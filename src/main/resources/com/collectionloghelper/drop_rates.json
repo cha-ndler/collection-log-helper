@@ -1,0 +1,165 @@
+[
+  {
+    "name": "General Graardor",
+    "category": "BOSSES",
+    "worldX": 2864,
+    "worldY": 5354,
+    "worldPlane": 2,
+    "killTimeSeconds": 90,
+    "items": [
+      {"itemId": 11832, "name": "Bandos chestplate", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Bandos_chestplate"},
+      {"itemId": 11834, "name": "Bandos tassets", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Bandos_tassets"},
+      {"itemId": 11836, "name": "Bandos boots", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Bandos_boots"},
+      {"itemId": 11830, "name": "Bandos hilt", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Bandos_hilt"},
+      {"itemId": 12650, "name": "Pet general graardor", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_general_graardor"}
+    ]
+  },
+  {
+    "name": "Commander Zilyana",
+    "category": "BOSSES",
+    "worldX": 2907,
+    "worldY": 5265,
+    "worldPlane": 0,
+    "killTimeSeconds": 75,
+    "items": [
+      {"itemId": 11785, "name": "Armadyl crossbow", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Armadyl_crossbow"},
+      {"itemId": 11806, "name": "Saradomin hilt", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Saradomin_hilt"},
+      {"itemId": 11838, "name": "Saradomin sword", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Saradomin_sword"},
+      {"itemId": 12651, "name": "Pet zilyana", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_zilyana"}
+    ]
+  },
+  {
+    "name": "K'ril Tsutsaroth",
+    "category": "BOSSES",
+    "worldX": 2925,
+    "worldY": 5333,
+    "worldPlane": 2,
+    "killTimeSeconds": 85,
+    "items": [
+      {"itemId": 11791, "name": "Staff of the dead", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Staff_of_the_dead"},
+      {"itemId": 11824, "name": "Zamorakian spear", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Zamorakian_spear"},
+      {"itemId": 11789, "name": "Steam battlestaff", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Steam_battlestaff"},
+      {"itemId": 12652, "name": "Pet k'ril tsutsaroth", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_k%27ril_tsutsaroth"}
+    ]
+  },
+  {
+    "name": "Kree'arra",
+    "category": "BOSSES",
+    "worldX": 2839,
+    "worldY": 5296,
+    "worldPlane": 2,
+    "killTimeSeconds": 80,
+    "items": [
+      {"itemId": 11826, "name": "Armadyl helmet", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Armadyl_helmet"},
+      {"itemId": 11828, "name": "Armadyl chestplate", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Armadyl_chestplate"},
+      {"itemId": 11830, "name": "Armadyl chainskirt", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Armadyl_chainskirt"},
+      {"itemId": 11810, "name": "Armadyl hilt", "dropRate": 0.0078125, "varbitId": 0, "isPet": false, "wikiPage": "Armadyl_hilt"},
+      {"itemId": 12649, "name": "Pet kree'arra", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_kree%27arra"}
+    ]
+  },
+  {
+    "name": "Zulrah",
+    "category": "BOSSES",
+    "worldX": 2268,
+    "worldY": 3069,
+    "worldPlane": 0,
+    "killTimeSeconds": 120,
+    "items": [
+      {"itemId": 12922, "name": "Tanzanite fang", "dropRate": 0.001953125, "varbitId": 0, "isPet": false, "wikiPage": "Tanzanite_fang"},
+      {"itemId": 12932, "name": "Magic fang", "dropRate": 0.001953125, "varbitId": 0, "isPet": false, "wikiPage": "Magic_fang"},
+      {"itemId": 12927, "name": "Serpentine visage", "dropRate": 0.001953125, "varbitId": 0, "isPet": false, "wikiPage": "Serpentine_visage"},
+      {"itemId": 6571, "name": "Uncut onyx", "dropRate": 0.001953125, "varbitId": 0, "isPet": false, "wikiPage": "Uncut_onyx"},
+      {"itemId": 13200, "name": "Tanzanite mutagen", "dropRate": 0.000153, "varbitId": 0, "isPet": false, "wikiPage": "Tanzanite_mutagen"},
+      {"itemId": 13201, "name": "Magma mutagen", "dropRate": 0.000153, "varbitId": 0, "isPet": false, "wikiPage": "Magma_mutagen"},
+      {"itemId": 12921, "name": "Pet snakeling", "dropRate": 0.00025, "varbitId": 0, "isPet": true, "wikiPage": "Pet_snakeling"},
+      {"itemId": 12936, "name": "Jar of swamp", "dropRate": 0.000333, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_swamp"}
+    ]
+  },
+  {
+    "name": "Vorkath",
+    "category": "BOSSES",
+    "worldX": 2272,
+    "worldY": 4052,
+    "worldPlane": 0,
+    "killTimeSeconds": 150,
+    "items": [
+      {"itemId": 22006, "name": "Skeletal visage", "dropRate": 0.0002, "varbitId": 0, "isPet": false, "wikiPage": "Skeletal_visage"},
+      {"itemId": 11286, "name": "Draconic visage", "dropRate": 0.0002, "varbitId": 0, "isPet": false, "wikiPage": "Draconic_visage"},
+      {"itemId": 22111, "name": "Dragonbone necklace", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Dragonbone_necklace"},
+      {"itemId": 22106, "name": "Jar of decay", "dropRate": 0.000333, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_decay"},
+      {"itemId": 21992, "name": "Vorki", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Vorki"}
+    ]
+  },
+  {
+    "name": "Chambers of Xeric",
+    "category": "RAIDS",
+    "worldX": 1233,
+    "worldY": 3573,
+    "worldPlane": 0,
+    "killTimeSeconds": 1800,
+    "items": [
+      {"itemId": 20997, "name": "Twisted bow", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Twisted_bow"},
+      {"itemId": 21003, "name": "Elder maul", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Elder_maul"},
+      {"itemId": 21043, "name": "Kodai insignia", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Kodai_insignia"},
+      {"itemId": 13652, "name": "Dragon claws", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_claws"},
+      {"itemId": 21018, "name": "Ancestral hat", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Ancestral_hat"},
+      {"itemId": 21021, "name": "Ancestral robe top", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Ancestral_robe_top"},
+      {"itemId": 21024, "name": "Ancestral robe bottom", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Ancestral_robe_bottom"},
+      {"itemId": 21034, "name": "Dexterous prayer scroll", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Dexterous_prayer_scroll"},
+      {"itemId": 21079, "name": "Arcane prayer scroll", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Arcane_prayer_scroll"},
+      {"itemId": 21000, "name": "Twisted buckler", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Twisted_buckler"},
+      {"itemId": 21012, "name": "Dragon hunter crossbow", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_hunter_crossbow"},
+      {"itemId": 21015, "name": "Dinh's bulwark", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Dinh%27s_bulwark"},
+      {"itemId": 20851, "name": "Olmlet", "dropRate": 0.019, "varbitId": 0, "isPet": true, "wikiPage": "Olmlet"}
+    ]
+  },
+  {
+    "name": "Theatre of Blood",
+    "category": "RAIDS",
+    "worldX": 3168,
+    "worldY": 4303,
+    "worldPlane": 0,
+    "killTimeSeconds": 1500,
+    "items": [
+      {"itemId": 22325, "name": "Scythe of vitur", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Scythe_of_vitur"},
+      {"itemId": 22324, "name": "Ghrazi rapier", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Ghrazi_rapier"},
+      {"itemId": 22323, "name": "Sanguinesti staff", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Sanguinesti_staff"},
+      {"itemId": 22326, "name": "Justiciar faceguard", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Justiciar_faceguard"},
+      {"itemId": 22327, "name": "Justiciar chestguard", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Justiciar_chestguard"},
+      {"itemId": 22328, "name": "Justiciar legguards", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Justiciar_legguards"},
+      {"itemId": 22477, "name": "Avernic defender hilt", "dropRate": 0.0029, "varbitId": 0, "isPet": false, "wikiPage": "Avernic_defender_hilt"},
+      {"itemId": 22473, "name": "Lil' zik", "dropRate": 0.019, "varbitId": 0, "isPet": true, "wikiPage": "Lil%27_zik"}
+    ]
+  },
+  {
+    "name": "Cerberus",
+    "category": "BOSSES",
+    "worldX": 1240,
+    "worldY": 1252,
+    "worldPlane": 0,
+    "killTimeSeconds": 60,
+    "items": [
+      {"itemId": 13231, "name": "Primordial crystal", "dropRate": 0.001953125, "varbitId": 0, "isPet": false, "wikiPage": "Primordial_crystal"},
+      {"itemId": 13229, "name": "Pegasian crystal", "dropRate": 0.001953125, "varbitId": 0, "isPet": false, "wikiPage": "Pegasian_crystal"},
+      {"itemId": 13227, "name": "Eternal crystal", "dropRate": 0.001953125, "varbitId": 0, "isPet": false, "wikiPage": "Eternal_crystal"},
+      {"itemId": 13233, "name": "Smouldering stone", "dropRate": 0.001953125, "varbitId": 0, "isPet": false, "wikiPage": "Smouldering_stone"},
+      {"itemId": 13245, "name": "Jar of souls", "dropRate": 0.0005, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_souls"},
+      {"itemId": 13247, "name": "Hellpuppy", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Hellpuppy"}
+    ]
+  },
+  {
+    "name": "Alchemical Hydra",
+    "category": "BOSSES",
+    "worldX": 1364,
+    "worldY": 10265,
+    "worldPlane": 0,
+    "killTimeSeconds": 120,
+    "items": [
+      {"itemId": 22966, "name": "Hydra's claw", "dropRate": 0.000999, "varbitId": 0, "isPet": false, "wikiPage": "Hydra%27s_claw"},
+      {"itemId": 22983, "name": "Hydra leather", "dropRate": 0.001946, "varbitId": 0, "isPet": false, "wikiPage": "Hydra_leather"},
+      {"itemId": 22988, "name": "Hydra tail", "dropRate": 0.001946, "varbitId": 0, "isPet": false, "wikiPage": "Hydra_tail"},
+      {"itemId": 22994, "name": "Jar of chemicals", "dropRate": 0.0005, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_chemicals"},
+      {"itemId": 22746, "name": "Ikkle hydra", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Ikkle_hydra"}
+    ]
+  }
+]
