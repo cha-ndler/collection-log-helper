@@ -2,7 +2,7 @@
 
 A RuneLite plugin that guides players through efficient collection log completion with intelligent efficiency scoring, on-screen guidance overlays, and multiple viewing modes.
 
-**Coverage:** 308 / ~1,904 items across 51 / 122 sources — [help us expand it](ITEMS_TRACKER.md)
+**Coverage:** Expanding toward full collection log support (~1,904 items) — [see current progress](ITEMS_TRACKER.md)
 
 ## Features
 
@@ -55,7 +55,7 @@ Requires Java 11+. Uses RuneLite client API (latest release), Lombok, and JUnit 
 
 ## Contributing
 
-We're actively expanding coverage from 308 to ~1,904 items. See:
+We're actively expanding toward full collection log coverage. See:
 
 - [**CONTRIBUTING.md**](CONTRIBUTING.md) — JSON schema reference, how to find data, PR process
 - [**ITEMS_TRACKER.md**](ITEMS_TRACKER.md) — Full coverage breakdown with claimable issues by priority
