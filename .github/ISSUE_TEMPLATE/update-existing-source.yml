@@ -1,0 +1,67 @@
+name: Update Existing Source
+description: Add missing items to a partially-covered source
+title: "Update [SOURCE_NAME] — add missing items"
+labels: ["type: update source", "status: partial"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to add missing items to a source that's already in `drop_rates.json`.
+        Check [ITEMS_TRACKER.md](../../blob/master/ITEMS_TRACKER.md) for the current coverage status.
+
+  - type: input
+    id: source-name
+    attributes:
+      label: Source Name
+      description: Name of the existing source in drop_rates.json
+      placeholder: e.g., "Chambers of Xeric"
+    validations:
+      required: true
+
+  - type: input
+    id: current-count
+    attributes:
+      label: Current Item Count
+      description: How many items we currently have for this source
+      placeholder: e.g., "13"
+    validations:
+      required: true
+
+  - type: input
+    id: expected-count
+    attributes:
+      label: Expected Item Count
+      description: Total items this source should have (per wiki)
+      placeholder: e.g., "23"
+    validations:
+      required: true
+
+  - type: textarea
+    id: missing-items-json
+    attributes:
+      label: Missing Items JSON
+      description: |
+        Paste the JSON array of missing items to add. See [CONTRIBUTING.md](../../blob/master/CONTRIBUTING.md) for the item schema.
+      render: json
+      placeholder: |
+        [
+          {"itemId": 12345, "name": "Item name", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Item_name"}
+        ]
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: quality-checklist
+    attributes:
+      label: Quality Checklist
+      options:
+        - label: All item IDs verified against the OSRS Wiki
+          required: true
+        - label: Drop rates converted to decimal correctly
+          required: true
+        - label: Item names match in-game names exactly
+          required: true
+        - label: No duplicate items (checked against existing source items)
+          required: true
+        - label: "`./gradlew build` passes with these items added"
+          required: true
