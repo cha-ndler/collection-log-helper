@@ -1,0 +1,83 @@
+name: Add Collection Log Category
+description: Add a new collection log source with item data
+title: "Add [CATEGORY_NAME] to drop_rates.json"
+labels: ["type: new source", "status: unclaimed"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing item data! Please fill out the details below.
+        Check [ITEMS_TRACKER.md](../../blob/master/ITEMS_TRACKER.md) to make sure this category isn't already claimed.
+
+  - type: input
+    id: category-name
+    attributes:
+      label: Category Name
+      description: Exact name as it appears in the collection log
+      placeholder: e.g., "Tempoross"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tab
+    attributes:
+      label: Collection Log Tab
+      options:
+        - Bosses
+        - Raids
+        - Clues
+        - Minigames
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: item-count
+    attributes:
+      label: Expected Item Count
+      description: Total number of items in this collection log category (check the wiki)
+      placeholder: e.g., "8"
+    validations:
+      required: true
+
+  - type: textarea
+    id: json-data
+    attributes:
+      label: JSON Data
+      description: |
+        Paste the full source JSON object. See [CONTRIBUTING.md](../../blob/master/CONTRIBUTING.md) for the schema reference.
+      render: json
+      placeholder: |
+        {
+          "name": "Boss Name",
+          "category": "BOSSES",
+          "worldX": 0,
+          "worldY": 0,
+          "worldPlane": 0,
+          "killTimeSeconds": 0,
+          "items": []
+        }
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: quality-checklist
+    attributes:
+      label: Quality Checklist
+      options:
+        - label: All item IDs verified against the OSRS Wiki
+          required: true
+        - label: Drop rates converted to decimal (e.g., 1/128 → 0.007813)
+          required: true
+        - label: Item names match in-game names exactly
+          required: true
+        - label: Wiki page names resolve to valid wiki URLs
+          required: true
+        - label: Pets marked with `isPet: true`
+          required: true
+        - label: Kill time reflects efficient mid-to-late-game setup
+          required: true
+        - label: World coordinates verified (in-game or via wiki map)
+          required: true
+        - label: "`./gradlew build` passes with this data added"
+          required: true
