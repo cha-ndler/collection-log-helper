@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Item Coverage Tracker
+    url: https://github.com/cha-ndler/collection-log-helper/blob/master/ITEMS_TRACKER.md
+    about: See which collection log categories need data — check here before opening an issue
+  - name: Contributing Guide
+    url: https://github.com/cha-ndler/collection-log-helper/blob/master/CONTRIBUTING.md
+    about: Learn how to add item data to the plugin
