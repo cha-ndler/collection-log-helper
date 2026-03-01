@@ -1,6 +1,6 @@
 # Collection Log Helper — Item Coverage Tracker
 
-> **Coverage: 308 / ~1,904 items | 51 / 122 sources**
+> **Coverage: 323 / ~1,904 items | 52 / 122 sources**
 
 This document tracks every OSRS Collection Log category and our progress toward full coverage. Community contributors can use this to find unclaimed work.
 
@@ -103,7 +103,7 @@ This document tracks every OSRS Collection Log category and our progress toward 
 
 | Category | Wiki Items | Our Items | Priority | Status | Issue |
 |----------|-----------|-----------|----------|--------|-------|
-| Beginner Clues | 16 | 0 | P1 | Unclaimed | [#16](../../issues/16) |
+| Beginner Clues | 15 | 15 | P1 | Done | [#16](../../issues/16) |
 | Easy Clues | 131 | 0 | P1 | Unclaimed | [#17](../../issues/17) |
 | Medium Clues | 115 | 0 | P1 | Unclaimed | [#18](../../issues/18) |
 | Hard Clues | 134 | 0 | P1 | Unclaimed | [#20](../../issues/20) |
