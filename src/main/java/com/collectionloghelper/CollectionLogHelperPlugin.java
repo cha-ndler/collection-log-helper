@@ -1,5 +1,7 @@
 package com.collectionloghelper;
 
+import com.collectionloghelper.data.CollectionLogCategory;
+import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
@@ -157,21 +159,44 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 	}
 
-	public void activateGuidance(WorldPoint worldPoint, String sourceName)
+	public void activateGuidance(CollectionLogSource source)
 	{
 		if (!config.showOverlays())
 		{
 			return;
 		}
 
-		guidanceOverlay.setTargetPoint(worldPoint);
-		guidanceOverlay.setTargetName(sourceName);
-		guidanceMinimapOverlay.setTargetPoint(worldPoint);
-
+		// Clear any existing guidance first
+		guidanceOverlay.clearTarget();
+		guidanceMinimapOverlay.clearTarget();
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
-		worldMapPointManager.add(new CollectionLogWorldMapPoint(worldPoint, sourceName));
+		if (panel != null)
+		{
+			panel.hideClueGuidance();
+		}
 
-		log.debug("Guidance activated for {} at {}", sourceName, worldPoint);
+		if (source.getCategory() == CollectionLogCategory.CLUES)
+		{
+			// Clue sources: text overlay + panel banner instead of map markers
+			guidanceOverlay.setClueGuidanceText("Do " + source.getName());
+			if (panel != null)
+			{
+				panel.showClueGuidance(source);
+			}
+		}
+		else
+		{
+			// Non-clue sources: world map, tile, and minimap overlays
+			WorldPoint worldPoint = source.getWorldPoint();
+			String displayName = source.getDisplayLocation();
+
+			guidanceOverlay.setTargetPoint(worldPoint);
+			guidanceOverlay.setTargetName(displayName);
+			guidanceMinimapOverlay.setTargetPoint(worldPoint);
+			worldMapPointManager.add(new CollectionLogWorldMapPoint(worldPoint, displayName));
+		}
+
+		log.debug("Guidance activated for {} ({})", source.getName(), source.getCategory());
 	}
 
 	public void deactivateGuidance()
@@ -179,6 +204,11 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
+		if (panel != null)
+		{
+			panel.hideClueGuidance();
+			panel.setGuidanceState(false, null);
+		}
 
 		log.debug("Guidance deactivated");
 	}

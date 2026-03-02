@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,27 +24,34 @@ import okhttp3.HttpUrl;
 class ItemDetailPanel extends JPanel
 {
 	private static final HttpUrl WIKI_BASE = HttpUrl.get("https://oldschool.runescape.wiki");
+	private static final Color GUIDE_ME_COLOR = new Color(30, 120, 30);
+	private static final Color STOP_GUIDANCE_COLOR = new Color(140, 30, 30);
+
+	private final JButton guideMeButton;
 
 	ItemDetailPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
-		ItemManager itemManager, Runnable onBack, Runnable onGuideMe)
+		ItemManager itemManager, Runnable onBack, Runnable onGuideMe, Runnable onStopGuidance,
+		boolean guidanceActive)
 	{
-		setLayout(new BorderLayout(0, 8));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
 
 		// Back button
 		JButton backButton = new JButton("\u2190 Back");
+		backButton.setAlignmentX(LEFT_ALIGNMENT);
+		backButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
+		backButton.setPreferredSize(new Dimension(0, 28));
 		backButton.addActionListener(e -> onBack.run());
-		add(backButton, BorderLayout.NORTH);
-
-		// Center content
-		JPanel contentPanel = new JPanel(new BorderLayout(0, 8));
-		contentPanel.setOpaque(false);
+		add(backButton);
 
 		// Item header with icon
 		JPanel headerPanel = new JPanel(new BorderLayout(8, 0));
 		headerPanel.setOpaque(false);
-		headerPanel.setBorder(BorderFactory.createEmptyBorder(4, 0, 8, 0));
+		headerPanel.setAlignmentX(LEFT_ALIGNMENT);
+		headerPanel.setBorder(BorderFactory.createEmptyBorder(8, 0, 8, 0));
+		headerPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 44));
+		headerPanel.setPreferredSize(new Dimension(0, 44));
 
 		JLabel iconLabel = new JLabel();
 		iconLabel.setPreferredSize(new Dimension(36, 36));
@@ -56,11 +65,14 @@ class ItemDetailPanel extends JPanel
 		nameLabel.setForeground(obtained ? Color.GREEN : Color.WHITE);
 		headerPanel.add(nameLabel, BorderLayout.CENTER);
 
-		contentPanel.add(headerPanel, BorderLayout.NORTH);
+		add(headerPanel);
 
 		// Info rows
-		JPanel infoPanel = new JPanel(new GridLayout(0, 1, 0, 4));
+		JPanel infoPanel = new JPanel();
+		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 		infoPanel.setOpaque(false);
+		infoPanel.setAlignmentX(LEFT_ALIGNMENT);
+		infoPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
 
 		addInfoRow(infoPanel, "Source:", source.getName());
 		addInfoRow(infoPanel, "Category:", source.getCategory().getDisplayName());
@@ -69,8 +81,7 @@ class ItemDetailPanel extends JPanel
 		addInfoRow(infoPanel, "Drop Rate:", denominator > 0 ? "1/" + denominator : "N/A");
 
 		addInfoRow(infoPanel, "Kill Time:", source.getKillTimeSeconds() + "s");
-		addInfoRow(infoPanel, "Location:",
-			source.getWorldX() + ", " + source.getWorldY());
+		addInfoRow(infoPanel, "Location:", source.getDisplayLocation());
 		addInfoRow(infoPanel, "Status:", obtained ? "Obtained" : "Missing");
 
 		if (item.isPet())
@@ -78,20 +89,34 @@ class ItemDetailPanel extends JPanel
 			addInfoRow(infoPanel, "Type:", "Pet");
 		}
 
-		contentPanel.add(infoPanel, BorderLayout.CENTER);
-		add(contentPanel, BorderLayout.CENTER);
+		add(infoPanel);
 
 		// Action buttons
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 8, 0));
 		buttonPanel.setOpaque(false);
+		buttonPanel.setAlignmentX(LEFT_ALIGNMENT);
+		buttonPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 32));
+		buttonPanel.setPreferredSize(new Dimension(0, 32));
 
-		JButton guideMeButton = new JButton("Guide Me");
-		guideMeButton.setToolTipText("Show overlays to guide you to " + source.getName());
+		guideMeButton = new JButton();
+		updateGuideButtonState(guidanceActive);
 		guideMeButton.addActionListener(e ->
 		{
-			if (onGuideMe != null)
+			if (guideMeButton.getText().equals("Stop Guidance"))
 			{
-				onGuideMe.run();
+				if (onStopGuidance != null)
+				{
+					onStopGuidance.run();
+				}
+				updateGuideButtonState(false);
+			}
+			else
+			{
+				if (onGuideMe != null)
+				{
+					onGuideMe.run();
+				}
+				updateGuideButtonState(true);
 			}
 		});
 		buttonPanel.add(guideMeButton);
@@ -101,13 +126,37 @@ class ItemDetailPanel extends JPanel
 		wikiButton.addActionListener(e -> openWiki(item));
 		buttonPanel.add(wikiButton);
 
-		add(buttonPanel, BorderLayout.SOUTH);
+		add(buttonPanel);
+
+		// Push content to top — prevents empty scrollable space
+		add(Box.createVerticalGlue());
+	}
+
+	private void updateGuideButtonState(boolean active)
+	{
+		if (active)
+		{
+			guideMeButton.setText("Stop Guidance");
+			guideMeButton.setBackground(STOP_GUIDANCE_COLOR);
+			guideMeButton.setForeground(Color.WHITE);
+			guideMeButton.setToolTipText("Stop guidance overlays");
+		}
+		else
+		{
+			guideMeButton.setText("Guide Me");
+			guideMeButton.setBackground(GUIDE_ME_COLOR);
+			guideMeButton.setForeground(Color.WHITE);
+			guideMeButton.setToolTipText("Show overlays to guide you");
+		}
 	}
 
 	private void addInfoRow(JPanel parent, String label, String value)
 	{
 		JPanel row = new JPanel(new BorderLayout());
 		row.setOpaque(false);
+		row.setAlignmentX(LEFT_ALIGNMENT);
+		row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+		row.setPreferredSize(new Dimension(0, 20));
 
 		JLabel labelComponent = new JLabel(label);
 		labelComponent.setFont(FontManager.getRunescapeSmallFont());
