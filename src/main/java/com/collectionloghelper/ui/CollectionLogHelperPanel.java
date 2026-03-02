@@ -127,7 +127,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		syncButton.setFont(FontManager.getRunescapeSmallFont());
 		syncButton.setAlignmentX(CENTER_ALIGNMENT);
 		syncButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 24));
-		syncButton.setToolTipText("Open your in-game Collection Log to sync obtained items");
+		syncButton.setToolTipText("Syncs automatically when you open the Collection Log in-game");
 		syncButton.addActionListener(e -> syncAction.run());
 		controlsPanel.add(syncButton);
 		controlsPanel.add(Box.createVerticalStrut(4));
