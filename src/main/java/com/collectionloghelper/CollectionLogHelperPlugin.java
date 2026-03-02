@@ -1,6 +1,7 @@
 package com.collectionloghelper;
 
 import com.collectionloghelper.data.CollectionLogCategory;
+import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerCollectionState;
@@ -19,9 +20,15 @@ import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
+import net.runelite.api.GameState;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ChatMessage;
+import net.runelite.api.events.GameStateChanged;
+import net.runelite.api.events.GameTick;
 import net.runelite.api.events.VarbitChanged;
+import net.runelite.api.events.WidgetLoaded;
+import net.runelite.api.gameval.InterfaceID;
+import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.EventBus;
@@ -46,6 +53,7 @@ public class CollectionLogHelperPlugin extends Plugin
 {
 	private static final Pattern COLLECTION_LOG_PATTERN =
 		Pattern.compile("New item added to your collection log: (.*)");
+	private static final int COLLECTION_LOG_GROUP_ID = InterfaceID.Collection.FRAME >> 16;
 
 	@Inject
 	private Client client;
@@ -89,6 +97,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
 	private int lastObtainedCount = -1;
+	private boolean collectionLogOpen;
 
 	@Override
 	protected void startUp() throws Exception
@@ -113,7 +122,19 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.add(guidanceOverlay);
 		overlayManager.add(guidanceMinimapOverlay);
 
-		log.debug("Collection Log Helper started");
+		// If already logged in (e.g., plugin enabled mid-session), load state
+		if (client.getGameState() == GameState.LOGGED_IN)
+		{
+			clientThread.invokeLater(() ->
+			{
+				collectionState.refreshVarps();
+				collectionState.loadObtainedItems();
+				lastObtainedCount = collectionState.getTotalObtained();
+				panel.rebuild();
+			});
+		}
+
+		log.info("Collection Log Helper started");
 	}
 
 	@Override
@@ -124,13 +145,42 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.remove(guidanceMinimapOverlay);
 		deactivateGuidance();
 		lastObtainedCount = -1;
+		collectionLogOpen = false;
+		collectionState.clearState();
 
-		log.debug("Collection Log Helper stopped");
+		log.info("Collection Log Helper stopped");
+	}
+
+	@Subscribe
+	public void onGameStateChanged(GameStateChanged event)
+	{
+		if (event.getGameState() == GameState.LOGGED_IN)
+		{
+			clientThread.invokeLater(() ->
+			{
+				collectionState.refreshVarps();
+				collectionState.loadObtainedItems();
+				lastObtainedCount = collectionState.getTotalObtained();
+				if (panel != null)
+				{
+					panel.rebuild();
+				}
+			});
+		}
+		else if (event.getGameState() == GameState.LOGIN_SCREEN)
+		{
+			collectionState.clearState();
+			lastObtainedCount = -1;
+			collectionLogOpen = false;
+		}
 	}
 
 	@Subscribe
 	public void onVarbitChanged(VarbitChanged event)
 	{
+		// Runs on the client thread — safe to call client API
+		collectionState.refreshVarps();
+
 		int currentCount = collectionState.getTotalObtained();
 		if (currentCount == lastObtainedCount)
 		{
@@ -159,6 +209,86 @@ public class CollectionLogHelperPlugin extends Plugin
 			String itemName = matcher.group(1);
 			log.debug("New collection log item: {}", itemName);
 
+			// Find the item in the database and mark it obtained
+			for (CollectionLogSource source : database.getAllSources())
+			{
+				for (CollectionLogItem item : source.getItems())
+				{
+					if (item.getName().equalsIgnoreCase(itemName))
+					{
+						collectionState.markItemObtained(item.getItemId());
+						log.debug("Marked item {} (ID: {}) as obtained", itemName, item.getItemId());
+						break;
+					}
+				}
+			}
+
+			if (panel != null)
+			{
+				panel.rebuild();
+			}
+		}
+	}
+
+	@Subscribe
+	public void onWidgetLoaded(WidgetLoaded event)
+	{
+		if (event.getGroupId() != COLLECTION_LOG_GROUP_ID)
+		{
+			return;
+		}
+
+		log.info("Collection log widget loaded (group {})", event.getGroupId());
+		collectionLogOpen = true;
+	}
+
+	@Subscribe
+	public void onGameTick(GameTick event)
+	{
+		if (!collectionLogOpen)
+		{
+			return;
+		}
+
+		// Check if the collection log is still visible
+		Widget itemsContainer = client.getWidget(InterfaceID.Collection.ITEMS);
+		if (itemsContainer == null || itemsContainer.isHidden())
+		{
+			collectionLogOpen = false;
+			return;
+		}
+
+		scanCollectionLogWidget(itemsContainer);
+	}
+
+	private void scanCollectionLogWidget(Widget itemsContainer)
+	{
+		Widget[] children = itemsContainer.getDynamicChildren();
+		if (children == null || children.length == 0)
+		{
+			return;
+		}
+
+		boolean changed = false;
+		for (Widget child : children)
+		{
+			int itemId = child.getItemId();
+			int opacity = child.getOpacity();
+
+			// Obtained items have opacity 0 (fully visible), unobtained are faded
+			if (itemId > 0 && opacity == 0)
+			{
+				if (collectionState.markItemObtained(itemId))
+				{
+					changed = true;
+				}
+			}
+		}
+
+		if (changed)
+		{
+			log.info("Collection log scan: synced obtained items (total: {})",
+				collectionState.getObtainedCount());
 			if (panel != null)
 			{
 				panel.rebuild();
@@ -182,13 +312,17 @@ public class CollectionLogHelperPlugin extends Plugin
 			panel.hideClueGuidance();
 		}
 
-		// Client API calls must run on the client thread
-		clientThread.invokeLater(() -> client.clearHintArrow());
-
-		if (config.useShortestPath())
+		// Client API calls and ShortestPath messages must run on the client thread
+		// (ShortestPath's handler calls client API internally)
+		clientThread.invokeLater(() ->
 		{
-			eventBus.post(new PluginMessage("shortestpath", "clear"));
-		}
+			client.clearHintArrow();
+
+			if (config.useShortestPath())
+			{
+				eventBus.post(new PluginMessage("shortestpath", "clear"));
+			}
+		});
 
 		if (source.getCategory() == CollectionLogCategory.CLUES)
 		{
@@ -217,14 +351,14 @@ public class CollectionLogHelperPlugin extends Plugin
 				{
 					client.setHintArrow(worldPoint);
 				}
-			});
 
-			if (config.useShortestPath())
-			{
-				Map<String, Object> data = new HashMap<>();
-				data.put("target", worldPoint);
-				eventBus.post(new PluginMessage("shortestpath", "path", data));
-			}
+				if (config.useShortestPath())
+				{
+					Map<String, Object> data = new HashMap<>();
+					data.put("target", worldPoint);
+					eventBus.post(new PluginMessage("shortestpath", "path", data));
+				}
+			});
 		}
 
 		// Always update panel guidance state from the plugin
@@ -241,8 +375,17 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
-		clientThread.invokeLater(() -> client.clearHintArrow());
-		eventBus.post(new PluginMessage("shortestpath", "clear"));
+
+		clientThread.invokeLater(() ->
+		{
+			client.clearHintArrow();
+
+			if (config.useShortestPath())
+			{
+				eventBus.post(new PluginMessage("shortestpath", "clear"));
+			}
+		});
+
 		if (panel != null)
 		{
 			panel.hideClueGuidance();
