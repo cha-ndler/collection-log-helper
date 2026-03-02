@@ -3134,5 +3134,371 @@
         "wikiPage": "Rune_scimitar_ornament_kit_(zamorak)"
       }
     ]
+  },
+  {
+    "name": "Revenants",
+    "category": "OTHER",
+    "worldX": 3073,
+    "worldY": 3654,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "items": [
+      {
+        "itemId": 21817,
+        "name": "Bracelet of ethereum",
+        "dropRate": 0.150829,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bracelet_of_ethereum"
+      },
+      {
+        "itemId": 21820,
+        "name": "Revenant ether",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Revenant_ether"
+      },
+      {
+        "itemId": 21802,
+        "name": "Revenant cave teleport",
+        "dropRate": 0.050251,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Revenant_cave_teleport"
+      },
+      {
+        "itemId": 21807,
+        "name": "Ancient emblem",
+        "dropRate": 0.00075,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_emblem"
+      },
+      {
+        "itemId": 21810,
+        "name": "Ancient totem",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_totem"
+      },
+      {
+        "itemId": 21813,
+        "name": "Ancient statuette",
+        "dropRate": 0.00025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_statuette"
+      },
+      {
+        "itemId": 21804,
+        "name": "Ancient crystal",
+        "dropRate": 0.000375,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_crystal"
+      },
+      {
+        "itemId": 22299,
+        "name": "Ancient medallion",
+        "dropRate": 0.000125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_medallion"
+      },
+      {
+        "itemId": 22302,
+        "name": "Ancient effigy",
+        "dropRate": 0.000125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_effigy"
+      },
+      {
+        "itemId": 22305,
+        "name": "Ancient relic",
+        "dropRate": 0.000125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_relic"
+      },
+      {
+        "itemId": 22547,
+        "name": "Craw's bow (u)",
+        "dropRate": 0.0000375,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Craw%27s_bow_(u)"
+      },
+      {
+        "itemId": 22552,
+        "name": "Thammaron's sceptre (u)",
+        "dropRate": 0.0000375,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Thammaron%27s_sceptre_(u)"
+      },
+      {
+        "itemId": 22542,
+        "name": "Viggora's chainmace (u)",
+        "dropRate": 0.0000375,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Viggora%27s_chainmace_(u)"
+      },
+      {
+        "itemId": 22557,
+        "name": "Amulet of avarice",
+        "dropRate": 0.000075,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Amulet_of_avarice"
+      }
+    ],
+    "locationDescription": "Revenant Caves, Wilderness"
+  },
+  {
+    "name": "Slayer",
+    "category": "OTHER",
+    "worldX": 3429,
+    "worldY": 3534,
+    "worldPlane": 0,
+    "killTimeSeconds": 30,
+    "locationDescription": "Slayer Tower, Morytania",
+    "items": [
+      {
+        "itemId": 4099,
+        "name": "Mystic hat (dark)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_hat_(dark)"
+      },
+      {
+        "itemId": 4101,
+        "name": "Mystic robe top (dark)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_robe_top_(dark)"
+      },
+      {
+        "itemId": 4103,
+        "name": "Mystic robe bottom (dark)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_robe_bottom_(dark)"
+      },
+      {
+        "itemId": 4105,
+        "name": "Mystic gloves (dark)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_gloves_(dark)"
+      },
+      {
+        "itemId": 4107,
+        "name": "Mystic boots (dark)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_boots_(dark)"
+      },
+      {
+        "itemId": 4109,
+        "name": "Mystic hat (light)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_hat_(light)"
+      },
+      {
+        "itemId": 4111,
+        "name": "Mystic robe top (light)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_robe_top_(light)"
+      },
+      {
+        "itemId": 4113,
+        "name": "Mystic robe bottom (light)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_robe_bottom_(light)"
+      },
+      {
+        "itemId": 4115,
+        "name": "Mystic gloves (light)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_gloves_(light)"
+      },
+      {
+        "itemId": 4117,
+        "name": "Mystic boots (light)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_boots_(light)"
+      },
+      {
+        "itemId": 4119,
+        "name": "Bronze boots",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_boots"
+      },
+      {
+        "itemId": 4121,
+        "name": "Iron boots",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_boots"
+      },
+      {
+        "itemId": 4123,
+        "name": "Steel boots",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_boots"
+      },
+      {
+        "itemId": 4125,
+        "name": "Black boots",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_boots"
+      },
+      {
+        "itemId": 4127,
+        "name": "Mithril boots",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_boots"
+      },
+      {
+        "itemId": 4129,
+        "name": "Adamant boots",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_boots"
+      },
+      {
+        "itemId": 4131,
+        "name": "Rune boots",
+        "dropRate": 0.008621,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_boots"
+      },
+      {
+        "itemId": 4151,
+        "name": "Abyssal whip",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_whip"
+      },
+      {
+        "itemId": 4153,
+        "name": "Granite maul",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_maul"
+      },
+      {
+        "itemId": 6665,
+        "name": "Mudskipper hat",
+        "dropRate": 0.039063,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mudskipper_hat"
+      },
+      {
+        "itemId": 6666,
+        "name": "Flippers",
+        "dropRate": 0.015625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Flippers"
+      },
+      {
+        "itemId": 3140,
+        "name": "Dragon chainbody",
+        "dropRate": 0.000031,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_chainbody"
+      },
+      {
+        "itemId": 6809,
+        "name": "Granite legs",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_legs"
+      },
+      {
+        "itemId": 8901,
+        "name": "Black mask (10)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_mask_(10)"
+      },
+      {
+        "itemId": 7975,
+        "name": "Crawling hand",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Crawling_hand_(item)"
+      },
+      {
+        "itemId": 7976,
+        "name": "Cockatrice head",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Cockatrice_head"
+      },
+      {
+        "itemId": 7977,
+        "name": "Basilisk head",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Basilisk_head"
+      },
+      {
+        "itemId": 7978,
+        "name": "Kurask head",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Kurask_head"
+      },
+      {
+        "itemId": 7979,
+        "name": "Abyssal head",
+        "dropRate": 0.000167,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_head"
+      }
+    ]
   }
 ]

@@ -28,6 +28,16 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "hideObtainedItems",
+		name = "Hide Obtained Items",
+		description = "Hide items you have already obtained from the collection log"
+	)
+	default boolean hideObtainedItems()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "showOverlays",
 		name = "Show Overlays",
 		description = "Show guidance overlays when using Guide Me",
