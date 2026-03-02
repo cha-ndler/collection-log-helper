@@ -2,74 +2,302 @@
   {
     "name": "General Graardor",
     "category": "BOSSES",
-    "worldX": 2864,
-    "worldY": 5354,
-    "worldPlane": 2,
+    "worldX": 2882,
+    "worldY": 3400,
+    "worldPlane": 0,
     "killTimeSeconds": 90,
     "items": [
-      {"itemId": 11832, "name": "Bandos chestplate", "dropRate": 0.002625, "varbitId": 0, "isPet": false, "wikiPage": "Bandos_chestplate"},
-      {"itemId": 11834, "name": "Bandos tassets", "dropRate": 0.002625, "varbitId": 0, "isPet": false, "wikiPage": "Bandos_tassets"},
-      {"itemId": 11836, "name": "Bandos boots", "dropRate": 0.002625, "varbitId": 0, "isPet": false, "wikiPage": "Bandos_boots"},
-      {"itemId": 11818, "name": "Bandos hilt", "dropRate": 0.001969, "varbitId": 0, "isPet": false, "wikiPage": "Bandos_hilt"},
-      {"itemId": 11819, "name": "Godsword shard 1", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_1"},
-      {"itemId": 11820, "name": "Godsword shard 2", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_2"},
-      {"itemId": 11821, "name": "Godsword shard 3", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_3"},
-      {"itemId": 12650, "name": "Pet general graardor", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_general_graardor"}
-    ]
+      {
+        "itemId": 11832,
+        "name": "Bandos chestplate",
+        "dropRate": 0.002625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_chestplate"
+      },
+      {
+        "itemId": 11834,
+        "name": "Bandos tassets",
+        "dropRate": 0.002625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_tassets"
+      },
+      {
+        "itemId": 11836,
+        "name": "Bandos boots",
+        "dropRate": 0.002625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_boots"
+      },
+      {
+        "itemId": 11818,
+        "name": "Bandos hilt",
+        "dropRate": 0.001969,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_hilt"
+      },
+      {
+        "itemId": 11819,
+        "name": "Godsword shard 1",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_1"
+      },
+      {
+        "itemId": 11820,
+        "name": "Godsword shard 2",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_2"
+      },
+      {
+        "itemId": 11821,
+        "name": "Godsword shard 3",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_3"
+      },
+      {
+        "itemId": 12650,
+        "name": "Pet general graardor",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_general_graardor"
+      }
+    ],
+    "locationDescription": "God Wars Dungeon entrance, Trollheim"
   },
   {
     "name": "Commander Zilyana",
     "category": "BOSSES",
-    "worldX": 2907,
-    "worldY": 5265,
+    "worldX": 2882,
+    "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 75,
     "items": [
-      {"itemId": 11838, "name": "Saradomin sword", "dropRate": 0.007874, "varbitId": 0, "isPet": false, "wikiPage": "Saradomin_sword"},
-      {"itemId": 13256, "name": "Saradomin's light", "dropRate": 0.003937, "varbitId": 0, "isPet": false, "wikiPage": "Saradomin%27s_light"},
-      {"itemId": 11785, "name": "Armadyl crossbow", "dropRate": 0.001969, "varbitId": 0, "isPet": false, "wikiPage": "Armadyl_crossbow"},
-      {"itemId": 11814, "name": "Saradomin hilt", "dropRate": 0.001969, "varbitId": 0, "isPet": false, "wikiPage": "Saradomin_hilt"},
-      {"itemId": 11819, "name": "Godsword shard 1", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_1"},
-      {"itemId": 11820, "name": "Godsword shard 2", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_2"},
-      {"itemId": 11821, "name": "Godsword shard 3", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_3"},
-      {"itemId": 12651, "name": "Pet zilyana", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_zilyana"}
-    ]
+      {
+        "itemId": 11838,
+        "name": "Saradomin sword",
+        "dropRate": 0.007874,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_sword"
+      },
+      {
+        "itemId": 13256,
+        "name": "Saradomin's light",
+        "dropRate": 0.003937,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin%27s_light"
+      },
+      {
+        "itemId": 11785,
+        "name": "Armadyl crossbow",
+        "dropRate": 0.001969,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_crossbow"
+      },
+      {
+        "itemId": 11814,
+        "name": "Saradomin hilt",
+        "dropRate": 0.001969,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_hilt"
+      },
+      {
+        "itemId": 11819,
+        "name": "Godsword shard 1",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_1"
+      },
+      {
+        "itemId": 11820,
+        "name": "Godsword shard 2",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_2"
+      },
+      {
+        "itemId": 11821,
+        "name": "Godsword shard 3",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_3"
+      },
+      {
+        "itemId": 12651,
+        "name": "Pet zilyana",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_zilyana"
+      }
+    ],
+    "locationDescription": "God Wars Dungeon entrance, Trollheim"
   },
   {
     "name": "K'ril Tsutsaroth",
     "category": "BOSSES",
-    "worldX": 2925,
-    "worldY": 5333,
-    "worldPlane": 2,
+    "worldX": 2882,
+    "worldY": 3400,
+    "worldPlane": 0,
     "killTimeSeconds": 85,
     "items": [
-      {"itemId": 11789, "name": "Steam battlestaff", "dropRate": 0.007874, "varbitId": 0, "isPet": false, "wikiPage": "Steam_battlestaff"},
-      {"itemId": 11824, "name": "Zamorakian spear", "dropRate": 0.007874, "varbitId": 0, "isPet": false, "wikiPage": "Zamorakian_spear"},
-      {"itemId": 11791, "name": "Staff of the dead", "dropRate": 0.001969, "varbitId": 0, "isPet": false, "wikiPage": "Staff_of_the_dead"},
-      {"itemId": 11816, "name": "Zamorak hilt", "dropRate": 0.001969, "varbitId": 0, "isPet": false, "wikiPage": "Zamorak_hilt"},
-      {"itemId": 11819, "name": "Godsword shard 1", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_1"},
-      {"itemId": 11820, "name": "Godsword shard 2", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_2"},
-      {"itemId": 11821, "name": "Godsword shard 3", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_3"},
-      {"itemId": 12652, "name": "Pet k'ril tsutsaroth", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_k%27ril_tsutsaroth"}
-    ]
+      {
+        "itemId": 11789,
+        "name": "Steam battlestaff",
+        "dropRate": 0.007874,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steam_battlestaff"
+      },
+      {
+        "itemId": 11824,
+        "name": "Zamorakian spear",
+        "dropRate": 0.007874,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorakian_spear"
+      },
+      {
+        "itemId": 11791,
+        "name": "Staff of the dead",
+        "dropRate": 0.001969,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Staff_of_the_dead"
+      },
+      {
+        "itemId": 11816,
+        "name": "Zamorak hilt",
+        "dropRate": 0.001969,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_hilt"
+      },
+      {
+        "itemId": 11819,
+        "name": "Godsword shard 1",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_1"
+      },
+      {
+        "itemId": 11820,
+        "name": "Godsword shard 2",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_2"
+      },
+      {
+        "itemId": 11821,
+        "name": "Godsword shard 3",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_3"
+      },
+      {
+        "itemId": 12652,
+        "name": "Pet k'ril tsutsaroth",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_k%27ril_tsutsaroth"
+      }
+    ],
+    "locationDescription": "God Wars Dungeon entrance, Trollheim"
   },
   {
     "name": "Kree'arra",
     "category": "BOSSES",
-    "worldX": 2839,
-    "worldY": 5296,
-    "worldPlane": 2,
+    "worldX": 2882,
+    "worldY": 3400,
+    "worldPlane": 0,
     "killTimeSeconds": 80,
     "items": [
-      {"itemId": 11826, "name": "Armadyl helmet", "dropRate": 0.002625, "varbitId": 0, "isPet": false, "wikiPage": "Armadyl_helmet"},
-      {"itemId": 11828, "name": "Armadyl chestplate", "dropRate": 0.002625, "varbitId": 0, "isPet": false, "wikiPage": "Armadyl_chestplate"},
-      {"itemId": 11830, "name": "Armadyl chainskirt", "dropRate": 0.002625, "varbitId": 0, "isPet": false, "wikiPage": "Armadyl_chainskirt"},
-      {"itemId": 11810, "name": "Armadyl hilt", "dropRate": 0.001969, "varbitId": 0, "isPet": false, "wikiPage": "Armadyl_hilt"},
-      {"itemId": 11819, "name": "Godsword shard 1", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_1"},
-      {"itemId": 11820, "name": "Godsword shard 2", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_2"},
-      {"itemId": 11821, "name": "Godsword shard 3", "dropRate": 0.001312, "varbitId": 0, "isPet": false, "wikiPage": "Godsword_shard_3"},
-      {"itemId": 12649, "name": "Pet kree'arra", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_kree%27arra"}
-    ]
+      {
+        "itemId": 11826,
+        "name": "Armadyl helmet",
+        "dropRate": 0.002625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_helmet"
+      },
+      {
+        "itemId": 11828,
+        "name": "Armadyl chestplate",
+        "dropRate": 0.002625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_chestplate"
+      },
+      {
+        "itemId": 11830,
+        "name": "Armadyl chainskirt",
+        "dropRate": 0.002625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_chainskirt"
+      },
+      {
+        "itemId": 11810,
+        "name": "Armadyl hilt",
+        "dropRate": 0.001969,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_hilt"
+      },
+      {
+        "itemId": 11819,
+        "name": "Godsword shard 1",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_1"
+      },
+      {
+        "itemId": 11820,
+        "name": "Godsword shard 2",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_2"
+      },
+      {
+        "itemId": 11821,
+        "name": "Godsword shard 3",
+        "dropRate": 0.001312,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Godsword_shard_3"
+      },
+      {
+        "itemId": 12649,
+        "name": "Pet kree'arra",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_kree%27arra"
+      }
+    ],
+    "locationDescription": "God Wars Dungeon entrance, Trollheim"
   },
   {
     "name": "Zulrah",
@@ -79,180 +307,701 @@
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "items": [
-      {"itemId": 12922, "name": "Tanzanite fang", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Tanzanite_fang"},
-      {"itemId": 12932, "name": "Magic fang", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Magic_fang"},
-      {"itemId": 12927, "name": "Serpentine visage", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Serpentine_visage"},
-      {"itemId": 6571, "name": "Uncut onyx", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Uncut_onyx"},
-      {"itemId": 13200, "name": "Tanzanite mutagen", "dropRate": 0.0000763, "varbitId": 0, "isPet": false, "wikiPage": "Tanzanite_mutagen"},
-      {"itemId": 13201, "name": "Magma mutagen", "dropRate": 0.0000763, "varbitId": 0, "isPet": false, "wikiPage": "Magma_mutagen"},
-      {"itemId": 12936, "name": "Jar of swamp", "dropRate": 0.000333, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_swamp"},
-      {"itemId": 12921, "name": "Pet snakeling", "dropRate": 0.00025, "varbitId": 0, "isPet": true, "wikiPage": "Pet_snakeling"}
+      {
+        "itemId": 12922,
+        "name": "Tanzanite fang",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tanzanite_fang"
+      },
+      {
+        "itemId": 12932,
+        "name": "Magic fang",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Magic_fang"
+      },
+      {
+        "itemId": 12927,
+        "name": "Serpentine visage",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Serpentine_visage"
+      },
+      {
+        "itemId": 6571,
+        "name": "Uncut onyx",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Uncut_onyx"
+      },
+      {
+        "itemId": 13200,
+        "name": "Tanzanite mutagen",
+        "dropRate": 7.63e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tanzanite_mutagen"
+      },
+      {
+        "itemId": 13201,
+        "name": "Magma mutagen",
+        "dropRate": 7.63e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Magma_mutagen"
+      },
+      {
+        "itemId": 12936,
+        "name": "Jar of swamp",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_swamp"
+      },
+      {
+        "itemId": 12921,
+        "name": "Pet snakeling",
+        "dropRate": 0.00025,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_snakeling"
+      }
     ]
   },
   {
     "name": "Vorkath",
     "category": "BOSSES",
-    "worldX": 2272,
-    "worldY": 4052,
+    "worldX": 2640,
+    "worldY": 3693,
     "worldPlane": 0,
     "killTimeSeconds": 150,
     "items": [
-      {"itemId": 21907, "name": "Vorkath's head", "dropRate": 0.02, "varbitId": 0, "isPet": false, "wikiPage": "Vorkath%27s_head"},
-      {"itemId": 22111, "name": "Dragonbone necklace", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Dragonbone_necklace"},
-      {"itemId": 22006, "name": "Skeletal visage", "dropRate": 0.0002, "varbitId": 0, "isPet": false, "wikiPage": "Skeletal_visage"},
-      {"itemId": 11286, "name": "Draconic visage", "dropRate": 0.0002, "varbitId": 0, "isPet": false, "wikiPage": "Draconic_visage"},
-      {"itemId": 22106, "name": "Jar of decay", "dropRate": 0.000333, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_decay"},
-      {"itemId": 21992, "name": "Vorki", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Vorki"}
-    ]
+      {
+        "itemId": 21907,
+        "name": "Vorkath's head",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Vorkath%27s_head"
+      },
+      {
+        "itemId": 22111,
+        "name": "Dragonbone necklace",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragonbone_necklace"
+      },
+      {
+        "itemId": 22006,
+        "name": "Skeletal visage",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Skeletal_visage"
+      },
+      {
+        "itemId": 11286,
+        "name": "Draconic visage",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Draconic_visage"
+      },
+      {
+        "itemId": 22106,
+        "name": "Jar of decay",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_decay"
+      },
+      {
+        "itemId": 21992,
+        "name": "Vorki",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Vorki"
+      }
+    ],
+    "locationDescription": "Rellekka docks (boat to island)"
   },
   {
     "name": "Cerberus",
     "category": "BOSSES",
-    "worldX": 1240,
-    "worldY": 1252,
+    "worldX": 2883,
+    "worldY": 3397,
     "worldPlane": 0,
+    "locationDescription": "Taverley Dungeon entrance, Taverley",
     "killTimeSeconds": 60,
     "items": [
-      {"itemId": 13231, "name": "Primordial crystal", "dropRate": 0.001923, "varbitId": 0, "isPet": false, "wikiPage": "Primordial_crystal"},
-      {"itemId": 13229, "name": "Pegasian crystal", "dropRate": 0.001923, "varbitId": 0, "isPet": false, "wikiPage": "Pegasian_crystal"},
-      {"itemId": 13227, "name": "Eternal crystal", "dropRate": 0.001923, "varbitId": 0, "isPet": false, "wikiPage": "Eternal_crystal"},
-      {"itemId": 13233, "name": "Smouldering stone", "dropRate": 0.001923, "varbitId": 0, "isPet": false, "wikiPage": "Smouldering_stone"},
-      {"itemId": 13245, "name": "Jar of souls", "dropRate": 0.0005, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_souls"},
-      {"itemId": 13247, "name": "Hellpuppy", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Hellpuppy"}
+      {
+        "itemId": 13231,
+        "name": "Primordial crystal",
+        "dropRate": 0.001923,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Primordial_crystal"
+      },
+      {
+        "itemId": 13229,
+        "name": "Pegasian crystal",
+        "dropRate": 0.001923,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pegasian_crystal"
+      },
+      {
+        "itemId": 13227,
+        "name": "Eternal crystal",
+        "dropRate": 0.001923,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eternal_crystal"
+      },
+      {
+        "itemId": 13233,
+        "name": "Smouldering stone",
+        "dropRate": 0.001923,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Smouldering_stone"
+      },
+      {
+        "itemId": 13245,
+        "name": "Jar of souls",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_souls"
+      },
+      {
+        "itemId": 13247,
+        "name": "Hellpuppy",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Hellpuppy"
+      }
     ]
   },
   {
     "name": "Alchemical Hydra",
     "category": "BOSSES",
-    "worldX": 1364,
-    "worldY": 10265,
+    "worldX": 1308,
+    "worldY": 3807,
     "worldPlane": 0,
+    "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
     "killTimeSeconds": 120,
     "items": [
-      {"itemId": 22971, "name": "Hydra's eye", "dropRate": 0.005525, "varbitId": 0, "isPet": false, "wikiPage": "Hydra%27s_eye"},
-      {"itemId": 22973, "name": "Hydra's fang", "dropRate": 0.005525, "varbitId": 0, "isPet": false, "wikiPage": "Hydra%27s_fang"},
-      {"itemId": 22975, "name": "Hydra's heart", "dropRate": 0.005525, "varbitId": 0, "isPet": false, "wikiPage": "Hydra%27s_heart"},
-      {"itemId": 22988, "name": "Hydra tail", "dropRate": 0.00195, "varbitId": 0, "isPet": false, "wikiPage": "Hydra_tail"},
-      {"itemId": 22983, "name": "Hydra leather", "dropRate": 0.001946, "varbitId": 0, "isPet": false, "wikiPage": "Hydra_leather"},
-      {"itemId": 22966, "name": "Hydra's claw", "dropRate": 0.000999, "varbitId": 0, "isPet": false, "wikiPage": "Hydra%27s_claw"},
-      {"itemId": 22988, "name": "Alchemical hydra heads", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Alchemical_hydra_heads"},
-      {"itemId": 22994, "name": "Jar of chemicals", "dropRate": 0.0005, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_chemicals"},
-      {"itemId": 22746, "name": "Ikkle hydra", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Ikkle_hydra"}
+      {
+        "itemId": 22971,
+        "name": "Hydra's eye",
+        "dropRate": 0.005525,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hydra%27s_eye"
+      },
+      {
+        "itemId": 22973,
+        "name": "Hydra's fang",
+        "dropRate": 0.005525,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hydra%27s_fang"
+      },
+      {
+        "itemId": 22975,
+        "name": "Hydra's heart",
+        "dropRate": 0.005525,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hydra%27s_heart"
+      },
+      {
+        "itemId": 22988,
+        "name": "Hydra tail",
+        "dropRate": 0.00195,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hydra_tail"
+      },
+      {
+        "itemId": 22983,
+        "name": "Hydra leather",
+        "dropRate": 0.001946,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hydra_leather"
+      },
+      {
+        "itemId": 22966,
+        "name": "Hydra's claw",
+        "dropRate": 0.000999,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hydra%27s_claw"
+      },
+      {
+        "itemId": 22988,
+        "name": "Alchemical hydra heads",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Alchemical_hydra_heads"
+      },
+      {
+        "itemId": 22994,
+        "name": "Jar of chemicals",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_chemicals"
+      },
+      {
+        "itemId": 22746,
+        "name": "Ikkle hydra",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Ikkle_hydra"
+      }
     ]
   },
   {
     "name": "Corporeal Beast",
     "category": "BOSSES",
     "worldX": 2966,
-    "worldY": 4382,
-    "worldPlane": 2,
+    "worldY": 3380,
+    "worldPlane": 0,
     "killTimeSeconds": 300,
     "items": [
-      {"itemId": 12829, "name": "Spectral sigil", "dropRate": 0.000733, "varbitId": 0, "isPet": false, "wikiPage": "Spectral_sigil"},
-      {"itemId": 12827, "name": "Arcane sigil", "dropRate": 0.000733, "varbitId": 0, "isPet": false, "wikiPage": "Arcane_sigil"},
-      {"itemId": 12819, "name": "Elysian sigil", "dropRate": 0.000244, "varbitId": 0, "isPet": false, "wikiPage": "Elysian_sigil"},
-      {"itemId": 12831, "name": "Spirit shield", "dropRate": 0.015625, "varbitId": 0, "isPet": false, "wikiPage": "Spirit_shield"},
-      {"itemId": 12833, "name": "Holy elixir", "dropRate": 0.005859, "varbitId": 0, "isPet": false, "wikiPage": "Holy_elixir"},
-      {"itemId": 22473, "name": "Jar of spirits", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_spirits"},
-      {"itemId": 12816, "name": "Pet dark core", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_dark_core"}
-    ]
+      {
+        "itemId": 12829,
+        "name": "Spectral sigil",
+        "dropRate": 0.000733,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Spectral_sigil"
+      },
+      {
+        "itemId": 12827,
+        "name": "Arcane sigil",
+        "dropRate": 0.000733,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Arcane_sigil"
+      },
+      {
+        "itemId": 12819,
+        "name": "Elysian sigil",
+        "dropRate": 0.000244,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Elysian_sigil"
+      },
+      {
+        "itemId": 12831,
+        "name": "Spirit shield",
+        "dropRate": 0.015625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Spirit_shield"
+      },
+      {
+        "itemId": 12833,
+        "name": "Holy elixir",
+        "dropRate": 0.005859,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Holy_elixir"
+      },
+      {
+        "itemId": 22473,
+        "name": "Jar of spirits",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_spirits"
+      },
+      {
+        "itemId": 12816,
+        "name": "Pet dark core",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_dark_core"
+      }
+    ],
+    "locationDescription": "Games necklace cave, level 21 Wilderness"
   },
   {
     "name": "Kalphite Queen",
     "category": "BOSSES",
-    "worldX": 3507,
-    "worldY": 9494,
+    "worldX": 3226,
+    "worldY": 3108,
     "worldPlane": 0,
+    "locationDescription": "Kalphite Lair entrance, Kharidian Desert",
     "killTimeSeconds": 180,
     "items": [
-      {"itemId": 7981, "name": "KQ head", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "KQ_head"},
-      {"itemId": 3140, "name": "Dragon chainbody", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_chainbody"},
-      {"itemId": 7158, "name": "Dragon 2h sword", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_2h_sword"},
-      {"itemId": 23677, "name": "Dragon pickaxe", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_pickaxe"},
-      {"itemId": 23525, "name": "Jar of sand", "dropRate": 0.0005, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_sand"},
-      {"itemId": 12647, "name": "Kalphite princess", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Kalphite_princess"}
+      {
+        "itemId": 7981,
+        "name": "KQ head",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "KQ_head"
+      },
+      {
+        "itemId": 3140,
+        "name": "Dragon chainbody",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_chainbody"
+      },
+      {
+        "itemId": 7158,
+        "name": "Dragon 2h sword",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_2h_sword"
+      },
+      {
+        "itemId": 23677,
+        "name": "Dragon pickaxe",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_pickaxe"
+      },
+      {
+        "itemId": 23525,
+        "name": "Jar of sand",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_sand"
+      },
+      {
+        "itemId": 12647,
+        "name": "Kalphite princess",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Kalphite_princess"
+      }
     ]
   },
   {
     "name": "Phantom Muspah",
     "category": "BOSSES",
-    "worldX": 2881,
-    "worldY": 6387,
+    "worldX": 2878,
+    "worldY": 3596,
     "worldPlane": 0,
     "killTimeSeconds": 180,
     "items": [
-      {"itemId": 27627, "name": "Ancient icon", "dropRate": 0.02, "varbitId": 0, "isPet": false, "wikiPage": "Ancient_icon"},
-      {"itemId": 27616, "name": "Venator shard", "dropRate": 0.01, "varbitId": 0, "isPet": false, "wikiPage": "Venator_shard"},
-      {"itemId": 27590, "name": "Muphin", "dropRate": 0.0004, "varbitId": 0, "isPet": true, "wikiPage": "Muphin"}
-    ]
+      {
+        "itemId": 27627,
+        "name": "Ancient icon",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_icon"
+      },
+      {
+        "itemId": 27616,
+        "name": "Venator shard",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Venator_shard"
+      },
+      {
+        "itemId": 27590,
+        "name": "Muphin",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Muphin"
+      }
+    ],
+    "locationDescription": "Ancient Prison entrance, Weiss"
   },
   {
     "name": "Duke Sucellus",
     "category": "BOSSES",
-    "worldX": 3034,
-    "worldY": 6431,
+    "worldX": 3009,
+    "worldY": 3514,
     "worldPlane": 0,
     "killTimeSeconds": 210,
     "items": [
-      {"itemId": 28321, "name": "Magus vestige", "dropRate": 0.001389, "varbitId": 0, "isPet": false, "wikiPage": "Magus_vestige"},
-      {"itemId": 28327, "name": "Chromium ingot", "dropRate": 0.004167, "varbitId": 0, "isPet": false, "wikiPage": "Chromium_ingot"},
-      {"itemId": 28319, "name": "Eye of the duke", "dropRate": 0.001389, "varbitId": 0, "isPet": false, "wikiPage": "Eye_of_the_duke"},
-      {"itemId": 26241, "name": "Virtus mask", "dropRate": 0.000463, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_mask"},
-      {"itemId": 26243, "name": "Virtus robe top", "dropRate": 0.000463, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_robe_top"},
-      {"itemId": 26245, "name": "Virtus robe bottom", "dropRate": 0.000463, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_robe_bottom"},
-      {"itemId": 28337, "name": "Baron", "dropRate": 0.0004, "varbitId": 0, "isPet": true, "wikiPage": "Baron"}
-    ]
+      {
+        "itemId": 28321,
+        "name": "Magus vestige",
+        "dropRate": 0.001389,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Magus_vestige"
+      },
+      {
+        "itemId": 28327,
+        "name": "Chromium ingot",
+        "dropRate": 0.004167,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chromium_ingot"
+      },
+      {
+        "itemId": 28319,
+        "name": "Eye of the duke",
+        "dropRate": 0.001389,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eye_of_the_duke"
+      },
+      {
+        "itemId": 26241,
+        "name": "Virtus mask",
+        "dropRate": 0.000463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_mask"
+      },
+      {
+        "itemId": 26243,
+        "name": "Virtus robe top",
+        "dropRate": 0.000463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_top"
+      },
+      {
+        "itemId": 26245,
+        "name": "Virtus robe bottom",
+        "dropRate": 0.000463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_bottom"
+      },
+      {
+        "itemId": 28337,
+        "name": "Baron",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Baron"
+      }
+    ],
+    "locationDescription": "Wizards' Tower, south of Draynor Village"
   },
   {
     "name": "The Leviathan",
     "category": "BOSSES",
-    "worldX": 3034,
-    "worldY": 6431,
+    "worldX": 3231,
+    "worldY": 2894,
     "worldPlane": 0,
     "killTimeSeconds": 240,
     "items": [
-      {"itemId": 28323, "name": "Venator vestige", "dropRate": 0.001302, "varbitId": 0, "isPet": false, "wikiPage": "Venator_vestige"},
-      {"itemId": 28327, "name": "Chromium ingot", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Chromium_ingot"},
-      {"itemId": 28315, "name": "Leviathan's lure", "dropRate": 0.001302, "varbitId": 0, "isPet": false, "wikiPage": "Leviathan%27s_lure"},
-      {"itemId": 26241, "name": "Virtus mask", "dropRate": 0.000434, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_mask"},
-      {"itemId": 26243, "name": "Virtus robe top", "dropRate": 0.000434, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_robe_top"},
-      {"itemId": 26245, "name": "Virtus robe bottom", "dropRate": 0.000434, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_robe_bottom"},
-      {"itemId": 28339, "name": "Lil'viathan", "dropRate": 0.0004, "varbitId": 0, "isPet": true, "wikiPage": "Lil%27viathan"}
-    ]
+      {
+        "itemId": 28323,
+        "name": "Venator vestige",
+        "dropRate": 0.001302,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Venator_vestige"
+      },
+      {
+        "itemId": 28327,
+        "name": "Chromium ingot",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chromium_ingot"
+      },
+      {
+        "itemId": 28315,
+        "name": "Leviathan's lure",
+        "dropRate": 0.001302,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Leviathan%27s_lure"
+      },
+      {
+        "itemId": 26241,
+        "name": "Virtus mask",
+        "dropRate": 0.000434,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_mask"
+      },
+      {
+        "itemId": 26243,
+        "name": "Virtus robe top",
+        "dropRate": 0.000434,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_top"
+      },
+      {
+        "itemId": 26245,
+        "name": "Virtus robe bottom",
+        "dropRate": 0.000434,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_bottom"
+      },
+      {
+        "itemId": 28339,
+        "name": "Lil'viathan",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Lil%27viathan"
+      }
+    ],
+    "locationDescription": "Catacombs entrance, Kourend"
   },
   {
     "name": "The Whisperer",
     "category": "BOSSES",
-    "worldX": 3034,
-    "worldY": 6431,
+    "worldX": 3009,
+    "worldY": 3514,
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "items": [
-      {"itemId": 28325, "name": "Bellator vestige", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Bellator_vestige"},
-      {"itemId": 28327, "name": "Chromium ingot", "dropRate": 0.005859, "varbitId": 0, "isPet": false, "wikiPage": "Chromium_ingot"},
-      {"itemId": 28317, "name": "Siren's staff", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Siren%27s_staff"},
-      {"itemId": 26241, "name": "Virtus mask", "dropRate": 0.000651, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_mask"},
-      {"itemId": 26243, "name": "Virtus robe top", "dropRate": 0.000651, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_robe_top"},
-      {"itemId": 26245, "name": "Virtus robe bottom", "dropRate": 0.000651, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_robe_bottom"},
-      {"itemId": 28341, "name": "Wisp", "dropRate": 0.0005, "varbitId": 0, "isPet": true, "wikiPage": "Wisp"}
-    ]
+      {
+        "itemId": 28325,
+        "name": "Bellator vestige",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bellator_vestige"
+      },
+      {
+        "itemId": 28327,
+        "name": "Chromium ingot",
+        "dropRate": 0.005859,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chromium_ingot"
+      },
+      {
+        "itemId": 28317,
+        "name": "Siren's staff",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Siren%27s_staff"
+      },
+      {
+        "itemId": 26241,
+        "name": "Virtus mask",
+        "dropRate": 0.000651,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_mask"
+      },
+      {
+        "itemId": 26243,
+        "name": "Virtus robe top",
+        "dropRate": 0.000651,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_top"
+      },
+      {
+        "itemId": 26245,
+        "name": "Virtus robe bottom",
+        "dropRate": 0.000651,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_bottom"
+      },
+      {
+        "itemId": 28341,
+        "name": "Wisp",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Wisp"
+      }
+    ],
+    "locationDescription": "Lassar Undercity entrance, Ice Mountain"
   },
   {
     "name": "Vardorvis",
     "category": "BOSSES",
-    "worldX": 3034,
-    "worldY": 6431,
+    "worldX": 1131,
+    "worldY": 3484,
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "items": [
-      {"itemId": 28329, "name": "Ultor vestige", "dropRate": 0.000919, "varbitId": 0, "isPet": false, "wikiPage": "Ultor_vestige"},
-      {"itemId": 28327, "name": "Chromium ingot", "dropRate": 0.002757, "varbitId": 0, "isPet": false, "wikiPage": "Chromium_ingot"},
-      {"itemId": 28313, "name": "Executioner's axe head", "dropRate": 0.000919, "varbitId": 0, "isPet": false, "wikiPage": "Executioner%27s_axe_head"},
-      {"itemId": 26241, "name": "Virtus mask", "dropRate": 0.000306, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_mask"},
-      {"itemId": 26243, "name": "Virtus robe top", "dropRate": 0.000306, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_robe_top"},
-      {"itemId": 26245, "name": "Virtus robe bottom", "dropRate": 0.000306, "varbitId": 0, "isPet": false, "wikiPage": "Virtus_robe_bottom"},
-      {"itemId": 28343, "name": "Butch", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Butch"}
-    ]
+      {
+        "itemId": 28329,
+        "name": "Ultor vestige",
+        "dropRate": 0.000919,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ultor_vestige"
+      },
+      {
+        "itemId": 28327,
+        "name": "Chromium ingot",
+        "dropRate": 0.002757,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chromium_ingot"
+      },
+      {
+        "itemId": 28313,
+        "name": "Executioner's axe head",
+        "dropRate": 0.000919,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Executioner%27s_axe_head"
+      },
+      {
+        "itemId": 26241,
+        "name": "Virtus mask",
+        "dropRate": 0.000306,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_mask"
+      },
+      {
+        "itemId": 26243,
+        "name": "Virtus robe top",
+        "dropRate": 0.000306,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_top"
+      },
+      {
+        "itemId": 26245,
+        "name": "Virtus robe bottom",
+        "dropRate": 0.000306,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_bottom"
+      },
+      {
+        "itemId": 28343,
+        "name": "Butch",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Butch"
+      }
+    ],
+    "locationDescription": "The Stranglewood, west of Slepe"
   },
   {
     "name": "Grotesque Guardians",
@@ -262,131 +1011,455 @@
     "worldPlane": 2,
     "killTimeSeconds": 120,
     "items": [
-      {"itemId": 21752, "name": "Granite maul", "dropRate": 0.004, "varbitId": 0, "isPet": false, "wikiPage": "Granite_maul"},
-      {"itemId": 21736, "name": "Granite gloves", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Granite_gloves"},
-      {"itemId": 21739, "name": "Granite ring", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Granite_ring"},
-      {"itemId": 21742, "name": "Granite hammer", "dropRate": 0.001333, "varbitId": 0, "isPet": false, "wikiPage": "Granite_hammer"},
-      {"itemId": 21730, "name": "Black tourmaline core", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Black_tourmaline_core"},
-      {"itemId": 21748, "name": "Jar of stone", "dropRate": 0.0002, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_stone"},
-      {"itemId": 21748, "name": "Noon", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Noon"}
-    ]
+      {
+        "itemId": 21752,
+        "name": "Granite maul",
+        "dropRate": 0.004,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_maul"
+      },
+      {
+        "itemId": 21736,
+        "name": "Granite gloves",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_gloves"
+      },
+      {
+        "itemId": 21739,
+        "name": "Granite ring",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_ring"
+      },
+      {
+        "itemId": 21742,
+        "name": "Granite hammer",
+        "dropRate": 0.001333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_hammer"
+      },
+      {
+        "itemId": 21730,
+        "name": "Black tourmaline core",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_tourmaline_core"
+      },
+      {
+        "itemId": 21748,
+        "name": "Jar of stone",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_stone"
+      },
+      {
+        "itemId": 21748,
+        "name": "Noon",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Noon"
+      }
+    ],
+    "locationDescription": "Slayer Tower rooftop, Morytania"
   },
   {
     "name": "The Nightmare",
     "category": "BOSSES",
-    "worldX": 3808,
-    "worldY": 9760,
-    "worldPlane": 1,
+    "worldX": 3662,
+    "worldY": 3218,
+    "worldPlane": 0,
     "killTimeSeconds": 600,
     "items": [
-      {"itemId": 24422, "name": "Nightmare staff", "dropRate": 0.003333, "varbitId": 0, "isPet": false, "wikiPage": "Nightmare_staff"},
-      {"itemId": 24419, "name": "Inquisitor's great helm", "dropRate": 0.002381, "varbitId": 0, "isPet": false, "wikiPage": "Inquisitor%27s_great_helm"},
-      {"itemId": 24420, "name": "Inquisitor's hauberk", "dropRate": 0.002381, "varbitId": 0, "isPet": false, "wikiPage": "Inquisitor%27s_hauberk"},
-      {"itemId": 24421, "name": "Inquisitor's plateskirt", "dropRate": 0.002381, "varbitId": 0, "isPet": false, "wikiPage": "Inquisitor%27s_plateskirt"},
-      {"itemId": 24417, "name": "Inquisitor's mace", "dropRate": 0.001333, "varbitId": 0, "isPet": false, "wikiPage": "Inquisitor%27s_mace"},
-      {"itemId": 24511, "name": "Eldritch orb", "dropRate": 0.001042, "varbitId": 0, "isPet": false, "wikiPage": "Eldritch_orb"},
-      {"itemId": 24514, "name": "Harmonised orb", "dropRate": 0.001042, "varbitId": 0, "isPet": false, "wikiPage": "Harmonised_orb"},
-      {"itemId": 24517, "name": "Volatile orb", "dropRate": 0.001042, "varbitId": 0, "isPet": false, "wikiPage": "Volatile_orb"},
-      {"itemId": 24491, "name": "Jar of dreams", "dropRate": 0.000526, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_dreams"},
-      {"itemId": 24491, "name": "Little nightmare", "dropRate": 0.00125, "varbitId": 0, "isPet": true, "wikiPage": "Little_nightmare"}
-    ]
+      {
+        "itemId": 24422,
+        "name": "Nightmare staff",
+        "dropRate": 0.003333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Nightmare_staff"
+      },
+      {
+        "itemId": 24419,
+        "name": "Inquisitor's great helm",
+        "dropRate": 0.002381,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Inquisitor%27s_great_helm"
+      },
+      {
+        "itemId": 24420,
+        "name": "Inquisitor's hauberk",
+        "dropRate": 0.002381,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Inquisitor%27s_hauberk"
+      },
+      {
+        "itemId": 24421,
+        "name": "Inquisitor's plateskirt",
+        "dropRate": 0.002381,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Inquisitor%27s_plateskirt"
+      },
+      {
+        "itemId": 24417,
+        "name": "Inquisitor's mace",
+        "dropRate": 0.001333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Inquisitor%27s_mace"
+      },
+      {
+        "itemId": 24511,
+        "name": "Eldritch orb",
+        "dropRate": 0.001042,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eldritch_orb"
+      },
+      {
+        "itemId": 24514,
+        "name": "Harmonised orb",
+        "dropRate": 0.001042,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Harmonised_orb"
+      },
+      {
+        "itemId": 24517,
+        "name": "Volatile orb",
+        "dropRate": 0.001042,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Volatile_orb"
+      },
+      {
+        "itemId": 24491,
+        "name": "Jar of dreams",
+        "dropRate": 0.000526,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_dreams"
+      },
+      {
+        "itemId": 24491,
+        "name": "Little nightmare",
+        "dropRate": 0.00125,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Little_nightmare"
+      }
+    ],
+    "locationDescription": "Slepe, east Morytania"
   },
   {
     "name": "Nex",
     "category": "BOSSES",
-    "worldX": 2924,
-    "worldY": 5202,
+    "worldX": 2882,
+    "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "items": [
-      {"itemId": 26382, "name": "Torva full helm (damaged)", "dropRate": 0.003876, "varbitId": 0, "isPet": false, "wikiPage": "Torva_full_helm_(damaged)"},
-      {"itemId": 26384, "name": "Torva platebody (damaged)", "dropRate": 0.003876, "varbitId": 0, "isPet": false, "wikiPage": "Torva_platebody_(damaged)"},
-      {"itemId": 26386, "name": "Torva platelegs (damaged)", "dropRate": 0.003876, "varbitId": 0, "isPet": false, "wikiPage": "Torva_platelegs_(damaged)"},
-      {"itemId": 26235, "name": "Zaryte vambraces", "dropRate": 0.005814, "varbitId": 0, "isPet": false, "wikiPage": "Zaryte_vambraces"},
-      {"itemId": 26372, "name": "Nihil horn", "dropRate": 0.003876, "varbitId": 0, "isPet": false, "wikiPage": "Nihil_horn"},
-      {"itemId": 26370, "name": "Ancient hilt", "dropRate": 0.001938, "varbitId": 0, "isPet": false, "wikiPage": "Ancient_hilt"},
-      {"itemId": 26348, "name": "Nexling", "dropRate": 0.002, "varbitId": 0, "isPet": true, "wikiPage": "Nexling"}
-    ]
+      {
+        "itemId": 26382,
+        "name": "Torva full helm (damaged)",
+        "dropRate": 0.003876,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Torva_full_helm_(damaged)"
+      },
+      {
+        "itemId": 26384,
+        "name": "Torva platebody (damaged)",
+        "dropRate": 0.003876,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Torva_platebody_(damaged)"
+      },
+      {
+        "itemId": 26386,
+        "name": "Torva platelegs (damaged)",
+        "dropRate": 0.003876,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Torva_platelegs_(damaged)"
+      },
+      {
+        "itemId": 26235,
+        "name": "Zaryte vambraces",
+        "dropRate": 0.005814,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zaryte_vambraces"
+      },
+      {
+        "itemId": 26372,
+        "name": "Nihil horn",
+        "dropRate": 0.003876,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Nihil_horn"
+      },
+      {
+        "itemId": 26370,
+        "name": "Ancient hilt",
+        "dropRate": 0.001938,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_hilt"
+      },
+      {
+        "itemId": 26348,
+        "name": "Nexling",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Nexling"
+      }
+    ],
+    "locationDescription": "God Wars Dungeon entrance, Trollheim"
   },
   {
     "name": "Sarachnis",
     "category": "BOSSES",
-    "worldX": 1847,
-    "worldY": 9899,
+    "worldX": 1701,
+    "worldY": 3574,
     "worldPlane": 0,
+    "locationDescription": "Forthos Dungeon, Hosidius",
     "killTimeSeconds": 90,
     "items": [
-      {"itemId": 23528, "name": "Sarachnis cudgel", "dropRate": 0.002604, "varbitId": 0, "isPet": false, "wikiPage": "Sarachnis_cudgel"},
-      {"itemId": 23517, "name": "Giant egg sac (full)", "dropRate": 0.05, "varbitId": 0, "isPet": false, "wikiPage": "Giant_egg_sac_(full)"},
-      {"itemId": 23535, "name": "Jar of eyes", "dropRate": 0.0005, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_eyes"},
-      {"itemId": 23495, "name": "Sraracha", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Sraracha"}
+      {
+        "itemId": 23528,
+        "name": "Sarachnis cudgel",
+        "dropRate": 0.002604,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sarachnis_cudgel"
+      },
+      {
+        "itemId": 23517,
+        "name": "Giant egg sac (full)",
+        "dropRate": 0.05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Giant_egg_sac_(full)"
+      },
+      {
+        "itemId": 23535,
+        "name": "Jar of eyes",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_eyes"
+      },
+      {
+        "itemId": 23495,
+        "name": "Sraracha",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Sraracha"
+      }
     ]
   },
   {
     "name": "Giant Mole",
     "category": "BOSSES",
-    "worldX": 1752,
-    "worldY": 5237,
+    "worldX": 2987,
+    "worldY": 3376,
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "items": [
-      {"itemId": 12646, "name": "Baby mole", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Baby_mole"}
-    ]
+      {
+        "itemId": 12646,
+        "name": "Baby mole",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Baby_mole"
+      }
+    ],
+    "locationDescription": "Falador Park"
   },
   {
     "name": "Dagannoth Rex",
     "category": "BOSSES",
-    "worldX": 2900,
-    "worldY": 4449,
+    "worldX": 2521,
+    "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "items": [
-      {"itemId": 6737, "name": "Berserker ring", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Berserker_ring"},
-      {"itemId": 6735, "name": "Warrior ring", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Warrior_ring"},
-      {"itemId": 6739, "name": "Dragon axe", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_axe"},
-      {"itemId": 12644, "name": "Pet dagannoth rex", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_dagannoth_rex"}
-    ]
+      {
+        "itemId": 6737,
+        "name": "Berserker ring",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Berserker_ring"
+      },
+      {
+        "itemId": 6735,
+        "name": "Warrior ring",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Warrior_ring"
+      },
+      {
+        "itemId": 6739,
+        "name": "Dragon axe",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_axe"
+      },
+      {
+        "itemId": 12644,
+        "name": "Pet dagannoth rex",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_dagannoth_rex"
+      }
+    ],
+    "locationDescription": "Waterbirth Island, Rellekka"
   },
   {
     "name": "Dagannoth Prime",
     "category": "BOSSES",
-    "worldX": 2900,
-    "worldY": 4449,
+    "worldX": 2521,
+    "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "items": [
-      {"itemId": 6731, "name": "Seers ring", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Seers_ring"},
-      {"itemId": 6562, "name": "Mud battlestaff", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Mud_battlestaff"},
-      {"itemId": 6739, "name": "Dragon axe", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_axe"},
-      {"itemId": 12643, "name": "Pet dagannoth prime", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_dagannoth_prime"}
-    ]
+      {
+        "itemId": 6731,
+        "name": "Seers ring",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Seers_ring"
+      },
+      {
+        "itemId": 6562,
+        "name": "Mud battlestaff",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mud_battlestaff"
+      },
+      {
+        "itemId": 6739,
+        "name": "Dragon axe",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_axe"
+      },
+      {
+        "itemId": 12643,
+        "name": "Pet dagannoth prime",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_dagannoth_prime"
+      }
+    ],
+    "locationDescription": "Waterbirth Island, Rellekka"
   },
   {
     "name": "Dagannoth Supreme",
     "category": "BOSSES",
-    "worldX": 2900,
-    "worldY": 4449,
+    "worldX": 2521,
+    "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "items": [
-      {"itemId": 6733, "name": "Archers ring", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Archers_ring"},
-      {"itemId": 6724, "name": "Seercull", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Seercull"},
-      {"itemId": 6739, "name": "Dragon axe", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_axe"},
-      {"itemId": 12645, "name": "Pet dagannoth supreme", "dropRate": 0.0002, "varbitId": 0, "isPet": true, "wikiPage": "Pet_dagannoth_supreme"}
-    ]
+      {
+        "itemId": 6733,
+        "name": "Archers ring",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Archers_ring"
+      },
+      {
+        "itemId": 6724,
+        "name": "Seercull",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Seercull"
+      },
+      {
+        "itemId": 6739,
+        "name": "Dragon axe",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_axe"
+      },
+      {
+        "itemId": 12645,
+        "name": "Pet dagannoth supreme",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_dagannoth_supreme"
+      }
+    ],
+    "locationDescription": "Waterbirth Island, Rellekka"
   },
   {
     "name": "Kraken",
     "category": "BOSSES",
-    "worldX": 2280,
-    "worldY": 10022,
+    "worldX": 2277,
+    "worldY": 3611,
     "worldPlane": 0,
+    "locationDescription": "Kraken Cove, Piscatoris",
     "killTimeSeconds": 30,
     "items": [
-      {"itemId": 11905, "name": "Trident of the seas (full)", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Trident_of_the_seas_(full)"},
-      {"itemId": 12004, "name": "Kraken tentacle", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Kraken_tentacle"},
-      {"itemId": 12007, "name": "Jar of dirt", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_dirt"},
-      {"itemId": 12655, "name": "Pet kraken", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Pet_kraken"}
+      {
+        "itemId": 11905,
+        "name": "Trident of the seas (full)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Trident_of_the_seas_(full)"
+      },
+      {
+        "itemId": 12004,
+        "name": "Kraken tentacle",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Kraken_tentacle"
+      },
+      {
+        "itemId": 12007,
+        "name": "Jar of dirt",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_dirt"
+      },
+      {
+        "itemId": 12655,
+        "name": "Pet kraken",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_kraken"
+      }
     ]
   },
   {
@@ -397,27 +1470,98 @@
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "items": [
-      {"itemId": 12002, "name": "Occult necklace", "dropRate": 0.002857, "varbitId": 0, "isPet": false, "wikiPage": "Occult_necklace"},
-      {"itemId": 11998, "name": "Smoke battlestaff", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Smoke_battlestaff"},
-      {"itemId": 3140, "name": "Dragon chainbody", "dropRate": 0.0005, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_chainbody"},
-      {"itemId": 12020, "name": "Jar of smoke", "dropRate": 0.0005, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_smoke"},
-      {"itemId": 12648, "name": "Pet smoke devil", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Pet_smoke_devil"}
+      {
+        "itemId": 12002,
+        "name": "Occult necklace",
+        "dropRate": 0.002857,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Occult_necklace"
+      },
+      {
+        "itemId": 11998,
+        "name": "Smoke battlestaff",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Smoke_battlestaff"
+      },
+      {
+        "itemId": 3140,
+        "name": "Dragon chainbody",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_chainbody"
+      },
+      {
+        "itemId": 12020,
+        "name": "Jar of smoke",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_smoke"
+      },
+      {
+        "itemId": 12648,
+        "name": "Pet smoke devil",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_smoke_devil"
+      }
     ]
   },
   {
     "name": "Abyssal Sire",
     "category": "BOSSES",
-    "worldX": 2965,
-    "worldY": 4772,
+    "worldX": 3039,
+    "worldY": 4763,
     "worldPlane": 0,
     "killTimeSeconds": 150,
     "items": [
-      {"itemId": 13265, "name": "Unsired", "dropRate": 0.01, "varbitId": 0, "isPet": false, "wikiPage": "Unsired"},
-      {"itemId": 13263, "name": "Abyssal dagger", "dropRate": 0.002033, "varbitId": 0, "isPet": false, "wikiPage": "Abyssal_dagger"},
-      {"itemId": 13271, "name": "Abyssal bludgeon", "dropRate": 0.001709, "varbitId": 0, "isPet": false, "wikiPage": "Abyssal_bludgeon"},
-      {"itemId": 13277, "name": "Jar of miasma", "dropRate": 0.0002, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_miasma"},
-      {"itemId": 13262, "name": "Abyssal orphan", "dropRate": 0.000338, "varbitId": 0, "isPet": true, "wikiPage": "Abyssal_orphan"}
-    ]
+      {
+        "itemId": 13265,
+        "name": "Unsired",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Unsired"
+      },
+      {
+        "itemId": 13263,
+        "name": "Abyssal dagger",
+        "dropRate": 0.002033,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_dagger"
+      },
+      {
+        "itemId": 13271,
+        "name": "Abyssal bludgeon",
+        "dropRate": 0.001709,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_bludgeon"
+      },
+      {
+        "itemId": 13277,
+        "name": "Jar of miasma",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_miasma"
+      },
+      {
+        "itemId": 13262,
+        "name": "Abyssal orphan",
+        "dropRate": 0.000338,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Abyssal_orphan"
+      }
+    ],
+    "locationDescription": "Abyssal Nexus, fairy ring DIP"
   },
   {
     "name": "King Black Dragon",
@@ -427,10 +1571,38 @@
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "items": [
-      {"itemId": 11920, "name": "Dragon pickaxe", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_pickaxe"},
-      {"itemId": 7981, "name": "KBD heads", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "KBD_heads"},
-      {"itemId": 11286, "name": "Draconic visage", "dropRate": 0.0002, "varbitId": 0, "isPet": false, "wikiPage": "Draconic_visage"},
-      {"itemId": 12653, "name": "Prince black dragon", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Prince_black_dragon"}
+      {
+        "itemId": 11920,
+        "name": "Dragon pickaxe",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_pickaxe"
+      },
+      {
+        "itemId": 7981,
+        "name": "KBD heads",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "KBD_heads"
+      },
+      {
+        "itemId": 11286,
+        "name": "Draconic visage",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Draconic_visage"
+      },
+      {
+        "itemId": 12653,
+        "name": "Prince black dragon",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Prince_black_dragon"
+      }
     ]
   },
   {
@@ -441,9 +1613,30 @@
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "items": [
-      {"itemId": 11920, "name": "Dragon pickaxe", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_pickaxe"},
-      {"itemId": 7158, "name": "Dragon 2h sword", "dropRate": 0.015625, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_2h_sword"},
-      {"itemId": 11335, "name": "Pet chaos elemental", "dropRate": 0.003333, "varbitId": 0, "isPet": true, "wikiPage": "Pet_chaos_elemental"}
+      {
+        "itemId": 11920,
+        "name": "Dragon pickaxe",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_pickaxe"
+      },
+      {
+        "itemId": 7158,
+        "name": "Dragon 2h sword",
+        "dropRate": 0.015625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_2h_sword"
+      },
+      {
+        "itemId": 11335,
+        "name": "Pet chaos elemental",
+        "dropRate": 0.003333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_chaos_elemental"
+      }
     ]
   },
   {
@@ -454,9 +1647,30 @@
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "items": [
-      {"itemId": 11932, "name": "Odium shard 3", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Odium_shard_3"},
-      {"itemId": 11934, "name": "Malediction shard 3", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Malediction_shard_3"},
-      {"itemId": 13181, "name": "Scorpia's offspring", "dropRate": 0.000496, "varbitId": 0, "isPet": true, "wikiPage": "Scorpia%27s_offspring"}
+      {
+        "itemId": 11932,
+        "name": "Odium shard 3",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Odium_shard_3"
+      },
+      {
+        "itemId": 11934,
+        "name": "Malediction shard 3",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Malediction_shard_3"
+      },
+      {
+        "itemId": 13181,
+        "name": "Scorpia's offspring",
+        "dropRate": 0.000496,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Scorpia%27s_offspring"
+      }
     ]
   },
   {
@@ -467,9 +1681,30 @@
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "items": [
-      {"itemId": 11928, "name": "Odium shard 1", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Odium_shard_1"},
-      {"itemId": 11930, "name": "Malediction shard 1", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Malediction_shard_1"},
-      {"itemId": 11335, "name": "Pet chaos elemental", "dropRate": 0.001, "varbitId": 0, "isPet": true, "wikiPage": "Pet_chaos_elemental"}
+      {
+        "itemId": 11928,
+        "name": "Odium shard 1",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Odium_shard_1"
+      },
+      {
+        "itemId": 11930,
+        "name": "Malediction shard 1",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Malediction_shard_1"
+      },
+      {
+        "itemId": 11335,
+        "name": "Pet chaos elemental",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_chaos_elemental"
+      }
     ]
   },
   {
@@ -480,11 +1715,46 @@
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "items": [
-      {"itemId": 27655, "name": "Fangs of Venenatis", "dropRate": 0.005102, "varbitId": 0, "isPet": false, "wikiPage": "Fangs_of_Venenatis"},
-      {"itemId": 27667, "name": "Voidwaker gem", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Voidwaker_gem"},
-      {"itemId": 12002, "name": "Treasonous ring", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Treasonous_ring"},
-      {"itemId": 11920, "name": "Dragon pickaxe", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_pickaxe"},
-      {"itemId": 13177, "name": "Venenatis spiderling", "dropRate": 0.000667, "varbitId": 0, "isPet": true, "wikiPage": "Venenatis_spiderling"}
+      {
+        "itemId": 27655,
+        "name": "Fangs of Venenatis",
+        "dropRate": 0.005102,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fangs_of_Venenatis"
+      },
+      {
+        "itemId": 27667,
+        "name": "Voidwaker gem",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Voidwaker_gem"
+      },
+      {
+        "itemId": 12002,
+        "name": "Treasonous ring",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Treasonous_ring"
+      },
+      {
+        "itemId": 11920,
+        "name": "Dragon pickaxe",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_pickaxe"
+      },
+      {
+        "itemId": 13177,
+        "name": "Venenatis spiderling",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Venenatis_spiderling"
+      }
     ]
   },
   {
@@ -495,11 +1765,46 @@
     "worldPlane": 0,
     "killTimeSeconds": 180,
     "items": [
-      {"itemId": 27657, "name": "Skull of Vet'ion", "dropRate": 0.005102, "varbitId": 0, "isPet": false, "wikiPage": "Skull_of_Vet%27ion"},
-      {"itemId": 27669, "name": "Voidwaker blade", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Voidwaker_blade"},
-      {"itemId": 12601, "name": "Ring of the gods", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Ring_of_the_gods"},
-      {"itemId": 11920, "name": "Dragon pickaxe", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_pickaxe"},
-      {"itemId": 13179, "name": "Vet'ion jr.", "dropRate": 0.000667, "varbitId": 0, "isPet": true, "wikiPage": "Vet%27ion_jr."}
+      {
+        "itemId": 27657,
+        "name": "Skull of Vet'ion",
+        "dropRate": 0.005102,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Skull_of_Vet%27ion"
+      },
+      {
+        "itemId": 27669,
+        "name": "Voidwaker blade",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Voidwaker_blade"
+      },
+      {
+        "itemId": 12601,
+        "name": "Ring of the gods",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ring_of_the_gods"
+      },
+      {
+        "itemId": 11920,
+        "name": "Dragon pickaxe",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_pickaxe"
+      },
+      {
+        "itemId": 13179,
+        "name": "Vet'ion jr.",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Vet%27ion_jr."
+      }
     ]
   },
   {
@@ -510,28 +1815,106 @@
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "items": [
-      {"itemId": 27653, "name": "Claws of Callisto", "dropRate": 0.005102, "varbitId": 0, "isPet": false, "wikiPage": "Claws_of_Callisto"},
-      {"itemId": 27671, "name": "Voidwaker hilt", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Voidwaker_hilt"},
-      {"itemId": 12603, "name": "Tyrannical ring", "dropRate": 0.001953, "varbitId": 0, "isPet": false, "wikiPage": "Tyrannical_ring"},
-      {"itemId": 11920, "name": "Dragon pickaxe", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_pickaxe"},
-      {"itemId": 13178, "name": "Callisto cub", "dropRate": 0.000667, "varbitId": 0, "isPet": true, "wikiPage": "Callisto_cub"}
+      {
+        "itemId": 27653,
+        "name": "Claws of Callisto",
+        "dropRate": 0.005102,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Claws_of_Callisto"
+      },
+      {
+        "itemId": 27671,
+        "name": "Voidwaker hilt",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Voidwaker_hilt"
+      },
+      {
+        "itemId": 12603,
+        "name": "Tyrannical ring",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tyrannical_ring"
+      },
+      {
+        "itemId": 11920,
+        "name": "Dragon pickaxe",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_pickaxe"
+      },
+      {
+        "itemId": 13178,
+        "name": "Callisto cub",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Callisto_cub"
+      }
     ]
   },
   {
     "name": "Demonic gorillas",
     "category": "OTHER",
-    "worldX": 2130,
-    "worldY": 5647,
+    "worldX": 2405,
+    "worldY": 3419,
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "items": [
-      {"itemId": 19529, "name": "Zenyte shard", "dropRate": 0.003333, "varbitId": 0, "isPet": false, "wikiPage": "Zenyte_shard"},
-      {"itemId": 19592, "name": "Ballista limbs", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Ballista_limbs"},
-      {"itemId": 19601, "name": "Ballista spring", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Ballista_spring"},
-      {"itemId": 19586, "name": "Light frame", "dropRate": 0.001333, "varbitId": 0, "isPet": false, "wikiPage": "Light_frame"},
-      {"itemId": 19589, "name": "Heavy frame", "dropRate": 0.000667, "varbitId": 0, "isPet": false, "wikiPage": "Heavy_frame"},
-      {"itemId": 19556, "name": "Monkey tail", "dropRate": 0.000667, "varbitId": 0, "isPet": false, "wikiPage": "Monkey_tail"}
-    ]
+      {
+        "itemId": 19529,
+        "name": "Zenyte shard",
+        "dropRate": 0.003333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zenyte_shard"
+      },
+      {
+        "itemId": 19592,
+        "name": "Ballista limbs",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ballista_limbs"
+      },
+      {
+        "itemId": 19601,
+        "name": "Ballista spring",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ballista_spring"
+      },
+      {
+        "itemId": 19586,
+        "name": "Light frame",
+        "dropRate": 0.001333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Light_frame"
+      },
+      {
+        "itemId": 19589,
+        "name": "Heavy frame",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Heavy_frame"
+      },
+      {
+        "itemId": 19556,
+        "name": "Monkey tail",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Monkey_tail"
+      }
+    ],
+    "locationDescription": "Crash Site Cavern, Gnome Stronghold"
   },
   {
     "name": "Lizardman shaman",
@@ -541,20 +1924,49 @@
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "items": [
-      {"itemId": 13576, "name": "Dragon warhammer", "dropRate": 0.000333, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_warhammer"}
+      {
+        "itemId": 13576,
+        "name": "Dragon warhammer",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_warhammer"
+      }
     ]
   },
   {
     "name": "Skotizo",
     "category": "BOSSES",
-    "worldX": 1693,
-    "worldY": 9886,
+    "worldX": 1636,
+    "worldY": 3673,
     "worldPlane": 0,
+    "locationDescription": "Catacombs of Kourend, Kourend Castle",
     "killTimeSeconds": 60,
     "items": [
-      {"itemId": 21273, "name": "Dark claw", "dropRate": 0.04, "varbitId": 0, "isPet": false, "wikiPage": "Dark_claw"},
-      {"itemId": 21279, "name": "Jar of darkness", "dropRate": 0.005, "varbitId": 0, "isPet": false, "wikiPage": "Jar_of_darkness"},
-      {"itemId": 21273, "name": "Skotos", "dropRate": 0.015385, "varbitId": 0, "isPet": true, "wikiPage": "Skotos"}
+      {
+        "itemId": 21273,
+        "name": "Dark claw",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_claw"
+      },
+      {
+        "itemId": 21279,
+        "name": "Jar of darkness",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_darkness"
+      },
+      {
+        "itemId": 21273,
+        "name": "Skotos",
+        "dropRate": 0.015385,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Skotos"
+      }
     ]
   },
   {
@@ -565,8 +1977,22 @@
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "items": [
-      {"itemId": 22997, "name": "Bottomless compost bucket", "dropRate": 0.028571, "varbitId": 0, "isPet": false, "wikiPage": "Bottomless_compost_bucket"},
-      {"itemId": 12000, "name": "Tangleroot", "dropRate": 0.000186, "varbitId": 0, "isPet": true, "wikiPage": "Tangleroot"}
+      {
+        "itemId": 22997,
+        "name": "Bottomless compost bucket",
+        "dropRate": 0.028571,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bottomless_compost_bucket"
+      },
+      {
+        "itemId": 12000,
+        "name": "Tangleroot",
+        "dropRate": 0.000186,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Tangleroot"
+      }
     ]
   },
   {
@@ -577,38 +2003,186 @@
     "worldPlane": 0,
     "killTimeSeconds": 1800,
     "items": [
-      {"itemId": 20997, "name": "Twisted bow", "dropRate": 0.00029, "varbitId": 0, "isPet": false, "wikiPage": "Twisted_bow"},
-      {"itemId": 21003, "name": "Elder maul", "dropRate": 0.00029, "varbitId": 0, "isPet": false, "wikiPage": "Elder_maul"},
-      {"itemId": 21043, "name": "Kodai insignia", "dropRate": 0.00029, "varbitId": 0, "isPet": false, "wikiPage": "Kodai_insignia"},
-      {"itemId": 13652, "name": "Dragon claws", "dropRate": 0.00029, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_claws"},
-      {"itemId": 21012, "name": "Dragon hunter crossbow", "dropRate": 0.00058, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_hunter_crossbow"},
-      {"itemId": 21000, "name": "Twisted buckler", "dropRate": 0.00058, "varbitId": 0, "isPet": false, "wikiPage": "Twisted_buckler"},
-      {"itemId": 21015, "name": "Dinh's bulwark", "dropRate": 0.00058, "varbitId": 0, "isPet": false, "wikiPage": "Dinh%27s_bulwark"},
-      {"itemId": 21018, "name": "Ancestral hat", "dropRate": 0.000435, "varbitId": 0, "isPet": false, "wikiPage": "Ancestral_hat"},
-      {"itemId": 21021, "name": "Ancestral robe top", "dropRate": 0.000435, "varbitId": 0, "isPet": false, "wikiPage": "Ancestral_robe_top"},
-      {"itemId": 21024, "name": "Ancestral robe bottom", "dropRate": 0.000435, "varbitId": 0, "isPet": false, "wikiPage": "Ancestral_robe_bottom"},
-      {"itemId": 21034, "name": "Dexterous prayer scroll", "dropRate": 0.00145, "varbitId": 0, "isPet": false, "wikiPage": "Dexterous_prayer_scroll"},
-      {"itemId": 21079, "name": "Arcane prayer scroll", "dropRate": 0.00145, "varbitId": 0, "isPet": false, "wikiPage": "Arcane_prayer_scroll"},
-      {"itemId": 20851, "name": "Olmlet", "dropRate": 0.01887, "varbitId": 0, "isPet": true, "wikiPage": "Olmlet"}
+      {
+        "itemId": 20997,
+        "name": "Twisted bow",
+        "dropRate": 0.00029,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Twisted_bow"
+      },
+      {
+        "itemId": 21003,
+        "name": "Elder maul",
+        "dropRate": 0.00029,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Elder_maul"
+      },
+      {
+        "itemId": 21043,
+        "name": "Kodai insignia",
+        "dropRate": 0.00029,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Kodai_insignia"
+      },
+      {
+        "itemId": 13652,
+        "name": "Dragon claws",
+        "dropRate": 0.00029,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_claws"
+      },
+      {
+        "itemId": 21012,
+        "name": "Dragon hunter crossbow",
+        "dropRate": 0.00058,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_hunter_crossbow"
+      },
+      {
+        "itemId": 21000,
+        "name": "Twisted buckler",
+        "dropRate": 0.00058,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Twisted_buckler"
+      },
+      {
+        "itemId": 21015,
+        "name": "Dinh's bulwark",
+        "dropRate": 0.00058,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dinh%27s_bulwark"
+      },
+      {
+        "itemId": 21018,
+        "name": "Ancestral hat",
+        "dropRate": 0.000435,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancestral_hat"
+      },
+      {
+        "itemId": 21021,
+        "name": "Ancestral robe top",
+        "dropRate": 0.000435,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancestral_robe_top"
+      },
+      {
+        "itemId": 21024,
+        "name": "Ancestral robe bottom",
+        "dropRate": 0.000435,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancestral_robe_bottom"
+      },
+      {
+        "itemId": 21034,
+        "name": "Dexterous prayer scroll",
+        "dropRate": 0.00145,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dexterous_prayer_scroll"
+      },
+      {
+        "itemId": 21079,
+        "name": "Arcane prayer scroll",
+        "dropRate": 0.00145,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Arcane_prayer_scroll"
+      },
+      {
+        "itemId": 20851,
+        "name": "Olmlet",
+        "dropRate": 0.01887,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Olmlet"
+      }
     ]
   },
   {
     "name": "Theatre of Blood",
     "category": "RAIDS",
-    "worldX": 3168,
-    "worldY": 4303,
+    "worldX": 3650,
+    "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 1500,
     "items": [
-      {"itemId": 22325, "name": "Scythe of vitur", "dropRate": 0.00157, "varbitId": 0, "isPet": false, "wikiPage": "Scythe_of_vitur"},
-      {"itemId": 22324, "name": "Ghrazi rapier", "dropRate": 0.00157, "varbitId": 0, "isPet": false, "wikiPage": "Ghrazi_rapier"},
-      {"itemId": 22323, "name": "Sanguinesti staff", "dropRate": 0.00157, "varbitId": 0, "isPet": false, "wikiPage": "Sanguinesti_staff"},
-      {"itemId": 22326, "name": "Justiciar faceguard", "dropRate": 0.00157, "varbitId": 0, "isPet": false, "wikiPage": "Justiciar_faceguard"},
-      {"itemId": 22327, "name": "Justiciar chestguard", "dropRate": 0.00157, "varbitId": 0, "isPet": false, "wikiPage": "Justiciar_chestguard"},
-      {"itemId": 22328, "name": "Justiciar legguards", "dropRate": 0.00157, "varbitId": 0, "isPet": false, "wikiPage": "Justiciar_legguards"},
-      {"itemId": 22477, "name": "Avernic defender hilt", "dropRate": 0.00157, "varbitId": 0, "isPet": false, "wikiPage": "Avernic_defender_hilt"},
-      {"itemId": 22473, "name": "Lil' zik", "dropRate": 0.00154, "varbitId": 0, "isPet": true, "wikiPage": "Lil%27_zik"}
-    ]
+      {
+        "itemId": 22325,
+        "name": "Scythe of vitur",
+        "dropRate": 0.00157,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Scythe_of_vitur"
+      },
+      {
+        "itemId": 22324,
+        "name": "Ghrazi rapier",
+        "dropRate": 0.00157,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ghrazi_rapier"
+      },
+      {
+        "itemId": 22323,
+        "name": "Sanguinesti staff",
+        "dropRate": 0.00157,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sanguinesti_staff"
+      },
+      {
+        "itemId": 22326,
+        "name": "Justiciar faceguard",
+        "dropRate": 0.00157,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Justiciar_faceguard"
+      },
+      {
+        "itemId": 22327,
+        "name": "Justiciar chestguard",
+        "dropRate": 0.00157,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Justiciar_chestguard"
+      },
+      {
+        "itemId": 22328,
+        "name": "Justiciar legguards",
+        "dropRate": 0.00157,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Justiciar_legguards"
+      },
+      {
+        "itemId": 22477,
+        "name": "Avernic defender hilt",
+        "dropRate": 0.00157,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Avernic_defender_hilt"
+      },
+      {
+        "itemId": 22473,
+        "name": "Lil' zik",
+        "dropRate": 0.00154,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Lil%27_zik"
+      }
+    ],
+    "locationDescription": "Ver Sinhaza, Morytania"
   },
   {
     "name": "Tombs of Amascut",
@@ -618,43 +2192,157 @@
     "worldPlane": 0,
     "killTimeSeconds": 2100,
     "items": [
-      {"itemId": 26219, "name": "Osmumten's fang", "dropRate": 0.00292, "varbitId": 0, "isPet": false, "wikiPage": "Osmumten%27s_fang"},
-      {"itemId": 25975, "name": "Lightbearer", "dropRate": 0.00292, "varbitId": 0, "isPet": false, "wikiPage": "Lightbearer"},
-      {"itemId": 25985, "name": "Elidinis' ward", "dropRate": 0.00125, "varbitId": 0, "isPet": false, "wikiPage": "Elidinis%27_ward"},
-      {"itemId": 27226, "name": "Masori mask", "dropRate": 0.000833, "varbitId": 0, "isPet": false, "wikiPage": "Masori_mask"},
-      {"itemId": 27229, "name": "Masori body", "dropRate": 0.000833, "varbitId": 0, "isPet": false, "wikiPage": "Masori_body"},
-      {"itemId": 27232, "name": "Masori chaps", "dropRate": 0.000833, "varbitId": 0, "isPet": false, "wikiPage": "Masori_chaps"},
-      {"itemId": 27275, "name": "Tumeken's shadow", "dropRate": 0.000417, "varbitId": 0, "isPet": false, "wikiPage": "Tumeken%27s_shadow"},
-      {"itemId": 27352, "name": "Tumeken's guardian", "dropRate": 0.002, "varbitId": 0, "isPet": true, "wikiPage": "Tumeken%27s_guardian"}
+      {
+        "itemId": 26219,
+        "name": "Osmumten's fang",
+        "dropRate": 0.00292,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Osmumten%27s_fang"
+      },
+      {
+        "itemId": 25975,
+        "name": "Lightbearer",
+        "dropRate": 0.00292,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lightbearer"
+      },
+      {
+        "itemId": 25985,
+        "name": "Elidinis' ward",
+        "dropRate": 0.00125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Elidinis%27_ward"
+      },
+      {
+        "itemId": 27226,
+        "name": "Masori mask",
+        "dropRate": 0.000833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Masori_mask"
+      },
+      {
+        "itemId": 27229,
+        "name": "Masori body",
+        "dropRate": 0.000833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Masori_body"
+      },
+      {
+        "itemId": 27232,
+        "name": "Masori chaps",
+        "dropRate": 0.000833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Masori_chaps"
+      },
+      {
+        "itemId": 27275,
+        "name": "Tumeken's shadow",
+        "dropRate": 0.000417,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tumeken%27s_shadow"
+      },
+      {
+        "itemId": 27352,
+        "name": "Tumeken's guardian",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Tumeken%27s_guardian"
+      }
     ]
   },
   {
     "name": "Corrupted Gauntlet",
     "category": "BOSSES",
-    "worldX": 3032,
-    "worldY": 6116,
+    "worldX": 3230,
+    "worldY": 6073,
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "items": [
-      {"itemId": 23862, "name": "Crystal weapon seed", "dropRate": 0.02, "varbitId": 0, "isPet": false, "wikiPage": "Crystal_weapon_seed"},
-      {"itemId": 23866, "name": "Crystal armour seed", "dropRate": 0.02, "varbitId": 0, "isPet": false, "wikiPage": "Crystal_armour_seed"},
-      {"itemId": 25859, "name": "Enhanced crystal weapon seed", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Enhanced_crystal_weapon_seed"},
-      {"itemId": 23757, "name": "Youngllef", "dropRate": 0.00125, "varbitId": 0, "isPet": true, "wikiPage": "Youngllef"}
-    ]
+      {
+        "itemId": 23862,
+        "name": "Crystal weapon seed",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Crystal_weapon_seed"
+      },
+      {
+        "itemId": 23866,
+        "name": "Crystal armour seed",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Crystal_armour_seed"
+      },
+      {
+        "itemId": 25859,
+        "name": "Enhanced crystal weapon seed",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Enhanced_crystal_weapon_seed"
+      },
+      {
+        "itemId": 23757,
+        "name": "Youngllef",
+        "dropRate": 0.00125,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Youngllef"
+      }
+    ],
+    "locationDescription": "The Gauntlet, Prifddinas"
   },
   {
     "name": "The Gauntlet",
     "category": "BOSSES",
-    "worldX": 3032,
-    "worldY": 6116,
+    "worldX": 3230,
+    "worldY": 6073,
     "worldPlane": 0,
     "killTimeSeconds": 720,
     "items": [
-      {"itemId": 23862, "name": "Crystal weapon seed", "dropRate": 0.008333, "varbitId": 0, "isPet": false, "wikiPage": "Crystal_weapon_seed"},
-      {"itemId": 23866, "name": "Crystal armour seed", "dropRate": 0.008333, "varbitId": 0, "isPet": false, "wikiPage": "Crystal_armour_seed"},
-      {"itemId": 25859, "name": "Enhanced crystal weapon seed", "dropRate": 0.0005, "varbitId": 0, "isPet": false, "wikiPage": "Enhanced_crystal_weapon_seed"},
-      {"itemId": 23757, "name": "Youngllef", "dropRate": 0.0005, "varbitId": 0, "isPet": true, "wikiPage": "Youngllef"}
-    ]
+      {
+        "itemId": 23862,
+        "name": "Crystal weapon seed",
+        "dropRate": 0.008333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Crystal_weapon_seed"
+      },
+      {
+        "itemId": 23866,
+        "name": "Crystal armour seed",
+        "dropRate": 0.008333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Crystal_armour_seed"
+      },
+      {
+        "itemId": 25859,
+        "name": "Enhanced crystal weapon seed",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Enhanced_crystal_weapon_seed"
+      },
+      {
+        "itemId": 23757,
+        "name": "Youngllef",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Youngllef"
+      }
+    ],
+    "locationDescription": "The Gauntlet, Prifddinas"
   },
   {
     "name": "Barrows",
@@ -664,30 +2352,198 @@
     "worldPlane": 0,
     "killTimeSeconds": 180,
     "items": [
-      {"itemId": 4708, "name": "Ahrim's hood", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Ahrim%27s_hood"},
-      {"itemId": 4712, "name": "Ahrim's robetop", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Ahrim%27s_robetop"},
-      {"itemId": 4714, "name": "Ahrim's robeskirt", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Ahrim%27s_robeskirt"},
-      {"itemId": 4710, "name": "Ahrim's staff", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Ahrim%27s_staff"},
-      {"itemId": 4716, "name": "Dharok's helm", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Dharok%27s_helm"},
-      {"itemId": 4720, "name": "Dharok's platebody", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Dharok%27s_platebody"},
-      {"itemId": 4722, "name": "Dharok's platelegs", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Dharok%27s_platelegs"},
-      {"itemId": 4718, "name": "Dharok's greataxe", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Dharok%27s_greataxe"},
-      {"itemId": 4724, "name": "Guthan's helm", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Guthan%27s_helm"},
-      {"itemId": 4728, "name": "Guthan's platebody", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Guthan%27s_platebody"},
-      {"itemId": 4730, "name": "Guthan's chainskirt", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Guthan%27s_chainskirt"},
-      {"itemId": 4726, "name": "Guthan's warspear", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Guthan%27s_warspear"},
-      {"itemId": 4732, "name": "Karil's coif", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Karil%27s_coif"},
-      {"itemId": 4736, "name": "Karil's leathertop", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Karil%27s_leathertop"},
-      {"itemId": 4738, "name": "Karil's leatherskirt", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Karil%27s_leatherskirt"},
-      {"itemId": 4734, "name": "Karil's crossbow", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Karil%27s_crossbow"},
-      {"itemId": 4745, "name": "Torag's helm", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Torag%27s_helm"},
-      {"itemId": 4749, "name": "Torag's platebody", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Torag%27s_platebody"},
-      {"itemId": 4751, "name": "Torag's platelegs", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Torag%27s_platelegs"},
-      {"itemId": 4747, "name": "Torag's hammers", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Torag%27s_hammers"},
-      {"itemId": 4753, "name": "Verac's helm", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Verac%27s_helm"},
-      {"itemId": 4757, "name": "Verac's brassard", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Verac%27s_brassard"},
-      {"itemId": 4759, "name": "Verac's plateskirt", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Verac%27s_plateskirt"},
-      {"itemId": 4755, "name": "Verac's flail", "dropRate": 0.000409, "varbitId": 0, "isPet": false, "wikiPage": "Verac%27s_flail"}
+      {
+        "itemId": 4708,
+        "name": "Ahrim's hood",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ahrim%27s_hood"
+      },
+      {
+        "itemId": 4712,
+        "name": "Ahrim's robetop",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ahrim%27s_robetop"
+      },
+      {
+        "itemId": 4714,
+        "name": "Ahrim's robeskirt",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ahrim%27s_robeskirt"
+      },
+      {
+        "itemId": 4710,
+        "name": "Ahrim's staff",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ahrim%27s_staff"
+      },
+      {
+        "itemId": 4716,
+        "name": "Dharok's helm",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dharok%27s_helm"
+      },
+      {
+        "itemId": 4720,
+        "name": "Dharok's platebody",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dharok%27s_platebody"
+      },
+      {
+        "itemId": 4722,
+        "name": "Dharok's platelegs",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dharok%27s_platelegs"
+      },
+      {
+        "itemId": 4718,
+        "name": "Dharok's greataxe",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dharok%27s_greataxe"
+      },
+      {
+        "itemId": 4724,
+        "name": "Guthan's helm",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthan%27s_helm"
+      },
+      {
+        "itemId": 4728,
+        "name": "Guthan's platebody",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthan%27s_platebody"
+      },
+      {
+        "itemId": 4730,
+        "name": "Guthan's chainskirt",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthan%27s_chainskirt"
+      },
+      {
+        "itemId": 4726,
+        "name": "Guthan's warspear",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthan%27s_warspear"
+      },
+      {
+        "itemId": 4732,
+        "name": "Karil's coif",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Karil%27s_coif"
+      },
+      {
+        "itemId": 4736,
+        "name": "Karil's leathertop",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Karil%27s_leathertop"
+      },
+      {
+        "itemId": 4738,
+        "name": "Karil's leatherskirt",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Karil%27s_leatherskirt"
+      },
+      {
+        "itemId": 4734,
+        "name": "Karil's crossbow",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Karil%27s_crossbow"
+      },
+      {
+        "itemId": 4745,
+        "name": "Torag's helm",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Torag%27s_helm"
+      },
+      {
+        "itemId": 4749,
+        "name": "Torag's platebody",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Torag%27s_platebody"
+      },
+      {
+        "itemId": 4751,
+        "name": "Torag's platelegs",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Torag%27s_platelegs"
+      },
+      {
+        "itemId": 4747,
+        "name": "Torag's hammers",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Torag%27s_hammers"
+      },
+      {
+        "itemId": 4753,
+        "name": "Verac's helm",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Verac%27s_helm"
+      },
+      {
+        "itemId": 4757,
+        "name": "Verac's brassard",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Verac%27s_brassard"
+      },
+      {
+        "itemId": 4759,
+        "name": "Verac's plateskirt",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Verac%27s_plateskirt"
+      },
+      {
+        "itemId": 4755,
+        "name": "Verac's flail",
+        "dropRate": 0.000409,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Verac%27s_flail"
+      }
     ]
   },
   {
@@ -698,12 +2554,54 @@
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "items": [
-      {"itemId": 25592, "name": "Tackle box", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Tackle_box"},
-      {"itemId": 25580, "name": "Fish barrel", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Fish_barrel"},
-      {"itemId": 25596, "name": "Big harpoonfish", "dropRate": 0.000625, "varbitId": 0, "isPet": false, "wikiPage": "Big_harpoonfish"},
-      {"itemId": 25576, "name": "Tome of water (empty)", "dropRate": 0.000625, "varbitId": 0, "isPet": false, "wikiPage": "Tome_of_water_(empty)"},
-      {"itemId": 21028, "name": "Dragon harpoon", "dropRate": 0.000125, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_harpoon"},
-      {"itemId": 25600, "name": "Tiny tempor", "dropRate": 0.000125, "varbitId": 0, "isPet": true, "wikiPage": "Tiny_tempor"}
+      {
+        "itemId": 25592,
+        "name": "Tackle box",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tackle_box"
+      },
+      {
+        "itemId": 25580,
+        "name": "Fish barrel",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fish_barrel"
+      },
+      {
+        "itemId": 25596,
+        "name": "Big harpoonfish",
+        "dropRate": 0.000625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Big_harpoonfish"
+      },
+      {
+        "itemId": 25576,
+        "name": "Tome of water (empty)",
+        "dropRate": 0.000625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tome_of_water_(empty)"
+      },
+      {
+        "itemId": 21028,
+        "name": "Dragon harpoon",
+        "dropRate": 0.000125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_harpoon"
+      },
+      {
+        "itemId": 25600,
+        "name": "Tiny tempor",
+        "dropRate": 0.000125,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Tiny_tempor"
+      }
     ]
   },
   {
@@ -714,15 +2612,78 @@
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "items": [
-      {"itemId": 20693, "name": "Pyromancer hood", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Pyromancer_hood"},
-      {"itemId": 20696, "name": "Pyromancer garb", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Pyromancer_garb"},
-      {"itemId": 20699, "name": "Pyromancer robe", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Pyromancer_robe"},
-      {"itemId": 20702, "name": "Pyromancer boots", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Pyromancer_boots"},
-      {"itemId": 20704, "name": "Warm gloves", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Warm_gloves"},
-      {"itemId": 20706, "name": "Bruma torch", "dropRate": 0.0025, "varbitId": 0, "isPet": false, "wikiPage": "Bruma_torch"},
-      {"itemId": 20714, "name": "Tome of fire (empty)", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Tome_of_fire_(empty)"},
-      {"itemId": 6739, "name": "Dragon axe", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Dragon_axe"},
-      {"itemId": 20693, "name": "Phoenix", "dropRate": 0.002, "varbitId": 0, "isPet": true, "wikiPage": "Phoenix"}
+      {
+        "itemId": 20693,
+        "name": "Pyromancer hood",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pyromancer_hood"
+      },
+      {
+        "itemId": 20696,
+        "name": "Pyromancer garb",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pyromancer_garb"
+      },
+      {
+        "itemId": 20699,
+        "name": "Pyromancer robe",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pyromancer_robe"
+      },
+      {
+        "itemId": 20702,
+        "name": "Pyromancer boots",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pyromancer_boots"
+      },
+      {
+        "itemId": 20704,
+        "name": "Warm gloves",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Warm_gloves"
+      },
+      {
+        "itemId": 20706,
+        "name": "Bruma torch",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bruma_torch"
+      },
+      {
+        "itemId": 20714,
+        "name": "Tome of fire (empty)",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tome_of_fire_(empty)"
+      },
+      {
+        "itemId": 6739,
+        "name": "Dragon axe",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_axe"
+      },
+      {
+        "itemId": 20693,
+        "name": "Phoenix",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Phoenix"
+      }
     ]
   },
   {
@@ -733,27 +2694,105 @@
     "worldPlane": 0,
     "killTimeSeconds": 240,
     "items": [
-      {"itemId": 23902, "name": "Crystal tool seed", "dropRate": 0.004875, "varbitId": 0, "isPet": false, "wikiPage": "Crystal_tool_seed"},
-      {"itemId": 23904, "name": "Zalcano shard", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Zalcano_shard"},
-      {"itemId": 6571, "name": "Uncut onyx", "dropRate": 0.000125, "varbitId": 0, "isPet": false, "wikiPage": "Uncut_onyx"},
-      {"itemId": 23760, "name": "Smolcano", "dropRate": 0.000444, "varbitId": 0, "isPet": true, "wikiPage": "Smolcano"}
+      {
+        "itemId": 23902,
+        "name": "Crystal tool seed",
+        "dropRate": 0.004875,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Crystal_tool_seed"
+      },
+      {
+        "itemId": 23904,
+        "name": "Zalcano shard",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zalcano_shard"
+      },
+      {
+        "itemId": 6571,
+        "name": "Uncut onyx",
+        "dropRate": 0.000125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Uncut_onyx"
+      },
+      {
+        "itemId": 23760,
+        "name": "Smolcano",
+        "dropRate": 0.000444,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Smolcano"
+      }
     ]
   },
   {
     "name": "Sol Heredit",
     "category": "BOSSES",
-    "worldX": 1810,
-    "worldY": 3198,
+    "worldX": 1794,
+    "worldY": 3107,
     "worldPlane": 0,
+    "locationDescription": "Fortis Colosseum, Varlamore",
     "killTimeSeconds": 2400,
     "items": [
-      {"itemId": 28923, "name": "Dizana's quiver (uncharged)", "dropRate": 1.0, "varbitId": 0, "isPet": false, "wikiPage": "Dizana%27s_quiver_(uncharged)"},
-      {"itemId": 28919, "name": "Sunfire fanatic helm", "dropRate": 0.01, "varbitId": 0, "isPet": false, "wikiPage": "Sunfire_fanatic_helm"},
-      {"itemId": 28921, "name": "Sunfire fanatic cuirass", "dropRate": 0.01, "varbitId": 0, "isPet": false, "wikiPage": "Sunfire_fanatic_cuirass"},
-      {"itemId": 28917, "name": "Sunfire fanatic chausses", "dropRate": 0.01, "varbitId": 0, "isPet": false, "wikiPage": "Sunfire_fanatic_chausses"},
-      {"itemId": 28925, "name": "Echo crystal", "dropRate": 0.007, "varbitId": 0, "isPet": false, "wikiPage": "Echo_crystal"},
-      {"itemId": 28915, "name": "Tonalztics of ralos", "dropRate": 0.012, "varbitId": 0, "isPet": false, "wikiPage": "Tonalztics_of_ralos"},
-      {"itemId": 28927, "name": "Smol heredit", "dropRate": 0.005, "varbitId": 0, "isPet": true, "wikiPage": "Smol_heredit"}
+      {
+        "itemId": 28923,
+        "name": "Dizana's quiver (uncharged)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dizana%27s_quiver_(uncharged)"
+      },
+      {
+        "itemId": 28919,
+        "name": "Sunfire fanatic helm",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sunfire_fanatic_helm"
+      },
+      {
+        "itemId": 28921,
+        "name": "Sunfire fanatic cuirass",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sunfire_fanatic_cuirass"
+      },
+      {
+        "itemId": 28917,
+        "name": "Sunfire fanatic chausses",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sunfire_fanatic_chausses"
+      },
+      {
+        "itemId": 28925,
+        "name": "Echo crystal",
+        "dropRate": 0.007,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Echo_crystal"
+      },
+      {
+        "itemId": 28915,
+        "name": "Tonalztics of ralos",
+        "dropRate": 0.012,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tonalztics_of_ralos"
+      },
+      {
+        "itemId": 28927,
+        "name": "Smol heredit",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Smol_heredit"
+      }
     ]
   },
   {
@@ -764,9 +2803,30 @@
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "items": [
-      {"itemId": 11929, "name": "Odium shard 2", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Odium_shard_2"},
-      {"itemId": 11931, "name": "Malediction shard 2", "dropRate": 0.003906, "varbitId": 0, "isPet": false, "wikiPage": "Malediction_shard_2"},
-      {"itemId": 20590, "name": "Fedora", "dropRate": 0.007813, "varbitId": 0, "isPet": false, "wikiPage": "Fedora"}
+      {
+        "itemId": 11929,
+        "name": "Odium shard 2",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Odium_shard_2"
+      },
+      {
+        "itemId": 11931,
+        "name": "Malediction shard 2",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Malediction_shard_2"
+      },
+      {
+        "itemId": 20590,
+        "name": "Fedora",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fedora"
+      }
     ]
   },
   {
@@ -777,45 +2837,173 @@
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "items": [
-      {"itemId": 29784, "name": "Araxyte fang", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Araxyte_fang"},
-      {"itemId": 29786, "name": "Araxyte head", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Araxyte_head"},
-      {"itemId": 29788, "name": "Noxious blade", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Noxious_blade"},
-      {"itemId": 29790, "name": "Noxious point", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Noxious_point"},
-      {"itemId": 29792, "name": "Noxious pommel", "dropRate": 0.001, "varbitId": 0, "isPet": false, "wikiPage": "Noxious_pommel"},
-      {"itemId": 29794, "name": "Rax", "dropRate": 0.000333, "varbitId": 0, "isPet": true, "wikiPage": "Rax"}
+      {
+        "itemId": 29784,
+        "name": "Araxyte fang",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Araxyte_fang"
+      },
+      {
+        "itemId": 29786,
+        "name": "Araxyte head",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Araxyte_head"
+      },
+      {
+        "itemId": 29788,
+        "name": "Noxious blade",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Noxious_blade"
+      },
+      {
+        "itemId": 29790,
+        "name": "Noxious point",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Noxious_point"
+      },
+      {
+        "itemId": 29792,
+        "name": "Noxious pommel",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Noxious_pommel"
+      },
+      {
+        "itemId": 29794,
+        "name": "Rax",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Rax"
+      }
     ]
   },
   {
     "name": "Perilous Moons",
     "category": "BOSSES",
-    "worldX": 1558,
-    "worldY": 9488,
+    "worldX": 1435,
+    "worldY": 3131,
     "worldPlane": 0,
+    "locationDescription": "Cam Torum entrance, Ralos Rise",
     "killTimeSeconds": 120,
     "items": [
-      {"itemId": 29296, "name": "Blue moon helm", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Blue_moon_helm"},
-      {"itemId": 29298, "name": "Blue moon chestplate", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Blue_moon_chestplate"},
-      {"itemId": 29300, "name": "Blue moon tassets", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Blue_moon_tassets"},
-      {"itemId": 29302, "name": "Eclipse moon helm", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Eclipse_moon_helm"},
-      {"itemId": 29304, "name": "Eclipse moon chestplate", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Eclipse_moon_chestplate"},
-      {"itemId": 29306, "name": "Eclipse moon tassets", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Eclipse_moon_tassets"},
-      {"itemId": 29308, "name": "Blood moon helm", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Blood_moon_helm"},
-      {"itemId": 29310, "name": "Blood moon chestplate", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Blood_moon_chestplate"},
-      {"itemId": 29312, "name": "Blood moon tassets", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Blood_moon_tassets"},
-      {"itemId": 29314, "name": "Dual macuahuitl", "dropRate": 0.0005, "varbitId": 0, "isPet": false, "wikiPage": "Dual_macuahuitl"}
+      {
+        "itemId": 29296,
+        "name": "Blue moon helm",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_moon_helm"
+      },
+      {
+        "itemId": 29298,
+        "name": "Blue moon chestplate",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_moon_chestplate"
+      },
+      {
+        "itemId": 29300,
+        "name": "Blue moon tassets",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_moon_tassets"
+      },
+      {
+        "itemId": 29302,
+        "name": "Eclipse moon helm",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eclipse_moon_helm"
+      },
+      {
+        "itemId": 29304,
+        "name": "Eclipse moon chestplate",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eclipse_moon_chestplate"
+      },
+      {
+        "itemId": 29306,
+        "name": "Eclipse moon tassets",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eclipse_moon_tassets"
+      },
+      {
+        "itemId": 29308,
+        "name": "Blood moon helm",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blood_moon_helm"
+      },
+      {
+        "itemId": 29310,
+        "name": "Blood moon chestplate",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blood_moon_chestplate"
+      },
+      {
+        "itemId": 29312,
+        "name": "Blood moon tassets",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blood_moon_tassets"
+      },
+      {
+        "itemId": 29314,
+        "name": "Dual macuahuitl",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dual_macuahuitl"
+      }
     ]
   },
   {
     "name": "Tormented Demons",
     "category": "OTHER",
-    "worldX": 2570,
-    "worldY": 5735,
+    "worldX": 2560,
+    "worldY": 3441,
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "items": [
-      {"itemId": 29554, "name": "Tormented synapse", "dropRate": 0.002, "varbitId": 0, "isPet": false, "wikiPage": "Tormented_synapse"},
-      {"itemId": 29556, "name": "Burning claw", "dropRate": 0.001333, "varbitId": 0, "isPet": false, "wikiPage": "Burning_claw"}
-    ]
+      {
+        "itemId": 29554,
+        "name": "Tormented synapse",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tormented_synapse"
+      },
+      {
+        "itemId": 29556,
+        "name": "Burning claw",
+        "dropRate": 0.001333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Burning_claw"
+      }
+    ],
+    "locationDescription": "Ruins south of Lava Maze, Wilderness"
   },
   {
     "name": "Beginner Treasure Trails",
@@ -825,21 +3013,126 @@
     "worldPlane": 0,
     "killTimeSeconds": 180,
     "items": [
-      {"itemId": 23285, "name": "Mole slippers", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Mole_slippers"},
-      {"itemId": 23288, "name": "Frog slippers", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Frog_slippers"},
-      {"itemId": 23291, "name": "Bear feet", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Bear_feet"},
-      {"itemId": 23294, "name": "Demon feet", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Demon_feet"},
-      {"itemId": 23297, "name": "Jester cape", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Jester_cape"},
-      {"itemId": 23300, "name": "Shoulder parrot", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Shoulder_parrot"},
-      {"itemId": 23303, "name": "Monk's robe top (t)", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Monk%27s_robe_top_(t)"},
-      {"itemId": 23306, "name": "Monk's robe (t)", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Monk%27s_robe_(t)"},
-      {"itemId": 23309, "name": "Amulet of defence (t)", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Amulet_of_defence_(t)"},
-      {"itemId": 23312, "name": "Sandwich lady hat", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Sandwich_lady_hat"},
-      {"itemId": 23315, "name": "Sandwich lady top", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Sandwich_lady_top"},
-      {"itemId": 23318, "name": "Sandwich lady bottom", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Sandwich_lady_bottom"},
-      {"itemId": 23321, "name": "Rune scimitar ornament kit (guthix)", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Rune_scimitar_ornament_kit_(guthix)"},
-      {"itemId": 23324, "name": "Rune scimitar ornament kit (saradomin)", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Rune_scimitar_ornament_kit_(saradomin)"},
-      {"itemId": 23327, "name": "Rune scimitar ornament kit (zamorak)", "dropRate": 0.002778, "varbitId": 0, "isPet": false, "wikiPage": "Rune_scimitar_ornament_kit_(zamorak)"}
+      {
+        "itemId": 23285,
+        "name": "Mole slippers",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mole_slippers"
+      },
+      {
+        "itemId": 23288,
+        "name": "Frog slippers",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Frog_slippers"
+      },
+      {
+        "itemId": 23291,
+        "name": "Bear feet",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bear_feet"
+      },
+      {
+        "itemId": 23294,
+        "name": "Demon feet",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Demon_feet"
+      },
+      {
+        "itemId": 23297,
+        "name": "Jester cape",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jester_cape"
+      },
+      {
+        "itemId": 23300,
+        "name": "Shoulder parrot",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shoulder_parrot"
+      },
+      {
+        "itemId": 23303,
+        "name": "Monk's robe top (t)",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Monk%27s_robe_top_(t)"
+      },
+      {
+        "itemId": 23306,
+        "name": "Monk's robe (t)",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Monk%27s_robe_(t)"
+      },
+      {
+        "itemId": 23309,
+        "name": "Amulet of defence (t)",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Amulet_of_defence_(t)"
+      },
+      {
+        "itemId": 23312,
+        "name": "Sandwich lady hat",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sandwich_lady_hat"
+      },
+      {
+        "itemId": 23315,
+        "name": "Sandwich lady top",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sandwich_lady_top"
+      },
+      {
+        "itemId": 23318,
+        "name": "Sandwich lady bottom",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sandwich_lady_bottom"
+      },
+      {
+        "itemId": 23321,
+        "name": "Rune scimitar ornament kit (guthix)",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_scimitar_ornament_kit_(guthix)"
+      },
+      {
+        "itemId": 23324,
+        "name": "Rune scimitar ornament kit (saradomin)",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_scimitar_ornament_kit_(saradomin)"
+      },
+      {
+        "itemId": 23327,
+        "name": "Rune scimitar ornament kit (zamorak)",
+        "dropRate": 0.002778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_scimitar_ornament_kit_(zamorak)"
+      }
     ]
   }
 ]
