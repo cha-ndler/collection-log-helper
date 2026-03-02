@@ -122,6 +122,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private boolean scriptScanActive;
 	private int scriptScanItemCount;
 	private int scanSettleCountdown;
+	private boolean hasCompletedFullSync;
+	private boolean syncReminderSent;
+	private int loginTickDelay;
 
 	@Override
 	protected void startUp() throws Exception
@@ -177,6 +180,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		autoSyncPending = false;
 		scriptScanActive = false;
 		scanSettleCountdown = 0;
+		hasCompletedFullSync = false;
+		syncReminderSent = false;
+		loginTickDelay = 0;
+		guidanceOverlay.setShowSyncReminder(false);
 		collectionState.clearState();
 
 		log.info("Collection Log Helper stopped");
@@ -187,6 +194,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		if (event.getGameState() == GameState.LOGGED_IN)
 		{
+			// Wait a few ticks after login before sending the sync reminder
+			loginTickDelay = 10;
 			clientThread.invokeLater(() ->
 			{
 				collectionState.refreshVarps();
@@ -207,6 +216,10 @@ public class CollectionLogHelperPlugin extends Plugin
 			autoSyncPending = false;
 			scriptScanActive = false;
 			scanSettleCountdown = 0;
+			hasCompletedFullSync = false;
+			syncReminderSent = false;
+			loginTickDelay = 0;
+			guidanceOverlay.setShowSyncReminder(false);
 		}
 	}
 
@@ -324,6 +337,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (scanSettleCountdown <= 0)
 			{
 				scriptScanActive = false;
+				hasCompletedFullSync = true;
+				guidanceOverlay.setShowSyncReminder(false);
 				log.info("Auto-sync complete: {} obtained items captured via script scan",
 					scriptScanItemCount);
 				scriptScanItemCount = 0;
@@ -331,6 +346,20 @@ public class CollectionLogHelperPlugin extends Plugin
 				{
 					panel.rebuild();
 				}
+			}
+		}
+
+		// Send a one-time sync reminder after login if no full sync has been done
+		if (loginTickDelay > 0)
+		{
+			loginTickDelay--;
+			if (loginTickDelay == 0 && !hasCompletedFullSync && !syncReminderSent)
+			{
+				syncReminderSent = true;
+				guidanceOverlay.setShowSyncReminder(true);
+				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
+					"<col=00c8c8>[Collection Log Helper]</col> Open your Collection Log to sync your obtained items.",
+					null);
 			}
 		}
 
