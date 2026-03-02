@@ -27,7 +27,7 @@ class CategorySummaryPanel extends JPanel
 
 	CategorySummaryPanel(CollectionLogCategory category, List<CollectionLogSource> sources,
 		PlayerCollectionState collectionState, ItemManager itemManager,
-		ItemClickHandler clickHandler)
+		ItemClickHandler clickHandler, boolean hideObtained)
 	{
 		setLayout(new BorderLayout());
 		setBackground(ColorScheme.DARKER_GRAY_COLOR);
@@ -65,6 +65,10 @@ class CategorySummaryPanel extends JPanel
 			for (CollectionLogItem item : source.getItems())
 			{
 				boolean itemObtained = collectionState.isItemObtained(item.getVarbitId());
+				if (hideObtained && itemObtained)
+				{
+					continue;
+				}
 				ItemRowPanel row = new ItemRowPanel(item, source, itemObtained, 0,
 					itemManager, () -> clickHandler.onItemClicked(item, source));
 				itemsContainer.add(row);

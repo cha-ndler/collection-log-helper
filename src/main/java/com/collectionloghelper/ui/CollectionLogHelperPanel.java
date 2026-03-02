@@ -1,5 +1,6 @@
 package com.collectionloghelper.ui;
 
+import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
@@ -61,6 +62,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		}
 	}
 
+	private final CollectionLogHelperConfig config;
 	private final DropRateDatabase database;
 	private final PlayerCollectionState collectionState;
 	private final EfficiencyCalculator calculator;
@@ -87,10 +89,12 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private boolean guidanceActive = false;
 	private CollectionLogSource guidedSource = null;
 
-	public CollectionLogHelperPanel(DropRateDatabase database, PlayerCollectionState collectionState,
+	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
+		DropRateDatabase database, PlayerCollectionState collectionState,
 		EfficiencyCalculator calculator, ItemManager itemManager,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator)
 	{
+		this.config = config;
 		this.database = database;
 		this.collectionState = collectionState;
 		this.calculator = calculator;
@@ -318,6 +322,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private void buildEfficientView()
 	{
 		List<ScoredItem> scored = calculator.rankByEfficiency();
+		boolean hideObtained = config.hideObtainedItems();
 
 		if (!scored.isEmpty())
 		{
@@ -329,11 +334,11 @@ public class CollectionLogHelperPanel extends PluginPanel
 			for (CollectionLogItem item : si.getSource().getItems())
 			{
 				boolean obtained = collectionState.isItemObtained(item.getVarbitId());
-				if (obtained)
+				if (hideObtained && obtained)
 				{
 					continue;
 				}
-				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), false,
+				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
 					si.getScore(), itemManager,
 					() -> showDetail(item, si.getSource()));
 				listContainer.add(row);
@@ -349,10 +354,17 @@ public class CollectionLogHelperPanel extends PluginPanel
 			return;
 		}
 
+		// Top Pick for this category
+		List<ScoredItem> categoryScored = calculator.filterByCategory(category);
+		if (!categoryScored.isEmpty())
+		{
+			listContainer.add(createQuickGuidePanel(categoryScored.get(0)));
+		}
+
 		List<CollectionLogSource> sources = database.getSourcesByCategory(category);
 		CategorySummaryPanel summary = new CategorySummaryPanel(
 			category, sources, collectionState, itemManager,
-			this::showDetail);
+			this::showDetail, config.hideObtainedItems());
 		listContainer.add(summary);
 	}
 
@@ -364,6 +376,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 			return;
 		}
 
+		boolean hideObtained = config.hideObtainedItems();
+
 		for (CollectionLogSource source : database.getAllSources())
 		{
 			for (CollectionLogItem item : source.getItems())
@@ -372,6 +386,10 @@ public class CollectionLogHelperPanel extends PluginPanel
 					|| source.getName().toLowerCase().contains(query))
 				{
 					boolean obtained = collectionState.isItemObtained(item.getVarbitId());
+					if (hideObtained && obtained)
+					{
+						continue;
+					}
 					ItemRowPanel row = new ItemRowPanel(item, source, obtained, 0,
 						itemManager, () -> showDetail(item, source));
 					listContainer.add(row);
@@ -383,6 +401,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private void buildPetHuntView()
 	{
 		List<ScoredItem> scored = calculator.filterPetsOnly();
+		boolean hideObtained = config.hideObtainedItems();
 
 		for (ScoredItem si : scored)
 		{
@@ -393,11 +412,11 @@ public class CollectionLogHelperPanel extends PluginPanel
 					continue;
 				}
 				boolean obtained = collectionState.isItemObtained(item.getVarbitId());
-				if (obtained)
+				if (hideObtained && obtained)
 				{
 					continue;
 				}
-				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), false,
+				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
 					si.getScore(), itemManager,
 					() -> showDetail(item, si.getSource()));
 				listContainer.add(row);
@@ -414,22 +433,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 		detailView.removeAll();
 		ItemDetailPanel detail = new ItemDetailPanel(
 			item, source, obtained, itemManager,
-			() ->
-			{
-				guidanceDeactivator.run();
-				setGuidanceState(false, null);
-				showListView();
-			},
-			() ->
-			{
-				guidanceActivator.accept(source);
-				setGuidanceState(true, source);
-			},
-			() ->
-			{
-				guidanceDeactivator.run();
-				setGuidanceState(false, null);
-			},
+			this::showListView,
+			() -> guidanceActivator.accept(source),
+			() -> guidanceDeactivator.run(),
 			isGuidingThis
 		);
 		detailView.add(detail, BorderLayout.NORTH);

@@ -25,6 +25,7 @@ public class GuidanceOverlay extends OverlayPanel
 
 	private volatile WorldPoint targetPoint;
 	private volatile String targetName;
+	private volatile String locationDescription;
 	private volatile String clueGuidanceText;
 
 	@Inject
@@ -61,6 +62,24 @@ public class GuidanceOverlay extends OverlayPanel
 		LocalPoint localPoint = LocalPoint.fromWorld(client.getTopLevelWorldView(), targetPoint);
 		if (localPoint == null)
 		{
+			// Target tile is not on screen — show compact direction panel
+			if (targetName != null)
+			{
+				panelComponent.getChildren().clear();
+				panelComponent.getChildren().add(TitleComponent.builder()
+					.text(targetName)
+					.color(new Color(255, 200, 0))
+					.build());
+				String loc = locationDescription != null ? locationDescription : "";
+				if (!loc.isEmpty())
+				{
+					panelComponent.getChildren().add(TitleComponent.builder()
+						.text(loc)
+						.color(Color.WHITE)
+						.build());
+				}
+				return super.render(graphics);
+			}
 			return null;
 		}
 
@@ -93,6 +112,11 @@ public class GuidanceOverlay extends OverlayPanel
 		this.targetName = targetName;
 	}
 
+	public void setLocationDescription(String locationDescription)
+	{
+		this.locationDescription = locationDescription;
+	}
+
 	public void setClueGuidanceText(String clueGuidanceText)
 	{
 		this.clueGuidanceText = clueGuidanceText;
@@ -102,6 +126,7 @@ public class GuidanceOverlay extends OverlayPanel
 	{
 		targetPoint = null;
 		targetName = null;
+		locationDescription = null;
 		clueGuidanceText = null;
 	}
 }

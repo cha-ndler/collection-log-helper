@@ -96,7 +96,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		database.load();
 
 		panel = new CollectionLogHelperPanel(
-			database, collectionState, calculator, itemManager,
+			config, database, collectionState, calculator, itemManager,
 			this::activateGuidance, this::deactivateGuidance);
 		panel.setMode(config.defaultMode());
 
@@ -173,18 +173,21 @@ public class CollectionLogHelperPlugin extends Plugin
 			return;
 		}
 
-		// Clear any existing guidance first
+		// Clear any existing guidance first (thread-safe overlay operations)
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
-		client.clearHintArrow();
-		if (config.useShortestPath())
-		{
-			eventBus.post(new PluginMessage("shortestpath", "clear"));
-		}
 		if (panel != null)
 		{
 			panel.hideClueGuidance();
+		}
+
+		// Client API calls must run on the client thread
+		clientThread.invokeLater(() -> client.clearHintArrow());
+
+		if (config.useShortestPath())
+		{
+			eventBus.post(new PluginMessage("shortestpath", "clear"));
 		}
 
 		if (source.getCategory() == CollectionLogCategory.CLUES)
@@ -203,14 +206,18 @@ public class CollectionLogHelperPlugin extends Plugin
 			String displayName = source.getDisplayLocation();
 
 			guidanceOverlay.setTargetPoint(worldPoint);
-			guidanceOverlay.setTargetName(displayName);
+			guidanceOverlay.setTargetName(source.getName());
+			guidanceOverlay.setLocationDescription(displayName);
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
 			worldMapPointManager.add(new CollectionLogWorldMapPoint(worldPoint, displayName));
 
-			if (config.showHintArrow())
+			clientThread.invokeLater(() ->
 			{
-				client.setHintArrow(worldPoint);
-			}
+				if (config.showHintArrow())
+				{
+					client.setHintArrow(worldPoint);
+				}
+			});
 
 			if (config.useShortestPath())
 			{
@@ -218,6 +225,12 @@ public class CollectionLogHelperPlugin extends Plugin
 				data.put("target", worldPoint);
 				eventBus.post(new PluginMessage("shortestpath", "path", data));
 			}
+		}
+
+		// Always update panel guidance state from the plugin
+		if (panel != null)
+		{
+			panel.setGuidanceState(true, source);
 		}
 
 		log.debug("Guidance activated for {} ({})", source.getName(), source.getCategory());
@@ -228,7 +241,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
-		client.clearHintArrow();
+		clientThread.invokeLater(() -> client.clearHintArrow());
 		eventBus.post(new PluginMessage("shortestpath", "clear"));
 		if (panel != null)
 		{
