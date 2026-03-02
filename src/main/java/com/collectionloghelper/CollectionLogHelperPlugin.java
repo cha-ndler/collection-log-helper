@@ -28,6 +28,7 @@ import net.runelite.api.events.GameTick;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.gameval.InterfaceID;
+import net.runelite.api.gameval.ItemID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -98,6 +99,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	private NavigationButton navButton;
 	private int lastObtainedCount = -1;
 	private boolean collectionLogOpen;
+	private BufferedImage collectionLogIcon;
+	private CollectionLogWorldMapPoint activeMapPoint;
 
 	@Override
 	protected void startUp() throws Exception
@@ -109,7 +112,10 @@ public class CollectionLogHelperPlugin extends Plugin
 			this::activateGuidance, this::deactivateGuidance, this::syncCollectionLog);
 		panel.setMode(config.defaultMode());
 
-		final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "panel_icon.png");
+		collectionLogIcon = itemManager.getImage(ItemID.COLLECTION_LOG);
+		final BufferedImage icon = collectionLogIcon != null
+			? collectionLogIcon
+			: ImageUtil.loadImageResource(getClass(), "panel_icon.png");
 
 		navButton = NavigationButton.builder()
 			.tooltip("Collection Log Helper")
@@ -247,20 +253,68 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
-		if (!collectionLogOpen)
+		// Collection log widget scanning
+		if (collectionLogOpen)
+		{
+			Widget itemsContainer = client.getWidget(InterfaceID.Collection.ITEMS);
+			if (itemsContainer == null || itemsContainer.isHidden())
+			{
+				collectionLogOpen = false;
+			}
+			else
+			{
+				scanCollectionLogWidget(itemsContainer);
+			}
+		}
+
+		// World map arrow rotation
+		updateWorldMapArrow();
+	}
+
+	private void updateWorldMapArrow()
+	{
+		if (activeMapPoint == null)
 		{
 			return;
 		}
 
-		// Check if the collection log is still visible
-		Widget itemsContainer = client.getWidget(InterfaceID.Collection.ITEMS);
-		if (itemsContainer == null || itemsContainer.isHidden())
+		net.runelite.api.worldmap.WorldMap worldMap = client.getWorldMap();
+		if (worldMap == null)
 		{
-			collectionLogOpen = false;
 			return;
 		}
 
-		scanCollectionLogWidget(itemsContainer);
+		net.runelite.api.Point mapCenter = worldMap.getWorldMapPosition();
+		if (mapCenter == null)
+		{
+			return;
+		}
+
+		WorldPoint target = activeMapPoint.getWorldPoint();
+		int dx = target.getX() - mapCenter.getX();
+		// World map Y is inverted (higher Y = further north = up on map)
+		int dy = target.getY() - mapCenter.getY();
+
+		// Map 8 octants to arrow directions
+		int degrees;
+		if (Math.abs(dx) > Math.abs(dy) * 2)
+		{
+			degrees = dx > 0 ? 0 : 180;
+		}
+		else if (Math.abs(dy) > Math.abs(dx) * 2)
+		{
+			degrees = dy > 0 ? 270 : 90;
+		}
+		else if (dx > 0)
+		{
+			degrees = dy > 0 ? 315 : 45;
+		}
+		else
+		{
+			degrees = dy > 0 ? 225 : 135;
+		}
+
+		activeMapPoint.rotateArrow(degrees);
 	}
 
 	private void scanCollectionLogWidget(Widget itemsContainer)
@@ -334,6 +388,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Clear any existing guidance first (thread-safe overlay operations)
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
+		activeMapPoint = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
 		if (panel != null)
 		{
@@ -371,7 +426,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			guidanceOverlay.setTargetName(source.getName());
 			guidanceOverlay.setLocationDescription(displayName);
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
-			worldMapPointManager.add(new CollectionLogWorldMapPoint(worldPoint, displayName));
+			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
+			worldMapPointManager.add(activeMapPoint);
 
 			clientThread.invokeLater(() ->
 			{
@@ -402,6 +458,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
+		activeMapPoint = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
 
 		clientThread.invokeLater(() ->
