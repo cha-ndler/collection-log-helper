@@ -350,7 +350,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Send a one-time sync reminder after login if no full sync has been done
-		if (loginTickDelay > 0)
+		if (loginTickDelay > 0 && config.showSyncReminder())
 		{
 			loginTickDelay--;
 			if (loginTickDelay == 0 && !hasCompletedFullSync && !syncReminderSent)
