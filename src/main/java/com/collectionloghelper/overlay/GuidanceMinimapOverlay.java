@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.inject.Inject;
-import lombok.Setter;
 import net.runelite.api.Client;
 import net.runelite.api.Perspective;
 import net.runelite.api.Point;
@@ -27,8 +26,7 @@ public class GuidanceMinimapOverlay extends Overlay
 
 	private final Client client;
 
-	@Setter
-	private WorldPoint targetPoint;
+	private volatile WorldPoint targetPoint;
 
 	private long lastFlashTime = 0;
 	private boolean flashVisible = true;
@@ -154,6 +152,11 @@ public class GuidanceMinimapOverlay extends Overlay
 		graphics.fillPolygon(
 			new int[]{innerTipX, inner1X, inner2X},
 			new int[]{innerTipY, inner1Y, inner2Y}, 3);
+	}
+
+	public void setTargetPoint(WorldPoint targetPoint)
+	{
+		this.targetPoint = targetPoint;
 	}
 
 	public void clearTarget()
