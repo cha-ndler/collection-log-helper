@@ -72,6 +72,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final JPanel detailView;
 
 	private Mode currentMode = Mode.EFFICIENT;
+	private boolean rebuilding = false;
+	private boolean rebuildPending = false;
 
 	public CollectionLogHelperPanel(DropRateDatabase database, PlayerCollectionState collectionState,
 		EfficiencyCalculator calculator, ItemManager itemManager,
@@ -202,28 +204,47 @@ public class CollectionLogHelperPanel extends PluginPanel
 	{
 		SwingUtilities.invokeLater(() ->
 		{
-			SwingUtil.fastRemoveAll(listContainer);
-			updateCompletionHeader();
-
-			switch (currentMode)
+			if (rebuilding)
 			{
-				case EFFICIENT:
-					buildEfficientView();
-					break;
-				case CATEGORY_FOCUS:
-					buildCategoryView();
-					break;
-				case SEARCH:
-					buildSearchView();
-					break;
-				case PET_HUNT:
-					buildPetHuntView();
-					break;
+				rebuildPending = true;
+				return;
 			}
 
-			listContainer.revalidate();
-			listContainer.repaint();
-			detailCardLayout.show(detailCardPanel, "list");
+			rebuilding = true;
+			try
+			{
+				SwingUtil.fastRemoveAll(listContainer);
+				updateCompletionHeader();
+
+				switch (currentMode)
+				{
+					case EFFICIENT:
+						buildEfficientView();
+						break;
+					case CATEGORY_FOCUS:
+						buildCategoryView();
+						break;
+					case SEARCH:
+						buildSearchView();
+						break;
+					case PET_HUNT:
+						buildPetHuntView();
+						break;
+				}
+
+				listContainer.revalidate();
+				listContainer.repaint();
+				detailCardLayout.show(detailCardPanel, "list");
+			}
+			finally
+			{
+				rebuilding = false;
+				if (rebuildPending)
+				{
+					rebuildPending = false;
+					rebuild();
+				}
+			}
 		});
 	}
 
