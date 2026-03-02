@@ -60,6 +60,10 @@ We're actively expanding toward full collection log coverage. See:
 - [**CONTRIBUTING.md**](CONTRIBUTING.md) — JSON schema reference, how to find data, PR process
 - [**ITEMS_TRACKER.md**](ITEMS_TRACKER.md) — Full coverage breakdown with claimable issues by priority
 
+## Acknowledgments
+
+This plugin references patterns from [Quest Helper](https://github.com/Zoinkwiz/quest-helper) (hint arrows, overlays) and [Shortest Path](https://github.com/Skretzo/shortest-path) (inter-plugin pathfinding via PluginMessage). See [CREDITS.md](CREDITS.md) for full details.
+
 ## License
 
 BSD 2-Clause
