@@ -73,7 +73,7 @@ public class EfficiencyCalculator
 
 		for (CollectionLogItem item : source.getItems())
 		{
-			if (!collectionState.isItemObtained(item.getVarbitId()))
+			if (!collectionState.isItemObtained(item.getItemId()))
 			{
 				combinedDropRate += item.getDropRate();
 				missingCount++;
@@ -101,7 +101,7 @@ public class EfficiencyCalculator
 
 		for (CollectionLogItem item : source.getItems())
 		{
-			if (item.isPet() && !collectionState.isItemObtained(item.getVarbitId()))
+			if (item.isPet() && !collectionState.isItemObtained(item.getItemId()))
 			{
 				combinedDropRate += item.getDropRate();
 				missingPetCount++;

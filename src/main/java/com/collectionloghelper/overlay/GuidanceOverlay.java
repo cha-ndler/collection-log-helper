@@ -1,5 +1,6 @@
 package com.collectionloghelper.overlay;
 
+import com.collectionloghelper.CollectionLogHelperConfig;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,14 +15,15 @@ import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPanel;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.OverlayUtil;
+import net.runelite.client.ui.overlay.components.LineComponent;
 import net.runelite.client.ui.overlay.components.TitleComponent;
 
 public class GuidanceOverlay extends OverlayPanel
 {
-	private static final Color BORDER_COLOR = new Color(0, 255, 255);
-	private static final Color FILL_COLOR = new Color(0, 255, 255, 50);
+	private static final int MAX_PANEL_WIDTH = 200;
 
 	private final Client client;
+	private final CollectionLogHelperConfig config;
 
 	private volatile WorldPoint targetPoint;
 	private volatile String targetName;
@@ -29,9 +31,10 @@ public class GuidanceOverlay extends OverlayPanel
 	private volatile String clueGuidanceText;
 
 	@Inject
-	private GuidanceOverlay(Client client)
+	private GuidanceOverlay(Client client, CollectionLogHelperConfig config)
 	{
 		this.client = client;
+		this.config = config;
 		setPosition(OverlayPosition.TOP_LEFT);
 		setLayer(OverlayLayer.ABOVE_SCENE);
 		setMovable(true);
@@ -42,6 +45,8 @@ public class GuidanceOverlay extends OverlayPanel
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
+		Color overlayColor = config.overlayColor();
+
 		if (targetPoint == null)
 		{
 			if (clueGuidanceText != null)
@@ -51,14 +56,13 @@ public class GuidanceOverlay extends OverlayPanel
 					.text(clueGuidanceText)
 					.color(Color.WHITE)
 					.build());
-				panelComponent.setPreferredSize(new Dimension(
-					graphics.getFontMetrics().stringWidth(clueGuidanceText) + 20, 0));
+				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
 				return super.render(graphics);
 			}
 			return null;
 		}
 
-		// Tile highlight rendering — uses DYNAMIC behavior
+		// Tile highlight rendering
 		LocalPoint localPoint = LocalPoint.fromWorld(client.getTopLevelWorldView(), targetPoint);
 		if (localPoint == null)
 		{
@@ -73,11 +77,12 @@ public class GuidanceOverlay extends OverlayPanel
 				String loc = locationDescription != null ? locationDescription : "";
 				if (!loc.isEmpty())
 				{
-					panelComponent.getChildren().add(TitleComponent.builder()
-						.text(loc)
-						.color(Color.WHITE)
+					panelComponent.getChildren().add(LineComponent.builder()
+						.left(loc)
+						.leftColor(Color.WHITE)
 						.build());
 				}
+				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
 				return super.render(graphics);
 			}
 			return null;
@@ -89,14 +94,16 @@ public class GuidanceOverlay extends OverlayPanel
 			return null;
 		}
 
-		OverlayUtil.renderPolygon(graphics, poly, BORDER_COLOR, FILL_COLOR,
+		Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
+			overlayColor.getBlue(), 50);
+		OverlayUtil.renderPolygon(graphics, poly, overlayColor, fillColor,
 			new BasicStroke(2.0f));
 
 		if (targetName != null)
 		{
 			OverlayUtil.renderTextLocation(graphics,
 				Perspective.getCanvasTextLocation(client, graphics, localPoint, targetName, 150),
-				targetName, BORDER_COLOR);
+				targetName, overlayColor);
 		}
 
 		return null;

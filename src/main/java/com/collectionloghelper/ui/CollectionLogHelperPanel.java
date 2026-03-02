@@ -333,7 +333,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		{
 			for (CollectionLogItem item : si.getSource().getItems())
 			{
-				boolean obtained = collectionState.isItemObtained(item.getVarbitId());
+				boolean obtained = collectionState.isItemObtained(item.getItemId());
 				if (hideObtained && obtained)
 				{
 					continue;
@@ -385,7 +385,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 				if (item.getName().toLowerCase().contains(query)
 					|| source.getName().toLowerCase().contains(query))
 				{
-					boolean obtained = collectionState.isItemObtained(item.getVarbitId());
+					boolean obtained = collectionState.isItemObtained(item.getItemId());
 					if (hideObtained && obtained)
 					{
 						continue;
@@ -411,7 +411,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 				{
 					continue;
 				}
-				boolean obtained = collectionState.isItemObtained(item.getVarbitId());
+				boolean obtained = collectionState.isItemObtained(item.getItemId());
 				if (hideObtained && obtained)
 				{
 					continue;
@@ -426,7 +426,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private void showDetail(CollectionLogItem item, CollectionLogSource source)
 	{
-		boolean obtained = collectionState.isItemObtained(item.getVarbitId());
+		boolean obtained = collectionState.isItemObtained(item.getItemId());
 		boolean isGuidingThis = guidanceActive && guidedSource != null
 			&& guidedSource.getName().equals(source.getName());
 
