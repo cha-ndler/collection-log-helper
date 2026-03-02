@@ -14,10 +14,15 @@ public class CollectionLogSource
     int worldPlane;
     int killTimeSeconds;
     String locationDescription;
+    List<Waypoint> waypoints;
     List<CollectionLogItem> items;
 
     public WorldPoint getWorldPoint()
     {
+        if (waypoints != null && !waypoints.isEmpty())
+        {
+            return waypoints.get(0).getWorldPoint();
+        }
         return new WorldPoint(worldX, worldY, worldPlane);
     }
 
