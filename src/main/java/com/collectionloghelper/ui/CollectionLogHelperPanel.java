@@ -8,8 +8,11 @@ import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.util.List;
 import java.util.function.Consumer;
@@ -70,6 +73,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final JTextField searchField;
 	private final JLabel completionLabel;
 	private final JPanel listContainer;
+	private final CardLayout cardLayout;
 	private final JPanel contentPanel;
 	private final JPanel listView;
 	private final JPanel detailView;
@@ -180,8 +184,27 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 		add(controlsPanel, BorderLayout.NORTH);
 
-		// Content panel — swaps between list and detail views directly
-		contentPanel = new JPanel(new BorderLayout());
+		// CardLayout with preferred size based on visible card only (fixes scrollbar)
+		cardLayout = new CardLayout();
+		contentPanel = new JPanel(cardLayout)
+		{
+			@Override
+			public Dimension getPreferredSize()
+			{
+				for (Component comp : getComponents())
+				{
+					if (comp.isVisible())
+					{
+						Insets insets = getInsets();
+						Dimension d = comp.getPreferredSize();
+						return new Dimension(
+							d.width + insets.left + insets.right,
+							d.height + insets.top + insets.bottom);
+					}
+				}
+				return super.getPreferredSize();
+			}
+		};
 		contentPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
 		// List view
@@ -197,8 +220,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 		detailView = new JPanel(new BorderLayout());
 		detailView.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
-		// Start with list view
-		contentPanel.add(listView, BorderLayout.CENTER);
+		contentPanel.add(listView, "list");
+		contentPanel.add(detailView, "detail");
 
 		add(contentPanel, BorderLayout.CENTER);
 
@@ -271,28 +294,23 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private void showListView()
 	{
-		contentPanel.removeAll();
-		contentPanel.add(listView, BorderLayout.CENTER);
-		contentPanel.validate();
-		contentPanel.repaint();
-		resetScrollPosition();
+		cardLayout.show(contentPanel, "list");
+		refreshScrollPane();
 	}
 
 	private void showDetailView()
 	{
-		contentPanel.removeAll();
-		contentPanel.add(detailView, BorderLayout.NORTH);
-		contentPanel.validate();
-		contentPanel.repaint();
-		resetScrollPosition();
+		cardLayout.show(contentPanel, "detail");
+		refreshScrollPane();
 	}
 
-	private void resetScrollPosition()
+	private void refreshScrollPane()
 	{
 		JScrollPane scrollPane = (JScrollPane) SwingUtilities.getAncestorOfClass(
 			JScrollPane.class, this);
 		if (scrollPane != null)
 		{
+			scrollPane.validate();
 			scrollPane.getVerticalScrollBar().setValue(0);
 		}
 	}
