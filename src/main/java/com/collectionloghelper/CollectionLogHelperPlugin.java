@@ -79,6 +79,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
+	private int lastObtainedCount = -1;
 
 	@Override
 	protected void startUp() throws Exception
@@ -113,6 +114,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.remove(guidanceOverlay);
 		overlayManager.remove(guidanceMinimapOverlay);
 		deactivateGuidance();
+		lastObtainedCount = -1;
 
 		log.debug("Collection Log Helper stopped");
 	}
@@ -120,6 +122,13 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onVarbitChanged(VarbitChanged event)
 	{
+		int currentCount = collectionState.getTotalObtained();
+		if (currentCount == lastObtainedCount)
+		{
+			return;
+		}
+
+		lastObtainedCount = currentCount;
 		if (panel != null)
 		{
 			panel.rebuild();
