@@ -11,6 +11,8 @@ import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -22,7 +24,9 @@ import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
+import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.events.PluginMessage;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -60,6 +64,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private ItemManager itemManager;
+
+	@Inject
+	private EventBus eventBus;
 
 	@Inject
 	private CollectionLogHelperConfig config;
@@ -170,6 +177,11 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
+		client.clearHintArrow();
+		if (config.useShortestPath())
+		{
+			eventBus.post(new PluginMessage("shortestpath", "clear"));
+		}
 		if (panel != null)
 		{
 			panel.hideClueGuidance();
@@ -194,6 +206,18 @@ public class CollectionLogHelperPlugin extends Plugin
 			guidanceOverlay.setTargetName(displayName);
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
 			worldMapPointManager.add(new CollectionLogWorldMapPoint(worldPoint, displayName));
+
+			if (config.showHintArrow())
+			{
+				client.setHintArrow(worldPoint);
+			}
+
+			if (config.useShortestPath())
+			{
+				Map<String, Object> data = new HashMap<>();
+				data.put("target", worldPoint);
+				eventBus.post(new PluginMessage("shortestpath", "path", data));
+			}
 		}
 
 		log.debug("Guidance activated for {} ({})", source.getName(), source.getCategory());
@@ -204,6 +228,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
+		client.clearHintArrow();
+		eventBus.post(new PluginMessage("shortestpath", "clear"));
 		if (panel != null)
 		{
 			panel.hideClueGuidance();
