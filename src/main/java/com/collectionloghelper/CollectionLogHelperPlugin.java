@@ -21,10 +21,12 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
+import net.runelite.api.MenuAction;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
+import net.runelite.api.events.ScriptPreFired;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.gameval.InterfaceID;
@@ -55,6 +57,19 @@ public class CollectionLogHelperPlugin extends Plugin
 	private static final Pattern COLLECTION_LOG_PATTERN =
 		Pattern.compile("New item added to your collection log: (.*)");
 	private static final int COLLECTION_LOG_GROUP_ID = InterfaceID.Collection.FRAME >> 16;
+
+	/**
+	 * Client script 4100 fires once per obtained item when the collection log
+	 * enters search mode. Args: [source, itemId, itemCount].
+	 * Used by TempleOSRS and WikiSync for full collection log scanning.
+	 */
+	private static final int SCRIPT_COLLECTION_LOG_ITEM = 4100;
+
+	/** Client script 2240 triggers the collection log search mode. */
+	private static final int SCRIPT_COLLECTION_LOG_SEARCH = 2240;
+
+	/** Ticks to wait after the last script 4100 fires before finalizing the scan. */
+	private static final int SCAN_SETTLE_TICKS = 3;
 
 	@Inject
 	private Client client;
@@ -101,6 +116,12 @@ public class CollectionLogHelperPlugin extends Plugin
 	private boolean collectionLogOpen;
 	private BufferedImage collectionLogIcon;
 	private CollectionLogWorldMapPoint activeMapPoint;
+
+	// Auto-sync state: triggered when collection log widget opens
+	private boolean autoSyncPending;
+	private boolean scriptScanActive;
+	private int scriptScanItemCount;
+	private int scanSettleCountdown;
 
 	@Override
 	protected void startUp() throws Exception
@@ -153,6 +174,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		deactivateGuidance();
 		lastObtainedCount = -1;
 		collectionLogOpen = false;
+		autoSyncPending = false;
+		scriptScanActive = false;
+		scanSettleCountdown = 0;
 		collectionState.clearState();
 
 		log.info("Collection Log Helper stopped");
@@ -180,6 +204,9 @@ public class CollectionLogHelperPlugin extends Plugin
 			collectionState.clearState();
 			lastObtainedCount = -1;
 			collectionLogOpen = false;
+			autoSyncPending = false;
+			scriptScanActive = false;
+			scanSettleCountdown = 0;
 		}
 	}
 
@@ -248,22 +275,72 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		log.info("Collection log widget loaded (group {})", event.getGroupId());
 		collectionLogOpen = true;
+
+		// Trigger automatic full scan: programmatically activate search mode
+		// which causes script 4100 to fire once per obtained item
+		autoSyncPending = true;
+	}
+
+	@Subscribe
+	public void onScriptPreFired(ScriptPreFired event)
+	{
+		if (event.getScriptId() != SCRIPT_COLLECTION_LOG_ITEM)
+		{
+			return;
+		}
+
+		// Script 4100 fires per obtained item during search-mode iteration
+		// Args: [source_widget, itemId, itemCount]
+		Object[] args = event.getScriptEvent().getArguments();
+		if (args != null && args.length >= 3)
+		{
+			int itemId = (int) args[1];
+			if (itemId > 0)
+			{
+				collectionState.markItemObtained(itemId);
+				scriptScanItemCount++;
+			}
+		}
+
+		// Reset the settle countdown — more items may be coming
+		scriptScanActive = true;
+		scanSettleCountdown = SCAN_SETTLE_TICKS;
 	}
 
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
-		// Collection log widget scanning
+		// Auto-sync: trigger search mode when collection log first opens
+		if (autoSyncPending && collectionLogOpen)
+		{
+			autoSyncPending = false;
+			triggerSearchModeScan();
+		}
+
+		// Wait for script 4100 to finish firing, then finalize
+		if (scriptScanActive)
+		{
+			scanSettleCountdown--;
+			if (scanSettleCountdown <= 0)
+			{
+				scriptScanActive = false;
+				log.info("Auto-sync complete: {} obtained items captured via script scan",
+					scriptScanItemCount);
+				scriptScanItemCount = 0;
+				if (panel != null)
+				{
+					panel.rebuild();
+				}
+			}
+		}
+
+		// Detect collection log closed
 		if (collectionLogOpen)
 		{
-			Widget itemsContainer = client.getWidget(InterfaceID.Collection.ITEMS_CONTENTS);
-			if (itemsContainer == null || itemsContainer.isHidden())
+			Widget frame = client.getWidget(InterfaceID.Collection.FRAME);
+			if (frame == null || frame.isHidden())
 			{
 				collectionLogOpen = false;
-			}
-			else
-			{
-				scanCollectionLogWidget(itemsContainer);
 			}
 		}
 
@@ -317,84 +394,57 @@ public class CollectionLogHelperPlugin extends Plugin
 		activeMapPoint.rotateArrow(degrees);
 	}
 
-	private void scanCollectionLogWidget(Widget itemsContainer)
+	/**
+	 * Programmatically trigger collection log search mode, which causes
+	 * script 4100 to fire once per obtained item. This is the same technique
+	 * used by TempleOSRS and WikiSync for full collection log scanning.
+	 * After triggering search, immediately clicks "Back" so the user
+	 * doesn't see the search UI flash.
+	 */
+	private void triggerSearchModeScan()
 	{
-		Widget[] children = itemsContainer.getDynamicChildren();
-		if (children == null || children.length == 0)
-		{
-			// Try static children as fallback
-			children = itemsContainer.getChildren();
-		}
-		if (children == null || children.length == 0)
-		{
-			return;
-		}
+		scriptScanItemCount = 0;
+		scriptScanActive = false;
+		scanSettleCountdown = SCAN_SETTLE_TICKS;
 
-		boolean changed = false;
-		int obtained = 0;
-		int total = 0;
-		for (Widget child : children)
-		{
-			if (child == null)
-			{
-				continue;
-			}
-			int itemId = child.getItemId();
-			int opacity = child.getOpacity();
+		log.info("Triggering collection log search-mode scan");
 
-			if (itemId > 0)
-			{
-				total++;
-				if (opacity == 0)
-				{
-					obtained++;
-					if (collectionState.markItemObtained(itemId))
-					{
-						changed = true;
-					}
-				}
-			}
-		}
+		// Click the Search toggle to enter search mode (fires script 4100 for each obtained item)
+		client.menuAction(-1, InterfaceID.Collection.SEARCH_TOGGLE,
+			MenuAction.CC_OP, 1, -1, "Search", null);
 
-		if (total > 0)
-		{
-			log.info("Widget scan: {}/{} items obtained, {} newly tracked",
-				obtained, total, changed ? "some" : "none");
-		}
+		// Run the search script to complete the transition
+		client.runScript(SCRIPT_COLLECTION_LOG_SEARCH);
 
-		if (changed)
-		{
-			log.info("Collection log scan: synced obtained items (total tracked: {})",
-				collectionState.getObtainedCount());
-			if (panel != null)
-			{
-				panel.rebuild();
-			}
-		}
+		// Click Back to exit search mode so the UI returns to normal
+		client.menuAction(-1, InterfaceID.Collection.SEARCH_TOGGLE,
+			MenuAction.CC_OP, 1, -1, "Back", null);
 	}
 
+	/**
+	 * Sync action triggered by the panel's Sync button.
+	 * If the collection log is open, triggers a full search-mode scan.
+	 * Otherwise, captures recent items from varps.
+	 */
 	private void syncCollectionLog()
 	{
 		clientThread.invokeLater(() ->
 		{
-			// Try to capture recent items from varps (always available)
 			collectionState.captureRecentItems();
 
-			// Try to scan the collection log widget if it's open
-			Widget itemsContainer = client.getWidget(InterfaceID.Collection.ITEMS_CONTENTS);
-			if (itemsContainer != null && !itemsContainer.isHidden())
+			Widget frame = client.getWidget(InterfaceID.Collection.FRAME);
+			if (frame != null && !frame.isHidden())
 			{
-				scanCollectionLogWidget(itemsContainer);
-				log.info("Sync: scanned open collection log widget");
+				triggerSearchModeScan();
+				log.info("Sync: triggered search-mode scan");
 			}
 			else
 			{
 				log.info("Sync: captured recent items from varps (open in-game Collection Log for full sync)");
-			}
-
-			if (panel != null)
-			{
-				panel.rebuild();
+				if (panel != null)
+				{
+					panel.rebuild();
+				}
 			}
 		});
 	}
