@@ -38,6 +38,16 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "showSyncReminder",
+		name = "Show Sync Reminder",
+		description = "Show a reminder to open the Collection Log after login to sync obtained items"
+	)
+	default boolean showSyncReminder()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "showOverlays",
 		name = "Show Overlays",
 		description = "Show guidance overlays when using Guide Me",
