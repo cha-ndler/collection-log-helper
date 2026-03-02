@@ -106,7 +106,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		panel = new CollectionLogHelperPanel(
 			config, database, collectionState, calculator, itemManager,
-			this::activateGuidance, this::deactivateGuidance);
+			this::activateGuidance, this::deactivateGuidance, this::syncCollectionLog);
 		panel.setMode(config.defaultMode());
 
 		final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "panel_icon.png");
@@ -129,6 +129,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				collectionState.refreshVarps();
 				collectionState.loadObtainedItems();
+				collectionState.captureRecentItems();
 				lastObtainedCount = collectionState.getTotalObtained();
 				panel.rebuild();
 			});
@@ -160,6 +161,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				collectionState.refreshVarps();
 				collectionState.loadObtainedItems();
+				collectionState.captureRecentItems();
 				lastObtainedCount = collectionState.getTotalObtained();
 				if (panel != null)
 				{
@@ -294,6 +296,32 @@ public class CollectionLogHelperPlugin extends Plugin
 				panel.rebuild();
 			}
 		}
+	}
+
+	private void syncCollectionLog()
+	{
+		clientThread.invokeLater(() ->
+		{
+			// Try to capture recent items from varps (always available)
+			collectionState.captureRecentItems();
+
+			// Try to scan the collection log widget if it's open
+			Widget itemsContainer = client.getWidget(InterfaceID.Collection.ITEMS);
+			if (itemsContainer != null && !itemsContainer.isHidden())
+			{
+				scanCollectionLogWidget(itemsContainer);
+				log.info("Sync: scanned open collection log widget");
+			}
+			else
+			{
+				log.info("Sync: captured recent items from varps (open in-game Collection Log for full sync)");
+			}
+
+			if (panel != null)
+			{
+				panel.rebuild();
+			}
+		});
 	}
 
 	public void activateGuidance(CollectionLogSource source)
