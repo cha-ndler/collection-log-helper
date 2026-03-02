@@ -11,6 +11,9 @@ import net.runelite.client.ui.overlay.worldmap.WorldMapPoint;
 
 public class CollectionLogWorldMapPoint extends WorldMapPoint
 {
+	private static final Color PIN_COLOR = new Color(0, 200, 200);
+	private static final Color PIN_BORDER = Color.WHITE;
+
 	private final BufferedImage image;
 	private final BufferedImage smallImage;
 	private final Point imageAnchorPoint;
@@ -52,7 +55,6 @@ public class CollectionLogWorldMapPoint extends WorldMapPoint
 		Graphics2D g = img.createGraphics();
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		Color pinColor = new Color(0xFF, 0x45, 0x00); // OrangeRed
 		int headDiameter = 22;
 		int headX = (width - headDiameter) / 2;
 		int headY = 2;
@@ -62,25 +64,25 @@ public class CollectionLogWorldMapPoint extends WorldMapPoint
 		int[] triX = {width / 2 - 9, width / 2 + 9, width / 2};
 		int[] triY = {headCenterY, headCenterY, height - 1};
 
-		// White border: draw larger shapes underneath
-		g.setColor(Color.WHITE);
+		// White border
+		g.setColor(PIN_BORDER);
 		g.fillOval(headX - 2, headY - 2, headDiameter + 4, headDiameter + 4);
 		g.setStroke(new BasicStroke(3.0f));
 		g.drawPolygon(triX, triY, 3);
 
 		// Fill pin body
-		g.setColor(pinColor);
+		g.setColor(PIN_COLOR);
 		g.fillOval(headX, headY, headDiameter, headDiameter);
 		g.fillPolygon(triX, triY, 3);
 
 		// White outline on circle
-		g.setColor(Color.WHITE);
+		g.setColor(PIN_BORDER);
 		g.setStroke(new BasicStroke(2.0f));
 		g.drawOval(headX, headY, headDiameter, headDiameter);
 
 		// White center dot
 		int dotDiam = 8;
-		g.setColor(Color.WHITE);
+		g.setColor(PIN_BORDER);
 		g.fillOval((width - dotDiam) / 2, headY + (headDiameter - dotDiam) / 2, dotDiam, dotDiam);
 
 		g.dispose();
@@ -98,12 +100,12 @@ public class CollectionLogWorldMapPoint extends WorldMapPoint
 		g.setColor(Color.BLACK);
 		g.fillOval(0, 0, size, size);
 
-		// Orange fill
-		g.setColor(new Color(0xFF, 0x8C, 0x00)); // DarkOrange
+		// Cyan fill
+		g.setColor(PIN_COLOR);
 		g.fillOval(2, 2, size - 4, size - 4);
 
 		// White center
-		g.setColor(Color.WHITE);
+		g.setColor(PIN_BORDER);
 		g.fillOval(4, 4, size - 8, size - 8);
 
 		g.dispose();

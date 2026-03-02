@@ -64,7 +64,7 @@ class CategorySummaryPanel extends JPanel
 		{
 			for (CollectionLogItem item : source.getItems())
 			{
-				boolean itemObtained = collectionState.isItemObtained(item.getVarbitId());
+				boolean itemObtained = collectionState.isItemObtained(item.getItemId());
 				if (hideObtained && itemObtained)
 				{
 					continue;
