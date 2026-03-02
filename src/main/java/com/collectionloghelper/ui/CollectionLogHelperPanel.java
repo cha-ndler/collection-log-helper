@@ -69,6 +69,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final ItemManager itemManager;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
+	private final Runnable syncAction;
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<CollectionLogCategory> categorySelector;
@@ -92,7 +93,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
 		DropRateDatabase database, PlayerCollectionState collectionState,
 		EfficiencyCalculator calculator, ItemManager itemManager,
-		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator)
+		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
+		Runnable syncAction)
 	{
 		this.config = config;
 		this.database = database;
@@ -101,6 +103,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.itemManager = itemManager;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
+		this.syncAction = syncAction;
 
 		setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
@@ -116,8 +119,18 @@ public class CollectionLogHelperPanel extends PluginPanel
 		completionLabel.setFont(FontManager.getRunescapeBoldFont());
 		completionLabel.setForeground(Color.WHITE);
 		completionLabel.setAlignmentX(CENTER_ALIGNMENT);
-		completionLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
+		completionLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 4, 0));
 		controlsPanel.add(completionLabel);
+
+		// Sync button
+		JButton syncButton = new JButton("Sync Collection Log");
+		syncButton.setFont(FontManager.getRunescapeSmallFont());
+		syncButton.setAlignmentX(CENTER_ALIGNMENT);
+		syncButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 24));
+		syncButton.setToolTipText("Open your in-game Collection Log to sync obtained items");
+		syncButton.addActionListener(e -> syncAction.run());
+		controlsPanel.add(syncButton);
+		controlsPanel.add(Box.createVerticalStrut(4));
 
 		// Mode selector
 		modeSelector = new JComboBox<>(Mode.values());
