@@ -256,7 +256,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Collection log widget scanning
 		if (collectionLogOpen)
 		{
-			Widget itemsContainer = client.getWidget(InterfaceID.Collection.ITEMS);
+			Widget itemsContainer = client.getWidget(InterfaceID.Collection.ITEMS_CONTENTS);
 			if (itemsContainer == null || itemsContainer.isHidden())
 			{
 				collectionLogOpen = false;
@@ -322,28 +322,49 @@ public class CollectionLogHelperPlugin extends Plugin
 		Widget[] children = itemsContainer.getDynamicChildren();
 		if (children == null || children.length == 0)
 		{
+			// Try static children as fallback
+			children = itemsContainer.getChildren();
+		}
+		if (children == null || children.length == 0)
+		{
 			return;
 		}
 
 		boolean changed = false;
+		int obtained = 0;
+		int total = 0;
 		for (Widget child : children)
 		{
+			if (child == null)
+			{
+				continue;
+			}
 			int itemId = child.getItemId();
 			int opacity = child.getOpacity();
 
-			// Obtained items have opacity 0 (fully visible), unobtained are faded
-			if (itemId > 0 && opacity == 0)
+			if (itemId > 0)
 			{
-				if (collectionState.markItemObtained(itemId))
+				total++;
+				if (opacity == 0)
 				{
-					changed = true;
+					obtained++;
+					if (collectionState.markItemObtained(itemId))
+					{
+						changed = true;
+					}
 				}
 			}
 		}
 
+		if (total > 0)
+		{
+			log.info("Widget scan: {}/{} items obtained, {} newly tracked",
+				obtained, total, changed ? "some" : "none");
+		}
+
 		if (changed)
 		{
-			log.info("Collection log scan: synced obtained items (total: {})",
+			log.info("Collection log scan: synced obtained items (total tracked: {})",
 				collectionState.getObtainedCount());
 			if (panel != null)
 			{
@@ -360,7 +381,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			collectionState.captureRecentItems();
 
 			// Try to scan the collection log widget if it's open
-			Widget itemsContainer = client.getWidget(InterfaceID.Collection.ITEMS);
+			Widget itemsContainer = client.getWidget(InterfaceID.Collection.ITEMS_CONTENTS);
 			if (itemsContainer != null && !itemsContainer.isHidden())
 			{
 				scanCollectionLogWidget(itemsContainer);
