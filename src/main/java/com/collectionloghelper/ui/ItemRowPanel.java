@@ -35,6 +35,7 @@ class ItemRowPanel extends JPanel
 		setBackground(obtained ? OBTAINED_COLOR : ColorScheme.DARKER_GRAY_COLOR);
 		setPreferredSize(ROW_SIZE);
 		setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
+		setAlignmentX(LEFT_ALIGNMENT);
 
 		// Item icon
 		JLabel iconLabel = new JLabel();
@@ -83,7 +84,7 @@ class ItemRowPanel extends JPanel
 			addMouseListener(new java.awt.event.MouseAdapter()
 			{
 				@Override
-				public void mouseClicked(java.awt.event.MouseEvent e)
+				public void mousePressed(java.awt.event.MouseEvent e)
 				{
 					onClick.run();
 				}

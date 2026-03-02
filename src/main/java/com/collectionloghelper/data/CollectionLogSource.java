@@ -13,10 +13,20 @@ public class CollectionLogSource
     int worldY;
     int worldPlane;
     int killTimeSeconds;
+    String locationDescription;
     List<CollectionLogItem> items;
 
     public WorldPoint getWorldPoint()
     {
         return new WorldPoint(worldX, worldY, worldPlane);
+    }
+
+    public String getDisplayLocation()
+    {
+        if (locationDescription != null && !locationDescription.isEmpty())
+        {
+            return locationDescription;
+        }
+        return name;
     }
 }

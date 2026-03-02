@@ -8,23 +8,24 @@ import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.util.List;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
@@ -33,6 +34,9 @@ import net.runelite.client.util.SwingUtil;
 
 public class CollectionLogHelperPanel extends PluginPanel
 {
+	private static final Color GUIDE_ME_COLOR = new Color(30, 120, 30);
+	private static final Color STOP_GUIDANCE_COLOR = new Color(140, 30, 30);
+
 	public enum Mode
 	{
 		EFFICIENT("Efficient"),
@@ -58,7 +62,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final PlayerCollectionState collectionState;
 	private final EfficiencyCalculator calculator;
 	private final ItemManager itemManager;
-	private final BiConsumer<WorldPoint, String> guidanceActivator;
+	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 
 	private final JComboBox<Mode> modeSelector;
@@ -66,18 +70,22 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final JTextField searchField;
 	private final JLabel completionLabel;
 	private final JPanel listContainer;
-	private final CardLayout detailCardLayout;
-	private final JPanel detailCardPanel;
+	private final JPanel contentPanel;
 	private final JPanel listView;
 	private final JPanel detailView;
+
+	private final JPanel clueGuidanceBanner;
+	private final JLabel clueGuidanceLabel;
 
 	private Mode currentMode = Mode.EFFICIENT;
 	private boolean rebuilding = false;
 	private boolean rebuildPending = false;
+	private boolean guidanceActive = false;
+	private CollectionLogSource guidedSource = null;
 
 	public CollectionLogHelperPanel(DropRateDatabase database, PlayerCollectionState collectionState,
 		EfficiencyCalculator calculator, ItemManager itemManager,
-		BiConsumer<WorldPoint, String> guidanceActivator, Runnable guidanceDeactivator)
+		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator)
 	{
 		this.database = database;
 		this.collectionState = collectionState;
@@ -156,12 +164,25 @@ public class CollectionLogHelperPanel extends PluginPanel
 		});
 		controlsPanel.add(searchField);
 
+		// Clue guidance banner (hidden by default)
+		clueGuidanceBanner = new JPanel(new BorderLayout());
+		clueGuidanceBanner.setBackground(new Color(40, 40, 60));
+		clueGuidanceBanner.setBorder(BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(new Color(100, 100, 200), 1),
+			BorderFactory.createEmptyBorder(6, 6, 6, 6)
+		));
+		clueGuidanceLabel = new JLabel();
+		clueGuidanceLabel.setForeground(Color.WHITE);
+		clueGuidanceLabel.setFont(FontManager.getRunescapeSmallFont());
+		clueGuidanceBanner.add(clueGuidanceLabel, BorderLayout.CENTER);
+		clueGuidanceBanner.setVisible(false);
+		controlsPanel.add(clueGuidanceBanner);
+
 		add(controlsPanel, BorderLayout.NORTH);
 
-		// Card layout for list vs detail views
-		detailCardLayout = new CardLayout();
-		detailCardPanel = new JPanel(detailCardLayout);
-		detailCardPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
+		// Content panel — swaps between list and detail views directly
+		contentPanel = new JPanel(new BorderLayout());
+		contentPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
 		// List view
 		listView = new JPanel(new BorderLayout());
@@ -172,14 +193,14 @@ public class CollectionLogHelperPanel extends PluginPanel
 		listContainer.setBackground(ColorScheme.DARK_GRAY_COLOR);
 		listView.add(listContainer, BorderLayout.NORTH);
 
-		detailCardPanel.add(listView, "list");
-
-		// Detail view placeholder
+		// Detail view
 		detailView = new JPanel(new BorderLayout());
 		detailView.setBackground(ColorScheme.DARK_GRAY_COLOR);
-		detailCardPanel.add(detailView, "detail");
 
-		add(detailCardPanel, BorderLayout.CENTER);
+		// Start with list view
+		contentPanel.add(listView, BorderLayout.CENTER);
+
+		add(contentPanel, BorderLayout.CENTER);
 
 		updateControlVisibility();
 	}
@@ -234,7 +255,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 				listContainer.revalidate();
 				listContainer.repaint();
-				detailCardLayout.show(detailCardPanel, "list");
+				showListView();
 			}
 			finally
 			{
@@ -248,9 +269,42 @@ public class CollectionLogHelperPanel extends PluginPanel
 		});
 	}
 
+	private void showListView()
+	{
+		contentPanel.removeAll();
+		contentPanel.add(listView, BorderLayout.CENTER);
+		contentPanel.validate();
+		contentPanel.repaint();
+		resetScrollPosition();
+	}
+
+	private void showDetailView()
+	{
+		contentPanel.removeAll();
+		contentPanel.add(detailView, BorderLayout.NORTH);
+		contentPanel.validate();
+		contentPanel.repaint();
+		resetScrollPosition();
+	}
+
+	private void resetScrollPosition()
+	{
+		JScrollPane scrollPane = (JScrollPane) SwingUtilities.getAncestorOfClass(
+			JScrollPane.class, this);
+		if (scrollPane != null)
+		{
+			scrollPane.getVerticalScrollBar().setValue(0);
+		}
+	}
+
 	private void buildEfficientView()
 	{
 		List<ScoredItem> scored = calculator.rankByEfficiency();
+
+		if (!scored.isEmpty())
+		{
+			listContainer.add(createQuickGuidePanel(scored.get(0)));
+		}
 
 		for (ScoredItem si : scored)
 		{
@@ -336,22 +390,123 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private void showDetail(CollectionLogItem item, CollectionLogSource source)
 	{
 		boolean obtained = collectionState.isItemObtained(item.getVarbitId());
+		boolean isGuidingThis = guidanceActive && guidedSource != null
+			&& guidedSource.getName().equals(source.getName());
 
+		detailView.removeAll();
+		ItemDetailPanel detail = new ItemDetailPanel(
+			item, source, obtained, itemManager,
+			() ->
+			{
+				guidanceDeactivator.run();
+				setGuidanceState(false, null);
+				showListView();
+			},
+			() ->
+			{
+				guidanceActivator.accept(source);
+				setGuidanceState(true, source);
+			},
+			() ->
+			{
+				guidanceDeactivator.run();
+				setGuidanceState(false, null);
+			},
+			isGuidingThis
+		);
+		detailView.add(detail, BorderLayout.NORTH);
+		showDetailView();
+	}
+
+	private JPanel createQuickGuidePanel(ScoredItem topItem)
+	{
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setBackground(new Color(30, 50, 30));
+		panel.setBorder(BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(new Color(80, 200, 80), 1),
+			BorderFactory.createEmptyBorder(6, 6, 6, 6)
+		));
+		panel.setAlignmentX(LEFT_ALIGNMENT);
+		panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+
+		JLabel titleLabel = new JLabel("<html><b>Top Pick: " + topItem.getSource().getName() + "</b></html>");
+		titleLabel.setFont(FontManager.getRunescapeBoldFont());
+		titleLabel.setForeground(new Color(255, 200, 0));
+		titleLabel.setAlignmentX(LEFT_ALIGNMENT);
+		panel.add(titleLabel);
+
+		String reasoning = topItem.getReasoning();
+		if (reasoning != null && !reasoning.isEmpty())
+		{
+			JLabel reasonLabel = new JLabel("<html>" + reasoning + "</html>");
+			reasonLabel.setFont(FontManager.getRunescapeSmallFont());
+			reasonLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+			reasonLabel.setAlignmentX(LEFT_ALIGNMENT);
+			panel.add(reasonLabel);
+		}
+
+		panel.add(Box.createRigidArea(new Dimension(0, 4)));
+
+		boolean isGuidingThis = guidanceActive && guidedSource != null
+			&& guidedSource.getName().equals(topItem.getSource().getName());
+
+		JButton guideButton = new JButton(isGuidingThis ? "Stop Guidance" : "Guide Me");
+		guideButton.setBackground(isGuidingThis ? STOP_GUIDANCE_COLOR : GUIDE_ME_COLOR);
+		guideButton.setForeground(Color.WHITE);
+		guideButton.setAlignmentX(LEFT_ALIGNMENT);
+		guideButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
+		guideButton.addActionListener(e ->
+		{
+			if (guideButton.getText().equals("Stop Guidance"))
+			{
+				guidanceDeactivator.run();
+				setGuidanceState(false, null);
+				guideButton.setText("Guide Me");
+				guideButton.setBackground(GUIDE_ME_COLOR);
+			}
+			else
+			{
+				guidanceActivator.accept(topItem.getSource());
+				setGuidanceState(true, topItem.getSource());
+				guideButton.setText("Stop Guidance");
+				guideButton.setBackground(STOP_GUIDANCE_COLOR);
+			}
+		});
+		panel.add(guideButton);
+
+		return panel;
+	}
+
+	public void setGuidanceState(boolean active, CollectionLogSource source)
+	{
+		guidanceActive = active;
+		guidedSource = source;
+	}
+
+	public void showClueGuidance(CollectionLogSource source)
+	{
 		SwingUtilities.invokeLater(() ->
 		{
-			detailView.removeAll();
-			ItemDetailPanel detail = new ItemDetailPanel(
-				item, source, obtained, itemManager,
-				() ->
-				{
-					guidanceDeactivator.run();
-					detailCardLayout.show(detailCardPanel, "list");
-				},
-				() -> guidanceActivator.accept(source.getWorldPoint(), source.getName())
-			);
-			detailView.add(detail, BorderLayout.CENTER);
-			detailView.revalidate();
-			detailCardLayout.show(detailCardPanel, "detail");
+			clueGuidanceLabel.setText(
+				"<html><b>Guidance: " + source.getName() + "</b><br>"
+				+ "Use the RuneLite <b>Clue Scroll</b> plugin for step-by-step guidance</html>");
+			clueGuidanceBanner.setVisible(true);
+			clueGuidanceBanner.revalidate();
+			clueGuidanceBanner.getParent().revalidate();
+		});
+	}
+
+	public void hideClueGuidance()
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			clueGuidanceBanner.setVisible(false);
+			clueGuidanceBanner.revalidate();
+			if (clueGuidanceBanner.getParent() != null)
+			{
+				clueGuidanceBanner.getParent().revalidate();
+			}
 		});
 	}
 

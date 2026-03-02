@@ -1,6 +1,6 @@
 # Collection Log Helper — Item Coverage Tracker
 
-> **Coverage: 323 / ~1,904 items | 52 / 122 sources**
+> **Coverage: 323 / ~1,698 items | 52 / 122 sources**
 
 This document tracks every OSRS Collection Log category and our progress toward full coverage. Community contributors can use this to find unclaimed work.
 
