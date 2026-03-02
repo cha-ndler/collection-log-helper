@@ -29,6 +29,7 @@ public class GuidanceOverlay extends OverlayPanel
 	private volatile String targetName;
 	private volatile String locationDescription;
 	private volatile String clueGuidanceText;
+	private volatile boolean showSyncReminder;
 
 	@Inject
 	private GuidanceOverlay(Client client, CollectionLogHelperConfig config)
@@ -56,6 +57,14 @@ public class GuidanceOverlay extends OverlayPanel
 					.text(clueGuidanceText)
 					.color(Color.WHITE)
 					.build());
+				addSyncReminderIfNeeded();
+				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
+				return super.render(graphics);
+			}
+			if (showSyncReminder)
+			{
+				panelComponent.getChildren().clear();
+				addSyncReminderIfNeeded();
 				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
 				return super.render(graphics);
 			}
@@ -82,6 +91,7 @@ public class GuidanceOverlay extends OverlayPanel
 						.leftColor(Color.WHITE)
 						.build());
 				}
+				addSyncReminderIfNeeded();
 				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
 				return super.render(graphics);
 			}
@@ -129,11 +139,27 @@ public class GuidanceOverlay extends OverlayPanel
 		this.clueGuidanceText = clueGuidanceText;
 	}
 
+	public void setShowSyncReminder(boolean show)
+	{
+		this.showSyncReminder = show;
+	}
+
 	public void clearTarget()
 	{
 		targetPoint = null;
 		targetName = null;
 		locationDescription = null;
 		clueGuidanceText = null;
+	}
+
+	private void addSyncReminderIfNeeded()
+	{
+		if (showSyncReminder)
+		{
+			panelComponent.getChildren().add(LineComponent.builder()
+				.left("Open Collection Log to sync")
+				.leftColor(new Color(255, 170, 0))
+				.build());
+		}
 	}
 }
