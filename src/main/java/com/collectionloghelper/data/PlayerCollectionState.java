@@ -97,6 +97,46 @@ public class PlayerCollectionState
 	}
 
 	/**
+	 * Must be called from the client thread. Reads the 12 most recently obtained
+	 * item IDs from varps and marks them as obtained. These varps are always
+	 * available after login without needing the collection log widget open.
+	 */
+	public boolean captureRecentItems()
+	{
+		int[] lastItemVarps = {
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM0,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM1,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM2,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM3,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM4,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM5,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM6,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM7,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM8,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM9,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM10,
+			VarPlayerID.COLLECTION_OVERVIEW_LAST_ITEM11,
+		};
+
+		boolean changed = false;
+		for (int varp : lastItemVarps)
+		{
+			int itemId = client.getVarpValue(varp);
+			if (itemId > 0 && obtainedItemIds.add(itemId))
+			{
+				changed = true;
+			}
+		}
+
+		if (changed)
+		{
+			saveObtainedItems();
+			log.info("Captured recent items from varps (total tracked: {})", obtainedItemIds.size());
+		}
+		return changed;
+	}
+
+	/**
 	 * Check if an item is obtained by its item ID (NOT varbit ID).
 	 */
 	public boolean isItemObtained(int itemId)
