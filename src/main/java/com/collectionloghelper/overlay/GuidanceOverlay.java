@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import javax.inject.Inject;
-import lombok.Setter;
 import net.runelite.api.Client;
 import net.runelite.api.Perspective;
 import net.runelite.api.coords.LocalPoint;
@@ -24,12 +23,9 @@ public class GuidanceOverlay extends OverlayPanel
 
 	private final Client client;
 
-	@Setter
-	private WorldPoint targetPoint;
-	@Setter
-	private String targetName;
-	@Setter
-	private String clueGuidanceText;
+	private volatile WorldPoint targetPoint;
+	private volatile String targetName;
+	private volatile String clueGuidanceText;
 
 	@Inject
 	private GuidanceOverlay(Client client)
@@ -85,6 +81,21 @@ public class GuidanceOverlay extends OverlayPanel
 		}
 
 		return null;
+	}
+
+	public void setTargetPoint(WorldPoint targetPoint)
+	{
+		this.targetPoint = targetPoint;
+	}
+
+	public void setTargetName(String targetName)
+	{
+		this.targetName = targetName;
+	}
+
+	public void setClueGuidanceText(String clueGuidanceText)
+	{
+		this.clueGuidanceText = clueGuidanceText;
 	}
 
 	public void clearTarget()
