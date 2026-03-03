@@ -16,8 +16,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -32,6 +35,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.runelite.client.game.ItemManager;
+import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.PluginPanel;
@@ -47,7 +51,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 		EFFICIENT("Efficient"),
 		CATEGORY_FOCUS("Category Focus"),
 		SEARCH("Search"),
-		PET_HUNT("Pet Hunt");
+		PET_HUNT("Pet Hunt"),
+		PROXIMITY("Efficient by Proximity");
 
 		private final String displayName;
 
@@ -72,6 +77,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Runnable syncAction;
+	private final Supplier<WorldPoint> playerLocationSupplier;
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<CollectionLogCategory> categorySelector;
@@ -97,7 +103,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		EfficiencyCalculator calculator, ItemManager itemManager,
 		RequirementsChecker requirementsChecker,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
-		Runnable syncAction)
+		Runnable syncAction, Supplier<WorldPoint> playerLocationSupplier)
 	{
 		this.config = config;
 		this.database = database;
@@ -108,6 +114,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.syncAction = syncAction;
+		this.playerLocationSupplier = playerLocationSupplier;
 
 		setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
@@ -296,6 +303,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 					case PET_HUNT:
 						buildPetHuntView();
 						break;
+					case PROXIMITY:
+						buildProximityView();
+						break;
 				}
 
 				listContainer.revalidate();
@@ -455,6 +465,96 @@ public class CollectionLogHelperPanel extends PluginPanel
 				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
 					si.getScore(), si.isLocked(), itemManager,
 					() -> showDetail(item, si.getSource()));
+				listContainer.add(row);
+			}
+		}
+	}
+
+	private void buildProximityView()
+	{
+		WorldPoint playerLocation = playerLocationSupplier.get();
+		if (playerLocation == null)
+		{
+			JLabel loginLabel = new JLabel("Log in to use Proximity mode");
+			loginLabel.setFont(FontManager.getRunescapeSmallFont());
+			loginLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+			loginLabel.setAlignmentX(LEFT_ALIGNMENT);
+			loginLabel.setBorder(BorderFactory.createEmptyBorder(8, 4, 8, 4));
+			listContainer.add(loginLabel);
+			return;
+		}
+
+		boolean hideObtained = config.hideObtainedItems();
+		boolean hideLocked = config.hideLockedContent();
+
+		// Score all sources and build a list with distance info
+		List<ScoredItem> scored = calculator.rankByEfficiency();
+
+		// Build a list of (ScoredItem, distance) pairs, filtered to sources with coordinates
+		List<Object[]> sourceDistances = new ArrayList<>();
+		for (ScoredItem si : scored)
+		{
+			CollectionLogSource source = si.getSource();
+			WorldPoint sourcePoint = source.getWorldPoint();
+			if (sourcePoint == null || (sourcePoint.getX() == 0 && sourcePoint.getY() == 0))
+			{
+				continue;
+			}
+			int distance = playerLocation.distanceTo(sourcePoint);
+			sourceDistances.add(new Object[]{si, distance});
+		}
+
+		// Sort by distance ascending, then by efficiency score descending for ties
+		sourceDistances.sort(Comparator
+			.<Object[], Integer>comparing(pair -> (int) pair[1])
+			.thenComparing(Comparator.<Object[], Double>comparing(
+				pair -> ((ScoredItem) pair[0]).getScore()).reversed()));
+
+		// Top Pick: closest accessible source
+		for (Object[] pair : sourceDistances)
+		{
+			ScoredItem si = (ScoredItem) pair[0];
+			if (!si.isLocked())
+			{
+				int dist = (int) pair[1];
+				ScoredItem topPick = new ScoredItem(
+					si.getSource(), si.getScore(), si.getMissingItemCount(),
+					si.getReasoning() + " (" + dist + " tiles away)", si.isLocked());
+				listContainer.add(createQuickGuidePanel(topPick));
+				break;
+			}
+		}
+
+		// List sources with their items, grouped by source with distance header
+		for (Object[] pair : sourceDistances)
+		{
+			ScoredItem si = (ScoredItem) pair[0];
+			if (hideLocked && si.isLocked())
+			{
+				continue;
+			}
+			int distance = (int) pair[1];
+			CollectionLogSource source = si.getSource();
+
+			// Source header with distance
+			JLabel sourceHeader = new JLabel(source.getName() + "  -  " + distance + " tiles");
+			sourceHeader.setFont(FontManager.getRunescapeBoldFont());
+			sourceHeader.setForeground(new Color(200, 200, 200));
+			sourceHeader.setAlignmentX(LEFT_ALIGNMENT);
+			sourceHeader.setBorder(BorderFactory.createEmptyBorder(6, 4, 2, 4));
+			sourceHeader.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+			listContainer.add(sourceHeader);
+
+			for (CollectionLogItem item : source.getItems())
+			{
+				boolean obtained = collectionState.isItemObtained(item.getItemId());
+				if (hideObtained && obtained)
+				{
+					continue;
+				}
+				ItemRowPanel row = new ItemRowPanel(item, source, obtained,
+					si.getScore(), si.isLocked(), itemManager,
+					() -> showDetail(item, source));
 				listContainer.add(row);
 			}
 		}
