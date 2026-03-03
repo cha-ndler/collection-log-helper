@@ -15,8 +15,15 @@ public class CollectionLogSource
     int killTimeSeconds;
     String locationDescription;
     List<Waypoint> waypoints;
+    RewardType rewardType;
+    double pointsPerHour;
     SourceRequirements requirements;
     List<CollectionLogItem> items;
+
+    public RewardType getRewardType()
+    {
+        return rewardType != null ? rewardType : RewardType.DROP;
+    }
 
     public WorldPoint getWorldPoint()
     {

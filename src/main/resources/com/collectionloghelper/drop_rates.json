@@ -307,7 +307,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "requirements": {
-      "quests": ["REGICIDE"]
+      "quests": [
+        "REGICIDE"
+      ]
     },
     "items": [
       {
@@ -384,7 +386,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 150,
     "requirements": {
-      "quests": ["DRAGON_SLAYER_II"]
+      "quests": [
+        "DRAGON_SLAYER_II"
+      ]
     },
     "items": [
       {
@@ -447,7 +451,12 @@
     "locationDescription": "Taverley Dungeon entrance, Taverley",
     "killTimeSeconds": 60,
     "requirements": {
-      "skills": [{"skill": "SLAYER", "level": 91}]
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 91
+        }
+      ]
     },
     "items": [
       {
@@ -509,11 +518,16 @@
     "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
     "killTimeSeconds": 120,
     "requirements": {
-      "skills": [{"skill": "SLAYER", "level": 95}]
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 95
+        }
+      ]
     },
     "items": [
       {
-        "itemId": 22971,
+        "itemId": 22973,
         "name": "Hydra's eye",
         "dropRate": 0.005525,
         "varbitId": 0,
@@ -521,7 +535,7 @@
         "wikiPage": "Hydra%27s_eye"
       },
       {
-        "itemId": 22973,
+        "itemId": 22971,
         "name": "Hydra's fang",
         "dropRate": 0.005525,
         "varbitId": 0,
@@ -529,7 +543,7 @@
         "wikiPage": "Hydra%27s_fang"
       },
       {
-        "itemId": 22975,
+        "itemId": 22969,
         "name": "Hydra's heart",
         "dropRate": 0.005525,
         "varbitId": 0,
@@ -561,6 +575,22 @@
         "wikiPage": "Hydra%27s_claw"
       },
       {
+        "itemId": 22804,
+        "name": "Dragon knife",
+        "dropRate": 0.009804,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_knife"
+      },
+      {
+        "itemId": 20849,
+        "name": "Dragon thrownaxe",
+        "dropRate": 0.009804,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_thrownaxe"
+      },
+      {
         "itemId": 23077,
         "name": "Alchemical hydra heads",
         "dropRate": 0.003906,
@@ -569,7 +599,7 @@
         "wikiPage": "Alchemical_hydra_heads"
       },
       {
-        "itemId": 22994,
+        "itemId": 23064,
         "name": "Jar of chemicals",
         "dropRate": 0.0005,
         "varbitId": 0,
@@ -720,7 +750,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 180,
     "requirements": {
-      "quests": ["SECRETS_OF_THE_NORTH"]
+      "quests": [
+        "SECRETS_OF_THE_NORTH"
+      ]
     },
     "items": [
       {
@@ -758,11 +790,13 @@
     "worldPlane": 0,
     "killTimeSeconds": 210,
     "requirements": {
-      "quests": ["DESERT_TREASURE_II__THE_FALLEN_EMPIRE"]
+      "quests": [
+        "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ]
     },
     "items": [
       {
-        "itemId": 28321,
+        "itemId": 28281,
         "name": "Magus vestige",
         "dropRate": 0.001389,
         "varbitId": 0,
@@ -770,7 +804,7 @@
         "wikiPage": "Magus_vestige"
       },
       {
-        "itemId": 28327,
+        "itemId": 28276,
         "name": "Chromium ingot",
         "dropRate": 0.004167,
         "varbitId": 0,
@@ -778,7 +812,7 @@
         "wikiPage": "Chromium_ingot"
       },
       {
-        "itemId": 28319,
+        "itemId": 28321,
         "name": "Eye of the duke",
         "dropRate": 0.001389,
         "varbitId": 0,
@@ -818,7 +852,7 @@
         "wikiPage": "Baron"
       }
     ],
-    "locationDescription": "Wizards' Tower, south of Draynor Village"
+    "locationDescription": "Duke Sucellus' lair, beneath the Wizards' Tower"
   },
   {
     "name": "The Leviathan",
@@ -828,11 +862,13 @@
     "worldPlane": 0,
     "killTimeSeconds": 240,
     "requirements": {
-      "quests": ["DESERT_TREASURE_II__THE_FALLEN_EMPIRE"]
+      "quests": [
+        "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ]
     },
     "items": [
       {
-        "itemId": 28323,
+        "itemId": 28283,
         "name": "Venator vestige",
         "dropRate": 0.001302,
         "varbitId": 0,
@@ -840,7 +876,7 @@
         "wikiPage": "Venator_vestige"
       },
       {
-        "itemId": 28327,
+        "itemId": 28276,
         "name": "Chromium ingot",
         "dropRate": 0.003906,
         "varbitId": 0,
@@ -848,7 +884,7 @@
         "wikiPage": "Chromium_ingot"
       },
       {
-        "itemId": 28315,
+        "itemId": 28325,
         "name": "Leviathan's lure",
         "dropRate": 0.001302,
         "varbitId": 0,
@@ -898,11 +934,13 @@
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "requirements": {
-      "quests": ["DESERT_TREASURE_II__THE_FALLEN_EMPIRE"]
+      "quests": [
+        "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ]
     },
     "items": [
       {
-        "itemId": 28325,
+        "itemId": 28279,
         "name": "Bellator vestige",
         "dropRate": 0.001953,
         "varbitId": 0,
@@ -910,7 +948,7 @@
         "wikiPage": "Bellator_vestige"
       },
       {
-        "itemId": 28327,
+        "itemId": 28276,
         "name": "Chromium ingot",
         "dropRate": 0.005859,
         "varbitId": 0,
@@ -918,7 +956,7 @@
         "wikiPage": "Chromium_ingot"
       },
       {
-        "itemId": 28317,
+        "itemId": 28323,
         "name": "Siren's staff",
         "dropRate": 0.001953,
         "varbitId": 0,
@@ -968,11 +1006,13 @@
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "requirements": {
-      "quests": ["DESERT_TREASURE_II__THE_FALLEN_EMPIRE"]
+      "quests": [
+        "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ]
     },
     "items": [
       {
-        "itemId": 28329,
+        "itemId": 28285,
         "name": "Ultor vestige",
         "dropRate": 0.000919,
         "varbitId": 0,
@@ -980,7 +1020,7 @@
         "wikiPage": "Ultor_vestige"
       },
       {
-        "itemId": 28327,
+        "itemId": 28276,
         "name": "Chromium ingot",
         "dropRate": 0.002757,
         "varbitId": 0,
@@ -988,7 +1028,7 @@
         "wikiPage": "Chromium_ingot"
       },
       {
-        "itemId": 28313,
+        "itemId": 28319,
         "name": "Executioner's axe head",
         "dropRate": 0.000919,
         "varbitId": 0,
@@ -1038,7 +1078,12 @@
     "worldPlane": 2,
     "killTimeSeconds": 120,
     "requirements": {
-      "skills": [{"skill": "SLAYER", "level": 75}]
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 75
+        }
+      ]
     },
     "items": [
       {
@@ -1458,7 +1503,12 @@
     "locationDescription": "Kraken Cove, Piscatoris",
     "killTimeSeconds": 30,
     "requirements": {
-      "skills": [{"skill": "SLAYER", "level": 87}]
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 87
+        }
+      ]
     },
     "items": [
       {
@@ -1503,7 +1553,12 @@
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "requirements": {
-      "skills": [{"skill": "SLAYER", "level": 93}]
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 93
+        }
+      ]
     },
     "items": [
       {
@@ -1556,7 +1611,12 @@
     "worldPlane": 0,
     "killTimeSeconds": 150,
     "requirements": {
-      "skills": [{"skill": "SLAYER", "level": 85}]
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 85
+        }
+      ]
     },
     "items": [
       {
@@ -1904,7 +1964,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "requirements": {
-      "quests": ["MONKEY_MADNESS_II"]
+      "quests": [
+        "MONKEY_MADNESS_II"
+      ]
     },
     "items": [
       {
@@ -2019,7 +2081,12 @@
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "requirements": {
-      "skills": [{"skill": "FARMING", "level": 65}]
+      "skills": [
+        {
+          "skill": "FARMING",
+          "level": 65
+        }
+      ]
     },
     "items": [
       {
@@ -2242,7 +2309,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 1500,
     "requirements": {
-      "quests": ["A_TASTE_OF_HOPE"]
+      "quests": [
+        "A_TASTE_OF_HOPE"
+      ]
     },
     "items": [
       {
@@ -2618,7 +2687,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "requirements": {
-      "quests": ["SONG_OF_THE_ELVES"]
+      "quests": [
+        "SONG_OF_THE_ELVES"
+      ]
     },
     "items": [
       {
@@ -2646,6 +2717,14 @@
         "wikiPage": "Enhanced_crystal_weapon_seed"
       },
       {
+        "itemId": 23859,
+        "name": "Gauntlet cape",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gauntlet_cape"
+      },
+      {
         "itemId": 23757,
         "name": "Youngllef",
         "dropRate": 0.00125,
@@ -2664,7 +2743,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 720,
     "requirements": {
-      "quests": ["SONG_OF_THE_ELVES"]
+      "quests": [
+        "SONG_OF_THE_ELVES"
+      ]
     },
     "items": [
       {
@@ -2692,6 +2773,14 @@
         "wikiPage": "Enhanced_crystal_weapon_seed"
       },
       {
+        "itemId": 23859,
+        "name": "Gauntlet cape",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gauntlet_cape"
+      },
+      {
         "itemId": 23757,
         "name": "Youngllef",
         "dropRate": 0.0005,
@@ -2710,7 +2799,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 180,
     "requirements": {
-      "quests": ["PRIEST_IN_PERIL"]
+      "quests": [
+        "PRIEST_IN_PERIL"
+      ]
     },
     "items": [
       {
@@ -3055,7 +3146,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 240,
     "requirements": {
-      "quests": ["SONG_OF_THE_ELVES"]
+      "quests": [
+        "SONG_OF_THE_ELVES"
+      ]
     },
     "items": [
       {
@@ -3374,7 +3467,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "requirements": {
-      "quests": ["WHILE_GUTHIX_SLEEPS"]
+      "quests": [
+        "WHILE_GUTHIX_SLEEPS"
+      ]
     },
     "items": [
       {
@@ -3647,7 +3742,8 @@
         "wikiPage": "Amulet_of_avarice"
       }
     ],
-    "locationDescription": "Revenant Caves, Wilderness"
+    "locationDescription": "Revenant Caves, Wilderness",
+    "rewardType": "MIXED"
   },
   {
     "name": "Slayer",
@@ -3900,8 +3996,15 @@
     "worldPlane": 0,
     "killTimeSeconds": 480,
     "requirements": {
-      "quests": ["SINS_OF_THE_FATHER"],
-      "skills": [{"skill": "AGILITY", "level": 52}]
+      "quests": [
+        "SINS_OF_THE_FATHER"
+      ],
+      "skills": [
+        {
+          "skill": "AGILITY",
+          "level": 52
+        }
+      ]
     },
     "items": [
       {
@@ -4033,7 +4136,8 @@
         "wikiPage": "Giant_squirrel"
       }
     ],
-    "locationDescription": "Hallowed Sepulchre entrance in Darkmeyer"
+    "locationDescription": "Hallowed Sepulchre entrance in Darkmeyer",
+    "rewardType": "MIXED"
   },
   {
     "name": "Guardians of the Rift",
@@ -4043,8 +4147,15 @@
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "requirements": {
-      "quests": ["TEMPLE_OF_THE_EYE"],
-      "skills": [{"skill": "RUNECRAFT", "level": 27}]
+      "quests": [
+        "TEMPLE_OF_THE_EYE"
+      ],
+      "skills": [
+        {
+          "skill": "RUNECRAFT",
+          "level": 27
+        }
+      ]
     },
     "items": [
       {
@@ -4219,7 +4330,8 @@
         "wikiPage": "Pirate%27s_hook"
       }
     ],
-    "locationDescription": "Brimhaven Agility Arena, east of Brimhaven"
+    "locationDescription": "Brimhaven Agility Arena, east of Brimhaven",
+    "rewardType": "SHOP"
   },
   {
     "name": "Giants' Foundry",
@@ -4286,7 +4398,8 @@
         "wikiPage": "Double_ammo_mould"
       }
     ],
-    "locationDescription": "Giants' Foundry beneath the Giant's Plateau"
+    "locationDescription": "Giants' Foundry beneath the Giant's Plateau",
+    "rewardType": "SHOP"
   },
   {
     "name": "Pest Control",
@@ -4377,7 +4490,8 @@
         "wikiPage": "Elite_void_robe"
       }
     ],
-    "locationDescription": "Void Knights' Outpost, south of Port Sarim"
+    "locationDescription": "Void Knights' Outpost, south of Port Sarim",
+    "rewardType": "SHOP"
   },
   {
     "name": "Mage Training Arena",
@@ -4452,7 +4566,8 @@
         "wikiPage": "Bones_to_Peaches"
       }
     ],
-    "locationDescription": "Mage Training Arena, north-east of Al Kharid"
+    "locationDescription": "Mage Training Arena, north-east of Al Kharid",
+    "rewardType": "SHOP"
   },
   {
     "name": "Shades of Mort'ton",
@@ -4462,7 +4577,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 180,
     "requirements": {
-      "quests": ["SHADES_OF_MORTTON"]
+      "quests": [
+        "SHADES_OF_MORTTON"
+      ]
     },
     "items": [
       {
@@ -4549,7 +4666,8 @@
         "wikiPage": "Plank_sack"
       }
     ],
-    "locationDescription": "Mahogany Homes, contracts available in Falador, Varrock, Hosidius, and Ardougne"
+    "locationDescription": "Mahogany Homes, contracts available in Falador, Varrock, Hosidius, and Ardougne",
+    "rewardType": "SHOP"
   },
   {
     "name": "Mastering Mixology",
@@ -4616,7 +4734,8 @@
         "wikiPage": "Chugging_barrel"
       }
     ],
-    "locationDescription": "Mastering Mixology, Aldarin in Varlamore"
+    "locationDescription": "Mastering Mixology, Aldarin in Varlamore",
+    "rewardType": "SHOP"
   },
   {
     "name": "Volcanic Mine",
@@ -4651,7 +4770,8 @@
         "wikiPage": "Volcanic_mine_teleport"
       }
     ],
-    "locationDescription": "Volcanic Mine, north-east Fossil Island volcano"
+    "locationDescription": "Volcanic Mine, north-east Fossil Island volcano",
+    "rewardType": "SHOP"
   },
   {
     "name": "Tithe Farm",
@@ -4718,7 +4838,8 @@
         "wikiPage": "Gricoller%27s_can"
       }
     ],
-    "locationDescription": "Tithe Farm, Hosidius"
+    "locationDescription": "Tithe Farm, Hosidius",
+    "rewardType": "SHOP"
   },
   {
     "name": "Gnome Restaurant",
@@ -4814,7 +4935,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "requirements": {
-      "quests": ["IN_AID_OF_THE_MYREQUE"]
+      "quests": [
+        "IN_AID_OF_THE_MYREQUE"
+      ]
     },
     "items": [
       {
@@ -5016,7 +5139,8 @@
         "wikiPage": "Mimic_scroll_case"
       }
     ],
-    "locationDescription": "Awarded for completing clue scroll milestones across all tiers"
+    "locationDescription": "Awarded for completing clue scroll milestones across all tiers",
+    "rewardType": "SHOP"
   },
   {
     "name": "Castle Wars",
@@ -5323,7 +5447,8 @@
         "wikiPage": "Guthix_halo"
       }
     ],
-    "locationDescription": "Castle Wars arena, south of Observatory"
+    "locationDescription": "Castle Wars arena, south of Observatory",
+    "rewardType": "SHOP"
   },
   {
     "name": "Soul Wars",
@@ -5358,7 +5483,8 @@
         "wikiPage": "Lil%27_creator"
       }
     ],
-    "locationDescription": "Isle of Souls, west of Edgeville"
+    "locationDescription": "Isle of Souls, west of Edgeville",
+    "rewardType": "MIXED"
   },
   {
     "name": "Last Man Standing",
@@ -5481,7 +5607,8 @@
         "wikiPage": "Victor%27s_cape_(1000)"
       }
     ],
-    "locationDescription": "Ferox Enclave, north of Varrock in the Wilderness"
+    "locationDescription": "Ferox Enclave, north of Varrock in the Wilderness",
+    "rewardType": "SHOP"
   },
   {
     "name": "Vale Totems",
@@ -5799,7 +5926,8 @@
         "wikiPage": "Phasmatys_flag"
       }
     ],
-    "locationDescription": "Mos Le'Harmless, east of Braindeath Island"
+    "locationDescription": "Mos Le'Harmless, east of Braindeath Island",
+    "rewardType": "SHOP"
   },
   {
     "name": "Barbarian Assault",
@@ -5890,7 +6018,8 @@
         "wikiPage": "Pet_penance_queen"
       }
     ],
-    "locationDescription": "Barbarian Outpost, north of Baxtorian Falls"
+    "locationDescription": "Barbarian Outpost, north of Baxtorian Falls",
+    "rewardType": "MIXED"
   },
   {
     "name": "Barracuda Trials",
@@ -5973,7 +6102,8 @@
         "wikiPage": "Gwyna%27s_fabric_roll"
       }
     ],
-    "locationDescription": "Sailing trial locations across the seas"
+    "locationDescription": "Sailing trial locations across the seas",
+    "rewardType": "SHOP"
   },
   {
     "name": "Aerial Fishing",
@@ -6056,7 +6186,8 @@
         "wikiPage": "Golden_tench"
       }
     ],
-    "locationDescription": "Lake Molch on Molch Island"
+    "locationDescription": "Lake Molch on Molch Island",
+    "rewardType": "MIXED"
   },
   {
     "name": "Boat Paints",
@@ -6417,7 +6548,8 @@
         "wikiPage": "Chompy_chick"
       }
     ],
-    "locationDescription": "Feldip Hills, south of Rantz"
+    "locationDescription": "Feldip Hills, south of Rantz",
+    "rewardType": "MILESTONE"
   },
   {
     "name": "Forestry",
@@ -6564,7 +6696,8 @@
         "wikiPage": "Funky_shaped_log"
       }
     ],
-    "locationDescription": "Various Woodcutting locations during Forestry events"
+    "locationDescription": "Various Woodcutting locations during Forestry events",
+    "rewardType": "MIXED"
   },
   {
     "name": "Fossil Island Notes",
@@ -6665,7 +6798,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "requirements": {
-      "quests": ["MONKEY_MADNESS_II"]
+      "quests": [
+        "MONKEY_MADNESS_II"
+      ]
     },
     "items": [
       {
@@ -6891,7 +7026,8 @@
         "wikiPage": "Dragon_keel_schematic"
       }
     ],
-    "locationDescription": "Various islands discovered through Sailing"
+    "locationDescription": "Various islands discovered through Sailing",
+    "rewardType": "SHOP"
   },
   {
     "name": "Monkey Backpacks",
@@ -6958,7 +7094,8 @@
         "wikiPage": "Princely_monkey"
       }
     ],
-    "locationDescription": "Ape Atoll Agility Course"
+    "locationDescription": "Ape Atoll Agility Course",
+    "rewardType": "SHOP"
   },
   {
     "name": "My Notes",
@@ -7832,7 +7969,8 @@
         "wikiPage": "Stale_baguette"
       }
     ],
-    "locationDescription": "Random event encounters throughout Gielinor"
+    "locationDescription": "Random event encounters throughout Gielinor",
+    "rewardType": "MIXED"
   },
   {
     "name": "Camdozaal",
@@ -7958,7 +8096,8 @@
         "wikiPage": "Calcified_acorn"
       }
     ],
-    "locationDescription": "Colossal Wyrm Agility Course in Avium Savannah, Varlamore"
+    "locationDescription": "Colossal Wyrm Agility Course in Avium Savannah, Varlamore",
+    "rewardType": "SHOP"
   },
   {
     "name": "Rooftop Agility",
@@ -8017,7 +8156,8 @@
         "wikiPage": "Graceful_boots"
       }
     ],
-    "locationDescription": "Rooftop Agility Courses, starting at Varrock"
+    "locationDescription": "Rooftop Agility Courses, starting at Varrock",
+    "rewardType": "SHOP"
   },
   {
     "name": "TzHaar",
@@ -8461,7 +8601,8 @@
         "wikiPage": "Shayzien_boots_(5)"
       }
     ],
-    "locationDescription": "Shayzien Combat Ring, Great Kourend"
+    "locationDescription": "Shayzien Combat Ring, Great Kourend",
+    "rewardType": "SHOP"
   },
   {
     "name": "Motherlode Mine",
@@ -8520,7 +8661,8 @@
         "wikiPage": "Gem_bag"
       }
     ],
-    "locationDescription": "Motherlode Mine beneath Falador"
+    "locationDescription": "Motherlode Mine beneath Falador",
+    "rewardType": "SHOP"
   },
   {
     "name": "Shooting Stars",
@@ -8547,7 +8689,8 @@
         "wikiPage": "Star_fragment"
       }
     ],
-    "locationDescription": "Crashed shooting stars found throughout Gielinor"
+    "locationDescription": "Crashed shooting stars found throughout Gielinor",
+    "rewardType": "SHOP"
   },
   {
     "name": "Creature Creation",
@@ -8557,7 +8700,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 20,
     "requirements": {
-      "quests": ["TOWER_OF_LIFE"]
+      "quests": [
+        "TOWER_OF_LIFE"
+      ]
     },
     "items": [
       {
@@ -9084,7 +9229,8 @@
         "isPet": false,
         "wikiPage": "Fire_cape"
       }
-    ]
+    ],
+    "rewardType": "MIXED"
   },
   {
     "name": "The Inferno",
@@ -9111,7 +9257,8 @@
         "isPet": false,
         "wikiPage": "Infernal_cape"
       }
-    ]
+    ],
+    "rewardType": "MIXED"
   },
   {
     "name": "Deranged Archaeologist",
@@ -10179,6 +10326,14 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rain_bow"
+      },
+      {
+        "itemId": 20164,
+        "name": "Large spade",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Large_spade"
       }
     ],
     "locationDescription": "Lumbridge"
@@ -11102,6 +11257,14 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Strength_amulet_(t)"
+      },
+      {
+        "itemId": 20249,
+        "name": "Clueless scroll",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Clueless_scroll"
       }
     ],
     "locationDescription": "Falador"
@@ -12660,6 +12823,14 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Fremennik_kilt"
+      },
+      {
+        "itemId": 19941,
+        "name": "Heavy casket",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Heavy_casket"
       }
     ],
     "locationDescription": "Prifddinas"
@@ -13047,6 +13218,22 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mummy%27s_feet"
+      },
+      {
+        "itemId": 22675,
+        "name": "Scroll sack",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Scroll_sack"
+      },
+      {
+        "itemId": 19730,
+        "name": "Bloodhound",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Bloodhound"
       }
     ],
     "locationDescription": "Grand Exchange"

@@ -1,6 +1,6 @@
 # Collection Log Helper — Item Coverage Tracker
 
-> **Coverage: 1,619 / ~1,698 items | 123 / 123 sources**
+> **Coverage: 1,628 / ~1,698 items | 123 / 123 sources**
 
 This document tracks every OSRS Collection Log category and our progress toward full coverage. Community contributors can use this to find unclaimed work.
 
@@ -39,7 +39,7 @@ This document tracks every OSRS Collection Log category and our progress toward 
 | Zulrah | 8 | 8 | — | Done | — |
 | Vorkath | 6 | 6 | — | Done | — |
 | Cerberus | 6 | 6 | — | Done | — |
-| Alchemical Hydra | 9 | 9 | — | Done | — |
+| Alchemical Hydra | 11 | 11 | — | Done | — |
 | Corporeal Beast | 7 | 7 | — | Done | — |
 | Kalphite Queen | 6 | 6 | — | Done | — |
 | Phantom Muspah | 3 | 3 | — | Done | — |
@@ -67,8 +67,8 @@ This document tracks every OSRS Collection Log category and our progress toward 
 | Callisto | 5 | 5 | — | Done | — |
 | Skotizo | 3 | 3 | — | Done | — |
 | Hespori | 2 | 2 | — | Done | — |
-| Corrupted Gauntlet | 4 | 4 | — | Done | — |
-| The Gauntlet | 4 | 4 | — | Done | — |
+| Corrupted Gauntlet | 5 | 5 | — | Done | — |
+| The Gauntlet | 5 | 5 | — | Done | — |
 | Barrows | 24 | 24 | — | Done | — |
 | Zalcano | 4 | 4 | — | Done | — |
 | Sol Heredit | 7 | 7 | — | Done | — |
@@ -99,17 +99,17 @@ This document tracks every OSRS Collection Log category and our progress toward 
 
 ## Clues
 
-11 sources in the collection log. **7 done, 4 partial.**
+11 sources in the collection log. **11 done.**
 
 | Category | Wiki Items | Our Items | Priority | Status | Issue |
 |----------|-----------|-----------|----------|--------|-------|
 | Beginner Treasure Trails | 15 | 15 | — | Done | — |
 | Scroll Cases | 13 | 13 | — | Done | — |
-| Easy Treasure Trails | 131 | 130 | P1 | Partial | — |
-| Medium Treasure Trails | 115 | 114 | P1 | Partial | — |
+| Easy Treasure Trails | 131 | 131 | — | Done | — |
+| Medium Treasure Trails | 115 | 115 | — | Done | — |
 | Hard Treasure Trails | 134 | 134 | — | Done | — |
-| Elite Treasure Trails | 59 | 58 | P1 | Partial | — |
-| Master Treasure Trails | 49 | 47 | P1 | Partial | — |
+| Elite Treasure Trails | 59 | 59 | — | Done | — |
+| Master Treasure Trails | 49 | 49 | — | Done | — |
 | Hard Treasure Trail Rewards (Rare) | 24 | 24 | — | Done | — |
 | Elite Treasure Trail Rewards (Rare) | 39 | 39 | — | Done | — |
 | Master Treasure Trail Rewards (Rare) | 47 | 47 | — | Done | — |
@@ -197,8 +197,7 @@ This document tracks every OSRS Collection Log category and our progress toward 
 
 | Priority | Total Categories | Done | Partial | Unclaimed |
 |----------|-----------------|------|---------|-----------|
-| P1 | 4 | 0 | 4 | 0 |
-| Done (no priority) | 119 | 119 | 0 | 0 |
-| **Total** | **123** | **119** | **4** | **0** |
+| Done (no priority) | 123 | 123 | 0 | 0 |
+| **Total** | **123** | **123** | **0** | **0** |
 
-*Remaining work: 4 clue tiers each missing 1-2 items (Easy, Medium, Elite, Master). Item ID audit needed for several boss sources ([#91](../../issues/91)).*
+*All 123 sources are complete with verified item IDs.*
