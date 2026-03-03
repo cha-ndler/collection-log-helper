@@ -115,6 +115,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private GuidanceMinimapOverlay guidanceMinimapOverlay;
 
+	/** Minimum tile movement before proximity view is refreshed. */
+	private static final int PROXIMITY_REFRESH_TILES = 10;
+
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
 	private int lastObtainedCount = -1;
@@ -131,6 +134,13 @@ public class CollectionLogHelperPlugin extends Plugin
 	private boolean syncReminderSent;
 	private int loginTickDelay;
 
+	/**
+	 * Player location cached on the client thread each game tick.
+	 * Read by the EDT in buildProximityView() — volatile ensures visibility.
+	 */
+	private volatile WorldPoint cachedPlayerLocation;
+	private WorldPoint lastProximityLocation;
+
 	@Override
 	protected void startUp() throws Exception
 	{
@@ -140,7 +150,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			config, database, collectionState, calculator, itemManager,
 			requirementsChecker,
 			this::activateGuidance, this::deactivateGuidance, this::syncCollectionLog,
-			() -> client.getLocalPlayer() != null ? client.getLocalPlayer().getWorldLocation() : null);
+			() -> cachedPlayerLocation);
 		panel.setMode(config.defaultMode());
 
 		collectionLogIcon = itemManager.getImage(ItemID.COLLECTION_LOG);
@@ -191,6 +201,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		hasCompletedFullSync = false;
 		syncReminderSent = false;
 		loginTickDelay = 0;
+		cachedPlayerLocation = null;
+		lastProximityLocation = null;
 		guidanceOverlay.setShowSyncReminder(false);
 		collectionState.clearState();
 
@@ -229,6 +241,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			hasCompletedFullSync = false;
 			syncReminderSent = false;
 			loginTickDelay = 0;
+			cachedPlayerLocation = null;
+			lastProximityLocation = null;
 			guidanceOverlay.setShowSyncReminder(false);
 		}
 	}
@@ -350,6 +364,25 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
+		// Cache player location for the EDT's proximity view (client thread only)
+		if (client.getLocalPlayer() != null)
+		{
+			cachedPlayerLocation = client.getLocalPlayer().getWorldLocation();
+
+			// Refresh proximity view when player moves significantly
+			if (panel != null
+				&& panel.getCurrentMode() == CollectionLogHelperPanel.Mode.PROXIMITY)
+			{
+				WorldPoint current = cachedPlayerLocation;
+				if (lastProximityLocation == null
+					|| current.distanceTo(lastProximityLocation) >= PROXIMITY_REFRESH_TILES)
+				{
+					lastProximityLocation = current;
+					panel.rebuild();
+				}
+			}
+		}
+
 		// Auto-sync: trigger search mode when collection log first opens
 		if (autoSyncPending && collectionLogOpen)
 		{

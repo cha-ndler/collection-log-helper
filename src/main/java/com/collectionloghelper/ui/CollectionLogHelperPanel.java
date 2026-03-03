@@ -257,6 +257,11 @@ public class CollectionLogHelperPanel extends PluginPanel
 		updateControlVisibility();
 	}
 
+	public Mode getCurrentMode()
+	{
+		return currentMode;
+	}
+
 	public void setMode(Mode mode)
 	{
 		currentMode = mode;
@@ -472,6 +477,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private void buildProximityView()
 	{
+		// cachedPlayerLocation is written on the client thread and read here on the EDT.
+		// volatile guarantees the EDT always sees the latest value.
 		WorldPoint playerLocation = playerLocationSupplier.get();
 		if (playerLocation == null)
 		{
@@ -487,57 +494,92 @@ public class CollectionLogHelperPanel extends PluginPanel
 		boolean hideObtained = config.hideObtainedItems();
 		boolean hideLocked = config.hideLockedContent();
 
-		// Score all sources and build a list with distance info
-		List<ScoredItem> scored = calculator.rankByEfficiency();
-
-		// Build a list of (ScoredItem, distance) pairs, filtered to sources with coordinates
-		List<Object[]> sourceDistances = new ArrayList<>();
-		for (ScoredItem si : scored)
+		// Iterate all sources directly — do not use rankByEfficiency() which
+		// filters out completed sources and may skip sources with no drop scores.
+		List<SourceDistance> sourceDistances = new ArrayList<>();
+		for (CollectionLogSource source : database.getAllSources())
 		{
-			CollectionLogSource source = si.getSource();
+			boolean locked = !requirementsChecker.isAccessible(source.getName());
+			if (hideLocked && locked)
+			{
+				continue;
+			}
+
 			WorldPoint sourcePoint = source.getWorldPoint();
 			if (sourcePoint == null || (sourcePoint.getX() == 0 && sourcePoint.getY() == 0))
 			{
 				continue;
 			}
+
+			int missingCount = 0;
+			for (CollectionLogItem item : source.getItems())
+			{
+				if (!collectionState.isItemObtained(item.getItemId()))
+				{
+					missingCount++;
+				}
+			}
+			if (missingCount == 0)
+			{
+				continue;
+			}
+
 			int distance = playerLocation.distanceTo(sourcePoint);
-			sourceDistances.add(new Object[]{si, distance});
+			sourceDistances.add(new SourceDistance(source, distance, missingCount, locked));
 		}
 
-		// Sort by distance ascending, then by efficiency score descending for ties
-		sourceDistances.sort(Comparator
-			.<Object[], Integer>comparing(pair -> (int) pair[1])
-			.thenComparing(Comparator.<Object[], Double>comparing(
-				pair -> ((ScoredItem) pair[0]).getScore()).reversed()));
-
-		// Top Pick: closest accessible source
-		for (Object[] pair : sourceDistances)
+		if (sourceDistances.isEmpty())
 		{
-			ScoredItem si = (ScoredItem) pair[0];
-			if (!si.isLocked())
+			JLabel emptyLabel = new JLabel(
+				"<html>All nearby items obtained.<br>Open your Collection Log to sync.</html>");
+			emptyLabel.setFont(FontManager.getRunescapeSmallFont());
+			emptyLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+			emptyLabel.setAlignmentX(LEFT_ALIGNMENT);
+			emptyLabel.setBorder(BorderFactory.createEmptyBorder(8, 4, 8, 4));
+			listContainer.add(emptyLabel);
+			return;
+		}
+
+		// Sort by distance ascending, tiebreak by missing count descending
+		sourceDistances.sort(
+			Comparator.comparingInt((SourceDistance sd) -> sd.distance)
+				.thenComparing(Comparator.comparingInt((SourceDistance sd) -> sd.missingCount).reversed()));
+
+		// Top Pick: closest accessible (unlocked) source
+		for (SourceDistance sd : sourceDistances)
+		{
+			if (!sd.locked)
 			{
-				int dist = (int) pair[1];
-				ScoredItem topPick = new ScoredItem(
-					si.getSource(), si.getScore(), si.getMissingItemCount(),
-					si.getReasoning() + " (" + dist + " tiles away)", si.isLocked());
+				String reasoning = sd.missingCount + " missing items, " + sd.distance + " tiles away";
+				ScoredItem topPick = new ScoredItem(sd.source, sd.missingCount, sd.missingCount, reasoning, false);
 				listContainer.add(createQuickGuidePanel(topPick));
 				break;
 			}
 		}
 
 		// List sources with their items, grouped by source with distance header
-		for (Object[] pair : sourceDistances)
+		for (SourceDistance sd : sourceDistances)
 		{
-			ScoredItem si = (ScoredItem) pair[0];
-			if (hideLocked && si.isLocked())
+			CollectionLogSource source = sd.source;
+
+			// Check whether any items are visible before adding the header,
+			// so we don't render an orphaned header with nothing below it.
+			boolean hasVisibleItems = false;
+			for (CollectionLogItem item : source.getItems())
+			{
+				boolean obtained = collectionState.isItemObtained(item.getItemId());
+				if (!hideObtained || !obtained)
+				{
+					hasVisibleItems = true;
+					break;
+				}
+			}
+			if (!hasVisibleItems)
 			{
 				continue;
 			}
-			int distance = (int) pair[1];
-			CollectionLogSource source = si.getSource();
 
-			// Source header with distance
-			JLabel sourceHeader = new JLabel(source.getName() + "  -  " + distance + " tiles");
+			JLabel sourceHeader = new JLabel(source.getName() + "  \u2014  " + sd.distance + " tiles");
 			sourceHeader.setFont(FontManager.getRunescapeBoldFont());
 			sourceHeader.setForeground(new Color(200, 200, 200));
 			sourceHeader.setAlignmentX(LEFT_ALIGNMENT);
@@ -553,10 +595,27 @@ public class CollectionLogHelperPanel extends PluginPanel
 					continue;
 				}
 				ItemRowPanel row = new ItemRowPanel(item, source, obtained,
-					si.getScore(), si.isLocked(), itemManager,
+					sd.missingCount, sd.locked, itemManager,
 					() -> showDetail(item, source));
 				listContainer.add(row);
 			}
+		}
+	}
+
+	/** Carries a source's computed distance from the player for the proximity view. */
+	private static final class SourceDistance
+	{
+		final CollectionLogSource source;
+		final int distance;
+		final int missingCount;
+		final boolean locked;
+
+		SourceDistance(CollectionLogSource source, int distance, int missingCount, boolean locked)
+		{
+			this.source = source;
+			this.distance = distance;
+			this.missingCount = missingCount;
+			this.locked = locked;
 		}
 	}
 
