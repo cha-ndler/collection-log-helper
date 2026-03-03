@@ -8,7 +8,11 @@ A RuneLite plugin that guides players through efficient collection log completio
 
 ### Efficiency Scoring
 
-Ranks collection log sources by how efficiently you can obtain missing items. The score factors in combined drop rates and average kill times to suggest the most time-effective grinds.
+Ranks collection log sources by how efficiently you can obtain missing items. The score factors in combined drop rates and average kill times to suggest the most time-effective grinds. Reward shop and guaranteed items are scored separately from probabilistic drops to prevent inflated rankings.
+
+### Account-Aware Requirements
+
+Sources are checked against your account's quest completions and skill levels. Locked content (e.g., Corrupted Gauntlet without Song of the Elves, Alchemical Hydra without 95 Slayer) can be hidden or shown with lock indicators. The Top Pick always recommends accessible content.
 
 ### Four Display Modes
 
@@ -45,6 +49,7 @@ Automatically detects new collection log entries via chat messages and varbit ch
 |--------|---------|-------------|
 | Default Mode | Efficient | Which mode opens on startup |
 | Hide Obtained Items | On | Hide items already obtained from the list |
+| Hide Locked Content | On | Hide sources requiring quests or skills you haven't met |
 | Show Sync Reminder | On | Remind you to open the Collection Log after login |
 | **Guidance** | | |
 | Show Overlays | On | Toggle all guidance overlays |
