@@ -32,7 +32,7 @@
         "wikiPage": "Bandos_boots"
       },
       {
-        "itemId": 11818,
+        "itemId": 11812,
         "name": "Bandos hilt",
         "dropRate": 0.001969,
         "varbitId": 0,
@@ -40,7 +40,7 @@
         "wikiPage": "Bandos_hilt"
       },
       {
-        "itemId": 11819,
+        "itemId": 11818,
         "name": "Godsword shard 1",
         "dropRate": 0.001312,
         "varbitId": 0,
@@ -56,7 +56,7 @@
         "wikiPage": "Godsword_shard_2"
       },
       {
-        "itemId": 11821,
+        "itemId": 11822,
         "name": "Godsword shard 3",
         "dropRate": 0.001312,
         "varbitId": 0,
@@ -115,7 +115,7 @@
         "wikiPage": "Saradomin_hilt"
       },
       {
-        "itemId": 11819,
+        "itemId": 11818,
         "name": "Godsword shard 1",
         "dropRate": 0.001312,
         "varbitId": 0,
@@ -131,7 +131,7 @@
         "wikiPage": "Godsword_shard_2"
       },
       {
-        "itemId": 11821,
+        "itemId": 11822,
         "name": "Godsword shard 3",
         "dropRate": 0.001312,
         "varbitId": 0,
@@ -190,7 +190,7 @@
         "wikiPage": "Zamorak_hilt"
       },
       {
-        "itemId": 11819,
+        "itemId": 11818,
         "name": "Godsword shard 1",
         "dropRate": 0.001312,
         "varbitId": 0,
@@ -206,7 +206,7 @@
         "wikiPage": "Godsword_shard_2"
       },
       {
-        "itemId": 11821,
+        "itemId": 11822,
         "name": "Godsword shard 3",
         "dropRate": 0.001312,
         "varbitId": 0,
@@ -265,7 +265,7 @@
         "wikiPage": "Armadyl_hilt"
       },
       {
-        "itemId": 11819,
+        "itemId": 11818,
         "name": "Godsword shard 1",
         "dropRate": 0.001312,
         "varbitId": 0,
@@ -281,7 +281,7 @@
         "wikiPage": "Godsword_shard_2"
       },
       {
-        "itemId": 11821,
+        "itemId": 11822,
         "name": "Godsword shard 3",
         "dropRate": 0.001312,
         "varbitId": 0,
@@ -549,7 +549,7 @@
         "wikiPage": "Hydra%27s_claw"
       },
       {
-        "itemId": 22988,
+        "itemId": 23077,
         "name": "Alchemical hydra heads",
         "dropRate": 0.003906,
         "varbitId": 0,
@@ -1052,7 +1052,7 @@
         "wikiPage": "Black_tourmaline_core"
       },
       {
-        "itemId": 21748,
+        "itemId": 21745,
         "name": "Jar of stone",
         "dropRate": 0.0002,
         "varbitId": 0,
@@ -1143,7 +1143,7 @@
         "wikiPage": "Volatile_orb"
       },
       {
-        "itemId": 24491,
+        "itemId": 24495,
         "name": "Jar of dreams",
         "dropRate": 0.000526,
         "varbitId": 0,
@@ -1944,7 +1944,7 @@
     "killTimeSeconds": 60,
     "items": [
       {
-        "itemId": 21273,
+        "itemId": 21275,
         "name": "Dark claw",
         "dropRate": 0.04,
         "varbitId": 0,
@@ -2106,6 +2106,86 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Olmlet"
+      },
+      {
+        "itemId": 21047,
+        "name": "Torn prayer scroll",
+        "dropRate": 0.0606,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Torn_prayer_scroll"
+      },
+      {
+        "itemId": 21027,
+        "name": "Dark relic",
+        "dropRate": 0.0606,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_relic"
+      },
+      {
+        "itemId": 6573,
+        "name": "Onyx",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Onyx"
+      },
+      {
+        "itemId": 22386,
+        "name": "Metamorphic dust",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Metamorphic_dust"
+      },
+      {
+        "itemId": 24670,
+        "name": "Twisted ancestral colour kit",
+        "dropRate": 0.01333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Twisted_ancestral_colour_kit"
+      },
+      {
+        "itemId": 22388,
+        "name": "Xeric's guard",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Xeric%27s_guard"
+      },
+      {
+        "itemId": 22390,
+        "name": "Xeric's warrior",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Xeric%27s_warrior"
+      },
+      {
+        "itemId": 22392,
+        "name": "Xeric's sentinel",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Xeric%27s_sentinel"
+      },
+      {
+        "itemId": 22394,
+        "name": "Xeric's general",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Xeric%27s_general"
+      },
+      {
+        "itemId": 22396,
+        "name": "Xeric's champion",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Xeric%27s_champion"
       }
     ]
   },
@@ -2180,6 +2260,78 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Lil%27_zik"
+      },
+      {
+        "itemId": 22446,
+        "name": "Vial of blood",
+        "dropRate": 0.333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Vial_of_blood"
+      },
+      {
+        "itemId": 22494,
+        "name": "Sinhaza shroud tier 1",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sinhaza_shroud_tier_1"
+      },
+      {
+        "itemId": 22496,
+        "name": "Sinhaza shroud tier 2",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sinhaza_shroud_tier_2"
+      },
+      {
+        "itemId": 22498,
+        "name": "Sinhaza shroud tier 3",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sinhaza_shroud_tier_3"
+      },
+      {
+        "itemId": 22500,
+        "name": "Sinhaza shroud tier 4",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sinhaza_shroud_tier_4"
+      },
+      {
+        "itemId": 22502,
+        "name": "Sinhaza shroud tier 5",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sinhaza_shroud_tier_5"
+      },
+      {
+        "itemId": 25746,
+        "name": "Sanguine dust",
+        "dropRate": 0.00364,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sanguine_dust"
+      },
+      {
+        "itemId": 25742,
+        "name": "Holy ornament kit",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Holy_ornament_kit"
+      },
+      {
+        "itemId": 25744,
+        "name": "Sanguine ornament kit",
+        "dropRate": 0.00667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sanguine_ornament_kit"
       }
     ],
     "locationDescription": "Ver Sinhaza, Morytania"
@@ -2255,6 +2407,158 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Tumeken%27s_guardian"
+      },
+      {
+        "itemId": 27279,
+        "name": "Thread of elidinis",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Thread_of_elidinis"
+      },
+      {
+        "itemId": 27283,
+        "name": "Breach of the scarab",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Breach_of_the_scarab"
+      },
+      {
+        "itemId": 27285,
+        "name": "Eye of the corruptor",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eye_of_the_corruptor"
+      },
+      {
+        "itemId": 27289,
+        "name": "Jewel of the sun",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jewel_of_the_sun"
+      },
+      {
+        "itemId": 30893,
+        "name": "Jewel of amascut",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jewel_of_amascut"
+      },
+      {
+        "itemId": 27293,
+        "name": "Cache of runes",
+        "dropRate": 0.111,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Cache_of_runes"
+      },
+      {
+        "itemId": 27255,
+        "name": "Menaphite ornament kit",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Menaphite_ornament_kit"
+      },
+      {
+        "itemId": 27248,
+        "name": "Cursed phalanx",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Cursed_phalanx"
+      },
+      {
+        "itemId": 27372,
+        "name": "Masori crafting kit",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Masori_crafting_kit"
+      },
+      {
+        "itemId": 27377,
+        "name": "Remnant of Akkha",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Remnant_of_akkha"
+      },
+      {
+        "itemId": 27378,
+        "name": "Remnant of Ba-Ba",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Remnant_of_ba-ba"
+      },
+      {
+        "itemId": 27379,
+        "name": "Remnant of Kephri",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Remnant_of_kephri"
+      },
+      {
+        "itemId": 27380,
+        "name": "Remnant of Zebak",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Remnant_of_zebak"
+      },
+      {
+        "itemId": 27381,
+        "name": "Ancient remnant",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_remnant"
+      },
+      {
+        "itemId": 27257,
+        "name": "Icthlarin's shroud (tier 1)",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Icthlarin%27s_shroud_(tier_1)"
+      },
+      {
+        "itemId": 27259,
+        "name": "Icthlarin's shroud (tier 2)",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Icthlarin%27s_shroud_(tier_2)"
+      },
+      {
+        "itemId": 27261,
+        "name": "Icthlarin's shroud (tier 3)",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Icthlarin%27s_shroud_(tier_3)"
+      },
+      {
+        "itemId": 27263,
+        "name": "Icthlarin's shroud (tier 4)",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Icthlarin%27s_shroud_(tier_4)"
+      },
+      {
+        "itemId": 27265,
+        "name": "Icthlarin's shroud (tier 5)",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Icthlarin%27s_shroud_(tier_5)"
       }
     ]
   },
@@ -2613,7 +2917,7 @@
     "killTimeSeconds": 300,
     "items": [
       {
-        "itemId": 20693,
+        "itemId": 20708,
         "name": "Pyromancer hood",
         "dropRate": 0.0025,
         "varbitId": 0,
@@ -2975,6 +3279,30 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dual_macuahuitl"
+      },
+      {
+        "itemId": 28988,
+        "name": "Blue moon spear",
+        "dropRate": 0.004464,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_moon_spear"
+      },
+      {
+        "itemId": 29000,
+        "name": "Eclipse atlatl",
+        "dropRate": 0.004464,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eclipse_atlatl"
+      },
+      {
+        "itemId": 28991,
+        "name": "Atlatl dart",
+        "dropRate": 0.665102,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Atlatl_dart"
       }
     ]
   },
@@ -3226,7 +3554,7 @@
       {
         "itemId": 22547,
         "name": "Craw's bow (u)",
-        "dropRate": 0.0000375,
+        "dropRate": 3.75e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Craw%27s_bow_(u)"
@@ -3234,7 +3562,7 @@
       {
         "itemId": 22552,
         "name": "Thammaron's sceptre (u)",
-        "dropRate": 0.0000375,
+        "dropRate": 3.75e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Thammaron%27s_sceptre_(u)"
@@ -3242,7 +3570,7 @@
       {
         "itemId": 22542,
         "name": "Viggora's chainmace (u)",
-        "dropRate": 0.0000375,
+        "dropRate": 3.75e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Viggora%27s_chainmace_(u)"
@@ -3250,7 +3578,7 @@
       {
         "itemId": 22557,
         "name": "Amulet of avarice",
-        "dropRate": 0.000075,
+        "dropRate": 7.5e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Amulet_of_avarice"
@@ -3438,7 +3766,7 @@
       {
         "itemId": 3140,
         "name": "Dragon chainbody",
-        "dropRate": 0.000031,
+        "dropRate": 3.1e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_chainbody"
@@ -5645,7 +5973,7 @@
       {
         "itemId": 22840,
         "name": "Golden tench",
-        "dropRate": 0.00005,
+        "dropRate": 5e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Golden_tench"
@@ -8207,5 +8535,5753 @@
       }
     ],
     "locationDescription": "Tower of Life, south of Ardougne"
+  },
+  {
+    "name": "The Hueycoatl",
+    "category": "BOSSES",
+    "worldX": 1509,
+    "worldY": 3290,
+    "worldPlane": 0,
+    "killTimeSeconds": 500,
+    "locationDescription": "The Darkfrost, Hailstorm Mountains in Varlamore",
+    "items": [
+      {
+        "itemId": 30070,
+        "name": "Dragon hunter wand",
+        "dropRate": 0.009524,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_hunter_wand"
+      },
+      {
+        "itemId": 30066,
+        "name": "Tome of earth (empty)",
+        "dropRate": 0.011111,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tome_of_earth_(empty)"
+      },
+      {
+        "itemId": 30068,
+        "name": "Soiled page",
+        "dropRate": 0.073529,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Soiled_page"
+      },
+      {
+        "itemId": 30085,
+        "name": "Hueycoatl hide",
+        "dropRate": 0.034921,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hueycoatl_hide"
+      },
+      {
+        "itemId": 30088,
+        "name": "Huasca seed",
+        "dropRate": 0.029412,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Huasca_seed"
+      },
+      {
+        "itemId": 30152,
+        "name": "Huberte",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Huberte"
+      }
+    ]
+  },
+  {
+    "name": "Yama",
+    "category": "BOSSES",
+    "worldX": 1503,
+    "worldY": 10091,
+    "worldPlane": 0,
+    "killTimeSeconds": 360,
+    "locationDescription": "Yama's Domain, Chasm of Fire beneath Shayzien",
+    "items": [
+      {
+        "itemId": 30775,
+        "name": "Chasm teleport scroll",
+        "dropRate": 0.042057,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chasm_teleport_scroll"
+      },
+      {
+        "itemId": 30765,
+        "name": "Oathplate shards",
+        "dropRate": 0.058581,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Oathplate_shards"
+      },
+      {
+        "itemId": 30750,
+        "name": "Oathplate helm",
+        "dropRate": 0.001667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Oathplate_helm"
+      },
+      {
+        "itemId": 30753,
+        "name": "Oathplate chest",
+        "dropRate": 0.001667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Oathplate_chest"
+      },
+      {
+        "itemId": 30756,
+        "name": "Oathplate legs",
+        "dropRate": 0.001667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Oathplate_legs"
+      },
+      {
+        "itemId": 30759,
+        "name": "Soulflame horn",
+        "dropRate": 0.003333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Soulflame_horn"
+      },
+      {
+        "itemId": 30806,
+        "name": "Rite of vile transference",
+        "dropRate": 0.00551,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rite_of_vile_transference"
+      },
+      {
+        "itemId": 30763,
+        "name": "Forgotten lockbox",
+        "dropRate": 0.030303,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Forgotten_lockbox"
+      },
+      {
+        "itemId": 30803,
+        "name": "Dossier",
+        "dropRate": 0.082645,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dossier"
+      },
+      {
+        "itemId": 30795,
+        "name": "Barrel of demonic tallow (full)",
+        "dropRate": 0.052571,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Barrel_of_demonic_tallow_(full)"
+      },
+      {
+        "itemId": 30888,
+        "name": "Yami",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Yami"
+      }
+    ]
+  },
+  {
+    "name": "Doom of Mokhaiotl",
+    "category": "BOSSES",
+    "worldX": 1311,
+    "worldY": 9520,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "locationDescription": "Ruins of Mokhaiotl, beneath Tlati Rainforest in Varlamore",
+    "items": [
+      {
+        "itemId": 31088,
+        "name": "Avernic treads",
+        "dropRate": 0.001852,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Avernic_treads"
+      },
+      {
+        "itemId": 31115,
+        "name": "Eye of ayak (uncharged)",
+        "dropRate": 0.001852,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eye_of_ayak_(uncharged)"
+      },
+      {
+        "itemId": 31109,
+        "name": "Mokhaiotl cloth",
+        "dropRate": 0.001852,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mokhaiotl_cloth"
+      },
+      {
+        "itemId": 31099,
+        "name": "Mokhaiotl waystone",
+        "dropRate": 0.067308,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mokhaiotl_waystone"
+      },
+      {
+        "itemId": 31111,
+        "name": "Demon tear",
+        "dropRate": 0.067308,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Demon_tear"
+      },
+      {
+        "itemId": 31130,
+        "name": "Dom",
+        "dropRate": 0.004,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Dom"
+      }
+    ]
+  },
+  {
+    "name": "Royal Titans",
+    "category": "BOSSES",
+    "worldX": 3008,
+    "worldY": 3150,
+    "worldPlane": 0,
+    "killTimeSeconds": 180,
+    "locationDescription": "Asgarnian Ice Dungeon, south of Port Sarim",
+    "items": [
+      {
+        "itemId": 30626,
+        "name": "Deadeye prayer scroll",
+        "dropRate": 0.013333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Deadeye_prayer_scroll"
+      },
+      {
+        "itemId": 30627,
+        "name": "Mystic vigour prayer scroll",
+        "dropRate": 0.013333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_vigour_prayer_scroll"
+      },
+      {
+        "itemId": 30637,
+        "name": "Giantsoul amulet (uncharged)",
+        "dropRate": 0.0625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Giantsoul_amulet_(uncharged)"
+      },
+      {
+        "itemId": 30628,
+        "name": "Ice element staff crown",
+        "dropRate": 0.013333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ice_element_staff_crown"
+      },
+      {
+        "itemId": 30631,
+        "name": "Fire element staff crown",
+        "dropRate": 0.013333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fire_element_staff_crown"
+      },
+      {
+        "itemId": 30640,
+        "name": "Desiccated page",
+        "dropRate": 0.072727,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Desiccated_page"
+      },
+      {
+        "itemId": 30622,
+        "name": "Bran",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Bran"
+      }
+    ]
+  },
+  {
+    "name": "Amoxliatl",
+    "category": "BOSSES",
+    "worldX": 1362,
+    "worldY": 4511,
+    "worldPlane": 0,
+    "killTimeSeconds": 90,
+    "locationDescription": "Ruins of Tapoyauik, Varlamore",
+    "items": [
+      {
+        "itemId": 29889,
+        "name": "Glacial temotli",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Glacial_temotli"
+      },
+      {
+        "itemId": 29892,
+        "name": "Pendant of ates (inert)",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pendant_of_ates_(inert)"
+      },
+      {
+        "itemId": 29895,
+        "name": "Frozen tear",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Frozen_tear"
+      },
+      {
+        "itemId": 30154,
+        "name": "Moxi",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Moxi"
+      }
+    ]
+  },
+  {
+    "name": "Brutus",
+    "category": "BOSSES",
+    "worldX": 3263,
+    "worldY": 3297,
+    "worldPlane": 0,
+    "killTimeSeconds": 45,
+    "locationDescription": "Lumbridge cow field",
+    "items": [
+      {
+        "itemId": 33124,
+        "name": "Beef",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Beef"
+      },
+      {
+        "itemId": 33101,
+        "name": "Mooleta",
+        "dropRate": 0.033333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mooleta"
+      },
+      {
+        "itemId": 33091,
+        "name": "Bottomless milk bucket (empty)",
+        "dropRate": 0.026667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bottomless_milk_bucket"
+      },
+      {
+        "itemId": 33093,
+        "name": "Cow slippers",
+        "dropRate": 0.006667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Cow_slippers"
+      }
+    ]
+  },
+  {
+    "name": "Shellbane Gryphon",
+    "category": "BOSSES",
+    "worldX": 3176,
+    "worldY": 2477,
+    "worldPlane": 0,
+    "killTimeSeconds": 70,
+    "locationDescription": "Shellbane Gryphon Cave, The Great Conch",
+    "items": [
+      {
+        "itemId": 31285,
+        "name": "Gull",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Gull_(pet)"
+      },
+      {
+        "itemId": 32921,
+        "name": "Jar of feathers",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_feathers"
+      },
+      {
+        "itemId": 31245,
+        "name": "Belle's folly (tarnished)",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Belle%27s_folly_(tarnished)"
+      },
+      {
+        "itemId": 31235,
+        "name": "Gryphon feather",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gryphon_feather"
+      }
+    ]
+  },
+  {
+    "name": "Scurrius",
+    "category": "BOSSES",
+    "worldX": 3299,
+    "worldY": 9867,
+    "worldPlane": 0,
+    "killTimeSeconds": 60,
+    "locationDescription": "Varrock Sewers",
+    "items": [
+      {
+        "itemId": 28801,
+        "name": "Scurry",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Scurry"
+      },
+      {
+        "itemId": 28798,
+        "name": "Scurrius' spine",
+        "dropRate": 0.030303,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Scurrius%27_spine"
+      }
+    ]
+  },
+  {
+    "name": "The Fight Caves",
+    "category": "BOSSES",
+    "worldX": 2439,
+    "worldY": 5172,
+    "worldPlane": 0,
+    "killTimeSeconds": 2400,
+    "locationDescription": "Mor Ul Rek, Karamja Volcano",
+    "items": [
+      {
+        "itemId": 13225,
+        "name": "Tzrek-jad",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Tzrek-jad"
+      },
+      {
+        "itemId": 6570,
+        "name": "Fire cape",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fire_cape"
+      }
+    ]
+  },
+  {
+    "name": "The Inferno",
+    "category": "BOSSES",
+    "worldX": 2496,
+    "worldY": 5122,
+    "worldPlane": 0,
+    "killTimeSeconds": 5400,
+    "locationDescription": "Mor Ul Rek, Karamja Volcano",
+    "items": [
+      {
+        "itemId": 21291,
+        "name": "Jal-nib-rek",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Jal-nib-rek"
+      },
+      {
+        "itemId": 21295,
+        "name": "Infernal cape",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Infernal_cape"
+      }
+    ]
+  },
+  {
+    "name": "Deranged Archaeologist",
+    "category": "BOSSES",
+    "worldX": 3683,
+    "worldY": 3706,
+    "worldPlane": 0,
+    "killTimeSeconds": 30,
+    "locationDescription": "Tar Swamp, Fossil Island",
+    "items": [
+      {
+        "itemId": 30895,
+        "name": "Steel ring",
+        "dropRate": 0.022901,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_ring"
+      }
+    ]
+  },
+  {
+    "name": "Easy Treasure Trails",
+    "category": "CLUES",
+    "worldX": 3222,
+    "worldY": 3218,
+    "worldPlane": 0,
+    "killTimeSeconds": 180,
+    "items": [
+      {
+        "itemId": 12221,
+        "name": "Bronze full helm (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_full_helm_(t)"
+      },
+      {
+        "itemId": 12215,
+        "name": "Bronze platebody (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_platebody_(t)"
+      },
+      {
+        "itemId": 12217,
+        "name": "Bronze platelegs (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_platelegs_(t)"
+      },
+      {
+        "itemId": 12219,
+        "name": "Bronze plateskirt (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_plateskirt_(t)"
+      },
+      {
+        "itemId": 12223,
+        "name": "Bronze kiteshield (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_kiteshield_(t)"
+      },
+      {
+        "itemId": 12231,
+        "name": "Iron full helm (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_full_helm_(t)"
+      },
+      {
+        "itemId": 12225,
+        "name": "Iron platebody (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_platebody_(t)"
+      },
+      {
+        "itemId": 12227,
+        "name": "Iron platelegs (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_platelegs_(t)"
+      },
+      {
+        "itemId": 12229,
+        "name": "Iron plateskirt (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_plateskirt_(t)"
+      },
+      {
+        "itemId": 12233,
+        "name": "Iron kiteshield (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_kiteshield_(t)"
+      },
+      {
+        "itemId": 20193,
+        "name": "Steel full helm (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_full_helm_(t)"
+      },
+      {
+        "itemId": 20184,
+        "name": "Steel platebody (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_platebody_(t)"
+      },
+      {
+        "itemId": 20187,
+        "name": "Steel platelegs (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_platelegs_(t)"
+      },
+      {
+        "itemId": 20190,
+        "name": "Steel plateskirt (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_plateskirt_(t)"
+      },
+      {
+        "itemId": 20196,
+        "name": "Steel kiteshield (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_kiteshield_(t)"
+      },
+      {
+        "itemId": 2587,
+        "name": "Black full helm (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_full_helm_(t)"
+      },
+      {
+        "itemId": 2583,
+        "name": "Black platebody (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_platebody_(t)"
+      },
+      {
+        "itemId": 2585,
+        "name": "Black platelegs (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_platelegs_(t)"
+      },
+      {
+        "itemId": 3472,
+        "name": "Black plateskirt (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_plateskirt_(t)"
+      },
+      {
+        "itemId": 2589,
+        "name": "Black kiteshield (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_kiteshield_(t)"
+      },
+      {
+        "itemId": 7364,
+        "name": "Studded body (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Studded_body_(t)"
+      },
+      {
+        "itemId": 7368,
+        "name": "Studded chaps (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Studded_chaps_(t)"
+      },
+      {
+        "itemId": 12211,
+        "name": "Bronze full helm (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_full_helm_(g)"
+      },
+      {
+        "itemId": 12205,
+        "name": "Bronze platebody (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_platebody_(g)"
+      },
+      {
+        "itemId": 12207,
+        "name": "Bronze platelegs (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_platelegs_(g)"
+      },
+      {
+        "itemId": 12209,
+        "name": "Bronze plateskirt (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_plateskirt_(g)"
+      },
+      {
+        "itemId": 12213,
+        "name": "Bronze kiteshield (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_kiteshield_(g)"
+      },
+      {
+        "itemId": 12241,
+        "name": "Iron full helm (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_full_helm_(g)"
+      },
+      {
+        "itemId": 12235,
+        "name": "Iron platebody (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_platebody_(g)"
+      },
+      {
+        "itemId": 12237,
+        "name": "Iron platelegs (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_platelegs_(g)"
+      },
+      {
+        "itemId": 12239,
+        "name": "Iron plateskirt (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_plateskirt_(g)"
+      },
+      {
+        "itemId": 12243,
+        "name": "Iron kiteshield (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_kiteshield_(g)"
+      },
+      {
+        "itemId": 20178,
+        "name": "Steel full helm (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_full_helm_(g)"
+      },
+      {
+        "itemId": 20169,
+        "name": "Steel platebody (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_platebody_(g)"
+      },
+      {
+        "itemId": 20172,
+        "name": "Steel platelegs (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_platelegs_(g)"
+      },
+      {
+        "itemId": 20175,
+        "name": "Steel plateskirt (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_plateskirt_(g)"
+      },
+      {
+        "itemId": 20181,
+        "name": "Steel kiteshield (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_kiteshield_(g)"
+      },
+      {
+        "itemId": 2595,
+        "name": "Black full helm (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_full_helm_(g)"
+      },
+      {
+        "itemId": 2591,
+        "name": "Black platebody (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_platebody_(g)"
+      },
+      {
+        "itemId": 2593,
+        "name": "Black platelegs (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_platelegs_(g)"
+      },
+      {
+        "itemId": 3473,
+        "name": "Black plateskirt (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_plateskirt_(g)"
+      },
+      {
+        "itemId": 2597,
+        "name": "Black kiteshield (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_kiteshield_(g)"
+      },
+      {
+        "itemId": 7362,
+        "name": "Studded body (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Studded_body_(g)"
+      },
+      {
+        "itemId": 7366,
+        "name": "Studded chaps (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Studded_chaps_(g)"
+      },
+      {
+        "itemId": 23381,
+        "name": "Leather body (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Leather_body_(g)"
+      },
+      {
+        "itemId": 23384,
+        "name": "Leather chaps (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Leather_chaps_(g)"
+      },
+      {
+        "itemId": 7332,
+        "name": "Black shield (h1)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_shield_(h1)"
+      },
+      {
+        "itemId": 7338,
+        "name": "Black shield (h2)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_shield_(h2)"
+      },
+      {
+        "itemId": 7344,
+        "name": "Black shield (h3)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_shield_(h3)"
+      },
+      {
+        "itemId": 7350,
+        "name": "Black shield (h4)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_shield_(h4)"
+      },
+      {
+        "itemId": 7356,
+        "name": "Black shield (h5)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_shield_(h5)"
+      },
+      {
+        "itemId": 10306,
+        "name": "Black helm (h1)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_helm_(h1)"
+      },
+      {
+        "itemId": 10308,
+        "name": "Black helm (h2)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_helm_(h2)"
+      },
+      {
+        "itemId": 10310,
+        "name": "Black helm (h3)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_helm_(h3)"
+      },
+      {
+        "itemId": 10312,
+        "name": "Black helm (h4)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_helm_(h4)"
+      },
+      {
+        "itemId": 10314,
+        "name": "Black helm (h5)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_helm_(h5)"
+      },
+      {
+        "itemId": 23366,
+        "name": "Black platebody (h1)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_platebody_(h1)"
+      },
+      {
+        "itemId": 23369,
+        "name": "Black platebody (h2)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_platebody_(h2)"
+      },
+      {
+        "itemId": 23372,
+        "name": "Black platebody (h3)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_platebody_(h3)"
+      },
+      {
+        "itemId": 23375,
+        "name": "Black platebody (h4)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_platebody_(h4)"
+      },
+      {
+        "itemId": 23378,
+        "name": "Black platebody (h5)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_platebody_(h5)"
+      },
+      {
+        "itemId": 7394,
+        "name": "Blue wizard hat (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_wizard_hat_(g)"
+      },
+      {
+        "itemId": 7390,
+        "name": "Blue wizard robe (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_wizard_robe_(g)"
+      },
+      {
+        "itemId": 7386,
+        "name": "Blue skirt (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_skirt_(g)"
+      },
+      {
+        "itemId": 7396,
+        "name": "Blue wizard hat (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_wizard_hat_(t)"
+      },
+      {
+        "itemId": 7392,
+        "name": "Blue wizard robe (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_wizard_robe_(t)"
+      },
+      {
+        "itemId": 7388,
+        "name": "Blue skirt (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_skirt_(t)"
+      },
+      {
+        "itemId": 12453,
+        "name": "Black wizard hat (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_wizard_hat_(g)"
+      },
+      {
+        "itemId": 12449,
+        "name": "Black wizard robe (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_wizard_robe_(g)"
+      },
+      {
+        "itemId": 12445,
+        "name": "Black skirt (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_skirt_(g)"
+      },
+      {
+        "itemId": 12455,
+        "name": "Black wizard hat (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_wizard_hat_(t)"
+      },
+      {
+        "itemId": 12451,
+        "name": "Black wizard robe (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_wizard_robe_(t)"
+      },
+      {
+        "itemId": 12447,
+        "name": "Black skirt (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_skirt_(t)"
+      },
+      {
+        "itemId": 10404,
+        "name": "Red elegant shirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_elegant_shirt"
+      },
+      {
+        "itemId": 10424,
+        "name": "Red elegant blouse",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_elegant_blouse"
+      },
+      {
+        "itemId": 10406,
+        "name": "Red elegant legs",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_elegant_legs"
+      },
+      {
+        "itemId": 10426,
+        "name": "Red elegant skirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_elegant_skirt"
+      },
+      {
+        "itemId": 10412,
+        "name": "Green elegant shirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_elegant_shirt"
+      },
+      {
+        "itemId": 10432,
+        "name": "Green elegant blouse",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_elegant_blouse"
+      },
+      {
+        "itemId": 10414,
+        "name": "Green elegant legs",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_elegant_legs"
+      },
+      {
+        "itemId": 10434,
+        "name": "Green elegant skirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_elegant_skirt"
+      },
+      {
+        "itemId": 10408,
+        "name": "Blue elegant shirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_elegant_shirt"
+      },
+      {
+        "itemId": 10428,
+        "name": "Blue elegant blouse",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_elegant_blouse"
+      },
+      {
+        "itemId": 10410,
+        "name": "Blue elegant legs",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_elegant_legs"
+      },
+      {
+        "itemId": 10430,
+        "name": "Blue elegant skirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_elegant_skirt"
+      },
+      {
+        "itemId": 10458,
+        "name": "Saradomin robe top",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_robe_top"
+      },
+      {
+        "itemId": 10464,
+        "name": "Saradomin robe legs",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_robe_legs"
+      },
+      {
+        "itemId": 10462,
+        "name": "Guthix robe top",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_robe_top"
+      },
+      {
+        "itemId": 10466,
+        "name": "Guthix robe legs",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_robe_legs"
+      },
+      {
+        "itemId": 10460,
+        "name": "Zamorak robe top",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_robe_top"
+      },
+      {
+        "itemId": 10468,
+        "name": "Zamorak robe legs",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_robe_legs"
+      },
+      {
+        "itemId": 12193,
+        "name": "Ancient robe top",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_robe_top"
+      },
+      {
+        "itemId": 12195,
+        "name": "Ancient robe legs",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_robe_legs"
+      },
+      {
+        "itemId": 12253,
+        "name": "Armadyl robe top",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_robe_top"
+      },
+      {
+        "itemId": 12255,
+        "name": "Armadyl robe legs",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_robe_legs"
+      },
+      {
+        "itemId": 12265,
+        "name": "Bandos robe top",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_robe_top"
+      },
+      {
+        "itemId": 12267,
+        "name": "Bandos robe legs",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_robe_legs"
+      },
+      {
+        "itemId": 10280,
+        "name": "Willow comp bow",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Willow_comp_bow"
+      },
+      {
+        "itemId": 10366,
+        "name": "Amulet of magic (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Amulet_of_magic_(t)"
+      },
+      {
+        "itemId": 20211,
+        "name": "Team cape zero",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Team_cape_zero"
+      },
+      {
+        "itemId": 20217,
+        "name": "Team cape i",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Team_cape_i"
+      },
+      {
+        "itemId": 20214,
+        "name": "Team cape x",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Team_cape_x"
+      },
+      {
+        "itemId": 23351,
+        "name": "Cape of skulls",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Cape_of_skulls"
+      },
+      {
+        "itemId": 20205,
+        "name": "Golden chef's hat",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Golden_chef%27s_hat"
+      },
+      {
+        "itemId": 20208,
+        "name": "Golden apron",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Golden_apron"
+      },
+      {
+        "itemId": 20166,
+        "name": "Wooden shield (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Wooden_shield_(g)"
+      },
+      {
+        "itemId": 20199,
+        "name": "Monk's robe top (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Monk%27s_robe_top_(g)"
+      },
+      {
+        "itemId": 20202,
+        "name": "Monk's robe (g)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Monk%27s_robe_(g)"
+      },
+      {
+        "itemId": 10316,
+        "name": "Bob's red shirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bob%27s_red_shirt"
+      },
+      {
+        "itemId": 10320,
+        "name": "Bob's green shirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bob%27s_green_shirt"
+      },
+      {
+        "itemId": 10318,
+        "name": "Bob's blue shirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bob%27s_blue_shirt"
+      },
+      {
+        "itemId": 10322,
+        "name": "Bob's black shirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bob%27s_black_shirt"
+      },
+      {
+        "itemId": 10324,
+        "name": "Bob's purple shirt",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bob%27s_purple_shirt"
+      },
+      {
+        "itemId": 2631,
+        "name": "Highwayman mask",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Highwayman_mask"
+      },
+      {
+        "itemId": 2633,
+        "name": "Blue beret",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_beret"
+      },
+      {
+        "itemId": 2635,
+        "name": "Black beret",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_beret"
+      },
+      {
+        "itemId": 12247,
+        "name": "Red beret",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_beret"
+      },
+      {
+        "itemId": 2637,
+        "name": "White beret",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "White_beret"
+      },
+      {
+        "itemId": 10392,
+        "name": "A powdered wig",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "A_powdered_wig"
+      },
+      {
+        "itemId": 12245,
+        "name": "Beanie",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Beanie"
+      },
+      {
+        "itemId": 12249,
+        "name": "Imp mask",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Imp_mask"
+      },
+      {
+        "itemId": 12251,
+        "name": "Goblin mask",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Goblin_mask"
+      },
+      {
+        "itemId": 10398,
+        "name": "Sleeping cap",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sleeping_cap"
+      },
+      {
+        "itemId": 10394,
+        "name": "Flared trousers",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Flared_trousers"
+      },
+      {
+        "itemId": 10396,
+        "name": "Pantaloons",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pantaloons"
+      },
+      {
+        "itemId": 12375,
+        "name": "Black cane",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_cane"
+      },
+      {
+        "itemId": 23363,
+        "name": "Staff of bob the cat",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Staff_of_bob_the_cat"
+      },
+      {
+        "itemId": 23354,
+        "name": "Amulet of power (t)",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Amulet_of_power_(t)"
+      },
+      {
+        "itemId": 23360,
+        "name": "Ham joint",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ham_joint"
+      },
+      {
+        "itemId": 23357,
+        "name": "Rain bow",
+        "dropRate": 0.007692,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rain_bow"
+      }
+    ],
+    "locationDescription": "Lumbridge"
+  },
+  {
+    "name": "Medium Treasure Trails",
+    "category": "CLUES",
+    "worldX": 2964,
+    "worldY": 3378,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 2577,
+        "name": "Ranger boots",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ranger_boots"
+      },
+      {
+        "itemId": 2579,
+        "name": "Wizard boots",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Wizard_boots"
+      },
+      {
+        "itemId": 12598,
+        "name": "Holy sandals",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Holy_sandals"
+      },
+      {
+        "itemId": 23389,
+        "name": "Spiked manacles",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Spiked_manacles"
+      },
+      {
+        "itemId": 23413,
+        "name": "Climbing boots (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Climbing_boots_(g)"
+      },
+      {
+        "itemId": 2605,
+        "name": "Adamant full helm (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_full_helm_(t)"
+      },
+      {
+        "itemId": 2599,
+        "name": "Adamant platebody (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_platebody_(t)"
+      },
+      {
+        "itemId": 2601,
+        "name": "Adamant platelegs (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_platelegs_(t)"
+      },
+      {
+        "itemId": 3474,
+        "name": "Adamant plateskirt (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_plateskirt_(t)"
+      },
+      {
+        "itemId": 2603,
+        "name": "Adamant kiteshield (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_kiteshield_(t)"
+      },
+      {
+        "itemId": 2613,
+        "name": "Adamant full helm (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_full_helm_(g)"
+      },
+      {
+        "itemId": 2607,
+        "name": "Adamant platebody (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_platebody_(g)"
+      },
+      {
+        "itemId": 2609,
+        "name": "Adamant platelegs (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_platelegs_(g)"
+      },
+      {
+        "itemId": 3475,
+        "name": "Adamant plateskirt (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_plateskirt_(g)"
+      },
+      {
+        "itemId": 2611,
+        "name": "Adamant kiteshield (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_kiteshield_(g)"
+      },
+      {
+        "itemId": 7334,
+        "name": "Adamant shield (h1)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_shield_(h1)"
+      },
+      {
+        "itemId": 7340,
+        "name": "Adamant shield (h2)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_shield_(h2)"
+      },
+      {
+        "itemId": 7346,
+        "name": "Adamant shield (h3)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_shield_(h3)"
+      },
+      {
+        "itemId": 7352,
+        "name": "Adamant shield (h4)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_shield_(h4)"
+      },
+      {
+        "itemId": 7358,
+        "name": "Adamant shield (h5)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_shield_(h5)"
+      },
+      {
+        "itemId": 10296,
+        "name": "Adamant helm (h1)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_helm_(h1)"
+      },
+      {
+        "itemId": 10298,
+        "name": "Adamant helm (h2)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_helm_(h2)"
+      },
+      {
+        "itemId": 10300,
+        "name": "Adamant helm (h3)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_helm_(h3)"
+      },
+      {
+        "itemId": 10302,
+        "name": "Adamant helm (h4)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_helm_(h4)"
+      },
+      {
+        "itemId": 10304,
+        "name": "Adamant helm (h5)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_helm_(h5)"
+      },
+      {
+        "itemId": 23392,
+        "name": "Adamant platebody (h1)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_platebody_(h1)"
+      },
+      {
+        "itemId": 23395,
+        "name": "Adamant platebody (h2)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_platebody_(h2)"
+      },
+      {
+        "itemId": 23398,
+        "name": "Adamant platebody (h3)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_platebody_(h3)"
+      },
+      {
+        "itemId": 23401,
+        "name": "Adamant platebody (h4)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_platebody_(h4)"
+      },
+      {
+        "itemId": 23404,
+        "name": "Adamant platebody (h5)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_platebody_(h5)"
+      },
+      {
+        "itemId": 12293,
+        "name": "Mithril full helm (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_full_helm_(t)"
+      },
+      {
+        "itemId": 12287,
+        "name": "Mithril platebody (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_platebody_(t)"
+      },
+      {
+        "itemId": 12289,
+        "name": "Mithril platelegs (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_platelegs_(t)"
+      },
+      {
+        "itemId": 12295,
+        "name": "Mithril plateskirt (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_plateskirt_(t)"
+      },
+      {
+        "itemId": 12291,
+        "name": "Mithril kiteshield (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_kiteshield_(t)"
+      },
+      {
+        "itemId": 12283,
+        "name": "Mithril full helm (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_full_helm_(g)"
+      },
+      {
+        "itemId": 12277,
+        "name": "Mithril platebody (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_platebody_(g)"
+      },
+      {
+        "itemId": 12279,
+        "name": "Mithril platelegs (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_platelegs_(g)"
+      },
+      {
+        "itemId": 12285,
+        "name": "Mithril plateskirt (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_plateskirt_(g)"
+      },
+      {
+        "itemId": 12281,
+        "name": "Mithril kiteshield (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_kiteshield_(g)"
+      },
+      {
+        "itemId": 7370,
+        "name": "Green d'hide body (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_d%27hide_body_(g)"
+      },
+      {
+        "itemId": 7372,
+        "name": "Green d'hide body (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_d%27hide_body_(t)"
+      },
+      {
+        "itemId": 7378,
+        "name": "Green d'hide chaps (g)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_d%27hide_chaps_(g)"
+      },
+      {
+        "itemId": 7380,
+        "name": "Green d'hide chaps (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_d%27hide_chaps_(t)"
+      },
+      {
+        "itemId": 10452,
+        "name": "Saradomin mitre",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_mitre"
+      },
+      {
+        "itemId": 10446,
+        "name": "Saradomin cloak",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_cloak"
+      },
+      {
+        "itemId": 10454,
+        "name": "Guthix mitre",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_mitre"
+      },
+      {
+        "itemId": 10448,
+        "name": "Guthix cloak",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_cloak"
+      },
+      {
+        "itemId": 10456,
+        "name": "Zamorak mitre",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_mitre"
+      },
+      {
+        "itemId": 10450,
+        "name": "Zamorak cloak",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_cloak"
+      },
+      {
+        "itemId": 12203,
+        "name": "Ancient mitre",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_mitre"
+      },
+      {
+        "itemId": 12197,
+        "name": "Ancient cloak",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_cloak"
+      },
+      {
+        "itemId": 12201,
+        "name": "Ancient stole",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_stole"
+      },
+      {
+        "itemId": 12199,
+        "name": "Ancient crozier",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_crozier"
+      },
+      {
+        "itemId": 12259,
+        "name": "Armadyl mitre",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_mitre"
+      },
+      {
+        "itemId": 12261,
+        "name": "Armadyl cloak",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_cloak"
+      },
+      {
+        "itemId": 12257,
+        "name": "Armadyl stole",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_stole"
+      },
+      {
+        "itemId": 12263,
+        "name": "Armadyl crozier",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_crozier"
+      },
+      {
+        "itemId": 12271,
+        "name": "Bandos mitre",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_mitre"
+      },
+      {
+        "itemId": 12273,
+        "name": "Bandos cloak",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_cloak"
+      },
+      {
+        "itemId": 12269,
+        "name": "Bandos stole",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_stole"
+      },
+      {
+        "itemId": 12275,
+        "name": "Bandos crozier",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_crozier"
+      },
+      {
+        "itemId": 7319,
+        "name": "Red boater",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_boater"
+      },
+      {
+        "itemId": 7323,
+        "name": "Green boater",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_boater"
+      },
+      {
+        "itemId": 7321,
+        "name": "Orange boater",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Orange_boater"
+      },
+      {
+        "itemId": 7327,
+        "name": "Black boater",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_boater"
+      },
+      {
+        "itemId": 7325,
+        "name": "Blue boater",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_boater"
+      },
+      {
+        "itemId": 12309,
+        "name": "Pink boater",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pink_boater"
+      },
+      {
+        "itemId": 12311,
+        "name": "Purple boater",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purple_boater"
+      },
+      {
+        "itemId": 12313,
+        "name": "White boater",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "White_boater"
+      },
+      {
+        "itemId": 2645,
+        "name": "Red headband",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_headband"
+      },
+      {
+        "itemId": 2647,
+        "name": "Black headband",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_headband"
+      },
+      {
+        "itemId": 2649,
+        "name": "Brown headband",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Brown_headband"
+      },
+      {
+        "itemId": 12299,
+        "name": "White headband",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "White_headband"
+      },
+      {
+        "itemId": 12301,
+        "name": "Blue headband",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_headband"
+      },
+      {
+        "itemId": 12303,
+        "name": "Gold headband",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gold_headband"
+      },
+      {
+        "itemId": 12305,
+        "name": "Pink headband",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pink_headband"
+      },
+      {
+        "itemId": 12307,
+        "name": "Green headband",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_headband"
+      },
+      {
+        "itemId": 12319,
+        "name": "Crier hat",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Crier_hat"
+      },
+      {
+        "itemId": 20240,
+        "name": "Crier coat",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Crier_coat"
+      },
+      {
+        "itemId": 20243,
+        "name": "Crier bell",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Crier_bell"
+      },
+      {
+        "itemId": 12377,
+        "name": "Adamant cane",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_cane"
+      },
+      {
+        "itemId": 20251,
+        "name": "Arceuus banner",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Arceuus_banner"
+      },
+      {
+        "itemId": 20260,
+        "name": "Piscarilius banner",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Piscarilius_banner"
+      },
+      {
+        "itemId": 20254,
+        "name": "Hosidius banner",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hosidius_banner"
+      },
+      {
+        "itemId": 20263,
+        "name": "Shayzien banner",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_banner"
+      },
+      {
+        "itemId": 20257,
+        "name": "Lovakengj banner",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lovakengj_banner"
+      },
+      {
+        "itemId": 20272,
+        "name": "Cabbage round shield",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Cabbage_round_shield"
+      },
+      {
+        "itemId": 20266,
+        "name": "Black unicorn mask",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_unicorn_mask"
+      },
+      {
+        "itemId": 20269,
+        "name": "White unicorn mask",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "White_unicorn_mask"
+      },
+      {
+        "itemId": 12361,
+        "name": "Cat mask",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Cat_mask"
+      },
+      {
+        "itemId": 12428,
+        "name": "Penguin mask",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Penguin_mask"
+      },
+      {
+        "itemId": 12359,
+        "name": "Leprechaun hat",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Leprechaun_hat"
+      },
+      {
+        "itemId": 20246,
+        "name": "Black leprechaun hat",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_leprechaun_hat"
+      },
+      {
+        "itemId": 23407,
+        "name": "Wolf mask",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Wolf_mask"
+      },
+      {
+        "itemId": 23410,
+        "name": "Wolf cloak",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Wolf_cloak"
+      },
+      {
+        "itemId": 10416,
+        "name": "Purple elegant shirt",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purple_elegant_shirt"
+      },
+      {
+        "itemId": 10436,
+        "name": "Purple elegant blouse",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purple_elegant_blouse"
+      },
+      {
+        "itemId": 10418,
+        "name": "Purple elegant legs",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purple_elegant_legs"
+      },
+      {
+        "itemId": 10438,
+        "name": "Purple elegant skirt",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purple_elegant_skirt"
+      },
+      {
+        "itemId": 10400,
+        "name": "Black elegant shirt",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_elegant_shirt"
+      },
+      {
+        "itemId": 10402,
+        "name": "Black elegant legs",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_elegant_legs"
+      },
+      {
+        "itemId": 10420,
+        "name": "White elegant blouse",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "White_elegant_blouse"
+      },
+      {
+        "itemId": 10422,
+        "name": "White elegant skirt",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "White_elegant_skirt"
+      },
+      {
+        "itemId": 12315,
+        "name": "Pink elegant shirt",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pink_elegant_shirt"
+      },
+      {
+        "itemId": 12339,
+        "name": "Pink elegant blouse",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pink_elegant_blouse"
+      },
+      {
+        "itemId": 12317,
+        "name": "Pink elegant legs",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pink_elegant_legs"
+      },
+      {
+        "itemId": 12341,
+        "name": "Pink elegant skirt",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pink_elegant_skirt"
+      },
+      {
+        "itemId": 12347,
+        "name": "Gold elegant shirt",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gold_elegant_shirt"
+      },
+      {
+        "itemId": 12343,
+        "name": "Gold elegant blouse",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gold_elegant_blouse"
+      },
+      {
+        "itemId": 12349,
+        "name": "Gold elegant legs",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gold_elegant_legs"
+      },
+      {
+        "itemId": 12345,
+        "name": "Gold elegant skirt",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gold_elegant_skirt"
+      },
+      {
+        "itemId": 10282,
+        "name": "Yew comp bow",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Yew_comp_bow"
+      },
+      {
+        "itemId": 10364,
+        "name": "Strength amulet (t)",
+        "dropRate": 0.008772,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Strength_amulet_(t)"
+      }
+    ],
+    "locationDescription": "Falador"
+  },
+  {
+    "name": "Hard Treasure Trails",
+    "category": "CLUES",
+    "worldX": 3213,
+    "worldY": 3428,
+    "worldPlane": 0,
+    "killTimeSeconds": 420,
+    "items": [
+      {
+        "itemId": 2657,
+        "name": "Zamorak full helm",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_full_helm"
+      },
+      {
+        "itemId": 2653,
+        "name": "Zamorak platebody",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_platebody"
+      },
+      {
+        "itemId": 2655,
+        "name": "Zamorak platelegs",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_platelegs"
+      },
+      {
+        "itemId": 3478,
+        "name": "Zamorak plateskirt",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_plateskirt"
+      },
+      {
+        "itemId": 2659,
+        "name": "Zamorak kiteshield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_kiteshield"
+      },
+      {
+        "itemId": 2673,
+        "name": "Guthix full helm",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_full_helm"
+      },
+      {
+        "itemId": 2669,
+        "name": "Guthix platebody",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_platebody"
+      },
+      {
+        "itemId": 2671,
+        "name": "Guthix platelegs",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_platelegs"
+      },
+      {
+        "itemId": 3480,
+        "name": "Guthix plateskirt",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_plateskirt"
+      },
+      {
+        "itemId": 2675,
+        "name": "Guthix kiteshield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_kiteshield"
+      },
+      {
+        "itemId": 2665,
+        "name": "Saradomin full helm",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_full_helm"
+      },
+      {
+        "itemId": 2661,
+        "name": "Saradomin platebody",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_platebody"
+      },
+      {
+        "itemId": 2663,
+        "name": "Saradomin platelegs",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_platelegs"
+      },
+      {
+        "itemId": 3479,
+        "name": "Saradomin plateskirt",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_plateskirt"
+      },
+      {
+        "itemId": 2667,
+        "name": "Saradomin kiteshield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_kiteshield"
+      },
+      {
+        "itemId": 12466,
+        "name": "Ancient full helm",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_full_helm"
+      },
+      {
+        "itemId": 12460,
+        "name": "Ancient platebody",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_platebody"
+      },
+      {
+        "itemId": 12462,
+        "name": "Ancient platelegs",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_platelegs"
+      },
+      {
+        "itemId": 12464,
+        "name": "Ancient plateskirt",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_plateskirt"
+      },
+      {
+        "itemId": 12468,
+        "name": "Ancient kiteshield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_kiteshield"
+      },
+      {
+        "itemId": 12476,
+        "name": "Armadyl full helm",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_full_helm"
+      },
+      {
+        "itemId": 12470,
+        "name": "Armadyl platebody",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_platebody"
+      },
+      {
+        "itemId": 12472,
+        "name": "Armadyl platelegs",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_platelegs"
+      },
+      {
+        "itemId": 12474,
+        "name": "Armadyl plateskirt",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_plateskirt"
+      },
+      {
+        "itemId": 12478,
+        "name": "Armadyl kiteshield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_kiteshield"
+      },
+      {
+        "itemId": 12486,
+        "name": "Bandos full helm",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_full_helm"
+      },
+      {
+        "itemId": 12480,
+        "name": "Bandos platebody",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_platebody"
+      },
+      {
+        "itemId": 12482,
+        "name": "Bandos platelegs",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_platelegs"
+      },
+      {
+        "itemId": 12484,
+        "name": "Bandos plateskirt",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_plateskirt"
+      },
+      {
+        "itemId": 12488,
+        "name": "Bandos kiteshield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_kiteshield"
+      },
+      {
+        "itemId": 10286,
+        "name": "Rune helm (h1)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_helm_(h1)"
+      },
+      {
+        "itemId": 10288,
+        "name": "Rune helm (h2)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_helm_(h2)"
+      },
+      {
+        "itemId": 10290,
+        "name": "Rune helm (h3)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_helm_(h3)"
+      },
+      {
+        "itemId": 10292,
+        "name": "Rune helm (h4)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_helm_(h4)"
+      },
+      {
+        "itemId": 10294,
+        "name": "Rune helm (h5)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_helm_(h5)"
+      },
+      {
+        "itemId": 7336,
+        "name": "Rune shield (h1)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_shield_(h1)"
+      },
+      {
+        "itemId": 7342,
+        "name": "Rune shield (h2)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_shield_(h2)"
+      },
+      {
+        "itemId": 7348,
+        "name": "Rune shield (h3)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_shield_(h3)"
+      },
+      {
+        "itemId": 7354,
+        "name": "Rune shield (h4)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_shield_(h4)"
+      },
+      {
+        "itemId": 7360,
+        "name": "Rune shield (h5)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_shield_(h5)"
+      },
+      {
+        "itemId": 23209,
+        "name": "Rune platebody (h1)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_platebody_(h1)"
+      },
+      {
+        "itemId": 23212,
+        "name": "Rune platebody (h2)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_platebody_(h2)"
+      },
+      {
+        "itemId": 23215,
+        "name": "Rune platebody (h3)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_platebody_(h3)"
+      },
+      {
+        "itemId": 23218,
+        "name": "Rune platebody (h4)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_platebody_(h4)"
+      },
+      {
+        "itemId": 23221,
+        "name": "Rune platebody (h5)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_platebody_(h5)"
+      },
+      {
+        "itemId": 2627,
+        "name": "Rune full helm (t)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_full_helm_(t)"
+      },
+      {
+        "itemId": 2623,
+        "name": "Rune platebody (t)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_platebody_(t)"
+      },
+      {
+        "itemId": 2625,
+        "name": "Rune platelegs (t)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_platelegs_(t)"
+      },
+      {
+        "itemId": 3477,
+        "name": "Rune plateskirt (t)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_plateskirt_(t)"
+      },
+      {
+        "itemId": 2629,
+        "name": "Rune kiteshield (t)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_kiteshield_(t)"
+      },
+      {
+        "itemId": 2619,
+        "name": "Rune full helm (g)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_full_helm_(g)"
+      },
+      {
+        "itemId": 2615,
+        "name": "Rune platebody (g)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_platebody_(g)"
+      },
+      {
+        "itemId": 2617,
+        "name": "Rune platelegs (g)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_platelegs_(g)"
+      },
+      {
+        "itemId": 3476,
+        "name": "Rune plateskirt (g)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_plateskirt_(g)"
+      },
+      {
+        "itemId": 2621,
+        "name": "Rune kiteshield (g)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_kiteshield_(g)"
+      },
+      {
+        "itemId": 10390,
+        "name": "Saradomin coif",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_coif"
+      },
+      {
+        "itemId": 10386,
+        "name": "Saradomin d'hide body",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_d%27hide_body"
+      },
+      {
+        "itemId": 10388,
+        "name": "Saradomin chaps",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_chaps"
+      },
+      {
+        "itemId": 10384,
+        "name": "Saradomin bracers",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_bracers"
+      },
+      {
+        "itemId": 19933,
+        "name": "Saradomin d'hide boots",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_d%27hide_boots"
+      },
+      {
+        "itemId": 23191,
+        "name": "Saradomin d'hide shield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_d%27hide_shield"
+      },
+      {
+        "itemId": 10382,
+        "name": "Guthix coif",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_coif"
+      },
+      {
+        "itemId": 10378,
+        "name": "Guthix d'hide body",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_d%27hide_body"
+      },
+      {
+        "itemId": 10380,
+        "name": "Guthix chaps",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_chaps"
+      },
+      {
+        "itemId": 10376,
+        "name": "Guthix bracers",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_bracers"
+      },
+      {
+        "itemId": 19927,
+        "name": "Guthix d'hide boots",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_d%27hide_boots"
+      },
+      {
+        "itemId": 23188,
+        "name": "Guthix d'hide shield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_d%27hide_shield"
+      },
+      {
+        "itemId": 10374,
+        "name": "Zamorak coif",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_coif"
+      },
+      {
+        "itemId": 10370,
+        "name": "Zamorak d'hide body",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_d%27hide_body"
+      },
+      {
+        "itemId": 10372,
+        "name": "Zamorak chaps",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_chaps"
+      },
+      {
+        "itemId": 10368,
+        "name": "Zamorak bracers",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_bracers"
+      },
+      {
+        "itemId": 19936,
+        "name": "Zamorak d'hide boots",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_d%27hide_boots"
+      },
+      {
+        "itemId": 23194,
+        "name": "Zamorak d'hide shield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_d%27hide_shield"
+      },
+      {
+        "itemId": 12504,
+        "name": "Bandos coif",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_coif"
+      },
+      {
+        "itemId": 12500,
+        "name": "Bandos d'hide body",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_d%27hide_body"
+      },
+      {
+        "itemId": 12502,
+        "name": "Bandos chaps",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_chaps"
+      },
+      {
+        "itemId": 12498,
+        "name": "Bandos bracers",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_bracers"
+      },
+      {
+        "itemId": 19924,
+        "name": "Bandos d'hide boots",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_d%27hide_boots"
+      },
+      {
+        "itemId": 23203,
+        "name": "Bandos d'hide shield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_d%27hide_shield"
+      },
+      {
+        "itemId": 12512,
+        "name": "Armadyl coif",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_coif"
+      },
+      {
+        "itemId": 12508,
+        "name": "Armadyl d'hide body",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_d%27hide_body"
+      },
+      {
+        "itemId": 12510,
+        "name": "Armadyl chaps",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_chaps"
+      },
+      {
+        "itemId": 12506,
+        "name": "Armadyl bracers",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_bracers"
+      },
+      {
+        "itemId": 19930,
+        "name": "Armadyl d'hide boots",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_d%27hide_boots"
+      },
+      {
+        "itemId": 23200,
+        "name": "Armadyl d'hide shield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_d%27hide_shield"
+      },
+      {
+        "itemId": 12496,
+        "name": "Ancient coif",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_coif"
+      },
+      {
+        "itemId": 12492,
+        "name": "Ancient d'hide body",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_d%27hide_body"
+      },
+      {
+        "itemId": 12494,
+        "name": "Ancient chaps",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_chaps"
+      },
+      {
+        "itemId": 12490,
+        "name": "Ancient bracers",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_bracers"
+      },
+      {
+        "itemId": 19921,
+        "name": "Ancient d'hide boots",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_d%27hide_boots"
+      },
+      {
+        "itemId": 23197,
+        "name": "Ancient d'hide shield",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_d%27hide_shield"
+      },
+      {
+        "itemId": 12327,
+        "name": "Red d'hide body (g)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_d%27hide_body_(g)"
+      },
+      {
+        "itemId": 12331,
+        "name": "Red d'hide body (t)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_d%27hide_body_(t)"
+      },
+      {
+        "itemId": 12329,
+        "name": "Red d'hide chaps (g)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_d%27hide_chaps_(g)"
+      },
+      {
+        "itemId": 12333,
+        "name": "Red d'hide chaps (t)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_d%27hide_chaps_(t)"
+      },
+      {
+        "itemId": 7374,
+        "name": "Blue d'hide body (g)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_d%27hide_body_(g)"
+      },
+      {
+        "itemId": 7376,
+        "name": "Blue d'hide body (t)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_d%27hide_body_(t)"
+      },
+      {
+        "itemId": 7382,
+        "name": "Blue d'hide chaps (g)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_d%27hide_chaps_(g)"
+      },
+      {
+        "itemId": 7384,
+        "name": "Blue d'hide chaps (t)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_d%27hide_chaps_(t)"
+      },
+      {
+        "itemId": 10470,
+        "name": "Saradomin stole",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_stole"
+      },
+      {
+        "itemId": 10440,
+        "name": "Saradomin crozier",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_crozier"
+      },
+      {
+        "itemId": 10472,
+        "name": "Guthix stole",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_stole"
+      },
+      {
+        "itemId": 10442,
+        "name": "Guthix crozier",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_crozier"
+      },
+      {
+        "itemId": 10474,
+        "name": "Zamorak stole",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_stole"
+      },
+      {
+        "itemId": 10444,
+        "name": "Zamorak crozier",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_crozier"
+      },
+      {
+        "itemId": 2581,
+        "name": "Robin hood hat",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Robin_hood_hat"
+      },
+      {
+        "itemId": 7400,
+        "name": "Enchanted hat",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Enchanted_hat"
+      },
+      {
+        "itemId": 7399,
+        "name": "Enchanted top",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Enchanted_top"
+      },
+      {
+        "itemId": 7398,
+        "name": "Enchanted robe",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Enchanted_robe"
+      },
+      {
+        "itemId": 2651,
+        "name": "Pirate's hat",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pirate%27s_hat"
+      },
+      {
+        "itemId": 12323,
+        "name": "Red cavalier",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_cavalier"
+      },
+      {
+        "itemId": 12321,
+        "name": "White cavalier",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "White_cavalier"
+      },
+      {
+        "itemId": 12325,
+        "name": "Navy cavalier",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Navy_cavalier"
+      },
+      {
+        "itemId": 2639,
+        "name": "Tan cavalier",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tan_cavalier"
+      },
+      {
+        "itemId": 2641,
+        "name": "Dark cavalier",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_cavalier"
+      },
+      {
+        "itemId": 2643,
+        "name": "Black cavalier",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_cavalier"
+      },
+      {
+        "itemId": 12516,
+        "name": "Pith helmet",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pith_helmet"
+      },
+      {
+        "itemId": 12514,
+        "name": "Explorer backpack",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Explorer_backpack"
+      },
+      {
+        "itemId": 12518,
+        "name": "Green dragon mask",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_dragon_mask"
+      },
+      {
+        "itemId": 12520,
+        "name": "Blue dragon mask",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_dragon_mask"
+      },
+      {
+        "itemId": 12522,
+        "name": "Red dragon mask",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_dragon_mask"
+      },
+      {
+        "itemId": 12524,
+        "name": "Black dragon mask",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_dragon_mask"
+      },
+      {
+        "itemId": 19915,
+        "name": "Cyclops head",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Cyclops_head"
+      },
+      {
+        "itemId": 19918,
+        "name": "Nunchaku",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Nunchaku"
+      },
+      {
+        "itemId": 12379,
+        "name": "Rune cane",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_cane"
+      },
+      {
+        "itemId": 23206,
+        "name": "Dual sai",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dual_sai"
+      },
+      {
+        "itemId": 10284,
+        "name": "Magic comp bow",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Magic_comp_bow"
+      },
+      {
+        "itemId": 22231,
+        "name": "Dragon boots ornament kit",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_boots_ornament_kit"
+      },
+      {
+        "itemId": 23227,
+        "name": "Rune defender ornament kit",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_defender_ornament_kit"
+      },
+      {
+        "itemId": 23237,
+        "name": "Berserker necklace ornament kit",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Berserker_necklace_ornament_kit"
+      },
+      {
+        "itemId": 23232,
+        "name": "Tzhaar-ket-om ornament kit",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tzhaar-ket-om_ornament_kit"
+      },
+      {
+        "itemId": 23224,
+        "name": "Thieving bag",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Thieving_bag"
+      },
+      {
+        "itemId": 19912,
+        "name": "Zombie head",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zombie_head_(Treasure_Trails)"
+      },
+      {
+        "itemId": 10362,
+        "name": "Amulet of glory (t)",
+        "dropRate": 0.007463,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Amulet_of_glory_(t)"
+      }
+    ],
+    "locationDescription": "Varrock"
+  },
+  {
+    "name": "Elite Treasure Trails",
+    "category": "CLUES",
+    "worldX": 3239,
+    "worldY": 6075,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "items": [
+      {
+        "itemId": 12538,
+        "name": "Dragon full helm ornament kit",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_full_helm_ornament_kit"
+      },
+      {
+        "itemId": 12534,
+        "name": "Dragon chainbody ornament kit",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_chainbody_ornament_kit"
+      },
+      {
+        "itemId": 12536,
+        "name": "Dragon legs/skirt ornament kit",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_legs/skirt_ornament_kit"
+      },
+      {
+        "itemId": 12532,
+        "name": "Dragon sq shield ornament kit",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_sq_shield_ornament_kit"
+      },
+      {
+        "itemId": 20002,
+        "name": "Dragon scimitar ornament kit",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_scimitar_ornament_kit"
+      },
+      {
+        "itemId": 12526,
+        "name": "Fury ornament kit",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fury_ornament_kit"
+      },
+      {
+        "itemId": 12530,
+        "name": "Light infinity colour kit",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Light_infinity_colour_kit"
+      },
+      {
+        "itemId": 12528,
+        "name": "Dark infinity colour kit",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_infinity_colour_kit"
+      },
+      {
+        "itemId": 12397,
+        "name": "Royal crown",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Royal_crown"
+      },
+      {
+        "itemId": 12393,
+        "name": "Royal gown top",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Royal_gown_top"
+      },
+      {
+        "itemId": 12395,
+        "name": "Royal gown bottom",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Royal_gown_bottom"
+      },
+      {
+        "itemId": 12439,
+        "name": "Royal sceptre",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Royal_sceptre"
+      },
+      {
+        "itemId": 12351,
+        "name": "Musketeer hat",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Musketeer_hat"
+      },
+      {
+        "itemId": 12441,
+        "name": "Musketeer tabard",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Musketeer_tabard"
+      },
+      {
+        "itemId": 12443,
+        "name": "Musketeer pants",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Musketeer_pants"
+      },
+      {
+        "itemId": 12381,
+        "name": "Black d'hide body (g)",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_d%27hide_body_(g)"
+      },
+      {
+        "itemId": 12385,
+        "name": "Black d'hide body (t)",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_d%27hide_body_(t)"
+      },
+      {
+        "itemId": 12383,
+        "name": "Black d'hide chaps (g)",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_d%27hide_chaps_(g)"
+      },
+      {
+        "itemId": 12387,
+        "name": "Black d'hide chaps (t)",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_d%27hide_chaps_(t)"
+      },
+      {
+        "itemId": 12596,
+        "name": "Rangers' tunic",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rangers%27_tunic"
+      },
+      {
+        "itemId": 19994,
+        "name": "Ranger gloves",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ranger_gloves"
+      },
+      {
+        "itemId": 23249,
+        "name": "Rangers' tights",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rangers%27_tights"
+      },
+      {
+        "itemId": 19997,
+        "name": "Holy wraps",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Holy_wraps"
+      },
+      {
+        "itemId": 12363,
+        "name": "Bronze dragon mask",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_dragon_mask"
+      },
+      {
+        "itemId": 12365,
+        "name": "Iron dragon mask",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_dragon_mask"
+      },
+      {
+        "itemId": 12367,
+        "name": "Steel dragon mask",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_dragon_mask"
+      },
+      {
+        "itemId": 12369,
+        "name": "Mithril dragon mask",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_dragon_mask"
+      },
+      {
+        "itemId": 23270,
+        "name": "Adamant dragon mask",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_dragon_mask"
+      },
+      {
+        "itemId": 23273,
+        "name": "Rune dragon mask",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_dragon_mask"
+      },
+      {
+        "itemId": 19943,
+        "name": "Arceuus scarf",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Arceuus_scarf"
+      },
+      {
+        "itemId": 19946,
+        "name": "Hosidius scarf",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hosidius_scarf"
+      },
+      {
+        "itemId": 19949,
+        "name": "Lovakengj scarf",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lovakengj_scarf"
+      },
+      {
+        "itemId": 19952,
+        "name": "Piscarilius scarf",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Piscarilius_scarf"
+      },
+      {
+        "itemId": 19955,
+        "name": "Shayzien scarf",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_scarf"
+      },
+      {
+        "itemId": 12357,
+        "name": "Katana",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Katana"
+      },
+      {
+        "itemId": 12373,
+        "name": "Dragon cane",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cane"
+      },
+      {
+        "itemId": 19991,
+        "name": "Bucket helm",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bucket_helm"
+      },
+      {
+        "itemId": 19988,
+        "name": "Blacksmith's helm",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blacksmith%27s_helm"
+      },
+      {
+        "itemId": 12540,
+        "name": "Deerstalker",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Deerstalker"
+      },
+      {
+        "itemId": 12430,
+        "name": "Afro",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Afro"
+      },
+      {
+        "itemId": 12355,
+        "name": "Big pirate hat",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Big_pirate_hat"
+      },
+      {
+        "itemId": 12432,
+        "name": "Top hat",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Top_hat"
+      },
+      {
+        "itemId": 12353,
+        "name": "Monocle",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Monocle"
+      },
+      {
+        "itemId": 12335,
+        "name": "Briefcase",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Briefcase"
+      },
+      {
+        "itemId": 12337,
+        "name": "Sagacious spectacles",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sagacious_spectacles"
+      },
+      {
+        "itemId": 19970,
+        "name": "Dark bow tie",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_bow_tie"
+      },
+      {
+        "itemId": 19958,
+        "name": "Dark tuxedo jacket",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_tuxedo_jacket"
+      },
+      {
+        "itemId": 19961,
+        "name": "Dark tuxedo cuffs",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_tuxedo_cuffs"
+      },
+      {
+        "itemId": 19964,
+        "name": "Dark trousers",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_trousers"
+      },
+      {
+        "itemId": 19967,
+        "name": "Dark tuxedo shoes",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_tuxedo_shoes"
+      },
+      {
+        "itemId": 19985,
+        "name": "Light bow tie",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Light_bow_tie"
+      },
+      {
+        "itemId": 19973,
+        "name": "Light tuxedo jacket",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Light_tuxedo_jacket"
+      },
+      {
+        "itemId": 19976,
+        "name": "Light tuxedo cuffs",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Light_tuxedo_cuffs"
+      },
+      {
+        "itemId": 19979,
+        "name": "Light trousers",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Light_trousers"
+      },
+      {
+        "itemId": 19982,
+        "name": "Light tuxedo shoes",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Light_tuxedo_shoes"
+      },
+      {
+        "itemId": 23255,
+        "name": "Uri's hat",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Uri%27s_hat"
+      },
+      {
+        "itemId": 23252,
+        "name": "Giant boot",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Giant_boot"
+      },
+      {
+        "itemId": 23246,
+        "name": "Fremennik kilt",
+        "dropRate": 0.017241,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fremennik_kilt"
+      }
+    ],
+    "locationDescription": "Prifddinas"
+  },
+  {
+    "name": "Master Treasure Trails",
+    "category": "CLUES",
+    "worldX": 3165,
+    "worldY": 3487,
+    "worldPlane": 0,
+    "killTimeSeconds": 900,
+    "items": [
+      {
+        "itemId": 20065,
+        "name": "Occult ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Occult_ornament_kit"
+      },
+      {
+        "itemId": 20062,
+        "name": "Torture ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Torture_ornament_kit"
+      },
+      {
+        "itemId": 22246,
+        "name": "Anguish ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Anguish_ornament_kit"
+      },
+      {
+        "itemId": 23348,
+        "name": "Tormented ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tormented_ornament_kit"
+      },
+      {
+        "itemId": 20143,
+        "name": "Dragon defender ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_defender_ornament_kit"
+      },
+      {
+        "itemId": 22239,
+        "name": "Dragon kiteshield ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_kiteshield_ornament_kit"
+      },
+      {
+        "itemId": 22236,
+        "name": "Dragon platebody ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_platebody_ornament_kit"
+      },
+      {
+        "itemId": 20068,
+        "name": "Armadyl godsword ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_godsword_ornament_kit"
+      },
+      {
+        "itemId": 20071,
+        "name": "Bandos godsword ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_godsword_ornament_kit"
+      },
+      {
+        "itemId": 20074,
+        "name": "Saradomin godsword ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_godsword_ornament_kit"
+      },
+      {
+        "itemId": 20077,
+        "name": "Zamorak godsword ornament kit",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_godsword_ornament_kit"
+      },
+      {
+        "itemId": 20128,
+        "name": "Hood of darkness",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hood_of_darkness"
+      },
+      {
+        "itemId": 20131,
+        "name": "Robe top of darkness",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Robe_top_of_darkness"
+      },
+      {
+        "itemId": 20134,
+        "name": "Gloves of darkness",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gloves_of_darkness"
+      },
+      {
+        "itemId": 20137,
+        "name": "Robe bottom of darkness",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Robe_bottom_of_darkness"
+      },
+      {
+        "itemId": 20140,
+        "name": "Boots of darkness",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Boots_of_darkness"
+      },
+      {
+        "itemId": 20035,
+        "name": "Samurai kasa",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Samurai_kasa"
+      },
+      {
+        "itemId": 20038,
+        "name": "Samurai shirt",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Samurai_shirt"
+      },
+      {
+        "itemId": 20041,
+        "name": "Samurai gloves",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Samurai_gloves"
+      },
+      {
+        "itemId": 20044,
+        "name": "Samurai greaves",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Samurai_greaves"
+      },
+      {
+        "itemId": 20047,
+        "name": "Samurai boots",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Samurai_boots"
+      },
+      {
+        "itemId": 20113,
+        "name": "Arceuus hood",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Arceuus_hood"
+      },
+      {
+        "itemId": 20116,
+        "name": "Hosidius hood",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hosidius_hood"
+      },
+      {
+        "itemId": 20119,
+        "name": "Lovakengj hood",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lovakengj_hood"
+      },
+      {
+        "itemId": 20122,
+        "name": "Piscarilius hood",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Piscarilius_hood"
+      },
+      {
+        "itemId": 20125,
+        "name": "Shayzien hood",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_hood"
+      },
+      {
+        "itemId": 20029,
+        "name": "Old demon mask",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Old_demon_mask"
+      },
+      {
+        "itemId": 20020,
+        "name": "Lesser demon mask",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lesser_demon_mask"
+      },
+      {
+        "itemId": 20023,
+        "name": "Greater demon mask",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Greater_demon_mask"
+      },
+      {
+        "itemId": 20026,
+        "name": "Black demon mask",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_demon_mask"
+      },
+      {
+        "itemId": 20032,
+        "name": "Jungle demon mask",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jungle_demon_mask"
+      },
+      {
+        "itemId": 19724,
+        "name": "Left eye patch",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Left_eye_patch"
+      },
+      {
+        "itemId": 20110,
+        "name": "Bowl wig",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bowl_wig"
+      },
+      {
+        "itemId": 20056,
+        "name": "Ale of the gods",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ale_of_the_gods"
+      },
+      {
+        "itemId": 20050,
+        "name": "Obsidian cape (r)",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Obsidian_cape_(r)"
+      },
+      {
+        "itemId": 20008,
+        "name": "Fancy tiara",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fancy_tiara"
+      },
+      {
+        "itemId": 20053,
+        "name": "Half moon spectacles",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Half_moon_spectacles"
+      },
+      {
+        "itemId": 20095,
+        "name": "Ankou mask",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ankou_mask"
+      },
+      {
+        "itemId": 20098,
+        "name": "Ankou top",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ankou_top"
+      },
+      {
+        "itemId": 20101,
+        "name": "Ankou gloves",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ankou_gloves"
+      },
+      {
+        "itemId": 20104,
+        "name": "Ankou's leggings",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ankou%27s_leggings"
+      },
+      {
+        "itemId": 20107,
+        "name": "Ankou socks",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ankou_socks"
+      },
+      {
+        "itemId": 20080,
+        "name": "Mummy's head",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mummy%27s_head"
+      },
+      {
+        "itemId": 20083,
+        "name": "Mummy's body",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mummy%27s_body"
+      },
+      {
+        "itemId": 20086,
+        "name": "Mummy's hands",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mummy%27s_hands"
+      },
+      {
+        "itemId": 20089,
+        "name": "Mummy's legs",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mummy%27s_legs"
+      },
+      {
+        "itemId": 20092,
+        "name": "Mummy's feet",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mummy%27s_feet"
+      }
+    ],
+    "locationDescription": "Grand Exchange"
+  },
+  {
+    "name": "Hard Treasure Trail Rewards (Rare)",
+    "category": "CLUES",
+    "worldX": 3213,
+    "worldY": 3428,
+    "worldPlane": 0,
+    "killTimeSeconds": 420,
+    "items": [
+      {
+        "itemId": 10350,
+        "name": "3rd age full helmet",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_full_helmet"
+      },
+      {
+        "itemId": 10348,
+        "name": "3rd age platebody",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_platebody"
+      },
+      {
+        "itemId": 10346,
+        "name": "3rd age platelegs",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_platelegs"
+      },
+      {
+        "itemId": 23242,
+        "name": "3rd age plateskirt",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_plateskirt"
+      },
+      {
+        "itemId": 10352,
+        "name": "3rd age kiteshield",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_kiteshield"
+      },
+      {
+        "itemId": 10334,
+        "name": "3rd age range coif",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_range_coif"
+      },
+      {
+        "itemId": 10330,
+        "name": "3rd age range top",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_range_top"
+      },
+      {
+        "itemId": 10332,
+        "name": "3rd age range legs",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_range_legs"
+      },
+      {
+        "itemId": 10336,
+        "name": "3rd age vambraces",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_vambraces"
+      },
+      {
+        "itemId": 10342,
+        "name": "3rd age mage hat",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_mage_hat"
+      },
+      {
+        "itemId": 10338,
+        "name": "3rd age robe top",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_robe_top"
+      },
+      {
+        "itemId": 10340,
+        "name": "3rd age robe",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_robe"
+      },
+      {
+        "itemId": 10344,
+        "name": "3rd age amulet",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_amulet"
+      },
+      {
+        "itemId": 3486,
+        "name": "Gilded full helm",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_full_helm"
+      },
+      {
+        "itemId": 3481,
+        "name": "Gilded platebody",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_platebody"
+      },
+      {
+        "itemId": 3483,
+        "name": "Gilded platelegs",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_platelegs"
+      },
+      {
+        "itemId": 3485,
+        "name": "Gilded plateskirt",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_plateskirt"
+      },
+      {
+        "itemId": 3488,
+        "name": "Gilded kiteshield",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_kiteshield"
+      },
+      {
+        "itemId": 20146,
+        "name": "Gilded med helm",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_med_helm"
+      },
+      {
+        "itemId": 20149,
+        "name": "Gilded chainbody",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_chainbody"
+      },
+      {
+        "itemId": 20152,
+        "name": "Gilded sq shield",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_sq_shield"
+      },
+      {
+        "itemId": 20155,
+        "name": "Gilded 2h sword",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_2h_sword"
+      },
+      {
+        "itemId": 20158,
+        "name": "Gilded spear",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_spear"
+      },
+      {
+        "itemId": 20161,
+        "name": "Gilded hasta",
+        "dropRate": 0.041667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_hasta"
+      }
+    ],
+    "locationDescription": "Varrock"
+  },
+  {
+    "name": "Elite Treasure Trail Rewards (Rare)",
+    "category": "CLUES",
+    "worldX": 3239,
+    "worldY": 6075,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "items": [
+      {
+        "itemId": 10350,
+        "name": "3rd age full helmet",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_full_helmet"
+      },
+      {
+        "itemId": 10348,
+        "name": "3rd age platebody",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_platebody"
+      },
+      {
+        "itemId": 10346,
+        "name": "3rd age platelegs",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_platelegs"
+      },
+      {
+        "itemId": 23242,
+        "name": "3rd age plateskirt",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_plateskirt"
+      },
+      {
+        "itemId": 10352,
+        "name": "3rd age kiteshield",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_kiteshield"
+      },
+      {
+        "itemId": 10334,
+        "name": "3rd age range coif",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_range_coif"
+      },
+      {
+        "itemId": 10330,
+        "name": "3rd age range top",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_range_top"
+      },
+      {
+        "itemId": 10332,
+        "name": "3rd age range legs",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_range_legs"
+      },
+      {
+        "itemId": 10336,
+        "name": "3rd age vambraces",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_vambraces"
+      },
+      {
+        "itemId": 10342,
+        "name": "3rd age mage hat",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_mage_hat"
+      },
+      {
+        "itemId": 10338,
+        "name": "3rd age robe top",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_robe_top"
+      },
+      {
+        "itemId": 10340,
+        "name": "3rd age robe",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_robe"
+      },
+      {
+        "itemId": 10344,
+        "name": "3rd age amulet",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_amulet"
+      },
+      {
+        "itemId": 12426,
+        "name": "3rd age longsword",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_longsword"
+      },
+      {
+        "itemId": 12422,
+        "name": "3rd age wand",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_wand"
+      },
+      {
+        "itemId": 12437,
+        "name": "3rd age cloak",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_cloak"
+      },
+      {
+        "itemId": 12424,
+        "name": "3rd age bow",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_bow"
+      },
+      {
+        "itemId": 3486,
+        "name": "Gilded full helm",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_full_helm"
+      },
+      {
+        "itemId": 3481,
+        "name": "Gilded platebody",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_platebody"
+      },
+      {
+        "itemId": 3483,
+        "name": "Gilded platelegs",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_platelegs"
+      },
+      {
+        "itemId": 3485,
+        "name": "Gilded plateskirt",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_plateskirt"
+      },
+      {
+        "itemId": 3488,
+        "name": "Gilded kiteshield",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_kiteshield"
+      },
+      {
+        "itemId": 20146,
+        "name": "Gilded med helm",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_med_helm"
+      },
+      {
+        "itemId": 20149,
+        "name": "Gilded chainbody",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_chainbody"
+      },
+      {
+        "itemId": 20152,
+        "name": "Gilded sq shield",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_sq_shield"
+      },
+      {
+        "itemId": 20155,
+        "name": "Gilded 2h sword",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_2h_sword"
+      },
+      {
+        "itemId": 20158,
+        "name": "Gilded spear",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_spear"
+      },
+      {
+        "itemId": 20161,
+        "name": "Gilded hasta",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_hasta"
+      },
+      {
+        "itemId": 12389,
+        "name": "Gilded scimitar",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_scimitar"
+      },
+      {
+        "itemId": 12391,
+        "name": "Gilded boots",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_boots"
+      },
+      {
+        "itemId": 23258,
+        "name": "Gilded coif",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_coif"
+      },
+      {
+        "itemId": 23261,
+        "name": "Gilded d'hide vambraces",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_d%27hide_vambraces"
+      },
+      {
+        "itemId": 23264,
+        "name": "Gilded d'hide body",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_d%27hide_body"
+      },
+      {
+        "itemId": 23267,
+        "name": "Gilded d'hide chaps",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_d%27hide_chaps"
+      },
+      {
+        "itemId": 23276,
+        "name": "Gilded pickaxe",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_pickaxe"
+      },
+      {
+        "itemId": 23279,
+        "name": "Gilded axe",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_axe"
+      },
+      {
+        "itemId": 23282,
+        "name": "Gilded spade",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_spade"
+      },
+      {
+        "itemId": 20005,
+        "name": "Ring of nature",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ring_of_nature"
+      },
+      {
+        "itemId": 12371,
+        "name": "Lava dragon mask",
+        "dropRate": 0.025641,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lava_dragon_mask"
+      }
+    ],
+    "locationDescription": "Prifddinas"
+  },
+  {
+    "name": "Master Treasure Trail Rewards (Rare)",
+    "category": "CLUES",
+    "worldX": 3165,
+    "worldY": 3487,
+    "worldPlane": 0,
+    "killTimeSeconds": 900,
+    "items": [
+      {
+        "itemId": 10350,
+        "name": "3rd age full helmet",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_full_helmet"
+      },
+      {
+        "itemId": 10348,
+        "name": "3rd age platebody",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_platebody"
+      },
+      {
+        "itemId": 10346,
+        "name": "3rd age platelegs",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_platelegs"
+      },
+      {
+        "itemId": 23242,
+        "name": "3rd age plateskirt",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_plateskirt"
+      },
+      {
+        "itemId": 10352,
+        "name": "3rd age kiteshield",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_kiteshield"
+      },
+      {
+        "itemId": 10334,
+        "name": "3rd age range coif",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_range_coif"
+      },
+      {
+        "itemId": 10330,
+        "name": "3rd age range top",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_range_top"
+      },
+      {
+        "itemId": 10332,
+        "name": "3rd age range legs",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_range_legs"
+      },
+      {
+        "itemId": 10336,
+        "name": "3rd age vambraces",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_vambraces"
+      },
+      {
+        "itemId": 10342,
+        "name": "3rd age mage hat",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_mage_hat"
+      },
+      {
+        "itemId": 10338,
+        "name": "3rd age robe top",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_robe_top"
+      },
+      {
+        "itemId": 10340,
+        "name": "3rd age robe",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_robe"
+      },
+      {
+        "itemId": 10344,
+        "name": "3rd age amulet",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_amulet"
+      },
+      {
+        "itemId": 12426,
+        "name": "3rd age longsword",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_longsword"
+      },
+      {
+        "itemId": 12422,
+        "name": "3rd age wand",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_wand"
+      },
+      {
+        "itemId": 12437,
+        "name": "3rd age cloak",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_cloak"
+      },
+      {
+        "itemId": 12424,
+        "name": "3rd age bow",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_bow"
+      },
+      {
+        "itemId": 23336,
+        "name": "3rd age druidic robe top",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_druidic_robe_top"
+      },
+      {
+        "itemId": 23339,
+        "name": "3rd age druidic robe bottoms",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_druidic_robe_bottoms"
+      },
+      {
+        "itemId": 23345,
+        "name": "3rd age druidic cloak",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_druidic_cloak"
+      },
+      {
+        "itemId": 23342,
+        "name": "3rd age druidic staff",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_druidic_staff"
+      },
+      {
+        "itemId": 20014,
+        "name": "3rd age pickaxe",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_pickaxe"
+      },
+      {
+        "itemId": 20011,
+        "name": "3rd age axe",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "3rd_age_axe"
+      },
+      {
+        "itemId": 23185,
+        "name": "Ring of 3rd age",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ring_of_3rd_age"
+      },
+      {
+        "itemId": 3486,
+        "name": "Gilded full helm",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_full_helm"
+      },
+      {
+        "itemId": 3481,
+        "name": "Gilded platebody",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_platebody"
+      },
+      {
+        "itemId": 3483,
+        "name": "Gilded platelegs",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_platelegs"
+      },
+      {
+        "itemId": 3485,
+        "name": "Gilded plateskirt",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_plateskirt"
+      },
+      {
+        "itemId": 3488,
+        "name": "Gilded kiteshield",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_kiteshield"
+      },
+      {
+        "itemId": 20146,
+        "name": "Gilded med helm",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_med_helm"
+      },
+      {
+        "itemId": 20149,
+        "name": "Gilded chainbody",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_chainbody"
+      },
+      {
+        "itemId": 20152,
+        "name": "Gilded sq shield",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_sq_shield"
+      },
+      {
+        "itemId": 20155,
+        "name": "Gilded 2h sword",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_2h_sword"
+      },
+      {
+        "itemId": 20158,
+        "name": "Gilded spear",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_spear"
+      },
+      {
+        "itemId": 20161,
+        "name": "Gilded hasta",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_hasta"
+      },
+      {
+        "itemId": 12389,
+        "name": "Gilded scimitar",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_scimitar"
+      },
+      {
+        "itemId": 12391,
+        "name": "Gilded boots",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_boots"
+      },
+      {
+        "itemId": 23258,
+        "name": "Gilded coif",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_coif"
+      },
+      {
+        "itemId": 23261,
+        "name": "Gilded d'hide vambraces",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_d%27hide_vambraces"
+      },
+      {
+        "itemId": 23264,
+        "name": "Gilded d'hide body",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_d%27hide_body"
+      },
+      {
+        "itemId": 23267,
+        "name": "Gilded d'hide chaps",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_d%27hide_chaps"
+      },
+      {
+        "itemId": 23276,
+        "name": "Gilded pickaxe",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_pickaxe"
+      },
+      {
+        "itemId": 23279,
+        "name": "Gilded axe",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_axe"
+      },
+      {
+        "itemId": 23282,
+        "name": "Gilded spade",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_spade"
+      },
+      {
+        "itemId": 20059,
+        "name": "Bucket helm (g)",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bucket_helm_(g)"
+      },
+      {
+        "itemId": 20017,
+        "name": "Ring of coins",
+        "dropRate": 0.021739,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ring_of_coins"
+      },
+      {
+        "itemId": 19730,
+        "name": "Bloodhound",
+        "dropRate": 0.021277,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Bloodhound"
+      }
+    ],
+    "locationDescription": "Grand Exchange"
+  },
+  {
+    "name": "Shared Treasure Trail Rewards",
+    "category": "CLUES",
+    "worldX": 3165,
+    "worldY": 3487,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 3827,
+        "name": "Saradomin page 1",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_page_1"
+      },
+      {
+        "itemId": 3828,
+        "name": "Saradomin page 2",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_page_2"
+      },
+      {
+        "itemId": 3829,
+        "name": "Saradomin page 3",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_page_3"
+      },
+      {
+        "itemId": 3830,
+        "name": "Saradomin page 4",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_page_4"
+      },
+      {
+        "itemId": 3831,
+        "name": "Zamorak page 1",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_page_1"
+      },
+      {
+        "itemId": 3832,
+        "name": "Zamorak page 2",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_page_2"
+      },
+      {
+        "itemId": 3833,
+        "name": "Zamorak page 3",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_page_3"
+      },
+      {
+        "itemId": 3834,
+        "name": "Zamorak page 4",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_page_4"
+      },
+      {
+        "itemId": 3835,
+        "name": "Guthix page 1",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_page_1"
+      },
+      {
+        "itemId": 3836,
+        "name": "Guthix page 2",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_page_2"
+      },
+      {
+        "itemId": 3837,
+        "name": "Guthix page 3",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_page_3"
+      },
+      {
+        "itemId": 3838,
+        "name": "Guthix page 4",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_page_4"
+      },
+      {
+        "itemId": 12613,
+        "name": "Bandos page 1",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_page_1"
+      },
+      {
+        "itemId": 12614,
+        "name": "Bandos page 2",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_page_2"
+      },
+      {
+        "itemId": 12615,
+        "name": "Bandos page 3",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_page_3"
+      },
+      {
+        "itemId": 12616,
+        "name": "Bandos page 4",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_page_4"
+      },
+      {
+        "itemId": 12617,
+        "name": "Armadyl page 1",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_page_1"
+      },
+      {
+        "itemId": 12618,
+        "name": "Armadyl page 2",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_page_2"
+      },
+      {
+        "itemId": 12619,
+        "name": "Armadyl page 3",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_page_3"
+      },
+      {
+        "itemId": 12620,
+        "name": "Armadyl page 4",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_page_4"
+      },
+      {
+        "itemId": 12621,
+        "name": "Ancient page 1",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page_1"
+      },
+      {
+        "itemId": 12622,
+        "name": "Ancient page 2",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page_2"
+      },
+      {
+        "itemId": 12623,
+        "name": "Ancient page 3",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page_3"
+      },
+      {
+        "itemId": 12624,
+        "name": "Ancient page 4",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page_4"
+      },
+      {
+        "itemId": 20220,
+        "name": "Holy blessing",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Holy_blessing"
+      },
+      {
+        "itemId": 20223,
+        "name": "Unholy blessing",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Unholy_blessing"
+      },
+      {
+        "itemId": 20226,
+        "name": "Peaceful blessing",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Peaceful_blessing"
+      },
+      {
+        "itemId": 20232,
+        "name": "War blessing",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "War_blessing"
+      },
+      {
+        "itemId": 20229,
+        "name": "Honourable blessing",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Honourable_blessing"
+      },
+      {
+        "itemId": 20235,
+        "name": "Ancient blessing",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_blessing"
+      },
+      {
+        "itemId": 7329,
+        "name": "Red firelighter",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_firelighter"
+      },
+      {
+        "itemId": 7330,
+        "name": "Green firelighter",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_firelighter"
+      },
+      {
+        "itemId": 7331,
+        "name": "Blue firelighter",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_firelighter"
+      },
+      {
+        "itemId": 10326,
+        "name": "Purple firelighter",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purple_firelighter"
+      },
+      {
+        "itemId": 10327,
+        "name": "White firelighter",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "White_firelighter"
+      },
+      {
+        "itemId": 12402,
+        "name": "Nardah teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Nardah_teleport"
+      },
+      {
+        "itemId": 12403,
+        "name": "Digsite teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Digsite_teleport"
+      },
+      {
+        "itemId": 12404,
+        "name": "Feldip hills teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Feldip_hills_teleport"
+      },
+      {
+        "itemId": 12405,
+        "name": "Lunar isle teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lunar_isle_teleport"
+      },
+      {
+        "itemId": 12406,
+        "name": "Mort'ton teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mort%27ton_teleport"
+      },
+      {
+        "itemId": 12407,
+        "name": "Pest control teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pest_control_teleport"
+      },
+      {
+        "itemId": 12408,
+        "name": "Piscatoris teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Piscatoris_teleport"
+      },
+      {
+        "itemId": 12409,
+        "name": "Tai bwo wannai teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tai_bwo_wannai_teleport"
+      },
+      {
+        "itemId": 12411,
+        "name": "Mos le'harmless teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mos_le%27harmless_teleport"
+      },
+      {
+        "itemId": 12642,
+        "name": "Lumberyard teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lumberyard_teleport"
+      },
+      {
+        "itemId": 12410,
+        "name": "Iorwerth camp teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iorwerth_camp_teleport"
+      },
+      {
+        "itemId": 23387,
+        "name": "Watson teleport",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Watson_teleport"
+      },
+      {
+        "itemId": 10476,
+        "name": "Purple sweets",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purple_sweets"
+      },
+      {
+        "itemId": 21387,
+        "name": "Master scroll book (empty)",
+        "dropRate": 0.020408,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Master_scroll_book_(empty)"
+      }
+    ],
+    "locationDescription": "Grand Exchange"
   }
 ]
