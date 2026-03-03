@@ -1,6 +1,6 @@
 # Collection Log Helper — Item Coverage Tracker
 
-> **Coverage: 887 / ~1,698 items | 103 / 122 sources**
+> **Coverage: 1,619 / ~1,698 items | 123 / 123 sources**
 
 This document tracks every OSRS Collection Log category and our progress toward full coverage. Community contributors can use this to find unclaimed work.
 
@@ -28,7 +28,7 @@ This document tracks every OSRS Collection Log category and our progress toward 
 
 ## Bosses
 
-39 sources in the collection log. **37 done, 1 partial, 12 missing.**
+54 sources in the collection log. **54 done.**
 
 | Category | Wiki Items | Our Items | Priority | Status | Issue |
 |----------|-----------|-----------|----------|--------|-------|
@@ -74,46 +74,46 @@ This document tracks every OSRS Collection Log category and our progress toward 
 | Sol Heredit | 7 | 7 | — | Done | — |
 | Crazy archaeologist | 3 | 3 | — | Done | — |
 | Araxxor | 6 | 6 | — | Done | — |
-| Perilous Moons | 13 | 10 | P0 | Partial | [#14](../../issues/14) |
-| Yama | 11 | 0 | P0 | Unclaimed | [#5](../../issues/5) |
-| The Hueycoatl | 6 | 0 | P0 | Unclaimed | [#4](../../issues/4) |
-| Doom of Mokhaiotl | 6 | 0 | P0 | Unclaimed | [#7](../../issues/7) |
-| Royal Titans | 7 | 0 | P0 | Unclaimed | [#10](../../issues/10) |
-| Amoxliatl | 4 | 0 | P0 | Unclaimed | [#12](../../issues/12) |
-| Brutus | 4 | 0 | P1 | Unclaimed | [#6](../../issues/6) |
-| Shellbane Gryphon | 4 | 0 | P1 | Unclaimed | [#8](../../issues/8) |
-| Scurrius | 2 | 0 | P1 | Unclaimed | [#9](../../issues/9) |
-| Fight Caves | 2 | 0 | P1 | Unclaimed | [#11](../../issues/11) |
-| Inferno | 2 | 0 | P1 | Unclaimed | [#13](../../issues/13) |
-| Deranged Archaeologist | 1 | 0 | P1 | Unclaimed | [#15](../../issues/15) |
+| Perilous Moons | 13 | 13 | — | Done | — |
+| Yama | 11 | 11 | — | Done | — |
+| The Hueycoatl | 6 | 6 | — | Done | — |
+| Doom of Mokhaiotl | 6 | 6 | — | Done | — |
+| Royal Titans | 7 | 7 | — | Done | — |
+| Amoxliatl | 4 | 4 | — | Done | — |
+| Brutus | 4 | 4 | — | Done | — |
+| Shellbane Gryphon | 4 | 4 | — | Done | — |
+| Scurrius | 2 | 2 | — | Done | — |
+| The Fight Caves | 2 | 2 | — | Done | — |
+| The Inferno | 2 | 2 | — | Done | — |
+| Deranged Archaeologist | 1 | 1 | — | Done | — |
 
 ## Raids
 
-3 sources in the collection log. **0 done, 3 partial.**
+3 sources in the collection log. **3 done.**
 
 | Category | Wiki Items | Our Items | Priority | Status | Issue |
 |----------|-----------|-----------|----------|--------|-------|
-| Chambers of Xeric | 23 | 13 | P0 | Partial | [#1](../../issues/1) |
-| Theatre of Blood | 17 | 8 | P0 | Partial | [#2](../../issues/2) |
-| Tombs of Amascut | 27 | 8 | P0 | Partial | [#3](../../issues/3) |
+| Chambers of Xeric | 23 | 23 | — | Done | — |
+| Theatre of Blood | 17 | 17 | — | Done | — |
+| Tombs of Amascut | 27 | 27 | — | Done | — |
 
 ## Clues
 
-11 sources in the collection log. **2 done, 0 partial, 9 missing (~634 items).**
+11 sources in the collection log. **7 done, 4 partial.**
 
 | Category | Wiki Items | Our Items | Priority | Status | Issue |
 |----------|-----------|-----------|----------|--------|-------|
-| Beginner Clues | 15 | 15 | — | Done | — |
+| Beginner Treasure Trails | 15 | 15 | — | Done | — |
 | Scroll Cases | 13 | 13 | — | Done | — |
-| Easy Clues | 131 | 0 | P1 | Unclaimed | [#17](../../issues/17) |
-| Medium Clues | 115 | 0 | P1 | Unclaimed | [#18](../../issues/18) |
-| Hard Clues | 134 | 0 | P1 | Unclaimed | [#20](../../issues/20) |
-| Elite Clues | 59 | 0 | P1 | Unclaimed | [#22](../../issues/22) |
-| Master Clues | 49 | 0 | P1 | Unclaimed | [#24](../../issues/24) |
-| Hard Clue Rare Table | 24 | 0 | P2 | Unclaimed | [#19](../../issues/19) |
-| Elite Clue Rare Table | 39 | 0 | P2 | Unclaimed | [#21](../../issues/21) |
-| Master Clue Rare Table | 45 | 0 | P2 | Unclaimed | [#23](../../issues/23) |
-| Shared Clue Rewards | 49 | 0 | P2 | Unclaimed | [#25](../../issues/25) |
+| Easy Treasure Trails | 131 | 130 | P1 | Partial | — |
+| Medium Treasure Trails | 115 | 114 | P1 | Partial | — |
+| Hard Treasure Trails | 134 | 134 | — | Done | — |
+| Elite Treasure Trails | 59 | 58 | P1 | Partial | — |
+| Master Treasure Trails | 49 | 47 | P1 | Partial | — |
+| Hard Treasure Trail Rewards (Rare) | 24 | 24 | — | Done | — |
+| Elite Treasure Trail Rewards (Rare) | 39 | 39 | — | Done | — |
+| Master Treasure Trail Rewards (Rare) | 47 | 47 | — | Done | — |
+| Shared Treasure Trail Rewards | 49 | 49 | — | Done | — |
 
 ## Minigames
 
@@ -184,11 +184,12 @@ This document tracks every OSRS Collection Log category and our progress toward 
 | Sea Treasures | 17 | 17 | — | Done | — |
 | Miscellaneous | 12 | 12 | — | Done | — |
 
-## Meta Issues
+## Open Issues
 
 | Topic | Description | Issue |
 |-------|-------------|-------|
-| All Pets | Ensure every boss/activity source includes its pet with `isPet: true`. No separate source needed — `EfficiencyCalculator.filterPetsOnly()` derives the view. | [#77](../../issues/77) |
+| Item ID Audit | Verify item IDs for Alch Hydra, Gauntlet, and DT2 bosses against RuneLite ItemID constants | [#91](../../issues/91) |
+| Shortest Path Bug | Shortest Path integration bugs when toggling guidance on/off rapidly | [#88](../../issues/88) |
 
 ---
 
@@ -196,11 +197,8 @@ This document tracks every OSRS Collection Log category and our progress toward 
 
 | Priority | Total Categories | Done | Partial | Unclaimed |
 |----------|-----------------|------|---------|-----------|
-| P0 | 9 | 0 | 4 | 5 |
-| P1 | 12 | 0 | 0 | 12 |
-| P2 | 4 | 0 | 0 | 4 |
-| P3 | 0 | 0 | 0 | 0 |
-| Done (no priority) | 97 | 97 | 0 | 0 |
-| **Total** | **122** | **97** | **4** | **21** |
+| P1 | 4 | 0 | 4 | 0 |
+| Done (no priority) | 119 | 119 | 0 | 0 |
+| **Total** | **123** | **119** | **4** | **0** |
 
-*Remaining work is concentrated in P0 bosses (new Varlamore content, raid completions) and P1 clue scroll tiers.*
+*Remaining work: 4 clue tiers each missing 1-2 items (Easy, Medium, Elite, Master). Item ID audit needed for several boss sources ([#91](../../issues/91)).*
