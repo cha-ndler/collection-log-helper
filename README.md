@@ -17,13 +17,19 @@ Ranks collection log sources by how efficiently you can obtain missing items. Th
 - **Search** — Full-text search across all items and sources
 - **Pet Hunt** — Pet drops only, ranked by efficiency
 
+### Automatic Sync
+
+Opens your in-game Collection Log once per session to automatically detect all obtained items — no manual browsing required. A configurable reminder nudges you to open the log after login if you haven't synced yet.
+
 ### Guidance Overlays
 
-Click "Guide Me" on any item to activate three navigation aids:
+Click "Guide Me" on any item to activate navigation aids:
 
 - **Tile highlight** — Cyan marker on the target location in the game world
 - **Minimap dot** — Cyan indicator on the minimap
 - **World map marker** — Clickable pin on the world map with edge snapping
+- **Hint arrow** — Native yellow hint arrow at the target (same as Quest Helper)
+- **Shortest Path integration** — Automatically requests a route from the [Shortest Path](https://github.com/Skretzo/shortest-path) plugin if installed
 
 ### Item Details
 
@@ -38,7 +44,12 @@ Automatically detects new collection log entries via chat messages and varbit ch
 | Option | Default | Description |
 |--------|---------|-------------|
 | Default Mode | Efficient | Which mode opens on startup |
+| Hide Obtained Items | On | Hide items already obtained from the list |
+| Show Sync Reminder | On | Remind you to open the Collection Log after login |
+| **Guidance** | | |
 | Show Overlays | On | Toggle all guidance overlays |
+| Show Hint Arrow | On | Show the yellow hint arrow at the target |
+| Shortest Path Integration | On | Request pathfinding from Shortest Path plugin |
 | Overlay Color | Cyan | Customize the overlay highlight color |
 
 ## Data
