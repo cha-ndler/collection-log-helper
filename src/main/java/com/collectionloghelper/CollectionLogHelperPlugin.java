@@ -139,7 +139,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		panel = new CollectionLogHelperPanel(
 			config, database, collectionState, calculator, itemManager,
 			requirementsChecker,
-			this::activateGuidance, this::deactivateGuidance, this::syncCollectionLog);
+			this::activateGuidance, this::deactivateGuidance, this::syncCollectionLog,
+			() -> client.getLocalPlayer() != null ? client.getLocalPlayer().getWorldLocation() : null);
 		panel.setMode(config.defaultMode());
 
 		collectionLogIcon = itemManager.getImage(ItemID.COLLECTION_LOG);
@@ -521,18 +522,6 @@ public class CollectionLogHelperPlugin extends Plugin
 			panel.hideClueGuidance();
 		}
 
-		// Client API calls and ShortestPath messages must run on the client thread
-		// (ShortestPath's handler calls client API internally)
-		clientThread.invokeLater(() ->
-		{
-			client.clearHintArrow();
-
-			if (config.useShortestPath())
-			{
-				eventBus.post(new PluginMessage("shortestpath", "clear"));
-			}
-		});
-
 		if (source.getCategory() == CollectionLogCategory.CLUES)
 		{
 			// Clue sources: text overlay + panel banner instead of map markers
@@ -541,6 +530,17 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				panel.showClueGuidance(source);
 			}
+
+			// Client API calls and ShortestPath messages must run on the client thread
+			clientThread.invokeLater(() ->
+			{
+				client.clearHintArrow();
+
+				if (config.useShortestPath())
+				{
+					eventBus.post(new PluginMessage("shortestpath", "clear"));
+				}
+			});
 		}
 		else
 		{
@@ -555,8 +555,17 @@ public class CollectionLogHelperPlugin extends Plugin
 			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
 
+			// Clear + path must execute atomically in a single client tick
+			// to prevent race conditions when guidance is restarted quickly
 			clientThread.invokeLater(() ->
 			{
+				client.clearHintArrow();
+
+				if (config.useShortestPath())
+				{
+					eventBus.post(new PluginMessage("shortestpath", "clear"));
+				}
+
 				if (config.showHintArrow())
 				{
 					client.setHintArrow(worldPoint);
