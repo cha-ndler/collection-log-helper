@@ -11,4 +11,6 @@ public class CollectionLogItem
     int varbitId;
     boolean isPet;
     String wikiPage;
+    int pointCost;
+    int milestoneKills;
 }
