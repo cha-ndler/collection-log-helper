@@ -5,6 +5,7 @@ import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerCollectionState;
+import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
@@ -27,6 +28,7 @@ import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.ScriptPreFired;
+import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.gameval.InterfaceID;
@@ -105,6 +107,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private EfficiencyCalculator calculator;
 
 	@Inject
+	private RequirementsChecker requirementsChecker;
+
+	@Inject
 	private GuidanceOverlay guidanceOverlay;
 
 	@Inject
@@ -133,6 +138,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		panel = new CollectionLogHelperPanel(
 			config, database, collectionState, calculator, itemManager,
+			requirementsChecker,
 			this::activateGuidance, this::deactivateGuidance, this::syncCollectionLog);
 		panel.setMode(config.defaultMode());
 
@@ -160,6 +166,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				collectionState.refreshVarps();
 				collectionState.loadObtainedItems();
 				collectionState.captureRecentItems();
+				requirementsChecker.refreshAccessibility(database.getAllSources());
 				lastObtainedCount = collectionState.getTotalObtained();
 				panel.rebuild();
 			});
@@ -201,6 +208,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				collectionState.refreshVarps();
 				collectionState.loadObtainedItems();
 				collectionState.captureRecentItems();
+				requirementsChecker.refreshAccessibility(database.getAllSources());
 				lastObtainedCount = collectionState.getTotalObtained();
 				if (panel != null)
 				{
@@ -211,6 +219,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		else if (event.getGameState() == GameState.LOGIN_SCREEN)
 		{
 			collectionState.clearState();
+			requirementsChecker.clearCache();
 			lastObtainedCount = -1;
 			collectionLogOpen = false;
 			autoSyncPending = false;
@@ -229,6 +238,13 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Runs on the client thread — safe to call client API
 		collectionState.refreshVarps();
 
+		// Don't trigger rebuilds mid-scan; the settle logic in onGameTick
+		// will fire a single rebuild once script 4100 stops firing.
+		if (scriptScanActive)
+		{
+			return;
+		}
+
 		int currentCount = collectionState.getTotalObtained();
 		if (currentCount == lastObtainedCount)
 		{
@@ -236,6 +252,16 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		lastObtainedCount = currentCount;
+		if (panel != null)
+		{
+			panel.rebuild();
+		}
+	}
+
+	@Subscribe
+	public void onStatChanged(StatChanged event)
+	{
+		requirementsChecker.refreshAccessibility(database.getAllSources());
 		if (panel != null)
 		{
 			panel.rebuild();

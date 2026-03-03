@@ -48,6 +48,16 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "hideLockedContent",
+		name = "Hide Locked Content",
+		description = "Hide sources that require quests or skill levels you haven't met"
+	)
+	default boolean hideLockedContent()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "showOverlays",
 		name = "Show Overlays",
 		description = "Show guidance overlays when using Guide Me",

@@ -10,4 +10,5 @@ public class ScoredItem
 	double score;
 	int missingItemCount;
 	String reasoning;
+	boolean locked;
 }
