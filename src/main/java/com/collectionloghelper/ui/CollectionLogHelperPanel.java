@@ -480,7 +480,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 		// cachedPlayerLocation is written on the client thread and read here on the EDT.
 		// volatile guarantees the EDT always sees the latest value.
 		WorldPoint playerLocation = playerLocationSupplier.get();
-		if (playerLocation == null)
+		// (0,0,0) occurs briefly during login/logout transitions — treat as not ready
+		if (playerLocation == null
+			|| (playerLocation.getX() == 0 && playerLocation.getY() == 0))
 		{
 			JLabel loginLabel = new JLabel("Log in to use Proximity mode");
 			loginLabel.setFont(FontManager.getRunescapeSmallFont());
@@ -525,6 +527,11 @@ public class CollectionLogHelperPanel extends PluginPanel
 			}
 
 			int distance = playerLocation.distanceTo(sourcePoint);
+			// distanceTo() returns Integer.MAX_VALUE when source is on a different plane
+			if (distance == Integer.MAX_VALUE)
+			{
+				continue;
+			}
 			sourceDistances.add(new SourceDistance(source, distance, missingCount, locked));
 		}
 
