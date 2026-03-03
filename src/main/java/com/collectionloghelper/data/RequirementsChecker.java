@@ -133,13 +133,19 @@ public class RequirementsChecker
 	{
 		String[] parts = enumName.split("_");
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < parts.length; i++)
+		boolean first = true;
+		for (String part : parts)
 		{
-			if (i > 0)
+			// split("_") produces empty tokens for consecutive or trailing underscores
+			if (part.isEmpty())
+			{
+				continue;
+			}
+			if (!first)
 			{
 				sb.append(' ');
 			}
-			String part = parts[i];
+			first = false;
 			if (part.matches("[IVX]+"))
 			{
 				// Roman numerals stay uppercase
