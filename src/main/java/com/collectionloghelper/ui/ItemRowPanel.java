@@ -19,20 +19,36 @@ import net.runelite.client.util.AsyncBufferedImage;
 class ItemRowPanel extends JPanel
 {
 	private static final Color OBTAINED_COLOR = new Color(0, 100, 0, 80);
+	private static final Color LOCKED_COLOR = new Color(50, 40, 40);
+	private static final Color LOCKED_TEXT_COLOR = new Color(160, 140, 140);
 	private static final Dimension ROW_SIZE = new Dimension(0, 36);
 
 	private final CollectionLogItem item;
 	private final CollectionLogSource source;
 
 	ItemRowPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
-		double score, ItemManager itemManager, Runnable onClick)
+		double score, boolean locked, ItemManager itemManager, Runnable onClick)
 	{
 		this.item = item;
 		this.source = source;
 
+		Color bgColor;
+		if (obtained)
+		{
+			bgColor = OBTAINED_COLOR;
+		}
+		else if (locked)
+		{
+			bgColor = LOCKED_COLOR;
+		}
+		else
+		{
+			bgColor = ColorScheme.DARKER_GRAY_COLOR;
+		}
+
 		setLayout(new BorderLayout(5, 0));
 		setBorder(BorderFactory.createEmptyBorder(4, 6, 4, 6));
-		setBackground(obtained ? OBTAINED_COLOR : ColorScheme.DARKER_GRAY_COLOR);
+		setBackground(bgColor);
 		setPreferredSize(ROW_SIZE);
 		setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
 		setAlignmentX(LEFT_ALIGNMENT);
@@ -49,14 +65,29 @@ class ItemRowPanel extends JPanel
 		JPanel centerPanel = new JPanel(new BorderLayout());
 		centerPanel.setOpaque(false);
 
+		Color nameColor;
+		if (obtained)
+		{
+			nameColor = Color.GREEN;
+		}
+		else if (locked)
+		{
+			nameColor = LOCKED_TEXT_COLOR;
+		}
+		else
+		{
+			nameColor = Color.WHITE;
+		}
+
 		JLabel nameLabel = new JLabel(item.getName());
 		nameLabel.setFont(FontManager.getRunescapeSmallFont());
-		nameLabel.setForeground(obtained ? Color.GREEN : Color.WHITE);
+		nameLabel.setForeground(nameColor);
 		centerPanel.add(nameLabel, BorderLayout.NORTH);
 
-		JLabel sourceLabel = new JLabel(source.getName());
+		String sourceLabelText = locked ? "\uD83D\uDD12 " + source.getName() : source.getName();
+		JLabel sourceLabel = new JLabel(sourceLabelText);
 		sourceLabel.setFont(FontManager.getRunescapeSmallFont());
-		sourceLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+		sourceLabel.setForeground(locked ? LOCKED_TEXT_COLOR : ColorScheme.LIGHT_GRAY_COLOR);
 		centerPanel.add(sourceLabel, BorderLayout.SOUTH);
 		add(centerPanel, BorderLayout.CENTER);
 
@@ -67,20 +98,21 @@ class ItemRowPanel extends JPanel
 		String rateStr = formatDropRate(item.getDropRate());
 		JLabel rateLabel = new JLabel(rateStr, SwingConstants.RIGHT);
 		rateLabel.setFont(FontManager.getRunescapeSmallFont());
-		rateLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+		rateLabel.setForeground(locked ? LOCKED_TEXT_COLOR : ColorScheme.LIGHT_GRAY_COLOR);
 		rightPanel.add(rateLabel, BorderLayout.NORTH);
 
 		if (score > 0)
 		{
 			JLabel scoreLabel = new JLabel(String.format("%.1f", score), SwingConstants.RIGHT);
 			scoreLabel.setFont(FontManager.getRunescapeSmallFont());
-			scoreLabel.setForeground(new Color(255, 200, 0));
+			scoreLabel.setForeground(locked ? LOCKED_TEXT_COLOR : new Color(255, 200, 0));
 			rightPanel.add(scoreLabel, BorderLayout.SOUTH);
 		}
 		add(rightPanel, BorderLayout.EAST);
 
 		if (onClick != null)
 		{
+			final Color normalBg = bgColor;
 			addMouseListener(new java.awt.event.MouseAdapter()
 			{
 				@Override
@@ -92,13 +124,24 @@ class ItemRowPanel extends JPanel
 				@Override
 				public void mouseEntered(java.awt.event.MouseEvent e)
 				{
-					setBackground(obtained ? OBTAINED_COLOR.brighter() : ColorScheme.DARKER_GRAY_HOVER_COLOR);
+					if (obtained)
+					{
+						setBackground(OBTAINED_COLOR.brighter());
+					}
+					else if (locked)
+					{
+						setBackground(new Color(60, 50, 50));
+					}
+					else
+					{
+						setBackground(ColorScheme.DARKER_GRAY_HOVER_COLOR);
+					}
 				}
 
 				@Override
 				public void mouseExited(java.awt.event.MouseEvent e)
 				{
-					setBackground(obtained ? OBTAINED_COLOR : ColorScheme.DARKER_GRAY_COLOR);
+					setBackground(normalBg);
 				}
 			});
 		}

@@ -6,6 +6,7 @@ import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerCollectionState;
+import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import java.awt.BorderLayout;
@@ -67,6 +68,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final PlayerCollectionState collectionState;
 	private final EfficiencyCalculator calculator;
 	private final ItemManager itemManager;
+	private final RequirementsChecker requirementsChecker;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Runnable syncAction;
@@ -93,6 +95,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
 		DropRateDatabase database, PlayerCollectionState collectionState,
 		EfficiencyCalculator calculator, ItemManager itemManager,
+		RequirementsChecker requirementsChecker,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
 		Runnable syncAction)
 	{
@@ -101,6 +104,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.collectionState = collectionState;
 		this.calculator = calculator;
 		this.itemManager = itemManager;
+		this.requirementsChecker = requirementsChecker;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.syncAction = syncAction;
@@ -142,6 +146,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 				currentMode = (Mode) e.getItem();
 				updateControlVisibility();
 				rebuild();
+				resetScrollPosition();
 			}
 		});
 		controlsPanel.add(modeSelector);
@@ -319,6 +324,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	{
 		cardLayout.show(contentPanel, "detail");
 		refreshScrollPane();
+		resetScrollPosition();
 	}
 
 	private void refreshScrollPane()
@@ -328,6 +334,15 @@ public class CollectionLogHelperPanel extends PluginPanel
 		if (scrollPane != null)
 		{
 			scrollPane.validate();
+		}
+	}
+
+	private void resetScrollPosition()
+	{
+		JScrollPane scrollPane = (JScrollPane) SwingUtilities.getAncestorOfClass(
+			JScrollPane.class, this);
+		if (scrollPane != null)
+		{
 			scrollPane.getVerticalScrollBar().setValue(0);
 		}
 	}
@@ -337,10 +352,11 @@ public class CollectionLogHelperPanel extends PluginPanel
 		List<ScoredItem> scored = calculator.rankByEfficiency();
 		boolean hideObtained = config.hideObtainedItems();
 
-		if (!scored.isEmpty())
-		{
-			listContainer.add(createQuickGuidePanel(scored.get(0)));
-		}
+		// Top Pick should always be an accessible (unlocked) source
+		scored.stream()
+			.filter(s -> !s.isLocked())
+			.findFirst()
+			.ifPresent(topPick -> listContainer.add(createQuickGuidePanel(topPick)));
 
 		for (ScoredItem si : scored)
 		{
@@ -352,7 +368,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 					continue;
 				}
 				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
-					si.getScore(), itemManager,
+					si.getScore(), si.isLocked(), itemManager,
 					() -> showDetail(item, si.getSource()));
 				listContainer.add(row);
 			}
@@ -367,16 +383,16 @@ public class CollectionLogHelperPanel extends PluginPanel
 			return;
 		}
 
-		// Top Pick for this category
+		// Top Pick for this category — always an accessible source
 		List<ScoredItem> categoryScored = calculator.filterByCategory(category);
-		if (!categoryScored.isEmpty())
-		{
-			listContainer.add(createQuickGuidePanel(categoryScored.get(0)));
-		}
+		categoryScored.stream()
+			.filter(s -> !s.isLocked())
+			.findFirst()
+			.ifPresent(topPick -> listContainer.add(createQuickGuidePanel(topPick)));
 
 		List<CollectionLogSource> sources = database.getSourcesByCategory(category);
 		CategorySummaryPanel summary = new CategorySummaryPanel(
-			category, sources, collectionState, itemManager,
+			category, sources, collectionState, requirementsChecker, itemManager,
 			this::showDetail, config.hideObtainedItems());
 		listContainer.add(summary);
 	}
@@ -390,9 +406,16 @@ public class CollectionLogHelperPanel extends PluginPanel
 		}
 
 		boolean hideObtained = config.hideObtainedItems();
+		boolean hideLocked = config.hideLockedContent();
 
 		for (CollectionLogSource source : database.getAllSources())
 		{
+			boolean locked = !requirementsChecker.isAccessible(source.getName());
+			if (hideLocked && locked)
+			{
+				continue;
+			}
+
 			for (CollectionLogItem item : source.getItems())
 			{
 				if (item.getName().toLowerCase().contains(query)
@@ -404,7 +427,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 						continue;
 					}
 					ItemRowPanel row = new ItemRowPanel(item, source, obtained, 0,
-						itemManager, () -> showDetail(item, source));
+						locked, itemManager, () -> showDetail(item, source));
 					listContainer.add(row);
 				}
 			}
@@ -430,7 +453,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 					continue;
 				}
 				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
-					si.getScore(), itemManager,
+					si.getScore(), si.isLocked(), itemManager,
 					() -> showDetail(item, si.getSource()));
 				listContainer.add(row);
 			}
@@ -440,12 +463,15 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private void showDetail(CollectionLogItem item, CollectionLogSource source)
 	{
 		boolean obtained = collectionState.isItemObtained(item.getItemId());
+		boolean locked = !requirementsChecker.isAccessible(source.getName());
 		boolean isGuidingThis = guidanceActive && guidedSource != null
 			&& guidedSource.getName().equals(source.getName());
 
 		detailView.removeAll();
 		ItemDetailPanel detail = new ItemDetailPanel(
-			item, source, obtained, itemManager,
+			item, source, obtained, locked,
+			requirementsChecker.getUnmetRequirements(source.getName()),
+			itemManager,
 			this::showListView,
 			() -> guidanceActivator.accept(source),
 			() -> guidanceDeactivator.run(),

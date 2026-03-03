@@ -15,6 +15,7 @@ public class CollectionLogSource
     int killTimeSeconds;
     String locationDescription;
     List<Waypoint> waypoints;
+    SourceRequirements requirements;
     List<CollectionLogItem> items;
 
     public WorldPoint getWorldPoint()
