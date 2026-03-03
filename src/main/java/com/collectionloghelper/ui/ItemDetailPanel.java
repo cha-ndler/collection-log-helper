@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -26,10 +27,12 @@ class ItemDetailPanel extends JPanel
 	private static final HttpUrl WIKI_BASE = HttpUrl.get("https://oldschool.runescape.wiki");
 	private static final Color GUIDE_ME_COLOR = new Color(30, 120, 30);
 	private static final Color STOP_GUIDANCE_COLOR = new Color(140, 30, 30);
+	private static final Color LOCKED_COLOR = new Color(200, 80, 80);
 
 	private final JButton guideMeButton;
 
 	ItemDetailPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
+		boolean locked, List<String> unmetRequirements,
 		ItemManager itemManager, Runnable onBack, Runnable onGuideMe, Runnable onStopGuidance,
 		boolean guidanceActive)
 	{
@@ -87,6 +90,18 @@ class ItemDetailPanel extends JPanel
 		if (item.isPet())
 		{
 			addInfoRow(infoPanel, "Type:", "Pet");
+		}
+
+		if (locked)
+		{
+			addInfoRow(infoPanel, "Access:", "Locked", LOCKED_COLOR);
+			if (unmetRequirements != null)
+			{
+				for (String req : unmetRequirements)
+				{
+					addInfoRow(infoPanel, "Requires:", req, LOCKED_COLOR);
+				}
+			}
 		}
 
 		add(infoPanel);
@@ -152,6 +167,11 @@ class ItemDetailPanel extends JPanel
 
 	private void addInfoRow(JPanel parent, String label, String value)
 	{
+		addInfoRow(parent, label, value, Color.WHITE);
+	}
+
+	private void addInfoRow(JPanel parent, String label, String value, Color valueColor)
+	{
 		JPanel row = new JPanel(new BorderLayout());
 		row.setOpaque(false);
 		row.setAlignmentX(LEFT_ALIGNMENT);
@@ -165,7 +185,7 @@ class ItemDetailPanel extends JPanel
 
 		JLabel valueComponent = new JLabel(value, SwingConstants.RIGHT);
 		valueComponent.setFont(FontManager.getRunescapeSmallFont());
-		valueComponent.setForeground(Color.WHITE);
+		valueComponent.setForeground(valueColor);
 		row.add(valueComponent, BorderLayout.EAST);
 
 		parent.add(row);

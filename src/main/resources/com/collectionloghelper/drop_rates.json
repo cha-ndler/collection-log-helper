@@ -306,6 +306,9 @@
     "worldY": 3069,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "requirements": {
+      "quests": ["REGICIDE"]
+    },
     "items": [
       {
         "itemId": 12922,
@@ -380,6 +383,9 @@
     "worldY": 3693,
     "worldPlane": 0,
     "killTimeSeconds": 150,
+    "requirements": {
+      "quests": ["DRAGON_SLAYER_II"]
+    },
     "items": [
       {
         "itemId": 21907,
@@ -440,6 +446,9 @@
     "worldPlane": 0,
     "locationDescription": "Taverley Dungeon entrance, Taverley",
     "killTimeSeconds": 60,
+    "requirements": {
+      "skills": [{"skill": "SLAYER", "level": 91}]
+    },
     "items": [
       {
         "itemId": 13231,
@@ -499,6 +508,9 @@
     "worldPlane": 0,
     "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
     "killTimeSeconds": 120,
+    "requirements": {
+      "skills": [{"skill": "SLAYER", "level": 95}]
+    },
     "items": [
       {
         "itemId": 22971,
@@ -707,6 +719,9 @@
     "worldY": 3596,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "requirements": {
+      "quests": ["SECRETS_OF_THE_NORTH"]
+    },
     "items": [
       {
         "itemId": 27627,
@@ -742,6 +757,9 @@
     "worldY": 3514,
     "worldPlane": 0,
     "killTimeSeconds": 210,
+    "requirements": {
+      "quests": ["DESERT_TREASURE_II__THE_FALLEN_EMPIRE"]
+    },
     "items": [
       {
         "itemId": 28321,
@@ -809,6 +827,9 @@
     "worldY": 2894,
     "worldPlane": 0,
     "killTimeSeconds": 240,
+    "requirements": {
+      "quests": ["DESERT_TREASURE_II__THE_FALLEN_EMPIRE"]
+    },
     "items": [
       {
         "itemId": 28323,
@@ -876,6 +897,9 @@
     "worldY": 3514,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "requirements": {
+      "quests": ["DESERT_TREASURE_II__THE_FALLEN_EMPIRE"]
+    },
     "items": [
       {
         "itemId": 28325,
@@ -943,6 +967,9 @@
     "worldY": 3484,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "requirements": {
+      "quests": ["DESERT_TREASURE_II__THE_FALLEN_EMPIRE"]
+    },
     "items": [
       {
         "itemId": 28329,
@@ -1010,6 +1037,9 @@
     "worldY": 3543,
     "worldPlane": 2,
     "killTimeSeconds": 120,
+    "requirements": {
+      "skills": [{"skill": "SLAYER", "level": 75}]
+    },
     "items": [
       {
         "itemId": 21752,
@@ -1427,6 +1457,9 @@
     "worldPlane": 0,
     "locationDescription": "Kraken Cove, Piscatoris",
     "killTimeSeconds": 30,
+    "requirements": {
+      "skills": [{"skill": "SLAYER", "level": 87}]
+    },
     "items": [
       {
         "itemId": 11905,
@@ -1469,6 +1502,9 @@
     "worldY": 9452,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "requirements": {
+      "skills": [{"skill": "SLAYER", "level": 93}]
+    },
     "items": [
       {
         "itemId": 12002,
@@ -1519,6 +1555,9 @@
     "worldY": 4763,
     "worldPlane": 0,
     "killTimeSeconds": 150,
+    "requirements": {
+      "skills": [{"skill": "SLAYER", "level": 85}]
+    },
     "items": [
       {
         "itemId": 13265,
@@ -1864,6 +1903,9 @@
     "worldY": 3419,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "requirements": {
+      "quests": ["MONKEY_MADNESS_II"]
+    },
     "items": [
       {
         "itemId": 19529,
@@ -1976,6 +2018,9 @@
     "worldY": 3731,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "requirements": {
+      "skills": [{"skill": "FARMING", "level": 65}]
+    },
     "items": [
       {
         "itemId": 22997,
@@ -2196,6 +2241,9 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 1500,
+    "requirements": {
+      "quests": ["A_TASTE_OF_HOPE"]
+    },
     "items": [
       {
         "itemId": 22325,
@@ -2569,6 +2617,9 @@
     "worldY": 6073,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "requirements": {
+      "quests": ["SONG_OF_THE_ELVES"]
+    },
     "items": [
       {
         "itemId": 23862,
@@ -2612,6 +2663,9 @@
     "worldY": 6073,
     "worldPlane": 0,
     "killTimeSeconds": 720,
+    "requirements": {
+      "quests": ["SONG_OF_THE_ELVES"]
+    },
     "items": [
       {
         "itemId": 23862,
@@ -2655,6 +2709,9 @@
     "worldY": 3298,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "requirements": {
+      "quests": ["PRIEST_IN_PERIL"]
+    },
     "items": [
       {
         "itemId": 4708,
@@ -2997,6 +3054,9 @@
     "worldY": 6040,
     "worldPlane": 0,
     "killTimeSeconds": 240,
+    "requirements": {
+      "quests": ["SONG_OF_THE_ELVES"]
+    },
     "items": [
       {
         "itemId": 23902,
@@ -3313,6 +3373,9 @@
     "worldY": 3441,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "requirements": {
+      "quests": ["WHILE_GUTHIX_SLEEPS"]
+    },
     "items": [
       {
         "itemId": 29554,
@@ -3836,6 +3899,10 @@
     "worldY": 3887,
     "worldPlane": 0,
     "killTimeSeconds": 480,
+    "requirements": {
+      "quests": ["SINS_OF_THE_FATHER"],
+      "skills": [{"skill": "AGILITY", "level": 52}]
+    },
     "items": [
       {
         "itemId": 24711,
@@ -3975,6 +4042,10 @@
     "worldY": 3168,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "requirements": {
+      "quests": ["TEMPLE_OF_THE_EYE"],
+      "skills": [{"skill": "RUNECRAFT", "level": 27}]
+    },
     "items": [
       {
         "itemId": 26876,
@@ -4390,6 +4461,9 @@
     "worldY": 3299,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "requirements": {
+      "quests": ["SHADES_OF_MORTTON"]
+    },
     "items": [
       {
         "itemId": 3470,
@@ -4739,6 +4813,9 @@
     "worldY": 3241,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "requirements": {
+      "quests": ["IN_AID_OF_THE_MYREQUE"]
+    },
     "items": [
       {
         "itemId": 10941,
@@ -6587,6 +6664,9 @@
     "worldY": 5647,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "requirements": {
+      "quests": ["MONKEY_MADNESS_II"]
+    },
     "items": [
       {
         "itemId": 19529,
@@ -6826,7 +6906,7 @@
         "name": "Monkey",
         "dropRate": 1.0,
         "varbitId": 0,
-        "isPet": true,
+        "isPet": false,
         "wikiPage": "Monkey_(Monkey_Madness_II)"
       },
       {
@@ -6834,7 +6914,7 @@
         "name": "Karamjan monkey",
         "dropRate": 1.0,
         "varbitId": 0,
-        "isPet": true,
+        "isPet": false,
         "wikiPage": "Karamjan_monkey_(item)"
       },
       {
@@ -6842,7 +6922,7 @@
         "name": "Zombie monkey",
         "dropRate": 1.0,
         "varbitId": 0,
-        "isPet": true,
+        "isPet": false,
         "wikiPage": "Zombie_monkey_(item)"
       },
       {
@@ -6850,7 +6930,7 @@
         "name": "Maniacal monkey",
         "dropRate": 1.0,
         "varbitId": 0,
-        "isPet": true,
+        "isPet": false,
         "wikiPage": "Maniacal_monkey_(item)"
       },
       {
@@ -6858,7 +6938,7 @@
         "name": "Skeleton monkey",
         "dropRate": 1.0,
         "varbitId": 0,
-        "isPet": true,
+        "isPet": false,
         "wikiPage": "Skeleton_monkey_(item)"
       },
       {
@@ -6866,7 +6946,7 @@
         "name": "Kruk jr",
         "dropRate": 1.0,
         "varbitId": 0,
-        "isPet": true,
+        "isPet": false,
         "wikiPage": "Kruk_jr"
       },
       {
@@ -6874,7 +6954,7 @@
         "name": "Princely monkey",
         "dropRate": 1.0,
         "varbitId": 0,
-        "isPet": true,
+        "isPet": false,
         "wikiPage": "Princely_monkey"
       }
     ],
@@ -8476,6 +8556,9 @@
     "worldY": 3204,
     "worldPlane": 0,
     "killTimeSeconds": 20,
+    "requirements": {
+      "quests": ["TOWER_OF_LIFE"]
+    },
     "items": [
       {
         "itemId": 10859,

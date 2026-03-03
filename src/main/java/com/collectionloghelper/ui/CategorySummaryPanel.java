@@ -4,6 +4,7 @@ import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.PlayerCollectionState;
+import com.collectionloghelper.data.RequirementsChecker;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,12 +27,14 @@ class CategorySummaryPanel extends JPanel
 	private boolean expanded = false;
 
 	CategorySummaryPanel(CollectionLogCategory category, List<CollectionLogSource> sources,
-		PlayerCollectionState collectionState, ItemManager itemManager,
-		ItemClickHandler clickHandler, boolean hideObtained)
+		PlayerCollectionState collectionState, RequirementsChecker requirementsChecker,
+		ItemManager itemManager, ItemClickHandler clickHandler, boolean hideObtained)
 	{
 		setLayout(new BorderLayout());
 		setBackground(ColorScheme.DARKER_GRAY_COLOR);
 		setBorder(BorderFactory.createEmptyBorder(0, 0, 4, 0));
+		setAlignmentX(LEFT_ALIGNMENT);
+		setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 
 		// Header with category name + progress bar
 		JPanel headerPanel = new JPanel(new BorderLayout(8, 0));
@@ -62,6 +65,7 @@ class CategorySummaryPanel extends JPanel
 
 		for (CollectionLogSource source : sources)
 		{
+			boolean locked = !requirementsChecker.isAccessible(source.getName());
 			for (CollectionLogItem item : source.getItems())
 			{
 				boolean itemObtained = collectionState.isItemObtained(item.getItemId());
@@ -70,7 +74,7 @@ class CategorySummaryPanel extends JPanel
 					continue;
 				}
 				ItemRowPanel row = new ItemRowPanel(item, source, itemObtained, 0,
-					itemManager, () -> clickHandler.onItemClicked(item, source));
+					locked, itemManager, () -> clickHandler.onItemClicked(item, source));
 				itemsContainer.add(row);
 			}
 		}
