@@ -3500,5 +3500,4712 @@
         "wikiPage": "Abyssal_head"
       }
     ]
+  },
+  {
+    "name": "Hallowed Sepulchre",
+    "category": "MINIGAMES",
+    "worldX": 3654,
+    "worldY": 3887,
+    "worldPlane": 0,
+    "killTimeSeconds": 480,
+    "items": [
+      {
+        "itemId": 24711,
+        "name": "Hallowed mark",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hallowed_mark"
+      },
+      {
+        "itemId": 24740,
+        "name": "Strange old lockpick",
+        "dropRate": 0.025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Strange_old_lockpick"
+      },
+      {
+        "itemId": 24844,
+        "name": "Ring of endurance",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ring_of_endurance"
+      },
+      {
+        "itemId": 24763,
+        "name": "Mysterious page 1",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mysterious_page"
+      },
+      {
+        "itemId": 24765,
+        "name": "Mysterious page 2",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mysterious_page"
+      },
+      {
+        "itemId": 24767,
+        "name": "Mysterious page 3",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mysterious_page"
+      },
+      {
+        "itemId": 24769,
+        "name": "Mysterious page 4",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mysterious_page"
+      },
+      {
+        "itemId": 24771,
+        "name": "Mysterious page 5",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mysterious_page"
+      },
+      {
+        "itemId": 24731,
+        "name": "Hallowed ring",
+        "dropRate": 0.059,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hallowed_ring"
+      },
+      {
+        "itemId": 24719,
+        "name": "Hallowed token",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hallowed_token"
+      },
+      {
+        "itemId": 24721,
+        "name": "Hallowed grapple",
+        "dropRate": 0.143,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hallowed_grapple"
+      },
+      {
+        "itemId": 24723,
+        "name": "Hallowed focus",
+        "dropRate": 0.143,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hallowed_focus"
+      },
+      {
+        "itemId": 24725,
+        "name": "Hallowed symbol",
+        "dropRate": 0.143,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hallowed_symbol"
+      },
+      {
+        "itemId": 24727,
+        "name": "Hallowed hammer",
+        "dropRate": 0.143,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hallowed_hammer"
+      },
+      {
+        "itemId": 24733,
+        "name": "Dark acorn",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_acorn"
+      },
+      {
+        "itemId": 20659,
+        "name": "Giant squirrel",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Giant_squirrel"
+      }
+    ],
+    "locationDescription": "Hallowed Sepulchre entrance in Darkmeyer"
+  },
+  {
+    "name": "Guardians of the Rift",
+    "category": "MINIGAMES",
+    "worldX": 3109,
+    "worldY": 3168,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "items": [
+      {
+        "itemId": 26876,
+        "name": "Atlax's diary",
+        "dropRate": 0.05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Atlax%27s_diary"
+      },
+      {
+        "itemId": 26798,
+        "name": "Catalytic talisman",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Catalytic_talisman"
+      },
+      {
+        "itemId": 5516,
+        "name": "Elemental talisman",
+        "dropRate": 0.003265,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Elemental_talisman"
+      },
+      {
+        "itemId": 26813,
+        "name": "Abyssal needle",
+        "dropRate": 0.003333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_needle"
+      },
+      {
+        "itemId": 26822,
+        "name": "Abyssal lantern",
+        "dropRate": 0.001429,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_lantern"
+      },
+      {
+        "itemId": 26811,
+        "name": "Abyssal red dye",
+        "dropRate": 0.000833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_red_dye"
+      },
+      {
+        "itemId": 26807,
+        "name": "Abyssal green dye",
+        "dropRate": 0.000833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_green_dye"
+      },
+      {
+        "itemId": 26809,
+        "name": "Abyssal blue dye",
+        "dropRate": 0.000833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_blue_dye"
+      },
+      {
+        "itemId": 26908,
+        "name": "Intricate pouch",
+        "dropRate": 0.035714,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Intricate_pouch"
+      },
+      {
+        "itemId": 26912,
+        "name": "Lost bag",
+        "dropRate": 0.000595,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lost_bag"
+      },
+      {
+        "itemId": 26910,
+        "name": "Tarnished locket",
+        "dropRate": 0.000893,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tarnished_locket"
+      },
+      {
+        "itemId": 26792,
+        "name": "Abyssal pearls",
+        "dropRate": 0.128571,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_pearls"
+      },
+      {
+        "itemId": 26850,
+        "name": "Hat of the eye",
+        "dropRate": 0.083,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hat_of_the_eye"
+      },
+      {
+        "itemId": 26852,
+        "name": "Robe top of the eye",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Robe_top_of_the_eye"
+      },
+      {
+        "itemId": 26854,
+        "name": "Robe bottoms of the eye",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Robe_bottoms_of_the_eye"
+      },
+      {
+        "itemId": 26856,
+        "name": "Boots of the eye",
+        "dropRate": 0.143,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Boots_of_the_eye"
+      },
+      {
+        "itemId": 26815,
+        "name": "Ring of the elements",
+        "dropRate": 0.083,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ring_of_the_elements"
+      },
+      {
+        "itemId": 26820,
+        "name": "Guardian's eye",
+        "dropRate": 0.012,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guardian%27s_eye"
+      },
+      {
+        "itemId": 26901,
+        "name": "Abyssal protector",
+        "dropRate": 0.00025,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Abyssal_protector"
+      }
+    ],
+    "locationDescription": "Temple of the Eye, accessed via portal in Wizards' Tower basement"
+  },
+  {
+    "name": "Brimhaven Agility Arena",
+    "category": "MINIGAMES",
+    "worldX": 2809,
+    "worldY": 3194,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "items": [
+      {
+        "itemId": 2997,
+        "name": "Pirate's hook",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pirate%27s_hook"
+      }
+    ],
+    "locationDescription": "Brimhaven Agility Arena, east of Brimhaven"
+  },
+  {
+    "name": "Giants' Foundry",
+    "category": "MINIGAMES",
+    "worldX": 3360,
+    "worldY": 3151,
+    "worldPlane": 0,
+    "killTimeSeconds": 360,
+    "items": [
+      {
+        "itemId": 27023,
+        "name": "Smiths tunic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Smiths_tunic"
+      },
+      {
+        "itemId": 27025,
+        "name": "Smiths trousers",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Smiths_trousers"
+      },
+      {
+        "itemId": 27027,
+        "name": "Smiths boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Smiths_boots"
+      },
+      {
+        "itemId": 27029,
+        "name": "Smiths gloves",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Smiths_gloves"
+      },
+      {
+        "itemId": 27021,
+        "name": "Colossal blade",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Colossal_blade"
+      },
+      {
+        "itemId": 27014,
+        "name": "Kovac's grog",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Kovac%27s_grog"
+      },
+      {
+        "itemId": 27012,
+        "name": "Double ammo mould",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Double_ammo_mould"
+      }
+    ],
+    "locationDescription": "Giants' Foundry beneath the Giant's Plateau"
+  },
+  {
+    "name": "Pest Control",
+    "category": "MINIGAMES",
+    "worldX": 2659,
+    "worldY": 2676,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 8839,
+        "name": "Void knight top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Void_knight_top"
+      },
+      {
+        "itemId": 8840,
+        "name": "Void knight robe",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Void_knight_robe"
+      },
+      {
+        "itemId": 8842,
+        "name": "Void knight gloves",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Void_knight_gloves"
+      },
+      {
+        "itemId": 8841,
+        "name": "Void knight mace",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Void_knight_mace"
+      },
+      {
+        "itemId": 11665,
+        "name": "Void melee helm",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Void_melee_helm"
+      },
+      {
+        "itemId": 11664,
+        "name": "Void ranger helm",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Void_ranger_helm"
+      },
+      {
+        "itemId": 11663,
+        "name": "Void mage helm",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Void_mage_helm"
+      },
+      {
+        "itemId": 11673,
+        "name": "Void seal",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Void_seal"
+      },
+      {
+        "itemId": 13072,
+        "name": "Elite void top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Elite_void_top"
+      },
+      {
+        "itemId": 13073,
+        "name": "Elite void robe",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Elite_void_robe"
+      }
+    ],
+    "locationDescription": "Void Knights' Outpost, south of Port Sarim"
+  },
+  {
+    "name": "Mage Training Arena",
+    "category": "MINIGAMES",
+    "worldX": 3363,
+    "worldY": 3316,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "items": [
+      {
+        "itemId": 6918,
+        "name": "Infinity hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Infinity_hat"
+      },
+      {
+        "itemId": 6916,
+        "name": "Infinity top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Infinity_top"
+      },
+      {
+        "itemId": 6924,
+        "name": "Infinity bottoms",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Infinity_bottoms"
+      },
+      {
+        "itemId": 6922,
+        "name": "Infinity gloves",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Infinity_gloves"
+      },
+      {
+        "itemId": 6920,
+        "name": "Infinity boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Infinity_boots"
+      },
+      {
+        "itemId": 6889,
+        "name": "Mage's book",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mage%27s_book"
+      },
+      {
+        "itemId": 6914,
+        "name": "Master wand",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Master_wand"
+      },
+      {
+        "itemId": 8015,
+        "name": "Bones to peaches",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bones_to_Peaches"
+      }
+    ],
+    "locationDescription": "Mage Training Arena, north-east of Al Kharid"
+  },
+  {
+    "name": "Shades of Mort'ton",
+    "category": "MINIGAMES",
+    "worldX": 3459,
+    "worldY": 3299,
+    "worldPlane": 0,
+    "killTimeSeconds": 180,
+    "items": [
+      {
+        "itemId": 3470,
+        "name": "Fine cloth",
+        "dropRate": 0.146,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fine_cloth"
+      },
+      {
+        "itemId": 12851,
+        "name": "Amulet of the damned",
+        "dropRate": 0.0417,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Amulet_of_the_damned"
+      },
+      {
+        "itemId": 12854,
+        "name": "Flamtaer bag",
+        "dropRate": 0.5,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Flamtaer_bag"
+      }
+    ],
+    "locationDescription": "Shades catacombs beneath Mort'ton"
+  },
+  {
+    "name": "Mahogany Homes",
+    "category": "MINIGAMES",
+    "worldX": 2954,
+    "worldY": 3369,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 24872,
+        "name": "Carpenter's helmet",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Carpenter%27s_helmet"
+      },
+      {
+        "itemId": 24874,
+        "name": "Carpenter's shirt",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Carpenter%27s_shirt"
+      },
+      {
+        "itemId": 24876,
+        "name": "Carpenter's trousers",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Carpenter%27s_trousers"
+      },
+      {
+        "itemId": 24878,
+        "name": "Carpenter's boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Carpenter%27s_boots"
+      },
+      {
+        "itemId": 24880,
+        "name": "Amy's saw",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Amy%27s_saw"
+      },
+      {
+        "itemId": 24882,
+        "name": "Plank sack",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Plank_sack"
+      }
+    ],
+    "locationDescription": "Mahogany Homes, contracts available in Falador, Varrock, Hosidius, and Ardougne"
+  },
+  {
+    "name": "Mastering Mixology",
+    "category": "MINIGAMES",
+    "worldX": 1389,
+    "worldY": 2955,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 29978,
+        "name": "Alchemist labcoat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Alchemist_labcoat"
+      },
+      {
+        "itemId": 29982,
+        "name": "Alchemist pants",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Alchemist_pants"
+      },
+      {
+        "itemId": 29986,
+        "name": "Alchemist gloves",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Alchemist_gloves"
+      },
+      {
+        "itemId": 29974,
+        "name": "Prescription goggles",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Prescription_goggles"
+      },
+      {
+        "itemId": 29996,
+        "name": "Reagent pouch",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Reagent_pouch"
+      },
+      {
+        "itemId": 29988,
+        "name": "Alchemist's amulet",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Alchemist%27s_amulet"
+      },
+      {
+        "itemId": 30002,
+        "name": "Chugging barrel",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chugging_barrel"
+      }
+    ],
+    "locationDescription": "Mastering Mixology, Aldarin in Varlamore"
+  },
+  {
+    "name": "Volcanic Mine",
+    "category": "MINIGAMES",
+    "worldX": 3815,
+    "worldY": 3807,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "items": [
+      {
+        "itemId": 21697,
+        "name": "Ash covered tome",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ash_covered_tome"
+      },
+      {
+        "itemId": 21539,
+        "name": "Large water container",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Large_water_container"
+      },
+      {
+        "itemId": 21541,
+        "name": "Volcanic mine teleport",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Volcanic_mine_teleport"
+      }
+    ],
+    "locationDescription": "Volcanic Mine, north-east Fossil Island volcano"
+  },
+  {
+    "name": "Tithe Farm",
+    "category": "MINIGAMES",
+    "worldX": 1791,
+    "worldY": 3504,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 13646,
+        "name": "Farmer's strawhat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Farmer%27s_strawhat"
+      },
+      {
+        "itemId": 13642,
+        "name": "Farmer's jacket",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Farmer%27s_jacket"
+      },
+      {
+        "itemId": 13640,
+        "name": "Farmer's boro trousers",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Farmer%27s_boro_trousers"
+      },
+      {
+        "itemId": 13644,
+        "name": "Farmer's boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Farmer%27s_boots"
+      },
+      {
+        "itemId": 13639,
+        "name": "Seed box",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Seed_box"
+      },
+      {
+        "itemId": 13226,
+        "name": "Herb sack",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Herb_sack"
+      },
+      {
+        "itemId": 13353,
+        "name": "Gricoller's can",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gricoller%27s_can"
+      }
+    ],
+    "locationDescription": "Tithe Farm, Hosidius"
+  },
+  {
+    "name": "Gnome Restaurant",
+    "category": "MINIGAMES",
+    "worldX": 2436,
+    "worldY": 3500,
+    "worldPlane": 0,
+    "killTimeSeconds": 420,
+    "items": [
+      {
+        "itemId": 9470,
+        "name": "Gnome scarf",
+        "dropRate": 0.0599,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gnome_scarf"
+      },
+      {
+        "itemId": 9472,
+        "name": "Gnome goggles",
+        "dropRate": 0.0599,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gnome_goggles"
+      },
+      {
+        "itemId": 9475,
+        "name": "Mint cake",
+        "dropRate": 0.0449,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mint_cake"
+      },
+      {
+        "itemId": 9469,
+        "name": "Grand seed pod",
+        "dropRate": 0.0449,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Grand_seed_pod"
+      }
+    ],
+    "locationDescription": "Gnome Restaurant, Tree Gnome Stronghold"
+  },
+  {
+    "name": "Fishing Trawler",
+    "category": "MINIGAMES",
+    "worldX": 2661,
+    "worldY": 3164,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "items": [
+      {
+        "itemId": 13258,
+        "name": "Angler hat",
+        "dropRate": 0.0833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Angler_hat"
+      },
+      {
+        "itemId": 13259,
+        "name": "Angler top",
+        "dropRate": 0.0833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Angler_top"
+      },
+      {
+        "itemId": 13260,
+        "name": "Angler waders",
+        "dropRate": 0.0833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Angler_waders"
+      },
+      {
+        "itemId": 13261,
+        "name": "Angler boots",
+        "dropRate": 0.0833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Angler_boots"
+      }
+    ],
+    "locationDescription": "Fishing Trawler, Port Khazard"
+  },
+  {
+    "name": "Temple Trekking",
+    "category": "MINIGAMES",
+    "worldX": 3479,
+    "worldY": 3241,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "items": [
+      {
+        "itemId": 10941,
+        "name": "Lumberjack hat",
+        "dropRate": 0.5,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lumberjack_hat"
+      },
+      {
+        "itemId": 10939,
+        "name": "Lumberjack top",
+        "dropRate": 0.5,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lumberjack_top"
+      },
+      {
+        "itemId": 10940,
+        "name": "Lumberjack legs",
+        "dropRate": 0.5,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lumberjack_legs"
+      },
+      {
+        "itemId": 10933,
+        "name": "Lumberjack boots",
+        "dropRate": 0.5,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lumberjack_boots"
+      }
+    ],
+    "locationDescription": "Temple Trekking, between Burgh de Rott and Paterdomus"
+  },
+  {
+    "name": "Rogues' Den",
+    "category": "MINIGAMES",
+    "worldX": 2907,
+    "worldY": 3537,
+    "worldPlane": 0,
+    "killTimeSeconds": 240,
+    "items": [
+      {
+        "itemId": 5554,
+        "name": "Rogue mask",
+        "dropRate": 0.4,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rogue_mask"
+      },
+      {
+        "itemId": 5553,
+        "name": "Rogue top",
+        "dropRate": 0.4,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rogue_top"
+      },
+      {
+        "itemId": 5555,
+        "name": "Rogue trousers",
+        "dropRate": 0.4,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rogue_trousers"
+      },
+      {
+        "itemId": 5556,
+        "name": "Rogue gloves",
+        "dropRate": 0.4,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rogue_gloves"
+      },
+      {
+        "itemId": 5557,
+        "name": "Rogue boots",
+        "dropRate": 0.4,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rogue_boots"
+      }
+    ],
+    "locationDescription": "Rogues' Den beneath the Burthorpe pub"
+  },
+  {
+    "name": "Scroll Cases",
+    "category": "CLUES",
+    "worldX": 3213,
+    "worldY": 3424,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 30902,
+        "name": "Minor beginner scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Minor_beginner_scroll_case"
+      },
+      {
+        "itemId": 30904,
+        "name": "Major beginner scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Major_beginner_scroll_case"
+      },
+      {
+        "itemId": 30906,
+        "name": "Minor easy scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Minor_easy_scroll_case"
+      },
+      {
+        "itemId": 30908,
+        "name": "Major easy scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Major_easy_scroll_case"
+      },
+      {
+        "itemId": 30910,
+        "name": "Minor medium scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Minor_medium_scroll_case"
+      },
+      {
+        "itemId": 30912,
+        "name": "Major medium scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Major_medium_scroll_case"
+      },
+      {
+        "itemId": 30914,
+        "name": "Minor hard scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Minor_hard_scroll_case"
+      },
+      {
+        "itemId": 30916,
+        "name": "Major hard scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Major_hard_scroll_case"
+      },
+      {
+        "itemId": 30918,
+        "name": "Minor elite scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Minor_elite_scroll_case"
+      },
+      {
+        "itemId": 30920,
+        "name": "Major elite scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Major_elite_scroll_case"
+      },
+      {
+        "itemId": 30922,
+        "name": "Minor master scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Minor_master_scroll_case"
+      },
+      {
+        "itemId": 30924,
+        "name": "Major master scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Major_master_scroll_case"
+      },
+      {
+        "itemId": 30926,
+        "name": "Mimic scroll case",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mimic_scroll_case"
+      }
+    ],
+    "locationDescription": "Awarded for completing clue scroll milestones across all tiers"
+  },
+  {
+    "name": "Castle Wars",
+    "category": "MINIGAMES",
+    "worldX": 2440,
+    "worldY": 3089,
+    "worldPlane": 0,
+    "killTimeSeconds": 1200,
+    "items": [
+      {
+        "itemId": 4071,
+        "name": "Decorative helm (red)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_helm_(red)"
+      },
+      {
+        "itemId": 25165,
+        "name": "Decorative full helm (red)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_full_helm_(red)"
+      },
+      {
+        "itemId": 4069,
+        "name": "Decorative armour (red platebody)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(red_platebody)"
+      },
+      {
+        "itemId": 4070,
+        "name": "Decorative armour (red platelegs)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(red_platelegs)"
+      },
+      {
+        "itemId": 11893,
+        "name": "Decorative armour (red plateskirt)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(red_plateskirt)"
+      },
+      {
+        "itemId": 25163,
+        "name": "Decorative boots (red)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_boots_(red)"
+      },
+      {
+        "itemId": 4068,
+        "name": "Decorative sword (red)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_sword_(red)"
+      },
+      {
+        "itemId": 4072,
+        "name": "Decorative shield (red)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_shield_(red)"
+      },
+      {
+        "itemId": 4506,
+        "name": "Decorative helm (white)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_helm_(white)"
+      },
+      {
+        "itemId": 25169,
+        "name": "Decorative full helm (white)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_full_helm_(white)"
+      },
+      {
+        "itemId": 4504,
+        "name": "Decorative armour (white platebody)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(white_platebody)"
+      },
+      {
+        "itemId": 4505,
+        "name": "Decorative armour (white platelegs)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(white_platelegs)"
+      },
+      {
+        "itemId": 11894,
+        "name": "Decorative armour (white plateskirt)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(white_plateskirt)"
+      },
+      {
+        "itemId": 25167,
+        "name": "Decorative boots (white)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_boots_(white)"
+      },
+      {
+        "itemId": 4503,
+        "name": "Decorative sword (white)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_sword_(white)"
+      },
+      {
+        "itemId": 4507,
+        "name": "Decorative shield (white)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_shield_(white)"
+      },
+      {
+        "itemId": 4511,
+        "name": "Decorative helm (gold)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_helm_(gold)"
+      },
+      {
+        "itemId": 25174,
+        "name": "Decorative full helm (gold)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_full_helm_(gold)"
+      },
+      {
+        "itemId": 4509,
+        "name": "Decorative armour (gold platebody)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(gold_platebody)"
+      },
+      {
+        "itemId": 4510,
+        "name": "Decorative armour (gold platelegs)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(gold_platelegs)"
+      },
+      {
+        "itemId": 11895,
+        "name": "Decorative armour (gold plateskirt)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(gold_plateskirt)"
+      },
+      {
+        "itemId": 25171,
+        "name": "Decorative boots (gold)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_boots_(gold)"
+      },
+      {
+        "itemId": 4508,
+        "name": "Decorative sword (gold)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_sword_(gold)"
+      },
+      {
+        "itemId": 4512,
+        "name": "Decorative shield (gold)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_shield_(gold)"
+      },
+      {
+        "itemId": 11898,
+        "name": "Decorative armour (magic hat)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(magic_hat)"
+      },
+      {
+        "itemId": 11896,
+        "name": "Decorative armour (magic top)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(magic_top)"
+      },
+      {
+        "itemId": 11897,
+        "name": "Decorative armour (magic legs)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(magic_legs)"
+      },
+      {
+        "itemId": 11899,
+        "name": "Decorative armour (ranged top)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(ranged_top)"
+      },
+      {
+        "itemId": 11900,
+        "name": "Decorative armour (ranged legs)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(ranged_legs)"
+      },
+      {
+        "itemId": 11901,
+        "name": "Decorative armour (quiver)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Decorative_armour_(quiver)"
+      },
+      {
+        "itemId": 4513,
+        "name": "Castlewars hood (Saradomin)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Castlewars_hood_(Saradomin)"
+      },
+      {
+        "itemId": 4514,
+        "name": "Castlewars cloak (Saradomin)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Castlewars_cloak_(Saradomin)"
+      },
+      {
+        "itemId": 4515,
+        "name": "Castlewars hood (Zamorak)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Castlewars_hood_(Zamorak)"
+      },
+      {
+        "itemId": 4516,
+        "name": "Castlewars cloak (Zamorak)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Castlewars_cloak_(Zamorak)"
+      },
+      {
+        "itemId": 12637,
+        "name": "Saradomin halo",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradomin_halo"
+      },
+      {
+        "itemId": 12638,
+        "name": "Zamorak halo",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorak_halo"
+      },
+      {
+        "itemId": 12639,
+        "name": "Guthix halo",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthix_halo"
+      }
+    ],
+    "locationDescription": "Castle Wars arena, south of Observatory"
+  },
+  {
+    "name": "Soul Wars",
+    "category": "MINIGAMES",
+    "worldX": 2210,
+    "worldY": 2858,
+    "worldPlane": 0,
+    "killTimeSeconds": 720,
+    "items": [
+      {
+        "itemId": 25344,
+        "name": "Soul cape (red)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Soul_cape"
+      },
+      {
+        "itemId": 25346,
+        "name": "Soul cape (blue)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Soul_cape"
+      },
+      {
+        "itemId": 25348,
+        "name": "Lil' creator",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Lil%27_creator"
+      }
+    ],
+    "locationDescription": "Isle of Souls, west of Edgeville"
+  },
+  {
+    "name": "Last Man Standing",
+    "category": "MINIGAMES",
+    "worldX": 3151,
+    "worldY": 3634,
+    "worldPlane": 0,
+    "killTimeSeconds": 900,
+    "items": [
+      {
+        "itemId": 24189,
+        "name": "Deadman's chest",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Deadman%27s_chest"
+      },
+      {
+        "itemId": 24190,
+        "name": "Deadman's legs",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Deadman%27s_legs"
+      },
+      {
+        "itemId": 24191,
+        "name": "Deadman's cape",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Deadman%27s_cape"
+      },
+      {
+        "itemId": 24192,
+        "name": "Armadyl halo",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadyl_halo"
+      },
+      {
+        "itemId": 24195,
+        "name": "Bandos halo",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bandos_halo"
+      },
+      {
+        "itemId": 24198,
+        "name": "Seren halo",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Seren_halo"
+      },
+      {
+        "itemId": 24201,
+        "name": "Ancient halo",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_halo"
+      },
+      {
+        "itemId": 24204,
+        "name": "Brassica halo",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Brassica_halo"
+      },
+      {
+        "itemId": 24207,
+        "name": "Victor's cape (1)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Victor%27s_cape_(1)"
+      },
+      {
+        "itemId": 24209,
+        "name": "Victor's cape (10)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Victor%27s_cape_(10)"
+      },
+      {
+        "itemId": 24211,
+        "name": "Victor's cape (50)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Victor%27s_cape_(50)"
+      },
+      {
+        "itemId": 24213,
+        "name": "Victor's cape (100)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Victor%27s_cape_(100)"
+      },
+      {
+        "itemId": 24215,
+        "name": "Victor's cape (500)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Victor%27s_cape_(500)"
+      },
+      {
+        "itemId": 24520,
+        "name": "Victor's cape (1000)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Victor%27s_cape_(1000)"
+      }
+    ],
+    "locationDescription": "Ferox Enclave, north of Varrock in the Wilderness"
+  },
+  {
+    "name": "Vale Totems",
+    "category": "MINIGAMES",
+    "worldX": 1452,
+    "worldY": 3128,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 31052,
+        "name": "Bow string spool",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bow_string_spool"
+      },
+      {
+        "itemId": 31043,
+        "name": "Fletching knife",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fletching_knife"
+      },
+      {
+        "itemId": 31047,
+        "name": "Dirty arrowtips",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dirty_arrowtips"
+      },
+      {
+        "itemId": 31032,
+        "name": "Ent branch",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ent_branch"
+      },
+      {
+        "itemId": 31045,
+        "name": "Bale of flax",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bale_of_flax"
+      },
+      {
+        "itemId": 31018,
+        "name": "Ent seed",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ent_seed"
+      },
+      {
+        "itemId": 31034,
+        "name": "Greenman mask",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Greenman_mask"
+      },
+      {
+        "itemId": 31024,
+        "name": "Greenman carving",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Greenman_carving"
+      },
+      {
+        "itemId": 31027,
+        "name": "Greenman statue",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Greenman_statue"
+      },
+      {
+        "itemId": 31016,
+        "name": "Sacraments of ent folk",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sacraments_of_ent_folk"
+      }
+    ],
+    "locationDescription": "Auburn Valley, north-west Varlamore"
+  },
+  {
+    "name": "Trouble Brewing",
+    "category": "MINIGAMES",
+    "worldX": 3811,
+    "worldY": 2847,
+    "worldPlane": 0,
+    "killTimeSeconds": 1200,
+    "items": [
+      {
+        "itemId": 8959,
+        "name": "Blue tricorn hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_tricorn_hat"
+      },
+      {
+        "itemId": 8960,
+        "name": "Green tricorn hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_tricorn_hat"
+      },
+      {
+        "itemId": 8961,
+        "name": "Red tricorn hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_tricorn_hat"
+      },
+      {
+        "itemId": 8962,
+        "name": "Brown tricorn hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Brown_tricorn_hat"
+      },
+      {
+        "itemId": 8963,
+        "name": "Black tricorn hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_tricorn_hat"
+      },
+      {
+        "itemId": 8964,
+        "name": "Purple tricorn hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purple_tricorn_hat"
+      },
+      {
+        "itemId": 8965,
+        "name": "Grey tricorn hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Grey_tricorn_hat"
+      },
+      {
+        "itemId": 8952,
+        "name": "Blue naval shirt",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_naval_shirt"
+      },
+      {
+        "itemId": 8953,
+        "name": "Green naval shirt",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_naval_shirt"
+      },
+      {
+        "itemId": 8954,
+        "name": "Red naval shirt",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_naval_shirt"
+      },
+      {
+        "itemId": 8955,
+        "name": "Brown naval shirt",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Brown_naval_shirt"
+      },
+      {
+        "itemId": 8956,
+        "name": "Black naval shirt",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_naval_shirt"
+      },
+      {
+        "itemId": 8957,
+        "name": "Purple naval shirt",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purple_naval_shirt"
+      },
+      {
+        "itemId": 8958,
+        "name": "Grey naval shirt",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Grey_naval_shirt"
+      },
+      {
+        "itemId": 8991,
+        "name": "Blue navy slacks",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blue_navy_slacks"
+      },
+      {
+        "itemId": 8992,
+        "name": "Green navy slacks",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_navy_slacks"
+      },
+      {
+        "itemId": 8993,
+        "name": "Red navy slacks",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_navy_slacks"
+      },
+      {
+        "itemId": 8994,
+        "name": "Brown navy slacks",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Brown_navy_slacks"
+      },
+      {
+        "itemId": 8995,
+        "name": "Black navy slacks",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_navy_slacks"
+      },
+      {
+        "itemId": 8996,
+        "name": "Purple navy slacks",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purple_navy_slacks"
+      },
+      {
+        "itemId": 8997,
+        "name": "Grey navy slacks",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Grey_navy_slacks"
+      },
+      {
+        "itemId": 8966,
+        "name": "Cutthroat flag",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Cutthroat_flag"
+      },
+      {
+        "itemId": 8967,
+        "name": "Gilded smile flag",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gilded_smile_flag"
+      },
+      {
+        "itemId": 8968,
+        "name": "Bronze fist flag",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_fist_flag"
+      },
+      {
+        "itemId": 8969,
+        "name": "Lucky shot flag",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lucky_shot_flag"
+      },
+      {
+        "itemId": 8970,
+        "name": "Treasure flag",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Treasure_flag"
+      },
+      {
+        "itemId": 8971,
+        "name": "Phasmatys flag",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Phasmatys_flag"
+      }
+    ],
+    "locationDescription": "Mos Le'Harmless, east of Braindeath Island"
+  },
+  {
+    "name": "Barbarian Assault",
+    "category": "MINIGAMES",
+    "worldX": 2519,
+    "worldY": 3571,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "items": [
+      {
+        "itemId": 10548,
+        "name": "Fighter hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fighter_hat"
+      },
+      {
+        "itemId": 10549,
+        "name": "Runner hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Runner_hat"
+      },
+      {
+        "itemId": 10550,
+        "name": "Ranger hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ranger_hat"
+      },
+      {
+        "itemId": 10547,
+        "name": "Healer hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Healer_hat"
+      },
+      {
+        "itemId": 10551,
+        "name": "Fighter torso",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fighter_torso"
+      },
+      {
+        "itemId": 10555,
+        "name": "Penance skirt",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Penance_skirt"
+      },
+      {
+        "itemId": 10553,
+        "name": "Penance gloves",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Penance_gloves"
+      },
+      {
+        "itemId": 10552,
+        "name": "Runner boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Runner_boots"
+      },
+      {
+        "itemId": 10564,
+        "name": "Granite body",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_body"
+      },
+      {
+        "itemId": 12703,
+        "name": "Pet penance queen",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Pet_penance_queen"
+      }
+    ],
+    "locationDescription": "Barbarian Outpost, north of Baxtorian Falls"
+  },
+  {
+    "name": "Barracuda Trials",
+    "category": "MINIGAMES",
+    "worldX": 1823,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 480,
+    "items": [
+      {
+        "itemId": 31732,
+        "name": "Stormy key",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Stormy_key"
+      },
+      {
+        "itemId": 31733,
+        "name": "Barrel stand",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Barrel_stand"
+      },
+      {
+        "itemId": 31734,
+        "name": "Ralph's fabric roll",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ralph%27s_fabric_roll"
+      },
+      {
+        "itemId": 31744,
+        "name": "Fetid key",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fetid_key"
+      },
+      {
+        "itemId": 31745,
+        "name": "Captured wind mote",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Captured_wind_mote"
+      },
+      {
+        "itemId": 31746,
+        "name": "Gurtob's fabric roll",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gurtob%27s_fabric_roll"
+      },
+      {
+        "itemId": 31756,
+        "name": "Serrated key",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Serrated_key"
+      },
+      {
+        "itemId": 31757,
+        "name": "Heart of ithell",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Heart_of_ithell"
+      },
+      {
+        "itemId": 31758,
+        "name": "Gwyna's fabric roll",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gwyna%27s_fabric_roll"
+      }
+    ],
+    "locationDescription": "Sailing trial locations across the seas"
+  },
+  {
+    "name": "Aerial Fishing",
+    "category": "OTHER",
+    "worldX": 1379,
+    "worldY": 3634,
+    "worldPlane": 0,
+    "killTimeSeconds": 30,
+    "items": [
+      {
+        "itemId": 13258,
+        "name": "Angler hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Angler_hat"
+      },
+      {
+        "itemId": 13259,
+        "name": "Angler top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Angler_top"
+      },
+      {
+        "itemId": 13260,
+        "name": "Angler waders",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Angler_waders"
+      },
+      {
+        "itemId": 13261,
+        "name": "Angler boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Angler_boots"
+      },
+      {
+        "itemId": 22846,
+        "name": "Pearl fishing rod",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pearl_fishing_rod"
+      },
+      {
+        "itemId": 22844,
+        "name": "Pearl fly fishing rod",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pearl_fly_fishing_rod"
+      },
+      {
+        "itemId": 22842,
+        "name": "Pearl barbarian rod",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pearl_barbarian_rod"
+      },
+      {
+        "itemId": 22838,
+        "name": "Fish sack",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fish_sack"
+      },
+      {
+        "itemId": 22840,
+        "name": "Golden tench",
+        "dropRate": 0.00005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Golden_tench"
+      }
+    ],
+    "locationDescription": "Lake Molch on Molch Island"
+  },
+  {
+    "name": "Boat Paints",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 32087,
+        "name": "Barracuda paint",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Barracuda_paint"
+      },
+      {
+        "itemId": 32090,
+        "name": "Shark paint",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shark_paint"
+      },
+      {
+        "itemId": 32093,
+        "name": "Inky paint",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Inky_paint"
+      },
+      {
+        "itemId": 32096,
+        "name": "Angler's paint",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Angler%27s_paint"
+      },
+      {
+        "itemId": 32099,
+        "name": "Salvor's paint",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Salvor%27s_paint"
+      },
+      {
+        "itemId": 32102,
+        "name": "Armadylean paint",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Armadylean_paint"
+      },
+      {
+        "itemId": 32104,
+        "name": "Zamorakian paint",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zamorakian_paint"
+      },
+      {
+        "itemId": 32106,
+        "name": "Guthixian paint",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guthixian_paint"
+      },
+      {
+        "itemId": 32108,
+        "name": "Saradominist paint",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Saradominist_paint"
+      },
+      {
+        "itemId": 32110,
+        "name": "Merchant's paint",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Merchant%27s_paint"
+      },
+      {
+        "itemId": 32113,
+        "name": "Sandy paint",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sandy_paint"
+      }
+    ],
+    "locationDescription": "Port Sarim docks, obtained via various Sailing activities"
+  },
+  {
+    "name": "Champion's Challenge",
+    "category": "OTHER",
+    "worldX": 3191,
+    "worldY": 3361,
+    "worldPlane": 0,
+    "killTimeSeconds": 15,
+    "items": [
+      {
+        "itemId": 6803,
+        "name": "Champion scroll (imp)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(imp)"
+      },
+      {
+        "itemId": 6801,
+        "name": "Champion scroll (goblin)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(goblin)"
+      },
+      {
+        "itemId": 6806,
+        "name": "Champion scroll (skeleton)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(skeleton)"
+      },
+      {
+        "itemId": 6807,
+        "name": "Champion scroll (zombie)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(zombie)"
+      },
+      {
+        "itemId": 6800,
+        "name": "Champion scroll (giant)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(giant)"
+      },
+      {
+        "itemId": 6802,
+        "name": "Champion scroll (hobgoblin)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(hobgoblin)"
+      },
+      {
+        "itemId": 6799,
+        "name": "Champion scroll (ghoul)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(ghoul)"
+      },
+      {
+        "itemId": 6798,
+        "name": "Champion scroll (earth warrior)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(earth_warrior)"
+      },
+      {
+        "itemId": 6804,
+        "name": "Champion scroll (jogre)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(jogre)"
+      },
+      {
+        "itemId": 6805,
+        "name": "Champion scroll (lesser demon)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(lesser_demon)"
+      },
+      {
+        "itemId": 21439,
+        "name": "Champion's cape",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion%27s_cape"
+      }
+    ],
+    "locationDescription": "Champions' Guild south of Varrock"
+  },
+  {
+    "name": "Chompy Bird Hunting",
+    "category": "OTHER",
+    "worldX": 2387,
+    "worldY": 3040,
+    "worldPlane": 0,
+    "killTimeSeconds": 45,
+    "items": [
+      {
+        "itemId": 2978,
+        "name": "Ogre bowman hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ogre_bowman_hat"
+      },
+      {
+        "itemId": 2979,
+        "name": "Bowman hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bowman_hat"
+      },
+      {
+        "itemId": 2980,
+        "name": "Ogre yeoman hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ogre_yeoman_hat"
+      },
+      {
+        "itemId": 2981,
+        "name": "Yeoman hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Yeoman_hat"
+      },
+      {
+        "itemId": 2982,
+        "name": "Ogre marksman hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ogre_marksman_hat"
+      },
+      {
+        "itemId": 2983,
+        "name": "Marksman hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Marksman_hat"
+      },
+      {
+        "itemId": 2984,
+        "name": "Ogre woodsman hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ogre_woodsman_hat"
+      },
+      {
+        "itemId": 2985,
+        "name": "Woodsman hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Woodsman_hat"
+      },
+      {
+        "itemId": 2986,
+        "name": "Ogre forester hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ogre_forester_hat"
+      },
+      {
+        "itemId": 2987,
+        "name": "Forester hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Forester_hat"
+      },
+      {
+        "itemId": 2988,
+        "name": "Ogre bowmaster hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ogre_bowmaster_hat"
+      },
+      {
+        "itemId": 2989,
+        "name": "Bowmaster hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bowmaster_hat"
+      },
+      {
+        "itemId": 2990,
+        "name": "Ogre expert hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ogre_expert_hat"
+      },
+      {
+        "itemId": 2991,
+        "name": "Expert hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Expert_hat"
+      },
+      {
+        "itemId": 2992,
+        "name": "Ogre dragon archer hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ogre_dragon_archer_hat"
+      },
+      {
+        "itemId": 2993,
+        "name": "Dragon archer hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_archer_hat"
+      },
+      {
+        "itemId": 2994,
+        "name": "Expert ogre dragon archer hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Expert_ogre_dragon_archer_hat"
+      },
+      {
+        "itemId": 2995,
+        "name": "Expert dragon archer hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Expert_dragon_archer_hat"
+      },
+      {
+        "itemId": 13071,
+        "name": "Chompy chick",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Chompy_chick"
+      }
+    ],
+    "locationDescription": "Feldip Hills, south of Rantz"
+  },
+  {
+    "name": "Forestry",
+    "category": "OTHER",
+    "worldX": 3222,
+    "worldY": 3501,
+    "worldPlane": 0,
+    "killTimeSeconds": 120,
+    "items": [
+      {
+        "itemId": 28626,
+        "name": "Fox whistle",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fox_whistle"
+      },
+      {
+        "itemId": 28663,
+        "name": "Golden pheasant egg",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Golden_pheasant_egg"
+      },
+      {
+        "itemId": 28655,
+        "name": "Petal garland",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Petal_garland"
+      },
+      {
+        "itemId": 28624,
+        "name": "Pheasant tail feathers",
+        "dropRate": 0.5,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pheasant_tail_feathers"
+      },
+      {
+        "itemId": 28674,
+        "name": "Sturdy beehive parts",
+        "dropRate": 0.667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sturdy_beehive_parts"
+      },
+      {
+        "itemId": 10941,
+        "name": "Lumberjack hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lumberjack_hat"
+      },
+      {
+        "itemId": 10939,
+        "name": "Lumberjack top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lumberjack_top"
+      },
+      {
+        "itemId": 10940,
+        "name": "Lumberjack legs",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lumberjack_legs"
+      },
+      {
+        "itemId": 10933,
+        "name": "Lumberjack boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lumberjack_boots"
+      },
+      {
+        "itemId": 28173,
+        "name": "Forestry hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Forestry_hat"
+      },
+      {
+        "itemId": 28169,
+        "name": "Forestry top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Forestry_top"
+      },
+      {
+        "itemId": 28171,
+        "name": "Forestry legs",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Forestry_legs"
+      },
+      {
+        "itemId": 28175,
+        "name": "Forestry boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Forestry_boots"
+      },
+      {
+        "itemId": 28140,
+        "name": "Log basket",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Log_basket"
+      },
+      {
+        "itemId": 28146,
+        "name": "Log brace",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Log_brace"
+      },
+      {
+        "itemId": 28630,
+        "name": "Twitcher's gloves",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Twitcher%27s_gloves"
+      },
+      {
+        "itemId": 28138,
+        "name": "Funky shaped log",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Funky_shaped_log"
+      }
+    ],
+    "locationDescription": "Various Woodcutting locations during Forestry events"
+  },
+  {
+    "name": "Fossil Island Notes",
+    "category": "OTHER",
+    "worldX": 3774,
+    "worldY": 3819,
+    "worldPlane": 0,
+    "killTimeSeconds": 30,
+    "items": [
+      {
+        "itemId": 21664,
+        "name": "Scribbled note",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Scribbled_note"
+      },
+      {
+        "itemId": 21666,
+        "name": "Partial note",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Partial_note"
+      },
+      {
+        "itemId": 21668,
+        "name": "Ancient note",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_note"
+      },
+      {
+        "itemId": 21670,
+        "name": "Ancient writings",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_writings"
+      },
+      {
+        "itemId": 21672,
+        "name": "Experimental note",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Experimental_note"
+      },
+      {
+        "itemId": 21674,
+        "name": "Paragraph of text",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Paragraph_of_text"
+      },
+      {
+        "itemId": 21676,
+        "name": "Musty smelling note",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Musty_smelling_note"
+      },
+      {
+        "itemId": 21678,
+        "name": "Hastily scrawled note",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hastily_scrawled_note"
+      },
+      {
+        "itemId": 21680,
+        "name": "Old writing",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Old_writing"
+      },
+      {
+        "itemId": 21682,
+        "name": "Short note",
+        "dropRate": 0.0333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Short_note"
+      }
+    ],
+    "locationDescription": "House on the Hill, Fossil Island"
+  },
+  {
+    "name": "Glough's Experiments",
+    "category": "OTHER",
+    "worldX": 2130,
+    "worldY": 5647,
+    "worldPlane": 0,
+    "killTimeSeconds": 30,
+    "items": [
+      {
+        "itemId": 19529,
+        "name": "Zenyte shard",
+        "dropRate": 0.003333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zenyte_shard"
+      },
+      {
+        "itemId": 19592,
+        "name": "Ballista limbs",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ballista_limbs"
+      },
+      {
+        "itemId": 19601,
+        "name": "Ballista spring",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ballista_spring"
+      },
+      {
+        "itemId": 19586,
+        "name": "Light frame",
+        "dropRate": 0.001333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Light_frame"
+      },
+      {
+        "itemId": 19589,
+        "name": "Heavy frame",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Heavy_frame"
+      },
+      {
+        "itemId": 19610,
+        "name": "Monkey tail",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Monkey_tail"
+      }
+    ],
+    "locationDescription": "Crash Site Cavern beneath Ape Atoll"
+  },
+  {
+    "name": "Hunter Guild",
+    "category": "OTHER",
+    "worldX": 1579,
+    "worldY": 3069,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 29263,
+        "name": "Guild hunter headwear",
+        "dropRate": 0.05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guild_hunter_headwear"
+      },
+      {
+        "itemId": 29265,
+        "name": "Guild hunter top",
+        "dropRate": 0.05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guild_hunter_top"
+      },
+      {
+        "itemId": 29267,
+        "name": "Guild hunter legs",
+        "dropRate": 0.05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guild_hunter_legs"
+      },
+      {
+        "itemId": 29269,
+        "name": "Guild hunter boots",
+        "dropRate": 0.05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Guild_hunter_boots"
+      },
+      {
+        "itemId": 29309,
+        "name": "Huntsman's kit",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Huntsman%27s_kit"
+      },
+      {
+        "itemId": 29271,
+        "name": "Basic quetzal whistle",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Basic_quetzal_whistle"
+      },
+      {
+        "itemId": 29273,
+        "name": "Enhanced quetzal whistle",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Enhanced_quetzal_whistle"
+      },
+      {
+        "itemId": 29275,
+        "name": "Perfected quetzal whistle",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Perfected_quetzal_whistle"
+      },
+      {
+        "itemId": 28962,
+        "name": "Quetzin",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Quetzin"
+      }
+    ],
+    "locationDescription": "Hunter Guild in the Kebos Lowlands"
+  },
+  {
+    "name": "Lost Schematics",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "items": [
+      {
+        "itemId": 32401,
+        "name": "Salvaging station schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Salvaging_station_schematic"
+      },
+      {
+        "itemId": 32402,
+        "name": "Gale catcher schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gale_catcher_schematic"
+      },
+      {
+        "itemId": 32405,
+        "name": "Rosewood cargo hold schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rosewood_cargo_hold_schematic"
+      },
+      {
+        "itemId": 32407,
+        "name": "Rosewood hull schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rosewood_hull_schematic"
+      },
+      {
+        "itemId": 32409,
+        "name": "Dragon helm schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_helm_schematic"
+      },
+      {
+        "itemId": 32404,
+        "name": "Dragon salvaging hook schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_salvaging_hook_schematic"
+      },
+      {
+        "itemId": 32403,
+        "name": "Eternal brazier schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eternal_brazier_schematic"
+      },
+      {
+        "itemId": 32406,
+        "name": "Dragon cannon schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cannon_schematic"
+      },
+      {
+        "itemId": 32408,
+        "name": "Rosewood & cotton sails schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rosewood_%26_cotton_sails_schematic"
+      },
+      {
+        "itemId": 32410,
+        "name": "Dragon keel schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_keel_schematic"
+      }
+    ],
+    "locationDescription": "Various islands discovered through Sailing"
+  },
+  {
+    "name": "Monkey Backpacks",
+    "category": "OTHER",
+    "worldX": 2764,
+    "worldY": 2703,
+    "worldPlane": 0,
+    "killTimeSeconds": 45,
+    "items": [
+      {
+        "itemId": 19556,
+        "name": "Monkey",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Monkey_(Monkey_Madness_II)"
+      },
+      {
+        "itemId": 24862,
+        "name": "Karamjan monkey",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Karamjan_monkey_(item)"
+      },
+      {
+        "itemId": 24863,
+        "name": "Zombie monkey",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Zombie_monkey_(item)"
+      },
+      {
+        "itemId": 24864,
+        "name": "Maniacal monkey",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Maniacal_monkey_(item)"
+      },
+      {
+        "itemId": 24865,
+        "name": "Skeleton monkey",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Skeleton_monkey_(item)"
+      },
+      {
+        "itemId": 24866,
+        "name": "Kruk jr",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Kruk_jr"
+      },
+      {
+        "itemId": 24867,
+        "name": "Princely monkey",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Princely_monkey"
+      }
+    ],
+    "locationDescription": "Ape Atoll Agility Course"
+  },
+  {
+    "name": "My Notes",
+    "category": "OTHER",
+    "worldX": 2520,
+    "worldY": 3571,
+    "worldPlane": 0,
+    "killTimeSeconds": 30,
+    "items": [
+      {
+        "itemId": 11341,
+        "name": "Ancient page 1",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11342,
+        "name": "Ancient page 2",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11343,
+        "name": "Ancient page 3",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11344,
+        "name": "Ancient page 4",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11345,
+        "name": "Ancient page 5",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11346,
+        "name": "Ancient page 6",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11347,
+        "name": "Ancient page 7",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11348,
+        "name": "Ancient page 8",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11349,
+        "name": "Ancient page 9",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11350,
+        "name": "Ancient page 10",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11351,
+        "name": "Ancient page 11",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11352,
+        "name": "Ancient page 12",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11353,
+        "name": "Ancient page 13",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11354,
+        "name": "Ancient page 14",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11355,
+        "name": "Ancient page 15",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11356,
+        "name": "Ancient page 16",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11357,
+        "name": "Ancient page 17",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11358,
+        "name": "Ancient page 18",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11359,
+        "name": "Ancient page 19",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11360,
+        "name": "Ancient page 20",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11361,
+        "name": "Ancient page 21",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11362,
+        "name": "Ancient page 22",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11363,
+        "name": "Ancient page 23",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11364,
+        "name": "Ancient page 24",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11365,
+        "name": "Ancient page 25",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11366,
+        "name": "Ancient page 26",
+        "dropRate": 0.003,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      }
+    ],
+    "locationDescription": "Ancient Cavern beneath the Baxtorian Falls"
+  },
+  {
+    "name": "Ocean Encounters",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 180,
+    "items": [
+      {
+        "itemId": 31770,
+        "name": "Tiny pearl",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tiny_pearl"
+      },
+      {
+        "itemId": 31773,
+        "name": "Small pearl",
+        "dropRate": 0.08,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Small_pearl"
+      },
+      {
+        "itemId": 31776,
+        "name": "Shiny pearl",
+        "dropRate": 0.06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shiny_pearl"
+      },
+      {
+        "itemId": 31779,
+        "name": "Bright pearl",
+        "dropRate": 0.05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bright_pearl"
+      },
+      {
+        "itemId": 31782,
+        "name": "Big pearl",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Big_pearl"
+      },
+      {
+        "itemId": 31785,
+        "name": "Huge pearl",
+        "dropRate": 0.03,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Huge_pearl"
+      },
+      {
+        "itemId": 31788,
+        "name": "Enormous pearl",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Enormous_pearl"
+      },
+      {
+        "itemId": 31791,
+        "name": "Shimmering pearl",
+        "dropRate": 0.015,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shimmering_pearl"
+      },
+      {
+        "itemId": 31794,
+        "name": "Glistening pearl",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Glistening_pearl"
+      },
+      {
+        "itemId": 31797,
+        "name": "Brilliant pearl",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Brilliant_pearl"
+      },
+      {
+        "itemId": 31800,
+        "name": "Radiant pearl",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Radiant_pearl"
+      }
+    ],
+    "locationDescription": "Open ocean during Sailing voyages"
+  },
+  {
+    "name": "Sailing Misc",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 31996,
+        "name": "Dragon metal sheet",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_metal_sheet"
+      },
+      {
+        "itemId": 31406,
+        "name": "Dragon nails",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_nails"
+      },
+      {
+        "itemId": 31916,
+        "name": "Dragon cannonball",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cannonball"
+      },
+      {
+        "itemId": 31946,
+        "name": "Echo pearl",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Echo_pearl"
+      },
+      {
+        "itemId": 31952,
+        "name": "Swift albatross feather",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Swift_albatross_feather"
+      },
+      {
+        "itemId": 31954,
+        "name": "Narwhal horn",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Narwhal_horn"
+      },
+      {
+        "itemId": 31959,
+        "name": "Ray barbs",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ray_barbs"
+      },
+      {
+        "itemId": 31961,
+        "name": "Broken dragon hook",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Broken_dragon_hook"
+      },
+      {
+        "itemId": 31949,
+        "name": "Bottled storm",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bottled_storm"
+      },
+      {
+        "itemId": 32115,
+        "name": "Dragon cannon barrel",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cannon_barrel"
+      },
+      {
+        "itemId": 31989,
+        "name": "Boat bottle (empty)",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Boat_bottle_(empty)"
+      },
+      {
+        "itemId": 33074,
+        "name": "Facility bottle (empty)",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Facility_bottle_(empty)"
+      }
+    ],
+    "locationDescription": "Various Sailing activities and island exploration"
+  },
+  {
+    "name": "Sea Treasures",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 300,
+    "items": [
+      {
+        "itemId": 32388,
+        "name": "Medallion fragment 1",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Medallion_fragment"
+      },
+      {
+        "itemId": 32389,
+        "name": "Medallion fragment 2",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Medallion_fragment"
+      },
+      {
+        "itemId": 32390,
+        "name": "Medallion fragment 3",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Medallion_fragment"
+      },
+      {
+        "itemId": 32391,
+        "name": "Medallion fragment 4",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Medallion_fragment"
+      },
+      {
+        "itemId": 32392,
+        "name": "Medallion fragment 5",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Medallion_fragment"
+      },
+      {
+        "itemId": 32393,
+        "name": "Medallion fragment 6",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Medallion_fragment"
+      },
+      {
+        "itemId": 32394,
+        "name": "Medallion fragment 7",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Medallion_fragment"
+      },
+      {
+        "itemId": 32395,
+        "name": "Medallion fragment 8",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Medallion_fragment"
+      },
+      {
+        "itemId": 32398,
+        "name": "Sailors' amulet (inert)",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sailors%27_amulet_(inert)"
+      },
+      {
+        "itemId": 32863,
+        "name": "Rusty locket",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rusty_locket"
+      },
+      {
+        "itemId": 32864,
+        "name": "Mouldy block",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mouldy_block"
+      },
+      {
+        "itemId": 32865,
+        "name": "Dull knife",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dull_knife"
+      },
+      {
+        "itemId": 32866,
+        "name": "Broken compass",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Broken_compass"
+      },
+      {
+        "itemId": 32867,
+        "name": "Rusty coin",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rusty_coin"
+      },
+      {
+        "itemId": 32868,
+        "name": "Broken sextant",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Broken_sextant"
+      },
+      {
+        "itemId": 32869,
+        "name": "Mouldy doll",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mouldy_doll"
+      },
+      {
+        "itemId": 32870,
+        "name": "Smashed mirror",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Smashed_mirror"
+      }
+    ],
+    "locationDescription": "Salvaging and treasure hunting during Sailing voyages"
+  },
+  {
+    "name": "Miscellaneous",
+    "category": "OTHER",
+    "worldX": 3222,
+    "worldY": 3218,
+    "worldPlane": 0,
+    "killTimeSeconds": 60,
+    "items": [
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 0.000244,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      },
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 0.000244,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 7536,
+        "name": "Fresh crab claw",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fresh_crab_claw"
+      },
+      {
+        "itemId": 7538,
+        "name": "Fresh crab shell",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fresh_crab_shell"
+      },
+      {
+        "itemId": 7989,
+        "name": "Big bass",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Big_bass"
+      },
+      {
+        "itemId": 7991,
+        "name": "Big swordfish",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Big_swordfish"
+      },
+      {
+        "itemId": 7993,
+        "name": "Big shark",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Big_shark"
+      },
+      {
+        "itemId": 9007,
+        "name": "Right skull half",
+        "dropRate": 0.000244,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Right_skull_half"
+      },
+      {
+        "itemId": 9008,
+        "name": "Left skull half",
+        "dropRate": 0.000244,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Left_skull_half"
+      },
+      {
+        "itemId": 9010,
+        "name": "Top of sceptre",
+        "dropRate": 0.000244,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Top_of_sceptre"
+      },
+      {
+        "itemId": 9011,
+        "name": "Bottom of sceptre",
+        "dropRate": 0.000244,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bottom_of_sceptre"
+      },
+      {
+        "itemId": 6571,
+        "name": "Uncut onyx",
+        "dropRate": 0.0001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Uncut_onyx"
+      }
+    ],
+    "locationDescription": "Various locations throughout Gielinor"
+  },
+  {
+    "name": "Random Events",
+    "category": "OTHER",
+    "worldX": 3222,
+    "worldY": 3218,
+    "worldPlane": 0,
+    "killTimeSeconds": 120,
+    "items": [
+      {
+        "itemId": 3057,
+        "name": "Mime mask",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mime_mask"
+      },
+      {
+        "itemId": 3058,
+        "name": "Mime top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mime_top"
+      },
+      {
+        "itemId": 3059,
+        "name": "Mime legs",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mime_legs"
+      },
+      {
+        "itemId": 3060,
+        "name": "Mime gloves",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mime_gloves"
+      },
+      {
+        "itemId": 3061,
+        "name": "Mime boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mime_boots"
+      },
+      {
+        "itemId": 7594,
+        "name": "Zombie mask",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zombie_mask"
+      },
+      {
+        "itemId": 7592,
+        "name": "Zombie shirt",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zombie_shirt"
+      },
+      {
+        "itemId": 7593,
+        "name": "Zombie trousers",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zombie_trousers"
+      },
+      {
+        "itemId": 7595,
+        "name": "Zombie gloves",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zombie_gloves"
+      },
+      {
+        "itemId": 7596,
+        "name": "Zombie boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zombie_boots"
+      },
+      {
+        "itemId": 6656,
+        "name": "Camo helmet",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Camo_helmet"
+      },
+      {
+        "itemId": 6654,
+        "name": "Camo top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Camo_top"
+      },
+      {
+        "itemId": 6655,
+        "name": "Camo bottoms",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Camo_bottoms"
+      },
+      {
+        "itemId": 25129,
+        "name": "Beekeeper's hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Beekeeper%27s_hat"
+      },
+      {
+        "itemId": 25131,
+        "name": "Beekeeper's top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Beekeeper%27s_top"
+      },
+      {
+        "itemId": 25133,
+        "name": "Beekeeper's legs",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Beekeeper%27s_legs"
+      },
+      {
+        "itemId": 25135,
+        "name": "Beekeeper's gloves",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Beekeeper%27s_gloves"
+      },
+      {
+        "itemId": 25137,
+        "name": "Beekeeper's boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Beekeeper%27s_boots"
+      },
+      {
+        "itemId": 6182,
+        "name": "Lederhosen hat",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lederhosen_hat"
+      },
+      {
+        "itemId": 6180,
+        "name": "Lederhosen top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lederhosen_top"
+      },
+      {
+        "itemId": 6181,
+        "name": "Lederhosen shorts",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Lederhosen_shorts"
+      },
+      {
+        "itemId": 6183,
+        "name": "Frog token",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Frog_token"
+      },
+      {
+        "itemId": 20590,
+        "name": "Stale baguette",
+        "dropRate": 0.00223,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Stale_baguette"
+      }
+    ],
+    "locationDescription": "Random event encounters throughout Gielinor"
+  },
+  {
+    "name": "Camdozaal",
+    "category": "OTHER",
+    "worldX": 2957,
+    "worldY": 5774,
+    "worldPlane": 0,
+    "killTimeSeconds": 30,
+    "items": [
+      {
+        "itemId": 25641,
+        "name": "Barronite mace",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Barronite_mace"
+      },
+      {
+        "itemId": 25635,
+        "name": "Barronite head",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Barronite_head"
+      },
+      {
+        "itemId": 25639,
+        "name": "Barronite guard",
+        "dropRate": 0.006667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Barronite_guard"
+      },
+      {
+        "itemId": 25637,
+        "name": "Barronite handle",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Barronite_handle"
+      },
+      {
+        "itemId": 25686,
+        "name": "Ancient globe",
+        "dropRate": 0.002857,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_globe"
+      },
+      {
+        "itemId": 25690,
+        "name": "Ancient astroscope",
+        "dropRate": 0.002857,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_astroscope"
+      },
+      {
+        "itemId": 25694,
+        "name": "Ancient carcanet",
+        "dropRate": 0.002857,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_carcanet"
+      },
+      {
+        "itemId": 25688,
+        "name": "Ancient ledger",
+        "dropRate": 0.002857,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_ledger"
+      },
+      {
+        "itemId": 25692,
+        "name": "Ancient treatise",
+        "dropRate": 0.002857,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_treatise"
+      },
+      {
+        "itemId": 25644,
+        "name": "Imcando hammer",
+        "dropRate": 0.003333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Imcando_hammer"
+      }
+    ],
+    "locationDescription": "Ruins of Camdozaal beneath Ice Mountain"
+  },
+  {
+    "name": "Colossal Wyrm Agility",
+    "category": "OTHER",
+    "worldX": 1652,
+    "worldY": 2931,
+    "worldPlane": 0,
+    "killTimeSeconds": 90,
+    "items": [
+      {
+        "itemId": 30040,
+        "name": "Colossal wyrm teleport scroll",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Colossal_wyrm_teleport_scroll"
+      },
+      {
+        "itemId": 30044,
+        "name": "Graceful crafting kit",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Graceful_crafting_kit"
+      },
+      {
+        "itemId": 30042,
+        "name": "Calcified acorn",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Calcified_acorn"
+      }
+    ],
+    "locationDescription": "Colossal Wyrm Agility Course in Avium Savannah, Varlamore"
+  },
+  {
+    "name": "Rooftop Agility",
+    "category": "OTHER",
+    "worldX": 3214,
+    "worldY": 3414,
+    "worldPlane": 0,
+    "killTimeSeconds": 60,
+    "items": [
+      {
+        "itemId": 11850,
+        "name": "Graceful hood",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Graceful_hood"
+      },
+      {
+        "itemId": 11852,
+        "name": "Graceful cape",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Graceful_cape"
+      },
+      {
+        "itemId": 11854,
+        "name": "Graceful top",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Graceful_top"
+      },
+      {
+        "itemId": 11856,
+        "name": "Graceful legs",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Graceful_legs"
+      },
+      {
+        "itemId": 11858,
+        "name": "Graceful gloves",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Graceful_gloves"
+      },
+      {
+        "itemId": 11860,
+        "name": "Graceful boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Graceful_boots"
+      }
+    ],
+    "locationDescription": "Rooftop Agility Courses, starting at Varrock"
+  },
+  {
+    "name": "TzHaar",
+    "category": "OTHER",
+    "worldX": 2444,
+    "worldY": 5175,
+    "worldPlane": 0,
+    "killTimeSeconds": 30,
+    "items": [
+      {
+        "itemId": 6522,
+        "name": "Toktz-xil-ul",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Toktz-xil-ul"
+      },
+      {
+        "itemId": 6523,
+        "name": "Toktz-xil-ak",
+        "dropRate": 0.001465,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Toktz-xil-ak"
+      },
+      {
+        "itemId": 6525,
+        "name": "Toktz-xil-ek",
+        "dropRate": 0.001465,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Toktz-xil-ek"
+      },
+      {
+        "itemId": 6524,
+        "name": "Toktz-ket-xil",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Toktz-ket-xil"
+      },
+      {
+        "itemId": 6528,
+        "name": "Tzhaar-ket-om",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tzhaar-ket-om"
+      },
+      {
+        "itemId": 6527,
+        "name": "Tzhaar-ket-em",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tzhaar-ket-em"
+      },
+      {
+        "itemId": 6526,
+        "name": "Toktz-mej-tal",
+        "dropRate": 0.000244,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Toktz-mej-tal"
+      },
+      {
+        "itemId": 21298,
+        "name": "Obsidian helmet",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Obsidian_helmet"
+      },
+      {
+        "itemId": 21301,
+        "name": "Obsidian platebody",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Obsidian_platebody"
+      },
+      {
+        "itemId": 21304,
+        "name": "Obsidian platelegs",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Obsidian_platelegs"
+      },
+      {
+        "itemId": 6570,
+        "name": "Fire cape",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fire_cape"
+      },
+      {
+        "itemId": 21295,
+        "name": "Infernal cape",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Infernal_cape"
+      },
+      {
+        "itemId": 13225,
+        "name": "TzRek-Jad",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "TzRek-Jad"
+      },
+      {
+        "itemId": 21291,
+        "name": "Jal-nib-rek",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Jal-nib-rek"
+      }
+    ],
+    "locationDescription": "TzHaar City beneath the Karamja Volcano"
+  },
+  {
+    "name": "Cyclopes",
+    "category": "OTHER",
+    "worldX": 2849,
+    "worldY": 3543,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "items": [
+      {
+        "itemId": 8844,
+        "name": "Bronze defender",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_defender"
+      },
+      {
+        "itemId": 8845,
+        "name": "Iron defender",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iron_defender"
+      },
+      {
+        "itemId": 8846,
+        "name": "Steel defender",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_defender"
+      },
+      {
+        "itemId": 8847,
+        "name": "Black defender",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_defender"
+      },
+      {
+        "itemId": 8848,
+        "name": "Mithril defender",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_defender"
+      },
+      {
+        "itemId": 8849,
+        "name": "Adamant defender",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_defender"
+      },
+      {
+        "itemId": 8850,
+        "name": "Rune defender",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_defender"
+      },
+      {
+        "itemId": 12954,
+        "name": "Dragon defender",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_defender"
+      }
+    ],
+    "locationDescription": "Warriors' Guild, Burthorpe"
+  },
+  {
+    "name": "Elder Chaos Druids",
+    "category": "OTHER",
+    "worldX": 3232,
+    "worldY": 3621,
+    "worldPlane": 0,
+    "killTimeSeconds": 15,
+    "items": [
+      {
+        "itemId": 20517,
+        "name": "Elder chaos top",
+        "dropRate": 0.000705,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Elder_chaos_top"
+      },
+      {
+        "itemId": 20520,
+        "name": "Elder chaos robe",
+        "dropRate": 0.000705,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Elder_chaos_robe"
+      },
+      {
+        "itemId": 20595,
+        "name": "Elder chaos hood",
+        "dropRate": 0.000705,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Elder_chaos_hood"
+      }
+    ],
+    "locationDescription": "Elder Chaos Temple, Wilderness"
+  },
+  {
+    "name": "Shayzien Armour",
+    "category": "OTHER",
+    "worldX": 1516,
+    "worldY": 3617,
+    "worldPlane": 0,
+    "killTimeSeconds": 30,
+    "items": [
+      {
+        "itemId": 13359,
+        "name": "Shayzien helm (1)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_helm_(1)"
+      },
+      {
+        "itemId": 13361,
+        "name": "Shayzien platebody (1)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_platebody_(1)"
+      },
+      {
+        "itemId": 13360,
+        "name": "Shayzien greaves (1)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_greaves_(1)"
+      },
+      {
+        "itemId": 13357,
+        "name": "Shayzien gloves (1)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_gloves_(1)"
+      },
+      {
+        "itemId": 13358,
+        "name": "Shayzien boots (1)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_boots_(1)"
+      },
+      {
+        "itemId": 13364,
+        "name": "Shayzien helm (2)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_helm_(2)"
+      },
+      {
+        "itemId": 13366,
+        "name": "Shayzien platebody (2)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_platebody_(2)"
+      },
+      {
+        "itemId": 13365,
+        "name": "Shayzien greaves (2)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_greaves_(2)"
+      },
+      {
+        "itemId": 13362,
+        "name": "Shayzien gloves (2)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_gloves_(2)"
+      },
+      {
+        "itemId": 13363,
+        "name": "Shayzien boots (2)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_boots_(2)"
+      },
+      {
+        "itemId": 13369,
+        "name": "Shayzien helm (3)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_helm_(3)"
+      },
+      {
+        "itemId": 13371,
+        "name": "Shayzien platebody (3)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_platebody_(3)"
+      },
+      {
+        "itemId": 13370,
+        "name": "Shayzien greaves (3)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_greaves_(3)"
+      },
+      {
+        "itemId": 13367,
+        "name": "Shayzien gloves (3)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_gloves_(3)"
+      },
+      {
+        "itemId": 13368,
+        "name": "Shayzien boots (3)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_boots_(3)"
+      },
+      {
+        "itemId": 13374,
+        "name": "Shayzien helm (4)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_helm_(4)"
+      },
+      {
+        "itemId": 13376,
+        "name": "Shayzien platebody (4)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_platebody_(4)"
+      },
+      {
+        "itemId": 13375,
+        "name": "Shayzien greaves (4)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_greaves_(4)"
+      },
+      {
+        "itemId": 13372,
+        "name": "Shayzien gloves (4)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_gloves_(4)"
+      },
+      {
+        "itemId": 13373,
+        "name": "Shayzien boots (4)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_boots_(4)"
+      },
+      {
+        "itemId": 13379,
+        "name": "Shayzien helm (5)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_helm_(5)"
+      },
+      {
+        "itemId": 13381,
+        "name": "Shayzien body (5)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_body_(5)"
+      },
+      {
+        "itemId": 13380,
+        "name": "Shayzien greaves (5)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_greaves_(5)"
+      },
+      {
+        "itemId": 13377,
+        "name": "Shayzien gloves (5)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_gloves_(5)"
+      },
+      {
+        "itemId": 13378,
+        "name": "Shayzien boots (5)",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shayzien_boots_(5)"
+      }
+    ],
+    "locationDescription": "Shayzien Combat Ring, Great Kourend"
+  },
+  {
+    "name": "Motherlode Mine",
+    "category": "OTHER",
+    "worldX": 3726,
+    "worldY": 5680,
+    "worldPlane": 0,
+    "killTimeSeconds": 60,
+    "items": [
+      {
+        "itemId": 12013,
+        "name": "Prospector helmet",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Prospector_helmet"
+      },
+      {
+        "itemId": 12014,
+        "name": "Prospector jacket",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Prospector_jacket"
+      },
+      {
+        "itemId": 12015,
+        "name": "Prospector legs",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Prospector_legs"
+      },
+      {
+        "itemId": 12016,
+        "name": "Prospector boots",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Prospector_boots"
+      },
+      {
+        "itemId": 12019,
+        "name": "Coal bag",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Coal_bag"
+      },
+      {
+        "itemId": 12020,
+        "name": "Gem bag",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gem_bag"
+      }
+    ],
+    "locationDescription": "Motherlode Mine beneath Falador"
+  },
+  {
+    "name": "Shooting Stars",
+    "category": "OTHER",
+    "worldX": 3214,
+    "worldY": 3414,
+    "worldPlane": 0,
+    "killTimeSeconds": 120,
+    "items": [
+      {
+        "itemId": 25539,
+        "name": "Celestial ring",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Celestial_ring"
+      },
+      {
+        "itemId": 25547,
+        "name": "Star fragment",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Star_fragment"
+      }
+    ],
+    "locationDescription": "Crashed shooting stars found throughout Gielinor"
+  },
+  {
+    "name": "Creature Creation",
+    "category": "OTHER",
+    "worldX": 2628,
+    "worldY": 3204,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "items": [
+      {
+        "itemId": 10859,
+        "name": "Tea flask",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tea_flask"
+      },
+      {
+        "itemId": 10877,
+        "name": "Plain satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Plain_satchel"
+      },
+      {
+        "itemId": 10878,
+        "name": "Green satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_satchel"
+      },
+      {
+        "itemId": 10879,
+        "name": "Red satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_satchel"
+      },
+      {
+        "itemId": 10880,
+        "name": "Black satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_satchel"
+      },
+      {
+        "itemId": 10881,
+        "name": "Gold satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gold_satchel"
+      },
+      {
+        "itemId": 10882,
+        "name": "Rune satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_satchel"
+      }
+    ],
+    "locationDescription": "Tower of Life, south of Ardougne"
   }
 ]
