@@ -1,6 +1,6 @@
 # Collection Log Helper — Item Coverage Tracker
 
-> **Coverage: 323 / ~1,698 items | 52 / 122 sources**
+> **Coverage: 887 / ~1,698 items | 103 / 122 sources**
 
 This document tracks every OSRS Collection Log category and our progress toward full coverage. Community contributors can use this to find unclaimed work.
 
@@ -99,11 +99,12 @@ This document tracks every OSRS Collection Log category and our progress toward 
 
 ## Clues
 
-11 sources in the collection log. **0 done, 0 partial, 11 missing (~634 items).**
+11 sources in the collection log. **2 done, 0 partial, 9 missing (~634 items).**
 
 | Category | Wiki Items | Our Items | Priority | Status | Issue |
 |----------|-----------|-----------|----------|--------|-------|
-| Beginner Clues | 15 | 15 | P1 | Done | [#16](../../issues/16) |
+| Beginner Clues | 15 | 15 | — | Done | — |
+| Scroll Cases | 13 | 13 | — | Done | — |
 | Easy Clues | 131 | 0 | P1 | Unclaimed | [#17](../../issues/17) |
 | Medium Clues | 115 | 0 | P1 | Unclaimed | [#18](../../issues/18) |
 | Hard Clues | 134 | 0 | P1 | Unclaimed | [#20](../../issues/20) |
@@ -113,76 +114,75 @@ This document tracks every OSRS Collection Log category and our progress toward 
 | Elite Clue Rare Table | 39 | 0 | P2 | Unclaimed | [#21](../../issues/21) |
 | Master Clue Rare Table | 45 | 0 | P2 | Unclaimed | [#23](../../issues/23) |
 | Shared Clue Rewards | 49 | 0 | P2 | Unclaimed | [#25](../../issues/25) |
-| Scroll Cases | 13 | 0 | P2 | Unclaimed | [#26](../../issues/26) |
 
 ## Minigames
 
-22 sources in the collection log. **2 done, 0 partial, 20 missing.**
+24 sources in the collection log. **24 done.**
 
 | Category | Wiki Items | Our Items | Priority | Status | Issue |
 |----------|-----------|-----------|----------|--------|-------|
 | Tempoross | 6 | 6 | — | Done | — |
 | Wintertodt | 9 | 9 | — | Done | — |
-| Guardians of the Rift | 17 | 0 | P1 | Unclaimed | [#27](../../issues/27) |
-| Hallowed Sepulchre | 16 | 0 | P1 | Unclaimed | [#28](../../issues/28) |
-| Castle Wars | 39 | 0 | P2 | Unclaimed | [#29](../../issues/29) |
-| Last Man Standing | 28 | 0 | P2 | Unclaimed | [#31](../../issues/31) |
-| Trouble Brewing | 30 | 0 | P2 | Unclaimed | [#33](../../issues/33) |
-| Barbarian Assault | 11 | 0 | P2 | Unclaimed | [#35](../../issues/35) |
-| Barracuda Trials | 9 | 0 | P2 | Unclaimed | [#37](../../issues/37) |
-| Brimhaven Agility Arena | 9 | 0 | P2 | Unclaimed | [#39](../../issues/39) |
-| Giants' Foundry | 9 | 0 | P2 | Unclaimed | [#41](../../issues/41) |
-| Pest Control | 10 | 0 | P2 | Unclaimed | [#43](../../issues/43) |
-| Mage Training Arena | 10 | 0 | P2 | Unclaimed | [#45](../../issues/45) |
-| Shades of Mort'ton | 14 | 0 | P2 | Unclaimed | [#47](../../issues/47) |
-| Mahogany Homes | 8 | 0 | P2 | Unclaimed | [#49](../../issues/49) |
-| Mastering Mixology | 7 | 0 | P2 | Unclaimed | [#51](../../issues/51) |
-| Volcanic Mine | 7 | 0 | P2 | Unclaimed | [#53](../../issues/53) |
-| Tithe Farm | 7 | 0 | P2 | Unclaimed | [#54](../../issues/54) |
-| Gnome Restaurant | 4 | 0 | P2 | Unclaimed | [#57](../../issues/57) |
-| Fishing Trawler | 4 | 0 | P2 | Unclaimed | [#59](../../issues/59) |
-| Temple Trekking | 4 | 0 | P2 | Unclaimed | [#61](../../issues/61) |
-| Rogues' Den | 5 | 0 | P2 | Unclaimed | [#63](../../issues/63) |
-| Soul Wars | 3 | 0 | P2 | Unclaimed | [#30](../../issues/30) |
-| Vale Totems | 4 | 0 | P2 | Unclaimed | [#32](../../issues/32) |
+| Guardians of the Rift | 19 | 19 | — | Done | — |
+| Hallowed Sepulchre | 16 | 16 | — | Done | — |
+| Castle Wars | 37 | 37 | — | Done | — |
+| Soul Wars | 3 | 3 | — | Done | — |
+| Last Man Standing | 14 | 14 | — | Done | — |
+| Vale Totems | 10 | 10 | — | Done | — |
+| Trouble Brewing | 27 | 27 | — | Done | — |
+| Barbarian Assault | 10 | 10 | — | Done | — |
+| Barracuda Trials | 9 | 9 | — | Done | — |
+| Brimhaven Agility Arena | 1 | 1 | — | Done | — |
+| Giants' Foundry | 7 | 7 | — | Done | — |
+| Pest Control | 10 | 10 | — | Done | — |
+| Mage Training Arena | 8 | 8 | — | Done | — |
+| Shades of Mort'ton | 3 | 3 | — | Done | — |
+| Mahogany Homes | 6 | 6 | — | Done | — |
+| Mastering Mixology | 7 | 7 | — | Done | — |
+| Volcanic Mine | 3 | 3 | — | Done | — |
+| Tithe Farm | 7 | 7 | — | Done | — |
+| Gnome Restaurant | 4 | 4 | — | Done | — |
+| Fishing Trawler | 4 | 4 | — | Done | — |
+| Temple Trekking | 4 | 4 | — | Done | — |
+| Rogues' Den | 5 | 5 | — | Done | — |
 
 ## Other
 
-31 sources in the collection log. **3 done, 0 partial, 28 missing.**
+31 sources in the collection log. **31 done.**
 
 | Category | Wiki Items | Our Items | Priority | Status | Issue |
 |----------|-----------|-----------|----------|--------|-------|
 | Demonic gorillas | 6 | 6 | — | Done | — |
 | Lizardman shaman | 1 | 1 | — | Done | — |
 | Tormented Demons | 2 | 2 | — | Done | — |
-| Revenants | ~15 | 0 | P1 | Unclaimed | [#34](../../issues/34) |
-| Slayer | ~20 | 0 | P1 | Unclaimed | [#36](../../issues/36) |
-| Random Events | 23 | 0 | P2 | Unclaimed | [#38](../../issues/38) |
-| Camdozaal | 9 | 0 | P2 | Unclaimed | [#40](../../issues/40) |
-| Colossal Wyrm Agility | 8 | 0 | P2 | Unclaimed | [#42](../../issues/42) |
-| Rooftop Agility | 7 | 0 | P2 | Unclaimed | [#44](../../issues/44) |
-| TzHaar | ~5 | 0 | P2 | Unclaimed | [#46](../../issues/46) |
-| Cyclopes | ~4 | 0 | P2 | Unclaimed | [#48](../../issues/48) |
-| Elder Chaos Druids | ~3 | 0 | P2 | Unclaimed | [#50](../../issues/50) |
-| Shayzien Armour | ~5 | 0 | P2 | Unclaimed | [#52](../../issues/52) |
-| Motherlode Mine | ~4 | 0 | P2 | Unclaimed | [#55](../../issues/55) |
-| Shooting Stars | ~3 | 0 | P2 | Unclaimed | [#56](../../issues/56) |
-| Creature Creation | ~4 | 0 | P2 | Unclaimed | [#58](../../issues/58) |
-| Aerial Fishing | ~3 | 0 | P3 | Unclaimed | [#60](../../issues/60) |
-| Boat Paints | ~4 | 0 | P3 | Unclaimed | [#62](../../issues/62) |
-| Champion's Challenge | ~10 | 0 | P3 | Unclaimed | [#64](../../issues/64) |
-| Chompy Bird Hunting | ~4 | 0 | P3 | Unclaimed | [#65](../../issues/65) |
-| Forestry | 1 | 0 | P3 | Unclaimed | [#66](../../issues/66) |
-| Fossil Island Notes | ~5 | 0 | P3 | Unclaimed | [#67](../../issues/67) |
-| Glough's Experiments | ~3 | 0 | P3 | Unclaimed | [#68](../../issues/68) |
-| Hunter Guild | ~5 | 0 | P3 | Unclaimed | [#69](../../issues/69) |
-| Lost Schematics | ~5 | 0 | P3 | Unclaimed | [#70](../../issues/70) |
-| Monkey Backpacks | ~4 | 0 | P3 | Unclaimed | [#71](../../issues/71) |
-| My Notes | ~10 | 0 | P3 | Unclaimed | [#72](../../issues/72) |
-| Ocean Encounters | ~5 | 0 | P3 | Unclaimed | [#73](../../issues/73) |
-| Sailing Misc | ~5 | 0 | P3 | Unclaimed | [#74](../../issues/74) |
-| Sea Treasures | ~5 | 0 | P3 | Unclaimed | [#75](../../issues/75) |
-| Miscellaneous | ~10 | 0 | P3 | Unclaimed | [#76](../../issues/76) |
+| Revenants | 14 | 14 | — | Done | — |
+| Slayer | 29 | 29 | — | Done | — |
+| Random Events | 23 | 23 | — | Done | — |
+| Camdozaal | 10 | 10 | — | Done | — |
+| Colossal Wyrm Agility | 3 | 3 | — | Done | — |
+| Rooftop Agility | 6 | 6 | — | Done | — |
+| TzHaar | 14 | 14 | — | Done | — |
+| Cyclopes | 8 | 8 | — | Done | — |
+| Elder Chaos Druids | 3 | 3 | — | Done | — |
+| Shayzien Armour | 25 | 25 | — | Done | — |
+| Motherlode Mine | 6 | 6 | — | Done | — |
+| Shooting Stars | 2 | 2 | — | Done | — |
+| Creature Creation | 7 | 7 | — | Done | — |
+| Aerial Fishing | 9 | 9 | — | Done | — |
+| Boat Paints | 11 | 11 | — | Done | — |
+| Champion's Challenge | 11 | 11 | — | Done | — |
+| Chompy Bird Hunting | 19 | 19 | — | Done | — |
+| Forestry | 17 | 17 | — | Done | — |
+| Fossil Island Notes | 10 | 10 | — | Done | — |
+| Glough's Experiments | 6 | 6 | — | Done | — |
+| Hunter Guild | 9 | 9 | — | Done | — |
+| Lost Schematics | 10 | 10 | — | Done | — |
+| Monkey Backpacks | 7 | 7 | — | Done | — |
+| My Notes | 26 | 26 | — | Done | — |
+| Ocean Encounters | 11 | 11 | — | Done | — |
+| Sailing Misc | 12 | 12 | — | Done | — |
+| Sea Treasures | 17 | 17 | — | Done | — |
+| Miscellaneous | 12 | 12 | — | Done | — |
 
 ## Meta Issues
 
@@ -198,9 +198,9 @@ This document tracks every OSRS Collection Log category and our progress toward 
 |----------|-----------------|------|---------|-----------|
 | P0 | 9 | 0 | 4 | 5 |
 | P1 | 12 | 0 | 0 | 12 |
-| P2 | 25 | 0 | 0 | 25 |
-| P3 | 15 | 0 | 0 | 15 |
-| Done (no priority) | 45 | 45 | 0 | 0 |
-| **Total** | **106** | **45** | **4** | **57** |
+| P2 | 4 | 0 | 0 | 4 |
+| P3 | 0 | 0 | 0 | 0 |
+| Done (no priority) | 97 | 97 | 0 | 0 |
+| **Total** | **122** | **97** | **4** | **21** |
 
-*Note: Some collection log categories have approximate (~) item counts pending wiki verification. Exact counts will be filled in as contributors claim issues.*
+*Remaining work is concentrated in P0 bosses (new Varlamore content, raid completions) and P1 clue scroll tiers.*
