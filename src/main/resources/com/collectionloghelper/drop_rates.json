@@ -786,8 +786,8 @@
   {
     "name": "Duke Sucellus",
     "category": "BOSSES",
-    "worldX": 3009,
-    "worldY": 3514,
+    "worldX": 2586,
+    "worldY": 3091,
     "worldPlane": 0,
     "killTimeSeconds": 210,
     "requirements": {
@@ -930,8 +930,8 @@
   {
     "name": "The Whisperer",
     "category": "BOSSES",
-    "worldX": 3009,
-    "worldY": 3514,
+    "worldX": 3007,
+    "worldY": 3477,
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "requirements": {
@@ -8681,10 +8681,170 @@
     "rewardType": "SHOP"
   },
   {
-    "name": "Creature Creation",
+    "name": "Creature Creation (Newtroost)",
     "category": "OTHER",
-    "worldX": 2628,
-    "worldY": 3204,
+    "worldX": 2629,
+    "worldY": 3196,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "requirements": {
+      "quests": [
+        "TOWER_OF_LIFE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 10859,
+        "name": "Tea flask",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tea_flask"
+      },
+      {
+        "itemId": 10882,
+        "name": "Rune satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_satchel"
+      }
+    ],
+    "locationDescription": "Tower of Life, south of Ardougne (Eye of newt + Feather)"
+  },
+  {
+    "name": "Creature Creation (Unicow)",
+    "category": "OTHER",
+    "worldX": 2629,
+    "worldY": 3196,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "requirements": {
+      "quests": [
+        "TOWER_OF_LIFE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 10859,
+        "name": "Tea flask",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tea_flask"
+      },
+      {
+        "itemId": 10878,
+        "name": "Green satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Green_satchel"
+      }
+    ],
+    "locationDescription": "Tower of Life, south of Ardougne (Cowhide + Unicorn horn)"
+  },
+  {
+    "name": "Creature Creation (Spidine)",
+    "category": "OTHER",
+    "worldX": 2629,
+    "worldY": 3196,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "requirements": {
+      "quests": [
+        "TOWER_OF_LIFE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 10859,
+        "name": "Tea flask",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tea_flask"
+      },
+      {
+        "itemId": 10879,
+        "name": "Red satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Red_satchel"
+      }
+    ],
+    "locationDescription": "Tower of Life, south of Ardougne (Red spiders' eggs + Raw sardine)"
+  },
+  {
+    "name": "Creature Creation (Swordchick)",
+    "category": "OTHER",
+    "worldX": 2629,
+    "worldY": 3196,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "requirements": {
+      "quests": [
+        "TOWER_OF_LIFE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 10859,
+        "name": "Tea flask",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tea_flask"
+      },
+      {
+        "itemId": 10880,
+        "name": "Black satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_satchel"
+      }
+    ],
+    "locationDescription": "Tower of Life, south of Ardougne (Raw swordfish + Raw chicken)"
+  },
+  {
+    "name": "Creature Creation (Jubster)",
+    "category": "OTHER",
+    "worldX": 2629,
+    "worldY": 3196,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "requirements": {
+      "quests": [
+        "TOWER_OF_LIFE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 10859,
+        "name": "Tea flask",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tea_flask"
+      },
+      {
+        "itemId": 10881,
+        "name": "Gold satchel",
+        "dropRate": 0.15,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gold_satchel"
+      }
+    ],
+    "locationDescription": "Tower of Life, south of Ardougne (Raw jubbly + Raw lobster)"
+  },
+  {
+    "name": "Creature Creation (Frogeel)",
+    "category": "OTHER",
+    "worldX": 2629,
+    "worldY": 3196,
     "worldPlane": 0,
     "killTimeSeconds": 20,
     "requirements": {
@@ -8708,49 +8868,9 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Plain_satchel"
-      },
-      {
-        "itemId": 10878,
-        "name": "Green satchel",
-        "dropRate": 0.15,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Green_satchel"
-      },
-      {
-        "itemId": 10879,
-        "name": "Red satchel",
-        "dropRate": 0.15,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Red_satchel"
-      },
-      {
-        "itemId": 10880,
-        "name": "Black satchel",
-        "dropRate": 0.15,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Black_satchel"
-      },
-      {
-        "itemId": 10881,
-        "name": "Gold satchel",
-        "dropRate": 0.15,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Gold_satchel"
-      },
-      {
-        "itemId": 10882,
-        "name": "Rune satchel",
-        "dropRate": 0.15,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Rune_satchel"
       }
     ],
-    "locationDescription": "Tower of Life, south of Ardougne"
+    "locationDescription": "Tower of Life, south of Ardougne (Raw cave eel + Giant frog legs)"
   },
   {
     "name": "The Hueycoatl",
