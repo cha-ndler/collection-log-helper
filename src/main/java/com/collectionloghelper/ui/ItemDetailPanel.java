@@ -175,6 +175,7 @@ class ItemDetailPanel extends JPanel
 		JPanel row = new JPanel(new BorderLayout(4, 0));
 		row.setOpaque(false);
 		row.setAlignmentX(LEFT_ALIGNMENT);
+		row.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
 
 		JLabel labelComponent = new JLabel(label);
 		labelComponent.setFont(FontManager.getRunescapeSmallFont());

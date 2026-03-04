@@ -592,36 +592,26 @@ public class CollectionLogHelperPlugin extends Plugin
 			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
 
-			// Clear hint arrow and ShortestPath state first, then post the new
-			// path on the next tick.  ShortestPath's restartPathfinding() uses a
-			// nested clientThread.invokeLater() internally; posting clear + path
-			// in the same callback can cause the iterator to miss the deferred
-			// pathfinder creation.  Separating by one tick avoids this.
+			// Do NOT send "clear" here — deactivateGuidance() already handles
+			// clearing, and ShortestPath's restartPathfinding() cancels any
+			// existing pathfinder internally.  Sending a redundant "clear"
+			// before "path" interferes with ShortestPath's deferred pathfinder
+			// creation via its nested invokeLater().
 			// Ref: https://github.com/Skretzo/shortest-path (ShortestPathPlugin.java)
 			clientThread.invokeLater(() ->
 			{
 				client.clearHintArrow();
-
-				if (config.useShortestPath())
-				{
-					eventBus.post(new PluginMessage("shortestpath", "clear"));
-				}
 
 				if (config.showHintArrow())
 				{
 					client.setHintArrow(worldPoint);
 				}
 
-				// Post path on the next tick so ShortestPath's internal state
-				// from the clear has fully settled before a new path is created
 				if (config.useShortestPath())
 				{
-					clientThread.invokeLater(() ->
-					{
-						Map<String, Object> data = new HashMap<>();
-						data.put("target", worldPoint);
-						eventBus.post(new PluginMessage("shortestpath", "path", data));
-					});
+					Map<String, Object> data = new HashMap<>();
+					data.put("target", worldPoint);
+					eventBus.post(new PluginMessage("shortestpath", "path", data));
 				}
 			});
 		}
