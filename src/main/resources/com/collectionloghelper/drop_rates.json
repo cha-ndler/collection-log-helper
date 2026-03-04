@@ -376,7 +376,8 @@
         "isPet": true,
         "wikiPage": "Pet_snakeling"
       }
-    ]
+    ],
+    "locationDescription": "Zul-Andra, east coast of Tirannwn"
   },
   {
     "name": "Vorkath",
@@ -665,7 +666,7 @@
         "wikiPage": "Holy_elixir"
       },
       {
-        "itemId": 22473,
+        "itemId": 25521,
         "name": "Jar of spirits",
         "dropRate": 0.001,
         "varbitId": 0,
@@ -1586,7 +1587,7 @@
         "wikiPage": "Dragon_chainbody"
       },
       {
-        "itemId": 12020,
+        "itemId": 25524,
         "name": "Jar of smoke",
         "dropRate": 0.0005,
         "varbitId": 0,
@@ -1601,7 +1602,8 @@
         "isPet": true,
         "wikiPage": "Pet_smoke_devil"
       }
-    ]
+    ],
+    "locationDescription": "Smoke Devil Dungeon, south of Castle Wars"
   },
   {
     "name": "Abyssal Sire",
@@ -1679,7 +1681,7 @@
         "wikiPage": "Dragon_pickaxe"
       },
       {
-        "itemId": 7981,
+        "itemId": 7980,
         "name": "KBD heads",
         "dropRate": 0.007813,
         "varbitId": 0,
@@ -1702,7 +1704,8 @@
         "isPet": true,
         "wikiPage": "Prince_black_dragon"
       }
-    ]
+    ],
+    "locationDescription": "King Black Dragon Lair, Wilderness"
   },
   {
     "name": "Chaos Elemental",
@@ -1736,7 +1739,8 @@
         "isPet": true,
         "wikiPage": "Pet_chaos_elemental"
       }
-    ]
+    ],
+    "locationDescription": "Rogues' Castle, deep Wilderness"
   },
   {
     "name": "Scorpia",
@@ -1770,7 +1774,8 @@
         "isPet": true,
         "wikiPage": "Scorpia%27s_offspring"
       }
-    ]
+    ],
+    "locationDescription": "Scorpia's Cave, deep Wilderness"
   },
   {
     "name": "Chaos Fanatic",
@@ -1804,7 +1809,8 @@
         "isPet": true,
         "wikiPage": "Pet_chaos_elemental"
       }
-    ]
+    ],
+    "locationDescription": "West of Lava Maze, Wilderness"
   },
   {
     "name": "Venenatis",
@@ -1831,7 +1837,7 @@
         "wikiPage": "Voidwaker_gem"
       },
       {
-        "itemId": 12002,
+        "itemId": 12605,
         "name": "Treasonous ring",
         "dropRate": 0.001953,
         "varbitId": 0,
@@ -1854,7 +1860,8 @@
         "isPet": true,
         "wikiPage": "Venenatis_spiderling"
       }
-    ]
+    ],
+    "locationDescription": "Venenatis' Cave, Wilderness"
   },
   {
     "name": "Vet'ion",
@@ -1904,7 +1911,8 @@
         "isPet": true,
         "wikiPage": "Vet%27ion_jr."
       }
-    ]
+    ],
+    "locationDescription": "Vet'ion's Rest, Wilderness"
   },
   {
     "name": "Callisto",
@@ -1954,7 +1962,8 @@
         "isPet": true,
         "wikiPage": "Callisto_cub"
       }
-    ]
+    ],
+    "locationDescription": "Callisto's Den, Wilderness"
   },
   {
     "name": "Demonic gorillas",
@@ -2010,7 +2019,7 @@
         "wikiPage": "Heavy_frame"
       },
       {
-        "itemId": 19556,
+        "itemId": 19610,
         "name": "Monkey tail",
         "dropRate": 0.000667,
         "varbitId": 0,
@@ -2036,7 +2045,8 @@
         "isPet": false,
         "wikiPage": "Dragon_warhammer"
       }
-    ]
+    ],
+    "locationDescription": "Lizardman Canyon, Shayzien"
   },
   {
     "name": "Skotizo",
@@ -2105,7 +2115,8 @@
         "isPet": true,
         "wikiPage": "Tangleroot"
       }
-    ]
+    ],
+    "locationDescription": "Farming Guild, Hosidius"
   },
   {
     "name": "Chambers of Xeric",
@@ -2299,7 +2310,8 @@
         "isPet": false,
         "wikiPage": "Xeric%27s_champion"
       }
-    ]
+    ],
+    "locationDescription": "Mount Quidamortem, Great Kourend"
   },
   {
     "name": "Theatre of Blood",
@@ -2677,7 +2689,8 @@
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_5)"
       }
-    ]
+    ],
+    "locationDescription": "Necropolis, Kharidian Desert"
   },
   {
     "name": "Corrupted Gauntlet",
@@ -2996,7 +3009,8 @@
         "isPet": false,
         "wikiPage": "Verac%27s_flail"
       }
-    ]
+    ],
+    "locationDescription": "Barrows, east of Mort'ton"
   },
   {
     "name": "Tempoross",
@@ -3054,7 +3068,8 @@
         "isPet": true,
         "wikiPage": "Tiny_tempor"
       }
-    ]
+    ],
+    "locationDescription": "Tempoross Cove, south of Al Kharid"
   },
   {
     "name": "Wintertodt",
@@ -3136,7 +3151,8 @@
         "isPet": true,
         "wikiPage": "Phoenix"
       }
-    ]
+    ],
+    "locationDescription": "Wintertodt Camp, northern Zeah"
   },
   {
     "name": "Zalcano",
@@ -3183,7 +3199,8 @@
         "isPet": true,
         "wikiPage": "Smolcano"
       }
-    ]
+    ],
+    "locationDescription": "Zalcano's Prison, Prifddinas"
   },
   {
     "name": "Sol Heredit",
@@ -3277,14 +3294,15 @@
         "wikiPage": "Malediction_shard_2"
       },
       {
-        "itemId": 20590,
+        "itemId": 11990,
         "name": "Fedora",
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Fedora"
       }
-    ]
+    ],
+    "locationDescription": "Ruins, south of Lava Maze, Wilderness"
   },
   {
     "name": "Araxxor",
@@ -3342,7 +3360,8 @@
         "isPet": true,
         "wikiPage": "Rax"
       }
-    ]
+    ],
+    "locationDescription": "Morytania Spider Cave"
   },
   {
     "name": "Perilous Moons",
@@ -3619,7 +3638,8 @@
         "isPet": false,
         "wikiPage": "Rune_scimitar_ornament_kit_(zamorak)"
       }
-    ]
+    ],
+    "locationDescription": "Grand Exchange"
   },
   {
     "name": "Revenants",
@@ -8246,38 +8266,6 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Obsidian_platelegs"
-      },
-      {
-        "itemId": 6570,
-        "name": "Fire cape",
-        "dropRate": 1.0,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Fire_cape"
-      },
-      {
-        "itemId": 21295,
-        "name": "Infernal cape",
-        "dropRate": 1.0,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Infernal_cape"
-      },
-      {
-        "itemId": 13225,
-        "name": "TzRek-Jad",
-        "dropRate": 0.005,
-        "varbitId": 0,
-        "isPet": true,
-        "wikiPage": "TzRek-Jad"
-      },
-      {
-        "itemId": 21291,
-        "name": "Jal-nib-rek",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": true,
-        "wikiPage": "Jal-nib-rek"
       }
     ],
     "locationDescription": "TzHaar City beneath the Karamja Volcano"
@@ -14143,7 +14131,7 @@
       {
         "itemId": 19730,
         "name": "Bloodhound",
-        "dropRate": 0.021277,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Bloodhound"
