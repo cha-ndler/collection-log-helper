@@ -93,7 +93,7 @@ public class EfficiencyCalculator
 		return results;
 	}
 
-	private ScoredItem scoreSource(CollectionLogSource source, boolean locked)
+	public ScoredItem scoreSource(CollectionLogSource source, boolean locked)
 	{
 		double dropDropRate = 0;
 		int missingCount = 0;
