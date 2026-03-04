@@ -24,12 +24,17 @@ class CategorySummaryPanel extends JPanel
 	private static final Color PROGRESS_BG_COLOR = new Color(60, 60, 60);
 
 	private final JPanel itemsContainer;
+	private final String categoryName;
+	private final JLabel nameLabel;
+	private final int obtained;
+	private final int total;
 	private boolean expanded = false;
 
 	CategorySummaryPanel(CollectionLogCategory category, List<CollectionLogSource> sources,
 		PlayerCollectionState collectionState, RequirementsChecker requirementsChecker,
 		ItemManager itemManager, ItemClickHandler clickHandler, boolean hideObtained)
 	{
+		this.categoryName = category.getDisplayName();
 		setLayout(new BorderLayout());
 		setBackground(ColorScheme.DARKER_GRAY_COLOR);
 		setBorder(BorderFactory.createEmptyBorder(0, 0, 4, 0));
@@ -41,10 +46,10 @@ class CategorySummaryPanel extends JPanel
 		headerPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
 		headerPanel.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
 
-		int obtained = collectionState.getCategoryCount(category);
-		int total = collectionState.getCategoryMax(category);
+		obtained = collectionState.getCategoryCount(category);
+		total = collectionState.getCategoryMax(category);
 
-		JLabel nameLabel = new JLabel(
+		nameLabel = new JLabel(
 			String.format("\u25B6 %s (%d/%d)", category.getDisplayName(), obtained, total));
 		nameLabel.setFont(FontManager.getRunescapeSmallFont());
 		nameLabel.setForeground(Color.WHITE);
@@ -107,6 +112,25 @@ class CategorySummaryPanel extends JPanel
 				headerPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
 			}
 		});
+	}
+
+	boolean isExpanded()
+	{
+		return expanded;
+	}
+
+	String getCategoryName()
+	{
+		return categoryName;
+	}
+
+	void setExpanded(boolean expand)
+	{
+		expanded = expand;
+		itemsContainer.setVisible(expanded);
+		nameLabel.setText(String.format("%s %s (%d/%d)",
+			expanded ? "\u25BC" : "\u25B6",
+			categoryName, obtained, total));
 	}
 
 	interface ItemClickHandler

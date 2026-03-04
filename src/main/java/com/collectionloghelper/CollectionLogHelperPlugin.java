@@ -276,8 +276,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onStatChanged(StatChanged event)
 	{
-		requirementsChecker.refreshAccessibility(database.getAllSources());
-		if (panel != null)
+		boolean changed = requirementsChecker.refreshAccessibility(database.getAllSources());
+		if (changed && panel != null)
 		{
 			panel.rebuild();
 		}
@@ -364,7 +364,11 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
-		// Cache player location for the EDT's proximity view (client thread only)
+		// Cache player location for the EDT's proximity view (client thread only).
+		// Proximity uses distanceTo2D() which ignores plane, so even boat-local
+		// coords while sailing will produce usable (approximate) distances.
+		// TODO: Transform sailing coords via WorldEntity for exact positions.
+		// Ref: LlemonDuck/sailing SailingUtil, sololegends/runelite-friend-finder
 		if (client.getLocalPlayer() != null)
 		{
 			cachedPlayerLocation = client.getLocalPlayer().getWorldLocation();
@@ -375,7 +379,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				WorldPoint current = cachedPlayerLocation;
 				if (lastProximityLocation == null
-					|| current.distanceTo(lastProximityLocation) >= PROXIMITY_REFRESH_TILES)
+					|| current.distanceTo2D(lastProximityLocation) >= PROXIMITY_REFRESH_TILES)
 				{
 					lastProximityLocation = current;
 					panel.rebuild();
@@ -588,8 +592,12 @@ public class CollectionLogHelperPlugin extends Plugin
 			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
 
-			// Clear + path must execute atomically in a single client tick
-			// to prevent race conditions when guidance is restarted quickly
+			// Clear hint arrow and ShortestPath state first, then post the new
+			// path on the next tick.  ShortestPath's restartPathfinding() uses a
+			// nested clientThread.invokeLater() internally; posting clear + path
+			// in the same callback can cause the iterator to miss the deferred
+			// pathfinder creation.  Separating by one tick avoids this.
+			// Ref: https://github.com/Skretzo/shortest-path (ShortestPathPlugin.java)
 			clientThread.invokeLater(() ->
 			{
 				client.clearHintArrow();
@@ -604,11 +612,16 @@ public class CollectionLogHelperPlugin extends Plugin
 					client.setHintArrow(worldPoint);
 				}
 
+				// Post path on the next tick so ShortestPath's internal state
+				// from the clear has fully settled before a new path is created
 				if (config.useShortestPath())
 				{
-					Map<String, Object> data = new HashMap<>();
-					data.put("target", worldPoint);
-					eventBus.post(new PluginMessage("shortestpath", "path", data));
+					clientThread.invokeLater(() ->
+					{
+						Map<String, Object> data = new HashMap<>();
+						data.put("target", worldPoint);
+						eventBus.post(new PluginMessage("shortestpath", "path", data));
+					});
 				}
 			});
 		}
