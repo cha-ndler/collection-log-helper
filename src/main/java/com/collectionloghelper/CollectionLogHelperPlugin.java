@@ -592,15 +592,17 @@ public class CollectionLogHelperPlugin extends Plugin
 			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
 
-			// Do NOT send "clear" before "path" — ShortestPath's onPluginMessage
-			// for "clear" goes through setTarget(UNDEFINED) → setTargets() which
-			// does NOT reset lastLocation. Then onPluginMessage for "path" calls
-			// restartPathfinding() directly, skipping setTargets(), so lastLocation
-			// stays stale. On the next game tick, isNearPath() short-circuits
-			// because the player hasn't moved, and the path never renders.
-			// restartPathfinding() already cancels the old pathfinder internally.
-			// Explicit "start" follows the Quest Helper integration pattern.
-			// Ref: https://github.com/Skretzo/shortest-path, https://github.com/Zoinkwiz/quest-helper
+			// ShortestPath re-guidance: send "clear" before "path" with a
+			// 1-tick delay. restartPathfinding() (invoked by the "path"
+			// message) cancels the old pathfinder but does NOT reset
+			// lastLocation. On the next game tick isNearPath() sees the
+			// player at the same lastLocation and short-circuits, so the
+			// new path never renders until the player moves. Sending
+			// "clear" first goes through setTarget(UNDEFINED) which
+			// properly tears down pathfinding state. The nested
+			// invokeLater ensures the clear is processed on one client
+			// tick and the new path request arrives on the next.
+			// Ref: https://github.com/Skretzo/shortest-path
 			clientThread.invokeLater(() ->
 			{
 				client.clearHintArrow();
@@ -612,13 +614,18 @@ public class CollectionLogHelperPlugin extends Plugin
 
 				if (config.useShortestPath())
 				{
-					Map<String, Object> data = new HashMap<>();
-					if (client.getLocalPlayer() != null)
+					eventBus.post(new PluginMessage("shortestpath", "clear"));
+
+					clientThread.invokeLater(() ->
 					{
-						data.put("start", client.getLocalPlayer().getWorldLocation());
-					}
-					data.put("target", worldPoint);
-					eventBus.post(new PluginMessage("shortestpath", "path", data));
+						Map<String, Object> data = new HashMap<>();
+						if (client.getLocalPlayer() != null)
+						{
+							data.put("start", client.getLocalPlayer().getWorldLocation());
+						}
+						data.put("target", worldPoint);
+						eventBus.post(new PluginMessage("shortestpath", "path", data));
+					});
 				}
 			});
 		}
