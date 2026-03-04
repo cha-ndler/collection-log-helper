@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
@@ -70,41 +69,46 @@ class ItemDetailPanel extends JPanel
 
 		add(headerPanel);
 
-		// Info rows
-		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-		infoPanel.setOpaque(false);
-		infoPanel.setAlignmentX(LEFT_ALIGNMENT);
-		infoPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
+		// Info rows — rendered as a single HTML table so the Swing HTML
+		// renderer handles text wrapping and row heights correctly.
+		// Individual BoxLayout rows can't compute height for wrapped HTML.
+		StringBuilder info = new StringBuilder();
+		info.append("<html><table width='195' cellpadding='3' cellspacing='0'>");
 
-		addInfoRow(infoPanel, "Source:", source.getName());
-		addInfoRow(infoPanel, "Category:", source.getCategory().getDisplayName());
+		appendInfoRow(info, "Source:", source.getName());
+		appendInfoRow(info, "Category:", source.getCategory().getDisplayName());
 
 		long denominator = item.getDropRate() > 0 ? Math.round(1.0 / item.getDropRate()) : 0;
-		addInfoRow(infoPanel, "Drop Rate:", denominator > 0 ? "1/" + denominator : "N/A");
+		appendInfoRow(info, "Drop Rate:", denominator > 0 ? "1/" + denominator : "N/A");
 
-		addInfoRow(infoPanel, "Kill Time:", source.getKillTimeSeconds() + "s");
-		addInfoRow(infoPanel, "Location:", source.getDisplayLocation());
-		addInfoRow(infoPanel, "Status:", obtained ? "Obtained" : "Missing");
+		appendInfoRow(info, "Kill Time:", source.getKillTimeSeconds() + "s");
+		appendInfoRow(info, "Location:", source.getDisplayLocation());
+		appendInfoRow(info, "Status:", obtained ? "Obtained" : "Missing");
 
 		if (item.isPet())
 		{
-			addInfoRow(infoPanel, "Type:", "Pet");
+			appendInfoRow(info, "Type:", "Pet");
 		}
 
 		if (locked)
 		{
-			addInfoRow(infoPanel, "Access:", "Locked", LOCKED_COLOR);
+			appendInfoRow(info, "Access:", "Locked", LOCKED_COLOR);
 			if (unmetRequirements != null)
 			{
 				for (String req : unmetRequirements)
 				{
-					addInfoRow(infoPanel, "Requires:", req, LOCKED_COLOR);
+					appendInfoRow(info, "Requires:", req, LOCKED_COLOR);
 				}
 			}
 		}
 
-		add(infoPanel);
+		info.append("</table></html>");
+
+		JLabel infoLabel = new JLabel(info.toString());
+		infoLabel.setFont(FontManager.getRunescapeSmallFont());
+		infoLabel.setAlignmentX(LEFT_ALIGNMENT);
+		infoLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
+		add(infoLabel);
 
 		// Action buttons
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 8, 0));
@@ -165,34 +169,19 @@ class ItemDetailPanel extends JPanel
 		}
 	}
 
-	private void addInfoRow(JPanel parent, String label, String value)
+	private void appendInfoRow(StringBuilder sb, String label, String value)
 	{
-		addInfoRow(parent, label, value, Color.WHITE);
+		appendInfoRow(sb, label, value, Color.WHITE);
 	}
 
-	private void addInfoRow(JPanel parent, String label, String value, Color valueColor)
+	private void appendInfoRow(StringBuilder sb, String label, String value, Color valueColor)
 	{
-		JPanel row = new JPanel(new BorderLayout(4, 0));
-		row.setOpaque(false);
-		row.setAlignmentX(LEFT_ALIGNMENT);
-		row.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
-
-		JLabel labelComponent = new JLabel(label);
-		labelComponent.setFont(FontManager.getRunescapeSmallFont());
-		labelComponent.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-		labelComponent.setVerticalAlignment(SwingConstants.TOP);
-		row.add(labelComponent, BorderLayout.WEST);
-
 		String hex = String.format("%02x%02x%02x", valueColor.getRed(), valueColor.getGreen(), valueColor.getBlue());
-		JLabel valueComponent = new JLabel(
-			"<html><div style='text-align:right;color:#" + hex + "'>" + value + "</div></html>");
-		valueComponent.setFont(FontManager.getRunescapeSmallFont());
-		// Preferred width of 0 forces HTML text to wrap within the space allocated by BorderLayout CENTER
-		valueComponent.setPreferredSize(new Dimension(0, 0));
-		row.add(valueComponent, BorderLayout.CENTER);
-		valueComponent.setHorizontalAlignment(SwingConstants.RIGHT);
-
-		parent.add(row);
+		sb.append("<tr>")
+			.append("<td valign='top'><font color='#b5b5b3'>").append(label).append("</font></td>")
+			.append("<td align='right' valign='top'><font color='#").append(hex).append("'>")
+			.append(value).append("</font></td>")
+			.append("</tr>");
 	}
 
 	private void openWiki(CollectionLogItem item)
