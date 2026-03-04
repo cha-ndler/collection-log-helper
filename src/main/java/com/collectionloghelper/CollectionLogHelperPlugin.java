@@ -592,12 +592,15 @@ public class CollectionLogHelperPlugin extends Plugin
 			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
 
-			// Do NOT send "clear" here — deactivateGuidance() already handles
-			// clearing, and ShortestPath's restartPathfinding() cancels any
-			// existing pathfinder internally.  Sending a redundant "clear"
-			// before "path" interferes with ShortestPath's deferred pathfinder
-			// creation via its nested invokeLater().
-			// Ref: https://github.com/Skretzo/shortest-path (ShortestPathPlugin.java)
+			// Do NOT send "clear" before "path" — ShortestPath's onPluginMessage
+			// for "clear" goes through setTarget(UNDEFINED) → setTargets() which
+			// does NOT reset lastLocation. Then onPluginMessage for "path" calls
+			// restartPathfinding() directly, skipping setTargets(), so lastLocation
+			// stays stale. On the next game tick, isNearPath() short-circuits
+			// because the player hasn't moved, and the path never renders.
+			// restartPathfinding() already cancels the old pathfinder internally.
+			// Explicit "start" follows the Quest Helper integration pattern.
+			// Ref: https://github.com/Skretzo/shortest-path, https://github.com/Zoinkwiz/quest-helper
 			clientThread.invokeLater(() ->
 			{
 				client.clearHintArrow();
@@ -610,6 +613,10 @@ public class CollectionLogHelperPlugin extends Plugin
 				if (config.useShortestPath())
 				{
 					Map<String, Object> data = new HashMap<>();
+					if (client.getLocalPlayer() != null)
+					{
+						data.put("start", client.getLocalPlayer().getWorldLocation());
+					}
 					data.put("target", worldPoint);
 					eventBus.post(new PluginMessage("shortestpath", "path", data));
 				}
