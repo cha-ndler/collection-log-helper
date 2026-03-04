@@ -149,7 +149,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		panel = new CollectionLogHelperPanel(
 			config, database, collectionState, calculator, itemManager,
 			requirementsChecker,
-			this::activateGuidance, this::deactivateGuidance, this::syncCollectionLog,
+			this::activateGuidance, this::deactivateGuidance,
 			() -> cachedPlayerLocation);
 		panel.setMode(config.defaultMode());
 
@@ -225,6 +225,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				lastObtainedCount = collectionState.getTotalObtained();
 				if (panel != null)
 				{
+					panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.NOT_SYNCED, 0);
 					panel.rebuild();
 				}
 			});
@@ -403,11 +404,13 @@ public class CollectionLogHelperPlugin extends Plugin
 				scriptScanActive = false;
 				hasCompletedFullSync = true;
 				guidanceOverlay.setShowSyncReminder(false);
+				int capturedCount = scriptScanItemCount;
 				log.info("Auto-sync complete: {} obtained items captured via script scan",
-					scriptScanItemCount);
+					capturedCount);
 				scriptScanItemCount = 0;
 				if (panel != null)
 				{
+					panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED, capturedCount);
 					panel.rebuild();
 				}
 			}
@@ -422,7 +425,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				syncReminderSent = true;
 				guidanceOverlay.setShowSyncReminder(true);
 				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
-					"<col=00c8c8>[Collection Log Helper]</col> Open your Collection Log to sync your obtained items.",
+					"<col=00c8c8>[Collection Log Helper]</col> Open your in-game Collection Log (click the quest tab icon) to sync progress.",
 					null);
 			}
 		}
@@ -500,6 +503,11 @@ public class CollectionLogHelperPlugin extends Plugin
 		scriptScanActive = false;
 		scanSettleCountdown = SCAN_SETTLE_TICKS;
 
+		if (panel != null)
+		{
+			panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCING, 0);
+		}
+
 		log.info("Triggering collection log search-mode scan");
 
 		// Click the Search toggle to enter search mode (fires script 4100 for each obtained item)
@@ -512,34 +520,6 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Click Back to exit search mode so the UI returns to normal
 		client.menuAction(-1, InterfaceID.Collection.SEARCH_TOGGLE,
 			MenuAction.CC_OP, 1, -1, "Back", null);
-	}
-
-	/**
-	 * Sync action triggered by the panel's Sync button.
-	 * If the collection log is open, triggers a full search-mode scan.
-	 * Otherwise, captures recent items from varps.
-	 */
-	private void syncCollectionLog()
-	{
-		clientThread.invokeLater(() ->
-		{
-			collectionState.captureRecentItems();
-
-			Widget frame = client.getWidget(InterfaceID.Collection.FRAME);
-			if (frame != null && !frame.isHidden())
-			{
-				triggerSearchModeScan();
-				log.info("Sync: triggered search-mode scan");
-			}
-			else
-			{
-				log.info("Sync: captured recent items from varps (open in-game Collection Log for full sync)");
-				if (panel != null)
-				{
-					panel.rebuild();
-				}
-			}
-		});
 	}
 
 	public void activateGuidance(CollectionLogSource source)
