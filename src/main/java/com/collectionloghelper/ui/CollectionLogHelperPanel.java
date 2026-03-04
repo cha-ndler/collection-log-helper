@@ -97,6 +97,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private boolean rebuildPending = false;
 	private boolean guidanceActive = false;
 	private CollectionLogSource guidedSource = null;
+	private boolean inDetailView = false;
 
 	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
 		DropRateDatabase database, PlayerCollectionState collectionState,
@@ -152,6 +153,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 			{
 				currentMode = (Mode) e.getItem();
 				updateControlVisibility();
+				inDetailView = false;
 				rebuild();
 				resetScrollPosition();
 			}
@@ -291,6 +293,20 @@ public class CollectionLogHelperPanel extends PluginPanel
 			rebuilding = true;
 			try
 			{
+				// Save expanded category names before clearing
+				java.util.Set<String> expandedCategories = new java.util.HashSet<>();
+				for (Component comp : listContainer.getComponents())
+				{
+					if (comp instanceof CategorySummaryPanel)
+					{
+						CategorySummaryPanel csp = (CategorySummaryPanel) comp;
+						if (csp.isExpanded())
+						{
+							expandedCategories.add(csp.getCategoryName());
+						}
+					}
+				}
+
 				SwingUtil.fastRemoveAll(listContainer);
 				updateCompletionHeader();
 
@@ -313,9 +329,25 @@ public class CollectionLogHelperPanel extends PluginPanel
 						break;
 				}
 
+				// Restore expanded category state
+				for (Component comp : listContainer.getComponents())
+				{
+					if (comp instanceof CategorySummaryPanel)
+					{
+						CategorySummaryPanel csp = (CategorySummaryPanel) comp;
+						if (expandedCategories.contains(csp.getCategoryName()))
+						{
+							csp.setExpanded(true);
+						}
+					}
+				}
+
 				listContainer.revalidate();
 				listContainer.repaint();
-				showListView();
+				if (!inDetailView)
+				{
+					showListView();
+				}
 			}
 			finally
 			{
@@ -331,12 +363,14 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private void showListView()
 	{
+		inDetailView = false;
 		cardLayout.show(contentPanel, "list");
 		refreshScrollPane();
 	}
 
 	private void showDetailView()
 	{
+		inDetailView = true;
 		cardLayout.show(contentPanel, "detail");
 		refreshScrollPane();
 		resetScrollPosition();
@@ -526,9 +560,14 @@ public class CollectionLogHelperPanel extends PluginPanel
 				continue;
 			}
 
-			int distance = playerLocation.distanceTo(sourcePoint);
-			// distanceTo() returns Integer.MAX_VALUE when source is on a different plane
-			if (distance == Integer.MAX_VALUE)
+				// Use plane-agnostic distance so sources remain visible when
+			// the player is on a different plane (e.g. sailing, instances).
+			// distanceTo2D ignores plane and returns Chebyshev distance.
+			// Ref: RuneLite API WorldPoint.distanceTo2D()
+			int distance = playerLocation.distanceTo2D(sourcePoint);
+
+			int maxDistance = config.proximityMaxDistance();
+			if (maxDistance > 0 && distance > maxDistance)
 			{
 				continue;
 			}

@@ -58,6 +58,17 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "proximityMaxDistance",
+		name = "Proximity Max Distance",
+		description = "Maximum tile distance for Proximity mode (0 = unlimited)",
+		position = 5
+	)
+	default int proximityMaxDistance()
+	{
+		return 0;
+	}
+
+	@ConfigItem(
 		keyName = "showOverlays",
 		name = "Show Overlays",
 		description = "Show guidance overlays when using Guide Me",

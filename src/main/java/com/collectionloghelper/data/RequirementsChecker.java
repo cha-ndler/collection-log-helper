@@ -30,9 +30,12 @@ public class RequirementsChecker
 
 	/**
 	 * Refresh accessibility cache for all sources. Must be called on the client thread.
+	 *
+	 * @return true if any source's accessibility status changed compared to the previous cache
 	 */
-	public void refreshAccessibility(List<CollectionLogSource> sources)
+	public boolean refreshAccessibility(List<CollectionLogSource> sources)
 	{
+		Map<String, Boolean> oldAccessibility = accessibilityCache;
 		Map<String, Boolean> newAccessibility = new HashMap<>();
 		Map<String, List<String>> newUnmet = new HashMap<>();
 
@@ -49,6 +52,17 @@ public class RequirementsChecker
 
 		accessibilityCache = newAccessibility;
 		unmetCache = newUnmet;
+
+		// Check if any source's accessibility status actually changed
+		for (Map.Entry<String, Boolean> entry : newAccessibility.entrySet())
+		{
+			Boolean oldValue = oldAccessibility.get(entry.getKey());
+			if (oldValue == null || !oldValue.equals(entry.getValue()))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
