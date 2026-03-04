@@ -560,7 +560,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 				continue;
 			}
 
-				// Use plane-agnostic distance so sources remain visible when
+			// Use plane-agnostic distance so sources remain visible when
 			// the player is on a different plane (e.g. sailing, instances).
 			// distanceTo2D ignores plane and returns Chebyshev distance.
 			// Ref: RuneLite API WorldPoint.distanceTo2D()
@@ -571,7 +571,13 @@ public class CollectionLogHelperPanel extends PluginPanel
 			{
 				continue;
 			}
-			sourceDistances.add(new SourceDistance(source, distance, missingCount, locked));
+
+			// Compute efficiency score for composite ranking
+			ScoredItem scored = calculator.scoreSource(source, locked);
+			double efficiencyScore = scored != null ? scored.getScore() : 0.0;
+
+			sourceDistances.add(new SourceDistance(source, distance, missingCount, locked,
+				efficiencyScore));
 		}
 
 		if (sourceDistances.isEmpty())
@@ -586,18 +592,18 @@ public class CollectionLogHelperPanel extends PluginPanel
 			return;
 		}
 
-		// Sort by distance ascending, tiebreak by missing count descending
+		// Sort by composite score (efficiency weighted by proximity) descending
 		sourceDistances.sort(
-			Comparator.comparingInt((SourceDistance sd) -> sd.distance)
-				.thenComparing(Comparator.comparingInt((SourceDistance sd) -> sd.missingCount).reversed()));
+			Comparator.comparingDouble((SourceDistance sd) -> sd.compositeScore()).reversed());
 
-		// Top Pick: closest accessible (unlocked) source
+		// Top Pick: highest composite-scored accessible (unlocked) source
 		for (SourceDistance sd : sourceDistances)
 		{
 			if (!sd.locked)
 			{
-				String reasoning = sd.missingCount + " missing items, " + sd.distance + " tiles away";
-				ScoredItem topPick = new ScoredItem(sd.source, sd.missingCount, sd.missingCount, reasoning, false);
+				String reasoning = String.format("%d missing items, %d tiles away (score: %.1f)",
+					sd.missingCount, sd.distance, sd.compositeScore());
+				ScoredItem topPick = new ScoredItem(sd.source, sd.compositeScore(), sd.missingCount, reasoning, false);
 				listContainer.add(createQuickGuidePanel(topPick));
 				break;
 			}
@@ -625,7 +631,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 				continue;
 			}
 
-			JLabel sourceHeader = new JLabel(source.getName() + "  \u2014  " + sd.distance + " tiles");
+			JLabel sourceHeader = new JLabel(String.format("%s  \u2014  %d tiles  (%.1f)",
+				source.getName(), sd.distance, sd.compositeScore()));
 			sourceHeader.setFont(FontManager.getRunescapeBoldFont());
 			sourceHeader.setForeground(new Color(200, 200, 200));
 			sourceHeader.setAlignmentX(LEFT_ALIGNMENT);
@@ -648,20 +655,29 @@ public class CollectionLogHelperPanel extends PluginPanel
 		}
 	}
 
-	/** Carries a source's computed distance from the player for the proximity view. */
+	/** Carries a source's computed distance and efficiency score for the proximity view. */
 	private static final class SourceDistance
 	{
 		final CollectionLogSource source;
 		final int distance;
 		final int missingCount;
 		final boolean locked;
+		final double efficiencyScore;
 
-		SourceDistance(CollectionLogSource source, int distance, int missingCount, boolean locked)
+		SourceDistance(CollectionLogSource source, int distance, int missingCount, boolean locked,
+			double efficiencyScore)
 		{
 			this.source = source;
 			this.distance = distance;
 			this.missingCount = missingCount;
 			this.locked = locked;
+			this.efficiencyScore = efficiencyScore;
+		}
+
+		/** Composite score: efficiency weighted by proximity. */
+		double compositeScore()
+		{
+			return efficiencyScore / (1.0 + distance / 100.0);
 		}
 	}
 
