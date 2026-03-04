@@ -172,21 +172,24 @@ class ItemDetailPanel extends JPanel
 
 	private void addInfoRow(JPanel parent, String label, String value, Color valueColor)
 	{
-		JPanel row = new JPanel(new BorderLayout());
+		JPanel row = new JPanel(new BorderLayout(4, 0));
 		row.setOpaque(false);
 		row.setAlignmentX(LEFT_ALIGNMENT);
-		row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
-		row.setPreferredSize(new Dimension(0, 20));
 
 		JLabel labelComponent = new JLabel(label);
 		labelComponent.setFont(FontManager.getRunescapeSmallFont());
 		labelComponent.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+		labelComponent.setVerticalAlignment(SwingConstants.TOP);
 		row.add(labelComponent, BorderLayout.WEST);
 
-		JLabel valueComponent = new JLabel(value, SwingConstants.RIGHT);
+		String hex = String.format("%02x%02x%02x", valueColor.getRed(), valueColor.getGreen(), valueColor.getBlue());
+		JLabel valueComponent = new JLabel(
+			"<html><div style='text-align:right;color:#" + hex + "'>" + value + "</div></html>");
 		valueComponent.setFont(FontManager.getRunescapeSmallFont());
-		valueComponent.setForeground(valueColor);
-		row.add(valueComponent, BorderLayout.EAST);
+		// Preferred width of 0 forces HTML text to wrap within the space allocated by BorderLayout CENTER
+		valueComponent.setPreferredSize(new Dimension(0, 0));
+		row.add(valueComponent, BorderLayout.CENTER);
+		valueComponent.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		parent.add(row);
 	}
