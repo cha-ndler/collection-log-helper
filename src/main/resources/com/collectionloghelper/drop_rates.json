@@ -2820,7 +2820,7 @@
       {
         "itemId": 4708,
         "name": "Ahrim's hood",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ahrim%27s_hood"
@@ -2828,7 +2828,7 @@
       {
         "itemId": 4712,
         "name": "Ahrim's robetop",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ahrim%27s_robetop"
@@ -2836,7 +2836,7 @@
       {
         "itemId": 4714,
         "name": "Ahrim's robeskirt",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ahrim%27s_robeskirt"
@@ -2844,7 +2844,7 @@
       {
         "itemId": 4710,
         "name": "Ahrim's staff",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ahrim%27s_staff"
@@ -2852,7 +2852,7 @@
       {
         "itemId": 4716,
         "name": "Dharok's helm",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dharok%27s_helm"
@@ -2860,7 +2860,7 @@
       {
         "itemId": 4720,
         "name": "Dharok's platebody",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dharok%27s_platebody"
@@ -2868,7 +2868,7 @@
       {
         "itemId": 4722,
         "name": "Dharok's platelegs",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dharok%27s_platelegs"
@@ -2876,7 +2876,7 @@
       {
         "itemId": 4718,
         "name": "Dharok's greataxe",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dharok%27s_greataxe"
@@ -2884,7 +2884,7 @@
       {
         "itemId": 4724,
         "name": "Guthan's helm",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Guthan%27s_helm"
@@ -2892,7 +2892,7 @@
       {
         "itemId": 4728,
         "name": "Guthan's platebody",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Guthan%27s_platebody"
@@ -2900,7 +2900,7 @@
       {
         "itemId": 4730,
         "name": "Guthan's chainskirt",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Guthan%27s_chainskirt"
@@ -2908,7 +2908,7 @@
       {
         "itemId": 4726,
         "name": "Guthan's warspear",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Guthan%27s_warspear"
@@ -2916,7 +2916,7 @@
       {
         "itemId": 4732,
         "name": "Karil's coif",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Karil%27s_coif"
@@ -2924,7 +2924,7 @@
       {
         "itemId": 4736,
         "name": "Karil's leathertop",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Karil%27s_leathertop"
@@ -2932,7 +2932,7 @@
       {
         "itemId": 4738,
         "name": "Karil's leatherskirt",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Karil%27s_leatherskirt"
@@ -2940,7 +2940,7 @@
       {
         "itemId": 4734,
         "name": "Karil's crossbow",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Karil%27s_crossbow"
@@ -2948,7 +2948,7 @@
       {
         "itemId": 4745,
         "name": "Torag's helm",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Torag%27s_helm"
@@ -2956,7 +2956,7 @@
       {
         "itemId": 4749,
         "name": "Torag's platebody",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Torag%27s_platebody"
@@ -2964,7 +2964,7 @@
       {
         "itemId": 4751,
         "name": "Torag's platelegs",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Torag%27s_platelegs"
@@ -2972,7 +2972,7 @@
       {
         "itemId": 4747,
         "name": "Torag's hammers",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Torag%27s_hammers"
@@ -2980,7 +2980,7 @@
       {
         "itemId": 4753,
         "name": "Verac's helm",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Verac%27s_helm"
@@ -2988,7 +2988,7 @@
       {
         "itemId": 4757,
         "name": "Verac's brassard",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Verac%27s_brassard"
@@ -2996,7 +2996,7 @@
       {
         "itemId": 4759,
         "name": "Verac's plateskirt",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Verac%27s_plateskirt"
@@ -3004,7 +3004,7 @@
       {
         "itemId": 4755,
         "name": "Verac's flail",
-        "dropRate": 0.000409,
+        "dropRate": 0.002856,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Verac%27s_flail"
@@ -4963,7 +4963,7 @@
       {
         "itemId": 10941,
         "name": "Lumberjack hat",
-        "dropRate": 0.5,
+        "dropRate": 0.25,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lumberjack_hat"
@@ -4971,7 +4971,7 @@
       {
         "itemId": 10939,
         "name": "Lumberjack top",
-        "dropRate": 0.5,
+        "dropRate": 0.25,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lumberjack_top"
@@ -4979,7 +4979,7 @@
       {
         "itemId": 10940,
         "name": "Lumberjack legs",
-        "dropRate": 0.5,
+        "dropRate": 0.25,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lumberjack_legs"
@@ -4987,7 +4987,7 @@
       {
         "itemId": 10933,
         "name": "Lumberjack boots",
-        "dropRate": 0.5,
+        "dropRate": 0.25,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lumberjack_boots"
@@ -5006,7 +5006,7 @@
       {
         "itemId": 5554,
         "name": "Rogue mask",
-        "dropRate": 0.4,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_mask"
@@ -5014,7 +5014,7 @@
       {
         "itemId": 5553,
         "name": "Rogue top",
-        "dropRate": 0.4,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_top"
@@ -5022,7 +5022,7 @@
       {
         "itemId": 5555,
         "name": "Rogue trousers",
-        "dropRate": 0.4,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_trousers"
@@ -5030,7 +5030,7 @@
       {
         "itemId": 5556,
         "name": "Rogue gloves",
-        "dropRate": 0.4,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_gloves"
@@ -5038,7 +5038,7 @@
       {
         "itemId": 5557,
         "name": "Rogue boots",
-        "dropRate": 0.4,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_boots"
@@ -5641,7 +5641,7 @@
       {
         "itemId": 31052,
         "name": "Bow string spool",
-        "dropRate": 1.0,
+        "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bow_string_spool"
@@ -5657,7 +5657,7 @@
       {
         "itemId": 31047,
         "name": "Dirty arrowtips",
-        "dropRate": 0.003,
+        "dropRate": 0.2006,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dirty_arrowtips"
@@ -5665,7 +5665,7 @@
       {
         "itemId": 31032,
         "name": "Ent branch",
-        "dropRate": 0.003,
+        "dropRate": 0.1629,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ent_branch"
@@ -5673,7 +5673,7 @@
       {
         "itemId": 31045,
         "name": "Bale of flax",
-        "dropRate": 0.003,
+        "dropRate": 0.1253,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bale_of_flax"
@@ -5681,7 +5681,7 @@
       {
         "itemId": 31018,
         "name": "Ent seed",
-        "dropRate": 0.003,
+        "dropRate": 0.0025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ent_seed"
@@ -5689,7 +5689,7 @@
       {
         "itemId": 31034,
         "name": "Greenman mask",
-        "dropRate": 0.003,
+        "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Greenman_mask"
@@ -7128,7 +7128,7 @@
       {
         "itemId": 11341,
         "name": "Ancient page 1",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7136,7 +7136,7 @@
       {
         "itemId": 11342,
         "name": "Ancient page 2",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7144,7 +7144,7 @@
       {
         "itemId": 11343,
         "name": "Ancient page 3",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7152,7 +7152,7 @@
       {
         "itemId": 11344,
         "name": "Ancient page 4",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7160,7 +7160,7 @@
       {
         "itemId": 11345,
         "name": "Ancient page 5",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7168,7 +7168,7 @@
       {
         "itemId": 11346,
         "name": "Ancient page 6",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7176,7 +7176,7 @@
       {
         "itemId": 11347,
         "name": "Ancient page 7",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7184,7 +7184,7 @@
       {
         "itemId": 11348,
         "name": "Ancient page 8",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7192,7 +7192,7 @@
       {
         "itemId": 11349,
         "name": "Ancient page 9",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7200,7 +7200,7 @@
       {
         "itemId": 11350,
         "name": "Ancient page 10",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7208,7 +7208,7 @@
       {
         "itemId": 11351,
         "name": "Ancient page 11",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7216,7 +7216,7 @@
       {
         "itemId": 11352,
         "name": "Ancient page 12",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7224,7 +7224,7 @@
       {
         "itemId": 11353,
         "name": "Ancient page 13",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7232,7 +7232,7 @@
       {
         "itemId": 11354,
         "name": "Ancient page 14",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7240,7 +7240,7 @@
       {
         "itemId": 11355,
         "name": "Ancient page 15",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7248,7 +7248,7 @@
       {
         "itemId": 11356,
         "name": "Ancient page 16",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7256,7 +7256,7 @@
       {
         "itemId": 11357,
         "name": "Ancient page 17",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7264,7 +7264,7 @@
       {
         "itemId": 11358,
         "name": "Ancient page 18",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7272,7 +7272,7 @@
       {
         "itemId": 11359,
         "name": "Ancient page 19",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7280,7 +7280,7 @@
       {
         "itemId": 11360,
         "name": "Ancient page 20",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7288,7 +7288,7 @@
       {
         "itemId": 11361,
         "name": "Ancient page 21",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7296,7 +7296,7 @@
       {
         "itemId": 11362,
         "name": "Ancient page 22",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7304,7 +7304,7 @@
       {
         "itemId": 11363,
         "name": "Ancient page 23",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7312,7 +7312,7 @@
       {
         "itemId": 11364,
         "name": "Ancient page 24",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7320,7 +7320,7 @@
       {
         "itemId": 11365,
         "name": "Ancient page 25",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
@@ -7328,7 +7328,7 @@
       {
         "itemId": 11366,
         "name": "Ancient page 26",
-        "dropRate": 0.003,
+        "dropRate": 0.002959,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_page"
