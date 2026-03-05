@@ -141,6 +141,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private volatile WorldPoint cachedPlayerLocation;
 	private WorldPoint lastProximityLocation;
 
+	/** Pending ShortestPath target — set after "clear", sent as "path" on the next game tick. */
+	private WorldPoint pendingShortestPathTarget;
+
 	@Override
 	protected void startUp() throws Exception
 	{
@@ -364,6 +367,20 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
+		// Dispatch deferred ShortestPath "path" message (1-tick after "clear")
+		if (pendingShortestPathTarget != null)
+		{
+			WorldPoint target = pendingShortestPathTarget;
+			pendingShortestPathTarget = null;
+			Map<String, Object> data = new HashMap<>();
+			if (client.getLocalPlayer() != null)
+			{
+				data.put("start", client.getLocalPlayer().getWorldLocation());
+			}
+			data.put("target", target);
+			eventBus.post(new PluginMessage("shortestpath", "path", data));
+		}
+
 		// Cache player location for the EDT's proximity view (client thread only).
 		// Proximity uses distanceTo2D() which ignores plane, so even boat-local
 		// coords while sailing will produce usable (approximate) distances.
@@ -592,16 +609,15 @@ public class CollectionLogHelperPlugin extends Plugin
 			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
 
-			// ShortestPath re-guidance: send "clear" before "path" with a
-			// 1-tick delay. restartPathfinding() (invoked by the "path"
-			// message) cancels the old pathfinder but does NOT reset
-			// lastLocation. On the next game tick isNearPath() sees the
-			// player at the same lastLocation and short-circuits, so the
-			// new path never renders until the player moves. Sending
-			// "clear" first goes through setTarget(UNDEFINED) which
-			// properly tears down pathfinding state. The nested
-			// invokeLater ensures the clear is processed on one client
-			// tick and the new path request arrives on the next.
+			// ShortestPath re-guidance: send "clear" now, then "path" on
+			// the next game tick. restartPathfinding() (invoked by "path")
+			// cancels the old pathfinder but does NOT reset lastLocation.
+			// On the next tick isNearPath() sees the player at the same
+			// lastLocation and short-circuits, so the path never renders.
+			// Sending "clear" first tears down pathfinding state including
+			// lastLocation. The 1-tick delay (via pendingShortestPathTarget
+			// dispatched in onGameTick) guarantees the clear is fully
+			// processed before the new path request arrives.
 			// Ref: https://github.com/Skretzo/shortest-path
 			clientThread.invokeLater(() ->
 			{
@@ -615,17 +631,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				if (config.useShortestPath())
 				{
 					eventBus.post(new PluginMessage("shortestpath", "clear"));
-
-					clientThread.invokeLater(() ->
-					{
-						Map<String, Object> data = new HashMap<>();
-						if (client.getLocalPlayer() != null)
-						{
-							data.put("start", client.getLocalPlayer().getWorldLocation());
-						}
-						data.put("target", worldPoint);
-						eventBus.post(new PluginMessage("shortestpath", "path", data));
-					});
+					pendingShortestPathTarget = worldPoint;
 				}
 			});
 		}
@@ -644,6 +650,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		activeMapPoint = null;
+		pendingShortestPathTarget = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
 
 		clientThread.invokeLater(() ->
