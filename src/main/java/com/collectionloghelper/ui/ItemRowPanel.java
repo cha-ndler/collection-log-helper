@@ -103,7 +103,8 @@ class ItemRowPanel extends JPanel
 
 		if (score > 0)
 		{
-			JLabel scoreLabel = new JLabel(String.format("%.1f", score), SwingConstants.RIGHT);
+			JLabel scoreLabel = new JLabel(formatScore(score), SwingConstants.RIGHT);
+			scoreLabel.setToolTipText("Estimated time to next new drop from this source");
 			scoreLabel.setFont(FontManager.getRunescapeSmallFont());
 			scoreLabel.setForeground(locked ? LOCKED_TEXT_COLOR : new Color(255, 200, 0));
 			rightPanel.add(scoreLabel, BorderLayout.SOUTH);
@@ -144,6 +145,35 @@ class ItemRowPanel extends JPanel
 					setBackground(normalBg);
 				}
 			});
+		}
+	}
+
+	private static String formatScore(double score)
+	{
+		double hours = 100.0 / score;
+		if (hours < 1.0 / 60.0)
+		{
+			return "< 1 min";
+		}
+		else if (hours < 1)
+		{
+			long min = Math.max(1, Math.round(hours * 60));
+			return "~" + min + " min";
+		}
+		else if (hours < 24)
+		{
+			long hrs = Math.round(hours);
+			return "~" + hrs + (hrs == 1 ? " hr" : " hrs");
+		}
+		else if (hours < 720)
+		{
+			long days = Math.round(hours / 24);
+			return "~" + days + (days == 1 ? " day" : " days");
+		}
+		else
+		{
+			long months = Math.round(hours / 720);
+			return "~" + months + (months == 1 ? " month" : " months");
 		}
 	}
 
