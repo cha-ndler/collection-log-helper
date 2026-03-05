@@ -14,6 +14,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
@@ -45,6 +46,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 {
 	private static final Color GUIDE_ME_COLOR = new Color(30, 120, 30);
 	private static final Color STOP_GUIDANCE_COLOR = new Color(140, 30, 30);
+	private static final Color SYNC_NOT_SYNCED_COLOR = new Color(230, 180, 50);
+	private static final Color SYNC_SYNCING_COLOR = new Color(0, 200, 200);
+	private static final Color SYNC_SYNCED_COLOR = new Color(50, 200, 50);
 
 	public enum Mode
 	{
@@ -68,6 +72,13 @@ public class CollectionLogHelperPanel extends PluginPanel
 		}
 	}
 
+	public enum SyncState
+	{
+		NOT_SYNCED,
+		SYNCING,
+		SYNCED
+	}
+
 	private final CollectionLogHelperConfig config;
 	private final DropRateDatabase database;
 	private final PlayerCollectionState collectionState;
@@ -76,8 +87,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final RequirementsChecker requirementsChecker;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
-	private final Runnable syncAction;
 	private final Supplier<WorldPoint> playerLocationSupplier;
+
+	private final JLabel syncStatusLabel;
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<CollectionLogCategory> categorySelector;
@@ -104,7 +116,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		EfficiencyCalculator calculator, ItemManager itemManager,
 		RequirementsChecker requirementsChecker,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
-		Runnable syncAction, Supplier<WorldPoint> playerLocationSupplier)
+		Supplier<WorldPoint> playerLocationSupplier)
 	{
 		this.config = config;
 		this.database = database;
@@ -114,7 +126,6 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.requirementsChecker = requirementsChecker;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
-		this.syncAction = syncAction;
 		this.playerLocationSupplier = playerLocationSupplier;
 
 		setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
@@ -134,14 +145,14 @@ public class CollectionLogHelperPanel extends PluginPanel
 		completionLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 4, 0));
 		controlsPanel.add(completionLabel);
 
-		// Sync button
-		JButton syncButton = new JButton("Sync Collection Log");
-		syncButton.setFont(FontManager.getRunescapeSmallFont());
-		syncButton.setAlignmentX(CENTER_ALIGNMENT);
-		syncButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 24));
-		syncButton.setToolTipText("Syncs automatically when you open the Collection Log in-game");
-		syncButton.addActionListener(e -> syncAction.run());
-		controlsPanel.add(syncButton);
+		// Sync status label
+		syncStatusLabel = new JLabel("Open Collection Log to sync", SwingConstants.CENTER);
+		syncStatusLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.ITALIC));
+		syncStatusLabel.setForeground(SYNC_NOT_SYNCED_COLOR);
+		syncStatusLabel.setAlignmentX(CENTER_ALIGNMENT);
+		syncStatusLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+		syncStatusLabel.setToolTipText("Syncs automatically when you open the Collection Log in-game");
+		controlsPanel.add(syncStatusLabel);
 		controlsPanel.add(Box.createVerticalStrut(4));
 
 		// Mode selector
@@ -278,6 +289,32 @@ public class CollectionLogHelperPanel extends PluginPanel
 		int total = collectionState.getTotalPossible();
 		double pct = collectionState.getCompletionPercentage();
 		completionLabel.setText(String.format("Collection Log: %d/%d (%.1f%%)", obtained, total, pct));
+	}
+
+	public void updateSyncStatus(SyncState state, int itemCount)
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			Font smallFont = FontManager.getRunescapeSmallFont();
+			switch (state)
+			{
+				case NOT_SYNCED:
+					syncStatusLabel.setText("Open Collection Log to sync");
+					syncStatusLabel.setFont(smallFont.deriveFont(Font.ITALIC));
+					syncStatusLabel.setForeground(SYNC_NOT_SYNCED_COLOR);
+					break;
+				case SYNCING:
+					syncStatusLabel.setText("Syncing...");
+					syncStatusLabel.setFont(smallFont.deriveFont(Font.ITALIC));
+					syncStatusLabel.setForeground(SYNC_SYNCING_COLOR);
+					break;
+				case SYNCED:
+					syncStatusLabel.setText("Synced (" + itemCount + " items)");
+					syncStatusLabel.setFont(smallFont.deriveFont(Font.PLAIN));
+					syncStatusLabel.setForeground(SYNC_SYNCED_COLOR);
+					break;
+			}
+		});
 	}
 
 	public void rebuild()
