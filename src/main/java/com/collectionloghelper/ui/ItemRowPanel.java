@@ -157,19 +157,23 @@ class ItemRowPanel extends JPanel
 		}
 		else if (hours < 1)
 		{
-			return "~" + Math.round(hours * 60) + " min";
+			long min = Math.max(1, Math.round(hours * 60));
+			return "~" + min + " min";
 		}
 		else if (hours < 24)
 		{
-			return "~" + Math.round(hours) + " hrs";
+			long hrs = Math.round(hours);
+			return "~" + hrs + (hrs == 1 ? " hr" : " hrs");
 		}
 		else if (hours < 720)
 		{
-			return "~" + Math.round(hours / 24) + " days";
+			long days = Math.round(hours / 24);
+			return "~" + days + (days == 1 ? " day" : " days");
 		}
 		else
 		{
-			return "~" + Math.round(hours / 720) + " months";
+			long months = Math.round(hours / 720);
+			return "~" + months + (months == 1 ? " month" : " months");
 		}
 	}
 
