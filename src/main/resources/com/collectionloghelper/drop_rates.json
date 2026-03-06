@@ -4881,7 +4881,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Large_water_container",
-        "pointCost": 70
+        "pointCost": 10000
       },
       {
         "itemId": 21541,
@@ -4890,7 +4890,34 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Volcanic_mine_teleport",
+        "pointCost": 200
+      },
+      {
+        "itemId": 21543,
+        "name": "Calcite",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Calcite",
         "pointCost": 70
+      },
+      {
+        "itemId": 21545,
+        "name": "Pyrophosphite",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pyrophosphite",
+        "pointCost": 70
+      },
+      {
+        "itemId": 27693,
+        "name": "Ore pack",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ore_pack_(Volcanic_Mine)",
+        "pointCost": 4000
       }
     ],
     "locationDescription": "Volcanic Mine, north-east Fossil Island volcano",
