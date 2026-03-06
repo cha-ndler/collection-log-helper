@@ -281,6 +281,78 @@ public class EfficiencyCalculatorTest
 		assertEquals(expectedScore, result.getScore(), 0.01);
 	}
 
+	// --- Completion reward (milestoneKills=1) in MIXED source ---
+
+	@Test
+	public void testMixedSource_completionReward()
+	{
+		// Source with 1 pet (probabilistic) + 1 guaranteed cape (milestoneKills=1)
+		// Like Fight Caves: pet at 1/200, fire cape guaranteed on completion
+		List<CollectionLogItem> items = Arrays.asList(
+			makeItem(1, "Pet", 0.005),
+			makeMilestoneItem(2, "Cape", 1));
+		CollectionLogSource source = makeMilestoneSource("Test Boss", 2400, items);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		assertNotNull(result);
+		assertEquals(2, result.getMissingItemCount());
+		// Pet: score = 0.005 * (3600/2400) * 100 = 0.75
+		// Cape: milestoneKills=1, hours = 1 * 2400/3600 = 0.667, score = (1/0.667)*100 = 150
+		// Total: 150.75
+		assertEquals(150.75, result.getScore(), 1.0);
+	}
+
+	@Test
+	public void testMixedSource_completionRewardAlreadyObtained()
+	{
+		// If cape is obtained, only pet contributes
+		List<CollectionLogItem> items = Arrays.asList(
+			makeItem(1, "Pet", 0.005),
+			makeMilestoneItem(2, "Cape", 1));
+		CollectionLogSource source = makeMilestoneSource("Test Boss", 2400, items);
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+		when(collectionState.isItemObtained(2)).thenReturn(true);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		assertNotNull(result);
+		assertEquals(1, result.getMissingItemCount());
+		// Only pet: 0.005 * (3600/2400) * 100 = 0.75
+		assertEquals(0.75, result.getScore(), 0.01);
+	}
+
+	// --- Clue effective kill time ---
+
+	@Test
+	public void testClueEffectiveKillTime()
+	{
+		CollectionLogSource source = new CollectionLogSource("Easy Treasure Trails",
+			CollectionLogCategory.CLUES, 3000, 3000, 0, 600,
+			"Easy Treasure Trails", Collections.emptyList(),
+			RewardType.DROP, 0, false, 1, null,
+			Collections.singletonList(makeItem(1, "Drop", 0.01)));
+		when(clueEstimator.estimateCompletionSeconds("Easy Treasure Trails")).thenReturn(900);
+
+		int effective = calculator.getEffectiveKillTime(source);
+		assertEquals(900, effective);
+	}
+
+	@Test
+	public void testClueEffectiveKillTime_fallback()
+	{
+		CollectionLogSource source = new CollectionLogSource("Easy Treasure Trails",
+			CollectionLogCategory.CLUES, 3000, 3000, 0, 600,
+			"Easy Treasure Trails", Collections.emptyList(),
+			RewardType.DROP, 0, false, 1, null,
+			Collections.singletonList(makeItem(1, "Drop", 0.01)));
+		when(clueEstimator.estimateCompletionSeconds("Easy Treasure Trails")).thenReturn(0);
+
+		int effective = calculator.getEffectiveKillTime(source);
+		assertEquals(600, effective);
+	}
+
 	// --- formatScore display ---
 
 	@Test
