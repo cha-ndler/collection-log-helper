@@ -156,9 +156,9 @@ public class GuidanceOverlay extends OverlayPanel
 	{
 		if (showSyncReminder)
 		{
-			panelComponent.getChildren().add(LineComponent.builder()
-				.left("Open Collection Log to sync")
-				.leftColor(new Color(255, 170, 0))
+			panelComponent.getChildren().add(TitleComponent.builder()
+				.text("Open Collection Log to sync")
+				.color(new Color(255, 170, 0))
 				.build());
 		}
 	}
