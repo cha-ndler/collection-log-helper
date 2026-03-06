@@ -4176,8 +4176,7 @@
       }
     ],
     "locationDescription": "Hallowed Sepulchre entrance in Darkmeyer",
-    "rewardType": "MIXED",
-    "mutuallyExclusive": true
+    "rewardType": "MIXED"
   },
   {
     "name": "Guardians of the Rift",
@@ -4351,8 +4350,7 @@
         "wikiPage": "Abyssal_protector"
       }
     ],
-    "locationDescription": "Temple of the Eye, accessed via portal in Wizards' Tower basement",
-    "mutuallyExclusive": true
+    "locationDescription": "Temple of the Eye, accessed via portal in Wizards' Tower basement"
   },
   {
     "name": "Brimhaven Agility Arena",
@@ -5014,7 +5012,8 @@
         "wikiPage": "Lumberjack_boots"
       }
     ],
-    "locationDescription": "Temple Trekking, between Burgh de Rott and Paterdomus"
+    "locationDescription": "Temple Trekking, between Burgh de Rott and Paterdomus",
+    "mutuallyExclusive": true
   },
   {
     "name": "Rogues' Den",
@@ -6740,8 +6739,7 @@
       }
     ],
     "locationDescription": "Various Woodcutting locations during Forestry events",
-    "rewardType": "MIXED",
-    "mutuallyExclusive": true
+    "rewardType": "MIXED"
   },
   {
     "name": "Fossil Island Notes",
