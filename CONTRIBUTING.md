@@ -39,7 +39,7 @@ Each source represents a single collection log category (e.g., "General Graardor
 | `worldX` | int | Yes | X coordinate of the boss/activity location |
 | `worldY` | int | Yes | Y coordinate of the boss/activity location |
 | `worldPlane` | int | Yes | World plane (0 = surface, 1+ = upper floors, etc.) |
-| `killTimeSeconds` | int | Yes | Average kill/completion time in seconds for an efficient mid-to-late-game setup |
+| `killTimeSeconds` | int | Yes | Average **full cycle** time in seconds from one loot opportunity to the next — includes kill, respawn/setup, banking, and travel. For event-based activities (e.g., Forestry), use the average interval between events, not the event duration. See [Kill Time Convention](#kill-time-convention) |
 | `mutuallyExclusive` | boolean | No | Set `true` if only one unique can drop per kill (GWD, raids, clue caskets, etc.). Defaults to `false`. See [Drop Table Mechanics](#drop-table-mechanics) |
 | `rollsPerKill` | int | No | Number of drop rolls per kill/completion. Defaults to `1`. Set for multi-roll sources (e.g., Zulrah: 2, Wintertodt: 10). See [Drop Table Mechanics](#drop-table-mechanics) |
 | `rewardType` | string | No | One of: `DROP` (default), `SHOP`, `MIXED`, `GUARANTEED`, `MILESTONE`. Controls how the scoring algorithm handles the source |
@@ -106,6 +106,25 @@ The `wikiPage` field is the URL path segment after `/w/` on the OSRS Wiki:
 - `https://oldschool.runescape.wiki/w/Saradomin%27s_light` → `"Saradomin%27s_light"`
 
 ## Special Cases
+
+### Kill Time Convention
+
+`killTimeSeconds` represents the **average full cycle time** from one loot opportunity to the next. This is NOT just the kill/action duration — it includes all overhead:
+
+| Source Type | What to Include |
+|-------------|----------------|
+| **Bosses** | Kill time + respawn timer + banking/resupply trip |
+| **Minigames** | Full game/round duration (including queue, setup, rewards) |
+| **Event-based** (Forestry, Random Events) | Average interval between events, not event duration |
+| **Slayer** | Per-creature kill time (task overhead handled separately) |
+| **Clues** | Average time to complete one clue of that tier |
+| **Skilling** (Camdozaal, Aerial Fishing) | Time per action/attempt that can yield the drop |
+
+**Examples:**
+- Forestry: `300` (events spawn every ~4-5 min while woodcutting, not 120s event duration)
+- Shades of Mort'ton: `300` (obtain remains + pyre logs, burn, open chest)
+- Random Events: `600` (passive, ~10 min between events on average)
+- Zulrah: `120` (kill + banking trip for efficient setup)
 
 ### Drop Table Mechanics
 
