@@ -1373,7 +1373,7 @@
     "worldX": 2987,
     "worldY": 3376,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 90,
     "items": [
       {
         "itemId": 12646,
@@ -2771,7 +2771,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Gauntlet_cape"
+        "wikiPage": "Gauntlet_cape",
+        "milestoneKills": 1
       },
       {
         "itemId": 23757,
@@ -2783,7 +2784,8 @@
       }
     ],
     "locationDescription": "The Gauntlet, Prifddinas",
-    "mutuallyExclusive": true
+    "mutuallyExclusive": true,
+    "rewardType": "MIXED"
   },
   {
     "name": "The Gauntlet",
@@ -2828,7 +2830,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Gauntlet_cape"
+        "wikiPage": "Gauntlet_cape",
+        "milestoneKills": 1
       },
       {
         "itemId": 23757,
@@ -2840,7 +2843,8 @@
       }
     ],
     "locationDescription": "The Gauntlet, Prifddinas",
-    "mutuallyExclusive": true
+    "mutuallyExclusive": true,
+    "rewardType": "MIXED"
   },
   {
     "name": "Barrows",
@@ -3258,7 +3262,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dizana%27s_quiver_(uncharged)"
+        "wikiPage": "Dizana%27s_quiver_(uncharged)",
+        "milestoneKills": 1
       },
       {
         "itemId": 28919,
@@ -3309,7 +3314,8 @@
         "wikiPage": "Smol_heredit"
       }
     ],
-    "mutuallyExclusive": true
+    "mutuallyExclusive": true,
+    "rewardType": "MIXED"
   },
   {
     "name": "Crazy archaeologist",
@@ -6638,10 +6644,12 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Champion%27s_cape"
+        "wikiPage": "Champion%27s_cape",
+        "milestoneKills": 10
       }
     ],
-    "locationDescription": "Champions' Guild south of Varrock"
+    "locationDescription": "Champions' Guild south of Varrock",
+    "rewardType": "MIXED"
   },
   {
     "name": "Chompy Bird Hunting",
@@ -7195,7 +7203,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Basic_quetzal_whistle"
+        "wikiPage": "Basic_quetzal_whistle",
+        "milestoneKills": 50
       },
       {
         "itemId": 29273,
@@ -7203,7 +7212,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Enhanced_quetzal_whistle"
+        "wikiPage": "Enhanced_quetzal_whistle",
+        "milestoneKills": 150
       },
       {
         "itemId": 29275,
@@ -7211,7 +7221,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Perfected_quetzal_whistle"
+        "wikiPage": "Perfected_quetzal_whistle",
+        "milestoneKills": 300
       },
       {
         "itemId": 28962,
@@ -7222,7 +7233,8 @@
         "wikiPage": "Quetzin"
       }
     ],
-    "locationDescription": "Hunter Guild in the Kebos Lowlands"
+    "locationDescription": "Hunter Guild in the Kebos Lowlands",
+    "rewardType": "MIXED"
   },
   {
     "name": "Lost Schematics",
@@ -8292,7 +8304,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Barronite_mace"
+        "wikiPage": "Barronite_mace",
+        "milestoneKills": 100
       },
       {
         "itemId": 25635,
@@ -8367,7 +8380,8 @@
         "wikiPage": "Imcando_hammer"
       }
     ],
-    "locationDescription": "Ruins of Camdozaal beneath Ice Mountain"
+    "locationDescription": "Ruins of Camdozaal beneath Ice Mountain",
+    "rewardType": "MIXED"
   },
   {
     "name": "Colossal Wyrm Agility",
@@ -9525,7 +9539,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Frozen_tear"
+        "wikiPage": "Frozen_tear",
+        "milestoneKills": 1
       },
       {
         "itemId": 30154,
@@ -9536,7 +9551,8 @@
         "wikiPage": "Moxi"
       }
     ],
-    "mutuallyExclusive": true
+    "mutuallyExclusive": true,
+    "rewardType": "MIXED"
   },
   {
     "name": "Brutus",
@@ -9621,10 +9637,12 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Gryphon_feather"
+        "wikiPage": "Gryphon_feather",
+        "milestoneKills": 1
       }
     ],
-    "mutuallyExclusive": true
+    "mutuallyExclusive": true,
+    "rewardType": "MIXED"
   },
   {
     "name": "Scurrius",
@@ -9676,7 +9694,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Fire_cape"
+        "wikiPage": "Fire_cape",
+        "milestoneKills": 1
       }
     ],
     "rewardType": "MIXED"
@@ -9704,7 +9723,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Infernal_cape"
+        "wikiPage": "Infernal_cape",
+        "milestoneKills": 1
       }
     ],
     "rewardType": "MIXED"
@@ -10779,7 +10799,7 @@
       {
         "itemId": 20164,
         "name": "Large spade",
-        "dropRate": 1.0,
+        "dropRate": 0.00390625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Large_spade"
@@ -11711,7 +11731,7 @@
       {
         "itemId": 20249,
         "name": "Clueless scroll",
-        "dropRate": 1.0,
+        "dropRate": 0.0025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Clueless_scroll"
@@ -13279,7 +13299,7 @@
       {
         "itemId": 19941,
         "name": "Heavy casket",
-        "dropRate": 1.0,
+        "dropRate": 0.023809523809523808,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Heavy_casket"
@@ -13675,7 +13695,7 @@
       {
         "itemId": 22675,
         "name": "Scroll sack",
-        "dropRate": 1.0,
+        "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Scroll_sack"
