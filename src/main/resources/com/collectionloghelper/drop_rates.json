@@ -382,7 +382,8 @@
       }
     ],
     "locationDescription": "Zul-Andra, east coast of Tirannwn",
-    "rollsPerKill": 2
+    "rollsPerKill": 2,
+    "mutuallyExclusive": true
   },
   {
     "name": "Vorkath",
@@ -513,7 +514,8 @@
         "isPet": true,
         "wikiPage": "Hellpuppy"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Alchemical Hydra",
@@ -620,7 +622,8 @@
         "isPet": true,
         "wikiPage": "Ikkle_hydra"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Corporeal Beast",
@@ -747,7 +750,8 @@
         "isPet": true,
         "wikiPage": "Kalphite_princess"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Phantom Muspah",
@@ -787,7 +791,8 @@
         "wikiPage": "Muphin"
       }
     ],
-    "locationDescription": "Ancient Prison entrance, Weiss"
+    "locationDescription": "Ancient Prison entrance, Weiss",
+    "mutuallyExclusive": true
   },
   {
     "name": "Duke Sucellus",
@@ -859,7 +864,8 @@
         "wikiPage": "Baron"
       }
     ],
-    "locationDescription": "Duke Sucellus' lair, beneath the Wizards' Tower"
+    "locationDescription": "Duke Sucellus' lair, beneath the Wizards' Tower",
+    "mutuallyExclusive": true
   },
   {
     "name": "The Leviathan",
@@ -931,7 +937,8 @@
         "wikiPage": "Lil%27viathan"
       }
     ],
-    "locationDescription": "Catacombs entrance, Kourend"
+    "locationDescription": "Catacombs entrance, Kourend",
+    "mutuallyExclusive": true
   },
   {
     "name": "The Whisperer",
@@ -1003,7 +1010,8 @@
         "wikiPage": "Wisp"
       }
     ],
-    "locationDescription": "Lassar Undercity entrance, Ice Mountain"
+    "locationDescription": "Lassar Undercity entrance, Ice Mountain",
+    "mutuallyExclusive": true
   },
   {
     "name": "Vardorvis",
@@ -1075,7 +1083,8 @@
         "wikiPage": "Butch"
       }
     ],
-    "locationDescription": "The Stranglewood, west of Slepe"
+    "locationDescription": "The Stranglewood, west of Slepe",
+    "mutuallyExclusive": true
   },
   {
     "name": "Grotesque Guardians",
@@ -1151,7 +1160,8 @@
       }
     ],
     "locationDescription": "Slayer Tower rooftop, Morytania",
-    "rollsPerKill": 2
+    "rollsPerKill": 2,
+    "mutuallyExclusive": true
   },
   {
     "name": "The Nightmare",
@@ -1354,7 +1364,8 @@
         "isPet": true,
         "wikiPage": "Sraracha"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Giant Mole",
@@ -1416,7 +1427,8 @@
         "wikiPage": "Pet_dagannoth_rex"
       }
     ],
-    "locationDescription": "Waterbirth Island, Rellekka"
+    "locationDescription": "Waterbirth Island, Rellekka",
+    "mutuallyExclusive": true
   },
   {
     "name": "Dagannoth Prime",
@@ -1459,7 +1471,8 @@
         "wikiPage": "Pet_dagannoth_prime"
       }
     ],
-    "locationDescription": "Waterbirth Island, Rellekka"
+    "locationDescription": "Waterbirth Island, Rellekka",
+    "mutuallyExclusive": true
   },
   {
     "name": "Dagannoth Supreme",
@@ -1502,7 +1515,8 @@
         "wikiPage": "Pet_dagannoth_supreme"
       }
     ],
-    "locationDescription": "Waterbirth Island, Rellekka"
+    "locationDescription": "Waterbirth Island, Rellekka",
+    "mutuallyExclusive": true
   },
   {
     "name": "Kraken",
@@ -1553,7 +1567,8 @@
         "isPet": true,
         "wikiPage": "Pet_kraken"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Thermonuclear smoke devil",
@@ -1612,7 +1627,8 @@
         "wikiPage": "Pet_smoke_devil"
       }
     ],
-    "locationDescription": "Smoke Devil Dungeon, south of Castle Wars"
+    "locationDescription": "Smoke Devil Dungeon, south of Castle Wars",
+    "mutuallyExclusive": true
   },
   {
     "name": "Abyssal Sire",
@@ -1671,7 +1687,8 @@
         "wikiPage": "Abyssal_orphan"
       }
     ],
-    "locationDescription": "Abyssal Nexus, fairy ring DIP"
+    "locationDescription": "Abyssal Nexus, fairy ring DIP",
+    "mutuallyExclusive": true
   },
   {
     "name": "King Black Dragon",
@@ -1714,7 +1731,8 @@
         "wikiPage": "Prince_black_dragon"
       }
     ],
-    "locationDescription": "King Black Dragon Lair, Wilderness"
+    "locationDescription": "King Black Dragon Lair, Wilderness",
+    "mutuallyExclusive": true
   },
   {
     "name": "Chaos Elemental",
@@ -1749,7 +1767,8 @@
         "wikiPage": "Pet_chaos_elemental"
       }
     ],
-    "locationDescription": "Rogues' Castle, deep Wilderness"
+    "locationDescription": "Rogues' Castle, deep Wilderness",
+    "mutuallyExclusive": true
   },
   {
     "name": "Scorpia",
@@ -1784,7 +1803,8 @@
         "wikiPage": "Scorpia%27s_offspring"
       }
     ],
-    "locationDescription": "Scorpia's Cave, deep Wilderness"
+    "locationDescription": "Scorpia's Cave, deep Wilderness",
+    "mutuallyExclusive": true
   },
   {
     "name": "Chaos Fanatic",
@@ -1819,7 +1839,8 @@
         "wikiPage": "Pet_chaos_elemental"
       }
     ],
-    "locationDescription": "West of Lava Maze, Wilderness"
+    "locationDescription": "West of Lava Maze, Wilderness",
+    "mutuallyExclusive": true
   },
   {
     "name": "Venenatis",
@@ -1870,7 +1891,8 @@
         "wikiPage": "Venenatis_spiderling"
       }
     ],
-    "locationDescription": "Venenatis' Cave, Wilderness"
+    "locationDescription": "Venenatis' Cave, Wilderness",
+    "mutuallyExclusive": true
   },
   {
     "name": "Vet'ion",
@@ -1921,7 +1943,8 @@
         "wikiPage": "Vet%27ion_jr."
       }
     ],
-    "locationDescription": "Vet'ion's Rest, Wilderness"
+    "locationDescription": "Vet'ion's Rest, Wilderness",
+    "mutuallyExclusive": true
   },
   {
     "name": "Callisto",
@@ -1972,7 +1995,8 @@
         "wikiPage": "Callisto_cub"
       }
     ],
-    "locationDescription": "Callisto's Den, Wilderness"
+    "locationDescription": "Callisto's Den, Wilderness",
+    "mutuallyExclusive": true
   },
   {
     "name": "Demonic gorillas",
@@ -2758,7 +2782,8 @@
         "wikiPage": "Youngllef"
       }
     ],
-    "locationDescription": "The Gauntlet, Prifddinas"
+    "locationDescription": "The Gauntlet, Prifddinas",
+    "mutuallyExclusive": true
   },
   {
     "name": "The Gauntlet",
@@ -2814,7 +2839,8 @@
         "wikiPage": "Youngllef"
       }
     ],
-    "locationDescription": "The Gauntlet, Prifddinas"
+    "locationDescription": "The Gauntlet, Prifddinas",
+    "mutuallyExclusive": true
   },
   {
     "name": "Barrows",
@@ -3214,7 +3240,8 @@
         "wikiPage": "Smolcano"
       }
     ],
-    "locationDescription": "Zalcano's Prison, Prifddinas"
+    "locationDescription": "Zalcano's Prison, Prifddinas",
+    "mutuallyExclusive": true
   },
   {
     "name": "Sol Heredit",
@@ -3376,7 +3403,8 @@
         "wikiPage": "Rax"
       }
     ],
-    "locationDescription": "Morytania Spider Cave"
+    "locationDescription": "Morytania Spider Cave",
+    "mutuallyExclusive": true
   },
   {
     "name": "Perilous Moons",
@@ -4051,7 +4079,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Hallowed_mark"
+        "wikiPage": "Hallowed_mark",
+        "pointCost": 250
       },
       {
         "itemId": 24740,
@@ -4123,7 +4152,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Hallowed_token"
+        "wikiPage": "Hallowed_token",
+        "pointCost": 250
       },
       {
         "itemId": 24721,
@@ -4175,7 +4205,8 @@
       }
     ],
     "locationDescription": "Hallowed Sepulchre entrance in Darkmeyer",
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "pointsPerHour": 30
   },
   {
     "name": "Guardians of the Rift",
@@ -4365,11 +4396,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Pirate%27s_hook"
+        "wikiPage": "Pirate%27s_hook",
+        "pointCost": 800
       }
     ],
     "locationDescription": "Brimhaven Agility Arena, east of Brimhaven",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 60
   },
   {
     "name": "Giants' Foundry",
@@ -4385,7 +4418,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Smiths_tunic"
+        "wikiPage": "Smiths_tunic",
+        "pointCost": 400
       },
       {
         "itemId": 27025,
@@ -4393,7 +4427,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Smiths_trousers"
+        "wikiPage": "Smiths_trousers",
+        "pointCost": 400
       },
       {
         "itemId": 27027,
@@ -4401,7 +4436,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Smiths_boots"
+        "wikiPage": "Smiths_boots",
+        "pointCost": 400
       },
       {
         "itemId": 27029,
@@ -4409,7 +4445,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Smiths_gloves"
+        "wikiPage": "Smiths_gloves",
+        "pointCost": 400
       },
       {
         "itemId": 27021,
@@ -4417,7 +4454,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Colossal_blade"
+        "wikiPage": "Colossal_blade",
+        "pointCost": 2000
       },
       {
         "itemId": 27014,
@@ -4425,7 +4463,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Kovac%27s_grog"
+        "wikiPage": "Kovac%27s_grog",
+        "pointCost": 300
       },
       {
         "itemId": 27012,
@@ -4433,11 +4472,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Double_ammo_mould"
+        "wikiPage": "Double_ammo_mould",
+        "pointCost": 300
       }
     ],
     "locationDescription": "Giants' Foundry beneath the Giant's Plateau",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 150
   },
   {
     "name": "Pest Control",
@@ -4453,7 +4494,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Void_knight_top"
+        "wikiPage": "Void_knight_top",
+        "pointCost": 250
       },
       {
         "itemId": 8840,
@@ -4461,7 +4503,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Void_knight_robe"
+        "wikiPage": "Void_knight_robe",
+        "pointCost": 250
       },
       {
         "itemId": 8842,
@@ -4469,7 +4512,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Void_knight_gloves"
+        "wikiPage": "Void_knight_gloves",
+        "pointCost": 150
       },
       {
         "itemId": 8841,
@@ -4477,7 +4521,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Void_knight_mace"
+        "wikiPage": "Void_knight_mace",
+        "pointCost": 250
       },
       {
         "itemId": 11665,
@@ -4485,7 +4530,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Void_melee_helm"
+        "wikiPage": "Void_melee_helm",
+        "pointCost": 200
       },
       {
         "itemId": 11664,
@@ -4493,7 +4539,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Void_ranger_helm"
+        "wikiPage": "Void_ranger_helm",
+        "pointCost": 200
       },
       {
         "itemId": 11663,
@@ -4501,7 +4548,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Void_mage_helm"
+        "wikiPage": "Void_mage_helm",
+        "pointCost": 200
       },
       {
         "itemId": 11673,
@@ -4509,7 +4557,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Void_seal"
+        "wikiPage": "Void_seal",
+        "pointCost": 10
       },
       {
         "itemId": 13072,
@@ -4517,7 +4566,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Elite_void_top"
+        "wikiPage": "Elite_void_top",
+        "pointCost": 650
       },
       {
         "itemId": 13073,
@@ -4525,11 +4575,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Elite_void_robe"
+        "wikiPage": "Elite_void_robe",
+        "pointCost": 650
       }
     ],
     "locationDescription": "Void Knights' Outpost, south of Port Sarim",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 110
   },
   {
     "name": "Mage Training Arena",
@@ -4545,7 +4597,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Infinity_hat"
+        "wikiPage": "Infinity_hat",
+        "pointCost": 400
       },
       {
         "itemId": 6916,
@@ -4553,7 +4606,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Infinity_top"
+        "wikiPage": "Infinity_top",
+        "pointCost": 500
       },
       {
         "itemId": 6924,
@@ -4561,7 +4615,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Infinity_bottoms"
+        "wikiPage": "Infinity_bottoms",
+        "pointCost": 600
       },
       {
         "itemId": 6922,
@@ -4569,7 +4624,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Infinity_gloves"
+        "wikiPage": "Infinity_gloves",
+        "pointCost": 200
       },
       {
         "itemId": 6920,
@@ -4577,7 +4633,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Infinity_boots"
+        "wikiPage": "Infinity_boots",
+        "pointCost": 200
       },
       {
         "itemId": 6889,
@@ -4585,7 +4642,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mage%27s_book"
+        "wikiPage": "Mage%27s_book",
+        "pointCost": 400
       },
       {
         "itemId": 6914,
@@ -4593,7 +4651,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Master_wand"
+        "wikiPage": "Master_wand",
+        "pointCost": 300
       },
       {
         "itemId": 8015,
@@ -4601,11 +4660,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bones_to_Peaches"
+        "wikiPage": "Bones_to_Peaches",
+        "pointCost": 200
       }
     ],
     "locationDescription": "Mage Training Arena, north-east of Al Kharid",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 100
   },
   {
     "name": "Shades of Mort'ton",
@@ -4661,7 +4722,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Carpenter%27s_helmet"
+        "wikiPage": "Carpenter%27s_helmet",
+        "pointCost": 400
       },
       {
         "itemId": 24874,
@@ -4669,7 +4731,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Carpenter%27s_shirt"
+        "wikiPage": "Carpenter%27s_shirt",
+        "pointCost": 800
       },
       {
         "itemId": 24876,
@@ -4677,7 +4740,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Carpenter%27s_trousers"
+        "wikiPage": "Carpenter%27s_trousers",
+        "pointCost": 600
       },
       {
         "itemId": 24878,
@@ -4685,7 +4749,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Carpenter%27s_boots"
+        "wikiPage": "Carpenter%27s_boots",
+        "pointCost": 200
       },
       {
         "itemId": 24880,
@@ -4693,7 +4758,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Amy%27s_saw"
+        "wikiPage": "Amy%27s_saw",
+        "pointCost": 500
       },
       {
         "itemId": 24882,
@@ -4701,11 +4767,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Plank_sack"
+        "wikiPage": "Plank_sack",
+        "pointCost": 350
       }
     ],
     "locationDescription": "Mahogany Homes, contracts available in Falador, Varrock, Hosidius, and Ardougne",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 200
   },
   {
     "name": "Mastering Mixology",
@@ -4721,7 +4789,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Alchemist_labcoat"
+        "wikiPage": "Alchemist_labcoat",
+        "pointCost": 1500
       },
       {
         "itemId": 29982,
@@ -4729,7 +4798,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Alchemist_pants"
+        "wikiPage": "Alchemist_pants",
+        "pointCost": 1500
       },
       {
         "itemId": 29986,
@@ -4737,7 +4807,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Alchemist_gloves"
+        "wikiPage": "Alchemist_gloves",
+        "pointCost": 800
       },
       {
         "itemId": 29974,
@@ -4745,7 +4816,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Prescription_goggles"
+        "wikiPage": "Prescription_goggles",
+        "pointCost": 1200
       },
       {
         "itemId": 29996,
@@ -4753,7 +4825,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Reagent_pouch"
+        "wikiPage": "Reagent_pouch",
+        "pointCost": 8000
       },
       {
         "itemId": 29988,
@@ -4761,7 +4834,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Alchemist%27s_amulet"
+        "wikiPage": "Alchemist%27s_amulet",
+        "pointCost": 2500
       },
       {
         "itemId": 30002,
@@ -4769,11 +4843,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Chugging_barrel"
+        "wikiPage": "Chugging_barrel",
+        "pointCost": 2000
       }
     ],
     "locationDescription": "Mastering Mixology, Aldarin in Varlamore",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 500
   },
   {
     "name": "Volcanic Mine",
@@ -4789,7 +4865,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ash_covered_tome"
+        "wikiPage": "Ash_covered_tome",
+        "pointCost": 40000
       },
       {
         "itemId": 21539,
@@ -4797,7 +4874,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Large_water_container"
+        "wikiPage": "Large_water_container",
+        "pointCost": 70
       },
       {
         "itemId": 21541,
@@ -4805,11 +4883,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Volcanic_mine_teleport"
+        "wikiPage": "Volcanic_mine_teleport",
+        "pointCost": 70
       }
     ],
     "locationDescription": "Volcanic Mine, north-east Fossil Island volcano",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 13600
   },
   {
     "name": "Tithe Farm",
@@ -4825,7 +4905,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Farmer%27s_strawhat"
+        "wikiPage": "Farmer%27s_strawhat",
+        "pointCost": 75
       },
       {
         "itemId": 13642,
@@ -4833,7 +4914,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Farmer%27s_jacket"
+        "wikiPage": "Farmer%27s_jacket",
+        "pointCost": 150
       },
       {
         "itemId": 13640,
@@ -4841,7 +4923,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Farmer%27s_boro_trousers"
+        "wikiPage": "Farmer%27s_boro_trousers",
+        "pointCost": 125
       },
       {
         "itemId": 13644,
@@ -4849,7 +4932,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Farmer%27s_boots"
+        "wikiPage": "Farmer%27s_boots",
+        "pointCost": 50
       },
       {
         "itemId": 13639,
@@ -4857,7 +4941,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Seed_box"
+        "wikiPage": "Seed_box",
+        "pointCost": 250
       },
       {
         "itemId": 13226,
@@ -4865,7 +4950,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Herb_sack"
+        "wikiPage": "Herb_sack",
+        "pointCost": 250
       },
       {
         "itemId": 13353,
@@ -4873,11 +4959,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Gricoller%27s_can"
+        "wikiPage": "Gricoller%27s_can",
+        "pointCost": 200
       }
     ],
     "locationDescription": "Tithe Farm, Hosidius",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 110
   },
   {
     "name": "Gnome Restaurant",
@@ -5025,7 +5113,7 @@
       {
         "itemId": 5554,
         "name": "Rogue mask",
-        "dropRate": 0.625,
+        "dropRate": 0.025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_mask"
@@ -5033,7 +5121,7 @@
       {
         "itemId": 5553,
         "name": "Rogue top",
-        "dropRate": 0.625,
+        "dropRate": 0.025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_top"
@@ -5041,7 +5129,7 @@
       {
         "itemId": 5555,
         "name": "Rogue trousers",
-        "dropRate": 0.625,
+        "dropRate": 0.025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_trousers"
@@ -5049,7 +5137,7 @@
       {
         "itemId": 5556,
         "name": "Rogue gloves",
-        "dropRate": 0.625,
+        "dropRate": 0.025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_gloves"
@@ -5057,7 +5145,7 @@
       {
         "itemId": 5557,
         "name": "Rogue boots",
-        "dropRate": 0.625,
+        "dropRate": 0.025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_boots"
@@ -5080,7 +5168,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Minor_beginner_scroll_case"
+        "wikiPage": "Minor_beginner_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30904,
@@ -5088,7 +5177,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Major_beginner_scroll_case"
+        "wikiPage": "Major_beginner_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30906,
@@ -5096,7 +5186,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Minor_easy_scroll_case"
+        "wikiPage": "Minor_easy_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30908,
@@ -5104,7 +5195,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Major_easy_scroll_case"
+        "wikiPage": "Major_easy_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30910,
@@ -5112,7 +5204,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Minor_medium_scroll_case"
+        "wikiPage": "Minor_medium_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30912,
@@ -5120,7 +5213,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Major_medium_scroll_case"
+        "wikiPage": "Major_medium_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30914,
@@ -5128,7 +5222,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Minor_hard_scroll_case"
+        "wikiPage": "Minor_hard_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30916,
@@ -5136,7 +5231,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Major_hard_scroll_case"
+        "wikiPage": "Major_hard_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30918,
@@ -5144,7 +5240,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Minor_elite_scroll_case"
+        "wikiPage": "Minor_elite_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30920,
@@ -5152,7 +5249,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Major_elite_scroll_case"
+        "wikiPage": "Major_elite_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30922,
@@ -5160,7 +5258,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Minor_master_scroll_case"
+        "wikiPage": "Minor_master_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30924,
@@ -5168,7 +5267,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Major_master_scroll_case"
+        "wikiPage": "Major_master_scroll_case",
+        "pointCost": 5
       },
       {
         "itemId": 30926,
@@ -5176,11 +5276,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mimic_scroll_case"
+        "wikiPage": "Mimic_scroll_case",
+        "pointCost": 5
       }
     ],
     "locationDescription": "Awarded for completing clue scroll milestones across all tiers",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 10
   },
   {
     "name": "Castle Wars",
@@ -5196,7 +5298,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_helm_(red)"
+        "wikiPage": "Decorative_helm_(red)",
+        "pointCost": 4
       },
       {
         "itemId": 25165,
@@ -5204,7 +5307,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_full_helm_(red)"
+        "wikiPage": "Decorative_full_helm_(red)",
+        "pointCost": 6
       },
       {
         "itemId": 4069,
@@ -5212,7 +5316,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(red_platebody)"
+        "wikiPage": "Decorative_armour_(red_platebody)",
+        "pointCost": 8
       },
       {
         "itemId": 4070,
@@ -5220,7 +5325,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(red_platelegs)"
+        "wikiPage": "Decorative_armour_(red_platelegs)",
+        "pointCost": 6
       },
       {
         "itemId": 11893,
@@ -5228,7 +5334,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(red_plateskirt)"
+        "wikiPage": "Decorative_armour_(red_plateskirt)",
+        "pointCost": 6
       },
       {
         "itemId": 25163,
@@ -5236,7 +5343,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_boots_(red)"
+        "wikiPage": "Decorative_boots_(red)",
+        "pointCost": 4
       },
       {
         "itemId": 4068,
@@ -5244,7 +5352,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_sword_(red)"
+        "wikiPage": "Decorative_sword_(red)",
+        "pointCost": 5
       },
       {
         "itemId": 4072,
@@ -5252,7 +5361,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_shield_(red)"
+        "wikiPage": "Decorative_shield_(red)",
+        "pointCost": 5
       },
       {
         "itemId": 4506,
@@ -5260,7 +5370,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_helm_(white)"
+        "wikiPage": "Decorative_helm_(white)",
+        "pointCost": 40
       },
       {
         "itemId": 25169,
@@ -5268,7 +5379,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_full_helm_(white)"
+        "wikiPage": "Decorative_full_helm_(white)",
+        "pointCost": 60
       },
       {
         "itemId": 4504,
@@ -5276,7 +5388,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(white_platebody)"
+        "wikiPage": "Decorative_armour_(white_platebody)",
+        "pointCost": 80
       },
       {
         "itemId": 4505,
@@ -5284,7 +5397,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(white_platelegs)"
+        "wikiPage": "Decorative_armour_(white_platelegs)",
+        "pointCost": 60
       },
       {
         "itemId": 11894,
@@ -5292,7 +5406,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(white_plateskirt)"
+        "wikiPage": "Decorative_armour_(white_plateskirt)",
+        "pointCost": 60
       },
       {
         "itemId": 25167,
@@ -5300,7 +5415,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_boots_(white)"
+        "wikiPage": "Decorative_boots_(white)",
+        "pointCost": 40
       },
       {
         "itemId": 4503,
@@ -5308,7 +5424,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_sword_(white)"
+        "wikiPage": "Decorative_sword_(white)",
+        "pointCost": 50
       },
       {
         "itemId": 4507,
@@ -5316,7 +5433,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_shield_(white)"
+        "wikiPage": "Decorative_shield_(white)",
+        "pointCost": 50
       },
       {
         "itemId": 4511,
@@ -5324,7 +5442,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_helm_(gold)"
+        "wikiPage": "Decorative_helm_(gold)",
+        "pointCost": 400
       },
       {
         "itemId": 25174,
@@ -5332,7 +5451,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_full_helm_(gold)"
+        "wikiPage": "Decorative_full_helm_(gold)",
+        "pointCost": 600
       },
       {
         "itemId": 4509,
@@ -5340,7 +5460,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(gold_platebody)"
+        "wikiPage": "Decorative_armour_(gold_platebody)",
+        "pointCost": 800
       },
       {
         "itemId": 4510,
@@ -5348,7 +5469,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(gold_platelegs)"
+        "wikiPage": "Decorative_armour_(gold_platelegs)",
+        "pointCost": 600
       },
       {
         "itemId": 11895,
@@ -5356,7 +5478,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(gold_plateskirt)"
+        "wikiPage": "Decorative_armour_(gold_plateskirt)",
+        "pointCost": 600
       },
       {
         "itemId": 25171,
@@ -5364,7 +5487,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_boots_(gold)"
+        "wikiPage": "Decorative_boots_(gold)",
+        "pointCost": 400
       },
       {
         "itemId": 4508,
@@ -5372,7 +5496,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_sword_(gold)"
+        "wikiPage": "Decorative_sword_(gold)",
+        "pointCost": 500
       },
       {
         "itemId": 4512,
@@ -5380,7 +5505,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_shield_(gold)"
+        "wikiPage": "Decorative_shield_(gold)",
+        "pointCost": 500
       },
       {
         "itemId": 11898,
@@ -5388,7 +5514,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(magic_hat)"
+        "wikiPage": "Decorative_armour_(magic_hat)",
+        "pointCost": 20
       },
       {
         "itemId": 11896,
@@ -5396,7 +5523,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(magic_top)"
+        "wikiPage": "Decorative_armour_(magic_top)",
+        "pointCost": 40
       },
       {
         "itemId": 11897,
@@ -5404,7 +5532,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(magic_legs)"
+        "wikiPage": "Decorative_armour_(magic_legs)",
+        "pointCost": 30
       },
       {
         "itemId": 11899,
@@ -5412,7 +5541,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(ranged_top)"
+        "wikiPage": "Decorative_armour_(ranged_top)",
+        "pointCost": 40
       },
       {
         "itemId": 11900,
@@ -5420,7 +5550,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(ranged_legs)"
+        "wikiPage": "Decorative_armour_(ranged_legs)",
+        "pointCost": 30
       },
       {
         "itemId": 11901,
@@ -5428,7 +5559,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Decorative_armour_(quiver)"
+        "wikiPage": "Decorative_armour_(quiver)",
+        "pointCost": 40
       },
       {
         "itemId": 4513,
@@ -5436,7 +5568,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Castlewars_hood_(Saradomin)"
+        "wikiPage": "Castlewars_hood_(Saradomin)",
+        "pointCost": 10
       },
       {
         "itemId": 4514,
@@ -5444,7 +5577,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Castlewars_cloak_(Saradomin)"
+        "wikiPage": "Castlewars_cloak_(Saradomin)",
+        "pointCost": 10
       },
       {
         "itemId": 4515,
@@ -5452,7 +5586,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Castlewars_hood_(Zamorak)"
+        "wikiPage": "Castlewars_hood_(Zamorak)",
+        "pointCost": 10
       },
       {
         "itemId": 4516,
@@ -5460,7 +5595,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Castlewars_cloak_(Zamorak)"
+        "wikiPage": "Castlewars_cloak_(Zamorak)",
+        "pointCost": 10
       },
       {
         "itemId": 12637,
@@ -5468,7 +5604,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Saradomin_halo"
+        "wikiPage": "Saradomin_halo",
+        "pointCost": 75
       },
       {
         "itemId": 12638,
@@ -5476,7 +5613,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Zamorak_halo"
+        "wikiPage": "Zamorak_halo",
+        "pointCost": 75
       },
       {
         "itemId": 12639,
@@ -5484,11 +5622,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Guthix_halo"
+        "wikiPage": "Guthix_halo",
+        "pointCost": 75
       }
     ],
     "locationDescription": "Castle Wars arena, south of Observatory",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 6
   },
   {
     "name": "Soul Wars",
@@ -5504,7 +5644,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Soul_cape"
+        "wikiPage": "Soul_cape",
+        "pointCost": 2500
       },
       {
         "itemId": 25346,
@@ -5512,7 +5653,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Soul_cape"
+        "wikiPage": "Soul_cape",
+        "pointCost": 2500
       },
       {
         "itemId": 25348,
@@ -5524,7 +5666,8 @@
       }
     ],
     "locationDescription": "Isle of Souls, west of Edgeville",
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "pointsPerHour": 30
   },
   {
     "name": "Last Man Standing",
@@ -5540,7 +5683,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Deadman%27s_chest"
+        "wikiPage": "Deadman%27s_chest",
+        "pointCost": 160
       },
       {
         "itemId": 24190,
@@ -5548,7 +5692,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Deadman%27s_legs"
+        "wikiPage": "Deadman%27s_legs",
+        "pointCost": 160
       },
       {
         "itemId": 24191,
@@ -5556,7 +5701,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Deadman%27s_cape"
+        "wikiPage": "Deadman%27s_cape",
+        "pointCost": 160
       },
       {
         "itemId": 24192,
@@ -5564,7 +5710,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Armadyl_halo"
+        "wikiPage": "Armadyl_halo",
+        "pointCost": 450
       },
       {
         "itemId": 24195,
@@ -5572,7 +5719,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bandos_halo"
+        "wikiPage": "Bandos_halo",
+        "pointCost": 450
       },
       {
         "itemId": 24198,
@@ -5580,7 +5728,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Seren_halo"
+        "wikiPage": "Seren_halo",
+        "pointCost": 450
       },
       {
         "itemId": 24201,
@@ -5588,7 +5737,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancient_halo"
+        "wikiPage": "Ancient_halo",
+        "pointCost": 450
       },
       {
         "itemId": 24204,
@@ -5596,7 +5746,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Brassica_halo"
+        "wikiPage": "Brassica_halo",
+        "pointCost": 450
       },
       {
         "itemId": 24207,
@@ -5604,7 +5755,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Victor%27s_cape_(1)"
+        "wikiPage": "Victor%27s_cape_(1)",
+        "pointCost": 1
       },
       {
         "itemId": 24209,
@@ -5612,7 +5764,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Victor%27s_cape_(10)"
+        "wikiPage": "Victor%27s_cape_(10)",
+        "pointCost": 1
       },
       {
         "itemId": 24211,
@@ -5620,7 +5773,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Victor%27s_cape_(50)"
+        "wikiPage": "Victor%27s_cape_(50)",
+        "pointCost": 1
       },
       {
         "itemId": 24213,
@@ -5628,7 +5782,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Victor%27s_cape_(100)"
+        "wikiPage": "Victor%27s_cape_(100)",
+        "pointCost": 1
       },
       {
         "itemId": 24215,
@@ -5636,7 +5791,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Victor%27s_cape_(500)"
+        "wikiPage": "Victor%27s_cape_(500)",
+        "pointCost": 1
       },
       {
         "itemId": 24520,
@@ -5644,11 +5800,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Victor%27s_cape_(1000)"
+        "wikiPage": "Victor%27s_cape_(1000)",
+        "pointCost": 1
       }
     ],
     "locationDescription": "Ferox Enclave, north of Varrock in the Wilderness",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 25
   },
   {
     "name": "Vale Totems",
@@ -5756,7 +5914,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blue_tricorn_hat"
+        "wikiPage": "Blue_tricorn_hat",
+        "pointCost": 500
       },
       {
         "itemId": 8960,
@@ -5764,7 +5923,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Green_tricorn_hat"
+        "wikiPage": "Green_tricorn_hat",
+        "pointCost": 500
       },
       {
         "itemId": 8961,
@@ -5772,7 +5932,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Red_tricorn_hat"
+        "wikiPage": "Red_tricorn_hat",
+        "pointCost": 500
       },
       {
         "itemId": 8962,
@@ -5780,7 +5941,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Brown_tricorn_hat"
+        "wikiPage": "Brown_tricorn_hat",
+        "pointCost": 500
       },
       {
         "itemId": 8963,
@@ -5788,7 +5950,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Black_tricorn_hat"
+        "wikiPage": "Black_tricorn_hat",
+        "pointCost": 500
       },
       {
         "itemId": 8964,
@@ -5796,7 +5959,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Purple_tricorn_hat"
+        "wikiPage": "Purple_tricorn_hat",
+        "pointCost": 500
       },
       {
         "itemId": 8965,
@@ -5804,7 +5968,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Grey_tricorn_hat"
+        "wikiPage": "Grey_tricorn_hat",
+        "pointCost": 500
       },
       {
         "itemId": 8952,
@@ -5812,7 +5977,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blue_naval_shirt"
+        "wikiPage": "Blue_naval_shirt",
+        "pointCost": 1000
       },
       {
         "itemId": 8953,
@@ -5820,7 +5986,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Green_naval_shirt"
+        "wikiPage": "Green_naval_shirt",
+        "pointCost": 1000
       },
       {
         "itemId": 8954,
@@ -5828,7 +5995,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Red_naval_shirt"
+        "wikiPage": "Red_naval_shirt",
+        "pointCost": 1000
       },
       {
         "itemId": 8955,
@@ -5836,7 +6004,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Brown_naval_shirt"
+        "wikiPage": "Brown_naval_shirt",
+        "pointCost": 1000
       },
       {
         "itemId": 8956,
@@ -5844,7 +6013,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Black_naval_shirt"
+        "wikiPage": "Black_naval_shirt",
+        "pointCost": 1000
       },
       {
         "itemId": 8957,
@@ -5852,7 +6022,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Purple_naval_shirt"
+        "wikiPage": "Purple_naval_shirt",
+        "pointCost": 1000
       },
       {
         "itemId": 8958,
@@ -5860,7 +6031,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Grey_naval_shirt"
+        "wikiPage": "Grey_naval_shirt",
+        "pointCost": 1000
       },
       {
         "itemId": 8991,
@@ -5868,7 +6040,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blue_navy_slacks"
+        "wikiPage": "Blue_navy_slacks",
+        "pointCost": 1000
       },
       {
         "itemId": 8992,
@@ -5876,7 +6049,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Green_navy_slacks"
+        "wikiPage": "Green_navy_slacks",
+        "pointCost": 1000
       },
       {
         "itemId": 8993,
@@ -5884,7 +6058,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Red_navy_slacks"
+        "wikiPage": "Red_navy_slacks",
+        "pointCost": 1000
       },
       {
         "itemId": 8994,
@@ -5892,7 +6067,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Brown_navy_slacks"
+        "wikiPage": "Brown_navy_slacks",
+        "pointCost": 1000
       },
       {
         "itemId": 8995,
@@ -5900,7 +6076,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Black_navy_slacks"
+        "wikiPage": "Black_navy_slacks",
+        "pointCost": 1000
       },
       {
         "itemId": 8996,
@@ -5908,7 +6085,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Purple_navy_slacks"
+        "wikiPage": "Purple_navy_slacks",
+        "pointCost": 1000
       },
       {
         "itemId": 8997,
@@ -5916,7 +6094,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Grey_navy_slacks"
+        "wikiPage": "Grey_navy_slacks",
+        "pointCost": 1000
       },
       {
         "itemId": 8966,
@@ -5924,7 +6103,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Cutthroat_flag"
+        "wikiPage": "Cutthroat_flag",
+        "pointCost": 2000
       },
       {
         "itemId": 8967,
@@ -5932,7 +6112,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Gilded_smile_flag"
+        "wikiPage": "Gilded_smile_flag",
+        "pointCost": 2000
       },
       {
         "itemId": 8968,
@@ -5940,7 +6121,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bronze_fist_flag"
+        "wikiPage": "Bronze_fist_flag",
+        "pointCost": 3000
       },
       {
         "itemId": 8969,
@@ -5948,7 +6130,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Lucky_shot_flag"
+        "wikiPage": "Lucky_shot_flag",
+        "pointCost": 4000
       },
       {
         "itemId": 8970,
@@ -5956,7 +6139,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Treasure_flag"
+        "wikiPage": "Treasure_flag",
+        "pointCost": 5000
       },
       {
         "itemId": 8971,
@@ -5964,11 +6148,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Phasmatys_flag"
+        "wikiPage": "Phasmatys_flag",
+        "pointCost": 6000
       }
     ],
     "locationDescription": "Mos Le'Harmless, east of Braindeath Island",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 300
   },
   {
     "name": "Barbarian Assault",
@@ -5984,7 +6170,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Fighter_hat"
+        "wikiPage": "Fighter_hat",
+        "pointCost": 1100
       },
       {
         "itemId": 10549,
@@ -5992,7 +6179,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Runner_hat"
+        "wikiPage": "Runner_hat",
+        "pointCost": 1100
       },
       {
         "itemId": 10550,
@@ -6000,7 +6188,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ranger_hat"
+        "wikiPage": "Ranger_hat",
+        "pointCost": 1100
       },
       {
         "itemId": 10547,
@@ -6008,7 +6197,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Healer_hat"
+        "wikiPage": "Healer_hat",
+        "pointCost": 1100
       },
       {
         "itemId": 10551,
@@ -6016,7 +6206,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Fighter_torso"
+        "wikiPage": "Fighter_torso",
+        "pointCost": 1500
       },
       {
         "itemId": 10555,
@@ -6024,7 +6215,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Penance_skirt"
+        "wikiPage": "Penance_skirt",
+        "pointCost": 1500
       },
       {
         "itemId": 10553,
@@ -6032,7 +6224,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Penance_gloves"
+        "wikiPage": "Penance_gloves",
+        "pointCost": 600
       },
       {
         "itemId": 10552,
@@ -6040,7 +6233,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Runner_boots"
+        "wikiPage": "Runner_boots",
+        "pointCost": 400
       },
       {
         "itemId": 10564,
@@ -6048,7 +6242,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Granite_body"
+        "wikiPage": "Granite_body",
+        "pointCost": 1000
       },
       {
         "itemId": 12703,
@@ -6060,7 +6255,8 @@
       }
     ],
     "locationDescription": "Barbarian Outpost, north of Baxtorian Falls",
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "pointsPerHour": 1000
   },
   {
     "name": "Barracuda Trials",
@@ -6076,7 +6272,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Stormy_key"
+        "wikiPage": "Stormy_key",
+        "pointCost": 1
       },
       {
         "itemId": 31733,
@@ -6084,7 +6281,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Barrel_stand"
+        "wikiPage": "Barrel_stand",
+        "pointCost": 1
       },
       {
         "itemId": 31734,
@@ -6092,7 +6290,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ralph%27s_fabric_roll"
+        "wikiPage": "Ralph%27s_fabric_roll",
+        "pointCost": 1
       },
       {
         "itemId": 31744,
@@ -6100,7 +6299,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Fetid_key"
+        "wikiPage": "Fetid_key",
+        "pointCost": 1
       },
       {
         "itemId": 31745,
@@ -6108,7 +6308,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Captured_wind_mote"
+        "wikiPage": "Captured_wind_mote",
+        "pointCost": 1
       },
       {
         "itemId": 31746,
@@ -6116,7 +6317,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Gurtob%27s_fabric_roll"
+        "wikiPage": "Gurtob%27s_fabric_roll",
+        "pointCost": 1
       },
       {
         "itemId": 31756,
@@ -6124,7 +6326,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Serrated_key"
+        "wikiPage": "Serrated_key",
+        "pointCost": 1
       },
       {
         "itemId": 31757,
@@ -6132,7 +6335,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Heart_of_ithell"
+        "wikiPage": "Heart_of_ithell",
+        "pointCost": 1
       },
       {
         "itemId": 31758,
@@ -6140,11 +6344,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Gwyna%27s_fabric_roll"
+        "wikiPage": "Gwyna%27s_fabric_roll",
+        "pointCost": 1
       }
     ],
     "locationDescription": "Sailing trial locations across the seas",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 3
   },
   {
     "name": "Aerial Fishing",
@@ -6160,7 +6366,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Angler_hat"
+        "wikiPage": "Angler_hat",
+        "pointCost": 100
       },
       {
         "itemId": 13259,
@@ -6168,7 +6375,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Angler_top"
+        "wikiPage": "Angler_top",
+        "pointCost": 100
       },
       {
         "itemId": 13260,
@@ -6176,7 +6384,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Angler_waders"
+        "wikiPage": "Angler_waders",
+        "pointCost": 100
       },
       {
         "itemId": 13261,
@@ -6184,7 +6393,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Angler_boots"
+        "wikiPage": "Angler_boots",
+        "pointCost": 100
       },
       {
         "itemId": 22846,
@@ -6192,7 +6402,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Pearl_fishing_rod"
+        "wikiPage": "Pearl_fishing_rod",
+        "pointCost": 100
       },
       {
         "itemId": 22844,
@@ -6200,7 +6411,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Pearl_fly_fishing_rod"
+        "wikiPage": "Pearl_fly_fishing_rod",
+        "pointCost": 120
       },
       {
         "itemId": 22842,
@@ -6208,7 +6420,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Pearl_barbarian_rod"
+        "wikiPage": "Pearl_barbarian_rod",
+        "pointCost": 120
       },
       {
         "itemId": 22838,
@@ -6216,7 +6429,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Fish_sack"
+        "wikiPage": "Fish_sack",
+        "pointCost": 1000
       },
       {
         "itemId": 22840,
@@ -6228,7 +6442,8 @@
       }
     ],
     "locationDescription": "Lake Molch on Molch Island",
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "pointsPerHour": 20
   },
   {
     "name": "Boat Paints",
@@ -6442,7 +6657,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ogre_bowman_hat"
+        "wikiPage": "Ogre_bowman_hat",
+        "milestoneKills": 30
       },
       {
         "itemId": 2979,
@@ -6450,7 +6666,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bowman_hat"
+        "wikiPage": "Bowman_hat",
+        "milestoneKills": 40
       },
       {
         "itemId": 2980,
@@ -6458,7 +6675,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ogre_yeoman_hat"
+        "wikiPage": "Ogre_yeoman_hat",
+        "milestoneKills": 50
       },
       {
         "itemId": 2981,
@@ -6466,7 +6684,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Yeoman_hat"
+        "wikiPage": "Yeoman_hat",
+        "milestoneKills": 70
       },
       {
         "itemId": 2982,
@@ -6474,7 +6693,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ogre_marksman_hat"
+        "wikiPage": "Ogre_marksman_hat",
+        "milestoneKills": 95
       },
       {
         "itemId": 2983,
@@ -6482,7 +6702,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Marksman_hat"
+        "wikiPage": "Marksman_hat",
+        "milestoneKills": 125
       },
       {
         "itemId": 2984,
@@ -6490,7 +6711,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ogre_woodsman_hat"
+        "wikiPage": "Ogre_woodsman_hat",
+        "milestoneKills": 170
       },
       {
         "itemId": 2985,
@@ -6498,7 +6720,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Woodsman_hat"
+        "wikiPage": "Woodsman_hat",
+        "milestoneKills": 225
       },
       {
         "itemId": 2986,
@@ -6506,7 +6729,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ogre_forester_hat"
+        "wikiPage": "Ogre_forester_hat",
+        "milestoneKills": 300
       },
       {
         "itemId": 2987,
@@ -6514,7 +6738,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Forester_hat"
+        "wikiPage": "Forester_hat",
+        "milestoneKills": 400
       },
       {
         "itemId": 2988,
@@ -6522,7 +6747,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ogre_bowmaster_hat"
+        "wikiPage": "Ogre_bowmaster_hat",
+        "milestoneKills": 550
       },
       {
         "itemId": 2989,
@@ -6530,7 +6756,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bowmaster_hat"
+        "wikiPage": "Bowmaster_hat",
+        "milestoneKills": 700
       },
       {
         "itemId": 2990,
@@ -6538,7 +6765,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ogre_expert_hat"
+        "wikiPage": "Ogre_expert_hat",
+        "milestoneKills": 1000
       },
       {
         "itemId": 2991,
@@ -6546,7 +6774,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Expert_hat"
+        "wikiPage": "Expert_hat",
+        "milestoneKills": 1300
       },
       {
         "itemId": 2992,
@@ -6554,7 +6783,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ogre_dragon_archer_hat"
+        "wikiPage": "Ogre_dragon_archer_hat",
+        "milestoneKills": 1700
       },
       {
         "itemId": 2993,
@@ -6562,7 +6792,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_archer_hat"
+        "wikiPage": "Dragon_archer_hat",
+        "milestoneKills": 2250
       },
       {
         "itemId": 2994,
@@ -6570,7 +6801,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Expert_ogre_dragon_archer_hat"
+        "wikiPage": "Expert_ogre_dragon_archer_hat",
+        "milestoneKills": 3000
       },
       {
         "itemId": 2995,
@@ -6578,7 +6810,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Expert_dragon_archer_hat"
+        "wikiPage": "Expert_dragon_archer_hat",
+        "milestoneKills": 4000
       },
       {
         "itemId": 13071,
@@ -6646,7 +6879,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Lumberjack_hat"
+        "wikiPage": "Lumberjack_hat",
+        "pointCost": 50
       },
       {
         "itemId": 10939,
@@ -6654,7 +6888,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Lumberjack_top"
+        "wikiPage": "Lumberjack_top",
+        "pointCost": 50
       },
       {
         "itemId": 10940,
@@ -6662,7 +6897,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Lumberjack_legs"
+        "wikiPage": "Lumberjack_legs",
+        "pointCost": 50
       },
       {
         "itemId": 10933,
@@ -6670,7 +6906,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Lumberjack_boots"
+        "wikiPage": "Lumberjack_boots",
+        "pointCost": 50
       },
       {
         "itemId": 28173,
@@ -6678,7 +6915,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Forestry_hat"
+        "wikiPage": "Forestry_hat",
+        "pointCost": 50
       },
       {
         "itemId": 28169,
@@ -6686,7 +6924,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Forestry_top"
+        "wikiPage": "Forestry_top",
+        "pointCost": 50
       },
       {
         "itemId": 28171,
@@ -6694,7 +6933,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Forestry_legs"
+        "wikiPage": "Forestry_legs",
+        "pointCost": 50
       },
       {
         "itemId": 28175,
@@ -6702,7 +6942,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Forestry_boots"
+        "wikiPage": "Forestry_boots",
+        "pointCost": 50
       },
       {
         "itemId": 28140,
@@ -6710,7 +6951,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Log_basket"
+        "wikiPage": "Log_basket",
+        "pointCost": 200
       },
       {
         "itemId": 28146,
@@ -6718,7 +6960,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Log_brace"
+        "wikiPage": "Log_brace",
+        "pointCost": 200
       },
       {
         "itemId": 28630,
@@ -6726,7 +6969,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Twitcher%27s_gloves"
+        "wikiPage": "Twitcher%27s_gloves",
+        "pointCost": 100
       },
       {
         "itemId": 28138,
@@ -6734,11 +6978,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Funky_shaped_log"
+        "wikiPage": "Funky_shaped_log",
+        "pointCost": 200
       }
     ],
     "locationDescription": "Various Woodcutting locations during Forestry events",
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "pointsPerHour": 50
   },
   {
     "name": "Fossil Island Notes",
@@ -6992,7 +7238,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Salvaging_station_schematic"
+        "wikiPage": "Salvaging_station_schematic",
+        "pointCost": 1
       },
       {
         "itemId": 32402,
@@ -7000,7 +7247,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Gale_catcher_schematic"
+        "wikiPage": "Gale_catcher_schematic",
+        "pointCost": 1
       },
       {
         "itemId": 32405,
@@ -7008,7 +7256,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Rosewood_cargo_hold_schematic"
+        "wikiPage": "Rosewood_cargo_hold_schematic",
+        "pointCost": 1
       },
       {
         "itemId": 32407,
@@ -7016,7 +7265,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Rosewood_hull_schematic"
+        "wikiPage": "Rosewood_hull_schematic",
+        "pointCost": 1
       },
       {
         "itemId": 32409,
@@ -7024,7 +7274,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_helm_schematic"
+        "wikiPage": "Dragon_helm_schematic",
+        "pointCost": 1
       },
       {
         "itemId": 32404,
@@ -7032,7 +7283,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_salvaging_hook_schematic"
+        "wikiPage": "Dragon_salvaging_hook_schematic",
+        "pointCost": 1
       },
       {
         "itemId": 32403,
@@ -7040,7 +7292,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Eternal_brazier_schematic"
+        "wikiPage": "Eternal_brazier_schematic",
+        "pointCost": 1
       },
       {
         "itemId": 32406,
@@ -7048,7 +7301,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_cannon_schematic"
+        "wikiPage": "Dragon_cannon_schematic",
+        "pointCost": 1
       },
       {
         "itemId": 32408,
@@ -7056,7 +7310,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Rosewood_%26_cotton_sails_schematic"
+        "wikiPage": "Rosewood_%26_cotton_sails_schematic",
+        "pointCost": 1
       },
       {
         "itemId": 32410,
@@ -7064,11 +7319,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_keel_schematic"
+        "wikiPage": "Dragon_keel_schematic",
+        "pointCost": 1
       }
     ],
     "locationDescription": "Various islands discovered through Sailing",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 2
   },
   {
     "name": "Monkey Backpacks",
@@ -7084,7 +7341,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Monkey_(Monkey_Madness_II)"
+        "wikiPage": "Monkey_(Monkey_Madness_II)",
+        "milestoneKills": 1
       },
       {
         "itemId": 24862,
@@ -7092,7 +7350,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Karamjan_monkey_(item)"
+        "wikiPage": "Karamjan_monkey_(item)",
+        "milestoneKills": 100
       },
       {
         "itemId": 24863,
@@ -7100,7 +7359,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Zombie_monkey_(item)"
+        "wikiPage": "Zombie_monkey_(item)",
+        "milestoneKills": 250
       },
       {
         "itemId": 24864,
@@ -7108,7 +7368,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Maniacal_monkey_(item)"
+        "wikiPage": "Maniacal_monkey_(item)",
+        "milestoneKills": 500
       },
       {
         "itemId": 24865,
@@ -7116,7 +7377,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Skeleton_monkey_(item)"
+        "wikiPage": "Skeleton_monkey_(item)",
+        "milestoneKills": 1000
       },
       {
         "itemId": 24866,
@@ -7124,7 +7386,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Kruk_jr"
+        "wikiPage": "Kruk_jr",
+        "milestoneKills": 1500
       },
       {
         "itemId": 24867,
@@ -7132,11 +7395,12 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Princely_monkey"
+        "wikiPage": "Princely_monkey",
+        "milestoneKills": 2000
       }
     ],
     "locationDescription": "Ape Atoll Agility Course",
-    "rewardType": "SHOP"
+    "rewardType": "MILESTONE"
   },
   {
     "name": "My Notes",
@@ -8119,7 +8383,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Colossal_wyrm_teleport_scroll"
+        "wikiPage": "Colossal_wyrm_teleport_scroll",
+        "pointCost": 40
       },
       {
         "itemId": 30044,
@@ -8127,7 +8392,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Graceful_crafting_kit"
+        "wikiPage": "Graceful_crafting_kit",
+        "pointCost": 650
       },
       {
         "itemId": 30042,
@@ -8135,11 +8401,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Calcified_acorn"
+        "wikiPage": "Calcified_acorn",
+        "pointCost": 900
       }
     ],
     "locationDescription": "Colossal Wyrm Agility Course in Avium Savannah, Varlamore",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 15
   },
   {
     "name": "Rooftop Agility",
@@ -8155,7 +8423,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Graceful_hood"
+        "wikiPage": "Graceful_hood",
+        "pointCost": 35
       },
       {
         "itemId": 11852,
@@ -8163,7 +8432,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Graceful_cape"
+        "wikiPage": "Graceful_cape",
+        "pointCost": 40
       },
       {
         "itemId": 11854,
@@ -8171,7 +8441,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Graceful_top"
+        "wikiPage": "Graceful_top",
+        "pointCost": 55
       },
       {
         "itemId": 11856,
@@ -8179,7 +8450,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Graceful_legs"
+        "wikiPage": "Graceful_legs",
+        "pointCost": 60
       },
       {
         "itemId": 11858,
@@ -8187,7 +8459,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Graceful_gloves"
+        "wikiPage": "Graceful_gloves",
+        "pointCost": 30
       },
       {
         "itemId": 11860,
@@ -8195,11 +8468,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Graceful_boots"
+        "wikiPage": "Graceful_boots",
+        "pointCost": 40
       }
     ],
     "locationDescription": "Rooftop Agility Courses, starting at Varrock",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 17
   },
   {
     "name": "TzHaar",
@@ -8417,7 +8692,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_helm_(1)"
+        "wikiPage": "Shayzien_helm_(1)",
+        "pointCost": 10
       },
       {
         "itemId": 13361,
@@ -8425,7 +8701,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_platebody_(1)"
+        "wikiPage": "Shayzien_platebody_(1)",
+        "pointCost": 10
       },
       {
         "itemId": 13360,
@@ -8433,7 +8710,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_greaves_(1)"
+        "wikiPage": "Shayzien_greaves_(1)",
+        "pointCost": 10
       },
       {
         "itemId": 13357,
@@ -8441,7 +8719,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_gloves_(1)"
+        "wikiPage": "Shayzien_gloves_(1)",
+        "pointCost": 10
       },
       {
         "itemId": 13358,
@@ -8449,7 +8728,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_boots_(1)"
+        "wikiPage": "Shayzien_boots_(1)",
+        "pointCost": 10
       },
       {
         "itemId": 13364,
@@ -8457,7 +8737,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_helm_(2)"
+        "wikiPage": "Shayzien_helm_(2)",
+        "pointCost": 10
       },
       {
         "itemId": 13366,
@@ -8465,7 +8746,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_platebody_(2)"
+        "wikiPage": "Shayzien_platebody_(2)",
+        "pointCost": 10
       },
       {
         "itemId": 13365,
@@ -8473,7 +8755,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_greaves_(2)"
+        "wikiPage": "Shayzien_greaves_(2)",
+        "pointCost": 10
       },
       {
         "itemId": 13362,
@@ -8481,7 +8764,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_gloves_(2)"
+        "wikiPage": "Shayzien_gloves_(2)",
+        "pointCost": 10
       },
       {
         "itemId": 13363,
@@ -8489,7 +8773,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_boots_(2)"
+        "wikiPage": "Shayzien_boots_(2)",
+        "pointCost": 10
       },
       {
         "itemId": 13369,
@@ -8497,7 +8782,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_helm_(3)"
+        "wikiPage": "Shayzien_helm_(3)",
+        "pointCost": 10
       },
       {
         "itemId": 13371,
@@ -8505,7 +8791,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_platebody_(3)"
+        "wikiPage": "Shayzien_platebody_(3)",
+        "pointCost": 10
       },
       {
         "itemId": 13370,
@@ -8513,7 +8800,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_greaves_(3)"
+        "wikiPage": "Shayzien_greaves_(3)",
+        "pointCost": 10
       },
       {
         "itemId": 13367,
@@ -8521,7 +8809,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_gloves_(3)"
+        "wikiPage": "Shayzien_gloves_(3)",
+        "pointCost": 10
       },
       {
         "itemId": 13368,
@@ -8529,7 +8818,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_boots_(3)"
+        "wikiPage": "Shayzien_boots_(3)",
+        "pointCost": 10
       },
       {
         "itemId": 13374,
@@ -8537,7 +8827,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_helm_(4)"
+        "wikiPage": "Shayzien_helm_(4)",
+        "pointCost": 10
       },
       {
         "itemId": 13376,
@@ -8545,7 +8836,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_platebody_(4)"
+        "wikiPage": "Shayzien_platebody_(4)",
+        "pointCost": 10
       },
       {
         "itemId": 13375,
@@ -8553,7 +8845,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_greaves_(4)"
+        "wikiPage": "Shayzien_greaves_(4)",
+        "pointCost": 10
       },
       {
         "itemId": 13372,
@@ -8561,7 +8854,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_gloves_(4)"
+        "wikiPage": "Shayzien_gloves_(4)",
+        "pointCost": 10
       },
       {
         "itemId": 13373,
@@ -8569,7 +8863,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_boots_(4)"
+        "wikiPage": "Shayzien_boots_(4)",
+        "pointCost": 10
       },
       {
         "itemId": 13379,
@@ -8577,7 +8872,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_helm_(5)"
+        "wikiPage": "Shayzien_helm_(5)",
+        "pointCost": 10
       },
       {
         "itemId": 13381,
@@ -8585,7 +8881,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_body_(5)"
+        "wikiPage": "Shayzien_body_(5)",
+        "pointCost": 10
       },
       {
         "itemId": 13380,
@@ -8593,7 +8890,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_greaves_(5)"
+        "wikiPage": "Shayzien_greaves_(5)",
+        "pointCost": 10
       },
       {
         "itemId": 13377,
@@ -8601,7 +8899,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_gloves_(5)"
+        "wikiPage": "Shayzien_gloves_(5)",
+        "pointCost": 10
       },
       {
         "itemId": 13378,
@@ -8609,11 +8908,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_boots_(5)"
+        "wikiPage": "Shayzien_boots_(5)",
+        "pointCost": 10
       }
     ],
     "locationDescription": "Shayzien Combat Ring, Great Kourend",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 250
   },
   {
     "name": "Motherlode Mine",
@@ -8629,7 +8930,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Prospector_helmet"
+        "wikiPage": "Prospector_helmet",
+        "pointCost": 40
       },
       {
         "itemId": 12014,
@@ -8637,7 +8939,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Prospector_jacket"
+        "wikiPage": "Prospector_jacket",
+        "pointCost": 60
       },
       {
         "itemId": 12015,
@@ -8645,7 +8948,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Prospector_legs"
+        "wikiPage": "Prospector_legs",
+        "pointCost": 50
       },
       {
         "itemId": 12016,
@@ -8653,7 +8957,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Prospector_boots"
+        "wikiPage": "Prospector_boots",
+        "pointCost": 30
       },
       {
         "itemId": 12019,
@@ -8661,7 +8966,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Coal_bag"
+        "wikiPage": "Coal_bag",
+        "pointCost": 100
       },
       {
         "itemId": 12020,
@@ -8669,11 +8975,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Gem_bag"
+        "wikiPage": "Gem_bag",
+        "pointCost": 100
       }
     ],
     "locationDescription": "Motherlode Mine beneath Falador",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 12
   },
   {
     "name": "Shooting Stars",
@@ -8689,7 +8997,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Celestial_ring"
+        "wikiPage": "Celestial_ring",
+        "pointCost": 2000
       },
       {
         "itemId": 25547,
@@ -8697,11 +9006,13 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Star_fragment"
+        "wikiPage": "Star_fragment",
+        "pointCost": 3000
       }
     ],
     "locationDescription": "Crashed shooting stars found throughout Gielinor",
-    "rewardType": "SHOP"
+    "rewardType": "SHOP",
+    "pointsPerHour": 800
   },
   {
     "name": "Creature Creation (Newtroost)",
@@ -9224,7 +9535,8 @@
         "isPet": true,
         "wikiPage": "Moxi"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Brutus",
@@ -9267,7 +9579,8 @@
         "isPet": false,
         "wikiPage": "Cow_slippers"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Shellbane Gryphon",
@@ -9310,7 +9623,8 @@
         "isPet": false,
         "wikiPage": "Gryphon_feather"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Scurrius",

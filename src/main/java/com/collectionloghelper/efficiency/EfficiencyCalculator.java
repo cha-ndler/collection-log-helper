@@ -129,12 +129,11 @@ public class EfficiencyCalculator
 
 	public ScoredItem scoreSource(CollectionLogSource source, boolean locked)
 	{
-		double dropDropRate = 0;
-		double maxDropRate = 0;
+		double combinedDropRate = 0;
 		int missingCount = 0;
 		int guaranteedCount = 0;
 		double totalPointCost = 0;
-		double totalMilestoneKills = 0;
+		double maxMilestoneKills = 0;
 		int rolls = source.getRollsPerKill();
 
 		for (CollectionLogItem item : source.getItems())
@@ -146,15 +145,14 @@ public class EfficiencyCalculator
 				{
 					guaranteedCount++;
 					totalPointCost += item.getPointCost();
-					totalMilestoneKills += item.getMilestoneKills();
+					maxMilestoneKills = Math.max(maxMilestoneKills, item.getMilestoneKills());
 				}
 				else
 				{
 					double effectiveRate = rolls > 1
 						? 1.0 - Math.pow(1.0 - item.getDropRate(), rolls)
 						: item.getDropRate();
-					dropDropRate += effectiveRate;
-					maxDropRate = Math.max(maxDropRate, effectiveRate);
+					combinedDropRate += effectiveRate;
 				}
 			}
 		}
@@ -190,11 +188,11 @@ public class EfficiencyCalculator
 		{
 			double score;
 			String reasoning;
-			if (totalMilestoneKills > 0 && source.getKillTimeSeconds() > 0)
+			if (maxMilestoneKills > 0 && source.getKillTimeSeconds() > 0)
 			{
-				double hoursNeeded = totalMilestoneKills * (source.getKillTimeSeconds() / 3600.0);
+				double hoursNeeded = maxMilestoneKills * (source.getKillTimeSeconds() / 3600.0);
 				score = (missingCount / hoursNeeded) * 100.0;
-				reasoning = String.format("%d missing milestone items, ~%.0f kills needed", missingCount, totalMilestoneKills);
+				reasoning = String.format("%d missing milestone items, ~%.0f kills needed", missingCount, maxMilestoneKills);
 			}
 			else
 			{
@@ -212,40 +210,50 @@ public class EfficiencyCalculator
 		}
 
 		// No probabilistic drops to score
-		if (dropDropRate <= 0)
+		if (combinedDropRate <= 0)
 		{
 			return null;
 		}
 
 		int dropCount = missingCount - guaranteedCount;
-		double effectiveDropRate = source.isMutuallyExclusive() ? maxDropRate : dropDropRate;
-		double expectedKills = 1.0 / effectiveDropRate;
 
-		// Use account-progression-aware clue completion time for CLUES sources
+		// Score = expected new items per hour × 100.
+		// By linearity of expectation, E[new items per kill] = sum of individual rates,
+		// regardless of whether drops are mutually exclusive or independent.
 		int killTimeSeconds = getEffectiveKillTime(source);
-		double expectedHours = expectedKills * (killTimeSeconds / 3600.0);
-		double dropScore = (dropCount / expectedHours) * 100.0;
+		double killsPerHour = 3600.0 / killTimeSeconds;
+		double newItemsPerHour = combinedDropRate * killsPerHour;
+		double dropScore = newItemsPerHour * 100.0;
+		double expectedKills = 1.0 / combinedDropRate;
 
-		// MIXED sources: combine drop score with guaranteed item score
+		// Sources with both guaranteed and probabilistic items: combine scores
 		double score;
 		String reasoning;
-		if (rewardType == RewardType.MIXED && guaranteedCount > 0)
+		if (guaranteedCount > 0)
 		{
-			double guaranteedScore = guaranteedCount * 0.2;
+			double guaranteedScore;
+			if (maxMilestoneKills > 0 && killTimeSeconds > 0)
+			{
+				double hoursNeeded = maxMilestoneKills * (killTimeSeconds / 3600.0);
+				guaranteedScore = (guaranteedCount / hoursNeeded) * 100.0;
+			}
+			else if (source.getPointsPerHour() > 0 && totalPointCost > 0)
+			{
+				double hoursNeeded = totalPointCost / source.getPointsPerHour();
+				guaranteedScore = (guaranteedCount / hoursNeeded) * 100.0;
+			}
+			else
+			{
+				guaranteedScore = guaranteedCount * 0.2;
+			}
 			score = dropScore + guaranteedScore;
-			reasoning = String.format("%d missing drops + %d shop items, ~%.0f kills expected",
-				dropCount, guaranteedCount, expectedKills);
-		}
-		else if (guaranteedCount > 0)
-		{
-			score = dropScore;
-			reasoning = String.format("%d missing drops + %d shop items, ~%.0f kills expected",
+			reasoning = String.format("%d missing drops + %d guaranteed, ~%.0f kills to next drop",
 				dropCount, guaranteedCount, expectedKills);
 		}
 		else
 		{
 			score = dropScore;
-			reasoning = String.format("%d missing items, ~%.0f kills expected", missingCount, expectedKills);
+			reasoning = String.format("%d missing items, ~%.0f kills to next drop", dropCount, expectedKills);
 		}
 
 		return new ScoredItem(source, score, missingCount, reasoning, locked);
@@ -271,12 +279,11 @@ public class EfficiencyCalculator
 
 	private ScoredItem scoreSourcePetsOnly(CollectionLogSource source, boolean locked)
 	{
-		double dropDropRate = 0;
-		double maxDropRate = 0;
+		double combinedDropRate = 0;
 		int missingPetCount = 0;
 		int guaranteedCount = 0;
 		double totalPointCost = 0;
-		double totalMilestoneKills = 0;
+		double maxMilestoneKills = 0;
 		int rolls = source.getRollsPerKill();
 
 		for (CollectionLogItem item : source.getItems())
@@ -288,15 +295,14 @@ public class EfficiencyCalculator
 				{
 					guaranteedCount++;
 					totalPointCost += item.getPointCost();
-					totalMilestoneKills += item.getMilestoneKills();
+					maxMilestoneKills = Math.max(maxMilestoneKills, item.getMilestoneKills());
 				}
 				else
 				{
 					double effectiveRate = rolls > 1
 						? 1.0 - Math.pow(1.0 - item.getDropRate(), rolls)
 						: item.getDropRate();
-					dropDropRate += effectiveRate;
-					maxDropRate = Math.max(maxDropRate, effectiveRate);
+					combinedDropRate += effectiveRate;
 				}
 			}
 		}
@@ -332,11 +338,11 @@ public class EfficiencyCalculator
 		{
 			double score;
 			String reasoning;
-			if (totalMilestoneKills > 0 && source.getKillTimeSeconds() > 0)
+			if (maxMilestoneKills > 0 && source.getKillTimeSeconds() > 0)
 			{
-				double hoursNeeded = totalMilestoneKills * (source.getKillTimeSeconds() / 3600.0);
+				double hoursNeeded = maxMilestoneKills * (source.getKillTimeSeconds() / 3600.0);
 				score = (missingPetCount / hoursNeeded) * 100.0;
-				reasoning = String.format("%d missing milestone pets, ~%.0f kills needed", missingPetCount, totalMilestoneKills);
+				reasoning = String.format("%d missing milestone pets, ~%.0f kills needed", missingPetCount, maxMilestoneKills);
 			}
 			else
 			{
@@ -353,38 +359,47 @@ public class EfficiencyCalculator
 			return new ScoredItem(source, missingPetCount * 0.2, missingPetCount, reasoning, locked);
 		}
 
-		if (dropDropRate <= 0)
+		if (combinedDropRate <= 0)
 		{
 			return null;
 		}
 
 		int dropCount = missingPetCount - guaranteedCount;
-		double effectiveDropRate = source.isMutuallyExclusive() ? maxDropRate : dropDropRate;
-		double expectedKills = 1.0 / effectiveDropRate;
 		int killTimeSeconds = getEffectiveKillTime(source);
-		double expectedHours = expectedKills * (killTimeSeconds / 3600.0);
-		double dropScore = (dropCount / expectedHours) * 100.0;
+		double killsPerHour = 3600.0 / killTimeSeconds;
+		double newItemsPerHour = combinedDropRate * killsPerHour;
+		double dropScore = newItemsPerHour * 100.0;
+		double expectedKills = 1.0 / combinedDropRate;
 
-		// MIXED sources: combine drop score with guaranteed pet score
+		// Sources with both guaranteed and probabilistic pet items: combine scores
 		double score;
 		String reasoning;
-		if (rewardType == RewardType.MIXED && guaranteedCount > 0)
+		if (guaranteedCount > 0)
 		{
-			double guaranteedScore = guaranteedCount * 0.2;
+			double guaranteedScore;
+			int petKillTime = getEffectiveKillTime(source);
+			if (maxMilestoneKills > 0 && petKillTime > 0)
+			{
+				double hoursNeeded = maxMilestoneKills * (petKillTime / 3600.0);
+				guaranteedScore = (guaranteedCount / hoursNeeded) * 100.0;
+			}
+			else if (source.getPointsPerHour() > 0 && totalPointCost > 0)
+			{
+				double hoursNeeded = totalPointCost / source.getPointsPerHour();
+				guaranteedScore = (guaranteedCount / hoursNeeded) * 100.0;
+			}
+			else
+			{
+				guaranteedScore = guaranteedCount * 0.2;
+			}
 			score = dropScore + guaranteedScore;
-			reasoning = String.format("%d missing pet drops + %d shop, ~%.0f kills expected",
-				dropCount, guaranteedCount, expectedKills);
-		}
-		else if (guaranteedCount > 0)
-		{
-			score = dropScore;
-			reasoning = String.format("%d missing pet drops + %d shop, ~%.0f kills expected",
+			reasoning = String.format("%d missing pet drops + %d guaranteed, ~%.0f kills to next drop",
 				dropCount, guaranteedCount, expectedKills);
 		}
 		else
 		{
 			score = dropScore;
-			reasoning = String.format("%d missing pets, ~%.0f kills expected", missingPetCount, expectedKills);
+			reasoning = String.format("%d missing pets, ~%.0f kills to next drop", missingPetCount, expectedKills);
 		}
 
 		return new ScoredItem(source, score, missingPetCount, reasoning, locked);
