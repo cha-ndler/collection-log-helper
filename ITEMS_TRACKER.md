@@ -1,6 +1,6 @@
 # Collection Log Helper — Item Coverage Tracker
 
-> **Coverage: 1,628 / ~1,698 items | 123 / 123 sources**
+> **Coverage: 1,629 / ~1,698 items | 128 / 128 sources**
 
 This document tracks every OSRS Collection Log category and our progress toward full coverage. Community contributors can use this to find unclaimed work.
 
@@ -148,7 +148,7 @@ This document tracks every OSRS Collection Log category and our progress toward 
 
 ## Other
 
-31 sources in the collection log. **31 done.**
+36 sources in the collection log. **36 done.**
 
 | Category | Wiki Items | Our Items | Priority | Status | Issue |
 |----------|-----------|-----------|----------|--------|-------|
@@ -190,6 +190,7 @@ This document tracks every OSRS Collection Log category and our progress toward 
 |-------|-------------|-------|
 | Item ID Audit | Verify item IDs for Alch Hydra, Gauntlet, and DT2 bosses against RuneLite ItemID constants | [#91](../../issues/91) |
 | Shortest Path Bug | Shortest Path integration bugs when toggling guidance on/off rapidly | [#88](../../issues/88) |
+| Future Improvements | Account-specific kill times, raid scaling, CA/diary modifiers, Wiki API integration | [#134](../../issues/134) |
 
 ---
 
@@ -197,7 +198,7 @@ This document tracks every OSRS Collection Log category and our progress toward 
 
 | Priority | Total Categories | Done | Partial | Unclaimed |
 |----------|-----------------|------|---------|-----------|
-| Done (no priority) | 123 | 123 | 0 | 0 |
-| **Total** | **123** | **123** | **0** | **0** |
+| Done (no priority) | 128 | 128 | 0 | 0 |
+| **Total** | **128** | **128** | **0** | **0** |
 
-*All 123 sources are complete with verified item IDs.*
+*All 128 sources are complete with verified item IDs. Drop rates audited March 2026 — see [accuracy overhaul](../../issues/135) for details.*
