@@ -188,8 +188,7 @@ This document tracks every OSRS Collection Log category and our progress toward 
 
 | Topic | Description | Issue |
 |-------|-------------|-------|
-| Item ID Audit | Verify item IDs for Alch Hydra, Gauntlet, and DT2 bosses against RuneLite ItemID constants | [#91](../../issues/91) |
-| Shortest Path Bug | Shortest Path integration bugs when toggling guidance on/off rapidly | [#88](../../issues/88) |
+| Slayer Strategy | Skip/block advisor, task weights, master selection | [#143](../../issues/143) |
 | Future Improvements | Account-specific kill times, raid scaling, CA/diary modifiers, Wiki API integration | [#134](../../issues/134) |
 
 ---
