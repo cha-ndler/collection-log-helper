@@ -260,9 +260,10 @@ public class EfficiencyCalculator
 	}
 
 	/**
-	 * Returns the effective kill/completion time for a source. For CLUES sources,
-	 * uses the account-progression-aware estimate from {@link ClueCompletionEstimator}.
-	 * For all other sources, returns the fixed killTimeSeconds from the database.
+	 * Returns the effective kill/completion time for a source. Adjusts for:
+	 * - CLUES: account-progression-aware estimate from {@link ClueCompletionEstimator}
+	 * - RAIDS: team size multiplier from config
+	 * - All others: fixed killTimeSeconds from the database
 	 */
 	int getEffectiveKillTime(CollectionLogSource source)
 	{
@@ -274,7 +275,13 @@ public class EfficiencyCalculator
 				return estimated;
 			}
 		}
-		return source.getKillTimeSeconds();
+		int baseTime = source.getKillTimeSeconds();
+		if (source.getCategory() == CollectionLogCategory.RAIDS)
+		{
+			double multiplier = config.raidTeamSize().getKillTimeMultiplier();
+			return Math.max(1, (int) (baseTime * multiplier));
+		}
+		return baseTime;
 	}
 
 	private ScoredItem scoreSourcePetsOnly(CollectionLogSource source, boolean locked)
