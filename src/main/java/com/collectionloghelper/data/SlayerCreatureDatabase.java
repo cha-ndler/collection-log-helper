@@ -31,6 +31,9 @@ public final class SlayerCreatureDatabase
 		map.put("dagannoth", Arrays.asList("Dagannoth Rex", "Dagannoth Prime", "Dagannoth Supreme"));
 		map.put("cave kraken", Collections.singletonList("Kraken"));
 		map.put("hydras", Collections.singletonList("Alchemical Hydra"));
+		map.put("lizardmen", Collections.singletonList("Lizardman shaman"));
+		map.put("tzhaar", Arrays.asList("TzHaar", "The Fight Caves", "The Inferno"));
+		map.put("araxytes", Collections.singletonList("Araxxor"));
 
 		CREATURE_TO_SOURCES = Collections.unmodifiableMap(map);
 	}
