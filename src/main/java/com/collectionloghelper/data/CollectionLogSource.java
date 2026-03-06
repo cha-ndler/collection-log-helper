@@ -17,12 +17,19 @@ public class CollectionLogSource
     List<Waypoint> waypoints;
     RewardType rewardType;
     double pointsPerHour;
+    boolean mutuallyExclusive;
+    int rollsPerKill;
     SourceRequirements requirements;
     List<CollectionLogItem> items;
 
     public RewardType getRewardType()
     {
         return rewardType != null ? rewardType : RewardType.DROP;
+    }
+
+    public int getRollsPerKill()
+    {
+        return rollsPerKill > 0 ? rollsPerKill : 1;
     }
 
     public WorldPoint getWorldPoint()
