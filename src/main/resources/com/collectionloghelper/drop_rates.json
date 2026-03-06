@@ -72,7 +72,8 @@
         "wikiPage": "Pet_general_graardor"
       }
     ],
-    "locationDescription": "God Wars Dungeon entrance, Trollheim"
+    "locationDescription": "God Wars Dungeon entrance, Trollheim",
+    "mutuallyExclusive": true
   },
   {
     "name": "Commander Zilyana",
@@ -147,7 +148,8 @@
         "wikiPage": "Pet_zilyana"
       }
     ],
-    "locationDescription": "God Wars Dungeon entrance, Trollheim"
+    "locationDescription": "God Wars Dungeon entrance, Trollheim",
+    "mutuallyExclusive": true
   },
   {
     "name": "K'ril Tsutsaroth",
@@ -222,7 +224,8 @@
         "wikiPage": "Pet_k%27ril_tsutsaroth"
       }
     ],
-    "locationDescription": "God Wars Dungeon entrance, Trollheim"
+    "locationDescription": "God Wars Dungeon entrance, Trollheim",
+    "mutuallyExclusive": true
   },
   {
     "name": "Kree'arra",
@@ -297,7 +300,8 @@
         "wikiPage": "Pet_kree%27arra"
       }
     ],
-    "locationDescription": "God Wars Dungeon entrance, Trollheim"
+    "locationDescription": "God Wars Dungeon entrance, Trollheim",
+    "mutuallyExclusive": true
   },
   {
     "name": "Zulrah",
@@ -377,7 +381,8 @@
         "wikiPage": "Pet_snakeling"
       }
     ],
-    "locationDescription": "Zul-Andra, east coast of Tirannwn"
+    "locationDescription": "Zul-Andra, east coast of Tirannwn",
+    "rollsPerKill": 2
   },
   {
     "name": "Vorkath",
@@ -682,7 +687,8 @@
         "wikiPage": "Pet_dark_core"
       }
     ],
-    "locationDescription": "Games necklace cave, level 21 Wilderness"
+    "locationDescription": "Games necklace cave, level 21 Wilderness",
+    "mutuallyExclusive": true
   },
   {
     "name": "Kalphite Queen",
@@ -1144,7 +1150,8 @@
         "wikiPage": "Noon"
       }
     ],
-    "locationDescription": "Slayer Tower rooftop, Morytania"
+    "locationDescription": "Slayer Tower rooftop, Morytania",
+    "rollsPerKill": 2
   },
   {
     "name": "The Nightmare",
@@ -1235,7 +1242,8 @@
         "wikiPage": "Little_nightmare"
       }
     ],
-    "locationDescription": "Slepe, east Morytania"
+    "locationDescription": "Slepe, east Morytania",
+    "mutuallyExclusive": true
   },
   {
     "name": "Nex",
@@ -1302,7 +1310,8 @@
         "wikiPage": "Nexling"
       }
     ],
-    "locationDescription": "God Wars Dungeon entrance, Trollheim"
+    "locationDescription": "God Wars Dungeon entrance, Trollheim",
+    "mutuallyExclusive": true
   },
   {
     "name": "Sarachnis",
@@ -2311,7 +2320,8 @@
         "wikiPage": "Xeric%27s_champion"
       }
     ],
-    "locationDescription": "Mount Quidamortem, Great Kourend"
+    "locationDescription": "Mount Quidamortem, Great Kourend",
+    "mutuallyExclusive": true
   },
   {
     "name": "Theatre of Blood",
@@ -2463,7 +2473,8 @@
         "wikiPage": "Sanguine_ornament_kit"
       }
     ],
-    "locationDescription": "Ver Sinhaza, Morytania"
+    "locationDescription": "Ver Sinhaza, Morytania",
+    "mutuallyExclusive": true
   },
   {
     "name": "Tombs of Amascut",
@@ -2690,7 +2701,8 @@
         "wikiPage": "Icthlarin%27s_shroud_(tier_5)"
       }
     ],
-    "locationDescription": "Necropolis, Kharidian Desert"
+    "locationDescription": "Necropolis, Kharidian Desert",
+    "mutuallyExclusive": true
   },
   {
     "name": "Corrupted Gauntlet",
@@ -3152,7 +3164,8 @@
         "wikiPage": "Phoenix"
       }
     ],
-    "locationDescription": "Wintertodt Camp, northern Zeah"
+    "locationDescription": "Wintertodt Camp, northern Zeah",
+    "rollsPerKill": 10
   },
   {
     "name": "Zalcano",
