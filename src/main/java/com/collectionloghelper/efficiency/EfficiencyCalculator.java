@@ -96,10 +96,12 @@ public class EfficiencyCalculator
 	public ScoredItem scoreSource(CollectionLogSource source, boolean locked)
 	{
 		double dropDropRate = 0;
+		double maxDropRate = 0;
 		int missingCount = 0;
 		int guaranteedCount = 0;
 		double totalPointCost = 0;
 		double totalMilestoneKills = 0;
+		int rolls = source.getRollsPerKill();
 
 		for (CollectionLogItem item : source.getItems())
 		{
@@ -114,7 +116,11 @@ public class EfficiencyCalculator
 				}
 				else
 				{
-					dropDropRate += item.getDropRate();
+					double effectiveRate = rolls > 1
+						? 1.0 - Math.pow(1.0 - item.getDropRate(), rolls)
+						: item.getDropRate();
+					dropDropRate += effectiveRate;
+					maxDropRate = Math.max(maxDropRate, effectiveRate);
 				}
 			}
 		}
@@ -178,7 +184,8 @@ public class EfficiencyCalculator
 		}
 
 		int dropCount = missingCount - guaranteedCount;
-		double expectedKills = 1.0 / dropDropRate;
+		double effectiveDropRate = source.isMutuallyExclusive() ? maxDropRate : dropDropRate;
+		double expectedKills = 1.0 / effectiveDropRate;
 		double expectedHours = expectedKills * (source.getKillTimeSeconds() / 3600.0);
 		double dropScore = (dropCount / expectedHours) * 100.0;
 
@@ -210,10 +217,12 @@ public class EfficiencyCalculator
 	private ScoredItem scoreSourcePetsOnly(CollectionLogSource source, boolean locked)
 	{
 		double dropDropRate = 0;
+		double maxDropRate = 0;
 		int missingPetCount = 0;
 		int guaranteedCount = 0;
 		double totalPointCost = 0;
 		double totalMilestoneKills = 0;
+		int rolls = source.getRollsPerKill();
 
 		for (CollectionLogItem item : source.getItems())
 		{
@@ -228,7 +237,11 @@ public class EfficiencyCalculator
 				}
 				else
 				{
-					dropDropRate += item.getDropRate();
+					double effectiveRate = rolls > 1
+						? 1.0 - Math.pow(1.0 - item.getDropRate(), rolls)
+						: item.getDropRate();
+					dropDropRate += effectiveRate;
+					maxDropRate = Math.max(maxDropRate, effectiveRate);
 				}
 			}
 		}
@@ -291,7 +304,8 @@ public class EfficiencyCalculator
 		}
 
 		int dropCount = missingPetCount - guaranteedCount;
-		double expectedKills = 1.0 / dropDropRate;
+		double effectiveDropRate = source.isMutuallyExclusive() ? maxDropRate : dropDropRate;
+		double expectedKills = 1.0 / effectiveDropRate;
 		double expectedHours = expectedKills * (source.getKillTimeSeconds() / 3600.0);
 		double dropScore = (dropCount / expectedHours) * 100.0;
 

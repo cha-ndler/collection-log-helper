@@ -56,7 +56,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		CATEGORY_FOCUS("Category Focus"),
 		SEARCH("Search"),
 		PET_HUNT("Pet Hunt"),
-		PROXIMITY("Efficient by Proximity");
+		PROXIMITY("Efficient by Proximity (Experimental)");
 
 		private final String displayName;
 
@@ -572,6 +572,12 @@ public class CollectionLogHelperPanel extends PluginPanel
 		List<SourceDistance> sourceDistances = new ArrayList<>();
 		for (CollectionLogSource source : database.getAllSources())
 		{
+			// Clue sources have no meaningful physical location
+			if (source.getCategory() == CollectionLogCategory.CLUES)
+			{
+				continue;
+			}
+
 			boolean locked = !requirementsChecker.isAccessible(source.getName());
 			if (hideLocked && locked)
 			{
