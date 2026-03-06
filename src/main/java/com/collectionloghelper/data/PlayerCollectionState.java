@@ -145,6 +145,30 @@ public class PlayerCollectionState
 	}
 
 	/**
+	 * Check if a nearby item ID is in the obtained set. Useful for diagnosing
+	 * item ID mismatches where the collection log reports a different ID than expected.
+	 */
+	public void debugItemId(int expectedId, String itemName)
+	{
+		if (obtainedItemIds.contains(expectedId))
+		{
+			return; // No mismatch
+		}
+		// Check nearby IDs (noted variants are typically +1)
+		for (int offset = -5; offset <= 5; offset++)
+		{
+			if (offset != 0 && obtainedItemIds.contains(expectedId + offset))
+			{
+				log.warn("Item ID mismatch for '{}': expected {} but found {} in obtained set (offset {})",
+					itemName, expectedId, expectedId + offset, offset);
+				return;
+			}
+		}
+		log.debug("Item '{}' (ID {}) not found in obtained set (set size: {})",
+			itemName, expectedId, obtainedItemIds.size());
+	}
+
+	/**
 	 * Mark an item as obtained. Returns true if newly added.
 	 */
 	public boolean markItemObtained(int itemId)
