@@ -8,8 +8,10 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
+import com.collectionloghelper.data.SlayerMasterDatabase;
 import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
+import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
@@ -133,6 +135,12 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private SlayerTaskState slayerTaskState;
 
+	@Inject
+	private SlayerMasterDatabase slayerMasterDatabase;
+
+	@Inject
+	private SlayerStrategyCalculator slayerStrategyCalculator;
+
 	/** Minimum tile movement before proximity view is refreshed. */
 	private static final int PROXIMITY_REFRESH_TILES = 10;
 
@@ -166,10 +174,12 @@ public class CollectionLogHelperPlugin extends Plugin
 	protected void startUp() throws Exception
 	{
 		database.load();
+		slayerMasterDatabase.load();
 
 		panel = new CollectionLogHelperPanel(
 			config, database, collectionState, calculator, clueEstimator,
 			itemManager, requirementsChecker, dataSyncState, slayerTaskState,
+			slayerStrategyCalculator,
 			this::activateGuidance, this::deactivateGuidance,
 			() -> cachedPlayerLocation);
 		panel.setMode(config.defaultMode());
