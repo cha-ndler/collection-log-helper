@@ -347,7 +347,7 @@
       {
         "itemId": 13200,
         "name": "Tanzanite mutagen",
-        "dropRate": 7.63e-05,
+        "dropRate": 0.000153,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tanzanite_mutagen"
@@ -355,7 +355,7 @@
       {
         "itemId": 13201,
         "name": "Magma mutagen",
-        "dropRate": 7.63e-05,
+        "dropRate": 0.000153,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Magma_mutagen"
@@ -578,7 +578,7 @@
       {
         "itemId": 22804,
         "name": "Dragon knife",
-        "dropRate": 0.009804,
+        "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_knife"
@@ -586,7 +586,7 @@
       {
         "itemId": 20849,
         "name": "Dragon thrownaxe",
-        "dropRate": 0.009804,
+        "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_thrownaxe"
@@ -1090,7 +1090,7 @@
       {
         "itemId": 21752,
         "name": "Granite maul",
-        "dropRate": 0.004,
+        "dropRate": 0.008,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_maul"
@@ -1098,7 +1098,7 @@
       {
         "itemId": 21736,
         "name": "Granite gloves",
-        "dropRate": 0.002,
+        "dropRate": 0.004,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_gloves"
@@ -1106,7 +1106,7 @@
       {
         "itemId": 21739,
         "name": "Granite ring",
-        "dropRate": 0.002,
+        "dropRate": 0.004,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_ring"
@@ -1114,7 +1114,7 @@
       {
         "itemId": 21742,
         "name": "Granite hammer",
-        "dropRate": 0.001333,
+        "dropRate": 0.002666,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_hammer"
@@ -1122,7 +1122,7 @@
       {
         "itemId": 21730,
         "name": "Black tourmaline core",
-        "dropRate": 0.001,
+        "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Black_tourmaline_core"
@@ -1130,7 +1130,7 @@
       {
         "itemId": 21745,
         "name": "Jar of stone",
-        "dropRate": 0.0002,
+        "dropRate": 0.0004,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jar_of_stone"
@@ -1138,7 +1138,7 @@
       {
         "itemId": 21748,
         "name": "Noon",
-        "dropRate": 0.000333,
+        "dropRate": 0.000666,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Noon"
@@ -1648,7 +1648,7 @@
       {
         "itemId": 13277,
         "name": "Jar of miasma",
-        "dropRate": 0.0002,
+        "dropRate": 0.001015,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jar_of_miasma"
@@ -1656,7 +1656,7 @@
       {
         "itemId": 13262,
         "name": "Abyssal orphan",
-        "dropRate": 0.000338,
+        "dropRate": 0.000391,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Abyssal_orphan"
@@ -2110,7 +2110,7 @@
       {
         "itemId": 12000,
         "name": "Tangleroot",
-        "dropRate": 0.000186,
+        "dropRate": 0.000143,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Tangleroot"
@@ -2129,7 +2129,7 @@
       {
         "itemId": 20997,
         "name": "Twisted bow",
-        "dropRate": 0.00029,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Twisted_bow"
@@ -2137,7 +2137,7 @@
       {
         "itemId": 21003,
         "name": "Elder maul",
-        "dropRate": 0.00029,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Elder_maul"
@@ -2145,7 +2145,7 @@
       {
         "itemId": 21043,
         "name": "Kodai insignia",
-        "dropRate": 0.00029,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Kodai_insignia"
@@ -2153,7 +2153,7 @@
       {
         "itemId": 13652,
         "name": "Dragon claws",
-        "dropRate": 0.00029,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_claws"
@@ -2161,7 +2161,7 @@
       {
         "itemId": 21012,
         "name": "Dragon hunter crossbow",
-        "dropRate": 0.00058,
+        "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_hunter_crossbow"
@@ -2169,7 +2169,7 @@
       {
         "itemId": 21000,
         "name": "Twisted buckler",
-        "dropRate": 0.00058,
+        "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Twisted_buckler"
@@ -2177,7 +2177,7 @@
       {
         "itemId": 21015,
         "name": "Dinh's bulwark",
-        "dropRate": 0.00058,
+        "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dinh%27s_bulwark"
@@ -2185,7 +2185,7 @@
       {
         "itemId": 21018,
         "name": "Ancestral hat",
-        "dropRate": 0.000435,
+        "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancestral_hat"
@@ -2193,7 +2193,7 @@
       {
         "itemId": 21021,
         "name": "Ancestral robe top",
-        "dropRate": 0.000435,
+        "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancestral_robe_top"
@@ -2201,7 +2201,7 @@
       {
         "itemId": 21024,
         "name": "Ancestral robe bottom",
-        "dropRate": 0.000435,
+        "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancestral_robe_bottom"
@@ -2209,7 +2209,7 @@
       {
         "itemId": 21034,
         "name": "Dexterous prayer scroll",
-        "dropRate": 0.00145,
+        "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dexterous_prayer_scroll"
@@ -2217,7 +2217,7 @@
       {
         "itemId": 21079,
         "name": "Arcane prayer scroll",
-        "dropRate": 0.00145,
+        "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Arcane_prayer_scroll"
@@ -2329,7 +2329,7 @@
       {
         "itemId": 22325,
         "name": "Scythe of vitur",
-        "dropRate": 0.00157,
+        "dropRate": 0.000578,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Scythe_of_vitur"
@@ -2337,7 +2337,7 @@
       {
         "itemId": 22324,
         "name": "Ghrazi rapier",
-        "dropRate": 0.00157,
+        "dropRate": 0.001156,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ghrazi_rapier"
@@ -2345,7 +2345,7 @@
       {
         "itemId": 22323,
         "name": "Sanguinesti staff",
-        "dropRate": 0.00157,
+        "dropRate": 0.001156,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sanguinesti_staff"
@@ -2353,7 +2353,7 @@
       {
         "itemId": 22326,
         "name": "Justiciar faceguard",
-        "dropRate": 0.00157,
+        "dropRate": 0.001156,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Justiciar_faceguard"
@@ -2361,7 +2361,7 @@
       {
         "itemId": 22327,
         "name": "Justiciar chestguard",
-        "dropRate": 0.00157,
+        "dropRate": 0.001156,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Justiciar_chestguard"
@@ -2369,7 +2369,7 @@
       {
         "itemId": 22328,
         "name": "Justiciar legguards",
-        "dropRate": 0.00157,
+        "dropRate": 0.001156,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Justiciar_legguards"
@@ -2377,7 +2377,7 @@
       {
         "itemId": 22477,
         "name": "Avernic defender hilt",
-        "dropRate": 0.00157,
+        "dropRate": 0.00462,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Avernic_defender_hilt"
@@ -3082,7 +3082,7 @@
       {
         "itemId": 20708,
         "name": "Pyromancer hood",
-        "dropRate": 0.0025,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_hood"
@@ -3090,7 +3090,7 @@
       {
         "itemId": 20696,
         "name": "Pyromancer garb",
-        "dropRate": 0.0025,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_garb"
@@ -3098,7 +3098,7 @@
       {
         "itemId": 20699,
         "name": "Pyromancer robe",
-        "dropRate": 0.0025,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_robe"
@@ -3106,7 +3106,7 @@
       {
         "itemId": 20702,
         "name": "Pyromancer boots",
-        "dropRate": 0.0025,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_boots"
@@ -3114,7 +3114,7 @@
       {
         "itemId": 20704,
         "name": "Warm gloves",
-        "dropRate": 0.0025,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Warm_gloves"
@@ -3122,7 +3122,7 @@
       {
         "itemId": 20706,
         "name": "Bruma torch",
-        "dropRate": 0.0025,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bruma_torch"
@@ -3138,7 +3138,7 @@
       {
         "itemId": 6739,
         "name": "Dragon axe",
-        "dropRate": 0.001,
+        "dropRate": 0.0001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_axe"
@@ -3146,7 +3146,7 @@
       {
         "itemId": 20693,
         "name": "Phoenix",
-        "dropRate": 0.002,
+        "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Phoenix"
@@ -3375,7 +3375,7 @@
       {
         "itemId": 29296,
         "name": "Blue moon helm",
-        "dropRate": 0.002,
+        "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Blue_moon_helm"
@@ -3383,7 +3383,7 @@
       {
         "itemId": 29298,
         "name": "Blue moon chestplate",
-        "dropRate": 0.002,
+        "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Blue_moon_chestplate"
@@ -3391,7 +3391,7 @@
       {
         "itemId": 29300,
         "name": "Blue moon tassets",
-        "dropRate": 0.002,
+        "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Blue_moon_tassets"
@@ -3399,7 +3399,7 @@
       {
         "itemId": 29302,
         "name": "Eclipse moon helm",
-        "dropRate": 0.002,
+        "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Eclipse_moon_helm"
@@ -3407,7 +3407,7 @@
       {
         "itemId": 29304,
         "name": "Eclipse moon chestplate",
-        "dropRate": 0.002,
+        "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Eclipse_moon_chestplate"
@@ -3415,7 +3415,7 @@
       {
         "itemId": 29306,
         "name": "Eclipse moon tassets",
-        "dropRate": 0.002,
+        "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Eclipse_moon_tassets"
@@ -3423,7 +3423,7 @@
       {
         "itemId": 29308,
         "name": "Blood moon helm",
-        "dropRate": 0.002,
+        "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Blood_moon_helm"
@@ -3431,7 +3431,7 @@
       {
         "itemId": 29310,
         "name": "Blood moon chestplate",
-        "dropRate": 0.002,
+        "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Blood_moon_chestplate"
@@ -3439,7 +3439,7 @@
       {
         "itemId": 29312,
         "name": "Blood moon tassets",
-        "dropRate": 0.002,
+        "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Blood_moon_tassets"
