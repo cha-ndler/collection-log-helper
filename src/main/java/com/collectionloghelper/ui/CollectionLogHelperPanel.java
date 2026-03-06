@@ -686,19 +686,102 @@ public class CollectionLogHelperPanel extends PluginPanel
 		for (ScoredItem si : scored)
 		{
 			boolean onTask = calculator.isOnSlayerTask(si.getSource());
-			for (CollectionLogItem item : si.getSource().getItems())
+			boolean hasGuaranteed = hasGuaranteedItems(si);
+			double dropScore = si.getDropOnlyScore();
+
+			// Guaranteed items shown first with full source score
+			if (hasGuaranteed)
 			{
-				boolean obtained = collectionState.isItemObtained(item.getItemId());
-				if (hideObtained && obtained)
+				for (CollectionLogItem item : si.getSource().getItems())
 				{
-					continue;
+					boolean obtained = collectionState.isItemObtained(item.getItemId());
+					if (hideObtained && obtained)
+					{
+						continue;
+					}
+					if (item.getDropRate() >= 1.0)
+					{
+						ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
+							si.getScore(), si.isLocked(), onTask, itemManager,
+							() -> showDetail(item, si.getSource()));
+						listContainer.add(row);
+					}
 				}
-				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
-					si.getScore(), si.isLocked(), onTask, itemManager,
-					() -> showDetail(item, si.getSource()));
-				listContainer.add(row);
+
+				// Sub-section for rare drops from the same source
+				List<CollectionLogItem> rareDrops = getRareDropItems(si, hideObtained);
+				if (!rareDrops.isEmpty())
+				{
+					listContainer.add(createAlsoMissingHeader(si.getSource().getName()));
+					for (CollectionLogItem item : rareDrops)
+					{
+						boolean obtained = collectionState.isItemObtained(item.getItemId());
+						ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
+							dropScore, si.isLocked(), onTask, itemManager,
+							() -> showDetail(item, si.getSource()));
+						listContainer.add(row);
+					}
+				}
+			}
+			else
+			{
+				// No guaranteed items — show all items with normal score
+				for (CollectionLogItem item : si.getSource().getItems())
+				{
+					boolean obtained = collectionState.isItemObtained(item.getItemId());
+					if (hideObtained && obtained)
+					{
+						continue;
+					}
+					ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
+						si.getScore(), si.isLocked(), onTask, itemManager,
+						() -> showDetail(item, si.getSource()));
+					listContainer.add(row);
+				}
 			}
 		}
+	}
+
+	private boolean hasGuaranteedItems(ScoredItem si)
+	{
+		for (CollectionLogItem item : si.getSource().getItems())
+		{
+			if (item.getDropRate() >= 1.0 && !collectionState.isItemObtained(item.getItemId()))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private List<CollectionLogItem> getRareDropItems(ScoredItem si, boolean hideObtained)
+	{
+		List<CollectionLogItem> rareDrops = new java.util.ArrayList<>();
+		for (CollectionLogItem item : si.getSource().getItems())
+		{
+			if (item.getDropRate() < 1.0)
+			{
+				boolean obtained = collectionState.isItemObtained(item.getItemId());
+				if (!hideObtained || !obtained)
+				{
+					rareDrops.add(item);
+				}
+			}
+		}
+		return rareDrops;
+	}
+
+	private JPanel createAlsoMissingHeader(String sourceName)
+	{
+		JPanel header = new JPanel(new BorderLayout());
+		header.setBackground(new Color(40, 40, 40));
+		header.setBorder(BorderFactory.createEmptyBorder(3, 8, 3, 8));
+		header.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+		JLabel label = new JLabel("Also missing from " + sourceName + ":");
+		label.setFont(FontManager.getRunescapeSmallFont());
+		label.setForeground(new Color(170, 170, 170));
+		header.add(label, BorderLayout.WEST);
+		return header;
 	}
 
 	private void buildCategoryView()
@@ -888,7 +971,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 			{
 				String reasoning = String.format("%d missing items, %d tiles away (score: %.1f)",
 					sd.missingCount, sd.distance, sd.compositeScore());
-				ScoredItem topPick = new ScoredItem(sd.source, sd.compositeScore(), sd.missingCount, reasoning, false);
+				ScoredItem topPick = new ScoredItem(sd.source, sd.compositeScore(), sd.missingCount, reasoning, false, sd.compositeScore());
 				listContainer.add(createQuickGuidePanel(topPick));
 				break;
 			}

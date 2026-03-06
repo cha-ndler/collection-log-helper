@@ -124,7 +124,8 @@ public class EfficiencyCalculator
 		}
 		String boostedReasoning = item.getReasoning() + " [Slayer task x" + SLAYER_TASK_BOOST + "]";
 		return new ScoredItem(item.getSource(), item.getScore() * SLAYER_TASK_BOOST,
-			item.getMissingItemCount(), boostedReasoning, item.isLocked());
+			item.getMissingItemCount(), boostedReasoning, item.isLocked(),
+			item.getDropOnlyScore() * SLAYER_TASK_BOOST);
 	}
 
 	public ScoredItem scoreSource(CollectionLogSource source, boolean locked)
@@ -180,7 +181,7 @@ public class EfficiencyCalculator
 				score = missingCount * 0.2;
 				reasoning = String.format("%d missing shop items", missingCount);
 			}
-			return new ScoredItem(source, score, missingCount, reasoning, locked);
+			return new ScoredItem(source, score, missingCount, reasoning, locked, score);
 		}
 
 		// MILESTONE sources: kill-count threshold unlocks
@@ -199,14 +200,14 @@ public class EfficiencyCalculator
 				score = missingCount * 0.3;
 				reasoning = String.format("%d missing milestone items", missingCount);
 			}
-			return new ScoredItem(source, score, missingCount, reasoning, locked);
+			return new ScoredItem(source, score, missingCount, reasoning, locked, score);
 		}
 
 		// All items are guaranteed but not tagged as SHOP/MILESTONE — flat score
 		if (guaranteedCount == missingCount)
 		{
 			String reasoning = String.format("%d missing items (reward shop)", missingCount);
-			return new ScoredItem(source, missingCount * 0.2, missingCount, reasoning, locked);
+			return new ScoredItem(source, missingCount * 0.2, missingCount, reasoning, locked, missingCount * 0.2);
 		}
 
 		// No probabilistic drops to score
@@ -256,7 +257,7 @@ public class EfficiencyCalculator
 			reasoning = String.format("%d missing items, ~%.0f kills to next drop", dropCount, expectedKills);
 		}
 
-		return new ScoredItem(source, score, missingCount, reasoning, locked);
+		return new ScoredItem(source, score, missingCount, reasoning, locked, dropScore);
 	}
 
 	/**
@@ -354,7 +355,7 @@ public class EfficiencyCalculator
 				score = missingPetCount * 0.2;
 				reasoning = String.format("%d missing shop pets", missingPetCount);
 			}
-			return new ScoredItem(source, score, missingPetCount, reasoning, locked);
+			return new ScoredItem(source, score, missingPetCount, reasoning, locked, score);
 		}
 
 		// MILESTONE sources
@@ -373,14 +374,14 @@ public class EfficiencyCalculator
 				score = missingPetCount * 0.3;
 				reasoning = String.format("%d missing milestone pets", missingPetCount);
 			}
-			return new ScoredItem(source, score, missingPetCount, reasoning, locked);
+			return new ScoredItem(source, score, missingPetCount, reasoning, locked, score);
 		}
 
 		// All guaranteed pets but not SHOP/MILESTONE tagged
 		if (guaranteedCount == missingPetCount)
 		{
 			String reasoning = String.format("%d missing pets (reward shop)", missingPetCount);
-			return new ScoredItem(source, missingPetCount * 0.2, missingPetCount, reasoning, locked);
+			return new ScoredItem(source, missingPetCount * 0.2, missingPetCount, reasoning, locked, missingPetCount * 0.2);
 		}
 
 		if (combinedDropRate <= 0)
@@ -426,6 +427,6 @@ public class EfficiencyCalculator
 			reasoning = String.format("%d missing pets, ~%.0f kills to next drop", missingPetCount, expectedKills);
 		}
 
-		return new ScoredItem(source, score, missingPetCount, reasoning, locked);
+		return new ScoredItem(source, score, missingPetCount, reasoning, locked, dropScore);
 	}
 }
