@@ -173,7 +173,7 @@ public class EfficiencyCalculator
 			{
 				double hoursNeeded = totalPointCost / source.getPointsPerHour();
 				score = (missingCount / hoursNeeded) * 100.0;
-				reasoning = String.format("%d missing shop items, ~%.1f hours of points needed", missingCount, hoursNeeded);
+				reasoning = String.format("%d missing shop items, ~%s of points needed", missingCount, formatHours(hoursNeeded));
 			}
 			else
 			{
@@ -284,6 +284,23 @@ public class EfficiencyCalculator
 		return baseTime;
 	}
 
+	private static String formatHours(double hours)
+	{
+		if (hours < 1.0 / 60.0)
+		{
+			return "< 1 min";
+		}
+		else if (hours < 1)
+		{
+			long min = Math.max(1, Math.round(hours * 60));
+			return min + " min";
+		}
+		else
+		{
+			return String.format("%.1f hours", hours);
+		}
+	}
+
 	private ScoredItem scoreSourcePetsOnly(CollectionLogSource source, boolean locked)
 	{
 		double combinedDropRate = 0;
@@ -330,7 +347,7 @@ public class EfficiencyCalculator
 			{
 				double hoursNeeded = totalPointCost / source.getPointsPerHour();
 				score = (missingPetCount / hoursNeeded) * 100.0;
-				reasoning = String.format("%d missing shop pets, ~%.1f hours of points needed", missingPetCount, hoursNeeded);
+				reasoning = String.format("%d missing shop pets, ~%s of points needed", missingPetCount, formatHours(hoursNeeded));
 			}
 			else
 			{
