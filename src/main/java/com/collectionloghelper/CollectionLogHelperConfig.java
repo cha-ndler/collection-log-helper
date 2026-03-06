@@ -48,6 +48,16 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "showBankScanReminder",
+		name = "Show Bank Scan Reminder",
+		description = "Show a reminder to open your Bank after login so the plugin can scan for clue scrolls and other items"
+	)
+	default boolean showBankScanReminder()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "hideLockedContent",
 		name = "Hide Locked Content",
 		description = "Hide sources that require quests or skill levels you haven't met"

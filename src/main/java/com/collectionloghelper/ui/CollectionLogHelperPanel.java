@@ -4,6 +4,7 @@ import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
@@ -79,17 +80,21 @@ public class CollectionLogHelperPanel extends PluginPanel
 		SYNCED
 	}
 
+	private static final Color DATA_WARNING_COLOR = new Color(220, 50, 50);
+
 	private final CollectionLogHelperConfig config;
 	private final DropRateDatabase database;
 	private final PlayerCollectionState collectionState;
 	private final EfficiencyCalculator calculator;
 	private final ItemManager itemManager;
 	private final RequirementsChecker requirementsChecker;
+	private final DataSyncState dataSyncState;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Supplier<WorldPoint> playerLocationSupplier;
 
 	private final JLabel syncStatusLabel;
+	private final JLabel dataSyncWarningLabel;
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<CollectionLogCategory> categorySelector;
@@ -114,7 +119,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
 		DropRateDatabase database, PlayerCollectionState collectionState,
 		EfficiencyCalculator calculator, ItemManager itemManager,
-		RequirementsChecker requirementsChecker,
+		RequirementsChecker requirementsChecker, DataSyncState dataSyncState,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
 		Supplier<WorldPoint> playerLocationSupplier)
 	{
@@ -124,6 +129,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.calculator = calculator;
 		this.itemManager = itemManager;
 		this.requirementsChecker = requirementsChecker;
+		this.dataSyncState = dataSyncState;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.playerLocationSupplier = playerLocationSupplier;
@@ -153,6 +159,17 @@ public class CollectionLogHelperPanel extends PluginPanel
 		syncStatusLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
 		syncStatusLabel.setToolTipText("Syncs automatically when you open the Collection Log in-game");
 		controlsPanel.add(syncStatusLabel);
+
+		// Data sync warning banner (hidden when all data sources are synced)
+		dataSyncWarningLabel = new JLabel("", SwingConstants.CENTER);
+		dataSyncWarningLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
+		dataSyncWarningLabel.setForeground(DATA_WARNING_COLOR);
+		dataSyncWarningLabel.setAlignmentX(CENTER_ALIGNMENT);
+		dataSyncWarningLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
+		dataSyncWarningLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
+		dataSyncWarningLabel.setVisible(false);
+		controlsPanel.add(dataSyncWarningLabel);
+
 		controlsPanel.add(Box.createVerticalStrut(4));
 
 		// Mode selector
@@ -314,6 +331,37 @@ public class CollectionLogHelperPanel extends PluginPanel
 					syncStatusLabel.setForeground(SYNC_SYNCED_COLOR);
 					break;
 			}
+		});
+	}
+
+	public void updateDataSyncWarning()
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			if (dataSyncState.isFullySynced())
+			{
+				dataSyncWarningLabel.setVisible(false);
+			}
+			else
+			{
+				StringBuilder text = new StringBuilder("<html><center>");
+				if (!dataSyncState.isCollectionLogSynced() && !dataSyncState.isBankScanned())
+				{
+					text.append("Open Collection Log & Bank<br>for accurate guidance");
+				}
+				else if (!dataSyncState.isCollectionLogSynced())
+				{
+					text.append("Open Collection Log<br>for accurate guidance");
+				}
+				else
+				{
+					text.append("Open Bank to scan items<br>for accurate guidance");
+				}
+				text.append("</center></html>");
+				dataSyncWarningLabel.setText(text.toString());
+				dataSyncWarningLabel.setVisible(true);
+			}
+			revalidate();
 		});
 	}
 
