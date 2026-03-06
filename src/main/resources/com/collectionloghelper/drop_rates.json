@@ -3022,7 +3022,8 @@
         "wikiPage": "Verac%27s_flail"
       }
     ],
-    "locationDescription": "Barrows, east of Mort'ton"
+    "locationDescription": "Barrows, east of Mort'ton",
+    "mutuallyExclusive": true
   },
   {
     "name": "Tempoross",
@@ -3280,7 +3281,8 @@
         "isPet": true,
         "wikiPage": "Smol_heredit"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Crazy archaeologist",
@@ -3489,7 +3491,8 @@
         "isPet": false,
         "wikiPage": "Atlatl_dart"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Tormented Demons",
@@ -3652,7 +3655,8 @@
         "wikiPage": "Rune_scimitar_ornament_kit_(zamorak)"
       }
     ],
-    "locationDescription": "Grand Exchange"
+    "locationDescription": "Grand Exchange",
+    "mutuallyExclusive": true
   },
   {
     "name": "Revenants",
@@ -3776,7 +3780,8 @@
       }
     ],
     "locationDescription": "Revenant Caves, Wilderness",
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "mutuallyExclusive": true
   },
   {
     "name": "Slayer",
@@ -4019,7 +4024,8 @@
         "isPet": false,
         "wikiPage": "Abyssal_head"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Hallowed Sepulchre",
@@ -4170,7 +4176,8 @@
       }
     ],
     "locationDescription": "Hallowed Sepulchre entrance in Darkmeyer",
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "mutuallyExclusive": true
   },
   {
     "name": "Guardians of the Rift",
@@ -4344,7 +4351,8 @@
         "wikiPage": "Abyssal_protector"
       }
     ],
-    "locationDescription": "Temple of the Eye, accessed via portal in Wizards' Tower basement"
+    "locationDescription": "Temple of the Eye, accessed via portal in Wizards' Tower basement",
+    "mutuallyExclusive": true
   },
   {
     "name": "Brimhaven Agility Arena",
@@ -5057,7 +5065,8 @@
         "wikiPage": "Rogue_boots"
       }
     ],
-    "locationDescription": "Rogues' Den beneath the Burthorpe pub"
+    "locationDescription": "Rogues' Den beneath the Burthorpe pub",
+    "mutuallyExclusive": true
   },
   {
     "name": "Scroll Cases",
@@ -5732,7 +5741,8 @@
         "wikiPage": "Sacraments_of_ent_folk"
       }
     ],
-    "locationDescription": "Auburn Valley, north-west Varlamore"
+    "locationDescription": "Auburn Valley, north-west Varlamore",
+    "mutuallyExclusive": true
   },
   {
     "name": "Trouble Brewing",
@@ -6730,7 +6740,8 @@
       }
     ],
     "locationDescription": "Various Woodcutting locations during Forestry events",
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "mutuallyExclusive": true
   },
   {
     "name": "Fossil Island Notes",
@@ -7446,7 +7457,8 @@
         "wikiPage": "Radiant_pearl"
       }
     ],
-    "locationDescription": "Open ocean during Sailing voyages"
+    "locationDescription": "Open ocean during Sailing voyages",
+    "mutuallyExclusive": true
   },
   {
     "name": "Sailing Misc",
@@ -8356,7 +8368,8 @@
         "wikiPage": "Dragon_defender"
       }
     ],
-    "locationDescription": "Warriors' Guild, Burthorpe"
+    "locationDescription": "Warriors' Guild, Burthorpe",
+    "mutuallyExclusive": true
   },
   {
     "name": "Elder Chaos Druids",
@@ -8942,7 +8955,8 @@
         "isPet": true,
         "wikiPage": "Huberte"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Yama",
@@ -9041,7 +9055,8 @@
         "isPet": true,
         "wikiPage": "Yami"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Doom of Mokhaiotl",
@@ -9100,7 +9115,8 @@
         "isPet": true,
         "wikiPage": "Dom"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Royal Titans",
@@ -9167,7 +9183,8 @@
         "isPet": true,
         "wikiPage": "Bran"
       }
-    ]
+    ],
+    "mutuallyExclusive": true
   },
   {
     "name": "Amoxliatl",
@@ -10457,7 +10474,8 @@
         "wikiPage": "Large_spade"
       }
     ],
-    "locationDescription": "Lumbridge"
+    "locationDescription": "Lumbridge",
+    "mutuallyExclusive": true
   },
   {
     "name": "Medium Treasure Trails",
@@ -11388,7 +11406,8 @@
         "wikiPage": "Clueless_scroll"
       }
     ],
-    "locationDescription": "Falador"
+    "locationDescription": "Falador",
+    "mutuallyExclusive": true
   },
   {
     "name": "Hard Treasure Trails",
@@ -12471,7 +12490,8 @@
         "wikiPage": "Amulet_of_glory_(t)"
       }
     ],
-    "locationDescription": "Varrock"
+    "locationDescription": "Varrock",
+    "mutuallyExclusive": true
   },
   {
     "name": "Elite Treasure Trails",
@@ -12954,7 +12974,8 @@
         "wikiPage": "Heavy_casket"
       }
     ],
-    "locationDescription": "Prifddinas"
+    "locationDescription": "Prifddinas",
+    "mutuallyExclusive": true
   },
   {
     "name": "Master Treasure Trails",
@@ -13357,7 +13378,8 @@
         "wikiPage": "Bloodhound"
       }
     ],
-    "locationDescription": "Grand Exchange"
+    "locationDescription": "Grand Exchange",
+    "mutuallyExclusive": true
   },
   {
     "name": "Hard Treasure Trail Rewards (Rare)",
@@ -13560,7 +13582,8 @@
         "wikiPage": "Gilded_hasta"
       }
     ],
-    "locationDescription": "Varrock"
+    "locationDescription": "Varrock",
+    "mutuallyExclusive": true
   },
   {
     "name": "Elite Treasure Trail Rewards (Rare)",
@@ -13883,7 +13906,8 @@
         "wikiPage": "Lava_dragon_mask"
       }
     ],
-    "locationDescription": "Prifddinas"
+    "locationDescription": "Prifddinas",
+    "mutuallyExclusive": true
   },
   {
     "name": "Master Treasure Trail Rewards (Rare)",
@@ -14270,7 +14294,8 @@
         "wikiPage": "Bloodhound"
       }
     ],
-    "locationDescription": "Grand Exchange"
+    "locationDescription": "Grand Exchange",
+    "mutuallyExclusive": true
   },
   {
     "name": "Shared Treasure Trail Rewards",
@@ -14673,6 +14698,7 @@
         "wikiPage": "Master_scroll_book_(empty)"
       }
     ],
-    "locationDescription": "Grand Exchange"
+    "locationDescription": "Grand Exchange",
+    "mutuallyExclusive": true
   }
 ]
