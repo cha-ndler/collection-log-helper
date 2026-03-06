@@ -2,24 +2,25 @@
 
 A RuneLite plugin that guides players through efficient collection log completion with intelligent efficiency scoring, on-screen guidance overlays, and multiple viewing modes.
 
-**Coverage:** Expanding toward full collection log support (~1,698 items) — [see current progress](ITEMS_TRACKER.md)
+**Coverage:** Expanding toward full collection log support (~1,698 items across 128 sources) — [see current progress](ITEMS_TRACKER.md)
 
 ## Features
 
 ### Efficiency Scoring
 
-Ranks collection log sources by how efficiently you can obtain missing items. The score factors in combined drop rates and average kill times to suggest the most time-effective grinds. Reward shop and guaranteed items are scored separately from probabilistic drops to prevent inflated rankings.
+Ranks collection log sources by how efficiently you can obtain missing items. The score factors in drop rates, kill times, and drop table mechanics to suggest the most time-effective grinds. Sources with mutually exclusive unique tables (GWD, raids, clue scrolls, etc.) use the highest individual item rate instead of summing rates, preventing inflated rankings. Multi-roll sources (Zulrah, Wintertodt, etc.) account for multiple drop chances per kill. Reward shop and guaranteed items are scored separately from probabilistic drops.
 
 ### Account-Aware Requirements
 
 Sources are checked against your account's quest completions and skill levels. Locked content (e.g., Corrupted Gauntlet without Song of the Elves, Alchemical Hydra without 95 Slayer) can be hidden or shown with lock indicators. The Top Pick always recommends accessible content.
 
-### Four Display Modes
+### Five Display Modes
 
 - **Efficient** — Missing items ranked by efficiency score (items per expected hour)
 - **Category Focus** — Items grouped by collection log tab (Bosses, Raids, Clues, Minigames, Other) with progress bars and collapsible sections
 - **Search** — Full-text search across all items and sources
 - **Pet Hunt** — Pet drops only, ranked by efficiency
+- **Efficient by Proximity (Experimental)** — Nearby sources ranked by a composite score of efficiency and distance from your current location
 
 ### Automatic Sync
 
@@ -56,10 +57,12 @@ Automatically detects new collection log entries via chat messages and varbit ch
 | Show Hint Arrow | On | Show the yellow hint arrow at the target |
 | Shortest Path Integration | On | Request pathfinding from Shortest Path plugin |
 | Overlay Color | Cyan | Customize the overlay highlight color |
+| **Proximity** | | |
+| Max Distance | 0 (unlimited) | Filter proximity mode results to within this tile distance |
 
 ## Data
 
-All drop data lives in [`src/main/resources/com/collectionloghelper/drop_rates.json`](src/main/resources/com/collectionloghelper/drop_rates.json). Each source includes world coordinates, kill time, and items with OSRS item IDs, decimal drop rates, pet flags, and wiki page links.
+All drop data lives in [`src/main/resources/com/collectionloghelper/drop_rates.json`](src/main/resources/com/collectionloghelper/drop_rates.json). Each source includes world coordinates, kill time, drop table mechanics (`mutuallyExclusive`, `rollsPerKill`), and items with OSRS item IDs, decimal drop rates, pet flags, and wiki page links.
 
 ## Building
 
