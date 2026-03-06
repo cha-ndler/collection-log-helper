@@ -34,6 +34,7 @@ class ItemDetailPanel extends JPanel
 
 	ItemDetailPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
 		boolean locked, List<String> unmetRequirements,
+		int sourceObtained, int sourceTotal,
 		ItemManager itemManager, ClueCompletionEstimator clueEstimator,
 		Runnable onBack, Runnable onGuideMe, Runnable onStopGuidance,
 		boolean guidanceActive)
@@ -79,6 +80,7 @@ class ItemDetailPanel extends JPanel
 		info.append("<html><table width='195' cellpadding='3' cellspacing='0'>");
 
 		appendInfoRow(info, "Source:", source.getName());
+		appendInfoRow(info, "Progress:", sourceObtained + "/" + sourceTotal + " items");
 		appendInfoRow(info, "Category:", source.getCategory().getDisplayName());
 
 		boolean isGuaranteed = item.getDropRate() >= 1.0;
