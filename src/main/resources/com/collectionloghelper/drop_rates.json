@@ -5904,7 +5904,8 @@
       }
     ],
     "locationDescription": "Auburn Valley, north-west Varlamore",
-    "mutuallyExclusive": true
+    "mutuallyExclusive": true,
+    "rewardType": "MIXED"
   },
   {
     "name": "Trouble Brewing",
@@ -6548,7 +6549,8 @@
         "wikiPage": "Sandy_paint"
       }
     ],
-    "locationDescription": "Port Sarim docks, obtained via various Sailing activities"
+    "locationDescription": "Port Sarim docks, obtained via various Sailing activities",
+    "rewardType": "MIXED"
   },
   {
     "name": "Champion's Challenge",
@@ -7985,7 +7987,8 @@
         "wikiPage": "Smashed_mirror"
       }
     ],
-    "locationDescription": "Salvaging and treasure hunting during Sailing voyages"
+    "locationDescription": "Salvaging and treasure hunting during Sailing voyages",
+    "rewardType": "MIXED"
   },
   {
     "name": "Miscellaneous",
