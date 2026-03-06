@@ -6,6 +6,7 @@ import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.DropRateDatabase;
+import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
@@ -81,6 +82,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	}
 
 	private static final Color DATA_WARNING_COLOR = new Color(220, 50, 50);
+	private static final Color CLUE_SUMMARY_COLOR = new Color(200, 170, 50);
 
 	private final CollectionLogHelperConfig config;
 	private final DropRateDatabase database;
@@ -95,6 +97,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private final JLabel syncStatusLabel;
 	private final JLabel dataSyncWarningLabel;
+	private final JLabel clueSummaryLabel;
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<CollectionLogCategory> categorySelector;
@@ -169,6 +172,16 @@ public class CollectionLogHelperPanel extends PluginPanel
 		dataSyncWarningLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
 		dataSyncWarningLabel.setVisible(false);
 		controlsPanel.add(dataSyncWarningLabel);
+
+		// Clue summary label (shows unopened caskets/containers from bank scan)
+		clueSummaryLabel = new JLabel("", SwingConstants.CENTER);
+		clueSummaryLabel.setFont(FontManager.getRunescapeSmallFont());
+		clueSummaryLabel.setForeground(CLUE_SUMMARY_COLOR);
+		clueSummaryLabel.setAlignmentX(CENTER_ALIGNMENT);
+		clueSummaryLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
+		clueSummaryLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
+		clueSummaryLabel.setVisible(false);
+		controlsPanel.add(clueSummaryLabel);
 
 		controlsPanel.add(Box.createVerticalStrut(4));
 
@@ -360,6 +373,40 @@ public class CollectionLogHelperPanel extends PluginPanel
 				text.append("</center></html>");
 				dataSyncWarningLabel.setText(text.toString());
 				dataSyncWarningLabel.setVisible(true);
+			}
+			revalidate();
+		});
+	}
+
+	public void updateClueSummary(PlayerBankState bankState)
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			String casketSummary = bankState.getCasketSummary();
+			String containerSummary = bankState.getContainerSummary();
+
+			if (casketSummary == null && containerSummary == null)
+			{
+				clueSummaryLabel.setVisible(false);
+			}
+			else
+			{
+				StringBuilder text = new StringBuilder("<html><center>");
+				if (casketSummary != null)
+				{
+					text.append(casketSummary);
+				}
+				if (containerSummary != null)
+				{
+					if (casketSummary != null)
+					{
+						text.append("<br>");
+					}
+					text.append(containerSummary);
+				}
+				text.append("</center></html>");
+				clueSummaryLabel.setText(text.toString());
+				clueSummaryLabel.setVisible(true);
 			}
 			revalidate();
 		});
