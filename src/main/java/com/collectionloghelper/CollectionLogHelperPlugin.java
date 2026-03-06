@@ -3,6 +3,7 @@ package com.collectionloghelper;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
@@ -24,9 +25,11 @@ import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.MenuAction;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.api.InventoryID;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
+import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.ScriptPreFired;
 import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
@@ -115,6 +118,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private GuidanceMinimapOverlay guidanceMinimapOverlay;
 
+	@Inject
+	private DataSyncState dataSyncState;
+
 	/** Minimum tile movement before proximity view is refreshed. */
 	private static final int PROXIMITY_REFRESH_TILES = 10;
 
@@ -151,7 +157,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		panel = new CollectionLogHelperPanel(
 			config, database, collectionState, calculator, itemManager,
-			requirementsChecker,
+			requirementsChecker, dataSyncState,
 			this::activateGuidance, this::deactivateGuidance,
 			() -> cachedPlayerLocation);
 		panel.setMode(config.defaultMode());
@@ -206,7 +212,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		loginTickDelay = 0;
 		cachedPlayerLocation = null;
 		lastProximityLocation = null;
-		guidanceOverlay.setShowSyncReminder(false);
+		guidanceOverlay.setShowCollectionLogReminder(false);
+		guidanceOverlay.setShowBankReminder(false);
+		dataSyncState.reset();
 		collectionState.clearState();
 
 		log.info("Collection Log Helper stopped");
@@ -219,6 +227,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			// Wait a few ticks after login before sending the sync reminder
 			loginTickDelay = 10;
+			dataSyncState.reset();
+			dataSyncState.setLoginTimestamp(System.currentTimeMillis());
 			clientThread.invokeLater(() ->
 			{
 				collectionState.refreshVarps();
@@ -247,7 +257,9 @@ public class CollectionLogHelperPlugin extends Plugin
 			loginTickDelay = 0;
 			cachedPlayerLocation = null;
 			lastProximityLocation = null;
-			guidanceOverlay.setShowSyncReminder(false);
+			guidanceOverlay.setShowCollectionLogReminder(false);
+			guidanceOverlay.setShowBankReminder(false);
+			dataSyncState.reset();
 		}
 	}
 
@@ -319,6 +331,21 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (panel != null)
 			{
 				panel.rebuild();
+			}
+		}
+	}
+
+	@Subscribe
+	public void onItemContainerChanged(ItemContainerChanged event)
+	{
+		if (event.getContainerId() == InventoryID.BANK.getId() && !dataSyncState.isBankScanned())
+		{
+			dataSyncState.setBankScanned(true);
+			guidanceOverlay.setShowBankReminder(false);
+			log.info("Bank opened — marked as scanned for this session");
+			if (panel != null)
+			{
+				panel.updateDataSyncWarning();
 			}
 		}
 	}
@@ -420,7 +447,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				scriptScanActive = false;
 				hasCompletedFullSync = true;
-				guidanceOverlay.setShowSyncReminder(false);
+				dataSyncState.setCollectionLogSynced(true);
+				guidanceOverlay.setShowCollectionLogReminder(false);
 				int capturedCount = scriptScanItemCount;
 				log.info("Auto-sync complete: {} obtained items captured via script scan",
 					capturedCount);
@@ -428,23 +456,42 @@ public class CollectionLogHelperPlugin extends Plugin
 				if (panel != null)
 				{
 					panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED, capturedCount);
+					panel.updateDataSyncWarning();
 					panel.rebuild();
 				}
 			}
 		}
 
-		// Send a one-time sync reminder after login if no full sync has been done
-		if (loginTickDelay > 0 && config.showSyncReminder())
+		// Send one-time sync reminders after login
+		if (loginTickDelay > 0)
 		{
 			loginTickDelay--;
-			if (loginTickDelay == 0 && !hasCompletedFullSync && !syncReminderSent)
+			if (loginTickDelay == 0 && !syncReminderSent)
 			{
 				syncReminderSent = true;
-				guidanceOverlay.setShowSyncReminder(true);
-				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
-					"<col=00c8c8>[Collection Log Helper]</col> Open your in-game Collection Log (click the quest tab icon) to sync progress.",
-					null);
+				if (config.showSyncReminder() && !hasCompletedFullSync)
+				{
+					guidanceOverlay.setShowCollectionLogReminder(true);
+					client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
+						"<col=00c8c8>[Collection Log Helper]</col> Open your in-game Collection Log (click the quest tab icon) to sync progress.",
+						null);
+				}
+				if (config.showBankScanReminder() && !dataSyncState.isBankScanned())
+				{
+					guidanceOverlay.setShowBankReminder(true);
+				}
+				if (panel != null)
+				{
+					panel.updateDataSyncWarning();
+				}
 			}
+		}
+
+		// Auto-dismiss overlay reminders after 2 minutes
+		if (dataSyncState.isReminderExpired())
+		{
+			guidanceOverlay.setShowCollectionLogReminder(false);
+			guidanceOverlay.setShowBankReminder(false);
 		}
 
 		// Detect collection log closed
