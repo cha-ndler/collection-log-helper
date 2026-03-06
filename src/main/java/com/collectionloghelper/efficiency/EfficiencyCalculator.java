@@ -8,6 +8,8 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.RewardType;
+import com.collectionloghelper.data.SlayerCreatureDatabase;
+import com.collectionloghelper.data.SlayerTaskState;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -18,19 +20,31 @@ import javax.inject.Singleton;
 @Singleton
 public class EfficiencyCalculator
 {
+	/**
+	 * Score multiplier applied to sources that match the player's current Slayer task.
+	 * The player is already committed to killing these NPCs, so drops from task-relevant
+	 * bosses are effectively "free" efficiency.
+	 */
+	static final double SLAYER_TASK_BOOST = 1.5;
+
 	private final DropRateDatabase database;
 	private final PlayerCollectionState collectionState;
 	private final RequirementsChecker requirementsChecker;
 	private final CollectionLogHelperConfig config;
+	private final ClueCompletionEstimator clueEstimator;
+	private final SlayerTaskState slayerTaskState;
 
 	@Inject
 	private EfficiencyCalculator(DropRateDatabase database, PlayerCollectionState collectionState,
-		RequirementsChecker requirementsChecker, CollectionLogHelperConfig config)
+		RequirementsChecker requirementsChecker, CollectionLogHelperConfig config,
+		ClueCompletionEstimator clueEstimator, SlayerTaskState slayerTaskState)
 	{
 		this.database = database;
 		this.collectionState = collectionState;
 		this.requirementsChecker = requirementsChecker;
 		this.config = config;
+		this.clueEstimator = clueEstimator;
+		this.slayerTaskState = slayerTaskState;
 	}
 
 	public List<ScoredItem> rankByEfficiency()
@@ -46,7 +60,7 @@ public class EfficiencyCalculator
 				continue;
 			}
 
-			ScoredItem scored = scoreSource(source, locked);
+			ScoredItem scored = applySlayerBoost(scoreSource(source, locked));
 			if (scored != null)
 			{
 				results.add(scored);
@@ -80,7 +94,7 @@ public class EfficiencyCalculator
 				continue;
 			}
 
-			ScoredItem scored = scoreSourcePetsOnly(source, locked);
+			ScoredItem scored = applySlayerBoost(scoreSourcePetsOnly(source, locked));
 			if (scored != null)
 			{
 				results.add(scored);
@@ -91,6 +105,26 @@ public class EfficiencyCalculator
 			.comparing(ScoredItem::isLocked)
 			.thenComparing(Comparator.comparingDouble(ScoredItem::getScore).reversed()));
 		return results;
+	}
+
+	/**
+	 * Returns true if the given source is boosted by the player's current Slayer task.
+	 */
+	public boolean isOnSlayerTask(CollectionLogSource source)
+	{
+		return slayerTaskState.isTaskActive()
+			&& SlayerCreatureDatabase.isSourceOnTask(slayerTaskState.getCreatureName(), source.getName());
+	}
+
+	private ScoredItem applySlayerBoost(ScoredItem item)
+	{
+		if (item == null || !isOnSlayerTask(item.getSource()))
+		{
+			return item;
+		}
+		String boostedReasoning = item.getReasoning() + " [Slayer task x" + SLAYER_TASK_BOOST + "]";
+		return new ScoredItem(item.getSource(), item.getScore() * SLAYER_TASK_BOOST,
+			item.getMissingItemCount(), boostedReasoning, item.isLocked());
 	}
 
 	public ScoredItem scoreSource(CollectionLogSource source, boolean locked)
@@ -186,7 +220,10 @@ public class EfficiencyCalculator
 		int dropCount = missingCount - guaranteedCount;
 		double effectiveDropRate = source.isMutuallyExclusive() ? maxDropRate : dropDropRate;
 		double expectedKills = 1.0 / effectiveDropRate;
-		double expectedHours = expectedKills * (source.getKillTimeSeconds() / 3600.0);
+
+		// Use account-progression-aware clue completion time for CLUES sources
+		int killTimeSeconds = getEffectiveKillTime(source);
+		double expectedHours = expectedKills * (killTimeSeconds / 3600.0);
 		double dropScore = (dropCount / expectedHours) * 100.0;
 
 		// MIXED sources: combine drop score with guaranteed item score
@@ -212,6 +249,24 @@ public class EfficiencyCalculator
 		}
 
 		return new ScoredItem(source, score, missingCount, reasoning, locked);
+	}
+
+	/**
+	 * Returns the effective kill/completion time for a source. For CLUES sources,
+	 * uses the account-progression-aware estimate from {@link ClueCompletionEstimator}.
+	 * For all other sources, returns the fixed killTimeSeconds from the database.
+	 */
+	int getEffectiveKillTime(CollectionLogSource source)
+	{
+		if (source.getCategory() == CollectionLogCategory.CLUES)
+		{
+			int estimated = clueEstimator.estimateCompletionSeconds(source.getName());
+			if (estimated > 0)
+			{
+				return estimated;
+			}
+		}
+		return source.getKillTimeSeconds();
 	}
 
 	private ScoredItem scoreSourcePetsOnly(CollectionLogSource source, boolean locked)
@@ -306,7 +361,8 @@ public class EfficiencyCalculator
 		int dropCount = missingPetCount - guaranteedCount;
 		double effectiveDropRate = source.isMutuallyExclusive() ? maxDropRate : dropDropRate;
 		double expectedKills = 1.0 / effectiveDropRate;
-		double expectedHours = expectedKills * (source.getKillTimeSeconds() / 3600.0);
+		int killTimeSeconds = getEffectiveKillTime(source);
+		double expectedHours = expectedKills * (killTimeSeconds / 3600.0);
 		double dropScore = (dropCount / expectedHours) * 100.0;
 
 		// MIXED sources: combine drop score with guaranteed pet score

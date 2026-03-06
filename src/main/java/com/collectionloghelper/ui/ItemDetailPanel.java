@@ -1,7 +1,9 @@
 package com.collectionloghelper.ui;
 
+import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -32,7 +34,8 @@ class ItemDetailPanel extends JPanel
 
 	ItemDetailPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
 		boolean locked, List<String> unmetRequirements,
-		ItemManager itemManager, Runnable onBack, Runnable onGuideMe, Runnable onStopGuidance,
+		ItemManager itemManager, ClueCompletionEstimator clueEstimator,
+		Runnable onBack, Runnable onGuideMe, Runnable onStopGuidance,
 		boolean guidanceActive)
 	{
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -81,10 +84,22 @@ class ItemDetailPanel extends JPanel
 		long denominator = item.getDropRate() > 0 ? Math.round(1.0 / item.getDropRate()) : 0;
 		appendInfoRow(info, "Drop Rate:", denominator > 0 ? "1/" + denominator : "N/A");
 
-		boolean hideLocationDetails = source.getCategory() == com.collectionloghelper.data.CollectionLogCategory.CLUES
+		boolean isClueSource = source.getCategory() == CollectionLogCategory.CLUES;
+		boolean hideLocationDetails = isClueSource
 			|| (source.getRewardType() == com.collectionloghelper.data.RewardType.SHOP
 				&& source.getItems().stream().allMatch(i -> i.getDropRate() >= 1.0));
-		if (!hideLocationDetails)
+		if (isClueSource && clueEstimator != null)
+		{
+			int estSeconds = clueEstimator.estimateCompletionSeconds(source.getName());
+			if (estSeconds > 0)
+			{
+				String bucketName = clueEstimator.getBucket().getDisplayName();
+				appendInfoRow(info, "Est. Time:",
+					"~" + ClueCompletionEstimator.formatTime(estSeconds)
+						+ " (" + bucketName.toLowerCase() + ")");
+			}
+		}
+		else if (!hideLocationDetails)
 		{
 			appendInfoRow(info, "Kill Time:", source.getKillTimeSeconds() + "s");
 			appendInfoRow(info, "Location:", source.getDisplayLocation());

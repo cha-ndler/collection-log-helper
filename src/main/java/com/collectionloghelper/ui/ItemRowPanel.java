@@ -21,6 +21,7 @@ class ItemRowPanel extends JPanel
 	private static final Color OBTAINED_COLOR = new Color(0, 100, 0, 80);
 	private static final Color LOCKED_COLOR = new Color(50, 40, 40);
 	private static final Color LOCKED_TEXT_COLOR = new Color(160, 140, 140);
+	private static final Color SLAYER_TASK_BORDER_COLOR = new Color(140, 60, 200);
 	private static final Dimension ROW_SIZE = new Dimension(0, 36);
 
 	private final CollectionLogItem item;
@@ -28,6 +29,13 @@ class ItemRowPanel extends JPanel
 
 	ItemRowPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
 		double score, boolean locked, ItemManager itemManager, Runnable onClick)
+	{
+		this(item, source, obtained, score, locked, false, itemManager, onClick);
+	}
+
+	ItemRowPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
+		double score, boolean locked, boolean onSlayerTask, ItemManager itemManager,
+		Runnable onClick)
 	{
 		this.item = item;
 		this.source = source;
@@ -47,7 +55,16 @@ class ItemRowPanel extends JPanel
 		}
 
 		setLayout(new BorderLayout(5, 0));
-		setBorder(BorderFactory.createEmptyBorder(4, 6, 4, 6));
+		if (onSlayerTask && !obtained)
+		{
+			setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(0, 3, 0, 0, SLAYER_TASK_BORDER_COLOR),
+				BorderFactory.createEmptyBorder(4, 3, 4, 6)));
+		}
+		else
+		{
+			setBorder(BorderFactory.createEmptyBorder(4, 6, 4, 6));
+		}
 		setBackground(bgColor);
 		setPreferredSize(ROW_SIZE);
 		setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));

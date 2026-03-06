@@ -9,6 +9,8 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
+import com.collectionloghelper.data.SlayerTaskState;
+import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import java.awt.BorderLayout;
@@ -83,14 +85,17 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private static final Color DATA_WARNING_COLOR = new Color(220, 50, 50);
 	private static final Color CLUE_SUMMARY_COLOR = new Color(200, 170, 50);
+	private static final Color SLAYER_TASK_COLOR = new Color(180, 80, 220);
 
 	private final CollectionLogHelperConfig config;
 	private final DropRateDatabase database;
 	private final PlayerCollectionState collectionState;
 	private final EfficiencyCalculator calculator;
+	private final ClueCompletionEstimator clueEstimator;
 	private final ItemManager itemManager;
 	private final RequirementsChecker requirementsChecker;
 	private final DataSyncState dataSyncState;
+	private final SlayerTaskState slayerTaskState;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Supplier<WorldPoint> playerLocationSupplier;
@@ -98,6 +103,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final JLabel syncStatusLabel;
 	private final JLabel dataSyncWarningLabel;
 	private final JLabel clueSummaryLabel;
+	private final JLabel slayerTaskLabel;
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<CollectionLogCategory> categorySelector;
@@ -121,8 +127,10 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
 		DropRateDatabase database, PlayerCollectionState collectionState,
-		EfficiencyCalculator calculator, ItemManager itemManager,
+		EfficiencyCalculator calculator, ClueCompletionEstimator clueEstimator,
+		ItemManager itemManager,
 		RequirementsChecker requirementsChecker, DataSyncState dataSyncState,
+		SlayerTaskState slayerTaskState,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
 		Supplier<WorldPoint> playerLocationSupplier)
 	{
@@ -130,9 +138,11 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.database = database;
 		this.collectionState = collectionState;
 		this.calculator = calculator;
+		this.clueEstimator = clueEstimator;
 		this.itemManager = itemManager;
 		this.requirementsChecker = requirementsChecker;
 		this.dataSyncState = dataSyncState;
+		this.slayerTaskState = slayerTaskState;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.playerLocationSupplier = playerLocationSupplier;
@@ -182,6 +192,16 @@ public class CollectionLogHelperPanel extends PluginPanel
 		clueSummaryLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
 		clueSummaryLabel.setVisible(false);
 		controlsPanel.add(clueSummaryLabel);
+
+		// Slayer task indicator
+		slayerTaskLabel = new JLabel("", SwingConstants.CENTER);
+		slayerTaskLabel.setFont(FontManager.getRunescapeSmallFont());
+		slayerTaskLabel.setForeground(SLAYER_TASK_COLOR);
+		slayerTaskLabel.setAlignmentX(CENTER_ALIGNMENT);
+		slayerTaskLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+		slayerTaskLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
+		slayerTaskLabel.setVisible(false);
+		controlsPanel.add(slayerTaskLabel);
 
 		controlsPanel.add(Box.createVerticalStrut(4));
 
@@ -321,6 +341,20 @@ public class CollectionLogHelperPanel extends PluginPanel
 		completionLabel.setText(String.format("Collection Log: %d/%d (%.1f%%)", obtained, total, pct));
 	}
 
+	private void updateSlayerTaskLabel()
+	{
+		if (slayerTaskState.isTaskActive())
+		{
+			slayerTaskLabel.setText("Slayer: " + slayerTaskState.getCreatureName()
+				+ " (" + slayerTaskState.getRemaining() + " remaining)");
+			slayerTaskLabel.setVisible(true);
+		}
+		else
+		{
+			slayerTaskLabel.setVisible(false);
+		}
+	}
+
 	public void updateSyncStatus(SyncState state, int itemCount)
 	{
 		SwingUtilities.invokeLater(() ->
@@ -441,6 +475,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 				SwingUtil.fastRemoveAll(listContainer);
 				updateCompletionHeader();
+				updateSlayerTaskLabel();
 
 				switch (currentMode)
 				{
@@ -541,6 +576,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 		for (ScoredItem si : scored)
 		{
+			boolean onTask = calculator.isOnSlayerTask(si.getSource());
 			for (CollectionLogItem item : si.getSource().getItems())
 			{
 				boolean obtained = collectionState.isItemObtained(item.getItemId());
@@ -549,7 +585,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 					continue;
 				}
 				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
-					si.getScore(), si.isLocked(), itemManager,
+					si.getScore(), si.isLocked(), onTask, itemManager,
 					() -> showDetail(item, si.getSource()));
 				listContainer.add(row);
 			}
@@ -597,6 +633,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 				continue;
 			}
 
+			boolean onTask = calculator.isOnSlayerTask(source);
 			for (CollectionLogItem item : source.getItems())
 			{
 				if (item.getName().toLowerCase().contains(query)
@@ -608,7 +645,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 						continue;
 					}
 					ItemRowPanel row = new ItemRowPanel(item, source, obtained, 0,
-						locked, itemManager, () -> showDetail(item, source));
+						locked, onTask, itemManager, () -> showDetail(item, source));
 					listContainer.add(row);
 				}
 			}
@@ -622,6 +659,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 		for (ScoredItem si : scored)
 		{
+			boolean onTask = calculator.isOnSlayerTask(si.getSource());
 			for (CollectionLogItem item : si.getSource().getItems())
 			{
 				if (!item.isPet())
@@ -634,7 +672,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 					continue;
 				}
 				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
-					si.getScore(), si.isLocked(), itemManager,
+					si.getScore(), si.isLocked(), onTask, itemManager,
 					() -> showDetail(item, si.getSource()));
 				listContainer.add(row);
 			}
@@ -778,6 +816,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 			sourceHeader.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
 			listContainer.add(sourceHeader);
 
+			boolean onTask = calculator.isOnSlayerTask(source);
 			for (CollectionLogItem item : source.getItems())
 			{
 				boolean obtained = collectionState.isItemObtained(item.getItemId());
@@ -786,7 +825,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 					continue;
 				}
 				ItemRowPanel row = new ItemRowPanel(item, source, obtained,
-					sd.missingCount, sd.locked, itemManager,
+					sd.missingCount, sd.locked, onTask, itemManager,
 					() -> showDetail(item, source));
 				listContainer.add(row);
 			}
@@ -830,7 +869,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		ItemDetailPanel detail = new ItemDetailPanel(
 			item, source, obtained, locked,
 			requirementsChecker.getUnmetRequirements(source.getName()),
-			itemManager,
+			itemManager, clueEstimator,
 			this::showListView,
 			() -> guidanceActivator.accept(source),
 			() -> guidanceDeactivator.run(),
