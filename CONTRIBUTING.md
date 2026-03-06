@@ -26,6 +26,8 @@ Each source represents a single collection log category (e.g., "General Graardor
   "worldY": 5354,
   "worldPlane": 2,
   "killTimeSeconds": 90,
+  "mutuallyExclusive": true,
+  "rollsPerKill": 2,
   "items": [ ... ]
 }
 ```
@@ -38,6 +40,11 @@ Each source represents a single collection log category (e.g., "General Graardor
 | `worldY` | int | Yes | Y coordinate of the boss/activity location |
 | `worldPlane` | int | Yes | World plane (0 = surface, 1+ = upper floors, etc.) |
 | `killTimeSeconds` | int | Yes | Average kill/completion time in seconds for an efficient mid-to-late-game setup |
+| `mutuallyExclusive` | boolean | No | Set `true` if only one unique can drop per kill (GWD, raids, clue caskets, etc.). Defaults to `false`. See [Drop Table Mechanics](#drop-table-mechanics) |
+| `rollsPerKill` | int | No | Number of drop rolls per kill/completion. Defaults to `1`. Set for multi-roll sources (e.g., Zulrah: 2, Wintertodt: 10). See [Drop Table Mechanics](#drop-table-mechanics) |
+| `rewardType` | string | No | One of: `DROP` (default), `SHOP`, `MIXED`, `GUARANTEED`, `MILESTONE`. Controls how the scoring algorithm handles the source |
+| `locationDescription` | string | No | Human-readable location text shown in the item detail panel |
+| `pointsPerHour` | double | No | Points earned per hour for `SHOP` sources (used in scoring) |
 | `items` | array | Yes | List of `CollectionLogItem` objects |
 
 ### `CollectionLogItem`
@@ -100,16 +107,31 @@ The `wikiPage` field is the URL path segment after `/w/` on the OSRS Wiki:
 
 ## Special Cases
 
+### Drop Table Mechanics
+
+The scoring algorithm needs to know how a source's drop table works to calculate efficiency correctly.
+
+**`mutuallyExclusive`** — Set to `true` when only one unique can drop per kill. This prevents the algorithm from summing all missing item rates (which would massively overestimate efficiency). Instead, it uses the highest single item rate. Examples:
+- All GWD bosses (one unique roll per kill from a shared table)
+- Raids (one unique per completion: CoX, ToB, ToA)
+- Clue caskets (one unique per casket opening)
+- Barrows (one item per chest)
+
+**`rollsPerKill`** — Set when a source gives multiple independent drop rolls per kill/completion. The algorithm computes the effective per-kill rate as `1 - (1 - perRollRate)^rollsPerKill`. When using this field, item `dropRate` values should be **per-roll** rates. Examples:
+- Zulrah: 2 rolls per kill
+- Grotesque Guardians: 2 rolls per kill
+- Wintertodt: ~10 rolls per game (mid-level assumption)
+
 ### Clue Scroll Items
 
-Clue items drop from **caskets**, not from kills. The `dropRate` should reflect the chance per casket opened, not per clue scroll obtained. The `killTimeSeconds` is the average time to complete one clue of that tier.
+Clue items drop from **caskets**, not from kills. The `dropRate` should reflect the chance per casket opened, not per clue scroll obtained. The `killTimeSeconds` is the average time to complete one clue of that tier. All clue sources should be tagged `mutuallyExclusive: true`.
 
 ### Raids (Point-Based Scaling)
 
-Raid drop rates scale with contribution points. Use the **base rate** (solo, max points) from the wiki. The plugin's efficiency calculator accounts for this.
+Raid drop rates scale with contribution points. All raids should be tagged `mutuallyExclusive: true` since only one unique drops per completion.
 
-- **Chambers of Xeric**: Rates per 570,000 points (max solo)
-- **Theatre of Blood**: Rates per completion
+- **Chambers of Xeric**: Rates scaled to a ~30,000 point raid (~3.45% unique chance), with correct item weights
+- **Theatre of Blood**: Weighted rates per 4-man completion (~1/9.1 unique chance, items weighted by rarity)
 - **Tombs of Amascut**: Rates per 300 invocation-level completion
 
 ### "All Pets" View
