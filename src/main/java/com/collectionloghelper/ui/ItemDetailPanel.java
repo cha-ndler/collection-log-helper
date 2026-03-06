@@ -81,8 +81,14 @@ class ItemDetailPanel extends JPanel
 		long denominator = item.getDropRate() > 0 ? Math.round(1.0 / item.getDropRate()) : 0;
 		appendInfoRow(info, "Drop Rate:", denominator > 0 ? "1/" + denominator : "N/A");
 
-		appendInfoRow(info, "Kill Time:", source.getKillTimeSeconds() + "s");
-		appendInfoRow(info, "Location:", source.getDisplayLocation());
+		boolean hideLocationDetails = source.getCategory() == com.collectionloghelper.data.CollectionLogCategory.CLUES
+			|| (source.getRewardType() == com.collectionloghelper.data.RewardType.SHOP
+				&& source.getItems().stream().allMatch(i -> i.getDropRate() >= 1.0));
+		if (!hideLocationDetails)
+		{
+			appendInfoRow(info, "Kill Time:", source.getKillTimeSeconds() + "s");
+			appendInfoRow(info, "Location:", source.getDisplayLocation());
+		}
 		appendInfoRow(info, "Status:", obtained ? "Obtained" : "Missing");
 
 		if (item.isPet())
