@@ -8,6 +8,8 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
+import com.collectionloghelper.data.SlayerTaskState;
+import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
@@ -111,6 +113,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private EfficiencyCalculator calculator;
 
 	@Inject
+	private ClueCompletionEstimator clueEstimator;
+
+	@Inject
 	private RequirementsChecker requirementsChecker;
 
 	@Inject
@@ -124,6 +129,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private PlayerBankState playerBankState;
+
+	@Inject
+	private SlayerTaskState slayerTaskState;
 
 	/** Minimum tile movement before proximity view is refreshed. */
 	private static final int PROXIMITY_REFRESH_TILES = 10;
@@ -160,8 +168,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		database.load();
 
 		panel = new CollectionLogHelperPanel(
-			config, database, collectionState, calculator, itemManager,
-			requirementsChecker, dataSyncState,
+			config, database, collectionState, calculator, clueEstimator,
+			itemManager, requirementsChecker, dataSyncState, slayerTaskState,
 			this::activateGuidance, this::deactivateGuidance,
 			() -> cachedPlayerLocation);
 		panel.setMode(config.defaultMode());
@@ -220,6 +228,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceOverlay.setShowBankReminder(false);
 		dataSyncState.reset();
 		playerBankState.reset();
+		slayerTaskState.reset();
 		collectionState.clearState();
 
 		log.info("Collection Log Helper stopped");
@@ -252,6 +261,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			collectionState.clearState();
 			requirementsChecker.clearCache();
+			clueEstimator.resetBucket();
+			slayerTaskState.reset();
 			lastObtainedCount = -1;
 			collectionLogOpen = false;
 			autoSyncPending = false;
@@ -275,6 +286,17 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Runs on the client thread — safe to call client API
 		collectionState.refreshVarps();
 
+		// Refresh Slayer task state and rebuild if the task changed
+		boolean wasActive = slayerTaskState.isTaskActive();
+		String oldCreature = slayerTaskState.getCreatureName();
+		int oldRemaining = slayerTaskState.getRemaining();
+		slayerTaskState.refresh();
+
+		boolean slayerChanged = wasActive != slayerTaskState.isTaskActive()
+			|| (slayerTaskState.getCreatureName() != null
+				&& !slayerTaskState.getCreatureName().equals(oldCreature))
+			|| slayerTaskState.getRemaining() != oldRemaining;
+
 		// Don't trigger rebuilds mid-scan; the settle logic in onGameTick
 		// will fire a single rebuild once script 4100 stops firing.
 		if (scriptScanActive)
@@ -283,13 +305,13 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		int currentCount = collectionState.getTotalObtained();
-		if (currentCount == lastObtainedCount)
+		if (currentCount != lastObtainedCount)
 		{
-			return;
+			lastObtainedCount = currentCount;
+			slayerChanged = true; // rebuild anyway
 		}
 
-		lastObtainedCount = currentCount;
-		if (panel != null)
+		if (slayerChanged && panel != null)
 		{
 			panel.rebuild();
 		}
