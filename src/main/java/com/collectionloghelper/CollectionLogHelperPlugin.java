@@ -5,6 +5,7 @@ import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.DropRateDatabase;
+import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
@@ -121,6 +122,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private DataSyncState dataSyncState;
 
+	@Inject
+	private PlayerBankState playerBankState;
+
 	/** Minimum tile movement before proximity view is refreshed. */
 	private static final int PROXIMITY_REFRESH_TILES = 10;
 
@@ -215,6 +219,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceOverlay.setShowCollectionLogReminder(false);
 		guidanceOverlay.setShowBankReminder(false);
 		dataSyncState.reset();
+		playerBankState.reset();
 		collectionState.clearState();
 
 		log.info("Collection Log Helper stopped");
@@ -260,6 +265,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			guidanceOverlay.setShowCollectionLogReminder(false);
 			guidanceOverlay.setShowBankReminder(false);
 			dataSyncState.reset();
+			playerBankState.reset();
 		}
 	}
 
@@ -338,14 +344,26 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged event)
 	{
-		if (event.getContainerId() == InventoryID.BANK.getId() && !dataSyncState.isBankScanned())
+		if (event.getContainerId() == InventoryID.BANK.getId())
 		{
-			dataSyncState.setBankScanned(true);
-			guidanceOverlay.setShowBankReminder(false);
-			log.info("Bank opened — marked as scanned for this session");
+			// Scan bank for clue-related items every time it updates
+			net.runelite.api.ItemContainer bankContainer = client.getItemContainer(InventoryID.BANK);
+			if (bankContainer != null)
+			{
+				playerBankState.scanBank(bankContainer);
+			}
+
+			if (!dataSyncState.isBankScanned())
+			{
+				dataSyncState.setBankScanned(true);
+				guidanceOverlay.setShowBankReminder(false);
+				log.info("Bank opened — marked as scanned for this session");
+			}
+
 			if (panel != null)
 			{
 				panel.updateDataSyncWarning();
+				panel.updateClueSummary(playerBankState);
 			}
 		}
 	}
