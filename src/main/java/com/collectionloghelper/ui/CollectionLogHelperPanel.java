@@ -9,10 +9,12 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
+import com.collectionloghelper.data.SlayerCreatureDatabase;
 import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
+import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -96,6 +98,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final RequirementsChecker requirementsChecker;
 	private final DataSyncState dataSyncState;
 	private final SlayerTaskState slayerTaskState;
+	private final SlayerStrategyCalculator slayerStrategyCalculator;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Supplier<WorldPoint> playerLocationSupplier;
@@ -117,6 +120,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private final JPanel clueGuidanceBanner;
 	private final JLabel clueGuidanceLabel;
+	private final JPanel slayerStrategyPanel;
+	private final JLabel slayerStrategyLabel;
+	private boolean slayerStrategyExpanded = false;
 
 	private Mode currentMode = Mode.EFFICIENT;
 	private boolean rebuilding = false;
@@ -131,6 +137,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		ItemManager itemManager,
 		RequirementsChecker requirementsChecker, DataSyncState dataSyncState,
 		SlayerTaskState slayerTaskState,
+		SlayerStrategyCalculator slayerStrategyCalculator,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
 		Supplier<WorldPoint> playerLocationSupplier)
 	{
@@ -143,6 +150,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.requirementsChecker = requirementsChecker;
 		this.dataSyncState = dataSyncState;
 		this.slayerTaskState = slayerTaskState;
+		this.slayerStrategyCalculator = slayerStrategyCalculator;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.playerLocationSupplier = playerLocationSupplier;
@@ -202,6 +210,43 @@ public class CollectionLogHelperPanel extends PluginPanel
 		slayerTaskLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
 		slayerTaskLabel.setVisible(false);
 		controlsPanel.add(slayerTaskLabel);
+
+		// Slayer strategy advisor panel (expandable, below task indicator)
+		slayerStrategyPanel = new JPanel();
+		slayerStrategyPanel.setLayout(new BoxLayout(slayerStrategyPanel, BoxLayout.Y_AXIS));
+		slayerStrategyPanel.setBackground(new Color(35, 25, 50));
+		slayerStrategyPanel.setBorder(BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(new Color(140, 60, 180), 1),
+			BorderFactory.createEmptyBorder(4, 6, 4, 6)
+		));
+		slayerStrategyPanel.setAlignmentX(CENTER_ALIGNMENT);
+		slayerStrategyPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		slayerStrategyPanel.setVisible(false);
+
+		JButton strategyToggle = new JButton("Slayer Strategy");
+		strategyToggle.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
+		strategyToggle.setForeground(new Color(180, 80, 220));
+		strategyToggle.setBackground(new Color(35, 25, 50));
+		strategyToggle.setBorderPainted(false);
+		strategyToggle.setFocusPainted(false);
+		strategyToggle.setContentAreaFilled(false);
+		strategyToggle.setAlignmentX(LEFT_ALIGNMENT);
+		strategyToggle.setMaximumSize(new Dimension(Integer.MAX_VALUE, 18));
+		strategyToggle.addActionListener(e ->
+		{
+			slayerStrategyExpanded = !slayerStrategyExpanded;
+			updateSlayerStrategy();
+		});
+		slayerStrategyPanel.add(strategyToggle);
+
+		slayerStrategyLabel = new JLabel();
+		slayerStrategyLabel.setFont(FontManager.getRunescapeSmallFont());
+		slayerStrategyLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+		slayerStrategyLabel.setAlignmentX(LEFT_ALIGNMENT);
+		slayerStrategyLabel.setVisible(false);
+		slayerStrategyPanel.add(slayerStrategyLabel);
+
+		controlsPanel.add(slayerStrategyPanel);
 
 		controlsPanel.add(Box.createVerticalStrut(4));
 
@@ -348,11 +393,75 @@ public class CollectionLogHelperPanel extends PluginPanel
 			slayerTaskLabel.setText("Slayer: " + slayerTaskState.getCreatureName()
 				+ " (" + slayerTaskState.getRemaining() + " remaining)");
 			slayerTaskLabel.setVisible(true);
+			slayerStrategyPanel.setVisible(true);
 		}
 		else
 		{
 			slayerTaskLabel.setVisible(false);
+			slayerStrategyPanel.setVisible(false);
 		}
+		updateSlayerStrategy();
+	}
+
+	private void updateSlayerStrategy()
+	{
+		if (!slayerStrategyPanel.isVisible() || !slayerStrategyExpanded)
+		{
+			slayerStrategyLabel.setVisible(false);
+			slayerStrategyPanel.revalidate();
+			return;
+		}
+
+		StringBuilder sb = new StringBuilder("<html>");
+
+		// Current task assessment
+		if (slayerTaskState.isTaskActive())
+		{
+			String creature = slayerTaskState.getCreatureName();
+			List<String> usefulSources = slayerStrategyCalculator.getUsefulSourcesForCreature(creature);
+			int missingItems = slayerStrategyCalculator.getMissingItemsForCreature(creature);
+			if (!usefulSources.isEmpty())
+			{
+				sb.append("<b>Current task:</b> ");
+				sb.append(String.join(", ", usefulSources));
+				sb.append(" (").append(missingItems).append(" missing)");
+			}
+			else
+			{
+				List<String> allSources = SlayerCreatureDatabase.getSourcesForCreature(creature);
+				if (!allSources.isEmpty())
+				{
+					sb.append("<b>Current task:</b> All items obtained");
+				}
+				else
+				{
+					sb.append("<b>Current task:</b> No boss variants");
+				}
+			}
+			sb.append("<br>");
+		}
+
+		// Recommended master
+		String recommended = slayerStrategyCalculator.getRecommendedMaster();
+		if (recommended != null)
+		{
+			sb.append("<b>Best master:</b> ").append(recommended).append("<br>");
+		}
+
+		// Recommended blocks
+		if (recommended != null)
+		{
+			List<String> blocks = slayerStrategyCalculator.getRecommendedBlockList(recommended);
+			if (!blocks.isEmpty())
+			{
+				sb.append("<b>Block:</b> ").append(String.join(", ", blocks));
+			}
+		}
+
+		sb.append("</html>");
+		slayerStrategyLabel.setText(sb.toString());
+		slayerStrategyLabel.setVisible(true);
+		slayerStrategyPanel.revalidate();
 	}
 
 	public void updateSyncStatus(SyncState state, int itemCount)
