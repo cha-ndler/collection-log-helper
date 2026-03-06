@@ -81,13 +81,33 @@ class ItemDetailPanel extends JPanel
 		appendInfoRow(info, "Source:", source.getName());
 		appendInfoRow(info, "Category:", source.getCategory().getDisplayName());
 
-		long denominator = item.getDropRate() > 0 ? Math.round(1.0 / item.getDropRate()) : 0;
-		appendInfoRow(info, "Drop Rate:", denominator > 0 ? "1/" + denominator : "N/A");
+		boolean isGuaranteed = item.getDropRate() >= 1.0;
+		if (isGuaranteed && item.getPointCost() > 0)
+		{
+			appendInfoRow(info, "Cost:", item.getPointCost() + " pts");
+			if (source.getPointsPerHour() > 0)
+			{
+				double hours = (double) item.getPointCost() / source.getPointsPerHour();
+				appendInfoRow(info, "Est. Time:", "~" + ClueCompletionEstimator.formatTime((int) (hours * 3600)));
+			}
+		}
+		else if (isGuaranteed && item.getMilestoneKills() > 0)
+		{
+			appendInfoRow(info, "Milestone:", item.getMilestoneKills() + " kills");
+			if (source.getKillTimeSeconds() > 0)
+			{
+				double hours = item.getMilestoneKills() * (source.getKillTimeSeconds() / 3600.0);
+				appendInfoRow(info, "Est. Time:", "~" + ClueCompletionEstimator.formatTime((int) (hours * 3600)));
+			}
+		}
+		else
+		{
+			long denominator = item.getDropRate() > 0 ? Math.round(1.0 / item.getDropRate()) : 0;
+			appendInfoRow(info, "Drop Rate:", denominator > 0 ? "1/" + denominator : "N/A");
+		}
 
 		boolean isClueSource = source.getCategory() == CollectionLogCategory.CLUES;
-		boolean hideLocationDetails = isClueSource
-			|| (source.getRewardType() == com.collectionloghelper.data.RewardType.SHOP
-				&& source.getItems().stream().allMatch(i -> i.getDropRate() >= 1.0));
+		boolean hideLocationDetails = isClueSource || isGuaranteed;
 		if (isClueSource && clueEstimator != null)
 		{
 			int estSeconds = clueEstimator.estimateCompletionSeconds(source.getName());

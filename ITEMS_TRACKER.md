@@ -188,7 +188,6 @@ This document tracks every OSRS Collection Log category and our progress toward 
 
 | Topic | Description | Issue |
 |-------|-------------|-------|
-| Slayer Strategy | Skip/block advisor, task weights, master selection | [#143](../../issues/143) |
 | Future Improvements | Account-specific kill times, raid scaling, CA/diary modifiers, Wiki API integration | [#134](../../issues/134) |
 
 ---
