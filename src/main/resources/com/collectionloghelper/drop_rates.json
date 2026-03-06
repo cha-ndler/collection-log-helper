@@ -469,7 +469,7 @@
       {
         "itemId": 13231,
         "name": "Primordial crystal",
-        "dropRate": 0.001923,
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Primordial_crystal"
@@ -477,7 +477,7 @@
       {
         "itemId": 13229,
         "name": "Pegasian crystal",
-        "dropRate": 0.001923,
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pegasian_crystal"
@@ -485,7 +485,7 @@
       {
         "itemId": 13227,
         "name": "Eternal crystal",
-        "dropRate": 0.001923,
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Eternal_crystal"
@@ -493,7 +493,7 @@
       {
         "itemId": 13233,
         "name": "Smouldering stone",
-        "dropRate": 0.001923,
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Smouldering_stone"
@@ -561,7 +561,7 @@
       {
         "itemId": 22988,
         "name": "Hydra tail",
-        "dropRate": 0.00195,
+        "dropRate": 0.001946,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra_tail"

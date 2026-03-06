@@ -200,6 +200,10 @@ class ItemRowPanel extends JPanel
 		{
 			return "N/A";
 		}
+		if (rate >= 1.0)
+		{
+			return "Guaranteed";
+		}
 		long denominator = Math.round(1.0 / rate);
 		return "1/" + denominator;
 	}
