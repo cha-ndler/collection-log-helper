@@ -3780,8 +3780,7 @@
       }
     ],
     "locationDescription": "Revenant Caves, Wilderness",
-    "rewardType": "MIXED",
-    "mutuallyExclusive": true
+    "rewardType": "MIXED"
   },
   {
     "name": "Slayer",
@@ -4614,7 +4613,7 @@
     "worldX": 3459,
     "worldY": 3299,
     "worldPlane": 0,
-    "killTimeSeconds": 180,
+    "killTimeSeconds": 300,
     "requirements": {
       "quests": [
         "SHADES_OF_MORTTON"
@@ -6599,7 +6598,7 @@
     "worldX": 3222,
     "worldY": 3501,
     "worldPlane": 0,
-    "killTimeSeconds": 120,
+    "killTimeSeconds": 300,
     "items": [
       {
         "itemId": 28626,
@@ -7145,7 +7144,7 @@
     "worldX": 2520,
     "worldY": 3571,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 180,
     "items": [
       {
         "itemId": 11341,
@@ -7825,7 +7824,7 @@
     "worldX": 3222,
     "worldY": 3218,
     "worldPlane": 0,
-    "killTimeSeconds": 120,
+    "killTimeSeconds": 600,
     "items": [
       {
         "itemId": 3057,
