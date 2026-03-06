@@ -199,4 +199,4 @@ This document tracks every OSRS Collection Log category and our progress toward 
 | Done (no priority) | 128 | 128 | 0 | 0 |
 | **Total** | **128** | **128** | **0** | **0** |
 
-*All 128 sources are complete with verified item IDs. Drop rates audited March 2026 — see [accuracy overhaul](../../issues/135) for details.*
+*All 128 sources are complete with verified item IDs and shop economics. Drop rates audited March 2026; scoring formula corrected (linearity of expectation, milestone max, SHOP/MIXED economics).*
