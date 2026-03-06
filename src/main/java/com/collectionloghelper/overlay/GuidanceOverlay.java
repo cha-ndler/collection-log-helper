@@ -29,7 +29,8 @@ public class GuidanceOverlay extends OverlayPanel
 	private volatile String targetName;
 	private volatile String locationDescription;
 	private volatile String clueGuidanceText;
-	private volatile boolean showSyncReminder;
+	private volatile boolean showCollectionLogReminder;
+	private volatile boolean showBankReminder;
 
 	@Inject
 	private GuidanceOverlay(Client client, CollectionLogHelperConfig config)
@@ -48,6 +49,8 @@ public class GuidanceOverlay extends OverlayPanel
 	{
 		Color overlayColor = config.overlayColor();
 
+		boolean hasReminder = showCollectionLogReminder || showBankReminder;
+
 		if (targetPoint == null)
 		{
 			if (clueGuidanceText != null)
@@ -57,14 +60,14 @@ public class GuidanceOverlay extends OverlayPanel
 					.text(clueGuidanceText)
 					.color(Color.WHITE)
 					.build());
-				addSyncReminderIfNeeded();
+				addSyncRemindersIfNeeded();
 				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
 				return super.render(graphics);
 			}
-			if (showSyncReminder)
+			if (hasReminder)
 			{
 				panelComponent.getChildren().clear();
-				addSyncReminderIfNeeded();
+				addSyncRemindersIfNeeded();
 				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
 				return super.render(graphics);
 			}
@@ -91,7 +94,7 @@ public class GuidanceOverlay extends OverlayPanel
 						.leftColor(Color.WHITE)
 						.build());
 				}
-				addSyncReminderIfNeeded();
+				addSyncRemindersIfNeeded();
 				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
 				return super.render(graphics);
 			}
@@ -139,9 +142,14 @@ public class GuidanceOverlay extends OverlayPanel
 		this.clueGuidanceText = clueGuidanceText;
 	}
 
-	public void setShowSyncReminder(boolean show)
+	public void setShowCollectionLogReminder(boolean show)
 	{
-		this.showSyncReminder = show;
+		this.showCollectionLogReminder = show;
+	}
+
+	public void setShowBankReminder(boolean show)
+	{
+		this.showBankReminder = show;
 	}
 
 	public void clearTarget()
@@ -152,12 +160,19 @@ public class GuidanceOverlay extends OverlayPanel
 		clueGuidanceText = null;
 	}
 
-	private void addSyncReminderIfNeeded()
+	private void addSyncRemindersIfNeeded()
 	{
-		if (showSyncReminder)
+		if (showCollectionLogReminder)
 		{
 			panelComponent.getChildren().add(TitleComponent.builder()
 				.text("Open Collection Log to sync")
+				.color(new Color(255, 170, 0))
+				.build());
+		}
+		if (showBankReminder)
+		{
+			panelComponent.getChildren().add(TitleComponent.builder()
+				.text("Open Bank to scan items")
 				.color(new Color(255, 170, 0))
 				.build());
 		}
