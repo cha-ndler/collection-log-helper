@@ -68,10 +68,21 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "raidTeamSize",
+		name = "Raid Team Size",
+		description = "Your typical raid team size — adjusts estimated completion times for CoX, ToB, and ToA",
+		position = 5
+	)
+	default RaidTeamSize raidTeamSize()
+	{
+		return RaidTeamSize.SOLO;
+	}
+
+	@ConfigItem(
 		keyName = "proximityMaxDistance",
 		name = "Proximity Max Distance",
 		description = "Maximum tile distance for Proximity mode (0 = unlimited)",
-		position = 5
+		position = 6
 	)
 	default int proximityMaxDistance()
 	{
