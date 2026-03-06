@@ -974,10 +974,21 @@ public class CollectionLogHelperPanel extends PluginPanel
 		boolean isGuidingThis = guidanceActive && guidedSource != null
 			&& guidedSource.getName().equals(source.getName());
 
+		int sourceTotal = source.getItems().size();
+		int sourceObtained = 0;
+		for (CollectionLogItem si : source.getItems())
+		{
+			if (collectionState.isItemObtained(si.getItemId()))
+			{
+				sourceObtained++;
+			}
+		}
+
 		detailView.removeAll();
 		ItemDetailPanel detail = new ItemDetailPanel(
 			item, source, obtained, locked,
 			requirementsChecker.getUnmetRequirements(source.getName()),
+			sourceObtained, sourceTotal,
 			itemManager, clueEstimator,
 			this::showListView,
 			() -> guidanceActivator.accept(source),
