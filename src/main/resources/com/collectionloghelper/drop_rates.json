@@ -6917,7 +6917,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lumberjack_hat",
-        "pointCost": 50
+        "pointCost": 1200
       },
       {
         "itemId": 10939,
@@ -6926,7 +6926,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lumberjack_top",
-        "pointCost": 50
+        "pointCost": 1500
       },
       {
         "itemId": 10940,
@@ -6935,7 +6935,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lumberjack_legs",
-        "pointCost": 50
+        "pointCost": 1300
       },
       {
         "itemId": 10933,
@@ -6944,7 +6944,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lumberjack_boots",
-        "pointCost": 50
+        "pointCost": 1000
       },
       {
         "itemId": 28173,
@@ -6953,7 +6953,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Forestry_hat",
-        "pointCost": 50
+        "pointCost": 1250
       },
       {
         "itemId": 28169,
@@ -6962,7 +6962,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Forestry_top",
-        "pointCost": 50
+        "pointCost": 1250
       },
       {
         "itemId": 28171,
@@ -6971,7 +6971,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Forestry_legs",
-        "pointCost": 50
+        "pointCost": 1250
       },
       {
         "itemId": 28175,
@@ -6980,7 +6980,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Forestry_boots",
-        "pointCost": 50
+        "pointCost": 1250
       },
       {
         "itemId": 28140,
@@ -6989,7 +6989,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Log_basket",
-        "pointCost": 200
+        "pointCost": 5000
       },
       {
         "itemId": 28146,
@@ -6998,7 +6998,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Log_brace",
-        "pointCost": 200
+        "pointCost": 3000
       },
       {
         "itemId": 28630,
@@ -7007,7 +7007,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Twitcher%27s_gloves",
-        "pointCost": 100
+        "pointCost": 5000
       },
       {
         "itemId": 28138,
@@ -7016,12 +7016,12 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Funky_shaped_log",
-        "pointCost": 200
+        "pointCost": 15000
       }
     ],
     "locationDescription": "Various Woodcutting locations during Forestry events",
     "rewardType": "MIXED",
-    "pointsPerHour": 50
+    "pointsPerHour": 200
   },
   {
     "name": "Fossil Island Notes",
@@ -9064,7 +9064,7 @@
     "worldX": 2629,
     "worldY": 3196,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 45,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -9096,7 +9096,7 @@
     "worldX": 2629,
     "worldY": 3196,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 45,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -9128,7 +9128,7 @@
     "worldX": 2629,
     "worldY": 3196,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 45,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -9160,7 +9160,7 @@
     "worldX": 2629,
     "worldY": 3196,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 45,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -9192,7 +9192,7 @@
     "worldX": 2629,
     "worldY": 3196,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 45,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -9224,7 +9224,7 @@
     "worldX": 2629,
     "worldY": 3196,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 45,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
