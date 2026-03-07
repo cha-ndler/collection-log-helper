@@ -687,6 +687,12 @@ public class CollectionLogHelperPanel extends PluginPanel
 		{
 			boolean onTask = calculator.isOnSlayerTask(si.getSource());
 			boolean hasGuaranteed = hasUnobtainedGuaranteedItems(si);
+			// When filtering to guaranteed-only, show the guaranteed portion of the score
+			// so the displayed time reflects actual effort for those items, not the
+			// combined score inflated by hidden probabilistic drops.
+			double displayScore = hasGuaranteed
+				? Math.max(si.getScore() - si.getDropOnlyScore(), 0.1)
+				: si.getScore();
 
 			for (CollectionLogItem item : si.getSource().getItems())
 			{
@@ -701,23 +707,37 @@ public class CollectionLogHelperPanel extends PluginPanel
 					continue;
 				}
 				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
-					si.getScore(), si.isLocked(), onTask, itemManager,
+					displayScore, si.isLocked(), onTask, itemManager,
 					() -> showDetail(item, si.getSource()));
 				listContainer.add(row);
 			}
 		}
 	}
 
+	/**
+	 * Returns true only when a source has BOTH unobtained guaranteed items AND
+	 * unobtained probabilistic items. Pure-guaranteed sources (all SHOP/MILESTONE)
+	 * should not trigger the guaranteed filter since their score is already correct.
+	 */
 	private boolean hasUnobtainedGuaranteedItems(ScoredItem si)
 	{
+		boolean hasGuaranteed = false;
+		boolean hasProbabilistic = false;
 		for (CollectionLogItem item : si.getSource().getItems())
 		{
-			if (item.getDropRate() >= 1.0 && !collectionState.isItemObtained(item.getItemId()))
+			if (!collectionState.isItemObtained(item.getItemId()))
 			{
-				return true;
+				if (item.getDropRate() >= 1.0)
+				{
+					hasGuaranteed = true;
+				}
+				else
+				{
+					hasProbabilistic = true;
+				}
 			}
 		}
-		return false;
+		return hasGuaranteed && hasProbabilistic;
 	}
 
 	private void buildCategoryView()
