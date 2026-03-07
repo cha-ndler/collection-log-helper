@@ -169,6 +169,10 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	/** Pending ShortestPath target — set after "clear", sent as "path" on the next game tick. */
 	private WorldPoint pendingShortestPathTarget;
+	private boolean slayerRefreshPending;
+
+	/** Dev mode: enables efficiency export on sync. Set via -Dcollectionlog.devmode=true */
+	private final boolean devMode = Boolean.getBoolean("collectionlog.devmode");
 
 	@Override
 	protected void startUp() throws Exception
@@ -251,6 +255,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			// Wait a few ticks after login before sending the sync reminder
 			loginTickDelay = 10;
+			slayerRefreshPending = true;
 			dataSyncState.reset();
 			dataSyncState.setLoginTimestamp(System.currentTimeMillis());
 			clientThread.invokeLater(() ->
@@ -259,6 +264,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				collectionState.loadObtainedItems();
 				collectionState.captureRecentItems();
 				requirementsChecker.refreshAccessibility(database.getAllSources());
+				slayerTaskState.refresh();
 				lastObtainedCount = collectionState.getTotalObtained();
 				if (panel != null)
 				{
@@ -281,6 +287,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			hasCompletedFullSync = false;
 			syncReminderSent = false;
 			loginTickDelay = 0;
+			slayerRefreshPending = false;
 			cachedPlayerLocation = null;
 			lastProximityLocation = null;
 			guidanceOverlay.setShowCollectionLogReminder(false);
@@ -482,6 +489,19 @@ public class CollectionLogHelperPlugin extends Plugin
 			}
 		}
 
+		// Deferred slayer task refresh — varps may not be loaded in the initial
+		// invokeLater after LOGGED_IN, so re-read a few ticks later when the
+		// server has definitely sent all varp data.
+		if (slayerRefreshPending && loginTickDelay <= 7)
+		{
+			slayerRefreshPending = false;
+			slayerTaskState.refresh();
+			if (panel != null)
+			{
+				panel.rebuild();
+			}
+		}
+
 		// Auto-sync: trigger search mode when collection log first opens
 		if (autoSyncPending && collectionLogOpen)
 		{
@@ -508,6 +528,12 @@ public class CollectionLogHelperPlugin extends Plugin
 					panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED, capturedCount);
 					panel.updateDataSyncWarning();
 					panel.rebuild();
+				}
+				if (devMode)
+				{
+					java.io.File exportFile = new java.io.File(
+						net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
+					calculator.exportEfficiencyList(exportFile);
 				}
 			}
 		}
