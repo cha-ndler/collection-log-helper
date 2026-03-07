@@ -382,7 +382,6 @@
       }
     ],
     "locationDescription": "Zul-Andra, east coast of Tirannwn",
-    "rollsPerKill": 2,
     "mutuallyExclusive": true
   },
   {
@@ -513,6 +512,14 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Hellpuppy"
+      },
+      {
+        "itemId": 13249,
+        "name": "Key master teleport",
+        "dropRate": 0.015385,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Key_master_teleport"
       }
     ],
     "mutuallyExclusive": true
@@ -862,6 +869,30 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Baron"
+      },
+      {
+        "itemId": 28270,
+        "name": "Ice quartz",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ice_quartz"
+      },
+      {
+        "itemId": 28333,
+        "name": "Duke's tablet",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Duke%27s_tablet"
+      },
+      {
+        "itemId": 28334,
+        "name": "Awakener's orb",
+        "dropRate": 0.0255,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Awakener%27s_orb"
       }
     ],
     "locationDescription": "Duke Sucellus' lair, beneath the Wizards' Tower",
@@ -935,6 +966,30 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Lil%27viathan"
+      },
+      {
+        "itemId": 28274,
+        "name": "Smoke quartz",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Smoke_quartz"
+      },
+      {
+        "itemId": 28332,
+        "name": "Scarred tablet",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Scarred_tablet"
+      },
+      {
+        "itemId": 28334,
+        "name": "Awakener's orb",
+        "dropRate": 0.0187,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Awakener%27s_orb"
       }
     ],
     "locationDescription": "Catacombs entrance, Kourend",
@@ -1008,6 +1063,30 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Wisp"
+      },
+      {
+        "itemId": 28272,
+        "name": "Shadow quartz",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shadow_quartz"
+      },
+      {
+        "itemId": 28331,
+        "name": "Sirenic tablet",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sirenic_tablet"
+      },
+      {
+        "itemId": 28334,
+        "name": "Awakener's orb",
+        "dropRate": 0.029,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Awakener%27s_orb"
       }
     ],
     "locationDescription": "Lassar Undercity entrance, Ice Mountain",
@@ -1081,6 +1160,30 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Butch"
+      },
+      {
+        "itemId": 28268,
+        "name": "Blood quartz",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blood_quartz"
+      },
+      {
+        "itemId": 28330,
+        "name": "Strangled tablet",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Strangled_tablet"
+      },
+      {
+        "itemId": 28334,
+        "name": "Awakener's orb",
+        "dropRate": 0.0124,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Awakener%27s_orb"
       }
     ],
     "locationDescription": "The Stranglewood, west of Slepe",
@@ -1145,7 +1248,7 @@
       {
         "itemId": 21745,
         "name": "Jar of stone",
-        "dropRate": 0.0004,
+        "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jar_of_stone"
@@ -1153,14 +1256,13 @@
       {
         "itemId": 21748,
         "name": "Noon",
-        "dropRate": 0.000666,
+        "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Noon"
       }
     ],
     "locationDescription": "Slayer Tower rooftop, Morytania",
-    "rollsPerKill": 2,
     "mutuallyExclusive": true
   },
   {
@@ -1318,6 +1420,14 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Nexling"
+      },
+      {
+        "itemId": 26231,
+        "name": "Nihil shard",
+        "dropRate": 0.1,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Nihil_shard"
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
@@ -1363,6 +1473,14 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Sraracha"
+      },
+      {
+        "itemId": 33133,
+        "name": "Pristine spider silk",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pristine_spider_silk"
       }
     ],
     "mutuallyExclusive": true
@@ -1382,9 +1500,63 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Baby_mole"
+      },
+      {
+        "itemId": 7416,
+        "name": "Mole claw",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mole_claw"
+      },
+      {
+        "itemId": 7418,
+        "name": "Mole skin",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mole_skin"
       }
     ],
     "locationDescription": "Falador Park"
+  },
+  {
+    "name": "Bryophyta",
+    "category": "BOSSES",
+    "worldX": 3174,
+    "worldY": 9899,
+    "worldPlane": 0,
+    "killTimeSeconds": 60,
+    "items": [
+      {
+        "itemId": 22372,
+        "name": "Bryophyta's essence",
+        "dropRate": 0.008475,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bryophyta%27s_essence"
+      }
+    ],
+    "locationDescription": "Varrock Sewers"
+  },
+  {
+    "name": "Obor",
+    "category": "BOSSES",
+    "worldX": 3095,
+    "worldY": 9832,
+    "worldPlane": 0,
+    "killTimeSeconds": 60,
+    "items": [
+      {
+        "itemId": 20756,
+        "name": "Hill giant club",
+        "dropRate": 0.008475,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hill_giant_club"
+      }
+    ],
+    "locationDescription": "Edgeville Dungeon"
   },
   {
     "name": "Dagannoth Rex",
@@ -2113,6 +2285,30 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Skotos"
+      },
+      {
+        "itemId": 19685,
+        "name": "Dark totem",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_totem"
+      },
+      {
+        "itemId": 6571,
+        "name": "Uncut onyx",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Uncut_onyx"
+      },
+      {
+        "itemId": 19677,
+        "name": "Ancient shard",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_shard"
       }
     ]
   },
@@ -2147,6 +2343,30 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Tangleroot"
+      },
+      {
+        "itemId": 22881,
+        "name": "Attas seed",
+        "dropRate": 0.333333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Attas_seed"
+      },
+      {
+        "itemId": 22883,
+        "name": "Iasor seed",
+        "dropRate": 0.333333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Iasor_seed"
+      },
+      {
+        "itemId": 22885,
+        "name": "Kronos seed",
+        "dropRate": 0.333333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Kronos_seed"
       }
     ],
     "locationDescription": "Farming Guild, Hosidius"
@@ -3050,6 +3270,14 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Verac%27s_flail"
+      },
+      {
+        "itemId": 4740,
+        "name": "Bolt rack",
+        "dropRate": 0.0625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bolt_rack"
       }
     ],
     "locationDescription": "Barrows, east of Mort'ton",
@@ -3193,6 +3421,14 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Phoenix"
+      },
+      {
+        "itemId": 20718,
+        "name": "Burnt page",
+        "dropRate": 0.022222,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Burnt_page"
       }
     ],
     "locationDescription": "Wintertodt Camp, northern Zeah",
