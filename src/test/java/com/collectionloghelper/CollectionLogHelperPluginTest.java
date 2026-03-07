@@ -7,6 +7,7 @@ public class CollectionLogHelperPluginTest
 {
 	public static void main(String[] args) throws Exception
 	{
+		System.setProperty("collectionlog.devmode", "true");
 		ExternalPluginManager.loadBuiltin(CollectionLogHelperPlugin.class);
 		RuneLite.main(args);
 	}

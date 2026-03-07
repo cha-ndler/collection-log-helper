@@ -10,13 +10,19 @@ import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.RewardType;
 import com.collectionloghelper.data.SlayerCreatureDatabase;
 import com.collectionloghelper.data.SlayerTaskState;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+@Slf4j
 @Singleton
 public class EfficiencyCalculator
 {
@@ -428,5 +434,115 @@ public class EfficiencyCalculator
 		}
 
 		return new ScoredItem(source, score, missingPetCount, reasoning, locked, dropScore);
+	}
+
+	/**
+	 * Exports the full ranked efficiency list to a text file for debugging.
+	 * Each source shows its score, reasoning, and per-item breakdown.
+	 */
+	public void exportEfficiencyList(File outputFile)
+	{
+		List<ScoredItem> scored = rankByEfficiency();
+		int totalObtained = 0;
+		int totalItems = 0;
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			for (CollectionLogItem item : source.getItems())
+			{
+				totalItems++;
+				if (collectionState.isItemObtained(item.getItemId()))
+				{
+					totalObtained++;
+				}
+			}
+		}
+
+		try (PrintWriter pw = new PrintWriter(new FileWriter(outputFile)))
+		{
+			pw.printf("=== Efficiency Export ===%n");
+			pw.printf("Collection Log: %d/%d (%.1f%%)%n", totalObtained, totalItems,
+				totalItems > 0 ? 100.0 * totalObtained / totalItems : 0);
+			pw.printf("Total sources with missing items: %d%n%n", scored.size());
+
+			int rank = 0;
+			for (ScoredItem si : scored)
+			{
+				rank++;
+				CollectionLogSource src = si.getSource();
+				boolean onTask = isOnSlayerTask(src);
+
+				pw.printf("--- #%d: %s ---%n", rank, src.getName());
+				pw.printf("  Category: %s | RewardType: %s | Locked: %s%s%n",
+					src.getCategory(), src.getRewardType(), si.isLocked(),
+					onTask ? " | ON SLAYER TASK" : "");
+				pw.printf("  killTimeSeconds: %d (effective: %d) | rollsPerKill: %d%n",
+					src.getKillTimeSeconds(), getEffectiveKillTime(src), src.getRollsPerKill());
+				if (src.getPointsPerHour() > 0)
+				{
+					pw.printf("  pointsPerHour: %.0f%n", src.getPointsPerHour());
+				}
+				pw.printf("  Score: %.2f | DropOnlyScore: %.2f | Missing: %d%n",
+					si.getScore(), si.getDropOnlyScore(), si.getMissingItemCount());
+				pw.printf("  DisplayTime: %s%n", formatExportTime(si.getScore()));
+				pw.printf("  Reasoning: %s%n", si.getReasoning());
+				pw.println("  Items:");
+				for (CollectionLogItem item : src.getItems())
+				{
+					boolean obtained = collectionState.isItemObtained(item.getItemId());
+					String status = obtained ? "[OBTAINED]" : "[MISSING] ";
+					String rateStr;
+					if (item.getDropRate() >= 1.0)
+					{
+						rateStr = "Guaranteed";
+						if (item.getPointCost() > 0)
+						{
+							rateStr += String.format(" (cost: %d pts)", item.getPointCost());
+						}
+						if (item.getMilestoneKills() > 0)
+						{
+							rateStr += String.format(" (milestone: %d kills)", item.getMilestoneKills());
+						}
+					}
+					else
+					{
+						long denom = Math.round(1.0 / item.getDropRate());
+						rateStr = "1/" + denom;
+					}
+					pw.printf("    %s %-40s %s (id: %d)%n", status, item.getName(), rateStr, item.getItemId());
+				}
+				pw.println();
+			}
+			log.info("Exported efficiency list to {}", outputFile.getAbsolutePath());
+		}
+		catch (IOException e)
+		{
+			log.error("Failed to export efficiency list", e);
+		}
+	}
+
+	private static String formatExportTime(double score)
+	{
+		if (score <= 0)
+		{
+			return "N/A";
+		}
+		double hours = 100.0 / score;
+		if (hours < 1.0 / 60.0)
+		{
+			return "< 1 min";
+		}
+		else if (hours < 1)
+		{
+			long min = Math.max(1, Math.round(hours * 60));
+			return "~" + min + " min";
+		}
+		else if (hours < 24)
+		{
+			return String.format("~%.1f hrs", hours);
+		}
+		else
+		{
+			return String.format("~%.1f days", hours / 24.0);
+		}
 	}
 }
