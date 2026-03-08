@@ -34,6 +34,7 @@ public final class SlayerCreatureDatabase
 		map.put("lizardmen", Collections.singletonList("Lizardman shaman"));
 		map.put("tzhaar", Arrays.asList("TzHaar", "The Fight Caves", "The Inferno"));
 		map.put("araxytes", Collections.singletonList("Araxxor"));
+		map.put("gryphons", Collections.singletonList("Shellbane Gryphon"));
 
 		CREATURE_TO_SOURCES = Collections.unmodifiableMap(map);
 	}

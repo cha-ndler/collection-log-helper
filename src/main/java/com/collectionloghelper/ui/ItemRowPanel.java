@@ -205,6 +205,18 @@ class ItemRowPanel extends JPanel
 			return "Guaranteed";
 		}
 		long denominator = Math.round(1.0 / rate);
+		if (denominator <= 1)
+		{
+			// Rate > 0.5 but < 1.0 — express as simplified fraction (e.g. 2/3)
+			for (int d = 2; d <= 4; d++)
+			{
+				long n = Math.round(rate * d);
+				if (n > 0 && n < d && Math.abs(rate - (double) n / d) < 0.01)
+				{
+					return n + "/" + d;
+				}
+			}
+		}
 		return "1/" + denominator;
 	}
 }
