@@ -1837,7 +1837,7 @@
       {
         "itemId": 13271,
         "name": "Abyssal bludgeon",
-        "dropRate": 0.001709,
+        "dropRate": 0.001615,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Abyssal_bludgeon"
@@ -2583,7 +2583,7 @@
       {
         "itemId": 22325,
         "name": "Scythe of vitur",
-        "dropRate": 0.000578,
+        "dropRate": 0.001446,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Scythe_of_vitur"
@@ -2591,7 +2591,7 @@
       {
         "itemId": 22324,
         "name": "Ghrazi rapier",
-        "dropRate": 0.001156,
+        "dropRate": 0.002892,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ghrazi_rapier"
@@ -2599,7 +2599,7 @@
       {
         "itemId": 22323,
         "name": "Sanguinesti staff",
-        "dropRate": 0.001156,
+        "dropRate": 0.002892,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sanguinesti_staff"
@@ -2607,7 +2607,7 @@
       {
         "itemId": 22326,
         "name": "Justiciar faceguard",
-        "dropRate": 0.001156,
+        "dropRate": 0.002892,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Justiciar_faceguard"
@@ -2615,7 +2615,7 @@
       {
         "itemId": 22327,
         "name": "Justiciar chestguard",
-        "dropRate": 0.001156,
+        "dropRate": 0.002892,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Justiciar_chestguard"
@@ -2623,7 +2623,7 @@
       {
         "itemId": 22328,
         "name": "Justiciar legguards",
-        "dropRate": 0.001156,
+        "dropRate": 0.002892,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Justiciar_legguards"
@@ -2631,7 +2631,7 @@
       {
         "itemId": 22477,
         "name": "Avernic defender hilt",
-        "dropRate": 0.00462,
+        "dropRate": 0.011568,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Avernic_defender_hilt"
