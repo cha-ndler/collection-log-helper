@@ -6324,7 +6324,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Greenman_carving"
+        "wikiPage": "Greenman_carving",
+        "milestoneKills": 1
       },
       {
         "itemId": 31027,
@@ -6332,7 +6333,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Greenman_statue"
+        "wikiPage": "Greenman_statue",
+        "milestoneKills": 1
       },
       {
         "itemId": 31016,
@@ -6340,7 +6342,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Sacraments_of_ent_folk"
+        "wikiPage": "Sacraments_of_ent_folk",
+        "milestoneKills": 1
       }
     ],
     "locationDescription": "Auburn Valley, north-west Varlamore",
