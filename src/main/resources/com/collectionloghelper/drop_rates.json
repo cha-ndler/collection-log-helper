@@ -160,7 +160,7 @@
     "killTimeSeconds": 85,
     "items": [
       {
-        "itemId": 11789,
+        "itemId": 11787,
         "name": "Steam battlestaff",
         "dropRate": 0.007874,
         "varbitId": 0,
@@ -681,7 +681,7 @@
         "wikiPage": "Elysian_sigil"
       },
       {
-        "itemId": 12831,
+        "itemId": 12823,
         "name": "Spirit shield",
         "dropRate": 0.015625,
         "varbitId": 0,
@@ -750,7 +750,7 @@
         "wikiPage": "Dragon_2h_sword"
       },
       {
-        "itemId": 23677,
+        "itemId": 12885,
         "name": "Dragon pickaxe",
         "dropRate": 0.0025,
         "varbitId": 0,
@@ -758,7 +758,7 @@
         "wikiPage": "Dragon_pickaxe"
       },
       {
-        "itemId": 23525,
+        "itemId": 11920,
         "name": "Jar of sand",
         "dropRate": 0.0005,
         "varbitId": 0,
@@ -904,7 +904,7 @@
         "wikiPage": "Virtus_robe_bottom"
       },
       {
-        "itemId": 28337,
+        "itemId": 28250,
         "name": "Baron",
         "dropRate": 0.0004,
         "varbitId": 0,
@@ -1001,7 +1001,7 @@
         "wikiPage": "Virtus_robe_bottom"
       },
       {
-        "itemId": 28339,
+        "itemId": 28252,
         "name": "Lil'viathan",
         "dropRate": 0.0004,
         "varbitId": 0,
@@ -1098,7 +1098,7 @@
         "wikiPage": "Virtus_robe_bottom"
       },
       {
-        "itemId": 28341,
+        "itemId": 28246,
         "name": "Wisp",
         "dropRate": 0.0005,
         "varbitId": 0,
@@ -1195,7 +1195,7 @@
         "wikiPage": "Virtus_robe_bottom"
       },
       {
-        "itemId": 28343,
+        "itemId": 28248,
         "name": "Butch",
         "dropRate": 0.000333,
         "varbitId": 0,
@@ -1247,7 +1247,7 @@
     },
     "items": [
       {
-        "itemId": 21752,
+        "itemId": 21726,
         "name": "Granite maul",
         "dropRate": 0.008,
         "varbitId": 0,
@@ -1407,7 +1407,7 @@
     "killTimeSeconds": 300,
     "items": [
       {
-        "itemId": 26382,
+        "itemId": 26376,
         "name": "Torva full helm (damaged)",
         "dropRate": 0.003876,
         "varbitId": 0,
@@ -1415,7 +1415,7 @@
         "wikiPage": "Torva_full_helm_(damaged)"
       },
       {
-        "itemId": 26384,
+        "itemId": 26378,
         "name": "Torva platebody (damaged)",
         "dropRate": 0.003876,
         "varbitId": 0,
@@ -1423,7 +1423,7 @@
         "wikiPage": "Torva_platebody_(damaged)"
       },
       {
-        "itemId": 26386,
+        "itemId": 26380,
         "name": "Torva platelegs (damaged)",
         "dropRate": 0.003876,
         "varbitId": 0,
@@ -1500,7 +1500,7 @@
         "wikiPage": "Giant_egg_sac_(full)"
       },
       {
-        "itemId": 23535,
+        "itemId": 23525,
         "name": "Jar of eyes",
         "dropRate": 0.0005,
         "varbitId": 0,
@@ -1868,7 +1868,7 @@
         "wikiPage": "Unsired"
       },
       {
-        "itemId": 13263,
+        "itemId": 25624,
         "name": "Abyssal dagger",
         "dropRate": 0.002033,
         "varbitId": 0,
@@ -1876,12 +1876,44 @@
         "wikiPage": "Abyssal_dagger"
       },
       {
-        "itemId": 13271,
-        "name": "Abyssal bludgeon",
+        "itemId": 4151,
+        "name": "Abyssal whip",
+        "dropRate": 0.01953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_whip"
+      },
+      {
+        "itemId": 7979,
+        "name": "Abyssal head",
+        "dropRate": 0.0065,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_head"
+      },
+      {
+        "itemId": 13274,
+        "name": "Bludgeon axon",
         "dropRate": 0.001615,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Abyssal_bludgeon"
+        "wikiPage": "Bludgeon_axon"
+      },
+      {
+        "itemId": 13275,
+        "name": "Bludgeon claw",
+        "dropRate": 0.001615,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bludgeon_claw"
+      },
+      {
+        "itemId": 13276,
+        "name": "Bludgeon spine",
+        "dropRate": 0.001615,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bludgeon_spine"
       },
       {
         "itemId": 13277,
@@ -1972,7 +2004,7 @@
         "wikiPage": "Dragon_2h_sword"
       },
       {
-        "itemId": 11335,
+        "itemId": 11995,
         "name": "Pet chaos elemental",
         "dropRate": 0.003333,
         "varbitId": 0,
@@ -1992,7 +2024,7 @@
     "killTimeSeconds": 60,
     "items": [
       {
-        "itemId": 11932,
+        "itemId": 11930,
         "name": "Odium shard 3",
         "dropRate": 0.003906,
         "varbitId": 0,
@@ -2000,7 +2032,7 @@
         "wikiPage": "Odium_shard_3"
       },
       {
-        "itemId": 11934,
+        "itemId": 11933,
         "name": "Malediction shard 3",
         "dropRate": 0.003906,
         "varbitId": 0,
@@ -2008,7 +2040,7 @@
         "wikiPage": "Malediction_shard_3"
       },
       {
-        "itemId": 13181,
+        "itemId": 7158,
         "name": "Scorpia's offspring",
         "dropRate": 0.000496,
         "varbitId": 0,
@@ -2036,7 +2068,7 @@
         "wikiPage": "Odium_shard_1"
       },
       {
-        "itemId": 11930,
+        "itemId": 11995,
         "name": "Malediction shard 1",
         "dropRate": 0.003906,
         "varbitId": 0,
@@ -2044,7 +2076,7 @@
         "wikiPage": "Malediction_shard_1"
       },
       {
-        "itemId": 11335,
+        "itemId": 11931,
         "name": "Pet chaos elemental",
         "dropRate": 0.001,
         "varbitId": 0,
@@ -2312,7 +2344,7 @@
         "wikiPage": "Dark_claw"
       },
       {
-        "itemId": 21279,
+        "itemId": 19701,
         "name": "Jar of darkness",
         "dropRate": 0.005,
         "varbitId": 0,
@@ -2370,20 +2402,12 @@
     },
     "items": [
       {
-        "itemId": 22997,
+        "itemId": 22994,
         "name": "Bottomless compost bucket",
         "dropRate": 0.028571,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bottomless_compost_bucket"
-      },
-      {
-        "itemId": 12000,
-        "name": "Tangleroot",
-        "dropRate": 0.000143,
-        "varbitId": 0,
-        "isPet": true,
-        "wikiPage": "Tangleroot"
       },
       {
         "itemId": 22881,
@@ -2622,7 +2646,7 @@
     },
     "items": [
       {
-        "itemId": 22325,
+        "itemId": 22486,
         "name": "Scythe of vitur",
         "dropRate": 0.001446,
         "varbitId": 0,
@@ -2638,7 +2662,7 @@
         "wikiPage": "Ghrazi_rapier"
       },
       {
-        "itemId": 22323,
+        "itemId": 22481,
         "name": "Sanguinesti staff",
         "dropRate": 0.002892,
         "varbitId": 0,
@@ -2818,7 +2842,7 @@
         "wikiPage": "Masori_chaps"
       },
       {
-        "itemId": 27275,
+        "itemId": 27277,
         "name": "Tumeken's shadow",
         "dropRate": 0.000417,
         "varbitId": 0,
@@ -3062,7 +3086,7 @@
     },
     "items": [
       {
-        "itemId": 23862,
+        "itemId": 4207,
         "name": "Crystal weapon seed",
         "dropRate": 0.008333,
         "varbitId": 0,
@@ -3070,7 +3094,7 @@
         "wikiPage": "Crystal_weapon_seed"
       },
       {
-        "itemId": 23866,
+        "itemId": 23956,
         "name": "Crystal armour seed",
         "dropRate": 0.008333,
         "varbitId": 0,
@@ -3448,7 +3472,7 @@
         "wikiPage": "Pyromancer_hood"
       },
       {
-        "itemId": 20696,
+        "itemId": 20710,
         "name": "Pyromancer garb",
         "dropRate": 0.006667,
         "varbitId": 0,
@@ -3456,7 +3480,7 @@
         "wikiPage": "Pyromancer_garb"
       },
       {
-        "itemId": 20699,
+        "itemId": 20712,
         "name": "Pyromancer robe",
         "dropRate": 0.006667,
         "varbitId": 0,
@@ -3464,7 +3488,7 @@
         "wikiPage": "Pyromancer_robe"
       },
       {
-        "itemId": 20702,
+        "itemId": 20716,
         "name": "Pyromancer boots",
         "dropRate": 0.006667,
         "varbitId": 0,
@@ -3488,7 +3512,7 @@
         "wikiPage": "Bruma_torch"
       },
       {
-        "itemId": 20714,
+        "itemId": 20720,
         "name": "Tome of fire (empty)",
         "dropRate": 0.001,
         "varbitId": 0,
@@ -3537,7 +3561,7 @@
     },
     "items": [
       {
-        "itemId": 23902,
+        "itemId": 23908,
         "name": "Crystal tool seed",
         "dropRate": 0.004875,
         "varbitId": 0,
@@ -3545,7 +3569,7 @@
         "wikiPage": "Crystal_tool_seed"
       },
       {
-        "itemId": 23904,
+        "itemId": 23953,
         "name": "Zalcano shard",
         "dropRate": 0.001,
         "varbitId": 0,
@@ -3659,7 +3683,7 @@
         "wikiPage": "Odium_shard_2"
       },
       {
-        "itemId": 11931,
+        "itemId": 11932,
         "name": "Malediction shard 2",
         "dropRate": 0.003906,
         "varbitId": 0,
@@ -3867,7 +3891,7 @@
     },
     "items": [
       {
-        "itemId": 29554,
+        "itemId": 29574,
         "name": "Tormented synapse",
         "dropRate": 0.002,
         "varbitId": 0,
@@ -3875,12 +3899,20 @@
         "wikiPage": "Tormented_synapse"
       },
       {
-        "itemId": 29556,
+        "itemId": 29580,
         "name": "Burning claw",
         "dropRate": 0.001333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Burning_claw"
+      },
+      {
+        "itemId": 29684,
+        "name": "Tormented ornament kit",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tormented_ornament_kit"
       }
     ],
     "locationDescription": "Ruins south of Lava Maze, Wilderness"
@@ -4527,7 +4559,7 @@
         "wikiPage": "Dark_acorn"
       },
       {
-        "itemId": 20659,
+        "itemId": 24729,
         "name": "Giant squirrel",
         "dropRate": 0.0005,
         "varbitId": 0,
@@ -4559,28 +4591,12 @@
     },
     "items": [
       {
-        "itemId": 26876,
-        "name": "Atlax's diary",
-        "dropRate": 0.05,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Atlax%27s_diary"
-      },
-      {
         "itemId": 26798,
         "name": "Catalytic talisman",
         "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Catalytic_talisman"
-      },
-      {
-        "itemId": 5516,
-        "name": "Elemental talisman",
-        "dropRate": 0.003265,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Elemental_talisman"
       },
       {
         "itemId": 26813,
@@ -4883,7 +4899,7 @@
         "pointCost": 200
       },
       {
-        "itemId": 11673,
+        "itemId": 11666,
         "name": "Void seal",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -5181,7 +5197,7 @@
         "pointCost": 500
       },
       {
-        "itemId": 24882,
+        "itemId": 24884,
         "name": "Plank sack",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -5248,7 +5264,7 @@
         "pointCost": 8000
       },
       {
-        "itemId": 29988,
+        "itemId": 29992,
         "name": "Alchemist's amulet",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -5288,7 +5304,7 @@
         "pointCost": 40000
       },
       {
-        "itemId": 21539,
+        "itemId": 12013,
         "name": "Large water container",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -5306,7 +5322,7 @@
         "pointCost": 200
       },
       {
-        "itemId": 21543,
+        "itemId": 12014,
         "name": "Calcite",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -5315,7 +5331,7 @@
         "pointCost": 70
       },
       {
-        "itemId": 21545,
+        "itemId": 12015,
         "name": "Pyrophosphite",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -5324,7 +5340,7 @@
         "pointCost": 70
       },
       {
-        "itemId": 27693,
+        "itemId": 27695,
         "name": "Ore pack",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -6085,7 +6101,7 @@
     "killTimeSeconds": 720,
     "items": [
       {
-        "itemId": 25344,
+        "itemId": 25340,
         "name": "Soul cape (red)",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -6279,14 +6295,6 @@
         "wikiPage": "Fletching_knife"
       },
       {
-        "itemId": 31047,
-        "name": "Dirty arrowtips",
-        "dropRate": 0.2006,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dirty_arrowtips"
-      },
-      {
         "itemId": 31032,
         "name": "Ent branch",
         "dropRate": 0.1629,
@@ -6295,55 +6303,12 @@
         "wikiPage": "Ent_branch"
       },
       {
-        "itemId": 31045,
-        "name": "Bale of flax",
-        "dropRate": 0.1253,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Bale_of_flax"
-      },
-      {
-        "itemId": 31018,
-        "name": "Ent seed",
-        "dropRate": 0.0025,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Ent_seed"
-      },
-      {
         "itemId": 31034,
         "name": "Greenman mask",
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Greenman_mask"
-      },
-      {
-        "itemId": 31024,
-        "name": "Greenman carving",
-        "dropRate": 1.0,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Greenman_carving",
-        "milestoneKills": 1
-      },
-      {
-        "itemId": 31027,
-        "name": "Greenman statue",
-        "dropRate": 1.0,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Greenman_statue",
-        "milestoneKills": 1
-      },
-      {
-        "itemId": 31016,
-        "name": "Sacraments of ent folk",
-        "dropRate": 1.0,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Sacraments_of_ent_folk",
-        "milestoneKills": 1
       }
     ],
     "locationDescription": "Auburn Valley, north-west Varlamore",
@@ -7311,7 +7276,7 @@
         "wikiPage": "Petal_garland"
       },
       {
-        "itemId": 28624,
+        "itemId": 28613,
         "name": "Pheasant tail feathers",
         "dropRate": 0.5,
         "varbitId": 0,
@@ -7643,33 +7608,6 @@
         "wikiPage": "Huntsman%27s_kit"
       },
       {
-        "itemId": 29271,
-        "name": "Basic quetzal whistle",
-        "dropRate": 1.0,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Basic_quetzal_whistle",
-        "milestoneKills": 50
-      },
-      {
-        "itemId": 29273,
-        "name": "Enhanced quetzal whistle",
-        "dropRate": 1.0,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Enhanced_quetzal_whistle",
-        "milestoneKills": 150
-      },
-      {
-        "itemId": 29275,
-        "name": "Perfected quetzal whistle",
-        "dropRate": 1.0,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Perfected_quetzal_whistle",
-        "milestoneKills": 300
-      },
-      {
         "itemId": 28962,
         "name": "Quetzin",
         "dropRate": 0.001,
@@ -7792,15 +7730,6 @@
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "items": [
-      {
-        "itemId": 19556,
-        "name": "Monkey",
-        "dropRate": 1.0,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Monkey_(Monkey_Madness_II)",
-        "milestoneKills": 1
-      },
       {
         "itemId": 24862,
         "name": "Karamjan monkey",
@@ -8847,7 +8776,7 @@
         "pointCost": 40
       },
       {
-        "itemId": 30044,
+        "itemId": 30045,
         "name": "Graceful crafting kit",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -8985,7 +8914,7 @@
         "wikiPage": "Tzhaar-ket-om"
       },
       {
-        "itemId": 6527,
+        "itemId": 6568,
         "name": "Tzhaar-ket-em",
         "dropRate": 0.001953,
         "varbitId": 0,
@@ -9421,7 +9350,7 @@
         "pointCost": 30
       },
       {
-        "itemId": 12019,
+        "itemId": 25627,
         "name": "Coal bag",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -9430,7 +9359,7 @@
         "pointCost": 100
       },
       {
-        "itemId": 12020,
+        "itemId": 25628,
         "name": "Gem bag",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -9800,7 +9729,7 @@
         "wikiPage": "Forgotten_lockbox"
       },
       {
-        "itemId": 30803,
+        "itemId": 30805,
         "name": "Dossier",
         "dropRate": 0.082645,
         "varbitId": 0,
@@ -11254,7 +11183,7 @@
         "wikiPage": "Rain_bow"
       },
       {
-        "itemId": 20164,
+        "itemId": 12297,
         "name": "Large spade",
         "dropRate": 0.00390625,
         "varbitId": 0,
@@ -12186,7 +12115,7 @@
         "wikiPage": "Strength_amulet_(t)"
       },
       {
-        "itemId": 20249,
+        "itemId": 20275,
         "name": "Clueless scroll",
         "dropRate": 0.0025,
         "varbitId": 0,
@@ -13270,7 +13199,7 @@
         "wikiPage": "Zombie_head_(Treasure_Trails)"
       },
       {
-        "itemId": 10362,
+        "itemId": 10354,
         "name": "Amulet of glory (t)",
         "dropRate": 0.003073,
         "varbitId": 0,
@@ -13754,7 +13683,7 @@
         "wikiPage": "Fremennik_kilt"
       },
       {
-        "itemId": 19941,
+        "itemId": 12371,
         "name": "Heavy casket",
         "dropRate": 0.023809523809523808,
         "varbitId": 0,
@@ -14150,7 +14079,7 @@
         "wikiPage": "Mummy%27s_feet"
       },
       {
-        "itemId": 22675,
+        "itemId": 20017,
         "name": "Scroll sack",
         "dropRate": 0.005,
         "varbitId": 0,
@@ -15462,7 +15391,7 @@
         "wikiPage": "Iorwerth_camp_teleport"
       },
       {
-        "itemId": 23387,
+        "itemId": 20238,
         "name": "Watson teleport",
         "dropRate": 0.003759,
         "varbitId": 0,
