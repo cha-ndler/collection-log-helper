@@ -373,6 +373,22 @@
         "wikiPage": "Jar_of_swamp"
       },
       {
+        "itemId": 12938,
+        "name": "Zul-andra teleport",
+        "dropRate": 0.1168,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zul-andra_teleport"
+      },
+      {
+        "itemId": 12934,
+        "name": "Zulrah's scales",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zulrah%27s_scales"
+      },
+      {
         "itemId": 12921,
         "name": "Pet snakeling",
         "dropRate": 0.00025,
@@ -782,12 +798,37 @@
         "wikiPage": "Ancient_icon"
       },
       {
-        "itemId": 27616,
+        "itemId": 27614,
         "name": "Venator shard",
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Venator_shard"
+      },
+      {
+        "itemId": 27616,
+        "name": "Ancient essence",
+        "dropRate": 0.6,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_essence"
+      },
+      {
+        "itemId": 27622,
+        "name": "Frozen cache",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Frozen_cache"
+      },
+      {
+        "itemId": 27643,
+        "name": "Charged ice",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Charged_ice",
+        "milestoneKills": 1
       },
       {
         "itemId": 27590,
@@ -3292,7 +3333,7 @@
     "killTimeSeconds": 300,
     "items": [
       {
-        "itemId": 25592,
+        "itemId": 25580,
         "name": "Tackle box",
         "dropRate": 0.0025,
         "varbitId": 0,
@@ -3300,7 +3341,7 @@
         "wikiPage": "Tackle_box"
       },
       {
-        "itemId": 25580,
+        "itemId": 25582,
         "name": "Fish barrel",
         "dropRate": 0.0025,
         "varbitId": 0,
@@ -3308,7 +3349,7 @@
         "wikiPage": "Fish_barrel"
       },
       {
-        "itemId": 25596,
+        "itemId": 25559,
         "name": "Big harpoonfish",
         "dropRate": 0.000625,
         "varbitId": 0,
@@ -3332,12 +3373,60 @@
         "wikiPage": "Dragon_harpoon"
       },
       {
-        "itemId": 25600,
+        "itemId": 25602,
         "name": "Tiny tempor",
         "dropRate": 0.000125,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Tiny_tempor"
+      },
+      {
+        "itemId": 25592,
+        "name": "Spirit angler headband",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Spirit_angler_headband"
+      },
+      {
+        "itemId": 25594,
+        "name": "Spirit angler top",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Spirit_angler_top"
+      },
+      {
+        "itemId": 25596,
+        "name": "Spirit angler waders",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Spirit_angler_waders"
+      },
+      {
+        "itemId": 25598,
+        "name": "Spirit angler boots",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Spirit_angler_boots"
+      },
+      {
+        "itemId": 25578,
+        "name": "Soaked page",
+        "dropRate": 0.0186,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Soaked_page"
+      },
+      {
+        "itemId": 25588,
+        "name": "Spirit flakes",
+        "dropRate": 0.25,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Spirit_flakes"
       }
     ],
     "locationDescription": "Tempoross Cove, south of Al Kharid"
@@ -3732,7 +3821,7 @@
       {
         "itemId": 29314,
         "name": "Dual macuahuitl",
-        "dropRate": 0.0005,
+        "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dual_macuahuitl"
@@ -4940,12 +5029,100 @@
         "wikiPage": "Amulet_of_the_damned"
       },
       {
-        "itemId": 12854,
+        "itemId": 25630,
         "name": "Flamtaer bag",
         "dropRate": 0.5,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Flamtaer_bag"
+      },
+      {
+        "itemId": 25438,
+        "name": "Zealot's helm",
+        "dropRate": 0.0078,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zealot%27s_helm"
+      },
+      {
+        "itemId": 25434,
+        "name": "Zealot's robe top",
+        "dropRate": 0.0078,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zealot%27s_robe_top"
+      },
+      {
+        "itemId": 25436,
+        "name": "Zealot's robe bottom",
+        "dropRate": 0.0078,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zealot%27s_robe_bottom"
+      },
+      {
+        "itemId": 25440,
+        "name": "Zealot's boots",
+        "dropRate": 0.0078,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Zealot%27s_boots"
+      },
+      {
+        "itemId": 25474,
+        "name": "Tree wizards' journal",
+        "dropRate": 0.0091,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Tree_wizards%27_journal"
+      },
+      {
+        "itemId": 25476,
+        "name": "Bloody notes",
+        "dropRate": 0.0091,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bloody_notes"
+      },
+      {
+        "itemId": 25454,
+        "name": "Gold lock",
+        "dropRate": 0.0159,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gold_lock"
+      },
+      {
+        "itemId": 25442,
+        "name": "Bronze lock",
+        "dropRate": 0.0159,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bronze_lock"
+      },
+      {
+        "itemId": 25445,
+        "name": "Steel lock",
+        "dropRate": 0.0159,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Steel_lock"
+      },
+      {
+        "itemId": 25448,
+        "name": "Black lock",
+        "dropRate": 0.0159,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_lock"
+      },
+      {
+        "itemId": 25451,
+        "name": "Silver lock",
+        "dropRate": 0.0159,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Silver_lock"
       }
     ],
     "locationDescription": "Shades catacombs beneath Mort'ton"
@@ -9872,6 +10049,17 @@
     "worldPlane": 0,
     "killTimeSeconds": 70,
     "locationDescription": "Shellbane Gryphon Cave, The Great Conch",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 51
+        }
+      ],
+      "quests": [
+        "TROUBLED_TORTUGANS"
+      ]
+    },
     "items": [
       {
         "itemId": 31285,
