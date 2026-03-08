@@ -658,11 +658,11 @@
     "items": [
       {
         "itemId": 12829,
-        "name": "Spectral sigil",
+        "name": "Spirit shield",
         "dropRate": 0.000733,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Spectral_sigil"
+        "wikiPage": "Spirit_shield"
       },
       {
         "itemId": 12827,
@@ -682,11 +682,11 @@
       },
       {
         "itemId": 12823,
-        "name": "Spirit shield",
+        "name": "Spectral sigil",
         "dropRate": 0.015625,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Spirit_shield"
+        "wikiPage": "Spectral_sigil"
       },
       {
         "itemId": 12833,
@@ -751,19 +751,19 @@
       },
       {
         "itemId": 12885,
-        "name": "Dragon pickaxe",
-        "dropRate": 0.0025,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dragon_pickaxe"
-      },
-      {
-        "itemId": 11920,
         "name": "Jar of sand",
-        "dropRate": 0.0005,
+        "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jar_of_sand"
+      },
+      {
+        "itemId": 11920,
+        "name": "Dragon pickaxe",
+        "dropRate": 0.0078,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_pickaxe"
       },
       {
         "itemId": 12647,
@@ -921,11 +921,11 @@
       },
       {
         "itemId": 28333,
-        "name": "Duke's tablet",
+        "name": "Frozen tablet",
         "dropRate": 0.04,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Duke%27s_tablet"
+        "wikiPage": "Frozen_tablet"
       },
       {
         "itemId": 28334,
@@ -1248,11 +1248,11 @@
     "items": [
       {
         "itemId": 21726,
-        "name": "Granite maul",
-        "dropRate": 0.008,
+        "name": "Granite dust",
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Granite_maul"
+        "wikiPage": "Granite_dust"
       },
       {
         "itemId": 21736,
@@ -1356,14 +1356,6 @@
       },
       {
         "itemId": 24511,
-        "name": "Eldritch orb",
-        "dropRate": 0.001042,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Eldritch_orb"
-      },
-      {
-        "itemId": 24514,
         "name": "Harmonised orb",
         "dropRate": 0.001042,
         "varbitId": 0,
@@ -1371,12 +1363,20 @@
         "wikiPage": "Harmonised_orb"
       },
       {
-        "itemId": 24517,
+        "itemId": 24514,
         "name": "Volatile orb",
         "dropRate": 0.001042,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Volatile_orb"
+      },
+      {
+        "itemId": 24517,
+        "name": "Eldritch orb",
+        "dropRate": 0.001042,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eldritch_orb"
       },
       {
         "itemId": 24495,
@@ -1877,19 +1877,19 @@
     "items": [
       {
         "itemId": 13265,
-        "name": "Unsired",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Unsired"
-      },
-      {
-        "itemId": 25624,
         "name": "Abyssal dagger",
         "dropRate": 0.002033,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Abyssal_dagger"
+      },
+      {
+        "itemId": 25624,
+        "name": "Unsired",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Unsired"
       },
       {
         "itemId": 4151,
@@ -1909,11 +1909,11 @@
       },
       {
         "itemId": 13274,
-        "name": "Bludgeon axon",
+        "name": "Bludgeon spine",
         "dropRate": 0.001615,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bludgeon_axon"
+        "wikiPage": "Bludgeon_spine"
       },
       {
         "itemId": 13275,
@@ -1925,11 +1925,11 @@
       },
       {
         "itemId": 13276,
-        "name": "Bludgeon spine",
+        "name": "Bludgeon axon",
         "dropRate": 0.001615,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bludgeon_spine"
+        "wikiPage": "Bludgeon_axon"
       },
       {
         "itemId": 13277,
@@ -2093,19 +2093,19 @@
       },
       {
         "itemId": 11995,
-        "name": "Malediction shard 1",
-        "dropRate": 0.003906,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Malediction_shard_1"
-      },
-      {
-        "itemId": 11931,
         "name": "Pet chaos elemental",
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Pet_chaos_elemental"
+      },
+      {
+        "itemId": 11931,
+        "name": "Malediction shard 1",
+        "dropRate": 0.0078,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Malediction_shard_1"
       }
     ],
     "locationDescription": "West of Lava Maze, Wilderness",
@@ -2120,7 +2120,7 @@
     "killTimeSeconds": 120,
     "items": [
       {
-        "itemId": 27655,
+        "itemId": 27670,
         "name": "Fangs of Venenatis",
         "dropRate": 0.005102,
         "varbitId": 0,
@@ -2128,7 +2128,7 @@
         "wikiPage": "Fangs_of_Venenatis"
       },
       {
-        "itemId": 27667,
+        "itemId": 27687,
         "name": "Voidwaker gem",
         "dropRate": 0.002778,
         "varbitId": 0,
@@ -2158,6 +2158,14 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Venenatis_spiderling"
+      },
+      {
+        "itemId": 7158,
+        "name": "Dragon 2h sword",
+        "dropRate": 0.0078,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_2h_sword"
       }
     ],
     "locationDescription": "Venenatis' Cave, Wilderness",
@@ -2172,7 +2180,7 @@
     "killTimeSeconds": 180,
     "items": [
       {
-        "itemId": 27657,
+        "itemId": 27673,
         "name": "Skull of Vet'ion",
         "dropRate": 0.005102,
         "varbitId": 0,
@@ -2180,7 +2188,7 @@
         "wikiPage": "Skull_of_Vet%27ion"
       },
       {
-        "itemId": 27669,
+        "itemId": 27684,
         "name": "Voidwaker blade",
         "dropRate": 0.002778,
         "varbitId": 0,
@@ -2210,6 +2218,14 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Vet%27ion_jr."
+      },
+      {
+        "itemId": 7158,
+        "name": "Dragon 2h sword",
+        "dropRate": 0.0078,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_2h_sword"
       }
     ],
     "locationDescription": "Vet'ion's Rest, Wilderness",
@@ -2224,7 +2240,7 @@
     "killTimeSeconds": 120,
     "items": [
       {
-        "itemId": 27653,
+        "itemId": 27667,
         "name": "Claws of Callisto",
         "dropRate": 0.005102,
         "varbitId": 0,
@@ -2232,7 +2248,7 @@
         "wikiPage": "Claws_of_Callisto"
       },
       {
-        "itemId": 27671,
+        "itemId": 27681,
         "name": "Voidwaker hilt",
         "dropRate": 0.002778,
         "varbitId": 0,
@@ -2262,6 +2278,14 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Callisto_cub"
+      },
+      {
+        "itemId": 7158,
+        "name": "Dragon 2h sword",
+        "dropRate": 0.0078,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_2h_sword"
       }
     ],
     "locationDescription": "Callisto's Den, Wilderness",
@@ -3497,22 +3521,6 @@
       },
       {
         "itemId": 20710,
-        "name": "Pyromancer garb",
-        "dropRate": 0.006667,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Pyromancer_garb"
-      },
-      {
-        "itemId": 20712,
-        "name": "Pyromancer robe",
-        "dropRate": 0.006667,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Pyromancer_robe"
-      },
-      {
-        "itemId": 20716,
         "name": "Pyromancer boots",
         "dropRate": 0.006667,
         "varbitId": 0,
@@ -3520,7 +3528,7 @@
         "wikiPage": "Pyromancer_boots"
       },
       {
-        "itemId": 20704,
+        "itemId": 20712,
         "name": "Warm gloves",
         "dropRate": 0.006667,
         "varbitId": 0,
@@ -3528,20 +3536,36 @@
         "wikiPage": "Warm_gloves"
       },
       {
-        "itemId": 20706,
-        "name": "Bruma torch",
+        "itemId": 20716,
+        "name": "Tome of fire (empty)",
         "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bruma_torch"
+        "wikiPage": "Tome_of_fire_(empty)"
+      },
+      {
+        "itemId": 20704,
+        "name": "Pyromancer garb",
+        "dropRate": 0.006667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pyromancer_garb"
+      },
+      {
+        "itemId": 20706,
+        "name": "Pyromancer robe",
+        "dropRate": 0.006667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pyromancer_robe"
       },
       {
         "itemId": 20720,
-        "name": "Tome of fire (empty)",
+        "name": "Bruma torch",
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Tome_of_fire_(empty)"
+        "wikiPage": "Bruma_torch"
       },
       {
         "itemId": 6739,
@@ -3586,19 +3610,19 @@
     "items": [
       {
         "itemId": 23908,
-        "name": "Crystal tool seed",
+        "name": "Zalcano shard",
         "dropRate": 0.004875,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Crystal_tool_seed"
+        "wikiPage": "Zalcano_shard"
       },
       {
         "itemId": 23953,
-        "name": "Zalcano shard",
+        "name": "Crystal tool seed",
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Zalcano_shard"
+        "wikiPage": "Crystal_tool_seed"
       },
       {
         "itemId": 6571,
@@ -4482,7 +4506,7 @@
       {
         "itemId": 21646,
         "name": "Granite longsword",
-        "dropRate": 0.002,
+        "dropRate": 0.00195,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_longsword"
@@ -4490,7 +4514,7 @@
       {
         "itemId": 21643,
         "name": "Granite boots",
-        "dropRate": 0.002,
+        "dropRate": 0.0017,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_boots"
@@ -4498,7 +4522,7 @@
       {
         "itemId": 10589,
         "name": "Granite helm",
-        "dropRate": 0.002,
+        "dropRate": 0.0078,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_helm"
@@ -4514,7 +4538,7 @@
       {
         "itemId": 11235,
         "name": "Dark bow",
-        "dropRate": 0.0067,
+        "dropRate": 0.00195,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dark_bow"
@@ -4522,7 +4546,7 @@
       {
         "itemId": 11286,
         "name": "Draconic visage",
-        "dropRate": 0.0001,
+        "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Draconic_visage"
@@ -4538,7 +4562,7 @@
       {
         "itemId": 11902,
         "name": "Leaf-bladed sword",
-        "dropRate": 0.004,
+        "dropRate": 0.0026,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Leaf-bladed_sword"
@@ -4554,7 +4578,7 @@
       {
         "itemId": 12002,
         "name": "Occult necklace",
-        "dropRate": 0.002,
+        "dropRate": 0.00195,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Occult_necklace"
@@ -4562,7 +4586,7 @@
       {
         "itemId": 12004,
         "name": "Kraken tentacle",
-        "dropRate": 0.002,
+        "dropRate": 0.0025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Kraken_tentacle"
@@ -4570,7 +4594,7 @@
       {
         "itemId": 13265,
         "name": "Abyssal dagger",
-        "dropRate": 0.0006,
+        "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Abyssal_dagger"
@@ -4586,7 +4610,7 @@
       {
         "itemId": 20727,
         "name": "Leaf-bladed battleaxe",
-        "dropRate": 0.004,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Leaf-bladed_battleaxe"
@@ -4594,7 +4618,7 @@
       {
         "itemId": 20730,
         "name": "Mist battlestaff",
-        "dropRate": 0.0001,
+        "dropRate": 3e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mist_battlestaff"
@@ -4602,7 +4626,7 @@
       {
         "itemId": 20736,
         "name": "Dust battlestaff",
-        "dropRate": 0.0001,
+        "dropRate": 3e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dust_battlestaff"
@@ -4658,7 +4682,7 @@
       {
         "itemId": 22957,
         "name": "Drake's claw",
-        "dropRate": 0.002,
+        "dropRate": 0.00195,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Drake%27s_claw"
@@ -4666,7 +4690,7 @@
       {
         "itemId": 22960,
         "name": "Drake's tooth",
-        "dropRate": 0.002,
+        "dropRate": 0.00195,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Drake%27s_tooth"
@@ -4674,7 +4698,7 @@
       {
         "itemId": 22963,
         "name": "Broken dragon hasta",
-        "dropRate": 0.002,
+        "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Broken_dragon_hasta"
@@ -4682,7 +4706,7 @@
       {
         "itemId": 22969,
         "name": "Hydra's heart",
-        "dropRate": 0.002,
+        "dropRate": 0.00552,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra%27s_heart"
@@ -4690,7 +4714,7 @@
       {
         "itemId": 22971,
         "name": "Hydra's fang",
-        "dropRate": 0.002,
+        "dropRate": 0.00552,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra%27s_fang"
@@ -4698,7 +4722,7 @@
       {
         "itemId": 22973,
         "name": "Hydra's eye",
-        "dropRate": 0.002,
+        "dropRate": 0.00552,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra%27s_eye"
@@ -4706,7 +4730,7 @@
       {
         "itemId": 22988,
         "name": "Hydra tail",
-        "dropRate": 0.002,
+        "dropRate": 0.00195,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra_tail"
@@ -4714,7 +4738,7 @@
       {
         "itemId": 23047,
         "name": "Mystic hat (dusk)",
-        "dropRate": 0.003,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mystic_hat_(dusk)"
@@ -4722,7 +4746,7 @@
       {
         "itemId": 23050,
         "name": "Mystic robe top (dusk)",
-        "dropRate": 0.003,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mystic_robe_top_(dusk)"
@@ -4730,7 +4754,7 @@
       {
         "itemId": 23053,
         "name": "Mystic robe bottom (dusk)",
-        "dropRate": 0.003,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mystic_robe_bottom_(dusk)"
@@ -4738,7 +4762,7 @@
       {
         "itemId": 23056,
         "name": "Mystic gloves (dusk)",
-        "dropRate": 0.003,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mystic_gloves_(dusk)"
@@ -4746,7 +4770,7 @@
       {
         "itemId": 23059,
         "name": "Mystic boots (dusk)",
-        "dropRate": 0.003,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mystic_boots_(dusk)"
@@ -4762,7 +4786,7 @@
       {
         "itemId": 24288,
         "name": "Dagon'hai hat",
-        "dropRate": 0.0078,
+        "dropRate": 0.0039,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dagon%27hai_hat"
@@ -4770,7 +4794,7 @@
       {
         "itemId": 24291,
         "name": "Dagon'hai robe top",
-        "dropRate": 0.0078,
+        "dropRate": 0.0039,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dagon%27hai_robe_top"
@@ -4778,7 +4802,7 @@
       {
         "itemId": 24294,
         "name": "Dagon'hai robe bottom",
-        "dropRate": 0.0078,
+        "dropRate": 0.0039,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dagon%27hai_robe_bottom"
@@ -4794,7 +4818,7 @@
       {
         "itemId": 26221,
         "name": "Ancient ceremonial top",
-        "dropRate": 0.0078,
+        "dropRate": 0.00156,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_ceremonial_top"
@@ -4802,7 +4826,7 @@
       {
         "itemId": 26223,
         "name": "Ancient ceremonial legs",
-        "dropRate": 0.0078,
+        "dropRate": 0.00156,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_ceremonial_legs"
@@ -4810,7 +4834,7 @@
       {
         "itemId": 26225,
         "name": "Ancient ceremonial mask",
-        "dropRate": 0.0078,
+        "dropRate": 0.00156,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_ceremonial_mask"
@@ -4818,7 +4842,7 @@
       {
         "itemId": 26227,
         "name": "Ancient ceremonial gloves",
-        "dropRate": 0.0078,
+        "dropRate": 0.00156,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_ceremonial_gloves"
@@ -4826,7 +4850,7 @@
       {
         "itemId": 26229,
         "name": "Ancient ceremonial boots",
-        "dropRate": 0.0078,
+        "dropRate": 0.00156,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_ceremonial_boots"
@@ -4834,7 +4858,7 @@
       {
         "itemId": 28583,
         "name": "Warped sceptre",
-        "dropRate": 0.001,
+        "dropRate": 0.003125,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Warped_sceptre"
@@ -4842,7 +4866,7 @@
       {
         "itemId": 29084,
         "name": "Sulphur blades",
-        "dropRate": 0.0005,
+        "dropRate": 0.00222,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sulphur_blades"
@@ -4850,7 +4874,7 @@
       {
         "itemId": 29455,
         "name": "Teleport anchoring scroll",
-        "dropRate": 0.002,
+        "dropRate": 0.00364,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Teleport_anchoring_scroll"
@@ -4858,7 +4882,7 @@
       {
         "itemId": 29806,
         "name": "Aranea boots",
-        "dropRate": 0.002,
+        "dropRate": 0.00125,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Aranea_boots"
@@ -4866,7 +4890,7 @@
       {
         "itemId": 29889,
         "name": "Glacial temotli",
-        "dropRate": 0.002,
+        "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Glacial_temotli"
@@ -4874,7 +4898,7 @@
       {
         "itemId": 29892,
         "name": "Pendant of ates",
-        "dropRate": 0.002,
+        "dropRate": 0.04,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pendant_of_ates"
@@ -4882,7 +4906,7 @@
       {
         "itemId": 29895,
         "name": "Frozen tear",
-        "dropRate": 0.002,
+        "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Frozen_tear"
@@ -4890,7 +4914,7 @@
       {
         "itemId": 30957,
         "name": "Earthbound tecpatl",
-        "dropRate": 0.002,
+        "dropRate": 0.0025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Earthbound_tecpatl"
@@ -4898,7 +4922,7 @@
       {
         "itemId": 31081,
         "name": "Antler guard",
-        "dropRate": 0.002,
+        "dropRate": 0.00154,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Antler_guard"
@@ -4906,7 +4930,7 @@
       {
         "itemId": 31084,
         "name": "Alchemist's signet",
-        "dropRate": 0.002,
+        "dropRate": 0.0161,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Alchemist%27s_signet"
@@ -4914,7 +4938,7 @@
       {
         "itemId": 31086,
         "name": "Broken antler",
-        "dropRate": 0.002,
+        "dropRate": 0.0667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Broken_antler"
@@ -4922,7 +4946,7 @@
       {
         "itemId": 31235,
         "name": "Gryphon feather",
-        "dropRate": 0.002,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Gryphon_feather"
@@ -4930,7 +4954,7 @@
       {
         "itemId": 31243,
         "name": "Horn of plenty",
-        "dropRate": 0.002,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Horn_of_plenty"
@@ -4938,7 +4962,7 @@
       {
         "itemId": 31996,
         "name": "Dragon metal sheet",
-        "dropRate": 0.001,
+        "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_metal_sheet"
@@ -4946,7 +4970,7 @@
       {
         "itemId": 32876,
         "name": "Aquanite tendon",
-        "dropRate": 0.002,
+        "dropRate": 0.00133,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Aquanite_tendon"
@@ -7007,7 +7031,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Steam_staff_upgrade_kit",
-        "pointCost": 12
+        "pointCost": 13
       },
       {
         "itemId": 12800,
@@ -7025,7 +7049,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ward_upgrade_kit",
-        "pointCost": 12
+        "pointCost": 20
       },
       {
         "itemId": 12849,
@@ -7074,39 +7098,43 @@
       },
       {
         "itemId": 24868,
-        "name": "Victor's cape (24868)",
+        "name": "Golden armadyl special attack",
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Victor%27s_cape",
-        "milestoneKills": 1
+        "wikiPage": "Golden_armadyl_special_attack",
+        "milestoneKills": 1,
+        "pointCost": 75
       },
       {
         "itemId": 24869,
-        "name": "Victor's cape (24869)",
+        "name": "Golden bandos special attack",
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Victor%27s_cape",
-        "milestoneKills": 1
+        "wikiPage": "Golden_bandos_special_attack",
+        "milestoneKills": 1,
+        "pointCost": 75
       },
       {
         "itemId": 24870,
-        "name": "Victor's cape (24870)",
+        "name": "Golden saradomin special attack",
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Victor%27s_cape",
-        "milestoneKills": 1
+        "wikiPage": "Golden_saradomin_special_attack",
+        "milestoneKills": 1,
+        "pointCost": 75
       },
       {
         "itemId": 24871,
-        "name": "Victor's cape (24871)",
+        "name": "Golden zamorak special attack",
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Victor%27s_cape",
-        "milestoneKills": 1
+        "wikiPage": "Golden_zamorak_special_attack",
+        "milestoneKills": 1,
+        "pointCost": 75
       }
     ],
     "locationDescription": "Ferox Enclave, north of Varrock in the Wilderness",
@@ -9401,7 +9429,7 @@
       {
         "itemId": 10976,
         "name": "Long bone",
-        "dropRate": 0.004,
+        "dropRate": 0.0025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Long_bone"
@@ -9409,7 +9437,7 @@
       {
         "itemId": 10977,
         "name": "Curved bone",
-        "dropRate": 0.001,
+        "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Curved_bone"
@@ -9417,7 +9445,7 @@
       {
         "itemId": 11335,
         "name": "Dragon full helm",
-        "dropRate": 0.0003,
+        "dropRate": 0.0001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_full_helm"
@@ -9425,7 +9453,7 @@
       {
         "itemId": 11338,
         "name": "Chewed bones",
-        "dropRate": 0.0003,
+        "dropRate": 0.0234,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Chewed_bones"
@@ -9433,7 +9461,7 @@
       {
         "itemId": 11942,
         "name": "Ecumenical key",
-        "dropRate": 0.02,
+        "dropRate": 0.0167,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ecumenical_key"
@@ -9449,7 +9477,7 @@
       {
         "itemId": 13392,
         "name": "Xeric's talisman",
-        "dropRate": 0.01,
+        "dropRate": 0.004,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Xeric%27s_talisman"
@@ -9457,7 +9485,7 @@
       {
         "itemId": 13576,
         "name": "Dragon warhammer",
-        "dropRate": 0.0002,
+        "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_warhammer"
@@ -9489,7 +9517,7 @@
       {
         "itemId": 19707,
         "name": "Amulet of eternal glory",
-        "dropRate": 2.2e-05,
+        "dropRate": 4e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Amulet_of_eternal_glory"
@@ -9497,7 +9525,7 @@
       {
         "itemId": 20433,
         "name": "Evil chicken feet",
-        "dropRate": 0.005,
+        "dropRate": 0.000833,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Evil_chicken_feet"
@@ -9505,7 +9533,7 @@
       {
         "itemId": 20436,
         "name": "Evil chicken wings",
-        "dropRate": 0.005,
+        "dropRate": 0.000833,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Evil_chicken_wings"
@@ -9513,7 +9541,7 @@
       {
         "itemId": 20439,
         "name": "Evil chicken head",
-        "dropRate": 0.005,
+        "dropRate": 0.000833,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Evil_chicken_head"
@@ -9521,7 +9549,7 @@
       {
         "itemId": 20442,
         "name": "Evil chicken legs",
-        "dropRate": 0.005,
+        "dropRate": 0.000833,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Evil_chicken_legs"
@@ -11383,11 +11411,11 @@
     "items": [
       {
         "itemId": 31285,
-        "name": "Gull",
+        "name": "Soup",
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Gull_(pet)"
+        "wikiPage": "Soup_(pet)"
       },
       {
         "itemId": 32921,
