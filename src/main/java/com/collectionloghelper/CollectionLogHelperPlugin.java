@@ -253,11 +253,17 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		if (event.getGameState() == GameState.LOGGED_IN)
 		{
-			// Wait a few ticks after login before sending the sync reminder
+			// LOGGED_IN fires multiple times during login/transitions.
+			// Only reset sync state on the first fire to avoid clearing
+			// collection log / bank sync flags mid-session.
+			boolean freshLogin = loginTickDelay == 0 && !syncReminderSent;
 			loginTickDelay = 10;
 			slayerRefreshPending = true;
-			dataSyncState.reset();
-			dataSyncState.setLoginTimestamp(System.currentTimeMillis());
+			if (freshLogin)
+			{
+				dataSyncState.reset();
+				dataSyncState.setLoginTimestamp(System.currentTimeMillis());
+			}
 			clientThread.invokeLater(() ->
 			{
 				collectionState.refreshVarps();
@@ -702,8 +708,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		else
 		{
 			// Non-clue sources: world map, tile, and minimap overlays
-			WorldPoint worldPoint = source.getWorldPoint();
-			String displayName = source.getDisplayLocation();
+			WorldPoint worldPoint = source.getWorldPoint(requirementsChecker);
+			String displayName = source.getDisplayLocation(requirementsChecker);
 
 			guidanceOverlay.setTargetPoint(worldPoint);
 			guidanceOverlay.setTargetName(source.getName());

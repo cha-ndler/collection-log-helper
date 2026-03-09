@@ -10,6 +10,7 @@ public class Waypoint
     int worldX;
     int worldY;
     int worldPlane;
+    SourceRequirements requirements;
 
     public WorldPoint getWorldPoint()
     {

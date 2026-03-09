@@ -90,6 +90,18 @@ public class RequirementsChecker
 		unmetCache = Collections.emptyMap();
 	}
 
+	/**
+	 * Check if the player meets the given requirements. Safe to call from client thread.
+	 */
+	public boolean meetsRequirements(SourceRequirements requirements)
+	{
+		if (requirements == null)
+		{
+			return true;
+		}
+		return checkRequirementsDetail(requirements).isEmpty();
+	}
+
 	private List<String> checkRequirements(CollectionLogSource source)
 	{
 		SourceRequirements requirements = source.getRequirements();
@@ -97,7 +109,11 @@ public class RequirementsChecker
 		{
 			return Collections.emptyList();
 		}
+		return checkRequirementsDetail(requirements);
+	}
 
+	private List<String> checkRequirementsDetail(SourceRequirements requirements)
+	{
 		List<String> unmet = new ArrayList<>();
 
 		if (requirements.getQuests() != null)
