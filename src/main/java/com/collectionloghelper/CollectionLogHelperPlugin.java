@@ -188,18 +188,29 @@ public class CollectionLogHelperPlugin extends Plugin
 			() -> cachedPlayerLocation);
 		panel.setMode(config.defaultMode());
 
-		collectionLogIcon = itemManager.getImage(ItemID.COLLECTION_LOG);
-		// Use static resource for nav button — AsyncBufferedImage may be blank at startup
-		final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "panel_icon.png");
-
+		// Use a placeholder icon initially, then swap to the real item sprite once loaded
+		final BufferedImage placeholder = ImageUtil.loadImageResource(getClass(), "panel_icon.png");
 		navButton = NavigationButton.builder()
 			.tooltip("Collection Log Helper")
-			.icon(icon)
+			.icon(placeholder)
 			.priority(6)
 			.panel(panel)
 			.build();
-
 		clientToolbar.addNavigation(navButton);
+
+		// AsyncBufferedImage may be blank at startup; onLoaded rebuilds the nav button
+		collectionLogIcon = itemManager.getImage(ItemID.COLLECTION_LOG);
+		((net.runelite.client.util.AsyncBufferedImage) collectionLogIcon).onLoaded(() ->
+		{
+			clientToolbar.removeNavigation(navButton);
+			navButton = NavigationButton.builder()
+				.tooltip("Collection Log Helper")
+				.icon(collectionLogIcon)
+				.priority(6)
+				.panel(panel)
+				.build();
+			clientToolbar.addNavigation(navButton);
+		});
 		overlayManager.add(guidanceOverlay);
 		overlayManager.add(guidanceMinimapOverlay);
 
@@ -271,9 +282,39 @@ public class CollectionLogHelperPlugin extends Plugin
 				requirementsChecker.refreshAccessibility(database.getAllSources());
 				slayerTaskState.refresh();
 				lastObtainedCount = collectionState.getTotalObtained();
+
+				// Smart sync: if cached data is fresh, skip sync prompts
+				if (freshLogin && collectionState.isCacheFresh())
+				{
+					dataSyncState.setCollectionLogSynced(true);
+					hasCompletedFullSync = true;
+					log.info("Collection log cache is fresh (varp {} matches last sync) — skipping sync prompt",
+						collectionState.getTotalObtained());
+
+					// Also restore cached bank data if available
+					if (playerBankState.loadFromCache())
+					{
+						dataSyncState.setBankScanned(true);
+						log.info("Bank cache loaded — skipping bank scan prompt");
+					}
+				}
+
 				if (panel != null)
 				{
-					panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.NOT_SYNCED, 0);
+					if (dataSyncState.isCollectionLogSynced())
+					{
+						panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
+							collectionState.getObtainedCount());
+					}
+					else
+					{
+						panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.NOT_SYNCED, 0);
+					}
+					panel.updateDataSyncWarning();
+					if (dataSyncState.isBankScanned())
+					{
+						panel.updateClueSummary(playerBankState);
+					}
 					panel.rebuild();
 				}
 			});
@@ -524,6 +565,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				hasCompletedFullSync = true;
 				dataSyncState.setCollectionLogSynced(true);
 				guidanceOverlay.setShowCollectionLogReminder(false);
+				collectionState.saveLastSyncedCount();
 				int capturedCount = scriptScanItemCount;
 				log.info("Auto-sync complete: {} obtained items captured via script scan",
 					capturedCount);
