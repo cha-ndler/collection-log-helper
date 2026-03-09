@@ -189,9 +189,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		panel.setMode(config.defaultMode());
 
 		collectionLogIcon = itemManager.getImage(ItemID.COLLECTION_LOG);
-		final BufferedImage icon = collectionLogIcon != null
-			? collectionLogIcon
-			: ImageUtil.loadImageResource(getClass(), "panel_icon.png");
+		// Use static resource for nav button — AsyncBufferedImage may be blank at startup
+		final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "panel_icon.png");
 
 		navButton = NavigationButton.builder()
 			.tooltip("Collection Log Helper")
