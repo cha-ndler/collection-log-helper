@@ -44,6 +44,7 @@ public class DropRateDatabase
                     (a, b) -> a
                 ));
 
+            validateData();
             log.debug("Loaded {} sources with {} items", sources.size(), itemsById.size());
         }
         catch (Exception e)
@@ -75,5 +76,30 @@ public class DropRateDatabase
     public CollectionLogItem getItemById(int itemId)
     {
         return itemsById.get(itemId);
+    }
+
+    private void validateData()
+    {
+        for (CollectionLogSource source : sources)
+        {
+            for (CollectionLogItem item : source.getItems())
+            {
+                if (item.getDropRate() < 0)
+                {
+                    log.warn("Invalid negative dropRate {} for item '{}' in source '{}'",
+                        item.getDropRate(), item.getName(), source.getName());
+                }
+                else if (item.getDropRate() == 0)
+                {
+                    log.warn("Zero dropRate for item '{}' in source '{}' — will use fallback scoring",
+                        item.getName(), source.getName());
+                }
+                else if (item.getDropRate() > 1.0)
+                {
+                    log.warn("dropRate {} > 1.0 for non-guaranteed item '{}' in source '{}'",
+                        item.getDropRate(), item.getName(), source.getName());
+                }
+            }
+        }
     }
 }

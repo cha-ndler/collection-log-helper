@@ -686,58 +686,33 @@ public class CollectionLogHelperPanel extends PluginPanel
 		for (ScoredItem si : scored)
 		{
 			boolean onTask = calculator.isOnSlayerTask(si.getSource());
-			boolean hasGuaranteed = hasUnobtainedGuaranteedItems(si);
-			// When filtering to guaranteed-only, show the guaranteed portion of the score
-			// so the displayed time reflects actual effort for those items, not the
-			// combined score inflated by hidden probabilistic drops.
-			double displayScore = hasGuaranteed
-				? Math.max(si.getScore() - si.getDropOnlyScore(), 0.1)
-				: si.getScore();
 
-			for (CollectionLogItem item : si.getSource().getItems())
+			// Show only the single best (fastest-to-obtain) item per source.
+			// This gives the user one clear recommendation with an accurate time.
+			CollectionLogItem bestItem = si.getBestItem();
+			if (bestItem != null && !collectionState.isItemObtained(bestItem.getItemId()))
 			{
-				boolean obtained = collectionState.isItemObtained(item.getItemId());
-				if (hideObtained && obtained)
-				{
-					continue;
-				}
-				// When a source has unobtained guaranteed items, only show those
-				if (hasGuaranteed && item.getDropRate() < 1.0)
-				{
-					continue;
-				}
-				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
-					displayScore, si.isLocked(), onTask, itemManager,
-					() -> showDetail(item, si.getSource()));
+				ItemRowPanel row = new ItemRowPanel(bestItem, si.getSource(), false,
+					si.getBestItemScore(), si.isLocked(), onTask, itemManager,
+					() -> showDetail(bestItem, si.getSource()));
 				listContainer.add(row);
 			}
-		}
-	}
-
-	/**
-	 * Returns true only when a source has BOTH unobtained guaranteed items AND
-	 * unobtained probabilistic items. Pure-guaranteed sources (all SHOP/MILESTONE)
-	 * should not trigger the guaranteed filter since their score is already correct.
-	 */
-	private boolean hasUnobtainedGuaranteedItems(ScoredItem si)
-	{
-		boolean hasGuaranteed = false;
-		boolean hasProbabilistic = false;
-		for (CollectionLogItem item : si.getSource().getItems())
-		{
-			if (!collectionState.isItemObtained(item.getItemId()))
+			else
 			{
-				if (item.getDropRate() >= 1.0)
+				// Fallback: show first missing item if bestItem is null or already obtained
+				for (CollectionLogItem item : si.getSource().getItems())
 				{
-					hasGuaranteed = true;
-				}
-				else
-				{
-					hasProbabilistic = true;
+					if (!collectionState.isItemObtained(item.getItemId()))
+					{
+						ItemRowPanel row = new ItemRowPanel(item, si.getSource(), false,
+							si.getScore(), si.isLocked(), onTask, itemManager,
+							() -> showDetail(item, si.getSource()));
+						listContainer.add(row);
+						break;
+					}
 				}
 			}
 		}
-		return hasGuaranteed && hasProbabilistic;
 	}
 
 	private void buildCategoryView()
@@ -865,7 +840,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 				continue;
 			}
 
-			WorldPoint sourcePoint = source.getWorldPoint();
+			WorldPoint sourcePoint = source.getWorldPoint(requirementsChecker);
 			if (sourcePoint == null || (sourcePoint.getX() == 0 && sourcePoint.getY() == 0))
 			{
 				continue;
@@ -927,7 +902,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 			{
 				String reasoning = String.format("%d missing items, %d tiles away (score: %.1f)",
 					sd.missingCount, sd.distance, sd.compositeScore());
-				ScoredItem topPick = new ScoredItem(sd.source, sd.compositeScore(), sd.missingCount, reasoning, false, sd.compositeScore());
+				ScoredItem topPick = new ScoredItem(sd.source, sd.compositeScore(), sd.missingCount, reasoning, false, sd.compositeScore(), null, sd.compositeScore());
 				listContainer.add(createQuickGuidePanel(topPick));
 				break;
 			}

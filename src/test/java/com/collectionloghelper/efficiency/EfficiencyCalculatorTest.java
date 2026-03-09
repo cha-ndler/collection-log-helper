@@ -66,7 +66,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, category, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, null, items);
+			RewardType.DROP, 0, false, 1, false, null, items);
 	}
 
 	private CollectionLogSource makeShopSource(String name, int killTimeSeconds,
@@ -74,7 +74,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.SHOP, pointsPerHour, false, 1, null, items);
+			RewardType.SHOP, pointsPerHour, false, 1, false, null, items);
 	}
 
 	private CollectionLogSource makeMilestoneSource(String name, int killTimeSeconds,
@@ -82,7 +82,23 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.MILESTONE, 0, false, 1, null, items);
+			RewardType.MILESTONE, 0, false, 1, false, null, items);
+	}
+
+	private CollectionLogSource makeMixedSource(String name, int killTimeSeconds,
+		double pointsPerHour, List<CollectionLogItem> items)
+	{
+		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
+			killTimeSeconds, name, Collections.emptyList(),
+			RewardType.MIXED, pointsPerHour, false, 1, false, null, items);
+	}
+
+	private CollectionLogSource makeAggregatedSource(String name, int killTimeSeconds,
+		List<CollectionLogItem> items)
+	{
+		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
+			killTimeSeconds, name, Collections.emptyList(),
+			RewardType.DROP, 0, false, 1, true, null, items);
 	}
 
 	private CollectionLogItem makeItem(int id, String name, double dropRate)
@@ -100,7 +116,7 @@ public class EfficiencyCalculatorTest
 		return new CollectionLogItem(id, name, 1.0, 0, false, null, 0, milestoneKills);
 	}
 
-	// --- Score formula: items per hour × 100 ---
+	// --- Per-item scoring: score = best individual item's score ---
 
 	@Test
 	public void testSingleMissingItem()
@@ -115,13 +131,15 @@ public class EfficiencyCalculatorTest
 		assertNotNull(result);
 		assertEquals(60.0, result.getScore(), 0.01);
 		assertEquals(1, result.getMissingItemCount());
+		assertNotNull(result.getBestItem());
+		assertEquals("Rare drop", result.getBestItem().getName());
 	}
 
 	@Test
-	public void testMultipleMissingItems_sumOfRates()
+	public void testMultipleMissingItems_bestItemScore()
 	{
 		// 3 items at 1/512 each, 120s kills
-		// score = (3/512) * (3600/120) * 100 = 0.00586 * 30 * 100 = 17.58
+		// Per-item scoring: best item = 1/512, score = (1/512) * 30 * 100 = 5.86
 		List<CollectionLogItem> items = Arrays.asList(
 			makeItem(1, "Drop A", 1.0 / 512),
 			makeItem(2, "Drop B", 1.0 / 512),
@@ -132,7 +150,9 @@ public class EfficiencyCalculatorTest
 		ScoredItem result = calculator.scoreSource(source, false);
 
 		assertNotNull(result);
-		assertEquals(17.58, result.getScore(), 0.1);
+		double expectedScore = (1.0 / 512) * 30 * 100;
+		assertEquals(expectedScore, result.getScore(), 0.01);
+		assertEquals(3, result.getMissingItemCount());
 	}
 
 	@Test
@@ -167,13 +187,9 @@ public class EfficiencyCalculatorTest
 	}
 
 	@Test
-	public void testNoDoubleCountingDropCount()
+	public void testBestItemSelected_highestRate()
 	{
-		// Old formula would give: score = dropCount * rate * kph * 100
-		// New formula gives: score = rate * kph * 100 (no dropCount multiplier)
-		// 5 items at 1/100 each, 60s kills
-		// Correct: score = 5*0.01 * 60 * 100 = 300
-		// Old (wrong) would be: 5 * 5*0.01 * 60 * 100 = 1500
+		// 5 items with different rates — best item should be the highest rate
 		List<CollectionLogItem> items = Arrays.asList(
 			makeItem(1, "A", 0.01), makeItem(2, "B", 0.01),
 			makeItem(3, "C", 0.01), makeItem(4, "D", 0.01),
@@ -183,7 +199,27 @@ public class EfficiencyCalculatorTest
 
 		ScoredItem result = calculator.scoreSource(source, false);
 
-		assertEquals(300.0, result.getScore(), 0.01);
+		// Best item score = 0.01 * 60 * 100 = 60 (all items have same rate)
+		assertEquals(60.0, result.getScore(), 0.01);
+		assertNotNull(result.getBestItem());
+	}
+
+	@Test
+	public void testBestItemSelected_mixedRates()
+	{
+		// Items with different rates — best = highest drop rate
+		List<CollectionLogItem> items = Arrays.asList(
+			makeItem(1, "Slow", 0.001),
+			makeItem(2, "Fast", 0.1),
+			makeItem(3, "Medium", 0.01));
+		CollectionLogSource source = makeSource("Test Boss", CollectionLogCategory.BOSSES, 60, items);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		// Best item = "Fast" at 0.1, score = 0.1 * 60 * 100 = 600
+		assertEquals(600.0, result.getScore(), 0.01);
+		assertEquals("Fast", result.getBestItem().getName());
 	}
 
 	// --- SHOP scoring ---
@@ -191,7 +227,8 @@ public class EfficiencyCalculatorTest
 	@Test
 	public void testShopScoring_withEconomics()
 	{
-		// 3 items, 100 pts each, 50 pts/hr → 6 hrs total → 3/6 * 100 = 50
+		// 3 items, 100 pts each, 50 pts/hr
+		// Best item: cheapest = 100 pts, 100/50 = 2 hrs, score = (1/2)*100 = 50
 		List<CollectionLogItem> items = Arrays.asList(
 			makeShopItem(1, "A", 100), makeShopItem(2, "B", 100), makeShopItem(3, "C", 100));
 		CollectionLogSource source = makeShopSource("Test Shop", 300, 50, items);
@@ -204,9 +241,27 @@ public class EfficiencyCalculatorTest
 	}
 
 	@Test
+	public void testShopScoring_cheapestItemFirst()
+	{
+		// Items with different costs — best = cheapest
+		List<CollectionLogItem> items = Arrays.asList(
+			makeShopItem(1, "Expensive", 1000),
+			makeShopItem(2, "Cheap", 100),
+			makeShopItem(3, "Medium", 500));
+		CollectionLogSource source = makeShopSource("Test Shop", 300, 50, items);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		// Cheap: 100/50 = 2 hrs, score = 50
+		assertEquals(50.0, result.getScore(), 0.01);
+		assertEquals("Cheap", result.getBestItem().getName());
+	}
+
+	@Test
 	public void testShopScoring_withoutEconomics_fallback()
 	{
-		// Items with 0 cost and 0 pph → flat 0.2 per item
+		// Items with 0 cost and 0 pph → flat 0.2 per item, best = 0.2
 		List<CollectionLogItem> items = Arrays.asList(
 			makeShopItem(1, "A", 0), makeShopItem(2, "B", 0));
 		CollectionLogSource source = makeShopSource("Test Shop", 300, 0, items);
@@ -215,17 +270,16 @@ public class EfficiencyCalculatorTest
 		ScoredItem result = calculator.scoreSource(source, false);
 
 		assertNotNull(result);
-		assertEquals(0.4, result.getScore(), 0.01);
+		assertEquals(0.2, result.getScore(), 0.01);
 	}
 
 	// --- MILESTONE scoring ---
 
 	@Test
-	public void testMilestoneScoring_usesMaxNotSum()
+	public void testMilestoneScoring_bestMilestoneItem()
 	{
 		// Milestones at 100, 500, 1000 kills. killTime=45s
-		// Correct: max=1000, hours = 1000*45/3600 = 12.5, score = 3/12.5*100 = 24
-		// Old (sum): sum=1600, hours = 1600*45/3600 = 20, score = 3/20*100 = 15
+		// Best item = milestone at 100 kills: hours = 100*45/3600 = 1.25, score = (1/1.25)*100 = 80
 		List<CollectionLogItem> items = Arrays.asList(
 			makeMilestoneItem(1, "Hat 1", 100),
 			makeMilestoneItem(2, "Hat 2", 500),
@@ -236,7 +290,9 @@ public class EfficiencyCalculatorTest
 		ScoredItem result = calculator.scoreSource(source, false);
 
 		assertNotNull(result);
-		assertEquals(24.0, result.getScore(), 0.01);
+		// Best = Hat 1 at 100 kills: 100 * 45/3600 = 1.25 hrs, score = 80
+		assertEquals(80.0, result.getScore(), 0.01);
+		assertEquals("Hat 1", result.getBestItem().getName());
 	}
 
 	// --- Raid team size scaling ---
@@ -271,7 +327,7 @@ public class EfficiencyCalculatorTest
 		List<CollectionLogItem> items = Collections.singletonList(makeItem(1, "Drop", 1.0 / 512));
 		CollectionLogSource source = new CollectionLogSource("Test", CollectionLogCategory.BOSSES,
 			3000, 3000, 0, 120, "Test", Collections.emptyList(),
-			RewardType.DROP, 0, false, 2, null, items);
+			RewardType.DROP, 0, false, 2, false, null, items);
 		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
 
 		ScoredItem result = calculator.scoreSource(source, false);
@@ -298,10 +354,11 @@ public class EfficiencyCalculatorTest
 
 		assertNotNull(result);
 		assertEquals(2, result.getMissingItemCount());
-		// Pet: score = 0.005 * (3600/2400) * 100 = 0.75
 		// Cape: milestoneKills=1, hours = 1 * 2400/3600 = 0.667, score = (1/0.667)*100 = 150
-		// Total: 150.75
-		assertEquals(150.75, result.getScore(), 1.0);
+		// Pet: score = 0.005 * (3600/2400) * 100 = 0.75
+		// Best = Cape at 150
+		assertEquals(150.0, result.getScore(), 1.0);
+		assertEquals("Cape", result.getBestItem().getName());
 	}
 
 	@Test
@@ -323,6 +380,98 @@ public class EfficiencyCalculatorTest
 		assertEquals(0.75, result.getScore(), 0.01);
 	}
 
+	// --- Mixed source: milestone vs shop vs drop ---
+
+	@Test
+	public void testMixedSource_bestItemIsGuaranteed()
+	{
+		// 1 rare drop at 1/30 + 2 milestone items (milestoneKills=1) + 2 shop items (1000 pts each)
+		// pointsPerHour = 200
+		List<CollectionLogItem> items = Arrays.asList(
+			makeItem(1, "Rare drop", 1.0 / 30),
+			makeMilestoneItem(2, "Milestone A", 1),
+			makeMilestoneItem(3, "Milestone B", 1),
+			makeShopItem(4, "Shop item A", 1000),
+			makeShopItem(5, "Shop item B", 1000));
+		CollectionLogSource source = makeMixedSource("Test Mixed", 300, 200, items);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		assertNotNull(result);
+		assertEquals(5, result.getMissingItemCount());
+
+		// Individual scores:
+		// Drop: (1/30) * (3600/300) * 100 = 40.0
+		// Milestone A: milestoneKills=1, hours = 300/3600 = 0.0833, score = 1200
+		// Milestone B: same = 1200
+		// Shop A: 1000/200 = 5 hrs, score = 20
+		// Shop B: same = 20
+		// Best = Milestone A at 1200
+		assertEquals(1200.0, result.getScore(), 1.0);
+		assertEquals("Milestone A", result.getBestItem().getName());
+	}
+
+	@Test
+	public void testMixedSource_onlyShopGuaranteed_bestIsShop()
+	{
+		// Source with rare drops + shop items but NO milestones
+		List<CollectionLogItem> items = Arrays.asList(
+			makeItem(1, "Rare drop", 1.0 / 100),
+			makeShopItem(2, "Shop A", 500),
+			makeShopItem(3, "Shop B", 500));
+		CollectionLogSource source = makeMixedSource("Test Shop Mixed", 300, 100, items);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		// Drop: 0.01 * 12 * 100 = 12
+		// Shop A: 100/500 * 100 = 20
+		// Shop B: same = 20
+		// Best = Shop A at 20
+		assertEquals(20.0, result.getScore(), 0.5);
+	}
+
+	// --- Aggregated source scoring ---
+
+	@Test
+	public void testAggregatedSource_bestItemScore()
+	{
+		// Aggregated source: best individual item is used (same as per-item model)
+		List<CollectionLogItem> items = Arrays.asList(
+			makeItem(1, "Common drop", 1.0 / 100),   // best rate
+			makeItem(2, "Medium drop", 1.0 / 500),
+			makeItem(3, "Rare drop", 1.0 / 1000));
+		CollectionLogSource source = makeAggregatedSource("Slayer", 30, items);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		// Best item = Common drop at 1/100, score = 0.01 * 120 * 100 = 120
+		double expectedScore = (1.0 / 100) * (3600.0 / 30) * 100;
+		assertEquals(expectedScore, result.getScore(), 0.01);
+		assertEquals("Common drop", result.getBestItem().getName());
+	}
+
+	@Test
+	public void testNonAggregatedSource_bestItemScore()
+	{
+		// Normal source: also uses best item score (not sum-of-rates anymore)
+		List<CollectionLogItem> items = Arrays.asList(
+			makeItem(1, "Drop A", 1.0 / 100),
+			makeItem(2, "Drop B", 1.0 / 500),
+			makeItem(3, "Drop C", 1.0 / 1000));
+		CollectionLogSource source = makeSource("Normal Boss", CollectionLogCategory.BOSSES, 30, items);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		// Best = Drop A at 1/100, score = 0.01 * 120 * 100 = 120
+		double expectedScore = (1.0 / 100) * (3600.0 / 30) * 100;
+		assertEquals(expectedScore, result.getScore(), 0.01);
+		assertEquals("Drop A", result.getBestItem().getName());
+	}
+
 	// --- Clue effective kill time ---
 
 	@Test
@@ -331,7 +480,7 @@ public class EfficiencyCalculatorTest
 		CollectionLogSource source = new CollectionLogSource("Easy Treasure Trails",
 			CollectionLogCategory.CLUES, 3000, 3000, 0, 600,
 			"Easy Treasure Trails", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, null,
+			RewardType.DROP, 0, false, 1, false, null,
 			Collections.singletonList(makeItem(1, "Drop", 0.01)));
 		when(clueEstimator.estimateCompletionSeconds("Easy Treasure Trails")).thenReturn(900);
 
@@ -345,12 +494,73 @@ public class EfficiencyCalculatorTest
 		CollectionLogSource source = new CollectionLogSource("Easy Treasure Trails",
 			CollectionLogCategory.CLUES, 3000, 3000, 0, 600,
 			"Easy Treasure Trails", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, null,
+			RewardType.DROP, 0, false, 1, false, null,
 			Collections.singletonList(makeItem(1, "Drop", 0.01)));
 		when(clueEstimator.estimateCompletionSeconds("Easy Treasure Trails")).thenReturn(0);
 
 		int effective = calculator.getEffectiveKillTime(source);
 		assertEquals(600, effective);
+	}
+
+	// --- Edge case safety ---
+
+	@Test
+	public void testZeroDropRate_returnsZeroScore()
+	{
+		// dropRate = 0 should not cause division by zero
+		CollectionLogSource source = makeSource("Test", CollectionLogCategory.BOSSES, 60,
+			Collections.singletonList(makeItem(1, "Bad item", 0.0)));
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		assertNotNull(result);
+		// Falls through to fallback: missingCount * 0.2 = 0.2
+		assertEquals(0.2, result.getScore(), 0.01);
+	}
+
+	@Test
+	public void testZeroKillTime_returnsZeroKillsPerHour()
+	{
+		// killTimeSeconds = 0 should not cause division by zero
+		CollectionLogSource source = makeSource("Test", CollectionLogCategory.BOSSES, 0,
+			Collections.singletonList(makeItem(1, "Drop", 0.01)));
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		assertNotNull(result);
+		// killsPerHour = 0, so drop score = 0, falls to fallback 0.2
+		assertEquals(0.2, result.getScore(), 0.01);
+	}
+
+	@Test
+	public void testZeroPointsPerHour_shopItemFallback()
+	{
+		// pointsPerHour = 0 with pointCost > 0 should not crash
+		List<CollectionLogItem> items = Collections.singletonList(makeShopItem(1, "Item", 500));
+		CollectionLogSource source = makeShopSource("Test", 300, 0, items);
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		assertNotNull(result);
+		// pointsPerHour=0 fails guard, returns 0.2 fallback
+		assertEquals(0.2, result.getScore(), 0.01);
+	}
+
+	@Test
+	public void testNegativeDropRate_returnsZeroScore()
+	{
+		// Negative dropRate should be treated as invalid
+		CollectionLogSource source = makeSource("Test", CollectionLogCategory.BOSSES, 60,
+			Collections.singletonList(makeItem(1, "Bad item", -0.5)));
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		assertNotNull(result);
+		assertEquals(0.2, result.getScore(), 0.01);
 	}
 
 	// --- formatScore display ---
