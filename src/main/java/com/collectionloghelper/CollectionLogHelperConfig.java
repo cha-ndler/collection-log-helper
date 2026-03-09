@@ -68,6 +68,16 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "exportEfficiencyLog",
+		name = "Export Efficiency Log",
+		description = "Write a detailed efficiency ranking to ~/.runelite/collection-log-helper/{player}/efficiency-export.txt after each sync"
+	)
+	default boolean exportEfficiencyLog()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "raidTeamSize",
 		name = "Raid Team Size",
 		description = "Your typical raid team size — adjusts estimated completion times for CoX, ToB, and ToA",

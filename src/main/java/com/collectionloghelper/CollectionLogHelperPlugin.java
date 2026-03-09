@@ -141,6 +141,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private SlayerStrategyCalculator slayerStrategyCalculator;
 
+	@Inject
+	private com.collectionloghelper.data.PluginDataManager pluginDataManager;
+
 	/** Minimum tile movement before proximity view is refreshed. */
 	private static final int PROXIMITY_REFRESH_TILES = 10;
 
@@ -170,9 +173,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	/** Pending ShortestPath target — set after "clear", sent as "path" on the next game tick. */
 	private WorldPoint pendingShortestPathTarget;
 	private boolean slayerRefreshPending;
-
-	/** Dev mode: enables efficiency export on sync. Set via -Dcollectionlog.devmode=true */
-	private final boolean devMode = Boolean.getBoolean("collectionlog.devmode");
 
 	@Override
 	protected void startUp() throws Exception
@@ -254,6 +254,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		playerBankState.reset();
 		slayerTaskState.reset();
 		collectionState.clearState();
+		pluginDataManager.reset();
 
 		log.info("Collection Log Helper stopped");
 	}
@@ -283,6 +284,9 @@ public class CollectionLogHelperPlugin extends Plugin
 				slayerTaskState.refresh();
 				lastObtainedCount = collectionState.getTotalObtained();
 
+				// Init per-character data directory
+				pluginDataManager.init();
+
 				// Smart sync: if cached data is fresh, skip sync prompts
 				if (freshLogin && collectionState.isCacheFresh())
 				{
@@ -298,10 +302,7 @@ public class CollectionLogHelperPlugin extends Plugin
 						log.info("Bank cache loaded — skipping bank scan prompt");
 					}
 
-					// Export efficiency list with cached data
-					java.io.File exportFile = new java.io.File(
-						net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
-					calculator.exportEfficiencyList(exportFile, client);
+					exportEfficiencyIfEnabled();
 				}
 
 				if (panel != null)
@@ -345,6 +346,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			guidanceOverlay.setShowBankReminder(false);
 			dataSyncState.reset();
 			playerBankState.reset();
+			pluginDataManager.reset();
 		}
 	}
 
@@ -581,11 +583,7 @@ public class CollectionLogHelperPlugin extends Plugin
 					panel.updateDataSyncWarning();
 					panel.rebuild();
 				}
-				{
-					java.io.File exportFile = new java.io.File(
-						net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
-					calculator.exportEfficiencyList(exportFile, client);
-				}
+				exportEfficiencyIfEnabled();
 			}
 		}
 
@@ -633,6 +631,22 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		// World map arrow rotation
 		updateWorldMapArrow();
+	}
+
+	private void exportEfficiencyIfEnabled()
+	{
+		if (!config.exportEfficiencyLog())
+		{
+			return;
+		}
+		java.io.File exportFile = pluginDataManager.getFile("efficiency-export.txt");
+		if (exportFile == null)
+		{
+			// Fallback if player name not yet available
+			exportFile = new java.io.File(
+				net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
+		}
+		calculator.exportEfficiencyList(exportFile, client);
 	}
 
 	private void updateWorldMapArrow()
