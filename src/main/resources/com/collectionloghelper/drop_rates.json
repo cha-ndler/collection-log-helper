@@ -1583,7 +1583,8 @@
     "worldX": 3174,
     "worldY": 9899,
     "worldPlane": 0,
-    "killTimeSeconds": 60,
+    "killTimeSeconds": 4500,
+    "locationDescription": "Varrock Sewers (requires Mossy key from moss giants)",
     "items": [
       {
         "itemId": 22372,
@@ -1593,8 +1594,7 @@
         "isPet": false,
         "wikiPage": "Bryophyta%27s_essence"
       }
-    ],
-    "locationDescription": "Varrock Sewers"
+    ]
   },
   {
     "name": "Obor",
@@ -1602,7 +1602,8 @@
     "worldX": 3095,
     "worldY": 9832,
     "worldPlane": 0,
-    "killTimeSeconds": 60,
+    "killTimeSeconds": 3900,
+    "locationDescription": "Edgeville Dungeon (requires Giant key from hill giants)",
     "items": [
       {
         "itemId": 20756,
@@ -1612,8 +1613,7 @@
         "isPet": false,
         "wikiPage": "Hill_giant_club"
       }
-    ],
-    "locationDescription": "Edgeville Dungeon"
+    ]
   },
   {
     "name": "Dagannoth Rex",
