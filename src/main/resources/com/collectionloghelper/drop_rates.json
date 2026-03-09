@@ -2380,8 +2380,8 @@
     "worldX": 1636,
     "worldY": 3673,
     "worldPlane": 0,
-    "locationDescription": "Catacombs of Kourend, Kourend Castle",
-    "killTimeSeconds": 60,
+    "locationDescription": "Catacombs of Kourend (requires Dark totem from Catacomb monsters)",
+    "killTimeSeconds": 5400,
     "items": [
       {
         "itemId": 21275,
@@ -6332,7 +6332,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Minor_beginner_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 50
       },
       {
         "itemId": 30904,
@@ -6341,7 +6341,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Major_beginner_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 100
       },
       {
         "itemId": 30906,
@@ -6350,7 +6350,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Minor_easy_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 100
       },
       {
         "itemId": 30908,
@@ -6359,7 +6359,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Major_easy_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 200
       },
       {
         "itemId": 30910,
@@ -6368,7 +6368,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Minor_medium_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 100
       },
       {
         "itemId": 30912,
@@ -6377,7 +6377,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Major_medium_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 250
       },
       {
         "itemId": 30914,
@@ -6386,7 +6386,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Minor_hard_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 50
       },
       {
         "itemId": 30916,
@@ -6395,7 +6395,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Major_hard_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 150
       },
       {
         "itemId": 30918,
@@ -6404,7 +6404,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Minor_elite_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 50
       },
       {
         "itemId": 30920,
@@ -6413,7 +6413,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Major_elite_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 150
       },
       {
         "itemId": 30922,
@@ -6422,7 +6422,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Minor_master_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 25
       },
       {
         "itemId": 30924,
@@ -6431,7 +6431,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Major_master_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 75
       },
       {
         "itemId": 30926,
@@ -6440,12 +6440,10 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mimic_scroll_case",
-        "pointCost": 5
+        "milestoneKills": 1
       }
     ],
-    "locationDescription": "Awarded for completing clue scroll milestones across all tiers",
-    "rewardType": "SHOP",
-    "pointsPerHour": 10
+    "locationDescription": "Awarded for completing clue scroll milestones across all tiers"
   },
   {
     "name": "Castle Wars",
