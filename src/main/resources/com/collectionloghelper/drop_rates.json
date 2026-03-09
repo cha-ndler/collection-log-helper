@@ -7199,8 +7199,8 @@
   {
     "name": "Trouble Brewing",
     "category": "MINIGAMES",
-    "worldX": 3811,
-    "worldY": 2847,
+    "worldX": 3812,
+    "worldY": 3021,
     "worldPlane": 0,
     "killTimeSeconds": 1200,
     "requirements": {"quests": ["CABIN_FEVER"], "skills": [{"skill": "COOKING", "level": 40}]},
