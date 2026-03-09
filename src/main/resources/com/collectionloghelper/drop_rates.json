@@ -8211,11 +8211,12 @@
       },
       {
         "itemId": 28613,
-        "name": "Pheasant tail feathers",
-        "dropRate": 0.5,
+        "name": "Cape pouch",
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Pheasant_tail_feathers"
+        "wikiPage": "Cape_pouch",
+        "pointCost": 2500
       },
       {
         "itemId": 28674,
@@ -10855,8 +10856,8 @@
   {
     "name": "Creature Creation (Newtroost)",
     "category": "OTHER",
-    "worldX": 2629,
-    "worldY": 3196,
+    "worldX": 2639,
+    "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "requirements": {
@@ -10887,8 +10888,8 @@
   {
     "name": "Creature Creation (Unicow)",
     "category": "OTHER",
-    "worldX": 2629,
-    "worldY": 3196,
+    "worldX": 2639,
+    "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "requirements": {
@@ -10919,8 +10920,8 @@
   {
     "name": "Creature Creation (Spidine)",
     "category": "OTHER",
-    "worldX": 2629,
-    "worldY": 3196,
+    "worldX": 2639,
+    "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "requirements": {
@@ -10951,8 +10952,8 @@
   {
     "name": "Creature Creation (Swordchick)",
     "category": "OTHER",
-    "worldX": 2629,
-    "worldY": 3196,
+    "worldX": 2639,
+    "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "requirements": {
@@ -10983,8 +10984,8 @@
   {
     "name": "Creature Creation (Jubster)",
     "category": "OTHER",
-    "worldX": 2629,
-    "worldY": 3196,
+    "worldX": 2639,
+    "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "requirements": {
@@ -11015,8 +11016,8 @@
   {
     "name": "Creature Creation (Frogeel)",
     "category": "OTHER",
-    "worldX": 2629,
-    "worldY": 3196,
+    "worldX": 2639,
+    "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "requirements": {

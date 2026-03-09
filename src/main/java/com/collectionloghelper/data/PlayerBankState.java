@@ -11,6 +11,7 @@ import net.runelite.api.Client;
 import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.ItemComposition;
+import net.runelite.client.config.ConfigManager;
 
 /**
  * Tracks scanned bank contents relevant to clue efficiency scoring.
@@ -20,7 +21,13 @@ import net.runelite.api.ItemComposition;
 @Singleton
 public class PlayerBankState
 {
+	private static final String CONFIG_GROUP = "collectionloghelper";
+	private static final String BANK_CASKETS_KEY = "bankCaskets";
+	private static final String BANK_SCROLLS_KEY = "bankScrolls";
+	private static final String BANK_CONTAINERS_KEY = "bankContainers";
+
 	private final Client client;
+	private final ConfigManager configManager;
 
 	/** Casket counts per tier (unopened reward caskets). */
 	private final Map<ClueTier, Integer> casketCounts = new EnumMap<>(ClueTier.class);
@@ -31,10 +38,14 @@ public class PlayerBankState
 	/** Clue container counts per tier (bottles + geodes + nests). */
 	private final Map<ClueTier, Integer> containerCounts = new EnumMap<>(ClueTier.class);
 
+	/** Whether the current data was loaded from cache (not a fresh scan). */
+	private boolean loadedFromCache;
+
 	@Inject
-	private PlayerBankState(Client client)
+	private PlayerBankState(Client client, ConfigManager configManager)
 	{
 		this.client = client;
+		this.configManager = configManager;
 	}
 
 	/**
@@ -104,7 +115,9 @@ public class PlayerBankState
 			}
 		}
 
+		loadedFromCache = false;
 		logScanResults();
+		saveToCache();
 	}
 
 	/**
@@ -264,11 +277,110 @@ public class PlayerBankState
 	}
 
 	/**
-	 * Resets all tracked bank state.
+	 * Returns true if the current data was loaded from cache rather than a fresh bank scan.
+	 */
+	public boolean isLoadedFromCache()
+	{
+		return loadedFromCache;
+	}
+
+	/**
+	 * Returns true if any cached bank data exists for this RS profile.
+	 */
+	public boolean hasCachedData()
+	{
+		return configManager.getRSProfileConfiguration(CONFIG_GROUP, BANK_CASKETS_KEY) != null;
+	}
+
+	/**
+	 * Load cached bank scan data from config (per RS profile).
+	 * Returns true if cache was found and loaded.
+	 */
+	public boolean loadFromCache()
+	{
+		clearCounts();
+		boolean found = false;
+
+		found |= loadMapFromConfig(BANK_CASKETS_KEY, casketCounts);
+		found |= loadMapFromConfig(BANK_SCROLLS_KEY, scrollCounts);
+		found |= loadMapFromConfig(BANK_CONTAINERS_KEY, containerCounts);
+
+		if (found)
+		{
+			loadedFromCache = true;
+			log.info("Loaded cached bank data: {} caskets, {} scrolls, {} containers",
+				getTotalCaskets(), getTotalScrolls(), getTotalContainers());
+		}
+		return found;
+	}
+
+	/**
+	 * Save current bank scan data to config (per RS profile).
+	 */
+	private void saveToCache()
+	{
+		saveMapToConfig(BANK_CASKETS_KEY, casketCounts);
+		saveMapToConfig(BANK_SCROLLS_KEY, scrollCounts);
+		saveMapToConfig(BANK_CONTAINERS_KEY, containerCounts);
+	}
+
+	private void saveMapToConfig(String key, Map<ClueTier, Integer> map)
+	{
+		if (map.isEmpty())
+		{
+			configManager.unsetRSProfileConfiguration(CONFIG_GROUP, key);
+			return;
+		}
+		StringBuilder sb = new StringBuilder();
+		for (Map.Entry<ClueTier, Integer> entry : map.entrySet())
+		{
+			if (sb.length() > 0)
+			{
+				sb.append(',');
+			}
+			sb.append(entry.getKey().name()).append(':').append(entry.getValue());
+		}
+		configManager.setRSProfileConfiguration(CONFIG_GROUP, key, sb.toString());
+	}
+
+	private boolean loadMapFromConfig(String key, Map<ClueTier, Integer> map)
+	{
+		String saved = configManager.getRSProfileConfiguration(CONFIG_GROUP, key);
+		if (saved == null || saved.isEmpty())
+		{
+			return false;
+		}
+		try
+		{
+			for (String entry : saved.split(","))
+			{
+				String[] parts = entry.split(":");
+				if (parts.length == 2)
+				{
+					ClueTier tier = ClueTier.valueOf(parts[0]);
+					int count = Integer.parseInt(parts[1]);
+					if (count > 0)
+					{
+						map.put(tier, count);
+					}
+				}
+			}
+			return true;
+		}
+		catch (Exception e)
+		{
+			log.warn("Failed to parse cached bank data for key {}", key, e);
+			return false;
+		}
+	}
+
+	/**
+	 * Resets all tracked bank state (in-memory only, does not clear cache).
 	 */
 	public void reset()
 	{
 		clearCounts();
+		loadedFromCache = false;
 	}
 
 	private void clearCounts()
