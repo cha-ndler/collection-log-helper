@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -21,6 +23,8 @@ import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import net.runelite.api.Client;
+import net.runelite.api.Skill;
 
 @Slf4j
 @Singleton
@@ -341,7 +345,7 @@ public class EfficiencyCalculator
 	 * Exports the full ranked efficiency list to a text file for debugging.
 	 * Each source shows its score, reasoning, and per-item breakdown.
 	 */
-	public void exportEfficiencyList(File outputFile)
+	public void exportEfficiencyList(File outputFile, Client client)
 	{
 		List<ScoredItem> scored = rankByEfficiency();
 		int totalObtained = 0;
@@ -360,10 +364,45 @@ public class EfficiencyCalculator
 
 		try (PrintWriter pw = new PrintWriter(new FileWriter(outputFile)))
 		{
-			pw.printf("=== Efficiency Export ===%n");
+			pw.printf("=== Collection Log Helper — Efficiency Export ===%n");
+			pw.printf("Exported: %s%n", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			pw.printf("Collection Log: %d/%d (%.1f%%)%n", totalObtained, totalItems,
 				totalItems > 0 ? 100.0 * totalObtained / totalItems : 0);
-			pw.printf("Total sources with missing items: %d%n%n", scored.size());
+			pw.printf("Varp totalObtained: %d | Tracked items: %d%n",
+				collectionState.getTotalObtained(), collectionState.getObtainedCount());
+			pw.printf("Total sources with missing items: %d%n", scored.size());
+
+			// Player stats context
+			if (client != null)
+			{
+				try
+				{
+					pw.printf("%n=== Account Stats ===%n");
+					pw.printf("Combat: %d | Total: %d%n",
+						client.getLocalPlayer() != null ? client.getLocalPlayer().getCombatLevel() : 0,
+						client.getTotalLevel());
+					for (Skill skill : Skill.values())
+					{
+						if (skill == Skill.OVERALL)
+						{
+							continue;
+						}
+						pw.printf("  %-15s %d%n", skill.getName() + ":", client.getRealSkillLevel(skill));
+					}
+				}
+				catch (Exception e)
+				{
+					pw.printf("  (Could not read player stats)%n");
+				}
+			}
+
+			// Slayer task context
+			if (slayerTaskState.isTaskActive())
+			{
+				pw.printf("%nSlayer Task: %s (%d remaining)%n",
+					slayerTaskState.getCreatureName(), slayerTaskState.getRemaining());
+			}
+			pw.println();
 
 			int rank = 0;
 			for (ScoredItem si : scored)
@@ -376,8 +415,17 @@ public class EfficiencyCalculator
 				pw.printf("  Category: %s | RewardType: %s | Locked: %s%s%n",
 					src.getCategory(), src.getRewardType(), si.isLocked(),
 					onTask ? " | ON SLAYER TASK" : "");
+				pw.printf("  Location: %s%n", src.getDisplayLocation(requirementsChecker));
 				pw.printf("  killTimeSeconds: %d (effective: %d) | rollsPerKill: %d%n",
 					src.getKillTimeSeconds(), getEffectiveKillTime(src), src.getRollsPerKill());
+				if (si.isLocked())
+				{
+					List<String> unmet = requirementsChecker.getUnmetRequirements(src.getName());
+					if (!unmet.isEmpty())
+					{
+						pw.printf("  Unmet requirements: %s%n", String.join(", ", unmet));
+					}
+				}
 				if (src.getPointsPerHour() > 0)
 				{
 					pw.printf("  pointsPerHour: %.0f%n", src.getPointsPerHour());

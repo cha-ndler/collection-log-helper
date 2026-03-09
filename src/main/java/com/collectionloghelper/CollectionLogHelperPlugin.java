@@ -297,6 +297,11 @@ public class CollectionLogHelperPlugin extends Plugin
 						dataSyncState.setBankScanned(true);
 						log.info("Bank cache loaded — skipping bank scan prompt");
 					}
+
+					// Export efficiency list with cached data
+					java.io.File exportFile = new java.io.File(
+						net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
+					calculator.exportEfficiencyList(exportFile, client);
 				}
 
 				if (panel != null)
@@ -576,11 +581,10 @@ public class CollectionLogHelperPlugin extends Plugin
 					panel.updateDataSyncWarning();
 					panel.rebuild();
 				}
-				if (devMode)
 				{
 					java.io.File exportFile = new java.io.File(
 						net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
-					calculator.exportEfficiencyList(exportFile);
+					calculator.exportEfficiencyList(exportFile, client);
 				}
 			}
 		}
