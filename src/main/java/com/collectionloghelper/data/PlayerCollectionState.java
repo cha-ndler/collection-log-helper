@@ -17,6 +17,7 @@ public class PlayerCollectionState
 {
 	private static final String CONFIG_GROUP = "collectionloghelper";
 	private static final String OBTAINED_KEY = "obtainedItems";
+	private static final String SYNCED_COUNT_KEY = "lastSyncedCount";
 
 	private final Client client;
 	private final ConfigManager configManager;
@@ -179,6 +180,48 @@ public class PlayerCollectionState
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Save the current totalObtained varp as the last synced count.
+	 * Called after a successful collection log sync.
+	 */
+	public void saveLastSyncedCount()
+	{
+		configManager.setRSProfileConfiguration(CONFIG_GROUP, SYNCED_COUNT_KEY,
+			String.valueOf(totalObtained));
+		log.debug("Saved last synced count: {}", totalObtained);
+	}
+
+	/**
+	 * Returns the last synced totalObtained count, or -1 if never synced.
+	 */
+	public int getLastSyncedCount()
+	{
+		String saved = configManager.getRSProfileConfiguration(CONFIG_GROUP, SYNCED_COUNT_KEY);
+		if (saved != null && !saved.isEmpty())
+		{
+			try
+			{
+				return Integer.parseInt(saved.trim());
+			}
+			catch (NumberFormatException e)
+			{
+				log.warn("Failed to parse lastSyncedCount", e);
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * Returns true if the cached obtained items are still fresh — i.e., the
+	 * varp totalObtained matches the last synced count, meaning no new items
+	 * have been obtained since the last sync.
+	 */
+	public boolean isCacheFresh()
+	{
+		int lastSynced = getLastSyncedCount();
+		return lastSynced >= 0 && lastSynced == totalObtained && !obtainedItemIds.isEmpty();
 	}
 
 	public int getObtainedCount()
