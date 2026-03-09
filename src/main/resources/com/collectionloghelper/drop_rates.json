@@ -3651,7 +3651,8 @@
     "worldY": 3107,
     "worldPlane": 0,
     "locationDescription": "Fortis Colosseum, Varlamore",
-    "killTimeSeconds": 2400,
+    "killTimeSeconds": 1440,
+    "requirements": {"quests": ["CHILDREN_OF_THE_SUN"]},
     "items": [
       {
         "itemId": 28923,
@@ -3849,7 +3850,7 @@
     "worldY": 3131,
     "worldPlane": 0,
     "locationDescription": "Cam Torum entrance, Ralos Rise",
-    "killTimeSeconds": 120,
+    "killTimeSeconds": 360,
     "items": [
       {
         "itemId": 29296,
@@ -4270,6 +4271,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "locationDescription": "Slayer Tower, Morytania",
+    "aggregated": true,
     "items": [
       {
         "itemId": 4099,
@@ -5139,6 +5141,8 @@
     "worldY": 3168,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "rewardType": "MIXED",
+    "pointsPerHour": 108,
     "requirements": {
       "quests": [
         "TEMPLE_OF_THE_EYE"
@@ -5234,50 +5238,56 @@
       {
         "itemId": 26850,
         "name": "Hat of the eye",
-        "dropRate": 0.083,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Hat_of_the_eye"
+        "wikiPage": "Hat_of_the_eye",
+        "pointCost": 400
       },
       {
         "itemId": 26852,
         "name": "Robe top of the eye",
-        "dropRate": 0.1,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Robe_top_of_the_eye"
+        "wikiPage": "Robe_top_of_the_eye",
+        "pointCost": 350
       },
       {
         "itemId": 26854,
         "name": "Robe bottoms of the eye",
-        "dropRate": 0.1,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Robe_bottoms_of_the_eye"
+        "wikiPage": "Robe_bottoms_of_the_eye",
+        "pointCost": 350
       },
       {
         "itemId": 26856,
         "name": "Boots of the eye",
-        "dropRate": 0.143,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Boots_of_the_eye"
+        "wikiPage": "Boots_of_the_eye",
+        "pointCost": 250
       },
       {
         "itemId": 26815,
         "name": "Ring of the elements",
-        "dropRate": 0.083,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ring_of_the_elements"
+        "wikiPage": "Ring_of_the_elements",
+        "pointCost": 400
       },
       {
         "itemId": 26820,
         "name": "Guardian's eye",
-        "dropRate": 0.012,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Guardian%27s_eye"
+        "wikiPage": "Guardian%27s_eye",
+        "pointCost": 3000
       },
       {
         "itemId": 26901,
@@ -5391,6 +5401,7 @@
     "worldY": 3151,
     "worldPlane": 0,
     "killTimeSeconds": 360,
+    "requirements": {"quests": ["SLEEPING_GIANTS"], "skills": [{"skill": "SMITHING", "level": 15}]},
     "items": [
       {
         "itemId": 27023,
@@ -5886,6 +5897,7 @@
     "worldY": 2955,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "requirements": {"quests": ["CHILDREN_OF_THE_SUN"], "skills": [{"skill": "HERBLORE", "level": 60}]},
     "items": [
       {
         "itemId": 29978,
@@ -5962,6 +5974,7 @@
     "worldY": 3807,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "requirements": {"quests": ["BONE_VOYAGE"], "skills": [{"skill": "MINING", "level": 50}]},
     "items": [
       {
         "itemId": 21697,
@@ -6047,6 +6060,7 @@
     "worldY": 3504,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "requirements": {"skills": [{"skill": "FARMING", "level": 34}]},
     "items": [
       {
         "itemId": 13646,
@@ -6122,7 +6136,7 @@
     "worldX": 2436,
     "worldY": 3500,
     "worldPlane": 0,
-    "killTimeSeconds": 420,
+    "killTimeSeconds": 120,
     "items": [
       {
         "itemId": 9470,
@@ -6923,7 +6937,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(1)",
-        "pointCost": 1
+        "milestoneKills": 10
       },
       {
         "itemId": 24209,
@@ -6932,7 +6946,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(10)",
-        "pointCost": 1
+        "milestoneKills": 100
       },
       {
         "itemId": 24211,
@@ -6941,7 +6955,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(50)",
-        "pointCost": 1
+        "milestoneKills": 500
       },
       {
         "itemId": 24213,
@@ -6950,7 +6964,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(100)",
-        "pointCost": 1
+        "milestoneKills": 1000
       },
       {
         "itemId": 24215,
@@ -6959,7 +6973,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(500)",
-        "pointCost": 1
+        "milestoneKills": 5000
       },
       {
         "itemId": 24520,
@@ -6968,7 +6982,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(1000)",
-        "pointCost": 1
+        "milestoneKills": 10000
       },
       {
         "itemId": 12757,
@@ -7067,7 +7081,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lava_staff_upgrade_kit",
-        "pointCost": 12
+        "pointCost": 13
       },
       {
         "itemId": 24217,
@@ -7103,7 +7117,6 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Golden_armadyl_special_attack",
-        "milestoneKills": 1,
         "pointCost": 75
       },
       {
@@ -7113,7 +7126,6 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Golden_bandos_special_attack",
-        "milestoneKills": 1,
         "pointCost": 75
       },
       {
@@ -7123,7 +7135,6 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Golden_saradomin_special_attack",
-        "milestoneKills": 1,
         "pointCost": 75
       },
       {
@@ -7133,12 +7144,11 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Golden_zamorak_special_attack",
-        "milestoneKills": 1,
         "pointCost": 75
       }
     ],
     "locationDescription": "Ferox Enclave, north of Varrock in the Wilderness",
-    "rewardType": "SHOP",
+    "rewardType": "MIXED",
     "pointsPerHour": 25
   },
   {
@@ -7193,6 +7203,7 @@
     "worldY": 2847,
     "worldPlane": 0,
     "killTimeSeconds": 1200,
+    "requirements": {"quests": ["CABIN_FEVER"], "skills": [{"skill": "COOKING", "level": 40}]},
     "items": [
       {
         "itemId": 8959,
@@ -8152,10 +8163,27 @@
   {
     "name": "Forestry",
     "category": "OTHER",
-    "worldX": 3222,
-    "worldY": 3501,
+    "worldX": 2725,
+    "worldY": 3490,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 120,
+    "waypoints": [
+      {
+        "name": "Prifddinas yews, SE bank",
+        "worldX": 3313,
+        "worldY": 6092,
+        "worldPlane": 0,
+        "requirements": {
+          "quests": ["SONG_OF_THE_ELVES"]
+        }
+      },
+      {
+        "name": "Seers' Village oak south of bank (W444 meta)",
+        "worldX": 2725,
+        "worldY": 3490,
+        "worldPlane": 0
+      }
+    ],
     "items": [
       {
         "itemId": 28626,
@@ -8330,7 +8358,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pheasant_cape",
-        "milestoneKills": 1
+        "milestoneKills": 30
       },
       {
         "itemId": 28618,
@@ -8339,7 +8367,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pheasant_boots",
-        "milestoneKills": 1
+        "milestoneKills": 60
       },
       {
         "itemId": 28620,
@@ -8348,7 +8376,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pheasant_hat",
-        "milestoneKills": 1
+        "milestoneKills": 90
       },
       {
         "itemId": 28622,
@@ -8357,10 +8385,10 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pheasant_legs",
-        "milestoneKills": 1
+        "milestoneKills": 120
       }
     ],
-    "locationDescription": "Various Woodcutting locations during Forestry events",
+    "locationDescription": "Seers' Village oak south of bank (W444 meta), NOT Woodcutting Guild",
     "rewardType": "MIXED",
     "pointsPerHour": 200
   },
@@ -8526,6 +8554,7 @@
     "worldY": 3069,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "requirements": {"quests": ["CHILDREN_OF_THE_SUN"], "skills": [{"skill": "HUNTER", "level": 46}]},
     "items": [
       {
         "itemId": 29263,
@@ -8576,7 +8605,7 @@
         "wikiPage": "Quetzin"
       }
     ],
-    "locationDescription": "Hunter Guild in the Kebos Lowlands",
+    "locationDescription": "Hunter Guild in Avium Savannah, Varlamore",
     "rewardType": "MIXED"
   },
   {
@@ -8689,6 +8718,7 @@
     "worldY": 2703,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "requirements": {"quests": ["MONKEY_MADNESS_II"], "skills": [{"skill": "AGILITY", "level": 48}]},
     "items": [
       {
         "itemId": 24862,
@@ -9329,6 +9359,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "aggregated": true,
     "items": [
       {
         "itemId": 1249,
@@ -10035,6 +10066,7 @@
     "worldY": 5774,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "requirements": {"quests": ["BELOW_ICE_MOUNTAIN"]},
     "items": [
       {
         "itemId": 25641,
@@ -10127,7 +10159,8 @@
     "worldX": 1652,
     "worldY": 2931,
     "worldPlane": 0,
-    "killTimeSeconds": 90,
+    "killTimeSeconds": 60,
+    "requirements": {"quests": ["CHILDREN_OF_THE_SUN"], "skills": [{"skill": "AGILITY", "level": 50}]},
     "items": [
       {
         "itemId": 30040,
@@ -11019,6 +11052,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 500,
     "locationDescription": "The Darkfrost, Hailstorm Mountains in Varlamore",
+    "requirements": {"quests": ["CHILDREN_OF_THE_SUN"]},
     "items": [
       {
         "itemId": 30070,
@@ -11179,6 +11213,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "locationDescription": "Ruins of Mokhaiotl, beneath Tlati Rainforest in Varlamore",
+    "requirements": {"quests": ["THE_FINAL_DAWN"]},
     "items": [
       {
         "itemId": 31088,
@@ -11237,7 +11272,7 @@
     "worldX": 3008,
     "worldY": 3150,
     "worldPlane": 0,
-    "killTimeSeconds": 180,
+    "killTimeSeconds": 75,
     "locationDescription": "Asgarnian Ice Dungeon, south of Port Sarim",
     "items": [
       {
@@ -11539,6 +11574,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "locationDescription": "Tar Swamp, Fossil Island",
+    "requirements": {"quests": ["BONE_VOYAGE"]},
     "items": [
       {
         "itemId": 30895,

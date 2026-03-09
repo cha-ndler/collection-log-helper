@@ -19,6 +19,7 @@ public class CollectionLogSource
     double pointsPerHour;
     boolean mutuallyExclusive;
     int rollsPerKill;
+    boolean aggregated;
     SourceRequirements requirements;
     List<CollectionLogItem> items;
 
@@ -39,6 +40,47 @@ public class CollectionLogSource
             return waypoints.get(0).getWorldPoint();
         }
         return new WorldPoint(worldX, worldY, worldPlane);
+    }
+
+    /**
+     * Returns the best accessible waypoint for this source based on the player's
+     * quest/skill progression. Falls back to the first waypoint or default coords.
+     */
+    public WorldPoint getWorldPoint(RequirementsChecker checker)
+    {
+        if (waypoints != null && !waypoints.isEmpty())
+        {
+            for (Waypoint wp : waypoints)
+            {
+                if (wp.getRequirements() == null || checker.meetsRequirements(wp.getRequirements()))
+                {
+                    return wp.getWorldPoint();
+                }
+            }
+            // All waypoints locked — use last as fallback
+            return waypoints.get(waypoints.size() - 1).getWorldPoint();
+        }
+        return new WorldPoint(worldX, worldY, worldPlane);
+    }
+
+    /**
+     * Returns the display location for the best accessible waypoint.
+     */
+    public String getDisplayLocation(RequirementsChecker checker)
+    {
+        if (waypoints != null && !waypoints.isEmpty())
+        {
+            for (Waypoint wp : waypoints)
+            {
+                if (wp.getRequirements() == null || checker.meetsRequirements(wp.getRequirements()))
+                {
+                    return wp.getName() != null ? wp.getName() : getDisplayLocation();
+                }
+            }
+            Waypoint last = waypoints.get(waypoints.size() - 1);
+            return last.getName() != null ? last.getName() : getDisplayLocation();
+        }
+        return getDisplayLocation();
     }
 
     public String getDisplayLocation()
