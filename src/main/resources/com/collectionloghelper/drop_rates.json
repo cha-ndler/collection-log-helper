@@ -659,7 +659,7 @@
       {
         "itemId": 12829,
         "name": "Spirit shield",
-        "dropRate": 0.000733,
+        "dropRate": 0.015625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Spirit_shield"
@@ -683,7 +683,7 @@
       {
         "itemId": 12823,
         "name": "Spectral sigil",
-        "dropRate": 0.015625,
+        "dropRate": 0.000733,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Spectral_sigil"

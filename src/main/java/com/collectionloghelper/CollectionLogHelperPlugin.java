@@ -47,6 +47,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.PluginMessage;
+import net.runelite.client.events.RuneScapeProfileChanged;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -284,33 +285,15 @@ public class CollectionLogHelperPlugin extends Plugin
 				slayerTaskState.refresh();
 				lastObtainedCount = collectionState.getTotalObtained();
 
-				// Init per-character data directory
-				pluginDataManager.init();
-
-				// Smart sync: if cached data is fresh, skip sync prompts
-				if (freshLogin && collectionState.isCacheFresh())
-				{
-					dataSyncState.setCollectionLogSynced(true);
-					hasCompletedFullSync = true;
-					log.info("Collection log cache is fresh (varp {} matches last sync) — skipping sync prompt",
-						collectionState.getTotalObtained());
-
-					// Also restore cached bank data if available
-					if (playerBankState.loadFromCache())
-					{
-						dataSyncState.setBankScanned(true);
-						log.info("Bank cache loaded — skipping bank scan prompt");
-					}
-
-					exportEfficiencyIfEnabled();
-				}
+				// Per-character dir and cache-fresh check are handled in
+				// onGameTick once varps and player name are available.
 
 				if (panel != null)
 				{
 					if (dataSyncState.isCollectionLogSynced())
 					{
 						panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
-							collectionState.getObtainedCount());
+							collectionState.getTotalObtained());
 					}
 					else
 					{
@@ -348,6 +331,18 @@ public class CollectionLogHelperPlugin extends Plugin
 			playerBankState.reset();
 			pluginDataManager.reset();
 		}
+	}
+
+	@Subscribe
+	public void onRuneScapeProfileChanged(RuneScapeProfileChanged event)
+	{
+		// RS profile is now available — pre-load cached obtained items so they're
+		// ready when onGameTick performs the cache-fresh check (varps aren't
+		// available yet during this event, so the full check happens in onGameTick).
+		collectionState.loadObtainedItems();
+		collectionState.captureRecentItems();
+		log.debug("RuneScapeProfileChanged — loaded {} obtained items from RS profile",
+			collectionState.getTotalObtained());
 	}
 
 	@Subscribe
@@ -505,6 +500,42 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
+		// Lazily init per-character data directory once player name is available
+		if (pluginDataManager.getCharacterDir() == null)
+		{
+			pluginDataManager.init();
+		}
+
+		// Deferred cache-fresh check: varps aren't loaded during LOGGED_IN or
+		// RuneScapeProfileChanged, so retry here once totalObtained becomes valid
+		if (!hasCompletedFullSync && collectionState.getTotalObtained() > 0
+			&& collectionState.isCacheFresh())
+		{
+			dataSyncState.setCollectionLogSynced(true);
+			hasCompletedFullSync = true;
+			log.info("Cache is fresh (varp {} matches last sync) — skipping sync prompt",
+				collectionState.getTotalObtained());
+
+			if (playerBankState.loadFromCache())
+			{
+				dataSyncState.setBankScanned(true);
+				log.info("Bank cache loaded — skipping bank scan prompt");
+			}
+
+			exportEfficiencyIfEnabled();
+
+			if (panel != null)
+			{
+				panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
+					collectionState.getTotalObtained());
+				panel.updateDataSyncWarning();
+				panel.rebuild();
+			}
+
+			guidanceOverlay.setShowCollectionLogReminder(false);
+			guidanceOverlay.setShowBankReminder(false);
+		}
+
 		// Dispatch deferred ShortestPath "path" message (1-tick after "clear")
 		if (pendingShortestPathTarget != null)
 		{
@@ -579,7 +610,8 @@ public class CollectionLogHelperPlugin extends Plugin
 				scriptScanItemCount = 0;
 				if (panel != null)
 				{
-					panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED, capturedCount);
+					panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
+						collectionState.getTotalObtained());
 					panel.updateDataSyncWarning();
 					panel.rebuild();
 				}
