@@ -62,7 +62,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		CATEGORY_FOCUS("Category Focus"),
 		SEARCH("Search"),
 		PET_HUNT("Pet Hunt"),
-		PROXIMITY("Efficient by Proximity (Experimental)");
+		PROXIMITY("Proximity");
 
 		private final String displayName;
 

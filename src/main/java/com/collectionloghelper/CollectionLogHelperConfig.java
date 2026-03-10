@@ -13,14 +13,15 @@ public interface CollectionLogHelperConfig extends Config
 	@ConfigSection(
 		name = "Guidance",
 		description = "Guidance overlay settings",
-		position = 0
+		position = 100
 	)
 	String guidanceSection = "guidance";
 
 	@ConfigItem(
 		keyName = "defaultMode",
-		name = "Default Mode",
-		description = "The default mode to show when opening the panel"
+		name = "Mode",
+		description = "The default mode to show when opening the panel",
+		position = 0
 	)
 	default CollectionLogHelperPanel.Mode defaultMode()
 	{
@@ -30,7 +31,8 @@ public interface CollectionLogHelperConfig extends Config
 	@ConfigItem(
 		keyName = "hideObtainedItems",
 		name = "Hide Obtained Items",
-		description = "Hide items you have already obtained from the collection log"
+		description = "Hide items you have already obtained from the collection log",
+		position = 1
 	)
 	default boolean hideObtainedItems()
 	{
@@ -38,29 +40,10 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "showSyncReminder",
-		name = "Show Sync Reminder",
-		description = "Show a reminder to open the Collection Log after login to sync obtained items"
-	)
-	default boolean showSyncReminder()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "showBankScanReminder",
-		name = "Show Bank Scan Reminder",
-		description = "Show a reminder to open your Bank after login so the plugin can scan for clue scrolls and other items"
-	)
-	default boolean showBankScanReminder()
-	{
-		return true;
-	}
-
-	@ConfigItem(
 		keyName = "hideLockedContent",
 		name = "Hide Locked Content",
-		description = "Hide sources that require quests or skill levels you haven't met"
+		description = "Hide sources that require quests or skill levels you haven't met",
+		position = 2
 	)
 	default boolean hideLockedContent()
 	{
@@ -70,7 +53,8 @@ public interface CollectionLogHelperConfig extends Config
 	@ConfigItem(
 		keyName = "exportEfficiencyLog",
 		name = "Export Efficiency Log",
-		description = "Write a detailed efficiency ranking to ~/.runelite/collection-log-helper/{player}/efficiency-export.txt after each sync"
+		description = "Write a detailed efficiency ranking to ~/.runelite/collection-log-helper/{player}/efficiency-export.txt after each sync",
+		position = 3
 	)
 	default boolean exportEfficiencyLog()
 	{
@@ -81,7 +65,7 @@ public interface CollectionLogHelperConfig extends Config
 		keyName = "raidTeamSize",
 		name = "Raid Team Size",
 		description = "Your typical raid team size — adjusts estimated completion times for CoX, ToB, and ToA",
-		position = 5
+		position = 4
 	)
 	default RaidTeamSize raidTeamSize()
 	{
@@ -92,11 +76,33 @@ public interface CollectionLogHelperConfig extends Config
 		keyName = "proximityMaxDistance",
 		name = "Proximity Max Distance",
 		description = "Maximum tile distance for Proximity mode (0 = unlimited)",
-		position = 6
+		position = 5
 	)
 	default int proximityMaxDistance()
 	{
 		return 0;
+	}
+
+	@ConfigItem(
+		keyName = "showSyncReminder",
+		name = "Show Sync Reminder",
+		description = "Show a reminder to open the Collection Log after login to sync obtained items",
+		position = 6
+	)
+	default boolean showSyncReminder()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "showBankScanReminder",
+		name = "Show Bank Scan Reminder",
+		description = "Show a reminder to open your Bank after login so the plugin can scan for clue scrolls and other items",
+		position = 7
+	)
+	default boolean showBankScanReminder()
+	{
+		return true;
 	}
 
 	@ConfigItem(
