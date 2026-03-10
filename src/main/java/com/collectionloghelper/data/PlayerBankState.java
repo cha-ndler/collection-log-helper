@@ -22,6 +22,7 @@ import net.runelite.client.config.ConfigManager;
 public class PlayerBankState
 {
 	private static final String CONFIG_GROUP = "collectionloghelper";
+	private static final String BANK_SCANNED_KEY = "bankScanned";
 	private static final String BANK_CASKETS_KEY = "bankCaskets";
 	private static final String BANK_SCROLLS_KEY = "bankScrolls";
 	private static final String BANK_CONTAINERS_KEY = "bankContainers";
@@ -299,19 +300,22 @@ public class PlayerBankState
 	public boolean loadFromCache()
 	{
 		clearCounts();
-		boolean found = false;
 
-		found |= loadMapFromConfig(BANK_CASKETS_KEY, casketCounts);
-		found |= loadMapFromConfig(BANK_SCROLLS_KEY, scrollCounts);
-		found |= loadMapFromConfig(BANK_CONTAINERS_KEY, containerCounts);
-
-		if (found)
+		// Check sentinel flag — indicates bank was previously scanned (even if empty)
+		String scanned = configManager.getRSProfileConfiguration(CONFIG_GROUP, BANK_SCANNED_KEY);
+		if (!"true".equals(scanned))
 		{
-			loadedFromCache = true;
-			log.info("Loaded cached bank data: {} caskets, {} scrolls, {} containers",
-				getTotalCaskets(), getTotalScrolls(), getTotalContainers());
+			return false;
 		}
-		return found;
+
+		loadMapFromConfig(BANK_CASKETS_KEY, casketCounts);
+		loadMapFromConfig(BANK_SCROLLS_KEY, scrollCounts);
+		loadMapFromConfig(BANK_CONTAINERS_KEY, containerCounts);
+
+		loadedFromCache = true;
+		log.info("Loaded cached bank data: {} caskets, {} scrolls, {} containers",
+			getTotalCaskets(), getTotalScrolls(), getTotalContainers());
+		return true;
 	}
 
 	/**
@@ -319,6 +323,7 @@ public class PlayerBankState
 	 */
 	private void saveToCache()
 	{
+		configManager.setRSProfileConfiguration(CONFIG_GROUP, BANK_SCANNED_KEY, "true");
 		saveMapToConfig(BANK_CASKETS_KEY, casketCounts);
 		saveMapToConfig(BANK_SCROLLS_KEY, scrollCounts);
 		saveMapToConfig(BANK_CONTAINERS_KEY, containerCounts);

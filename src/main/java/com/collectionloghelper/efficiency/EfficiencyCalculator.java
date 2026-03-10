@@ -180,7 +180,7 @@ public class EfficiencyCalculator
 			score = missingCount * 0.2;
 		}
 
-		String reasoning = buildReasoning(bestItem, bestItemScore, missingCount, killTimeSeconds);
+		String reasoning = buildReasoning(bestItem, bestItemScore, missingCount, killTimeSeconds, rolls);
 		double dropOnlyScore = bestItem != null && bestItem.getDropRate() < 1.0 ? bestItemScore : 0;
 
 		return new ScoredItem(source, score, missingCount, reasoning, locked,
@@ -227,7 +227,7 @@ public class EfficiencyCalculator
 	}
 
 	private String buildReasoning(CollectionLogItem bestItem, double bestItemScore,
-		int missingCount, int killTimeSeconds)
+		int missingCount, int killTimeSeconds, int rollsPerKill)
 	{
 		if (bestItem == null)
 		{
@@ -253,7 +253,10 @@ public class EfficiencyCalculator
 		}
 		else if (bestItem.getDropRate() > 0)
 		{
-			double expectedKills = 1.0 / bestItem.getDropRate();
+			double effectiveRate = rollsPerKill > 1
+				? 1.0 - Math.pow(1.0 - bestItem.getDropRate(), rollsPerKill)
+				: bestItem.getDropRate();
+			double expectedKills = 1.0 / effectiveRate;
 			return String.format("%s ~%.0f kills, ~%s (%d missing total)",
 				bestItem.getName(), expectedKills, timeStr, missingCount);
 		}
@@ -334,7 +337,7 @@ public class EfficiencyCalculator
 		}
 
 		double score = bestPetScore > 0 ? bestPetScore : missingPetCount * 0.2;
-		String reasoning = buildReasoning(bestPet, bestPetScore, missingPetCount, killTimeSeconds);
+		String reasoning = buildReasoning(bestPet, bestPetScore, missingPetCount, killTimeSeconds, rolls);
 		double dropOnlyScore = bestPet != null && bestPet.getDropRate() < 1.0 ? bestPetScore : 0;
 
 		return new ScoredItem(source, score, missingPetCount, reasoning, locked,
