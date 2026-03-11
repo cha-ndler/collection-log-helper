@@ -882,6 +882,15 @@ public class CollectionLogHelperPlugin extends Plugin
 	 */
 	private void applyStepToOverlays(GuidanceStep step, String sourceName)
 	{
+		// Send world message hint if this step has one
+		if (step.getWorldMessage() != null && !step.getWorldMessage().isEmpty())
+		{
+			clientThread.invokeLater(() ->
+				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
+					"<col=00c8c8>[Collection Log Helper]</col> " + step.getWorldMessage(),
+					null));
+		}
+
 		if (step.getWorldX() > 0)
 		{
 			WorldPoint worldPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
