@@ -118,6 +118,18 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "autoAdvanceGuidance",
+		name = "Auto-Advance Guidance",
+		description = "Automatically start guidance for the next best source when a guided sequence completes",
+		section = guidanceSection,
+		position = 4
+	)
+	default boolean autoAdvanceGuidance()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "showOverlays",
 		name = "Show Overlays",
 		description = "Show guidance overlays when using Guide Me",

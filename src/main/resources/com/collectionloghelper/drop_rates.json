@@ -1648,6 +1648,26 @@
     "afkLevel": 1,
     "locationDescription": "Varrock Sewers (requires Mossy key from moss giants)",
     "travelTip": "Varrock teleport -> sewers",
+    "guidanceSteps": [
+      {
+        "description": "Get a Mossy key from moss giants",
+        "worldX": 3170,
+        "worldY": 9899,
+        "worldPlane": 0,
+        "travelTip": "Varrock teleport -> sewers",
+        "completionCondition": "INVENTORY_HAS_ITEM",
+        "completionItemId": 22374
+      },
+      {
+        "description": "Enter Bryophyta's lair and kill her",
+        "worldX": 3174,
+        "worldY": 9899,
+        "worldPlane": 0,
+        "npcId": 8195,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ],
     "items": [
       {
         "itemId": 22372,
@@ -1669,6 +1689,26 @@
     "afkLevel": 1,
     "locationDescription": "Edgeville Dungeon (requires Giant key from hill giants)",
     "travelTip": "Edgeville respawn/glory",
+    "guidanceSteps": [
+      {
+        "description": "Get a Giant key from hill giants",
+        "worldX": 3117,
+        "worldY": 9856,
+        "worldPlane": 0,
+        "travelTip": "Edgeville respawn/glory -> dungeon",
+        "completionCondition": "INVENTORY_HAS_ITEM",
+        "completionItemId": 20754
+      },
+      {
+        "description": "Enter Obor's lair and kill him",
+        "worldX": 3095,
+        "worldY": 9832,
+        "worldPlane": 0,
+        "npcId": 7416,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ],
     "items": [
       {
         "itemId": 20756,
@@ -8718,6 +8758,33 @@
     "worldY": 3571,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Barbarian Assault outpost",
+        "worldX": 2519,
+        "worldY": 3571,
+        "worldPlane": 0,
+        "travelTip": "Minigame tele -> Barbarian Assault, or games necklace",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
+      },
+      {
+        "description": "Play rounds to earn Honour Points",
+        "worldX": 2519,
+        "worldY": 3571,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Buy rewards from Commander Connad",
+        "worldX": 2519,
+        "worldY": 3571,
+        "worldPlane": 0,
+        "npcId": 5258,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL"
+      }
+    ],
     "items": [
       {
         "itemId": 10548,
