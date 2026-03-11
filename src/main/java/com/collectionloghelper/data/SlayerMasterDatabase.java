@@ -68,7 +68,14 @@ public class SlayerMasterDatabase
 				{
 					String creatureName = taskEntry.getKey();
 					JsonObject taskObj = taskEntry.getValue().getAsJsonObject();
-					int weight = taskObj.get("weight").getAsInt();
+					JsonElement weightElem = taskObj.get("weight");
+					if (weightElem == null || weightElem.isJsonNull())
+					{
+						log.warn("Skipping slayer task '{}' for master '{}': missing weight",
+							creatureName, masterName);
+						continue;
+					}
+					int weight = weightElem.getAsInt();
 					taskWeights.put(creatureName, weight);
 					totalWeight += weight;
 				}
