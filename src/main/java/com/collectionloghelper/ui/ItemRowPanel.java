@@ -106,6 +106,14 @@ class ItemRowPanel extends JPanel
 		sourceLabel.setFont(FontManager.getRunescapeSmallFont());
 		sourceLabel.setForeground(locked ? LOCKED_TEXT_COLOR : ColorScheme.LIGHT_GRAY_COLOR);
 		centerPanel.add(sourceLabel, BorderLayout.SOUTH);
+
+		// Tooltip with location and travel tip
+		String tooltip = source.getDisplayLocation();
+		if (source.getTravelTip() != null && !source.getTravelTip().isEmpty())
+		{
+			tooltip += " — " + source.getTravelTip();
+		}
+		setToolTipText(tooltip);
 		add(centerPanel, BorderLayout.CENTER);
 
 		// Right: drop rate + score

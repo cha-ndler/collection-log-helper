@@ -432,6 +432,10 @@ public class EfficiencyCalculator
 					src.getCategory(), src.getRewardType(), src.getAfkLevel(), si.isLocked(),
 					onTask ? " | ON SLAYER TASK" : "");
 				pw.printf("  Location: %s%n", src.getDisplayLocation(requirementsChecker));
+				if (src.getTravelTip() != null && !src.getTravelTip().isEmpty())
+				{
+					pw.printf("  Travel: %s%n", src.getTravelTip());
+				}
 				pw.printf("  killTimeSeconds: %d (effective: %d) | rollsPerKill: %d%n",
 					src.getKillTimeSeconds(), getEffectiveKillTime(src), src.getRollsPerKill());
 				if (si.isLocked())
