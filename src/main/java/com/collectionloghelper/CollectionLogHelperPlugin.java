@@ -1,18 +1,23 @@
 package com.collectionloghelper;
 
+import com.collectionloghelper.data.CompletionCondition;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.DropRateDatabase;
+import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.PlayerBankState;
+import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.SlayerMasterDatabase;
 import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
+import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
+import com.collectionloghelper.guidance.GuidanceSequencer;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
 import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
@@ -21,6 +26,7 @@ import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,6 +42,7 @@ import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.ScriptPreFired;
 import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
@@ -141,6 +148,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private PlayerBankState playerBankState;
 
 	@Inject
+	private PlayerInventoryState playerInventoryState;
+
+	@Inject
 	private SlayerTaskState slayerTaskState;
 
 	@Inject
@@ -151,6 +161,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private com.collectionloghelper.data.PluginDataManager pluginDataManager;
+
+	@Inject
+	private GuidanceSequencer guidanceSequencer;
 
 	/** Minimum tile movement before proximity view is refreshed. */
 	private static final int PROXIMITY_REFRESH_TILES = 10;
@@ -196,6 +209,10 @@ public class CollectionLogHelperPlugin extends Plugin
 			() -> cachedPlayerLocation,
 			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()));
 		panel.setMode(config.defaultMode());
+		panel.setStepCallbacks(
+			() -> guidanceSequencer.advanceStep(),
+			() -> guidanceSequencer.advanceStep()
+		);
 
 		// Use a placeholder icon initially, then swap to the real item sprite once loaded
 		final BufferedImage placeholder = ImageUtil.loadImageResource(getClass(), "panel_icon.png");
@@ -263,6 +280,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceOverlay.setShowBankReminder(false);
 		dataSyncState.reset();
 		playerBankState.reset();
+		playerInventoryState.reset();
 		slayerTaskState.reset();
 		collectionState.clearState();
 		pluginDataManager.reset();
@@ -339,6 +357,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			guidanceOverlay.setShowBankReminder(false);
 			dataSyncState.reset();
 			playerBankState.reset();
+			playerInventoryState.reset();
 			pluginDataManager.reset();
 		}
 	}
@@ -425,6 +444,7 @@ public class CollectionLogHelperPlugin extends Plugin
 					if (item.getName().equalsIgnoreCase(itemName))
 					{
 						collectionState.markItemObtained(item.getItemId());
+						guidanceSequencer.onItemObtained(item.getItemId());
 						log.debug("Marked item {} (ID: {}) as obtained", itemName, item.getItemId());
 						break;
 					}
@@ -441,6 +461,19 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged event)
 	{
+		if (event.getContainerId() == InventoryID.INVENTORY.getId())
+		{
+			net.runelite.api.ItemContainer invContainer = client.getItemContainer(InventoryID.INVENTORY);
+			if (invContainer != null)
+			{
+				playerInventoryState.scanInventory(invContainer);
+				if (guidanceSequencer.isActive())
+				{
+					guidanceSequencer.onInventoryChanged();
+				}
+			}
+		}
+
 		if (event.getContainerId() == InventoryID.BANK.getId())
 		{
 			// Scan bank for clue-related items every time it updates
@@ -568,6 +601,12 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (client.getLocalPlayer() != null)
 		{
 			cachedPlayerLocation = client.getLocalPlayer().getWorldLocation();
+
+			// Check ARRIVE_AT_TILE completion for guidance sequencer
+			if (guidanceSequencer.isActive())
+			{
+				guidanceSequencer.onPlayerMoved(cachedPlayerLocation);
+			}
 
 			// Refresh proximity view when player moves significantly
 			if (panel != null
@@ -777,13 +816,29 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Clear any existing guidance first (thread-safe overlay operations)
-		guidanceOverlay.clearTarget();
-		guidanceMinimapOverlay.clearTarget();
-		activeMapPoint = null;
-		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
-		if (panel != null)
+		clearGuidanceOverlays();
+
+		// If source has multi-step guidance, start the sequencer
+		if (source.getGuidanceSteps() != null && !source.getGuidanceSteps().isEmpty())
 		{
-			panel.hideClueGuidance();
+			guidanceSequencer.startSequence(source, this::onStepChanged, this::onSequenceComplete);
+			GuidanceStep step = guidanceSequencer.getCurrentStep();
+			if (step != null)
+			{
+				applyStepToOverlays(step, source.getName());
+			}
+			if (panel != null)
+			{
+				panel.setGuidanceState(true, source);
+				panel.updateStepProgress(
+					guidanceSequencer.getCurrentIndex() + 1,
+					guidanceSequencer.getTotalSteps(),
+					step != null ? step.getDescription() : "",
+					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL);
+			}
+			log.debug("Multi-step guidance activated for {} ({} steps)",
+				source.getName(), source.getGuidanceSteps().size());
+			return;
 		}
 
 		if (source.getCategory() == CollectionLogCategory.CLUES)
@@ -809,31 +864,39 @@ public class CollectionLogHelperPlugin extends Plugin
 		else
 		{
 			// Non-clue sources: world map, tile, and minimap overlays
-			WorldPoint worldPoint = source.getWorldPoint(requirementsChecker);
-			String displayName = source.getDisplayLocation(requirementsChecker);
+			applySourceToOverlays(source);
+		}
 
+		// Always update panel guidance state from the plugin
+		if (panel != null)
+		{
+			panel.setGuidanceState(true, source);
+			panel.hideStepProgress();
+		}
+
+		log.debug("Guidance activated for {} ({})", source.getName(), source.getCategory());
+	}
+
+	/**
+	 * Applies a single guidance step's data to all overlays.
+	 */
+	private void applyStepToOverlays(GuidanceStep step, String sourceName)
+	{
+		if (step.getWorldX() > 0)
+		{
+			WorldPoint worldPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
 			guidanceOverlay.setTargetPoint(worldPoint);
-			guidanceOverlay.setTargetName(source.getName());
-			guidanceOverlay.setLocationDescription(displayName);
-			guidanceOverlay.setTravelTip(source.getTravelTip());
-			guidanceOverlay.setTargetNpcId(source.getNpcId());
-			guidanceOverlay.setInteractAction(source.getInteractAction());
-			dialogHighlightOverlay.setTargetDialogOptions(source.getDialogOptions());
+			guidanceOverlay.setTargetName(sourceName);
+			guidanceOverlay.setLocationDescription(step.getDescription());
+			guidanceOverlay.setTravelTip(step.getTravelTip());
+			guidanceOverlay.setTargetNpcId(step.getNpcId());
+			guidanceOverlay.setInteractAction(step.getInteractAction());
+			dialogHighlightOverlay.setTargetDialogOptions(step.getDialogOptions());
 			dialogHighlightOverlay.setGuidanceActive(true);
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
-			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
+			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, step.getDescription(), collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
 
-			// ShortestPath re-guidance: send "clear" now, then "path" on
-			// the next game tick. restartPathfinding() (invoked by "path")
-			// cancels the old pathfinder but does NOT reset lastLocation.
-			// On the next tick isNearPath() sees the player at the same
-			// lastLocation and short-circuits, so the path never renders.
-			// Sending "clear" first tears down pathfinding state including
-			// lastLocation. The 1-tick delay (via pendingShortestPathTarget
-			// dispatched in onGameTick) guarantees the clear is fully
-			// processed before the new path request arrives.
-			// Ref: https://github.com/Skretzo/shortest-path
 			clientThread.invokeLater(() ->
 			{
 				client.clearHintArrow();
@@ -850,18 +913,120 @@ public class CollectionLogHelperPlugin extends Plugin
 				}
 			});
 		}
+		else
+		{
+			// Step with no location — show text overlay only
+			guidanceOverlay.setClueGuidanceText(step.getDescription());
+			clientThread.invokeLater(() ->
+			{
+				client.clearHintArrow();
+				if (config.useShortestPath())
+				{
+					eventBus.post(new PluginMessage("shortestpath", "clear"));
+				}
+			});
+		}
+	}
 
-		// Always update panel guidance state from the plugin
+	/**
+	 * Applies a source's default location data to overlays (non-sequencer path).
+	 * ShortestPath re-guidance: send "clear" now, then "path" on the next game
+	 * tick via pendingShortestPathTarget. The 1-tick delay guarantees the clear
+	 * is fully processed before the new path request arrives.
+	 * Ref: https://github.com/Skretzo/shortest-path
+	 */
+	private void applySourceToOverlays(CollectionLogSource source)
+	{
+		WorldPoint worldPoint = source.getWorldPoint(requirementsChecker);
+		String displayName = source.getDisplayLocation(requirementsChecker);
+
+		guidanceOverlay.setTargetPoint(worldPoint);
+		guidanceOverlay.setTargetName(source.getName());
+		guidanceOverlay.setLocationDescription(displayName);
+		guidanceOverlay.setTravelTip(source.getTravelTip());
+		guidanceOverlay.setTargetNpcId(source.getNpcId());
+		guidanceOverlay.setInteractAction(source.getInteractAction());
+		dialogHighlightOverlay.setTargetDialogOptions(source.getDialogOptions());
+		dialogHighlightOverlay.setGuidanceActive(true);
+		guidanceMinimapOverlay.setTargetPoint(worldPoint);
+		activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
+		worldMapPointManager.add(activeMapPoint);
+
+		clientThread.invokeLater(() ->
+		{
+			client.clearHintArrow();
+
+			if (config.showHintArrow())
+			{
+				client.setHintArrow(worldPoint);
+			}
+
+			if (config.useShortestPath())
+			{
+				eventBus.post(new PluginMessage("shortestpath", "clear"));
+				pendingShortestPathTarget = worldPoint;
+			}
+		});
+	}
+
+	private void clearGuidanceOverlays()
+	{
+		guidanceOverlay.clearTarget();
+		guidanceMinimapOverlay.clearTarget();
+		activeMapPoint = null;
+		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
 		if (panel != null)
 		{
-			panel.setGuidanceState(true, source);
+			panel.hideClueGuidance();
 		}
+	}
 
-		log.debug("Guidance activated for {} ({})", source.getName(), source.getCategory());
+	/**
+	 * Callback from GuidanceSequencer when the current step changes.
+	 */
+	private void onStepChanged(GuidanceStep step)
+	{
+		clearGuidanceOverlays();
+		String sourceName = guidanceSequencer.getActiveSource() != null
+			? guidanceSequencer.getActiveSource().getName() : "";
+		applyStepToOverlays(step, sourceName);
+
+		if (panel != null)
+		{
+			panel.updateStepProgress(
+				guidanceSequencer.getCurrentIndex() + 1,
+				guidanceSequencer.getTotalSteps(),
+				step.getDescription(),
+				step.getCompletionCondition() == CompletionCondition.MANUAL);
+		}
+	}
+
+	/**
+	 * Callback from GuidanceSequencer when the entire sequence is complete.
+	 */
+	private void onSequenceComplete()
+	{
+		deactivateGuidance();
+
+		if (config.autoAdvanceGuidance() && panel != null)
+		{
+			panel.rebuild();
+			// Auto-activate guidance for the next top efficiency pick
+			List<ScoredItem> ranked = calculator.rankByEfficiency();
+			ranked.stream()
+				.filter(s -> !s.isLocked())
+				.findFirst()
+				.ifPresent(topPick -> activateGuidance(topPick.getSource()));
+		}
+		else if (panel != null)
+		{
+			panel.rebuild();
+		}
 	}
 
 	public void deactivateGuidance()
 	{
+		guidanceSequencer.stopSequence();
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		dialogHighlightOverlay.clear();
@@ -882,10 +1047,37 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (panel != null)
 		{
 			panel.hideClueGuidance();
+			panel.hideStepProgress();
 			panel.setGuidanceState(false, null);
 		}
 
 		log.debug("Guidance deactivated");
+	}
+
+	@Subscribe
+	public void onMenuOptionClicked(MenuOptionClicked event)
+	{
+		if (!guidanceSequencer.isActive())
+		{
+			return;
+		}
+
+		// Detect NPC interactions for NPC_TALKED_TO completion
+		MenuAction action = event.getMenuAction();
+		if (action == MenuAction.NPC_FIRST_OPTION || action == MenuAction.NPC_SECOND_OPTION
+			|| action == MenuAction.NPC_THIRD_OPTION || action == MenuAction.NPC_FOURTH_OPTION
+			|| action == MenuAction.NPC_FIFTH_OPTION)
+		{
+			// event.getId() is the NPC index; look up the NPC from the scene
+			for (net.runelite.api.NPC npc : client.getTopLevelWorldView().npcs())
+			{
+				if (npc != null && npc.getIndex() == event.getId())
+				{
+					guidanceSequencer.onNpcInteracted(npc.getId());
+					break;
+				}
+			}
+		}
 	}
 
 	@Provides

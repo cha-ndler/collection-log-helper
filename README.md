@@ -36,6 +36,16 @@ Click "Guide Me" on any item to activate navigation aids:
 - **Hint arrow** — Native yellow hint arrow at the target (same as Quest Helper)
 - **Shortest Path integration** — Automatically requests a route from the [Shortest Path](https://github.com/Skretzo/shortest-path) plugin if installed
 
+### Step-by-Step Guidance
+
+Sources with multi-step sequences (e.g., Bryophyta, Obor, Barbarian Assault) provide Quest Helper-style guided walkthroughs:
+
+- **Step progress banner** — "Step 2/5: Enter Bryophyta's lair and kill her" displayed in the panel
+- **Auto-completion detection** — Steps auto-advance when you obtain a key item, arrive at a tile, or interact with an NPC
+- **Bank routing** — If a step requires items you don't have, the system redirects you to a bank first
+- **Skip satisfied steps** — Steps whose conditions are already met (e.g., key already in inventory) are automatically skipped
+- **Auto-advance** — When a sequence completes, guidance automatically activates for the next best source (configurable)
+
 ### Item Details
 
 Click any item to see its full info: source, category, drop rate (as 1/X), kill time, world coordinates, obtained status, and links to the OSRS Wiki.
@@ -53,6 +63,7 @@ Automatically detects new collection log entries via chat messages and varbit ch
 | Hide Locked Content | On | Hide sources requiring quests or skills you haven't met |
 | Show Sync Reminder | On | Remind you to open the Collection Log after login |
 | **Guidance** | | |
+| Auto-Advance Guidance | On | Automatically start guidance for the next best source when a sequence completes |
 | Show Overlays | On | Toggle all guidance overlays |
 | Show Hint Arrow | On | Show the yellow hint arrow at the target |
 | Shortest Path Integration | On | Request pathfinding from Shortest Path plugin |
