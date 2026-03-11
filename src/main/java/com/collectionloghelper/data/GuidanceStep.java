@@ -49,6 +49,12 @@ public class GuidanceStep
 	/** Chat message to display when this step activates (null = no message). */
 	String worldMessage;
 
+	/** Game object ID to highlight for this step (0 = no object). */
+	int objectId;
+
+	/** Right-click action to display on the highlighted object (e.g., "Chop", "Mine"). */
+	String objectInteractAction;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;

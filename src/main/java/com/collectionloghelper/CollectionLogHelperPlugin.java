@@ -22,6 +22,7 @@ import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
 import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
 import com.collectionloghelper.overlay.GuidanceOverlay;
+import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
@@ -142,6 +143,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private DialogHighlightOverlay dialogHighlightOverlay;
 
 	@Inject
+	private ObjectHighlightOverlay objectHighlightOverlay;
+
+	@Inject
 	private DataSyncState dataSyncState;
 
 	@Inject
@@ -240,6 +244,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.add(guidanceOverlay);
 		overlayManager.add(guidanceMinimapOverlay);
 		overlayManager.add(dialogHighlightOverlay);
+		overlayManager.add(objectHighlightOverlay);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -265,6 +270,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.remove(guidanceOverlay);
 		overlayManager.remove(guidanceMinimapOverlay);
 		overlayManager.remove(dialogHighlightOverlay);
+		overlayManager.remove(objectHighlightOverlay);
 		deactivateGuidance();
 		lastObtainedCount = -1;
 		collectionLogOpen = false;
@@ -891,6 +897,9 @@ public class CollectionLogHelperPlugin extends Plugin
 					null));
 		}
 
+		objectHighlightOverlay.setTargetObjectId(step.getObjectId());
+		objectHighlightOverlay.setObjectInteractAction(step.getObjectInteractAction());
+
 		if (step.getWorldX() > 0)
 		{
 			WorldPoint worldPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
@@ -982,6 +991,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
+		objectHighlightOverlay.clearTarget();
 		activeMapPoint = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
 		if (panel != null)
@@ -1039,6 +1049,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		dialogHighlightOverlay.clear();
+		objectHighlightOverlay.clearTarget();
 		activeMapPoint = null;
 		pendingShortestPathTarget = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
