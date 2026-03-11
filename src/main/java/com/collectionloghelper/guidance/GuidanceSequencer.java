@@ -317,7 +317,8 @@ public class GuidanceSequencer
 			"Grand Exchange bank",
 			null,
 			CompletionCondition.MANUAL,
-			0, 0, 0
+			0, 0, 0,
+			null  // worldMessage
 		);
 	}
 

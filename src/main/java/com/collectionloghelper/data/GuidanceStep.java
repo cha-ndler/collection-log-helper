@@ -46,6 +46,9 @@ public class GuidanceStep
 	/** NPC ID for NPC_TALKED_TO completion check. */
 	int completionNpcId;
 
+	/** Chat message to display when this step activates (null = no message). */
+	String worldMessage;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
