@@ -3652,10 +3652,14 @@
     "worldPlane": 0,
     "locationDescription": "Fortis Colosseum, Varlamore",
     "killTimeSeconds": 1440,
-    "requirements": {"quests": ["CHILDREN_OF_THE_SUN"]},
+    "requirements": {
+      "quests": [
+        "CHILDREN_OF_THE_SUN"
+      ]
+    },
     "items": [
       {
-        "itemId": 28923,
+        "itemId": 28947,
         "name": "Dizana's quiver (uncharged)",
         "dropRate": 1.0,
         "varbitId": 0,
@@ -3664,7 +3668,7 @@
         "milestoneKills": 1
       },
       {
-        "itemId": 28919,
+        "itemId": 28933,
         "name": "Sunfire fanatic helm",
         "dropRate": 0.01,
         "varbitId": 0,
@@ -3672,7 +3676,7 @@
         "wikiPage": "Sunfire_fanatic_helm"
       },
       {
-        "itemId": 28921,
+        "itemId": 28936,
         "name": "Sunfire fanatic cuirass",
         "dropRate": 0.01,
         "varbitId": 0,
@@ -3680,7 +3684,7 @@
         "wikiPage": "Sunfire_fanatic_cuirass"
       },
       {
-        "itemId": 28917,
+        "itemId": 28939,
         "name": "Sunfire fanatic chausses",
         "dropRate": 0.01,
         "varbitId": 0,
@@ -3688,7 +3692,7 @@
         "wikiPage": "Sunfire_fanatic_chausses"
       },
       {
-        "itemId": 28925,
+        "itemId": 28942,
         "name": "Echo crystal",
         "dropRate": 0.007,
         "varbitId": 0,
@@ -3696,15 +3700,31 @@
         "wikiPage": "Echo_crystal"
       },
       {
-        "itemId": 28915,
-        "name": "Tonalztics of ralos",
+        "itemId": 28919,
+        "name": "Tonalztics of ralos (uncharged)",
         "dropRate": 0.012,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tonalztics_of_ralos"
       },
       {
-        "itemId": 28927,
+        "itemId": 28924,
+        "name": "Sunfire splinters",
+        "dropRate": 0.012,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sunfire_splinters"
+      },
+      {
+        "itemId": 6571,
+        "name": "Uncut onyx",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Uncut_onyx"
+      },
+      {
+        "itemId": 28960,
         "name": "Smol heredit",
         "dropRate": 0.005,
         "varbitId": 0,
@@ -4264,95 +4284,49 @@
     "rewardType": "MIXED"
   },
   {
-    "name": "Slayer",
+    "name": "Crawling Hand",
     "category": "OTHER",
-    "worldX": 3429,
-    "worldY": 3534,
+    "worldX": 3418,
+    "worldY": 3543,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
-    "locationDescription": "Slayer Tower, Morytania",
-    "aggregated": true,
+    "killTimeSeconds": 8,
+    "locationDescription": "Slayer Tower ground floor, Morytania",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 5
+        }
+      ]
+    },
     "items": [
       {
-        "itemId": 4099,
-        "name": "Mystic hat (dark)",
-        "dropRate": 0.001953,
+        "itemId": 7975,
+        "name": "Crawling hand",
+        "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mystic_hat_(dark)"
-      },
-      {
-        "itemId": 4101,
-        "name": "Mystic robe top (dark)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mystic_robe_top_(dark)"
-      },
-      {
-        "itemId": 4103,
-        "name": "Mystic robe bottom (dark)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mystic_robe_bottom_(dark)"
-      },
-      {
-        "itemId": 4105,
-        "name": "Mystic gloves (dark)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mystic_gloves_(dark)"
-      },
-      {
-        "itemId": 4107,
-        "name": "Mystic boots (dark)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mystic_boots_(dark)"
-      },
-      {
-        "itemId": 4109,
-        "name": "Mystic hat (light)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mystic_hat_(light)"
-      },
-      {
-        "itemId": 4111,
-        "name": "Mystic robe top (light)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mystic_robe_top_(light)"
-      },
-      {
-        "itemId": 4113,
-        "name": "Mystic robe bottom (light)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mystic_robe_bottom_(light)"
-      },
-      {
-        "itemId": 4115,
-        "name": "Mystic gloves (light)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mystic_gloves_(light)"
-      },
-      {
-        "itemId": 4117,
-        "name": "Mystic boots (light)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mystic_boots_(light)"
-      },
+        "wikiPage": "Crawling_hand_(item)"
+      }
+    ]
+  },
+  {
+    "name": "Cave Crawler",
+    "category": "OTHER",
+    "worldX": 2788,
+    "worldY": 10000,
+    "worldPlane": 0,
+    "killTimeSeconds": 10,
+    "locationDescription": "Fremennik Slayer Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 10
+        }
+      ]
+    },
+    "items": [
       {
         "itemId": 4119,
         "name": "Bronze boots",
@@ -4360,6 +4334,60 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bronze_boots"
+      }
+    ]
+  },
+  {
+    "name": "Rockslug",
+    "category": "OTHER",
+    "worldX": 2794,
+    "worldY": 10018,
+    "worldPlane": 0,
+    "killTimeSeconds": 10,
+    "locationDescription": "Fremennik Slayer Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 20
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 4115,
+        "name": "Mystic gloves (light)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_gloves_(light)"
+      }
+    ]
+  },
+  {
+    "name": "Cockatrice",
+    "category": "OTHER",
+    "worldX": 2792,
+    "worldY": 10035,
+    "worldPlane": 0,
+    "killTimeSeconds": 12,
+    "locationDescription": "Fremennik Slayer Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 25
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 7976,
+        "name": "Cockatrice head",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Cockatrice_head"
       },
       {
         "itemId": 4121,
@@ -4370,61 +4398,59 @@
         "wikiPage": "Iron_boots"
       },
       {
+        "itemId": 4117,
+        "name": "Mystic boots (light)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_boots_(light)"
+      }
+    ]
+  },
+  {
+    "name": "Pyrefiend",
+    "category": "OTHER",
+    "worldX": 2761,
+    "worldY": 10008,
+    "worldPlane": 0,
+    "killTimeSeconds": 10,
+    "locationDescription": "Fremennik Slayer Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 30
+        }
+      ]
+    },
+    "items": [
+      {
         "itemId": 4123,
         "name": "Steel boots",
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Steel_boots"
-      },
-      {
-        "itemId": 4125,
-        "name": "Black boots",
-        "dropRate": 0.007813,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Black_boots"
-      },
-      {
-        "itemId": 4127,
-        "name": "Mithril boots",
-        "dropRate": 0.007813,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mithril_boots"
-      },
-      {
-        "itemId": 4129,
-        "name": "Adamant boots",
-        "dropRate": 0.007813,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Adamant_boots"
-      },
-      {
-        "itemId": 4131,
-        "name": "Rune boots",
-        "dropRate": 0.008621,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Rune_boots"
-      },
-      {
-        "itemId": 4151,
-        "name": "Abyssal whip",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Abyssal_whip"
-      },
-      {
-        "itemId": 4153,
-        "name": "Granite maul",
-        "dropRate": 0.003906,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Granite_maul"
-      },
+      }
+    ]
+  },
+  {
+    "name": "Mogre",
+    "category": "OTHER",
+    "worldX": 2987,
+    "worldY": 3110,
+    "worldPlane": 0,
+    "killTimeSeconds": 18,
+    "locationDescription": "Mudskipper Point, south of Port Sarim",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 32
+        }
+      ]
+    },
+    "items": [
       {
         "itemId": 6665,
         "name": "Mudskipper hat",
@@ -4440,47 +4466,26 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Flippers"
-      },
-      {
-        "itemId": 3140,
-        "name": "Dragon chainbody",
-        "dropRate": 3.1e-05,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dragon_chainbody"
-      },
-      {
-        "itemId": 6809,
-        "name": "Granite legs",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Granite_legs"
-      },
-      {
-        "itemId": 8901,
-        "name": "Black mask (10)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Black_mask_(10)"
-      },
-      {
-        "itemId": 7975,
-        "name": "Crawling hand",
-        "dropRate": 0.002,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Crawling_hand_(item)"
-      },
-      {
-        "itemId": 7976,
-        "name": "Cockatrice head",
-        "dropRate": 0.001,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Cockatrice_head"
-      },
+      }
+    ]
+  },
+  {
+    "name": "Basilisk",
+    "category": "OTHER",
+    "worldX": 2744,
+    "worldY": 10008,
+    "worldPlane": 0,
+    "killTimeSeconds": 18,
+    "locationDescription": "Fremennik Slayer Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 40
+        }
+      ]
+    },
+    "items": [
       {
         "itemId": 7977,
         "name": "Basilisk head",
@@ -4488,159 +4493,478 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Basilisk_head"
-      },
-      {
-        "itemId": 7978,
-        "name": "Kurask head",
-        "dropRate": 0.000333,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Kurask_head"
-      },
-      {
-        "itemId": 7979,
-        "name": "Abyssal head",
-        "dropRate": 0.000167,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Abyssal_head"
-      },
-      {
-        "itemId": 21646,
-        "name": "Granite longsword",
-        "dropRate": 0.00195,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Granite_longsword"
-      },
-      {
-        "itemId": 21643,
-        "name": "Granite boots",
-        "dropRate": 0.0017,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Granite_boots"
-      },
+      }
+    ]
+  },
+  {
+    "name": "Terror Dog",
+    "category": "OTHER",
+    "worldX": 3149,
+    "worldY": 4663,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "locationDescription": "Tarn's Lair, Abandoned Mine",
+    "requirements": {
+      "quests": [
+        "HAUNTED_MINE"
+      ],
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 40
+        }
+      ]
+    },
+    "items": [
       {
         "itemId": 10589,
         "name": "Granite helm",
-        "dropRate": 0.0078,
+        "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_helm"
+      }
+    ]
+  },
+  {
+    "name": "Infernal Mage",
+    "category": "OTHER",
+    "worldX": 3440,
+    "worldY": 3563,
+    "worldPlane": 1,
+    "killTimeSeconds": 15,
+    "locationDescription": "Slayer Tower 1st floor, Morytania",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 45
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 4099,
+        "name": "Mystic hat (dark)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_hat_(dark)"
       },
+      {
+        "itemId": 4107,
+        "name": "Mystic boots (dark)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_boots_(dark)"
+      }
+    ]
+  },
+  {
+    "name": "Brine Rat",
+    "category": "OTHER",
+    "worldX": 2707,
+    "worldY": 10132,
+    "worldPlane": 0,
+    "killTimeSeconds": 14,
+    "locationDescription": "Brine Rat Cavern, north-east of Rellekka",
+    "requirements": {
+      "quests": [
+        "OLAFS_QUEST"
+      ],
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 47
+        }
+      ]
+    },
+    "items": [
       {
         "itemId": 11037,
         "name": "Brine sabre",
-        "dropRate": 0.00195,
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Brine_sabre"
-      },
+      }
+    ]
+  },
+  {
+    "name": "Frost Nagua",
+    "category": "OTHER",
+    "worldX": 1693,
+    "worldY": 3232,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "locationDescription": "Ruins of Tapoyauik, Cam Torum",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 48
+        }
+      ]
+    },
+    "items": [
       {
-        "itemId": 11235,
-        "name": "Dark bow",
-        "dropRate": 0.00195,
+        "itemId": 29889,
+        "name": "Glacial temotli",
+        "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dark_bow"
+        "wikiPage": "Glacial_temotli"
       },
       {
-        "itemId": 11286,
-        "name": "Draconic visage",
-        "dropRate": 0.0002,
+        "itemId": 29895,
+        "name": "Frozen tear",
+        "dropRate": 0.1,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Draconic_visage"
+        "wikiPage": "Frozen_tear"
       },
       {
-        "itemId": 11840,
-        "name": "Dragon boots",
-        "dropRate": 0.0078,
+        "itemId": 29892,
+        "name": "Pendant of ates (inert)",
+        "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_boots"
+        "wikiPage": "Pendant_of_ates_(inert)"
+      }
+    ]
+  },
+  {
+    "name": "Sulphur Nagua",
+    "category": "OTHER",
+    "worldX": 1440,
+    "worldY": 9602,
+    "worldPlane": 0,
+    "killTimeSeconds": 18,
+    "locationDescription": "Neypotzli, Cam Torum",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 48
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 29084,
+        "name": "Sulphur blades",
+        "dropRate": 0.002222,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sulphur_blades"
+      }
+    ]
+  },
+  {
+    "name": "Earthen Nagua",
+    "category": "OTHER",
+    "worldX": 1309,
+    "worldY": 3104,
+    "worldPlane": 0,
+    "killTimeSeconds": 25,
+    "locationDescription": "Tonali Cavern, Cam Torum",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 48
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 30957,
+        "name": "Earthbound tecpatl",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Earthbound_tecpatl"
+      }
+    ]
+  },
+  {
+    "name": "Bloodveld",
+    "category": "OTHER",
+    "worldX": 3442,
+    "worldY": 3543,
+    "worldPlane": 1,
+    "killTimeSeconds": 12,
+    "locationDescription": "Slayer Tower 1st floor, Morytania",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 50
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 4125,
+        "name": "Black boots",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Black_boots"
       },
+      {
+        "itemId": 4101,
+        "name": "Mystic robe top (dark)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_robe_top_(dark)"
+      }
+    ]
+  },
+  {
+    "name": "Gryphon",
+    "category": "OTHER",
+    "worldX": 1456,
+    "worldY": 2880,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "locationDescription": "Great Conch, Unquiet Ocean",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 51
+        }
+      ],
+      "quests": [
+        "TROUBLED_TORTUGANS"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 31235,
+        "name": "Gryphon feather",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Gryphon_feather"
+      },
+      {
+        "itemId": 31243,
+        "name": "Horn of plenty (Empty)",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Horn_of_plenty"
+      }
+    ]
+  },
+  {
+    "name": "Jelly",
+    "category": "OTHER",
+    "worldX": 2704,
+    "worldY": 10028,
+    "worldPlane": 0,
+    "killTimeSeconds": 12,
+    "locationDescription": "Fremennik Slayer Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 52
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 4127,
+        "name": "Mithril boots",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mithril_boots"
+      }
+    ]
+  },
+  {
+    "name": "Turoth",
+    "category": "OTHER",
+    "worldX": 2722,
+    "worldY": 10002,
+    "worldPlane": 0,
+    "killTimeSeconds": 15,
+    "locationDescription": "Fremennik Slayer Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 55
+        }
+      ]
+    },
+    "items": [
       {
         "itemId": 11902,
         "name": "Leaf-bladed sword",
-        "dropRate": 0.0026,
+        "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Leaf-bladed_sword"
       },
       {
-        "itemId": 11908,
-        "name": "Trident of the seas",
-        "dropRate": 0.005,
+        "itemId": 4113,
+        "name": "Mystic robe bottom (light)",
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Trident_of_the_seas"
-      },
+        "wikiPage": "Mystic_robe_bottom_(light)"
+      }
+    ]
+  },
+  {
+    "name": "Warped Creature",
+    "category": "OTHER",
+    "worldX": 2032,
+    "worldY": 4636,
+    "worldPlane": 0,
+    "killTimeSeconds": 25,
+    "locationDescription": "Poison Waste Dungeon, Tirannwn",
+    "requirements": {
+      "quests": [
+        "THE_PATH_OF_GLOUPHRIE"
+      ],
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 56
+        }
+      ]
+    },
+    "items": [
       {
-        "itemId": 12002,
-        "name": "Occult necklace",
-        "dropRate": 0.00195,
+        "itemId": 28583,
+        "name": "Warped sceptre (uncharged)",
+        "dropRate": 0.003125,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Occult_necklace"
-      },
+        "wikiPage": "Warped_sceptre"
+      }
+    ]
+  },
+  {
+    "name": "Cave Horror",
+    "category": "OTHER",
+    "worldX": 3740,
+    "worldY": 9373,
+    "worldPlane": 0,
+    "killTimeSeconds": 12,
+    "locationDescription": "Mos Le'Harmless Cave",
+    "requirements": {
+      "quests": [
+        "CABIN_FEVER"
+      ],
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 58
+        }
+      ]
+    },
+    "items": [
       {
-        "itemId": 12004,
-        "name": "Kraken tentacle",
-        "dropRate": 0.0025,
+        "itemId": 8901,
+        "name": "Black mask (10)",
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Kraken_tentacle"
-      },
+        "wikiPage": "Black_mask_(10)"
+      }
+    ]
+  },
+  {
+    "name": "Aberrant Spectre",
+    "category": "OTHER",
+    "worldX": 3436,
+    "worldY": 3547,
+    "worldPlane": 1,
+    "killTimeSeconds": 12,
+    "locationDescription": "Slayer Tower 1st floor, Morytania",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 60
+        }
+      ]
+    },
+    "items": [
       {
-        "itemId": 13265,
-        "name": "Abyssal dagger",
-        "dropRate": 0.002,
+        "itemId": 4105,
+        "name": "Mystic gloves (dark)",
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Abyssal_dagger"
-      },
+        "wikiPage": "Mystic_gloves_(dark)"
+      }
+    ]
+  },
+  {
+    "name": "Basilisk Knight",
+    "category": "OTHER",
+    "worldX": 2456,
+    "worldY": 4240,
+    "worldPlane": 0,
+    "killTimeSeconds": 45,
+    "locationDescription": "Jormungand's Prison, Island of Stone",
+    "requirements": {
+      "quests": [
+        "THE_FREMENNIK_EXILES"
+      ],
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 60
+        }
+      ]
+    },
+    "items": [
       {
-        "itemId": 20724,
-        "name": "Imbued heart",
-        "dropRate": 0.003,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Imbued_heart"
-      },
-      {
-        "itemId": 20727,
-        "name": "Leaf-bladed battleaxe",
+        "itemId": 24268,
+        "name": "Basilisk jaw",
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Leaf-bladed_battleaxe"
+        "wikiPage": "Basilisk_jaw"
       },
       {
-        "itemId": 20730,
-        "name": "Mist battlestaff",
-        "dropRate": 3e-05,
+        "itemId": 4109,
+        "name": "Mystic hat (light)",
+        "dropRate": 0.003906,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mist_battlestaff"
-      },
-      {
-        "itemId": 20736,
-        "name": "Dust battlestaff",
-        "dropRate": 3e-05,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dust_battlestaff"
-      },
-      {
-        "itemId": 20849,
-        "name": "Dragon thrownaxe",
-        "dropRate": 0.0005,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dragon_thrownaxe"
-      },
+        "wikiPage": "Mystic_hat_(light)"
+      }
+    ]
+  },
+  {
+    "name": "Wyrm",
+    "category": "OTHER",
+    "worldX": 1311,
+    "worldY": 10205,
+    "worldPlane": 0,
+    "killTimeSeconds": 18,
+    "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 62
+        }
+      ]
+    },
+    "items": [
       {
         "itemId": 21009,
         "name": "Dragon sword",
@@ -4658,20 +4982,12 @@
         "wikiPage": "Dragon_harpoon"
       },
       {
-        "itemId": 21270,
-        "name": "Eternal gem",
-        "dropRate": 0.003,
+        "itemId": 20849,
+        "name": "Dragon thrownaxe",
+        "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Eternal_gem"
-      },
-      {
-        "itemId": 21637,
-        "name": "Wyvern visage",
-        "dropRate": 0.0001,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Wyvern_visage"
+        "wikiPage": "Dragon_thrownaxe"
       },
       {
         "itemId": 22804,
@@ -4680,11 +4996,441 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_knife"
+      }
+    ]
+  },
+  {
+    "name": "Lava Strykewyrm",
+    "category": "OTHER",
+    "worldX": 2150,
+    "worldY": 2968,
+    "worldPlane": 0,
+    "killTimeSeconds": 25,
+    "locationDescription": "Charred Island",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 62
+        },
+        {
+          "skill": "SAILING",
+          "level": 60
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 31996,
+        "name": "Dragon metal sheet",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_metal_sheet"
+      }
+    ]
+  },
+  {
+    "name": "Dust Devil",
+    "category": "OTHER",
+    "worldX": 3310,
+    "worldY": 2962,
+    "worldPlane": 0,
+    "killTimeSeconds": 15,
+    "locationDescription": "Smoke Dungeon, Kharidian Desert",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 65
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 3140,
+        "name": "Dragon chainbody",
+        "dropRate": 3.1e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_chainbody"
+      }
+    ]
+  },
+  {
+    "name": "Fossil Island Wyvern",
+    "category": "OTHER",
+    "worldX": 3602,
+    "worldY": 10290,
+    "worldPlane": 0,
+    "killTimeSeconds": 30,
+    "locationDescription": "Wyvern Cave, Fossil Island",
+    "requirements": {
+      "quests": [
+        "BONE_VOYAGE"
+      ],
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 66
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 21637,
+        "name": "Wyvern visage",
+        "dropRate": 8.33e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Wyvern_visage"
       },
+      {
+        "itemId": 21646,
+        "name": "Granite longsword",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_longsword"
+      },
+      {
+        "itemId": 21643,
+        "name": "Granite boots",
+        "dropRate": 0.000391,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_boots"
+      }
+    ]
+  },
+  {
+    "name": "Kurask",
+    "category": "OTHER",
+    "worldX": 2701,
+    "worldY": 9992,
+    "worldPlane": 0,
+    "killTimeSeconds": 17,
+    "locationDescription": "Fremennik Slayer Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 70
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 7978,
+        "name": "Kurask head",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Kurask_head"
+      },
+      {
+        "itemId": 20727,
+        "name": "Leaf-bladed battleaxe",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Leaf-bladed_battleaxe"
+      },
+      {
+        "itemId": 4111,
+        "name": "Mystic robe top (light)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_robe_top_(light)"
+      }
+    ]
+  },
+  {
+    "name": "Skeletal Wyvern",
+    "category": "OTHER",
+    "worldX": 3008,
+    "worldY": 3150,
+    "worldPlane": 0,
+    "killTimeSeconds": 35,
+    "locationDescription": "Asgarnian Ice Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 72
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 6809,
+        "name": "Granite legs",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_legs"
+      },
+      {
+        "itemId": 11286,
+        "name": "Draconic visage",
+        "dropRate": 0.0001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Draconic_visage"
+      }
+    ]
+  },
+  {
+    "name": "Gargoyle",
+    "category": "OTHER",
+    "worldX": 3429,
+    "worldY": 3534,
+    "worldPlane": 2,
+    "killTimeSeconds": 15,
+    "locationDescription": "Slayer Tower top floor, Morytania",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 75
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 4153,
+        "name": "Granite maul",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_maul"
+      },
+      {
+        "itemId": 4129,
+        "name": "Adamant boots",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Adamant_boots"
+      },
+      {
+        "itemId": 4103,
+        "name": "Mystic robe bottom (dark)",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mystic_robe_bottom_(dark)"
+      }
+    ]
+  },
+  {
+    "name": "Custodian Stalker",
+    "category": "OTHER",
+    "worldX": 1575,
+    "worldY": 3090,
+    "worldPlane": 0,
+    "killTimeSeconds": 35,
+    "locationDescription": "Stalker Den, Auburnvale",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 76
+        }
+      ],
+      "quests": [
+        "SHADOWS_OF_CUSTODIA"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 31086,
+        "name": "Broken antler",
+        "dropRate": 0.032258,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Broken_antler"
+      },
+      {
+        "itemId": 31081,
+        "name": "Antler guard",
+        "dropRate": 0.001538,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Antler_guard"
+      },
+      {
+        "itemId": 31084,
+        "name": "Alchemist's signet",
+        "dropRate": 0.016129,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Alchemist%27s_signet"
+      }
+    ]
+  },
+  {
+    "name": "Aquanite",
+    "category": "OTHER",
+    "worldX": 2712,
+    "worldY": 9882,
+    "worldPlane": 0,
+    "killTimeSeconds": 16,
+    "locationDescription": "Waterfall Dungeon, east of Baxtorian Falls",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 78
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 32876,
+        "name": "Aquanite tendon",
+        "dropRate": 0.001333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Aquanite_tendon"
+      }
+    ]
+  },
+  {
+    "name": "Nechryael",
+    "category": "OTHER",
+    "worldX": 3442,
+    "worldY": 3558,
+    "worldPlane": 2,
+    "killTimeSeconds": 7,
+    "locationDescription": "Slayer Tower top floor, Morytania",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 80
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 4131,
+        "name": "Rune boots",
+        "dropRate": 0.008621,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rune_boots"
+      }
+    ]
+  },
+  {
+    "name": "Spiritual Mage",
+    "category": "OTHER",
+    "worldX": 2844,
+    "worldY": 5280,
+    "worldPlane": 2,
+    "killTimeSeconds": 19,
+    "locationDescription": "God Wars Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 83
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 11840,
+        "name": "Dragon boots",
+        "dropRate": 0.007813,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_boots"
+      }
+    ]
+  },
+  {
+    "name": "Spiritual Mage (Zarosian)",
+    "category": "OTHER",
+    "worldX": 2904,
+    "worldY": 5203,
+    "worldPlane": 0,
+    "killTimeSeconds": 21,
+    "locationDescription": "God Wars Dungeon, Ancient Prison",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 83
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 26221,
+        "name": "Ancient ceremonial top",
+        "dropRate": 0.001563,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_ceremonial_top"
+      },
+      {
+        "itemId": 26223,
+        "name": "Ancient ceremonial legs",
+        "dropRate": 0.001563,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_ceremonial_legs"
+      },
+      {
+        "itemId": 26225,
+        "name": "Ancient ceremonial mask",
+        "dropRate": 0.001563,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_ceremonial_mask"
+      },
+      {
+        "itemId": 26227,
+        "name": "Ancient ceremonial gloves",
+        "dropRate": 0.001563,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_ceremonial_gloves"
+      },
+      {
+        "itemId": 26229,
+        "name": "Ancient ceremonial boots",
+        "dropRate": 0.001563,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_ceremonial_boots"
+      }
+    ]
+  },
+  {
+    "name": "Drake",
+    "category": "OTHER",
+    "worldX": 1310,
+    "worldY": 10057,
+    "worldPlane": 0,
+    "killTimeSeconds": 22,
+    "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 84
+        }
+      ]
+    },
+    "items": [
       {
         "itemId": 22957,
         "name": "Drake's claw",
-        "dropRate": 0.00195,
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Drake%27s_claw"
@@ -4692,23 +5438,193 @@
       {
         "itemId": 22960,
         "name": "Drake's tooth",
-        "dropRate": 0.00195,
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Drake%27s_tooth"
+      }
+    ]
+  },
+  {
+    "name": "Abyssal Demon",
+    "category": "OTHER",
+    "worldX": 3418,
+    "worldY": 3560,
+    "worldPlane": 2,
+    "killTimeSeconds": 13,
+    "locationDescription": "Slayer Tower top floor, Morytania",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 85
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 4151,
+        "name": "Abyssal whip",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_whip"
       },
       {
-        "itemId": 22963,
-        "name": "Broken dragon hasta",
+        "itemId": 7979,
+        "name": "Abyssal head",
+        "dropRate": 0.000167,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_head"
+      },
+      {
+        "itemId": 13265,
+        "name": "Abyssal dagger",
+        "dropRate": 3.13e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Abyssal_dagger"
+      }
+    ]
+  },
+  {
+    "name": "Cave Kraken",
+    "category": "OTHER",
+    "worldX": 2278,
+    "worldY": 3611,
+    "worldPlane": 0,
+    "killTimeSeconds": 8,
+    "locationDescription": "Kraken Cove",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 87
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 11908,
+        "name": "Uncharged trident",
         "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Broken_dragon_hasta"
+        "wikiPage": "Trident_of_the_seas"
       },
+      {
+        "itemId": 12004,
+        "name": "Kraken tentacle",
+        "dropRate": 0.000833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Kraken_tentacle"
+      }
+    ]
+  },
+  {
+    "name": "Dark Beast",
+    "category": "OTHER",
+    "worldX": 1920,
+    "worldY": 4672,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "locationDescription": "Iorwerth Dungeon, Prifddinas",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 90
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 11235,
+        "name": "Dark bow",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_bow"
+      }
+    ]
+  },
+  {
+    "name": "Araxyte",
+    "category": "OTHER",
+    "worldX": 3657,
+    "worldY": 3407,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "locationDescription": "Araxyte Cave, north-east of Darkmeyer",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 92
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 29806,
+        "name": "Aranea boots",
+        "dropRate": 0.00125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Aranea_boots"
+      }
+    ]
+  },
+  {
+    "name": "Smoke Devil",
+    "category": "OTHER",
+    "worldX": 2412,
+    "worldY": 3061,
+    "worldPlane": 0,
+    "killTimeSeconds": 11,
+    "locationDescription": "Smoke Devil Dungeon",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 93
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 12002,
+        "name": "Occult necklace",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Occult_necklace"
+      }
+    ]
+  },
+  {
+    "name": "Hydra",
+    "category": "OTHER",
+    "worldX": 1310,
+    "worldY": 10190,
+    "worldPlane": 0,
+    "killTimeSeconds": 27,
+    "locationDescription": "Karuulm Slayer Dungeon, lower level",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 95
+        }
+      ]
+    },
+    "items": [
       {
         "itemId": 22969,
         "name": "Hydra's heart",
-        "dropRate": 0.00552,
+        "dropRate": 0.00277,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra%27s_heart"
@@ -4716,7 +5632,7 @@
       {
         "itemId": 22971,
         "name": "Hydra's fang",
-        "dropRate": 0.00552,
+        "dropRate": 0.00277,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra%27s_fang"
@@ -4724,7 +5640,7 @@
       {
         "itemId": 22973,
         "name": "Hydra's eye",
-        "dropRate": 0.00552,
+        "dropRate": 0.00277,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra%27s_eye"
@@ -4732,11 +5648,46 @@
       {
         "itemId": 22988,
         "name": "Hydra tail",
-        "dropRate": 0.00195,
+        "dropRate": 0.000999,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra_tail"
-      },
+      }
+    ]
+  },
+  {
+    "name": "Vyrewatch Sentinel",
+    "category": "OTHER",
+    "worldX": 3631,
+    "worldY": 3325,
+    "worldPlane": 0,
+    "killTimeSeconds": 25,
+    "locationDescription": "Darkmeyer, Morytania",
+    "requirements": {
+      "quests": [
+        "SINS_OF_THE_FATHER"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 24777,
+        "name": "Blood shard",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blood_shard"
+      }
+    ]
+  },
+  {
+    "name": "Brimstone Chest",
+    "category": "OTHER",
+    "worldX": 1309,
+    "worldY": 3785,
+    "worldPlane": 0,
+    "killTimeSeconds": 600,
+    "locationDescription": "Mount Karuulm, near Konar",
+    "items": [
       {
         "itemId": 23047,
         "name": "Mystic hat (dusk)",
@@ -4778,17 +5729,28 @@
         "wikiPage": "Mystic_boots_(dusk)"
       },
       {
-        "itemId": 24268,
-        "name": "Basilisk jaw",
-        "dropRate": 0.001,
+        "itemId": 22963,
+        "name": "Broken dragon hasta",
+        "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Basilisk_jaw"
-      },
+        "wikiPage": "Broken_dragon_hasta"
+      }
+    ]
+  },
+  {
+    "name": "Larran's Big Chest",
+    "category": "OTHER",
+    "worldX": 3018,
+    "worldY": 3955,
+    "worldPlane": 0,
+    "killTimeSeconds": 900,
+    "locationDescription": "Wilderness, Pirates' Hideout",
+    "items": [
       {
         "itemId": 24288,
         "name": "Dagon'hai hat",
-        "dropRate": 0.0039,
+        "dropRate": 0.003906,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dagon%27hai_hat"
@@ -4796,7 +5758,7 @@
       {
         "itemId": 24291,
         "name": "Dagon'hai robe top",
-        "dropRate": 0.0039,
+        "dropRate": 0.003906,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dagon%27hai_robe_top"
@@ -4804,181 +5766,74 @@
       {
         "itemId": 24294,
         "name": "Dagon'hai robe bottom",
-        "dropRate": 0.0039,
+        "dropRate": 0.003906,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dagon%27hai_robe_bottom"
-      },
+      }
+    ]
+  },
+  {
+    "name": "Superior Slayer Monster",
+    "category": "OTHER",
+    "worldX": 3429,
+    "worldY": 3534,
+    "worldPlane": 0,
+    "killTimeSeconds": 3000,
+    "locationDescription": "Slayer Tower, Morytania (varies)",
+    "items": [
       {
-        "itemId": 24777,
-        "name": "Blood shard",
-        "dropRate": 0.000667,
+        "itemId": 20724,
+        "name": "Imbued heart",
+        "dropRate": 0.001153,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blood_shard"
+        "wikiPage": "Imbued_heart"
       },
       {
-        "itemId": 26221,
-        "name": "Ancient ceremonial top",
-        "dropRate": 0.00156,
+        "itemId": 21270,
+        "name": "Eternal gem",
+        "dropRate": 0.001153,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancient_ceremonial_top"
+        "wikiPage": "Eternal_gem"
       },
       {
-        "itemId": 26223,
-        "name": "Ancient ceremonial legs",
-        "dropRate": 0.00156,
+        "itemId": 20730,
+        "name": "Mist battlestaff",
+        "dropRate": 0.004032,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancient_ceremonial_legs"
+        "wikiPage": "Mist_battlestaff"
       },
       {
-        "itemId": 26225,
-        "name": "Ancient ceremonial mask",
-        "dropRate": 0.00156,
+        "itemId": 20736,
+        "name": "Dust battlestaff",
+        "dropRate": 0.004032,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancient_ceremonial_mask"
-      },
-      {
-        "itemId": 26227,
-        "name": "Ancient ceremonial gloves",
-        "dropRate": 0.00156,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Ancient_ceremonial_gloves"
-      },
-      {
-        "itemId": 26229,
-        "name": "Ancient ceremonial boots",
-        "dropRate": 0.00156,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Ancient_ceremonial_boots"
-      },
-      {
-        "itemId": 28583,
-        "name": "Warped sceptre",
-        "dropRate": 0.003125,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Warped_sceptre"
-      },
-      {
-        "itemId": 29084,
-        "name": "Sulphur blades",
-        "dropRate": 0.00222,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Sulphur_blades"
-      },
+        "wikiPage": "Dust_battlestaff"
+      }
+    ]
+  },
+  {
+    "name": "Zombie Pirate Locker",
+    "category": "OTHER",
+    "worldX": 3373,
+    "worldY": 3625,
+    "worldPlane": 0,
+    "killTimeSeconds": 180,
+    "locationDescription": "East of Chaos Temple, level 14 Wilderness",
+    "items": [
       {
         "itemId": 29455,
         "name": "Teleport anchoring scroll",
-        "dropRate": 0.00364,
+        "dropRate": 0.003636,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Teleport_anchoring_scroll"
-      },
-      {
-        "itemId": 29806,
-        "name": "Aranea boots",
-        "dropRate": 0.00125,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Aranea_boots"
-      },
-      {
-        "itemId": 29889,
-        "name": "Glacial temotli",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Glacial_temotli"
-      },
-      {
-        "itemId": 29892,
-        "name": "Pendant of ates",
-        "dropRate": 0.04,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Pendant_of_ates"
-      },
-      {
-        "itemId": 29895,
-        "name": "Frozen tear",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Frozen_tear"
-      },
-      {
-        "itemId": 30957,
-        "name": "Earthbound tecpatl",
-        "dropRate": 0.0025,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Earthbound_tecpatl"
-      },
-      {
-        "itemId": 31081,
-        "name": "Antler guard",
-        "dropRate": 0.00154,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Antler_guard"
-      },
-      {
-        "itemId": 31084,
-        "name": "Alchemist's signet",
-        "dropRate": 0.0161,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Alchemist%27s_signet"
-      },
-      {
-        "itemId": 31086,
-        "name": "Broken antler",
-        "dropRate": 0.0667,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Broken_antler"
-      },
-      {
-        "itemId": 31235,
-        "name": "Gryphon feather",
-        "dropRate": 1.0,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Gryphon_feather"
-      },
-      {
-        "itemId": 31243,
-        "name": "Horn of plenty",
-        "dropRate": 0.001,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Horn_of_plenty"
-      },
-      {
-        "itemId": 31996,
-        "name": "Dragon metal sheet",
-        "dropRate": 0.005,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dragon_metal_sheet"
-      },
-      {
-        "itemId": 32876,
-        "name": "Aquanite tendon",
-        "dropRate": 0.00133,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Aquanite_tendon"
       }
-    ],
-    "mutuallyExclusive": true
+    ]
   },
   {
     "name": "Hallowed Sepulchre",
@@ -5401,7 +6256,17 @@
     "worldY": 3151,
     "worldPlane": 0,
     "killTimeSeconds": 360,
-    "requirements": {"quests": ["SLEEPING_GIANTS"], "skills": [{"skill": "SMITHING", "level": 15}]},
+    "requirements": {
+      "quests": [
+        "SLEEPING_GIANTS"
+      ],
+      "skills": [
+        {
+          "skill": "SMITHING",
+          "level": 15
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 27023,
@@ -5897,7 +6762,17 @@
     "worldY": 2955,
     "worldPlane": 0,
     "killTimeSeconds": 300,
-    "requirements": {"quests": ["CHILDREN_OF_THE_SUN"], "skills": [{"skill": "HERBLORE", "level": 60}]},
+    "requirements": {
+      "quests": [
+        "CHILDREN_OF_THE_SUN"
+      ],
+      "skills": [
+        {
+          "skill": "HERBLORE",
+          "level": 60
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 29978,
@@ -5974,7 +6849,17 @@
     "worldY": 3807,
     "worldPlane": 0,
     "killTimeSeconds": 600,
-    "requirements": {"quests": ["BONE_VOYAGE"], "skills": [{"skill": "MINING", "level": 50}]},
+    "requirements": {
+      "quests": [
+        "BONE_VOYAGE"
+      ],
+      "skills": [
+        {
+          "skill": "MINING",
+          "level": 50
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 21697,
@@ -6060,7 +6945,14 @@
     "worldY": 3504,
     "worldPlane": 0,
     "killTimeSeconds": 300,
-    "requirements": {"skills": [{"skill": "FARMING", "level": 34}]},
+    "requirements": {
+      "skills": [
+        {
+          "skill": "FARMING",
+          "level": 34
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 13646,
@@ -7201,7 +8093,17 @@
     "worldY": 3021,
     "worldPlane": 0,
     "killTimeSeconds": 1200,
-    "requirements": {"quests": ["CABIN_FEVER"], "skills": [{"skill": "COOKING", "level": 40}]},
+    "requirements": {
+      "quests": [
+        "CABIN_FEVER"
+      ],
+      "skills": [
+        {
+          "skill": "COOKING",
+          "level": 40
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 8959,
@@ -8172,7 +9074,9 @@
         "worldY": 6092,
         "worldPlane": 0,
         "requirements": {
-          "quests": ["SONG_OF_THE_ELVES"]
+          "quests": [
+            "SONG_OF_THE_ELVES"
+          ]
         }
       },
       {
@@ -8553,7 +9457,17 @@
     "worldY": 3069,
     "worldPlane": 0,
     "killTimeSeconds": 300,
-    "requirements": {"quests": ["CHILDREN_OF_THE_SUN"], "skills": [{"skill": "HUNTER", "level": 46}]},
+    "requirements": {
+      "quests": [
+        "CHILDREN_OF_THE_SUN"
+      ],
+      "skills": [
+        {
+          "skill": "HUNTER",
+          "level": 46
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 29263,
@@ -8717,7 +9631,17 @@
     "worldY": 2703,
     "worldPlane": 0,
     "killTimeSeconds": 45,
-    "requirements": {"quests": ["MONKEY_MADNESS_II"], "skills": [{"skill": "AGILITY", "level": 48}]},
+    "requirements": {
+      "quests": [
+        "MONKEY_MADNESS_II"
+      ],
+      "skills": [
+        {
+          "skill": "AGILITY",
+          "level": 48
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 24862,
@@ -10065,7 +10989,11 @@
     "worldY": 5774,
     "worldPlane": 0,
     "killTimeSeconds": 30,
-    "requirements": {"quests": ["BELOW_ICE_MOUNTAIN"]},
+    "requirements": {
+      "quests": [
+        "BELOW_ICE_MOUNTAIN"
+      ]
+    },
     "items": [
       {
         "itemId": 25641,
@@ -10159,7 +11087,17 @@
     "worldY": 2931,
     "worldPlane": 0,
     "killTimeSeconds": 60,
-    "requirements": {"quests": ["CHILDREN_OF_THE_SUN"], "skills": [{"skill": "AGILITY", "level": 50}]},
+    "requirements": {
+      "quests": [
+        "CHILDREN_OF_THE_SUN"
+      ],
+      "skills": [
+        {
+          "skill": "AGILITY",
+          "level": 50
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 30040,
@@ -11051,7 +11989,11 @@
     "worldPlane": 0,
     "killTimeSeconds": 500,
     "locationDescription": "The Darkfrost, Hailstorm Mountains in Varlamore",
-    "requirements": {"quests": ["CHILDREN_OF_THE_SUN"]},
+    "requirements": {
+      "quests": [
+        "CHILDREN_OF_THE_SUN"
+      ]
+    },
     "items": [
       {
         "itemId": 30070,
@@ -11212,7 +12154,11 @@
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "locationDescription": "Ruins of Mokhaiotl, beneath Tlati Rainforest in Varlamore",
-    "requirements": {"quests": ["THE_FINAL_DAWN"]},
+    "requirements": {
+      "quests": [
+        "THE_FINAL_DAWN"
+      ]
+    },
     "items": [
       {
         "itemId": 31088,
@@ -11573,7 +12519,11 @@
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "locationDescription": "Tar Swamp, Fossil Island",
-    "requirements": {"quests": ["BONE_VOYAGE"]},
+    "requirements": {
+      "quests": [
+        "BONE_VOYAGE"
+      ]
+    },
     "items": [
       {
         "itemId": 30895,
