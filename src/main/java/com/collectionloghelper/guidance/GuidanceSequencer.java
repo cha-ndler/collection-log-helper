@@ -318,7 +318,8 @@ public class GuidanceSequencer
 			null,
 			CompletionCondition.MANUAL,
 			0, 0, 0,
-			null  // worldMessage
+			null,  // worldMessage
+			0, null  // objectId, objectInteractAction
 		);
 	}
 
