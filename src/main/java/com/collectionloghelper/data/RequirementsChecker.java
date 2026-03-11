@@ -21,6 +21,7 @@ public class RequirementsChecker
 
 	private volatile Map<String, Boolean> accessibilityCache = Collections.emptyMap();
 	private volatile Map<String, List<String>> unmetCache = Collections.emptyMap();
+	private volatile boolean fairyRingAccess = false;
 
 	@Inject
 	private RequirementsChecker(Client client)
@@ -53,6 +54,17 @@ public class RequirementsChecker
 		accessibilityCache = newAccessibility;
 		unmetCache = newUnmet;
 
+		// Cache fairy ring access: requires starting Fairytale II (not just completing it).
+		// QuestState.NOT_STARTED means no access; IN_PROGRESS or FINISHED means access.
+		try
+		{
+			fairyRingAccess = Quest.FAIRYTALE_II__CURE_A_QUEEN.getState(client) != QuestState.NOT_STARTED;
+		}
+		catch (Exception e)
+		{
+			fairyRingAccess = false;
+		}
+
 		// Check if any source's accessibility status actually changed
 		for (Map.Entry<String, Boolean> entry : newAccessibility.entrySet())
 		{
@@ -82,12 +94,22 @@ public class RequirementsChecker
 	}
 
 	/**
+	 * Returns true if the player has access to the fairy ring network
+	 * (started Fairytale II - Cure a Queen). Safe to call from EDT.
+	 */
+	public boolean hasFairyRingAccess()
+	{
+		return fairyRingAccess;
+	}
+
+	/**
 	 * Clear the cache (e.g., on logout).
 	 */
 	public void clearCache()
 	{
 		accessibilityCache = Collections.emptyMap();
 		unmetCache = Collections.emptyMap();
+		fairyRingAccess = false;
 	}
 
 	/**

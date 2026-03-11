@@ -20,6 +20,8 @@ public class CollectionLogSource
     boolean mutuallyExclusive;
     int rollsPerKill;
     boolean aggregated;
+    int afkLevel;
+    String travelTip;
     SourceRequirements requirements;
     List<CollectionLogItem> items;
 

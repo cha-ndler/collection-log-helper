@@ -50,6 +50,7 @@ public class EfficiencyCalculatorTest
 		lenient().when(requirementsChecker.isAccessible(anyString())).thenReturn(true);
 		lenient().when(config.hideLockedContent()).thenReturn(false);
 		lenient().when(config.raidTeamSize()).thenReturn(RaidTeamSize.SOLO);
+		lenient().when(config.afkOnly()).thenReturn(false);
 
 		// Use reflection to call the private constructor
 		Constructor<EfficiencyCalculator> ctor = EfficiencyCalculator.class.getDeclaredConstructor(
@@ -66,7 +67,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, category, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, null, items);
+			RewardType.DROP, 0, false, 1, false, 0, null, null, items);
 	}
 
 	private CollectionLogSource makeShopSource(String name, int killTimeSeconds,
@@ -74,7 +75,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.SHOP, pointsPerHour, false, 1, false, null, items);
+			RewardType.SHOP, pointsPerHour, false, 1, false, 0, null, null, items);
 	}
 
 	private CollectionLogSource makeMilestoneSource(String name, int killTimeSeconds,
@@ -82,7 +83,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.MILESTONE, 0, false, 1, false, null, items);
+			RewardType.MILESTONE, 0, false, 1, false, 0, null, null, items);
 	}
 
 	private CollectionLogSource makeMixedSource(String name, int killTimeSeconds,
@@ -90,7 +91,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.MIXED, pointsPerHour, false, 1, false, null, items);
+			RewardType.MIXED, pointsPerHour, false, 1, false, 0, null, null, items);
 	}
 
 	private CollectionLogSource makeAggregatedSource(String name, int killTimeSeconds,
@@ -98,7 +99,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, true, null, items);
+			RewardType.DROP, 0, false, 1, true, 0, null, null, items);
 	}
 
 	private CollectionLogItem makeItem(int id, String name, double dropRate)
@@ -327,7 +328,7 @@ public class EfficiencyCalculatorTest
 		List<CollectionLogItem> items = Collections.singletonList(makeItem(1, "Drop", 1.0 / 512));
 		CollectionLogSource source = new CollectionLogSource("Test", CollectionLogCategory.BOSSES,
 			3000, 3000, 0, 120, "Test", Collections.emptyList(),
-			RewardType.DROP, 0, false, 2, false, null, items);
+			RewardType.DROP, 0, false, 2, false, 0, null, null, items);
 		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
 
 		ScoredItem result = calculator.scoreSource(source, false);
@@ -480,7 +481,7 @@ public class EfficiencyCalculatorTest
 		CollectionLogSource source = new CollectionLogSource("Easy Treasure Trails",
 			CollectionLogCategory.CLUES, 3000, 3000, 0, 600,
 			"Easy Treasure Trails", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, null,
+			RewardType.DROP, 0, false, 1, false, 0, null, null,
 			Collections.singletonList(makeItem(1, "Drop", 0.01)));
 		when(clueEstimator.estimateCompletionSeconds("Easy Treasure Trails")).thenReturn(900);
 
@@ -494,7 +495,7 @@ public class EfficiencyCalculatorTest
 		CollectionLogSource source = new CollectionLogSource("Easy Treasure Trails",
 			CollectionLogCategory.CLUES, 3000, 3000, 0, 600,
 			"Easy Treasure Trails", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, null,
+			RewardType.DROP, 0, false, 1, false, 0, null, null,
 			Collections.singletonList(makeItem(1, "Drop", 0.01)));
 		when(clueEstimator.estimateCompletionSeconds("Easy Treasure Trails")).thenReturn(0);
 
@@ -576,5 +577,55 @@ public class EfficiencyCalculatorTest
 
 		double hoursForScore200 = 100.0 / 200;
 		assertEquals(0.5, hoursForScore200, 0.001);
+	}
+
+	// --- AFK filter ---
+
+	@Test
+	public void testAfkFilter_excludesLowAfkLevel()
+	{
+		// Source with afkLevel 0 should be excluded when afkOnly=true
+		CollectionLogSource source = new CollectionLogSource("Test Boss", CollectionLogCategory.BOSSES,
+			3000, 3000, 0, 60, "Test Boss", Collections.emptyList(),
+			RewardType.DROP, 0, false, 1, false, 0, null, null,
+			Collections.singletonList(makeItem(1, "Drop", 0.01)));
+		lenient().when(collectionState.isItemObtained(1)).thenReturn(false);
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		when(config.afkOnly()).thenReturn(true);
+
+		List<ScoredItem> results = calculator.rankByEfficiency();
+		assertTrue(results.isEmpty());
+	}
+
+	@Test
+	public void testAfkFilter_includesHighAfkLevel()
+	{
+		// Source with afkLevel 2 should be included when afkOnly=true
+		CollectionLogSource source = new CollectionLogSource("AFK Source", CollectionLogCategory.BOSSES,
+			3000, 3000, 0, 60, "AFK Source", Collections.emptyList(),
+			RewardType.DROP, 0, false, 1, false, 2, null, null,
+			Collections.singletonList(makeItem(1, "Drop", 0.01)));
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		when(config.afkOnly()).thenReturn(true);
+
+		List<ScoredItem> results = calculator.rankByEfficiency();
+		assertEquals(1, results.size());
+	}
+
+	@Test
+	public void testAfkFilter_disabledShowsAll()
+	{
+		// When afkOnly=false, all sources show regardless of afkLevel
+		CollectionLogSource source = new CollectionLogSource("Test Boss", CollectionLogCategory.BOSSES,
+			3000, 3000, 0, 60, "Test Boss", Collections.emptyList(),
+			RewardType.DROP, 0, false, 1, false, 0, null, null,
+			Collections.singletonList(makeItem(1, "Drop", 0.01)));
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		when(config.afkOnly()).thenReturn(false);
+
+		List<ScoredItem> results = calculator.rankByEfficiency();
+		assertEquals(1, results.size());
 	}
 }

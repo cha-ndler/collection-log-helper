@@ -57,15 +57,23 @@ public class EfficiencyCalculator
 		this.slayerTaskState = slayerTaskState;
 	}
 
+	/** Minimum afkLevel a source must have to pass the AFK filter. */
+	private static final int AFK_MIN_LEVEL = 2;
+
 	public List<ScoredItem> rankByEfficiency()
 	{
 		List<ScoredItem> results = new ArrayList<>();
 		boolean hideLocked = config.hideLockedContent();
+		boolean afkOnly = config.afkOnly();
 
 		for (CollectionLogSource source : database.getAllSources())
 		{
 			boolean locked = !requirementsChecker.isAccessible(source.getName());
 			if (hideLocked && locked)
+			{
+				continue;
+			}
+			if (afkOnly && source.getAfkLevel() < AFK_MIN_LEVEL)
 			{
 				continue;
 			}
@@ -95,11 +103,16 @@ public class EfficiencyCalculator
 	{
 		List<ScoredItem> results = new ArrayList<>();
 		boolean hideLocked = config.hideLockedContent();
+		boolean afkOnly = config.afkOnly();
 
 		for (CollectionLogSource source : database.getAllSources())
 		{
 			boolean locked = !requirementsChecker.isAccessible(source.getName());
 			if (hideLocked && locked)
+			{
+				continue;
+			}
+			if (afkOnly && source.getAfkLevel() < AFK_MIN_LEVEL)
 			{
 				continue;
 			}
@@ -415,8 +428,8 @@ public class EfficiencyCalculator
 				boolean onTask = isOnSlayerTask(src);
 
 				pw.printf("--- #%d: %s ---%n", rank, src.getName());
-				pw.printf("  Category: %s | RewardType: %s | Locked: %s%s%n",
-					src.getCategory(), src.getRewardType(), si.isLocked(),
+				pw.printf("  Category: %s | RewardType: %s | AFK: %d | Locked: %s%s%n",
+					src.getCategory(), src.getRewardType(), src.getAfkLevel(), si.isLocked(),
 					onTask ? " | ON SLAYER TASK" : "");
 				pw.printf("  Location: %s%n", src.getDisplayLocation(requirementsChecker));
 				pw.printf("  killTimeSeconds: %d (effective: %d) | rollsPerKill: %d%n",

@@ -73,6 +73,7 @@
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
+    "travelTip": "Trollheim teleport → GWD",
     "mutuallyExclusive": true
   },
   {
@@ -149,6 +150,7 @@
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
+    "travelTip": "Trollheim teleport → GWD",
     "mutuallyExclusive": true
   },
   {
@@ -225,6 +227,7 @@
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
+    "travelTip": "Trollheim teleport → GWD",
     "mutuallyExclusive": true
   },
   {
@@ -301,6 +304,7 @@
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
+    "travelTip": "Trollheim teleport → GWD",
     "mutuallyExclusive": true
   },
   {
@@ -398,6 +402,7 @@
       }
     ],
     "locationDescription": "Zul-Andra, east coast of Tirannwn",
+    "travelTip": "Fairy ring BJS → boat",
     "mutuallyExclusive": true
   },
   {
@@ -462,7 +467,8 @@
         "wikiPage": "Vorki"
       }
     ],
-    "locationDescription": "Rellekka docks (boat to island)"
+    "locationDescription": "Rellekka docks (boat to island)",
+    "travelTip": "Lunar Isle tele → Rellekka boat"
   },
   {
     "name": "Cerberus",
@@ -471,6 +477,7 @@
     "worldY": 3397,
     "worldPlane": 0,
     "locationDescription": "Taverley Dungeon entrance, Taverley",
+    "travelTip": "Teleport to house → Taverley",
     "killTimeSeconds": 60,
     "requirements": {
       "skills": [
@@ -547,6 +554,7 @@
     "worldY": 3807,
     "worldPlane": 0,
     "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
+    "travelTip": "Fairy ring CIR → Karuulm",
     "killTimeSeconds": 120,
     "requirements": {
       "skills": [
@@ -714,6 +722,7 @@
       }
     ],
     "locationDescription": "Games necklace cave, level 21 Wilderness",
+    "travelTip": "Games necklace → Corp",
     "mutuallyExclusive": true
   },
   {
@@ -723,6 +732,7 @@
     "worldY": 3108,
     "worldPlane": 0,
     "locationDescription": "Kalphite Lair entrance, Kharidian Desert",
+    "travelTip": "Fairy ring BIQ → KQ tunnel",
     "killTimeSeconds": 180,
     "items": [
       {
@@ -840,6 +850,7 @@
       }
     ],
     "locationDescription": "Ancient Prison entrance, Weiss",
+    "travelTip": "Fairy ring DKS → Weiss",
     "mutuallyExclusive": true
   },
   {
@@ -937,6 +948,7 @@
       }
     ],
     "locationDescription": "Duke Sucellus' lair, beneath the Wizards' Tower",
+    "travelTip": "Quetzal whistle → Cam Torum",
     "mutuallyExclusive": true
   },
   {
@@ -1034,6 +1046,7 @@
       }
     ],
     "locationDescription": "Catacombs entrance, Kourend",
+    "travelTip": "Xeric's talisman → Heart",
     "mutuallyExclusive": true
   },
   {
@@ -1131,6 +1144,7 @@
       }
     ],
     "locationDescription": "Lassar Undercity entrance, Ice Mountain",
+    "travelTip": "Lassar teleport (ancient)",
     "mutuallyExclusive": true
   },
   {
@@ -1228,6 +1242,7 @@
       }
     ],
     "locationDescription": "The Stranglewood, west of Slepe",
+    "travelTip": "Slepe teleport (Drakan's)",
     "mutuallyExclusive": true
   },
   {
@@ -1304,6 +1319,7 @@
       }
     ],
     "locationDescription": "Slayer Tower rooftop, Morytania",
+    "travelTip": "Slayer ring → Slayer Tower",
     "mutuallyExclusive": true
   },
   {
@@ -1412,6 +1428,7 @@
       }
     ],
     "locationDescription": "Slepe, east Morytania",
+    "travelTip": "Drakan's medallion → Slepe",
     "mutuallyExclusive": true
   },
   {
@@ -1488,6 +1505,7 @@
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
+    "travelTip": "Trollheim teleport → GWD",
     "mutuallyExclusive": true
   },
   {
@@ -1497,7 +1515,9 @@
     "worldY": 3574,
     "worldPlane": 0,
     "locationDescription": "Forthos Dungeon, Hosidius",
+    "travelTip": "Xeric's talisman → Heart",
     "killTimeSeconds": 90,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 23528,
@@ -1549,6 +1569,7 @@
     "worldY": 3376,
     "worldPlane": 0,
     "killTimeSeconds": 90,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 12646,
@@ -1575,7 +1596,8 @@
         "wikiPage": "Mole_skin"
       }
     ],
-    "locationDescription": "Falador Park"
+    "locationDescription": "Falador Park",
+    "travelTip": "Falador teleport → park"
   },
   {
     "name": "Bryophyta",
@@ -1584,7 +1606,9 @@
     "worldY": 9899,
     "worldPlane": 0,
     "killTimeSeconds": 4500,
+    "afkLevel": 1,
     "locationDescription": "Varrock Sewers (requires Mossy key from moss giants)",
+    "travelTip": "Varrock teleport → sewers",
     "items": [
       {
         "itemId": 22372,
@@ -1603,7 +1627,9 @@
     "worldY": 9832,
     "worldPlane": 0,
     "killTimeSeconds": 3900,
+    "afkLevel": 1,
     "locationDescription": "Edgeville Dungeon (requires Giant key from hill giants)",
+    "travelTip": "Edgeville respawn/glory",
     "items": [
       {
         "itemId": 20756,
@@ -1622,6 +1648,7 @@
     "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 6737,
@@ -1657,6 +1684,7 @@
       }
     ],
     "locationDescription": "Waterbirth Island, Rellekka",
+    "travelTip": "Lunar Isle tele → Rellekka",
     "mutuallyExclusive": true
   },
   {
@@ -1666,6 +1694,7 @@
     "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 6731,
@@ -1701,6 +1730,7 @@
       }
     ],
     "locationDescription": "Waterbirth Island, Rellekka",
+    "travelTip": "Lunar Isle tele → Rellekka",
     "mutuallyExclusive": true
   },
   {
@@ -1710,6 +1740,7 @@
     "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 6733,
@@ -1745,6 +1776,7 @@
       }
     ],
     "locationDescription": "Waterbirth Island, Rellekka",
+    "travelTip": "Lunar Isle tele → Rellekka",
     "mutuallyExclusive": true
   },
   {
@@ -1754,7 +1786,9 @@
     "worldY": 3611,
     "worldPlane": 0,
     "locationDescription": "Kraken Cove, Piscatoris",
+    "travelTip": "Fairy ring AKQ → Piscatoris",
     "killTimeSeconds": 30,
+    "afkLevel": 2,
     "requirements": {
       "skills": [
         {
@@ -1806,6 +1840,7 @@
     "worldY": 9452,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -1857,6 +1892,7 @@
       }
     ],
     "locationDescription": "Smoke Devil Dungeon, south of Castle Wars",
+    "travelTip": "Castle Wars tele → south",
     "mutuallyExclusive": true
   },
   {
@@ -1949,6 +1985,7 @@
       }
     ],
     "locationDescription": "Abyssal Nexus, fairy ring DIP",
+    "travelTip": "Fairy ring DIP",
     "mutuallyExclusive": true
   },
   {
@@ -1958,6 +1995,7 @@
     "worldY": 3849,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 11920,
@@ -1993,6 +2031,7 @@
       }
     ],
     "locationDescription": "King Black Dragon Lair, Wilderness",
+    "travelTip": "Burning amulet → Lava Maze",
     "mutuallyExclusive": true
   },
   {
@@ -2029,6 +2068,7 @@
       }
     ],
     "locationDescription": "Rogues' Castle, deep Wilderness",
+    "travelTip": "Burning amulet → Lava Maze",
     "mutuallyExclusive": true
   },
   {
@@ -2073,6 +2113,7 @@
       }
     ],
     "locationDescription": "Scorpia's Cave, deep Wilderness",
+    "travelTip": "Burning amulet → Lava Maze",
     "mutuallyExclusive": true
   },
   {
@@ -2082,6 +2123,7 @@
     "worldY": 3834,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 11928,
@@ -2109,6 +2151,7 @@
       }
     ],
     "locationDescription": "West of Lava Maze, Wilderness",
+    "travelTip": "Burning amulet → Lava Maze",
     "mutuallyExclusive": true
   },
   {
@@ -2118,6 +2161,7 @@
     "worldY": 3734,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 27670,
@@ -2169,6 +2213,7 @@
       }
     ],
     "locationDescription": "Venenatis' Cave, Wilderness",
+    "travelTip": "Burning amulet → Bandit Camp",
     "mutuallyExclusive": true
   },
   {
@@ -2229,6 +2274,7 @@
       }
     ],
     "locationDescription": "Vet'ion's Rest, Wilderness",
+    "travelTip": "Burning amulet → Bandit Camp",
     "mutuallyExclusive": true
   },
   {
@@ -2238,6 +2284,7 @@
     "worldY": 3834,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 27667,
@@ -2289,6 +2336,7 @@
       }
     ],
     "locationDescription": "Callisto's Den, Wilderness",
+    "travelTip": "Burning amulet → Lava Maze",
     "mutuallyExclusive": true
   },
   {
@@ -2353,7 +2401,8 @@
         "wikiPage": "Monkey_tail"
       }
     ],
-    "locationDescription": "Crash Site Cavern, Gnome Stronghold"
+    "locationDescription": "Crash Site Cavern, Gnome Stronghold",
+    "travelTip": "Spirit tree → Stronghold"
   },
   {
     "name": "Lizardman shaman",
@@ -2362,6 +2411,7 @@
     "worldY": 3686,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 13576,
@@ -2372,7 +2422,8 @@
         "wikiPage": "Dragon_warhammer"
       }
     ],
-    "locationDescription": "Lizardman Canyon, Shayzien"
+    "locationDescription": "Lizardman Canyon, Shayzien",
+    "travelTip": "Xeric's talisman → Lookout"
   },
   {
     "name": "Skotizo",
@@ -2381,6 +2432,7 @@
     "worldY": 3673,
     "worldPlane": 0,
     "locationDescription": "Catacombs of Kourend (requires Dark totem from Catacomb monsters)",
+    "travelTip": "Xeric's talisman → Heart",
     "killTimeSeconds": 5400,
     "items": [
       {
@@ -2440,6 +2492,7 @@
     "worldY": 3731,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -2482,7 +2535,8 @@
         "wikiPage": "Kronos_seed"
       }
     ],
-    "locationDescription": "Farming Guild, Hosidius"
+    "locationDescription": "Farming Guild, Hosidius",
+    "travelTip": "Fairy ring CIR → Farming Guild"
   },
   {
     "name": "Chambers of Xeric",
@@ -2678,6 +2732,7 @@
       }
     ],
     "locationDescription": "Mount Quidamortem, Great Kourend",
+    "travelTip": "Xeric's talisman → Chambers",
     "mutuallyExclusive": true
   },
   {
@@ -2831,6 +2886,7 @@
       }
     ],
     "locationDescription": "Ver Sinhaza, Morytania",
+    "travelTip": "Drakan's medallion → Ver Sinhaza",
     "mutuallyExclusive": true
   },
   {
@@ -3059,6 +3115,7 @@
       }
     ],
     "locationDescription": "Necropolis, Kharidian Desert",
+    "travelTip": "Pharaoh's sceptre → Necropolis",
     "mutuallyExclusive": true
   },
   {
@@ -3117,6 +3174,7 @@
       }
     ],
     "locationDescription": "The Gauntlet, Prifddinas",
+    "travelTip": "Teleport crystal → Prifddinas",
     "mutuallyExclusive": true,
     "rewardType": "MIXED"
   },
@@ -3176,6 +3234,7 @@
       }
     ],
     "locationDescription": "The Gauntlet, Prifddinas",
+    "travelTip": "Teleport crystal → Prifddinas",
     "mutuallyExclusive": true,
     "rewardType": "MIXED"
   },
@@ -3186,6 +3245,7 @@
     "worldY": 3298,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "PRIEST_IN_PERIL"
@@ -3394,6 +3454,7 @@
       }
     ],
     "locationDescription": "Barrows, east of Mort'ton",
+    "travelTip": "Barrows teleport (Arceuus)",
     "mutuallyExclusive": true
   },
   {
@@ -3403,6 +3464,7 @@
     "worldY": 2840,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 25580,
@@ -3501,7 +3563,8 @@
         "wikiPage": "Spirit_flakes"
       }
     ],
-    "locationDescription": "Tempoross Cove, south of Al Kharid"
+    "locationDescription": "Tempoross Cove, south of Al Kharid",
+    "travelTip": "Grouping tele → Tempoross"
   },
   {
     "name": "Wintertodt",
@@ -3593,7 +3656,9 @@
       }
     ],
     "locationDescription": "Wintertodt Camp, northern Zeah",
-    "rollsPerKill": 10
+    "travelTip": "Games necklace → Wintertodt",
+    "rollsPerKill": 10,
+    "afkLevel": 2
   },
   {
     "name": "Zalcano",
@@ -3642,6 +3707,7 @@
       }
     ],
     "locationDescription": "Zalcano's Prison, Prifddinas",
+    "travelTip": "Teleport crystal → Prifddinas",
     "mutuallyExclusive": true
   },
   {
@@ -3651,6 +3717,7 @@
     "worldY": 3107,
     "worldPlane": 0,
     "locationDescription": "Fortis Colosseum, Varlamore",
+    "travelTip": "Quetzal whistle → Varlamore",
     "killTimeSeconds": 1440,
     "requirements": {
       "quests": [
@@ -3742,6 +3809,7 @@
     "worldY": 3696,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 11929,
@@ -3768,7 +3836,8 @@
         "wikiPage": "Fedora"
       }
     ],
-    "locationDescription": "Ruins, south of Lava Maze, Wilderness"
+    "locationDescription": "Ruins, south of Lava Maze, Wilderness",
+    "travelTip": "Burning amulet → Bandit Camp"
   },
   {
     "name": "Araxxor",
@@ -3861,6 +3930,7 @@
       }
     ],
     "locationDescription": "Morytania Spider Cave",
+    "travelTip": "Drakan's medallion → Darkmeyer",
     "mutuallyExclusive": true
   },
   {
@@ -3870,6 +3940,7 @@
     "worldY": 3131,
     "worldPlane": 0,
     "locationDescription": "Cam Torum entrance, Ralos Rise",
+    "travelTip": "Quetzal whistle → Cam Torum",
     "killTimeSeconds": 360,
     "items": [
       {
@@ -4017,7 +4088,8 @@
         "wikiPage": "Tormented_ornament_kit"
       }
     ],
-    "locationDescription": "Ruins south of Lava Maze, Wilderness"
+    "locationDescription": "Ruins south of Lava Maze, Wilderness",
+    "travelTip": "Burning amulet → Lava Maze"
   },
   {
     "name": "Beginner Treasure Trails",
@@ -4026,6 +4098,7 @@
     "worldY": 3422,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 23285,
@@ -4281,6 +4354,7 @@
       }
     ],
     "locationDescription": "Revenant Caves, Wilderness",
+    "travelTip": "Burning amulet → Rev Caves",
     "rewardType": "MIXED"
   },
   {
@@ -4290,7 +4364,9 @@
     "worldY": 3543,
     "worldPlane": 0,
     "killTimeSeconds": 8,
+    "afkLevel": 2,
     "locationDescription": "Slayer Tower ground floor, Morytania",
+    "travelTip": "Slayer ring → Slayer Tower",
     "requirements": {
       "skills": [
         {
@@ -4317,7 +4393,9 @@
     "worldY": 10000,
     "worldPlane": 0,
     "killTimeSeconds": 10,
+    "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
+    "travelTip": "Slayer ring → Fremennik cave",
     "requirements": {
       "skills": [
         {
@@ -4344,7 +4422,9 @@
     "worldY": 10018,
     "worldPlane": 0,
     "killTimeSeconds": 10,
+    "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
+    "travelTip": "Slayer ring → Fremennik cave",
     "requirements": {
       "skills": [
         {
@@ -4371,7 +4451,9 @@
     "worldY": 10035,
     "worldPlane": 0,
     "killTimeSeconds": 12,
+    "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
+    "travelTip": "Slayer ring → Fremennik cave",
     "requirements": {
       "skills": [
         {
@@ -4414,7 +4496,9 @@
     "worldY": 10008,
     "worldPlane": 0,
     "killTimeSeconds": 10,
+    "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
+    "travelTip": "Slayer ring → Fremennik cave",
     "requirements": {
       "skills": [
         {
@@ -4441,7 +4525,9 @@
     "worldY": 3110,
     "worldPlane": 0,
     "killTimeSeconds": 18,
+    "afkLevel": 2,
     "locationDescription": "Mudskipper Point, south of Port Sarim",
+    "travelTip": "Port Sarim → Mudskipper Point",
     "requirements": {
       "skills": [
         {
@@ -4476,7 +4562,9 @@
     "worldY": 10008,
     "worldPlane": 0,
     "killTimeSeconds": 18,
+    "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
+    "travelTip": "Slayer ring → Fremennik cave",
     "requirements": {
       "skills": [
         {
@@ -4503,7 +4591,9 @@
     "worldY": 4663,
     "worldPlane": 0,
     "killTimeSeconds": 20,
+    "afkLevel": 2,
     "locationDescription": "Tarn's Lair, Abandoned Mine",
+    "travelTip": "Slayer ring → Tarn's Lair",
     "requirements": {
       "quests": [
         "HAUNTED_MINE"
@@ -4533,7 +4623,9 @@
     "worldY": 3563,
     "worldPlane": 1,
     "killTimeSeconds": 15,
+    "afkLevel": 2,
     "locationDescription": "Slayer Tower 1st floor, Morytania",
+    "travelTip": "Slayer ring → Slayer Tower",
     "requirements": {
       "skills": [
         {
@@ -4568,7 +4660,9 @@
     "worldY": 10132,
     "worldPlane": 0,
     "killTimeSeconds": 14,
+    "afkLevel": 2,
     "locationDescription": "Brine Rat Cavern, north-east of Rellekka",
+    "travelTip": "Fairy ring DKS → Rellekka",
     "requirements": {
       "quests": [
         "OLAFS_QUEST"
@@ -4598,7 +4692,9 @@
     "worldY": 3232,
     "worldPlane": 0,
     "killTimeSeconds": 20,
+    "afkLevel": 2,
     "locationDescription": "Ruins of Tapoyauik, Cam Torum",
+    "travelTip": "Quetzal whistle → Cam Torum",
     "requirements": {
       "skills": [
         {
@@ -4641,7 +4737,9 @@
     "worldY": 9602,
     "worldPlane": 0,
     "killTimeSeconds": 18,
+    "afkLevel": 2,
     "locationDescription": "Neypotzli, Cam Torum",
+    "travelTip": "Quetzal whistle → Cam Torum",
     "requirements": {
       "skills": [
         {
@@ -4668,7 +4766,9 @@
     "worldY": 3104,
     "worldPlane": 0,
     "killTimeSeconds": 25,
+    "afkLevel": 2,
     "locationDescription": "Tonali Cavern, Cam Torum",
+    "travelTip": "Quetzal whistle → Cam Torum",
     "requirements": {
       "skills": [
         {
@@ -4695,7 +4795,9 @@
     "worldY": 3543,
     "worldPlane": 1,
     "killTimeSeconds": 12,
+    "afkLevel": 2,
     "locationDescription": "Slayer Tower 1st floor, Morytania",
+    "travelTip": "Slayer ring → Slayer Tower",
     "requirements": {
       "skills": [
         {
@@ -4730,7 +4832,9 @@
     "worldY": 2880,
     "worldPlane": 0,
     "killTimeSeconds": 20,
+    "afkLevel": 2,
     "locationDescription": "Great Conch, Unquiet Ocean",
+    "travelTip": "Fairy ring → Great Conch",
     "requirements": {
       "skills": [
         {
@@ -4768,7 +4872,9 @@
     "worldY": 10028,
     "worldPlane": 0,
     "killTimeSeconds": 12,
+    "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
+    "travelTip": "Slayer ring → Fremennik cave",
     "requirements": {
       "skills": [
         {
@@ -4795,7 +4901,9 @@
     "worldY": 10002,
     "worldPlane": 0,
     "killTimeSeconds": 15,
+    "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
+    "travelTip": "Slayer ring → Fremennik cave",
     "requirements": {
       "skills": [
         {
@@ -4830,7 +4938,9 @@
     "worldY": 4636,
     "worldPlane": 0,
     "killTimeSeconds": 25,
+    "afkLevel": 2,
     "locationDescription": "Poison Waste Dungeon, Tirannwn",
+    "travelTip": "Tirannwn quiver → Poison Waste",
     "requirements": {
       "quests": [
         "THE_PATH_OF_GLOUPHRIE"
@@ -4860,7 +4970,9 @@
     "worldY": 9373,
     "worldPlane": 0,
     "killTimeSeconds": 12,
+    "afkLevel": 2,
     "locationDescription": "Mos Le'Harmless Cave",
+    "travelTip": "Fairy ring CKR → boat",
     "requirements": {
       "quests": [
         "CABIN_FEVER"
@@ -4890,7 +5002,9 @@
     "worldY": 3547,
     "worldPlane": 1,
     "killTimeSeconds": 12,
+    "afkLevel": 2,
     "locationDescription": "Slayer Tower 1st floor, Morytania",
+    "travelTip": "Slayer ring → Slayer Tower",
     "requirements": {
       "skills": [
         {
@@ -4917,7 +5031,9 @@
     "worldY": 4240,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "afkLevel": 1,
     "locationDescription": "Jormungand's Prison, Island of Stone",
+    "travelTip": "Lunar Isle tele → Rellekka",
     "requirements": {
       "quests": [
         "THE_FREMENNIK_EXILES"
@@ -4955,7 +5071,9 @@
     "worldY": 10205,
     "worldPlane": 0,
     "killTimeSeconds": 18,
+    "afkLevel": 2,
     "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
+    "travelTip": "Fairy ring CIR → Karuulm",
     "requirements": {
       "skills": [
         {
@@ -5007,6 +5125,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 25,
     "locationDescription": "Charred Island",
+    "travelTip": "Quetzal whistle → Varlamore",
     "requirements": {
       "skills": [
         {
@@ -5037,7 +5156,9 @@
     "worldY": 2962,
     "worldPlane": 0,
     "killTimeSeconds": 15,
+    "afkLevel": 2,
     "locationDescription": "Smoke Dungeon, Kharidian Desert",
+    "travelTip": "Fairy ring BIQ → Smoke Dungeon",
     "requirements": {
       "skills": [
         {
@@ -5064,7 +5185,9 @@
     "worldY": 10290,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 2,
     "locationDescription": "Wyvern Cave, Fossil Island",
+    "travelTip": "Digsite pendant → Fossil Island",
     "requirements": {
       "quests": [
         "BONE_VOYAGE"
@@ -5110,7 +5233,9 @@
     "worldY": 9992,
     "worldPlane": 0,
     "killTimeSeconds": 17,
+    "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
+    "travelTip": "Slayer ring → Fremennik cave",
     "requirements": {
       "skills": [
         {
@@ -5153,7 +5278,9 @@
     "worldY": 3150,
     "worldPlane": 0,
     "killTimeSeconds": 35,
+    "afkLevel": 2,
     "locationDescription": "Asgarnian Ice Dungeon",
+    "travelTip": "Port Sarim → Ice Dungeon",
     "requirements": {
       "skills": [
         {
@@ -5188,7 +5315,9 @@
     "worldY": 3534,
     "worldPlane": 2,
     "killTimeSeconds": 15,
+    "afkLevel": 2,
     "locationDescription": "Slayer Tower top floor, Morytania",
+    "travelTip": "Slayer ring → Slayer Tower",
     "requirements": {
       "skills": [
         {
@@ -5231,7 +5360,9 @@
     "worldY": 3090,
     "worldPlane": 0,
     "killTimeSeconds": 35,
+    "afkLevel": 2,
     "locationDescription": "Stalker Den, Auburnvale",
+    "travelTip": "Quetzal whistle → Varlamore",
     "requirements": {
       "skills": [
         {
@@ -5277,7 +5408,9 @@
     "worldY": 9882,
     "worldPlane": 0,
     "killTimeSeconds": 16,
+    "afkLevel": 2,
     "locationDescription": "Waterfall Dungeon, east of Baxtorian Falls",
+    "travelTip": "Fairy ring BLR",
     "requirements": {
       "skills": [
         {
@@ -5304,7 +5437,9 @@
     "worldY": 3558,
     "worldPlane": 2,
     "killTimeSeconds": 7,
+    "afkLevel": 2,
     "locationDescription": "Slayer Tower top floor, Morytania",
+    "travelTip": "Slayer ring → Slayer Tower",
     "requirements": {
       "skills": [
         {
@@ -5331,7 +5466,9 @@
     "worldY": 5280,
     "worldPlane": 2,
     "killTimeSeconds": 19,
+    "afkLevel": 2,
     "locationDescription": "God Wars Dungeon",
+    "travelTip": "Trollheim teleport → GWD",
     "requirements": {
       "skills": [
         {
@@ -5358,7 +5495,9 @@
     "worldY": 5203,
     "worldPlane": 0,
     "killTimeSeconds": 21,
+    "afkLevel": 2,
     "locationDescription": "God Wars Dungeon, Ancient Prison",
+    "travelTip": "Trollheim teleport → GWD",
     "requirements": {
       "skills": [
         {
@@ -5417,7 +5556,9 @@
     "worldY": 10057,
     "worldPlane": 0,
     "killTimeSeconds": 22,
+    "afkLevel": 2,
     "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
+    "travelTip": "Fairy ring CIR → Karuulm",
     "requirements": {
       "skills": [
         {
@@ -5452,7 +5593,9 @@
     "worldY": 3560,
     "worldPlane": 2,
     "killTimeSeconds": 13,
+    "afkLevel": 2,
     "locationDescription": "Slayer Tower top floor, Morytania",
+    "travelTip": "Slayer ring → Slayer Tower",
     "requirements": {
       "skills": [
         {
@@ -5495,7 +5638,9 @@
     "worldY": 3611,
     "worldPlane": 0,
     "killTimeSeconds": 8,
+    "afkLevel": 2,
     "locationDescription": "Kraken Cove",
+    "travelTip": "Fairy ring AKQ → Piscatoris",
     "requirements": {
       "skills": [
         {
@@ -5530,7 +5675,9 @@
     "worldY": 4672,
     "worldPlane": 0,
     "killTimeSeconds": 20,
+    "afkLevel": 2,
     "locationDescription": "Iorwerth Dungeon, Prifddinas",
+    "travelTip": "Teleport crystal → Prifddinas",
     "requirements": {
       "skills": [
         {
@@ -5557,7 +5704,9 @@
     "worldY": 3407,
     "worldPlane": 0,
     "killTimeSeconds": 20,
+    "afkLevel": 1,
     "locationDescription": "Araxyte Cave, north-east of Darkmeyer",
+    "travelTip": "Drakan's medallion → Darkmeyer",
     "requirements": {
       "skills": [
         {
@@ -5584,7 +5733,9 @@
     "worldY": 3061,
     "worldPlane": 0,
     "killTimeSeconds": 11,
+    "afkLevel": 2,
     "locationDescription": "Smoke Devil Dungeon",
+    "travelTip": "Castle Wars tele → south",
     "requirements": {
       "skills": [
         {
@@ -5611,7 +5762,9 @@
     "worldY": 10190,
     "worldPlane": 0,
     "killTimeSeconds": 27,
+    "afkLevel": 2,
     "locationDescription": "Karuulm Slayer Dungeon, lower level",
+    "travelTip": "Fairy ring CIR → Karuulm",
     "requirements": {
       "skills": [
         {
@@ -5662,7 +5815,9 @@
     "worldY": 3325,
     "worldPlane": 0,
     "killTimeSeconds": 25,
+    "afkLevel": 3,
     "locationDescription": "Darkmeyer, Morytania",
+    "travelTip": "Drakan's medallion → Darkmeyer",
     "requirements": {
       "quests": [
         "SINS_OF_THE_FATHER"
@@ -5686,7 +5841,9 @@
     "worldY": 3785,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 2,
     "locationDescription": "Mount Karuulm, near Konar",
+    "travelTip": "Fairy ring CIR → Karuulm",
     "items": [
       {
         "itemId": 23047,
@@ -5745,7 +5902,9 @@
     "worldY": 3955,
     "worldPlane": 0,
     "killTimeSeconds": 900,
+    "afkLevel": 2,
     "locationDescription": "Wilderness, Pirates' Hideout",
+    "travelTip": "Obelisk → lvl 35 Wildy",
     "items": [
       {
         "itemId": 24288,
@@ -5780,7 +5939,9 @@
     "worldY": 3534,
     "worldPlane": 0,
     "killTimeSeconds": 3000,
+    "afkLevel": 2,
     "locationDescription": "Slayer Tower, Morytania (varies)",
+    "travelTip": "Slayer ring → Slayer Tower",
     "items": [
       {
         "itemId": 20724,
@@ -5823,7 +5984,9 @@
     "worldY": 3625,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "afkLevel": 2,
     "locationDescription": "East of Chaos Temple, level 14 Wilderness",
+    "travelTip": "Burning amulet → Bandit Camp",
     "items": [
       {
         "itemId": 29455,
@@ -5986,6 +6149,7 @@
       }
     ],
     "locationDescription": "Hallowed Sepulchre entrance in Darkmeyer",
+    "travelTip": "Drakan's medallion → Darkmeyer",
     "rewardType": "MIXED",
     "pointsPerHour": 30
   },
@@ -5996,6 +6160,7 @@
     "worldY": 3168,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 1,
     "rewardType": "MIXED",
     "pointsPerHour": 108,
     "requirements": {
@@ -6153,7 +6318,8 @@
         "wikiPage": "Abyssal_protector"
       }
     ],
-    "locationDescription": "Temple of the Eye, accessed via portal in Wizards' Tower basement"
+    "locationDescription": "Temple of the Eye, accessed via portal in Wizards' Tower basement",
+    "travelTip": "Arceuus teleport → Temple"
   },
   {
     "name": "Brimhaven Agility Arena",
@@ -6162,6 +6328,7 @@
     "worldY": 3194,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 2997,
@@ -6246,6 +6413,7 @@
       }
     ],
     "locationDescription": "Brimhaven Agility Arena, east of Brimhaven",
+    "travelTip": "Fairy ring CKR → Brimhaven",
     "rewardType": "SHOP",
     "pointsPerHour": 60
   },
@@ -6256,6 +6424,7 @@
     "worldY": 3151,
     "worldPlane": 0,
     "killTimeSeconds": 360,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "SLEEPING_GIANTS"
@@ -6351,6 +6520,7 @@
       }
     ],
     "locationDescription": "Giants' Foundry beneath the Giant's Plateau",
+    "travelTip": "Fairy ring AJR → Giant's Plateau",
     "rewardType": "SHOP",
     "pointsPerHour": 150
   },
@@ -6361,6 +6531,7 @@
     "worldY": 2676,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 8839,
@@ -6454,6 +6625,7 @@
       }
     ],
     "locationDescription": "Void Knights' Outpost, south of Port Sarim",
+    "travelTip": "Minigame tele → Pest Control",
     "rewardType": "SHOP",
     "pointsPerHour": 110
   },
@@ -6464,6 +6636,7 @@
     "worldY": 3316,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 6918,
@@ -6539,6 +6712,7 @@
       }
     ],
     "locationDescription": "Mage Training Arena, north-east of Al Kharid",
+    "travelTip": "Fairy ring BIQ → north",
     "rewardType": "SHOP",
     "pointsPerHour": 100
   },
@@ -6549,6 +6723,7 @@
     "worldY": 3299,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "SHADES_OF_MORTTON"
@@ -6668,7 +6843,8 @@
         "wikiPage": "Silver_lock"
       }
     ],
-    "locationDescription": "Shades catacombs beneath Mort'ton"
+    "locationDescription": "Shades catacombs beneath Mort'ton",
+    "travelTip": "Barrows teleport → Mort'ton"
   },
   {
     "name": "Mahogany Homes",
@@ -6677,6 +6853,7 @@
     "worldY": 3369,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 24872,
@@ -6752,6 +6929,7 @@
       }
     ],
     "locationDescription": "Mahogany Homes, contracts available in Falador, Varrock, Hosidius, and Ardougne",
+    "travelTip": "Varies by contract city",
     "rewardType": "SHOP",
     "pointsPerHour": 200
   },
@@ -6762,6 +6940,7 @@
     "worldY": 2955,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "CHILDREN_OF_THE_SUN"
@@ -6839,6 +7018,7 @@
       }
     ],
     "locationDescription": "Mastering Mixology, Aldarin in Varlamore",
+    "travelTip": "Quetzal whistle → Varlamore",
     "rewardType": "SHOP",
     "pointsPerHour": 500
   },
@@ -6849,6 +7029,7 @@
     "worldY": 3807,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "BONE_VOYAGE"
@@ -6935,6 +7116,7 @@
       }
     ],
     "locationDescription": "Volcanic Mine, north-east Fossil Island volcano",
+    "travelTip": "Digsite pendant → Fossil Island",
     "rewardType": "SHOP",
     "pointsPerHour": 1500
   },
@@ -6945,6 +7127,7 @@
     "worldY": 3504,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -7019,6 +7202,7 @@
       }
     ],
     "locationDescription": "Tithe Farm, Hosidius",
+    "travelTip": "Xeric's talisman → Hosidius",
     "rewardType": "SHOP",
     "pointsPerHour": 110
   },
@@ -7029,6 +7213,7 @@
     "worldY": 3500,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 9470,
@@ -7063,7 +7248,8 @@
         "wikiPage": "Grand_seed_pod"
       }
     ],
-    "locationDescription": "Gnome Restaurant, Tree Gnome Stronghold"
+    "locationDescription": "Gnome Restaurant, Tree Gnome Stronghold",
+    "travelTip": "Spirit tree → Stronghold"
   },
   {
     "name": "Fishing Trawler",
@@ -7072,6 +7258,7 @@
     "worldY": 3164,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 3,
     "items": [
       {
         "itemId": 13258,
@@ -7106,7 +7293,8 @@
         "wikiPage": "Angler_boots"
       }
     ],
-    "locationDescription": "Fishing Trawler, Port Khazard"
+    "locationDescription": "Fishing Trawler, Port Khazard",
+    "travelTip": "Minigame tele → Trawler"
   },
   {
     "name": "Temple Trekking",
@@ -7115,6 +7303,7 @@
     "worldY": 3241,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "IN_AID_OF_THE_MYREQUE"
@@ -7155,6 +7344,7 @@
       }
     ],
     "locationDescription": "Temple Trekking, between Burgh de Rott and Paterdomus",
+    "travelTip": "Ectophial → Burgh de Rott",
     "mutuallyExclusive": true
   },
   {
@@ -7164,6 +7354,7 @@
     "worldY": 3537,
     "worldPlane": 0,
     "killTimeSeconds": 240,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 5554,
@@ -7207,6 +7398,7 @@
       }
     ],
     "locationDescription": "Rogues' Den beneath the Burthorpe pub",
+    "travelTip": "Games necklace → Burthorpe",
     "mutuallyExclusive": true
   },
   {
@@ -7216,6 +7408,7 @@
     "worldY": 3424,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 30902,
@@ -7344,6 +7537,7 @@
     "worldY": 3089,
     "worldPlane": 0,
     "killTimeSeconds": 1200,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 4071,
@@ -7698,6 +7892,7 @@
       }
     ],
     "locationDescription": "Castle Wars arena, south of Observatory",
+    "travelTip": "Minigame tele → Castle Wars",
     "rewardType": "SHOP",
     "pointsPerHour": 6
   },
@@ -7708,6 +7903,7 @@
     "worldY": 2858,
     "worldPlane": 0,
     "killTimeSeconds": 720,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 25340,
@@ -7737,6 +7933,7 @@
       }
     ],
     "locationDescription": "Isle of Souls, west of Edgeville",
+    "travelTip": "Minigame tele → Soul Wars",
     "rewardType": "MIXED",
     "pointsPerHour": 30
   },
@@ -8038,6 +8235,7 @@
       }
     ],
     "locationDescription": "Ferox Enclave, north of Varrock in the Wilderness",
+    "travelTip": "Minigame tele → LMS",
     "rewardType": "MIXED",
     "pointsPerHour": 25
   },
@@ -8048,6 +8246,7 @@
     "worldY": 3128,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 31052,
@@ -8083,6 +8282,7 @@
       }
     ],
     "locationDescription": "Auburn Valley, north-west Varlamore",
+    "travelTip": "Quetzal whistle → Varlamore",
     "mutuallyExclusive": true,
     "rewardType": "MIXED"
   },
@@ -8093,6 +8293,7 @@
     "worldY": 3021,
     "worldPlane": 0,
     "killTimeSeconds": 1200,
+    "afkLevel": 3,
     "requirements": {
       "quests": [
         "CABIN_FEVER"
@@ -8377,6 +8578,7 @@
       }
     ],
     "locationDescription": "Mos Le'Harmless, east of Braindeath Island",
+    "travelTip": "Minigame tele → Trouble Brew",
     "rewardType": "SHOP",
     "pointsPerHour": 300
   },
@@ -8487,6 +8689,7 @@
       }
     ],
     "locationDescription": "Barbarian Outpost, north of Baxtorian Falls",
+    "travelTip": "Minigame tele → BA",
     "rewardType": "MIXED",
     "pointsPerHour": 1000
   },
@@ -8497,6 +8700,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 480,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 31732,
@@ -8581,6 +8785,7 @@
       }
     ],
     "locationDescription": "Sailing trial locations across the seas",
+    "travelTip": "Sailing port → trial",
     "rewardType": "SHOP",
     "pointsPerHour": 3
   },
@@ -8591,6 +8796,7 @@
     "worldY": 3634,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 13258,
@@ -8674,6 +8880,7 @@
       }
     ],
     "locationDescription": "Lake Molch on Molch Island",
+    "travelTip": "Fairy ring CIR → Molch",
     "rewardType": "MIXED",
     "pointsPerHour": 20
   },
@@ -8684,6 +8891,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 32087,
@@ -8775,6 +8983,7 @@
       }
     ],
     "locationDescription": "Port Sarim docks, obtained via various Sailing activities",
+    "travelTip": "Port Sarim docks",
     "rewardType": "MIXED"
   },
   {
@@ -8784,6 +8993,7 @@
     "worldY": 3361,
     "worldPlane": 0,
     "killTimeSeconds": 15,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 6803,
@@ -8876,6 +9086,7 @@
       }
     ],
     "locationDescription": "Champions' Guild south of Varrock",
+    "travelTip": "Varrock teleport → south",
     "rewardType": "MIXED"
   },
   {
@@ -8885,6 +9096,7 @@
     "worldY": 3040,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 2978,
@@ -9058,6 +9270,7 @@
       }
     ],
     "locationDescription": "Feldip Hills, south of Rantz",
+    "travelTip": "Fairy ring AKS → Feldip",
     "rewardType": "MILESTONE"
   },
   {
@@ -9067,6 +9280,7 @@
     "worldY": 3490,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "afkLevel": 2,
     "waypoints": [
       {
         "name": "Prifddinas yews, SE bank",
@@ -9292,6 +9506,7 @@
       }
     ],
     "locationDescription": "Seers' Village oak south of bank (W444 meta), NOT Woodcutting Guild",
+    "travelTip": "Camelot teleport → Seers'",
     "rewardType": "MIXED",
     "pointsPerHour": 200
   },
@@ -9302,6 +9517,7 @@
     "worldY": 3819,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 21664,
@@ -9384,7 +9600,8 @@
         "wikiPage": "Short_note"
       }
     ],
-    "locationDescription": "House on the Hill, Fossil Island"
+    "locationDescription": "House on the Hill, Fossil Island",
+    "travelTip": "Digsite pendant → Fossil Island"
   },
   {
     "name": "Glough's Experiments",
@@ -9393,6 +9610,7 @@
     "worldY": 5647,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "MONKEY_MADNESS_II"
@@ -9448,7 +9666,8 @@
         "wikiPage": "Monkey_tail"
       }
     ],
-    "locationDescription": "Crash Site Cavern beneath Ape Atoll"
+    "locationDescription": "Crash Site Cavern beneath Ape Atoll",
+    "travelTip": "Spirit tree → Stronghold"
   },
   {
     "name": "Hunter Guild",
@@ -9457,6 +9676,7 @@
     "worldY": 3069,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "CHILDREN_OF_THE_SUN"
@@ -9519,6 +9739,7 @@
       }
     ],
     "locationDescription": "Hunter Guild in Avium Savannah, Varlamore",
+    "travelTip": "Quetzal whistle → Varlamore",
     "rewardType": "MIXED"
   },
   {
@@ -9528,6 +9749,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 32401,
@@ -9621,6 +9843,7 @@
       }
     ],
     "locationDescription": "Various islands discovered through Sailing",
+    "travelTip": "Port Sarim docks → sail",
     "rewardType": "SHOP",
     "pointsPerHour": 2
   },
@@ -9631,6 +9854,7 @@
     "worldY": 2703,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "MONKEY_MADNESS_II"
@@ -9699,6 +9923,7 @@
       }
     ],
     "locationDescription": "Ape Atoll Agility Course",
+    "travelTip": "Fairy ring CLR → Ape Atoll",
     "rewardType": "MILESTONE"
   },
   {
@@ -9708,6 +9933,7 @@
     "worldY": 3571,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 11341,
@@ -9918,7 +10144,8 @@
         "wikiPage": "Ancient_page"
       }
     ],
-    "locationDescription": "Ancient Cavern beneath the Baxtorian Falls"
+    "locationDescription": "Ancient Cavern beneath the Baxtorian Falls",
+    "travelTip": "Barbarian Assault tele → falls"
   },
   {
     "name": "Ocean Encounters",
@@ -9927,6 +10154,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 31770,
@@ -10018,6 +10246,7 @@
       }
     ],
     "locationDescription": "Open ocean during Sailing voyages",
+    "travelTip": "Port Sarim docks → sail",
     "mutuallyExclusive": true
   },
   {
@@ -10027,6 +10256,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 31996,
@@ -10125,7 +10355,8 @@
         "wikiPage": "Facility_bottle_(empty)"
       }
     ],
-    "locationDescription": "Various Sailing activities and island exploration"
+    "locationDescription": "Various Sailing activities and island exploration",
+    "travelTip": "Port Sarim docks → sail"
   },
   {
     "name": "Sea Treasures",
@@ -10134,6 +10365,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 32388,
@@ -10273,6 +10505,7 @@
       }
     ],
     "locationDescription": "Salvaging and treasure hunting during Sailing voyages",
+    "travelTip": "Port Sarim docks → sail",
     "rewardType": "MIXED"
   },
   {
@@ -10283,6 +10516,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "aggregated": true,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 1249,
@@ -10793,6 +11027,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 3,
     "items": [
       {
         "itemId": 3057,
@@ -10989,6 +11224,7 @@
     "worldY": 5774,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "BELOW_ICE_MOUNTAIN"
@@ -11078,6 +11314,7 @@
       }
     ],
     "locationDescription": "Ruins of Camdozaal beneath Ice Mountain",
+    "travelTip": "Lassar teleport → Ice Mountain",
     "rewardType": "MIXED"
   },
   {
@@ -11087,6 +11324,7 @@
     "worldY": 2931,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "CHILDREN_OF_THE_SUN"
@@ -11173,6 +11411,7 @@
       }
     ],
     "locationDescription": "Colossal Wyrm Agility Course in Avium Savannah, Varlamore",
+    "travelTip": "Quetzal whistle → Varlamore",
     "rewardType": "SHOP",
     "pointsPerHour": 15
   },
@@ -11183,6 +11422,7 @@
     "worldY": 3414,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 11850,
@@ -11258,6 +11498,7 @@
     "worldY": 5175,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 6522,
@@ -11340,7 +11581,8 @@
         "wikiPage": "Obsidian_platelegs"
       }
     ],
-    "locationDescription": "TzHaar City beneath the Karamja Volcano"
+    "locationDescription": "TzHaar City beneath the Karamja Volcano",
+    "travelTip": "Fairy ring BLP → TzHaar"
   },
   {
     "name": "Cyclopes",
@@ -11349,6 +11591,7 @@
     "worldY": 3543,
     "worldPlane": 0,
     "killTimeSeconds": 20,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 8844,
@@ -11416,6 +11659,7 @@
       }
     ],
     "locationDescription": "Warriors' Guild, Burthorpe",
+    "travelTip": "Games necklace → Burthorpe",
     "mutuallyExclusive": true
   },
   {
@@ -11425,6 +11669,7 @@
     "worldY": 3621,
     "worldPlane": 0,
     "killTimeSeconds": 15,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 20517,
@@ -11451,7 +11696,8 @@
         "wikiPage": "Elder_chaos_hood"
       }
     ],
-    "locationDescription": "Elder Chaos Temple, Wilderness"
+    "locationDescription": "Elder Chaos Temple, Wilderness",
+    "travelTip": "Burning amulet → Chaos Temple"
   },
   {
     "name": "Shayzien Armour",
@@ -11460,6 +11706,7 @@
     "worldY": 3617,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 13359,
@@ -11688,6 +11935,7 @@
       }
     ],
     "locationDescription": "Shayzien Combat Ring, Great Kourend",
+    "travelTip": "Xeric's talisman → Lookout",
     "rewardType": "SHOP",
     "pointsPerHour": 250
   },
@@ -11698,6 +11946,7 @@
     "worldY": 5680,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 12013,
@@ -11755,6 +12004,7 @@
       }
     ],
     "locationDescription": "Motherlode Mine beneath Falador",
+    "travelTip": "Falador teleport → mine",
     "rewardType": "SHOP",
     "pointsPerHour": 12
   },
@@ -11765,6 +12015,7 @@
     "worldY": 3414,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 25539,
@@ -11796,6 +12047,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -11819,7 +12071,8 @@
         "wikiPage": "Rune_satchel"
       }
     ],
-    "locationDescription": "Tower of Life, south of Ardougne (Eye of newt + Feather)"
+    "locationDescription": "Tower of Life, south of Ardougne (Eye of newt + Feather)",
+    "travelTip": "Fairy ring DJP"
   },
   {
     "name": "Creature Creation (Unicow)",
@@ -11828,6 +12081,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -11851,7 +12105,8 @@
         "wikiPage": "Green_satchel"
       }
     ],
-    "locationDescription": "Tower of Life, south of Ardougne (Cowhide + Unicorn horn)"
+    "locationDescription": "Tower of Life, south of Ardougne (Cowhide + Unicorn horn)",
+    "travelTip": "Fairy ring DJP"
   },
   {
     "name": "Creature Creation (Spidine)",
@@ -11860,6 +12115,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -11883,7 +12139,8 @@
         "wikiPage": "Red_satchel"
       }
     ],
-    "locationDescription": "Tower of Life, south of Ardougne (Red spiders' eggs + Raw sardine)"
+    "locationDescription": "Tower of Life, south of Ardougne (Red spiders' eggs + Raw sardine)",
+    "travelTip": "Fairy ring DJP"
   },
   {
     "name": "Creature Creation (Swordchick)",
@@ -11892,6 +12149,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -11915,7 +12173,8 @@
         "wikiPage": "Black_satchel"
       }
     ],
-    "locationDescription": "Tower of Life, south of Ardougne (Raw swordfish + Raw chicken)"
+    "locationDescription": "Tower of Life, south of Ardougne (Raw swordfish + Raw chicken)",
+    "travelTip": "Fairy ring DJP"
   },
   {
     "name": "Creature Creation (Jubster)",
@@ -11924,6 +12183,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -11947,7 +12207,8 @@
         "wikiPage": "Gold_satchel"
       }
     ],
-    "locationDescription": "Tower of Life, south of Ardougne (Raw jubbly + Raw lobster)"
+    "locationDescription": "Tower of Life, south of Ardougne (Raw jubbly + Raw lobster)",
+    "travelTip": "Fairy ring DJP"
   },
   {
     "name": "Creature Creation (Frogeel)",
@@ -11956,6 +12217,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -11979,7 +12241,8 @@
         "wikiPage": "Plain_satchel"
       }
     ],
-    "locationDescription": "Tower of Life, south of Ardougne (Raw cave eel + Giant frog legs)"
+    "locationDescription": "Tower of Life, south of Ardougne (Raw cave eel + Giant frog legs)",
+    "travelTip": "Fairy ring DJP"
   },
   {
     "name": "The Hueycoatl",
@@ -11989,6 +12252,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 500,
     "locationDescription": "The Darkfrost, Hailstorm Mountains in Varlamore",
+    "travelTip": "Quetzal whistle → Varlamore",
     "requirements": {
       "quests": [
         "CHILDREN_OF_THE_SUN"
@@ -12054,6 +12318,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 360,
     "locationDescription": "Yama's Domain, Chasm of Fire beneath Shayzien",
+    "travelTip": "Xeric's talisman → Heart",
     "items": [
       {
         "itemId": 30775,
@@ -12154,6 +12419,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "locationDescription": "Ruins of Mokhaiotl, beneath Tlati Rainforest in Varlamore",
+    "travelTip": "Quetzal whistle → Varlamore",
     "requirements": {
       "quests": [
         "THE_FINAL_DAWN"
@@ -12219,6 +12485,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 75,
     "locationDescription": "Asgarnian Ice Dungeon, south of Port Sarim",
+    "travelTip": "Port Sarim → Ice Dungeon",
     "items": [
       {
         "itemId": 30626,
@@ -12287,6 +12554,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 90,
     "locationDescription": "Ruins of Tapoyauik, Varlamore",
+    "travelTip": "Quetzal whistle → Varlamore",
     "items": [
       {
         "itemId": 29889,
@@ -12333,6 +12601,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 45,
     "locationDescription": "Lumbridge cow field",
+    "travelTip": "Lumbridge teleport",
     "items": [
       {
         "itemId": 33124,
@@ -12377,6 +12646,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 70,
     "locationDescription": "Shellbane Gryphon Cave, The Great Conch",
+    "travelTip": "Fairy ring → Great Conch",
     "requirements": {
       "skills": [
         {
@@ -12433,7 +12703,9 @@
     "worldY": 9867,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "afkLevel": 1,
     "locationDescription": "Varrock Sewers",
+    "travelTip": "Varrock teleport → sewers",
     "items": [
       {
         "itemId": 28801,
@@ -12461,6 +12733,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 2400,
     "locationDescription": "Mor Ul Rek, Karamja Volcano",
+    "travelTip": "Fairy ring BLP → TzHaar",
     "items": [
       {
         "itemId": 13225,
@@ -12490,6 +12763,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 5400,
     "locationDescription": "Mor Ul Rek, Karamja Volcano",
+    "travelTip": "Fairy ring BLP → TzHaar",
     "items": [
       {
         "itemId": 21291,
@@ -12518,7 +12792,9 @@
     "worldY": 3706,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "afkLevel": 1,
     "locationDescription": "Tar Swamp, Fossil Island",
+    "travelTip": "Digsite pendant → Fossil Island",
     "requirements": {
       "quests": [
         "BONE_VOYAGE"
@@ -12542,6 +12818,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 12221,
@@ -13602,6 +13879,7 @@
     "worldY": 3378,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 2577,
@@ -14534,6 +14812,7 @@
     "worldY": 3428,
     "worldPlane": 0,
     "killTimeSeconds": 420,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 2657,
@@ -15618,6 +15897,7 @@
     "worldY": 6075,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 12538,
@@ -16110,6 +16390,7 @@
     "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 900,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 20065,
@@ -16522,6 +16803,7 @@
     "worldY": 3428,
     "worldPlane": 0,
     "killTimeSeconds": 420,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 10350,
@@ -16726,6 +17008,7 @@
     "worldY": 6075,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 10350,
@@ -17050,6 +17333,7 @@
     "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 900,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 10350,
@@ -17438,6 +17722,7 @@
     "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 3827,
