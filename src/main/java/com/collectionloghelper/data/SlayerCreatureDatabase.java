@@ -20,21 +20,43 @@ public final class SlayerCreatureDatabase
 	{
 		Map<String, List<String>> map = new HashMap<>();
 
-		map.put("abyssal demons", Collections.singletonList("Abyssal Sire"));
+		// Boss-only mappings (existing)
 		map.put("black demons", Arrays.asList("Demonic gorillas", "Skotizo"));
 		map.put("greater demons", Collections.singletonList("K'ril Tsutsaroth"));
 		map.put("aviansie", Collections.singletonList("Kree'arra"));
 		map.put("kalphite", Collections.singletonList("Kalphite Queen"));
-		map.put("gargoyles", Collections.singletonList("Grotesque Guardians"));
-		map.put("smoke devils", Collections.singletonList("Thermonuclear smoke devil"));
 		map.put("hellhounds", Collections.singletonList("Cerberus"));
 		map.put("dagannoth", Arrays.asList("Dagannoth Rex", "Dagannoth Prime", "Dagannoth Supreme"));
-		map.put("cave kraken", Collections.singletonList("Kraken"));
-		map.put("hydras", Collections.singletonList("Alchemical Hydra"));
 		map.put("lizardmen", Collections.singletonList("Lizardman shaman"));
 		map.put("tzhaar", Arrays.asList("TzHaar", "The Fight Caves", "The Inferno"));
-		map.put("araxytes", Collections.singletonList("Araxxor"));
-		map.put("gryphons", Collections.singletonList("Shellbane Gryphon"));
+
+		// Per-creature Slayer sources + boss variants
+		map.put("crawling hands", Collections.singletonList("Crawling Hand"));
+		map.put("cave crawlers", Collections.singletonList("Cave Crawler"));
+		map.put("brine rats", Collections.singletonList("Brine Rat"));
+		map.put("cave horrors", Collections.singletonList("Cave Horror"));
+		map.put("basilisk knights", Collections.singletonList("Basilisk Knight"));
+		map.put("bloodveld", Collections.singletonList("Bloodveld"));
+		map.put("aberrant spectres", Collections.singletonList("Aberrant Spectre"));
+		map.put("dust devils", Collections.singletonList("Dust Devil"));
+		map.put("fossil island wyverns", Collections.singletonList("Fossil Island Wyvern"));
+		map.put("kurask", Collections.singletonList("Kurask"));
+		map.put("skeletal wyverns", Collections.singletonList("Skeletal Wyvern"));
+		map.put("gargoyles", Arrays.asList("Gargoyle", "Grotesque Guardians"));
+		map.put("nechryael", Collections.singletonList("Nechryael"));
+		map.put("spiritual creatures", Collections.singletonList("Spiritual Mage"));
+		map.put("drakes", Collections.singletonList("Drake"));
+		map.put("abyssal demons", Arrays.asList("Abyssal Demon", "Abyssal Sire"));
+		map.put("cave kraken", Arrays.asList("Cave Kraken", "Kraken"));
+		map.put("dark beasts", Collections.singletonList("Dark Beast"));
+		map.put("araxytes", Arrays.asList("Araxyte", "Araxxor"));
+		map.put("smoke devils", Arrays.asList("Smoke Devil", "Thermonuclear smoke devil"));
+		map.put("hydras", Arrays.asList("Hydra", "Alchemical Hydra"));
+		map.put("wyrms", Collections.singletonList("Wyrm"));
+		map.put("turoth", Collections.singletonList("Turoth"));
+		map.put("warped creatures", Collections.singletonList("Warped Creature"));
+		map.put("vampyres", Collections.singletonList("Vyrewatch Sentinel"));
+		map.put("gryphons", Arrays.asList("Gryphon", "Shellbane Gryphon"));
 
 		CREATURE_TO_SOURCES = Collections.unmodifiableMap(map);
 	}
