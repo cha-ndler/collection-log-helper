@@ -22,6 +22,9 @@ public class CollectionLogSource
     boolean aggregated;
     int afkLevel;
     String travelTip;
+    int npcId;
+    String interactAction;
+    List<String> dialogOptions;
     SourceRequirements requirements;
     List<CollectionLogItem> items;
 

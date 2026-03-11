@@ -14,6 +14,7 @@ import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
+import com.collectionloghelper.overlay.DialogHighlightOverlay;
 import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
 import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
@@ -107,6 +108,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private CollectionLogHelperConfig config;
 
 	@Inject
+	private ConfigManager configManager;
+
+	@Inject
 	private DropRateDatabase database;
 
 	@Inject
@@ -126,6 +130,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private GuidanceMinimapOverlay guidanceMinimapOverlay;
+
+	@Inject
+	private DialogHighlightOverlay dialogHighlightOverlay;
 
 	@Inject
 	private DataSyncState dataSyncState;
@@ -186,7 +193,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			itemManager, requirementsChecker, dataSyncState, slayerTaskState,
 			slayerStrategyCalculator,
 			this::activateGuidance, this::deactivateGuidance,
-			() -> cachedPlayerLocation);
+			() -> cachedPlayerLocation,
+			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()));
 		panel.setMode(config.defaultMode());
 
 		// Use a placeholder icon initially, then swap to the real item sprite once loaded
@@ -214,6 +222,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		});
 		overlayManager.add(guidanceOverlay);
 		overlayManager.add(guidanceMinimapOverlay);
+		overlayManager.add(dialogHighlightOverlay);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -238,6 +247,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		clientToolbar.removeNavigation(navButton);
 		overlayManager.remove(guidanceOverlay);
 		overlayManager.remove(guidanceMinimapOverlay);
+		overlayManager.remove(dialogHighlightOverlay);
 		deactivateGuidance();
 		lastObtainedCount = -1;
 		collectionLogOpen = false;
@@ -805,6 +815,11 @@ public class CollectionLogHelperPlugin extends Plugin
 			guidanceOverlay.setTargetPoint(worldPoint);
 			guidanceOverlay.setTargetName(source.getName());
 			guidanceOverlay.setLocationDescription(displayName);
+			guidanceOverlay.setTravelTip(source.getTravelTip());
+			guidanceOverlay.setTargetNpcId(source.getNpcId());
+			guidanceOverlay.setInteractAction(source.getInteractAction());
+			dialogHighlightOverlay.setTargetDialogOptions(source.getDialogOptions());
+			dialogHighlightOverlay.setGuidanceActive(true);
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
 			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
@@ -849,6 +864,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
+		dialogHighlightOverlay.clear();
 		activeMapPoint = null;
 		pendingShortestPathTarget = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
