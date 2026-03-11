@@ -36,6 +36,7 @@ class ItemDetailPanel extends JPanel
 		boolean locked, List<String> unmetRequirements,
 		int sourceObtained, int sourceTotal,
 		ItemManager itemManager, ClueCompletionEstimator clueEstimator,
+		boolean hasFairyRingAccess,
 		Runnable onBack, Runnable onGuideMe, Runnable onStopGuidance,
 		boolean guidanceActive)
 	{
@@ -125,6 +126,19 @@ class ItemDetailPanel extends JPanel
 		{
 			appendInfoRow(info, "Kill Time:", source.getKillTimeSeconds() + "s");
 			appendInfoRow(info, "Location:", source.getDisplayLocation());
+			if (source.getTravelTip() != null && !source.getTravelTip().isEmpty())
+			{
+				String tip = source.getTravelTip();
+				boolean isFairyRingTip = tip.toLowerCase().contains("fairy ring");
+				if (isFairyRingTip && !hasFairyRingAccess)
+				{
+					appendInfoRow(info, "Travel:", tip + " (req: Fairy Tale II)", LOCKED_COLOR);
+				}
+				else
+				{
+					appendInfoRow(info, "Travel:", tip, new Color(100, 200, 255));
+				}
+			}
 		}
 		appendInfoRow(info, "Status:", obtained ? "Obtained" : "Missing");
 

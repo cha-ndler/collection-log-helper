@@ -1004,6 +1004,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 			requirementsChecker.getUnmetRequirements(source.getName()),
 			sourceObtained, sourceTotal,
 			itemManager, clueEstimator,
+			requirementsChecker.hasFairyRingAccess(),
 			this::showListView,
 			() -> guidanceActivator.accept(source),
 			() -> guidanceDeactivator.run(),
