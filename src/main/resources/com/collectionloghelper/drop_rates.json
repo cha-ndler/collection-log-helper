@@ -1517,7 +1517,6 @@
     "locationDescription": "Forthos Dungeon, Hosidius",
     "travelTip": "Xeric's talisman → Heart",
     "killTimeSeconds": 90,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 23528,
@@ -1648,7 +1647,6 @@
     "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 6737,
@@ -1694,7 +1692,6 @@
     "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 6731,
@@ -1740,7 +1737,6 @@
     "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 6733,
@@ -1840,7 +1836,6 @@
     "worldY": 9452,
     "worldPlane": 0,
     "killTimeSeconds": 30,
-    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -2114,7 +2109,8 @@
     ],
     "locationDescription": "Scorpia's Cave, deep Wilderness",
     "travelTip": "Burning amulet → Lava Maze",
-    "mutuallyExclusive": true
+    "mutuallyExclusive": true,
+    "afkLevel": 1
   },
   {
     "name": "Chaos Fanatic",
@@ -2161,7 +2157,6 @@
     "worldY": 3734,
     "worldPlane": 0,
     "killTimeSeconds": 120,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 27670,
@@ -2284,7 +2279,6 @@
     "worldY": 3834,
     "worldPlane": 0,
     "killTimeSeconds": 120,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 27667,
@@ -2411,7 +2405,6 @@
     "worldY": 3686,
     "worldPlane": 0,
     "killTimeSeconds": 30,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 13576,
@@ -2492,7 +2485,6 @@
     "worldY": 3731,
     "worldPlane": 0,
     "killTimeSeconds": 60,
-    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -3658,7 +3650,7 @@
     "locationDescription": "Wintertodt Camp, northern Zeah",
     "travelTip": "Games necklace → Wintertodt",
     "rollsPerKill": 10,
-    "afkLevel": 2
+    "afkLevel": 1
   },
   {
     "name": "Zalcano",
@@ -3708,7 +3700,8 @@
     ],
     "locationDescription": "Zalcano's Prison, Prifddinas",
     "travelTip": "Teleport crystal → Prifddinas",
-    "mutuallyExclusive": true
+    "mutuallyExclusive": true,
+    "afkLevel": 1
   },
   {
     "name": "Sol Heredit",
@@ -4048,7 +4041,8 @@
         "wikiPage": "Atlatl_dart"
       }
     ],
-    "mutuallyExclusive": true
+    "mutuallyExclusive": true,
+    "afkLevel": 1
   },
   {
     "name": "Tormented Demons",
@@ -4098,7 +4092,6 @@
     "worldY": 3422,
     "worldPlane": 0,
     "killTimeSeconds": 180,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 23285,
@@ -4355,7 +4348,8 @@
     ],
     "locationDescription": "Revenant Caves, Wilderness",
     "travelTip": "Burning amulet → Rev Caves",
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "afkLevel": 1
   },
   {
     "name": "Crawling Hand",
@@ -4834,7 +4828,7 @@
     "killTimeSeconds": 20,
     "afkLevel": 2,
     "locationDescription": "Great Conch, Unquiet Ocean",
-    "travelTip": "Fairy ring → Great Conch",
+    "travelTip": "Fairy ring CJQ → Great Conch",
     "requirements": {
       "skills": [
         {
@@ -4970,7 +4964,7 @@
     "worldY": 9373,
     "worldPlane": 0,
     "killTimeSeconds": 12,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "locationDescription": "Mos Le'Harmless Cave",
     "travelTip": "Fairy ring CKR → boat",
     "requirements": {
@@ -5031,7 +5025,6 @@
     "worldY": 4240,
     "worldPlane": 0,
     "killTimeSeconds": 45,
-    "afkLevel": 1,
     "locationDescription": "Jormungand's Prison, Island of Stone",
     "travelTip": "Lunar Isle tele → Rellekka",
     "requirements": {
@@ -5147,7 +5140,8 @@
         "isPet": false,
         "wikiPage": "Dragon_metal_sheet"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Dust Devil",
@@ -5158,7 +5152,7 @@
     "killTimeSeconds": 15,
     "afkLevel": 2,
     "locationDescription": "Smoke Dungeon, Kharidian Desert",
-    "travelTip": "Fairy ring BIQ → Smoke Dungeon",
+    "travelTip": "Pollnivneach teleport → well",
     "requirements": {
       "skills": [
         {
@@ -5278,7 +5272,7 @@
     "worldY": 3150,
     "worldPlane": 0,
     "killTimeSeconds": 35,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "locationDescription": "Asgarnian Ice Dungeon",
     "travelTip": "Port Sarim → Ice Dungeon",
     "requirements": {
@@ -5410,7 +5404,7 @@
     "killTimeSeconds": 16,
     "afkLevel": 2,
     "locationDescription": "Waterfall Dungeon, east of Baxtorian Falls",
-    "travelTip": "Fairy ring BLR",
+    "travelTip": "Sail to Ynysdail (73 Sailing)",
     "requirements": {
       "skills": [
         {
@@ -5704,7 +5698,6 @@
     "worldY": 3407,
     "worldPlane": 0,
     "killTimeSeconds": 20,
-    "afkLevel": 1,
     "locationDescription": "Araxyte Cave, north-east of Darkmeyer",
     "travelTip": "Drakan's medallion → Darkmeyer",
     "requirements": {
@@ -6151,7 +6144,8 @@
     "locationDescription": "Hallowed Sepulchre entrance in Darkmeyer",
     "travelTip": "Drakan's medallion → Darkmeyer",
     "rewardType": "MIXED",
-    "pointsPerHour": 30
+    "pointsPerHour": 30,
+    "afkLevel": 1
   },
   {
     "name": "Guardians of the Rift",
@@ -6520,7 +6514,7 @@
       }
     ],
     "locationDescription": "Giants' Foundry beneath the Giant's Plateau",
-    "travelTip": "Fairy ring AJR → Giant's Plateau",
+    "travelTip": "Grouping tele → Giants' Foundry",
     "rewardType": "SHOP",
     "pointsPerHour": 150
   },
@@ -6636,7 +6630,6 @@
     "worldY": 3316,
     "worldPlane": 0,
     "killTimeSeconds": 600,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 6918,
@@ -6712,7 +6705,7 @@
       }
     ],
     "locationDescription": "Mage Training Arena, north-east of Al Kharid",
-    "travelTip": "Fairy ring BIQ → north",
+    "travelTip": "Ring of dueling → Emir's Arena",
     "rewardType": "SHOP",
     "pointsPerHour": 100
   },
@@ -7127,7 +7120,6 @@
     "worldY": 3504,
     "worldPlane": 0,
     "killTimeSeconds": 300,
-    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -7213,7 +7205,6 @@
     "worldY": 3500,
     "worldPlane": 0,
     "killTimeSeconds": 120,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 9470,
@@ -7258,7 +7249,7 @@
     "worldY": 3164,
     "worldPlane": 0,
     "killTimeSeconds": 600,
-    "afkLevel": 3,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 13258,
@@ -7354,7 +7345,6 @@
     "worldY": 3537,
     "worldPlane": 0,
     "killTimeSeconds": 240,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 5554,
@@ -7408,7 +7398,6 @@
     "worldY": 3424,
     "worldPlane": 0,
     "killTimeSeconds": 300,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 30902,
@@ -8691,7 +8680,8 @@
     "locationDescription": "Barbarian Outpost, north of Baxtorian Falls",
     "travelTip": "Minigame tele → BA",
     "rewardType": "MIXED",
-    "pointsPerHour": 1000
+    "pointsPerHour": 1000,
+    "afkLevel": 1
   },
   {
     "name": "Barracuda Trials",
@@ -8796,7 +8786,6 @@
     "worldY": 3634,
     "worldPlane": 0,
     "killTimeSeconds": 30,
-    "afkLevel": 2,
     "items": [
       {
         "itemId": 13258,
@@ -8880,7 +8869,7 @@
       }
     ],
     "locationDescription": "Lake Molch on Molch Island",
-    "travelTip": "Fairy ring CIR → Molch",
+    "travelTip": "Fairy ring DJR → Molch",
     "rewardType": "MIXED",
     "pointsPerHour": 20
   },
@@ -9096,7 +9085,6 @@
     "worldY": 3040,
     "worldPlane": 0,
     "killTimeSeconds": 45,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 2978,
@@ -9854,7 +9842,6 @@
     "worldY": 2703,
     "worldPlane": 0,
     "killTimeSeconds": 45,
-    "afkLevel": 1,
     "requirements": {
       "quests": [
         "MONKEY_MADNESS_II"
@@ -11324,7 +11311,6 @@
     "worldY": 2931,
     "worldPlane": 0,
     "killTimeSeconds": 60,
-    "afkLevel": 1,
     "requirements": {
       "quests": [
         "CHILDREN_OF_THE_SUN"
@@ -11422,7 +11408,6 @@
     "worldY": 3414,
     "worldPlane": 0,
     "killTimeSeconds": 60,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 11850,
@@ -11498,7 +11483,7 @@
     "worldY": 5175,
     "worldPlane": 0,
     "killTimeSeconds": 30,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 6522,
@@ -11591,7 +11576,7 @@
     "worldY": 3543,
     "worldPlane": 0,
     "killTimeSeconds": 20,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 8844,
@@ -11669,7 +11654,7 @@
     "worldY": 3621,
     "worldPlane": 0,
     "killTimeSeconds": 15,
-    "afkLevel": 1,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 20517,
@@ -11946,7 +11931,7 @@
     "worldY": 5680,
     "worldPlane": 0,
     "killTimeSeconds": 60,
-    "afkLevel": 2,
+    "afkLevel": 3,
     "items": [
       {
         "itemId": 12013,
@@ -12015,7 +12000,7 @@
     "worldY": 3414,
     "worldPlane": 0,
     "killTimeSeconds": 120,
-    "afkLevel": 2,
+    "afkLevel": 3,
     "items": [
       {
         "itemId": 25539,
@@ -12646,7 +12631,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 70,
     "locationDescription": "Shellbane Gryphon Cave, The Great Conch",
-    "travelTip": "Fairy ring → Great Conch",
+    "travelTip": "Fairy ring CJQ → Great Conch",
     "requirements": {
       "skills": [
         {
@@ -12703,7 +12688,6 @@
     "worldY": 9867,
     "worldPlane": 0,
     "killTimeSeconds": 60,
-    "afkLevel": 1,
     "locationDescription": "Varrock Sewers",
     "travelTip": "Varrock teleport → sewers",
     "items": [
@@ -12818,7 +12802,6 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 180,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 12221,
@@ -13879,7 +13862,6 @@
     "worldY": 3378,
     "worldPlane": 0,
     "killTimeSeconds": 300,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 2577,
@@ -14812,7 +14794,6 @@
     "worldY": 3428,
     "worldPlane": 0,
     "killTimeSeconds": 420,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 2657,
@@ -15897,7 +15878,6 @@
     "worldY": 6075,
     "worldPlane": 0,
     "killTimeSeconds": 600,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 12538,
@@ -16390,7 +16370,6 @@
     "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 900,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 20065,
@@ -16803,7 +16782,6 @@
     "worldY": 3428,
     "worldPlane": 0,
     "killTimeSeconds": 420,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 10350,
@@ -17008,7 +16986,6 @@
     "worldY": 6075,
     "worldPlane": 0,
     "killTimeSeconds": 600,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 10350,
@@ -17333,7 +17310,6 @@
     "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 900,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 10350,
@@ -17722,7 +17698,6 @@
     "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 300,
-    "afkLevel": 1,
     "items": [
       {
         "itemId": 3827,
