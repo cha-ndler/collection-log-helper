@@ -6,7 +6,7 @@
 - **Author:** Zoinkwiz
 - **Repository:** https://github.com/Zoinkwiz/quest-helper
 - **License:** BSD 2-Clause
-- Referenced for: hint arrow patterns, minimap overlay techniques, world map navigation patterns
+- Referenced for: hint arrow patterns, minimap overlay techniques, world map navigation patterns, step-by-step guidance sequencing (completion conditions, auto-advance, step skipping)
 
 ### Shortest Path
 - **Author:** Skretzo

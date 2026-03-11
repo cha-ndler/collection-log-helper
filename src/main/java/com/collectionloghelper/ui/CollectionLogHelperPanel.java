@@ -130,6 +130,14 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final JLabel guidanceBannerLabel;
 	private final JPanel guidanceBannerPanel;
 
+	private final JPanel stepProgressPanel;
+	private final JLabel stepProgressLabel;
+	private final JButton nextStepButton;
+	private final JButton skipStepButton;
+
+	private Runnable stepAdvancer;
+	private Runnable stepSkipper;
+
 	private Mode currentMode = Mode.EFFICIENT;
 	private boolean rebuilding = false;
 	private boolean rebuildPending = false;
@@ -271,6 +279,62 @@ public class CollectionLogHelperPanel extends PluginPanel
 		guidanceBannerLabel.setForeground(new Color(80, 200, 80));
 		guidanceBannerPanel.add(guidanceBannerLabel, BorderLayout.CENTER);
 		controlsPanel.add(guidanceBannerPanel);
+
+		// Step progress panel (for multi-step guidance sequences)
+		stepProgressPanel = new JPanel();
+		stepProgressPanel.setLayout(new BoxLayout(stepProgressPanel, BoxLayout.Y_AXIS));
+		stepProgressPanel.setBackground(new Color(25, 35, 55));
+		stepProgressPanel.setBorder(BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(new Color(80, 150, 220), 1),
+			BorderFactory.createEmptyBorder(4, 6, 4, 6)
+		));
+		stepProgressPanel.setAlignmentX(CENTER_ALIGNMENT);
+		stepProgressPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		stepProgressPanel.setVisible(false);
+
+		stepProgressLabel = new JLabel();
+		stepProgressLabel.setFont(FontManager.getRunescapeSmallFont());
+		stepProgressLabel.setForeground(new Color(80, 180, 255));
+		stepProgressLabel.setAlignmentX(LEFT_ALIGNMENT);
+		stepProgressPanel.add(stepProgressLabel);
+
+		JPanel stepButtonRow = new JPanel();
+		stepButtonRow.setLayout(new BoxLayout(stepButtonRow, BoxLayout.X_AXIS));
+		stepButtonRow.setBackground(new Color(25, 35, 55));
+		stepButtonRow.setAlignmentX(LEFT_ALIGNMENT);
+
+		nextStepButton = new JButton("Next Step");
+		nextStepButton.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
+		nextStepButton.setBackground(new Color(30, 100, 30));
+		nextStepButton.setForeground(Color.WHITE);
+		nextStepButton.setVisible(false);
+		nextStepButton.addActionListener(e ->
+		{
+			if (stepAdvancer != null)
+			{
+				stepAdvancer.run();
+			}
+		});
+		stepButtonRow.add(nextStepButton);
+
+		stepButtonRow.add(Box.createHorizontalStrut(4));
+
+		skipStepButton = new JButton("Skip");
+		skipStepButton.setFont(FontManager.getRunescapeSmallFont());
+		skipStepButton.setBackground(new Color(80, 80, 80));
+		skipStepButton.setForeground(Color.WHITE);
+		skipStepButton.addActionListener(e ->
+		{
+			if (stepSkipper != null)
+			{
+				stepSkipper.run();
+			}
+		});
+		stepButtonRow.add(skipStepButton);
+
+		stepProgressPanel.add(Box.createVerticalStrut(3));
+		stepProgressPanel.add(stepButtonRow);
+		controlsPanel.add(stepProgressPanel);
 
 		controlsPanel.add(Box.createVerticalStrut(4));
 
@@ -1205,6 +1269,50 @@ public class CollectionLogHelperPanel extends PluginPanel
 			clueGuidanceBanner.revalidate();
 			clueGuidanceBanner.getParent().revalidate();
 		});
+	}
+
+	/**
+	 * Updates the step progress banner with current step info.
+	 */
+	public void updateStepProgress(int current, int total, String description, boolean isManual)
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			stepProgressLabel.setText(
+				"<html>Step " + current + "/" + total + ": " + description + "</html>");
+			nextStepButton.setVisible(isManual);
+			stepProgressPanel.setVisible(true);
+			stepProgressPanel.revalidate();
+			if (stepProgressPanel.getParent() != null)
+			{
+				stepProgressPanel.getParent().revalidate();
+			}
+		});
+	}
+
+	/**
+	 * Hides the step progress banner.
+	 */
+	public void hideStepProgress()
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			stepProgressPanel.setVisible(false);
+			stepProgressPanel.revalidate();
+			if (stepProgressPanel.getParent() != null)
+			{
+				stepProgressPanel.getParent().revalidate();
+			}
+		});
+	}
+
+	/**
+	 * Sets callbacks for step advance/skip buttons.
+	 */
+	public void setStepCallbacks(Runnable advancer, Runnable skipper)
+	{
+		this.stepAdvancer = advancer;
+		this.stepSkipper = skipper;
 	}
 
 	public void hideClueGuidance()

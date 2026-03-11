@@ -25,6 +25,7 @@ public class CollectionLogSource
     int npcId;
     String interactAction;
     List<String> dialogOptions;
+    List<GuidanceStep> guidanceSteps;
     SourceRequirements requirements;
     List<CollectionLogItem> items;
 

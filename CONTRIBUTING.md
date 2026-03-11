@@ -45,6 +45,7 @@ Each source represents a single collection log category (e.g., "General Graardor
 | `rewardType` | string | No | One of: `DROP` (default), `SHOP`, `MIXED`, `GUARANTEED`, `MILESTONE`. Controls how the scoring algorithm handles the source |
 | `locationDescription` | string | No | Human-readable location text shown in the item detail panel |
 | `pointsPerHour` | double | No | Points earned per hour for `SHOP` sources (used in scoring) |
+| `guidanceSteps` | array | No | Ordered list of `GuidanceStep` objects for multi-step guidance sequences. See [Guidance Steps](#guidance-steps) |
 | `items` | array | Yes | List of `CollectionLogItem` objects |
 
 ### `CollectionLogItem`
@@ -70,6 +71,45 @@ Each item represents a single drop or reward within a source.
 | `varbitId` | int | Yes | Varbit tracking the item's collection state. Use `0` if unknown |
 | `isPet` | boolean | Yes | `true` if this item is a pet. Used by the "All Pets" efficiency view |
 | `wikiPage` | string | Yes | OSRS Wiki page name (the part after `oldschool.runescape.wiki/w/`). URL-encode special characters (e.g., `%27` for apostrophes) |
+
+### `GuidanceStep`
+
+Sources that require multiple actions (e.g., obtain a key, then enter a dungeon, then kill a boss) can define an ordered list of guidance steps. When "Guide Me" is activated for such a source, the plugin walks the player through each step sequentially.
+
+```json
+{
+  "description": "Get a Mossy key from moss giants",
+  "worldX": 3170,
+  "worldY": 9899,
+  "worldPlane": 0,
+  "travelTip": "Varrock teleport -> sewers",
+  "completionCondition": "INVENTORY_HAS_ITEM",
+  "completionItemId": 22374
+}
+```
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `description` | string | Yes | What the player should do in this step |
+| `worldX` | int | No | Target X coordinate (0 = no location overlay) |
+| `worldY` | int | No | Target Y coordinate |
+| `worldPlane` | int | No | Target world plane |
+| `npcId` | int | No | NPC to highlight at the target location |
+| `interactAction` | string | No | Right-click action to highlight (e.g., "Attack", "Talk-to") |
+| `dialogOptions` | array | No | Dialog choices to highlight when talking to an NPC |
+| `travelTip` | string | No | Travel tip shown in the overlay |
+| `requiredItemIds` | array | No | Item IDs that must be in inventory before proceeding. If missing, the plugin redirects to a bank |
+| `completionCondition` | string | Yes | One of: `ITEM_OBTAINED`, `INVENTORY_HAS_ITEM`, `ARRIVE_AT_TILE`, `NPC_TALKED_TO`, `MANUAL` |
+| `completionItemId` | int | No | Item ID for `ITEM_OBTAINED` or `INVENTORY_HAS_ITEM` checks |
+| `completionDistance` | int | No | Tile distance threshold for `ARRIVE_AT_TILE` (default: 5) |
+| `completionNpcId` | int | No | NPC ID for `NPC_TALKED_TO` checks |
+
+**Completion conditions:**
+- `ITEM_OBTAINED` — Auto-advances when the item appears in the collection log
+- `INVENTORY_HAS_ITEM` — Auto-advances when the item enters the player's inventory
+- `ARRIVE_AT_TILE` — Auto-advances when the player is within `completionDistance` tiles of the target
+- `NPC_TALKED_TO` — Auto-advances when the player interacts with the specified NPC
+- `MANUAL` — Player must click "Next Step" or "Skip" in the panel
 
 ## How to Find Data
 
