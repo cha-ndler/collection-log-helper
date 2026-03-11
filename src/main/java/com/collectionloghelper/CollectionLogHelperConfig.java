@@ -84,10 +84,21 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "afkOnly",
+		name = "AFK Only",
+		description = "Only show AFK-friendly sources (afkLevel >= 2) in Efficient and Pet Hunt modes",
+		position = 6
+	)
+	default boolean afkOnly()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "showSyncReminder",
 		name = "Show Sync Reminder",
 		description = "Show a reminder to open the Collection Log after login to sync obtained items",
-		position = 6
+		position = 7
 	)
 	default boolean showSyncReminder()
 	{
@@ -98,7 +109,7 @@ public interface CollectionLogHelperConfig extends Config
 		keyName = "showBankScanReminder",
 		name = "Show Bank Scan Reminder",
 		description = "Show a reminder to open your Bank after login so the plugin can scan for clue scrolls and other items",
-		position = 7
+		position = 8
 	)
 	default boolean showBankScanReminder()
 	{
