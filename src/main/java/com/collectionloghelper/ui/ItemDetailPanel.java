@@ -107,10 +107,15 @@ class ItemDetailPanel extends JPanel
 		{
 			long denominator = item.getDropRate() > 0 ? Math.round(1.0 / item.getDropRate()) : 0;
 			appendInfoRow(info, "Drop Rate:", denominator > 0 ? "1/" + denominator : "N/A");
+			if (denominator > 0 && source.getKillTimeSeconds() > 0)
+			{
+				double expectedKills = denominator;
+				double hours = expectedKills * (source.getKillTimeSeconds() / 3600.0);
+				appendInfoRow(info, "Est. Time:", "~" + ClueCompletionEstimator.formatTime((int) (hours * 3600)));
+			}
 		}
 
 		boolean isClueSource = source.getCategory() == CollectionLogCategory.CLUES;
-		boolean hideLocationDetails = isClueSource || isGuaranteed;
 		if (isClueSource && clueEstimator != null)
 		{
 			int estSeconds = clueEstimator.estimateCompletionSeconds(source.getName());
@@ -122,9 +127,12 @@ class ItemDetailPanel extends JPanel
 						+ " (" + bucketName.toLowerCase() + ")");
 			}
 		}
-		else if (!hideLocationDetails)
+		else if (!isClueSource)
 		{
-			appendInfoRow(info, "Kill Time:", source.getKillTimeSeconds() + "s");
+			if (!isGuaranteed)
+			{
+				appendInfoRow(info, "Kill Time:", source.getKillTimeSeconds() + "s");
+			}
 			appendInfoRow(info, "Location:", source.getDisplayLocation());
 			if (source.getTravelTip() != null && !source.getTravelTip().isEmpty())
 			{
