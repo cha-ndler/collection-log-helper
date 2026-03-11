@@ -9,6 +9,7 @@ import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.RewardType;
 import com.collectionloghelper.data.SlayerCreatureDatabase;
+import com.collectionloghelper.data.SlayerMasterDatabase;
 import com.collectionloghelper.data.SlayerTaskState;
 import java.io.File;
 import java.io.FileWriter;
@@ -43,11 +44,13 @@ public class EfficiencyCalculator
 	private final CollectionLogHelperConfig config;
 	private final ClueCompletionEstimator clueEstimator;
 	private final SlayerTaskState slayerTaskState;
+	private final SlayerMasterDatabase slayerMasterDatabase;
 
 	@Inject
 	private EfficiencyCalculator(DropRateDatabase database, PlayerCollectionState collectionState,
 		RequirementsChecker requirementsChecker, CollectionLogHelperConfig config,
-		ClueCompletionEstimator clueEstimator, SlayerTaskState slayerTaskState)
+		ClueCompletionEstimator clueEstimator, SlayerTaskState slayerTaskState,
+		SlayerMasterDatabase slayerMasterDatabase)
 	{
 		this.database = database;
 		this.collectionState = collectionState;
@@ -55,16 +58,14 @@ public class EfficiencyCalculator
 		this.config = config;
 		this.clueEstimator = clueEstimator;
 		this.slayerTaskState = slayerTaskState;
+		this.slayerMasterDatabase = slayerMasterDatabase;
 	}
-
-	/** Minimum afkLevel a source must have to pass the AFK filter. */
-	private static final int AFK_MIN_LEVEL = 2;
 
 	public List<ScoredItem> rankByEfficiency()
 	{
 		List<ScoredItem> results = new ArrayList<>();
 		boolean hideLocked = config.hideLockedContent();
-		boolean afkOnly = config.afkOnly();
+		int afkMinLevel = config.afkFilter().getMinAfkLevel();
 
 		for (CollectionLogSource source : database.getAllSources())
 		{
@@ -73,7 +74,7 @@ public class EfficiencyCalculator
 			{
 				continue;
 			}
-			if (afkOnly && source.getAfkLevel() < AFK_MIN_LEVEL)
+			if (afkMinLevel > 0 && source.getAfkLevel() < afkMinLevel)
 			{
 				continue;
 			}
@@ -103,7 +104,7 @@ public class EfficiencyCalculator
 	{
 		List<ScoredItem> results = new ArrayList<>();
 		boolean hideLocked = config.hideLockedContent();
-		boolean afkOnly = config.afkOnly();
+		int afkMinLevel = config.afkFilter().getMinAfkLevel();
 
 		for (CollectionLogSource source : database.getAllSources())
 		{
@@ -112,7 +113,7 @@ public class EfficiencyCalculator
 			{
 				continue;
 			}
-			if (afkOnly && source.getAfkLevel() < AFK_MIN_LEVEL)
+			if (afkMinLevel > 0 && source.getAfkLevel() < afkMinLevel)
 			{
 				continue;
 			}
@@ -280,6 +281,7 @@ public class EfficiencyCalculator
 	 * Returns the effective kill/completion time for a source. Adjusts for:
 	 * - CLUES: account-progression-aware estimate from {@link ClueCompletionEstimator}
 	 * - RAIDS: team size multiplier from config
+	 * - SLAYER task-only: inflated by 1/P(creature|master) to account for task acquisition overhead
 	 * - All others: fixed killTimeSeconds from the database
 	 */
 	int getEffectiveKillTime(CollectionLogSource source)
@@ -298,7 +300,45 @@ public class EfficiencyCalculator
 			double multiplier = config.raidTeamSize().getKillTimeMultiplier();
 			return Math.max(1, (int) (baseTime * multiplier));
 		}
+
+		// Slayer task-only sources: inflate kill time by 1/P(creature|master)
+		// to account for the fact that you can only kill these on-task.
+		// Skip if player is currently on this creature's task (boost handles that).
+		if (SlayerCreatureDatabase.isTaskOnlySource(source.getName())
+			&& !isOnSlayerTask(source))
+		{
+			double taskProb = getBestTaskProbability(source.getName());
+			if (taskProb > 0 && taskProb < 1.0)
+			{
+				return Math.max(1, (int) (baseTime / taskProb));
+			}
+		}
+
 		return baseTime;
+	}
+
+	/**
+	 * Returns the highest probability of being assigned the creature task
+	 * for the given source, across all Slayer masters.
+	 */
+	private double getBestTaskProbability(String sourceName)
+	{
+		String creature = SlayerCreatureDatabase.getCreatureForSource(sourceName);
+		if (creature == null)
+		{
+			return 0;
+		}
+
+		double bestProb = 0;
+		for (String masterName : slayerMasterDatabase.getMasterNames())
+		{
+			double prob = slayerMasterDatabase.getTaskProbability(masterName, creature);
+			if (prob > bestProb)
+			{
+				bestProb = prob;
+			}
+		}
+		return bestProb;
 	}
 
 	private static String formatHours(double hours)

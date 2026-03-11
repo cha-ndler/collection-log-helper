@@ -1,5 +1,6 @@
 package com.collectionloghelper.ui;
 
+import com.collectionloghelper.AfkFilter;
 import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
@@ -102,6 +103,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Supplier<WorldPoint> playerLocationSupplier;
+	private final Consumer<AfkFilter> afkFilterUpdater;
 
 	private final JLabel syncStatusLabel;
 	private final JLabel dataSyncWarningLabel;
@@ -109,6 +111,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final JLabel slayerTaskLabel;
 
 	private final JComboBox<Mode> modeSelector;
+	private final JComboBox<AfkFilter> afkFilterSelector;
 	private final JComboBox<CollectionLogCategory> categorySelector;
 	private final JTextField searchField;
 	private final JLabel completionLabel;
@@ -123,6 +126,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final JPanel slayerStrategyPanel;
 	private final JLabel slayerStrategyLabel;
 	private boolean slayerStrategyExpanded = false;
+
+	private final JLabel guidanceBannerLabel;
+	private final JPanel guidanceBannerPanel;
 
 	private Mode currentMode = Mode.EFFICIENT;
 	private boolean rebuilding = false;
@@ -139,7 +145,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 		SlayerTaskState slayerTaskState,
 		SlayerStrategyCalculator slayerStrategyCalculator,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
-		Supplier<WorldPoint> playerLocationSupplier)
+		Supplier<WorldPoint> playerLocationSupplier,
+		Consumer<AfkFilter> afkFilterUpdater)
 	{
 		this.config = config;
 		this.database = database;
@@ -154,6 +161,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.playerLocationSupplier = playerLocationSupplier;
+		this.afkFilterUpdater = afkFilterUpdater;
 
 		setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
@@ -248,6 +256,22 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 		controlsPanel.add(slayerStrategyPanel);
 
+		// Active guidance banner (shows which source is being guided)
+		guidanceBannerPanel = new JPanel(new BorderLayout());
+		guidanceBannerPanel.setBackground(new Color(25, 50, 25));
+		guidanceBannerPanel.setBorder(BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(new Color(80, 200, 80), 1),
+			BorderFactory.createEmptyBorder(3, 6, 3, 6)
+		));
+		guidanceBannerPanel.setAlignmentX(CENTER_ALIGNMENT);
+		guidanceBannerPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 24));
+		guidanceBannerPanel.setVisible(false);
+		guidanceBannerLabel = new JLabel();
+		guidanceBannerLabel.setFont(FontManager.getRunescapeSmallFont());
+		guidanceBannerLabel.setForeground(new Color(80, 200, 80));
+		guidanceBannerPanel.add(guidanceBannerLabel, BorderLayout.CENTER);
+		controlsPanel.add(guidanceBannerPanel);
+
 		controlsPanel.add(Box.createVerticalStrut(4));
 
 		// Mode selector
@@ -266,6 +290,22 @@ public class CollectionLogHelperPanel extends PluginPanel
 		});
 		controlsPanel.add(modeSelector);
 
+		// AFK filter selector (visible in Efficient and Pet Hunt modes)
+		afkFilterSelector = new JComboBox<>(AfkFilter.values());
+		afkFilterSelector.setSelectedItem(config.afkFilter());
+		afkFilterSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
+		afkFilterSelector.setVisible(currentMode == Mode.EFFICIENT || currentMode == Mode.PET_HUNT);
+		afkFilterSelector.addItemListener(e ->
+		{
+			if (e.getStateChange() == ItemEvent.SELECTED)
+			{
+				AfkFilter selected = (AfkFilter) e.getItem();
+				afkFilterUpdater.accept(selected);
+				rebuild();
+			}
+		});
+		controlsPanel.add(afkFilterSelector);
+
 		// Category selector (visible in Category Focus mode)
 		categorySelector = new JComboBox<>(CollectionLogCategory.values());
 		categorySelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
@@ -283,6 +323,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		searchField = new JTextField();
 		searchField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
 		searchField.setVisible(false);
+		searchField.setToolTipText("Search by item name or source name");
 		searchField.getDocument().addDocumentListener(new DocumentListener()
 		{
 			@Override
@@ -405,9 +446,27 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private void updateSlayerStrategy()
 	{
-		if (!slayerStrategyPanel.isVisible() || !slayerStrategyExpanded)
+		if (!slayerStrategyPanel.isVisible())
 		{
 			slayerStrategyLabel.setVisible(false);
+			slayerStrategyPanel.revalidate();
+			return;
+		}
+
+		String recommended = slayerStrategyCalculator.getRecommendedMaster();
+
+		if (!slayerStrategyExpanded)
+		{
+			// Show a one-line summary when collapsed so users know content exists
+			if (recommended != null)
+			{
+				slayerStrategyLabel.setText("<html><font color='#b5b5b3'>Best: " + recommended + "</font></html>");
+				slayerStrategyLabel.setVisible(true);
+			}
+			else
+			{
+				slayerStrategyLabel.setVisible(false);
+			}
 			slayerStrategyPanel.revalidate();
 			return;
 		}
@@ -442,7 +501,6 @@ public class CollectionLogHelperPanel extends PluginPanel
 		}
 
 		// Recommended master
-		String recommended = slayerStrategyCalculator.getRecommendedMaster();
 		if (recommended != null)
 		{
 			sb.append("<b>Best master:</b> ").append(recommended).append("<br>");
@@ -677,6 +735,23 @@ public class CollectionLogHelperPanel extends PluginPanel
 		List<ScoredItem> scored = calculator.rankByEfficiency();
 		boolean hideObtained = config.hideObtainedItems();
 
+		if (scored.isEmpty())
+		{
+			if (config.afkFilter().getMinAfkLevel() > 0)
+			{
+				addEmptyStateMessage("No sources match the current AFK filter.<br>Try a lower Efficient AFK setting.");
+			}
+			else if (config.hideLockedContent())
+			{
+				addEmptyStateMessage("All sources are locked or completed.<br>Adjust filters to see more.");
+			}
+			else
+			{
+				addEmptyStateMessage("All items obtained. Congratulations!");
+			}
+			return;
+		}
+
 		// Top Pick should always be an accessible (unlocked) source
 		scored.stream()
 			.filter(s -> !s.isLocked())
@@ -742,11 +817,13 @@ public class CollectionLogHelperPanel extends PluginPanel
 		String query = searchField.getText().toLowerCase().trim();
 		if (query.isEmpty())
 		{
+			addEmptyStateMessage("Search by item or source name");
 			return;
 		}
 
 		boolean hideObtained = config.hideObtainedItems();
 		boolean hideLocked = config.hideLockedContent();
+		int resultCount = 0;
 
 		for (CollectionLogSource source : database.getAllSources())
 		{
@@ -770,8 +847,14 @@ public class CollectionLogHelperPanel extends PluginPanel
 					ItemRowPanel row = new ItemRowPanel(item, source, obtained, 0,
 						locked, onTask, itemManager, () -> showDetail(item, source));
 					listContainer.add(row);
+					resultCount++;
 				}
 			}
+		}
+
+		if (resultCount == 0)
+		{
+			addEmptyStateMessage("No items match '" + query + "'");
 		}
 	}
 
@@ -779,6 +862,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	{
 		List<ScoredItem> scored = calculator.filterPetsOnly();
 		boolean hideObtained = config.hideObtainedItems();
+		int resultCount = 0;
 
 		for (ScoredItem si : scored)
 		{
@@ -798,6 +882,19 @@ public class CollectionLogHelperPanel extends PluginPanel
 					si.getScore(), si.isLocked(), onTask, itemManager,
 					() -> showDetail(item, si.getSource()));
 				listContainer.add(row);
+				resultCount++;
+			}
+		}
+
+		if (resultCount == 0)
+		{
+			if (config.afkFilter().getMinAfkLevel() > 0)
+			{
+				addEmptyStateMessage("No pets match the current AFK filter.<br>Try a lower Efficient AFK setting.");
+			}
+			else
+			{
+				addEmptyStateMessage("All pets obtained!");
 			}
 		}
 	}
@@ -1078,6 +1175,23 @@ public class CollectionLogHelperPanel extends PluginPanel
 	{
 		guidanceActive = active;
 		guidedSource = source;
+		SwingUtilities.invokeLater(() ->
+		{
+			if (active && source != null)
+			{
+				guidanceBannerLabel.setText("Guiding: " + source.getName());
+				guidanceBannerPanel.setVisible(true);
+			}
+			else
+			{
+				guidanceBannerPanel.setVisible(false);
+			}
+			guidanceBannerPanel.revalidate();
+			if (guidanceBannerPanel.getParent() != null)
+			{
+				guidanceBannerPanel.getParent().revalidate();
+			}
+		});
 	}
 
 	public void showClueGuidance(CollectionLogSource source)
@@ -1106,8 +1220,21 @@ public class CollectionLogHelperPanel extends PluginPanel
 		});
 	}
 
+	private void addEmptyStateMessage(String message)
+	{
+		JLabel label = new JLabel("<html><center>" + message + "</center></html>");
+		label.setFont(FontManager.getRunescapeSmallFont());
+		label.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setAlignmentX(CENTER_ALIGNMENT);
+		label.setBorder(BorderFactory.createEmptyBorder(16, 8, 16, 8));
+		label.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		listContainer.add(label);
+	}
+
 	private void updateControlVisibility()
 	{
+		afkFilterSelector.setVisible(currentMode == Mode.EFFICIENT || currentMode == Mode.PET_HUNT);
 		categorySelector.setVisible(currentMode == Mode.CATEGORY_FOCUS);
 		searchField.setVisible(currentMode == Mode.SEARCH);
 	}

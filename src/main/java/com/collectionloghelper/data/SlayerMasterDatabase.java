@@ -115,15 +115,27 @@ public class SlayerMasterDatabase
 	/**
 	 * Returns the probability of being assigned a specific creature task
 	 * from the given master: weight / totalWeight.
+	 * Creature name lookup is case-insensitive.
 	 */
 	public double getTaskProbability(String masterName, String creatureName)
 	{
 		Map<String, Integer> weights = masterTaskWeights.get(masterName);
-		if (weights == null)
+		if (weights == null || creatureName == null)
 		{
 			return 0.0;
 		}
-		Integer weight = weights.get(creatureName);
+		// Case-insensitive lookup: JSON keys use mixed case ("Abyssal demons"),
+		// SlayerCreatureDatabase stores lowercase ("abyssal demons")
+		String lowerCreature = creatureName.toLowerCase();
+		Integer weight = null;
+		for (Map.Entry<String, Integer> entry : weights.entrySet())
+		{
+			if (entry.getKey().toLowerCase().equals(lowerCreature))
+			{
+				weight = entry.getValue();
+				break;
+			}
+		}
 		if (weight == null)
 		{
 			return 0.0;

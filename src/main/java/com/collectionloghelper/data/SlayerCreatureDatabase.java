@@ -3,8 +3,10 @@ package com.collectionloghelper.data;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Maps Slayer task creature names to collection log source names
@@ -15,6 +17,15 @@ import java.util.Map;
 public final class SlayerCreatureDatabase
 {
 	private static final Map<String, List<String>> CREATURE_TO_SOURCES;
+
+	/** Reverse lookup: source name → creature task name. */
+	private static final Map<String, String> SOURCE_TO_CREATURE;
+
+	/**
+	 * Sources that require an active Slayer task to kill. These are the per-creature
+	 * Slayer sources — boss variants (Abyssal Sire, Kraken, etc.) can be fought off-task.
+	 */
+	private static final Set<String> TASK_ONLY_SOURCES;
 
 	static
 	{
@@ -59,6 +70,48 @@ public final class SlayerCreatureDatabase
 		map.put("gryphons", Arrays.asList("Gryphon", "Shellbane Gryphon"));
 
 		CREATURE_TO_SOURCES = Collections.unmodifiableMap(map);
+
+		// Build reverse lookup
+		Map<String, String> reverseMap = new HashMap<>();
+		for (Map.Entry<String, List<String>> entry : map.entrySet())
+		{
+			for (String sourceName : entry.getValue())
+			{
+				reverseMap.put(sourceName, entry.getKey());
+			}
+		}
+		SOURCE_TO_CREATURE = Collections.unmodifiableMap(reverseMap);
+
+		// Per-creature Slayer sources that require an active task to kill.
+		// Boss variants (Sire, Kraken, Cerberus, etc.) are NOT task-only.
+		Set<String> taskOnly = new HashSet<>();
+		taskOnly.add("Crawling Hand");
+		taskOnly.add("Cave Crawler");
+		taskOnly.add("Brine Rat");
+		taskOnly.add("Cave Horror");
+		taskOnly.add("Basilisk Knight");
+		taskOnly.add("Bloodveld");
+		taskOnly.add("Aberrant Spectre");
+		taskOnly.add("Dust Devil");
+		taskOnly.add("Fossil Island Wyvern");
+		taskOnly.add("Kurask");
+		taskOnly.add("Skeletal Wyvern");
+		taskOnly.add("Gargoyle");
+		taskOnly.add("Nechryael");
+		taskOnly.add("Spiritual Mage");
+		taskOnly.add("Drake");
+		taskOnly.add("Abyssal Demon");
+		taskOnly.add("Cave Kraken");
+		taskOnly.add("Dark Beast");
+		taskOnly.add("Araxyte");
+		taskOnly.add("Smoke Devil");
+		taskOnly.add("Hydra");
+		taskOnly.add("Wyrm");
+		taskOnly.add("Turoth");
+		taskOnly.add("Warped Creature");
+		taskOnly.add("Vyrewatch Sentinel");
+		taskOnly.add("Gryphon");
+		TASK_ONLY_SOURCES = Collections.unmodifiableSet(taskOnly);
 	}
 
 	private SlayerCreatureDatabase()
@@ -96,5 +149,28 @@ public final class SlayerCreatureDatabase
 		}
 		List<String> sources = CREATURE_TO_SOURCES.get(creatureName.toLowerCase());
 		return sources != null && sources.contains(sourceName);
+	}
+
+	/**
+	 * Returns the Slayer task creature name for a given source, or null
+	 * if the source has no creature mapping.
+	 */
+	public static String getCreatureForSource(String sourceName)
+	{
+		if (sourceName == null)
+		{
+			return null;
+		}
+		return SOURCE_TO_CREATURE.get(sourceName);
+	}
+
+	/**
+	 * Returns true if the source requires an active Slayer task to access.
+	 * Boss variants (Abyssal Sire, Kraken, etc.) return false since they
+	 * can be fought off-task.
+	 */
+	public static boolean isTaskOnlySource(String sourceName)
+	{
+		return sourceName != null && TASK_ONLY_SOURCES.contains(sourceName);
 	}
 }

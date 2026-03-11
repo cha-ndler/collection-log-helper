@@ -84,14 +84,15 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "afkOnly",
-		name = "AFK Only",
-		description = "Only show AFK-friendly sources (afkLevel >= 2) in Efficient and Pet Hunt modes",
-		position = 6
+		keyName = "afkFilter",
+		name = "Efficient AFK",
+		description = "Filter sources by AFK level in Efficient and Pet Hunt modes",
+		position = 6,
+		hidden = true
 	)
-	default boolean afkOnly()
+	default AfkFilter afkFilter()
 	{
-		return false;
+		return AfkFilter.OFF;
 	}
 
 	@ConfigItem(
