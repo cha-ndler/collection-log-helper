@@ -905,8 +905,10 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		objectHighlightOverlay.setTargetObjectId(step.getObjectId());
 		objectHighlightOverlay.setObjectInteractAction(step.getObjectInteractAction());
+		objectHighlightOverlay.setUseItemOnObject(step.isUseItemOnObject());
 
 		itemHighlightOverlay.setTargetItemIds(step.getHighlightItemIds());
+		itemHighlightOverlay.setUseItemOnObject(step.isUseItemOnObject());
 
 		if (step.getWorldX() > 0)
 		{
