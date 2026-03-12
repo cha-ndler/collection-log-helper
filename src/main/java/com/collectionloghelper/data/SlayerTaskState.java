@@ -109,8 +109,14 @@ public class SlayerTaskState
 					log.debug("No boss sublist rows for bossId {}", bossId);
 					return null;
 				}
-				taskDBRow = (Integer) client.getDBTableField(
-					bossRows.get(0), DBTableID.SlayerTaskSublist.COL_TASK, 0)[0];
+				Object[] bossField = client.getDBTableField(
+					bossRows.get(0), DBTableID.SlayerTaskSublist.COL_TASK, 0);
+				if (bossField == null || bossField.length == 0)
+				{
+					log.debug("Empty DB field for boss sublist row");
+					return null;
+				}
+				taskDBRow = (Integer) bossField[0];
 			}
 			else
 			{
@@ -125,8 +131,14 @@ public class SlayerTaskState
 				taskDBRow = taskRows.get(0);
 			}
 
-			String name = (String) client.getDBTableField(
-				taskDBRow, DBTableID.SlayerTask.COL_NAME_UPPERCASE, 0)[0];
+			Object[] nameField = client.getDBTableField(
+				taskDBRow, DBTableID.SlayerTask.COL_NAME_UPPERCASE, 0);
+			if (nameField == null || nameField.length == 0)
+			{
+				log.debug("Empty DB field for task name, taskDBRow={}", taskDBRow);
+				return null;
+			}
+			String name = (String) nameField[0];
 
 			// DB returns uppercase — convert to title case for display
 			if (name != null && name.length() > 1)
