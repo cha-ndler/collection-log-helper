@@ -60,27 +60,38 @@ public class GuidanceOverlay extends OverlayPanel
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
+		// Snapshot all volatile fields to prevent thread-safety races
+		final WorldPoint point = this.targetPoint;
+		final String name = this.targetName;
+		final String locDesc = this.locationDescription;
+		final String travel = this.travelTip;
+		final String clueText = this.clueGuidanceText;
+		final int npcId = this.targetNpcId;
+		final String action = this.interactAction;
+		final boolean logReminder = this.showCollectionLogReminder;
+		final boolean bankReminder = this.showBankReminder;
+
 		Color overlayColor = config.overlayColor();
 
-		boolean hasReminder = showCollectionLogReminder || showBankReminder;
+		boolean hasReminder = logReminder || bankReminder;
 
-		if (targetPoint == null)
+		if (point == null)
 		{
-			if (clueGuidanceText != null)
+			if (clueText != null)
 			{
 				panelComponent.getChildren().clear();
 				panelComponent.getChildren().add(TitleComponent.builder()
-					.text(clueGuidanceText)
+					.text(clueText)
 					.color(Color.WHITE)
 					.build());
-				addSyncRemindersIfNeeded();
+				addSyncRemindersIfNeeded(logReminder, bankReminder);
 				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
 				return super.render(graphics);
 			}
 			if (hasReminder)
 			{
 				panelComponent.getChildren().clear();
-				addSyncRemindersIfNeeded();
+				addSyncRemindersIfNeeded(logReminder, bankReminder);
 				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
 				return super.render(graphics);
 			}
@@ -88,18 +99,18 @@ public class GuidanceOverlay extends OverlayPanel
 		}
 
 		// Tile highlight rendering
-		LocalPoint localPoint = LocalPoint.fromWorld(client.getTopLevelWorldView(), targetPoint);
+		LocalPoint localPoint = LocalPoint.fromWorld(client.getTopLevelWorldView(), point);
 		if (localPoint == null)
 		{
 			// Target tile is not on screen — show compact direction panel
-			if (targetName != null)
+			if (name != null)
 			{
 				panelComponent.getChildren().clear();
 				panelComponent.getChildren().add(TitleComponent.builder()
-					.text(targetName)
+					.text(name)
 					.color(new Color(255, 200, 0))
 					.build());
-				String loc = locationDescription != null ? locationDescription : "";
+				String loc = locDesc != null ? locDesc : "";
 				if (!loc.isEmpty())
 				{
 					panelComponent.getChildren().add(LineComponent.builder()
@@ -107,21 +118,21 @@ public class GuidanceOverlay extends OverlayPanel
 						.leftColor(Color.WHITE)
 						.build());
 				}
-				if (travelTip != null && !travelTip.isEmpty())
+				if (travel != null && !travel.isEmpty())
 				{
 					panelComponent.getChildren().add(LineComponent.builder()
-						.left("Travel: " + travelTip)
+						.left("Travel: " + travel)
 						.leftColor(new Color(100, 200, 255))
 						.build());
 				}
-				if (interactAction != null && !interactAction.isEmpty())
+				if (action != null && !action.isEmpty())
 				{
 					panelComponent.getChildren().add(LineComponent.builder()
-						.left(interactAction)
+						.left(action)
 						.leftColor(new Color(100, 255, 100))
 						.build());
 				}
-				addSyncRemindersIfNeeded();
+				addSyncRemindersIfNeeded(logReminder, bankReminder);
 				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
 				return super.render(graphics);
 			}
@@ -130,13 +141,13 @@ public class GuidanceOverlay extends OverlayPanel
 
 		// NPC highlighting — if we have a target NPC ID, try to find and highlight it
 		boolean npcHighlighted = false;
-		if (targetNpcId > 0)
+		if (npcId > 0)
 		{
 			for (NPC npc : client.getTopLevelWorldView().npcs())
 			{
-				if (npc != null && npc.getId() == targetNpcId)
+				if (npc != null && npc.getId() == npcId)
 				{
-					renderNpcHighlight(graphics, npc, overlayColor);
+					renderNpcHighlight(graphics, npc, overlayColor, action);
 					npcHighlighted = true;
 					break;
 				}
@@ -157,11 +168,11 @@ public class GuidanceOverlay extends OverlayPanel
 			OverlayUtil.renderPolygon(graphics, poly, overlayColor, fillColor,
 				new BasicStroke(2.0f));
 
-			if (targetName != null)
+			if (name != null)
 			{
 				OverlayUtil.renderTextLocation(graphics,
-					Perspective.getCanvasTextLocation(client, graphics, localPoint, targetName, 150),
-					targetName, overlayColor);
+					Perspective.getCanvasTextLocation(client, graphics, localPoint, name, 150),
+					name, overlayColor);
 			}
 		}
 
@@ -172,7 +183,7 @@ public class GuidanceOverlay extends OverlayPanel
 	 * Renders a highlight around an NPC with a downward-pointing arrow and
 	 * action label above it, similar to Quest Helper's NPC step rendering.
 	 */
-	private void renderNpcHighlight(Graphics2D graphics, NPC npc, Color overlayColor)
+	private void renderNpcHighlight(Graphics2D graphics, NPC npc, Color overlayColor, String action)
 	{
 		Shape hull = npc.getConvexHull();
 		if (hull != null)
@@ -196,8 +207,8 @@ public class GuidanceOverlay extends OverlayPanel
 		LocalPoint npcLocal = npc.getLocalLocation();
 		if (npcLocal != null)
 		{
-			String label = interactAction != null
-				? interactAction + " " + npc.getName()
+			String label = action != null
+				? action + " " + npc.getName()
 				: npc.getName();
 
 			Point textPoint = Perspective.getCanvasTextLocation(
@@ -316,16 +327,16 @@ public class GuidanceOverlay extends OverlayPanel
 		interactAction = null;
 	}
 
-	private void addSyncRemindersIfNeeded()
+	private void addSyncRemindersIfNeeded(boolean logReminder, boolean bankReminder)
 	{
-		if (showCollectionLogReminder)
+		if (logReminder)
 		{
 			panelComponent.getChildren().add(TitleComponent.builder()
 				.text("Open Collection Log to sync")
 				.color(new Color(255, 170, 0))
 				.build());
 		}
-		if (showBankReminder)
+		if (bankReminder)
 		{
 			panelComponent.getChildren().add(TitleComponent.builder()
 				.text("Open Bank to scan items")
