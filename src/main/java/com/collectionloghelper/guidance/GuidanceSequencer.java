@@ -319,7 +319,8 @@ public class GuidanceSequencer
 			CompletionCondition.MANUAL,
 			0, 0, 0,
 			null,  // worldMessage
-			0, null  // objectId, objectInteractAction
+			0, null,  // objectId, objectInteractAction
+			null  // highlightItemIds
 		);
 	}
 
