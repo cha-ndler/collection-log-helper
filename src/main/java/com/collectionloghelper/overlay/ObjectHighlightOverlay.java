@@ -37,6 +37,7 @@ public class ObjectHighlightOverlay extends Overlay
 
 	private volatile int targetObjectId;
 	private volatile String objectInteractAction;
+	private volatile boolean useItemOnObject;
 
 	@Inject
 	private ObjectHighlightOverlay(Client client, CollectionLogHelperConfig config)
@@ -57,10 +58,16 @@ public class ObjectHighlightOverlay extends Overlay
 		this.objectInteractAction = action;
 	}
 
+	public void setUseItemOnObject(boolean value)
+	{
+		this.useItemOnObject = value;
+	}
+
 	public void clearTarget()
 	{
 		this.targetObjectId = 0;
 		this.objectInteractAction = null;
+		this.useItemOnObject = false;
 	}
 
 	@Override
@@ -69,6 +76,7 @@ public class ObjectHighlightOverlay extends Overlay
 		// Snapshot volatile fields to prevent thread-safety races
 		final int objId = this.targetObjectId;
 		final String action = this.objectInteractAction;
+		final boolean useItem = this.useItemOnObject;
 
 		if (objId <= 0)
 		{
@@ -117,7 +125,7 @@ public class ObjectHighlightOverlay extends Overlay
 						if (gameObject != null && gameObject.getId() == objId)
 						{
 							renderObjectHighlight(graphics, gameObject.getConvexHull(),
-								gameObject.getLocalLocation(), overlayColor, action);
+								gameObject.getLocalLocation(), overlayColor, action, useItem);
 						}
 					}
 				}
@@ -127,7 +135,7 @@ public class ObjectHighlightOverlay extends Overlay
 				if (wallObject != null && wallObject.getId() == objId)
 				{
 					renderObjectHighlight(graphics, wallObject.getConvexHull(),
-						wallObject.getLocalLocation(), overlayColor, action);
+						wallObject.getLocalLocation(), overlayColor, action, useItem);
 				}
 
 				// Check decorative objects
@@ -135,7 +143,7 @@ public class ObjectHighlightOverlay extends Overlay
 				if (decorativeObject != null && decorativeObject.getId() == objId)
 				{
 					renderObjectHighlight(graphics, decorativeObject.getConvexHull(),
-						decorativeObject.getLocalLocation(), overlayColor, action);
+						decorativeObject.getLocalLocation(), overlayColor, action, useItem);
 				}
 			}
 		}
@@ -144,7 +152,7 @@ public class ObjectHighlightOverlay extends Overlay
 	}
 
 	private void renderObjectHighlight(Graphics2D graphics, Shape hull, LocalPoint localPoint,
-		Color overlayColor, String action)
+		Color overlayColor, String action, boolean useItem)
 	{
 		if (hull != null)
 		{
@@ -166,11 +174,12 @@ public class ObjectHighlightOverlay extends Overlay
 		// Render action text above the object
 		if (localPoint != null && action != null)
 		{
+			String displayText = useItem ? "Use " + action + " \u2192" : action;
 			Point textPoint = Perspective.getCanvasTextLocation(
-				client, graphics, localPoint, action, TEXT_HEIGHT_OFFSET);
+				client, graphics, localPoint, displayText, TEXT_HEIGHT_OFFSET);
 			if (textPoint != null)
 			{
-				renderOutlinedText(graphics, textPoint, action, overlayColor);
+				renderOutlinedText(graphics, textPoint, displayText, overlayColor);
 			}
 		}
 	}

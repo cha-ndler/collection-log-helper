@@ -58,6 +58,9 @@ public class GuidanceStep
 	/** Item IDs to highlight in the player's inventory during this step. */
 	List<Integer> highlightItemIds;
 
+	/** When true, overlays show "Use X on Y" style prompts instead of simple action labels. */
+	boolean useItemOnObject;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
