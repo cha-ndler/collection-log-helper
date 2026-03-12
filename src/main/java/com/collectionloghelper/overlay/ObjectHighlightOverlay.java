@@ -66,15 +66,33 @@ public class ObjectHighlightOverlay extends Overlay
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
-		if (targetObjectId <= 0)
+		// Snapshot volatile fields to prevent thread-safety races
+		final int objId = this.targetObjectId;
+		final String action = this.objectInteractAction;
+
+		if (objId <= 0)
 		{
 			return null;
 		}
 
 		Color overlayColor = config.overlayColor();
-		Scene scene = client.getTopLevelWorldView().getScene();
-		int plane = client.getTopLevelWorldView().getPlane();
-		Tile[][] tiles = scene.getTiles()[plane];
+		net.runelite.api.WorldView worldView = client.getTopLevelWorldView();
+		if (worldView == null)
+		{
+			return null;
+		}
+		Scene scene = worldView.getScene();
+		if (scene == null)
+		{
+			return null;
+		}
+		int plane = worldView.getPlane();
+		Tile[][][] allTiles = scene.getTiles();
+		if (allTiles == null || plane < 0 || plane >= allTiles.length)
+		{
+			return null;
+		}
+		Tile[][] tiles = allTiles[plane];
 
 		for (Tile[] row : tiles)
 		{
@@ -96,28 +114,28 @@ public class ObjectHighlightOverlay extends Overlay
 				{
 					for (GameObject gameObject : gameObjects)
 					{
-						if (gameObject != null && gameObject.getId() == targetObjectId)
+						if (gameObject != null && gameObject.getId() == objId)
 						{
 							renderObjectHighlight(graphics, gameObject.getConvexHull(),
-								gameObject.getLocalLocation(), overlayColor);
+								gameObject.getLocalLocation(), overlayColor, action);
 						}
 					}
 				}
 
 				// Check wall objects
 				WallObject wallObject = tile.getWallObject();
-				if (wallObject != null && wallObject.getId() == targetObjectId)
+				if (wallObject != null && wallObject.getId() == objId)
 				{
 					renderObjectHighlight(graphics, wallObject.getConvexHull(),
-						wallObject.getLocalLocation(), overlayColor);
+						wallObject.getLocalLocation(), overlayColor, action);
 				}
 
 				// Check decorative objects
 				DecorativeObject decorativeObject = tile.getDecorativeObject();
-				if (decorativeObject != null && decorativeObject.getId() == targetObjectId)
+				if (decorativeObject != null && decorativeObject.getId() == objId)
 				{
 					renderObjectHighlight(graphics, decorativeObject.getConvexHull(),
-						decorativeObject.getLocalLocation(), overlayColor);
+						decorativeObject.getLocalLocation(), overlayColor, action);
 				}
 			}
 		}
@@ -126,7 +144,7 @@ public class ObjectHighlightOverlay extends Overlay
 	}
 
 	private void renderObjectHighlight(Graphics2D graphics, Shape hull, LocalPoint localPoint,
-		Color overlayColor)
+		Color overlayColor, String action)
 	{
 		if (hull != null)
 		{
@@ -146,13 +164,13 @@ public class ObjectHighlightOverlay extends Overlay
 		}
 
 		// Render action text above the object
-		if (localPoint != null && objectInteractAction != null)
+		if (localPoint != null && action != null)
 		{
 			Point textPoint = Perspective.getCanvasTextLocation(
-				client, graphics, localPoint, objectInteractAction, TEXT_HEIGHT_OFFSET);
+				client, graphics, localPoint, action, TEXT_HEIGHT_OFFSET);
 			if (textPoint != null)
 			{
-				renderOutlinedText(graphics, textPoint, objectInteractAction, overlayColor);
+				renderOutlinedText(graphics, textPoint, action, overlayColor);
 			}
 		}
 	}
