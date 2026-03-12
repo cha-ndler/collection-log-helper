@@ -44,9 +44,17 @@ public final class SlayerCreatureDatabase
 		// Per-creature Slayer sources + boss variants
 		map.put("crawling hands", Collections.singletonList("Crawling Hand"));
 		map.put("cave crawlers", Collections.singletonList("Cave Crawler"));
+		map.put("rockslugs", Collections.singletonList("Rockslug"));
+		map.put("cockatrices", Collections.singletonList("Cockatrice"));
+		map.put("pyrefiends", Collections.singletonList("Pyrefiend"));
+		map.put("mogres", Collections.singletonList("Mogre"));
+		map.put("basilisks", Arrays.asList("Basilisk", "Basilisk Knight"));
+		map.put("terror dogs", Collections.singletonList("Terror Dog"));
+		map.put("infernal mages", Collections.singletonList("Infernal Mage"));
 		map.put("brine rats", Collections.singletonList("Brine Rat"));
+		map.put("jellies", Collections.singletonList("Jelly"));
+		map.put("lesser nagua", Arrays.asList("Frost Nagua", "Sulphur Nagua", "Earthen Nagua"));
 		map.put("cave horrors", Collections.singletonList("Cave Horror"));
-		map.put("basilisk knights", Collections.singletonList("Basilisk Knight"));
 		map.put("bloodveld", Collections.singletonList("Bloodveld"));
 		map.put("aberrant spectres", Collections.singletonList("Aberrant Spectre"));
 		map.put("dust devils", Collections.singletonList("Dust Devil"));
@@ -54,8 +62,10 @@ public final class SlayerCreatureDatabase
 		map.put("kurask", Collections.singletonList("Kurask"));
 		map.put("skeletal wyverns", Collections.singletonList("Skeletal Wyvern"));
 		map.put("gargoyles", Arrays.asList("Gargoyle", "Grotesque Guardians"));
+		map.put("custodian stalkers", Collections.singletonList("Custodian Stalker"));
+		map.put("aquanites", Collections.singletonList("Aquanite"));
 		map.put("nechryael", Collections.singletonList("Nechryael"));
-		map.put("spiritual creatures", Collections.singletonList("Spiritual Mage"));
+		map.put("spiritual creatures", Arrays.asList("Spiritual Mage", "Spiritual Mage (Zarosian)"));
 		map.put("drakes", Collections.singletonList("Drake"));
 		map.put("abyssal demons", Arrays.asList("Abyssal Demon", "Abyssal Sire"));
 		map.put("cave kraken", Arrays.asList("Cave Kraken", "Kraken"));
@@ -63,7 +73,7 @@ public final class SlayerCreatureDatabase
 		map.put("araxytes", Arrays.asList("Araxyte", "Araxxor"));
 		map.put("smoke devils", Arrays.asList("Smoke Devil", "Thermonuclear smoke devil"));
 		map.put("hydras", Arrays.asList("Hydra", "Alchemical Hydra"));
-		map.put("wyrms", Collections.singletonList("Wyrm"));
+		map.put("wyrms", Arrays.asList("Wyrm", "Lava Strykewyrm"));
 		map.put("turoth", Collections.singletonList("Turoth"));
 		map.put("warped creatures", Collections.singletonList("Warped Creature"));
 		map.put("vampyres", Collections.singletonList("Vyrewatch Sentinel"));
@@ -82,14 +92,25 @@ public final class SlayerCreatureDatabase
 		}
 		SOURCE_TO_CREATURE = Collections.unmodifiableMap(reverseMap);
 
-		// Per-creature Slayer sources that require an active task to kill.
+		// Per-creature Slayer sources where efficiency depends on task assignment.
 		// Boss variants (Sire, Kraken, Cerberus, etc.) are NOT task-only.
 		Set<String> taskOnly = new HashSet<>();
 		taskOnly.add("Crawling Hand");
 		taskOnly.add("Cave Crawler");
-		taskOnly.add("Brine Rat");
-		taskOnly.add("Cave Horror");
+		taskOnly.add("Rockslug");
+		taskOnly.add("Cockatrice");
+		taskOnly.add("Pyrefiend");
+		taskOnly.add("Mogre");
+		taskOnly.add("Basilisk");
 		taskOnly.add("Basilisk Knight");
+		taskOnly.add("Terror Dog");
+		taskOnly.add("Infernal Mage");
+		taskOnly.add("Brine Rat");
+		taskOnly.add("Jelly");
+		taskOnly.add("Frost Nagua");
+		taskOnly.add("Sulphur Nagua");
+		taskOnly.add("Earthen Nagua");
+		taskOnly.add("Cave Horror");
 		taskOnly.add("Bloodveld");
 		taskOnly.add("Aberrant Spectre");
 		taskOnly.add("Dust Devil");
@@ -97,8 +118,11 @@ public final class SlayerCreatureDatabase
 		taskOnly.add("Kurask");
 		taskOnly.add("Skeletal Wyvern");
 		taskOnly.add("Gargoyle");
+		taskOnly.add("Custodian Stalker");
+		taskOnly.add("Aquanite");
 		taskOnly.add("Nechryael");
 		taskOnly.add("Spiritual Mage");
+		taskOnly.add("Spiritual Mage (Zarosian)");
 		taskOnly.add("Drake");
 		taskOnly.add("Abyssal Demon");
 		taskOnly.add("Cave Kraken");
@@ -106,6 +130,7 @@ public final class SlayerCreatureDatabase
 		taskOnly.add("Araxyte");
 		taskOnly.add("Smoke Devil");
 		taskOnly.add("Hydra");
+		taskOnly.add("Lava Strykewyrm");
 		taskOnly.add("Wyrm");
 		taskOnly.add("Turoth");
 		taskOnly.add("Warped Creature");
