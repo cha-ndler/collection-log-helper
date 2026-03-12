@@ -76,7 +76,19 @@
     "travelTip": "Trollheim teleport -> GWD",
     "mutuallyExclusive": true,
     "npcId": 2215,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the God Wars Dungeon and kill General Graardor.",
+        "worldX": 2882,
+        "worldY": 3400,
+        "worldPlane": 0,
+        "worldMessage": "Travel to the God Wars Dungeon and attack General Graardor.",
+        "npcId": 2215,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Commander Zilyana",
@@ -155,7 +167,19 @@
     "travelTip": "Trollheim teleport -> GWD",
     "mutuallyExclusive": true,
     "npcId": 2205,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the God Wars Dungeon and kill Commander Zilyana.",
+        "worldX": 2882,
+        "worldY": 3400,
+        "worldPlane": 0,
+        "worldMessage": "Travel to the God Wars Dungeon and attack Commander Zilyana.",
+        "npcId": 2205,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "K'ril Tsutsaroth",
@@ -234,7 +258,19 @@
     "travelTip": "Trollheim teleport -> GWD",
     "mutuallyExclusive": true,
     "npcId": 3129,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the God Wars Dungeon and kill K'ril Tsutsaroth.",
+        "worldX": 2882,
+        "worldY": 3400,
+        "worldPlane": 0,
+        "worldMessage": "Travel to the God Wars Dungeon and attack K'ril Tsutsaroth.",
+        "npcId": 3129,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Kree'arra",
@@ -313,7 +349,19 @@
     "travelTip": "Trollheim teleport -> GWD",
     "mutuallyExclusive": true,
     "npcId": 3162,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the God Wars Dungeon and kill Kree'arra.",
+        "worldX": 2882,
+        "worldY": 3400,
+        "worldPlane": 0,
+        "worldMessage": "Travel to the God Wars Dungeon and attack Kree'arra.",
+        "npcId": 3162,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Zulrah",
@@ -413,7 +461,19 @@
     "travelTip": "Fairy ring BJS -> boat",
     "mutuallyExclusive": true,
     "npcId": 2042,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Zul-Andra and kill Zulrah.",
+        "worldX": 2268,
+        "worldY": 3069,
+        "worldPlane": 0,
+        "worldMessage": "Travel to Zul-Andra and attack Zulrah.",
+        "npcId": 2042,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Vorkath",
@@ -480,7 +540,19 @@
     "locationDescription": "Rellekka docks (boat to island)",
     "travelTip": "Lunar Isle tele -> Rellekka boat",
     "npcId": 8061,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Rellekka and kill Vorkath.",
+        "worldX": 2640,
+        "worldY": 3693,
+        "worldPlane": 0,
+        "worldMessage": "Travel to Rellekka and attack Vorkath.",
+        "npcId": 8061,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Cerberus",
@@ -559,7 +631,19 @@
     ],
     "mutuallyExclusive": true,
     "npcId": 5862,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Taverley Dungeon and kill Cerberus.",
+        "worldX": 2883,
+        "worldY": 3397,
+        "worldPlane": 0,
+        "worldMessage": "Travel to Taverley Dungeon and attack Cerberus.",
+        "npcId": 5862,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Alchemical Hydra",
@@ -670,7 +754,19 @@
     ],
     "mutuallyExclusive": true,
     "npcId": 8615,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Mount Karuulm and kill the Alchemical Hydra.",
+        "worldX": 1308,
+        "worldY": 3807,
+        "worldPlane": 0,
+        "worldMessage": "Travel to the Karuulm Slayer Dungeon and attack the Alchemical Hydra.",
+        "npcId": 8615,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Corporeal Beast",
@@ -873,7 +969,19 @@
     "travelTip": "Fairy ring DKS -> Weiss",
     "mutuallyExclusive": true,
     "npcId": 12077,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Ancient Prison and kill the Phantom Muspah.",
+        "worldX": 2878,
+        "worldY": 3596,
+        "worldPlane": 0,
+        "worldMessage": "Travel to the Ancient Prison near Weiss and attack the Phantom Muspah.",
+        "npcId": 12077,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Duke Sucellus",
@@ -1352,7 +1460,19 @@
     "travelTip": "Slayer ring -> Slayer Tower",
     "mutuallyExclusive": true,
     "npcId": 7851,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Slayer Tower rooftop and kill the Grotesque Guardians.",
+        "worldX": 3427,
+        "worldY": 3543,
+        "worldPlane": 2,
+        "worldMessage": "Travel to the Slayer Tower rooftop and attack the Grotesque Guardians.",
+        "npcId": 7851,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "The Nightmare",
@@ -1915,7 +2035,19 @@
     ],
     "mutuallyExclusive": true,
     "npcId": 494,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Kraken Cove and kill the Kraken.",
+        "worldX": 2277,
+        "worldY": 3611,
+        "worldPlane": 0,
+        "worldMessage": "Travel to Kraken Cove and attack the Kraken.",
+        "npcId": 494,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Thermonuclear smoke devil",
@@ -1978,7 +2110,19 @@
     "travelTip": "Castle Wars tele -> south",
     "mutuallyExclusive": true,
     "npcId": 499,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Smoke Devil Dungeon and kill the Thermonuclear smoke devil.",
+        "worldX": 2379,
+        "worldY": 9452,
+        "worldPlane": 0,
+        "worldMessage": "Travel to the Smoke Devil Dungeon south of Castle Wars and attack the Thermonuclear smoke devil.",
+        "npcId": 499,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Abyssal Sire",
@@ -8474,41 +8618,6 @@
         }
       ]
     },
-    "guidanceSteps": [
-      {
-        "description": "Travel to Mos Le'Harmless",
-        "worldX": 3811,
-        "worldY": 2992,
-        "worldPlane": 0,
-        "worldMessage": "Travel to Mos Le'Harmless. Use World 304 for active games.",
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Talk to Honest Jimmy to join a game",
-        "worldX": 3811,
-        "worldY": 2992,
-        "worldPlane": 0,
-        "npcId": 4519,
-        "interactAction": "Talk-to",
-        "worldMessage": "Talk to Honest Jimmy to join a Trouble Brewing game.",
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Complete the Trouble Brewing minigame",
-        "worldMessage": "Complete the Trouble Brewing minigame. Games last approximately 20 minutes.",
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Spend Pieces of Eight on rewards",
-        "worldX": 3811,
-        "worldY": 2992,
-        "worldPlane": 0,
-        "npcId": 4519,
-        "interactAction": "Trade",
-        "worldMessage": "Trade with Honest Jimmy to spend your Pieces of Eight on rewards.",
-        "completionCondition": "MANUAL"
-      }
-    ],
     "items": [
       {
         "itemId": 8959,
