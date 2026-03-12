@@ -355,28 +355,29 @@ public class PlayerBankState
 		{
 			return false;
 		}
-		try
+		boolean loaded = false;
+		for (String entry : saved.split(","))
 		{
-			for (String entry : saved.split(","))
+			try
 			{
 				String[] parts = entry.split(":");
 				if (parts.length == 2)
 				{
-					ClueTier tier = ClueTier.valueOf(parts[0]);
-					int count = Integer.parseInt(parts[1]);
+					ClueTier tier = ClueTier.valueOf(parts[0].trim());
+					int count = Integer.parseInt(parts[1].trim());
 					if (count > 0)
 					{
 						map.put(tier, count);
+						loaded = true;
 					}
 				}
 			}
-			return true;
+			catch (IllegalArgumentException e)
+			{
+				log.warn("Skipping invalid cached bank entry '{}' for key {}", entry, key, e);
+			}
 		}
-		catch (Exception e)
-		{
-			log.warn("Failed to parse cached bank data for key {}", key, e);
-			return false;
-		}
+		return loaded;
 	}
 
 	/**
