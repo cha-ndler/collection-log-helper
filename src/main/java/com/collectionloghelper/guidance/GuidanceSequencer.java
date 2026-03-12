@@ -320,7 +320,8 @@ public class GuidanceSequencer
 			0, 0, 0,
 			null,  // worldMessage
 			0, null,  // objectId, objectInteractAction
-			null  // highlightItemIds
+			null,  // highlightItemIds
+			false  // useItemOnObject
 		);
 	}
 

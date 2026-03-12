@@ -20,6 +20,7 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 	private final CollectionLogHelperConfig config;
 
 	private volatile List<Integer> targetItemIds = Collections.emptyList();
+	private volatile boolean useItemOnObject;
 
 	@Inject
 	private ItemHighlightOverlay(CollectionLogHelperConfig config)
@@ -49,6 +50,18 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 		graphics.setColor(color);
 		graphics.setStroke(new BasicStroke(2.0f));
 		graphics.draw(bounds);
+
+		// Draw a small arrow indicator when this item should be used on an object
+		if (useItemOnObject)
+		{
+			graphics.setFont(graphics.getFont().deriveFont(java.awt.Font.BOLD, 10f));
+			graphics.setColor(Color.BLACK);
+			int arrowX = bounds.x + bounds.width - 10;
+			int arrowY = bounds.y + bounds.height - 2;
+			graphics.drawString("\u2192", arrowX + 1, arrowY + 1);
+			graphics.setColor(color);
+			graphics.drawString("\u2192", arrowX, arrowY);
+		}
 	}
 
 	public void setTargetItemIds(List<Integer> itemIds)
@@ -56,8 +69,14 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 		this.targetItemIds = itemIds != null ? itemIds : Collections.emptyList();
 	}
 
+	public void setUseItemOnObject(boolean value)
+	{
+		this.useItemOnObject = value;
+	}
+
 	public void clearTarget()
 	{
 		this.targetItemIds = Collections.emptyList();
+		this.useItemOnObject = false;
 	}
 }
