@@ -837,7 +837,18 @@
     "travelTip": "Games necklace -> Corp",
     "mutuallyExclusive": true,
     "npcId": 319,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Games necklace cave, level 21 Wilderness and attack Corporeal Beast.",
+        "worldX": 2966,
+        "worldY": 3380,
+        "worldPlane": 0,
+        "npcId": 319,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Kalphite Queen",
@@ -900,7 +911,18 @@
     ],
     "mutuallyExclusive": true,
     "npcId": 963,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Kalphite Lair entrance, Kharidian Desert and attack Kalphite Queen.",
+        "worldX": 3226,
+        "worldY": 3108,
+        "worldPlane": 0,
+        "npcId": 963,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Phantom Muspah",
@@ -1081,7 +1103,18 @@
     "travelTip": "Quetzal whistle -> Cam Torum",
     "mutuallyExclusive": true,
     "npcId": 12191,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Duke Sucellus' lair, beneath the Wizards' Tower and attack Duke Sucellus.",
+        "worldX": 2586,
+        "worldY": 3091,
+        "worldPlane": 0,
+        "npcId": 12191,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "The Leviathan",
@@ -1181,7 +1214,18 @@
     "travelTip": "Xeric's talisman -> Heart",
     "mutuallyExclusive": true,
     "npcId": 12214,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Catacombs entrance, Kourend and attack The Leviathan.",
+        "worldX": 3231,
+        "worldY": 2894,
+        "worldPlane": 0,
+        "npcId": 12214,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "The Whisperer",
@@ -1281,7 +1325,18 @@
     "travelTip": "Lassar teleport (ancient)",
     "mutuallyExclusive": true,
     "npcId": 12204,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Lassar Undercity entrance, Ice Mountain and attack The Whisperer.",
+        "worldX": 3007,
+        "worldY": 3477,
+        "worldPlane": 0,
+        "npcId": 12204,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Vardorvis",
@@ -1381,7 +1436,18 @@
     "travelTip": "Slepe teleport (Drakan's)",
     "mutuallyExclusive": true,
     "npcId": 12223,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to The Stranglewood, west of Slepe and attack Vardorvis.",
+        "worldX": 1131,
+        "worldY": 3484,
+        "worldPlane": 0,
+        "npcId": 12223,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Grotesque Guardians",
@@ -1583,7 +1649,18 @@
     "travelTip": "Drakan's medallion -> Slepe",
     "mutuallyExclusive": true,
     "npcId": 9425,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Slepe, east Morytania and attack The Nightmare.",
+        "worldX": 3662,
+        "worldY": 3218,
+        "worldPlane": 0,
+        "npcId": 9425,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Nex",
@@ -1662,7 +1739,18 @@
     "travelTip": "Trollheim teleport -> GWD",
     "mutuallyExclusive": true,
     "npcId": 11278,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to God Wars Dungeon entrance, Trollheim and attack Nex.",
+        "worldX": 2882,
+        "worldY": 3400,
+        "worldPlane": 0,
+        "npcId": 11278,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Sarachnis",
@@ -1717,7 +1805,18 @@
     ],
     "mutuallyExclusive": true,
     "npcId": 8713,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Forthos Dungeon, Hosidius and attack Sarachnis.",
+        "worldX": 1701,
+        "worldY": 3574,
+        "worldPlane": 0,
+        "npcId": 8713,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Giant Mole",
@@ -1756,7 +1855,18 @@
     "locationDescription": "Falador Park",
     "travelTip": "Falador teleport -> park",
     "npcId": 5779,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Falador Park and attack Giant Mole.",
+        "worldX": 2987,
+        "worldY": 3376,
+        "worldPlane": 0,
+        "npcId": 5779,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Bryophyta",
@@ -1885,7 +1995,18 @@
     "travelTip": "Lunar Isle tele -> Rellekka",
     "mutuallyExclusive": true,
     "npcId": 2267,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Waterbirth Island, Rellekka and attack Dagannoth Rex.",
+        "worldX": 2521,
+        "worldY": 3740,
+        "worldPlane": 0,
+        "npcId": 2267,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Dagannoth Prime",
@@ -1932,7 +2053,18 @@
     "travelTip": "Lunar Isle tele -> Rellekka",
     "mutuallyExclusive": true,
     "npcId": 2266,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Waterbirth Island, Rellekka and attack Dagannoth Prime.",
+        "worldX": 2521,
+        "worldY": 3740,
+        "worldPlane": 0,
+        "npcId": 2266,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Dagannoth Supreme",
@@ -1979,7 +2111,18 @@
     "travelTip": "Lunar Isle tele -> Rellekka",
     "mutuallyExclusive": true,
     "npcId": 2265,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Waterbirth Island, Rellekka and attack Dagannoth Supreme.",
+        "worldX": 2521,
+        "worldY": 3740,
+        "worldPlane": 0,
+        "npcId": 2265,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Kraken",
@@ -2217,7 +2360,18 @@
     "travelTip": "Fairy ring DIP",
     "mutuallyExclusive": true,
     "npcId": 5886,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Abyssal Nexus, fairy ring DIP and attack Abyssal Sire.",
+        "worldX": 3039,
+        "worldY": 4763,
+        "worldPlane": 0,
+        "npcId": 5886,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "King Black Dragon",
@@ -2265,7 +2419,18 @@
     "travelTip": "Burning amulet -> Lava Maze",
     "mutuallyExclusive": true,
     "npcId": 239,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to King Black Dragon Lair, Wilderness and attack King Black Dragon.",
+        "worldX": 3005,
+        "worldY": 3849,
+        "worldPlane": 0,
+        "npcId": 239,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Chaos Elemental",
@@ -2304,7 +2469,18 @@
     "travelTip": "Burning amulet -> Lava Maze",
     "mutuallyExclusive": true,
     "npcId": 2054,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Rogues' Castle, deep Wilderness and attack Chaos Elemental.",
+        "worldX": 3281,
+        "worldY": 3910,
+        "worldPlane": 0,
+        "npcId": 2054,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Scorpia",
@@ -2352,7 +2528,18 @@
     "mutuallyExclusive": true,
     "afkLevel": 1,
     "npcId": 6615,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Scorpia's Cave, deep Wilderness and attack Scorpia.",
+        "worldX": 3233,
+        "worldY": 3945,
+        "worldPlane": 0,
+        "npcId": 6615,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Chaos Fanatic",
@@ -2392,7 +2579,18 @@
     "travelTip": "Burning amulet -> Lava Maze",
     "mutuallyExclusive": true,
     "npcId": 6619,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to West of Lava Maze, Wilderness and attack Chaos Fanatic.",
+        "worldX": 2981,
+        "worldY": 3834,
+        "worldPlane": 0,
+        "npcId": 6619,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Venenatis",
@@ -2455,7 +2653,18 @@
     "travelTip": "Burning amulet -> Bandit Camp",
     "mutuallyExclusive": true,
     "npcId": 6610,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Venenatis' Cave, Wilderness and attack Venenatis.",
+        "worldX": 3344,
+        "worldY": 3734,
+        "worldPlane": 0,
+        "npcId": 6610,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Vet'ion",
@@ -2518,7 +2727,18 @@
     "travelTip": "Burning amulet -> Bandit Camp",
     "mutuallyExclusive": true,
     "npcId": 6611,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Vet'ion's Rest, Wilderness and attack Vet'ion.",
+        "worldX": 3220,
+        "worldY": 3783,
+        "worldPlane": 0,
+        "npcId": 6611,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Callisto",
@@ -2581,7 +2801,18 @@
     "travelTip": "Burning amulet -> Lava Maze",
     "mutuallyExclusive": true,
     "npcId": 6609,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Callisto's Den, Wilderness and attack Callisto.",
+        "worldX": 3292,
+        "worldY": 3834,
+        "worldPlane": 0,
+        "npcId": 6609,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Demonic gorillas",
@@ -2648,7 +2879,18 @@
     "locationDescription": "Crash Site Cavern, Gnome Stronghold",
     "travelTip": "Spirit tree -> Stronghold",
     "npcId": 7144,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Crash Site Cavern, Gnome Stronghold and attack Demonic gorillas.",
+        "worldX": 2405,
+        "worldY": 3419,
+        "worldPlane": 0,
+        "npcId": 7144,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Lizardman shaman",
@@ -2670,7 +2912,18 @@
     "locationDescription": "Lizardman Canyon, Shayzien",
     "travelTip": "Xeric's talisman -> Lookout",
     "npcId": 6766,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Lizardman Canyon, Shayzien and attack Lizardman shaman.",
+        "worldX": 1472,
+        "worldY": 3686,
+        "worldPlane": 0,
+        "npcId": 6766,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Skotizo",
@@ -2732,7 +2985,18 @@
       }
     ],
     "npcId": 7286,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Catacombs of Kourend (requires Dark totem from Catacomb monsters) and attack Skotizo.",
+        "worldX": 1636,
+        "worldY": 3673,
+        "worldPlane": 0,
+        "npcId": 7286,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Hespori",
@@ -3431,6 +3695,17 @@
       "enter",
       "corrupted",
       "challenge"
+    ],
+    "guidanceSteps": [
+      {
+        "description": "Travel to The Gauntlet, Prifddinas and attack Corrupted Gauntlet.",
+        "worldX": 3230,
+        "worldY": 6073,
+        "worldPlane": 0,
+        "npcId": 9020,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL"
+      }
     ]
   },
   {
@@ -3497,6 +3772,17 @@
     "dialogOptions": [
       "enter",
       "challenge"
+    ],
+    "guidanceSteps": [
+      {
+        "description": "Travel to The Gauntlet, Prifddinas and attack The Gauntlet.",
+        "worldX": 3230,
+        "worldY": 6073,
+        "worldPlane": 0,
+        "npcId": 9020,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL"
+      }
     ]
   },
   {
@@ -3827,7 +4113,18 @@
     "locationDescription": "Tempoross Cove, south of Al Kharid",
     "travelTip": "Grouping tele -> Tempoross",
     "npcId": 10584,
-    "interactAction": "Talk-to"
+    "interactAction": "Talk-to",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Tempoross Cove, south of Al Kharid and attack Tempoross.",
+        "worldX": 3135,
+        "worldY": 2840,
+        "worldPlane": 0,
+        "npcId": 10584,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Wintertodt",
@@ -3923,7 +4220,18 @@
     "rollsPerKill": 10,
     "afkLevel": 1,
     "npcId": 7374,
-    "interactAction": "Talk-to"
+    "interactAction": "Talk-to",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Wintertodt Camp, northern Zeah and attack Wintertodt.",
+        "worldX": 1621,
+        "worldY": 3997,
+        "worldPlane": 0,
+        "npcId": 7374,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Zalcano",
@@ -4073,6 +4381,17 @@
       "enter",
       "fight",
       "challenge"
+    ],
+    "guidanceSteps": [
+      {
+        "description": "Travel to Fortis Colosseum, Varlamore and attack Sol Heredit.",
+        "worldX": 1794,
+        "worldY": 3107,
+        "worldPlane": 0,
+        "npcId": 12807,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL"
+      }
     ]
   },
   {
@@ -4206,7 +4525,18 @@
     "travelTip": "Drakan's medallion -> Darkmeyer",
     "mutuallyExclusive": true,
     "npcId": 13668,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Morytania Spider Cave and attack Araxxor.",
+        "worldX": 3686,
+        "worldY": 3426,
+        "worldPlane": 0,
+        "npcId": 13668,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Perilous Moons",
@@ -5207,7 +5537,18 @@
       }
     ],
     "npcId": 426,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Fremennik Slayer Dungeon and attack Turoth.",
+        "worldX": 2722,
+        "worldY": 10002,
+        "worldPlane": 0,
+        "npcId": 426,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Warped Creature",
@@ -5273,7 +5614,18 @@
       }
     ],
     "npcId": 3209,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Mos Le'Harmless Cave and attack Cave Horror.",
+        "worldX": 3740,
+        "worldY": 9373,
+        "worldPlane": 0,
+        "npcId": 3209,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Aberrant Spectre",
@@ -5343,7 +5695,18 @@
       }
     ],
     "npcId": 9293,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Jormungand's Prison, Island of Stone and attack Basilisk Knight.",
+        "worldX": 2456,
+        "worldY": 4240,
+        "worldPlane": 0,
+        "npcId": 9293,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Wyrm",
@@ -5398,7 +5761,18 @@
       }
     ],
     "npcId": 8610,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Karuulm Slayer Dungeon, Mount Karuulm and attack Wyrm.",
+        "worldX": 1311,
+        "worldY": 10205,
+        "worldPlane": 0,
+        "npcId": 8610,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Lava Strykewyrm",
@@ -5462,7 +5836,18 @@
       }
     ],
     "npcId": 423,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Smoke Dungeon, Kharidian Desert and attack Dust Devil.",
+        "worldX": 3310,
+        "worldY": 2962,
+        "worldPlane": 0,
+        "npcId": 423,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Fossil Island Wyvern",
@@ -5512,7 +5897,18 @@
       }
     ],
     "npcId": 7794,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Wyvern Cave, Fossil Island and attack Fossil Island Wyvern.",
+        "worldX": 3602,
+        "worldY": 10290,
+        "worldPlane": 0,
+        "npcId": 7794,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Kurask",
@@ -5559,7 +5955,18 @@
       }
     ],
     "npcId": 410,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Fremennik Slayer Dungeon and attack Kurask.",
+        "worldX": 2701,
+        "worldY": 9992,
+        "worldPlane": 0,
+        "npcId": 410,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Skeletal Wyvern",
@@ -5598,7 +6005,18 @@
       }
     ],
     "npcId": 465,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Asgarnian Ice Dungeon and attack Skeletal Wyvern.",
+        "worldX": 3008,
+        "worldY": 3150,
+        "worldPlane": 0,
+        "npcId": 465,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Gargoyle",
@@ -5645,7 +6063,18 @@
       }
     ],
     "npcId": 412,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Slayer Tower top floor, Morytania and attack Gargoyle.",
+        "worldX": 3429,
+        "worldY": 3534,
+        "worldPlane": 2,
+        "npcId": 412,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Custodian Stalker",
@@ -5753,7 +6182,18 @@
       }
     ],
     "npcId": 11,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Slayer Tower top floor, Morytania and attack Nechryael.",
+        "worldX": 3442,
+        "worldY": 3558,
+        "worldPlane": 2,
+        "npcId": 11,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Spiritual Mage",
@@ -5882,7 +6322,18 @@
       }
     ],
     "npcId": 8612,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Karuulm Slayer Dungeon, Mount Karuulm and attack Drake.",
+        "worldX": 1310,
+        "worldY": 10057,
+        "worldPlane": 0,
+        "npcId": 8612,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Abyssal Demon",
@@ -5929,7 +6380,18 @@
       }
     ],
     "npcId": 415,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Slayer Tower top floor, Morytania and attack Abyssal Demon.",
+        "worldX": 3418,
+        "worldY": 3560,
+        "worldPlane": 2,
+        "npcId": 415,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Cave Kraken",
@@ -5968,7 +6430,18 @@
       }
     ],
     "npcId": 492,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Kraken Cove and attack Cave Kraken.",
+        "worldX": 2278,
+        "worldY": 3611,
+        "worldPlane": 0,
+        "npcId": 492,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Dark Beast",
@@ -5999,7 +6472,18 @@
       }
     ],
     "npcId": 4005,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Iorwerth Dungeon, Prifddinas and attack Dark Beast.",
+        "worldX": 1920,
+        "worldY": 4672,
+        "worldPlane": 0,
+        "npcId": 4005,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Araxyte",
@@ -6029,7 +6513,18 @@
       }
     ],
     "npcId": 13667,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Araxyte Cave, north-east of Darkmeyer and attack Araxyte.",
+        "worldX": 3657,
+        "worldY": 3407,
+        "worldPlane": 0,
+        "npcId": 13667,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Smoke Devil",
@@ -6060,7 +6555,18 @@
       }
     ],
     "npcId": 498,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Smoke Devil Dungeon and attack Smoke Devil.",
+        "worldX": 2412,
+        "worldY": 3061,
+        "worldPlane": 0,
+        "npcId": 498,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Hydra",
@@ -6115,7 +6621,18 @@
       }
     ],
     "npcId": 8609,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Karuulm Slayer Dungeon, lower level and attack Hydra.",
+        "worldX": 1310,
+        "worldY": 10190,
+        "worldPlane": 0,
+        "npcId": 8609,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Vyrewatch Sentinel",
@@ -6143,7 +6660,18 @@
       }
     ],
     "npcId": 9756,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Darkmeyer, Morytania and attack Vyrewatch Sentinel.",
+        "worldX": 3631,
+        "worldY": 3325,
+        "worldPlane": 0,
+        "npcId": 9756,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Brimstone Chest",
@@ -6637,6 +7165,17 @@
     "dialogOptions": [
       "enter",
       "join"
+    ],
+    "guidanceSteps": [
+      {
+        "description": "Travel to Temple of the Eye, accessed via portal in Wizards' Tower basement and attack Guardians of the Rift.",
+        "worldX": 3109,
+        "worldY": 3168,
+        "worldPlane": 0,
+        "npcId": 12179,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL"
+      }
     ]
   },
   {
@@ -12652,7 +13191,18 @@
     ],
     "mutuallyExclusive": true,
     "npcId": 13958,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to The Darkfrost, Hailstorm Mountains in Varlamore and attack The Hueycoatl.",
+        "worldX": 1509,
+        "worldY": 3290,
+        "worldPlane": 0,
+        "npcId": 13958,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Yama",
@@ -13068,7 +13618,18 @@
       }
     ],
     "npcId": 7222,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Varrock Sewers and attack Scurrius.",
+        "worldX": 3299,
+        "worldY": 9867,
+        "worldPlane": 0,
+        "npcId": 7222,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "The Fight Caves",
@@ -13104,6 +13665,17 @@
     "dialogOptions": [
       "I want to fight",
       "fight"
+    ],
+    "guidanceSteps": [
+      {
+        "description": "Travel to Mor Ul Rek, Karamja Volcano and attack The Fight Caves.",
+        "worldX": 2439,
+        "worldY": 5172,
+        "worldPlane": 0,
+        "npcId": 2180,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL"
+      }
     ]
   },
   {
@@ -13140,6 +13712,17 @@
     "dialogOptions": [
       "fight",
       "enter"
+    ],
+    "guidanceSteps": [
+      {
+        "description": "Travel to Mor Ul Rek, Karamja Volcano and attack The Inferno.",
+        "worldX": 2496,
+        "worldY": 5122,
+        "worldPlane": 0,
+        "npcId": 7690,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL"
+      }
     ]
   },
   {
