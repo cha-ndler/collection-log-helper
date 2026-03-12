@@ -8474,6 +8474,41 @@
         }
       ]
     },
+    "guidanceSteps": [
+      {
+        "description": "Travel to Mos Le'Harmless",
+        "worldX": 3811,
+        "worldY": 2992,
+        "worldPlane": 0,
+        "worldMessage": "Travel to Mos Le'Harmless. Use World 304 for active games.",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Talk to Honest Jimmy to join a game",
+        "worldX": 3811,
+        "worldY": 2992,
+        "worldPlane": 0,
+        "npcId": 4519,
+        "interactAction": "Talk-to",
+        "worldMessage": "Talk to Honest Jimmy to join a Trouble Brewing game.",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete the Trouble Brewing minigame",
+        "worldMessage": "Complete the Trouble Brewing minigame. Games last approximately 20 minutes.",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Spend Pieces of Eight on rewards",
+        "worldX": 3811,
+        "worldY": 2992,
+        "worldPlane": 0,
+        "npcId": 4519,
+        "interactAction": "Trade",
+        "worldMessage": "Trade with Honest Jimmy to spend your Pieces of Eight on rewards.",
+        "completionCondition": "MANUAL"
+      }
+    ],
     "items": [
       {
         "itemId": 8959,
