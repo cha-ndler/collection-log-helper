@@ -103,6 +103,10 @@ Sources that require multiple actions (e.g., obtain a key, then enter a dungeon,
 | `completionItemId` | int | No | Item ID for `ITEM_OBTAINED` or `INVENTORY_HAS_ITEM` checks |
 | `completionDistance` | int | No | Tile distance threshold for `ARRIVE_AT_TILE` (default: 5) |
 | `completionNpcId` | int | No | NPC ID for `NPC_TALKED_TO` checks |
+| `worldMessage` | string | No | Chat message displayed when this step activates |
+| `objectId` | int | No | Game object ID to highlight at this step's location |
+| `objectInteractAction` | string | No | Right-click action to display on the highlighted object |
+| `highlightItemIds` | array of int | No | Item IDs to highlight in the player's inventory during this step |
 
 **Completion conditions:**
 - `ITEM_OBTAINED` — Auto-advances when the item appears in the collection log
