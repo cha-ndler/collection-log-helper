@@ -1004,6 +1004,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
+		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
 		activeMapPoint = null;
