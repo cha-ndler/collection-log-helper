@@ -55,6 +55,9 @@ public class GuidanceStep
 	/** Right-click action to display on the highlighted object (e.g., "Chop", "Mine"). */
 	String objectInteractAction;
 
+	/** Item IDs to highlight in the player's inventory during this step. */
+	List<Integer> highlightItemIds;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
