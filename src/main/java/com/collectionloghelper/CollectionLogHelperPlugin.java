@@ -38,6 +38,9 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.MenuAction;
+import net.runelite.api.WorldEntity;
+import net.runelite.api.WorldView;
+import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.InventoryID;
 import net.runelite.api.events.ChatMessage;
@@ -606,13 +609,13 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Cache player location for the EDT's proximity view (client thread only).
-		// Proximity uses distanceTo2D() which ignores plane, so even boat-local
-		// coords while sailing will produce usable (approximate) distances.
-		// TODO: Transform sailing coords via WorldEntity for exact positions.
-		// Ref: LlemonDuck/sailing SailingUtil, sololegends/runelite-friend-finder
+		// When sailing, the player is inside a WorldEntity whose inner WorldView
+		// returns boat-local coords.  Detect this and transform to real-world
+		// coordinates via WorldEntity.transformToMainWorld().
+		// Ref: LlemonDuck/sailing SailingUtil, RuneLite WorldEntity API
 		if (client.getLocalPlayer() != null)
 		{
-			cachedPlayerLocation = client.getLocalPlayer().getWorldLocation();
+			cachedPlayerLocation = resolvePlayerWorldLocation();
 
 			// Check ARRIVE_AT_TILE completion for guidance sequencer
 			if (guidanceSequencer.isActive())
@@ -1110,6 +1113,55 @@ public class CollectionLogHelperPlugin extends Plugin
 				}
 			}
 		}
+	}
+
+	/**
+	 * Resolve the player's real-world location, transforming boat-local
+	 * coordinates when the player is inside a sailing WorldEntity.
+	 *
+	 * When sailing, the player's WorldView is the boat's inner view (not
+	 * top-level).  We find the owning WorldEntity and use
+	 * {@code transformToMainWorld} to map the player's local point back to
+	 * overworld coordinates.
+	 *
+	 * Falls back to the plain {@code getWorldLocation()} if the WorldEntity
+	 * API is unavailable (older RuneLite) or on any error.
+	 */
+	private WorldPoint resolvePlayerWorldLocation()
+	{
+		WorldPoint fallback = client.getLocalPlayer().getWorldLocation();
+		try
+		{
+			WorldView playerView = client.getLocalPlayer().getWorldView();
+			if (playerView == null || playerView.isTopLevel())
+			{
+				return fallback;
+			}
+
+			// Player is inside a non-top-level WorldView (e.g. a sailing boat).
+			// Find the WorldEntity whose inner WorldView matches the player's.
+			WorldView topLevel = client.getTopLevelWorldView();
+			for (WorldEntity entity : topLevel.worldEntities())
+			{
+				if (entity.getWorldView() == playerView)
+				{
+					LocalPoint playerLocal = client.getLocalPlayer().getLocalLocation();
+					LocalPoint mainLocal = entity.transformToMainWorld(playerLocal);
+					if (mainLocal != null)
+					{
+						return WorldPoint.fromLocal(topLevel,
+							mainLocal.getX(), mainLocal.getY(),
+							topLevel.getPlane());
+					}
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			// WorldEntity API may not be available; fall back silently.
+		}
+		return fallback;
 	}
 
 	@Provides
