@@ -1,6 +1,9 @@
 package com.collectionloghelper.data;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lombok.Value;
 
 /**
@@ -40,6 +43,9 @@ public class GuidanceStep
 	/** Item ID used for ITEM_OBTAINED or INVENTORY_HAS_ITEM completion checks. */
 	int completionItemId;
 
+	/** Required quantity for INVENTORY_HAS_ITEM checks (0 or 1 = any quantity). */
+	int completionItemCount;
+
 	/** Tile distance threshold for ARRIVE_AT_TILE completion (default 5). */
 	int completionDistance;
 
@@ -52,6 +58,9 @@ public class GuidanceStep
 	/** Game object ID to highlight for this step (0 = no object). */
 	int objectId;
 
+	/** Additional object IDs to highlight (e.g., both team variants in Trouble Brewing). */
+	List<Integer> objectIds;
+
 	/** Right-click action to display on the highlighted object (e.g., "Chop", "Mine"). */
 	String objectInteractAction;
 
@@ -61,8 +70,42 @@ public class GuidanceStep
 	/** When true, overlays show "Use X on Y" style prompts instead of simple action labels. */
 	boolean useItemOnObject;
 
+	/** 1-indexed step number to loop back to when this step completes (0 = no loop). */
+	int loopBackToStep;
+
+	/** Total number of loop iterations before advancing past this step (0 = no loop). */
+	int loopCount;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
+	}
+
+	public int getCompletionItemCount()
+	{
+		return completionItemCount > 0 ? completionItemCount : 1;
+	}
+
+	/**
+	 * Returns all object IDs to highlight, combining objectId and objectIds.
+	 */
+	public Set<Integer> getAllObjectIds()
+	{
+		Set<Integer> ids = new HashSet<>();
+		if (objectId > 0)
+		{
+			ids.add(objectId);
+		}
+		if (objectIds != null)
+		{
+			for (int id : objectIds)
+			{
+				if (id > 0)
+				{
+					ids.add(id);
+				}
+			}
+		}
+		return ids.isEmpty() ? Collections.emptySet() : ids;
 	}
 }

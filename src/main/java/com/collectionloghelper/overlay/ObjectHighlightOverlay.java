@@ -11,6 +11,8 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.util.Collections;
+import java.util.Set;
 import javax.inject.Inject;
 import net.runelite.api.Client;
 import net.runelite.api.DecorativeObject;
@@ -35,7 +37,7 @@ public class ObjectHighlightOverlay extends Overlay
 	private final Client client;
 	private final CollectionLogHelperConfig config;
 
-	private volatile int targetObjectId;
+	private volatile Set<Integer> targetObjectIds = Collections.emptySet();
 	private volatile String objectInteractAction;
 	private volatile boolean useItemOnObject;
 
@@ -50,7 +52,12 @@ public class ObjectHighlightOverlay extends Overlay
 
 	public void setTargetObjectId(int objectId)
 	{
-		this.targetObjectId = objectId;
+		this.targetObjectIds = objectId > 0 ? Set.of(objectId) : Collections.emptySet();
+	}
+
+	public void setTargetObjectIds(Set<Integer> objectIds)
+	{
+		this.targetObjectIds = objectIds != null ? objectIds : Collections.emptySet();
 	}
 
 	public void setObjectInteractAction(String action)
@@ -65,7 +72,7 @@ public class ObjectHighlightOverlay extends Overlay
 
 	public void clearTarget()
 	{
-		this.targetObjectId = 0;
+		this.targetObjectIds = Collections.emptySet();
 		this.objectInteractAction = null;
 		this.useItemOnObject = false;
 	}
@@ -74,11 +81,11 @@ public class ObjectHighlightOverlay extends Overlay
 	public Dimension render(Graphics2D graphics)
 	{
 		// Snapshot volatile fields to prevent thread-safety races
-		final int objId = this.targetObjectId;
+		final Set<Integer> objIds = this.targetObjectIds;
 		final String action = this.objectInteractAction;
 		final boolean useItem = this.useItemOnObject;
 
-		if (objId <= 0)
+		if (objIds.isEmpty())
 		{
 			return null;
 		}
@@ -122,7 +129,7 @@ public class ObjectHighlightOverlay extends Overlay
 				{
 					for (GameObject gameObject : gameObjects)
 					{
-						if (gameObject != null && gameObject.getId() == objId)
+						if (gameObject != null && objIds.contains(gameObject.getId()))
 						{
 							renderObjectHighlight(graphics, gameObject.getConvexHull(),
 								gameObject.getLocalLocation(), overlayColor, action, useItem);
@@ -132,7 +139,7 @@ public class ObjectHighlightOverlay extends Overlay
 
 				// Check wall objects
 				WallObject wallObject = tile.getWallObject();
-				if (wallObject != null && wallObject.getId() == objId)
+				if (wallObject != null && objIds.contains(wallObject.getId()))
 				{
 					renderObjectHighlight(graphics, wallObject.getConvexHull(),
 						wallObject.getLocalLocation(), overlayColor, action, useItem);
@@ -140,7 +147,7 @@ public class ObjectHighlightOverlay extends Overlay
 
 				// Check decorative objects
 				DecorativeObject decorativeObject = tile.getDecorativeObject();
-				if (decorativeObject != null && decorativeObject.getId() == objId)
+				if (decorativeObject != null && objIds.contains(decorativeObject.getId()))
 				{
 					renderObjectHighlight(graphics, decorativeObject.getConvexHull(),
 						decorativeObject.getLocalLocation(), overlayColor, action, useItem);
