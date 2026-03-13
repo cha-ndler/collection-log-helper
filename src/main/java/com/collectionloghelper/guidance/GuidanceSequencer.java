@@ -3,6 +3,7 @@ package com.collectionloghelper.guidance;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.CompletionCondition;
 import com.collectionloghelper.data.GuidanceStep;
+import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
 import java.util.List;
 import java.util.function.Consumer;
@@ -25,19 +26,32 @@ public class GuidanceSequencer
 	private static final int GE_BANK_PLANE = 0;
 
 	private final PlayerInventoryState inventoryState;
+	private final PlayerCollectionState collectionState;
 
+	private volatile WorldPoint lastKnownPlayerLocation;
 	private volatile CollectionLogSource activeSource;
 	private volatile List<GuidanceStep> steps;
 	private volatile int currentIndex;
 	private volatile boolean active;
+	private volatile int loopIterationsCompleted;
 
 	private Consumer<GuidanceStep> onStepChanged;
 	private Runnable onSequenceComplete;
 
 	@Inject
-	private GuidanceSequencer(PlayerInventoryState inventoryState)
+	private GuidanceSequencer(PlayerInventoryState inventoryState, PlayerCollectionState collectionState)
 	{
 		this.inventoryState = inventoryState;
+		this.collectionState = collectionState;
+	}
+
+	/**
+	 * Sets the player's current location for ARRIVE_AT_TILE pre-checks.
+	 * Should be called before startSequence().
+	 */
+	public void setPlayerLocation(WorldPoint location)
+	{
+		this.lastKnownPlayerLocation = location;
 	}
 
 	/**
@@ -50,6 +64,7 @@ public class GuidanceSequencer
 		this.activeSource = source;
 		this.steps = source.getGuidanceSteps();
 		this.currentIndex = 0;
+		this.loopIterationsCompleted = 0;
 		this.onStepChanged = stepChanged;
 		this.onSequenceComplete = sequenceComplete;
 		this.active = true;
@@ -138,6 +153,11 @@ public class GuidanceSequencer
 		return activeSource;
 	}
 
+	public int getLoopIterationsCompleted()
+	{
+		return loopIterationsCompleted;
+	}
+
 	/**
 	 * Called when a collection log item is obtained. Checks ITEM_OBTAINED condition.
 	 */
@@ -169,13 +189,25 @@ public class GuidanceSequencer
 		}
 
 		GuidanceStep step = getRawCurrentStep();
-		if (step != null && step.getCompletionCondition() == CompletionCondition.INVENTORY_HAS_ITEM
-			&& step.getCompletionItemId() > 0
-			&& inventoryState.hasItem(step.getCompletionItemId()))
+		if (step != null && step.getCompletionItemId() > 0)
 		{
-			log.info("Step {} complete (INVENTORY_HAS_ITEM: {})", currentIndex + 1, step.getCompletionItemId());
-			advanceStep();
-			return;
+			if (step.getCompletionCondition() == CompletionCondition.INVENTORY_HAS_ITEM
+				&& inventoryState.hasItemCount(step.getCompletionItemId(), step.getCompletionItemCount()))
+			{
+				log.info("Step {} complete (INVENTORY_HAS_ITEM: {} x{})",
+					currentIndex + 1, step.getCompletionItemId(), step.getCompletionItemCount());
+				advanceStep();
+				return;
+			}
+
+			if (step.getCompletionCondition() == CompletionCondition.INVENTORY_NOT_HAS_ITEM
+				&& !inventoryState.hasItem(step.getCompletionItemId()))
+			{
+				log.info("Step {} complete (INVENTORY_NOT_HAS_ITEM: {})",
+					currentIndex + 1, step.getCompletionItemId());
+				advanceStep();
+				return;
+			}
 		}
 
 		// Re-notify step changed in case bank routing status changed
@@ -197,14 +229,31 @@ public class GuidanceSequencer
 		}
 
 		GuidanceStep step = getRawCurrentStep();
-		if (step != null && step.getCompletionCondition() == CompletionCondition.ARRIVE_AT_TILE
+		if (step == null)
+		{
+			return;
+		}
+
+		if (step.getCompletionCondition() == CompletionCondition.ARRIVE_AT_TILE
 			&& step.getWorldX() > 0)
 		{
 			WorldPoint stepPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
-			if (playerLocation.distanceTo2D(stepPoint) <= step.getCompletionDistance())
+			int dist = playerLocation.distanceTo2D(stepPoint);
+			if (playerLocation.getPlane() == step.getWorldPlane()
+				&& dist <= step.getCompletionDistance())
 			{
-				log.info("Step {} complete (ARRIVE_AT_TILE: within {} tiles)",
-					currentIndex + 1, step.getCompletionDistance());
+				log.info("Step {} complete (ARRIVE_AT_TILE: within {} tiles, plane {})",
+					currentIndex + 1, step.getCompletionDistance(), step.getWorldPlane());
+				advanceStep();
+			}
+		}
+
+		if (step.getCompletionCondition() == CompletionCondition.PLAYER_ON_PLANE)
+		{
+			if (playerLocation.getPlane() == step.getWorldPlane())
+			{
+				log.info("Step {} complete (PLAYER_ON_PLANE: plane {})",
+					currentIndex + 1, step.getWorldPlane());
 				advanceStep();
 			}
 		}
@@ -237,6 +286,33 @@ public class GuidanceSequencer
 		if (!active || steps == null)
 		{
 			return;
+		}
+
+		// Check if the completing step has a loop
+		GuidanceStep completingStep = getRawCurrentStep();
+		if (completingStep != null && completingStep.getLoopBackToStep() > 0 && completingStep.getLoopCount() > 0)
+		{
+			loopIterationsCompleted++;
+			if (loopIterationsCompleted < completingStep.getLoopCount())
+			{
+				int targetIndex = completingStep.getLoopBackToStep() - 1; // convert 1-indexed to 0-indexed
+				log.info("Loop iteration {}/{} complete — looping back to step {}",
+					loopIterationsCompleted, completingStep.getLoopCount(), completingStep.getLoopBackToStep());
+				currentIndex = targetIndex;
+				skipSatisfiedSteps();
+				if (active)
+				{
+					GuidanceStep step = getCurrentStep();
+					if (step != null)
+					{
+						log.info("Resumed at step {}/{}: {}", currentIndex + 1, steps.size(), step.getDescription());
+						notifyStepChanged(step);
+					}
+				}
+				return;
+			}
+			log.info("All {} loop iterations complete — advancing past loop", completingStep.getLoopCount());
+			loopIterationsCompleted = 0;
 		}
 
 		currentIndex++;
@@ -302,7 +378,21 @@ public class GuidanceSequencer
 		switch (step.getCompletionCondition())
 		{
 			case INVENTORY_HAS_ITEM:
-				return step.getCompletionItemId() > 0 && inventoryState.hasItem(step.getCompletionItemId());
+				return step.getCompletionItemId() > 0
+					&& inventoryState.hasItemCount(step.getCompletionItemId(), step.getCompletionItemCount());
+			case INVENTORY_NOT_HAS_ITEM:
+				return step.getCompletionItemId() > 0 && !inventoryState.hasItem(step.getCompletionItemId());
+			case ITEM_OBTAINED:
+				return step.getCompletionItemId() > 0 && collectionState.isItemObtained(step.getCompletionItemId());
+			case ARRIVE_AT_TILE:
+				return lastKnownPlayerLocation != null && step.getWorldX() > 0
+					&& lastKnownPlayerLocation.getPlane() == step.getWorldPlane()
+					&& lastKnownPlayerLocation.distanceTo2D(
+						new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane()))
+					<= step.getCompletionDistance();
+			case PLAYER_ON_PLANE:
+				return lastKnownPlayerLocation != null
+					&& lastKnownPlayerLocation.getPlane() == step.getWorldPlane();
 			default:
 				return false;
 		}
@@ -317,11 +407,12 @@ public class GuidanceSequencer
 			"Grand Exchange bank",
 			null,
 			CompletionCondition.MANUAL,
-			0, 0, 0,
+			0, 0, 0, 0,
 			null,  // worldMessage
-			0, null,  // objectId, objectInteractAction
+			0, null, null,  // objectId, objectIds, objectInteractAction
 			null,  // highlightItemIds
-			false  // useItemOnObject
+			false,  // useItemOnObject
+			0, 0   // loopBackToStep, loopCount
 		);
 	}
 

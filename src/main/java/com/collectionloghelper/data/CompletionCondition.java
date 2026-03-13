@@ -17,6 +17,12 @@ public enum CompletionCondition
 	/** Step completes when the player interacts with a specific NPC. */
 	NPC_TALKED_TO,
 
+	/** Step completes when the player's inventory no longer contains a specific item. */
+	INVENTORY_NOT_HAS_ITEM,
+
+	/** Step completes when the player reaches the target world plane (ignores XY). */
+	PLAYER_ON_PLANE,
+
 	/** Step must be manually advanced by the player via the panel. */
 	MANUAL
 }

@@ -9953,29 +9953,77 @@
         "worldY": 2992,
         "worldPlane": 0,
         "worldMessage": "Travel to Mos Le'Harmless. Use World 304 for active games.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
       },
       {
         "description": "Talk to Honest Jimmy to join a game",
         "worldX": 3811,
         "worldY": 2992,
         "worldPlane": 0,
-        "npcId": 4519,
-        "interactAction": "Talk-to",
+        "npcId": 1816,
+        "interactAction": "Join-Team",
         "worldMessage": "Talk to Honest Jimmy to join a Trouble Brewing game.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "NPC_TALKED_TO",
+        "completionNpcId": 1816
       },
       {
-        "description": "Complete the Trouble Brewing minigame",
-        "worldMessage": "Complete the Trouble Brewing minigame. Games last approximately 20 minutes.",
-        "completionCondition": "MANUAL"
+        "description": "Take 25 buckets from the workbench",
+        "objectId": 15934,
+        "objectInteractAction": "Take",
+        "worldMessage": "Take 25 buckets from the workbench.",
+        "completionCondition": "INVENTORY_HAS_ITEM",
+        "completionItemId": 1925,
+        "completionItemCount": 25
+      },
+      {
+        "description": "Fill buckets at the water pump",
+        "objectId": 15936,
+        "objectInteractAction": "Use",
+        "highlightItemIds": [1925],
+        "useItemOnObject": true,
+        "worldMessage": "Use buckets on the water pump to fill them.",
+        "completionCondition": "INVENTORY_HAS_ITEM",
+        "completionItemId": 1929,
+        "completionItemCount": 25
+      },
+      {
+        "description": "Climb ladder to upper floor",
+        "worldPlane": 2,
+        "objectIds": [15899, 15896],
+        "objectInteractAction": "Climb-up",
+        "worldMessage": "Climb the ladder to the upper floor.",
+        "completionCondition": "PLAYER_ON_PLANE"
+      },
+      {
+        "description": "Empty buckets into the water hopper",
+        "worldX": 3811,
+        "worldY": 3000,
+        "worldPlane": 2,
+        "objectIds": [15847, 15873],
+        "objectInteractAction": "Use",
+        "highlightItemIds": [1929],
+        "useItemOnObject": true,
+        "worldMessage": "Use buckets of water on the hopper to empty them.",
+        "completionCondition": "INVENTORY_NOT_HAS_ITEM",
+        "completionItemId": 1929
+      },
+      {
+        "description": "Climb ladder back to ground floor",
+        "worldPlane": 0,
+        "objectIds": [15901, 15898],
+        "objectInteractAction": "Climb-down",
+        "worldMessage": "Climb the ladder back down.",
+        "completionCondition": "PLAYER_ON_PLANE",
+        "loopBackToStep": 3,
+        "loopCount": 4
       },
       {
         "description": "Spend Pieces of Eight on rewards",
         "worldX": 3811,
         "worldY": 2992,
         "worldPlane": 0,
-        "npcId": 4519,
+        "npcId": 1816,
         "interactAction": "Trade",
         "worldMessage": "Trade with Honest Jimmy to spend your Pieces of Eight on rewards.",
         "completionCondition": "MANUAL"
