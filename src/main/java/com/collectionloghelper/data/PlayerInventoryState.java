@@ -1,6 +1,8 @@
 package com.collectionloghelper.data;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -17,6 +19,7 @@ import net.runelite.api.ItemContainer;
 public class PlayerInventoryState
 {
 	private volatile Set<Integer> itemIds = new HashSet<>();
+	private volatile Map<Integer, Integer> itemCounts = new HashMap<>();
 
 	@Inject
 	private PlayerInventoryState()
@@ -29,6 +32,7 @@ public class PlayerInventoryState
 	public void scanInventory(ItemContainer inventoryContainer)
 	{
 		Set<Integer> newIds = new HashSet<>();
+		Map<Integer, Integer> newCounts = new HashMap<>();
 
 		if (inventoryContainer != null)
 		{
@@ -40,12 +44,14 @@ public class PlayerInventoryState
 					if (item.getId() > 0 && item.getQuantity() > 0)
 					{
 						newIds.add(item.getId());
+						newCounts.merge(item.getId(), item.getQuantity(), Integer::sum);
 					}
 				}
 			}
 		}
 
 		itemIds = newIds;
+		itemCounts = newCounts;
 	}
 
 	/**
@@ -54,6 +60,22 @@ public class PlayerInventoryState
 	public boolean hasItem(int itemId)
 	{
 		return itemIds.contains(itemId);
+	}
+
+	/**
+	 * Returns the count of the given item ID in the player's inventory.
+	 */
+	public int getItemCount(int itemId)
+	{
+		return itemCounts.getOrDefault(itemId, 0);
+	}
+
+	/**
+	 * Returns true if the player's inventory contains at least the given count of the item.
+	 */
+	public boolean hasItemCount(int itemId, int count)
+	{
+		return getItemCount(itemId) >= count;
 	}
 
 	/**
@@ -74,5 +96,6 @@ public class PlayerInventoryState
 	public void reset()
 	{
 		itemIds = new HashSet<>();
+		itemCounts = new HashMap<>();
 	}
 }
