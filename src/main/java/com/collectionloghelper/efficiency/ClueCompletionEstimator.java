@@ -11,6 +11,9 @@ import net.runelite.api.Skill;
 @Singleton
 public class ClueCompletionEstimator
 {
+	/** VarPlayer 101 — quest points. Same as {@code VarPlayer.QUEST_POINTS}. */
+	private static final int VARP_QUEST_POINTS = 101;
+
 	public enum ProgressionBucket
 	{
 		EARLY("Early-game"),
@@ -157,8 +160,7 @@ public class ClueCompletionEstimator
 
 	private int getQuestPoints()
 	{
-		// Quest points are stored in varp 101
-		return client.getVarpValue(101);
+		return client.getVarpValue(VARP_QUEST_POINTS);
 	}
 
 	/**

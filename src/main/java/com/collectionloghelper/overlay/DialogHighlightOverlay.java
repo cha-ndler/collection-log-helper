@@ -12,6 +12,7 @@ import net.runelite.api.widgets.Widget;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
+import javax.inject.Singleton;
 
 /**
  * Highlights dialog options that the player should select when interacting
@@ -21,6 +22,7 @@ import net.runelite.client.ui.overlay.OverlayPosition;
  *   219 = Player dialog choices (multi-option)
  *   231 = NPC dialog (continue)
  */
+@Singleton
 public class DialogHighlightOverlay extends Overlay
 {
 	private static final int DIALOG_OPTION_GROUP = 219;

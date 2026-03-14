@@ -225,7 +225,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		panel.setMode(config.defaultMode());
 		panel.setStepCallbacks(
 			() -> guidanceSequencer.advanceStep(),
-			() -> guidanceSequencer.advanceStep()
+			() -> guidanceSequencer.skipStep()
 		);
 
 		// Use a placeholder icon initially, then swap to the real item sprite once loaded
@@ -487,15 +487,6 @@ public class CollectionLogHelperPlugin extends Plugin
 				playerInventoryState.scanInventory(invContainer);
 				if (guidanceSequencer.isActive())
 				{
-					// Debug: log relevant inventory counts for current step
-					GuidanceStep dbgStep = guidanceSequencer.getRawCurrentStep();
-					if (dbgStep != null && dbgStep.getCompletionItemId() > 0)
-					{
-						int count = playerInventoryState.getItemCount(dbgStep.getCompletionItemId());
-						log.info("[DEBUG] Inventory: itemId={} count={} need={} condition={}",
-							dbgStep.getCompletionItemId(), count,
-							dbgStep.getCompletionItemCount(), dbgStep.getCompletionCondition());
-					}
 					guidanceSequencer.onInventoryChanged();
 				}
 			}
@@ -1111,42 +1102,26 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked event)
 	{
-		// Debug: log all interactions when guidance is active
-		if (guidanceSequencer.isActive())
+		if (!guidanceSequencer.isActive())
 		{
-			MenuAction action = event.getMenuAction();
-			log.info("[DEBUG] Menu click: option='{}' target='{}' action={} id={} param0={} param1={}",
-				event.getMenuOption(), event.getMenuTarget(), action, event.getId(),
-				event.getParam0(), event.getParam1());
+			return;
+		}
 
-			// Log object interactions with object ID
-			if (action == MenuAction.GAME_OBJECT_FIRST_OPTION || action == MenuAction.GAME_OBJECT_SECOND_OPTION
-				|| action == MenuAction.GAME_OBJECT_THIRD_OPTION || action == MenuAction.GAME_OBJECT_FOURTH_OPTION
-				|| action == MenuAction.GAME_OBJECT_FIFTH_OPTION)
+		// Detect NPC interactions for NPC_TALKED_TO completion condition.
+		MenuAction action = event.getMenuAction();
+		if (action == MenuAction.NPC_FIRST_OPTION || action == MenuAction.NPC_SECOND_OPTION
+			|| action == MenuAction.NPC_THIRD_OPTION || action == MenuAction.NPC_FOURTH_OPTION
+			|| action == MenuAction.NPC_FIFTH_OPTION)
+		{
+			// event.getId() is the NPC index; look up the NPC from the scene
+			for (net.runelite.api.NPC npc : client.getTopLevelWorldView().npcs())
 			{
-				log.info("[DEBUG] Object interaction: objectId={} option='{}'", event.getId(), event.getMenuOption());
-			}
-
-			// Detect NPC interactions for NPC_TALKED_TO completion
-			if (action == MenuAction.NPC_FIRST_OPTION || action == MenuAction.NPC_SECOND_OPTION
-				|| action == MenuAction.NPC_THIRD_OPTION || action == MenuAction.NPC_FOURTH_OPTION
-				|| action == MenuAction.NPC_FIFTH_OPTION)
-			{
-				// event.getId() is the NPC index; look up the NPC from the scene
-				for (net.runelite.api.NPC npc : client.getTopLevelWorldView().npcs())
+				if (npc != null && npc.getIndex() == event.getId())
 				{
-					if (npc != null && npc.getIndex() == event.getId())
-					{
-						log.info("[DEBUG] NPC interaction: npcId={} name='{}'", npc.getId(), npc.getName());
-						guidanceSequencer.onNpcInteracted(npc.getId());
-						break;
-					}
+					guidanceSequencer.onNpcInteracted(npc.getId());
+					break;
 				}
 			}
-		}
-		else
-		{
-			// Still detect NPC interactions when not in guidance (no-op, but keep structure)
 		}
 	}
 
@@ -1194,7 +1169,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 		catch (Exception e)
 		{
-			// WorldEntity API may not be available; fall back silently.
+			log.debug("WorldEntity transform failed, using fallback location", e);
 		}
 		return fallback;
 	}

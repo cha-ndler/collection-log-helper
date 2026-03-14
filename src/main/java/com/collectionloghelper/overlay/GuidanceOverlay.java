@@ -24,7 +24,9 @@ import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.OverlayUtil;
 import net.runelite.client.ui.overlay.components.LineComponent;
 import net.runelite.client.ui.overlay.components.TitleComponent;
+import javax.inject.Singleton;
 
+@Singleton
 public class GuidanceOverlay extends OverlayPanel
 {
 	private static final int MAX_PANEL_WIDTH = 200;
