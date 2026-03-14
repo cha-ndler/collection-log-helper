@@ -18,7 +18,9 @@ import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
+import javax.inject.Singleton;
 
+@Singleton
 public class GuidanceMinimapOverlay extends Overlay
 {
 	private static final int DOT_RADIUS = 4;
