@@ -164,6 +164,14 @@ public class EfficiencyCalculator
 		CollectionLogItem bestItem = null;
 		double bestItemScore = 0;
 
+		// Accumulate combined probability of obtaining ANY missing item per kill.
+		// For probabilistic drops: P(any) = 1 - product(1 - p_i) for each missing item.
+		// For multi-roll sources the per-item rates already account for rolls via
+		// scoreIndividualItem, but the combined rate must use per-kill effective rates.
+		double productMissAll = 1.0;
+		int guaranteedMissing = 0;
+		double bestGuaranteedScore = 0;
+
 		for (CollectionLogItem item : source.getItems())
 		{
 			if (collectionState.isItemObtained(item.getItemId()))
@@ -178,6 +186,22 @@ public class EfficiencyCalculator
 				bestItemScore = itemScore;
 				bestItem = item;
 			}
+
+			if (item.getDropRate() > 0 && item.getDropRate() < 1.0)
+			{
+				double effectiveRate = rolls > 1
+					? 1.0 - Math.pow(1.0 - item.getDropRate(), rolls)
+					: item.getDropRate();
+				productMissAll *= (1.0 - effectiveRate);
+			}
+			else if (item.getDropRate() >= 1.0)
+			{
+				guaranteedMissing++;
+				if (itemScore > bestGuaranteedScore)
+				{
+					bestGuaranteedScore = itemScore;
+				}
+			}
 		}
 
 		if (missingCount == 0)
@@ -185,17 +209,26 @@ public class EfficiencyCalculator
 			return null;
 		}
 
-		// The source score IS the best individual item score.
-		// This represents "how fast can you get your next log slot from this source"
-		// and gives accurate per-item time estimates.
-		double score = bestItemScore;
+		// Combined score: expected new log slots per hour from this source.
+		// For probabilistic items: use combined "any new item" rate.
+		// For guaranteed items: add the best guaranteed item's score (only one
+		// can be the next unlock, so don't sum them all).
+		double combinedDropRate = 1.0 - productMissAll;
+		double combinedScore = combinedDropRate * killsPerHour * 100.0;
+		if (guaranteedMissing > 0 && bestGuaranteedScore > combinedScore)
+		{
+			combinedScore = bestGuaranteedScore;
+		}
+
+		double score = combinedScore;
 		if (score <= 0)
 		{
 			score = missingCount * 0.2;
 		}
 
-		String reasoning = buildReasoning(bestItem, bestItemScore, missingCount, killTimeSeconds, rolls);
-		double dropOnlyScore = bestItem != null && bestItem.getDropRate() < 1.0 ? bestItemScore : 0;
+		String reasoning = buildCombinedReasoning(bestItem, bestItemScore, missingCount,
+			killTimeSeconds, rolls, combinedDropRate, killsPerHour, guaranteedMissing);
+		double dropOnlyScore = combinedDropRate > 0 ? combinedDropRate * killsPerHour * 100.0 : 0;
 
 		return new ScoredItem(source, score, missingCount, reasoning, locked,
 			dropOnlyScore, bestItem, bestItemScore);
@@ -240,41 +273,56 @@ public class EfficiencyCalculator
 		}
 	}
 
-	private String buildReasoning(CollectionLogItem bestItem, double bestItemScore,
-		int missingCount, int killTimeSeconds, int rollsPerKill)
+	private String buildCombinedReasoning(CollectionLogItem bestItem, double bestItemScore,
+		int missingCount, int killTimeSeconds, int rollsPerKill,
+		double combinedDropRate, double killsPerHour, int guaranteedMissing)
 	{
 		if (bestItem == null)
 		{
 			return String.format("%d missing items", missingCount);
 		}
 
-		String timeStr;
-		double hours = bestItemScore > 0 ? 100.0 / bestItemScore : 0;
-		timeStr = formatHours(hours);
-
-		if (bestItem.getDropRate() >= 1.0)
+		// Show combined "any new slot" time for the source
+		String anySlotTime;
+		if (combinedDropRate > 0 && killsPerHour > 0)
 		{
-			if (bestItem.getMilestoneKills() > 0)
-			{
-				return String.format("%s in ~%s (%d missing total)",
-					bestItem.getName(), timeStr, missingCount);
-			}
-			else if (bestItem.getPointCost() > 0)
-			{
-				return String.format("%s in ~%s (%d missing total)",
-					bestItem.getName(), timeStr, missingCount);
-			}
+			double anySlotHours = 1.0 / (combinedDropRate * killsPerHour);
+			anySlotTime = formatHours(anySlotHours);
 		}
-		else if (bestItem.getDropRate() > 0)
+		else
 		{
+			anySlotTime = "N/A";
+		}
+
+		// Also show the best individual item time
+		String bestItemTime = bestItemScore > 0 ? formatHours(100.0 / bestItemScore) : "N/A";
+
+		if (missingCount == 1)
+		{
+			// Only one item missing — combined rate equals single item rate
+			if (bestItem.getDropRate() >= 1.0)
+			{
+				return String.format("%s in ~%s", bestItem.getName(), bestItemTime);
+			}
 			double effectiveRate = rollsPerKill > 1
 				? 1.0 - Math.pow(1.0 - bestItem.getDropRate(), rollsPerKill)
 				: bestItem.getDropRate();
-			double expectedKills = 1.0 / effectiveRate;
-			return String.format("%s ~%.0f kills, ~%s (%d missing total)",
-				bestItem.getName(), expectedKills, timeStr, missingCount);
+			return String.format("%s ~%.0f kills, ~%s",
+				bestItem.getName(), 1.0 / effectiveRate, bestItemTime);
 		}
-		return String.format("%d missing items", missingCount);
+
+		// Multiple missing items — show combined rate and best item
+		int probMissing = missingCount - guaranteedMissing;
+		if (combinedDropRate > 0 && probMissing > 0)
+		{
+			long anySlotDenom = Math.max(2, Math.round(1.0 / combinedDropRate));
+			return String.format("Any of %d items ~1/%d/kill, ~%s (best: %s ~%s)",
+				missingCount, anySlotDenom, anySlotTime,
+				bestItem.getName(), bestItemTime);
+		}
+
+		return String.format("%s in ~%s (%d missing total)",
+			bestItem.getName(), bestItemTime, missingCount);
 	}
 
 	/**
@@ -389,8 +437,12 @@ public class EfficiencyCalculator
 			return null;
 		}
 
+		// Pet hunt typically has 1 pet per source, so combined = best.
+		// For sources with multiple pets, use the best score (pets are
+		// independent rolls, not a combined table).
 		double score = bestPetScore > 0 ? bestPetScore : missingPetCount * 0.2;
-		String reasoning = buildReasoning(bestPet, bestPetScore, missingPetCount, killTimeSeconds, rolls);
+		String reasoning = buildCombinedReasoning(bestPet, bestPetScore, missingPetCount,
+			killTimeSeconds, rolls, 0, killsPerHour, 0);
 		double dropOnlyScore = bestPet != null && bestPet.getDropRate() < 1.0 ? bestPetScore : 0;
 
 		return new ScoredItem(source, score, missingPetCount, reasoning, locked,
@@ -420,7 +472,7 @@ public class EfficiencyCalculator
 
 		try (PrintWriter pw = new PrintWriter(new FileWriter(outputFile)))
 		{
-			pw.printf("=== Collection Log Helper — Efficiency Export ===%n");
+			pw.printf("=== Collection Log Helper — Efficiency Export (Combined-Rate Scoring) ===%n");
 			pw.printf("Exported: %s%n", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			pw.printf("Collection Log: %d/%d (%.1f%%)%n", totalObtained, totalItems,
 				totalItems > 0 ? 100.0 * totalObtained / totalItems : 0);
