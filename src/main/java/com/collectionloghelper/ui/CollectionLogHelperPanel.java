@@ -918,7 +918,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 		if (resultCount == 0)
 		{
-			addEmptyStateMessage("No items match '" + query + "'");
+			// Escape query to prevent HTML injection in the JLabel
+			String safeQuery = query.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+			addEmptyStateMessage("No items match '" + safeQuery + "'");
 		}
 	}
 

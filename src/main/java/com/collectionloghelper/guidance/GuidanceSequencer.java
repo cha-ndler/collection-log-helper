@@ -279,7 +279,45 @@ public class GuidanceSequencer
 	}
 
 	/**
-	 * Manually advances to the next step (for MANUAL completion or Skip button).
+	 * Unconditionally skips the current step, bypassing any active loop.
+	 * Used by the panel's Skip button to let users move past steps they
+	 * want to handle manually or that are stuck.
+	 */
+	public void skipStep()
+	{
+		if (!active || steps == null)
+		{
+			return;
+		}
+
+		loopIterationsCompleted = 0;
+		currentIndex++;
+		skipSatisfiedSteps();
+
+		if (currentIndex >= steps.size())
+		{
+			log.info("Guidance sequence complete (skipped) for {}",
+				activeSource != null ? activeSource.getName() : "?");
+			active = false;
+			if (onSequenceComplete != null)
+			{
+				onSequenceComplete.run();
+			}
+		}
+		else
+		{
+			GuidanceStep step = getCurrentStep();
+			if (step != null)
+			{
+				log.info("Skipped to step {}/{}: {}", currentIndex + 1, steps.size(), step.getDescription());
+				notifyStepChanged(step);
+			}
+		}
+	}
+
+	/**
+	 * Advances to the next step, respecting loop conditions.
+	 * Used for automatic completion and the Next Step button.
 	 */
 	public void advanceStep()
 	{

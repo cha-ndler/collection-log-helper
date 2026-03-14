@@ -10,11 +10,13 @@ import java.util.List;
 import javax.inject.Inject;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.ui.overlay.WidgetItemOverlay;
+import javax.inject.Singleton;
 
 /**
  * Highlights inventory items that are relevant to the current guidance step.
  * Uses WidgetItemOverlay to render colored borders and fills on matching items.
  */
+@Singleton
 public class ItemHighlightOverlay extends WidgetItemOverlay
 {
 	private final CollectionLogHelperConfig config;
