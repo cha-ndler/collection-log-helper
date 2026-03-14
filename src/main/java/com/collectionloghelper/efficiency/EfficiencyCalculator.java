@@ -213,11 +213,24 @@ public class EfficiencyCalculator
 		// For probabilistic items: use combined "any new item" rate.
 		// For guaranteed items: add the best guaranteed item's score (only one
 		// can be the next unlock, so don't sum them all).
+		//
+		// Aggregated sources (e.g. "Miscellaneous") bundle items from unrelated
+		// activities that cannot be farmed at a single location. Combined-rate
+		// scoring would be misleading, so fall back to best-item scoring.
 		double combinedDropRate = 1.0 - productMissAll;
-		double combinedScore = combinedDropRate * killsPerHour * 100.0;
-		if (guaranteedMissing > 0 && bestGuaranteedScore > combinedScore)
+		double combinedScore;
+		if (source.isAggregated())
 		{
-			combinedScore = bestGuaranteedScore;
+			combinedScore = bestItemScore;
+			combinedDropRate = 0;
+		}
+		else
+		{
+			combinedScore = combinedDropRate * killsPerHour * 100.0;
+			if (guaranteedMissing > 0 && bestGuaranteedScore > combinedScore)
+			{
+				combinedScore = bestGuaranteedScore;
+			}
 		}
 
 		double score = combinedScore;
