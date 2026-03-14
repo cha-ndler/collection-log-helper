@@ -826,13 +826,14 @@ public class CollectionLogHelperPanel extends PluginPanel
 		{
 			boolean onTask = calculator.isOnSlayerTask(si.getSource());
 
-			// Show only the single best (fastest-to-obtain) item per source.
-			// This gives the user one clear recommendation with an accurate time.
+			// Show the best (fastest-to-obtain) item per source, but use
+			// the source-level score for the time display so the displayed
+			// time matches the sort order.
 			CollectionLogItem bestItem = si.getBestItem();
 			if (bestItem != null && !collectionState.isItemObtained(bestItem.getItemId()))
 			{
 				ItemRowPanel row = new ItemRowPanel(bestItem, si.getSource(), false,
-					si.getBestItemScore(), si.isLocked(), onTask, itemManager,
+					si.getScore(), si.isLocked(), onTask, itemManager,
 					() -> showDetail(bestItem, si.getSource()));
 				listContainer.add(row);
 			}
