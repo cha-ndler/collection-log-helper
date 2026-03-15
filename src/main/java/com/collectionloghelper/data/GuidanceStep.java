@@ -67,6 +67,9 @@ public class GuidanceStep
 	/** Item IDs to highlight in the player's inventory during this step. */
 	List<Integer> highlightItemIds;
 
+	/** Regex pattern for CHAT_MESSAGE_RECEIVED completion check. */
+	String completionChatPattern;
+
 	/** When true, overlays show "Use X on Y" style prompts instead of simple action labels. */
 	boolean useItemOnObject;
 
