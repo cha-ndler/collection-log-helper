@@ -176,4 +176,28 @@ public interface CollectionLogHelperConfig extends Config
 	{
 		return new Color(0, 255, 255);
 	}
+
+	@ConfigItem(
+		keyName = "notifyOnStepComplete",
+		name = "Step Notifications",
+		description = "Show a RuneLite notification when a guidance step auto-completes",
+		section = guidanceSection,
+		position = 5
+	)
+	default boolean notifyOnStepComplete()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "notifyOnSequenceComplete",
+		name = "Sequence Notifications",
+		description = "Show a RuneLite notification when an entire guidance sequence completes",
+		section = guidanceSection,
+		position = 6
+	)
+	default boolean notifyOnSequenceComplete()
+	{
+		return true;
+	}
 }
