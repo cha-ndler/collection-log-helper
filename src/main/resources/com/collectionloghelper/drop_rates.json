@@ -6,6 +6,17 @@
     "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 90,
+    "requirements": {
+      "quests": [
+        "TROLL_STRONGHOLD"
+      ],
+      "skills": [
+        {
+          "skill": "STRENGTH",
+          "level": 70
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 11832,
@@ -97,6 +108,17 @@
     "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 75,
+    "requirements": {
+      "quests": [
+        "TROLL_STRONGHOLD"
+      ],
+      "skills": [
+        {
+          "skill": "AGILITY",
+          "level": 70
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 11838,
@@ -188,6 +210,17 @@
     "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 85,
+    "requirements": {
+      "quests": [
+        "TROLL_STRONGHOLD"
+      ],
+      "skills": [
+        {
+          "skill": "HITPOINTS",
+          "level": 70
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 11787,
@@ -279,6 +312,17 @@
     "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 80,
+    "requirements": {
+      "quests": [
+        "TROLL_STRONGHOLD"
+      ],
+      "skills": [
+        {
+          "skill": "RANGED",
+          "level": 70
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 11826,
@@ -1547,6 +1591,9 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 600,
+    "requirements": {
+      "quests": ["PRIEST_IN_PERIL"]
+    },
     "items": [
       {
         "itemId": 24422,
@@ -1669,6 +1716,12 @@
     "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "requirements": {
+      "quests": [
+        "TROLL_STRONGHOLD",
+        "THE_FROZEN_DOOR"
+      ]
+    },
     "items": [
       {
         "itemId": 26376,
@@ -4501,6 +4554,9 @@
     "worldY": 3426,
     "worldPlane": 0,
     "killTimeSeconds": 300,
+    "requirements": {
+      "quests": ["SINS_OF_THE_FATHER"]
+    },
     "items": [
       {
         "itemId": 29784,
@@ -4610,6 +4666,9 @@
     "locationDescription": "Cam Torum entrance, Ralos Rise",
     "travelTip": "Quetzal whistle -> Cam Torum",
     "killTimeSeconds": 360,
+    "requirements": {
+      "quests": ["PERILOUS_MOONS"]
+    },
     "items": [
       {
         "itemId": 29296,
@@ -6760,6 +6819,7 @@
     "locationDescription": "Iorwerth Dungeon, Prifddinas",
     "travelTip": "Teleport crystal -> Prifddinas",
     "requirements": {
+      "quests": ["SONG_OF_THE_ELVES"],
       "skills": [
         {
           "skill": "SLAYER",
