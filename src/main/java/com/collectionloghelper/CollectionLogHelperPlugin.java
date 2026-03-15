@@ -560,6 +560,21 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (invContainer != null)
 			{
 				playerInventoryState.scanInventory(invContainer);
+
+				// Log inventory contents when authoring mode is active
+				if (config.guidanceAuthoring())
+				{
+					StringBuilder inv = new StringBuilder("INVENTORY");
+					for (net.runelite.api.Item item : invContainer.getItems())
+					{
+						if (item.getId() > 0 && item.getQuantity() > 0)
+						{
+							inv.append(String.format(" %d x%d", item.getId(), item.getQuantity()));
+						}
+					}
+					authoringLog(inv.toString());
+				}
+
 				if (guidanceSequencer.isActive())
 				{
 					guidanceSequencer.onInventoryChanged();
@@ -594,6 +609,47 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onWidgetLoaded(WidgetLoaded event)
 	{
+		// Capture dialog widget text for authoring mode
+		if (config.guidanceAuthoring())
+		{
+			// Player dialog choices (group 219)
+			if (event.getGroupId() == 219)
+			{
+				clientThread.invokeLater(() ->
+				{
+					Widget container = client.getWidget(219, 1);
+					if (container != null)
+					{
+						Widget[] children = container.getDynamicChildren();
+						if (children != null)
+						{
+							StringBuilder sb = new StringBuilder("DIALOG_OPTIONS");
+							for (Widget child : children)
+							{
+								if (child != null && child.getText() != null && !child.getText().isEmpty())
+								{
+									sb.append(" '").append(child.getText()).append("'");
+								}
+							}
+							authoringLog(sb.toString());
+						}
+					}
+				});
+			}
+			// NPC dialog (group 231)
+			if (event.getGroupId() == 231)
+			{
+				clientThread.invokeLater(() ->
+				{
+					Widget textWidget = client.getWidget(231, 4);
+					if (textWidget != null && textWidget.getText() != null)
+					{
+						authoringLog("DIALOG_NPC text='%s'", textWidget.getText());
+					}
+				});
+			}
+		}
+
 		if (event.getGroupId() != COLLECTION_LOG_GROUP_ID)
 		{
 			return;
@@ -1245,6 +1301,18 @@ public class CollectionLogHelperPlugin extends Plugin
 						break;
 					}
 				}
+			}
+			else if (action == MenuAction.WIDGET_TARGET_ON_GAME_OBJECT)
+			{
+				authoringLog("USE_ITEM_ON_OBJECT objectId=%d itemId=%d", event.getId(), event.getParam0());
+			}
+			else if (action == MenuAction.WIDGET_TARGET_ON_NPC)
+			{
+				authoringLog("USE_ITEM_ON_NPC npcIndex=%d", event.getId());
+			}
+			else if (action == MenuAction.WIDGET_TARGET_ON_WIDGET)
+			{
+				authoringLog("USE_ITEM_ON_ITEM param0=%d param1=%d", event.getParam0(), event.getParam1());
 			}
 		}
 
