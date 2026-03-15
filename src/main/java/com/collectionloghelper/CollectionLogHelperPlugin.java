@@ -739,12 +739,12 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			return;
 		}
-		java.io.File exportFile = pluginDataManager.getFile("efficiency-export-combined.txt");
+		java.io.File exportFile = pluginDataManager.getFile("efficiency-export.txt");
 		if (exportFile == null)
 		{
 			// Fallback if player name not yet available
 			exportFile = new java.io.File(
-				net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export-combined.txt");
+				net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
 		}
 		calculator.exportEfficiencyList(exportFile, client);
 	}

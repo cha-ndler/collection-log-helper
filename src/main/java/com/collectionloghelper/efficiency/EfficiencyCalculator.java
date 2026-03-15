@@ -485,7 +485,7 @@ public class EfficiencyCalculator
 
 		try (PrintWriter pw = new PrintWriter(new FileWriter(outputFile)))
 		{
-			pw.printf("=== Collection Log Helper — Efficiency Export (Combined-Rate Scoring) ===%n");
+			pw.printf("=== Collection Log Helper — Efficiency Export ===%n");
 			pw.printf("Exported: %s%n", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			pw.printf("Collection Log: %d/%d (%.1f%%)%n", totalObtained, totalItems,
 				totalItems > 0 ? 100.0 * totalObtained / totalItems : 0);
