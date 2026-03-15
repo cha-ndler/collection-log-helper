@@ -17,6 +17,14 @@ public interface CollectionLogHelperConfig extends Config
 	)
 	String guidanceSection = "guidance";
 
+	@ConfigSection(
+		name = "Developer",
+		description = "Development tools for authoring guidance sequences",
+		position = 200,
+		closedByDefault = true
+	)
+	String developerSection = "developer";
+
 	@ConfigItem(
 		keyName = "defaultMode",
 		name = "Mode",
@@ -199,5 +207,17 @@ public interface CollectionLogHelperConfig extends Config
 	default boolean notifyOnSequenceComplete()
 	{
 		return true;
+	}
+
+	@ConfigItem(
+		keyName = "guidanceAuthoring",
+		name = "Guidance Authoring Mode",
+		description = "Log all game interactions (menu clicks, NPC IDs, object IDs, animations, chat messages, locations) to a file for authoring new guidance sequences",
+		section = developerSection,
+		position = 0
+	)
+	default boolean guidanceAuthoring()
+	{
+		return false;
 	}
 }
