@@ -46,6 +46,7 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.InventoryID;
 import net.runelite.api.NPC;
+import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.ActorDeath;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
@@ -227,6 +228,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private WorldPoint pendingShortestPathTarget;
 	private boolean slayerRefreshPending;
 
+	/** Writer for guidance authoring event log. Opened when authoring mode enabled. */
+	private java.io.PrintWriter authoringLogWriter;
+
 	@Override
 	protected void startUp() throws Exception
 	{
@@ -297,6 +301,11 @@ public class CollectionLogHelperPlugin extends Plugin
 	protected void shutDown() throws Exception
 	{
 		chatCommandManager.unregisterCommand("clh");
+		if (authoringLogWriter != null)
+		{
+			authoringLogWriter.close();
+			authoringLogWriter = null;
+		}
 		clientToolbar.removeNavigation(navButton);
 		overlayManager.remove(guidanceOverlay);
 		overlayManager.remove(guidanceMinimapOverlay);
@@ -469,6 +478,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (event.getActor() instanceof NPC)
 		{
 			NPC npc = (NPC) event.getActor();
+			if (config.guidanceAuthoring())
+			{
+				authoringLog("DEATH npcId=%d name='%s'", npc.getId(), npc.getName());
+			}
 			guidanceSequencer.onNpcDeath(npc.getId());
 		}
 	}
@@ -480,6 +493,11 @@ public class CollectionLogHelperPlugin extends Plugin
 			&& event.getType() != ChatMessageType.SPAM)
 		{
 			return;
+		}
+
+		if (config.guidanceAuthoring())
+		{
+			authoringLog("CHAT type=%s msg='%s'", event.getType(), event.getMessage());
 		}
 
 		// Forward chat messages to guidance sequencer for CHAT_MESSAGE_RECEIVED condition
@@ -1199,19 +1217,48 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked event)
 	{
+		MenuAction action = event.getMenuAction();
+
+		// Authoring mode: log all interactions regardless of guidance state
+		if (config.guidanceAuthoring())
+		{
+			authoringLog("MENU option='%s' target='%s' action=%s id=%d param0=%d param1=%d",
+				event.getMenuOption(), event.getMenuTarget(), action,
+				event.getId(), event.getParam0(), event.getParam1());
+
+			if (action == MenuAction.GAME_OBJECT_FIRST_OPTION || action == MenuAction.GAME_OBJECT_SECOND_OPTION
+				|| action == MenuAction.GAME_OBJECT_THIRD_OPTION || action == MenuAction.GAME_OBJECT_FOURTH_OPTION
+				|| action == MenuAction.GAME_OBJECT_FIFTH_OPTION)
+			{
+				authoringLog("OBJECT id=%d option='%s'", event.getId(), event.getMenuOption());
+			}
+			else if (action == MenuAction.NPC_FIRST_OPTION || action == MenuAction.NPC_SECOND_OPTION
+				|| action == MenuAction.NPC_THIRD_OPTION || action == MenuAction.NPC_FOURTH_OPTION
+				|| action == MenuAction.NPC_FIFTH_OPTION)
+			{
+				for (NPC npc : client.getTopLevelWorldView().npcs())
+				{
+					if (npc != null && npc.getIndex() == event.getId())
+					{
+						authoringLog("NPC id=%d name='%s' option='%s'",
+							npc.getId(), npc.getName(), event.getMenuOption());
+						break;
+					}
+				}
+			}
+		}
+
 		if (!guidanceSequencer.isActive())
 		{
 			return;
 		}
 
 		// Detect NPC interactions for NPC_TALKED_TO completion condition.
-		MenuAction action = event.getMenuAction();
 		if (action == MenuAction.NPC_FIRST_OPTION || action == MenuAction.NPC_SECOND_OPTION
 			|| action == MenuAction.NPC_THIRD_OPTION || action == MenuAction.NPC_FOURTH_OPTION
 			|| action == MenuAction.NPC_FIFTH_OPTION)
 		{
-			// event.getId() is the NPC index; look up the NPC from the scene
-			for (net.runelite.api.NPC npc : client.getTopLevelWorldView().npcs())
+			for (NPC npc : client.getTopLevelWorldView().npcs())
 			{
 				if (npc != null && npc.getIndex() == event.getId())
 				{
@@ -1269,6 +1316,58 @@ public class CollectionLogHelperPlugin extends Plugin
 			log.debug("WorldEntity transform failed, using fallback location", e);
 		}
 		return fallback;
+	}
+
+	// ---- Guidance Authoring Event Logger ----
+
+	private void authoringLog(String format, Object... args)
+	{
+		if (!config.guidanceAuthoring())
+		{
+			return;
+		}
+		if (authoringLogWriter == null)
+		{
+			java.io.File logFile = pluginDataManager.getFile("authoring-log.txt");
+			if (logFile == null)
+			{
+				logFile = new java.io.File(
+					net.runelite.client.RuneLite.RUNELITE_DIR, "clh-authoring-log.txt");
+			}
+			try
+			{
+				authoringLogWriter = new java.io.PrintWriter(
+					new java.io.FileWriter(logFile, true), true);
+				authoringLogWriter.printf("=== Authoring session started %s ===%n",
+					java.time.LocalDateTime.now().format(
+						java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			}
+			catch (java.io.IOException e)
+			{
+				log.error("Failed to open authoring log", e);
+				return;
+			}
+		}
+		WorldPoint loc = cachedPlayerLocation;
+		String locStr = loc != null
+			? String.format("[%d,%d,%d]", loc.getX(), loc.getY(), loc.getPlane()) : "[?,?,?]";
+		String timestamp = java.time.LocalTime.now().format(
+			java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss"));
+		authoringLogWriter.printf("%s %s %s%n", timestamp, locStr, String.format(format, args));
+	}
+
+	@Subscribe
+	public void onAnimationChanged(AnimationChanged event)
+	{
+		if (!config.guidanceAuthoring() || event.getActor() != client.getLocalPlayer())
+		{
+			return;
+		}
+		int animId = client.getLocalPlayer().getAnimation();
+		if (animId != -1)
+		{
+			authoringLog("ANIMATION player=%d", animId);
+		}
 	}
 
 	private void onClhCommand(ChatMessage chatMessage, String message)
