@@ -44,6 +44,8 @@ import net.runelite.api.WorldView;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.InventoryID;
+import net.runelite.api.NPC;
+import net.runelite.api.events.ActorDeath;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
@@ -444,12 +446,32 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	@Subscribe
+	public void onActorDeath(ActorDeath event)
+	{
+		if (!guidanceSequencer.isActive())
+		{
+			return;
+		}
+		if (event.getActor() instanceof NPC)
+		{
+			NPC npc = (NPC) event.getActor();
+			guidanceSequencer.onNpcDeath(npc.getId());
+		}
+	}
+
+	@Subscribe
 	public void onChatMessage(ChatMessage event)
 	{
 		if (event.getType() != ChatMessageType.GAMEMESSAGE
 			&& event.getType() != ChatMessageType.SPAM)
 		{
 			return;
+		}
+
+		// Forward chat messages to guidance sequencer for CHAT_MESSAGE_RECEIVED condition
+		if (guidanceSequencer.isActive())
+		{
+			guidanceSequencer.onChatMessage(event.getMessage());
 		}
 
 		Matcher matcher = COLLECTION_LOG_PATTERN.matcher(event.getMessage());

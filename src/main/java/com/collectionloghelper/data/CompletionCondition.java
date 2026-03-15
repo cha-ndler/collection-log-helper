@@ -23,6 +23,12 @@ public enum CompletionCondition
 	/** Step completes when the player reaches the target world plane (ignores XY). */
 	PLAYER_ON_PLANE,
 
+	/** Step completes when a specific NPC dies. */
+	ACTOR_DEATH,
+
+	/** Step completes when a specific chat message pattern is received. */
+	CHAT_MESSAGE_RECEIVED,
+
 	/** Step must be manually advanced by the player via the panel. */
 	MANUAL
 }
