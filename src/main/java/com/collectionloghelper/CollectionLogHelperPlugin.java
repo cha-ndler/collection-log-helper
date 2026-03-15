@@ -19,6 +19,7 @@ import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
+import com.collectionloghelper.overlay.GuidanceInfoBox;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
 import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
 import com.collectionloghelper.overlay.GuidanceOverlay;
@@ -72,6 +73,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.ui.overlay.OverlayManager;
+import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
 import net.runelite.client.util.ImageUtil;
 
@@ -129,6 +131,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private Notifier notifier;
+
+	@Inject
+	private InfoBoxManager infoBoxManager;
 
 	@Inject
 	private DropRateDatabase database;
@@ -193,6 +198,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private boolean collectionLogOpen;
 	private BufferedImage collectionLogIcon;
 	private CollectionLogWorldMapPoint activeMapPoint;
+	private GuidanceInfoBox activeInfoBox;
 
 	// Auto-sync state: triggered when collection log widget opens
 	private boolean autoSyncPending;
@@ -901,6 +907,16 @@ public class CollectionLogHelperPlugin extends Plugin
 					step != null ? step.getDescription() : "",
 					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL);
 			}
+			// Add InfoBox showing step progress
+			if (!source.getItems().isEmpty())
+			{
+				BufferedImage icon = itemManager.getImage(source.getItems().get(0).getItemId());
+				activeInfoBox = new GuidanceInfoBox(icon, this);
+				activeInfoBox.setStepText("1/" + guidanceSequencer.getTotalSteps());
+				activeInfoBox.setTooltipText(source.getName() + ": "
+					+ (step != null ? step.getDescription() : ""));
+				infoBoxManager.addInfoBox(activeInfoBox);
+			}
 			log.debug("Multi-step guidance activated for {} ({} steps)",
 				source.getName(), source.getGuidanceSteps().size());
 			return;
@@ -1083,6 +1099,19 @@ public class CollectionLogHelperPlugin extends Plugin
 			notifier.notify("Step complete: " + step.getDescription());
 		}
 
+		// Update InfoBox progress
+		if (activeInfoBox != null)
+		{
+			int current = guidanceSequencer.getCurrentIndex() + 1;
+			int total = guidanceSequencer.getTotalSteps();
+			activeInfoBox.setStepText(current + "/" + total);
+			activeInfoBox.setTooltipText(step.getDescription());
+			if (current == total)
+			{
+				activeInfoBox.setTextColor(java.awt.Color.GREEN);
+			}
+		}
+
 		if (panel != null)
 		{
 			panel.updateStepProgress(
@@ -1126,6 +1155,11 @@ public class CollectionLogHelperPlugin extends Plugin
 	public void deactivateGuidance()
 	{
 		lastMessagedStepIndex = -1;
+		if (activeInfoBox != null)
+		{
+			infoBoxManager.removeInfoBox(activeInfoBox);
+			activeInfoBox = null;
+		}
 		guidanceSequencer.stopSequence();
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
