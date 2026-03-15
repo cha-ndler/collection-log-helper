@@ -49,9 +49,16 @@ import net.runelite.api.NPC;
 import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.ActorDeath;
 import net.runelite.api.events.ChatMessage;
+import net.runelite.api.events.GameObjectSpawned;
+import net.runelite.api.events.GameObjectDespawned;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
+import net.runelite.api.events.HitsplatApplied;
 import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.api.events.ItemSpawned;
+import net.runelite.api.events.ItemDespawned;
+import net.runelite.api.events.NpcSpawned;
+import net.runelite.api.events.NpcDespawned;
 import net.runelite.client.events.NpcLootReceived;
 import net.runelite.client.game.ItemStack;
 import net.runelite.api.events.MenuOptionClicked;
@@ -427,6 +434,14 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Runs on the client thread — safe to call client API
 		collectionState.refreshVarps();
 
+		// Authoring: log varbit changes (throttle to 1 per tick to avoid spam)
+		if (config.guidanceAuthoring() && client.getTickCount() != lastVarbitLogTick)
+		{
+			lastVarbitLogTick = client.getTickCount();
+			authoringLog("VARBIT_CHANGED varbitId=%d value=%d",
+				event.getVarbitId(), event.getValue());
+		}
+
 		// Refresh Slayer task state and rebuild if the task changed
 		boolean wasActive = slayerTaskState.isTaskActive();
 		String oldCreature = slayerTaskState.getCreatureName();
@@ -554,26 +569,17 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged event)
 	{
+		if (config.guidanceAuthoring())
+		{
+			logContainerChange(event);
+		}
+
 		if (event.getContainerId() == InventoryID.INVENTORY.getId())
 		{
 			net.runelite.api.ItemContainer invContainer = client.getItemContainer(InventoryID.INVENTORY);
 			if (invContainer != null)
 			{
 				playerInventoryState.scanInventory(invContainer);
-
-				// Log inventory contents when authoring mode is active
-				if (config.guidanceAuthoring())
-				{
-					StringBuilder inv = new StringBuilder("INVENTORY");
-					for (net.runelite.api.Item item : invContainer.getItems())
-					{
-						if (item.getId() > 0 && item.getQuantity() > 0)
-						{
-							inv.append(String.format(" %d x%d", item.getId(), item.getQuantity()));
-						}
-					}
-					authoringLog(inv.toString());
-				}
 
 				if (guidanceSequencer.isActive())
 				{
@@ -1424,6 +1430,49 @@ public class CollectionLogHelperPlugin extends Plugin
 		authoringLogWriter.printf("%s %s %s%n", timestamp, locStr, String.format(format, args));
 	}
 
+	/** Logs inventory or equipment container changes with slot names for equipment. */
+	private void logContainerChange(ItemContainerChanged event)
+	{
+		int containerId = event.getContainerId();
+		if (containerId == InventoryID.INVENTORY.getId())
+		{
+			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.INVENTORY);
+			if (c == null)
+			{
+				return;
+			}
+			StringBuilder sb = new StringBuilder("INVENTORY");
+			for (net.runelite.api.Item item : c.getItems())
+			{
+				if (item.getId() > 0 && item.getQuantity() > 0)
+				{
+					sb.append(String.format(" %d x%d", item.getId(), item.getQuantity()));
+				}
+			}
+			authoringLog(sb.toString());
+		}
+		else if (containerId == InventoryID.EQUIPMENT.getId())
+		{
+			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.EQUIPMENT);
+			if (c == null)
+			{
+				return;
+			}
+			String[] slotNames = {"Head", "Cape", "Amulet", "Weapon", "Body",
+				"Shield", "?", "Legs", "?", "Gloves", "Boots", "?", "Ring", "Ammo"};
+			StringBuilder sb = new StringBuilder("EQUIPMENT");
+			net.runelite.api.Item[] items = c.getItems();
+			for (int i = 0; i < items.length && i < slotNames.length; i++)
+			{
+				if (items[i].getId() > 0)
+				{
+					sb.append(String.format(" %s=%d", slotNames[i], items[i].getId()));
+				}
+			}
+			authoringLog(sb.toString());
+		}
+	}
+
 	@Subscribe
 	public void onAnimationChanged(AnimationChanged event)
 	{
@@ -1437,6 +1486,101 @@ public class CollectionLogHelperPlugin extends Plugin
 			authoringLog("ANIMATION player=%d", animId);
 		}
 	}
+
+	@Subscribe
+	public void onItemSpawned(ItemSpawned event)
+	{
+		if (!config.guidanceAuthoring())
+		{
+			return;
+		}
+		WorldPoint wp = event.getTile().getWorldLocation();
+		authoringLog("GROUND_ITEM_SPAWN id=%d qty=%d at=[%d,%d,%d]",
+			event.getItem().getId(), event.getItem().getQuantity(),
+			wp.getX(), wp.getY(), wp.getPlane());
+	}
+
+	@Subscribe
+	public void onItemDespawned(ItemDespawned event)
+	{
+		if (!config.guidanceAuthoring())
+		{
+			return;
+		}
+		WorldPoint wp = event.getTile().getWorldLocation();
+		authoringLog("GROUND_ITEM_DESPAWN id=%d at=[%d,%d,%d]",
+			event.getItem().getId(), wp.getX(), wp.getY(), wp.getPlane());
+	}
+
+	@Subscribe
+	public void onGameObjectSpawned(GameObjectSpawned event)
+	{
+		if (!config.guidanceAuthoring())
+		{
+			return;
+		}
+		WorldPoint wp = event.getTile().getWorldLocation();
+		authoringLog("OBJECT_SPAWN id=%d at=[%d,%d,%d]",
+			event.getGameObject().getId(), wp.getX(), wp.getY(), wp.getPlane());
+	}
+
+	@Subscribe
+	public void onGameObjectDespawned(GameObjectDespawned event)
+	{
+		if (!config.guidanceAuthoring())
+		{
+			return;
+		}
+		WorldPoint wp = event.getTile().getWorldLocation();
+		authoringLog("OBJECT_DESPAWN id=%d at=[%d,%d,%d]",
+			event.getGameObject().getId(), wp.getX(), wp.getY(), wp.getPlane());
+	}
+
+	@Subscribe
+	public void onNpcSpawned(NpcSpawned event)
+	{
+		if (!config.guidanceAuthoring())
+		{
+			return;
+		}
+		NPC npc = event.getNpc();
+		authoringLog("NPC_SPAWN id=%d name='%s' index=%d", npc.getId(), npc.getName(), npc.getIndex());
+	}
+
+	@Subscribe
+	public void onNpcDespawned(NpcDespawned event)
+	{
+		if (!config.guidanceAuthoring())
+		{
+			return;
+		}
+		NPC npc = event.getNpc();
+		authoringLog("NPC_DESPAWN id=%d name='%s'", npc.getId(), npc.getName());
+	}
+
+	@Subscribe
+	public void onHitsplatApplied(HitsplatApplied event)
+	{
+		if (!config.guidanceAuthoring())
+		{
+			return;
+		}
+		if (event.getActor() == client.getLocalPlayer())
+		{
+			authoringLog("HITSPLAT_RECEIVED type=%d amount=%d",
+				event.getHitsplat().getHitsplatType(), event.getHitsplat().getAmount());
+		}
+		else if (event.getActor() instanceof NPC)
+		{
+			NPC npc = (NPC) event.getActor();
+			authoringLog("HITSPLAT_DEALT npcId=%d name='%s' type=%d amount=%d",
+				npc.getId(), npc.getName(),
+				event.getHitsplat().getHitsplatType(), event.getHitsplat().getAmount());
+		}
+	}
+
+	/** Last varbit change tick — throttle to avoid flooding the log. */
+	private int lastVarbitLogTick = -1;
 
 	private void onClhCommand(ChatMessage chatMessage, String message)
 	{
