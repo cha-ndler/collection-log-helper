@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.client.Notifier;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
@@ -121,6 +122,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private ConfigManager configManager;
+
+	@Inject
+	private Notifier notifier;
 
 	@Inject
 	private DropRateDatabase database;
@@ -1033,6 +1037,11 @@ public class CollectionLogHelperPlugin extends Plugin
 			? guidanceSequencer.getActiveSource().getName() : "";
 		applyStepToOverlays(step, sourceName);
 
+		if (config.notifyOnStepComplete())
+		{
+			notifier.notify("Step complete: " + step.getDescription());
+		}
+
 		if (panel != null)
 		{
 			panel.updateStepProgress(
@@ -1048,7 +1057,14 @@ public class CollectionLogHelperPlugin extends Plugin
 	 */
 	private void onSequenceComplete()
 	{
+		String sourceName = guidanceSequencer.getActiveSource() != null
+			? guidanceSequencer.getActiveSource().getName() : "unknown";
 		deactivateGuidance();
+
+		if (config.notifyOnSequenceComplete())
+		{
+			notifier.notify("Guidance complete for " + sourceName);
+		}
 
 		if (config.autoAdvanceGuidance() && panel != null)
 		{
