@@ -88,6 +88,21 @@
     "mutuallyExclusive": true,
     "npcId": 2215,
     "interactAction": "Attack",
+    "waypoints": [
+      {
+        "name": "Trollheim teleport",
+        "worldX": 2889,
+        "worldY": 3678,
+        "worldPlane": 0,
+        "requirements": { "quests": ["EADGARS_RUSE"] }
+      },
+      {
+        "name": "Walk from Death Plateau",
+        "worldX": 2861,
+        "worldY": 3594,
+        "worldPlane": 0
+      }
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to the God Wars Dungeon and kill General Graardor.",
@@ -190,6 +205,21 @@
     "mutuallyExclusive": true,
     "npcId": 2205,
     "interactAction": "Attack",
+    "waypoints": [
+      {
+        "name": "Trollheim teleport",
+        "worldX": 2889,
+        "worldY": 3678,
+        "worldPlane": 0,
+        "requirements": { "quests": ["EADGARS_RUSE"] }
+      },
+      {
+        "name": "Walk from Death Plateau",
+        "worldX": 2861,
+        "worldY": 3594,
+        "worldPlane": 0
+      }
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to the God Wars Dungeon and kill Commander Zilyana.",
@@ -292,6 +322,21 @@
     "mutuallyExclusive": true,
     "npcId": 3129,
     "interactAction": "Attack",
+    "waypoints": [
+      {
+        "name": "Trollheim teleport",
+        "worldX": 2889,
+        "worldY": 3678,
+        "worldPlane": 0,
+        "requirements": { "quests": ["EADGARS_RUSE"] }
+      },
+      {
+        "name": "Walk from Death Plateau",
+        "worldX": 2861,
+        "worldY": 3594,
+        "worldPlane": 0
+      }
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to the God Wars Dungeon and kill K'ril Tsutsaroth.",
@@ -394,6 +439,21 @@
     "mutuallyExclusive": true,
     "npcId": 3162,
     "interactAction": "Attack",
+    "waypoints": [
+      {
+        "name": "Trollheim teleport",
+        "worldX": 2889,
+        "worldY": 3678,
+        "worldPlane": 0,
+        "requirements": { "quests": ["EADGARS_RUSE"] }
+      },
+      {
+        "name": "Walk from Death Plateau",
+        "worldX": 2861,
+        "worldY": 3594,
+        "worldPlane": 0
+      }
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to the God Wars Dungeon and kill Kree'arra.",
@@ -799,6 +859,21 @@
     "mutuallyExclusive": true,
     "npcId": 8615,
     "interactAction": "Attack",
+    "waypoints": [
+      {
+        "name": "Fairy ring CIR",
+        "worldX": 1310,
+        "worldY": 3810,
+        "worldPlane": 0,
+        "requirements": { "quests": ["FAIRYTALE_II__CURE_A_QUEEN"] }
+      },
+      {
+        "name": "Walk from Shayzien",
+        "worldX": 1478,
+        "worldY": 3537,
+        "worldPlane": 0
+      }
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Mount Karuulm and kill the Alchemical Hydra.",
@@ -1697,6 +1772,22 @@
     "mutuallyExclusive": true,
     "npcId": 9425,
     "interactAction": "Attack",
+    "waypoints": [
+      {
+        "name": "Drakan's medallion to Slepe",
+        "worldX": 3730,
+        "worldY": 3340,
+        "worldPlane": 0,
+        "requirements": { "quests": ["SINS_OF_THE_FATHER"] }
+      },
+      {
+        "name": "Walk via Canifis",
+        "worldX": 3492,
+        "worldY": 3488,
+        "worldPlane": 0,
+        "requirements": { "quests": ["PRIEST_IN_PERIL"] }
+      }
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Slepe, east Morytania and attack The Nightmare.",
@@ -1793,6 +1884,21 @@
     "mutuallyExclusive": true,
     "npcId": 11278,
     "interactAction": "Attack",
+    "waypoints": [
+      {
+        "name": "Trollheim teleport",
+        "worldX": 2889,
+        "worldY": 3678,
+        "worldPlane": 0,
+        "requirements": { "quests": ["EADGARS_RUSE"] }
+      },
+      {
+        "name": "Walk from Death Plateau",
+        "worldX": 2861,
+        "worldY": 3594,
+        "worldPlane": 0
+      }
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to God Wars Dungeon entrance, Trollheim and attack Nex.",
@@ -2232,6 +2338,21 @@
     "mutuallyExclusive": true,
     "npcId": 494,
     "interactAction": "Attack",
+    "waypoints": [
+      {
+        "name": "Fairy ring AKQ",
+        "worldX": 2319,
+        "worldY": 3615,
+        "worldPlane": 0,
+        "requirements": { "quests": ["FAIRYTALE_II__CURE_A_QUEEN"] }
+      },
+      {
+        "name": "Walk from Piscatoris fishing colony",
+        "worldX": 2341,
+        "worldY": 3649,
+        "worldPlane": 0
+      }
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Kraken Cove and kill the Kraken.",
@@ -3471,6 +3592,22 @@
     "locationDescription": "Ver Sinhaza, Morytania",
     "travelTip": "Drakan's medallion -> Ver Sinhaza",
     "mutuallyExclusive": true,
+    "waypoints": [
+      {
+        "name": "Drakan's medallion to Ver Sinhaza",
+        "worldX": 3649,
+        "worldY": 3218,
+        "worldPlane": 0,
+        "requirements": { "quests": ["SINS_OF_THE_FATHER"] }
+      },
+      {
+        "name": "Walk via Canifis",
+        "worldX": 3492,
+        "worldY": 3488,
+        "worldPlane": 0,
+        "requirements": { "quests": ["PRIEST_IN_PERIL"] }
+      }
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Ver Sinhaza, Morytania and enter Theatre of Blood.",
