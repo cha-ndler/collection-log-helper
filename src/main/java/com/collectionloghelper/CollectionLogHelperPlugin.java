@@ -50,6 +50,8 @@ import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.client.events.NpcLootReceived;
+import net.runelite.client.game.ItemStack;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.ScriptPreFired;
 import net.runelite.api.events.StatChanged;
@@ -498,6 +500,23 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (panel != null)
 			{
 				panel.rebuild();
+			}
+		}
+	}
+
+	@Subscribe
+	public void onNpcLootReceived(NpcLootReceived event)
+	{
+		for (ItemStack itemStack : event.getItems())
+		{
+			int itemId = itemStack.getId();
+			CollectionLogItem item = database.getItemById(itemId);
+			if (item != null && !collectionState.isItemObtained(itemId))
+			{
+				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
+					"<col=00c8c8>[Collection Log Helper]</col> Collection log drop: " + item.getName(),
+					null);
+				guidanceSequencer.onItemObtained(itemId);
 			}
 		}
 	}
