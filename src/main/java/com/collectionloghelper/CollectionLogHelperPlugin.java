@@ -62,6 +62,7 @@ import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.gameval.ItemID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
+import net.runelite.client.chat.ChatCommandManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
@@ -134,6 +135,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private InfoBoxManager infoBoxManager;
+
+	@Inject
+	private ChatCommandManager chatCommandManager;
 
 	@Inject
 	private DropRateDatabase database;
@@ -285,12 +289,14 @@ public class CollectionLogHelperPlugin extends Plugin
 			});
 		}
 
+		chatCommandManager.registerCommand("clh", this::onClhCommand);
 		log.info("Collection Log Helper started");
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
+		chatCommandManager.unregisterCommand("clh");
 		clientToolbar.removeNavigation(navButton);
 		overlayManager.remove(guidanceOverlay);
 		overlayManager.remove(guidanceMinimapOverlay);
@@ -1263,6 +1269,57 @@ public class CollectionLogHelperPlugin extends Plugin
 			log.debug("WorldEntity transform failed, using fallback location", e);
 		}
 		return fallback;
+	}
+
+	private void onClhCommand(ChatMessage chatMessage, String message)
+	{
+		int obtained = collectionState.getTotalObtained();
+		int total = collectionState.getTotalPossible();
+		String progressLine;
+		if (total > 0)
+		{
+			double pct = (obtained * 100.0) / total;
+			progressLine = String.format("Collection Log: %d/%d (%.1f%%)", obtained, total, pct);
+		}
+		else
+		{
+			progressLine = "Collection Log: not synced";
+		}
+
+		String guidanceLine;
+		if (guidanceSequencer.isActive() && guidanceSequencer.getActiveSource() != null)
+		{
+			String sourceName = guidanceSequencer.getActiveSource().getName();
+			int step = guidanceSequencer.getCurrentIndex() + 1;
+			int totalSteps = guidanceSequencer.getTotalSteps();
+			guidanceLine = String.format("Guiding: %s step %d/%d", sourceName, step, totalSteps);
+		}
+		else
+		{
+			guidanceLine = "No active guidance";
+		}
+
+		String topPickLine;
+		List<ScoredItem> ranked = calculator.rankByEfficiency();
+		ScoredItem topPick = ranked.stream()
+			.filter(s -> !s.isLocked())
+			.findFirst()
+			.orElse(null);
+		if (topPick != null)
+		{
+			double hours = topPick.getScore() > 0 ? 100.0 / topPick.getScore() : 0;
+			String timeStr = ClueCompletionEstimator.formatTime((int) (hours * 3600));
+			topPickLine = String.format("Top pick: %s (~%s)", topPick.getSource().getName(), timeStr);
+		}
+		else
+		{
+			topPickLine = "Top pick: none available";
+		}
+
+		String output = "<col=00c8c8>[Collection Log Helper]</col> "
+			+ progressLine + " | " + guidanceLine + " | " + topPickLine;
+		clientThread.invokeLater(() ->
+			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", output, null));
 	}
 
 	@Provides
