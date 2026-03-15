@@ -7,6 +7,7 @@ import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -260,6 +261,48 @@ public class GuidanceSequencer
 	}
 
 	/**
+	 * Called when an NPC dies. Checks ACTOR_DEATH condition.
+	 */
+	public void onNpcDeath(int npcId)
+	{
+		if (!active)
+		{
+			return;
+		}
+
+		GuidanceStep step = getRawCurrentStep();
+		if (step != null && step.getCompletionCondition() == CompletionCondition.ACTOR_DEATH
+			&& step.getCompletionNpcId() == npcId)
+		{
+			log.info("Step {} complete (ACTOR_DEATH: {})", currentIndex + 1, npcId);
+			advanceStep();
+		}
+	}
+
+	/**
+	 * Called when a chat message is received. Checks CHAT_MESSAGE_RECEIVED condition using regex.
+	 */
+	public void onChatMessage(String message)
+	{
+		if (!active)
+		{
+			return;
+		}
+
+		GuidanceStep step = getRawCurrentStep();
+		if (step != null && step.getCompletionCondition() == CompletionCondition.CHAT_MESSAGE_RECEIVED
+			&& step.getCompletionChatPattern() != null)
+		{
+			if (Pattern.compile(step.getCompletionChatPattern()).matcher(message).find())
+			{
+				log.info("Step {} complete (CHAT_MESSAGE_RECEIVED: matched '{}')",
+					currentIndex + 1, step.getCompletionChatPattern());
+				advanceStep();
+			}
+		}
+	}
+
+	/**
 	 * Called when the player interacts with an NPC. Checks NPC_TALKED_TO condition.
 	 */
 	public void onNpcInteracted(int npcId)
@@ -431,6 +474,9 @@ public class GuidanceSequencer
 			case PLAYER_ON_PLANE:
 				return lastKnownPlayerLocation != null
 					&& lastKnownPlayerLocation.getPlane() == step.getWorldPlane();
+			case ACTOR_DEATH:
+			case CHAT_MESSAGE_RECEIVED:
+				return false;
 			default:
 				return false;
 		}
@@ -449,6 +495,7 @@ public class GuidanceSequencer
 			null,  // worldMessage
 			0, null, null,  // objectId, objectIds, objectInteractAction
 			null,  // highlightItemIds
+			null,  // completionChatPattern
 			false,  // useItemOnObject
 			0, 0   // loopBackToStep, loopCount
 		);
