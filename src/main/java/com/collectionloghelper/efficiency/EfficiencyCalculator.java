@@ -189,9 +189,14 @@ public class EfficiencyCalculator
 
 			if (item.getDropRate() > 0 && item.getDropRate() < 1.0)
 			{
+				double baseRate = item.getDropRate();
+				if (source.getCategory() == CollectionLogCategory.RAIDS)
+				{
+					baseRate *= config.raidTeamSize().getDropRateMultiplier();
+				}
 				double effectiveRate = rolls > 1
-					? 1.0 - Math.pow(1.0 - item.getDropRate(), rolls)
-					: item.getDropRate();
+					? 1.0 - Math.pow(1.0 - baseRate, rolls)
+					: baseRate;
 				productMissAll *= (1.0 - effectiveRate);
 			}
 			else if (item.getDropRate() >= 1.0)
@@ -279,9 +284,15 @@ public class EfficiencyCalculator
 		else
 		{
 			// Probabilistic drop — score by expected kills
+			double baseRate = item.getDropRate();
+			// Raid team size reduces individual drop rate (points split among team)
+			if (source.getCategory() == CollectionLogCategory.RAIDS)
+			{
+				baseRate *= config.raidTeamSize().getDropRateMultiplier();
+			}
 			double effectiveRate = rolls > 1
-				? 1.0 - Math.pow(1.0 - item.getDropRate(), rolls)
-				: item.getDropRate();
+				? 1.0 - Math.pow(1.0 - baseRate, rolls)
+				: baseRate;
 			return effectiveRate * killsPerHour * 100.0;
 		}
 	}
