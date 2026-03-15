@@ -94,7 +94,11 @@
         "worldX": 2889,
         "worldY": 3678,
         "worldPlane": 0,
-        "requirements": { "quests": ["EADGARS_RUSE"] }
+        "requirements": {
+          "quests": [
+            "EADGARS_RUSE"
+          ]
+        }
       },
       {
         "name": "Walk from Death Plateau",
@@ -211,7 +215,11 @@
         "worldX": 2889,
         "worldY": 3678,
         "worldPlane": 0,
-        "requirements": { "quests": ["EADGARS_RUSE"] }
+        "requirements": {
+          "quests": [
+            "EADGARS_RUSE"
+          ]
+        }
       },
       {
         "name": "Walk from Death Plateau",
@@ -328,7 +336,11 @@
         "worldX": 2889,
         "worldY": 3678,
         "worldPlane": 0,
-        "requirements": { "quests": ["EADGARS_RUSE"] }
+        "requirements": {
+          "quests": [
+            "EADGARS_RUSE"
+          ]
+        }
       },
       {
         "name": "Walk from Death Plateau",
@@ -445,7 +457,11 @@
         "worldX": 2889,
         "worldY": 3678,
         "worldPlane": 0,
-        "requirements": { "quests": ["EADGARS_RUSE"] }
+        "requirements": {
+          "quests": [
+            "EADGARS_RUSE"
+          ]
+        }
       },
       {
         "name": "Walk from Death Plateau",
@@ -865,7 +881,11 @@
         "worldX": 1310,
         "worldY": 3810,
         "worldPlane": 0,
-        "requirements": { "quests": ["FAIRYTALE_II__CURE_A_QUEEN"] }
+        "requirements": {
+          "quests": [
+            "FAIRYTALE_II__CURE_A_QUEEN"
+          ]
+        }
       },
       {
         "name": "Walk from Shayzien",
@@ -1667,7 +1687,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "requirements": {
-      "quests": ["PRIEST_IN_PERIL"]
+      "quests": [
+        "PRIEST_IN_PERIL"
+      ]
     },
     "items": [
       {
@@ -1778,14 +1800,22 @@
         "worldX": 3730,
         "worldY": 3340,
         "worldPlane": 0,
-        "requirements": { "quests": ["SINS_OF_THE_FATHER"] }
+        "requirements": {
+          "quests": [
+            "SINS_OF_THE_FATHER"
+          ]
+        }
       },
       {
         "name": "Walk via Canifis",
         "worldX": 3492,
         "worldY": 3488,
         "worldPlane": 0,
-        "requirements": { "quests": ["PRIEST_IN_PERIL"] }
+        "requirements": {
+          "quests": [
+            "PRIEST_IN_PERIL"
+          ]
+        }
       }
     ],
     "guidanceSteps": [
@@ -1890,7 +1920,11 @@
         "worldX": 2889,
         "worldY": 3678,
         "worldPlane": 0,
-        "requirements": { "quests": ["EADGARS_RUSE"] }
+        "requirements": {
+          "quests": [
+            "EADGARS_RUSE"
+          ]
+        }
       },
       {
         "name": "Walk from Death Plateau",
@@ -2344,7 +2378,11 @@
         "worldX": 2319,
         "worldY": 3615,
         "worldPlane": 0,
-        "requirements": { "quests": ["FAIRYTALE_II__CURE_A_QUEEN"] }
+        "requirements": {
+          "quests": [
+            "FAIRYTALE_II__CURE_A_QUEEN"
+          ]
+        }
       },
       {
         "name": "Walk from Piscatoris fishing colony",
@@ -3598,14 +3636,22 @@
         "worldX": 3649,
         "worldY": 3218,
         "worldPlane": 0,
-        "requirements": { "quests": ["SINS_OF_THE_FATHER"] }
+        "requirements": {
+          "quests": [
+            "SINS_OF_THE_FATHER"
+          ]
+        }
       },
       {
         "name": "Walk via Canifis",
         "worldX": 3492,
         "worldY": 3488,
         "worldPlane": 0,
-        "requirements": { "quests": ["PRIEST_IN_PERIL"] }
+        "requirements": {
+          "quests": [
+            "PRIEST_IN_PERIL"
+          ]
+        }
       }
     ],
     "guidanceSteps": [
@@ -4692,7 +4738,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "requirements": {
-      "quests": ["SINS_OF_THE_FATHER"]
+      "quests": [
+        "SINS_OF_THE_FATHER"
+      ]
     },
     "items": [
       {
@@ -4804,7 +4852,9 @@
     "travelTip": "Quetzal whistle -> Cam Torum",
     "killTimeSeconds": 360,
     "requirements": {
-      "quests": ["PERILOUS_MOONS"]
+      "quests": [
+        "PERILOUS_MOONS"
+      ]
     },
     "items": [
       {
@@ -6956,7 +7006,9 @@
     "locationDescription": "Iorwerth Dungeon, Prifddinas",
     "travelTip": "Teleport crystal -> Prifddinas",
     "requirements": {
-      "quests": ["SONG_OF_THE_ELVES"],
+      "quests": [
+        "SONG_OF_THE_ELVES"
+      ],
       "skills": [
         {
           "skill": "SLAYER",
@@ -10145,85 +10197,217 @@
     "pointsPerHour": 300,
     "guidanceSteps": [
       {
-        "description": "Travel to Mos Le'Harmless",
-        "worldX": 3811,
-        "worldY": 2992,
+        "description": "Travel to Trouble Brewing on Mos Le'Harmless",
+        "worldX": 3810,
+        "worldY": 3021,
         "worldPlane": 0,
-        "worldMessage": "Travel to Mos Le'Harmless. Use World 304 for active games.",
+        "npcId": 0,
+        "interactAction": null,
+        "dialogOptions": null,
+        "travelTip": "Minigame tele -> Trouble Brew",
+        "requiredItemIds": null,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionItemId": 0,
+        "completionItemCount": 0,
+        "completionDistance": 10,
+        "completionNpcId": 0,
+        "worldMessage": "Head to the Trouble Brewing lobby and talk to Honest Jimmy to join a team.",
+        "objectId": 0,
+        "objectIds": null,
+        "objectInteractAction": null,
+        "highlightItemIds": null,
+        "useItemOnObject": false,
+        "completionChatPattern": null,
+        "loopBackToStep": 0,
+        "loopCount": 0
       },
       {
-        "description": "Talk to Honest Jimmy to join a game",
-        "worldX": 3811,
-        "worldY": 2992,
+        "description": "Talk to Honest Jimmy to join a team",
+        "worldX": 3810,
+        "worldY": 3021,
         "worldPlane": 0,
         "npcId": 1816,
         "interactAction": "Join-Team",
-        "worldMessage": "Talk to Honest Jimmy to join a Trouble Brewing game.",
+        "dialogOptions": null,
+        "travelTip": null,
+        "requiredItemIds": null,
         "completionCondition": "NPC_TALKED_TO",
-        "completionNpcId": 1816
+        "completionItemId": 0,
+        "completionItemCount": 0,
+        "completionDistance": 0,
+        "completionNpcId": 1816,
+        "worldMessage": null,
+        "objectId": 0,
+        "objectIds": null,
+        "objectInteractAction": null,
+        "highlightItemIds": null,
+        "useItemOnObject": false,
+        "completionChatPattern": null,
+        "loopBackToStep": 0,
+        "loopCount": 0
       },
       {
         "description": "Take 25 buckets from the workbench",
-        "objectId": 15934,
-        "objectInteractAction": "Take",
-        "worldMessage": "Take 25 buckets from the workbench.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "npcId": 0,
+        "interactAction": null,
+        "dialogOptions": null,
+        "travelTip": null,
+        "requiredItemIds": null,
         "completionCondition": "INVENTORY_HAS_ITEM",
         "completionItemId": 1925,
-        "completionItemCount": 25
+        "completionItemCount": 25,
+        "completionDistance": 0,
+        "completionNpcId": 0,
+        "worldMessage": "Take 25 buckets from the workbench using Take-5.",
+        "objectId": 15934,
+        "objectIds": null,
+        "objectInteractAction": "Take-Tool",
+        "highlightItemIds": null,
+        "useItemOnObject": false,
+        "completionChatPattern": null,
+        "loopBackToStep": 0,
+        "loopCount": 0
       },
       {
         "description": "Fill buckets at the water pump",
-        "objectId": 15936,
-        "objectInteractAction": "Use",
-        "highlightItemIds": [1925],
-        "useItemOnObject": true,
-        "worldMessage": "Use buckets on the water pump to fill them.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "npcId": 0,
+        "interactAction": null,
+        "dialogOptions": null,
+        "travelTip": null,
+        "requiredItemIds": null,
         "completionCondition": "INVENTORY_HAS_ITEM",
         "completionItemId": 1929,
-        "completionItemCount": 25
+        "completionItemCount": 25,
+        "completionDistance": 0,
+        "completionNpcId": 0,
+        "worldMessage": null,
+        "objectId": 15936,
+        "objectIds": null,
+        "objectInteractAction": null,
+        "highlightItemIds": [
+          1925
+        ],
+        "useItemOnObject": true,
+        "completionChatPattern": null,
+        "loopBackToStep": 0,
+        "loopCount": 0
       },
       {
         "description": "Climb ladder to upper floor",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 2,
-        "objectIds": [15899, 15896],
+        "npcId": 0,
+        "interactAction": null,
+        "dialogOptions": null,
+        "travelTip": null,
+        "requiredItemIds": null,
+        "completionCondition": "PLAYER_ON_PLANE",
+        "completionItemId": 0,
+        "completionItemCount": 0,
+        "completionDistance": 0,
+        "completionNpcId": 0,
+        "worldMessage": null,
+        "objectId": 0,
+        "objectIds": [
+          15899,
+          15896
+        ],
         "objectInteractAction": "Climb-up",
-        "worldMessage": "Climb the ladder to the upper floor.",
-        "completionCondition": "PLAYER_ON_PLANE"
+        "highlightItemIds": null,
+        "useItemOnObject": false,
+        "completionChatPattern": null,
+        "loopBackToStep": 0,
+        "loopCount": 0
       },
       {
-        "description": "Empty buckets into the water hopper",
-        "worldX": 3811,
-        "worldY": 3000,
+        "description": "Empty buckets of water into the hopper",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 2,
-        "objectIds": [15847, 15873],
-        "objectInteractAction": "Use",
-        "highlightItemIds": [1929],
-        "useItemOnObject": true,
-        "worldMessage": "Use buckets of water on the hopper to empty them.",
+        "npcId": 0,
+        "interactAction": null,
+        "dialogOptions": null,
+        "travelTip": null,
+        "requiredItemIds": null,
         "completionCondition": "INVENTORY_NOT_HAS_ITEM",
-        "completionItemId": 1929
+        "completionItemId": 1929,
+        "completionItemCount": 0,
+        "completionDistance": 0,
+        "completionNpcId": 0,
+        "worldMessage": null,
+        "objectId": 0,
+        "objectIds": [
+          15847,
+          15873
+        ],
+        "objectInteractAction": null,
+        "highlightItemIds": [
+          1929
+        ],
+        "useItemOnObject": true,
+        "completionChatPattern": null,
+        "loopBackToStep": 0,
+        "loopCount": 0
       },
       {
         "description": "Climb ladder back to ground floor",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
-        "objectIds": [15901, 15898],
-        "objectInteractAction": "Climb-down",
-        "worldMessage": "Climb the ladder back down.",
+        "npcId": 0,
+        "interactAction": null,
+        "dialogOptions": null,
+        "travelTip": null,
+        "requiredItemIds": null,
         "completionCondition": "PLAYER_ON_PLANE",
-        "loopBackToStep": 3,
+        "completionItemId": 0,
+        "completionItemCount": 0,
+        "completionDistance": 0,
+        "completionNpcId": 0,
+        "worldMessage": null,
+        "objectId": 0,
+        "objectIds": [
+          15901,
+          15898
+        ],
+        "objectInteractAction": "Climb-down",
+        "highlightItemIds": null,
+        "useItemOnObject": false,
+        "completionChatPattern": null,
+        "loopBackToStep": 4,
         "loopCount": 4
       },
       {
-        "description": "Spend Pieces of Eight on rewards",
-        "worldX": 3811,
-        "worldY": 2992,
+        "description": "AFK until the game ends, then spend Pieces of Eight on rewards",
+        "worldX": 3810,
+        "worldY": 3021,
         "worldPlane": 0,
         "npcId": 1816,
         "interactAction": "Trade",
-        "worldMessage": "Trade with Honest Jimmy to spend your Pieces of Eight on rewards.",
-        "completionCondition": "MANUAL"
+        "dialogOptions": null,
+        "travelTip": null,
+        "requiredItemIds": null,
+        "completionCondition": "MANUAL",
+        "completionItemId": 0,
+        "completionItemCount": 0,
+        "completionDistance": 0,
+        "completionNpcId": 0,
+        "worldMessage": "All 100 buckets contributed! AFK until the round ends, then trade Honest Jimmy for rewards.",
+        "objectId": 0,
+        "objectIds": null,
+        "objectInteractAction": null,
+        "highlightItemIds": null,
+        "useItemOnObject": false,
+        "completionChatPattern": null,
+        "loopBackToStep": 0,
+        "loopCount": 0
       }
     ]
   },
