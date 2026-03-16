@@ -2,13 +2,21 @@
 
 A RuneLite plugin that guides players through efficient collection log completion with intelligent efficiency scoring, on-screen guidance overlays, and multiple viewing modes.
 
-**Coverage:** Expanding toward full collection log support (~1,698 items across 128 sources) — [see current progress](ITEMS_TRACKER.md)
+**Coverage:** 1,931 items across 184 sources with efficiency scoring, guidance overlays, and account-aware filtering.
 
 ## Features
 
 ### Efficiency Scoring
 
-Ranks collection log sources by how efficiently you can obtain missing items. The score factors in drop rates, kill times, and drop table mechanics to suggest the most time-effective grinds. Sources with mutually exclusive unique tables (GWD, raids, clue scrolls, etc.) use the highest individual item rate instead of summing rates, preventing inflated rankings. Multi-roll sources (Zulrah, Wintertodt, etc.) account for multiple drop chances per kill. Reward shop and guaranteed items are scored separately from probabilistic drops.
+Ranks collection log sources by how efficiently you can obtain missing items. The score factors in drop rates, kill times, and drop table mechanics to suggest the most time-effective grinds:
+
+- **Combined-rate scoring** — `1 - Π(1 - p_i)` for all missing items on a source, giving the probability of ANY new log slot per kill
+- **Independent drop modeling** — Items on separate tables (pets, mutagens, raid uniques) are scored correctly using independent probability
+- **Sequential dependencies** — Items requiring predecessors (Bludgeon pieces, Hydra rings, defender chain) are excluded from scoring until their prerequisite is obtained
+- **Raid team size scaling** — Adjustable Solo/Duo/Trio/Full team size affects drop rates and kill times for raids
+- **Slayer task overhead** — Task-only sources inflate effective kill time by 1/P(creature|master) when not on task
+- **Main/Ironman toggle** — Separate completion rates for accounts with significantly different methods (Corp, GWD, wilderness bosses, etc.)
+- **Mutually exclusive variants** — Raid difficulty variants (CoX/CoX CM, ToA 150/300/500) and shared-loot boss groups (GWD, DT2) are cross-referenced with "(also: ...)" notes
 
 ### Account-Aware Requirements
 
@@ -33,7 +41,15 @@ Click "Guide Me" on any item to activate navigation aids:
 - **Tile highlight** — Cyan marker on the target location in the game world
 - **Minimap dot** — Cyan indicator on the minimap
 - **World map marker** — Clickable pin on the world map with edge snapping
+- **World map route line** — Colored line with arrowhead from player to target on the world map
 - **Hint arrow** — Native yellow hint arrow at the target (same as Quest Helper)
+- **NPC highlighting** — Hull highlight with action text on target NPCs
+- **Object highlighting** — Game object highlights with "Use X on Y" prompts
+- **Ground item highlighting** — Highlights lootable items relevant to current guidance step
+- **Inventory item highlighting** — Arrow indicators on items needed for interactions
+- **Dialog highlighting** — Highlights correct dialog choices matching the current source
+- **Hover tooltips** — Rich tooltip info when hovering highlighted NPCs and objects
+- **Right-click menu** — "Collection Log Guide" option on right-clicking tracked NPCs
 - **Shortest Path integration** — Automatically requests a route from the [Shortest Path](https://github.com/Skretzo/shortest-path) plugin if installed
 
 ### Step-by-Step Guidance
@@ -61,6 +77,8 @@ Automatically detects new collection log entries via chat messages and varbit ch
 | Default Mode | Efficient | Which mode opens on startup |
 | Hide Obtained Items | On | Hide items already obtained from the list |
 | Hide Locked Content | On | Hide sources requiring quests or skills you haven't met |
+| Account Type | Main | Adjusts completion rates for main accounts vs ironmen |
+| Raid Team Size | Solo | Your typical raid team size — adjusts drop rates and kill times |
 | Show Sync Reminder | On | Remind you to open the Collection Log after login |
 | **Guidance** | | |
 | Auto-Advance Guidance | On | Automatically start guidance for the next best source when a sequence completes |
@@ -73,7 +91,7 @@ Automatically detects new collection log entries via chat messages and varbit ch
 
 ## Data
 
-All drop data lives in [`src/main/resources/com/collectionloghelper/drop_rates.json`](src/main/resources/com/collectionloghelper/drop_rates.json). Each source includes world coordinates, kill time, drop table mechanics (`mutuallyExclusive`, `rollsPerKill`), and items with OSRS item IDs, decimal drop rates, pet flags, and wiki page links.
+All drop data lives in [`src/main/resources/com/collectionloghelper/drop_rates.json`](src/main/resources/com/collectionloghelper/drop_rates.json). Each source includes world coordinates, kill times (main + iron), drop table mechanics (`mutuallyExclusive`, `rollsPerKill`, `mutuallyExclusiveSources`), quest/skill requirements, NPC IDs, guidance steps, and items with OSRS item IDs, decimal drop rates, pet flags, `independent`/`requiresPrevious` flags, and wiki page links. Kill times are aligned with TempleOSRS EHB rates.
 
 ## Building
 
@@ -92,7 +110,7 @@ We're actively expanding toward full collection log coverage. See:
 
 ## Acknowledgments
 
-This plugin references patterns from [Quest Helper](https://github.com/Zoinkwiz/quest-helper) (hint arrows, overlays) and [Shortest Path](https://github.com/Skretzo/shortest-path) (inter-plugin pathfinding via PluginMessage). See [CREDITS.md](CREDITS.md) for full details.
+This plugin references patterns from [Quest Helper](https://github.com/Zoinkwiz/quest-helper) (hint arrows, overlays, step sequencing) and [Shortest Path](https://github.com/Skretzo/shortest-path) (inter-plugin pathfinding). Kill time and scoring data validated against the [Log Hunters](https://discord.gg/loghunters) community's Log Adviser spreadsheet. See [CREDITS.md](CREDITS.md) for full details.
 
 ## License
 
