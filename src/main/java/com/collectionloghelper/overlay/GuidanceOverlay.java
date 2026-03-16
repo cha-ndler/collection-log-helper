@@ -156,6 +156,8 @@ public class GuidanceOverlay extends OverlayPanel
 					if (candidate != null && candidate.getId() == npcId)
 					{
 						npc = candidate;
+						// Cache the fallback result to avoid re-scanning every frame
+						this.trackedNpc = npc;
 						break;
 					}
 				}
