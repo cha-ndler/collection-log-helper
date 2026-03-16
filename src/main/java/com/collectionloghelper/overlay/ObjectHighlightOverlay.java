@@ -26,6 +26,8 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
+import net.runelite.client.ui.overlay.tooltip.Tooltip;
+import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import javax.inject.Singleton;
 
 @Singleton
@@ -39,9 +41,13 @@ public class ObjectHighlightOverlay extends Overlay
 	private final Client client;
 	private final CollectionLogHelperConfig config;
 
+	@Inject
+	private TooltipManager tooltipManager;
+
 	private volatile Set<Integer> targetObjectIds = Collections.emptySet();
 	private volatile String objectInteractAction;
 	private volatile boolean useItemOnObject;
+	private volatile String tooltipText;
 
 	@Inject
 	private ObjectHighlightOverlay(Client client, CollectionLogHelperConfig config)
@@ -72,11 +78,17 @@ public class ObjectHighlightOverlay extends Overlay
 		this.useItemOnObject = value;
 	}
 
+	public void setTooltipText(String text)
+	{
+		this.tooltipText = text;
+	}
+
 	public void clearTarget()
 	{
 		this.targetObjectIds = Collections.emptySet();
 		this.objectInteractAction = null;
 		this.useItemOnObject = false;
+		this.tooltipText = null;
 	}
 
 	@Override
@@ -86,6 +98,7 @@ public class ObjectHighlightOverlay extends Overlay
 		final Set<Integer> objIds = this.targetObjectIds;
 		final String action = this.objectInteractAction;
 		final boolean useItem = this.useItemOnObject;
+		final String tipText = this.tooltipText;
 
 		if (objIds.isEmpty())
 		{
@@ -110,6 +123,9 @@ public class ObjectHighlightOverlay extends Overlay
 			return null;
 		}
 		Tile[][] tiles = allTiles[plane];
+		final Point mousePos = client.getMouseCanvasPosition();
+		final String builtTooltip = OverlayTooltipHelper.buildTooltip(tipText, action);
+		boolean tooltipShown = false;
 
 		for (Tile[] row : tiles)
 		{
@@ -133,8 +149,9 @@ public class ObjectHighlightOverlay extends Overlay
 					{
 						if (gameObject != null && objIds.contains(gameObject.getId()))
 						{
-							renderObjectHighlight(graphics, gameObject.getConvexHull(),
-								gameObject.getLocalLocation(), overlayColor, action, useItem);
+							tooltipShown |= renderObjectHighlight(graphics, gameObject.getConvexHull(),
+								gameObject.getLocalLocation(), overlayColor, action, useItem,
+								mousePos, builtTooltip, tooltipShown);
 						}
 					}
 				}
@@ -143,16 +160,18 @@ public class ObjectHighlightOverlay extends Overlay
 				WallObject wallObject = tile.getWallObject();
 				if (wallObject != null && objIds.contains(wallObject.getId()))
 				{
-					renderObjectHighlight(graphics, wallObject.getConvexHull(),
-						wallObject.getLocalLocation(), overlayColor, action, useItem);
+					tooltipShown |= renderObjectHighlight(graphics, wallObject.getConvexHull(),
+						wallObject.getLocalLocation(), overlayColor, action, useItem,
+						mousePos, builtTooltip, tooltipShown);
 				}
 
 				// Check decorative objects
 				DecorativeObject decorativeObject = tile.getDecorativeObject();
 				if (decorativeObject != null && objIds.contains(decorativeObject.getId()))
 				{
-					renderObjectHighlight(graphics, decorativeObject.getConvexHull(),
-						decorativeObject.getLocalLocation(), overlayColor, action, useItem);
+					tooltipShown |= renderObjectHighlight(graphics, decorativeObject.getConvexHull(),
+						decorativeObject.getLocalLocation(), overlayColor, action, useItem,
+						mousePos, builtTooltip, tooltipShown);
 				}
 			}
 		}
@@ -160,9 +179,11 @@ public class ObjectHighlightOverlay extends Overlay
 		return null;
 	}
 
-	private void renderObjectHighlight(Graphics2D graphics, Shape hull, LocalPoint localPoint,
-		Color overlayColor, String action, boolean useItem)
+	private boolean renderObjectHighlight(Graphics2D graphics, Shape hull, LocalPoint localPoint,
+		Color overlayColor, String action, boolean useItem,
+		Point mousePos, String builtTooltip, boolean tooltipAlreadyShown)
 	{
+		boolean showedTooltip = false;
 		if (hull != null)
 		{
 			Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
@@ -178,6 +199,14 @@ public class ObjectHighlightOverlay extends Overlay
 			int arrowX = (int) bounds.getCenterX();
 			int arrowTipY = (int) bounds.getMinY() - ARROW_GAP;
 			renderDirectionArrow(graphics, arrowX, arrowTipY, overlayColor);
+
+			// Show tooltip when mouse hovers over the object hull (once per frame)
+			if (!tooltipAlreadyShown && builtTooltip != null
+				&& mousePos != null && hull.contains(mousePos.getX(), mousePos.getY()))
+			{
+				tooltipManager.add(new Tooltip(builtTooltip));
+				showedTooltip = true;
+			}
 		}
 
 		// Render action text above the object
@@ -191,6 +220,7 @@ public class ObjectHighlightOverlay extends Overlay
 				renderOutlinedText(graphics, textPoint, displayText, overlayColor);
 			}
 		}
+		return showedTooltip;
 	}
 
 	private void renderDirectionArrow(Graphics2D graphics, int x, int tipY, Color color)
