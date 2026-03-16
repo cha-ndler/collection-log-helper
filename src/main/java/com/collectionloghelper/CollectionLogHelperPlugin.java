@@ -53,6 +53,7 @@ import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameObjectDespawned;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
+import net.runelite.api.events.InteractingChanged;
 import net.runelite.api.events.HitsplatApplied;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.ItemSpawned;
@@ -234,6 +235,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	/** Pending ShortestPath target — set after "clear", sent as "path" on the next game tick. */
 	private WorldPoint pendingShortestPathTarget;
 	private boolean slayerRefreshPending;
+
+	/** Tracked NPC for guidance overlay — maintained via NpcSpawned/NpcDespawned events. */
+	private volatile NPC trackedGuidanceNpc;
 
 	/** Writer for guidance authoring event log. Opened when authoring mode enabled. */
 	private java.io.PrintWriter authoringLogWriter;
@@ -983,6 +987,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (step != null)
 			{
 				applyStepToOverlays(step, source.getName());
+				scanForTrackedNpc(step);
 			}
 			if (panel != null)
 			{
@@ -1157,6 +1162,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	private void clearGuidanceOverlays()
 	{
+		trackedGuidanceNpc = null;
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		dialogHighlightOverlay.clear();
@@ -1171,6 +1177,31 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	/**
+	 * Scans currently loaded NPCs to find a match for the given step's target NPC ID.
+	 * Called once when a new step activates to seed the tracked NPC reference.
+	 */
+	private void scanForTrackedNpc(GuidanceStep step)
+	{
+		trackedGuidanceNpc = null;
+		guidanceOverlay.setTrackedNpc(null);
+
+		if (step == null || step.getNpcId() <= 0)
+		{
+			return;
+		}
+
+		for (NPC npc : client.getTopLevelWorldView().npcs())
+		{
+			if (npc != null && npc.getId() == step.getNpcId())
+			{
+				trackedGuidanceNpc = npc;
+				guidanceOverlay.setTrackedNpc(npc);
+				break;
+			}
+		}
+	}
+
+	/**
 	 * Callback from GuidanceSequencer when the current step changes.
 	 */
 	private void onStepChanged(GuidanceStep step)
@@ -1179,6 +1210,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		String sourceName = guidanceSequencer.getActiveSource() != null
 			? guidanceSequencer.getActiveSource().getName() : "";
 		applyStepToOverlays(step, sourceName);
+		scanForTrackedNpc(step);
 
 		if (config.notifyOnStepComplete())
 		{
@@ -1241,6 +1273,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	public void deactivateGuidance()
 	{
 		lastMessagedStepIndex = -1;
+		trackedGuidanceNpc = null;
 		if (activeInfoBox != null)
 		{
 			infoBoxManager.removeInfoBox(activeInfoBox);
@@ -1539,23 +1572,61 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onNpcSpawned(NpcSpawned event)
 	{
-		if (!config.guidanceAuthoring())
-		{
-			return;
-		}
 		NPC npc = event.getNpc();
-		authoringLog("NPC_SPAWN id=%d name='%s' index=%d", npc.getId(), npc.getName(), npc.getIndex());
+
+		if (config.guidanceAuthoring())
+		{
+			authoringLog("NPC_SPAWN id=%d name='%s' index=%d", npc.getId(), npc.getName(), npc.getIndex());
+		}
+
+		// Track the spawned NPC if it matches the current guidance step's target
+		if (guidanceSequencer.isActive() && trackedGuidanceNpc == null)
+		{
+			GuidanceStep step = guidanceSequencer.getRawCurrentStep();
+			if (step != null && step.getNpcId() > 0 && npc.getId() == step.getNpcId())
+			{
+				trackedGuidanceNpc = npc;
+				guidanceOverlay.setTrackedNpc(npc);
+			}
+		}
 	}
 
 	@Subscribe
 	public void onNpcDespawned(NpcDespawned event)
 	{
-		if (!config.guidanceAuthoring())
+		NPC npc = event.getNpc();
+
+		if (config.guidanceAuthoring())
+		{
+			authoringLog("NPC_DESPAWN id=%d name='%s'", npc.getId(), npc.getName());
+		}
+
+		// Clear tracked NPC if it despawned
+		if (npc == trackedGuidanceNpc)
+		{
+			trackedGuidanceNpc = null;
+			guidanceOverlay.setTrackedNpc(null);
+		}
+	}
+
+	@Subscribe
+	public void onInteractingChanged(InteractingChanged event)
+	{
+		if (!guidanceSequencer.isActive())
 		{
 			return;
 		}
-		NPC npc = event.getNpc();
-		authoringLog("NPC_DESPAWN id=%d name='%s'", npc.getId(), npc.getName());
+
+		if (event.getSource() == client.getLocalPlayer() && event.getTarget() instanceof NPC)
+		{
+			NPC npc = (NPC) event.getTarget();
+			GuidanceStep step = guidanceSequencer.getRawCurrentStep();
+			if (step != null && step.getCompletionCondition() == CompletionCondition.NPC_TALKED_TO
+				&& step.getCompletionNpcId() == npc.getId())
+			{
+				guidanceSequencer.onNpcInteracted(npc.getId());
+			}
+		}
 	}
 
 	@Subscribe
