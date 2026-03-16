@@ -67,6 +67,9 @@ public class GuidanceStep
 	/** Item IDs to highlight in the player's inventory during this step. */
 	List<Integer> highlightItemIds;
 
+	/** Item IDs to highlight on the ground during this step. */
+	List<Integer> groundItemIds;
+
 	/** Regex pattern for CHAT_MESSAGE_RECEIVED completion check. */
 	String completionChatPattern;
 
