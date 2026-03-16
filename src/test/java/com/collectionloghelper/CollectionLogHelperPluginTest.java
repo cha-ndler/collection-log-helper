@@ -5,6 +5,7 @@ import net.runelite.client.externalplugins.ExternalPluginManager;
 
 public class CollectionLogHelperPluginTest
 {
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception
 	{
 		System.setProperty("collectionlog.devmode", "true");
