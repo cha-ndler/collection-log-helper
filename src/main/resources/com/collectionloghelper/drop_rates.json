@@ -20462,5 +20462,208 @@
         "completionCondition": "MANUAL"
       }
     ]
+  },
+  {
+    "name": "Thieving (Seed Stalls)",
+    "category": "OTHER",
+    "worldX": 3080,
+    "worldY": 3252,
+    "worldPlane": 0,
+    "killTimeSeconds": 2,
+    "items": [
+      {
+        "itemId": 20663,
+        "name": "Rocky",
+        "dropRate": 0.00001778,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Rocky"
+      }
+    ],
+    "locationDescription": "Draynor Village seed market",
+    "travelTip": "Draynor Village teleport or Lumbridge Home teleport -> walk west",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Draynor Village seed market and steal from seed stalls.",
+        "worldX": 3080,
+        "worldY": 3252,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Black Chinchompas",
+    "category": "OTHER",
+    "worldX": 3143,
+    "worldY": 3771,
+    "worldPlane": 0,
+    "killTimeSeconds": 4,
+    "items": [
+      {
+        "itemId": 13324,
+        "name": "Baby chinchompa",
+        "dropRate": 0.00001208,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Baby_chinchompa"
+      }
+    ],
+    "locationDescription": "Wilderness black chinchompa hunting area",
+    "travelTip": "Wilderness Obelisk to level 35 -> run east",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Wilderness black chinchompa hunting area and catch black chinchompas.",
+        "worldX": 3143,
+        "worldY": 3771,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Woodcutting (Teak Trees)",
+    "category": "OTHER",
+    "worldX": 2770,
+    "worldY": 2700,
+    "worldPlane": 0,
+    "killTimeSeconds": 2,
+    "items": [
+      {
+        "itemId": 13322,
+        "name": "Beaver",
+        "dropRate": 0.00000378,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Beaver"
+      }
+    ],
+    "locationDescription": "Ape Atoll teak trees",
+    "travelTip": "Teleport to Ape Atoll or fairy ring CLR",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Ape Atoll teak trees and chop teak logs.",
+        "worldX": 2770,
+        "worldY": 2700,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Mining (Gemstone Rocks)",
+    "category": "OTHER",
+    "worldX": 2842,
+    "worldY": 9381,
+    "worldPlane": 0,
+    "killTimeSeconds": 2,
+    "items": [
+      {
+        "itemId": 13321,
+        "name": "Rock golem",
+        "dropRate": 0.00000478,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Rock_golem"
+      }
+    ],
+    "locationDescription": "Shilo Village underground mine",
+    "travelTip": "Cart ride to Shilo Village -> enter underground mine",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Shilo Village underground mine and mine gemstone rocks.",
+        "worldX": 2842,
+        "worldY": 9381,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Fishing (Swordfish)",
+    "category": "OTHER",
+    "worldX": 2604,
+    "worldY": 3414,
+    "worldPlane": 0,
+    "killTimeSeconds": 2,
+    "items": [
+      {
+        "itemId": 13320,
+        "name": "Heron",
+        "dropRate": 0.00000791,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Heron"
+      }
+    ],
+    "locationDescription": "Fishing Guild",
+    "travelTip": "Skills necklace teleport to Fishing Guild",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Fishing Guild and harpoon swordfish.",
+        "worldX": 2604,
+        "worldY": 3414,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Runecrafting (Fire Runes)",
+    "category": "OTHER",
+    "worldX": 2583,
+    "worldY": 4838,
+    "worldPlane": 0,
+    "killTimeSeconds": 1,
+    "items": [
+      {
+        "itemId": 20665,
+        "name": "Rift guardian",
+        "dropRate": 0.00000056,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Rift_guardian"
+      }
+    ],
+    "locationDescription": "Fire altar",
+    "travelTip": "Ring of dueling to Duel Arena -> enter fire altar ruins with fire talisman/tiara",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Fire altar and craft fire runes.",
+        "worldX": 2583,
+        "worldY": 4838,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Farming (Fruit Trees)",
+    "category": "OTHER",
+    "worldX": 1249,
+    "worldY": 3719,
+    "worldPlane": 0,
+    "killTimeSeconds": 60,
+    "items": [
+      {
+        "itemId": 20661,
+        "name": "Tangleroot",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Tangleroot"
+      }
+    ],
+    "locationDescription": "Farming Guild",
+    "travelTip": "Fairy ring CIR -> Farming Guild",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Farming Guild and check health of fruit trees.",
+        "worldX": 1249,
+        "worldY": 3719,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
   }
 ]
