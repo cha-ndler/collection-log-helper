@@ -70,10 +70,21 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "accountType",
+		name = "Account Type",
+		description = "Adjusts completion rates for main accounts vs ironmen",
+		position = 4
+	)
+	default AccountType accountType()
+	{
+		return AccountType.MAIN;
+	}
+
+	@ConfigItem(
 		keyName = "raidTeamSize",
 		name = "Raid Team Size",
 		description = "Your typical raid team size — adjusts estimated completion times for CoX, ToB, and ToA",
-		position = 4
+		position = 5
 	)
 	default RaidTeamSize raidTeamSize()
 	{
@@ -84,7 +95,7 @@ public interface CollectionLogHelperConfig extends Config
 		keyName = "proximityMaxDistance",
 		name = "Proximity Max Distance",
 		description = "Maximum tile distance for Proximity mode (0 = unlimited)",
-		position = 5
+		position = 6
 	)
 	default int proximityMaxDistance()
 	{
@@ -95,7 +106,7 @@ public interface CollectionLogHelperConfig extends Config
 		keyName = "afkFilter",
 		name = "Efficient AFK",
 		description = "Filter sources by AFK level in Efficient and Pet Hunt modes",
-		position = 6,
+		position = 7,
 		hidden = true
 	)
 	default AfkFilter afkFilter()
@@ -107,7 +118,7 @@ public interface CollectionLogHelperConfig extends Config
 		keyName = "showSyncReminder",
 		name = "Show Sync Reminder",
 		description = "Show a reminder to open the Collection Log after login to sync obtained items",
-		position = 7
+		position = 8
 	)
 	default boolean showSyncReminder()
 	{
@@ -118,7 +129,7 @@ public interface CollectionLogHelperConfig extends Config
 		keyName = "showBankScanReminder",
 		name = "Show Bank Scan Reminder",
 		description = "Show a reminder to open your Bank after login so the plugin can scan for clue scrolls and other items",
-		position = 8
+		position = 9
 	)
 	default boolean showBankScanReminder()
 	{

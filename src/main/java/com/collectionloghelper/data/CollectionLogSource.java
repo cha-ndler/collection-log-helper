@@ -13,6 +13,7 @@ public class CollectionLogSource
     int worldY;
     int worldPlane;
     int killTimeSeconds;
+    int ironKillTimeSeconds;
     String locationDescription;
     List<Waypoint> waypoints;
     RewardType rewardType;
