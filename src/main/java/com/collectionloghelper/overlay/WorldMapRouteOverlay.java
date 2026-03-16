@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.geom.Line2D;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -87,6 +88,7 @@ public class WorldMapRouteOverlay extends Overlay
 		}
 
 		// Clip to the map widget bounds so the line doesn't draw outside the map
+		Shape previousClip = graphics.getClip();
 		graphics.setClip(mapBounds);
 
 		Color overlayColor = config.overlayColor();
@@ -110,6 +112,9 @@ public class WorldMapRouteOverlay extends Overlay
 
 		// Draw arrowhead at the target end
 		drawArrowhead(graphics, playerMapPoint, targetMapPoint, lineColor);
+
+		// Restore previous clip so other overlays are not affected
+		graphics.setClip(previousClip);
 
 		return null;
 	}
