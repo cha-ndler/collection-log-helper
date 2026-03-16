@@ -46,7 +46,7 @@ import net.runelite.api.WorldEntity;
 import net.runelite.api.WorldView;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
-import net.runelite.api.InventoryID;
+import net.runelite.api.gameval.InventoryID;
 import net.runelite.api.NPC;
 import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.ActorDeath;
@@ -591,9 +591,9 @@ public class CollectionLogHelperPlugin extends Plugin
 			logContainerChange(event);
 		}
 
-		if (event.getContainerId() == InventoryID.INVENTORY.getId())
+		if (event.getContainerId() == InventoryID.INV)
 		{
-			net.runelite.api.ItemContainer invContainer = client.getItemContainer(InventoryID.INVENTORY);
+			net.runelite.api.ItemContainer invContainer = client.getItemContainer(InventoryID.INV);
 			if (invContainer != null)
 			{
 				playerInventoryState.scanInventory(invContainer);
@@ -605,7 +605,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			}
 		}
 
-		if (event.getContainerId() == InventoryID.BANK.getId())
+		if (event.getContainerId() == InventoryID.BANK)
 		{
 			// Scan bank for clue-related items every time it updates
 			net.runelite.api.ItemContainer bankContainer = client.getItemContainer(InventoryID.BANK);
@@ -1563,9 +1563,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private void logContainerChange(ItemContainerChanged event)
 	{
 		int containerId = event.getContainerId();
-		if (containerId == InventoryID.INVENTORY.getId())
+		if (containerId == InventoryID.INV)
 		{
-			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.INVENTORY);
+			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.INV);
 			if (c == null)
 			{
 				return;
@@ -1580,9 +1580,9 @@ public class CollectionLogHelperPlugin extends Plugin
 			}
 			authoringLog(sb.toString());
 		}
-		else if (containerId == InventoryID.EQUIPMENT.getId())
+		else if (containerId == InventoryID.WORN)
 		{
-			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.EQUIPMENT);
+			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.WORN);
 			if (c == null)
 			{
 				return;
