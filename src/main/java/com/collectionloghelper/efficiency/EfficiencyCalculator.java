@@ -515,7 +515,7 @@ public class EfficiencyCalculator
 						client.getTotalLevel());
 					for (Skill skill : Skill.values())
 					{
-						if (skill == Skill.OVERALL)
+						if (skill == null)
 						{
 							continue;
 						}
