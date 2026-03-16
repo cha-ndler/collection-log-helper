@@ -2278,7 +2278,7 @@
         "independent": true
       },
       {
-        "itemId": 12644,
+        "itemId": 12645,
         "name": "Pet dagannoth rex",
         "dropRate": 0.0002,
         "varbitId": 0,
@@ -2344,7 +2344,7 @@
         "independent": true
       },
       {
-        "itemId": 12643,
+        "itemId": 12644,
         "name": "Pet dagannoth prime",
         "dropRate": 0.0002,
         "varbitId": 0,
@@ -2410,7 +2410,7 @@
         "independent": true
       },
       {
-        "itemId": 12645,
+        "itemId": 12643,
         "name": "Pet dagannoth supreme",
         "dropRate": 0.0002,
         "varbitId": 0,
@@ -4951,7 +4951,7 @@
     },
     "items": [
       {
-        "itemId": 23862,
+        "itemId": 4207,
         "name": "Crystal weapon seed",
         "dropRate": 0.02,
         "varbitId": 0,
@@ -4959,7 +4959,7 @@
         "wikiPage": "Crystal_weapon_seed"
       },
       {
-        "itemId": 23866,
+        "itemId": 23956,
         "name": "Crystal armour seed",
         "dropRate": 0.02,
         "varbitId": 0,
@@ -5796,7 +5796,7 @@
     "items": [
       {
         "itemId": 29784,
-        "name": "Araxyte fang",
+        "name": "Araxyte venom sack",
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
@@ -5804,7 +5804,7 @@
       },
       {
         "itemId": 29786,
-        "name": "Araxyte head",
+        "name": "Jar of venom",
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
@@ -5820,7 +5820,7 @@
       },
       {
         "itemId": 29788,
-        "name": "Noxious blade",
+        "name": "Araxyte head",
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
@@ -5829,7 +5829,7 @@
       },
       {
         "itemId": 29792,
-        "name": "Noxious pommel",
+        "name": "Noxious blade",
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
@@ -5838,7 +5838,7 @@
       },
       {
         "itemId": 29794,
-        "name": "Rax",
+        "name": "Noxious pommel",
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
@@ -5913,7 +5913,7 @@
     },
     "items": [
       {
-        "itemId": 29296,
+        "itemId": 29019,
         "name": "Blue moon helm",
         "dropRate": 0.004464,
         "varbitId": 0,
@@ -5922,7 +5922,7 @@
         "independent": true
       },
       {
-        "itemId": 29298,
+        "itemId": 29013,
         "name": "Blue moon chestplate",
         "dropRate": 0.004464,
         "varbitId": 0,
@@ -5931,7 +5931,7 @@
         "independent": true
       },
       {
-        "itemId": 29300,
+        "itemId": 29016,
         "name": "Blue moon tassets",
         "dropRate": 0.004464,
         "varbitId": 0,
@@ -5940,7 +5940,7 @@
         "independent": true
       },
       {
-        "itemId": 29302,
+        "itemId": 29010,
         "name": "Eclipse moon helm",
         "dropRate": 0.004464,
         "varbitId": 0,
@@ -5949,7 +5949,7 @@
         "independent": true
       },
       {
-        "itemId": 29304,
+        "itemId": 29004,
         "name": "Eclipse moon chestplate",
         "dropRate": 0.004464,
         "varbitId": 0,
@@ -5958,7 +5958,7 @@
         "independent": true
       },
       {
-        "itemId": 29306,
+        "itemId": 29007,
         "name": "Eclipse moon tassets",
         "dropRate": 0.004464,
         "varbitId": 0,
@@ -5967,7 +5967,7 @@
         "independent": true
       },
       {
-        "itemId": 29308,
+        "itemId": 29028,
         "name": "Blood moon helm",
         "dropRate": 0.004464,
         "varbitId": 0,
@@ -5976,7 +5976,7 @@
         "independent": true
       },
       {
-        "itemId": 29310,
+        "itemId": 29022,
         "name": "Blood moon chestplate",
         "dropRate": 0.004464,
         "varbitId": 0,
@@ -5985,7 +5985,7 @@
         "independent": true
       },
       {
-        "itemId": 29312,
+        "itemId": 29025,
         "name": "Blood moon tassets",
         "dropRate": 0.004464,
         "varbitId": 0,
@@ -5994,7 +5994,7 @@
         "independent": true
       },
       {
-        "itemId": 29314,
+        "itemId": 28997,
         "name": "Dual macuahuitl",
         "dropRate": 0.004464,
         "varbitId": 0,
@@ -6059,7 +6059,7 @@
     "items": [
       {
         "itemId": 29574,
-        "name": "Tormented synapse",
+        "name": "Burning claw",
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
@@ -6067,7 +6067,7 @@
       },
       {
         "itemId": 29580,
-        "name": "Burning claw",
+        "name": "Tormented synapse",
         "dropRate": 0.001333,
         "varbitId": 0,
         "isPet": false,
@@ -6075,7 +6075,7 @@
       },
       {
         "itemId": 29684,
-        "name": "Tormented ornament kit",
+        "name": "Guthixian temple teleport",
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
@@ -8642,7 +8642,7 @@
       },
       {
         "itemId": 24729,
-        "name": "Giant squirrel",
+        "name": "Dark dye",
         "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": true,
@@ -9258,13 +9258,40 @@
         "pointCost": 300
       },
       {
-        "itemId": 8015,
+        "itemId": 6926,
         "name": "Bones to peaches",
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bones_to_Peaches",
         "pointCost": 200
+      },
+      {
+        "itemId": 6908,
+        "name": "Beginner wand",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Beginner_wand",
+        "pointCost": 30
+      },
+      {
+        "itemId": 6910,
+        "name": "Apprentice wand",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Apprentice_wand",
+        "pointCost": 60
+      },
+      {
+        "itemId": 6912,
+        "name": "Teacher wand",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Teacher_wand",
+        "pointCost": 150
       }
     ],
     "locationDescription": "Mage Training Arena, north-east of Al Kharid",
@@ -15239,7 +15266,7 @@
     },
     "items": [
       {
-        "itemId": 10859,
+        "itemId": 25617,
         "name": "Tea flask",
         "dropRate": 0.1,
         "varbitId": 0,
@@ -15247,7 +15274,7 @@
         "wikiPage": "Tea_flask"
       },
       {
-        "itemId": 10882,
+        "itemId": 25623,
         "name": "Rune satchel",
         "dropRate": 0.15,
         "varbitId": 0,
@@ -15290,7 +15317,7 @@
     },
     "items": [
       {
-        "itemId": 10859,
+        "itemId": 25617,
         "name": "Tea flask",
         "dropRate": 0.1,
         "varbitId": 0,
@@ -15298,7 +15325,7 @@
         "wikiPage": "Tea_flask"
       },
       {
-        "itemId": 10878,
+        "itemId": 25619,
         "name": "Green satchel",
         "dropRate": 0.15,
         "varbitId": 0,
@@ -15341,7 +15368,7 @@
     },
     "items": [
       {
-        "itemId": 10859,
+        "itemId": 25617,
         "name": "Tea flask",
         "dropRate": 0.1,
         "varbitId": 0,
@@ -15349,7 +15376,7 @@
         "wikiPage": "Tea_flask"
       },
       {
-        "itemId": 10879,
+        "itemId": 25620,
         "name": "Red satchel",
         "dropRate": 0.15,
         "varbitId": 0,
@@ -15392,7 +15419,7 @@
     },
     "items": [
       {
-        "itemId": 10859,
+        "itemId": 25617,
         "name": "Tea flask",
         "dropRate": 0.1,
         "varbitId": 0,
@@ -15400,7 +15427,7 @@
         "wikiPage": "Tea_flask"
       },
       {
-        "itemId": 10880,
+        "itemId": 25621,
         "name": "Black satchel",
         "dropRate": 0.15,
         "varbitId": 0,
@@ -15443,7 +15470,7 @@
     },
     "items": [
       {
-        "itemId": 10859,
+        "itemId": 25617,
         "name": "Tea flask",
         "dropRate": 0.1,
         "varbitId": 0,
@@ -15451,7 +15478,7 @@
         "wikiPage": "Tea_flask"
       },
       {
-        "itemId": 10881,
+        "itemId": 25622,
         "name": "Gold satchel",
         "dropRate": 0.15,
         "varbitId": 0,
@@ -15494,7 +15521,7 @@
     },
     "items": [
       {
-        "itemId": 10859,
+        "itemId": 25617,
         "name": "Tea flask",
         "dropRate": 0.1,
         "varbitId": 0,
@@ -15502,7 +15529,7 @@
         "wikiPage": "Tea_flask"
       },
       {
-        "itemId": 10877,
+        "itemId": 25618,
         "name": "Plain satchel",
         "dropRate": 0.15,
         "varbitId": 0,
