@@ -134,6 +134,14 @@ public class EfficiencyCalculatorTest
 		return new CollectionLogItem(id, name, 1.0, 0, false, null, 0, milestoneKills, false, false);
 	}
 
+	private CollectionLogSource makeMutuallyExclusiveSource(String name, CollectionLogCategory category,
+		int killTimeSeconds, List<String> variants, List<CollectionLogItem> items)
+	{
+		return new CollectionLogSource(name, category, 3000, 3000, 0,
+			killTimeSeconds, 0, name, Collections.emptyList(),
+			RewardType.DROP, 0, true, variants, 1, false, 0, null, 0, null, null, null, null, 0, null, 0, items);
+	}
+
 	// --- Per-item scoring: score = best individual item's score ---
 
 	@Test
@@ -833,5 +841,76 @@ public class EfficiencyCalculatorTest
 		double overallCombined = 1.0 - (1.0 - standardCombined) * (1.0 - independentCombined);
 		double expectedScore = overallCombined * 60 * 100;
 		assertEquals(expectedScore, result.getScore(), 0.1);
+	}
+
+	// --- Mutually exclusive source variant note ---
+
+	@Test
+	public void testMutuallyExclusiveSource_reasoningShowsVariants()
+	{
+		// CoX-style source with a variant — reasoning should include "(also: CoX CM)"
+		List<CollectionLogItem> items = Collections.singletonList(makeItem(1, "Twisted bow", 0.0013));
+		CollectionLogSource source = makeMutuallyExclusiveSource("Chambers of Xeric",
+			CollectionLogCategory.RAIDS, 1800,
+			Arrays.asList("Chambers of Xeric (Challenge Mode)"), items);
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		assertNotNull(result);
+		assertTrue("Reasoning should mention variant source",
+			result.getReasoning().contains("(also: Chambers of Xeric (Challenge Mode))"));
+	}
+
+	@Test
+	public void testMutuallyExclusiveSource_multipleVariants()
+	{
+		// ToA-style source with two variants
+		List<CollectionLogItem> items = Collections.singletonList(makeItem(1, "Fang", 0.002));
+		CollectionLogSource source = makeMutuallyExclusiveSource("Tombs of Amascut",
+			CollectionLogCategory.RAIDS, 1500,
+			Arrays.asList("Tombs of Amascut (300 Invocation)", "Tombs of Amascut (500 Invocation)"),
+			items);
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		assertNotNull(result);
+		assertTrue("Reasoning should mention both variants",
+			result.getReasoning().contains("(also: Tombs of Amascut (300 Invocation), Tombs of Amascut (500 Invocation))"));
+	}
+
+	@Test
+	public void testNonMutuallyExclusiveSource_noVariantNote()
+	{
+		// Normal source without variants — reasoning should NOT contain "(also:"
+		List<CollectionLogItem> items = Collections.singletonList(makeItem(1, "Drop", 0.01));
+		CollectionLogSource source = makeSource("Normal Boss", CollectionLogCategory.BOSSES, 60, items);
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		assertNotNull(result);
+		assertFalse("Non-variant source should not have variant note",
+			result.getReasoning().contains("(also:"));
+	}
+
+	@Test
+	public void testMutuallyExclusiveSource_sharedItemAlreadyObtained()
+	{
+		// Both CoX and CoX CM share the same item IDs. If an item is obtained,
+		// it should show as obtained for BOTH sources (since isItemObtained checks by ID).
+		List<CollectionLogItem> items = Collections.singletonList(makeItem(20997, "Twisted bow", 0.0013));
+		CollectionLogSource cox = makeMutuallyExclusiveSource("Chambers of Xeric",
+			CollectionLogCategory.RAIDS, 1800,
+			Arrays.asList("Chambers of Xeric (Challenge Mode)"), items);
+		CollectionLogSource coxCm = makeMutuallyExclusiveSource("Chambers of Xeric (Challenge Mode)",
+			CollectionLogCategory.RAIDS, 1200,
+			Arrays.asList("Chambers of Xeric"), items);
+
+		// Item obtained — both sources should return null (fully completed)
+		when(collectionState.isItemObtained(20997)).thenReturn(true);
+		assertNull("CoX should be null when shared item obtained", calculator.scoreSource(cox, false));
+		assertNull("CoX CM should be null when shared item obtained", calculator.scoreSource(coxCm, false));
 	}
 }
