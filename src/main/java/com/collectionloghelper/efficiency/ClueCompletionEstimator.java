@@ -106,7 +106,7 @@ public class ClueCompletionEstimator
 		int totalLevel = 0;
 		for (Skill skill : Skill.values())
 		{
-			if (skill == Skill.OVERALL)
+			if (skill == null)
 			{
 				continue;
 			}
