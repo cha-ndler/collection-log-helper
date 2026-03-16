@@ -72,7 +72,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, category, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null, items);
+			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0, items);
 	}
 
 	private CollectionLogSource makeShopSource(String name, int killTimeSeconds,
@@ -80,7 +80,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.SHOP, pointsPerHour, false, 1, false, 0, null, 0, null, null, null, null, items);
+			RewardType.SHOP, pointsPerHour, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0, items);
 	}
 
 	private CollectionLogSource makeMilestoneSource(String name, int killTimeSeconds,
@@ -88,7 +88,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.MILESTONE, 0, false, 1, false, 0, null, 0, null, null, null, null, items);
+			RewardType.MILESTONE, 0, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0, items);
 	}
 
 	private CollectionLogSource makeMixedSource(String name, int killTimeSeconds,
@@ -96,7 +96,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.MIXED, pointsPerHour, false, 1, false, 0, null, 0, null, null, null, null, items);
+			RewardType.MIXED, pointsPerHour, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0, items);
 	}
 
 	private CollectionLogSource makeAggregatedSource(String name, int killTimeSeconds,
@@ -104,7 +104,7 @@ public class EfficiencyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			killTimeSeconds, name, Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, true, 0, null, 0, null, null, null, null, items);
+			RewardType.DROP, 0, false, 1, true, 0, null, 0, null, null, null, null, 0, null, 0, items);
 	}
 
 	private CollectionLogItem makeItem(int id, String name, double dropRate)
@@ -333,7 +333,7 @@ public class EfficiencyCalculatorTest
 		List<CollectionLogItem> items = Collections.singletonList(makeItem(1, "Drop", 1.0 / 512));
 		CollectionLogSource source = new CollectionLogSource("Test", CollectionLogCategory.BOSSES,
 			3000, 3000, 0, 120, "Test", Collections.emptyList(),
-			RewardType.DROP, 0, false, 2, false, 0, null, 0, null, null, null, null, items);
+			RewardType.DROP, 0, false, 2, false, 0, null, 0, null, null, null, null, 0, null, 0, items);
 		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
 
 		ScoredItem result = calculator.scoreSource(source, false);
@@ -486,7 +486,7 @@ public class EfficiencyCalculatorTest
 		CollectionLogSource source = new CollectionLogSource("Easy Treasure Trails",
 			CollectionLogCategory.CLUES, 3000, 3000, 0, 600,
 			"Easy Treasure Trails", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null,
+			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
 			Collections.singletonList(makeItem(1, "Drop", 0.01)));
 		when(clueEstimator.estimateCompletionSeconds("Easy Treasure Trails")).thenReturn(900);
 
@@ -500,7 +500,7 @@ public class EfficiencyCalculatorTest
 		CollectionLogSource source = new CollectionLogSource("Easy Treasure Trails",
 			CollectionLogCategory.CLUES, 3000, 3000, 0, 600,
 			"Easy Treasure Trails", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null,
+			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
 			Collections.singletonList(makeItem(1, "Drop", 0.01)));
 		when(clueEstimator.estimateCompletionSeconds("Easy Treasure Trails")).thenReturn(0);
 
@@ -592,7 +592,7 @@ public class EfficiencyCalculatorTest
 		// Source with afkLevel 0 should be excluded when filter is AFK+ (minLevel=2)
 		CollectionLogSource source = new CollectionLogSource("Test Boss", CollectionLogCategory.BOSSES,
 			3000, 3000, 0, 60, "Test Boss", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null,
+			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
 			Collections.singletonList(makeItem(1, "Drop", 0.01)));
 		lenient().when(collectionState.isItemObtained(1)).thenReturn(false);
 		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
@@ -608,7 +608,7 @@ public class EfficiencyCalculatorTest
 		// Source with afkLevel 2 should be included when filter is AFK+ (minLevel=2)
 		CollectionLogSource source = new CollectionLogSource("AFK Source", CollectionLogCategory.BOSSES,
 			3000, 3000, 0, 60, "AFK Source", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, 2, null, 0, null, null, null, null,
+			RewardType.DROP, 0, false, 1, false, 2, null, 0, null, null, null, null, 0, null, 0,
 			Collections.singletonList(makeItem(1, "Drop", 0.01)));
 		when(collectionState.isItemObtained(1)).thenReturn(false);
 		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
@@ -624,7 +624,7 @@ public class EfficiencyCalculatorTest
 		// When filter is OFF, all sources show regardless of afkLevel
 		CollectionLogSource source = new CollectionLogSource("Test Boss", CollectionLogCategory.BOSSES,
 			3000, 3000, 0, 60, "Test Boss", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null,
+			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
 			Collections.singletonList(makeItem(1, "Drop", 0.01)));
 		when(collectionState.isItemObtained(1)).thenReturn(false);
 		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
@@ -643,7 +643,7 @@ public class EfficiencyCalculatorTest
 		// effective kill time should be 20/0.05 = 400s
 		CollectionLogSource source = new CollectionLogSource("Abyssal Demon", CollectionLogCategory.OTHER,
 			3000, 3000, 0, 20, "Abyssal Demon", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null,
+			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
 			Collections.singletonList(makeItem(1, "Whip", 0.001953)));
 		when(slayerMasterDatabase.getMasterNames()).thenReturn(Collections.singletonList("Duradel"));
 		when(slayerMasterDatabase.getTaskProbability("Duradel", "abyssal demons")).thenReturn(0.05);
@@ -658,7 +658,7 @@ public class EfficiencyCalculatorTest
 		// If currently on abyssal demon task, no overhead applied
 		CollectionLogSource source = new CollectionLogSource("Abyssal Demon", CollectionLogCategory.OTHER,
 			3000, 3000, 0, 20, "Abyssal Demon", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null,
+			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
 			Collections.singletonList(makeItem(1, "Whip", 0.001953)));
 		when(slayerTaskState.isTaskActive()).thenReturn(true);
 		when(slayerTaskState.getCreatureName()).thenReturn("Abyssal demons");
@@ -673,7 +673,7 @@ public class EfficiencyCalculatorTest
 		// "Abyssal Sire" is NOT task-only (it's a boss), so no overhead
 		CollectionLogSource source = new CollectionLogSource("Abyssal Sire", CollectionLogCategory.BOSSES,
 			3000, 3000, 0, 180, "Abyssal Sire", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null,
+			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
 			Collections.singletonList(makeItem(1, "Unsired", 0.0078)));
 
 		int effectiveTime = calculator.getEffectiveKillTime(source);
@@ -686,7 +686,7 @@ public class EfficiencyCalculatorTest
 		// Two masters: Duradel P=0.06, Nieve P=0.04 — should use Duradel (higher P = lower overhead)
 		CollectionLogSource source = new CollectionLogSource("Abyssal Demon", CollectionLogCategory.OTHER,
 			3000, 3000, 0, 12, "Abyssal Demon", Collections.emptyList(),
-			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null,
+			RewardType.DROP, 0, false, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
 			Collections.singletonList(makeItem(1, "Whip", 0.001953)));
 		when(slayerMasterDatabase.getMasterNames()).thenReturn(Arrays.asList("Duradel", "Nieve"));
 		when(slayerMasterDatabase.getTaskProbability("Duradel", "abyssal demons")).thenReturn(0.06);

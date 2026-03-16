@@ -9908,6 +9908,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 1200,
     "afkLevel": 3,
+    "cumulativeTrackItemId": 1929,
+    "cumulativeTrackObjectIds": [15847, 15873],
+    "cumulativeTrackThreshold": 100,
     "requirements": {
       "quests": [
         "CABIN_FEVER"

@@ -27,6 +27,9 @@ public class CollectionLogSource
     List<String> dialogOptions;
     List<GuidanceStep> guidanceSteps;
     SourceRequirements requirements;
+    int cumulativeTrackItemId;
+    List<Integer> cumulativeTrackObjectIds;
+    int cumulativeTrackThreshold;
     List<CollectionLogItem> items;
 
     public RewardType getRewardType()
