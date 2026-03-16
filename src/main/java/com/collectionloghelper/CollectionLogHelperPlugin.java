@@ -25,6 +25,7 @@ import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
 import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
+import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
@@ -175,6 +176,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private ItemHighlightOverlay itemHighlightOverlay;
 
 	@Inject
+	private WorldMapRouteOverlay worldMapRouteOverlay;
+
+	@Inject
 	private DataSyncState dataSyncState;
 
 	@Inject
@@ -282,6 +286,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.add(dialogHighlightOverlay);
 		overlayManager.add(objectHighlightOverlay);
 		overlayManager.add(itemHighlightOverlay);
+		overlayManager.add(worldMapRouteOverlay);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -316,6 +321,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.remove(dialogHighlightOverlay);
 		overlayManager.remove(objectHighlightOverlay);
 		overlayManager.remove(itemHighlightOverlay);
+		overlayManager.remove(worldMapRouteOverlay);
 		deactivateGuidance();
 		lastObtainedCount = -1;
 		collectionLogOpen = false;
@@ -1077,6 +1083,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			dialogHighlightOverlay.setTargetDialogOptions(step.getDialogOptions());
 			dialogHighlightOverlay.setGuidanceActive(true);
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
+			worldMapRouteOverlay.setTargetPoint(worldPoint);
 			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, step.getDescription(), collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
 
@@ -1132,6 +1139,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		dialogHighlightOverlay.setTargetDialogOptions(source.getDialogOptions());
 		dialogHighlightOverlay.setGuidanceActive(true);
 		guidanceMinimapOverlay.setTargetPoint(worldPoint);
+		worldMapRouteOverlay.setTargetPoint(worldPoint);
 		activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
 		worldMapPointManager.add(activeMapPoint);
 
@@ -1156,6 +1164,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
+		worldMapRouteOverlay.clearTarget();
 		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
@@ -1236,6 +1245,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceSequencer.stopSequence();
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
+		worldMapRouteOverlay.clearTarget();
 		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
