@@ -61,9 +61,10 @@ import net.runelite.api.events.ItemSpawned;
 import net.runelite.api.events.ItemDespawned;
 import net.runelite.api.events.NpcSpawned;
 import net.runelite.api.events.NpcDespawned;
+import net.runelite.api.events.MenuEntryAdded;
+import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.client.events.NpcLootReceived;
 import net.runelite.client.game.ItemStack;
-import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.ScriptPreFired;
 import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
@@ -112,6 +113,8 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	/** Ticks to wait after the last script 4100 fires before finalizing the scan. */
 	private static final int SCAN_SETTLE_TICKS = 3;
+
+	private static final String MENU_OPTION_GUIDE = "Collection Log Guide";
 
 	@Inject
 	private Client client;
@@ -1286,9 +1289,68 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	@Subscribe
+	public void onMenuEntryAdded(MenuEntryAdded event)
+	{
+		if (!config.showOverlays())
+		{
+			return;
+		}
+
+		int type = event.getType();
+		if (type < MenuAction.NPC_FIRST_OPTION.getId() || type > MenuAction.NPC_FIFTH_OPTION.getId())
+		{
+			return;
+		}
+
+		NPC npc = event.getMenuEntry().getNpc();
+		if (npc == null)
+		{
+			return;
+		}
+
+		int npcId = npc.getId();
+		CollectionLogSource source = database.getSourceByNpcId(npcId);
+		if (source == null)
+		{
+			return;
+		}
+
+		// Skip if guidance is already active for this source
+		if (guidanceSequencer.isActive() && source.equals(guidanceSequencer.getActiveSource()))
+		{
+			return;
+		}
+
+		// Check if source has any missing items
+		boolean hasMissing = source.getItems().stream()
+			.anyMatch(item -> !collectionState.isItemObtained(item.getItemId()));
+		if (!hasMissing)
+		{
+			return;
+		}
+
+		client.getMenu().createMenuEntry(-1)
+			.setOption(MENU_OPTION_GUIDE)
+			.setTarget(event.getTarget())
+			.setType(MenuAction.RUNELITE)
+			.setIdentifier(npcId);
+	}
+
+	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked event)
 	{
 		MenuAction action = event.getMenuAction();
+
+		// Handle "Collection Log Guide" right-click menu action
+		if (action == MenuAction.RUNELITE && MENU_OPTION_GUIDE.equals(event.getMenuOption()))
+		{
+			CollectionLogSource source = database.getSourceByNpcId(event.getId());
+			if (source != null)
+			{
+				activateGuidance(source);
+			}
+			return;
+		}
 
 		// Authoring mode: log all interactions regardless of guidance state
 		if (config.guidanceAuthoring())
