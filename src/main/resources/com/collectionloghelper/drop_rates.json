@@ -88,6 +88,11 @@
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
     "travelTip": "Trollheim teleport -> GWD",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Commander Zilyana",
+      "K'ril Tsutsaroth",
+      "Kree'arra"
+    ],
     "npcId": 2215,
     "interactAction": "Attack",
     "waypoints": [
@@ -211,6 +216,11 @@
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
     "travelTip": "Trollheim teleport -> GWD",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "General Graardor",
+      "K'ril Tsutsaroth",
+      "Kree'arra"
+    ],
     "npcId": 2205,
     "interactAction": "Attack",
     "waypoints": [
@@ -334,6 +344,11 @@
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
     "travelTip": "Trollheim teleport -> GWD",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "General Graardor",
+      "Commander Zilyana",
+      "Kree'arra"
+    ],
     "npcId": 3129,
     "interactAction": "Attack",
     "waypoints": [
@@ -457,6 +472,11 @@
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
     "travelTip": "Trollheim teleport -> GWD",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "General Graardor",
+      "Commander Zilyana",
+      "K'ril Tsutsaroth"
+    ],
     "npcId": 3162,
     "interactAction": "Attack",
     "waypoints": [
@@ -1068,6 +1088,13 @@
       }
     ],
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Chaos Elemental",
+      "Scorpia",
+      "Venenatis",
+      "Vet'ion",
+      "Callisto"
+    ],
     "npcId": 963,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -1262,6 +1289,11 @@
     "locationDescription": "Duke Sucellus' lair, beneath the Wizards' Tower",
     "travelTip": "Quetzal whistle -> Cam Torum",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "The Leviathan",
+      "The Whisperer",
+      "Vardorvis"
+    ],
     "npcId": 12191,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -1374,6 +1406,11 @@
     "locationDescription": "Catacombs entrance, Kourend",
     "travelTip": "Xeric's talisman -> Heart",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Duke Sucellus",
+      "The Whisperer",
+      "Vardorvis"
+    ],
     "npcId": 12214,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -1486,6 +1523,11 @@
     "locationDescription": "Lassar Undercity entrance, Ice Mountain",
     "travelTip": "Lassar teleport (ancient)",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Duke Sucellus",
+      "The Leviathan",
+      "Vardorvis"
+    ],
     "npcId": 12204,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -1598,6 +1640,11 @@
     "locationDescription": "The Stranglewood, west of Slepe",
     "travelTip": "Slepe teleport (Drakan's)",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Duke Sucellus",
+      "The Leviathan",
+      "The Whisperer"
+    ],
     "npcId": 12223,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -2243,6 +2290,10 @@
     "locationDescription": "Waterbirth Island, Rellekka",
     "travelTip": "Lunar Isle tele -> Rellekka",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Dagannoth Prime",
+      "Dagannoth Supreme"
+    ],
     "npcId": 2267,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -2305,6 +2356,10 @@
     "locationDescription": "Waterbirth Island, Rellekka",
     "travelTip": "Lunar Isle tele -> Rellekka",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Dagannoth Rex",
+      "Dagannoth Supreme"
+    ],
     "npcId": 2266,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -2367,6 +2422,10 @@
     "locationDescription": "Waterbirth Island, Rellekka",
     "travelTip": "Lunar Isle tele -> Rellekka",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Dagannoth Rex",
+      "Dagannoth Prime"
+    ],
     "npcId": 2265,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -2755,6 +2814,13 @@
     "locationDescription": "Rogues' Castle, deep Wilderness",
     "travelTip": "Burning amulet -> Lava Maze",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Kalphite Queen",
+      "Scorpia",
+      "Venenatis",
+      "Vet'ion",
+      "Callisto"
+    ],
     "npcId": 2054,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -2815,6 +2881,13 @@
     "locationDescription": "Scorpia's Cave, deep Wilderness",
     "travelTip": "Burning amulet -> Lava Maze",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Kalphite Queen",
+      "Chaos Elemental",
+      "Venenatis",
+      "Vet'ion",
+      "Callisto"
+    ],
     "afkLevel": 1,
     "npcId": 6615,
     "interactAction": "Attack",
@@ -2944,6 +3017,13 @@
     "locationDescription": "Venenatis' Cave, Wilderness",
     "travelTip": "Burning amulet -> Bandit Camp",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Kalphite Queen",
+      "Chaos Elemental",
+      "Scorpia",
+      "Vet'ion",
+      "Callisto"
+    ],
     "npcId": 6610,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -3019,6 +3099,13 @@
     "locationDescription": "Vet'ion's Rest, Wilderness",
     "travelTip": "Burning amulet -> Bandit Camp",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Kalphite Queen",
+      "Chaos Elemental",
+      "Scorpia",
+      "Venenatis",
+      "Callisto"
+    ],
     "npcId": 6611,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -3094,6 +3181,13 @@
     "locationDescription": "Callisto's Den, Wilderness",
     "travelTip": "Burning amulet -> Lava Maze",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Kalphite Queen",
+      "Chaos Elemental",
+      "Scorpia",
+      "Venenatis",
+      "Vet'ion"
+    ],
     "npcId": 6609,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -3579,6 +3673,9 @@
     "locationDescription": "Mount Quidamortem, Great Kourend",
     "travelTip": "Xeric's talisman -> Chambers",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Chambers of Xeric (Challenge Mode)"
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Mount Quidamortem, Great Kourend and enter Chambers of Xeric.",
@@ -3587,9 +3684,6 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ],
-    "mutuallyExclusiveSources": [
-      "Chambers of Xeric (Challenge Mode)"
     ]
   },
   {
@@ -4291,6 +4385,10 @@
     "locationDescription": "Necropolis, Kharidian Desert",
     "travelTip": "Pharaoh's sceptre -> Necropolis",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Tombs of Amascut (300 Invocation)",
+      "Tombs of Amascut (500 Invocation)"
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Necropolis, Kharidian Desert and enter Tombs of Amascut.",
@@ -4299,10 +4397,6 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ],
-    "mutuallyExclusiveSources": [
-      "Tombs of Amascut (300 Invocation)",
-      "Tombs of Amascut (500 Invocation)"
     ]
   },
   {
@@ -4902,6 +4996,9 @@
     "locationDescription": "The Gauntlet, Prifddinas",
     "travelTip": "Teleport crystal -> Prifddinas",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "The Gauntlet"
+    ],
     "rewardType": "MIXED",
     "npcId": 9020,
     "interactAction": "Talk-to",
@@ -4981,6 +5078,9 @@
     "locationDescription": "The Gauntlet, Prifddinas",
     "travelTip": "Teleport crystal -> Prifddinas",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Corrupted Gauntlet"
+    ],
     "rewardType": "MIXED",
     "npcId": 9020,
     "interactAction": "Talk-to",
@@ -15157,6 +15257,14 @@
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Eye of newt + Feather)",
     "travelTip": "Fairy ring DJP",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Creature Creation (Frogeel)",
+      "Creature Creation (Jubster)",
+      "Creature Creation (Spidine)",
+      "Creature Creation (Swordchick)",
+      "Creature Creation (Unicow)"
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Tower of Life, south of Ardougne (Eye of newt + Feather) and create creatures at the Tower of Life.",
@@ -15200,6 +15308,14 @@
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Cowhide + Unicorn horn)",
     "travelTip": "Fairy ring DJP",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Creature Creation (Frogeel)",
+      "Creature Creation (Jubster)",
+      "Creature Creation (Newtroost)",
+      "Creature Creation (Spidine)",
+      "Creature Creation (Swordchick)"
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Tower of Life, south of Ardougne (Cowhide + Unicorn horn) and create creatures at the Tower of Life.",
@@ -15243,6 +15359,14 @@
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Red spiders' eggs + Raw sardine)",
     "travelTip": "Fairy ring DJP",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Creature Creation (Frogeel)",
+      "Creature Creation (Jubster)",
+      "Creature Creation (Newtroost)",
+      "Creature Creation (Swordchick)",
+      "Creature Creation (Unicow)"
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Tower of Life, south of Ardougne (Red spiders' eggs + Raw sardine) and create creatures at the Tower of Life.",
@@ -15286,6 +15410,14 @@
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Raw swordfish + Raw chicken)",
     "travelTip": "Fairy ring DJP",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Creature Creation (Frogeel)",
+      "Creature Creation (Jubster)",
+      "Creature Creation (Newtroost)",
+      "Creature Creation (Spidine)",
+      "Creature Creation (Unicow)"
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Tower of Life, south of Ardougne (Raw swordfish + Raw chicken) and create creatures at the Tower of Life.",
@@ -15329,6 +15461,14 @@
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Raw jubbly + Raw lobster)",
     "travelTip": "Fairy ring DJP",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Creature Creation (Frogeel)",
+      "Creature Creation (Newtroost)",
+      "Creature Creation (Spidine)",
+      "Creature Creation (Swordchick)",
+      "Creature Creation (Unicow)"
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Tower of Life, south of Ardougne (Raw jubbly + Raw lobster) and create creatures at the Tower of Life.",
@@ -15372,6 +15512,14 @@
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Raw cave eel + Giant frog legs)",
     "travelTip": "Fairy ring DJP",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Creature Creation (Jubster)",
+      "Creature Creation (Newtroost)",
+      "Creature Creation (Spidine)",
+      "Creature Creation (Swordchick)",
+      "Creature Creation (Unicow)"
+    ],
     "guidanceSteps": [
       {
         "description": "Travel to Tower of Life, south of Ardougne (Raw cave eel + Giant frog legs) and create creatures at the Tower of Life.",
