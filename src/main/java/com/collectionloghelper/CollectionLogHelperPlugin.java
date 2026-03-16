@@ -1191,7 +1191,14 @@ public class CollectionLogHelperPlugin extends Plugin
 			int current = guidanceSequencer.getCurrentIndex() + 1;
 			int total = guidanceSequencer.getTotalSteps();
 			activeInfoBox.setStepText(current + "/" + total);
-			activeInfoBox.setTooltipText(step.getDescription());
+			String tooltip = step.getDescription();
+			if (guidanceSequencer.getCumulativeTrackThreshold() > 0)
+			{
+				tooltip += "\n" + guidanceSequencer.getCumulativeActionCount()
+					+ "/" + guidanceSequencer.getCumulativeTrackThreshold()
+					+ " actions tracked";
+			}
+			activeInfoBox.setTooltipText(tooltip);
 			if (current == total)
 			{
 				activeInfoBox.setTextColor(java.awt.Color.GREEN);
@@ -1325,6 +1332,23 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (!guidanceSequencer.isActive())
 		{
 			return;
+		}
+
+		// Track cumulative use-item-on-object actions for guidance (e.g., Trouble Brewing hopper)
+		if (action == MenuAction.WIDGET_TARGET_ON_GAME_OBJECT)
+		{
+			CollectionLogSource source = guidanceSequencer.getActiveSource();
+			if (source != null && source.getCumulativeTrackItemId() > 0
+					&& source.getCumulativeTrackObjectIds() != null)
+			{
+				int objectId = event.getId();
+				int itemId = event.getParam0();
+				if (itemId == source.getCumulativeTrackItemId()
+						&& source.getCumulativeTrackObjectIds().contains(objectId))
+				{
+					guidanceSequencer.onTrackedAction();
+				}
+			}
 		}
 
 		// Detect NPC interactions for NPC_TALKED_TO completion condition.
