@@ -6,6 +6,7 @@
     "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 62,
+    "ironKillTimeSeconds": 116,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -80,7 +81,8 @@
         "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_general_graardor"
+        "wikiPage": "Pet_general_graardor",
+        "independent": true
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
@@ -127,6 +129,7 @@
     "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 62,
+    "ironKillTimeSeconds": 120,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -201,7 +204,8 @@
         "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_zilyana"
+        "wikiPage": "Pet_zilyana",
+        "independent": true
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
@@ -248,6 +252,7 @@
     "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 55,
+    "ironKillTimeSeconds": 129,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -322,7 +327,8 @@
         "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_k%27ril_tsutsaroth"
+        "wikiPage": "Pet_k%27ril_tsutsaroth",
+        "independent": true
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
@@ -369,6 +375,7 @@
     "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 80,
+    "ironKillTimeSeconds": 120,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -443,7 +450,8 @@
         "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_kree%27arra"
+        "wikiPage": "Pet_kree%27arra",
+        "independent": true
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
@@ -534,7 +542,8 @@
         "dropRate": 0.000153,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Tanzanite_mutagen"
+        "wikiPage": "Tanzanite_mutagen",
+        "independent": true
       },
       {
         "itemId": 13201,
@@ -542,7 +551,8 @@
         "dropRate": 0.000153,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Magma_mutagen"
+        "wikiPage": "Magma_mutagen",
+        "independent": true
       },
       {
         "itemId": 12936,
@@ -574,7 +584,8 @@
         "dropRate": 0.00025,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_snakeling"
+        "wikiPage": "Pet_snakeling",
+        "independent": true
       }
     ],
     "locationDescription": "Zul-Andra, east coast of Tirannwn",
@@ -654,7 +665,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Vorki"
+        "wikiPage": "Vorki",
+        "independent": true
       }
     ],
     "locationDescription": "Rellekka docks (boat to island)",
@@ -738,7 +750,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Hellpuppy"
+        "wikiPage": "Hellpuppy",
+        "independent": true
       },
       {
         "itemId": 13249,
@@ -784,14 +797,6 @@
     },
     "items": [
       {
-        "itemId": 22973,
-        "name": "Hydra's eye",
-        "dropRate": 0.005525,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Hydra%27s_eye"
-      },
-      {
         "itemId": 22971,
         "name": "Hydra's fang",
         "dropRate": 0.005525,
@@ -800,12 +805,22 @@
         "wikiPage": "Hydra%27s_fang"
       },
       {
+        "itemId": 22973,
+        "name": "Hydra's eye",
+        "dropRate": 0.005525,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Hydra%27s_eye",
+        "requiresPrevious": true
+      },
+      {
         "itemId": 22969,
         "name": "Hydra's heart",
         "dropRate": 0.005525,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Hydra%27s_heart"
+        "wikiPage": "Hydra%27s_heart",
+        "requiresPrevious": true
       },
       {
         "itemId": 22988,
@@ -869,7 +884,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Ikkle_hydra"
+        "wikiPage": "Ikkle_hydra",
+        "independent": true
       }
     ],
     "mutuallyExclusive": true,
@@ -914,6 +930,7 @@
     "worldY": 3380,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "ironKillTimeSeconds": 424,
     "items": [
       {
         "itemId": 12829,
@@ -969,7 +986,8 @@
         "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_dark_core"
+        "wikiPage": "Pet_dark_core",
+        "independent": true
       }
     ],
     "locationDescription": "Games necklace cave, level 21 Wilderness",
@@ -1045,7 +1063,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Kalphite_princess"
+        "wikiPage": "Kalphite_princess",
+        "independent": true
       }
     ],
     "mutuallyExclusive": true,
@@ -1123,7 +1142,8 @@
         "dropRate": 0.0004,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Muphin"
+        "wikiPage": "Muphin",
+        "independent": true
       }
     ],
     "locationDescription": "Ancient Prison entrance, Weiss",
@@ -1211,7 +1231,8 @@
         "dropRate": 0.0004,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Baron"
+        "wikiPage": "Baron",
+        "independent": true
       },
       {
         "itemId": 28270,
@@ -1322,7 +1343,8 @@
         "dropRate": 0.0004,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Lil%27viathan"
+        "wikiPage": "Lil%27viathan",
+        "independent": true
       },
       {
         "itemId": 28274,
@@ -1433,7 +1455,8 @@
         "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Wisp"
+        "wikiPage": "Wisp",
+        "independent": true
       },
       {
         "itemId": 28272,
@@ -1544,7 +1567,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Butch"
+        "wikiPage": "Butch",
+        "independent": true
       },
       {
         "itemId": 28268,
@@ -1658,7 +1682,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Noon"
+        "wikiPage": "Noon",
+        "independent": true
       }
     ],
     "locationDescription": "Slayer Tower rooftop, Morytania",
@@ -1698,7 +1723,8 @@
         "dropRate": 0.003333,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Nightmare_staff"
+        "wikiPage": "Nightmare_staff",
+        "independent": true
       },
       {
         "itemId": 24419,
@@ -1706,7 +1732,8 @@
         "dropRate": 0.002381,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Inquisitor%27s_great_helm"
+        "wikiPage": "Inquisitor%27s_great_helm",
+        "independent": true
       },
       {
         "itemId": 24420,
@@ -1714,7 +1741,8 @@
         "dropRate": 0.002381,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Inquisitor%27s_hauberk"
+        "wikiPage": "Inquisitor%27s_hauberk",
+        "independent": true
       },
       {
         "itemId": 24421,
@@ -1722,7 +1750,8 @@
         "dropRate": 0.002381,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Inquisitor%27s_plateskirt"
+        "wikiPage": "Inquisitor%27s_plateskirt",
+        "independent": true
       },
       {
         "itemId": 24417,
@@ -1730,7 +1759,8 @@
         "dropRate": 0.001333,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Inquisitor%27s_mace"
+        "wikiPage": "Inquisitor%27s_mace",
+        "independent": true
       },
       {
         "itemId": 24511,
@@ -1738,7 +1768,8 @@
         "dropRate": 0.001042,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Harmonised_orb"
+        "wikiPage": "Harmonised_orb",
+        "independent": true
       },
       {
         "itemId": 24514,
@@ -1746,7 +1777,8 @@
         "dropRate": 0.001042,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Volatile_orb"
+        "wikiPage": "Volatile_orb",
+        "independent": true
       },
       {
         "itemId": 24517,
@@ -1754,7 +1786,8 @@
         "dropRate": 0.001042,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Eldritch_orb"
+        "wikiPage": "Eldritch_orb",
+        "independent": true
       },
       {
         "itemId": 24495,
@@ -1762,7 +1795,8 @@
         "dropRate": 0.000526,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Jar_of_dreams"
+        "wikiPage": "Jar_of_dreams",
+        "independent": true
       },
       {
         "itemId": 24491,
@@ -1770,7 +1804,8 @@
         "dropRate": 0.00125,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Little_nightmare"
+        "wikiPage": "Little_nightmare",
+        "independent": true
       },
       {
         "itemId": 25837,
@@ -1778,7 +1813,8 @@
         "dropRate": 0.04,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Slepey_tablet"
+        "wikiPage": "Slepey_tablet",
+        "independent": true
       },
       {
         "itemId": 25838,
@@ -1786,7 +1822,8 @@
         "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Parasitic_egg"
+        "wikiPage": "Parasitic_egg",
+        "independent": true
       }
     ],
     "locationDescription": "Slepe, east Morytania",
@@ -1850,7 +1887,8 @@
         "dropRate": 0.003876,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Torva_full_helm_(damaged)"
+        "wikiPage": "Torva_full_helm_(damaged)",
+        "independent": true
       },
       {
         "itemId": 26378,
@@ -1858,7 +1896,8 @@
         "dropRate": 0.003876,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Torva_platebody_(damaged)"
+        "wikiPage": "Torva_platebody_(damaged)",
+        "independent": true
       },
       {
         "itemId": 26380,
@@ -1866,7 +1905,8 @@
         "dropRate": 0.003876,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Torva_platelegs_(damaged)"
+        "wikiPage": "Torva_platelegs_(damaged)",
+        "independent": true
       },
       {
         "itemId": 26235,
@@ -1874,7 +1914,8 @@
         "dropRate": 0.005814,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Zaryte_vambraces"
+        "wikiPage": "Zaryte_vambraces",
+        "independent": true
       },
       {
         "itemId": 26372,
@@ -1882,7 +1923,8 @@
         "dropRate": 0.003876,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Nihil_horn"
+        "wikiPage": "Nihil_horn",
+        "independent": true
       },
       {
         "itemId": 26370,
@@ -1890,7 +1932,8 @@
         "dropRate": 0.001938,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancient_hilt"
+        "wikiPage": "Ancient_hilt",
+        "independent": true
       },
       {
         "itemId": 26348,
@@ -1898,7 +1941,8 @@
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Nexling"
+        "wikiPage": "Nexling",
+        "independent": true
       },
       {
         "itemId": 26231,
@@ -1906,7 +1950,8 @@
         "dropRate": 0.1,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Nihil_shard"
+        "wikiPage": "Nihil_shard",
+        "independent": true
       }
     ],
     "locationDescription": "God Wars Dungeon entrance, Trollheim",
@@ -1985,7 +2030,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Sraracha"
+        "wikiPage": "Sraracha",
+        "independent": true
       },
       {
         "itemId": 33133,
@@ -2018,6 +2064,7 @@
     "worldY": 3376,
     "worldPlane": 0,
     "killTimeSeconds": 29,
+    "ironKillTimeSeconds": 37,
     "afkLevel": 1,
     "items": [
       {
@@ -2026,7 +2073,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Baby_mole"
+        "wikiPage": "Baby_mole",
+        "independent": true
       },
       {
         "itemId": 7416,
@@ -2157,7 +2205,8 @@
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Berserker_ring"
+        "wikiPage": "Berserker_ring",
+        "independent": true
       },
       {
         "itemId": 6735,
@@ -2165,7 +2214,8 @@
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Warrior_ring"
+        "wikiPage": "Warrior_ring",
+        "independent": true
       },
       {
         "itemId": 6739,
@@ -2173,7 +2223,8 @@
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_axe"
+        "wikiPage": "Dragon_axe",
+        "independent": true
       },
       {
         "itemId": 12644,
@@ -2181,7 +2232,8 @@
         "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_dagannoth_rex"
+        "wikiPage": "Pet_dagannoth_rex",
+        "independent": true
       }
     ],
     "locationDescription": "Waterbirth Island, Rellekka",
@@ -2215,7 +2267,8 @@
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Seers_ring"
+        "wikiPage": "Seers_ring",
+        "independent": true
       },
       {
         "itemId": 6562,
@@ -2223,7 +2276,8 @@
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mud_battlestaff"
+        "wikiPage": "Mud_battlestaff",
+        "independent": true
       },
       {
         "itemId": 6739,
@@ -2231,7 +2285,8 @@
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_axe"
+        "wikiPage": "Dragon_axe",
+        "independent": true
       },
       {
         "itemId": 12643,
@@ -2239,7 +2294,8 @@
         "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_dagannoth_prime"
+        "wikiPage": "Pet_dagannoth_prime",
+        "independent": true
       }
     ],
     "locationDescription": "Waterbirth Island, Rellekka",
@@ -2273,7 +2329,8 @@
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Archers_ring"
+        "wikiPage": "Archers_ring",
+        "independent": true
       },
       {
         "itemId": 6724,
@@ -2281,7 +2338,8 @@
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Seercull"
+        "wikiPage": "Seercull",
+        "independent": true
       },
       {
         "itemId": 6739,
@@ -2289,7 +2347,8 @@
         "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_axe"
+        "wikiPage": "Dragon_axe",
+        "independent": true
       },
       {
         "itemId": 12645,
@@ -2297,7 +2356,8 @@
         "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_dagannoth_supreme"
+        "wikiPage": "Pet_dagannoth_supreme",
+        "independent": true
       }
     ],
     "locationDescription": "Waterbirth Island, Rellekka",
@@ -2366,7 +2426,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_kraken"
+        "wikiPage": "Pet_kraken",
+        "independent": true
       }
     ],
     "mutuallyExclusive": true,
@@ -2411,6 +2472,7 @@
     "worldY": 9452,
     "worldPlane": 0,
     "killTimeSeconds": 24,
+    "ironKillTimeSeconds": 36,
     "requirements": {
       "skills": [
         {
@@ -2458,7 +2520,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_smoke_devil"
+        "wikiPage": "Pet_smoke_devil",
+        "independent": true
       }
     ],
     "locationDescription": "Smoke Devil Dungeon, south of Castle Wars",
@@ -2509,7 +2572,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Unsired"
+        "wikiPage": "Unsired",
+        "independent": true
       },
       {
         "itemId": 4151,
@@ -2541,7 +2605,8 @@
         "dropRate": 0.001615,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bludgeon_claw"
+        "wikiPage": "Bludgeon_claw",
+        "requiresPrevious": true
       },
       {
         "itemId": 13276,
@@ -2549,7 +2614,8 @@
         "dropRate": 0.001615,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bludgeon_axon"
+        "wikiPage": "Bludgeon_axon",
+        "requiresPrevious": true
       },
       {
         "itemId": 13277,
@@ -2565,7 +2631,8 @@
         "dropRate": 0.000391,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Abyssal_orphan"
+        "wikiPage": "Abyssal_orphan",
+        "independent": true
       }
     ],
     "locationDescription": "Abyssal Nexus, fairy ring DIP",
@@ -2592,6 +2659,7 @@
     "worldY": 3849,
     "worldPlane": 0,
     "killTimeSeconds": 28,
+    "ironKillTimeSeconds": 48,
     "afkLevel": 1,
     "items": [
       {
@@ -2624,7 +2692,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Prince_black_dragon"
+        "wikiPage": "Prince_black_dragon",
+        "independent": true
       }
     ],
     "locationDescription": "King Black Dragon Lair, Wilderness",
@@ -2651,6 +2720,7 @@
     "worldY": 3910,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "ironKillTimeSeconds": 75,
     "items": [
       {
         "itemId": 11920,
@@ -2674,7 +2744,8 @@
         "dropRate": 0.003333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_chaos_elemental"
+        "wikiPage": "Pet_chaos_elemental",
+        "independent": true
       }
     ],
     "locationDescription": "Rogues' Castle, deep Wilderness",
@@ -2701,6 +2772,7 @@
     "worldY": 3945,
     "worldPlane": 0,
     "killTimeSeconds": 28,
+    "ironKillTimeSeconds": 45,
     "items": [
       {
         "itemId": 11930,
@@ -2724,7 +2796,8 @@
         "dropRate": 0.000496,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Scorpia%27s_offspring"
+        "wikiPage": "Scorpia%27s_offspring",
+        "independent": true
       },
       {
         "itemId": 7158,
@@ -2760,6 +2833,7 @@
     "worldY": 3834,
     "worldPlane": 0,
     "killTimeSeconds": 36,
+    "ironKillTimeSeconds": 45,
     "afkLevel": 1,
     "items": [
       {
@@ -2776,7 +2850,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_chaos_elemental"
+        "wikiPage": "Pet_chaos_elemental",
+        "independent": true
       },
       {
         "itemId": 11931,
@@ -2850,7 +2925,8 @@
         "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Venenatis_spiderling"
+        "wikiPage": "Venenatis_spiderling",
+        "independent": true
       },
       {
         "itemId": 7158,
@@ -2924,7 +3000,8 @@
         "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Vet%27ion_jr."
+        "wikiPage": "Vet%27ion_jr.",
+        "independent": true
       },
       {
         "itemId": 7158,
@@ -2998,7 +3075,8 @@
         "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Callisto_cub"
+        "wikiPage": "Callisto_cub",
+        "independent": true
       },
       {
         "itemId": 7158,
@@ -3169,7 +3247,8 @@
         "dropRate": 0.015385,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Skotos"
+        "wikiPage": "Skotos",
+        "independent": true
       },
       {
         "itemId": 19685,
@@ -3285,7 +3364,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Twisted_bow"
+        "wikiPage": "Twisted_bow",
+        "independent": true
       },
       {
         "itemId": 21003,
@@ -3293,7 +3373,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Elder_maul"
+        "wikiPage": "Elder_maul",
+        "independent": true
       },
       {
         "itemId": 21043,
@@ -3301,7 +3382,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Kodai_insignia"
+        "wikiPage": "Kodai_insignia",
+        "independent": true
       },
       {
         "itemId": 13652,
@@ -3309,7 +3391,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_claws"
+        "wikiPage": "Dragon_claws",
+        "independent": true
       },
       {
         "itemId": 21012,
@@ -3317,7 +3400,8 @@
         "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_hunter_crossbow"
+        "wikiPage": "Dragon_hunter_crossbow",
+        "independent": true
       },
       {
         "itemId": 21000,
@@ -3325,7 +3409,8 @@
         "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Twisted_buckler"
+        "wikiPage": "Twisted_buckler",
+        "independent": true
       },
       {
         "itemId": 21015,
@@ -3333,7 +3418,8 @@
         "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dinh%27s_bulwark"
+        "wikiPage": "Dinh%27s_bulwark",
+        "independent": true
       },
       {
         "itemId": 21018,
@@ -3341,7 +3427,8 @@
         "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancestral_hat"
+        "wikiPage": "Ancestral_hat",
+        "independent": true
       },
       {
         "itemId": 21021,
@@ -3349,7 +3436,8 @@
         "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancestral_robe_top"
+        "wikiPage": "Ancestral_robe_top",
+        "independent": true
       },
       {
         "itemId": 21024,
@@ -3357,7 +3445,8 @@
         "dropRate": 0.0015,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancestral_robe_bottom"
+        "wikiPage": "Ancestral_robe_bottom",
+        "independent": true
       },
       {
         "itemId": 21034,
@@ -3365,7 +3454,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dexterous_prayer_scroll"
+        "wikiPage": "Dexterous_prayer_scroll",
+        "independent": true
       },
       {
         "itemId": 21079,
@@ -3373,7 +3463,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Arcane_prayer_scroll"
+        "wikiPage": "Arcane_prayer_scroll",
+        "independent": true
       },
       {
         "itemId": 20851,
@@ -3381,7 +3472,8 @@
         "dropRate": 0.01887,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Olmlet"
+        "wikiPage": "Olmlet",
+        "independent": true
       },
       {
         "itemId": 21047,
@@ -3389,7 +3481,8 @@
         "dropRate": 0.0606,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Torn_prayer_scroll"
+        "wikiPage": "Torn_prayer_scroll",
+        "independent": true
       },
       {
         "itemId": 21027,
@@ -3397,7 +3490,8 @@
         "dropRate": 0.0606,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dark_relic"
+        "wikiPage": "Dark_relic",
+        "independent": true
       },
       {
         "itemId": 6573,
@@ -3405,7 +3499,8 @@
         "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Onyx"
+        "wikiPage": "Onyx",
+        "independent": true
       },
       {
         "itemId": 22386,
@@ -3413,7 +3508,8 @@
         "dropRate": 0.0025,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Metamorphic_dust"
+        "wikiPage": "Metamorphic_dust",
+        "independent": true
       },
       {
         "itemId": 24670,
@@ -3421,7 +3517,8 @@
         "dropRate": 0.01333,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Twisted_ancestral_colour_kit"
+        "wikiPage": "Twisted_ancestral_colour_kit",
+        "independent": true
       },
       {
         "itemId": 22388,
@@ -3429,7 +3526,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Xeric%27s_guard"
+        "wikiPage": "Xeric%27s_guard",
+        "independent": true
       },
       {
         "itemId": 22390,
@@ -3437,7 +3535,9 @@
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Xeric%27s_warrior"
+        "wikiPage": "Xeric%27s_warrior",
+        "independent": true,
+        "requiresPrevious": true
       },
       {
         "itemId": 22392,
@@ -3445,7 +3545,9 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Xeric%27s_sentinel"
+        "wikiPage": "Xeric%27s_sentinel",
+        "independent": true,
+        "requiresPrevious": true
       },
       {
         "itemId": 22394,
@@ -3453,7 +3555,9 @@
         "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Xeric%27s_general"
+        "wikiPage": "Xeric%27s_general",
+        "independent": true,
+        "requiresPrevious": true
       },
       {
         "itemId": 22396,
@@ -3461,7 +3565,9 @@
         "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Xeric%27s_champion"
+        "wikiPage": "Xeric%27s_champion",
+        "requiresPrevious": true,
+        "independent": true
       }
     ],
     "locationDescription": "Mount Quidamortem, Great Kourend",
@@ -3496,7 +3602,8 @@
         "dropRate": 0.001446,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Scythe_of_vitur"
+        "wikiPage": "Scythe_of_vitur",
+        "independent": true
       },
       {
         "itemId": 22324,
@@ -3504,7 +3611,8 @@
         "dropRate": 0.002892,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ghrazi_rapier"
+        "wikiPage": "Ghrazi_rapier",
+        "independent": true
       },
       {
         "itemId": 22481,
@@ -3512,7 +3620,8 @@
         "dropRate": 0.002892,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Sanguinesti_staff"
+        "wikiPage": "Sanguinesti_staff",
+        "independent": true
       },
       {
         "itemId": 22326,
@@ -3520,7 +3629,8 @@
         "dropRate": 0.002892,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Justiciar_faceguard"
+        "wikiPage": "Justiciar_faceguard",
+        "independent": true
       },
       {
         "itemId": 22327,
@@ -3528,7 +3638,8 @@
         "dropRate": 0.002892,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Justiciar_chestguard"
+        "wikiPage": "Justiciar_chestguard",
+        "independent": true
       },
       {
         "itemId": 22328,
@@ -3536,7 +3647,8 @@
         "dropRate": 0.002892,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Justiciar_legguards"
+        "wikiPage": "Justiciar_legguards",
+        "independent": true
       },
       {
         "itemId": 22477,
@@ -3544,7 +3656,8 @@
         "dropRate": 0.011568,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Avernic_defender_hilt"
+        "wikiPage": "Avernic_defender_hilt",
+        "independent": true
       },
       {
         "itemId": 22473,
@@ -3552,7 +3665,8 @@
         "dropRate": 0.00154,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Lil%27_zik"
+        "wikiPage": "Lil%27_zik",
+        "independent": true
       },
       {
         "itemId": 22446,
@@ -3560,7 +3674,8 @@
         "dropRate": 0.333,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Vial_of_blood"
+        "wikiPage": "Vial_of_blood",
+        "independent": true
       },
       {
         "itemId": 22494,
@@ -3568,7 +3683,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Sinhaza_shroud_tier_1"
+        "wikiPage": "Sinhaza_shroud_tier_1",
+        "independent": true
       },
       {
         "itemId": 22496,
@@ -3576,7 +3692,9 @@
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Sinhaza_shroud_tier_2"
+        "wikiPage": "Sinhaza_shroud_tier_2",
+        "independent": true,
+        "requiresPrevious": true
       },
       {
         "itemId": 22498,
@@ -3584,7 +3702,9 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Sinhaza_shroud_tier_3"
+        "wikiPage": "Sinhaza_shroud_tier_3",
+        "independent": true,
+        "requiresPrevious": true
       },
       {
         "itemId": 22500,
@@ -3592,7 +3712,9 @@
         "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Sinhaza_shroud_tier_4"
+        "wikiPage": "Sinhaza_shroud_tier_4",
+        "independent": true,
+        "requiresPrevious": true
       },
       {
         "itemId": 22502,
@@ -3600,7 +3722,9 @@
         "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Sinhaza_shroud_tier_5"
+        "wikiPage": "Sinhaza_shroud_tier_5",
+        "independent": true,
+        "requiresPrevious": true
       },
       {
         "itemId": 25746,
@@ -3608,7 +3732,8 @@
         "dropRate": 0.00364,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Sanguine_dust"
+        "wikiPage": "Sanguine_dust",
+        "independent": true
       },
       {
         "itemId": 25742,
@@ -3616,7 +3741,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Holy_ornament_kit"
+        "wikiPage": "Holy_ornament_kit",
+        "independent": true
       },
       {
         "itemId": 25744,
@@ -3624,7 +3750,8 @@
         "dropRate": 0.00667,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Sanguine_ornament_kit"
+        "wikiPage": "Sanguine_ornament_kit",
+        "independent": true
       }
     ],
     "locationDescription": "Ver Sinhaza, Morytania",
@@ -3678,7 +3805,8 @@
         "dropRate": 0.00292,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Osmumten%27s_fang"
+        "wikiPage": "Osmumten%27s_fang",
+        "independent": true
       },
       {
         "itemId": 25975,
@@ -3686,7 +3814,8 @@
         "dropRate": 0.00292,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Lightbearer"
+        "wikiPage": "Lightbearer",
+        "independent": true
       },
       {
         "itemId": 25985,
@@ -3694,7 +3823,8 @@
         "dropRate": 0.00125,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Elidinis%27_ward"
+        "wikiPage": "Elidinis%27_ward",
+        "independent": true
       },
       {
         "itemId": 27226,
@@ -3702,7 +3832,8 @@
         "dropRate": 0.000833,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Masori_mask"
+        "wikiPage": "Masori_mask",
+        "independent": true
       },
       {
         "itemId": 27229,
@@ -3710,7 +3841,8 @@
         "dropRate": 0.000833,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Masori_body"
+        "wikiPage": "Masori_body",
+        "independent": true
       },
       {
         "itemId": 27232,
@@ -3718,7 +3850,8 @@
         "dropRate": 0.000833,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Masori_chaps"
+        "wikiPage": "Masori_chaps",
+        "independent": true
       },
       {
         "itemId": 27277,
@@ -3726,7 +3859,8 @@
         "dropRate": 0.000417,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Tumeken%27s_shadow"
+        "wikiPage": "Tumeken%27s_shadow",
+        "independent": true
       },
       {
         "itemId": 27352,
@@ -3734,7 +3868,8 @@
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Tumeken%27s_guardian"
+        "wikiPage": "Tumeken%27s_guardian",
+        "independent": true
       },
       {
         "itemId": 27279,
@@ -3742,7 +3877,8 @@
         "dropRate": 0.1,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Thread_of_elidinis"
+        "wikiPage": "Thread_of_elidinis",
+        "independent": true
       },
       {
         "itemId": 27283,
@@ -3750,7 +3886,8 @@
         "dropRate": 0.04,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Breach_of_the_scarab"
+        "wikiPage": "Breach_of_the_scarab",
+        "independent": true
       },
       {
         "itemId": 27285,
@@ -3758,7 +3895,8 @@
         "dropRate": 0.04,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Eye_of_the_corruptor"
+        "wikiPage": "Eye_of_the_corruptor",
+        "independent": true
       },
       {
         "itemId": 27289,
@@ -3766,7 +3904,8 @@
         "dropRate": 0.04,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Jewel_of_the_sun"
+        "wikiPage": "Jewel_of_the_sun",
+        "independent": true
       },
       {
         "itemId": 30893,
@@ -3774,7 +3913,8 @@
         "dropRate": 0.04,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Jewel_of_amascut"
+        "wikiPage": "Jewel_of_amascut",
+        "independent": true
       },
       {
         "itemId": 27293,
@@ -3782,7 +3922,8 @@
         "dropRate": 0.111,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Cache_of_runes"
+        "wikiPage": "Cache_of_runes",
+        "independent": true
       },
       {
         "itemId": 27255,
@@ -3790,7 +3931,8 @@
         "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Menaphite_ornament_kit"
+        "wikiPage": "Menaphite_ornament_kit",
+        "independent": true
       },
       {
         "itemId": 27248,
@@ -3798,7 +3940,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Cursed_phalanx"
+        "wikiPage": "Cursed_phalanx",
+        "independent": true
       },
       {
         "itemId": 27372,
@@ -3806,7 +3949,8 @@
         "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Masori_crafting_kit"
+        "wikiPage": "Masori_crafting_kit",
+        "independent": true
       },
       {
         "itemId": 27377,
@@ -3814,7 +3958,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Remnant_of_akkha"
+        "wikiPage": "Remnant_of_akkha",
+        "independent": true
       },
       {
         "itemId": 27378,
@@ -3822,7 +3967,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Remnant_of_ba-ba"
+        "wikiPage": "Remnant_of_ba-ba",
+        "independent": true
       },
       {
         "itemId": 27379,
@@ -3830,7 +3976,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Remnant_of_kephri"
+        "wikiPage": "Remnant_of_kephri",
+        "independent": true
       },
       {
         "itemId": 27380,
@@ -3838,7 +3985,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Remnant_of_zebak"
+        "wikiPage": "Remnant_of_zebak",
+        "independent": true
       },
       {
         "itemId": 27381,
@@ -3846,7 +3994,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancient_remnant"
+        "wikiPage": "Ancient_remnant",
+        "independent": true
       },
       {
         "itemId": 27257,
@@ -3854,7 +4003,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Icthlarin%27s_shroud_(tier_1)"
+        "wikiPage": "Icthlarin%27s_shroud_(tier_1)",
+        "independent": true
       },
       {
         "itemId": 27259,
@@ -3862,7 +4012,8 @@
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Icthlarin%27s_shroud_(tier_2)"
+        "wikiPage": "Icthlarin%27s_shroud_(tier_2)",
+        "independent": true
       },
       {
         "itemId": 27261,
@@ -3870,7 +4021,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Icthlarin%27s_shroud_(tier_3)"
+        "wikiPage": "Icthlarin%27s_shroud_(tier_3)",
+        "independent": true
       },
       {
         "itemId": 27263,
@@ -3878,7 +4030,8 @@
         "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Icthlarin%27s_shroud_(tier_4)"
+        "wikiPage": "Icthlarin%27s_shroud_(tier_4)",
+        "independent": true
       },
       {
         "itemId": 27265,
@@ -3886,7 +4039,8 @@
         "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Icthlarin%27s_shroud_(tier_5)"
+        "wikiPage": "Icthlarin%27s_shroud_(tier_5)",
+        "independent": true
       }
     ],
     "locationDescription": "Necropolis, Kharidian Desert",
@@ -3954,7 +4108,8 @@
         "dropRate": 0.00125,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Youngllef"
+        "wikiPage": "Youngllef",
+        "independent": true
       }
     ],
     "locationDescription": "The Gauntlet, Prifddinas",
@@ -4032,7 +4187,8 @@
         "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Youngllef"
+        "wikiPage": "Youngllef",
+        "independent": true
       }
     ],
     "locationDescription": "The Gauntlet, Prifddinas",
@@ -4340,7 +4496,8 @@
         "dropRate": 0.000125,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Tiny_tempor"
+        "wikiPage": "Tiny_tempor",
+        "independent": true
       },
       {
         "itemId": 25592,
@@ -4485,7 +4642,8 @@
         "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Phoenix"
+        "wikiPage": "Phoenix",
+        "independent": true
       },
       {
         "itemId": 20718,
@@ -4557,7 +4715,8 @@
         "dropRate": 0.000444,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Smolcano"
+        "wikiPage": "Smolcano",
+        "independent": true
       }
     ],
     "locationDescription": "Zalcano's Prison, Prifddinas",
@@ -4660,7 +4819,8 @@
         "dropRate": 0.005,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Smol_heredit"
+        "wikiPage": "Smol_heredit",
+        "independent": true
       }
     ],
     "mutuallyExclusive": true,
@@ -4760,14 +4920,6 @@
         "wikiPage": "Araxyte_head"
       },
       {
-        "itemId": 29788,
-        "name": "Noxious blade",
-        "dropRate": 0.001,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Noxious_blade"
-      },
-      {
         "itemId": 29790,
         "name": "Noxious point",
         "dropRate": 0.001,
@@ -4776,12 +4928,22 @@
         "wikiPage": "Noxious_point"
       },
       {
+        "itemId": 29788,
+        "name": "Noxious blade",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Noxious_blade",
+        "requiresPrevious": true
+      },
+      {
         "itemId": 29792,
         "name": "Noxious pommel",
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Noxious_pommel"
+        "wikiPage": "Noxious_pommel",
+        "requiresPrevious": true
       },
       {
         "itemId": 29794,
@@ -4789,7 +4951,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Rax"
+        "wikiPage": "Rax",
+        "independent": true
       },
       {
         "itemId": 29781,
@@ -4822,7 +4985,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Nid"
+        "wikiPage": "Nid",
+        "independent": true
       }
     ],
     "locationDescription": "Morytania Spider Cave",
@@ -4863,7 +5027,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blue_moon_helm"
+        "wikiPage": "Blue_moon_helm",
+        "independent": true
       },
       {
         "itemId": 29298,
@@ -4871,7 +5036,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blue_moon_chestplate"
+        "wikiPage": "Blue_moon_chestplate",
+        "independent": true
       },
       {
         "itemId": 29300,
@@ -4879,7 +5045,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blue_moon_tassets"
+        "wikiPage": "Blue_moon_tassets",
+        "independent": true
       },
       {
         "itemId": 29302,
@@ -4887,7 +5054,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Eclipse_moon_helm"
+        "wikiPage": "Eclipse_moon_helm",
+        "independent": true
       },
       {
         "itemId": 29304,
@@ -4895,7 +5063,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Eclipse_moon_chestplate"
+        "wikiPage": "Eclipse_moon_chestplate",
+        "independent": true
       },
       {
         "itemId": 29306,
@@ -4903,7 +5072,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Eclipse_moon_tassets"
+        "wikiPage": "Eclipse_moon_tassets",
+        "independent": true
       },
       {
         "itemId": 29308,
@@ -4911,7 +5081,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blood_moon_helm"
+        "wikiPage": "Blood_moon_helm",
+        "independent": true
       },
       {
         "itemId": 29310,
@@ -4919,7 +5090,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blood_moon_chestplate"
+        "wikiPage": "Blood_moon_chestplate",
+        "independent": true
       },
       {
         "itemId": 29312,
@@ -4927,7 +5099,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blood_moon_tassets"
+        "wikiPage": "Blood_moon_tassets",
+        "independent": true
       },
       {
         "itemId": 29314,
@@ -4935,7 +5108,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dual_macuahuitl"
+        "wikiPage": "Dual_macuahuitl",
+        "independent": true
       },
       {
         "itemId": 28988,
@@ -4943,7 +5117,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Blue_moon_spear"
+        "wikiPage": "Blue_moon_spear",
+        "independent": true
       },
       {
         "itemId": 29000,
@@ -4951,7 +5126,8 @@
         "dropRate": 0.004464,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Eclipse_atlatl"
+        "wikiPage": "Eclipse_atlatl",
+        "independent": true
       },
       {
         "itemId": 28991,
@@ -4959,7 +5135,8 @@
         "dropRate": 0.665102,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Atlatl_dart"
+        "wikiPage": "Atlatl_dart",
+        "independent": true
       }
     ],
     "mutuallyExclusive": true,
@@ -7405,6 +7582,7 @@
     "worldY": 3625,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "ironKillTimeSeconds": 120,
     "afkLevel": 2,
     "locationDescription": "East of Chaos Temple, level 14 Wilderness",
     "travelTip": "Burning amulet -> Bandit Camp",
@@ -7575,7 +7753,8 @@
         "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Giant_squirrel"
+        "wikiPage": "Giant_squirrel",
+        "independent": true
       }
     ],
     "locationDescription": "Hallowed Sepulchre entrance in Darkmeyer",
@@ -7755,7 +7934,8 @@
         "dropRate": 0.00025,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Abyssal_protector"
+        "wikiPage": "Abyssal_protector",
+        "independent": true
       }
     ],
     "locationDescription": "Temple of the Eye, accessed via portal in Wizards' Tower basement",
@@ -9516,7 +9696,8 @@
         "dropRate": 0.0025,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Lil%27_creator"
+        "wikiPage": "Lil%27_creator",
+        "independent": true
       }
     ],
     "locationDescription": "Isle of Souls, west of Edgeville",
@@ -9909,7 +10090,10 @@
     "killTimeSeconds": 1200,
     "afkLevel": 3,
     "cumulativeTrackItemId": 1929,
-    "cumulativeTrackObjectIds": [15847, 15873],
+    "cumulativeTrackObjectIds": [
+      15847,
+      15873
+    ],
     "cumulativeTrackThreshold": 100,
     "requirements": {
       "quests": [
@@ -10536,7 +10720,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Pet_penance_queen"
+        "wikiPage": "Pet_penance_queen",
+        "independent": true
       },
       {
         "itemId": 10589,
@@ -11166,7 +11351,8 @@
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Chompy_chick"
+        "wikiPage": "Chompy_chick",
+        "independent": true
       }
     ],
     "locationDescription": "Feldip Hills, south of Rantz",
@@ -11671,7 +11857,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Quetzin"
+        "wikiPage": "Quetzin",
+        "independent": true
       }
     ],
     "locationDescription": "Hunter Guild in Avium Savannah, Varlamore",
@@ -12658,7 +12845,8 @@
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Chompy_chick"
+        "wikiPage": "Chompy_chick",
+        "independent": true
       },
       {
         "itemId": 13392,
@@ -12781,7 +12969,8 @@
         "dropRate": 0.00044,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Herbi"
+        "wikiPage": "Herbi",
+        "independent": true
       },
       {
         "itemId": 21649,
@@ -13657,7 +13846,8 @@
         "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Iron_defender"
+        "wikiPage": "Iron_defender",
+        "requiresPrevious": true
       },
       {
         "itemId": 8846,
@@ -13665,7 +13855,8 @@
         "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Steel_defender"
+        "wikiPage": "Steel_defender",
+        "requiresPrevious": true
       },
       {
         "itemId": 8847,
@@ -13673,7 +13864,8 @@
         "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Black_defender"
+        "wikiPage": "Black_defender",
+        "requiresPrevious": true
       },
       {
         "itemId": 8848,
@@ -13681,7 +13873,8 @@
         "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mithril_defender"
+        "wikiPage": "Mithril_defender",
+        "requiresPrevious": true
       },
       {
         "itemId": 8849,
@@ -13689,7 +13882,8 @@
         "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Adamant_defender"
+        "wikiPage": "Adamant_defender",
+        "requiresPrevious": true
       },
       {
         "itemId": 8850,
@@ -13697,7 +13891,8 @@
         "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Rune_defender"
+        "wikiPage": "Rune_defender",
+        "requiresPrevious": true
       },
       {
         "itemId": 12954,
@@ -13705,7 +13900,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dragon_defender"
+        "wikiPage": "Dragon_defender",
+        "requiresPrevious": true
       }
     ],
     "locationDescription": "Warriors' Guild, Burthorpe",
@@ -14454,7 +14650,8 @@
         "dropRate": 0.0025,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Huberte"
+        "wikiPage": "Huberte",
+        "independent": true
       }
     ],
     "mutuallyExclusive": true,
@@ -14568,7 +14765,8 @@
         "dropRate": 0.0004,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Yami"
+        "wikiPage": "Yami",
+        "independent": true
       }
     ],
     "mutuallyExclusive": true,
@@ -14643,7 +14841,8 @@
         "dropRate": 0.004,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Dom"
+        "wikiPage": "Dom",
+        "independent": true
       }
     ],
     "mutuallyExclusive": true,
@@ -14721,7 +14920,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Bran"
+        "wikiPage": "Bran",
+        "independent": true
       }
     ],
     "mutuallyExclusive": true,
@@ -14776,7 +14976,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Moxi"
+        "wikiPage": "Moxi",
+        "independent": true
       }
     ],
     "mutuallyExclusive": true,
@@ -14807,7 +15008,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Beef"
+        "wikiPage": "Beef",
+        "independent": true
       },
       {
         "itemId": 33101,
@@ -14872,7 +15074,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Soup_(pet)"
+        "wikiPage": "Soup_(pet)",
+        "independent": true
       },
       {
         "itemId": 32921,
@@ -14928,7 +15131,8 @@
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Scurry"
+        "wikiPage": "Scurry",
+        "independent": true
       },
       {
         "itemId": 28798,
@@ -14969,7 +15173,8 @@
         "dropRate": 0.005,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Tzrek-jad"
+        "wikiPage": "Tzrek-jad",
+        "independent": true
       },
       {
         "itemId": 6570,
@@ -15016,7 +15221,8 @@
         "dropRate": 0.01,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Jal-nib-rek"
+        "wikiPage": "Jal-nib-rek",
+        "independent": true
       },
       {
         "itemId": 21295,
@@ -19084,7 +19290,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Bloodhound"
+        "wikiPage": "Bloodhound",
+        "independent": true
       },
       {
         "itemId": 20059,
@@ -20035,7 +20242,8 @@
         "dropRate": 0.001,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Bloodhound"
+        "wikiPage": "Bloodhound",
+        "independent": true
       }
     ],
     "locationDescription": "Grand Exchange",

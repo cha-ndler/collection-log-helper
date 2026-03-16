@@ -1,5 +1,6 @@
 package com.collectionloghelper.efficiency;
 
+import com.collectionloghelper.AccountType;
 import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
@@ -168,17 +169,44 @@ public class EfficiencyCalculator
 		// For probabilistic drops: P(any) = 1 - product(1 - p_i) for each missing item.
 		// For multi-roll sources the per-item rates already account for rolls via
 		// scoreIndividualItem, but the combined rate must use per-kill effective rates.
-		double productMissAll = 1.0;
+		//
+		// Coupon collector correction (issue #134): NOT needed here. Our drop_rates.json
+		// stores per-ITEM rates (e.g. Barrows: each piece is 1/350), not per-table rates.
+		// Because we skip already-obtained items (line above), the combined rate only
+		// includes missing items. Each item's rate represents the independent probability
+		// of receiving that specific item on a kill, so there is no duplicate dilution —
+		// the chance of getting "Ahrim's hood" is 1/350 regardless of which other Barrows
+		// items you already own. The formula 1 - product(1 - p_i) is mathematically exact
+		// for independent per-item rates with obtained items excluded.
+		//
+		// Independent drop modeling inspired by Log Hunters community (https://discord.gg/loghunters)
+		// Items flagged as independent roll on separate tables from the main drop.
+		// Standard items share one table; independent items each get their own roll.
+		// Overall combined rate = 1 - (1 - standardCombined) * (1 - independentCombined)
+		double standardProductMissAll = 1.0;
+		double independentProductMissAll = 1.0;
 		int guaranteedMissing = 0;
 		double bestGuaranteedScore = 0;
 
-		for (CollectionLogItem item : source.getItems())
+		List<CollectionLogItem> items = source.getItems();
+		for (int i = 0; i < items.size(); i++)
 		{
+			CollectionLogItem item = items.get(i);
 			if (collectionState.isItemObtained(item.getItemId()))
 			{
 				continue;
 			}
 			missingCount++;
+
+			// Sequential drop dependency modeling inspired by Log Hunters community
+			// (https://discord.gg/loghunters)
+			// If this item requires the previous item to be obtained first, and
+			// the predecessor is not yet obtained, skip it from scoring — it can't drop yet.
+			if (item.isRequiresPrevious() && i > 0
+				&& !collectionState.isItemObtained(items.get(i - 1).getItemId()))
+			{
+				continue;
+			}
 
 			double itemScore = scoreIndividualItem(item, source, killsPerHour, killTimeSeconds, rolls);
 			if (itemScore > bestItemScore)
@@ -197,7 +225,14 @@ public class EfficiencyCalculator
 				double effectiveRate = rolls > 1
 					? 1.0 - Math.pow(1.0 - baseRate, rolls)
 					: baseRate;
-				productMissAll *= (1.0 - effectiveRate);
+				if (item.isIndependent())
+				{
+					independentProductMissAll *= (1.0 - effectiveRate);
+				}
+				else
+				{
+					standardProductMissAll *= (1.0 - effectiveRate);
+				}
 			}
 			else if (item.getDropRate() >= 1.0)
 			{
@@ -215,14 +250,17 @@ public class EfficiencyCalculator
 		}
 
 		// Combined score: expected new log slots per hour from this source.
-		// For probabilistic items: use combined "any new item" rate.
+		// Standard and independent items are on separate tables, so combine them:
+		// P(any) = 1 - P(miss all standard) * P(miss all independent)
 		// For guaranteed items: add the best guaranteed item's score (only one
 		// can be the next unlock, so don't sum them all).
 		//
 		// Aggregated sources (e.g. "Miscellaneous") bundle items from unrelated
 		// activities that cannot be farmed at a single location. Combined-rate
 		// scoring would be misleading, so fall back to best-item scoring.
-		double combinedDropRate = 1.0 - productMissAll;
+		double standardCombinedRate = 1.0 - standardProductMissAll;
+		double independentCombinedRate = 1.0 - independentProductMissAll;
+		double combinedDropRate = 1.0 - (1.0 - standardCombinedRate) * (1.0 - independentCombinedRate);
 		double combinedScore;
 		if (source.isAggregated())
 		{
@@ -352,6 +390,7 @@ public class EfficiencyCalculator
 	/**
 	 * Returns the effective kill/completion time for a source. Adjusts for:
 	 * - CLUES: account-progression-aware estimate from {@link ClueCompletionEstimator}
+	 * - IRONMAN: uses iron-specific kill time when configured and available
 	 * - RAIDS: team size multiplier from config
 	 * - SLAYER task-only: inflated by 1/P(creature|master) to account for task acquisition overhead
 	 * - All others: fixed killTimeSeconds from the database
@@ -367,6 +406,13 @@ public class EfficiencyCalculator
 			}
 		}
 		int baseTime = source.getKillTimeSeconds();
+
+		// Use iron kill time when configured and available
+		if (config.accountType() == AccountType.IRONMAN && source.getIronKillTimeSeconds() > 0)
+		{
+			baseTime = source.getIronKillTimeSeconds();
+		}
+
 		if (source.getCategory() == CollectionLogCategory.RAIDS)
 		{
 			double multiplier = config.raidTeamSize().getKillTimeMultiplier();

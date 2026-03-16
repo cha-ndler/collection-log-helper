@@ -13,4 +13,6 @@ public class CollectionLogItem
     String wikiPage;
     int pointCost;
     int milestoneKills;
+    boolean requiresPrevious;
+    boolean independent;
 }
