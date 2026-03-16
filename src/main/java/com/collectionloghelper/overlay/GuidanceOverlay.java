@@ -46,6 +46,7 @@ public class GuidanceOverlay extends OverlayPanel
 	private volatile String interactAction;
 	private volatile boolean showCollectionLogReminder;
 	private volatile boolean showBankReminder;
+	private volatile NPC trackedNpc;
 
 	@Inject
 	private GuidanceOverlay(Client client, CollectionLogHelperConfig config)
@@ -145,14 +146,26 @@ public class GuidanceOverlay extends OverlayPanel
 		boolean npcHighlighted = false;
 		if (npcId > 0)
 		{
-			for (NPC npc : client.getTopLevelWorldView().npcs())
+			NPC npc = this.trackedNpc;
+			// Use tracked NPC if available and still matches; fall back to full scan
+			if (npc == null || npc.getId() != npcId)
 			{
-				if (npc != null && npc.getId() == npcId)
+				npc = null;
+				for (NPC candidate : client.getTopLevelWorldView().npcs())
 				{
-					renderNpcHighlight(graphics, npc, overlayColor, action);
-					npcHighlighted = true;
-					break;
+					if (candidate != null && candidate.getId() == npcId)
+					{
+						npc = candidate;
+						// Cache the fallback result to avoid re-scanning every frame
+						this.trackedNpc = npc;
+						break;
+					}
 				}
+			}
+			if (npc != null)
+			{
+				renderNpcHighlight(graphics, npc, overlayColor, action);
+				npcHighlighted = true;
 			}
 		}
 
@@ -318,6 +331,11 @@ public class GuidanceOverlay extends OverlayPanel
 		this.showBankReminder = show;
 	}
 
+	public void setTrackedNpc(NPC npc)
+	{
+		this.trackedNpc = npc;
+	}
+
 	public void clearTarget()
 	{
 		targetPoint = null;
@@ -327,6 +345,7 @@ public class GuidanceOverlay extends OverlayPanel
 		clueGuidanceText = null;
 		targetNpcId = 0;
 		interactAction = null;
+		trackedNpc = null;
 	}
 
 	private void addSyncRemindersIfNeeded(boolean logReminder, boolean bankReminder)
