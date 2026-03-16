@@ -15619,6 +15619,11 @@
     "killTimeSeconds": 180,
     "locationDescription": "Yama's Domain, Chasm of Fire beneath Shayzien",
     "travelTip": "Xeric's talisman -> Heart",
+    "requirements": {
+      "quests": [
+        "A_KINGDOM_DIVIDED"
+      ]
+    },
     "items": [
       {
         "itemId": 30775,
@@ -15891,6 +15896,11 @@
     "killTimeSeconds": 42,
     "locationDescription": "Ruins of Tapoyauik, Varlamore",
     "travelTip": "Quetzal whistle -> Varlamore",
+    "requirements": {
+      "quests": [
+        "THE_HEART_OF_DARKNESS"
+      ]
+    },
     "items": [
       {
         "itemId": 29889,
@@ -15950,6 +15960,11 @@
     "killTimeSeconds": 45,
     "locationDescription": "Lumbridge cow field",
     "travelTip": "Lumbridge teleport",
+    "requirements": {
+      "quests": [
+        "THE_IDES_OF_MILK"
+      ]
+    },
     "items": [
       {
         "itemId": 33124,
