@@ -26,6 +26,7 @@ import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
 import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
+import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
@@ -55,15 +56,17 @@ import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameObjectDespawned;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
+import net.runelite.api.events.InteractingChanged;
 import net.runelite.api.events.HitsplatApplied;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.ItemSpawned;
 import net.runelite.api.events.ItemDespawned;
 import net.runelite.api.events.NpcSpawned;
 import net.runelite.api.events.NpcDespawned;
+import net.runelite.api.events.MenuEntryAdded;
+import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.client.events.NpcLootReceived;
 import net.runelite.client.game.ItemStack;
-import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.ScriptPreFired;
 import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
@@ -112,6 +115,8 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	/** Ticks to wait after the last script 4100 fires before finalizing the scan. */
 	private static final int SCAN_SETTLE_TICKS = 3;
+
+	private static final String MENU_OPTION_GUIDE = "Collection Log Guide";
 
 	@Inject
 	private Client client;
@@ -183,6 +188,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private GroundItemHighlightOverlay groundItemHighlightOverlay;
 
 	@Inject
+	private WorldMapRouteOverlay worldMapRouteOverlay;
+
+	@Inject
 	private DataSyncState dataSyncState;
 
 	@Inject
@@ -240,6 +248,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private WorldPoint pendingShortestPathTarget;
 	private boolean slayerRefreshPending;
 
+	/** Tracked NPC for guidance overlay — maintained via NpcSpawned/NpcDespawned events. */
+	private volatile NPC trackedGuidanceNpc;
+
 	/** Writer for guidance authoring event log. Opened when authoring mode enabled. */
 	private java.io.PrintWriter authoringLogWriter;
 
@@ -291,6 +302,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.add(objectHighlightOverlay);
 		overlayManager.add(itemHighlightOverlay);
 		overlayManager.add(groundItemHighlightOverlay);
+		overlayManager.add(worldMapRouteOverlay);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -326,6 +338,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.remove(objectHighlightOverlay);
 		overlayManager.remove(itemHighlightOverlay);
 		overlayManager.remove(groundItemHighlightOverlay);
+		overlayManager.remove(worldMapRouteOverlay);
 		deactivateGuidance();
 		lastObtainedCount = -1;
 		collectionLogOpen = false;
@@ -990,6 +1003,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (step != null)
 			{
 				applyStepToOverlays(step, source.getName());
+				scanForTrackedNpc(step);
 			}
 			if (panel != null)
 			{
@@ -1090,6 +1104,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			dialogHighlightOverlay.setTargetDialogOptions(step.getDialogOptions());
 			dialogHighlightOverlay.setGuidanceActive(true);
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
+			worldMapRouteOverlay.setTargetPoint(worldPoint);
 			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, step.getDescription(), collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
 
@@ -1145,6 +1160,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		dialogHighlightOverlay.setTargetDialogOptions(source.getDialogOptions());
 		dialogHighlightOverlay.setGuidanceActive(true);
 		guidanceMinimapOverlay.setTargetPoint(worldPoint);
+		worldMapRouteOverlay.setTargetPoint(worldPoint);
 		activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
 		worldMapPointManager.add(activeMapPoint);
 
@@ -1167,8 +1183,10 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	private void clearGuidanceOverlays()
 	{
+		trackedGuidanceNpc = null;
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
+		worldMapRouteOverlay.clearTarget();
 		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
@@ -1182,6 +1200,31 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	/**
+	 * Scans currently loaded NPCs to find a match for the given step's target NPC ID.
+	 * Called once when a new step activates to seed the tracked NPC reference.
+	 */
+	private void scanForTrackedNpc(GuidanceStep step)
+	{
+		trackedGuidanceNpc = null;
+		guidanceOverlay.setTrackedNpc(null);
+
+		if (step == null || step.getNpcId() <= 0)
+		{
+			return;
+		}
+
+		for (NPC npc : client.getTopLevelWorldView().npcs())
+		{
+			if (npc != null && npc.getId() == step.getNpcId())
+			{
+				trackedGuidanceNpc = npc;
+				guidanceOverlay.setTrackedNpc(npc);
+				break;
+			}
+		}
+	}
+
+	/**
 	 * Callback from GuidanceSequencer when the current step changes.
 	 */
 	private void onStepChanged(GuidanceStep step)
@@ -1190,6 +1233,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		String sourceName = guidanceSequencer.getActiveSource() != null
 			? guidanceSequencer.getActiveSource().getName() : "";
 		applyStepToOverlays(step, sourceName);
+		scanForTrackedNpc(step);
 
 		if (config.notifyOnStepComplete())
 		{
@@ -1202,7 +1246,14 @@ public class CollectionLogHelperPlugin extends Plugin
 			int current = guidanceSequencer.getCurrentIndex() + 1;
 			int total = guidanceSequencer.getTotalSteps();
 			activeInfoBox.setStepText(current + "/" + total);
-			activeInfoBox.setTooltipText(step.getDescription());
+			String tooltip = step.getDescription();
+			if (guidanceSequencer.getCumulativeTrackThreshold() > 0)
+			{
+				tooltip += "\n" + guidanceSequencer.getCumulativeActionCount()
+					+ "/" + guidanceSequencer.getCumulativeTrackThreshold()
+					+ " actions tracked";
+			}
+			activeInfoBox.setTooltipText(tooltip);
 			if (current == total)
 			{
 				activeInfoBox.setTextColor(java.awt.Color.GREEN);
@@ -1252,6 +1303,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	public void deactivateGuidance()
 	{
 		lastMessagedStepIndex = -1;
+		trackedGuidanceNpc = null;
 		if (activeInfoBox != null)
 		{
 			infoBoxManager.removeInfoBox(activeInfoBox);
@@ -1260,6 +1312,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceSequencer.stopSequence();
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
+		worldMapRouteOverlay.clearTarget();
 		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
@@ -1289,9 +1342,68 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	@Subscribe
+	public void onMenuEntryAdded(MenuEntryAdded event)
+	{
+		if (!config.showOverlays())
+		{
+			return;
+		}
+
+		int type = event.getType();
+		if (type < MenuAction.NPC_FIRST_OPTION.getId() || type > MenuAction.NPC_FIFTH_OPTION.getId())
+		{
+			return;
+		}
+
+		NPC npc = event.getMenuEntry().getNpc();
+		if (npc == null)
+		{
+			return;
+		}
+
+		int npcId = npc.getId();
+		CollectionLogSource source = database.getSourceByNpcId(npcId);
+		if (source == null)
+		{
+			return;
+		}
+
+		// Skip if guidance is already active for this source
+		if (guidanceSequencer.isActive() && source.equals(guidanceSequencer.getActiveSource()))
+		{
+			return;
+		}
+
+		// Check if source has any missing items
+		boolean hasMissing = source.getItems().stream()
+			.anyMatch(item -> !collectionState.isItemObtained(item.getItemId()));
+		if (!hasMissing)
+		{
+			return;
+		}
+
+		client.getMenu().createMenuEntry(-1)
+			.setOption(MENU_OPTION_GUIDE)
+			.setTarget(event.getTarget())
+			.setType(MenuAction.RUNELITE)
+			.setIdentifier(npcId);
+	}
+
+	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked event)
 	{
 		MenuAction action = event.getMenuAction();
+
+		// Handle "Collection Log Guide" right-click menu action
+		if (action == MenuAction.RUNELITE && MENU_OPTION_GUIDE.equals(event.getMenuOption()))
+		{
+			CollectionLogSource source = database.getSourceByNpcId(event.getId());
+			if (source != null)
+			{
+				activateGuidance(source);
+			}
+			return;
+		}
 
 		// Authoring mode: log all interactions regardless of guidance state
 		if (config.guidanceAuthoring())
@@ -1337,6 +1449,23 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (!guidanceSequencer.isActive())
 		{
 			return;
+		}
+
+		// Track cumulative use-item-on-object actions for guidance (e.g., Trouble Brewing hopper)
+		if (action == MenuAction.WIDGET_TARGET_ON_GAME_OBJECT)
+		{
+			CollectionLogSource source = guidanceSequencer.getActiveSource();
+			if (source != null && source.getCumulativeTrackItemId() > 0
+					&& source.getCumulativeTrackObjectIds() != null)
+			{
+				int objectId = event.getId();
+				int itemId = event.getParam0();
+				if (itemId == source.getCumulativeTrackItemId()
+						&& source.getCumulativeTrackObjectIds().contains(objectId))
+				{
+					guidanceSequencer.onTrackedAction();
+				}
+			}
 		}
 
 		// Detect NPC interactions for NPC_TALKED_TO completion condition.
@@ -1551,23 +1680,61 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onNpcSpawned(NpcSpawned event)
 	{
-		if (!config.guidanceAuthoring())
-		{
-			return;
-		}
 		NPC npc = event.getNpc();
-		authoringLog("NPC_SPAWN id=%d name='%s' index=%d", npc.getId(), npc.getName(), npc.getIndex());
+
+		if (config.guidanceAuthoring())
+		{
+			authoringLog("NPC_SPAWN id=%d name='%s' index=%d", npc.getId(), npc.getName(), npc.getIndex());
+		}
+
+		// Track the spawned NPC if it matches the current guidance step's target
+		if (guidanceSequencer.isActive() && trackedGuidanceNpc == null)
+		{
+			GuidanceStep step = guidanceSequencer.getRawCurrentStep();
+			if (step != null && step.getNpcId() > 0 && npc.getId() == step.getNpcId())
+			{
+				trackedGuidanceNpc = npc;
+				guidanceOverlay.setTrackedNpc(npc);
+			}
+		}
 	}
 
 	@Subscribe
 	public void onNpcDespawned(NpcDespawned event)
 	{
-		if (!config.guidanceAuthoring())
+		NPC npc = event.getNpc();
+
+		if (config.guidanceAuthoring())
+		{
+			authoringLog("NPC_DESPAWN id=%d name='%s'", npc.getId(), npc.getName());
+		}
+
+		// Clear tracked NPC if it despawned
+		if (npc == trackedGuidanceNpc)
+		{
+			trackedGuidanceNpc = null;
+			guidanceOverlay.setTrackedNpc(null);
+		}
+	}
+
+	@Subscribe
+	public void onInteractingChanged(InteractingChanged event)
+	{
+		if (!guidanceSequencer.isActive())
 		{
 			return;
 		}
-		NPC npc = event.getNpc();
-		authoringLog("NPC_DESPAWN id=%d name='%s'", npc.getId(), npc.getName());
+
+		if (event.getSource() == client.getLocalPlayer() && event.getTarget() instanceof NPC)
+		{
+			NPC npc = (NPC) event.getTarget();
+			GuidanceStep step = guidanceSequencer.getRawCurrentStep();
+			if (step != null && step.getCompletionCondition() == CompletionCondition.NPC_TALKED_TO
+				&& step.getCompletionNpcId() == npc.getId())
+			{
+				guidanceSequencer.onNpcInteracted(npc.getId());
+			}
+		}
 	}
 
 	@Subscribe
