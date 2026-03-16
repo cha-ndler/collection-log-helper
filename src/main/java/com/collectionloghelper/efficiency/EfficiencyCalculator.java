@@ -284,6 +284,7 @@ public class EfficiencyCalculator
 
 		String reasoning = buildCombinedReasoning(bestItem, bestItemScore, missingCount,
 			killTimeSeconds, rolls, combinedDropRate, killsPerHour, guaranteedMissing);
+		reasoning = appendVariantNote(reasoning, source);
 		double dropOnlyScore = combinedDropRate > 0 ? combinedDropRate * killsPerHour * 100.0 : 0;
 
 		return new ScoredItem(source, score, missingCount, reasoning, locked,
@@ -385,6 +386,21 @@ public class EfficiencyCalculator
 
 		return String.format("%s in ~%s (%d missing total)",
 			bestItem.getName(), bestItemTime, missingCount);
+	}
+
+	/**
+	 * Appends a "also at: ..." note to the reasoning for mutually exclusive sources.
+	 * These sources share the same collection log item IDs, so obtaining an item at
+	 * any variant fills the slot for all variants. The note helps players see alternatives.
+	 */
+	private static String appendVariantNote(String reasoning, CollectionLogSource source)
+	{
+		List<String> variants = source.getMutuallyExclusiveSources();
+		if (variants == null || variants.isEmpty())
+		{
+			return reasoning;
+		}
+		return reasoning + " (also: " + String.join(", ", variants) + ")";
 	}
 
 	/**
@@ -513,6 +529,7 @@ public class EfficiencyCalculator
 		double score = bestPetScore > 0 ? bestPetScore : missingPetCount * 0.2;
 		String reasoning = buildCombinedReasoning(bestPet, bestPetScore, missingPetCount,
 			killTimeSeconds, rolls, 0, killsPerHour, 0);
+		reasoning = appendVariantNote(reasoning, source);
 		double dropOnlyScore = bestPet != null && bestPet.getDropRate() < 1.0 ? bestPetScore : 0;
 
 		return new ScoredItem(source, score, missingPetCount, reasoning, locked,
