@@ -5,7 +5,7 @@
     "worldX": 2882,
     "worldY": 3400,
     "worldPlane": 0,
-    "killTimeSeconds": 90,
+    "killTimeSeconds": 62,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -126,7 +126,7 @@
     "worldX": 2882,
     "worldY": 3400,
     "worldPlane": 0,
-    "killTimeSeconds": 75,
+    "killTimeSeconds": 62,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -247,7 +247,7 @@
     "worldX": 2882,
     "worldY": 3400,
     "worldPlane": 0,
-    "killTimeSeconds": 85,
+    "killTimeSeconds": 55,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -489,7 +489,7 @@
     "worldX": 2268,
     "worldY": 3069,
     "worldPlane": 0,
-    "killTimeSeconds": 120,
+    "killTimeSeconds": 82,
     "requirements": {
       "quests": [
         "REGICIDE"
@@ -601,7 +601,7 @@
     "worldX": 2640,
     "worldY": 3693,
     "worldPlane": 0,
-    "killTimeSeconds": 150,
+    "killTimeSeconds": 106,
     "requirements": {
       "quests": [
         "DRAGON_SLAYER_II"
@@ -913,7 +913,7 @@
     "worldX": 2966,
     "worldY": 3380,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 60,
     "items": [
       {
         "itemId": 12829,
@@ -997,7 +997,7 @@
     "worldPlane": 0,
     "locationDescription": "Kalphite Lair entrance, Kharidian Desert",
     "travelTip": "Fairy ring BIQ -> KQ tunnel",
-    "killTimeSeconds": 180,
+    "killTimeSeconds": 65,
     "items": [
       {
         "itemId": 7981,
@@ -1069,7 +1069,7 @@
     "worldX": 2878,
     "worldY": 3596,
     "worldPlane": 0,
-    "killTimeSeconds": 180,
+    "killTimeSeconds": 138,
     "requirements": {
       "quests": [
         "SECRETS_OF_THE_NORTH"
@@ -1150,7 +1150,7 @@
     "worldX": 2586,
     "worldY": 3091,
     "worldPlane": 0,
-    "killTimeSeconds": 210,
+    "killTimeSeconds": 88,
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
@@ -1261,7 +1261,7 @@
     "worldX": 3231,
     "worldY": 2894,
     "worldPlane": 0,
-    "killTimeSeconds": 240,
+    "killTimeSeconds": 120,
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
@@ -1372,7 +1372,7 @@
     "worldX": 3007,
     "worldY": 3477,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 171,
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
@@ -1483,7 +1483,7 @@
     "worldX": 1131,
     "worldY": 3484,
     "worldPlane": 0,
-    "killTimeSeconds": 120,
+    "killTimeSeconds": 97,
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
@@ -1594,7 +1594,7 @@
     "worldX": 3427,
     "worldY": 3543,
     "worldPlane": 2,
-    "killTimeSeconds": 120,
+    "killTimeSeconds": 97,
     "requirements": {
       "skills": [
         {
@@ -1836,7 +1836,7 @@
     "worldX": 2882,
     "worldY": 3400,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 240,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD",
@@ -1953,7 +1953,7 @@
     "worldPlane": 0,
     "locationDescription": "Forthos Dungeon, Hosidius",
     "travelTip": "Xeric's talisman -> Heart",
-    "killTimeSeconds": 90,
+    "killTimeSeconds": 45,
     "items": [
       {
         "itemId": 23528,
@@ -2017,7 +2017,7 @@
     "worldX": 2987,
     "worldY": 3376,
     "worldPlane": 0,
-    "killTimeSeconds": 90,
+    "killTimeSeconds": 29,
     "afkLevel": 1,
     "items": [
       {
@@ -2410,7 +2410,7 @@
     "worldX": 2379,
     "worldY": 9452,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 24,
     "requirements": {
       "skills": [
         {
@@ -2485,7 +2485,7 @@
     "worldX": 3039,
     "worldY": 4763,
     "worldPlane": 0,
-    "killTimeSeconds": 150,
+    "killTimeSeconds": 72,
     "requirements": {
       "skills": [
         {
@@ -2591,7 +2591,7 @@
     "worldX": 3005,
     "worldY": 3849,
     "worldPlane": 0,
-    "killTimeSeconds": 60,
+    "killTimeSeconds": 28,
     "afkLevel": 1,
     "items": [
       {
@@ -2650,7 +2650,7 @@
     "worldX": 3281,
     "worldY": 3910,
     "worldPlane": 0,
-    "killTimeSeconds": 60,
+    "killTimeSeconds": 30,
     "items": [
       {
         "itemId": 11920,
@@ -2700,7 +2700,7 @@
     "worldX": 3233,
     "worldY": 3945,
     "worldPlane": 0,
-    "killTimeSeconds": 60,
+    "killTimeSeconds": 28,
     "items": [
       {
         "itemId": 11930,
@@ -2759,7 +2759,7 @@
     "worldX": 2981,
     "worldY": 3834,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 36,
     "afkLevel": 1,
     "items": [
       {
@@ -3216,7 +3216,7 @@
     "worldX": 1233,
     "worldY": 3731,
     "worldPlane": 0,
-    "killTimeSeconds": 60,
+    "killTimeSeconds": 38,
     "requirements": {
       "skills": [
         {
@@ -3986,7 +3986,7 @@
     "worldX": 3230,
     "worldY": 6073,
     "worldPlane": 0,
-    "killTimeSeconds": 720,
+    "killTimeSeconds": 360,
     "requirements": {
       "quests": [
         "SONG_OF_THE_ELVES"
@@ -4520,7 +4520,7 @@
     "worldX": 3289,
     "worldY": 6040,
     "worldPlane": 0,
-    "killTimeSeconds": 240,
+    "killTimeSeconds": 90,
     "requirements": {
       "quests": [
         "SONG_OF_THE_ELVES"
@@ -4736,7 +4736,7 @@
     "worldX": 3686,
     "worldY": 3426,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 80,
     "requirements": {
       "quests": [
         "SINS_OF_THE_FATHER"
@@ -4850,7 +4850,7 @@
     "worldPlane": 0,
     "locationDescription": "Cam Torum entrance, Ralos Rise",
     "travelTip": "Quetzal whistle -> Cam Torum",
-    "killTimeSeconds": 360,
+    "killTimeSeconds": 200,
     "requirements": {
       "quests": [
         "PERILOUS_MOONS"
@@ -14396,7 +14396,7 @@
     "worldX": 1509,
     "worldY": 3290,
     "worldPlane": 0,
-    "killTimeSeconds": 500,
+    "killTimeSeconds": 327,
     "locationDescription": "The Darkfrost, Hailstorm Mountains in Varlamore",
     "travelTip": "Quetzal whistle -> Varlamore",
     "requirements": {
@@ -14475,7 +14475,7 @@
     "worldX": 1503,
     "worldY": 10091,
     "worldPlane": 0,
-    "killTimeSeconds": 360,
+    "killTimeSeconds": 180,
     "locationDescription": "Yama's Domain, Chasm of Fire beneath Shayzien",
     "travelTip": "Xeric's talisman -> Heart",
     "items": [
@@ -14660,7 +14660,7 @@
     "worldX": 3008,
     "worldY": 3150,
     "worldPlane": 0,
-    "killTimeSeconds": 75,
+    "killTimeSeconds": 60,
     "locationDescription": "Asgarnian Ice Dungeon, south of Port Sarim",
     "travelTip": "Port Sarim -> Ice Dungeon",
     "items": [
@@ -14738,7 +14738,7 @@
     "worldX": 1362,
     "worldY": 4511,
     "worldPlane": 0,
-    "killTimeSeconds": 90,
+    "killTimeSeconds": 42,
     "locationDescription": "Ruins of Tapoyauik, Varlamore",
     "travelTip": "Quetzal whistle -> Varlamore",
     "items": [
@@ -14848,7 +14848,7 @@
     "worldX": 3176,
     "worldY": 2477,
     "worldPlane": 0,
-    "killTimeSeconds": 70,
+    "killTimeSeconds": 36,
     "locationDescription": "Shellbane Gryphon Cave, The Great Conch",
     "travelTip": "Fairy ring CJQ -> Great Conch",
     "requirements": {
@@ -14915,7 +14915,7 @@
     "worldX": 3299,
     "worldY": 9867,
     "worldPlane": 0,
-    "killTimeSeconds": 60,
+    "killTimeSeconds": 42,
     "locationDescription": "Varrock Sewers",
     "travelTip": "Varrock teleport -> sewers",
     "items": [
@@ -14956,7 +14956,7 @@
     "worldX": 2439,
     "worldY": 5172,
     "worldPlane": 0,
-    "killTimeSeconds": 2400,
+    "killTimeSeconds": 1440,
     "locationDescription": "Mor Ul Rek, Karamja Volcano",
     "travelTip": "Fairy ring BLP -> TzHaar",
     "items": [
@@ -15003,7 +15003,7 @@
     "worldX": 2496,
     "worldY": 5122,
     "worldPlane": 0,
-    "killTimeSeconds": 5400,
+    "killTimeSeconds": 3600,
     "locationDescription": "Mor Ul Rek, Karamja Volcano",
     "travelTip": "Fairy ring BLP -> TzHaar",
     "items": [
