@@ -2148,7 +2148,9 @@
         "isPet": false,
         "wikiPage": "Bryophyta%27s_essence"
       }
-    ]
+    ],
+    "npcId": 8195,
+    "interactAction": "Attack"
   },
   {
     "name": "Obor",
@@ -2189,7 +2191,9 @@
         "isPet": false,
         "wikiPage": "Hill_giant_club"
       }
-    ]
+    ],
+    "npcId": 7416,
+    "interactAction": "Attack"
   },
   {
     "name": "Dagannoth Rex",
@@ -3348,7 +3352,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 8583,
+    "interactAction": "Attack"
   },
   {
     "name": "Chambers of Xeric",
@@ -4731,7 +4737,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 9049,
+    "interactAction": "Mine"
   },
   {
     "name": "Sol Heredit",
@@ -4888,7 +4896,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 6618,
+    "interactAction": "Attack"
   },
   {
     "name": "Araxxor",
@@ -5149,7 +5159,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 13011,
+    "interactAction": "Attack"
   },
   {
     "name": "Tormented Demons",
@@ -14778,7 +14790,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 14176,
+    "interactAction": "Attack"
   },
   {
     "name": "Doom of Mokhaiotl",
@@ -14854,7 +14868,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 14707,
+    "interactAction": "Attack"
   },
   {
     "name": "Royal Titans",
@@ -14933,7 +14949,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 12596,
+    "interactAction": "Attack"
   },
   {
     "name": "Amoxliatl",
@@ -14990,7 +15008,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 13685,
+    "interactAction": "Attack"
   },
   {
     "name": "Brutus",
@@ -15045,7 +15065,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 15626,
+    "interactAction": "Attack"
   },
   {
     "name": "Shellbane Gryphon",
@@ -15113,7 +15135,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 14860,
+    "interactAction": "Attack"
   },
   {
     "name": "Scurrius",
@@ -15286,7 +15310,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "npcId": 7806,
+    "interactAction": "Attack"
   },
   {
     "name": "Easy Treasure Trails",
