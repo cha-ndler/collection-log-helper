@@ -186,30 +186,6 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "notifyOnStepComplete",
-		name = "Step Notifications",
-		description = "Show a RuneLite notification when a guidance step auto-completes",
-		section = guidanceSection,
-		position = 5
-	)
-	default boolean notifyOnStepComplete()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "notifyOnSequenceComplete",
-		name = "Sequence Notifications",
-		description = "Show a RuneLite notification when an entire guidance sequence completes",
-		section = guidanceSection,
-		position = 6
-	)
-	default boolean notifyOnSequenceComplete()
-	{
-		return true;
-	}
-
-	@ConfigItem(
 		keyName = "guidanceAuthoring",
 		name = "Guidance Authoring Mode",
 		description = "Log all game interactions (menu clicks, NPC IDs, object IDs, animations, chat messages, locations) to a file for authoring new guidance sequences",
