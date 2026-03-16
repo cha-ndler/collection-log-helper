@@ -35,6 +35,7 @@ public class GuidanceSequencer
 	private volatile int currentIndex;
 	private volatile boolean active;
 	private volatile int loopIterationsCompleted;
+	private volatile int cumulativeActionCount;
 
 	private Consumer<GuidanceStep> onStepChanged;
 	private Runnable onSequenceComplete;
@@ -66,6 +67,7 @@ public class GuidanceSequencer
 		this.steps = source.getGuidanceSteps();
 		this.currentIndex = 0;
 		this.loopIterationsCompleted = 0;
+		this.cumulativeActionCount = 0;
 		this.onStepChanged = stepChanged;
 		this.onSequenceComplete = sequenceComplete;
 		this.active = true;
@@ -157,6 +159,56 @@ public class GuidanceSequencer
 	public int getLoopIterationsCompleted()
 	{
 		return loopIterationsCompleted;
+	}
+
+	public int getCumulativeActionCount()
+	{
+		return cumulativeActionCount;
+	}
+
+	/**
+	 * Returns the cumulative track threshold from the active source, or 0 if none.
+	 */
+	public int getCumulativeTrackThreshold()
+	{
+		return activeSource != null ? activeSource.getCumulativeTrackThreshold() : 0;
+	}
+
+	/**
+	 * Called when the player performs a tracked use-item-on-object action
+	 * (e.g., emptying a bucket of water into the Trouble Brewing hopper).
+	 * Increments the cumulative counter and force-completes any active loop
+	 * when the threshold is reached.
+	 */
+	public void onTrackedAction()
+	{
+		if (!active || activeSource == null)
+		{
+			return;
+		}
+		int threshold = activeSource.getCumulativeTrackThreshold();
+		if (threshold <= 0)
+		{
+			return;
+		}
+		cumulativeActionCount++;
+		log.debug("Cumulative action {}/{}", cumulativeActionCount, threshold);
+		if (cumulativeActionCount >= threshold)
+		{
+			log.info("Cumulative threshold reached ({}/{}), completing loop", cumulativeActionCount, threshold);
+			// Force-complete any active loop and advance past it
+			for (int i = currentIndex; i < steps.size(); i++)
+			{
+				GuidanceStep s = steps.get(i);
+				if (s.getLoopCount() > 0)
+				{
+					loopIterationsCompleted = s.getLoopCount();
+					currentIndex = i;
+					advanceStep();
+					return;
+				}
+			}
+		}
 	}
 
 	/**
