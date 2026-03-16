@@ -470,6 +470,14 @@ public class CollectionLogHelperPlugin extends Plugin
 				&& !slayerTaskState.getCreatureName().equals(oldCreature))
 			|| slayerTaskState.getRemaining() != oldRemaining;
 
+		// Refresh requirements (fairy ring access, quest gates) on varbit changes
+		// since quest states are stored as varbits and update during login.
+		boolean reqsChanged = requirementsChecker.refreshAccessibility(database.getAllSources());
+		if (reqsChanged)
+		{
+			slayerChanged = true; // force rebuild to update travel tips
+		}
+
 		// Don't trigger rebuilds mid-scan; the settle logic in onGameTick
 		// will fire a single rebuild once script 4100 stops firing.
 		if (scriptScanActive)
@@ -988,8 +996,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			return;
 		}
 
-		// Clear any existing guidance first (thread-safe overlay operations)
-		clearGuidanceOverlays();
+		// Clear any existing guidance first, including InfoBox and sequencer
+		deactivateGuidance();
 
 		// If source has multi-step guidance, start the sequencer
 		if (source.getGuidanceSteps() != null && !source.getGuidanceSteps().isEmpty())
