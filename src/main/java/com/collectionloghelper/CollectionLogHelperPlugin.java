@@ -23,6 +23,7 @@ import com.collectionloghelper.overlay.GuidanceInfoBox;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
 import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
 import com.collectionloghelper.overlay.GuidanceOverlay;
+import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
 import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
@@ -30,6 +31,7 @@ import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -179,6 +181,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private WorldMapRouteOverlay worldMapRouteOverlay;
 
 	@Inject
+	private GroundItemHighlightOverlay groundItemHighlightOverlay;
+
+	@Inject
 	private DataSyncState dataSyncState;
 
 	@Inject
@@ -287,6 +292,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.add(objectHighlightOverlay);
 		overlayManager.add(itemHighlightOverlay);
 		overlayManager.add(worldMapRouteOverlay);
+		overlayManager.add(groundItemHighlightOverlay);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -322,6 +328,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.remove(objectHighlightOverlay);
 		overlayManager.remove(itemHighlightOverlay);
 		overlayManager.remove(worldMapRouteOverlay);
+		overlayManager.remove(groundItemHighlightOverlay);
 		deactivateGuidance();
 		lastObtainedCount = -1;
 		collectionLogOpen = false;
@@ -1071,6 +1078,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		itemHighlightOverlay.setTargetItemIds(step.getHighlightItemIds());
 		itemHighlightOverlay.setUseItemOnObject(step.isUseItemOnObject());
 
+		groundItemHighlightOverlay.setTargetGroundItemIds(
+			step.getGroundItemIds() != null ? new HashSet<>(step.getGroundItemIds()) : null);
+
 		if (step.getWorldX() > 0)
 		{
 			WorldPoint worldPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
@@ -1168,6 +1178,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
+		groundItemHighlightOverlay.clearTargets();
 		activeMapPoint = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
 		if (panel != null)
@@ -1249,6 +1260,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
+		groundItemHighlightOverlay.clearTargets();
 		activeMapPoint = null;
 		pendingShortestPathTarget = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
