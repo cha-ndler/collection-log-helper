@@ -24,6 +24,8 @@ import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.OverlayUtil;
 import net.runelite.client.ui.overlay.components.LineComponent;
 import net.runelite.client.ui.overlay.components.TitleComponent;
+import net.runelite.client.ui.overlay.tooltip.Tooltip;
+import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import javax.inject.Singleton;
 
 @Singleton
@@ -36,6 +38,9 @@ public class GuidanceOverlay extends OverlayPanel
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
+
+	@Inject
+	private TooltipManager tooltipManager;
 
 	private volatile WorldPoint targetPoint;
 	private volatile String targetName;
@@ -164,7 +169,7 @@ public class GuidanceOverlay extends OverlayPanel
 			}
 			if (npc != null)
 			{
-				renderNpcHighlight(graphics, npc, overlayColor, action);
+				renderNpcHighlight(graphics, npc, overlayColor, action, locDesc);
 				npcHighlighted = true;
 			}
 		}
@@ -198,7 +203,8 @@ public class GuidanceOverlay extends OverlayPanel
 	 * Renders a highlight around an NPC with a downward-pointing arrow and
 	 * action label above it, similar to Quest Helper's NPC step rendering.
 	 */
-	private void renderNpcHighlight(Graphics2D graphics, NPC npc, Color overlayColor, String action)
+	private void renderNpcHighlight(Graphics2D graphics, NPC npc, Color overlayColor, String action,
+		String locDesc)
 	{
 		Shape hull = npc.getConvexHull();
 		if (hull != null)
@@ -216,6 +222,17 @@ public class GuidanceOverlay extends OverlayPanel
 			int arrowX = (int) bounds.getCenterX();
 			int arrowTipY = (int) bounds.getMinY() - ARROW_GAP;
 			renderDirectionArrow(graphics, arrowX, arrowTipY, overlayColor);
+
+			// Show tooltip when mouse hovers over the NPC hull
+			String builtTooltip = OverlayTooltipHelper.buildTooltip(locDesc, action);
+			if (builtTooltip != null)
+			{
+				Point mousePos = client.getMouseCanvasPosition();
+				if (mousePos != null && hull.contains(mousePos.getX(), mousePos.getY()))
+				{
+					tooltipManager.add(new Tooltip(builtTooltip));
+				}
+			}
 		}
 
 		// Render action text above the NPC and arrow
