@@ -547,6 +547,7 @@ public class GuidanceSequencer
 			null,  // worldMessage
 			0, null, null,  // objectId, objectIds, objectInteractAction
 			null,  // highlightItemIds
+			null,  // groundItemIds
 			null,  // completionChatPattern
 			false,  // useItemOnObject
 			0, 0   // loopBackToStep, loopCount
