@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ public class DropRateDatabase
 {
     private List<CollectionLogSource> sources = Collections.emptyList();
     private Map<Integer, CollectionLogItem> itemsById = Collections.emptyMap();
+    private Map<Integer, CollectionLogSource> sourcesByNpcId = Collections.emptyMap();
 
     @Inject
     private Gson gson;
@@ -43,6 +45,16 @@ public class DropRateDatabase
                     item -> item,
                     (a, b) -> a
                 ));
+
+            Map<Integer, CollectionLogSource> npcMap = new HashMap<>();
+            for (CollectionLogSource source : sources)
+            {
+                if (source.getNpcId() > 0)
+                {
+                    npcMap.put(source.getNpcId(), source);
+                }
+            }
+            sourcesByNpcId = npcMap;
 
             validateData();
             log.debug("Loaded {} sources with {} items", sources.size(), itemsById.size());
@@ -76,6 +88,11 @@ public class DropRateDatabase
     public CollectionLogItem getItemById(int itemId)
     {
         return itemsById.get(itemId);
+    }
+
+    public CollectionLogSource getSourceByNpcId(int npcId)
+    {
+        return sourcesByNpcId.get(npcId);
     }
 
     private void validateData()
