@@ -19,6 +19,7 @@ public class CollectionLogSource
     RewardType rewardType;
     double pointsPerHour;
     boolean mutuallyExclusive;
+    List<String> mutuallyExclusiveSources;
     int rollsPerKill;
     boolean aggregated;
     int afkLevel;
