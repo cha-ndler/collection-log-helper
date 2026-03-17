@@ -11762,7 +11762,7 @@
     "worldX": 1379,
     "worldY": 3634,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 2,
     "items": [
       {
         "itemId": 13258,
@@ -11825,7 +11825,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pearl_barbarian_rod",
-        "pointCost": 120
+        "pointCost": 150
       },
       {
         "itemId": 22838,
@@ -14528,7 +14528,7 @@
     "locationDescription": "Colossal Wyrm Agility Course in Avium Savannah, Varlamore",
     "travelTip": "Quetzal whistle -> Varlamore",
     "rewardType": "SHOP",
-    "pointsPerHour": 15,
+    "pointsPerHour": 234,
     "guidanceSteps": [
       {
         "description": "Travel to Colossal Wyrm Agility Course in Avium Savannah, Varlamore and train at Colossal Wyrm Agility.",
@@ -14825,7 +14825,7 @@
     "worldX": 3232,
     "worldY": 3621,
     "worldPlane": 0,
-    "killTimeSeconds": 15,
+    "killTimeSeconds": 8,
     "afkLevel": 2,
     "items": [
       {
