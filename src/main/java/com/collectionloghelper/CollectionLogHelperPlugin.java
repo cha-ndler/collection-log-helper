@@ -89,6 +89,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
 import net.runelite.client.util.ImageUtil;
+import net.runelite.client.util.Text;
 
 @Slf4j
 @PluginDescriptor(
@@ -541,10 +542,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Forward chat messages to guidance sequencer for CHAT_MESSAGE_RECEIVED condition
 		if (guidanceSequencer.isActive())
 		{
-			guidanceSequencer.onChatMessage(event.getMessage());
+			guidanceSequencer.onChatMessage(Text.removeTags(event.getMessage()));
 		}
 
-		Matcher matcher = COLLECTION_LOG_PATTERN.matcher(event.getMessage());
+		Matcher matcher = COLLECTION_LOG_PATTERN.matcher(Text.removeTags(event.getMessage()));
 		if (matcher.find())
 		{
 			String itemName = matcher.group(1);
