@@ -13965,6 +13965,7 @@
       }
     ],
     "locationDescription": "Deep sea fishing shoals",
+    "travelTip": "Sail to deep sea fishing shoals",
     "guidanceSteps": [
       {
         "description": "Fish at the deep sea fishing shoals for rare colored fish.",
@@ -13995,6 +13996,7 @@
       }
     ],
     "locationDescription": "Jalsavrah Pyramid in Sophanem",
+    "travelTip": "Pharaoh's sceptre -> Jalsavrah",
     "guidanceSteps": [
       {
         "description": "Loot the grand gold chest on the last floor of Pyramid Plunder.",
@@ -14049,6 +14051,7 @@
       }
     ],
     "locationDescription": "Stronghold of Security beneath Barbarian Village",
+    "travelTip": "Skull sceptre -> Barbarian Village",
     "guidanceSteps": [
       {
         "description": "Kill Stronghold of Security monsters for skull sceptre pieces.",
@@ -14095,6 +14098,7 @@
       }
     ],
     "locationDescription": "Catacombs of Kourend beneath Kourend Castle",
+    "travelTip": "Xeric's talisman -> Heart",
     "guidanceSteps": [
       {
         "description": "Kill monsters in the Catacombs of Kourend for dark totem pieces.",
@@ -14125,6 +14129,7 @@
       }
     ],
     "locationDescription": "God Wars Dungeon entrance in the Wilderness",
+    "travelTip": "Cemetery teleport -> run east",
     "guidanceSteps": [
       {
         "description": "Kill monsters in the Wilderness God Wars Dungeon for ecumenical keys.",
@@ -14187,6 +14192,7 @@
       }
     ],
     "locationDescription": "Elven Crystal Chest in Prifddinas",
+    "travelTip": "Teleport crystal -> Prifddinas",
     "guidanceSteps": [
       {
         "description": "Open the Elven Crystal Chest in Prifddinas.",
@@ -14520,6 +14526,7 @@
       }
     ],
     "locationDescription": "Various locations throughout Gielinor",
+    "travelTip": "Varies by activity",
     "guidanceSteps": [
       {
         "description": "Complete miscellaneous activities throughout Gielinor.",
@@ -14726,6 +14733,7 @@
       }
     ],
     "locationDescription": "Random event encounters throughout Gielinor",
+    "travelTip": "Triggered randomly while skilling",
     "guidanceSteps": [
       {
         "description": "Complete random events encountered throughout Gielinor.",
@@ -15033,6 +15041,7 @@
       }
     ],
     "locationDescription": "Rooftop Agility Courses, starting at Varrock",
+    "travelTip": "Varrock teleport -> course start",
     "guidanceSteps": [
       {
         "description": "Travel to Rooftop Agility Courses, starting at Varrock and train at Rooftop Agility.",
@@ -15655,6 +15664,7 @@
       }
     ],
     "locationDescription": "Crashed shooting stars found throughout Gielinor",
+    "travelTip": "POH telescope -> nearest teleport",
     "guidanceSteps": [
       {
         "description": "Travel to Crashed shooting stars found throughout Gielinor and mine crashed shooting stars.",
