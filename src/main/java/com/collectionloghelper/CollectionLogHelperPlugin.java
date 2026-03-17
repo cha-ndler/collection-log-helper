@@ -217,6 +217,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
 	private int lastObtainedCount = -1;
+	private volatile boolean pendingRequirementsRefresh = false;
 	private boolean collectionLogOpen;
 	private BufferedImage collectionLogIcon;
 	private CollectionLogWorldMapPoint activeMapPoint;
@@ -470,13 +471,10 @@ public class CollectionLogHelperPlugin extends Plugin
 				&& !slayerTaskState.getCreatureName().equals(oldCreature))
 			|| slayerTaskState.getRemaining() != oldRemaining;
 
-		// Refresh requirements (fairy ring access, quest gates) on varbit changes
-		// since quest states are stored as varbits and update during login.
-		boolean reqsChanged = requirementsChecker.refreshAccessibility(database.getAllSources());
-		if (reqsChanged)
-		{
-			slayerChanged = true; // force rebuild to update travel tips
-		}
+		// Flag requirements for refresh on next game tick (debounced).
+		// Quest states are varbits that fire hundreds of times during login,
+		// so we can't call refreshAccessibility() here — it scans all sources.
+		pendingRequirementsRefresh = true;
 
 		// Don't trigger rebuilds mid-scan; the settle logic in onGameTick
 		// will fire a single rebuild once script 4100 stops firing.
@@ -723,6 +721,17 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
+		// Debounced requirements refresh — flagged by onVarbitChanged, runs once per tick
+		if (pendingRequirementsRefresh)
+		{
+			pendingRequirementsRefresh = false;
+			boolean reqsChanged = requirementsChecker.refreshAccessibility(database.getAllSources());
+			if (reqsChanged && panel != null && !scriptScanActive)
+			{
+				panel.rebuild();
+			}
+		}
+
 		// Lazily init per-character data directory once player name is available
 		if (pluginDataManager.getCharacterDir() == null)
 		{
