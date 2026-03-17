@@ -71,6 +71,7 @@ import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.gameval.InterfaceID;
+import net.runelite.api.gameval.VarbitID;
 import net.runelite.api.gameval.ItemID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
@@ -219,6 +220,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private NavigationButton navButton;
 	private int lastObtainedCount = -1;
 	private volatile boolean pendingRequirementsRefresh = false;
+	private boolean clogNotificationChecked = false;
 	private boolean collectionLogOpen;
 	private BufferedImage collectionLogIcon;
 	private CollectionLogWorldMapPoint activeMapPoint;
@@ -422,6 +424,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			scanSettleCountdown = 0;
 			hasCompletedFullSync = false;
 			syncReminderSent = false;
+			clogNotificationChecked = false;
 			loginTickDelay = 0;
 			slayerRefreshPending = false;
 			cachedPlayerLocation = null;
@@ -823,6 +826,23 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (panel != null)
 			{
 				panel.rebuild();
+			}
+		}
+
+		// One-time check: warn if in-game collection log notification is disabled.
+		// Without it, the "New item added to your collection log" chat message
+		// never fires and our real-time detection silently fails.
+		// Approach from C Engineer: Completed plugin (m0bilebtw).
+		if (!clogNotificationChecked && loginTickDelay <= 5 && client.getGameState() == GameState.LOGGED_IN)
+		{
+			clogNotificationChecked = true;
+			int setting = client.getVarbitValue(VarbitID.OPTION_COLLECTION_NEW_ITEM);
+			if (setting == 0 || setting == 2)
+			{
+				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
+					"[Collection Log Helper] Warning: Your collection log notification setting is " +
+					"disabled. Enable it in Settings > All Settings > Collection Log > 'New item notification' " +
+					"for real-time item detection.", "");
 			}
 		}
 
