@@ -8524,8 +8524,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Hallowed_mark",
-        "pointCost": 250
+        "wikiPage": "Hallowed_mark"
       },
       {
         "itemId": 24740,
@@ -8598,7 +8597,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hallowed_token",
-        "pointCost": 250
+        "pointCost": 10
       },
       {
         "itemId": 24721,
@@ -8653,7 +8652,7 @@
     "locationDescription": "Hallowed Sepulchre entrance in Darkmeyer",
     "travelTip": "Drakan's medallion -> Darkmeyer",
     "rewardType": "MIXED",
-    "pointsPerHour": 30,
+    "pointsPerHour": 160,
     "afkLevel": 1,
     "guidanceSteps": [
       {
@@ -8945,7 +8944,7 @@
     "locationDescription": "Brimhaven Agility Arena, east of Brimhaven",
     "travelTip": "Fairy ring CKR -> Brimhaven",
     "rewardType": "SHOP",
-    "pointsPerHour": 60,
+    "pointsPerHour": 66,
     "guidanceSteps": [
       {
         "description": "Travel to Brimhaven Agility Arena, east of Brimhaven and train at Brimhaven Agility Arena.",
@@ -8983,7 +8982,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Smiths_tunic",
-        "pointCost": 400
+        "pointCost": 4000
       },
       {
         "itemId": 27025,
@@ -8992,7 +8991,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Smiths_trousers",
-        "pointCost": 400
+        "pointCost": 4000
       },
       {
         "itemId": 27027,
@@ -9001,7 +9000,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Smiths_boots",
-        "pointCost": 400
+        "pointCost": 3500
       },
       {
         "itemId": 27029,
@@ -9010,7 +9009,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Smiths_gloves",
-        "pointCost": 400
+        "pointCost": 3500
       },
       {
         "itemId": 27021,
@@ -9019,7 +9018,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Colossal_blade",
-        "pointCost": 2000
+        "pointCost": 5000
       },
       {
         "itemId": 27014,
@@ -9037,7 +9036,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Double_ammo_mould",
-        "pointCost": 300
+        "pointCost": 2000
       },
       {
         "itemId": 27017,
@@ -9061,7 +9060,7 @@
     "locationDescription": "Giants' Foundry beneath the Giant's Plateau",
     "travelTip": "Grouping tele -> Giants' Foundry",
     "rewardType": "SHOP",
-    "pointsPerHour": 150,
+    "pointsPerHour": 2000,
     "guidanceSteps": [
       {
         "description": "Travel to Giants' Foundry beneath the Giant's Plateau and train at Giants' Foundry.",
@@ -9175,7 +9174,7 @@
     "locationDescription": "Void Knights' Outpost, south of Port Sarim",
     "travelTip": "Minigame tele -> Pest Control",
     "rewardType": "SHOP",
-    "pointsPerHour": 110,
+    "pointsPerHour": 270,
     "guidanceSteps": [
       {
         "description": "Travel to Void Knights' Outpost, south of Port Sarim and play Pest Control.",
@@ -9201,7 +9200,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Infinity_hat",
-        "pointCost": 400
+        "pointCost": 25
       },
       {
         "itemId": 6916,
@@ -9210,7 +9209,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Infinity_top",
-        "pointCost": 500
+        "pointCost": 29
       },
       {
         "itemId": 6924,
@@ -9219,7 +9218,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Infinity_bottoms",
-        "pointCost": 600
+        "pointCost": 32
       },
       {
         "itemId": 6922,
@@ -9228,7 +9227,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Infinity_gloves",
-        "pointCost": 200
+        "pointCost": 13
       },
       {
         "itemId": 6920,
@@ -9237,7 +9236,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Infinity_boots",
-        "pointCost": 200
+        "pointCost": 9
       },
       {
         "itemId": 6889,
@@ -9246,7 +9245,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mage%27s_book",
-        "pointCost": 400
+        "pointCost": 37
       },
       {
         "itemId": 6914,
@@ -9255,7 +9254,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Master_wand",
-        "pointCost": 300
+        "pointCost": 17
       },
       {
         "itemId": 6926,
@@ -9264,7 +9263,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bones_to_Peaches",
-        "pointCost": 200
+        "pointCost": 16
       },
       {
         "itemId": 6908,
@@ -9273,7 +9272,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Beginner_wand",
-        "pointCost": 30
+        "pointCost": 2
       },
       {
         "itemId": 6910,
@@ -9282,7 +9281,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Apprentice_wand",
-        "pointCost": 60
+        "pointCost": 4
       },
       {
         "itemId": 6912,
@@ -9291,13 +9290,13 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Teacher_wand",
-        "pointCost": 150
+        "pointCost": 12
       }
     ],
     "locationDescription": "Mage Training Arena, north-east of Al Kharid",
     "travelTip": "Ring of dueling -> Emir's Arena",
     "rewardType": "SHOP",
-    "pointsPerHour": 100,
+    "pointsPerHour": 10,
     "guidanceSteps": [
       {
         "description": "Travel to Mage Training Arena, north-east of Al Kharid and train at Mage Training Arena.",
@@ -9532,7 +9531,7 @@
     "locationDescription": "Mahogany Homes, contracts available in Falador, Varrock, Hosidius, and Ardougne",
     "travelTip": "Varies by contract city",
     "rewardType": "SHOP",
-    "pointsPerHour": 200,
+    "pointsPerHour": 285,
     "guidanceSteps": [
       {
         "description": "Travel to Mahogany Homes, contracts available in Falador, Varrock, Hosidius, and Ardougne and train at Mahogany Homes.",
@@ -9570,7 +9569,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Alchemist_labcoat",
-        "pointCost": 1500
+        "pointCost": 8750
       },
       {
         "itemId": 29982,
@@ -9579,7 +9578,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Alchemist_pants",
-        "pointCost": 1500
+        "pointCost": 8750
       },
       {
         "itemId": 29986,
@@ -9588,7 +9587,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Alchemist_gloves",
-        "pointCost": 800
+        "pointCost": 8750
       },
       {
         "itemId": 29974,
@@ -9597,7 +9596,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Prescription_goggles",
-        "pointCost": 1200
+        "pointCost": 24950
       },
       {
         "itemId": 29996,
@@ -9606,7 +9605,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Reagent_pouch",
-        "pointCost": 8000
+        "pointCost": 40100
       },
       {
         "itemId": 29992,
@@ -9615,7 +9614,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Alchemist%27s_amulet",
-        "pointCost": 2500
+        "pointCost": 19950
       },
       {
         "itemId": 30002,
@@ -9624,13 +9623,13 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Chugging_barrel",
-        "pointCost": 2000
+        "pointCost": 49850
       }
     ],
     "locationDescription": "Mastering Mixology, Aldarin in Varlamore",
     "travelTip": "Quetzal whistle -> Varlamore",
     "rewardType": "SHOP",
-    "pointsPerHour": 500,
+    "pointsPerHour": 12000,
     "guidanceSteps": [
       {
         "description": "Travel to Mastering Mixology, Aldarin in Varlamore and train at Mastering Mixology.",
@@ -9677,7 +9676,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Prospector_helmet",
-        "pointCost": 40
+        "pointCost": 26000
       },
       {
         "itemId": 21541,
@@ -9695,7 +9694,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Prospector_jacket",
-        "pointCost": 60
+        "pointCost": 39000
       },
       {
         "itemId": 12015,
@@ -9704,7 +9703,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Prospector_legs",
-        "pointCost": 50
+        "pointCost": 34000
       },
       {
         "itemId": 27695,
@@ -9722,7 +9721,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Prospector_boots",
-        "pointCost": 30
+        "pointCost": 21000
       },
       {
         "itemId": 25615,
@@ -9737,7 +9736,7 @@
     "locationDescription": "Volcanic Mine, north-east Fossil Island volcano",
     "travelTip": "Digsite pendant -> Fossil Island",
     "rewardType": "SHOP",
-    "pointsPerHour": 1500,
+    "pointsPerHour": 10000,
     "guidanceSteps": [
       {
         "description": "Travel to Volcanic Mine, north-east Fossil Island volcano and train at Volcanic Mine.",
@@ -9831,7 +9830,7 @@
     "locationDescription": "Tithe Farm, Hosidius",
     "travelTip": "Xeric's talisman -> Hosidius",
     "rewardType": "SHOP",
-    "pointsPerHour": 110,
+    "pointsPerHour": 95,
     "guidanceSteps": [
       {
         "description": "Travel to Tithe Farm, Hosidius and train at Tithe Farm.",
@@ -10220,7 +10219,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Decorative_full_helm_(red)",
-        "pointCost": 6
+        "pointCost": 5
       },
       {
         "itemId": 4069,
@@ -10274,7 +10273,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Decorative_shield_(red)",
-        "pointCost": 5
+        "pointCost": 6
       },
       {
         "itemId": 4506,
@@ -10292,7 +10291,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Decorative_full_helm_(white)",
-        "pointCost": 60
+        "pointCost": 40
       },
       {
         "itemId": 4504,
@@ -10346,7 +10345,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Decorative_shield_(white)",
-        "pointCost": 50
+        "pointCost": 60
       },
       {
         "itemId": 4511,
@@ -10364,7 +10363,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Decorative_full_helm_(gold)",
-        "pointCost": 600
+        "pointCost": 500
       },
       {
         "itemId": 4509,
@@ -10418,7 +10417,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Decorative_shield_(gold)",
-        "pointCost": 500
+        "pointCost": 600
       },
       {
         "itemId": 11898,
@@ -10559,7 +10558,7 @@
     "locationDescription": "Castle Wars arena, south of Observatory",
     "travelTip": "Minigame tele -> Castle Wars",
     "rewardType": "SHOP",
-    "pointsPerHour": 6,
+    "pointsPerHour": 12.7,
     "guidanceSteps": [
       {
         "description": "Travel to Castle Wars arena, south of Observatory and play Castle Wars.",
@@ -10610,7 +10609,7 @@
     "locationDescription": "Isle of Souls, west of Edgeville",
     "travelTip": "Minigame tele -> Soul Wars",
     "rewardType": "MIXED",
-    "pointsPerHour": 30,
+    "pointsPerHour": 375,
     "guidanceSteps": [
       {
         "description": "Travel to Isle of Souls, west of Edgeville and play Soul Wars.",
@@ -10921,7 +10920,7 @@
     "locationDescription": "Ferox Enclave, north of Varrock in the Wilderness",
     "travelTip": "Minigame tele -> LMS",
     "rewardType": "MIXED",
-    "pointsPerHour": 25,
+    "pointsPerHour": 28,
     "guidanceSteps": [
       {
         "description": "Travel to Ferox Enclave, north of Varrock in the Wilderness and play Last Man Standing.",
@@ -11288,7 +11287,7 @@
     "locationDescription": "Mos Le'Harmless, east of Braindeath Island",
     "travelTip": "Minigame tele -> Trouble Brew",
     "rewardType": "SHOP",
-    "pointsPerHour": 300,
+    "pointsPerHour": 1200,
     "guidanceSteps": [
       {
         "description": "Travel to Trouble Brewing on Mos Le'Harmless",
@@ -11642,7 +11641,7 @@
     "locationDescription": "Barbarian Outpost, north of Baxtorian Falls",
     "travelTip": "Minigame tele -> BA",
     "rewardType": "MIXED",
-    "pointsPerHour": 1000,
+    "pointsPerHour": 1550,
     "afkLevel": 1,
     "npcId": 1657,
     "interactAction": "Talk-to",
@@ -11848,7 +11847,7 @@
     "locationDescription": "Lake Molch on Molch Island",
     "travelTip": "Fairy ring DJR -> Molch",
     "rewardType": "MIXED",
-    "pointsPerHour": 20,
+    "pointsPerHour": 32,
     "guidanceSteps": [
       {
         "description": "Travel to Lake Molch on Molch Island and train at Aerial Fishing.",
@@ -12510,7 +12509,7 @@
     "locationDescription": "Seers' Village oak south of bank (W444 meta), NOT Woodcutting Guild",
     "travelTip": "Camelot teleport -> Seers'",
     "rewardType": "MIXED",
-    "pointsPerHour": 200,
+    "pointsPerHour": 1800,
     "guidanceSteps": [
       {
         "description": "Travel to Seers' Village oak south of bank (W444 meta), NOT Woodcutting Guild and train at Forestry.",
@@ -14728,7 +14727,7 @@
     ],
     "locationDescription": "Rooftop Agility Courses, starting at Varrock",
     "rewardType": "SHOP",
-    "pointsPerHour": 17,
+    "pointsPerHour": 25,
     "guidanceSteps": [
       {
         "description": "Travel to Rooftop Agility Courses, starting at Varrock and train at Rooftop Agility.",
@@ -14987,7 +14986,7 @@
     "worldX": 1516,
     "worldY": 3617,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 36,
     "afkLevel": 2,
     "items": [
       {
@@ -14996,8 +14995,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_helm_(1)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_helm_(1)"
       },
       {
         "itemId": 13361,
@@ -15005,8 +15003,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_platebody_(1)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_platebody_(1)"
       },
       {
         "itemId": 13360,
@@ -15014,8 +15011,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_greaves_(1)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_greaves_(1)"
       },
       {
         "itemId": 13357,
@@ -15023,8 +15019,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_gloves_(1)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_gloves_(1)"
       },
       {
         "itemId": 13358,
@@ -15032,8 +15027,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_boots_(1)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_boots_(1)"
       },
       {
         "itemId": 13364,
@@ -15041,8 +15035,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_helm_(2)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_helm_(2)"
       },
       {
         "itemId": 13366,
@@ -15050,8 +15043,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_platebody_(2)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_platebody_(2)"
       },
       {
         "itemId": 13365,
@@ -15059,8 +15051,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_greaves_(2)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_greaves_(2)"
       },
       {
         "itemId": 13362,
@@ -15068,8 +15059,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_gloves_(2)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_gloves_(2)"
       },
       {
         "itemId": 13363,
@@ -15077,8 +15067,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_boots_(2)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_boots_(2)"
       },
       {
         "itemId": 13369,
@@ -15086,8 +15075,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_helm_(3)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_helm_(3)"
       },
       {
         "itemId": 13371,
@@ -15095,8 +15083,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_platebody_(3)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_platebody_(3)"
       },
       {
         "itemId": 13370,
@@ -15104,8 +15091,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_greaves_(3)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_greaves_(3)"
       },
       {
         "itemId": 13367,
@@ -15113,8 +15099,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_gloves_(3)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_gloves_(3)"
       },
       {
         "itemId": 13368,
@@ -15122,8 +15107,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_boots_(3)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_boots_(3)"
       },
       {
         "itemId": 13374,
@@ -15131,8 +15115,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_helm_(4)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_helm_(4)"
       },
       {
         "itemId": 13376,
@@ -15140,8 +15123,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_platebody_(4)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_platebody_(4)"
       },
       {
         "itemId": 13375,
@@ -15149,8 +15131,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_greaves_(4)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_greaves_(4)"
       },
       {
         "itemId": 13372,
@@ -15158,8 +15139,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_gloves_(4)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_gloves_(4)"
       },
       {
         "itemId": 13373,
@@ -15167,8 +15147,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_boots_(4)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_boots_(4)"
       },
       {
         "itemId": 13379,
@@ -15176,8 +15155,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_helm_(5)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_helm_(5)"
       },
       {
         "itemId": 13381,
@@ -15185,8 +15163,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_body_(5)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_body_(5)"
       },
       {
         "itemId": 13380,
@@ -15194,8 +15171,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_greaves_(5)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_greaves_(5)"
       },
       {
         "itemId": 13377,
@@ -15203,8 +15179,7 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_gloves_(5)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_gloves_(5)"
       },
       {
         "itemId": 13378,
@@ -15212,14 +15187,11 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shayzien_boots_(5)",
-        "pointCost": 10
+        "wikiPage": "Shayzien_boots_(5)"
       }
     ],
     "locationDescription": "Shayzien Combat Ring, Great Kourend",
     "travelTip": "Xeric's talisman -> Lookout",
-    "rewardType": "SHOP",
-    "pointsPerHour": 250,
     "guidanceSteps": [
       {
         "description": "Travel to Shayzien Combat Ring, Great Kourend and earn Shayzien armour.",
@@ -15297,7 +15269,7 @@
     "locationDescription": "Motherlode Mine beneath Falador",
     "travelTip": "Falador teleport -> mine",
     "rewardType": "SHOP",
-    "pointsPerHour": 12,
+    "pointsPerHour": 10,
     "guidanceSteps": [
       {
         "description": "Travel to Motherlode Mine beneath Falador and train at Motherlode Mine.",
