@@ -13640,22 +13640,6 @@
         "wikiPage": "Shield_left_half"
       },
       {
-        "itemId": 7536,
-        "name": "Fresh crab claw",
-        "dropRate": 0.002,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Fresh_crab_claw"
-      },
-      {
-        "itemId": 7538,
-        "name": "Fresh crab shell",
-        "dropRate": 0.002,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Fresh_crab_shell"
-      },
-      {
         "itemId": 7989,
         "name": "Big bass",
         "dropRate": 0.001,
@@ -21866,6 +21850,48 @@
         "description": "Travel to the Farming Guild and check health of fruit trees.",
         "worldX": 1249,
         "worldY": 3719,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Underwater Crabs",
+    "category": "OTHER",
+    "worldX": 2987,
+    "worldY": 3033,
+    "worldPlane": 0,
+    "killTimeSeconds": 9,
+    "requirements": {
+      "quests": [
+        "RECIPE_FOR_DISASTER__FREEING_PIRATE_PETE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 7536,
+        "name": "Fresh crab claw",
+        "dropRate": 0.125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fresh_crab_claw"
+      },
+      {
+        "itemId": 7538,
+        "name": "Fresh crab shell",
+        "dropRate": 0.125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Fresh_crab_shell"
+      }
+    ],
+    "locationDescription": "Mogre Camp, underwater south of Mudskipper Point",
+    "travelTip": "Fairy ring AIQ -> Mudskipper Point, dive underwater",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Mudskipper Point, dive underwater and kill crabs (level 23) for claw and shell drops.",
+        "worldX": 2987,
+        "worldY": 3033,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
