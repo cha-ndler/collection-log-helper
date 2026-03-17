@@ -1107,7 +1107,8 @@
         "interactAction": "Attack",
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 97
   },
   {
     "name": "Phantom Muspah",
@@ -3448,7 +3449,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 72
   },
   {
     "name": "Chambers of Xeric",
@@ -13952,7 +13954,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "aggregated": false
+    "aggregated": false,
+    "ironKillTimeSeconds": 600
   },
   {
     "name": "Miscellaneous",
@@ -16290,7 +16293,8 @@
         "interactAction": "Attack",
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 60
   },
   {
     "name": "The Fight Caves",
@@ -18433,7 +18437,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 360
   },
   {
     "name": "Hard Treasure Trails",
@@ -19526,7 +19531,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 720
   },
   {
     "name": "Elite Treasure Trails",
@@ -20027,7 +20033,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 6000
   },
   {
     "name": "Master Treasure Trails",
@@ -20449,7 +20456,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 7200
   },
   {
     "name": "Hard Treasure Trail Rewards (Rare)",
