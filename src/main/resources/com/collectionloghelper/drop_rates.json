@@ -9843,12 +9843,12 @@
     ]
   },
   {
-    "name": "Gnome Restaurant",
+    "name": "Gnome Restaurant (Scarfs)",
     "category": "MINIGAMES",
     "worldX": 2436,
     "worldY": 3500,
     "worldPlane": 0,
-    "killTimeSeconds": 120,
+    "killTimeSeconds": 180,
     "items": [
       {
         "itemId": 9470,
@@ -9865,34 +9865,21 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Gnome_goggles"
-      },
-      {
-        "itemId": 9475,
-        "name": "Mint cake",
-        "dropRate": 0.0449,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mint_cake"
-      },
-      {
-        "itemId": 9469,
-        "name": "Grand seed pod",
-        "dropRate": 0.0449,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Grand_seed_pod"
       }
     ],
-    "locationDescription": "Gnome Restaurant, Tree Gnome Stronghold",
+    "locationDescription": "Tree Gnome Stronghold - deliver to Captain Ninto or Captain Daerkin",
     "travelTip": "Spirit tree -> Stronghold",
     "guidanceSteps": [
       {
-        "description": "Travel to Gnome Restaurant, Tree Gnome Stronghold and train at Gnome Restaurant.",
+        "description": "Get a hard delivery order from Gianne jnr. Re-roll until assigned Captain Ninto or Captain Daerkin. Cook and deliver for a chance at Gnome scarf or Gnome goggles.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
+    ],
+    "mutuallyExclusiveSources": [
+      "Gnome Restaurant (Seed Pods)"
     ]
   },
   {
@@ -13231,96 +13218,107 @@
     "worldX": 1824,
     "worldY": 3691,
     "worldPlane": 0,
-    "killTimeSeconds": 180,
+    "killTimeSeconds": 7200,
     "afkLevel": 1,
     "items": [
       {
         "itemId": 31770,
         "name": "Tiny pearl",
-        "dropRate": 0.1,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Tiny_pearl"
+        "wikiPage": "Tiny_pearl",
+        "milestoneKills": 1
       },
       {
         "itemId": 31773,
         "name": "Small pearl",
-        "dropRate": 0.08,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Small_pearl"
+        "wikiPage": "Small_pearl",
+        "milestoneKills": 1
       },
       {
         "itemId": 31776,
         "name": "Shiny pearl",
-        "dropRate": 0.06,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shiny_pearl"
+        "wikiPage": "Shiny_pearl",
+        "milestoneKills": 1
       },
       {
         "itemId": 31779,
         "name": "Bright pearl",
-        "dropRate": 0.05,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Bright_pearl"
+        "wikiPage": "Bright_pearl",
+        "milestoneKills": 1
       },
       {
         "itemId": 31782,
         "name": "Big pearl",
-        "dropRate": 0.04,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Big_pearl"
+        "wikiPage": "Big_pearl",
+        "milestoneKills": 1
       },
       {
         "itemId": 31785,
         "name": "Huge pearl",
-        "dropRate": 0.03,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Huge_pearl"
+        "wikiPage": "Huge_pearl",
+        "milestoneKills": 1
       },
       {
         "itemId": 31788,
         "name": "Enormous pearl",
-        "dropRate": 0.02,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Enormous_pearl"
+        "wikiPage": "Enormous_pearl",
+        "milestoneKills": 1
       },
       {
         "itemId": 31791,
         "name": "Shimmering pearl",
-        "dropRate": 0.015,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Shimmering_pearl"
+        "wikiPage": "Shimmering_pearl",
+        "milestoneKills": 1
       },
       {
         "itemId": 31794,
         "name": "Glistening pearl",
-        "dropRate": 0.01,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Glistening_pearl"
+        "wikiPage": "Glistening_pearl",
+        "milestoneKills": 1
       },
       {
         "itemId": 31797,
         "name": "Brilliant pearl",
-        "dropRate": 0.005,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Brilliant_pearl"
+        "wikiPage": "Brilliant_pearl",
+        "milestoneKills": 1
       },
       {
         "itemId": 31800,
         "name": "Radiant pearl",
-        "dropRate": 0.002,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Radiant_pearl"
+        "wikiPage": "Radiant_pearl",
+        "milestoneKills": 1
       }
     ],
     "locationDescription": "Open ocean during Sailing voyages",
@@ -21892,6 +21890,46 @@
         "description": "Travel to Mudskipper Point, dive underwater and kill crabs (level 23) for claw and shell drops.",
         "worldX": 2987,
         "worldY": 3033,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Gnome Restaurant (Seed Pods)",
+    "category": "MINIGAMES",
+    "worldX": 2436,
+    "worldY": 3500,
+    "worldPlane": 0,
+    "killTimeSeconds": 180,
+    "items": [
+      {
+        "itemId": 9475,
+        "name": "Mint cake",
+        "dropRate": 0.0449,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mint_cake"
+      },
+      {
+        "itemId": 9469,
+        "name": "Grand seed pod",
+        "dropRate": 0.0449,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Grand_seed_pod"
+      }
+    ],
+    "locationDescription": "Tree Gnome Stronghold - deliver to Wingstone, Penwie, Brambickle, or Prof. Manglethorp",
+    "travelTip": "Spirit tree -> Stronghold",
+    "mutuallyExclusiveSources": [
+      "Gnome Restaurant (Scarfs)"
+    ],
+    "guidanceSteps": [
+      {
+        "description": "Get a hard delivery order from Gianne jnr. Re-roll until assigned Wingstone, Penwie, Brambickle, or Prof. Manglethorp. Cook and deliver for a chance at Mint cake or Grand seed pod.",
+        "worldX": 2436,
+        "worldY": 3500,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
