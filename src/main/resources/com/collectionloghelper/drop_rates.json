@@ -13612,6 +13612,298 @@
     ]
   },
   {
+    "name": "Deep Sea Fishing",
+    "category": "OTHER",
+    "worldX": 1565,
+    "worldY": 3420,
+    "worldPlane": 0,
+    "killTimeSeconds": 14,
+    "aggregated": true,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 31408,
+        "name": "Giant blue krill",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Giant_blue_krill"
+      },
+      {
+        "itemId": 31412,
+        "name": "Golden haddock",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Golden_haddock"
+      },
+      {
+        "itemId": 31416,
+        "name": "Orangefin",
+        "dropRate": 0.00025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Orangefin"
+      },
+      {
+        "itemId": 31420,
+        "name": "Huge halibut",
+        "dropRate": 0.00025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Huge_halibut"
+      },
+      {
+        "itemId": 31424,
+        "name": "Purplefin",
+        "dropRate": 0.000167,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Purplefin"
+      },
+      {
+        "itemId": 31428,
+        "name": "Swift marlin",
+        "dropRate": 0.000167,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Swift_marlin"
+      }
+    ],
+    "locationDescription": "Deep sea fishing shoals",
+    "guidanceSteps": [
+      {
+        "description": "Fish at the deep sea fishing shoals for rare colored fish.",
+        "worldX": 1565,
+        "worldY": 3420,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Pyramid Plunder",
+    "category": "OTHER",
+    "worldX": 3288,
+    "worldY": 2801,
+    "worldPlane": 0,
+    "killTimeSeconds": 19,
+    "aggregated": false,
+    "afkLevel": 0,
+    "items": [
+      {
+        "itemId": 26945,
+        "name": "Pharaoh's sceptre",
+        "dropRate": 0.001538,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Pharaoh%27s_sceptre"
+      }
+    ],
+    "locationDescription": "Jalsavrah Pyramid in Sophanem",
+    "guidanceSteps": [
+      {
+        "description": "Loot the grand gold chest on the last floor of Pyramid Plunder.",
+        "worldX": 3288,
+        "worldY": 2801,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Stronghold of Security",
+    "category": "OTHER",
+    "worldX": 1859,
+    "worldY": 5243,
+    "worldPlane": 0,
+    "killTimeSeconds": 7,
+    "aggregated": true,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 9007,
+        "name": "Right skull half",
+        "dropRate": 0.0297,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Right_skull_half"
+      },
+      {
+        "itemId": 9008,
+        "name": "Left skull half",
+        "dropRate": 0.03,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Left_skull_half"
+      },
+      {
+        "itemId": 9010,
+        "name": "Top of sceptre",
+        "dropRate": 0.0297,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Top_of_sceptre"
+      },
+      {
+        "itemId": 9011,
+        "name": "Bottom of sceptre",
+        "dropRate": 0.03,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bottom_of_sceptre"
+      }
+    ],
+    "locationDescription": "Stronghold of Security beneath Barbarian Village",
+    "guidanceSteps": [
+      {
+        "description": "Kill Stronghold of Security monsters for skull sceptre pieces.",
+        "worldX": 1859,
+        "worldY": 5243,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Catacombs of Kourend",
+    "category": "OTHER",
+    "worldX": 1664,
+    "worldY": 10050,
+    "worldPlane": 0,
+    "killTimeSeconds": 12,
+    "aggregated": true,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 19679,
+        "name": "Dark totem base",
+        "dropRate": 0.00339,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_totem_base"
+      },
+      {
+        "itemId": 19681,
+        "name": "Dark totem middle",
+        "dropRate": 0.00339,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_totem_middle"
+      },
+      {
+        "itemId": 19683,
+        "name": "Dark totem top",
+        "dropRate": 0.00339,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dark_totem_top"
+      }
+    ],
+    "locationDescription": "Catacombs of Kourend beneath Kourend Castle",
+    "guidanceSteps": [
+      {
+        "description": "Kill monsters in the Catacombs of Kourend for dark totem pieces.",
+        "worldX": 1664,
+        "worldY": 10050,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Wilderness God Wars Dungeon",
+    "category": "OTHER",
+    "worldX": 3015,
+    "worldY": 3739,
+    "worldPlane": 0,
+    "killTimeSeconds": 7,
+    "aggregated": false,
+    "afkLevel": 0,
+    "items": [
+      {
+        "itemId": 11942,
+        "name": "Ecumenical key",
+        "dropRate": 0.0167,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ecumenical_key"
+      }
+    ],
+    "locationDescription": "God Wars Dungeon entrance in the Wilderness",
+    "guidanceSteps": [
+      {
+        "description": "Kill monsters in the Wilderness God Wars Dungeon for ecumenical keys.",
+        "worldX": 3015,
+        "worldY": 3739,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "Elven Crystal Chest",
+    "category": "OTHER",
+    "worldX": 3272,
+    "worldY": 6084,
+    "worldPlane": 0,
+    "killTimeSeconds": 2,
+    "aggregated": false,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 24034,
+        "name": "Dragonstone full helm",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragonstone_full_helm"
+      },
+      {
+        "itemId": 24037,
+        "name": "Dragonstone platebody",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragonstone_platebody"
+      },
+      {
+        "itemId": 24040,
+        "name": "Dragonstone platelegs",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragonstone_platelegs"
+      },
+      {
+        "itemId": 24043,
+        "name": "Dragonstone boots",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragonstone_boots"
+      },
+      {
+        "itemId": 24046,
+        "name": "Dragonstone gauntlets",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragonstone_gauntlets"
+      }
+    ],
+    "locationDescription": "Elven Crystal Chest in Prifddinas",
+    "guidanceSteps": [
+      {
+        "description": "Open the Elven Crystal Chest in Prifddinas.",
+        "worldX": 3272,
+        "worldY": 6084,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
     "name": "Miscellaneous",
     "category": "OTHER",
     "worldX": 3222,
@@ -13648,7 +13940,7 @@
       {
         "itemId": 7991,
         "name": "Big swordfish",
-        "dropRate": 0.001,
+        "dropRate": 0.0004,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Big_swordfish"
@@ -13656,42 +13948,10 @@
       {
         "itemId": 7993,
         "name": "Big shark",
-        "dropRate": 0.001,
+        "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Big_shark"
-      },
-      {
-        "itemId": 9007,
-        "name": "Right skull half",
-        "dropRate": 0.000244,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Right_skull_half"
-      },
-      {
-        "itemId": 9008,
-        "name": "Left skull half",
-        "dropRate": 0.000244,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Left_skull_half"
-      },
-      {
-        "itemId": 9010,
-        "name": "Top of sceptre",
-        "dropRate": 0.000244,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Top_of_sceptre"
-      },
-      {
-        "itemId": 9011,
-        "name": "Bottom of sceptre",
-        "dropRate": 0.000244,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Bottom_of_sceptre"
       },
       {
         "itemId": 6571,
@@ -13734,61 +13994,12 @@
         "wikiPage": "Chewed_bones"
       },
       {
-        "itemId": 11942,
-        "name": "Ecumenical key",
-        "dropRate": 0.0167,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Ecumenical_key"
-      },
-      {
-        "itemId": 13071,
-        "name": "Chompy chick",
-        "dropRate": 0.002,
-        "varbitId": 0,
-        "isPet": true,
-        "wikiPage": "Chompy_chick",
-        "independent": true
-      },
-      {
         "itemId": 13392,
         "name": "Xeric's talisman",
-        "dropRate": 0.004,
+        "dropRate": 0.008,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Xeric%27s_talisman"
-      },
-      {
-        "itemId": 13576,
-        "name": "Dragon warhammer",
-        "dropRate": 0.000333,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dragon_warhammer"
-      },
-      {
-        "itemId": 19679,
-        "name": "Dark totem base",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dark_totem_base"
-      },
-      {
-        "itemId": 19681,
-        "name": "Dark totem middle",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dark_totem_middle"
-      },
-      {
-        "itemId": 19683,
-        "name": "Dark totem top",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dark_totem_top"
       },
       {
         "itemId": 19707,
@@ -13868,7 +14079,7 @@
       {
         "itemId": 21509,
         "name": "Herbi",
-        "dropRate": 0.00044,
+        "dropRate": 0.000154,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Herbi",
@@ -13877,15 +14088,16 @@
       {
         "itemId": 21649,
         "name": "Merfolk trident",
-        "dropRate": 0.01,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Merfolk_trident"
+        "wikiPage": "Merfolk_trident",
+        "pointCost": 400
       },
       {
         "itemId": 21838,
         "name": "Shaman mask",
-        "dropRate": 0.005,
+        "dropRate": 0.000833,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shaman_mask"
@@ -13893,7 +14105,7 @@
       {
         "itemId": 21918,
         "name": "Dragon limbs",
-        "dropRate": 0.0005,
+        "dropRate": 0.00125,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_limbs"
@@ -13901,7 +14113,7 @@
       {
         "itemId": 22100,
         "name": "Dragon metal slice",
-        "dropRate": 0.001,
+        "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_metal_slice"
@@ -13909,7 +14121,7 @@
       {
         "itemId": 22103,
         "name": "Dragon metal lump",
-        "dropRate": 0.001,
+        "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_metal_lump"
@@ -13933,7 +14145,7 @@
       {
         "itemId": 23522,
         "name": "Mask of ranul",
-        "dropRate": 0.005,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mask_of_ranul"
@@ -13941,7 +14153,7 @@
       {
         "itemId": 23943,
         "name": "Elven signet",
-        "dropRate": 0.0001,
+        "dropRate": 0.0078,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Elven_signet"
@@ -13957,50 +14169,10 @@
       {
         "itemId": 24000,
         "name": "Crystal grail",
-        "dropRate": 0.005,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Crystal_grail"
-      },
-      {
-        "itemId": 24034,
-        "name": "Dragonstone full helm",
-        "dropRate": 0.005,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dragonstone_full_helm"
-      },
-      {
-        "itemId": 24037,
-        "name": "Dragonstone platebody",
-        "dropRate": 0.005,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dragonstone_platebody"
-      },
-      {
-        "itemId": 24040,
-        "name": "Dragonstone platelegs",
-        "dropRate": 0.005,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dragonstone_platelegs"
-      },
-      {
-        "itemId": 24043,
-        "name": "Dragonstone boots",
-        "dropRate": 0.005,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dragonstone_boots"
-      },
-      {
-        "itemId": 24046,
-        "name": "Dragonstone gauntlets",
-        "dropRate": 0.005,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Dragonstone_gauntlets"
       },
       {
         "itemId": 25844,
@@ -14017,14 +14189,6 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Blue_egg_sac"
-      },
-      {
-        "itemId": 26945,
-        "name": "Pharaoh's sceptre",
-        "dropRate": 0.002,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Pharaoh%27s_sceptre"
       },
       {
         "itemId": 28813,
@@ -14051,57 +14215,9 @@
         "wikiPage": "Broken_zombie_helmet"
       },
       {
-        "itemId": 31408,
-        "name": "Giant blue krill",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Giant_blue_krill"
-      },
-      {
-        "itemId": 31412,
-        "name": "Golden haddock",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Golden_haddock"
-      },
-      {
-        "itemId": 31416,
-        "name": "Orangefin",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Orangefin"
-      },
-      {
-        "itemId": 31420,
-        "name": "Huge halibut",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Huge_halibut"
-      },
-      {
-        "itemId": 31424,
-        "name": "Purplefin",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Purplefin"
-      },
-      {
-        "itemId": 31428,
-        "name": "Swift marlin",
-        "dropRate": 0.01,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Swift_marlin"
-      },
-      {
         "itemId": 31572,
         "name": "Squid beak",
-        "dropRate": 0.005,
+        "dropRate": 0.00195,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Squid_beak"
