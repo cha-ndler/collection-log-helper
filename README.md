@@ -2,7 +2,7 @@
 
 A RuneLite plugin that guides players through efficient collection log completion with intelligent efficiency scoring, on-screen guidance overlays, and multiple viewing modes.
 
-**Coverage:** 1,931 items across 184 sources with efficiency scoring, guidance overlays, and account-aware filtering.
+**Coverage:** 1,932 items across 192 sources with efficiency scoring, guidance overlays, and account-aware filtering.
 
 ## Features
 
