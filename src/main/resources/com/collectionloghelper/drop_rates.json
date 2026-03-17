@@ -727,7 +727,7 @@
       {
         "itemId": 13231,
         "name": "Primordial crystal",
-        "dropRate": 0.001953,
+        "dropRate": 0.001923,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Primordial_crystal"
@@ -735,7 +735,7 @@
       {
         "itemId": 13229,
         "name": "Pegasian crystal",
-        "dropRate": 0.001953,
+        "dropRate": 0.001923,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pegasian_crystal"
@@ -743,7 +743,7 @@
       {
         "itemId": 13227,
         "name": "Eternal crystal",
-        "dropRate": 0.001953,
+        "dropRate": 0.001923,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Eternal_crystal"
@@ -751,7 +751,7 @@
       {
         "itemId": 13233,
         "name": "Smouldering stone",
-        "dropRate": 0.001953,
+        "dropRate": 0.001923,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Smouldering_stone"
@@ -1064,7 +1064,7 @@
       {
         "itemId": 12885,
         "name": "Jar of sand",
-        "dropRate": 0.005,
+        "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jar_of_sand"
@@ -1072,7 +1072,7 @@
       {
         "itemId": 11920,
         "name": "Dragon pickaxe",
-        "dropRate": 0.0078,
+        "dropRate": 0.0025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_pickaxe"
@@ -1280,7 +1280,7 @@
       {
         "itemId": 28334,
         "name": "Awakener's orb",
-        "dropRate": 0.0255,
+        "dropRate": 0.020619,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Awakener%27s_orb"
@@ -2641,7 +2641,7 @@
       {
         "itemId": 4151,
         "name": "Abyssal whip",
-        "dropRate": 0.01953,
+        "dropRate": 0.0009375,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Abyssal_whip"
@@ -2649,7 +2649,7 @@
       {
         "itemId": 7979,
         "name": "Abyssal head",
-        "dropRate": 0.0065,
+        "dropRate": 0.00078125,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Abyssal_head"
@@ -2933,7 +2933,7 @@
       {
         "itemId": 11931,
         "name": "Malediction shard 1",
-        "dropRate": 0.0078,
+        "dropRate": 0.00390625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Malediction_shard_1"
@@ -3008,7 +3008,7 @@
       {
         "itemId": 7158,
         "name": "Dragon 2h sword",
-        "dropRate": 0.0078,
+        "dropRate": 0.00390625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_2h_sword"
@@ -3090,7 +3090,7 @@
       {
         "itemId": 7158,
         "name": "Dragon 2h sword",
-        "dropRate": 0.0078,
+        "dropRate": 0.00390625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_2h_sword"
@@ -3172,7 +3172,7 @@
       {
         "itemId": 7158,
         "name": "Dragon 2h sword",
-        "dropRate": 0.0078,
+        "dropRate": 0.00390625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_2h_sword"
@@ -5575,7 +5575,7 @@
       {
         "itemId": 23908,
         "name": "Zalcano shard",
-        "dropRate": 0.004875,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Zalcano_shard"
@@ -5583,7 +5583,7 @@
       {
         "itemId": 23953,
         "name": "Crystal tool seed",
-        "dropRate": 0.001,
+        "dropRate": 0.004875,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Crystal_tool_seed"
@@ -16133,11 +16133,11 @@
     "items": [
       {
         "itemId": 31285,
-        "name": "Soup",
+        "name": "Gull",
         "dropRate": 0.000333,
         "varbitId": 0,
         "isPet": true,
-        "wikiPage": "Soup_(pet)",
+        "wikiPage": "Gull_(pet)",
         "independent": true
       },
       {
