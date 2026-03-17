@@ -5649,7 +5649,7 @@
       {
         "itemId": 28933,
         "name": "Sunfire fanatic helm",
-        "dropRate": 0.01,
+        "dropRate": 0.015625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sunfire_fanatic_helm"
@@ -5657,7 +5657,7 @@
       {
         "itemId": 28936,
         "name": "Sunfire fanatic cuirass",
-        "dropRate": 0.01,
+        "dropRate": 0.015625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sunfire_fanatic_cuirass"
@@ -5665,7 +5665,7 @@
       {
         "itemId": 28939,
         "name": "Sunfire fanatic chausses",
-        "dropRate": 0.01,
+        "dropRate": 0.015625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sunfire_fanatic_chausses"
@@ -5673,7 +5673,7 @@
       {
         "itemId": 28942,
         "name": "Echo crystal",
-        "dropRate": 0.007,
+        "dropRate": 0.028125,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Echo_crystal"
@@ -5681,7 +5681,7 @@
       {
         "itemId": 28919,
         "name": "Tonalztics of ralos (uncharged)",
-        "dropRate": 0.012,
+        "dropRate": 0.005208,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tonalztics_of_ralos"
@@ -5797,7 +5797,7 @@
       {
         "itemId": 29784,
         "name": "Araxyte venom sack",
-        "dropRate": 0.002,
+        "dropRate": 0.0625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Araxyte_fang"
@@ -5813,7 +5813,7 @@
       {
         "itemId": 29790,
         "name": "Noxious point",
-        "dropRate": 0.001,
+        "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Noxious_point"
@@ -5821,7 +5821,7 @@
       {
         "itemId": 29788,
         "name": "Araxyte head",
-        "dropRate": 0.001,
+        "dropRate": 0.004,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Noxious_blade",
@@ -5830,7 +5830,7 @@
       {
         "itemId": 29792,
         "name": "Noxious blade",
-        "dropRate": 0.001,
+        "dropRate": 0.005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Noxious_pommel",
@@ -5839,7 +5839,7 @@
       {
         "itemId": 29794,
         "name": "Noxious pommel",
-        "dropRate": 0.000333,
+        "dropRate": 0.005,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Rax",
@@ -6076,7 +6076,7 @@
       {
         "itemId": 29684,
         "name": "Guthixian temple teleport",
-        "dropRate": 0.001,
+        "dropRate": 0.083333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tormented_ornament_kit"
@@ -10020,7 +10020,7 @@
       {
         "itemId": 5554,
         "name": "Rogue mask",
-        "dropRate": 0.025,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_mask"
@@ -10028,7 +10028,7 @@
       {
         "itemId": 5553,
         "name": "Rogue top",
-        "dropRate": 0.025,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_top"
@@ -10036,7 +10036,7 @@
       {
         "itemId": 5555,
         "name": "Rogue trousers",
-        "dropRate": 0.025,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_trousers"
@@ -10044,7 +10044,7 @@
       {
         "itemId": 5556,
         "name": "Rogue gloves",
-        "dropRate": 0.025,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_gloves"
@@ -10052,7 +10052,7 @@
       {
         "itemId": 5557,
         "name": "Rogue boots",
-        "dropRate": 0.025,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_boots"
@@ -12546,7 +12546,7 @@
       {
         "itemId": 21664,
         "name": "Scribbled note",
-        "dropRate": 0.0333,
+        "dropRate": 0.333333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Scribbled_note"
@@ -12554,7 +12554,7 @@
       {
         "itemId": 21666,
         "name": "Partial note",
-        "dropRate": 0.0333,
+        "dropRate": 0.333333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Partial_note"
@@ -12562,7 +12562,7 @@
       {
         "itemId": 21668,
         "name": "Ancient note",
-        "dropRate": 0.0333,
+        "dropRate": 0.333333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_note"
@@ -12570,7 +12570,7 @@
       {
         "itemId": 21670,
         "name": "Ancient writings",
-        "dropRate": 0.0333,
+        "dropRate": 0.333333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_writings"
@@ -12578,7 +12578,7 @@
       {
         "itemId": 21672,
         "name": "Experimental note",
-        "dropRate": 0.0333,
+        "dropRate": 0.333333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Experimental_note"
@@ -12586,7 +12586,7 @@
       {
         "itemId": 21674,
         "name": "Paragraph of text",
-        "dropRate": 0.0333,
+        "dropRate": 0.333333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Paragraph_of_text"
@@ -12594,7 +12594,7 @@
       {
         "itemId": 21676,
         "name": "Musty smelling note",
-        "dropRate": 0.0333,
+        "dropRate": 0.333333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Musty_smelling_note"
@@ -12602,7 +12602,7 @@
       {
         "itemId": 21678,
         "name": "Hastily scrawled note",
-        "dropRate": 0.0333,
+        "dropRate": 0.333333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hastily_scrawled_note"
@@ -12610,7 +12610,7 @@
       {
         "itemId": 21680,
         "name": "Old writing",
-        "dropRate": 0.0333,
+        "dropRate": 0.333333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Old_writing"
@@ -12618,7 +12618,7 @@
       {
         "itemId": 21682,
         "name": "Short note",
-        "dropRate": 0.0333,
+        "dropRate": 0.333333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Short_note"
