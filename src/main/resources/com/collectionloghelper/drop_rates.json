@@ -3208,7 +3208,7 @@
     "worldX": 2405,
     "worldY": 3419,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 60,
     "requirements": {
       "quests": [
         "MONKEY_MADNESS_II"
@@ -6068,7 +6068,7 @@
       {
         "itemId": 29580,
         "name": "Tormented synapse",
-        "dropRate": 0.001333,
+        "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Burning_claw"
@@ -6225,7 +6225,7 @@
       {
         "itemId": 12297,
         "name": "Black pickaxe",
-        "dropRate": 0.00124,
+        "dropRate": 0.00248,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Black_pickaxe"
@@ -6249,12 +6249,12 @@
     "worldX": 3073,
     "worldY": 3654,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 14,
     "items": [
       {
         "itemId": 21817,
         "name": "Bracelet of ethereum",
-        "dropRate": 0.150829,
+        "dropRate": 0.07142857142857142,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bracelet_of_ethereum"
@@ -6270,7 +6270,7 @@
       {
         "itemId": 21802,
         "name": "Revenant cave teleport",
-        "dropRate": 0.050251,
+        "dropRate": 0.05555555555555555,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Revenant_cave_teleport"
@@ -6278,7 +6278,7 @@
       {
         "itemId": 21807,
         "name": "Ancient emblem",
-        "dropRate": 0.00075,
+        "dropRate": 0.00018628912071535022,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_emblem"
@@ -6286,7 +6286,7 @@
       {
         "itemId": 21810,
         "name": "Ancient totem",
-        "dropRate": 0.0005,
+        "dropRate": 0.0007451564828614009,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_totem"
@@ -6294,7 +6294,7 @@
       {
         "itemId": 21813,
         "name": "Ancient statuette",
-        "dropRate": 0.00025,
+        "dropRate": 0.00037257824143070045,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_statuette"
@@ -6302,7 +6302,7 @@
       {
         "itemId": 21804,
         "name": "Ancient crystal",
-        "dropRate": 0.000375,
+        "dropRate": 0.0005589714924538849,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_crystal"
@@ -6310,7 +6310,7 @@
       {
         "itemId": 22299,
         "name": "Ancient medallion",
-        "dropRate": 0.000125,
+        "dropRate": 0.00018628912071535022,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_medallion"
@@ -6318,7 +6318,7 @@
       {
         "itemId": 22302,
         "name": "Ancient effigy",
-        "dropRate": 0.000125,
+        "dropRate": 0.00018628912071535022,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_effigy"
@@ -6326,7 +6326,7 @@
       {
         "itemId": 22305,
         "name": "Ancient relic",
-        "dropRate": 0.000125,
+        "dropRate": 0.00018628912071535022,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_relic"
@@ -6334,7 +6334,7 @@
       {
         "itemId": 22547,
         "name": "Craw's bow (u)",
-        "dropRate": 3.75e-05,
+        "dropRate": 5.588465407399128e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Craw%27s_bow_(u)"
@@ -6342,7 +6342,7 @@
       {
         "itemId": 22552,
         "name": "Thammaron's sceptre (u)",
-        "dropRate": 3.75e-05,
+        "dropRate": 5.588465407399128e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Thammaron%27s_sceptre_(u)"
@@ -6350,7 +6350,7 @@
       {
         "itemId": 22542,
         "name": "Viggora's chainmace (u)",
-        "dropRate": 3.75e-05,
+        "dropRate": 5.588465407399128e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Viggora%27s_chainmace_(u)"
@@ -6358,7 +6358,7 @@
       {
         "itemId": 22557,
         "name": "Amulet of avarice",
-        "dropRate": 7.5e-05,
+        "dropRate": 0.00011176930814798256,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Amulet_of_avarice"
@@ -6384,7 +6384,7 @@
     "worldX": 3418,
     "worldY": 3543,
     "worldPlane": 0,
-    "killTimeSeconds": 8,
+    "killTimeSeconds": 5,
     "afkLevel": 2,
     "locationDescription": "Slayer Tower ground floor, Morytania",
     "travelTip": "Slayer ring -> Slayer Tower",
@@ -6422,7 +6422,7 @@
     "worldX": 2788,
     "worldY": 10000,
     "worldPlane": 0,
-    "killTimeSeconds": 10,
+    "killTimeSeconds": 5,
     "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
     "travelTip": "Slayer ring -> Fremennik cave",
@@ -6498,7 +6498,7 @@
     "worldX": 2792,
     "worldY": 10035,
     "worldPlane": 0,
-    "killTimeSeconds": 12,
+    "killTimeSeconds": 5,
     "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
     "travelTip": "Slayer ring -> Fremennik cave",
@@ -6552,7 +6552,7 @@
     "worldX": 2761,
     "worldY": 10008,
     "worldPlane": 0,
-    "killTimeSeconds": 10,
+    "killTimeSeconds": 9,
     "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
     "travelTip": "Slayer ring -> Fremennik cave",
@@ -6590,7 +6590,7 @@
     "worldX": 2987,
     "worldY": 3110,
     "worldPlane": 0,
-    "killTimeSeconds": 18,
+    "killTimeSeconds": 40,
     "afkLevel": 2,
     "locationDescription": "Mudskipper Point, south of Port Sarim",
     "travelTip": "Port Sarim -> Mudskipper Point",
@@ -6636,7 +6636,7 @@
     "worldX": 2744,
     "worldY": 10008,
     "worldPlane": 0,
-    "killTimeSeconds": 18,
+    "killTimeSeconds": 10,
     "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
     "travelTip": "Slayer ring -> Fremennik cave",
@@ -6674,7 +6674,7 @@
     "worldX": 3149,
     "worldY": 4663,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 18,
     "afkLevel": 2,
     "locationDescription": "Tarn's Lair, Abandoned Mine",
     "travelTip": "Slayer ring -> Tarn's Lair",
@@ -6715,7 +6715,7 @@
     "worldX": 3440,
     "worldY": 3563,
     "worldPlane": 1,
-    "killTimeSeconds": 15,
+    "killTimeSeconds": 8,
     "afkLevel": 2,
     "locationDescription": "Slayer Tower 1st floor, Morytania",
     "travelTip": "Slayer ring -> Slayer Tower",
@@ -6761,7 +6761,7 @@
     "worldX": 2707,
     "worldY": 10132,
     "worldPlane": 0,
-    "killTimeSeconds": 14,
+    "killTimeSeconds": 5,
     "afkLevel": 2,
     "locationDescription": "Brine Rat Cavern, north-east of Rellekka",
     "travelTip": "Fairy ring DKS -> Rellekka",
@@ -6856,7 +6856,7 @@
     "worldX": 1440,
     "worldY": 9602,
     "worldPlane": 0,
-    "killTimeSeconds": 18,
+    "killTimeSeconds": 12,
     "afkLevel": 2,
     "locationDescription": "Neypotzli, Cam Torum",
     "travelTip": "Quetzal whistle -> Cam Torum",
@@ -6894,7 +6894,7 @@
     "worldX": 1309,
     "worldY": 3104,
     "worldPlane": 0,
-    "killTimeSeconds": 25,
+    "killTimeSeconds": 13,
     "afkLevel": 2,
     "locationDescription": "Tonali Cavern, Cam Torum",
     "travelTip": "Quetzal whistle -> Cam Torum",
@@ -6978,7 +6978,7 @@
     "worldX": 1456,
     "worldY": 2880,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 6,
     "afkLevel": 2,
     "locationDescription": "Great Conch, Unquiet Ocean",
     "travelTip": "Fairy ring CJQ -> Great Conch",
@@ -7065,7 +7065,7 @@
     "worldX": 2722,
     "worldY": 10002,
     "worldPlane": 0,
-    "killTimeSeconds": 15,
+    "killTimeSeconds": 12,
     "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
     "travelTip": "Slayer ring -> Fremennik cave",
@@ -7115,7 +7115,7 @@
     "worldX": 2032,
     "worldY": 4636,
     "worldPlane": 0,
-    "killTimeSeconds": 25,
+    "killTimeSeconds": 18,
     "afkLevel": 2,
     "locationDescription": "Poison Waste Dungeon, Tirannwn",
     "travelTip": "Tirannwn quiver -> Poison Waste",
@@ -7156,7 +7156,7 @@
     "worldX": 3740,
     "worldY": 9373,
     "worldPlane": 0,
-    "killTimeSeconds": 12,
+    "killTimeSeconds": 7,
     "afkLevel": 1,
     "locationDescription": "Mos Le'Harmless Cave",
     "travelTip": "Fairy ring CKR -> boat",
@@ -7201,7 +7201,7 @@
     "worldX": 3436,
     "worldY": 3547,
     "worldPlane": 1,
-    "killTimeSeconds": 12,
+    "killTimeSeconds": 8,
     "afkLevel": 2,
     "locationDescription": "Slayer Tower 1st floor, Morytania",
     "travelTip": "Slayer ring -> Slayer Tower",
@@ -7239,7 +7239,7 @@
     "worldX": 2456,
     "worldY": 4240,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 40,
     "locationDescription": "Jormungand's Prison, Island of Stone",
     "travelTip": "Lunar Isle tele -> Rellekka",
     "requirements": {
@@ -7291,7 +7291,7 @@
     "worldX": 1311,
     "worldY": 10205,
     "worldPlane": 0,
-    "killTimeSeconds": 18,
+    "killTimeSeconds": 14,
     "afkLevel": 2,
     "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
     "travelTip": "Fairy ring CIR -> Karuulm",
@@ -7399,7 +7399,7 @@
     "worldX": 3310,
     "worldY": 2962,
     "worldPlane": 0,
-    "killTimeSeconds": 15,
+    "killTimeSeconds": 6,
     "afkLevel": 2,
     "locationDescription": "Smoke Dungeon, Kharidian Desert",
     "travelTip": "Pollnivneach teleport -> well",
@@ -7441,7 +7441,7 @@
     "worldX": 3602,
     "worldY": 10290,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 25,
     "afkLevel": 2,
     "locationDescription": "Wyvern Cave, Fossil Island",
     "travelTip": "Digsite pendant -> Fossil Island",
@@ -7502,7 +7502,7 @@
     "worldX": 2701,
     "worldY": 9992,
     "worldPlane": 0,
-    "killTimeSeconds": 17,
+    "killTimeSeconds": 14,
     "afkLevel": 2,
     "locationDescription": "Fremennik Slayer Dungeon",
     "travelTip": "Slayer ring -> Fremennik cave",
@@ -7560,7 +7560,7 @@
     "worldX": 3008,
     "worldY": 3150,
     "worldPlane": 0,
-    "killTimeSeconds": 35,
+    "killTimeSeconds": 36,
     "afkLevel": 1,
     "locationDescription": "Asgarnian Ice Dungeon",
     "travelTip": "Port Sarim -> Ice Dungeon",
@@ -7610,7 +7610,7 @@
     "worldX": 3429,
     "worldY": 3534,
     "worldPlane": 2,
-    "killTimeSeconds": 15,
+    "killTimeSeconds": 14,
     "afkLevel": 2,
     "locationDescription": "Slayer Tower top floor, Morytania",
     "travelTip": "Slayer ring -> Slayer Tower",
@@ -7668,7 +7668,7 @@
     "worldX": 1575,
     "worldY": 3090,
     "worldPlane": 0,
-    "killTimeSeconds": 35,
+    "killTimeSeconds": 9,
     "afkLevel": 2,
     "locationDescription": "Stalker Den, Auburnvale",
     "travelTip": "Quetzal whistle -> Varlamore",
@@ -7725,7 +7725,7 @@
     "worldX": 2712,
     "worldY": 9882,
     "worldPlane": 0,
-    "killTimeSeconds": 16,
+    "killTimeSeconds": 24,
     "afkLevel": 2,
     "locationDescription": "Waterfall Dungeon, east of Baxtorian Falls",
     "travelTip": "Sail to Ynysdail (73 Sailing)",
@@ -7763,7 +7763,7 @@
     "worldX": 3442,
     "worldY": 3558,
     "worldPlane": 2,
-    "killTimeSeconds": 7,
+    "killTimeSeconds": 9,
     "afkLevel": 2,
     "locationDescription": "Slayer Tower top floor, Morytania",
     "travelTip": "Slayer ring -> Slayer Tower",
@@ -7805,7 +7805,7 @@
     "worldX": 2844,
     "worldY": 5280,
     "worldPlane": 2,
-    "killTimeSeconds": 19,
+    "killTimeSeconds": 20,
     "afkLevel": 2,
     "locationDescription": "God Wars Dungeon",
     "travelTip": "Trollheim teleport -> GWD",
@@ -7843,7 +7843,7 @@
     "worldX": 2904,
     "worldY": 5203,
     "worldPlane": 0,
-    "killTimeSeconds": 21,
+    "killTimeSeconds": 24,
     "afkLevel": 2,
     "locationDescription": "God Wars Dungeon, Ancient Prison",
     "travelTip": "Trollheim teleport -> GWD",
@@ -7913,7 +7913,7 @@
     "worldX": 1310,
     "worldY": 10057,
     "worldPlane": 0,
-    "killTimeSeconds": 22,
+    "killTimeSeconds": 23,
     "afkLevel": 2,
     "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
     "travelTip": "Fairy ring CIR -> Karuulm",
@@ -7963,7 +7963,7 @@
     "worldX": 3418,
     "worldY": 3560,
     "worldPlane": 2,
-    "killTimeSeconds": 13,
+    "killTimeSeconds": 10,
     "afkLevel": 2,
     "locationDescription": "Slayer Tower top floor, Morytania",
     "travelTip": "Slayer ring -> Slayer Tower",
@@ -8021,7 +8021,7 @@
     "worldX": 2278,
     "worldY": 3611,
     "worldPlane": 0,
-    "killTimeSeconds": 8,
+    "killTimeSeconds": 15,
     "afkLevel": 2,
     "locationDescription": "Kraken Cove",
     "travelTip": "Fairy ring AKQ -> Piscatoris",
@@ -8071,7 +8071,7 @@
     "worldX": 1920,
     "worldY": 4672,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 19,
     "afkLevel": 2,
     "locationDescription": "Iorwerth Dungeon, Prifddinas",
     "travelTip": "Teleport crystal -> Prifddinas",
@@ -8116,7 +8116,7 @@
     "worldX": 3657,
     "worldY": 3407,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 7,
     "locationDescription": "Araxyte Cave, north-east of Darkmeyer",
     "travelTip": "Drakan's medallion -> Darkmeyer",
     "requirements": {
@@ -8157,7 +8157,7 @@
     "worldX": 2412,
     "worldY": 3061,
     "worldPlane": 0,
-    "killTimeSeconds": 11,
+    "killTimeSeconds": 5,
     "afkLevel": 2,
     "locationDescription": "Smoke Devil Dungeon",
     "travelTip": "Castle Wars tele -> south",
@@ -8265,7 +8265,7 @@
     "worldX": 3631,
     "worldY": 3325,
     "worldPlane": 0,
-    "killTimeSeconds": 25,
+    "killTimeSeconds": 22,
     "afkLevel": 3,
     "locationDescription": "Darkmeyer, Morytania",
     "travelTip": "Drakan's medallion -> Darkmeyer",
@@ -8304,7 +8304,7 @@
     "worldX": 1309,
     "worldY": 3785,
     "worldPlane": 0,
-    "killTimeSeconds": 600,
+    "killTimeSeconds": 900,
     "afkLevel": 2,
     "locationDescription": "Mount Karuulm, near Konar",
     "travelTip": "Fairy ring CIR -> Karuulm",
@@ -8374,7 +8374,7 @@
     "worldX": 3018,
     "worldY": 3955,
     "worldPlane": 0,
-    "killTimeSeconds": 900,
+    "killTimeSeconds": 1029,
     "afkLevel": 2,
     "locationDescription": "Wilderness, Pirates' Hideout",
     "travelTip": "Obelisk -> lvl 35 Wildy",
@@ -8474,7 +8474,7 @@
     "worldX": 3373,
     "worldY": 3625,
     "worldPlane": 0,
-    "killTimeSeconds": 180,
+    "killTimeSeconds": 120,
     "ironKillTimeSeconds": 120,
     "afkLevel": 2,
     "locationDescription": "East of Chaos Temple, level 14 Wilderness",
@@ -12087,7 +12087,7 @@
     "worldX": 2387,
     "worldY": 3040,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 9,
     "items": [
       {
         "itemId": 2978,
@@ -12526,7 +12526,7 @@
     "worldX": 3774,
     "worldY": 3819,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 4,
     "afkLevel": 2,
     "items": [
       {
@@ -12703,7 +12703,7 @@
     "worldX": 1579,
     "worldY": 3069,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 120,
     "afkLevel": 2,
     "requirements": {
       "quests": [
@@ -12720,7 +12720,7 @@
       {
         "itemId": 29263,
         "name": "Guild hunter headwear",
-        "dropRate": 0.05,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Guild_hunter_headwear"
@@ -12728,7 +12728,7 @@
       {
         "itemId": 29265,
         "name": "Guild hunter top",
-        "dropRate": 0.05,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Guild_hunter_top"
@@ -12736,7 +12736,7 @@
       {
         "itemId": 29267,
         "name": "Guild hunter legs",
-        "dropRate": 0.05,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Guild_hunter_legs"
@@ -12744,7 +12744,7 @@
       {
         "itemId": 29269,
         "name": "Guild hunter boots",
-        "dropRate": 0.05,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Guild_hunter_boots"
@@ -12900,7 +12900,7 @@
     "worldX": 2764,
     "worldY": 2703,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 38,
     "requirements": {
       "quests": [
         "MONKEY_MADNESS_II"
@@ -12987,7 +12987,7 @@
     "worldX": 2520,
     "worldY": 3571,
     "worldPlane": 0,
-    "killTimeSeconds": 180,
+    "killTimeSeconds": 10,
     "afkLevel": 2,
     "items": [
       {
@@ -14445,7 +14445,7 @@
     "worldX": 2957,
     "worldY": 5774,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 24,
     "afkLevel": 2,
     "requirements": {
       "quests": [
@@ -14744,7 +14744,7 @@
     "worldX": 2444,
     "worldY": 5175,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 5,
     "afkLevel": 1,
     "items": [
       {
@@ -14846,7 +14846,7 @@
     "worldX": 2849,
     "worldY": 3543,
     "worldPlane": 0,
-    "killTimeSeconds": 20,
+    "killTimeSeconds": 18,
     "afkLevel": 1,
     "items": [
       {
@@ -17206,7 +17206,7 @@
       {
         "itemId": 20166,
         "name": "Wooden shield (g)",
-        "dropRate": 0.000534,
+        "dropRate": 0.002135,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Wooden_shield_(g)"
@@ -18203,7 +18203,7 @@
       {
         "itemId": 10416,
         "name": "Purple elegant shirt",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Purple_elegant_shirt"
@@ -18211,7 +18211,7 @@
       {
         "itemId": 10436,
         "name": "Purple elegant blouse",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Purple_elegant_blouse"
@@ -18219,7 +18219,7 @@
       {
         "itemId": 10418,
         "name": "Purple elegant legs",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Purple_elegant_legs"
@@ -18227,7 +18227,7 @@
       {
         "itemId": 10438,
         "name": "Purple elegant skirt",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Purple_elegant_skirt"
@@ -18235,7 +18235,7 @@
       {
         "itemId": 10400,
         "name": "Black elegant shirt",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Black_elegant_shirt"
@@ -18243,7 +18243,7 @@
       {
         "itemId": 10402,
         "name": "Black elegant legs",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Black_elegant_legs"
@@ -18251,7 +18251,7 @@
       {
         "itemId": 10420,
         "name": "White elegant blouse",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "White_elegant_blouse"
@@ -18259,7 +18259,7 @@
       {
         "itemId": 10422,
         "name": "White elegant skirt",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "White_elegant_skirt"
@@ -18267,7 +18267,7 @@
       {
         "itemId": 12315,
         "name": "Pink elegant shirt",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pink_elegant_shirt"
@@ -18275,7 +18275,7 @@
       {
         "itemId": 12339,
         "name": "Pink elegant blouse",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pink_elegant_blouse"
@@ -18283,7 +18283,7 @@
       {
         "itemId": 12317,
         "name": "Pink elegant legs",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pink_elegant_legs"
@@ -18291,7 +18291,7 @@
       {
         "itemId": 12341,
         "name": "Pink elegant skirt",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pink_elegant_skirt"
@@ -18299,7 +18299,7 @@
       {
         "itemId": 12347,
         "name": "Gold elegant shirt",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Gold_elegant_shirt"
@@ -18307,7 +18307,7 @@
       {
         "itemId": 12343,
         "name": "Gold elegant blouse",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Gold_elegant_blouse"
@@ -18315,7 +18315,7 @@
       {
         "itemId": 12349,
         "name": "Gold elegant legs",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Gold_elegant_legs"
@@ -18323,7 +18323,7 @@
       {
         "itemId": 12345,
         "name": "Gold elegant skirt",
-        "dropRate": 0.003526,
+        "dropRate": 0.001764,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Gold_elegant_skirt"
@@ -18696,7 +18696,7 @@
       {
         "itemId": 23209,
         "name": "Rune platebody (h1)",
-        "dropRate": 0.003073,
+        "dropRate": 0.000615,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rune_platebody_(h1)"
@@ -18704,7 +18704,7 @@
       {
         "itemId": 23212,
         "name": "Rune platebody (h2)",
-        "dropRate": 0.003073,
+        "dropRate": 0.000615,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rune_platebody_(h2)"
@@ -18712,7 +18712,7 @@
       {
         "itemId": 23215,
         "name": "Rune platebody (h3)",
-        "dropRate": 0.003073,
+        "dropRate": 0.000615,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rune_platebody_(h3)"
@@ -18720,7 +18720,7 @@
       {
         "itemId": 23218,
         "name": "Rune platebody (h4)",
-        "dropRate": 0.003073,
+        "dropRate": 0.000615,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rune_platebody_(h4)"
@@ -18728,7 +18728,7 @@
       {
         "itemId": 23221,
         "name": "Rune platebody (h5)",
-        "dropRate": 0.003073,
+        "dropRate": 0.000615,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rune_platebody_(h5)"
@@ -21749,7 +21749,7 @@
       {
         "itemId": 20663,
         "name": "Rocky",
-        "dropRate": 1.778e-05,
+        "dropRate": 2.9398794649419375e-05,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Rocky"
