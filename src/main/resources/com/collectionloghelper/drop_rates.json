@@ -7729,8 +7729,8 @@
   {
     "name": "Custodian Stalker",
     "category": "OTHER",
-    "worldX": 1575,
-    "worldY": 3090,
+    "worldX": 1301,
+    "worldY": 9820,
     "worldPlane": 0,
     "killTimeSeconds": 9,
     "afkLevel": 2,
@@ -7771,15 +7771,15 @@
         "wikiPage": "Alchemist%27s_signet"
       }
     ],
-    "locationDescription": "Stalker Den, Auburnvale",
-    "travelTip": "Quetzal whistle -> Varlamore",
+    "locationDescription": "Stalker Den, beneath Custodia Pass, Varlamore",
+    "travelTip": "Fairy ring AIS -> Auburnvale, enter Stalker Den",
     "npcId": 14703,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
         "description": "Travel to Stalker Den, Auburnvale and kill Custodian Stalker on task.",
-        "worldX": 1575,
-        "worldY": 3090,
+        "worldX": 1301,
+        "worldY": 9820,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -22421,7 +22421,7 @@
     "killTimeSeconds": 9,
     "requirements": {
       "quests": [
-        "RECIPE_FOR_DISASTER__FREEING_PIRATE_PETE"
+        "RECIPE_FOR_DISASTER__PIRATE_PETE"
       ]
     },
     "items": [
