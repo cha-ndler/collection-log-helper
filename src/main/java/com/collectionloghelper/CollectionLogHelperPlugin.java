@@ -503,6 +503,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onStatChanged(StatChanged event)
 	{
+		clueEstimator.resetBucket();
 		boolean changed = requirementsChecker.refreshAccessibility(database.getAllSources());
 		if (changed && panel != null)
 		{
