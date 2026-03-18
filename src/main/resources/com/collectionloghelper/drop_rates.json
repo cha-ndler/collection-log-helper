@@ -8448,7 +8448,7 @@
     "worldX": 3018,
     "worldY": 3955,
     "worldPlane": 0,
-    "killTimeSeconds": 1029,
+    "killTimeSeconds": 2,
     "afkLevel": 2,
     "items": [
       {
@@ -8486,7 +8486,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 1029
   },
   {
     "name": "Superior Slayer Monster",
@@ -8548,7 +8549,7 @@
     "worldX": 3373,
     "worldY": 3625,
     "worldPlane": 0,
-    "killTimeSeconds": 120,
+    "killTimeSeconds": 2,
     "ironKillTimeSeconds": 120,
     "afkLevel": 2,
     "items": [
@@ -9447,7 +9448,7 @@
     "worldX": 3459,
     "worldY": 3299,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 21,
     "afkLevel": 1,
     "requirements": {
       "quests": [
@@ -11155,7 +11156,7 @@
     "worldX": 1452,
     "worldY": 3128,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 40,
     "afkLevel": 2,
     "items": [
       {
