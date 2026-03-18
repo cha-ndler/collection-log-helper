@@ -597,7 +597,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Zulrah%27s_scales"
+        "wikiPage": "Zulrah%27s_scales",
+        "milestoneKills": 1
       },
       {
         "itemId": 12921,
@@ -1149,7 +1150,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancient_essence"
+        "wikiPage": "Ancient_essence",
+        "milestoneKills": 1
       },
       {
         "itemId": 27622,
@@ -1689,7 +1691,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Granite_dust"
+        "wikiPage": "Granite_dust",
+        "milestoneKills": 1
       },
       {
         "itemId": 21736,
@@ -2146,7 +2149,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mole_claw"
+        "wikiPage": "Mole_claw",
+        "milestoneKills": 1
       },
       {
         "itemId": 7418,
@@ -2154,7 +2158,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mole_skin"
+        "wikiPage": "Mole_skin",
+        "milestoneKills": 1
       }
     ],
     "locationDescription": "Falador Park",
@@ -3382,7 +3387,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Dark_totem"
+        "wikiPage": "Dark_totem",
+        "milestoneKills": 1
       },
       {
         "itemId": 6571,
@@ -3398,7 +3404,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ancient_shard"
+        "wikiPage": "Ancient_shard",
+        "milestoneKills": 1
       }
     ],
     "locationDescription": "Catacombs of Kourend (requires Dark totem from Catacomb monsters)",
@@ -3479,8 +3486,7 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ],
-    "ironKillTimeSeconds": 72
+    ]
   },
   {
     "name": "Chambers of Xeric",
@@ -7084,7 +7090,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Gryphon_feather"
+        "wikiPage": "Gryphon_feather",
+        "milestoneKills": 1
       },
       {
         "itemId": 31243,
@@ -8654,7 +8661,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Hallowed_mark"
+        "wikiPage": "Hallowed_mark",
+        "milestoneKills": 1
       },
       {
         "itemId": 24740,
@@ -12257,7 +12265,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Armadylean_paint",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 15
       },
       {
         "itemId": 32104,
@@ -12266,7 +12275,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Zamorakian_paint",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 15
       },
       {
         "itemId": 32106,
@@ -12275,7 +12285,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Guthixian_paint",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 15
       },
       {
         "itemId": 32108,
@@ -12284,7 +12295,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Saradominist_paint",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 15
       },
       {
         "itemId": 32110,
@@ -12293,7 +12305,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Merchant%27s_paint",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 15
       },
       {
         "itemId": 32113,
@@ -12302,7 +12315,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sandy_paint",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 15
       }
     ],
     "locationDescription": "Port Sarim docks, obtained via various Sailing activities",
@@ -13920,7 +13934,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Medallion_fragment",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 10
       },
       {
         "itemId": 32389,
@@ -13929,7 +13944,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Medallion_fragment",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 20
       },
       {
         "itemId": 32390,
@@ -13938,7 +13954,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Medallion_fragment",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 30
       },
       {
         "itemId": 32391,
@@ -13947,7 +13964,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Medallion_fragment",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 40
       },
       {
         "itemId": 32392,
@@ -13956,7 +13974,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Medallion_fragment",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 60
       },
       {
         "itemId": 32393,
@@ -13965,7 +13984,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Medallion_fragment",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 80
       },
       {
         "itemId": 32394,
@@ -13974,7 +13994,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Medallion_fragment",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 100
       },
       {
         "itemId": 32395,
@@ -13983,7 +14004,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Medallion_fragment",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 120
       },
       {
         "itemId": 32398,
@@ -14661,7 +14683,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Crystal_grail"
+        "wikiPage": "Crystal_grail",
+        "milestoneKills": 1
       },
       {
         "itemId": 25844,
@@ -14751,7 +14774,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mime_mask"
+        "wikiPage": "Mime_mask",
+        "milestoneKills": 5
       },
       {
         "itemId": 3058,
@@ -14760,7 +14784,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mime_top",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 3059,
@@ -14769,7 +14794,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mime_legs",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 3060,
@@ -14778,7 +14804,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mime_gloves",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 3061,
@@ -14787,7 +14814,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mime_boots",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 7592,
@@ -14795,7 +14823,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Zombie_shirt"
+        "wikiPage": "Zombie_shirt",
+        "milestoneKills": 5
       },
       {
         "itemId": 7593,
@@ -14804,7 +14833,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Zombie_trousers",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 7594,
@@ -14813,7 +14843,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Zombie_mask",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 7595,
@@ -14822,7 +14853,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Zombie_gloves",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 7596,
@@ -14831,7 +14863,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Zombie_boots",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 6654,
@@ -14839,7 +14872,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Camo_top"
+        "wikiPage": "Camo_top",
+        "milestoneKills": 5
       },
       {
         "itemId": 6655,
@@ -14848,7 +14882,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Camo_bottoms",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 6656,
@@ -14857,7 +14892,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Camo_helmet",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 25129,
@@ -14865,7 +14901,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Beekeeper%27s_hat"
+        "wikiPage": "Beekeeper%27s_hat",
+        "milestoneKills": 5
       },
       {
         "itemId": 25131,
@@ -14874,7 +14911,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Beekeeper%27s_top",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 25133,
@@ -14883,7 +14921,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Beekeeper%27s_legs",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 25135,
@@ -14892,7 +14931,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Beekeeper%27s_gloves",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 25137,
@@ -14901,7 +14941,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Beekeeper%27s_boots",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 6180,
@@ -14909,7 +14950,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Lederhosen_top"
+        "wikiPage": "Lederhosen_top",
+        "milestoneKills": 5
       },
       {
         "itemId": 6181,
@@ -14918,7 +14960,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lederhosen_shorts",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 6182,
@@ -14927,7 +14970,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lederhosen_hat",
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 5
       },
       {
         "itemId": 6183,
@@ -14935,7 +14979,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Frog_token"
+        "wikiPage": "Frog_token",
+        "milestoneKills": 5
       },
       {
         "itemId": 20590,
@@ -15555,7 +15600,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_helm_(1)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 40
       },
       {
         "itemId": 13361,
@@ -15564,7 +15610,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_platebody_(1)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 40
       },
       {
         "itemId": 13360,
@@ -15573,7 +15620,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_greaves_(1)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 40
       },
       {
         "itemId": 13357,
@@ -15582,7 +15630,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_gloves_(1)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 40
       },
       {
         "itemId": 13358,
@@ -15591,7 +15640,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_boots_(1)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 40
       },
       {
         "itemId": 13364,
@@ -15600,7 +15650,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_helm_(2)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 80
       },
       {
         "itemId": 13366,
@@ -15609,7 +15660,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_platebody_(2)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 80
       },
       {
         "itemId": 13365,
@@ -15618,7 +15670,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_greaves_(2)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 80
       },
       {
         "itemId": 13362,
@@ -15627,7 +15680,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_gloves_(2)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 80
       },
       {
         "itemId": 13363,
@@ -15636,7 +15690,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_boots_(2)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 80
       },
       {
         "itemId": 13369,
@@ -15645,7 +15700,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_helm_(3)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 120
       },
       {
         "itemId": 13371,
@@ -15654,7 +15710,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_platebody_(3)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 120
       },
       {
         "itemId": 13370,
@@ -15663,7 +15720,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_greaves_(3)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 120
       },
       {
         "itemId": 13367,
@@ -15672,7 +15730,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_gloves_(3)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 120
       },
       {
         "itemId": 13368,
@@ -15681,7 +15740,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_boots_(3)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 120
       },
       {
         "itemId": 13374,
@@ -15690,7 +15750,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_helm_(4)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 160
       },
       {
         "itemId": 13376,
@@ -15699,7 +15760,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_platebody_(4)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 160
       },
       {
         "itemId": 13375,
@@ -15708,7 +15770,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_greaves_(4)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 160
       },
       {
         "itemId": 13372,
@@ -15717,7 +15780,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_gloves_(4)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 160
       },
       {
         "itemId": 13373,
@@ -15726,7 +15790,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_boots_(4)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 160
       },
       {
         "itemId": 13379,
@@ -15735,7 +15800,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_helm_(5)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 200
       },
       {
         "itemId": 13381,
@@ -15744,7 +15810,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_body_(5)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 200
       },
       {
         "itemId": 13380,
@@ -15753,7 +15820,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_greaves_(5)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 200
       },
       {
         "itemId": 13377,
@@ -15762,7 +15830,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_gloves_(5)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 200
       },
       {
         "itemId": 13378,
@@ -15771,7 +15840,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Shayzien_boots_(5)",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 200
       }
     ],
     "locationDescription": "Shayzien Combat Ring, Great Kourend",
@@ -16481,7 +16551,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Demon_tear"
+        "wikiPage": "Demon_tear",
+        "milestoneKills": 1
       },
       {
         "itemId": 31130,
@@ -18983,8 +19054,7 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ],
-    "ironKillTimeSeconds": 360
+    ]
   },
   {
     "name": "Hard Treasure Trails",
@@ -20078,8 +20148,7 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ],
-    "ironKillTimeSeconds": 720
+    ]
   },
   {
     "name": "Elite Treasure Trails",
@@ -24146,7 +24215,8 @@
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Crystal_grail"
+        "wikiPage": "Crystal_grail",
+        "milestoneKills": 1
       }
     ],
     "locationDescription": "Prifddinas, south-east corner",
