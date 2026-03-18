@@ -36,6 +36,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -115,6 +116,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final JComboBox<CollectionLogCategory> categorySelector;
 	private final JTextField searchField;
 	private final JLabel completionLabel;
+	private final JProgressBar completionProgressBar;
 	private final JPanel listContainer;
 	private final CardLayout cardLayout;
 	private final JPanel contentPanel;
@@ -185,8 +187,20 @@ public class CollectionLogHelperPanel extends PluginPanel
 		completionLabel.setFont(FontManager.getRunescapeBoldFont());
 		completionLabel.setForeground(Color.WHITE);
 		completionLabel.setAlignmentX(CENTER_ALIGNMENT);
-		completionLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 4, 0));
+		completionLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0));
 		controlsPanel.add(completionLabel);
+
+		// Progress bar
+		completionProgressBar = new JProgressBar(0, 1699);
+		completionProgressBar.setValue(0);
+		completionProgressBar.setPreferredSize(new Dimension(Integer.MAX_VALUE, 6));
+		completionProgressBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, 6));
+		completionProgressBar.setAlignmentX(CENTER_ALIGNMENT);
+		completionProgressBar.setBorderPainted(false);
+		completionProgressBar.setBackground(new Color(40, 40, 40));
+		completionProgressBar.setForeground(new Color(80, 200, 80));
+		completionProgressBar.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
+		controlsPanel.add(completionProgressBar);
 
 		// Sync status label
 		syncStatusLabel = new JLabel("Open Collection Log to sync", SwingConstants.CENTER);
@@ -489,6 +503,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 		int total = collectionState.getTotalPossible();
 		double pct = collectionState.getCompletionPercentage();
 		completionLabel.setText(String.format("Collection Log: %d/%d (%.1f%%)", obtained, total, pct));
+		completionProgressBar.setMaximum(Math.max(total, 1));
+		completionProgressBar.setValue(obtained);
 	}
 
 	private void updateSlayerTaskLabel()
@@ -690,6 +706,15 @@ public class CollectionLogHelperPanel extends PluginPanel
 			rebuilding = true;
 			try
 			{
+				// Save scroll position before rebuild
+				int savedScrollPosition = 0;
+				JScrollPane scrollPane = (JScrollPane) SwingUtilities.getAncestorOfClass(
+					JScrollPane.class, this);
+				if (scrollPane != null)
+				{
+					savedScrollPosition = scrollPane.getVerticalScrollBar().getValue();
+				}
+
 				// Save expanded category names before clearing
 				java.util.Set<String> expandedCategories = new java.util.HashSet<>();
 				for (Component comp : listContainer.getComponents())
@@ -745,6 +770,14 @@ public class CollectionLogHelperPanel extends PluginPanel
 				if (!inDetailView)
 				{
 					showListView();
+
+					// Restore scroll position after rebuild
+					final int restorePosition = savedScrollPosition;
+					if (scrollPane != null && restorePosition > 0)
+					{
+						SwingUtilities.invokeLater(() ->
+							scrollPane.getVerticalScrollBar().setValue(restorePosition));
+					}
 				}
 			}
 			finally
