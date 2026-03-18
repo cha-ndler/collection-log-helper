@@ -8370,6 +8370,9 @@
         "interactAction": "Attack",
         "completionCondition": "MANUAL"
       }
+    ],
+    "mutuallyExclusiveSources": [
+      "Pickpocketing Darkmeyer Vyre"
     ]
   },
   {
@@ -8541,6 +8544,9 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
+    ],
+    "mutuallyExclusiveSources": [
+      "Waterfiend"
     ]
   },
   {
@@ -9039,6 +9045,15 @@
         "isPet": false,
         "wikiPage": "Brimhaven_voucher",
         "milestoneKills": 1
+      },
+      {
+        "itemId": 20659,
+        "name": "Giant squirrel",
+        "dropRate": 4.18e-05,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Giant_squirrel",
+        "independent": true
       }
     ],
     "locationDescription": "Brimhaven Agility Arena, east of Brimhaven",
@@ -12002,6 +12017,15 @@
         "isPet": false,
         "wikiPage": "Gwyna%27s_fabric_roll",
         "pointCost": 1
+      },
+      {
+        "itemId": 31283,
+        "name": "Soup",
+        "dropRate": 0.000444,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Soup_(item)",
+        "independent": true
       }
     ],
     "locationDescription": "Sailing trial locations across the seas",
@@ -12244,7 +12268,11 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "mutuallyExclusiveSources": [
+      "Vampyre Kraken (Boat Combat)",
+      "Port Tasks"
+    ]
   },
   {
     "name": "Champion's Challenge",
@@ -13810,6 +13838,22 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
+    ],
+    "mutuallyExclusiveSources": [
+      "Stingray (Boat Combat)",
+      "Albatross (Boat Combat)",
+      "Narwhal (Boat Combat)",
+      "Orcas (Boat Combat)",
+      "Great White Shark (Boat Combat)",
+      "Vampyre Kraken (Boat Combat)",
+      "Small Salvage",
+      "Fishy Salvage",
+      "Barracuda Salvage",
+      "Large Salvage",
+      "Plundered Salvage",
+      "Martial Salvage",
+      "Fremennik Salvage",
+      "Opulent Salvage"
     ]
   },
   {
@@ -13977,7 +14021,17 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "mutuallyExclusiveSources": [
+      "Small Salvage",
+      "Fishy Salvage",
+      "Barracuda Salvage",
+      "Large Salvage",
+      "Plundered Salvage",
+      "Martial Salvage",
+      "Fremennik Salvage",
+      "Opulent Salvage"
+    ]
   },
   {
     "name": "Deep Sea Fishing",
@@ -14613,7 +14667,18 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "aggregated": true
+    "aggregated": true,
+    "mutuallyExclusiveSources": [
+      "Mithril Dragon",
+      "Adamant Dragon",
+      "Rune Dragon",
+      "Ogress Shaman",
+      "Armoured Zombie",
+      "Cutting Squid",
+      "Prifddinas Elf",
+      "Fountain of Rune",
+      "Prifddinas Rabbit"
+    ]
   },
   {
     "name": "Random Events",
@@ -15045,6 +15110,15 @@
         "wikiPage": "Calcified_acorn",
         "pointCost": 900,
         "independent": true
+      },
+      {
+        "itemId": 20659,
+        "name": "Giant squirrel",
+        "dropRate": 4.36e-05,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Giant_squirrel",
+        "independent": true
       }
     ],
     "locationDescription": "Colossal Wyrm Agility Course in Avium Savannah, Varlamore",
@@ -15136,6 +15210,15 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mark_of_grace"
+      },
+      {
+        "itemId": 20659,
+        "name": "Giant squirrel",
+        "dropRate": 3.13e-05,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Giant_squirrel",
+        "independent": true
       }
     ],
     "locationDescription": "Rooftop Agility Courses, starting at Varrock",
@@ -22493,6 +22576,1551 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
+    ]
+  },
+  {
+    "name": "Stingray (Boat Combat)",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 14,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 31959,
+        "name": "Ray barbs",
+        "dropRate": 0.04348,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ray_barbs"
+      }
+    ],
+    "locationDescription": "Boat combat encounters while Sailing",
+    "travelTip": "Port Sarim docks -> sail to encounter",
+    "guidanceSteps": [
+      {
+        "description": "Sail from Port Sarim and engage stingrays in boat combat.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Albatross (Boat Combat)",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 19,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 31952,
+        "name": "Swift albatross feather",
+        "dropRate": 0.03333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Swift_albatross_feather"
+      }
+    ],
+    "locationDescription": "Boat combat encounters while Sailing",
+    "travelTip": "Port Sarim docks -> sail to encounter",
+    "guidanceSteps": [
+      {
+        "description": "Sail from Port Sarim and engage albatrosses in boat combat.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Narwhal (Boat Combat)",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 22,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 31406,
+        "name": "Dragon nails",
+        "dropRate": 0.008333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_nails"
+      },
+      {
+        "itemId": 31954,
+        "name": "Narwhal horn",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Narwhal_horn"
+      },
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 4.07e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 3.05e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      }
+    ],
+    "locationDescription": "Boat combat encounters while Sailing",
+    "travelTip": "Port Sarim docks -> sail to encounter",
+    "guidanceSteps": [
+      {
+        "description": "Sail from Port Sarim and engage narwhals in boat combat.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Orcas (Boat Combat)",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 40,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 31916,
+        "name": "Dragon cannonball",
+        "dropRate": 0.02174,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cannonball"
+      },
+      {
+        "itemId": 31946,
+        "name": "Echo pearl",
+        "dropRate": 0.01515,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Echo_pearl"
+      },
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 5.31e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 3.98e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      }
+    ],
+    "locationDescription": "Boat combat encounters while Sailing",
+    "travelTip": "Port Sarim docks -> sail to encounter",
+    "guidanceSteps": [
+      {
+        "description": "Sail from Port Sarim and engage orcas in boat combat.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Great White Shark (Boat Combat)",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 20,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 31996,
+        "name": "Dragon metal sheet",
+        "dropRate": 0.000651,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_metal_sheet"
+      },
+      {
+        "itemId": 31916,
+        "name": "Dragon cannonball",
+        "dropRate": 0.02,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cannonball"
+      },
+      {
+        "itemId": 31961,
+        "name": "Broken dragon hook",
+        "dropRate": 0.000978,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Broken_dragon_hook"
+      },
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 2.44e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 1.83e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      }
+    ],
+    "locationDescription": "Boat combat encounters while Sailing",
+    "travelTip": "Port Sarim docks -> sail to encounter",
+    "guidanceSteps": [
+      {
+        "description": "Sail from Port Sarim and engage great white sharks in boat combat.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Vampyre Kraken (Boat Combat)",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 33,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 32093,
+        "name": "Inky paint",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Inky_paint"
+      },
+      {
+        "itemId": 31996,
+        "name": "Dragon metal sheet",
+        "dropRate": 0.002347,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_metal_sheet"
+      },
+      {
+        "itemId": 31916,
+        "name": "Dragon cannonball",
+        "dropRate": 0.01695,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cannonball"
+      },
+      {
+        "itemId": 31949,
+        "name": "Bottled storm",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bottled_storm"
+      },
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 2.07e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 1.55e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      }
+    ],
+    "locationDescription": "Boat combat encounters while Sailing",
+    "travelTip": "Port Sarim docks -> sail to encounter",
+    "guidanceSteps": [
+      {
+        "description": "Sail from Port Sarim and engage vampyre krakens in boat combat.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sailing Misc",
+      "Boat Paints"
+    ]
+  },
+  {
+    "name": "Small Salvage",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 4,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 31989,
+        "name": "Boat bottle (empty)",
+        "dropRate": 0.001333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Boat_bottle_(empty)"
+      },
+      {
+        "itemId": 32398,
+        "name": "Sailors' amulet (inert)",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sailors%27_amulet_(inert)"
+      },
+      {
+        "itemId": 32863,
+        "name": "Rusty locket",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rusty_locket"
+      }
+    ],
+    "locationDescription": "Sorting salvage obtained from Sailing voyages",
+    "travelTip": "Port Sarim docks -> sort salvage",
+    "guidanceSteps": [
+      {
+        "description": "Sort through small salvage obtained from Sailing voyages.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sea Treasures",
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Fishy Salvage",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 4,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 31989,
+        "name": "Boat bottle (empty)",
+        "dropRate": 0.001333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Boat_bottle_(empty)"
+      },
+      {
+        "itemId": 32398,
+        "name": "Sailors' amulet (inert)",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sailors%27_amulet_(inert)"
+      },
+      {
+        "itemId": 32864,
+        "name": "Mouldy block",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mouldy_block"
+      }
+    ],
+    "locationDescription": "Sorting salvage obtained from Sailing voyages",
+    "travelTip": "Port Sarim docks -> sort salvage",
+    "guidanceSteps": [
+      {
+        "description": "Sort through fishy salvage obtained from Sailing voyages.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sea Treasures",
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Barracuda Salvage",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 4,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 31989,
+        "name": "Boat bottle (empty)",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Boat_bottle_(empty)"
+      },
+      {
+        "itemId": 32398,
+        "name": "Sailors' amulet (inert)",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sailors%27_amulet_(inert)"
+      },
+      {
+        "itemId": 32865,
+        "name": "Dull knife",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dull_knife"
+      }
+    ],
+    "locationDescription": "Sorting salvage obtained from Sailing voyages",
+    "travelTip": "Port Sarim docks -> sort salvage",
+    "guidanceSteps": [
+      {
+        "description": "Sort through barracuda salvage obtained from Sailing voyages.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sea Treasures",
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Large Salvage",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 5,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 32398,
+        "name": "Sailors' amulet (inert)",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sailors%27_amulet_(inert)"
+      },
+      {
+        "itemId": 32866,
+        "name": "Broken compass",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Broken_compass"
+      }
+    ],
+    "locationDescription": "Sorting salvage obtained from Sailing voyages",
+    "travelTip": "Port Sarim docks -> sort salvage",
+    "guidanceSteps": [
+      {
+        "description": "Sort through large salvage obtained from Sailing voyages.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sea Treasures",
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Plundered Salvage",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 4,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 31916,
+        "name": "Dragon cannonball",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cannonball"
+      },
+      {
+        "itemId": 32398,
+        "name": "Sailors' amulet (inert)",
+        "dropRate": 0.002222,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sailors%27_amulet_(inert)"
+      },
+      {
+        "itemId": 32867,
+        "name": "Rusty coin",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Rusty_coin"
+      }
+    ],
+    "locationDescription": "Sorting salvage obtained from Sailing voyages",
+    "travelTip": "Port Sarim docks -> sort salvage",
+    "guidanceSteps": [
+      {
+        "description": "Sort through plundered salvage obtained from Sailing voyages.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sea Treasures",
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Martial Salvage",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 5,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 32099,
+        "name": "Salvor's paint",
+        "dropRate": 4.17e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Salvor%27s_paint"
+      },
+      {
+        "itemId": 31916,
+        "name": "Dragon cannonball",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cannonball"
+      },
+      {
+        "itemId": 32398,
+        "name": "Sailors' amulet (inert)",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sailors%27_amulet_(inert)"
+      },
+      {
+        "itemId": 32868,
+        "name": "Broken sextant",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Broken_sextant"
+      }
+    ],
+    "locationDescription": "Sorting salvage obtained from Sailing voyages",
+    "travelTip": "Port Sarim docks -> sort salvage",
+    "guidanceSteps": [
+      {
+        "description": "Sort through martial salvage obtained from Sailing voyages.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sea Treasures",
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Fremennik Salvage",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 5,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 32398,
+        "name": "Sailors' amulet (inert)",
+        "dropRate": 0.002857,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sailors%27_amulet_(inert)"
+      },
+      {
+        "itemId": 32870,
+        "name": "Smashed mirror",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Smashed_mirror"
+      }
+    ],
+    "locationDescription": "Sorting salvage obtained from Sailing voyages",
+    "travelTip": "Port Sarim docks -> sort salvage",
+    "guidanceSteps": [
+      {
+        "description": "Sort through fremennik salvage obtained from Sailing voyages.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sea Treasures",
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Opulent Salvage",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 7,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 31406,
+        "name": "Dragon nails",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_nails"
+      },
+      {
+        "itemId": 31916,
+        "name": "Dragon cannonball",
+        "dropRate": 0.002358,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cannonball"
+      },
+      {
+        "itemId": 32115,
+        "name": "Dragon cannon barrel",
+        "dropRate": 5e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_cannon_barrel"
+      },
+      {
+        "itemId": 32398,
+        "name": "Sailors' amulet (inert)",
+        "dropRate": 0.003333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sailors%27_amulet_(inert)"
+      },
+      {
+        "itemId": 32869,
+        "name": "Mouldy doll",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mouldy_doll"
+      },
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 9.68e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 7.26e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      }
+    ],
+    "locationDescription": "Sorting salvage obtained from Sailing voyages",
+    "travelTip": "Port Sarim docks -> sort salvage",
+    "guidanceSteps": [
+      {
+        "description": "Sort through opulent salvage obtained from Sailing voyages.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Sea Treasures",
+      "Sailing Misc"
+    ]
+  },
+  {
+    "name": "Mithril Dragon",
+    "category": "OTHER",
+    "worldX": 1745,
+    "worldY": 5323,
+    "worldPlane": 0,
+    "killTimeSeconds": 43,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 11286,
+        "name": "Draconic visage",
+        "dropRate": 0.0001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Draconic_visage"
+      },
+      {
+        "itemId": 11338,
+        "name": "Chewed bones",
+        "dropRate": 0.02326,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chewed_bones"
+      },
+      {
+        "itemId": 11335,
+        "name": "Dragon full helm",
+        "dropRate": 0.000122,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_full_helm"
+      },
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 3.65e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 2.74e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      },
+      {
+        "itemId": 11341,
+        "name": "Ancient page 1",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11342,
+        "name": "Ancient page 2",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11343,
+        "name": "Ancient page 3",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11344,
+        "name": "Ancient page 4",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11345,
+        "name": "Ancient page 5",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11346,
+        "name": "Ancient page 6",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11347,
+        "name": "Ancient page 7",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11348,
+        "name": "Ancient page 8",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11349,
+        "name": "Ancient page 9",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11350,
+        "name": "Ancient page 10",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11351,
+        "name": "Ancient page 11",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11352,
+        "name": "Ancient page 12",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11353,
+        "name": "Ancient page 13",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11354,
+        "name": "Ancient page 14",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11355,
+        "name": "Ancient page 15",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11356,
+        "name": "Ancient page 16",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11357,
+        "name": "Ancient page 17",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11358,
+        "name": "Ancient page 18",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11359,
+        "name": "Ancient page 19",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11360,
+        "name": "Ancient page 20",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11361,
+        "name": "Ancient page 21",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11362,
+        "name": "Ancient page 22",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11363,
+        "name": "Ancient page 23",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11364,
+        "name": "Ancient page 24",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11365,
+        "name": "Ancient page 25",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      },
+      {
+        "itemId": 11366,
+        "name": "Ancient page 26",
+        "dropRate": 0.000601,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ancient_page"
+      }
+    ],
+    "locationDescription": "Ancient Cavern, beneath the Baxtorian Falls",
+    "travelTip": "Barbarian Outpost -> dive into whirlpool",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Ancient Cavern beneath Baxtorian Falls and kill mithril dragons.",
+        "worldX": 1745,
+        "worldY": 5323,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Adamant Dragon",
+    "category": "OTHER",
+    "worldX": 1568,
+    "worldY": 5062,
+    "worldPlane": 0,
+    "killTimeSeconds": 42,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 11286,
+        "name": "Draconic visage",
+        "dropRate": 0.000111,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Draconic_visage"
+      },
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 3.36e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 22100,
+        "name": "Dragon metal slice",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_metal_slice"
+      },
+      {
+        "itemId": 21918,
+        "name": "Dragon limbs",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_limbs"
+      },
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 2.52e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      }
+    ],
+    "locationDescription": "Lithkren Vault, accessed via Digsite pendant",
+    "travelTip": "Digsite pendant -> Lithkren",
+    "requirements": {
+      "quests": [
+        "DRAGON_SLAYER_II"
+      ]
+    },
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Lithkren Vault and kill adamant dragons.",
+        "worldX": 1568,
+        "worldY": 5062,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Rune Dragon",
+    "category": "OTHER",
+    "worldX": 1568,
+    "worldY": 5062,
+    "worldPlane": 0,
+    "killTimeSeconds": 48,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 11286,
+        "name": "Draconic visage",
+        "dropRate": 0.000125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Draconic_visage"
+      },
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 2.91e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 22103,
+        "name": "Dragon metal lump",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_metal_lump"
+      },
+      {
+        "itemId": 21918,
+        "name": "Dragon limbs",
+        "dropRate": 0.00125,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_limbs"
+      },
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 2.18e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      }
+    ],
+    "locationDescription": "Lithkren Vault, accessed via Digsite pendant",
+    "travelTip": "Digsite pendant -> Lithkren",
+    "requirements": {
+      "quests": [
+        "DRAGON_SLAYER_II"
+      ]
+    },
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Lithkren Vault and kill rune dragons.",
+        "worldX": 1568,
+        "worldY": 5062,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Ogress Shaman",
+    "category": "OTHER",
+    "worldX": 2459,
+    "worldY": 9488,
+    "worldPlane": 2,
+    "killTimeSeconds": 14,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 10976,
+        "name": "Long bone",
+        "dropRate": 0.0025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Long_bone"
+      },
+      {
+        "itemId": 10977,
+        "name": "Curved bone",
+        "dropRate": 0.0001996,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Curved_bone"
+      },
+      {
+        "itemId": 21838,
+        "name": "Shaman mask",
+        "dropRate": 0.000833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shaman_mask"
+      }
+    ],
+    "locationDescription": "Corsair Cove Dungeon",
+    "travelTip": "Corsair Cove -> dungeon entrance",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Corsair Cove Dungeon and kill ogress shamans.",
+        "worldX": 2459,
+        "worldY": 9488,
+        "worldPlane": 2,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Armoured Zombie",
+    "category": "OTHER",
+    "worldX": 3566,
+    "worldY": 3390,
+    "worldPlane": 0,
+    "killTimeSeconds": 7,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 1.91e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 1.43e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      },
+      {
+        "itemId": 6807,
+        "name": "Champion scroll (zombie)",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Champion_scroll_(zombie)"
+      },
+      {
+        "itemId": 28813,
+        "name": "Broken zombie axe",
+        "dropRate": 0.001667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Broken_zombie_axe"
+      },
+      {
+        "itemId": 30324,
+        "name": "Broken zombie helmet",
+        "dropRate": 0.001667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Broken_zombie_helmet"
+      }
+    ],
+    "locationDescription": "Zemouregal's Fort, north of Varrock",
+    "travelTip": "Varrock teleport -> north to fort",
+    "requirements": {
+      "quests": [
+        "DEFENDER_OF_VARROCK"
+      ]
+    },
+    "guidanceSteps": [
+      {
+        "description": "Travel to Zemouregal's Fort and kill armoured zombies.",
+        "worldX": 3566,
+        "worldY": 3390,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Cutting Squid",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 2,
+    "afkLevel": 3,
+    "items": [
+      {
+        "itemId": 31572,
+        "name": "Squid beak",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Squid_beak"
+      }
+    ],
+    "locationDescription": "Cut squid caught while Sailing",
+    "travelTip": "Port Sarim docks -> sail to catch squid",
+    "guidanceSteps": [
+      {
+        "description": "Cut squid obtained from Sailing to find squid beaks.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Prifddinas Elf",
+    "category": "OTHER",
+    "worldX": 3279,
+    "worldY": 6072,
+    "worldPlane": 0,
+    "killTimeSeconds": 7,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 23959,
+        "name": "Enhanced crystal teleport seed",
+        "dropRate": 0.000977,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Enhanced_crystal_teleport_seed"
+      }
+    ],
+    "locationDescription": "Prifddinas, accessed after Song of the Elves",
+    "travelTip": "Teleport crystal -> Prifddinas",
+    "requirements": {
+      "quests": [
+        "SONG_OF_THE_ELVES"
+      ]
+    },
+    "guidanceSteps": [
+      {
+        "description": "Travel to Prifddinas and kill elves for enhanced crystal teleport seeds.",
+        "worldX": 3279,
+        "worldY": 6072,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Fountain of Rune",
+    "category": "OTHER",
+    "worldX": 3375,
+    "worldY": 3893,
+    "worldPlane": 0,
+    "killTimeSeconds": 2,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 19707,
+        "name": "Amulet of eternal glory",
+        "dropRate": 4e-05,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Amulet_of_eternal_glory"
+      }
+    ],
+    "locationDescription": "Fountain of Rune, deep Wilderness",
+    "travelTip": "Wilderness sword 4 -> Fountain of Rune",
+    "guidanceSteps": [
+      {
+        "description": "Charge amulets of glory at the Fountain of Rune in the Wilderness.",
+        "worldX": 3375,
+        "worldY": 3893,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Waterfiend",
+    "category": "OTHER",
+    "worldX": 1745,
+    "worldY": 5323,
+    "worldPlane": 0,
+    "killTimeSeconds": 24,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 20730,
+        "name": "Mist battlestaff",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Mist_battlestaff"
+      },
+      {
+        "itemId": 2366,
+        "name": "Shield left half",
+        "dropRate": 5.72e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shield_left_half"
+      },
+      {
+        "itemId": 1249,
+        "name": "Dragon spear",
+        "dropRate": 4.29e-06,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_spear"
+      }
+    ],
+    "locationDescription": "Ancient Cavern, beneath the Baxtorian Falls",
+    "travelTip": "Barbarian Outpost -> dive into whirlpool",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Ancient Cavern and kill waterfiends.",
+        "worldX": 1745,
+        "worldY": 5323,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Superior Slayer Monster"
+    ]
+  },
+  {
+    "name": "Port Tasks",
+    "category": "OTHER",
+    "worldX": 1824,
+    "worldY": 3691,
+    "worldPlane": 0,
+    "killTimeSeconds": 60,
+    "afkLevel": 2,
+    "items": [
+      {
+        "itemId": 31283,
+        "name": "Soup",
+        "dropRate": 0.000222,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Soup_(item)"
+      },
+      {
+        "itemId": 32090,
+        "name": "Shark paint",
+        "dropRate": 0.02778,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shark_paint"
+      }
+    ],
+    "locationDescription": "Port tasks from sailing ports",
+    "travelTip": "Port Sarim docks -> complete port tasks",
+    "guidanceSteps": [
+      {
+        "description": "Complete port tasks at sailing ports to earn rewards.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Boat Paints"
+    ]
+  },
+  {
+    "name": "Prifddinas Rabbit",
+    "category": "OTHER",
+    "worldX": 3267,
+    "worldY": 6082,
+    "worldPlane": 0,
+    "killTimeSeconds": 514,
+    "afkLevel": 1,
+    "items": [
+      {
+        "itemId": 24000,
+        "name": "Crystal grail",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Crystal_grail"
+      }
+    ],
+    "locationDescription": "Prifddinas, south-east corner",
+    "travelTip": "Teleport crystal -> Prifddinas",
+    "requirements": {
+      "quests": [
+        "SONG_OF_THE_ELVES"
+      ]
+    },
+    "guidanceSteps": [
+      {
+        "description": "Find and kill the Prifddinas rabbit for the crystal grail.",
+        "worldX": 3267,
+        "worldY": 6082,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Pickpocketing Darkmeyer Vyre",
+    "category": "OTHER",
+    "worldX": 3631,
+    "worldY": 3325,
+    "worldPlane": 0,
+    "killTimeSeconds": 7,
+    "afkLevel": 3,
+    "items": [
+      {
+        "itemId": 24777,
+        "name": "Blood shard",
+        "dropRate": 0.0002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blood_shard"
+      }
+    ],
+    "locationDescription": "Darkmeyer, Morytania",
+    "travelTip": "Drakan's medallion -> Darkmeyer",
+    "requirements": {
+      "quests": [
+        "SINS_OF_THE_FATHER"
+      ]
+    },
+    "guidanceSteps": [
+      {
+        "description": "Travel to Darkmeyer and pickpocket vyres for blood shards.",
+        "worldX": 3631,
+        "worldY": 3325,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ],
+    "mutuallyExclusiveSources": [
+      "Vyrewatch Sentinel"
     ]
   }
 ]
