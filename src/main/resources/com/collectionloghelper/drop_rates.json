@@ -518,6 +518,7 @@
     "worldY": 3069,
     "worldPlane": 0,
     "killTimeSeconds": 82,
+    "ironKillTimeSeconds": 92,
     "requirements": {
       "quests": [
         "REGICIDE"
@@ -713,6 +714,7 @@
     "worldY": 3397,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "ironKillTimeSeconds": 67,
     "requirements": {
       "skills": [
         {
@@ -805,6 +807,7 @@
     "worldY": 3807,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "ironKillTimeSeconds": 124,
     "requirements": {
       "skills": [
         {
@@ -1117,6 +1120,7 @@
     "worldY": 3596,
     "worldPlane": 0,
     "killTimeSeconds": 138,
+    "ironKillTimeSeconds": 144,
     "requirements": {
       "quests": [
         "SECRETS_OF_THE_NORTH"
@@ -1142,7 +1146,7 @@
       {
         "itemId": 27616,
         "name": "Ancient essence",
-        "dropRate": 0.6,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_essence"
@@ -1316,6 +1320,7 @@
     "worldY": 2894,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "ironKillTimeSeconds": 144,
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
@@ -1550,6 +1555,7 @@
     "worldY": 3484,
     "worldPlane": 0,
     "killTimeSeconds": 97,
+    "ironKillTimeSeconds": 109,
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
@@ -1667,6 +1673,7 @@
     "worldY": 3543,
     "worldPlane": 2,
     "killTimeSeconds": 97,
+    "ironKillTimeSeconds": 106,
     "requirements": {
       "skills": [
         {
@@ -1732,6 +1739,14 @@
         "isPet": true,
         "wikiPage": "Noon",
         "independent": true
+      },
+      {
+        "itemId": 4153,
+        "name": "Granite maul",
+        "dropRate": 0.00781,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Granite_maul"
       }
     ],
     "locationDescription": "Slayer Tower rooftop, Morytania",
@@ -1922,6 +1937,7 @@
     "worldY": 3400,
     "worldPlane": 0,
     "killTimeSeconds": 240,
+    "ironKillTimeSeconds": 257,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD",
@@ -2448,6 +2464,7 @@
     "worldY": 3611,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "ironKillTimeSeconds": 40,
     "afkLevel": 2,
     "requirements": {
       "skills": [
@@ -2613,6 +2630,7 @@
     "worldY": 4763,
     "worldPlane": 0,
     "killTimeSeconds": 72,
+    "ironKillTimeSeconds": 80,
     "requirements": {
       "skills": [
         {
@@ -2797,7 +2815,7 @@
       {
         "itemId": 7158,
         "name": "Dragon 2h sword",
-        "dropRate": 0.015625,
+        "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_2h_sword"
@@ -2964,11 +2982,12 @@
     "worldY": 3734,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "ironKillTimeSeconds": 72,
     "items": [
       {
         "itemId": 27670,
         "name": "Fangs of Venenatis",
-        "dropRate": 0.005102,
+        "dropRate": 0.001618,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Fangs_of_Venenatis"
@@ -2976,7 +2995,7 @@
       {
         "itemId": 27687,
         "name": "Voidwaker gem",
-        "dropRate": 0.002778,
+        "dropRate": 0.001096,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Voidwaker_gem"
@@ -2992,7 +3011,7 @@
       {
         "itemId": 11920,
         "name": "Dragon pickaxe",
-        "dropRate": 0.003906,
+        "dropRate": 0.005848,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_pickaxe"
@@ -3000,7 +3019,7 @@
       {
         "itemId": 13177,
         "name": "Venenatis spiderling",
-        "dropRate": 0.000667,
+        "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Venenatis_spiderling",
@@ -3046,11 +3065,12 @@
     "worldY": 3783,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "ironKillTimeSeconds": 80,
     "items": [
       {
         "itemId": 27673,
         "name": "Skull of Vet'ion",
-        "dropRate": 0.005102,
+        "dropRate": 0.001618,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Skull_of_Vet%27ion"
@@ -3058,7 +3078,7 @@
       {
         "itemId": 27684,
         "name": "Voidwaker blade",
-        "dropRate": 0.002778,
+        "dropRate": 0.001096,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Voidwaker_blade"
@@ -3074,7 +3094,7 @@
       {
         "itemId": 11920,
         "name": "Dragon pickaxe",
-        "dropRate": 0.003906,
+        "dropRate": 0.000588,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_pickaxe"
@@ -3082,7 +3102,7 @@
       {
         "itemId": 13179,
         "name": "Vet'ion jr.",
-        "dropRate": 0.000667,
+        "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Vet%27ion_jr.",
@@ -3095,6 +3115,14 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_2h_sword"
+      },
+      {
+        "itemId": 6806,
+        "name": "Skeleton champion scroll",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Skeleton_champion_scroll"
       }
     ],
     "locationDescription": "Vet'ion's Rest, Wilderness",
@@ -3128,11 +3156,12 @@
     "worldY": 3834,
     "worldPlane": 0,
     "killTimeSeconds": 120,
+    "ironKillTimeSeconds": 72,
     "items": [
       {
         "itemId": 27667,
         "name": "Claws of Callisto",
-        "dropRate": 0.005102,
+        "dropRate": 0.001618,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Claws_of_Callisto"
@@ -3140,7 +3169,7 @@
       {
         "itemId": 27681,
         "name": "Voidwaker hilt",
-        "dropRate": 0.002778,
+        "dropRate": 0.001096,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Voidwaker_hilt"
@@ -3148,7 +3177,7 @@
       {
         "itemId": 12603,
         "name": "Tyrannical ring",
-        "dropRate": 0.001953,
+        "dropRate": 0.001397,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tyrannical_ring"
@@ -3156,7 +3185,7 @@
       {
         "itemId": 11920,
         "name": "Dragon pickaxe",
-        "dropRate": 0.003906,
+        "dropRate": 0.005848,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_pickaxe"
@@ -3164,7 +3193,7 @@
       {
         "itemId": 13178,
         "name": "Callisto cub",
-        "dropRate": 0.000667,
+        "dropRate": 0.000357,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Callisto_cub",
@@ -3173,7 +3202,7 @@
       {
         "itemId": 7158,
         "name": "Dragon 2h sword",
-        "dropRate": 0.00390625,
+        "dropRate": 0.002793,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_2h_sword"
@@ -3320,7 +3349,7 @@
     "worldX": 1636,
     "worldY": 3673,
     "worldPlane": 0,
-    "killTimeSeconds": 5400,
+    "killTimeSeconds": 8000,
     "items": [
       {
         "itemId": 21275,
@@ -3395,6 +3424,7 @@
     "worldY": 3731,
     "worldPlane": 0,
     "killTimeSeconds": 38,
+    "ironKillTimeSeconds": 72,
     "requirements": {
       "skills": [
         {
@@ -4957,7 +4987,7 @@
     "worldX": 3230,
     "worldY": 6073,
     "worldPlane": 0,
-    "killTimeSeconds": 600,
+    "killTimeSeconds": 514,
     "requirements": {
       "quests": [
         "SONG_OF_THE_ELVES"
@@ -5049,7 +5079,7 @@
       {
         "itemId": 4207,
         "name": "Crystal weapon seed",
-        "dropRate": 0.008333,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Crystal_weapon_seed"
@@ -5057,7 +5087,7 @@
       {
         "itemId": 23956,
         "name": "Crystal armour seed",
-        "dropRate": 0.008333,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Crystal_armour_seed"
@@ -5348,7 +5378,7 @@
     "worldX": 3135,
     "worldY": 2840,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 45,
     "afkLevel": 1,
     "items": [
       {
@@ -5403,7 +5433,7 @@
       {
         "itemId": 25592,
         "name": "Spirit angler headband",
-        "dropRate": 0.0025,
+        "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Spirit_angler_headband",
@@ -5412,7 +5442,7 @@
       {
         "itemId": 25594,
         "name": "Spirit angler top",
-        "dropRate": 0.0025,
+        "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Spirit_angler_top",
@@ -5421,7 +5451,7 @@
       {
         "itemId": 25596,
         "name": "Spirit angler waders",
-        "dropRate": 0.0025,
+        "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Spirit_angler_waders",
@@ -5430,7 +5460,7 @@
       {
         "itemId": 25598,
         "name": "Spirit angler boots",
-        "dropRate": 0.0025,
+        "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Spirit_angler_boots",
@@ -5475,7 +5505,7 @@
     "worldX": 1621,
     "worldY": 3997,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 86,
     "afkLevel": 1,
     "items": [
       {
@@ -5489,7 +5519,7 @@
       {
         "itemId": 20716,
         "name": "Tome of fire (empty)",
-        "dropRate": 0.006667,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tome_of_fire_(empty)"
@@ -5532,7 +5562,7 @@
       {
         "itemId": 20720,
         "name": "Bruma torch",
-        "dropRate": 0.001,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bruma_torch"
@@ -5763,7 +5793,7 @@
     "worldX": 2975,
     "worldY": 3696,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 48,
     "afkLevel": 1,
     "items": [
       {
@@ -5812,6 +5842,7 @@
     "worldY": 3426,
     "worldPlane": 0,
     "killTimeSeconds": 80,
+    "ironKillTimeSeconds": 90,
     "requirements": {
       "quests": [
         "SINS_OF_THE_FATHER"
@@ -6126,7 +6157,8 @@
     "worldX": 3212,
     "worldY": 3422,
     "worldPlane": 0,
-    "killTimeSeconds": 180,
+    "killTimeSeconds": 72,
+    "ironKillTimeSeconds": 180,
     "items": [
       {
         "itemId": 23285,
@@ -7600,6 +7632,14 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mystic_robe_top_(light)"
+      },
+      {
+        "itemId": 11902,
+        "name": "Leaf-bladed sword",
+        "dropRate": 0.00195,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Leaf-bladed_sword"
       }
     ],
     "locationDescription": "Fremennik Slayer Dungeon",
@@ -7963,6 +8003,14 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancient_ceremonial_boots"
+      },
+      {
+        "itemId": 11840,
+        "name": "Dragon boots",
+        "dropRate": 0.015625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Dragon_boots"
       }
     ],
     "locationDescription": "God Wars Dungeon, Ancient Prison",
@@ -10124,7 +10172,7 @@
     "worldX": 3479,
     "worldY": 3241,
     "worldPlane": 0,
-    "killTimeSeconds": 600,
+    "killTimeSeconds": 360,
     "afkLevel": 1,
     "requirements": {
       "quests": [
@@ -10196,7 +10244,7 @@
       {
         "itemId": 5554,
         "name": "Rogue mask",
-        "dropRate": 0.625,
+        "dropRate": 0.3333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_mask",
@@ -10205,7 +10253,7 @@
       {
         "itemId": 5553,
         "name": "Rogue top",
-        "dropRate": 0.625,
+        "dropRate": 0.3333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_top",
@@ -10214,7 +10262,7 @@
       {
         "itemId": 5555,
         "name": "Rogue trousers",
-        "dropRate": 0.625,
+        "dropRate": 0.3333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_trousers",
@@ -10223,7 +10271,7 @@
       {
         "itemId": 5556,
         "name": "Rogue gloves",
-        "dropRate": 0.625,
+        "dropRate": 0.3333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_gloves",
@@ -10232,7 +10280,7 @@
       {
         "itemId": 5557,
         "name": "Rogue boots",
-        "dropRate": 0.625,
+        "dropRate": 0.3333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_boots",
@@ -12986,7 +13034,7 @@
     "worldX": 2130,
     "worldY": 5647,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 60,
     "afkLevel": 2,
     "requirements": {
       "quests": [
@@ -14318,6 +14366,14 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragonstone_gauntlets"
+      },
+      {
+        "itemId": 6571,
+        "name": "Uncut onyx",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Uncut_onyx"
       }
     ],
     "locationDescription": "Elven Crystal Chest in Prifddinas",
@@ -15864,7 +15920,7 @@
     "worldX": 2639,
     "worldY": 3218,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 24,
     "afkLevel": 2,
     "requirements": {
       "quests": [
@@ -15917,7 +15973,7 @@
     "worldX": 2639,
     "worldY": 3218,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 24,
     "afkLevel": 2,
     "requirements": {
       "quests": [
@@ -15970,7 +16026,7 @@
     "worldX": 2639,
     "worldY": 3218,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 24,
     "afkLevel": 2,
     "requirements": {
       "quests": [
@@ -16023,7 +16079,7 @@
     "worldX": 2639,
     "worldY": 3218,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 24,
     "afkLevel": 2,
     "requirements": {
       "quests": [
@@ -16076,7 +16132,7 @@
     "worldX": 2639,
     "worldY": 3218,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 24,
     "afkLevel": 2,
     "requirements": {
       "quests": [
@@ -16129,7 +16185,7 @@
     "worldX": 2639,
     "worldY": 3218,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 24,
     "afkLevel": 2,
     "requirements": {
       "quests": [
@@ -16140,7 +16196,7 @@
       {
         "itemId": 25617,
         "name": "Tea flask",
-        "dropRate": 0.1,
+        "dropRate": 0.142857,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tea_flask"
@@ -16272,7 +16328,7 @@
       {
         "itemId": 30775,
         "name": "Chasm teleport scroll",
-        "dropRate": 0.042057,
+        "dropRate": 0.04762,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Chasm_teleport_scroll"
@@ -16280,7 +16336,7 @@
       {
         "itemId": 30765,
         "name": "Oathplate shards",
-        "dropRate": 0.058581,
+        "dropRate": 0.03333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Oathplate_shards"
@@ -16288,7 +16344,7 @@
       {
         "itemId": 30750,
         "name": "Oathplate helm",
-        "dropRate": 0.001667,
+        "dropRate": 0.000909,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Oathplate_helm"
@@ -16296,7 +16352,7 @@
       {
         "itemId": 30753,
         "name": "Oathplate chest",
-        "dropRate": 0.001667,
+        "dropRate": 0.000909,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Oathplate_chest"
@@ -16304,7 +16360,7 @@
       {
         "itemId": 30756,
         "name": "Oathplate legs",
-        "dropRate": 0.001667,
+        "dropRate": 0.000909,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Oathplate_legs"
@@ -16312,7 +16368,7 @@
       {
         "itemId": 30759,
         "name": "Soulflame horn",
-        "dropRate": 0.003333,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Soulflame_horn"
@@ -16380,7 +16436,7 @@
     "worldX": 1311,
     "worldY": 9520,
     "worldPlane": 0,
-    "killTimeSeconds": 600,
+    "killTimeSeconds": 1029,
     "requirements": {
       "quests": [
         "THE_FINAL_DAWN"
@@ -16390,7 +16446,7 @@
       {
         "itemId": 31088,
         "name": "Avernic treads",
-        "dropRate": 0.001852,
+        "dropRate": 0.01,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Avernic_treads"
@@ -16398,7 +16454,7 @@
       {
         "itemId": 31115,
         "name": "Eye of ayak (uncharged)",
-        "dropRate": 0.001852,
+        "dropRate": 0.01042,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Eye_of_ayak_(uncharged)"
@@ -16406,7 +16462,7 @@
       {
         "itemId": 31109,
         "name": "Mokhaiotl cloth",
-        "dropRate": 0.001852,
+        "dropRate": 0.01087,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mokhaiotl_cloth"
@@ -16414,7 +16470,7 @@
       {
         "itemId": 31099,
         "name": "Mokhaiotl waystone",
-        "dropRate": 0.067308,
+        "dropRate": 0.5,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mokhaiotl_waystone"
@@ -16422,7 +16478,7 @@
       {
         "itemId": 31111,
         "name": "Demon tear",
-        "dropRate": 0.067308,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Demon_tear"
@@ -16430,7 +16486,7 @@
       {
         "itemId": 31130,
         "name": "Dom",
-        "dropRate": 0.004,
+        "dropRate": 0.01235,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Dom",
@@ -16512,7 +16568,7 @@
       {
         "itemId": 30622,
         "name": "Bran",
-        "dropRate": 0.000333,
+        "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Bran",
@@ -16541,6 +16597,7 @@
     "worldY": 4511,
     "worldPlane": 0,
     "killTimeSeconds": 42,
+    "ironKillTimeSeconds": 48,
     "requirements": {
       "quests": [
         "THE_HEART_OF_DARKNESS"
@@ -16580,6 +16637,14 @@
         "isPet": true,
         "wikiPage": "Moxi",
         "independent": true
+      },
+      {
+        "itemId": 30088,
+        "name": "Huasca seed",
+        "dropRate": 0.00303,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Huasca_seed"
       }
     ],
     "locationDescription": "Ruins of Tapoyauik, Varlamore",
@@ -16780,11 +16845,12 @@
     "worldY": 5172,
     "worldPlane": 0,
     "killTimeSeconds": 1440,
+    "ironKillTimeSeconds": 1636,
     "items": [
       {
         "itemId": 13225,
         "name": "Tzrek-jad",
-        "dropRate": 0.005,
+        "dropRate": 0.01493,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Tzrek-jad",
@@ -16828,11 +16894,12 @@
     "worldY": 5122,
     "worldPlane": 0,
     "killTimeSeconds": 3600,
+    "ironKillTimeSeconds": 4000,
     "items": [
       {
         "itemId": 21291,
         "name": "Jal-nib-rek",
-        "dropRate": 0.01,
+        "dropRate": 0.02326,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Jal-nib-rek",
@@ -16912,7 +16979,8 @@
     "worldX": 3222,
     "worldY": 3218,
     "worldPlane": 0,
-    "killTimeSeconds": 180,
+    "killTimeSeconds": 80,
+    "ironKillTimeSeconds": 180,
     "items": [
       {
         "itemId": 12221,
@@ -17957,7 +18025,7 @@
       {
         "itemId": 12297,
         "name": "Large spade",
-        "dropRate": 0.00390625,
+        "dropRate": 0.08333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Large_spade"
@@ -17981,7 +18049,8 @@
     "worldX": 2964,
     "worldY": 3378,
     "worldPlane": 0,
-    "killTimeSeconds": 300,
+    "killTimeSeconds": 120,
+    "ironKillTimeSeconds": 360,
     "items": [
       {
         "itemId": 2577,
@@ -18690,7 +18759,7 @@
       {
         "itemId": 20266,
         "name": "Black unicorn mask",
-        "dropRate": 0.001764,
+        "dropRate": 0.003531,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Black_unicorn_mask"
@@ -18698,7 +18767,7 @@
       {
         "itemId": 20269,
         "name": "White unicorn mask",
-        "dropRate": 0.001764,
+        "dropRate": 0.003531,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "White_unicorn_mask"
@@ -18898,7 +18967,7 @@
       {
         "itemId": 20275,
         "name": "Clueless scroll",
-        "dropRate": 0.0025,
+        "dropRate": 0.01168,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Clueless_scroll"
@@ -18923,7 +18992,8 @@
     "worldX": 3213,
     "worldY": 3428,
     "worldPlane": 0,
-    "killTimeSeconds": 420,
+    "killTimeSeconds": 180,
+    "ironKillTimeSeconds": 720,
     "items": [
       {
         "itemId": 2657,
@@ -22424,6 +22494,14 @@
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Heron"
+      },
+      {
+        "itemId": 7991,
+        "name": "Big swordfish",
+        "dropRate": 0.000833,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Big_swordfish"
       }
     ],
     "locationDescription": "Fishing Guild",
@@ -22585,6 +22663,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 14,
+    "ironKillTimeSeconds": 18,
     "afkLevel": 1,
     "items": [
       {
@@ -22618,6 +22697,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 19,
+    "ironKillTimeSeconds": 26,
     "afkLevel": 1,
     "items": [
       {
@@ -22651,6 +22731,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 22,
+    "ironKillTimeSeconds": 33,
     "afkLevel": 1,
     "items": [
       {
@@ -22708,6 +22789,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 40,
+    "ironKillTimeSeconds": 60,
     "afkLevel": 1,
     "items": [
       {
@@ -22765,6 +22847,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 20,
+    "ironKillTimeSeconds": 30,
     "afkLevel": 1,
     "items": [
       {
@@ -22830,6 +22913,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 33,
+    "ironKillTimeSeconds": 67,
     "afkLevel": 1,
     "items": [
       {
