@@ -133,8 +133,8 @@
     "worldX": 2882,
     "worldY": 3400,
     "worldPlane": 0,
-    "killTimeSeconds": 62,
-    "ironKillTimeSeconds": 120,
+    "killTimeSeconds": 80,
+    "ironKillTimeSeconds": 144,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -261,8 +261,8 @@
     "worldX": 2882,
     "worldY": 3400,
     "worldPlane": 0,
-    "killTimeSeconds": 55,
-    "ironKillTimeSeconds": 129,
+    "killTimeSeconds": 72,
+    "ironKillTimeSeconds": 144,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -389,8 +389,8 @@
     "worldX": 2882,
     "worldY": 3400,
     "worldPlane": 0,
-    "killTimeSeconds": 80,
-    "ironKillTimeSeconds": 120,
+    "killTimeSeconds": 103,
+    "ironKillTimeSeconds": 180,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -953,8 +953,8 @@
     "worldX": 2966,
     "worldY": 3380,
     "worldPlane": 0,
-    "killTimeSeconds": 60,
-    "ironKillTimeSeconds": 424,
+    "killTimeSeconds": 72,
+    "ironKillTimeSeconds": 600,
     "items": [
       {
         "itemId": 12829,
@@ -1037,7 +1037,7 @@
     "worldX": 3226,
     "worldY": 3108,
     "worldPlane": 0,
-    "killTimeSeconds": 65,
+    "killTimeSeconds": 120,
     "items": [
       {
         "itemId": 7981,
@@ -1112,7 +1112,7 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "ironKillTimeSeconds": 97
+    "ironKillTimeSeconds": 144
   },
   {
     "name": "Phantom Muspah",
@@ -1204,7 +1204,7 @@
     "worldX": 2586,
     "worldY": 3091,
     "worldPlane": 0,
-    "killTimeSeconds": 88,
+    "killTimeSeconds": 129,
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
@@ -1313,7 +1313,8 @@
         "interactAction": "Attack",
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 150
   },
   {
     "name": "The Leviathan",
@@ -1321,8 +1322,8 @@
     "worldX": 3231,
     "worldY": 2894,
     "worldPlane": 0,
-    "killTimeSeconds": 120,
-    "ironKillTimeSeconds": 144,
+    "killTimeSeconds": 138,
+    "ironKillTimeSeconds": 150,
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
@@ -1776,7 +1777,7 @@
     "worldX": 3662,
     "worldY": 3218,
     "worldPlane": 0,
-    "killTimeSeconds": 600,
+    "killTimeSeconds": 300,
     "requirements": {
       "quests": [
         "PRIEST_IN_PERIL"
@@ -1931,7 +1932,8 @@
         "interactAction": "Attack",
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 360
   },
   {
     "name": "Nex",
@@ -1939,8 +1941,8 @@
     "worldX": 2882,
     "worldY": 3400,
     "worldPlane": 0,
-    "killTimeSeconds": 240,
-    "ironKillTimeSeconds": 257,
+    "killTimeSeconds": 300,
+    "ironKillTimeSeconds": 300,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD",
@@ -2184,7 +2186,7 @@
     "worldX": 3174,
     "worldY": 9899,
     "worldPlane": 0,
-    "killTimeSeconds": 4500,
+    "killTimeSeconds": 514,
     "afkLevel": 1,
     "items": [
       {
@@ -2219,7 +2221,8 @@
         "interactAction": "Attack",
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 514
   },
   {
     "name": "Obor",
@@ -2227,7 +2230,7 @@
     "worldX": 3095,
     "worldY": 9832,
     "worldPlane": 0,
-    "killTimeSeconds": 3900,
+    "killTimeSeconds": 450,
     "afkLevel": 1,
     "items": [
       {
@@ -2262,7 +2265,8 @@
         "interactAction": "Attack",
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 450
   },
   {
     "name": "Dagannoth Rex",
@@ -2468,8 +2472,8 @@
     "worldX": 2277,
     "worldY": 3611,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
-    "ironKillTimeSeconds": 40,
+    "killTimeSeconds": 42,
+    "ironKillTimeSeconds": 45,
     "afkLevel": 2,
     "requirements": {
       "skills": [
@@ -2745,8 +2749,8 @@
     "worldX": 3005,
     "worldY": 3849,
     "worldPlane": 0,
-    "killTimeSeconds": 28,
-    "ironKillTimeSeconds": 48,
+    "killTimeSeconds": 36,
+    "ironKillTimeSeconds": 45,
     "afkLevel": 1,
     "items": [
       {
@@ -3160,8 +3164,8 @@
     "worldX": 3292,
     "worldY": 3834,
     "worldPlane": 0,
-    "killTimeSeconds": 120,
-    "ironKillTimeSeconds": 72,
+    "killTimeSeconds": 69,
+    "ironKillTimeSeconds": 90,
     "items": [
       {
         "itemId": 27667,
@@ -3354,7 +3358,7 @@
     "worldX": 1636,
     "worldY": 3673,
     "worldPlane": 0,
-    "killTimeSeconds": 8000,
+    "killTimeSeconds": 3600,
     "items": [
       {
         "itemId": 21275,
@@ -3422,7 +3426,8 @@
         "interactAction": "Attack",
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 3600
   },
   {
     "name": "Hespori",
@@ -3494,7 +3499,7 @@
     "worldX": 1233,
     "worldY": 3573,
     "worldPlane": 0,
-    "killTimeSeconds": 1800,
+    "killTimeSeconds": 1029,
     "items": [
       {
         "itemId": 20997,
@@ -3722,7 +3727,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 1029
   },
   {
     "name": "Chambers of Xeric (Challenge Mode)",
@@ -3966,7 +3972,7 @@
     "worldX": 3650,
     "worldY": 3218,
     "worldPlane": 0,
-    "killTimeSeconds": 1500,
+    "killTimeSeconds": 1200,
     "requirements": {
       "quests": [
         "A_TASTE_OF_HOPE"
@@ -4166,7 +4172,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 1440
   },
   {
     "name": "Tombs of Amascut",
@@ -4174,7 +4181,7 @@
     "worldX": 3234,
     "worldY": 2784,
     "worldPlane": 0,
-    "killTimeSeconds": 2100,
+    "killTimeSeconds": 1029,
     "items": [
       {
         "itemId": 26219,
@@ -4439,7 +4446,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 1200
   },
   {
     "name": "Tombs of Amascut (300 Invocation)",
@@ -4720,7 +4728,7 @@
     "worldX": 3234,
     "worldY": 2784,
     "worldPlane": 0,
-    "killTimeSeconds": 2118,
+    "killTimeSeconds": 1440,
     "items": [
       {
         "itemId": 26219,
@@ -4985,7 +4993,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 1680
   },
   {
     "name": "Corrupted Gauntlet",
@@ -5075,7 +5084,7 @@
     "worldX": 3230,
     "worldY": 6073,
     "worldPlane": 0,
-    "killTimeSeconds": 360,
+    "killTimeSeconds": 450,
     "requirements": {
       "quests": [
         "SONG_OF_THE_ELVES"
@@ -5148,7 +5157,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "ironKillTimeSeconds": 450
   },
   {
     "name": "Barrows",
@@ -5384,7 +5394,7 @@
     "worldX": 3135,
     "worldY": 2840,
     "worldPlane": 0,
-    "killTimeSeconds": 45,
+    "killTimeSeconds": 600,
     "afkLevel": 1,
     "items": [
       {
@@ -5503,7 +5513,9 @@
         "interactAction": "Talk-to",
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 600,
+    "rollsPerKill": 10
   },
   {
     "name": "Wintertodt",
@@ -5511,7 +5523,7 @@
     "worldX": 1621,
     "worldY": 3997,
     "worldPlane": 0,
-    "killTimeSeconds": 86,
+    "killTimeSeconds": 655,
     "afkLevel": 1,
     "items": [
       {
@@ -5614,7 +5626,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "rollsPerKill": 10
+    "rollsPerKill": 10,
+    "ironKillTimeSeconds": 655
   },
   {
     "name": "Zalcano",
@@ -5685,7 +5698,7 @@
     "worldX": 1794,
     "worldY": 3107,
     "worldPlane": 0,
-    "killTimeSeconds": 1440,
+    "killTimeSeconds": 514,
     "requirements": {
       "quests": [
         "CHILDREN_OF_THE_SUN"
@@ -5791,7 +5804,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "ironKillTimeSeconds": 600
   },
   {
     "name": "Crazy archaeologist",
@@ -16872,7 +16886,7 @@
     "worldX": 3299,
     "worldY": 9867,
     "worldPlane": 0,
-    "killTimeSeconds": 42,
+    "killTimeSeconds": 72,
     "items": [
       {
         "itemId": 28801,
@@ -16907,7 +16921,7 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "ironKillTimeSeconds": 60
+    "ironKillTimeSeconds": 80
   },
   {
     "name": "The Fight Caves",
@@ -22981,8 +22995,8 @@
     "worldX": 1824,
     "worldY": 3691,
     "worldPlane": 0,
-    "killTimeSeconds": 33,
-    "ironKillTimeSeconds": 67,
+    "killTimeSeconds": 42,
+    "ironKillTimeSeconds": 45,
     "afkLevel": 1,
     "items": [
       {
