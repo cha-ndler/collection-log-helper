@@ -931,11 +931,11 @@ public class CollectionLogHelperPanel extends PluginPanel
 				continue;
 			}
 
+			boolean sourceNameMatches = source.getName().toLowerCase().contains(query);
 			boolean onTask = calculator.isOnSlayerTask(source);
 			for (CollectionLogItem item : source.getItems())
 			{
-				if (item.getName().toLowerCase().contains(query)
-					|| source.getName().toLowerCase().contains(query))
+				if (sourceNameMatches || item.getName().toLowerCase().contains(query))
 				{
 					boolean obtained = collectionState.isItemObtained(item.getItemId());
 					if (hideObtained && obtained)
