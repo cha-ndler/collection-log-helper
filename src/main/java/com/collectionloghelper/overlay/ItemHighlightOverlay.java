@@ -19,6 +19,9 @@ import javax.inject.Singleton;
 @Singleton
 public class ItemHighlightOverlay extends WidgetItemOverlay
 {
+	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
+	private static final java.awt.Font BOLD_10 = new java.awt.Font(java.awt.Font.DIALOG, java.awt.Font.BOLD, 10);
+
 	private final CollectionLogHelperConfig config;
 
 	private volatile List<Integer> targetItemIds = Collections.emptyList();
@@ -50,13 +53,13 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 		graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), 65));
 		graphics.fill(bounds);
 		graphics.setColor(color);
-		graphics.setStroke(new BasicStroke(2.0f));
+		graphics.setStroke(STROKE_2);
 		graphics.draw(bounds);
 
 		// Draw a small arrow indicator when this item should be used on an object
 		if (useItemOnObject)
 		{
-			graphics.setFont(graphics.getFont().deriveFont(java.awt.Font.BOLD, 10f));
+			graphics.setFont(BOLD_10);
 			graphics.setColor(Color.BLACK);
 			int arrowX = bounds.x + bounds.width - 10;
 			int arrowY = bounds.y + bounds.height - 2;

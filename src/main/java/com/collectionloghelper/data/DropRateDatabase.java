@@ -5,7 +5,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,10 @@ public class DropRateDatabase
 {
     private List<CollectionLogSource> sources = Collections.emptyList();
     private Map<Integer, CollectionLogItem> itemsById = Collections.emptyMap();
+    private Map<String, CollectionLogItem> itemsByName = Collections.emptyMap();
     private Map<Integer, CollectionLogSource> sourcesByNpcId = Collections.emptyMap();
+    private Map<CollectionLogCategory, List<CollectionLogSource>> sourcesByCategory = Collections.emptyMap();
+    private Map<String, CollectionLogSource> sourcesByNameLower = Collections.emptyMap();
 
     @Inject
     private Gson gson;
@@ -46,15 +51,28 @@ public class DropRateDatabase
                     (a, b) -> a
                 ));
 
+            Map<String, CollectionLogItem> nameMap = new HashMap<>();
+            for (CollectionLogItem item : itemsById.values())
+            {
+                nameMap.putIfAbsent(item.getName().toLowerCase(), item);
+            }
+            itemsByName = nameMap;
+
             Map<Integer, CollectionLogSource> npcMap = new HashMap<>();
+            Map<CollectionLogCategory, List<CollectionLogSource>> catMap = new EnumMap<>(CollectionLogCategory.class);
+            Map<String, CollectionLogSource> nameMap2 = new HashMap<>();
             for (CollectionLogSource source : sources)
             {
                 if (source.getNpcId() > 0)
                 {
                     npcMap.put(source.getNpcId(), source);
                 }
+                catMap.computeIfAbsent(source.getCategory(), k -> new ArrayList<>()).add(source);
+                nameMap2.put(source.getName().toLowerCase(), source);
             }
             sourcesByNpcId = npcMap;
+            sourcesByCategory = catMap;
+            sourcesByNameLower = nameMap2;
 
             validateData();
             log.debug("Loaded {} sources with {} items", sources.size(), itemsById.size());
@@ -72,22 +90,22 @@ public class DropRateDatabase
 
     public List<CollectionLogSource> getSourcesByCategory(CollectionLogCategory category)
     {
-        return sources.stream()
-            .filter(s -> s.getCategory() == category)
-            .collect(Collectors.toList());
+        return sourcesByCategory.getOrDefault(category, Collections.emptyList());
     }
 
     public CollectionLogSource getSourceByName(String name)
     {
-        return sources.stream()
-            .filter(s -> s.getName().equalsIgnoreCase(name))
-            .findFirst()
-            .orElse(null);
+        return sourcesByNameLower.get(name.toLowerCase());
     }
 
     public CollectionLogItem getItemById(int itemId)
     {
         return itemsById.get(itemId);
+    }
+
+    public CollectionLogItem getItemByName(String name)
+    {
+        return itemsByName.get(name.toLowerCase());
     }
 
     public CollectionLogSource getSourceByNpcId(int npcId)

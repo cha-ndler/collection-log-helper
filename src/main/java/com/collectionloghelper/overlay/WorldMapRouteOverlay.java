@@ -33,6 +33,7 @@ public class WorldMapRouteOverlay extends Overlay
 	private static final float LINE_WIDTH = 2.0f;
 	private static final int LINE_ALPHA = 180;
 	private static final int ARROWHEAD_SIZE = 8;
+	private static final BasicStroke LINE_STROKE = new BasicStroke(LINE_WIDTH);
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
@@ -103,7 +104,7 @@ public class WorldMapRouteOverlay extends Overlay
 
 		// Draw the route line
 		graphics.setColor(lineColor);
-		graphics.setStroke(new BasicStroke(LINE_WIDTH));
+		graphics.setStroke(LINE_STROKE);
 		Line2D.Double line = new Line2D.Double(
 			playerMapPoint.getX(), playerMapPoint.getY(),
 			targetMapPoint.getX(), targetMapPoint.getY()
