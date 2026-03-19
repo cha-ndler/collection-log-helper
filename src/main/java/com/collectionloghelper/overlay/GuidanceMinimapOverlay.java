@@ -26,6 +26,9 @@ public class GuidanceMinimapOverlay extends Overlay
 	private static final int DOT_RADIUS = 4;
 	private static final int ARROW_INNER_DIST = 55;
 	private static final int ARROW_OUTER_DIST = 65;
+	private static final BasicStroke STROKE_6 = new BasicStroke(6);
+	private static final BasicStroke STROKE_3 = new BasicStroke(3);
+	private static final BasicStroke STROKE_1 = new BasicStroke(1);
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
@@ -166,17 +169,17 @@ public class GuidanceMinimapOverlay extends Overlay
 	{
 		// Black border
 		graphics.setColor(Color.BLACK);
-		graphics.setStroke(new BasicStroke(6));
+		graphics.setStroke(STROKE_6);
 		graphics.draw(line);
 		drawArrowHead(graphics, line, 2, 2);
 
 		// Colored fill
 		graphics.setColor(color);
-		graphics.setStroke(new BasicStroke(3));
+		graphics.setStroke(STROKE_3);
 		graphics.draw(line);
 		drawArrowHead(graphics, line, 0, 0);
 
-		graphics.setStroke(new BasicStroke(1));
+		graphics.setStroke(STROKE_1);
 	}
 
 	/**

@@ -249,6 +249,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private WorldPoint pendingShortestPathTarget;
 	private boolean slayerRefreshPending;
 
+	/** Coalesces multiple panel.rebuild() calls into a single rebuild per game tick. */
+	private boolean pendingPanelRebuild;
+
 	/** Tracked NPC for guidance overlay — maintained via NpcSpawned/NpcDespawned events. */
 	private volatile NPC trackedGuidanceNpc;
 
@@ -349,6 +352,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		hasCompletedFullSync = false;
 		syncReminderSent = false;
 		loginTickDelay = 0;
+		pendingPanelRebuild = false;
 		cachedPlayerLocation = null;
 		lastProximityLocation = null;
 		guidanceOverlay.setShowCollectionLogReminder(false);
@@ -387,6 +391,9 @@ public class CollectionLogHelperPlugin extends Plugin
 				requirementsChecker.refreshAccessibility(database.getAllSources());
 				slayerTaskState.refresh();
 				lastObtainedCount = collectionState.getTotalObtained();
+
+				// Rescan scene for tracked objects after scene (re)load
+				objectHighlightOverlay.rescanScene();
 
 				// Per-character dir and cache-fresh check are handled in
 				// onGameTick once varps and player name are available.
@@ -494,9 +501,9 @@ public class CollectionLogHelperPlugin extends Plugin
 			slayerChanged = true; // rebuild anyway
 		}
 
-		if (slayerChanged && panel != null)
+		if (slayerChanged)
 		{
-			panel.rebuild();
+			pendingPanelRebuild = true;
 		}
 	}
 
@@ -505,9 +512,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		clueEstimator.resetBucket();
 		boolean changed = requirementsChecker.refreshAccessibility(database.getAllSources());
-		if (changed && panel != null)
+		if (changed)
 		{
-			panel.rebuild();
+			pendingPanelRebuild = true;
 		}
 	}
 
@@ -555,25 +562,16 @@ public class CollectionLogHelperPlugin extends Plugin
 			String itemName = matcher.group(1);
 			log.debug("New collection log item: {}", itemName);
 
-			// Find the item in the database and mark it obtained
-			for (CollectionLogSource source : database.getAllSources())
+			// O(1) lookup by name instead of scanning all sources × items
+			CollectionLogItem item = database.getItemByName(itemName);
+			if (item != null)
 			{
-				for (CollectionLogItem item : source.getItems())
-				{
-					if (item.getName().equalsIgnoreCase(itemName))
-					{
-						collectionState.markItemObtained(item.getItemId());
-						guidanceSequencer.onItemObtained(item.getItemId());
-						log.debug("Marked item {} (ID: {}) as obtained", itemName, item.getItemId());
-						break;
-					}
-				}
+				collectionState.markItemObtained(item.getItemId());
+				guidanceSequencer.onItemObtained(item.getItemId());
+				log.debug("Marked item {} (ID: {}) as obtained", itemName, item.getItemId());
 			}
 
-			if (panel != null)
-			{
-				panel.rebuild();
-			}
+			pendingPanelRebuild = true;
 		}
 	}
 
@@ -731,9 +729,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			pendingRequirementsRefresh = false;
 			boolean reqsChanged = requirementsChecker.refreshAccessibility(database.getAllSources());
-			if (reqsChanged && panel != null && !scriptScanActive)
+			if (reqsChanged && !scriptScanActive)
 			{
-				panel.rebuild();
+				pendingPanelRebuild = true;
 			}
 		}
 
@@ -766,8 +764,8 @@ public class CollectionLogHelperPlugin extends Plugin
 				panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
 					collectionState.getTotalObtained());
 				panel.updateDataSyncWarning();
-				panel.rebuild();
 			}
+			pendingPanelRebuild = true;
 
 			guidanceOverlay.setShowCollectionLogReminder(false);
 			guidanceOverlay.setShowBankReminder(false);
@@ -812,7 +810,7 @@ public class CollectionLogHelperPlugin extends Plugin
 					|| current.distanceTo2D(lastProximityLocation) >= PROXIMITY_REFRESH_TILES)
 				{
 					lastProximityLocation = current;
-					panel.rebuild();
+					pendingPanelRebuild = true;
 				}
 			}
 		}
@@ -824,10 +822,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			slayerRefreshPending = false;
 			slayerTaskState.refresh();
-			if (panel != null)
-			{
-				panel.rebuild();
-			}
+			pendingPanelRebuild = true;
 		}
 
 		// One-time check: warn if in-game collection log notification is disabled.
@@ -874,8 +869,8 @@ public class CollectionLogHelperPlugin extends Plugin
 					panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
 						collectionState.getTotalObtained());
 					panel.updateDataSyncWarning();
-					panel.rebuild();
 				}
+				pendingPanelRebuild = true;
 				exportEfficiencyIfEnabled();
 			}
 		}
@@ -924,6 +919,14 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		// World map arrow rotation
 		updateWorldMapArrow();
+
+		// Single coalesced rebuild per tick — all event handlers and checks above
+		// set pendingPanelRebuild instead of calling panel.rebuild() directly.
+		if (pendingPanelRebuild && panel != null)
+		{
+			pendingPanelRebuild = false;
+			panel.rebuild();
+		}
 	}
 
 	private void exportEfficiencyIfEnabled()
@@ -1311,19 +1314,15 @@ public class CollectionLogHelperPlugin extends Plugin
 			? guidanceSequencer.getActiveSource().getName() : "unknown";
 		deactivateGuidance();
 
-		if (config.autoAdvanceGuidance() && panel != null)
+		pendingPanelRebuild = true;
+		if (config.autoAdvanceGuidance())
 		{
-			panel.rebuild();
 			// Auto-activate guidance for the next top efficiency pick
 			List<ScoredItem> ranked = calculator.rankByEfficiency();
 			ranked.stream()
 				.filter(s -> !s.isLocked())
 				.findFirst()
 				.ifPresent(topPick -> activateGuidance(topPick.getSource()));
-		}
-		else if (panel != null)
-		{
-			panel.rebuild();
 		}
 	}
 
@@ -1658,6 +1657,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onItemSpawned(ItemSpawned event)
 	{
+		groundItemHighlightOverlay.onItemSpawned(event.getItem(), event.getTile());
+
 		if (!config.guidanceAuthoring())
 		{
 			return;
@@ -1671,6 +1672,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onItemDespawned(ItemDespawned event)
 	{
+		groundItemHighlightOverlay.onItemDespawned(event.getItem());
+
 		if (!config.guidanceAuthoring())
 		{
 			return;
@@ -1683,6 +1686,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onGameObjectSpawned(GameObjectSpawned event)
 	{
+		objectHighlightOverlay.onObjectSpawned(event.getGameObject());
+
 		if (!config.guidanceAuthoring())
 		{
 			return;
@@ -1695,6 +1700,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onGameObjectDespawned(GameObjectDespawned event)
 	{
+		objectHighlightOverlay.onObjectDespawned(event.getGameObject());
+
 		if (!config.guidanceAuthoring())
 		{
 			return;
