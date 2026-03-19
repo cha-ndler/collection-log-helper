@@ -96,9 +96,37 @@ public class EfficiencyCalculator
 
 	public List<ScoredItem> filterByCategory(CollectionLogCategory category)
 	{
-		return rankByEfficiency().stream()
-			.filter(s -> s.getSource().getCategory() == category)
-			.collect(Collectors.toList());
+		List<ScoredItem> results = new ArrayList<>();
+		boolean hideLocked = config.hideLockedContent();
+		int afkMinLevel = config.afkFilter().getMinAfkLevel();
+
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			if (source.getCategory() != category)
+			{
+				continue;
+			}
+			boolean locked = !requirementsChecker.isAccessible(source.getName());
+			if (hideLocked && locked)
+			{
+				continue;
+			}
+			if (afkMinLevel > 0 && source.getAfkLevel() < afkMinLevel)
+			{
+				continue;
+			}
+
+			ScoredItem scored = applySlayerBoost(scoreSource(source, locked));
+			if (scored != null)
+			{
+				results.add(scored);
+			}
+		}
+
+		results.sort(Comparator
+			.comparing(ScoredItem::isLocked)
+			.thenComparing(Comparator.comparingDouble(ScoredItem::getScore).reversed()));
+		return results;
 	}
 
 	public List<ScoredItem> filterPetsOnly()

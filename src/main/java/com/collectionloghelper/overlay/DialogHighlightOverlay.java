@@ -44,7 +44,7 @@ public class DialogHighlightOverlay extends Overlay
 	private final Client client;
 	private final CollectionLogHelperConfig config;
 
-	private volatile List<String> targetDialogOptions = new ArrayList<>();
+	private volatile List<String> targetDialogOptionsLower = new ArrayList<>();
 	private volatile boolean guidanceActive;
 
 	@Inject
@@ -68,7 +68,7 @@ public class DialogHighlightOverlay extends Overlay
 		Color highlightColor = config.overlayColor();
 
 		// Highlight matching dialog options in the multi-option dialog
-		if (!targetDialogOptions.isEmpty())
+		if (!targetDialogOptionsLower.isEmpty())
 		{
 			renderDialogOptionHighlights(graphics, highlightColor);
 		}
@@ -93,6 +93,7 @@ public class DialogHighlightOverlay extends Overlay
 			return;
 		}
 
+		List<String> targets = targetDialogOptionsLower;
 		for (Widget option : children)
 		{
 			if (option == null || option.getText() == null)
@@ -101,9 +102,17 @@ public class DialogHighlightOverlay extends Overlay
 			}
 
 			String optionText = option.getText();
-			for (String target : targetDialogOptions)
+			// Skip if already highlighted (arrow prepended on a previous frame)
+			if (optionText.startsWith(ARROW_INDICATOR))
 			{
-				if (optionText.toLowerCase().contains(target.toLowerCase()))
+				renderWidgetHighlight(graphics, option, highlightColor);
+				continue;
+			}
+
+			String optionLower = optionText.toLowerCase();
+			for (String target : targets)
+			{
+				if (optionLower.contains(target))
 				{
 					renderWidgetHighlight(graphics, option, highlightColor);
 					option.setText(ARROW_INDICATOR + optionText);
@@ -123,7 +132,7 @@ public class DialogHighlightOverlay extends Overlay
 		}
 
 		String text = continueWidget.getText();
-		if (text != null && text.toLowerCase().contains("click here to continue"))
+		if (text != null && text.contains("Click here to continue"))
 		{
 			renderWidgetHighlight(graphics, continueWidget, highlightColor);
 			continueWidget.setTextColor(highlightColor.getRGB() & 0xFFFFFF);
@@ -166,7 +175,19 @@ public class DialogHighlightOverlay extends Overlay
 
 	public void setTargetDialogOptions(List<String> options)
 	{
-		this.targetDialogOptions = options != null ? options : new ArrayList<>();
+		if (options == null || options.isEmpty())
+		{
+			this.targetDialogOptionsLower = new ArrayList<>();
+		}
+		else
+		{
+			List<String> lower = new ArrayList<>(options.size());
+			for (String opt : options)
+			{
+				lower.add(opt.toLowerCase());
+			}
+			this.targetDialogOptionsLower = lower;
+		}
 	}
 
 	public void setGuidanceActive(boolean active)
@@ -176,7 +197,7 @@ public class DialogHighlightOverlay extends Overlay
 
 	public void clear()
 	{
-		targetDialogOptions = new ArrayList<>();
+		targetDialogOptionsLower = new ArrayList<>();
 		guidanceActive = false;
 	}
 }
