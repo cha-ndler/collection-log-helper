@@ -35,6 +35,12 @@ public class GuidanceOverlay extends OverlayPanel
 	private static final int ARROW_HEIGHT = 14;
 	private static final int ARROW_WIDTH = 12;
 	private static final int ARROW_GAP = 5;
+	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
+	private static final Font BOLD_12 = new Font(Font.DIALOG, Font.BOLD, 12);
+	private static final Color TITLE_COLOR = new Color(255, 200, 0);
+	private static final Color TRAVEL_COLOR = new Color(100, 200, 255);
+	private static final Color ACTION_COLOR = new Color(100, 255, 100);
+	private static final Color REMINDER_COLOR = new Color(255, 170, 0);
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
@@ -116,7 +122,7 @@ public class GuidanceOverlay extends OverlayPanel
 				panelComponent.getChildren().clear();
 				panelComponent.getChildren().add(TitleComponent.builder()
 					.text(name)
-					.color(new Color(255, 200, 0))
+					.color(TITLE_COLOR)
 					.build());
 				String loc = locDesc != null ? locDesc : "";
 				if (!loc.isEmpty())
@@ -130,14 +136,14 @@ public class GuidanceOverlay extends OverlayPanel
 				{
 					panelComponent.getChildren().add(LineComponent.builder()
 						.left("Travel: " + travel)
-						.leftColor(new Color(100, 200, 255))
+						.leftColor(TRAVEL_COLOR)
 						.build());
 				}
 				if (action != null && !action.isEmpty())
 				{
 					panelComponent.getChildren().add(LineComponent.builder()
 						.left(action)
-						.leftColor(new Color(100, 255, 100))
+						.leftColor(ACTION_COLOR)
 						.build());
 				}
 				addSyncRemindersIfNeeded(logReminder, bankReminder);
@@ -186,7 +192,7 @@ public class GuidanceOverlay extends OverlayPanel
 			Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
 				overlayColor.getBlue(), 50);
 			OverlayUtil.renderPolygon(graphics, poly, overlayColor, fillColor,
-				new BasicStroke(2.0f));
+				STROKE_2);
 
 			if (name != null)
 			{
@@ -214,7 +220,7 @@ public class GuidanceOverlay extends OverlayPanel
 			graphics.setColor(fillColor);
 			graphics.fill(hull);
 			graphics.setColor(overlayColor);
-			graphics.setStroke(new BasicStroke(2.0f));
+			graphics.setStroke(STROKE_2);
 			graphics.draw(hull);
 
 			// Draw downward-pointing arrow above the NPC hull
@@ -270,7 +276,7 @@ public class GuidanceOverlay extends OverlayPanel
 
 		// Black outline
 		graphics.setColor(Color.BLACK);
-		graphics.setStroke(new BasicStroke(2.0f));
+		graphics.setStroke(STROKE_2);
 		graphics.drawPolygon(arrow);
 
 		// Colored fill
@@ -285,8 +291,7 @@ public class GuidanceOverlay extends OverlayPanel
 	{
 		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		Font font = graphics.getFont().deriveFont(Font.BOLD, 12f);
-		graphics.setFont(font);
+		graphics.setFont(BOLD_12);
 		FontMetrics fm = graphics.getFontMetrics();
 		int x = point.getX() - fm.stringWidth(text) / 2;
 		int y = point.getY();
@@ -371,14 +376,14 @@ public class GuidanceOverlay extends OverlayPanel
 		{
 			panelComponent.getChildren().add(TitleComponent.builder()
 				.text("Open Collection Log to sync")
-				.color(new Color(255, 170, 0))
+				.color(REMINDER_COLOR)
 				.build());
 		}
 		if (bankReminder)
 		{
 			panelComponent.getChildren().add(TitleComponent.builder()
 				.text("Open Bank to scan items")
-				.color(new Color(255, 170, 0))
+				.color(REMINDER_COLOR)
 				.build());
 		}
 	}
