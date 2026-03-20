@@ -550,6 +550,8 @@ public class GuidanceSequencer
 			null,  // groundItemIds
 			null,  // completionChatPattern
 			false,  // useItemOnObject
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
 			0, 0   // loopBackToStep, loopCount
 		);
 	}
