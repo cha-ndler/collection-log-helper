@@ -26,6 +26,7 @@ import net.runelite.api.Tile;
 import net.runelite.api.TileObject;
 import net.runelite.api.WallObject;
 import net.runelite.api.coords.LocalPoint;
+import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
@@ -53,6 +54,9 @@ public class ObjectHighlightOverlay extends Overlay
 	private volatile String objectInteractAction;
 	private volatile boolean useItemOnObject;
 	private volatile String tooltipText;
+	private volatile WorldPoint filterTile;
+	private volatile int filterMaxDistance;
+	private volatile List<WorldPoint> filterTiles;
 
 	/**
 	 * Cached list of scene objects matching targetObjectIds.
@@ -98,12 +102,43 @@ public class ObjectHighlightOverlay extends Overlay
 		this.tooltipText = text;
 	}
 
+	/**
+	 * Sets an optional tile-distance filter. When filterTile is non-null and maxDistance > 0,
+	 * only objects within maxDistance tiles of filterTile are highlighted.
+	 * Must be called BEFORE setTargetObjectIds so the filter is active during rescan.
+	 */
+	public void setObjectFilter(WorldPoint tile, int maxDistance)
+	{
+		this.filterTile = tile;
+		this.filterMaxDistance = maxDistance;
+		this.filterTiles = null;
+	}
+
+	/**
+	 * Sets an exact-tile filter. Only objects whose world location matches one of the
+	 * given tiles are highlighted. Overrides the distance-based filter.
+	 * Must be called BEFORE setTargetObjectIds so the filter is active during rescan.
+	 */
+	public void setObjectFilterTiles(List<WorldPoint> tiles)
+	{
+		this.filterTiles = tiles;
+		if (tiles != null && !tiles.isEmpty())
+		{
+			// Clear distance filter when using exact tiles
+			this.filterTile = null;
+			this.filterMaxDistance = 0;
+		}
+	}
+
 	public void clearTarget()
 	{
 		this.targetObjectIds = Collections.emptySet();
 		this.objectInteractAction = null;
 		this.useItemOnObject = false;
 		this.tooltipText = null;
+		this.filterTile = null;
+		this.filterMaxDistance = 0;
+		this.filterTiles = null;
 		this.matchedObjects = Collections.emptyList();
 	}
 
@@ -115,6 +150,10 @@ public class ObjectHighlightOverlay extends Overlay
 	{
 		Set<Integer> ids = targetObjectIds;
 		if (ids.isEmpty() || obj == null || !ids.contains(obj.getId()))
+		{
+			return;
+		}
+		if (!passesTileFilter(obj))
 		{
 			return;
 		}
@@ -189,19 +228,19 @@ public class ObjectHighlightOverlay extends Overlay
 				{
 					for (GameObject go : gameObjects)
 					{
-						if (go != null && ids.contains(go.getId()))
+						if (go != null && ids.contains(go.getId()) && passesTileFilter(go))
 						{
 							found.add(go);
 						}
 					}
 				}
 				WallObject wo = tile.getWallObject();
-				if (wo != null && ids.contains(wo.getId()))
+				if (wo != null && ids.contains(wo.getId()) && passesTileFilter(wo))
 				{
 					found.add(wo);
 				}
 				DecorativeObject deco = tile.getDecorativeObject();
-				if (deco != null && ids.contains(deco.getId()))
+				if (deco != null && ids.contains(deco.getId()) && passesTileFilter(deco))
 				{
 					found.add(deco);
 				}
@@ -238,6 +277,42 @@ public class ObjectHighlightOverlay extends Overlay
 		}
 
 		return null;
+	}
+
+	private boolean passesTileFilter(TileObject obj)
+	{
+		// Exact tile filter takes priority
+		List<WorldPoint> exactTiles = filterTiles;
+		if (exactTiles != null && !exactTiles.isEmpty())
+		{
+			WorldPoint objWorld = obj.getWorldLocation();
+			if (objWorld == null)
+			{
+				return false;
+			}
+			for (WorldPoint allowed : exactTiles)
+			{
+				if (objWorld.distanceTo2D(allowed) <= 1 && objWorld.getPlane() == allowed.getPlane())
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		// Distance-based filter
+		WorldPoint tile = filterTile;
+		int maxDist = filterMaxDistance;
+		if (tile == null || maxDist <= 0)
+		{
+			return true;
+		}
+		WorldPoint objWorld = obj.getWorldLocation();
+		if (objWorld == null)
+		{
+			return false;
+		}
+		return objWorld.distanceTo2D(tile) <= maxDist;
 	}
 
 	private static Shape getHull(TileObject obj)

@@ -1121,6 +1121,29 @@ public class CollectionLogHelperPlugin extends Plugin
 					null));
 		}
 
+		// Set tile filter before target IDs so it's active during rescan
+		if (step.getObjectFilterTiles() != null && !step.getObjectFilterTiles().isEmpty())
+		{
+			List<WorldPoint> tiles = new java.util.ArrayList<>();
+			for (int[] t : step.getObjectFilterTiles())
+			{
+				if (t != null && t.length >= 3)
+				{
+					tiles.add(new WorldPoint(t[0], t[1], t[2]));
+				}
+			}
+			objectHighlightOverlay.setObjectFilterTiles(tiles);
+		}
+		else if (step.getObjectMaxDistance() > 0 && step.getWorldX() > 0)
+		{
+			objectHighlightOverlay.setObjectFilter(
+				new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane()),
+				step.getObjectMaxDistance());
+		}
+		else
+		{
+			objectHighlightOverlay.setObjectFilter(null, 0);
+		}
 		objectHighlightOverlay.setTargetObjectIds(step.getAllObjectIds());
 		objectHighlightOverlay.setObjectInteractAction(step.getObjectInteractAction());
 		objectHighlightOverlay.setUseItemOnObject(step.isUseItemOnObject());
