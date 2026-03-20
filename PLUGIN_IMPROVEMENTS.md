@@ -1,6 +1,6 @@
 # Collection Log Helper — Plugin Improvement Analysis
 
-> Captured from live RuneLite session on March 18, 2026 (Hanadji @ Trouble Brewing, 700/1699 slots)
+> Captured from live RuneLite session (Trouble Brewing, 700/1699 slots)
 
 ---
 
