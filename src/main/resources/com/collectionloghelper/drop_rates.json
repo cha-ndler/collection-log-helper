@@ -11771,6 +11771,10 @@
           1929
         ],
         "useItemOnObject": true,
+        "objectFilterTiles": [
+          [3811, 3000, 2],
+          [3822, 2951, 2]
+        ],
         "completionChatPattern": null,
         "loopBackToStep": 0,
         "loopCount": 0
@@ -11801,7 +11805,7 @@
         "useItemOnObject": false,
         "completionChatPattern": null,
         "loopBackToStep": 4,
-        "loopCount": 4
+        "loopCount": 3
       },
       {
         "description": "AFK until the game ends, then spend Pieces of Eight on rewards",
