@@ -76,6 +76,21 @@ public class GuidanceStep
 	/** When true, overlays show "Use X on Y" style prompts instead of simple action labels. */
 	boolean useItemOnObject;
 
+	/**
+	 * Max tile distance from worldX/worldY to highlight objects (0 = no filter).
+	 * When set, only objects within this radius of the step's coordinates are highlighted.
+	 * Useful when multiple instances of the same object ID exist but only one is correct
+	 * (e.g., Trouble Brewing hoppers).
+	 */
+	int objectMaxDistance;
+
+	/**
+	 * Specific tile coordinates where objects should be highlighted.
+	 * Each entry is [x, y, plane]. When non-null, only objects at one of these
+	 * tiles are highlighted, overriding objectMaxDistance.
+	 */
+	List<int[]> objectFilterTiles;
+
 	/** 1-indexed step number to loop back to when this step completes (0 = no loop). */
 	int loopBackToStep;
 

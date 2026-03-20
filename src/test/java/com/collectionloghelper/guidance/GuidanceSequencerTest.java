@@ -69,6 +69,8 @@ public class GuidanceSequencerTest
 			null, null,     // highlightItemIds, groundItemIds
 			null,           // completionChatPattern
 			false,          // useItemOnObject
+			0,              // objectMaxDistance
+			null,           // objectFilterTiles
 			0, 0            // loopBackToStep, loopCount
 		);
 	}
@@ -87,6 +89,8 @@ public class GuidanceSequencerTest
 			null, null,
 			null,
 			false,
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
 			0, 0
 		);
 	}
@@ -105,6 +109,8 @@ public class GuidanceSequencerTest
 			null, null,
 			null,
 			false,
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
 			0, 0
 		);
 	}
@@ -123,6 +129,8 @@ public class GuidanceSequencerTest
 			null, null,
 			null,
 			false,
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
 			0, 0
 		);
 	}
@@ -141,6 +149,8 @@ public class GuidanceSequencerTest
 			null, null,
 			null,
 			false,
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
 			0, 0
 		);
 	}
@@ -159,6 +169,8 @@ public class GuidanceSequencerTest
 			null, null,
 			null,
 			false,
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
 			0, 0
 		);
 	}
@@ -177,6 +189,8 @@ public class GuidanceSequencerTest
 			null, null,
 			pattern,
 			false,
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
 			0, 0
 		);
 	}
@@ -196,6 +210,8 @@ public class GuidanceSequencerTest
 			null, null,
 			null,
 			false,
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
 			loopBackToStep, loopCount
 		);
 	}
@@ -214,6 +230,8 @@ public class GuidanceSequencerTest
 			null, null,
 			null,
 			false,
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
 			0, 0
 		);
 	}
@@ -232,6 +250,8 @@ public class GuidanceSequencerTest
 			null, null,
 			null,
 			false,
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
 			0, 0
 		);
 	}
