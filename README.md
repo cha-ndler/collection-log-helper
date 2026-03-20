@@ -106,7 +106,6 @@ Requires Java 11+. Uses RuneLite client API (latest release), Lombok, and JUnit 
 We're actively expanding toward full collection log coverage. See:
 
 - [**CONTRIBUTING.md**](CONTRIBUTING.md) — JSON schema reference, how to find data, PR process
-- [**ITEMS_TRACKER.md**](ITEMS_TRACKER.md) — Full coverage breakdown with claimable issues by priority
 
 ## Acknowledgments
 
