@@ -1868,7 +1868,7 @@
       {
         "itemId": 24491,
         "name": "Little nightmare",
-        "dropRate": 0.00125,
+        "dropRate": 0.00025,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Little_nightmare",
@@ -5545,7 +5545,7 @@
       {
         "itemId": 20704,
         "name": "Pyromancer garb",
-        "dropRate": 0.006667,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_garb"
@@ -5553,7 +5553,7 @@
       {
         "itemId": 20708,
         "name": "Pyromancer hood",
-        "dropRate": 0.006667,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_hood",
@@ -5562,7 +5562,7 @@
       {
         "itemId": 20706,
         "name": "Pyromancer robe",
-        "dropRate": 0.006667,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_robe",
@@ -5571,7 +5571,7 @@
       {
         "itemId": 20710,
         "name": "Pyromancer boots",
-        "dropRate": 0.006667,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_boots",
@@ -15405,11 +15405,11 @@
       },
       {
         "itemId": 6568,
-        "name": "Tzhaar-ket-em",
+        "name": "Obsidian cape",
         "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Tzhaar-ket-em"
+        "wikiPage": "Obsidian_cape"
       },
       {
         "itemId": 6526,
