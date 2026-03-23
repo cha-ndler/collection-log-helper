@@ -10266,7 +10266,7 @@
       {
         "itemId": 5554,
         "name": "Rogue mask",
-        "dropRate": 0.3333,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_mask",
@@ -10275,7 +10275,7 @@
       {
         "itemId": 5553,
         "name": "Rogue top",
-        "dropRate": 0.3333,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_top",
@@ -10284,7 +10284,7 @@
       {
         "itemId": 5555,
         "name": "Rogue trousers",
-        "dropRate": 0.3333,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_trousers",
@@ -10293,7 +10293,7 @@
       {
         "itemId": 5556,
         "name": "Rogue gloves",
-        "dropRate": 0.3333,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_gloves",
@@ -10302,7 +10302,7 @@
       {
         "itemId": 5557,
         "name": "Rogue boots",
-        "dropRate": 0.3333,
+        "dropRate": 0.625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Rogue_boots",
@@ -10988,7 +10988,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(1)",
-        "milestoneKills": 10
+        "milestoneKills": 1
       },
       {
         "itemId": 24209,
@@ -10997,7 +10997,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(10)",
-        "milestoneKills": 100,
+        "milestoneKills": 10,
         "requiresPrevious": true
       },
       {
@@ -11007,7 +11007,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(50)",
-        "milestoneKills": 500,
+        "milestoneKills": 50,
         "requiresPrevious": true
       },
       {
@@ -11017,7 +11017,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(100)",
-        "milestoneKills": 1000,
+        "milestoneKills": 100,
         "requiresPrevious": true
       },
       {
@@ -11027,7 +11027,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(500)",
-        "milestoneKills": 5000,
+        "milestoneKills": 500,
         "requiresPrevious": true
       },
       {
@@ -11037,7 +11037,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Victor%27s_cape_(1000)",
-        "milestoneKills": 10000,
+        "milestoneKills": 1000,
         "requiresPrevious": true
       },
       {
@@ -16284,7 +16284,7 @@
       {
         "itemId": 25617,
         "name": "Tea flask",
-        "dropRate": 0.142857,
+        "dropRate": 0.1,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tea_flask"
