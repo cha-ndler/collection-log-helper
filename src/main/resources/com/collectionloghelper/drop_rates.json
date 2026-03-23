@@ -6138,7 +6138,7 @@
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Tormented_synapse"
+        "wikiPage": "Burning_claw"
       },
       {
         "itemId": 29580,
@@ -6146,7 +6146,7 @@
         "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Burning_claw"
+        "wikiPage": "Tormented_synapse"
       },
       {
         "itemId": 29684,
@@ -22577,7 +22577,7 @@
       {
         "itemId": 13320,
         "name": "Heron",
-        "dropRate": 7.91e-06,
+        "dropRate": 3.92e-06,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Heron"
