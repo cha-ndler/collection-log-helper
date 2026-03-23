@@ -951,7 +951,7 @@
     "name": "Corporeal Beast",
     "category": "BOSSES",
     "worldX": 2966,
-    "worldY": 3380,
+    "worldY": 4382,
     "worldPlane": 0,
     "killTimeSeconds": 72,
     "ironKillTimeSeconds": 600,
@@ -1023,7 +1023,7 @@
       {
         "description": "Travel to Games necklace cave, level 21 Wilderness and attack Corporeal Beast.",
         "worldX": 2966,
-        "worldY": 3380,
+        "worldY": 4382,
         "worldPlane": 0,
         "npcId": 319,
         "interactAction": "Attack",
@@ -1117,8 +1117,8 @@
   {
     "name": "Phantom Muspah",
     "category": "BOSSES",
-    "worldX": 2878,
-    "worldY": 3596,
+    "worldX": 2846,
+    "worldY": 3940,
     "worldPlane": 0,
     "killTimeSeconds": 138,
     "ironKillTimeSeconds": 144,
@@ -1181,15 +1181,15 @@
       }
     ],
     "locationDescription": "Ancient Prison entrance, Weiss",
-    "travelTip": "Fairy ring DKS -> Weiss",
+    "travelTip": "Icy basalt teleport -> Weiss, or Ring of shadows",
     "mutuallyExclusive": true,
     "npcId": 12077,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
         "description": "Travel to the Ancient Prison and kill the Phantom Muspah.",
-        "worldX": 2878,
-        "worldY": 3596,
+        "worldX": 2846,
+        "worldY": 3940,
         "worldPlane": 0,
         "worldMessage": "Travel to the Ancient Prison near Weiss and attack the Phantom Muspah.",
         "npcId": 12077,
@@ -1201,8 +1201,8 @@
   {
     "name": "Duke Sucellus",
     "category": "BOSSES",
-    "worldX": 2586,
-    "worldY": 3091,
+    "worldX": 2846,
+    "worldY": 3938,
     "worldPlane": 0,
     "killTimeSeconds": 129,
     "requirements": {
@@ -1293,8 +1293,8 @@
         "wikiPage": "Awakener%27s_orb"
       }
     ],
-    "locationDescription": "Duke Sucellus' lair, beneath the Wizards' Tower",
-    "travelTip": "Quetzal whistle -> Cam Torum",
+    "locationDescription": "Ghorrock Prison, accessed via Weiss",
+    "travelTip": "Icy basalt -> Weiss, or Ring of shadows -> Ghorrock",
     "mutuallyExclusive": true,
     "mutuallyExclusiveSources": [
       "The Leviathan",
@@ -1305,9 +1305,9 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Duke Sucellus' lair, beneath the Wizards' Tower and attack Duke Sucellus.",
-        "worldX": 2586,
-        "worldY": 3091,
+        "description": "Travel to Ghorrock Prison via Weiss and attack Duke Sucellus.",
+        "worldX": 2846,
+        "worldY": 3938,
         "worldPlane": 0,
         "npcId": 12191,
         "interactAction": "Attack",
@@ -1319,8 +1319,8 @@
   {
     "name": "The Leviathan",
     "category": "BOSSES",
-    "worldX": 3231,
-    "worldY": 2894,
+    "worldX": 3104,
+    "worldY": 3162,
     "worldPlane": 0,
     "killTimeSeconds": 138,
     "ironKillTimeSeconds": 150,
@@ -1412,8 +1412,8 @@
         "wikiPage": "Awakener%27s_orb"
       }
     ],
-    "locationDescription": "Catacombs entrance, Kourend",
-    "travelTip": "Xeric's talisman -> Heart",
+    "locationDescription": "The Scar, accessed via Temple of the Eye beneath Wizards' Tower",
+    "travelTip": "Ring of shadows -> The Scar, or Fairy ring DIS -> Wizards' Tower",
     "mutuallyExclusive": true,
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
@@ -1424,9 +1424,9 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Catacombs entrance, Kourend and attack The Leviathan.",
-        "worldX": 3231,
-        "worldY": 2894,
+        "description": "Travel to the Temple of the Eye beneath the Wizards' Tower and attack The Leviathan.",
+        "worldX": 3104,
+        "worldY": 3162,
         "worldPlane": 0,
         "npcId": 12214,
         "interactAction": "Attack",
@@ -1554,8 +1554,8 @@
   {
     "name": "Vardorvis",
     "category": "BOSSES",
-    "worldX": 1131,
-    "worldY": 3484,
+    "worldX": 1175,
+    "worldY": 3424,
     "worldPlane": 0,
     "killTimeSeconds": 97,
     "ironKillTimeSeconds": 109,
@@ -1647,8 +1647,8 @@
         "wikiPage": "Awakener%27s_orb"
       }
     ],
-    "locationDescription": "The Stranglewood, west of Slepe",
-    "travelTip": "Slepe teleport (Drakan's)",
+    "locationDescription": "The Stranglewood, south of Mount Quidamortem",
+    "travelTip": "Ring of shadows -> Stranglewood, or Fairy ring BLS -> rowboat",
     "mutuallyExclusive": true,
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
@@ -1659,9 +1659,9 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to The Stranglewood, west of Slepe and attack Vardorvis.",
-        "worldX": 1131,
-        "worldY": 3484,
+        "description": "Travel to The Stranglewood and attack Vardorvis.",
+        "worldX": 1175,
+        "worldY": 3424,
         "worldPlane": 0,
         "npcId": 12223,
         "interactAction": "Attack",
@@ -2184,7 +2184,7 @@
     "name": "Bryophyta",
     "category": "BOSSES",
     "worldX": 3174,
-    "worldY": 9899,
+    "worldY": 3435,
     "worldPlane": 0,
     "killTimeSeconds": 514,
     "afkLevel": 1,
@@ -2205,8 +2205,8 @@
     "guidanceSteps": [
       {
         "description": "Get a Mossy key from moss giants",
-        "worldX": 3170,
-        "worldY": 9899,
+        "worldX": 3174,
+        "worldY": 3435,
         "worldPlane": 0,
         "travelTip": "Varrock teleport -> sewers",
         "completionCondition": "INVENTORY_HAS_ITEM",
@@ -2215,7 +2215,7 @@
       {
         "description": "Enter Bryophyta's lair and kill her",
         "worldX": 3174,
-        "worldY": 9899,
+        "worldY": 3435,
         "worldPlane": 0,
         "npcId": 8195,
         "interactAction": "Attack",
@@ -2227,8 +2227,8 @@
   {
     "name": "Obor",
     "category": "BOSSES",
-    "worldX": 3095,
-    "worldY": 9832,
+    "worldX": 3097,
+    "worldY": 3468,
     "worldPlane": 0,
     "killTimeSeconds": 450,
     "afkLevel": 1,
@@ -2249,8 +2249,8 @@
     "guidanceSteps": [
       {
         "description": "Get a Giant key from hill giants",
-        "worldX": 3117,
-        "worldY": 9856,
+        "worldX": 3097,
+        "worldY": 3468,
         "worldPlane": 0,
         "travelTip": "Edgeville respawn/glory -> dungeon",
         "completionCondition": "INVENTORY_HAS_ITEM",
@@ -2258,8 +2258,8 @@
       },
       {
         "description": "Enter Obor's lair and kill him",
-        "worldX": 3095,
-        "worldY": 9832,
+        "worldX": 3097,
+        "worldY": 3468,
         "worldPlane": 0,
         "npcId": 7416,
         "interactAction": "Attack",
@@ -2558,8 +2558,8 @@
   {
     "name": "Thermonuclear smoke devil",
     "category": "BOSSES",
-    "worldX": 2379,
-    "worldY": 9452,
+    "worldX": 2404,
+    "worldY": 3060,
     "worldPlane": 0,
     "killTimeSeconds": 24,
     "ironKillTimeSeconds": 36,
@@ -2622,8 +2622,8 @@
     "guidanceSteps": [
       {
         "description": "Travel to the Smoke Devil Dungeon and kill the Thermonuclear smoke devil.",
-        "worldX": 2379,
-        "worldY": 9452,
+        "worldX": 2404,
+        "worldY": 3060,
         "worldPlane": 0,
         "worldMessage": "Travel to the Smoke Devil Dungeon south of Castle Wars and attack the Thermonuclear smoke devil.",
         "npcId": 499,
@@ -2996,7 +2996,7 @@
       {
         "itemId": 27670,
         "name": "Fangs of Venenatis",
-        "dropRate": 0.001618,
+        "dropRate": 0.005102,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Fangs_of_Venenatis"
@@ -3004,7 +3004,7 @@
       {
         "itemId": 27687,
         "name": "Voidwaker gem",
-        "dropRate": 0.001096,
+        "dropRate": 0.002778,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Voidwaker_gem"
@@ -3020,7 +3020,7 @@
       {
         "itemId": 11920,
         "name": "Dragon pickaxe",
-        "dropRate": 0.005848,
+        "dropRate": 0.003906,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_pickaxe"
@@ -3028,7 +3028,7 @@
       {
         "itemId": 13177,
         "name": "Venenatis spiderling",
-        "dropRate": 0.0005,
+        "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Venenatis_spiderling",
@@ -3079,7 +3079,7 @@
       {
         "itemId": 27673,
         "name": "Skull of Vet'ion",
-        "dropRate": 0.001618,
+        "dropRate": 0.005102,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Skull_of_Vet%27ion"
@@ -3087,7 +3087,7 @@
       {
         "itemId": 27684,
         "name": "Voidwaker blade",
-        "dropRate": 0.001096,
+        "dropRate": 0.002778,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Voidwaker_blade"
@@ -3103,7 +3103,7 @@
       {
         "itemId": 11920,
         "name": "Dragon pickaxe",
-        "dropRate": 0.000588,
+        "dropRate": 0.003906,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_pickaxe"
@@ -3111,7 +3111,7 @@
       {
         "itemId": 13179,
         "name": "Vet'ion jr.",
-        "dropRate": 0.0005,
+        "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Vet%27ion_jr.",
@@ -3128,7 +3128,7 @@
       {
         "itemId": 6806,
         "name": "Skeleton champion scroll",
-        "dropRate": 0.002,
+        "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Skeleton_champion_scroll"
@@ -3170,7 +3170,7 @@
       {
         "itemId": 27667,
         "name": "Claws of Callisto",
-        "dropRate": 0.001618,
+        "dropRate": 0.005102,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Claws_of_Callisto"
@@ -3178,7 +3178,7 @@
       {
         "itemId": 27681,
         "name": "Voidwaker hilt",
-        "dropRate": 0.001096,
+        "dropRate": 0.002778,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Voidwaker_hilt"
@@ -3186,7 +3186,7 @@
       {
         "itemId": 12603,
         "name": "Tyrannical ring",
-        "dropRate": 0.001397,
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tyrannical_ring"
@@ -3194,7 +3194,7 @@
       {
         "itemId": 11920,
         "name": "Dragon pickaxe",
-        "dropRate": 0.005848,
+        "dropRate": 0.003906,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_pickaxe"
@@ -3202,7 +3202,7 @@
       {
         "itemId": 13178,
         "name": "Callisto cub",
-        "dropRate": 0.000357,
+        "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Callisto_cub",
@@ -3211,7 +3211,7 @@
       {
         "itemId": 7158,
         "name": "Dragon 2h sword",
-        "dropRate": 0.002793,
+        "dropRate": 0.003906,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_2h_sword"
@@ -3531,7 +3531,7 @@
       {
         "itemId": 13652,
         "name": "Dragon claws",
-        "dropRate": 0.001,
+        "dropRate": 0.001504,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_claws",
@@ -3540,7 +3540,7 @@
       {
         "itemId": 21012,
         "name": "Dragon hunter crossbow",
-        "dropRate": 0.0015,
+        "dropRate": 0.002004,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_hunter_crossbow",
@@ -3549,7 +3549,7 @@
       {
         "itemId": 21000,
         "name": "Twisted buckler",
-        "dropRate": 0.0015,
+        "dropRate": 0.002004,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Twisted_buckler",
@@ -3982,7 +3982,7 @@
       {
         "itemId": 22486,
         "name": "Scythe of vitur",
-        "dropRate": 0.001446,
+        "dropRate": 0.005784,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Scythe_of_vitur",
@@ -3991,7 +3991,7 @@
       {
         "itemId": 22324,
         "name": "Ghrazi rapier",
-        "dropRate": 0.002892,
+        "dropRate": 0.011568,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ghrazi_rapier",
@@ -4000,7 +4000,7 @@
       {
         "itemId": 22481,
         "name": "Sanguinesti staff",
-        "dropRate": 0.002892,
+        "dropRate": 0.011568,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sanguinesti_staff",
@@ -4009,7 +4009,7 @@
       {
         "itemId": 22326,
         "name": "Justiciar faceguard",
-        "dropRate": 0.002892,
+        "dropRate": 0.011568,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Justiciar_faceguard",
@@ -4018,7 +4018,7 @@
       {
         "itemId": 22327,
         "name": "Justiciar chestguard",
-        "dropRate": 0.002892,
+        "dropRate": 0.011568,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Justiciar_chestguard",
@@ -4027,7 +4027,7 @@
       {
         "itemId": 22328,
         "name": "Justiciar legguards",
-        "dropRate": 0.002892,
+        "dropRate": 0.011568,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Justiciar_legguards",
@@ -4036,7 +4036,7 @@
       {
         "itemId": 22477,
         "name": "Avernic defender hilt",
-        "dropRate": 0.011568,
+        "dropRate": 0.046272,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Avernic_defender_hilt",
@@ -5094,7 +5094,7 @@
       {
         "itemId": 4207,
         "name": "Crystal weapon seed",
-        "dropRate": 0.02,
+        "dropRate": 0.008333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Crystal_weapon_seed"
@@ -5102,7 +5102,7 @@
       {
         "itemId": 23956,
         "name": "Crystal armour seed",
-        "dropRate": 0.02,
+        "dropRate": 0.008333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Crystal_armour_seed"
@@ -5369,7 +5369,7 @@
       {
         "itemId": 4740,
         "name": "Bolt rack",
-        "dropRate": 0.0625,
+        "dropRate": 0.603,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bolt_rack"
@@ -5717,7 +5717,7 @@
       {
         "itemId": 28933,
         "name": "Sunfire fanatic helm",
-        "dropRate": 0.015625,
+        "dropRate": 0.0395,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sunfire_fanatic_helm",
@@ -5726,7 +5726,7 @@
       {
         "itemId": 28936,
         "name": "Sunfire fanatic cuirass",
-        "dropRate": 0.015625,
+        "dropRate": 0.0395,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sunfire_fanatic_cuirass",
@@ -5735,7 +5735,7 @@
       {
         "itemId": 28939,
         "name": "Sunfire fanatic chausses",
-        "dropRate": 0.015625,
+        "dropRate": 0.0395,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sunfire_fanatic_chausses",
@@ -5880,7 +5880,7 @@
       {
         "itemId": 29786,
         "name": "Jar of venom",
-        "dropRate": 0.001,
+        "dropRate": 0.000667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Araxyte_head"
@@ -5915,7 +5915,7 @@
         "name": "Noxious pommel",
         "dropRate": 0.005,
         "varbitId": 0,
-        "isPet": true,
+        "isPet": false,
         "wikiPage": "Rax",
         "independent": true,
         "requiresPrevious": true
@@ -8803,7 +8803,7 @@
         "name": "Dark dye",
         "dropRate": 0.0005,
         "varbitId": 0,
-        "isPet": true,
+        "isPet": false,
         "wikiPage": "Giant_squirrel",
         "independent": true
       }
@@ -14410,7 +14410,7 @@
       {
         "itemId": 6571,
         "name": "Uncut onyx",
-        "dropRate": 0.000667,
+        "dropRate": 0.0001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Uncut_onyx"
@@ -15910,7 +15910,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Prospector_legs",
-        "pointCost": 50,
+        "pointCost": 40,
         "independent": true
       },
       {
@@ -15920,7 +15920,7 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Prospector_boots",
-        "pointCost": 30,
+        "pointCost": 40,
         "independent": true
       },
       {
@@ -16534,7 +16534,7 @@
       {
         "itemId": 31088,
         "name": "Avernic treads",
-        "dropRate": 0.01,
+        "dropRate": 0.001852,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Avernic_treads"
@@ -16542,7 +16542,7 @@
       {
         "itemId": 31115,
         "name": "Eye of ayak (uncharged)",
-        "dropRate": 0.01042,
+        "dropRate": 0.001852,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Eye_of_ayak_(uncharged)"
@@ -16550,7 +16550,7 @@
       {
         "itemId": 31109,
         "name": "Mokhaiotl cloth",
-        "dropRate": 0.01087,
+        "dropRate": 0.001852,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mokhaiotl_cloth"
@@ -16558,7 +16558,7 @@
       {
         "itemId": 31099,
         "name": "Mokhaiotl waystone",
-        "dropRate": 0.5,
+        "dropRate": 0.067308,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mokhaiotl_waystone"
@@ -16575,7 +16575,7 @@
       {
         "itemId": 31130,
         "name": "Dom",
-        "dropRate": 0.01235,
+        "dropRate": 0.004,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Dom",
@@ -16730,7 +16730,7 @@
       {
         "itemId": 30088,
         "name": "Huasca seed",
-        "dropRate": 0.00303,
+        "dropRate": 0.0341,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Huasca_seed"
