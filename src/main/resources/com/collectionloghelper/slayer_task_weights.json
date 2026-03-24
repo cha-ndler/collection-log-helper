@@ -45,9 +45,7 @@
         "Waterfiends": { "weight": 2, "minCombat": 75 },
         "Wyrms": { "weight": 8, "minSlayer": 62 },
         "Hydras": { "weight": 10, "minSlayer": 95 },
-        "Iron dragons": { "weight": 5 },
-        "Steel dragons": { "weight": 5 },
-        "Mithril dragons": { "weight": 4 }
+        "Metal dragons": { "weight": 14 }
       }
     },
     "Nieve": {
@@ -83,9 +81,7 @@
         "Kalphite": { "weight": 9, "minCombat": 15 },
         "Kurask": { "weight": 3, "minCombat": 65, "minSlayer": 70 },
         "Lizardmen": { "weight": 8 },
-        "Iron dragons": { "weight": 5 },
-        "Steel dragons": { "weight": 4 },
-        "Mithril dragons": { "weight": 3 },
+        "Metal dragons": { "weight": 12 },
         "Mutated Zygomites": { "weight": 2, "minCombat": 60, "minSlayer": 57 },
         "Nechryael": { "weight": 7, "minCombat": 85, "minSlayer": 80 },
         "Red dragons": { "weight": 5, "minCombat": 68 },
@@ -132,9 +128,7 @@
         "Kurask": { "weight": 3, "minCombat": 65, "minSlayer": 70 },
         "Lesser Nagua": { "weight": 2, "minSlayer": 48 },
         "Lizardmen": { "weight": 8 },
-        "Iron dragons": { "weight": 5 },
-        "Steel dragons": { "weight": 5 },
-        "Mithril dragons": { "weight": 5 },
+        "Metal dragons": { "weight": 15 },
         "Mutated Zygomites": { "weight": 2, "minCombat": 60, "minSlayer": 57 },
         "Nechryael": { "weight": 7, "minCombat": 85, "minSlayer": 80 },
         "Red dragons": { "weight": 5, "minCombat": 68 },
