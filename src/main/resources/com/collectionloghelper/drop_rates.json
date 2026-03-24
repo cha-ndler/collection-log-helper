@@ -9481,7 +9481,7 @@
     "name": "Hallowed Sepulchre",
     "category": "MINIGAMES",
     "worldX": 3654,
-    "worldY": 3887,
+    "worldY": 3387,
     "worldPlane": 0,
     "killTimeSeconds": 480,
     "afkLevel": 1,
@@ -9642,14 +9642,14 @@
       {
         "description": "Travel to Hallowed Sepulchre entrance in Darkmeyer.",
         "worldX": 3654,
-        "worldY": 3887,
+        "worldY": 3387,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
         "description": "Travel to Hallowed Sepulchre entrance in Darkmeyer and train at Hallowed Sepulchre.",
         "worldX": 3654,
-        "worldY": 3887,
+        "worldY": 3387,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -10401,8 +10401,8 @@
   {
     "name": "Shades of Mort'ton",
     "category": "MINIGAMES",
-    "worldX": 3459,
-    "worldY": 3299,
+    "worldX": 3506,
+    "worldY": 3316,
     "worldPlane": 0,
     "killTimeSeconds": 21,
     "afkLevel": 1,
@@ -10533,19 +10533,19 @@
       }
     ],
     "locationDescription": "Shades catacombs beneath Mort'ton",
-    "travelTip": "Barrows teleport -> Mort'ton",
+    "travelTip": "Minigame teleport -> Shades of Mort'ton, or Mort'ton teleport (Arceuus)",
     "guidanceSteps": [
       {
-        "description": "Travel to Shades catacombs beneath Mort'ton.",
-        "worldX": 3459,
-        "worldY": 3299,
+        "description": "Travel to Mort'ton. Use the Shades of Mort'ton minigame teleport or Mort'ton teleport.",
+        "worldX": 3506,
+        "worldY": 3316,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Travel to Shades catacombs beneath Mort'ton and play Shades of Mort'ton.",
-        "worldX": 3459,
-        "worldY": 3299,
+        "description": "Enter the Shades catacombs and burn shades for rewards.",
+        "worldX": 3506,
+        "worldY": 3316,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
