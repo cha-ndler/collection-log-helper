@@ -1,6 +1,7 @@
 package com.collectionloghelper.overlay;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
+import com.collectionloghelper.NpcHighlightStyle;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,6 +25,7 @@ import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.OverlayUtil;
 import net.runelite.client.ui.overlay.components.LineComponent;
 import net.runelite.client.ui.overlay.components.TitleComponent;
+import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import javax.inject.Singleton;
@@ -47,6 +49,9 @@ public class GuidanceOverlay extends OverlayPanel
 
 	@Inject
 	private TooltipManager tooltipManager;
+
+	@Inject
+	private ModelOutlineRenderer modelOutlineRenderer;
 
 	private volatile WorldPoint targetPoint;
 	private volatile String targetName;
@@ -217,18 +222,51 @@ public class GuidanceOverlay extends OverlayPanel
 	private void renderNpcHighlight(Graphics2D graphics, NPC npc, Color overlayColor, String action,
 		String locDesc)
 	{
+		NpcHighlightStyle style = config.npcHighlightStyle();
+
+		switch (style)
+		{
+			case OUTLINE:
+				modelOutlineRenderer.drawOutline(npc, 2, overlayColor, 4);
+				break;
+			case TILE:
+			{
+				LocalPoint tileLocal = npc.getLocalLocation();
+				if (tileLocal != null)
+				{
+					Polygon tilePoly = Perspective.getCanvasTilePoly(client, tileLocal);
+					if (tilePoly != null)
+					{
+						Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
+							overlayColor.getBlue(), 50);
+						OverlayUtil.renderPolygon(graphics, tilePoly, overlayColor, fillColor,
+							STROKE_2);
+					}
+				}
+				break;
+			}
+			case HULL:
+			default:
+			{
+				Shape hull = npc.getConvexHull();
+				if (hull != null)
+				{
+					Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
+						overlayColor.getBlue(), 30);
+					graphics.setColor(fillColor);
+					graphics.fill(hull);
+					graphics.setColor(overlayColor);
+					graphics.setStroke(STROKE_2);
+					graphics.draw(hull);
+				}
+				break;
+			}
+		}
+
+		// Draw downward-pointing arrow above the NPC
 		Shape hull = npc.getConvexHull();
 		if (hull != null)
 		{
-			Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
-				overlayColor.getBlue(), 30);
-			graphics.setColor(fillColor);
-			graphics.fill(hull);
-			graphics.setColor(overlayColor);
-			graphics.setStroke(STROKE_2);
-			graphics.draw(hull);
-
-			// Draw downward-pointing arrow above the NPC hull
 			Rectangle bounds = hull.getBounds();
 			int arrowX = (int) bounds.getCenterX();
 			int arrowTipY = (int) bounds.getMinY() - ARROW_GAP;
