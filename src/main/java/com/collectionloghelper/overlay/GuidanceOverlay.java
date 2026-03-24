@@ -112,8 +112,13 @@ public class GuidanceOverlay extends OverlayPanel
 			return null;
 		}
 
+		// Skip world rendering if player is on a different plane than the target
+		boolean samePlane = client.getLocalPlayer() != null
+			&& client.getLocalPlayer().getWorldLocation().getPlane() == point.getPlane();
+
 		// Tile highlight rendering
-		LocalPoint localPoint = LocalPoint.fromWorld(client.getTopLevelWorldView(), point);
+		LocalPoint localPoint = samePlane
+			? LocalPoint.fromWorld(client.getTopLevelWorldView(), point) : null;
 		if (localPoint == null)
 		{
 			// Target tile is not on screen — show compact direction panel

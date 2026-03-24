@@ -1203,7 +1203,9 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				client.clearHintArrow();
 
-				if (config.showHintArrow())
+				if (config.showHintArrow()
+					&& client.getLocalPlayer() != null
+					&& client.getLocalPlayer().getWorldLocation().getPlane() == worldPoint.getPlane())
 				{
 					client.setHintArrow(worldPoint);
 				}
@@ -1259,7 +1261,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			client.clearHintArrow();
 
-			if (config.showHintArrow())
+			if (config.showHintArrow()
+				&& client.getLocalPlayer() != null
+				&& client.getLocalPlayer().getWorldLocation().getPlane() == worldPoint.getPlane())
 			{
 				client.setHintArrow(worldPoint);
 			}
@@ -1282,6 +1286,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
 		groundItemHighlightOverlay.clearTargets();
+		clientThread.invokeLater(() -> client.clearHintArrow());
 		activeMapPoint = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
 		if (panel != null)

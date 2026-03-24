@@ -20,7 +20,6 @@ import javax.inject.Singleton;
 public class ItemHighlightOverlay extends WidgetItemOverlay
 {
 	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
-	private static final java.awt.Font BOLD_10 = new java.awt.Font(java.awt.Font.DIALOG, java.awt.Font.BOLD, 10);
 
 	private final CollectionLogHelperConfig config;
 
@@ -55,18 +54,6 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 		graphics.setColor(color);
 		graphics.setStroke(STROKE_2);
 		graphics.draw(bounds);
-
-		// Draw a small arrow indicator when this item should be used on an object
-		if (useItemOnObject)
-		{
-			graphics.setFont(BOLD_10);
-			graphics.setColor(Color.BLACK);
-			int arrowX = bounds.x + bounds.width - 10;
-			int arrowY = bounds.y + bounds.height - 2;
-			graphics.drawString("\u2192", arrowX + 1, arrowY + 1);
-			graphics.setColor(color);
-			graphics.drawString("\u2192", arrowX, arrowY);
-		}
 	}
 
 	public void setTargetItemIds(List<Integer> itemIds)

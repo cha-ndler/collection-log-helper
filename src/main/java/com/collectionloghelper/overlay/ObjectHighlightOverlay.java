@@ -339,12 +339,8 @@ public class ObjectHighlightOverlay extends Overlay
 		boolean showedTooltip = false;
 		if (hull != null)
 		{
-			Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
-				overlayColor.getBlue(), 30);
-			graphics.setColor(fillColor);
-			graphics.fill(hull);
 			graphics.setColor(overlayColor);
-			graphics.setStroke(STROKE_2);
+			graphics.setStroke(new BasicStroke(1.5f));
 			graphics.draw(hull);
 
 			// Draw downward-pointing arrow above the object hull
