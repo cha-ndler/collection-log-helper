@@ -11020,10 +11020,11 @@
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Travel to Void Knights' Outpost, south of Port Sarim and play Pest Control.",
+        "description": "Board a lander to play Pest Control.",
         "worldX": 2659,
         "worldY": 2676,
         "worldPlane": 0,
+        "dialogOptions": ["Novice", "Intermediate", "Veteran"],
         "completionCondition": "MANUAL"
       }
     ],
@@ -11814,6 +11815,9 @@
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
+        "npcId": 4572,
+        "interactAction": "Talk-to",
+        "dialogOptions": ["I'll take a hard one", "hard", "deliver"],
         "completionCondition": "MANUAL"
       }
     ]
@@ -12553,10 +12557,11 @@
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Travel to Castle Wars arena, south of Observatory and play Castle Wars.",
+        "description": "Enter a Castle Wars portal to join a team.",
         "worldX": 2440,
         "worldY": 3089,
         "worldPlane": 0,
+        "dialogOptions": ["Saradomin", "Zamorak", "Guthix"],
         "completionCondition": "MANUAL"
       }
     ],
@@ -12613,10 +12618,11 @@
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Travel to Isle of Souls, west of Edgeville and play Soul Wars.",
+        "description": "Talk to Nomad or Soul Wars Portal to join a game.",
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
+        "dialogOptions": ["Join", "Yes"],
         "completionCondition": "MANUAL"
       }
     ],
@@ -13391,7 +13397,7 @@
         "worldPlane": 0,
         "npcId": 1816,
         "interactAction": "Join-Team",
-        "dialogOptions": null,
+        "dialogOptions": ["Yes", "Join"],
         "travelTip": null,
         "requiredItemIds": null,
         "completionCondition": "NPC_TALKED_TO",
@@ -13733,6 +13739,7 @@
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
+        "dialogOptions": ["Attacker", "Defender", "Collector", "Healer"],
         "completionCondition": "MANUAL"
       },
       {
@@ -25063,6 +25070,9 @@
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
+        "npcId": 4572,
+        "interactAction": "Talk-to",
+        "dialogOptions": ["I'll take a hard one", "hard", "deliver"],
         "completionCondition": "MANUAL"
       }
     ]
