@@ -27,6 +27,7 @@ import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
 import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
+import com.collectionloghelper.overlay.WidgetHighlightOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
@@ -191,6 +192,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private GroundItemHighlightOverlay groundItemHighlightOverlay;
 
 	@Inject
+	private WidgetHighlightOverlay widgetHighlightOverlay;
+
+	@Inject
 	private DataSyncState dataSyncState;
 
 	@Inject
@@ -272,7 +276,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		panel = new CollectionLogHelperPanel(
 			config, database, collectionState, calculator, clueEstimator,
 			itemManager, requirementsChecker, dataSyncState, slayerTaskState,
-			slayerStrategyCalculator,
+			slayerStrategyCalculator, playerInventoryState,
 			this::activateGuidance, this::deactivateGuidance,
 			() -> cachedPlayerLocation,
 			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()));
@@ -312,6 +316,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.add(itemHighlightOverlay);
 		overlayManager.add(worldMapRouteOverlay);
 		overlayManager.add(groundItemHighlightOverlay);
+		overlayManager.add(widgetHighlightOverlay);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -350,6 +355,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.remove(itemHighlightOverlay);
 		overlayManager.remove(worldMapRouteOverlay);
 		overlayManager.remove(groundItemHighlightOverlay);
+		overlayManager.remove(widgetHighlightOverlay);
 		deactivateGuidance();
 		lastObtainedCount = -1;
 		collectionLogOpen = false;
@@ -1051,6 +1057,15 @@ public class CollectionLogHelperPlugin extends Plugin
 			return;
 		}
 
+		// Warn if the source has unmet requirements (don't block, just warn)
+		List<String> unmetReqs = requirementsChecker.getUnmetRequirements(source.getName());
+		if (!unmetReqs.isEmpty())
+		{
+			String unmetList = String.join(", ", unmetReqs);
+			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
+				"[Collection Log Helper] Warning: " + source.getName() + " requires " + unmetList, "");
+		}
+
 		// Clear any existing guidance first, including InfoBox and sequencer
 		deactivateGuidance();
 
@@ -1068,11 +1083,13 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (panel != null)
 			{
 				panel.setGuidanceState(true, source);
+				GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
 				panel.updateStepProgress(
 					guidanceSequencer.getCurrentIndex() + 1,
 					guidanceSequencer.getTotalSteps(),
 					step != null ? step.getDescription() : "",
-					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL);
+					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL,
+					rawStep != null ? rawStep.getRequiredItemIds() : null);
 			}
 			// Add InfoBox showing step progress
 			if (!source.getItems().isEmpty())
@@ -1175,6 +1192,23 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		groundItemHighlightOverlay.setTargetGroundItemIds(
 			step.getGroundItemIds() != null ? new HashSet<>(step.getGroundItemIds()) : null);
+
+		if (step.getHighlightWidgetIds() != null && step.getHighlightWidgetIds().length > 0)
+		{
+			List<int[]> widgets = new java.util.ArrayList<>();
+			for (int[] ref : step.getHighlightWidgetIds())
+			{
+				if (ref != null && ref.length >= 2)
+				{
+					widgets.add(ref);
+				}
+			}
+			widgetHighlightOverlay.setHighlightWidgets(widgets);
+		}
+		else
+		{
+			widgetHighlightOverlay.clearHighlights();
+		}
 
 		if (step.getWorldX() > 0)
 		{
@@ -1286,6 +1320,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
 		groundItemHighlightOverlay.clearTargets();
+		widgetHighlightOverlay.clearHighlights();
 		clientThread.invokeLater(() -> client.clearHintArrow());
 		activeMapPoint = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
@@ -1353,11 +1388,13 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		if (panel != null)
 		{
+			GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
 			panel.updateStepProgress(
 				guidanceSequencer.getCurrentIndex() + 1,
 				guidanceSequencer.getTotalSteps(),
 				step.getDescription(),
-				step.getCompletionCondition() == CompletionCondition.MANUAL);
+				step.getCompletionCondition() == CompletionCondition.MANUAL,
+				rawStep != null ? rawStep.getRequiredItemIds() : null);
 		}
 	}
 
@@ -1399,6 +1436,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
 		groundItemHighlightOverlay.clearTargets();
+		widgetHighlightOverlay.clearHighlights();
 		activeMapPoint = null;
 		pendingShortestPathTarget = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
