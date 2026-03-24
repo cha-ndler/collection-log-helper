@@ -13678,6 +13678,9 @@
         "worldX": 2387,
         "worldY": 3040,
         "worldPlane": 0,
+        "requiredItemIds": [
+          2883
+        ],
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
@@ -25764,6 +25767,9 @@
         "worldX": 3375,
         "worldY": 3893,
         "worldPlane": 0,
+        "requiredItemIds": [
+          1704
+        ],
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
