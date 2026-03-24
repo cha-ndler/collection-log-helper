@@ -670,6 +670,7 @@
     "worldY": 3693,
     "worldPlane": 0,
     "killTimeSeconds": 106,
+    "ironKillTimeSeconds": 129,
     "requirements": {
       "quests": [
         "DRAGON_SLAYER_II"
@@ -2004,29 +2005,14 @@
         "isPet": true,
         "wikiPage": "Little_nightmare",
         "independent": true
-      },
-      {
-        "itemId": 25837,
-        "name": "Slepey tablet",
-        "dropRate": 0.04,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Slepey_tablet",
-        "independent": true
-      },
-      {
-        "itemId": 25838,
-        "name": "Parasitic egg",
-        "dropRate": 0.005,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Parasitic_egg",
-        "independent": true
       }
     ],
     "locationDescription": "Slepe, east Morytania",
     "travelTip": "Drakan's medallion -> Slepe",
     "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Phosani's Nightmare"
+    ],
     "npcId": 9425,
     "interactAction": "Attack",
     "waypoints": [
@@ -2073,6 +2059,180 @@
       }
     ],
     "ironKillTimeSeconds": 360
+  },
+  {
+    "name": "Phosani's Nightmare",
+    "category": "BOSSES",
+    "worldX": 3662,
+    "worldY": 3218,
+    "worldPlane": 0,
+    "killTimeSeconds": 480,
+    "requirements": {
+      "quests": [
+        "PRIEST_IN_PERIL"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 24422,
+        "name": "Nightmare staff",
+        "dropRate": 0.001876,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Nightmare_staff",
+        "independent": true
+      },
+      {
+        "itemId": 24419,
+        "name": "Inquisitor's great helm",
+        "dropRate": 0.001429,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Inquisitor%27s_great_helm",
+        "independent": true
+      },
+      {
+        "itemId": 24420,
+        "name": "Inquisitor's hauberk",
+        "dropRate": 0.001429,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Inquisitor%27s_hauberk",
+        "independent": true
+      },
+      {
+        "itemId": 24421,
+        "name": "Inquisitor's plateskirt",
+        "dropRate": 0.001429,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Inquisitor%27s_plateskirt",
+        "independent": true
+      },
+      {
+        "itemId": 24417,
+        "name": "Inquisitor's mace",
+        "dropRate": 0.0008,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Inquisitor%27s_mace",
+        "independent": true
+      },
+      {
+        "itemId": 24511,
+        "name": "Harmonised orb",
+        "dropRate": 0.000625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Harmonised_orb",
+        "independent": true
+      },
+      {
+        "itemId": 24514,
+        "name": "Volatile orb",
+        "dropRate": 0.000625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Volatile_orb",
+        "independent": true
+      },
+      {
+        "itemId": 24517,
+        "name": "Eldritch orb",
+        "dropRate": 0.000625,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eldritch_orb",
+        "independent": true
+      },
+      {
+        "itemId": 24495,
+        "name": "Jar of dreams",
+        "dropRate": 0.00025,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Jar_of_dreams",
+        "independent": true
+      },
+      {
+        "itemId": 24491,
+        "name": "Little nightmare",
+        "dropRate": 0.000714,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Little_nightmare",
+        "independent": true
+      },
+      {
+        "itemId": 25837,
+        "name": "Slepey tablet",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Slepey_tablet",
+        "independent": true
+      },
+      {
+        "itemId": 25838,
+        "name": "Parasitic egg",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Parasitic_egg",
+        "independent": true
+      }
+    ],
+    "locationDescription": "Slepe, east Morytania",
+    "travelTip": "Drakan's medallion -> Slepe",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "The Nightmare"
+    ],
+    "npcId": 9423,
+    "interactAction": "Attack",
+    "waypoints": [
+      {
+        "name": "Drakan's medallion to Slepe",
+        "worldX": 3730,
+        "worldY": 3340,
+        "worldPlane": 0,
+        "requirements": {
+          "quests": [
+            "SINS_OF_THE_FATHER"
+          ]
+        }
+      },
+      {
+        "name": "Walk via Canifis",
+        "worldX": 3492,
+        "worldY": 3488,
+        "worldPlane": 0,
+        "requirements": {
+          "quests": [
+            "PRIEST_IN_PERIL"
+          ]
+        }
+      }
+    ],
+    "guidanceSteps": [
+      {
+        "description": "Travel to Slepe, east Morytania.",
+        "worldX": 3662,
+        "worldY": 3218,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Phosani's Nightmare.",
+        "worldX": 3662,
+        "worldY": 3218,
+        "worldPlane": 0,
+        "npcId": 9423,
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 9423
+      }
+    ]
   },
   {
     "name": "Nex",
@@ -2213,6 +2373,7 @@
     "worldY": 3574,
     "worldPlane": 0,
     "killTimeSeconds": 45,
+    "ironKillTimeSeconds": 60,
     "items": [
       {
         "itemId": 23528,
@@ -2444,6 +2605,7 @@
     "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "ironKillTimeSeconds": 36,
     "items": [
       {
         "itemId": 6737,
@@ -2518,6 +2680,7 @@
     "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "ironKillTimeSeconds": 36,
     "items": [
       {
         "itemId": 6731,
@@ -2592,6 +2755,7 @@
     "worldY": 3740,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "ironKillTimeSeconds": 36,
     "items": [
       {
         "itemId": 6733,
@@ -3519,6 +3683,7 @@
     "worldY": 3419,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "ironKillTimeSeconds": 72,
     "requirements": {
       "quests": [
         "MONKEY_MADNESS_II"
@@ -5528,6 +5693,7 @@
     "worldY": 3298,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "ironKillTimeSeconds": 240,
     "afkLevel": 1,
     "requirements": {
       "quests": [
@@ -6559,6 +6725,7 @@
     "worldY": 3441,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "ironKillTimeSeconds": 72,
     "requirements": {
       "quests": [
         "WHILE_GUTHIX_SLEEPS"
@@ -17895,6 +18062,7 @@
     "worldY": 9520,
     "worldPlane": 0,
     "killTimeSeconds": 1029,
+    "ironKillTimeSeconds": 1200,
     "requirements": {
       "quests": [
         "THE_FINAL_DAWN"
@@ -23960,6 +24128,42 @@
         "description": "Open clue scrolls from your bank or obtained during gameplay.",
         "worldX": 3165,
         "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
+  },
+  {
+    "name": "The Mimic",
+    "category": "CLUES",
+    "worldX": 3164,
+    "worldY": 3489,
+    "worldPlane": 0,
+    "killTimeSeconds": 10800,
+    "wikiPage": "The_Mimic",
+    "locationDescription": "Triggered from master clue caskets (1/15 rate). No fixed location.",
+    "items": [
+      {
+        "itemId": 23185,
+        "name": "Ring of 3rd age",
+        "dropRate": 0.026316,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ring_of_3rd_age"
+      }
+    ],
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Grand Exchange.",
+        "worldX": 3164,
+        "worldY": 3489,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete master clue scrolls until The Mimic spawns (1/15 chance per casket). Enable Mimic encounters via the Strange casket in Watson's house if not already enabled.",
+        "worldX": 3164,
+        "worldY": 3489,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
