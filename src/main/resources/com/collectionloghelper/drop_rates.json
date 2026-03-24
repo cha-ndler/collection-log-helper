@@ -1171,6 +1171,7 @@
         "worldX": 3226,
         "worldY": 3108,
         "worldPlane": 0,
+        "requiredItemIds": [954],
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
@@ -1875,6 +1876,7 @@
         "worldX": 3427,
         "worldY": 3543,
         "worldPlane": 2,
+        "requiredItemIds": [21730],
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
@@ -2351,6 +2353,7 @@
         "worldY": 3435,
         "worldPlane": 0,
         "travelTip": "Varrock teleport -> sewers",
+        "requiredItemIds": [22374],
         "completionCondition": "INVENTORY_HAS_ITEM",
         "completionItemId": 22374
       },
@@ -2395,6 +2398,7 @@
         "worldY": 3468,
         "worldPlane": 0,
         "travelTip": "Edgeville respawn/glory -> dungeon",
+        "requiredItemIds": [20754],
         "completionCondition": "INVENTORY_HAS_ITEM",
         "completionItemId": 20754
       },
@@ -3618,6 +3622,7 @@
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
+        "requiredItemIds": [19685],
         "npcId": 7286,
         "interactAction": "Attack",
         "completionCondition": "MANUAL"
@@ -3917,10 +3922,14 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Quidamortem, Great Kourend and enter Chambers of Xeric.",
+        "description": "Travel to the Chambers of Xeric.",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete the raid and collect loot from the chest.",
         "completionCondition": "MANUAL"
       }
     ],
@@ -4154,10 +4163,14 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Quidamortem, Great Kourend and enter Chambers of Xeric (Challenge Mode).",
+        "description": "Travel to the Chambers of Xeric.",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete the raid and collect loot from the chest.",
         "completionCondition": "MANUAL"
       }
     ]
@@ -4362,10 +4375,14 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Ver Sinhaza, Morytania and enter Theatre of Blood.",
+        "description": "Travel to the Theatre of Blood.",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete the raid and collect loot.",
         "completionCondition": "MANUAL"
       }
     ],
@@ -4636,10 +4653,14 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Necropolis, Kharidian Desert and enter Tombs of Amascut.",
+        "description": "Travel to the Tombs of Amascut.",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete the raid and collect loot from the sarcophagus.",
         "completionCondition": "MANUAL"
       }
     ],
@@ -4910,10 +4931,14 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Necropolis, Kharidian Desert and enter Tombs of Amascut (300 Invocation).",
+        "description": "Travel to the Tombs of Amascut.",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete the raid and collect loot from the sarcophagus.",
         "completionCondition": "MANUAL"
       }
     ]
@@ -5183,10 +5208,14 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Necropolis, Kharidian Desert and enter Tombs of Amascut (500 Invocation).",
+        "description": "Travel to the Tombs of Amascut.",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete the raid and collect loot from the sarcophagus.",
         "completionCondition": "MANUAL"
       }
     ],
@@ -5263,12 +5292,16 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to The Gauntlet, Prifddinas and attack Corrupted Gauntlet.",
+        "description": "Travel to the Corrupted Gauntlet.",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0,
         "npcId": 9020,
         "interactAction": "Talk-to",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete the Corrupted Gauntlet and collect loot.",
         "completionCondition": "MANUAL"
       }
     ],
@@ -5344,12 +5377,16 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to The Gauntlet, Prifddinas and attack The Gauntlet.",
+        "description": "Travel to the Gauntlet.",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0,
         "npcId": 9020,
         "interactAction": "Talk-to",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete the Gauntlet and collect loot.",
         "completionCondition": "MANUAL"
       }
     ],
@@ -5576,7 +5613,15 @@
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Barrows, east of Mort'ton and complete Barrows runs.",
+        "description": "Travel to Barrows, east of Mort'ton.",
+        "worldX": 3565,
+        "worldY": 3298,
+        "worldPlane": 0,
+        "requiredItemIds": [952],
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Dig into each brother's crypt, defeat all six brothers, then loot the chest.",
         "worldX": 3565,
         "worldY": 3298,
         "worldPlane": 0,
@@ -17169,12 +17214,16 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Mor Ul Rek, Karamja Volcano and attack The Fight Caves.",
+        "description": "Travel to the Fight Caves.",
         "worldX": 2439,
         "worldY": 5172,
         "worldPlane": 0,
         "npcId": 2180,
         "interactAction": "Talk-to",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete the Fight Caves and collect your reward.",
         "completionCondition": "MANUAL"
       }
     ],
@@ -17218,12 +17267,16 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Mor Ul Rek, Karamja Volcano and attack The Inferno.",
+        "description": "Travel to the Inferno.",
         "worldX": 2496,
         "worldY": 5122,
         "worldPlane": 0,
         "npcId": 7690,
         "interactAction": "Talk-to",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Complete the Inferno and collect your reward.",
         "completionCondition": "MANUAL"
       }
     ],
