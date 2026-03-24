@@ -9,6 +9,7 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerInventoryState;
+import com.collectionloghelper.data.PlayerTravelCapabilities;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.SlayerMasterDatabase;
@@ -208,6 +209,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private SlayerStrategyCalculator slayerStrategyCalculator;
 
 	@Inject
+	private PlayerTravelCapabilities travelCapabilities;
+
+	@Inject
 	private com.collectionloghelper.data.PluginDataManager pluginDataManager;
 
 	@Inject
@@ -220,6 +224,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private NavigationButton navButton;
 	private int lastObtainedCount = -1;
 	private volatile boolean pendingRequirementsRefresh = false;
+	private volatile boolean pendingTravelVarbitRefresh = false;
 	private boolean clogNotificationChecked = false;
 	private boolean collectionLogOpen;
 	private BufferedImage collectionLogIcon;
@@ -317,6 +322,8 @@ public class CollectionLogHelperPlugin extends Plugin
 				collectionState.loadObtainedItems();
 				collectionState.captureRecentItems();
 				requirementsChecker.refreshAccessibility(database.getAllSources());
+				travelCapabilities.refreshQuestState();
+				travelCapabilities.refreshVarbits();
 				lastObtainedCount = collectionState.getTotalObtained();
 				panel.rebuild();
 			});
@@ -361,6 +368,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		playerBankState.reset();
 		playerInventoryState.reset();
 		slayerTaskState.reset();
+		travelCapabilities.reset();
 		collectionState.clearState();
 		pluginDataManager.reset();
 
@@ -389,6 +397,8 @@ public class CollectionLogHelperPlugin extends Plugin
 				collectionState.loadObtainedItems();
 				collectionState.captureRecentItems();
 				requirementsChecker.refreshAccessibility(database.getAllSources());
+				travelCapabilities.refreshQuestState();
+				travelCapabilities.refreshVarbits();
 				slayerTaskState.refresh();
 				lastObtainedCount = collectionState.getTotalObtained();
 
@@ -434,6 +444,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			clogNotificationChecked = false;
 			loginTickDelay = 0;
 			slayerRefreshPending = false;
+			pendingTravelVarbitRefresh = false;
 			cachedPlayerLocation = null;
 			lastProximityLocation = null;
 			guidanceOverlay.setShowCollectionLogReminder(false);
@@ -441,6 +452,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			dataSyncState.reset();
 			playerBankState.reset();
 			playerInventoryState.reset();
+			travelCapabilities.reset();
 			pluginDataManager.reset();
 		}
 	}
@@ -482,10 +494,11 @@ public class CollectionLogHelperPlugin extends Plugin
 				&& !slayerTaskState.getCreatureName().equals(oldCreature))
 			|| slayerTaskState.getRemaining() != oldRemaining;
 
-		// Flag requirements for refresh on next game tick (debounced).
+		// Flag requirements and travel capabilities for refresh on next game tick (debounced).
 		// Quest states are varbits that fire hundreds of times during login,
 		// so we can't call refreshAccessibility() here — it scans all sources.
 		pendingRequirementsRefresh = true;
+		pendingTravelVarbitRefresh = true;
 
 		// Don't trigger rebuilds mid-scan; the settle logic in onGameTick
 		// will fire a single rebuild once script 4100 stops firing.
@@ -616,11 +629,12 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		if (event.getContainerId() == InventoryID.BANK)
 		{
-			// Scan bank for clue-related items every time it updates
+			// Scan bank for clue-related items and travel teleports every time it updates
 			net.runelite.api.ItemContainer bankContainer = client.getItemContainer(InventoryID.BANK);
 			if (bankContainer != null)
 			{
 				playerBankState.scanBank(bankContainer);
+				travelCapabilities.scanBank(bankContainer);
 			}
 
 			if (!dataSyncState.isBankScanned())
@@ -733,6 +747,13 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				pendingPanelRebuild = true;
 			}
+		}
+
+		// Debounced travel varbit refresh — flagged by onVarbitChanged, runs once per tick
+		if (pendingTravelVarbitRefresh)
+		{
+			pendingTravelVarbitRefresh = false;
+			travelCapabilities.refreshVarbits();
 		}
 
 		// Lazily init per-character data directory once player name is available
@@ -1167,6 +1188,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				travelTip = source.getTravelTip();
 			}
 			guidanceOverlay.setTravelTip(travelTip);
+			log.debug("Travel capabilities for step '{}': {}", step.getDescription(), travelCapabilities.getSummary());
 			guidanceOverlay.setTargetNpcId(step.getNpcId());
 			guidanceOverlay.setInteractAction(step.getInteractAction());
 			dialogHighlightOverlay.setTargetDialogOptions(step.getDialogOptions());
