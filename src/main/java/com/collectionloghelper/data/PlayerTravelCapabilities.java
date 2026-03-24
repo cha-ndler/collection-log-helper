@@ -318,6 +318,115 @@ public class PlayerTravelCapabilities
 	}
 
 	/**
+	 * Selects the best travel option from a travelTip string based on the player's
+	 * current capabilities. Options in the tip are assumed to be ordered by priority
+	 * (best first), so the first available option is returned.
+	 *
+	 * @param travelTip the raw travel tip string, with options separated by ", or " or " or "
+	 * @return the best available option, or the full original string if none match
+	 */
+	public String selectBestTravelTip(String travelTip)
+	{
+		if (travelTip == null || travelTip.isEmpty())
+		{
+			return travelTip;
+		}
+
+		// Split on ", or " first, then " or " for remaining segments
+		String[] options = travelTip.split(",?\\s+or\\s+");
+
+		if (options.length <= 1)
+		{
+			return travelTip;
+		}
+
+		for (String option : options)
+		{
+			String trimmed = option.trim();
+			if (trimmed.isEmpty())
+			{
+				continue;
+			}
+			if (isOptionAvailable(trimmed))
+			{
+				return trimmed;
+			}
+		}
+
+		// No options matched — return the full original as fallback
+		return travelTip;
+	}
+
+	/**
+	 * Checks whether a single travel option is available to the player based on
+	 * keyword matching against current capabilities.
+	 */
+	private boolean isOptionAvailable(String option)
+	{
+		String lower = option.toLowerCase();
+
+		if (lower.contains("fairy ring"))
+		{
+			return canUseFairyRings();
+		}
+		if (lower.contains("spirit tree"))
+		{
+			return isSpiritTrees();
+		}
+		if (lower.contains("lunar") || lower.contains("moonclan"))
+		{
+			return isOnLunarSpellbook();
+		}
+		if (lower.contains("ancient") || lower.contains("lassar") || lower.contains("paddewwa"))
+		{
+			return isOnAncientSpellbook();
+		}
+		if (lower.contains("arceuus") || lower.contains("barrows teleport") || lower.contains("mort'ton teleport"))
+		{
+			return isOnArceuusSpellbook();
+		}
+		if (lower.contains("games necklace"))
+		{
+			return isGamesNecklace();
+		}
+		if (lower.contains("ring of dueling"))
+		{
+			return isRingOfDueling();
+		}
+		if (lower.contains("glory") || lower.contains("amulet of glory"))
+		{
+			return isGlory();
+		}
+		if (lower.contains("slayer ring"))
+		{
+			return isSlayerRing();
+		}
+		if (lower.contains("xeric"))
+		{
+			return isXericsTalisman();
+		}
+		if (lower.contains("digsite pendant"))
+		{
+			return isDigsitePendant();
+		}
+		if (lower.contains("royal seed pod"))
+		{
+			return isRoyalSeedPod();
+		}
+		if (lower.contains("poh") || lower.contains("house teleport"))
+		{
+			return hasPoh();
+		}
+		if (lower.contains("minigame teleport") || lower.contains("walk") || lower.contains("run"))
+		{
+			return true;
+		}
+
+		// No keyword match — assume available
+		return true;
+	}
+
+	/**
 	 * Clears all cached state (e.g., on logout).
 	 */
 	public void reset()

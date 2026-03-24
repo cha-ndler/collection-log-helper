@@ -1182,11 +1182,12 @@ public class CollectionLogHelperPlugin extends Plugin
 			guidanceOverlay.setTargetPoint(worldPoint);
 			guidanceOverlay.setTargetName(sourceName);
 			guidanceOverlay.setLocationDescription(step.getDescription());
-			String travelTip = step.getTravelTip();
-			if ((travelTip == null || travelTip.isEmpty()) && source != null)
+			String rawTravelTip = step.getTravelTip();
+			if ((rawTravelTip == null || rawTravelTip.isEmpty()) && source != null)
 			{
-				travelTip = source.getTravelTip();
+				rawTravelTip = source.getTravelTip();
 			}
+			String travelTip = travelCapabilities.selectBestTravelTip(rawTravelTip);
 			guidanceOverlay.setTravelTip(travelTip);
 			log.debug("Travel capabilities for step '{}': {}", step.getDescription(), travelCapabilities.getSummary());
 			guidanceOverlay.setTargetNpcId(step.getNpcId());
