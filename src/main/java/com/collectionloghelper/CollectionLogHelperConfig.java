@@ -141,7 +141,7 @@ public interface CollectionLogHelperConfig extends Config
 		name = "Auto-Advance Guidance",
 		description = "Automatically start guidance for the next best source when a guided sequence completes",
 		section = guidanceSection,
-		position = 4
+		position = 5
 	)
 	default boolean autoAdvanceGuidance()
 	{
@@ -161,11 +161,23 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "npcHighlightStyle",
+		name = "NPC Highlight Style",
+		description = "How guided NPCs are highlighted in the game world",
+		section = guidanceSection,
+		position = 1
+	)
+	default NpcHighlightStyle npcHighlightStyle()
+	{
+		return NpcHighlightStyle.HULL;
+	}
+
+	@ConfigItem(
 		keyName = "showHintArrow",
 		name = "Show Hint Arrow",
 		description = "Show the in-game yellow hint arrow at the guidance target",
 		section = guidanceSection,
-		position = 1
+		position = 2
 	)
 	default boolean showHintArrow()
 	{
@@ -177,7 +189,7 @@ public interface CollectionLogHelperConfig extends Config
 		name = "Shortest Path Integration",
 		description = "Request a path from the Shortest Path plugin (if installed) when guidance is activated",
 		section = guidanceSection,
-		position = 2
+		position = 3
 	)
 	default boolean useShortestPath()
 	{
@@ -189,7 +201,7 @@ public interface CollectionLogHelperConfig extends Config
 		name = "Overlay Color",
 		description = "Color used for guidance overlays",
 		section = guidanceSection,
-		position = 3
+		position = 4
 	)
 	default Color overlayColor()
 	{
