@@ -253,7 +253,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		slayerStrategyPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		slayerStrategyPanel.setVisible(false);
 
-		JButton strategyToggle = new JButton("Slayer Strategy");
+		JButton strategyToggle = new JButton("\u25B6 Slayer Strategy");
 		strategyToggle.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
 		strategyToggle.setForeground(new Color(180, 80, 220));
 		strategyToggle.setBackground(new Color(35, 25, 50));
@@ -265,6 +265,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		strategyToggle.addActionListener(e ->
 		{
 			slayerStrategyExpanded = !slayerStrategyExpanded;
+			strategyToggle.setText((slayerStrategyExpanded ? "\u25BC " : "\u25B6 ") + "Slayer Strategy");
 			updateSlayerStrategy();
 		});
 		slayerStrategyPanel.add(strategyToggle);
