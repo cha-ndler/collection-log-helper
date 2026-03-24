@@ -1382,7 +1382,11 @@
     "mutuallyExclusiveSources": [
       "The Leviathan",
       "The Whisperer",
-      "Vardorvis"
+      "Vardorvis",
+      "Duke Sucellus (Awakened)",
+      "The Leviathan (Awakened)",
+      "The Whisperer (Awakened)",
+      "Vardorvis (Awakened)"
     ],
     "npcId": 12191,
     "interactAction": "Attack",
@@ -1509,7 +1513,11 @@
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Whisperer",
-      "Vardorvis"
+      "Vardorvis",
+      "Duke Sucellus (Awakened)",
+      "The Leviathan (Awakened)",
+      "The Whisperer (Awakened)",
+      "Vardorvis (Awakened)"
     ],
     "npcId": 12214,
     "interactAction": "Attack",
@@ -1634,7 +1642,11 @@
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
-      "Vardorvis"
+      "Vardorvis",
+      "Duke Sucellus (Awakened)",
+      "The Leviathan (Awakened)",
+      "The Whisperer (Awakened)",
+      "Vardorvis (Awakened)"
     ],
     "npcId": 12204,
     "interactAction": "Attack",
@@ -1760,7 +1772,11 @@
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
-      "The Whisperer"
+      "The Whisperer",
+      "Duke Sucellus (Awakened)",
+      "The Leviathan (Awakened)",
+      "The Whisperer (Awakened)",
+      "Vardorvis (Awakened)"
     ],
     "npcId": 12223,
     "interactAction": "Attack",
@@ -1774,6 +1790,525 @@
       },
       {
         "description": "Kill Vardorvis.",
+        "worldX": 1175,
+        "worldY": 3424,
+        "worldPlane": 0,
+        "npcId": 12223,
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 12223
+      }
+    ]
+  },
+  {
+    "name": "Duke Sucellus (Awakened)",
+    "category": "BOSSES",
+    "worldX": 2846,
+    "worldY": 3938,
+    "worldPlane": 0,
+    "killTimeSeconds": 180,
+    "ironKillTimeSeconds": 210,
+    "requirements": {
+      "quests": [
+        "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 28281,
+        "name": "Magus vestige",
+        "dropRate": 0.004167,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Magus_vestige"
+      },
+      {
+        "itemId": 28276,
+        "name": "Chromium ingot",
+        "dropRate": 0.012501,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chromium_ingot"
+      },
+      {
+        "itemId": 28321,
+        "name": "Eye of the duke",
+        "dropRate": 0.004167,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Eye_of_the_duke"
+      },
+      {
+        "itemId": 26241,
+        "name": "Virtus mask",
+        "dropRate": 0.001389,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_mask"
+      },
+      {
+        "itemId": 26243,
+        "name": "Virtus robe top",
+        "dropRate": 0.001389,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_top"
+      },
+      {
+        "itemId": 26245,
+        "name": "Virtus robe bottom",
+        "dropRate": 0.001389,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_bottom"
+      },
+      {
+        "itemId": 28250,
+        "name": "Baron",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Baron",
+        "independent": true
+      },
+      {
+        "itemId": 28270,
+        "name": "Ice quartz",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ice_quartz"
+      },
+      {
+        "itemId": 28333,
+        "name": "Frozen tablet",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Frozen_tablet"
+      },
+      {
+        "itemId": 28334,
+        "name": "Awakener's orb",
+        "dropRate": 0.020619,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Awakener%27s_orb"
+      }
+    ],
+    "locationDescription": "Ghorrock Prison, accessed via Weiss",
+    "travelTip": "Icy basalt -> Weiss, or Ring of shadows -> Ghorrock",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Duke Sucellus",
+      "The Leviathan",
+      "The Whisperer",
+      "Vardorvis",
+      "The Leviathan (Awakened)",
+      "The Whisperer (Awakened)",
+      "Vardorvis (Awakened)"
+    ],
+    "npcId": 12191,
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Ghorrock Prison via Weiss.",
+        "worldX": 2846,
+        "worldY": 3938,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Duke Sucellus (Awakened).",
+        "worldX": 2846,
+        "worldY": 3938,
+        "worldPlane": 0,
+        "npcId": 12191,
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 12191
+      }
+    ]
+  },
+  {
+    "name": "The Leviathan (Awakened)",
+    "category": "BOSSES",
+    "worldX": 3104,
+    "worldY": 3162,
+    "worldPlane": 0,
+    "killTimeSeconds": 195,
+    "ironKillTimeSeconds": 220,
+    "requirements": {
+      "quests": [
+        "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 28283,
+        "name": "Venator vestige",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Venator_vestige"
+      },
+      {
+        "itemId": 28276,
+        "name": "Chromium ingot",
+        "dropRate": 0.011718,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chromium_ingot"
+      },
+      {
+        "itemId": 28325,
+        "name": "Leviathan's lure",
+        "dropRate": 0.003906,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Leviathan%27s_lure"
+      },
+      {
+        "itemId": 26241,
+        "name": "Virtus mask",
+        "dropRate": 0.001302,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_mask"
+      },
+      {
+        "itemId": 26243,
+        "name": "Virtus robe top",
+        "dropRate": 0.001302,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_top"
+      },
+      {
+        "itemId": 26245,
+        "name": "Virtus robe bottom",
+        "dropRate": 0.001302,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_bottom"
+      },
+      {
+        "itemId": 28252,
+        "name": "Lil'viathan",
+        "dropRate": 0.0004,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Lil%27viathan",
+        "independent": true
+      },
+      {
+        "itemId": 28274,
+        "name": "Smoke quartz",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Smoke_quartz"
+      },
+      {
+        "itemId": 28332,
+        "name": "Scarred tablet",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Scarred_tablet"
+      },
+      {
+        "itemId": 28334,
+        "name": "Awakener's orb",
+        "dropRate": 0.0187,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Awakener%27s_orb"
+      }
+    ],
+    "locationDescription": "The Scar, accessed via Temple of the Eye beneath Wizards' Tower",
+    "travelTip": "Ring of shadows -> The Scar, or Fairy ring DIS -> Wizards' Tower",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Duke Sucellus",
+      "The Leviathan",
+      "The Whisperer",
+      "Vardorvis",
+      "Duke Sucellus (Awakened)",
+      "The Whisperer (Awakened)",
+      "Vardorvis (Awakened)"
+    ],
+    "npcId": 12214,
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to The Scar beneath the Wizards' Tower.",
+        "worldX": 3104,
+        "worldY": 3162,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill The Leviathan (Awakened).",
+        "worldX": 3104,
+        "worldY": 3162,
+        "worldPlane": 0,
+        "npcId": 12214,
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 12214
+      }
+    ]
+  },
+  {
+    "name": "The Whisperer (Awakened)",
+    "category": "BOSSES",
+    "worldX": 3007,
+    "worldY": 3477,
+    "worldPlane": 0,
+    "killTimeSeconds": 240,
+    "requirements": {
+      "quests": [
+        "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 28279,
+        "name": "Bellator vestige",
+        "dropRate": 0.005859,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Bellator_vestige"
+      },
+      {
+        "itemId": 28276,
+        "name": "Chromium ingot",
+        "dropRate": 0.017577,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chromium_ingot"
+      },
+      {
+        "itemId": 28323,
+        "name": "Siren's staff",
+        "dropRate": 0.005859,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Siren%27s_staff"
+      },
+      {
+        "itemId": 26241,
+        "name": "Virtus mask",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_mask"
+      },
+      {
+        "itemId": 26243,
+        "name": "Virtus robe top",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_top"
+      },
+      {
+        "itemId": 26245,
+        "name": "Virtus robe bottom",
+        "dropRate": 0.001953,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_bottom"
+      },
+      {
+        "itemId": 28246,
+        "name": "Wisp",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Wisp",
+        "independent": true
+      },
+      {
+        "itemId": 28272,
+        "name": "Shadow quartz",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Shadow_quartz"
+      },
+      {
+        "itemId": 28331,
+        "name": "Sirenic tablet",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sirenic_tablet"
+      },
+      {
+        "itemId": 28334,
+        "name": "Awakener's orb",
+        "dropRate": 0.029,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Awakener%27s_orb"
+      }
+    ],
+    "locationDescription": "Lassar Undercity entrance, Ice Mountain",
+    "travelTip": "Lassar teleport (ancient)",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Duke Sucellus",
+      "The Leviathan",
+      "The Whisperer",
+      "Vardorvis",
+      "Duke Sucellus (Awakened)",
+      "The Leviathan (Awakened)",
+      "Vardorvis (Awakened)"
+    ],
+    "npcId": 12204,
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to Lassar Undercity beneath Ice Mountain.",
+        "worldX": 3007,
+        "worldY": 3477,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill The Whisperer (Awakened).",
+        "worldX": 3007,
+        "worldY": 3477,
+        "worldPlane": 0,
+        "npcId": 12204,
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 12204
+      }
+    ]
+  },
+  {
+    "name": "Vardorvis (Awakened)",
+    "category": "BOSSES",
+    "worldX": 1175,
+    "worldY": 3424,
+    "worldPlane": 0,
+    "killTimeSeconds": 135,
+    "ironKillTimeSeconds": 155,
+    "requirements": {
+      "quests": [
+        "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 28285,
+        "name": "Ultor vestige",
+        "dropRate": 0.002757,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ultor_vestige"
+      },
+      {
+        "itemId": 28276,
+        "name": "Chromium ingot",
+        "dropRate": 0.008271,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Chromium_ingot"
+      },
+      {
+        "itemId": 28319,
+        "name": "Executioner's axe head",
+        "dropRate": 0.002757,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Executioner%27s_axe_head"
+      },
+      {
+        "itemId": 26241,
+        "name": "Virtus mask",
+        "dropRate": 0.000918,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_mask"
+      },
+      {
+        "itemId": 26243,
+        "name": "Virtus robe top",
+        "dropRate": 0.000918,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_top"
+      },
+      {
+        "itemId": 26245,
+        "name": "Virtus robe bottom",
+        "dropRate": 0.000918,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Virtus_robe_bottom"
+      },
+      {
+        "itemId": 28248,
+        "name": "Butch",
+        "dropRate": 0.000333,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Butch",
+        "independent": true
+      },
+      {
+        "itemId": 28268,
+        "name": "Blood quartz",
+        "dropRate": 0.005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Blood_quartz"
+      },
+      {
+        "itemId": 28330,
+        "name": "Strangled tablet",
+        "dropRate": 0.04,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Strangled_tablet"
+      },
+      {
+        "itemId": 28334,
+        "name": "Awakener's orb",
+        "dropRate": 0.0124,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Awakener%27s_orb"
+      }
+    ],
+    "locationDescription": "The Stranglewood, south of Mount Quidamortem",
+    "travelTip": "Ring of shadows -> Stranglewood, or Fairy ring BLS -> rowboat",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Duke Sucellus",
+      "The Leviathan",
+      "The Whisperer",
+      "Vardorvis",
+      "Duke Sucellus (Awakened)",
+      "The Leviathan (Awakened)",
+      "The Whisperer (Awakened)"
+    ],
+    "npcId": 12223,
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to The Stranglewood.",
+        "worldX": 1175,
+        "worldY": 3424,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Vardorvis (Awakened).",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
