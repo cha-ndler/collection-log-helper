@@ -14,6 +14,9 @@ public enum CompletionCondition
 	/** Step completes when the player arrives within range of the target tile. */
 	ARRIVE_AT_TILE,
 
+	/** Step completes when the player enters the target zone (rectangular area). */
+	ARRIVE_AT_ZONE,
+
 	/** Step completes when the player interacts with a specific NPC. */
 	NPC_TALKED_TO,
 

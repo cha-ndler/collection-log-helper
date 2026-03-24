@@ -91,11 +91,17 @@ public class GuidanceStep
 	 */
 	List<int[]> objectFilterTiles;
 
+	/** Widget IDs to highlight in the game interface during this step. Each entry is [groupId, childId]. */
+	int[][] highlightWidgetIds;
+
 	/** 1-indexed step number to loop back to when this step completes (0 = no loop). */
 	int loopBackToStep;
 
 	/** Total number of loop iterations before advancing past this step (0 = no loop). */
 	int loopCount;
+
+	/** Zone bounds [minX, minY, maxX, maxY, plane] for ARRIVE_AT_ZONE completion (null if not a zone step). */
+	int[] completionZone;
 
 	public int getCompletionDistance()
 	{
@@ -105,6 +111,18 @@ public class GuidanceStep
 	public int getCompletionItemCount()
 	{
 		return completionItemCount > 0 ? completionItemCount : 1;
+	}
+
+	/**
+	 * Returns the Zone defined by completionZone, or null if not set.
+	 */
+	public Zone getZone()
+	{
+		if (completionZone != null && completionZone.length == 5)
+		{
+			return new Zone(completionZone[0], completionZone[1], completionZone[2], completionZone[3], completionZone[4]);
+		}
+		return null;
 	}
 
 	/**
