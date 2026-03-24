@@ -71,7 +71,9 @@ public class GuidanceSequencerTest
 			false,          // useItemOnObject
 			0,              // objectMaxDistance
 			null,           // objectFilterTiles
-			0, 0            // loopBackToStep, loopCount
+			null,           // highlightWidgetIds
+			0, 0,           // loopBackToStep, loopCount
+			null            // completionZone
 		);
 	}
 
@@ -91,7 +93,9 @@ public class GuidanceSequencerTest
 			false,
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
-			0, 0
+			null,  // highlightWidgetIds
+			0, 0,  // loopBackToStep, loopCount
+			null   // completionZone
 		);
 	}
 
@@ -111,7 +115,9 @@ public class GuidanceSequencerTest
 			false,
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
-			0, 0
+			null,  // highlightWidgetIds
+			0, 0,  // loopBackToStep, loopCount
+			null   // completionZone
 		);
 	}
 
@@ -131,7 +137,9 @@ public class GuidanceSequencerTest
 			false,
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
-			0, 0
+			null,  // highlightWidgetIds
+			0, 0,  // loopBackToStep, loopCount
+			null   // completionZone
 		);
 	}
 
@@ -151,7 +159,9 @@ public class GuidanceSequencerTest
 			false,
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
-			0, 0
+			null,  // highlightWidgetIds
+			0, 0,  // loopBackToStep, loopCount
+			null   // completionZone
 		);
 	}
 
@@ -171,7 +181,9 @@ public class GuidanceSequencerTest
 			false,
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
-			0, 0
+			null,  // highlightWidgetIds
+			0, 0,  // loopBackToStep, loopCount
+			null   // completionZone
 		);
 	}
 
@@ -191,7 +203,9 @@ public class GuidanceSequencerTest
 			false,
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
-			0, 0
+			null,  // highlightWidgetIds
+			0, 0,  // loopBackToStep, loopCount
+			null   // completionZone
 		);
 	}
 
@@ -212,7 +226,9 @@ public class GuidanceSequencerTest
 			false,
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
-			loopBackToStep, loopCount
+			null,  // highlightWidgetIds
+			loopBackToStep, loopCount,
+			null   // completionZone
 		);
 	}
 
@@ -232,7 +248,9 @@ public class GuidanceSequencerTest
 			false,
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
-			0, 0
+			null,  // highlightWidgetIds
+			0, 0,  // loopBackToStep, loopCount
+			null   // completionZone
 		);
 	}
 
@@ -252,7 +270,9 @@ public class GuidanceSequencerTest
 			false,
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
-			0, 0
+			null,  // highlightWidgetIds
+			0, 0,  // loopBackToStep, loopCount
+			null   // completionZone
 		);
 	}
 

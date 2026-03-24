@@ -5,6 +5,7 @@ import com.collectionloghelper.data.CompletionCondition;
 import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
+import com.collectionloghelper.data.Zone;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -301,6 +302,17 @@ public class GuidanceSequencer
 			}
 		}
 
+		if (step.getCompletionCondition() == CompletionCondition.ARRIVE_AT_ZONE)
+		{
+			Zone zone = step.getZone();
+			if (zone != null && zone.contains(playerLocation))
+			{
+				log.info("Step {} complete (ARRIVE_AT_ZONE: player in zone [{},{} - {},{}] plane {})",
+					currentIndex + 1, zone.getMinX(), zone.getMinY(), zone.getMaxX(), zone.getMaxY(), zone.getPlane());
+				advanceStep();
+			}
+		}
+
 		if (step.getCompletionCondition() == CompletionCondition.PLAYER_ON_PLANE)
 		{
 			if (playerLocation.getPlane() == step.getWorldPlane())
@@ -523,6 +535,10 @@ public class GuidanceSequencer
 					&& lastKnownPlayerLocation.distanceTo2D(
 						new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane()))
 					<= step.getCompletionDistance();
+			case ARRIVE_AT_ZONE:
+				Zone zone = step.getZone();
+				return lastKnownPlayerLocation != null && zone != null
+					&& zone.contains(lastKnownPlayerLocation);
 			case PLAYER_ON_PLANE:
 				return lastKnownPlayerLocation != null
 					&& lastKnownPlayerLocation.getPlane() == step.getWorldPlane();
@@ -552,7 +568,9 @@ public class GuidanceSequencer
 			false,  // useItemOnObject
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
-			0, 0   // loopBackToStep, loopCount
+			null,  // highlightWidgetIds
+			0, 0,  // loopBackToStep, loopCount
+			null   // completionZone
 		);
 	}
 
