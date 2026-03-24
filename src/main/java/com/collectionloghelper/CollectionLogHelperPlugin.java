@@ -1041,7 +1041,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			GuidanceStep step = guidanceSequencer.getCurrentStep();
 			if (step != null)
 			{
-				applyStepToOverlays(step, source.getName());
+				applyStepToOverlays(step, source.getName(), source);
 				scanForTrackedNpc(step);
 			}
 			if (panel != null)
@@ -1107,7 +1107,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	/**
 	 * Applies a single guidance step's data to all overlays.
 	 */
-	private void applyStepToOverlays(GuidanceStep step, String sourceName)
+	private void applyStepToOverlays(GuidanceStep step, String sourceName, CollectionLogSource source)
 	{
 		// Send world message hint if this step has one (only once per step, not on re-notify)
 		int stepIndex = guidanceSequencer.getCurrentIndex();
@@ -1161,7 +1161,12 @@ public class CollectionLogHelperPlugin extends Plugin
 			guidanceOverlay.setTargetPoint(worldPoint);
 			guidanceOverlay.setTargetName(sourceName);
 			guidanceOverlay.setLocationDescription(step.getDescription());
-			guidanceOverlay.setTravelTip(step.getTravelTip());
+			String travelTip = step.getTravelTip();
+			if ((travelTip == null || travelTip.isEmpty()) && source != null)
+			{
+				travelTip = source.getTravelTip();
+			}
+			guidanceOverlay.setTravelTip(travelTip);
 			guidanceOverlay.setTargetNpcId(step.getNpcId());
 			guidanceOverlay.setInteractAction(step.getInteractAction());
 			dialogHighlightOverlay.setTargetDialogOptions(step.getDialogOptions());
@@ -1293,9 +1298,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private void onStepChanged(GuidanceStep step)
 	{
 		clearGuidanceOverlays();
-		String sourceName = guidanceSequencer.getActiveSource() != null
-			? guidanceSequencer.getActiveSource().getName() : "";
-		applyStepToOverlays(step, sourceName);
+		CollectionLogSource activeSource = guidanceSequencer.getActiveSource();
+		String sourceName = activeSource != null ? activeSource.getName() : "";
+		applyStepToOverlays(step, sourceName, activeSource);
 		scanForTrackedNpc(step);
 
 		// Update InfoBox progress
