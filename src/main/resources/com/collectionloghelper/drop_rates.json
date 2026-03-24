@@ -116,14 +116,21 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the God Wars Dungeon and kill General Graardor.",
+        "description": "Travel to the God Wars Dungeon.",
         "worldX": 2882,
         "worldY": 3400,
         "worldPlane": 0,
-        "worldMessage": "Travel to the God Wars Dungeon and attack General Graardor.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill General Graardor.",
+        "worldX": 2882,
+        "worldY": 3400,
+        "worldPlane": 0,
         "npcId": 2215,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 2215
       }
     ]
   },
@@ -244,14 +251,21 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the God Wars Dungeon and kill Commander Zilyana.",
+        "description": "Travel to the God Wars Dungeon.",
         "worldX": 2882,
         "worldY": 3400,
         "worldPlane": 0,
-        "worldMessage": "Travel to the God Wars Dungeon and attack Commander Zilyana.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Commander Zilyana.",
+        "worldX": 2882,
+        "worldY": 3400,
+        "worldPlane": 0,
         "npcId": 2205,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 2205
       }
     ]
   },
@@ -372,14 +386,21 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the God Wars Dungeon and kill K'ril Tsutsaroth.",
+        "description": "Travel to the God Wars Dungeon.",
         "worldX": 2882,
         "worldY": 3400,
         "worldPlane": 0,
-        "worldMessage": "Travel to the God Wars Dungeon and attack K'ril Tsutsaroth.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill K'ril Tsutsaroth.",
+        "worldX": 2882,
+        "worldY": 3400,
+        "worldPlane": 0,
         "npcId": 3129,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 3129
       }
     ]
   },
@@ -500,14 +521,21 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the God Wars Dungeon and kill Kree'arra.",
+        "description": "Travel to the God Wars Dungeon.",
         "worldX": 2882,
         "worldY": 3400,
         "worldPlane": 0,
-        "worldMessage": "Travel to the God Wars Dungeon and attack Kree'arra.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Kree'arra.",
+        "worldX": 2882,
+        "worldY": 3400,
+        "worldPlane": 0,
         "npcId": 3162,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 3162
       }
     ]
   },
@@ -617,14 +645,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Zul-Andra and kill Zulrah.",
+        "description": "Travel to Zul-Andra.",
         "worldX": 2268,
         "worldY": 3069,
         "worldPlane": 0,
-        "worldMessage": "Travel to Zul-Andra and attack Zulrah.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Zulrah.",
+        "worldX": 2268,
+        "worldY": 3069,
+        "worldPlane": 0,
         "npcId": 2042,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 2042
       }
     ]
   },
@@ -697,14 +732,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Rellekka and kill Vorkath.",
+        "description": "Travel to Rellekka.",
         "worldX": 2640,
         "worldY": 3693,
         "worldPlane": 0,
-        "worldMessage": "Travel to Rellekka and attack Vorkath.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Vorkath.",
+        "worldX": 2640,
+        "worldY": 3693,
+        "worldPlane": 0,
         "npcId": 8061,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 8061
       }
     ]
   },
@@ -790,14 +832,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Taverley Dungeon and kill Cerberus.",
+        "description": "Travel to Taverley Dungeon.",
         "worldX": 2883,
         "worldY": 3397,
         "worldPlane": 0,
-        "worldMessage": "Travel to Taverley Dungeon and attack Cerberus.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Cerberus.",
+        "worldX": 2883,
+        "worldY": 3397,
+        "worldPlane": 0,
         "npcId": 5862,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 5862
       }
     ]
   },
@@ -936,14 +985,21 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm and kill the Alchemical Hydra.",
+        "description": "Travel to Mount Karuulm.",
         "worldX": 1308,
         "worldY": 3807,
         "worldPlane": 0,
-        "worldMessage": "Travel to the Karuulm Slayer Dungeon and attack the Alchemical Hydra.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill the Alchemical Hydra.",
+        "worldX": 1308,
+        "worldY": 3807,
+        "worldPlane": 0,
         "npcId": 8615,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 8615
       }
     ]
   },
@@ -1021,13 +1077,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Games necklace cave, level 21 Wilderness and attack Corporeal Beast.",
+        "description": "Travel to the Corporeal Beast's cave.",
+        "worldX": 2966,
+        "worldY": 4382,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Corporeal Beast.",
         "worldX": 2966,
         "worldY": 4382,
         "worldPlane": 0,
         "npcId": 319,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 319
       }
     ]
   },
@@ -1103,13 +1167,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Kalphite Lair entrance, Kharidian Desert and attack Kalphite Queen.",
+        "description": "Travel to the Kalphite Lair.",
+        "worldX": 3226,
+        "worldY": 3108,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Kalphite Queen.",
         "worldX": 3226,
         "worldY": 3108,
         "worldPlane": 0,
         "npcId": 963,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 963
       }
     ],
     "ironKillTimeSeconds": 144
@@ -1187,14 +1259,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Ancient Prison and kill the Phantom Muspah.",
+        "description": "Travel to the Ancient Prison near Weiss.",
         "worldX": 2846,
         "worldY": 3940,
         "worldPlane": 0,
-        "worldMessage": "Travel to the Ancient Prison near Weiss and attack the Phantom Muspah.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill the Phantom Muspah.",
+        "worldX": 2846,
+        "worldY": 3940,
+        "worldPlane": 0,
         "npcId": 12077,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 12077
       }
     ]
   },
@@ -1305,13 +1384,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ghorrock Prison via Weiss and attack Duke Sucellus.",
+        "description": "Travel to Ghorrock Prison via Weiss.",
+        "worldX": 2846,
+        "worldY": 3938,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Duke Sucellus.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
         "npcId": 12191,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 12191
       }
     ],
     "ironKillTimeSeconds": 150
@@ -1424,13 +1511,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Temple of the Eye beneath the Wizards' Tower and attack The Leviathan.",
+        "description": "Travel to The Scar beneath the Wizards' Tower.",
+        "worldX": 3104,
+        "worldY": 3162,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill The Leviathan.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
         "npcId": 12214,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 12214
       }
     ]
   },
@@ -1541,13 +1636,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Lassar Undercity entrance, Ice Mountain and attack The Whisperer.",
+        "description": "Travel to Lassar Undercity beneath Ice Mountain.",
+        "worldX": 3007,
+        "worldY": 3477,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill The Whisperer.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
         "npcId": 12204,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 12204
       }
     ]
   },
@@ -1659,13 +1762,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to The Stranglewood and attack Vardorvis.",
+        "description": "Travel to The Stranglewood.",
+        "worldX": 1175,
+        "worldY": 3424,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Vardorvis.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
         "npcId": 12223,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 12223
       }
     ]
   },
@@ -1760,14 +1871,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Slayer Tower rooftop and kill the Grotesque Guardians.",
+        "description": "Travel to the Slayer Tower rooftop.",
         "worldX": 3427,
         "worldY": 3543,
         "worldPlane": 2,
-        "worldMessage": "Travel to the Slayer Tower rooftop and attack the Grotesque Guardians.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill the Grotesque Guardians.",
+        "worldX": 3427,
+        "worldY": 3543,
+        "worldPlane": 2,
         "npcId": 7851,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 7851
       }
     ]
   },
@@ -2049,13 +2167,21 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to God Wars Dungeon entrance, Trollheim and attack Nex.",
+        "description": "Travel to God Wars Dungeon.",
+        "worldX": 2882,
+        "worldY": 3400,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Nex.",
         "worldX": 2882,
         "worldY": 3400,
         "worldPlane": 0,
         "npcId": 11278,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 11278
       }
     ]
   },
@@ -2116,13 +2242,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Forthos Dungeon, Hosidius and attack Sarachnis.",
+        "description": "Travel to Forthos Dungeon.",
+        "worldX": 1701,
+        "worldY": 3574,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Sarachnis.",
         "worldX": 1701,
         "worldY": 3574,
         "worldPlane": 0,
         "npcId": 8713,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 8713
       }
     ]
   },
@@ -2170,13 +2304,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Falador Park and attack Giant Mole.",
+        "description": "Travel to Falador Park.",
+        "worldX": 2987,
+        "worldY": 3376,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Giant Mole.",
         "worldX": 2987,
         "worldY": 3376,
         "worldPlane": 0,
         "npcId": 5779,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 5779
       }
     ]
   },
@@ -2544,14 +2686,21 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Kraken Cove and kill the Kraken.",
+        "description": "Travel to Kraken Cove.",
         "worldX": 2277,
         "worldY": 3611,
         "worldPlane": 0,
-        "worldMessage": "Travel to Kraken Cove and attack the Kraken.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill the Kraken.",
+        "worldX": 2277,
+        "worldY": 3611,
+        "worldPlane": 0,
         "npcId": 494,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 494
       }
     ]
   },
@@ -2621,14 +2770,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Smoke Devil Dungeon and kill the Thermonuclear smoke devil.",
+        "description": "Travel to the Smoke Devil Dungeon.",
         "worldX": 2404,
         "worldY": 3060,
         "worldPlane": 0,
-        "worldMessage": "Travel to the Smoke Devil Dungeon south of Castle Wars and attack the Thermonuclear smoke devil.",
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill the Thermonuclear smoke devil.",
+        "worldX": 2404,
+        "worldY": 3060,
+        "worldPlane": 0,
         "npcId": 499,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 499
       }
     ]
   },
@@ -2733,13 +2889,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Abyssal Nexus, fairy ring DIP and attack Abyssal Sire.",
+        "description": "Travel to the Abyssal Nexus.",
+        "worldX": 3039,
+        "worldY": 4763,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill the Abyssal Sire.",
         "worldX": 3039,
         "worldY": 4763,
         "worldPlane": 0,
         "npcId": 5886,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 5886
       }
     ]
   },
@@ -2921,13 +3085,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Scorpia's Cave, deep Wilderness and attack Scorpia.",
+        "description": "Travel to Scorpia's Cave in the Wilderness.",
+        "worldX": 3233,
+        "worldY": 3945,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Scorpia.",
         "worldX": 3233,
         "worldY": 3945,
         "worldPlane": 0,
         "npcId": 6615,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 6615
       }
     ]
   },
@@ -3057,13 +3229,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Venenatis' Cave, Wilderness and attack Venenatis.",
+        "description": "Travel to Venenatis' Cave in the Wilderness.",
+        "worldX": 3344,
+        "worldY": 3734,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Venenatis.",
         "worldX": 3344,
         "worldY": 3734,
         "worldPlane": 0,
         "npcId": 6610,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 6610
       }
     ]
   },
@@ -3148,13 +3328,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Vet'ion's Rest, Wilderness and attack Vet'ion.",
+        "description": "Travel to Vet'ion's Rest in the Wilderness.",
+        "worldX": 3220,
+        "worldY": 3783,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Vet'ion.",
         "worldX": 3220,
         "worldY": 3783,
         "worldPlane": 0,
         "npcId": 6611,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 6611
       }
     ]
   },
@@ -3231,13 +3419,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Callisto's Den, Wilderness and attack Callisto.",
+        "description": "Travel to Callisto's Den in the Wilderness.",
+        "worldX": 3292,
+        "worldY": 3834,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Kill Callisto.",
         "worldX": 3292,
         "worldY": 3834,
         "worldPlane": 0,
         "npcId": 6609,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 6609
       }
     ]
   },
@@ -11772,8 +11968,16 @@
         ],
         "useItemOnObject": true,
         "objectFilterTiles": [
-          [3811, 3000, 2],
-          [3822, 2951, 2]
+          [
+            3811,
+            3000,
+            2
+          ],
+          [
+            3822,
+            2951,
+            2
+          ]
         ],
         "completionChatPattern": null,
         "loopBackToStep": 0,
