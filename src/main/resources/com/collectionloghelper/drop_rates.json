@@ -3741,7 +3741,7 @@
       {
         "itemId": 20997,
         "name": "Twisted bow",
-        "dropRate": 0.0013,
+        "dropRate": 0.002067,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Twisted_bow",
@@ -3750,7 +3750,7 @@
       {
         "itemId": 21003,
         "name": "Elder maul",
-        "dropRate": 0.0013,
+        "dropRate": 0.002067,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Elder_maul",
@@ -3759,7 +3759,7 @@
       {
         "itemId": 21043,
         "name": "Kodai insignia",
-        "dropRate": 0.0013,
+        "dropRate": 0.002067,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Kodai_insignia",
@@ -3768,7 +3768,7 @@
       {
         "itemId": 13652,
         "name": "Dragon claws",
-        "dropRate": 0.0013,
+        "dropRate": 0.003109,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_claws",
@@ -3777,7 +3777,7 @@
       {
         "itemId": 21012,
         "name": "Dragon hunter crossbow",
-        "dropRate": 0.00195,
+        "dropRate": 0.004142,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_hunter_crossbow",
@@ -3786,7 +3786,7 @@
       {
         "itemId": 21000,
         "name": "Twisted buckler",
-        "dropRate": 0.00195,
+        "dropRate": 0.004142,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Twisted_buckler",
@@ -3795,7 +3795,7 @@
       {
         "itemId": 21015,
         "name": "Dinh's bulwark",
-        "dropRate": 0.00195,
+        "dropRate": 0.0031,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dinh%27s_bulwark",
@@ -3804,7 +3804,7 @@
       {
         "itemId": 21018,
         "name": "Ancestral hat",
-        "dropRate": 0.00195,
+        "dropRate": 0.0031,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancestral_hat",
@@ -3813,7 +3813,7 @@
       {
         "itemId": 21021,
         "name": "Ancestral robe top",
-        "dropRate": 0.00195,
+        "dropRate": 0.0031,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancestral_robe_top",
@@ -3822,7 +3822,7 @@
       {
         "itemId": 21024,
         "name": "Ancestral robe bottom",
-        "dropRate": 0.00195,
+        "dropRate": 0.0031,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ancestral_robe_bottom",
@@ -3831,7 +3831,7 @@
       {
         "itemId": 21034,
         "name": "Dexterous prayer scroll",
-        "dropRate": 0.013,
+        "dropRate": 0.02067,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dexterous_prayer_scroll",
@@ -3840,7 +3840,7 @@
       {
         "itemId": 21079,
         "name": "Arcane prayer scroll",
-        "dropRate": 0.013,
+        "dropRate": 0.02067,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Arcane_prayer_scroll",
@@ -3849,7 +3849,7 @@
       {
         "itemId": 20851,
         "name": "Olmlet",
-        "dropRate": 0.024531,
+        "dropRate": 0.01887,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Olmlet",
@@ -3858,7 +3858,7 @@
       {
         "itemId": 21047,
         "name": "Torn prayer scroll",
-        "dropRate": 0.07878,
+        "dropRate": 0.125252,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Torn_prayer_scroll",
@@ -3867,7 +3867,7 @@
       {
         "itemId": 21027,
         "name": "Dark relic",
-        "dropRate": 0.07878,
+        "dropRate": 0.125252,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dark_relic",
@@ -3876,7 +3876,7 @@
       {
         "itemId": 6573,
         "name": "Onyx",
-        "dropRate": 0.0065,
+        "dropRate": 0.010333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Onyx",
@@ -3903,7 +3903,7 @@
       {
         "itemId": 22388,
         "name": "Xeric's guard",
-        "dropRate": 0.013,
+        "dropRate": 0.02067,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Xeric%27s_guard",
@@ -3912,7 +3912,7 @@
       {
         "itemId": 22390,
         "name": "Xeric's warrior",
-        "dropRate": 0.0026,
+        "dropRate": 0.004133,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Xeric%27s_warrior",
@@ -3922,7 +3922,7 @@
       {
         "itemId": 22392,
         "name": "Xeric's sentinel",
-        "dropRate": 0.0013,
+        "dropRate": 0.002067,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Xeric%27s_sentinel",
@@ -3932,7 +3932,7 @@
       {
         "itemId": 22394,
         "name": "Xeric's general",
-        "dropRate": 0.000867,
+        "dropRate": 0.001379,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Xeric%27s_general",
@@ -3942,7 +3942,7 @@
       {
         "itemId": 22396,
         "name": "Xeric's champion",
-        "dropRate": 0.00065,
+        "dropRate": 0.001033,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Xeric%27s_champion",
