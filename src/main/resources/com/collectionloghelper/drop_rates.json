@@ -639,7 +639,7 @@
       }
     ],
     "locationDescription": "Zul-Andra, east coast of Tirannwn",
-    "travelTip": "Fairy ring BJS -> boat",
+    "travelTip": "Fairy ring BJS -> Zul-Andra (after Regicide), or Charter ship to Port Tyras",
     "mutuallyExclusive": true,
     "npcId": 2042,
     "interactAction": "Attack",
@@ -727,7 +727,7 @@
       }
     ],
     "locationDescription": "Rellekka docks (boat to island)",
-    "travelTip": "Lunar Isle tele -> Rellekka boat",
+    "travelTip": "Lunar Isle teleport -> Rellekka, or Fremennik sea boots -> Rellekka",
     "npcId": 8061,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -826,7 +826,7 @@
       }
     ],
     "locationDescription": "Taverley Dungeon entrance, Taverley",
-    "travelTip": "Teleport to house -> Taverley",
+    "travelTip": "Fairy ring BIP -> Taverley Dungeon, or POH -> Taverley portal",
     "mutuallyExclusive": true,
     "npcId": 5862,
     "interactAction": "Attack",
@@ -960,7 +960,7 @@
       }
     ],
     "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
-    "travelTip": "Fairy ring CIR -> Karuulm",
+    "travelTip": "Fairy ring CIR -> Mount Karuulm, or Rada's blessing teleport",
     "mutuallyExclusive": true,
     "npcId": 8615,
     "interactAction": "Attack",
@@ -1071,7 +1071,7 @@
       }
     ],
     "locationDescription": "Games necklace cave, level 21 Wilderness",
-    "travelTip": "Games necklace -> Corp",
+    "travelTip": "Games necklace -> Corporeal Beast",
     "mutuallyExclusive": true,
     "npcId": 319,
     "interactAction": "Attack",
@@ -1874,14 +1874,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Slayer Tower rooftop.",
-        "worldX": 3427,
-        "worldY": 3543,
-        "worldPlane": 2,
+        "description": "Travel to the Slayer Tower.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 0,
         "requiredItemIds": [
           21730
         ],
         "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Climb the stairs to the top floor.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE"
       },
       {
         "description": "Kill the Grotesque Guardians.",
@@ -2313,7 +2320,7 @@
       }
     ],
     "locationDescription": "Falador Park",
-    "travelTip": "Falador teleport -> park",
+    "travelTip": "Falador teleport -> Park, dig with spade",
     "npcId": 5779,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -2927,7 +2934,7 @@
       }
     ],
     "locationDescription": "Abyssal Nexus, fairy ring DIP",
-    "travelTip": "Fairy ring DIP",
+    "travelTip": "Fairy ring DIP -> Abyssal Nexus",
     "mutuallyExclusive": true,
     "npcId": 5886,
     "interactAction": "Attack",
@@ -5706,7 +5713,7 @@
       }
     ],
     "locationDescription": "Barrows, east of Mort'ton",
-    "travelTip": "Barrows teleport (Arceuus)",
+    "travelTip": "Barrows teleport (Arceuus), or Mort'ton teleport, or Fairy ring BKR",
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
@@ -7349,11 +7356,18 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Slayer Tower 1st floor, Morytania.",
-        "worldX": 3440,
-        "worldY": 3563,
-        "worldPlane": 1,
+        "description": "Travel to the Slayer Tower.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Climb the stairs to the first floor.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 1,
+        "completionCondition": "PLAYER_ON_PLANE"
       },
       {
         "description": "Kill Infernal Mage.",
@@ -7397,7 +7411,7 @@
       }
     ],
     "locationDescription": "Brine Rat Cavern, north-east of Rellekka",
-    "travelTip": "Fairy ring DKS -> Rellekka",
+    "travelTip": "Fairy ring DKS -> Snowy Hunter area, enter tunnel",
     "npcId": 4501,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -7626,11 +7640,18 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Slayer Tower 1st floor, Morytania.",
-        "worldX": 3442,
-        "worldY": 3543,
-        "worldPlane": 1,
+        "description": "Travel to the Slayer Tower.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Climb the stairs to the first floor.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 1,
+        "completionCondition": "PLAYER_ON_PLANE"
       },
       {
         "description": "Kill Bloodveld.",
@@ -7897,7 +7918,7 @@
       }
     ],
     "locationDescription": "Mos Le'Harmless Cave",
-    "travelTip": "Fairy ring CKR -> boat",
+    "travelTip": "Fairy ring ALQ -> Mos Le'Harmless, or Charter ship",
     "npcId": 3209,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -7952,11 +7973,18 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Slayer Tower 1st floor, Morytania.",
-        "worldX": 3436,
-        "worldY": 3547,
-        "worldPlane": 1,
+        "description": "Travel to the Slayer Tower.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Climb the stairs to the first floor.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 1,
+        "completionCondition": "PLAYER_ON_PLANE"
       },
       {
         "description": "Kill Aberrant Spectre.",
@@ -8254,7 +8282,7 @@
       }
     ],
     "locationDescription": "Wyvern Cave, Fossil Island",
-    "travelTip": "Digsite pendant -> Fossil Island",
+    "travelTip": "Mushroom meadow teleport, or Digsite pendant -> Fossil Island",
     "npcId": 7794,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -8416,7 +8444,7 @@
     "worldY": 3534,
     "worldPlane": 2,
     "killTimeSeconds": 14,
-    "afkLevel": 2,
+    "afkLevel": 3,
     "requirements": {
       "skills": [
         {
@@ -8457,11 +8485,18 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Slayer Tower top floor, Morytania.",
+        "description": "Travel to the Slayer Tower.",
         "worldX": 3429,
-        "worldY": 3534,
-        "worldPlane": 2,
+        "worldY": 3535,
+        "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Climb the stairs to the top floor.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE"
       },
       {
         "description": "Kill Gargoyle.",
@@ -8626,11 +8661,18 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Slayer Tower top floor, Morytania.",
-        "worldX": 3442,
-        "worldY": 3558,
-        "worldPlane": 2,
+        "description": "Travel to the Slayer Tower.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Climb the stairs to the top floor.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE"
       },
       {
         "description": "Kill Nechryael.",
@@ -8890,11 +8932,18 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Slayer Tower top floor, Morytania.",
-        "worldX": 3418,
-        "worldY": 3560,
-        "worldPlane": 2,
+        "description": "Travel to the Slayer Tower.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
+      },
+      {
+        "description": "Climb the stairs to the top floor.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE"
       },
       {
         "description": "Kill Abyssal Demon.",
@@ -8915,7 +8964,7 @@
     "worldY": 3611,
     "worldPlane": 0,
     "killTimeSeconds": 15,
-    "afkLevel": 2,
+    "afkLevel": 3,
     "requirements": {
       "skills": [
         {
@@ -15491,7 +15540,7 @@
     "worldY": 6084,
     "worldPlane": 0,
     "killTimeSeconds": 2,
-    "afkLevel": 1,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 24034,
@@ -23920,7 +23969,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 2
   },
   {
     "name": "Black Chinchompas",
@@ -23956,7 +24006,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Woodcutting (Teak Trees)",
@@ -23992,7 +24043,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 2
   },
   {
     "name": "Mining (Gemstone Rocks)",
@@ -24028,7 +24080,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Fishing (Swordfish)",
@@ -24072,7 +24125,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 2
   },
   {
     "name": "Runecrafting (Fire Runes)",
@@ -24108,7 +24162,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Farming (Fruit Trees)",
@@ -24144,7 +24199,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 3
   },
   {
     "name": "Underwater Crabs",
@@ -25748,7 +25804,7 @@
     "worldY": 3893,
     "worldPlane": 0,
     "killTimeSeconds": 2,
-    "afkLevel": 1,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 19707,
