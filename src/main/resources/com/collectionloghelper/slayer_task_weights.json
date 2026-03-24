@@ -130,6 +130,7 @@
         "Jellies": { "weight": 6, "minCombat": 57, "minSlayer": 52 },
         "Kalphite": { "weight": 9, "minCombat": 15 },
         "Kurask": { "weight": 3, "minCombat": 65, "minSlayer": 70 },
+        "Lesser Nagua": { "weight": 2, "minSlayer": 48 },
         "Lizardmen": { "weight": 8 },
         "Iron dragons": { "weight": 5 },
         "Steel dragons": { "weight": 5 },
