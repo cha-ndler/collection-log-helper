@@ -32,7 +32,7 @@ public class WorldMapRouteOverlay extends Overlay
 {
 	private static final float LINE_WIDTH = 2.0f;
 	private static final int LINE_ALPHA = 180;
-	private static final int ARROWHEAD_SIZE = 8;
+	private static final int ARROWHEAD_SIZE = 12;
 	private static final BasicStroke LINE_STROKE = new BasicStroke(LINE_WIDTH);
 
 	private final Client client;
