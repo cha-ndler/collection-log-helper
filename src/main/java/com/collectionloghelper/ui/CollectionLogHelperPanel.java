@@ -9,6 +9,7 @@ import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
+import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.SlayerCreatureDatabase;
 import com.collectionloghelper.data.SlayerTaskState;
@@ -21,9 +22,12 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -32,6 +36,7 @@ import java.util.function.Supplier;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -41,10 +46,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.runelite.client.game.ItemManager;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.util.AsyncBufferedImage;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.PluginPanel;
@@ -101,6 +108,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final DataSyncState dataSyncState;
 	private final SlayerTaskState slayerTaskState;
 	private final SlayerStrategyCalculator slayerStrategyCalculator;
+	private final PlayerInventoryState inventoryState;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Supplier<WorldPoint> playerLocationSupplier;
@@ -130,10 +138,12 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private boolean slayerStrategyExpanded = false;
 
 	private final JLabel guidanceBannerLabel;
+	private final JLabel requirementsWarningLabel;
 	private final JPanel guidanceBannerPanel;
 
 	private final JPanel stepProgressPanel;
 	private final JLabel stepProgressLabel;
+	private final JPanel requiredItemsPanel;
 	private final JButton nextStepButton;
 	private final JButton skipStepButton;
 
@@ -154,6 +164,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		RequirementsChecker requirementsChecker, DataSyncState dataSyncState,
 		SlayerTaskState slayerTaskState,
 		SlayerStrategyCalculator slayerStrategyCalculator,
+		PlayerInventoryState inventoryState,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
 		Supplier<WorldPoint> playerLocationSupplier,
 		Consumer<AfkFilter> afkFilterUpdater)
@@ -168,6 +179,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.dataSyncState = dataSyncState;
 		this.slayerTaskState = slayerTaskState;
 		this.slayerStrategyCalculator = slayerStrategyCalculator;
+		this.inventoryState = inventoryState;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.playerLocationSupplier = playerLocationSupplier;
@@ -280,19 +292,27 @@ public class CollectionLogHelperPanel extends PluginPanel
 		controlsPanel.add(slayerStrategyPanel);
 
 		// Active guidance banner (shows which source is being guided)
-		guidanceBannerPanel = new JPanel(new BorderLayout());
+		guidanceBannerPanel = new JPanel();
+		guidanceBannerPanel.setLayout(new BoxLayout(guidanceBannerPanel, BoxLayout.Y_AXIS));
 		guidanceBannerPanel.setBackground(new Color(25, 50, 25));
 		guidanceBannerPanel.setBorder(BorderFactory.createCompoundBorder(
 			BorderFactory.createLineBorder(new Color(80, 200, 80), 1),
 			BorderFactory.createEmptyBorder(3, 6, 3, 6)
 		));
 		guidanceBannerPanel.setAlignmentX(CENTER_ALIGNMENT);
-		guidanceBannerPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 24));
+		guidanceBannerPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 48));
 		guidanceBannerPanel.setVisible(false);
 		guidanceBannerLabel = new JLabel();
 		guidanceBannerLabel.setFont(FontManager.getRunescapeSmallFont());
 		guidanceBannerLabel.setForeground(new Color(80, 200, 80));
-		guidanceBannerPanel.add(guidanceBannerLabel, BorderLayout.CENTER);
+		guidanceBannerLabel.setAlignmentX(LEFT_ALIGNMENT);
+		guidanceBannerPanel.add(guidanceBannerLabel);
+		requirementsWarningLabel = new JLabel();
+		requirementsWarningLabel.setFont(FontManager.getRunescapeSmallFont());
+		requirementsWarningLabel.setForeground(new Color(255, 170, 0));
+		requirementsWarningLabel.setAlignmentX(LEFT_ALIGNMENT);
+		requirementsWarningLabel.setVisible(false);
+		guidanceBannerPanel.add(requirementsWarningLabel);
 		controlsPanel.add(guidanceBannerPanel);
 
 		// Step progress panel (for multi-step guidance sequences)
@@ -312,6 +332,12 @@ public class CollectionLogHelperPanel extends PluginPanel
 		stepProgressLabel.setForeground(new Color(80, 180, 255));
 		stepProgressLabel.setAlignmentX(LEFT_ALIGNMENT);
 		stepProgressPanel.add(stepProgressLabel);
+
+		requiredItemsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 4, 2));
+		requiredItemsPanel.setBackground(new Color(25, 35, 55));
+		requiredItemsPanel.setAlignmentX(LEFT_ALIGNMENT);
+		requiredItemsPanel.setVisible(false);
+		stepProgressPanel.add(requiredItemsPanel);
 
 		JPanel stepButtonRow = new JPanel();
 		stepButtonRow.setLayout(new BoxLayout(stepButtonRow, BoxLayout.X_AXIS));
@@ -1282,10 +1308,24 @@ public class CollectionLogHelperPanel extends PluginPanel
 			{
 				guidanceBannerLabel.setText("Guiding: " + source.getName());
 				guidanceBannerPanel.setVisible(true);
+
+				// Show unmet requirements warning if applicable
+				java.util.List<String> unmet = requirementsChecker.getUnmetRequirements(source.getName());
+				if (!unmet.isEmpty())
+				{
+					String warningText = "\u26A0 Requires: " + String.join(", ", unmet);
+					requirementsWarningLabel.setText("<html>" + warningText + "</html>");
+					requirementsWarningLabel.setVisible(true);
+				}
+				else
+				{
+					requirementsWarningLabel.setVisible(false);
+				}
 			}
 			else
 			{
 				guidanceBannerPanel.setVisible(false);
+				requirementsWarningLabel.setVisible(false);
 			}
 			guidanceBannerPanel.revalidate();
 			if (guidanceBannerPanel.getParent() != null)
@@ -1311,13 +1351,15 @@ public class CollectionLogHelperPanel extends PluginPanel
 	/**
 	 * Updates the step progress banner with current step info.
 	 */
-	public void updateStepProgress(int current, int total, String description, boolean isManual)
+	public void updateStepProgress(int current, int total, String description, boolean isManual,
+		List<Integer> requiredItemIds)
 	{
 		SwingUtilities.invokeLater(() ->
 		{
 			stepProgressLabel.setText(
 				"<html>Step " + current + "/" + total + ": " + description + "</html>");
 			nextStepButton.setVisible(isManual);
+			updateRequiredItemDisplay(requiredItemIds);
 			stepProgressPanel.setVisible(true);
 			stepProgressPanel.revalidate();
 			if (stepProgressPanel.getParent() != null)
@@ -1328,12 +1370,81 @@ public class CollectionLogHelperPanel extends PluginPanel
 	}
 
 	/**
+	 * Updates the required items display with item sprites and green/red status borders.
+	 * Green border = item is in inventory, red border = item is missing.
+	 */
+	private void updateRequiredItemDisplay(List<Integer> requiredItemIds)
+	{
+		requiredItemsPanel.removeAll();
+
+		if (requiredItemIds == null || requiredItemIds.isEmpty())
+		{
+			requiredItemsPanel.setVisible(false);
+			return;
+		}
+
+		JLabel headerLabel = new JLabel("Required:");
+		headerLabel.setFont(FontManager.getRunescapeSmallFont());
+		headerLabel.setForeground(new Color(180, 180, 180));
+		requiredItemsPanel.add(headerLabel);
+
+		for (int itemId : requiredItemIds)
+		{
+			boolean hasItem = inventoryState.hasItem(itemId);
+			Color borderColor = hasItem ? new Color(40, 180, 40) : new Color(200, 40, 40);
+
+			JLabel itemLabel = new JLabel();
+			itemLabel.setPreferredSize(new Dimension(32, 32));
+			itemLabel.setBorder(BorderFactory.createLineBorder(borderColor, 2));
+			itemLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			itemLabel.setVerticalAlignment(SwingConstants.CENTER);
+
+			// Load item sprite asynchronously
+			AsyncBufferedImage asyncImage = itemManager.getImage(itemId);
+			asyncImage.onLoaded(() ->
+			{
+				BufferedImage scaled = scaleImage(asyncImage, 28, 28);
+				itemLabel.setIcon(new ImageIcon(scaled));
+				itemLabel.revalidate();
+				itemLabel.repaint();
+			});
+			// Set initial image (may be placeholder)
+			BufferedImage scaled = scaleImage(asyncImage, 28, 28);
+			itemLabel.setIcon(new ImageIcon(scaled));
+
+			// Tooltip with item name and status
+			String statusText = hasItem ? " (in inventory)" : " (MISSING)";
+			itemLabel.setToolTipText(itemManager.getItemComposition(itemId).getName() + statusText);
+
+			requiredItemsPanel.add(itemLabel);
+		}
+
+		requiredItemsPanel.setVisible(true);
+		requiredItemsPanel.revalidate();
+		requiredItemsPanel.repaint();
+	}
+
+	/**
+	 * Scales a BufferedImage to the given dimensions.
+	 */
+	private static BufferedImage scaleImage(BufferedImage source, int width, int height)
+	{
+		BufferedImage scaled = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = scaled.createGraphics();
+		g.drawImage(source, 0, 0, width, height, null);
+		g.dispose();
+		return scaled;
+	}
+
+	/**
 	 * Hides the step progress banner.
 	 */
 	public void hideStepProgress()
 	{
 		SwingUtilities.invokeLater(() ->
 		{
+			requiredItemsPanel.removeAll();
+			requiredItemsPanel.setVisible(false);
 			stepProgressPanel.setVisible(false);
 			stepProgressPanel.revalidate();
 			if (stepProgressPanel.getParent() != null)
