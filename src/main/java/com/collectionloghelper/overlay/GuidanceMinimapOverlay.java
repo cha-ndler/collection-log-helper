@@ -23,7 +23,6 @@ import javax.inject.Singleton;
 @Singleton
 public class GuidanceMinimapOverlay extends Overlay
 {
-	private static final int DOT_RADIUS = 4;
 	private static final int ARROW_INNER_DIST = 55;
 	private static final int ARROW_OUTER_DIST = 65;
 	private static final BasicStroke STROKE_6 = new BasicStroke(6);
@@ -57,25 +56,12 @@ public class GuidanceMinimapOverlay extends Overlay
 
 		LocalPoint localPoint = LocalPoint.fromWorld(client.getTopLevelWorldView(), targetPoint);
 
-		// If target is on the loaded map, try to show it as a dot on minimap
+		// If target is visible on the minimap, no arrow needed
 		if (localPoint != null)
 		{
 			Point minimapPoint = Perspective.localToMinimap(client, localPoint);
 			if (minimapPoint != null)
 			{
-				// Outlined dot for visibility
-				graphics.setColor(Color.BLACK);
-				graphics.fillOval(
-					minimapPoint.getX() - DOT_RADIUS - 1,
-					minimapPoint.getY() - DOT_RADIUS - 1,
-					(DOT_RADIUS + 1) * 2,
-					(DOT_RADIUS + 1) * 2);
-				graphics.setColor(overlayColor);
-				graphics.fillOval(
-					minimapPoint.getX() - DOT_RADIUS,
-					minimapPoint.getY() - DOT_RADIUS,
-					DOT_RADIUS * 2,
-					DOT_RADIUS * 2);
 				return null;
 			}
 		}
