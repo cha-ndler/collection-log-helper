@@ -4034,7 +4034,10 @@
       },
       {
         "description": "Complete the raid and collect loot from the chest.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "worldX": 1233,
+        "worldY": 3573,
+        "worldPlane": 0
       }
     ],
     "ironKillTimeSeconds": 1029
@@ -4275,7 +4278,10 @@
       },
       {
         "description": "Complete the raid and collect loot from the chest.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "worldX": 1233,
+        "worldY": 3573,
+        "worldPlane": 0
       }
     ]
   },
@@ -4487,7 +4493,10 @@
       },
       {
         "description": "Complete the raid and collect loot.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "worldX": 3650,
+        "worldY": 3218,
+        "worldPlane": 0
       }
     ],
     "ironKillTimeSeconds": 1440
@@ -4765,7 +4774,10 @@
       },
       {
         "description": "Complete the raid and collect loot from the sarcophagus.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "worldX": 3234,
+        "worldY": 2784,
+        "worldPlane": 0
       }
     ],
     "ironKillTimeSeconds": 1200
@@ -5043,7 +5055,10 @@
       },
       {
         "description": "Complete the raid and collect loot from the sarcophagus.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "worldX": 3234,
+        "worldY": 2784,
+        "worldPlane": 0
       }
     ]
   },
@@ -5320,7 +5335,10 @@
       },
       {
         "description": "Complete the raid and collect loot from the sarcophagus.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "worldX": 3234,
+        "worldY": 2784,
+        "worldPlane": 0
       }
     ],
     "ironKillTimeSeconds": 1680
@@ -5406,7 +5424,10 @@
       },
       {
         "description": "Complete the Corrupted Gauntlet and collect loot.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "worldX": 3230,
+        "worldY": 6073,
+        "worldPlane": 0
       }
     ],
     "rewardType": "MIXED"
@@ -5491,7 +5512,10 @@
       },
       {
         "description": "Complete the Gauntlet and collect loot.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "worldX": 3230,
+        "worldY": 6073,
+        "worldPlane": 0
       }
     ],
     "rewardType": "MIXED",
@@ -18379,7 +18403,10 @@
       },
       {
         "description": "Complete the Fight Caves and collect your reward.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "worldX": 2439,
+        "worldY": 5172,
+        "worldPlane": 0
       }
     ],
     "rewardType": "MIXED"
@@ -18432,7 +18459,10 @@
       },
       {
         "description": "Complete the Inferno and collect your reward.",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "worldX": 2496,
+        "worldY": 5122,
+        "worldPlane": 0
       }
     ],
     "rewardType": "MIXED"
