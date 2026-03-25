@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -227,6 +228,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
 	private int lastObtainedCount = -1;
+
+	/** Cached set of source names that have at least one unobtained item. Rebuilt when collection state changes. */
+	private Set<String> sourcesWithMissingItems = new HashSet<>();
 	private volatile boolean pendingRequirementsRefresh = false;
 	private volatile boolean pendingTravelVarbitRefresh = false;
 	private boolean clogNotificationChecked = false;
@@ -260,6 +264,10 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	/** Coalesces multiple panel.rebuild() calls into a single rebuild per game tick. */
 	private boolean pendingPanelRebuild;
+
+	/** Cached ranked efficiency list — recomputed only when dirty. */
+	private List<ScoredItem> cachedRankedSources;
+	private boolean rankedSourcesDirty = true;
 
 	/** Tracked NPC for guidance overlay — maintained via NpcSpawned/NpcDespawned events. */
 	private volatile NPC trackedGuidanceNpc;
@@ -330,6 +338,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				travelCapabilities.refreshQuestState();
 				travelCapabilities.refreshVarbits();
 				lastObtainedCount = collectionState.getTotalObtained();
+				rebuildSourcesWithMissingItems();
 				panel.rebuild();
 			});
 		}
@@ -347,6 +356,10 @@ public class CollectionLogHelperPlugin extends Plugin
 			authoringLogWriter.close();
 			authoringLogWriter = null;
 		}
+		if (panel != null)
+		{
+			panel.shutDown();
+		}
 		clientToolbar.removeNavigation(navButton);
 		overlayManager.remove(guidanceOverlay);
 		overlayManager.remove(guidanceMinimapOverlay);
@@ -358,6 +371,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayManager.remove(widgetHighlightOverlay);
 		deactivateGuidance();
 		lastObtainedCount = -1;
+		sourcesWithMissingItems.clear();
 		collectionLogOpen = false;
 		autoSyncPending = false;
 		scriptScanActive = false;
@@ -366,6 +380,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		syncReminderSent = false;
 		loginTickDelay = 0;
 		pendingPanelRebuild = false;
+		rankedSourcesDirty = true;
+		cachedRankedSources = null;
 		cachedPlayerLocation = null;
 		lastProximityLocation = null;
 		guidanceOverlay.setShowCollectionLogReminder(false);
@@ -407,6 +423,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				travelCapabilities.refreshVarbits();
 				slayerTaskState.refresh();
 				lastObtainedCount = collectionState.getTotalObtained();
+				rebuildSourcesWithMissingItems();
 
 				// Rescan scene for tracked objects after scene (re)load
 				objectHighlightOverlay.rescanScene();
@@ -441,6 +458,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			clueEstimator.resetBucket();
 			slayerTaskState.reset();
 			lastObtainedCount = -1;
+			sourcesWithMissingItems.clear();
 			collectionLogOpen = false;
 			autoSyncPending = false;
 			scriptScanActive = false;
@@ -517,12 +535,14 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (currentCount != lastObtainedCount)
 		{
 			lastObtainedCount = currentCount;
+			rebuildSourcesWithMissingItems();
 			slayerChanged = true; // rebuild anyway
 		}
 
 		if (slayerChanged)
 		{
 			pendingPanelRebuild = true;
+			rankedSourcesDirty = true;
 		}
 	}
 
@@ -530,11 +550,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	public void onStatChanged(StatChanged event)
 	{
 		clueEstimator.resetBucket();
-		boolean changed = requirementsChecker.refreshAccessibility(database.getAllSources());
-		if (changed)
-		{
-			pendingPanelRebuild = true;
-		}
+		pendingRequirementsRefresh = true;
 	}
 
 	@Subscribe
@@ -591,6 +607,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			}
 
 			pendingPanelRebuild = true;
+			rankedSourcesDirty = true;
 		}
 	}
 
@@ -752,6 +769,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (reqsChanged && !scriptScanActive)
 			{
 				pendingPanelRebuild = true;
+				rankedSourcesDirty = true;
 			}
 		}
 
@@ -793,6 +811,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				panel.updateDataSyncWarning();
 			}
 			pendingPanelRebuild = true;
+			rankedSourcesDirty = true;
 
 			guidanceOverlay.setShowCollectionLogReminder(false);
 			guidanceOverlay.setShowBankReminder(false);
@@ -838,6 +857,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				{
 					lastProximityLocation = current;
 					pendingPanelRebuild = true;
+					rankedSourcesDirty = true;
 				}
 			}
 		}
@@ -850,6 +870,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			slayerRefreshPending = false;
 			slayerTaskState.refresh();
 			pendingPanelRebuild = true;
+			rankedSourcesDirty = true;
 		}
 
 		// One-time check: warn if in-game collection log notification is disabled.
@@ -898,6 +919,7 @@ public class CollectionLogHelperPlugin extends Plugin
 					panel.updateDataSyncWarning();
 				}
 				pendingPanelRebuild = true;
+				rankedSourcesDirty = true;
 				exportEfficiencyIfEnabled();
 			}
 		}
@@ -1399,6 +1421,19 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	/**
+	 * Returns a cached ranked efficiency list, recomputing only when the dirty flag is set.
+	 */
+	private List<ScoredItem> getRankedSources()
+	{
+		if (rankedSourcesDirty || cachedRankedSources == null)
+		{
+			cachedRankedSources = calculator.rankByEfficiency();
+			rankedSourcesDirty = false;
+		}
+		return cachedRankedSources;
+	}
+
+	/**
 	 * Callback from GuidanceSequencer when the entire sequence is complete.
 	 */
 	private void onSequenceComplete()
@@ -1408,10 +1443,11 @@ public class CollectionLogHelperPlugin extends Plugin
 		deactivateGuidance();
 
 		pendingPanelRebuild = true;
+		rankedSourcesDirty = true;
 		if (config.autoAdvanceGuidance())
 		{
 			// Auto-activate guidance for the next top efficiency pick
-			List<ScoredItem> ranked = calculator.rankByEfficiency();
+			List<ScoredItem> ranked = getRankedSources();
 			ranked.stream()
 				.filter(s -> !s.isLocked())
 				.findFirst()
@@ -1461,6 +1497,27 @@ public class CollectionLogHelperPlugin extends Plugin
 		log.debug("Guidance deactivated");
 	}
 
+	/**
+	 * Rebuilds the cached set of source names that have at least one unobtained item.
+	 * Called when collection state changes to avoid per-menu-entry item scanning.
+	 */
+	private void rebuildSourcesWithMissingItems()
+	{
+		Set<String> missing = new HashSet<>();
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			for (CollectionLogItem item : source.getItems())
+			{
+				if (!collectionState.isItemObtained(item.getItemId()))
+				{
+					missing.add(source.getName());
+					break;
+				}
+			}
+		}
+		sourcesWithMissingItems = missing;
+	}
+
 	@Subscribe
 	public void onMenuEntryAdded(MenuEntryAdded event)
 	{
@@ -1494,10 +1551,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			return;
 		}
 
-		// Check if source has any missing items
-		boolean hasMissing = source.getItems().stream()
-			.anyMatch(item -> !collectionState.isItemObtained(item.getItemId()));
-		if (!hasMissing)
+		// Check if source has any missing items (O(1) cached lookup)
+		if (!sourcesWithMissingItems.contains(source.getName()))
 		{
 			return;
 		}
@@ -1542,14 +1597,11 @@ public class CollectionLogHelperPlugin extends Plugin
 				|| action == MenuAction.NPC_THIRD_OPTION || action == MenuAction.NPC_FOURTH_OPTION
 				|| action == MenuAction.NPC_FIFTH_OPTION)
 			{
-				for (NPC npc : client.getTopLevelWorldView().npcs())
+				NPC npc = event.getMenuEntry().getNpc();
+				if (npc != null)
 				{
-					if (npc != null && npc.getIndex() == event.getId())
-					{
-						authoringLog("NPC id=%d name='%s' option='%s'",
-							npc.getId(), npc.getName(), event.getMenuOption());
-						break;
-					}
+					authoringLog("NPC id=%d name='%s' option='%s'",
+						npc.getId(), npc.getName(), event.getMenuOption());
 				}
 			}
 			else if (action == MenuAction.WIDGET_TARGET_ON_GAME_OBJECT)
@@ -1593,13 +1645,10 @@ public class CollectionLogHelperPlugin extends Plugin
 			|| action == MenuAction.NPC_THIRD_OPTION || action == MenuAction.NPC_FOURTH_OPTION
 			|| action == MenuAction.NPC_FIFTH_OPTION)
 		{
-			for (NPC npc : client.getTopLevelWorldView().npcs())
+			NPC npc = event.getMenuEntry().getNpc();
+			if (npc != null)
 			{
-				if (npc != null && npc.getIndex() == event.getId())
-				{
-					guidanceSequencer.onNpcInteracted(npc.getId());
-					break;
-				}
+				guidanceSequencer.onNpcInteracted(npc.getId());
 			}
 		}
 	}
@@ -1918,7 +1967,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		String topPickLine;
-		List<ScoredItem> ranked = calculator.rankByEfficiency();
+		List<ScoredItem> ranked = getRankedSources();
 		ScoredItem topPick = ranked.stream()
 			.filter(s -> !s.isLocked())
 			.findFirst()

@@ -37,8 +37,12 @@ public class WorldMapRouteOverlay extends Overlay
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
+	private final Polygon arrowPolygon = new Polygon();
+	private final Line2D.Double routeLine = new Line2D.Double();
 
 	private volatile WorldPoint targetPoint;
+	private Color cachedOverlayColor;
+	private Color cachedLineColor;
 
 	@Inject
 	private WorldMapRouteOverlay(Client client, CollectionLogHelperConfig config)
@@ -93,23 +97,24 @@ public class WorldMapRouteOverlay extends Overlay
 		graphics.setClip(mapBounds);
 
 		Color overlayColor = config.overlayColor();
-		Color lineColor = new Color(
-			overlayColor.getRed(),
-			overlayColor.getGreen(),
-			overlayColor.getBlue(),
-			LINE_ALPHA
-		);
+		if (!overlayColor.equals(cachedOverlayColor))
+		{
+			cachedOverlayColor = overlayColor;
+			cachedLineColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
+				overlayColor.getBlue(), LINE_ALPHA);
+		}
+		Color lineColor = cachedLineColor;
 
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		// Draw the route line
 		graphics.setColor(lineColor);
 		graphics.setStroke(LINE_STROKE);
-		Line2D.Double line = new Line2D.Double(
+		routeLine.setLine(
 			playerMapPoint.getX(), playerMapPoint.getY(),
 			targetMapPoint.getX(), targetMapPoint.getY()
 		);
-		graphics.draw(line);
+		graphics.draw(routeLine);
 
 		// Draw arrowhead at the target end
 		drawArrowhead(graphics, playerMapPoint, targetMapPoint, lineColor);
@@ -128,6 +133,10 @@ public class WorldMapRouteOverlay extends Overlay
 	private Point mapWorldPointToGraphicsPoint(WorldPoint worldPoint, Rectangle worldMapRect)
 	{
 		WorldMap worldMap = client.getWorldMap();
+		if (worldMap == null || worldMap.getWorldMapData() == null)
+		{
+			return null;
+		}
 
 		if (!worldMap.getWorldMapData().surfaceContainsPosition(worldPoint.getX(), worldPoint.getY()))
 		{
@@ -140,6 +149,10 @@ public class WorldMapRouteOverlay extends Overlay
 		int heightInTiles = (int) Math.ceil(worldMapRect.getHeight() / pixelsPerTile);
 
 		Point worldMapPosition = worldMap.getWorldMapPosition();
+		if (worldMapPosition == null)
+		{
+			return null;
+		}
 
 		int yTileMax = worldMapPosition.getY() - heightInTiles / 2;
 		int yTileOffset = (yTileMax - worldPoint.getY() - 1) * -1;
@@ -176,14 +189,13 @@ public class WorldMapRouteOverlay extends Overlay
 		int x2 = tipX - (int) (ARROWHEAD_SIZE * Math.cos(angle + Math.PI / 6));
 		int y2 = tipY - (int) (ARROWHEAD_SIZE * Math.sin(angle + Math.PI / 6));
 
-		Polygon arrowhead = new Polygon(
-			new int[]{tipX, x1, x2},
-			new int[]{tipY, y1, y2},
-			3
-		);
+		arrowPolygon.reset();
+		arrowPolygon.addPoint(tipX, tipY);
+		arrowPolygon.addPoint(x1, y1);
+		arrowPolygon.addPoint(x2, y2);
 
 		graphics.setColor(color);
-		graphics.fillPolygon(arrowhead);
+		graphics.fillPolygon(arrowPolygon);
 	}
 
 	public void setTargetPoint(WorldPoint point)

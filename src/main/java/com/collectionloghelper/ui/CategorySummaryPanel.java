@@ -29,12 +29,28 @@ class CategorySummaryPanel extends JPanel
 	private final int obtained;
 	private final int total;
 	private boolean expanded = false;
+	private boolean populated = false;
+
+	// Data retained for lazy population
+	private List<CollectionLogSource> lazySources;
+	private PlayerCollectionState lazyCollectionState;
+	private RequirementsChecker lazyRequirementsChecker;
+	private ItemManager lazyItemManager;
+	private ItemClickHandler lazyClickHandler;
+	private boolean lazyHideObtained;
 
 	CategorySummaryPanel(CollectionLogCategory category, List<CollectionLogSource> sources,
 		PlayerCollectionState collectionState, RequirementsChecker requirementsChecker,
 		ItemManager itemManager, ItemClickHandler clickHandler, boolean hideObtained)
 	{
 		this.categoryName = category.getDisplayName();
+		this.lazySources = sources;
+		this.lazyCollectionState = collectionState;
+		this.lazyRequirementsChecker = requirementsChecker;
+		this.lazyItemManager = itemManager;
+		this.lazyClickHandler = clickHandler;
+		this.lazyHideObtained = hideObtained;
+
 		setLayout(new BorderLayout());
 		setBackground(ColorScheme.DARKER_GRAY_COLOR);
 		setBorder(BorderFactory.createEmptyBorder(0, 0, 4, 0));
@@ -62,27 +78,11 @@ class CategorySummaryPanel extends JPanel
 
 		add(headerPanel, BorderLayout.NORTH);
 
-		// Expandable items container
+		// Expandable items container (rows created lazily on first expand)
 		itemsContainer = new JPanel();
 		itemsContainer.setLayout(new BoxLayout(itemsContainer, BoxLayout.Y_AXIS));
 		itemsContainer.setBackground(ColorScheme.DARK_GRAY_COLOR);
 		itemsContainer.setVisible(false);
-
-		for (CollectionLogSource source : sources)
-		{
-			boolean locked = !requirementsChecker.isAccessible(source.getName());
-			for (CollectionLogItem item : source.getItems())
-			{
-				boolean itemObtained = collectionState.isItemObtained(item.getItemId());
-				if (hideObtained && itemObtained)
-				{
-					continue;
-				}
-				ItemRowPanel row = new ItemRowPanel(item, source, itemObtained, 0,
-					locked, itemManager, () -> clickHandler.onItemClicked(item, source));
-				itemsContainer.add(row);
-			}
-		}
 
 		add(itemsContainer, BorderLayout.CENTER);
 
@@ -93,6 +93,10 @@ class CategorySummaryPanel extends JPanel
 			public void mouseClicked(java.awt.event.MouseEvent e)
 			{
 				expanded = !expanded;
+				if (expanded && !populated)
+				{
+					populateItems();
+				}
 				itemsContainer.setVisible(expanded);
 				nameLabel.setText(String.format("%s %s (%d/%d)",
 					expanded ? "\u25BC" : "\u25B6",
@@ -114,6 +118,32 @@ class CategorySummaryPanel extends JPanel
 		});
 	}
 
+	private void populateItems()
+	{
+		for (CollectionLogSource source : lazySources)
+		{
+			boolean locked = !lazyRequirementsChecker.isAccessible(source.getName());
+			for (CollectionLogItem item : source.getItems())
+			{
+				boolean itemObtained = lazyCollectionState.isItemObtained(item.getItemId());
+				if (lazyHideObtained && itemObtained)
+				{
+					continue;
+				}
+				ItemRowPanel row = new ItemRowPanel(item, source, itemObtained, 0,
+					locked, lazyItemManager, () -> lazyClickHandler.onItemClicked(item, source));
+				itemsContainer.add(row);
+			}
+		}
+		populated = true;
+		// Release references no longer needed
+		lazySources = null;
+		lazyCollectionState = null;
+		lazyRequirementsChecker = null;
+		lazyItemManager = null;
+		lazyClickHandler = null;
+	}
+
 	boolean isExpanded()
 	{
 		return expanded;
@@ -127,6 +157,10 @@ class CategorySummaryPanel extends JPanel
 	void setExpanded(boolean expand)
 	{
 		expanded = expand;
+		if (expanded && !populated)
+		{
+			populateItems();
+		}
 		itemsContainer.setVisible(expanded);
 		nameLabel.setText(String.format("%s %s (%d/%d)",
 			expanded ? "\u25BC" : "\u25B6",

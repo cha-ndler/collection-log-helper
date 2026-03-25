@@ -34,6 +34,7 @@ import javax.inject.Singleton;
 public class GuidanceOverlay extends OverlayPanel
 {
 	private static final int MAX_PANEL_WIDTH = 200;
+	private static final Dimension PANEL_PREFERRED_SIZE = new Dimension(MAX_PANEL_WIDTH, 0);
 	private static final int ARROW_HEIGHT = 14;
 	private static final int ARROW_WIDTH = 12;
 	private static final int ARROW_GAP = 5;
@@ -43,6 +44,7 @@ public class GuidanceOverlay extends OverlayPanel
 	private static final Color TRAVEL_COLOR = new Color(100, 200, 255);
 	private static final Color ACTION_COLOR = new Color(100, 255, 100);
 	private static final Color REMINDER_COLOR = new Color(255, 170, 0);
+	private static final int MAX_RENDER_DISTANCE = 2400;
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
@@ -63,6 +65,12 @@ public class GuidanceOverlay extends OverlayPanel
 	private volatile boolean showCollectionLogReminder;
 	private volatile boolean showBankReminder;
 	private volatile NPC trackedNpc;
+	private final Polygon arrowPolygon = new Polygon();
+	private Color cachedOverlayColor;
+	private Color cachedFillColor50;
+	private Color cachedFillColor30;
+	private volatile String cachedTravelLabel;
+	private volatile String cachedNpcLabel;
 
 	@Inject
 	private GuidanceOverlay(Client client, CollectionLogHelperConfig config)
@@ -91,6 +99,7 @@ public class GuidanceOverlay extends OverlayPanel
 		final boolean bankReminder = this.showBankReminder;
 
 		Color overlayColor = config.overlayColor();
+		updateCachedColors(overlayColor);
 
 		boolean hasReminder = logReminder || bankReminder;
 
@@ -104,14 +113,14 @@ public class GuidanceOverlay extends OverlayPanel
 					.color(Color.WHITE)
 					.build());
 				addSyncRemindersIfNeeded(logReminder, bankReminder);
-				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
+				panelComponent.setPreferredSize(PANEL_PREFERRED_SIZE);
 				return super.render(graphics);
 			}
 			if (hasReminder)
 			{
 				panelComponent.getChildren().clear();
 				addSyncRemindersIfNeeded(logReminder, bankReminder);
-				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
+				panelComponent.setPreferredSize(PANEL_PREFERRED_SIZE);
 				return super.render(graphics);
 			}
 			return null;
@@ -145,7 +154,7 @@ public class GuidanceOverlay extends OverlayPanel
 				if (travel != null && !travel.isEmpty())
 				{
 					panelComponent.getChildren().add(LineComponent.builder()
-						.left("Travel: " + travel)
+						.left(cachedTravelLabel != null ? cachedTravelLabel : "Travel: " + travel)
 						.leftColor(TRAVEL_COLOR)
 						.build());
 				}
@@ -157,7 +166,7 @@ public class GuidanceOverlay extends OverlayPanel
 						.build());
 				}
 				addSyncRemindersIfNeeded(logReminder, bankReminder);
-				panelComponent.setPreferredSize(new Dimension(MAX_PANEL_WIDTH, 0));
+				panelComponent.setPreferredSize(PANEL_PREFERRED_SIZE);
 				return super.render(graphics);
 			}
 			return null;
@@ -172,14 +181,28 @@ public class GuidanceOverlay extends OverlayPanel
 			if (npc == null || npc.getId() != npcId)
 			{
 				npc = null;
-				for (NPC candidate : client.getTopLevelWorldView().npcs())
+				net.runelite.api.WorldView wv = client.getTopLevelWorldView();
+				LocalPoint playerLocal = client.getLocalPlayer() != null
+					? client.getLocalPlayer().getLocalLocation() : null;
+				if (wv != null)
 				{
-					if (candidate != null && candidate.getId() == npcId)
+					for (NPC candidate : wv.npcs())
 					{
-						npc = candidate;
-						// Cache the fallback result to avoid re-scanning every frame
-						this.trackedNpc = npc;
-						break;
+						if (candidate != null && candidate.getId() == npcId)
+						{
+							// Skip NPCs too far from the player to be visible
+							if (playerLocal != null)
+							{
+								LocalPoint candidateLocal = candidate.getLocalLocation();
+								if (candidateLocal != null
+									&& playerLocal.distanceTo(candidateLocal) > MAX_RENDER_DISTANCE)
+								{
+									continue;
+								}
+							}
+							npc = candidate;
+							break;
+						}
 					}
 				}
 			}
@@ -199,9 +222,7 @@ public class GuidanceOverlay extends OverlayPanel
 				return null;
 			}
 
-			Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
-				overlayColor.getBlue(), 50);
-			OverlayUtil.renderPolygon(graphics, poly, overlayColor, fillColor,
+			OverlayUtil.renderPolygon(graphics, poly, overlayColor, cachedFillColor50,
 				STROKE_2);
 
 			if (name != null)
@@ -237,9 +258,7 @@ public class GuidanceOverlay extends OverlayPanel
 					Polygon tilePoly = Perspective.getCanvasTilePoly(client, tileLocal);
 					if (tilePoly != null)
 					{
-						Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
-							overlayColor.getBlue(), 50);
-						OverlayUtil.renderPolygon(graphics, tilePoly, overlayColor, fillColor,
+						OverlayUtil.renderPolygon(graphics, tilePoly, overlayColor, cachedFillColor50,
 							STROKE_2);
 					}
 				}
@@ -251,9 +270,7 @@ public class GuidanceOverlay extends OverlayPanel
 				Shape hull = npc.getConvexHull();
 				if (hull != null)
 				{
-					Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
-						overlayColor.getBlue(), 30);
-					graphics.setColor(fillColor);
+					graphics.setColor(cachedFillColor30);
 					graphics.fill(hull);
 					graphics.setColor(overlayColor);
 					graphics.setStroke(STROKE_2);
@@ -263,11 +280,11 @@ public class GuidanceOverlay extends OverlayPanel
 			}
 		}
 
-		// Draw downward-pointing arrow above the NPC
-		Shape hull = npc.getConvexHull();
-		if (hull != null)
+		// Draw downward-pointing arrow above the NPC (reuse hull from HULL case if available)
+		Shape arrowHull = npc.getConvexHull();
+		if (arrowHull != null)
 		{
-			Rectangle bounds = hull.getBounds();
+			Rectangle bounds = arrowHull.getBounds();
 			int arrowX = (int) bounds.getCenterX();
 			int arrowTipY = (int) bounds.getMinY() - ARROW_GAP;
 			renderDirectionArrow(graphics, arrowX, arrowTipY, overlayColor);
@@ -277,7 +294,7 @@ public class GuidanceOverlay extends OverlayPanel
 			if (builtTooltip != null)
 			{
 				Point mousePos = client.getMouseCanvasPosition();
-				if (mousePos != null && hull.contains(mousePos.getX(), mousePos.getY()))
+				if (mousePos != null && arrowHull.contains(mousePos.getX(), mousePos.getY()))
 				{
 					tooltipManager.add(new Tooltip(builtTooltip));
 				}
@@ -288,9 +305,7 @@ public class GuidanceOverlay extends OverlayPanel
 		LocalPoint npcLocal = npc.getLocalLocation();
 		if (npcLocal != null)
 		{
-			String label = action != null
-				? action + " " + npc.getName()
-				: npc.getName();
+			String label = cachedNpcLabel != null ? cachedNpcLabel : npc.getName();
 
 			Point textPoint = Perspective.getCanvasTextLocation(
 				client, graphics, npcLocal, label,
@@ -311,20 +326,19 @@ public class GuidanceOverlay extends OverlayPanel
 		int halfW = ARROW_WIDTH / 2;
 		int topY = tipY - ARROW_HEIGHT;
 
-		Polygon arrow = new Polygon(
-			new int[]{x, x + halfW, x - halfW},
-			new int[]{tipY, topY, topY},
-			3
-		);
+		arrowPolygon.reset();
+		arrowPolygon.addPoint(x, tipY);
+		arrowPolygon.addPoint(x + halfW, topY);
+		arrowPolygon.addPoint(x - halfW, topY);
 
 		// Black outline
 		graphics.setColor(Color.BLACK);
 		graphics.setStroke(STROKE_2);
-		graphics.drawPolygon(arrow);
+		graphics.drawPolygon(arrowPolygon);
 
 		// Colored fill
 		graphics.setColor(color);
-		graphics.fillPolygon(arrow);
+		graphics.fillPolygon(arrowPolygon);
 	}
 
 	/**
@@ -351,6 +365,18 @@ public class GuidanceOverlay extends OverlayPanel
 		graphics.drawString(text, x, y);
 	}
 
+	private void updateCachedColors(Color overlayColor)
+	{
+		if (!overlayColor.equals(cachedOverlayColor))
+		{
+			cachedOverlayColor = overlayColor;
+			cachedFillColor50 = new Color(overlayColor.getRed(), overlayColor.getGreen(),
+				overlayColor.getBlue(), 50);
+			cachedFillColor30 = new Color(overlayColor.getRed(), overlayColor.getGreen(),
+				overlayColor.getBlue(), 30);
+		}
+	}
+
 	public void setTargetPoint(WorldPoint targetPoint)
 	{
 		this.targetPoint = targetPoint;
@@ -369,6 +395,8 @@ public class GuidanceOverlay extends OverlayPanel
 	public void setTravelTip(String travelTip)
 	{
 		this.travelTip = travelTip;
+		this.cachedTravelLabel = (travelTip != null && !travelTip.isEmpty())
+			? "Travel: " + travelTip : null;
 	}
 
 	public void setClueGuidanceText(String clueGuidanceText)
@@ -384,6 +412,7 @@ public class GuidanceOverlay extends OverlayPanel
 	public void setInteractAction(String action)
 	{
 		this.interactAction = action;
+		rebuildNpcLabel(action, this.trackedNpc);
 	}
 
 	public void setShowCollectionLogReminder(boolean show)
@@ -399,6 +428,7 @@ public class GuidanceOverlay extends OverlayPanel
 	public void setTrackedNpc(NPC npc)
 	{
 		this.trackedNpc = npc;
+		rebuildNpcLabel(this.interactAction, npc);
 	}
 
 	public void clearTarget()
@@ -411,6 +441,23 @@ public class GuidanceOverlay extends OverlayPanel
 		targetNpcId = 0;
 		interactAction = null;
 		trackedNpc = null;
+		cachedTravelLabel = null;
+		cachedNpcLabel = null;
+	}
+
+	private void rebuildNpcLabel(String action, NPC npc)
+	{
+		if (npc != null)
+		{
+			String npcName = npc.getName();
+			cachedNpcLabel = (action != null)
+				? action + " " + npcName
+				: npcName;
+		}
+		else
+		{
+			cachedNpcLabel = null;
+		}
 	}
 
 	private void addSyncRemindersIfNeeded(boolean logReminder, boolean bankReminder)

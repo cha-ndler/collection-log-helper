@@ -42,6 +42,14 @@ public class GuidanceSequencer
 	private volatile int loopIterationsCompleted;
 	private volatile int cumulativeActionCount;
 
+	/** Cached compiled pattern for the current step's chat completion regex. */
+	private Pattern compiledChatPattern;
+	/** The source pattern string that produced compiledChatPattern, for invalidation. */
+	private String compiledChatPatternSource;
+	/** Cached WorldPoint for the current step's target location. */
+	private WorldPoint cachedStepPoint;
+	private int cachedStepPointIndex = -1;
+
 	/** Cache of resolved alternatives keyed by step index. Cleared when a new sequence starts. */
 	private final Map<Integer, GuidanceStep> resolvedAlternatives = new HashMap<>();
 
@@ -328,7 +336,12 @@ public class GuidanceSequencer
 		if (step.getCompletionCondition() == CompletionCondition.ARRIVE_AT_TILE
 			&& step.getWorldX() > 0)
 		{
-			WorldPoint stepPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
+			if (cachedStepPointIndex != currentIndex)
+			{
+				cachedStepPointIndex = currentIndex;
+				cachedStepPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
+			}
+			WorldPoint stepPoint = cachedStepPoint;
 			int dist = playerLocation.distanceTo2D(stepPoint);
 			if (playerLocation.getPlane() == step.getWorldPlane()
 				&& dist <= step.getCompletionDistance())
@@ -394,7 +407,13 @@ public class GuidanceSequencer
 		if (step != null && step.getCompletionCondition() == CompletionCondition.CHAT_MESSAGE_RECEIVED
 			&& step.getCompletionChatPattern() != null)
 		{
-			if (Pattern.compile(step.getCompletionChatPattern()).matcher(message).find())
+			String patternStr = step.getCompletionChatPattern();
+			if (!patternStr.equals(compiledChatPatternSource))
+			{
+				compiledChatPatternSource = patternStr;
+				compiledChatPattern = Pattern.compile(patternStr);
+			}
+			if (compiledChatPattern.matcher(message).find())
 			{
 				log.info("Step {} complete (CHAT_MESSAGE_RECEIVED: matched '{}')",
 					currentIndex + 1, step.getCompletionChatPattern());
