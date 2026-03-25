@@ -5,8 +5,11 @@ import com.collectionloghelper.data.CompletionCondition;
 import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
+import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.Zone;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -29,6 +32,7 @@ public class GuidanceSequencer
 
 	private final PlayerInventoryState inventoryState;
 	private final PlayerCollectionState collectionState;
+	private final RequirementsChecker requirementsChecker;
 
 	private volatile WorldPoint lastKnownPlayerLocation;
 	private volatile CollectionLogSource activeSource;
@@ -38,14 +42,19 @@ public class GuidanceSequencer
 	private volatile int loopIterationsCompleted;
 	private volatile int cumulativeActionCount;
 
+	/** Cache of resolved alternatives keyed by step index. Cleared when a new sequence starts. */
+	private final Map<Integer, GuidanceStep> resolvedAlternatives = new HashMap<>();
+
 	private Consumer<GuidanceStep> onStepChanged;
 	private Runnable onSequenceComplete;
 
 	@Inject
-	private GuidanceSequencer(PlayerInventoryState inventoryState, PlayerCollectionState collectionState)
+	private GuidanceSequencer(PlayerInventoryState inventoryState, PlayerCollectionState collectionState,
+		RequirementsChecker requirementsChecker)
 	{
 		this.inventoryState = inventoryState;
 		this.collectionState = collectionState;
+		this.requirementsChecker = requirementsChecker;
 	}
 
 	/**
@@ -69,6 +78,7 @@ public class GuidanceSequencer
 		this.currentIndex = 0;
 		this.loopIterationsCompleted = 0;
 		this.cumulativeActionCount = 0;
+		this.resolvedAlternatives.clear();
 		this.onStepChanged = stepChanged;
 		this.onSequenceComplete = sequenceComplete;
 		this.active = true;
@@ -97,12 +107,14 @@ public class GuidanceSequencer
 		activeSource = null;
 		steps = null;
 		currentIndex = 0;
+		resolvedAlternatives.clear();
 		onStepChanged = null;
 		onSequenceComplete = null;
 	}
 
 	/**
 	 * Returns the current guidance step, or null if no sequence is active.
+	 * If the step has conditional alternatives, returns the resolved version.
 	 * If the current step requires items not in inventory, returns a synthetic
 	 * "go to bank" step instead.
 	 */
@@ -113,7 +125,7 @@ public class GuidanceSequencer
 			return null;
 		}
 
-		GuidanceStep step = steps.get(currentIndex);
+		GuidanceStep step = resolveStep(currentIndex);
 
 		// Check if the step requires items not currently in inventory
 		if (step.getRequiredItemIds() != null && !step.getRequiredItemIds().isEmpty()
@@ -126,7 +138,8 @@ public class GuidanceSequencer
 	}
 
 	/**
-	 * Returns the raw current step without bank routing substitution.
+	 * Returns the raw current step without bank routing substitution,
+	 * but with conditional alternatives resolved.
 	 */
 	public GuidanceStep getRawCurrentStep()
 	{
@@ -134,7 +147,31 @@ public class GuidanceSequencer
 		{
 			return null;
 		}
-		return steps.get(currentIndex);
+		return resolveStep(currentIndex);
+	}
+
+	/**
+	 * Resolves conditional alternatives for the step at the given index.
+	 * The result is cached so resolution only happens once per step activation,
+	 * not on every tick.
+	 */
+	private GuidanceStep resolveStep(int index)
+	{
+		GuidanceStep step = steps.get(index);
+		if (step.getConditionalAlternatives() == null || step.getConditionalAlternatives().isEmpty())
+		{
+			return step;
+		}
+
+		return resolvedAlternatives.computeIfAbsent(index, i ->
+		{
+			GuidanceStep resolved = step.resolveAlternative(requirementsChecker);
+			if (resolved != step)
+			{
+				log.info("Step {} resolved conditional alternative: {}", i + 1, resolved.getDescription());
+			}
+			return resolved;
+		});
 	}
 
 	public int getCurrentIndex()
@@ -570,7 +607,8 @@ public class GuidanceSequencer
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
-			null   // completionZone
+			null,  // completionZone
+			null   // conditionalAlternatives
 		);
 	}
 
