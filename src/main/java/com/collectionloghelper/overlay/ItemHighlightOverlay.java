@@ -6,7 +6,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.ui.overlay.WidgetItemOverlay;
@@ -23,8 +25,10 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 
 	private final CollectionLogHelperConfig config;
 
-	private volatile List<Integer> targetItemIds = Collections.emptyList();
+	private volatile Set<Integer> targetItemIds = Collections.emptySet();
 	private volatile boolean useItemOnObject;
+	private Color cachedOverlayColor;
+	private Color cachedFillColor;
 
 	@Inject
 	private ItemHighlightOverlay(CollectionLogHelperConfig config)
@@ -47,9 +51,14 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 		}
 
 		Color color = config.overlayColor();
+		if (!color.equals(cachedOverlayColor))
+		{
+			cachedOverlayColor = color;
+			cachedFillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), 65);
+		}
 		Rectangle bounds = widgetItem.getCanvasBounds();
 
-		graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), 65));
+		graphics.setColor(cachedFillColor);
 		graphics.fill(bounds);
 		graphics.setColor(color);
 		graphics.setStroke(STROKE_2);
@@ -58,7 +67,7 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 
 	public void setTargetItemIds(List<Integer> itemIds)
 	{
-		this.targetItemIds = itemIds != null ? itemIds : Collections.emptyList();
+		this.targetItemIds = itemIds != null ? new HashSet<>(itemIds) : Collections.emptySet();
 	}
 
 	public void setUseItemOnObject(boolean value)
@@ -68,7 +77,7 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 
 	public void clearTarget()
 	{
-		this.targetItemIds = Collections.emptyList();
+		this.targetItemIds = Collections.emptySet();
 		this.useItemOnObject = false;
 	}
 }

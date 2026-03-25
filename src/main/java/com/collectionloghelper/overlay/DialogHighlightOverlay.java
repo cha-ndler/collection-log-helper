@@ -46,6 +46,9 @@ public class DialogHighlightOverlay extends Overlay
 
 	private volatile List<String> targetDialogOptionsLower = new ArrayList<>();
 	private volatile boolean guidanceActive;
+	private Color cachedHighlightColor;
+	private Color cachedFillColor;
+	private Color cachedBorderColor;
 
 	@Inject
 	private DialogHighlightOverlay(Client client, CollectionLogHelperConfig config)
@@ -66,6 +69,14 @@ public class DialogHighlightOverlay extends Overlay
 		}
 
 		Color highlightColor = config.overlayColor();
+		if (!highlightColor.equals(cachedHighlightColor))
+		{
+			cachedHighlightColor = highlightColor;
+			cachedFillColor = new Color(highlightColor.getRed(), highlightColor.getGreen(),
+				highlightColor.getBlue(), BACKGROUND_ALPHA);
+			cachedBorderColor = new Color(highlightColor.getRed(), highlightColor.getGreen(),
+				highlightColor.getBlue(), BORDER_ALPHA);
+		}
 
 		// Highlight matching dialog options in the multi-option dialog
 		if (!targetDialogOptionsLower.isEmpty())
@@ -153,23 +164,11 @@ public class DialogHighlightOverlay extends Overlay
 		int height = bounds.height + BACKGROUND_PADDING_Y * 2;
 
 		// Semi-transparent fill similar to object/NPC highlight overlays
-		Color fillColor = new Color(
-			highlightColor.getRed(),
-			highlightColor.getGreen(),
-			highlightColor.getBlue(),
-			BACKGROUND_ALPHA
-		);
-		graphics.setColor(fillColor);
+		graphics.setColor(cachedFillColor);
 		graphics.fillRect(x, y, width, height);
 
 		// Subtle border
-		Color borderColor = new Color(
-			highlightColor.getRed(),
-			highlightColor.getGreen(),
-			highlightColor.getBlue(),
-			BORDER_ALPHA
-		);
-		graphics.setColor(borderColor);
+		graphics.setColor(cachedBorderColor);
 		graphics.drawRect(x, y, width, height);
 	}
 

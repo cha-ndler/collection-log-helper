@@ -1,7 +1,10 @@
 package com.collectionloghelper.data;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import net.runelite.api.gameval.ItemID;
 
 /**
@@ -74,6 +77,19 @@ public class ClueItemDatabase
 
 	private static final Map<Integer, ClueItemInfo> CLUE_ITEMS = new HashMap<>();
 
+	/**
+	 * Set of all item IDs that are known to be clue-related.
+	 * Includes all statically registered IDs. Additional IDs discovered
+	 * at runtime via name matching can be added with {@link #markAsClueScroll}.
+	 */
+	private static final Set<Integer> ALL_CLUE_ITEM_IDS = ConcurrentHashMap.newKeySet();
+
+	/**
+	 * Set of item IDs that have been checked via name lookup and confirmed NOT
+	 * to be clue-related. Used to avoid repeated getItemDefinition calls.
+	 */
+	private static final Set<Integer> KNOWN_NON_CLUE_IDS = ConcurrentHashMap.newKeySet();
+
 	static
 	{
 		// Clue scrolls (unstarted) — beginner and master have single IDs.
@@ -116,6 +132,7 @@ public class ClueItemDatabase
 	private static void register(int itemId, ClueTier tier, ClueItemType type)
 	{
 		CLUE_ITEMS.put(itemId, new ClueItemInfo(tier, type));
+		ALL_CLUE_ITEM_IDS.add(itemId);
 	}
 
 	/**
@@ -151,6 +168,45 @@ public class ClueItemDatabase
 	{
 		ClueItemInfo info = CLUE_ITEMS.get(itemId);
 		return info != null && info.type == ClueItemType.CASKET;
+	}
+
+	/**
+	 * Returns true if this item ID is known to be clue-related, either from
+	 * the static database or from a previous name-based discovery.
+	 * Returns false if the item has been checked and confirmed NOT clue-related.
+	 * Returns false (but does not confirm) for items never checked — use
+	 * {@link #isKnownNonClueItem} to distinguish.
+	 */
+	public static boolean isClueRelatedItem(int itemId)
+	{
+		return ALL_CLUE_ITEM_IDS.contains(itemId);
+	}
+
+	/**
+	 * Returns true if this item has been previously checked via name lookup
+	 * and confirmed NOT to be a clue scroll.
+	 */
+	public static boolean isKnownNonClueItem(int itemId)
+	{
+		return KNOWN_NON_CLUE_IDS.contains(itemId);
+	}
+
+	/**
+	 * Records that a name-matched item ID is a clue scroll, so future scans
+	 * can skip the getItemDefinition lookup.
+	 */
+	public static void markAsClueScroll(int itemId)
+	{
+		ALL_CLUE_ITEM_IDS.add(itemId);
+	}
+
+	/**
+	 * Records that an item ID has been checked via name and is NOT clue-related,
+	 * so future scans can skip the getItemDefinition lookup.
+	 */
+	public static void markAsNonClueItem(int itemId)
+	{
+		KNOWN_NON_CLUE_IDS.add(itemId);
 	}
 
 	/**
