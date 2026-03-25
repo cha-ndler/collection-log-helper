@@ -1,5 +1,6 @@
 package com.collectionloghelper.data;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,13 +14,16 @@ import net.runelite.api.ItemContainer;
 /**
  * Tracks the player's current inventory contents for guidance step checks.
  * Populated each time the inventory changes via ItemContainerChanged.
+ * Uses a single volatile snapshot to ensure atomic reads across itemIds and itemCounts.
  */
 @Slf4j
 @Singleton
 public class PlayerInventoryState
 {
-	private volatile Set<Integer> itemIds = new HashSet<>();
-	private volatile Map<Integer, Integer> itemCounts = new HashMap<>();
+	private static final InventorySnapshot EMPTY = new InventorySnapshot(
+		Collections.emptySet(), Collections.emptyMap());
+
+	private volatile InventorySnapshot snapshot = EMPTY;
 
 	@Inject
 	private PlayerInventoryState()
@@ -50,8 +54,7 @@ public class PlayerInventoryState
 			}
 		}
 
-		itemIds = newIds;
-		itemCounts = newCounts;
+		snapshot = new InventorySnapshot(newIds, newCounts);
 	}
 
 	/**
@@ -59,7 +62,7 @@ public class PlayerInventoryState
 	 */
 	public boolean hasItem(int itemId)
 	{
-		return itemIds.contains(itemId);
+		return snapshot.itemIds.contains(itemId);
 	}
 
 	/**
@@ -67,7 +70,7 @@ public class PlayerInventoryState
 	 */
 	public int getItemCount(int itemId)
 	{
-		return itemCounts.getOrDefault(itemId, 0);
+		return snapshot.itemCounts.getOrDefault(itemId, 0);
 	}
 
 	/**
@@ -87,7 +90,7 @@ public class PlayerInventoryState
 		{
 			return true;
 		}
-		return itemIds.containsAll(requiredIds);
+		return snapshot.itemIds.containsAll(requiredIds);
 	}
 
 	/**
@@ -95,7 +98,18 @@ public class PlayerInventoryState
 	 */
 	public void reset()
 	{
-		itemIds = new HashSet<>();
-		itemCounts = new HashMap<>();
+		snapshot = EMPTY;
+	}
+
+	private static class InventorySnapshot
+	{
+		final Set<Integer> itemIds;
+		final Map<Integer, Integer> itemCounts;
+
+		InventorySnapshot(Set<Integer> itemIds, Map<Integer, Integer> itemCounts)
+		{
+			this.itemIds = itemIds;
+			this.itemCounts = itemCounts;
+		}
 	}
 }

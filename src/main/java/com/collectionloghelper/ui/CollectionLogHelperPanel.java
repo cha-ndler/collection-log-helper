@@ -46,6 +46,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.ToolTipManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -149,6 +150,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private Runnable stepAdvancer;
 	private Runnable stepSkipper;
+
+	private final Timer searchDebounceTimer;
 
 	private Mode currentMode = Mode.EFFICIENT;
 	private boolean rebuilding = false;
@@ -429,24 +432,26 @@ public class CollectionLogHelperPanel extends PluginPanel
 		searchField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
 		searchField.setVisible(false);
 		searchField.setToolTipText("Search by item name or source name");
+		searchDebounceTimer = new Timer(200, e -> rebuild());
+		searchDebounceTimer.setRepeats(false);
 		searchField.getDocument().addDocumentListener(new DocumentListener()
 		{
 			@Override
 			public void insertUpdate(DocumentEvent e)
 			{
-				rebuild();
+				searchDebounceTimer.restart();
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e)
 			{
-				rebuild();
+				searchDebounceTimer.restart();
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e)
 			{
-				rebuild();
+				searchDebounceTimer.restart();
 			}
 		});
 		controlsPanel.add(searchField);
@@ -718,6 +723,11 @@ public class CollectionLogHelperPanel extends PluginPanel
 			}
 			revalidate();
 		});
+	}
+
+	public void shutDown()
+	{
+		searchDebounceTimer.stop();
 	}
 
 	public void rebuild()

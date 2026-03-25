@@ -31,6 +31,9 @@ public class GuidanceMinimapOverlay extends Overlay
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
+	private final Line2D.Double arrowLine = new Line2D.Double();
+	private final Polygon arrowHead = new Polygon();
+	private final AffineTransform arrowTransform = new AffineTransform();
 
 	private volatile WorldPoint targetPoint;
 
@@ -102,10 +105,10 @@ public class GuidanceMinimapOverlay extends Overlay
 		int endX = playerMinimapLoc.getX() + (int) (ARROW_OUTER_DIST * Math.cos(angle));
 		int endY = playerMinimapLoc.getY() + (int) (ARROW_OUTER_DIST * Math.sin(angle));
 
-		Line2D.Double line = new Line2D.Double(startX, startY, endX, endY);
+		arrowLine.setLine(startX, startY, endX, endY);
 
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		drawArrow(graphics, line, overlayColor);
+		drawArrow(graphics, arrowLine, overlayColor);
 
 		return null;
 	}
@@ -174,21 +177,21 @@ public class GuidanceMinimapOverlay extends Overlay
 	private void drawArrowHead(Graphics2D graphics, Line2D.Double line,
 		int extraHeight, int extraWidth)
 	{
-		Polygon arrowHead = new Polygon();
+		arrowHead.reset();
 		arrowHead.addPoint(0, 6 + extraHeight);
 		arrowHead.addPoint(-6 - extraWidth, -1 - extraHeight);
 		arrowHead.addPoint(6 + extraWidth, -1 - extraHeight);
 
 		double angle = Math.atan2(line.y2 - line.y1, line.x2 - line.x1);
 
-		AffineTransform tx = new AffineTransform();
-		tx.translate(line.x2, line.y2);
-		tx.rotate(angle - Math.PI / 2.0);
+		arrowTransform.setToIdentity();
+		arrowTransform.translate(line.x2, line.y2);
+		arrowTransform.rotate(angle - Math.PI / 2.0);
 
-		Graphics2D g = (Graphics2D) graphics.create();
-		g.setTransform(tx);
-		g.fill(arrowHead);
-		g.dispose();
+		AffineTransform savedTransform = graphics.getTransform();
+		graphics.setTransform(arrowTransform);
+		graphics.fill(arrowHead);
+		graphics.setTransform(savedTransform);
 	}
 
 	public void setTargetPoint(WorldPoint targetPoint)

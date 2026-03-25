@@ -106,13 +106,36 @@ public class PlayerBankState
 				continue;
 			}
 
-			// For items not in the static map, check item name to catch
-			// step-specific clue scroll IDs (easy/medium/hard/elite have
-			// hundreds of per-step variants)
+			// Check if this item was previously discovered as a clue scroll
+			// via name matching (avoids redundant getItemDefinition calls)
+			if (ClueItemDatabase.isClueRelatedItem(itemId))
+			{
+				ClueTier cachedTier = getTierByItemName(itemId);
+				if (cachedTier != null)
+				{
+					scrollCounts.merge(cachedTier, quantity, Integer::sum);
+				}
+				continue;
+			}
+
+			// Skip items already confirmed as non-clue via prior name lookup
+			if (ClueItemDatabase.isKnownNonClueItem(itemId))
+			{
+				continue;
+			}
+
+			// For truly unknown items, check item name to catch step-specific
+			// clue scroll IDs (easy/medium/hard/elite have hundreds of per-step
+			// variants). Cache the result to avoid future lookups.
 			ClueTier nameTier = getTierByItemName(itemId);
 			if (nameTier != null)
 			{
+				ClueItemDatabase.markAsClueScroll(itemId);
 				scrollCounts.merge(nameTier, quantity, Integer::sum);
+			}
+			else
+			{
+				ClueItemDatabase.markAsNonClueItem(itemId);
 			}
 		}
 
