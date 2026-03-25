@@ -159,11 +159,51 @@ Sources that require multiple actions can define an ordered list of guidance ste
 - `INVENTORY_HAS_ITEM` — Auto-advances when the player has `completionItemCount` of the item
 - `INVENTORY_NOT_HAS_ITEM` — Auto-advances when the item is no longer in inventory
 - `ARRIVE_AT_TILE` — Auto-advances when within `completionDistance` tiles of the target
+- `ARRIVE_AT_ZONE` — Auto-advances when the player enters the target zone (rectangular area). Uses `completionZone` field
 - `PLAYER_ON_PLANE` — Auto-advances when the player is on the specified `worldPlane`
 - `NPC_TALKED_TO` — Auto-advances when the player interacts with the specified NPC
 - `ACTOR_DEATH` — Auto-advances when the specified NPC dies
 - `CHAT_MESSAGE_RECEIVED` — Auto-advances when a chat message matches `completionChatPattern`
 - `MANUAL` — Player must click "Next Step" or "Skip" in the panel
+
+**Additional step fields:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `completionZone` | int[5] | For `ARRIVE_AT_ZONE`: `[minX, minY, maxX, maxY, plane]` defining the rectangular area |
+| `highlightWidgetIds` | int[][] | Widget IDs to highlight: `[[groupId, childId], ...]` for game interface elements |
+| `conditionalAlternatives` | array | Dynamic step branching based on player state. See [Conditional Alternatives](#conditional-alternatives) |
+
+### Conditional Alternatives
+
+Steps can dynamically select different paths based on the player's quest completions, skill levels, or other requirements. When a step has `conditionalAlternatives`, the sequencer evaluates each alternative's requirements and uses the first match:
+
+```json
+{
+  "description": "Travel to Cerberus (default: walk)",
+  "worldX": 2884, "worldY": 3395, "worldPlane": 0,
+  "completionCondition": "ARRIVE_AT_TILE",
+  "conditionalAlternatives": [
+    {
+      "requirements": {
+        "quests": ["FAIRYTALE_II__CURE_A_QUEEN"]
+      },
+      "description": "Use Fairy ring BIP to reach Taverley Dungeon.",
+      "worldX": 2763, "worldY": 5130, "worldPlane": 0,
+      "travelTip": "Fairy ring BIP"
+    },
+    {
+      "requirements": {
+        "skills": [{"skill": "AGILITY", "level": 70}]
+      },
+      "description": "Use the pipe shortcut in Taverley Dungeon.",
+      "travelTip": "Taverley Dungeon pipe shortcut"
+    }
+  ]
+}
+```
+
+Only non-null fields in the alternative override the base step — null fields fall through to the parent. If no alternative's requirements are met, the base step is used as fallback.
 
 ### Requirements
 
