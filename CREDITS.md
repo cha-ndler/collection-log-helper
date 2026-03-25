@@ -6,7 +6,7 @@
 - **Author:** Zoinkwiz
 - **Repository:** https://github.com/Zoinkwiz/quest-helper
 - **License:** BSD 2-Clause
-- Referenced for: hint arrow patterns, minimap overlay techniques, world map navigation patterns, step-by-step guidance sequencing (completion conditions, auto-advance, step skipping)
+- Referenced for: hint arrow patterns, minimap overlay techniques, world map navigation patterns, step-by-step guidance sequencing (completion conditions, auto-advance, step skipping), conditional step branching (ConditionalStep pattern), NPC highlight styles (hull/outline/tile rendering), widget highlighting overlay patterns, zone-based area detection, pre-flight requirement check UX, item requirement sprite display
 
 ### Shortest Path
 - **Author:** Skretzo
@@ -42,11 +42,11 @@
 ### TempleOSRS
 - **Website:** https://templeosrs.com
 - **API Docs:** https://templeosrs.com/api_doc.php
-- Referenced for: canonical collection log item ID verification (all 1,932 item IDs validated), EHB kill time alignment
+- Referenced for: canonical collection log item ID verification (all 2,101 item IDs validated across 224 sources), EHB kill time alignment, collection log category verification
 
 ### OSRS Wiki
 - **Website:** https://oldschool.runescape.wiki
-- Referenced for: drop rate verification, quest requirements, NPC IDs, monster coordinates, game mechanics research
+- Referenced for: drop rate verification (all 224 sources audited), quest requirements, NPC IDs, world coordinates, game mechanics research, raid loot mechanics (CoX points, ToB team scaling, ToA raid level formula), slayer task weights (4 masters verified), DT2 Awakened boss rates, wilderness boss variant rates
 
 ### Bitterkoekje DPS Calculator
 - **Repository:** https://github.com/weirdgloop/osrs-dps-calc
