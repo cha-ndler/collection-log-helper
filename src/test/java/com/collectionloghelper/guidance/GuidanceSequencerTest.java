@@ -4,10 +4,14 @@ import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.CompletionCondition;
+import com.collectionloghelper.data.ConditionalAlternative;
 import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
+import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.RewardType;
+import com.collectionloghelper.data.SkillRequirement;
+import com.collectionloghelper.data.SourceRequirements;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +39,8 @@ public class GuidanceSequencerTest
 	private PlayerInventoryState inventoryState;
 	@Mock
 	private PlayerCollectionState collectionState;
+	@Mock
+	private RequirementsChecker requirementsChecker;
 
 	private GuidanceSequencer sequencer;
 
@@ -48,9 +54,9 @@ public class GuidanceSequencerTest
 		lenient().when(collectionState.isItemObtained(anyInt())).thenReturn(false);
 
 		Constructor<GuidanceSequencer> ctor = GuidanceSequencer.class.getDeclaredConstructor(
-			PlayerInventoryState.class, PlayerCollectionState.class);
+			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class);
 		ctor.setAccessible(true);
-		sequencer = ctor.newInstance(inventoryState, collectionState);
+		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker);
 	}
 
 	// ---- Helper methods ----
@@ -73,7 +79,8 @@ public class GuidanceSequencerTest
 			null,           // objectFilterTiles
 			null,           // highlightWidgetIds
 			0, 0,           // loopBackToStep, loopCount
-			null            // completionZone
+			null,           // completionZone
+			null            // conditionalAlternatives
 		);
 	}
 
@@ -95,7 +102,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
-			null   // completionZone
+			null,  // completionZone
+			null   // conditionalAlternatives
 		);
 	}
 
@@ -117,7 +125,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
-			null   // completionZone
+			null,  // completionZone
+			null   // conditionalAlternatives
 		);
 	}
 
@@ -139,7 +148,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
-			null   // completionZone
+			null,  // completionZone
+			null   // conditionalAlternatives
 		);
 	}
 
@@ -161,7 +171,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
-			null   // completionZone
+			null,  // completionZone
+			null   // conditionalAlternatives
 		);
 	}
 
@@ -183,7 +194,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
-			null   // completionZone
+			null,  // completionZone
+			null   // conditionalAlternatives
 		);
 	}
 
@@ -205,7 +217,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
-			null   // completionZone
+			null,  // completionZone
+			null   // conditionalAlternatives
 		);
 	}
 
@@ -228,7 +241,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			loopBackToStep, loopCount,
-			null   // completionZone
+			null,  // completionZone
+			null   // conditionalAlternatives
 		);
 	}
 
@@ -250,7 +264,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
-			null   // completionZone
+			null,  // completionZone
+			null   // conditionalAlternatives
 		);
 	}
 
@@ -272,7 +287,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
-			null   // completionZone
+			null,  // completionZone
+			null   // conditionalAlternatives
 		);
 	}
 
@@ -962,5 +978,330 @@ public class GuidanceSequencerTest
 		// Should not throw
 		sequencer.advanceStep();
 		sequencer.skipStep();
+	}
+
+	// ---- Conditional alternative tests ----
+
+	private SourceRequirements makeQuestRequirement(String questName)
+	{
+		return new SourceRequirements(Arrays.asList(questName), null);
+	}
+
+	private SourceRequirements makeSkillRequirement(String skill, int level)
+	{
+		return new SourceRequirements(null, Arrays.asList(new SkillRequirement(skill, level)));
+	}
+
+	private GuidanceStep makeStepWithAlternatives(String description, int worldX, int worldY,
+		String travelTip, List<ConditionalAlternative> alternatives)
+	{
+		return new GuidanceStep(
+			description,
+			worldX, worldY, 0,
+			0, null, null,
+			travelTip, null,
+			CompletionCondition.ARRIVE_AT_TILE,
+			0, 0, 5, 0,
+			null,
+			0, null, null,
+			null, null,
+			null,
+			false,
+			0,
+			null,
+			null,
+			0, 0,
+			null,
+			alternatives
+		);
+	}
+
+	@Test
+	public void testConditionalAlternativeUsedWhenRequirementsMet()
+	{
+		SourceRequirements reqs = makeQuestRequirement("LOST_CITY");
+		when(requirementsChecker.meetsRequirements(reqs)).thenReturn(true);
+
+		ConditionalAlternative alt = new ConditionalAlternative(
+			reqs,
+			"Use fairy ring",  // override description
+			2400, 4435, null,  // override coordinates
+			"Fairy ring BIP",  // override travel tip
+			null, null, null, null, null, null  // no other overrides
+		);
+
+		GuidanceStep step = makeStepWithAlternatives(
+			"Walk there manually", 3000, 3000, "Walk south", Arrays.asList(alt));
+
+		List<GuidanceStep> steps = Arrays.asList(step, makeManualStep("Done"));
+		startSequence(steps);
+
+		GuidanceStep current = sequencer.getCurrentStep();
+		assertEquals("Use fairy ring", current.getDescription());
+		assertEquals(2400, current.getWorldX());
+		assertEquals(4435, current.getWorldY());
+		assertEquals("Fairy ring BIP", current.getTravelTip());
+		// Plane should fall through from base step
+		assertEquals(0, current.getWorldPlane());
+	}
+
+	@Test
+	public void testConditionalAlternativeFallbackWhenRequirementsNotMet()
+	{
+		SourceRequirements reqs = makeQuestRequirement("SONG_OF_THE_ELVES");
+		when(requirementsChecker.meetsRequirements(reqs)).thenReturn(false);
+
+		ConditionalAlternative alt = new ConditionalAlternative(
+			reqs,
+			"Teleport to Prifddinas", 3200, 6100, null,
+			"Prifddinas teleport",
+			null, null, null, null, null, null
+		);
+
+		GuidanceStep step = makeStepWithAlternatives(
+			"Walk from Ardougne", 2600, 3300, "Ardougne teleport", Arrays.asList(alt));
+
+		List<GuidanceStep> steps = Arrays.asList(step, makeManualStep("Done"));
+		startSequence(steps);
+
+		GuidanceStep current = sequencer.getCurrentStep();
+		// Should use base step since requirements not met
+		assertEquals("Walk from Ardougne", current.getDescription());
+		assertEquals(2600, current.getWorldX());
+		assertEquals(3300, current.getWorldY());
+		assertEquals("Ardougne teleport", current.getTravelTip());
+	}
+
+	@Test
+	public void testConditionalAlternativeFirstMatchWins()
+	{
+		SourceRequirements reqs1 = makeQuestRequirement("FAIRYTALE_II__CURE_A_QUEEN");
+		SourceRequirements reqs2 = makeSkillRequirement("AGILITY", 70);
+		when(requirementsChecker.meetsRequirements(reqs1)).thenReturn(false);
+		when(requirementsChecker.meetsRequirements(reqs2)).thenReturn(true);
+
+		ConditionalAlternative alt1 = new ConditionalAlternative(
+			reqs1,
+			"Fairy ring route", 2400, 4400, null,
+			"Fairy ring CKS",
+			null, null, null, null, null, null
+		);
+		ConditionalAlternative alt2 = new ConditionalAlternative(
+			reqs2,
+			"Agility shortcut", 2500, 3500, null,
+			"Use agility shortcut",
+			null, null, null, null, null, null
+		);
+
+		GuidanceStep step = makeStepWithAlternatives(
+			"Long walk", 3000, 3000, "Walk manually", Arrays.asList(alt1, alt2));
+
+		List<GuidanceStep> steps = Arrays.asList(step, makeManualStep("Done"));
+		startSequence(steps);
+
+		GuidanceStep current = sequencer.getCurrentStep();
+		// First alternative fails, second matches
+		assertEquals("Agility shortcut", current.getDescription());
+		assertEquals(2500, current.getWorldX());
+		assertEquals(3500, current.getWorldY());
+		assertEquals("Use agility shortcut", current.getTravelTip());
+	}
+
+	@Test
+	public void testConditionalAlternativeNullFieldsFallThrough()
+	{
+		SourceRequirements reqs = makeQuestRequirement("LOST_CITY");
+		when(requirementsChecker.meetsRequirements(reqs)).thenReturn(true);
+
+		// Only override description and travelTip, leave coordinates null
+		ConditionalAlternative alt = new ConditionalAlternative(
+			reqs,
+			"Use fairy ring",  // override description
+			null, null, null,  // coordinates fall through
+			"Fairy ring BIP",  // override travel tip
+			null, null, null, null, null, null
+		);
+
+		GuidanceStep step = makeStepWithAlternatives(
+			"Walk there", 3000, 3000, "Walk south", Arrays.asList(alt));
+
+		List<GuidanceStep> steps = Arrays.asList(step, makeManualStep("Done"));
+		startSequence(steps);
+
+		GuidanceStep current = sequencer.getCurrentStep();
+		assertEquals("Use fairy ring", current.getDescription());
+		// Coordinates should fall through from base step
+		assertEquals(3000, current.getWorldX());
+		assertEquals(3000, current.getWorldY());
+		assertEquals("Fairy ring BIP", current.getTravelTip());
+	}
+
+	@Test
+	public void testConditionalAlternativeResolutionIsCached()
+	{
+		SourceRequirements reqs = makeQuestRequirement("LOST_CITY");
+		when(requirementsChecker.meetsRequirements(reqs)).thenReturn(true);
+
+		ConditionalAlternative alt = new ConditionalAlternative(
+			reqs, "Alt route", 2000, 2000, null,
+			"Alt tip", null, null, null, null, null, null
+		);
+
+		GuidanceStep step = makeStepWithAlternatives(
+			"Base route", 3000, 3000, "Base tip", Arrays.asList(alt));
+
+		List<GuidanceStep> steps = Arrays.asList(step, makeManualStep("Done"));
+		startSequence(steps);
+
+		GuidanceStep first = sequencer.getCurrentStep();
+		assertEquals("Alt route", first.getDescription());
+
+		// Now change requirements to not met — but cache should still return alt
+		lenient().when(requirementsChecker.meetsRequirements(reqs)).thenReturn(false);
+		GuidanceStep second = sequencer.getCurrentStep();
+		assertEquals("Alt route", second.getDescription());
+	}
+
+	@Test
+	public void testConditionalAlternativeWithCompletionConditionOverride()
+	{
+		SourceRequirements reqs = makeQuestRequirement("LOST_CITY");
+		when(requirementsChecker.meetsRequirements(reqs)).thenReturn(true);
+
+		ConditionalAlternative alt = new ConditionalAlternative(
+			reqs,
+			"Talk to fairy", null, null, null,
+			null,
+			100, "Talk-to",  // override npcId and interactAction
+			null,
+			CompletionCondition.NPC_TALKED_TO,  // override completion condition
+			null,
+			100  // override completionNpcId
+		);
+
+		GuidanceStep step = makeStepWithAlternatives(
+			"Walk to destination", 3000, 3000, "Walk south", Arrays.asList(alt));
+
+		List<GuidanceStep> steps = Arrays.asList(step, makeManualStep("Done"));
+		startSequence(steps);
+
+		GuidanceStep current = sequencer.getCurrentStep();
+		assertEquals("Talk to fairy", current.getDescription());
+		assertEquals(100, current.getNpcId());
+		assertEquals("Talk-to", current.getInteractAction());
+		assertEquals(CompletionCondition.NPC_TALKED_TO, current.getCompletionCondition());
+		assertEquals(100, current.getCompletionNpcId());
+		// Coordinates fall through
+		assertEquals(3000, current.getWorldX());
+		assertEquals(3000, current.getWorldY());
+	}
+
+	@Test
+	public void testStepWithNoAlternativesUnchanged()
+	{
+		// Step with null conditionalAlternatives should pass through unchanged
+		GuidanceStep step = makeManualStep("Simple step");
+		assertNull(step.getConditionalAlternatives());
+
+		List<GuidanceStep> steps = Arrays.asList(step);
+		startSequence(steps);
+
+		GuidanceStep current = sequencer.getCurrentStep();
+		assertEquals("Simple step", current.getDescription());
+	}
+
+	@Test
+	public void testStepWithEmptyAlternativesUnchanged()
+	{
+		GuidanceStep step = new GuidanceStep(
+			"No alternatives",
+			3000, 3000, 0,
+			0, null, null,
+			null, null,
+			CompletionCondition.MANUAL,
+			0, 0, 0, 0,
+			null,
+			0, null, null,
+			null, null,
+			null,
+			false,
+			0,
+			null,
+			null,
+			0, 0,
+			null,
+			Collections.emptyList()  // empty list of alternatives
+		);
+
+		List<GuidanceStep> steps = Arrays.asList(step);
+		startSequence(steps);
+
+		GuidanceStep current = sequencer.getCurrentStep();
+		assertEquals("No alternatives", current.getDescription());
+	}
+
+	@Test
+	public void testConditionalAlternativeWithNullRequirementsSkipped()
+	{
+		// Alternative with null requirements should not match
+		ConditionalAlternative alt = new ConditionalAlternative(
+			null,  // null requirements
+			"Should not be used", 2000, 2000, null,
+			null, null, null, null, null, null, null
+		);
+
+		GuidanceStep step = makeStepWithAlternatives(
+			"Base step", 3000, 3000, "Base tip", Arrays.asList(alt));
+
+		List<GuidanceStep> steps = Arrays.asList(step, makeManualStep("Done"));
+		startSequence(steps);
+
+		GuidanceStep current = sequencer.getCurrentStep();
+		assertEquals("Base step", current.getDescription());
+	}
+
+	@Test
+	public void testResolveAlternativeDirectly()
+	{
+		// Test GuidanceStep.resolveAlternative() directly
+		SourceRequirements reqs = makeQuestRequirement("DRAGON_SLAYER_I");
+		RequirementsChecker mockChecker = org.mockito.Mockito.mock(RequirementsChecker.class);
+		when(mockChecker.meetsRequirements(reqs)).thenReturn(true);
+
+		ConditionalAlternative alt = new ConditionalAlternative(
+			reqs, "Dragon route", 2800, 3400, null,
+			"Teleport to Crandor", null, null, null, null, null, null
+		);
+
+		GuidanceStep base = makeStepWithAlternatives(
+			"Walk to Karamja", 2900, 3100, "Charter ship", Arrays.asList(alt));
+
+		GuidanceStep resolved = base.resolveAlternative(mockChecker);
+		assertNotSame(base, resolved);
+		assertEquals("Dragon route", resolved.getDescription());
+		assertEquals(2800, resolved.getWorldX());
+		assertEquals(3400, resolved.getWorldY());
+		assertEquals("Teleport to Crandor", resolved.getTravelTip());
+		// The resolved step should not carry alternatives (already resolved)
+		assertNull(resolved.getConditionalAlternatives());
+	}
+
+	@Test
+	public void testResolveAlternativeReturnsSelfWhenNoMatch()
+	{
+		SourceRequirements reqs = makeQuestRequirement("SONG_OF_THE_ELVES");
+		RequirementsChecker mockChecker = org.mockito.Mockito.mock(RequirementsChecker.class);
+		when(mockChecker.meetsRequirements(reqs)).thenReturn(false);
+
+		ConditionalAlternative alt = new ConditionalAlternative(
+			reqs, "Elf route", null, null, null,
+			null, null, null, null, null, null, null
+		);
+
+		GuidanceStep base = makeStepWithAlternatives(
+			"Long walk", 3000, 3000, "Walk", Arrays.asList(alt));
+
+		GuidanceStep resolved = base.resolveAlternative(mockChecker);
+		assertSame(base, resolved);
 	}
 }

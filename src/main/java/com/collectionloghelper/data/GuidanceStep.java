@@ -103,6 +103,13 @@ public class GuidanceStep
 	/** Zone bounds [minX, minY, maxX, maxY, plane] for ARRIVE_AT_ZONE completion (null if not a zone step). */
 	int[] completionZone;
 
+	/**
+	 * Conditional alternatives for this step. When non-null, the sequencer evaluates
+	 * each alternative's requirements and uses the first one whose requirements are met.
+	 * Falls back to this step's own data if no alternative matches.
+	 */
+	List<ConditionalAlternative> conditionalAlternatives;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
@@ -146,5 +153,70 @@ public class GuidanceStep
 			}
 		}
 		return ids.isEmpty() ? Collections.emptySet() : ids;
+	}
+
+	/**
+	 * Resolves conditional alternatives against the player's current state.
+	 * If the step has conditional alternatives, returns a merged step using the
+	 * first alternative whose requirements are met. If no alternative matches,
+	 * returns this step unchanged.
+	 *
+	 * @param checker the requirements checker to evaluate alternatives against
+	 * @return the resolved step (may be this step or a merged copy)
+	 */
+	public GuidanceStep resolveAlternative(RequirementsChecker checker)
+	{
+		if (conditionalAlternatives == null || conditionalAlternatives.isEmpty())
+		{
+			return this;
+		}
+		for (ConditionalAlternative alt : conditionalAlternatives)
+		{
+			if (alt.getRequirements() != null && checker.meetsRequirements(alt.getRequirements()))
+			{
+				return mergeAlternative(alt);
+			}
+		}
+		return this;
+	}
+
+	/**
+	 * Creates a new GuidanceStep by merging this step's values with overrides from
+	 * the given alternative. Non-null fields in the alternative override the base step;
+	 * null fields fall through to the base step's values.
+	 */
+	private GuidanceStep mergeAlternative(ConditionalAlternative alt)
+	{
+		return new GuidanceStep(
+			alt.getDescription() != null ? alt.getDescription() : this.description,
+			alt.getWorldX() != null ? alt.getWorldX() : this.worldX,
+			alt.getWorldY() != null ? alt.getWorldY() : this.worldY,
+			alt.getWorldPlane() != null ? alt.getWorldPlane() : this.worldPlane,
+			alt.getNpcId() != null ? alt.getNpcId() : this.npcId,
+			alt.getInteractAction() != null ? alt.getInteractAction() : this.interactAction,
+			this.dialogOptions,
+			alt.getTravelTip() != null ? alt.getTravelTip() : this.travelTip,
+			this.requiredItemIds,
+			alt.getCompletionCondition() != null ? alt.getCompletionCondition() : this.completionCondition,
+			this.completionItemId,
+			this.completionItemCount,
+			alt.getCompletionDistance() != null ? alt.getCompletionDistance() : this.completionDistance,
+			alt.getCompletionNpcId() != null ? alt.getCompletionNpcId() : this.completionNpcId,
+			this.worldMessage,
+			alt.getObjectId() != null ? alt.getObjectId() : this.objectId,
+			this.objectIds,
+			this.objectInteractAction,
+			this.highlightItemIds,
+			this.groundItemIds,
+			this.completionChatPattern,
+			this.useItemOnObject,
+			this.objectMaxDistance,
+			this.objectFilterTiles,
+			this.highlightWidgetIds,
+			this.loopBackToStep,
+			this.loopCount,
+			this.completionZone,
+			null // merged steps don't carry alternatives (already resolved)
+		);
 	}
 }
