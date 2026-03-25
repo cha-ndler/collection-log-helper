@@ -38,6 +38,7 @@ public class GroundItemHighlightOverlay extends Overlay
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
+	private final Polygon arrowPolygon = new Polygon();
 
 	private volatile Set<Integer> targetGroundItemIds = Collections.emptySet();
 
@@ -47,6 +48,8 @@ public class GroundItemHighlightOverlay extends Overlay
 	 * from the plugin, avoiding a full tile grid scan every frame.
 	 */
 	private volatile List<TrackedGroundItem> matchedItems = Collections.emptyList();
+	private Color cachedOverlayColor;
+	private Color cachedFillColor;
 
 	@Inject
 	private GroundItemHighlightOverlay(Client client, CollectionLogHelperConfig config)
@@ -81,7 +84,9 @@ public class GroundItemHighlightOverlay extends Overlay
 			return;
 		}
 		List<TrackedGroundItem> current = new ArrayList<>(matchedItems);
-		current.add(new TrackedGroundItem(item, tile));
+		ItemComposition comp = client.getItemDefinition(item.getId());
+		String name = comp != null ? comp.getName() : null;
+		current.add(new TrackedGroundItem(item, tile, name));
 		matchedItems = current;
 	}
 
@@ -110,18 +115,24 @@ public class GroundItemHighlightOverlay extends Overlay
 		}
 
 		Color overlayColor = config.overlayColor();
+		if (!overlayColor.equals(cachedOverlayColor))
+		{
+			cachedOverlayColor = overlayColor;
+			cachedFillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
+				overlayColor.getBlue(), 30);
+		}
 
 		for (TrackedGroundItem tracked : items)
 		{
-			renderGroundItemHighlight(graphics, tracked.tile, tracked.item, overlayColor);
+			renderGroundItemHighlight(graphics, tracked, overlayColor);
 		}
 
 		return null;
 	}
 
-	private void renderGroundItemHighlight(Graphics2D graphics, Tile tile, TileItem item, Color overlayColor)
+	private void renderGroundItemHighlight(Graphics2D graphics, TrackedGroundItem tracked, Color overlayColor)
 	{
-		LocalPoint localPoint = tile.getLocalLocation();
+		LocalPoint localPoint = tracked.tile.getLocalLocation();
 		if (localPoint == null)
 		{
 			return;
@@ -130,9 +141,7 @@ public class GroundItemHighlightOverlay extends Overlay
 		Polygon tilePoly = Perspective.getCanvasTilePoly(client, localPoint);
 		if (tilePoly != null)
 		{
-			Color fillColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
-				overlayColor.getBlue(), 30);
-			graphics.setColor(fillColor);
+			graphics.setColor(cachedFillColor);
 			graphics.fill(tilePoly);
 			graphics.setColor(overlayColor);
 			graphics.setStroke(STROKE_2);
@@ -145,41 +154,34 @@ public class GroundItemHighlightOverlay extends Overlay
 		}
 
 		// Render item name above the tile
-		String itemName = getItemName(item.getId());
-		if (itemName != null)
+		if (tracked.itemName != null)
 		{
 			Point textPoint = Perspective.getCanvasTextLocation(
-				client, graphics, localPoint, itemName, TEXT_HEIGHT_OFFSET);
+				client, graphics, localPoint, tracked.itemName, TEXT_HEIGHT_OFFSET);
 			if (textPoint != null)
 			{
-				renderOutlinedText(graphics, textPoint, itemName, overlayColor);
+				renderOutlinedText(graphics, textPoint, tracked.itemName, overlayColor);
 			}
 		}
 	}
 
-	private String getItemName(int itemId)
-	{
-		ItemComposition composition = client.getItemDefinition(itemId);
-		return composition != null ? composition.getName() : null;
-	}
 
 	private void renderDirectionArrow(Graphics2D graphics, int x, int tipY, Color color)
 	{
 		int halfW = ARROW_WIDTH / 2;
 		int topY = tipY - ARROW_HEIGHT;
 
-		Polygon arrow = new Polygon(
-			new int[]{x, x + halfW, x - halfW},
-			new int[]{tipY, topY, topY},
-			3
-		);
+		arrowPolygon.reset();
+		arrowPolygon.addPoint(x, tipY);
+		arrowPolygon.addPoint(x + halfW, topY);
+		arrowPolygon.addPoint(x - halfW, topY);
 
 		graphics.setColor(Color.BLACK);
 		graphics.setStroke(STROKE_2);
-		graphics.drawPolygon(arrow);
+		graphics.drawPolygon(arrowPolygon);
 
 		graphics.setColor(color);
-		graphics.fillPolygon(arrow);
+		graphics.fillPolygon(arrowPolygon);
 	}
 
 	private void renderOutlinedText(Graphics2D graphics, Point point, String text, Color color)
@@ -205,11 +207,13 @@ public class GroundItemHighlightOverlay extends Overlay
 	{
 		final TileItem item;
 		final Tile tile;
+		final String itemName;
 
-		TrackedGroundItem(TileItem item, Tile tile)
+		TrackedGroundItem(TileItem item, Tile tile, String itemName)
 		{
 			this.item = item;
 			this.tile = tile;
+			this.itemName = itemName;
 		}
 	}
 }

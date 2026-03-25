@@ -31,6 +31,8 @@ public class WidgetHighlightOverlay extends Overlay
 	private final Client client;
 	private final CollectionLogHelperConfig config;
 	private volatile List<int[]> highlightWidgets = new ArrayList<>();
+	private Color cachedOverlayColor;
+	private Color cachedFillColor;
 
 	@Inject
 	private WidgetHighlightOverlay(Client client, CollectionLogHelperConfig config)
@@ -73,7 +75,11 @@ public class WidgetHighlightOverlay extends Overlay
 		}
 
 		Color color = config.overlayColor();
-		Color fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), FILL_ALPHA);
+		if (!color.equals(cachedOverlayColor))
+		{
+			cachedOverlayColor = color;
+			cachedFillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), FILL_ALPHA);
+		}
 		graphics.setStroke(STROKE_2);
 
 		for (int[] widgetRef : widgets)
@@ -95,7 +101,7 @@ public class WidgetHighlightOverlay extends Overlay
 				continue;
 			}
 
-			graphics.setColor(fillColor);
+			graphics.setColor(cachedFillColor);
 			graphics.fill(bounds);
 			graphics.setColor(color);
 			graphics.draw(bounds);

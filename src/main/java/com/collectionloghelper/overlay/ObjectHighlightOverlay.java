@@ -41,11 +41,13 @@ public class ObjectHighlightOverlay extends Overlay
 	private static final int ARROW_WIDTH = 12;
 	private static final int ARROW_GAP = 5;
 	private static final int TEXT_HEIGHT_OFFSET = 130;
+	private static final BasicStroke STROKE_1_5 = new BasicStroke(1.5f);
 	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
 	private static final Font BOLD_12 = new Font(Font.DIALOG, Font.BOLD, 12);
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
+	private final Polygon arrowPolygon = new Polygon();
 
 	@Inject
 	private TooltipManager tooltipManager;
@@ -57,6 +59,7 @@ public class ObjectHighlightOverlay extends Overlay
 	private volatile WorldPoint filterTile;
 	private volatile int filterMaxDistance;
 	private volatile List<WorldPoint> filterTiles;
+	private volatile String cachedDisplayText;
 
 	/**
 	 * Cached list of scene objects matching targetObjectIds.
@@ -90,11 +93,13 @@ public class ObjectHighlightOverlay extends Overlay
 	public void setObjectInteractAction(String action)
 	{
 		this.objectInteractAction = action;
+		rebuildDisplayText(action, this.useItemOnObject);
 	}
 
 	public void setUseItemOnObject(boolean value)
 	{
 		this.useItemOnObject = value;
+		rebuildDisplayText(this.objectInteractAction, value);
 	}
 
 	public void setTooltipText(String text)
@@ -140,6 +145,19 @@ public class ObjectHighlightOverlay extends Overlay
 		this.filterMaxDistance = 0;
 		this.filterTiles = null;
 		this.matchedObjects = Collections.emptyList();
+		this.cachedDisplayText = null;
+	}
+
+	private void rebuildDisplayText(String action, boolean useItem)
+	{
+		if (action != null)
+		{
+			cachedDisplayText = useItem ? "Use " + action + " \u2192" : action;
+		}
+		else
+		{
+			cachedDisplayText = null;
+		}
 	}
 
 	/**
@@ -340,7 +358,7 @@ public class ObjectHighlightOverlay extends Overlay
 		if (hull != null)
 		{
 			graphics.setColor(overlayColor);
-			graphics.setStroke(new BasicStroke(1.5f));
+			graphics.setStroke(STROKE_1_5);
 			graphics.draw(hull);
 
 			// Draw downward-pointing arrow above the object hull
@@ -359,9 +377,9 @@ public class ObjectHighlightOverlay extends Overlay
 		}
 
 		// Render action text above the object
-		if (localPoint != null && action != null)
+		String displayText = this.cachedDisplayText;
+		if (localPoint != null && displayText != null)
 		{
-			String displayText = useItem ? "Use " + action + " \u2192" : action;
 			Point textPoint = Perspective.getCanvasTextLocation(
 				client, graphics, localPoint, displayText, TEXT_HEIGHT_OFFSET);
 			if (textPoint != null)
@@ -377,18 +395,17 @@ public class ObjectHighlightOverlay extends Overlay
 		int halfW = ARROW_WIDTH / 2;
 		int topY = tipY - ARROW_HEIGHT;
 
-		Polygon arrow = new Polygon(
-			new int[]{x, x + halfW, x - halfW},
-			new int[]{tipY, topY, topY},
-			3
-		);
+		arrowPolygon.reset();
+		arrowPolygon.addPoint(x, tipY);
+		arrowPolygon.addPoint(x + halfW, topY);
+		arrowPolygon.addPoint(x - halfW, topY);
 
 		graphics.setColor(Color.BLACK);
 		graphics.setStroke(STROKE_2);
-		graphics.drawPolygon(arrow);
+		graphics.drawPolygon(arrowPolygon);
 
 		graphics.setColor(color);
-		graphics.fillPolygon(arrow);
+		graphics.fillPolygon(arrowPolygon);
 	}
 
 	private void renderOutlinedText(Graphics2D graphics, Point point, String text, Color color)
