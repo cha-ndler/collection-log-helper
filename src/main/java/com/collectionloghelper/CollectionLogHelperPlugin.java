@@ -284,7 +284,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		panel = new CollectionLogHelperPanel(
 			config, database, collectionState, calculator, clueEstimator,
 			itemManager, requirementsChecker, dataSyncState, slayerTaskState,
-			slayerStrategyCalculator, playerInventoryState,
+			slayerStrategyCalculator, playerInventoryState, playerBankState,
 			this::activateGuidance, this::deactivateGuidance,
 			() -> cachedPlayerLocation,
 			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()));
@@ -647,6 +647,15 @@ public class CollectionLogHelperPlugin extends Plugin
 				{
 					guidanceSequencer.onInventoryChanged();
 				}
+			}
+		}
+
+		if (event.getContainerId() == InventoryID.WORN)
+		{
+			net.runelite.api.ItemContainer equipContainer = client.getItemContainer(InventoryID.WORN);
+			if (equipContainer != null)
+			{
+				playerInventoryState.scanEquipment(equipContainer);
 			}
 		}
 
