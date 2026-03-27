@@ -65,7 +65,7 @@ Each source represents a single collection log category (e.g., "General Graardor
 | `dialogOptions` | array | No | Dialog choices to highlight when talking to NPCs |
 | `waypoints` | array | No | Requirement-gated alternate world locations. See [Waypoints](#waypoints) |
 | `requirements` | object | No | Quest and skill requirements. See [Requirements](#requirements) |
-| `guidanceSteps` | array | No | Ordered list of `GuidanceStep` objects. See [Guidance Steps](#guidance-steps) |
+| `guidanceSteps` | array | No | Ordered list of `GuidanceStep` objects. See [`GuidanceStep`](#guidancestep) |
 | `items` | array | Yes | List of `CollectionLogItem` objects |
 
 ### `CollectionLogItem`

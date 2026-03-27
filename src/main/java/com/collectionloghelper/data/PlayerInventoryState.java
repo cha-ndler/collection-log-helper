@@ -24,6 +24,7 @@ public class PlayerInventoryState
 		Collections.emptySet(), Collections.emptyMap());
 
 	private volatile InventorySnapshot snapshot = EMPTY;
+	private volatile Set<Integer> equippedItemIds = Collections.emptySet();
 
 	@Inject
 	private PlayerInventoryState()
@@ -58,11 +59,44 @@ public class PlayerInventoryState
 	}
 
 	/**
+	 * Scans the equipment container and updates tracked equipped item IDs.
+	 */
+	public void scanEquipment(ItemContainer equipmentContainer)
+	{
+		Set<Integer> newIds = new HashSet<>();
+
+		if (equipmentContainer != null)
+		{
+			Item[] items = equipmentContainer.getItems();
+			if (items != null)
+			{
+				for (Item item : items)
+				{
+					if (item.getId() > 0 && item.getQuantity() > 0)
+					{
+						newIds.add(item.getId());
+					}
+				}
+			}
+		}
+
+		equippedItemIds = newIds;
+	}
+
+	/**
 	 * Returns true if the player's inventory contains the given item ID.
 	 */
 	public boolean hasItem(int itemId)
 	{
 		return snapshot.itemIds.contains(itemId);
+	}
+
+	/**
+	 * Returns true if the player has the given item equipped.
+	 */
+	public boolean hasEquippedItem(int itemId)
+	{
+		return equippedItemIds.contains(itemId);
 	}
 
 	/**
@@ -99,6 +133,7 @@ public class PlayerInventoryState
 	public void reset()
 	{
 		snapshot = EMPTY;
+		equippedItemIds = Collections.emptySet();
 	}
 
 	private static class InventorySnapshot

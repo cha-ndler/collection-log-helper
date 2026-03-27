@@ -110,6 +110,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final SlayerTaskState slayerTaskState;
 	private final SlayerStrategyCalculator slayerStrategyCalculator;
 	private final PlayerInventoryState inventoryState;
+	private final PlayerBankState bankState;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Supplier<WorldPoint> playerLocationSupplier;
@@ -168,6 +169,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		SlayerTaskState slayerTaskState,
 		SlayerStrategyCalculator slayerStrategyCalculator,
 		PlayerInventoryState inventoryState,
+		PlayerBankState bankState,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
 		Supplier<WorldPoint> playerLocationSupplier,
 		Consumer<AfkFilter> afkFilterUpdater)
@@ -183,6 +185,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.slayerTaskState = slayerTaskState;
 		this.slayerStrategyCalculator = slayerStrategyCalculator;
 		this.inventoryState = inventoryState;
+		this.bankState = bankState;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.playerLocationSupplier = playerLocationSupplier;
@@ -1379,9 +1382,15 @@ public class CollectionLogHelperPanel extends PluginPanel
 		});
 	}
 
+	private static final Color ITEM_STATUS_GREEN = new Color(40, 180, 40);
+	private static final Color ITEM_STATUS_YELLOW = new Color(200, 180, 40);
+	private static final Color ITEM_STATUS_RED = new Color(200, 40, 40);
+
 	/**
-	 * Updates the required items display with item sprites and green/red status borders.
-	 * Green border = item is in inventory, red border = item is missing.
+	 * Updates the required items display with item sprites and colored status borders.
+	 * Green border = item is in inventory or equipped (ready to use).
+	 * Yellow border = item is in the bank but not on the player.
+	 * Red border = item is not found anywhere (not in inventory, equipment, or bank).
 	 */
 	private void updateRequiredItemDisplay(List<Integer> requiredItemIds)
 	{
@@ -1400,8 +1409,27 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 		for (int itemId : requiredItemIds)
 		{
-			boolean hasItem = inventoryState.hasItem(itemId);
-			Color borderColor = hasItem ? new Color(40, 180, 40) : new Color(200, 40, 40);
+			boolean inInventory = inventoryState.hasItem(itemId);
+			boolean equipped = inventoryState.hasEquippedItem(itemId);
+			boolean inBank = bankState.hasItem(itemId);
+
+			Color borderColor;
+			String statusText;
+			if (inInventory || equipped)
+			{
+				borderColor = ITEM_STATUS_GREEN;
+				statusText = equipped && !inInventory ? " (equipped)" : " (in inventory)";
+			}
+			else if (inBank)
+			{
+				borderColor = ITEM_STATUS_YELLOW;
+				statusText = " (in bank)";
+			}
+			else
+			{
+				borderColor = ITEM_STATUS_RED;
+				statusText = " (MISSING)";
+			}
 
 			JLabel itemLabel = new JLabel();
 			itemLabel.setPreferredSize(new Dimension(32, 32));
@@ -1422,8 +1450,6 @@ public class CollectionLogHelperPanel extends PluginPanel
 			BufferedImage scaled = scaleImage(asyncImage, 28, 28);
 			itemLabel.setIcon(new ImageIcon(scaled));
 
-			// Tooltip with item name and status
-			String statusText = hasItem ? " (in inventory)" : " (MISSING)";
 			itemLabel.setToolTipText(itemManager.getItemComposition(itemId).getName() + statusText);
 
 			requiredItemsPanel.add(itemLabel);

@@ -2,8 +2,11 @@ package com.collectionloghelper.data;
 
 import com.collectionloghelper.data.ClueItemDatabase.ClueItemType;
 import com.collectionloghelper.data.ClueItemDatabase.ClueTier;
+import java.util.Collections;
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +42,9 @@ public class PlayerBankState
 	/** Clue container counts per tier (bottles + geodes + nests). */
 	private final Map<ClueTier, Integer> containerCounts = new EnumMap<>(ClueTier.class);
 
+	/** All item IDs seen in the bank (for generic item lookup). */
+	private volatile Set<Integer> allBankItemIds = Collections.emptySet();
+
 	/** Whether the current data was loaded from cache (not a fresh scan). */
 	private boolean loadedFromCache;
 
@@ -69,6 +75,7 @@ public class PlayerBankState
 			return;
 		}
 
+		Set<Integer> seenIds = new HashSet<>();
 		for (Item item : items)
 		{
 			int itemId = item.getId();
@@ -78,6 +85,8 @@ public class PlayerBankState
 			{
 				continue;
 			}
+
+			seenIds.add(itemId);
 
 			// Check the static database first (caskets, bottles, geodes, nests,
 			// and beginner/master scrolls)
@@ -139,6 +148,7 @@ public class PlayerBankState
 			}
 		}
 
+		allBankItemIds = Collections.unmodifiableSet(seenIds);
 		loadedFromCache = false;
 		logScanResults();
 		saveToCache();
@@ -217,6 +227,23 @@ public class PlayerBankState
 	public int getContainerCount(ClueTier tier)
 	{
 		return containerCounts.getOrDefault(tier, 0);
+	}
+
+	/**
+	 * Returns true if the bank contains the given item ID.
+	 * Only reliable after a bank scan has been performed this session.
+	 */
+	public boolean hasItem(int itemId)
+	{
+		return allBankItemIds.contains(itemId);
+	}
+
+	/**
+	 * Returns true if any bank data (generic item IDs) is available from a scan.
+	 */
+	public boolean hasBankItemData()
+	{
+		return !allBankItemIds.isEmpty();
 	}
 
 	/**
@@ -417,5 +444,6 @@ public class PlayerBankState
 		casketCounts.clear();
 		scrollCounts.clear();
 		containerCounts.clear();
+		allBankItemIds = Collections.emptySet();
 	}
 }
