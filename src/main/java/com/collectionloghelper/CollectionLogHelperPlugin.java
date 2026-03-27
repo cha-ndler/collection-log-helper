@@ -631,6 +631,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged event)
 	{
+		log.info("ItemContainerChanged fired: containerId={}, BANK={}, match={}",
+			event.getContainerId(), InventoryID.BANK, event.getContainerId() == InventoryID.BANK);
+
 		if (config.guidanceAuthoring())
 		{
 			logContainerChange(event);
@@ -638,7 +641,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		if (event.getContainerId() == InventoryID.INV)
 		{
-			net.runelite.api.ItemContainer invContainer = client.getItemContainer(InventoryID.INV);
+			net.runelite.api.ItemContainer invContainer = event.getItemContainer();
 			if (invContainer != null)
 			{
 				playerInventoryState.scanInventory(invContainer);
@@ -652,7 +655,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		if (event.getContainerId() == InventoryID.WORN)
 		{
-			net.runelite.api.ItemContainer equipContainer = client.getItemContainer(InventoryID.WORN);
+			net.runelite.api.ItemContainer equipContainer = event.getItemContainer();
 			if (equipContainer != null)
 			{
 				playerInventoryState.scanEquipment(equipContainer);
@@ -662,7 +665,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (event.getContainerId() == InventoryID.BANK)
 		{
 			// Scan bank for clue-related items and travel teleports every time it updates
-			net.runelite.api.ItemContainer bankContainer = client.getItemContainer(InventoryID.BANK);
+			net.runelite.api.ItemContainer bankContainer = event.getItemContainer();
 			if (bankContainer != null)
 			{
 				playerBankState.scanBank(bankContainer);
