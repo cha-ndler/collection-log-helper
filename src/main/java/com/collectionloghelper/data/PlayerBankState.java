@@ -29,6 +29,7 @@ public class PlayerBankState
 	private static final String BANK_CASKETS_KEY = "bankCaskets";
 	private static final String BANK_SCROLLS_KEY = "bankScrolls";
 	private static final String BANK_CONTAINERS_KEY = "bankContainers";
+	private static final String BANK_ITEM_IDS_KEY = "bankItemIds";
 
 	private final Client client;
 	private final ConfigManager configManager;
@@ -361,10 +362,11 @@ public class PlayerBankState
 		loadMapFromConfig(BANK_CASKETS_KEY, casketCounts);
 		loadMapFromConfig(BANK_SCROLLS_KEY, scrollCounts);
 		loadMapFromConfig(BANK_CONTAINERS_KEY, containerCounts);
+		loadItemIdsFromConfig();
 
 		loadedFromCache = true;
-		log.info("Loaded cached bank data: {} caskets, {} scrolls, {} containers",
-			getTotalCaskets(), getTotalScrolls(), getTotalContainers());
+		log.info("Loaded cached bank data: {} caskets, {} scrolls, {} containers, {} item IDs",
+			getTotalCaskets(), getTotalScrolls(), getTotalContainers(), allBankItemIds.size());
 		return true;
 	}
 
@@ -377,6 +379,27 @@ public class PlayerBankState
 		saveMapToConfig(BANK_CASKETS_KEY, casketCounts);
 		saveMapToConfig(BANK_SCROLLS_KEY, scrollCounts);
 		saveMapToConfig(BANK_CONTAINERS_KEY, containerCounts);
+		saveItemIdsToConfig();
+	}
+
+	private void saveItemIdsToConfig()
+	{
+		Set<Integer> ids = allBankItemIds;
+		if (ids.isEmpty())
+		{
+			configManager.unsetRSProfileConfiguration(CONFIG_GROUP, BANK_ITEM_IDS_KEY);
+			return;
+		}
+		StringBuilder sb = new StringBuilder();
+		for (int id : ids)
+		{
+			if (sb.length() > 0)
+			{
+				sb.append(',');
+			}
+			sb.append(id);
+		}
+		configManager.setRSProfileConfiguration(CONFIG_GROUP, BANK_ITEM_IDS_KEY, sb.toString());
 	}
 
 	private void saveMapToConfig(String key, Map<ClueTier, Integer> map)
@@ -428,6 +451,28 @@ public class PlayerBankState
 			}
 		}
 		return loaded;
+	}
+
+	private void loadItemIdsFromConfig()
+	{
+		String saved = configManager.getRSProfileConfiguration(CONFIG_GROUP, BANK_ITEM_IDS_KEY);
+		if (saved == null || saved.isEmpty())
+		{
+			return;
+		}
+		Set<Integer> ids = new HashSet<>();
+		for (String entry : saved.split(","))
+		{
+			try
+			{
+				ids.add(Integer.parseInt(entry.trim()));
+			}
+			catch (NumberFormatException e)
+			{
+				log.warn("Skipping invalid cached bank item ID '{}'", entry);
+			}
+		}
+		allBankItemIds = Collections.unmodifiableSet(ids);
 	}
 
 	/**
