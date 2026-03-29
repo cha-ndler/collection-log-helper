@@ -6796,7 +6796,7 @@
     "worldX": 1794,
     "worldY": 3107,
     "worldPlane": 0,
-    "killTimeSeconds": 514,
+    "killTimeSeconds": 1440,
     "requirements": {
       "quests": [
         "CHILDREN_OF_THE_SUN"
