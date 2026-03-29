@@ -251,9 +251,11 @@ public class GuidanceOverlay extends OverlayPanel
 
 			if (name != null)
 			{
-				OverlayUtil.renderTextLocation(graphics,
-					Perspective.getCanvasTextLocation(client, graphics, localPoint, name, 150),
-					name, overlayColor);
+				Point tileTextPoint = Perspective.getCanvasTextLocation(client, graphics, localPoint, name, 150);
+				if (tileTextPoint != null)
+				{
+					OverlayUtil.renderTextLocation(graphics, tileTextPoint, name, overlayColor);
+				}
 			}
 		}
 
