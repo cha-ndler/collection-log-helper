@@ -225,6 +225,8 @@ public class GuidanceOverlay extends OverlayPanel
 								}
 							}
 							npc = candidate;
+							this.trackedNpc = candidate;
+							rebuildNpcLabel(this.interactAction, candidate);
 							break;
 						}
 					}
