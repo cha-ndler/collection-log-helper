@@ -29,14 +29,14 @@ import lombok.Value;
 @Value
 public class CollectionLogItem
 {
-    int itemId;
-    String name;
-    double dropRate;
-    int varbitId;
-    boolean isPet;
-    String wikiPage;
-    int pointCost;
-    int milestoneKills;
-    boolean requiresPrevious;
-    boolean independent;
+	int itemId;
+	String name;
+	double dropRate;
+	int varbitId;
+	boolean isPet;
+	String wikiPage;
+	int pointCost;
+	int milestoneKills;
+	boolean requiresPrevious;
+	boolean independent;
 }

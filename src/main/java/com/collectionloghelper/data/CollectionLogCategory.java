@@ -31,11 +31,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum CollectionLogCategory
 {
-    BOSSES("Bosses"),
-    RAIDS("Raids"),
-    CLUES("Clues"),
-    MINIGAMES("Minigames"),
-    OTHER("Other");
+	BOSSES("Bosses"),
+	RAIDS("Raids"),
+	CLUES("Clues"),
+	MINIGAMES("Minigames"),
+	OTHER("Other");
 
-    private final String displayName;
+	private final String displayName;
 }
