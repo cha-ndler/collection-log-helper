@@ -4617,7 +4617,7 @@
       {
         "itemId": 20851,
         "name": "Olmlet",
-        "dropRate": 0.01887,
+        "dropRate": 0.000434,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Olmlet",
@@ -4861,7 +4861,7 @@
       {
         "itemId": 20851,
         "name": "Olmlet",
-        "dropRate": 0.01887,
+        "dropRate": 0.000897,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Olmlet",
