@@ -116,21 +116,28 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the God Wars Dungeon.",
+        "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
         "worldX": 2882,
         "worldY": 3400,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
       },
       {
-        "description": "Kill General Graardor.",
-        "worldX": 2882,
-        "worldY": 3400,
-        "worldPlane": 0,
+        "description": "Get 40 Bandos killcount by killing goblins, hobgoblins, or jogres in the main chamber",
+        "worldX": 2862,
+        "worldY": 5357,
+        "worldPlane": 2,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Enter the Bandos boss room and kill General Graardor",
+        "worldX": 2864,
+        "worldY": 5360,
+        "worldPlane": 2,
         "npcId": 2215,
         "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 2215
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -140,8 +147,8 @@
     "worldX": 2882,
     "worldY": 3400,
     "worldPlane": 0,
-    "killTimeSeconds": 80,
-    "ironKillTimeSeconds": 144,
+    "killTimeSeconds": 62,
+    "ironKillTimeSeconds": 120,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -275,8 +282,8 @@
     "worldX": 2882,
     "worldY": 3400,
     "worldPlane": 0,
-    "killTimeSeconds": 72,
-    "ironKillTimeSeconds": 144,
+    "killTimeSeconds": 55,
+    "ironKillTimeSeconds": 129,
     "requirements": {
       "quests": [
         "TROLL_STRONGHOLD"
@@ -645,21 +652,20 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Zul-Andra.",
+        "description": "Use fairy ring BJS to reach the dock, then board the sacrificial boat to Zul-Andra",
         "worldX": 2268,
         "worldY": 3069,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
-        "description": "Kill Zulrah.",
+        "description": "Board the sacrificial boat at Zul-Andra to fight Zulrah. Learn the rotation patterns for efficient kills",
         "worldX": 2268,
         "worldY": 3069,
         "worldPlane": 0,
         "npcId": 2042,
-        "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 2042
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -733,21 +739,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Rellekka.",
+        "description": "Use the Lunar Isle teleport or Rellekka house portal, then take the boat to Ungael from Rellekka docks",
         "worldX": 2640,
         "worldY": 3693,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
       },
       {
-        "description": "Kill Vorkath.",
-        "worldX": 2640,
-        "worldY": 3693,
+        "description": "Poke Vorkath to wake him, then kill him. Watch for acid pools, zombified spawn, and the fireball special",
+        "worldX": 2273,
+        "worldY": 4049,
         "worldPlane": 0,
         "npcId": 8061,
-        "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8061
+        "interactAction": "Poke",
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -833,21 +839,28 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Taverley Dungeon.",
+        "description": "Teleport to your house in Taverley (or use Kourend portal) and enter the Taverley Dungeon",
         "worldX": 2883,
         "worldY": 3397,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
       },
       {
-        "description": "Kill Cerberus.",
-        "worldX": 2883,
-        "worldY": 3397,
+        "description": "Navigate to the hellhound area deep in the dungeon, then enter the Cerberus lair through the portal. Requires Slayer task",
+        "worldX": 1240,
+        "worldY": 1251,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill Cerberus. Protect from Magic, watch for the triple ghost special attack",
+        "worldX": 1240,
+        "worldY": 1251,
         "worldPlane": 0,
         "npcId": 5862,
         "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 5862
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -986,21 +999,28 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm.",
+        "description": "Use fairy ring CIR to reach the base of Mount Karuulm, then climb up",
         "worldX": 1308,
         "worldY": 3807,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Kill the Alchemical Hydra.",
-        "worldX": 1308,
-        "worldY": 3807,
+        "description": "Enter the Hydra dungeon on the mountain. Navigate past the regular hydras to the Alchemical Hydra instance. Requires Slayer task",
+        "worldX": 1364,
+        "worldY": 10265,
         "worldPlane": 0,
-        "npcId": 8615,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase — walk over the correct vent matching the Hydra's colour",
+        "worldX": 1364,
+        "worldY": 10265,
+        "worldPlane": 0,
+        "npcId": 8621,
         "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8615
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -1078,21 +1098,28 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Corporeal Beast's cave.",
+        "description": "Use a games necklace to teleport to the Corporeal Beast cave (level 21 Wilderness)",
         "worldX": 2966,
-        "worldY": 4382,
+        "worldY": 3380,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
-        "description": "Kill Corporeal Beast.",
-        "worldX": 2966,
+        "description": "Enter the cave and run past the dark energy core room to the boss chamber",
+        "worldX": 2991,
         "worldY": 4382,
-        "worldPlane": 0,
+        "worldPlane": 2,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill the Corporeal Beast. Spec with Dragon Warhammer/BGS to reduce its Defence, then use a zamorakian spear or equivalent",
+        "worldX": 2991,
+        "worldY": 4382,
+        "worldPlane": 2,
         "npcId": 319,
         "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 319
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -1102,7 +1129,7 @@
     "worldX": 3226,
     "worldY": 3108,
     "worldPlane": 0,
-    "killTimeSeconds": 120,
+    "killTimeSeconds": 65,
     "items": [
       {
         "itemId": 7981,
@@ -1168,24 +1195,28 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Kalphite Lair.",
+        "description": "Use fairy ring BIQ to reach the Kalphite Lair entrance in the Kharidian Desert",
         "worldX": 3226,
         "worldY": 3108,
         "worldPlane": 0,
-        "requiredItemIds": [
-          954
-        ],
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Kill Kalphite Queen.",
+        "description": "Climb down the tunnel entrance and navigate to the Kalphite Queen chamber. Use a rope on the first and second holes if needed",
+        "worldX": 3226,
+        "worldY": 3108,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill the Kalphite Queen. She has two forms — use melee/range for first form, then ranged/magic for second",
         "worldX": 3226,
         "worldY": 3108,
         "worldPlane": 0,
         "npcId": 963,
         "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 963
+        "completionCondition": "MANUAL"
       }
     ],
     "ironKillTimeSeconds": 144
@@ -1287,7 +1318,7 @@
     "worldX": 2846,
     "worldY": 3938,
     "worldPlane": 0,
-    "killTimeSeconds": 129,
+    "killTimeSeconds": 88,
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
@@ -2576,21 +2607,28 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Slepe, east Morytania.",
+        "description": "Use Drakan's medallion to teleport to Slepe",
         "worldX": 3662,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Kill The Nightmare.",
-        "worldX": 3662,
-        "worldY": 3218,
-        "worldPlane": 0,
+        "description": "Enter The Nightmare's lair through the church in Slepe. Go down the stairs in the north-east of town",
+        "worldX": 3808,
+        "worldY": 9775,
+        "worldPlane": 1,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Fight The Nightmare. Protect from the active pillar attacks, run from parasites, and break the healing totems when they appear",
+        "worldX": 3808,
+        "worldY": 9775,
+        "worldPlane": 1,
         "npcId": 9425,
         "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 9425
+        "completionCondition": "MANUAL"
       }
     ],
     "ironKillTimeSeconds": 360
@@ -2959,21 +2997,28 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Forthos Dungeon.",
+        "description": "Use Xeric's talisman to teleport to the Heart of Gielinor, then run south to Forthos Dungeon",
         "worldX": 1701,
         "worldY": 3574,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 25
       },
       {
-        "description": "Kill Sarachnis.",
-        "worldX": 1701,
-        "worldY": 3574,
+        "description": "Enter Forthos Dungeon and navigate to the spider area in the south. Enter Sarachnis' lair",
+        "worldX": 1847,
+        "worldY": 9910,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill Sarachnis. Use crush weapons, protect from ranged when she's red, protect from magic when blue. Kill the spawns quickly",
+        "worldX": 1847,
+        "worldY": 9910,
         "worldPlane": 0,
         "npcId": 8713,
         "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8713
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -3520,21 +3565,28 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Smoke Devil Dungeon.",
-        "worldX": 2404,
-        "worldY": 3060,
+        "description": "Teleport to Castle Wars and run south to the Smoke Devil Dungeon entrance. Requires a Smoke devil Slayer task",
+        "worldX": 2379,
+        "worldY": 9452,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Kill the Thermonuclear smoke devil.",
-        "worldX": 2404,
-        "worldY": 3060,
+        "description": "Enter the dungeon and navigate to the Thermonuclear smoke devil area at the back",
+        "worldX": 2379,
+        "worldY": 9452,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill the Thermonuclear smoke devil. Use Protect from Magic and bring an antidote for poison",
+        "worldX": 2379,
+        "worldY": 9452,
         "worldPlane": 0,
         "npcId": 499,
         "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 499
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -3663,8 +3715,8 @@
     "worldX": 3005,
     "worldY": 3849,
     "worldPlane": 0,
-    "killTimeSeconds": 36,
-    "ironKillTimeSeconds": 45,
+    "killTimeSeconds": 28,
+    "ironKillTimeSeconds": 48,
     "afkLevel": 1,
     "items": [
       {
@@ -4726,18 +4778,26 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Chambers of Xeric.",
+        "description": "Use Xeric's talisman to teleport to the Chambers, or use the Raids board at Mount Quidamortem",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Complete the raid and collect loot from the chest.",
-        "completionCondition": "MANUAL",
+        "description": "Enter the raid and scout rooms. Complete each room — combat, puzzle, and resource rooms — on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
-        "worldPlane": 0
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Defeat the Great Olm in the final room. Dodge head attacks, run from crystals, and watch for flame wall specials",
+        "worldX": 1233,
+        "worldY": 3573,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
       }
     ],
     "ironKillTimeSeconds": 1029
@@ -4970,18 +5030,26 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Chambers of Xeric.",
+        "description": "Use Xeric's talisman to teleport to the Chambers, or use the Raids board at Mount Quidamortem",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Complete the raid and collect loot from the chest.",
-        "completionCondition": "MANUAL",
+        "description": "Enter the raid and scout rooms. Complete each room — combat, puzzle, and resource rooms — on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
-        "worldPlane": 0
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Defeat the Great Olm in the final room. Dodge head attacks, run from crystals, and watch for flame wall specials",
+        "worldX": 1233,
+        "worldY": 3573,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -5185,18 +5253,19 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Theatre of Blood.",
+        "description": "Use Drakan's medallion to teleport to Ver Sinhaza",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
-        "description": "Complete the raid and collect loot.",
-        "completionCondition": "MANUAL",
+        "description": "Form a team and enter the Theatre. Fight through: The Maiden, Pestilent Bloat, Nylocas, Sotetseg, Xarpus, and finally Verzik Vitur",
         "worldX": 3650,
         "worldY": 3218,
-        "worldPlane": 0
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
       }
     ],
     "ironKillTimeSeconds": 1440
@@ -5466,18 +5535,26 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Tombs of Amascut.",
+        "description": "Use the Pharaoh's sceptre to teleport to the Necropolis, or use fairy ring AKP and run south",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Complete the raid and collect loot from the sarcophagus.",
-        "completionCondition": "MANUAL",
+        "description": "Enter the Tombs lobby. Set your invocation level and form a team or go solo",
         "worldX": 3234,
         "worldY": 2784,
-        "worldPlane": 0
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras), then defeat the Wardens boss at the end",
+        "worldX": 3234,
+        "worldY": 2784,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
       }
     ],
     "ironKillTimeSeconds": 1200
@@ -5747,18 +5824,26 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Tombs of Amascut.",
+        "description": "Use the Pharaoh's sceptre to teleport to the Necropolis, or use fairy ring AKP and run south",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Complete the raid and collect loot from the sarcophagus.",
-        "completionCondition": "MANUAL",
+        "description": "Enter the Tombs lobby. Set your invocation level and form a team or go solo",
         "worldX": 3234,
         "worldY": 2784,
-        "worldPlane": 0
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras), then defeat the Wardens boss at the end",
+        "worldX": 3234,
+        "worldY": 2784,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -6027,18 +6112,26 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Tombs of Amascut.",
+        "description": "Use the Pharaoh's sceptre to teleport to the Necropolis, or use fairy ring AKP and run south",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Complete the raid and collect loot from the sarcophagus.",
-        "completionCondition": "MANUAL",
+        "description": "Enter the Tombs lobby. Set your invocation level and form a team or go solo",
         "worldX": 3234,
         "worldY": 2784,
-        "worldPlane": 0
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras), then defeat the Wardens boss at the end",
+        "worldX": 3234,
+        "worldY": 2784,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
       }
     ],
     "ironKillTimeSeconds": 1680
@@ -6442,19 +6535,38 @@
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Barrows, east of Mort'ton.",
+        "description": "Teleport to Barrows using the Arceuus spellbook or Barrows teleport tablet",
         "worldX": 3565,
         "worldY": 3298,
         "worldPlane": 0,
-        "requiredItemIds": [
-          952
-        ],
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Dig into each brother's crypt, defeat all six brothers, then loot the chest.",
+        "description": "Dig on each brother's mound with a spade. Kill each brother when they appear in the crypt",
         "worldX": 3565,
         "worldY": 3298,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Find the brother whose crypt has a tunnel entrance (the empty one). Dig on their mound and climb down",
+        "worldX": 3565,
+        "worldY": 3298,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Navigate the tunnel maze to the centre chest room. Kill any remaining brothers that appear",
+        "worldX": 3551,
+        "worldY": 9694,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open the chest in the centre room to receive your Barrows loot. Teleport out and repeat",
+        "worldX": 3551,
+        "worldY": 9694,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -6577,21 +6689,26 @@
     "interactAction": "Talk-to",
     "guidanceSteps": [
       {
-        "description": "Travel to Tempoross Cove, south of Al Kharid.",
+        "description": "Use the Grouping teleport or sail from Al Kharid docks to reach Tempoross Cove",
         "worldX": 3135,
         "worldY": 2840,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Kill Tempoross.",
+        "description": "Board the boat when a game is starting. Fish harpoonfish, cook them on the cannons, then load them into the cannons to fire at Tempoross",
         "worldX": 3135,
         "worldY": 2840,
         "worldPlane": 0,
-        "npcId": 10584,
-        "interactAction": "Talk-to",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 10584
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "After defeating Tempoross, search the reward pool for collection log drops. Higher participation gives more reward rolls",
+        "worldX": 3135,
+        "worldY": 2840,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
       }
     ],
     "ironKillTimeSeconds": 600,
@@ -6697,21 +6814,26 @@
     "interactAction": "Talk-to",
     "guidanceSteps": [
       {
-        "description": "Travel to Wintertodt Camp, northern Zeah.",
+        "description": "Use a games necklace to teleport directly to the Wintertodt Camp, or take the boat from Port Sarim",
         "worldX": 1621,
         "worldY": 3997,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Kill Wintertodt.",
+        "description": "Enter the Wintertodt arena when the boss spawns. Chop bruma roots, fletch into kindling, then feed the braziers to earn points",
         "worldX": 1621,
         "worldY": 3997,
         "worldPlane": 0,
-        "npcId": 7374,
-        "interactAction": "Talk-to",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 7374
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Earn 500+ points per game for maximum reward crates. Open crates for Pyromancer outfit, Tome of fire, and Phoenix pet",
+        "worldX": 1621,
+        "worldY": 3997,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
       }
     ],
     "rollsPerKill": 10,
@@ -6893,21 +7015,28 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Fortis Colosseum, Varlamore.",
+        "description": "Use the Quetzal whistle to reach Varlamore, then enter the Fortis Colosseum",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Kill Sol Heredit.",
+        "description": "Talk to the Minimus NPC to start a Colosseum run. Fight through 12 waves of increasingly difficult enemies",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
-        "npcId": 12807,
-        "interactAction": "Talk-to",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12807
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks — learn the mechanics for consistent clears",
+        "worldX": 1794,
+        "worldY": 3107,
+        "worldPlane": 0,
+        "npcId": 12610,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL"
       }
     ],
     "rewardType": "MIXED",
@@ -10415,16 +10544,24 @@
     "travelTip": "Drakan's medallion -> Darkmeyer",
     "guidanceSteps": [
       {
-        "description": "Travel to Hallowed Sepulchre entrance in Darkmeyer.",
+        "description": "Use Drakan's medallion to teleport to Darkmeyer, then enter the Hallowed Sepulchre",
         "worldX": 3654,
-        "worldY": 3387,
+        "worldY": 3887,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Travel to Hallowed Sepulchre entrance in Darkmeyer and train at Hallowed Sepulchre.",
+        "description": "Complete the agility floors, looting coffins along the way for hallowed marks and rare drops. Higher floors have better drop rates",
         "worldX": 3654,
-        "worldY": 3387,
+        "worldY": 3887,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Spend hallowed marks at the reward shop near the entrance for collection log items",
+        "worldX": 3654,
+        "worldY": 3887,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -10880,17 +11017,36 @@
     "travelTip": "Grouping tele -> Giants' Foundry",
     "guidanceSteps": [
       {
-        "description": "Travel to Giants' Foundry beneath the Giant's Plateau.",
+        "description": "Use the Grouping teleport to reach Giants' Foundry, or teleport to Falador and run south-east",
         "worldX": 3360,
         "worldY": 3151,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
-        "description": "Travel to Giants' Foundry beneath the Giant's Plateau and train at Giants' Foundry.",
-        "worldX": 3360,
-        "worldY": 3151,
+        "description": "Talk to Kovac to select a commission. Bring metal bars (mithril+ recommended) from the bank",
+        "worldX": 3365,
+        "worldY": 11489,
         "worldPlane": 0,
+        "npcId": 11472,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Pour the metal into the crucible, then use the trip hammer, grindstone, and polishing wheel to shape the sword. Match the target profile shown on the heat gauge",
+        "worldX": 3365,
+        "worldY": 11489,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Hand in the finished sword to Kovac for reputation points. Spend points at his shop for collection log items",
+        "worldX": 3365,
+        "worldY": 11489,
+        "worldPlane": 0,
+        "npcId": 11472,
+        "interactAction": "Talk-to",
         "completionCondition": "MANUAL"
       }
     ],
@@ -11024,7 +11180,11 @@
         "worldX": 2659,
         "worldY": 2676,
         "worldPlane": 0,
-        "dialogOptions": ["Novice", "Intermediate", "Veteran"],
+        "dialogOptions": [
+          "Novice",
+          "Intermediate",
+          "Veteran"
+        ],
         "completionCondition": "MANUAL"
       }
     ],
@@ -11312,16 +11472,39 @@
     "travelTip": "Minigame teleport -> Shades of Mort'ton, or Mort'ton teleport (Arceuus)",
     "guidanceSteps": [
       {
-        "description": "Travel to Mort'ton. Use the Shades of Mort'ton minigame teleport or Mort'ton teleport.",
-        "worldX": 3506,
-        "worldY": 3316,
+        "description": "Teleport to Barrows and run south to Mort'ton",
+        "worldX": 3459,
+        "worldY": 3299,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
-        "description": "Enter the Shades catacombs and burn shades for rewards.",
-        "worldX": 3506,
-        "worldY": 3316,
+        "description": "Collect shade remains from the Shades in Mort'ton or bring your own",
+        "worldX": 3459,
+        "worldY": 3299,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Use sacred oil on logs to make pyre logs, then burn shades on the funeral pyres to receive shade keys",
+        "worldX": 3502,
+        "worldY": 3277,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Enter the Shades catacombs via the trapdoor south of the general store",
+        "worldX": 3492,
+        "worldY": 3279,
+        "worldPlane": 0,
+        "objectId": 4005,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Use your shade keys on the locked chests deeper in the catacombs for collection log drops",
+        "worldX": 3459,
+        "worldY": 3299,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -11817,7 +12000,11 @@
         "worldPlane": 0,
         "npcId": 4572,
         "interactAction": "Talk-to",
-        "dialogOptions": ["I'll take a hard one", "hard", "deliver"],
+        "dialogOptions": [
+          "I'll take a hard one",
+          "hard",
+          "deliver"
+        ],
         "completionCondition": "MANUAL"
       }
     ]
@@ -12561,7 +12748,11 @@
         "worldX": 2440,
         "worldY": 3089,
         "worldPlane": 0,
-        "dialogOptions": ["Saradomin", "Zamorak", "Guthix"],
+        "dialogOptions": [
+          "Saradomin",
+          "Zamorak",
+          "Guthix"
+        ],
         "completionCondition": "MANUAL"
       }
     ],
@@ -12622,7 +12813,10 @@
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
-        "dialogOptions": ["Join", "Yes"],
+        "dialogOptions": [
+          "Join",
+          "Yes"
+        ],
         "completionCondition": "MANUAL"
       }
     ],
@@ -13397,7 +13591,10 @@
         "worldPlane": 0,
         "npcId": 1816,
         "interactAction": "Join-Team",
-        "dialogOptions": ["Yes", "Join"],
+        "dialogOptions": [
+          "Yes",
+          "Join"
+        ],
         "travelTip": null,
         "requiredItemIds": null,
         "completionCondition": "NPC_TALKED_TO",
@@ -13739,7 +13936,12 @@
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
-        "dialogOptions": ["Attacker", "Defender", "Collector", "Healer"],
+        "dialogOptions": [
+          "Attacker",
+          "Defender",
+          "Collector",
+          "Healer"
+        ],
         "completionCondition": "MANUAL"
       },
       {
@@ -16497,7 +16699,8 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mining_gloves",
-        "pointCost": 60
+        "pointCost": 0,
+        "milestoneKills": 360
       },
       {
         "itemId": 21345,
@@ -16506,8 +16709,9 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Superior_mining_gloves",
-        "pointCost": 120,
-        "requiresPrevious": true
+        "pointCost": 0,
+        "requiresPrevious": true,
+        "milestoneKills": 720
       },
       {
         "itemId": 21392,
@@ -16516,8 +16720,9 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Expert_mining_gloves",
-        "pointCost": 240,
-        "requiresPrevious": true
+        "pointCost": 0,
+        "requiresPrevious": true,
+        "milestoneKills": 1440
       },
       {
         "itemId": 21509,
@@ -16535,8 +16740,9 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Merfolk_trident",
-        "pointCost": 400,
-        "independent": true
+        "pointCost": 0,
+        "independent": true,
+        "milestoneKills": 400
       },
       {
         "itemId": 21838,
@@ -19020,7 +19226,7 @@
     "worldX": 3299,
     "worldY": 9867,
     "worldPlane": 0,
-    "killTimeSeconds": 72,
+    "killTimeSeconds": 42,
     "items": [
       {
         "itemId": 28801,
@@ -19183,7 +19389,7 @@
     "worldX": 3683,
     "worldY": 3706,
     "worldPlane": 0,
-    "killTimeSeconds": 30,
+    "killTimeSeconds": 45,
     "afkLevel": 1,
     "requirements": {
       "quests": [
@@ -25072,7 +25278,11 @@
         "worldPlane": 0,
         "npcId": 4572,
         "interactAction": "Talk-to",
-        "dialogOptions": ["I'll take a hard one", "hard", "deliver"],
+        "dialogOptions": [
+          "I'll take a hard one",
+          "hard",
+          "deliver"
+        ],
         "completionCondition": "MANUAL"
       }
     ]
