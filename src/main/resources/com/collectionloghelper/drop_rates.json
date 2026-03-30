@@ -17919,7 +17919,7 @@
     "locationDescription": "Warriors' Guild, Burthorpe",
     "travelTip": "Games necklace -> Burthorpe",
     "mutuallyExclusive": true,
-    "npcId": 2463,
+    "npcId": 2137,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
