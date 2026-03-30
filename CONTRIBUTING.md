@@ -314,11 +314,28 @@ Clue items drop from **caskets**, not from kills. The `dropRate` should reflect 
 
 ### Raids (Point-Based Scaling)
 
-Raid drop rates scale with contribution points. All raids should be tagged `mutuallyExclusive: true`.
+Raid drop rates scale with contribution points. All raids should be tagged `mutuallyExclusive: true`. Rates are stored as **per-raid solo rates** — team size scaling is applied dynamically via the RaidTeamSize config.
 
-- **Chambers of Xeric**: Rates scaled to a ~30,000 point raid
-- **Theatre of Blood**: Weighted rates per 4-man completion
-- **Tombs of Amascut**: Rates per 300 invocation-level completion
+- **Chambers of Xeric**: Per-raid solo rates at ~20,000 points. CM uses a 2.067x multiplier on normal rates
+- **Theatre of Blood**: Per-completion solo rates. ToB Hard Mode is a separate source with better base rates and 3 HM-exclusive items
+- **Tombs of Amascut**: Per-raid solo rates at each invocation level (150/300/500 as separate sources). At RL 500, unique weightings shift per the June 2025 rebalance
+
+### Milestone Items (KC Thresholds)
+
+Some items are guaranteed at specific kill count milestones rather than being random drops. Use `"dropRate": 1.0` with `"milestoneKills": N` where N is the KC threshold:
+
+- **Xeric's capes** (CoX CM): 100/500/1000/1500/2000 CM completions
+- **Icthlarin's shrouds** (ToA): 100/500/1000/1500/2000 completions
+- **Sinhaza shrouds** (ToB): 100/500/1000/1500/2000 completions
+
+Use `requiresPrevious: true` on tiers 2+ since they unlock sequentially.
+
+### Cumulative Rates (Multi-Phase Bosses)
+
+Some bosses involve multiple phases or attempts per "completion," each with independent loot rolls. Store the **cumulative per-completion probability**, not the per-phase rate:
+
+- **Doom of Mokhaiotl**: Delving to depth 10 gives 10 independent rolls (depths 1-10) with improving rates. Use the cumulative `1 - Π(1 - p_depth)` across all depths
+- **Sol Heredit**: 12 Colosseum waves with independent rolls from wave 4+. Use the cumulative per-completion rate
 
 ### "All Pets" View
 
