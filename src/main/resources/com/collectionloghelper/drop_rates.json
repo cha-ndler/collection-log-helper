@@ -1014,7 +1014,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase — walk over the correct vent matching the Hydra's colour",
+        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase \u00e2\u20ac\u201d walk over the correct vent matching the Hydra's colour",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
@@ -1210,7 +1210,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Kalphite Queen. She has two forms — use melee/range for first form, then ranged/magic for second",
+        "description": "Kill the Kalphite Queen. She has two forms \u00e2\u20ac\u201d use melee/range for first form, then ranged/magic for second",
         "worldX": 3226,
         "worldY": 3108,
         "worldPlane": 0,
@@ -4719,7 +4719,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room — combat, puzzle, and resource rooms — on your way to the final boss",
+        "description": "Enter the raid and scout rooms. Complete each room \u00e2\u20ac\u201d combat, puzzle, and resource rooms \u00e2\u20ac\u201d on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -4971,7 +4971,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room — combat, puzzle, and resource rooms — on your way to the final boss",
+        "description": "Enter the raid and scout rooms. Complete each room \u00e2\u20ac\u201d combat, puzzle, and resource rooms \u00e2\u20ac\u201d on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5214,7 +5214,7 @@
       {
         "itemId": 26219,
         "name": "Osmumten's fang",
-        "dropRate": 0.00292,
+        "dropRate": 0.005848,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Osmumten%27s_fang",
@@ -5223,7 +5223,7 @@
       {
         "itemId": 25975,
         "name": "Lightbearer",
-        "dropRate": 0.00292,
+        "dropRate": 0.005848,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lightbearer",
@@ -5232,7 +5232,7 @@
       {
         "itemId": 25985,
         "name": "Elidinis' ward",
-        "dropRate": 0.00125,
+        "dropRate": 0.002506,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Elidinis%27_ward",
@@ -5241,7 +5241,7 @@
       {
         "itemId": 27226,
         "name": "Masori mask",
-        "dropRate": 0.000833,
+        "dropRate": 0.001671,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Masori_mask",
@@ -5250,7 +5250,7 @@
       {
         "itemId": 27229,
         "name": "Masori body",
-        "dropRate": 0.000833,
+        "dropRate": 0.001671,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Masori_body",
@@ -5259,7 +5259,7 @@
       {
         "itemId": 27232,
         "name": "Masori chaps",
-        "dropRate": 0.000833,
+        "dropRate": 0.001671,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Masori_chaps",
@@ -5268,7 +5268,7 @@
       {
         "itemId": 27277,
         "name": "Tumeken's shadow",
-        "dropRate": 0.000417,
+        "dropRate": 0.000835,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tumeken%27s_shadow",
@@ -5277,7 +5277,7 @@
       {
         "itemId": 27352,
         "name": "Tumeken's guardian",
-        "dropRate": 0.002,
+        "dropRate": 0.000625,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Tumeken%27s_guardian",
@@ -5295,7 +5295,7 @@
       {
         "itemId": 27283,
         "name": "Breach of the scarab",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Breach_of_the_scarab",
@@ -5304,7 +5304,7 @@
       {
         "itemId": 27285,
         "name": "Eye of the corruptor",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Eye_of_the_corruptor",
@@ -5313,7 +5313,7 @@
       {
         "itemId": 27289,
         "name": "Jewel of the sun",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jewel_of_the_sun",
@@ -5322,7 +5322,7 @@
       {
         "itemId": 30893,
         "name": "Jewel of amascut",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jewel_of_amascut",
@@ -5412,51 +5412,51 @@
       {
         "itemId": 27257,
         "name": "Icthlarin's shroud (tier 1)",
-        "dropRate": 0.01,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_1)",
-        "independent": true
+        "milestoneKills": 100
       },
       {
         "itemId": 27259,
         "name": "Icthlarin's shroud (tier 2)",
-        "dropRate": 0.002,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_2)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 500
       },
       {
         "itemId": 27261,
         "name": "Icthlarin's shroud (tier 3)",
-        "dropRate": 0.001,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_3)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 1000
       },
       {
         "itemId": 27263,
         "name": "Icthlarin's shroud (tier 4)",
-        "dropRate": 0.000667,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_4)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 1500
       },
       {
         "itemId": 27265,
         "name": "Icthlarin's shroud (tier 5)",
-        "dropRate": 0.0005,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_5)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 2000
       }
     ],
     "locationDescription": "Necropolis, Kharidian Desert",
@@ -5503,7 +5503,7 @@
       {
         "itemId": 26219,
         "name": "Osmumten's fang",
-        "dropRate": 0.004468,
+        "dropRate": 0.011629,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Osmumten%27s_fang",
@@ -5512,7 +5512,7 @@
       {
         "itemId": 25975,
         "name": "Lightbearer",
-        "dropRate": 0.004468,
+        "dropRate": 0.011629,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lightbearer",
@@ -5521,7 +5521,7 @@
       {
         "itemId": 25985,
         "name": "Elidinis' ward",
-        "dropRate": 0.001913,
+        "dropRate": 0.004984,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Elidinis%27_ward",
@@ -5530,7 +5530,7 @@
       {
         "itemId": 27226,
         "name": "Masori mask",
-        "dropRate": 0.001274,
+        "dropRate": 0.003323,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Masori_mask",
@@ -5539,7 +5539,7 @@
       {
         "itemId": 27229,
         "name": "Masori body",
-        "dropRate": 0.001274,
+        "dropRate": 0.003323,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Masori_body",
@@ -5548,7 +5548,7 @@
       {
         "itemId": 27232,
         "name": "Masori chaps",
-        "dropRate": 0.001274,
+        "dropRate": 0.003323,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Masori_chaps",
@@ -5557,7 +5557,7 @@
       {
         "itemId": 27277,
         "name": "Tumeken's shadow",
-        "dropRate": 0.000638,
+        "dropRate": 0.001661,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tumeken%27s_shadow",
@@ -5566,7 +5566,7 @@
       {
         "itemId": 27352,
         "name": "Tumeken's guardian",
-        "dropRate": 0.00306,
+        "dropRate": 0.001281,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Tumeken%27s_guardian",
@@ -5584,7 +5584,7 @@
       {
         "itemId": 27283,
         "name": "Breach of the scarab",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Breach_of_the_scarab",
@@ -5593,7 +5593,7 @@
       {
         "itemId": 27285,
         "name": "Eye of the corruptor",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Eye_of_the_corruptor",
@@ -5602,7 +5602,7 @@
       {
         "itemId": 27289,
         "name": "Jewel of the sun",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jewel_of_the_sun",
@@ -5611,7 +5611,7 @@
       {
         "itemId": 30893,
         "name": "Jewel of amascut",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jewel_of_amascut",
@@ -5701,51 +5701,51 @@
       {
         "itemId": 27257,
         "name": "Icthlarin's shroud (tier 1)",
-        "dropRate": 0.01,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_1)",
-        "independent": true
+        "milestoneKills": 100
       },
       {
         "itemId": 27259,
         "name": "Icthlarin's shroud (tier 2)",
-        "dropRate": 0.002,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_2)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 500
       },
       {
         "itemId": 27261,
         "name": "Icthlarin's shroud (tier 3)",
-        "dropRate": 0.001,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_3)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 1000
       },
       {
         "itemId": 27263,
         "name": "Icthlarin's shroud (tier 4)",
-        "dropRate": 0.000667,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_4)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 1500
       },
       {
         "itemId": 27265,
         "name": "Icthlarin's shroud (tier 5)",
-        "dropRate": 0.0005,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_5)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 2000
       }
     ],
     "locationDescription": "Necropolis, Kharidian Desert",
@@ -5791,7 +5791,7 @@
       {
         "itemId": 26219,
         "name": "Osmumten's fang",
-        "dropRate": 0.00876,
+        "dropRate": 0.016129,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Osmumten%27s_fang",
@@ -5800,7 +5800,7 @@
       {
         "itemId": 25975,
         "name": "Lightbearer",
-        "dropRate": 0.00876,
+        "dropRate": 0.018834,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Lightbearer",
@@ -5809,7 +5809,7 @@
       {
         "itemId": 25985,
         "name": "Elidinis' ward",
-        "dropRate": 0.00375,
+        "dropRate": 0.016129,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Elidinis%27_ward",
@@ -5818,7 +5818,7 @@
       {
         "itemId": 27226,
         "name": "Masori mask",
-        "dropRate": 0.002499,
+        "dropRate": 0.010753,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Masori_mask",
@@ -5827,7 +5827,7 @@
       {
         "itemId": 27229,
         "name": "Masori body",
-        "dropRate": 0.002499,
+        "dropRate": 0.010753,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Masori_body",
@@ -5836,7 +5836,7 @@
       {
         "itemId": 27232,
         "name": "Masori chaps",
-        "dropRate": 0.002499,
+        "dropRate": 0.010753,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Masori_chaps",
@@ -5845,7 +5845,7 @@
       {
         "itemId": 27277,
         "name": "Tumeken's shadow",
-        "dropRate": 0.001251,
+        "dropRate": 0.005376,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tumeken%27s_shadow",
@@ -5854,7 +5854,7 @@
       {
         "itemId": 27352,
         "name": "Tumeken's guardian",
-        "dropRate": 0.006,
+        "dropRate": 0.00621,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Tumeken%27s_guardian",
@@ -5872,7 +5872,7 @@
       {
         "itemId": 27283,
         "name": "Breach of the scarab",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Breach_of_the_scarab",
@@ -5881,7 +5881,7 @@
       {
         "itemId": 27285,
         "name": "Eye of the corruptor",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Eye_of_the_corruptor",
@@ -5890,7 +5890,7 @@
       {
         "itemId": 27289,
         "name": "Jewel of the sun",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jewel_of_the_sun",
@@ -5899,7 +5899,7 @@
       {
         "itemId": 30893,
         "name": "Jewel of amascut",
-        "dropRate": 0.04,
+        "dropRate": 0.02,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Jewel_of_amascut",
@@ -5989,51 +5989,51 @@
       {
         "itemId": 27257,
         "name": "Icthlarin's shroud (tier 1)",
-        "dropRate": 0.01,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_1)",
-        "independent": true
+        "milestoneKills": 100
       },
       {
         "itemId": 27259,
         "name": "Icthlarin's shroud (tier 2)",
-        "dropRate": 0.002,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_2)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 500
       },
       {
         "itemId": 27261,
         "name": "Icthlarin's shroud (tier 3)",
-        "dropRate": 0.001,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_3)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 1000
       },
       {
         "itemId": 27263,
         "name": "Icthlarin's shroud (tier 4)",
-        "dropRate": 0.000667,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_4)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 1500
       },
       {
         "itemId": 27265,
         "name": "Icthlarin's shroud (tier 5)",
-        "dropRate": 0.0005,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Icthlarin%27s_shroud_(tier_5)",
-        "independent": true,
-        "requiresPrevious": true
+        "requiresPrevious": true,
+        "milestoneKills": 2000
       }
     ],
     "locationDescription": "Necropolis, Kharidian Desert",
@@ -6964,7 +6964,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks — learn the mechanics for consistent clears",
+        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks \u00e2\u20ac\u201d learn the mechanics for consistent clears",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -7629,7 +7629,7 @@
       {
         "itemId": 22547,
         "name": "Craw's bow (u)",
-        "dropRate": 0.0000559,
+        "dropRate": 5.59e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Craw%27s_bow_(u)"
@@ -7637,7 +7637,7 @@
       {
         "itemId": 22552,
         "name": "Thammaron's sceptre (u)",
-        "dropRate": 0.0000559,
+        "dropRate": 5.59e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Thammaron%27s_sceptre_(u)"
@@ -7645,7 +7645,7 @@
       {
         "itemId": 22542,
         "name": "Viggora's chainmace (u)",
-        "dropRate": 0.0000559,
+        "dropRate": 5.59e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Viggora%27s_chainmace_(u)"
@@ -18754,7 +18754,7 @@
       {
         "itemId": 31088,
         "name": "Avernic treads",
-        "dropRate": 0.009920,
+        "dropRate": 0.00992,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Avernic_treads"
