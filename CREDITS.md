@@ -30,7 +30,7 @@
 - **Community:** Log Hunters Discord
 - **Invite:** https://discord.gg/loghunters
 - **Resource:** Log Adviser spreadsheet (v1.3.4 by Main Mukkor)
-- Referenced for: TempleOSRS EHB kill time alignment, independent drop table modeling, sequential drop dependencies (requiresPrevious), main vs ironman completion rates, identification of missing skilling pet sources, raid variant data, full item-by-item drop rate audit, SHOP/MIXED pointsPerHour corrections, and Miscellaneous source extraction
+- Referenced for: TempleOSRS EHB kill time alignment, independent drop table modeling, sequential drop dependencies (requiresPrevious), main vs ironman completion rates, identification of missing skilling pet sources, raid variant data, SHOP/MIXED pointsPerHour corrections, Miscellaneous source extraction, and comprehensive item-by-item accuracy audit (ToA per-raid rate corrections, Sol Heredit per-completion rates, Revenant skulled demon rates, Hallowed Sepulchre SHOP conversion, TzHaar mixed-type rate dilution, Doom of Mokhaiotl cumulative delve model, Forestry event-type weighting, Wintertodt pyromancer per-roll rates)
 
 ### C Engineer: Completed
 - **Author:** m0bilebtw
@@ -42,11 +42,16 @@
 ### TempleOSRS
 - **Website:** https://templeosrs.com
 - **API Docs:** https://templeosrs.com/api_doc.php
-- Referenced for: canonical collection log item ID verification (all 2,101 item IDs validated across 224 sources), EHB kill time alignment, collection log category verification
+- Referenced for: canonical collection log item ID verification (all 2,111 item entries validated across 225 sources), EHB kill time alignment, collection log category verification
 
 ### OSRS Wiki
 - **Website:** https://oldschool.runescape.wiki
-- Referenced for: drop rate verification (all 224 sources audited), quest requirements, NPC IDs, world coordinates, game mechanics research, raid loot mechanics (CoX points, ToB team scaling, ToA raid level formula), slayer task weights (4 masters verified), DT2 Awakened boss rates, wilderness boss variant rates
+- Referenced for: drop rate verification (all 225 sources audited), quest requirements, NPC IDs, world coordinates, game mechanics research, raid loot mechanics (CoX points, ToB team scaling, ToA raid level formula), slayer task weights (4 masters verified), DT2 Awakened boss rates, wilderness boss variant rates
+
+### Wise Old Man (WOM)
+- **Website:** https://wiseoldman.net
+- **Repository:** https://github.com/wise-old-man/wise-old-man
+- Referenced for: ironman EHB rates used to validate iron-specific kill times
 
 ### Bitterkoekje DPS Calculator
 - **Repository:** https://github.com/weirdgloop/osrs-dps-calc
