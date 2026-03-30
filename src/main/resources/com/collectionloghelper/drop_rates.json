@@ -5201,7 +5201,208 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "ironKillTimeSeconds": 1440
+    "ironKillTimeSeconds": 1440,
+    "mutuallyExclusiveSources": [
+      "Theatre of Blood (Hard Mode)"
+    ]
+  },
+  {
+    "name": "Theatre of Blood (Hard Mode)",
+    "category": "RAIDS",
+    "worldX": 3650,
+    "worldY": 3218,
+    "worldPlane": 0,
+    "killTimeSeconds": 1350,
+    "ironKillTimeSeconds": 1620,
+    "requirements": {
+      "quests": [
+        "A_TASTE_OF_HOPE"
+      ]
+    },
+    "items": [
+      {
+        "itemId": 22486,
+        "name": "Scythe of vitur (uncharged)",
+        "dropRate": 0.007215,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Scythe_of_vitur",
+        "independent": true
+      },
+      {
+        "itemId": 22324,
+        "name": "Ghrazi rapier",
+        "dropRate": 0.01443,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ghrazi_rapier",
+        "independent": true
+      },
+      {
+        "itemId": 22481,
+        "name": "Sanguinesti staff (uncharged)",
+        "dropRate": 0.01443,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sanguinesti_staff",
+        "independent": true
+      },
+      {
+        "itemId": 22326,
+        "name": "Justiciar faceguard",
+        "dropRate": 0.01443,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Justiciar_faceguard",
+        "independent": true
+      },
+      {
+        "itemId": 22327,
+        "name": "Justiciar chestguard",
+        "dropRate": 0.01443,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Justiciar_chestguard",
+        "independent": true
+      },
+      {
+        "itemId": 22328,
+        "name": "Justiciar legguards",
+        "dropRate": 0.01443,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Justiciar_legguards",
+        "independent": true
+      },
+      {
+        "itemId": 22477,
+        "name": "Avernic defender hilt",
+        "dropRate": 0.050505,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Avernic_defender_hilt",
+        "independent": true
+      },
+      {
+        "itemId": 22473,
+        "name": "Lil' zik",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": true,
+        "wikiPage": "Lil%27_zik",
+        "independent": true
+      },
+      {
+        "itemId": 22446,
+        "name": "Vial of blood",
+        "dropRate": 0.333,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Vial_of_blood",
+        "independent": true
+      },
+      {
+        "itemId": 22494,
+        "name": "Sinhaza shroud tier 1",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sinhaza_shroud_tier_1",
+        "independent": true
+      },
+      {
+        "itemId": 22496,
+        "name": "Sinhaza shroud tier 2",
+        "dropRate": 0.002,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sinhaza_shroud_tier_2",
+        "independent": true,
+        "requiresPrevious": true
+      },
+      {
+        "itemId": 22498,
+        "name": "Sinhaza shroud tier 3",
+        "dropRate": 0.001,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sinhaza_shroud_tier_3",
+        "independent": true,
+        "requiresPrevious": true
+      },
+      {
+        "itemId": 22500,
+        "name": "Sinhaza shroud tier 4",
+        "dropRate": 0.000667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sinhaza_shroud_tier_4",
+        "independent": true,
+        "requiresPrevious": true
+      },
+      {
+        "itemId": 22502,
+        "name": "Sinhaza shroud tier 5",
+        "dropRate": 0.0005,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sinhaza_shroud_tier_5",
+        "independent": true,
+        "requiresPrevious": true
+      },
+      {
+        "itemId": 25746,
+        "name": "Sanguine dust",
+        "dropRate": 0.003636,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sanguine_dust",
+        "independent": true
+      },
+      {
+        "itemId": 25742,
+        "name": "Holy ornament kit",
+        "dropRate": 0.01,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Holy_ornament_kit",
+        "independent": true
+      },
+      {
+        "itemId": 25744,
+        "name": "Sanguine ornament kit",
+        "dropRate": 0.006667,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Sanguine_ornament_kit",
+        "independent": true
+      }
+    ],
+    "locationDescription": "Ver Sinhaza, Morytania",
+    "travelTip": "Drakan's medallion -> Ver Sinhaza",
+    "mutuallyExclusive": true,
+    "mutuallyExclusiveSources": [
+      "Theatre of Blood"
+    ],
+    "npcId": 10852,
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Use Drakan's medallion to teleport to Ver Sinhaza",
+        "worldX": 3650,
+        "worldY": 3218,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
+      },
+      {
+        "description": "Form a team and enter the Theatre in Hard Mode. Fight through all rooms and defeat Verzik Vitur",
+        "worldX": 3650,
+        "worldY": 3218,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      }
+    ]
   },
   {
     "name": "Tombs of Amascut",
@@ -6779,6 +6980,7 @@
     "worldY": 6040,
     "worldPlane": 0,
     "killTimeSeconds": 90,
+    "ironKillTimeSeconds": 120,
     "afkLevel": 1,
     "requirements": {
       "quests": [
@@ -18617,6 +18819,7 @@
     "worldY": 10091,
     "worldPlane": 0,
     "killTimeSeconds": 180,
+    "ironKillTimeSeconds": 200,
     "requirements": {
       "quests": [
         "A_KINGDOM_DIVIDED"
