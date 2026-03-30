@@ -4701,24 +4701,6 @@
         "isPet": false,
         "wikiPage": "Onyx",
         "independent": true
-      },
-      {
-        "itemId": 22386,
-        "name": "Metamorphic dust",
-        "dropRate": 0.0025,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Metamorphic_dust",
-        "independent": true
-      },
-      {
-        "itemId": 24670,
-        "name": "Twisted ancestral colour kit",
-        "dropRate": 0.01333,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Twisted_ancestral_colour_kit",
-        "independent": true
       }
     ],
     "locationDescription": "Mount Quidamortem, Great Kourend",
