@@ -6578,7 +6578,7 @@
     "worldX": 3135,
     "worldY": 2840,
     "worldPlane": 0,
-    "killTimeSeconds": 600,
+    "killTimeSeconds": 450,
     "afkLevel": 1,
     "items": [
       {
@@ -6836,7 +6836,7 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "rollsPerKill": 10,
+    "rollsPerKill": 8,
     "ironKillTimeSeconds": 655
   },
   {
