@@ -6888,7 +6888,7 @@
       {
         "itemId": 28933,
         "name": "Sunfire fanatic helm",
-        "dropRate": 0.0395,
+        "dropRate": 0.04087,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sunfire_fanatic_helm",
@@ -6897,7 +6897,7 @@
       {
         "itemId": 28936,
         "name": "Sunfire fanatic cuirass",
-        "dropRate": 0.0395,
+        "dropRate": 0.04087,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sunfire_fanatic_cuirass",
@@ -6906,7 +6906,7 @@
       {
         "itemId": 28939,
         "name": "Sunfire fanatic chausses",
-        "dropRate": 0.0395,
+        "dropRate": 0.04087,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Sunfire_fanatic_chausses",
@@ -6915,7 +6915,7 @@
       {
         "itemId": 28942,
         "name": "Echo crystal",
-        "dropRate": 0.028125,
+        "dropRate": 0.08039,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Echo_crystal"
@@ -6923,7 +6923,7 @@
       {
         "itemId": 28919,
         "name": "Tonalztics of ralos (uncharged)",
-        "dropRate": 0.005208,
+        "dropRate": 0.01196,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tonalztics_of_ralos"
@@ -6931,10 +6931,11 @@
       {
         "itemId": 28924,
         "name": "Sunfire splinters",
-        "dropRate": 0.012,
+        "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Sunfire_splinters"
+        "wikiPage": "Sunfire_splinters",
+        "milestoneKills": 1
       },
       {
         "itemId": 6571,
