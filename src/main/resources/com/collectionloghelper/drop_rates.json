@@ -3643,7 +3643,7 @@
       {
         "itemId": 13274,
         "name": "Bludgeon spine",
-        "dropRate": 0.001615,
+        "dropRate": 0.004844,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bludgeon_spine"
@@ -3651,7 +3651,7 @@
       {
         "itemId": 13275,
         "name": "Bludgeon claw",
-        "dropRate": 0.001615,
+        "dropRate": 0.004844,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bludgeon_claw",
@@ -3660,7 +3660,7 @@
       {
         "itemId": 13276,
         "name": "Bludgeon axon",
-        "dropRate": 0.001615,
+        "dropRate": 0.004844,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Bludgeon_axon",
