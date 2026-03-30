@@ -124,6 +124,13 @@
         "completionDistance": 30
       },
       {
+        "description": "Enter the God Wars Dungeon",
+        "worldX": 2882,
+        "worldY": 5310,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE"
+      },
+      {
         "description": "Get 40 Bandos killcount by killing goblins, hobgoblins, or jogres in the main chamber",
         "worldX": 2862,
         "worldY": 5357,
@@ -137,7 +144,8 @@
         "worldPlane": 2,
         "npcId": 2215,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 2215
       }
     ]
   },
@@ -258,17 +266,32 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the God Wars Dungeon.",
+        "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
         "worldX": 2882,
         "worldY": 3400,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
       },
       {
-        "description": "Kill Commander Zilyana.",
+        "description": "Enter the God Wars Dungeon",
+        "worldX": 2882,
+        "worldY": 5310,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE"
+      },
+      {
+        "description": "Get 40 Saradomin killcount by killing knights and spiritual warriors in the main chamber",
+        "worldX": 2907,
+        "worldY": 5265,
+        "worldPlane": 2,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Enter the Saradomin boss room and kill Commander Zilyana",
         "worldX": 2925,
         "worldY": 5265,
-        "worldPlane": 0,
+        "worldPlane": 2,
         "npcId": 2205,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
@@ -393,14 +416,29 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the God Wars Dungeon.",
+        "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
         "worldX": 2882,
         "worldY": 3400,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
       },
       {
-        "description": "Kill K'ril Tsutsaroth.",
+        "description": "Enter the God Wars Dungeon",
+        "worldX": 2882,
+        "worldY": 5310,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE"
+      },
+      {
+        "description": "Get 40 Zamorak killcount by killing imps, werewolves, or vampyres in the main chamber",
+        "worldX": 2914,
+        "worldY": 5350,
+        "worldPlane": 2,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Enter the Zamorak boss room and kill K'ril Tsutsaroth",
         "worldX": 2914,
         "worldY": 5350,
         "worldPlane": 2,
@@ -528,14 +566,29 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the God Wars Dungeon.",
+        "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
         "worldX": 2882,
         "worldY": 3400,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
       },
       {
-        "description": "Kill Kree'arra.",
+        "description": "Enter the God Wars Dungeon",
+        "worldX": 2882,
+        "worldY": 5310,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE"
+      },
+      {
+        "description": "Get 40 Armadyl killcount by killing aviansie in the main chamber",
+        "worldX": 2844,
+        "worldY": 5280,
+        "worldPlane": 2,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Use a mithril grapple to enter the Armadyl boss room and kill Kree'arra",
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,
@@ -833,13 +886,13 @@
       }
     ],
     "locationDescription": "Taverley Dungeon entrance, Taverley",
-    "travelTip": "Fairy ring BIP -> Taverley Dungeon, or POH -> Taverley portal",
+    "travelTip": "POH Taverley portal, or Key master teleport",
     "mutuallyExclusive": true,
     "npcId": 5862,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Teleport to your house in Taverley (or use Kourend portal) and enter the Taverley Dungeon",
+        "description": "Teleport to your house in Taverley or use a Key master teleport, then enter the Taverley Dungeon",
         "worldX": 2883,
         "worldY": 3397,
         "worldPlane": 0,
@@ -1106,11 +1159,19 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the cave and run past the dark energy core room to the boss chamber",
+        "description": "Enter the cave to reach the underground lair",
         "worldX": 2991,
         "worldY": 4382,
         "worldPlane": 2,
-        "completionCondition": "MANUAL"
+        "completionCondition": "PLAYER_ON_PLANE"
+      },
+      {
+        "description": "Run past the dark energy core room to the boss chamber",
+        "worldX": 2991,
+        "worldY": 4382,
+        "worldPlane": 2,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill the Corporeal Beast. Spec with Dragon Warhammer/BGS to reduce its Defence, then use a zamorakian spear or equivalent",
@@ -1119,7 +1180,8 @@
         "worldPlane": 2,
         "npcId": 319,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 319
       }
     ]
   },
@@ -2612,22 +2674,20 @@
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 30
       },
       {
         "description": "Enter The Nightmare's lair through the church in Slepe. Go down the stairs in the north-east of town",
         "worldX": 3808,
         "worldY": 9775,
         "worldPlane": 1,
-        "completionCondition": "MANUAL"
+        "completionCondition": "PLAYER_ON_PLANE"
       },
       {
         "description": "Fight The Nightmare. Protect from the active pillar attacks, run from parasites, and break the healing totems when they appear",
         "worldX": 3808,
         "worldY": 9775,
         "worldPlane": 1,
-        "npcId": 9425,
-        "interactAction": "Attack",
         "completionCondition": "MANUAL"
       }
     ],
@@ -2789,21 +2849,26 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Slepe, east Morytania.",
+        "description": "Use Drakan's medallion to teleport to Slepe",
         "worldX": 3662,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
       },
       {
-        "description": "Kill Phosani's Nightmare.",
-        "worldX": 3662,
-        "worldY": 3218,
-        "worldPlane": 0,
-        "npcId": 9423,
-        "interactAction": "Attack",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 9423
+        "description": "Enter the Sisterhood Sanctuary through the church in Slepe. Go down the stairs and drink from the Pool of Nightmares",
+        "worldX": 3808,
+        "worldY": 9775,
+        "worldPlane": 1,
+        "completionCondition": "PLAYER_ON_PLANE"
+      },
+      {
+        "description": "Fight Phosani's Nightmare solo. This is a harder version with no downtime between phases",
+        "worldX": 3808,
+        "worldY": 9775,
+        "worldPlane": 1,
+        "completionCondition": "MANUAL"
       }
     ]
   },
@@ -2921,14 +2986,23 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to God Wars Dungeon.",
+        "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
         "worldX": 2882,
         "worldY": 3400,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
       },
       {
-        "description": "Kill Nex.",
+        "description": "Enter the main dungeon and head to the frozen door to access the Ancient Prison",
+        "worldX": 2905,
+        "worldY": 5190,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
+      },
+      {
+        "description": "Kill Nex in the Ancient Prison",
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
@@ -8911,7 +8985,7 @@
       }
     ],
     "locationDescription": "Mos Le'Harmless Cave",
-    "travelTip": "Fairy ring ALQ -> Mos Le'Harmless, or Charter ship",
+    "travelTip": "Minigame tele -> Trouble Brewing, or Charter ship",
     "npcId": 3209,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -17849,21 +17923,27 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Warriors' Guild, Burthorpe.",
+        "description": "Travel to the Warriors' Guild in Burthorpe",
         "worldX": 2849,
         "worldY": 3543,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
-        "description": "Kill Cyclopes.",
+        "description": "Climb the stairs to the top floor Cyclopes room. Bring warrior guild tokens",
         "worldX": 2849,
         "worldY": 3543,
-        "worldPlane": 0,
-        "npcId": 2463,
-        "interactAction": "Attack",
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE"
+      },
+      {
+        "description": "Kill Cyclopes for defender drops. Each kill costs 10 warrior guild tokens",
+        "worldX": 2849,
+        "worldY": 3543,
+        "worldPlane": 2,
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 2463
+        "completionNpcId": 2137
       }
     ]
   },
