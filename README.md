@@ -42,7 +42,7 @@ The plugin detects your available teleports and transport methods, then shows on
 
 ### Automatic Sync
 
-Opens your in-game Collection Log once per session to automatically detect all obtained items — no manual browsing required. A configurable reminder nudges you to open the log after login if you haven't synced yet.
+When you open your in-game Collection Log, the plugin automatically detects all obtained items — no manual browsing through each tab required. A configurable reminder nudges you to open the log after login if you haven't synced yet.
 
 ### Guidance Overlays
 
