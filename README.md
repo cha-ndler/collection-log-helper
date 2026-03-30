@@ -2,7 +2,7 @@
 
 A RuneLite plugin that guides players through efficient collection log completion with intelligent efficiency scoring, on-screen guidance overlays, and multiple viewing modes.
 
-**Coverage:** 2,101 items across 224 sources — all item IDs verified against TempleOSRS, drop rates audited against OSRS Wiki and the [Log Hunters](https://discord.gg/loghunters) community spreadsheet.
+**Coverage:** 2,111 items across 225 sources — all item IDs verified against TempleOSRS, drop rates audited against OSRS Wiki and the [Log Hunters](https://discord.gg/loghunters) community spreadsheet.
 
 ## Features
 
@@ -16,7 +16,7 @@ Ranks collection log sources by how efficiently you can obtain missing items. Th
 - **Raid team size scaling** — Adjustable Solo/Duo/Trio/Full team size affects drop rates and kill times for raids
 - **Slayer task overhead** — Task-only sources inflate effective kill time by 1/P(creature|master) when not on task
 - **Main/Ironman toggle** — Separate completion rates for accounts with significantly different methods (Corp, GWD, wilderness bosses, etc.)
-- **Mutually exclusive variants** — Raid difficulty variants (CoX/CoX CM, ToA 150/300/500), DT2 Awakened bosses, and shared-loot boss groups are cross-referenced with "(also: ...)" notes
+- **Mutually exclusive variants** — Raid difficulty variants (CoX/CoX CM, ToB/ToB HM, ToA 150/300/500), DT2 Awakened bosses, and shared-loot boss groups are cross-referenced with "(also: ...)" notes
 
 ### Account-Aware Requirements
 
@@ -64,9 +64,9 @@ Click "Guide Me" on any item to activate navigation aids:
 
 ### Step-by-Step Guidance
 
-All 224 sources have multi-step guidance sequences with auto-completing steps:
+All 225 sources have multi-step guidance sequences with auto-completing steps:
 
-- **Auto-arrival detection** — 222 sources detect when you arrive at the target location (ARRIVE_AT_TILE)
+- **Auto-arrival detection** — 223 sources detect when you arrive at the target location (ARRIVE_AT_TILE)
 - **Auto-kill detection** — 112 sources detect when you kill the target (ACTOR_DEATH)
 - **Multi-floor navigation** — 9 sources guide you through stair climbing with PLAYER_ON_PLANE detection
 - **Zone-based detection** — ARRIVE_AT_ZONE for large areas (rectangular zone matching)
@@ -107,7 +107,7 @@ Automatically detects new collection log entries via chat messages and varbit ch
 
 ## Data
 
-All drop data lives in [`src/main/resources/com/collectionloghelper/drop_rates.json`](src/main/resources/com/collectionloghelper/drop_rates.json). 224 sources with 2,101 items covering all bosses, raids, slayer creatures, clue scrolls, minigames, shops, and skilling activities. Each source includes world coordinates, kill times (main + iron), drop table mechanics, quest/skill requirements, NPC IDs, multi-step guidance, and items with OSRS item IDs, decimal drop rates, and wiki links. Kill times are aligned with TempleOSRS EHB rates.
+All drop data lives in [`src/main/resources/com/collectionloghelper/drop_rates.json`](src/main/resources/com/collectionloghelper/drop_rates.json). 225 sources with 2,111 items covering all bosses, raids, slayer creatures, clue scrolls, minigames, shops, and skilling activities. Each source includes world coordinates, kill times (main + iron), drop table mechanics, quest/skill requirements, NPC IDs, multi-step guidance, and items with OSRS item IDs, decimal drop rates, and wiki links. Kill times are aligned with TempleOSRS EHB rates. Drop rates have been wiki-verified and cross-audited against the Log Hunters Log Adviser spreadsheet.
 
 Slayer task weights for all 4 masters (Duradel, Nieve, Konar, Turael) are in [`slayer_task_weights.json`](src/main/resources/com/collectionloghelper/slayer_task_weights.json) — 148 tasks verified against OSRS Wiki.
 
