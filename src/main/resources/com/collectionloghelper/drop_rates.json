@@ -266,8 +266,8 @@
       },
       {
         "description": "Kill Commander Zilyana.",
-        "worldX": 2882,
-        "worldY": 3400,
+        "worldX": 2925,
+        "worldY": 5265,
         "worldPlane": 0,
         "npcId": 2205,
         "interactAction": "Attack",
@@ -401,9 +401,9 @@
       },
       {
         "description": "Kill K'ril Tsutsaroth.",
-        "worldX": 2882,
-        "worldY": 3400,
-        "worldPlane": 0,
+        "worldX": 2914,
+        "worldY": 5350,
+        "worldPlane": 2,
         "npcId": 3129,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
@@ -536,9 +536,9 @@
       },
       {
         "description": "Kill Kree'arra.",
-        "worldX": 2882,
-        "worldY": 3400,
-        "worldPlane": 0,
+        "worldX": 2844,
+        "worldY": 5280,
+        "worldPlane": 2,
         "npcId": 3162,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
@@ -1100,7 +1100,7 @@
       {
         "description": "Use a games necklace to teleport to the Corporeal Beast cave (level 21 Wilderness)",
         "worldX": 2966,
-        "worldY": 3380,
+        "worldY": 4382,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
@@ -2929,8 +2929,8 @@
       },
       {
         "description": "Kill Nex.",
-        "worldX": 2882,
-        "worldY": 3400,
+        "worldX": 2905,
+        "worldY": 5190,
         "worldPlane": 0,
         "npcId": 11278,
         "interactAction": "Attack",
@@ -2997,7 +2997,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Xeric's talisman to teleport to the Heart of Gielinor, then run south to Forthos Dungeon",
+        "description": "Use Xeric's talisman (Xeric's Heart) to teleport to central Kourend, then run south to Forthos Dungeon",
         "worldX": 1701,
         "worldY": 3574,
         "worldPlane": 0,
@@ -6675,7 +6675,7 @@
       {
         "itemId": 20704,
         "name": "Pyromancer garb",
-        "dropRate": 0.001667,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_garb"
@@ -6683,7 +6683,7 @@
       {
         "itemId": 20708,
         "name": "Pyromancer hood",
-        "dropRate": 0.001667,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_hood",
@@ -6692,7 +6692,7 @@
       {
         "itemId": 20706,
         "name": "Pyromancer robe",
-        "dropRate": 0.001667,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_robe",
@@ -6701,7 +6701,7 @@
       {
         "itemId": 20710,
         "name": "Pyromancer boots",
-        "dropRate": 0.001667,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Pyromancer_boots",
@@ -7319,8 +7319,8 @@
   {
     "name": "Tormented Demons",
     "category": "OTHER",
-    "worldX": 2560,
-    "worldY": 3441,
+    "worldX": 4100,
+    "worldY": 4415,
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "ironKillTimeSeconds": 72,
@@ -7355,22 +7355,23 @@
         "wikiPage": "Tormented_ornament_kit"
       }
     ],
-    "locationDescription": "Ruins south of Lava Maze, Wilderness",
-    "travelTip": "Burning amulet -> Lava Maze",
+    "locationDescription": "Ancient Guthixian Temple, Chasm of Tears",
+    "travelTip": "Guthixian temple teleport",
     "npcId": 13599,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ruins south of Lava Maze, Wilderness.",
-        "worldX": 2560,
-        "worldY": 3441,
+        "description": "Use a Guthixian temple teleport or attract a light creature with a sapphire lantern in the Chasm of Tears.",
+        "worldX": 4100,
+        "worldY": 4415,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30
       },
       {
         "description": "Kill Tormented Demons.",
-        "worldX": 2560,
-        "worldY": 3441,
+        "worldX": 4100,
+        "worldY": 4415,
         "worldPlane": 0,
         "npcId": 13599,
         "interactAction": "Attack",
@@ -10480,7 +10481,7 @@
       {
         "description": "Use Drakan's medallion to teleport to Darkmeyer, then enter the Hallowed Sepulchre",
         "worldX": 3654,
-        "worldY": 3887,
+        "worldY": 3387,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
@@ -10488,14 +10489,14 @@
       {
         "description": "Complete the agility floors, looting coffins along the way for hallowed marks and rare drops. Higher floors have better drop rates",
         "worldX": 3654,
-        "worldY": 3887,
+        "worldY": 3387,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
         "description": "Spend hallowed marks at the reward shop near the entrance for collection log items",
         "worldX": 3654,
-        "worldY": 3887,
+        "worldY": 3387,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -12063,7 +12064,7 @@
       }
     ],
     "locationDescription": "Temple Trekking, between Burgh de Rott and Paterdomus",
-    "travelTip": "Ectophial -> Burgh de Rott",
+    "travelTip": "Drakan's medallion -> Burgh de Rott, or Minigame tele",
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
@@ -15649,7 +15650,7 @@
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Travel to Ancient Cavern beneath the Baxtorian Falls and collect notes during Sailing activities.",
+        "description": "Kill mithril dragons in the Ancient Cavern for ancient page drops.",
         "worldX": 2520,
         "worldY": 3571,
         "worldPlane": 0,
@@ -17456,7 +17457,7 @@
       {
         "itemId": 6522,
         "name": "Toktz-xil-ul",
-        "dropRate": 0.001953,
+        "dropRate": 0.000488,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Toktz-xil-ul"
@@ -17464,7 +17465,7 @@
       {
         "itemId": 6523,
         "name": "Toktz-xil-ak",
-        "dropRate": 0.001465,
+        "dropRate": 0.000488,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Toktz-xil-ak"
@@ -17472,7 +17473,7 @@
       {
         "itemId": 6525,
         "name": "Toktz-xil-ek",
-        "dropRate": 0.001465,
+        "dropRate": 0.000488,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Toktz-xil-ek"
@@ -17480,7 +17481,7 @@
       {
         "itemId": 6524,
         "name": "Toktz-ket-xil",
-        "dropRate": 0.001953,
+        "dropRate": 0.000488,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Toktz-ket-xil"
@@ -17488,7 +17489,7 @@
       {
         "itemId": 6528,
         "name": "Tzhaar-ket-om",
-        "dropRate": 0.001953,
+        "dropRate": 0.000488,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Tzhaar-ket-om"
@@ -17496,7 +17497,7 @@
       {
         "itemId": 6568,
         "name": "Obsidian cape",
-        "dropRate": 0.001953,
+        "dropRate": 0.000977,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Obsidian_cape"
@@ -17504,7 +17505,7 @@
       {
         "itemId": 6526,
         "name": "Toktz-mej-tal",
-        "dropRate": 0.000244,
+        "dropRate": 6.1e-05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Toktz-mej-tal"
@@ -17512,7 +17513,7 @@
       {
         "itemId": 21298,
         "name": "Obsidian helmet",
-        "dropRate": 0.0005,
+        "dropRate": 0.000125,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Obsidian_helmet"
@@ -17520,7 +17521,7 @@
       {
         "itemId": 21301,
         "name": "Obsidian platebody",
-        "dropRate": 0.0005,
+        "dropRate": 0.000125,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Obsidian_platebody"
@@ -17528,7 +17529,7 @@
       {
         "itemId": 21304,
         "name": "Obsidian platelegs",
-        "dropRate": 0.0005,
+        "dropRate": 0.000125,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Obsidian_platelegs"
