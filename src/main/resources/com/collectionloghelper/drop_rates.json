@@ -7659,8 +7659,8 @@
   {
     "name": "Beginner Treasure Trails",
     "category": "CLUES",
-    "worldX": 3212,
-    "worldY": 3422,
+    "worldX": 3165,
+    "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 72,
     "ironKillTimeSeconds": 180,
@@ -7798,16 +7798,37 @@
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Grand Exchange.",
-        "worldX": 3212,
-        "worldY": 3422,
+        "description": "Travel to the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
-        "worldX": 3212,
-        "worldY": 3422,
+        "description": "Buy Young impling jars from the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open jars to obtain beginner clue scrolls (1/25 rate per jar).",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open reward casket for collection log items.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -19661,8 +19682,8 @@
   {
     "name": "Easy Treasure Trails",
     "category": "CLUES",
-    "worldX": 3222,
-    "worldY": 3218,
+    "worldX": 3165,
+    "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 80,
     "ironKillTimeSeconds": 180,
@@ -20716,20 +20737,41 @@
         "wikiPage": "Black_pickaxe"
       }
     ],
-    "locationDescription": "Lumbridge",
+    "locationDescription": "Grand Exchange",
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Lumbridge.",
-        "worldX": 3222,
-        "worldY": 3218,
+        "description": "Travel to the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
-        "worldX": 3222,
-        "worldY": 3218,
+        "description": "Buy Gourmet impling jars from the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open jars to obtain easy clue scrolls (1/25 rate per jar).",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open reward casket for collection log items.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -20738,8 +20780,8 @@
   {
     "name": "Medium Treasure Trails",
     "category": "CLUES",
-    "worldX": 2964,
-    "worldY": 3378,
+    "worldX": 3165,
+    "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "ironKillTimeSeconds": 360,
@@ -21665,20 +21707,41 @@
         "wikiPage": "Gnomish_firelighter"
       }
     ],
-    "locationDescription": "Falador",
+    "locationDescription": "Grand Exchange",
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Falador.",
-        "worldX": 2964,
-        "worldY": 3378,
+        "description": "Travel to the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
-        "worldX": 2964,
-        "worldY": 3378,
+        "description": "Buy Eclectic impling jars from the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open jars to obtain medium clue scrolls (1/25 rate per jar).",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open reward casket for collection log items.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -21687,8 +21750,8 @@
   {
     "name": "Hard Treasure Trails",
     "category": "CLUES",
-    "worldX": 3213,
-    "worldY": 3428,
+    "worldX": 3165,
+    "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 180,
     "ironKillTimeSeconds": 720,
@@ -22766,20 +22829,41 @@
         "wikiPage": "Amulet_of_glory_(t)"
       }
     ],
-    "locationDescription": "Varrock",
+    "locationDescription": "Grand Exchange",
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Varrock.",
-        "worldX": 3213,
-        "worldY": 3428,
+        "description": "Travel to the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
-        "worldX": 3213,
-        "worldY": 3428,
+        "description": "Buy Ninja impling jars from the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open jars to obtain hard clue scrolls (1/25 rate per jar).",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open reward casket for collection log items.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -22788,8 +22872,8 @@
   {
     "name": "Elite Treasure Trails",
     "category": "CLUES",
-    "worldX": 3239,
-    "worldY": 6075,
+    "worldX": 3165,
+    "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "items": [
@@ -23266,20 +23350,41 @@
         "wikiPage": "Ring_of_nature"
       }
     ],
-    "locationDescription": "Prifddinas",
+    "locationDescription": "Grand Exchange",
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Prifddinas.",
-        "worldX": 3239,
-        "worldY": 6075,
+        "description": "Travel to the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
-        "worldX": 3239,
-        "worldY": 6075,
+        "description": "Buy Dragon impling jars from the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open jars to obtain elite clue scrolls (1/50 rate per jar).",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open reward casket for collection log items.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -23692,16 +23797,30 @@
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Grand Exchange.",
+        "description": "Travel to the Grand Exchange.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
+        "description": "Obtain a master clue by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a rare drop from high-level PvM.",
         "worldX": 3165,
         "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open reward casket for collection log items.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -23711,8 +23830,8 @@
   {
     "name": "Hard Treasure Trail Rewards (Rare)",
     "category": "CLUES",
-    "worldX": 3213,
-    "worldY": 3428,
+    "worldX": 3165,
+    "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 420,
     "items": [
@@ -23909,20 +24028,41 @@
         "wikiPage": "Gilded_hasta"
       }
     ],
-    "locationDescription": "Varrock",
+    "locationDescription": "Grand Exchange",
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Varrock.",
-        "worldX": 3213,
-        "worldY": 3428,
+        "description": "Travel to the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
-        "worldX": 3213,
-        "worldY": 3428,
+        "description": "Buy Ninja impling jars from the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open jars to obtain hard clue scrolls (1/25 rate per jar).",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open reward casket for collection log items.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -23931,8 +24071,8 @@
   {
     "name": "Elite Treasure Trail Rewards (Rare)",
     "category": "CLUES",
-    "worldX": 3239,
-    "worldY": 6075,
+    "worldX": 3165,
+    "worldY": 3487,
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "items": [
@@ -24249,20 +24389,41 @@
         "wikiPage": "Lava_dragon_mask"
       }
     ],
-    "locationDescription": "Prifddinas",
+    "locationDescription": "Grand Exchange",
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Prifddinas.",
-        "worldX": 3239,
-        "worldY": 6075,
+        "description": "Travel to the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
-        "worldX": 3239,
-        "worldY": 6075,
+        "description": "Buy Dragon impling jars from the Grand Exchange.",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open jars to obtain elite clue scrolls (1/50 rate per jar).",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open reward casket for collection log items.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -24658,16 +24819,30 @@
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Grand Exchange.",
+        "description": "Travel to the Grand Exchange.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
+        "description": "Obtain a master clue by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a rare drop from high-level PvM.",
         "worldX": 3165,
         "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open reward casket for collection log items.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -25078,16 +25253,30 @@
     "mutuallyExclusive": true,
     "guidanceSteps": [
       {
-        "description": "Travel to Grand Exchange.",
+        "description": "Travel to the Grand Exchange.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE"
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
+        "description": "Buy impling jars from the Grand Exchange for your target clue tier (Young for beginner, Gourmet for easy, Eclectic for medium, Ninja for hard).",
         "worldX": 3165,
         "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open jars to obtain clue scrolls, then complete clue steps using the RuneLite Clue Scroll plugin.",
+        "worldX": 3165,
+        "worldY": 3487,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Open reward casket for collection log items.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }

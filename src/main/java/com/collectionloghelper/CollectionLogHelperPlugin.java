@@ -460,7 +460,8 @@ public class CollectionLogHelperPlugin extends Plugin
 
 				if (panel != null)
 				{
-					if (dataSyncState.isCollectionLogSynced())
+					if (dataSyncState.isCollectionLogSynced()
+						&& collectionState.getTotalObtained() > 0)
 					{
 						panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
 							collectionState.getTotalObtained());
