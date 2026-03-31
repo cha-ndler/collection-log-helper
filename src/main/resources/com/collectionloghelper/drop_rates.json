@@ -808,7 +808,8 @@
         "interactAction": "Poke",
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Cerberus",
@@ -3094,7 +3095,8 @@
         "interactAction": "Attack",
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Giant Mole",
@@ -3485,7 +3487,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 42,
     "ironKillTimeSeconds": 45,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -4463,7 +4465,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 6766
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Skotizo",
@@ -4622,7 +4625,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 8583
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Chambers of Xeric",
@@ -6929,7 +6933,7 @@
     "worldY": 3997,
     "worldPlane": 0,
     "killTimeSeconds": 655,
-    "afkLevel": 1,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 20712,
@@ -8250,7 +8254,7 @@
     "worldY": 3110,
     "worldPlane": 0,
     "killTimeSeconds": 40,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -9144,7 +9148,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 9293
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Wyrm",
@@ -9474,7 +9479,7 @@
     "worldY": 3150,
     "worldPlane": 0,
     "killTimeSeconds": 36,
-    "afkLevel": 1,
+    "afkLevel": 2,
     "requirements": {
       "skills": [
         {
@@ -9532,7 +9537,7 @@
     "worldY": 3534,
     "worldPlane": 2,
     "killTimeSeconds": 14,
-    "afkLevel": 3,
+    "afkLevel": 2,
     "requirements": {
       "skills": [
         {
@@ -9605,7 +9610,7 @@
     "worldY": 9820,
     "worldPlane": 0,
     "killTimeSeconds": 9,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -9921,7 +9926,7 @@
     "worldY": 10057,
     "worldPlane": 0,
     "killTimeSeconds": 23,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -10052,7 +10057,7 @@
     "worldY": 3611,
     "worldPlane": 0,
     "killTimeSeconds": 15,
-    "afkLevel": 3,
+    "afkLevel": 2,
     "requirements": {
       "skills": [
         {
@@ -10203,7 +10208,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 13667
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Smoke Devil",
@@ -10212,7 +10218,7 @@
     "worldY": 3061,
     "worldPlane": 0,
     "killTimeSeconds": 5,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "skills": [
         {
@@ -10338,7 +10344,7 @@
     "worldY": 3325,
     "worldPlane": 0,
     "killTimeSeconds": 22,
-    "afkLevel": 3,
+    "afkLevel": 2,
     "requirements": {
       "quests": [
         "SINS_OF_THE_FATHER"
@@ -10388,7 +10394,7 @@
     "worldY": 3785,
     "worldPlane": 0,
     "killTimeSeconds": 900,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 23047,
@@ -10465,7 +10471,7 @@
     "worldY": 3955,
     "worldPlane": 0,
     "killTimeSeconds": 2,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 24288,
@@ -10584,7 +10590,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 2,
     "ironKillTimeSeconds": 120,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 29455,
@@ -11141,7 +11147,7 @@
     "worldY": 3151,
     "worldPlane": 0,
     "killTimeSeconds": 360,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "SLEEPING_GIANTS"
@@ -12239,7 +12245,8 @@
         ],
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Fishing Trawler",
@@ -12611,7 +12618,7 @@
     "worldY": 3089,
     "worldPlane": 0,
     "killTimeSeconds": 1200,
-    "afkLevel": 1,
+    "afkLevel": 3,
     "items": [
       {
         "itemId": 4071,
@@ -13474,7 +13481,7 @@
     "worldY": 3021,
     "worldPlane": 0,
     "killTimeSeconds": 1200,
-    "afkLevel": 3,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "CABIN_FEVER"
@@ -14432,7 +14439,8 @@
       }
     ],
     "rewardType": "MIXED",
-    "pointsPerHour": 32
+    "pointsPerHour": 32,
+    "afkLevel": 1
   },
   {
     "name": "Boat Paints",
@@ -14910,7 +14918,8 @@
         "completionNpcId": 1475
       }
     ],
-    "rewardType": "MILESTONE"
+    "rewardType": "MILESTONE",
+    "afkLevel": 1
   },
   {
     "name": "Forestry",
@@ -15196,7 +15205,7 @@
     "worldY": 3819,
     "worldPlane": 0,
     "killTimeSeconds": 4,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 21664,
@@ -15495,7 +15504,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 600,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 32401,
@@ -16445,7 +16454,7 @@
     "worldY": 3420,
     "worldPlane": 0,
     "killTimeSeconds": 14,
-    "afkLevel": 2,
+    "afkLevel": 3,
     "items": [
       {
         "itemId": 31408,
@@ -16623,7 +16632,7 @@
     "worldY": 10050,
     "worldPlane": 0,
     "killTimeSeconds": 12,
-    "afkLevel": 1,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 19679,
@@ -17759,7 +17768,7 @@
     "worldY": 5175,
     "worldPlane": 0,
     "killTimeSeconds": 5,
-    "afkLevel": 1,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 6522,
@@ -17873,7 +17882,7 @@
     "worldY": 3543,
     "worldPlane": 0,
     "killTimeSeconds": 18,
-    "afkLevel": 1,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 8844,
@@ -17985,7 +17994,7 @@
     "worldY": 3621,
     "worldPlane": 0,
     "killTimeSeconds": 8,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 20517,
@@ -18464,7 +18473,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 24,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -18527,7 +18536,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 24,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -18590,7 +18599,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 24,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -18653,7 +18662,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 24,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -18716,7 +18725,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 24,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -18779,7 +18788,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 24,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "requirements": {
       "quests": [
         "TOWER_OF_LIFE"
@@ -19518,7 +19527,8 @@
         "completionNpcId": 7222
       }
     ],
-    "ironKillTimeSeconds": 80
+    "ironKillTimeSeconds": 80,
+    "afkLevel": 1
   },
   {
     "name": "The Fight Caves",
@@ -25464,7 +25474,7 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 2
   },
   {
     "name": "Fishing (Swordfish)",
@@ -25509,7 +25519,7 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 2
+    "afkLevel": 3
   },
   {
     "name": "Runecrafting (Fire Runes)",
@@ -25632,7 +25642,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 2
   },
   {
     "name": "Gnome Restaurant (Seed Pods)",
@@ -25686,7 +25697,8 @@
         ],
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Stingray (Boat Combat)",
@@ -27109,7 +27121,7 @@
     "worldY": 3691,
     "worldPlane": 0,
     "killTimeSeconds": 2,
-    "afkLevel": 3,
+    "afkLevel": 2,
     "items": [
       {
         "itemId": 31572,
@@ -27149,7 +27161,7 @@
     "worldY": 6072,
     "worldPlane": 0,
     "killTimeSeconds": 7,
-    "afkLevel": 2,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 23959,
@@ -27387,7 +27399,7 @@
     "worldY": 3325,
     "worldPlane": 0,
     "killTimeSeconds": 7,
-    "afkLevel": 3,
+    "afkLevel": 1,
     "items": [
       {
         "itemId": 24777,
