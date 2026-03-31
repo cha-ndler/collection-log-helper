@@ -12016,11 +12016,11 @@
       },
       {
         "itemId": 27695,
-        "name": "Ore pack",
+        "name": "Dragon pickaxe (broken)",
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Ore_pack_(Volcanic_Mine)",
+        "wikiPage": "Dragon_pickaxe_(broken)",
         "pointCost": 4000
       },
       {
@@ -12981,11 +12981,11 @@
     "items": [
       {
         "itemId": 25340,
-        "name": "Soul cape (red)",
+        "name": "Ectoplasmator",
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Soul_cape",
+        "wikiPage": "Ectoplasmator",
         "pointCost": 2500,
         "independent": true
       },
@@ -15575,6 +15575,16 @@
         "wikiPage": "Dragon_keel_schematic",
         "pointCost": 1,
         "independent": true
+      },
+      {
+        "itemId": 33143,
+        "name": "Ballistic attractor schematic",
+        "dropRate": 1.0,
+        "varbitId": 0,
+        "isPet": false,
+        "wikiPage": "Ballistic_attractor_schematic",
+        "pointCost": 1,
+        "independent": true
       }
     ],
     "locationDescription": "Various islands discovered through Sailing",
@@ -17515,11 +17525,11 @@
       },
       {
         "itemId": 30045,
-        "name": "Graceful crafting kit",
+        "name": "Graceful hood",
         "dropRate": 1.0,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Graceful_crafting_kit",
+        "wikiPage": "Graceful_hood",
         "pointCost": 650,
         "independent": true
       },
@@ -20699,11 +20709,11 @@
       },
       {
         "itemId": 12297,
-        "name": "Large spade",
+        "name": "Black pickaxe",
         "dropRate": 0.08333,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Large_spade"
+        "wikiPage": "Black_pickaxe"
       }
     ],
     "locationDescription": "Lumbridge",
@@ -21648,11 +21658,11 @@
       },
       {
         "itemId": 20275,
-        "name": "Clueless scroll",
+        "name": "Gnomish firelighter",
         "dropRate": 0.01168,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Clueless_scroll"
+        "wikiPage": "Gnomish_firelighter"
       }
     ],
     "locationDescription": "Falador",
@@ -23248,14 +23258,6 @@
         "wikiPage": "Fremennik_kilt"
       },
       {
-        "itemId": 12371,
-        "name": "Heavy casket",
-        "dropRate": 0.023809523809523808,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Heavy_casket"
-      },
-      {
         "itemId": 20005,
         "name": "Ring of nature",
         "dropRate": 6.82e-05,
@@ -23667,14 +23669,6 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Mummy%27s_feet"
-      },
-      {
-        "itemId": 20017,
-        "name": "Scroll sack",
-        "dropRate": 0.005,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Scroll_sack"
       },
       {
         "itemId": 19730,
@@ -25057,11 +25051,11 @@
       },
       {
         "itemId": 20238,
-        "name": "Watson teleport",
+        "name": "Charge dragonstone jewellery scroll",
         "dropRate": 0.003759,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Watson_teleport"
+        "wikiPage": "Charge_dragonstone_jewellery_scroll"
       },
       {
         "itemId": 10476,
