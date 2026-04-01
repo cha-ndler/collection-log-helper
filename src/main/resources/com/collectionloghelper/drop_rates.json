@@ -9739,8 +9739,8 @@
   {
     "name": "Aquanite",
     "category": "OTHER",
-    "worldX": 2712,
-    "worldY": 9882,
+    "worldX": 2275,
+    "worldY": 9880,
     "worldPlane": 0,
     "killTimeSeconds": 24,
     "afkLevel": 2,
@@ -9762,23 +9762,23 @@
         "wikiPage": "Aquanite_tendon"
       }
     ],
-    "locationDescription": "Waterfall Dungeon, east of Baxtorian Falls",
+    "locationDescription": "Ynysdail Cavern, beneath Ynysdail (73 Sailing)",
     "travelTip": "Sail to Ynysdail (73 Sailing)",
     "npcId": 15497,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Waterfall Dungeon, east of Baxtorian Falls.",
-        "worldX": 2712,
-        "worldY": 9882,
+        "description": "Travel to Ynysdail Cavern entrance, west of Baxtorian Falls (73 Sailing required).",
+        "worldX": 2218,
+        "worldY": 3477,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
       },
       {
         "description": "Kill Aquanite.",
-        "worldX": 2712,
-        "worldY": 9882,
+        "worldX": 2275,
+        "worldY": 9880,
         "worldPlane": 0,
         "npcId": 15497,
         "interactAction": "Attack",
