@@ -806,7 +806,8 @@
         "worldPlane": 0,
         "npcId": 8061,
         "interactAction": "Poke",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 8061
       }
     ],
     "afkLevel": 1
@@ -914,7 +915,8 @@
         "worldPlane": 0,
         "npcId": 5862,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 5862
       }
     ]
   },
@@ -1074,7 +1076,8 @@
         "worldPlane": 0,
         "npcId": 8621,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 8621
       }
     ]
   },
@@ -1279,7 +1282,8 @@
         "worldPlane": 0,
         "npcId": 963,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 965
       }
     ],
     "ironKillTimeSeconds": 144
@@ -3103,7 +3107,8 @@
         "worldPlane": 0,
         "npcId": 8713,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 8713
       }
     ],
     "afkLevel": 1
@@ -3213,7 +3218,8 @@
         "worldPlane": 0,
         "npcId": 8195,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 8195
       }
     ],
     "ironKillTimeSeconds": 514
@@ -3260,7 +3266,8 @@
         "worldPlane": 0,
         "npcId": 7416,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 7416
       }
     ],
     "ironKillTimeSeconds": 450
@@ -3677,7 +3684,8 @@
         "worldPlane": 0,
         "npcId": 499,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 499
       }
     ]
   },
@@ -26998,7 +27006,10 @@
         "worldX": 1745,
         "worldY": 5323,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 2919,
+        "npcId": 2919,
+        "interactAction": "Attack"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -27078,7 +27089,10 @@
         "worldX": 1568,
         "worldY": 5062,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 8030,
+        "npcId": 8030,
+        "interactAction": "Attack"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -27158,7 +27172,10 @@
         "worldX": 1587,
         "worldY": 5075,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 8031,
+        "npcId": 8031,
+        "interactAction": "Attack"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -27483,7 +27500,10 @@
         "worldX": 1745,
         "worldY": 5323,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 2916,
+        "npcId": 2916,
+        "interactAction": "Attack"
       }
     ],
     "mutuallyExclusiveSources": [
