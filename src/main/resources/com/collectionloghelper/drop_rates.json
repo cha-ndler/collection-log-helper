@@ -2,8 +2,8 @@
   {
     "name": "General Graardor",
     "category": "BOSSES",
-    "worldX": 2882,
-    "worldY": 3400,
+    "worldX": 2918,
+    "worldY": 3745,
     "worldPlane": 0,
     "killTimeSeconds": 62,
     "ironKillTimeSeconds": 116,
@@ -117,8 +117,8 @@
     "guidanceSteps": [
       {
         "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
-        "worldX": 2882,
-        "worldY": 3400,
+        "worldX": 2918,
+        "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 30
@@ -152,8 +152,8 @@
   {
     "name": "Commander Zilyana",
     "category": "BOSSES",
-    "worldX": 2882,
-    "worldY": 3400,
+    "worldX": 2918,
+    "worldY": 3745,
     "worldPlane": 0,
     "killTimeSeconds": 62,
     "ironKillTimeSeconds": 120,
@@ -267,8 +267,8 @@
     "guidanceSteps": [
       {
         "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
-        "worldX": 2882,
-        "worldY": 3400,
+        "worldX": 2918,
+        "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 30
@@ -302,8 +302,8 @@
   {
     "name": "K'ril Tsutsaroth",
     "category": "BOSSES",
-    "worldX": 2882,
-    "worldY": 3400,
+    "worldX": 2918,
+    "worldY": 3745,
     "worldPlane": 0,
     "killTimeSeconds": 55,
     "ironKillTimeSeconds": 129,
@@ -417,8 +417,8 @@
     "guidanceSteps": [
       {
         "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
-        "worldX": 2882,
-        "worldY": 3400,
+        "worldX": 2918,
+        "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 30
@@ -452,8 +452,8 @@
   {
     "name": "Kree'arra",
     "category": "BOSSES",
-    "worldX": 2882,
-    "worldY": 3400,
+    "worldX": 2918,
+    "worldY": 3745,
     "worldPlane": 0,
     "killTimeSeconds": 103,
     "ironKillTimeSeconds": 180,
@@ -567,8 +567,8 @@
     "guidanceSteps": [
       {
         "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
-        "worldX": 2882,
-        "worldY": 3400,
+        "worldX": 2918,
+        "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 30
@@ -1361,7 +1361,8 @@
         "worldX": 2846,
         "worldY": 3940,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill the Phantom Muspah.",
@@ -1490,7 +1491,8 @@
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Duke Sucellus.",
@@ -1621,7 +1623,8 @@
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill The Leviathan.",
@@ -1750,7 +1753,8 @@
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill The Whisperer.",
@@ -1880,7 +1884,8 @@
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Vardorvis.",
@@ -2010,7 +2015,8 @@
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Duke Sucellus (Awakened).",
@@ -2140,7 +2146,8 @@
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill The Leviathan (Awakened).",
@@ -2269,7 +2276,8 @@
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill The Whisperer (Awakened).",
@@ -2399,7 +2407,8 @@
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Vardorvis (Awakened).",
@@ -2511,7 +2520,8 @@
         "requiredItemIds": [
           21730
         ],
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Climb the stairs to the top floor.",
@@ -2876,8 +2886,8 @@
   {
     "name": "Nex",
     "category": "BOSSES",
-    "worldX": 2882,
-    "worldY": 3400,
+    "worldX": 2918,
+    "worldY": 3745,
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "ironKillTimeSeconds": 300,
@@ -2988,8 +2998,8 @@
     "guidanceSteps": [
       {
         "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
-        "worldX": 2882,
-        "worldY": 3400,
+        "worldX": 2918,
+        "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 30
@@ -3146,12 +3156,13 @@
         "worldX": 2987,
         "worldY": 3376,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Giant Mole.",
-        "worldX": 2987,
-        "worldY": 3376,
+        "worldX": 1759,
+        "worldY": 5189,
         "worldPlane": 0,
         "npcId": 5779,
         "interactAction": "Attack",
@@ -3315,7 +3326,8 @@
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Dagannoth Rex.",
@@ -3390,7 +3402,8 @@
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Dagannoth Prime.",
@@ -3465,7 +3478,8 @@
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Dagannoth Supreme.",
@@ -3561,7 +3575,8 @@
         "worldX": 2277,
         "worldY": 3611,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill the Kraken.",
@@ -3771,7 +3786,8 @@
         "worldX": 3039,
         "worldY": 4763,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill the Abyssal Sire.",
@@ -3840,7 +3856,8 @@
         "worldX": 3005,
         "worldY": 3849,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill King Black Dragon.",
@@ -3857,8 +3874,8 @@
   {
     "name": "Chaos Elemental",
     "category": "BOSSES",
-    "worldX": 3281,
-    "worldY": 3910,
+    "worldX": 3261,
+    "worldY": 3927,
     "worldPlane": 0,
     "killTimeSeconds": 30,
     "ironKillTimeSeconds": 75,
@@ -3904,15 +3921,16 @@
     "guidanceSteps": [
       {
         "description": "Travel to Rogues' Castle, deep Wilderness.",
-        "worldX": 3281,
-        "worldY": 3910,
+        "worldX": 3261,
+        "worldY": 3927,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Chaos Elemental.",
-        "worldX": 3281,
-        "worldY": 3910,
+        "worldX": 3261,
+        "worldY": 3927,
         "worldPlane": 0,
         "npcId": 2054,
         "interactAction": "Attack",
@@ -3983,7 +4001,8 @@
         "worldX": 3233,
         "worldY": 3945,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Scorpia.",
@@ -4000,8 +4019,8 @@
   {
     "name": "Chaos Fanatic",
     "category": "BOSSES",
-    "worldX": 2981,
-    "worldY": 3834,
+    "worldX": 2979,
+    "worldY": 3846,
     "worldPlane": 0,
     "killTimeSeconds": 36,
     "ironKillTimeSeconds": 45,
@@ -4041,15 +4060,16 @@
     "guidanceSteps": [
       {
         "description": "Travel to West of Lava Maze, Wilderness.",
-        "worldX": 2981,
-        "worldY": 3834,
+        "worldX": 2979,
+        "worldY": 3846,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Chaos Fanatic.",
-        "worldX": 2981,
-        "worldY": 3834,
+        "worldX": 2979,
+        "worldY": 3846,
         "worldPlane": 0,
         "npcId": 6619,
         "interactAction": "Attack",
@@ -4061,8 +4081,8 @@
   {
     "name": "Venenatis",
     "category": "BOSSES",
-    "worldX": 3344,
-    "worldY": 3734,
+    "worldX": 3319,
+    "worldY": 3798,
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "ironKillTimeSeconds": 72,
@@ -4132,15 +4152,16 @@
     "guidanceSteps": [
       {
         "description": "Travel to Venenatis' Cave in the Wilderness.",
-        "worldX": 3344,
-        "worldY": 3734,
+        "worldX": 3319,
+        "worldY": 3798,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Venenatis.",
-        "worldX": 3344,
-        "worldY": 3734,
+        "worldX": 3319,
+        "worldY": 3798,
         "worldPlane": 0,
         "npcId": 6610,
         "interactAction": "Attack",
@@ -4234,7 +4255,8 @@
         "worldX": 3220,
         "worldY": 3783,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Vet'ion.",
@@ -4251,8 +4273,8 @@
   {
     "name": "Callisto",
     "category": "BOSSES",
-    "worldX": 3292,
-    "worldY": 3834,
+    "worldX": 3291,
+    "worldY": 3849,
     "worldPlane": 0,
     "killTimeSeconds": 69,
     "ironKillTimeSeconds": 90,
@@ -4322,15 +4344,16 @@
     "guidanceSteps": [
       {
         "description": "Travel to Callisto's Den in the Wilderness.",
-        "worldX": 3292,
-        "worldY": 3834,
+        "worldX": 3291,
+        "worldY": 3849,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Callisto.",
-        "worldX": 3292,
-        "worldY": 3834,
+        "worldX": 3291,
+        "worldY": 3849,
         "worldPlane": 0,
         "npcId": 6609,
         "interactAction": "Attack",
@@ -4412,7 +4435,8 @@
         "worldX": 2405,
         "worldY": 3419,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Demonic gorillas.",
@@ -4453,7 +4477,8 @@
         "worldX": 1472,
         "worldY": 3686,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Lizardman shaman.",
@@ -4538,7 +4563,8 @@
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Skotizo.",
@@ -4613,7 +4639,8 @@
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Hespori.",
@@ -6425,7 +6452,8 @@
         "worldPlane": 0,
         "npcId": 9020,
         "interactAction": "Talk-to",
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Complete the Corrupted Gauntlet and collect loot.",
@@ -6513,7 +6541,8 @@
         "worldPlane": 0,
         "npcId": 9020,
         "interactAction": "Talk-to",
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Complete the Gauntlet and collect loot.",
@@ -7054,8 +7083,8 @@
   {
     "name": "Zalcano",
     "category": "BOSSES",
-    "worldX": 3289,
-    "worldY": 6040,
+    "worldX": 3031,
+    "worldY": 6048,
     "worldPlane": 0,
     "killTimeSeconds": 90,
     "ironKillTimeSeconds": 120,
@@ -7108,15 +7137,16 @@
     "guidanceSteps": [
       {
         "description": "Travel to Zalcano's Prison, Prifddinas.",
-        "worldX": 3289,
-        "worldY": 6040,
+        "worldX": 3031,
+        "worldY": 6048,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Zalcano.",
-        "worldX": 3289,
-        "worldY": 6040,
+        "worldX": 3031,
+        "worldY": 6048,
         "worldPlane": 0,
         "npcId": 9049,
         "interactAction": "Mine",
@@ -7300,7 +7330,8 @@
         "worldX": 2975,
         "worldY": 3696,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Crazy archaeologist.",
@@ -7425,7 +7456,8 @@
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Araxxor.",
@@ -7582,7 +7614,8 @@
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Perilous Moons.",
@@ -7806,7 +7839,8 @@
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Buy Young impling jars from the Grand Exchange.",
@@ -7969,7 +8003,8 @@
         "worldX": 3073,
         "worldY": 3654,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Revenant Caves, Wilderness and kill revenants.",
@@ -8017,7 +8052,8 @@
         "worldX": 3418,
         "worldY": 3543,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Crawling Hand.",
@@ -8067,7 +8103,8 @@
         "worldX": 2788,
         "worldY": 10000,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Cave Crawler.",
@@ -8117,7 +8154,8 @@
         "worldX": 2794,
         "worldY": 10018,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Rockslug.",
@@ -8183,7 +8221,8 @@
         "worldX": 2792,
         "worldY": 10035,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Cockatrice.",
@@ -8233,7 +8272,8 @@
         "worldX": 2761,
         "worldY": 10008,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Pyrefiend.",
@@ -8291,7 +8331,8 @@
         "worldX": 2987,
         "worldY": 3110,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Mogre.",
@@ -8341,7 +8382,8 @@
         "worldX": 2744,
         "worldY": 10008,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Basilisk.",
@@ -8394,7 +8436,8 @@
         "worldX": 3149,
         "worldY": 4663,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Terror Dog.",
@@ -8452,7 +8495,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Climb the stairs to the first floor.",
@@ -8512,7 +8556,8 @@
         "worldX": 2707,
         "worldY": 10132,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Brine Rat.",
@@ -8578,7 +8623,8 @@
         "worldX": 1693,
         "worldY": 3232,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Frost Nagua.",
@@ -8628,7 +8674,8 @@
         "worldX": 1440,
         "worldY": 9602,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Sulphur Nagua.",
@@ -8678,7 +8725,8 @@
         "worldX": 1309,
         "worldY": 3104,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Earthen Nagua.",
@@ -8736,7 +8784,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Climb the stairs to the first floor.",
@@ -8805,7 +8854,8 @@
         "worldX": 1456,
         "worldY": 2880,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Gryphon.",
@@ -8855,7 +8905,8 @@
         "worldX": 2704,
         "worldY": 10028,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Jelly.",
@@ -8905,7 +8956,7 @@
     ],
     "locationDescription": "Fremennik Slayer Dungeon",
     "travelTip": "Slayer ring -> Fremennik cave",
-    "npcId": 426,
+    "npcId": 430,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
@@ -8913,17 +8964,18 @@
         "worldX": 2722,
         "worldY": 10002,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Turoth.",
         "worldX": 2722,
         "worldY": 10002,
         "worldPlane": 0,
-        "npcId": 426,
+        "npcId": 430,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 426
+        "completionNpcId": 430
       }
     ]
   },
@@ -8966,7 +9018,8 @@
         "worldX": 2032,
         "worldY": 4636,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Warped Creature.",
@@ -9011,7 +9064,7 @@
     ],
     "locationDescription": "Mos Le'Harmless Cave",
     "travelTip": "Minigame tele -> Trouble Brewing, or Charter ship",
-    "npcId": 3209,
+    "npcId": 1047,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
@@ -9019,17 +9072,18 @@
         "worldX": 3740,
         "worldY": 9373,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Cave Horror.",
         "worldX": 3740,
         "worldY": 9373,
         "worldPlane": 0,
-        "npcId": 3209,
+        "npcId": 1047,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 3209
+        "completionNpcId": 1047
       }
     ]
   },
@@ -9069,7 +9123,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Climb the stairs to the first floor.",
@@ -9136,7 +9191,8 @@
         "worldX": 2456,
         "worldY": 4240,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Basilisk Knight.",
@@ -9211,7 +9267,8 @@
         "worldX": 1311,
         "worldY": 10205,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Wyrm.",
@@ -9265,7 +9322,8 @@
         "worldX": 2150,
         "worldY": 2968,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Lava Strykewyrm.",
@@ -9315,7 +9373,8 @@
         "worldX": 3310,
         "worldY": 2962,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Dust Devil.",
@@ -9384,7 +9443,8 @@
         "worldX": 3602,
         "worldY": 10290,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Fossil Island Wyvern.",
@@ -9458,7 +9518,8 @@
         "worldX": 2701,
         "worldY": 9992,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Kurask.",
@@ -9516,7 +9577,8 @@
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Skeletal Wyvern.",
@@ -9582,7 +9644,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Climb the stairs to the top floor.",
@@ -9658,7 +9721,8 @@
         "worldX": 1301,
         "worldY": 9820,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Custodian Stalker.",
@@ -9708,7 +9772,8 @@
         "worldX": 2712,
         "worldY": 9882,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Aquanite.",
@@ -9758,7 +9823,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Climb the stairs to the top floor.",
@@ -9815,7 +9881,8 @@
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Spiritual Mage.",
@@ -9905,7 +9972,8 @@
         "worldX": 2904,
         "worldY": 5203,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Spiritual Mage (Zarosian).",
@@ -9963,7 +10031,8 @@
         "worldX": 1310,
         "worldY": 10057,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Drake.",
@@ -10029,7 +10098,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Climb the stairs to the top floor.",
@@ -10094,7 +10164,8 @@
         "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Cave Kraken.",
@@ -10147,7 +10218,8 @@
         "worldX": 1920,
         "worldY": 4672,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Dark Beast.",
@@ -10196,7 +10268,8 @@
         "worldX": 3657,
         "worldY": 3407,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Araxyte.",
@@ -10247,7 +10320,8 @@
         "worldX": 2412,
         "worldY": 3061,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Smoke Devil.",
@@ -10323,7 +10397,8 @@
         "worldX": 1310,
         "worldY": 10190,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Hydra.",
@@ -10370,7 +10445,8 @@
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Vyrewatch Sentinel.",
@@ -10453,7 +10529,8 @@
         "worldX": 1309,
         "worldY": 3785,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Mount Karuulm, near Konar and open the Brimstone Chest.",
@@ -10506,7 +10583,8 @@
         "worldX": 3018,
         "worldY": 3955,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Wilderness, Pirates' Hideout and open the Larran's Big Chest.",
@@ -10568,7 +10646,8 @@
         "worldX": 3429,
         "worldY": 3534,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Slayer Tower, Morytania (varies) and kill superior slayer monsters on task.",
@@ -10609,7 +10688,8 @@
         "worldX": 3373,
         "worldY": 3625,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to East of Chaos Temple, level 14 Wilderness and open the Zombie Pirate Locker.",
@@ -10991,17 +11071,17 @@
         "worldX": 3109,
         "worldY": 3168,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Kill Guardians of the Rift.",
+        "description": "Play Guardians of the Rift minigame rounds to earn rewards.",
         "worldX": 3109,
         "worldY": 3168,
         "worldPlane": 0,
         "npcId": 12179,
         "interactAction": "Talk-to",
-        "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12179
+        "completionCondition": "MANUAL"
       }
     ],
     "rewardType": "MIXED",
@@ -11127,7 +11207,8 @@
         "worldX": 2809,
         "worldY": 3194,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Brimhaven Agility Arena, east of Brimhaven and train at Brimhaven Agility Arena.",
@@ -11411,7 +11492,8 @@
         "worldX": 2659,
         "worldY": 2676,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Board a lander to play Pest Control.",
@@ -11559,7 +11641,8 @@
         "worldX": 3363,
         "worldY": 3316,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Mage Training Arena, north-east of Al Kharid and train at Mage Training Arena.",
@@ -11846,7 +11929,8 @@
         "worldX": 2954,
         "worldY": 3369,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Mahogany Homes, contracts available in Falador, Varrock, Hosidius, and Ardougne and train at Mahogany Homes.",
@@ -11958,7 +12042,8 @@
         "worldX": 1389,
         "worldY": 2955,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Mastering Mixology, Aldarin in Varlamore and train at Mastering Mixology.",
@@ -12079,7 +12164,8 @@
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Volcanic Mine, north-east Fossil Island volcano and train at Volcanic Mine.",
@@ -12180,7 +12266,8 @@
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Tithe Farm, Hosidius and train at Tithe Farm.",
@@ -12229,7 +12316,8 @@
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Get a hard delivery order from Gianne jnr. Re-roll until assigned Captain Ninto or Captain Daerkin. Cook and deliver for a chance at Gnome scarf or Gnome goggles.",
@@ -12302,7 +12390,8 @@
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Fishing Trawler, Port Khazard and train at Fishing Trawler.",
@@ -12376,7 +12465,8 @@
         "worldX": 3479,
         "worldY": 3241,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Temple Trekking, between Burgh de Rott and Paterdomus and play Temple Trekking.",
@@ -12450,7 +12540,8 @@
         "worldX": 2907,
         "worldY": 3537,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Rogues' Den beneath the Burthorpe pub and train at Rogues' Den.",
@@ -12596,14 +12687,15 @@
     "locationDescription": "Awarded for completing clue scroll milestones across all tiers",
     "guidanceSteps": [
       {
-        "description": "Travel to Awarded for completing clue scroll milestones across all tiers.",
+        "description": "Travel to the Grand Exchange to manage clue scroll caskets.",
         "worldX": 3213,
         "worldY": 3424,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
-        "description": "Open clue scrolls from your bank or obtained during gameplay.",
+        "description": "Complete clue scrolls of all tiers to earn milestone scroll cases.",
         "worldX": 3213,
         "worldY": 3424,
         "worldPlane": 0,
@@ -12980,7 +13072,8 @@
         "worldX": 2440,
         "worldY": 3089,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Enter a Castle Wars portal to join a team.",
@@ -13045,7 +13138,8 @@
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Talk to Nomad or Soul Wars Portal to join a game.",
@@ -13398,7 +13492,8 @@
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Ferox Enclave, north of Varrock in the Wilderness and play Last Man Standing.",
@@ -13462,7 +13557,8 @@
         "worldX": 1452,
         "worldY": 3128,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Auburn Valley, north-west Varlamore and play Vale Totems.",
@@ -14310,7 +14406,8 @@
         "worldX": 1823,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Sailing trial locations across the seas and play Barracuda Trials.",
@@ -14428,7 +14525,8 @@
         "worldX": 1379,
         "worldY": 3634,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Lake Molch on Molch Island and train at Aerial Fishing.",
@@ -14560,7 +14658,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Port Sarim docks, obtained via various Sailing activities and discover boat paints during Sailing.",
@@ -14683,7 +14782,8 @@
         "worldX": 3191,
         "worldY": 3361,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Champions' Guild south of Varrock and complete champion challenges.",
@@ -14905,7 +15005,8 @@
         "requiredItemIds": [
           2883
         ],
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Chompy Bird Hunting.",
@@ -15185,7 +15286,8 @@
         "worldX": 2725,
         "worldY": 3490,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Seers' Village oak south of bank (W444 meta), NOT Woodcutting Guild and train at Forestry.",
@@ -15306,7 +15408,8 @@
         "worldX": 3774,
         "worldY": 3819,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to House on the Hill, Fossil Island and collect Fossil Island notes.",
@@ -15390,7 +15493,8 @@
         "worldX": 2130,
         "worldY": 5647,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Glough's Experiments.",
@@ -15485,7 +15589,8 @@
         "worldX": 1579,
         "worldY": 3069,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Hunter Guild in Avium Savannah, Varlamore and train Hunter.",
@@ -15625,7 +15730,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Various islands discovered through Sailing and discover lost schematics during Sailing.",
@@ -15725,7 +15831,8 @@
         "worldX": 2764,
         "worldY": 2703,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Ape Atoll Agility Course and earn monkey backpacks.",
@@ -15963,7 +16070,8 @@
         "worldX": 2520,
         "worldY": 3571,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill mithril dragons in the Ancient Cavern for ancient page drops.",
@@ -16103,7 +16211,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Complete ocean encounters during Sailing voyages.",
@@ -16228,7 +16337,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Complete various Sailing activities.",
@@ -16425,7 +16535,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Discover sea treasures during Sailing voyages.",
@@ -16513,7 +16624,8 @@
         "worldX": 1565,
         "worldY": 3420,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Fish at the deep sea fishing shoals for rare colored fish.",
@@ -16551,7 +16663,8 @@
         "worldX": 3288,
         "worldY": 2801,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Loot the grand gold chest on the last floor of Pyramid Plunder.",
@@ -16613,7 +16726,8 @@
         "worldX": 1859,
         "worldY": 5243,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Stronghold of Security monsters for skull sceptre pieces.",
@@ -16669,7 +16783,8 @@
         "worldX": 1664,
         "worldY": 10050,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill monsters in the Catacombs of Kourend for dark totem pieces.",
@@ -16707,7 +16822,8 @@
         "worldX": 3015,
         "worldY": 3739,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill monsters in the Wilderness God Wars Dungeon for ecumenical keys.",
@@ -16785,7 +16901,8 @@
         "worldX": 3272,
         "worldY": 6084,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Open the Elven Crystal Chest in Prifddinas.",
@@ -17133,7 +17250,8 @@
         "worldX": 3222,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Complete miscellaneous activities throughout Gielinor.",
@@ -17396,7 +17514,8 @@
         "worldX": 3222,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Complete random events encountered throughout Gielinor.",
@@ -17512,7 +17631,8 @@
         "worldX": 2957,
         "worldY": 5774,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Travel to Ruins of Camdozaal beneath Ice Mountain and train skills in Camdozaal.",
@@ -17641,7 +17761,8 @@
         "worldX": 1652,
         "worldY": 2931,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Colossal Wyrm Agility Course in Avium Savannah, Varlamore and train at Colossal Wyrm Agility.",
@@ -17748,7 +17869,8 @@
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Rooftop Agility Courses, starting at Varrock and train at Rooftop Agility.",
@@ -17861,7 +17983,8 @@
         "worldX": 2444,
         "worldY": 5175,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill TzHaar.",
@@ -18031,7 +18154,8 @@
         "worldX": 3232,
         "worldY": 3621,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Elder Chaos Druids.",
@@ -18313,7 +18437,8 @@
         "worldX": 1516,
         "worldY": 3617,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Shayzien Combat Ring, Great Kourend and earn Shayzien armour.",
@@ -18402,7 +18527,8 @@
         "worldX": 3726,
         "worldY": 5680,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Travel to Motherlode Mine beneath Falador and train at Motherlode Mine.",
@@ -18453,7 +18579,8 @@
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Crashed shooting stars found throughout Gielinor and mine crashed shooting stars.",
@@ -18515,7 +18642,8 @@
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Creature Creation (Newtroost).",
@@ -18578,7 +18706,8 @@
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Creature Creation (Unicow).",
@@ -18641,7 +18770,8 @@
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Creature Creation (Spidine).",
@@ -18704,7 +18834,8 @@
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Creature Creation (Swordchick).",
@@ -18767,7 +18898,8 @@
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Creature Creation (Jubster).",
@@ -18830,7 +18962,8 @@
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Creature Creation (Frogeel).",
@@ -18910,7 +19043,7 @@
     "locationDescription": "The Darkfrost, Hailstorm Mountains in Varlamore",
     "travelTip": "Quetzal whistle -> Varlamore",
     "mutuallyExclusive": true,
-    "npcId": 13958,
+    "npcId": 14009,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
@@ -18918,17 +19051,18 @@
         "worldX": 1509,
         "worldY": 3290,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill The Hueycoatl.",
         "worldX": 1509,
         "worldY": 3290,
         "worldPlane": 0,
-        "npcId": 13958,
+        "npcId": 14009,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 13958
+        "completionNpcId": 14009
       }
     ]
   },
@@ -19047,7 +19181,8 @@
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Yama.",
@@ -19137,7 +19272,8 @@
         "worldX": 1311,
         "worldY": 9520,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Doom of Mokhaiotl.",
@@ -19229,7 +19365,8 @@
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Royal Titans.",
@@ -19311,7 +19448,8 @@
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Amoxliatl.",
@@ -19384,7 +19522,8 @@
         "worldX": 3263,
         "worldY": 3297,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Brutus.",
@@ -19463,7 +19602,8 @@
         "worldX": 3176,
         "worldY": 2477,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Shellbane Gryphon.",
@@ -19514,7 +19654,8 @@
         "worldX": 3299,
         "worldY": 9867,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Kill Scurrius.",
@@ -19574,7 +19715,8 @@
         "worldPlane": 0,
         "npcId": 2180,
         "interactAction": "Talk-to",
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Complete the Fight Caves and collect your reward.",
@@ -19630,7 +19772,8 @@
         "worldPlane": 0,
         "npcId": 7690,
         "interactAction": "Talk-to",
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Complete the Inferno and collect your reward.",
@@ -19675,7 +19818,8 @@
         "worldX": 3683,
         "worldY": 3706,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Kill Deranged Archaeologist.",
@@ -20755,7 +20899,8 @@
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Buy Gourmet impling jars from the Grand Exchange.",
@@ -21725,7 +21870,8 @@
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Buy Eclectic impling jars from the Grand Exchange.",
@@ -22847,7 +22993,8 @@
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Buy Ninja impling jars from the Grand Exchange.",
@@ -23368,7 +23515,8 @@
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Buy Dragon impling jars from the Grand Exchange.",
@@ -23811,7 +23959,8 @@
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Obtain a master clue by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a rare drop from high-level PvM.",
@@ -24046,7 +24195,8 @@
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Buy Ninja impling jars from the Grand Exchange.",
@@ -24407,7 +24557,8 @@
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Buy Dragon impling jars from the Grand Exchange.",
@@ -24833,7 +24984,8 @@
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Obtain a master clue by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a rare drop from high-level PvM.",
@@ -25267,7 +25419,8 @@
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Buy impling jars from the Grand Exchange for your target clue tier (Young for beginner, Gourmet for easy, Eclectic for medium, Ninja for hard).",
@@ -25317,7 +25470,8 @@
         "worldX": 3164,
         "worldY": 3489,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Complete master clue scrolls until The Mimic spawns (1/15 chance per casket). Enable Mimic encounters via the Strange casket in Watson's house if not already enabled.",
@@ -25353,7 +25507,8 @@
         "worldX": 3080,
         "worldY": 3252,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Draynor Village seed market and steal from seed stalls.",
@@ -25390,7 +25545,8 @@
         "worldX": 3143,
         "worldY": 3771,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to the Wilderness black chinchompa hunting area and catch black chinchompas.",
@@ -25427,7 +25583,8 @@
         "worldX": 2770,
         "worldY": 2700,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to the Ape Atoll teak trees and chop teak logs.",
@@ -25464,7 +25621,8 @@
         "worldX": 2842,
         "worldY": 9381,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Travel to the Shilo Village underground mine and mine gemstone rocks.",
@@ -25509,7 +25667,8 @@
         "worldX": 2604,
         "worldY": 3414,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to the Fishing Guild and harpoon swordfish.",
@@ -25546,7 +25705,8 @@
         "worldX": 2583,
         "worldY": 4838,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Travel to the Fire altar and craft fire runes.",
@@ -25583,7 +25743,8 @@
         "worldX": 1249,
         "worldY": 3719,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to the Farming Guild and check health of fruit trees.",
@@ -25633,7 +25794,8 @@
         "worldX": 2987,
         "worldY": 3033,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Mudskipper Point, dive underwater and kill crabs (level 23) for claw and shell drops.",
@@ -25681,7 +25843,8 @@
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Get a hard delivery order from Gianne jnr. Re-roll until assigned Wingstone, Penwie, Brambickle, or Prof. Manglethorp. Cook and deliver for a chance at Mint cake or Grand seed pod.",
@@ -25727,7 +25890,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sail from Port Sarim and engage stingrays in boat combat.",
@@ -25768,7 +25932,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sail from Port Sarim and engage albatrosses in boat combat.",
@@ -25833,7 +25998,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sail from Port Sarim and engage narwhals in boat combat.",
@@ -25898,7 +26064,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sail from Port Sarim and engage orcas in boat combat.",
@@ -25971,7 +26138,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sail from Port Sarim and engage great white sharks in boat combat.",
@@ -26052,7 +26220,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sail from Port Sarim and engage vampyre krakens in boat combat.",
@@ -26109,7 +26278,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sort through small salvage obtained from Sailing voyages.",
@@ -26166,7 +26336,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sort through fishy salvage obtained from Sailing voyages.",
@@ -26223,7 +26394,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sort through barracuda salvage obtained from Sailing voyages.",
@@ -26272,7 +26444,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sort through large salvage obtained from Sailing voyages.",
@@ -26329,7 +26502,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sort through plundered salvage obtained from Sailing voyages.",
@@ -26394,7 +26568,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sort through martial salvage obtained from Sailing voyages.",
@@ -26443,7 +26618,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sort through fremennik salvage obtained from Sailing voyages.",
@@ -26532,7 +26708,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Sort through opulent salvage obtained from Sailing voyages.",
@@ -26813,7 +26990,8 @@
         "worldX": 1745,
         "worldY": 5323,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Travel to the Ancient Cavern beneath Baxtorian Falls and kill mithril dragons.",
@@ -26825,7 +27003,9 @@
     ],
     "mutuallyExclusiveSources": [
       "Miscellaneous"
-    ]
+    ],
+    "npcId": 2919,
+    "interactAction": "Attack"
   },
   {
     "name": "Adamant Dragon",
@@ -26890,7 +27070,8 @@
         "worldX": 1568,
         "worldY": 5062,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Travel to the Lithkren Vault and kill adamant dragons.",
@@ -26902,13 +27083,15 @@
     ],
     "mutuallyExclusiveSources": [
       "Miscellaneous"
-    ]
+    ],
+    "npcId": 8030,
+    "interactAction": "Attack"
   },
   {
     "name": "Rune Dragon",
     "category": "OTHER",
-    "worldX": 1568,
-    "worldY": 5062,
+    "worldX": 1587,
+    "worldY": 5075,
     "worldPlane": 0,
     "killTimeSeconds": 48,
     "afkLevel": 1,
@@ -26964,22 +27147,25 @@
     "guidanceSteps": [
       {
         "description": "Travel to Lithkren Vault, accessed via Digsite pendant.",
-        "worldX": 1568,
-        "worldY": 5062,
+        "worldX": 1587,
+        "worldY": 5075,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Travel to the Lithkren Vault and kill rune dragons.",
-        "worldX": 1568,
-        "worldY": 5062,
+        "worldX": 1587,
+        "worldY": 5075,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
     ],
     "mutuallyExclusiveSources": [
       "Miscellaneous"
-    ]
+    ],
+    "npcId": 8031,
+    "interactAction": "Attack"
   },
   {
     "name": "Ogress Shaman",
@@ -27023,7 +27209,8 @@
         "worldX": 2459,
         "worldY": 9488,
         "worldPlane": 2,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Travel to the Corsair Cove Dungeon and kill ogress shamans.",
@@ -27100,7 +27287,8 @@
         "worldX": 3566,
         "worldY": 3390,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Zemouregal's Fort and kill armoured zombies.",
@@ -27140,7 +27328,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Cut squid obtained from Sailing to find squid beaks.",
@@ -27185,7 +27374,8 @@
         "worldX": 3279,
         "worldY": 6072,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Travel to Prifddinas and kill elves for enhanced crystal teleport seeds.",
@@ -27228,7 +27418,8 @@
         "requiredItemIds": [
           1704
         ],
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Charge amulets of glory at the Fountain of Rune in the Wilderness.",
@@ -27284,7 +27475,8 @@
         "worldX": 1745,
         "worldY": 5323,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Travel to the Ancient Cavern and kill waterfiends.",
@@ -27296,7 +27488,9 @@
     ],
     "mutuallyExclusiveSources": [
       "Superior Slayer Monster"
-    ]
+    ],
+    "npcId": 2916,
+    "interactAction": "Attack"
   },
   {
     "name": "Port Tasks",
@@ -27332,7 +27526,8 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Complete port tasks at sailing ports to earn rewards.",
@@ -27378,7 +27573,8 @@
         "worldX": 3267,
         "worldY": 6082,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
       },
       {
         "description": "Find and kill the Prifddinas rabbit for the crystal grail.",
@@ -27423,7 +27619,8 @@
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
       },
       {
         "description": "Travel to Darkmeyer and pickpocket vyres for blood shards.",
