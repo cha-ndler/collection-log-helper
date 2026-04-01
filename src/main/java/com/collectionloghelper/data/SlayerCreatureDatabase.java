@@ -46,8 +46,10 @@ public final class SlayerCreatureDatabase
 	private static final Map<String, String> SOURCE_TO_CREATURE;
 
 	/**
-	 * Sources that require an active Slayer task to kill. These are the per-creature
-	 * Slayer sources — boss variants (Abyssal Sire, Kraken, etc.) can be fought off-task.
+	 * Sources where efficiency depends on Slayer task assignment. Includes:
+	 * 1. Monsters/bosses that REQUIRE an active task to access (Kraken, Cerberus, etc.)
+	 * 2. Monsters whose meta involves on-task killing (Dust Devils, Nechryael, etc.)
+	 * Excludes creatures freely farmable off-task (Gargoyles, Cave Horrors, etc.).
 	 */
 	private static final Set<String> TASK_ONLY_SOURCES;
 
@@ -116,50 +118,33 @@ public final class SlayerCreatureDatabase
 		}
 		SOURCE_TO_CREATURE = Collections.unmodifiableMap(reverseMap);
 
-		// Per-creature Slayer sources where efficiency depends on task assignment.
-		// Boss variants (Sire, Kraken, Cerberus, etc.) are NOT task-only.
+		// Sources where efficiency depends on task assignment, split into two groups:
 		Set<String> taskOnly = new HashSet<>();
-		taskOnly.add("Crawling Hand");
-		taskOnly.add("Cave Crawler");
-		taskOnly.add("Rockslug");
-		taskOnly.add("Cockatrice");
-		taskOnly.add("Pyrefiend");
-		taskOnly.add("Mogre");
-		taskOnly.add("Basilisk");
-		taskOnly.add("Basilisk Knight");
-		taskOnly.add("Terror Dog");
-		taskOnly.add("Infernal Mage");
-		taskOnly.add("Brine Rat");
-		taskOnly.add("Jelly");
-		taskOnly.add("Frost Nagua");
-		taskOnly.add("Sulphur Nagua");
-		taskOnly.add("Earthen Nagua");
-		taskOnly.add("Cave Horror");
-		taskOnly.add("Bloodveld");
-		taskOnly.add("Aberrant Spectre");
-		taskOnly.add("Dust Devil");
-		taskOnly.add("Fossil Island Wyvern");
-		taskOnly.add("Kurask");
-		taskOnly.add("Skeletal Wyvern");
-		taskOnly.add("Gargoyle");
-		taskOnly.add("Custodian Stalker");
-		taskOnly.add("Aquanite");
-		taskOnly.add("Nechryael");
-		taskOnly.add("Spiritual Mage");
-		taskOnly.add("Spiritual Mage (Zarosian)");
-		taskOnly.add("Drake");
+
+		// Group 1: Require an active Slayer task to access/kill (game mechanic).
+		taskOnly.add("Cave Kraken");       // 87 Slayer + cave kraken task
+		taskOnly.add("Smoke Devil");       // 93 Slayer + smoke devil task
+		taskOnly.add("Kraken");            // Boss: 87 Slayer + cave kraken task
+		taskOnly.add("Thermonuclear smoke devil"); // Boss: 93 Slayer + smoke devil task
+		taskOnly.add("Cerberus");          // Boss: 91 Slayer + hellhound task
+		taskOnly.add("Grotesque Guardians"); // Boss: 75 Slayer + gargoyle task
+		taskOnly.add("Alchemical Hydra");  // Boss: 95 Slayer + hydra task
+		taskOnly.add("Abyssal Sire");      // Boss: 85 Slayer + abyssal demon task
+		taskOnly.add("Lava Strykewyrm");   // 77 Slayer + wyrm task (Wilderness)
+		taskOnly.add("Basilisk Knight");   // 60 Slayer + basilisk task (Jormungand's Prison)
+		taskOnly.add("Shellbane Gryphon"); // Boss: gryphon task
+
+		// Group 2: Don't strictly require a task but meta is on-task only
+		// (Log Hunters marks these "(on task)" — kph assumes task assignment).
 		taskOnly.add("Abyssal Demon");
-		taskOnly.add("Cave Kraken");
-		taskOnly.add("Dark Beast");
+		taskOnly.add("Aquanite");
 		taskOnly.add("Araxyte");
-		taskOnly.add("Smoke Devil");
-		taskOnly.add("Hydra");
-		taskOnly.add("Lava Strykewyrm");
-		taskOnly.add("Wyrm");
-		taskOnly.add("Turoth");
-		taskOnly.add("Warped Creature");
-		taskOnly.add("Vyrewatch Sentinel");
+		taskOnly.add("Drake");
+		taskOnly.add("Dust Devil");
 		taskOnly.add("Gryphon");
+		taskOnly.add("Nechryael");
+		taskOnly.add("Wyrm");
+
 		TASK_ONLY_SOURCES = Collections.unmodifiableSet(taskOnly);
 	}
 
@@ -214,9 +199,9 @@ public final class SlayerCreatureDatabase
 	}
 
 	/**
-	 * Returns true if the source requires an active Slayer task to access.
-	 * Boss variants (Abyssal Sire, Kraken, etc.) return false since they
-	 * can be fought off-task.
+	 * Returns true if the source's efficiency depends on Slayer task assignment.
+	 * Includes bosses that require a task (Cerberus, Kraken, Hydra, etc.)
+	 * and creatures whose meta involves on-task killing (Dust Devils, etc.).
 	 */
 	public static boolean isTaskOnlySource(String sourceName)
 	{
