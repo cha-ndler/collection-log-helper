@@ -5621,7 +5621,7 @@
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your completed Theatre of Blood count is:"
+        "completionChatPattern": "Your completed Theatre of Blood: Hard Mode count is:"
       }
     ]
   },
