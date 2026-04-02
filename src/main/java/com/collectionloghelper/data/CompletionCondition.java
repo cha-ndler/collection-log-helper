@@ -56,6 +56,9 @@ public enum CompletionCondition
 	/** Step completes when a specific chat message pattern is received. */
 	CHAT_MESSAGE_RECEIVED,
 
+	/** Step completes when a specific varbit reaches a threshold value. */
+	VARBIT_AT_LEAST,
+
 	/** Step must be manually advanced by the player via the panel. */
 	MANUAL
 }

@@ -97,6 +97,12 @@ public class GuidanceStep
 	/** Regex pattern for CHAT_MESSAGE_RECEIVED completion check. */
 	String completionChatPattern;
 
+	/** Varbit ID for VARBIT_AT_LEAST completion check. */
+	int completionVarbitId;
+
+	/** Minimum varbit value for VARBIT_AT_LEAST completion check. */
+	int completionVarbitValue;
+
 	/** When true, overlays show "Use X on Y" style prompts instead of simple action labels. */
 	boolean useItemOnObject;
 
@@ -233,6 +239,8 @@ public class GuidanceStep
 			this.highlightItemIds,
 			this.groundItemIds,
 			this.completionChatPattern,
+			this.completionVarbitId,
+			this.completionVarbitValue,
 			this.useItemOnObject,
 			this.objectMaxDistance,
 			this.objectFilterTiles,
