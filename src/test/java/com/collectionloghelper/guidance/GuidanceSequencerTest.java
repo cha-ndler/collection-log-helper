@@ -94,6 +94,7 @@ public class GuidanceSequencerTest
 			null, null,     // travelTip, requiredItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,    // completionItemId, completionItemCount, completionDistance, completionNpcId
+			null,           // completionNpcIds
 			null,           // worldMessage
 			0, null, null,  // objectId, objectIds, objectInteractAction
 			null, null,     // highlightItemIds, groundItemIds
@@ -118,6 +119,7 @@ public class GuidanceSequencerTest
 			null, null,
 			condition,
 			completionItemId, 0, 0, 0,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -142,6 +144,7 @@ public class GuidanceSequencerTest
 			null, null,
 			CompletionCondition.INVENTORY_HAS_ITEM,
 			itemId, count, 0, 0,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -166,6 +169,7 @@ public class GuidanceSequencerTest
 			null, null,
 			CompletionCondition.ARRIVE_AT_TILE,
 			0, 0, distance, 0,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -190,6 +194,7 @@ public class GuidanceSequencerTest
 			null, null,
 			CompletionCondition.NPC_TALKED_TO,
 			0, 0, 0, npcId,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -214,6 +219,7 @@ public class GuidanceSequencerTest
 			null, null,
 			CompletionCondition.ACTOR_DEATH,
 			0, 0, 0, npcId,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -238,6 +244,7 @@ public class GuidanceSequencerTest
 			null, null,
 			CompletionCondition.CHAT_MESSAGE_RECEIVED,
 			0, 0, 0, 0,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -263,6 +270,7 @@ public class GuidanceSequencerTest
 			null, null,
 			condition,
 			0, 0, 0, completionNpcId,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -287,6 +295,7 @@ public class GuidanceSequencerTest
 			null, null,
 			CompletionCondition.PLAYER_ON_PLANE,
 			0, 0, 0, 0,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -311,6 +320,7 @@ public class GuidanceSequencerTest
 			null, null,
 			CompletionCondition.VARBIT_AT_LEAST,
 			0, 0, 0, 0,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -335,6 +345,7 @@ public class GuidanceSequencerTest
 			null, requiredItemIds,
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -687,6 +698,62 @@ public class GuidanceSequencerTest
 
 		// Varbit above threshold — should also advance
 		sequencer.onVarbitChanged(3975, 45);
+		assertEquals(1, sequencer.getCurrentIndex());
+	}
+
+	@Test
+	public void testActorDeathWithMultipleNpcIds()
+	{
+		// Simulates Zulrah: NPC can die as any of 3 forms (2042, 2043, 2044)
+		GuidanceStep multiFormKillStep = new GuidanceStep(
+			"Kill Zulrah",
+			0, 0, 0,
+			2042, null, null,
+			null, null,
+			CompletionCondition.ACTOR_DEATH,
+			0, 0, 0, 0,
+			Arrays.asList(2042, 2043, 2044),  // completionNpcIds
+			null,
+			0, null, null,
+			null, null,
+			null,
+			0, 0,
+			false,
+			0, null, null,
+			0, 0,
+			null,
+			null
+		);
+
+		List<GuidanceStep> steps = Arrays.asList(
+			multiFormKillStep,
+			makeManualStep("Collect loot")
+		);
+
+		startSequence(steps);
+		assertEquals(0, sequencer.getCurrentIndex());
+
+		// Wrong NPC — should not advance
+		sequencer.onNpcDeath(9999);
+		assertEquals(0, sequencer.getCurrentIndex());
+
+		// Kill as blue form (2043) — should advance
+		sequencer.onNpcDeath(2043);
+		assertEquals(1, sequencer.getCurrentIndex());
+	}
+
+	@Test
+	public void testActorDeathWithMultipleNpcIdsFallsBackToSingleId()
+	{
+		// When completionNpcIds is null, falls back to completionNpcId
+		List<GuidanceStep> steps = Arrays.asList(
+			makeActorDeathStep(5862),
+			makeManualStep("Collect loot")
+		);
+
+		startSequence(steps);
+
+		sequencer.onNpcDeath(5862);
 		assertEquals(1, sequencer.getCurrentIndex());
 	}
 
@@ -1099,6 +1166,7 @@ public class GuidanceSequencerTest
 			travelTip, null,
 			CompletionCondition.ARRIVE_AT_TILE,
 			0, 0, 5, 0,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,
@@ -1318,6 +1386,7 @@ public class GuidanceSequencerTest
 			null, null,
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
+			null,  // completionNpcIds
 			null,
 			0, null, null,
 			null, null,

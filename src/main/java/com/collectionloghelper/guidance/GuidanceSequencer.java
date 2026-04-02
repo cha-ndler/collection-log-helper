@@ -410,7 +410,7 @@ public class GuidanceSequencer
 
 		GuidanceStep step = getRawCurrentStep();
 		if (step != null && step.getCompletionCondition() == CompletionCondition.ACTOR_DEATH
-			&& step.getCompletionNpcId() == npcId)
+			&& step.matchesCompletionNpc(npcId))
 		{
 			log.info("Step {} complete (ACTOR_DEATH: {})", currentIndex + 1, npcId);
 			advanceStep();
@@ -662,6 +662,7 @@ public class GuidanceSequencer
 			null,
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
+			null,  // completionNpcIds
 			null,  // worldMessage
 			0, null, null,  // objectId, objectIds, objectInteractAction
 			null,  // highlightItemIds
