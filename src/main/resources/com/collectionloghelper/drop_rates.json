@@ -2751,7 +2751,8 @@
         "worldX": 3808,
         "worldY": 9775,
         "worldPlane": 1,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your Nightmare kill count is:"
       }
     ],
     "ironKillTimeSeconds": 360
@@ -2931,7 +2932,8 @@
         "worldX": 3808,
         "worldY": 9775,
         "worldPlane": 1,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your Phosani's Nightmare kill count is:"
       }
     ]
   },
@@ -4945,7 +4947,8 @@
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your completed Chambers of Xeric count is:"
       }
     ],
     "ironKillTimeSeconds": 1029
@@ -5197,7 +5200,8 @@
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your completed Chambers of Xeric Challenge Mode count is:"
       }
     ]
   },
@@ -5413,7 +5417,8 @@
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your completed Theatre of Blood count is:"
       }
     ],
     "ironKillTimeSeconds": 1440,
@@ -5615,7 +5620,8 @@
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your completed Theatre of Blood count is:"
       }
     ]
   },
@@ -5903,7 +5909,8 @@
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your completed Tombs of Amascut count is:"
       }
     ],
     "ironKillTimeSeconds": 1200
@@ -6192,7 +6199,8 @@
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your completed Tombs of Amascut: Expert Mode count is:"
       }
     ]
   },
@@ -6480,7 +6488,8 @@
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your completed Tombs of Amascut: Expert Mode count is:"
       }
     ],
     "ironKillTimeSeconds": 1680
@@ -6567,7 +6576,8 @@
       },
       {
         "description": "Complete the Corrupted Gauntlet and collect loot.",
-        "completionCondition": "MANUAL",
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your Corrupted Gauntlet completion count is:",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0
@@ -6656,7 +6666,8 @@
       },
       {
         "description": "Complete the Gauntlet and collect loot.",
-        "completionCondition": "MANUAL",
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your Gauntlet completion count is:",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0
@@ -7117,7 +7128,8 @@
         "worldX": 3135,
         "worldY": 2840,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your Tempoross subdued count is:"
       }
     ],
     "ironKillTimeSeconds": 600,
@@ -7242,7 +7254,8 @@
         "worldX": 1621,
         "worldY": 3997,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your Wintertodt subdued count is:"
       }
     ],
     "rollsPerKill": 8,
@@ -7448,7 +7461,8 @@
         "worldPlane": 0,
         "npcId": 12610,
         "interactAction": "Attack",
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your Fortis Colosseum completion count is:"
       }
     ],
     "rewardType": "MIXED",
