@@ -37,6 +37,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.runelite.api.Client;
 import net.runelite.api.Perspective;
+import net.runelite.api.Player;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
@@ -165,7 +166,12 @@ public class GuidanceMinimapOverlay extends Overlay
 		final int yy = (sin * x - y * cos) >> 16;
 
 		// Get player's minimap location as the center
-		Point playerMinimap = client.getLocalPlayer().getMinimapLocation();
+		Player localPlayer = client.getLocalPlayer();
+		if (localPlayer == null)
+		{
+			return null;
+		}
+		Point playerMinimap = localPlayer.getMinimapLocation();
 		if (playerMinimap == null)
 		{
 			return null;

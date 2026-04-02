@@ -73,8 +73,11 @@ public class GuidanceStep
 	/** Tile distance threshold for ARRIVE_AT_TILE completion (default 5). */
 	int completionDistance;
 
-	/** NPC ID for NPC_TALKED_TO completion check. */
+	/** NPC ID for NPC_TALKED_TO or ACTOR_DEATH completion check. */
 	int completionNpcId;
+
+	/** Additional NPC IDs for ACTOR_DEATH completion (multi-form bosses like Zulrah). */
+	List<Integer> completionNpcIds;
 
 	/** Chat message to display when this step activates (null = no message). */
 	String worldMessage;
@@ -96,6 +99,12 @@ public class GuidanceStep
 
 	/** Regex pattern for CHAT_MESSAGE_RECEIVED completion check. */
 	String completionChatPattern;
+
+	/** Varbit ID for VARBIT_AT_LEAST completion check. */
+	int completionVarbitId;
+
+	/** Minimum varbit value for VARBIT_AT_LEAST completion check. */
+	int completionVarbitValue;
 
 	/** When true, overlays show "Use X on Y" style prompts instead of simple action labels. */
 	boolean useItemOnObject;
@@ -142,6 +151,30 @@ public class GuidanceStep
 	public int getCompletionItemCount()
 	{
 		return completionItemCount > 0 ? completionItemCount : 1;
+	}
+
+	/**
+	 * Returns true if the given NPC ID matches this step's completion NPC.
+	 * Checks both the single completionNpcId and the completionNpcIds list,
+	 * supporting multi-form bosses (e.g., Zulrah's 3 combat forms).
+	 */
+	public boolean matchesCompletionNpc(int npcId)
+	{
+		if (completionNpcId == npcId)
+		{
+			return true;
+		}
+		if (completionNpcIds != null)
+		{
+			for (int id : completionNpcIds)
+			{
+				if (id == npcId)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -226,6 +259,7 @@ public class GuidanceStep
 			this.completionItemCount,
 			alt.getCompletionDistance() != null ? alt.getCompletionDistance() : this.completionDistance,
 			alt.getCompletionNpcId() != null ? alt.getCompletionNpcId() : this.completionNpcId,
+			this.completionNpcIds,
 			this.worldMessage,
 			alt.getObjectId() != null ? alt.getObjectId() : this.objectId,
 			this.objectIds,
@@ -233,6 +267,8 @@ public class GuidanceStep
 			this.highlightItemIds,
 			this.groundItemIds,
 			this.completionChatPattern,
+			this.completionVarbitId,
+			this.completionVarbitValue,
 			this.useItemOnObject,
 			this.objectMaxDistance,
 			this.objectFilterTiles,

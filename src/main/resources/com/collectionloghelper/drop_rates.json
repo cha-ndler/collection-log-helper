@@ -135,7 +135,9 @@
         "worldX": 2862,
         "worldY": 5357,
         "worldPlane": 2,
-        "completionCondition": "MANUAL"
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 3975,
+        "completionVarbitValue": 40
       },
       {
         "description": "Enter the Bandos boss room and kill General Graardor",
@@ -285,7 +287,9 @@
         "worldX": 2907,
         "worldY": 5265,
         "worldPlane": 2,
-        "completionCondition": "MANUAL"
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 3972,
+        "completionVarbitValue": 40
       },
       {
         "description": "Enter the Saradomin boss room and kill Commander Zilyana",
@@ -435,7 +439,9 @@
         "worldX": 2914,
         "worldY": 5350,
         "worldPlane": 2,
-        "completionCondition": "MANUAL"
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 3976,
+        "completionVarbitValue": 40
       },
       {
         "description": "Enter the Zamorak boss room and kill K'ril Tsutsaroth",
@@ -585,7 +591,9 @@
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,
-        "completionCondition": "MANUAL"
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 3973,
+        "completionVarbitValue": 40
       },
       {
         "description": "Use a mithril grapple to enter the Armadyl boss room and kill Kree'arra",
@@ -705,20 +713,33 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use fairy ring BJS to reach the dock, then board the sacrificial boat to Zul-Andra",
-        "worldX": 2268,
-        "worldY": 3069,
+        "description": "Travel to Zul-Andra using a Zul-andra teleport scroll or fairy ring BJS",
+        "worldX": 2215,
+        "worldY": 3057,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Zul-andra teleport scroll (fastest), or fairy ring BJS + run east"
       },
       {
-        "description": "Board the sacrificial boat at Zul-Andra to fight Zulrah. Learn the rotation patterns for efficient kills",
+        "description": "Board the Sacrificial boat to enter Zulrah's shrine",
+        "worldX": 2215,
+        "worldY": 3057,
+        "worldPlane": 0,
+        "objectId": 46241,
+        "objectInteractAction": "Board",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill Zulrah. Learn the rotation patterns for efficient kills",
         "worldX": 2268,
         "worldY": 3069,
         "worldPlane": 0,
         "npcId": 2042,
-        "completionCondition": "MANUAL"
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 2042,
+        "completionNpcIds": [2042, 2043, 2044]
       }
     ]
   },
@@ -792,22 +813,34 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use the Lunar Isle teleport or Rellekka house portal, then take the boat to Ungael from Rellekka docks",
-        "worldX": 2640,
-        "worldY": 3693,
+        "description": "Travel to Rellekka docks",
+        "worldX": 2641,
+        "worldY": 3697,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 15,
+        "travelTip": "Lunar Isle teleport + talk to banker, Rellekka house portal, or Fremennik sea boots"
       },
       {
-        "description": "Poke Vorkath to wake him, then kill him. Watch for acid pools, zombified spawn, and the fireball special",
+        "description": "Talk to Torfinn on the docks to sail to Ungael",
+        "worldX": 2641,
+        "worldY": 3697,
+        "worldPlane": 0,
+        "npcId": 10405,
+        "interactAction": "Travel",
+        "completionCondition": "NPC_TALKED_TO",
+        "completionNpcId": 10405
+      },
+      {
+        "description": "Poke Vorkath to wake him, then kill him",
         "worldX": 2273,
         "worldY": 4049,
         "worldPlane": 0,
         "npcId": 8061,
         "interactAction": "Poke",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8061
+        "completionNpcId": 8061,
+        "completionNpcIds": [8058, 8059, 8060, 8061]
       }
     ],
     "afkLevel": 1
@@ -894,18 +927,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Teleport to your house in Taverley or use a Key master teleport, then enter the Taverley Dungeon",
-        "worldX": 2883,
-        "worldY": 3397,
-        "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
-      },
-      {
-        "description": "Navigate to the hellhound area deep in the dungeon, then enter the Cerberus lair through the portal. Requires Slayer task",
-        "worldX": 1240,
+        "description": "Use a Key master teleport or teleport to your house in Taverley",
+        "worldX": 1310,
         "worldY": 1251,
         "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 30,
+        "travelTip": "Key master teleport (fastest), or POH Taverley portal + navigate dungeon"
+      },
+      {
+        "description": "Turn an Iron Winch to open a gate and enter the boss arena. Requires a hellhound Slayer task",
+        "worldX": 1291,
+        "worldY": 1254,
+        "worldPlane": 0,
+        "objectId": 23104,
+        "objectInteractAction": "Turn",
         "completionCondition": "MANUAL"
       },
       {
@@ -1164,14 +1200,14 @@
       },
       {
         "description": "Enter the cave to reach the underground lair",
-        "worldX": 2991,
+        "worldX": 2981,
         "worldY": 4382,
         "worldPlane": 2,
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
         "description": "Run past the dark energy core room to the boss chamber",
-        "worldX": 2991,
+        "worldX": 2981,
         "worldY": 4382,
         "worldPlane": 2,
         "completionCondition": "ARRIVE_AT_TILE",
@@ -1179,7 +1215,7 @@
       },
       {
         "description": "Kill the Corporeal Beast. Spec with Dragon Warhammer/BGS to reduce its Defence, then use a zamorakian spear or equivalent",
-        "worldX": 2991,
+        "worldX": 2981,
         "worldY": 4382,
         "worldPlane": 2,
         "npcId": 319,
@@ -1261,24 +1297,36 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use fairy ring BIQ to reach the Kalphite Lair entrance in the Kharidian Desert",
-        "worldX": 3226,
+        "description": "Travel to the Kalphite Lair entrance in the Kharidian Desert",
+        "worldX": 3227,
         "worldY": 3108,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15,
+        "travelTip": "Fairy ring BIQ, or desert amulet to Kalphite Cave (with Hard Desert Diary)"
       },
       {
-        "description": "Climb down the tunnel entrance and navigate to the Kalphite Queen chamber. Use a rope on the first and second holes if needed",
-        "worldX": 3226,
+        "description": "Climb down the first tunnel entrance (use a rope if first time)",
+        "worldX": 3227,
         "worldY": 3108,
         "worldPlane": 0,
+        "objectId": 3828,
+        "objectInteractAction": "Climb-down",
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Kalphite Queen. She has two forms \u00e2\u20ac\u201d use melee/range for first form, then ranged/magic for second",
-        "worldX": 3226,
-        "worldY": 3108,
+        "description": "Navigate to the second tunnel and climb down to the Kalphite Queen chamber",
+        "worldX": 3509,
+        "worldY": 9497,
+        "worldPlane": 0,
+        "objectId": 40421,
+        "objectInteractAction": "Climb-down",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill the Kalphite Queen (two forms: melee for first, ranged/magic for second)",
+        "worldX": 3471,
+        "worldY": 9506,
         "worldPlane": 0,
         "npcId": 963,
         "interactAction": "Attack",
@@ -3017,6 +3065,15 @@
         "completionDistance": 30
       },
       {
+        "description": "Get 40 Zaros killcount by killing Ancient Warriors, Mages, and Rangers in the Ancient Prison",
+        "worldX": 2905,
+        "worldY": 5190,
+        "worldPlane": 0,
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 13080,
+        "completionVarbitValue": 40
+      },
+      {
         "description": "Kill Nex in the Ancient Prison",
         "worldX": 2905,
         "worldY": 5190,
@@ -3157,15 +3214,27 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Falador Park.",
-        "worldX": 2987,
-        "worldY": 3376,
+        "description": "Travel to Falador Park",
+        "worldX": 2989,
+        "worldY": 3378,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15,
+        "travelTip": "Falador teleport, or ring of wealth to Falador"
       },
       {
-        "description": "Kill Giant Mole.",
+        "description": "Dig on a mole hill with a spade to enter the Giant Mole's lair",
+        "worldX": 2989,
+        "worldY": 3378,
+        "worldPlane": 0,
+        "objectId": 12202,
+        "objectInteractAction": "Look-inside",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "worldMessage": "Bring a spade and a light source"
+      },
+      {
+        "description": "Kill the Giant Mole",
         "worldX": 1759,
         "worldY": 5189,
         "worldPlane": 0,
@@ -3578,17 +3647,27 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Kraken Cove.",
-        "worldX": 2277,
+        "description": "Travel to Kraken Cove",
+        "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15,
+        "travelTip": "Fairy ring AKQ, or Slayer ring to Stronghold Slayer Cave"
       },
       {
-        "description": "Kill the Kraken.",
-        "worldX": 2277,
+        "description": "Enter the crevice to access the Kraken's cave",
+        "worldX": 2278,
         "worldY": 3611,
+        "worldPlane": 0,
+        "objectId": 537,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill the Kraken",
+        "worldX": 2272,
+        "worldY": 10016,
         "worldPlane": 0,
         "npcId": 494,
         "interactAction": "Attack",
@@ -3663,22 +3742,25 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Teleport to Castle Wars and run south to the Smoke Devil Dungeon entrance. Requires a Smoke devil Slayer task",
-        "worldX": 2379,
-        "worldY": 9452,
+        "description": "Travel to the Smoke Devil Dungeon south of Castle Wars",
+        "worldX": 2412,
+        "worldY": 3061,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15,
+        "travelTip": "Fairy ring BKP, or ring of dueling to Castle Wars + run south-west"
       },
       {
-        "description": "Enter the dungeon and navigate to the Thermonuclear smoke devil area at the back",
-        "worldX": 2379,
-        "worldY": 9452,
+        "description": "Enter the Smoky cave. Requires a Smoke devil Slayer task",
+        "worldX": 2412,
+        "worldY": 3061,
         "worldPlane": 0,
+        "objectId": 30176,
+        "objectInteractAction": "Enter",
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Thermonuclear smoke devil. Use Protect from Magic and bring an antidote for poison",
+        "description": "Navigate to the boss area in the north-west and kill the Thermonuclear smoke devil",
         "worldX": 2379,
         "worldY": 9452,
         "worldPlane": 0,
@@ -3790,15 +3872,25 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Abyssal Nexus.",
-        "worldX": 3039,
+        "description": "Use fairy ring DIP to reach the Abyssal Nexus. Requires an Abyssal demon Slayer task",
+        "worldX": 3037,
         "worldY": 4763,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Fairy ring DIP"
       },
       {
-        "description": "Kill the Abyssal Sire.",
+        "description": "Enter one of the Sire chambers through an Eye",
+        "worldX": 3039,
+        "worldY": 4763,
+        "worldPlane": 0,
+        "npcId": 6479,
+        "interactAction": "Peek",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill the Abyssal Sire",
         "worldX": 3039,
         "worldY": 4763,
         "worldPlane": 0,
@@ -3860,17 +3952,27 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to King Black Dragon Lair, Wilderness.",
-        "worldX": 3005,
-        "worldY": 3849,
+        "description": "Travel to the Lava Maze in the Wilderness",
+        "worldX": 3028,
+        "worldY": 3842,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Burning amulet to Lava Maze (level 41 Wilderness)"
       },
       {
-        "description": "Kill King Black Dragon.",
-        "worldX": 3005,
-        "worldY": 3849,
+        "description": "Climb down the ladder west of the Lava Maze and pull the lever to teleport to the KBD Lair",
+        "worldX": 3067,
+        "worldY": 10253,
+        "worldPlane": 0,
+        "objectId": 1816,
+        "objectInteractAction": "Pull",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill the King Black Dragon",
+        "worldX": 2269,
+        "worldY": 4705,
         "worldPlane": 0,
         "npcId": 239,
         "interactAction": "Attack",
@@ -6572,6 +6674,8 @@
     "killTimeSeconds": 180,
     "ironKillTimeSeconds": 240,
     "afkLevel": 1,
+    "npcId": 1673,
+    "interactAction": "Attack",
     "requirements": {
       "quests": [
         "PRIEST_IN_PERIL"
@@ -6789,35 +6893,91 @@
         "worldY": 3298,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Barrows teleport (Arceuus 83 Magic), Barrows teleport tablet, or Fairy ring BKR"
       },
       {
-        "description": "Dig on each brother's mound with a spade. Kill each brother when they appear in the crypt",
+        "description": "Dig on Dharok's mound (north-east) and kill Dharok the Wretched",
+        "worldX": 3575,
+        "worldY": 3298,
+        "worldPlane": 0,
+        "npcId": 1673,
+        "interactAction": "Attack",
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 458,
+        "completionVarbitValue": 1
+      },
+      {
+        "description": "Dig on Ahrim's mound (centre) and kill Ahrim the Blighted",
+        "worldX": 3566,
+        "worldY": 3289,
+        "worldPlane": 0,
+        "npcId": 1672,
+        "interactAction": "Attack",
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 457,
+        "completionVarbitValue": 1
+      },
+      {
+        "description": "Dig on Verac's mound (north-west) and kill Verac the Defiled",
+        "worldX": 3557,
+        "worldY": 3298,
+        "worldPlane": 0,
+        "npcId": 1677,
+        "interactAction": "Attack",
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 462,
+        "completionVarbitValue": 1
+      },
+      {
+        "description": "Dig on Torag's mound (south-west) and kill Torag the Corrupted",
+        "worldX": 3553,
+        "worldY": 3283,
+        "worldPlane": 0,
+        "npcId": 1676,
+        "interactAction": "Attack",
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 461,
+        "completionVarbitValue": 1
+      },
+      {
+        "description": "Dig on Karil's mound (south) and kill Karil the Tainted",
+        "worldX": 3566,
+        "worldY": 3275,
+        "worldPlane": 0,
+        "npcId": 1675,
+        "interactAction": "Attack",
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 460,
+        "completionVarbitValue": 1
+      },
+      {
+        "description": "Dig on Guthan's mound (south-east) and kill Guthan the Infested",
+        "worldX": 3577,
+        "worldY": 3283,
+        "worldPlane": 0,
+        "npcId": 1674,
+        "interactAction": "Attack",
+        "completionCondition": "VARBIT_AT_LEAST",
+        "completionVarbitId": 459,
+        "completionVarbitValue": 1
+      },
+      {
+        "description": "Find the brother whose crypt has a tunnel entrance and climb down into the tunnels",
         "worldX": 3565,
         "worldY": 3298,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Find the brother whose crypt has a tunnel entrance (the empty one). Dig on their mound and climb down",
-        "worldX": 3565,
-        "worldY": 3298,
-        "worldPlane": 0,
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Navigate the tunnel maze to the centre chest room. Kill any remaining brothers that appear",
+        "description": "Navigate the tunnel maze to the centre room and search the chest for loot",
         "worldX": 3551,
         "worldY": 9694,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Open the chest in the centre room to receive your Barrows loot. Teleport out and repeat",
-        "worldX": 3551,
-        "worldY": 9694,
-        "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "objectId": 20723,
+        "objectInteractAction": "Open",
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your reward:"
       }
     ]
   },
