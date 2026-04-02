@@ -18114,7 +18114,9 @@
         "worldY": 3543,
         "worldPlane": 2,
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 2137
+        "completionNpcId": 2137,
+        "npcId": 2137,
+        "interactAction": "Attack"
       }
     ]
   },
