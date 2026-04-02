@@ -535,6 +535,9 @@ public class CollectionLogHelperPlugin extends Plugin
 				event.getVarbitId(), event.getValue());
 		}
 
+		// Forward varbit change to guidance sequencer for VARBIT_AT_LEAST completion
+		guidanceSequencer.onVarbitChanged(event.getVarbitId(), event.getValue());
+
 		// Refresh Slayer task state and rebuild if the task changed
 		boolean wasActive = slayerTaskState.isTaskActive();
 		String oldCreature = slayerTaskState.getCreatureName();

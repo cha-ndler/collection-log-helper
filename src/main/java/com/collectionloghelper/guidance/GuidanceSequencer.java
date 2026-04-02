@@ -410,7 +410,7 @@ public class GuidanceSequencer
 
 		GuidanceStep step = getRawCurrentStep();
 		if (step != null && step.getCompletionCondition() == CompletionCondition.ACTOR_DEATH
-			&& step.getCompletionNpcId() == npcId)
+			&& step.matchesCompletionNpc(npcId))
 		{
 			log.info("Step {} complete (ACTOR_DEATH: {})", currentIndex + 1, npcId);
 			advanceStep();
@@ -461,6 +461,27 @@ public class GuidanceSequencer
 			&& step.getCompletionNpcId() == npcId)
 		{
 			log.info("Step {} complete (NPC_TALKED_TO: {})", currentIndex + 1, npcId);
+			advanceStep();
+		}
+	}
+
+	/**
+	 * Called when a varbit changes. Checks VARBIT_AT_LEAST condition.
+	 */
+	public void onVarbitChanged(int varbitId, int value)
+	{
+		if (!active)
+		{
+			return;
+		}
+
+		GuidanceStep step = getRawCurrentStep();
+		if (step != null && step.getCompletionCondition() == CompletionCondition.VARBIT_AT_LEAST
+			&& step.getCompletionVarbitId() == varbitId
+			&& value >= step.getCompletionVarbitValue())
+		{
+			log.info("Step {} complete (VARBIT_AT_LEAST: varbit {} = {} >= {})",
+				currentIndex + 1, varbitId, value, step.getCompletionVarbitValue());
 			advanceStep();
 		}
 	}
@@ -624,6 +645,7 @@ public class GuidanceSequencer
 					&& lastKnownPlayerLocation.getPlane() == step.getWorldPlane();
 			case ACTOR_DEATH:
 			case CHAT_MESSAGE_RECEIVED:
+			case VARBIT_AT_LEAST:
 				return false;
 			default:
 				return false;
@@ -640,11 +662,13 @@ public class GuidanceSequencer
 			null,
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
+			null,  // completionNpcIds
 			null,  // worldMessage
 			0, null, null,  // objectId, objectIds, objectInteractAction
 			null,  // highlightItemIds
 			null,  // groundItemIds
 			null,  // completionChatPattern
+			0, 0,  // completionVarbitId, completionVarbitValue
 			false,  // useItemOnObject
 			0,     // objectMaxDistance
 			null,  // objectFilterTiles
