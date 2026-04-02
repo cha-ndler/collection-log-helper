@@ -727,7 +727,7 @@
         "worldY": 3057,
         "worldPlane": 0,
         "objectId": 46241,
-        "objectInteractAction": "Quick-Board",
+        "objectInteractAction": "Board",
         "completionCondition": "MANUAL"
       },
       {
@@ -738,7 +738,8 @@
         "npcId": 2042,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 2042
+        "completionNpcId": 2042,
+        "completionNpcIds": [2042, 2043, 2044]
       }
     ]
   },
@@ -838,7 +839,8 @@
         "npcId": 8061,
         "interactAction": "Poke",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8061
+        "completionNpcId": 8061,
+        "completionNpcIds": [8058, 8059, 8060, 8061]
       }
     ],
     "afkLevel": 1
@@ -3226,7 +3228,7 @@
         "worldY": 3378,
         "worldPlane": 0,
         "objectId": 12202,
-        "objectInteractAction": "Dig",
+        "objectInteractAction": "Look-inside",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
         "worldMessage": "Bring a spade and a light source"
@@ -3883,8 +3885,8 @@
         "worldX": 3039,
         "worldY": 4763,
         "worldPlane": 0,
-        "objectId": 6479,
-        "objectInteractAction": "Peek",
+        "npcId": 6479,
+        "interactAction": "Peek",
         "completionCondition": "MANUAL"
       },
       {
@@ -6973,7 +6975,7 @@
         "worldY": 9694,
         "worldPlane": 0,
         "objectId": 20723,
-        "objectInteractAction": "Search",
+        "objectInteractAction": "Open",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your reward:"
       }
