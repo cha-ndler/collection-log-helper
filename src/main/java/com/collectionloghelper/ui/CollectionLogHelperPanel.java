@@ -184,6 +184,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private boolean rebuildPending = false;
 	private boolean guidanceActive = false;
 	private CollectionLogSource guidedSource = null;
+	private JButton topPickGuideButton = null;
+	private CollectionLogSource topPickSource = null;
 	private boolean inDetailView = false;
 
 	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
@@ -1333,6 +1335,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 		});
 		panel.add(guideButton);
 
+		topPickGuideButton = guideButton;
+		topPickSource = topItem.getSource();
+
 		return panel;
 	}
 
@@ -1369,6 +1374,15 @@ public class CollectionLogHelperPanel extends PluginPanel
 			if (guidanceBannerPanel.getParent() != null)
 			{
 				guidanceBannerPanel.getParent().revalidate();
+			}
+
+			// Sync top pick button with current guidance state
+			if (topPickGuideButton != null && topPickSource != null)
+			{
+				boolean isGuidingTopPick = active && source != null
+					&& source.getName().equals(topPickSource.getName());
+				topPickGuideButton.setText(isGuidingTopPick ? "Stop Guidance" : "Guide Me");
+				topPickGuideButton.setBackground(isGuidingTopPick ? STOP_GUIDANCE_COLOR : GUIDE_ME_COLOR);
 			}
 		});
 	}
