@@ -19790,6 +19790,15 @@
         "completionDistance": 20
       },
       {
+        "description": "Enter the Shellbane Gryphon cave.",
+        "worldX": 3177,
+        "worldY": 2478,
+        "worldPlane": 0,
+        "objectId": 58439,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
+      },
+      {
         "description": "Kill Shellbane Gryphon.",
         "worldX": 3176,
         "worldY": 2477,
