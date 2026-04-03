@@ -28,13 +28,9 @@ import com.collectionloghelper.CollectionLogHelperConfig;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.Shape;
+import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,8 +38,10 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.runelite.api.Client;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.api.DecorativeObject;
 import net.runelite.api.GameObject;
+import net.runelite.api.GroundObject;
 import net.runelite.api.Perspective;
 import net.runelite.api.Point;
 import net.runelite.api.Scene;
@@ -53,25 +51,23 @@ import net.runelite.api.WallObject;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.ui.overlay.Overlay;
+import net.runelite.client.ui.overlay.OverlayUtil;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 
+@Slf4j
 @Singleton
 public class ObjectHighlightOverlay extends Overlay
 {
-	private static final int ARROW_HEIGHT = 14;
-	private static final int ARROW_WIDTH = 12;
-	private static final int ARROW_GAP = 5;
 	private static final int TEXT_HEIGHT_OFFSET = 130;
 	private static final BasicStroke STROKE_1_5 = new BasicStroke(1.5f);
 	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
-	private static final Font BOLD_12 = new Font(Font.DIALOG, Font.BOLD, 12);
 
 	private final Client client;
+	private final ClientThread clientThread;
 	private final CollectionLogHelperConfig config;
-	private final Polygon arrowPolygon = new Polygon();
 
 	@Inject
 	private TooltipManager tooltipManager;
@@ -94,9 +90,10 @@ public class ObjectHighlightOverlay extends Overlay
 	private volatile List<TileObject> matchedObjects = Collections.emptyList();
 
 	@Inject
-	private ObjectHighlightOverlay(Client client, CollectionLogHelperConfig config)
+	private ObjectHighlightOverlay(Client client, ClientThread clientThread, CollectionLogHelperConfig config)
 	{
 		this.client = client;
+		this.clientThread = clientThread;
 		this.config = config;
 		setPosition(OverlayPosition.DYNAMIC);
 		setLayer(OverlayLayer.ABOVE_SCENE);
@@ -105,13 +102,13 @@ public class ObjectHighlightOverlay extends Overlay
 	public void setTargetObjectId(int objectId)
 	{
 		this.targetObjectIds = objectId > 0 ? Set.of(objectId) : Collections.emptySet();
-		rescanScene();
+		clientThread.invokeLater(this::rescanScene);
 	}
 
 	public void setTargetObjectIds(Set<Integer> objectIds)
 	{
 		this.targetObjectIds = objectIds != null ? objectIds : Collections.emptySet();
-		rescanScene();
+		clientThread.invokeLater(this::rescanScene);
 	}
 
 	public void setObjectInteractAction(String action)
@@ -286,8 +283,14 @@ public class ObjectHighlightOverlay extends Overlay
 				{
 					found.add(deco);
 				}
+				GroundObject ground = tile.getGroundObject();
+				if (ground != null && ids.contains(ground.getId()) && passesTileFilter(ground))
+				{
+					found.add(ground);
+				}
 			}
 		}
+		log.debug("rescanScene: looking for {} on plane {}, found {} matches", ids, plane, found.size());
 		matchedObjects = found;
 	}
 
@@ -385,12 +388,6 @@ public class ObjectHighlightOverlay extends Overlay
 			graphics.setStroke(STROKE_1_5);
 			graphics.draw(hull);
 
-			// Draw downward-pointing arrow above the object hull
-			Rectangle bounds = hull.getBounds();
-			int arrowX = (int) bounds.getCenterX();
-			int arrowTipY = (int) bounds.getMinY() - ARROW_GAP;
-			renderDirectionArrow(graphics, arrowX, arrowTipY, overlayColor);
-
 			// Show tooltip when mouse hovers over the object hull (once per frame)
 			if (!tooltipAlreadyShown && builtTooltip != null
 				&& mousePos != null && hull.contains(mousePos.getX(), mousePos.getY()))
@@ -408,46 +405,9 @@ public class ObjectHighlightOverlay extends Overlay
 				client, graphics, localPoint, displayText, TEXT_HEIGHT_OFFSET);
 			if (textPoint != null)
 			{
-				renderOutlinedText(graphics, textPoint, displayText, overlayColor);
+				OverlayUtil.renderTextLocation(graphics, textPoint, displayText, overlayColor);
 			}
 		}
 		return showedTooltip;
-	}
-
-	private void renderDirectionArrow(Graphics2D graphics, int x, int tipY, Color color)
-	{
-		int halfW = ARROW_WIDTH / 2;
-		int topY = tipY - ARROW_HEIGHT;
-
-		arrowPolygon.reset();
-		arrowPolygon.addPoint(x, tipY);
-		arrowPolygon.addPoint(x + halfW, topY);
-		arrowPolygon.addPoint(x - halfW, topY);
-
-		graphics.setColor(Color.BLACK);
-		graphics.setStroke(STROKE_2);
-		graphics.drawPolygon(arrowPolygon);
-
-		graphics.setColor(color);
-		graphics.fillPolygon(arrowPolygon);
-	}
-
-	private void renderOutlinedText(Graphics2D graphics, Point point, String text, Color color)
-	{
-		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		graphics.setFont(BOLD_12);
-		FontMetrics fm = graphics.getFontMetrics();
-		int x = point.getX() - fm.stringWidth(text) / 2;
-		int y = point.getY();
-
-		graphics.setColor(Color.BLACK);
-		graphics.drawString(text, x + 1, y + 1);
-		graphics.drawString(text, x - 1, y - 1);
-		graphics.drawString(text, x + 1, y - 1);
-		graphics.drawString(text, x - 1, y + 1);
-
-		graphics.setColor(color);
-		graphics.drawString(text, x, y);
 	}
 }

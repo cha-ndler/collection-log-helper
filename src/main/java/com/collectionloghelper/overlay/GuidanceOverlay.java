@@ -88,6 +88,7 @@ public class GuidanceOverlay extends OverlayPanel
 	private volatile String interactAction;
 	private volatile boolean showCollectionLogReminder;
 	private volatile boolean showBankReminder;
+	private volatile boolean suppressTileHighlight;
 	private volatile NPC trackedNpc;
 	private final Polygon arrowPolygon = new Polygon();
 	private Color cachedOverlayColor;
@@ -239,8 +240,9 @@ public class GuidanceOverlay extends OverlayPanel
 			}
 		}
 
-		// Tile highlight rendering (skip if NPC is already highlighted nearby)
-		if (!npcHighlighted)
+		// Tile highlight rendering (skip if NPC is already highlighted nearby,
+		// or if an object highlight is handling the visual for this step)
+		if (!npcHighlighted && !suppressTileHighlight)
 		{
 			Polygon poly = Perspective.getCanvasTilePoly(client, localPoint);
 			if (poly == null)
@@ -443,6 +445,11 @@ public class GuidanceOverlay extends OverlayPanel
 		rebuildNpcLabel(action, this.trackedNpc);
 	}
 
+	public void setSuppressTileHighlight(boolean suppress)
+	{
+		this.suppressTileHighlight = suppress;
+	}
+
 	public void setShowCollectionLogReminder(boolean show)
 	{
 		this.showCollectionLogReminder = show;
@@ -468,6 +475,7 @@ public class GuidanceOverlay extends OverlayPanel
 		clueGuidanceText = null;
 		targetNpcId = 0;
 		interactAction = null;
+		suppressTileHighlight = false;
 		trackedNpc = null;
 		cachedTravelLabel = null;
 		cachedNpcLabel = null;

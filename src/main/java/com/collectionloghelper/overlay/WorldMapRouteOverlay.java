@@ -29,7 +29,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -56,12 +55,10 @@ public class WorldMapRouteOverlay extends Overlay
 {
 	private static final float LINE_WIDTH = 2.0f;
 	private static final int LINE_ALPHA = 180;
-	private static final int ARROWHEAD_SIZE = 12;
 	private static final BasicStroke LINE_STROKE = new BasicStroke(LINE_WIDTH);
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
-	private final Polygon arrowPolygon = new Polygon();
 	private final Line2D.Double routeLine = new Line2D.Double();
 
 	private volatile WorldPoint targetPoint;
@@ -116,35 +113,37 @@ public class WorldMapRouteOverlay extends Overlay
 			return null;
 		}
 
-		// Clip to the map widget bounds so the line doesn't draw outside the map
-		Shape previousClip = graphics.getClip();
-		graphics.setClip(mapBounds);
+		// Only draw the route line when both endpoints are within the map bounds.
+		// When the target is off-screen, CollectionLogWorldMapPoint's edge-snap
+		// arrow already indicates direction — drawing a clipped line just creates
+		// visual artifacts near the arrow sprite.
+		boolean playerVisible = mapBounds.contains(playerMapPoint.getX(), playerMapPoint.getY());
+		boolean targetVisible = mapBounds.contains(targetMapPoint.getX(), targetMapPoint.getY());
 
-		Color overlayColor = config.overlayColor();
-		if (!overlayColor.equals(cachedOverlayColor))
+		if (playerVisible && targetVisible)
 		{
-			cachedOverlayColor = overlayColor;
-			cachedLineColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
-				overlayColor.getBlue(), LINE_ALPHA);
+			Shape previousClip = graphics.getClip();
+			graphics.setClip(mapBounds);
+
+			Color overlayColor = config.overlayColor();
+			if (!overlayColor.equals(cachedOverlayColor))
+			{
+				cachedOverlayColor = overlayColor;
+				cachedLineColor = new Color(overlayColor.getRed(), overlayColor.getGreen(),
+					overlayColor.getBlue(), LINE_ALPHA);
+			}
+
+			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			graphics.setColor(cachedLineColor);
+			graphics.setStroke(LINE_STROKE);
+			routeLine.setLine(
+				playerMapPoint.getX(), playerMapPoint.getY(),
+				targetMapPoint.getX(), targetMapPoint.getY()
+			);
+			graphics.draw(routeLine);
+
+			graphics.setClip(previousClip);
 		}
-		Color lineColor = cachedLineColor;
-
-		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-		// Draw the route line
-		graphics.setColor(lineColor);
-		graphics.setStroke(LINE_STROKE);
-		routeLine.setLine(
-			playerMapPoint.getX(), playerMapPoint.getY(),
-			targetMapPoint.getX(), targetMapPoint.getY()
-		);
-		graphics.draw(routeLine);
-
-		// Draw arrowhead at the target end
-		drawArrowhead(graphics, playerMapPoint, targetMapPoint, lineColor);
-
-		// Restore previous clip so other overlays are not affected
-		graphics.setClip(previousClip);
 
 		return null;
 	}
@@ -193,33 +192,6 @@ public class WorldMapRouteOverlay extends Overlay
 		xGraphDiff += (int) worldMapRect.getX();
 
 		return new Point(xGraphDiff, yGraphDiff);
-	}
-
-	/**
-	 * Draws a small filled arrowhead at the target point, pointing in the
-	 * direction from the player to the target.
-	 */
-	private void drawArrowhead(Graphics2D graphics, Point from, Point to, Color color)
-	{
-		double dx = to.getX() - from.getX();
-		double dy = to.getY() - from.getY();
-		double angle = Math.atan2(dy, dx);
-
-		int tipX = to.getX();
-		int tipY = to.getY();
-
-		int x1 = tipX - (int) (ARROWHEAD_SIZE * Math.cos(angle - Math.PI / 6));
-		int y1 = tipY - (int) (ARROWHEAD_SIZE * Math.sin(angle - Math.PI / 6));
-		int x2 = tipX - (int) (ARROWHEAD_SIZE * Math.cos(angle + Math.PI / 6));
-		int y2 = tipY - (int) (ARROWHEAD_SIZE * Math.sin(angle + Math.PI / 6));
-
-		arrowPolygon.reset();
-		arrowPolygon.addPoint(tipX, tipY);
-		arrowPolygon.addPoint(x1, y1);
-		arrowPolygon.addPoint(x2, y2);
-
-		graphics.setColor(color);
-		graphics.fillPolygon(arrowPolygon);
 	}
 
 	public void setTargetPoint(WorldPoint point)
