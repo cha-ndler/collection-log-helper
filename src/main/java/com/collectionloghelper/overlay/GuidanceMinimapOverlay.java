@@ -82,7 +82,13 @@ public class GuidanceMinimapOverlay extends Overlay
 
 		Color overlayColor = config.overlayColor();
 
-		LocalPoint localPoint = LocalPoint.fromWorld(client.getTopLevelWorldView(), targetPoint);
+		net.runelite.api.WorldView wv = client.getTopLevelWorldView();
+		if (wv == null)
+		{
+			return null;
+		}
+
+		LocalPoint localPoint = LocalPoint.fromWorld(wv, targetPoint);
 
 		// If target is visible on the minimap, no arrow needed
 		if (localPoint != null)
