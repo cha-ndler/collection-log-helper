@@ -41,6 +41,7 @@ import javax.inject.Singleton;
 import net.runelite.api.Client;
 import net.runelite.api.NPC;
 import net.runelite.api.Perspective;
+import net.runelite.api.Player;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
@@ -152,12 +153,14 @@ public class GuidanceOverlay extends OverlayPanel
 		}
 
 		// Skip world rendering if player is on a different plane than the target
-		boolean samePlane = client.getLocalPlayer() != null
-			&& client.getLocalPlayer().getWorldLocation().getPlane() == point.getPlane();
+		Player localPlayer = client.getLocalPlayer();
+		boolean samePlane = localPlayer != null
+			&& localPlayer.getWorldLocation().getPlane() == point.getPlane();
 
 		// Tile highlight rendering
-		LocalPoint localPoint = samePlane
-			? LocalPoint.fromWorld(client.getTopLevelWorldView(), point) : null;
+		net.runelite.api.WorldView wv = client.getTopLevelWorldView();
+		LocalPoint localPoint = samePlane && wv != null
+			? LocalPoint.fromWorld(wv, point) : null;
 		if (localPoint == null)
 		{
 			// Target tile is not on screen — show compact direction panel
@@ -197,43 +200,12 @@ public class GuidanceOverlay extends OverlayPanel
 			return null;
 		}
 
-		// NPC highlighting — if we have a target NPC ID, try to find and highlight it
+		// NPC highlighting — use event-driven tracked NPC (set via onNpcSpawned/onNpcDespawned)
 		boolean npcHighlighted = false;
 		if (npcId > 0)
 		{
 			NPC npc = this.trackedNpc;
-			// Use tracked NPC if available and still matches; fall back to full scan
-			if (npc == null || npc.getId() != npcId)
-			{
-				npc = null;
-				net.runelite.api.WorldView wv = client.getTopLevelWorldView();
-				LocalPoint playerLocal = client.getLocalPlayer() != null
-					? client.getLocalPlayer().getLocalLocation() : null;
-				if (wv != null)
-				{
-					for (NPC candidate : wv.npcs())
-					{
-						if (candidate != null && candidate.getId() == npcId)
-						{
-							// Skip NPCs too far from the player to be visible
-							if (playerLocal != null)
-							{
-								LocalPoint candidateLocal = candidate.getLocalLocation();
-								if (candidateLocal != null
-									&& playerLocal.distanceTo(candidateLocal) > MAX_RENDER_DISTANCE)
-								{
-									continue;
-								}
-							}
-							npc = candidate;
-							this.trackedNpc = candidate;
-							rebuildNpcLabel(this.interactAction, candidate);
-							break;
-						}
-					}
-				}
-			}
-			if (npc != null)
+			if (npc != null && npc.getId() == npcId)
 			{
 				renderNpcHighlight(graphics, npc, overlayColor, action, locDesc);
 				npcHighlighted = true;
@@ -361,14 +333,13 @@ public class GuidanceOverlay extends OverlayPanel
 		arrowPolygon.addPoint(x + halfW, topY);
 		arrowPolygon.addPoint(x - halfW, topY);
 
-		// Black outline
+		// Colored fill first, then black outline on top
+		graphics.setColor(color);
+		graphics.fillPolygon(arrowPolygon);
+
 		graphics.setColor(Color.BLACK);
 		graphics.setStroke(STROKE_2);
 		graphics.drawPolygon(arrowPolygon);
-
-		// Colored fill
-		graphics.setColor(color);
-		graphics.fillPolygon(arrowPolygon);
 	}
 
 	/**

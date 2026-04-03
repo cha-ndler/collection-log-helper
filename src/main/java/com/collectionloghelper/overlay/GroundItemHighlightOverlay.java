@@ -200,12 +200,13 @@ public class GroundItemHighlightOverlay extends Overlay
 		arrowPolygon.addPoint(x + halfW, topY);
 		arrowPolygon.addPoint(x - halfW, topY);
 
+		// Colored fill first, then black outline on top
+		graphics.setColor(color);
+		graphics.fillPolygon(arrowPolygon);
+
 		graphics.setColor(Color.BLACK);
 		graphics.setStroke(STROKE_2);
 		graphics.drawPolygon(arrowPolygon);
-
-		graphics.setColor(color);
-		graphics.fillPolygon(arrowPolygon);
 	}
 
 	private void renderOutlinedText(Graphics2D graphics, Point point, String text, Color color)
