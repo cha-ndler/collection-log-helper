@@ -2503,7 +2503,7 @@
       {
         "itemId": 21736,
         "name": "Granite gloves",
-        "dropRate": 0.004,
+        "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_gloves"
@@ -2511,7 +2511,7 @@
       {
         "itemId": 21739,
         "name": "Granite ring",
-        "dropRate": 0.004,
+        "dropRate": 0.002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_ring"
@@ -2519,7 +2519,7 @@
       {
         "itemId": 21742,
         "name": "Granite hammer",
-        "dropRate": 0.002666,
+        "dropRate": 0.001333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_hammer"
@@ -2527,7 +2527,7 @@
       {
         "itemId": 21730,
         "name": "Black tourmaline core",
-        "dropRate": 0.002,
+        "dropRate": 0.001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Black_tourmaline_core"
@@ -2552,7 +2552,7 @@
       {
         "itemId": 4153,
         "name": "Granite maul",
-        "dropRate": 0.00781,
+        "dropRate": 0.004,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Granite_maul"
@@ -4003,7 +4003,7 @@
       {
         "itemId": 7158,
         "name": "Dragon 2h sword",
-        "dropRate": 0.007813,
+        "dropRate": 0.015625,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_2h_sword"
@@ -7279,7 +7279,7 @@
       {
         "itemId": 23908,
         "name": "Zalcano shard",
-        "dropRate": 0.001,
+        "dropRate": 0.001333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Zalcano_shard"
@@ -9020,7 +9020,7 @@
       {
         "itemId": 31243,
         "name": "Horn of plenty (Empty)",
-        "dropRate": 0.001,
+        "dropRate": 0.0004,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Horn_of_plenty"
@@ -9349,7 +9349,7 @@
       {
         "itemId": 24268,
         "name": "Basilisk jaw",
-        "dropRate": 0.001,
+        "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Basilisk_jaw"
@@ -9409,7 +9409,7 @@
       {
         "itemId": 21009,
         "name": "Dragon sword",
-        "dropRate": 0.0005,
+        "dropRate": 0.0001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_sword"
@@ -9417,7 +9417,7 @@
       {
         "itemId": 21028,
         "name": "Dragon harpoon",
-        "dropRate": 0.0005,
+        "dropRate": 0.0001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_harpoon"
@@ -9425,7 +9425,7 @@
       {
         "itemId": 20849,
         "name": "Dragon thrownaxe",
-        "dropRate": 0.0005,
+        "dropRate": 0.0001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_thrownaxe"
@@ -9433,7 +9433,7 @@
       {
         "itemId": 22804,
         "name": "Dragon knife",
-        "dropRate": 0.0005,
+        "dropRate": 0.0001,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_knife"
@@ -9488,7 +9488,7 @@
       {
         "itemId": 31996,
         "name": "Dragon metal sheet",
-        "dropRate": 0.01,
+        "dropRate": 0.0025,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_metal_sheet"
@@ -9684,7 +9684,7 @@
       {
         "itemId": 11902,
         "name": "Leaf-bladed sword",
-        "dropRate": 0.00195,
+        "dropRate": 0.002604,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Leaf-bladed_sword"
@@ -9938,7 +9938,7 @@
       {
         "itemId": 32876,
         "name": "Aquanite tendon",
-        "dropRate": 0.001333,
+        "dropRate": 0.000286,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Aquanite_tendon"
@@ -10138,7 +10138,7 @@
       {
         "itemId": 11840,
         "name": "Dragon boots",
-        "dropRate": 0.015625,
+        "dropRate": 0.007813,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_boots"
@@ -10189,7 +10189,7 @@
       {
         "itemId": 22957,
         "name": "Drake's claw",
-        "dropRate": 0.001953,
+        "dropRate": 0.000391,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Drake%27s_claw"
@@ -10197,7 +10197,7 @@
       {
         "itemId": 22960,
         "name": "Drake's tooth",
-        "dropRate": 0.001953,
+        "dropRate": 0.000391,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Drake%27s_tooth"
@@ -10434,7 +10434,7 @@
       {
         "itemId": 29806,
         "name": "Aranea boots",
-        "dropRate": 0.00125,
+        "dropRate": 0.0005,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Aranea_boots"
@@ -10537,7 +10537,7 @@
       {
         "itemId": 22971,
         "name": "Hydra's fang",
-        "dropRate": 0.00277,
+        "dropRate": 0.000555,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra%27s_fang"
@@ -10545,7 +10545,7 @@
       {
         "itemId": 22973,
         "name": "Hydra's eye",
-        "dropRate": 0.00277,
+        "dropRate": 0.000555,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra%27s_eye",
@@ -10554,7 +10554,7 @@
       {
         "itemId": 22969,
         "name": "Hydra's heart",
-        "dropRate": 0.00277,
+        "dropRate": 0.000555,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra%27s_heart",
@@ -10563,7 +10563,7 @@
       {
         "itemId": 22988,
         "name": "Hydra tail",
-        "dropRate": 0.000999,
+        "dropRate": 0.0002,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Hydra_tail"
