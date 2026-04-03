@@ -39,7 +39,7 @@ import net.runelite.client.ui.overlay.worldmap.WorldMapPoint;
 public class CollectionLogWorldMapPoint extends WorldMapPoint
 {
 	private static final int ICON_SIZE = 32;
-	private static final int ARROW_SIZE = 20;
+	private static final int ARROW_SIZE = 32;
 	private static final Color BADGE_COLOR = new Color(0, 200, 200);
 	private static final Color BADGE_BORDER = new Color(0, 100, 100);
 
@@ -159,25 +159,24 @@ public class CollectionLogWorldMapPoint extends WorldMapPoint
 		Graphics2D g = img.createGraphics();
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		// Arrow polygon pointing right (0 degrees), centered in the image
+		// Chevron pointing right (0 degrees), centered in the image
 		int cx = size / 2;
 		int cy = size / 2;
-		int[] xPoints = {cx + 8, cx - 4, cx - 2, cx - 4};
-		int[] yPoints = {cy, cy - 6, cy, cy + 6};
+		int[] xPoints = {cx + 12, cx - 6, cx - 2, cx - 6};
+		int[] yPoints = {cy, cy - 9, cy, cy + 9};
 
 		AffineTransform tx = new AffineTransform();
 		tx.rotate(Math.toRadians(degrees), cx, cy);
-
-		// Black border
 		g.setTransform(tx);
-		g.setColor(Color.BLACK);
-		g.setStroke(new BasicStroke(2.5f));
-		g.drawPolygon(xPoints, yPoints, 4);
-		g.fillPolygon(xPoints, yPoints, 4);
 
-		// Colored fill (slightly smaller area due to border)
+		// Solid fill
 		g.setColor(BADGE_COLOR);
 		g.fillPolygon(xPoints, yPoints, 4);
+
+		// Black outline on top
+		g.setColor(BADGE_BORDER);
+		g.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+		g.drawPolygon(xPoints, yPoints, 4);
 
 		g.dispose();
 		return img;
