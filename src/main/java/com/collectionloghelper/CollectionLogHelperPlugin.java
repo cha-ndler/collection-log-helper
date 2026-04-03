@@ -77,9 +77,15 @@ import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ActorDeath;
 import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.ChatMessage;
+import net.runelite.api.events.DecorativeObjectDespawned;
+import net.runelite.api.events.DecorativeObjectSpawned;
 import net.runelite.api.events.GameObjectDespawned;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameStateChanged;
+import net.runelite.api.events.GroundObjectDespawned;
+import net.runelite.api.events.GroundObjectSpawned;
+import net.runelite.api.events.WallObjectDespawned;
+import net.runelite.api.events.WallObjectSpawned;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.HitsplatApplied;
 import net.runelite.api.events.InteractingChanged;
@@ -1138,13 +1144,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (source.getGuidanceSteps() != null && !source.getGuidanceSteps().isEmpty())
 		{
 			guidanceSequencer.setPlayerLocation(cachedPlayerLocation);
+			// startSequence triggers onStepChanged callback which handles
+			// applyStepToOverlays and scanForTrackedNpc for the initial step
 			guidanceSequencer.startSequence(source, this::onStepChanged, this::onSequenceComplete);
 			GuidanceStep step = guidanceSequencer.getCurrentStep();
-			if (step != null)
-			{
-				applyStepToOverlays(step, source.getName(), source);
-				scanForTrackedNpc(step);
-			}
 			if (panel != null)
 			{
 				panel.setGuidanceState(true, source);
@@ -1275,6 +1278,9 @@ public class CollectionLogHelperPlugin extends Plugin
 			widgetHighlightOverlay.clearHighlights();
 		}
 
+		// Suppress tile highlight when ObjectHighlightOverlay handles the visual
+		guidanceOverlay.setSuppressTileHighlight(!step.getAllObjectIds().isEmpty());
+
 		if (step.getWorldX() > 0)
 		{
 			WorldPoint worldPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
@@ -1295,6 +1301,10 @@ public class CollectionLogHelperPlugin extends Plugin
 			dialogHighlightOverlay.setGuidanceActive(true);
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
 			worldMapRouteOverlay.setTargetPoint(worldPoint);
+			if (activeMapPoint != null)
+			{
+				worldMapPointManager.remove(activeMapPoint);
+			}
 			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, step.getDescription(), collectionLogIcon);
 			worldMapPointManager.add(activeMapPoint);
 
@@ -1302,7 +1312,12 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				client.clearHintArrow();
 
+				// Skip hint arrow inside Sailing instances — surface world
+				// coords render at wrong positions in instanced WorldViews
+				boolean inInstance = client.getLocalPlayer() != null
+					&& client.getLocalPlayer().getWorldView() != client.getTopLevelWorldView();
 				if (config.showHintArrow()
+					&& !inInstance
 					&& client.getLocalPlayer() != null
 					&& client.getLocalPlayer().getWorldLocation().getPlane() == worldPoint.getPlane())
 				{
@@ -1318,7 +1333,20 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 		else
 		{
-			// Step with no location — show text overlay only
+			// Step with no location — clear previous target and show text overlay only
+			guidanceOverlay.setTargetPoint(null);
+			guidanceOverlay.setTargetName(null);
+			guidanceOverlay.setTargetNpcId(0);
+			guidanceOverlay.setInteractAction(null);
+			guidanceOverlay.setLocationDescription(null);
+			guidanceOverlay.setTravelTip(null);
+			guidanceMinimapOverlay.setTargetPoint(null);
+			worldMapRouteOverlay.setTargetPoint(null);
+			if (activeMapPoint != null)
+			{
+				worldMapPointManager.remove(activeMapPoint);
+				activeMapPoint = null;
+			}
 			guidanceOverlay.setClueGuidanceText(step.getDescription());
 			clientThread.invokeLater(() ->
 			{
@@ -1353,6 +1381,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		dialogHighlightOverlay.setGuidanceActive(true);
 		guidanceMinimapOverlay.setTargetPoint(worldPoint);
 		worldMapRouteOverlay.setTargetPoint(worldPoint);
+		if (activeMapPoint != null)
+		{
+			worldMapPointManager.remove(activeMapPoint);
+		}
 		activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
 		worldMapPointManager.add(activeMapPoint);
 
@@ -1360,7 +1392,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			client.clearHintArrow();
 
+			boolean inInstance = client.getLocalPlayer() != null
+				&& client.getLocalPlayer().getWorldView() != client.getTopLevelWorldView();
 			if (config.showHintArrow()
+				&& !inInstance
 				&& client.getLocalPlayer() != null
 				&& client.getLocalPlayer().getWorldLocation().getPlane() == worldPoint.getPlane())
 			{
@@ -1409,15 +1444,19 @@ public class CollectionLogHelperPlugin extends Plugin
 			return;
 		}
 
-		for (NPC npc : client.getTopLevelWorldView().npcs())
+		final int targetNpcId = step.getNpcId();
+		clientThread.invokeLater(() ->
 		{
-			if (npc != null && npc.getId() == step.getNpcId())
+			for (NPC npc : client.getTopLevelWorldView().npcs())
 			{
-				trackedGuidanceNpc = npc;
-				guidanceOverlay.setTrackedNpc(npc);
-				break;
+				if (npc != null && npc.getId() == targetNpcId)
+				{
+					trackedGuidanceNpc = npc;
+					guidanceOverlay.setTrackedNpc(npc);
+					break;
+				}
 			}
-		}
+		});
 	}
 
 	/**
@@ -1895,6 +1934,42 @@ public class CollectionLogHelperPlugin extends Plugin
 		WorldPoint wp = event.getTile().getWorldLocation();
 		authoringLog("OBJECT_DESPAWN id=%d at=[%d,%d,%d]",
 			event.getGameObject().getId(), wp.getX(), wp.getY(), wp.getPlane());
+	}
+
+	@Subscribe
+	public void onWallObjectSpawned(WallObjectSpawned event)
+	{
+		objectHighlightOverlay.onObjectSpawned(event.getWallObject());
+	}
+
+	@Subscribe
+	public void onWallObjectDespawned(WallObjectDespawned event)
+	{
+		objectHighlightOverlay.onObjectDespawned(event.getWallObject());
+	}
+
+	@Subscribe
+	public void onDecorativeObjectSpawned(DecorativeObjectSpawned event)
+	{
+		objectHighlightOverlay.onObjectSpawned(event.getDecorativeObject());
+	}
+
+	@Subscribe
+	public void onDecorativeObjectDespawned(DecorativeObjectDespawned event)
+	{
+		objectHighlightOverlay.onObjectDespawned(event.getDecorativeObject());
+	}
+
+	@Subscribe
+	public void onGroundObjectSpawned(GroundObjectSpawned event)
+	{
+		objectHighlightOverlay.onObjectSpawned(event.getGroundObject());
+	}
+
+	@Subscribe
+	public void onGroundObjectDespawned(GroundObjectDespawned event)
+	{
+		objectHighlightOverlay.onObjectDespawned(event.getGroundObject());
 	}
 
 	@Subscribe
