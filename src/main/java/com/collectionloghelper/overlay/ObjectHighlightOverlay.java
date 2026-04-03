@@ -26,12 +26,11 @@ package com.collectionloghelper.overlay;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
 import java.awt.BasicStroke;
-import lombok.extern.slf4j.Slf4j;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-
 import java.awt.Shape;
+import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
