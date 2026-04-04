@@ -668,7 +668,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged event)
 	{
-		log.info("ItemContainerChanged fired: containerId={}, BANK={}, match={}",
+		log.debug("ItemContainerChanged fired: containerId={}, BANK={}, match={}",
 			event.getContainerId(), InventoryID.BANK, event.getContainerId() == InventoryID.BANK);
 
 		if (config.guidanceAuthoring())
@@ -1447,7 +1447,12 @@ public class CollectionLogHelperPlugin extends Plugin
 		final int targetNpcId = step.getNpcId();
 		clientThread.invokeLater(() ->
 		{
-			for (NPC npc : client.getTopLevelWorldView().npcs())
+			WorldView wv = client.getTopLevelWorldView();
+			if (wv == null)
+			{
+				return;
+			}
+			for (NPC npc : wv.npcs())
 			{
 				if (npc != null && npc.getId() == targetNpcId)
 				{
