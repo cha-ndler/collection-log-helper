@@ -22,22 +22,26 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.collectionloghelper.data;
+package com.collectionloghelper;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum CollectionLogCategory
+public enum EfficientSortMode
 {
-	BOSSES("Bosses"),
-	RAIDS("Raids"),
-	CLUES("Clues"),
-	MINIGAMES("Minigames"),
-	SLAYER("Slayer"),
-	SKILLING("Skilling"),
-	OTHER("Other");
+	EFFICIENCY("Efficiency Score"),
+	KILL_TIME("Kill Time"),
+	DROP_RATE("Best Drop Rate"),
+	ALPHABETICAL("Alphabetical"),
+	ITEMS_REMAINING("Items Remaining");
 
 	private final String displayName;
+
+	@Override
+	public String toString()
+	{
+		return displayName;
+	}
 }
