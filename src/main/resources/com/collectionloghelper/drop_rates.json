@@ -739,7 +739,11 @@
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2042,
-        "completionNpcIds": [2042, 2043, 2044]
+        "completionNpcIds": [
+          2042,
+          2043,
+          2044
+        ]
       }
     ]
   },
@@ -840,7 +844,12 @@
         "interactAction": "Poke",
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 8061,
-        "completionNpcIds": [8058, 8059, 8060, 8061]
+        "completionNpcIds": [
+          8058,
+          8059,
+          8060,
+          8061
+        ]
       }
     ],
     "afkLevel": 1
@@ -1818,7 +1827,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12204
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 210
   },
   {
     "name": "Vardorvis",
@@ -2341,7 +2351,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12204
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 300
   },
   {
     "name": "Vardorvis (Awakened)",
@@ -4473,7 +4484,7 @@
   },
   {
     "name": "Demonic gorillas",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2405,
     "worldY": 3419,
     "worldPlane": 0,
@@ -4561,7 +4572,7 @@
   },
   {
     "name": "Lizardman shaman",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 1472,
     "worldY": 3686,
     "worldPlane": 0,
@@ -5200,7 +5211,8 @@
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your completed Chambers of Xeric Challenge Mode count is:"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 1500
   },
   {
     "name": "Theatre of Blood",
@@ -6199,7 +6211,8 @@
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your completed Tombs of Amascut: Expert Mode count is:"
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 1500
   },
   {
     "name": "Tombs of Amascut (500 Invocation)",
@@ -7806,11 +7819,12 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 13011
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 240
   },
   {
     "name": "Tormented Demons",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 4100,
     "worldY": 4415,
     "worldPlane": 0,
@@ -8197,7 +8211,7 @@
   },
   {
     "name": "Crawling Hand",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3418,
     "worldY": 3543,
     "worldPlane": 0,
@@ -8248,7 +8262,7 @@
   },
   {
     "name": "Cave Crawler",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2788,
     "worldY": 10000,
     "worldPlane": 0,
@@ -8299,7 +8313,7 @@
   },
   {
     "name": "Rockslug",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2794,
     "worldY": 10018,
     "worldPlane": 0,
@@ -8350,7 +8364,7 @@
   },
   {
     "name": "Cockatrice",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2792,
     "worldY": 10035,
     "worldPlane": 0,
@@ -8417,7 +8431,7 @@
   },
   {
     "name": "Pyrefiend",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2761,
     "worldY": 10008,
     "worldPlane": 0,
@@ -8468,7 +8482,7 @@
   },
   {
     "name": "Mogre",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2987,
     "worldY": 3110,
     "worldPlane": 0,
@@ -8527,7 +8541,7 @@
   },
   {
     "name": "Basilisk",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2744,
     "worldY": 10008,
     "worldPlane": 0,
@@ -8578,7 +8592,7 @@
   },
   {
     "name": "Terror Dog",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3149,
     "worldY": 4663,
     "worldPlane": 0,
@@ -8632,7 +8646,7 @@
   },
   {
     "name": "Infernal Mage",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3440,
     "worldY": 3563,
     "worldPlane": 1,
@@ -8698,7 +8712,7 @@
   },
   {
     "name": "Brine Rat",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2707,
     "worldY": 10132,
     "worldPlane": 0,
@@ -8752,7 +8766,7 @@
   },
   {
     "name": "Frost Nagua",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 1693,
     "worldY": 3232,
     "worldPlane": 0,
@@ -8819,7 +8833,7 @@
   },
   {
     "name": "Sulphur Nagua",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 1440,
     "worldY": 9602,
     "worldPlane": 0,
@@ -8870,7 +8884,7 @@
   },
   {
     "name": "Earthen Nagua",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 1309,
     "worldY": 3104,
     "worldPlane": 0,
@@ -8921,7 +8935,7 @@
   },
   {
     "name": "Bloodveld",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3442,
     "worldY": 3543,
     "worldPlane": 1,
@@ -8987,7 +9001,7 @@
   },
   {
     "name": "Gryphon",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 1456,
     "worldY": 2880,
     "worldPlane": 0,
@@ -9050,7 +9064,7 @@
   },
   {
     "name": "Jelly",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2704,
     "worldY": 10028,
     "worldPlane": 0,
@@ -9101,7 +9115,7 @@
   },
   {
     "name": "Turoth",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2722,
     "worldY": 10002,
     "worldPlane": 0,
@@ -9160,7 +9174,7 @@
   },
   {
     "name": "Warped Creature",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2032,
     "worldY": 4636,
     "worldPlane": 0,
@@ -9214,7 +9228,7 @@
   },
   {
     "name": "Cave Horror",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3740,
     "worldY": 9373,
     "worldPlane": 0,
@@ -9268,7 +9282,7 @@
   },
   {
     "name": "Aberrant Spectre",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3436,
     "worldY": 3547,
     "worldPlane": 1,
@@ -9326,7 +9340,7 @@
   },
   {
     "name": "Basilisk Knight",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2456,
     "worldY": 4240,
     "worldPlane": 0,
@@ -9388,7 +9402,7 @@
   },
   {
     "name": "Wyrm",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 1311,
     "worldY": 10205,
     "worldPlane": 0,
@@ -9463,7 +9477,7 @@
   },
   {
     "name": "Lava Strykewyrm",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2150,
     "worldY": 2968,
     "worldPlane": 0,
@@ -9518,7 +9532,7 @@
   },
   {
     "name": "Dust Devil",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3310,
     "worldY": 2962,
     "worldPlane": 0,
@@ -9569,7 +9583,7 @@
   },
   {
     "name": "Fossil Island Wyvern",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3602,
     "worldY": 10290,
     "worldPlane": 0,
@@ -9639,7 +9653,7 @@
   },
   {
     "name": "Kurask",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2701,
     "worldY": 9992,
     "worldPlane": 0,
@@ -9714,7 +9728,7 @@
   },
   {
     "name": "Skeletal Wyvern",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3008,
     "worldY": 3150,
     "worldPlane": 0,
@@ -9773,7 +9787,7 @@
   },
   {
     "name": "Gargoyle",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3429,
     "worldY": 3534,
     "worldPlane": 2,
@@ -9847,7 +9861,7 @@
   },
   {
     "name": "Custodian Stalker",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 1301,
     "worldY": 9820,
     "worldPlane": 0,
@@ -9917,7 +9931,7 @@
   },
   {
     "name": "Aquanite",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2275,
     "worldY": 9880,
     "worldPlane": 0,
@@ -9968,7 +9982,7 @@
   },
   {
     "name": "Nechryael",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3442,
     "worldY": 3558,
     "worldPlane": 2,
@@ -10026,7 +10040,7 @@
   },
   {
     "name": "Spiritual Mage",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2844,
     "worldY": 5280,
     "worldPlane": 2,
@@ -10077,7 +10091,7 @@
   },
   {
     "name": "Spiritual Mage (Zarosian)",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2904,
     "worldY": 5203,
     "worldPlane": 0,
@@ -10168,7 +10182,7 @@
   },
   {
     "name": "Drake",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 1310,
     "worldY": 10057,
     "worldPlane": 0,
@@ -10227,7 +10241,7 @@
   },
   {
     "name": "Abyssal Demon",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3418,
     "worldY": 3560,
     "worldPlane": 2,
@@ -10301,7 +10315,7 @@
   },
   {
     "name": "Cave Kraken",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2278,
     "worldY": 3611,
     "worldPlane": 0,
@@ -10360,7 +10374,7 @@
   },
   {
     "name": "Dark Beast",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 1920,
     "worldY": 4672,
     "worldPlane": 0,
@@ -10414,7 +10428,7 @@
   },
   {
     "name": "Araxyte",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3657,
     "worldY": 3407,
     "worldPlane": 0,
@@ -10465,7 +10479,7 @@
   },
   {
     "name": "Smoke Devil",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 2412,
     "worldY": 3061,
     "worldPlane": 0,
@@ -10516,7 +10530,7 @@
   },
   {
     "name": "Hydra",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 1310,
     "worldY": 10190,
     "worldPlane": 0,
@@ -10593,7 +10607,7 @@
   },
   {
     "name": "Vyrewatch Sentinel",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3631,
     "worldY": 3325,
     "worldPlane": 0,
@@ -10777,7 +10791,7 @@
   },
   {
     "name": "Superior Slayer Monster",
-    "category": "OTHER",
+    "category": "SLAYER",
     "worldX": 3429,
     "worldY": 3534,
     "worldPlane": 0,
@@ -14094,9 +14108,7 @@
         "objectInteractAction": null,
         "highlightItemIds": null,
         "useItemOnObject": false,
-        "completionChatPattern": null,
-        "loopBackToStep": 0,
-        "loopCount": 0
+        "completionChatPattern": null
       },
       {
         "description": "Talk to Honest Jimmy to join a team",
@@ -14122,9 +14134,7 @@
         "objectInteractAction": null,
         "highlightItemIds": null,
         "useItemOnObject": false,
-        "completionChatPattern": null,
-        "loopBackToStep": 0,
-        "loopCount": 0
+        "completionChatPattern": null
       },
       {
         "description": "Take 25 buckets from the workbench",
@@ -14147,9 +14157,7 @@
         "objectInteractAction": "Take-Tool",
         "highlightItemIds": null,
         "useItemOnObject": false,
-        "completionChatPattern": null,
-        "loopBackToStep": 0,
-        "loopCount": 0
+        "completionChatPattern": null
       },
       {
         "description": "Fill buckets at the water pump",
@@ -14174,9 +14182,7 @@
           1925
         ],
         "useItemOnObject": true,
-        "completionChatPattern": null,
-        "loopBackToStep": 0,
-        "loopCount": 0
+        "completionChatPattern": null
       },
       {
         "description": "Climb ladder to upper floor",
@@ -14202,9 +14208,7 @@
         "objectInteractAction": "Climb-up",
         "highlightItemIds": null,
         "useItemOnObject": false,
-        "completionChatPattern": null,
-        "loopBackToStep": 0,
-        "loopCount": 0
+        "completionChatPattern": null
       },
       {
         "description": "Empty buckets of water into the hopper",
@@ -14222,12 +14226,12 @@
         "completionDistance": 0,
         "completionNpcId": 0,
         "worldMessage": null,
-        "objectId": 0,
+        "objectId": 15847,
         "objectIds": [
           15847,
           15873
         ],
-        "objectInteractAction": null,
+        "objectInteractAction": "Use",
         "highlightItemIds": [
           1929
         ],
@@ -14244,9 +14248,7 @@
             2
           ]
         ],
-        "completionChatPattern": null,
-        "loopBackToStep": 0,
-        "loopCount": 0
+        "completionChatPattern": null
       },
       {
         "description": "Climb ladder back to ground floor",
@@ -14297,9 +14299,7 @@
         "objectInteractAction": null,
         "highlightItemIds": null,
         "useItemOnObject": false,
-        "completionChatPattern": null,
-        "loopBackToStep": 0,
-        "loopCount": 0
+        "completionChatPattern": null
       }
     ],
     "cumulativeTrackItemId": 1929,
@@ -14601,7 +14601,7 @@
   },
   {
     "name": "Aerial Fishing",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 1379,
     "worldY": 3634,
     "worldPlane": 0,
@@ -16739,7 +16739,7 @@
   },
   {
     "name": "Deep Sea Fishing",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 1565,
     "worldY": 3420,
     "worldPlane": 0,
@@ -17825,7 +17825,7 @@
   },
   {
     "name": "Colossal Wyrm Agility",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 1652,
     "worldY": 2931,
     "worldPlane": 0,
@@ -17956,7 +17956,7 @@
   },
   {
     "name": "Rooftop Agility",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 3214,
     "worldY": 3414,
     "worldPlane": 0,
@@ -18632,7 +18632,7 @@
   },
   {
     "name": "Motherlode Mine",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 3726,
     "worldY": 5680,
     "worldPlane": 0,
@@ -18724,7 +18724,7 @@
   },
   {
     "name": "Shooting Stars",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 3214,
     "worldY": 3414,
     "worldPlane": 0,
@@ -19245,7 +19245,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 14009
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 400
   },
   {
     "name": "Yama",
@@ -19559,7 +19560,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12596
       }
-    ]
+    ],
+    "ironKillTimeSeconds": 90
   },
   {
     "name": "Amoxliatl",
@@ -25674,7 +25676,7 @@
   },
   {
     "name": "Thieving (Seed Stalls)",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 3080,
     "worldY": 3252,
     "worldPlane": 0,
@@ -25712,7 +25714,7 @@
   },
   {
     "name": "Black Chinchompas",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 3143,
     "worldY": 3771,
     "worldPlane": 0,
@@ -25750,7 +25752,7 @@
   },
   {
     "name": "Woodcutting (Teak Trees)",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 2770,
     "worldY": 2700,
     "worldPlane": 0,
@@ -25788,7 +25790,7 @@
   },
   {
     "name": "Mining (Gemstone Rocks)",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 2842,
     "worldY": 9381,
     "worldPlane": 0,
@@ -25826,7 +25828,7 @@
   },
   {
     "name": "Fishing (Swordfish)",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 2604,
     "worldY": 3414,
     "worldPlane": 0,
@@ -25872,7 +25874,7 @@
   },
   {
     "name": "Runecrafting (Fire Runes)",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 2583,
     "worldY": 4838,
     "worldPlane": 0,
@@ -25910,7 +25912,7 @@
   },
   {
     "name": "Farming (Fruit Trees)",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 1249,
     "worldY": 3719,
     "worldPlane": 0,
@@ -25948,7 +25950,7 @@
   },
   {
     "name": "Underwater Crabs",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 2987,
     "worldY": 3033,
     "worldPlane": 0,
@@ -26088,12 +26090,15 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 15218
       }
     ],
     "mutuallyExclusiveSources": [
       "Sailing Misc"
-    ]
+    ],
+    "npcId": 15218,
+    "interactAction": "Attack"
   },
   {
     "name": "Albatross (Boat Combat)",
@@ -26130,12 +26135,15 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 15224
       }
     ],
     "mutuallyExclusiveSources": [
       "Sailing Misc"
-    ]
+    ],
+    "npcId": 15224,
+    "interactAction": "Attack"
   },
   {
     "name": "Narwhal (Boat Combat)",
@@ -26196,12 +26204,15 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 15202
       }
     ],
     "mutuallyExclusiveSources": [
       "Sailing Misc"
-    ]
+    ],
+    "npcId": 15202,
+    "interactAction": "Attack"
   },
   {
     "name": "Orcas (Boat Combat)",
@@ -26262,12 +26273,15 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 15204
       }
     ],
     "mutuallyExclusiveSources": [
       "Sailing Misc"
-    ]
+    ],
+    "npcId": 15204,
+    "interactAction": "Attack"
   },
   {
     "name": "Great White Shark (Boat Combat)",
@@ -26336,12 +26350,15 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 15200
       }
     ],
     "mutuallyExclusiveSources": [
       "Sailing Misc"
-    ]
+    ],
+    "npcId": 15200,
+    "interactAction": "Attack"
   },
   {
     "name": "Vampyre Kraken (Boat Combat)",
@@ -26418,13 +26435,16 @@
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 15212
       }
     ],
     "mutuallyExclusiveSources": [
       "Sailing Misc",
       "Boat Paints"
-    ]
+    ],
+    "npcId": 15212,
+    "interactAction": "Attack"
   },
   {
     "name": "Small Salvage",
@@ -27503,7 +27523,7 @@
   },
   {
     "name": "Cutting Squid",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 1824,
     "worldY": 3691,
     "worldPlane": 0,
@@ -27745,7 +27765,7 @@
   },
   {
     "name": "Prifddinas Rabbit",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 3267,
     "worldY": 6082,
     "worldPlane": 0,
@@ -27792,7 +27812,7 @@
   },
   {
     "name": "Pickpocketing Darkmeyer Vyre",
-    "category": "OTHER",
+    "category": "SKILLING",
     "worldX": 3631,
     "worldY": 3325,
     "worldPlane": 0,
