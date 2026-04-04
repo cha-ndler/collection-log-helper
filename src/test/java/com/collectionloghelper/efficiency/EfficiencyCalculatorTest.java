@@ -937,4 +937,201 @@ public class EfficiencyCalculatorTest
 		assertNull("CoX should be null when shared item obtained", calculator.scoreSource(cox, false));
 		assertNull("CoX CM should be null when shared item obtained", calculator.scoreSource(coxCm, false));
 	}
+
+	// --- Iron account type ---
+
+	@Test
+	public void testIronKillTime_usedWhenConfigured()
+	{
+		// Source with ironKillTimeSeconds=120, base=60. Iron should use 120.
+		CollectionLogSource source = new CollectionLogSource("Test Boss", CollectionLogCategory.BOSSES,
+			3000, 3000, 0, 60, 120, "Test Boss", Collections.emptyList(),
+			RewardType.DROP, 0, false, null, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
+			Collections.singletonList(makeItem(1, "Drop", 0.01)));
+		when(config.accountType()).thenReturn(AccountType.IRONMAN);
+
+		int effectiveTime = calculator.getEffectiveKillTime(source);
+		assertEquals(120, effectiveTime);
+	}
+
+	@Test
+	public void testIronKillTime_fallsBackToBaseWhenZero()
+	{
+		// Source with ironKillTimeSeconds=0 — iron should fall back to base killTime
+		CollectionLogSource source = new CollectionLogSource("Test Boss", CollectionLogCategory.BOSSES,
+			3000, 3000, 0, 60, 0, "Test Boss", Collections.emptyList(),
+			RewardType.DROP, 0, false, null, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
+			Collections.singletonList(makeItem(1, "Drop", 0.01)));
+		when(config.accountType()).thenReturn(AccountType.IRONMAN);
+
+		int effectiveTime = calculator.getEffectiveKillTime(source);
+		assertEquals(60, effectiveTime);
+	}
+
+	@Test
+	public void testIronKillTime_notUsedForMainAccount()
+	{
+		// Main account should use base killTime even if ironKillTimeSeconds is set
+		CollectionLogSource source = new CollectionLogSource("Test Boss", CollectionLogCategory.BOSSES,
+			3000, 3000, 0, 60, 120, "Test Boss", Collections.emptyList(),
+			RewardType.DROP, 0, false, null, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
+			Collections.singletonList(makeItem(1, "Drop", 0.01)));
+		when(config.accountType()).thenReturn(AccountType.MAIN);
+
+		int effectiveTime = calculator.getEffectiveKillTime(source);
+		assertEquals(60, effectiveTime);
+	}
+
+	// --- Pet-only scoring ---
+
+	@Test
+	public void testPetsOnly_filtersPetsFromSource()
+	{
+		// Source with 2 regular items + 1 pet — only pet should be scored
+		CollectionLogItem regular1 = makeItem(1, "Drop A", 0.01);
+		CollectionLogItem regular2 = makeItem(2, "Drop B", 0.01);
+		CollectionLogItem pet = new CollectionLogItem(3, "Pet", 1.0 / 3000, 0, true, null, 0, 0, false, true);
+		CollectionLogSource source = makeSource("Test Boss", CollectionLogCategory.BOSSES, 60,
+			Arrays.asList(regular1, regular2, pet));
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+
+		List<ScoredItem> results = calculator.filterPetsOnly();
+
+		assertEquals(1, results.size());
+		assertEquals(1, results.get(0).getMissingItemCount());
+		// Pet score = (1/3000) * 60 * 100 = 2.0
+		assertEquals(2.0, results.get(0).getScore(), 0.01);
+	}
+
+	@Test
+	public void testPetsOnly_excludesObtainedPets()
+	{
+		CollectionLogItem pet = new CollectionLogItem(1, "Pet", 1.0 / 3000, 0, true, null, 0, 0, false, true);
+		CollectionLogSource source = makeSource("Test Boss", CollectionLogCategory.BOSSES, 60,
+			Collections.singletonList(pet));
+		when(collectionState.isItemObtained(1)).thenReturn(true);
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+
+		List<ScoredItem> results = calculator.filterPetsOnly();
+		assertTrue(results.isEmpty());
+	}
+
+	@Test
+	public void testPetsOnly_noPetsInSource_excluded()
+	{
+		// Source with no pets at all should not appear in pet hunt
+		CollectionLogSource source = makeSource("Test Boss", CollectionLogCategory.BOSSES, 60,
+			Collections.singletonList(makeItem(1, "Drop", 0.01)));
+		lenient().when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+
+		List<ScoredItem> results = calculator.filterPetsOnly();
+		assertTrue(results.isEmpty());
+	}
+
+	// --- Guaranteed score does NOT override when probabilistic is higher ---
+
+	@Test
+	public void testGuaranteedScore_doesNotOverrideHigherCombined()
+	{
+		// Source with a fast probabilistic drop + a slow guaranteed milestone
+		// Combined probabilistic score should win over guaranteed score
+		List<CollectionLogItem> items = Arrays.asList(
+			makeItem(1, "Common", 0.1),          // score = 0.1 * 60 * 100 = 600
+			makeItem(2, "Medium", 0.05),          // score = 0.05 * 60 * 100 = 300
+			makeMilestoneItem(3, "Slow cape", 500)); // hours = 500*60/3600 = 8.33, score = 12
+		CollectionLogSource source = makeSource("Test Boss", CollectionLogCategory.BOSSES, 60, items);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		// Combined rate = 1 - (1-0.1)*(1-0.05) = 1 - 0.855 = 0.145
+		// Combined score = 0.145 * 60 * 100 = 870
+		// Guaranteed best = 12 — lower than 870, so combined wins
+		double combinedRate = 1.0 - (1.0 - 0.1) * (1.0 - 0.05);
+		double expectedScore = combinedRate * 60 * 100;
+		assertEquals(expectedScore, result.getScore(), 0.01);
+	}
+
+	// --- Single remaining independent item ---
+
+	@Test
+	public void testSingleRemainingIndependentItem()
+	{
+		// Source with 3 independent items, 2 obtained, 1 remaining
+		// Score should be based on just the 1 remaining independent item
+		List<CollectionLogItem> items = Arrays.asList(
+			makeIndependentItem(1, "Indep A", 0.01),
+			makeIndependentItem(2, "Indep B", 0.02),
+			makeIndependentItem(3, "Indep C", 0.005));
+		CollectionLogSource source = makeSource("Test Boss", CollectionLogCategory.BOSSES, 60, items);
+		when(collectionState.isItemObtained(1)).thenReturn(true);
+		when(collectionState.isItemObtained(2)).thenReturn(true);
+		when(collectionState.isItemObtained(3)).thenReturn(false);
+
+		ScoredItem result = calculator.scoreSource(source, false);
+
+		// Only Indep C at 0.005: score = 0.005 * 60 * 100 = 30
+		assertEquals(30.0, result.getScore(), 0.01);
+		assertEquals(1, result.getMissingItemCount());
+		assertEquals("Indep C", result.getBestItem().getName());
+	}
+
+	// --- Raid team sizes DUO and FULL ---
+
+	@Test
+	public void testRaidDuoTeamSize()
+	{
+		List<CollectionLogItem> items = Collections.singletonList(makeItem(1, "Unique", 0.01));
+		CollectionLogSource source = makeSource("Test Raid", CollectionLogCategory.RAIDS, 1800, items);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		// DUO: dropRate=0.01*0.55=0.0055, killTime=1800*0.75=1350s, kph=2.667
+		// score = 0.0055 * 2.667 * 100 = 1.467
+		when(config.raidTeamSize()).thenReturn(RaidTeamSize.DUO);
+		ScoredItem duo = calculator.scoreSource(source, false);
+		double duoRate = 0.01 * RaidTeamSize.DUO.getDropRateMultiplier();
+		double duoKph = 3600.0 / (1800 * RaidTeamSize.DUO.getKillTimeMultiplier());
+		assertEquals(duoRate * duoKph * 100, duo.getScore(), 0.01);
+	}
+
+	@Test
+	public void testRaidFullGroupTeamSize()
+	{
+		List<CollectionLogItem> items = Collections.singletonList(makeItem(1, "Unique", 0.01));
+		CollectionLogSource source = makeSource("Test Raid", CollectionLogCategory.RAIDS, 1800, items);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		// FULL: dropRate=0.01*0.28=0.0028, killTime=1800*0.5=900s, kph=4.0
+		// score = 0.0028 * 4.0 * 100 = 1.12
+		when(config.raidTeamSize()).thenReturn(RaidTeamSize.FULL_GROUP);
+		ScoredItem full = calculator.scoreSource(source, false);
+		double fullRate = 0.01 * RaidTeamSize.FULL_GROUP.getDropRateMultiplier();
+		double fullKph = 3600.0 / (1800 * RaidTeamSize.FULL_GROUP.getKillTimeMultiplier());
+		assertEquals(fullRate * fullKph * 100, full.getScore(), 0.01);
+	}
+
+	// --- Iron kill time with raid source ---
+
+	@Test
+	public void testIronRaidSource_ironTimeWithRaidMultiplier()
+	{
+		// Raid source with ironKillTimeSeconds — should apply both iron time AND raid multiplier
+		CollectionLogSource source = new CollectionLogSource("Test Raid", CollectionLogCategory.RAIDS,
+			3000, 3000, 0, 1800, 2400, "Test Raid", Collections.emptyList(),
+			RewardType.DROP, 0, false, null, 1, false, 0, null, 0, null, null, null, null, 0, null, 0,
+			Collections.singletonList(makeItem(1, "Unique", 0.01)));
+		when(config.accountType()).thenReturn(AccountType.IRONMAN);
+		when(config.raidTeamSize()).thenReturn(RaidTeamSize.SOLO);
+
+		// Iron base = 2400, solo multiplier = 1.0, effective = 2400
+		int effectiveTime = calculator.getEffectiveKillTime(source);
+		assertEquals(2400, effectiveTime);
+
+		// With trio: 2400 * 0.6 = 1440
+		when(config.raidTeamSize()).thenReturn(RaidTeamSize.TRIO);
+		effectiveTime = calculator.getEffectiveKillTime(source);
+		assertEquals(1440, effectiveTime);
+	}
 }
