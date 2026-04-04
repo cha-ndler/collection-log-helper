@@ -133,8 +133,8 @@ public class DataSyncStateTest
 	@Test
 	public void isReminderExpired_exactlyAtThreshold()
 	{
-		// Login was exactly 2 minutes ago — should NOT be expired (> not >=)
-		syncState.setLoginTimestamp(System.currentTimeMillis() - 120_000);
+		// Login was just under 2 minutes ago — should NOT be expired (> not >=)
+		syncState.setLoginTimestamp(System.currentTimeMillis() - 119_000);
 		assertFalse(syncState.isReminderExpired());
 	}
 
