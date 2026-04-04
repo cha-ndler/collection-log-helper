@@ -116,17 +116,6 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "proximityMaxDistance",
-		name = "Proximity Max Distance",
-		description = "Maximum tile distance for Proximity mode (0 = unlimited)",
-		position = 6
-	)
-	default int proximityMaxDistance()
-	{
-		return 0;
-	}
-
-	@ConfigItem(
 		keyName = "afkFilter",
 		name = "Efficient AFK",
 		description = "Filter sources by AFK level in Efficient and Pet Hunt modes",
