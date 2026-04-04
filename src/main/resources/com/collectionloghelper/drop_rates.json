@@ -302,6 +302,8 @@
         "worldX": 2925,
         "worldY": 5265,
         "worldPlane": 2,
+        "objectId": 26504,
+        "objectInteractAction": "Open",
         "npcId": 2205,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
@@ -456,6 +458,8 @@
         "worldX": 2914,
         "worldY": 5350,
         "worldPlane": 2,
+        "objectId": 26505,
+        "objectInteractAction": "Open",
         "npcId": 3129,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
@@ -610,6 +614,8 @@
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,
+        "objectId": 26502,
+        "objectInteractAction": "Open",
         "npcId": 3162,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
@@ -2607,6 +2613,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 2,
+        "objectId": 2119,
+        "objectInteractAction": "Climb-up",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -4581,12 +4589,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Crash Site Cavern, Gnome Stronghold.",
-        "worldX": 2405,
-        "worldY": 3419,
+        "description": "Travel to the Crash Site Cavern entrance, north-west of the Grand Tree.",
+        "worldX": 2027,
+        "worldY": 5613,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15
+      },
+      {
+        "description": "Enter the Crash Site Cavern.",
+        "worldX": 2027,
+        "worldY": 5613,
+        "worldPlane": 0,
+        "objectId": 28686,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Demonic gorillas.",
@@ -8771,6 +8788,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 1,
+        "objectId": 2114,
+        "objectInteractAction": "Climb-up",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -8938,21 +8957,12 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm.",
-        "worldX": 1311,
-        "worldY": 3807,
+        "description": "Travel to Neypotzli, Cam Torum.",
+        "worldX": 1440,
+        "worldY": 9602,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
-      },
-      {
-        "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
-        "worldX": 1311,
-        "worldY": 3807,
-        "worldPlane": 0,
-        "objectId": 34359,
-        "objectInteractAction": "Activate",
-        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Sulphur Nagua.",
@@ -9069,6 +9079,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 1,
+        "objectId": 2114,
+        "objectInteractAction": "Climb-up",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -9426,6 +9438,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 1,
+        "objectId": 2114,
+        "objectInteractAction": "Climb-up",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -9965,6 +9979,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 2,
+        "objectId": 2119,
+        "objectInteractAction": "Climb-up",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -10144,6 +10160,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 2,
+        "objectId": 2119,
+        "objectInteractAction": "Climb-up",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -10428,6 +10446,8 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 2,
+        "objectId": 2119,
+        "objectInteractAction": "Climb-up",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -15806,12 +15826,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Crash Site Cavern beneath Ape Atoll.",
-        "worldX": 2130,
-        "worldY": 5647,
+        "description": "Travel to the Crash Site Cavern entrance, north-west of the Grand Tree.",
+        "worldX": 2027,
+        "worldY": 5613,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Crash Site Cavern.",
+        "worldX": 2027,
+        "worldY": 5613,
+        "worldPlane": 0,
+        "objectId": 28686,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Glough's Experiments.",
@@ -18433,6 +18462,8 @@
         "worldX": 2849,
         "worldY": 3543,
         "worldPlane": 2,
+        "objectId": 16671,
+        "objectInteractAction": "Climb-up",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
