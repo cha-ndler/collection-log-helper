@@ -124,10 +124,12 @@
         "completionDistance": 30
       },
       {
-        "description": "Enter the God Wars Dungeon",
+        "description": "Enter the God Wars Dungeon.",
         "worldX": 2882,
         "worldY": 5310,
         "worldPlane": 2,
+        "objectId": 26415,
+        "objectInteractAction": "Move",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -144,6 +146,8 @@
         "worldX": 2864,
         "worldY": 5360,
         "worldPlane": 2,
+        "objectId": 26461,
+        "objectInteractAction": "Open",
         "npcId": 2215,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
@@ -276,10 +280,12 @@
         "completionDistance": 30
       },
       {
-        "description": "Enter the God Wars Dungeon",
+        "description": "Enter the God Wars Dungeon.",
         "worldX": 2882,
         "worldY": 5310,
         "worldPlane": 2,
+        "objectId": 26415,
+        "objectInteractAction": "Move",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -428,10 +434,12 @@
         "completionDistance": 30
       },
       {
-        "description": "Enter the God Wars Dungeon",
+        "description": "Enter the God Wars Dungeon.",
         "worldX": 2882,
         "worldY": 5310,
         "worldPlane": 2,
+        "objectId": 26415,
+        "objectInteractAction": "Move",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -580,10 +588,12 @@
         "completionDistance": 30
       },
       {
-        "description": "Enter the God Wars Dungeon",
+        "description": "Enter the God Wars Dungeon.",
         "worldX": 2882,
         "worldY": 5310,
         "worldPlane": 2,
+        "objectId": 26415,
+        "objectInteractAction": "Move",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -1100,15 +1110,24 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use fairy ring CIR to reach the base of Mount Karuulm, then climb up",
-        "worldX": 1308,
+        "description": "Travel to Mount Karuulm.",
+        "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15
       },
       {
-        "description": "Enter the Hydra dungeon on the mountain. Navigate past the regular hydras to the Alchemical Hydra instance. Requires Slayer task",
+        "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
+        "worldX": 1311,
+        "worldY": 3807,
+        "worldPlane": 0,
+        "objectId": 34359,
+        "objectInteractAction": "Activate",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Navigate past the regular hydras to the Alchemical Hydra instance. Requires Slayer task.",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
@@ -2591,6 +2610,15 @@
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
+        "description": "Go through the roof entrance to reach the Grotesque Guardians.",
+        "worldX": 3429,
+        "worldY": 3535,
+        "worldPlane": 2,
+        "objectId": 31673,
+        "objectInteractAction": "Go-through",
+        "completionCondition": "MANUAL"
+      },
+      {
         "description": "Kill the Grotesque Guardians.",
         "worldX": 3427,
         "worldY": 3543,
@@ -3071,6 +3099,8 @@
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
+        "objectIds": [42840, 42841],
+        "objectInteractAction": "Open",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 30
       },
@@ -8292,12 +8322,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Fremennik Slayer Dungeon.",
-        "worldX": 2788,
-        "worldY": 10000,
+        "description": "Travel to the Fremennik Slayer Dungeon entrance, east of Rellekka.",
+        "worldX": 2797,
+        "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Fremennik Slayer Dungeon.",
+        "worldX": 2797,
+        "worldY": 3614,
+        "worldPlane": 0,
+        "objectId": 2123,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Cave Crawler.",
@@ -8343,12 +8382,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Fremennik Slayer Dungeon.",
-        "worldX": 2794,
-        "worldY": 10018,
+        "description": "Travel to the Fremennik Slayer Dungeon entrance, east of Rellekka.",
+        "worldX": 2797,
+        "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Fremennik Slayer Dungeon.",
+        "worldX": 2797,
+        "worldY": 3614,
+        "worldPlane": 0,
+        "objectId": 2123,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Rockslug.",
@@ -8410,12 +8458,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Fremennik Slayer Dungeon.",
-        "worldX": 2792,
-        "worldY": 10035,
+        "description": "Travel to the Fremennik Slayer Dungeon entrance, east of Rellekka.",
+        "worldX": 2797,
+        "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Fremennik Slayer Dungeon.",
+        "worldX": 2797,
+        "worldY": 3614,
+        "worldPlane": 0,
+        "objectId": 2123,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Cockatrice.",
@@ -8461,12 +8518,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Fremennik Slayer Dungeon.",
-        "worldX": 2761,
-        "worldY": 10008,
+        "description": "Travel to the Fremennik Slayer Dungeon entrance, east of Rellekka.",
+        "worldX": 2797,
+        "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Fremennik Slayer Dungeon.",
+        "worldX": 2797,
+        "worldY": 3614,
+        "worldPlane": 0,
+        "objectId": 2123,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Pyrefiend.",
@@ -8571,12 +8637,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Fremennik Slayer Dungeon.",
-        "worldX": 2744,
-        "worldY": 10008,
+        "description": "Travel to the Fremennik Slayer Dungeon entrance, east of Rellekka.",
+        "worldX": 2797,
+        "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Fremennik Slayer Dungeon.",
+        "worldX": 2797,
+        "worldY": 3614,
+        "worldPlane": 0,
+        "objectId": 2123,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Basilisk.",
@@ -8863,12 +8938,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Neypotzli, Cam Torum.",
-        "worldX": 1440,
-        "worldY": 9602,
+        "description": "Travel to Mount Karuulm.",
+        "worldX": 1311,
+        "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
+        "worldX": 1311,
+        "worldY": 3807,
+        "worldPlane": 0,
+        "objectId": 34359,
+        "objectInteractAction": "Activate",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Sulphur Nagua.",
@@ -9094,12 +9178,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Fremennik Slayer Dungeon.",
-        "worldX": 2704,
-        "worldY": 10028,
+        "description": "Travel to the Fremennik Slayer Dungeon entrance, east of Rellekka.",
+        "worldX": 2797,
+        "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Fremennik Slayer Dungeon.",
+        "worldX": 2797,
+        "worldY": 3614,
+        "worldPlane": 0,
+        "objectId": 2123,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Jelly.",
@@ -9153,12 +9246,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Fremennik Slayer Dungeon.",
-        "worldX": 2722,
-        "worldY": 10002,
+        "description": "Travel to the Fremennik Slayer Dungeon entrance, east of Rellekka.",
+        "worldX": 2797,
+        "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Fremennik Slayer Dungeon.",
+        "worldX": 2797,
+        "worldY": 3614,
+        "worldPlane": 0,
+        "objectId": 2123,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Turoth.",
@@ -9456,12 +9558,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Karuulm Slayer Dungeon, Mount Karuulm.",
+        "description": "Travel to Mount Karuulm.",
         "worldX": 1311,
-        "worldY": 10205,
+        "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
+        "worldX": 1311,
+        "worldY": 3807,
+        "worldPlane": 0,
+        "objectId": 34359,
+        "objectInteractAction": "Activate",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Wyrm.",
@@ -9707,12 +9818,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Fremennik Slayer Dungeon.",
-        "worldX": 2701,
-        "worldY": 9992,
+        "description": "Travel to the Fremennik Slayer Dungeon entrance, east of Rellekka.",
+        "worldX": 2797,
+        "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Fremennik Slayer Dungeon.",
+        "worldX": 2797,
+        "worldY": 3614,
+        "worldPlane": 0,
+        "objectId": 2123,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Kurask.",
@@ -10220,12 +10340,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Karuulm Slayer Dungeon, Mount Karuulm.",
-        "worldX": 1310,
-        "worldY": 10057,
+        "description": "Travel to Mount Karuulm.",
+        "worldX": 1311,
+        "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
+        "worldX": 1311,
+        "worldY": 3807,
+        "worldPlane": 0,
+        "objectId": 34359,
+        "objectInteractAction": "Activate",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Drake.",
@@ -10586,12 +10715,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Karuulm Slayer Dungeon, lower level.",
-        "worldX": 1310,
-        "worldY": 10190,
+        "description": "Travel to Mount Karuulm.",
+        "worldX": 1311,
+        "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
+        "worldX": 1311,
+        "worldY": 3807,
+        "worldPlane": 0,
+        "objectId": 34359,
+        "objectInteractAction": "Activate",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Hydra.",
@@ -16245,12 +16383,21 @@
     "travelTip": "Barbarian Assault tele -> falls",
     "guidanceSteps": [
       {
-        "description": "Travel to Ancient Cavern beneath the Baxtorian Falls.",
-        "worldX": 2520,
-        "worldY": 3571,
+        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost.",
+        "worldX": 2512,
+        "worldY": 3509,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15
+      },
+      {
+        "description": "Dive into the whirlpool to enter the Ancient Cavern.",
+        "worldX": 2512,
+        "worldY": 3509,
+        "worldPlane": 0,
+        "objectIds": [25274, 25275],
+        "objectInteractAction": "Dive-in",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill mithril dragons in the Ancient Cavern for ancient page drops.",
@@ -16958,12 +17105,21 @@
     "travelTip": "Xeric's talisman -> Heart",
     "guidanceSteps": [
       {
-        "description": "Travel to Catacombs of Kourend beneath Kourend Castle.",
-        "worldX": 1664,
-        "worldY": 10050,
+        "description": "Travel to Kourend Castle.",
+        "worldX": 1636,
+        "worldY": 3673,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Investigate the Statue of King Rada I to enter the Catacombs.",
+        "worldX": 1636,
+        "worldY": 3673,
+        "worldPlane": 0,
+        "objectId": 27785,
+        "objectInteractAction": "Investigate",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill monsters in the Catacombs of Kourend for dark totem pieces.",
@@ -27196,12 +27352,21 @@
     "travelTip": "Barbarian Outpost -> dive into whirlpool",
     "guidanceSteps": [
       {
-        "description": "Travel to Ancient Cavern, beneath the Baxtorian Falls.",
-        "worldX": 1745,
-        "worldY": 5323,
+        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost.",
+        "worldX": 2512,
+        "worldY": 3509,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Dive into the whirlpool to enter the Ancient Cavern.",
+        "worldX": 2512,
+        "worldY": 3509,
+        "worldPlane": 0,
+        "objectIds": [25274, 25275],
+        "objectInteractAction": "Dive-in",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Travel to the Ancient Cavern beneath Baxtorian Falls and kill mithril dragons.",
@@ -27690,12 +27855,21 @@
     "travelTip": "Barbarian Outpost -> dive into whirlpool",
     "guidanceSteps": [
       {
-        "description": "Travel to Ancient Cavern, beneath the Baxtorian Falls.",
-        "worldX": 1745,
-        "worldY": 5323,
+        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost.",
+        "worldX": 2512,
+        "worldY": 3509,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Dive into the whirlpool to enter the Ancient Cavern.",
+        "worldX": 2512,
+        "worldY": 3509,
+        "worldPlane": 0,
+        "objectIds": [25274, 25275],
+        "objectInteractAction": "Dive-in",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Travel to the Ancient Cavern and kill waterfiends.",
