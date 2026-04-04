@@ -1256,7 +1256,6 @@ public class CollectionLogHelperPlugin extends Plugin
 		objectHighlightOverlay.setTooltipText(step.getDescription());
 
 		itemHighlightOverlay.setTargetItemIds(step.getHighlightItemIds());
-		itemHighlightOverlay.setUseItemOnObject(step.isUseItemOnObject());
 
 		groundItemHighlightOverlay.setTargetGroundItemIds(
 			step.getGroundItemIds() != null ? new HashSet<>(step.getGroundItemIds()) : null);

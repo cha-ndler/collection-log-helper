@@ -50,7 +50,6 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 	private final CollectionLogHelperConfig config;
 
 	private volatile Set<Integer> targetItemIds = Collections.emptySet();
-	private volatile boolean useItemOnObject;
 	private Color cachedOverlayColor;
 	private Color cachedFillColor;
 
@@ -94,14 +93,8 @@ public class ItemHighlightOverlay extends WidgetItemOverlay
 		this.targetItemIds = itemIds != null ? new HashSet<>(itemIds) : Collections.emptySet();
 	}
 
-	public void setUseItemOnObject(boolean value)
-	{
-		this.useItemOnObject = value;
-	}
-
 	public void clearTarget()
 	{
 		this.targetItemIds = Collections.emptySet();
-		this.useItemOnObject = false;
 	}
 }
