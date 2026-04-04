@@ -2691,7 +2691,7 @@
       {
         "itemId": 24491,
         "name": "Little nightmare",
-        "dropRate": 0.00025,
+        "dropRate": 0.00125,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Little_nightmare",
