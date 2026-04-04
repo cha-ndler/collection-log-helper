@@ -57,7 +57,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -76,7 +75,6 @@ import javax.swing.ToolTipManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.runelite.client.game.ItemManager;
-import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.util.AsyncBufferedImage;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
@@ -97,8 +95,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		EFFICIENT("Efficient"),
 		CATEGORY_FOCUS("Category Focus"),
 		SEARCH("Search"),
-		PET_HUNT("Pet Hunt"),
-		PROXIMITY("Proximity");
+		PET_HUNT("Pet Hunt");
 
 		private final String displayName;
 
@@ -139,7 +136,6 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final PlayerBankState bankState;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
-	private final Supplier<WorldPoint> playerLocationSupplier;
 	private final Consumer<AfkFilter> afkFilterUpdater;
 
 	private final JLabel syncStatusLabel;
@@ -200,7 +196,6 @@ public class CollectionLogHelperPanel extends PluginPanel
 		PlayerInventoryState inventoryState,
 		PlayerBankState bankState,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
-		Supplier<WorldPoint> playerLocationSupplier,
 		Consumer<AfkFilter> afkFilterUpdater)
 	{
 		this.config = config;
@@ -217,7 +212,6 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.bankState = bankState;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
-		this.playerLocationSupplier = playerLocationSupplier;
 		this.afkFilterUpdater = afkFilterUpdater;
 
 		setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
@@ -829,9 +823,6 @@ public class CollectionLogHelperPanel extends PluginPanel
 					case PET_HUNT:
 						buildPetHuntView();
 						break;
-					case PROXIMITY:
-						buildProximityView();
-						break;
 				}
 
 				// Restore expanded category state
@@ -1098,185 +1089,6 @@ public class CollectionLogHelperPanel extends PluginPanel
 			{
 				addEmptyStateMessage("All pets obtained!");
 			}
-		}
-	}
-
-	private void buildProximityView()
-	{
-		// cachedPlayerLocation is written on the client thread and read here on the EDT.
-		// volatile guarantees the EDT always sees the latest value.
-		WorldPoint playerLocation = playerLocationSupplier.get();
-		// (0,0,0) occurs briefly during login/logout transitions — treat as not ready
-		if (playerLocation == null
-			|| (playerLocation.getX() == 0 && playerLocation.getY() == 0))
-		{
-			JLabel loginLabel = new JLabel("Log in to use Proximity mode");
-			loginLabel.setFont(FontManager.getRunescapeSmallFont());
-			loginLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-			loginLabel.setAlignmentX(LEFT_ALIGNMENT);
-			loginLabel.setBorder(BorderFactory.createEmptyBorder(8, 4, 8, 4));
-			listContainer.add(loginLabel);
-			return;
-		}
-
-		boolean hideObtained = config.hideObtainedItems();
-		boolean hideLocked = config.hideLockedContent();
-
-		// Iterate all sources directly — do not use rankByEfficiency() which
-		// filters out completed sources and may skip sources with no drop scores.
-		List<SourceDistance> sourceDistances = new ArrayList<>();
-		for (CollectionLogSource source : database.getAllSources())
-		{
-			// Clue sources have no meaningful physical location
-			if (source.getCategory() == CollectionLogCategory.CLUES)
-			{
-				continue;
-			}
-
-			boolean locked = !requirementsChecker.isAccessible(source.getName());
-			if (hideLocked && locked)
-			{
-				continue;
-			}
-
-			WorldPoint sourcePoint = source.getWorldPoint(requirementsChecker);
-			if (sourcePoint == null || (sourcePoint.getX() == 0 && sourcePoint.getY() == 0))
-			{
-				continue;
-			}
-
-			int missingCount = 0;
-			for (CollectionLogItem item : source.getItems())
-			{
-				if (!collectionState.isItemObtained(item.getItemId()))
-				{
-					missingCount++;
-				}
-			}
-			if (missingCount == 0)
-			{
-				continue;
-			}
-
-			// Use plane-agnostic distance so sources remain visible when
-			// the player is on a different plane (e.g. sailing, instances).
-			// distanceTo2D ignores plane and returns Chebyshev distance.
-			// Ref: RuneLite API WorldPoint.distanceTo2D()
-			int distance = playerLocation.distanceTo2D(sourcePoint);
-
-			int maxDistance = config.proximityMaxDistance();
-			if (maxDistance > 0 && distance > maxDistance)
-			{
-				continue;
-			}
-
-			// Compute efficiency score for composite ranking
-			ScoredItem scored = calculator.scoreSource(source, locked);
-			double efficiencyScore = scored != null ? scored.getScore() : 0.0;
-
-			sourceDistances.add(new SourceDistance(source, distance, missingCount, locked,
-				efficiencyScore));
-		}
-
-		if (sourceDistances.isEmpty())
-		{
-			JLabel emptyLabel = new JLabel(
-				"<html>All nearby items obtained.<br>Open your Collection Log to sync.</html>");
-			emptyLabel.setFont(FontManager.getRunescapeSmallFont());
-			emptyLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-			emptyLabel.setAlignmentX(LEFT_ALIGNMENT);
-			emptyLabel.setBorder(BorderFactory.createEmptyBorder(8, 4, 8, 4));
-			listContainer.add(emptyLabel);
-			return;
-		}
-
-		// Sort by composite score (efficiency weighted by proximity) descending
-		sourceDistances.sort(
-			Comparator.comparingDouble((SourceDistance sd) -> sd.compositeScore()).reversed());
-
-		// Top Pick: highest composite-scored accessible (unlocked) source
-		for (SourceDistance sd : sourceDistances)
-		{
-			if (!sd.locked)
-			{
-				String reasoning = String.format("%d missing items, %d tiles away (score: %.1f)",
-					sd.missingCount, sd.distance, sd.compositeScore());
-				ScoredItem topPick = new ScoredItem(sd.source, sd.compositeScore(), sd.missingCount, reasoning, false, sd.compositeScore(), null, sd.compositeScore());
-				listContainer.add(createQuickGuidePanel(topPick));
-				break;
-			}
-		}
-
-		// List sources with their items, grouped by source with distance header
-		for (SourceDistance sd : sourceDistances)
-		{
-			CollectionLogSource source = sd.source;
-
-			// Check whether any items are visible before adding the header,
-			// so we don't render an orphaned header with nothing below it.
-			boolean hasVisibleItems = false;
-			for (CollectionLogItem item : source.getItems())
-			{
-				boolean obtained = collectionState.isItemObtained(item.getItemId());
-				if (!hideObtained || !obtained)
-				{
-					hasVisibleItems = true;
-					break;
-				}
-			}
-			if (!hasVisibleItems)
-			{
-				continue;
-			}
-
-			JLabel sourceHeader = new JLabel(String.format("%s  \u2014  %d tiles  (%.1f)",
-				source.getName(), sd.distance, sd.compositeScore()));
-			sourceHeader.setFont(FontManager.getRunescapeBoldFont());
-			sourceHeader.setForeground(new Color(200, 200, 200));
-			sourceHeader.setAlignmentX(LEFT_ALIGNMENT);
-			sourceHeader.setBorder(BorderFactory.createEmptyBorder(6, 4, 2, 4));
-			sourceHeader.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
-			listContainer.add(sourceHeader);
-
-			boolean onTask = calculator.isOnSlayerTask(source);
-			for (CollectionLogItem item : source.getItems())
-			{
-				boolean obtained = collectionState.isItemObtained(item.getItemId());
-				if (hideObtained && obtained)
-				{
-					continue;
-				}
-				ItemRowPanel row = new ItemRowPanel(item, source, obtained,
-					sd.missingCount, sd.locked, onTask, itemManager,
-					() -> showDetail(item, source));
-				listContainer.add(row);
-			}
-		}
-	}
-
-	/** Carries a source's computed distance and efficiency score for the proximity view. */
-	private static final class SourceDistance
-	{
-		final CollectionLogSource source;
-		final int distance;
-		final int missingCount;
-		final boolean locked;
-		final double efficiencyScore;
-
-		SourceDistance(CollectionLogSource source, int distance, int missingCount, boolean locked,
-			double efficiencyScore)
-		{
-			this.source = source;
-			this.distance = distance;
-			this.missingCount = missingCount;
-			this.locked = locked;
-			this.efficiencyScore = efficiencyScore;
-		}
-
-		/** Composite score: efficiency weighted by proximity. */
-		double compositeScore()
-		{
-			return efficiencyScore / (1.0 + distance / 100.0);
 		}
 	}
 

@@ -252,8 +252,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private GuidanceSequencer guidanceSequencer;
 
-	/** Minimum tile movement before proximity view is refreshed. */
-	private static final int PROXIMITY_REFRESH_TILES = 10;
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -280,10 +278,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	/**
 	 * Player location cached on the client thread each game tick.
-	 * Read by the EDT in buildProximityView() — volatile ensures visibility.
+	 * Read by guidance sequencer and authoring log — volatile ensures visibility.
 	 */
 	private volatile WorldPoint cachedPlayerLocation;
-	private WorldPoint lastProximityLocation;
 
 	/** Tracks the last guidance step index for which a worldMessage was sent (prevents spam on re-notify). */
 	private int lastMessagedStepIndex = -1;
@@ -316,7 +313,6 @@ public class CollectionLogHelperPlugin extends Plugin
 			itemManager, requirementsChecker, dataSyncState, slayerTaskState,
 			slayerStrategyCalculator, playerInventoryState, playerBankState,
 			this::activateGuidance, this::deactivateGuidance,
-			() -> cachedPlayerLocation,
 			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()));
 		panel.setMode(config.defaultMode());
 		panel.setStepCallbacks(
@@ -416,7 +412,6 @@ public class CollectionLogHelperPlugin extends Plugin
 		rankedSourcesDirty = true;
 		cachedRankedSources = null;
 		cachedPlayerLocation = null;
-		lastProximityLocation = null;
 		guidanceOverlay.setShowCollectionLogReminder(false);
 		guidanceOverlay.setShowBankReminder(false);
 		dataSyncState.reset();
@@ -504,7 +499,6 @@ public class CollectionLogHelperPlugin extends Plugin
 			slayerRefreshPending = false;
 			pendingTravelVarbitRefresh = false;
 			cachedPlayerLocation = null;
-			lastProximityLocation = null;
 			guidanceOverlay.setShowCollectionLogReminder(false);
 			guidanceOverlay.setShowBankReminder(false);
 			dataSyncState.reset();
@@ -880,7 +874,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			eventBus.post(new PluginMessage("shortestpath", "path", data));
 		}
 
-		// Cache player location for the EDT's proximity view (client thread only).
+		// Cache player location for guidance sequencer and authoring log (client thread only).
 		// When sailing, the player is inside a WorldEntity whose inner WorldView
 		// returns boat-local coords.  Detect this and transform to real-world
 		// coordinates via WorldEntity.transformToMainWorld().
@@ -896,19 +890,6 @@ public class CollectionLogHelperPlugin extends Plugin
 				guidanceSequencer.onPlayerMoved(cachedPlayerLocation);
 			}
 
-			// Refresh proximity view when player moves significantly
-			if (panel != null
-				&& panel.getCurrentMode() == CollectionLogHelperPanel.Mode.PROXIMITY)
-			{
-				WorldPoint current = cachedPlayerLocation;
-				if (lastProximityLocation == null
-					|| current.distanceTo2D(lastProximityLocation) >= PROXIMITY_REFRESH_TILES)
-				{
-					lastProximityLocation = current;
-					pendingPanelRebuild = true;
-					rankedSourcesDirty = true;
-				}
-			}
 		}
 
 		// Deferred slayer task refresh — varps may not be loaded in the initial
