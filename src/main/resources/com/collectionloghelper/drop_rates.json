@@ -19283,7 +19283,7 @@
       {
         "itemId": 30750,
         "name": "Oathplate helm",
-        "dropRate": 0.000909,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Oathplate_helm"
@@ -19291,7 +19291,7 @@
       {
         "itemId": 30753,
         "name": "Oathplate chest",
-        "dropRate": 0.000909,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Oathplate_chest"
@@ -19299,7 +19299,7 @@
       {
         "itemId": 30756,
         "name": "Oathplate legs",
-        "dropRate": 0.000909,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Oathplate_legs"
@@ -19307,7 +19307,7 @@
       {
         "itemId": 30759,
         "name": "Soulflame horn",
-        "dropRate": 0.001667,
+        "dropRate": 0.003333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Soulflame_horn"
