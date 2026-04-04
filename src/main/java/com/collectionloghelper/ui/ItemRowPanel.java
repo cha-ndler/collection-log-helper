@@ -26,6 +26,8 @@ package com.collectionloghelper.ui;
 
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.data.SkillRequirement;
+import com.collectionloghelper.data.SourceRequirements;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -131,11 +133,42 @@ class ItemRowPanel extends JPanel
 		sourceLabel.setForeground(locked ? LOCKED_TEXT_COLOR : ColorScheme.LIGHT_GRAY_COLOR);
 		centerPanel.add(sourceLabel, BorderLayout.SOUTH);
 
-		// Tooltip with location and travel tip
+		// Tooltip with location, travel tip, and requirements for locked sources
 		String tooltip = source.getDisplayLocation();
 		if (source.getTravelTip() != null && !source.getTravelTip().isEmpty())
 		{
 			tooltip += " — " + source.getTravelTip();
+		}
+		if (locked && source.getRequirements() != null)
+		{
+			StringBuilder reqs = new StringBuilder();
+			SourceRequirements requirements = source.getRequirements();
+			if (requirements.getQuests() != null)
+			{
+				for (String quest : requirements.getQuests())
+				{
+					if (reqs.length() > 0)
+					{
+						reqs.append(", ");
+					}
+					reqs.append(quest);
+				}
+			}
+			if (requirements.getSkills() != null)
+			{
+				for (SkillRequirement skill : requirements.getSkills())
+				{
+					if (reqs.length() > 0)
+					{
+						reqs.append(", ");
+					}
+					reqs.append(skill.getLevel()).append(" ").append(skill.getSkill());
+				}
+			}
+			if (reqs.length() > 0)
+			{
+				tooltip += " | Requires: " + reqs;
+			}
 		}
 		setToolTipText(tooltip);
 		add(centerPanel, BorderLayout.CENTER);

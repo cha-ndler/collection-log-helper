@@ -25,6 +25,7 @@
 package com.collectionloghelper.ui;
 
 import com.collectionloghelper.AfkFilter;
+import com.collectionloghelper.EfficientSortMode;
 import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
@@ -148,6 +149,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<AfkFilter> afkFilterSelector;
+	private final JComboBox<EfficientSortMode> sortSelector;
 	private final JComboBox<CollectionLogCategory> categorySelector;
 	private final JTextField searchField;
 	private final JLabel completionLabel;
@@ -443,6 +445,19 @@ public class CollectionLogHelperPanel extends PluginPanel
 			}
 		});
 		controlsPanel.add(afkFilterSelector);
+
+		// Sort selector (visible in Efficient mode)
+		sortSelector = new JComboBox<>(EfficientSortMode.values());
+		sortSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
+		sortSelector.setVisible(currentMode == Mode.EFFICIENT);
+		sortSelector.addItemListener(e ->
+		{
+			if (e.getStateChange() == ItemEvent.SELECTED)
+			{
+				rebuild();
+			}
+		});
+		controlsPanel.add(sortSelector);
 
 		// Category selector (visible in Category Focus mode)
 		categorySelector = new JComboBox<>(CollectionLogCategory.values());
@@ -897,6 +912,26 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private void buildEfficientView()
 	{
 		List<ScoredItem> scored = calculator.rankByEfficiency();
+		EfficientSortMode sortMode = (EfficientSortMode) sortSelector.getSelectedItem();
+		if (sortMode != null && sortMode != EfficientSortMode.EFFICIENCY)
+		{
+			scored = new ArrayList<>(scored);
+			switch (sortMode)
+			{
+				case KILL_TIME:
+					scored.sort(Comparator.comparingDouble(s -> s.getSource().getKillTimeSeconds()));
+					break;
+				case DROP_RATE:
+					scored.sort(Comparator.comparingDouble(ScoredItem::getDropOnlyScore).reversed());
+					break;
+				case ALPHABETICAL:
+					scored.sort(Comparator.comparing(s -> s.getSource().getName()));
+					break;
+				case ITEMS_REMAINING:
+					scored.sort(Comparator.comparingInt(ScoredItem::getMissingItemCount).reversed());
+					break;
+			}
+		}
 		boolean hideObtained = config.hideObtainedItems();
 
 		if (scored.isEmpty())
@@ -1566,6 +1601,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private void updateControlVisibility()
 	{
 		afkFilterSelector.setVisible(currentMode == Mode.EFFICIENT || currentMode == Mode.PET_HUNT);
+		sortSelector.setVisible(currentMode == Mode.EFFICIENT);
 		categorySelector.setVisible(currentMode == Mode.CATEGORY_FOCUS);
 		searchField.setVisible(currentMode == Mode.SEARCH);
 	}
