@@ -2352,7 +2352,7 @@
         "completionNpcId": 12204
       }
     ],
-    "ironKillTimeSeconds": 290
+    "ironKillTimeSeconds": 300
   },
   {
     "name": "Vardorvis (Awakened)",
@@ -2943,8 +2943,7 @@
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Phosani's Nightmare kill count is:"
       }
-    ],
-    "ironKillTimeSeconds": 480
+    ]
   },
   {
     "name": "Nex",
@@ -5213,7 +5212,7 @@
         "completionChatPattern": "Your completed Chambers of Xeric Challenge Mode count is:"
       }
     ],
-    "ironKillTimeSeconds": 1440
+    "ironKillTimeSeconds": 1500
   },
   {
     "name": "Theatre of Blood",
@@ -6213,7 +6212,7 @@
         "completionChatPattern": "Your completed Tombs of Amascut: Expert Mode count is:"
       }
     ],
-    "ironKillTimeSeconds": 1440
+    "ironKillTimeSeconds": 1500
   },
   {
     "name": "Tombs of Amascut (500 Invocation)",
@@ -6594,8 +6593,7 @@
         "worldPlane": 0
       }
     ],
-    "rewardType": "MIXED",
-    "ironKillTimeSeconds": 514
+    "rewardType": "MIXED"
   },
   {
     "name": "The Gauntlet",
@@ -7537,8 +7535,7 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 6618
       }
-    ],
-    "ironKillTimeSeconds": 55
+    ]
   },
   {
     "name": "Araxxor",
@@ -7823,7 +7820,7 @@
         "completionNpcId": 13011
       }
     ],
-    "ironKillTimeSeconds": 230
+    "ironKillTimeSeconds": 240
   },
   {
     "name": "Tormented Demons",
@@ -19249,7 +19246,7 @@
         "completionNpcId": 14009
       }
     ],
-    "ironKillTimeSeconds": 380
+    "ironKillTimeSeconds": 400
   },
   {
     "name": "Yama",
@@ -19564,7 +19561,7 @@
         "completionNpcId": 12596
       }
     ],
-    "ironKillTimeSeconds": 72
+    "ironKillTimeSeconds": 90
   },
   {
     "name": "Amoxliatl",
@@ -19721,8 +19718,7 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 15626
       }
-    ],
-    "ironKillTimeSeconds": 52
+    ]
   },
   {
     "name": "Shellbane Gryphon",
@@ -19812,8 +19808,7 @@
         "completionNpcId": 14860
       }
     ],
-    "rewardType": "MIXED",
-    "ironKillTimeSeconds": 42
+    "rewardType": "MIXED"
   },
   {
     "name": "Scurrius",
@@ -20028,8 +20023,7 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 7806
       }
-    ],
-    "ironKillTimeSeconds": 52
+    ]
   },
   {
     "name": "Easy Treasure Trails",
