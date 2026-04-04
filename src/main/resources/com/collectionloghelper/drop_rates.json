@@ -2569,9 +2569,6 @@
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
-        "requiredItemIds": [
-          21730
-        ],
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
       },
