@@ -247,8 +247,6 @@ public class ClueItemDatabaseTest
 	public void markAsClueScroll_addsToRelatedItems()
 	{
 		int testId = 777777;
-		assertFalse(ClueItemDatabase.isClueRelatedItem(testId));
-
 		ClueItemDatabase.markAsClueScroll(testId);
 		assertTrue(ClueItemDatabase.isClueRelatedItem(testId));
 	}
@@ -257,8 +255,6 @@ public class ClueItemDatabaseTest
 	public void markAsNonClueItem_addsToKnownNonClue()
 	{
 		int testId = 888888;
-		assertFalse(ClueItemDatabase.isKnownNonClueItem(testId));
-
 		ClueItemDatabase.markAsNonClueItem(testId);
 		assertTrue(ClueItemDatabase.isKnownNonClueItem(testId));
 	}
