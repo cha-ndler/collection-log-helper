@@ -32,13 +32,12 @@ The plugin detects your available teleports and transport methods, then shows on
 - **Spellbook awareness** — Shows Arceuus/Lunar/Ancient teleports only when on that spellbook
 - **Shortest Path integration** — Automatically requests optimal routes from the [Shortest Path](https://github.com/Skretzo/shortest-path) plugin if installed
 
-### Five Display Modes
+### Four Display Modes
 
 - **Efficient** — Missing items ranked by efficiency score (items per expected hour)
 - **Category Focus** — Items grouped by collection log tab (Bosses, Raids, Clues, Minigames, Other) with progress bars and collapsible sections
 - **Search** — Full-text search across all items and sources
 - **Pet Hunt** — Pet drops only, ranked by efficiency
-- **Efficient by Proximity (Experimental)** — Nearby sources ranked by a composite score of efficiency and distance from your current location
 
 ### Automatic Sync
 
@@ -102,9 +101,6 @@ Automatically detects new collection log entries via chat messages and varbit ch
 | Show Hint Arrow | On | Show the yellow hint arrow at the target |
 | Shortest Path Integration | On | Request pathfinding from Shortest Path plugin |
 | Overlay Color | Cyan | Customize the overlay highlight color |
-| **Proximity** | | |
-| Max Distance | 0 (unlimited) | Filter proximity mode results to within this tile distance |
-
 ## Data
 
 All drop data lives in [`src/main/resources/com/collectionloghelper/drop_rates.json`](src/main/resources/com/collectionloghelper/drop_rates.json). 225 sources with 2,111 items covering all bosses, raids, slayer creatures, clue scrolls, minigames, shops, and skilling activities. Each source includes world coordinates, kill times (main + iron), drop table mechanics, quest/skill requirements, NPC IDs, multi-step guidance, and items with OSRS item IDs, decimal drop rates, and wiki links. Kill times are aligned with TempleOSRS EHB rates. Drop rates have been wiki-verified and cross-audited against the Log Hunters Log Adviser spreadsheet.
