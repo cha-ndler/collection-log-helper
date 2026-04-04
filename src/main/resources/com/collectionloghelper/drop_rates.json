@@ -2691,7 +2691,7 @@
       {
         "itemId": 24491,
         "name": "Little nightmare",
-        "dropRate": 0.00025,
+        "dropRate": 0.00125,
         "varbitId": 0,
         "isPet": true,
         "wikiPage": "Little_nightmare",
@@ -9287,12 +9287,12 @@
     },
     "items": [
       {
-        "itemId": 4105,
-        "name": "Mystic gloves (dark)",
+        "itemId": 4103,
+        "name": "Mystic robe bottom (dark)",
         "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mystic_gloves_(dark)"
+        "wikiPage": "Mystic_robe_bottom_(dark)"
       }
     ],
     "locationDescription": "Slayer Tower 1st floor, Morytania",
@@ -9895,7 +9895,7 @@
     ],
     "locationDescription": "Stalker Den, beneath Custodia Pass, Varlamore",
     "travelTip": "Fairy ring AIS -> Auburnvale, enter Stalker Den",
-    "npcId": 14703,
+    "npcId": 14704,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
@@ -9911,10 +9911,10 @@
         "worldX": 1301,
         "worldY": 9820,
         "worldPlane": 0,
-        "npcId": 14703,
+        "npcId": 14704,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 14703
+        "completionNpcId": 14704
       }
     ]
   },
@@ -19283,7 +19283,7 @@
       {
         "itemId": 30750,
         "name": "Oathplate helm",
-        "dropRate": 0.000909,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Oathplate_helm"
@@ -19291,7 +19291,7 @@
       {
         "itemId": 30753,
         "name": "Oathplate chest",
-        "dropRate": 0.000909,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Oathplate_chest"
@@ -19299,7 +19299,7 @@
       {
         "itemId": 30756,
         "name": "Oathplate legs",
-        "dropRate": 0.000909,
+        "dropRate": 0.001667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Oathplate_legs"
@@ -19307,7 +19307,7 @@
       {
         "itemId": 30759,
         "name": "Soulflame horn",
-        "dropRate": 0.001667,
+        "dropRate": 0.003333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Soulflame_horn"
