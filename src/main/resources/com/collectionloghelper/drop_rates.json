@@ -9287,12 +9287,12 @@
     },
     "items": [
       {
-        "itemId": 4105,
-        "name": "Mystic gloves (dark)",
+        "itemId": 4103,
+        "name": "Mystic robe bottom (dark)",
         "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mystic_gloves_(dark)"
+        "wikiPage": "Mystic_robe_bottom_(dark)"
       }
     ],
     "locationDescription": "Slayer Tower 1st floor, Morytania",
@@ -9895,7 +9895,7 @@
     ],
     "locationDescription": "Stalker Den, beneath Custodia Pass, Varlamore",
     "travelTip": "Fairy ring AIS -> Auburnvale, enter Stalker Den",
-    "npcId": 14703,
+    "npcId": 14704,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
@@ -9911,10 +9911,10 @@
         "worldX": 1301,
         "worldY": 9820,
         "worldPlane": 0,
-        "npcId": 14703,
+        "npcId": 14704,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 14703
+        "completionNpcId": 14704
       }
     ]
   },
