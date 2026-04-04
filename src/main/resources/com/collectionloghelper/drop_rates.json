@@ -2808,6 +2808,7 @@
     "worldY": 3218,
     "worldPlane": 0,
     "killTimeSeconds": 480,
+    "ironKillTimeSeconds": 540,
     "requirements": {
       "quests": [
         "PRIEST_IN_PERIL"
@@ -3329,7 +3330,16 @@
         "completionItemId": 22374
       },
       {
-        "description": "Enter Bryophyta's lair and kill her",
+        "description": "Use the Mossy key on the gate to enter Bryophyta's lair.",
+        "worldX": 3174,
+        "worldY": 3435,
+        "worldPlane": 0,
+        "objectId": 32534,
+        "objectInteractAction": "Open",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill Bryophyta.",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
@@ -3377,7 +3387,16 @@
         "completionItemId": 20754
       },
       {
-        "description": "Enter Obor's lair and kill him",
+        "description": "Use the Giant key on the gate to enter Obor's lair.",
+        "worldX": 3097,
+        "worldY": 3468,
+        "worldPlane": 0,
+        "objectId": 29486,
+        "objectInteractAction": "Open",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill Obor.",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -7304,6 +7323,8 @@
         "worldX": 1621,
         "worldY": 3997,
         "worldPlane": 0,
+        "objectId": 29322,
+        "objectInteractAction": "Enter",
         "completionCondition": "MANUAL"
       },
       {
@@ -7497,7 +7518,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use the Quetzal whistle to reach Varlamore, then enter the Fortis Colosseum",
+        "description": "Use the Quetzal whistle to reach Varlamore, then travel to the Fortis Colosseum.",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -7505,7 +7526,16 @@
         "completionDistance": 20
       },
       {
-        "description": "Talk to the Minimus NPC to start a Colosseum run. Fight through 12 waves of increasingly difficult enemies",
+        "description": "Enter the Fortis Colosseum.",
+        "worldX": 1794,
+        "worldY": 3107,
+        "worldPlane": 0,
+        "objectId": 50749,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Talk to Minimus to start a Colosseum run. Fight through 12 waves of increasingly difficult enemies.",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -7697,6 +7727,15 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
+      },
+      {
+        "description": "Enter the Morytania Spider Cave.",
+        "worldX": 3686,
+        "worldY": 3426,
+        "worldPlane": 0,
+        "objectId": 42594,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Araxxor.",
@@ -8247,7 +8286,16 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill revenants in the caves for unique drops. Bring risk \u2014 it's multi-combat Wilderness.",
+        "description": "Enter the Revenant Caves (100k coin fee). Warning: this is Wilderness.",
+        "worldX": 3073,
+        "worldY": 3654,
+        "worldPlane": 0,
+        "objectId": 31555,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill revenants in the caves for unique drops. Bring risk — it's multi-combat Wilderness.",
         "worldX": 3073,
         "worldY": 3654,
         "worldPlane": 0,
@@ -9383,6 +9431,15 @@
         "completionDistance": 15
       },
       {
+        "description": "Enter Mos Le'Harmless Cave.",
+        "worldX": 3740,
+        "worldY": 9373,
+        "worldPlane": 0,
+        "objectId": 3650,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
+      },
+      {
         "description": "Kill Cave Horror.",
         "worldX": 3740,
         "worldY": 9373,
@@ -10510,6 +10567,15 @@
         "completionDistance": 20
       },
       {
+        "description": "Enter Kraken Cove.",
+        "worldX": 2278,
+        "worldY": 3611,
+        "worldPlane": 0,
+        "objectId": 30177,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
+      },
+      {
         "description": "Kill Cave Kraken.",
         "worldX": 2278,
         "worldY": 3611,
@@ -10612,6 +10678,15 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
+      },
+      {
+        "description": "Enter the Morytania Spider Cave.",
+        "worldX": 3657,
+        "worldY": 3407,
+        "worldPlane": 0,
+        "objectId": 42594,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Araxyte.",
@@ -11426,13 +11501,23 @@
         "completionDistance": 20
       },
       {
+        "description": "Pass through the barrier to enter the Guardians of the Rift arena.",
+        "worldX": 3109,
+        "worldY": 3168,
+        "worldPlane": 0,
+        "objectId": 43700,
+        "objectInteractAction": "Pass",
+        "completionCondition": "MANUAL"
+      },
+      {
         "description": "Play Guardians of the Rift minigame rounds to earn rewards.",
         "worldX": 3109,
         "worldY": 3168,
         "worldPlane": 0,
         "npcId": 12179,
         "interactAction": "Talk-to",
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your Guardians of the Rift count is:"
       }
     ],
     "rewardType": "MIXED",
@@ -13431,6 +13516,8 @@
         "worldX": 2440,
         "worldY": 3089,
         "worldPlane": 0,
+        "objectId": 30386,
+        "objectInteractAction": "Enter",
         "dialogOptions": [
           "Saradomin",
           "Zamorak",
@@ -13493,10 +13580,12 @@
         "completionDistance": 20
       },
       {
-        "description": "Talk to Nomad or Soul Wars Portal to join a game.",
+        "description": "Talk to Nomad or enter the Soul Wars Portal to join a game.",
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
+        "objectId": 40474,
+        "objectInteractAction": "Enter",
         "dialogOptions": [
           "Join",
           "Yes"
@@ -20037,6 +20126,15 @@
         "completionDistance": 15
       },
       {
+        "description": "Climb down the manhole to enter Varrock Sewers.",
+        "worldX": 3299,
+        "worldY": 9867,
+        "worldPlane": 0,
+        "objectId": 882,
+        "objectInteractAction": "Climb-down",
+        "completionCondition": "MANUAL"
+      },
+      {
         "description": "Kill Scurrius.",
         "worldX": 3299,
         "worldY": 9867,
@@ -20099,7 +20197,8 @@
       },
       {
         "description": "Complete the Fight Caves and collect your reward.",
-        "completionCondition": "MANUAL",
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your TzTok-Jad kill count is:",
         "worldX": 2439,
         "worldY": 5172,
         "worldPlane": 0
@@ -20156,7 +20255,8 @@
       },
       {
         "description": "Complete the Inferno and collect your reward.",
-        "completionCondition": "MANUAL",
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your TzKal-Zuk kill count is:",
         "worldX": 2496,
         "worldY": 5122,
         "worldPlane": 0
@@ -27628,7 +27728,16 @@
         "completionDistance": 15
       },
       {
-        "description": "Travel to the Corsair Cove Dungeon and kill ogress shamans.",
+        "description": "Enter the Corsair Cove Dungeon.",
+        "worldX": 2459,
+        "worldY": 9488,
+        "worldPlane": 2,
+        "objectId": 31791,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill ogress shamans for unique drops.",
         "worldX": 2459,
         "worldY": 9488,
         "worldPlane": 2,
