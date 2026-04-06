@@ -1359,6 +1359,12 @@ public class CollectionLogHelperPlugin extends Plugin
 			return;
 		}
 
+		// Collect ALL matching tiers so multiple keys highlight multiple chests
+		Set<Integer> matchedObjectIds = new HashSet<>();
+		List<Integer> matchedItemIds = new java.util.ArrayList<>();
+		String tooltipText = null;
+		String action = null;
+
 		for (ItemObjectTier tier : step.getDynamicItemObjectTiers())
 		{
 			if (tier.getItemIds() == null)
@@ -1369,24 +1375,35 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				if (playerInventoryState.hasItem(itemId))
 				{
-					// Found lowest tier with items — override overlays
 					if (tier.getObjectIds() != null && !tier.getObjectIds().isEmpty())
 					{
-						objectHighlightOverlay.setTargetObjectIds(new HashSet<>(tier.getObjectIds()));
-						String action = tier.getInteractAction() != null
+						matchedObjectIds.addAll(tier.getObjectIds());
+					}
+					matchedItemIds.add(itemId);
+					if (action == null)
+					{
+						action = tier.getInteractAction() != null
 							? tier.getInteractAction()
 							: step.getObjectInteractAction();
-						objectHighlightOverlay.setObjectInteractAction(action);
-						objectHighlightOverlay.setTooltipText(
-							tier.getName() != null
-								? action + " " + tier.getName()
-								: step.getDescription());
 					}
-					itemHighlightOverlay.setTargetItemIds(
-						java.util.Collections.singletonList(itemId));
-					return;
+					if (tooltipText == null)
+					{
+						tooltipText = tier.getName() != null
+							? (action + " " + tier.getName())
+							: step.getDescription();
+					}
+					break; // Only match first key per tier (avoid duplicates)
 				}
 			}
+		}
+
+		if (!matchedObjectIds.isEmpty())
+		{
+			objectHighlightOverlay.setTargetObjectIds(matchedObjectIds);
+			objectHighlightOverlay.setObjectInteractAction(action);
+			objectHighlightOverlay.setTooltipText(
+				matchedItemIds.size() > 1 ? step.getDescription() : tooltipText);
+			itemHighlightOverlay.setTargetItemIds(matchedItemIds);
 		}
 	}
 

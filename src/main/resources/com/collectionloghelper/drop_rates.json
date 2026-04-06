@@ -12264,36 +12264,31 @@
         "description": "Navigate through the catacombs and open chests with your shade keys — lowest tier key highlighted first",
         "objectInteractAction": "Open",
         "dynamicItemObjectTiers": [
-          {
-            "name": "Bronze chest",
-            "itemIds": [3450, 3451, 3452, 3453, 3454],
-            "objectIds": [4111, 4112, 4113, 4114, 4115],
-            "interactAction": "Open"
-          },
-          {
-            "name": "Steel chest",
-            "itemIds": [3455, 3456, 3457, 3458, 3459],
-            "objectIds": [4116, 4117, 4118, 4119, 4120],
-            "interactAction": "Open"
-          },
-          {
-            "name": "Black chest",
-            "itemIds": [3460, 3461, 3462, 3463, 3464],
-            "objectIds": [4121, 4122, 4123, 4124, 4125],
-            "interactAction": "Open"
-          },
-          {
-            "name": "Silver chest",
-            "itemIds": [3465, 3466, 3467, 3468, 3469],
-            "objectIds": [4126, 4127, 4128, 4129, 4130],
-            "interactAction": "Open"
-          },
-          {
-            "name": "Gold chest",
-            "itemIds": [25424, 25426, 25428, 25430, 25432],
-            "objectIds": [41212, 41213, 41214, 41215, 41216],
-            "interactAction": "Open"
-          }
+          { "name": "Bronze chest (red)", "itemIds": [3450], "objectIds": [4111], "interactAction": "Open" },
+          { "name": "Bronze chest (brown)", "itemIds": [3451], "objectIds": [4112], "interactAction": "Open" },
+          { "name": "Bronze chest (crimson)", "itemIds": [3452], "objectIds": [4113], "interactAction": "Open" },
+          { "name": "Bronze chest (black)", "itemIds": [3453], "objectIds": [4114], "interactAction": "Open" },
+          { "name": "Bronze chest (purple)", "itemIds": [3454], "objectIds": [4115], "interactAction": "Open" },
+          { "name": "Steel chest (red)", "itemIds": [3455], "objectIds": [4116], "interactAction": "Open" },
+          { "name": "Steel chest (brown)", "itemIds": [3456], "objectIds": [4117], "interactAction": "Open" },
+          { "name": "Steel chest (crimson)", "itemIds": [3457], "objectIds": [4118], "interactAction": "Open" },
+          { "name": "Steel chest (black)", "itemIds": [3458], "objectIds": [4119], "interactAction": "Open" },
+          { "name": "Steel chest (purple)", "itemIds": [3459], "objectIds": [4120], "interactAction": "Open" },
+          { "name": "Black chest (red)", "itemIds": [3460], "objectIds": [4121], "interactAction": "Open" },
+          { "name": "Black chest (brown)", "itemIds": [3461], "objectIds": [4122], "interactAction": "Open" },
+          { "name": "Black chest (crimson)", "itemIds": [3462], "objectIds": [4123], "interactAction": "Open" },
+          { "name": "Black chest (black)", "itemIds": [3463], "objectIds": [4124], "interactAction": "Open" },
+          { "name": "Black chest (purple)", "itemIds": [3464], "objectIds": [4125], "interactAction": "Open" },
+          { "name": "Silver chest (red)", "itemIds": [3465], "objectIds": [4126], "interactAction": "Open" },
+          { "name": "Silver chest (brown)", "itemIds": [3466], "objectIds": [4127], "interactAction": "Open" },
+          { "name": "Silver chest (crimson)", "itemIds": [3467], "objectIds": [4128], "interactAction": "Open" },
+          { "name": "Silver chest (black)", "itemIds": [3468], "objectIds": [4129], "interactAction": "Open" },
+          { "name": "Silver chest (purple)", "itemIds": [3469], "objectIds": [4130], "interactAction": "Open" },
+          { "name": "Gold chest (red)", "itemIds": [25424], "objectIds": [41212], "interactAction": "Open" },
+          { "name": "Gold chest (brown)", "itemIds": [25426], "objectIds": [41213], "interactAction": "Open" },
+          { "name": "Gold chest (crimson)", "itemIds": [25428], "objectIds": [41214], "interactAction": "Open" },
+          { "name": "Gold chest (black)", "itemIds": [25430], "objectIds": [41215], "interactAction": "Open" },
+          { "name": "Gold chest (purple)", "itemIds": [25432], "objectIds": [41216], "interactAction": "Open" }
         ],
         "completionCondition": "MANUAL",
         "loopBackToStep": 2,
