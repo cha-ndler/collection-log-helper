@@ -9099,14 +9099,6 @@
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Black_boots"
-      },
-      {
-        "itemId": 4101,
-        "name": "Mystic robe top (dark)",
-        "dropRate": 0.001953,
-        "varbitId": 0,
-        "isPet": false,
-        "wikiPage": "Mystic_robe_top_(dark)"
       }
     ],
     "locationDescription": "Slayer Tower 1st floor, Morytania",
@@ -10010,12 +10002,12 @@
         "wikiPage": "Adamant_boots"
       },
       {
-        "itemId": 4103,
-        "name": "Mystic robe bottom (dark)",
+        "itemId": 4101,
+        "name": "Mystic robe top (dark)",
         "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
-        "wikiPage": "Mystic_robe_bottom_(dark)"
+        "wikiPage": "Mystic_robe_top_(dark)"
       }
     ],
     "locationDescription": "Slayer Tower top floor, Morytania",
@@ -19886,7 +19878,7 @@
       {
         "itemId": 30088,
         "name": "Huasca seed",
-        "dropRate": 0.0341,
+        "dropRate": 0.017241,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Huasca_seed"
