@@ -312,6 +312,22 @@ public class GuidanceSequencer
 		}
 
 		GuidanceStep step = getRawCurrentStep();
+
+		// Auto-advance if skipIfHasAnyItemIds is now satisfied (e.g., key just entered inventory)
+		if (step != null && step.getSkipIfHasAnyItemIds() != null)
+		{
+			for (int itemId : step.getSkipIfHasAnyItemIds())
+			{
+				if (inventoryState.hasItem(itemId))
+				{
+					log.info("Step {} auto-advancing (skipIfHasAnyItemIds satisfied: item {})",
+						currentIndex + 1, itemId);
+					advanceStep();
+					return;
+				}
+			}
+		}
+
 		if (step != null && step.getCompletionItemId() > 0)
 		{
 			if (step.getCompletionCondition() == CompletionCondition.INVENTORY_HAS_ITEM
@@ -616,6 +632,18 @@ public class GuidanceSequencer
 
 	private boolean isStepAlreadySatisfied(GuidanceStep step)
 	{
+		// OR-logic skip: if inventory has ANY of these items, skip the step
+		if (step.getSkipIfHasAnyItemIds() != null && !step.getSkipIfHasAnyItemIds().isEmpty())
+		{
+			for (int itemId : step.getSkipIfHasAnyItemIds())
+			{
+				if (inventoryState.hasItem(itemId))
+				{
+					return true;
+				}
+			}
+		}
+
 		if (step.getCompletionCondition() == null)
 		{
 			return false;
@@ -674,6 +702,8 @@ public class GuidanceSequencer
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
