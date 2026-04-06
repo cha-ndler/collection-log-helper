@@ -12225,45 +12225,41 @@
         "independent": true
       }
     ],
-    "locationDescription": "Shades catacombs beneath Mort'ton",
-    "travelTip": "Minigame teleport -> Shades of Mort'ton, or Mort'ton teleport (Arceuus)",
+    "locationDescription": "Funeral pyres and Shade Catacombs in Mort'ton",
+    "travelTip": "Minigame teleport -> Shades of Mort'ton, or Mort'ton teleport scroll",
     "guidanceSteps": [
       {
-        "description": "Teleport to Barrows and run south to Mort'ton",
-        "worldX": 3459,
-        "worldY": 3299,
+        "description": "Teleport to Mort'ton using the minigame teleport or a Mort'ton teleport scroll",
+        "worldX": 3490,
+        "worldY": 3287,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
       },
       {
-        "description": "Collect shade remains from the Shades in Mort'ton or bring your own",
-        "worldX": 3459,
-        "worldY": 3299,
-        "worldPlane": 0,
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Use sacred oil on logs to make pyre logs, then burn shades on the funeral pyres to receive shade keys",
-        "worldX": 3502,
+        "description": "Burn shade remains on the funeral pyres south-east of the temple to receive shade keys",
+        "worldX": 3505,
         "worldY": 3277,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Enter the Shades catacombs via the trapdoor south of the general store",
-        "worldX": 3492,
-        "worldY": 3279,
+        "description": "Enter the Shade Catacombs through the wooden doors west of the temple",
+        "worldX": 3484,
+        "worldY": 3303,
         "worldPlane": 0,
-        "objectId": 4005,
+        "objectId": 4133,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Use your shade keys on the locked chests deeper in the catacombs for collection log drops",
-        "worldX": 3459,
-        "worldY": 3299,
+        "description": "Navigate through the catacombs and use your shade keys on the gold chests for collection log drops",
+        "worldX": 3507,
+        "worldY": 9682,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "objectId": 41212,
+        "completionCondition": "MANUAL",
+        "loopBackToStep": 1,
+        "loopCount": 50
       }
     ]
   },
