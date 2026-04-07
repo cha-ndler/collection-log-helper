@@ -12221,36 +12221,77 @@
     "travelTip": "Minigame teleport -> Shades of Mort'ton, or Mort'ton teleport scroll",
     "guidanceSteps": [
       {
-        "description": "Teleport to Mort'ton using the minigame teleport or a Mort'ton teleport scroll",
-        "worldX": 3490,
-        "worldY": 3287,
+        "description": "Travel to Mort'ton",
+        "worldX": 3506,
+        "worldY": 3310,
         "worldPlane": 0,
+        "travelTip": "Minigame teleport -> Shades of Mort'ton | Barrows teleport + run south | Mort'ton teleport scroll",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 30
       },
       {
-        "description": "Burn shade remains on the funeral pyres south-east of the temple to receive shade keys",
-        "worldX": 3505,
-        "worldY": 3277,
+        "description": "Burn shade remains on the funeral pyres",
+        "worldX": 3507,
+        "worldY": 3275,
         "worldPlane": 0,
+        "objectId": 4093,
+        "objectInteractAction": "Build",
+        "requiredItemIds": [590],
+        "skipIfHasAnyItemIds": [3450, 3451, 3452, 3453, 3454, 3455, 3456, 3457, 3458, 3459, 3460, 3461, 3462, 3463, 3464, 3465, 3466, 3467, 3468, 3469, 25424, 25426, 25428, 25430, 25432],
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "You attempt to light the funeral pyre"
+      },
+      {
+        "description": "Pick up your shade key from the reward pillar",
+        "worldX": 3505,
+        "worldY": 3279,
+        "worldPlane": 0,
+        "groundItemIds": [3450, 3451, 3452, 3453, 3454, 3455, 3456, 3457, 3458, 3459, 3460, 3461, 3462, 3463, 3464, 3465, 3466, 3467, 3468, 3469, 25424, 25426, 25428, 25430, 25432],
+        "skipIfHasAnyItemIds": [3450, 3451, 3452, 3453, 3454, 3455, 3456, 3457, 3458, 3459, 3460, 3461, 3462, 3463, 3464, 3465, 3466, 3467, 3468, 3469, 25424, 25426, 25428, 25430, 25432],
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Enter the Shade Catacombs through the wooden doors west of the temple",
+        "description": "Enter the Shade Catacombs through the wooden doors north-west of the temple",
         "worldX": 3484,
-        "worldY": 3303,
+        "worldY": 3320,
         "worldPlane": 0,
         "objectId": 4133,
-        "completionCondition": "MANUAL"
+        "objectInteractAction": "Open",
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "You use your Shade key"
       },
       {
-        "description": "Navigate through the catacombs and use your shade keys on the gold chests for collection log drops",
-        "worldX": 3507,
-        "worldY": 9682,
-        "worldPlane": 0,
-        "objectId": 41212,
+        "description": "Open chests matching your shade keys",
+        "objectInteractAction": "Open",
+        "dynamicItemObjectTiers": [
+          { "name": "Bronze chest (red)", "itemIds": [3450], "objectIds": [4111], "interactAction": "Open" },
+          { "name": "Bronze chest (brown)", "itemIds": [3451], "objectIds": [4112], "interactAction": "Open" },
+          { "name": "Bronze chest (crimson)", "itemIds": [3452], "objectIds": [4113], "interactAction": "Open" },
+          { "name": "Bronze chest (black)", "itemIds": [3453], "objectIds": [4114], "interactAction": "Open" },
+          { "name": "Bronze chest (purple)", "itemIds": [3454], "objectIds": [4115], "interactAction": "Open" },
+          { "name": "Steel chest (red)", "itemIds": [3455], "objectIds": [4116], "interactAction": "Open" },
+          { "name": "Steel chest (brown)", "itemIds": [3456], "objectIds": [4117], "interactAction": "Open" },
+          { "name": "Steel chest (crimson)", "itemIds": [3457], "objectIds": [4118], "interactAction": "Open" },
+          { "name": "Steel chest (black)", "itemIds": [3458], "objectIds": [4119], "interactAction": "Open" },
+          { "name": "Steel chest (purple)", "itemIds": [3459], "objectIds": [4120], "interactAction": "Open" },
+          { "name": "Black chest (red)", "itemIds": [3460], "objectIds": [4121], "interactAction": "Open" },
+          { "name": "Black chest (brown)", "itemIds": [3461], "objectIds": [4122], "interactAction": "Open" },
+          { "name": "Black chest (crimson)", "itemIds": [3462], "objectIds": [4123], "interactAction": "Open" },
+          { "name": "Black chest (black)", "itemIds": [3463], "objectIds": [4124], "interactAction": "Open" },
+          { "name": "Black chest (purple)", "itemIds": [3464], "objectIds": [4125], "interactAction": "Open" },
+          { "name": "Silver chest (red)", "itemIds": [3465], "objectIds": [4126], "interactAction": "Open" },
+          { "name": "Silver chest (brown)", "itemIds": [3466], "objectIds": [4127], "interactAction": "Open" },
+          { "name": "Silver chest (crimson)", "itemIds": [3467], "objectIds": [4128], "interactAction": "Open" },
+          { "name": "Silver chest (black)", "itemIds": [3468], "objectIds": [4129], "interactAction": "Open" },
+          { "name": "Silver chest (purple)", "itemIds": [3469], "objectIds": [4130], "interactAction": "Open" },
+          { "name": "Gold chest (red)", "itemIds": [25424], "objectIds": [41212], "interactAction": "Open" },
+          { "name": "Gold chest (brown)", "itemIds": [25426], "objectIds": [41213], "interactAction": "Open" },
+          { "name": "Gold chest (crimson)", "itemIds": [25428], "objectIds": [41214], "interactAction": "Open" },
+          { "name": "Gold chest (black)", "itemIds": [25430], "objectIds": [41215], "interactAction": "Open" },
+          { "name": "Gold chest (purple)", "itemIds": [25432], "objectIds": [41216], "interactAction": "Open" }
+        ],
         "completionCondition": "MANUAL",
-        "loopBackToStep": 1,
+        "loopBackToStep": 2,
         "loopCount": 50
       }
     ]
