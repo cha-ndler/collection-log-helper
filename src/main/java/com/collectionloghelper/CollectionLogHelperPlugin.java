@@ -33,6 +33,7 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
+import com.collectionloghelper.data.ItemObjectTier;
 import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
 import com.collectionloghelper.data.RequirementsChecker;
@@ -56,6 +57,7 @@ import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -680,6 +682,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				if (guidanceSequencer.isActive())
 				{
 					guidanceSequencer.onInventoryChanged();
+					applyDynamicItemObjectOverlays();
 				}
 			}
 		}
@@ -1336,6 +1339,72 @@ public class CollectionLogHelperPlugin extends Plugin
 					eventBus.post(new PluginMessage("shortestpath", "clear"));
 				}
 			});
+		}
+
+		// Dynamic overlay override for Shades of Mort'ton key/chest highlighting
+		applyDynamicItemObjectOverlays();
+	}
+
+	/**
+	 * Dynamically overrides overlays when the current step has dynamicItemObjectTiers.
+	 * Scans inventory for the lowest tier with matching items, then highlights
+	 * that tier's objects and the matching item. Called on step change and on
+	 * inventory change while a guidance sequence is active.
+	 */
+	private void applyDynamicItemObjectOverlays()
+	{
+		GuidanceStep step = guidanceSequencer.getRawCurrentStep();
+		if (step == null || step.getDynamicItemObjectTiers() == null
+			|| step.getDynamicItemObjectTiers().isEmpty())
+		{
+			return;
+		}
+
+		// Collect ALL matching tiers so multiple keys highlight multiple chests
+		Set<Integer> matchedObjectIds = new HashSet<>();
+		List<Integer> matchedItemIds = new ArrayList<>();
+		String tooltipText = null;
+		String action = null;
+
+		for (ItemObjectTier tier : step.getDynamicItemObjectTiers())
+		{
+			if (tier.getItemIds() == null)
+			{
+				continue;
+			}
+			for (int itemId : tier.getItemIds())
+			{
+				if (playerInventoryState.hasItem(itemId))
+				{
+					if (tier.getObjectIds() != null && !tier.getObjectIds().isEmpty())
+					{
+						matchedObjectIds.addAll(tier.getObjectIds());
+					}
+					matchedItemIds.add(itemId);
+					if (action == null)
+					{
+						action = tier.getInteractAction() != null
+							? tier.getInteractAction()
+							: step.getObjectInteractAction();
+					}
+					if (tooltipText == null)
+					{
+						tooltipText = tier.getName() != null
+							? (action + " " + tier.getName())
+							: step.getDescription();
+					}
+					break; // Only match first key per tier (avoid duplicates)
+				}
+			}
+		}
+
+		if (!matchedObjectIds.isEmpty())
+		{
+			objectHighlightOverlay.setTargetObjectIds(matchedObjectIds);
+			objectHighlightOverlay.setObjectInteractAction(action);
+			objectHighlightOverlay.setTooltipText(
+				matchedItemIds.size() > 1 ? step.getDescription() : tooltipText);
+			itemHighlightOverlay.setTargetItemIds(matchedItemIds);
 		}
 	}
 

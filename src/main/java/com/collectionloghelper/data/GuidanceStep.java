@@ -133,6 +133,20 @@ public class GuidanceStep
 	/** Total number of loop iterations before advancing past this step (0 = no loop). */
 	int loopCount;
 
+	/**
+	 * Item IDs that trigger auto-skip when ANY of them is in inventory (OR logic).
+	 * Used to skip steps like "burn shade remains" when the player already has keys.
+	 */
+	List<Integer> skipIfHasAnyItemIds;
+
+	/**
+	 * Prioritized item-to-object tiers for dynamic overlay resolution. When non-null,
+	 * the plugin scans inventory for the lowest tier with matching items and overrides
+	 * the object and item highlight overlays to target that tier's objects and items.
+	 * Tiers are evaluated in list order (first = lowest priority to use first).
+	 */
+	List<ItemObjectTier> dynamicItemObjectTiers;
+
 	/** Zone bounds [minX, minY, maxX, maxY, plane] for ARRIVE_AT_ZONE completion (null if not a zone step). */
 	int[] completionZone;
 
@@ -275,6 +289,8 @@ public class GuidanceStep
 			this.highlightWidgetIds,
 			this.loopBackToStep,
 			this.loopCount,
+			this.skipIfHasAnyItemIds,
+			this.dynamicItemObjectTiers,
 			this.completionZone,
 			null // merged steps don't carry alternatives (already resolved)
 		);

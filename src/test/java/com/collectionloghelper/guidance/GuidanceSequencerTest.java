@@ -105,6 +105,8 @@ public class GuidanceSequencerTest
 			null,           // objectFilterTiles
 			null,           // highlightWidgetIds
 			0, 0,           // loopBackToStep, loopCount
+			null,           // skipIfHasAnyItemIds
+			null,           // dynamicItemObjectTiers
 			null,           // completionZone
 			null            // conditionalAlternatives
 		);
@@ -130,6 +132,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
@@ -155,6 +159,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
@@ -180,6 +186,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
@@ -205,6 +213,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
@@ -230,6 +240,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
@@ -255,6 +267,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
@@ -281,6 +295,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			loopBackToStep, loopCount,
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
@@ -306,6 +322,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
@@ -331,6 +349,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
@@ -356,6 +376,8 @@ public class GuidanceSequencerTest
 			null,  // objectFilterTiles
 			null,  // highlightWidgetIds
 			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null   // conditionalAlternatives
 		);
@@ -721,6 +743,8 @@ public class GuidanceSequencerTest
 			false,
 			0, null, null,
 			0, 0,
+			null,
+			null,
 			null,
 			null
 		);
@@ -1178,6 +1202,8 @@ public class GuidanceSequencerTest
 			null,
 			0, 0,
 			null,
+			null,
+			null,
 			alternatives
 		);
 	}
@@ -1397,6 +1423,8 @@ public class GuidanceSequencerTest
 			null,
 			null,
 			0, 0,
+			null,
+			null,
 			null,
 			Collections.emptyList()  // empty list of alternatives
 		);
