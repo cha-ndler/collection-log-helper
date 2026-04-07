@@ -10118,12 +10118,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Stalker Den, beneath Custodia Pass, Varlamore.",
-        "worldX": 1301,
-        "worldY": 9820,
+        "description": "Travel to the Stalker Den entrance south of Custodia Pass, Varlamore",
+        "worldX": 1324,
+        "worldY": 3364,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Stalker Den through the cave entrance",
+        "worldX": 1324,
+        "worldY": 3364,
+        "worldPlane": 0,
+        "objectId": 57279,
+        "objectInteractAction": "Squeeze-through",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Custodian Stalker.",
@@ -27857,6 +27866,8 @@
     ],
     "locationDescription": "Zemouregal's Fort, north of Varrock",
     "travelTip": "Varrock teleport -> north to fort",
+    "npcId": 14113,
+    "interactAction": "Attack",
     "requirements": {
       "quests": [
         "DEFENDER_OF_VARROCK"
@@ -27872,11 +27883,14 @@
         "completionDistance": 20
       },
       {
-        "description": "Travel to Zemouregal's Fort and kill armoured zombies.",
+        "description": "Kill armoured zombies inside the fort.",
         "worldX": 3566,
         "worldY": 3390,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "npcId": 14113,
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 14113
       }
     ],
     "mutuallyExclusiveSources": [
