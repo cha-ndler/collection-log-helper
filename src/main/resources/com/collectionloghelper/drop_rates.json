@@ -153,7 +153,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2215
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Commander Zilyana",
@@ -309,7 +310,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2205
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "K'ril Tsutsaroth",
@@ -465,7 +467,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 3129
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Kree'arra",
@@ -621,7 +624,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 3162
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Zulrah",
@@ -761,7 +765,8 @@
           2044
         ]
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Vorkath",
@@ -979,7 +984,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 5862
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Alchemical Hydra",
@@ -1140,7 +1146,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase \u00e2\u20ac\u201d walk over the correct vent matching the Hydra's colour",
+        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase — walk over the correct vent matching the Hydra's colour",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
@@ -1149,7 +1155,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 8621
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Corporeal Beast",
@@ -1259,7 +1266,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 319
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Kalphite Queen",
@@ -1370,7 +1378,8 @@
         "completionNpcId": 965
       }
     ],
-    "ironKillTimeSeconds": 144
+    "ironKillTimeSeconds": 144,
+    "afkLevel": 0
   },
   {
     "name": "Phantom Muspah",
@@ -1462,7 +1471,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12077
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Duke Sucellus",
@@ -1593,7 +1603,8 @@
         "completionNpcId": 12191
       }
     ],
-    "ironKillTimeSeconds": 150
+    "ironKillTimeSeconds": 150,
+    "afkLevel": 0
   },
   {
     "name": "The Leviathan",
@@ -1724,7 +1735,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12214
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "The Whisperer",
@@ -1855,7 +1867,8 @@
         "completionNpcId": 12204
       }
     ],
-    "ironKillTimeSeconds": 210
+    "ironKillTimeSeconds": 210,
+    "afkLevel": 0
   },
   {
     "name": "Vardorvis",
@@ -1986,7 +1999,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12223
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Duke Sucellus (Awakened)",
@@ -2117,7 +2131,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12191
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "The Leviathan (Awakened)",
@@ -2248,7 +2263,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12214
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "The Whisperer (Awakened)",
@@ -2379,7 +2395,8 @@
         "completionNpcId": 12204
       }
     ],
-    "ironKillTimeSeconds": 300
+    "ironKillTimeSeconds": 300,
+    "afkLevel": 0
   },
   {
     "name": "Vardorvis (Awakened)",
@@ -2510,7 +2527,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12223
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Grotesque Guardians",
@@ -2638,7 +2656,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 7851
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "The Nightmare",
@@ -2801,7 +2820,8 @@
         "completionChatPattern": "Your Nightmare kill count is:"
       }
     ],
-    "ironKillTimeSeconds": 360
+    "ironKillTimeSeconds": 360,
+    "afkLevel": 0
   },
   {
     "name": "Phosani's Nightmare",
@@ -2982,7 +3002,8 @@
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Phosani's Nightmare kill count is:"
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Nex",
@@ -3110,7 +3131,10 @@
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
-        "objectIds": [42840, 42841],
+        "objectIds": [
+          42840,
+          42841
+        ],
         "objectInteractAction": "Open",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 30
@@ -3134,7 +3158,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 11278
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Sarachnis",
@@ -3488,7 +3513,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2267
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Dagannoth Prime",
@@ -3564,7 +3590,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2266
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Dagannoth Supreme",
@@ -3640,7 +3667,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2265
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Kraken",
@@ -3650,7 +3678,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 42,
     "ironKillTimeSeconds": 45,
-    "afkLevel": 1,
+    "afkLevel": 2,
     "requirements": {
       "skills": [
         {
@@ -3842,7 +3870,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 499
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Abyssal Sire",
@@ -3972,7 +4001,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 5886
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "King Black Dragon",
@@ -4120,7 +4150,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2054
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Scorpia",
@@ -4130,7 +4161,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 28,
     "ironKillTimeSeconds": 45,
-    "afkLevel": 1,
+    "afkLevel": 0,
     "items": [
       {
         "itemId": 11930,
@@ -4207,7 +4238,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 36,
     "ironKillTimeSeconds": 45,
-    "afkLevel": 1,
+    "afkLevel": 0,
     "items": [
       {
         "itemId": 11928,
@@ -4351,7 +4382,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 6610
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Vet'ion",
@@ -4451,7 +4483,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 6611
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Callisto",
@@ -4543,7 +4576,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 6609
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Demonic gorillas",
@@ -4640,7 +4674,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 7144
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Lizardman shaman",
@@ -4769,7 +4804,8 @@
         "completionNpcId": 7286
       }
     ],
-    "ironKillTimeSeconds": 3600
+    "ironKillTimeSeconds": 3600,
+    "afkLevel": 0
   },
   {
     "name": "Hespori",
@@ -5018,7 +5054,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room \u00e2\u20ac\u201d combat, puzzle, and resource rooms \u00e2\u20ac\u201d on your way to the final boss",
+        "description": "Enter the raid and scout rooms. Complete each room — combat, puzzle, and resource rooms — on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5033,7 +5069,8 @@
         "completionChatPattern": "Your completed Chambers of Xeric count is:"
       }
     ],
-    "ironKillTimeSeconds": 1029
+    "ironKillTimeSeconds": 1029,
+    "afkLevel": 0
   },
   {
     "name": "Chambers of Xeric (Challenge Mode)",
@@ -5273,7 +5310,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room \u00e2\u20ac\u201d combat, puzzle, and resource rooms \u00e2\u20ac\u201d on your way to the final boss",
+        "description": "Enter the raid and scout rooms. Complete each room — combat, puzzle, and resource rooms — on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5288,7 +5325,8 @@
         "completionChatPattern": "Your completed Chambers of Xeric Challenge Mode count is:"
       }
     ],
-    "ironKillTimeSeconds": 1500
+    "ironKillTimeSeconds": 1500,
+    "afkLevel": 0
   },
   {
     "name": "Theatre of Blood",
@@ -5511,7 +5549,8 @@
     "ironKillTimeSeconds": 1440,
     "mutuallyExclusiveSources": [
       "Theatre of Blood (Hard Mode)"
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Theatre of Blood (Hard Mode)",
@@ -5712,7 +5751,8 @@
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your completed Theatre of Blood: Hard Mode count is:"
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Tombs of Amascut",
@@ -6002,7 +6042,8 @@
         "completionChatPattern": "Your completed Tombs of Amascut count is:"
       }
     ],
-    "ironKillTimeSeconds": 1200
+    "ironKillTimeSeconds": 1200,
+    "afkLevel": 0
   },
   {
     "name": "Tombs of Amascut (300 Invocation)",
@@ -6292,7 +6333,8 @@
         "completionChatPattern": "Your completed Tombs of Amascut: Expert Mode count is:"
       }
     ],
-    "ironKillTimeSeconds": 1500
+    "ironKillTimeSeconds": 1500,
+    "afkLevel": 0
   },
   {
     "name": "Tombs of Amascut (500 Invocation)",
@@ -6582,7 +6624,8 @@
         "completionChatPattern": "Your completed Tombs of Amascut: Expert Mode count is:"
       }
     ],
-    "ironKillTimeSeconds": 1680
+    "ironKillTimeSeconds": 1680,
+    "afkLevel": 0
   },
   {
     "name": "Corrupted Gauntlet",
@@ -6673,7 +6716,8 @@
         "worldPlane": 0
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "afkLevel": 0
   },
   {
     "name": "The Gauntlet",
@@ -6764,7 +6808,8 @@
       }
     ],
     "rewardType": "MIXED",
-    "ironKillTimeSeconds": 450
+    "ironKillTimeSeconds": 450,
+    "afkLevel": 0
   },
   {
     "name": "Barrows",
@@ -7556,7 +7601,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks \u00e2\u20ac\u201d learn the mechanics for consistent clears",
+        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks — learn the mechanics for consistent clears",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -7567,7 +7612,8 @@
       }
     ],
     "rewardType": "MIXED",
-    "ironKillTimeSeconds": 600
+    "ironKillTimeSeconds": 600,
+    "afkLevel": 0
   },
   {
     "name": "Crazy archaeologist",
@@ -7576,7 +7622,7 @@
     "worldY": 3696,
     "worldPlane": 0,
     "killTimeSeconds": 48,
-    "afkLevel": 1,
+    "afkLevel": 0,
     "items": [
       {
         "itemId": 11929,
@@ -7761,7 +7807,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 13668
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Perilous Moons",
@@ -7984,7 +8031,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 13599
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Beginner Treasure Trails",
@@ -8163,7 +8211,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Revenants",
@@ -8172,7 +8221,7 @@
     "worldY": 3654,
     "worldPlane": 0,
     "killTimeSeconds": 14,
-    "afkLevel": 1,
+    "afkLevel": 0,
     "items": [
       {
         "itemId": 21817,
@@ -9670,7 +9719,7 @@
     "worldY": 2968,
     "worldPlane": 0,
     "killTimeSeconds": 25,
-    "afkLevel": 1,
+    "afkLevel": 0,
     "requirements": {
       "skills": [
         {
@@ -10998,7 +11047,7 @@
     "worldY": 3955,
     "worldPlane": 0,
     "killTimeSeconds": 2,
-    "afkLevel": 1,
+    "afkLevel": 0,
     "items": [
       {
         "itemId": 24288,
@@ -11119,7 +11168,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 2,
     "ironKillTimeSeconds": 120,
-    "afkLevel": 1,
+    "afkLevel": 0,
     "items": [
       {
         "itemId": 29455,
@@ -11157,7 +11206,7 @@
     "worldY": 3387,
     "worldPlane": 0,
     "killTimeSeconds": 480,
-    "afkLevel": 1,
+    "afkLevel": 0,
     "requirements": {
       "quests": [
         "SINS_OF_THE_FATHER"
@@ -12113,7 +12162,8 @@
       }
     ],
     "rewardType": "SHOP",
-    "pointsPerHour": 10
+    "pointsPerHour": 10,
+    "afkLevel": 0
   },
   {
     "name": "Shades of Mort'ton",
@@ -12268,8 +12318,36 @@
         "worldPlane": 0,
         "objectId": 4093,
         "objectInteractAction": "Build",
-        "requiredItemIds": [590],
-        "skipIfHasAnyItemIds": [3450, 3451, 3452, 3453, 3454, 3455, 3456, 3457, 3458, 3459, 3460, 3461, 3462, 3463, 3464, 3465, 3466, 3467, 3468, 3469, 25424, 25426, 25428, 25430, 25432],
+        "requiredItemIds": [
+          590
+        ],
+        "skipIfHasAnyItemIds": [
+          3450,
+          3451,
+          3452,
+          3453,
+          3454,
+          3455,
+          3456,
+          3457,
+          3458,
+          3459,
+          3460,
+          3461,
+          3462,
+          3463,
+          3464,
+          3465,
+          3466,
+          3467,
+          3468,
+          3469,
+          25424,
+          25426,
+          25428,
+          25430,
+          25432
+        ],
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "You attempt to light the funeral pyre"
       },
@@ -12278,8 +12356,60 @@
         "worldX": 3505,
         "worldY": 3279,
         "worldPlane": 0,
-        "groundItemIds": [3450, 3451, 3452, 3453, 3454, 3455, 3456, 3457, 3458, 3459, 3460, 3461, 3462, 3463, 3464, 3465, 3466, 3467, 3468, 3469, 25424, 25426, 25428, 25430, 25432],
-        "skipIfHasAnyItemIds": [3450, 3451, 3452, 3453, 3454, 3455, 3456, 3457, 3458, 3459, 3460, 3461, 3462, 3463, 3464, 3465, 3466, 3467, 3468, 3469, 25424, 25426, 25428, 25430, 25432],
+        "groundItemIds": [
+          3450,
+          3451,
+          3452,
+          3453,
+          3454,
+          3455,
+          3456,
+          3457,
+          3458,
+          3459,
+          3460,
+          3461,
+          3462,
+          3463,
+          3464,
+          3465,
+          3466,
+          3467,
+          3468,
+          3469,
+          25424,
+          25426,
+          25428,
+          25430,
+          25432
+        ],
+        "skipIfHasAnyItemIds": [
+          3450,
+          3451,
+          3452,
+          3453,
+          3454,
+          3455,
+          3456,
+          3457,
+          3458,
+          3459,
+          3460,
+          3461,
+          3462,
+          3463,
+          3464,
+          3465,
+          3466,
+          3467,
+          3468,
+          3469,
+          25424,
+          25426,
+          25428,
+          25430,
+          25432
+        ],
         "completionCondition": "MANUAL"
       },
       {
@@ -12296,31 +12426,256 @@
         "description": "Open chests matching your shade keys",
         "objectInteractAction": "Open",
         "dynamicItemObjectTiers": [
-          { "name": "Bronze chest (red)", "itemIds": [3450], "objectIds": [4111], "interactAction": "Open" },
-          { "name": "Bronze chest (brown)", "itemIds": [3451], "objectIds": [4112], "interactAction": "Open" },
-          { "name": "Bronze chest (crimson)", "itemIds": [3452], "objectIds": [4113], "interactAction": "Open" },
-          { "name": "Bronze chest (black)", "itemIds": [3453], "objectIds": [4114], "interactAction": "Open" },
-          { "name": "Bronze chest (purple)", "itemIds": [3454], "objectIds": [4115], "interactAction": "Open" },
-          { "name": "Steel chest (red)", "itemIds": [3455], "objectIds": [4116], "interactAction": "Open" },
-          { "name": "Steel chest (brown)", "itemIds": [3456], "objectIds": [4117], "interactAction": "Open" },
-          { "name": "Steel chest (crimson)", "itemIds": [3457], "objectIds": [4118], "interactAction": "Open" },
-          { "name": "Steel chest (black)", "itemIds": [3458], "objectIds": [4119], "interactAction": "Open" },
-          { "name": "Steel chest (purple)", "itemIds": [3459], "objectIds": [4120], "interactAction": "Open" },
-          { "name": "Black chest (red)", "itemIds": [3460], "objectIds": [4121], "interactAction": "Open" },
-          { "name": "Black chest (brown)", "itemIds": [3461], "objectIds": [4122], "interactAction": "Open" },
-          { "name": "Black chest (crimson)", "itemIds": [3462], "objectIds": [4123], "interactAction": "Open" },
-          { "name": "Black chest (black)", "itemIds": [3463], "objectIds": [4124], "interactAction": "Open" },
-          { "name": "Black chest (purple)", "itemIds": [3464], "objectIds": [4125], "interactAction": "Open" },
-          { "name": "Silver chest (red)", "itemIds": [3465], "objectIds": [4126], "interactAction": "Open" },
-          { "name": "Silver chest (brown)", "itemIds": [3466], "objectIds": [4127], "interactAction": "Open" },
-          { "name": "Silver chest (crimson)", "itemIds": [3467], "objectIds": [4128], "interactAction": "Open" },
-          { "name": "Silver chest (black)", "itemIds": [3468], "objectIds": [4129], "interactAction": "Open" },
-          { "name": "Silver chest (purple)", "itemIds": [3469], "objectIds": [4130], "interactAction": "Open" },
-          { "name": "Gold chest (red)", "itemIds": [25424], "objectIds": [41212], "interactAction": "Open" },
-          { "name": "Gold chest (brown)", "itemIds": [25426], "objectIds": [41213], "interactAction": "Open" },
-          { "name": "Gold chest (crimson)", "itemIds": [25428], "objectIds": [41214], "interactAction": "Open" },
-          { "name": "Gold chest (black)", "itemIds": [25430], "objectIds": [41215], "interactAction": "Open" },
-          { "name": "Gold chest (purple)", "itemIds": [25432], "objectIds": [41216], "interactAction": "Open" }
+          {
+            "name": "Bronze chest (red)",
+            "itemIds": [
+              3450
+            ],
+            "objectIds": [
+              4111
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Bronze chest (brown)",
+            "itemIds": [
+              3451
+            ],
+            "objectIds": [
+              4112
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Bronze chest (crimson)",
+            "itemIds": [
+              3452
+            ],
+            "objectIds": [
+              4113
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Bronze chest (black)",
+            "itemIds": [
+              3453
+            ],
+            "objectIds": [
+              4114
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Bronze chest (purple)",
+            "itemIds": [
+              3454
+            ],
+            "objectIds": [
+              4115
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Steel chest (red)",
+            "itemIds": [
+              3455
+            ],
+            "objectIds": [
+              4116
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Steel chest (brown)",
+            "itemIds": [
+              3456
+            ],
+            "objectIds": [
+              4117
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Steel chest (crimson)",
+            "itemIds": [
+              3457
+            ],
+            "objectIds": [
+              4118
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Steel chest (black)",
+            "itemIds": [
+              3458
+            ],
+            "objectIds": [
+              4119
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Steel chest (purple)",
+            "itemIds": [
+              3459
+            ],
+            "objectIds": [
+              4120
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Black chest (red)",
+            "itemIds": [
+              3460
+            ],
+            "objectIds": [
+              4121
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Black chest (brown)",
+            "itemIds": [
+              3461
+            ],
+            "objectIds": [
+              4122
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Black chest (crimson)",
+            "itemIds": [
+              3462
+            ],
+            "objectIds": [
+              4123
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Black chest (black)",
+            "itemIds": [
+              3463
+            ],
+            "objectIds": [
+              4124
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Black chest (purple)",
+            "itemIds": [
+              3464
+            ],
+            "objectIds": [
+              4125
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Silver chest (red)",
+            "itemIds": [
+              3465
+            ],
+            "objectIds": [
+              4126
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Silver chest (brown)",
+            "itemIds": [
+              3466
+            ],
+            "objectIds": [
+              4127
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Silver chest (crimson)",
+            "itemIds": [
+              3467
+            ],
+            "objectIds": [
+              4128
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Silver chest (black)",
+            "itemIds": [
+              3468
+            ],
+            "objectIds": [
+              4129
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Silver chest (purple)",
+            "itemIds": [
+              3469
+            ],
+            "objectIds": [
+              4130
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Gold chest (red)",
+            "itemIds": [
+              25424
+            ],
+            "objectIds": [
+              41212
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Gold chest (brown)",
+            "itemIds": [
+              25426
+            ],
+            "objectIds": [
+              41213
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Gold chest (crimson)",
+            "itemIds": [
+              25428
+            ],
+            "objectIds": [
+              41214
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Gold chest (black)",
+            "itemIds": [
+              25430
+            ],
+            "objectIds": [
+              41215
+            ],
+            "interactAction": "Open"
+          },
+          {
+            "name": "Gold chest (purple)",
+            "itemIds": [
+              25432
+            ],
+            "objectIds": [
+              41216
+            ],
+            "interactAction": "Open"
+          }
         ],
         "completionCondition": "MANUAL",
         "loopBackToStep": 2,
@@ -12775,7 +13130,8 @@
       }
     ],
     "rewardType": "SHOP",
-    "pointsPerHour": 95
+    "pointsPerHour": 95,
+    "afkLevel": 0
   },
   {
     "name": "Gnome Restaurant (Scarfs)",
@@ -13047,7 +13403,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Scroll Cases",
@@ -13198,7 +13555,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Castle Wars",
@@ -14005,7 +14363,8 @@
       }
     ],
     "rewardType": "MIXED",
-    "pointsPerHour": 28
+    "pointsPerHour": 28,
+    "afkLevel": 0
   },
   {
     "name": "Vale Totems",
@@ -16338,7 +16697,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "rewardType": "MILESTONE"
+    "rewardType": "MILESTONE",
+    "afkLevel": 0
   },
   {
     "name": "My Notes",
@@ -16574,7 +16934,10 @@
         "worldX": 2512,
         "worldY": 3509,
         "worldPlane": 0,
-        "objectIds": [25274, 25275],
+        "objectIds": [
+          25274,
+          25275
+        ],
         "objectInteractAction": "Dive-in",
         "completionCondition": "MANUAL"
       },
@@ -18287,7 +18650,8 @@
       }
     ],
     "rewardType": "SHOP",
-    "pointsPerHour": 234
+    "pointsPerHour": 234,
+    "afkLevel": 1
   },
   {
     "name": "Rooftop Agility",
@@ -18395,7 +18759,8 @@
       }
     ],
     "rewardType": "SHOP",
-    "pointsPerHour": 22
+    "pointsPerHour": 22,
+    "afkLevel": 1
   },
   {
     "name": "TzHaar",
@@ -18635,7 +19000,7 @@
     "worldY": 3621,
     "worldPlane": 0,
     "killTimeSeconds": 8,
-    "afkLevel": 1,
+    "afkLevel": 0,
     "items": [
       {
         "itemId": 20517,
@@ -19583,7 +19948,8 @@
         "completionNpcId": 14009
       }
     ],
-    "ironKillTimeSeconds": 400
+    "ironKillTimeSeconds": 400,
+    "afkLevel": 0
   },
   {
     "name": "Yama",
@@ -19713,7 +20079,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 14176
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Doom of Mokhaiotl",
@@ -19804,7 +20171,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 14707
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Royal Titans",
@@ -19898,7 +20266,8 @@
         "completionNpcId": 12596
       }
     ],
-    "ironKillTimeSeconds": 90
+    "ironKillTimeSeconds": 90,
+    "afkLevel": 0
   },
   {
     "name": "Amoxliatl",
@@ -19982,7 +20351,8 @@
         "completionNpcId": 13685
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "afkLevel": 0
   },
   {
     "name": "Brutus",
@@ -20055,7 +20425,8 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 15626
       }
-    ]
+    ],
+    "afkLevel": 0
   },
   {
     "name": "Shellbane Gryphon",
@@ -20145,7 +20516,8 @@
         "completionNpcId": 14860
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "afkLevel": 0
   },
   {
     "name": "Scurrius",
@@ -20265,7 +20637,8 @@
         "worldPlane": 0
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "afkLevel": 0
   },
   {
     "name": "The Inferno",
@@ -20323,7 +20696,8 @@
         "worldPlane": 0
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "afkLevel": 0
   },
   {
     "name": "Deranged Archaeologist",
@@ -21470,7 +21844,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Medium Treasure Trails",
@@ -22441,7 +22816,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Hard Treasure Trails",
@@ -23564,7 +23940,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Elite Treasure Trails",
@@ -24087,7 +24464,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "ironKillTimeSeconds": 6000
+    "ironKillTimeSeconds": 6000,
+    "afkLevel": 1
   },
   {
     "name": "Master Treasure Trails",
@@ -24524,7 +24902,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "ironKillTimeSeconds": 7200
+    "ironKillTimeSeconds": 7200,
+    "afkLevel": 1
   },
   {
     "name": "Hard Treasure Trail Rewards (Rare)",
@@ -24766,7 +25145,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Elite Treasure Trail Rewards (Rare)",
@@ -25128,7 +25508,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Master Treasure Trail Rewards (Rare)",
@@ -25548,7 +25929,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Shared Treasure Trail Rewards",
@@ -25983,7 +26365,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "The Mimic",
@@ -26020,7 +26403,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "afkLevel": 1
   },
   {
     "name": "Thieving (Seed Stalls)",
@@ -26096,7 +26480,7 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 0
   },
   {
     "name": "Woodcutting (Teak Trees)",
@@ -27556,7 +27940,10 @@
         "worldX": 2512,
         "worldY": 3509,
         "worldPlane": 0,
-        "objectIds": [25274, 25275],
+        "objectIds": [
+          25274,
+          25275
+        ],
         "objectInteractAction": "Dive-in",
         "completionCondition": "MANUAL"
       },
@@ -28078,7 +28465,10 @@
         "worldX": 2512,
         "worldY": 3509,
         "worldPlane": 0,
-        "objectIds": [25274, 25275],
+        "objectIds": [
+          25274,
+          25275
+        ],
         "objectInteractAction": "Dive-in",
         "completionCondition": "MANUAL"
       },
