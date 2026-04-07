@@ -57,6 +57,7 @@ import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -1361,7 +1362,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		// Collect ALL matching tiers so multiple keys highlight multiple chests
 		Set<Integer> matchedObjectIds = new HashSet<>();
-		List<Integer> matchedItemIds = new java.util.ArrayList<>();
+		List<Integer> matchedItemIds = new ArrayList<>();
 		String tooltipText = null;
 		String action = null;
 
