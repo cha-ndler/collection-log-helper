@@ -12221,16 +12221,16 @@
     "travelTip": "Minigame teleport -> Shades of Mort'ton, or Mort'ton teleport scroll",
     "guidanceSteps": [
       {
-        "description": "Teleport to Mort'ton using the minigame teleport or a Mort'ton teleport scroll",
-        "worldX": 3490,
-        "worldY": 3287,
+        "description": "Travel to Mort'ton",
+        "worldX": 3506,
+        "worldY": 3310,
         "worldPlane": 0,
         "travelTip": "Minigame teleport -> Shades of Mort'ton | Barrows teleport + run south | Mort'ton teleport scroll",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 30
       },
       {
-        "description": "Burn shade remains on the funeral pyres south-east of the temple to receive shade keys. Use Fiyr or Urium remains with magic/redwood pyre logs for gold and silver keys",
+        "description": "Burn shade remains on the funeral pyres",
         "worldX": 3507,
         "worldY": 3275,
         "worldPlane": 0,
@@ -12261,7 +12261,7 @@
         "completionChatPattern": "You use your Shade key"
       },
       {
-        "description": "Navigate through the catacombs and open chests with your shade keys — lowest tier key highlighted first",
+        "description": "Open chests matching your shade keys",
         "objectInteractAction": "Open",
         "dynamicItemObjectTiers": [
           { "name": "Bronze chest (red)", "itemIds": [3450], "objectIds": [4111], "interactAction": "Open" },
