@@ -1237,6 +1237,8 @@
         "worldX": 2981,
         "worldY": 4382,
         "worldPlane": 2,
+        "objectId": 677,
+        "objectInteractAction": "Go-through",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
@@ -2784,7 +2786,7 @@
         "completionDistance": 30
       },
       {
-        "description": "Enter The Nightmare's lair through the church in Slepe. Go down the stairs in the north-east of town",
+        "description": "Enter The Nightmare's lair through the church in Slepe. Go down the stairs south-west of the church",
         "worldX": 3808,
         "worldY": 9775,
         "worldPlane": 1,
@@ -3196,6 +3198,8 @@
         "worldX": 1701,
         "worldY": 3574,
         "worldPlane": 0,
+        "objectId": 34862,
+        "objectInteractAction": "Climb-down",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 25
       },
@@ -3204,6 +3208,8 @@
         "worldX": 1847,
         "worldY": 9910,
         "worldPlane": 0,
+        "objectId": 34858,
+        "objectInteractAction": "Enter-crypt",
         "completionCondition": "MANUAL"
       },
       {
@@ -5006,6 +5012,8 @@
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
+        "objectId": 29777,
+        "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
       },
@@ -5259,6 +5267,8 @@
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
+        "objectId": 29777,
+        "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
       },
@@ -5484,6 +5494,8 @@
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
+        "objectId": 32653,
+        "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
       },
@@ -5687,6 +5699,8 @@
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
+        "objectId": 32653,
+        "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
       },
@@ -9806,12 +9820,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Wyvern Cave, Fossil Island.",
-        "worldX": 3602,
-        "worldY": 10290,
+        "description": "Travel to Wyvern Cave on Fossil Island",
+        "worldX": 3745,
+        "worldY": 3777,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
+      },
+      {
+        "description": "Enter the Wyvern Cave",
+        "worldX": 3745,
+        "worldY": 3777,
+        "worldPlane": 0,
+        "objectId": 30869,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Fossil Island Wyvern.",
@@ -27747,6 +27770,8 @@
     ],
     "locationDescription": "Corsair Cove Dungeon",
     "travelTip": "Corsair Cove -> dungeon entrance",
+    "npcId": 7991,
+    "interactAction": "Attack",
     "guidanceSteps": [
       {
         "description": "Travel to Corsair Cove Dungeon.",
@@ -27770,7 +27795,10 @@
         "worldX": 2459,
         "worldY": 9488,
         "worldPlane": 2,
-        "completionCondition": "MANUAL"
+        "npcId": 7991,
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 7991
       }
     ],
     "mutuallyExclusiveSources": [
@@ -28132,6 +28160,8 @@
         "SONG_OF_THE_ELVES"
       ]
     },
+    "npcId": 9118,
+    "interactAction": "Attack",
     "guidanceSteps": [
       {
         "description": "Travel to Prifddinas, south-east corner.",
@@ -28146,7 +28176,10 @@
         "worldX": 3267,
         "worldY": 6082,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "npcId": 9118,
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 9118
       }
     ],
     "mutuallyExclusiveSources": [
