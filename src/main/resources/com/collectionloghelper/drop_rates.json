@@ -4037,8 +4037,8 @@
   {
     "name": "Venenatis",
     "category": "BOSSES",
-    "worldX": 3332,
-    "worldY": 3734,
+    "worldX": 3321,
+    "worldY": 3794,
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "ironKillTimeSeconds": 72,
@@ -4100,12 +4100,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Silk Chasm in the Wilderness. Use burning amulet to Bandit Camp and run east",
-        "worldX": 3332,
-        "worldY": 3734,
+        "description": "Travel to the Silk Chasm cave entrance in the Wilderness. Use burning amulet to Bandit Camp and run east",
+        "worldX": 3321,
+        "worldY": 3794,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 25
+        "completionDistance": 20
+      },
+      {
+        "description": "Enter the Cave Entrance to access the Silk Chasm",
+        "worldX": 3321,
+        "worldY": 3794,
+        "worldPlane": 0,
+        "objectId": 47077,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Venenatis. Use Protect from Magic and watch for the web attack",
@@ -10661,24 +10670,33 @@
     "travelTip": "Drakan's medallion -> Darkmeyer",
     "guidanceSteps": [
       {
-        "description": "Use Drakan's medallion to teleport to Darkmeyer, then enter the Hallowed Sepulchre",
+        "description": "Use Drakan's medallion to teleport to Darkmeyer. Head to the Mausoleum Door in the south-east",
         "worldX": 3654,
-        "worldY": 3387,
+        "worldY": 3385,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15
+      },
+      {
+        "description": "Enter the Mausoleum Door to access the Hallowed Sepulchre",
+        "worldX": 3654,
+        "worldY": 3385,
+        "worldPlane": 0,
+        "objectId": 38574,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Complete the agility floors, looting coffins along the way for hallowed marks and rare drops. Higher floors have better drop rates",
         "worldX": 3654,
-        "worldY": 3387,
+        "worldY": 3385,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
         "description": "Spend hallowed marks at the reward shop near the entrance for collection log items",
         "worldX": 3654,
-        "worldY": 3387,
+        "worldY": 3385,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
