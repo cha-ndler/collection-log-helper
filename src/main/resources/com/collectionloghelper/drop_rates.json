@@ -3898,8 +3898,8 @@
   {
     "name": "Scorpia",
     "category": "BOSSES",
-    "worldX": 3233,
-    "worldY": 3945,
+    "worldX": 3231,
+    "worldY": 3936,
     "worldPlane": 0,
     "killTimeSeconds": 28,
     "ironKillTimeSeconds": 45,
@@ -3948,17 +3948,26 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Scorpia's Cave in the Wilderness.",
-        "worldX": 3233,
-        "worldY": 3945,
+        "description": "Travel to the Scorpion Pit in deep Wilderness (level ~53). Use burning amulet to Lava Maze and run south",
+        "worldX": 3231,
+        "worldY": 3936,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
       },
       {
-        "description": "Kill Scorpia.",
+        "description": "Enter the Cavern to access Scorpia's underground lair",
+        "worldX": 3231,
+        "worldY": 3936,
+        "worldPlane": 0,
+        "objectId": 26762,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill Scorpia. Watch for the healing prayer special and Scorpia's Guardians",
         "worldX": 3233,
-        "worldY": 3945,
+        "worldY": 10341,
         "worldPlane": 0,
         "npcId": 6615,
         "interactAction": "Attack",
@@ -4028,8 +4037,8 @@
   {
     "name": "Venenatis",
     "category": "BOSSES",
-    "worldX": 3319,
-    "worldY": 3798,
+    "worldX": 3332,
+    "worldY": 3734,
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "ironKillTimeSeconds": 72,
@@ -4078,7 +4087,7 @@
         "wikiPage": "Dragon_2h_sword"
       }
     ],
-    "locationDescription": "Venenatis' Cave, Wilderness",
+    "locationDescription": "Silk Chasm, Wilderness",
     "travelTip": "Burning amulet -> Bandit Camp",
     "mutuallyExclusiveSources": [
       "Kalphite Queen",
@@ -4091,17 +4100,17 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Venenatis' Cave in the Wilderness.",
-        "worldX": 3319,
-        "worldY": 3798,
+        "description": "Travel to the Silk Chasm in the Wilderness. Use burning amulet to Bandit Camp and run east",
+        "worldX": 3332,
+        "worldY": 3734,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 25
       },
       {
-        "description": "Kill Venenatis.",
-        "worldX": 3319,
-        "worldY": 3798,
+        "description": "Kill Venenatis. Use Protect from Magic and watch for the web attack",
+        "worldX": 3332,
+        "worldY": 3734,
         "worldPlane": 0,
         "npcId": 6610,
         "interactAction": "Attack",
