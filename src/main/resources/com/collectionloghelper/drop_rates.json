@@ -2594,25 +2594,37 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Drakan's medallion to teleport to Slepe",
-        "worldX": 3662,
-        "worldY": 3218,
+        "description": "Use Drakan's medallion to teleport to Slepe, or walk via Canifis",
+        "worldX": 3728,
+        "worldY": 3302,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 20
       },
       {
-        "description": "Enter The Nightmare's lair through the church in Slepe. Go down the stairs south-west of the church",
-        "worldX": 3808,
-        "worldY": 9775,
-        "worldPlane": 1,
+        "description": "Climb down the stairs in Slepe church to enter the Sisterhood Sanctuary",
+        "worldX": 3728,
+        "worldY": 3302,
+        "worldPlane": 0,
+        "objectId": 32637,
+        "objectInteractAction": "Climb-down",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Fight The Nightmare. Protect from the active pillar attacks, run from parasites, and break the healing totems when they appear",
-        "worldX": 3808,
-        "worldY": 9775,
+        "description": "Run south to The Nightmare's arena in the Sisterhood Sanctuary",
+        "worldX": 3806,
+        "worldY": 9757,
         "worldPlane": 1,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20
+      },
+      {
+        "description": "Disturb The Nightmare to start the fight. Protect from the active pillar attacks, run from parasites, and break the healing totems",
+        "worldX": 3806,
+        "worldY": 9757,
+        "worldPlane": 1,
+        "npcId": 9460,
+        "interactAction": "Disturb",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Nightmare kill count is:"
       }
@@ -2764,24 +2776,35 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Drakan's medallion to teleport to Slepe",
-        "worldX": 3662,
-        "worldY": 3218,
+        "description": "Use Drakan's medallion to teleport to Slepe, or walk via Canifis",
+        "worldX": 3728,
+        "worldY": 3302,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 20
       },
       {
-        "description": "Enter the Sisterhood Sanctuary through the church in Slepe. Go down the stairs and drink from the Pool of Nightmares",
-        "worldX": 3808,
-        "worldY": 9775,
-        "worldPlane": 1,
+        "description": "Climb down the stairs in Slepe church to enter the Sisterhood Sanctuary",
+        "worldX": 3728,
+        "worldY": 3302,
+        "worldPlane": 0,
+        "objectId": 32637,
+        "objectInteractAction": "Climb-down",
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Fight Phosani's Nightmare solo. This is a harder version with no downtime between phases",
+        "description": "Drink from the Pool of Nightmare to enter Phosani's dream",
         "worldX": 3808,
-        "worldY": 9775,
+        "worldY": 9780,
+        "worldPlane": 1,
+        "objectId": 29706,
+        "objectInteractAction": "Drink",
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Fight Phosani's Nightmare solo. This is a harder version with no downtime between phases",
+        "worldX": 3806,
+        "worldY": 9757,
         "worldPlane": 1,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Phosani's Nightmare kill count is:"
@@ -14484,10 +14507,10 @@
       }
     ],
     "locationDescription": "Port Sarim docks, obtained via various Sailing activities",
-    "travelTip": "Port Sarim docks",
+    "travelTip": "Sailors' amulet to any port, board boat, sail and sort salvage",
     "guidanceSteps": [
       {
-        "description": "Travel to a Sailing port.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -14495,7 +14518,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Obtain boat paints from various Sailing activities and rewards.",
+        "description": "Board your boat and sail. Defeat sea creatures and sort salvage for a chance at boat paint drops.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -15929,10 +15952,10 @@
       }
     ],
     "locationDescription": "Open ocean during Sailing voyages",
-    "travelTip": "Port Sarim docks -> sail",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to encounters",
     "guidanceSteps": [
       {
-        "description": "Travel to Open ocean during Sailing voyages.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -15940,7 +15963,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Complete ocean encounters during Sailing voyages.",
+        "description": "Board your boat and sail into open water. Engage random ocean encounters as they appear.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -16043,10 +16066,10 @@
       }
     ],
     "locationDescription": "Various Sailing activities and island exploration",
-    "travelTip": "Port Sarim docks -> sail",
+    "travelTip": "Sailors' amulet to any port, board boat, sail",
     "guidanceSteps": [
       {
-        "description": "Travel to a Sailing port.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -16054,7 +16077,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Obtain miscellaneous Sailing items through voyages and island exploration.",
+        "description": "Board your boat and participate in various Sailing activities including voyages and island exploration.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -16224,10 +16247,10 @@
       }
     ],
     "locationDescription": "Salvaging and treasure hunting during Sailing voyages",
-    "travelTip": "Port Sarim docks -> sail",
+    "travelTip": "Sailors' amulet to any port, complete sea treasure voyages",
     "guidanceSteps": [
       {
-        "description": "Travel to Salvaging and treasure hunting during Sailing voyages.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -16235,7 +16258,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Discover sea treasures during Sailing voyages.",
+        "description": "Complete sea treasure voyages from port notice boards. Higher Sailing levels unlock better treasures.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25109,10 +25132,10 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Port Sarim docks -> sort salvage",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
     "guidanceSteps": [
       {
-        "description": "Travel to a Sailing port to sort your salvage.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25120,7 +25143,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sort small salvage from your Sailing voyages at any port.",
+        "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for small salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25164,10 +25187,10 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Port Sarim docks -> sort salvage",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
     "guidanceSteps": [
       {
-        "description": "Travel to a Sailing port to sort your salvage.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25175,7 +25198,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sort fishy salvage from your Sailing voyages at any port.",
+        "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for fishy salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25219,10 +25242,10 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Port Sarim docks -> sort salvage",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
     "guidanceSteps": [
       {
-        "description": "Travel to a Sailing port to sort your salvage.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25230,7 +25253,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sort barracuda salvage from your Sailing voyages at any port.",
+        "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for barracuda salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25267,10 +25290,10 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Port Sarim docks -> sort salvage",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
     "guidanceSteps": [
       {
-        "description": "Travel to a Sailing port to sort your salvage.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25278,7 +25301,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sort large salvage from your Sailing voyages at any port.",
+        "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for large salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25322,10 +25345,10 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Port Sarim docks -> sort salvage",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
     "guidanceSteps": [
       {
-        "description": "Travel to a Sailing port to sort your salvage.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25333,7 +25356,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sort plundered salvage from your Sailing voyages at any port.",
+        "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for plundered salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25384,10 +25407,10 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Port Sarim docks -> sort salvage",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
     "guidanceSteps": [
       {
-        "description": "Travel to a Sailing port to sort your salvage.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25395,7 +25418,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sort martial salvage from your Sailing voyages at any port.",
+        "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for martial salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25432,10 +25455,10 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Port Sarim docks -> sort salvage",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
     "guidanceSteps": [
       {
-        "description": "Travel to a Sailing port to sort your salvage.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25443,7 +25466,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sort Fremennik salvage from your Sailing voyages at any port.",
+        "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for fremennik salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25515,10 +25538,10 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Port Sarim docks -> sort salvage",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
     "guidanceSteps": [
       {
-        "description": "Travel to a Sailing port to sort your salvage.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25526,7 +25549,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sort opulent salvage from your Sailing voyages at any port.",
+        "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for opulent salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -26331,10 +26354,10 @@
       }
     ],
     "locationDescription": "Port tasks from sailing ports",
-    "travelTip": "Port Sarim docks -> complete port tasks",
+    "travelTip": "Sailors' amulet to any port, accept tasks from notice board",
     "guidanceSteps": [
       {
-        "description": "Travel to Port tasks from sailing ports.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -26342,7 +26365,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Complete port tasks at sailing ports to earn rewards.",
+        "description": "Accept port tasks from notice boards at Sailing ports. Complete tasks for Sailing XP and rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
