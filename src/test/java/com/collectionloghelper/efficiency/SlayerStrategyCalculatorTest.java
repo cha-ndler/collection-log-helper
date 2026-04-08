@@ -76,12 +76,12 @@ public class SlayerStrategyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			60, 0, name, Collections.emptyList(),
-			RewardType.DROP, 0, false, null, 1, false, 0, null, 0, null, null, null, null, 0, null, 0, items);
+			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null, null, null, 0, null, 0, items);
 	}
 
 	private CollectionLogItem makeItem(int id, String name)
 	{
-		return new CollectionLogItem(id, name, 0.01, 0, false, null, 0, 0, false, false);
+		return new CollectionLogItem(id, name, 0.01, false, null, 0, 0, false, false);
 	}
 
 	private void setupMasterWithTasks(String masterName, Map<String, Integer> tasks)

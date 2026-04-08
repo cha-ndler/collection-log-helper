@@ -32,7 +32,6 @@ public class CollectionLogItem
 	int itemId;
 	String name;
 	double dropRate;
-	int varbitId;
 	boolean isPet;
 	String wikiPage;
 	int pointCost;

@@ -42,7 +42,6 @@ public class CollectionLogSource
 	List<Waypoint> waypoints;
 	RewardType rewardType;
 	double pointsPerHour;
-	boolean mutuallyExclusive;
 	List<String> mutuallyExclusiveSources;
 	int rollsPerKill;
 	boolean aggregated;
