@@ -48,7 +48,7 @@ public class CollectionLogSourceTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.BOSSES, x, y, plane,
 			60, 0, locationDesc, waypoints,
-			null, 0, false, null, 0, false, 0, null, 0, null, null, null, null, 0, null, 0,
+			null, 0, null, 0, false, 0, null, 0, null, null, null, null, 0, null, 0,
 			Collections.emptyList());
 	}
 
