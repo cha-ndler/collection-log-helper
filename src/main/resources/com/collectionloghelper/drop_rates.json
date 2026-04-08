@@ -24769,7 +24769,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack stingrays when they appear, then Harvest defeated stingrays for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack stingrays when they appear, then Harvest defeated stingrays for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -24813,7 +24813,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack albatrosses when they appear, then Harvest defeated albatrosses for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack albatrosss when they appear, then Harvest defeated albatro for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -24878,7 +24878,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack narwhals when they appear, then Harvest defeated narwhals for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack narwhals when they appear, then Harvest defeated narwhals for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -24943,7 +24943,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack orcas when they appear, then Harvest defeated orcas for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack orcas when they appear, then Harvest defeated orcas for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25015,7 +25015,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack great white sharks when they appear, then Harvest defeated sharks for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack great white sharks when they appear, then Harvest defeated great white sharks for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -25094,7 +25094,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack vampyre krakens when they appear, then Harvest defeated krakens for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack vampyre krakens when they appear, then Harvest defeated vampyre krakens for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
