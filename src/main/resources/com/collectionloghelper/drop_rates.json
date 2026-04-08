@@ -26800,17 +26800,17 @@
       {
         "itemId": 31959,
         "name": "Ray barbs",
-        "dropRate": 0.04348,
+        "dropRate": 0.03333,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Ray_barbs"
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Port Sarim docks -> sail to encounter",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
     "guidanceSteps": [
       {
-        "description": "Travel to Boat combat encounters while Sailing.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -26818,7 +26818,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sail from Port Sarim and engage stingrays in boat combat.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack stingrays when they appear, then Harvest defeated stingrays for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -26845,17 +26845,17 @@
       {
         "itemId": 31952,
         "name": "Swift albatross feather",
-        "dropRate": 0.03333,
+        "dropRate": 0.02857,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Swift_albatross_feather"
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Port Sarim docks -> sail to encounter",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
     "guidanceSteps": [
       {
-        "description": "Travel to Boat combat encounters while Sailing.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -26863,7 +26863,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sail from Port Sarim and engage albatrosses in boat combat.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack albatrosses when they appear, then Harvest defeated albatrosses for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -26890,7 +26890,7 @@
       {
         "itemId": 31406,
         "name": "Dragon nails",
-        "dropRate": 0.008333,
+        "dropRate": 0.006667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_nails"
@@ -26898,7 +26898,7 @@
       {
         "itemId": 31954,
         "name": "Narwhal horn",
-        "dropRate": 0.01,
+        "dropRate": 0.05,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Narwhal_horn"
@@ -26921,10 +26921,10 @@
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Port Sarim docks -> sail to encounter",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
     "guidanceSteps": [
       {
-        "description": "Travel to Boat combat encounters while Sailing.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -26932,7 +26932,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sail from Port Sarim and engage narwhals in boat combat.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack narwhals when they appear, then Harvest defeated narwhals for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -26967,7 +26967,7 @@
       {
         "itemId": 31946,
         "name": "Echo pearl",
-        "dropRate": 0.01515,
+        "dropRate": 0.01429,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Echo_pearl"
@@ -26990,10 +26990,10 @@
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Port Sarim docks -> sail to encounter",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
     "guidanceSteps": [
       {
-        "description": "Travel to Boat combat encounters while Sailing.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -27001,7 +27001,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sail from Port Sarim and engage orcas in boat combat.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack orcas when they appear, then Harvest defeated orcas for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -27067,10 +27067,10 @@
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Port Sarim docks -> sail to encounter",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
     "guidanceSteps": [
       {
-        "description": "Travel to Boat combat encounters while Sailing.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -27078,7 +27078,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sail from Port Sarim and engage great white sharks in boat combat.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack great white sharks when they appear, then Harvest defeated sharks for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -27113,7 +27113,7 @@
       {
         "itemId": 31996,
         "name": "Dragon metal sheet",
-        "dropRate": 0.002347,
+        "dropRate": 0.001953,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_metal_sheet"
@@ -27121,7 +27121,7 @@
       {
         "itemId": 31916,
         "name": "Dragon cannonball",
-        "dropRate": 0.01695,
+        "dropRate": 0.01667,
         "varbitId": 0,
         "isPet": false,
         "wikiPage": "Dragon_cannonball"
@@ -27152,10 +27152,10 @@
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Port Sarim docks -> sail to encounter",
+    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
     "guidanceSteps": [
       {
-        "description": "Travel to Boat combat encounters while Sailing.",
+        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -27163,7 +27163,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Sail from Port Sarim and engage vampyre krakens in boat combat.",
+        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Attack vampyre krakens when they appear, then Harvest defeated krakens for loot. Repair at a Shipwright when needed.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
