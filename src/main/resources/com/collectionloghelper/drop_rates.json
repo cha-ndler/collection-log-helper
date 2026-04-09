@@ -4430,7 +4430,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Lizardman shaman.",
+        "description": "Kill Lizardman shamans. Dodge the acid pool and explosive spawn attacks. Stand near a wall to prevent being jumped on. Slayer task recommended for rates",
         "worldX": 1472,
         "worldY": 3686,
         "worldPlane": 0,
@@ -7820,7 +7820,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Crawling Hand.",
+        "description": "Kill Crawling Hands in the Slayer Tower basement. Very low combat — good for early slayer tasks",
         "worldX": 3418,
         "worldY": 3543,
         "worldPlane": 0,
@@ -8127,7 +8127,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Mogre.",
+        "description": "Kill Mogres at Mudskipper Point. Throw fishing explosives into the flooded area to spawn them (requires Skippy and the Mogres miniquest)",
         "worldX": 2987,
         "worldY": 3110,
         "worldPlane": 0,
@@ -8239,7 +8239,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Terror Dog.",
+        "description": "Kill Terror Dogs beneath the Troll Stronghold. Access via the tunnel during/after Troll Stronghold quest",
         "worldX": 3149,
         "worldY": 4663,
         "worldPlane": 0,
@@ -8358,7 +8358,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Brine Rat.",
+        "description": "Kill Brine Rats in the Brine Rat Cavern. Dig with a spade south of the Windswept Tree near Rellekka lighthouse to enter",
         "worldX": 2707,
         "worldY": 10132,
         "worldPlane": 0,
@@ -8422,7 +8422,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Frost Nagua.",
+        "description": "Kill Frost Nagua in the icy caves of Varlamore. Use fire spells or crush weapons for weakness",
         "worldX": 1693,
         "worldY": 3232,
         "worldPlane": 0,
@@ -8472,7 +8472,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Sulphur Nagua.",
+        "description": "Kill Sulphur Nagua in the volcanic caves of Varlamore",
         "worldX": 1440,
         "worldY": 9602,
         "worldPlane": 0,
@@ -8522,7 +8522,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Earthen Nagua.",
+        "description": "Kill Earthen Nagua in the Tonali Cavern beneath Cam Torum, Varlamore",
         "worldX": 1309,
         "worldY": 3104,
         "worldPlane": 0,
@@ -8642,7 +8642,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Gryphon.",
+        "description": "Kill Gryphons on the islands accessible via Sailing. Standard combat — no special mechanics",
         "worldX": 1456,
         "worldY": 2880,
         "worldPlane": 0,
@@ -8820,7 +8820,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Warped Creature.",
+        "description": "Kill Warped Creatures in the Warped area beneath Lumbridge Swamp. Requires completion of Song of the Elves",
         "worldX": 2032,
         "worldY": 4636,
         "worldPlane": 0,
@@ -9000,7 +9000,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Basilisk Knight.",
+        "description": "Kill Basilisk Knights in the Jormungand's Prison. Requires mirror shield or V's shield equipped. Use Protect from Magic",
         "worldX": 2456,
         "worldY": 4240,
         "worldPlane": 0,
@@ -9135,7 +9135,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Lava Strykewyrm.",
+        "description": "Kill Lava Strykewyrms in the Wilderness (level 34+). Use ice spells to freeze them, then attack with melee. Bring cheap gear for PKer risk",
         "worldX": 2150,
         "worldY": 2968,
         "worldPlane": 0,
@@ -9185,7 +9185,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dust Devil.",
+        "description": "Kill Dust Devils in the Smoke Dungeon or Catacombs of Kourend. Requires face protection (slayer helm works). Burst/barrage in Catacombs for fast tasks",
         "worldX": 3310,
         "worldY": 2962,
         "worldPlane": 0,
@@ -9398,7 +9398,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Skeletal Wyvern.",
+        "description": "Kill Skeletal Wyverns in the Asgarnian Ice Dungeon. Use elemental/mind/dragonfire shield for ice breath protection. Range safespot available",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
@@ -9601,7 +9601,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Aquanite.",
+        "description": "Kill Aquanites in Ynysdail Cavern (requires 73 Sailing). Use crush weapons for best accuracy",
         "worldX": 2275,
         "worldY": 9880,
         "worldPlane": 0,
@@ -9710,7 +9710,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Spiritual Mage.",
+        "description": "Kill Spiritual Mages in the God Wars Dungeon. Requires 83 Slayer. Found in all four god chambers — equip the corresponding god item for protection",
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,
@@ -9795,7 +9795,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Spiritual Mage (Zarosian).",
+        "description": "Kill Zarosian Spiritual Mages in Nex's Prison. Requires 83 Slayer and frozen key to access the Ancient Prison",
         "worldX": 2904,
         "worldY": 5203,
         "worldPlane": 0,
@@ -10053,7 +10053,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Dark Beast.",
+        "description": "Kill Dark Beasts in the Mourner Tunnels or Catacombs of Kourend. Use Protect from Melee. High Defence — use accurate weapon styles",
         "worldX": 1920,
         "worldY": 4672,
         "worldPlane": 0,
@@ -10162,7 +10162,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Smoke Devil.",
+        "description": "Kill Smoke Devils in the Smoke Devil Dungeon. Requires face protection (slayer helm works). Burst/barrage task for fast completion",
         "worldX": 2412,
         "worldY": 3061,
         "worldPlane": 0,
