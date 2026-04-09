@@ -9571,6 +9571,10 @@
         {
           "skill": "SLAYER",
           "level": 78
+        },
+        {
+          "skill": "SAILING",
+          "level": 73
         }
       ]
     },
@@ -14556,7 +14560,15 @@
     "mutuallyExclusiveSources": [
       "Vampyre Kraken (Boat Combat)",
       "Port Tasks"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 28
+        }
+      ]
+    }
   },
   {
     "name": "Champion's Challenge",
@@ -15996,7 +16008,15 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 28
+        }
+      ]
+    }
   },
   {
     "name": "Sailing Misc",
@@ -16302,7 +16322,15 @@
       "Martial Salvage",
       "Fremennik Salvage",
       "Opulent Salvage"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 30
+        }
+      ]
+    }
   },
   {
     "name": "Deep Sea Fishing",
@@ -24799,7 +24827,15 @@
       "Sailing Misc"
     ],
     "npcId": 15218,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 50
+        }
+      ]
+    }
   },
   {
     "name": "Albatross (Boat Combat)",
@@ -24843,7 +24879,15 @@
       "Sailing Misc"
     ],
     "npcId": 15224,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 55
+        }
+      ]
+    }
   },
   {
     "name": "Narwhal (Boat Combat)",
@@ -24908,7 +24952,15 @@
       "Sailing Misc"
     ],
     "npcId": 15202,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 62
+        }
+      ]
+    }
   },
   {
     "name": "Orcas (Boat Combat)",
@@ -24973,7 +25025,15 @@
       "Sailing Misc"
     ],
     "npcId": 15204,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 80
+        }
+      ]
+    }
   },
   {
     "name": "Great White Shark (Boat Combat)",
@@ -25045,7 +25105,15 @@
       "Sailing Misc"
     ],
     "npcId": 15200,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 75
+        }
+      ]
+    }
   },
   {
     "name": "Vampyre Kraken (Boat Combat)",
@@ -25125,7 +25193,15 @@
       "Boat Paints"
     ],
     "npcId": 15212,
-    "interactAction": "Attack"
+    "interactAction": "Attack",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 78
+        }
+      ]
+    }
   },
   {
     "name": "Small Salvage",
@@ -25180,7 +25256,15 @@
     "mutuallyExclusiveSources": [
       "Sea Treasures",
       "Sailing Misc"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 15
+        }
+      ]
+    }
   },
   {
     "name": "Fishy Salvage",
@@ -25235,7 +25319,15 @@
     "mutuallyExclusiveSources": [
       "Sea Treasures",
       "Sailing Misc"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 25
+        }
+      ]
+    }
   },
   {
     "name": "Barracuda Salvage",
@@ -25290,7 +25382,15 @@
     "mutuallyExclusiveSources": [
       "Sea Treasures",
       "Sailing Misc"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 35
+        }
+      ]
+    }
   },
   {
     "name": "Large Salvage",
@@ -25338,7 +25438,15 @@
     "mutuallyExclusiveSources": [
       "Sea Treasures",
       "Sailing Misc"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 45
+        }
+      ]
+    }
   },
   {
     "name": "Plundered Salvage",
@@ -25393,7 +25501,15 @@
     "mutuallyExclusiveSources": [
       "Sea Treasures",
       "Sailing Misc"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 55
+        }
+      ]
+    }
   },
   {
     "name": "Martial Salvage",
@@ -25455,7 +25571,15 @@
     "mutuallyExclusiveSources": [
       "Sea Treasures",
       "Sailing Misc"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 65
+        }
+      ]
+    }
   },
   {
     "name": "Fremennik Salvage",
@@ -25503,7 +25627,15 @@
     "mutuallyExclusiveSources": [
       "Sea Treasures",
       "Sailing Misc"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 70
+        }
+      ]
+    }
   },
   {
     "name": "Opulent Salvage",
@@ -25586,7 +25718,15 @@
     "mutuallyExclusiveSources": [
       "Sea Treasures",
       "Sailing Misc"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 80
+        }
+      ]
+    }
   },
   {
     "name": "Mithril Dragon",
@@ -26195,7 +26335,15 @@
     ],
     "mutuallyExclusiveSources": [
       "Miscellaneous"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 45
+        }
+      ]
+    }
   },
   {
     "name": "Prifddinas Elf",
