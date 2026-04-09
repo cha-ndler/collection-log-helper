@@ -1359,7 +1359,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Ancient Prison near Weiss.",
+        "description": "Use icy basalt to teleport to Weiss, or Ring of Shadows. Enter the Ancient Prison south of town",
         "worldX": 2846,
         "worldY": 3940,
         "worldPlane": 0,
@@ -1367,7 +1367,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill the Phantom Muspah.",
+        "description": "Kill the Phantom Muspah. Switch prayers between Protect from Magic (ranged form) and Protect from Missiles (melee form). Dodge shield attacks and freeze specials",
         "worldX": 2846,
         "worldY": 3940,
         "worldPlane": 0,
@@ -1465,7 +1465,7 @@
       }
     ],
     "locationDescription": "Ghorrock Prison, accessed via Weiss",
-    "travelTip": "Icy basalt -> Weiss, or Ring of shadows -> Ghorrock",
+    "travelTip": "Ring of Shadows -> Ghorrock Dungeon",
     "mutuallyExclusiveSources": [
       "The Leviathan",
       "The Whisperer",
@@ -1479,7 +1479,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ghorrock Prison via Weiss.",
+        "description": "Use Ring of Shadows to teleport to Ghorrock Dungeon, or travel via Weiss Salt Mine",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
@@ -1487,7 +1487,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Duke Sucellus.",
+        "description": "Kill Duke Sucellus. Use Protect from Melee, dodge the falling ice, and avoid the blue mushroom gas clouds",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
@@ -1587,7 +1587,7 @@
       }
     ],
     "locationDescription": "The Scar, accessed via Temple of the Eye beneath Wizards' Tower",
-    "travelTip": "Ring of shadows -> The Scar, or Fairy ring DIS -> Wizards' Tower",
+    "travelTip": "Ring of Shadows -> The Scar",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Whisperer",
@@ -1601,7 +1601,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to The Scar beneath the Wizards' Tower.",
+        "description": "Use Ring of Shadows to teleport to The Scar, or rowboat from beneath the Wizards's Tower",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -1609,7 +1609,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill The Leviathan.",
+        "description": "Kill The Leviathan. Dodge the boulder attacks, use Protect from Magic during ranged phase, and destroy the Shadow Leeches",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -1707,7 +1707,7 @@
       }
     ],
     "locationDescription": "Lassar Undercity entrance, Ice Mountain",
-    "travelTip": "Lassar teleport (ancient)",
+    "travelTip": "Ring of Shadows -> Lassar Undercity",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
@@ -1721,7 +1721,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Lassar Undercity beneath Ice Mountain.",
+        "description": "Use Ring of Shadows to teleport to Lassar Undercity, or enter the sinkhole north-west of Camdozaal",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
@@ -1729,7 +1729,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill The Whisperer.",
+        "description": "Kill The Whisperer. Dodge the tentacle attacks in the pillared room, switch prayers for the Screech attack, and step on the correct tiles during the shadow phase",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
@@ -1829,7 +1829,7 @@
       }
     ],
     "locationDescription": "The Stranglewood, south of Mount Quidamortem",
-    "travelTip": "Ring of shadows -> Stranglewood, or Fairy ring BLS -> rowboat",
+    "travelTip": "Ring of Shadows -> The Stranglewood",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
@@ -1843,7 +1843,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to The Stranglewood.",
+        "description": "Use Ring of Shadows to teleport to The Stranglewood, or walk from the Kourend Woodland",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
@@ -1851,7 +1851,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Vardorvis.",
+        "description": "Kill Vardorvis. Use Protect from Melee, dodge the axes, and kill the Strangled spawns quickly before they heal the boss",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
@@ -1950,7 +1950,7 @@
       }
     ],
     "locationDescription": "Ghorrock Prison, accessed via Weiss",
-    "travelTip": "Icy basalt -> Weiss, or Ring of shadows -> Ghorrock",
+    "travelTip": "Ring of Shadows -> Ghorrock Dungeon",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
@@ -1964,7 +1964,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ghorrock Prison via Weiss.",
+        "description": "Use Ring of Shadows to teleport to Ghorrock Dungeon, or travel via Weiss Salt Mine",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
@@ -1972,7 +1972,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Duke Sucellus (Awakened).",
+        "description": "Kill Duke Sucellus (Awakened). Use Protect from Melee, dodge the falling ice, and avoid the blue mushroom gas clouds. Awakened mode has enhanced mechanics and higher stats",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
@@ -2071,7 +2071,7 @@
       }
     ],
     "locationDescription": "The Scar, accessed via Temple of the Eye beneath Wizards' Tower",
-    "travelTip": "Ring of shadows -> The Scar, or Fairy ring DIS -> Wizards' Tower",
+    "travelTip": "Ring of Shadows -> The Scar",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
@@ -2085,7 +2085,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to The Scar beneath the Wizards' Tower.",
+        "description": "Use Ring of Shadows to teleport to The Scar, or rowboat from beneath the Wizards's Tower",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -2093,7 +2093,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill The Leviathan (Awakened).",
+        "description": "Kill The Leviathan (Awakened). Dodge the boulder attacks, use Protect from Magic during ranged phase, and destroy the Shadow Leeches. Awakened mode has enhanced mechanics and higher stats",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -2191,7 +2191,7 @@
       }
     ],
     "locationDescription": "Lassar Undercity entrance, Ice Mountain",
-    "travelTip": "Lassar teleport (ancient)",
+    "travelTip": "Ring of Shadows -> Lassar Undercity",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
@@ -2205,7 +2205,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Lassar Undercity beneath Ice Mountain.",
+        "description": "Use Ring of Shadows to teleport to Lassar Undercity, or enter the sinkhole north-west of Camdozaal",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
@@ -2213,7 +2213,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill The Whisperer (Awakened).",
+        "description": "Kill The Whisperer (Awakened). Dodge the tentacle attacks in the pillared room, switch prayers for the Screech attack, and step on the correct tiles during the shadow phase. Awakened mode has enhanced mechanics and higher stats",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
@@ -2313,7 +2313,7 @@
       }
     ],
     "locationDescription": "The Stranglewood, south of Mount Quidamortem",
-    "travelTip": "Ring of shadows -> Stranglewood, or Fairy ring BLS -> rowboat",
+    "travelTip": "Ring of Shadows -> The Stranglewood",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
@@ -2327,7 +2327,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to The Stranglewood.",
+        "description": "Use Ring of Shadows to teleport to The Stranglewood, or walk from the Kourend Woodland",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
@@ -2335,7 +2335,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Vardorvis (Awakened).",
+        "description": "Kill Vardorvis (Awakened). Use Protect from Melee, dodge the axes, and kill the Strangled spawns quickly before they heal the boss. Awakened mode has enhanced mechanics and higher stats",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
@@ -3278,7 +3278,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Waterbirth Island, Rellekka.",
+        "description": "Travel to Waterbirth Island via Rellekka docks or Lunar Isle teleport. Navigate the dungeon to the kings' lair",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3286,7 +3286,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Rex.",
+        "description": "Kill Dagannoth Rex. Use Magic (fire spells work best). Rex is weak to Magic and uses melee — Protect from Melee when nearby",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3350,7 +3350,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Waterbirth Island, Rellekka.",
+        "description": "Travel to Waterbirth Island via Rellekka docks or Lunar Isle teleport. Navigate the dungeon to the kings' lair",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3358,7 +3358,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Prime.",
+        "description": "Kill Dagannoth Prime. Use Ranged. Prime attacks with Magic — use Protect from Magic when targeting Prime",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3422,7 +3422,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Waterbirth Island, Rellekka.",
+        "description": "Travel to Waterbirth Island via Rellekka docks or Lunar Isle teleport. Navigate the dungeon to the kings' lair",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3430,7 +3430,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Supreme.",
+        "description": "Kill Dagannoth Supreme. Use Melee. Supreme attacks with Ranged — use Protect from Missiles when targeting Supreme",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -4502,7 +4502,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Catacombs of Kourend (requires Dark totem from Catacomb monsters).",
+        "description": "Use dark totem on the Dark Altar in the Catacombs of Kourend. Requires 3 totem pieces from Catacomb monsters",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
@@ -4510,7 +4510,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Skotizo.",
+        "description": "Kill Skotizo. Destroy the Awakened Altars around the room to weaken him, use Arclight for massive damage bonus",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
