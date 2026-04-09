@@ -7712,7 +7712,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Obtain from low-level monsters or Hans in Lumbridge"
   },
   {
     "name": "Revenants",
@@ -12819,7 +12820,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Obtain from various activities, open for random tier clue"
   },
   {
     "name": "Castle Wars",
@@ -14238,7 +14240,7 @@
       }
     ],
     "locationDescription": "Barbarian Outpost, north of Baxtorian Falls",
-    "travelTip": "Minigame tele -> BA",
+    "travelTip": "Games necklace -> Barbarian Assault outpost",
     "npcId": 1657,
     "interactAction": "Talk-to",
     "dialogOptions": [
@@ -18320,7 +18322,7 @@
       }
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Eye of newt + Feather)",
-    "travelTip": "Fairy ring DJP",
+    "travelTip": "Fairy ring DJP -> Tower of Life (south of Ardougne)",
     "mutuallyExclusiveSources": [
       "Creature Creation (Frogeel)",
       "Creature Creation (Jubster)",
@@ -18381,7 +18383,7 @@
       }
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Cowhide + Unicorn horn)",
-    "travelTip": "Fairy ring DJP",
+    "travelTip": "Fairy ring DJP -> Tower of Life (south of Ardougne)",
     "mutuallyExclusiveSources": [
       "Creature Creation (Frogeel)",
       "Creature Creation (Jubster)",
@@ -18442,7 +18444,7 @@
       }
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Red spiders' eggs + Raw sardine)",
-    "travelTip": "Fairy ring DJP",
+    "travelTip": "Fairy ring DJP -> Tower of Life (south of Ardougne)",
     "mutuallyExclusiveSources": [
       "Creature Creation (Frogeel)",
       "Creature Creation (Jubster)",
@@ -18503,7 +18505,7 @@
       }
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Raw swordfish + Raw chicken)",
-    "travelTip": "Fairy ring DJP",
+    "travelTip": "Fairy ring DJP -> Tower of Life (south of Ardougne)",
     "mutuallyExclusiveSources": [
       "Creature Creation (Frogeel)",
       "Creature Creation (Jubster)",
@@ -18564,7 +18566,7 @@
       }
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Raw jubbly + Raw lobster)",
-    "travelTip": "Fairy ring DJP",
+    "travelTip": "Fairy ring DJP -> Tower of Life (south of Ardougne)",
     "mutuallyExclusiveSources": [
       "Creature Creation (Frogeel)",
       "Creature Creation (Newtroost)",
@@ -18625,7 +18627,7 @@
       }
     ],
     "locationDescription": "Tower of Life, south of Ardougne (Raw cave eel + Giant frog legs)",
-    "travelTip": "Fairy ring DJP",
+    "travelTip": "Fairy ring DJP -> Tower of Life (south of Ardougne)",
     "mutuallyExclusiveSources": [
       "Creature Creation (Jubster)",
       "Creature Creation (Newtroost)",
@@ -19154,7 +19156,7 @@
       }
     ],
     "locationDescription": "Lumbridge cow field",
-    "travelTip": "Lumbridge teleport",
+    "travelTip": "Quetzal whistle -> Varlamore, or Civitas illa Fortis teleport",
     "npcId": 15626,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -20452,7 +20454,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Obtain from low-level monsters, H.A.M. members, or pickpocketing"
   },
   {
     "name": "Medium Treasure Trails",
@@ -21308,7 +21311,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Obtain from mid-level monsters, eclectic implings, or Falconry"
   },
   {
     "name": "Hard Treasure Trails",
@@ -22297,7 +22301,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Obtain from bosses, Jellies, or hard clue bottles while fishing"
   },
   {
     "name": "Elite Treasure Trails",
@@ -22761,7 +22766,8 @@
       }
     ],
     "ironKillTimeSeconds": 6000,
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Obtain from bosses, Barrows, or elite clue geodes while mining"
   },
   {
     "name": "Master Treasure Trails",
@@ -23149,7 +23155,8 @@
       }
     ],
     "ironKillTimeSeconds": 7200,
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Watson in Hosidius (trade in one of each tier), or from bosses"
   },
   {
     "name": "Hard Treasure Trail Rewards (Rare)",
@@ -23367,7 +23374,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Complete hard clue scrolls for mega-rare table rolls"
   },
   {
     "name": "Elite Treasure Trail Rewards (Rare)",
@@ -23690,7 +23698,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Complete elite clue scrolls for mega-rare table rolls"
   },
   {
     "name": "Master Treasure Trail Rewards (Rare)",
@@ -24063,7 +24072,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Complete master clue scrolls for mega-rare table rolls"
   },
   {
     "name": "Shared Treasure Trail Rewards",
@@ -24449,7 +24459,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Complete any tier clue scroll for shared reward table"
   },
   {
     "name": "The Mimic",
@@ -24486,7 +24497,8 @@
         "completionCondition": "MANUAL"
       }
     ],
-    "afkLevel": 1
+    "afkLevel": 1,
+    "travelTip": "Enable via Watson, then open elite+ caskets for Mimic chance"
   },
   {
     "name": "Thieving (Seed Stalls)",
