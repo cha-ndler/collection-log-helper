@@ -95,7 +95,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 		EFFICIENT("Efficient"),
 		CATEGORY_FOCUS("Category Focus"),
 		SEARCH("Search"),
-		PET_HUNT("Pet Hunt");
+		PET_HUNT("Pet Hunt"),
+		STATISTICS("Statistics");
 
 		private final String displayName;
 
@@ -832,6 +833,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 					case PET_HUNT:
 						buildPetHuntView();
 						break;
+					case STATISTICS:
+						buildStatsView();
+						break;
 				}
 
 				// Restore expanded category state
@@ -1111,6 +1115,135 @@ public class CollectionLogHelperPanel extends PluginPanel
 				addEmptyStateMessage("All pets obtained!");
 			}
 		}
+	}
+
+	private void buildStatsView()
+	{
+		// Overall summary
+		int totalObtained = 0;
+		int totalItems = 0;
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			for (CollectionLogItem item : source.getItems())
+			{
+				totalItems++;
+				if (collectionState.isItemObtained(item.getItemId()))
+				{
+					totalObtained++;
+				}
+			}
+		}
+		double overallPct = totalItems > 0 ? 100.0 * totalObtained / totalItems : 0;
+
+		JPanel overallPanel = new JPanel(new BorderLayout(5, 2));
+		overallPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
+		overallPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+
+		JLabel overallLabel = new JLabel(String.format("Collection Log: %d / %d (%.1f%%)",
+			totalObtained, totalItems, overallPct));
+		overallLabel.setFont(FontManager.getRunescapeBoldFont());
+		overallLabel.setForeground(Color.WHITE);
+		overallPanel.add(overallLabel, BorderLayout.NORTH);
+
+		JPanel overallBar = createProgressBar(totalObtained, totalItems);
+		overallPanel.add(overallBar, BorderLayout.SOUTH);
+		listContainer.add(overallPanel);
+
+		listContainer.add(javax.swing.Box.createVerticalStrut(4));
+
+		// Per-category breakdown
+		for (CollectionLogCategory category : CollectionLogCategory.values())
+		{
+			List<CollectionLogSource> sources = database.getSourcesByCategory(category);
+			if (sources == null || sources.isEmpty())
+			{
+				continue;
+			}
+
+			int catObtained = 0;
+			int catTotal = 0;
+			int catSources = sources.size();
+			int catSourcesComplete = 0;
+
+			for (CollectionLogSource source : sources)
+			{
+				boolean sourceComplete = true;
+				for (CollectionLogItem item : source.getItems())
+				{
+					catTotal++;
+					if (collectionState.isItemObtained(item.getItemId()))
+					{
+						catObtained++;
+					}
+					else
+					{
+						sourceComplete = false;
+					}
+				}
+				if (sourceComplete)
+				{
+					catSourcesComplete++;
+				}
+			}
+
+			double catPct = catTotal > 0 ? 100.0 * catObtained / catTotal : 0;
+
+			JPanel catPanel = new JPanel(new BorderLayout(5, 2));
+			catPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
+			catPanel.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
+
+			JLabel catNameLabel = new JLabel(category.getDisplayName());
+			catNameLabel.setFont(FontManager.getRunescapeBoldFont());
+			catNameLabel.setForeground(Color.WHITE);
+
+			JLabel catCountLabel = new JLabel(String.format("%d / %d  (%.1f%%)",
+				catObtained, catTotal, catPct));
+			catCountLabel.setFont(FontManager.getRunescapeSmallFont());
+			catCountLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+			catCountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			JPanel catHeader = new JPanel(new BorderLayout());
+			catHeader.setOpaque(false);
+			catHeader.add(catNameLabel, BorderLayout.WEST);
+			catHeader.add(catCountLabel, BorderLayout.EAST);
+			catPanel.add(catHeader, BorderLayout.NORTH);
+
+			JPanel catBar = createProgressBar(catObtained, catTotal);
+			catPanel.add(catBar, BorderLayout.CENTER);
+
+			JLabel catDetailLabel = new JLabel(String.format("%d sources, %d complete",
+				catSources, catSourcesComplete));
+			catDetailLabel.setFont(FontManager.getRunescapeSmallFont());
+			catDetailLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+			catPanel.add(catDetailLabel, BorderLayout.SOUTH);
+
+			listContainer.add(catPanel);
+			listContainer.add(javax.swing.Box.createVerticalStrut(2));
+		}
+	}
+
+	private JPanel createProgressBar(int obtained, int total)
+	{
+		final double pct = total > 0 ? (double) obtained / total : 0;
+		JPanel bar = new JPanel()
+		{
+			@Override
+			protected void paintComponent(java.awt.Graphics g)
+			{
+				super.paintComponent(g);
+				int w = getWidth();
+				int h = getHeight();
+				g.setColor(new Color(60, 60, 60));
+				g.fillRect(0, 0, w, h);
+				if (pct > 0)
+				{
+					g.setColor(new Color(0, 200, 0));
+					g.fillRect(0, 0, (int) (w * pct), h);
+				}
+			}
+		};
+		bar.setPreferredSize(new Dimension(0, 6));
+		return bar;
 	}
 
 	private void showDetail(CollectionLogItem item, CollectionLogSource source)
