@@ -155,7 +155,8 @@ class CategorySummaryPanel extends JPanel
 					continue;
 				}
 				ItemRowPanel row = new ItemRowPanel(item, source, itemObtained, 0,
-					locked, lazyItemManager, () -> lazyClickHandler.onItemClicked(item, source));
+					locked, lazyRequirementsChecker.getUnmetRequirements(source.getName()),
+					lazyItemManager, () -> lazyClickHandler.onItemClicked(item, source));
 				itemsContainer.add(row);
 			}
 		}
