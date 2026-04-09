@@ -18804,28 +18804,28 @@
       {
         "itemId": 31088,
         "name": "Avernic treads",
-        "dropRate": 0.00992,
+        "dropRate": 0.000741,
         "isPet": false,
         "wikiPage": "Avernic_treads"
       },
       {
         "itemId": 31115,
         "name": "Eye of ayak (uncharged)",
-        "dropRate": 0.010415,
+        "dropRate": 0.0005,
         "isPet": false,
         "wikiPage": "Eye_of_ayak_(uncharged)"
       },
       {
         "itemId": 31109,
         "name": "Mokhaiotl cloth",
-        "dropRate": 0.010811,
+        "dropRate": 0.0004,
         "isPet": false,
         "wikiPage": "Mokhaiotl_cloth"
       },
       {
         "itemId": 31099,
         "name": "Mokhaiotl waystone",
-        "dropRate": 0.501823,
+        "dropRate": 0.067308,
         "isPet": false,
         "wikiPage": "Mokhaiotl_waystone"
       },
@@ -18840,7 +18840,7 @@
       {
         "itemId": 31130,
         "name": "Dom",
-        "dropRate": 0.012277,
+        "dropRate": 0.001,
         "isPet": true,
         "wikiPage": "Dom",
         "independent": true
