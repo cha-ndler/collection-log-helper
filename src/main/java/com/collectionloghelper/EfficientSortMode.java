@@ -35,7 +35,8 @@ public enum EfficientSortMode
 	KILL_TIME("Kill Time"),
 	DROP_RATE("Best Drop Rate"),
 	ALPHABETICAL("Alphabetical"),
-	ITEMS_REMAINING("Items Remaining");
+	ITEMS_REMAINING("Items Remaining"),
+	COMPLETION_PERCENTAGE("Completion %");
 
 	private final String displayName;
 
