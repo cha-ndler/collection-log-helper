@@ -1119,31 +1119,30 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private void buildStatsView()
 	{
-		// Overall summary
-		int totalObtained = 0;
-		int totalItems = 0;
-		for (CollectionLogSource source : database.getAllSources())
-		{
-			for (CollectionLogItem item : source.getItems())
-			{
-				totalItems++;
-				if (collectionState.isItemObtained(item.getItemId()))
-				{
-					totalObtained++;
-				}
-			}
-		}
-		double overallPct = totalItems > 0 ? 100.0 * totalObtained / totalItems : 0;
+		// Overall summary — use varp-based counts for accurate deduplicated totals
+		int totalObtained = collectionState.getTotalObtained();
+		int totalItems = collectionState.getTotalPossible();
+		double overallPct = collectionState.getCompletionPercentage();
 
 		JPanel overallPanel = new JPanel(new BorderLayout(5, 2));
 		overallPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
 		overallPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
-		JLabel overallLabel = new JLabel(String.format("Collection Log: %d / %d (%.1f%%)",
+		JLabel overallTitle = new JLabel("Collection Log");
+		overallTitle.setFont(FontManager.getRunescapeBoldFont());
+		overallTitle.setForeground(Color.WHITE);
+
+		JLabel overallCount = new JLabel(String.format("%d / %d (%.1f%%)",
 			totalObtained, totalItems, overallPct));
-		overallLabel.setFont(FontManager.getRunescapeBoldFont());
-		overallLabel.setForeground(Color.WHITE);
-		overallPanel.add(overallLabel, BorderLayout.NORTH);
+		overallCount.setFont(FontManager.getRunescapeBoldFont());
+		overallCount.setForeground(Color.WHITE);
+		overallCount.setHorizontalAlignment(SwingConstants.RIGHT);
+
+		JPanel overallHeader = new JPanel(new BorderLayout());
+		overallHeader.setOpaque(false);
+		overallHeader.add(overallTitle, BorderLayout.WEST);
+		overallHeader.add(overallCount, BorderLayout.EAST);
+		overallPanel.add(overallHeader, BorderLayout.NORTH);
 
 		JPanel overallBar = createProgressBar(totalObtained, totalItems);
 		overallPanel.add(overallBar, BorderLayout.SOUTH);
@@ -1160,30 +1159,53 @@ public class CollectionLogHelperPanel extends PluginPanel
 				continue;
 			}
 
-			int catObtained = 0;
-			int catTotal = 0;
 			int catSources = sources.size();
 			int catSourcesComplete = 0;
+
+			// Use varp-based counts for categories the game tracks (deduplicated),
+			// fall back to manual counting for SLAYER/SKILLING (no game varps)
+			int varpCount = collectionState.getCategoryCount(category);
+			int varpMax = collectionState.getCategoryMax(category);
+			boolean useVarps = varpMax > 0;
+
+			int catObtained = 0;
+			int catTotal = 0;
 
 			for (CollectionLogSource source : sources)
 			{
 				boolean sourceComplete = true;
 				for (CollectionLogItem item : source.getItems())
 				{
-					catTotal++;
-					if (collectionState.isItemObtained(item.getItemId()))
+					if (!useVarps)
 					{
-						catObtained++;
+						catTotal++;
+						if (collectionState.isItemObtained(item.getItemId()))
+						{
+							catObtained++;
+						}
+						else
+						{
+							sourceComplete = false;
+						}
 					}
 					else
 					{
-						sourceComplete = false;
+						if (!collectionState.isItemObtained(item.getItemId()))
+						{
+							sourceComplete = false;
+						}
 					}
 				}
 				if (sourceComplete)
 				{
 					catSourcesComplete++;
 				}
+			}
+
+			if (useVarps)
+			{
+				catObtained = varpCount;
+				catTotal = varpMax;
 			}
 
 			double catPct = catTotal > 0 ? 100.0 * catObtained / catTotal : 0;
