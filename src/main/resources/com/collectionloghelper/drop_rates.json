@@ -3875,7 +3875,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Rogues' Castle, deep Wilderness.",
+        "description": "Travel to the Chaos Elemental in deep Wilderness (level 50+). Use burning amulet to Lava Maze and run west",
         "worldX": 3261,
         "worldY": 3927,
         "worldPlane": 0,
@@ -3883,7 +3883,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Chaos Elemental.",
+        "description": "Kill the Chaos Elemental. Wear cheap gear — it can unequip your items. Use Protect from Magic and bring high-healing food",
         "worldX": 3261,
         "worldY": 3927,
         "worldPlane": 0,
@@ -4015,7 +4015,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to West of Lava Maze, Wilderness.",
+        "description": "Travel to the Chaos Fanatic in the Wilderness (level 42). Use burning amulet to Bandit Camp and run north-west",
         "worldX": 2979,
         "worldY": 3846,
         "worldPlane": 0,
@@ -4023,7 +4023,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Chaos Fanatic.",
+        "description": "Kill the Chaos Fanatic. Use Protect from Magic and stand in melee range to avoid the multi-hit projectile",
         "worldX": 2979,
         "worldY": 3846,
         "worldPlane": 0,
@@ -4202,7 +4202,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Vet'ion's Rest in the Wilderness.",
+        "description": "Travel to Vet'ion in the Wilderness. Use burning amulet to Chaos Temple and run east",
         "worldX": 3220,
         "worldY": 3783,
         "worldPlane": 0,
@@ -4210,7 +4210,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Vet'ion.",
+        "description": "Kill Vet'ion. Use crush weapons (Inquisitor's mace ideal). Watch for the lightning attack and kill Skeletal Hellhounds quickly",
         "worldX": 3220,
         "worldY": 3783,
         "worldPlane": 0,
@@ -4288,7 +4288,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Callisto's Den in the Wilderness.",
+        "description": "Travel to Callisto in the Wilderness. Use burning amulet to Chaos Temple and run south-east",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
@@ -4296,7 +4296,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Callisto.",
+        "description": "Kill Callisto. Use Verac's or Arclight. Watch for the knockback shockwave and the healing cubs — kill cubs first",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
@@ -4575,7 +4575,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Farming Guild, Hosidius.",
+        "description": "Travel to the Farming Guild (fairy ring CIR or Skills necklace). Plant a Hespori seed in the Hespori patch (requires 65 Farming)",
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
@@ -4583,7 +4583,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Hespori.",
+        "description": "Kill Hespori. Use Protect from Magic, avoid the flower special attacks. Can only be fought when fully grown (~32 hours after planting)",
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
@@ -6243,7 +6243,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Corrupted Gauntlet.",
+        "description": "Travel to Prifddinas via crystal seed teleport or charter ship. The Gauntlet entrance is in the north-west of the city",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0,
@@ -6253,7 +6253,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Complete the Corrupted Gauntlet and collect loot.",
+        "description": "Complete the Corrupted Gauntlet. Gather resources, craft armour and weapons, then defeat the Corrupted Hunllef. Tier 3 armour + staff/halberd/bow recommended",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Corrupted Gauntlet completion count is:",
         "worldX": 3230,
@@ -6328,7 +6328,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Gauntlet.",
+        "description": "Travel to Prifddinas via crystal seed teleport or charter ship. The Gauntlet entrance is in the north-west of the city",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0,
@@ -6338,7 +6338,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Complete the Gauntlet and collect loot.",
+        "description": "Complete the Gauntlet. Gather resources, craft armour and weapons, then defeat the Crystalline Hunllef",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Gauntlet completion count is:",
         "worldX": 3230,
@@ -6940,7 +6940,7 @@
     "interactAction": "Mine",
     "guidanceSteps": [
       {
-        "description": "Travel to Zalcano's Prison, Prifddinas.",
+        "description": "Travel to Prifddinas via crystal seed teleport. Zalcano is in the south-east mining area",
         "worldX": 3031,
         "worldY": 6048,
         "worldPlane": 0,
@@ -6948,7 +6948,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Zalcano.",
+        "description": "Defeat Zalcano. Mine the glowing rocks, smith tephra into refined tephra at the furnace, then throw it at Zalcano. Repeat until she falls, then mine her for damage",
         "worldX": 3031,
         "worldY": 6048,
         "worldPlane": 0,
@@ -7128,7 +7128,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ruins, south of Lava Maze, Wilderness.",
+        "description": "Travel to the Crazy Archaeologist in the Ruins of Camdozaal area (Wilderness level 23). Use Games necklace to Corporeal Beast and run south",
         "worldX": 2975,
         "worldY": 3696,
         "worldPlane": 0,
@@ -7136,7 +7136,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Crazy archaeologist.",
+        "description": "Kill the Crazy archaeologist. Dodge the book rain special attack (move 2 tiles) and use Protect from Missiles",
         "worldX": 2975,
         "worldY": 3696,
         "worldPlane": 0,
@@ -19395,7 +19395,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Tar Swamp, Fossil Island.",
+        "description": "Travel to Fossil Island via boat from Digsite. The Deranged Archaeologist is on the south coast",
         "worldX": 3683,
         "worldY": 3706,
         "worldPlane": 0,
@@ -19403,7 +19403,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Deranged Archaeologist.",
+        "description": "Kill the Deranged Archaeologist. Dodge the book rain attack and use Protect from Missiles. Easier version of Crazy archaeologist",
         "worldX": 3683,
         "worldY": 3706,
         "worldPlane": 0,
