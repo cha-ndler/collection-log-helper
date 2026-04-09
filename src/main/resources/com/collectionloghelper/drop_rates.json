@@ -2470,8 +2470,8 @@
   {
     "name": "The Nightmare",
     "category": "BOSSES",
-    "worldX": 3662,
-    "worldY": 3218,
+    "worldX": 3728,
+    "worldY": 3302,
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "requirements": {
@@ -2635,8 +2635,8 @@
   {
     "name": "Phosani's Nightmare",
     "category": "BOSSES",
-    "worldX": 3662,
-    "worldY": 3218,
+    "worldX": 3728,
+    "worldY": 3302,
     "worldPlane": 0,
     "killTimeSeconds": 480,
     "ironKillTimeSeconds": 540,
