@@ -1652,7 +1652,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 	private void updateControlVisibility()
 	{
-		afkFilterSelector.setVisible(currentMode == Mode.EFFICIENT || currentMode == Mode.PET_HUNT);
+		afkFilterSelector.setVisible(currentMode == Mode.EFFICIENT || currentMode == Mode.PET_HUNT
+			|| currentMode == Mode.CATEGORY_FOCUS);
 		sortSelector.setVisible(currentMode == Mode.EFFICIENT);
 		categorySelector.setVisible(currentMode == Mode.CATEGORY_FOCUS);
 		searchField.setVisible(currentMode == Mode.SEARCH);
