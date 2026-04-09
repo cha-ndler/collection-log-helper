@@ -19184,8 +19184,8 @@
   {
     "name": "Shellbane Gryphon",
     "category": "BOSSES",
-    "worldX": 3176,
-    "worldY": 2477,
+    "worldX": 13993,
+    "worldY": 9901,
     "worldPlane": 0,
     "killTimeSeconds": 36,
     "requirements": {
@@ -19238,16 +19238,16 @@
     "guidanceSteps": [
       {
         "description": "Travel to Shellbane Gryphon Cave, The Great Conch.",
-        "worldX": 3176,
-        "worldY": 2477,
+        "worldX": 13993,
+        "worldY": 9901,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
       },
       {
         "description": "Enter the cave and fight the Shellbane Gryphon. Requires 51 Slayer. Use Protect from Melee",
-        "worldX": 3177,
-        "worldY": 2478,
+        "worldX": 13993,
+        "worldY": 9901,
         "worldPlane": 0,
         "objectId": 58439,
         "objectInteractAction": "Enter",
@@ -19255,8 +19255,8 @@
       },
       {
         "description": "Kill the Shellbane Gryphon. Use Protect from Melee and dodge the wing gust attack. 51 Slayer required",
-        "worldX": 3176,
-        "worldY": 2477,
+        "worldX": 13993,
+        "worldY": 9901,
         "worldPlane": 0,
         "npcId": 14860,
         "interactAction": "Attack",
