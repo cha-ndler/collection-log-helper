@@ -2527,7 +2527,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Grotesque Guardians.",
+        "description": "Kill the Grotesque Guardians on the Slayer Tower roof. Requires gargoyle Slayer task + brittle key. Dodge Dawn lightning and Dusk prison attack",
         "worldX": 3427,
         "worldY": 3543,
         "worldPlane": 2,
@@ -3019,7 +3019,7 @@
         "completionVarbitValue": 40
       },
       {
-        "description": "Kill Nex in the Ancient Prison",
+        "description": "Kill Nex in the Ancient Prison. 4-phase fight: Smoke (Protect from Magic), Shadow (avoid shadow), Blood (do not attack during siphon), Ice (Protect from Magic). Team recommended",
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
@@ -3175,7 +3175,7 @@
         "worldMessage": "Bring a spade and a light source"
       },
       {
-        "description": "Kill the Giant Mole",
+        "description": "Kill the Giant Mole. Bring Falador shield 3+ to track her location when she digs away. Use Dharok or twisted bow",
         "worldX": 1759,
         "worldY": 5189,
         "worldPlane": 0,
@@ -3230,7 +3230,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Bryophyta.",
+        "description": "Kill Bryophyta. Requires mossy key to enter. Kill the Growthlings that heal her, use magic or ranged",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
@@ -3286,7 +3286,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Obor.",
+        "description": "Kill Obor. Requires giant key to enter. Use Protect from Melee and a strong melee weapon",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -3605,7 +3605,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Kraken",
+        "description": "Kill the Kraken boss. Disturb the whirlpool, then attack the tentacles before focusing the boss. 87 Slayer required, on task only",
         "worldX": 2272,
         "worldY": 10016,
         "worldPlane": 0,
@@ -3815,7 +3815,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Abyssal Sire",
+        "description": "Kill the Abyssal Sire. Stun the respiratory systems, then attack the Sire. Watch for poison pools and the teleport grab. 85 Slayer on task",
         "worldX": 3039,
         "worldY": 4763,
         "worldPlane": 0,
@@ -3891,7 +3891,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the King Black Dragon",
+        "description": "Kill the King Black Dragon. Use anti-dragon shield + antifire potion. Protect from Magic and use ranged or melee with stab weapons",
         "worldX": 2269,
         "worldY": 4705,
         "worldPlane": 0,
@@ -4460,7 +4460,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Demonic gorillas.",
+        "description": "Kill Demonic gorillas in the Crash Site Cavern. Switch prayers based on their attack style. They change after 3 missed hits. Use ranged + melee switch",
         "worldX": 2405,
         "worldY": 3419,
         "worldPlane": 0,
@@ -7332,7 +7332,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Araxxor.",
+        "description": "Kill Araxxor. 3-phase spider boss with acid, darkness, and minion mechanics. Use crush weapons and Protect from Melee. Watch for the web cocoon special",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
@@ -7539,7 +7539,7 @@
         "completionDistance": 30
       },
       {
-        "description": "Kill Tormented Demons.",
+        "description": "Kill Tormented Demons. Switch attack styles to break their protection prayers. Use fire spells + Darklight to remove their shield",
         "worldX": 4100,
         "worldY": 4415,
         "worldPlane": 0,
@@ -7951,7 +7951,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Cave Crawler.",
+        "description": "Kill Cave Crawlers in the Fremennik Slayer Dungeon or Lumbridge Swamp caves. Low Slayer requirement (10). Can poison you",
         "worldX": 2788,
         "worldY": 10000,
         "worldPlane": 0,
@@ -8010,7 +8010,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Rockslug.",
+        "description": "Kill Rockslugs in the Fremennik Slayer Dungeon. Finish them with a bag of salt when low HP (requires 20 Slayer)",
         "worldX": 2794,
         "worldY": 10018,
         "worldPlane": 0,
@@ -8083,7 +8083,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Cockatrice.",
+        "description": "Kill Cockatrices in the Fremennik Slayer Dungeon. Requires mirror shield equipped (25 Slayer)",
         "worldX": 2792,
         "worldY": 10035,
         "worldPlane": 0,
@@ -8142,7 +8142,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Pyrefiend.",
+        "description": "Kill Pyrefiends in the Fremennik Slayer Dungeon or Catacombs of Kourend (30 Slayer). Use Protect from Magic",
         "worldX": 2761,
         "worldY": 10008,
         "worldPlane": 0,
@@ -8258,7 +8258,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Basilisk.",
+        "description": "Kill Basilisks in the Fremennik Slayer Dungeon. Requires mirror shield equipped (40 Slayer)",
         "worldX": 2744,
         "worldY": 10008,
         "worldPlane": 0,
@@ -8377,7 +8377,7 @@
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Kill Infernal Mage.",
+        "description": "Kill Infernal Mages in the Slayer Tower. Use Protect from Magic (45 Slayer)",
         "worldX": 3440,
         "worldY": 3563,
         "worldPlane": 1,
@@ -8653,7 +8653,7 @@
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Kill Bloodveld.",
+        "description": "Kill Bloodvelds in the Slayer Tower or Catacombs of Kourend. Use Protect from Melee, weak to ranged (50 Slayer)",
         "worldX": 3442,
         "worldY": 3543,
         "worldPlane": 1,
@@ -8773,7 +8773,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Jelly.",
+        "description": "Kill Jellies in the Fremennik Slayer Dungeon or Catacombs of Kourend. Use Protect from Melee (52 Slayer)",
         "worldX": 2704,
         "worldY": 10028,
         "worldPlane": 0,
@@ -8839,7 +8839,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Turoth.",
+        "description": "Kill Turoths in the Fremennik Slayer Dungeon. Must use leaf-bladed weapons, broad bolts, or magic dart (55 Slayer)",
         "worldX": 2722,
         "worldY": 10002,
         "worldPlane": 0,
@@ -8954,7 +8954,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Cave Horror.",
+        "description": "Kill Cave Horrors in the Mos Le Harmless cave. Requires witchwood icon necklace equipped to prevent stat drain (58 Slayer)",
         "worldX": 3740,
         "worldY": 9373,
         "worldPlane": 0,
@@ -9013,7 +9013,7 @@
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Kill Aberrant Spectre.",
+        "description": "Kill Aberrant Spectres in the Slayer Tower or Catacombs. Requires nosepeg or slayer helm. Use Protect from Magic (60 Slayer)",
         "worldX": 3436,
         "worldY": 3547,
         "worldPlane": 1,
@@ -9153,7 +9153,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Wyrm.",
+        "description": "Kill Wyrms in the Karuulm Slayer Dungeon. Pray Magic or use boots of stone. Found on the first level (62 Slayer)",
         "worldX": 1311,
         "worldY": 10205,
         "worldPlane": 0,
@@ -9333,7 +9333,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Fossil Island Wyvern.",
+        "description": "Kill Fossil Island Wyverns in the Wyvern Cave. Requires elemental/mind/dragonfire shield for ice breath (66 Slayer)",
         "worldX": 3602,
         "worldY": 10290,
         "worldPlane": 0,
@@ -9413,7 +9413,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Kurask.",
+        "description": "Kill Kuraskes in the Fremennik Slayer Dungeon. Must use leaf-bladed weapons, broad bolts, or magic dart (70 Slayer)",
         "worldX": 2701,
         "worldY": 9992,
         "worldPlane": 0,
@@ -9543,7 +9543,7 @@
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Kill Gargoyle.",
+        "description": "Kill Gargoyles on the Slayer Tower top floor. Finish with rock hammer when low HP. Auto-smash with Gargoyle smasher perk (75 Slayer)",
         "worldX": 3429,
         "worldY": 3534,
         "worldPlane": 2,
@@ -9619,7 +9619,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Custodian Stalker.",
+        "description": "Kill Elder Custodian Stalkers in the Stalker Den, Custodia Pass. Higher tier variants drop rarer uniques",
         "worldX": 1301,
         "worldY": 9820,
         "worldPlane": 0,
@@ -9732,7 +9732,7 @@
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Kill Nechryael.",
+        "description": "Kill Nechryaels in the Slayer Tower or Catacombs of Kourend. Burst/barrage the death spawns in Catacombs for fast tasks (80 Slayer)",
         "worldX": 3442,
         "worldY": 3558,
         "worldPlane": 2,
@@ -9933,7 +9933,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Drake.",
+        "description": "Kill Drakes in the Karuulm Slayer Dungeon. Dodge the volcanic breath attack by moving. Use boots of stone (84 Slayer)",
         "worldX": 1310,
         "worldY": 10057,
         "worldPlane": 0,
@@ -10006,7 +10006,7 @@
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Kill Abyssal Demon.",
+        "description": "Kill Abyssal Demons in the Slayer Tower or Catacombs. They teleport around. Use burst/barrage in Catacombs for efficient tasks (85 Slayer)",
         "worldX": 3418,
         "worldY": 3560,
         "worldPlane": 2,
@@ -10072,7 +10072,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Cave Kraken.",
+        "description": "Kill the Kraken boss or regular cave krakens. Disturb the whirlpool to start, attack tentacles first. 87 Slayer, on task only",
         "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
@@ -10183,7 +10183,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Araxyte.",
+        "description": "Kill Araxytes in the Araxyte Cave (north-east of Darkmeyer). Dodge the web and venom attacks. Use melee with crush (92 Slayer)",
         "worldX": 3657,
         "worldY": 3407,
         "worldPlane": 0,
@@ -10316,7 +10316,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Hydra.",
+        "description": "Kill Hydras in the Karuulm Slayer Dungeon lower level. Dodge the fire and poison attacks. Use boots of stone (95 Slayer)",
         "worldX": 1310,
         "worldY": 10190,
         "worldPlane": 0,
@@ -10363,7 +10363,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Vyrewatch Sentinel.",
+        "description": "Kill Vyrewatch Sentinels in Darkmeyer. Requires flail of ivandis or blisterwood weapon. Good blood shard farming spot",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
@@ -14946,7 +14946,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Chompy Bird Hunting.",
+        "description": "Hunt and kill Chompy birds in the Feldip Hills using ogre bellows + bloated toads. Need Western Provinces diary kills for elite hats",
         "worldX": 2387,
         "worldY": 3040,
         "worldPlane": 0,
@@ -17725,7 +17725,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill TzHaar.",
+        "description": "Kill TzHaar creatures in Mor Ul Rek or sell items at TzHaar shops for Tokkul. Buy uncut onyx from the gem shop",
         "worldX": 2444,
         "worldY": 5175,
         "worldPlane": 0,
@@ -17888,7 +17888,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Elder Chaos Druids.",
+        "description": "Kill Elder Chaos Druids in the Wilderness (level 13). They drop the Elder chaos robe set. Watch for PKers",
         "worldX": 3232,
         "worldY": 3621,
         "worldPlane": 0,
@@ -18340,7 +18340,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Creature Creation (Newtroost).",
+        "description": "Create and kill Newtroosts in the Tower of Life. Use raw chicken + eye of newt on the altar",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
@@ -18401,7 +18401,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Creature Creation (Unicow).",
+        "description": "Create and kill Unicows in the Tower of Life. Use cowhide + unicorn horn on the altar",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
@@ -18462,7 +18462,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Creature Creation (Spidine).",
+        "description": "Create and kill Spidines in the Tower of Life. Use red spider eggs + raw sardine on the altar",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
@@ -18523,7 +18523,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Creature Creation (Swordchick).",
+        "description": "Create and kill Swordchicks in the Tower of Life. Use raw chicken + metal sword on the altar",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
@@ -18584,7 +18584,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Creature Creation (Jubster).",
+        "description": "Create and kill Jubsters in the Tower of Life. Use raw shrimps + raw cake on the altar",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
@@ -18645,7 +18645,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Creature Creation (Frogeel).",
+        "description": "Create and kill Frogeels in the Tower of Life. Use raw cave eel + giant frog legs on the altar",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
@@ -19252,7 +19252,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Shellbane Gryphon.",
+        "description": "Kill the Shellbane Gryphon. Use Protect from Melee and dodge the wing gust attack. 51 Slayer required",
         "worldX": 3176,
         "worldY": 2477,
         "worldPlane": 0,
@@ -19312,7 +19312,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Scurrius.",
+        "description": "Kill Scurrius in the Varrock Sewers. Dodge the falling rocks and kill the giant rats that heal the boss. Low-level boss suitable for mid-game players",
         "worldX": 3299,
         "worldY": 9867,
         "worldPlane": 0,
@@ -26277,7 +26277,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill ogress shamans for unique drops.",
+        "description": "Kill Ogress Shamans in the Corsair Cove Dungeon",
         "worldX": 2459,
         "worldY": 9488,
         "worldPlane": 2,
@@ -26355,7 +26355,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill armoured zombies inside the fort.",
+        "description": "Kill Armoured Zombies in the Shayzien Crypts",
         "worldX": 3566,
         "worldY": 3390,
         "worldPlane": 0,
