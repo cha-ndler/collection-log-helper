@@ -16970,7 +16970,7 @@
     "travelTip": "Varies by activity",
     "guidanceSteps": [
       {
-        "description": "Travel to various locations throughout Gielinor.",
+        "description": "Check the Collection Log for miscellaneous items from random events, miniquests, and other activities.",
         "worldX": 3222,
         "worldY": 3218,
         "worldPlane": 0,
@@ -18200,7 +18200,7 @@
     "travelTip": "POH telescope -> nearest teleport",
     "guidanceSteps": [
       {
-        "description": "Travel to a crashed shooting star.",
+        "description": "Look for crashed shooting stars using a telescope in your POH, or check the star tracker on the mining guild notice board.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
