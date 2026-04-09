@@ -115,7 +115,7 @@
         "completionDistance": 30
       },
       {
-        "description": "Enter the God Wars Dungeon.",
+        "description": "Kill General Graardor. Use Protect from Melee, pray Piety, and tank the minions. Kill Sergeant Steelwill first if you want to reduce damage taken",
         "worldX": 2882,
         "worldY": 5310,
         "worldPlane": 2,
@@ -263,7 +263,7 @@
         "completionDistance": 30
       },
       {
-        "description": "Enter the God Wars Dungeon.",
+        "description": "Kill Commander Zilyana. Use Protect from Ranged and a crossbow. Kite her in a large loop around the room to avoid melee damage",
         "worldX": 2882,
         "worldY": 5310,
         "worldPlane": 2,
@@ -411,7 +411,7 @@
         "completionDistance": 30
       },
       {
-        "description": "Enter the God Wars Dungeon.",
+        "description": "Kill K'ril Tsutsaroth. Use Protect from Melee and high-healing food. His special attack can hit through prayer. Shadow of Tumeken or arclight effective",
         "worldX": 2882,
         "worldY": 5310,
         "worldPlane": 2,
@@ -559,7 +559,7 @@
         "completionDistance": 30
       },
       {
-        "description": "Enter the God Wars Dungeon.",
+        "description": "Kill Kree'arra. Use Protect from Ranged and chinchompas or crossbow. Kite in a loop. All GWD bosses require 40 KC of the corresponding faction",
         "worldX": 2882,
         "worldY": 5310,
         "worldPlane": 2,
@@ -785,7 +785,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Rellekka docks",
+        "description": "Travel to Rellekka docks, sail to Ungael Island via Torfinn. Use lunar isle teleport or Fremennik sea boots",
         "worldX": 2641,
         "worldY": 3697,
         "worldPlane": 0,
@@ -804,7 +804,7 @@
         "completionNpcId": 10405
       },
       {
-        "description": "Poke Vorkath to wake him, then kill him",
+        "description": "Kill Vorkath. Use Protect from Ranged for standard phase, dodge acid pools, and click the Zombified Spawn immediately when it appears",
         "worldX": 2273,
         "worldY": 4049,
         "worldPlane": 0,
@@ -1049,7 +1049,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm.",
+        "description": "Travel to the Karuulm Slayer Dungeon (fairy ring CIR or Mount Karuulm teleport). Descend to the lowest level",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
@@ -2501,7 +2501,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Slayer Tower.",
+        "description": "Travel to the Slayer Tower (fairy ring CKS, slayer ring, or Canifis teleport)",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
@@ -2509,7 +2509,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Climb the stairs to the top floor.",
+        "description": "Use the brittle key on the gargoyle door at the top of the Slayer Tower. Requires a gargoyle Slayer task",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 2,
@@ -3155,7 +3155,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Falador Park",
+        "description": "Travel to Falador Park. Dig on a mole hill with a spade to enter",
         "worldX": 2989,
         "worldY": 3378,
         "worldPlane": 0,
@@ -3209,7 +3209,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Get a Mossy key from moss giants",
+        "description": "Travel to the Varrock Sewers (manhole behind Varrock Palace or in Edgeville Dungeon)",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
@@ -3265,7 +3265,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Get a Giant key from hill giants",
+        "description": "Travel to the Edgeville Dungeon or Varrock Sewers hill giant area",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -3587,7 +3587,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Kraken Cove",
+        "description": "Travel to the Kraken Cove in the Fremennik Slayer Dungeon (fairy ring AJR or slayer ring)",
         "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
@@ -4451,7 +4451,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Crash Site Cavern.",
+        "description": "Enter the Crash Site Cavern beneath the Gnome Stronghold",
         "worldX": 2027,
         "worldY": 5613,
         "worldPlane": 0,
@@ -4494,7 +4494,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Lizardman Canyon, Shayzien.",
+        "description": "Travel to the Lizardman Temple or Canyon in Shayzien (Xeric's talisman or fairy ring DJR)",
         "worldX": 1472,
         "worldY": 3686,
         "worldPlane": 0,
