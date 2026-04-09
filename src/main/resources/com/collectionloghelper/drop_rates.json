@@ -11281,7 +11281,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Board a lander to play Pest Control.",
+        "description": "Board a lander to play Pest Control. Defend the Void Knight by destroying all 4 portals. Earn commendation points for the Void Knight set pieces",
         "worldX": 2659,
         "worldY": 2676,
         "worldPlane": 0,
@@ -12248,7 +12248,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Mine ore in the Volcanic Mine for mining XP and numulite rewards.",
+        "description": "Mine ore in the Volcanic Mine. Work in a team to mine boulders into the lava vortex for bonus points. Check stability and dodge falling rocks",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
@@ -12462,7 +12462,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Board Murphy's trawler and play Fishing Trawler rounds for unique fish rewards.",
+        "description": "Board Murphy's trawler at Port Khazard. Bail water and repair nets during the 5-minute voyage. Angler's outfit pieces are 1/8 per trawler reward",
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 0,
@@ -12532,7 +12532,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Escort NPCs between Burgh de Rott and Paterdomus for trek reward tokens.",
+        "description": "Escort NPCs on treks between Burgh de Rott and Paterdomus. Choose harder routes for better reward chances. Complete both directions for all rewards",
         "worldX": 3479,
         "worldY": 3241,
         "worldPlane": 0,
@@ -13083,7 +13083,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter a Castle Wars portal to join a team.",
+        "description": "Play Castle Wars by capturing the enemy flag and defending your own. Earn tickets to buy gold decorative armour from Lanthus",
         "worldX": 2440,
         "worldY": 3089,
         "worldPlane": 0,
@@ -13472,7 +13472,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Play Last Man Standing matches for points to spend at Justine's reward shop.",
+        "description": "Play Last Man Standing — a battle royale minigame on the island east of Ferox Enclave. Earn points to buy the Halos and Dragon Claws ornament kit",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
@@ -13860,7 +13860,7 @@
         "completionChatPattern": null
       },
       {
-        "description": "Talk to Honest Jimmy to join a team",
+        "description": "Play Trouble Brewing on Braindeath Island. Brew 'rum' by collecting ingredients and operating the distillery. Earn Pieces of Eight",
         "worldX": 3810,
         "worldY": 3021,
         "worldPlane": 0,
@@ -14427,7 +14427,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Catch fish using cormorants at Lake Molch for Molch pearls and unique fish.",
+        "description": "Catch fish using cormorants at Lake Molch on Molch Island. Requires 35 Hunter and 43 Fishing. Trade fish with Alry the Angler for Molch pearls",
         "worldX": 1379,
         "worldY": 3634,
         "worldPlane": 0,
@@ -24481,7 +24481,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Travel to the Wilderness black chinchompa hunting area and catch black chinchompas.",
+        "description": "Catch black chinchompas in the Wilderness (level 32-36). Bring minimal risk — PKers frequent this area. Best caught with box traps at 80+ Hunter",
         "worldX": 3143,
         "worldY": 3771,
         "worldPlane": 0,
