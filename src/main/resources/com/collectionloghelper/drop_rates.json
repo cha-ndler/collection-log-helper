@@ -1878,7 +1878,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the Stranglewood Temple",
+        "description": "Enter the Stranglewood Temple to reach the boss arena. Climb over the rocks to start the fight",
         "worldX": 1174,
         "worldY": 3428,
         "worldPlane": 0,
@@ -2398,7 +2398,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the Stranglewood Temple",
+        "description": "Enter the Stranglewood Temple to reach the boss arena. Awakened mode has enhanced stats and mechanics",
         "worldX": 1174,
         "worldY": 3428,
         "worldPlane": 0,
@@ -7133,7 +7133,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the Fortis Colosseum.",
+        "description": "Enter the Fortis Colosseum. Survive 12 waves of gladiators, then fight Sol Heredit. Choose modifiers wisely between waves",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -7315,7 +7315,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Morytania Spider Cave.",
+        "description": "Travel to the Araxyte Cave in north-east Morytania (fairy ring CLS or Darkmeyer teleport)",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
@@ -7323,7 +7323,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the Morytania Spider Cave.",
+        "description": "Enter the cave and navigate to the Araxxor arena",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
@@ -7676,7 +7676,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Open beginner clue scrolls from various low-level activities. Complete the steps to earn rewards",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -7827,7 +7827,7 @@
     "travelTip": "Burning amulet -> Rev Caves",
     "guidanceSteps": [
       {
-        "description": "Travel to Revenant Caves, Wilderness.",
+        "description": "Travel to the Revenant Caves in the Wilderness (level 28-34). Burning amulet to Bandit Camp, run north-east",
         "worldX": 3073,
         "worldY": 3654,
         "worldPlane": 0,
@@ -7942,7 +7942,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Fremennik Slayer Dungeon.",
+        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Lumbridge Swamp caves",
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
@@ -8001,7 +8001,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Fremennik Slayer Dungeon.",
+        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Bring a bag of salt to finish them",
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
@@ -8074,7 +8074,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Fremennik Slayer Dungeon.",
+        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required",
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
@@ -8133,7 +8133,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Fremennik Slayer Dungeon.",
+        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or use Catacombs of Kourend",
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
@@ -8249,7 +8249,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Fremennik Slayer Dungeon.",
+        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required",
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
@@ -8303,7 +8303,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Tarn's Lair, Abandoned Mine.",
+        "description": "Travel to the Abandoned Mine beneath Troll Stronghold (fairy ring AJR to Fremennik, then north)",
         "worldX": 3149,
         "worldY": 4663,
         "worldPlane": 0,
@@ -8360,7 +8360,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Slayer Tower.",
+        "description": "Travel to the Slayer Tower via slayer ring, fairy ring CKS, or Canifis teleport",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
@@ -8368,7 +8368,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Climb the stairs to the first floor.",
+        "description": "Climb the stairs to the first or second floor of the Slayer Tower",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 1,
@@ -8486,7 +8486,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ruins of Tapoyauik, Cam Torum.",
+        "description": "Travel to the Ruins of Tapoyauik in Cam Torum, Varlamore (quetzal whistle)",
         "worldX": 1693,
         "worldY": 3232,
         "worldPlane": 0,
@@ -8536,7 +8536,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Neypotzli, Cam Torum.",
+        "description": "Travel to Neypotzli in Cam Torum, Varlamore (quetzal whistle)",
         "worldX": 1440,
         "worldY": 9602,
         "worldPlane": 0,
@@ -8586,7 +8586,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Tonali Cavern, Cam Torum.",
+        "description": "Travel to the Tonali Cavern beneath Cam Torum, Varlamore (quetzal whistle)",
         "worldX": 1309,
         "worldY": 3104,
         "worldPlane": 0,
@@ -8636,7 +8636,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Slayer Tower.",
+        "description": "Travel to the Slayer Tower (slayer ring or fairy ring CKS) or Catacombs of Kourend",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
@@ -8644,7 +8644,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Climb the stairs to the first floor.",
+        "description": "Climb the stairs to the Bloodveld area. Catacombs offers burst/barrage spots",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 1,
@@ -8706,7 +8706,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Great Conch, Unquiet Ocean.",
+        "description": "Sail to Great Conch island in the Unquiet Ocean. Requires Sailing level to access",
         "worldX": 1456,
         "worldY": 2880,
         "worldPlane": 0,
@@ -8764,7 +8764,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Fremennik Slayer Dungeon.",
+        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Catacombs of Kourend for burst tasks",
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
@@ -8830,7 +8830,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Fremennik Slayer Dungeon.",
+        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required",
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
@@ -8937,7 +8937,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mos Le'Harmless Cave.",
+        "description": "Travel to Mos Le Harmless (charter ship from Port Phasmatys or Ectofuntus teleport)",
         "worldX": 3740,
         "worldY": 9373,
         "worldPlane": 0,
@@ -8945,7 +8945,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter Mos Le'Harmless Cave.",
+        "description": "Enter the cave on the north side of the island. Witchwood icon required",
         "worldX": 3740,
         "worldY": 9373,
         "worldPlane": 0,
@@ -8996,7 +8996,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Slayer Tower.",
+        "description": "Travel to the Slayer Tower (slayer ring or fairy ring CKS) or Catacombs",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
@@ -9004,7 +9004,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Climb the stairs to the first floor.",
+        "description": "Climb the stairs to the Aberrant Spectre floor. Nosepeg/slayer helm required",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 1,
@@ -9136,7 +9136,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm.",
+        "description": "Travel to Mount Karuulm (fairy ring CIR or Battlefront teleport). Enter the Karuulm Slayer Dungeon",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
@@ -9199,7 +9199,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Charred Island.",
+        "description": "Travel to the Wilderness Lava Strykewyrm area (level 34+). Use burning amulet to Bandit Camp",
         "worldX": 2150,
         "worldY": 2968,
         "worldPlane": 0,
@@ -9316,7 +9316,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Wyvern Cave on Fossil Island",
+        "description": "Travel to Fossil Island (Digsite pendant or mushroom transport). Head to the Wyvern Cave",
         "worldX": 3745,
         "worldY": 3777,
         "worldPlane": 0,
@@ -9324,7 +9324,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Wyvern Cave",
+        "description": "Enter the Wyvern Cave. Elemental/mind/dragonfire shield required",
         "worldX": 3745,
         "worldY": 3777,
         "worldPlane": 0,
@@ -9404,7 +9404,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Fremennik Slayer Dungeon.",
+        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required",
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
@@ -9462,7 +9462,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Asgarnian Ice Dungeon.",
+        "description": "Travel to the Asgarnian Ice Dungeon (fairy ring AKQ or Mudskipper Point teleport)",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
@@ -9526,7 +9526,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Slayer Tower.",
+        "description": "Travel to the Slayer Tower (slayer ring or fairy ring CKS)",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
@@ -9534,7 +9534,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Climb the stairs to the top floor.",
+        "description": "Climb to the top floor of the Slayer Tower. Rock hammer required to finish",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 2,
@@ -9715,7 +9715,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Slayer Tower.",
+        "description": "Travel to the Slayer Tower (slayer ring or fairy ring CKS) or Catacombs of Kourend",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
@@ -9723,7 +9723,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Climb the stairs to the top floor.",
+        "description": "Climb to the top floor. Burst/barrage death spawns in Catacombs for fast XP",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 2,
@@ -9774,7 +9774,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to God Wars Dungeon.",
+        "description": "Travel to the God Wars Dungeon (fairy ring AJQ then south, or Trollheim teleport)",
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,
@@ -9916,7 +9916,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm.",
+        "description": "Travel to Mount Karuulm (fairy ring CIR). Enter the Karuulm Slayer Dungeon, go to mid level",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
@@ -9989,7 +9989,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Slayer Tower.",
+        "description": "Travel to the Slayer Tower top floor (slayer ring) or Catacombs of Kourend",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
@@ -9997,7 +9997,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Climb the stairs to the top floor.",
+        "description": "Climb to the top floor. Burst/barrage in Catacombs for fastest tasks",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 2,
@@ -10055,7 +10055,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Kraken Cove.",
+        "description": "Travel to the Kraken Cove (fairy ring AKQ or slayer ring to Fremennik Slayer Dungeon)",
         "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
@@ -10063,7 +10063,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter Kraken Cove.",
+        "description": "Enter the Kraken Cove entrance. 87 Slayer, on task only",
         "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
@@ -10117,7 +10117,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Iorwerth Dungeon, Prifddinas.",
+        "description": "Travel to the Iorwerth Dungeon in Prifddinas (crystal seed teleport) or Mourner Tunnels",
         "worldX": 1920,
         "worldY": 4672,
         "worldPlane": 0,
@@ -10174,7 +10174,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the Morytania Spider Cave.",
+        "description": "Enter the Araxyte Cave (north-east Darkmeyer). Use crush weapons for best accuracy",
         "worldX": 3657,
         "worldY": 3407,
         "worldPlane": 0,
@@ -10226,7 +10226,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Smoke Devil Dungeon.",
+        "description": "Travel to the Smoke Devil Dungeon south of Castle Wars (fairy ring BKP or Yanille teleport)",
         "worldX": 2412,
         "worldY": 3061,
         "worldPlane": 0,
@@ -10299,7 +10299,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm.",
+        "description": "Travel to Mount Karuulm (fairy ring CIR). Enter Karuulm Slayer Dungeon, descend to lowest level",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
@@ -10355,7 +10355,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Darkmeyer, Morytania.",
+        "description": "Travel to Darkmeyer via Drakan medallion or Morytania teleport. Blisterwood weapon required",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
@@ -10433,7 +10433,7 @@
     "travelTip": "Fairy ring CIR -> Karuulm",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm, near Konar.",
+        "description": "Travel to Mount Karuulm near Konar (fairy ring CIR). Open Brimstone chests with brimstone keys",
         "worldX": 1309,
         "worldY": 3785,
         "worldPlane": 0,
@@ -10484,7 +10484,7 @@
     "travelTip": "Obelisk -> lvl 35 Wildy",
     "guidanceSteps": [
       {
-        "description": "Travel to Wilderness, Pirates' Hideout.",
+        "description": "Travel to the Wilderness chest locations (level 23 or 39). Use Larran's keys from Wilderness Slayer",
         "worldX": 3018,
         "worldY": 3955,
         "worldPlane": 0,
@@ -11626,7 +11626,7 @@
     "travelTip": "Minigame teleport -> Shades of Mort'ton, or Mort'ton teleport scroll",
     "guidanceSteps": [
       {
-        "description": "Travel to Mort'ton",
+        "description": "Travel to Mort'ton via Barrows teleport or fairy ring BKR. Bring pyre logs and shade remains",
         "worldX": 3506,
         "worldY": 3310,
         "worldPlane": 0,
@@ -11635,7 +11635,7 @@
         "completionDistance": 30
       },
       {
-        "description": "Burn shade remains on the funeral pyres",
+        "description": "Burn shade remains on the funeral pyres, then use shade keys on the underground chests",
         "worldX": 3507,
         "worldY": 3275,
         "worldPlane": 0,
@@ -12407,7 +12407,7 @@
     "travelTip": "Xeric's talisman -> Hosidius",
     "guidanceSteps": [
       {
-        "description": "Travel to Tithe Farm, Hosidius.",
+        "description": "Travel to the Tithe Farm in Hosidius (Xeric talisman Xeric Heart or fairy ring CIR then south)",
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
@@ -12526,7 +12526,7 @@
     "travelTip": "Minigame tele -> Trawler",
     "guidanceSteps": [
       {
-        "description": "Travel to Fishing Trawler, Port Khazard.",
+        "description": "Travel to Port Khazard (fairy ring BKP or Ardougne teleport). Board Murphy's trawler",
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 0,
@@ -13958,7 +13958,7 @@
         "completionChatPattern": null
       },
       {
-        "description": "Take 25 buckets from the workbench",
+        "description": "Take 25 buckets from the workbench using Take-5 to fill with water for brewing",
         "worldX": 3812,
         "worldY": 3021,
         "worldPlane": 0,
@@ -13981,7 +13981,7 @@
         "completionChatPattern": null
       },
       {
-        "description": "Fill buckets at the water pump",
+        "description": "Fill buckets at the water pumps and use them in the brewing process",
         "worldX": 3812,
         "worldY": 3021,
         "worldPlane": 0,
@@ -14247,7 +14247,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Barbarian Assault outpost",
+        "description": "Travel to the Barbarian Assault outpost (games necklace or fairy ring CLQ)",
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
@@ -14256,7 +14256,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Play rounds to earn Honour Points",
+        "description": "Play rounds to earn honour points. Buy gambles from Commander Connad for rare pet chance",
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
@@ -14491,7 +14491,7 @@
     "travelTip": "Fairy ring DJR -> Molch",
     "guidanceSteps": [
       {
-        "description": "Travel to Lake Molch on Molch Island.",
+        "description": "Travel to Lake Molch on Molch Island (fairy ring DJR to Shayzien, then boat from Molch)",
         "worldX": 1379,
         "worldY": 3634,
         "worldPlane": 0,
@@ -14935,7 +14935,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Feldip Hills, south of Rantz.",
+        "description": "Travel to the Feldip Hills south of Rantz (fairy ring AKS). Bring ogre bellows and bloated toads",
         "worldX": 2387,
         "worldY": 3040,
         "worldPlane": 0,
@@ -15395,7 +15395,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Crash Site Cavern.",
+        "description": "Enter the Crash Site Cavern beneath the Gnome Stronghold via the entrance north of the Tree Gnome Village",
         "worldX": 2027,
         "worldY": 5613,
         "worldPlane": 0,
@@ -15616,7 +15616,7 @@
     "travelTip": "Port Sarim docks -> sail",
     "guidanceSteps": [
       {
-        "description": "Travel to discoverable Sailing islands.",
+        "description": "Sail to discoverable Sailing islands and search for Lost Schematics. Higher Sailing unlocks more islands",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -15711,7 +15711,7 @@
     "travelTip": "Fairy ring CLR -> Ape Atoll",
     "guidanceSteps": [
       {
-        "description": "Travel to Ape Atoll Agility Course.",
+        "description": "Travel to the Ape Atoll Agility Course (fairy ring CLR then navigate to course). Complete laps for monkey pieces",
         "worldX": 2764,
         "worldY": 2703,
         "worldPlane": 0,
@@ -16460,7 +16460,7 @@
     "travelTip": "Sail to deep sea fishing shoals",
     "guidanceSteps": [
       {
-        "description": "Travel to Deep sea fishing shoals.",
+        "description": "Travel to the Deep Sea Fishing hub via Guildmaster Jane on Fishing Guild dock (requires 68 Fishing)",
         "worldX": 1565,
         "worldY": 3420,
         "worldPlane": 0,
@@ -16498,7 +16498,7 @@
     "travelTip": "Pharaoh's sceptre -> Jalsavrah",
     "guidanceSteps": [
       {
-        "description": "Travel to Jalsavrah Pyramid in Sophanem.",
+        "description": "Travel to the Jalsavrah Pyramid in Sophanem (pharaoh sceptre teleport or carpet ride). Speak to the Guardian Mummy",
         "worldX": 3288,
         "worldY": 2801,
         "worldPlane": 0,
@@ -16611,7 +16611,7 @@
     "travelTip": "Xeric's talisman -> Heart",
     "guidanceSteps": [
       {
-        "description": "Travel to Kourend Castle.",
+        "description": "Travel to Kourend Castle via Xeric talisman (Xeric Heart) or fairy ring CIS. Enter catacombs via the statue",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
@@ -19243,7 +19243,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the Shellbane Gryphon cave.",
+        "description": "Enter the cave and fight the Shellbane Gryphon. Requires 51 Slayer. Use Protect from Melee",
         "worldX": 3177,
         "worldY": 2478,
         "worldPlane": 0,
@@ -19295,7 +19295,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Varrock Sewers.",
+        "description": "Travel to Varrock Sewers via the manhole behind Varrock Palace or south of Edgeville bank",
         "worldX": 3299,
         "worldY": 9867,
         "worldPlane": 0,
@@ -20416,7 +20416,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Open easy clue scrolls from low-level monsters or skilling. Complete cryptic clues, emote clues, and map clues",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -21272,7 +21272,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Open medium clue scrolls from mid-level content. Complete coordinate clues, puzzle boxes, and anagram clues",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -22261,7 +22261,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Open hard clue scrolls from bosses and high-level monsters. Complete multi-step clue chains with puzzle boxes",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -22724,7 +22724,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Open elite clue scrolls from bosses, Barrows, and elite content. Solve coordinate and map clues across Gielinor",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -23119,7 +23119,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Open master clue scrolls from Watson or other masters. Complete the hardest clue steps requiring high stats and quest access",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -23331,7 +23331,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Complete hard clue scrolls for a chance at 3rd age armour, gilded items, and other rare mega-rares",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -23654,7 +23654,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Complete elite clue scrolls for a chance at 3rd age items, rangers tunic, and other mega-rare rewards",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -24034,7 +24034,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Complete master clue scrolls for a chance at 3rd age pickaxe/axe, bloodhound pet, and other mega-rares",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -24420,7 +24420,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Complete any tier of treasure trail for shared reward table items like clue nests and teleport scrolls",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -24471,7 +24471,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange.",
+        "description": "Enable The Mimic via Watson and open elite+ caskets for a chance to fight the Mimic boss for unique rewards",
         "worldX": 3164,
         "worldY": 3489,
         "worldPlane": 0,
@@ -24508,7 +24508,7 @@
     "travelTip": "Draynor Village teleport or Lumbridge Home teleport -> walk west",
     "guidanceSteps": [
       {
-        "description": "Travel to Draynor Village seed market.",
+        "description": "Travel to the Draynor Village seed market stall (Amulet of glory to Draynor or Lumbridge teleport)",
         "worldX": 3080,
         "worldY": 3252,
         "worldPlane": 0,
@@ -24582,7 +24582,7 @@
     "travelTip": "Teleport to Ape Atoll or fairy ring CLR",
     "guidanceSteps": [
       {
-        "description": "Travel to Ape Atoll teak trees.",
+        "description": "Travel to the Ape Atoll teak trees (fairy ring CLR) or Fossil Island hardwood grove",
         "worldX": 2770,
         "worldY": 2700,
         "worldPlane": 0,
@@ -24663,7 +24663,7 @@
     "travelTip": "Skills necklace teleport to Fishing Guild",
     "guidanceSteps": [
       {
-        "description": "Travel to Fishing Guild.",
+        "description": "Travel to the Fishing Guild (skills necklace) or Catherby beach for swordfish spots",
         "worldX": 2604,
         "worldY": 3414,
         "worldPlane": 0,
@@ -24700,7 +24700,7 @@
     "travelTip": "Ring of dueling to Duel Arena -> enter fire altar ruins with fire talisman/tiara",
     "guidanceSteps": [
       {
-        "description": "Travel to Fire altar.",
+        "description": "Travel to the Fire Altar via the Abyss or duel ring to Al Kharid then run north",
         "worldX": 2583,
         "worldY": 4838,
         "worldPlane": 0,
@@ -24737,7 +24737,7 @@
     "travelTip": "Fairy ring CIR -> Farming Guild",
     "guidanceSteps": [
       {
-        "description": "Travel to Farming Guild.",
+        "description": "Travel to the Farming Guild (fairy ring CIR) or any fruit tree patch for farming runs",
         "worldX": 1249,
         "worldY": 3719,
         "worldPlane": 0,
@@ -26260,7 +26260,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Corsair Cove Dungeon.",
+        "description": "Travel to the Corsair Cove Dungeon (spirit tree to Corsair Cove or charter ship)",
         "worldX": 2459,
         "worldY": 9488,
         "worldPlane": 2,
@@ -26268,7 +26268,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Enter the Corsair Cove Dungeon.",
+        "description": "Enter the dungeon through the cave entrance south of the cove",
         "worldX": 2459,
         "worldY": 9488,
         "worldPlane": 2,
@@ -26652,7 +26652,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Prifddinas, south-east corner.",
+        "description": "Travel to the south-east corner of Prifddinas (crystal seed teleport). Requires Song of the Elves",
         "worldX": 3267,
         "worldY": 6082,
         "worldPlane": 0,
@@ -26700,7 +26700,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Darkmeyer, Morytania.",
+        "description": "Travel to Darkmeyer via Drakan medallion. Pickpocket Vyrewatch Sentinels for blood shards",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
