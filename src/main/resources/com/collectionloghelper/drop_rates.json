@@ -7397,7 +7397,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Cam Torum entrance, Ralos Rise.",
+        "description": "Travel to the Perilous Moons dungeon beneath Cam Torum, Varlamore. Use quetzal whistle or Varlamore teleport",
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
@@ -7405,7 +7405,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Perilous Moons.",
+        "description": "Complete Perilous Moons. Fight the three Moon bosses in sequence. Each has unique mechanics — learn the safe tiles and prayer switches",
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
@@ -18647,7 +18647,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to The Darkfrost, Hailstorm Mountains in Varlamore.",
+        "description": "Travel to the Hueycoatl Arena in Cam Torum, Varlamore. Use quetzal whistle or Varlamore teleport",
         "worldX": 1509,
         "worldY": 3290,
         "worldPlane": 0,
@@ -18655,7 +18655,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill The Hueycoatl.",
+        "description": "Kill The Hueycoatl. Dodge the fire breath and tail sweep attacks. Destroy the egg nests when they spawn to prevent add waves",
         "worldX": 1509,
         "worldY": 3290,
         "worldPlane": 0,
@@ -18767,7 +18767,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Yama's Domain, Chasm of Fire beneath Shayzien.",
+        "description": "Travel to the Chasm of Yama beneath Cam Torum, Varlamore. Use quetzal whistle or the chasm teleport scroll",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
@@ -18775,7 +18775,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Yama.",
+        "description": "Kill Yama. This is a group boss (duo+ recommended). Use Protect from Melee, dodge the slam attacks, and destroy the soul totems",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
@@ -18852,7 +18852,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ruins of Mokhaiotl, beneath Tlati Rainforest in Varlamore.",
+        "description": "Travel to the Ruins of Mokhaiotl beneath the Tlati Rainforest, Varlamore. Use quetzal whistle to reach the area",
         "worldX": 1311,
         "worldY": 9520,
         "worldPlane": 0,
@@ -18860,7 +18860,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Doom of Mokhaiotl.",
+        "description": "Complete the Doom delve. Fight through progressive floors of increasing difficulty. Higher floors have better unique drop rates",
         "worldX": 1311,
         "worldY": 9520,
         "worldPlane": 0,
@@ -18938,7 +18938,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Asgarnian Ice Dungeon, south of Port Sarim.",
+        "description": "Travel to the Asgarnian Ice Dungeon (fairy ring AKQ). Use the tunnel shortcut with 60 Agility, or giantsoul amulet teleport",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
@@ -18946,7 +18946,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Royal Titans.",
+        "description": "Kill both Royal Titans (Eldric + Branda). Duo recommended. Focus DPS on both evenly — if one falls first, the other enrages. Dodge the ice/fire waves and elemental spawns",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
@@ -19017,7 +19017,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ruins of Tapoyauik, Varlamore.",
+        "description": "Travel to Amoxliatl's lair in Cam Torum, Varlamore. Use quetzal whistle or Varlamore teleport",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
@@ -19025,7 +19025,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Amoxliatl.",
+        "description": "Kill Amoxliatl. Dodge the ice attacks and use Protect from Magic. Collect frozen tears during the fight for additional rewards",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
@@ -19087,7 +19087,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Lumbridge cow field.",
+        "description": "Travel to the Colosseum in Civitas illa Fortis, Varlamore. Use quetzal whistle to Varlamore",
         "worldX": 3263,
         "worldY": 3297,
         "worldPlane": 0,
@@ -19095,7 +19095,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Brutus.",
+        "description": "Kill Brutus. This is a straightforward melee boss. Use Protect from Melee and bring high-level gear",
         "worldX": 3263,
         "worldY": 3297,
         "worldPlane": 0,
@@ -19289,7 +19289,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Fight Caves.",
+        "description": "Travel to Mor Ul Rek (TzHaar city) via fairy ring BLP, or use Karamja gloves 4. Enter the Fight Caves",
         "worldX": 2439,
         "worldY": 5172,
         "worldPlane": 0,
@@ -19299,7 +19299,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Complete the Fight Caves and collect your reward.",
+        "description": "Complete the Fight Caves. Survive 63 waves of TzHaar monsters, then defeat TzTok-Jad. Use the Italy Rock safespot and switch prayers on Jad's attacks",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your TzTok-Jad kill count is:",
         "worldX": 2439,
@@ -19346,7 +19346,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Inferno.",
+        "description": "Travel to Mor Ul Rek via fairy ring BLP. Sacrifice a fire cape to enter the Inferno",
         "worldX": 2496,
         "worldY": 5122,
         "worldPlane": 0,
@@ -19356,7 +19356,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Complete the Inferno and collect your reward.",
+        "description": "Complete the Inferno. Survive 69 waves including triple Jad, then defeat TzKal-Zuk. Master prayer flicking, blob/bat positioning, and the shield mechanic",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your TzKal-Zuk kill count is:",
         "worldX": 2496,
