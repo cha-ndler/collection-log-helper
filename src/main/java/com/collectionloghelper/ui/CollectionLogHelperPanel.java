@@ -1233,11 +1233,77 @@ public class CollectionLogHelperPanel extends PluginPanel
 			JPanel catBar = createProgressBar(catObtained, catTotal);
 			catPanel.add(catBar, BorderLayout.CENTER);
 
+			// Estimate remaining hours from efficiency scores
+			double totalHours = 0;
+			List<ScoredItem> categoryScored = calculator.filterByCategory(category);
+			for (ScoredItem si : categoryScored)
+			{
+				if (si.getScore() > 0)
+				{
+					totalHours += 100.0 / si.getScore();
+				}
+			}
+
+			JPanel catFooter = new JPanel(new BorderLayout());
+			catFooter.setOpaque(false);
+
 			JLabel catDetailLabel = new JLabel(String.format("%d sources, %d complete",
 				catSources, catSourcesComplete));
 			catDetailLabel.setFont(FontManager.getRunescapeSmallFont());
 			catDetailLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-			catPanel.add(catDetailLabel, BorderLayout.SOUTH);
+
+			String timeStr;
+			if (totalHours <= 0 || catObtained >= catTotal)
+			{
+				timeStr = "";
+			}
+			else if (totalHours < 1)
+			{
+				timeStr = "~" + Math.max(1, Math.round(totalHours * 60)) + " min left";
+			}
+			else if (totalHours < 24)
+			{
+				timeStr = "~" + Math.round(totalHours) + " hrs left";
+			}
+			else
+			{
+				long days = Math.round(totalHours / 24);
+				timeStr = "~" + days + (days == 1 ? " day left" : " days left");
+			}
+
+			JLabel catTimeLabel = new JLabel(timeStr);
+			catTimeLabel.setFont(FontManager.getRunescapeSmallFont());
+			catTimeLabel.setForeground(new Color(255, 200, 0));
+			catTimeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			catFooter.add(catDetailLabel, BorderLayout.WEST);
+			catFooter.add(catTimeLabel, BorderLayout.EAST);
+			catPanel.add(catFooter, BorderLayout.SOUTH);
+
+			// Click to navigate to Category Focus mode
+			final CollectionLogCategory clickedCategory = category;
+			catPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+			catPanel.addMouseListener(new java.awt.event.MouseAdapter()
+			{
+				@Override
+				public void mousePressed(java.awt.event.MouseEvent e)
+				{
+					categorySelector.setSelectedItem(clickedCategory);
+					modeSelector.setSelectedItem(Mode.CATEGORY_FOCUS);
+				}
+
+				@Override
+				public void mouseEntered(java.awt.event.MouseEvent e)
+				{
+					catPanel.setBackground(ColorScheme.DARKER_GRAY_HOVER_COLOR);
+				}
+
+				@Override
+				public void mouseExited(java.awt.event.MouseEvent e)
+				{
+					catPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
+				}
+			});
 
 			listContainer.add(catPanel);
 			listContainer.add(javax.swing.Box.createVerticalStrut(2));
