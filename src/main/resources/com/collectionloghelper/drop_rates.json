@@ -1487,6 +1487,15 @@
         "completionDistance": 20
       },
       {
+        "description": "Navigate through Ghorrock Prison to the Asylum stairs",
+        "worldX": 2973,
+        "worldY": 6440,
+        "worldPlane": 2,
+        "objectId": 49100,
+        "objectInteractAction": "Climb",
+        "completionCondition": "MANUAL"
+      },
+      {
         "description": "Kill Duke Sucellus. Use Protect from Melee, dodge the falling ice, and avoid the blue mushroom gas clouds",
         "worldX": 2846,
         "worldY": 3938,
@@ -1609,6 +1618,15 @@
         "completionDistance": 20
       },
       {
+        "description": "Climb the handholds to enter The Leviathan's arena",
+        "worldX": 3104,
+        "worldY": 3162,
+        "worldPlane": 0,
+        "objectId": 47592,
+        "objectInteractAction": "Climb",
+        "completionCondition": "MANUAL"
+      },
+      {
         "description": "Kill The Leviathan. Dodge the boulder attacks, use Protect from Magic during ranged phase, and destroy the Shadow Leeches",
         "worldX": 3104,
         "worldY": 3162,
@@ -1727,6 +1745,15 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
+      },
+      {
+        "description": "Climb the rope down the sinkhole to enter Lassar Undercity",
+        "worldX": 3007,
+        "worldY": 3477,
+        "worldPlane": 0,
+        "objectId": 48197,
+        "objectInteractAction": "Climb-rope",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill The Whisperer. Dodge the tentacle attacks in the pillared room, switch prayers for the Screech attack, and step on the correct tiles during the shadow phase",
@@ -1851,6 +1878,15 @@
         "completionDistance": 20
       },
       {
+        "description": "Enter the Stranglewood Temple",
+        "worldX": 1174,
+        "worldY": 3428,
+        "worldPlane": 0,
+        "objectId": 48723,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
+      },
+      {
         "description": "Kill Vardorvis. Use Protect from Melee, dodge the axes, and kill the Strangled spawns quickly before they heal the boss",
         "worldX": 1175,
         "worldY": 3424,
@@ -1970,6 +2006,15 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
+      },
+      {
+        "description": "Navigate through Ghorrock Prison to the Asylum stairs",
+        "worldX": 2973,
+        "worldY": 6440,
+        "worldPlane": 2,
+        "objectId": 49100,
+        "objectInteractAction": "Climb",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Duke Sucellus (Awakened). Use Protect from Melee, dodge the falling ice, and avoid the blue mushroom gas clouds. Awakened mode has enhanced mechanics and higher stats",
@@ -2093,6 +2138,15 @@
         "completionDistance": 20
       },
       {
+        "description": "Climb the handholds to enter The Leviathan's arena",
+        "worldX": 3104,
+        "worldY": 3162,
+        "worldPlane": 0,
+        "objectId": 47592,
+        "objectInteractAction": "Climb",
+        "completionCondition": "MANUAL"
+      },
+      {
         "description": "Kill The Leviathan (Awakened). Dodge the boulder attacks, use Protect from Magic during ranged phase, and destroy the Shadow Leeches. Awakened mode has enhanced mechanics and higher stats",
         "worldX": 3104,
         "worldY": 3162,
@@ -2211,6 +2265,15 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
+      },
+      {
+        "description": "Climb the rope down the sinkhole to enter Lassar Undercity",
+        "worldX": 3007,
+        "worldY": 3477,
+        "worldPlane": 0,
+        "objectId": 48197,
+        "objectInteractAction": "Climb-rope",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill The Whisperer (Awakened). Dodge the tentacle attacks in the pillared room, switch prayers for the Screech attack, and step on the correct tiles during the shadow phase. Awakened mode has enhanced mechanics and higher stats",
@@ -2333,6 +2396,15 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
+      },
+      {
+        "description": "Enter the Stranglewood Temple",
+        "worldX": 1174,
+        "worldY": 3428,
+        "worldPlane": 0,
+        "objectId": 48723,
+        "objectInteractAction": "Enter",
+        "completionCondition": "MANUAL"
       },
       {
         "description": "Kill Vardorvis (Awakened). Use Protect from Melee, dodge the axes, and kill the Strangled spawns quickly before they heal the boss. Awakened mode has enhanced mechanics and higher stats",
