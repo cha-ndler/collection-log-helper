@@ -144,6 +144,11 @@ class CategorySummaryPanel extends JPanel
 
 	private void populateItems()
 	{
+		// Capture click handler in local variable — the field is nulled after
+		// population, but lambdas passed to ItemRowPanel must remain valid
+		// for when users click items later.
+		final ItemClickHandler clickHandler = lazyClickHandler;
+
 		for (CollectionLogSource source : lazySources)
 		{
 			boolean locked = !lazyRequirementsChecker.isAccessible(source.getName());
@@ -156,7 +161,7 @@ class CategorySummaryPanel extends JPanel
 				}
 				ItemRowPanel row = new ItemRowPanel(item, source, itemObtained, 0,
 					locked, lazyRequirementsChecker.getUnmetRequirements(source.getName()),
-					lazyItemManager, () -> lazyClickHandler.onItemClicked(item, source));
+					lazyItemManager, () -> clickHandler.onItemClicked(item, source));
 				itemsContainer.add(row);
 			}
 		}
