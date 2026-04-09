@@ -2,7 +2,7 @@
 
 A RuneLite plugin that guides players through efficient collection log completion with intelligent efficiency scoring, on-screen guidance overlays, and multiple viewing modes.
 
-**Coverage:** 2,111 items across 225 sources — all item IDs verified against TempleOSRS, drop rates audited against OSRS Wiki and the [Log Hunters](https://discord.gg/loghunters) community spreadsheet.
+**Coverage:** 2,109 items across 225 sources — all item IDs verified against TempleOSRS, drop rates audited against OSRS Wiki and the [Log Hunters](https://discord.gg/loghunters) community spreadsheet. 98% of sources have detailed guidance descriptions with combat mechanics, teleport routes, and equipment requirements.
 
 ## Features
 
@@ -20,7 +20,7 @@ Ranks collection log sources by how efficiently you can obtain missing items. Th
 
 ### Account-Aware Requirements
 
-Sources are checked against your account's quest completions and skill levels. Locked content (e.g., Corrupted Gauntlet without Song of the Elves, Alchemical Hydra without 95 Slayer) can be hidden or shown with lock indicators. The Top Pick always recommends accessible content. A pre-flight warning alerts you to unmet requirements when activating guidance.
+Sources are checked against your account's quest completions and skill levels (including Sailing). Locked content (e.g., Corrupted Gauntlet without Song of the Elves, Alchemical Hydra without 95 Slayer, boat combat without 28 Sailing) can be hidden or shown with lock indicators. Hovering locked sources shows formatted unmet requirements with your current level (e.g., "Slayer level 72 (current: 65)"). The Top Pick always recommends accessible content. A pre-flight warning alerts you to unmet requirements when activating guidance.
 
 ### Smart Travel Routing
 
@@ -32,12 +32,13 @@ The plugin detects your available teleports and transport methods, then shows on
 - **Spellbook awareness** — Shows Arceuus/Lunar/Ancient teleports only when on that spellbook
 - **Shortest Path integration** — Automatically requests optimal routes from the [Shortest Path](https://github.com/Skretzo/shortest-path) plugin if installed
 
-### Four Display Modes
+### Five Display Modes
 
-- **Efficient** — Missing items ranked by efficiency score (items per expected hour)
-- **Category Focus** — Items grouped by collection log tab (Bosses, Raids, Clues, Minigames, Other) with progress bars and collapsible sections
+- **Efficient** — Missing items ranked by efficiency score with 6 sort options (Efficiency, Kill Time, Best Drop Rate, Alphabetical, Items Remaining, Completion %). Sort selection persists across sessions.
+- **Category Focus** — Items grouped by collection log tab (Bosses, Raids, Clues, Minigames, Slayer, Skilling, Other) with progress bars and collapsible sections. Click any item to view details and start guidance. AFK filter available.
 - **Search** — Full-text search across all items and sources
 - **Pet Hunt** — Pet drops only, ranked by efficiency
+- **Statistics** — Dashboard showing overall and per-category completion progress with progress bars, estimated hours remaining, and source completion counts. Click any category to jump to Category Focus view.
 
 ### Automatic Sync
 
@@ -88,11 +89,13 @@ Automatically detects new collection log entries via chat messages and varbit ch
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| Default Mode | Efficient | Which mode opens on startup |
+| Default Mode | Efficient | Which mode opens on startup (Efficient, Category Focus, Search, Pet Hunt, Statistics) |
 | Hide Obtained Items | On | Hide items already obtained from the list |
 | Hide Locked Content | On | Hide sources requiring quests or skills you haven't met |
 | Account Type | Main | Adjusts completion rates for main accounts vs ironmen |
 | Raid Team Size | Solo | Your typical raid team size — adjusts drop rates and kill times |
+| AFK Filter | Off | Filter sources by AFK level (Off, Semi-AFK+, AFK+, Very AFK) |
+| Efficient Sort | Efficiency | Sort order in Efficient mode (persisted across sessions) |
 | Show Sync Reminder | On | Remind you to open the Collection Log after login |
 | **Guidance** | | |
 | NPC Highlight Style | Hull | Choose hull, outline, or tile highlight for guided NPCs |
@@ -103,7 +106,7 @@ Automatically detects new collection log entries via chat messages and varbit ch
 | Overlay Color | Cyan | Customize the overlay highlight color |
 ## Data
 
-All drop data lives in [`src/main/resources/com/collectionloghelper/drop_rates.json`](src/main/resources/com/collectionloghelper/drop_rates.json). 225 sources with 2,111 items covering all bosses, raids, slayer creatures, clue scrolls, minigames, shops, and skilling activities. Each source includes world coordinates, kill times (main + iron), drop table mechanics, quest/skill requirements, NPC IDs, multi-step guidance, and items with OSRS item IDs, decimal drop rates, and wiki links. Kill times are aligned with TempleOSRS EHB rates. Drop rates have been wiki-verified and cross-audited against the Log Hunters Log Adviser spreadsheet.
+All drop data lives in [`src/main/resources/com/collectionloghelper/drop_rates.json`](src/main/resources/com/collectionloghelper/drop_rates.json). 225 sources with 2,109 items covering all bosses, raids, slayer creatures, clue scrolls, minigames, shops, and skilling activities. Each source includes world coordinates, kill times (main + iron), drop table mechanics, quest/skill requirements (including Sailing levels), NPC IDs, entrance object IDs, multi-step guidance with combat/travel descriptions, and items with OSRS item IDs, decimal drop rates, and wiki links. Kill times are aligned with TempleOSRS EHB rates. Drop rates have been wiki-verified and cross-audited against the Log Hunters Log Adviser spreadsheet.
 
 Slayer task weights for all 4 masters (Duradel, Nieve, Konar, Turael) are in [`slayer_task_weights.json`](src/main/resources/com/collectionloghelper/slayer_task_weights.json) — 148 tasks verified against OSRS Wiki.
 
