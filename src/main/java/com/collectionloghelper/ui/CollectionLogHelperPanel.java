@@ -1124,25 +1124,17 @@ public class CollectionLogHelperPanel extends PluginPanel
 		int totalItems = collectionState.getTotalPossible();
 		double overallPct = collectionState.getCompletionPercentage();
 
+		String overallText = String.format("%d / %d (%.1f%%)", totalObtained, totalItems, overallPct);
+
 		JPanel overallPanel = new JPanel(new BorderLayout(5, 2));
 		overallPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
 		overallPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+		overallPanel.setToolTipText("Collection Log: " + overallText);
 
-		JLabel overallTitle = new JLabel("Collection Log");
-		overallTitle.setFont(FontManager.getRunescapeBoldFont());
-		overallTitle.setForeground(Color.WHITE);
-
-		JLabel overallCount = new JLabel(String.format("%d / %d (%.1f%%)",
-			totalObtained, totalItems, overallPct));
-		overallCount.setFont(FontManager.getRunescapeBoldFont());
-		overallCount.setForeground(Color.WHITE);
-		overallCount.setHorizontalAlignment(SwingConstants.RIGHT);
-
-		JPanel overallHeader = new JPanel(new BorderLayout());
-		overallHeader.setOpaque(false);
-		overallHeader.add(overallTitle, BorderLayout.WEST);
-		overallHeader.add(overallCount, BorderLayout.EAST);
-		overallPanel.add(overallHeader, BorderLayout.NORTH);
+		JLabel overallLabel = new JLabel(overallText);
+		overallLabel.setFont(FontManager.getRunescapeBoldFont());
+		overallLabel.setForeground(Color.WHITE);
+		overallPanel.add(overallLabel, BorderLayout.NORTH);
 
 		JPanel overallBar = createProgressBar(totalObtained, totalItems);
 		overallPanel.add(overallBar, BorderLayout.SOUTH);
@@ -1210,28 +1202,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 			double catPct = catTotal > 0 ? 100.0 * catObtained / catTotal : 0;
 
-			JPanel catPanel = new JPanel(new BorderLayout(5, 2));
-			catPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
-			catPanel.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
-
-			JLabel catNameLabel = new JLabel(category.getDisplayName());
-			catNameLabel.setFont(FontManager.getRunescapeBoldFont());
-			catNameLabel.setForeground(Color.WHITE);
-
-			JLabel catCountLabel = new JLabel(String.format("%d / %d  (%.1f%%)",
-				catObtained, catTotal, catPct));
-			catCountLabel.setFont(FontManager.getRunescapeSmallFont());
-			catCountLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-			catCountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-
-			JPanel catHeader = new JPanel(new BorderLayout());
-			catHeader.setOpaque(false);
-			catHeader.add(catNameLabel, BorderLayout.WEST);
-			catHeader.add(catCountLabel, BorderLayout.EAST);
-			catPanel.add(catHeader, BorderLayout.NORTH);
-
-			JPanel catBar = createProgressBar(catObtained, catTotal);
-			catPanel.add(catBar, BorderLayout.CENTER);
+			String countText = String.format("%d / %d (%.1f%%)", catObtained, catTotal, catPct);
 
 			// Estimate remaining hours from efficiency scores
 			double totalHours = 0;
@@ -1244,18 +1215,10 @@ public class CollectionLogHelperPanel extends PluginPanel
 				}
 			}
 
-			JPanel catFooter = new JPanel(new BorderLayout());
-			catFooter.setOpaque(false);
-
-			JLabel catDetailLabel = new JLabel(String.format("%d sources, %d complete",
-				catSources, catSourcesComplete));
-			catDetailLabel.setFont(FontManager.getRunescapeSmallFont());
-			catDetailLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-
 			String timeStr;
 			if (totalHours <= 0 || catObtained >= catTotal)
 			{
-				timeStr = "";
+				timeStr = null;
 			}
 			else if (totalHours < 1)
 			{
@@ -1271,14 +1234,49 @@ public class CollectionLogHelperPanel extends PluginPanel
 				timeStr = "~" + days + (days == 1 ? " day left" : " days left");
 			}
 
-			JLabel catTimeLabel = new JLabel(timeStr);
-			catTimeLabel.setFont(FontManager.getRunescapeSmallFont());
-			catTimeLabel.setForeground(new Color(255, 200, 0));
-			catTimeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+			JPanel catPanel = new JPanel(new BorderLayout(5, 2));
+			catPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
+			catPanel.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
 
-			catFooter.add(catDetailLabel, BorderLayout.WEST);
-			catFooter.add(catTimeLabel, BorderLayout.EAST);
-			catPanel.add(catFooter, BorderLayout.SOUTH);
+			// Tooltip with full details for truncated text
+			String tooltip = String.format("%s: %s | %d sources, %d complete",
+				category.getDisplayName(), countText, catSources, catSourcesComplete);
+			if (timeStr != null)
+			{
+				tooltip += " | " + timeStr;
+			}
+			catPanel.setToolTipText(tooltip);
+
+			// Header: category name (bold) + count (right, small)
+			JLabel catNameLabel = new JLabel(category.getDisplayName());
+			catNameLabel.setFont(FontManager.getRunescapeBoldFont());
+			catNameLabel.setForeground(Color.WHITE);
+
+			JLabel catCountLabel = new JLabel(countText);
+			catCountLabel.setFont(FontManager.getRunescapeSmallFont());
+			catCountLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
+			catCountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			JPanel catHeader = new JPanel(new BorderLayout());
+			catHeader.setOpaque(false);
+			catHeader.add(catNameLabel, BorderLayout.WEST);
+			catHeader.add(catCountLabel, BorderLayout.EAST);
+			catPanel.add(catHeader, BorderLayout.NORTH);
+
+			JPanel catBar = createProgressBar(catObtained, catTotal);
+			catPanel.add(catBar, BorderLayout.CENTER);
+
+			// Footer: source count (left) + time estimate (right)
+			String footerText = catSources + " sources, " + catSourcesComplete + " complete";
+			if (timeStr != null)
+			{
+				footerText += "  |  " + timeStr;
+			}
+			JLabel catFooterLabel = new JLabel(footerText);
+			catFooterLabel.setFont(FontManager.getRunescapeSmallFont());
+			catFooterLabel.setForeground(timeStr != null
+				? new Color(255, 200, 0) : ColorScheme.LIGHT_GRAY_COLOR);
+			catPanel.add(catFooterLabel, BorderLayout.SOUTH);
 
 			// Click to navigate to Category Focus mode
 			final CollectionLogCategory clickedCategory = category;
