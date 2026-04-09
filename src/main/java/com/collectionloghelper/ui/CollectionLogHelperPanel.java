@@ -137,6 +137,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Consumer<AfkFilter> afkFilterUpdater;
+	private final Consumer<EfficientSortMode> sortModeUpdater;
 
 	private final JLabel syncStatusLabel;
 	private final JLabel dataSyncWarningLabel;
@@ -196,7 +197,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 		PlayerInventoryState inventoryState,
 		PlayerBankState bankState,
 		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
-		Consumer<AfkFilter> afkFilterUpdater)
+		Consumer<AfkFilter> afkFilterUpdater,
+		Consumer<EfficientSortMode> sortModeUpdater)
 	{
 		this.config = config;
 		this.database = database;
@@ -213,6 +215,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.afkFilterUpdater = afkFilterUpdater;
+		this.sortModeUpdater = sortModeUpdater;
 
 		setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
@@ -442,12 +445,18 @@ public class CollectionLogHelperPanel extends PluginPanel
 
 		// Sort selector (visible in Efficient mode)
 		sortSelector = new JComboBox<>(EfficientSortMode.values());
+		sortSelector.setSelectedItem(config.efficientSortMode());
 		sortSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
 		sortSelector.setVisible(currentMode == Mode.EFFICIENT);
 		sortSelector.addItemListener(e ->
 		{
 			if (e.getStateChange() == ItemEvent.SELECTED)
 			{
+				EfficientSortMode selected = (EfficientSortMode) sortSelector.getSelectedItem();
+				if (selected != null)
+				{
+					sortModeUpdater.accept(selected);
+				}
 				rebuild();
 			}
 		});
@@ -920,6 +929,13 @@ public class CollectionLogHelperPanel extends PluginPanel
 					break;
 				case ITEMS_REMAINING:
 					scored.sort(Comparator.comparingInt(ScoredItem::getMissingItemCount).reversed());
+					break;
+				case COMPLETION_PERCENTAGE:
+					scored.sort(Comparator.comparingDouble((ScoredItem s) ->
+					{
+						int total = s.getSource().getItems().size();
+						return total > 0 ? (double) (total - s.getMissingItemCount()) / total : 0;
+					}).reversed());
 					break;
 			}
 		}

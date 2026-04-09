@@ -315,7 +315,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			itemManager, requirementsChecker, dataSyncState, slayerTaskState,
 			slayerStrategyCalculator, playerInventoryState, playerBankState,
 			this::activateGuidance, this::deactivateGuidance,
-			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()));
+			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()),
+			sort -> configManager.setConfiguration("collectionloghelper", "efficientSortMode", sort.name()));
 		panel.setMode(config.defaultMode());
 		panel.setStepCallbacks(
 			() -> guidanceSequencer.advanceStep(),

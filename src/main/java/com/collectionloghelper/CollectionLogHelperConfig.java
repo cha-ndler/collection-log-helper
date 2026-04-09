@@ -128,6 +128,18 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "efficientSortMode",
+		name = "Efficient Sort",
+		description = "Sort order for sources in Efficient mode",
+		position = 8,
+		hidden = true
+	)
+	default EfficientSortMode efficientSortMode()
+	{
+		return EfficientSortMode.EFFICIENCY;
+	}
+
+	@ConfigItem(
 		keyName = "showSyncReminder",
 		name = "Show Sync Reminder",
 		description = "Show a reminder to open the Collection Log after login to sync obtained items",
