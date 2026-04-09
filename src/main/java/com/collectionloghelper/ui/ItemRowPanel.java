@@ -26,12 +26,11 @@ package com.collectionloghelper.ui;
 
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
-import com.collectionloghelper.data.SkillRequirement;
-import com.collectionloghelper.data.SourceRequirements;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -54,14 +53,16 @@ class ItemRowPanel extends JPanel
 	private final CollectionLogSource source;
 
 	ItemRowPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
-		double score, boolean locked, ItemManager itemManager, Runnable onClick)
+		double score, boolean locked, List<String> unmetRequirements,
+		ItemManager itemManager, Runnable onClick)
 	{
-		this(item, source, obtained, score, locked, false, itemManager, onClick);
+		this(item, source, obtained, score, locked, false, unmetRequirements,
+			itemManager, onClick);
 	}
 
 	ItemRowPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
-		double score, boolean locked, boolean onSlayerTask, ItemManager itemManager,
-		Runnable onClick)
+		double score, boolean locked, boolean onSlayerTask,
+		List<String> unmetRequirements, ItemManager itemManager, Runnable onClick)
 	{
 		this.item = item;
 		this.source = source;
@@ -139,36 +140,9 @@ class ItemRowPanel extends JPanel
 		{
 			tooltip += " — " + source.getTravelTip();
 		}
-		if (locked && source.getRequirements() != null)
+		if (locked && unmetRequirements != null && !unmetRequirements.isEmpty())
 		{
-			StringBuilder reqs = new StringBuilder();
-			SourceRequirements requirements = source.getRequirements();
-			if (requirements.getQuests() != null)
-			{
-				for (String quest : requirements.getQuests())
-				{
-					if (reqs.length() > 0)
-					{
-						reqs.append(", ");
-					}
-					reqs.append(quest);
-				}
-			}
-			if (requirements.getSkills() != null)
-			{
-				for (SkillRequirement skill : requirements.getSkills())
-				{
-					if (reqs.length() > 0)
-					{
-						reqs.append(", ");
-					}
-					reqs.append(skill.getLevel()).append(" ").append(skill.getSkill());
-				}
-			}
-			if (reqs.length() > 0)
-			{
-				tooltip += " | Requires: " + reqs;
-			}
+			tooltip += " | Requires: " + String.join(", ", unmetRequirements);
 		}
 		setToolTipText(tooltip);
 		add(centerPanel, BorderLayout.CENTER);

@@ -959,8 +959,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 			if (bestItem != null && !collectionState.isItemObtained(bestItem.getItemId()))
 			{
 				ItemRowPanel row = new ItemRowPanel(bestItem, si.getSource(), false,
-					si.getScore(), si.isLocked(), onTask, itemManager,
-					() -> showDetail(bestItem, si.getSource()));
+					si.getScore(), si.isLocked(), onTask,
+					requirementsChecker.getUnmetRequirements(si.getSource().getName()),
+					itemManager, () -> showDetail(bestItem, si.getSource()));
 				listContainer.add(row);
 			}
 			else
@@ -971,8 +972,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 					if (!collectionState.isItemObtained(item.getItemId()))
 					{
 						ItemRowPanel row = new ItemRowPanel(item, si.getSource(), false,
-							si.getScore(), si.isLocked(), onTask, itemManager,
-							() -> showDetail(item, si.getSource()));
+							si.getScore(), si.isLocked(), onTask,
+							requirementsChecker.getUnmetRequirements(si.getSource().getName()),
+							itemManager, () -> showDetail(item, si.getSource()));
 						listContainer.add(row);
 						break;
 					}
@@ -1036,7 +1038,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 						continue;
 					}
 					ItemRowPanel row = new ItemRowPanel(item, source, obtained, 0,
-						locked, onTask, itemManager, () -> showDetail(item, source));
+						locked, onTask,
+						requirementsChecker.getUnmetRequirements(source.getName()),
+						itemManager, () -> showDetail(item, source));
 					listContainer.add(row);
 					resultCount++;
 				}
@@ -1072,8 +1076,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 					continue;
 				}
 				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
-					si.getScore(), si.isLocked(), onTask, itemManager,
-					() -> showDetail(item, si.getSource()));
+					si.getScore(), si.isLocked(), onTask,
+					requirementsChecker.getUnmetRequirements(si.getSource().getName()),
+					itemManager, () -> showDetail(item, si.getSource()));
 				listContainer.add(row);
 				resultCount++;
 			}
