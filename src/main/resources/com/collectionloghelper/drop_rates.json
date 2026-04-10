@@ -5204,30 +5204,6 @@
         "independent": true,
         "requiresPrevious": true,
         "milestoneKills": 2000
-      },
-      {
-        "itemId": 25746,
-        "name": "Sanguine dust",
-        "dropRate": 0.00364,
-        "isPet": false,
-        "wikiPage": "Sanguine_dust",
-        "independent": true
-      },
-      {
-        "itemId": 25742,
-        "name": "Holy ornament kit",
-        "dropRate": 0.01,
-        "isPet": false,
-        "wikiPage": "Holy_ornament_kit",
-        "independent": true
-      },
-      {
-        "itemId": 25744,
-        "name": "Sanguine ornament kit",
-        "dropRate": 0.00667,
-        "isPet": false,
-        "wikiPage": "Sanguine_ornament_kit",
-        "independent": true
       }
     ],
     "locationDescription": "Ver Sinhaza, Morytania",
