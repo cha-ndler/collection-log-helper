@@ -2541,6 +2541,7 @@
   },
   {
     "name": "The Nightmare",
+    "raidRateConvention": "SOLO",
     "category": "BOSSES",
     "worldX": 3728,
     "worldY": 3302,
@@ -2706,6 +2707,7 @@
   },
   {
     "name": "Phosani's Nightmare",
+    "raidRateConvention": "SOLO",
     "category": "BOSSES",
     "worldX": 3728,
     "worldY": 3302,
@@ -4668,6 +4670,7 @@
   },
   {
     "name": "Chambers of Xeric",
+    "raidRateConvention": "SOLO",
     "category": "RAIDS",
     "worldX": 1233,
     "worldY": 3573,
@@ -4840,6 +4843,7 @@
   },
   {
     "name": "Chambers of Xeric (Challenge Mode)",
+    "raidRateConvention": "SOLO",
     "category": "RAIDS",
     "worldX": 1233,
     "worldY": 3573,
@@ -5072,6 +5076,7 @@
   },
   {
     "name": "Theatre of Blood",
+    "raidRateConvention": "SOLO",
     "category": "RAIDS",
     "worldX": 3650,
     "worldY": 3218,
@@ -5259,6 +5264,7 @@
   },
   {
     "name": "Theatre of Blood (Hard Mode)",
+    "raidRateConvention": "SOLO",
     "category": "RAIDS",
     "worldX": 3650,
     "worldY": 3218,
@@ -5448,6 +5454,7 @@
   },
   {
     "name": "Tombs of Amascut",
+    "raidRateConvention": "PER_COMPLETION_SCALED",
     "category": "RAIDS",
     "worldX": 3234,
     "worldY": 2784,
@@ -5717,6 +5724,7 @@
   },
   {
     "name": "Tombs of Amascut (300 Invocation)",
+    "raidRateConvention": "PER_COMPLETION_SCALED",
     "category": "RAIDS",
     "worldX": 3234,
     "worldY": 2784,
@@ -5986,6 +5994,7 @@
   },
   {
     "name": "Tombs of Amascut (500 Invocation)",
+    "raidRateConvention": "PER_COMPLETION_SCALED",
     "category": "RAIDS",
     "worldX": 3234,
     "worldY": 2784,
