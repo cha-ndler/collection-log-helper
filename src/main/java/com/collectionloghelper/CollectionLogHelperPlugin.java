@@ -72,6 +72,7 @@ import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.MenuAction;
 import net.runelite.api.NPC;
+import net.runelite.api.Player;
 import net.runelite.api.WorldEntity;
 import net.runelite.api.WorldView;
 import net.runelite.api.coords.LocalPoint;
@@ -1298,12 +1299,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 				// Skip hint arrow inside Sailing instances — surface world
 				// coords render at wrong positions in instanced WorldViews
-				boolean inInstance = client.getLocalPlayer() != null
-					&& client.getLocalPlayer().getWorldView() != client.getTopLevelWorldView();
-				if (config.showHintArrow()
-					&& !inInstance
-					&& client.getLocalPlayer() != null
-					&& client.getLocalPlayer().getWorldLocation().getPlane() == worldPoint.getPlane())
+				if (shouldSetHintArrowTo(worldPoint))
 				{
 					client.setHintArrow(worldPoint);
 				}
@@ -1442,12 +1438,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			client.clearHintArrow();
 
-			boolean inInstance = client.getLocalPlayer() != null
-				&& client.getLocalPlayer().getWorldView() != client.getTopLevelWorldView();
-			if (config.showHintArrow()
-				&& !inInstance
-				&& client.getLocalPlayer() != null
-				&& client.getLocalPlayer().getWorldLocation().getPlane() == worldPoint.getPlane())
+			if (shouldSetHintArrowTo(worldPoint))
 			{
 				client.setHintArrow(worldPoint);
 			}
@@ -1804,10 +1795,15 @@ public class CollectionLogHelperPlugin extends Plugin
 	 */
 	private WorldPoint resolvePlayerWorldLocation()
 	{
-		WorldPoint fallback = client.getLocalPlayer().getWorldLocation();
+		Player lp = client.getLocalPlayer();
+		if (lp == null)
+		{
+			return null;
+		}
+		WorldPoint fallback = lp.getWorldLocation();
 		try
 		{
-			WorldView playerView = client.getLocalPlayer().getWorldView();
+			WorldView playerView = lp.getWorldView();
 			if (playerView == null || playerView.isTopLevel())
 			{
 				return fallback;
@@ -1820,7 +1816,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				if (entity.getWorldView() == playerView)
 				{
-					LocalPoint playerLocal = client.getLocalPlayer().getLocalLocation();
+					LocalPoint playerLocal = lp.getLocalLocation();
 					LocalPoint mainLocal = entity.transformToMainWorld(playerLocal);
 					if (mainLocal != null)
 					{
@@ -1837,6 +1833,32 @@ public class CollectionLogHelperPlugin extends Plugin
 			log.debug("WorldEntity transform failed, using fallback location", e);
 		}
 		return fallback;
+	}
+
+	/**
+	 * Decides whether a hint arrow should be placed at {@code worldPoint}.
+	 * Snapshots {@code getLocalPlayer()} once to avoid the TOCTOU race where
+	 * the player transitions to null mid-check. Skips hint arrows inside
+	 * non-top-level WorldViews (e.g. sailing boats) because surface-world
+	 * coords render at wrong positions in instanced views.
+	 */
+	private boolean shouldSetHintArrowTo(WorldPoint worldPoint)
+	{
+		if (!config.showHintArrow() || worldPoint == null)
+		{
+			return false;
+		}
+		Player lp = client.getLocalPlayer();
+		if (lp == null)
+		{
+			return false;
+		}
+		if (lp.getWorldView() != client.getTopLevelWorldView())
+		{
+			return false;
+		}
+		WorldPoint playerLoc = lp.getWorldLocation();
+		return playerLoc != null && playerLoc.getPlane() == worldPoint.getPlane();
 	}
 
 	// ---- Guidance Authoring Event Logger ----
