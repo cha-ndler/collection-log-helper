@@ -102,18 +102,19 @@ public class GuidanceMinimapOverlay extends Overlay
 
 		// Target is far away — draw direction arrow on minimap edge
 		// Uses camera yaw rotation so the arrow always points correctly
-		if (client.getLocalPlayer() == null)
+		Player lp = client.getLocalPlayer();
+		if (lp == null)
 		{
 			return null;
 		}
 
-		WorldPoint playerLocation = client.getLocalPlayer().getWorldLocation();
+		WorldPoint playerLocation = lp.getWorldLocation();
 		if (playerLocation == null)
 		{
 			return null;
 		}
 
-		Point playerMinimapLoc = client.getLocalPlayer().getMinimapLocation();
+		Point playerMinimapLoc = lp.getMinimapLocation();
 		if (playerMinimapLoc == null)
 		{
 			return null;

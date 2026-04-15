@@ -36,6 +36,7 @@ import java.awt.geom.Line2D;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.runelite.api.Client;
+import net.runelite.api.Player;
 import net.runelite.api.Point;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.gameval.InterfaceID;
@@ -92,12 +93,13 @@ public class WorldMapRouteOverlay extends Overlay
 			return null;
 		}
 
-		if (client.getLocalPlayer() == null)
+		Player lp = client.getLocalPlayer();
+		if (lp == null)
 		{
 			return null;
 		}
 
-		WorldPoint playerLocation = client.getLocalPlayer().getWorldLocation();
+		WorldPoint playerLocation = lp.getWorldLocation();
 		if (playerLocation == null)
 		{
 			return null;
