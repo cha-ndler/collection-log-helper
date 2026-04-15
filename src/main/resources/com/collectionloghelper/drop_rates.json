@@ -4547,10 +4547,9 @@
       {
         "itemId": 19685,
         "name": "Dark totem",
-        "dropRate": 1.0,
+        "dropRate": 0.0078125,
         "isPet": false,
-        "wikiPage": "Dark_totem",
-        "milestoneKills": 1
+        "wikiPage": "Dark_totem"
       },
       {
         "itemId": 6571,
