@@ -7726,6 +7726,7 @@
     "worldY": 3654,
     "worldPlane": 0,
     "killTimeSeconds": 14,
+    "ironKillTimeSeconds": 20,
     "afkLevel": 0,
     "items": [
       {
@@ -15232,82 +15233,82 @@
       {
         "itemId": 21664,
         "name": "Scribbled note",
-        "dropRate": 0.333333,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Scribbled_note",
-        "independent": true
+        "milestoneKills": 1
       },
       {
         "itemId": 21666,
         "name": "Partial note",
-        "dropRate": 0.333333,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Partial_note",
-        "independent": true
+        "milestoneKills": 1
       },
       {
         "itemId": 21668,
         "name": "Ancient note",
-        "dropRate": 0.333333,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Ancient_note",
-        "independent": true
+        "milestoneKills": 1
       },
       {
         "itemId": 21670,
         "name": "Ancient writings",
-        "dropRate": 0.333333,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Ancient_writings",
-        "independent": true
+        "milestoneKills": 1
       },
       {
         "itemId": 21672,
         "name": "Experimental note",
-        "dropRate": 0.333333,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Experimental_note",
-        "independent": true
+        "milestoneKills": 1
       },
       {
         "itemId": 21674,
         "name": "Paragraph of text",
-        "dropRate": 0.333333,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Paragraph_of_text",
-        "independent": true
+        "milestoneKills": 1
       },
       {
         "itemId": 21676,
         "name": "Musty smelling note",
-        "dropRate": 0.333333,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Musty_smelling_note",
-        "independent": true
+        "milestoneKills": 1
       },
       {
         "itemId": 21678,
         "name": "Hastily scrawled note",
-        "dropRate": 0.333333,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Hastily_scrawled_note",
-        "independent": true
+        "milestoneKills": 1
       },
       {
         "itemId": 21680,
         "name": "Old writing",
-        "dropRate": 0.333333,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Old_writing",
-        "independent": true
+        "milestoneKills": 1
       },
       {
         "itemId": 21682,
         "name": "Short note",
-        "dropRate": 0.333333,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Short_note",
-        "independent": true
+        "milestoneKills": 1
       }
     ],
     "locationDescription": "House on the Hill, Fossil Island",
