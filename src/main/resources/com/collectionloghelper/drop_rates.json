@@ -1073,7 +1073,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase \u00e2\u20ac\u201d walk over the correct vent matching the Hydra's colour",
+        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase \u2014 walk over the correct vent matching the Hydra's colour",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
@@ -4823,7 +4823,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room \u00e2\u20ac\u201d combat, puzzle, and resource rooms \u00e2\u20ac\u201d on your way to the final boss",
+        "description": "Enter the raid and scout rooms. Complete each room \u2014 combat, puzzle, and resource rooms \u2014 on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5056,7 +5056,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room \u00e2\u20ac\u201d combat, puzzle, and resource rooms \u00e2\u20ac\u201d on your way to the final boss",
+        "description": "Enter the raid and scout rooms. Complete each room \u2014 combat, puzzle, and resource rooms \u2014 on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -7161,7 +7161,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks \u00e2\u20ac\u201d learn the mechanics for consistent clears",
+        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks \u2014 learn the mechanics for consistent clears",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -7858,7 +7858,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill revenants in the caves for unique drops. Bring risk \u00e2\u20ac\u201d it's multi-combat Wilderness.",
+        "description": "Kill revenants in the caves for unique drops. Bring risk \u2014 it's multi-combat Wilderness.",
         "worldX": 3073,
         "worldY": 3654,
         "worldPlane": 0,
