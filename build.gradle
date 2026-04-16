@@ -2,6 +2,12 @@ plugins {
 	id 'java'
 }
 
+ext {
+	pluginName = 'Collection Log Helper'
+	pluginDescription = 'Guides players through efficient collection log completion with overlays and efficiency scoring'
+	pluginProvider = 'cha-ndler'
+}
+
 repositories {
 	mavenLocal()
 	maven {
@@ -14,7 +20,7 @@ repositories {
 }
 
 def runeLiteVersion = 'latest.release'
-def pluginMainClass = 'com.collectionloghelper.CollectionLogHelperPluginTest'
+def pluginMainClass = 'com.collectionloghelper.CollectionLogHelperPlugin'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
