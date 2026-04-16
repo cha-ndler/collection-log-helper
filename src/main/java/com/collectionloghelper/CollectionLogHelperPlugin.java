@@ -47,6 +47,7 @@ import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.GuidanceUIState;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
+import com.collectionloghelper.lifecycle.SyncStateCoordinator;
 import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
@@ -220,9 +221,6 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	// Auto-sync state: triggered when collection log widget opens
 	private boolean autoSyncPending;
-	private boolean scriptScanActive;
-	private int scriptScanItemCount;
-	private int scanSettleCountdown;
 	private boolean hasCompletedFullSync;
 	private boolean syncReminderSent;
 	private int loginTickDelay;
@@ -817,38 +815,6 @@ public class CollectionLogHelperPlugin extends Plugin
 				net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
 		}
 		calculator.exportEfficiencyList(exportFile, client);
-	}
-
-	/**
-	 * Programmatically trigger collection log search mode, which causes
-	 * script 4100 to fire once per obtained item. This is the same technique
-	 * used by TempleOSRS and WikiSync for full collection log scanning.
-	 * After triggering search, immediately clicks "Back" so the user
-	 * doesn't see the search UI flash.
-	 */
-	private void triggerSearchModeScan()
-	{
-		scriptScanItemCount = 0;
-		scriptScanActive = false;
-		scanSettleCountdown = SCAN_SETTLE_TICKS;
-
-		if (panel != null)
-		{
-			panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCING, 0);
-		}
-
-		log.info("Triggering collection log search-mode scan");
-
-		// Click the Search toggle to enter search mode (fires script 4100 for each obtained item)
-		client.menuAction(-1, InterfaceID.Collection.SEARCH_TOGGLE,
-			MenuAction.CC_OP, 1, -1, "Search", null);
-
-		// Run the search script to complete the transition
-		client.runScript(SCRIPT_COLLECTION_LOG_SEARCH);
-
-		// Click Back to exit search mode so the UI returns to normal
-		client.menuAction(-1, InterfaceID.Collection.SEARCH_TOGGLE,
-			MenuAction.CC_OP, 1, -1, "Back", null);
 	}
 
 	public void activateGuidance(CollectionLogSource source)
