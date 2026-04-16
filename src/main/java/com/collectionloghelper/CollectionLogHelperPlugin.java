@@ -47,6 +47,7 @@ import com.collectionloghelper.guidance.GuidanceSequencer;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
+import com.collectionloghelper.lifecycle.SyncStateCoordinator;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
 import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
@@ -96,10 +97,8 @@ import net.runelite.api.events.ScriptPreFired;
 import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.events.WidgetLoaded;
-import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.gameval.InventoryID;
 import net.runelite.api.gameval.ItemID;
-import net.runelite.api.gameval.VarbitID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatCommandManager;
@@ -131,20 +130,6 @@ public class CollectionLogHelperPlugin extends Plugin
 {
 	private static final Pattern COLLECTION_LOG_PATTERN =
 		Pattern.compile("New item added to your collection log: (.*)");
-	private static final int COLLECTION_LOG_GROUP_ID = InterfaceID.Collection.FRAME >> 16;
-
-	/**
-	 * Client script 4100 fires once per obtained item when the collection log
-	 * enters search mode. Args: [source, itemId, itemCount].
-	 * Used by TempleOSRS and WikiSync for full collection log scanning.
-	 */
-	private static final int SCRIPT_COLLECTION_LOG_ITEM = 4100;
-
-	/** Client script 2240 triggers the collection log search mode. */
-	private static final int SCRIPT_COLLECTION_LOG_SEARCH = 2240;
-
-	/** Ticks to wait after the last script 4100 fires before finalizing the scan. */
-	private static final int SCAN_SETTLE_TICKS = 3;
 
 	private static final String MENU_OPTION_GUIDE = "Collection Log Guide";
 
@@ -257,29 +242,20 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private AuthoringLogger authoringLogger;
 
+	@Inject
+	private SyncStateCoordinator syncStateCoordinator;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
-	private int lastObtainedCount = -1;
 
 	/** Cached set of source names that have at least one unobtained item. Rebuilt when collection state changes. */
 	private Set<String> sourcesWithMissingItems = new HashSet<>();
 	private volatile boolean pendingRequirementsRefresh = false;
 	private volatile boolean pendingTravelVarbitRefresh = false;
-	private boolean clogNotificationChecked = false;
-	private boolean collectionLogOpen;
 	private BufferedImage collectionLogIcon;
 	private CollectionLogWorldMapPoint activeMapPoint;
 	private GuidanceInfoBox activeInfoBox;
-
-	// Auto-sync state: triggered when collection log widget opens
-	private boolean autoSyncPending;
-	private boolean scriptScanActive;
-	private int scriptScanItemCount;
-	private int scanSettleCountdown;
-	private boolean hasCompletedFullSync;
-	private boolean syncReminderSent;
-	private int loginTickDelay;
 
 	/**
 	 * Player location cached on the client thread each game tick.
@@ -361,7 +337,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				requirementsChecker.refreshAccessibility(database.getAllSources());
 				travelCapabilities.refreshQuestState();
 				travelCapabilities.refreshVarbits();
-				lastObtainedCount = collectionState.getTotalObtained();
+				syncStateCoordinator.setLastObtainedCount(collectionState.getTotalObtained());
 				rebuildSourcesWithMissingItems();
 				if (panel != null)
 				{
@@ -387,15 +363,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayRegistry.unregisterAll();
 		eventBus.unregister(sceneEventRouter);
 		deactivateGuidance();
-		lastObtainedCount = -1;
+		syncStateCoordinator.reset();
 		sourcesWithMissingItems.clear();
-		collectionLogOpen = false;
-		autoSyncPending = false;
-		scriptScanActive = false;
-		scanSettleCountdown = 0;
-		hasCompletedFullSync = false;
-		syncReminderSent = false;
-		loginTickDelay = 0;
 		pendingPanelRebuild = false;
 		rankedSourcesDirty = true;
 		cachedRankedSources = null;
@@ -421,14 +390,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			// LOGGED_IN fires multiple times during login/transitions.
 			// Only reset sync state on the first fire to avoid clearing
 			// collection log / bank sync flags mid-session.
-			boolean freshLogin = loginTickDelay == 0 && !syncReminderSent;
-			loginTickDelay = 10;
+			syncStateCoordinator.onGameStateLoggedIn();
 			slayerRefreshPending = true;
-			if (freshLogin)
-			{
-				dataSyncState.reset();
-				dataSyncState.setLoginTimestamp(System.currentTimeMillis());
-			}
 			clientThread.invokeLater(() ->
 			{
 				collectionState.refreshVarps();
@@ -438,7 +401,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				travelCapabilities.refreshQuestState();
 				travelCapabilities.refreshVarbits();
 				slayerTaskState.refresh();
-				lastObtainedCount = collectionState.getTotalObtained();
+				syncStateCoordinator.setLastObtainedCount(collectionState.getTotalObtained());
 				rebuildSourcesWithMissingItems();
 
 				// Rescan scene for tracked objects after scene (re)load
@@ -474,16 +437,9 @@ public class CollectionLogHelperPlugin extends Plugin
 			requirementsChecker.clearCache();
 			clueEstimator.resetBucket();
 			slayerTaskState.reset();
-			lastObtainedCount = -1;
+			syncStateCoordinator.onGameStateLoginScreen();
+			syncStateCoordinator.setLastObtainedCount(-1);
 			sourcesWithMissingItems.clear();
-			collectionLogOpen = false;
-			autoSyncPending = false;
-			scriptScanActive = false;
-			scanSettleCountdown = 0;
-			hasCompletedFullSync = false;
-			syncReminderSent = false;
-			clogNotificationChecked = false;
-			loginTickDelay = 0;
 			slayerRefreshPending = false;
 			pendingTravelVarbitRefresh = false;
 			cachedPlayerLocation = null;
@@ -545,15 +501,15 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		// Don't trigger rebuilds mid-scan; the settle logic in onGameTick
 		// will fire a single rebuild once script 4100 stops firing.
-		if (scriptScanActive)
+		if (syncStateCoordinator.isScriptScanActive())
 		{
 			return;
 		}
 
 		int currentCount = collectionState.getTotalObtained();
-		if (currentCount != lastObtainedCount)
+		if (currentCount != syncStateCoordinator.getLastObtainedCount())
 		{
-			lastObtainedCount = currentCount;
+			syncStateCoordinator.onCollectionStateChanged(currentCount);
 			rebuildSourcesWithMissingItems();
 			slayerChanged = true; // rebuild anyway
 		}
@@ -751,43 +707,13 @@ public class CollectionLogHelperPlugin extends Plugin
 			}
 		}
 
-		if (event.getGroupId() != COLLECTION_LOG_GROUP_ID)
-		{
-			return;
-		}
-
-		log.info("Collection log widget loaded (group {})", event.getGroupId());
-		collectionLogOpen = true;
-
-		// Trigger automatic full scan: programmatically activate search mode
-		// which causes script 4100 to fire once per obtained item
-		autoSyncPending = true;
+		syncStateCoordinator.onWidgetLoaded(event.getGroupId());
 	}
 
 	@Subscribe
 	public void onScriptPreFired(ScriptPreFired event)
 	{
-		if (event.getScriptId() != SCRIPT_COLLECTION_LOG_ITEM)
-		{
-			return;
-		}
-
-		// Script 4100 fires per obtained item during search-mode iteration
-		// Args: [source_widget, itemId, itemCount]
-		Object[] args = event.getScriptEvent().getArguments();
-		if (args != null && args.length >= 3)
-		{
-			int itemId = (int) args[1];
-			if (itemId > 0)
-			{
-				collectionState.markItemObtained(itemId);
-				scriptScanItemCount++;
-			}
-		}
-
-		// Reset the settle countdown — more items may be coming
-		scriptScanActive = true;
-		scanSettleCountdown = SCAN_SETTLE_TICKS;
+		syncStateCoordinator.onScriptPreFired(event.getScriptId(), event.getScriptEvent().getArguments());
 	}
 
 	@Subscribe
@@ -798,7 +724,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			pendingRequirementsRefresh = false;
 			boolean reqsChanged = requirementsChecker.refreshAccessibility(database.getAllSources());
-			if (reqsChanged && !scriptScanActive)
+			if (reqsChanged && !syncStateCoordinator.isScriptScanActive())
 			{
 				pendingPanelRebuild = true;
 				rankedSourcesDirty = true;
@@ -816,37 +742,6 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (pluginDataManager.getCharacterDir() == null)
 		{
 			pluginDataManager.init();
-		}
-
-		// Deferred cache-fresh check: varps aren't loaded during LOGGED_IN or
-		// RuneScapeProfileChanged, so retry here once totalObtained becomes valid
-		if (!hasCompletedFullSync && collectionState.getTotalObtained() > 0
-			&& collectionState.isCacheFresh())
-		{
-			dataSyncState.setCollectionLogSynced(true);
-			hasCompletedFullSync = true;
-			log.info("Cache is fresh (varp {} matches last sync) — skipping sync prompt",
-				collectionState.getTotalObtained());
-
-			if (playerBankState.loadFromCache())
-			{
-				dataSyncState.setBankScanned(true);
-				log.info("Bank cache loaded — skipping bank scan prompt");
-			}
-
-			exportEfficiencyIfEnabled();
-
-			if (panel != null)
-			{
-				panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
-					collectionState.getTotalObtained());
-				panel.updateDataSyncWarning();
-			}
-			pendingPanelRebuild = true;
-			rankedSourcesDirty = true;
-
-			guidanceOverlay.setShowCollectionLogReminder(false);
-			guidanceOverlay.setShowBankReminder(false);
 		}
 
 		// Dispatch deferred ShortestPath "path" message (1-tick after "clear")
@@ -885,7 +780,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Deferred slayer task refresh — varps may not be loaded in the initial
 		// invokeLater after LOGGED_IN, so re-read a few ticks later when the
 		// server has definitely sent all varp data.
-		if (slayerRefreshPending && loginTickDelay <= 7)
+		if (slayerRefreshPending && syncStateCoordinator.getLoginTickDelay() <= 7)
 		{
 			slayerRefreshPending = false;
 			slayerTaskState.refresh();
@@ -893,97 +788,18 @@ public class CollectionLogHelperPlugin extends Plugin
 			rankedSourcesDirty = true;
 		}
 
-		// One-time check: warn if in-game collection log notification is disabled.
-		// Without it, the "New item added to your collection log" chat message
-		// never fires and our real-time detection silently fails.
-		// Approach from C Engineer: Completed plugin (m0bilebtw).
-		if (!clogNotificationChecked && loginTickDelay <= 5 && client.getGameState() == GameState.LOGGED_IN)
-		{
-			clogNotificationChecked = true;
-			int setting = client.getVarbitValue(VarbitID.OPTION_COLLECTION_NEW_ITEM);
-			if (setting == 0 || setting == 2)
-			{
-				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
-					"[Collection Log Helper] Warning: Your collection log notification setting is " +
-					"disabled. Enable it in Settings > All Settings > Collection Log > 'New item notification' " +
-					"for real-time item detection.", "");
-			}
-		}
-
-		// Auto-sync: trigger search mode when collection log first opens
-		if (autoSyncPending && collectionLogOpen)
-		{
-			autoSyncPending = false;
-			triggerSearchModeScan();
-		}
-
-		// Wait for script 4100 to finish firing, then finalize
-		if (scriptScanActive)
-		{
-			scanSettleCountdown--;
-			if (scanSettleCountdown <= 0)
-			{
-				scriptScanActive = false;
-				hasCompletedFullSync = true;
-				dataSyncState.setCollectionLogSynced(true);
-				guidanceOverlay.setShowCollectionLogReminder(false);
-				collectionState.saveLastSyncedCount();
-				int capturedCount = scriptScanItemCount;
-				log.info("Auto-sync complete: {} obtained items captured via script scan",
-					capturedCount);
-				scriptScanItemCount = 0;
-				if (panel != null)
-				{
-					panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
-						collectionState.getTotalObtained());
-					panel.updateDataSyncWarning();
-				}
+		// Delegate all remaining sync-lifecycle logic to the coordinator
+		SyncStateCoordinator.SyncTickResult syncResult = syncStateCoordinator.tickSync(
+			panel,
+			() -> {
 				pendingPanelRebuild = true;
 				rankedSourcesDirty = true;
-				exportEfficiencyIfEnabled();
-			}
-		}
-
-		// Send one-time sync reminders after login
-		if (loginTickDelay > 0)
+			},
+			this::exportEfficiencyIfEnabled
+		);
+		if (syncResult == SyncStateCoordinator.SyncTickResult.RANKED_DIRTY)
 		{
-			loginTickDelay--;
-			if (loginTickDelay == 0 && !syncReminderSent)
-			{
-				syncReminderSent = true;
-				if (config.showSyncReminder() && !hasCompletedFullSync)
-				{
-					guidanceOverlay.setShowCollectionLogReminder(true);
-					client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
-						"<col=00c8c8>[Collection Log Helper]</col> Open your in-game Collection Log (click the quest tab icon) to sync progress.",
-						null);
-				}
-				if (config.showBankScanReminder() && !dataSyncState.isBankScanned())
-				{
-					guidanceOverlay.setShowBankReminder(true);
-				}
-				if (panel != null)
-				{
-					panel.updateDataSyncWarning();
-				}
-			}
-		}
-
-		// Auto-dismiss overlay reminders after 2 minutes
-		if (dataSyncState.isReminderExpired())
-		{
-			guidanceOverlay.setShowCollectionLogReminder(false);
-			guidanceOverlay.setShowBankReminder(false);
-		}
-
-		// Detect collection log closed
-		if (collectionLogOpen)
-		{
-			Widget frame = client.getWidget(InterfaceID.Collection.FRAME);
-			if (frame == null || frame.isHidden())
-			{
-				collectionLogOpen = false;
-			}
+			rankedSourcesDirty = true;
 		}
 
 		// World map arrow rotation
@@ -1058,38 +874,6 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		activeMapPoint.rotateArrow(degrees);
-	}
-
-	/**
-	 * Programmatically trigger collection log search mode, which causes
-	 * script 4100 to fire once per obtained item. This is the same technique
-	 * used by TempleOSRS and WikiSync for full collection log scanning.
-	 * After triggering search, immediately clicks "Back" so the user
-	 * doesn't see the search UI flash.
-	 */
-	private void triggerSearchModeScan()
-	{
-		scriptScanItemCount = 0;
-		scriptScanActive = false;
-		scanSettleCountdown = SCAN_SETTLE_TICKS;
-
-		if (panel != null)
-		{
-			panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCING, 0);
-		}
-
-		log.info("Triggering collection log search-mode scan");
-
-		// Click the Search toggle to enter search mode (fires script 4100 for each obtained item)
-		client.menuAction(-1, InterfaceID.Collection.SEARCH_TOGGLE,
-			MenuAction.CC_OP, 1, -1, "Search", null);
-
-		// Run the search script to complete the transition
-		client.runScript(SCRIPT_COLLECTION_LOG_SEARCH);
-
-		// Click Back to exit search mode so the UI returns to normal
-		client.menuAction(-1, InterfaceID.Collection.SEARCH_TOGGLE,
-			MenuAction.CC_OP, 1, -1, "Back", null);
 	}
 
 	public void activateGuidance(CollectionLogSource source)
