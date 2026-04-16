@@ -45,7 +45,7 @@ import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
-import com.collectionloghelper.lifecycle.SceneObjectRouter;
+import com.collectionloghelper.lifecycle.SceneEventRouter;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
 import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
@@ -82,15 +82,11 @@ import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ActorDeath;
 import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.ChatMessage;
-import net.runelite.api.events.GameObjectDespawned;
-import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.HitsplatApplied;
 import net.runelite.api.events.InteractingChanged;
 import net.runelite.api.events.ItemContainerChanged;
-import net.runelite.api.events.ItemDespawned;
-import net.runelite.api.events.ItemSpawned;
 import net.runelite.api.events.MenuEntryAdded;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.NpcDespawned;
@@ -255,7 +251,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private OverlayRegistry overlayRegistry;
 
 	@Inject
-	private SceneObjectRouter sceneObjectRouter;
+	private SceneEventRouter sceneEventRouter;
 
 
 	private CollectionLogHelperPanel panel;
@@ -350,7 +346,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			clientToolbar.addNavigation(navButton);
 		});
 		overlayRegistry.registerAll();
-		eventBus.register(sceneObjectRouter);
+		sceneEventRouter.setAuthoringLogger(msg -> authoringLog("%s", msg));
+		eventBus.register(sceneEventRouter);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -391,7 +388,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 		clientToolbar.removeNavigation(navButton);
 		overlayRegistry.unregisterAll();
-		eventBus.unregister(sceneObjectRouter);
+		eventBus.unregister(sceneEventRouter);
 		deactivateGuidance();
 		lastObtainedCount = -1;
 		sourcesWithMissingItems.clear();
@@ -1944,63 +1941,6 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			authoringLog("ANIMATION player=%d", animId);
 		}
-	}
-
-	@Subscribe
-	public void onItemSpawned(ItemSpawned event)
-	{
-		groundItemHighlightOverlay.onItemSpawned(event.getItem(), event.getTile());
-
-		if (!config.guidanceAuthoring())
-		{
-			return;
-		}
-		WorldPoint wp = event.getTile().getWorldLocation();
-		authoringLog("GROUND_ITEM_SPAWN id=%d qty=%d at=[%d,%d,%d]",
-			event.getItem().getId(), event.getItem().getQuantity(),
-			wp.getX(), wp.getY(), wp.getPlane());
-	}
-
-	@Subscribe
-	public void onItemDespawned(ItemDespawned event)
-	{
-		groundItemHighlightOverlay.onItemDespawned(event.getItem());
-
-		if (!config.guidanceAuthoring())
-		{
-			return;
-		}
-		WorldPoint wp = event.getTile().getWorldLocation();
-		authoringLog("GROUND_ITEM_DESPAWN id=%d at=[%d,%d,%d]",
-			event.getItem().getId(), wp.getX(), wp.getY(), wp.getPlane());
-	}
-
-	@Subscribe
-	public void onGameObjectSpawned(GameObjectSpawned event)
-	{
-		objectHighlightOverlay.onObjectSpawned(event.getGameObject());
-
-		if (!config.guidanceAuthoring())
-		{
-			return;
-		}
-		WorldPoint wp = event.getTile().getWorldLocation();
-		authoringLog("OBJECT_SPAWN id=%d at=[%d,%d,%d]",
-			event.getGameObject().getId(), wp.getX(), wp.getY(), wp.getPlane());
-	}
-
-	@Subscribe
-	public void onGameObjectDespawned(GameObjectDespawned event)
-	{
-		objectHighlightOverlay.onObjectDespawned(event.getGameObject());
-
-		if (!config.guidanceAuthoring())
-		{
-			return;
-		}
-		WorldPoint wp = event.getTile().getWorldLocation();
-		authoringLog("OBJECT_DESPAWN id=%d at=[%d,%d,%d]",
-			event.getGameObject().getId(), wp.getX(), wp.getY(), wp.getPlane());
 	}
 
 	@Subscribe
