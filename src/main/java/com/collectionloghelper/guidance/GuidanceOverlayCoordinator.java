@@ -143,7 +143,7 @@ public class GuidanceOverlayCoordinator
 	private Runnable onSequenceCompleteCallback;
 
 	@Inject
-	private GuidanceOverlayCoordinator(
+	GuidanceOverlayCoordinator(
 		Client client,
 		ClientThread clientThread,
 		EventBus eventBus,
@@ -777,7 +777,10 @@ public class GuidanceOverlayCoordinator
 	 */
 	private void onSequenceComplete()
 	{
+		String sourceName = guidanceSequencer.getActiveSource() != null
+			? guidanceSequencer.getActiveSource().getName() : "unknown";
 		deactivateGuidance();
+		log.debug("Guidance sequence complete for {}", sourceName);
 		if (onSequenceCompleteCallback != null)
 		{
 			onSequenceCompleteCallback.run();
