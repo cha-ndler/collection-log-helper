@@ -4,6 +4,15 @@ A RuneLite plugin that guides players through efficient collection log completio
 
 **Coverage:** 2,109 items across 225 sources — all item IDs verified against TempleOSRS, drop rates audited against OSRS Wiki and the [Log Hunters](https://discord.gg/loghunters) community spreadsheet. 98% of sources have detailed guidance descriptions with combat mechanics, teleport routes, and equipment requirements.
 
+## Screenshots
+
+![Active guidance at Shades of Mort'ton](docs/screenshots/overlay-1.png)
+![Next guidance step after burning remains](docs/screenshots/overlay-2.png)
+![Inventory highlighting for keys and chests](docs/screenshots/overlay-3.png)
+![Efficiency rankings panel](docs/screenshots/panel.png)
+![World map navigation overlay](docs/screenshots/worldmap.png)
+![Plugin settings](docs/screenshots/settings.png)
+
 ## Features
 
 ### Efficiency Scoring
