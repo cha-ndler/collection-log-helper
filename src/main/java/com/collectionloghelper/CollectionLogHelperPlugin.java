@@ -44,6 +44,7 @@ import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
+import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
 import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
@@ -255,6 +256,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private GuidanceSequencer guidanceSequencer;
 
+	@Inject
+	private OverlayRegistry overlayRegistry;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -347,14 +351,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				.build();
 			clientToolbar.addNavigation(navButton);
 		});
-		overlayManager.add(guidanceOverlay);
-		overlayManager.add(guidanceMinimapOverlay);
-		overlayManager.add(dialogHighlightOverlay);
-		overlayManager.add(objectHighlightOverlay);
-		overlayManager.add(itemHighlightOverlay);
-		overlayManager.add(worldMapRouteOverlay);
-		overlayManager.add(groundItemHighlightOverlay);
-		overlayManager.add(widgetHighlightOverlay);
+		overlayRegistry.registerAll();
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -394,14 +391,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			panel.shutDown();
 		}
 		clientToolbar.removeNavigation(navButton);
-		overlayManager.remove(guidanceOverlay);
-		overlayManager.remove(guidanceMinimapOverlay);
-		overlayManager.remove(dialogHighlightOverlay);
-		overlayManager.remove(objectHighlightOverlay);
-		overlayManager.remove(itemHighlightOverlay);
-		overlayManager.remove(worldMapRouteOverlay);
-		overlayManager.remove(groundItemHighlightOverlay);
-		overlayManager.remove(widgetHighlightOverlay);
+		overlayRegistry.unregisterAll();
 		deactivateGuidance();
 		lastObtainedCount = -1;
 		sourcesWithMissingItems.clear();
