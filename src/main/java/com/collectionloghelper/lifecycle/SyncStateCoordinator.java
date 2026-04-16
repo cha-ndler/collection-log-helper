@@ -28,7 +28,6 @@ import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
-import com.collectionloghelper.data.PluginDataManager;
 import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import javax.inject.Inject;
@@ -41,7 +40,6 @@ import net.runelite.api.MenuAction;
 import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.gameval.VarbitID;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.callback.ClientThread;
 
 /**
  * Manages the auto-sync and collection log scan lifecycle.
@@ -68,12 +66,10 @@ public class SyncStateCoordinator
 	private static final int SCAN_SETTLE_TICKS = 3;
 
 	private final Client client;
-	private final ClientThread clientThread;
 	private final CollectionLogHelperConfig config;
 	private final PlayerCollectionState collectionState;
 	private final DataSyncState dataSyncState;
 	private final PlayerBankState playerBankState;
-	private final PluginDataManager pluginDataManager;
 	private final GuidanceOverlay guidanceOverlay;
 
 	// ---- Sync state fields ----
@@ -111,21 +107,17 @@ public class SyncStateCoordinator
 	@Inject
 	SyncStateCoordinator(
 		Client client,
-		ClientThread clientThread,
 		CollectionLogHelperConfig config,
 		PlayerCollectionState collectionState,
 		DataSyncState dataSyncState,
 		PlayerBankState playerBankState,
-		PluginDataManager pluginDataManager,
 		GuidanceOverlay guidanceOverlay)
 	{
 		this.client = client;
-		this.clientThread = clientThread;
 		this.config = config;
 		this.collectionState = collectionState;
 		this.dataSyncState = dataSyncState;
 		this.playerBankState = playerBankState;
-		this.pluginDataManager = pluginDataManager;
 		this.guidanceOverlay = guidanceOverlay;
 	}
 

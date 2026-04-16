@@ -94,6 +94,7 @@ import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.NpcDespawned;
 import net.runelite.api.events.NpcSpawned;
 import net.runelite.api.events.ScriptPreFired;
+import net.runelite.api.ScriptEvent;
 import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.events.WidgetLoaded;
@@ -713,7 +714,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onScriptPreFired(ScriptPreFired event)
 	{
-		syncStateCoordinator.onScriptPreFired(event.getScriptId(), event.getScriptEvent().getArguments());
+		ScriptEvent se = event.getScriptEvent();
+		syncStateCoordinator.onScriptPreFired(event.getScriptId(), se != null ? se.getArguments() : null);
 	}
 
 	@Subscribe
