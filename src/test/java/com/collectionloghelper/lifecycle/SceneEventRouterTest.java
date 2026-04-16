@@ -24,6 +24,8 @@
  */
 package com.collectionloghelper.lifecycle;
 
+import com.collectionloghelper.CollectionLogHelperConfig;
+import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import net.runelite.api.DecorativeObject;
 import net.runelite.api.GroundObject;
@@ -43,10 +45,16 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SceneObjectRouterTest
+public class SceneEventRouterTest
 {
 	@Mock
 	private ObjectHighlightOverlay objectHighlightOverlay;
+
+	@Mock
+	private GroundItemHighlightOverlay groundItemHighlightOverlay;
+
+	@Mock
+	private CollectionLogHelperConfig config;
 
 	@Mock
 	private WallObject wallObject;
@@ -57,12 +65,12 @@ public class SceneObjectRouterTest
 	@Mock
 	private GroundObject groundObject;
 
-	private SceneObjectRouter router;
+	private SceneEventRouter router;
 
 	@Before
 	public void setUp()
 	{
-		router = new SceneObjectRouter(objectHighlightOverlay);
+		router = new SceneEventRouter(objectHighlightOverlay, groundItemHighlightOverlay, config);
 	}
 
 	// ========================================================================
