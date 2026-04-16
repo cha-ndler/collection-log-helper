@@ -4,6 +4,13 @@ A RuneLite plugin that guides players through efficient collection log completio
 
 **Coverage:** 2,109 items across 225 sources — all item IDs verified against TempleOSRS, drop rates audited against OSRS Wiki and the [Log Hunters](https://discord.gg/loghunters) community spreadsheet. 98% of sources have detailed guidance descriptions with combat mechanics, teleport routes, and equipment requirements.
 
+## Screenshots
+
+<!-- TODO: capture in-game screenshots and replace the placeholders below -->
+![Guidance overlay on a boss](docs/screenshots/overlay.png)
+![Side panel showing efficiency rankings](docs/screenshots/panel.png)
+![World-map route line](docs/screenshots/worldmap.png)
+
 ## Features
 
 ### Efficiency Scoring
