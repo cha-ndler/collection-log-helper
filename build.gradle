@@ -19,7 +19,7 @@ repositories {
 	mavenCentral()
 }
 
-def runeLiteVersion = 'latest.release'
+def runeLiteVersion = '1.12.24'
 def pluginMainClass = 'com.collectionloghelper.CollectionLogHelperPlugin'
 
 dependencies {
