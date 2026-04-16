@@ -155,7 +155,7 @@ public class AuthoringLogger
 					sb.append(String.format(" %d x%d", item.getId(), item.getQuantity()));
 				}
 			}
-			log(sb.toString());
+			log("%s", sb.toString());
 		}
 		else if (containerId == InventoryID.WORN)
 		{
@@ -173,7 +173,7 @@ public class AuthoringLogger
 					sb.append(String.format(" %s=%d", EQUIPMENT_SLOT_NAMES[i], items[i].getId()));
 				}
 			}
-			log(sb.toString());
+			log("%s", sb.toString());
 		}
 	}
 
