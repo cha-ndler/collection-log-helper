@@ -44,6 +44,7 @@ import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
+import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
@@ -253,6 +254,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private SceneEventRouter sceneEventRouter;
 
+	@Inject
+	private AuthoringLogger authoringLogger;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -300,9 +304,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	/** Tracked NPC for guidance overlay — maintained via NpcSpawned/NpcDespawned events. */
 	private volatile NPC trackedGuidanceNpc;
 
-	/** Writer for guidance authoring event log. Opened when authoring mode enabled. */
-	private java.io.PrintWriter authoringLogWriter;
-
 	@Override
 	protected void startUp() throws Exception
 	{
@@ -346,7 +347,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			clientToolbar.addNavigation(navButton);
 		});
 		overlayRegistry.registerAll();
-		sceneEventRouter.setAuthoringLogger(msg -> authoringLog("%s", msg));
+		sceneEventRouter.setAuthoringLogger(msg -> authoringLogger.log("%s", msg));
 		eventBus.register(sceneEventRouter);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
@@ -377,11 +378,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	protected void shutDown() throws Exception
 	{
 		chatCommandManager.unregisterCommand("clh");
-		if (authoringLogWriter != null)
-		{
-			authoringLogWriter.close();
-			authoringLogWriter = null;
-		}
+		authoringLogger.close();
 		if (panel != null)
 		{
 			panel.shutDown();
@@ -519,10 +516,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		collectionState.refreshVarps();
 
 		// Authoring: log varbit changes (throttle to 1 per tick to avoid spam)
-		if (config.guidanceAuthoring() && client.getTickCount() != lastVarbitLogTick)
+		if (config.guidanceAuthoring() && client.getTickCount() != authoringLogger.getLastVarbitLogTick())
 		{
-			lastVarbitLogTick = client.getTickCount();
-			authoringLog("VARBIT_CHANGED varbitId=%d value=%d",
+			authoringLogger.setLastVarbitLogTick(client.getTickCount());
+			authoringLogger.log("VARBIT_CHANGED varbitId=%d value=%d",
 				event.getVarbitId(), event.getValue());
 		}
 
@@ -587,7 +584,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			NPC npc = (NPC) event.getActor();
 			if (config.guidanceAuthoring())
 			{
-				authoringLog("DEATH npcId=%d name='%s'", npc.getId(), npc.getName());
+				authoringLogger.log("DEATH npcId=%d name='%s'", npc.getId(), npc.getName());
 			}
 			guidanceSequencer.onNpcDeath(npc.getId());
 		}
@@ -604,7 +601,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		if (config.guidanceAuthoring())
 		{
-			authoringLog("CHAT type=%s msg='%s'", event.getType(), event.getMessage());
+			authoringLogger.log("CHAT type=%s msg='%s'", event.getType(), event.getMessage());
 		}
 
 		// Forward chat messages to guidance sequencer for CHAT_MESSAGE_RECEIVED condition
@@ -658,7 +655,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		if (config.guidanceAuthoring())
 		{
-			logContainerChange(event);
+			authoringLogger.logContainerChange(event, client);
 		}
 
 		if (event.getContainerId() == InventoryID.INV)
@@ -735,7 +732,7 @@ public class CollectionLogHelperPlugin extends Plugin
 									sb.append(" '").append(child.getText()).append("'");
 								}
 							}
-							authoringLog(sb.toString());
+							authoringLogger.log(sb.toString());
 						}
 					}
 				});
@@ -748,7 +745,7 @@ public class CollectionLogHelperPlugin extends Plugin
 					Widget textWidget = client.getWidget(231, 4);
 					if (textWidget != null && textWidget.getText() != null)
 					{
-						authoringLog("DIALOG_NPC text='%s'", textWidget.getText());
+						authoringLogger.log("DIALOG_NPC text='%s'", textWidget.getText());
 					}
 				});
 			}
@@ -874,6 +871,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (client.getLocalPlayer() != null)
 		{
 			cachedPlayerLocation = resolvePlayerWorldLocation();
+			authoringLogger.setPlayerLocation(cachedPlayerLocation);
 
 			// Check ARRIVE_AT_TILE completion for guidance sequencer
 			if (guidanceSequencer.isActive())
@@ -1698,7 +1696,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Authoring mode: log all interactions regardless of guidance state
 		if (config.guidanceAuthoring())
 		{
-			authoringLog("MENU option='%s' target='%s' action=%s id=%d param0=%d param1=%d",
+			authoringLogger.log("MENU option='%s' target='%s' action=%s id=%d param0=%d param1=%d",
 				event.getMenuOption(), event.getMenuTarget(), action,
 				event.getId(), event.getParam0(), event.getParam1());
 
@@ -1706,7 +1704,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				|| action == MenuAction.GAME_OBJECT_THIRD_OPTION || action == MenuAction.GAME_OBJECT_FOURTH_OPTION
 				|| action == MenuAction.GAME_OBJECT_FIFTH_OPTION)
 			{
-				authoringLog("OBJECT id=%d option='%s'", event.getId(), event.getMenuOption());
+				authoringLogger.log("OBJECT id=%d option='%s'", event.getId(), event.getMenuOption());
 			}
 			else if (action == MenuAction.NPC_FIRST_OPTION || action == MenuAction.NPC_SECOND_OPTION
 				|| action == MenuAction.NPC_THIRD_OPTION || action == MenuAction.NPC_FOURTH_OPTION
@@ -1715,21 +1713,21 @@ public class CollectionLogHelperPlugin extends Plugin
 				NPC npc = event.getMenuEntry().getNpc();
 				if (npc != null)
 				{
-					authoringLog("NPC id=%d name='%s' option='%s'",
+					authoringLogger.log("NPC id=%d name='%s' option='%s'",
 						npc.getId(), npc.getName(), event.getMenuOption());
 				}
 			}
 			else if (action == MenuAction.WIDGET_TARGET_ON_GAME_OBJECT)
 			{
-				authoringLog("USE_ITEM_ON_OBJECT objectId=%d itemId=%d", event.getId(), event.getParam0());
+				authoringLogger.log("USE_ITEM_ON_OBJECT objectId=%d itemId=%d", event.getId(), event.getParam0());
 			}
 			else if (action == MenuAction.WIDGET_TARGET_ON_NPC)
 			{
-				authoringLog("USE_ITEM_ON_NPC npcIndex=%d", event.getId());
+				authoringLogger.log("USE_ITEM_ON_NPC npcIndex=%d", event.getId());
 			}
 			else if (action == MenuAction.WIDGET_TARGET_ON_WIDGET)
 			{
-				authoringLog("USE_ITEM_ON_ITEM param0=%d param1=%d", event.getParam0(), event.getParam1());
+				authoringLogger.log("USE_ITEM_ON_ITEM param0=%d param1=%d", event.getParam0(), event.getParam1());
 			}
 		}
 
@@ -1848,87 +1846,6 @@ public class CollectionLogHelperPlugin extends Plugin
 		return playerLoc != null && playerLoc.getPlane() == worldPoint.getPlane();
 	}
 
-	// ---- Guidance Authoring Event Logger ----
-
-	private void authoringLog(String format, Object... args)
-	{
-		if (!config.guidanceAuthoring())
-		{
-			return;
-		}
-		if (authoringLogWriter == null)
-		{
-			java.io.File logFile = pluginDataManager.getFile("authoring-log.txt");
-			if (logFile == null)
-			{
-				logFile = new java.io.File(
-					net.runelite.client.RuneLite.RUNELITE_DIR, "clh-authoring-log.txt");
-			}
-			try
-			{
-				authoringLogWriter = new java.io.PrintWriter(
-					new java.io.FileWriter(logFile, true), true);
-				authoringLogWriter.printf("=== Authoring session started %s ===%n",
-					java.time.LocalDateTime.now().format(
-						java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-			}
-			catch (java.io.IOException e)
-			{
-				log.error("Failed to open authoring log", e);
-				return;
-			}
-		}
-		WorldPoint loc = cachedPlayerLocation;
-		String locStr = loc != null
-			? String.format("[%d,%d,%d]", loc.getX(), loc.getY(), loc.getPlane()) : "[?,?,?]";
-		String timestamp = java.time.LocalTime.now().format(
-			java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss"));
-		authoringLogWriter.printf("%s %s %s%n", timestamp, locStr, String.format(format, args));
-	}
-
-	/** Logs inventory or equipment container changes with slot names for equipment. */
-	private void logContainerChange(ItemContainerChanged event)
-	{
-		int containerId = event.getContainerId();
-		if (containerId == InventoryID.INV)
-		{
-			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.INV);
-			if (c == null)
-			{
-				return;
-			}
-			StringBuilder sb = new StringBuilder("INVENTORY");
-			for (net.runelite.api.Item item : c.getItems())
-			{
-				if (item.getId() > 0 && item.getQuantity() > 0)
-				{
-					sb.append(String.format(" %d x%d", item.getId(), item.getQuantity()));
-				}
-			}
-			authoringLog(sb.toString());
-		}
-		else if (containerId == InventoryID.WORN)
-		{
-			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.WORN);
-			if (c == null)
-			{
-				return;
-			}
-			String[] slotNames = {"Head", "Cape", "Amulet", "Weapon", "Body",
-				"Shield", "?", "Legs", "?", "Gloves", "Boots", "?", "Ring", "Ammo"};
-			StringBuilder sb = new StringBuilder("EQUIPMENT");
-			net.runelite.api.Item[] items = c.getItems();
-			for (int i = 0; i < items.length && i < slotNames.length; i++)
-			{
-				if (items[i].getId() > 0)
-				{
-					sb.append(String.format(" %s=%d", slotNames[i], items[i].getId()));
-				}
-			}
-			authoringLog(sb.toString());
-		}
-	}
-
 	@Subscribe
 	public void onAnimationChanged(AnimationChanged event)
 	{
@@ -1939,7 +1856,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		int animId = client.getLocalPlayer().getAnimation();
 		if (animId != -1)
 		{
-			authoringLog("ANIMATION player=%d", animId);
+			authoringLogger.log("ANIMATION player=%d", animId);
 		}
 	}
 
@@ -1950,7 +1867,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		if (config.guidanceAuthoring())
 		{
-			authoringLog("NPC_SPAWN id=%d name='%s' index=%d", npc.getId(), npc.getName(), npc.getIndex());
+			authoringLogger.log("NPC_SPAWN id=%d name='%s' index=%d", npc.getId(), npc.getName(), npc.getIndex());
 		}
 
 		// Track the spawned NPC if it matches the current guidance step's target
@@ -1972,7 +1889,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		if (config.guidanceAuthoring())
 		{
-			authoringLog("NPC_DESPAWN id=%d name='%s'", npc.getId(), npc.getName());
+			authoringLogger.log("NPC_DESPAWN id=%d name='%s'", npc.getId(), npc.getName());
 		}
 
 		// Clear tracked NPC if it despawned
@@ -2012,20 +1929,17 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 		if (event.getActor() == client.getLocalPlayer())
 		{
-			authoringLog("HITSPLAT_RECEIVED type=%d amount=%d",
+			authoringLogger.log("HITSPLAT_RECEIVED type=%d amount=%d",
 				event.getHitsplat().getHitsplatType(), event.getHitsplat().getAmount());
 		}
 		else if (event.getActor() instanceof NPC)
 		{
 			NPC npc = (NPC) event.getActor();
-			authoringLog("HITSPLAT_DEALT npcId=%d name='%s' type=%d amount=%d",
+			authoringLogger.log("HITSPLAT_DEALT npcId=%d name='%s' type=%d amount=%d",
 				npc.getId(), npc.getName(),
 				event.getHitsplat().getHitsplatType(), event.getHitsplat().getAmount());
 		}
 	}
-
-	/** Last varbit change tick — throttle to avoid flooding the log. */
-	private int lastVarbitLogTick = -1;
 
 	private void onClhCommand(ChatMessage chatMessage, String message)
 	{
