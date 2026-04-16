@@ -19,7 +19,7 @@ repositories {
 	mavenCentral()
 }
 
-def runeLiteVersion = 'latest.release'
+def runeLiteVersion = '1.12.24'
 def pluginMainClass = 'com.collectionloghelper.CollectionLogHelperPlugin'
 
 dependencies {
@@ -54,16 +54,15 @@ tasks.register('run', JavaExec) {
 }
 
 tasks.register('shadowJar', Jar) {
-	dependsOn configurations.testRuntimeClasspath
+	dependsOn configurations.runtimeClasspath
 	manifest {
 		attributes('Main-Class': pluginMainClass, 'Multi-Release': true)
 	}
 
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 	from sourceSets.main.output
-	from sourceSets.test.output
 	from {
-		configurations.testRuntimeClasspath.collect { file ->
+		configurations.runtimeClasspath.collect { file ->
 			file.isDirectory() ? file : zipTree(file)
 		}
 	}
