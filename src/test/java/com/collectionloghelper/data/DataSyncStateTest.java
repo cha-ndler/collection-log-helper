@@ -167,4 +167,159 @@ public class DataSyncStateTest
 		syncState.setLoginTimestamp(ts);
 		assertEquals(ts, syncState.getLoginTimestamp());
 	}
+
+	// ========================================================================
+	// State transitions — SYNCED back to UNSYNCED
+	// ========================================================================
+
+	@Test
+	public void transitionFromSyncedBackToUnsynced_collectionLog()
+	{
+		// Arrange — fully synced
+		syncState.setCollectionLogSynced(true);
+		syncState.setBankScanned(true);
+		assertTrue(syncState.isFullySynced());
+
+		// Act — un-sync the collection log
+		syncState.setCollectionLogSynced(false);
+
+		// Assert
+		assertFalse(syncState.isCollectionLogSynced());
+		assertFalse(syncState.isFullySynced());
+		assertTrue(syncState.isBankScanned()); // bank state unchanged
+	}
+
+	@Test
+	public void transitionFromSyncedBackToUnsynced_bank()
+	{
+		// Arrange — fully synced
+		syncState.setCollectionLogSynced(true);
+		syncState.setBankScanned(true);
+		assertTrue(syncState.isFullySynced());
+
+		// Act — un-sync the bank
+		syncState.setBankScanned(false);
+
+		// Assert
+		assertFalse(syncState.isBankScanned());
+		assertFalse(syncState.isFullySynced());
+		assertTrue(syncState.isCollectionLogSynced()); // collection log unchanged
+	}
+
+	@Test
+	public void transitionFromSyncedToUnsyncedAndBackToSynced()
+	{
+		// Arrange — start fully synced
+		syncState.setCollectionLogSynced(true);
+		syncState.setBankScanned(true);
+
+		// Act — intermediate unsynced state
+		syncState.setCollectionLogSynced(false);
+		assertFalse(syncState.isFullySynced());
+
+		// Act — re-sync
+		syncState.setCollectionLogSynced(true);
+
+		// Assert
+		assertTrue(syncState.isFullySynced());
+	}
+
+	// ========================================================================
+	// Reset transitions
+	// ========================================================================
+
+	@Test
+	public void resetAfterFullSync_returnsToInitialState()
+	{
+		// Arrange
+		syncState.setCollectionLogSynced(true);
+		syncState.setBankScanned(true);
+		syncState.setLoginTimestamp(999_000L);
+
+		// Act
+		syncState.reset();
+
+		// Assert — back to clean initial state
+		assertFalse(syncState.isCollectionLogSynced());
+		assertFalse(syncState.isBankScanned());
+		assertFalse(syncState.isFullySynced());
+		assertEquals(0, syncState.getLoginTimestamp());
+		assertFalse(syncState.isReminderExpired());
+	}
+
+	@Test
+	public void resetIsIdempotent()
+	{
+		// Arrange
+		syncState.setCollectionLogSynced(true);
+		syncState.reset();
+
+		// Act — second reset on already-clean state
+		syncState.reset();
+
+		// Assert
+		assertFalse(syncState.isCollectionLogSynced());
+		assertFalse(syncState.isBankScanned());
+		assertEquals(0, syncState.getLoginTimestamp());
+	}
+
+	// ========================================================================
+	// isReminderExpired boundary values
+	// ========================================================================
+
+	@Test
+	public void isReminderExpired_negativeTimestamp_returnsFalse()
+	{
+		// loginTimestamp <= 0 should never expire
+		syncState.setLoginTimestamp(-1L);
+		assertFalse(syncState.isReminderExpired());
+	}
+
+	@Test
+	public void isReminderExpired_justOverThreshold_returnsTrue()
+	{
+		// Login was 2 minutes + 1 ms ago — should be expired
+		syncState.setLoginTimestamp(System.currentTimeMillis() - 120_001);
+		assertTrue(syncState.isReminderExpired());
+	}
+
+	@Test
+	public void isReminderExpired_afterReset_returnsFalse()
+	{
+		// Arrange — set old timestamp, trigger expiry
+		syncState.setLoginTimestamp(System.currentTimeMillis() - 180_000);
+		assertTrue(syncState.isReminderExpired());
+
+		// Act
+		syncState.reset();
+
+		// Assert — reset clears timestamp so reminder no longer expired
+		assertFalse(syncState.isReminderExpired());
+	}
+
+	// ========================================================================
+	// isFullySynced — flag independence
+	// ========================================================================
+
+	@Test
+	public void isFullySynced_setTrueThenFalseForOneFlag_remainsFalse()
+	{
+		// Toggle collectionLog true/false while bank stays true
+		syncState.setBankScanned(true);
+		syncState.setCollectionLogSynced(true);
+		assertTrue(syncState.isFullySynced());
+
+		syncState.setCollectionLogSynced(false);
+		assertFalse(syncState.isFullySynced());
+	}
+
+	@Test
+	public void isFullySynced_independentOfLoginTimestamp()
+	{
+		// loginTimestamp should not affect isFullySynced
+		syncState.setCollectionLogSynced(true);
+		syncState.setBankScanned(true);
+		syncState.setLoginTimestamp(0L);
+		assertTrue(syncState.isFullySynced());
+	}
 }
