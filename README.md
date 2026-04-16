@@ -6,10 +6,12 @@ A RuneLite plugin that guides players through efficient collection log completio
 
 ## Screenshots
 
-<!-- TODO: capture in-game screenshots and replace the placeholders below -->
-![Guidance overlay on a boss](docs/screenshots/overlay.png)
-![Side panel showing efficiency rankings](docs/screenshots/panel.png)
-![World-map route line](docs/screenshots/worldmap.png)
+![Active guidance at Shades of Mort'ton](docs/screenshots/overlay-1.png)
+![Next guidance step after burning remains](docs/screenshots/overlay-2.png)
+![Inventory highlighting for keys and chests](docs/screenshots/overlay-3.png)
+![Efficiency rankings panel](docs/screenshots/panel.png)
+![World map navigation overlay](docs/screenshots/worldmap.png)
+![Plugin settings](docs/screenshots/settings.png)
 
 ## Features
 
