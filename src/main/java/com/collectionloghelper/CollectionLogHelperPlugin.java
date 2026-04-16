@@ -24,7 +24,6 @@
  */
 package com.collectionloghelper;
 
-import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.CompletionCondition;
@@ -33,7 +32,6 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
-import com.collectionloghelper.data.ItemObjectTier;
 import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
 import com.collectionloghelper.data.RequirementsChecker;
@@ -43,30 +41,19 @@ import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
+import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.GuidanceUIState;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
-import com.collectionloghelper.lifecycle.SyncStateCoordinator;
-import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
-import com.collectionloghelper.overlay.DialogHighlightOverlay;
-import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
-import com.collectionloghelper.overlay.GuidanceInfoBox;
-import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
 import com.collectionloghelper.overlay.GuidanceOverlay;
-import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
-import com.collectionloghelper.overlay.WidgetHighlightOverlay;
-import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -108,7 +95,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.NpcLootReceived;
-import net.runelite.client.events.PluginMessage;
 import net.runelite.client.events.RuneScapeProfileChanged;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.game.ItemStack;
@@ -116,9 +102,6 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.NavigationButton;
-import net.runelite.client.ui.overlay.OverlayManager;
-import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
 import net.runelite.client.util.ImageUtil;
 import net.runelite.client.util.Text;
 
@@ -145,12 +128,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	private ClientToolbar clientToolbar;
 
 	@Inject
-	private OverlayManager overlayManager;
-
-	@Inject
-	private WorldMapPointManager worldMapPointManager;
-
-	@Inject
 	private ItemManager itemManager;
 
 	@Inject
@@ -161,10 +138,6 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private ConfigManager configManager;
-
-
-	@Inject
-	private InfoBoxManager infoBoxManager;
 
 	@Inject
 	private ChatCommandManager chatCommandManager;
@@ -188,25 +161,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private GuidanceOverlay guidanceOverlay;
 
 	@Inject
-	private GuidanceMinimapOverlay guidanceMinimapOverlay;
-
-	@Inject
-	private DialogHighlightOverlay dialogHighlightOverlay;
-
-	@Inject
 	private ObjectHighlightOverlay objectHighlightOverlay;
-
-	@Inject
-	private ItemHighlightOverlay itemHighlightOverlay;
-
-	@Inject
-	private WorldMapRouteOverlay worldMapRouteOverlay;
-
-	@Inject
-	private GroundItemHighlightOverlay groundItemHighlightOverlay;
-
-	@Inject
-	private WidgetHighlightOverlay widgetHighlightOverlay;
 
 	@Inject
 	private DataSyncState dataSyncState;
@@ -236,6 +191,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private GuidanceSequencer guidanceSequencer;
 
 	@Inject
+	private GuidanceOverlayCoordinator guidanceCoordinator;
+
+	@Inject
 	private OverlayRegistry overlayRegistry;
 
 	@Inject
@@ -260,6 +218,15 @@ public class CollectionLogHelperPlugin extends Plugin
 	private volatile boolean pendingTravelVarbitRefresh = false;
 	private BufferedImage collectionLogIcon;
 
+	// Auto-sync state: triggered when collection log widget opens
+	private boolean autoSyncPending;
+	private boolean scriptScanActive;
+	private int scriptScanItemCount;
+	private int scanSettleCountdown;
+	private boolean hasCompletedFullSync;
+	private boolean syncReminderSent;
+	private int loginTickDelay;
+
 	/**
 	 * Player location cached on the client thread each game tick.
 	 * Read by guidance sequencer and authoring log — volatile ensures visibility.
@@ -274,6 +241,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	/** Cached ranked efficiency list — recomputed only when dirty. */
 	private List<ScoredItem> cachedRankedSources;
 	private boolean rankedSourcesDirty = true;
+
+	/** Writer for guidance authoring event log. Opened when authoring mode enabled. */
+	private java.io.PrintWriter authoringLogWriter;
 
 	@Override
 	protected void startUp() throws Exception
@@ -294,6 +264,11 @@ public class CollectionLogHelperPlugin extends Plugin
 			() -> guidanceSequencer.skipStep()
 		);
 
+		// Wire coordinator with references it needs from the plugin
+		guidanceCoordinator.setPluginInstance(this);
+		guidanceCoordinator.setPanel(panel);
+		guidanceCoordinator.setOnSequenceCompleteCallback(this::onSequenceComplete);
+
 		// Use a placeholder icon initially, then swap to the real item sprite once loaded
 		final BufferedImage placeholder = ImageUtil.loadImageResource(getClass(), "panel_icon.png");
 		navButton = NavigationButton.builder()
@@ -306,6 +281,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		// AsyncBufferedImage may be blank at startup; onLoaded rebuilds the nav button
 		collectionLogIcon = itemManager.getImage(ItemID.COLLECTION_LOG);
+		guidanceCoordinator.setCollectionLogIcon(collectionLogIcon);
 		((net.runelite.client.util.AsyncBufferedImage) collectionLogIcon).onLoaded(() ->
 		{
 			clientToolbar.removeNavigation(navButton);
@@ -619,7 +595,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				if (guidanceSequencer.isActive())
 				{
 					guidanceSequencer.onInventoryChanged();
-					applyDynamicItemObjectOverlays();
+					guidanceCoordinator.onItemContainerChanged();
 				}
 			}
 		}
@@ -740,19 +716,39 @@ public class CollectionLogHelperPlugin extends Plugin
 			pluginDataManager.init();
 		}
 
-		// Dispatch deferred ShortestPath "path" message (1-tick after "clear")
-		if (guidanceUIState.getPendingShortestPathTarget() != null)
+		// Deferred cache-fresh check: varps aren't loaded during LOGGED_IN or
+		// RuneScapeProfileChanged, so retry here once totalObtained becomes valid
+		if (!hasCompletedFullSync && collectionState.getTotalObtained() > 0
+			&& collectionState.isCacheFresh())
 		{
-			WorldPoint target = guidanceUIState.getPendingShortestPathTarget();
-			guidanceUIState.setPendingShortestPathTarget(null);
-			Map<String, Object> data = new HashMap<>();
-			if (client.getLocalPlayer() != null)
+			dataSyncState.setCollectionLogSynced(true);
+			hasCompletedFullSync = true;
+			log.info("Cache is fresh (varp {} matches last sync) — skipping sync prompt",
+				collectionState.getTotalObtained());
+
+			if (playerBankState.loadFromCache())
 			{
-				data.put("start", client.getLocalPlayer().getWorldLocation());
+				dataSyncState.setBankScanned(true);
+				log.info("Bank cache loaded — skipping bank scan prompt");
 			}
-			data.put("target", target);
-			eventBus.post(new PluginMessage("shortestpath", "path", data));
+
+			exportEfficiencyIfEnabled();
+
+			if (panel != null)
+			{
+				panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
+					collectionState.getTotalObtained());
+				panel.updateDataSyncWarning();
+			}
+			pendingPanelRebuild = true;
+			rankedSourcesDirty = true;
+
+			guidanceOverlay.setShowCollectionLogReminder(false);
+			guidanceOverlay.setShowBankReminder(false);
 		}
+
+		// Dispatch deferred ShortestPath "path" and world map arrow via coordinator
+		guidanceCoordinator.tick();
 
 		// Cache player location for guidance sequencer and authoring log (client thread only).
 		// When sailing, the player is inside a WorldEntity whose inner WorldView
@@ -798,9 +794,6 @@ public class CollectionLogHelperPlugin extends Plugin
 			rankedSourcesDirty = true;
 		}
 
-		// World map arrow rotation
-		updateWorldMapArrow();
-
 		// Single coalesced rebuild per tick — all event handlers and checks above
 		// set pendingPanelRebuild instead of calling panel.rebuild() directly.
 		if (pendingPanelRebuild && panel != null)
@@ -826,492 +819,41 @@ public class CollectionLogHelperPlugin extends Plugin
 		calculator.exportEfficiencyList(exportFile, client);
 	}
 
-	private void updateWorldMapArrow()
+	/**
+	 * Programmatically trigger collection log search mode, which causes
+	 * script 4100 to fire once per obtained item. This is the same technique
+	 * used by TempleOSRS and WikiSync for full collection log scanning.
+	 * After triggering search, immediately clicks "Back" so the user
+	 * doesn't see the search UI flash.
+	 */
+	private void triggerSearchModeScan()
 	{
-		if (guidanceUIState.getActiveMapPoint() == null)
+		scriptScanItemCount = 0;
+		scriptScanActive = false;
+		scanSettleCountdown = SCAN_SETTLE_TICKS;
+
+		if (panel != null)
 		{
-			return;
+			panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCING, 0);
 		}
 
-		net.runelite.api.worldmap.WorldMap worldMap = client.getWorldMap();
-		if (worldMap == null)
-		{
-			return;
-		}
+		log.info("Triggering collection log search-mode scan");
 
-		net.runelite.api.Point mapCenter = worldMap.getWorldMapPosition();
-		if (mapCenter == null)
-		{
-			return;
-		}
+		// Click the Search toggle to enter search mode (fires script 4100 for each obtained item)
+		client.menuAction(-1, InterfaceID.Collection.SEARCH_TOGGLE,
+			MenuAction.CC_OP, 1, -1, "Search", null);
 
-		WorldPoint target = guidanceUIState.getActiveMapPoint().getWorldPoint();
-		int dx = target.getX() - mapCenter.getX();
-		// World map Y is inverted (higher Y = further north = up on map)
-		int dy = target.getY() - mapCenter.getY();
+		// Run the search script to complete the transition
+		client.runScript(SCRIPT_COLLECTION_LOG_SEARCH);
 
-		// Map 8 octants to arrow directions
-		int degrees;
-		if (Math.abs(dx) > Math.abs(dy) * 2)
-		{
-			degrees = dx > 0 ? 0 : 180;
-		}
-		else if (Math.abs(dy) > Math.abs(dx) * 2)
-		{
-			degrees = dy > 0 ? 270 : 90;
-		}
-		else if (dx > 0)
-		{
-			degrees = dy > 0 ? 315 : 45;
-		}
-		else
-		{
-			degrees = dy > 0 ? 225 : 135;
-		}
-
-		guidanceUIState.getActiveMapPoint().rotateArrow(degrees);
+		// Click Back to exit search mode so the UI returns to normal
+		client.menuAction(-1, InterfaceID.Collection.SEARCH_TOGGLE,
+			MenuAction.CC_OP, 1, -1, "Back", null);
 	}
 
 	public void activateGuidance(CollectionLogSource source)
 	{
-		if (!config.showOverlays())
-		{
-			return;
-		}
-
-		// Warn if the source has unmet requirements (don't block, just warn)
-		List<String> unmetReqs = requirementsChecker.getUnmetRequirements(source.getName());
-		if (!unmetReqs.isEmpty())
-		{
-			String unmetList = String.join(", ", unmetReqs);
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
-				"[Collection Log Helper] Warning: " + source.getName() + " requires " + unmetList, "");
-		}
-
-		// Clear any existing guidance first, including InfoBox and sequencer
-		deactivateGuidance();
-
-		// If source has multi-step guidance, start the sequencer
-		if (source.getGuidanceSteps() != null && !source.getGuidanceSteps().isEmpty())
-		{
-			guidanceSequencer.setPlayerLocation(cachedPlayerLocation);
-			// startSequence triggers onStepChanged callback which handles
-			// applyStepToOverlays and scanForTrackedNpc for the initial step
-			guidanceSequencer.startSequence(source, this::onStepChanged, this::onSequenceComplete);
-			GuidanceStep step = guidanceSequencer.getCurrentStep();
-			if (panel != null)
-			{
-				panel.setGuidanceState(true, source);
-				GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
-				panel.updateStepProgress(
-					guidanceSequencer.getCurrentIndex() + 1,
-					guidanceSequencer.getTotalSteps(),
-					step != null ? step.getDescription() : "",
-					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL,
-					rawStep != null ? rawStep.getRequiredItemIds() : null);
-			}
-			// Add InfoBox showing step progress
-			if (!source.getItems().isEmpty())
-			{
-				BufferedImage icon = itemManager.getImage(source.getItems().get(0).getItemId());
-				GuidanceInfoBox newInfoBox = new GuidanceInfoBox(icon, this);
-				newInfoBox.setStepText("1/" + guidanceSequencer.getTotalSteps());
-				newInfoBox.setTooltipText(source.getName() + ": "
-					+ (step != null ? step.getDescription() : ""));
-				infoBoxManager.addInfoBox(newInfoBox);
-				guidanceUIState.setActiveInfoBox(newInfoBox);
-			}
-			log.debug("Multi-step guidance activated for {} ({} steps)",
-				source.getName(), source.getGuidanceSteps().size());
-			return;
-		}
-
-		if (source.getCategory() == CollectionLogCategory.CLUES)
-		{
-			// Clue sources: text overlay + panel banner instead of map markers
-			guidanceOverlay.setClueGuidanceText("Do " + source.getName());
-			if (panel != null)
-			{
-				panel.showClueGuidance(source);
-			}
-
-			// Client API calls and ShortestPath messages must run on the client thread
-			clientThread.invokeLater(() ->
-			{
-				client.clearHintArrow();
-
-				if (config.useShortestPath())
-				{
-					eventBus.post(new PluginMessage("shortestpath", "clear"));
-				}
-			});
-		}
-		else
-		{
-			// Non-clue sources: world map, tile, and minimap overlays
-			applySourceToOverlays(source);
-		}
-
-		// Always update panel guidance state from the plugin
-		if (panel != null)
-		{
-			panel.setGuidanceState(true, source);
-			panel.hideStepProgress();
-		}
-
-		log.debug("Guidance activated for {} ({})", source.getName(), source.getCategory());
-	}
-
-	/**
-	 * Applies a single guidance step's data to all overlays.
-	 */
-	private void applyStepToOverlays(GuidanceStep step, String sourceName, CollectionLogSource source)
-	{
-		// Send world message hint if this step has one (only once per step, not on re-notify)
-		int stepIndex = guidanceSequencer.getCurrentIndex();
-		if (step.getWorldMessage() != null && !step.getWorldMessage().isEmpty()
-			&& stepIndex != guidanceUIState.getLastMessagedStepIndex())
-		{
-			guidanceUIState.setLastMessagedStepIndex(stepIndex);
-			clientThread.invokeLater(() ->
-				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
-					"<col=00c8c8>[Collection Log Helper]</col> " + step.getWorldMessage(),
-					null));
-		}
-
-		// Set tile filter before target IDs so it's active during rescan
-		if (step.getObjectFilterTiles() != null && !step.getObjectFilterTiles().isEmpty())
-		{
-			List<WorldPoint> tiles = new java.util.ArrayList<>();
-			for (int[] t : step.getObjectFilterTiles())
-			{
-				if (t != null && t.length >= 3)
-				{
-					tiles.add(new WorldPoint(t[0], t[1], t[2]));
-				}
-			}
-			objectHighlightOverlay.setObjectFilterTiles(tiles);
-		}
-		else if (step.getObjectMaxDistance() > 0 && step.getWorldX() > 0)
-		{
-			objectHighlightOverlay.setObjectFilter(
-				new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane()),
-				step.getObjectMaxDistance());
-		}
-		else
-		{
-			objectHighlightOverlay.setObjectFilter(null, 0);
-		}
-		objectHighlightOverlay.setTargetObjectIds(step.getAllObjectIds());
-		objectHighlightOverlay.setObjectInteractAction(step.getObjectInteractAction());
-		objectHighlightOverlay.setUseItemOnObject(step.isUseItemOnObject());
-		objectHighlightOverlay.setTooltipText(step.getDescription());
-
-		itemHighlightOverlay.setTargetItemIds(step.getHighlightItemIds());
-
-		groundItemHighlightOverlay.setTargetGroundItemIds(
-			step.getGroundItemIds() != null ? new HashSet<>(step.getGroundItemIds()) : null);
-
-		if (step.getHighlightWidgetIds() != null && step.getHighlightWidgetIds().length > 0)
-		{
-			List<int[]> widgets = new java.util.ArrayList<>();
-			for (int[] ref : step.getHighlightWidgetIds())
-			{
-				if (ref != null && ref.length >= 2)
-				{
-					widgets.add(ref);
-				}
-			}
-			widgetHighlightOverlay.setHighlightWidgets(widgets);
-		}
-		else
-		{
-			widgetHighlightOverlay.clearHighlights();
-		}
-
-		// Suppress tile highlight when ObjectHighlightOverlay handles the visual
-		guidanceOverlay.setSuppressTileHighlight(!step.getAllObjectIds().isEmpty());
-
-		if (step.getWorldX() > 0)
-		{
-			WorldPoint worldPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
-			guidanceOverlay.setTargetPoint(worldPoint);
-			guidanceOverlay.setTargetName(sourceName);
-			guidanceOverlay.setLocationDescription(step.getDescription());
-			String rawTravelTip = step.getTravelTip();
-			if ((rawTravelTip == null || rawTravelTip.isEmpty()) && source != null)
-			{
-				rawTravelTip = source.getTravelTip();
-			}
-			String travelTip = travelCapabilities.selectBestTravelTip(rawTravelTip);
-			guidanceOverlay.setTravelTip(travelTip);
-			log.debug("Travel capabilities for step '{}': {}", step.getDescription(), travelCapabilities.getSummary());
-			guidanceOverlay.setTargetNpcId(step.getNpcId());
-			guidanceOverlay.setInteractAction(step.getInteractAction());
-			dialogHighlightOverlay.setTargetDialogOptions(step.getDialogOptions());
-			dialogHighlightOverlay.setGuidanceActive(true);
-			guidanceMinimapOverlay.setTargetPoint(worldPoint);
-			worldMapRouteOverlay.setTargetPoint(worldPoint);
-			if (guidanceUIState.getActiveMapPoint() != null)
-			{
-				worldMapPointManager.remove(guidanceUIState.getActiveMapPoint());
-			}
-			guidanceUIState.setActiveMapPoint(new CollectionLogWorldMapPoint(worldPoint, step.getDescription(), collectionLogIcon));
-			worldMapPointManager.add(guidanceUIState.getActiveMapPoint());
-
-			clientThread.invokeLater(() ->
-			{
-				client.clearHintArrow();
-
-				// Skip hint arrow inside Sailing instances — surface world
-				// coords render at wrong positions in instanced WorldViews
-				if (shouldSetHintArrowTo(worldPoint))
-				{
-					client.setHintArrow(worldPoint);
-				}
-
-				if (config.useShortestPath())
-				{
-					eventBus.post(new PluginMessage("shortestpath", "clear"));
-					guidanceUIState.setPendingShortestPathTarget(worldPoint);
-				}
-			});
-		}
-		else
-		{
-			// Step with no location — clear previous target and show text overlay only
-			guidanceOverlay.setTargetPoint(null);
-			guidanceOverlay.setTargetName(null);
-			guidanceOverlay.setTargetNpcId(0);
-			guidanceOverlay.setInteractAction(null);
-			guidanceOverlay.setLocationDescription(null);
-			guidanceOverlay.setTravelTip(null);
-			guidanceMinimapOverlay.setTargetPoint(null);
-			worldMapRouteOverlay.setTargetPoint(null);
-			if (guidanceUIState.getActiveMapPoint() != null)
-			{
-				worldMapPointManager.remove(guidanceUIState.getActiveMapPoint());
-				guidanceUIState.setActiveMapPoint(null);
-			}
-			guidanceOverlay.setClueGuidanceText(step.getDescription());
-			clientThread.invokeLater(() ->
-			{
-				client.clearHintArrow();
-				if (config.useShortestPath())
-				{
-					eventBus.post(new PluginMessage("shortestpath", "clear"));
-				}
-			});
-		}
-
-		// Dynamic overlay override for Shades of Mort'ton key/chest highlighting
-		applyDynamicItemObjectOverlays();
-	}
-
-	/**
-	 * Dynamically overrides overlays when the current step has dynamicItemObjectTiers.
-	 * Scans inventory for the lowest tier with matching items, then highlights
-	 * that tier's objects and the matching item. Called on step change and on
-	 * inventory change while a guidance sequence is active.
-	 */
-	private void applyDynamicItemObjectOverlays()
-	{
-		GuidanceStep step = guidanceSequencer.getRawCurrentStep();
-		if (step == null || step.getDynamicItemObjectTiers() == null
-			|| step.getDynamicItemObjectTiers().isEmpty())
-		{
-			return;
-		}
-
-		// Collect ALL matching tiers so multiple keys highlight multiple chests
-		Set<Integer> matchedObjectIds = new HashSet<>();
-		List<Integer> matchedItemIds = new ArrayList<>();
-		String tooltipText = null;
-		String action = null;
-
-		for (ItemObjectTier tier : step.getDynamicItemObjectTiers())
-		{
-			if (tier.getItemIds() == null)
-			{
-				continue;
-			}
-			for (int itemId : tier.getItemIds())
-			{
-				if (playerInventoryState.hasItem(itemId))
-				{
-					if (tier.getObjectIds() != null && !tier.getObjectIds().isEmpty())
-					{
-						matchedObjectIds.addAll(tier.getObjectIds());
-					}
-					matchedItemIds.add(itemId);
-					if (action == null)
-					{
-						action = tier.getInteractAction() != null
-							? tier.getInteractAction()
-							: step.getObjectInteractAction();
-					}
-					if (tooltipText == null)
-					{
-						tooltipText = tier.getName() != null
-							? (action + " " + tier.getName())
-							: step.getDescription();
-					}
-					break; // Only match first key per tier (avoid duplicates)
-				}
-			}
-		}
-
-		if (!matchedObjectIds.isEmpty())
-		{
-			objectHighlightOverlay.setTargetObjectIds(matchedObjectIds);
-			objectHighlightOverlay.setObjectInteractAction(action);
-			objectHighlightOverlay.setTooltipText(
-				matchedItemIds.size() > 1 ? step.getDescription() : tooltipText);
-			itemHighlightOverlay.setTargetItemIds(matchedItemIds);
-		}
-	}
-
-	/**
-	 * Applies a source's default location data to overlays (non-sequencer path).
-	 * ShortestPath re-guidance: send "clear" now, then "path" on the next game
-	 * tick via pendingShortestPathTarget. The 1-tick delay guarantees the clear
-	 * is fully processed before the new path request arrives.
-	 * Ref: https://github.com/Skretzo/shortest-path
-	 */
-	private void applySourceToOverlays(CollectionLogSource source)
-	{
-		WorldPoint worldPoint = source.getWorldPoint(requirementsChecker);
-		String displayName = source.getDisplayLocation(requirementsChecker);
-
-		guidanceOverlay.setTargetPoint(worldPoint);
-		guidanceOverlay.setTargetName(source.getName());
-		guidanceOverlay.setLocationDescription(displayName);
-		guidanceOverlay.setTravelTip(source.getTravelTip());
-		guidanceOverlay.setTargetNpcId(source.getNpcId());
-		guidanceOverlay.setInteractAction(source.getInteractAction());
-		dialogHighlightOverlay.setTargetDialogOptions(source.getDialogOptions());
-		dialogHighlightOverlay.setGuidanceActive(true);
-		guidanceMinimapOverlay.setTargetPoint(worldPoint);
-		worldMapRouteOverlay.setTargetPoint(worldPoint);
-		if (guidanceUIState.getActiveMapPoint() != null)
-		{
-			worldMapPointManager.remove(guidanceUIState.getActiveMapPoint());
-		}
-		guidanceUIState.setActiveMapPoint(new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon));
-		worldMapPointManager.add(guidanceUIState.getActiveMapPoint());
-
-		clientThread.invokeLater(() ->
-		{
-			client.clearHintArrow();
-
-			if (shouldSetHintArrowTo(worldPoint))
-			{
-				client.setHintArrow(worldPoint);
-			}
-
-			if (config.useShortestPath())
-			{
-				eventBus.post(new PluginMessage("shortestpath", "clear"));
-				guidanceUIState.setPendingShortestPathTarget(worldPoint);
-			}
-		});
-	}
-
-	private void clearGuidanceOverlays()
-	{
-		guidanceUIState.setTrackedGuidanceNpc(null);
-		guidanceOverlay.clearTarget();
-		guidanceMinimapOverlay.clearTarget();
-		worldMapRouteOverlay.clearTarget();
-		dialogHighlightOverlay.clear();
-		objectHighlightOverlay.clearTarget();
-		itemHighlightOverlay.clearTarget();
-		groundItemHighlightOverlay.clearTargets();
-		widgetHighlightOverlay.clearHighlights();
-		clientThread.invokeLater(() -> client.clearHintArrow());
-		guidanceUIState.setActiveMapPoint(null);
-		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
-		if (panel != null)
-		{
-			panel.hideClueGuidance();
-		}
-	}
-
-	/**
-	 * Scans currently loaded NPCs to find a match for the given step's target NPC ID.
-	 * Called once when a new step activates to seed the tracked NPC reference.
-	 */
-	private void scanForTrackedNpc(GuidanceStep step)
-	{
-		guidanceUIState.setTrackedGuidanceNpc(null);
-		guidanceOverlay.setTrackedNpc(null);
-
-		if (step == null || step.getNpcId() <= 0)
-		{
-			return;
-		}
-
-		final int targetNpcId = step.getNpcId();
-		clientThread.invokeLater(() ->
-		{
-			WorldView wv = client.getTopLevelWorldView();
-			if (wv == null)
-			{
-				return;
-			}
-			for (NPC npc : wv.npcs())
-			{
-				if (npc != null && npc.getId() == targetNpcId)
-				{
-					guidanceUIState.setTrackedGuidanceNpc(npc);
-					guidanceOverlay.setTrackedNpc(npc);
-					break;
-				}
-			}
-		});
-	}
-
-	/**
-	 * Callback from GuidanceSequencer when the current step changes.
-	 */
-	private void onStepChanged(GuidanceStep step)
-	{
-		clearGuidanceOverlays();
-		CollectionLogSource activeSource = guidanceSequencer.getActiveSource();
-		String sourceName = activeSource != null ? activeSource.getName() : "";
-		applyStepToOverlays(step, sourceName, activeSource);
-		scanForTrackedNpc(step);
-
-		// Update InfoBox progress
-		if (guidanceUIState.getActiveInfoBox() != null)
-		{
-			int current = guidanceSequencer.getCurrentIndex() + 1;
-			int total = guidanceSequencer.getTotalSteps();
-			guidanceUIState.getActiveInfoBox().setStepText(current + "/" + total);
-			String tooltip = step.getDescription();
-			if (guidanceSequencer.getCumulativeTrackThreshold() > 0)
-			{
-				tooltip += "\n" + guidanceSequencer.getCumulativeActionCount()
-					+ "/" + guidanceSequencer.getCumulativeTrackThreshold()
-					+ " actions tracked";
-			}
-			guidanceUIState.getActiveInfoBox().setTooltipText(tooltip);
-			if (current == total)
-			{
-				guidanceUIState.getActiveInfoBox().setTextColor(java.awt.Color.GREEN);
-			}
-		}
-
-		if (panel != null)
-		{
-			GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
-			panel.updateStepProgress(
-				guidanceSequencer.getCurrentIndex() + 1,
-				guidanceSequencer.getTotalSteps(),
-				step.getDescription(),
-				step.getCompletionCondition() == CompletionCondition.MANUAL,
-				rawStep != null ? rawStep.getRequiredItemIds() : null);
-		}
+		guidanceCoordinator.activateGuidance(source, cachedPlayerLocation);
 	}
 
 	/**
@@ -1328,14 +870,11 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	/**
-	 * Callback from GuidanceSequencer when the entire sequence is complete.
+	 * Callback from coordinator when a guidance sequence completes.
+	 * Handles auto-advance to next source and panel rebuild.
 	 */
 	private void onSequenceComplete()
 	{
-		String sourceName = guidanceSequencer.getActiveSource() != null
-			? guidanceSequencer.getActiveSource().getName() : "unknown";
-		deactivateGuidance();
-
 		pendingPanelRebuild = true;
 		rankedSourcesDirty = true;
 		if (config.autoAdvanceGuidance())
@@ -1351,40 +890,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	public void deactivateGuidance()
 	{
-		if (guidanceUIState.getActiveInfoBox() != null)
-		{
-			infoBoxManager.removeInfoBox(guidanceUIState.getActiveInfoBox());
-		}
-		guidanceUIState.clearAll();
-		guidanceSequencer.stopSequence();
-		guidanceOverlay.clearTarget();
-		guidanceMinimapOverlay.clearTarget();
-		worldMapRouteOverlay.clearTarget();
-		dialogHighlightOverlay.clear();
-		objectHighlightOverlay.clearTarget();
-		itemHighlightOverlay.clearTarget();
-		groundItemHighlightOverlay.clearTargets();
-		widgetHighlightOverlay.clearHighlights();
-		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
-
-		clientThread.invokeLater(() ->
-		{
-			client.clearHintArrow();
-
-			if (config.useShortestPath())
-			{
-				eventBus.post(new PluginMessage("shortestpath", "clear"));
-			}
-		});
-
-		if (panel != null)
-		{
-			panel.hideClueGuidance();
-			panel.hideStepProgress();
-			panel.setGuidanceState(false, null);
-		}
-
-		log.debug("Guidance deactivated");
+		guidanceCoordinator.deactivateGuidance();
 	}
 
 	/**
@@ -1393,19 +899,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	 */
 	private void rebuildSourcesWithMissingItems()
 	{
-		Set<String> missing = new HashSet<>();
-		for (CollectionLogSource source : database.getAllSources())
-		{
-			for (CollectionLogItem item : source.getItems())
-			{
-				if (!collectionState.isItemObtained(item.getItemId()))
-				{
-					missing.add(source.getName());
-					break;
-				}
-			}
-		}
-		sourcesWithMissingItems = missing;
+		sourcesWithMissingItems = guidanceCoordinator.rebuildSourcesWithMissingItems(
+			database, collectionState);
 	}
 
 	@Subscribe
@@ -1436,7 +931,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Skip if guidance is already active for this source
-		if (guidanceSequencer.isActive() && source.equals(guidanceSequencer.getActiveSource()))
+		if (guidanceCoordinator.isSourceGuided(source))
 		{
 			return;
 		}
@@ -1597,30 +1092,85 @@ public class CollectionLogHelperPlugin extends Plugin
 		return fallback;
 	}
 
-	/**
-	 * Decides whether a hint arrow should be placed at {@code worldPoint}.
-	 * Snapshots {@code getLocalPlayer()} once to avoid the TOCTOU race where
-	 * the player transitions to null mid-check. Skips hint arrows inside
-	 * non-top-level WorldViews (e.g. sailing boats) because surface-world
-	 * coords render at wrong positions in instanced views.
-	 */
-	private boolean shouldSetHintArrowTo(WorldPoint worldPoint)
+	// ---- Guidance Authoring Event Logger ----
+
+	private void authoringLog(String format, Object... args)
 	{
-		if (!config.showHintArrow() || worldPoint == null)
+		if (!config.guidanceAuthoring())
 		{
-			return false;
+			return;
 		}
-		Player lp = client.getLocalPlayer();
-		if (lp == null)
+		if (authoringLogWriter == null)
 		{
-			return false;
+			java.io.File logFile = pluginDataManager.getFile("authoring-log.txt");
+			if (logFile == null)
+			{
+				logFile = new java.io.File(
+					net.runelite.client.RuneLite.RUNELITE_DIR, "clh-authoring-log.txt");
+			}
+			try
+			{
+				authoringLogWriter = new java.io.PrintWriter(
+					new java.io.FileWriter(logFile, true), true);
+				authoringLogWriter.printf("=== Authoring session started %s ===%n",
+					java.time.LocalDateTime.now().format(
+						java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			}
+			catch (java.io.IOException e)
+			{
+				log.error("Failed to open authoring log", e);
+				return;
+			}
 		}
-		if (lp.getWorldView() != client.getTopLevelWorldView())
+		WorldPoint loc = cachedPlayerLocation;
+		String locStr = loc != null
+			? String.format("[%d,%d,%d]", loc.getX(), loc.getY(), loc.getPlane()) : "[?,?,?]";
+		String timestamp = java.time.LocalTime.now().format(
+			java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss"));
+		authoringLogWriter.printf("%s %s %s%n", timestamp, locStr, String.format(format, args));
+	}
+
+	/** Logs inventory or equipment container changes with slot names for equipment. */
+	private void logContainerChange(ItemContainerChanged event)
+	{
+		int containerId = event.getContainerId();
+		if (containerId == InventoryID.INV)
 		{
-			return false;
+			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.INV);
+			if (c == null)
+			{
+				return;
+			}
+			StringBuilder sb = new StringBuilder("INVENTORY");
+			for (net.runelite.api.Item item : c.getItems())
+			{
+				if (item.getId() > 0 && item.getQuantity() > 0)
+				{
+					sb.append(String.format(" %d x%d", item.getId(), item.getQuantity()));
+				}
+			}
+			authoringLog(sb.toString());
 		}
-		WorldPoint playerLoc = lp.getWorldLocation();
-		return playerLoc != null && playerLoc.getPlane() == worldPoint.getPlane();
+		else if (containerId == InventoryID.WORN)
+		{
+			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.WORN);
+			if (c == null)
+			{
+				return;
+			}
+			String[] slotNames = {"Head", "Cape", "Amulet", "Weapon", "Body",
+				"Shield", "?", "Legs", "?", "Gloves", "Boots", "?", "Ring", "Ammo"};
+			StringBuilder sb = new StringBuilder("EQUIPMENT");
+			net.runelite.api.Item[] items = c.getItems();
+			for (int i = 0; i < items.length && i < slotNames.length; i++)
+			{
+				if (items[i].getId() > 0)
+				{
+					sb.append(String.format(" %s=%d", slotNames[i], items[i].getId()));
+				}
+			}
+			authoringLog(sb.toString());
+		}
 	}
 
 	@Subscribe
@@ -1648,15 +1198,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Track the spawned NPC if it matches the current guidance step's target
-		if (guidanceSequencer.isActive() && guidanceUIState.getTrackedGuidanceNpc() == null)
-		{
-			GuidanceStep step = guidanceSequencer.getRawCurrentStep();
-			if (step != null && step.getNpcId() > 0 && npc.getId() == step.getNpcId())
-			{
-				guidanceUIState.setTrackedGuidanceNpc(npc);
-				guidanceOverlay.setTrackedNpc(npc);
-			}
-		}
+		guidanceCoordinator.onNpcSpawned(npc);
 	}
 
 	@Subscribe
@@ -1670,11 +1212,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Clear tracked NPC if it despawned
-		if (npc == guidanceUIState.getTrackedGuidanceNpc())
-		{
-			guidanceUIState.setTrackedGuidanceNpc(null);
-			guidanceOverlay.setTrackedNpc(null);
-		}
+		guidanceCoordinator.onNpcDespawned(npc);
 	}
 
 	@Subscribe
