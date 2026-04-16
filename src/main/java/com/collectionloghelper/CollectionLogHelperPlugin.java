@@ -45,6 +45,7 @@ import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
+import com.collectionloghelper.lifecycle.GuidanceUIState;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
 import com.collectionloghelper.lifecycle.SyncStateCoordinator;
@@ -246,6 +247,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private SyncStateCoordinator syncStateCoordinator;
 
+	@Inject
+	private GuidanceUIState guidanceUIState;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -255,8 +259,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	private volatile boolean pendingRequirementsRefresh = false;
 	private volatile boolean pendingTravelVarbitRefresh = false;
 	private BufferedImage collectionLogIcon;
-	private CollectionLogWorldMapPoint activeMapPoint;
-	private GuidanceInfoBox activeInfoBox;
 
 	/**
 	 * Player location cached on the client thread each game tick.
@@ -264,11 +266,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	 */
 	private volatile WorldPoint cachedPlayerLocation;
 
-	/** Tracks the last guidance step index for which a worldMessage was sent (prevents spam on re-notify). */
-	private int lastMessagedStepIndex = -1;
-
-	/** Pending ShortestPath target — set after "clear", sent as "path" on the next game tick. */
-	private WorldPoint pendingShortestPathTarget;
 	private boolean slayerRefreshPending;
 
 	/** Coalesces multiple panel.rebuild() calls into a single rebuild per game tick. */
@@ -277,9 +274,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	/** Cached ranked efficiency list — recomputed only when dirty. */
 	private List<ScoredItem> cachedRankedSources;
 	private boolean rankedSourcesDirty = true;
-
-	/** Tracked NPC for guidance overlay — maintained via NpcSpawned/NpcDespawned events. */
-	private volatile NPC trackedGuidanceNpc;
 
 	@Override
 	protected void startUp() throws Exception
@@ -747,10 +741,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Dispatch deferred ShortestPath "path" message (1-tick after "clear")
-		if (pendingShortestPathTarget != null)
+		if (guidanceUIState.getPendingShortestPathTarget() != null)
 		{
-			WorldPoint target = pendingShortestPathTarget;
-			pendingShortestPathTarget = null;
+			WorldPoint target = guidanceUIState.getPendingShortestPathTarget();
+			guidanceUIState.setPendingShortestPathTarget(null);
 			Map<String, Object> data = new HashMap<>();
 			if (client.getLocalPlayer() != null)
 			{
@@ -834,7 +828,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	private void updateWorldMapArrow()
 	{
-		if (activeMapPoint == null)
+		if (guidanceUIState.getActiveMapPoint() == null)
 		{
 			return;
 		}
@@ -851,7 +845,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			return;
 		}
 
-		WorldPoint target = activeMapPoint.getWorldPoint();
+		WorldPoint target = guidanceUIState.getActiveMapPoint().getWorldPoint();
 		int dx = target.getX() - mapCenter.getX();
 		// World map Y is inverted (higher Y = further north = up on map)
 		int dy = target.getY() - mapCenter.getY();
@@ -875,7 +869,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			degrees = dy > 0 ? 225 : 135;
 		}
 
-		activeMapPoint.rotateArrow(degrees);
+		guidanceUIState.getActiveMapPoint().rotateArrow(degrees);
 	}
 
 	public void activateGuidance(CollectionLogSource source)
@@ -920,11 +914,12 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (!source.getItems().isEmpty())
 			{
 				BufferedImage icon = itemManager.getImage(source.getItems().get(0).getItemId());
-				activeInfoBox = new GuidanceInfoBox(icon, this);
-				activeInfoBox.setStepText("1/" + guidanceSequencer.getTotalSteps());
-				activeInfoBox.setTooltipText(source.getName() + ": "
+				GuidanceInfoBox newInfoBox = new GuidanceInfoBox(icon, this);
+				newInfoBox.setStepText("1/" + guidanceSequencer.getTotalSteps());
+				newInfoBox.setTooltipText(source.getName() + ": "
 					+ (step != null ? step.getDescription() : ""));
-				infoBoxManager.addInfoBox(activeInfoBox);
+				infoBoxManager.addInfoBox(newInfoBox);
+				guidanceUIState.setActiveInfoBox(newInfoBox);
 			}
 			log.debug("Multi-step guidance activated for {} ({} steps)",
 				source.getName(), source.getGuidanceSteps().size());
@@ -975,9 +970,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Send world message hint if this step has one (only once per step, not on re-notify)
 		int stepIndex = guidanceSequencer.getCurrentIndex();
 		if (step.getWorldMessage() != null && !step.getWorldMessage().isEmpty()
-			&& stepIndex != lastMessagedStepIndex)
+			&& stepIndex != guidanceUIState.getLastMessagedStepIndex())
 		{
-			lastMessagedStepIndex = stepIndex;
+			guidanceUIState.setLastMessagedStepIndex(stepIndex);
 			clientThread.invokeLater(() ->
 				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
 					"<col=00c8c8>[Collection Log Helper]</col> " + step.getWorldMessage(),
@@ -1057,12 +1052,12 @@ public class CollectionLogHelperPlugin extends Plugin
 			dialogHighlightOverlay.setGuidanceActive(true);
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
 			worldMapRouteOverlay.setTargetPoint(worldPoint);
-			if (activeMapPoint != null)
+			if (guidanceUIState.getActiveMapPoint() != null)
 			{
-				worldMapPointManager.remove(activeMapPoint);
+				worldMapPointManager.remove(guidanceUIState.getActiveMapPoint());
 			}
-			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, step.getDescription(), collectionLogIcon);
-			worldMapPointManager.add(activeMapPoint);
+			guidanceUIState.setActiveMapPoint(new CollectionLogWorldMapPoint(worldPoint, step.getDescription(), collectionLogIcon));
+			worldMapPointManager.add(guidanceUIState.getActiveMapPoint());
 
 			clientThread.invokeLater(() ->
 			{
@@ -1078,7 +1073,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				if (config.useShortestPath())
 				{
 					eventBus.post(new PluginMessage("shortestpath", "clear"));
-					pendingShortestPathTarget = worldPoint;
+					guidanceUIState.setPendingShortestPathTarget(worldPoint);
 				}
 			});
 		}
@@ -1093,10 +1088,10 @@ public class CollectionLogHelperPlugin extends Plugin
 			guidanceOverlay.setTravelTip(null);
 			guidanceMinimapOverlay.setTargetPoint(null);
 			worldMapRouteOverlay.setTargetPoint(null);
-			if (activeMapPoint != null)
+			if (guidanceUIState.getActiveMapPoint() != null)
 			{
-				worldMapPointManager.remove(activeMapPoint);
-				activeMapPoint = null;
+				worldMapPointManager.remove(guidanceUIState.getActiveMapPoint());
+				guidanceUIState.setActiveMapPoint(null);
 			}
 			guidanceOverlay.setClueGuidanceText(step.getDescription());
 			clientThread.invokeLater(() ->
@@ -1198,12 +1193,12 @@ public class CollectionLogHelperPlugin extends Plugin
 		dialogHighlightOverlay.setGuidanceActive(true);
 		guidanceMinimapOverlay.setTargetPoint(worldPoint);
 		worldMapRouteOverlay.setTargetPoint(worldPoint);
-		if (activeMapPoint != null)
+		if (guidanceUIState.getActiveMapPoint() != null)
 		{
-			worldMapPointManager.remove(activeMapPoint);
+			worldMapPointManager.remove(guidanceUIState.getActiveMapPoint());
 		}
-		activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
-		worldMapPointManager.add(activeMapPoint);
+		guidanceUIState.setActiveMapPoint(new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon));
+		worldMapPointManager.add(guidanceUIState.getActiveMapPoint());
 
 		clientThread.invokeLater(() ->
 		{
@@ -1217,14 +1212,14 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (config.useShortestPath())
 			{
 				eventBus.post(new PluginMessage("shortestpath", "clear"));
-				pendingShortestPathTarget = worldPoint;
+				guidanceUIState.setPendingShortestPathTarget(worldPoint);
 			}
 		});
 	}
 
 	private void clearGuidanceOverlays()
 	{
-		trackedGuidanceNpc = null;
+		guidanceUIState.setTrackedGuidanceNpc(null);
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		worldMapRouteOverlay.clearTarget();
@@ -1234,7 +1229,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		groundItemHighlightOverlay.clearTargets();
 		widgetHighlightOverlay.clearHighlights();
 		clientThread.invokeLater(() -> client.clearHintArrow());
-		activeMapPoint = null;
+		guidanceUIState.setActiveMapPoint(null);
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
 		if (panel != null)
 		{
@@ -1248,7 +1243,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	 */
 	private void scanForTrackedNpc(GuidanceStep step)
 	{
-		trackedGuidanceNpc = null;
+		guidanceUIState.setTrackedGuidanceNpc(null);
 		guidanceOverlay.setTrackedNpc(null);
 
 		if (step == null || step.getNpcId() <= 0)
@@ -1268,7 +1263,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			{
 				if (npc != null && npc.getId() == targetNpcId)
 				{
-					trackedGuidanceNpc = npc;
+					guidanceUIState.setTrackedGuidanceNpc(npc);
 					guidanceOverlay.setTrackedNpc(npc);
 					break;
 				}
@@ -1288,11 +1283,11 @@ public class CollectionLogHelperPlugin extends Plugin
 		scanForTrackedNpc(step);
 
 		// Update InfoBox progress
-		if (activeInfoBox != null)
+		if (guidanceUIState.getActiveInfoBox() != null)
 		{
 			int current = guidanceSequencer.getCurrentIndex() + 1;
 			int total = guidanceSequencer.getTotalSteps();
-			activeInfoBox.setStepText(current + "/" + total);
+			guidanceUIState.getActiveInfoBox().setStepText(current + "/" + total);
 			String tooltip = step.getDescription();
 			if (guidanceSequencer.getCumulativeTrackThreshold() > 0)
 			{
@@ -1300,10 +1295,10 @@ public class CollectionLogHelperPlugin extends Plugin
 					+ "/" + guidanceSequencer.getCumulativeTrackThreshold()
 					+ " actions tracked";
 			}
-			activeInfoBox.setTooltipText(tooltip);
+			guidanceUIState.getActiveInfoBox().setTooltipText(tooltip);
 			if (current == total)
 			{
-				activeInfoBox.setTextColor(java.awt.Color.GREEN);
+				guidanceUIState.getActiveInfoBox().setTextColor(java.awt.Color.GREEN);
 			}
 		}
 
@@ -1356,13 +1351,11 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	public void deactivateGuidance()
 	{
-		lastMessagedStepIndex = -1;
-		trackedGuidanceNpc = null;
-		if (activeInfoBox != null)
+		if (guidanceUIState.getActiveInfoBox() != null)
 		{
-			infoBoxManager.removeInfoBox(activeInfoBox);
-			activeInfoBox = null;
+			infoBoxManager.removeInfoBox(guidanceUIState.getActiveInfoBox());
 		}
+		guidanceUIState.clearAll();
 		guidanceSequencer.stopSequence();
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
@@ -1372,8 +1365,6 @@ public class CollectionLogHelperPlugin extends Plugin
 		itemHighlightOverlay.clearTarget();
 		groundItemHighlightOverlay.clearTargets();
 		widgetHighlightOverlay.clearHighlights();
-		activeMapPoint = null;
-		pendingShortestPathTarget = null;
 		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
 
 		clientThread.invokeLater(() ->
@@ -1657,12 +1648,12 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Track the spawned NPC if it matches the current guidance step's target
-		if (guidanceSequencer.isActive() && trackedGuidanceNpc == null)
+		if (guidanceSequencer.isActive() && guidanceUIState.getTrackedGuidanceNpc() == null)
 		{
 			GuidanceStep step = guidanceSequencer.getRawCurrentStep();
 			if (step != null && step.getNpcId() > 0 && npc.getId() == step.getNpcId())
 			{
-				trackedGuidanceNpc = npc;
+				guidanceUIState.setTrackedGuidanceNpc(npc);
 				guidanceOverlay.setTrackedNpc(npc);
 			}
 		}
@@ -1679,9 +1670,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Clear tracked NPC if it despawned
-		if (npc == trackedGuidanceNpc)
+		if (npc == guidanceUIState.getTrackedGuidanceNpc())
 		{
-			trackedGuidanceNpc = null;
+			guidanceUIState.setTrackedGuidanceNpc(null);
 			guidanceOverlay.setTrackedNpc(null);
 		}
 	}
