@@ -112,7 +112,7 @@
         "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 8
       },
       {
         "description": "Kill General Graardor. Use Protect from Melee, pray Piety, and tank the minions. Kill Sergeant Steelwill first if you want to reduce damage taken",
@@ -260,7 +260,7 @@
         "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 8
       },
       {
         "description": "Kill Commander Zilyana. Use Protect from Ranged and a crossbow. Kite her in a large loop around the room to avoid melee damage",
@@ -408,7 +408,7 @@
         "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 8
       },
       {
         "description": "Kill K'ril Tsutsaroth. Use Protect from Melee and high-healing food. His special attack can hit through prayer. Shadow of Tumeken or arclight effective",
@@ -556,7 +556,7 @@
         "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 8
       },
       {
         "description": "Kill Kree'arra. Use Protect from Ranged and chinchompas or crossbow. Kite in a loop. All GWD bosses require 40 KC of the corresponding faction",
@@ -901,7 +901,7 @@
         "worldY": 1251,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30,
+        "completionDistance": 8,
         "travelTip": "Key master teleport (fastest), or POH Taverley portal + navigate dungeon"
       },
       {
@@ -1026,7 +1026,7 @@
     ],
     "locationDescription": "Karuulm Slayer Dungeon, Mount Karuulm",
     "travelTip": "Fairy ring CIR -> Mount Karuulm, or Rada's blessing teleport",
-    "npcId": 8615,
+    "npcId": 8621,
     "interactAction": "Attack",
     "waypoints": [
       {
@@ -1073,7 +1073,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase â€” walk over the correct vent matching the Hydra's colour",
+        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase \u00e2\u20ac\u201d walk over the correct vent matching the Hydra's colour",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
@@ -1249,7 +1249,7 @@
       "Vet'ion",
       "Callisto"
     ],
-    "npcId": 963,
+    "npcId": 965,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
@@ -1284,7 +1284,7 @@
         "worldX": 3471,
         "worldY": 9506,
         "worldPlane": 0,
-        "npcId": 963,
+        "npcId": 965,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 965
@@ -2996,7 +2996,7 @@
         "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 8
       },
       {
         "description": "Enter the main dungeon and head to the frozen door to access the Ancient Prison",
@@ -3009,7 +3009,7 @@
         ],
         "objectInteractAction": "Open",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 8
       },
       {
         "description": "Get 40 Zaros killcount by killing Ancient Warriors, Mages, and Rangers in the Ancient Prison",
@@ -3092,7 +3092,7 @@
         "objectId": 34862,
         "objectInteractAction": "Climb-down",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 25
+        "completionDistance": 8
       },
       {
         "description": "Enter Forthos Dungeon and navigate to the spider area in the south. Enter Sarachnis' lair",
@@ -3360,7 +3360,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Rex. Use Magic (fire spells work best). Rex is weak to Magic and uses melee — Protect from Melee when nearby",
+        "description": "Kill Dagannoth Rex. Use Magic (fire spells work best). Rex is weak to Magic and uses melee \u2014 Protect from Melee when nearby",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3432,7 +3432,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Prime. Use Ranged. Prime attacks with Magic — use Protect from Magic when targeting Prime",
+        "description": "Kill Dagannoth Prime. Use Ranged. Prime attacks with Magic \u2014 use Protect from Magic when targeting Prime",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3504,7 +3504,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Supreme. Use Melee. Supreme attacks with Ranged — use Protect from Missiles when targeting Supreme",
+        "description": "Kill Dagannoth Supreme. Use Melee. Supreme attacks with Ranged \u2014 use Protect from Missiles when targeting Supreme",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3957,7 +3957,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill the Chaos Elemental. Wear cheap gear — it can unequip your items. Use Protect from Magic and bring high-healing food",
+        "description": "Kill the Chaos Elemental. Wear cheap gear \u2014 it can unequip your items. Use Protect from Magic and bring high-healing food",
         "worldX": 3261,
         "worldY": 3927,
         "worldPlane": 0,
@@ -4370,7 +4370,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Callisto. Use Verac's or Arclight. Watch for the knockback shockwave and the healing cubs — kill cubs first",
+        "description": "Kill Callisto. Use Verac's or Arclight. Watch for the knockback shockwave and the healing cubs \u2014 kill cubs first",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
@@ -4823,7 +4823,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room â€” combat, puzzle, and resource rooms â€” on your way to the final boss",
+        "description": "Enter the raid and scout rooms. Complete each room \u00e2\u20ac\u201d combat, puzzle, and resource rooms \u00e2\u20ac\u201d on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5056,7 +5056,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room â€” combat, puzzle, and resource rooms â€” on your way to the final boss",
+        "description": "Enter the raid and scout rooms. Complete each room \u00e2\u20ac\u201d combat, puzzle, and resource rooms \u00e2\u20ac\u201d on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -7161,7 +7161,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks â€” learn the mechanics for consistent clears",
+        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks \u00e2\u20ac\u201d learn the mechanics for consistent clears",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -7489,7 +7489,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Complete Perilous Moons. Fight the three Moon bosses in sequence. Each has unique mechanics — learn the safe tiles and prayer switches",
+        "description": "Complete Perilous Moons. Fight the three Moon bosses in sequence. Each has unique mechanics \u2014 learn the safe tiles and prayer switches",
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
@@ -7548,7 +7548,7 @@
         "worldY": 4415,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 8
       },
       {
         "description": "Kill Tormented Demons. Switch attack styles to break their protection prayers. Use fire spells + Darklight to remove their shield",
@@ -7858,7 +7858,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill revenants in the caves for unique drops. Bring risk â€” it's multi-combat Wilderness.",
+        "description": "Kill revenants in the caves for unique drops. Bring risk \u00e2\u20ac\u201d it's multi-combat Wilderness.",
         "worldX": 3073,
         "worldY": 3654,
         "worldPlane": 0,
@@ -7906,7 +7906,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Crawling Hands in the Slayer Tower basement. Very low combat — good for early slayer tasks",
+        "description": "Kill Crawling Hands in the Slayer Tower basement. Very low combat \u2014 good for early slayer tasks",
         "worldX": 3418,
         "worldY": 3543,
         "worldPlane": 0,
@@ -8728,7 +8728,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Gryphons on the islands accessible via Sailing. Standard combat — no special mechanics",
+        "description": "Kill Gryphons on the islands accessible via Sailing. Standard combat \u2014 no special mechanics",
         "worldX": 1456,
         "worldY": 2880,
         "worldPlane": 0,
@@ -9796,7 +9796,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Spiritual Mages in the God Wars Dungeon. Requires 83 Slayer. Found in all four god chambers — equip the corresponding god item for protection",
+        "description": "Kill Spiritual Mages in the God Wars Dungeon. Requires 83 Slayer. Found in all four god chambers \u2014 equip the corresponding god item for protection",
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,
@@ -10139,7 +10139,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Dark Beasts in the Mourner Tunnels or Catacombs of Kourend. Use Protect from Melee. High Defence — use accurate weapon styles",
+        "description": "Kill Dark Beasts in the Mourner Tunnels or Catacombs of Kourend. Use Protect from Melee. High Defence \u2014 use accurate weapon styles",
         "worldX": 1920,
         "worldY": 4672,
         "worldPlane": 0,
@@ -11646,7 +11646,7 @@
         "worldPlane": 0,
         "travelTip": "Minigame teleport -> Shades of Mort'ton | Barrows teleport + run south | Mort'ton teleport scroll",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 30
+        "completionDistance": 8
       },
       {
         "description": "Burn shade remains on the funeral pyres, then use shade keys on the underground chests",
@@ -13559,7 +13559,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Play Last Man Standing — a battle royale minigame on the island east of Ferox Enclave. Earn points to buy the Halos and Dragon Claws ornament kit",
+        "description": "Play Last Man Standing \u2014 a battle royale minigame on the island east of Ferox Enclave. Earn points to buy the Halos and Dragon Claws ornament kit",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
@@ -19033,7 +19033,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill both Royal Titans (Eldric + Branda). Duo recommended. Focus DPS on both evenly — if one falls first, the other enrages. Dodge the ice/fire waves and elemental spawns",
+        "description": "Kill both Royal Titans (Eldric + Branda). Duo recommended. Focus DPS on both evenly \u2014 if one falls first, the other enrages. Dodge the ice/fire waves and elemental spawns",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
@@ -24578,7 +24578,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Catch black chinchompas in the Wilderness (level 32-36). Bring minimal risk — PKers frequent this area. Best caught with box traps at 80+ Hunter",
+        "description": "Catch black chinchompas in the Wilderness (level 32-36). Bring minimal risk \u2014 PKers frequent this area. Best caught with box traps at 80+ Hunter",
         "worldX": 3143,
         "worldY": 3771,
         "worldPlane": 0,
