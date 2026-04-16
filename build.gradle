@@ -47,7 +47,7 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.register('run', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
-	mainClass = pluginMainClass
+	mainClass = 'com.collectionloghelper.CollectionLogHelperPluginTest'
 
 	jvmArgs "-ea"
 	args "--developer-mode", "--debug"
