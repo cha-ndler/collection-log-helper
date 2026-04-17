@@ -45,6 +45,7 @@ import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.ui.mode.PanelModeController;
 import com.collectionloghelper.ui.mode.PanelShellContext;
 import com.collectionloghelper.ui.mode.PetHuntModeController;
+import com.collectionloghelper.ui.mode.SearchModeController;
 import com.collectionloghelper.ui.mode.StatisticsModeController;
 import java.util.EnumMap;
 import java.util.Map;
@@ -587,6 +588,9 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		modeControllers.put(Mode.PET_HUNT,
 			new PetHuntModeController(this, config, collectionState, calculator,
 				requirementsChecker, itemManager));
+		modeControllers.put(Mode.SEARCH,
+			new SearchModeController(this, config, database, collectionState, calculator,
+				requirementsChecker, itemManager));
 
 		updateControlVisibility();
 	}
@@ -861,7 +865,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 							buildCategoryView();
 							break;
 						case SEARCH:
-							buildSearchView();
+							// Extracted to SearchModeController (registered in modeControllers).
 							break;
 						case PET_HUNT:
 							// Extracted to PetHuntModeController (registered in modeControllers).
@@ -1057,56 +1061,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			category, sources, collectionState, requirementsChecker, itemManager,
 			this::showDetail, config.hideObtainedItems());
 		listContainer.add(summary);
-	}
-
-	private void buildSearchView()
-	{
-		String query = searchField.getText().toLowerCase().trim();
-		if (query.isEmpty())
-		{
-			addEmptyStateMessage("Search by item or source name");
-			return;
-		}
-
-		boolean hideObtained = config.hideObtainedItems();
-		boolean hideLocked = config.hideLockedContent();
-		int resultCount = 0;
-
-		for (CollectionLogSource source : database.getAllSources())
-		{
-			boolean locked = !requirementsChecker.isAccessible(source.getName());
-			if (hideLocked && locked)
-			{
-				continue;
-			}
-
-			boolean sourceNameMatches = source.getName().toLowerCase().contains(query);
-			boolean onTask = calculator.isOnSlayerTask(source);
-			for (CollectionLogItem item : source.getItems())
-			{
-				if (sourceNameMatches || item.getName().toLowerCase().contains(query))
-				{
-					boolean obtained = collectionState.isItemObtained(item.getItemId());
-					if (hideObtained && obtained)
-					{
-						continue;
-					}
-					ItemRowPanel row = new ItemRowPanel(item, source, obtained, 0,
-						locked, onTask,
-						requirementsChecker.getUnmetRequirements(source.getName()),
-						itemManager, () -> showDetail(item, source));
-					listContainer.add(row);
-					resultCount++;
-				}
-			}
-		}
-
-		if (resultCount == 0)
-		{
-			// Escape query to prevent HTML injection in the JLabel
-			String safeQuery = query.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
-			addEmptyStateMessage("No items match '" + safeQuery + "'");
-		}
 	}
 
 	private void showDetailInternal(CollectionLogItem item, CollectionLogSource source)
