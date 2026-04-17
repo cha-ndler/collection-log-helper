@@ -197,14 +197,68 @@ public class VerifiedSceneIdRegistryTest
 	}
 
 	// ========================================================================
-	// Schema version — schema field is present in JSON
+	// Schema version — tolerant of unsupported and missing version fields
 	// ========================================================================
 
 	@Test
-	public void schemaVersion_isCheckedOnLoad()
+	public void loadFromJson_unsupportedVersion_stillReturnsEntries()
 	{
-		// Registry loaded without error and returned entries — implies version=1 was accepted
-		assertFalse("A successful load must yield entries", registry.all().isEmpty());
+		String json = "{"
+			+ "\"version\": 99,"
+			+ "\"entries\": ["
+			+ "  {"
+			+ "    \"objectName\": \"Test entrance\","
+			+ "    \"examineId\": 11111,"
+			+ "    \"sceneIds\": [11112],"
+			+ "    \"confidence\": \"high\","
+			+ "    \"source\": \"unit test\","
+			+ "    \"notes\": \"synthetic fixture for schema-version tolerance\""
+			+ "  }"
+			+ "]"
+			+ "}";
+
+		VerifiedSceneIdRegistry loaded = VerifiedSceneIdRegistry.loadFromJson(json, new Gson());
+
+		assertEquals(
+			"Unsupported schema version must still yield entries (loader warns, does not drop)",
+			1,
+			loaded.all().size());
+		assertTrue(loaded.lookupByExamineId(11111).isPresent());
+		assertTrue(loaded.lookupBySceneId(11112).isPresent());
+	}
+
+	@Test
+	public void loadFromJson_missingVersion_stillReturnsEntries()
+	{
+		// Regression guard: prior implementation NPE'd on root.get("version").getAsInt() when the
+		// field was absent. The load-path swallowed the NPE via a broad catch and returned an empty
+		// registry — a silent degradation. The loader now null-guards the version read.
+		String json = "{"
+			+ "\"entries\": ["
+			+ "  {"
+			+ "    \"objectName\": \"Version-less entrance\","
+			+ "    \"examineId\": 22222,"
+			+ "    \"sceneIds\": [22222],"
+			+ "    \"confidence\": \"high\","
+			+ "    \"source\": \"unit test\""
+			+ "  }"
+			+ "]"
+			+ "}";
+
+		VerifiedSceneIdRegistry loaded = VerifiedSceneIdRegistry.loadFromJson(json, new Gson());
+
+		assertEquals(
+			"Missing version field must be tolerated, not NPE or silently return empty",
+			1,
+			loaded.all().size());
+		assertTrue(loaded.lookupByExamineId(22222).isPresent());
+	}
+
+	@Test
+	public void loadFromJson_malformedJson_returnsEmpty()
+	{
+		VerifiedSceneIdRegistry loaded = VerifiedSceneIdRegistry.loadFromJson("{not valid json", new Gson());
+		assertTrue("Malformed JSON must return an empty registry, not throw", loaded.all().isEmpty());
 	}
 
 	// ========================================================================

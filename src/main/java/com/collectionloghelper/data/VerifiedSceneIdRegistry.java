@@ -107,34 +107,64 @@ public class VerifiedSceneIdRegistry
 
 			InputStreamReader reader = new InputStreamReader(is);
 			JsonElement parsed = new JsonParser().parse(reader);
-			JsonObject root = parsed.getAsJsonObject();
-
-			int version = root.get("version").getAsInt();
-			if (version != EXPECTED_SCHEMA_VERSION)
-			{
-				log.warn("verified_scene_ids.json schema version {} is unsupported (expected {}); loading anyway",
-					version, EXPECTED_SCHEMA_VERSION);
-			}
-
-			Type listType = new TypeToken<List<VerifiedSceneId>>()
-			{
-			}.getType();
-			List<VerifiedSceneId> entries = gson.fromJson(root.get("entries"), listType);
-
-			if (entries == null || entries.isEmpty())
-			{
-				log.warn("verified_scene_ids.json loaded with no entries");
-				return empty();
-			}
-
-			log.debug("Loaded {} verified scene-ID entries", entries.size());
-			return new VerifiedSceneIdRegistry(entries);
+			return parseRoot(parsed.getAsJsonObject(), gson);
 		}
 		catch (Exception e)
 		{
 			log.error("Failed to load verified_scene_ids.json", e);
 			return empty();
 		}
+	}
+
+	/**
+	 * Parses a registry from a raw JSON string. Package-private for testing; production callers
+	 * should use {@link #load()}.
+	 */
+	static VerifiedSceneIdRegistry loadFromJson(String json, Gson gson)
+	{
+		try
+		{
+			JsonElement parsed = new JsonParser().parse(json);
+			return parseRoot(parsed.getAsJsonObject(), gson);
+		}
+		catch (Exception e)
+		{
+			log.error("Failed to parse verified_scene_ids JSON", e);
+			return empty();
+		}
+	}
+
+	private static VerifiedSceneIdRegistry parseRoot(JsonObject root, Gson gson)
+	{
+		JsonElement versionElement = root.get("version");
+		if (versionElement == null || versionElement.isJsonNull())
+		{
+			log.warn("verified_scene_ids.json missing 'version' field; assuming schema version {}",
+				EXPECTED_SCHEMA_VERSION);
+		}
+		else
+		{
+			int version = versionElement.getAsInt();
+			if (version != EXPECTED_SCHEMA_VERSION)
+			{
+				log.warn("verified_scene_ids.json schema version {} is unsupported (expected {}); loading anyway",
+					version, EXPECTED_SCHEMA_VERSION);
+			}
+		}
+
+		Type listType = new TypeToken<List<VerifiedSceneId>>()
+		{
+		}.getType();
+		List<VerifiedSceneId> entries = gson.fromJson(root.get("entries"), listType);
+
+		if (entries == null || entries.isEmpty())
+		{
+			log.warn("verified_scene_ids.json loaded with no entries");
+			return empty();
+		}
+
+		log.debug("Loaded {} verified scene-ID entries", entries.size());
+		return new VerifiedSceneIdRegistry(entries);
 	}
 
 	/** Returns a registry with no entries. */
