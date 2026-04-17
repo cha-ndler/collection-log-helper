@@ -132,6 +132,7 @@ Requires Java 11+. Uses RuneLite client API (latest release), Lombok, and JUnit 
 We're actively expanding toward Quest Helper-level guidance for every source. See:
 
 - [**CONTRIBUTING.md**](CONTRIBUTING.md) — JSON schema reference, how to find data, PR process
+- [Data sourcing: MCP > registry > in-game](CONTRIBUTING.md#data-sourcing---try-mcp-first-in-game-last) — which tool to reach for first when adding or auditing data
 
 ## Acknowledgments
 
