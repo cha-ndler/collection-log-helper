@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-16",
+  "description": "Registry of verified examine-ID <-> scene-ID pairs. Where examineId and sceneIds differ, the object's cache examine tooltip reports a different ID than the scene tile ID exposed by RuneLite's Tile.getGameObjects() / getWallObject() API. Always use sceneIds in guidance steps and ObjectHighlightOverlay. See feedback_object_id_gotcha.md for the underlying reason.",
+  "entries": [
+    {
+      "objectName": "Shellbane Gryphon Cave entrance",
+      "examineId": 58441,
+      "sceneIds": [58439],
+      "confidence": "high",
+      "action": "Enter",
+      "canonicalLocation": "The Great Conch island (instance coords ~13993, 9901, plane 0)",
+      "source": "authoring-log capture / cha-ndler/collection-log-helper#293; coordinate fix in commit e4dd6a06",
+      "notes": "Cache stores 58441 ('Cave entrance', Enter action) as the examine ID. The scene tile exposes 58439 (unnamed, 3x2 object at cache coords 3176,2477,0). Use 58439 in guidance objectId. Island also uses instanced coordinates (~13993,9901) rather than cache-derived surface coords — see feedback_object_id_gotcha.md."
+    },
+    {
+      "objectName": "Sisterhood Sanctuary Stairs (Nightmare / Phosani entrance)",
+      "examineId": 32637,
+      "sceneIds": [32637],
+      "confidence": "high",
+      "action": "Climb-down",
+      "canonicalLocation": "Slepe church (3727, 3300, plane 0)",
+      "source": "MCP object_lookup verification; commit ca4201d9",
+      "notes": "No examine/scene divergence detected. Cached at (3727,3300,0) with Climb-down action. Included because the NPC coords (3808,9775,1) were previously wrong — steps must use the Slepe surface entrance coords, not the sanctuary floor coords."
+    },
+    {
+      "objectName": "Pool of Nightmares (Phosani entrance)",
+      "examineId": 29706,
+      "sceneIds": [29706],
+      "confidence": "high",
+      "action": "Drink-from",
+      "canonicalLocation": "Sisterhood Sanctuary (dynamically placed, no cache spawn)",
+      "source": "MCP object_lookup verification; commit ca4201d9",
+      "notes": "No examine/scene divergence. Object is dynamically placed — MCP shows no spawn locations. Drink-from is the correct action; Spectate is also valid but does not advance guidance."
+    },
+    {
+      "objectName": "Scorpia Cavern entrance",
+      "examineId": 26762,
+      "sceneIds": [26762],
+      "confidence": "high",
+      "action": "Enter",
+      "canonicalLocation": "Wilderness Scorpia entrance (3231, 3936, plane 0)",
+      "source": "MCP object_lookup verification; commit 9bda6882",
+      "notes": "No examine/scene divergence. Three cache spawns confirmed at (3231,3936), (3231,3951), (3241,3949). The (3231,3936) spawn is the primary guidance target."
+    },
+    {
+      "objectName": "Venenatis Cave Entrance",
+      "examineId": 47077,
+      "sceneIds": [47077],
+      "confidence": "high",
+      "action": "Enter",
+      "canonicalLocation": "Silk Chasm approach (3321, 3794, plane 0)",
+      "source": "MCP object_lookup verification; commit a5397e8b",
+      "notes": "No examine/scene divergence. One cache spawn at (3321,3794,0) with Enter, Peek, Check-Fee actions. Venenatis NPC spawn is deeper in the chasm — worldX/worldY for the source should be the entrance coords, not the NPC location."
+    },
+    {
+      "objectName": "Chambers of Xeric entrance",
+      "examineId": 29777,
+      "sceneIds": [29777],
+      "confidence": "high",
+      "action": "Enter",
+      "canonicalLocation": "Great Kourend mountain approach (1232, 3573, plane 0)",
+      "source": "MCP object_lookup verification; commit 42b48636",
+      "notes": "No examine/scene divergence. One cache spawn at (1232,3573,0). Used for both Chambers of Xeric and Chambers of Xeric (CM) sources — same entrance object."
+    },
+    {
+      "objectName": "Theatre of Blood entrance",
+      "examineId": 32653,
+      "sceneIds": [32653],
+      "confidence": "high",
+      "action": "Enter",
+      "canonicalLocation": "Ver Sinhaza (3678, 3216, plane 0)",
+      "source": "MCP object_lookup verification; commit 42b48636",
+      "notes": "No examine/scene divergence. One cache spawn at (3678,3216,0). Used for both Theatre of Blood and Theatre of Blood (Hard Mode) sources."
+    },
+    {
+      "objectName": "Corporeal Beast cave Passage",
+      "examineId": 677,
+      "sceneIds": [677],
+      "confidence": "high",
+      "action": "Go-through",
+      "canonicalLocation": "Corp cave (2971, 4382, plane 2)",
+      "source": "MCP object_lookup verification; commit 42b48636",
+      "notes": "No examine/scene divergence. Two spawns in cache: (2971,4254,2) and (2971,4382,2). The (2971,4382,2) spawn is the final passage into the Corp chamber."
+    },
+    {
+      "objectName": "Hallowed Sepulchre Mausoleum Door",
+      "examineId": 38574,
+      "sceneIds": [38574],
+      "confidence": "high",
+      "action": "Enter",
+      "canonicalLocation": "Darkmeyer approach (3654, 3385, plane 0)",
+      "source": "MCP object_lookup verification; commit a5397e8b",
+      "notes": "No examine/scene divergence. One cache spawn at (3654,3385,0). Object type=0 (wall object), not a game object — must subscribe to WallObjectSpawned in SceneEventRouter for highlight to fire."
+    },
+    {
+      "objectName": "Duke Sucellus Asylum Stairs",
+      "examineId": 49100,
+      "sceneIds": [49100],
+      "confidence": "high",
+      "action": "Climb",
+      "canonicalLocation": "Ghorrock Prison (2973, 6440, plane 2)",
+      "source": "MCP object_lookup verification; commit 61a02573",
+      "notes": "No examine/scene divergence. One cache spawn at (2973,6440,2). Used for both Duke Sucellus and Duke Sucellus (Awakened) sources."
+    },
+    {
+      "objectName": "The Leviathan Handholds",
+      "examineId": 47592,
+      "sceneIds": [47592],
+      "confidence": "high",
+      "action": "Climb",
+      "canonicalLocation": "The Scar (dynamically placed, no cache spawn)",
+      "source": "MCP object_lookup verification; commit 61a02573",
+      "notes": "No examine/scene divergence detected, but object is dynamically placed — no spawn in cache extract. MCP returns no locations. Used for both Leviathan and Leviathan (Awakened) sources."
+    },
+    {
+      "objectName": "The Whisperer Rock / Climb-rope",
+      "examineId": 48197,
+      "sceneIds": [48197],
+      "confidence": "high",
+      "action": "Climb-rope",
+      "canonicalLocation": "Lassar Undercity sinkhole (dynamically placed, no cache spawn)",
+      "source": "MCP object_lookup verification; commit 61a02573",
+      "notes": "No examine/scene divergence detected. MCP returns no spawn locations — dynamically placed. Used for both Whisperer and Whisperer (Awakened) sources."
+    },
+    {
+      "objectName": "Vardorvis Temple Entry",
+      "examineId": 48723,
+      "sceneIds": [48723],
+      "confidence": "high",
+      "action": "Enter",
+      "canonicalLocation": "The Stranglewood (1174, 3428, plane 0)",
+      "source": "MCP object_lookup verification; commit 61a02573",
+      "notes": "No examine/scene divergence. One cache spawn at (1174,3428,0) — object named 'Entry' in cache. Used for both Vardorvis and Vardorvis (Awakened) sources."
+    },
+    {
+      "objectName": "Custodian Stalker Den Cave",
+      "examineId": 57279,
+      "sceneIds": [57279],
+      "confidence": "high",
+      "action": "Squeeze-through",
+      "canonicalLocation": "Custodia Pass, Varlamore (1324, 3364, plane 0)",
+      "source": "MCP object_lookup verification; commit 4fa59e29",
+      "notes": "No examine/scene divergence. One cache spawn at (1324,3364,0). Object named 'Cave' with Squeeze-through action. Source worldX/worldY should be surface entrance coords, not underground NPC coords (1301,9820)."
+    },
+    {
+      "objectName": "Fossil Island Wyvern Cave Entrance",
+      "examineId": 30869,
+      "sceneIds": [30869],
+      "confidence": "high",
+      "action": "Enter",
+      "canonicalLocation": "Fossil Island (3745, 3777, plane 0)",
+      "source": "MCP object_lookup verification; commit 42b48636",
+      "notes": "No examine/scene divergence. One cache spawn at (3745,3777,0). Object named 'Cave Entrance'."
+    },
+    {
+      "objectName": "Sarachnis Forthos Dungeon Ladder",
+      "examineId": 34862,
+      "sceneIds": [34862],
+      "confidence": "high",
+      "action": "Climb-down",
+      "canonicalLocation": "Forthos Dungeon entrance (1702, 3574, plane 0)",
+      "source": "MCP object_lookup verification; commit 42b48636",
+      "notes": "No examine/scene divergence. One cache spawn at (1702,3574,0). This is the first object step for Sarachnis; paired with the Thick Web (34858) as the second step."
+    },
+    {
+      "objectName": "Sarachnis Forthos Dungeon Thick Web",
+      "examineId": 34858,
+      "sceneIds": [34858],
+      "confidence": "high",
+      "action": "Enter-crypt",
+      "canonicalLocation": "Forthos Dungeon crypt entrance (1841-1842, 9912, plane 0)",
+      "source": "MCP object_lookup verification; commit 42b48636",
+      "notes": "No examine/scene divergence. Two cache spawns at (1841,9912,0) and (1842,9912,0). Object type=0 (wall object) — requires WallObjectSpawned subscription for highlight to fire. Paired with the Forthos Dungeon Ladder (34862) as the first step."
+    }
+  ]
+}
