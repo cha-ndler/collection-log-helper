@@ -45,6 +45,7 @@ import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.ui.mode.CategoryModeController;
 import com.collectionloghelper.ui.mode.EfficientModeController;
 import com.collectionloghelper.ui.mode.PanelModeController;
+import com.collectionloghelper.ui.mode.PanelModeDispatcher;
 import com.collectionloghelper.ui.mode.PanelShellContext;
 import com.collectionloghelper.ui.mode.PetHuntModeController;
 import com.collectionloghelper.ui.mode.SearchModeController;
@@ -62,8 +63,6 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.BorderFactory;
@@ -80,7 +79,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-import javax.swing.ToolTipManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.runelite.client.game.ItemManager;
@@ -88,7 +86,6 @@ import net.runelite.client.util.AsyncBufferedImage;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.PluginPanel;
-import net.runelite.client.util.AsyncBufferedImage;
 import net.runelite.client.util.SwingUtil;
 
 public class CollectionLogHelperPanel extends PluginPanel implements PanelShellContext
@@ -189,6 +186,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final Timer searchDebounceTimer;
 
 	private final Map<Mode, PanelModeController> modeControllers = new EnumMap<>(Mode.class);
+	private final PanelModeDispatcher<Mode> modeDispatcher = new PanelModeDispatcher<>(modeControllers);
 
 	private Mode currentMode = Mode.EFFICIENT;
 	private boolean rebuilding = false;
@@ -432,16 +430,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			{
 				Mode previous = currentMode;
 				currentMode = (Mode) e.getItem();
-				PanelModeController leaving = modeControllers.get(previous);
-				if (leaving != null && previous != currentMode)
-				{
-					leaving.onModeDeactivated();
-				}
-				PanelModeController entering = modeControllers.get(currentMode);
-				if (entering != null && previous != currentMode)
-				{
-					entering.onModeActivated();
-				}
+				modeDispatcher.switchMode(previous, currentMode);
 				updateControlVisibility();
 				inDetailView = false;
 				rebuild();
@@ -857,15 +846,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 				updateCompletionHeader();
 				updateSlayerTaskLabel();
 
-				PanelModeController controller = modeControllers.get(currentMode);
-				if (controller != null)
-				{
-					controller.buildView();
-				}
-				else
-				{
-					// All modes are controller-backed; fallback branch is unused.
-				}
+				modeDispatcher.buildView(currentMode);
 
 				// Restore expanded category state
 				for (Component comp : listContainer.getComponents())
@@ -942,7 +923,8 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		}
 	}
 
-	private void showDetailInternal(CollectionLogItem item, CollectionLogSource source)
+	@Override
+	public void showDetail(CollectionLogItem item, CollectionLogSource source)
 	{
 		boolean obtained = collectionState.isItemObtained(item.getItemId());
 		boolean locked = !requirementsChecker.isAccessible(source.getName());
@@ -975,7 +957,8 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		showDetailView();
 	}
 
-	private JPanel createQuickGuidePanelInternal(ScoredItem topItem)
+	@Override
+	public JPanel createQuickGuidePanel(ScoredItem topItem)
 	{
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -1248,7 +1231,8 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		});
 	}
 
-	private void addEmptyStateMessageInternal(String message)
+	@Override
+	public void addEmptyStateMessage(String message)
 	{
 		JLabel label = new JLabel("<html><center>" + message + "</center></html>");
 		label.setFont(FontManager.getRunescapeSmallFont());
@@ -1275,24 +1259,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	public void addToList(Component component)
 	{
 		listContainer.add(component);
-	}
-
-	@Override
-	public void addEmptyStateMessage(String message)
-	{
-		addEmptyStateMessageInternal(message);
-	}
-
-	@Override
-	public JPanel createQuickGuidePanel(ScoredItem topItem)
-	{
-		return createQuickGuidePanelInternal(topItem);
-	}
-
-	@Override
-	public void showDetail(CollectionLogItem item, CollectionLogSource source)
-	{
-		showDetailInternal(item, source);
 	}
 
 	@Override
