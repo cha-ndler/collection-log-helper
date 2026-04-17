@@ -42,6 +42,16 @@ import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
+import com.collectionloghelper.ui.mode.CategoryModeController;
+import com.collectionloghelper.ui.mode.EfficientModeController;
+import com.collectionloghelper.ui.mode.PanelModeController;
+import com.collectionloghelper.ui.mode.PanelModeDispatcher;
+import com.collectionloghelper.ui.mode.PanelShellContext;
+import com.collectionloghelper.ui.mode.PetHuntModeController;
+import com.collectionloghelper.ui.mode.SearchModeController;
+import com.collectionloghelper.ui.mode.StatisticsModeController;
+import java.util.EnumMap;
+import java.util.Map;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -53,8 +63,6 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.BorderFactory;
@@ -71,7 +79,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-import javax.swing.ToolTipManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.runelite.client.game.ItemManager;
@@ -79,10 +86,9 @@ import net.runelite.client.util.AsyncBufferedImage;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.PluginPanel;
-import net.runelite.client.util.AsyncBufferedImage;
 import net.runelite.client.util.SwingUtil;
 
-public class CollectionLogHelperPanel extends PluginPanel
+public class CollectionLogHelperPanel extends PluginPanel implements PanelShellContext
 {
 	private static final Color GUIDE_ME_COLOR = new Color(30, 120, 30);
 	private static final Color STOP_GUIDANCE_COLOR = new Color(140, 30, 30);
@@ -178,6 +184,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private Runnable stepSkipper;
 
 	private final Timer searchDebounceTimer;
+
+	private final Map<Mode, PanelModeController> modeControllers = new EnumMap<>(Mode.class);
+	private final PanelModeDispatcher<Mode> modeDispatcher = new PanelModeDispatcher<>(modeControllers);
 
 	private Mode currentMode = Mode.EFFICIENT;
 	private boolean rebuilding = false;
@@ -419,7 +428,9 @@ public class CollectionLogHelperPanel extends PluginPanel
 		{
 			if (e.getStateChange() == ItemEvent.SELECTED)
 			{
+				Mode previous = currentMode;
 				currentMode = (Mode) e.getItem();
+				modeDispatcher.switchMode(previous, currentMode);
 				updateControlVisibility();
 				inDetailView = false;
 				rebuild();
@@ -561,6 +572,22 @@ public class CollectionLogHelperPanel extends PluginPanel
 		contentPanel.add(detailView, "detail");
 
 		add(contentPanel, BorderLayout.CENTER);
+
+		// Mode controllers — populated once, dispatched from rebuild()
+		modeControllers.put(Mode.STATISTICS,
+			new StatisticsModeController(this, collectionState, database, calculator));
+		modeControllers.put(Mode.PET_HUNT,
+			new PetHuntModeController(this, config, collectionState, calculator,
+				requirementsChecker, itemManager));
+		modeControllers.put(Mode.SEARCH,
+			new SearchModeController(this, config, database, collectionState, calculator,
+				requirementsChecker, itemManager));
+		modeControllers.put(Mode.CATEGORY_FOCUS,
+			new CategoryModeController(this, config, database, collectionState, calculator,
+				requirementsChecker, itemManager));
+		modeControllers.put(Mode.EFFICIENT,
+			new EfficientModeController(this, config, collectionState, calculator,
+				requirementsChecker, itemManager));
 
 		updateControlVisibility();
 	}
@@ -819,24 +846,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 				updateCompletionHeader();
 				updateSlayerTaskLabel();
 
-				switch (currentMode)
-				{
-					case EFFICIENT:
-						buildEfficientView();
-						break;
-					case CATEGORY_FOCUS:
-						buildCategoryView();
-						break;
-					case SEARCH:
-						buildSearchView();
-						break;
-					case PET_HUNT:
-						buildPetHuntView();
-						break;
-					case STATISTICS:
-						buildStatsView();
-						break;
-				}
+				modeDispatcher.buildView(currentMode);
 
 				// Restore expanded category state
 				for (Component comp : listContainer.getComponents())
@@ -913,426 +923,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 		}
 	}
 
-	private void buildEfficientView()
-	{
-		List<ScoredItem> scored = calculator.rankByEfficiency();
-		EfficientSortMode sortMode = (EfficientSortMode) sortSelector.getSelectedItem();
-		if (sortMode != null && sortMode != EfficientSortMode.EFFICIENCY)
-		{
-			scored = new ArrayList<>(scored);
-			switch (sortMode)
-			{
-				case KILL_TIME:
-					scored.sort(Comparator.comparingDouble(s -> s.getSource().getKillTimeSeconds()));
-					break;
-				case DROP_RATE:
-					scored.sort(Comparator.comparingDouble(ScoredItem::getDropOnlyScore).reversed());
-					break;
-				case ALPHABETICAL:
-					scored.sort(Comparator.comparing(s -> s.getSource().getName()));
-					break;
-				case ITEMS_REMAINING:
-					scored.sort(Comparator.comparingInt(ScoredItem::getMissingItemCount).reversed());
-					break;
-				case COMPLETION_PERCENTAGE:
-					scored.sort(Comparator.comparingDouble((ScoredItem s) ->
-					{
-						int total = s.getSource().getItems().size();
-						return total > 0 ? (double) (total - s.getMissingItemCount()) / total : 0;
-					}).reversed());
-					break;
-			}
-		}
-		boolean hideObtained = config.hideObtainedItems();
-
-		if (scored.isEmpty())
-		{
-			if (config.afkFilter().getMinAfkLevel() > 0)
-			{
-				addEmptyStateMessage("No sources match the current AFK filter.<br>Try a lower Efficient AFK setting.");
-			}
-			else if (config.hideLockedContent())
-			{
-				addEmptyStateMessage("All sources are locked or completed.<br>Adjust filters to see more.");
-			}
-			else
-			{
-				addEmptyStateMessage("All items obtained. Congratulations!");
-			}
-			return;
-		}
-
-		// Top Pick should always be an accessible (unlocked) source
-		scored.stream()
-			.filter(s -> !s.isLocked())
-			.findFirst()
-			.ifPresent(topPick -> listContainer.add(createQuickGuidePanel(topPick)));
-
-		for (ScoredItem si : scored)
-		{
-			boolean onTask = calculator.isOnSlayerTask(si.getSource());
-
-			// Show the best (fastest-to-obtain) item per source, but use
-			// the source-level score for the time display so the displayed
-			// time matches the sort order.
-			CollectionLogItem bestItem = si.getBestItem();
-			if (bestItem != null && !collectionState.isItemObtained(bestItem.getItemId()))
-			{
-				ItemRowPanel row = new ItemRowPanel(bestItem, si.getSource(), false,
-					si.getScore(), si.isLocked(), onTask,
-					requirementsChecker.getUnmetRequirements(si.getSource().getName()),
-					itemManager, () -> showDetail(bestItem, si.getSource()));
-				listContainer.add(row);
-			}
-			else
-			{
-				// Fallback: show first missing item if bestItem is null or already obtained
-				for (CollectionLogItem item : si.getSource().getItems())
-				{
-					if (!collectionState.isItemObtained(item.getItemId()))
-					{
-						ItemRowPanel row = new ItemRowPanel(item, si.getSource(), false,
-							si.getScore(), si.isLocked(), onTask,
-							requirementsChecker.getUnmetRequirements(si.getSource().getName()),
-							itemManager, () -> showDetail(item, si.getSource()));
-						listContainer.add(row);
-						break;
-					}
-				}
-			}
-		}
-	}
-
-	private void buildCategoryView()
-	{
-		CollectionLogCategory category = (CollectionLogCategory) categorySelector.getSelectedItem();
-		if (category == null)
-		{
-			return;
-		}
-
-		// Top Pick for this category — always an accessible source
-		List<ScoredItem> categoryScored = calculator.filterByCategory(category);
-		categoryScored.stream()
-			.filter(s -> !s.isLocked())
-			.findFirst()
-			.ifPresent(topPick -> listContainer.add(createQuickGuidePanel(topPick)));
-
-		List<CollectionLogSource> sources = database.getSourcesByCategory(category);
-		CategorySummaryPanel summary = new CategorySummaryPanel(
-			category, sources, collectionState, requirementsChecker, itemManager,
-			this::showDetail, config.hideObtainedItems());
-		listContainer.add(summary);
-	}
-
-	private void buildSearchView()
-	{
-		String query = searchField.getText().toLowerCase().trim();
-		if (query.isEmpty())
-		{
-			addEmptyStateMessage("Search by item or source name");
-			return;
-		}
-
-		boolean hideObtained = config.hideObtainedItems();
-		boolean hideLocked = config.hideLockedContent();
-		int resultCount = 0;
-
-		for (CollectionLogSource source : database.getAllSources())
-		{
-			boolean locked = !requirementsChecker.isAccessible(source.getName());
-			if (hideLocked && locked)
-			{
-				continue;
-			}
-
-			boolean sourceNameMatches = source.getName().toLowerCase().contains(query);
-			boolean onTask = calculator.isOnSlayerTask(source);
-			for (CollectionLogItem item : source.getItems())
-			{
-				if (sourceNameMatches || item.getName().toLowerCase().contains(query))
-				{
-					boolean obtained = collectionState.isItemObtained(item.getItemId());
-					if (hideObtained && obtained)
-					{
-						continue;
-					}
-					ItemRowPanel row = new ItemRowPanel(item, source, obtained, 0,
-						locked, onTask,
-						requirementsChecker.getUnmetRequirements(source.getName()),
-						itemManager, () -> showDetail(item, source));
-					listContainer.add(row);
-					resultCount++;
-				}
-			}
-		}
-
-		if (resultCount == 0)
-		{
-			// Escape query to prevent HTML injection in the JLabel
-			String safeQuery = query.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
-			addEmptyStateMessage("No items match '" + safeQuery + "'");
-		}
-	}
-
-	private void buildPetHuntView()
-	{
-		List<ScoredItem> scored = calculator.filterPetsOnly();
-		boolean hideObtained = config.hideObtainedItems();
-		int resultCount = 0;
-
-		for (ScoredItem si : scored)
-		{
-			boolean onTask = calculator.isOnSlayerTask(si.getSource());
-			for (CollectionLogItem item : si.getSource().getItems())
-			{
-				if (!item.isPet())
-				{
-					continue;
-				}
-				boolean obtained = collectionState.isItemObtained(item.getItemId());
-				if (hideObtained && obtained)
-				{
-					continue;
-				}
-				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
-					si.getScore(), si.isLocked(), onTask,
-					requirementsChecker.getUnmetRequirements(si.getSource().getName()),
-					itemManager, () -> showDetail(item, si.getSource()));
-				listContainer.add(row);
-				resultCount++;
-			}
-		}
-
-		if (resultCount == 0)
-		{
-			if (config.afkFilter().getMinAfkLevel() > 0)
-			{
-				addEmptyStateMessage("No pets match the current AFK filter.<br>Try a lower Efficient AFK setting.");
-			}
-			else
-			{
-				addEmptyStateMessage("All pets obtained!");
-			}
-		}
-	}
-
-	private void buildStatsView()
-	{
-		// Overall summary — use varp-based counts for accurate deduplicated totals
-		int totalObtained = collectionState.getTotalObtained();
-		int totalItems = collectionState.getTotalPossible();
-		double overallPct = collectionState.getCompletionPercentage();
-
-		String overallText = String.format("%d / %d (%.1f%%)", totalObtained, totalItems, overallPct);
-
-		JPanel overallPanel = new JPanel(new BorderLayout(5, 2));
-		overallPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
-		overallPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-		overallPanel.setToolTipText("Collection Log: " + overallText);
-
-		JLabel overallLabel = new JLabel(overallText);
-		overallLabel.setFont(FontManager.getRunescapeBoldFont());
-		overallLabel.setForeground(Color.WHITE);
-		overallPanel.add(overallLabel, BorderLayout.NORTH);
-
-		JPanel overallBar = createProgressBar(totalObtained, totalItems);
-		overallPanel.add(overallBar, BorderLayout.SOUTH);
-		listContainer.add(overallPanel);
-
-		listContainer.add(javax.swing.Box.createVerticalStrut(4));
-
-		// Per-category breakdown
-		for (CollectionLogCategory category : CollectionLogCategory.values())
-		{
-			List<CollectionLogSource> sources = database.getSourcesByCategory(category);
-			if (sources == null || sources.isEmpty())
-			{
-				continue;
-			}
-
-			int catSources = sources.size();
-			int catSourcesComplete = 0;
-
-			// Use varp-based counts for categories the game tracks (deduplicated),
-			// fall back to manual counting for SLAYER/SKILLING (no game varps)
-			int varpCount = collectionState.getCategoryCount(category);
-			int varpMax = collectionState.getCategoryMax(category);
-			boolean useVarps = varpMax > 0;
-
-			int catObtained = 0;
-			int catTotal = 0;
-
-			for (CollectionLogSource source : sources)
-			{
-				boolean sourceComplete = true;
-				for (CollectionLogItem item : source.getItems())
-				{
-					if (!useVarps)
-					{
-						catTotal++;
-						if (collectionState.isItemObtained(item.getItemId()))
-						{
-							catObtained++;
-						}
-						else
-						{
-							sourceComplete = false;
-						}
-					}
-					else
-					{
-						if (!collectionState.isItemObtained(item.getItemId()))
-						{
-							sourceComplete = false;
-						}
-					}
-				}
-				if (sourceComplete)
-				{
-					catSourcesComplete++;
-				}
-			}
-
-			if (useVarps)
-			{
-				catObtained = varpCount;
-				catTotal = varpMax;
-			}
-
-			double catPct = catTotal > 0 ? 100.0 * catObtained / catTotal : 0;
-
-			String countText = String.format("%d / %d (%.1f%%)", catObtained, catTotal, catPct);
-
-			// Estimate remaining hours from efficiency scores
-			double totalHours = 0;
-			List<ScoredItem> categoryScored = calculator.filterByCategory(category);
-			for (ScoredItem si : categoryScored)
-			{
-				if (si.getScore() > 0)
-				{
-					totalHours += 100.0 / si.getScore();
-				}
-			}
-
-			String timeStr;
-			if (totalHours <= 0 || catObtained >= catTotal)
-			{
-				timeStr = null;
-			}
-			else if (totalHours < 1)
-			{
-				timeStr = "~" + Math.max(1, Math.round(totalHours * 60)) + " min left";
-			}
-			else if (totalHours < 24)
-			{
-				timeStr = "~" + Math.round(totalHours) + " hrs left";
-			}
-			else
-			{
-				long days = Math.round(totalHours / 24);
-				timeStr = "~" + days + (days == 1 ? " day left" : " days left");
-			}
-
-			JPanel catPanel = new JPanel(new BorderLayout(5, 2));
-			catPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
-			catPanel.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
-
-			// Tooltip with full details for truncated text
-			String tooltip = String.format("%s: %s | %d sources, %d complete",
-				category.getDisplayName(), countText, catSources, catSourcesComplete);
-			if (timeStr != null)
-			{
-				tooltip += " | " + timeStr;
-			}
-			catPanel.setToolTipText(tooltip);
-
-			// Header: category name (bold) + count (right, small)
-			JLabel catNameLabel = new JLabel(category.getDisplayName());
-			catNameLabel.setFont(FontManager.getRunescapeBoldFont());
-			catNameLabel.setForeground(Color.WHITE);
-
-			JLabel catCountLabel = new JLabel(countText);
-			catCountLabel.setFont(FontManager.getRunescapeSmallFont());
-			catCountLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-			catCountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-
-			JPanel catHeader = new JPanel(new BorderLayout());
-			catHeader.setOpaque(false);
-			catHeader.add(catNameLabel, BorderLayout.WEST);
-			catHeader.add(catCountLabel, BorderLayout.EAST);
-			catPanel.add(catHeader, BorderLayout.NORTH);
-
-			JPanel catBar = createProgressBar(catObtained, catTotal);
-			catPanel.add(catBar, BorderLayout.CENTER);
-
-			// Footer: source count (left) + time estimate (right)
-			String footerText = catSources + " sources, " + catSourcesComplete + " complete";
-			if (timeStr != null)
-			{
-				footerText += "  |  " + timeStr;
-			}
-			JLabel catFooterLabel = new JLabel(footerText);
-			catFooterLabel.setFont(FontManager.getRunescapeSmallFont());
-			catFooterLabel.setForeground(timeStr != null
-				? new Color(255, 200, 0) : ColorScheme.LIGHT_GRAY_COLOR);
-			catPanel.add(catFooterLabel, BorderLayout.SOUTH);
-
-			// Click to navigate to Category Focus mode
-			final CollectionLogCategory clickedCategory = category;
-			catPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-			catPanel.addMouseListener(new java.awt.event.MouseAdapter()
-			{
-				@Override
-				public void mousePressed(java.awt.event.MouseEvent e)
-				{
-					categorySelector.setSelectedItem(clickedCategory);
-					modeSelector.setSelectedItem(Mode.CATEGORY_FOCUS);
-				}
-
-				@Override
-				public void mouseEntered(java.awt.event.MouseEvent e)
-				{
-					catPanel.setBackground(ColorScheme.DARKER_GRAY_HOVER_COLOR);
-				}
-
-				@Override
-				public void mouseExited(java.awt.event.MouseEvent e)
-				{
-					catPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
-				}
-			});
-
-			listContainer.add(catPanel);
-			listContainer.add(javax.swing.Box.createVerticalStrut(2));
-		}
-	}
-
-	private JPanel createProgressBar(int obtained, int total)
-	{
-		final double pct = total > 0 ? (double) obtained / total : 0;
-		JPanel bar = new JPanel()
-		{
-			@Override
-			protected void paintComponent(java.awt.Graphics g)
-			{
-				super.paintComponent(g);
-				int w = getWidth();
-				int h = getHeight();
-				g.setColor(new Color(60, 60, 60));
-				g.fillRect(0, 0, w, h);
-				if (pct > 0)
-				{
-					g.setColor(new Color(0, 200, 0));
-					g.fillRect(0, 0, (int) (w * pct), h);
-				}
-			}
-		};
-		bar.setPreferredSize(new Dimension(0, 6));
-		return bar;
-	}
-
-	private void showDetail(CollectionLogItem item, CollectionLogSource source)
+	@Override
+	public void showDetail(CollectionLogItem item, CollectionLogSource source)
 	{
 		boolean obtained = collectionState.isItemObtained(item.getItemId());
 		boolean locked = !requirementsChecker.isAccessible(source.getName());
@@ -1365,7 +957,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 		showDetailView();
 	}
 
-	private JPanel createQuickGuidePanel(ScoredItem topItem)
+	@Override
+	public JPanel createQuickGuidePanel(ScoredItem topItem)
 	{
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -1638,7 +1231,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 		});
 	}
 
-	private void addEmptyStateMessage(String message)
+	@Override
+	public void addEmptyStateMessage(String message)
 	{
 		JLabel label = new JLabel("<html><center>" + message + "</center></html>");
 		label.setFont(FontManager.getRunescapeSmallFont());
@@ -1657,5 +1251,38 @@ public class CollectionLogHelperPanel extends PluginPanel
 		sortSelector.setVisible(currentMode == Mode.EFFICIENT);
 		categorySelector.setVisible(currentMode == Mode.CATEGORY_FOCUS);
 		searchField.setVisible(currentMode == Mode.SEARCH);
+	}
+
+	// ── PanelShellContext implementation ────────────────────────────────────
+
+	@Override
+	public void addToList(Component component)
+	{
+		listContainer.add(component);
+	}
+
+	@Override
+	public void switchToCategoryFocus(CollectionLogCategory category)
+	{
+		categorySelector.setSelectedItem(category);
+		modeSelector.setSelectedItem(Mode.CATEGORY_FOCUS);
+	}
+
+	@Override
+	public String getSearchQuery()
+	{
+		return searchField.getText() == null ? "" : searchField.getText().toLowerCase().trim();
+	}
+
+	@Override
+	public EfficientSortMode getEfficientSortMode()
+	{
+		return (EfficientSortMode) sortSelector.getSelectedItem();
+	}
+
+	@Override
+	public CollectionLogCategory getSelectedCategory()
+	{
+		return (CollectionLogCategory) categorySelector.getSelectedItem();
 	}
 }
