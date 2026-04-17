@@ -493,7 +493,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 **Tier A — Production polish for Plugin Hub resubmission**
 
 - [x] A1 — Panel decomposition                          status: done          owner: cha-ndler  updated: 2026-04-17  pr: #349  note: 5 mode controllers extracted (94–297 LOC each) behind PanelModeDispatcher; 468/468 tests green. Shell still 1,288 LOC (shared widgets) — follow-up A1b.
-- [ ] A1b — Shell widget decomposition                   status: planned       owner: —          updated: 2026-04-17  note: extract StepProgressView / SlayerStrategyView / GuidanceBannerView / SyncStatusView / clue summary from CollectionLogHelperPanel shell; target <600 LOC shell
+- [x] A1b — Shell widget decomposition                   status: done          owner: cha-ndler  updated: 2026-04-17  pr: #351  note: 6 widgets extracted (SyncStatusView, ClueSummaryView, GuidanceBannerView, StepProgressView, SlayerStrategyView, QuickGuidePanelView); shell 1,288 → 698 LOC (−46%); 511 tests green. Shell didn't hit <600 target (final-field constructor overhead ~175 LOC) but is under the 800-LOC Plugin Hub flag threshold.
 - [x] A2 — Plugin class <1,000 LOC                       status: done          owner: cha-ndler  updated: 2026-04-17  pr: #347  note: 1,281 → 904 LOC via GuidanceEventRouter extraction
 - [x] A3 — Issue triage & labels                         status: done          owner: cha-ndler  updated: 2026-04-17  note: GitHub-only — summary in #345; 10 labels created, #319 closed, #323/#314/#306/#134 labeled
 - [x] A4 — Plugin Hub self-review doc                    status: done          owner: cha-ndler  updated: 2026-04-17  pr: #346  note: 27 green / 3 yellow / 2 red — docs/plugin-hub-review.md
