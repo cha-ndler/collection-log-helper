@@ -26,10 +26,8 @@ package com.collectionloghelper;
 
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
-import com.collectionloghelper.data.CompletionCondition;
 import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.DropRateDatabase;
-import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
@@ -44,6 +42,7 @@ import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
+import com.collectionloghelper.lifecycle.GuidanceEventRouter;
 import com.collectionloghelper.lifecycle.GuidanceUIState;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
@@ -63,33 +62,22 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
-import net.runelite.api.MenuAction;
 import net.runelite.api.NPC;
 import net.runelite.api.Player;
 import net.runelite.api.WorldEntity;
 import net.runelite.api.WorldView;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
-import net.runelite.api.events.ActorDeath;
-import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
-import net.runelite.api.events.HitsplatApplied;
-import net.runelite.api.events.InteractingChanged;
 import net.runelite.api.events.ItemContainerChanged;
-import net.runelite.api.events.MenuEntryAdded;
-import net.runelite.api.events.MenuOptionClicked;
-import net.runelite.api.events.NpcDespawned;
-import net.runelite.api.events.NpcSpawned;
 import net.runelite.api.events.ScriptPreFired;
 import net.runelite.api.ScriptEvent;
 import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
-import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.gameval.InventoryID;
 import net.runelite.api.gameval.ItemID;
-import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatCommandManager;
 import net.runelite.client.config.ConfigManager;
@@ -116,8 +104,6 @@ public class CollectionLogHelperPlugin extends Plugin
 {
 	private static final Pattern COLLECTION_LOG_PATTERN =
 		Pattern.compile("New item added to your collection log: (.*)");
-
-	private static final String MENU_OPTION_GUIDE = "Collection Log Guide";
 
 	@Inject
 	private Client client;
@@ -209,6 +195,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private GuidanceUIState guidanceUIState;
 
+	@Inject
+	private GuidanceEventRouter guidanceEventRouter;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -219,11 +208,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	private volatile boolean pendingTravelVarbitRefresh = false;
 	private BufferedImage collectionLogIcon;
 
-	// Auto-sync state: triggered when collection log widget opens
-	private boolean autoSyncPending;
+	// Deferred cache-fresh check: set once the full sync completes
 	private boolean hasCompletedFullSync;
-	private boolean syncReminderSent;
-	private int loginTickDelay;
 
 	/**
 	 * Player location cached on the client thread each game tick.
@@ -239,9 +225,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	/** Cached ranked efficiency list — recomputed only when dirty. */
 	private List<ScoredItem> cachedRankedSources;
 	private boolean rankedSourcesDirty = true;
-
-	/** Writer for guidance authoring event log. Opened when authoring mode enabled. */
-	private java.io.PrintWriter authoringLogWriter;
 
 	@Override
 	protected void startUp() throws Exception
@@ -294,6 +277,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayRegistry.registerAll();
 		sceneEventRouter.setAuthoringLogger(msg -> authoringLogger.log("%s", msg));
 		eventBus.register(sceneEventRouter);
+		guidanceEventRouter.setMissingItemsSupplier(() -> sourcesWithMissingItems);
+		guidanceEventRouter.setActivateGuidanceCallback(this::activateGuidance);
+		eventBus.register(guidanceEventRouter);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -331,6 +317,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		clientToolbar.removeNavigation(navButton);
 		overlayRegistry.unregisterAll();
 		eventBus.unregister(sceneEventRouter);
+		eventBus.unregister(guidanceEventRouter);
 		deactivateGuidance();
 		syncStateCoordinator.reset();
 		sourcesWithMissingItems.clear();
@@ -498,24 +485,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	@Subscribe
-	public void onActorDeath(ActorDeath event)
-	{
-		if (!guidanceSequencer.isActive())
-		{
-			return;
-		}
-		if (event.getActor() instanceof NPC)
-		{
-			NPC npc = (NPC) event.getActor();
-			if (config.guidanceAuthoring())
-			{
-				authoringLogger.log("DEATH npcId=%d name='%s'", npc.getId(), npc.getName());
-			}
-			guidanceSequencer.onNpcDeath(npc.getId());
-		}
-	}
-
-	@Subscribe
 	public void onChatMessage(ChatMessage event)
 	{
 		if (event.getType() != ChatMessageType.GAMEMESSAGE
@@ -630,53 +599,6 @@ public class CollectionLogHelperPlugin extends Plugin
 				panel.updateClueSummary(playerBankState);
 			}
 		}
-	}
-
-	@Subscribe
-	public void onWidgetLoaded(WidgetLoaded event)
-	{
-		// Capture dialog widget text for authoring mode
-		if (config.guidanceAuthoring())
-		{
-			// Player dialog choices (group 219)
-			if (event.getGroupId() == 219)
-			{
-				clientThread.invokeLater(() ->
-				{
-					Widget container = client.getWidget(219, 1);
-					if (container != null)
-					{
-						Widget[] children = container.getDynamicChildren();
-						if (children != null)
-						{
-							StringBuilder sb = new StringBuilder("DIALOG_OPTIONS");
-							for (Widget child : children)
-							{
-								if (child != null && child.getText() != null && !child.getText().isEmpty())
-								{
-									sb.append(" '").append(child.getText()).append("'");
-								}
-							}
-							authoringLogger.log(sb.toString());
-						}
-					}
-				});
-			}
-			// NPC dialog (group 231)
-			if (event.getGroupId() == 231)
-			{
-				clientThread.invokeLater(() ->
-				{
-					Widget textWidget = client.getWidget(231, 4);
-					if (textWidget != null && textWidget.getText() != null)
-					{
-						authoringLogger.log("DIALOG_NPC text='%s'", textWidget.getText());
-					}
-				});
-			}
-		}
-
-		syncStateCoordinator.onWidgetLoaded(event.getGroupId());
 	}
 
 	@Subscribe
@@ -869,141 +791,6 @@ public class CollectionLogHelperPlugin extends Plugin
 			database, collectionState);
 	}
 
-	@Subscribe
-	public void onMenuEntryAdded(MenuEntryAdded event)
-	{
-		if (!config.showOverlays())
-		{
-			return;
-		}
-
-		int type = event.getType();
-		if (type < MenuAction.NPC_FIRST_OPTION.getId() || type > MenuAction.NPC_FIFTH_OPTION.getId())
-		{
-			return;
-		}
-
-		NPC npc = event.getMenuEntry().getNpc();
-		if (npc == null)
-		{
-			return;
-		}
-
-		int npcId = npc.getId();
-		CollectionLogSource source = database.getSourceByNpcId(npcId);
-		if (source == null)
-		{
-			return;
-		}
-
-		// Skip if guidance is already active for this source
-		if (guidanceCoordinator.isSourceGuided(source))
-		{
-			return;
-		}
-
-		// Check if source has any missing items (O(1) cached lookup)
-		if (!sourcesWithMissingItems.contains(source.getName()))
-		{
-			return;
-		}
-
-		client.getMenu().createMenuEntry(-1)
-			.setOption(MENU_OPTION_GUIDE)
-			.setTarget(event.getTarget())
-			.setType(MenuAction.RUNELITE)
-			.setIdentifier(npcId);
-	}
-
-	@Subscribe
-	public void onMenuOptionClicked(MenuOptionClicked event)
-	{
-		MenuAction action = event.getMenuAction();
-
-		// Handle "Collection Log Guide" right-click menu action
-		if (action == MenuAction.RUNELITE && MENU_OPTION_GUIDE.equals(event.getMenuOption()))
-		{
-			CollectionLogSource source = database.getSourceByNpcId(event.getId());
-			if (source != null)
-			{
-				activateGuidance(source);
-			}
-			return;
-		}
-
-		// Authoring mode: log all interactions regardless of guidance state
-		if (config.guidanceAuthoring())
-		{
-			authoringLogger.log("MENU option='%s' target='%s' action=%s id=%d param0=%d param1=%d",
-				event.getMenuOption(), event.getMenuTarget(), action,
-				event.getId(), event.getParam0(), event.getParam1());
-
-			if (action == MenuAction.GAME_OBJECT_FIRST_OPTION || action == MenuAction.GAME_OBJECT_SECOND_OPTION
-				|| action == MenuAction.GAME_OBJECT_THIRD_OPTION || action == MenuAction.GAME_OBJECT_FOURTH_OPTION
-				|| action == MenuAction.GAME_OBJECT_FIFTH_OPTION)
-			{
-				authoringLogger.log("OBJECT id=%d option='%s'", event.getId(), event.getMenuOption());
-			}
-			else if (action == MenuAction.NPC_FIRST_OPTION || action == MenuAction.NPC_SECOND_OPTION
-				|| action == MenuAction.NPC_THIRD_OPTION || action == MenuAction.NPC_FOURTH_OPTION
-				|| action == MenuAction.NPC_FIFTH_OPTION)
-			{
-				NPC npc = event.getMenuEntry().getNpc();
-				if (npc != null)
-				{
-					authoringLogger.log("NPC id=%d name='%s' option='%s'",
-						npc.getId(), npc.getName(), event.getMenuOption());
-				}
-			}
-			else if (action == MenuAction.WIDGET_TARGET_ON_GAME_OBJECT)
-			{
-				authoringLogger.log("USE_ITEM_ON_OBJECT objectId=%d itemId=%d", event.getId(), event.getParam0());
-			}
-			else if (action == MenuAction.WIDGET_TARGET_ON_NPC)
-			{
-				authoringLogger.log("USE_ITEM_ON_NPC npcIndex=%d", event.getId());
-			}
-			else if (action == MenuAction.WIDGET_TARGET_ON_WIDGET)
-			{
-				authoringLogger.log("USE_ITEM_ON_ITEM param0=%d param1=%d", event.getParam0(), event.getParam1());
-			}
-		}
-
-		if (!guidanceSequencer.isActive())
-		{
-			return;
-		}
-
-		// Track cumulative use-item-on-object actions for guidance (e.g., Trouble Brewing hopper)
-		if (action == MenuAction.WIDGET_TARGET_ON_GAME_OBJECT)
-		{
-			CollectionLogSource source = guidanceSequencer.getActiveSource();
-			if (source != null && source.getCumulativeTrackItemId() > 0
-					&& source.getCumulativeTrackObjectIds() != null)
-			{
-				int objectId = event.getId();
-				int itemId = event.getParam0();
-				if (itemId == source.getCumulativeTrackItemId()
-						&& source.getCumulativeTrackObjectIds().contains(objectId))
-				{
-					guidanceSequencer.onTrackedAction();
-				}
-			}
-		}
-
-		// Detect NPC interactions for NPC_TALKED_TO completion condition.
-		if (action == MenuAction.NPC_FIRST_OPTION || action == MenuAction.NPC_SECOND_OPTION
-			|| action == MenuAction.NPC_THIRD_OPTION || action == MenuAction.NPC_FOURTH_OPTION
-			|| action == MenuAction.NPC_FIFTH_OPTION)
-		{
-			NPC npc = event.getMenuEntry().getNpc();
-			if (npc != null)
-			{
-				guidanceSequencer.onNpcInteracted(npc.getId());
-			}
-		}
-	}
-
 	/**
 	 * Resolve the player's real-world location, transforming boat-local
 	 * coordinates when the player is inside a sailing WorldEntity.
@@ -1056,170 +843,6 @@ public class CollectionLogHelperPlugin extends Plugin
 			log.debug("WorldEntity transform failed, using fallback location", e);
 		}
 		return fallback;
-	}
-
-	// ---- Guidance Authoring Event Logger ----
-
-	private void authoringLog(String format, Object... args)
-	{
-		if (!config.guidanceAuthoring())
-		{
-			return;
-		}
-		if (authoringLogWriter == null)
-		{
-			java.io.File logFile = pluginDataManager.getFile("authoring-log.txt");
-			if (logFile == null)
-			{
-				logFile = new java.io.File(
-					net.runelite.client.RuneLite.RUNELITE_DIR, "clh-authoring-log.txt");
-			}
-			try
-			{
-				authoringLogWriter = new java.io.PrintWriter(
-					new java.io.FileWriter(logFile, true), true);
-				authoringLogWriter.printf("=== Authoring session started %s ===%n",
-					java.time.LocalDateTime.now().format(
-						java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-			}
-			catch (java.io.IOException e)
-			{
-				log.error("Failed to open authoring log", e);
-				return;
-			}
-		}
-		WorldPoint loc = cachedPlayerLocation;
-		String locStr = loc != null
-			? String.format("[%d,%d,%d]", loc.getX(), loc.getY(), loc.getPlane()) : "[?,?,?]";
-		String timestamp = java.time.LocalTime.now().format(
-			java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss"));
-		authoringLogWriter.printf("%s %s %s%n", timestamp, locStr, String.format(format, args));
-	}
-
-	/** Logs inventory or equipment container changes with slot names for equipment. */
-	private void logContainerChange(ItemContainerChanged event)
-	{
-		int containerId = event.getContainerId();
-		if (containerId == InventoryID.INV)
-		{
-			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.INV);
-			if (c == null)
-			{
-				return;
-			}
-			StringBuilder sb = new StringBuilder("INVENTORY");
-			for (net.runelite.api.Item item : c.getItems())
-			{
-				if (item.getId() > 0 && item.getQuantity() > 0)
-				{
-					sb.append(String.format(" %d x%d", item.getId(), item.getQuantity()));
-				}
-			}
-			authoringLog(sb.toString());
-		}
-		else if (containerId == InventoryID.WORN)
-		{
-			net.runelite.api.ItemContainer c = client.getItemContainer(InventoryID.WORN);
-			if (c == null)
-			{
-				return;
-			}
-			String[] slotNames = {"Head", "Cape", "Amulet", "Weapon", "Body",
-				"Shield", "?", "Legs", "?", "Gloves", "Boots", "?", "Ring", "Ammo"};
-			StringBuilder sb = new StringBuilder("EQUIPMENT");
-			net.runelite.api.Item[] items = c.getItems();
-			for (int i = 0; i < items.length && i < slotNames.length; i++)
-			{
-				if (items[i].getId() > 0)
-				{
-					sb.append(String.format(" %s=%d", slotNames[i], items[i].getId()));
-				}
-			}
-			authoringLog(sb.toString());
-		}
-	}
-
-	@Subscribe
-	public void onAnimationChanged(AnimationChanged event)
-	{
-		if (!config.guidanceAuthoring() || event.getActor() != client.getLocalPlayer())
-		{
-			return;
-		}
-		int animId = client.getLocalPlayer().getAnimation();
-		if (animId != -1)
-		{
-			authoringLogger.log("ANIMATION player=%d", animId);
-		}
-	}
-
-	@Subscribe
-	public void onNpcSpawned(NpcSpawned event)
-	{
-		NPC npc = event.getNpc();
-
-		if (config.guidanceAuthoring())
-		{
-			authoringLogger.log("NPC_SPAWN id=%d name='%s' index=%d", npc.getId(), npc.getName(), npc.getIndex());
-		}
-
-		// Track the spawned NPC if it matches the current guidance step's target
-		guidanceCoordinator.onNpcSpawned(npc);
-	}
-
-	@Subscribe
-	public void onNpcDespawned(NpcDespawned event)
-	{
-		NPC npc = event.getNpc();
-
-		if (config.guidanceAuthoring())
-		{
-			authoringLogger.log("NPC_DESPAWN id=%d name='%s'", npc.getId(), npc.getName());
-		}
-
-		// Clear tracked NPC if it despawned
-		guidanceCoordinator.onNpcDespawned(npc);
-	}
-
-	@Subscribe
-	public void onInteractingChanged(InteractingChanged event)
-	{
-		if (!guidanceSequencer.isActive())
-		{
-			return;
-		}
-
-		if (event.getSource() == client.getLocalPlayer() && event.getTarget() instanceof NPC)
-		{
-			NPC npc = (NPC) event.getTarget();
-			GuidanceStep step = guidanceSequencer.getRawCurrentStep();
-			if (step != null && step.getCompletionCondition() == CompletionCondition.NPC_TALKED_TO
-				&& step.getCompletionNpcId() == npc.getId())
-			{
-				guidanceSequencer.onNpcInteracted(npc.getId());
-			}
-		}
-	}
-
-	@Subscribe
-	public void onHitsplatApplied(HitsplatApplied event)
-	{
-		if (!config.guidanceAuthoring())
-		{
-			return;
-		}
-		if (event.getActor() == client.getLocalPlayer())
-		{
-			authoringLogger.log("HITSPLAT_RECEIVED type=%d amount=%d",
-				event.getHitsplat().getHitsplatType(), event.getHitsplat().getAmount());
-		}
-		else if (event.getActor() instanceof NPC)
-		{
-			NPC npc = (NPC) event.getActor();
-			authoringLogger.log("HITSPLAT_DEALT npcId=%d name='%s' type=%d amount=%d",
-				npc.getId(), npc.getName(),
-				event.getHitsplat().getHitsplatType(), event.getHitsplat().getAmount());
-		}
 	}
 
 	private void onClhCommand(ChatMessage chatMessage, String message)
