@@ -36,7 +36,6 @@ import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.RequirementsChecker;
-import com.collectionloghelper.data.SlayerCreatureDatabase;
 import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
@@ -52,29 +51,26 @@ import com.collectionloghelper.ui.mode.SearchModeController;
 import com.collectionloghelper.ui.mode.StatisticsModeController;
 import com.collectionloghelper.ui.widget.ClueSummaryView;
 import com.collectionloghelper.ui.widget.GuidanceBannerView;
+import com.collectionloghelper.ui.widget.QuickGuidePanelView;
 import com.collectionloghelper.ui.widget.SlayerStrategyView;
 import com.collectionloghelper.ui.widget.StepProgressView;
 import com.collectionloghelper.ui.widget.SyncStatusView;
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
-import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -87,7 +83,6 @@ import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.runelite.client.game.ItemManager;
-import net.runelite.client.util.AsyncBufferedImage;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.PluginPanel;
@@ -95,8 +90,6 @@ import net.runelite.client.util.SwingUtil;
 
 public class CollectionLogHelperPanel extends PluginPanel implements PanelShellContext
 {
-	private static final Color GUIDE_ME_COLOR = new Color(30, 120, 30);
-	private static final Color STOP_GUIDANCE_COLOR = new Color(140, 30, 30);
 
 	public enum Mode
 	{
@@ -135,11 +128,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final ClueCompletionEstimator clueEstimator;
 	private final ItemManager itemManager;
 	private final RequirementsChecker requirementsChecker;
-	private final DataSyncState dataSyncState;
-	private final SlayerTaskState slayerTaskState;
-	private final SlayerStrategyCalculator slayerStrategyCalculator;
-	private final PlayerInventoryState inventoryState;
-	private final PlayerBankState bankState;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Consumer<AfkFilter> afkFilterUpdater;
@@ -163,8 +151,8 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	private final GuidanceBannerView guidanceBannerView;
 	private final SlayerStrategyView slayerStrategyView;
-
 	private final StepProgressView stepProgressView;
+	private final QuickGuidePanelView quickGuidePanelView;
 
 	private final Timer searchDebounceTimer;
 
@@ -176,8 +164,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private boolean rebuildPending = false;
 	private boolean guidanceActive = false;
 	private CollectionLogSource guidedSource = null;
-	private JButton topPickGuideButton = null;
-	private CollectionLogSource topPickSource = null;
 	private boolean inDetailView = false;
 
 	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
@@ -200,11 +186,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		this.clueEstimator = clueEstimator;
 		this.itemManager = itemManager;
 		this.requirementsChecker = requirementsChecker;
-		this.dataSyncState = dataSyncState;
-		this.slayerTaskState = slayerTaskState;
-		this.slayerStrategyCalculator = slayerStrategyCalculator;
-		this.inventoryState = inventoryState;
-		this.bankState = bankState;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.afkFilterUpdater = afkFilterUpdater;
@@ -214,12 +195,11 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
 		setLayout(new BorderLayout());
 
-		// Top controls panel
+		// === Controls panel (north) ===
 		JPanel controlsPanel = new JPanel();
 		controlsPanel.setLayout(new BoxLayout(controlsPanel, BoxLayout.Y_AXIS));
 		controlsPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
-		// Completion header
 		completionLabel = new JLabel("Collection Log: 0/0 (0.0%)", SwingConstants.CENTER);
 		completionLabel.setFont(FontManager.getRunescapeBoldFont());
 		completionLabel.setForeground(Color.WHITE);
@@ -227,7 +207,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		completionLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0));
 		controlsPanel.add(completionLabel);
 
-		// Progress bar
 		completionProgressBar = new JProgressBar(0, 1699);
 		completionProgressBar.setValue(0);
 		completionProgressBar.setPreferredSize(new Dimension(Integer.MAX_VALUE, 6));
@@ -239,38 +218,34 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		completionProgressBar.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
 		controlsPanel.add(completionProgressBar);
 
-		// Sync status + data-sync warning (extracted to SyncStatusView)
 		syncStatusView = new SyncStatusView(dataSyncState);
 		syncStatusView.setAlignmentX(CENTER_ALIGNMENT);
 		syncStatusView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(syncStatusView);
 
-		// Clue summary (extracted to ClueSummaryView)
 		clueSummaryView = new ClueSummaryView();
 		clueSummaryView.setAlignmentX(CENTER_ALIGNMENT);
 		clueSummaryView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(clueSummaryView);
 
-		// Slayer task indicator + strategy advisor (extracted to SlayerStrategyView)
 		slayerStrategyView = new SlayerStrategyView(slayerTaskState, slayerStrategyCalculator);
 		slayerStrategyView.setAlignmentX(CENTER_ALIGNMENT);
 		slayerStrategyView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(slayerStrategyView);
 
-		// Guidance banners (active + clue) extracted to GuidanceBannerView
 		guidanceBannerView = new GuidanceBannerView(requirementsChecker);
 		guidanceBannerView.setAlignmentX(CENTER_ALIGNMENT);
 		guidanceBannerView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(guidanceBannerView);
 
-		// Step progress (extracted to StepProgressView)
 		stepProgressView = new StepProgressView(itemManager, inventoryState, bankState);
 		stepProgressView.setAlignmentX(CENTER_ALIGNMENT);
 		controlsPanel.add(stepProgressView);
 
+		quickGuidePanelView = new QuickGuidePanelView(guidanceActivator, guidanceDeactivator);
+
 		controlsPanel.add(Box.createVerticalStrut(4));
 
-		// Mode selector
 		modeSelector = new JComboBox<>(Mode.values());
 		modeSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
 		modeSelector.addItemListener(e ->
@@ -288,7 +263,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		});
 		controlsPanel.add(modeSelector);
 
-		// AFK filter selector (visible in Efficient and Pet Hunt modes)
 		afkFilterSelector = new JComboBox<>(AfkFilter.values());
 		afkFilterSelector.setSelectedItem(config.afkFilter());
 		afkFilterSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
@@ -304,7 +278,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		});
 		controlsPanel.add(afkFilterSelector);
 
-		// Sort selector (visible in Efficient mode)
 		sortSelector = new JComboBox<>(EfficientSortMode.values());
 		sortSelector.setSelectedItem(config.efficientSortMode());
 		sortSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
@@ -323,7 +296,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		});
 		controlsPanel.add(sortSelector);
 
-		// Category selector (visible in Category Focus mode)
 		categorySelector = new JComboBox<>(CollectionLogCategory.values());
 		categorySelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
 		categorySelector.setVisible(false);
@@ -336,7 +308,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		});
 		controlsPanel.add(categorySelector);
 
-		// Search field (visible in Search mode)
 		searchField = new JTextField();
 		searchField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
 		searchField.setVisible(false);
@@ -367,7 +338,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 		add(controlsPanel, BorderLayout.NORTH);
 
-		// CardLayout with preferred size based on visible card only (fixes scrollbar)
+		// === Content panel (center, CardLayout) ===
 		cardLayout = new CardLayout();
 		contentPanel = new JPanel(cardLayout)
 		{
@@ -390,22 +361,18 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		};
 		contentPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
-		// List view
 		listView = new JPanel(new BorderLayout());
 		listView.setBackground(ColorScheme.DARK_GRAY_COLOR);
-
 		listContainer = new JPanel();
 		listContainer.setLayout(new BoxLayout(listContainer, BoxLayout.Y_AXIS));
 		listContainer.setBackground(ColorScheme.DARK_GRAY_COLOR);
 		listView.add(listContainer, BorderLayout.NORTH);
 
-		// Detail view
 		detailView = new JPanel(new BorderLayout());
 		detailView.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
 		contentPanel.add(listView, "list");
 		contentPanel.add(detailView, "detail");
-
 		add(contentPanel, BorderLayout.CENTER);
 
 		// Mode controllers — populated once, dispatched from rebuild()
@@ -494,7 +461,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 				}
 
 				// Save expanded category names before clearing
-				java.util.Set<String> expandedCategories = new java.util.HashSet<>();
+				Set<String> expandedCategories = new HashSet<>();
 				for (Component comp : listContainer.getComponents())
 				{
 					if (comp instanceof CategorySummaryPanel)
@@ -625,65 +592,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	@Override
 	public JPanel createQuickGuidePanel(ScoredItem topItem)
 	{
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBackground(new Color(30, 50, 30));
-		panel.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(80, 200, 80), 1),
-			BorderFactory.createEmptyBorder(6, 6, 6, 6)
-		));
-		panel.setAlignmentX(LEFT_ALIGNMENT);
-		panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-
-		JLabel titleLabel = new JLabel("<html><b>Top Pick: " + topItem.getSource().getName() + "</b></html>");
-		titleLabel.setFont(FontManager.getRunescapeBoldFont());
-		titleLabel.setForeground(new Color(255, 200, 0));
-		titleLabel.setAlignmentX(LEFT_ALIGNMENT);
-		panel.add(titleLabel);
-
-		String reasoning = topItem.getReasoning();
-		if (reasoning != null && !reasoning.isEmpty())
-		{
-			JLabel reasonLabel = new JLabel("<html>" + reasoning + "</html>");
-			reasonLabel.setFont(FontManager.getRunescapeSmallFont());
-			reasonLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-			reasonLabel.setAlignmentX(LEFT_ALIGNMENT);
-			panel.add(reasonLabel);
-		}
-
-		panel.add(Box.createRigidArea(new Dimension(0, 4)));
-
-		boolean isGuidingThis = guidanceActive && guidedSource != null
-			&& guidedSource.getName().equals(topItem.getSource().getName());
-
-		JButton guideButton = new JButton(isGuidingThis ? "Stop Guidance" : "Guide Me");
-		guideButton.setBackground(isGuidingThis ? STOP_GUIDANCE_COLOR : GUIDE_ME_COLOR);
-		guideButton.setForeground(Color.WHITE);
-		guideButton.setAlignmentX(LEFT_ALIGNMENT);
-		guideButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
-		guideButton.addActionListener(e ->
-		{
-			if (guideButton.getText().equals("Stop Guidance"))
-			{
-				guidanceDeactivator.run();
-				setGuidanceState(false, null);
-				guideButton.setText("Guide Me");
-				guideButton.setBackground(GUIDE_ME_COLOR);
-			}
-			else
-			{
-				guidanceActivator.accept(topItem.getSource());
-				setGuidanceState(true, topItem.getSource());
-				guideButton.setText("Stop Guidance");
-				guideButton.setBackground(STOP_GUIDANCE_COLOR);
-			}
-		});
-		panel.add(guideButton);
-
-		topPickGuideButton = guideButton;
-		topPickSource = topItem.getSource();
-
-		return panel;
+		return quickGuidePanelView.create(topItem, guidanceActive, guidedSource);
 	}
 
 	public void setGuidanceState(boolean active, CollectionLogSource source)
@@ -698,17 +607,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		{
 			guidanceBannerView.hideGuidance();
 		}
-		// Sync top pick button with current guidance state (EDT-safe via invokeLater)
-		SwingUtilities.invokeLater(() ->
-		{
-			if (topPickGuideButton != null && topPickSource != null)
-			{
-				boolean isGuidingTopPick = active && source != null
-					&& source.getName().equals(topPickSource.getName());
-				topPickGuideButton.setText(isGuidingTopPick ? "Stop Guidance" : "Guide Me");
-				topPickGuideButton.setBackground(isGuidingTopPick ? STOP_GUIDANCE_COLOR : GUIDE_ME_COLOR);
-			}
-		});
+		quickGuidePanelView.syncGuidanceState(active, source);
 	}
 
 	public void showClueGuidance(CollectionLogSource source)
