@@ -36,7 +36,6 @@ import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.RequirementsChecker;
-import com.collectionloghelper.data.SlayerCreatureDatabase;
 import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
@@ -50,26 +49,28 @@ import com.collectionloghelper.ui.mode.PanelShellContext;
 import com.collectionloghelper.ui.mode.PetHuntModeController;
 import com.collectionloghelper.ui.mode.SearchModeController;
 import com.collectionloghelper.ui.mode.StatisticsModeController;
+import com.collectionloghelper.ui.widget.ClueSummaryView;
+import com.collectionloghelper.ui.widget.GuidanceBannerView;
+import com.collectionloghelper.ui.widget.QuickGuidePanelView;
+import com.collectionloghelper.ui.widget.SlayerStrategyView;
+import com.collectionloghelper.ui.widget.StepProgressView;
+import com.collectionloghelper.ui.widget.SyncStatusView;
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
-import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -82,7 +83,6 @@ import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import net.runelite.client.game.ItemManager;
-import net.runelite.client.util.AsyncBufferedImage;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.PluginPanel;
@@ -90,11 +90,6 @@ import net.runelite.client.util.SwingUtil;
 
 public class CollectionLogHelperPanel extends PluginPanel implements PanelShellContext
 {
-	private static final Color GUIDE_ME_COLOR = new Color(30, 120, 30);
-	private static final Color STOP_GUIDANCE_COLOR = new Color(140, 30, 30);
-	private static final Color SYNC_NOT_SYNCED_COLOR = new Color(230, 180, 50);
-	private static final Color SYNC_SYNCING_COLOR = new Color(0, 200, 200);
-	private static final Color SYNC_SYNCED_COLOR = new Color(50, 200, 50);
 
 	public enum Mode
 	{
@@ -125,9 +120,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		SYNCED
 	}
 
-	private static final Color DATA_WARNING_COLOR = new Color(220, 50, 50);
-	private static final Color CLUE_SUMMARY_COLOR = new Color(200, 170, 50);
-	private static final Color SLAYER_TASK_COLOR = new Color(180, 80, 220);
 
 	private final CollectionLogHelperConfig config;
 	private final DropRateDatabase database;
@@ -136,20 +128,13 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final ClueCompletionEstimator clueEstimator;
 	private final ItemManager itemManager;
 	private final RequirementsChecker requirementsChecker;
-	private final DataSyncState dataSyncState;
-	private final SlayerTaskState slayerTaskState;
-	private final SlayerStrategyCalculator slayerStrategyCalculator;
-	private final PlayerInventoryState inventoryState;
-	private final PlayerBankState bankState;
 	private final Consumer<CollectionLogSource> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Consumer<AfkFilter> afkFilterUpdater;
 	private final Consumer<EfficientSortMode> sortModeUpdater;
 
-	private final JLabel syncStatusLabel;
-	private final JLabel dataSyncWarningLabel;
-	private final JLabel clueSummaryLabel;
-	private final JLabel slayerTaskLabel;
+	private final SyncStatusView syncStatusView;
+	private final ClueSummaryView clueSummaryView;
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<AfkFilter> afkFilterSelector;
@@ -164,24 +149,10 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final JPanel listView;
 	private final JPanel detailView;
 
-	private final JPanel clueGuidanceBanner;
-	private final JLabel clueGuidanceLabel;
-	private final JPanel slayerStrategyPanel;
-	private final JLabel slayerStrategyLabel;
-	private boolean slayerStrategyExpanded = false;
-
-	private final JLabel guidanceBannerLabel;
-	private final JLabel requirementsWarningLabel;
-	private final JPanel guidanceBannerPanel;
-
-	private final JPanel stepProgressPanel;
-	private final JLabel stepProgressLabel;
-	private final JPanel requiredItemsPanel;
-	private final JButton nextStepButton;
-	private final JButton skipStepButton;
-
-	private Runnable stepAdvancer;
-	private Runnable stepSkipper;
+	private final GuidanceBannerView guidanceBannerView;
+	private final SlayerStrategyView slayerStrategyView;
+	private final StepProgressView stepProgressView;
+	private final QuickGuidePanelView quickGuidePanelView;
 
 	private final Timer searchDebounceTimer;
 
@@ -193,8 +164,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private boolean rebuildPending = false;
 	private boolean guidanceActive = false;
 	private CollectionLogSource guidedSource = null;
-	private JButton topPickGuideButton = null;
-	private CollectionLogSource topPickSource = null;
 	private boolean inDetailView = false;
 
 	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
@@ -217,11 +186,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		this.clueEstimator = clueEstimator;
 		this.itemManager = itemManager;
 		this.requirementsChecker = requirementsChecker;
-		this.dataSyncState = dataSyncState;
-		this.slayerTaskState = slayerTaskState;
-		this.slayerStrategyCalculator = slayerStrategyCalculator;
-		this.inventoryState = inventoryState;
-		this.bankState = bankState;
 		this.guidanceActivator = guidanceActivator;
 		this.guidanceDeactivator = guidanceDeactivator;
 		this.afkFilterUpdater = afkFilterUpdater;
@@ -231,12 +195,11 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
 		setLayout(new BorderLayout());
 
-		// Top controls panel
+		// === Controls panel (north) ===
 		JPanel controlsPanel = new JPanel();
 		controlsPanel.setLayout(new BoxLayout(controlsPanel, BoxLayout.Y_AXIS));
 		controlsPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
-		// Completion header
 		completionLabel = new JLabel("Collection Log: 0/0 (0.0%)", SwingConstants.CENTER);
 		completionLabel.setFont(FontManager.getRunescapeBoldFont());
 		completionLabel.setForeground(Color.WHITE);
@@ -244,7 +207,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		completionLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0));
 		controlsPanel.add(completionLabel);
 
-		// Progress bar
 		completionProgressBar = new JProgressBar(0, 1699);
 		completionProgressBar.setValue(0);
 		completionProgressBar.setPreferredSize(new Dimension(Integer.MAX_VALUE, 6));
@@ -256,172 +218,34 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		completionProgressBar.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
 		controlsPanel.add(completionProgressBar);
 
-		// Sync status label
-		syncStatusLabel = new JLabel("Open Collection Log to sync", SwingConstants.CENTER);
-		syncStatusLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.ITALIC));
-		syncStatusLabel.setForeground(SYNC_NOT_SYNCED_COLOR);
-		syncStatusLabel.setAlignmentX(CENTER_ALIGNMENT);
-		syncStatusLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
-		syncStatusLabel.setToolTipText("Syncs automatically when you open the Collection Log in-game");
-		controlsPanel.add(syncStatusLabel);
+		syncStatusView = new SyncStatusView(dataSyncState);
+		syncStatusView.setAlignmentX(CENTER_ALIGNMENT);
+		syncStatusView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		controlsPanel.add(syncStatusView);
 
-		// Data sync warning banner (hidden when all data sources are synced)
-		dataSyncWarningLabel = new JLabel("", SwingConstants.CENTER);
-		dataSyncWarningLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
-		dataSyncWarningLabel.setForeground(DATA_WARNING_COLOR);
-		dataSyncWarningLabel.setAlignmentX(CENTER_ALIGNMENT);
-		dataSyncWarningLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
-		dataSyncWarningLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
-		dataSyncWarningLabel.setVisible(false);
-		controlsPanel.add(dataSyncWarningLabel);
+		clueSummaryView = new ClueSummaryView();
+		clueSummaryView.setAlignmentX(CENTER_ALIGNMENT);
+		clueSummaryView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		controlsPanel.add(clueSummaryView);
 
-		// Clue summary label (shows unopened caskets/containers from bank scan)
-		clueSummaryLabel = new JLabel("", SwingConstants.CENTER);
-		clueSummaryLabel.setFont(FontManager.getRunescapeSmallFont());
-		clueSummaryLabel.setForeground(CLUE_SUMMARY_COLOR);
-		clueSummaryLabel.setAlignmentX(CENTER_ALIGNMENT);
-		clueSummaryLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
-		clueSummaryLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
-		clueSummaryLabel.setVisible(false);
-		controlsPanel.add(clueSummaryLabel);
+		slayerStrategyView = new SlayerStrategyView(slayerTaskState, slayerStrategyCalculator);
+		slayerStrategyView.setAlignmentX(CENTER_ALIGNMENT);
+		slayerStrategyView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		controlsPanel.add(slayerStrategyView);
 
-		// Slayer task indicator
-		slayerTaskLabel = new JLabel("", SwingConstants.CENTER);
-		slayerTaskLabel.setFont(FontManager.getRunescapeSmallFont());
-		slayerTaskLabel.setForeground(SLAYER_TASK_COLOR);
-		slayerTaskLabel.setAlignmentX(CENTER_ALIGNMENT);
-		slayerTaskLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
-		slayerTaskLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
-		slayerTaskLabel.setVisible(false);
-		controlsPanel.add(slayerTaskLabel);
+		guidanceBannerView = new GuidanceBannerView(requirementsChecker);
+		guidanceBannerView.setAlignmentX(CENTER_ALIGNMENT);
+		guidanceBannerView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		controlsPanel.add(guidanceBannerView);
 
-		// Slayer strategy advisor panel (expandable, below task indicator)
-		slayerStrategyPanel = new JPanel();
-		slayerStrategyPanel.setLayout(new BoxLayout(slayerStrategyPanel, BoxLayout.Y_AXIS));
-		slayerStrategyPanel.setBackground(new Color(35, 25, 50));
-		slayerStrategyPanel.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(140, 60, 180), 1),
-			BorderFactory.createEmptyBorder(4, 6, 4, 6)
-		));
-		slayerStrategyPanel.setAlignmentX(CENTER_ALIGNMENT);
-		slayerStrategyPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-		slayerStrategyPanel.setVisible(false);
+		stepProgressView = new StepProgressView(itemManager, inventoryState, bankState);
+		stepProgressView.setAlignmentX(CENTER_ALIGNMENT);
+		controlsPanel.add(stepProgressView);
 
-		JButton strategyToggle = new JButton("\u25B6 Slayer Strategy");
-		strategyToggle.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
-		strategyToggle.setForeground(new Color(180, 80, 220));
-		strategyToggle.setBackground(new Color(35, 25, 50));
-		strategyToggle.setBorderPainted(false);
-		strategyToggle.setFocusPainted(false);
-		strategyToggle.setContentAreaFilled(false);
-		strategyToggle.setAlignmentX(LEFT_ALIGNMENT);
-		strategyToggle.setMaximumSize(new Dimension(Integer.MAX_VALUE, 18));
-		strategyToggle.addActionListener(e ->
-		{
-			slayerStrategyExpanded = !slayerStrategyExpanded;
-			strategyToggle.setText((slayerStrategyExpanded ? "\u25BC " : "\u25B6 ") + "Slayer Strategy");
-			updateSlayerStrategy();
-		});
-		slayerStrategyPanel.add(strategyToggle);
-
-		slayerStrategyLabel = new JLabel();
-		slayerStrategyLabel.setFont(FontManager.getRunescapeSmallFont());
-		slayerStrategyLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-		slayerStrategyLabel.setAlignmentX(LEFT_ALIGNMENT);
-		slayerStrategyLabel.setVisible(false);
-		slayerStrategyPanel.add(slayerStrategyLabel);
-
-		controlsPanel.add(slayerStrategyPanel);
-
-		// Active guidance banner (shows which source is being guided)
-		guidanceBannerPanel = new JPanel();
-		guidanceBannerPanel.setLayout(new BoxLayout(guidanceBannerPanel, BoxLayout.Y_AXIS));
-		guidanceBannerPanel.setBackground(new Color(25, 50, 25));
-		guidanceBannerPanel.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(80, 200, 80), 1),
-			BorderFactory.createEmptyBorder(3, 6, 3, 6)
-		));
-		guidanceBannerPanel.setAlignmentX(CENTER_ALIGNMENT);
-		guidanceBannerPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 48));
-		guidanceBannerPanel.setVisible(false);
-		guidanceBannerLabel = new JLabel();
-		guidanceBannerLabel.setFont(FontManager.getRunescapeSmallFont());
-		guidanceBannerLabel.setForeground(new Color(80, 200, 80));
-		guidanceBannerLabel.setAlignmentX(LEFT_ALIGNMENT);
-		guidanceBannerPanel.add(guidanceBannerLabel);
-		requirementsWarningLabel = new JLabel();
-		requirementsWarningLabel.setFont(FontManager.getRunescapeSmallFont());
-		requirementsWarningLabel.setForeground(new Color(255, 170, 0));
-		requirementsWarningLabel.setAlignmentX(LEFT_ALIGNMENT);
-		requirementsWarningLabel.setVisible(false);
-		guidanceBannerPanel.add(requirementsWarningLabel);
-		controlsPanel.add(guidanceBannerPanel);
-
-		// Step progress panel (for multi-step guidance sequences)
-		stepProgressPanel = new JPanel();
-		stepProgressPanel.setLayout(new BoxLayout(stepProgressPanel, BoxLayout.Y_AXIS));
-		stepProgressPanel.setBackground(new Color(25, 35, 55));
-		stepProgressPanel.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(80, 150, 220), 1),
-			BorderFactory.createEmptyBorder(4, 6, 4, 6)
-		));
-		stepProgressPanel.setAlignmentX(CENTER_ALIGNMENT);
-		stepProgressPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-		stepProgressPanel.setVisible(false);
-
-		stepProgressLabel = new JLabel();
-		stepProgressLabel.setFont(FontManager.getRunescapeSmallFont());
-		stepProgressLabel.setForeground(new Color(80, 180, 255));
-		stepProgressLabel.setAlignmentX(LEFT_ALIGNMENT);
-		stepProgressPanel.add(stepProgressLabel);
-
-		requiredItemsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 4, 2));
-		requiredItemsPanel.setBackground(new Color(25, 35, 55));
-		requiredItemsPanel.setAlignmentX(LEFT_ALIGNMENT);
-		requiredItemsPanel.setVisible(false);
-		stepProgressPanel.add(requiredItemsPanel);
-
-		JPanel stepButtonRow = new JPanel();
-		stepButtonRow.setLayout(new BoxLayout(stepButtonRow, BoxLayout.X_AXIS));
-		stepButtonRow.setBackground(new Color(25, 35, 55));
-		stepButtonRow.setAlignmentX(LEFT_ALIGNMENT);
-
-		nextStepButton = new JButton("Next Step");
-		nextStepButton.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
-		nextStepButton.setBackground(new Color(30, 100, 30));
-		nextStepButton.setForeground(Color.WHITE);
-		nextStepButton.setVisible(false);
-		nextStepButton.addActionListener(e ->
-		{
-			if (stepAdvancer != null)
-			{
-				stepAdvancer.run();
-			}
-		});
-		stepButtonRow.add(nextStepButton);
-
-		stepButtonRow.add(Box.createHorizontalStrut(4));
-
-		skipStepButton = new JButton("Skip");
-		skipStepButton.setFont(FontManager.getRunescapeSmallFont());
-		skipStepButton.setBackground(new Color(80, 80, 80));
-		skipStepButton.setForeground(Color.WHITE);
-		skipStepButton.addActionListener(e ->
-		{
-			if (stepSkipper != null)
-			{
-				stepSkipper.run();
-			}
-		});
-		stepButtonRow.add(skipStepButton);
-
-		stepProgressPanel.add(Box.createVerticalStrut(3));
-		stepProgressPanel.add(stepButtonRow);
-		controlsPanel.add(stepProgressPanel);
+		quickGuidePanelView = new QuickGuidePanelView(guidanceActivator, guidanceDeactivator);
 
 		controlsPanel.add(Box.createVerticalStrut(4));
 
-		// Mode selector
 		modeSelector = new JComboBox<>(Mode.values());
 		modeSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
 		modeSelector.addItemListener(e ->
@@ -439,7 +263,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		});
 		controlsPanel.add(modeSelector);
 
-		// AFK filter selector (visible in Efficient and Pet Hunt modes)
 		afkFilterSelector = new JComboBox<>(AfkFilter.values());
 		afkFilterSelector.setSelectedItem(config.afkFilter());
 		afkFilterSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
@@ -455,7 +278,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		});
 		controlsPanel.add(afkFilterSelector);
 
-		// Sort selector (visible in Efficient mode)
 		sortSelector = new JComboBox<>(EfficientSortMode.values());
 		sortSelector.setSelectedItem(config.efficientSortMode());
 		sortSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
@@ -474,7 +296,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		});
 		controlsPanel.add(sortSelector);
 
-		// Category selector (visible in Category Focus mode)
 		categorySelector = new JComboBox<>(CollectionLogCategory.values());
 		categorySelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
 		categorySelector.setVisible(false);
@@ -487,7 +308,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		});
 		controlsPanel.add(categorySelector);
 
-		// Search field (visible in Search mode)
 		searchField = new JTextField();
 		searchField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
 		searchField.setVisible(false);
@@ -516,23 +336,9 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		});
 		controlsPanel.add(searchField);
 
-		// Clue guidance banner (hidden by default)
-		clueGuidanceBanner = new JPanel(new BorderLayout());
-		clueGuidanceBanner.setBackground(new Color(40, 40, 60));
-		clueGuidanceBanner.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(100, 100, 200), 1),
-			BorderFactory.createEmptyBorder(6, 6, 6, 6)
-		));
-		clueGuidanceLabel = new JLabel();
-		clueGuidanceLabel.setForeground(Color.WHITE);
-		clueGuidanceLabel.setFont(FontManager.getRunescapeSmallFont());
-		clueGuidanceBanner.add(clueGuidanceLabel, BorderLayout.CENTER);
-		clueGuidanceBanner.setVisible(false);
-		controlsPanel.add(clueGuidanceBanner);
-
 		add(controlsPanel, BorderLayout.NORTH);
 
-		// CardLayout with preferred size based on visible card only (fixes scrollbar)
+		// === Content panel (center, CardLayout) ===
 		cardLayout = new CardLayout();
 		contentPanel = new JPanel(cardLayout)
 		{
@@ -555,22 +361,18 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		};
 		contentPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
-		// List view
 		listView = new JPanel(new BorderLayout());
 		listView.setBackground(ColorScheme.DARK_GRAY_COLOR);
-
 		listContainer = new JPanel();
 		listContainer.setLayout(new BoxLayout(listContainer, BoxLayout.Y_AXIS));
 		listContainer.setBackground(ColorScheme.DARK_GRAY_COLOR);
 		listView.add(listContainer, BorderLayout.NORTH);
 
-		// Detail view
 		detailView = new JPanel(new BorderLayout());
 		detailView.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
 		contentPanel.add(listView, "list");
 		contentPanel.add(detailView, "detail");
-
 		add(contentPanel, BorderLayout.CENTER);
 
 		// Mode controllers — populated once, dispatched from rebuild()
@@ -615,190 +417,20 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		completionProgressBar.setValue(obtained);
 	}
 
-	private void updateSlayerTaskLabel()
-	{
-		if (slayerTaskState.isTaskActive())
-		{
-			slayerTaskLabel.setText("Slayer: " + slayerTaskState.getCreatureName()
-				+ " (" + slayerTaskState.getRemaining() + " remaining)");
-			slayerTaskLabel.setVisible(true);
-			slayerStrategyPanel.setVisible(true);
-		}
-		else
-		{
-			slayerTaskLabel.setVisible(false);
-			slayerStrategyPanel.setVisible(false);
-		}
-		updateSlayerStrategy();
-	}
-
-	private void updateSlayerStrategy()
-	{
-		if (!slayerStrategyPanel.isVisible())
-		{
-			slayerStrategyLabel.setVisible(false);
-			slayerStrategyPanel.revalidate();
-			return;
-		}
-
-		String recommended = slayerStrategyCalculator.getRecommendedMaster();
-
-		if (!slayerStrategyExpanded)
-		{
-			// Show a one-line summary when collapsed so users know content exists
-			if (recommended != null)
-			{
-				slayerStrategyLabel.setText("<html><font color='#b5b5b3'>Best: " + recommended + "</font></html>");
-				slayerStrategyLabel.setVisible(true);
-			}
-			else
-			{
-				slayerStrategyLabel.setVisible(false);
-			}
-			slayerStrategyPanel.revalidate();
-			return;
-		}
-
-		StringBuilder sb = new StringBuilder("<html>");
-
-		// Current task assessment
-		if (slayerTaskState.isTaskActive())
-		{
-			String creature = slayerTaskState.getCreatureName();
-			List<String> usefulSources = slayerStrategyCalculator.getUsefulSourcesForCreature(creature);
-			int missingItems = slayerStrategyCalculator.getMissingItemsForCreature(creature);
-			if (!usefulSources.isEmpty())
-			{
-				sb.append("<b>Current task:</b> ");
-				sb.append(String.join(", ", usefulSources));
-				sb.append(" (").append(missingItems).append(" missing)");
-			}
-			else
-			{
-				List<String> allSources = SlayerCreatureDatabase.getSourcesForCreature(creature);
-				if (!allSources.isEmpty())
-				{
-					sb.append("<b>Current task:</b> All items obtained");
-				}
-				else
-				{
-					sb.append("<b>Current task:</b> No boss variants");
-				}
-			}
-			sb.append("<br>");
-		}
-
-		// Recommended master
-		if (recommended != null)
-		{
-			sb.append("<b>Best master:</b> ").append(recommended).append("<br>");
-		}
-
-		// Recommended blocks
-		if (recommended != null)
-		{
-			List<String> blocks = slayerStrategyCalculator.getRecommendedBlockList(recommended);
-			if (!blocks.isEmpty())
-			{
-				sb.append("<b>Block:</b> ").append(String.join(", ", blocks));
-			}
-		}
-
-		sb.append("</html>");
-		slayerStrategyLabel.setText(sb.toString());
-		slayerStrategyLabel.setVisible(true);
-		slayerStrategyPanel.revalidate();
-	}
 
 	public void updateSyncStatus(SyncState state, int itemCount)
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			Font smallFont = FontManager.getRunescapeSmallFont();
-			switch (state)
-			{
-				case NOT_SYNCED:
-					syncStatusLabel.setText("Open Collection Log to sync");
-					syncStatusLabel.setFont(smallFont.deriveFont(Font.ITALIC));
-					syncStatusLabel.setForeground(SYNC_NOT_SYNCED_COLOR);
-					break;
-				case SYNCING:
-					syncStatusLabel.setText("Syncing...");
-					syncStatusLabel.setFont(smallFont.deriveFont(Font.ITALIC));
-					syncStatusLabel.setForeground(SYNC_SYNCING_COLOR);
-					break;
-				case SYNCED:
-					syncStatusLabel.setText("Synced (" + itemCount + " items)");
-					syncStatusLabel.setFont(smallFont.deriveFont(Font.PLAIN));
-					syncStatusLabel.setForeground(SYNC_SYNCED_COLOR);
-					break;
-			}
-		});
+		syncStatusView.updateSyncStatus(state, itemCount);
 	}
 
 	public void updateDataSyncWarning()
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			if (dataSyncState.isFullySynced())
-			{
-				dataSyncWarningLabel.setVisible(false);
-			}
-			else
-			{
-				StringBuilder text = new StringBuilder("<html><center>");
-				if (!dataSyncState.isCollectionLogSynced() && !dataSyncState.isBankScanned())
-				{
-					text.append("Open Collection Log & Bank<br>for accurate guidance");
-				}
-				else if (!dataSyncState.isCollectionLogSynced())
-				{
-					text.append("Open Collection Log<br>for accurate guidance");
-				}
-				else
-				{
-					text.append("Open Bank to scan items<br>for accurate guidance");
-				}
-				text.append("</center></html>");
-				dataSyncWarningLabel.setText(text.toString());
-				dataSyncWarningLabel.setVisible(true);
-			}
-			revalidate();
-		});
+		syncStatusView.updateDataSyncWarning();
 	}
 
 	public void updateClueSummary(PlayerBankState bankState)
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			String casketSummary = bankState.getCasketSummary();
-			String containerSummary = bankState.getContainerSummary();
-
-			if (casketSummary == null && containerSummary == null)
-			{
-				clueSummaryLabel.setVisible(false);
-			}
-			else
-			{
-				StringBuilder text = new StringBuilder("<html><center>");
-				if (casketSummary != null)
-				{
-					text.append(casketSummary);
-				}
-				if (containerSummary != null)
-				{
-					if (casketSummary != null)
-					{
-						text.append("<br>");
-					}
-					text.append(containerSummary);
-				}
-				text.append("</center></html>");
-				clueSummaryLabel.setText(text.toString());
-				clueSummaryLabel.setVisible(true);
-			}
-			revalidate();
-		});
+		clueSummaryView.updateFromBankState(bankState);
 	}
 
 	public void shutDown()
@@ -829,7 +461,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 				}
 
 				// Save expanded category names before clearing
-				java.util.Set<String> expandedCategories = new java.util.HashSet<>();
+				Set<String> expandedCategories = new HashSet<>();
 				for (Component comp : listContainer.getComponents())
 				{
 					if (comp instanceof CategorySummaryPanel)
@@ -844,7 +476,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 				SwingUtil.fastRemoveAll(listContainer);
 				updateCompletionHeader();
-				updateSlayerTaskLabel();
+				slayerStrategyView.refresh();
 
 				modeDispatcher.buildView(currentMode);
 
@@ -960,124 +592,27 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	@Override
 	public JPanel createQuickGuidePanel(ScoredItem topItem)
 	{
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBackground(new Color(30, 50, 30));
-		panel.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(80, 200, 80), 1),
-			BorderFactory.createEmptyBorder(6, 6, 6, 6)
-		));
-		panel.setAlignmentX(LEFT_ALIGNMENT);
-		panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-
-		JLabel titleLabel = new JLabel("<html><b>Top Pick: " + topItem.getSource().getName() + "</b></html>");
-		titleLabel.setFont(FontManager.getRunescapeBoldFont());
-		titleLabel.setForeground(new Color(255, 200, 0));
-		titleLabel.setAlignmentX(LEFT_ALIGNMENT);
-		panel.add(titleLabel);
-
-		String reasoning = topItem.getReasoning();
-		if (reasoning != null && !reasoning.isEmpty())
-		{
-			JLabel reasonLabel = new JLabel("<html>" + reasoning + "</html>");
-			reasonLabel.setFont(FontManager.getRunescapeSmallFont());
-			reasonLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-			reasonLabel.setAlignmentX(LEFT_ALIGNMENT);
-			panel.add(reasonLabel);
-		}
-
-		panel.add(Box.createRigidArea(new Dimension(0, 4)));
-
-		boolean isGuidingThis = guidanceActive && guidedSource != null
-			&& guidedSource.getName().equals(topItem.getSource().getName());
-
-		JButton guideButton = new JButton(isGuidingThis ? "Stop Guidance" : "Guide Me");
-		guideButton.setBackground(isGuidingThis ? STOP_GUIDANCE_COLOR : GUIDE_ME_COLOR);
-		guideButton.setForeground(Color.WHITE);
-		guideButton.setAlignmentX(LEFT_ALIGNMENT);
-		guideButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
-		guideButton.addActionListener(e ->
-		{
-			if (guideButton.getText().equals("Stop Guidance"))
-			{
-				guidanceDeactivator.run();
-				setGuidanceState(false, null);
-				guideButton.setText("Guide Me");
-				guideButton.setBackground(GUIDE_ME_COLOR);
-			}
-			else
-			{
-				guidanceActivator.accept(topItem.getSource());
-				setGuidanceState(true, topItem.getSource());
-				guideButton.setText("Stop Guidance");
-				guideButton.setBackground(STOP_GUIDANCE_COLOR);
-			}
-		});
-		panel.add(guideButton);
-
-		topPickGuideButton = guideButton;
-		topPickSource = topItem.getSource();
-
-		return panel;
+		return quickGuidePanelView.create(topItem, guidanceActive, guidedSource);
 	}
 
 	public void setGuidanceState(boolean active, CollectionLogSource source)
 	{
 		guidanceActive = active;
 		guidedSource = source;
-		SwingUtilities.invokeLater(() ->
+		if (active && source != null)
 		{
-			if (active && source != null)
-			{
-				guidanceBannerLabel.setText("Guiding: " + source.getName());
-				guidanceBannerPanel.setVisible(true);
-
-				// Show unmet requirements warning if applicable
-				java.util.List<String> unmet = requirementsChecker.getUnmetRequirements(source.getName());
-				if (!unmet.isEmpty())
-				{
-					String warningText = "\u26A0 Requires: " + String.join(", ", unmet);
-					requirementsWarningLabel.setText("<html>" + warningText + "</html>");
-					requirementsWarningLabel.setVisible(true);
-				}
-				else
-				{
-					requirementsWarningLabel.setVisible(false);
-				}
-			}
-			else
-			{
-				guidanceBannerPanel.setVisible(false);
-				requirementsWarningLabel.setVisible(false);
-			}
-			guidanceBannerPanel.revalidate();
-			if (guidanceBannerPanel.getParent() != null)
-			{
-				guidanceBannerPanel.getParent().revalidate();
-			}
-
-			// Sync top pick button with current guidance state
-			if (topPickGuideButton != null && topPickSource != null)
-			{
-				boolean isGuidingTopPick = active && source != null
-					&& source.getName().equals(topPickSource.getName());
-				topPickGuideButton.setText(isGuidingTopPick ? "Stop Guidance" : "Guide Me");
-				topPickGuideButton.setBackground(isGuidingTopPick ? STOP_GUIDANCE_COLOR : GUIDE_ME_COLOR);
-			}
-		});
+			guidanceBannerView.showGuidance(source);
+		}
+		else
+		{
+			guidanceBannerView.hideGuidance();
+		}
+		quickGuidePanelView.syncGuidanceState(active, source);
 	}
 
 	public void showClueGuidance(CollectionLogSource source)
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			clueGuidanceLabel.setText(
-				"<html><b>Guidance: " + source.getName() + "</b><br>"
-				+ "Use the RuneLite <b>Clue Scroll</b> plugin for step-by-step guidance</html>");
-			clueGuidanceBanner.setVisible(true);
-			clueGuidanceBanner.revalidate();
-			clueGuidanceBanner.getParent().revalidate();
-		});
+		guidanceBannerView.showClueGuidance(source);
 	}
 
 	/**
@@ -1086,149 +621,24 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	public void updateStepProgress(int current, int total, String description, boolean isManual,
 		List<Integer> requiredItemIds)
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			stepProgressLabel.setText(
-				"<html>Step " + current + "/" + total + ": " + description + "</html>");
-			nextStepButton.setVisible(isManual);
-			updateRequiredItemDisplay(requiredItemIds);
-			stepProgressPanel.setVisible(true);
-			stepProgressPanel.revalidate();
-			if (stepProgressPanel.getParent() != null)
-			{
-				stepProgressPanel.getParent().revalidate();
-			}
-		});
+		stepProgressView.showStep(current, total, description, isManual, requiredItemIds);
 	}
 
-	private static final Color ITEM_STATUS_GREEN = new Color(40, 180, 40);
-	private static final Color ITEM_STATUS_YELLOW = new Color(200, 180, 40);
-	private static final Color ITEM_STATUS_RED = new Color(200, 40, 40);
-
-	/**
-	 * Updates the required items display with item sprites and colored status borders.
-	 * Green border = item is in inventory or equipped (ready to use).
-	 * Yellow border = item is in the bank but not on the player.
-	 * Red border = item is not found anywhere (not in inventory, equipment, or bank).
-	 */
-	private void updateRequiredItemDisplay(List<Integer> requiredItemIds)
-	{
-		requiredItemsPanel.removeAll();
-
-		if (requiredItemIds == null || requiredItemIds.isEmpty())
-		{
-			requiredItemsPanel.setVisible(false);
-			return;
-		}
-
-		JLabel headerLabel = new JLabel("Required:");
-		headerLabel.setFont(FontManager.getRunescapeSmallFont());
-		headerLabel.setForeground(new Color(180, 180, 180));
-		requiredItemsPanel.add(headerLabel);
-
-		for (int itemId : requiredItemIds)
-		{
-			boolean inInventory = inventoryState.hasItem(itemId);
-			boolean equipped = inventoryState.hasEquippedItem(itemId);
-			boolean inBank = bankState.hasItem(itemId);
-
-			Color borderColor;
-			String statusText;
-			if (inInventory || equipped)
-			{
-				borderColor = ITEM_STATUS_GREEN;
-				statusText = equipped && !inInventory ? " (equipped)" : " (in inventory)";
-			}
-			else if (inBank)
-			{
-				borderColor = ITEM_STATUS_YELLOW;
-				statusText = " (in bank)";
-			}
-			else
-			{
-				borderColor = ITEM_STATUS_RED;
-				statusText = " (MISSING)";
-			}
-
-			JLabel itemLabel = new JLabel();
-			itemLabel.setPreferredSize(new Dimension(32, 32));
-			itemLabel.setBorder(BorderFactory.createLineBorder(borderColor, 2));
-			itemLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			itemLabel.setVerticalAlignment(SwingConstants.CENTER);
-
-			// Load item sprite asynchronously
-			AsyncBufferedImage asyncImage = itemManager.getImage(itemId);
-			asyncImage.onLoaded(() ->
-			{
-				BufferedImage scaled = scaleImage(asyncImage, 28, 28);
-				itemLabel.setIcon(new ImageIcon(scaled));
-				itemLabel.revalidate();
-				itemLabel.repaint();
-			});
-			// Set initial image (may be placeholder)
-			BufferedImage scaled = scaleImage(asyncImage, 28, 28);
-			itemLabel.setIcon(new ImageIcon(scaled));
-
-			itemLabel.setToolTipText(itemManager.getItemComposition(itemId).getName() + statusText);
-
-			requiredItemsPanel.add(itemLabel);
-		}
-
-		requiredItemsPanel.setVisible(true);
-		requiredItemsPanel.revalidate();
-		requiredItemsPanel.repaint();
-	}
-
-	/**
-	 * Scales a BufferedImage to the given dimensions.
-	 */
-	private static BufferedImage scaleImage(BufferedImage source, int width, int height)
-	{
-		BufferedImage scaled = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = scaled.createGraphics();
-		g.drawImage(source, 0, 0, width, height, null);
-		g.dispose();
-		return scaled;
-	}
-
-	/**
-	 * Hides the step progress banner.
-	 */
+	/** Hides the step progress banner. */
 	public void hideStepProgress()
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			requiredItemsPanel.removeAll();
-			requiredItemsPanel.setVisible(false);
-			stepProgressPanel.setVisible(false);
-			stepProgressPanel.revalidate();
-			if (stepProgressPanel.getParent() != null)
-			{
-				stepProgressPanel.getParent().revalidate();
-			}
-		});
+		stepProgressView.hide();
 	}
 
-	/**
-	 * Sets callbacks for step advance/skip buttons.
-	 */
+	/** Sets callbacks for step advance/skip buttons. */
 	public void setStepCallbacks(Runnable advancer, Runnable skipper)
 	{
-		this.stepAdvancer = advancer;
-		this.stepSkipper = skipper;
+		stepProgressView.setCallbacks(advancer, skipper);
 	}
 
 	public void hideClueGuidance()
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			clueGuidanceBanner.setVisible(false);
-			clueGuidanceBanner.revalidate();
-			if (clueGuidanceBanner.getParent() != null)
-			{
-				clueGuidanceBanner.getParent().revalidate();
-			}
-		});
+		guidanceBannerView.hideClueGuidance();
 	}
 
 	@Override
