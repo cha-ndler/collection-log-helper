@@ -50,6 +50,7 @@ import com.collectionloghelper.ui.mode.PanelShellContext;
 import com.collectionloghelper.ui.mode.PetHuntModeController;
 import com.collectionloghelper.ui.mode.SearchModeController;
 import com.collectionloghelper.ui.mode.StatisticsModeController;
+import com.collectionloghelper.ui.widget.SyncStatusView;
 import java.util.EnumMap;
 import java.util.Map;
 import java.awt.BorderLayout;
@@ -92,9 +93,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 {
 	private static final Color GUIDE_ME_COLOR = new Color(30, 120, 30);
 	private static final Color STOP_GUIDANCE_COLOR = new Color(140, 30, 30);
-	private static final Color SYNC_NOT_SYNCED_COLOR = new Color(230, 180, 50);
-	private static final Color SYNC_SYNCING_COLOR = new Color(0, 200, 200);
-	private static final Color SYNC_SYNCED_COLOR = new Color(50, 200, 50);
 
 	public enum Mode
 	{
@@ -125,7 +123,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		SYNCED
 	}
 
-	private static final Color DATA_WARNING_COLOR = new Color(220, 50, 50);
 	private static final Color CLUE_SUMMARY_COLOR = new Color(200, 170, 50);
 	private static final Color SLAYER_TASK_COLOR = new Color(180, 80, 220);
 
@@ -146,8 +143,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final Consumer<AfkFilter> afkFilterUpdater;
 	private final Consumer<EfficientSortMode> sortModeUpdater;
 
-	private final JLabel syncStatusLabel;
-	private final JLabel dataSyncWarningLabel;
+	private final SyncStatusView syncStatusView;
 	private final JLabel clueSummaryLabel;
 	private final JLabel slayerTaskLabel;
 
@@ -256,24 +252,11 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		completionProgressBar.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
 		controlsPanel.add(completionProgressBar);
 
-		// Sync status label
-		syncStatusLabel = new JLabel("Open Collection Log to sync", SwingConstants.CENTER);
-		syncStatusLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.ITALIC));
-		syncStatusLabel.setForeground(SYNC_NOT_SYNCED_COLOR);
-		syncStatusLabel.setAlignmentX(CENTER_ALIGNMENT);
-		syncStatusLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
-		syncStatusLabel.setToolTipText("Syncs automatically when you open the Collection Log in-game");
-		controlsPanel.add(syncStatusLabel);
-
-		// Data sync warning banner (hidden when all data sources are synced)
-		dataSyncWarningLabel = new JLabel("", SwingConstants.CENTER);
-		dataSyncWarningLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
-		dataSyncWarningLabel.setForeground(DATA_WARNING_COLOR);
-		dataSyncWarningLabel.setAlignmentX(CENTER_ALIGNMENT);
-		dataSyncWarningLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
-		dataSyncWarningLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
-		dataSyncWarningLabel.setVisible(false);
-		controlsPanel.add(dataSyncWarningLabel);
+		// Sync status + data-sync warning (extracted to SyncStatusView)
+		syncStatusView = new SyncStatusView(dataSyncState);
+		syncStatusView.setAlignmentX(CENTER_ALIGNMENT);
+		syncStatusView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		controlsPanel.add(syncStatusView);
 
 		// Clue summary label (shows unopened caskets/containers from bank scan)
 		clueSummaryLabel = new JLabel("", SwingConstants.CENTER);
@@ -712,59 +695,12 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	public void updateSyncStatus(SyncState state, int itemCount)
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			Font smallFont = FontManager.getRunescapeSmallFont();
-			switch (state)
-			{
-				case NOT_SYNCED:
-					syncStatusLabel.setText("Open Collection Log to sync");
-					syncStatusLabel.setFont(smallFont.deriveFont(Font.ITALIC));
-					syncStatusLabel.setForeground(SYNC_NOT_SYNCED_COLOR);
-					break;
-				case SYNCING:
-					syncStatusLabel.setText("Syncing...");
-					syncStatusLabel.setFont(smallFont.deriveFont(Font.ITALIC));
-					syncStatusLabel.setForeground(SYNC_SYNCING_COLOR);
-					break;
-				case SYNCED:
-					syncStatusLabel.setText("Synced (" + itemCount + " items)");
-					syncStatusLabel.setFont(smallFont.deriveFont(Font.PLAIN));
-					syncStatusLabel.setForeground(SYNC_SYNCED_COLOR);
-					break;
-			}
-		});
+		syncStatusView.updateSyncStatus(state, itemCount);
 	}
 
 	public void updateDataSyncWarning()
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			if (dataSyncState.isFullySynced())
-			{
-				dataSyncWarningLabel.setVisible(false);
-			}
-			else
-			{
-				StringBuilder text = new StringBuilder("<html><center>");
-				if (!dataSyncState.isCollectionLogSynced() && !dataSyncState.isBankScanned())
-				{
-					text.append("Open Collection Log & Bank<br>for accurate guidance");
-				}
-				else if (!dataSyncState.isCollectionLogSynced())
-				{
-					text.append("Open Collection Log<br>for accurate guidance");
-				}
-				else
-				{
-					text.append("Open Bank to scan items<br>for accurate guidance");
-				}
-				text.append("</center></html>");
-				dataSyncWarningLabel.setText(text.toString());
-				dataSyncWarningLabel.setVisible(true);
-			}
-			revalidate();
-		});
+		syncStatusView.updateDataSyncWarning();
 	}
 
 	public void updateClueSummary(PlayerBankState bankState)
