@@ -51,6 +51,7 @@ import com.collectionloghelper.ui.mode.PetHuntModeController;
 import com.collectionloghelper.ui.mode.SearchModeController;
 import com.collectionloghelper.ui.mode.StatisticsModeController;
 import com.collectionloghelper.ui.widget.ClueSummaryView;
+import com.collectionloghelper.ui.widget.GuidanceBannerView;
 import com.collectionloghelper.ui.widget.SyncStatusView;
 import java.util.EnumMap;
 import java.util.Map;
@@ -160,15 +161,10 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final JPanel listView;
 	private final JPanel detailView;
 
-	private final JPanel clueGuidanceBanner;
-	private final JLabel clueGuidanceLabel;
+	private final GuidanceBannerView guidanceBannerView;
 	private final JPanel slayerStrategyPanel;
 	private final JLabel slayerStrategyLabel;
 	private boolean slayerStrategyExpanded = false;
-
-	private final JLabel guidanceBannerLabel;
-	private final JLabel requirementsWarningLabel;
-	private final JPanel guidanceBannerPanel;
 
 	private final JPanel stepProgressPanel;
 	private final JLabel stepProgressLabel;
@@ -312,29 +308,11 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 		controlsPanel.add(slayerStrategyPanel);
 
-		// Active guidance banner (shows which source is being guided)
-		guidanceBannerPanel = new JPanel();
-		guidanceBannerPanel.setLayout(new BoxLayout(guidanceBannerPanel, BoxLayout.Y_AXIS));
-		guidanceBannerPanel.setBackground(new Color(25, 50, 25));
-		guidanceBannerPanel.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(80, 200, 80), 1),
-			BorderFactory.createEmptyBorder(3, 6, 3, 6)
-		));
-		guidanceBannerPanel.setAlignmentX(CENTER_ALIGNMENT);
-		guidanceBannerPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 48));
-		guidanceBannerPanel.setVisible(false);
-		guidanceBannerLabel = new JLabel();
-		guidanceBannerLabel.setFont(FontManager.getRunescapeSmallFont());
-		guidanceBannerLabel.setForeground(new Color(80, 200, 80));
-		guidanceBannerLabel.setAlignmentX(LEFT_ALIGNMENT);
-		guidanceBannerPanel.add(guidanceBannerLabel);
-		requirementsWarningLabel = new JLabel();
-		requirementsWarningLabel.setFont(FontManager.getRunescapeSmallFont());
-		requirementsWarningLabel.setForeground(new Color(255, 170, 0));
-		requirementsWarningLabel.setAlignmentX(LEFT_ALIGNMENT);
-		requirementsWarningLabel.setVisible(false);
-		guidanceBannerPanel.add(requirementsWarningLabel);
-		controlsPanel.add(guidanceBannerPanel);
+		// Guidance banners (active + clue) extracted to GuidanceBannerView
+		guidanceBannerView = new GuidanceBannerView(requirementsChecker);
+		guidanceBannerView.setAlignmentX(CENTER_ALIGNMENT);
+		guidanceBannerView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		controlsPanel.add(guidanceBannerView);
 
 		// Step progress panel (for multi-step guidance sequences)
 		stepProgressPanel = new JPanel();
@@ -494,20 +472,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			}
 		});
 		controlsPanel.add(searchField);
-
-		// Clue guidance banner (hidden by default)
-		clueGuidanceBanner = new JPanel(new BorderLayout());
-		clueGuidanceBanner.setBackground(new Color(40, 40, 60));
-		clueGuidanceBanner.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(100, 100, 200), 1),
-			BorderFactory.createEmptyBorder(6, 6, 6, 6)
-		));
-		clueGuidanceLabel = new JLabel();
-		clueGuidanceLabel.setForeground(Color.WHITE);
-		clueGuidanceLabel.setFont(FontManager.getRunescapeSmallFont());
-		clueGuidanceBanner.add(clueGuidanceLabel, BorderLayout.CENTER);
-		clueGuidanceBanner.setVisible(false);
-		controlsPanel.add(clueGuidanceBanner);
 
 		add(controlsPanel, BorderLayout.NORTH);
 
@@ -928,38 +892,17 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	{
 		guidanceActive = active;
 		guidedSource = source;
+		if (active && source != null)
+		{
+			guidanceBannerView.showGuidance(source);
+		}
+		else
+		{
+			guidanceBannerView.hideGuidance();
+		}
+		// Sync top pick button with current guidance state (EDT-safe via invokeLater)
 		SwingUtilities.invokeLater(() ->
 		{
-			if (active && source != null)
-			{
-				guidanceBannerLabel.setText("Guiding: " + source.getName());
-				guidanceBannerPanel.setVisible(true);
-
-				// Show unmet requirements warning if applicable
-				java.util.List<String> unmet = requirementsChecker.getUnmetRequirements(source.getName());
-				if (!unmet.isEmpty())
-				{
-					String warningText = "\u26A0 Requires: " + String.join(", ", unmet);
-					requirementsWarningLabel.setText("<html>" + warningText + "</html>");
-					requirementsWarningLabel.setVisible(true);
-				}
-				else
-				{
-					requirementsWarningLabel.setVisible(false);
-				}
-			}
-			else
-			{
-				guidanceBannerPanel.setVisible(false);
-				requirementsWarningLabel.setVisible(false);
-			}
-			guidanceBannerPanel.revalidate();
-			if (guidanceBannerPanel.getParent() != null)
-			{
-				guidanceBannerPanel.getParent().revalidate();
-			}
-
-			// Sync top pick button with current guidance state
 			if (topPickGuideButton != null && topPickSource != null)
 			{
 				boolean isGuidingTopPick = active && source != null
@@ -972,15 +915,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	public void showClueGuidance(CollectionLogSource source)
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			clueGuidanceLabel.setText(
-				"<html><b>Guidance: " + source.getName() + "</b><br>"
-				+ "Use the RuneLite <b>Clue Scroll</b> plugin for step-by-step guidance</html>");
-			clueGuidanceBanner.setVisible(true);
-			clueGuidanceBanner.revalidate();
-			clueGuidanceBanner.getParent().revalidate();
-		});
+		guidanceBannerView.showClueGuidance(source);
 	}
 
 	/**
@@ -1123,15 +1058,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	public void hideClueGuidance()
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			clueGuidanceBanner.setVisible(false);
-			clueGuidanceBanner.revalidate();
-			if (clueGuidanceBanner.getParent() != null)
-			{
-				clueGuidanceBanner.getParent().revalidate();
-			}
-		});
+		guidanceBannerView.hideClueGuidance();
 	}
 
 	@Override
