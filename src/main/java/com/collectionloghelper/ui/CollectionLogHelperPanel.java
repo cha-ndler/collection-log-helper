@@ -42,6 +42,7 @@ import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
+import com.collectionloghelper.ui.mode.CategoryModeController;
 import com.collectionloghelper.ui.mode.PanelModeController;
 import com.collectionloghelper.ui.mode.PanelShellContext;
 import com.collectionloghelper.ui.mode.PetHuntModeController;
@@ -591,6 +592,9 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		modeControllers.put(Mode.SEARCH,
 			new SearchModeController(this, config, database, collectionState, calculator,
 				requirementsChecker, itemManager));
+		modeControllers.put(Mode.CATEGORY_FOCUS,
+			new CategoryModeController(this, config, database, collectionState, calculator,
+				requirementsChecker, itemManager));
 
 		updateControlVisibility();
 	}
@@ -862,7 +866,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 							buildEfficientView();
 							break;
 						case CATEGORY_FOCUS:
-							buildCategoryView();
+							// Extracted to CategoryModeController (registered in modeControllers).
 							break;
 						case SEARCH:
 							// Extracted to SearchModeController (registered in modeControllers).
@@ -1039,28 +1043,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 				}
 			}
 		}
-	}
-
-	private void buildCategoryView()
-	{
-		CollectionLogCategory category = (CollectionLogCategory) categorySelector.getSelectedItem();
-		if (category == null)
-		{
-			return;
-		}
-
-		// Top Pick for this category — always an accessible source
-		List<ScoredItem> categoryScored = calculator.filterByCategory(category);
-		categoryScored.stream()
-			.filter(s -> !s.isLocked())
-			.findFirst()
-			.ifPresent(topPick -> listContainer.add(createQuickGuidePanel(topPick)));
-
-		List<CollectionLogSource> sources = database.getSourcesByCategory(category);
-		CategorySummaryPanel summary = new CategorySummaryPanel(
-			category, sources, collectionState, requirementsChecker, itemManager,
-			this::showDetail, config.hideObtainedItems());
-		listContainer.add(summary);
 	}
 
 	private void showDetailInternal(CollectionLogItem item, CollectionLogSource source)
