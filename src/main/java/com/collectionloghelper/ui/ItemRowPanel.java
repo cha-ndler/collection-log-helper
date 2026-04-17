@@ -41,7 +41,7 @@ import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.util.AsyncBufferedImage;
 
-class ItemRowPanel extends JPanel
+public class ItemRowPanel extends JPanel
 {
 	private static final Color OBTAINED_COLOR = new Color(0, 100, 0, 80);
 	private static final Color LOCKED_COLOR = new Color(50, 40, 40);
@@ -52,7 +52,7 @@ class ItemRowPanel extends JPanel
 	private final CollectionLogItem item;
 	private final CollectionLogSource source;
 
-	ItemRowPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
+	public ItemRowPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
 		double score, boolean locked, List<String> unmetRequirements,
 		ItemManager itemManager, Runnable onClick)
 	{
@@ -60,7 +60,7 @@ class ItemRowPanel extends JPanel
 			itemManager, onClick);
 	}
 
-	ItemRowPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
+	public ItemRowPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
 		double score, boolean locked, boolean onSlayerTask,
 		List<String> unmetRequirements, ItemManager itemManager, Runnable onClick)
 	{

@@ -44,6 +44,7 @@ import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.ui.mode.PanelModeController;
 import com.collectionloghelper.ui.mode.PanelShellContext;
+import com.collectionloghelper.ui.mode.PetHuntModeController;
 import com.collectionloghelper.ui.mode.StatisticsModeController;
 import java.util.EnumMap;
 import java.util.Map;
@@ -583,6 +584,9 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		// Mode controllers — populated once, dispatched from rebuild()
 		modeControllers.put(Mode.STATISTICS,
 			new StatisticsModeController(this, collectionState, database, calculator));
+		modeControllers.put(Mode.PET_HUNT,
+			new PetHuntModeController(this, config, collectionState, calculator,
+				requirementsChecker, itemManager));
 
 		updateControlVisibility();
 	}
@@ -860,7 +864,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 							buildSearchView();
 							break;
 						case PET_HUNT:
-							buildPetHuntView();
+							// Extracted to PetHuntModeController (registered in modeControllers).
 							break;
 						case STATISTICS:
 							// Extracted to StatisticsModeController (registered in modeControllers).
@@ -1102,48 +1106,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			// Escape query to prevent HTML injection in the JLabel
 			String safeQuery = query.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
 			addEmptyStateMessage("No items match '" + safeQuery + "'");
-		}
-	}
-
-	private void buildPetHuntView()
-	{
-		List<ScoredItem> scored = calculator.filterPetsOnly();
-		boolean hideObtained = config.hideObtainedItems();
-		int resultCount = 0;
-
-		for (ScoredItem si : scored)
-		{
-			boolean onTask = calculator.isOnSlayerTask(si.getSource());
-			for (CollectionLogItem item : si.getSource().getItems())
-			{
-				if (!item.isPet())
-				{
-					continue;
-				}
-				boolean obtained = collectionState.isItemObtained(item.getItemId());
-				if (hideObtained && obtained)
-				{
-					continue;
-				}
-				ItemRowPanel row = new ItemRowPanel(item, si.getSource(), obtained,
-					si.getScore(), si.isLocked(), onTask,
-					requirementsChecker.getUnmetRequirements(si.getSource().getName()),
-					itemManager, () -> showDetail(item, si.getSource()));
-				listContainer.add(row);
-				resultCount++;
-			}
-		}
-
-		if (resultCount == 0)
-		{
-			if (config.afkFilter().getMinAfkLevel() > 0)
-			{
-				addEmptyStateMessage("No pets match the current AFK filter.<br>Try a lower Efficient AFK setting.");
-			}
-			else
-			{
-				addEmptyStateMessage("All pets obtained!");
-			}
 		}
 	}
 
