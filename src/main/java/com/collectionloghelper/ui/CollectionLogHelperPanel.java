@@ -52,6 +52,7 @@ import com.collectionloghelper.ui.mode.SearchModeController;
 import com.collectionloghelper.ui.mode.StatisticsModeController;
 import com.collectionloghelper.ui.widget.ClueSummaryView;
 import com.collectionloghelper.ui.widget.GuidanceBannerView;
+import com.collectionloghelper.ui.widget.StepProgressView;
 import com.collectionloghelper.ui.widget.SyncStatusView;
 import java.util.EnumMap;
 import java.util.Map;
@@ -166,14 +167,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final JLabel slayerStrategyLabel;
 	private boolean slayerStrategyExpanded = false;
 
-	private final JPanel stepProgressPanel;
-	private final JLabel stepProgressLabel;
-	private final JPanel requiredItemsPanel;
-	private final JButton nextStepButton;
-	private final JButton skipStepButton;
-
-	private Runnable stepAdvancer;
-	private Runnable stepSkipper;
+	private final StepProgressView stepProgressView;
 
 	private final Timer searchDebounceTimer;
 
@@ -314,67 +308,10 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		guidanceBannerView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(guidanceBannerView);
 
-		// Step progress panel (for multi-step guidance sequences)
-		stepProgressPanel = new JPanel();
-		stepProgressPanel.setLayout(new BoxLayout(stepProgressPanel, BoxLayout.Y_AXIS));
-		stepProgressPanel.setBackground(new Color(25, 35, 55));
-		stepProgressPanel.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(80, 150, 220), 1),
-			BorderFactory.createEmptyBorder(4, 6, 4, 6)
-		));
-		stepProgressPanel.setAlignmentX(CENTER_ALIGNMENT);
-		stepProgressPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-		stepProgressPanel.setVisible(false);
-
-		stepProgressLabel = new JLabel();
-		stepProgressLabel.setFont(FontManager.getRunescapeSmallFont());
-		stepProgressLabel.setForeground(new Color(80, 180, 255));
-		stepProgressLabel.setAlignmentX(LEFT_ALIGNMENT);
-		stepProgressPanel.add(stepProgressLabel);
-
-		requiredItemsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 4, 2));
-		requiredItemsPanel.setBackground(new Color(25, 35, 55));
-		requiredItemsPanel.setAlignmentX(LEFT_ALIGNMENT);
-		requiredItemsPanel.setVisible(false);
-		stepProgressPanel.add(requiredItemsPanel);
-
-		JPanel stepButtonRow = new JPanel();
-		stepButtonRow.setLayout(new BoxLayout(stepButtonRow, BoxLayout.X_AXIS));
-		stepButtonRow.setBackground(new Color(25, 35, 55));
-		stepButtonRow.setAlignmentX(LEFT_ALIGNMENT);
-
-		nextStepButton = new JButton("Next Step");
-		nextStepButton.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
-		nextStepButton.setBackground(new Color(30, 100, 30));
-		nextStepButton.setForeground(Color.WHITE);
-		nextStepButton.setVisible(false);
-		nextStepButton.addActionListener(e ->
-		{
-			if (stepAdvancer != null)
-			{
-				stepAdvancer.run();
-			}
-		});
-		stepButtonRow.add(nextStepButton);
-
-		stepButtonRow.add(Box.createHorizontalStrut(4));
-
-		skipStepButton = new JButton("Skip");
-		skipStepButton.setFont(FontManager.getRunescapeSmallFont());
-		skipStepButton.setBackground(new Color(80, 80, 80));
-		skipStepButton.setForeground(Color.WHITE);
-		skipStepButton.addActionListener(e ->
-		{
-			if (stepSkipper != null)
-			{
-				stepSkipper.run();
-			}
-		});
-		stepButtonRow.add(skipStepButton);
-
-		stepProgressPanel.add(Box.createVerticalStrut(3));
-		stepProgressPanel.add(stepButtonRow);
-		controlsPanel.add(stepProgressPanel);
+		// Step progress (extracted to StepProgressView)
+		stepProgressView = new StepProgressView(itemManager, inventoryState, bankState);
+		stepProgressView.setAlignmentX(CENTER_ALIGNMENT);
+		controlsPanel.add(stepProgressView);
 
 		controlsPanel.add(Box.createVerticalStrut(4));
 
@@ -924,136 +861,19 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	public void updateStepProgress(int current, int total, String description, boolean isManual,
 		List<Integer> requiredItemIds)
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			stepProgressLabel.setText(
-				"<html>Step " + current + "/" + total + ": " + description + "</html>");
-			nextStepButton.setVisible(isManual);
-			updateRequiredItemDisplay(requiredItemIds);
-			stepProgressPanel.setVisible(true);
-			stepProgressPanel.revalidate();
-			if (stepProgressPanel.getParent() != null)
-			{
-				stepProgressPanel.getParent().revalidate();
-			}
-		});
+		stepProgressView.showStep(current, total, description, isManual, requiredItemIds);
 	}
 
-	private static final Color ITEM_STATUS_GREEN = new Color(40, 180, 40);
-	private static final Color ITEM_STATUS_YELLOW = new Color(200, 180, 40);
-	private static final Color ITEM_STATUS_RED = new Color(200, 40, 40);
-
-	/**
-	 * Updates the required items display with item sprites and colored status borders.
-	 * Green border = item is in inventory or equipped (ready to use).
-	 * Yellow border = item is in the bank but not on the player.
-	 * Red border = item is not found anywhere (not in inventory, equipment, or bank).
-	 */
-	private void updateRequiredItemDisplay(List<Integer> requiredItemIds)
-	{
-		requiredItemsPanel.removeAll();
-
-		if (requiredItemIds == null || requiredItemIds.isEmpty())
-		{
-			requiredItemsPanel.setVisible(false);
-			return;
-		}
-
-		JLabel headerLabel = new JLabel("Required:");
-		headerLabel.setFont(FontManager.getRunescapeSmallFont());
-		headerLabel.setForeground(new Color(180, 180, 180));
-		requiredItemsPanel.add(headerLabel);
-
-		for (int itemId : requiredItemIds)
-		{
-			boolean inInventory = inventoryState.hasItem(itemId);
-			boolean equipped = inventoryState.hasEquippedItem(itemId);
-			boolean inBank = bankState.hasItem(itemId);
-
-			Color borderColor;
-			String statusText;
-			if (inInventory || equipped)
-			{
-				borderColor = ITEM_STATUS_GREEN;
-				statusText = equipped && !inInventory ? " (equipped)" : " (in inventory)";
-			}
-			else if (inBank)
-			{
-				borderColor = ITEM_STATUS_YELLOW;
-				statusText = " (in bank)";
-			}
-			else
-			{
-				borderColor = ITEM_STATUS_RED;
-				statusText = " (MISSING)";
-			}
-
-			JLabel itemLabel = new JLabel();
-			itemLabel.setPreferredSize(new Dimension(32, 32));
-			itemLabel.setBorder(BorderFactory.createLineBorder(borderColor, 2));
-			itemLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			itemLabel.setVerticalAlignment(SwingConstants.CENTER);
-
-			// Load item sprite asynchronously
-			AsyncBufferedImage asyncImage = itemManager.getImage(itemId);
-			asyncImage.onLoaded(() ->
-			{
-				BufferedImage scaled = scaleImage(asyncImage, 28, 28);
-				itemLabel.setIcon(new ImageIcon(scaled));
-				itemLabel.revalidate();
-				itemLabel.repaint();
-			});
-			// Set initial image (may be placeholder)
-			BufferedImage scaled = scaleImage(asyncImage, 28, 28);
-			itemLabel.setIcon(new ImageIcon(scaled));
-
-			itemLabel.setToolTipText(itemManager.getItemComposition(itemId).getName() + statusText);
-
-			requiredItemsPanel.add(itemLabel);
-		}
-
-		requiredItemsPanel.setVisible(true);
-		requiredItemsPanel.revalidate();
-		requiredItemsPanel.repaint();
-	}
-
-	/**
-	 * Scales a BufferedImage to the given dimensions.
-	 */
-	private static BufferedImage scaleImage(BufferedImage source, int width, int height)
-	{
-		BufferedImage scaled = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = scaled.createGraphics();
-		g.drawImage(source, 0, 0, width, height, null);
-		g.dispose();
-		return scaled;
-	}
-
-	/**
-	 * Hides the step progress banner.
-	 */
+	/** Hides the step progress banner. */
 	public void hideStepProgress()
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			requiredItemsPanel.removeAll();
-			requiredItemsPanel.setVisible(false);
-			stepProgressPanel.setVisible(false);
-			stepProgressPanel.revalidate();
-			if (stepProgressPanel.getParent() != null)
-			{
-				stepProgressPanel.getParent().revalidate();
-			}
-		});
+		stepProgressView.hide();
 	}
 
-	/**
-	 * Sets callbacks for step advance/skip buttons.
-	 */
+	/** Sets callbacks for step advance/skip buttons. */
 	public void setStepCallbacks(Runnable advancer, Runnable skipper)
 	{
-		this.stepAdvancer = advancer;
-		this.stepSkipper = skipper;
+		stepProgressView.setCallbacks(advancer, skipper);
 	}
 
 	public void hideClueGuidance()
