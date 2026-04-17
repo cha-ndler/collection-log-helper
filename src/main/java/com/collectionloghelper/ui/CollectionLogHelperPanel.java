@@ -52,6 +52,7 @@ import com.collectionloghelper.ui.mode.SearchModeController;
 import com.collectionloghelper.ui.mode.StatisticsModeController;
 import com.collectionloghelper.ui.widget.ClueSummaryView;
 import com.collectionloghelper.ui.widget.GuidanceBannerView;
+import com.collectionloghelper.ui.widget.SlayerStrategyView;
 import com.collectionloghelper.ui.widget.StepProgressView;
 import com.collectionloghelper.ui.widget.SyncStatusView;
 import java.util.EnumMap;
@@ -126,7 +127,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		SYNCED
 	}
 
-	private static final Color SLAYER_TASK_COLOR = new Color(180, 80, 220);
 
 	private final CollectionLogHelperConfig config;
 	private final DropRateDatabase database;
@@ -147,7 +147,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	private final SyncStatusView syncStatusView;
 	private final ClueSummaryView clueSummaryView;
-	private final JLabel slayerTaskLabel;
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<AfkFilter> afkFilterSelector;
@@ -163,9 +162,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final JPanel detailView;
 
 	private final GuidanceBannerView guidanceBannerView;
-	private final JPanel slayerStrategyPanel;
-	private final JLabel slayerStrategyLabel;
-	private boolean slayerStrategyExpanded = false;
+	private final SlayerStrategyView slayerStrategyView;
 
 	private final StepProgressView stepProgressView;
 
@@ -254,53 +251,11 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		clueSummaryView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(clueSummaryView);
 
-		// Slayer task indicator
-		slayerTaskLabel = new JLabel("", SwingConstants.CENTER);
-		slayerTaskLabel.setFont(FontManager.getRunescapeSmallFont());
-		slayerTaskLabel.setForeground(SLAYER_TASK_COLOR);
-		slayerTaskLabel.setAlignmentX(CENTER_ALIGNMENT);
-		slayerTaskLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
-		slayerTaskLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
-		slayerTaskLabel.setVisible(false);
-		controlsPanel.add(slayerTaskLabel);
-
-		// Slayer strategy advisor panel (expandable, below task indicator)
-		slayerStrategyPanel = new JPanel();
-		slayerStrategyPanel.setLayout(new BoxLayout(slayerStrategyPanel, BoxLayout.Y_AXIS));
-		slayerStrategyPanel.setBackground(new Color(35, 25, 50));
-		slayerStrategyPanel.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(140, 60, 180), 1),
-			BorderFactory.createEmptyBorder(4, 6, 4, 6)
-		));
-		slayerStrategyPanel.setAlignmentX(CENTER_ALIGNMENT);
-		slayerStrategyPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-		slayerStrategyPanel.setVisible(false);
-
-		JButton strategyToggle = new JButton("\u25B6 Slayer Strategy");
-		strategyToggle.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
-		strategyToggle.setForeground(new Color(180, 80, 220));
-		strategyToggle.setBackground(new Color(35, 25, 50));
-		strategyToggle.setBorderPainted(false);
-		strategyToggle.setFocusPainted(false);
-		strategyToggle.setContentAreaFilled(false);
-		strategyToggle.setAlignmentX(LEFT_ALIGNMENT);
-		strategyToggle.setMaximumSize(new Dimension(Integer.MAX_VALUE, 18));
-		strategyToggle.addActionListener(e ->
-		{
-			slayerStrategyExpanded = !slayerStrategyExpanded;
-			strategyToggle.setText((slayerStrategyExpanded ? "\u25BC " : "\u25B6 ") + "Slayer Strategy");
-			updateSlayerStrategy();
-		});
-		slayerStrategyPanel.add(strategyToggle);
-
-		slayerStrategyLabel = new JLabel();
-		slayerStrategyLabel.setFont(FontManager.getRunescapeSmallFont());
-		slayerStrategyLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-		slayerStrategyLabel.setAlignmentX(LEFT_ALIGNMENT);
-		slayerStrategyLabel.setVisible(false);
-		slayerStrategyPanel.add(slayerStrategyLabel);
-
-		controlsPanel.add(slayerStrategyPanel);
+		// Slayer task indicator + strategy advisor (extracted to SlayerStrategyView)
+		slayerStrategyView = new SlayerStrategyView(slayerTaskState, slayerStrategyCalculator);
+		slayerStrategyView.setAlignmentX(CENTER_ALIGNMENT);
+		slayerStrategyView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		controlsPanel.add(slayerStrategyView);
 
 		// Guidance banners (active + clue) extracted to GuidanceBannerView
 		guidanceBannerView = new GuidanceBannerView(requirementsChecker);
@@ -495,100 +450,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		completionProgressBar.setValue(obtained);
 	}
 
-	private void updateSlayerTaskLabel()
-	{
-		if (slayerTaskState.isTaskActive())
-		{
-			slayerTaskLabel.setText("Slayer: " + slayerTaskState.getCreatureName()
-				+ " (" + slayerTaskState.getRemaining() + " remaining)");
-			slayerTaskLabel.setVisible(true);
-			slayerStrategyPanel.setVisible(true);
-		}
-		else
-		{
-			slayerTaskLabel.setVisible(false);
-			slayerStrategyPanel.setVisible(false);
-		}
-		updateSlayerStrategy();
-	}
-
-	private void updateSlayerStrategy()
-	{
-		if (!slayerStrategyPanel.isVisible())
-		{
-			slayerStrategyLabel.setVisible(false);
-			slayerStrategyPanel.revalidate();
-			return;
-		}
-
-		String recommended = slayerStrategyCalculator.getRecommendedMaster();
-
-		if (!slayerStrategyExpanded)
-		{
-			// Show a one-line summary when collapsed so users know content exists
-			if (recommended != null)
-			{
-				slayerStrategyLabel.setText("<html><font color='#b5b5b3'>Best: " + recommended + "</font></html>");
-				slayerStrategyLabel.setVisible(true);
-			}
-			else
-			{
-				slayerStrategyLabel.setVisible(false);
-			}
-			slayerStrategyPanel.revalidate();
-			return;
-		}
-
-		StringBuilder sb = new StringBuilder("<html>");
-
-		// Current task assessment
-		if (slayerTaskState.isTaskActive())
-		{
-			String creature = slayerTaskState.getCreatureName();
-			List<String> usefulSources = slayerStrategyCalculator.getUsefulSourcesForCreature(creature);
-			int missingItems = slayerStrategyCalculator.getMissingItemsForCreature(creature);
-			if (!usefulSources.isEmpty())
-			{
-				sb.append("<b>Current task:</b> ");
-				sb.append(String.join(", ", usefulSources));
-				sb.append(" (").append(missingItems).append(" missing)");
-			}
-			else
-			{
-				List<String> allSources = SlayerCreatureDatabase.getSourcesForCreature(creature);
-				if (!allSources.isEmpty())
-				{
-					sb.append("<b>Current task:</b> All items obtained");
-				}
-				else
-				{
-					sb.append("<b>Current task:</b> No boss variants");
-				}
-			}
-			sb.append("<br>");
-		}
-
-		// Recommended master
-		if (recommended != null)
-		{
-			sb.append("<b>Best master:</b> ").append(recommended).append("<br>");
-		}
-
-		// Recommended blocks
-		if (recommended != null)
-		{
-			List<String> blocks = slayerStrategyCalculator.getRecommendedBlockList(recommended);
-			if (!blocks.isEmpty())
-			{
-				sb.append("<b>Block:</b> ").append(String.join(", ", blocks));
-			}
-		}
-
-		sb.append("</html>");
-		slayerStrategyLabel.setText(sb.toString());
-		slayerStrategyLabel.setVisible(true);
-		slayerStrategyPanel.revalidate();
-	}
 
 	public void updateSyncStatus(SyncState state, int itemCount)
 	{
@@ -648,7 +509,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 				SwingUtil.fastRemoveAll(listContainer);
 				updateCompletionHeader();
-				updateSlayerTaskLabel();
+				slayerStrategyView.refresh();
 
 				modeDispatcher.buildView(currentMode);
 
