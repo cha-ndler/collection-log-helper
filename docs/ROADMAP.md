@@ -502,9 +502,9 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 **Tier A.5 — Data sourcing infrastructure**
 
 - [x] A5.1 — `varbit_lookup` MCP tool                    status: done          owner: cha-ndler  updated: 2026-04-16  note: closed by runelite-dev-toolkit v0.2.0 — varbit_lookup MCP tool
-- [ ] A5.2 — `verified_scene_ids.json` registry          status: planned       owner: —          updated: 2026-04-16
+- [x] A5.2 — `verified_scene_ids.json` registry          status: done          owner: cha-ndler  updated: 2026-04-17  pr: #342
 - [x] A5.3 — `cache_diff_check` MCP tool                 status: done          owner: cha-ndler  updated: 2026-04-16  note: closed by runelite-dev-toolkit v0.2.0 — cache_diff_check MCP tool
-- [ ] A5.4 — Tiered sourcing strategy in CONTRIBUTING    status: planned       owner: —          updated: 2026-04-16
+- [x] A5.4 — Tiered sourcing strategy in CONTRIBUTING    status: done          owner: cha-ndler  updated: 2026-04-17  pr: #341
 - [x] A5.5 — In-game authoring playbook generator        status: done          owner: cha-ndler  updated: 2026-04-16  note: closed by runelite-dev-toolkit v0.2.0 — authoring_playbook MCP tool
 - [x] A5.6 — Data confidence brain (D-06)                status: done          owner: cha-ndler  updated: 2026-04-16  note: closed by runelite-dev-toolkit v0.2.0 — data_source_router + precedence.json (auto-tuner deferred)
 
