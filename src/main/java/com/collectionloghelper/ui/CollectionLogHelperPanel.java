@@ -50,6 +50,7 @@ import com.collectionloghelper.ui.mode.PanelShellContext;
 import com.collectionloghelper.ui.mode.PetHuntModeController;
 import com.collectionloghelper.ui.mode.SearchModeController;
 import com.collectionloghelper.ui.mode.StatisticsModeController;
+import com.collectionloghelper.ui.widget.ClueSummaryView;
 import com.collectionloghelper.ui.widget.SyncStatusView;
 import java.util.EnumMap;
 import java.util.Map;
@@ -123,7 +124,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		SYNCED
 	}
 
-	private static final Color CLUE_SUMMARY_COLOR = new Color(200, 170, 50);
 	private static final Color SLAYER_TASK_COLOR = new Color(180, 80, 220);
 
 	private final CollectionLogHelperConfig config;
@@ -144,7 +144,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final Consumer<EfficientSortMode> sortModeUpdater;
 
 	private final SyncStatusView syncStatusView;
-	private final JLabel clueSummaryLabel;
+	private final ClueSummaryView clueSummaryView;
 	private final JLabel slayerTaskLabel;
 
 	private final JComboBox<Mode> modeSelector;
@@ -258,15 +258,11 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		syncStatusView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(syncStatusView);
 
-		// Clue summary label (shows unopened caskets/containers from bank scan)
-		clueSummaryLabel = new JLabel("", SwingConstants.CENTER);
-		clueSummaryLabel.setFont(FontManager.getRunescapeSmallFont());
-		clueSummaryLabel.setForeground(CLUE_SUMMARY_COLOR);
-		clueSummaryLabel.setAlignmentX(CENTER_ALIGNMENT);
-		clueSummaryLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
-		clueSummaryLabel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
-		clueSummaryLabel.setVisible(false);
-		controlsPanel.add(clueSummaryLabel);
+		// Clue summary (extracted to ClueSummaryView)
+		clueSummaryView = new ClueSummaryView();
+		clueSummaryView.setAlignmentX(CENTER_ALIGNMENT);
+		clueSummaryView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		controlsPanel.add(clueSummaryView);
 
 		// Slayer task indicator
 		slayerTaskLabel = new JLabel("", SwingConstants.CENTER);
@@ -705,36 +701,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	public void updateClueSummary(PlayerBankState bankState)
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			String casketSummary = bankState.getCasketSummary();
-			String containerSummary = bankState.getContainerSummary();
-
-			if (casketSummary == null && containerSummary == null)
-			{
-				clueSummaryLabel.setVisible(false);
-			}
-			else
-			{
-				StringBuilder text = new StringBuilder("<html><center>");
-				if (casketSummary != null)
-				{
-					text.append(casketSummary);
-				}
-				if (containerSummary != null)
-				{
-					if (casketSummary != null)
-					{
-						text.append("<br>");
-					}
-					text.append(containerSummary);
-				}
-				text.append("</center></html>");
-				clueSummaryLabel.setText(text.toString());
-				clueSummaryLabel.setVisible(true);
-			}
-			revalidate();
-		});
+		clueSummaryView.updateFromBankState(bankState);
 	}
 
 	public void shutDown()
