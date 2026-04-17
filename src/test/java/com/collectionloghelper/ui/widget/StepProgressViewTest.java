@@ -27,7 +27,6 @@ package com.collectionloghelper.ui.widget;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerInventoryState;
 import net.runelite.client.game.ItemManager;
-import java.util.Arrays;
 import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;

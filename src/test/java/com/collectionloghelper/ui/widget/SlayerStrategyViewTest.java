@@ -26,7 +26,6 @@ package com.collectionloghelper.ui.widget;
 
 import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
-import java.util.Arrays;
 import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
