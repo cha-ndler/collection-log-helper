@@ -42,7 +42,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 
-class CategorySummaryPanel extends JPanel
+public class CategorySummaryPanel extends JPanel
 {
 	private static final Color PROGRESS_BAR_COLOR = new Color(0, 200, 0);
 	private static final Color PROGRESS_BG_COLOR = new Color(60, 60, 60);
@@ -63,7 +63,7 @@ class CategorySummaryPanel extends JPanel
 	private ItemClickHandler lazyClickHandler;
 	private boolean lazyHideObtained;
 
-	CategorySummaryPanel(CollectionLogCategory category, List<CollectionLogSource> sources,
+	public CategorySummaryPanel(CollectionLogCategory category, List<CollectionLogSource> sources,
 		PlayerCollectionState collectionState, RequirementsChecker requirementsChecker,
 		ItemManager itemManager, ItemClickHandler clickHandler, boolean hideObtained)
 	{
@@ -197,7 +197,7 @@ class CategorySummaryPanel extends JPanel
 			categoryName, obtained, total));
 	}
 
-	interface ItemClickHandler
+	public interface ItemClickHandler
 	{
 		void onItemClicked(CollectionLogItem item, CollectionLogSource source);
 	}
