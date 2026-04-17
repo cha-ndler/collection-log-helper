@@ -42,6 +42,11 @@ import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
+import com.collectionloghelper.ui.mode.PanelModeController;
+import com.collectionloghelper.ui.mode.PanelShellContext;
+import com.collectionloghelper.ui.mode.StatisticsModeController;
+import java.util.EnumMap;
+import java.util.Map;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -82,7 +87,7 @@ import net.runelite.client.ui.PluginPanel;
 import net.runelite.client.util.AsyncBufferedImage;
 import net.runelite.client.util.SwingUtil;
 
-public class CollectionLogHelperPanel extends PluginPanel
+public class CollectionLogHelperPanel extends PluginPanel implements PanelShellContext
 {
 	private static final Color GUIDE_ME_COLOR = new Color(30, 120, 30);
 	private static final Color STOP_GUIDANCE_COLOR = new Color(140, 30, 30);
@@ -178,6 +183,8 @@ public class CollectionLogHelperPanel extends PluginPanel
 	private Runnable stepSkipper;
 
 	private final Timer searchDebounceTimer;
+
+	private final Map<Mode, PanelModeController> modeControllers = new EnumMap<>(Mode.class);
 
 	private Mode currentMode = Mode.EFFICIENT;
 	private boolean rebuilding = false;
@@ -419,7 +426,18 @@ public class CollectionLogHelperPanel extends PluginPanel
 		{
 			if (e.getStateChange() == ItemEvent.SELECTED)
 			{
+				Mode previous = currentMode;
 				currentMode = (Mode) e.getItem();
+				PanelModeController leaving = modeControllers.get(previous);
+				if (leaving != null && previous != currentMode)
+				{
+					leaving.onModeDeactivated();
+				}
+				PanelModeController entering = modeControllers.get(currentMode);
+				if (entering != null && previous != currentMode)
+				{
+					entering.onModeActivated();
+				}
 				updateControlVisibility();
 				inDetailView = false;
 				rebuild();
@@ -561,6 +579,10 @@ public class CollectionLogHelperPanel extends PluginPanel
 		contentPanel.add(detailView, "detail");
 
 		add(contentPanel, BorderLayout.CENTER);
+
+		// Mode controllers — populated once, dispatched from rebuild()
+		modeControllers.put(Mode.STATISTICS,
+			new StatisticsModeController(this, collectionState, database, calculator));
 
 		updateControlVisibility();
 	}
@@ -819,23 +841,31 @@ public class CollectionLogHelperPanel extends PluginPanel
 				updateCompletionHeader();
 				updateSlayerTaskLabel();
 
-				switch (currentMode)
+				PanelModeController controller = modeControllers.get(currentMode);
+				if (controller != null)
 				{
-					case EFFICIENT:
-						buildEfficientView();
-						break;
-					case CATEGORY_FOCUS:
-						buildCategoryView();
-						break;
-					case SEARCH:
-						buildSearchView();
-						break;
-					case PET_HUNT:
-						buildPetHuntView();
-						break;
-					case STATISTICS:
-						buildStatsView();
-						break;
+					controller.buildView();
+				}
+				else
+				{
+					switch (currentMode)
+					{
+						case EFFICIENT:
+							buildEfficientView();
+							break;
+						case CATEGORY_FOCUS:
+							buildCategoryView();
+							break;
+						case SEARCH:
+							buildSearchView();
+							break;
+						case PET_HUNT:
+							buildPetHuntView();
+							break;
+						case STATISTICS:
+							// Extracted to StatisticsModeController (registered in modeControllers).
+							break;
+					}
 				}
 
 				// Restore expanded category state
@@ -1117,222 +1147,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		}
 	}
 
-	private void buildStatsView()
-	{
-		// Overall summary — use varp-based counts for accurate deduplicated totals
-		int totalObtained = collectionState.getTotalObtained();
-		int totalItems = collectionState.getTotalPossible();
-		double overallPct = collectionState.getCompletionPercentage();
-
-		String overallText = String.format("%d / %d (%.1f%%)", totalObtained, totalItems, overallPct);
-
-		JPanel overallPanel = new JPanel(new BorderLayout(5, 2));
-		overallPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
-		overallPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-		overallPanel.setToolTipText("Collection Log: " + overallText);
-
-		JLabel overallLabel = new JLabel(overallText);
-		overallLabel.setFont(FontManager.getRunescapeBoldFont());
-		overallLabel.setForeground(Color.WHITE);
-		overallPanel.add(overallLabel, BorderLayout.NORTH);
-
-		JPanel overallBar = createProgressBar(totalObtained, totalItems);
-		overallPanel.add(overallBar, BorderLayout.SOUTH);
-		listContainer.add(overallPanel);
-
-		listContainer.add(javax.swing.Box.createVerticalStrut(4));
-
-		// Per-category breakdown
-		for (CollectionLogCategory category : CollectionLogCategory.values())
-		{
-			List<CollectionLogSource> sources = database.getSourcesByCategory(category);
-			if (sources == null || sources.isEmpty())
-			{
-				continue;
-			}
-
-			int catSources = sources.size();
-			int catSourcesComplete = 0;
-
-			// Use varp-based counts for categories the game tracks (deduplicated),
-			// fall back to manual counting for SLAYER/SKILLING (no game varps)
-			int varpCount = collectionState.getCategoryCount(category);
-			int varpMax = collectionState.getCategoryMax(category);
-			boolean useVarps = varpMax > 0;
-
-			int catObtained = 0;
-			int catTotal = 0;
-
-			for (CollectionLogSource source : sources)
-			{
-				boolean sourceComplete = true;
-				for (CollectionLogItem item : source.getItems())
-				{
-					if (!useVarps)
-					{
-						catTotal++;
-						if (collectionState.isItemObtained(item.getItemId()))
-						{
-							catObtained++;
-						}
-						else
-						{
-							sourceComplete = false;
-						}
-					}
-					else
-					{
-						if (!collectionState.isItemObtained(item.getItemId()))
-						{
-							sourceComplete = false;
-						}
-					}
-				}
-				if (sourceComplete)
-				{
-					catSourcesComplete++;
-				}
-			}
-
-			if (useVarps)
-			{
-				catObtained = varpCount;
-				catTotal = varpMax;
-			}
-
-			double catPct = catTotal > 0 ? 100.0 * catObtained / catTotal : 0;
-
-			String countText = String.format("%d / %d (%.1f%%)", catObtained, catTotal, catPct);
-
-			// Estimate remaining hours from efficiency scores
-			double totalHours = 0;
-			List<ScoredItem> categoryScored = calculator.filterByCategory(category);
-			for (ScoredItem si : categoryScored)
-			{
-				if (si.getScore() > 0)
-				{
-					totalHours += 100.0 / si.getScore();
-				}
-			}
-
-			String timeStr;
-			if (totalHours <= 0 || catObtained >= catTotal)
-			{
-				timeStr = null;
-			}
-			else if (totalHours < 1)
-			{
-				timeStr = "~" + Math.max(1, Math.round(totalHours * 60)) + " min left";
-			}
-			else if (totalHours < 24)
-			{
-				timeStr = "~" + Math.round(totalHours) + " hrs left";
-			}
-			else
-			{
-				long days = Math.round(totalHours / 24);
-				timeStr = "~" + days + (days == 1 ? " day left" : " days left");
-			}
-
-			JPanel catPanel = new JPanel(new BorderLayout(5, 2));
-			catPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
-			catPanel.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
-
-			// Tooltip with full details for truncated text
-			String tooltip = String.format("%s: %s | %d sources, %d complete",
-				category.getDisplayName(), countText, catSources, catSourcesComplete);
-			if (timeStr != null)
-			{
-				tooltip += " | " + timeStr;
-			}
-			catPanel.setToolTipText(tooltip);
-
-			// Header: category name (bold) + count (right, small)
-			JLabel catNameLabel = new JLabel(category.getDisplayName());
-			catNameLabel.setFont(FontManager.getRunescapeBoldFont());
-			catNameLabel.setForeground(Color.WHITE);
-
-			JLabel catCountLabel = new JLabel(countText);
-			catCountLabel.setFont(FontManager.getRunescapeSmallFont());
-			catCountLabel.setForeground(ColorScheme.LIGHT_GRAY_COLOR);
-			catCountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-
-			JPanel catHeader = new JPanel(new BorderLayout());
-			catHeader.setOpaque(false);
-			catHeader.add(catNameLabel, BorderLayout.WEST);
-			catHeader.add(catCountLabel, BorderLayout.EAST);
-			catPanel.add(catHeader, BorderLayout.NORTH);
-
-			JPanel catBar = createProgressBar(catObtained, catTotal);
-			catPanel.add(catBar, BorderLayout.CENTER);
-
-			// Footer: source count (left) + time estimate (right)
-			String footerText = catSources + " sources, " + catSourcesComplete + " complete";
-			if (timeStr != null)
-			{
-				footerText += "  |  " + timeStr;
-			}
-			JLabel catFooterLabel = new JLabel(footerText);
-			catFooterLabel.setFont(FontManager.getRunescapeSmallFont());
-			catFooterLabel.setForeground(timeStr != null
-				? new Color(255, 200, 0) : ColorScheme.LIGHT_GRAY_COLOR);
-			catPanel.add(catFooterLabel, BorderLayout.SOUTH);
-
-			// Click to navigate to Category Focus mode
-			final CollectionLogCategory clickedCategory = category;
-			catPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-			catPanel.addMouseListener(new java.awt.event.MouseAdapter()
-			{
-				@Override
-				public void mousePressed(java.awt.event.MouseEvent e)
-				{
-					categorySelector.setSelectedItem(clickedCategory);
-					modeSelector.setSelectedItem(Mode.CATEGORY_FOCUS);
-				}
-
-				@Override
-				public void mouseEntered(java.awt.event.MouseEvent e)
-				{
-					catPanel.setBackground(ColorScheme.DARKER_GRAY_HOVER_COLOR);
-				}
-
-				@Override
-				public void mouseExited(java.awt.event.MouseEvent e)
-				{
-					catPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
-				}
-			});
-
-			listContainer.add(catPanel);
-			listContainer.add(javax.swing.Box.createVerticalStrut(2));
-		}
-	}
-
-	private JPanel createProgressBar(int obtained, int total)
-	{
-		final double pct = total > 0 ? (double) obtained / total : 0;
-		JPanel bar = new JPanel()
-		{
-			@Override
-			protected void paintComponent(java.awt.Graphics g)
-			{
-				super.paintComponent(g);
-				int w = getWidth();
-				int h = getHeight();
-				g.setColor(new Color(60, 60, 60));
-				g.fillRect(0, 0, w, h);
-				if (pct > 0)
-				{
-					g.setColor(new Color(0, 200, 0));
-					g.fillRect(0, 0, (int) (w * pct), h);
-				}
-			}
-		};
-		bar.setPreferredSize(new Dimension(0, 6));
-		return bar;
-	}
-
-	private void showDetail(CollectionLogItem item, CollectionLogSource source)
+	private void showDetailInternal(CollectionLogItem item, CollectionLogSource source)
 	{
 		boolean obtained = collectionState.isItemObtained(item.getItemId());
 		boolean locked = !requirementsChecker.isAccessible(source.getName());
@@ -1365,7 +1180,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		showDetailView();
 	}
 
-	private JPanel createQuickGuidePanel(ScoredItem topItem)
+	private JPanel createQuickGuidePanelInternal(ScoredItem topItem)
 	{
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -1638,7 +1453,7 @@ public class CollectionLogHelperPanel extends PluginPanel
 		});
 	}
 
-	private void addEmptyStateMessage(String message)
+	private void addEmptyStateMessageInternal(String message)
 	{
 		JLabel label = new JLabel("<html><center>" + message + "</center></html>");
 		label.setFont(FontManager.getRunescapeSmallFont());
@@ -1657,5 +1472,56 @@ public class CollectionLogHelperPanel extends PluginPanel
 		sortSelector.setVisible(currentMode == Mode.EFFICIENT);
 		categorySelector.setVisible(currentMode == Mode.CATEGORY_FOCUS);
 		searchField.setVisible(currentMode == Mode.SEARCH);
+	}
+
+	// ── PanelShellContext implementation ────────────────────────────────────
+
+	@Override
+	public void addToList(Component component)
+	{
+		listContainer.add(component);
+	}
+
+	@Override
+	public void addEmptyStateMessage(String message)
+	{
+		addEmptyStateMessageInternal(message);
+	}
+
+	@Override
+	public JPanel createQuickGuidePanel(ScoredItem topItem)
+	{
+		return createQuickGuidePanelInternal(topItem);
+	}
+
+	@Override
+	public void showDetail(CollectionLogItem item, CollectionLogSource source)
+	{
+		showDetailInternal(item, source);
+	}
+
+	@Override
+	public void switchToCategoryFocus(CollectionLogCategory category)
+	{
+		categorySelector.setSelectedItem(category);
+		modeSelector.setSelectedItem(Mode.CATEGORY_FOCUS);
+	}
+
+	@Override
+	public String getSearchQuery()
+	{
+		return searchField.getText() == null ? "" : searchField.getText().toLowerCase().trim();
+	}
+
+	@Override
+	public EfficientSortMode getEfficientSortMode()
+	{
+		return (EfficientSortMode) sortSelector.getSelectedItem();
+	}
+
+	@Override
+	public CollectionLogCategory getSelectedCategory()
+	{
+		return (CollectionLogCategory) categorySelector.getSelectedItem();
 	}
 }
