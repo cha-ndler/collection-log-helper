@@ -43,6 +43,7 @@ import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.ui.mode.CategoryModeController;
+import com.collectionloghelper.ui.mode.EfficientModeController;
 import com.collectionloghelper.ui.mode.PanelModeController;
 import com.collectionloghelper.ui.mode.PanelShellContext;
 import com.collectionloghelper.ui.mode.PetHuntModeController;
@@ -595,6 +596,9 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		modeControllers.put(Mode.CATEGORY_FOCUS,
 			new CategoryModeController(this, config, database, collectionState, calculator,
 				requirementsChecker, itemManager));
+		modeControllers.put(Mode.EFFICIENT,
+			new EfficientModeController(this, config, collectionState, calculator,
+				requirementsChecker, itemManager));
 
 		updateControlVisibility();
 	}
@@ -860,24 +864,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 				}
 				else
 				{
-					switch (currentMode)
-					{
-						case EFFICIENT:
-							buildEfficientView();
-							break;
-						case CATEGORY_FOCUS:
-							// Extracted to CategoryModeController (registered in modeControllers).
-							break;
-						case SEARCH:
-							// Extracted to SearchModeController (registered in modeControllers).
-							break;
-						case PET_HUNT:
-							// Extracted to PetHuntModeController (registered in modeControllers).
-							break;
-						case STATISTICS:
-							// Extracted to StatisticsModeController (registered in modeControllers).
-							break;
-					}
+					// All modes are controller-backed; fallback branch is unused.
 				}
 
 				// Restore expanded category state
@@ -952,96 +939,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		if (scrollPane != null)
 		{
 			scrollPane.getVerticalScrollBar().setValue(0);
-		}
-	}
-
-	private void buildEfficientView()
-	{
-		List<ScoredItem> scored = calculator.rankByEfficiency();
-		EfficientSortMode sortMode = (EfficientSortMode) sortSelector.getSelectedItem();
-		if (sortMode != null && sortMode != EfficientSortMode.EFFICIENCY)
-		{
-			scored = new ArrayList<>(scored);
-			switch (sortMode)
-			{
-				case KILL_TIME:
-					scored.sort(Comparator.comparingDouble(s -> s.getSource().getKillTimeSeconds()));
-					break;
-				case DROP_RATE:
-					scored.sort(Comparator.comparingDouble(ScoredItem::getDropOnlyScore).reversed());
-					break;
-				case ALPHABETICAL:
-					scored.sort(Comparator.comparing(s -> s.getSource().getName()));
-					break;
-				case ITEMS_REMAINING:
-					scored.sort(Comparator.comparingInt(ScoredItem::getMissingItemCount).reversed());
-					break;
-				case COMPLETION_PERCENTAGE:
-					scored.sort(Comparator.comparingDouble((ScoredItem s) ->
-					{
-						int total = s.getSource().getItems().size();
-						return total > 0 ? (double) (total - s.getMissingItemCount()) / total : 0;
-					}).reversed());
-					break;
-			}
-		}
-		boolean hideObtained = config.hideObtainedItems();
-
-		if (scored.isEmpty())
-		{
-			if (config.afkFilter().getMinAfkLevel() > 0)
-			{
-				addEmptyStateMessage("No sources match the current AFK filter.<br>Try a lower Efficient AFK setting.");
-			}
-			else if (config.hideLockedContent())
-			{
-				addEmptyStateMessage("All sources are locked or completed.<br>Adjust filters to see more.");
-			}
-			else
-			{
-				addEmptyStateMessage("All items obtained. Congratulations!");
-			}
-			return;
-		}
-
-		// Top Pick should always be an accessible (unlocked) source
-		scored.stream()
-			.filter(s -> !s.isLocked())
-			.findFirst()
-			.ifPresent(topPick -> listContainer.add(createQuickGuidePanel(topPick)));
-
-		for (ScoredItem si : scored)
-		{
-			boolean onTask = calculator.isOnSlayerTask(si.getSource());
-
-			// Show the best (fastest-to-obtain) item per source, but use
-			// the source-level score for the time display so the displayed
-			// time matches the sort order.
-			CollectionLogItem bestItem = si.getBestItem();
-			if (bestItem != null && !collectionState.isItemObtained(bestItem.getItemId()))
-			{
-				ItemRowPanel row = new ItemRowPanel(bestItem, si.getSource(), false,
-					si.getScore(), si.isLocked(), onTask,
-					requirementsChecker.getUnmetRequirements(si.getSource().getName()),
-					itemManager, () -> showDetail(bestItem, si.getSource()));
-				listContainer.add(row);
-			}
-			else
-			{
-				// Fallback: show first missing item if bestItem is null or already obtained
-				for (CollectionLogItem item : si.getSource().getItems())
-				{
-					if (!collectionState.isItemObtained(item.getItemId()))
-					{
-						ItemRowPanel row = new ItemRowPanel(item, si.getSource(), false,
-							si.getScore(), si.isLocked(), onTask,
-							requirementsChecker.getUnmetRequirements(si.getSource().getName()),
-							itemManager, () -> showDetail(item, si.getSource()));
-						listContainer.add(row);
-						break;
-					}
-				}
-			}
 		}
 	}
 
