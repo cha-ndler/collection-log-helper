@@ -327,6 +327,38 @@ public class GuidanceOverlayCoordinator
 	}
 
 	/**
+	 * Refreshes the in-game hint arrow to match the current {@code showHintArrow} config value.
+	 * Called when the config option is toggled at runtime. If hint arrows are now disabled,
+	 * clears the arrow; if enabled and guidance is active, re-sets it to the current target.
+	 */
+	public void refreshHintArrow()
+	{
+		if (!config.showHintArrow())
+		{
+			clientThread.invokeLater(() -> client.clearHintArrow());
+			return;
+		}
+
+		// Re-apply hint arrow to the current guidance target (if any)
+		if (!guidanceSequencer.isActive())
+		{
+			return;
+		}
+		GuidanceStep step = guidanceSequencer.getRawCurrentStep();
+		if (step != null && step.getWorldX() > 0)
+		{
+			WorldPoint worldPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
+			clientThread.invokeLater(() ->
+			{
+				if (shouldSetHintArrowTo(worldPoint))
+				{
+					client.setHintArrow(worldPoint);
+				}
+			});
+		}
+	}
+
+	/**
 	 * Called from the plugin's onGameTick. Handles world map arrow rotation
 	 * and dispatches the deferred ShortestPath "path" message.
 	 */
