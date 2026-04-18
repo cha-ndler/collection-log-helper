@@ -11690,9 +11690,9 @@
         "completionChatPattern": "You attempt to light the funeral pyre"
       },
       {
-        "description": "Pick up your shade key from the reward pillar",
-        "worldX": 3505,
-        "worldY": 3279,
+        "description": "Pick up your shade key from the reward pillar inside the temple.",
+        "worldX": 3495,
+        "worldY": 3298,
         "worldPlane": 0,
         "groundItemIds": [
           3450,
