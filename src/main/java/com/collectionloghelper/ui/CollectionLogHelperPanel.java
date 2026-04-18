@@ -627,7 +627,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	/** Hides the step progress banner. */
 	public void hideStepProgress()
 	{
-		stepProgressView.hide();
+		stepProgressView.hideStep();
 	}
 
 	/** Sets callbacks for step advance/skip buttons. */

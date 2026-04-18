@@ -28,11 +28,14 @@ import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerInventoryState;
 import net.runelite.client.game.ItemManager;
 import java.util.Collections;
+import javax.swing.SwingUtilities;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests for {@link StepProgressView}.
@@ -78,9 +81,9 @@ public class StepProgressViewTest
 	}
 
 	@Test
-	public void hide_doesNotThrow()
+	public void hideStep_doesNotThrow()
 	{
-		view.hide();
+		view.hideStep();
 	}
 
 	@Test
@@ -97,9 +100,49 @@ public class StepProgressViewTest
 	}
 
 	@Test
-	public void hide_afterShowStep_doesNotThrow()
+	public void hideStep_afterShowStep_doesNotThrow()
 	{
 		view.showStep(1, 3, "Do the thing", false, Collections.emptyList());
-		view.hide();
+		view.hideStep();
+	}
+
+	// ── Visibility regression tests for issue #353 ──────────────────────────
+	//
+	// The widget previously defined public void hide(), which shadowed the
+	// deprecated-but-still-wired java.awt.Component#hide(). Component#setVisible
+	// dispatches to hide()/show() internally, so the override silently turned
+	// setVisible(false) into a no-op and left the Skip-button panel visible in
+	// every state where guidance wasn't running. These tests pin the contract.
+
+	@Test
+	public void afterConstruction_isNotVisible()
+	{
+		assertFalse("StepProgressView must start hidden", view.isVisible());
+	}
+
+	@Test
+	public void hideStep_afterShowStep_actuallyHides() throws Exception
+	{
+		view.showStep(1, 3, "Do the thing", false, Collections.emptyList());
+		flushEdt();
+		assertTrue("showStep should make widget visible", view.isVisible());
+
+		view.hideStep();
+		flushEdt();
+		assertFalse("hideStep must make widget invisible", view.isVisible());
+	}
+
+	@Test
+	public void showStep_makesVisible() throws Exception
+	{
+		view.showStep(2, 4, "Pick up reward", true, Collections.emptyList());
+		flushEdt();
+		assertTrue("showStep must make widget visible", view.isVisible());
+	}
+
+	/** Flush the Swing event queue so invokeLater-scheduled work completes. */
+	private static void flushEdt() throws Exception
+	{
+		SwingUtilities.invokeAndWait(() -> { });
 	}
 }

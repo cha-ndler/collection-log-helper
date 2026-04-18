@@ -52,8 +52,14 @@ import net.runelite.client.util.AsyncBufferedImage;
  * and the Next Step / Skip buttons.
  *
  * <p>Constructed once by the shell; updated via {@link #showStep} and
- * hidden via {@link #hide}. Step-advance and skip callbacks are wired
+ * hidden via {@link #hideStep}. Step-advance and skip callbacks are wired
  * via {@link #setCallbacks}.
+ *
+ * <p><b>Note:</b> the hide method is named {@code hideStep} rather than
+ * {@code hide} to avoid shadowing the deprecated {@link java.awt.Component#hide()}.
+ * {@code Component.setVisible(false)} internally dispatches to {@code hide()};
+ * an override with the same signature breaks {@code setVisible(false)} for this
+ * widget and leaves it visible in pre-guidance states (see issue #353).
  */
 public class StepProgressView extends JPanel
 {
@@ -185,8 +191,12 @@ public class StepProgressView extends JPanel
 	/**
 	 * Hides the step progress panel and clears required items.
 	 * Safe to call from any thread.
+	 *
+	 * <p>Intentionally named {@code hideStep} (not {@code hide}) — see class
+	 * Javadoc and issue #353 for why overriding {@link java.awt.Component#hide()}
+	 * would break {@link #setVisible}.
 	 */
-	public void hide()
+	public void hideStep()
 	{
 		SwingUtilities.invokeLater(() ->
 		{
