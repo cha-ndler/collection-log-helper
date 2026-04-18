@@ -119,6 +119,11 @@ public class QuickGuidePanelView
 		guideButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
 		guideButton.addActionListener(e ->
 		{
+			// Note: This action listener updates the button locally (immediate),
+			// and the guidanceActivator/guidanceDeactivator callbacks route through
+			// GuidanceOverlayCoordinator → syncGuidanceState(), which updates the
+			// same button again on the next invokeLater. This double-update is
+			// expected and harmless (idempotent button state changes).
 			if (guideButton.getText().equals("Stop Guidance"))
 			{
 				guidanceDeactivator.run();

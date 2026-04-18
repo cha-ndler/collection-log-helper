@@ -27,11 +27,15 @@ package com.collectionloghelper.ui.widget;
 import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import java.util.Collections;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests for {@link SlayerStrategyView}.
@@ -95,5 +99,63 @@ public class SlayerStrategyViewTest
 			.thenReturn(Collections.emptyList());
 		Mockito.when(calculator.getMissingItemsForCreature(null)).thenReturn(0);
 		view.refresh();
+	}
+
+	@Test
+	public void refresh_activeTask_expandedState_doesNotThrow() throws Exception
+	{
+		Mockito.when(slayerTaskState.isTaskActive()).thenReturn(true);
+		Mockito.when(slayerTaskState.getCreatureName()).thenReturn("Abyssal Demons");
+		Mockito.when(slayerTaskState.getRemaining()).thenReturn(120);
+		Mockito.when(calculator.getRecommendedMaster()).thenReturn("Duradel");
+		Mockito.when(calculator.getUsefulSourcesForCreature("Abyssal Demons"))
+			.thenReturn(Collections.singletonList("Abyssal Lord"));
+		Mockito.when(calculator.getMissingItemsForCreature("Abyssal Demons")).thenReturn(2);
+		Mockito.when(calculator.getRecommendedBlockList("Duradel"))
+			.thenReturn(Collections.emptyList());
+
+		view.refresh();
+
+		// Drill down to the toggle button: view → slayerStrategyPanel (JPanel) → strategyToggle (JButton).
+		// view.getComponents()[1] is the JPanel, not the button; the button sits one level deeper.
+		JPanel strategyPanel = (JPanel) view.getComponents()[1];
+		JButton toggle = (JButton) strategyPanel.getComponents()[0];
+		assertTrue("toggle should have an expand/collapse listener", toggle.getActionListeners().length > 0);
+
+		SwingUtilities.invokeAndWait(toggle::doClick);
+
+		// After one click, toggle text should flip to the expanded glyph (▼).
+		assertTrue("toggle text should indicate expanded state after click",
+			toggle.getText().startsWith("\u25BC"));
+	}
+
+	@Test
+	public void toggleExpanded_multipleToggles_doesNotThrow() throws Exception
+	{
+		Mockito.when(slayerTaskState.isTaskActive()).thenReturn(true);
+		Mockito.when(slayerTaskState.getCreatureName()).thenReturn("Slayer Master");
+		Mockito.when(slayerTaskState.getRemaining()).thenReturn(50);
+		Mockito.when(calculator.getRecommendedMaster()).thenReturn("Konar");
+		Mockito.when(calculator.getUsefulSourcesForCreature("Slayer Master"))
+			.thenReturn(Collections.singletonList("Boss"));
+		Mockito.when(calculator.getMissingItemsForCreature("Slayer Master")).thenReturn(1);
+		Mockito.when(calculator.getRecommendedBlockList("Konar"))
+			.thenReturn(Collections.singletonList("Easy Task"));
+
+		view.refresh();
+
+		JPanel strategyPanel = (JPanel) view.getComponents()[1];
+		JButton toggle = (JButton) strategyPanel.getComponents()[0];
+		String collapsedGlyph = "\u25B6";
+		String expandedGlyph = "\u25BC";
+		assertTrue("toggle should start collapsed", toggle.getText().startsWith(collapsedGlyph));
+
+		SwingUtilities.invokeAndWait(toggle::doClick);
+		assertTrue("toggle should be expanded after first click",
+			toggle.getText().startsWith(expandedGlyph));
+
+		SwingUtilities.invokeAndWait(toggle::doClick);
+		assertTrue("toggle should be collapsed after second click",
+			toggle.getText().startsWith(collapsedGlyph));
 	}
 }
