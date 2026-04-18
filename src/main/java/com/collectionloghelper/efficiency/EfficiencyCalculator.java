@@ -111,10 +111,8 @@ public class EfficiencyCalculator
 			}
 		}
 
-		// Unlocked first (by score desc), then locked (by score desc)
-		results.sort(Comparator
-			.comparing(ScoredItem::isLocked)
-			.thenComparing(Comparator.comparingDouble(ScoredItem::getScore).reversed()));
+		// Sort by efficiency score descending; locked items appear at their natural position
+		results.sort(Comparator.comparingDouble(ScoredItem::getScore).reversed());
 		return results;
 	}
 
@@ -147,9 +145,7 @@ public class EfficiencyCalculator
 			}
 		}
 
-		results.sort(Comparator
-			.comparing(ScoredItem::isLocked)
-			.thenComparing(Comparator.comparingDouble(ScoredItem::getScore).reversed()));
+		results.sort(Comparator.comparingDouble(ScoredItem::getScore).reversed());
 		return results;
 	}
 
@@ -178,9 +174,7 @@ public class EfficiencyCalculator
 			}
 		}
 
-		results.sort(Comparator
-			.comparing(ScoredItem::isLocked)
-			.thenComparing(Comparator.comparingDouble(ScoredItem::getScore).reversed()));
+		results.sort(Comparator.comparingDouble(ScoredItem::getScore).reversed());
 		return results;
 	}
 
