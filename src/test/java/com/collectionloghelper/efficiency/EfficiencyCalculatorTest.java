@@ -1134,4 +1134,65 @@ public class EfficiencyCalculatorTest
 		effectiveTime = calculator.getEffectiveKillTime(source);
 		assertEquals(1440, effectiveTime);
 	}
+
+	// --- #374: locked items rank at natural efficiency position ---
+
+	@Test
+	public void testLockedItemsRankAtNaturalEfficiencyPosition()
+	{
+		// Three sources: locked-fast (high score), unlocked-medium, locked-slow
+		// All must interleave by score; locked must NOT be pushed to the bottom.
+		CollectionLogSource lockedFast = makeSource("Locked Fast", CollectionLogCategory.BOSSES, 60,
+			Collections.singletonList(makeItem(1, "Drop A", 0.5)));   // score ≈ 3000
+		CollectionLogSource unlockedMedium = makeSource("Unlocked Medium", CollectionLogCategory.BOSSES, 120,
+			Collections.singletonList(makeItem(2, "Drop B", 0.1)));   // score ≈ 300
+		CollectionLogSource lockedSlow = makeSource("Locked Slow", CollectionLogCategory.BOSSES, 600,
+			Collections.singletonList(makeItem(3, "Drop C", 0.01)));  // score ≈ 6
+
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+		when(collectionState.isItemObtained(2)).thenReturn(false);
+		when(collectionState.isItemObtained(3)).thenReturn(false);
+
+		// lockedFast and lockedSlow are locked; unlockedMedium is accessible
+		when(requirementsChecker.isAccessible("Locked Fast")).thenReturn(false);
+		when(requirementsChecker.isAccessible("Unlocked Medium")).thenReturn(true);
+		when(requirementsChecker.isAccessible("Locked Slow")).thenReturn(false);
+		when(database.getAllSources()).thenReturn(Arrays.asList(lockedFast, unlockedMedium, lockedSlow));
+
+		List<ScoredItem> ranked = calculator.rankByEfficiency();
+
+		// Expected order by descending score: lockedFast > unlockedMedium > lockedSlow
+		assertEquals(3, ranked.size());
+		assertEquals("Locked Fast", ranked.get(0).getSource().getName());
+		assertEquals("Unlocked Medium", ranked.get(1).getSource().getName());
+		assertEquals("Locked Slow", ranked.get(2).getSource().getName());
+	}
+
+	@Test
+	public void testLockedHighScoreAppearsBeforeUnlockedLowScore()
+	{
+		// Regression guard: a locked guaranteed item (e.g. Demon tear) with a very high score
+		// must appear above low-scoring unlocked sources.
+		CollectionLogSource lockedGuaranteed = makeMilestoneSource("Demon Tear Boss", 1020,
+			Collections.singletonList(makeMilestoneItem(10, "Demon Tear", 1)));
+		// milestoneKills=1, killTime=1020s → hours = 1020/3600 = 0.283 → score ≈ 353
+		CollectionLogSource unlockedRare = makeSource("Unlocked Rare Boss", CollectionLogCategory.BOSSES, 3600,
+			Collections.singletonList(makeItem(11, "Rare Piece", 0.001)));
+		// score = 0.001 * 1 * 100 = 0.1
+
+		when(collectionState.isItemObtained(10)).thenReturn(false);
+		when(collectionState.isItemObtained(11)).thenReturn(false);
+
+		when(requirementsChecker.isAccessible("Demon Tear Boss")).thenReturn(false);
+		when(requirementsChecker.isAccessible("Unlocked Rare Boss")).thenReturn(true);
+		when(database.getAllSources()).thenReturn(Arrays.asList(unlockedRare, lockedGuaranteed));
+
+		List<ScoredItem> ranked = calculator.rankByEfficiency();
+
+		assertEquals(2, ranked.size());
+		// Locked guaranteed (high score) must be first
+		assertEquals("Demon Tear Boss", ranked.get(0).getSource().getName());
+		assertTrue("locked source must appear at natural efficiency position",
+			ranked.get(0).isLocked());
+	}
 }
