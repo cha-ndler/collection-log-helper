@@ -2,6 +2,39 @@
 
 ## Unreleased
 
+## 1.0.0-hub — 2026-04-17
+
+### Changed
+
+- **Panel decomposition (A1 / A1b)** — `CollectionLogHelperPanel` refactored from a 1,661-LOC
+  god-object into a thin shell (698 LOC) delegating to five per-mode controllers
+  (`EfficientModeController`, `CategoryModeController`, `SearchModeController`,
+  `PetHuntModeController`, `StatisticsModeController`) and six shared view widgets
+  (`SyncStatusView`, `ClueSummaryView`, `GuidanceBannerView`, `StepProgressView`,
+  `SlayerStrategyView`, `QuickGuidePanelView`).  PRs [#349](../../pull/349) and [#351](../../pull/351).
+- **Plugin class slim-down (A2)** — `CollectionLogHelperPlugin` reduced from 2,192 LOC to 904 LOC
+  (-59%) by extracting seven dedicated service classes: `OverlayRegistry`, `SceneEventRouter`,
+  `AuthoringLogger`, `SyncStateCoordinator`, `GuidanceUIState`, `GuidanceOverlayCoordinator`,
+  `GuidanceEventRouter`.  PRs [#331](../../pull/331)–[#339](../../pull/339), [#347](../../pull/347).
+
+### Added
+
+- **Data-sourcing infrastructure (A5)** — `verified_scene_ids.json` registry maps cache IDs to
+  scene IDs for known divergences; MCP tools `varbit_lookup`, `cache_diff_check`,
+  `authoring_playbook`, and `data_source_router` (runelite-dev-toolkit v0.2.0) make in-game
+  authoring runs a last resort.  PRs [#341](../../pull/341) and [#342](../../pull/342).
+- **Plugin Hub self-review doc** — `docs/plugin-hub-review.md` audits all submission criteria
+  (27 green / 3 yellow / 2 red), with fix milestones for each open item.
+  PR [#346](../../pull/346).
+
+### Fixed
+
+- **`StepProgressView.hide()` shadowed deprecated `Component.hide()`** — renamed to `hideStep()`
+  so Swing's internal visibility dispatch routes correctly.  PR [#353](../../pull/353) /
+  [#354](../../pull/354).
+
+---
+
 ## 0.1.0 — Initial public release
 
 ### Added
