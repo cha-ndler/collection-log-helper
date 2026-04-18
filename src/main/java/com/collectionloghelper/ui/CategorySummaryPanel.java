@@ -86,8 +86,31 @@ public class CategorySummaryPanel extends JPanel
 		headerPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
 		headerPanel.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
 
-		obtained = collectionState.getCategoryCount(category);
-		total = collectionState.getCategoryMax(category);
+		// SLAYER and SKILLING have no dedicated varps in the OSRS collection log API;
+		// compute counts from the source list instead.
+		int computedObtained = 0;
+		int computedTotal = 0;
+		if (category == CollectionLogCategory.SLAYER || category == CollectionLogCategory.SKILLING)
+		{
+			for (CollectionLogSource src : sources)
+			{
+				for (CollectionLogItem it : src.getItems())
+				{
+					computedTotal++;
+					if (collectionState.isItemObtained(it.getItemId()))
+					{
+						computedObtained++;
+					}
+				}
+			}
+			obtained = computedObtained;
+			total = computedTotal;
+		}
+		else
+		{
+			obtained = collectionState.getCategoryCount(category);
+			total = collectionState.getCategoryMax(category);
+		}
 
 		nameLabel = new JLabel(
 			String.format("\u25B6 %s (%d/%d)", category.getDisplayName(), obtained, total));
