@@ -1500,4 +1500,106 @@ public class GuidanceSequencerTest
 		GuidanceStep resolved = base.resolveAlternative(mockChecker);
 		assertSame(base, resolved);
 	}
+
+	// ---- Skip-chain on activation tests (#375) ----
+
+	/**
+	 * When the initial skip-chain skips N steps and lands on step N+1,
+	 * onStepChanged must be called with that landed step and the sequencer
+	 * index must reflect the skipped position.
+	 * This guards the bug where the panel blue box was not rendered after
+	 * mid-sequence activation.
+	 */
+	@Test
+	public void testStepChangedCallbackFiredWithLandedStepAfterSkipChain()
+	{
+		int item1 = 100;
+		// Step 1: already satisfied (player has item)
+		when(inventoryState.hasItemCount(item1, 1)).thenReturn(true);
+
+		List<GuidanceStep> steps = Arrays.asList(
+			makeInventoryHasItemStep(item1, 1),  // step 0: will be skipped
+			makeManualStep("Landed step"),        // step 1: should be landed on
+			makeManualStep("Final step")          // step 2: not yet reached
+		);
+
+		AtomicReference<GuidanceStep> landedStep = new AtomicReference<>();
+		AtomicReference<Integer> landedIndex = new AtomicReference<>();
+
+		startSequence(steps, s -> {
+			landedStep.set(s);
+			landedIndex.set(sequencer.getCurrentIndex());
+		}, () -> {});
+
+		// Skip-chain should have advanced past step 0 and landed on step 1
+		assertTrue("Sequencer should still be active", sequencer.isActive());
+		assertEquals("Should be at index 1 (step 2/3)", 1, sequencer.getCurrentIndex());
+
+		// onStepChanged must have been called with the landed step
+		assertNotNull("onStepChanged must be called after skip-chain", landedStep.get());
+		assertEquals("Landed step description must match", "Landed step", landedStep.get().getDescription());
+		assertEquals("Landed index must match current index", 1, landedIndex.get().intValue());
+	}
+
+	/**
+	 * When all steps are already satisfied at activation, onStepChanged must NOT be
+	 * called (there is no valid step to display), but onSequenceComplete must fire,
+	 * and the sequencer must be inactive when startSequence returns.
+	 * This guards the edge-case where the panel showed an empty blue box ("Step 1/0:").
+	 */
+	@Test
+	public void testAllStepsSatisfiedNoStepChangedCallbackFired()
+	{
+		int item1 = 100, item2 = 200;
+		when(inventoryState.hasItemCount(item1, 1)).thenReturn(true);
+		when(inventoryState.hasItemCount(item2, 1)).thenReturn(true);
+
+		List<GuidanceStep> steps = Arrays.asList(
+			makeInventoryHasItemStep(item1, 1),
+			makeInventoryHasItemStep(item2, 1)
+		);
+
+		AtomicReference<GuidanceStep> receivedStep = new AtomicReference<>();
+		AtomicBoolean completed = new AtomicBoolean(false);
+
+		startSequence(steps, s -> receivedStep.set(s), () -> completed.set(true));
+
+		// Sequence should be complete and inactive
+		assertTrue("onSequenceComplete must fire", completed.get());
+		assertFalse("Sequencer must be inactive after all-satisfied sequence", sequencer.isActive());
+
+		// onStepChanged must NOT have been called — there is no valid step to land on
+		assertNull("onStepChanged must not be called when all steps are already satisfied",
+			receivedStep.get());
+	}
+
+	/**
+	 * When the skip-chain skips the first two steps out of five and lands on step 3,
+	 * the callback receives step 3 and the index is 2.
+	 * Mirrors the Shades of Mort'ton scenario from issue #375.
+	 */
+	@Test
+	public void testMidSequenceActivationLandsOnCorrectStep()
+	{
+		// Steps 1 and 2: ARRIVE_AT_TILE already satisfied (player is at location)
+		sequencer.setPlayerLocation(new WorldPoint(3507, 3275, 0));
+
+		List<GuidanceStep> steps = Arrays.asList(
+			makeArriveStep(3488, 3283, 0, 25),   // step 0: bank/arrive — satisfied
+			makeArriveStep(3507, 3275, 0, 10),   // step 1: at pyre — satisfied
+			makeManualStep("Pick up shade key"), // step 2: not satisfied, should land here
+			makeManualStep("Enter catacombs"),   // step 3
+			makeManualStep("Open chests")        // step 4
+		);
+
+		AtomicReference<GuidanceStep> landedStep = new AtomicReference<>();
+		startSequence(steps, s -> landedStep.set(s), () -> {});
+
+		assertTrue("Sequencer should be active", sequencer.isActive());
+		assertEquals("Should land on index 2", 2, sequencer.getCurrentIndex());
+		assertEquals("Total steps should be 5", 5, sequencer.getTotalSteps());
+		assertNotNull("onStepChanged must have fired", landedStep.get());
+		assertEquals("Landed step should be 'Pick up shade key'",
+			"Pick up shade key", landedStep.get().getDescription());
+	}
 }

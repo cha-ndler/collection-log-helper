@@ -215,14 +215,28 @@ public class GuidanceOverlayCoordinator
 		if (source.getGuidanceSteps() != null && !source.getGuidanceSteps().isEmpty())
 		{
 			guidanceSequencer.setPlayerLocation(cachedPlayerLocation);
-			// startSequence triggers onStepChanged callback which handles
-			// applyStepToOverlays and scanForTrackedNpc for the initial step
+			// startSequence runs the initial skip-chain synchronously. If all steps
+			// are already satisfied, onSequenceComplete fires inside startSequence,
+			// which calls deactivateGuidance() — leave panel cleared and return.
 			guidanceSequencer.startSequence(source, this::onStepChanged, this::onSequenceComplete);
+
+			if (!guidanceSequencer.isActive())
+			{
+				// All steps were already satisfied — sequence completed immediately.
+				// onSequenceComplete already called deactivateGuidance(); nothing more to do.
+				log.debug("Multi-step guidance for {} completed immediately (all steps already satisfied)",
+					source.getName());
+				return;
+			}
+
+			// Sequence is active: landed on a mid-sequence step after skip-chain.
+			// Explicitly push the landed step to the panel to ensure the blue box is
+			// rendered even when the skip-chain bypassed the normal step-transition path.
 			GuidanceStep step = guidanceSequencer.getCurrentStep();
+			GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
 			if (panel != null)
 			{
 				panel.setGuidanceState(true, source);
-				GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
 				panel.updateStepProgress(
 					guidanceSequencer.getCurrentIndex() + 1,
 					guidanceSequencer.getTotalSteps(),
@@ -230,18 +244,20 @@ public class GuidanceOverlayCoordinator
 					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL,
 					rawStep != null ? rawStep.getRequiredItemIds() : null);
 			}
-			// Add InfoBox showing step progress
+			// Add InfoBox showing the correct landed step (not always "1/N")
 			if (!source.getItems().isEmpty() && pluginInstance != null)
 			{
 				BufferedImage icon = itemManager.getImage(source.getItems().get(0).getItemId());
 				activeInfoBox = new GuidanceInfoBox(icon, pluginInstance);
-				activeInfoBox.setStepText("1/" + guidanceSequencer.getTotalSteps());
+				int landedStep = guidanceSequencer.getCurrentIndex() + 1;
+				activeInfoBox.setStepText(landedStep + "/" + guidanceSequencer.getTotalSteps());
 				activeInfoBox.setTooltipText(source.getName() + ": "
 					+ (step != null ? step.getDescription() : ""));
 				infoBoxManager.addInfoBox(activeInfoBox);
 			}
-			log.debug("Multi-step guidance activated for {} ({} steps)",
-				source.getName(), source.getGuidanceSteps().size());
+			log.debug("Multi-step guidance activated for {} ({} steps, starting at step {})",
+				source.getName(), source.getGuidanceSteps().size(),
+				guidanceSequencer.getCurrentIndex() + 1);
 			return;
 		}
 
