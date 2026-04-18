@@ -11640,13 +11640,14 @@
     "travelTip": "Minigame teleport -> Shades of Mort'ton, or Mort'ton teleport scroll",
     "guidanceSteps": [
       {
-        "description": "Travel to Mort'ton via Barrows teleport or fairy ring BKR. Bring pyre logs and shade remains",
-        "worldX": 3506,
-        "worldY": 3310,
+        "description": "Bank: bring pyre logs, shade remains, and a tinderbox to Mort'ton",
+        "worldX": 3488,
+        "worldY": 3283,
         "worldPlane": 0,
-        "travelTip": "Minigame teleport -> Shades of Mort'ton | Barrows teleport + run south | Mort'ton teleport scroll",
+        "travelTip": "Minigame teleport -> Shades of Mort'ton | Barrows teleport + run south | Mort'ton teleport scroll | Fairy ring BKR",
+        "requiredItemIds": [590],
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 8
+        "completionDistance": 25
       },
       {
         "description": "Burn shade remains on the funeral pyres, then use shade keys on the underground chests",
