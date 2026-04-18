@@ -530,7 +530,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 
 **Tier D — Coverage breadth**
 
-- [ ] D1 — Deep-guidance authoring bar                  status: planned       owner: —          updated: 2026-04-16
+- [/] D1 — Deep-guidance authoring bar                  status: in-progress   owner: cha-ndler  updated: 2026-04-17  pr: pending
 - [ ] D2 — Top-40 sources deep pass                     status: planned       owner: —          updated: 2026-04-16
 - [ ] D3 — Mid-tier sources deep pass                   status: planned       owner: —          updated: 2026-04-16
 - [ ] D4 — Long-tail sources deep pass                  status: planned       owner: —          updated: 2026-04-16
