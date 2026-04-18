@@ -12834,6 +12834,7 @@
       }
     ],
     "afkLevel": 1,
+    "rewardType": "MILESTONE",
     "travelTip": "Obtain from various activities, open for random tier clue"
   },
   {
@@ -16096,6 +16097,7 @@
         "completionCondition": "MANUAL"
       }
     ],
+    "rewardType": "MILESTONE",
     "requirements": {
       "skills": [
         {
@@ -18167,7 +18169,8 @@
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
-    ]
+    ],
+    "rewardType": "MILESTONE"
   },
   {
     "name": "Motherlode Mine",
