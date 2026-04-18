@@ -492,7 +492,7 @@ This bar is the authoring target for [Tier D (D2-D4)](docs/ROADMAP.md#tier-d--co
 
 **Common pitfall.** Writing only the *fastest* route without a fallback waypoint. New accounts without Eadgar's Ruse silently receive a travel tip that requires a quest they haven't done. Always pair an unlocked-ability travel tip with at least one unconditional fallback waypoint.
 
-> Further reading: [`feedback_object_step_ux_pattern.md`](https://github.com/cha-ndler/runelite-dev-toolkit/blob/main/memory-seed/feedback_object_step_ux_pattern.md) — covers how to set `worldX/Y` correctly on steps so the hint arrow lands on the right tile.
+> **Coordinate precision note:** `worldX/worldY` on every step must match the object's *actual* tile, not the room centre. The hint arrow and minimap dot are both derived from `worldX/worldY` — an off-by-one puts the arrow on the wrong tile. Verify coordinates with the `coordinate_helper` MCP tool or the RuneLite Developer Tools tile-hover readout.
 
 ---
 
@@ -568,7 +568,7 @@ This bar is the authoring target for [Tier D (D2-D4)](docs/ROADMAP.md#tier-d--co
 
 **Common pitfall.** Setting `requirements` for the *preferred* route only. If accessing the boss requires a quest, the quest must be in `requirements.quests` — even if an alternate unquested route exists. A player who cannot do the content should see it as locked, not receive a travel tip for a route they cannot complete. Use `waypoints` to handle the unlocked-route variation, not `requirements`.
 
-> See [`feedback_category_taxonomy.md`](https://github.com/cha-ndler/runelite-dev-toolkit/blob/main/memory-seed/feedback_category_taxonomy.md) for category assignment rules — getting `category` right is a prerequisite-adjacent concern because the panel's locked-source filtering is category-aware.
+> **Category reminder:** The `category` field affects locked-source filtering. Use `SLAYER` for slayer creatures, `SKILLING` for non-combat skill activities, and `OTHER` only for genuinely miscellaneous sources. See the [JSON Schema Reference](#collectionlogsource) table for the full enum.
 
 ---
 
@@ -576,7 +576,7 @@ This bar is the authoring target for [Tier D (D2-D4)](docs/ROADMAP.md#tier-d--co
 
 **Definition.** Every item has a `dropRate` value with at least six decimal places of precision, sourced from the highest-confidence data tier available for that data type. The source citation is not stored in the JSON (the file has no comment fields), but the contributor should know where the rate came from and be prepared to justify it in the PR description. Rates that differ materially from the Wiki must note the reconciliation reason in the PR.
 
-**Good example:** `Zulrah` — zero `guidance_lint` issues; `rollsPerKill: 2` reflects the actual dual-table mechanic; `independent: true` on the mutagen items marks their separate table correctly. The rates align with TempleOSRS EHB math.
+**Good example:** `Zulrah` — zero `guidance_lint` issues; `independent: true` on the mutagen items marks their separate table correctly. The rates align with TempleOSRS EHB math.
 
 **Common pitfall.** Using a Wiki drop rate when TempleOSRS or the Log Hunters spreadsheet has a more accurate community-audited figure. Per decision [D-03](docs/ROADMAP.md#d-03--data-sourcing-strategy-minimize-in-game-authoring-runs), the source-of-truth precedence for drop rates is: **Wiki first**, **Log Hunters second**, **TempleOSRS third** for rate precision. Collection log item IDs are the inverse — use TempleOSRS canonical IDs, not the Wiki item IDs, which diverge for some items.
 
