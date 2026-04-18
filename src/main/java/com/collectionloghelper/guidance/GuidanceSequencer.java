@@ -26,6 +26,7 @@ package com.collectionloghelper.guidance;
 
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.CompletionCondition;
+import com.collectionloghelper.data.CompletionNode;
 import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
@@ -644,12 +645,41 @@ public class GuidanceSequencer
 			}
 		}
 
+		// B1: composable AND/OR tree takes precedence when present. The tree's leaves
+		// reuse the exact same predicate the legacy switch uses, so a tree whose single
+		// leaf wraps the legacy enum behaves identically.
+		CompletionNode node = step.getCompletionNode();
+		if (node != null)
+		{
+			return node.evaluate(leaf -> evaluateLeafCondition(step, leaf));
+		}
+
 		if (step.getCompletionCondition() == null)
 		{
 			return false;
 		}
 
-		switch (step.getCompletionCondition())
+		return evaluateLeafCondition(step, step.getCompletionCondition());
+	}
+
+	/**
+	 * Evaluates a single atomic {@link CompletionCondition} against the current
+	 * sequencer state using the fields on {@code step}. This is the shared leaf
+	 * predicate used by both the legacy single-enum path and the new composable
+	 * {@link CompletionNode} tree path (B1).
+	 *
+	 * <p>Event-driven conditions (ACTOR_DEATH, CHAT_MESSAGE_RECEIVED, VARBIT_AT_LEAST,
+	 * NPC_TALKED_TO, MANUAL) always return {@code false} here — they cannot be
+	 * eagerly verified against cached state and must be driven by the matching
+	 * event handlers.
+	 */
+	private boolean evaluateLeafCondition(GuidanceStep step, CompletionCondition condition)
+	{
+		if (condition == null)
+		{
+			return false;
+		}
+		switch (condition)
 		{
 			case INVENTORY_HAS_ITEM:
 				return step.getCompletionItemId() > 0
@@ -674,7 +704,8 @@ public class GuidanceSequencer
 			case ACTOR_DEATH:
 			case CHAT_MESSAGE_RECEIVED:
 			case VARBIT_AT_LEAST:
-				return false;
+			case NPC_TALKED_TO:
+			case MANUAL:
 			default:
 				return false;
 		}
