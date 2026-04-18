@@ -327,6 +327,77 @@ public class GuidanceOverlayCoordinator
 	}
 
 	/**
+	 * Shows or hides all guidance overlays without touching the guidance sequencer state.
+	 * Called when the {@code showOverlays} config option is toggled at runtime.
+	 * <p>
+	 * When {@code visible=false}: clears all overlay visuals (tiles, NPC/object highlights,
+	 * minimap arrow, world map route, hint arrow, ShortestPath) but leaves the sequencer,
+	 * InfoBox, and panel step display untouched so auto-progression continues normally.
+	 * <p>
+	 * When {@code visible=true}: re-applies the current guidance step to overlays so they
+	 * reappear without requiring the user to restart guidance.
+	 *
+	 * @param visible {@code true} to show overlays, {@code false} to hide them
+	 */
+	public void setOverlaysEnabled(boolean visible)
+	{
+		if (!visible)
+		{
+			// Hide overlays only — do NOT stop the sequencer or clear InfoBox/panel
+			clearGuidanceOverlays();
+			return;
+		}
+
+		// Re-show overlays: re-apply the current step if guidance is active
+		if (!guidanceSequencer.isActive())
+		{
+			return;
+		}
+		GuidanceStep step = guidanceSequencer.getCurrentStep();
+		if (step == null)
+		{
+			return;
+		}
+		CollectionLogSource activeSource = guidanceSequencer.getActiveSource();
+		String sourceName = activeSource != null ? activeSource.getName() : "";
+		applyStepToOverlays(step, sourceName, activeSource);
+		scanForTrackedNpc(step);
+	}
+
+	/**
+	 * Refreshes the in-game hint arrow to match the current {@code showHintArrow} config value.
+	 * Called when the {@code showHintArrow} config option is toggled at runtime. If hint arrows
+	 * are now disabled, clears the arrow; if enabled and guidance is active, re-sets it to
+	 * the current target.
+	 */
+	public void refreshHintArrow()
+	{
+		if (!config.showHintArrow())
+		{
+			clientThread.invokeLater(() -> client.clearHintArrow());
+			return;
+		}
+
+		// Re-apply hint arrow to the current guidance target (if any)
+		if (!guidanceSequencer.isActive())
+		{
+			return;
+		}
+		GuidanceStep step = guidanceSequencer.getRawCurrentStep();
+		if (step != null && step.getWorldX() > 0)
+		{
+			WorldPoint worldPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
+			clientThread.invokeLater(() ->
+			{
+				if (shouldSetHintArrowTo(worldPoint))
+				{
+					client.setHintArrow(worldPoint);
+				}
+			});
+		}
+	}
+
+	/**
 	 * Called from the plugin's onGameTick. Handles world map arrow rotation
 	 * and dispatches the deferred ShortestPath "path" message.
 	 */

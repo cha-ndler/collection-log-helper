@@ -76,6 +76,7 @@ import net.runelite.api.events.ScriptPreFired;
 import net.runelite.api.ScriptEvent;
 import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.api.gameval.InventoryID;
 import net.runelite.api.gameval.ItemID;
 import net.runelite.client.callback.ClientThread;
@@ -482,6 +483,46 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		clueEstimator.resetBucket();
 		pendingRequirementsRefresh = true;
+	}
+
+	@Subscribe
+	public void onConfigChanged(ConfigChanged event)
+	{
+		if (!"collectionloghelper".equals(event.getGroup()))
+		{
+			return;
+		}
+
+		String key = event.getKey();
+
+		// Show Overlays toggled: hide or restore overlay visuals without stopping guidance
+		if ("showOverlays".equals(key))
+		{
+			guidanceCoordinator.setOverlaysEnabled(config.showOverlays());
+			return;
+		}
+
+		// Show Hint Arrow toggled: refresh the in-game arrow to match current state
+		if ("showHintArrow".equals(key))
+		{
+			guidanceCoordinator.refreshHintArrow();
+			return;
+		}
+
+		// Filter/display settings that require an immediate panel rebuild
+		if ("hideObtainedItems".equals(key)
+			|| "hideLockedContent".equals(key)
+			|| "accountType".equals(key)
+			|| "raidTeamSize".equals(key)
+			|| "afkFilter".equals(key)
+			|| "efficientSortMode".equals(key)
+			|| "showSyncReminder".equals(key)
+			|| "showBankScanReminder".equals(key)
+			|| "defaultMode".equals(key))
+		{
+			pendingPanelRebuild = true;
+			rankedSourcesDirty = true;
+		}
 	}
 
 	@Subscribe
