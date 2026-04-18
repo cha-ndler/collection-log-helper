@@ -495,10 +495,10 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		String key = event.getKey();
 
-		// Show Overlays toggled off: clear any active guidance immediately
-		if ("showOverlays".equals(key) && !config.showOverlays())
+		// Show Overlays toggled: hide or restore overlay visuals without stopping guidance
+		if ("showOverlays".equals(key))
 		{
-			deactivateGuidance();
+			guidanceCoordinator.setOverlaysEnabled(config.showOverlays());
 			return;
 		}
 
