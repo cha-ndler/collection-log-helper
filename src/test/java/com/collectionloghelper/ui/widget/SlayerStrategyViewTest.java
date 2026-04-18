@@ -26,12 +26,17 @@ package com.collectionloghelper.ui.widget;
 
 import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collections;
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests for {@link SlayerStrategyView}.
@@ -95,5 +100,63 @@ public class SlayerStrategyViewTest
 			.thenReturn(Collections.emptyList());
 		Mockito.when(calculator.getMissingItemsForCreature(null)).thenReturn(0);
 		view.refresh();
+	}
+
+	@Test
+	public void refresh_activeTask_expandedState_doesNotThrow() throws Exception
+	{
+		Mockito.when(slayerTaskState.isTaskActive()).thenReturn(true);
+		Mockito.when(slayerTaskState.getCreatureName()).thenReturn("Abyssal Demons");
+		Mockito.when(slayerTaskState.getRemaining()).thenReturn(120);
+		Mockito.when(calculator.getRecommendedMaster()).thenReturn("Duradel");
+		Mockito.when(calculator.getUsefulSourcesForCreature("Abyssal Demons"))
+			.thenReturn(Collections.singletonList("Abyssal Lord"));
+		Mockito.when(calculator.getMissingItemsForCreature("Abyssal Demons")).thenReturn(2);
+		Mockito.when(calculator.getRecommendedBlockList("Duradel"))
+			.thenReturn(Collections.emptyList());
+
+		view.refresh();
+
+		// Drive the toggle button's ActionListener on the EDT to expand
+		SwingUtilities.invokeAndWait(() ->
+		{
+			ActionListener[] listeners = view.getComponents()[1].getListeners(ActionListener.class);
+			for (ActionListener listener : listeners)
+			{
+				listener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+			}
+		});
+
+		// No exception should occur; expanded content should render without error
+	}
+
+	@Test
+	public void toggleExpanded_multipleToggles_doesNotThrow() throws Exception
+	{
+		Mockito.when(slayerTaskState.isTaskActive()).thenReturn(true);
+		Mockito.when(slayerTaskState.getCreatureName()).thenReturn("Slayer Master");
+		Mockito.when(slayerTaskState.getRemaining()).thenReturn(50);
+		Mockito.when(calculator.getRecommendedMaster()).thenReturn("Konar");
+		Mockito.when(calculator.getUsefulSourcesForCreature("Slayer Master"))
+			.thenReturn(Collections.singletonList("Boss"));
+		Mockito.when(calculator.getMissingItemsForCreature("Slayer Master")).thenReturn(1);
+		Mockito.when(calculator.getRecommendedBlockList("Konar"))
+			.thenReturn(Collections.singletonList("Easy Task"));
+
+		view.refresh();
+
+		// Toggle expanded and collapsed states repeatedly
+		SwingUtilities.invokeAndWait(() ->
+		{
+			ActionListener[] listeners = view.getComponents()[1].getListeners(ActionListener.class);
+			if (listeners.length > 0)
+			{
+				ActionListener listener = listeners[0];
+				// Toggle to expanded
+				listener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+				// Toggle back to collapsed
+				listener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+			}
+		});
 	}
 }
