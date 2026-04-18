@@ -240,9 +240,12 @@ public class CollectionLogHelperPlugin extends Plugin
 			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()),
 			sort -> configManager.setConfiguration("collectionloghelper", "efficientSortMode", sort.name()));
 		panel.setMode(config.defaultMode());
+		// Route step-advance and skip through the client thread so overlay
+		// rescans (e.g. ObjectHighlightOverlay.rescanScene) fire in the same
+		// game-frame as auto-completion events rather than the next tick.
 		panel.setStepCallbacks(
-			() -> guidanceSequencer.advanceStep(),
-			() -> guidanceSequencer.skipStep()
+			() -> clientThread.invokeLater(guidanceSequencer::advanceStep),
+			() -> clientThread.invokeLater(guidanceSequencer::skipStep)
 		);
 
 		// Wire coordinator with references it needs from the plugin
