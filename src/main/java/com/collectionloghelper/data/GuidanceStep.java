@@ -157,6 +157,17 @@ public class GuidanceStep
 	 */
 	List<ConditionalAlternative> conditionalAlternatives;
 
+	/**
+	 * Composable AND/OR completion tree (B1). When non-null, the sequencer walks the tree
+	 * for eager completion checks instead of looking at {@link #completionCondition}.
+	 *
+	 * <p>The legacy {@link #completionCondition} field remains the canonical atomic form
+	 * and continues to drive event-triggered handlers (item drops, NPC death, chat events,
+	 * varbit updates). This field is strictly additive: when absent (as it is on every
+	 * production source as of B1), behaviour is identical to the legacy path.
+	 */
+	CompletionNode completionNode;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
@@ -292,7 +303,8 @@ public class GuidanceStep
 			this.skipIfHasAnyItemIds,
 			this.dynamicItemObjectTiers,
 			this.completionZone,
-			null // merged steps don't carry alternatives (already resolved)
+			null, // merged steps don't carry alternatives (already resolved)
+			this.completionNode
 		);
 	}
 }

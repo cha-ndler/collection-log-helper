@@ -108,7 +108,8 @@ public class GuidanceSequencerTest
 			null,           // skipIfHasAnyItemIds
 			null,           // dynamicItemObjectTiers
 			null,           // completionZone
-			null            // conditionalAlternatives
+			null,           // conditionalAlternatives
+			null            // completionNode
 		);
 	}
 
@@ -135,7 +136,8 @@ public class GuidanceSequencerTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
@@ -162,7 +164,8 @@ public class GuidanceSequencerTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
@@ -189,7 +192,8 @@ public class GuidanceSequencerTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
@@ -216,7 +220,8 @@ public class GuidanceSequencerTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
@@ -243,7 +248,8 @@ public class GuidanceSequencerTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
@@ -270,7 +276,8 @@ public class GuidanceSequencerTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
@@ -298,7 +305,8 @@ public class GuidanceSequencerTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
@@ -325,7 +333,8 @@ public class GuidanceSequencerTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
@@ -352,7 +361,8 @@ public class GuidanceSequencerTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
@@ -379,7 +389,8 @@ public class GuidanceSequencerTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
@@ -743,6 +754,7 @@ public class GuidanceSequencerTest
 			false,
 			0, null, null,
 			0, 0,
+			null,
 			null,
 			null,
 			null,
@@ -1204,7 +1216,8 @@ public class GuidanceSequencerTest
 			null,
 			null,
 			null,
-			alternatives
+			alternatives,
+			null
 		);
 	}
 
@@ -1426,7 +1439,8 @@ public class GuidanceSequencerTest
 			null,
 			null,
 			null,
-			Collections.emptyList()  // empty list of alternatives
+			Collections.emptyList(),  // empty list of alternatives
+			null
 		);
 
 		List<GuidanceStep> steps = Arrays.asList(step);

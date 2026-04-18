@@ -705,7 +705,8 @@ public class GuidanceSequencer
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 
