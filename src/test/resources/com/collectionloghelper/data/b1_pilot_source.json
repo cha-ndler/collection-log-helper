@@ -1,0 +1,84 @@
+[
+  {
+    "name": "B1 Pilot Source",
+    "category": "BOSSES",
+    "worldX": 3200,
+    "worldY": 3200,
+    "worldPlane": 0,
+    "killTimeSeconds": 60,
+    "ironKillTimeSeconds": 0,
+    "locationDescription": "Synthetic fixture for B1 composable completion conditions.",
+    "waypoints": [],
+    "rewardType": "DROP",
+    "pointsPerHour": 0.0,
+    "mutuallyExclusiveSources": [],
+    "rollsPerKill": 1,
+    "aggregated": false,
+    "afkLevel": 0,
+    "npcId": 0,
+    "guidanceSteps": [
+      {
+        "description": "Legacy-shape step — still uses single completionCondition enum.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "AND-tree step: need both key AND arrive at zone.",
+        "worldX": 3200,
+        "worldY": 3200,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "completionItemId": 12345,
+        "completionZone": [3195, 3195, 3205, 3205, 0],
+        "completionNode": {
+          "op": "all",
+          "nodes": [
+            "INVENTORY_HAS_ITEM",
+            "ARRIVE_AT_ZONE"
+          ]
+        }
+      },
+      {
+        "description": "OR-tree step: either item obtained OR inventory already has it.",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "completionItemId": 12345,
+        "completionNode": {
+          "op": "any",
+          "nodes": [
+            "ITEM_OBTAINED",
+            "INVENTORY_HAS_ITEM"
+          ]
+        }
+      },
+      {
+        "description": "Nested tree: ALL(ITEM_OBTAINED, ANY(INVENTORY_HAS_ITEM, PLAYER_ON_PLANE)).",
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 2,
+        "completionCondition": "MANUAL",
+        "completionItemId": 12345,
+        "completionNode": {
+          "op": "all",
+          "nodes": [
+            "ITEM_OBTAINED",
+            {
+              "op": "any",
+              "nodes": [
+                "INVENTORY_HAS_ITEM",
+                "PLAYER_ON_PLANE"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "cumulativeTrackItemId": 0,
+    "cumulativeTrackThreshold": 0,
+    "items": []
+  }
+]

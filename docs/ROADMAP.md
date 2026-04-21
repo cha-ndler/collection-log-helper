@@ -511,7 +511,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 
 **Tier B — Guidance depth parity with Quest Helper**
 
-- [ ] B1 — Composable completion conditions             status: planned       owner: —          updated: 2026-04-16
+- [/] B1 — Composable completion conditions             status: in-progress   owner: cha-ndler  updated: 2026-04-17
 - [ ] B2 — Tile-sequence pathing                        status: planned       owner: —          updated: 2026-04-16
 - [ ] B3 — Nested conditional steps                     status: planned       owner: —          updated: 2026-04-16
 - [ ] B4 — Alternative-method modelling                 status: planned       owner: —          updated: 2026-04-16

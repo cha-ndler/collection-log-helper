@@ -131,7 +131,8 @@ public class GuidanceEventRouterTest
 			null,  // skipIfHasAnyItemIds
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
-			null   // conditionalAlternatives
+			null,  // conditionalAlternatives
+			null   // completionNode
 		);
 	}
 

@@ -64,8 +64,15 @@ public class DropRateDatabase
 				return;
 			}
 
+			// Extend the injected Gson with the CompletionNode adapter so guidance
+			// steps can opt into composable AND/OR completion trees (B1) while legacy
+			// string-enum completionCondition data keeps parsing unchanged.
+			Gson nodeAwareGson = gson.newBuilder()
+				.registerTypeAdapter(CompletionNode.class, new CompletionNodeAdapter())
+				.create();
+
 			Type listType = new TypeToken<List<CollectionLogSource>>(){}.getType();
-			sources = gson.fromJson(new InputStreamReader(is), listType);
+			sources = nodeAwareGson.fromJson(new InputStreamReader(is), listType);
 
 			itemsById = sources.stream()
 				.flatMap(s -> s.getItems().stream())
