@@ -198,8 +198,15 @@ public class GuidanceOverlayCoordinator
 	 */
 	public void activateGuidance(CollectionLogSource source, WorldPoint cachedPlayerLocation)
 	{
+		log.info("[guide-me-trace] activateGuidance ENTRY source={} showOverlays={} panel={} cachedLoc={}",
+			source != null ? source.getName() : "null",
+			config.showOverlays(),
+			panel != null ? "set" : "NULL",
+			cachedPlayerLocation);
+
 		if (!config.showOverlays())
 		{
+			log.info("[guide-me-trace] activateGuidance EARLY-RETURN: showOverlays=false");
 			return;
 		}
 
@@ -213,23 +220,30 @@ public class GuidanceOverlayCoordinator
 		}
 
 		// Clear any existing guidance first, including InfoBox and sequencer
+		log.info("[guide-me-trace] activateGuidance calling deactivateGuidance() to clear prior state");
 		deactivateGuidance();
 
 		// If source has multi-step guidance, start the sequencer
 		if (source.getGuidanceSteps() != null && !source.getGuidanceSteps().isEmpty())
 		{
+			log.info("[guide-me-trace] activateGuidance: source has {} guidance steps, calling startSequence",
+				source.getGuidanceSteps().size());
 			guidanceSequencer.setPlayerLocation(cachedPlayerLocation);
 			// startSequence runs the initial skip-chain synchronously. If all steps
 			// are already satisfied, onSequenceComplete fires inside startSequence,
 			// which calls deactivateGuidance() — leave panel cleared and return.
 			guidanceSequencer.startSequence(source, this::onStepChanged, this::onSequenceComplete);
 
+			log.info("[guide-me-trace] activateGuidance: after startSequence isActive={} currentIndex={} totalSteps={}",
+				guidanceSequencer.isActive(),
+				guidanceSequencer.getCurrentIndex(),
+				guidanceSequencer.getTotalSteps());
+
 			if (!guidanceSequencer.isActive())
 			{
 				// All steps were already satisfied — sequence completed immediately.
 				// onSequenceComplete already called deactivateGuidance(); nothing more to do.
-				log.debug("Multi-step guidance for {} completed immediately (all steps already satisfied)",
-					source.getName());
+				log.info("[guide-me-trace] activateGuidance EARLY-RETURN: all steps already satisfied (panel state NOT activated)");
 				return;
 			}
 
@@ -240,13 +254,28 @@ public class GuidanceOverlayCoordinator
 			GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
 			if (panel != null)
 			{
-				panel.setGuidanceState(true, source);
+				log.info("[guide-me-trace] activateGuidance: about to call panel.setGuidanceState(true, {})",
+					source.getName());
+				try
+				{
+					panel.setGuidanceState(true, source);
+					log.info("[guide-me-trace] activateGuidance: panel.setGuidanceState COMPLETED");
+				}
+				catch (RuntimeException ex)
+				{
+					log.error("[guide-me-trace] activateGuidance: panel.setGuidanceState THREW", ex);
+					throw ex;
+				}
 				panel.updateStepProgress(
 					guidanceSequencer.getCurrentIndex() + 1,
 					guidanceSequencer.getTotalSteps(),
 					step != null ? step.getDescription() : "",
 					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL,
 					rawStep != null ? rawStep.getRequiredItemIds() : null);
+			}
+			else
+			{
+				log.warn("[guide-me-trace] activateGuidance: panel reference is NULL, cannot setGuidanceState");
 			}
 			// Add InfoBox showing the correct landed step (not always "1/N")
 			if (!source.getItems().isEmpty() && pluginInstance != null)
@@ -259,9 +288,10 @@ public class GuidanceOverlayCoordinator
 					+ (step != null ? step.getDescription() : ""));
 				infoBoxManager.addInfoBox(activeInfoBox);
 			}
-			log.debug("Multi-step guidance activated for {} ({} steps, starting at step {})",
-				source.getName(), source.getGuidanceSteps().size(),
-				guidanceSequencer.getCurrentIndex() + 1);
+			log.info("[guide-me-trace] activateGuidance EXIT (multi-step path) for {} at step {}/{}",
+				source.getName(),
+				guidanceSequencer.getCurrentIndex() + 1,
+				guidanceSequencer.getTotalSteps());
 			return;
 		}
 
@@ -308,6 +338,11 @@ public class GuidanceOverlayCoordinator
 	 */
 	public void deactivateGuidance()
 	{
+		log.info("[guide-me-trace] deactivateGuidance ENTRY sequencerActive={} caller-stack-top={}",
+			guidanceSequencer.isActive(),
+			Thread.currentThread().getStackTrace().length > 2
+				? Thread.currentThread().getStackTrace()[2].toString()
+				: "?");
 		lastMessagedStepIndex = -1;
 		trackedGuidanceNpc = null;
 		if (activeInfoBox != null)
@@ -760,6 +795,9 @@ public class GuidanceOverlayCoordinator
 	 */
 	private void onStepChanged(GuidanceStep step)
 	{
+		log.info("[guide-me-trace] onStepChanged ENTRY step.desc={} stepIndex={}",
+			step != null ? step.getDescription() : "null",
+			guidanceSequencer.getCurrentIndex());
 		clearGuidanceOverlays();
 		CollectionLogSource activeSource = guidanceSequencer.getActiveSource();
 		String sourceName = activeSource != null ? activeSource.getName() : "";
@@ -807,6 +845,7 @@ public class GuidanceOverlayCoordinator
 	{
 		String sourceName = guidanceSequencer.getActiveSource() != null
 			? guidanceSequencer.getActiveSource().getName() : "unknown";
+		log.info("[guide-me-trace] onSequenceComplete ENTRY sourceName={}", sourceName);
 		deactivateGuidance();
 		log.debug("Guidance sequence complete for {}", sourceName);
 		if (onSequenceCompleteCallback != null)

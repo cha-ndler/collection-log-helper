@@ -82,12 +82,14 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.PluginPanel;
 import net.runelite.client.util.SwingUtil;
 
+@Slf4j
 public class CollectionLogHelperPanel extends PluginPanel implements PanelShellContext
 {
 
@@ -592,11 +594,20 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	@Override
 	public JPanel createQuickGuidePanel(ScoredItem topItem)
 	{
+		log.info("[guide-me-trace] createQuickGuidePanel topItem.source={} guidanceActive={} guidedSource={}",
+			topItem != null && topItem.getSource() != null ? topItem.getSource().getName() : "null",
+			guidanceActive,
+			guidedSource != null ? guidedSource.getName() : "null");
 		return quickGuidePanelView.create(topItem, guidanceActive, guidedSource);
 	}
 
 	public void setGuidanceState(boolean active, CollectionLogSource source)
 	{
+		log.info("[guide-me-trace] panel.setGuidanceState ENTRY active={} source={} prevActive={} prevSource={}",
+			active,
+			source != null ? source.getName() : "null",
+			guidanceActive,
+			guidedSource != null ? guidedSource.getName() : "null");
 		guidanceActive = active;
 		guidedSource = source;
 		if (active && source != null)
@@ -608,6 +619,9 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			guidanceBannerView.hideGuidance();
 		}
 		quickGuidePanelView.syncGuidanceState(active, source);
+		log.info("[guide-me-trace] panel.setGuidanceState EXIT guidanceActive={} guidedSource={}",
+			guidanceActive,
+			guidedSource != null ? guidedSource.getName() : "null");
 	}
 
 	public void showClueGuidance(CollectionLogSource source)
