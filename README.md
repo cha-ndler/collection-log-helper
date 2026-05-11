@@ -98,6 +98,15 @@ Ranks every collection log source by efficiency and guides you there step-by-ste
 
 Requires Java 11+. Uses RuneLite client API, Lombok, and JUnit 4.
 
+## Testing
+
+```bash
+./gradlew test    # unit tests
+./gradlew run     # dev-mode RuneLite with the plugin sideloaded
+```
+
+Unit tests cover pure logic. Anything touching overlay rendering, player state, or live game events also needs in-game verification — track that work in [`docs/in-game-validation-log.md`](docs/in-game-validation-log.md), the running ledger of per-PR test reproducers and pass/fail status.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the JSON schema reference, data sourcing tiers, and PR process.
