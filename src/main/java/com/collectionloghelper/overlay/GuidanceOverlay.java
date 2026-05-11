@@ -26,6 +26,7 @@ package com.collectionloghelper.overlay;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.NpcHighlightStyle;
+import com.collectionloghelper.guidance.RequiredItemDisplay;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -72,9 +73,6 @@ public class GuidanceOverlay extends OverlayPanel
 	private static final Color ACTION_COLOR = new Color(100, 255, 100);
 	private static final Color REMINDER_COLOR = new Color(255, 170, 0);
 	private static final Color ITEM_REQUIREMENTS_HEADER_COLOR = new Color(220, 220, 220);
-	static final Color ITEM_HELD_COLOR = new Color(40, 180, 40);
-	static final Color ITEM_IN_BANK_COLOR = new Color(200, 180, 40);
-	static final Color ITEM_MISSING_COLOR = new Color(220, 70, 70);
 	private static final int MAX_RENDER_DISTANCE = 2400;
 
 	private final Client client;
@@ -520,13 +518,11 @@ public class GuidanceOverlay extends OverlayPanel
 
 	/**
 	 * Appends "Item requirements:" header followed by one line per required
-	 * item, colored by availability:
-	 * <ul>
-	 *   <li>{@link Status#HELD}    -> green   (in inventory or equipped)</li>
-	 *   <li>{@link Status#IN_BANK} -> yellow  (found in last bank scan)</li>
-	 *   <li>{@link Status#MISSING} -> red     (not held anywhere known)</li>
-	 * </ul>
-	 * No-op when {@link #requiredItems} is empty.
+	 * item, colored by availability via
+	 * {@link RequiredItemDisplay#getStatusColor()}. Items found in the bank
+	 * get a " (bank)" suffix so the row reads as a hint to withdraw.
+	 *
+	 * <p>No-op when {@code items} is null or empty.
 	 */
 	private void addRequiredItemsIfPresent(List<RequiredItemDisplay> items)
 	{
@@ -542,57 +538,12 @@ public class GuidanceOverlay extends OverlayPanel
 
 		for (RequiredItemDisplay item : items)
 		{
-			Color color;
-			String suffix;
-			switch (item.getStatus())
-			{
-				case HELD:
-					color = ITEM_HELD_COLOR;
-					suffix = "";
-					break;
-				case IN_BANK:
-					color = ITEM_IN_BANK_COLOR;
-					suffix = " (bank)";
-					break;
-				case MISSING:
-				default:
-					color = ITEM_MISSING_COLOR;
-					suffix = "";
-					break;
-			}
+			String suffix = item.getStatus() == RequiredItemDisplay.Status.IN_BANK
+				? " (bank)" : "";
 			panelComponent.getChildren().add(LineComponent.builder()
 				.left(item.getName() + suffix)
-				.leftColor(color)
+				.leftColor(item.getStatusColor())
 				.build());
-		}
-	}
-
-	/**
-	 * Immutable display row for the required-items section.
-	 * Pre-resolved by {@code GuidanceOverlayCoordinator} so the render path
-	 * never touches inventory or bank state.
-	 */
-	public static final class RequiredItemDisplay
-	{
-		public enum Status { HELD, IN_BANK, MISSING }
-
-		private final String name;
-		private final Status status;
-
-		public RequiredItemDisplay(String name, Status status)
-		{
-			this.name = name;
-			this.status = status;
-		}
-
-		public String getName()
-		{
-			return name;
-		}
-
-		public Status getStatus()
-		{
-			return status;
 		}
 	}
 }
