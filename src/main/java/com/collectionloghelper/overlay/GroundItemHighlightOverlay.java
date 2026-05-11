@@ -133,7 +133,7 @@ public class GroundItemHighlightOverlay extends Overlay
 	{
 		final List<TrackedGroundItem> items = this.matchedItems;
 
-		if (items.isEmpty())
+		if (items.isEmpty() || !config.showOverlays())
 		{
 			return null;
 		}

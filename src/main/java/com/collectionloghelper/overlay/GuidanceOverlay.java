@@ -135,6 +135,21 @@ public class GuidanceOverlay extends OverlayPanel
 
 		boolean hasReminder = logReminder || bankReminder;
 
+		// When Show Overlays is off, suppress every guidance visual but keep
+		// sync/bank reminders visible — those have their own toggles and are
+		// not "guidance" content per se.
+		if (!config.showOverlays())
+		{
+			if (hasReminder)
+			{
+				panelComponent.getChildren().clear();
+				addSyncRemindersIfNeeded(logReminder, bankReminder);
+				panelComponent.setPreferredSize(PANEL_PREFERRED_SIZE);
+				return super.render(graphics);
+			}
+			return null;
+		}
+
 		if (point == null)
 		{
 			if (clueText != null)
