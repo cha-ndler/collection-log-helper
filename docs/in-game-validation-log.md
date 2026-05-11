@@ -86,6 +86,24 @@ Documentation only. No in-game validation required. **Skip.**
 
 ---
 
+## PR fix/363-config-toggle-propagation — Config toggles propagate immediately *(pending merge)*
+
+Closes #363 (Show Overlays / Show Hint Arrow toggles inert mid-guidance). Approach: each overlay self-gates on `config.showOverlays()` at render time (cheap volatile read per frame); `@Subscribe onConfigChanged` handler revokes / re-applies `client.setHintArrow()` since that's a one-shot client mutation rather than a render-loop predicate.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance, toggle **Show Overlays** OFF -> object highlight, tile marker, world map route, NPC outline, dialog highlight, ground item highlight, and the top-left guidance overlay panel all disappear within 1 frame (~50ms) | `[ ]` | |
+| 2 | Toggle Show Overlays ON -> overlays return immediately (state was preserved, just gated) | `[ ]` | |
+| 3 | Toggle Show Overlays OFF while sync/bank reminders are visible -> reminders remain (independent of overlay toggle) | `[ ]` | |
+| 4 | Activate guidance, toggle **Show Hint Arrow** OFF -> in-game tile arrow + minimap arrow clear immediately | `[ ]` | |
+| 5 | Toggle Show Hint Arrow ON mid-guidance -> arrow re-renders on current step's target | `[ ]` | |
+| 6 | Toggle Show Hint Arrow rapidly off/on/off/on -> no stale arrows, no errors in console | `[ ]` | |
+| 7 | Without guidance active, toggle Show Hint Arrow ON -> no arrow appears (correct: no target) | `[ ]` | |
+| 8 | Activate guidance on a clue-tier source (no step target) -> Show Hint Arrow toggle has no visible effect (correct: no target to point at) | `[ ]` | |
+| 9 | Regression: skip button mid-guidance with Show Overlays ON -> overlays update on next tick (matches pre-fix behavior) | `[ ]` | |
+
+---
+
 ## Still-open bugs that closed PR #371 left unfixed
 
 These need fresh validation when a follow-up PR ships the real fix. The "still broken on master" column captures the regression baseline observed on 2026-05-10.
@@ -94,8 +112,8 @@ These need fresh validation when a follow-up PR ships the real fix. The "still b
 |---|---|---|---|---|
 | #362 | Category Focus -> SLAYER -> count reads "0/0", no progress bar | `[ ]` | — | `[ ]` |
 | #362 | Category Focus -> SKILLING -> same "0/0" issue | `[ ]` | — | `[ ]` |
-| #363 | Activate guidance -> toggle Show Overlays OFF -> overlay should clear immediately (not require Stop/Start) | `[ ]` | — | `[ ]` |
-| #363 | Activate guidance -> toggle Show Hint Arrow OFF -> minimap arrow + in-game tile arrow clear immediately | `[ ]` | — | `[ ]` |
+| #363 | Activate guidance -> toggle Show Overlays OFF -> overlay should clear immediately (not require Stop/Start) | `[!]` | fix/363 | `[ ]` |
+| #363 | Activate guidance -> toggle Show Hint Arrow OFF -> minimap arrow + in-game tile arrow clear immediately | `[!]` | fix/363 | `[ ]` |
 | #364 | Toggle Hide Locked Content ON -> items with unmet quest/skill requirements disappear from list | `[ ]` | — | `[ ]` |
 | #373 | Toggle Show Overlays OFF mid-guidance -> guidance session CONTINUES; only overlay rendering stops | `[ ]` | — | `[ ]` |
 | #374 | Efficient mode with locked items -> locked items appear at their natural efficiency position (e.g., a ~17-min locked item sits near other ~17-min items), not segregated to the bottom | `[ ]` | — | `[ ]` |

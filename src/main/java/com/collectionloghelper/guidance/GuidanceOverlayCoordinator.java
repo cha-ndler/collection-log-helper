@@ -862,6 +862,44 @@ public class GuidanceOverlayCoordinator
 	}
 
 	/**
+	 * Re-applies the hint arrow against the current guidance step, respecting
+	 * {@code config.showHintArrow()}. Called by the config-change handler when
+	 * "Show Hint Arrow" is toggled mid-guidance so the change takes effect
+	 * immediately rather than at the next step transition.
+	 *
+	 * <p>When the toggle goes OFF (or guidance is inactive), the arrow is
+	 * cleared. When the toggle goes ON and a step with a world target is
+	 * active, the arrow is re-set at that target.
+	 *
+	 * <p>All client mutations are dispatched on the client thread.
+	 */
+	public void refreshHintArrow()
+	{
+		clientThread.invokeLater(() ->
+		{
+			client.clearHintArrow();
+
+			if (!guidanceSequencer.isActive())
+			{
+				return;
+			}
+
+			GuidanceStep step = guidanceSequencer.getCurrentStep();
+			if (step == null || step.getWorldX() <= 0)
+			{
+				return;
+			}
+
+			WorldPoint worldPoint = new WorldPoint(
+				step.getWorldX(), step.getWorldY(), step.getWorldPlane());
+			if (shouldSetHintArrowTo(worldPoint))
+			{
+				client.setHintArrow(worldPoint);
+			}
+		});
+	}
+
+	/**
 	 * Decides whether a hint arrow should be placed at the given world point.
 	 * Snapshots getLocalPlayer() once to avoid TOCTOU races. Skips hint arrows
 	 * inside non-top-level WorldViews (e.g. sailing boats).
