@@ -7,7 +7,7 @@
 >
 > Combined with Quest-Helper-level step-by-step guidance — *where to go, what to equip, what to bring, exact tile* — plus current-meta knowledge that updates as Jagex updates the game. Math + automation + meta intelligence in one plugin.
 
-> **Status**: Living document. Update the status block at the end of each milestone or agent session. Last reviewed: 2026-04-16.
+> **Status**: Living document. Update the status block at the end of each milestone or agent session. Last reviewed: 2026-05-10.
 
 ---
 
@@ -22,6 +22,8 @@
 7. [Decision register](#7-decision-register)
 8. [Day 0 → present: completed work](#8-day-0--present-completed-work)
 9. [Status log](#9-status-log)
+
+> **Tier index**: A → A.5 → B → **B.5 (new)** → C → D → E → F. B.5 (UI parity with Quest Helper) can run in parallel with B/C and was added 2026-05-10 to track per-step requirements/recommended/prereq panels, collapsible sections, and per-step world map arrow + icon.
 
 ---
 
@@ -201,6 +203,33 @@ Sub-milestones (the order reflects dependencies, not priority):
 - B4 — Alternative-method modelling on sources: a source can declare multiple methods (e.g., "Konar task", "unlocked ancient Hydra lair") and the sequencer picks one based on player state.
 - B5 — Puzzle/dynamic step type: a step can re-render its target every tick based on a pluggable evaluator. Pilot on one source (Wintertodt braziers or Barbarian Assault roles).
 - B6 — **Decision D-01**: hybrid Java helpers — see section 7. If we adopt them, scaffold one pilot source (e.g., Cerberus) as a Java helper class to prove the pattern.
+
+### Tier B.5 — UI parity with Quest Helper
+
+- **Mission**: Match Quest Helper's per-step panel and overlay surface so a player can follow CLH guidance for any active collection log item without leaving the panel or alt-tabbing to the Wiki. "Extremely simple to follow once guidance is active" is the explicit success bar.
+- **Outcome**: For the active step, the panel shows what to bring (with bank-scan colors), any unmet prerequisites (quest/skill/diary), and a navigable section list for long sequences. The world map shows a per-step arrow and destination icon. Overlay highlights match Quest Helper's outline-glow style.
+- **Estimated PRs**: 6-10
+- **Estimated effort**: 8-12 agent-session-days
+- **Agents**: `planner`, `runelite-plugin-dev`, `code-reviewer`, optional `a11y-architect` for the panel layout
+- **Data sources**: Quest Helper source (reference for visual conventions), Wiki (per-item required/recommended fields), existing `drop_rates.json` (`requiredItemIds`, `conditionalAlternatives`)
+- **MCP dependency**: low. Panel rendering and overlay drawing are pure RuneLite SDK work.
+- **Dependencies**: Tier A complete (panel decomposition); independent of Tier B (data depth) and Tier C (player-aware) — can run in parallel with either.
+- **Risks**:
+  - *Bank-scan staleness*. Bank state is only updated when the player opens their bank. Mitigation: cache last-seen bank contents per character with a "last scanned at" timestamp visible in the requirements panel.
+  - *Visual debt*. Cramming requirements/prerequisites/recommended into the existing step panel makes it busy. Mitigation: design pass first; consider a collapsible "Bring + Prereqs" header that defaults to expanded only for the active step.
+  - *Quest Helper UX divergence*. We aren't cloning Quest Helper; some conventions won't fit CLH (efficiency mode, slayer-strategy mode have different priorities). Mitigation: B.5 UI elements render *only* when guidance is active; non-guidance modes stay unchanged.
+
+Sub-milestones (the order reflects player-impact priority, not dependencies):
+
+- B.5.1 — Per-step item requirements panel. Renders `requiredItemIds` for the active step with bank-scan-aware coloring: green if equipped/in inventory, white-with-info-icon if found in last bank scan, red if not held anywhere. Tooltip on the info icon says "Items can be found in your: Bank" (Quest Helper convention).
+- B.5.2 — Recommended items section. Soft-recommended supplies (food, prayer potions, combat gear, teleports) declared per source/step. Rendered below required, same color rules, but never blocks progression.
+- B.5.3 — General requirements section. Quest/skill/diary/varbit prerequisites for the source surfaced in the panel header. Green when met, red when not. Today this is gated by `conditionalAlternatives` but invisible to the player — surface it explicitly.
+- B.5.4 — Collapsible step sections. For sequences >5 steps, support `section` field on each step so the panel groups them into named collapsible blocks (Bank prep / Travel / Combat / Loot). The active step's section auto-expands; others stay collapsed.
+- B.5.5 — Per-step world map arrow + destination icon. In addition to the existing route overlay, draw a Quest-Helper-style arrow on the world map pointing to the active step's `worldX`/`worldY`, plus an NPC/object/item icon at the destination chosen from the step's primary action type.
+- B.5.6 — Object/NPC outline-glow highlight style. Tracked separately as cha-ndler/collection-log-helper#377 (model-outline glow vs bounding rectangles). Roll into this tier for visual consistency.
+- B.5.7 — Dialog choice highlighting polish. Audit the existing `dialogHighlight` overlay; bring up to Quest Helper visual standard (consistent color, no flicker, clear primary-choice indicator).
+
+Tracked as meta-issue cha-ndler/collection-log-helper#382.
 
 ### Tier C — Player-aware guidance
 
@@ -517,6 +546,16 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [ ] B4 — Alternative-method modelling                 status: planned       owner: —          updated: 2026-04-16
 - [ ] B5 — Puzzle/dynamic step type                     status: planned       owner: —          updated: 2026-04-16
 - [ ] B6 — Decision D-01 pilot (hybrid Java helper)     status: planned       owner: —          updated: 2026-04-16
+
+**Tier B.5 — UI parity with Quest Helper**
+
+- [ ] B.5.1 — Per-step item requirements panel          status: planned       owner: —          updated: 2026-05-10  note: bank-scan colored (green/white-with-info-icon/red); tracked under cha-ndler/collection-log-helper#382
+- [ ] B.5.2 — Recommended items section                 status: planned       owner: —          updated: 2026-05-10  note: soft-recommended supplies below required; cha-ndler/collection-log-helper#382
+- [ ] B.5.3 — General requirements section              status: planned       owner: —          updated: 2026-05-10  note: surface quest/skill/diary prereqs in panel header (green/red); cha-ndler/collection-log-helper#382
+- [ ] B.5.4 — Collapsible step sections                 status: planned       owner: —          updated: 2026-05-10  note: `section` field on step, auto-expand active section; cha-ndler/collection-log-helper#382
+- [ ] B.5.5 — Per-step world map arrow + destination icon  status: planned    owner: —          updated: 2026-05-10  note: Quest-Helper-style arrow + NPC/object icon at step destination; cha-ndler/collection-log-helper#382
+- [ ] B.5.6 — Object/NPC outline-glow highlight style   status: planned       owner: —          updated: 2026-05-10  issue: cha-ndler/collection-log-helper#377
+- [ ] B.5.7 — Dialog choice highlighting polish         status: planned       owner: —          updated: 2026-05-10  note: audit existing `dialogHighlight` overlay; cha-ndler/collection-log-helper#382
 
 **Tier C — Player-aware guidance**
 
