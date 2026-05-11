@@ -282,6 +282,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		eventBus.register(sceneEventRouter);
 		guidanceEventRouter.setMissingItemsSupplier(() -> sourcesWithMissingItems);
 		guidanceEventRouter.setActivateGuidanceCallback(this::activateGuidance);
+		guidanceEventRouter.setOnFilterConfigChanged(this::onFilterConfigChanged);
 		eventBus.register(guidanceEventRouter);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
@@ -745,6 +746,22 @@ public class CollectionLogHelperPlugin extends Plugin
 	public void activateGuidance(CollectionLogSource source)
 	{
 		guidanceCoordinator.activateGuidance(source, cachedPlayerLocation);
+	}
+
+	/**
+	 * Callback invoked by {@link com.collectionloghelper.lifecycle.GuidanceEventRouter}
+	 * when a filter-affecting config key changes mid-session. Marks the
+	 * ranked-sources cache dirty and the panel-rebuild flag so the next
+	 * game-tick coalesces a single rebuild against the new filter state.
+	 *
+	 * <p>Closes cha-ndler/collection-log-helper#364 (Hide Locked Content
+	 * + sibling filter toggles previously stayed inert because nothing
+	 * listened for config changes).
+	 */
+	private void onFilterConfigChanged()
+	{
+		rankedSourcesDirty = true;
+		pendingPanelRebuild = true;
 	}
 
 	/**

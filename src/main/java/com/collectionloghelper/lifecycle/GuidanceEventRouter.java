@@ -31,6 +31,8 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -112,6 +114,13 @@ public class GuidanceEventRouter
 	 */
 	private Consumer<CollectionLogSource> activateGuidanceCallback;
 
+	/**
+	 * Callback fired when a config key in {@link #FILTER_CONFIG_KEYS} changes,
+	 * so the plugin can mark its panel-rebuild flag. Set once by the plugin
+	 * in {@code startUp()}.
+	 */
+	private Runnable onFilterConfigChanged;
+
 	@Inject
 	public GuidanceEventRouter(
 		Client client,
@@ -149,6 +158,17 @@ public class GuidanceEventRouter
 	public void setActivateGuidanceCallback(Consumer<CollectionLogSource> callback)
 	{
 		this.activateGuidanceCallback = callback;
+	}
+
+	/**
+	 * Sets the callback fired when a filter-affecting config key changes.
+	 * The plugin should mark its {@code pendingPanelRebuild} flag (and any
+	 * relevant "dirty" caches) so the next game-tick coalesces a rebuild.
+	 * Must be called from {@code Plugin.startUp()} before any events are processed.
+	 */
+	public void setOnFilterConfigChanged(Runnable callback)
+	{
+		this.onFilterConfigChanged = callback;
 	}
 
 	// ── Actor death ─────────────────────────────────────────────────────────
@@ -459,17 +479,55 @@ public class GuidanceEventRouter
 	static final String KEY_SHOW_HINT_ARROW = "showHintArrow";
 
 	/**
+	 * Config keys that affect what the panel renders (which items appear,
+	 * how they're ranked / labelled). When any of these change, the panel
+	 * must rebuild so the toggle takes effect immediately instead of
+	 * staying invisible until some other event triggers a rebuild.
+	 *
+	 * <p>Excludes keys handled elsewhere or with no panel impact:
+	 * overlay-rendering toggles (each overlay self-gates on its config),
+	 * hint-arrow toggle (handled by {@link #KEY_SHOW_HINT_ARROW}),
+	 * guidance behavior toggles ({@code autoAdvanceGuidance},
+	 * {@code useShortestPath}), and visual-only keys
+	 * ({@code overlayColor}, {@code npcHighlightStyle},
+	 * {@code defaultMode}, etc.).
+	 */
+	static final Set<String> FILTER_CONFIG_KEYS;
+	static
+	{
+		Set<String> keys = new HashSet<>();
+		keys.add("hideObtainedItems");
+		keys.add("hideLockedContent");
+		keys.add("accountType");
+		keys.add("raidTeamSize");
+		keys.add("afkFilter");
+		keys.add("efficientSortMode");
+		FILTER_CONFIG_KEYS = Collections.unmodifiableSet(keys);
+	}
+
+	/**
 	 * Re-applies state when a config item changes mid-session so toggles take
-	 * effect immediately rather than waiting for the next step transition.
+	 * effect immediately rather than waiting for the next step transition or
+	 * unrelated event.
 	 *
-	 * <p>Today this only handles the hint-arrow toggle, because hint arrows
-	 * are set via {@code client.setHintArrow()} (a one-shot client mutation)
-	 * rather than a render-loop predicate. The overlay-rendering toggles
-	 * ({@code showOverlays}, etc.) propagate automatically: each overlay's
-	 * {@code render()} method gates on {@code config.showOverlays()} every
-	 * frame, so toggling the config is reflected on the next paint.
+	 * <p>Two propagation paths:
+	 * <ul>
+	 *   <li><b>Hint arrow</b> ({@link #KEY_SHOW_HINT_ARROW}): dispatched to
+	 *       {@code guidanceCoordinator.refreshHintArrow()}, which clears
+	 *       and conditionally re-applies {@code client.setHintArrow()}.</li>
+	 *   <li><b>Filter / sort / account-type</b> ({@link #FILTER_CONFIG_KEYS}):
+	 *       fires {@link #onFilterConfigChanged}, which the plugin uses to
+	 *       mark its {@code pendingPanelRebuild} flag so the next tick
+	 *       coalesces a single rebuild.</li>
+	 * </ul>
 	 *
-	 * <p>Closes cha-ndler/collection-log-helper#363 (Show Hint Arrow half).
+	 * <p>Overlay-rendering toggles (e.g. {@code showOverlays}) are NOT
+	 * handled here — each overlay's {@code render()} method gates on the
+	 * config every frame, so the toggle propagates automatically.
+	 *
+	 * <p>Closes cha-ndler/collection-log-helper#363 (Show Hint Arrow half)
+	 * and cha-ndler/collection-log-helper#364 (Hide Locked Content + sibling
+	 * filter toggles).
 	 */
 	@Subscribe
 	public void onConfigChanged(ConfigChanged event)
@@ -479,9 +537,17 @@ public class GuidanceEventRouter
 			return;
 		}
 
-		if (KEY_SHOW_HINT_ARROW.equals(event.getKey()))
+		String key = event.getKey();
+
+		if (KEY_SHOW_HINT_ARROW.equals(key))
 		{
 			guidanceCoordinator.refreshHintArrow();
+			return;
+		}
+
+		if (FILTER_CONFIG_KEYS.contains(key) && onFilterConfigChanged != null)
+		{
+			onFilterConfigChanged.run();
 		}
 	}
 }

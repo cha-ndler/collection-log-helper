@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import net.runelite.api.Actor;
 import net.runelite.api.Client;
@@ -61,6 +62,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -791,5 +793,167 @@ public class GuidanceEventRouterTest
 		router.onConfigChanged(event);
 
 		verify(guidanceCoordinator).refreshHintArrow();
+	}
+
+	// ========================================================================
+	// onConfigChanged — filter-key panel rebuild propagation (#364)
+	// ========================================================================
+
+	/**
+	 * Toggling Hide Locked Content must fire the panel-rebuild callback so
+	 * the list re-filters on the next tick. cha-ndler/collection-log-helper#364.
+	 */
+	@Test
+	public void onConfigChangedHideLockedContentFiresPanelRebuildCallback()
+	{
+		AtomicInteger rebuildCount = new AtomicInteger(0);
+		router.setOnFilterConfigChanged(rebuildCount::incrementAndGet);
+
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("collectionloghelper");
+		event.setKey("hideLockedContent");
+		event.setOldValue("false");
+		event.setNewValue("true");
+
+		router.onConfigChanged(event);
+
+		assertEquals(1, rebuildCount.get());
+		// And it must NOT also call refreshHintArrow.
+		verify(guidanceCoordinator, never()).refreshHintArrow();
+	}
+
+	@Test
+	public void onConfigChangedHideObtainedItemsFiresPanelRebuildCallback()
+	{
+		AtomicInteger rebuildCount = new AtomicInteger(0);
+		router.setOnFilterConfigChanged(rebuildCount::incrementAndGet);
+
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("collectionloghelper");
+		event.setKey("hideObtainedItems");
+		event.setOldValue("false");
+		event.setNewValue("true");
+
+		router.onConfigChanged(event);
+
+		assertEquals(1, rebuildCount.get());
+	}
+
+	@Test
+	public void onConfigChangedAccountTypeFiresPanelRebuildCallback()
+	{
+		AtomicInteger rebuildCount = new AtomicInteger(0);
+		router.setOnFilterConfigChanged(rebuildCount::incrementAndGet);
+
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("collectionloghelper");
+		event.setKey("accountType");
+		event.setOldValue("MAIN");
+		event.setNewValue("IRON");
+
+		router.onConfigChanged(event);
+
+		assertEquals(1, rebuildCount.get());
+	}
+
+	@Test
+	public void onConfigChangedRaidTeamSizeFiresPanelRebuildCallback()
+	{
+		AtomicInteger rebuildCount = new AtomicInteger(0);
+		router.setOnFilterConfigChanged(rebuildCount::incrementAndGet);
+
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("collectionloghelper");
+		event.setKey("raidTeamSize");
+		event.setOldValue("SOLO");
+		event.setNewValue("FIVE");
+
+		router.onConfigChanged(event);
+
+		assertEquals(1, rebuildCount.get());
+	}
+
+	@Test
+	public void onConfigChangedAfkFilterFiresPanelRebuildCallback()
+	{
+		AtomicInteger rebuildCount = new AtomicInteger(0);
+		router.setOnFilterConfigChanged(rebuildCount::incrementAndGet);
+
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("collectionloghelper");
+		event.setKey("afkFilter");
+		event.setOldValue("NONE");
+		event.setNewValue("LIGHT");
+
+		router.onConfigChanged(event);
+
+		assertEquals(1, rebuildCount.get());
+	}
+
+	@Test
+	public void onConfigChangedEfficientSortModeFiresPanelRebuildCallback()
+	{
+		AtomicInteger rebuildCount = new AtomicInteger(0);
+		router.setOnFilterConfigChanged(rebuildCount::incrementAndGet);
+
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("collectionloghelper");
+		event.setKey("efficientSortMode");
+		event.setOldValue("EFFICIENCY");
+		event.setNewValue("TIME");
+
+		router.onConfigChanged(event);
+
+		assertEquals(1, rebuildCount.get());
+	}
+
+	/**
+	 * Non-filter keys in our group (e.g. visual-only or guidance-behavior
+	 * toggles) must NOT trigger a panel rebuild — that would be wasted work
+	 * on every overlay color change, etc.
+	 */
+	@Test
+	public void onConfigChangedNonFilterKeyDoesNotRebuildPanel()
+	{
+		AtomicInteger rebuildCount = new AtomicInteger(0);
+		router.setOnFilterConfigChanged(rebuildCount::incrementAndGet);
+
+		for (String nonFilterKey : new String[]{
+			"overlayColor", "npcHighlightStyle", "autoAdvanceGuidance",
+			"useShortestPath", "showSyncReminder", "showBankScanReminder",
+			"defaultMode", "exportEfficiencyLog", "guidanceAuthoring",
+			"showOverlays"
+		})
+		{
+			ConfigChanged event = new ConfigChanged();
+			event.setGroup("collectionloghelper");
+			event.setKey(nonFilterKey);
+			event.setOldValue("a");
+			event.setNewValue("b");
+			router.onConfigChanged(event);
+		}
+
+		assertEquals("No filter rebuilds should fire for non-filter keys",
+			0, rebuildCount.get());
+	}
+
+	/**
+	 * A null callback (unwired plugin) must not throw — defensive against
+	 * mid-startup race where the event arrives before the plugin completes
+	 * its setOnFilterConfigChanged() call.
+	 */
+	@Test
+	public void onConfigChangedNullFilterCallbackIsNoOp()
+	{
+		router.setOnFilterConfigChanged(null);
+
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("collectionloghelper");
+		event.setKey("hideLockedContent");
+		event.setOldValue("false");
+		event.setNewValue("true");
+
+		// Must not throw
+		router.onConfigChanged(event);
 	}
 }
