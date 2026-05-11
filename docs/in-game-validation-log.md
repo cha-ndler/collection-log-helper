@@ -86,6 +86,27 @@ Documentation only. No in-game validation required. **Skip.**
 
 ---
 
+## PR fix/364-config-triggered-panel-rebuild — Filter-config toggles trigger panel rebuild *(pending merge)*
+
+Closes #364 (Hide Locked Content toggle inert). Approach: extends the `@Subscribe onConfigChanged` handler added in fix/363 with a `FILTER_CONFIG_KEYS` set; when any of those keys change, fires a plugin-supplied callback that flips `pendingPanelRebuild = true` + `rankedSourcesDirty = true`. Next game-tick coalesces a single rebuild against the new filter state.
+
+Covers six toggles previously broken or untested for mid-session changes:
+`hideLockedContent`, `hideObtainedItems`, `accountType`, `raidTeamSize`, `afkFilter`, `efficientSortMode`.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Toggle Hide Locked Content ON mid-session -> within 1 tick (~600ms) the list rebuilds; locked items disappear from Efficient / Category / Search lists | `[ ]` | |
+| 2 | Toggle Hide Locked Content OFF again -> locked items return at their natural efficiency position (red highlight + lock icon) | `[ ]` | |
+| 3 | Toggle Hide Obtained Items ON -> sources with no missing items disappear within 1 tick | `[ ]` | |
+| 4 | Switch Account Type Main -> Iron mid-session -> efficiency list re-ranks; iron-only sources change visibility / position | `[ ]` | |
+| 5 | Switch Raid Team Size SOLO -> FIVE -> raid sources re-rank with team-size-adjusted efficiency | `[ ]` | |
+| 6 | Switch Efficient Sort Mode (Efficiency -> Time, etc.) -> list re-orders within 1 tick | `[ ]` | |
+| 7 | Adjust Efficient AFK Filter -> list re-filters by AFK level within 1 tick | `[ ]` | |
+| 8 | Regression: change Overlay Color or NPC Highlight Style -> panel does NOT pointlessly rebuild (toggle non-filter key with side panel open; check there's no visual flicker) | `[ ]` | |
+| 9 | Regression: rapid-fire-toggle Hide Locked Content 5 times in <1s -> panel rebuilds once on the next tick (coalesced via `pendingPanelRebuild`); no console errors | `[ ]` | |
+
+---
+
 ## PR fix/363-config-toggle-propagation — Config toggles propagate immediately *(pending merge)*
 
 Closes #363 (Show Overlays / Show Hint Arrow toggles inert mid-guidance). Approach: each overlay self-gates on `config.showOverlays()` at render time (cheap volatile read per frame); `@Subscribe onConfigChanged` handler revokes / re-applies `client.setHintArrow()` since that's a one-shot client mutation rather than a render-loop predicate.
@@ -114,7 +135,7 @@ These need fresh validation when a follow-up PR ships the real fix. The "still b
 | #362 | Category Focus -> SKILLING -> same "0/0" issue | `[ ]` | — | `[ ]` |
 | #363 | Activate guidance -> toggle Show Overlays OFF -> overlay should clear immediately (not require Stop/Start) | `[!]` | fix/363 | `[ ]` |
 | #363 | Activate guidance -> toggle Show Hint Arrow OFF -> minimap arrow + in-game tile arrow clear immediately | `[!]` | fix/363 | `[ ]` |
-| #364 | Toggle Hide Locked Content ON -> items with unmet quest/skill requirements disappear from list | `[ ]` | — | `[ ]` |
+| #364 | Toggle Hide Locked Content ON -> items with unmet quest/skill requirements disappear from list | `[!]` | fix/364 | `[ ]` |
 | #373 | Toggle Show Overlays OFF mid-guidance -> guidance session CONTINUES; only overlay rendering stops | `[ ]` | — | `[ ]` |
 | #374 | Efficient mode with locked items -> locked items appear at their natural efficiency position (e.g., a ~17-min locked item sits near other ~17-min items), not segregated to the bottom | `[ ]` | — | `[ ]` |
 | #378 | Walk away from the active step's tile mid-sequence -> step does NOT regress to a prior step | `[ ]` | — | `[ ]` |
