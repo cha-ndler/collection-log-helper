@@ -54,6 +54,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -990,11 +992,16 @@ public class GuidanceSequencerTest
 		assertFalse(sequencer.isActive());
 	}
 
+	/**
+	 * Missing required items must no longer trigger a synthetic bank step.
+	 * The sequencer returns the real step regardless of held-item state;
+	 * required-item availability is surfaced via the panel + in-game overlay
+	 * (cha-ndler/collection-log-helper#380).
+	 */
 	@Test
-	public void testBankRoutingWhenMissingRequiredItems()
+	public void testMissingRequiredItemsStillReturnsRealStep()
 	{
 		List<Integer> required = Arrays.asList(100, 200);
-		when(inventoryState.hasAllItems(required)).thenReturn(false);
 
 		List<GuidanceStep> steps = Arrays.asList(
 			makeStepWithRequiredItems(required),
@@ -1003,20 +1010,24 @@ public class GuidanceSequencerTest
 
 		startSequence(steps);
 		GuidanceStep current = sequencer.getCurrentStep();
-		// Should return a bank routing step instead
-		assertEquals("Get required items from bank", current.getDescription());
-		assertEquals(CompletionCondition.MANUAL, current.getCompletionCondition());
+		assertEquals("Step needing items", current.getDescription());
+		// requiredItemIds must remain on the returned step so the panel/overlay
+		// can render availability borders.
+		assertEquals(required, current.getRequiredItemIds());
 
-		// Raw step should still be the original
+		// Raw step accessor returns the same step (no substitution path remains).
 		GuidanceStep raw = sequencer.getRawCurrentStep();
 		assertEquals("Step needing items", raw.getDescription());
+
+		// The sequencer must not consult inventory state in getCurrentStep
+		// any more; the previous bank-routing path was the only consumer.
+		verify(inventoryState, never()).hasAllItems(required);
 	}
 
 	@Test
-	public void testBankRoutingNotAppliedWhenItemsPresent()
+	public void testRequiredItemsPresentReturnsRealStep()
 	{
 		List<Integer> required = Arrays.asList(100, 200);
-		when(inventoryState.hasAllItems(required)).thenReturn(true);
 
 		List<GuidanceStep> steps = Arrays.asList(
 			makeStepWithRequiredItems(required),

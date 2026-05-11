@@ -33,7 +33,10 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.ItemObjectTier;
 import com.collectionloghelper.data.PlayerCollectionState;
+import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerInventoryState;
+import com.collectionloghelper.overlay.GuidanceOverlay.RequiredItemDisplay;
+import com.collectionloghelper.overlay.GuidanceOverlay.RequiredItemDisplay.Status;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
@@ -93,6 +96,7 @@ public class GuidanceOverlayCoordinator
 	private final RequirementsChecker requirementsChecker;
 	private final PlayerTravelCapabilities travelCapabilities;
 	private final PlayerInventoryState playerInventoryState;
+	private final PlayerBankState playerBankState;
 	private final ItemManager itemManager;
 	private final WorldMapPointManager worldMapPointManager;
 	private final InfoBoxManager infoBoxManager;
@@ -152,6 +156,7 @@ public class GuidanceOverlayCoordinator
 		RequirementsChecker requirementsChecker,
 		PlayerTravelCapabilities travelCapabilities,
 		PlayerInventoryState playerInventoryState,
+		PlayerBankState playerBankState,
 		ItemManager itemManager,
 		WorldMapPointManager worldMapPointManager,
 		InfoBoxManager infoBoxManager,
@@ -172,6 +177,7 @@ public class GuidanceOverlayCoordinator
 		this.requirementsChecker = requirementsChecker;
 		this.travelCapabilities = travelCapabilities;
 		this.playerInventoryState = playerInventoryState;
+		this.playerBankState = playerBankState;
 		this.itemManager = itemManager;
 		this.worldMapPointManager = worldMapPointManager;
 		this.infoBoxManager = infoBoxManager;
@@ -249,6 +255,8 @@ public class GuidanceOverlayCoordinator
 		{
 			// Clue sources: text overlay + panel banner instead of map markers
 			guidanceOverlay.setClueGuidanceText("Do " + source.getName());
+			// Clue-only sources never carry per-step required items.
+			guidanceOverlay.setRequiredItems(java.util.Collections.emptyList());
 			if (panel != null)
 			{
 				panel.showClueGuidance(source);
@@ -420,6 +428,59 @@ public class GuidanceOverlayCoordinator
 		return missing;
 	}
 
+	/**
+	 * Resolves each required item ID into a display row (name + availability).
+	 * Held-in-inventory and equipped both count as {@link Status#HELD}; bank
+	 * scan hits count as {@link Status#IN_BANK}; nothing-found is
+	 * {@link Status#MISSING}. Item names are looked up via {@link ItemManager}.
+	 *
+	 * <p>Returns an empty list when the step has no required items.
+	 */
+	private List<RequiredItemDisplay> resolveRequiredItems(GuidanceStep step)
+	{
+		if (step == null
+			|| step.getRequiredItemIds() == null
+			|| step.getRequiredItemIds().isEmpty())
+		{
+			return java.util.Collections.emptyList();
+		}
+
+		List<RequiredItemDisplay> out = new java.util.ArrayList<>(step.getRequiredItemIds().size());
+		for (Integer itemId : step.getRequiredItemIds())
+		{
+			if (itemId == null || itemId <= 0)
+			{
+				continue;
+			}
+
+			Status status;
+			if (playerInventoryState.hasItem(itemId) || playerInventoryState.hasEquippedItem(itemId))
+			{
+				status = Status.HELD;
+			}
+			else if (playerBankState.hasItem(itemId))
+			{
+				status = Status.IN_BANK;
+			}
+			else
+			{
+				status = Status.MISSING;
+			}
+
+			String name;
+			try
+			{
+				name = itemManager.getItemComposition(itemId).getName();
+			}
+			catch (Exception ex)
+			{
+				name = "Item #" + itemId;
+			}
+			out.add(new RequiredItemDisplay(name, status));
+		}
+		return out;
+	}
+
 	// -- Private methods --
 
 	/**
@@ -491,6 +552,10 @@ public class GuidanceOverlayCoordinator
 
 		// Suppress tile highlight when ObjectHighlightOverlay handles the visual
 		guidanceOverlay.setSuppressTileHighlight(!step.getAllObjectIds().isEmpty());
+
+		// Resolve required-item availability for this step once and push to the
+		// overlay; the render loop must never touch inventory/bank state.
+		guidanceOverlay.setRequiredItems(resolveRequiredItems(step));
 
 		if (step.getWorldX() > 0)
 		{
@@ -642,6 +707,8 @@ public class GuidanceOverlayCoordinator
 		guidanceOverlay.setTargetPoint(worldPoint);
 		guidanceOverlay.setTargetName(source.getName());
 		guidanceOverlay.setLocationDescription(displayName);
+		// Non-sequencer path: no step context, so no per-step item requirements.
+		guidanceOverlay.setRequiredItems(java.util.Collections.emptyList());
 		guidanceOverlay.setTravelTip(source.getTravelTip());
 		guidanceOverlay.setTargetNpcId(source.getNpcId());
 		guidanceOverlay.setInteractAction(source.getInteractAction());

@@ -36,6 +36,8 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.util.Collections;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.runelite.api.Client;
@@ -69,6 +71,10 @@ public class GuidanceOverlay extends OverlayPanel
 	private static final Color TRAVEL_COLOR = new Color(100, 200, 255);
 	private static final Color ACTION_COLOR = new Color(100, 255, 100);
 	private static final Color REMINDER_COLOR = new Color(255, 170, 0);
+	private static final Color ITEM_REQUIREMENTS_HEADER_COLOR = new Color(220, 220, 220);
+	static final Color ITEM_HELD_COLOR = new Color(40, 180, 40);
+	static final Color ITEM_IN_BANK_COLOR = new Color(200, 180, 40);
+	static final Color ITEM_MISSING_COLOR = new Color(220, 70, 70);
 	private static final int MAX_RENDER_DISTANCE = 2400;
 
 	private final Client client;
@@ -91,6 +97,7 @@ public class GuidanceOverlay extends OverlayPanel
 	private volatile boolean showBankReminder;
 	private volatile boolean suppressTileHighlight;
 	private volatile NPC trackedNpc;
+	private volatile List<RequiredItemDisplay> requiredItems = Collections.emptyList();
 	private final Polygon arrowPolygon = new Polygon();
 	private Color cachedOverlayColor;
 	private Color cachedFillColor50;
@@ -123,6 +130,7 @@ public class GuidanceOverlay extends OverlayPanel
 		final String action = this.interactAction;
 		final boolean logReminder = this.showCollectionLogReminder;
 		final boolean bankReminder = this.showBankReminder;
+		final List<RequiredItemDisplay> items = this.requiredItems;
 
 		Color overlayColor = config.overlayColor();
 		updateCachedColors(overlayColor);
@@ -138,6 +146,7 @@ public class GuidanceOverlay extends OverlayPanel
 					.text(clueText)
 					.color(Color.WHITE)
 					.build());
+				addRequiredItemsIfPresent(items);
 				addSyncRemindersIfNeeded(logReminder, bankReminder);
 				panelComponent.setPreferredSize(PANEL_PREFERRED_SIZE);
 				return super.render(graphics);
@@ -193,6 +202,7 @@ public class GuidanceOverlay extends OverlayPanel
 						.leftColor(ACTION_COLOR)
 						.build());
 				}
+				addRequiredItemsIfPresent(items);
 				addSyncRemindersIfNeeded(logReminder, bankReminder);
 				panelComponent.setPreferredSize(PANEL_PREFERRED_SIZE);
 				return super.render(graphics);
@@ -217,22 +227,32 @@ public class GuidanceOverlay extends OverlayPanel
 		if (!npcHighlighted && !suppressTileHighlight)
 		{
 			Polygon poly = Perspective.getCanvasTilePoly(client, localPoint);
-			if (poly == null)
+			if (poly != null)
 			{
-				return null;
-			}
+				OverlayUtil.renderPolygon(graphics, poly, overlayColor, cachedFillColor50,
+					STROKE_2);
 
-			OverlayUtil.renderPolygon(graphics, poly, overlayColor, cachedFillColor50,
-				STROKE_2);
-
-			if (name != null)
-			{
-				Point tileTextPoint = Perspective.getCanvasTextLocation(client, graphics, localPoint, name, 150);
-				if (tileTextPoint != null)
+				if (name != null)
 				{
-					OverlayUtil.renderTextLocation(graphics, tileTextPoint, name, overlayColor);
+					Point tileTextPoint = Perspective.getCanvasTextLocation(client, graphics, localPoint, name, 150);
+					if (tileTextPoint != null)
+					{
+						OverlayUtil.renderTextLocation(graphics, tileTextPoint, name, overlayColor);
+					}
 				}
 			}
+		}
+
+		// When the target is on-screen we normally skip the side panel, but a
+		// required-items list still needs to be visible so the player can
+		// confirm they have what the step needs (or notice what's missing).
+		if (items != null && !items.isEmpty())
+		{
+			panelComponent.getChildren().clear();
+			addRequiredItemsIfPresent(items);
+			addSyncRemindersIfNeeded(logReminder, bankReminder);
+			panelComponent.setPreferredSize(PANEL_PREFERRED_SIZE);
+			return super.render(graphics);
 		}
 
 		return null;
@@ -437,6 +457,18 @@ public class GuidanceOverlay extends OverlayPanel
 		rebuildNpcLabel(this.interactAction, npc);
 	}
 
+	/**
+	 * Sets the required-item availability list rendered beneath the step
+	 * description. Each entry is a pre-resolved (name + availability) pair so
+	 * the render loop never touches inventory or bank state directly.
+	 *
+	 * <p>Pass an empty list (or {@code null}) to hide the section.
+	 */
+	public void setRequiredItems(List<RequiredItemDisplay> items)
+	{
+		this.requiredItems = items == null ? Collections.emptyList() : List.copyOf(items);
+	}
+
 	public void clearTarget()
 	{
 		targetPoint = null;
@@ -450,6 +482,7 @@ public class GuidanceOverlay extends OverlayPanel
 		trackedNpc = null;
 		cachedTravelLabel = null;
 		cachedNpcLabel = null;
+		requiredItems = Collections.emptyList();
 	}
 
 	private void rebuildNpcLabel(String action, NPC npc)
@@ -482,6 +515,84 @@ public class GuidanceOverlay extends OverlayPanel
 				.text("Open Bank to scan items")
 				.color(REMINDER_COLOR)
 				.build());
+		}
+	}
+
+	/**
+	 * Appends "Item requirements:" header followed by one line per required
+	 * item, colored by availability:
+	 * <ul>
+	 *   <li>{@link Status#HELD}    -> green   (in inventory or equipped)</li>
+	 *   <li>{@link Status#IN_BANK} -> yellow  (found in last bank scan)</li>
+	 *   <li>{@link Status#MISSING} -> red     (not held anywhere known)</li>
+	 * </ul>
+	 * No-op when {@link #requiredItems} is empty.
+	 */
+	private void addRequiredItemsIfPresent(List<RequiredItemDisplay> items)
+	{
+		if (items == null || items.isEmpty())
+		{
+			return;
+		}
+
+		panelComponent.getChildren().add(LineComponent.builder()
+			.left("Item requirements:")
+			.leftColor(ITEM_REQUIREMENTS_HEADER_COLOR)
+			.build());
+
+		for (RequiredItemDisplay item : items)
+		{
+			Color color;
+			String suffix;
+			switch (item.getStatus())
+			{
+				case HELD:
+					color = ITEM_HELD_COLOR;
+					suffix = "";
+					break;
+				case IN_BANK:
+					color = ITEM_IN_BANK_COLOR;
+					suffix = " (bank)";
+					break;
+				case MISSING:
+				default:
+					color = ITEM_MISSING_COLOR;
+					suffix = "";
+					break;
+			}
+			panelComponent.getChildren().add(LineComponent.builder()
+				.left(item.getName() + suffix)
+				.leftColor(color)
+				.build());
+		}
+	}
+
+	/**
+	 * Immutable display row for the required-items section.
+	 * Pre-resolved by {@code GuidanceOverlayCoordinator} so the render path
+	 * never touches inventory or bank state.
+	 */
+	public static final class RequiredItemDisplay
+	{
+		public enum Status { HELD, IN_BANK, MISSING }
+
+		private final String name;
+		private final Status status;
+
+		public RequiredItemDisplay(String name, Status status)
+		{
+			this.name = name;
+			this.status = status;
+		}
+
+		public String getName()
+		{
+			return name;
+		}
+
+		public Status getStatus()
+		{
+			return status;
 		}
 	}
 }
