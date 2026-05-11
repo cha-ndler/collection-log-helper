@@ -49,11 +49,6 @@ import net.runelite.api.coords.WorldPoint;
 @Singleton
 public class GuidanceSequencer
 {
-	/** Grand Exchange bank location for synthetic "go to bank" steps. */
-	private static final int GE_BANK_X = 3164;
-	private static final int GE_BANK_Y = 3489;
-	private static final int GE_BANK_PLANE = 0;
-
 	private final PlayerInventoryState inventoryState;
 	private final PlayerCollectionState collectionState;
 	private final RequirementsChecker requirementsChecker;
@@ -147,8 +142,11 @@ public class GuidanceSequencer
 	/**
 	 * Returns the current guidance step, or null if no sequence is active.
 	 * If the step has conditional alternatives, returns the resolved version.
-	 * If the current step requires items not in inventory, returns a synthetic
-	 * "go to bank" step instead.
+	 *
+	 * <p>Missing {@code requiredItemIds} no longer trigger a synthetic bank
+	 * routing step. Required items are surfaced informationally via the panel
+	 * and in-game overlay (with green / yellow / red availability borders);
+	 * the player chooses when and where to bank.
 	 */
 	public GuidanceStep getCurrentStep()
 	{
@@ -156,17 +154,7 @@ public class GuidanceSequencer
 		{
 			return null;
 		}
-
-		GuidanceStep step = resolveStep(currentIndex);
-
-		// Check if the step requires items not currently in inventory
-		if (step.getRequiredItemIds() != null && !step.getRequiredItemIds().isEmpty()
-			&& !inventoryState.hasAllItems(step.getRequiredItemIds()))
-		{
-			return createBankStep(step);
-		}
-
-		return step;
+		return resolveStep(currentIndex);
 	}
 
 	/**
@@ -678,35 +666,6 @@ public class GuidanceSequencer
 			default:
 				return false;
 		}
-	}
-
-	private GuidanceStep createBankStep(GuidanceStep originalStep)
-	{
-		return new GuidanceStep(
-			"Get required items from bank",
-			GE_BANK_X, GE_BANK_Y, GE_BANK_PLANE,
-			0, null, null,
-			"Grand Exchange bank",
-			null,
-			CompletionCondition.MANUAL,
-			0, 0, 0, 0,
-			null,  // completionNpcIds
-			null,  // worldMessage
-			0, null, null,  // objectId, objectIds, objectInteractAction
-			null,  // highlightItemIds
-			null,  // groundItemIds
-			null,  // completionChatPattern
-			0, 0,  // completionVarbitId, completionVarbitValue
-			false,  // useItemOnObject
-			0,     // objectMaxDistance
-			null,  // objectFilterTiles
-			null,  // highlightWidgetIds
-			0, 0,  // loopBackToStep, loopCount
-			null,  // skipIfHasAnyItemIds
-			null,  // dynamicItemObjectTiers
-			null,  // completionZone
-			null   // conditionalAlternatives
-		);
 	}
 
 	private void notifyStepChanged(GuidanceStep step)
