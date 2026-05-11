@@ -81,7 +81,7 @@ public class WorldMapRouteOverlay extends Overlay
 	public Dimension render(Graphics2D graphics)
 	{
 		final WorldPoint target = this.targetPoint;
-		if (target == null)
+		if (target == null || !config.showOverlays())
 		{
 			return null;
 		}

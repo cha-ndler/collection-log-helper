@@ -52,6 +52,7 @@ import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.events.ConfigChanged;
 
 /**
  * Routes guidance- and authoring-specific events that were previously handled
@@ -447,6 +448,40 @@ public class GuidanceEventRouter
 			{
 				guidanceSequencer.onNpcInteracted(npc.getId());
 			}
+		}
+	}
+
+	// ── Config propagation ──────────────────────────────────────────────────
+
+	/** Config group key used by every {@link CollectionLogHelperConfig} item. */
+	static final String CONFIG_GROUP = "collectionloghelper";
+	/** Config key for the "Show Hint Arrow" toggle. */
+	static final String KEY_SHOW_HINT_ARROW = "showHintArrow";
+
+	/**
+	 * Re-applies state when a config item changes mid-session so toggles take
+	 * effect immediately rather than waiting for the next step transition.
+	 *
+	 * <p>Today this only handles the hint-arrow toggle, because hint arrows
+	 * are set via {@code client.setHintArrow()} (a one-shot client mutation)
+	 * rather than a render-loop predicate. The overlay-rendering toggles
+	 * ({@code showOverlays}, etc.) propagate automatically: each overlay's
+	 * {@code render()} method gates on {@code config.showOverlays()} every
+	 * frame, so toggling the config is reflected on the next paint.
+	 *
+	 * <p>Closes cha-ndler/collection-log-helper#363 (Show Hint Arrow half).
+	 */
+	@Subscribe
+	public void onConfigChanged(ConfigChanged event)
+	{
+		if (!CONFIG_GROUP.equals(event.getGroup()))
+		{
+			return;
+		}
+
+		if (KEY_SHOW_HINT_ARROW.equals(event.getKey()))
+		{
+			guidanceCoordinator.refreshHintArrow();
 		}
 	}
 }

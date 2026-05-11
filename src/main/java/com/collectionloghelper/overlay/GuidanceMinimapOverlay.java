@@ -75,7 +75,7 @@ public class GuidanceMinimapOverlay extends Overlay
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
-		if (targetPoint == null)
+		if (targetPoint == null || !config.showOverlays())
 		{
 			return null;
 		}
