@@ -54,6 +54,7 @@ import net.runelite.api.events.MenuEntryAdded;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.NpcDespawned;
 import net.runelite.api.events.NpcSpawned;
+import net.runelite.client.events.ConfigChanged;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -714,5 +715,81 @@ public class GuidanceEventRouterTest
 
 		// Assert — no menu entry added when supplier is null
 		verify(client, never()).getMenu();
+	}
+
+	// ========================================================================
+	// onConfigChanged — propagation of "Show Hint Arrow" toggle (#363)
+	// ========================================================================
+
+	/**
+	 * When the player toggles "Show Hint Arrow" mid-guidance, the router must
+	 * call refreshHintArrow() so the change takes effect immediately rather
+	 * than waiting for the next step transition.
+	 */
+	@Test
+	public void onConfigChangedShowHintArrowCallsRefreshHintArrow()
+	{
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("collectionloghelper");
+		event.setKey("showHintArrow");
+		event.setOldValue("true");
+		event.setNewValue("false");
+
+		router.onConfigChanged(event);
+
+		verify(guidanceCoordinator).refreshHintArrow();
+	}
+
+	/**
+	 * The router only refreshes for "showHintArrow". Other keys in the same
+	 * config group must not trigger a hint-arrow refresh.
+	 */
+	@Test
+	public void onConfigChangedUnrelatedKeyDoesNotRefreshHintArrow()
+	{
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("collectionloghelper");
+		event.setKey("showOverlays");
+		event.setOldValue("true");
+		event.setNewValue("false");
+
+		router.onConfigChanged(event);
+
+		verify(guidanceCoordinator, never()).refreshHintArrow();
+	}
+
+	/**
+	 * Events from other plugins must be ignored entirely — no work done.
+	 */
+	@Test
+	public void onConfigChangedDifferentPluginGroupIgnored()
+	{
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("someOtherPlugin");
+		event.setKey("showHintArrow");
+		event.setOldValue("true");
+		event.setNewValue("false");
+
+		router.onConfigChanged(event);
+
+		verify(guidanceCoordinator, never()).refreshHintArrow();
+	}
+
+	/**
+	 * Toggling ON also dispatches a refresh — the coordinator's
+	 * refreshHintArrow handles both directions (clear if off, re-set if on).
+	 */
+	@Test
+	public void onConfigChangedShowHintArrowOnAlsoRefreshes()
+	{
+		ConfigChanged event = new ConfigChanged();
+		event.setGroup("collectionloghelper");
+		event.setKey("showHintArrow");
+		event.setOldValue("false");
+		event.setNewValue("true");
+
+		router.onConfigChanged(event);
+
+		verify(guidanceCoordinator).refreshHintArrow();
 	}
 }

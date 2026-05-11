@@ -303,7 +303,7 @@ public class ObjectHighlightOverlay extends Overlay
 		final boolean useItem = this.useItemOnObject;
 		final String tipText = this.tooltipText;
 
-		if (objects.isEmpty())
+		if (objects.isEmpty() || !config.showOverlays())
 		{
 			return null;
 		}
