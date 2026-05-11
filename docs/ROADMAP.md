@@ -128,6 +128,7 @@ This costs two weeks. It saves the much larger cost of another closure.
 2. **Use `code-reviewer` agent before requesting review**. Fix CRITICAL and HIGH issues. Document any intentional deviations.
 3. **Run `./gradlew build` locally before push**. CI is not a linter.
 4. **Superset detection**: before opening, check whether an already-open PR supersedes yours.
+5. **In-game validation for player-facing changes**. Anything touching overlays, panel rendering, hint arrows, or live game events adds reproducer rows to [`docs/in-game-validation-log.md`](in-game-validation-log.md) in the same PR. A merged PR with unticked validation rows is "code-merged, not user-verified" — track the gap explicitly. The closed cha-ndler/collection-log-helper#371 cycle is the cautionary example: 521/521 unit tests passed but every claimed fix was still broken in-game.
 
 ---
 
