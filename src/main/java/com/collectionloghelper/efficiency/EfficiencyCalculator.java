@@ -111,10 +111,11 @@ public class EfficiencyCalculator
 			}
 		}
 
-		// Unlocked first (by score desc), then locked (by score desc)
-		results.sort(Comparator
-			.comparing(ScoredItem::isLocked)
-			.thenComparing(Comparator.comparingDouble(ScoredItem::getScore).reversed()));
+		// Sort by score descending only. Locked items stay at their natural
+		// efficiency position; the renderer visually distinguishes them via a
+		// red highlight + lock icon + tooltip naming the unmet requirement.
+		// Closes cha-ndler/collection-log-helper#374.
+		results.sort(Comparator.comparingDouble(ScoredItem::getScore).reversed());
 		return results;
 	}
 
@@ -147,9 +148,7 @@ public class EfficiencyCalculator
 			}
 		}
 
-		results.sort(Comparator
-			.comparing(ScoredItem::isLocked)
-			.thenComparing(Comparator.comparingDouble(ScoredItem::getScore).reversed()));
+		results.sort(Comparator.comparingDouble(ScoredItem::getScore).reversed());
 		return results;
 	}
 
@@ -178,9 +177,7 @@ public class EfficiencyCalculator
 			}
 		}
 
-		results.sort(Comparator
-			.comparing(ScoredItem::isLocked)
-			.thenComparing(Comparator.comparingDouble(ScoredItem::getScore).reversed()));
+		results.sort(Comparator.comparingDouble(ScoredItem::getScore).reversed());
 		return results;
 	}
 
