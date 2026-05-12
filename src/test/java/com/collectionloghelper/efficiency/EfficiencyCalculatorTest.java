@@ -1112,6 +1112,81 @@ public class EfficiencyCalculatorTest
 		assertEquals(fullRate * fullKph * 100, full.getScore(), 0.01);
 	}
 
+	// --- Locked-item ranking position (cha-ndler/collection-log-helper#374) ---
+
+	/**
+	 * Closes cha-ndler/collection-log-helper#374. Locked items must rank by
+	 * score alone — same as unlocked items — and NOT get segregated to the
+	 * bottom of the list. The renderer visually distinguishes locked items
+	 * (red highlight + lock icon) but their position should reflect their
+	 * efficiency.
+	 */
+	@Test
+	public void testRankByEfficiency_lockedItemRanksAtNaturalScorePosition()
+	{
+		// Three sources, deliberately staggered scores. The middle one is locked.
+		CollectionLogSource fast = makeSource("Fast Unlocked", CollectionLogCategory.BOSSES,
+			30, Collections.singletonList(makeItem(1, "Fast drop", 0.05)));
+		CollectionLogSource mediumLocked = makeSource("Medium Locked", CollectionLogCategory.BOSSES,
+			60, Collections.singletonList(makeItem(2, "Medium drop", 0.05)));
+		CollectionLogSource slow = makeSource("Slow Unlocked", CollectionLogCategory.BOSSES,
+			120, Collections.singletonList(makeItem(3, "Slow drop", 0.05)));
+
+		when(database.getAllSources()).thenReturn(Arrays.asList(fast, mediumLocked, slow));
+		// Mark only the middle one as locked.
+		when(requirementsChecker.isAccessible("Fast Unlocked")).thenReturn(true);
+		when(requirementsChecker.isAccessible("Medium Locked")).thenReturn(false);
+		when(requirementsChecker.isAccessible("Slow Unlocked")).thenReturn(true);
+		// All drops are unobtained so the items count toward score.
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+		when(collectionState.isItemObtained(2)).thenReturn(false);
+		when(collectionState.isItemObtained(3)).thenReturn(false);
+		// Hide-locked OFF so the locked source isn't filtered out.
+		when(config.hideLockedContent()).thenReturn(false);
+
+		List<ScoredItem> ranked = calculator.rankByEfficiency();
+
+		assertEquals(3, ranked.size());
+		assertEquals("Fast Unlocked", ranked.get(0).getSource().getName());
+		assertEquals("Medium Locked", ranked.get(1).getSource().getName());
+		assertEquals("Slow Unlocked", ranked.get(2).getSource().getName());
+
+		// Sanity: locked-flag is preserved (renderer needs it for the red border).
+		assertFalse(ranked.get(0).isLocked());
+		assertTrue("Middle source must still be flagged as locked for the renderer",
+			ranked.get(1).isLocked());
+		assertFalse(ranked.get(2).isLocked());
+	}
+
+	/**
+	 * Same rule applies inside Category Focus mode.
+	 */
+	@Test
+	public void testFilterByCategory_lockedItemRanksAtNaturalScorePosition()
+	{
+		CollectionLogSource fast = makeSource("Fast Unlocked", CollectionLogCategory.BOSSES,
+			30, Collections.singletonList(makeItem(1, "Fast drop", 0.05)));
+		CollectionLogSource mediumLocked = makeSource("Medium Locked", CollectionLogCategory.BOSSES,
+			60, Collections.singletonList(makeItem(2, "Medium drop", 0.05)));
+		CollectionLogSource slow = makeSource("Slow Unlocked", CollectionLogCategory.BOSSES,
+			120, Collections.singletonList(makeItem(3, "Slow drop", 0.05)));
+
+		when(database.getAllSources()).thenReturn(Arrays.asList(fast, mediumLocked, slow));
+		when(requirementsChecker.isAccessible("Fast Unlocked")).thenReturn(true);
+		when(requirementsChecker.isAccessible("Medium Locked")).thenReturn(false);
+		when(requirementsChecker.isAccessible("Slow Unlocked")).thenReturn(true);
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+		when(collectionState.isItemObtained(2)).thenReturn(false);
+		when(collectionState.isItemObtained(3)).thenReturn(false);
+		when(config.hideLockedContent()).thenReturn(false);
+
+		List<ScoredItem> ranked = calculator.filterByCategory(CollectionLogCategory.BOSSES);
+
+		assertEquals(3, ranked.size());
+		assertEquals("Medium Locked", ranked.get(1).getSource().getName());
+		assertTrue(ranked.get(1).isLocked());
+	}
+
 	// --- Iron kill time with raid source ---
 
 	@Test

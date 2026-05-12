@@ -118,6 +118,21 @@ A proper architectural fix (pre-resolved `List<RequiredItemDisplay>` passed from
 
 ---
 
+## PR fix/374-locked-items-natural-position — Locked items rank by score, not segregated *(pending merge)*
+
+Closes cha-ndler/collection-log-helper#374. Three identical `Comparator.comparing(ScoredItem::isLocked).thenComparing(...)` chains in `EfficiencyCalculator` (`rankByEfficiency`, `filterByCategory`, `filterPetsOnly`) sorted by `isLocked` first — pushing every locked item to the bottom of the list regardless of its score. Removed the segregation key: score-only sort. Locked items keep their `isLocked` flag for the renderer (red highlight + lock icon + tooltip), they just appear in their natural efficiency position now.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Efficient mode with a locked source whose score sits between two unlocked ones → locked source appears INTERLEAVED, not at the bottom | `[ ]` | |
+| 2 | Locked source still renders with red highlight + lock icon (renderer unchanged) | `[ ]` | |
+| 3 | Hover the locked source → tooltip names the unmet requirement (quest / skill / diary) | `[ ]` | |
+| 4 | Toggle Hide Locked Content ON → locked sources still disappear entirely (no regression from cha-ndler/collection-log-helper#387) | `[ ]` | |
+| 5 | Category Focus mode with mixed locked/unlocked sources → same interleaving behavior | `[ ]` | |
+| 6 | Top Pick still picks the highest-score UNLOCKED source (locked sources can't be Top Pick — `findFirst().filter(!isLocked)` semantics intact) | `[ ]` | |
+
+---
+
 ## PR fix/required-items-client-thread — Guide Me activation regression *(pending merge)*
 
 Closes the regression surfaced by trace from PR #388: Guide Me on any source with `requiredItemIds` (e.g. Shades of Mort'ton) silently failed because `RequiredItemResolver.lookupName` called `ItemManager.getItemComposition()` from the EDT, which throws `AssertionError("must be called on client thread")`. The original catch only caught `RuntimeException`, so the assertion propagated up and aborted `activateGuidance` mid-flight — leaving the overlay state set but the panel state stale ("Guide Me" instead of "Stop Guidance").
@@ -189,7 +204,7 @@ These need fresh validation when a follow-up PR ships the real fix. The "still b
 | #363 | Activate guidance -> toggle Show Hint Arrow OFF -> minimap arrow + in-game tile arrow clear immediately | `[!]` | fix/363 | `[ ]` |
 | #364 | Toggle Hide Locked Content ON -> items with unmet quest/skill requirements disappear from list | `[!]` | fix/364 | `[ ]` |
 | #373 | Toggle Show Overlays OFF mid-guidance -> guidance session CONTINUES; only overlay rendering stops | `[!]` | fix/373 | `[ ]` |
-| #374 | Efficient mode with locked items -> locked items appear at their natural efficiency position (e.g., a ~17-min locked item sits near other ~17-min items), not segregated to the bottom | `[ ]` | — | `[ ]` |
+| #374 | Efficient mode with locked items -> locked items appear at their natural efficiency position (e.g., a ~17-min locked item sits near other ~17-min items), not segregated to the bottom | `[!]` | fix/374 | `[ ]` |
 | #378 | Walk away from the active step's tile mid-sequence -> step does NOT regress to a prior step | `[ ]` | — | `[ ]` |
 | #381 | Mid-guidance: teleport far away and back -> hint arrow re-renders without a Stop/Start cycle | `[ ]` | — | `[ ]` |
 
