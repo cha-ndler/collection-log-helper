@@ -86,7 +86,7 @@ Documentation only. No in-game validation required. **Skip.**
 
 ---
 
-## PR fix/373-overlay-toggle-preserves-guidance — Show Overlays toggle no longer kills the guidance session *(pending merge)*
+## PR #390 (fix/373-overlay-toggle-preserves-guidance) — Show Overlays toggle no longer kills the guidance session *(merged 2026-05-11)*
 
 Closes cha-ndler/collection-log-helper#373. Removes the early-return at the top of `GuidanceOverlayCoordinator.activateGuidance` that aborted the whole call when `config.showOverlays()` was false. Since cha-ndler/collection-log-helper#386 added per-overlay self-gating, the early-return is now redundant *and* wrong: toggling Show Overlays off should hide overlays (which #386 already does), not refuse to start guidance.
 
@@ -98,6 +98,23 @@ Closes cha-ndler/collection-log-helper#373. Removes the early-return at the top 
 | 4 | Repeat toggle cycle 3 times rapidly → state stays consistent each cycle; no stuck buttons; no console errors | `[ ]` | |
 | 5 | Stop Guidance manually with Show Overlays OFF → button returns to "Guide Me", banner clears | `[ ]` | |
 | 6 | Regression: Show Overlays ON + Guide Me on Shades of Mort'ton → still works as in cha-ndler/collection-log-helper#389 (panel + overlay both populate) | `[ ]` | |
+
+---
+
+## PR fix/step-progress-view-client-thread — StepProgressView tooltip lookup no longer crashes *(pending merge)*
+
+Closes the same class of bug as cha-ndler/collection-log-helper#389 but on the side-panel widget. `StepProgressView.updateRequiredItemDisplay` calls `itemManager.getItemComposition(itemId).getName()` to build tooltips for each required-item icon — but that runs on the EDT (the widget is a Swing panel), and `getItemComposition` asserts caller-is-client-thread. The `AssertionError` aborted the loop mid-iteration, leaving the required-items strip hidden in the panel and dumping stack traces to `client.log`.
+
+Minimal fix: wrap the `getItemComposition` call in `try / catch (Throwable)`, falling back to `"Item #N"` for the tooltip. Loop completes, panel renders icons + colored borders correctly; only tooltips degrade to IDs when on EDT.
+
+A proper architectural fix (pre-resolved `List<RequiredItemDisplay>` passed from coordinator on client thread) is queued as a follow-up; out of scope here to keep the PR minimal.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with `requiredItemIds` (e.g. Shades of Mort'ton step 1) → side-panel required-items strip shows item icons with colored borders | `[ ]` | |
+| 2 | Hover over an item icon → tooltip shows either the item name (if cache loaded on EDT) OR "Item #N (in inventory / bank / MISSING)" — both acceptable, no crash | `[ ]` | |
+| 3 | Open `client.log` after a Guide Me click → ZERO `Uncaught exception` lines pointing at `StepProgressView.updateRequiredItemDisplay` | `[ ]` | |
+| 4 | Cycle Guide Me → Stop Guidance → Guide Me 5 times → required-items strip renders each time, no degradation | `[ ]` | |
 
 ---
 
