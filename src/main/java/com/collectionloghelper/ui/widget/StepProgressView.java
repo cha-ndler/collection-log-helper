@@ -42,6 +42,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.util.AsyncBufferedImage;
@@ -61,6 +62,7 @@ import net.runelite.client.util.AsyncBufferedImage;
  * an override with the same signature breaks {@code setVisible(false)} for this
  * widget and leaves it visible in pre-guidance states (see issue #353).
  */
+@Slf4j
 public class StepProgressView extends JPanel
 {
 	private static final Color ITEM_STATUS_GREEN = new Color(40, 180, 40);
@@ -276,7 +278,27 @@ public class StepProgressView extends JPanel
 			BufferedImage scaled = scaleImage(asyncImage, 28, 28);
 			itemLabel.setIcon(new ImageIcon(scaled));
 
-			itemLabel.setToolTipText(itemManager.getItemComposition(itemId).getName() + statusText);
+			// ItemManager.getItemComposition() asserts client-thread, but this
+			// runs on the EDT (the panel is a Swing widget updated via
+			// SwingUtilities.invokeLater in showStep). The assertion is an Error
+			// (not RuntimeException) so it would otherwise propagate up,
+			// abort the loop mid-iteration, and leave the required-items strip
+			// hidden. See cha-ndler/collection-log-helper#388 for the trace.
+			// Falling back to "Item #N" keeps the row visible; a proper fix
+			// (pre-resolved items via RequiredItemResolver on client thread) is
+			// tracked as a follow-up — see PR description.
+			String tooltipName;
+			try
+			{
+				tooltipName = itemManager.getItemComposition(itemId).getName();
+			}
+			catch (Throwable t)
+			{
+				log.warn("Item composition lookup failed for required-item id {}: {}",
+					itemId, t.toString());
+				tooltipName = "Item #" + itemId;
+			}
+			itemLabel.setToolTipText(tooltipName + statusText);
 			requiredItemsPanel.add(itemLabel);
 		}
 
