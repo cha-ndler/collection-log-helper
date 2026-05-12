@@ -198,10 +198,13 @@ public class GuidanceOverlayCoordinator
 	 */
 	public void activateGuidance(CollectionLogSource source, WorldPoint cachedPlayerLocation)
 	{
-		if (!config.showOverlays())
-		{
-			return;
-		}
+		// Note: deliberately NO early-return on config.showOverlays() here.
+		// Show Overlays controls whether *overlays render*, not whether
+		// guidance is active. Each overlay's render() method self-gates
+		// on config.showOverlays() (added in cha-ndler/collection-log-helper#386),
+		// so toggling the option off hides them on the next paint without
+		// stopping the sequencer or the panel banner. Closes
+		// cha-ndler/collection-log-helper#373.
 
 		// Warn if the source has unmet requirements (don't block, just warn)
 		List<String> unmetReqs = requirementsChecker.getUnmetRequirements(source.getName());
