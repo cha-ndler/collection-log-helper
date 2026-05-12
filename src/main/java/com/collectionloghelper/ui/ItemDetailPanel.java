@@ -146,7 +146,7 @@ class ItemDetailPanel extends JPanel
 			if (estSeconds > 0)
 			{
 				String bucketName = clueEstimator.getBucket().getDisplayName();
-				appendInfoRow(info, "Est. Time:",
+				appendInfoRow(info, "Per Clue:",
 					"~" + ClueCompletionEstimator.formatTime(estSeconds)
 						+ " (" + bucketName.toLowerCase() + ")");
 			}
