@@ -118,7 +118,25 @@ A proper architectural fix (pre-resolved `List<RequiredItemDisplay>` passed from
 
 ---
 
-## PR fix/374-locked-items-natural-position — Locked items rank by score, not segregated *(pending merge)*
+## PR fix/381-hint-arrow-refresh-after-teleport — Hint arrow re-applies after long-distance teleport *(pending merge)*
+
+Closes cha-ndler/collection-log-helper#381. After teleporting away mid-guidance (e.g. Mort'ton → Grand Exchange via bank teleport, then back), the in-game hint arrow stayed cleared at the new step's target location. `client.setHintArrow(WorldPoint)` is bound to the loaded scene — when the scene reloaded, the arrow target was no longer rendered and walking back into range did not auto-restore it. Before this fix, only step transitions and the "Show Hint Arrow" config toggle re-set the arrow; neither fires on a teleport.
+
+Fix: introduces a new small focused class `com.collectionloghelper.guidance.GuidanceMovementTracker` (~160 lines, single responsibility) that subscribes to `GameTick` and tracks the player's WorldPoint each tick while guidance is active. When the single-tick Chebyshev delta exceeds 10 tiles (running caps at 2 tiles/tick — any single-tick jump >10 is unambiguously a teleport) or the plane changes, it calls `GuidanceOverlayCoordinator.refreshHintArrow()`. That existing method already gates on `config.showHintArrow()` and the active step's world target, so the tracker fires unconditionally on teleport and lets the coordinator decide whether to set, clear, or no-op. Extracted as a separate class (rather than another handler on `GuidanceEventRouter`, which already has 10 subscribers and 549 lines) so future movement-driven guidance behavior (e.g. step regression on player-left-step-location for cha-ndler/collection-log-helper#378) can live alongside it.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a multi-step source (Shades of Mort'ton). Mid-sequence, teleport away (Grand Exchange teleport). Teleport back to Mort'ton → hint arrow (minimap + in-game tile arrow) reappears at the current step's target WITHOUT having to Stop / Start Guidance | `[ ]` | |
+| 2 | With "Show Hint Arrow" config DISABLED, teleport long-distance during active guidance → no arrow appears (refresh respects the toggle) | `[ ]` | |
+| 3 | Plane change mid-guidance (climb a ladder, enter a basement) → hint arrow re-applies at the current step's target on the new plane | `[ ]` | |
+| 4 | Ordinary walking 10+ ticks across a normal scene boundary (no teleport) → arrow does NOT flicker / churn (no false-positive refresh) | `[ ]` | |
+| 5 | Stop Guidance, teleport, Start Guidance fresh → first tick re-baselines silently; no spurious refresh from prior baseline | `[ ]` | |
+| 6 | Step transitions mid-session still fire arrow updates (existing applyStepToOverlays path unchanged) | `[ ]` | |
+| 7 | client.log grep for `IllegalStateException` / `AssertionError` from `setHintArrow` after teleport → should be ZERO entries (refresh runs through coordinator which dispatches on client thread) | `[ ]` | |
+
+---
+
+## PR fix/374-locked-items-natural-position — Locked items rank by score, not segregated *(merged 2026-05-11, PR #392)*
 
 Closes cha-ndler/collection-log-helper#374. Three identical `Comparator.comparing(ScoredItem::isLocked).thenComparing(...)` chains in `EfficiencyCalculator` (`rankByEfficiency`, `filterByCategory`, `filterPetsOnly`) sorted by `isLocked` first — pushing every locked item to the bottom of the list regardless of its score. Removed the segregation key: score-only sort. Locked items keep their `isLocked` flag for the renderer (red highlight + lock icon + tooltip), they just appear in their natural efficiency position now.
 
@@ -206,7 +224,7 @@ These need fresh validation when a follow-up PR ships the real fix. The "still b
 | #373 | Toggle Show Overlays OFF mid-guidance -> guidance session CONTINUES; only overlay rendering stops | `[!]` | fix/373 | `[ ]` |
 | #374 | Efficient mode with locked items -> locked items appear at their natural efficiency position (e.g., a ~17-min locked item sits near other ~17-min items), not segregated to the bottom | `[!]` | fix/374 | `[ ]` |
 | #378 | Walk away from the active step's tile mid-sequence -> step does NOT regress to a prior step | `[ ]` | — | `[ ]` |
-| #381 | Mid-guidance: teleport far away and back -> hint arrow re-renders without a Stop/Start cycle | `[ ]` | — | `[ ]` |
+| #381 | Mid-guidance: teleport far away and back -> hint arrow re-renders without a Stop/Start cycle | `[!]` | fix/381 | `[ ]` |
 
 ---
 
