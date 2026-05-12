@@ -198,6 +198,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private GuidanceEventRouter guidanceEventRouter;
 
+	@Inject
+	private com.collectionloghelper.guidance.GuidanceMovementTracker guidanceMovementTracker;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -284,6 +287,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceEventRouter.setActivateGuidanceCallback(this::activateGuidance);
 		guidanceEventRouter.setOnFilterConfigChanged(this::onFilterConfigChanged);
 		eventBus.register(guidanceEventRouter);
+		eventBus.register(guidanceMovementTracker);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -322,6 +326,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayRegistry.unregisterAll();
 		eventBus.unregister(sceneEventRouter);
 		eventBus.unregister(guidanceEventRouter);
+		eventBus.unregister(guidanceMovementTracker);
 		deactivateGuidance();
 		syncStateCoordinator.reset();
 		sourcesWithMissingItems.clear();
