@@ -86,6 +86,21 @@ Documentation only. No in-game validation required. **Skip.**
 
 ---
 
+## PR fix/373-overlay-toggle-preserves-guidance — Show Overlays toggle no longer kills the guidance session *(pending merge)*
+
+Closes cha-ndler/collection-log-helper#373. Removes the early-return at the top of `GuidanceOverlayCoordinator.activateGuidance` that aborted the whole call when `config.showOverlays()` was false. Since cha-ndler/collection-log-helper#386 added per-overlay self-gating, the early-return is now redundant *and* wrong: toggling Show Overlays off should hide overlays (which #386 already does), not refuse to start guidance.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | With Show Overlays OFF, click Guide Me on any source → panel button changes to "Stop Guidance", banner shows "Guiding: X", step progress widget appears in panel, but NO 3D world overlays render | `[ ]` | |
+| 2 | While guidance is active with Show Overlays OFF, toggle Show Overlays ON → overlays appear immediately at the current step's target (without re-clicking Guide Me) | `[ ]` | |
+| 3 | While guidance is active with Show Overlays ON, toggle Show Overlays OFF → overlays disappear immediately but guidance stays active (panel button stays "Stop Guidance") | `[ ]` | |
+| 4 | Repeat toggle cycle 3 times rapidly → state stays consistent each cycle; no stuck buttons; no console errors | `[ ]` | |
+| 5 | Stop Guidance manually with Show Overlays OFF → button returns to "Guide Me", banner clears | `[ ]` | |
+| 6 | Regression: Show Overlays ON + Guide Me on Shades of Mort'ton → still works as in cha-ndler/collection-log-helper#389 (panel + overlay both populate) | `[ ]` | |
+
+---
+
 ## PR fix/required-items-client-thread — Guide Me activation regression *(pending merge)*
 
 Closes the regression surfaced by trace from PR #388: Guide Me on any source with `requiredItemIds` (e.g. Shades of Mort'ton) silently failed because `RequiredItemResolver.lookupName` called `ItemManager.getItemComposition()` from the EDT, which throws `AssertionError("must be called on client thread")`. The original catch only caught `RuntimeException`, so the assertion propagated up and aborted `activateGuidance` mid-flight — leaving the overlay state set but the panel state stale ("Guide Me" instead of "Stop Guidance").
@@ -156,7 +171,7 @@ These need fresh validation when a follow-up PR ships the real fix. The "still b
 | #363 | Activate guidance -> toggle Show Overlays OFF -> overlay should clear immediately (not require Stop/Start) | `[!]` | fix/363 | `[ ]` |
 | #363 | Activate guidance -> toggle Show Hint Arrow OFF -> minimap arrow + in-game tile arrow clear immediately | `[!]` | fix/363 | `[ ]` |
 | #364 | Toggle Hide Locked Content ON -> items with unmet quest/skill requirements disappear from list | `[!]` | fix/364 | `[ ]` |
-| #373 | Toggle Show Overlays OFF mid-guidance -> guidance session CONTINUES; only overlay rendering stops | `[ ]` | — | `[ ]` |
+| #373 | Toggle Show Overlays OFF mid-guidance -> guidance session CONTINUES; only overlay rendering stops | `[!]` | fix/373 | `[ ]` |
 | #374 | Efficient mode with locked items -> locked items appear at their natural efficiency position (e.g., a ~17-min locked item sits near other ~17-min items), not segregated to the bottom | `[ ]` | — | `[ ]` |
 | #378 | Walk away from the active step's tile mid-sequence -> step does NOT regress to a prior step | `[ ]` | — | `[ ]` |
 | #381 | Mid-guidance: teleport far away and back -> hint arrow re-renders without a Stop/Start cycle | `[ ]` | — | `[ ]` |
