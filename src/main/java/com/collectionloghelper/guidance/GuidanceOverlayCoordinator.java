@@ -516,7 +516,19 @@ public class GuidanceOverlayCoordinator
 
 		// Resolve required-item availability for this step once and push to the
 		// overlay; the render loop must never touch inventory/bank state.
-		guidanceOverlay.setRequiredItems(requiredItemResolver.resolve(step));
+		//
+		// MUST run on the client thread: RequiredItemResolver.resolve() calls
+		// ItemManager.getItemComposition(int), which asserts caller-is-client-
+		// thread. Calling from the EDT (which is where activateGuidance lives
+		// when triggered by a panel button click) throws AssertionError, aborts
+		// the rest of activateGuidance mid-flight, and leaves the panel state
+		// out of sync with the overlay state (overlay set, panel button stays
+		// "Guide Me"). See cha-ndler/collection-log-helper#388 for the trace
+		// that surfaced this. The deferral is cheap (~1 tick at worst) and
+		// idempotent against rapid step changes because each call wins.
+		final GuidanceStep stepForResolve = step;
+		clientThread.invokeLater(() ->
+			guidanceOverlay.setRequiredItems(requiredItemResolver.resolve(stepForResolve)));
 
 		if (step.getWorldX() > 0)
 		{

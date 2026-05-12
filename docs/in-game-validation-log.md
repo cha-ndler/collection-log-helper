@@ -86,6 +86,26 @@ Documentation only. No in-game validation required. **Skip.**
 
 ---
 
+## PR fix/required-items-client-thread — Guide Me activation regression *(pending merge)*
+
+Closes the regression surfaced by trace from PR #388: Guide Me on any source with `requiredItemIds` (e.g. Shades of Mort'ton) silently failed because `RequiredItemResolver.lookupName` called `ItemManager.getItemComposition()` from the EDT, which throws `AssertionError("must be called on client thread")`. The original catch only caught `RuntimeException`, so the assertion propagated up and aborted `activateGuidance` mid-flight — leaving the overlay state set but the panel state stale ("Guide Me" instead of "Stop Guidance").
+
+Two-layer fix:
+1. `GuidanceOverlayCoordinator.applyStepToOverlays` now dispatches the resolve + set onto `clientThread.invokeLater()`.
+2. `RequiredItemResolver.lookupName` widens its catch from `RuntimeException` to `Throwable` (belt-and-suspenders) so a future caller that forgets the client-thread contract can't silently kill activation again.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Click Guide Me on Top Pick "Shades of Mort'ton" (Bronze lock) → panel button changes to "Stop Guidance" AND in-game overlay shows step 1 content. State stays in sync. | `[ ]` | |
+| 2 | Click Stop Guidance → panel button returns to "Guide Me" AND overlay clears. | `[ ]` | |
+| 3 | Click Guide Me from the Bronze lock item-detail view → button changes correctly there too. | `[ ]` | |
+| 4 | Click Guide Me on a source with no `requiredItemIds` (e.g. Larran's Big Chest → Dagon'hai robe bottom) → still works as before (regression check). | `[ ]` | |
+| 5 | Repeatedly Guide Me / Stop Guidance on the same source 5 times → state stays consistent each cycle; no stuck buttons. | `[ ]` | |
+| 6 | Open client.log and grep `Item composition lookup failed` → should be ZERO entries during normal activation (the assertion path is no longer hit). | `[ ]` | |
+| 7 | Required-items section in panel + in-game overlay renders item NAMES (e.g. "Tinderbox"), not raw IDs (e.g. "Item #590"). | `[ ]` | |
+
+---
+
 ## PR fix/364-config-triggered-panel-rebuild — Filter-config toggles trigger panel rebuild *(pending merge)*
 
 Closes #364 (Hide Locked Content toggle inert). Approach: extends the `@Subscribe onConfigChanged` handler added in fix/363 with a `FILTER_CONFIG_KEYS` set; when any of those keys change, fires a plugin-supplied callback that flips `pendingPanelRebuild = true` + `rankedSourcesDirty = true`. Next game-tick coalesces a single rebuild against the new filter state.
