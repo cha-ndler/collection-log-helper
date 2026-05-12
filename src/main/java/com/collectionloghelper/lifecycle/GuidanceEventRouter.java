@@ -42,8 +42,11 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.MenuAction;
 import net.runelite.api.NPC;
+import net.runelite.api.Player;
+import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ActorDeath;
 import net.runelite.api.events.AnimationChanged;
+import net.runelite.api.events.GameTick;
 import net.runelite.api.events.HitsplatApplied;
 import net.runelite.api.events.InteractingChanged;
 import net.runelite.api.events.MenuEntryAdded;
@@ -121,6 +124,23 @@ public class GuidanceEventRouter
 	 */
 	private Runnable onFilterConfigChanged;
 
+	/**
+	 * Player world location at the end of the previous game tick, used by
+	 * {@link #onGameTick(GameTick)} to detect long-distance teleports while
+	 * guidance is active. Reset to {@code null} when guidance is inactive so
+	 * the next active tick re-baselines without firing a false-positive
+	 * refresh on the resumption tick.
+	 */
+	private WorldPoint lastTickPlayerLocation;
+
+	/**
+	 * Chebyshev-distance threshold (tiles) above which a single-tick player
+	 * position delta is treated as a teleport rather than walking. Running
+	 * caps at 2 tiles/tick in OSRS, so any single-tick delta over this is
+	 * unambiguously a teleport, fairy ring, mounted glory, etc.
+	 */
+	static final int TELEPORT_DISTANCE_THRESHOLD = 10;
+
 	@Inject
 	public GuidanceEventRouter(
 		Client client,
@@ -169,6 +189,82 @@ public class GuidanceEventRouter
 	public void setOnFilterConfigChanged(Runnable callback)
 	{
 		this.onFilterConfigChanged = callback;
+	}
+
+	// ── Game tick ───────────────────────────────────────────────────────────
+
+	/**
+	 * Detects long-distance teleports during active guidance and re-applies
+	 * the hint arrow so it doesn't go stale at the previous step location.
+	 *
+	 * <p>Background: {@code client.setHintArrow(WorldPoint)} is bound to the
+	 * loaded scene. When the player teleports (Mort'ton → GE → back), the
+	 * scene reloads and the previous arrow target is no longer rendered;
+	 * walking back into range does not auto-restore it. Before this handler,
+	 * the only paths that re-set the arrow were step transitions and the
+	 * "Show Hint Arrow" config toggle — neither fires on a teleport.
+	 *
+	 * <p>Strategy: track the player's WorldPoint at the end of each tick.
+	 * When delta exceeds {@link #TELEPORT_DISTANCE_THRESHOLD} tiles
+	 * (Chebyshev) or the plane changes, call
+	 * {@link GuidanceOverlayCoordinator#refreshHintArrow()}. Running caps at
+	 * 2 tiles/tick, so anything above the threshold is unambiguously a
+	 * teleport — walking won't fire false positives.
+	 *
+	 * <p>The coordinator's {@code refreshHintArrow()} already gates on
+	 * {@code config.showHintArrow()} and the active step's world target, so
+	 * this method intentionally fires unconditionally on teleport and lets
+	 * the coordinator decide whether to set, clear, or no-op.
+	 *
+	 * <p>Closes cha-ndler/collection-log-helper#381.
+	 */
+	@Subscribe
+	public void onGameTick(GameTick event)
+	{
+		if (!guidanceSequencer.isActive())
+		{
+			lastTickPlayerLocation = null;
+			return;
+		}
+
+		Player lp = client.getLocalPlayer();
+		if (lp == null)
+		{
+			return;
+		}
+
+		WorldPoint current = lp.getWorldLocation();
+		if (current == null)
+		{
+			return;
+		}
+
+		WorldPoint previous = lastTickPlayerLocation;
+		lastTickPlayerLocation = current;
+
+		if (previous == null)
+		{
+			return;
+		}
+
+		if (previous.getPlane() != current.getPlane() || chebyshev(previous, current) > TELEPORT_DISTANCE_THRESHOLD)
+		{
+			guidanceCoordinator.refreshHintArrow();
+		}
+	}
+
+	/**
+	 * Chebyshev (chessboard) distance between two world points on the same
+	 * plane. Caller is responsible for plane equality. Inlined instead of
+	 * relying on {@code WorldPoint.distanceTo} so the algorithm is explicit
+	 * and unit-testable without depending on RuneLite API distance semantics
+	 * (which return {@code Integer.MAX_VALUE} across planes).
+	 */
+	private static int chebyshev(WorldPoint a, WorldPoint b)
+	{
+		int dx = Math.abs(a.getX() - b.getX());
+		int dy = Math.abs(a.getY() - b.getY());
+		return Math.max(dx, dy);
 	}
 
 	// ── Actor death ─────────────────────────────────────────────────────────
