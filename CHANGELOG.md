@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Changed
+
+- **Clue per-casket time labeled "Per Clue:"** — for clue sources the secondary time row
+  (player-progression bucket) was previously also labeled "Est. Time:", making the two
+  values ("total" vs "per casket") visually indistinguishable.
+  ([#368](../../issues/368))
+
 ## 1.0.0-hub — 2026-04-17
 
 ### Changed
