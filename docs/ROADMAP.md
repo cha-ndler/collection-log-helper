@@ -528,7 +528,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [x] A3 — Issue triage & labels                         status: done          owner: cha-ndler  updated: 2026-04-17  note: GitHub-only — summary in #345; 10 labels created, #319 closed, #323/#314/#306/#134 labeled
 - [x] A4 — Plugin Hub self-review doc                    status: done          owner: cha-ndler  updated: 2026-04-17  pr: #346  note: 27 green / 3 yellow / 2 red — docs/plugin-hub-review.md
 - [x] A5 — Screenshots refresh                           status: done          owner: cha-ndler  updated: 2026-04-16  note: docs/screenshots/ populated
-- [/] A6 — Tag v1.0.0-hub, wait a week, resubmit         status: in-progress   owner: cha-ndler  updated: 2026-04-17  pr: #355  note: CHANGELOG promoted to 1.0.0-hub, resubmission checklist drafted (docs/plugin-hub-resubmission.md), tag v1.0.0-hub drafted locally — awaiting quiet-week validation before `git push origin v1.0.0-hub`.
+- [/] A6 — Tag v1.0.0-hub, wait a week, resubmit         status: in-progress   owner: cha-ndler  updated: 2026-05-12  pr: #355, refresh pending  note: original locally-drafted tag from 2026-04-17 (commit b9518653) went stale — 13 PRs landed afterward including the v1-blocker fix burst from in-game testing on 2026-05-10. CHANGELOG and docs/plugin-hub-resubmission.md refreshed; tag will be deleted and re-cut on current master HEAD after the refresh PR merges. Earliest push date 2026-05-19 assuming no further master merges during the quiet week.
 
 **Tier A.5 — Data sourcing infrastructure**
 
