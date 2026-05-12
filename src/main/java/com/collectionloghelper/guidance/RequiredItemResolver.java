@@ -115,12 +115,20 @@ public class RequiredItemResolver
 		{
 			return itemManager.getItemComposition(itemId).getName();
 		}
-		catch (RuntimeException ex)
+		catch (Throwable ex)
 		{
-			// Defensive: getItemComposition can throw for invalid IDs in some
-			// client states (e.g. cache not yet loaded). Surface the ID so the
-			// player still sees a row instead of silently dropping it.
-			log.debug("Item composition lookup failed for id {}: {}", itemId, ex.getMessage());
+			// Defensive: getItemComposition can fail for several reasons:
+			//   - Invalid item IDs (RuntimeException, e.g. NPE on null comp)
+			//   - Cache not yet loaded
+			//   - Caller not on client thread (AssertionError "must be called
+			//     on client thread") — see cha-ndler/collection-log-helper#388
+			// AssertionError extends Error, not RuntimeException, so catching
+			// only RuntimeException let it propagate and silently aborted the
+			// entire guidance activation. Catching Throwable here keeps the
+			// resolver fail-safe: the player sees "Item #N" instead of nothing,
+			// and the calling activation path completes normally.
+			log.warn("Item composition lookup failed for id {}: {}",
+				itemId, ex.toString());
 			return "Item #" + itemId;
 		}
 	}

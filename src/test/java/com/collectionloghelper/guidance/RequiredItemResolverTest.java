@@ -214,6 +214,29 @@ public class RequiredItemResolverTest
 		assertEquals(Status.MISSING, rows.get(0).getStatus());
 	}
 
+	/**
+	 * Regression for cha-ndler/collection-log-helper#388. ItemManager.getItem-
+	 * Composition asserts "must be called on client thread"; from the EDT this
+	 * throws java.lang.AssertionError, which is NOT a RuntimeException. The
+	 * original catch (RuntimeException) let it propagate and silently aborted
+	 * the entire activateGuidance call. The catch now widens to Throwable so
+	 * the player still gets a usable row + the rest of activation completes.
+	 */
+	@Test
+	public void itemCompositionAssertionErrorFallsBackToIdLabel()
+	{
+		final int badThreadId = 590;
+		when(itemManager.getItemComposition(badThreadId))
+			.thenThrow(new AssertionError("must be called on client thread"));
+
+		List<RequiredItemDisplay> rows = resolver.resolve(
+			stepWithRequiredItems(Collections.singletonList(badThreadId)));
+
+		assertEquals(1, rows.size());
+		assertEquals("Item #" + badThreadId, rows.get(0).getName());
+		assertEquals(Status.MISSING, rows.get(0).getStatus());
+	}
+
 	// --- Helpers ---
 
 	private static GuidanceStep stepWithRequiredItems(List<Integer> requiredItemIds)
