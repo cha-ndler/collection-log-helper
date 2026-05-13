@@ -43,6 +43,18 @@ public class GuidanceStep
 	/** Human-readable description of what to do in this step. */
 	String description;
 
+	/**
+	 * Optional per-item override for the step's description text.  When the active
+	 * guidance has a specific target collection-log item AND this map has an entry
+	 * for that item, the override string is used in place of {@link #description}.
+	 * Falls back to the static description when no override applies (null map, null
+	 * target, or target not present in the map).
+	 *
+	 * <p>Null by default — existing JSON without this field deserialises unchanged.
+	 */
+	@Nullable
+	Map<Integer, String> perItemStepDescription;
+
 	/** Target world coordinates for this step (0 = no location). */
 	int worldX;
 	int worldY;
@@ -200,6 +212,28 @@ public class GuidanceStep
 	}
 
 	/**
+	 * Resolves the description for this step given the active guidance target item.
+	 * When {@link #perItemStepDescription} has an entry for {@code targetItemId}, that
+	 * override is returned.  Falls back to {@link #description} when the map is null,
+	 * {@code targetItemId} is null, or no entry exists for the target.
+	 *
+	 * @param targetItemId the clog item ID the player is hunting, or {@code null}
+	 * @return the resolved description string (never null if {@link #description} is set)
+	 */
+	public String resolveDescription(@Nullable Integer targetItemId)
+	{
+		if (targetItemId != null && perItemStepDescription != null)
+		{
+			String override = perItemStepDescription.get(targetItemId);
+			if (override != null)
+			{
+				return override;
+			}
+		}
+		return description;
+	}
+
+	/**
 	 * Returns true if the given NPC ID matches this step's completion NPC.
 	 * Checks both the single completionNpcId and the completionNpcIds list,
 	 * supporting multi-form bosses (e.g., Zulrah's 3 combat forms).
@@ -292,6 +326,7 @@ public class GuidanceStep
 	{
 		return new GuidanceStep(
 			alt.getDescription() != null ? alt.getDescription() : this.description,
+			this.perItemStepDescription,
 			alt.getWorldX() != null ? alt.getWorldX() : this.worldX,
 			alt.getWorldY() != null ? alt.getWorldY() : this.worldY,
 			alt.getWorldPlane() != null ? alt.getWorldPlane() : this.worldPlane,

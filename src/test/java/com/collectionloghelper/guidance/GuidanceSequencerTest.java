@@ -91,6 +91,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			description,
+			null,           // perItemStepDescription
 			0, 0, 0,       // worldX, worldY, worldPlane
 			0, null, null,  // npcId, interactAction, dialogOptions
 			null, null,     // travelTip, requiredItemIds
@@ -121,6 +122,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			"Step: " + condition.name(),
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, null,
@@ -151,6 +153,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			"Collect " + count + " items",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, null,
@@ -181,6 +184,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			"Walk to location",
+			null,  // perItemStepDescription
 			x, y, plane,
 			0, null, null,
 			null, null,
@@ -211,6 +215,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			"Talk to NPC",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, null,
@@ -241,6 +246,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			"Kill NPC",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, null,
@@ -271,6 +277,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			"Wait for chat",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, null,
@@ -302,6 +309,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			description,
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, null,
@@ -332,6 +340,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			"Go to plane " + plane,
+			null,  // perItemStepDescription
 			0, 0, plane,
 			0, null, null,
 			null, null,
@@ -362,6 +371,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			"Wait for varbit",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, null,
@@ -392,6 +402,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			"Step needing items",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, requiredItemIds,
@@ -764,6 +775,7 @@ public class GuidanceSequencerTest
 		// Simulates Zulrah: NPC can die as any of 3 forms (2042, 2043, 2044)
 		GuidanceStep multiFormKillStep = new GuidanceStep(
 			"Kill Zulrah",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			2042, null, null,
 			null, null,
@@ -1232,6 +1244,7 @@ public class GuidanceSequencerTest
 	{
 		return new GuidanceStep(
 			description,
+			null,  // perItemStepDescription
 			worldX, worldY, 0,
 			0, null, null,
 			travelTip, null,
@@ -1457,6 +1470,7 @@ public class GuidanceSequencerTest
 	{
 		GuidanceStep step = new GuidanceStep(
 			"No alternatives",
+			null,  // perItemStepDescription
 			3000, 3000, 0,
 			0, null, null,
 			null, null,
