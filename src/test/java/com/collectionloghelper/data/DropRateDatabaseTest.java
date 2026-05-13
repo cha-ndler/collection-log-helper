@@ -353,14 +353,13 @@ public class DropRateDatabaseTest
 	}
 
 	/**
-	 * The real drop_rates.json (no recommendedItemIds yet) must still parse
-	 * without errors — i.e. the additive schema is backwards compatible.
+	 * Where recommendedItemIds is present in drop_rates.json (B.5.2b backfill),
+	 * each array must be non-empty, contain only positive item IDs, and have
+	 * no more than 6 entries (per authoring spec).
 	 */
 	@Test
-	public void load_existingDataParsesWithoutRecommendedItemIds()
+	public void load_recommendedItemIds_whenPresent_areValidAndBounded()
 	{
-		// If we got here the @Before loaded successfully — just verify all
-		// guidance steps that exist have null recommendedItemIds (no data yet).
 		for (CollectionLogSource source : database.getAllSources())
 		{
 			if (source.getGuidanceSteps() == null)
@@ -369,8 +368,20 @@ public class DropRateDatabaseTest
 			}
 			for (GuidanceStep step : source.getGuidanceSteps())
 			{
-				assertNull("Existing data must not have recommendedItemIds set (B.5.2b is pending)",
-					step.getRecommendedItemIds());
+				List<Integer> recommended = step.getRecommendedItemIds();
+				if (recommended == null)
+				{
+					continue; // null is fine — most steps have no recommendedItemIds
+				}
+				String ctx = source.getName() + " / " + step.getDescription();
+				assertFalse("recommendedItemIds must not be empty: " + ctx, recommended.isEmpty());
+				assertTrue("recommendedItemIds must have at most 6 entries: " + ctx,
+					recommended.size() <= 6);
+				for (int id : recommended)
+				{
+					assertTrue("recommendedItemIds must contain only positive IDs (got " + id + "): " + ctx,
+						id > 0);
+				}
 			}
 		}
 	}
