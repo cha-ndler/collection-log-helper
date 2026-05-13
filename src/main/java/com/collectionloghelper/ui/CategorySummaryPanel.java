@@ -29,6 +29,7 @@ import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
+import com.collectionloghelper.efficiency.RankedCategoryItem;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -57,12 +58,17 @@ public class CategorySummaryPanel extends JPanel
 
 	// Data retained for lazy population
 	private List<CollectionLogSource> lazySources;
+	/** Non-null when using efficiency-sorted display (Category Focus mode). */
+	private List<RankedCategoryItem> lazyRankedItems;
 	private PlayerCollectionState lazyCollectionState;
 	private RequirementsChecker lazyRequirementsChecker;
 	private ItemManager lazyItemManager;
 	private ItemClickHandler lazyClickHandler;
 	private boolean lazyHideObtained;
 
+	/**
+	 * Constructs a panel that displays items in wiki/source order (default behaviour).
+	 */
 	public CategorySummaryPanel(CollectionLogCategory category, List<CollectionLogSource> sources,
 		PlayerCollectionState collectionState, RequirementsChecker requirementsChecker,
 		ItemManager itemManager, ItemClickHandler clickHandler, boolean hideObtained)
@@ -142,7 +148,133 @@ public class CategorySummaryPanel extends JPanel
 		});
 	}
 
+	/**
+	 * Private constructor for the efficiency-sorted path. Use
+	 * {@link #withEfficiencySort} to construct.
+	 *
+	 * <p>A private constructor is required because Java's type erasure makes
+	 * {@code List<RankedCategoryItem>} and {@code List<CollectionLogSource>}
+	 * indistinguishable at the JVM level, preventing a second public overload.
+	 */
+	private CategorySummaryPanel(CollectionLogCategory category, List<RankedCategoryItem> rankedItems,
+		PlayerCollectionState collectionState, RequirementsChecker requirementsChecker,
+		ItemManager itemManager, ItemClickHandler clickHandler, boolean hideObtained,
+		@SuppressWarnings("unused") boolean efficiencySentinel)
+	{
+		this.categoryName = category.getDisplayName();
+		this.lazyRankedItems = rankedItems;
+		this.lazySources = null;
+		this.lazyCollectionState = collectionState;
+		this.lazyRequirementsChecker = requirementsChecker;
+		this.lazyItemManager = itemManager;
+		this.lazyClickHandler = clickHandler;
+		this.lazyHideObtained = hideObtained;
+
+		setLayout(new BorderLayout());
+		setBackground(ColorScheme.DARKER_GRAY_COLOR);
+		setBorder(BorderFactory.createEmptyBorder(0, 0, 4, 0));
+		setAlignmentX(LEFT_ALIGNMENT);
+		setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+
+		JPanel headerPanel = new JPanel(new BorderLayout(8, 0));
+		headerPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
+		headerPanel.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
+
+		obtained = collectionState.getCategoryCount(category);
+		total = collectionState.getCategoryMax(category);
+
+		nameLabel = new JLabel(
+			String.format("\u25B6 %s (%d/%d)", category.getDisplayName(), obtained, total));
+		nameLabel.setFont(FontManager.getRunescapeSmallFont());
+		nameLabel.setForeground(Color.WHITE);
+		headerPanel.add(nameLabel, BorderLayout.WEST);
+
+		JPanel progressBar = new ProgressBar(obtained, total);
+		progressBar.setPreferredSize(new Dimension(80, 12));
+		headerPanel.add(progressBar, BorderLayout.EAST);
+
+		add(headerPanel, BorderLayout.NORTH);
+
+		itemsContainer = new JPanel();
+		itemsContainer.setLayout(new BoxLayout(itemsContainer, BoxLayout.Y_AXIS));
+		itemsContainer.setBackground(ColorScheme.DARK_GRAY_COLOR);
+		itemsContainer.setVisible(false);
+
+		add(itemsContainer, BorderLayout.CENTER);
+
+		headerPanel.addMouseListener(new java.awt.event.MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent e)
+			{
+				expanded = !expanded;
+				if (expanded && !populated)
+				{
+					populateItems();
+				}
+				itemsContainer.setVisible(expanded);
+				nameLabel.setText(String.format("%s %s (%d/%d)",
+					expanded ? "\u25BC" : "\u25B6",
+					category.getDisplayName(), obtained, total));
+				revalidate();
+			}
+
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent e)
+			{
+				headerPanel.setBackground(ColorScheme.DARKER_GRAY_HOVER_COLOR);
+			}
+
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent e)
+			{
+				headerPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
+			}
+		});
+	}
+
+	/**
+	 * Creates a {@link CategorySummaryPanel} that displays items sorted by
+	 * descending efficiency score (Category Focus mode).
+	 *
+	 * <p>Sort rules (applied by
+	 * {@link com.collectionloghelper.efficiency.EfficiencyCalculator#rankItemsByEfficiencyForCategory}
+	 * before this method is called):
+	 * <ul>
+	 *   <li>Unobtained items first, by descending score.</li>
+	 *   <li>Obtained items last (when shown), also by descending score.</li>
+	 *   <li>Score ties break alphabetically on item name.</li>
+	 *   <li>Locked items interleave at their natural score position (issue #392).</li>
+	 * </ul>
+	 *
+	 * @param rankedItems pre-sorted list from
+	 *        {@link com.collectionloghelper.efficiency.EfficiencyCalculator#rankItemsByEfficiencyForCategory}
+	 */
+	public static CategorySummaryPanel withEfficiencySort(
+		CollectionLogCategory category, List<RankedCategoryItem> rankedItems,
+		PlayerCollectionState collectionState, RequirementsChecker requirementsChecker,
+		ItemManager itemManager, ItemClickHandler clickHandler, boolean hideObtained)
+	{
+		return new CategorySummaryPanel(category, rankedItems, collectionState,
+			requirementsChecker, itemManager, clickHandler, hideObtained, true);
+	}
+
 	private void populateItems()
+	{
+		if (lazyRankedItems != null)
+		{
+			populateRankedItems();
+		}
+		else
+		{
+			populateSourceItems();
+		}
+	}
+
+	/**
+	 * Populates items in wiki/source order (original behaviour).
+	 */
+	private void populateSourceItems()
 	{
 		// Capture click handler in local variable — the field is nulled after
 		// population, but lambdas passed to ItemRowPanel must remain valid
@@ -166,8 +298,32 @@ public class CategorySummaryPanel extends JPanel
 			}
 		}
 		populated = true;
-		// Release references no longer needed
 		lazySources = null;
+		lazyCollectionState = null;
+		lazyRequirementsChecker = null;
+		lazyItemManager = null;
+		lazyClickHandler = null;
+	}
+
+	/**
+	 * Populates items in efficiency-score order using the pre-sorted ranked list.
+	 */
+	private void populateRankedItems()
+	{
+		final ItemClickHandler clickHandler = lazyClickHandler;
+
+		for (RankedCategoryItem ranked : lazyRankedItems)
+		{
+			CollectionLogItem item = ranked.getItem();
+			CollectionLogSource source = ranked.getSource();
+			ItemRowPanel row = new ItemRowPanel(item, source, ranked.isObtained(),
+				ranked.getScore(), ranked.isLocked(),
+				lazyRequirementsChecker.getUnmetRequirements(source.getName()),
+				lazyItemManager, () -> clickHandler.onItemClicked(item, source));
+			itemsContainer.add(row);
+		}
+		populated = true;
+		lazyRankedItems = null;
 		lazyCollectionState = null;
 		lazyRequirementsChecker = null;
 		lazyItemManager = null;
