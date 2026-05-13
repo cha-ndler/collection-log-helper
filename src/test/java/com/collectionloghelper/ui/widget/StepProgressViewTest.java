@@ -917,7 +917,7 @@ public class StepProgressViewTest
 			"Step",
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -943,7 +943,7 @@ public class StepProgressViewTest
 			"Step",
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			recommendedItemIds,

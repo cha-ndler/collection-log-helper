@@ -539,7 +539,7 @@ public class RequiredItemResolverTest
 			"Test step",
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null,
 			requiredItemIds,
 			perItemRequiredItemIds,

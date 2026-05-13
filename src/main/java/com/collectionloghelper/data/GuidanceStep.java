@@ -63,6 +63,17 @@ public class GuidanceStep
 	/** NPC to highlight for this step (0 = no NPC). */
 	int npcId;
 
+	/**
+	 * Optional per-item override for the step's npcId.  When the active guidance
+	 * target has an entry in this map, the overlay highlights / targets that NPC
+	 * instead of the step's static {@link #npcId}.  Falls back to the static
+	 * npcId when no override applies (null map, null target, target not in map).
+	 *
+	 * <p>Null by default — existing JSON without this field deserialises unchanged.
+	 */
+	@Nullable
+	Map<Integer, Integer> perItemNpcId;
+
 	/** Right-click action to highlight on the NPC (e.g., "Attack", "Talk-to"). */
 	String interactAction;
 
@@ -234,6 +245,28 @@ public class GuidanceStep
 	}
 
 	/**
+	 * Resolves the NPC ID for this step given the active guidance target item.
+	 * When {@link #perItemNpcId} has an entry for {@code targetItemId}, that
+	 * override is returned.  Falls back to {@link #npcId} when the map is null,
+	 * {@code targetItemId} is null, or no entry exists for the target.
+	 *
+	 * @param targetItemId the clog item ID the player is hunting, or {@code null}
+	 * @return the resolved NPC ID (falls back to the static npcId primitive)
+	 */
+	public int resolveNpcId(@Nullable Integer targetItemId)
+	{
+		if (targetItemId != null && perItemNpcId != null)
+		{
+			Integer override = perItemNpcId.get(targetItemId);
+			if (override != null)
+			{
+				return override;
+			}
+		}
+		return npcId;
+	}
+
+	/**
 	 * Returns true if the given NPC ID matches this step's completion NPC.
 	 * Checks both the single completionNpcId and the completionNpcIds list,
 	 * supporting multi-form bosses (e.g., Zulrah's 3 combat forms).
@@ -331,6 +364,7 @@ public class GuidanceStep
 			alt.getWorldY() != null ? alt.getWorldY() : this.worldY,
 			alt.getWorldPlane() != null ? alt.getWorldPlane() : this.worldPlane,
 			alt.getNpcId() != null ? alt.getNpcId() : this.npcId,
+			this.perItemNpcId,
 			alt.getInteractAction() != null ? alt.getInteractAction() : this.interactAction,
 			this.dialogOptions,
 			alt.getTravelTip() != null ? alt.getTravelTip() : this.travelTip,
