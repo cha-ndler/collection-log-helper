@@ -9,7 +9,7 @@
 > - `[!]` — Regression / failed (file a new issue and cross-link)
 > - `[?]` — Inconclusive (couldn't reproduce / state-dependent)
 
-> **Last updated**: 2026-05-11
+> **Last updated**: 2026-05-12
 
 ---
 
@@ -207,6 +207,94 @@ Closes #363 (Show Overlays / Show Hint Arrow toggles inert mid-guidance). Approa
 | 7 | Without guidance active, toggle Show Hint Arrow ON -> no arrow appears (correct: no target) | `[ ]` | |
 | 8 | Activate guidance on a clue-tier source (no step target) -> Show Hint Arrow toggle has no visible effect (correct: no target to point at) | `[ ]` | |
 | 9 | Regression: skip button mid-guidance with Show Overlays ON -> overlays update on next tick (matches pre-fix behavior) | `[ ]` | |
+
+---
+
+## PR #396 — B.5.6 NPC and object outline-glow highlight style *(pending merge)*
+
+Closes cha-ndler/collection-log-helper#377. Refs cha-ndler/collection-log-helper#382 (B.5.6).
+
+Adds `OUTLINE_GLOW` to `NpcHighlightStyle` and a new `ObjectHighlightStyle` enum (also gains `HULL` as the legacy option). Defaults flip to `OUTLINE_GLOW` for both. Uses RuneLite's native `ModelOutlineRenderer.drawOutline(actor/tileObject, width=6, color, feather=4)` — exposed in 1.12.26.3, no custom vertex projection needed. Existing `HULL` paths preserved for backwards compatibility.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with an NPC step (e.g. Vorkath, Cerberus) → the target NPC renders with a glowing model outline, not a clickbox / hull polygon | `[ ]` | |
+| 2 | Activate guidance on a source with an object step (e.g. Shades of Mort'ton funeral pyre, GWD door) → the target object renders with the same outline-glow style | `[ ]` | |
+| 3 | Config → NPC Highlight Style → switch from `OUTLINE_GLOW` to `HULL` → bounding hull returns immediately (no Stop/Start required, propagation from PR #386) | `[ ]` | |
+| 4 | Config → Object Highlight Style → switch from `OUTLINE_GLOW` to `HULL` → bounding hull returns for objects | `[ ]` | |
+| 5 | Both styles set back to `OUTLINE_GLOW` → outline returns | `[ ]` | |
+| 6 | Outline colour matches the `Overlay Color` config setting (change it to a vivid colour to verify) | `[ ]` | |
+| 7 | Multi-form NPC mid-fight (Zulrah, Hydra) → outline tracks the current form's model | `[ ]` | |
+| 8 | Walk a long distance from the highlighted target → outline keeps tracking until target leaves render distance, then disappears cleanly (no lingering outline ghost) | `[ ]` | |
+| 9 | FPS check: 30 seconds parked in a busy scene (GE) with guidance active → no perceptible FPS drop vs `HULL` mode (outline should be free per-frame from `ModelOutlineRenderer` cache) | `[ ]` | |
+| 10 | Regression: NPC indicator / object indicator stock RuneLite plugins still render their own highlights independently (don't conflict with ours) | `[ ]` | |
+| 11 | `client.log` after 5 minutes of guidance → ZERO stack traces mentioning `ModelOutlineRenderer` or `drawOutline` | `[ ]` | |
+
+---
+
+## PR #397 — B.5.5 per-step world map arrow and destination icon *(pending merge)*
+
+Refs cha-ndler/collection-log-helper#382 (B.5.5).
+
+New `WorldMapDestinationOverlay` (338 LOC) adds two world-map visuals tied to the active guidance step:
+- **Edge-snap directional arrow** at the world-map boundary when the destination tile is off-screen (8 pre-rendered sprites, every 45°).
+- **Destination icon** at the target tile when it is on-screen:
+  - NPC step (has `npcId` / `npcName`) → person silhouette icon
+  - Object step (has `objectId`) → chest icon
+  - Otherwise → diamond tile marker
+
+Wired through `GuidanceOverlayCoordinator` (`setTarget` on `applyStepToOverlays` / `applySourceToOverlays`; `clearTarget` on `deactivateGuidance` and the no-location step branch). `WorldMapRouteOverlay` is untouched — both render layers coexist.
+
+> **Known visual overlap flagged by the worker**: when the destination is off-screen, both this overlay's arrow AND the existing `CollectionLogWorldMapPoint` edge-snap chevron will draw simultaneously. Same teal colour, so visually consistent, but worth a product decision in tests 6–7 below. Easy fix either direction.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with an NPC step. Open world map → on-screen destination shows a **person silhouette** icon at the target tile | `[ ]` | |
+| 2 | Activate guidance on a source with an object step (chest, door). Open world map → on-screen destination shows a **chest** icon at the target tile | `[ ]` | |
+| 3 | Activate guidance on a clue-tier / generic source. Open world map → on-screen destination shows a **diamond tile marker** | `[ ]` | |
+| 4 | Pan the world map so the destination scrolls off-screen → **edge-snap arrow** appears at the map boundary pointing toward the destination; the on-screen icon disappears | `[ ]` | |
+| 5 | Pan in 8 directions (N, NE, E, SE, S, SW, W, NW) → the arrow sprite rotates correctly through all 8 pre-rendered orientations | `[ ]` | |
+| 6 | **Overlap check**: with destination off-screen, observe whether the existing `CollectionLogWorldMapPoint` chevron ALSO draws. Both visible = expected per worker note. Decide product preference | `[ ]` | both? hide one? |
+| 7 | If both chevrons draw and the result looks cluttered → file a follow-up issue; otherwise leave as-is | `[ ]` | |
+| 8 | Existing `WorldMapRouteOverlay` route line still draws between waypoints (regression check) | `[ ]` | |
+| 9 | Stop guidance → both arrow and icon disappear from world map immediately | `[ ]` | |
+| 10 | Step transition mid-sequence → icon + arrow update to the new step's destination on the next tick | `[ ]` | |
+| 11 | Step with no destination tile (clue caskets, milestone-only sources) → no arrow, no icon (correct: nothing to point at) | `[ ]` | |
+| 12 | FPS check: open world map for 30 seconds with guidance active → no perceptible drop (all sprites cached at construction, zero per-frame allocation) | `[ ]` | |
+| 13 | `client.log` after a session including 5+ teleports / step transitions → ZERO stack traces from `WorldMapDestinationOverlay` | `[ ]` | |
+
+---
+
+## PR #398 — B.5.1 per-step item requirements with bank-scan state colouring *(pending merge)*
+
+Refs cha-ndler/collection-log-helper#382 (B.5.1).
+
+Adds an "Items needed:" subsection to `StepProgressView` that lists each entry in the **current step's** `requiredItemIds` with availability colouring:
+- **Green** name label: item held in inventory OR worn
+- **White** name label + small ℹ icon + tooltip "in bank": present in last bank scan
+- **Red** name label: not found anywhere
+
+`StepProgressView` no longer takes `PlayerInventoryState` / `PlayerBankState` directly. It receives pre-resolved `List<RequiredItemDisplay>` rows produced on the **client thread** by `RequiredItemResolver`, then pushed to the EDT (avoids the `ItemManager` client-thread assert seen in #388 / #389). `GuidanceOverlayCoordinator` defers resolution via `clientThread.invokeLater` in both `activateGuidance` and `onStepChanged` paths.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on Shades of Mort'ton (step 1 has `requiredItemIds`: tinderbox + pyre logs + shade remains) → side panel renders an "Items needed:" header followed by one row per required item | `[ ]` | |
+| 2 | Required item in INVENTORY → row name renders in GREEN | `[ ]` | |
+| 3 | Required item EQUIPPED → row name renders in GREEN (treated same as inventory) | `[ ]` | |
+| 4 | Required item ONLY in last bank scan → row name renders in WHITE with small ℹ icon; hover the ℹ → tooltip says "in bank" | `[ ]` | |
+| 5 | Required item missing from inventory, equipment, AND bank → row name renders in RED | `[ ]` | |
+| 6 | Activate guidance on a source whose current step has no `requiredItemIds` (e.g. Vorkath if no required items, or a clue tier) → NO "Items needed:" header appears | `[ ]` | |
+| 7 | Pick up a MISSING required item from the floor → row transitions RED → GREEN on the next tick without rebuilding the whole panel | `[ ]` | |
+| 8 | Drop a required item from inventory while standing in front of a bank (so it's still in bank) → row transitions GREEN → WHITE | `[ ]` | |
+| 9 | Drop the required item somewhere it's NOT in bank → row transitions GREEN → RED | `[ ]` | |
+| 10 | Step advance (auto-arrival or Next Step) to a step whose `requiredItemIds` differs → "Items needed:" list refreshes to the new step's items in the same tick (no stale entries) | `[ ]` | |
+| 11 | Step advance to a step with no `requiredItemIds` → header disappears cleanly | `[ ]` | |
+| 12 | Equipped item rendering: equip a required item → tooltip on the row says "in inventory" or "equipped" (either acceptable as long as the colour is GREEN) | `[ ]` | |
+| 13 | Open bank to refresh bank scan, then close → row that was RED (item only in bank, scan stale) refreshes to WHITE | `[ ]` | |
+| 14 | Stop Guidance → "Items needed:" subsection disappears with the rest of the step strip | `[ ]` | |
+| 15 | Cycle Guide Me → Stop Guidance → Guide Me 5 times → list renders correctly each time, no stale rows from prior sessions | `[ ]` | |
+| 16 | `client.log` after 5 minutes of guidance with step transitions → ZERO `AssertionError` or `IllegalStateException` from `ItemManager.getItemComposition`, `getImage`, or `RequiredItemResolver` | `[ ]` | |
+| 17 | Regression: in-game overlay required-items panel (added in #384) still works alongside the new side-panel section | `[ ]` | |
 
 ---
 
