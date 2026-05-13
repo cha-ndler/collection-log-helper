@@ -222,7 +222,6 @@ public class GuidanceOverlayCoordinator
 	public void activateGuidance(CollectionLogSource source, WorldPoint cachedPlayerLocation,
 		@Nullable Integer targetItemId)
 	{
-		this.activeTargetItemId = targetItemId;
 		// Note: deliberately NO early-return on config.showOverlays() here.
 		// Show Overlays controls whether *overlays render*, not whether
 		// guidance is active. Each overlay's render() method self-gates
@@ -243,8 +242,10 @@ public class GuidanceOverlayCoordinator
 		// Build requirement rows on the client thread (snapshot); passed to the panel header.
 		final List<RequirementRow> requirementRows = requirementsChecker.buildRequirementRows(source);
 
-		// Clear any existing guidance first, including InfoBox and sequencer
+		// Clear any existing guidance first, including InfoBox and sequencer.
+		// deactivateGuidance() resets activeTargetItemId to null, so restore it afterwards.
 		deactivateGuidance();
+		this.activeTargetItemId = targetItemId;
 
 		// If source has multi-step guidance, start the sequencer
 		if (source.getGuidanceSteps() != null && !source.getGuidanceSteps().isEmpty())
@@ -273,7 +274,7 @@ public class GuidanceOverlayCoordinator
 			{
 				final int landedIdx = guidanceSequencer.getCurrentIndex() + 1;
 				final int stepTotal = guidanceSequencer.getTotalSteps();
-				final String stepDesc = step != null ? step.getDescription() : "";
+				final String stepDesc = step != null ? step.resolveDescription(activeTargetItemId) : "";
 				final boolean stepManual =
 					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL;
 				final List<GuidanceStep> sourceSteps =
@@ -863,7 +864,7 @@ public class GuidanceOverlayCoordinator
 		{
 			final int current = guidanceSequencer.getCurrentIndex() + 1;
 			final int total = guidanceSequencer.getTotalSteps();
-			final String desc = step.getDescription();
+			final String desc = step.resolveDescription(activeTargetItemId);
 			final boolean isManual = step.getCompletionCondition() == CompletionCondition.MANUAL;
 			final GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
 			final CollectionLogSource stepChangeSource = guidanceSequencer.getActiveSource();
