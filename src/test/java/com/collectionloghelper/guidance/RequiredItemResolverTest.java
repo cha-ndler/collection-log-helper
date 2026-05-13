@@ -31,7 +31,9 @@ import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.guidance.RequiredItemDisplay.Status;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import net.runelite.api.ItemComposition;
 import net.runelite.client.game.ItemManager;
 import org.junit.Before;
@@ -61,35 +63,57 @@ public class RequiredItemResolverTest
 	private ItemManager itemManager;
 
 	@Mock
+	private GuidanceOverlayCoordinator coordinator;
+
+	@Mock
 	private ItemComposition tinderboxComp;
 	@Mock
 	private ItemComposition pyreLogsComp;
 	@Mock
 	private ItemComposition remainsComp;
+	@Mock
+	private ItemComposition loarRemainsComp;
+	@Mock
+	private ItemComposition loarPyreLogsComp;
 
 	private RequiredItemResolver resolver;
 
 	private static final int TINDERBOX = 590;
 	private static final int PYRE_LOGS = 3438;
 	private static final int SHADE_REMAINS = 3392;
+	// Mort'ton tier consumables
+	private static final int LOAR_REMAINS = 3402;
+	private static final int LOAR_PYRE_LOGS = 3438;
+	// Sample clog item IDs for per-item map tests
+	private static final int BRONZE_LOCK = 25442;
+	private static final int GOLD_LOCK = 25454;
 
 	@Before
 	public void setUp()
 	{
 		resolver = new RequiredItemResolver(inventoryState, bankState, itemManager);
+		resolver.setCoordinator(coordinator);
 
 		// Default: nothing held, nothing in bank — keeps each test focused on
 		// the one signal it stubs.
 		lenient().when(inventoryState.hasItem(anyInt())).thenReturn(false);
 		lenient().when(inventoryState.hasEquippedItem(anyInt())).thenReturn(false);
 		lenient().when(bankState.hasItem(anyInt())).thenReturn(false);
+		// Default: no active target item
+		lenient().when(coordinator.getActiveTargetItemId()).thenReturn(null);
 
 		lenient().when(tinderboxComp.getName()).thenReturn("Tinderbox");
 		lenient().when(pyreLogsComp.getName()).thenReturn("Pyre logs");
 		lenient().when(remainsComp.getName()).thenReturn("Loar remains");
+		lenient().when(loarRemainsComp.getName()).thenReturn("Loar remains");
 		lenient().when(itemManager.getItemComposition(TINDERBOX)).thenReturn(tinderboxComp);
 		lenient().when(itemManager.getItemComposition(PYRE_LOGS)).thenReturn(pyreLogsComp);
 		lenient().when(itemManager.getItemComposition(SHADE_REMAINS)).thenReturn(remainsComp);
+		lenient().when(itemManager.getItemComposition(LOAR_REMAINS)).thenReturn(loarRemainsComp);
+		// Note: LOAR_PYRE_LOGS (3438) is the same OSRS item as PYRE_LOGS — Loar tier
+		// pyre logs are named "Pyre logs" without a tier prefix.  pyreLogsComp above
+		// covers both constants.  The loarPyreLogsComp @Mock field is intentionally
+		// left as a no-op mock to keep the constant-naming consistent with worker tests.
 	}
 
 	@Test
@@ -369,6 +393,124 @@ public class RequiredItemResolverTest
 		assertEquals(Status.HELD, rows.get(0).getStatus());
 	}
 
+	// ── perItemRequiredItemIds override (AC: #417) ─────────────────────────────
+
+	/**
+	 * When the coordinator has an active target item that is a key in the step's
+	 * perItemRequiredItemIds map, the resolver should use the override list instead
+	 * of the static requiredItemIds.
+	 */
+	@Test
+	public void perItemOverride_usedWhenTargetMatchesMapKey()
+	{
+		when(coordinator.getActiveTargetItemId()).thenReturn(BRONZE_LOCK);
+
+		Map<Integer, List<Integer>> perItemMap = new HashMap<>();
+		perItemMap.put(BRONZE_LOCK, Arrays.asList(TINDERBOX, LOAR_REMAINS, LOAR_PYRE_LOGS));
+		perItemMap.put(GOLD_LOCK, Arrays.asList(TINDERBOX, 3410, 3446));
+
+		GuidanceStep step = stepWithPerItemMap(
+			Collections.singletonList(TINDERBOX), // static fallback
+			perItemMap);
+
+		List<RequiredItemDisplay> rows = resolver.resolve(step);
+
+		assertEquals("Override list must have 3 items (tinderbox + loar remains + loar pyre logs)",
+			3, rows.size());
+		assertEquals(TINDERBOX, rows.get(0).getItemId());
+		assertEquals(LOAR_REMAINS, rows.get(1).getItemId());
+		assertEquals(LOAR_PYRE_LOGS, rows.get(2).getItemId());
+	}
+
+	/**
+	 * When the coordinator has no active target item (null), the resolver should
+	 * fall back to the step's static requiredItemIds.
+	 */
+	@Test
+	public void perItemOverride_fallsBackWhenNoActiveTarget()
+	{
+		when(coordinator.getActiveTargetItemId()).thenReturn(null);
+
+		Map<Integer, List<Integer>> perItemMap = new HashMap<>();
+		perItemMap.put(BRONZE_LOCK, Arrays.asList(TINDERBOX, LOAR_REMAINS, LOAR_PYRE_LOGS));
+
+		GuidanceStep step = stepWithPerItemMap(
+			Collections.singletonList(TINDERBOX), // static list
+			perItemMap);
+
+		List<RequiredItemDisplay> rows = resolver.resolve(step);
+
+		assertEquals("Must fall back to static required list (1 item)", 1, rows.size());
+		assertEquals(TINDERBOX, rows.get(0).getItemId());
+	}
+
+	/**
+	 * When the coordinator has an active target item but it is NOT a key in the
+	 * map, the resolver falls back to the static requiredItemIds.
+	 */
+	@Test
+	public void perItemOverride_fallsBackWhenTargetNotInMap()
+	{
+		when(coordinator.getActiveTargetItemId()).thenReturn(99999);
+
+		Map<Integer, List<Integer>> perItemMap = new HashMap<>();
+		perItemMap.put(BRONZE_LOCK, Arrays.asList(TINDERBOX, LOAR_REMAINS, LOAR_PYRE_LOGS));
+
+		GuidanceStep step = stepWithPerItemMap(
+			Collections.singletonList(TINDERBOX), // static list
+			perItemMap);
+
+		List<RequiredItemDisplay> rows = resolver.resolve(step);
+
+		assertEquals("Must fall back to static list when target ID is not a map key", 1, rows.size());
+		assertEquals(TINDERBOX, rows.get(0).getItemId());
+	}
+
+	/**
+	 * When the step has no perItemRequiredItemIds map (null), the resolver must
+	 * always use the static requiredItemIds regardless of the active target.
+	 */
+	@Test
+	public void perItemOverride_fallsBackWhenStepHasNoMap()
+	{
+		// lenient: resolver short-circuits on null map before reading the target,
+		// so this stub may not be exercised — but its INTENT (verify fallback even
+		// with a target set) is what the test is asserting.
+		lenient().when(coordinator.getActiveTargetItemId()).thenReturn(BRONZE_LOCK);
+
+		// stepWithRequiredItems creates a step with null perItemRequiredItemIds
+		GuidanceStep step = stepWithRequiredItems(Collections.singletonList(TINDERBOX));
+
+		List<RequiredItemDisplay> rows = resolver.resolve(step);
+
+		assertEquals("No map on step — must use static required list", 1, rows.size());
+		assertEquals(TINDERBOX, rows.get(0).getItemId());
+	}
+
+	/**
+	 * Verifies that the coordinator reference is optional: resolver with no
+	 * coordinator set (null) uses the static requiredItemIds.
+	 */
+	@Test
+	public void perItemOverride_noCoordinator_usesStaticList()
+	{
+		RequiredItemResolver resolverNoCoord =
+			new RequiredItemResolver(inventoryState, bankState, itemManager);
+		// deliberately do NOT call setCoordinator
+
+		Map<Integer, List<Integer>> perItemMap = new HashMap<>();
+		perItemMap.put(BRONZE_LOCK, Arrays.asList(TINDERBOX, LOAR_REMAINS));
+
+		GuidanceStep step = stepWithPerItemMap(
+			Collections.singletonList(TINDERBOX),
+			perItemMap);
+
+		List<RequiredItemDisplay> rows = resolverNoCoord.resolve(step);
+
+		assertEquals("No coordinator wired — must use static required list", 1, rows.size());
+		assertEquals(TINDERBOX, rows.get(0).getItemId());
+	}
+
 	// --- Helpers ---
 
 	private static GuidanceStep stepWithRequiredItems(List<Integer> requiredItemIds)
@@ -379,12 +521,27 @@ public class RequiredItemResolverTest
 	private static GuidanceStep stepWithRequiredAndRecommendedItems(
 		List<Integer> requiredItemIds, List<Integer> recommendedItemIds)
 	{
+		return stepFull(requiredItemIds, null, recommendedItemIds);
+	}
+
+	private static GuidanceStep stepWithPerItemMap(
+		List<Integer> requiredItemIds, Map<Integer, List<Integer>> perItemMap)
+	{
+		return stepFull(requiredItemIds, perItemMap, null);
+	}
+
+	private static GuidanceStep stepFull(
+		List<Integer> requiredItemIds,
+		Map<Integer, List<Integer>> perItemRequiredItemIds,
+		List<Integer> recommendedItemIds)
+	{
 		return new GuidanceStep(
 			"Test step",
 			0, 0, 0,
 			0, null, null,
 			null,
 			requiredItemIds,
+			perItemRequiredItemIds,
 			recommendedItemIds,
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,

@@ -51,6 +51,15 @@ public class RequiredItemResolver
 	private final PlayerInventoryState inventoryState;
 	private final PlayerBankState bankState;
 	private final ItemManager itemManager;
+	/**
+	 * Coordinator reference used to read {@code activeTargetItemId} for
+	 * per-item required-item overrides.  Set via {@link #setCoordinator}
+	 * after both objects are constructed to avoid a circular Guice injection
+	 * (coordinator already injects resolver; resolver must not inject coordinator
+	 * via constructor).  Null-safe: if unset the resolver falls back to the
+	 * step's static {@code requiredItemIds}.
+	 */
+	private GuidanceOverlayCoordinator coordinator;
 
 	@Inject
 	RequiredItemResolver(
@@ -64,8 +73,23 @@ public class RequiredItemResolver
 	}
 
 	/**
-	 * Resolves a step's {@code requiredItemIds} into display rows.
-	 * Returns an empty list when the step is null or has no required items.
+	 * Wires the coordinator reference.  Must be called once during plugin startup,
+	 * after both the coordinator and resolver are constructed by Guice.
+	 */
+	public void setCoordinator(GuidanceOverlayCoordinator coordinator)
+	{
+		this.coordinator = coordinator;
+	}
+
+	/**
+	 * Resolves a step's required item IDs into display rows.
+	 *
+	 * <p>When the step has a {@code perItemRequiredItemIds} map AND the coordinator
+	 * has an active target item ID that is a key in that map, the override list
+	 * for that item is used instead of the step's static {@code requiredItemIds}.
+	 * Falls back to the static list when no override applies.
+	 *
+	 * <p>Returns an empty list when the step is null or has no required items.
 	 */
 	public List<RequiredItemDisplay> resolve(GuidanceStep step)
 	{
@@ -73,7 +97,30 @@ public class RequiredItemResolver
 		{
 			return Collections.emptyList();
 		}
-		return resolveIds(step.getRequiredItemIds());
+		List<Integer> ids = pickRequiredItemIds(step);
+		return resolveIds(ids);
+	}
+
+	/**
+	 * Selects the effective required-item list for a step.  Checks for a
+	 * per-item override via the coordinator's active target item ID before
+	 * falling back to the step's static {@code requiredItemIds}.
+	 */
+	private List<Integer> pickRequiredItemIds(GuidanceStep step)
+	{
+		if (step.getPerItemRequiredItemIds() != null && coordinator != null)
+		{
+			Integer targetItemId = coordinator.getActiveTargetItemId();
+			if (targetItemId != null)
+			{
+				List<Integer> override = step.getPerItemRequiredItemIds().get(targetItemId);
+				if (override != null)
+				{
+					return override;
+				}
+			}
+		}
+		return step.getRequiredItemIds();
 	}
 
 	/**

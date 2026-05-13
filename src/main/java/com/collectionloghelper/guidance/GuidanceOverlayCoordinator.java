@@ -57,8 +57,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
@@ -121,6 +123,18 @@ public class GuidanceOverlayCoordinator
 	 * overlay render. Must remain volatile.
 	 */
 	private volatile NPC trackedGuidanceNpc;
+
+	/**
+	 * The collection-log item ID that was active when guidance was last activated,
+	 * if the player launched guidance from an item-specific context (e.g. the
+	 * Item Detail view or the Top Pick button).  Null when no item target is known.
+	 * Used by {@link RequiredItemResolver} to select the per-item required-item
+	 * override for multi-method sources such as Shades of Mort'ton.
+	 * Cleared by {@link #deactivateGuidance()}.
+	 */
+	@Getter
+	@Nullable
+	private Integer activeTargetItemId;
 
 	/** Last guidance step index for which a worldMessage was sent (prevents spam). */
 	private int lastMessagedStepIndex = -1;
@@ -200,9 +214,15 @@ public class GuidanceOverlayCoordinator
 	 *
 	 * @param source the collection log source to guide
 	 * @param cachedPlayerLocation current player location for sequencer init
+	 * @param targetItemId the collection-log item ID the player is hunting, or
+	 *                     {@code null} when the caller has no specific item context.
+	 *                     Stored on the coordinator so {@link RequiredItemResolver}
+	 *                     can select the correct per-item consumable override.
 	 */
-	public void activateGuidance(CollectionLogSource source, WorldPoint cachedPlayerLocation)
+	public void activateGuidance(CollectionLogSource source, WorldPoint cachedPlayerLocation,
+		@Nullable Integer targetItemId)
 	{
+		this.activeTargetItemId = targetItemId;
 		// Note: deliberately NO early-return on config.showOverlays() here.
 		// Show Overlays controls whether *overlays render*, not whether
 		// guidance is active. Each overlay's render() method self-gates
@@ -335,6 +355,7 @@ public class GuidanceOverlayCoordinator
 	 */
 	public void deactivateGuidance()
 	{
+		activeTargetItemId = null;
 		lastMessagedStepIndex = -1;
 		trackedGuidanceNpc = null;
 		if (activeInfoBox != null)

@@ -41,6 +41,7 @@ import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
+import com.collectionloghelper.guidance.RequiredItemResolver;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.GuidanceEventRouter;
 import com.collectionloghelper.lifecycle.GuidanceUIState;
@@ -57,6 +58,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
@@ -181,6 +183,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private GuidanceOverlayCoordinator guidanceCoordinator;
 
 	@Inject
+	private RequiredItemResolver requiredItemResolver;
+
+	@Inject
 	private OverlayRegistry overlayRegistry;
 
 	@Inject
@@ -239,7 +244,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			config, database, collectionState, calculator, clueEstimator,
 			itemManager, requirementsChecker, dataSyncState, slayerTaskState,
 			slayerStrategyCalculator, playerInventoryState, playerBankState,
-			this::activateGuidance, this::deactivateGuidance,
+			(java.util.function.BiConsumer<CollectionLogSource, Integer>) this::activateGuidance,
+			this::deactivateGuidance,
 			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()),
 			sort -> configManager.setConfiguration("collectionloghelper", "efficientSortMode", sort.name()));
 		panel.setMode(config.defaultMode());
@@ -255,6 +261,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceCoordinator.setPluginInstance(this);
 		guidanceCoordinator.setPanel(panel);
 		guidanceCoordinator.setOnSequenceCompleteCallback(this::onSequenceComplete);
+		// Wire coordinator into resolver (post-construction, avoids circular injection)
+		requiredItemResolver.setCoordinator(guidanceCoordinator);
 
 		// Use a placeholder icon initially, then swap to the real item sprite once loaded
 		final BufferedImage placeholder = ImageUtil.loadImageResource(getClass(), "panel_icon.png");
@@ -284,7 +292,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		sceneEventRouter.setAuthoringLogger(msg -> authoringLogger.log("%s", msg));
 		eventBus.register(sceneEventRouter);
 		guidanceEventRouter.setMissingItemsSupplier(() -> sourcesWithMissingItems);
-		guidanceEventRouter.setActivateGuidanceCallback(this::activateGuidance);
+		guidanceEventRouter.setActivateGuidanceCallback(
+			(java.util.function.Consumer<CollectionLogSource>) this::activateGuidance);
 		guidanceEventRouter.setOnFilterConfigChanged(this::onFilterConfigChanged);
 		eventBus.register(guidanceEventRouter);
 		eventBus.register(guidanceMovementTracker);
@@ -765,10 +774,26 @@ public class CollectionLogHelperPlugin extends Plugin
 	 */
 	public void activateGuidance(CollectionLogSource source)
 	{
+		activateGuidance(source, null);
+	}
+
+	/**
+	 * Activates guidance for {@code source} targeting a specific collection-log item.
+	 * The {@code targetItemId} is stored on the coordinator so
+	 * {@link RequiredItemResolver} can select the correct per-item consumable
+	 * override (e.g. the correct shade tier for Shades of Mort'ton).
+	 *
+	 * <p>Pass {@code null} when the call site has no specific item context.
+	 *
+	 * <p>All work runs on the client thread (same rationale as the no-arg overload).
+	 */
+	public void activateGuidance(CollectionLogSource source, @Nullable Integer targetItemId)
+	{
 		// Route through the client thread: RequirementsChecker.buildRequirementRows
 		// and related coordinator work require client-thread context.  Mirrors the
 		// step-advance / skip wrap added in commit c528d0ae.
-		clientThread.invokeLater(() -> guidanceCoordinator.activateGuidance(source, cachedPlayerLocation));
+		clientThread.invokeLater(() -> guidanceCoordinator.activateGuidance(
+			source, cachedPlayerLocation, targetItemId));
 	}
 
 	/**
