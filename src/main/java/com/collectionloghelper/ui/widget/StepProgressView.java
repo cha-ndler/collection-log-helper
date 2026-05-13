@@ -64,10 +64,10 @@ import net.runelite.client.util.AsyncBufferedImage;
  * When no step in the source has a section label the flat single-line layout
  * is used unchanged.
  *
- * <p>Required-item rows are passed in as pre-resolved {@link RequiredItemDisplay}
- * objects (name + status already determined on the client thread by
- * {@link com.collectionloghelper.guidance.RequiredItemResolver}) so this widget
- * never touches inventory/bank state directly.
+ * <p>Required-item rows and recommended-item rows are passed in as pre-resolved
+ * {@link RequiredItemDisplay} objects (name + status already determined on the
+ * client thread by {@link com.collectionloghelper.guidance.RequiredItemResolver})
+ * so this widget never touches inventory/bank state directly.
  *
  * <p>Constructed once by the shell; updated via {@link #showStep} and
  * hidden via {@link #hideStep}. Step-advance and skip callbacks are wired
@@ -92,6 +92,7 @@ public class StepProgressView extends JPanel
 
 	private final JLabel stepProgressLabel;
 	private final JPanel requiredItemsPanel;
+	private final JPanel recommendedItemsPanel;
 	/** Container rendered when the source uses section labels (sectioned mode). */
 	private final JPanel sectionsPanel;
 	private final JButton nextStepButton;
@@ -132,6 +133,13 @@ public class StepProgressView extends JPanel
 		requiredItemsPanel.setAlignmentX(LEFT_ALIGNMENT);
 		requiredItemsPanel.setVisible(false);
 		add(requiredItemsPanel);
+
+		recommendedItemsPanel = new JPanel();
+		recommendedItemsPanel.setLayout(new BoxLayout(recommendedItemsPanel, BoxLayout.Y_AXIS));
+		recommendedItemsPanel.setBackground(BG);
+		recommendedItemsPanel.setAlignmentX(LEFT_ALIGNMENT);
+		recommendedItemsPanel.setVisible(false);
+		add(recommendedItemsPanel);
 
 		sectionsPanel = new JPanel();
 		sectionsPanel.setLayout(new BoxLayout(sectionsPanel, BoxLayout.Y_AXIS));
@@ -203,7 +211,8 @@ public class StepProgressView extends JPanel
 	public void showStep(int current, int total, String description, boolean isManual,
 		List<RequiredItemDisplay> requiredItems)
 	{
-		showStep(current, total, description, isManual, requiredItems, Collections.emptyList());
+		showStep(current, total, description, isManual, requiredItems,
+			Collections.<RequiredItemDisplay>emptyList(), Collections.<GuidanceStep>emptyList());
 	}
 
 	/**
@@ -211,19 +220,48 @@ public class StepProgressView extends JPanel
 	 * when {@code allSteps} contains at least one step with a non-null section label.
 	 * Safe to call from any thread.
 	 *
-	 * @param current       one-based step index
-	 * @param total         total number of steps
-	 * @param description   human-readable step description
-	 * @param isManual      whether the Next Step button should be shown
-	 * @param requiredItems pre-resolved display rows (may be {@code null} or empty)
-	 * @param allSteps      full ordered step list for the active source; used to compute
-	 *                      section groups. Pass an empty list to force flat layout.
+	 * @param current            one-based step index
+	 * @param total              total number of steps
+	 * @param description        human-readable step description
+	 * @param isManual           whether the Next Step button should be shown
+	 * @param requiredItems      pre-resolved required-item display rows (may be {@code null}
+	 *                           or empty)
+	 * @param allSteps           full ordered step list for the active source; used to compute
+	 *                           section groups. Pass an empty list to force flat layout.
 	 */
 	public void showStep(int current, int total, String description, boolean isManual,
 		List<RequiredItemDisplay> requiredItems, List<GuidanceStep> allSteps)
 	{
+		showStep(current, total, description, isManual, requiredItems,
+			Collections.<RequiredItemDisplay>emptyList(), allSteps);
+	}
+
+	/**
+	 * Shows and populates the step progress panel, rendering both the required-items and
+	 * recommended-items subsections, and collapsible section blocks when {@code allSteps}
+	 * contains at least one step with a non-null section label.
+	 * Safe to call from any thread.
+	 *
+	 * @param current            one-based step index
+	 * @param total              total number of steps
+	 * @param description        human-readable step description
+	 * @param isManual           whether the Next Step button should be shown
+	 * @param requiredItems      pre-resolved required-item display rows (may be {@code null}
+	 *                           or empty)
+	 * @param recommendedItems   pre-resolved recommended-item display rows (may be
+	 *                           {@code null} or empty); hidden when empty
+	 * @param allSteps           full ordered step list for the active source; used to
+	 *                           compute section groups. Pass an empty list to force flat
+	 *                           layout.
+	 */
+	public void showStep(int current, int total, String description, boolean isManual,
+		List<RequiredItemDisplay> requiredItems, List<RequiredItemDisplay> recommendedItems,
+		List<GuidanceStep> allSteps)
+	{
 		final List<RequiredItemDisplay> rows =
 			requiredItems != null ? requiredItems : Collections.emptyList();
+		final List<RequiredItemDisplay> recRows =
+			recommendedItems != null ? recommendedItems : Collections.emptyList();
 		final List<GuidanceStep> steps =
 			allSteps != null ? allSteps : Collections.emptyList();
 		final List<StepSectionGroup> groups = StepSectionGrouper.group(steps);
@@ -236,16 +274,19 @@ public class StepProgressView extends JPanel
 
 			if (groups.isEmpty())
 			{
-				// Flat layout — hide sections, show required items inline
+				// Flat layout — hide sections, show required and recommended items inline
 				sectionsPanel.setVisible(false);
 				updateRequiredItemDisplay(rows);
+				updateRecommendedItemDisplay(recRows);
 			}
 			else
 			{
-				// Sectioned layout — hide inline required items, render section blocks
+				// Sectioned layout — hide inline panels, render section blocks
 				requiredItemsPanel.removeAll();
 				requiredItemsPanel.setVisible(false);
-				updateSectionDisplay(groups, current, rows);
+				recommendedItemsPanel.removeAll();
+				recommendedItemsPanel.setVisible(false);
+				updateSectionDisplay(groups, current, rows, recRows);
 			}
 
 			setVisible(true);
@@ -271,6 +312,8 @@ public class StepProgressView extends JPanel
 		{
 			requiredItemsPanel.removeAll();
 			requiredItemsPanel.setVisible(false);
+			recommendedItemsPanel.removeAll();
+			recommendedItemsPanel.setVisible(false);
 			sectionsPanel.removeAll();
 			sectionsPanel.setVisible(false);
 			setVisible(false);
@@ -288,17 +331,19 @@ public class StepProgressView extends JPanel
 	 * Rebuilds the collapsible section blocks.
 	 *
 	 * <p>The section containing {@code activeStepIndex} is force-expanded and its
-	 * required-item rows are rendered immediately below the step label. Other sections
-	 * respect their stored collapse state (defaulting to collapsed).
+	 * required-item and recommended-item rows are rendered immediately below the step
+	 * label. Other sections respect their stored collapse state (defaulting to
+	 * collapsed).
 	 *
 	 * <p>Must be called on the EDT.
 	 *
-	 * @param groups          ordered section groups from {@link StepSectionGrouper#group}
-	 * @param activeStepIndex 1-based index of the currently active step
-	 * @param requiredItems   display rows for the active step
+	 * @param groups           ordered section groups from {@link StepSectionGrouper#group}
+	 * @param activeStepIndex  1-based index of the currently active step
+	 * @param requiredItems    required-item display rows for the active step
+	 * @param recommendedItems recommended-item display rows for the active step
 	 */
 	void updateSectionDisplay(List<StepSectionGroup> groups, int activeStepIndex,
-		List<RequiredItemDisplay> requiredItems)
+		List<RequiredItemDisplay> requiredItems, List<RequiredItemDisplay> recommendedItems)
 	{
 		sectionsPanel.removeAll();
 
@@ -315,7 +360,8 @@ public class StepProgressView extends JPanel
 			boolean isActiveSection = group.getName().equals(activeSectionName);
 			boolean expanded = sectionExpandState.getOrDefault(group.getName(), Boolean.FALSE);
 
-			JPanel block = buildSectionBlock(group, isActiveSection, expanded, activeStepIndex, requiredItems);
+			JPanel block = buildSectionBlock(group, isActiveSection, expanded,
+				activeStepIndex, requiredItems, recommendedItems);
 			block.setAlignmentX(LEFT_ALIGNMENT);
 			sectionsPanel.add(block);
 			sectionsPanel.add(Box.createVerticalStrut(2));
@@ -327,14 +373,25 @@ public class StepProgressView extends JPanel
 	}
 
 	/**
+	 * Overload retained for backwards compatibility with existing test callers that
+	 * do not yet pass recommended items.
+	 */
+	void updateSectionDisplay(List<StepSectionGroup> groups, int activeStepIndex,
+		List<RequiredItemDisplay> requiredItems)
+	{
+		updateSectionDisplay(groups, activeStepIndex, requiredItems, Collections.emptyList());
+	}
+
+	/**
 	 * Builds a single collapsible section block: a clickable header row + a body
-	 * panel containing the step indices (and required-item rows for the active step
-	 * when expanded).
+	 * panel containing the step indices (and required-item + recommended-item rows
+	 * for the active step when expanded).
 	 *
 	 * <p>Must be called on the EDT.
 	 */
 	private JPanel buildSectionBlock(StepSectionGroup group, boolean isActiveSection,
-		boolean expanded, int activeStepIndex, List<RequiredItemDisplay> requiredItems)
+		boolean expanded, int activeStepIndex, List<RequiredItemDisplay> requiredItems,
+		List<RequiredItemDisplay> recommendedItems)
 	{
 		JPanel block = new JPanel();
 		block.setLayout(new BoxLayout(block, BoxLayout.Y_AXIS));
@@ -387,6 +444,33 @@ public class StepProgressView extends JPanel
 
 				body.add(itemsInSection);
 			}
+
+			if (isActive && recommendedItems != null && !recommendedItems.isEmpty())
+			{
+				JPanel recInSection = new JPanel();
+				recInSection.setLayout(new BoxLayout(recInSection, BoxLayout.Y_AXIS));
+				recInSection.setBackground(new Color(20, 28, 45));
+				recInSection.setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 0));
+				recInSection.setAlignmentX(LEFT_ALIGNMENT);
+				recInSection.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+
+				JLabel recLabel = new JLabel("Recommended:");
+				recLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
+				recLabel.setForeground(new Color(180, 180, 180));
+				recLabel.setAlignmentX(LEFT_ALIGNMENT);
+				recInSection.add(recLabel);
+				recInSection.add(Box.createVerticalStrut(2));
+
+				for (RequiredItemDisplay row : recommendedItems)
+				{
+					JPanel rowPanel = buildItemRow(row);
+					rowPanel.setAlignmentX(LEFT_ALIGNMENT);
+					recInSection.add(rowPanel);
+					recInSection.add(Box.createVerticalStrut(2));
+				}
+
+				body.add(recInSection);
+			}
 		}
 
 		body.setVisible(expanded);
@@ -434,7 +518,7 @@ public class StepProgressView extends JPanel
 		return arrow + sectionName + " (" + stepCount + " step" + (stepCount == 1 ? "" : "s") + ")";
 	}
 
-	// ── Flat required-items display (unchanged from B.5.1) ───────────────────
+	// ── Flat required/recommended-items display ─────────────────────────────
 
 	/**
 	 * Rebuilds the required-items subsection from pre-resolved display rows.
@@ -454,33 +538,60 @@ public class StepProgressView extends JPanel
 	 */
 	void updateRequiredItemDisplay(List<RequiredItemDisplay> rows)
 	{
-		requiredItemsPanel.removeAll();
+		updateItemSubsection(requiredItemsPanel, "Items needed:", rows);
+	}
+
+	/**
+	 * Rebuilds the recommended-items subsection from pre-resolved display rows.
+	 * Uses the same row layout as {@link #updateRequiredItemDisplay} so colouring
+	 * (green/white+ℹ/red) is identical.
+	 * The subsection is hidden when {@code rows} is empty.
+	 * Must be called on the EDT.
+	 *
+	 * @param rows pre-resolved display rows from
+	 *             {@link com.collectionloghelper.guidance.RequiredItemResolver#resolveRecommended}
+	 */
+	void updateRecommendedItemDisplay(List<RequiredItemDisplay> rows)
+	{
+		updateItemSubsection(recommendedItemsPanel, "Recommended:", rows);
+	}
+
+	/**
+	 * Shared implementation for both the required-items and recommended-items
+	 * subsections. Clears {@code panel}, populates it with a header label and one
+	 * row per entry, then sets its visibility based on whether {@code rows} is empty.
+	 * Must be called on the EDT.
+	 */
+	private void updateItemSubsection(JPanel panel, String headerText,
+		List<RequiredItemDisplay> rows)
+	{
+		panel.removeAll();
 
 		if (rows == null || rows.isEmpty())
 		{
-			requiredItemsPanel.setVisible(false);
+			panel.setVisible(false);
 			return;
 		}
 
-		JLabel headerLabel = new JLabel("Items needed:");
+		JLabel headerLabel = new JLabel(headerText);
 		headerLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
 		headerLabel.setForeground(new Color(180, 180, 180));
 		headerLabel.setAlignmentX(LEFT_ALIGNMENT);
-		requiredItemsPanel.add(headerLabel);
+		panel.add(headerLabel);
 
-		requiredItemsPanel.add(Box.createVerticalStrut(2));
+		panel.add(Box.createVerticalStrut(2));
 
 		for (RequiredItemDisplay row : rows)
 		{
 			JPanel rowPanel = buildItemRow(row);
 			rowPanel.setAlignmentX(LEFT_ALIGNMENT);
-			requiredItemsPanel.add(rowPanel);
-			requiredItemsPanel.add(Box.createVerticalStrut(2));
+			panel.add(rowPanel);
+			panel.add(Box.createVerticalStrut(2));
 		}
 
-		requiredItemsPanel.setVisible(true);
-		requiredItemsPanel.revalidate();
-		requiredItemsPanel.repaint();
+		panel.setVisible(true);
+		panel.revalidate();
+		panel.repaint();
 	}
 
 	/**

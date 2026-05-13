@@ -59,6 +59,7 @@ public class StepSectionGrouperTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null, null,

@@ -269,8 +269,10 @@ public class GuidanceOverlayCoordinator
 				{
 					final List<RequiredItemDisplay> resolvedItems =
 						requiredItemResolver.resolve(rawForResolve);
+					final List<RequiredItemDisplay> resolvedRecommended =
+						requiredItemResolver.resolveRecommended(rawForResolve);
 					panel.updateStepProgress(landedIdx, stepTotal, stepDesc, stepManual,
-						resolvedItems, sourceSteps);
+						resolvedItems, resolvedRecommended, sourceSteps);
 				});
 			}
 			// Add InfoBox showing the correct landed step (not always "1/N")
@@ -850,12 +852,16 @@ public class GuidanceOverlayCoordinator
 			// to the client thread because RequiredItemResolver.resolve() calls
 			// ItemManager.getItemComposition, which asserts caller-is-client-thread. See
 			// cha-ndler/collection-log-helper#388 for the original trace.
-			panel.updateStepProgress(current, total, desc, isManual, Collections.emptyList(), sourceSteps);
+			panel.updateStepProgress(current, total, desc, isManual,
+				Collections.emptyList(), Collections.emptyList(), sourceSteps);
 			clientThread.invokeLater(() ->
 			{
 				final List<RequiredItemDisplay> resolvedItems =
 					requiredItemResolver.resolve(rawStep);
-				panel.updateStepProgress(current, total, desc, isManual, resolvedItems, sourceSteps);
+				final List<RequiredItemDisplay> resolvedRecommended =
+					requiredItemResolver.resolveRecommended(rawStep);
+				panel.updateStepProgress(current, total, desc, isManual,
+					resolvedItems, resolvedRecommended, sourceSteps);
 			});
 		}
 	}
