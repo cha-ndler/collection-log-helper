@@ -9,7 +9,7 @@ Readiness gate for the `v1.0.0-hub` resubmission to `runelite/plugin-hub`.
 All Tier-A milestones must be `[x] done` in [docs/ROADMAP.md — Status log](ROADMAP.md#9-status-log)
 before the tag is pushed.
 
-Current state (as of 2026-04-17):
+Current state (as of 2026-05-12):
 
 | Milestone | Status |
 |-----------|--------|
@@ -20,7 +20,13 @@ Current state (as of 2026-04-17):
 | A4 — Plugin Hub self-review doc | [x] done — PR #346 |
 | A5 — Screenshots refresh | [x] done |
 | A5.1–A5.6 — Data sourcing infrastructure | [x] done |
-| A6 — Tag v1.0.0-hub (this milestone) | [/] in-progress |
+| A6 — Tag v1.0.0-hub (this milestone) | [/] in-progress — tag re-cut pending |
+
+The originally-drafted tag from 2026-04-17 (commit `b9518653`, mapping to PR #357) is stale.
+Between that commit and the current `master` HEAD, 13 PRs landed — RuneLite client bump,
+Tier B.5 roadmap addition, in-game validation log, and the v1-blocker fix burst from manual
+testing on 2026-05-10 (PRs #372, #384, #386–#394).  The tag will be re-cut on the current
+`master` HEAD before the Plugin Hub PR is opened.
 
 ---
 
@@ -40,12 +46,12 @@ Expected result: empty list.  If any P1 bugs are open, resolve them before pushi
 
 `docs/plugin-hub-review.md` must have no un-triaged **Red** items.
 
-Current open reds (as of 2026-04-17):
+Current open reds (as of 2026-05-12):
 
 | Item | Mitigation |
 |------|-----------|
 | `runelite-plugin` Gradle plugin missing | Investigate whether Hub CI requires `com.openosrs.externalplugin`; add if needed. Low-risk: the build passes without it and no reviewer comment cited it explicitly in #11156. |
-| Files > 800 LOC | Resolved by A1/A1b: `CollectionLogHelperPanel` shell is now 698 LOC; `CollectionLogHelperPlugin` is 904 LOC (borderline, not over). Residuals: `GuidanceOverlayCoordinator` (859), `EfficiencyCalculator` (754), `GuidanceSequencer` (719) — all functional, acceptable at submission. |
+| Files > 800 LOC | Resolved by A1/A1b: `CollectionLogHelperPanel` shell is now 698 LOC; `CollectionLogHelperPlugin` is 904 LOC (borderline, not over). Residuals: `GuidanceOverlayCoordinator` (859), `EfficiencyCalculator` (754), `GuidanceSequencer` (719) — all functional, acceptable at submission. Re-measure residuals after the 2026-05-10 fix burst before submission. |
 
 Re-run `mcp__plugin_runelite-dev-toolkit_runelite-dev__plugin_hub_validate` on the tag commit to
 confirm no new findings before opening the PR.
@@ -54,18 +60,42 @@ confirm no new findings before opening the PR.
 
 ## 4. Quiet-week criteria
 
-- No merges to `master` for **7 calendar days** after the tag is pushed.
-- Exception: critical bug-fix commits may land; update the `Unreleased` CHANGELOG section if so.
+- No merges to `master` for **7 calendar days** *before* the tag is pushed and the Plugin
+  Hub PR is opened. (Reviewer-facing signal: this codebase has stabilized.)
+- Exception: post-tag critical bug-fix commits may land; update the `Unreleased` CHANGELOG
+  section if so. Avoid this if at all possible.
 - Do **not** amend or re-push the tag once it is live.
 
-The tag was drafted locally on 2026-04-17 as `v1.0.0-hub`.  The earliest push date is
-**2026-04-24**.
+The tag was originally drafted locally on 2026-04-17 (commit `b9518653`).  That tag is
+**stale** — 13 PRs landed afterward, including the v1-blocker fix burst from in-game testing
+on 2026-05-10 (PRs #372, #384, #386–#394).  The tag will be deleted locally and re-cut on
+the current `master` HEAD once this CHANGELOG/doc refresh PR merges.
+
+**New earliest-push date**: 7 calendar days after the CHANGELOG/doc refresh PR merges to
+`master` (final merge in the v1.0.0-hub content set).  Assuming that merge lands on
+2026-05-12, the earliest push date is **2026-05-19**.  If any additional merges land
+during the window — for any reason — the clock resets to 7 days from the latest merge.
 
 ---
 
-## 5. Push the tag
+## 5. Re-cut and push the tag
 
-When quiet-week criteria are met:
+The locally-drafted tag from 2026-04-17 must be deleted before re-cutting so the name is
+free to point at the current `master` HEAD:
+
+```bash
+# Delete the stale local tag (it was never pushed)
+git tag -d v1.0.0-hub
+
+# Confirm not on remote (must return empty)
+git ls-remote --tags origin | grep v1.0.0-hub
+
+# Re-cut on current master HEAD
+git fetch origin master
+git tag -a v1.0.0-hub origin/master -m "v1.0.0-hub: Plugin Hub submission"
+```
+
+When quiet-week criteria are met, push:
 
 ```bash
 git push origin v1.0.0-hub
@@ -116,4 +146,19 @@ For context during review responses:
 | #349, #351 | Panel decomposition (1,661 → 698 LOC shell) |
 | #346 | Plugin Hub self-review doc |
 | #342, #341 | Data-sourcing infrastructure |
-| #353, #354 | Fix StepProgressView.hide() Component shadow |
+| #353, #354 | Fix `StepProgressView.hide()` Component shadow |
+| #358 | Deep-guidance authoring bar (D1) |
+| #361 | GitHub Actions CI |
+| #379 | RuneLite client 1.12.24 → 1.12.26.3 |
+| #383 | ROADMAP: Tier B.5 (UI parity) added |
+| #384 | Surface required-item availability inline |
+| #385 | In-game validation log (2026-05-10) |
+| #372 | Mort'ton step ordering, teleport arrival, skip overlay refresh |
+| #386 | Show Overlays / Show Hint Arrow toggle propagation |
+| #387 | Filter-affecting config rebuild |
+| #389 | Required-item name resolution on client thread |
+| #390 | Show Overlays toggle no longer aborts guidance |
+| #391 | StepProgressView tooltip lookup safety |
+| #392 | Locked items rank by score |
+| #393 | Hint arrow refresh after teleport |
+| #394 | "Per Clue:" labeling fix |
