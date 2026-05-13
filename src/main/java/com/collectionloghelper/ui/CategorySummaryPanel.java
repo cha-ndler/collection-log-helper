@@ -184,7 +184,7 @@ public class CategorySummaryPanel extends JPanel
 		total = collectionState.getCategoryMax(category);
 
 		nameLabel = new JLabel(
-			String.format("▶ %s (%d/%d)", category.getDisplayName(), obtained, total));
+			String.format("\u25B6 %s (%d/%d)", category.getDisplayName(), obtained, total));
 		nameLabel.setFont(FontManager.getRunescapeSmallFont());
 		nameLabel.setForeground(Color.WHITE);
 		headerPanel.add(nameLabel, BorderLayout.WEST);
@@ -214,7 +214,7 @@ public class CategorySummaryPanel extends JPanel
 				}
 				itemsContainer.setVisible(expanded);
 				nameLabel.setText(String.format("%s %s (%d/%d)",
-					expanded ? "▼" : "▶",
+					expanded ? "\u25BC" : "\u25B6",
 					category.getDisplayName(), obtained, total));
 				revalidate();
 			}

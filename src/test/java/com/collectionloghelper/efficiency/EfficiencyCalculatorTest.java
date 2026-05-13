@@ -1431,4 +1431,60 @@ public class EfficiencyCalculatorTest
 		assertEquals("Slow obtained", result.get(1).getItem().getName());
 		assertTrue(result.get(1).isObtained());
 	}
+
+	/**
+	 * Items with requiresPrevious=true whose predecessor is not yet obtained
+	 * must be excluded from the ranked list (they cannot drop yet).
+	 * Mirrors the same guard in {@link EfficiencyCalculator#scoreSource}.
+	 */
+	@Test
+	public void testRankItemsByEfficiency_requiresPrevious_predecessorNotObtained_excluded()
+	{
+		// Two sequential items: A (base), B (requiresPrevious)
+		// Neither obtained — B cannot drop yet, so only A should appear.
+		CollectionLogItem itemA = makeItem(1, "Base item", 0.05);
+		CollectionLogItem itemB = makeItemRequiresPrevious(2, "Sequential item", 0.05);
+
+		CollectionLogSource source = makeSource("Sequential Boss", CollectionLogCategory.BOSSES,
+			60, Arrays.asList(itemA, itemB));
+
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+		when(collectionState.isItemObtained(2)).thenReturn(false);
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		assertEquals("Only the base item should appear — sequential item excluded", 1, result.size());
+		assertEquals("Base item", result.get(0).getItem().getName());
+	}
+
+	/**
+	 * Items with requiresPrevious=true appear once their predecessor is obtained.
+	 */
+	@Test
+	public void testRankItemsByEfficiency_requiresPrevious_predecessorObtained_included()
+	{
+		CollectionLogItem itemA = makeItem(1, "Base item", 0.05);
+		CollectionLogItem itemB = makeItemRequiresPrevious(2, "Sequential item", 0.05);
+
+		CollectionLogSource source = makeSource("Sequential Boss", CollectionLogCategory.BOSSES,
+			60, Arrays.asList(itemA, itemB));
+
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		// Predecessor obtained — item B can now drop
+		when(collectionState.isItemObtained(1)).thenReturn(true);
+		when(collectionState.isItemObtained(2)).thenReturn(false);
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		// Item A is obtained and shown (hideObtained=false), item B is unobtained and shown
+		assertEquals(2, result.size());
+		// B (unobtained) ranks first, A (obtained) sinks to bottom
+		assertEquals("Sequential item", result.get(0).getItem().getName());
+		assertFalse(result.get(0).isObtained());
+		assertEquals("Base item", result.get(1).getItem().getName());
+		assertTrue(result.get(1).isObtained());
+	}
 }

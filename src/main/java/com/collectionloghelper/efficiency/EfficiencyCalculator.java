@@ -213,6 +213,15 @@ public class EfficiencyCalculator
 					continue;
 				}
 
+				// Sequential drop dependency: skip items whose predecessor has not
+				// yet been obtained (they cannot drop until the prior item is owned).
+				// Mirrors the same guard in scoreSource — see issue #134.
+				if (item.isRequiresPrevious() && i > 0
+					&& !collectionState.isItemObtained(items.get(i - 1).getItemId()))
+				{
+					continue;
+				}
+
 				// Score is only meaningful for unobtained items; obtained items
 				// still get a score so within-bucket ordering is consistent.
 				double score = scoreIndividualItem(item, source, killsPerHour, killTimeSeconds, rolls)
