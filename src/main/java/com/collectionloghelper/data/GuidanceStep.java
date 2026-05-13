@@ -157,6 +157,14 @@ public class GuidanceStep
 	 */
 	List<ConditionalAlternative> conditionalAlternatives;
 
+	/**
+	 * Section label used to group consecutive steps into named collapsible blocks in the panel.
+	 * Null by default — steps without a section render in the flat (ungrouped) layout.
+	 * When ANY step in the active source has a non-null section, all steps are rendered
+	 * with section headers; null-section steps are placed in an "Other" group.
+	 */
+	String section;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
@@ -292,7 +300,8 @@ public class GuidanceStep
 			this.skipIfHasAnyItemIds,
 			this.dynamicItemObjectTiers,
 			this.completionZone,
-			null // merged steps don't carry alternatives (already resolved)
+			null, // merged steps don't carry alternatives (already resolved)
+			this.section
 		);
 	}
 }

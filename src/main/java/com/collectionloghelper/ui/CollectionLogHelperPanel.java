@@ -619,7 +619,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	}
 
 	/**
-	 * Updates the step progress banner with current step info.
+	 * Updates the step progress banner with current step info (flat layout).
 	 *
 	 * @param requiredItems pre-resolved display rows from
 	 *                      {@link com.collectionloghelper.guidance.RequiredItemResolver};
@@ -629,6 +629,21 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		List<RequiredItemDisplay> requiredItems)
 	{
 		stepProgressView.showStep(current, total, description, isManual, requiredItems);
+	}
+
+	/**
+	 * Updates the step progress banner with current step info, enabling collapsible
+	 * section blocks when {@code allSteps} contains steps with section labels.
+	 *
+	 * @param requiredItems pre-resolved display rows; may be {@code null} or empty
+	 * @param allSteps      full ordered step list for the active source; used to compute
+	 *                      section groups — pass an empty list for flat layout
+	 */
+	public void updateStepProgress(int current, int total, String description, boolean isManual,
+		List<RequiredItemDisplay> requiredItems,
+		List<com.collectionloghelper.data.GuidanceStep> allSteps)
+	{
+		stepProgressView.showStep(current, total, description, isManual, requiredItems, allSteps);
 	}
 
 	/** Hides the step progress banner. */
