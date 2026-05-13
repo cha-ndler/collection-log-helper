@@ -26,11 +26,10 @@ package com.collectionloghelper.ui.mode;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.CollectionLogCategory;
-import com.collectionloghelper.data.CollectionLogSource;
-import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
+import com.collectionloghelper.efficiency.RankedCategoryItem;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.ui.CategorySummaryPanel;
 import java.util.List;
@@ -45,7 +44,6 @@ public class CategoryModeController implements PanelModeController
 {
 	private final PanelShellContext shell;
 	private final CollectionLogHelperConfig config;
-	private final DropRateDatabase database;
 	private final PlayerCollectionState collectionState;
 	private final EfficiencyCalculator calculator;
 	private final RequirementsChecker requirementsChecker;
@@ -54,7 +52,6 @@ public class CategoryModeController implements PanelModeController
 	public CategoryModeController(
 		PanelShellContext shell,
 		CollectionLogHelperConfig config,
-		DropRateDatabase database,
 		PlayerCollectionState collectionState,
 		EfficiencyCalculator calculator,
 		RequirementsChecker requirementsChecker,
@@ -62,7 +59,6 @@ public class CategoryModeController implements PanelModeController
 	{
 		this.shell = shell;
 		this.config = config;
-		this.database = database;
 		this.collectionState = collectionState;
 		this.calculator = calculator;
 		this.requirementsChecker = requirementsChecker;
@@ -78,17 +74,22 @@ public class CategoryModeController implements PanelModeController
 			return;
 		}
 
-		// Top Pick for this category — always an accessible source
+		// Top Pick for this category — always an accessible (unlocked) source
 		List<ScoredItem> categoryScored = calculator.filterByCategory(category);
 		categoryScored.stream()
 			.filter(s -> !s.isLocked())
 			.findFirst()
 			.ifPresent(topPick -> shell.addToList(shell.createQuickGuidePanel(topPick)));
 
-		List<CollectionLogSource> sources = database.getSourcesByCategory(category);
-		CategorySummaryPanel summary = new CategorySummaryPanel(
-			category, sources, collectionState, requirementsChecker, itemManager,
-			shell::showDetail, config.hideObtainedItems());
+		// Items sorted by descending efficiency score. Unobtained items first;
+		// obtained items sink to the bottom (but remain visible when hideObtained=false).
+		// Locked items interleave at their natural score position (issue #392 rule).
+		boolean hideObtained = config.hideObtainedItems();
+		List<RankedCategoryItem> rankedItems =
+			calculator.rankItemsByEfficiencyForCategory(category, hideObtained);
+		CategorySummaryPanel summary = CategorySummaryPanel.withEfficiencySort(
+			category, rankedItems, collectionState, requirementsChecker, itemManager,
+			shell::showDetail, hideObtained);
 		shell.addToList(summary);
 	}
 }

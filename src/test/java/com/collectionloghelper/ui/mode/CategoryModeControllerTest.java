@@ -26,10 +26,10 @@ package com.collectionloghelper.ui.mode;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.CollectionLogCategory;
-import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
+import com.collectionloghelper.efficiency.RankedCategoryItem;
 import java.util.Collections;
 import net.runelite.client.game.ItemManager;
 import org.junit.Before;
@@ -40,7 +40,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -51,9 +50,6 @@ public class CategoryModeControllerTest
 
 	@Mock
 	private CollectionLogHelperConfig config;
-
-	@Mock
-	private DropRateDatabase database;
 
 	@Mock
 	private PlayerCollectionState collectionState;
@@ -73,7 +69,7 @@ public class CategoryModeControllerTest
 	public void setUp()
 	{
 		controller = new CategoryModeController(
-			shell, config, database, collectionState, calculator, requirementsChecker, itemManager);
+			shell, config, collectionState, calculator, requirementsChecker, itemManager);
 	}
 
 	@Test
@@ -85,9 +81,10 @@ public class CategoryModeControllerTest
 		// Act
 		controller.buildView();
 
-		// Assert — no scoring or database work happens
+		// Assert — no scoring work happens when no category is selected
 		verify(calculator, never()).filterByCategory(org.mockito.ArgumentMatchers.any());
-		verifyNoInteractions(database);
+		verify(calculator, never()).rankItemsByEfficiencyForCategory(
+			org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.anyBoolean());
 	}
 
 	@Test
@@ -96,13 +93,18 @@ public class CategoryModeControllerTest
 		// Arrange
 		when(shell.getSelectedCategory()).thenReturn(CollectionLogCategory.BOSSES);
 		when(calculator.filterByCategory(CollectionLogCategory.BOSSES)).thenReturn(Collections.emptyList());
-		when(database.getSourcesByCategory(CollectionLogCategory.BOSSES)).thenReturn(Collections.emptyList());
+		when(calculator.rankItemsByEfficiencyForCategory(
+			CollectionLogCategory.BOSSES, false))
+			.thenReturn(Collections.<RankedCategoryItem>emptyList());
 		when(config.hideObtainedItems()).thenReturn(false);
+		when(collectionState.getCategoryCount(CollectionLogCategory.BOSSES)).thenReturn(0);
+		when(collectionState.getCategoryMax(CollectionLogCategory.BOSSES)).thenReturn(0);
 
 		// Act
 		controller.buildView();
 
-		// Assert — at least the summary panel is added (no top-pick since list is empty)
+		// Assert — the efficiency-sorted summary panel is added
 		verify(shell).addToList(org.mockito.ArgumentMatchers.any(com.collectionloghelper.ui.CategorySummaryPanel.class));
+		verify(calculator).rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
 	}
 }
