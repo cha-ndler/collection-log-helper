@@ -45,6 +45,7 @@ import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import com.collectionloghelper.overlay.WidgetHighlightOverlay;
+import com.collectionloghelper.overlay.WorldMapDestinationOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import java.awt.image.BufferedImage;
@@ -104,6 +105,7 @@ public class GuidanceOverlayCoordinator
 	private final ObjectHighlightOverlay objectHighlightOverlay;
 	private final ItemHighlightOverlay itemHighlightOverlay;
 	private final WorldMapRouteOverlay worldMapRouteOverlay;
+	private final WorldMapDestinationOverlay worldMapDestinationOverlay;
 	private final GroundItemHighlightOverlay groundItemHighlightOverlay;
 	private final WidgetHighlightOverlay widgetHighlightOverlay;
 
@@ -164,6 +166,7 @@ public class GuidanceOverlayCoordinator
 		ObjectHighlightOverlay objectHighlightOverlay,
 		ItemHighlightOverlay itemHighlightOverlay,
 		WorldMapRouteOverlay worldMapRouteOverlay,
+		WorldMapDestinationOverlay worldMapDestinationOverlay,
 		GroundItemHighlightOverlay groundItemHighlightOverlay,
 		WidgetHighlightOverlay widgetHighlightOverlay)
 	{
@@ -185,6 +188,7 @@ public class GuidanceOverlayCoordinator
 		this.objectHighlightOverlay = objectHighlightOverlay;
 		this.itemHighlightOverlay = itemHighlightOverlay;
 		this.worldMapRouteOverlay = worldMapRouteOverlay;
+		this.worldMapDestinationOverlay = worldMapDestinationOverlay;
 		this.groundItemHighlightOverlay = groundItemHighlightOverlay;
 		this.widgetHighlightOverlay = widgetHighlightOverlay;
 	}
@@ -322,6 +326,7 @@ public class GuidanceOverlayCoordinator
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		worldMapRouteOverlay.clearTarget();
+		worldMapDestinationOverlay.clearTarget();
 		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
@@ -553,6 +558,7 @@ public class GuidanceOverlayCoordinator
 			dialogHighlightOverlay.setGuidanceActive(true);
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
 			worldMapRouteOverlay.setTargetPoint(worldPoint);
+			worldMapDestinationOverlay.setTarget(worldPoint, resolveStepIconType(step));
 			if (activeMapPoint != null)
 			{
 				worldMapPointManager.remove(activeMapPoint);
@@ -589,6 +595,7 @@ public class GuidanceOverlayCoordinator
 			guidanceOverlay.setTravelTip(null);
 			guidanceMinimapOverlay.setTargetPoint(null);
 			worldMapRouteOverlay.setTargetPoint(null);
+			worldMapDestinationOverlay.clearTarget();
 			if (activeMapPoint != null)
 			{
 				worldMapPointManager.remove(activeMapPoint);
@@ -692,6 +699,8 @@ public class GuidanceOverlayCoordinator
 		dialogHighlightOverlay.setGuidanceActive(true);
 		guidanceMinimapOverlay.setTargetPoint(worldPoint);
 		worldMapRouteOverlay.setTargetPoint(worldPoint);
+		// Non-sequencer path: no step context, use generic TILE icon
+		worldMapDestinationOverlay.setTarget(worldPoint, WorldMapDestinationOverlay.StepIconType.TILE);
 		if (activeMapPoint != null)
 		{
 			worldMapPointManager.remove(activeMapPoint);
@@ -722,6 +731,7 @@ public class GuidanceOverlayCoordinator
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		worldMapRouteOverlay.clearTarget();
+		worldMapDestinationOverlay.clearTarget();
 		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
@@ -936,5 +946,23 @@ public class GuidanceOverlayCoordinator
 		}
 		WorldPoint playerLoc = lp.getWorldLocation();
 		return playerLoc != null && playerLoc.getPlane() == worldPoint.getPlane();
+	}
+
+	/**
+	 * Determines the world-map destination icon type for a guidance step.
+	 * NPC steps use the NPC icon, object steps use the object/chest icon,
+	 * and all other steps use the generic tile diamond.
+	 */
+	private static WorldMapDestinationOverlay.StepIconType resolveStepIconType(GuidanceStep step)
+	{
+		if (step.getNpcId() > 0)
+		{
+			return WorldMapDestinationOverlay.StepIconType.NPC;
+		}
+		if (step.getObjectId() > 0 || (step.getObjectIds() != null && !step.getObjectIds().isEmpty()))
+		{
+			return WorldMapDestinationOverlay.StepIconType.OBJECT;
+		}
+		return WorldMapDestinationOverlay.StepIconType.TILE;
 	}
 }

@@ -31,6 +31,7 @@ import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import com.collectionloghelper.overlay.WidgetHighlightOverlay;
+import com.collectionloghelper.overlay.WorldMapDestinationOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import net.runelite.client.ui.overlay.OverlayManager;
 import org.junit.Before;
@@ -60,6 +61,8 @@ public class OverlayRegistryTest
 	@Mock
 	private WorldMapRouteOverlay worldMapRouteOverlay;
 	@Mock
+	private WorldMapDestinationOverlay worldMapDestinationOverlay;
+	@Mock
 	private GroundItemHighlightOverlay groundItemHighlightOverlay;
 	@Mock
 	private WidgetHighlightOverlay widgetHighlightOverlay;
@@ -77,6 +80,7 @@ public class OverlayRegistryTest
 			objectHighlightOverlay,
 			itemHighlightOverlay,
 			worldMapRouteOverlay,
+			worldMapDestinationOverlay,
 			groundItemHighlightOverlay,
 			widgetHighlightOverlay
 		);
@@ -132,6 +136,13 @@ public class OverlayRegistryTest
 	}
 
 	@Test
+	public void testRegisterAllAddsWorldMapDestinationOverlay()
+	{
+		registry.registerAll();
+		verify(overlayManager).add(worldMapDestinationOverlay);
+	}
+
+	@Test
 	public void testRegisterAllAddsGroundItemHighlightOverlay()
 	{
 		registry.registerAll();
@@ -146,13 +157,13 @@ public class OverlayRegistryTest
 	}
 
 	@Test
-	public void testRegisterAllAddsEightOverlays()
+	public void testRegisterAllAddsNineOverlays()
 	{
 		// Arrange + Act
 		registry.registerAll();
 
-		// Assert — exactly 8 add() calls, no more
-		verify(overlayManager, times(8)).add(any());
+		// Assert — exactly 9 add() calls, no more
+		verify(overlayManager, times(9)).add(any());
 	}
 
 	@Test
@@ -171,6 +182,7 @@ public class OverlayRegistryTest
 		inOrder.verify(overlayManager).add(objectHighlightOverlay);
 		inOrder.verify(overlayManager).add(itemHighlightOverlay);
 		inOrder.verify(overlayManager).add(worldMapRouteOverlay);
+		inOrder.verify(overlayManager).add(worldMapDestinationOverlay);
 		inOrder.verify(overlayManager).add(groundItemHighlightOverlay);
 		inOrder.verify(overlayManager).add(widgetHighlightOverlay);
 	}
@@ -180,10 +192,10 @@ public class OverlayRegistryTest
 	// ========================================================================
 
 	@Test
-	public void testUnregisterAllRemovesEightOverlays()
+	public void testUnregisterAllRemovesNineOverlays()
 	{
 		registry.unregisterAll();
-		verify(overlayManager, times(8)).remove(any());
+		verify(overlayManager, times(9)).remove(any());
 	}
 
 	@Test
@@ -229,6 +241,13 @@ public class OverlayRegistryTest
 	}
 
 	@Test
+	public void testUnregisterAllRemovesWorldMapDestinationOverlay()
+	{
+		registry.unregisterAll();
+		verify(overlayManager).remove(worldMapDestinationOverlay);
+	}
+
+	@Test
 	public void testUnregisterAllRemovesGroundItemHighlightOverlay()
 	{
 		registry.unregisterAll();
@@ -255,6 +274,7 @@ public class OverlayRegistryTest
 		inOrder.verify(overlayManager).remove(objectHighlightOverlay);
 		inOrder.verify(overlayManager).remove(itemHighlightOverlay);
 		inOrder.verify(overlayManager).remove(worldMapRouteOverlay);
+		inOrder.verify(overlayManager).remove(worldMapDestinationOverlay);
 		inOrder.verify(overlayManager).remove(groundItemHighlightOverlay);
 		inOrder.verify(overlayManager).remove(widgetHighlightOverlay);
 	}
@@ -275,6 +295,8 @@ public class OverlayRegistryTest
 		verify(overlayManager, times(1)).remove(guidanceOverlay);
 		verify(overlayManager, times(1)).add(guidanceMinimapOverlay);
 		verify(overlayManager, times(1)).remove(guidanceMinimapOverlay);
+		verify(overlayManager, times(1)).add(worldMapDestinationOverlay);
+		verify(overlayManager, times(1)).remove(worldMapDestinationOverlay);
 		verify(overlayManager, times(1)).add(widgetHighlightOverlay);
 		verify(overlayManager, times(1)).remove(widgetHighlightOverlay);
 	}
