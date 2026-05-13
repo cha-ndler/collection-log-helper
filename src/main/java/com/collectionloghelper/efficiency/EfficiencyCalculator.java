@@ -152,6 +152,106 @@ public class EfficiencyCalculator
 		return results;
 	}
 
+	/**
+	 * Returns all items belonging to {@code category} ranked for display in
+	 * Category Focus mode.
+	 *
+	 * <p>Sort rules:
+	 * <ol>
+	 *   <li>Unobtained items first, ordered by descending per-item efficiency score.</li>
+	 *   <li>Obtained items last (when {@code hideObtained} is {@code false}),
+	 *       also ordered by descending score.</li>
+	 *   <li>Score ties break alphabetically on item name (deterministic).</li>
+	 *   <li>Locked items interleave at their natural score position — NOT segregated
+	 *       to the bottom (same rule as Efficient mode, issue #392).</li>
+	 * </ol>
+	 *
+	 * <p>When {@code hideObtained} is {@code true} obtained items are omitted
+	 * entirely (existing behaviour preserved).
+	 */
+	public List<RankedCategoryItem> rankItemsByEfficiencyForCategory(
+		CollectionLogCategory category, boolean hideObtained)
+	{
+		int afkMinLevel = config.afkFilter().getMinAfkLevel();
+		boolean hideLocked = config.hideLockedContent();
+
+		List<RankedCategoryItem> unobtained = new ArrayList<>();
+		List<RankedCategoryItem> obtained = new ArrayList<>();
+
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			if (source.getCategory() != category)
+			{
+				continue;
+			}
+
+			boolean locked = !requirementsChecker.isAccessible(source.getName());
+			if (hideLocked && locked)
+			{
+				continue;
+			}
+			if (afkMinLevel > 0 && source.getAfkLevel() < afkMinLevel)
+			{
+				continue;
+			}
+
+			int killTimeSeconds = getEffectiveKillTime(source);
+			double killsPerHour = killTimeSeconds > 0 ? 3600.0 / killTimeSeconds : 0;
+			int rolls = source.getRollsPerKill();
+			List<com.collectionloghelper.data.CollectionLogItem> items = source.getItems();
+
+			// Slayer boost factor for this source (1.0 if not on task)
+			double slayerBoost = isOnSlayerTask(source) ? SLAYER_TASK_BOOST : 1.0;
+
+			for (int i = 0; i < items.size(); i++)
+			{
+				com.collectionloghelper.data.CollectionLogItem item = items.get(i);
+				boolean itemObtained = collectionState.isItemObtained(item.getItemId());
+
+				if (hideObtained && itemObtained)
+				{
+					continue;
+				}
+
+				// Sequential drop dependency: skip items whose predecessor has not
+				// yet been obtained (they cannot drop until the prior item is owned).
+				// Mirrors the same guard in scoreSource — see issue #134.
+				if (item.isRequiresPrevious() && i > 0
+					&& !collectionState.isItemObtained(items.get(i - 1).getItemId()))
+				{
+					continue;
+				}
+
+				// Score is only meaningful for unobtained items; obtained items
+				// still get a score so within-bucket ordering is consistent.
+				double score = scoreIndividualItem(item, source, killsPerHour, killTimeSeconds, rolls)
+					* slayerBoost;
+
+				RankedCategoryItem ranked = new RankedCategoryItem(item, source, score, locked, itemObtained);
+				if (itemObtained)
+				{
+					obtained.add(ranked);
+				}
+				else
+				{
+					unobtained.add(ranked);
+				}
+			}
+		}
+
+		Comparator<RankedCategoryItem> byScoreDescThenName =
+			Comparator.comparingDouble(RankedCategoryItem::getScore).reversed()
+				.thenComparing(r -> r.getItem().getName());
+
+		unobtained.sort(byScoreDescThenName);
+		obtained.sort(byScoreDescThenName);
+
+		List<RankedCategoryItem> result = new ArrayList<>(unobtained.size() + obtained.size());
+		result.addAll(unobtained);
+		result.addAll(obtained);
+		return result;
+	}
+
 	public List<ScoredItem> filterPetsOnly()
 	{
 		List<ScoredItem> results = new ArrayList<>();

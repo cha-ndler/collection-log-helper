@@ -37,6 +37,7 @@ import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.RewardType;
 import com.collectionloghelper.data.SlayerMasterDatabase;
 import com.collectionloghelper.data.SlayerTaskState;
+import com.collectionloghelper.efficiency.RankedCategoryItem;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1208,5 +1209,282 @@ public class EfficiencyCalculatorTest
 		when(config.raidTeamSize()).thenReturn(RaidTeamSize.TRIO);
 		effectiveTime = calculator.getEffectiveKillTime(source);
 		assertEquals(1440, effectiveTime);
+	}
+
+	// --- rankItemsByEfficiencyForCategory (issue #370) ---
+
+	/**
+	 * Unobtained items should precede obtained items, each bucket sorted
+	 * by descending per-item efficiency score.
+	 */
+	@Test
+	public void testRankItemsByEfficiency_unobtainedFirstThenObtained()
+	{
+		// Source A: fast drop (score high), item obtained
+		// Source B: slow drop (score low), item NOT obtained
+		// Source C: medium drop, item NOT obtained
+		// Expected order: C (medium, unobtained), B (slow, unobtained), A (fast, obtained)
+		CollectionLogItem fastObtained = makeItem(1, "Fast item", 0.1);     // score=600
+		CollectionLogItem mediumMissing = makeItem(2, "Medium item", 0.05); // score=300
+		CollectionLogItem slowMissing = makeItem(3, "Slow item", 0.02);    // score=120
+
+		CollectionLogSource sourceA = makeSource("Source A", CollectionLogCategory.BOSSES,
+			60, Collections.singletonList(fastObtained));
+		CollectionLogSource sourceB = makeSource("Source B", CollectionLogCategory.BOSSES,
+			60, Collections.singletonList(slowMissing));
+		CollectionLogSource sourceC = makeSource("Source C", CollectionLogCategory.BOSSES,
+			60, Collections.singletonList(mediumMissing));
+
+		when(database.getAllSources()).thenReturn(Arrays.asList(sourceA, sourceB, sourceC));
+		when(collectionState.isItemObtained(1)).thenReturn(true);
+		when(collectionState.isItemObtained(2)).thenReturn(false);
+		when(collectionState.isItemObtained(3)).thenReturn(false);
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		assertEquals(3, result.size());
+		// Unobtained first: medium (score 300) then slow (score 120)
+		assertEquals("Medium item", result.get(0).getItem().getName());
+		assertFalse(result.get(0).isObtained());
+		assertEquals("Slow item", result.get(1).getItem().getName());
+		assertFalse(result.get(1).isObtained());
+		// Obtained last
+		assertEquals("Fast item", result.get(2).getItem().getName());
+		assertTrue(result.get(2).isObtained());
+	}
+
+	/**
+	 * Locked items interleave by score — they are NOT segregated to the bottom
+	 * (same rule as Efficient mode, issue #392).
+	 */
+	@Test
+	public void testRankItemsByEfficiency_lockedItemInterleavesByScore()
+	{
+		CollectionLogItem fastItem = makeItem(1, "Fast", 0.1);   // score=600
+		CollectionLogItem medItem = makeItem(2, "Medium", 0.05); // score=300  (locked source)
+		CollectionLogItem slowItem = makeItem(3, "Slow", 0.02);  // score=120
+
+		CollectionLogSource unlockFast = makeSource("Unlocked Fast", CollectionLogCategory.BOSSES,
+			60, Collections.singletonList(fastItem));
+		CollectionLogSource lockedMed = makeSource("Locked Medium", CollectionLogCategory.BOSSES,
+			60, Collections.singletonList(medItem));
+		CollectionLogSource unlockSlow = makeSource("Unlocked Slow", CollectionLogCategory.BOSSES,
+			60, Collections.singletonList(slowItem));
+
+		when(database.getAllSources()).thenReturn(Arrays.asList(unlockFast, lockedMed, unlockSlow));
+		when(requirementsChecker.isAccessible("Unlocked Fast")).thenReturn(true);
+		when(requirementsChecker.isAccessible("Locked Medium")).thenReturn(false);
+		when(requirementsChecker.isAccessible("Unlocked Slow")).thenReturn(true);
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		assertEquals(3, result.size());
+		assertEquals("Fast", result.get(0).getItem().getName());
+		assertFalse(result.get(0).isLocked());
+		// Locked medium item interleaves at its natural score position (#2)
+		assertEquals("Medium", result.get(1).getItem().getName());
+		assertTrue("Locked item must be flagged but interleave by score", result.get(1).isLocked());
+		assertEquals("Slow", result.get(2).getItem().getName());
+		assertFalse(result.get(2).isLocked());
+	}
+
+	/**
+	 * When hideObtained is true, obtained items are filtered out entirely.
+	 */
+	@Test
+	public void testRankItemsByEfficiency_hideObtainedFiltersThemOut()
+	{
+		CollectionLogItem unobtained = makeItem(1, "Missing", 0.05);
+		CollectionLogItem obtained = makeItem(2, "Got it", 0.1);
+
+		CollectionLogSource source = makeSource("Source", CollectionLogCategory.BOSSES,
+			60, Arrays.asList(unobtained, obtained));
+
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+		when(collectionState.isItemObtained(2)).thenReturn(true);
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, true);
+
+		assertEquals(1, result.size());
+		assertEquals("Missing", result.get(0).getItem().getName());
+		assertFalse(result.get(0).isObtained());
+	}
+
+	/**
+	 * Empty category returns empty list without errors.
+	 */
+	@Test
+	public void testRankItemsByEfficiency_emptyCategory_returnsEmpty()
+	{
+		when(database.getAllSources()).thenReturn(Collections.emptyList());
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		assertNotNull(result);
+		assertTrue(result.isEmpty());
+	}
+
+	/**
+	 * Single-item category returns exactly one ranked entry.
+	 */
+	@Test
+	public void testRankItemsByEfficiency_singleItemCategory()
+	{
+		CollectionLogItem item = makeItem(1, "Solo drop", 0.05);
+		CollectionLogSource source = makeSource("Solo Boss", CollectionLogCategory.BOSSES,
+			60, Collections.singletonList(item));
+
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		assertEquals(1, result.size());
+		assertEquals("Solo drop", result.get(0).getItem().getName());
+		assertFalse(result.get(0).isObtained());
+		assertFalse(result.get(0).isLocked());
+	}
+
+	/**
+	 * Items with equal scores sort alphabetically by item name (deterministic tie-break).
+	 */
+	@Test
+	public void testRankItemsByEfficiency_tieBreakAlphabetical()
+	{
+		// Three items all with identical drop rates — scores will be equal
+		CollectionLogItem itemZ = makeItem(1, "Zephyr helm", 0.01);
+		CollectionLogItem itemA = makeItem(2, "Abyssal whip", 0.01);
+		CollectionLogItem itemM = makeItem(3, "Magic longbow", 0.01);
+
+		CollectionLogSource source = makeSource("Tie Boss", CollectionLogCategory.BOSSES,
+			60, Arrays.asList(itemZ, itemA, itemM));
+
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		assertEquals(3, result.size());
+		assertEquals("Abyssal whip", result.get(0).getItem().getName());
+		assertEquals("Magic longbow", result.get(1).getItem().getName());
+		assertEquals("Zephyr helm", result.get(2).getItem().getName());
+	}
+
+	/**
+	 * Items from a different category should not appear in the results.
+	 */
+	@Test
+	public void testRankItemsByEfficiency_ignoresOtherCategories()
+	{
+		CollectionLogItem bossItem = makeItem(1, "Boss drop", 0.05);
+		CollectionLogItem clueItem = makeItem(2, "Clue reward", 0.05);
+
+		CollectionLogSource bossSource = makeSource("Boss", CollectionLogCategory.BOSSES,
+			60, Collections.singletonList(bossItem));
+		CollectionLogSource clueSource = makeSource("Clue", CollectionLogCategory.CLUES,
+			60, Collections.singletonList(clueItem));
+
+		when(database.getAllSources()).thenReturn(Arrays.asList(bossSource, clueSource));
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+		// clueEstimator is NOT stubbed — the clue source is filtered out before
+		// getEffectiveKillTime is called (category != BOSSES).
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		assertEquals(1, result.size());
+		assertEquals("Boss drop", result.get(0).getItem().getName());
+	}
+
+	/**
+	 * Obtained items within the obtained bucket are also ordered by descending score,
+	 * with alphabetical tie-break.
+	 */
+	@Test
+	public void testRankItemsByEfficiency_obtainedBucketSortedByScore()
+	{
+		CollectionLogItem slowObtained = makeItem(1, "Slow obtained", 0.01);   // score=60
+		CollectionLogItem fastObtained = makeItem(2, "Fast obtained", 0.1);    // score=600
+
+		CollectionLogSource source = makeSource("Source", CollectionLogCategory.BOSSES,
+			60, Arrays.asList(slowObtained, fastObtained));
+
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		when(collectionState.isItemObtained(1)).thenReturn(true);
+		when(collectionState.isItemObtained(2)).thenReturn(true);
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		assertEquals(2, result.size());
+		// Both obtained; higher score first
+		assertEquals("Fast obtained", result.get(0).getItem().getName());
+		assertTrue(result.get(0).isObtained());
+		assertEquals("Slow obtained", result.get(1).getItem().getName());
+		assertTrue(result.get(1).isObtained());
+	}
+
+	/**
+	 * Items with requiresPrevious=true whose predecessor is not yet obtained
+	 * must be excluded from the ranked list (they cannot drop yet).
+	 * Mirrors the same guard in {@link EfficiencyCalculator#scoreSource}.
+	 */
+	@Test
+	public void testRankItemsByEfficiency_requiresPrevious_predecessorNotObtained_excluded()
+	{
+		// Two sequential items: A (base), B (requiresPrevious)
+		// Neither obtained — B cannot drop yet, so only A should appear.
+		CollectionLogItem itemA = makeItem(1, "Base item", 0.05);
+		CollectionLogItem itemB = makeItemRequiresPrevious(2, "Sequential item", 0.05);
+
+		CollectionLogSource source = makeSource("Sequential Boss", CollectionLogCategory.BOSSES,
+			60, Arrays.asList(itemA, itemB));
+
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		when(collectionState.isItemObtained(1)).thenReturn(false);
+		when(collectionState.isItemObtained(2)).thenReturn(false);
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		assertEquals("Only the base item should appear — sequential item excluded", 1, result.size());
+		assertEquals("Base item", result.get(0).getItem().getName());
+	}
+
+	/**
+	 * Items with requiresPrevious=true appear once their predecessor is obtained.
+	 */
+	@Test
+	public void testRankItemsByEfficiency_requiresPrevious_predecessorObtained_included()
+	{
+		CollectionLogItem itemA = makeItem(1, "Base item", 0.05);
+		CollectionLogItem itemB = makeItemRequiresPrevious(2, "Sequential item", 0.05);
+
+		CollectionLogSource source = makeSource("Sequential Boss", CollectionLogCategory.BOSSES,
+			60, Arrays.asList(itemA, itemB));
+
+		when(database.getAllSources()).thenReturn(Collections.singletonList(source));
+		// Predecessor obtained — item B can now drop
+		when(collectionState.isItemObtained(1)).thenReturn(true);
+		when(collectionState.isItemObtained(2)).thenReturn(false);
+
+		List<RankedCategoryItem> result =
+			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
+
+		// Item A is obtained and shown (hideObtained=false), item B is unobtained and shown
+		assertEquals(2, result.size());
+		// B (unobtained) ranks first, A (obtained) sinks to bottom
+		assertEquals("Sequential item", result.get(0).getItem().getName());
+		assertFalse(result.get(0).isObtained());
+		assertEquals("Base item", result.get(1).getItem().getName());
+		assertTrue(result.get(1).isObtained());
 	}
 }
