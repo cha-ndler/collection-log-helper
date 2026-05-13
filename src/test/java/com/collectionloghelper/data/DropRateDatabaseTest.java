@@ -300,4 +300,78 @@ public class DropRateDatabaseTest
 		assertNotNull(source);
 		assertTrue(source.getKillTimeSeconds() > 0);
 	}
+
+	// ========================================================================
+	// GuidanceStep.recommendedItemIds — schema deserialization (B.5.2)
+	// ========================================================================
+
+	/**
+	 * A GuidanceStep JSON with {@code recommendedItemIds} present must
+	 * deserialise the list correctly.
+	 */
+	@Test
+	public void guidanceStep_withRecommendedItemIds_deserializesCorrectly()
+	{
+		Gson gson = new GsonBuilder().create();
+		String json =
+			"{\"description\":\"Test step\","
+			+ "\"completionCondition\":\"MANUAL\","
+			+ "\"requiredItemIds\":[590],"
+			+ "\"recommendedItemIds\":[4151,2440]}";
+
+		GuidanceStep step = gson.fromJson(json, GuidanceStep.class);
+
+		assertNotNull("Step must not be null", step);
+		assertNotNull("requiredItemIds must be deserialised", step.getRequiredItemIds());
+		assertEquals(1, step.getRequiredItemIds().size());
+		assertEquals(Integer.valueOf(590), step.getRequiredItemIds().get(0));
+
+		assertNotNull("recommendedItemIds must be deserialised", step.getRecommendedItemIds());
+		assertEquals(2, step.getRecommendedItemIds().size());
+		assertEquals(Integer.valueOf(4151), step.getRecommendedItemIds().get(0));
+		assertEquals(Integer.valueOf(2440), step.getRecommendedItemIds().get(1));
+	}
+
+	/**
+	 * A GuidanceStep JSON without {@code recommendedItemIds} (existing data)
+	 * must deserialise with a null field — no NPE, backwards compatible.
+	 */
+	@Test
+	public void guidanceStep_withoutRecommendedItemIds_nullField()
+	{
+		Gson gson = new GsonBuilder().create();
+		String json =
+			"{\"description\":\"Legacy step\","
+			+ "\"completionCondition\":\"MANUAL\","
+			+ "\"requiredItemIds\":[590]}";
+
+		GuidanceStep step = gson.fromJson(json, GuidanceStep.class);
+
+		assertNotNull("Step must not be null", step);
+		assertNull("recommendedItemIds must be null when absent from JSON",
+			step.getRecommendedItemIds());
+	}
+
+	/**
+	 * The real drop_rates.json (no recommendedItemIds yet) must still parse
+	 * without errors — i.e. the additive schema is backwards compatible.
+	 */
+	@Test
+	public void load_existingDataParsesWithoutRecommendedItemIds()
+	{
+		// If we got here the @Before loaded successfully — just verify all
+		// guidance steps that exist have null recommendedItemIds (no data yet).
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			if (source.getGuidanceSteps() == null)
+			{
+				continue;
+			}
+			for (GuidanceStep step : source.getGuidanceSteps())
+			{
+				assertNull("Existing data must not have recommendedItemIds set (B.5.2b is pending)",
+					step.getRecommendedItemIds());
+			}
+		}
+	}
 }

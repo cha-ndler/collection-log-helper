@@ -64,20 +64,43 @@ public class RequiredItemResolver
 	}
 
 	/**
-	 * Resolves a step's required item IDs into display rows.
-	 * Returns an empty list when the step is null, has no required items,
-	 * or the list contains only invalid IDs.
+	 * Resolves a step's {@code requiredItemIds} into display rows.
+	 * Returns an empty list when the step is null or has no required items.
 	 */
 	public List<RequiredItemDisplay> resolve(GuidanceStep step)
 	{
-		if (step == null
-			|| step.getRequiredItemIds() == null
-			|| step.getRequiredItemIds().isEmpty())
+		if (step == null)
 		{
 			return Collections.emptyList();
 		}
+		return resolveIds(step.getRequiredItemIds());
+	}
 
-		List<Integer> ids = step.getRequiredItemIds();
+	/**
+	 * Resolves a step's {@code recommendedItemIds} into display rows.
+	 * Returns an empty list when the step is null or has no recommended items.
+	 */
+	public List<RequiredItemDisplay> resolveRecommended(GuidanceStep step)
+	{
+		if (step == null)
+		{
+			return Collections.emptyList();
+		}
+		return resolveIds(step.getRecommendedItemIds());
+	}
+
+	/**
+	 * Resolves an arbitrary list of item IDs into display rows.
+	 * Returns an empty list when {@code ids} is null or empty, or contains
+	 * only invalid IDs. Shared implementation for both required and recommended
+	 * item resolution so colouring logic stays consistent.
+	 */
+	public List<RequiredItemDisplay> resolveIds(List<Integer> ids)
+	{
+		if (ids == null || ids.isEmpty())
+		{
+			return Collections.emptyList();
+		}
 		List<RequiredItemDisplay> out = new ArrayList<>(ids.size());
 		for (Integer itemId : ids)
 		{
