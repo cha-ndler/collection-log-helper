@@ -11807,13 +11807,15 @@
     "travelTip": "Minigame teleport -> Shades of Mort'ton, or Mort'ton teleport scroll",
     "guidanceSteps": [
       {
-        "description": "Bank: bring pyre logs, shade remains, and a tinderbox to Mort'ton",
+        "description": "Bank: bring Fiyr pyre logs, Fiyr shade remains, and a tinderbox to Mort'ton (or any matching shade tier)",
         "worldX": 3488,
         "worldY": 3283,
         "worldPlane": 0,
         "travelTip": "Minigame teleport -> Shades of Mort'ton | Barrows teleport + run south | Mort'ton teleport scroll | Fairy ring BKR",
         "requiredItemIds": [
-          590
+          590,
+          3410,
+          3446
         ],
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 25,
@@ -11827,7 +11829,9 @@
         "objectId": 4093,
         "objectInteractAction": "Build",
         "requiredItemIds": [
-          590
+          590,
+          3410,
+          3446
         ],
         "skipIfHasAnyItemIds": [
           3450,
