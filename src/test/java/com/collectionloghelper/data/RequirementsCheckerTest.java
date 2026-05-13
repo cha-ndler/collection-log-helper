@@ -24,6 +24,7 @@
  */
 package com.collectionloghelper.data;
 
+import net.runelite.api.Varbits;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -95,5 +96,60 @@ public class RequirementsCheckerTest
 	public void formatEnumName_romanNumeralVII()
 	{
 		assertEquals("Part VII", RequirementsChecker.formatEnumName("PART_VII"));
+	}
+
+	// =========================================================================
+	// resolveDiaryVarbit — static resolver for DIARY_<AREA>_<TIER> Varbits constants
+	// =========================================================================
+
+	@Test
+	public void resolveDiaryVarbit_knownDiary_returnsPositiveVarbit()
+	{
+		int varbit = RequirementsChecker.resolveDiaryVarbit("ARDOUGNE_ELITE");
+		assertTrue("Known diary must resolve to a positive varbit ID", varbit > 0);
+		assertEquals(Varbits.DIARY_ARDOUGNE_ELITE, varbit);
+	}
+
+	@Test
+	public void resolveDiaryVarbit_lumbridgeHard_returnsExpected()
+	{
+		int varbit = RequirementsChecker.resolveDiaryVarbit("LUMBRIDGE_HARD");
+		assertEquals(Varbits.DIARY_LUMBRIDGE_HARD, varbit);
+	}
+
+	@Test
+	public void resolveDiaryVarbit_kandarin_medium_returnsExpected()
+	{
+		int varbit = RequirementsChecker.resolveDiaryVarbit("KANDARIN_MEDIUM");
+		assertEquals(Varbits.DIARY_KANDARIN_MEDIUM, varbit);
+	}
+
+	@Test
+	public void resolveDiaryVarbit_unknownDiary_returnsMinusOne()
+	{
+		int varbit = RequirementsChecker.resolveDiaryVarbit("NONEXISTENT_AREA_ELITE");
+		assertEquals("Unknown diary must return -1", -1, varbit);
+	}
+
+	@Test
+	public void resolveDiaryVarbit_nullInput_returnsMinusOne()
+	{
+		int varbit = RequirementsChecker.resolveDiaryVarbit(null);
+		assertEquals("Null diary must return -1", -1, varbit);
+	}
+
+	@Test
+	public void resolveDiaryVarbit_emptyInput_returnsMinusOne()
+	{
+		int varbit = RequirementsChecker.resolveDiaryVarbit("");
+		assertEquals("Empty diary must return -1", -1, varbit);
+	}
+
+	@Test
+	public void resolveDiaryVarbit_lowercaseInput_resolvedCorrectly()
+	{
+		// resolveDiaryVarbit normalises to uppercase internally
+		int varbit = RequirementsChecker.resolveDiaryVarbit("ardougne_easy");
+		assertEquals(Varbits.DIARY_ARDOUGNE_EASY, varbit);
 	}
 }

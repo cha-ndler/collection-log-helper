@@ -24,6 +24,8 @@
  */
 package com.collectionloghelper.data;
 
+import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,6 +38,7 @@ import net.runelite.api.Client;
 import net.runelite.api.Quest;
 import net.runelite.api.QuestState;
 import net.runelite.api.Skill;
+import net.runelite.api.Varbits;
 
 @Slf4j
 @Singleton
@@ -146,6 +149,138 @@ public class RequirementsChecker
 			return true;
 		}
 		return checkRequirementsDetail(requirements).isEmpty();
+	}
+
+	/**
+	 * Build a display-ready list of {@link RequirementRow}s for the given source.
+	 * Must be called on the client thread (reads live client state).
+	 * Returns an empty list when the source has no requirements.
+	 */
+	public List<RequirementRow> buildRequirementRows(CollectionLogSource source)
+	{
+		if (source == null)
+		{
+			return Collections.emptyList();
+		}
+		SourceRequirements requirements = source.getRequirements();
+		if (requirements == null)
+		{
+			return Collections.emptyList();
+		}
+
+		List<RequirementRow> rows = new ArrayList<>();
+
+		// --- Quest rows ---
+		if (requirements.getQuests() != null)
+		{
+			for (String questName : requirements.getQuests())
+			{
+				try
+				{
+					Quest quest = Quest.valueOf(questName);
+					QuestState state = quest.getState(client);
+					String label = formatEnumName(questName);
+					String stateText;
+					Color color;
+					boolean met;
+					switch (state)
+					{
+						case FINISHED:
+							stateText = "COMPLETED";
+							color = RequirementRow.COLOR_MET;
+							met = true;
+							break;
+						case IN_PROGRESS:
+							stateText = "IN PROGRESS";
+							color = RequirementRow.COLOR_IN_PROGRESS;
+							met = false;
+							break;
+						default:
+							stateText = "NOT STARTED";
+							color = RequirementRow.COLOR_UNMET;
+							met = false;
+							break;
+					}
+					rows.add(new RequirementRow(RequirementRow.Category.QUEST, label, stateText, color, met));
+				}
+				catch (IllegalArgumentException e)
+				{
+					log.warn("Unknown quest enum for requirement row: {}", questName);
+				}
+			}
+		}
+
+		// --- Skill rows ---
+		if (requirements.getSkills() != null)
+		{
+			for (SkillRequirement skillReq : requirements.getSkills())
+			{
+				try
+				{
+					Skill skill = Skill.valueOf(skillReq.getSkill());
+					int playerLevel = client.getRealSkillLevel(skill);
+					int required = skillReq.getLevel();
+					String label = formatEnumName(skillReq.getSkill()) + " " + required;
+					String stateText = "level " + playerLevel + "/" + required;
+					boolean met = playerLevel >= required;
+					Color color = met ? RequirementRow.COLOR_MET : RequirementRow.COLOR_UNMET;
+					rows.add(new RequirementRow(RequirementRow.Category.SKILL, label, stateText, color, met));
+				}
+				catch (IllegalArgumentException e)
+				{
+					log.warn("Unknown skill enum for requirement row: {}", skillReq.getSkill());
+				}
+			}
+		}
+
+		// --- Diary rows ---
+		if (requirements.getDiaries() != null)
+		{
+			for (String diaryName : requirements.getDiaries())
+			{
+				int varbitId = resolveDiaryVarbit(diaryName);
+				String label = formatEnumName(diaryName);
+				boolean met;
+				if (varbitId < 0)
+				{
+					// Unrecognised diary — treat as unmet and warn
+					log.warn("Unknown diary requirement: {}", diaryName);
+					met = false;
+				}
+				else
+				{
+					met = client.getVarbitValue(varbitId) == 1;
+				}
+				String stateText = met ? "COMPLETED" : "NOT COMPLETED";
+				Color color = met ? RequirementRow.COLOR_MET : RequirementRow.COLOR_UNMET;
+				rows.add(new RequirementRow(RequirementRow.Category.DIARY, label, stateText, color, met));
+			}
+		}
+
+		return Collections.unmodifiableList(rows);
+	}
+
+	/**
+	 * Resolves a diary requirement string such as {@code "LUMBRIDGE_HARD"} to the
+	 * matching {@link Varbits} constant using reflection on the {@code DIARY_<name>}
+	 * field naming convention. Returns {@code -1} if the constant is not found.
+	 */
+	static int resolveDiaryVarbit(String diaryName)
+	{
+		if (diaryName == null || diaryName.isEmpty())
+		{
+			return -1;
+		}
+		String fieldName = "DIARY_" + diaryName.toUpperCase();
+		try
+		{
+			Field f = Varbits.class.getField(fieldName);
+			return f.getInt(null);
+		}
+		catch (NoSuchFieldException | IllegalAccessException e)
+		{
+			return -1;
+		}
 	}
 
 	private List<String> checkRequirements(CollectionLogSource source)
