@@ -748,9 +748,27 @@ public class CollectionLogHelperPlugin extends Plugin
 		calculator.exportEfficiencyList(exportFile, client);
 	}
 
+	/**
+	 * Activates guidance for {@code source}, ensuring all work runs on the client
+	 * thread.  {@link com.collectionloghelper.guidance.GuidanceOverlayCoordinator#activateGuidance}
+	 * transitively calls {@link com.collectionloghelper.data.RequirementsChecker#buildRequirementRows},
+	 * which uses {@code client.getQuestState} and similar client-thread-only APIs.
+	 * Wrapping here (rather than inside the coordinator) covers all call paths —
+	 * both the Item Detail "Guide Me" button
+	 * ({@link com.collectionloghelper.ui.CollectionLogHelperPanel}) and the Top Pick
+	 * green button ({@link com.collectionloghelper.ui.widget.QuickGuidePanelView}) — in
+	 * one place, mirroring the step-advance / skip fix in commit c528d0ae.
+	 *
+	 * <p>This method returns immediately; activation completes on the next client-thread
+	 * tick.  The panel's "Stop Guidance" button state may lag by one tick — this is
+	 * acceptable and consistent with the step-advance pattern.
+	 */
 	public void activateGuidance(CollectionLogSource source)
 	{
-		guidanceCoordinator.activateGuidance(source, cachedPlayerLocation);
+		// Route through the client thread: RequirementsChecker.buildRequirementRows
+		// and related coordinator work require client-thread context.  Mirrors the
+		// step-advance / skip wrap added in commit c528d0ae.
+		clientThread.invokeLater(() -> guidanceCoordinator.activateGuidance(source, cachedPlayerLocation));
 	}
 
 	/**
