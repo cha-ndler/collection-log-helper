@@ -256,19 +256,21 @@ public class GuidanceOverlayCoordinator
 				final String stepDesc = step != null ? step.getDescription() : "";
 				final boolean stepManual =
 					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL;
+				final List<GuidanceStep> sourceSteps =
+					source.getGuidanceSteps() != null ? source.getGuidanceSteps() : Collections.emptyList();
 				panel.setGuidanceState(true, source, requirementRows);
 				// Show step text immediately without items; resolve names on the client
 				// thread (~1 tick) to avoid the EDT assert in ItemManager#getItemComposition
 				// (see cha-ndler/collection-log-helper#388).
 				panel.updateStepProgress(landedIdx, stepTotal, stepDesc, stepManual,
-					Collections.emptyList());
+					Collections.emptyList(), sourceSteps);
 				final GuidanceStep rawForResolve = rawStep;
 				clientThread.invokeLater(() ->
 				{
 					final List<RequiredItemDisplay> resolvedItems =
 						requiredItemResolver.resolve(rawForResolve);
 					panel.updateStepProgress(landedIdx, stepTotal, stepDesc, stepManual,
-						resolvedItems);
+						resolvedItems, sourceSteps);
 				});
 			}
 			// Add InfoBox showing the correct landed step (not always "1/N")
@@ -834,18 +836,22 @@ public class GuidanceOverlayCoordinator
 			final String desc = step.getDescription();
 			final boolean isManual = step.getCompletionCondition() == CompletionCondition.MANUAL;
 			final GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
+			final CollectionLogSource stepChangeSource = guidanceSequencer.getActiveSource();
+			final List<GuidanceStep> sourceSteps = stepChangeSource != null
+				&& stepChangeSource.getGuidanceSteps() != null
+				? stepChangeSource.getGuidanceSteps() : Collections.emptyList();
 
 			// Push description + step progress to the panel immediately (safe from any thread
 			// because showStep dispatches to the EDT). Required-item resolution is deferred
 			// to the client thread because RequiredItemResolver.resolve() calls
 			// ItemManager.getItemComposition, which asserts caller-is-client-thread. See
 			// cha-ndler/collection-log-helper#388 for the original trace.
-			panel.updateStepProgress(current, total, desc, isManual, Collections.emptyList());
+			panel.updateStepProgress(current, total, desc, isManual, Collections.emptyList(), sourceSteps);
 			clientThread.invokeLater(() ->
 			{
 				final List<RequiredItemDisplay> resolvedItems =
 					requiredItemResolver.resolve(rawStep);
-				panel.updateStepProgress(current, total, desc, isManual, resolvedItems);
+				panel.updateStepProgress(current, total, desc, isManual, resolvedItems, sourceSteps);
 			});
 		}
 	}

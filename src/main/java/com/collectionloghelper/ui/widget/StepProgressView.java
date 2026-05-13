@@ -24,6 +24,7 @@
  */
 package com.collectionloghelper.ui.widget;
 
+import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.guidance.RequiredItemDisplay;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,7 +32,9 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -47,8 +50,19 @@ import net.runelite.client.util.AsyncBufferedImage;
 
 /**
  * Shared widget that displays the multi-step guidance progress bar,
- * the required-items subsection (with colour-coded availability), and the
+ * the required-items subsection (with colour-coded availability), the
+ * collapsible step sections (when any step carries a section label), and the
  * Next Step / Skip buttons.
+ *
+ * <h3>Section rendering (B.5.4)</h3>
+ * <p>When the active source has at least one step with a non-null
+ * {@link GuidanceStep#getSection()} value, steps are grouped into named
+ * collapsible blocks computed by {@link StepSectionGrouper}. Each block
+ * shows a header: "▼ {Section Name} (N steps)" when expanded, or
+ * "▶ {Section Name} (N steps)" when collapsed. Clicking the header toggles
+ * the block. The section containing the active step is always force-expanded.
+ * When no step in the source has a section label the flat single-line layout
+ * is used unchanged.
  *
  * <p>Required-item rows are passed in as pre-resolved {@link RequiredItemDisplay}
  * objects (name + status already determined on the client thread by
@@ -70,12 +84,24 @@ public class StepProgressView extends JPanel
 	/** Tooltip suffix appended to items whose status is IN_BANK. */
 	private static final String IN_BANK_TOOLTIP_SUFFIX = " ℹ in bank";
 
+	private static final Color BG = new Color(25, 35, 55);
+	private static final Color SECTION_HEADER_FG = new Color(200, 200, 200);
+	private static final Color SECTION_HEADER_ACTIVE_FG = new Color(80, 180, 255);
+
 	private final ItemManager itemManager;
 
 	private final JLabel stepProgressLabel;
 	private final JPanel requiredItemsPanel;
+	/** Container rendered when the source uses section labels (sectioned mode). */
+	private final JPanel sectionsPanel;
 	private final JButton nextStepButton;
 	private final JButton skipStepButton;
+
+	/**
+	 * Per-section collapse state. True = expanded. New sections default to collapsed
+	 * (except for the active-step section which is force-expanded on each render).
+	 */
+	private final Map<String, Boolean> sectionExpandState = new HashMap<>();
 
 	private Runnable stepAdvancer;
 	private Runnable stepSkipper;
@@ -85,7 +111,7 @@ public class StepProgressView extends JPanel
 		this.itemManager = itemManager;
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		setBackground(new Color(25, 35, 55));
+		setBackground(BG);
 		setBorder(BorderFactory.createCompoundBorder(
 			BorderFactory.createLineBorder(new Color(80, 150, 220), 1),
 			BorderFactory.createEmptyBorder(4, 6, 4, 6)
@@ -102,14 +128,21 @@ public class StepProgressView extends JPanel
 
 		requiredItemsPanel = new JPanel();
 		requiredItemsPanel.setLayout(new BoxLayout(requiredItemsPanel, BoxLayout.Y_AXIS));
-		requiredItemsPanel.setBackground(new Color(25, 35, 55));
+		requiredItemsPanel.setBackground(BG);
 		requiredItemsPanel.setAlignmentX(LEFT_ALIGNMENT);
 		requiredItemsPanel.setVisible(false);
 		add(requiredItemsPanel);
 
+		sectionsPanel = new JPanel();
+		sectionsPanel.setLayout(new BoxLayout(sectionsPanel, BoxLayout.Y_AXIS));
+		sectionsPanel.setBackground(BG);
+		sectionsPanel.setAlignmentX(LEFT_ALIGNMENT);
+		sectionsPanel.setVisible(false);
+		add(sectionsPanel);
+
 		JPanel stepButtonRow = new JPanel();
 		stepButtonRow.setLayout(new BoxLayout(stepButtonRow, BoxLayout.X_AXIS));
-		stepButtonRow.setBackground(new Color(25, 35, 55));
+		stepButtonRow.setBackground(BG);
 		stepButtonRow.setAlignmentX(LEFT_ALIGNMENT);
 
 		nextStepButton = new JButton("Next Step");
@@ -156,7 +189,7 @@ public class StepProgressView extends JPanel
 	}
 
 	/**
-	 * Shows and populates the step progress panel.
+	 * Shows and populates the step progress panel (flat layout — no section grouping).
 	 * Safe to call from any thread.
 	 *
 	 * @param current       one-based step index
@@ -170,15 +203,51 @@ public class StepProgressView extends JPanel
 	public void showStep(int current, int total, String description, boolean isManual,
 		List<RequiredItemDisplay> requiredItems)
 	{
+		showStep(current, total, description, isManual, requiredItems, Collections.emptyList());
+	}
+
+	/**
+	 * Shows and populates the step progress panel, rendering collapsible section blocks
+	 * when {@code allSteps} contains at least one step with a non-null section label.
+	 * Safe to call from any thread.
+	 *
+	 * @param current       one-based step index
+	 * @param total         total number of steps
+	 * @param description   human-readable step description
+	 * @param isManual      whether the Next Step button should be shown
+	 * @param requiredItems pre-resolved display rows (may be {@code null} or empty)
+	 * @param allSteps      full ordered step list for the active source; used to compute
+	 *                      section groups. Pass an empty list to force flat layout.
+	 */
+	public void showStep(int current, int total, String description, boolean isManual,
+		List<RequiredItemDisplay> requiredItems, List<GuidanceStep> allSteps)
+	{
 		final List<RequiredItemDisplay> rows =
 			requiredItems != null ? requiredItems : Collections.emptyList();
+		final List<GuidanceStep> steps =
+			allSteps != null ? allSteps : Collections.emptyList();
+		final List<StepSectionGroup> groups = StepSectionGrouper.group(steps);
 
 		SwingUtilities.invokeLater(() ->
 		{
 			stepProgressLabel.setText(
 				"<html>Step " + current + "/" + total + ": " + description + "</html>");
 			nextStepButton.setVisible(isManual);
-			updateRequiredItemDisplay(rows);
+
+			if (groups.isEmpty())
+			{
+				// Flat layout — hide sections, show required items inline
+				sectionsPanel.setVisible(false);
+				updateRequiredItemDisplay(rows);
+			}
+			else
+			{
+				// Sectioned layout — hide inline required items, render section blocks
+				requiredItemsPanel.removeAll();
+				requiredItemsPanel.setVisible(false);
+				updateSectionDisplay(groups, current, rows);
+			}
+
 			setVisible(true);
 			revalidate();
 			if (getParent() != null)
@@ -202,6 +271,8 @@ public class StepProgressView extends JPanel
 		{
 			requiredItemsPanel.removeAll();
 			requiredItemsPanel.setVisible(false);
+			sectionsPanel.removeAll();
+			sectionsPanel.setVisible(false);
 			setVisible(false);
 			revalidate();
 			if (getParent() != null)
@@ -210,6 +281,160 @@ public class StepProgressView extends JPanel
 			}
 		});
 	}
+
+	// ── Section rendering ────────────────────────────────────────────────────
+
+	/**
+	 * Rebuilds the collapsible section blocks.
+	 *
+	 * <p>The section containing {@code activeStepIndex} is force-expanded and its
+	 * required-item rows are rendered immediately below the step label. Other sections
+	 * respect their stored collapse state (defaulting to collapsed).
+	 *
+	 * <p>Must be called on the EDT.
+	 *
+	 * @param groups          ordered section groups from {@link StepSectionGrouper#group}
+	 * @param activeStepIndex 1-based index of the currently active step
+	 * @param requiredItems   display rows for the active step
+	 */
+	void updateSectionDisplay(List<StepSectionGroup> groups, int activeStepIndex,
+		List<RequiredItemDisplay> requiredItems)
+	{
+		sectionsPanel.removeAll();
+
+		String activeSectionName = StepSectionGrouper.sectionNameFor(groups, activeStepIndex);
+
+		// Force-expand the active section
+		if (activeSectionName != null)
+		{
+			sectionExpandState.put(activeSectionName, Boolean.TRUE);
+		}
+
+		for (StepSectionGroup group : groups)
+		{
+			boolean isActiveSection = group.getName().equals(activeSectionName);
+			boolean expanded = sectionExpandState.getOrDefault(group.getName(), Boolean.FALSE);
+
+			JPanel block = buildSectionBlock(group, isActiveSection, expanded, activeStepIndex, requiredItems);
+			block.setAlignmentX(LEFT_ALIGNMENT);
+			sectionsPanel.add(block);
+			sectionsPanel.add(Box.createVerticalStrut(2));
+		}
+
+		sectionsPanel.setVisible(true);
+		sectionsPanel.revalidate();
+		sectionsPanel.repaint();
+	}
+
+	/**
+	 * Builds a single collapsible section block: a clickable header row + a body
+	 * panel containing the step indices (and required-item rows for the active step
+	 * when expanded).
+	 *
+	 * <p>Must be called on the EDT.
+	 */
+	private JPanel buildSectionBlock(StepSectionGroup group, boolean isActiveSection,
+		boolean expanded, int activeStepIndex, List<RequiredItemDisplay> requiredItems)
+	{
+		JPanel block = new JPanel();
+		block.setLayout(new BoxLayout(block, BoxLayout.Y_AXIS));
+		block.setBackground(BG);
+		block.setAlignmentX(LEFT_ALIGNMENT);
+		block.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+
+		// Body panel (shown when expanded)
+		JPanel body = new JPanel();
+		body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
+		body.setBackground(new Color(20, 28, 45));
+		body.setBorder(BorderFactory.createEmptyBorder(2, 8, 2, 0));
+		body.setAlignmentX(LEFT_ALIGNMENT);
+		body.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+
+		for (int stepIdx : group.getStepIndices())
+		{
+			boolean isActive = stepIdx == activeStepIndex;
+			Color stepFg = isActive ? SECTION_HEADER_ACTIVE_FG : new Color(160, 160, 160);
+
+			JLabel stepLabel = new JLabel("• Step " + stepIdx);
+			stepLabel.setFont(FontManager.getRunescapeSmallFont());
+			stepLabel.setForeground(stepFg);
+			stepLabel.setAlignmentX(LEFT_ALIGNMENT);
+			body.add(stepLabel);
+
+			if (isActive && requiredItems != null && !requiredItems.isEmpty())
+			{
+				JPanel itemsInSection = new JPanel();
+				itemsInSection.setLayout(new BoxLayout(itemsInSection, BoxLayout.Y_AXIS));
+				itemsInSection.setBackground(new Color(20, 28, 45));
+				itemsInSection.setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 0));
+				itemsInSection.setAlignmentX(LEFT_ALIGNMENT);
+				itemsInSection.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+
+				JLabel neededLabel = new JLabel("Items needed:");
+				neededLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
+				neededLabel.setForeground(new Color(180, 180, 180));
+				neededLabel.setAlignmentX(LEFT_ALIGNMENT);
+				itemsInSection.add(neededLabel);
+				itemsInSection.add(Box.createVerticalStrut(2));
+
+				for (RequiredItemDisplay row : requiredItems)
+				{
+					JPanel rowPanel = buildItemRow(row);
+					rowPanel.setAlignmentX(LEFT_ALIGNMENT);
+					itemsInSection.add(rowPanel);
+					itemsInSection.add(Box.createVerticalStrut(2));
+				}
+
+				body.add(itemsInSection);
+			}
+		}
+
+		body.setVisible(expanded);
+
+		// Header button
+		int stepCount = group.getStepIndices().size();
+		String headerText = buildHeaderText(group.getName(), stepCount, expanded);
+
+		JButton header = new JButton(headerText);
+		header.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
+		header.setForeground(isActiveSection ? SECTION_HEADER_ACTIVE_FG : SECTION_HEADER_FG);
+		header.setBackground(new Color(35, 45, 65));
+		header.setBorderPainted(false);
+		header.setFocusPainted(false);
+		header.setContentAreaFilled(true);
+		header.setHorizontalAlignment(SwingConstants.LEFT);
+		header.setAlignmentX(LEFT_ALIGNMENT);
+		header.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+
+		final String groupName = group.getName();
+		header.addActionListener(e ->
+		{
+			boolean nowExpanded = !body.isVisible();
+			sectionExpandState.put(groupName, nowExpanded);
+			body.setVisible(nowExpanded);
+			header.setText(buildHeaderText(groupName, stepCount, nowExpanded));
+			sectionsPanel.revalidate();
+			sectionsPanel.repaint();
+			revalidate();
+			if (getParent() != null)
+			{
+				getParent().revalidate();
+			}
+		});
+
+		block.add(header);
+		block.add(body);
+		return block;
+	}
+
+	/** Formats the section header text with the expand/collapse arrow glyph. */
+	private static String buildHeaderText(String sectionName, int stepCount, boolean isExpanded)
+	{
+		String arrow = isExpanded ? "▼ " : "▶ ";
+		return arrow + sectionName + " (" + stepCount + " step" + (stepCount == 1 ? "" : "s") + ")";
+	}
+
+	// ── Flat required-items display (unchanged from B.5.1) ───────────────────
 
 	/**
 	 * Rebuilds the required-items subsection from pre-resolved display rows.
@@ -266,7 +491,7 @@ public class StepProgressView extends JPanel
 	{
 		JPanel rowPanel = new JPanel();
 		rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
-		rowPanel.setBackground(new Color(25, 35, 55));
+		rowPanel.setBackground(BG);
 		rowPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 32));
 
 		// --- Icon ---
