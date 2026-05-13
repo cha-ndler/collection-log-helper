@@ -25,6 +25,7 @@
 package com.collectionloghelper.overlay;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
+import com.collectionloghelper.ObjectHighlightStyle;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -54,6 +55,7 @@ import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayUtil;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
+import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 
@@ -71,6 +73,9 @@ public class ObjectHighlightOverlay extends Overlay
 
 	@Inject
 	private TooltipManager tooltipManager;
+
+	@Inject
+	private ModelOutlineRenderer modelOutlineRenderer;
 
 	private volatile Set<Integer> targetObjectIds = Collections.emptySet();
 	private volatile String objectInteractAction;
@@ -309,16 +314,37 @@ public class ObjectHighlightOverlay extends Overlay
 		}
 
 		Color overlayColor = config.overlayColor();
+		final ObjectHighlightStyle style = config.objectHighlightStyle();
 		final Point mousePos = client.getMouseCanvasPosition();
 		final String builtTooltip = OverlayTooltipHelper.buildTooltip(tipText, action);
 		boolean tooltipShown = false;
 
 		for (TileObject obj : objects)
 		{
-			Shape hull = getHull(obj);
 			LocalPoint localPoint = obj.getLocalLocation();
-			tooltipShown |= renderObjectHighlight(graphics, hull, localPoint,
-				overlayColor, action, useItem, mousePos, builtTooltip, tooltipShown);
+			if (style == ObjectHighlightStyle.OUTLINE_GLOW)
+			{
+				// Wide feathered outline produces a soft glow effect around the model.
+				// outlineWidth=6 feather=4 (max) gives visible glow without performance cost.
+				modelOutlineRenderer.drawOutline(obj, 6, overlayColor, 4);
+				// Render action label above the object (tooltip not available without hull hitbox)
+				String displayText = this.cachedDisplayText;
+				if (localPoint != null && displayText != null)
+				{
+					Point textPoint = Perspective.getCanvasTextLocation(
+						client, graphics, localPoint, displayText, TEXT_HEIGHT_OFFSET);
+					if (textPoint != null)
+					{
+						OverlayUtil.renderTextLocation(graphics, textPoint, displayText, overlayColor);
+					}
+				}
+			}
+			else
+			{
+				Shape hull = getHull(obj);
+				tooltipShown |= renderObjectHighlight(graphics, hull, localPoint,
+					overlayColor, action, useItem, mousePos, builtTooltip, tooltipShown);
+			}
 		}
 
 		return null;
@@ -410,4 +436,5 @@ public class ObjectHighlightOverlay extends Overlay
 		}
 		return showedTooltip;
 	}
+
 }
