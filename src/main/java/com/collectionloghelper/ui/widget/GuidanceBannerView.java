@@ -25,10 +25,12 @@
 package com.collectionloghelper.ui.widget;
 
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.data.RequirementRow;
 import com.collectionloghelper.data.RequirementsChecker;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -57,6 +59,9 @@ public class GuidanceBannerView extends JPanel
 	private final JPanel guidanceBannerPanel;
 	private final JLabel guidanceBannerLabel;
 	private final JLabel requirementsWarningLabel;
+
+	// Per-source requirements section (quest / skill / diary rows)
+	private final RequirementsView requirementsView;
 
 	// Clue-guidance banner (purple/blue)
 	private final JPanel clueGuidanceBanner;
@@ -96,6 +101,12 @@ public class GuidanceBannerView extends JPanel
 
 		add(guidanceBannerPanel);
 
+		// Per-source requirements section (hidden by default; shown when source has requirements)
+		requirementsView = new RequirementsView();
+		requirementsView.setAlignmentX(CENTER_ALIGNMENT);
+		requirementsView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		add(requirementsView);
+
 		// Clue guidance banner (hidden by default)
 		clueGuidanceBanner = new JPanel(new BorderLayout());
 		clueGuidanceBanner.setBackground(new Color(40, 40, 60));
@@ -112,11 +123,18 @@ public class GuidanceBannerView extends JPanel
 	}
 
 	/**
-	 * Shows the guidance headline for the given source.
-	 * Handles {@code null} source by hiding the banner.
+	 * Shows the guidance headline for the given source and, below it, the
+	 * per-source requirements section.
+	 *
+	 * <p>Handles {@code null} source by hiding the banner.
 	 * Safe to call from any thread.
+	 *
+	 * @param source  the source being guided (may be {@code null})
+	 * @param requirementRows pre-built requirement rows produced by
+	 *                        {@link com.collectionloghelper.data.RequirementsChecker#buildRequirementRows}
+	 *                        on the client thread; may be {@code null} or empty
 	 */
-	public void showGuidance(CollectionLogSource source)
+	public void showGuidance(CollectionLogSource source, List<RequirementRow> requirementRows)
 	{
 		if (source == null)
 		{
@@ -126,6 +144,8 @@ public class GuidanceBannerView extends JPanel
 		// Snapshot before dispatch
 		final String sourceName = source.getName();
 		final List<String> unmet = requirementsChecker.getUnmetRequirements(sourceName);
+		final List<RequirementRow> rows =
+			requirementRows != null ? requirementRows : Collections.emptyList();
 
 		SwingUtilities.invokeLater(() ->
 		{
@@ -148,10 +168,14 @@ public class GuidanceBannerView extends JPanel
 				guidanceBannerPanel.getParent().revalidate();
 			}
 		});
+
+		// Delegate to RequirementsView \u2014 hides itself when rows is empty
+		requirementsView.showRequirements(rows);
 	}
 
 	/**
-	 * Hides the active-guidance headline. Safe to call from any thread.
+	 * Hides the active-guidance headline and requirements section.
+	 * Safe to call from any thread.
 	 */
 	public void hideGuidance()
 	{
@@ -165,6 +189,7 @@ public class GuidanceBannerView extends JPanel
 				guidanceBannerPanel.getParent().revalidate();
 			}
 		});
+		requirementsView.hideRequirements();
 	}
 
 	/**

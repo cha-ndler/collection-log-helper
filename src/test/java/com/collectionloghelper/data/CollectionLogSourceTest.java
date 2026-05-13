@@ -120,7 +120,7 @@ public class CollectionLogSourceTest
 	@Test
 	public void getWorldPointWithChecker_firstAccessible()
 	{
-		SourceRequirements reqs = new SourceRequirements(Collections.singletonList("DRAGON_SLAYER_II"), null);
+		SourceRequirements reqs = new SourceRequirements(Collections.singletonList("DRAGON_SLAYER_II"), null, null);
 		Waypoint wp1 = new Waypoint("Shortcut", 2500, 2600, 0, reqs);
 		Waypoint wp2 = new Waypoint("Walk", 3500, 3600, 0, null);
 
@@ -134,7 +134,7 @@ public class CollectionLogSourceTest
 	@Test
 	public void getWorldPointWithChecker_firstLocked_fallsToSecond()
 	{
-		SourceRequirements reqs = new SourceRequirements(Collections.singletonList("DRAGON_SLAYER_II"), null);
+		SourceRequirements reqs = new SourceRequirements(Collections.singletonList("DRAGON_SLAYER_II"), null, null);
 		Waypoint wp1 = new Waypoint("Shortcut", 2500, 2600, 0, reqs);
 		Waypoint wp2 = new Waypoint("Walk", 3500, 3600, 0, null);
 
@@ -148,8 +148,8 @@ public class CollectionLogSourceTest
 	@Test
 	public void getWorldPointWithChecker_allLocked_fallsToLast()
 	{
-		SourceRequirements reqs1 = new SourceRequirements(Collections.singletonList("QUEST_A"), null);
-		SourceRequirements reqs2 = new SourceRequirements(Collections.singletonList("QUEST_B"), null);
+		SourceRequirements reqs1 = new SourceRequirements(Collections.singletonList("QUEST_A"), null, null);
+		SourceRequirements reqs2 = new SourceRequirements(Collections.singletonList("QUEST_B"), null, null);
 		Waypoint wp1 = new Waypoint("Best", 1000, 1000, 0, reqs1);
 		Waypoint wp2 = new Waypoint("Alt", 2000, 2000, 0, reqs2);
 
@@ -224,7 +224,7 @@ public class CollectionLogSourceTest
 	@Test
 	public void getDisplayLocationWithChecker_allLockedFallsToLastName()
 	{
-		SourceRequirements reqs = new SourceRequirements(Collections.singletonList("QUEST_A"), null);
+		SourceRequirements reqs = new SourceRequirements(Collections.singletonList("QUEST_A"), null, null);
 		Waypoint wp1 = new Waypoint("First", 1000, 1000, 0, reqs);
 		Waypoint wp2 = new Waypoint("Last", 2000, 2000, 0, reqs);
 

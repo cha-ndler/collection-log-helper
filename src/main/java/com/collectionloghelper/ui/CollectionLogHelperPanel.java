@@ -35,6 +35,7 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
+import com.collectionloghelper.data.RequirementRow;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.guidance.RequiredItemDisplay;
 import com.collectionloghelper.data.SlayerTaskState;
@@ -596,13 +597,14 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		return quickGuidePanelView.create(topItem, guidanceActive, guidedSource);
 	}
 
-	public void setGuidanceState(boolean active, CollectionLogSource source)
+	public void setGuidanceState(boolean active, CollectionLogSource source,
+		List<RequirementRow> requirementRows)
 	{
 		guidanceActive = active;
 		guidedSource = source;
 		if (active && source != null)
 		{
-			guidanceBannerView.showGuidance(source);
+			guidanceBannerView.showGuidance(source, requirementRows);
 		}
 		else
 		{
