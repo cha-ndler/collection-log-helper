@@ -27,7 +27,9 @@ package com.collectionloghelper.data;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import javax.annotation.Nullable;
 import lombok.Value;
 
 /**
@@ -60,6 +62,18 @@ public class GuidanceStep
 
 	/** Item IDs that must be in inventory before this step can proceed. */
 	List<Integer> requiredItemIds;
+
+	/**
+	 * Optional per-item override for requiredItemIds.  When the active guidance has a
+	 * specific target collection-log item AND this map has an entry for that item, the
+	 * override list is used in place of {@link #requiredItemIds}.  Falls back to the
+	 * static {@link #requiredItemIds} when no override applies (null map, null target,
+	 * or target not present in the map).
+	 *
+	 * <p>Null by default — existing JSON without this field deserialises unchanged.
+	 */
+	@Nullable
+	Map<Integer, List<Integer>> perItemRequiredItemIds;
 
 	/**
 	 * Soft-recommended item IDs for this step: food, prayer potions, anti-venom,
@@ -286,6 +300,7 @@ public class GuidanceStep
 			this.dialogOptions,
 			alt.getTravelTip() != null ? alt.getTravelTip() : this.travelTip,
 			this.requiredItemIds,
+			this.perItemRequiredItemIds,
 			this.recommendedItemIds,
 			alt.getCompletionCondition() != null ? alt.getCompletionCondition() : this.completionCondition,
 			this.completionItemId,
