@@ -35,8 +35,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 /**
- * Unit tests for {@link GuidanceStep#resolveDescription(Integer)} and the
- * {@code perItemStepDescription} schema field.
+ * Unit tests for {@link GuidanceStep#resolveDescription(Integer)},
+ * {@link GuidanceStep#resolveNpcId(Integer)}, and the
+ * {@code perItemStepDescription} / {@code perItemNpcId} schema fields.
  *
  * <p>Acceptance criteria verified:
  * <ol>
@@ -44,6 +45,10 @@ import static org.junit.Assert.assertNull;
  *   <li>resolveDescription(itemId) returns the override when the map has a matching entry.</li>
  *   <li>resolveDescription(itemId) falls back to static when the map exists but has no entry for the target.</li>
  *   <li>resolveDescription(itemId) falls back to static when the map is null.</li>
+ *   <li>resolveNpcId(null) returns the static npcId.</li>
+ *   <li>resolveNpcId(itemId) returns the override when the map has a matching entry.</li>
+ *   <li>resolveNpcId(itemId) falls back to static when the map exists but has no entry for the target.</li>
+ *   <li>resolveNpcId(itemId) falls back to static when the map is null.</li>
  *   <li>Schema deserialisation: JSON without {@code perItemStepDescription} yields a null field (backwards-compatible).</li>
  *   <li>Schema deserialisation: JSON with {@code perItemStepDescription} populates the map correctly.</li>
  * </ol>
@@ -160,6 +165,63 @@ public class GuidanceStepTest
 		assertEquals("Tier 1 override", step.resolveDescription(1001));
 	}
 
+	// ── resolveNpcId constants ─────────────────────────────────────────────────
+
+	private static final int STATIC_NPC_ID = 5000;
+	private static final int OVERRIDE_NPC_ID = 6001;
+	private static final int OTHER_NPC_ID = 7777;
+
+	// ── resolveNpcId: null targetItemId ───────────────────────────────────────
+
+	@Test
+	public void resolveNpcId_nullTarget_returnsStaticNpcId()
+	{
+		Map<Integer, Integer> npcOverrides = new HashMap<>();
+		npcOverrides.put(ITEM_TIER1, OVERRIDE_NPC_ID);
+
+		GuidanceStep step = stepWithNpcOverrides(STATIC_NPC_ID, npcOverrides);
+
+		assertEquals(STATIC_NPC_ID, step.resolveNpcId(null));
+	}
+
+	// ── resolveNpcId: map has matching entry ──────────────────────────────────
+
+	@Test
+	public void resolveNpcId_targetInMap_returnsOverrideNpcId()
+	{
+		Map<Integer, Integer> npcOverrides = new HashMap<>();
+		npcOverrides.put(ITEM_TIER1, OVERRIDE_NPC_ID);
+		npcOverrides.put(ITEM_TIER5, OTHER_NPC_ID);
+
+		GuidanceStep step = stepWithNpcOverrides(STATIC_NPC_ID, npcOverrides);
+
+		assertEquals(OVERRIDE_NPC_ID, step.resolveNpcId(ITEM_TIER1));
+		assertEquals(OTHER_NPC_ID, step.resolveNpcId(ITEM_TIER5));
+	}
+
+	// ── resolveNpcId: map exists but target not in it ─────────────────────────
+
+	@Test
+	public void resolveNpcId_targetNotInMap_returnsStaticNpcId()
+	{
+		Map<Integer, Integer> npcOverrides = new HashMap<>();
+		npcOverrides.put(ITEM_TIER1, OVERRIDE_NPC_ID);
+
+		GuidanceStep step = stepWithNpcOverrides(STATIC_NPC_ID, npcOverrides);
+
+		assertEquals(STATIC_NPC_ID, step.resolveNpcId(ITEM_UNKNOWN));
+	}
+
+	// ── resolveNpcId: null map ────────────────────────────────────────────────
+
+	@Test
+	public void resolveNpcId_nullMap_returnsStaticNpcId()
+	{
+		GuidanceStep step = stepWithNpcOverrides(STATIC_NPC_ID, null);
+
+		assertEquals(STATIC_NPC_ID, step.resolveNpcId(ITEM_TIER1));
+	}
+
 	// ── Helper ────────────────────────────────────────────────────────────────
 
 	private static GuidanceStep stepWithOverrides(String description,
@@ -169,7 +231,39 @@ public class GuidanceStepTest
 			description,
 			perItemStepDescription,
 			0, 0, 0,       // worldX, worldY, worldPlane
-			0, null, null,  // npcId, interactAction, dialogOptions
+			0, null, null, null,  // npcId, perItemNpcId, interactAction, dialogOptions
+			null, null,     // travelTip, requiredItemIds
+			null,           // perItemRequiredItemIds
+			null,           // recommendedItemIds
+			CompletionCondition.MANUAL,
+			0, 0, 0, 0,    // completionItemId, completionItemCount, completionDistance, completionNpcId
+			null,           // completionNpcIds
+			null,           // worldMessage
+			0, null, null,  // objectId, objectIds, objectInteractAction
+			null, null,     // highlightItemIds, groundItemIds
+			null,           // completionChatPattern
+			0, 0,           // completionVarbitId, completionVarbitValue
+			false,          // useItemOnObject
+			0,              // objectMaxDistance
+			null,           // objectFilterTiles
+			null,           // highlightWidgetIds
+			0, 0,           // loopBackToStep, loopCount
+			null,           // skipIfHasAnyItemIds
+			null,           // dynamicItemObjectTiers
+			null,           // completionZone
+			null,           // conditionalAlternatives
+			null            // section
+		);
+	}
+
+	private static GuidanceStep stepWithNpcOverrides(int npcId,
+		Map<Integer, Integer> perItemNpcId)
+	{
+		return new GuidanceStep(
+			STATIC_DESC,
+			null,           // perItemStepDescription
+			0, 0, 0,       // worldX, worldY, worldPlane
+			npcId, perItemNpcId, null, null,  // npcId, perItemNpcId, interactAction, dialogOptions
 			null, null,     // travelTip, requiredItemIds
 			null,           // perItemRequiredItemIds
 			null,           // recommendedItemIds

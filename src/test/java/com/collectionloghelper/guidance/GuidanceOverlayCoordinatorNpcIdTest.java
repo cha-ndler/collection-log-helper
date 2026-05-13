@@ -41,12 +41,12 @@ import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import com.collectionloghelper.overlay.WidgetHighlightOverlay;
 import com.collectionloghelper.overlay.WorldMapDestinationOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
-import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 import net.runelite.api.Client;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.callback.ClientThread;
@@ -63,32 +63,31 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
  * Tests that {@link GuidanceOverlayCoordinator#activateGuidance} passes the
- * per-item-resolved description to the panel's {@code updateStepProgress} call.
+ * per-item-resolved NPC ID to {@link GuidanceOverlay#setTargetNpcId} when a step
+ * has a {@code perItemNpcId} override for the active target item.
  *
  * <p>Acceptance criteria:
  * <ul>
  *   <li>When {@code targetItemId} is non-null and the active step has a matching
- *       {@code perItemStepDescription} entry, {@code updateStepProgress} receives
- *       the override text.</li>
- *   <li>When {@code targetItemId} is null (no item context), {@code updateStepProgress}
- *       receives the static description.</li>
+ *       {@code perItemNpcId} entry, {@code guidanceOverlay.setTargetNpcId} receives
+ *       the override NPC ID.</li>
+ *   <li>When {@code targetItemId} is null (no item context), {@code guidanceOverlay.setTargetNpcId}
+ *       receives the static {@code npcId}.</li>
  * </ul>
  */
 @RunWith(MockitoJUnitRunner.class)
-public class GuidanceOverlayCoordinatorDescriptionTest
+public class GuidanceOverlayCoordinatorNpcIdTest
 {
-	private static final int TARGET_ITEM_ID = 1001;
-	private static final String STATIC_DESC = "Kill soldiers for armour";
-	private static final String OVERRIDE_DESC = "Kill Tier 1 soldiers (40 kills)";
+	private static final int TARGET_ITEM_ID = 2003;
+	private static final int STATIC_NPC_ID = 5000;
+	private static final int OVERRIDE_NPC_ID = 6001;
 
 	@Mock
 	private Client client;
@@ -132,8 +131,6 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 	private GroundItemHighlightOverlay groundItemHighlightOverlay;
 	@Mock
 	private WidgetHighlightOverlay widgetHighlightOverlay;
-	@Mock
-	private CollectionLogHelperPanel panel;
 
 	private GuidanceOverlayCoordinator coordinator;
 
@@ -174,92 +171,102 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay);
 
-		coordinator.setPanel(panel);
-
 		when(requirementsChecker.getUnmetRequirements(any())).thenReturn(Collections.emptyList());
 		when(requirementsChecker.buildRequirementRows(any())).thenReturn(Collections.emptyList());
 	}
 
 	/**
-	 * When the active step has a {@code perItemStepDescription} entry for the active
-	 * target item, the coordinator must pass the override text — not the static
-	 * description — to {@code panel.updateStepProgress}.
+	 * When the active step has a {@code perItemNpcId} entry for the active target item,
+	 * the coordinator must pass the override NPC ID to {@code guidanceOverlay.setTargetNpcId}.
 	 */
+	@SuppressWarnings("unchecked")
 	@Test
-	public void activateGuidance_withTargetItemId_panelReceivesOverrideDescription()
+	public void activateGuidance_withTargetItemId_overlayReceivesOverrideNpcId()
 	{
-		Map<Integer, String> descOverrides = new HashMap<>();
-		descOverrides.put(TARGET_ITEM_ID, OVERRIDE_DESC);
+		Map<Integer, Integer> npcOverrides = new HashMap<>();
+		npcOverrides.put(TARGET_ITEM_ID, OVERRIDE_NPC_ID);
 
-		GuidanceStep step = minimalStepWithDescOverride(STATIC_DESC, descOverrides);
-		CollectionLogSource source = sourceWithSteps("Shayzien Armour", step);
+		GuidanceStep step = minimalStepWithNpcOverride(STATIC_NPC_ID, npcOverrides);
+		CollectionLogSource source = sourceWithSteps("Perilous Moons", step);
 
-		// Sequencer reports the step as active at index 0
 		when(guidanceSequencer.isActive()).thenReturn(true);
 		when(guidanceSequencer.getCurrentStep()).thenReturn(step);
 		when(guidanceSequencer.getRawCurrentStep()).thenReturn(step);
 		when(guidanceSequencer.getCurrentIndex()).thenReturn(0);
-		when(guidanceSequencer.getTotalSteps()).thenReturn(1);
-		// getActiveSource is used by onStepChanged (not the activation path); lenient to avoid strict fail
-		org.mockito.Mockito.lenient().when(guidanceSequencer.getActiveSource()).thenReturn(source);
+		when(guidanceSequencer.getActiveSource()).thenReturn(source);
+		// getTotalSteps not needed: panel is null and InfoBox is not created in this test
+		org.mockito.Mockito.lenient().when(guidanceSequencer.getTotalSteps()).thenReturn(1);
+
+		// Capture the onStepChanged callback passed to startSequence and invoke it
+		// synchronously so applyStepToOverlays (which calls setTargetNpcId) runs.
+		doAnswer(inv ->
+		{
+			Consumer<GuidanceStep> onStepChanged = inv.getArgument(1);
+			onStepChanged.accept(step);
+			return null;
+		}).when(guidanceSequencer).startSequence(any(), any(), any());
 
 		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0), TARGET_ITEM_ID);
 
-		ArgumentCaptor<String> descCaptor = ArgumentCaptor.forClass(String.class);
-		// The activation path calls the 6-arg overload: (int, int, String, boolean, List, List)
-		verify(panel, atLeastOnce()).updateStepProgress(
-			anyInt(), anyInt(), descCaptor.capture(), anyBoolean(), anyList(), anyList());
+		ArgumentCaptor<Integer> npcIdCaptor = ArgumentCaptor.forClass(Integer.class);
+		verify(guidanceOverlay, atLeastOnce()).setTargetNpcId(npcIdCaptor.capture());
 
-		// The first updateStepProgress call (before deferred item resolution) uses the resolved desc.
-		assertEquals(OVERRIDE_DESC, descCaptor.getAllValues().get(0));
+		assertEquals(OVERRIDE_NPC_ID, (int) npcIdCaptor.getAllValues().get(0));
 	}
 
 	/**
-	 * When no target item is set (null), the coordinator must pass the static description
-	 * even if the step has a non-empty {@code perItemStepDescription} map.
+	 * When no target item is set (null), the coordinator must pass the static NPC ID
+	 * even if the step has a non-empty {@code perItemNpcId} map.
 	 */
+	@SuppressWarnings("unchecked")
 	@Test
-	public void activateGuidance_withNullTargetItemId_panelReceivesStaticDescription()
+	public void activateGuidance_withNullTargetItemId_overlayReceivesStaticNpcId()
 	{
-		Map<Integer, String> descOverrides = new HashMap<>();
-		descOverrides.put(TARGET_ITEM_ID, OVERRIDE_DESC);
+		Map<Integer, Integer> npcOverrides = new HashMap<>();
+		npcOverrides.put(TARGET_ITEM_ID, OVERRIDE_NPC_ID);
 
-		GuidanceStep step = minimalStepWithDescOverride(STATIC_DESC, descOverrides);
-		CollectionLogSource source = sourceWithSteps("Shayzien Armour", step);
+		GuidanceStep step = minimalStepWithNpcOverride(STATIC_NPC_ID, npcOverrides);
+		CollectionLogSource source = sourceWithSteps("Perilous Moons", step);
 
 		when(guidanceSequencer.isActive()).thenReturn(true);
 		when(guidanceSequencer.getCurrentStep()).thenReturn(step);
 		when(guidanceSequencer.getRawCurrentStep()).thenReturn(step);
 		when(guidanceSequencer.getCurrentIndex()).thenReturn(0);
-		when(guidanceSequencer.getTotalSteps()).thenReturn(1);
-		// getActiveSource is used by onStepChanged (not the activation path); lenient to avoid strict fail
-		org.mockito.Mockito.lenient().when(guidanceSequencer.getActiveSource()).thenReturn(source);
+		when(guidanceSequencer.getActiveSource()).thenReturn(source);
+		org.mockito.Mockito.lenient().when(guidanceSequencer.getTotalSteps()).thenReturn(1);
+
+		// Capture the onStepChanged callback passed to startSequence and invoke it
+		// synchronously so applyStepToOverlays (which calls setTargetNpcId) runs.
+		doAnswer(inv ->
+		{
+			Consumer<GuidanceStep> onStepChanged = inv.getArgument(1);
+			onStepChanged.accept(step);
+			return null;
+		}).when(guidanceSequencer).startSequence(any(), any(), any());
 
 		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0), null);
 
-		ArgumentCaptor<String> descCaptor = ArgumentCaptor.forClass(String.class);
-		// The activation path calls the 6-arg overload: (int, int, String, boolean, List, List)
-		verify(panel, atLeastOnce()).updateStepProgress(
-			anyInt(), anyInt(), descCaptor.capture(), anyBoolean(), anyList(), anyList());
+		ArgumentCaptor<Integer> npcIdCaptor = ArgumentCaptor.forClass(Integer.class);
+		verify(guidanceOverlay, atLeastOnce()).setTargetNpcId(npcIdCaptor.capture());
 
-		assertEquals(STATIC_DESC, descCaptor.getAllValues().get(0));
+		assertEquals(STATIC_NPC_ID, (int) npcIdCaptor.getAllValues().get(0));
 	}
 
 	// ── helpers ───────────────────────────────────────────────────────────────
 
-	private static GuidanceStep minimalStepWithDescOverride(String description,
-		Map<Integer, String> perItemStepDescription)
+	private static GuidanceStep minimalStepWithNpcOverride(int npcId,
+		Map<Integer, Integer> perItemNpcId)
 	{
 		return new GuidanceStep(
-			description,
-			perItemStepDescription,
-			0, 0, 0,       // worldX, worldY, worldPlane
-			0, null, null, null,  // npcId, perItemNpcId, interactAction, dialogOptions
+			"Kill the boss",
+			null,           // perItemStepDescription
+			3200, 3200, 0, // worldX, worldY, worldPlane — non-zero to reach the NPC branch
+			npcId, perItemNpcId, null, null,  // npcId, perItemNpcId, interactAction, dialogOptions
 			null, null,     // travelTip, requiredItemIds
 			null,           // perItemRequiredItemIds
 			null,           // recommendedItemIds
-			CompletionCondition.MANUAL,
-			0, 0, 0, 0,    // completionItemId, completionItemCount, completionDistance, completionNpcId
+			CompletionCondition.ACTOR_DEATH,
+			0, 0, 0, npcId,  // completionItemId, completionItemCount, completionDistance, completionNpcId
 			null,           // completionNpcIds
 			null,           // worldMessage
 			0, null, null,  // objectId, objectIds, objectInteractAction
@@ -283,7 +290,7 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 	{
 		return new CollectionLogSource(
 			name,
-			CollectionLogCategory.MINIGAMES,
+			CollectionLogCategory.BOSSES,
 			0, 0, 0,
 			0, 0,
 			null, null, null, 0.0,
