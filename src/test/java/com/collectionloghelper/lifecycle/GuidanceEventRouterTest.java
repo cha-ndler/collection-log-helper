@@ -118,6 +118,7 @@ public class GuidanceEventRouterTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
 			CompletionCondition.NPC_TALKED_TO,
 			0, 0, 0, npcId,

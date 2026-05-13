@@ -28,7 +28,7 @@ import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.efficiency.ScoredItem;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -53,7 +53,7 @@ public class QuickGuidePanelView
 	private static final Color GUIDE_ME_COLOR = new Color(30, 120, 30);
 	private static final Color STOP_GUIDANCE_COLOR = new Color(140, 30, 30);
 
-	private final Consumer<CollectionLogSource> guidanceActivator;
+	private final BiConsumer<CollectionLogSource, Integer> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 
 	/** Retained so {@link #syncGuidanceState} can update button text and color. */
@@ -61,7 +61,7 @@ public class QuickGuidePanelView
 	/** The source the last-created panel is tracking. */
 	private CollectionLogSource lastSource;
 
-	public QuickGuidePanelView(Consumer<CollectionLogSource> guidanceActivator,
+	public QuickGuidePanelView(BiConsumer<CollectionLogSource, Integer> guidanceActivator,
 		Runnable guidanceDeactivator)
 	{
 		this.guidanceActivator = guidanceActivator;
@@ -80,6 +80,22 @@ public class QuickGuidePanelView
 	public JPanel create(ScoredItem topItem, boolean guidanceActive, CollectionLogSource guidedSource)
 	{
 		final CollectionLogSource source = topItem.getSource();
+		// Resolve the target item ID for per-item guidance overrides.
+		// Prefer the best (most efficient missing) item from the scored item;
+		// fall back to the first item in the source list when no best item is set.
+		final Integer topItemId;
+		if (topItem.getBestItem() != null)
+		{
+			topItemId = topItem.getBestItem().getItemId();
+		}
+		else if (source.getItems() != null && !source.getItems().isEmpty())
+		{
+			topItemId = source.getItems().get(0).getItemId();
+		}
+		else
+		{
+			topItemId = null;
+		}
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -132,7 +148,7 @@ public class QuickGuidePanelView
 			}
 			else
 			{
-				guidanceActivator.accept(source);
+				guidanceActivator.accept(source, topItemId);
 				guideButton.setText("Stop Guidance");
 				guideButton.setBackground(STOP_GUIDANCE_COLOR);
 			}

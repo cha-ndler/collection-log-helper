@@ -918,6 +918,7 @@ public class StepProgressViewTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
@@ -942,6 +943,7 @@ public class StepProgressViewTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // perItemRequiredItemIds
 			recommendedItemIds,
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
