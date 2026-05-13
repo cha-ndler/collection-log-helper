@@ -31,6 +31,7 @@ import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import com.collectionloghelper.overlay.WidgetHighlightOverlay;
+import com.collectionloghelper.overlay.WorldMapDestinationOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -51,6 +52,7 @@ public class OverlayRegistry
 	private final ObjectHighlightOverlay objectHighlightOverlay;
 	private final ItemHighlightOverlay itemHighlightOverlay;
 	private final WorldMapRouteOverlay worldMapRouteOverlay;
+	private final WorldMapDestinationOverlay worldMapDestinationOverlay;
 	private final GroundItemHighlightOverlay groundItemHighlightOverlay;
 	private final WidgetHighlightOverlay widgetHighlightOverlay;
 
@@ -63,6 +65,7 @@ public class OverlayRegistry
 		ObjectHighlightOverlay objectHighlightOverlay,
 		ItemHighlightOverlay itemHighlightOverlay,
 		WorldMapRouteOverlay worldMapRouteOverlay,
+		WorldMapDestinationOverlay worldMapDestinationOverlay,
 		GroundItemHighlightOverlay groundItemHighlightOverlay,
 		WidgetHighlightOverlay widgetHighlightOverlay)
 	{
@@ -73,6 +76,7 @@ public class OverlayRegistry
 		this.objectHighlightOverlay = objectHighlightOverlay;
 		this.itemHighlightOverlay = itemHighlightOverlay;
 		this.worldMapRouteOverlay = worldMapRouteOverlay;
+		this.worldMapDestinationOverlay = worldMapDestinationOverlay;
 		this.groundItemHighlightOverlay = groundItemHighlightOverlay;
 		this.widgetHighlightOverlay = widgetHighlightOverlay;
 	}
@@ -86,6 +90,7 @@ public class OverlayRegistry
 		overlayManager.add(objectHighlightOverlay);
 		overlayManager.add(itemHighlightOverlay);
 		overlayManager.add(worldMapRouteOverlay);
+		overlayManager.add(worldMapDestinationOverlay);
 		overlayManager.add(groundItemHighlightOverlay);
 		overlayManager.add(widgetHighlightOverlay);
 	}
@@ -99,6 +104,7 @@ public class OverlayRegistry
 		overlayManager.remove(objectHighlightOverlay);
 		overlayManager.remove(itemHighlightOverlay);
 		overlayManager.remove(worldMapRouteOverlay);
+		overlayManager.remove(worldMapDestinationOverlay);
 		overlayManager.remove(groundItemHighlightOverlay);
 		overlayManager.remove(widgetHighlightOverlay);
 	}
