@@ -34,6 +34,7 @@ import java.awt.Component;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -753,6 +754,160 @@ public class StepProgressViewTest
 			}
 		}
 		return result;
+	}
+
+	// ── Reset / Sync button tests (#369) ────────────────────────────────────
+
+	/**
+	 * After construction the Reset and Sync buttons must be present in the
+	 * step-button row (findable via findButtonByText).
+	 */
+	@Test
+	public void construction_hasResetAndSyncButtons()
+	{
+		assertNotNull("Reset button must exist after construction", findButtonByText(view, "Reset"));
+		assertNotNull("Sync button must exist after construction", findButtonByText(view, "Sync"));
+	}
+
+	/**
+	 * The Reset button must invoke the reset callback when clicked.
+	 */
+	@Test
+	public void resetButton_click_invokesResetCallback() throws Exception
+	{
+		AtomicBoolean resetFired = new AtomicBoolean(false);
+		view.setCallbacks(() -> {}, () -> {}, () -> resetFired.set(true), () -> {});
+		flushEdt();
+
+		JButton resetBtn = findButtonByText(view, "Reset");
+		assertNotNull("Reset button must be present", resetBtn);
+		SwingUtilities.invokeAndWait(() -> resetBtn.doClick());
+
+		assertTrue("Reset callback must fire when Reset button is clicked", resetFired.get());
+	}
+
+	/**
+	 * The Sync button must invoke the sync callback when clicked.
+	 */
+	@Test
+	public void syncButton_click_invokesSyncCallback() throws Exception
+	{
+		AtomicBoolean syncFired = new AtomicBoolean(false);
+		view.setCallbacks(() -> {}, () -> {}, () -> {}, () -> syncFired.set(true));
+		flushEdt();
+
+		JButton syncBtn = findButtonByText(view, "Sync");
+		assertNotNull("Sync button must be present", syncBtn);
+		SwingUtilities.invokeAndWait(() -> syncBtn.doClick());
+
+		assertTrue("Sync callback must fire when Sync button is clicked", syncFired.get());
+	}
+
+	/**
+	 * setCallbacks(advancer, skipper) two-arg overload must remain valid after the
+	 * new four-arg overload is introduced — existing callers are not broken.
+	 */
+	@Test
+	public void setCallbacks_twoArg_doesNotThrow()
+	{
+		view.setCallbacks(() -> {}, () -> {});
+	}
+
+	/**
+	 * When setCallbacks is called with null reset/sync callbacks, clicking the buttons
+	 * must not throw a NullPointerException.
+	 */
+	@Test
+	public void resetAndSyncButtons_nullCallbacks_doNotThrow() throws Exception
+	{
+		view.setCallbacks(() -> {}, () -> {}, null, null);
+		flushEdt();
+
+		JButton resetBtn = findButtonByText(view, "Reset");
+		JButton syncBtn = findButtonByText(view, "Sync");
+		assertNotNull(resetBtn);
+		assertNotNull(syncBtn);
+		SwingUtilities.invokeAndWait(() ->
+		{
+			resetBtn.doClick();
+			syncBtn.doClick();
+		});
+	}
+
+	/**
+	 * The Reset button has the tooltip "Restart from step 1".
+	 */
+	@Test
+	public void resetButton_hasExpectedTooltip()
+	{
+		JButton resetBtn = findButtonByText(view, "Reset");
+		assertNotNull(resetBtn);
+		assertEquals("Restart from step 1", resetBtn.getToolTipText());
+	}
+
+	/**
+	 * The Sync button has the tooltip "Re-evaluate current state".
+	 */
+	@Test
+	public void syncButton_hasExpectedTooltip()
+	{
+		JButton syncBtn = findButtonByText(view, "Sync");
+		assertNotNull(syncBtn);
+		assertEquals("Re-evaluate current state", syncBtn.getToolTipText());
+	}
+
+	// ── Helpers (Reset/Sync) ─────────────────────────────────────────────────
+
+	/**
+	 * Finds the first {@link JButton} anywhere in {@code root}'s component tree
+	 * whose text equals {@code text}. Searches recursively.
+	 */
+	private static JButton findButtonByText(JPanel root, String text)
+	{
+		for (Component c : root.getComponents())
+		{
+			if (c instanceof JButton)
+			{
+				JButton btn = (JButton) c;
+				if (text.equals(btn.getText()))
+				{
+					return btn;
+				}
+			}
+			else if (c instanceof JPanel)
+			{
+				JButton found = findButtonInPanel((JPanel) c, text);
+				if (found != null)
+				{
+					return found;
+				}
+			}
+		}
+		return null;
+	}
+
+	private static JButton findButtonInPanel(JPanel panel, String text)
+	{
+		for (Component c : panel.getComponents())
+		{
+			if (c instanceof JButton)
+			{
+				JButton btn = (JButton) c;
+				if (text.equals(btn.getText()))
+				{
+					return btn;
+				}
+			}
+			else if (c instanceof JPanel)
+			{
+				JButton found = findButtonInPanel((JPanel) c, text);
+				if (found != null)
+				{
+					return found;
+				}
+			}
+		}
+		return null;
 	}
 
 	/** Builds a minimal {@link GuidanceStep} with the given section label (may be null). */

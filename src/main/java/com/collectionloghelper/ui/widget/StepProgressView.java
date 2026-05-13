@@ -97,6 +97,8 @@ public class StepProgressView extends JPanel
 	private final JPanel sectionsPanel;
 	private final JButton nextStepButton;
 	private final JButton skipStepButton;
+	private final JButton resetButton;
+	private final JButton syncButton;
 
 	/**
 	 * Per-section collapse state. True = expanded. New sections default to collapsed
@@ -106,6 +108,8 @@ public class StepProgressView extends JPanel
 
 	private Runnable stepAdvancer;
 	private Runnable stepSkipper;
+	private Runnable stepResetter;
+	private Runnable stepSyncer;
 
 	public StepProgressView(ItemManager itemManager)
 	{
@@ -182,6 +186,38 @@ public class StepProgressView extends JPanel
 		});
 		stepButtonRow.add(skipStepButton);
 
+		stepButtonRow.add(Box.createHorizontalStrut(4));
+
+		resetButton = new JButton("Reset");
+		resetButton.setFont(FontManager.getRunescapeSmallFont());
+		resetButton.setBackground(new Color(70, 50, 50));
+		resetButton.setForeground(new Color(200, 200, 200));
+		resetButton.setToolTipText("Restart from step 1");
+		resetButton.addActionListener(e ->
+		{
+			if (stepResetter != null)
+			{
+				stepResetter.run();
+			}
+		});
+		stepButtonRow.add(resetButton);
+
+		stepButtonRow.add(Box.createHorizontalStrut(4));
+
+		syncButton = new JButton("Sync");
+		syncButton.setFont(FontManager.getRunescapeSmallFont());
+		syncButton.setBackground(new Color(50, 60, 80));
+		syncButton.setForeground(new Color(200, 200, 200));
+		syncButton.setToolTipText("Re-evaluate current state");
+		syncButton.addActionListener(e ->
+		{
+			if (stepSyncer != null)
+			{
+				stepSyncer.run();
+			}
+		});
+		stepButtonRow.add(syncButton);
+
 		add(Box.createVerticalStrut(3));
 		add(stepButtonRow);
 	}
@@ -194,6 +230,23 @@ public class StepProgressView extends JPanel
 	{
 		this.stepAdvancer = advancer;
 		this.stepSkipper = skipper;
+	}
+
+	/**
+	 * Sets all four step-control callbacks: advance, skip, reset, and sync.
+	 * Any callback may be {@code null} (the corresponding button click will be a no-op).
+	 *
+	 * @param advancer  callback for the Next Step button
+	 * @param skipper   callback for the Skip button
+	 * @param resetter  callback for the Reset button (restart from step 1, no skip-chain)
+	 * @param syncer    callback for the Sync button (re-evaluate skip-chain against current state)
+	 */
+	public void setCallbacks(Runnable advancer, Runnable skipper, Runnable resetter, Runnable syncer)
+	{
+		this.stepAdvancer = advancer;
+		this.stepSkipper = skipper;
+		this.stepResetter = resetter;
+		this.stepSyncer = syncer;
 	}
 
 	/**
