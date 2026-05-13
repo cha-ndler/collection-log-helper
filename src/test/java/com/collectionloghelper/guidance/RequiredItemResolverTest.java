@@ -273,10 +273,11 @@ public class RequiredItemResolverTest
 			null,
 			null,
 			0, 0,
-			null,
-			null,
-			null,
-			null
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
+			null,  // completionZone
+			null,  // conditionalAlternatives
+			null   // section
 		);
 	}
 }
