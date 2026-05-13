@@ -112,7 +112,8 @@
         "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 8
+        "completionDistance": 8,
+        "section": "Travel"
       },
       {
         "description": "Kill General Graardor. Use Protect from Melee, pray Piety, and tank the minions. Kill Sergeant Steelwill first if you want to reduce damage taken",
@@ -121,7 +122,8 @@
         "worldPlane": 2,
         "objectId": 26415,
         "objectInteractAction": "Move",
-        "completionCondition": "PLAYER_ON_PLANE"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Combat"
       },
       {
         "description": "Get 40 Bandos killcount by killing goblins, hobgoblins, or jogres in the main chamber",
@@ -130,7 +132,8 @@
         "worldPlane": 2,
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 3975,
-        "completionVarbitValue": 40
+        "completionVarbitValue": 40,
+        "section": "Combat"
       },
       {
         "description": "Enter the Bandos boss room and kill General Graardor",
@@ -142,7 +145,13 @@
         "npcId": 2215,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 2215
+        "completionNpcId": 2215,
+        "section": "Combat",
+        "recommendedItemIds": [
+          6685,
+          2434,
+          11804
+        ]
       }
     ],
     "afkLevel": 0
@@ -260,7 +269,8 @@
         "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 8
+        "completionDistance": 8,
+        "section": "Travel"
       },
       {
         "description": "Kill Commander Zilyana. Use Protect from Ranged and a crossbow. Kite her in a large loop around the room to avoid melee damage",
@@ -269,7 +279,8 @@
         "worldPlane": 2,
         "objectId": 26415,
         "objectInteractAction": "Move",
-        "completionCondition": "PLAYER_ON_PLANE"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Combat"
       },
       {
         "description": "Get 40 Saradomin killcount by killing knights and spiritual warriors in the main chamber",
@@ -278,7 +289,8 @@
         "worldPlane": 2,
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 3972,
-        "completionVarbitValue": 40
+        "completionVarbitValue": 40,
+        "section": "Combat"
       },
       {
         "description": "Enter the Saradomin boss room and kill Commander Zilyana",
@@ -290,7 +302,13 @@
         "npcId": 2205,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 2205
+        "completionNpcId": 2205,
+        "section": "Combat",
+        "recommendedItemIds": [
+          6685,
+          2434,
+          9185
+        ]
       }
     ],
     "afkLevel": 0
@@ -408,7 +426,8 @@
         "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 8
+        "completionDistance": 8,
+        "section": "Travel"
       },
       {
         "description": "Kill K'ril Tsutsaroth. Use Protect from Melee and high-healing food. His special attack can hit through prayer. Shadow of Tumeken or arclight effective",
@@ -417,7 +436,8 @@
         "worldPlane": 2,
         "objectId": 26415,
         "objectInteractAction": "Move",
-        "completionCondition": "PLAYER_ON_PLANE"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Combat"
       },
       {
         "description": "Get 40 Zamorak killcount by killing imps, werewolves, or vampyres in the main chamber",
@@ -426,7 +446,8 @@
         "worldPlane": 2,
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 3976,
-        "completionVarbitValue": 40
+        "completionVarbitValue": 40,
+        "section": "Combat"
       },
       {
         "description": "Enter the Zamorak boss room and kill K'ril Tsutsaroth",
@@ -438,7 +459,13 @@
         "npcId": 3129,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 3129
+        "completionNpcId": 3129,
+        "section": "Combat",
+        "recommendedItemIds": [
+          6685,
+          2434,
+          11804
+        ]
       }
     ],
     "afkLevel": 0
@@ -556,7 +583,8 @@
         "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 8
+        "completionDistance": 8,
+        "section": "Travel"
       },
       {
         "description": "Kill Kree'arra. Use Protect from Ranged and chinchompas or crossbow. Kite in a loop. All GWD bosses require 40 KC of the corresponding faction",
@@ -565,7 +593,8 @@
         "worldPlane": 2,
         "objectId": 26415,
         "objectInteractAction": "Move",
-        "completionCondition": "PLAYER_ON_PLANE"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Combat"
       },
       {
         "description": "Get 40 Armadyl killcount by killing aviansie in the main chamber",
@@ -574,7 +603,8 @@
         "worldPlane": 2,
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 3973,
-        "completionVarbitValue": 40
+        "completionVarbitValue": 40,
+        "section": "Combat"
       },
       {
         "description": "Use a mithril grapple to enter the Armadyl boss room and kill Kree'arra",
@@ -585,9 +615,17 @@
         "objectInteractAction": "Open",
         "npcId": 3162,
         "interactAction": "Attack",
-        "requiredItemIds": [9419],
+        "requiredItemIds": [
+          9419
+        ],
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 3162
+        "completionNpcId": 3162,
+        "section": "Combat",
+        "recommendedItemIds": [
+          6685,
+          2434,
+          9185
+        ]
       }
     ],
     "afkLevel": 0
@@ -693,7 +731,8 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Zul-andra teleport scroll (fastest), or fairy ring BJS + run east"
+        "travelTip": "Zul-andra teleport scroll (fastest), or fairy ring BJS + run east",
+        "section": "Travel"
       },
       {
         "description": "Board the Sacrificial boat to enter Zulrah's shrine",
@@ -702,7 +741,8 @@
         "worldPlane": 0,
         "objectId": 46241,
         "objectInteractAction": "Board",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
         "description": "Kill Zulrah. Learn the rotation patterns for efficient kills",
@@ -717,6 +757,12 @@
           2042,
           2043,
           2044
+        ],
+        "section": "Combat",
+        "recommendedItemIds": [
+          13441,
+          3024,
+          12913
         ]
       }
     ],
@@ -792,7 +838,8 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Lunar Isle teleport + talk to banker, Rellekka house portal, or Fremennik sea boots"
+        "travelTip": "Lunar Isle teleport + talk to banker, Rellekka house portal, or Fremennik sea boots",
+        "section": "Travel"
       },
       {
         "description": "Talk to Torfinn on the docks to sail to Ungael",
@@ -802,7 +849,8 @@
         "npcId": 10405,
         "interactAction": "Travel",
         "completionCondition": "NPC_TALKED_TO",
-        "completionNpcId": 10405
+        "completionNpcId": 10405,
+        "section": "Travel"
       },
       {
         "description": "Kill Vorkath. Use Protect from Ranged for standard phase, dodge acid pools, and click the Zombified Spawn immediately when it appears",
@@ -818,6 +866,12 @@
           8059,
           8060,
           8061
+        ],
+        "section": "Combat",
+        "recommendedItemIds": [
+          13441,
+          3024,
+          12913
         ]
       }
     ],
@@ -903,7 +957,8 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
-        "travelTip": "Key master teleport (fastest), or POH Taverley portal + navigate dungeon"
+        "travelTip": "Key master teleport (fastest), or POH Taverley portal + navigate dungeon",
+        "section": "Travel"
       },
       {
         "description": "Turn an Iron Winch to open a gate and enter the boss arena. Requires a hellhound Slayer task",
@@ -912,7 +967,8 @@
         "worldPlane": 0,
         "objectId": 23104,
         "objectInteractAction": "Turn",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
         "description": "Kill Cerberus. Protect from Magic, watch for the triple ghost special attack",
@@ -922,7 +978,13 @@
         "npcId": 5862,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 5862
+        "completionNpcId": 5862,
+        "section": "Combat",
+        "recommendedItemIds": [
+          2434,
+          3024,
+          12695
+        ]
       }
     ],
     "afkLevel": 0
@@ -1055,7 +1117,8 @@
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
         "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
@@ -1064,24 +1127,32 @@
         "worldPlane": 0,
         "objectId": 34359,
         "objectInteractAction": "Activate",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
         "description": "Navigate past the regular hydras to the Alchemical Hydra instance. Requires Slayer task.",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase \u2014 walk over the correct vent matching the Hydra's colour",
+        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase — walk over the correct vent matching the Hydra's colour",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
         "npcId": 8621,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8621
+        "completionNpcId": 8621,
+        "section": "Combat",
+        "recommendedItemIds": [
+          385,
+          2434,
+          12913
+        ]
       }
     ],
     "afkLevel": 0
@@ -3361,7 +3432,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Rex. Use Magic (fire spells work best). Rex is weak to Magic and uses melee \u2014 Protect from Melee when nearby",
+        "description": "Kill Dagannoth Rex. Use Magic (fire spells work best). Rex is weak to Magic and uses melee — Protect from Melee when nearby",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3433,7 +3504,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Prime. Use Ranged. Prime attacks with Magic \u2014 use Protect from Magic when targeting Prime",
+        "description": "Kill Dagannoth Prime. Use Ranged. Prime attacks with Magic — use Protect from Magic when targeting Prime",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3505,7 +3576,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Supreme. Use Melee. Supreme attacks with Ranged \u2014 use Protect from Missiles when targeting Supreme",
+        "description": "Kill Dagannoth Supreme. Use Melee. Supreme attacks with Ranged — use Protect from Missiles when targeting Supreme",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3958,7 +4029,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill the Chaos Elemental. Wear cheap gear \u2014 it can unequip your items. Use Protect from Magic and bring high-healing food",
+        "description": "Kill the Chaos Elemental. Wear cheap gear — it can unequip your items. Use Protect from Magic and bring high-healing food",
         "worldX": 3261,
         "worldY": 3927,
         "worldPlane": 0,
@@ -4371,7 +4442,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Callisto. Use Verac's or Arclight. Watch for the knockback shockwave and the healing cubs \u2014 kill cubs first",
+        "description": "Kill Callisto. Use Verac's or Arclight. Watch for the knockback shockwave and the healing cubs — kill cubs first",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
@@ -4580,7 +4651,9 @@
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
-        "requiredItemIds": [19685],
+        "requiredItemIds": [
+          19685
+        ],
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
       },
@@ -4654,9 +4727,13 @@
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
-        "requiredItemIds": [22875, 952],
+        "requiredItemIds": [
+          22875,
+          952
+        ],
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Kill Hespori. Use Protect from Magic, avoid the flower special attacks. Can only be fought when fully grown (~32 hours after planting)",
@@ -4666,7 +4743,12 @@
         "npcId": 8583,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8583
+        "completionNpcId": 8583,
+        "section": "Combat",
+        "recommendedItemIds": [
+          385,
+          2434
+        ]
       }
     ],
     "afkLevel": 1
@@ -4823,14 +4905,16 @@
         "objectId": 29777,
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room \u2014 combat, puzzle, and resource rooms \u2014 on your way to the final boss",
+        "description": "Enter the raid and scout rooms. Complete each room — combat, puzzle, and resource rooms — on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Combat"
       },
       {
         "description": "Defeat the Great Olm in the final room. Dodge head attacks, run from crystals, and watch for flame wall specials",
@@ -4838,7 +4922,13 @@
         "worldY": 3573,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your completed Chambers of Xeric count is:"
+        "completionChatPattern": "Your completed Chambers of Xeric count is:",
+        "section": "Combat",
+        "recommendedItemIds": [
+          6685,
+          3024,
+          13652
+        ]
       }
     ],
     "ironKillTimeSeconds": 1029,
@@ -5056,14 +5146,16 @@
         "objectId": 29777,
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room \u2014 combat, puzzle, and resource rooms \u2014 on your way to the final boss",
+        "description": "Enter the raid and scout rooms. Complete each room — combat, puzzle, and resource rooms — on your way to the final boss",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Combat"
       },
       {
         "description": "Defeat the Great Olm in the final room. Dodge head attacks, run from crystals, and watch for flame wall specials",
@@ -5071,7 +5163,13 @@
         "worldY": 3573,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your completed Chambers of Xeric Challenge Mode count is:"
+        "completionChatPattern": "Your completed Chambers of Xeric Challenge Mode count is:",
+        "section": "Combat",
+        "recommendedItemIds": [
+          6685,
+          3024,
+          13652
+        ]
       }
     ],
     "ironKillTimeSeconds": 1500,
@@ -5248,7 +5346,8 @@
         "objectId": 32653,
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
         "description": "Form a team and enter the Theatre. Fight through: The Maiden, Pestilent Bloat, Nylocas, Sotetseg, Xarpus, and finally Verzik Vitur",
@@ -5256,7 +5355,13 @@
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your completed Theatre of Blood count is:"
+        "completionChatPattern": "Your completed Theatre of Blood count is:",
+        "section": "Combat",
+        "recommendedItemIds": [
+          6685,
+          3024,
+          27690
+        ]
       }
     ],
     "ironKillTimeSeconds": 1440,
@@ -5442,7 +5547,8 @@
         "objectId": 32653,
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
         "description": "Form a team and enter the Theatre in Hard Mode. Fight through all rooms and defeat Verzik Vitur",
@@ -5450,7 +5556,13 @@
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your completed Theatre of Blood: Hard Mode count is:"
+        "completionChatPattern": "Your completed Theatre of Blood: Hard Mode count is:",
+        "section": "Combat",
+        "recommendedItemIds": [
+          6685,
+          3024,
+          27690
+        ]
       }
     ],
     "afkLevel": 0
@@ -5704,14 +5816,16 @@
         "worldY": 2784,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Enter the Tombs lobby. Set your invocation level and form a team or go solo",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
         "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras), then defeat the Wardens boss at the end",
@@ -5719,7 +5833,13 @@
         "worldY": 2784,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your completed Tombs of Amascut count is:"
+        "completionChatPattern": "Your completed Tombs of Amascut count is:",
+        "recommendedItemIds": [
+          6685,
+          3024,
+          21003
+        ],
+        "section": "Combat"
       }
     ],
     "ironKillTimeSeconds": 1200,
@@ -6640,7 +6760,8 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Barrows teleport (Arceuus 83 Magic), Barrows teleport tablet, or Fairy ring BKR"
+        "travelTip": "Barrows teleport (Arceuus 83 Magic), Barrows teleport tablet, or Fairy ring BKR",
+        "section": "Travel"
       },
       {
         "description": "Dig on Dharok's mound (north-east) and kill Dharok the Wretched",
@@ -6649,10 +6770,17 @@
         "worldPlane": 0,
         "npcId": 1673,
         "interactAction": "Attack",
-        "requiredItemIds": [952],
+        "requiredItemIds": [
+          952
+        ],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 458,
-        "completionVarbitValue": 1
+        "completionVarbitValue": 1,
+        "recommendedItemIds": [
+          2434,
+          3024
+        ],
+        "section": "Combat"
       },
       {
         "description": "Dig on Ahrim's mound (centre) and kill Ahrim the Blighted",
@@ -6661,10 +6789,13 @@
         "worldPlane": 0,
         "npcId": 1672,
         "interactAction": "Attack",
-        "requiredItemIds": [952],
+        "requiredItemIds": [
+          952
+        ],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 457,
-        "completionVarbitValue": 1
+        "completionVarbitValue": 1,
+        "section": "Combat"
       },
       {
         "description": "Dig on Verac's mound (north-west) and kill Verac the Defiled",
@@ -6673,10 +6804,13 @@
         "worldPlane": 0,
         "npcId": 1677,
         "interactAction": "Attack",
-        "requiredItemIds": [952],
+        "requiredItemIds": [
+          952
+        ],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 462,
-        "completionVarbitValue": 1
+        "completionVarbitValue": 1,
+        "section": "Combat"
       },
       {
         "description": "Dig on Torag's mound (south-west) and kill Torag the Corrupted",
@@ -6685,10 +6819,13 @@
         "worldPlane": 0,
         "npcId": 1676,
         "interactAction": "Attack",
-        "requiredItemIds": [952],
+        "requiredItemIds": [
+          952
+        ],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 461,
-        "completionVarbitValue": 1
+        "completionVarbitValue": 1,
+        "section": "Combat"
       },
       {
         "description": "Dig on Karil's mound (south) and kill Karil the Tainted",
@@ -6697,10 +6834,13 @@
         "worldPlane": 0,
         "npcId": 1675,
         "interactAction": "Attack",
-        "requiredItemIds": [952],
+        "requiredItemIds": [
+          952
+        ],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 460,
-        "completionVarbitValue": 1
+        "completionVarbitValue": 1,
+        "section": "Combat"
       },
       {
         "description": "Dig on Guthan's mound (south-east) and kill Guthan the Infested",
@@ -6709,17 +6849,21 @@
         "worldPlane": 0,
         "npcId": 1674,
         "interactAction": "Attack",
-        "requiredItemIds": [952],
+        "requiredItemIds": [
+          952
+        ],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 459,
-        "completionVarbitValue": 1
+        "completionVarbitValue": 1,
+        "section": "Combat"
       },
       {
         "description": "Find the brother whose crypt has a tunnel entrance and climb down into the tunnels",
         "worldX": 3565,
         "worldY": 3298,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Loot"
       },
       {
         "description": "Navigate the tunnel maze to the centre room and search the chest for loot",
@@ -6729,7 +6873,8 @@
         "objectId": 20723,
         "objectInteractAction": "Open",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your reward:"
+        "completionChatPattern": "Your reward:",
+        "section": "Loot"
       }
     ]
   },
@@ -6843,15 +6988,19 @@
         "worldY": 2840,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Board the boat when a game is starting. Fish harpoonfish, cook them on the cannons, then load them into the cannons to fire at Tempoross",
         "worldX": 3135,
         "worldY": 2840,
         "worldPlane": 0,
-        "requiredItemIds": [311],
-        "completionCondition": "MANUAL"
+        "requiredItemIds": [
+          311
+        ],
+        "completionCondition": "MANUAL",
+        "section": "Skilling"
       },
       {
         "description": "After defeating Tempoross, search the reward pool for collection log drops. Higher participation gives more reward rolls",
@@ -6859,7 +7008,8 @@
         "worldY": 2840,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your Tempoross subdued count is:"
+        "completionChatPattern": "Your Tempoross subdued count is:",
+        "section": "Reward"
       }
     ],
     "ironKillTimeSeconds": 600,
@@ -6960,7 +7110,8 @@
         "worldY": 3997,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Enter the Wintertodt arena when the boss spawns. Chop bruma roots, fletch into kindling, then feed the braziers to earn points",
@@ -6969,8 +7120,12 @@
         "worldPlane": 0,
         "objectId": 29322,
         "objectInteractAction": "Enter",
-        "requiredItemIds": [590, 1351],
-        "completionCondition": "MANUAL"
+        "requiredItemIds": [
+          590,
+          1351
+        ],
+        "completionCondition": "MANUAL",
+        "section": "Skilling"
       },
       {
         "description": "Earn 500+ points per game for maximum reward crates. Open crates for Pyromancer outfit, Tome of fire, and Phoenix pet",
@@ -6978,7 +7133,8 @@
         "worldY": 3997,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your Wintertodt subdued count is:"
+        "completionChatPattern": "Your Wintertodt subdued count is:",
+        "section": "Reward"
       }
     ],
     "rollsPerKill": 8,
@@ -7172,7 +7328,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks \u2014 learn the mechanics for consistent clears",
+        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks — learn the mechanics for consistent clears",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -7500,7 +7656,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Complete Perilous Moons. Fight the three Moon bosses in sequence. Each has unique mechanics \u2014 learn the safe tiles and prayer switches",
+        "description": "Complete Perilous Moons. Fight the three Moon bosses in sequence. Each has unique mechanics — learn the safe tiles and prayer switches",
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
@@ -7869,7 +8025,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill revenants in the caves for unique drops. Bring risk \u2014 it's multi-combat Wilderness.",
+        "description": "Kill revenants in the caves for unique drops. Bring risk — it's multi-combat Wilderness.",
         "worldX": 3073,
         "worldY": 3654,
         "worldPlane": 0,
@@ -7917,7 +8073,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Crawling Hands in the Slayer Tower basement. Very low combat \u2014 good for early slayer tasks",
+        "description": "Kill Crawling Hands in the Slayer Tower basement. Very low combat — good for early slayer tasks",
         "worldX": 3418,
         "worldY": 3543,
         "worldPlane": 0,
@@ -8739,7 +8895,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Gryphons on the islands accessible via Sailing. Standard combat \u2014 no special mechanics",
+        "description": "Kill Gryphons on the islands accessible via Sailing. Standard combat — no special mechanics",
         "worldX": 1456,
         "worldY": 2880,
         "worldPlane": 0,
@@ -9807,7 +9963,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Spiritual Mages in the God Wars Dungeon. Requires 83 Slayer. Found in all four god chambers \u2014 equip the corresponding god item for protection",
+        "description": "Kill Spiritual Mages in the God Wars Dungeon. Requires 83 Slayer. Found in all four god chambers — equip the corresponding god item for protection",
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,
@@ -10150,7 +10306,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill Dark Beasts in the Mourner Tunnels or Catacombs of Kourend. Use Protect from Melee. High Defence \u2014 use accurate weapon styles",
+        "description": "Kill Dark Beasts in the Mourner Tunnels or Catacombs of Kourend. Use Protect from Melee. High Defence — use accurate weapon styles",
         "worldX": 1920,
         "worldY": 4672,
         "worldPlane": 0,
@@ -11656,9 +11812,12 @@
         "worldY": 3283,
         "worldPlane": 0,
         "travelTip": "Minigame teleport -> Shades of Mort'ton | Barrows teleport + run south | Mort'ton teleport scroll | Fairy ring BKR",
-        "requiredItemIds": [590],
+        "requiredItemIds": [
+          590
+        ],
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 25
+        "completionDistance": 25,
+        "section": "Bank prep"
       },
       {
         "description": "Burn shade remains on the funeral pyres, then use shade keys on the underground chests",
@@ -11698,7 +11857,8 @@
           25432
         ],
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "You attempt to light the funeral pyre"
+        "completionChatPattern": "You attempt to light the funeral pyre",
+        "section": "Skilling"
       },
       {
         "description": "Pick up your shade key from the reward pillar inside the temple.",
@@ -11759,7 +11919,8 @@
           25430,
           25432
         ],
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Loot"
       },
       {
         "description": "Enter the Shade Catacombs through the wooden doors north-west of the temple",
@@ -11769,7 +11930,8 @@
         "objectId": 4133,
         "objectInteractAction": "Open",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "You use your Shade key"
+        "completionChatPattern": "You use your Shade key",
+        "section": "Loot"
       },
       {
         "description": "Open chests matching your shade keys",
@@ -12028,7 +12190,8 @@
         ],
         "completionCondition": "MANUAL",
         "loopBackToStep": 2,
-        "loopCount": 50
+        "loopCount": 50,
+        "section": "Loot"
       }
     ]
   },
@@ -13572,7 +13735,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Play Last Man Standing \u2014 a battle royale minigame on the island east of Ferox Enclave. Earn points to buy the Halos and Dragon Claws ornament kit",
+        "description": "Play Last Man Standing — a battle royale minigame on the island east of Ferox Enclave. Earn points to buy the Halos and Dragon Claws ornament kit",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
@@ -19048,7 +19211,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill both Royal Titans (Eldric + Branda). Duo recommended. Focus DPS on both evenly \u2014 if one falls first, the other enrages. Dodge the ice/fire waves and elemental spawns",
+        "description": "Kill both Royal Titans (Eldric + Branda). Duo recommended. Focus DPS on both evenly — if one falls first, the other enrages. Dodge the ice/fire waves and elemental spawns",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
@@ -19454,7 +19617,9 @@
         "worldPlane": 0,
         "npcId": 7690,
         "interactAction": "Talk-to",
-        "requiredItemIds": [6570],
+        "requiredItemIds": [
+          6570
+        ],
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
       },
@@ -24594,7 +24759,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Catch black chinchompas in the Wilderness (level 32-36). Bring minimal risk \u2014 PKers frequent this area. Best caught with box traps at 80+ Hunter",
+        "description": "Catch black chinchompas in the Wilderness (level 32-36). Bring minimal risk — PKers frequent this area. Best caught with box traps at 80+ Hunter",
         "worldX": 3143,
         "worldY": 3771,
         "worldPlane": 0,
