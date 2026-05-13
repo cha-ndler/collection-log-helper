@@ -32,6 +32,7 @@ import java.awt.Rectangle;
 import java.util.Arrays;
 import java.util.Collections;
 import net.runelite.api.Client;
+import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.widgets.Widget;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,9 +61,9 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class DialogHighlightOverlayTest
 {
-	private static final int DIALOG_OPTION_GROUP = 219;
+	private static final int DIALOG_OPTION_GROUP = InterfaceID.CHATMENU;
 	private static final int DIALOG_OPTION_CHILD = 1;
-	private static final int NPC_DIALOG_GROUP = 231;
+	private static final int NPC_DIALOG_GROUP = InterfaceID.CHAT_LEFT;
 	private static final int NPC_DIALOG_CONTINUE_CHILD = 5;
 
 	@Mock

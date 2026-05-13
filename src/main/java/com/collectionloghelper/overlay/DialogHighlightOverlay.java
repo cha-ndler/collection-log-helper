@@ -34,6 +34,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.runelite.api.Client;
+import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
@@ -44,16 +45,16 @@ import net.runelite.client.ui.overlay.OverlayPosition;
  * with NPCs during guidance. Similar to Quest Helper's dialog highlighting.
  *
  * Widget groups used:
- *   219 = Player dialog choices (multi-option)
- *   231 = NPC dialog (continue)
+ *   InterfaceID.CHATMENU (219) = Player dialog choices (multi-option)
+ *   InterfaceID.CHAT_LEFT (231) = NPC dialog (continue)
  */
 @Singleton
 public class DialogHighlightOverlay extends Overlay
 {
-	private static final int DIALOG_OPTION_GROUP = 219;
+	private static final int DIALOG_OPTION_GROUP = InterfaceID.CHATMENU;
 	private static final int DIALOG_OPTION_CHILD = 1;
 
-	private static final int NPC_DIALOG_GROUP = 231;
+	private static final int NPC_DIALOG_GROUP = InterfaceID.CHAT_LEFT;
 	private static final int NPC_DIALOG_CONTINUE_CHILD = 5;
 
 	private static final int BACKGROUND_PADDING_X = 4;
