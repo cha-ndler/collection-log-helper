@@ -7657,10 +7657,38 @@
       },
       {
         "description": "Complete Perilous Moons. Fight the three Moon bosses in sequence. Each has unique mechanics — learn the safe tiles and prayer switches",
+        "perItemStepDescription": {
+          "29019": "Fight the Blue Moon and open the Lunar Chest to receive your Blue Moon armour.",
+          "29013": "Fight the Blue Moon and open the Lunar Chest to receive your Blue Moon armour.",
+          "29016": "Fight the Blue Moon and open the Lunar Chest to receive your Blue Moon armour.",
+          "28988": "Fight the Blue Moon and open the Lunar Chest to receive the Blue Moon spear.",
+          "29028": "Fight the Blood Moon and open the Lunar Chest to receive your Blood Moon armour.",
+          "29022": "Fight the Blood Moon and open the Lunar Chest to receive your Blood Moon armour.",
+          "29025": "Fight the Blood Moon and open the Lunar Chest to receive your Blood Moon armour.",
+          "28997": "Fight the Blood Moon and open the Lunar Chest to receive the dual macuahuitl.",
+          "29010": "Fight the Eclipse Moon and open the Lunar Chest to receive your Eclipse Moon armour.",
+          "29004": "Fight the Eclipse Moon and open the Lunar Chest to receive your Eclipse Moon armour.",
+          "29007": "Fight the Eclipse Moon and open the Lunar Chest to receive your Eclipse Moon armour.",
+          "29000": "Fight the Eclipse Moon and open the Lunar Chest to receive the eclipse atlatl."
+        },
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
         "npcId": 13011,
+        "perItemNpcId": {
+          "29019": 13013,
+          "29013": 13013,
+          "29016": 13013,
+          "28988": 13013,
+          "29028": 13011,
+          "29022": 13011,
+          "29025": 13011,
+          "28997": 13011,
+          "29010": 13012,
+          "29004": 13012,
+          "29007": 13012,
+          "29000": 13012
+        },
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 13011
