@@ -387,7 +387,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			new SearchModeController(this, config, database, collectionState, calculator,
 				requirementsChecker, itemManager));
 		modeControllers.put(Mode.CATEGORY_FOCUS,
-			new CategoryModeController(this, config, database, collectionState, calculator,
+			new CategoryModeController(this, config, collectionState, calculator,
 				requirementsChecker, itemManager));
 		modeControllers.put(Mode.EFFICIENT,
 			new EfficientModeController(this, config, collectionState, calculator,
