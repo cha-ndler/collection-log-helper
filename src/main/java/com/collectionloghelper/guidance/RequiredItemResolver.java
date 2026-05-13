@@ -93,7 +93,7 @@ public class RequiredItemResolver
 	private RequiredItemDisplay resolveSingle(int itemId)
 	{
 		Status status = resolveStatus(itemId);
-		return new RequiredItemDisplay(lookupName(itemId), status);
+		return new RequiredItemDisplay(itemId, lookupName(itemId), status);
 	}
 
 	private Status resolveStatus(int itemId)

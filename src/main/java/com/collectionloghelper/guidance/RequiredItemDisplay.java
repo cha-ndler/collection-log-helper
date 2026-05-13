@@ -54,13 +54,20 @@ public final class RequiredItemDisplay
 		MISSING
 	}
 
+	private final int itemId;
 	private final String name;
 	private final Status status;
 
-	public RequiredItemDisplay(String name, Status status)
+	public RequiredItemDisplay(int itemId, String name, Status status)
 	{
+		this.itemId = itemId;
 		this.name = Objects.requireNonNull(name, "name");
 		this.status = Objects.requireNonNull(status, "status");
+	}
+
+	public int getItemId()
+	{
+		return itemId;
 	}
 
 	public String getName()
@@ -100,18 +107,18 @@ public final class RequiredItemDisplay
 			return false;
 		}
 		RequiredItemDisplay other = (RequiredItemDisplay) o;
-		return status == other.status && name.equals(other.name);
+		return itemId == other.itemId && status == other.status && name.equals(other.name);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(name, status);
+		return Objects.hash(itemId, name, status);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "RequiredItemDisplay{name='" + name + "', status=" + status + '}';
+		return "RequiredItemDisplay{itemId=" + itemId + ", name='" + name + "', status=" + status + '}';
 	}
 }

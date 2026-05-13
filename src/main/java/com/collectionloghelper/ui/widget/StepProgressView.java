@@ -24,14 +24,13 @@
  */
 package com.collectionloghelper.ui.widget;
 
-import com.collectionloghelper.data.PlayerBankState;
-import com.collectionloghelper.data.PlayerInventoryState;
+import com.collectionloghelper.guidance.RequiredItemDisplay;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -42,15 +41,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.util.AsyncBufferedImage;
 
 /**
  * Shared widget that displays the multi-step guidance progress bar,
- * the required-items panel (with colour-coded availability borders),
- * and the Next Step / Skip buttons.
+ * the required-items subsection (with colour-coded availability), and the
+ * Next Step / Skip buttons.
+ *
+ * <p>Required-item rows are passed in as pre-resolved {@link RequiredItemDisplay}
+ * objects (name + status already determined on the client thread by
+ * {@link com.collectionloghelper.guidance.RequiredItemResolver}) so this widget
+ * never touches inventory/bank state directly.
  *
  * <p>Constructed once by the shell; updated via {@link #showStep} and
  * hidden via {@link #hideStep}. Step-advance and skip callbacks are wired
@@ -62,16 +65,12 @@ import net.runelite.client.util.AsyncBufferedImage;
  * an override with the same signature breaks {@code setVisible(false)} for this
  * widget and leaves it visible in pre-guidance states (see issue #353).
  */
-@Slf4j
 public class StepProgressView extends JPanel
 {
-	private static final Color ITEM_STATUS_GREEN = new Color(40, 180, 40);
-	private static final Color ITEM_STATUS_YELLOW = new Color(200, 180, 40);
-	private static final Color ITEM_STATUS_RED = new Color(200, 40, 40);
+	/** Tooltip suffix appended to items whose status is IN_BANK. */
+	private static final String IN_BANK_TOOLTIP_SUFFIX = " ℹ in bank";
 
 	private final ItemManager itemManager;
-	private final PlayerInventoryState inventoryState;
-	private final PlayerBankState bankState;
 
 	private final JLabel stepProgressLabel;
 	private final JPanel requiredItemsPanel;
@@ -81,13 +80,9 @@ public class StepProgressView extends JPanel
 	private Runnable stepAdvancer;
 	private Runnable stepSkipper;
 
-	public StepProgressView(ItemManager itemManager,
-		PlayerInventoryState inventoryState,
-		PlayerBankState bankState)
+	public StepProgressView(ItemManager itemManager)
 	{
 		this.itemManager = itemManager;
-		this.inventoryState = inventoryState;
-		this.bankState = bankState;
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(new Color(25, 35, 55));
@@ -105,7 +100,8 @@ public class StepProgressView extends JPanel
 		stepProgressLabel.setAlignmentX(LEFT_ALIGNMENT);
 		add(stepProgressLabel);
 
-		requiredItemsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 4, 2));
+		requiredItemsPanel = new JPanel();
+		requiredItemsPanel.setLayout(new BoxLayout(requiredItemsPanel, BoxLayout.Y_AXIS));
 		requiredItemsPanel.setBackground(new Color(25, 35, 55));
 		requiredItemsPanel.setAlignmentX(LEFT_ALIGNMENT);
 		requiredItemsPanel.setVisible(false);
@@ -163,24 +159,26 @@ public class StepProgressView extends JPanel
 	 * Shows and populates the step progress panel.
 	 * Safe to call from any thread.
 	 *
-	 * @param current         one-based step index
-	 * @param total           total number of steps
-	 * @param description     human-readable step description
-	 * @param isManual        whether the Next Step button should be shown
-	 * @param requiredItemIds item IDs to display (may be {@code null} or empty)
+	 * @param current       one-based step index
+	 * @param total         total number of steps
+	 * @param description   human-readable step description
+	 * @param isManual      whether the Next Step button should be shown
+	 * @param requiredItems pre-resolved display rows (may be {@code null} or empty);
+	 *                      resolved on the client thread by
+	 *                      {@link com.collectionloghelper.guidance.RequiredItemResolver}
 	 */
 	public void showStep(int current, int total, String description, boolean isManual,
-		List<Integer> requiredItemIds)
+		List<RequiredItemDisplay> requiredItems)
 	{
-		// Snapshot immutable values before dispatch
-		final List<Integer> itemIds = requiredItemIds;
+		final List<RequiredItemDisplay> rows =
+			requiredItems != null ? requiredItems : Collections.emptyList();
 
 		SwingUtilities.invokeLater(() ->
 		{
 			stepProgressLabel.setText(
 				"<html>Step " + current + "/" + total + ": " + description + "</html>");
 			nextStepButton.setVisible(isManual);
-			updateRequiredItemDisplay(itemIds);
+			updateRequiredItemDisplay(rows);
 			setVisible(true);
 			revalidate();
 			if (getParent() != null)
@@ -214,97 +212,139 @@ public class StepProgressView extends JPanel
 	}
 
 	/**
-	 * Updates the required-item icon strip with colour-coded availability borders.
+	 * Rebuilds the required-items subsection from pre-resolved display rows.
+	 *
+	 * <p>Each row shows a 28×28 item sprite icon followed by the item name.
+	 * The name label is coloured by availability:
 	 * <ul>
-	 *   <li>Green — item is in inventory or equipped</li>
-	 *   <li>Yellow — item is in the bank but not on the player</li>
-	 *   <li>Red — item not found anywhere</li>
+	 *   <li><b>Green</b> — held in inventory or equipped</li>
+	 *   <li><b>White</b> (+ tooltip suffix "ℹ in bank") — present in last bank scan</li>
+	 *   <li><b>Red</b> — not found anywhere</li>
 	 * </ul>
+	 * The subsection is hidden when {@code rows} is empty.
 	 * Must be called on the EDT.
+	 *
+	 * @param rows pre-resolved display rows from
+	 *             {@link com.collectionloghelper.guidance.RequiredItemResolver}
 	 */
-	private void updateRequiredItemDisplay(List<Integer> requiredItemIds)
+	void updateRequiredItemDisplay(List<RequiredItemDisplay> rows)
 	{
 		requiredItemsPanel.removeAll();
 
-		if (requiredItemIds == null || requiredItemIds.isEmpty())
+		if (rows == null || rows.isEmpty())
 		{
 			requiredItemsPanel.setVisible(false);
 			return;
 		}
 
-		JLabel headerLabel = new JLabel("Required:");
-		headerLabel.setFont(FontManager.getRunescapeSmallFont());
+		JLabel headerLabel = new JLabel("Items needed:");
+		headerLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
 		headerLabel.setForeground(new Color(180, 180, 180));
+		headerLabel.setAlignmentX(LEFT_ALIGNMENT);
 		requiredItemsPanel.add(headerLabel);
 
-		for (int itemId : requiredItemIds)
+		requiredItemsPanel.add(Box.createVerticalStrut(2));
+
+		for (RequiredItemDisplay row : rows)
 		{
-			boolean inInventory = inventoryState.hasItem(itemId);
-			boolean equipped = inventoryState.hasEquippedItem(itemId);
-			boolean inBank = bankState.hasItem(itemId);
-
-			Color borderColor;
-			String statusText;
-			if (inInventory || equipped)
-			{
-				borderColor = ITEM_STATUS_GREEN;
-				statusText = equipped && !inInventory ? " (equipped)" : " (in inventory)";
-			}
-			else if (inBank)
-			{
-				borderColor = ITEM_STATUS_YELLOW;
-				statusText = " (in bank)";
-			}
-			else
-			{
-				borderColor = ITEM_STATUS_RED;
-				statusText = " (MISSING)";
-			}
-
-			JLabel itemLabel = new JLabel();
-			itemLabel.setPreferredSize(new Dimension(32, 32));
-			itemLabel.setBorder(BorderFactory.createLineBorder(borderColor, 2));
-			itemLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			itemLabel.setVerticalAlignment(SwingConstants.CENTER);
-
-			AsyncBufferedImage asyncImage = itemManager.getImage(itemId);
-			asyncImage.onLoaded(() ->
-			{
-				BufferedImage scaled = scaleImage(asyncImage, 28, 28);
-				itemLabel.setIcon(new ImageIcon(scaled));
-				itemLabel.revalidate();
-				itemLabel.repaint();
-			});
-			BufferedImage scaled = scaleImage(asyncImage, 28, 28);
-			itemLabel.setIcon(new ImageIcon(scaled));
-
-			// ItemManager.getItemComposition() asserts client-thread, but this
-			// runs on the EDT (the panel is a Swing widget updated via
-			// SwingUtilities.invokeLater in showStep). The assertion is an Error
-			// (not RuntimeException) so it would otherwise propagate up,
-			// abort the loop mid-iteration, and leave the required-items strip
-			// hidden. See cha-ndler/collection-log-helper#388 for the trace.
-			// Falling back to "Item #N" keeps the row visible; a proper fix
-			// (pre-resolved items via RequiredItemResolver on client thread) is
-			// tracked as a follow-up — see PR description.
-			String tooltipName;
-			try
-			{
-				tooltipName = itemManager.getItemComposition(itemId).getName();
-			}
-			catch (Throwable t)
-			{
-				log.warn("Item composition lookup failed for required-item id {}: {}",
-					itemId, t.toString());
-				tooltipName = "Item #" + itemId;
-			}
-			itemLabel.setToolTipText(tooltipName + statusText);
-			requiredItemsPanel.add(itemLabel);
+			JPanel rowPanel = buildItemRow(row);
+			rowPanel.setAlignmentX(LEFT_ALIGNMENT);
+			requiredItemsPanel.add(rowPanel);
+			requiredItemsPanel.add(Box.createVerticalStrut(2));
 		}
 
 		requiredItemsPanel.setVisible(true);
 		requiredItemsPanel.revalidate();
 		requiredItemsPanel.repaint();
+	}
+
+	/**
+	 * Builds a single item row: a 28×28 sprite icon + a name label coloured
+	 * by the row's availability status.
+	 */
+	private JPanel buildItemRow(RequiredItemDisplay row)
+	{
+		JPanel rowPanel = new JPanel();
+		rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
+		rowPanel.setBackground(new Color(25, 35, 55));
+		rowPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 32));
+
+		// --- Icon ---
+		JLabel iconLabel = new JLabel();
+		iconLabel.setPreferredSize(new Dimension(28, 28));
+		iconLabel.setMinimumSize(new Dimension(28, 28));
+		iconLabel.setMaximumSize(new Dimension(28, 28));
+		iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		iconLabel.setVerticalAlignment(SwingConstants.CENTER);
+
+		// --- Name label ---
+		Color nameColor;
+		String tooltipSuffix;
+		switch (row.getStatus())
+		{
+			case HELD:
+				nameColor = RequiredItemDisplay.COLOR_HELD;
+				tooltipSuffix = "";
+				break;
+			case IN_BANK:
+				nameColor = Color.WHITE;
+				tooltipSuffix = IN_BANK_TOOLTIP_SUFFIX;
+				break;
+			case MISSING:
+			default:
+				nameColor = RequiredItemDisplay.COLOR_MISSING;
+				tooltipSuffix = "";
+				break;
+		}
+
+		JLabel nameLabel = new JLabel(row.getName());
+		nameLabel.setFont(FontManager.getRunescapeSmallFont());
+		nameLabel.setForeground(nameColor);
+		nameLabel.setToolTipText(row.getName() + tooltipSuffix);
+		iconLabel.setToolTipText(row.getName() + tooltipSuffix);
+
+		rowPanel.add(iconLabel);
+		rowPanel.add(Box.createHorizontalStrut(4));
+		rowPanel.add(nameLabel);
+
+		// Load sprite asynchronously; itemManager.getImage is safe to call on the EDT.
+		if (row.getItemId() > 0)
+		{
+			loadItemIcon(row.getItemId(), iconLabel);
+		}
+
+		return rowPanel;
+	}
+
+	/**
+	 * Loads the item sprite for the given item ID into {@code iconLabel} asynchronously.
+	 * Called after the row panel is constructed so the icon appears as soon as the
+	 * image is available. Safe to call when {@code itemManager} has no image for the
+	 * given ID (e.g., in tests) — the icon label is simply left empty.
+	 */
+	void loadItemIcon(int itemId, JLabel iconLabel)
+	{
+		AsyncBufferedImage asyncImage = itemManager.getImage(itemId);
+		if (asyncImage == null)
+		{
+			return;
+		}
+		asyncImage.onLoaded(() ->
+		{
+			if (asyncImage.getWidth() > 0)
+			{
+				BufferedImage scaled = scaleImage(asyncImage, 28, 28);
+				iconLabel.setIcon(new ImageIcon(scaled));
+				iconLabel.revalidate();
+				iconLabel.repaint();
+			}
+		});
+		// Apply synchronously in case the image is already loaded
+		if (asyncImage.getWidth() > 0)
+		{
+			BufferedImage scaled = scaleImage(asyncImage, 28, 28);
+			iconLabel.setIcon(new ImageIcon(scaled));
+		}
 	}
 
 	private static BufferedImage scaleImage(BufferedImage source, int width, int height)

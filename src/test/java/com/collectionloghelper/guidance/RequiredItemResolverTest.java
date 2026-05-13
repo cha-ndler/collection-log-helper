@@ -237,6 +237,18 @@ public class RequiredItemResolverTest
 		assertEquals(Status.MISSING, rows.get(0).getStatus());
 	}
 
+	@Test
+	public void resolvedRowPreservesItemId()
+	{
+		when(inventoryState.hasItem(TINDERBOX)).thenReturn(true);
+
+		List<RequiredItemDisplay> rows = resolver.resolve(
+			stepWithRequiredItems(Collections.singletonList(TINDERBOX)));
+
+		assertEquals("Item ID must be preserved in the display row so the panel can load the sprite",
+			TINDERBOX, rows.get(0).getItemId());
+	}
+
 	// --- Helpers ---
 
 	private static GuidanceStep stepWithRequiredItems(List<Integer> requiredItemIds)
