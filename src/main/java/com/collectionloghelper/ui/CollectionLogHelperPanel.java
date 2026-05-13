@@ -36,6 +36,7 @@ import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.RequirementsChecker;
+import com.collectionloghelper.guidance.RequiredItemDisplay;
 import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
@@ -238,7 +239,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		guidanceBannerView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(guidanceBannerView);
 
-		stepProgressView = new StepProgressView(itemManager, inventoryState, bankState);
+		stepProgressView = new StepProgressView(itemManager);
 		stepProgressView.setAlignmentX(CENTER_ALIGNMENT);
 		controlsPanel.add(stepProgressView);
 
@@ -617,11 +618,15 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	/**
 	 * Updates the step progress banner with current step info.
+	 *
+	 * @param requiredItems pre-resolved display rows from
+	 *                      {@link com.collectionloghelper.guidance.RequiredItemResolver};
+	 *                      may be {@code null} or empty when the step has no required items
 	 */
 	public void updateStepProgress(int current, int total, String description, boolean isManual,
-		List<Integer> requiredItemIds)
+		List<RequiredItemDisplay> requiredItems)
 	{
-		stepProgressView.showStep(current, total, description, isManual, requiredItemIds);
+		stepProgressView.showStep(current, total, description, isManual, requiredItems);
 	}
 
 	/** Hides the step progress banner. */
