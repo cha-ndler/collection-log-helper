@@ -24,6 +24,8 @@
  */
 package com.collectionloghelper.ui.widget;
 
+import com.collectionloghelper.data.CompletionCondition;
+import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.guidance.RequiredItemDisplay;
 import com.collectionloghelper.guidance.RequiredItemDisplay.Status;
 import net.runelite.client.game.ItemManager;
@@ -32,6 +34,7 @@ import java.awt.Component;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -282,6 +285,143 @@ public class StepProgressViewTest
 			RequiredItemDisplay.COLOR_HELD, updated.getForeground());
 	}
 
+	// ── Section rendering tests (B.5.4) ─────────────────────────────────────
+
+	/**
+	 * When the step list contains no section labels the sectionsPanel must stay hidden
+	 * and the flat required-items panel is used instead.
+	 */
+	@Test
+	public void showStep_withNoSectionData_sectionsPanelHidden() throws Exception
+	{
+		List<GuidanceStep> noSectionSteps = Arrays.asList(stepWithSection(null), stepWithSection(null));
+		view.showStep(1, 2, "Travel", false, Collections.emptyList(), noSectionSteps);
+		flushEdt();
+
+		JPanel sectionsPanel = findSectionsPanel(view);
+		assertNotNull("sectionsPanel must be present in widget", sectionsPanel);
+		assertFalse("sectionsPanel must be hidden when no step has a section",
+			sectionsPanel.isVisible());
+	}
+
+	/**
+	 * When at least one step in allSteps has a section label, the sectionsPanel
+	 * must become visible and contain at least one section header button.
+	 */
+	@Test
+	public void showStep_withSectionData_sectionsPanelVisible() throws Exception
+	{
+		List<GuidanceStep> steps = Arrays.asList(
+			stepWithSection("Travel"),
+			stepWithSection("Combat"));
+		view.showStep(1, 2, "Walk to boss", false, Collections.emptyList(), steps);
+		flushEdt();
+
+		JPanel sectionsPanel = findSectionsPanel(view);
+		assertNotNull(sectionsPanel);
+		assertTrue("sectionsPanel must be visible when steps have sections",
+			sectionsPanel.isVisible());
+		// At least two header buttons (one per section)
+		List<JButton> buttons = findAllButtons(sectionsPanel);
+		assertEquals("Must have one header button per section", 2, buttons.size());
+	}
+
+	/**
+	 * The active step's section header must begin with the expanded arrow "▼".
+	 * Other sections default to collapsed "▶".
+	 */
+	@Test
+	public void showStep_activeSectionForceExpanded_showsDownArrow() throws Exception
+	{
+		// 3 steps: step 1 in "Travel", step 2 in "Combat", step 3 in "Travel"
+		List<GuidanceStep> steps = Arrays.asList(
+			stepWithSection("Travel"),
+			stepWithSection("Combat"),
+			stepWithSection("Travel"));
+		// Active step = step 2 (in "Combat")
+		view.showStep(2, 3, "Fight the boss", false, Collections.emptyList(), steps);
+		flushEdt();
+
+		JPanel sectionsPanel = findSectionsPanel(view);
+		List<JButton> buttons = findAllButtons(sectionsPanel);
+		assertEquals("Must have 3 header buttons (Travel, Combat, Travel)", 3, buttons.size());
+
+		// Travel (step 1) — not active, should be collapsed
+		assertTrue("Inactive section must start with collapse arrow",
+			buttons.get(0).getText().startsWith("▶"));
+		// Combat (step 2) — active, must be expanded
+		assertTrue("Active section must start with expand arrow",
+			buttons.get(1).getText().startsWith("▼"));
+		// Travel (step 3) — not active, should be collapsed
+		assertTrue("Inactive section must start with collapse arrow",
+			buttons.get(2).getText().startsWith("▶"));
+	}
+
+	/**
+	 * When switching to a different active step, the previously active section
+	 * can remain expanded (user toggled it) but the new active section is
+	 * force-expanded.
+	 */
+	@Test
+	public void showStep_activeStepChanges_newSectionForceExpanded() throws Exception
+	{
+		List<GuidanceStep> steps = Arrays.asList(
+			stepWithSection("Starting off"),
+			stepWithSection("Travel"));
+
+		// First render: step 1 active
+		view.showStep(1, 2, "Start", false, Collections.emptyList(), steps);
+		flushEdt();
+
+		// Second render: step 2 becomes active
+		view.showStep(2, 2, "Walk", false, Collections.emptyList(), steps);
+		flushEdt();
+
+		JPanel sectionsPanel = findSectionsPanel(view);
+		List<JButton> buttons = findAllButtons(sectionsPanel);
+		assertEquals(2, buttons.size());
+		// "Travel" section (button index 1) must be force-expanded
+		assertTrue("New active section must show expanded arrow after step change",
+			buttons.get(1).getText().startsWith("▼"));
+	}
+
+	/**
+	 * When showStep is called with sections, the inline required-items panel
+	 * (flat layout) must be hidden — items are shown inside the active section body.
+	 */
+	@Test
+	public void showStep_withSections_inlineRequiredItemsPanelHidden() throws Exception
+	{
+		List<GuidanceStep> steps = Collections.singletonList(stepWithSection("Travel"));
+		List<RequiredItemDisplay> items = Collections.singletonList(
+			new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.HELD));
+
+		view.showStep(1, 1, "Go somewhere", false, items, steps);
+		flushEdt();
+
+		// The flat requiredItemsPanel (first JPanel child) must be hidden in sectioned mode
+		JPanel reqPanel = findRequiredItemsPanel(view);
+		assertNotNull(reqPanel);
+		assertFalse("Inline required-items panel must be hidden in sectioned mode",
+			reqPanel.isVisible());
+	}
+
+	/**
+	 * hideStep must also clear the sections panel.
+	 */
+	@Test
+	public void hideStep_afterSectionedShow_sectionsPanelHidden() throws Exception
+	{
+		List<GuidanceStep> steps = Collections.singletonList(stepWithSection("Combat"));
+		view.showStep(1, 1, "Fight", false, Collections.emptyList(), steps);
+		flushEdt();
+		assertTrue("sectionsPanel must be visible before hide", findSectionsPanel(view).isVisible());
+
+		view.hideStep();
+		flushEdt();
+		assertFalse("sectionsPanel must be hidden after hideStep", findSectionsPanel(view).isVisible());
+	}
+
 	// ── Helpers ─────────────────────────────────────────────────────────────
 
 	/** Flush the Swing event queue so invokeLater-scheduled work completes. */
@@ -349,5 +489,81 @@ public class StepProgressViewTest
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * Finds the sectionsPanel — the second {@link JPanel} direct child of the
+	 * StepProgressView (after the requiredItemsPanel).
+	 */
+	private static JPanel findSectionsPanel(StepProgressView view)
+	{
+		int panelCount = 0;
+		for (Component c : view.getComponents())
+		{
+			if (c instanceof JPanel)
+			{
+				panelCount++;
+				if (panelCount == 2)
+				{
+					return (JPanel) c;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Collects all {@link JButton} components found directly inside {@code panel}
+	 * or inside any direct JPanel child (section block container).
+	 */
+	private static List<JButton> findAllButtons(JPanel panel)
+	{
+		List<JButton> result = new java.util.ArrayList<>();
+		if (panel == null)
+		{
+			return result;
+		}
+		for (Component c : panel.getComponents())
+		{
+			if (c instanceof JButton)
+			{
+				result.add((JButton) c);
+			}
+			else if (c instanceof JPanel)
+			{
+				// Section block: first child is the header JButton
+				for (Component child : ((JPanel) c).getComponents())
+				{
+					if (child instanceof JButton)
+					{
+						result.add((JButton) child);
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	/** Builds a minimal {@link GuidanceStep} with the given section label (may be null). */
+	private static GuidanceStep stepWithSection(String section)
+	{
+		return new GuidanceStep(
+			"Step",
+			0, 0, 0,
+			0, null, null,
+			null, null,
+			CompletionCondition.MANUAL,
+			0, 0, 0, 0,
+			null, null,
+			0, null, null,
+			null, null,
+			null,
+			0, 0,
+			false,
+			0, null, null,
+			0, 0,
+			null, null, null, null,
+			section
+		);
 	}
 }
