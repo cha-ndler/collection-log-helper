@@ -249,9 +249,135 @@ public class RequiredItemResolverTest
 			TINDERBOX, rows.get(0).getItemId());
 	}
 
+	// ── resolveRecommended (B.5.2) ──────────────────────────────────────────
+
+	@Test
+	public void resolveRecommendedReturnsEmptyForNullStep()
+	{
+		assertTrue("Null step must yield an empty recommended result",
+			resolver.resolveRecommended(null).isEmpty());
+	}
+
+	@Test
+	public void resolveRecommendedReturnsEmptyWhenFieldIsNull()
+	{
+		GuidanceStep step = stepWithRequiredAndRecommendedItems(null, null);
+		assertTrue(resolver.resolveRecommended(step).isEmpty());
+	}
+
+	@Test
+	public void resolveRecommendedReturnsEmptyWhenFieldIsEmptyList()
+	{
+		GuidanceStep step = stepWithRequiredAndRecommendedItems(null, Collections.emptyList());
+		assertTrue(resolver.resolveRecommended(step).isEmpty());
+	}
+
+	@Test
+	public void resolveRecommendedHeldInInventory_resolvesToHeld()
+	{
+		when(inventoryState.hasItem(TINDERBOX)).thenReturn(true);
+
+		List<RequiredItemDisplay> rows = resolver.resolveRecommended(
+			stepWithRequiredAndRecommendedItems(null, Collections.singletonList(TINDERBOX)));
+
+		assertEquals(1, rows.size());
+		assertEquals(Status.HELD, rows.get(0).getStatus());
+		assertEquals("Tinderbox", rows.get(0).getName());
+	}
+
+	@Test
+	public void resolveRecommendedInBank_resolvesToInBank()
+	{
+		when(bankState.hasItem(PYRE_LOGS)).thenReturn(true);
+
+		List<RequiredItemDisplay> rows = resolver.resolveRecommended(
+			stepWithRequiredAndRecommendedItems(null, Collections.singletonList(PYRE_LOGS)));
+
+		assertEquals(1, rows.size());
+		assertEquals(Status.IN_BANK, rows.get(0).getStatus());
+	}
+
+	@Test
+	public void resolveRecommendedMissing_resolvesToMissing()
+	{
+		List<RequiredItemDisplay> rows = resolver.resolveRecommended(
+			stepWithRequiredAndRecommendedItems(null, Collections.singletonList(SHADE_REMAINS)));
+
+		assertEquals(1, rows.size());
+		assertEquals(Status.MISSING, rows.get(0).getStatus());
+	}
+
+	/**
+	 * Verifies that required and recommended lists are resolved independently and
+	 * produce separate display rows with correct statuses each.
+	 */
+	@Test
+	public void resolveRequiredAndRecommendedAreIndependent()
+	{
+		when(inventoryState.hasItem(TINDERBOX)).thenReturn(true);
+		when(bankState.hasItem(PYRE_LOGS)).thenReturn(true);
+
+		GuidanceStep step = stepWithRequiredAndRecommendedItems(
+			Collections.singletonList(TINDERBOX),
+			Collections.singletonList(PYRE_LOGS));
+
+		List<RequiredItemDisplay> required = resolver.resolve(step);
+		List<RequiredItemDisplay> recommended = resolver.resolveRecommended(step);
+
+		assertEquals(1, required.size());
+		assertEquals(Status.HELD, required.get(0).getStatus());
+
+		assertEquals(1, recommended.size());
+		assertEquals(Status.IN_BANK, recommended.get(0).getStatus());
+	}
+
+	// ── resolveIds (B.5.2) ──────────────────────────────────────────────────
+
+	@Test
+	public void resolveIdsNullReturnsEmpty()
+	{
+		assertTrue(resolver.resolveIds(null).isEmpty());
+	}
+
+	@Test
+	public void resolveIdsEmptyListReturnsEmpty()
+	{
+		assertTrue(resolver.resolveIds(Collections.emptyList()).isEmpty());
+	}
+
+	@Test
+	public void resolveIdsFiltersInvalidIds()
+	{
+		// IDs <= 0 are invalid and must be skipped
+		List<RequiredItemDisplay> rows = resolver.resolveIds(Arrays.asList(0, -1, null));
+		assertTrue("Invalid item IDs must be skipped", rows.isEmpty());
+
+		// itemManager must never be called for invalid IDs
+		verify(itemManager, never()).getItemComposition(0);
+	}
+
+	@Test
+	public void resolveIdsProducesCorrectRowsForValidIds()
+	{
+		when(inventoryState.hasItem(TINDERBOX)).thenReturn(true);
+
+		List<RequiredItemDisplay> rows = resolver.resolveIds(Collections.singletonList(TINDERBOX));
+
+		assertEquals(1, rows.size());
+		assertEquals(TINDERBOX, rows.get(0).getItemId());
+		assertEquals("Tinderbox", rows.get(0).getName());
+		assertEquals(Status.HELD, rows.get(0).getStatus());
+	}
+
 	// --- Helpers ---
 
 	private static GuidanceStep stepWithRequiredItems(List<Integer> requiredItemIds)
+	{
+		return stepWithRequiredAndRecommendedItems(requiredItemIds, null);
+	}
+
+	private static GuidanceStep stepWithRequiredAndRecommendedItems(
+		List<Integer> requiredItemIds, List<Integer> recommendedItemIds)
 	{
 		return new GuidanceStep(
 			"Test step",
@@ -259,6 +385,7 @@ public class RequiredItemResolverTest
 			0, null, null,
 			null,
 			requiredItemIds,
+			recommendedItemIds,
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null,

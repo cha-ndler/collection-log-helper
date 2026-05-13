@@ -422,6 +422,164 @@ public class StepProgressViewTest
 		assertFalse("sectionsPanel must be hidden after hideStep", findSectionsPanel(view).isVisible());
 	}
 
+	// ── Recommended-items subsection tests (B.5.2) ──────────────────────────
+
+	/**
+	 * When required items are empty but recommended items are populated, the
+	 * "Recommended:" subsection must be visible and the "Items needed:" panel hidden.
+	 */
+	@Test
+	public void updateRecommendedItemDisplay_withRows_subsectionVisible() throws Exception
+	{
+		List<RequiredItemDisplay> recRows = Collections.singletonList(
+			new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.HELD));
+
+		view.showStep(1, 1, "Boss fight", false,
+			Collections.<RequiredItemDisplay>emptyList(),
+			recRows,
+			Collections.<GuidanceStep>emptyList());
+		flushEdt();
+
+		JPanel recPanel = findRecommendedItemsPanel(view);
+		assertNotNull("recommendedItemsPanel must be present in widget", recPanel);
+		assertTrue("recommendedItemsPanel must be visible when rows are non-empty",
+			recPanel.isVisible());
+		// Required panel must be hidden since we passed empty
+		JPanel reqPanel = findRequiredItemsPanel(view);
+		assertFalse("Required items panel must be hidden when required list is empty",
+			reqPanel.isVisible());
+	}
+
+	/**
+	 * When recommended items list is empty the subsection must remain hidden.
+	 */
+	@Test
+	public void updateRecommendedItemDisplay_emptyList_subsectionHidden() throws Exception
+	{
+		view.showStep(1, 1, "No rec items", false,
+			Collections.<RequiredItemDisplay>emptyList(),
+			Collections.<RequiredItemDisplay>emptyList(),
+			Collections.<GuidanceStep>emptyList());
+		flushEdt();
+
+		JPanel recPanel = findRecommendedItemsPanel(view);
+		assertFalse("recommendedItemsPanel must be hidden when recommended list is empty",
+			recPanel.isVisible());
+	}
+
+	/**
+	 * Both sections must be visible when both required and recommended lists are populated.
+	 */
+	@Test
+	public void showStep_bothRequiredAndRecommended_bothSectionsVisible() throws Exception
+	{
+		List<RequiredItemDisplay> req = Collections.singletonList(
+			new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.HELD));
+		List<RequiredItemDisplay> rec = Collections.singletonList(
+			new RequiredItemDisplay(PYRE_LOGS_ID, "Pyre logs", Status.MISSING));
+
+		view.showStep(1, 1, "Do thing", false, req, rec, Collections.<GuidanceStep>emptyList());
+		flushEdt();
+
+		assertTrue("Items needed panel must be visible when required list populated",
+			findRequiredItemsPanel(view).isVisible());
+		assertTrue("Recommended panel must be visible when recommended list populated",
+			findRecommendedItemsPanel(view).isVisible());
+	}
+
+	/**
+	 * Recommended rows use the same colour semantics as required rows (HELD=green,
+	 * IN_BANK=white+tooltip, MISSING=red). Parameterised across all three statuses.
+	 */
+	@Test
+	public void updateRecommendedItemDisplay_heldStatus_greenLabel() throws Exception
+	{
+		view.updateRecommendedItemDisplay(Collections.singletonList(
+			new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.HELD)));
+		flushEdt();
+
+		JLabel label = findFirstRecommendedNameLabel(view);
+		assertNotNull(label);
+		assertEquals("HELD recommended row must use green colour",
+			RequiredItemDisplay.COLOR_HELD, label.getForeground());
+	}
+
+	@Test
+	public void updateRecommendedItemDisplay_inBankStatus_whiteLabelWithTooltip() throws Exception
+	{
+		view.updateRecommendedItemDisplay(Collections.singletonList(
+			new RequiredItemDisplay(PYRE_LOGS_ID, "Pyre logs", Status.IN_BANK)));
+		flushEdt();
+
+		JLabel label = findFirstRecommendedNameLabel(view);
+		assertNotNull(label);
+		assertEquals("IN_BANK recommended row must use white colour",
+			Color.WHITE, label.getForeground());
+		assertTrue("IN_BANK recommended tooltip must contain 'in bank'",
+			label.getToolTipText() != null && label.getToolTipText().contains("in bank"));
+	}
+
+	@Test
+	public void updateRecommendedItemDisplay_missingStatus_redLabel() throws Exception
+	{
+		view.updateRecommendedItemDisplay(Collections.singletonList(
+			new RequiredItemDisplay(SHADE_REMAINS_ID, "Loar remains", Status.MISSING)));
+		flushEdt();
+
+		JLabel label = findFirstRecommendedNameLabel(view);
+		assertNotNull(label);
+		assertEquals("MISSING recommended row must use red colour",
+			RequiredItemDisplay.COLOR_MISSING, label.getForeground());
+	}
+
+	/**
+	 * hideStep must clear both required and recommended panels.
+	 */
+	@Test
+	public void hideStep_clearsBothItemPanels() throws Exception
+	{
+		List<RequiredItemDisplay> req = Collections.singletonList(
+			new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.HELD));
+		List<RequiredItemDisplay> rec = Collections.singletonList(
+			new RequiredItemDisplay(PYRE_LOGS_ID, "Pyre logs", Status.MISSING));
+
+		view.showStep(1, 1, "Do thing", false, req, rec, Collections.<GuidanceStep>emptyList());
+		flushEdt();
+
+		view.hideStep();
+		flushEdt();
+
+		assertFalse("Required panel must be hidden after hideStep",
+			findRequiredItemsPanel(view).isVisible());
+		assertFalse("Recommended panel must be hidden after hideStep",
+			findRecommendedItemsPanel(view).isVisible());
+	}
+
+	/**
+	 * Schema-level: a step constructed with a non-null recommendedItemIds list
+	 * exposes the list correctly via getRecommendedItemIds().
+	 */
+	@Test
+	public void guidanceStep_recommendedItemIds_accessible()
+	{
+		List<Integer> recIds = Arrays.asList(TINDERBOX_ID, PYRE_LOGS_ID);
+		GuidanceStep step = stepWithRecommendedItems(recIds);
+		assertEquals("recommendedItemIds must be accessible via getter",
+			recIds, step.getRecommendedItemIds());
+	}
+
+	/**
+	 * Schema-level: a step constructed without recommendedItemIds (null) has
+	 * a null getter return rather than an empty list.
+	 */
+	@Test
+	public void guidanceStep_recommendedItemIds_nullWhenAbsent()
+	{
+		GuidanceStep step = stepWithSection(null); // no recommendedItemIds
+		assertFalse("recommendedItemIds must be null when not set",
+			step.getRecommendedItemIds() != null);
+	}
+
 	// ── Helpers ─────────────────────────────────────────────────────────────
 
 	/** Flush the Swing event queue so invokeLater-scheduled work completes. */
@@ -441,6 +599,59 @@ public class StepProgressViewTest
 			if (c instanceof JPanel)
 			{
 				return (JPanel) c;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Finds the recommended-items sub-panel inside {@code view}. It is the second
+	 * {@link JPanel} direct child of the StepProgressView (after requiredItemsPanel).
+	 */
+	private static JPanel findRecommendedItemsPanel(StepProgressView view)
+	{
+		int panelCount = 0;
+		for (Component c : view.getComponents())
+		{
+			if (c instanceof JPanel)
+			{
+				panelCount++;
+				if (panelCount == 2)
+				{
+					return (JPanel) c;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the first item-name label from the recommended-items sub-panel.
+	 */
+	private static JLabel findFirstRecommendedNameLabel(StepProgressView view)
+	{
+		JPanel recPanel = findRecommendedItemsPanel(view);
+		if (recPanel == null)
+		{
+			return null;
+		}
+		for (Component c : recPanel.getComponents())
+		{
+			if (!(c instanceof JPanel))
+			{
+				continue;
+			}
+			JPanel rowPanel = (JPanel) c;
+			for (Component child : rowPanel.getComponents())
+			{
+				if (child instanceof JLabel)
+				{
+					JLabel label = (JLabel) child;
+					if (label.getText() != null && !label.getText().isEmpty())
+					{
+						return label;
+					}
+				}
 			}
 		}
 		return null;
@@ -492,8 +703,8 @@ public class StepProgressViewTest
 	}
 
 	/**
-	 * Finds the sectionsPanel — the second {@link JPanel} direct child of the
-	 * StepProgressView (after the requiredItemsPanel).
+	 * Finds the sectionsPanel — the third {@link JPanel} direct child of the
+	 * StepProgressView (after requiredItemsPanel and recommendedItemsPanel).
 	 */
 	private static JPanel findSectionsPanel(StepProgressView view)
 	{
@@ -503,7 +714,7 @@ public class StepProgressViewTest
 			if (c instanceof JPanel)
 			{
 				panelCount++;
-				if (panelCount == 2)
+				if (panelCount == 3)
 				{
 					return (JPanel) c;
 				}
@@ -552,6 +763,7 @@ public class StepProgressViewTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null, null,
@@ -564,6 +776,30 @@ public class StepProgressViewTest
 			0, 0,
 			null, null, null, null,
 			section
+		);
+	}
+
+	/** Builds a minimal {@link GuidanceStep} with the given recommendedItemIds. */
+	private static GuidanceStep stepWithRecommendedItems(List<Integer> recommendedItemIds)
+	{
+		return new GuidanceStep(
+			"Step",
+			0, 0, 0,
+			0, null, null,
+			null, null,
+			recommendedItemIds,
+			CompletionCondition.MANUAL,
+			0, 0, 0, 0,
+			null, null,
+			0, null, null,
+			null, null,
+			null,
+			0, 0,
+			false,
+			0, null, null,
+			0, 0,
+			null, null, null, null,
+			null
 		);
 	}
 }

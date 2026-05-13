@@ -635,15 +635,37 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	 * Updates the step progress banner with current step info, enabling collapsible
 	 * section blocks when {@code allSteps} contains steps with section labels.
 	 *
-	 * @param requiredItems pre-resolved display rows; may be {@code null} or empty
-	 * @param allSteps      full ordered step list for the active source; used to compute
-	 *                      section groups — pass an empty list for flat layout
+	 * @param requiredItems    pre-resolved required-item display rows; may be {@code null}
+	 *                         or empty
+	 * @param allSteps         full ordered step list for the active source; used to compute
+	 *                         section groups — pass an empty list for flat layout
 	 */
 	public void updateStepProgress(int current, int total, String description, boolean isManual,
 		List<RequiredItemDisplay> requiredItems,
 		List<com.collectionloghelper.data.GuidanceStep> allSteps)
 	{
 		stepProgressView.showStep(current, total, description, isManual, requiredItems, allSteps);
+	}
+
+	/**
+	 * Updates the step progress banner with current step info, both required and
+	 * recommended items, and enables collapsible section blocks when {@code allSteps}
+	 * contains steps with section labels.
+	 *
+	 * @param requiredItems    pre-resolved required-item display rows; may be {@code null}
+	 *                         or empty
+	 * @param recommendedItems pre-resolved recommended-item display rows; may be
+	 *                         {@code null} or empty
+	 * @param allSteps         full ordered step list for the active source; used to compute
+	 *                         section groups — pass an empty list for flat layout
+	 */
+	public void updateStepProgress(int current, int total, String description, boolean isManual,
+		List<RequiredItemDisplay> requiredItems,
+		List<RequiredItemDisplay> recommendedItems,
+		List<com.collectionloghelper.data.GuidanceStep> allSteps)
+	{
+		stepProgressView.showStep(current, total, description, isManual,
+			requiredItems, recommendedItems, allSteps);
 	}
 
 	/** Hides the step progress banner. */

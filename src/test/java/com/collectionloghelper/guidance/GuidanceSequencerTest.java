@@ -94,6 +94,7 @@ public class GuidanceSequencerTest
 			0, 0, 0,       // worldX, worldY, worldPlane
 			0, null, null,  // npcId, interactAction, dialogOptions
 			null, null,     // travelTip, requiredItemIds
+			null,           // recommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,    // completionItemId, completionItemCount, completionDistance, completionNpcId
 			null,           // completionNpcIds
@@ -122,6 +123,7 @@ public class GuidanceSequencerTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			condition,
 			completionItemId, 0, 0, 0,
 			null,  // completionNpcIds
@@ -150,6 +152,7 @@ public class GuidanceSequencerTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.INVENTORY_HAS_ITEM,
 			itemId, count, 0, 0,
 			null,  // completionNpcIds
@@ -178,6 +181,7 @@ public class GuidanceSequencerTest
 			x, y, plane,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.ARRIVE_AT_TILE,
 			0, 0, distance, 0,
 			null,  // completionNpcIds
@@ -206,6 +210,7 @@ public class GuidanceSequencerTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.NPC_TALKED_TO,
 			0, 0, 0, npcId,
 			null,  // completionNpcIds
@@ -234,6 +239,7 @@ public class GuidanceSequencerTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.ACTOR_DEATH,
 			0, 0, 0, npcId,
 			null,  // completionNpcIds
@@ -262,6 +268,7 @@ public class GuidanceSequencerTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.CHAT_MESSAGE_RECEIVED,
 			0, 0, 0, 0,
 			null,  // completionNpcIds
@@ -291,6 +298,7 @@ public class GuidanceSequencerTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			condition,
 			0, 0, 0, completionNpcId,
 			null,  // completionNpcIds
@@ -319,6 +327,7 @@ public class GuidanceSequencerTest
 			0, 0, plane,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.PLAYER_ON_PLANE,
 			0, 0, 0, 0,
 			null,  // completionNpcIds
@@ -347,6 +356,7 @@ public class GuidanceSequencerTest
 			0, 0, 0,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.VARBIT_AT_LEAST,
 			0, 0, 0, 0,
 			null,  // completionNpcIds
@@ -375,6 +385,7 @@ public class GuidanceSequencerTest
 			0, 0, 0,
 			0, null, null,
 			null, requiredItemIds,
+			null,  // recommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null,  // completionNpcIds
@@ -745,6 +756,7 @@ public class GuidanceSequencerTest
 			0, 0, 0,
 			2042, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.ACTOR_DEATH,
 			0, 0, 0, 0,
 			Arrays.asList(2042, 2043, 2044),  // completionNpcIds
@@ -1211,6 +1223,7 @@ public class GuidanceSequencerTest
 			worldX, worldY, 0,
 			0, null, null,
 			travelTip, null,
+			null,  // recommendedItemIds
 			CompletionCondition.ARRIVE_AT_TILE,
 			0, 0, 5, 0,
 			null,  // completionNpcIds
@@ -1434,6 +1447,7 @@ public class GuidanceSequencerTest
 			3000, 3000, 0,
 			0, null, null,
 			null, null,
+			null,  // recommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null,  // completionNpcIds
