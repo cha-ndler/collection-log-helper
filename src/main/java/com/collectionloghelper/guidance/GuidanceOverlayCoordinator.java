@@ -243,13 +243,25 @@ public class GuidanceOverlayCoordinator
 			GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
 			if (panel != null)
 			{
+				final int landedIdx = guidanceSequencer.getCurrentIndex() + 1;
+				final int stepTotal = guidanceSequencer.getTotalSteps();
+				final String stepDesc = step != null ? step.getDescription() : "";
+				final boolean stepManual =
+					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL;
 				panel.setGuidanceState(true, source);
-				panel.updateStepProgress(
-					guidanceSequencer.getCurrentIndex() + 1,
-					guidanceSequencer.getTotalSteps(),
-					step != null ? step.getDescription() : "",
-					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL,
-					rawStep != null ? rawStep.getRequiredItemIds() : null);
+				// Show step text immediately without items; resolve names on the client
+				// thread (~1 tick) to avoid the EDT assert in ItemManager#getItemComposition
+				// (see cha-ndler/collection-log-helper#388).
+				panel.updateStepProgress(landedIdx, stepTotal, stepDesc, stepManual,
+					Collections.emptyList());
+				final GuidanceStep rawForResolve = rawStep;
+				clientThread.invokeLater(() ->
+				{
+					final List<RequiredItemDisplay> resolvedItems =
+						requiredItemResolver.resolve(rawForResolve);
+					panel.updateStepProgress(landedIdx, stepTotal, stepDesc, stepManual,
+						resolvedItems);
+				});
 			}
 			// Add InfoBox showing the correct landed step (not always "1/N")
 			if (!source.getItems().isEmpty() && pluginInstance != null)
@@ -803,13 +815,24 @@ public class GuidanceOverlayCoordinator
 
 		if (panel != null)
 		{
-			GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
-			panel.updateStepProgress(
-				guidanceSequencer.getCurrentIndex() + 1,
-				guidanceSequencer.getTotalSteps(),
-				step.getDescription(),
-				step.getCompletionCondition() == CompletionCondition.MANUAL,
-				rawStep != null ? rawStep.getRequiredItemIds() : null);
+			final int current = guidanceSequencer.getCurrentIndex() + 1;
+			final int total = guidanceSequencer.getTotalSteps();
+			final String desc = step.getDescription();
+			final boolean isManual = step.getCompletionCondition() == CompletionCondition.MANUAL;
+			final GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
+
+			// Push description + step progress to the panel immediately (safe from any thread
+			// because showStep dispatches to the EDT). Required-item resolution is deferred
+			// to the client thread because RequiredItemResolver.resolve() calls
+			// ItemManager.getItemComposition, which asserts caller-is-client-thread. See
+			// cha-ndler/collection-log-helper#388 for the original trace.
+			panel.updateStepProgress(current, total, desc, isManual, Collections.emptyList());
+			clientThread.invokeLater(() ->
+			{
+				final List<RequiredItemDisplay> resolvedItems =
+					requiredItemResolver.resolve(rawStep);
+				panel.updateStepProgress(current, total, desc, isManual, resolvedItems);
+			});
 		}
 	}
 
