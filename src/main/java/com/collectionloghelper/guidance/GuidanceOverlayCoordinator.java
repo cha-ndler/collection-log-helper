@@ -538,7 +538,7 @@ public class GuidanceOverlayCoordinator
 		objectHighlightOverlay.setTargetObjectIds(step.getAllObjectIds());
 		objectHighlightOverlay.setObjectInteractAction(step.getObjectInteractAction());
 		objectHighlightOverlay.setUseItemOnObject(step.isUseItemOnObject());
-		objectHighlightOverlay.setTooltipText(step.getDescription());
+		objectHighlightOverlay.setTooltipText(step.resolveDescription(activeTargetItemId));
 
 		itemHighlightOverlay.setTargetItemIds(step.getHighlightItemIds());
 
@@ -586,7 +586,7 @@ public class GuidanceOverlayCoordinator
 			WorldPoint worldPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
 			guidanceOverlay.setTargetPoint(worldPoint);
 			guidanceOverlay.setTargetName(sourceName);
-			guidanceOverlay.setLocationDescription(step.getDescription());
+			guidanceOverlay.setLocationDescription(step.resolveDescription(activeTargetItemId));
 			String rawTravelTip = step.getTravelTip();
 			if ((rawTravelTip == null || rawTravelTip.isEmpty()) && source != null)
 			{
@@ -650,7 +650,7 @@ public class GuidanceOverlayCoordinator
 				worldMapPointManager.remove(activeMapPoint);
 				activeMapPoint = null;
 			}
-			guidanceOverlay.setClueGuidanceText(step.getDescription());
+			guidanceOverlay.setClueGuidanceText(step.resolveDescription(activeTargetItemId));
 			clientThread.invokeLater(() ->
 			{
 				client.clearHintArrow();
