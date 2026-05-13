@@ -431,7 +431,8 @@ public class GuidanceOverlayCoordinator
 		if (guidanceSequencer.isActive() && trackedGuidanceNpc == null)
 		{
 			GuidanceStep step = guidanceSequencer.getRawCurrentStep();
-			if (step != null && step.getNpcId() > 0 && npc.getId() == step.getNpcId())
+			if (step != null && step.resolveNpcId(activeTargetItemId) > 0
+				&& npc.getId() == step.resolveNpcId(activeTargetItemId))
 			{
 				trackedGuidanceNpc = npc;
 				guidanceOverlay.setTrackedNpc(npc);
@@ -594,7 +595,7 @@ public class GuidanceOverlayCoordinator
 			String travelTip = travelCapabilities.selectBestTravelTip(rawTravelTip);
 			guidanceOverlay.setTravelTip(travelTip);
 			log.debug("Travel capabilities for step '{}': {}", step.getDescription(), travelCapabilities.getSummary());
-			guidanceOverlay.setTargetNpcId(step.getNpcId());
+			guidanceOverlay.setTargetNpcId(step.resolveNpcId(activeTargetItemId));
 			guidanceOverlay.setInteractAction(step.getInteractAction());
 			dialogHighlightOverlay.setTargetDialogOptions(step.getDialogOptions());
 			dialogHighlightOverlay.setGuidanceActive(true);
@@ -804,12 +805,13 @@ public class GuidanceOverlayCoordinator
 		trackedGuidanceNpc = null;
 		guidanceOverlay.setTrackedNpc(null);
 
-		if (step == null || step.getNpcId() <= 0)
+		final int resolvedNpcId = step == null ? 0 : step.resolveNpcId(activeTargetItemId);
+		if (resolvedNpcId <= 0)
 		{
 			return;
 		}
 
-		final int targetNpcId = step.getNpcId();
+		final int targetNpcId = resolvedNpcId;
 		clientThread.invokeLater(() ->
 		{
 			WorldView wv = client.getTopLevelWorldView();
@@ -1021,9 +1023,9 @@ public class GuidanceOverlayCoordinator
 	 * NPC steps use the NPC icon, object steps use the object/chest icon,
 	 * and all other steps use the generic tile diamond.
 	 */
-	private static WorldMapDestinationOverlay.StepIconType resolveStepIconType(GuidanceStep step)
+	private WorldMapDestinationOverlay.StepIconType resolveStepIconType(GuidanceStep step)
 	{
-		if (step.getNpcId() > 0)
+		if (step.resolveNpcId(activeTargetItemId) > 0)
 		{
 			return WorldMapDestinationOverlay.StepIconType.NPC;
 		}
