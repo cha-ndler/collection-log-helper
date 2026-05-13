@@ -201,7 +201,11 @@ Sub-milestones (the order reflects dependencies, not priority):
 - B1 — Add composable completion conditions. Today's 10-value enum becomes a discriminated union that can AND/OR other conditions. Keep the old enum values as the atomic leaves.
 - B2 — Tile-sequence pathing: `GuidanceStep` can declare an ordered list of waypoint tiles that the player must cross in order, not just "arrive within N tiles of the target."
 - B3 — Nested conditional steps: `conditionalAlternatives` can itself branch, not just one-level-deep overrides.
-- B4 — Alternative-method modelling on sources: a source can declare multiple methods (e.g., "Konar task", "unlocked ancient Hydra lair") and the sequencer picks one based on player state.
+- B4 — Alternative-method modelling on sources: a source can declare multiple methods (e.g., "Konar task", "unlocked ancient Hydra lair") and the sequencer picks one based on player state. **Direction firmed up 2026-05-13** — the per-item-target principle (different clog items from the same source require different methods/consumables/gear) is the operating model. Concrete deliverables:
+  - **B4.1 — Per-item required-items override (proof of concept)**: schema field `perItemRequiredItemIds` on `GuidanceStep`. Activation chain propagates the target clog item ID from the panel through to the resolver. Mort'ton is the first source (issue #417): each shade tier maps to its target clog items. Establishes the pattern.
+  - **B4.2 — Survey + audit**: read-only audit of all 225 sources × all clog items to produce a prioritized candidate list of sources that benefit from per-item method differentiation. Output is a tracking issue with categorized candidates: multi-tier chests (Mort'ton-style), difficulty-mode bundles (CoX vs CM, ToB vs HM, ToA invocation tiers), method-variant bosses (Vorkath / Zulrah / Hydra method splits).
+  - **B4.3 — Per-source backfills**: one focused PR per high-impact candidate source from B4.2's list. May require additional schema fields beyond B4.1 — `perItemRecommendedItemIds`, `perItemTravelTip`, `perItemKillTimeSeconds`, `perItemConditionalAlternatives` — added incrementally as candidate sources surface the need.
+  - **B4.4 — North Star alignment**: when enough candidate sources are backfilled, the panel's "Top Pick" selector can drive the per-item method choice automatically, matching the ROADMAP's North Star: *"best source for this player, right now"* extended into the per-step guidance UI surface.
 - B5 — Puzzle/dynamic step type: a step can re-render its target every tick based on a pluggable evaluator. Pilot on one source (Wintertodt braziers or Barbarian Assault roles).
 - B6 — **Decision D-01**: hybrid Java helpers — see section 7. If we adopt them, scaffold one pilot source (e.g., Cerberus) as a Java helper class to prove the pattern.
 
@@ -544,7 +548,11 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [ ] B1 — Composable completion conditions             status: planned       owner: —          updated: 2026-04-16
 - [ ] B2 — Tile-sequence pathing                        status: planned       owner: —          updated: 2026-04-16
 - [ ] B3 — Nested conditional steps                     status: planned       owner: —          updated: 2026-04-16
-- [ ] B4 — Alternative-method modelling                 status: planned       owner: —          updated: 2026-04-16
+- [/] B4 — Alternative-method modelling                 status: in-progress   owner: cha-ndler  updated: 2026-05-13  note: direction firmed up — see expanded section above. Sub-milestones:
+- [/] B4.1 — Per-item required-items override (Mort'ton POC)  status: in-progress  owner: cha-ndler  updated: 2026-05-13  issue: #417  note: worker dispatched 2026-05-13. Establishes `perItemRequiredItemIds` schema field + activation-chain propagation of target clog item ID.
+- [ ] B4.2 — Survey + audit of all sources for per-item method differentiation  status: planned  owner: —  updated: 2026-05-13  note: holds until B4.1 lands so schema is stable. Read-only audit; output is a tracking issue with categorized candidates.
+- [ ] B4.3 — Per-source backfills (one PR per high-impact candidate from B4.2)  status: planned  owner: —  updated: 2026-05-13
+- [ ] B4.4 — Top Pick auto-drives per-item method choice (North Star UI alignment)  status: planned  owner: —  updated: 2026-05-13
 - [ ] B5 — Puzzle/dynamic step type                     status: planned       owner: —          updated: 2026-04-16
 - [ ] B6 — Decision D-01 pilot (hybrid Java helper)     status: planned       owner: —          updated: 2026-04-16
 
