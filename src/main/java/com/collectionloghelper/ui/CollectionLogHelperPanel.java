@@ -69,6 +69,7 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -130,7 +131,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final ClueCompletionEstimator clueEstimator;
 	private final ItemManager itemManager;
 	private final RequirementsChecker requirementsChecker;
-	private final Consumer<CollectionLogSource> guidanceActivator;
+	private final BiConsumer<CollectionLogSource, Integer> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 	private final Consumer<AfkFilter> afkFilterUpdater;
 	private final Consumer<EfficientSortMode> sortModeUpdater;
@@ -177,7 +178,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		SlayerStrategyCalculator slayerStrategyCalculator,
 		PlayerInventoryState inventoryState,
 		PlayerBankState bankState,
-		Consumer<CollectionLogSource> guidanceActivator, Runnable guidanceDeactivator,
+		BiConsumer<CollectionLogSource, Integer> guidanceActivator, Runnable guidanceDeactivator,
 		Consumer<AfkFilter> afkFilterUpdater,
 		Consumer<EfficientSortMode> sortModeUpdater)
 	{
@@ -583,7 +584,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			itemManager, clueEstimator,
 			requirementsChecker.hasFairyRingAccess(),
 			this::showListView,
-			() -> guidanceActivator.accept(source),
+			() -> guidanceActivator.accept(source, item.getItemId()),
 			() -> guidanceDeactivator.run(),
 			isGuidingThis
 		);

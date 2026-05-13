@@ -28,7 +28,7 @@ import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.efficiency.ScoredItem;
 import java.util.Collections;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import javax.swing.JPanel;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public class QuickGuidePanelViewTest
 	@Before
 	public void setUp()
 	{
-		Consumer<CollectionLogSource> activator = s -> {};
+		BiConsumer<CollectionLogSource, Integer> activator = (s, id) -> {};
 		Runnable deactivator = () -> {};
 		view = new QuickGuidePanelView(activator, deactivator);
 

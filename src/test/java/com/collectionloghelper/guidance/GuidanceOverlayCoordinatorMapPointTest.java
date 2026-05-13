@@ -179,7 +179,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 	{
 		CollectionLogSource source = sourceAtCoords("Zulrah", 2268, 3073, 0);
 
-		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0));
+		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0), null);
 
 		// WorldMapDestinationOverlay handles the arrow — legacy map point must not be added.
 		verify(worldMapPointManager, never()).add(any(CollectionLogWorldMapPoint.class));
@@ -194,7 +194,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 	{
 		CollectionLogSource source = sourceAtCoordsWithEmptySteps("Barrows", 3565, 3289, 0);
 
-		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0));
+		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0), null);
 
 		verify(worldMapPointManager, never()).add(any(CollectionLogWorldMapPoint.class));
 	}
