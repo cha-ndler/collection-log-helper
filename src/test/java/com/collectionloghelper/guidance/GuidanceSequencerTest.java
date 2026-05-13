@@ -1183,12 +1183,12 @@ public class GuidanceSequencerTest
 
 	private SourceRequirements makeQuestRequirement(String questName)
 	{
-		return new SourceRequirements(Arrays.asList(questName), null);
+		return new SourceRequirements(Arrays.asList(questName), null, null);
 	}
 
 	private SourceRequirements makeSkillRequirement(String skill, int level)
 	{
-		return new SourceRequirements(null, Arrays.asList(new SkillRequirement(skill, level)));
+		return new SourceRequirements(null, Arrays.asList(new SkillRequirement(skill, level)), null);
 	}
 
 	private GuidanceStep makeStepWithAlternatives(String description, int worldX, int worldY,

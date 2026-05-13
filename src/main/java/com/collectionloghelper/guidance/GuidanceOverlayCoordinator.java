@@ -35,6 +35,7 @@ import com.collectionloghelper.data.ItemObjectTier;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
+import com.collectionloghelper.data.RequirementRow;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
@@ -219,6 +220,9 @@ public class GuidanceOverlayCoordinator
 				"[Collection Log Helper] Warning: " + source.getName() + " requires " + unmetList, "");
 		}
 
+		// Build requirement rows on the client thread (snapshot); passed to the panel header.
+		final List<RequirementRow> requirementRows = requirementsChecker.buildRequirementRows(source);
+
 		// Clear any existing guidance first, including InfoBox and sequencer
 		deactivateGuidance();
 
@@ -252,7 +256,7 @@ public class GuidanceOverlayCoordinator
 				final String stepDesc = step != null ? step.getDescription() : "";
 				final boolean stepManual =
 					step != null && step.getCompletionCondition() == CompletionCondition.MANUAL;
-				panel.setGuidanceState(true, source);
+				panel.setGuidanceState(true, source, requirementRows);
 				// Show step text immediately without items; resolve names on the client
 				// thread (~1 tick) to avoid the EDT assert in ItemManager#getItemComposition
 				// (see cha-ndler/collection-log-helper#388).
@@ -315,7 +319,7 @@ public class GuidanceOverlayCoordinator
 		// Always update panel guidance state from the plugin
 		if (panel != null)
 		{
-			panel.setGuidanceState(true, source);
+			panel.setGuidanceState(true, source, requirementRows);
 			panel.hideStepProgress();
 		}
 
@@ -362,7 +366,7 @@ public class GuidanceOverlayCoordinator
 		{
 			panel.hideClueGuidance();
 			panel.hideStepProgress();
-			panel.setGuidanceState(false, null);
+			panel.setGuidanceState(false, null, null);
 		}
 
 		log.debug("Guidance deactivated");
