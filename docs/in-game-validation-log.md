@@ -9,7 +9,7 @@
 > - `[!]` — Regression / failed (file a new issue and cross-link)
 > - `[?]` — Inconclusive (couldn't reproduce / state-dependent)
 
-> **Last updated**: 2026-05-13
+> **Last updated**: 2026-05-13 (validation pass post-#409)
 
 ---
 
@@ -370,6 +370,87 @@ Adds a `String section` field to `GuidanceStep` (additive, backwards compatible 
 | 6 | `./gradlew test` passes locally on master at HEAD (the 18 new StepSectionGrouper / StepProgressView section tests cover the sectioned-layout paths) | `[ ]` | |
 | 7 | OPTIONAL (advanced): hand-edit `drop_rates.json` for a single source to set `section` on a few consecutive steps (e.g. add `"section": "Bank prep"` to step 1, `"section": "Travel"` to steps 2–3, `"section": "Combat"` to steps 4+ on a test source) → activate guidance → verify section headers render with "▼" expanded chevron, active step's section is expanded, other sections collapse on click | `[ ]` | optional pending B.5.4b data |
 | 8 | `client.log` after 5 minutes of guidance → ZERO stack traces mentioning `StepSectionGrouper`, `sectionsPanel`, or `StepProgressView` section paths | `[ ]` | |
+
+---
+
+## PR #404 — B.5.7 dialog highlighting audit + polish *(merged 2026-05-13)*
+
+Refs cha-ndler/collection-log-helper#382 (B.5.7). Fixed 3 dialog-overlay bugs surfaced during audit: location-less dialog steps not wiring overlay state; widget-state mutation across frames; always-on NPC continue-prompt rendering when no dialog step is active.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a dialog-heavy source (any source with a `dialogChoice` step) → expected dialog option highlights when player opens that NPC dialog | `[?]` | Not exercised in 2026-05-13 pass (T7 skipped). |
+| 2 | Without any active guidance step, talk to a random NPC (banker, Doomsayer, shop NPC) → NO dialog highlight artifacts; the overlay is cleanly absent | `[?]` | Not exercised. |
+| 3 | Switch sources mid-conversation → dialog highlight refreshes (no stale arrow prefix from prior step) | `[ ]` | |
+| 4 | `client.log` after 5 minutes of dialog interactions → ZERO `Uncaught exception` traces in `DialogHighlightOverlay` | `[ ]` | |
+
+---
+
+## PR #405 — B.5.2 recommended items section per guidance step *(merged 2026-05-13, validated 2026-05-13)*
+
+Refs cha-ndler/collection-log-helper#382 (B.5.2). New "Recommended:" subsection below "Items needed:" rendering `recommendedItemIds` with the same bank-scan colouring as B.5.1.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on Barrows (Dharok step has recommendedItemIds from B.5.2b: Prayer potion + Super restore) → "Recommended:" subsection appears below "Items needed:" with both rows colour-coded | `[x]` | T6 PASS — region capture confirmed Prayer potion(4) + Super restore(4) rows rendered correctly. |
+| 2 | Step with no `recommendedItemIds` → "Recommended:" subsection hidden (no empty header) | `[x]` | Implicit from T2 Shades of Mort'ton Bank prep step — no Recommended section rendered. |
+| 3 | Required + recommended both populated → both subsections coexist in panel | `[x]` | T6 PASS — Spade (Items needed) + Prayer potion / Super restore (Recommended) visible together on Barrows Dharok step. |
+| 4 | State transition: withdraw a recommended item from bank → row transitions WHITE → GREEN within ~1 tick | `[?]` | Not specifically exercised this pass; behaviour expected to mirror B.5.1's GREEN/WHITE/RED transitions which DID work for required items in T5. |
+
+---
+
+## PR #406 — B.5.7 follow-ups (widget ID constants + drawAfterInterface decision) *(merged 2026-05-13)*
+
+Refs cha-ndler/collection-log-helper#382 (B.5.7 follow-ups). Replaced magic widget literals 219/231 with `InterfaceID.CHATMENU` / `InterfaceID.CHAT_LEFT`. Decision: skip `drawAfterInterface()` — `OverlayLayer.ABOVE_WIDGETS` already paints above all widgets.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source whose current step has a `dialogChoice` → dialog highlight renders on the correct option text (regression check) | `[?]` | Not exercised in 2026-05-13 pass. |
+| 2 | `client.log` startup check → ZERO warnings about `InterfaceID` lookup or unknown widget IDs | `[x]` | T9 log audit confirmed clean. |
+| 3 | No z-order regression: dialog highlight still appears ABOVE the dialog widget text (not behind) | `[?]` | Not exercised. |
+
+---
+
+## PR #407 — #370 efficiency sort in Category Focus mode *(merged 2026-05-13, partially validated 2026-05-13)*
+
+Closes cha-ndler/collection-log-helper#370. Category Focus mode item list now sorts by descending efficiency score. Includes the `requiresPrevious` guard fix discovered during self-review (122 items across Hydra, Sire, ToB/ToA/CoX shroud tiers, Defenders, Graceful recolours) — items with unmet prerequisites no longer outrank legitimately-pursuable items.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Open Category Focus → Bosses → top item is the highest-efficiency UNOBTAINED item in that category | `[?]` | T1 of prior pass observed locked-item interleaving by score (Bronze lock at top by score, ~6 min); could not confirm specifically the Bosses filter was active. Functional path confirmed; specific category confirmation deferred. |
+| 2 | Locked items interleave by score (not pinned at bottom) — regression check vs PR #392 | `[x]` | T1 evidence: Bronze lock (locked) appeared at top by score, not at bottom. |
+| 3 | "Hide Obtained Items" OFF → obtained items appear AFTER all unobtained in the same category, in their own efficiency order | `[ ]` | |
+| 4 | Cross-source items with `requiresPrevious` (e.g. Hydra eye/fang/heart, ToA shroud upgrades) appear with non-zero score ONLY when the prerequisite is owned | `[ ]` | |
+| 5 | Switch between Category Focus and Efficient mode → Efficient mode behaviour unchanged from pre-#407 | `[ ]` | |
+
+---
+
+## PR #408 — B.5.4b sections + B.5.2b recommendedItemIds backfill *(merged 2026-05-13, partially validated 2026-05-13)*
+
+Refs cha-ndler/collection-log-helper#382 (B.5.4b, B.5.2b). 18 sources received `section` labels (64 steps); 15 sources received `recommendedItemIds` arrays. Vocabulary: `Travel` / `Combat` / `Loot` / `Bank prep` / `Skilling` / `Reward`.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on Shades of Mort'ton → step strip groups under "Bank prep (1 step)" / "Skilling (1 step)" / "Loot (3 steps)" | `[x]` | T2 PASS — sections all visible in region capture. |
+| 2 | Activate guidance on Barrows → "Travel (1 step)" / "Combat (6 steps)" / "Loot (2 steps)" sections | `[x]` | T6 PASS — Barrows sections visible. |
+| 3 | Active step's section is auto-expanded; other sections collapse to header | `[x]` | T2 + T6 both showed: Bank prep expanded for Mort'ton (active step was step 1), Combat expanded for Barrows (active was step 2). |
+| 4 | Activate guidance on Barrows Dharok step → "Recommended:" shows Prayer potion + Super restore | `[x]` | T6 PASS — both rows visible. |
+| 5 | Activate guidance on a sectioned source with multiple steps in the same section → consecutive steps render under one header | `[ ]` | |
+| 6 | Activate guidance on a source NOT in the 18-source priority list → flat layout (no section headers) | `[ ]` | |
+
+---
+
+## PR #409 — fix(guidance): wrap activateGuidance entry point on client thread *(merged 2026-05-13, validated 2026-05-13)*
+
+Closes the regression discovered in the 2026-05-13 pre-fix validation pass: `Plugin.activateGuidance` ran on the EDT but called `RequirementsChecker.buildRequirementRows` (client-thread-only) introduced by PR #401.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Click Guide Me on Shades of Mort'ton (which fully failed pre-fix) → guidance activates, step strip renders | `[x]` | T2 PASS — full activation, step 1/5 visible, panel populated. |
+| 2 | Click Top Pick green Guide Me button on any source → guidance activates cleanly | `[x]` | Implicit from session — multiple sources activated without issue. |
+| 3 | Click Guide Me from the Item Detail view → guidance activates cleanly | `[x]` | Implicit — Barrows activation in T6 used this path. |
+| 4 | `client.log` grep `AssertionError` since boot → ZERO matches | `[x]` | T9 log audit confirmed: no AssertionError since 09:35 EDT boot. |
+| 5 | Regression: step-advance and skip (`c528d0ae`) still work | `[ ]` | Not specifically re-tested in 2026-05-13 pass; no evidence of regression. |
 
 ---
 
