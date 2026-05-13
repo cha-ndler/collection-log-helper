@@ -680,6 +680,16 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		stepProgressView.setCallbacks(advancer, skipper);
 	}
 
+	/**
+	 * Sets callbacks for all four step-control buttons: Next Step, Skip, Reset,
+	 * and Sync. Any callback may be {@code null}.
+	 */
+	public void setStepCallbacks(Runnable advancer, Runnable skipper,
+		Runnable resetter, Runnable syncer)
+	{
+		stepProgressView.setCallbacks(advancer, skipper, resetter, syncer);
+	}
+
 	public void hideClueGuidance()
 	{
 		guidanceBannerView.hideClueGuidance();
