@@ -1,0 +1,263 @@
+/*
+ * Copyright (c) 2025, cha-ndler
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+package com.collectionloghelper.guidance;
+
+import com.collectionloghelper.CollectionLogHelperConfig;
+import com.collectionloghelper.data.CollectionLogCategory;
+import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.data.PlayerInventoryState;
+import com.collectionloghelper.data.PlayerTravelCapabilities;
+import com.collectionloghelper.data.RequirementsChecker;
+import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
+import com.collectionloghelper.overlay.DialogHighlightOverlay;
+import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
+import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
+import com.collectionloghelper.overlay.GuidanceOverlay;
+import com.collectionloghelper.overlay.ItemHighlightOverlay;
+import com.collectionloghelper.overlay.ObjectHighlightOverlay;
+import com.collectionloghelper.overlay.WidgetHighlightOverlay;
+import com.collectionloghelper.overlay.WorldMapDestinationOverlay;
+import com.collectionloghelper.overlay.WorldMapRouteOverlay;
+import java.lang.reflect.Constructor;
+import java.util.Collections;
+import net.runelite.api.Client;
+import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.callback.ClientThread;
+import net.runelite.client.eventbus.EventBus;
+import net.runelite.client.game.ItemManager;
+import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
+import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+/**
+ * Regression test for issue #410: double arrow on the world map when
+ * {@code WorldMapDestinationOverlay} (B.5.5) and {@code CollectionLogWorldMapPoint}
+ * are both active simultaneously.
+ *
+ * <p>{@link CollectionLogWorldMapPoint} draws its own edge-snap chevron via
+ * {@link CollectionLogWorldMapPoint#onEdgeSnap()}.  {@link WorldMapDestinationOverlay}
+ * independently draws an edge-snap arrow in its {@code render()} path.  When both are
+ * registered at the same time, two overlapping arrows appear on the world map.
+ *
+ * <p>The fix: {@link GuidanceOverlayCoordinator#activateGuidance} must NEVER call
+ * {@link WorldMapPointManager#add(net.runelite.client.ui.overlay.worldmap.WorldMapPoint)}
+ * with a {@link CollectionLogWorldMapPoint} while guidance is active.
+ * {@link WorldMapDestinationOverlay} supersedes it for both the on-screen destination
+ * icon and the off-screen directional arrow.
+ */
+@RunWith(MockitoJUnitRunner.class)
+public class GuidanceOverlayCoordinatorMapPointTest
+{
+	@Mock
+	private Client client;
+	@Mock
+	private ClientThread clientThread;
+	@Mock
+	private EventBus eventBus;
+	@Mock
+	private CollectionLogHelperConfig config;
+	@Mock
+	private GuidanceSequencer guidanceSequencer;
+	@Mock
+	private RequirementsChecker requirementsChecker;
+	@Mock
+	private PlayerTravelCapabilities travelCapabilities;
+	@Mock
+	private PlayerInventoryState playerInventoryState;
+	@Mock
+	private ItemManager itemManager;
+	@Mock
+	private RequiredItemResolver requiredItemResolver;
+	@Mock
+	private WorldMapPointManager worldMapPointManager;
+	@Mock
+	private InfoBoxManager infoBoxManager;
+	@Mock
+	private GuidanceOverlay guidanceOverlay;
+	@Mock
+	private GuidanceMinimapOverlay guidanceMinimapOverlay;
+	@Mock
+	private DialogHighlightOverlay dialogHighlightOverlay;
+	@Mock
+	private ObjectHighlightOverlay objectHighlightOverlay;
+	@Mock
+	private ItemHighlightOverlay itemHighlightOverlay;
+	@Mock
+	private WorldMapRouteOverlay worldMapRouteOverlay;
+	@Mock
+	private WorldMapDestinationOverlay worldMapDestinationOverlay;
+	@Mock
+	private GroundItemHighlightOverlay groundItemHighlightOverlay;
+	@Mock
+	private WidgetHighlightOverlay widgetHighlightOverlay;
+
+	private GuidanceOverlayCoordinator coordinator;
+
+	@Before
+	public void setUp() throws Exception
+	{
+		Constructor<GuidanceOverlayCoordinator> ctor =
+			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
+				Client.class,
+				ClientThread.class,
+				EventBus.class,
+				CollectionLogHelperConfig.class,
+				GuidanceSequencer.class,
+				RequirementsChecker.class,
+				PlayerTravelCapabilities.class,
+				PlayerInventoryState.class,
+				ItemManager.class,
+				RequiredItemResolver.class,
+				WorldMapPointManager.class,
+				InfoBoxManager.class,
+				GuidanceOverlay.class,
+				GuidanceMinimapOverlay.class,
+				DialogHighlightOverlay.class,
+				ObjectHighlightOverlay.class,
+				ItemHighlightOverlay.class,
+				WorldMapRouteOverlay.class,
+				WorldMapDestinationOverlay.class,
+				GroundItemHighlightOverlay.class,
+				WidgetHighlightOverlay.class);
+		ctor.setAccessible(true);
+		coordinator = ctor.newInstance(
+			client, clientThread, eventBus, config,
+			guidanceSequencer, requirementsChecker, travelCapabilities,
+			playerInventoryState, itemManager, requiredItemResolver,
+			worldMapPointManager, infoBoxManager,
+			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
+			objectHighlightOverlay, itemHighlightOverlay,
+			worldMapRouteOverlay, worldMapDestinationOverlay,
+			groundItemHighlightOverlay, widgetHighlightOverlay);
+
+		// Default stubs: no unmet requirements; buildRequirementRows called unconditionally
+		when(requirementsChecker.getUnmetRequirements(any())).thenReturn(Collections.emptyList());
+		when(requirementsChecker.buildRequirementRows(any())).thenReturn(Collections.emptyList());
+	}
+
+	/**
+	 * When a non-clue, non-step source with a world coordinate is activated,
+	 * {@link WorldMapPointManager#add} must NEVER be called with a
+	 * {@link CollectionLogWorldMapPoint}. The {@link WorldMapDestinationOverlay}
+	 * owns the world-map arrow; the legacy map point would produce a double arrow.
+	 *
+	 * <p>Closes cha-ndler/collection-log-helper#410.
+	 */
+	@Test
+	public void activateGuidance_nonClueSource_doesNotAddLegacyMapPoint()
+	{
+		CollectionLogSource source = sourceAtCoords("Zulrah", 2268, 3073, 0);
+
+		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0));
+
+		// WorldMapDestinationOverlay handles the arrow — legacy map point must not be added.
+		verify(worldMapPointManager, never()).add(any(CollectionLogWorldMapPoint.class));
+	}
+
+	/**
+	 * When the source has an empty guidance-steps list (non-multi-step path), the same
+	 * contract applies: no {@link CollectionLogWorldMapPoint} must be registered.
+	 */
+	@Test
+	public void activateGuidance_emptyStepsSource_doesNotAddLegacyMapPoint()
+	{
+		CollectionLogSource source = sourceAtCoordsWithEmptySteps("Barrows", 3565, 3289, 0);
+
+		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0));
+
+		verify(worldMapPointManager, never()).add(any(CollectionLogWorldMapPoint.class));
+	}
+
+	// ---- helpers ----
+
+	/** Builds a minimal BOSSES source with coordinates but no guidance steps. */
+	private static CollectionLogSource sourceAtCoords(
+		String name, int x, int y, int plane)
+	{
+		return new CollectionLogSource(
+			name,
+			CollectionLogCategory.BOSSES,
+			x, y, plane,
+			0, 0,
+			null,  // locationDescription
+			null,  // waypoints
+			null,  // rewardType
+			0.0,   // pointsPerHour
+			null,  // mutuallyExclusiveSources
+			0,     // rollsPerKill
+			false, // aggregated
+			0,     // afkLevel
+			null,  // travelTip
+			0,     // npcId
+			null,  // interactAction
+			null,  // dialogOptions
+			null,  // guidanceSteps — no multi-step
+			null,  // requirements
+			0,     // cumulativeTrackItemId
+			null,  // cumulativeTrackObjectIds
+			0,     // cumulativeTrackThreshold
+			Collections.emptyList()  // items
+		);
+	}
+
+	/** Builds a BOSSES source with coordinates and an explicitly empty guidanceSteps list. */
+	private static CollectionLogSource sourceAtCoordsWithEmptySteps(
+		String name, int x, int y, int plane)
+	{
+		return new CollectionLogSource(
+			name,
+			CollectionLogCategory.BOSSES,
+			x, y, plane,
+			0, 0,
+			null,
+			null,
+			null,
+			0.0,
+			null,
+			0,
+			false,
+			0,
+			null,
+			0,
+			null,
+			null,
+			Collections.emptyList(),  // empty guidanceSteps — skips multi-step branch
+			null,
+			0,
+			null,
+			0,
+			Collections.emptyList()
+		);
+	}
+}
