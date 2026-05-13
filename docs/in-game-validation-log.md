@@ -9,7 +9,7 @@
 > - `[!]` — Regression / failed (file a new issue and cross-link)
 > - `[?]` — Inconclusive (couldn't reproduce / state-dependent)
 
-> **Last updated**: 2026-05-12
+> **Last updated**: 2026-05-13
 
 ---
 
@@ -295,6 +295,81 @@ Adds an "Items needed:" subsection to `StepProgressView` that lists each entry i
 | 15 | Cycle Guide Me → Stop Guidance → Guide Me 5 times → list renders correctly each time, no stale rows from prior sessions | `[ ]` | |
 | 16 | `client.log` after 5 minutes of guidance with step transitions → ZERO `AssertionError` or `IllegalStateException` from `ItemManager.getItemComposition`, `getImage`, or `RequiredItemResolver` | `[ ]` | |
 | 17 | Regression: in-game overlay required-items panel (added in #384) still works alongside the new side-panel section | `[ ]` | |
+
+---
+
+## PR #400 — B.5.1b `requiredItemIds` backfill across 7 high-impact sources *(merged 2026-05-13)*
+
+Refs cha-ndler/collection-log-helper#382 (B.5.1b). Pure data — no code change.
+
+Added `requiredItemIds` arrays to 12 guidance steps across 7 sources. Validation lights up the existing B.5.1 "Items needed:" subsection for these sources.
+
+| # | Source | Step | Expected item(s) in "Items needed:" | Status | Notes |
+|---|---|---|---|---|---|
+| 1 | Kree'arra | Step 4 (grapple room entry) | Mithril grapple | `[ ]` | |
+| 2 | Skotizo | Step 1 (dark totem use) | Dark totem | `[ ]` | |
+| 3 | Hespori | Step 1 (plant seed) | Hespori seed + spade | `[ ]` | |
+| 4 | Barrows | Step 2 (Ahrim dig) | Spade | `[ ]` | |
+| 5 | Barrows | Step 3 (Dharok dig) | Spade | `[ ]` | |
+| 6 | Barrows | Step 4 (Guthan dig) | Spade | `[ ]` | |
+| 7 | Barrows | Step 5 (Karil dig) | Spade | `[ ]` | |
+| 8 | Barrows | Step 6 (Torag dig) | Spade | `[ ]` | |
+| 9 | Barrows | Step 7 (Verac dig) | Spade | `[ ]` | |
+| 10 | Tempoross | Step 2 (fish harpoonfish) | Harpoon | `[ ]` | |
+| 11 | Wintertodt | Step 2 (enter arena) | Tinderbox + axe | `[ ]` | |
+| 12 | The Inferno | Step 1 (sacrifice cape) | Fire cape | `[ ]` | |
+| 13 | Spot-check excluded source (e.g. Vorkath) | Step 1 | NO "Items needed:" header (correct — Vorkath has no hard-gated items) | `[ ]` | |
+| 14 | `./gradlew test` passes locally on master at HEAD | n/a | n/a | `[ ]` | |
+
+---
+
+## PR #401 — B.5.3 General requirements (quest/skill/diary) in guidance header *(merged 2026-05-13)*
+
+Refs cha-ndler/collection-log-helper#382 (B.5.3).
+
+When guidance activates, a "Requirements:" subsection appears below the "Guiding: \<source\>" headline (above the step strip), listing each prerequisite as a coloured row:
+- Quest: GREEN (COMPLETED) / YELLOW (IN PROGRESS) / RED (NOT STARTED)
+- Skill: GREEN (level met) / RED (level short, shows "level X/Y")
+- Diary: GREEN (COMPLETED) / RED (NOT COMPLETED)
+- Hidden entirely when source has no requirements.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a multi-requirement source (e.g. Cerberus → 91 Slayer) → "Requirements:" subsection appears under the headline | `[ ]` | |
+| 2 | Player meets a skill requirement → row renders GREEN, format like "Slayer 91/91" | `[ ]` | |
+| 3 | Player short on a skill requirement → row renders RED, format like "Slayer 85/91" | `[ ]` | |
+| 4 | Quest requirement met → row renders GREEN with "COMPLETED" | `[ ]` | |
+| 5 | Quest requirement in progress → row renders YELLOW with "IN PROGRESS" | `[ ]` | |
+| 6 | Quest requirement not started → row renders RED with "NOT STARTED" | `[ ]` | |
+| 7 | Diary requirement met (e.g. Kandarin Diary tier for a source that gates on it) → row renders GREEN | `[ ]` | |
+| 8 | Diary requirement not met → row renders RED with the tier name | `[ ]` | |
+| 9 | Activate guidance on a source with NO requirements (e.g. a low-level clue tier) → "Requirements:" subsection is absent (no empty header) | `[ ]` | |
+| 10 | Stop Guidance → "Requirements:" subsection disappears with the rest of the header | `[ ]` | |
+| 11 | Switch sources mid-session → "Requirements:" refreshes to the new source's requirements (no stale rows) | `[ ]` | |
+| 12 | Train a skill from below to at-or-above the requirement → row transitions RED → GREEN on the next reconciliation (may require a Stop/Start cycle if state isn't reactive — note observation) | `[ ]` | |
+| 13 | Regression: B.5.1 "Items needed:" subsection still appears below the step strip, unaffected by the new header section | `[ ]` | |
+| 14 | `client.log` after 5 minutes of guidance → ZERO stack traces mentioning `RequirementsChecker`, `RequirementsView`, `buildRequirementRows`, or diary varbit lookup | `[ ]` | |
+
+---
+
+## PR #402 — B.5.4 Collapsible step sections via `section` field on `GuidanceStep` *(merged 2026-05-13)*
+
+Refs cha-ndler/collection-log-helper#382 (B.5.4).
+
+Adds a `String section` field to `GuidanceStep` (additive, backwards compatible — null = legacy flat layout). When ANY step on the active source has `section` set, `StepProgressView` groups consecutive same-section steps into collapsible blocks. Active step's section auto-expands. Null-section steps fall into an "Other" group.
+
+> **Validation note**: No source in `drop_rates.json` has a `section` field set yet (data backfill is a follow-up milestone B.5.4b). Most in-client checks here are **regression checks** that the existing flat layout is unchanged. The sectioned-layout behaviour is currently only exercised by unit tests; in-client validation will expand once sections are authored on real sources.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on any multi-step source (e.g. Shades of Mort'ton) → step strip renders in the legacy flat layout, identical to pre-#402 master | `[ ]` | |
+| 2 | Step strip shows all steps in order with the existing "Items needed:" subsection attached to the active step | `[ ]` | |
+| 3 | Auto-advance through 2–3 steps mid-session → strip updates per step, no section-header artefacts appear | `[ ]` | |
+| 4 | Skip / Next Step buttons work as before | `[ ]` | |
+| 5 | Stop Guidance → strip clears as before | `[ ]` | |
+| 6 | `./gradlew test` passes locally on master at HEAD (the 18 new StepSectionGrouper / StepProgressView section tests cover the sectioned-layout paths) | `[ ]` | |
+| 7 | OPTIONAL (advanced): hand-edit `drop_rates.json` for a single source to set `section` on a few consecutive steps (e.g. add `"section": "Bank prep"` to step 1, `"section": "Travel"` to steps 2–3, `"section": "Combat"` to steps 4+ on a test source) → activate guidance → verify section headers render with "▼" expanded chevron, active step's section is expanded, other sections collapse on click | `[ ]` | optional pending B.5.4b data |
+| 8 | `client.log` after 5 minutes of guidance → ZERO stack traces mentioning `StepSectionGrouper`, `sectionsPanel`, or `StepProgressView` section paths | `[ ]` | |
 
 ---
 
