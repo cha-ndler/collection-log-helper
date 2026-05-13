@@ -1641,4 +1641,206 @@ public class GuidanceSequencerTest
 		assertEquals("Landed step should be 'Pick up shade key'",
 			"Pick up shade key", landedStep.get().getDescription());
 	}
+
+	// ---- restartFromStep0 tests (Reset button) ────────────────────────────
+
+	/**
+	 * restartFromStep0 when the sequencer is active: index must return to 0,
+	 * sequencer must remain active, and onStepChanged must fire with step 0.
+	 */
+	@Test
+	public void testRestartFromStep0_resetsToFirstStep()
+	{
+		List<GuidanceStep> steps = Arrays.asList(
+			makeManualStep("Step 1"),
+			makeManualStep("Step 2"),
+			makeManualStep("Step 3")
+		);
+
+		AtomicReference<GuidanceStep> lastStep = new AtomicReference<>();
+		startSequence(steps, s -> lastStep.set(s), () -> {});
+
+		// Advance to step 2
+		sequencer.advanceStep();
+		assertEquals(1, sequencer.getCurrentIndex());
+
+		// Reset: must return to step 0 without skip-chain
+		sequencer.restartFromStep0();
+
+		assertTrue("Sequencer must remain active after reset", sequencer.isActive());
+		assertEquals("Index must be 0 after reset", 0, sequencer.getCurrentIndex());
+		assertNotNull("onStepChanged must fire after reset", lastStep.get());
+		assertEquals("Step 1", lastStep.get().getDescription());
+	}
+
+	/**
+	 * restartFromStep0 must NOT run the skip-chain even when the first step's
+	 * completion condition is already satisfied (that is the whole point of Reset).
+	 * Approach: startSequence lands at step 0 (default mocks have inventory empty),
+	 * then we update the mock to say the item is present, sync forward to step 1,
+	 * and verify Reset takes us back to step 0 unconditionally.
+	 */
+	@Test
+	public void testRestartFromStep0_forceStep0EvenIfSatisfied()
+	{
+		int itemId = 590;
+		// @Before already sets lenient defaults: hasItemCount and hasItem return false.
+		// Startsequence skip-chain lands at step 0 because inventory is empty by default.
+
+		List<GuidanceStep> steps = Arrays.asList(
+			makeInventoryHasItemStep(itemId, 1), // step 0
+			makeManualStep("Step 2")             // step 1
+		);
+
+		startSequence(steps);
+		assertEquals("Should start at step 0", 0, sequencer.getCurrentIndex());
+
+		// Now mock reports inventory has the item (player picked it up mid-session).
+		// INVENTORY_HAS_ITEM only checks hasItemCount; hasItem is not needed here.
+		when(inventoryState.hasItemCount(itemId, 1)).thenReturn(true);
+
+		// Sync forward so skip-chain pushes to step 1
+		sequencer.syncToCurrentState();
+		assertEquals("Sync should have advanced to step 1", 1, sequencer.getCurrentIndex());
+
+		// Reset: force back to step 0 even though the condition is satisfied
+		sequencer.restartFromStep0();
+
+		assertEquals("restartFromStep0 must land on step 0 regardless of satisfaction",
+			0, sequencer.getCurrentIndex());
+		assertTrue(sequencer.isActive());
+	}
+
+	/**
+	 * restartFromStep0 is a no-op when the sequencer is not active.
+	 */
+	@Test
+	public void testRestartFromStep0_noopWhenInactive()
+	{
+		assertFalse(sequencer.isActive());
+		// Must not throw
+		sequencer.restartFromStep0();
+		assertFalse(sequencer.isActive());
+	}
+
+	/**
+	 * restartFromStep0 resets the loop counter so loops replay from the beginning.
+	 */
+	@Test
+	public void testRestartFromStep0_resetsLoopCounter()
+	{
+		List<GuidanceStep> steps = Arrays.asList(
+			makeManualStep("Step 1"),
+			makeLoopingStep("Step 2 (loop)", CompletionCondition.ACTOR_DEATH, 1234, 1, 3)
+		);
+
+		startSequence(steps);
+		sequencer.advanceStep(); // move to step 2 (index 1)
+		// Simulate one loop iteration completing
+		sequencer.onNpcDeath(1234);
+		// loopIterationsCompleted is 1 now
+
+		sequencer.restartFromStep0();
+		assertEquals(0, sequencer.getCurrentIndex());
+		// After reset, loop counter should be cleared so the loop replays fully
+		assertEquals(0, sequencer.getLoopIterationsCompleted());
+	}
+
+	// ---- syncToCurrentState tests (Sync button) ───────────────────────────
+
+	/**
+	 * syncToCurrentState re-runs the skip-chain from step 0 without stopping the
+	 * underlying sequence. If the player has satisfied step 0, the sequencer
+	 * must advance forward to the first unsatisfied step.
+	 * Approach: startSequence lands at step 0 (default mocks have inventory empty),
+	 * then we update the mock and call sync to jump to step 1.
+	 */
+	@Test
+	public void testSyncToCurrentState_advancesToFirstUnsatisfiedStep()
+	{
+		int itemId = 590;
+		// @Before already sets lenient defaults: inventory empty, lands at step 0.
+
+		List<GuidanceStep> steps = Arrays.asList(
+			makeInventoryHasItemStep(itemId, 1), // step 0
+			makeManualStep("Step 2"),            // step 1
+			makeManualStep("Step 3")             // step 2
+		);
+
+		startSequence(steps);
+		assertEquals("Should start at step 0", 0, sequencer.getCurrentIndex());
+
+		// Player picked up the item mid-session.
+		// INVENTORY_HAS_ITEM only checks hasItemCount; hasItem is not needed here.
+		when(inventoryState.hasItemCount(itemId, 1)).thenReturn(true);
+
+		AtomicReference<GuidanceStep> lastStep = new AtomicReference<>();
+		sequencer.setOnStepChanged(s -> lastStep.set(s));
+
+		// Sync: re-evaluate from step 0, should jump to step 1
+		sequencer.syncToCurrentState();
+
+		assertTrue("Sequencer must remain active after sync", sequencer.isActive());
+		assertEquals("Should advance to step 1 (first unsatisfied)", 1, sequencer.getCurrentIndex());
+		assertNotNull("onStepChanged must fire with new step", lastStep.get());
+		assertEquals("Step 2", lastStep.get().getDescription());
+	}
+
+	/**
+	 * syncToCurrentState must NOT stop the sequence — active flag stays true and
+	 * callbacks remain wired.
+	 */
+	@Test
+	public void testSyncToCurrentState_doesNotStopSequence()
+	{
+		List<GuidanceStep> steps = Arrays.asList(
+			makeManualStep("Step 1"),
+			makeManualStep("Step 2")
+		);
+		AtomicBoolean completeFired = new AtomicBoolean(false);
+		startSequence(steps, s -> {}, () -> completeFired.set(true));
+
+		sequencer.syncToCurrentState();
+
+		assertTrue("Sequence must remain active after sync", sequencer.isActive());
+		assertFalse("onSequenceComplete must not fire on sync", completeFired.get());
+		assertNotNull("Active source must remain set after sync", sequencer.getActiveSource());
+	}
+
+	/**
+	 * syncToCurrentState is a no-op when the sequencer is not active.
+	 */
+	@Test
+	public void testSyncToCurrentState_noopWhenInactive()
+	{
+		assertFalse(sequencer.isActive());
+		// Must not throw
+		sequencer.syncToCurrentState();
+		assertFalse(sequencer.isActive());
+	}
+
+	/**
+	 * syncToCurrentState when no steps are satisfied fires onStepChanged to
+	 * refresh the panel but does not change the index.
+	 */
+	@Test
+	public void testSyncToCurrentState_staysAtCurrentIfAlreadyCorrect()
+	{
+		List<GuidanceStep> steps = Arrays.asList(
+			makeManualStep("Step 1"),
+			makeManualStep("Step 2")
+		);
+
+		AtomicReference<GuidanceStep> lastStep = new AtomicReference<>();
+		startSequence(steps, s -> lastStep.set(s), () -> {});
+		assertEquals(0, sequencer.getCurrentIndex());
+
+		// Sync with no newly-satisfied steps — must remain at step 0
+		sequencer.setOnStepChanged(s -> lastStep.set(s));
+		sequencer.syncToCurrentState();
+
+		assertEquals("Index must not change when no steps are satisfied", 0, sequencer.getCurrentIndex());
+		// onStepChanged fires to refresh the panel even if index did not change
+		assertNotNull("onStepChanged must fire on sync", lastStep.get());
+	}
 }
