@@ -93,7 +93,7 @@ public class GuidanceSequencerTest
 			description,
 			null,           // perItemStepDescription
 			0, 0, 0,       // worldX, worldY, worldPlane
-			0, null, null,  // npcId, interactAction, dialogOptions
+			0, null, null, null,  // npcId, perItemNpcId, interactAction, dialogOptions
 			null, null,     // travelTip, requiredItemIds
 			null,           // perItemRequiredItemIds
 			null,           // recommendedItemIds
@@ -124,7 +124,7 @@ public class GuidanceSequencerTest
 			"Step: " + condition.name(),
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -155,7 +155,7 @@ public class GuidanceSequencerTest
 			"Collect " + count + " items",
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -186,7 +186,7 @@ public class GuidanceSequencerTest
 			"Walk to location",
 			null,  // perItemStepDescription
 			x, y, plane,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -217,7 +217,7 @@ public class GuidanceSequencerTest
 			"Talk to NPC",
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -248,7 +248,7 @@ public class GuidanceSequencerTest
 			"Kill NPC",
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -279,7 +279,7 @@ public class GuidanceSequencerTest
 			"Wait for chat",
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -311,7 +311,7 @@ public class GuidanceSequencerTest
 			description,
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -342,7 +342,7 @@ public class GuidanceSequencerTest
 			"Go to plane " + plane,
 			null,  // perItemStepDescription
 			0, 0, plane,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -373,7 +373,7 @@ public class GuidanceSequencerTest
 			"Wait for varbit",
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -404,7 +404,7 @@ public class GuidanceSequencerTest
 			"Step needing items",
 			null,  // perItemStepDescription
 			0, 0, 0,
-			0, null, null,
+			0, null, null, null,
 			null, requiredItemIds,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -777,7 +777,7 @@ public class GuidanceSequencerTest
 			"Kill Zulrah",
 			null,  // perItemStepDescription
 			0, 0, 0,
-			2042, null, null,
+			2042, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -1246,7 +1246,7 @@ public class GuidanceSequencerTest
 			description,
 			null,  // perItemStepDescription
 			worldX, worldY, 0,
-			0, null, null,
+			0, null, null, null,
 			travelTip, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
@@ -1472,7 +1472,7 @@ public class GuidanceSequencerTest
 			"No alternatives",
 			null,  // perItemStepDescription
 			3000, 3000, 0,
-			0, null, null,
+			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
