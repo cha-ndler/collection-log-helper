@@ -579,12 +579,14 @@ public class GuidanceOverlayCoordinator
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
 			worldMapRouteOverlay.setTargetPoint(worldPoint);
 			worldMapDestinationOverlay.setTarget(worldPoint, resolveStepIconType(step));
+			// WorldMapDestinationOverlay supersedes CollectionLogWorldMapPoint for
+			// both on-screen icon and edge-snap arrow. Remove any legacy map point
+			// to prevent a double arrow on the world map (#410).
 			if (activeMapPoint != null)
 			{
 				worldMapPointManager.remove(activeMapPoint);
+				activeMapPoint = null;
 			}
-			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, step.getDescription(), collectionLogIcon);
-			worldMapPointManager.add(activeMapPoint);
 
 			clientThread.invokeLater(() ->
 			{
@@ -723,14 +725,15 @@ public class GuidanceOverlayCoordinator
 		dialogHighlightOverlay.setGuidanceActive(true);
 		guidanceMinimapOverlay.setTargetPoint(worldPoint);
 		worldMapRouteOverlay.setTargetPoint(worldPoint);
-		// Non-sequencer path: no step context, use generic TILE icon
+		// Non-sequencer path: no step context, use generic TILE icon.
+		// WorldMapDestinationOverlay supersedes CollectionLogWorldMapPoint — do not
+		// add the legacy map point to avoid a double arrow on the world map (#410).
 		worldMapDestinationOverlay.setTarget(worldPoint, WorldMapDestinationOverlay.StepIconType.TILE);
 		if (activeMapPoint != null)
 		{
 			worldMapPointManager.remove(activeMapPoint);
+			activeMapPoint = null;
 		}
-		activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
-		worldMapPointManager.add(activeMapPoint);
 
 		clientThread.invokeLater(() ->
 		{
