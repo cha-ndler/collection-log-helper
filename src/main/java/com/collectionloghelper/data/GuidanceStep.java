@@ -61,6 +61,16 @@ public class GuidanceStep
 	/** Item IDs that must be in inventory before this step can proceed. */
 	List<Integer> requiredItemIds;
 
+	/**
+	 * Soft-recommended item IDs for this step: food, prayer potions, anti-venom,
+	 * combat gear, teleports, etc. Items that materially improve the run but are
+	 * not strictly required to complete the step.
+	 *
+	 * <p>Null by default — existing JSON without this field deserialises unchanged.
+	 * The panel hides the "Recommended:" subsection when this list is null or empty.
+	 */
+	List<Integer> recommendedItemIds;
+
 	/** How the system detects this step is complete. */
 	CompletionCondition completionCondition;
 
@@ -276,6 +286,7 @@ public class GuidanceStep
 			this.dialogOptions,
 			alt.getTravelTip() != null ? alt.getTravelTip() : this.travelTip,
 			this.requiredItemIds,
+			this.recommendedItemIds,
 			alt.getCompletionCondition() != null ? alt.getCompletionCondition() : this.completionCondition,
 			this.completionItemId,
 			this.completionItemCount,
