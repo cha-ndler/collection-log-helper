@@ -604,7 +604,11 @@ public class GuidanceOverlayCoordinator
 		}
 		else
 		{
-			// Step with no location -- clear previous target and show text overlay only
+			// Step with no location -- clear previous target and show text overlay only.
+			// Dialog options are still applied here: a step may be a pure dialog-choice
+			// step with no world coordinates (e.g. "Choose the 'Yes' option").
+			dialogHighlightOverlay.setTargetDialogOptions(step.getDialogOptions());
+			dialogHighlightOverlay.setGuidanceActive(true);
 			guidanceOverlay.setTargetPoint(null);
 			guidanceOverlay.setTargetName(null);
 			guidanceOverlay.setTargetNpcId(0);

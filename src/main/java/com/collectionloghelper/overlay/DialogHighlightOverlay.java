@@ -27,11 +27,8 @@ package com.collectionloghelper.overlay;
 import com.collectionloghelper.CollectionLogHelperConfig;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -59,7 +56,6 @@ public class DialogHighlightOverlay extends Overlay
 	private static final int NPC_DIALOG_GROUP = 231;
 	private static final int NPC_DIALOG_CONTINUE_CHILD = 5;
 
-	private static final String ARROW_INDICATOR = "\u25b6 ";
 	private static final int BACKGROUND_PADDING_X = 4;
 	private static final int BACKGROUND_PADDING_Y = 2;
 	private static final int BACKGROUND_ALPHA = 50;
@@ -102,14 +98,15 @@ public class DialogHighlightOverlay extends Overlay
 				highlightColor.getBlue(), BORDER_ALPHA);
 		}
 
-		// Highlight matching dialog options in the multi-option dialog
+		// Highlight matching dialog options and the continue prompt only when a
+		// dialog-choice step is active (targetDialogOptionsLower non-empty).
+		// Without this guard the continue button would be highlighted during every
+		// NPC conversation regardless of whether guidance has a dialog step.
 		if (!targetDialogOptionsLower.isEmpty())
 		{
 			renderDialogOptionHighlights(graphics, highlightColor);
+			renderContinueHighlight(graphics, highlightColor);
 		}
-
-		// Highlight "Click here to continue" in NPC dialog to keep the player moving
-		renderContinueHighlight(graphics, highlightColor);
 
 		return null;
 	}
@@ -136,22 +133,18 @@ public class DialogHighlightOverlay extends Overlay
 				continue;
 			}
 
-			String optionText = option.getText();
-			// Skip if already highlighted (arrow prepended on a previous frame)
-			if (optionText.startsWith(ARROW_INDICATOR))
-			{
-				renderWidgetHighlight(graphics, option, highlightColor);
-				continue;
-			}
-
-			String optionLower = optionText.toLowerCase();
+			// Match against the original widget text without mutating it.
+			// Previously the render loop called option.setText() / option.setTextColor()
+			// to prepend an arrow indicator; that approach mutated persistent widget state
+			// across frames and accumulated stale prefixes when the dialog closed and
+			// reopened. Pure drawing (fill + border rect) is sufficient visual feedback
+			// and avoids touching widget state from the render thread.
+			String optionLower = option.getText().toLowerCase();
 			for (String target : targets)
 			{
 				if (optionLower.contains(target))
 				{
 					renderWidgetHighlight(graphics, option, highlightColor);
-					option.setText(ARROW_INDICATOR + optionText);
-					option.setTextColor(highlightColor.getRGB() & 0xFFFFFF);
 					break;
 				}
 			}
@@ -167,10 +160,10 @@ public class DialogHighlightOverlay extends Overlay
 		}
 
 		String text = continueWidget.getText();
+		// Highlight the continue prompt purely by drawing; do not mutate widget text colour.
 		if (text != null && text.contains("Click here to continue"))
 		{
 			renderWidgetHighlight(graphics, continueWidget, highlightColor);
-			continueWidget.setTextColor(highlightColor.getRGB() & 0xFFFFFF);
 		}
 	}
 
