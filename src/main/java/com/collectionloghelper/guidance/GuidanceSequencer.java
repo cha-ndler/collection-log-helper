@@ -219,6 +219,96 @@ public class GuidanceSequencer
 		return loopIterationsCompleted;
 	}
 
+	/**
+	 * Replaces the step-changed callback without restarting the sequence.
+	 * Used by tests to observe step-change notifications after
+	 * {@link #startSequence} has already been called.
+	 */
+	public void setOnStepChanged(Consumer<GuidanceStep> callback)
+	{
+		this.onStepChanged = callback;
+	}
+
+	/**
+	 * Forces the guidance sequence back to step 1 (index 0) WITHOUT running the
+	 * skip-chain. Used by the Reset button to let the user replay the full
+	 * sequence from the beginning even if their current state already satisfies
+	 * earlier steps.
+	 *
+	 * <p>The sequence remains active and all callbacks are preserved. Loop
+	 * counters and resolved-alternative caches are cleared so the sequence
+	 * behaves as if it were freshly started at step 0.
+	 *
+	 * <p>No-op if the sequencer is not currently active.
+	 */
+	public void restartFromStep0()
+	{
+		if (!active || steps == null)
+		{
+			return;
+		}
+
+		currentIndex = 0;
+		loopIterationsCompleted = 0;
+		cumulativeActionCount = 0;
+		resolvedAlternatives.clear();
+		// Do NOT call skipSatisfiedSteps() — Reset forces step 0 unconditionally.
+
+		GuidanceStep step = getCurrentStep();
+		if (step != null)
+		{
+			log.info("Guidance sequence reset to step 1/{} for {}",
+				steps.size(), activeSource != null ? activeSource.getName() : "?");
+			notifyStepChanged(step);
+		}
+	}
+
+	/**
+	 * Re-evaluates the activation skip-chain from step 0 against current player
+	 * state and jumps to the first unsatisfied step. Used by the Sync button to
+	 * let the user catch up after picking up items or travelling while guidance
+	 * was already active.
+	 *
+	 * <p>Unlike Reset, Sync does NOT change {@link #active}, does NOT clear
+	 * callbacks, and does NOT stop/restart the underlying sequence — it only
+	 * moves the index forward (or backward, if {@link #isStepAlreadySatisfied}
+	 * semantics allow) to the correct position.
+	 *
+	 * <p>Always fires {@link #notifyStepChanged} so the panel and overlays
+	 * refresh even if the index did not change.
+	 *
+	 * <p>No-op if the sequencer is not currently active.
+	 */
+	public void syncToCurrentState()
+	{
+		if (!active || steps == null)
+		{
+			return;
+		}
+
+		currentIndex = 0;
+		loopIterationsCompleted = 0;
+		resolvedAlternatives.clear();
+		// Re-run the skip-chain to find the first unsatisfied step
+		skipSatisfiedSteps();
+
+		if (!active)
+		{
+			// All steps already satisfied — sequence completed via skipSatisfiedSteps
+			log.info("Sync completed sequence immediately (all steps already satisfied) for {}",
+				activeSource != null ? activeSource.getName() : "?");
+			return;
+		}
+
+		GuidanceStep step = getCurrentStep();
+		if (step != null)
+		{
+			log.info("Guidance synced to step {}/{} for {}",
+				currentIndex + 1, steps.size(), activeSource != null ? activeSource.getName() : "?");
+			notifyStepChanged(step);
+		}
+	}
+
 	public int getCumulativeActionCount()
 	{
 		return cumulativeActionCount;
