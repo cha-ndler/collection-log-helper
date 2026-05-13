@@ -56,6 +56,7 @@ public class StepSectionGrouperTest
 	{
 		return new GuidanceStep(
 			"Step",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, null,

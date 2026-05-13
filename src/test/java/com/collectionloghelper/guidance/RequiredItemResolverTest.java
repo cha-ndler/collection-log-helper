@@ -537,6 +537,7 @@ public class RequiredItemResolverTest
 	{
 		return new GuidanceStep(
 			"Test step",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null,

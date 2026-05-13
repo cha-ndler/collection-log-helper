@@ -915,6 +915,7 @@ public class StepProgressViewTest
 	{
 		return new GuidanceStep(
 			"Step",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, null,
@@ -940,6 +941,7 @@ public class StepProgressViewTest
 	{
 		return new GuidanceStep(
 			"Step",
+			null,  // perItemStepDescription
 			0, 0, 0,
 			0, null, null,
 			null, null,
