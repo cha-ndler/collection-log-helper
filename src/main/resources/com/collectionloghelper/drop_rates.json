@@ -585,6 +585,7 @@
         "objectInteractAction": "Open",
         "npcId": 3162,
         "interactAction": "Attack",
+        "requiredItemIds": [9419],
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 3162
       }
@@ -4579,6 +4580,7 @@
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
+        "requiredItemIds": [19685],
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
       },
@@ -4652,6 +4654,7 @@
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
+        "requiredItemIds": [22875, 952],
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
       },
@@ -6646,6 +6649,7 @@
         "worldPlane": 0,
         "npcId": 1673,
         "interactAction": "Attack",
+        "requiredItemIds": [952],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 458,
         "completionVarbitValue": 1
@@ -6657,6 +6661,7 @@
         "worldPlane": 0,
         "npcId": 1672,
         "interactAction": "Attack",
+        "requiredItemIds": [952],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 457,
         "completionVarbitValue": 1
@@ -6668,6 +6673,7 @@
         "worldPlane": 0,
         "npcId": 1677,
         "interactAction": "Attack",
+        "requiredItemIds": [952],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 462,
         "completionVarbitValue": 1
@@ -6679,6 +6685,7 @@
         "worldPlane": 0,
         "npcId": 1676,
         "interactAction": "Attack",
+        "requiredItemIds": [952],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 461,
         "completionVarbitValue": 1
@@ -6690,6 +6697,7 @@
         "worldPlane": 0,
         "npcId": 1675,
         "interactAction": "Attack",
+        "requiredItemIds": [952],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 460,
         "completionVarbitValue": 1
@@ -6701,6 +6709,7 @@
         "worldPlane": 0,
         "npcId": 1674,
         "interactAction": "Attack",
+        "requiredItemIds": [952],
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 459,
         "completionVarbitValue": 1
@@ -6841,6 +6850,7 @@
         "worldX": 3135,
         "worldY": 2840,
         "worldPlane": 0,
+        "requiredItemIds": [311],
         "completionCondition": "MANUAL"
       },
       {
@@ -6959,6 +6969,7 @@
         "worldPlane": 0,
         "objectId": 29322,
         "objectInteractAction": "Enter",
+        "requiredItemIds": [590, 1351],
         "completionCondition": "MANUAL"
       },
       {
@@ -19443,6 +19454,7 @@
         "worldPlane": 0,
         "npcId": 7690,
         "interactAction": "Talk-to",
+        "requiredItemIds": [6570],
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15
       },
