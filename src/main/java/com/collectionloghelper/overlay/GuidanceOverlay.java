@@ -282,6 +282,11 @@ public class GuidanceOverlay extends OverlayPanel
 
 		switch (style)
 		{
+			case OUTLINE_GLOW:
+				// Wide feathered outline produces a soft glow effect around the model.
+				// outlineWidth=6 feather=4 (max) gives visible glow without performance cost.
+				modelOutlineRenderer.drawOutline(npc, 6, overlayColor, 4);
+				break;
 			case OUTLINE:
 				modelOutlineRenderer.drawOutline(npc, 2, overlayColor, 4);
 				break;
