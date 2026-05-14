@@ -25,10 +25,12 @@
 package com.collectionloghelper.overlay;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -61,6 +63,14 @@ public class DialogHighlightOverlay extends Overlay
 	private static final int BACKGROUND_PADDING_Y = 2;
 	private static final int BACKGROUND_ALPHA = 50;
 	private static final int BORDER_ALPHA = 120;
+	/** Higher-opacity border for the primary (first-listed) recommended option. */
+	private static final int PRIMARY_BORDER_ALPHA = 220;
+
+	/** Thin border stroke for secondary/additional matched options. */
+	private static final BasicStroke SECONDARY_STROKE = new BasicStroke(1.0f);
+	/** Thicker border stroke for the primary recommended option — visually distinct. */
+	private static final BasicStroke PRIMARY_STROKE = new BasicStroke(2.5f,
+		BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
@@ -70,6 +80,7 @@ public class DialogHighlightOverlay extends Overlay
 	private Color cachedHighlightColor;
 	private Color cachedFillColor;
 	private Color cachedBorderColor;
+	private Color cachedPrimaryBorderColor;
 
 	@Inject
 	private DialogHighlightOverlay(Client client, CollectionLogHelperConfig config)
@@ -97,7 +108,11 @@ public class DialogHighlightOverlay extends Overlay
 				highlightColor.getBlue(), BACKGROUND_ALPHA);
 			cachedBorderColor = new Color(highlightColor.getRed(), highlightColor.getGreen(),
 				highlightColor.getBlue(), BORDER_ALPHA);
+			cachedPrimaryBorderColor = new Color(highlightColor.getRed(), highlightColor.getGreen(),
+				highlightColor.getBlue(), PRIMARY_BORDER_ALPHA);
 		}
+
+		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		// Highlight matching dialog options and the continue prompt only when a
 		// dialog-choice step is active (targetDialogOptionsLower non-empty).
@@ -127,6 +142,9 @@ public class DialogHighlightOverlay extends Overlay
 		}
 
 		List<String> targets = targetDialogOptionsLower;
+		// primaryTarget is the first entry in the list — it receives a thicker border
+		// and higher-opacity colour so the recommended choice is visually distinct.
+		String primaryTarget = targets.isEmpty() ? null : targets.get(0);
 		for (Widget option : children)
 		{
 			if (option == null || option.getText() == null)
@@ -145,7 +163,8 @@ public class DialogHighlightOverlay extends Overlay
 			{
 				if (optionLower.contains(target))
 				{
-					renderWidgetHighlight(graphics, option, highlightColor);
+					boolean isPrimary = target.equals(primaryTarget);
+					renderWidgetHighlight(graphics, option, highlightColor, isPrimary);
 					break;
 				}
 			}
@@ -162,13 +181,22 @@ public class DialogHighlightOverlay extends Overlay
 
 		String text = continueWidget.getText();
 		// Highlight the continue prompt purely by drawing; do not mutate widget text colour.
+		// The continue prompt is always the sole action available, so it is always primary.
 		if (text != null && text.contains("Click here to continue"))
 		{
-			renderWidgetHighlight(graphics, continueWidget, highlightColor);
+			renderWidgetHighlight(graphics, continueWidget, highlightColor, true);
 		}
 	}
 
-	private void renderWidgetHighlight(Graphics2D graphics, Widget widget, Color highlightColor)
+	/**
+	 * Draws a highlight rectangle for {@code widget}.
+	 *
+	 * @param primary {@code true} for the first/recommended choice — renders with a
+	 *                thicker stroke and higher-opacity border so it stands out from
+	 *                secondary matches. {@code false} for additional matched options.
+	 */
+	private void renderWidgetHighlight(Graphics2D graphics, Widget widget,
+		Color highlightColor, boolean primary)
 	{
 		Rectangle bounds = widget.getBounds();
 		if (bounds == null || bounds.width <= 0 || bounds.height <= 0)
@@ -181,12 +209,14 @@ public class DialogHighlightOverlay extends Overlay
 		int width = bounds.width + BACKGROUND_PADDING_X * 2;
 		int height = bounds.height + BACKGROUND_PADDING_Y * 2;
 
-		// Semi-transparent fill similar to object/NPC highlight overlays
+		// Semi-transparent fill — same intensity for primary and secondary
 		graphics.setColor(cachedFillColor);
 		graphics.fillRect(x, y, width, height);
 
-		// Subtle border
-		graphics.setColor(cachedBorderColor);
+		// Primary choice: thicker stroke + higher-opacity border for clear visual priority.
+		// Secondary choices: thin stroke + normal-opacity border.
+		graphics.setStroke(primary ? PRIMARY_STROKE : SECONDARY_STROKE);
+		graphics.setColor(primary ? cachedPrimaryBorderColor : cachedBorderColor);
 		graphics.drawRect(x, y, width, height);
 	}
 
