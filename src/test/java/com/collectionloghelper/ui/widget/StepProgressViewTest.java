@@ -603,7 +603,7 @@ public class StepProgressViewTest
 			if (c instanceof JPanel)
 			{
 				panelCount++;
-				if (panelCount == 2)
+				if (panelCount == 3)
 				{
 					return (JPanel) c;
 				}
@@ -625,7 +625,7 @@ public class StepProgressViewTest
 			if (c instanceof JPanel)
 			{
 				panelCount++;
-				if (panelCount == 3)
+				if (panelCount == 4)
 				{
 					return (JPanel) c;
 				}
@@ -712,8 +712,9 @@ public class StepProgressViewTest
 	}
 
 	/**
-	 * Finds the sectionsPanel — the fourth {@link JPanel} direct child of the
-	 * StepProgressView (chip panel, required, recommended, then sections).
+	 * Finds the sectionsPanel — the fifth {@link JPanel} direct child of the
+	 * StepProgressView (chipPanel, recChipPanel, requiredItemsPanel,
+	 * recommendedItemsPanel, then sectionsPanel).
 	 */
 	private static JPanel findSectionsPanel(StepProgressView view)
 	{
@@ -723,7 +724,7 @@ public class StepProgressViewTest
 			if (c instanceof JPanel)
 			{
 				panelCount++;
-				if (panelCount == 4)
+				if (panelCount == 5)
 				{
 					return (JPanel) c;
 				}
@@ -929,6 +930,7 @@ public class StepProgressViewTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null, null,
@@ -956,6 +958,7 @@ public class StepProgressViewTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			recommendedItemIds,
+			null,  // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null, null,

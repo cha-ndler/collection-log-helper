@@ -104,6 +104,12 @@ public class StepProgressView extends JPanel
 	 * item availability (green/white/red). Hidden when the step has no required items.
 	 */
 	private final RequiredItemsChipPanel chipPanel;
+	/**
+	 * B.5.2 chip strip — rendered directly below the required-items chip strip.
+	 * Uses a thinner 1-pixel muted-alpha border to signal advisory status.
+	 * Hidden when the step has no recommended items.
+	 */
+	private final RecommendedItemsChipPanel recChipPanel;
 	private final JPanel requiredItemsPanel;
 	private final JPanel recommendedItemsPanel;
 	/** Container rendered when the source uses section labels (sectioned mode). */
@@ -148,6 +154,11 @@ public class StepProgressView extends JPanel
 		chipPanel = new RequiredItemsChipPanel(itemManager);
 		chipPanel.setAlignmentX(LEFT_ALIGNMENT);
 		add(chipPanel);
+
+		// B.5.2 chip strip — directly below the required-items chips
+		recChipPanel = new RecommendedItemsChipPanel(itemManager);
+		recChipPanel.setAlignmentX(LEFT_ALIGNMENT);
+		add(recChipPanel);
 		add(Box.createVerticalStrut(2));
 
 		requiredItemsPanel = new JPanel();
@@ -349,6 +360,7 @@ public class StepProgressView extends JPanel
 				// Flat layout — hide sections, show chip strip + required/recommended items inline
 				sectionsPanel.setVisible(false);
 				chipPanel.update(rows);
+				recChipPanel.update(recRows);
 				updateRequiredItemDisplay(rows);
 				updateRecommendedItemDisplay(recRows);
 			}
@@ -356,6 +368,7 @@ public class StepProgressView extends JPanel
 			{
 				// Sectioned layout — hide inline panels (including chip strip), render section blocks
 				chipPanel.update(Collections.<RequiredItemDisplay>emptyList());
+				recChipPanel.update(Collections.<RequiredItemDisplay>emptyList());
 				requiredItemsPanel.removeAll();
 				requiredItemsPanel.setVisible(false);
 				recommendedItemsPanel.removeAll();
@@ -385,6 +398,7 @@ public class StepProgressView extends JPanel
 		SwingUtilities.invokeLater(() ->
 		{
 			chipPanel.update(Collections.<RequiredItemDisplay>emptyList());
+			recChipPanel.update(Collections.<RequiredItemDisplay>emptyList());
 			requiredItemsPanel.removeAll();
 			requiredItemsPanel.setVisible(false);
 			recommendedItemsPanel.removeAll();
