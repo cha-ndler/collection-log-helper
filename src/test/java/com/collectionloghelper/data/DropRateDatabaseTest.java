@@ -541,4 +541,35 @@ public class DropRateDatabaseTest
 			}
 		}
 	}
+
+	// ========================================================================
+	// GuidanceStep.perItemRecommendedItemIds — regression (B.5.2)
+	// ========================================================================
+
+	/**
+	 * Regression: as of B.5.2 release, no production step in drop_rates.json uses
+	 * {@code perItemRecommendedItemIds}.  This test enforces the invariant so a
+	 * future data backfill that sets the field is explicit and visible in review.
+	 *
+	 * <p>If this test begins failing intentionally (a data author added the field),
+	 * delete or update it with a comment referencing the PR that introduced the data.
+	 */
+	@Test
+	public void regression_noProductionStepHasPerItemRecommendedItemIds()
+	{
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			if (source.getGuidanceSteps() == null)
+			{
+				continue;
+			}
+			for (GuidanceStep step : source.getGuidanceSteps())
+			{
+				assertNull(
+					"perItemRecommendedItemIds must not be set in production data yet "
+						+ "(source: " + source.getName() + ")",
+					step.getPerItemRecommendedItemIds());
+			}
+		}
+	}
 }

@@ -511,6 +511,92 @@ public class RequiredItemResolverTest
 		assertEquals(TINDERBOX, rows.get(0).getItemId());
 	}
 
+
+	// ── perItemRecommendedItemIds override (B.5.2) ─────────────────────────────
+
+	/**
+	 * When the coordinator has an active target item that is a key in the step's
+	 * perItemRecommendedItemIds map, resolveRecommended uses the override list.
+	 */
+	@Test
+	public void perItemRecommendedOverride_usedWhenTargetMatchesMapKey()
+	{
+		when(coordinator.getActiveTargetItemId()).thenReturn(BRONZE_LOCK);
+
+		Map<Integer, List<Integer>> perItemRecMap = new HashMap<>();
+		perItemRecMap.put(BRONZE_LOCK, Arrays.asList(TINDERBOX, PYRE_LOGS));
+		perItemRecMap.put(GOLD_LOCK, Collections.singletonList(SHADE_REMAINS));
+
+		GuidanceStep step = stepFullWithPerItemRec(
+			null,
+			null,
+			Collections.singletonList(SHADE_REMAINS),  // static fallback
+			perItemRecMap);
+
+		List<RequiredItemDisplay> rows = resolver.resolveRecommended(step);
+
+		assertEquals("Override list must have 2 items for BRONZE_LOCK target", 2, rows.size());
+		assertEquals(TINDERBOX, rows.get(0).getItemId());
+		assertEquals(PYRE_LOGS, rows.get(1).getItemId());
+	}
+
+	/**
+	 * When no active target, resolveRecommended falls back to the static recommendedItemIds.
+	 */
+	@Test
+	public void perItemRecommendedOverride_fallsBackWhenNoActiveTarget()
+	{
+		when(coordinator.getActiveTargetItemId()).thenReturn(null);
+
+		Map<Integer, List<Integer>> perItemRecMap = new HashMap<>();
+		perItemRecMap.put(BRONZE_LOCK, Arrays.asList(TINDERBOX, PYRE_LOGS));
+
+		GuidanceStep step = stepFullWithPerItemRec(
+			null, null, Collections.singletonList(SHADE_REMAINS), perItemRecMap);
+
+		List<RequiredItemDisplay> rows = resolver.resolveRecommended(step);
+
+		assertEquals("Must fall back to static recommended list (1 item)", 1, rows.size());
+		assertEquals(SHADE_REMAINS, rows.get(0).getItemId());
+	}
+
+	/**
+	 * When the target is not in the map, falls back to the static recommendedItemIds.
+	 */
+	@Test
+	public void perItemRecommendedOverride_fallsBackWhenTargetNotInMap()
+	{
+		when(coordinator.getActiveTargetItemId()).thenReturn(99999);
+
+		Map<Integer, List<Integer>> perItemRecMap = new HashMap<>();
+		perItemRecMap.put(BRONZE_LOCK, Arrays.asList(TINDERBOX, PYRE_LOGS));
+
+		GuidanceStep step = stepFullWithPerItemRec(
+			null, null, Collections.singletonList(SHADE_REMAINS), perItemRecMap);
+
+		List<RequiredItemDisplay> rows = resolver.resolveRecommended(step);
+
+		assertEquals("Must fall back to static recommended list when target not in map",
+			1, rows.size());
+		assertEquals(SHADE_REMAINS, rows.get(0).getItemId());
+	}
+
+	/**
+	 * When the step has no perItemRecommendedItemIds map (null), uses the static list.
+	 */
+	@Test
+	public void perItemRecommendedOverride_fallsBackWhenStepHasNoMap()
+	{
+		lenient().when(coordinator.getActiveTargetItemId()).thenReturn(BRONZE_LOCK);
+
+		GuidanceStep step = stepWithRequiredAndRecommendedItems(
+			null, Collections.singletonList(TINDERBOX));
+
+		List<RequiredItemDisplay> rows = resolver.resolveRecommended(step);
+
+		assertEquals("No map on step — must use static recommended list", 1, rows.size());
+		assertEquals(TINDERBOX, rows.get(0).getItemId());
+	}
 	// --- Helpers ---
 
 	private static GuidanceStep stepWithRequiredItems(List<Integer> requiredItemIds)
@@ -544,6 +630,7 @@ public class RequiredItemResolverTest
 			requiredItemIds,
 			perItemRequiredItemIds,
 			recommendedItemIds,
+			null,  // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null,
@@ -564,6 +651,44 @@ public class RequiredItemResolverTest
 			null,  // conditionalAlternatives
 			null,  // section
 			null   // waypoints
+		);
+	}
+
+	private static GuidanceStep stepFullWithPerItemRec(
+		List<Integer> requiredItemIds,
+		Map<Integer, List<Integer>> perItemRequiredItemIds,
+		List<Integer> recommendedItemIds,
+		Map<Integer, List<Integer>> perItemRecommendedItemIds)
+	{
+		return new GuidanceStep(
+			"Test step",
+			null,  // perItemStepDescription
+			0, 0, 0,
+			0, null, null, null,
+			null,
+			requiredItemIds,
+			perItemRequiredItemIds,
+			recommendedItemIds,
+			perItemRecommendedItemIds,
+			CompletionCondition.MANUAL,
+			0, 0, 0, 0,
+			null,
+			null,
+			0, null, null,
+			null,
+			null,
+			null,
+			0, 0,
+			false,
+			0,
+			null,
+			null,
+			0, 0,
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
+			null,  // completionZone
+			null,  // conditionalAlternatives
+			null   // section
 		);
 	}
 }

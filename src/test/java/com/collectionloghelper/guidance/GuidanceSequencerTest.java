@@ -97,6 +97,7 @@ public class GuidanceSequencerTest
 			null, null,     // travelTip, requiredItemIds
 			null,           // perItemRequiredItemIds
 			null,           // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,    // completionItemId, completionItemCount, completionDistance, completionNpcId
 			null,           // completionNpcIds
@@ -129,6 +130,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,  // perItemRecommendedItemIds
 			condition,
 			completionItemId, 0, 0, 0,
 			null,  // completionNpcIds
@@ -161,6 +163,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.INVENTORY_HAS_ITEM,
 			itemId, count, 0, 0,
 			null,  // completionNpcIds
@@ -193,6 +196,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.ARRIVE_AT_TILE,
 			0, 0, distance, 0,
 			null,  // completionNpcIds
@@ -225,6 +229,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.NPC_TALKED_TO,
 			0, 0, 0, npcId,
 			null,  // completionNpcIds
@@ -257,6 +262,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.ACTOR_DEATH,
 			0, 0, 0, npcId,
 			null,  // completionNpcIds
@@ -289,6 +295,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.CHAT_MESSAGE_RECEIVED,
 			0, 0, 0, 0,
 			null,  // completionNpcIds
@@ -322,6 +329,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,  // perItemRecommendedItemIds
 			condition,
 			0, 0, 0, completionNpcId,
 			null,  // completionNpcIds
@@ -354,6 +362,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.PLAYER_ON_PLANE,
 			0, 0, 0, 0,
 			null,  // completionNpcIds
@@ -386,6 +395,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.VARBIT_AT_LEAST,
 			0, 0, 0, 0,
 			null,  // completionNpcIds
@@ -418,6 +428,7 @@ public class GuidanceSequencerTest
 			null, requiredItemIds,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null,  // completionNpcIds
@@ -792,6 +803,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.ACTOR_DEATH,
 			0, 0, 0, 0,
 			Arrays.asList(2042, 2043, 2044),  // completionNpcIds
@@ -1262,6 +1274,7 @@ public class GuidanceSequencerTest
 			travelTip, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.ARRIVE_AT_TILE,
 			0, 0, 5, 0,
 			null,  // completionNpcIds
@@ -1496,6 +1509,7 @@ public class GuidanceSequencerTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null,  // completionNpcIds

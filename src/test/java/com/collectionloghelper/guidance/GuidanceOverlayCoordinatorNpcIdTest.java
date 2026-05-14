@@ -265,6 +265,7 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 			null, null,     // travelTip, requiredItemIds
 			null,           // perItemRequiredItemIds
 			null,           // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.ACTOR_DEATH,
 			0, 0, 0, npcId,  // completionItemId, completionItemCount, completionDistance, completionNpcId
 			null,           // completionNpcIds

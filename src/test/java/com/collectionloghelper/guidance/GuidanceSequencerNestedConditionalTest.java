@@ -469,6 +469,7 @@ public class GuidanceSequencerNestedConditionalTest
 			null, null,
 			null,           // perItemRequiredItemIds
 			null,           // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null,           // completionNpcIds
@@ -502,6 +503,7 @@ public class GuidanceSequencerNestedConditionalTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.ARRIVE_AT_TILE,
 			0, 0, 5, 0,
 			null,  // completionNpcIds
