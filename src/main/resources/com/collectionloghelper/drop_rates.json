@@ -7653,7 +7653,15 @@
         "worldY": 3131,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 100
+      },
+      {
+        "description": "Enter Cam Torum and make your way north through the city to the Neypotzli dungeon entrance",
+        "worldX": 1435,
+        "worldY": 9700,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 80
       },
       {
         "description": "Complete Perilous Moons. Fight the three Moon bosses in sequence. Each has unique mechanics — learn the safe tiles and prayer switches",
