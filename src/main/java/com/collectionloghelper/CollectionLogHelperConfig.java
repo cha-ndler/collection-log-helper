@@ -268,4 +268,16 @@ public interface CollectionLogHelperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+		keyName = "enableCrossSourceMode",
+		name = "Cross-source recommendation mode",
+		description = "Show a per-item best-path ranking that surfaces the fastest source for each unobtained item across all sources (Tier E1). Off by default — panel integration is in progress.",
+		position = 10,
+		hidden = true
+	)
+	default boolean enableCrossSourceMode()
+	{
+		return false;
+	}
 }
