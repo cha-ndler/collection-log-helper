@@ -33,6 +33,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests for {@link GuidanceStep#resolveDescription(Integer)},
@@ -163,6 +164,83 @@ public class GuidanceStepTest
 		assertEquals("Tier 5 override", map.get(1005));
 		assertEquals("Kill soldiers", step.resolveDescription(9999));
 		assertEquals("Tier 1 override", step.resolveDescription(1001));
+	}
+
+	// ── Cyclopes defender tier chain (B4.3.3) ────────────────────────────────
+
+	/** Item IDs for the Warriors' Guild defender tier chain. */
+	private static final int BRONZE_DEFENDER = 8844;
+	private static final int IRON_DEFENDER   = 8845;
+	private static final int RUNE_DEFENDER   = 8850;
+	private static final int DRAGON_DEFENDER = 12954;
+
+	private static final String CYCLOPES_STATIC_DESC =
+		"Kill Cyclopes for defender drops. Each kill costs 10 warrior guild tokens";
+
+	/**
+	 * Verifies that resolveDescription returns the Iron defender override text
+	 * (containing both "Iron" and "Bronze") when targeted at the Iron defender item.
+	 * This exercises the mid-chain scenario where the player holds the previous tier.
+	 */
+	@Test
+	public void cyclopes_resolveDescription_ironDefender_mentionsBronzeHolding()
+	{
+		Map<Integer, String> overrides = new HashMap<>();
+		overrides.put(BRONZE_DEFENDER,
+			"Kill Cyclopes (no prerequisite) to receive a Bronze defender and start the chain.");
+		overrides.put(IRON_DEFENDER,
+			"Kill Cyclopes while holding a Bronze defender in inventory to receive an Iron defender.");
+		overrides.put(RUNE_DEFENDER,
+			"Kill Cyclopes while holding an Adamant defender in inventory to receive a Rune defender.");
+		overrides.put(DRAGON_DEFENDER,
+			"Kill Cyclopes while holding a Rune defender in inventory to receive the Dragon defender.");
+
+		GuidanceStep step = stepWithOverrides(CYCLOPES_STATIC_DESC, overrides);
+
+		String resolved = step.resolveDescription(IRON_DEFENDER);
+		assertTrue("Override for Iron defender must mention 'Iron'",
+			resolved.contains("Iron"));
+		assertTrue("Override for Iron defender must mention 'Bronze' (what to hold)",
+			resolved.contains("Bronze"));
+	}
+
+	/**
+	 * Verifies that the Dragon defender entry (the terminal tier) resolves
+	 * correctly and references the Rune defender as the required held item.
+	 */
+	@Test
+	public void cyclopes_resolveDescription_dragonDefender_mentionsRuneHolding()
+	{
+		Map<Integer, String> overrides = new HashMap<>();
+		overrides.put(DRAGON_DEFENDER,
+			"Kill Cyclopes while holding a Rune defender in inventory to receive the Dragon defender.");
+
+		GuidanceStep step = stepWithOverrides(CYCLOPES_STATIC_DESC, overrides);
+
+		String resolved = step.resolveDescription(DRAGON_DEFENDER);
+		assertTrue("Dragon defender override must mention 'Dragon'",
+			resolved.contains("Dragon"));
+		assertTrue("Dragon defender override must mention 'Rune' (what to hold)",
+			resolved.contains("Rune"));
+	}
+
+	/**
+	 * When no targetItemId is supplied the coordinator has no active item in context
+	 * (e.g. the source has multiple uncollected tiers). The static generic description
+	 * should be returned unchanged.
+	 */
+	@Test
+	public void cyclopes_resolveDescription_noTarget_returnsStaticDescription()
+	{
+		Map<Integer, String> overrides = new HashMap<>();
+		overrides.put(BRONZE_DEFENDER,
+			"Kill Cyclopes (no prerequisite) to receive a Bronze defender and start the chain.");
+		overrides.put(IRON_DEFENDER,
+			"Kill Cyclopes while holding a Bronze defender in inventory to receive an Iron defender.");
+
+		GuidanceStep step = stepWithOverrides(CYCLOPES_STATIC_DESC, overrides);
+
+		assertEquals(CYCLOPES_STATIC_DESC, step.resolveDescription(null));
 	}
 
 	// ── resolveNpcId constants ─────────────────────────────────────────────────
