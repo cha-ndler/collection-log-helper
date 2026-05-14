@@ -649,8 +649,9 @@ public class RequiredItemResolverTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
