@@ -369,6 +369,7 @@ public class GuidanceOverlayCoordinator
 		guidanceMinimapOverlay.clearTarget();
 		worldMapRouteOverlay.clearTarget();
 		worldMapDestinationOverlay.clearTarget();
+		worldMapDestinationOverlay.setMapPointActive(false);
 		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
@@ -603,14 +604,20 @@ public class GuidanceOverlayCoordinator
 			guidanceMinimapOverlay.setTargetPoint(worldPoint);
 			worldMapRouteOverlay.setTargetPoint(worldPoint);
 			worldMapDestinationOverlay.setTarget(worldPoint, resolveStepIconType(step));
-			// WorldMapDestinationOverlay supersedes CollectionLogWorldMapPoint for
-			// both on-screen icon and edge-snap arrow. Remove any legacy map point
-			// to prevent a double arrow on the world map (#410).
+			// Register a CollectionLogWorldMapPoint for click-to-focus behaviour
+			// (setJumpOnClick). WorldMapDestinationOverlay draws the on-screen icon
+			// but does not receive click events — only a WorldMapPoint does (#429).
+			// To avoid a double edge-snap arrow (#410), WorldMapDestinationOverlay
+			// suppresses its own off-screen arrow while the map point is active
+			// (see WorldMapDestinationOverlay.setMapPointActive).
 			if (activeMapPoint != null)
 			{
 				worldMapPointManager.remove(activeMapPoint);
-				activeMapPoint = null;
 			}
+			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint,
+				step.resolveDescription(activeTargetItemId), collectionLogIcon);
+			worldMapPointManager.add(activeMapPoint);
+			worldMapDestinationOverlay.setMapPointActive(true);
 
 			clientThread.invokeLater(() ->
 			{
@@ -646,6 +653,7 @@ public class GuidanceOverlayCoordinator
 			guidanceMinimapOverlay.setTargetPoint(null);
 			worldMapRouteOverlay.setTargetPoint(null);
 			worldMapDestinationOverlay.clearTarget();
+			worldMapDestinationOverlay.setMapPointActive(false);
 			if (activeMapPoint != null)
 			{
 				worldMapPointManager.remove(activeMapPoint);
@@ -750,14 +758,17 @@ public class GuidanceOverlayCoordinator
 		guidanceMinimapOverlay.setTargetPoint(worldPoint);
 		worldMapRouteOverlay.setTargetPoint(worldPoint);
 		// Non-sequencer path: no step context, use generic TILE icon.
-		// WorldMapDestinationOverlay supersedes CollectionLogWorldMapPoint — do not
-		// add the legacy map point to avoid a double arrow on the world map (#410).
 		worldMapDestinationOverlay.setTarget(worldPoint, WorldMapDestinationOverlay.StepIconType.TILE);
+		// Register a CollectionLogWorldMapPoint for click-to-focus behaviour (#429).
+		// WorldMapDestinationOverlay suppresses its off-screen arrow while the map
+		// point is active to avoid a duplicate edge-snap arrow (#410).
 		if (activeMapPoint != null)
 		{
 			worldMapPointManager.remove(activeMapPoint);
-			activeMapPoint = null;
 		}
+		activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
+		worldMapPointManager.add(activeMapPoint);
+		worldMapDestinationOverlay.setMapPointActive(true);
 
 		clientThread.invokeLater(() ->
 		{
@@ -783,6 +794,7 @@ public class GuidanceOverlayCoordinator
 		guidanceMinimapOverlay.clearTarget();
 		worldMapRouteOverlay.clearTarget();
 		worldMapDestinationOverlay.clearTarget();
+		worldMapDestinationOverlay.setMapPointActive(false);
 		dialogHighlightOverlay.clear();
 		objectHighlightOverlay.clearTarget();
 		itemHighlightOverlay.clearTarget();
