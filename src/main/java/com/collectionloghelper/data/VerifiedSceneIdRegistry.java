@@ -32,6 +32,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -105,7 +106,7 @@ public class VerifiedSceneIdRegistry
 				return empty();
 			}
 
-			InputStreamReader reader = new InputStreamReader(is);
+			InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
 			JsonElement parsed = new JsonParser().parse(reader);
 			return parseRoot(parsed.getAsJsonObject(), gson);
 		}
