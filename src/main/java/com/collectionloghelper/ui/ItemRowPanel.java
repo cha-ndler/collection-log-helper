@@ -198,7 +198,19 @@ public class ItemRowPanel extends JPanel
 				@Override
 				public void mouseExited(java.awt.event.MouseEvent e)
 				{
-					setBackground(normalBg);
+					// Guard: only reset the background when the mouse truly leaves
+					// the row boundary.  Moving from the row panel into a child
+					// component (icon, name label, rate label…) also fires
+					// mouseExited, but the exit point is still within the panel's
+					// own bounds.  Without this check that intra-row transition
+					// repeatedly calls setBackground(), triggering rapid repaints
+					// that smear the non-opaque child labels and produce ghost-text
+					// artefacts — e.g. a tier suffix such as "(1)" rendered twice
+					// with a horizontal offset (issue #428).
+					if (!ItemRowPanel.this.contains(e.getPoint()))
+					{
+						setBackground(normalBg);
+					}
 				}
 			});
 		}
