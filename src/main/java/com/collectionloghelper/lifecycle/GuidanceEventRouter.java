@@ -42,6 +42,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.MenuAction;
 import net.runelite.api.NPC;
+import net.runelite.api.Player;
 import net.runelite.api.events.ActorDeath;
 import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.HitsplatApplied;
@@ -196,11 +197,16 @@ public class GuidanceEventRouter
 	@Subscribe
 	public void onAnimationChanged(AnimationChanged event)
 	{
-		if (!config.guidanceAuthoring() || event.getActor() != client.getLocalPlayer())
+		if (!config.guidanceAuthoring())
 		{
 			return;
 		}
-		int animId = client.getLocalPlayer().getAnimation();
+		Player lp = client.getLocalPlayer();
+		if (lp == null || event.getActor() != lp)
+		{
+			return;
+		}
+		int animId = lp.getAnimation();
 		if (animId != -1)
 		{
 			authoringLogger.log("ANIMATION player=%d", animId);
