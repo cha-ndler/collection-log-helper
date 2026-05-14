@@ -583,7 +583,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [/] C1 — POH teleport inventory model                 status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #470
 - [/] C2 — Equipped-item state                          status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #463
 - [/] C3 — Diary tier state                             status: in-progress   owner: —          updated: 2026-05-14  pr: #461
-- [ ] C4 — Skill-cape perk state                        status: planned       owner: —          updated: 2026-04-16
+- [/] C4 — Skill-cape perk state                        status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #471
 - [/] C5 — Partial-quest state                          status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: cha-ndler/collection-log-helper#462
 - [ ] C6 — Wire into top-20 sources                     status: planned       owner: —          updated: 2026-04-16
 - [/] C7 — Player-capability debug overlay              status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #459
