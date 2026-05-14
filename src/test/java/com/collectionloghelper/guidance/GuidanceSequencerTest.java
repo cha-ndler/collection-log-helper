@@ -1282,7 +1282,8 @@ public class GuidanceSequencerTest
 			"Use fairy ring",  // override description
 			2400, 4435, null,  // override coordinates
 			"Fairy ring BIP",  // override travel tip
-			null, null, null, null, null, null  // no other overrides
+			null, null, null, null, null, null,  // no other overrides
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1310,7 +1311,8 @@ public class GuidanceSequencerTest
 			reqs,
 			"Teleport to Prifddinas", 3200, 6100, null,
 			"Prifddinas teleport",
-			null, null, null, null, null, null
+			null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1339,13 +1341,15 @@ public class GuidanceSequencerTest
 			reqs1,
 			"Fairy ring route", 2400, 4400, null,
 			"Fairy ring CKS",
-			null, null, null, null, null, null
+			null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 		ConditionalAlternative alt2 = new ConditionalAlternative(
 			reqs2,
 			"Agility shortcut", 2500, 3500, null,
 			"Use agility shortcut",
-			null, null, null, null, null, null
+			null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1374,7 +1378,8 @@ public class GuidanceSequencerTest
 			"Use fairy ring",  // override description
 			null, null, null,  // coordinates fall through
 			"Fairy ring BIP",  // override travel tip
-			null, null, null, null, null, null
+			null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1399,7 +1404,8 @@ public class GuidanceSequencerTest
 
 		ConditionalAlternative alt = new ConditionalAlternative(
 			reqs, "Alt route", 2000, 2000, null,
-			"Alt tip", null, null, null, null, null, null
+			"Alt tip", null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1431,7 +1437,8 @@ public class GuidanceSequencerTest
 			null,
 			CompletionCondition.NPC_TALKED_TO,  // override completion condition
 			null,
-			100  // override completionNpcId
+			100,  // override completionNpcId
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1510,7 +1517,8 @@ public class GuidanceSequencerTest
 		ConditionalAlternative alt = new ConditionalAlternative(
 			null,  // null requirements
 			"Should not be used", 2000, 2000, null,
-			null, null, null, null, null, null, null
+			null, null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1533,7 +1541,8 @@ public class GuidanceSequencerTest
 
 		ConditionalAlternative alt = new ConditionalAlternative(
 			reqs, "Dragon route", 2800, 3400, null,
-			"Teleport to Crandor", null, null, null, null, null, null
+			"Teleport to Crandor", null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep base = makeStepWithAlternatives(
@@ -1558,7 +1567,8 @@ public class GuidanceSequencerTest
 
 		ConditionalAlternative alt = new ConditionalAlternative(
 			reqs, "Elf route", null, null, null,
-			null, null, null, null, null, null, null
+			null, null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep base = makeStepWithAlternatives(
