@@ -113,7 +113,7 @@ public class StatisticsModeControllerTest
 			null, null, null, 0.0, null,
 			0, false, 0, null,
 			0, null, null, null, null,
-			0, null, 0, Collections.emptyList());
+			0, null, 0, Collections.emptyList(), null);
 		List<CollectionLogSource> bossList = Collections.singletonList(source);
 		when(database.getSourcesByCategory(CollectionLogCategory.BOSSES)).thenReturn(bossList);
 		when(collectionState.getCategoryCount(CollectionLogCategory.BOSSES)).thenReturn(5);

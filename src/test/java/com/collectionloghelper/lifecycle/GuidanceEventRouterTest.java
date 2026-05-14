@@ -170,7 +170,8 @@ public class GuidanceEventRouterTest
 			0,         // cumulativeTrackItemId
 			null,      // cumulativeTrackObjectIds
 			0,         // cumulativeTrackThreshold
-			null       // items
+			null,      // items
+			null       // metaAuthoredDate
 		);
 	}
 
@@ -202,7 +203,7 @@ public class GuidanceEventRouterTest
 			objectIds,
 			0,
 			null
-		);
+		, null);
 	}
 
 	@Before

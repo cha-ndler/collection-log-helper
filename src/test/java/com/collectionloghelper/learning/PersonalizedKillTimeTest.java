@@ -80,7 +80,7 @@ public class PersonalizedKillTimeTest
 			/* guidanceSteps */ null, /* requirements */ null,
 			/* cumulativeTrackItemId */ 0, /* cumulativeTrackObjectIds */ null,
 			/* cumulativeTrackThreshold */ 0,
-			Collections.emptyList());
+			Collections.emptyList(), null /* metaAuthoredDate */);
 	}
 
 	// ── No learned data ──────────────────────────────────────────────────────────

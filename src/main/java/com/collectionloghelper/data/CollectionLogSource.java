@@ -25,6 +25,7 @@
 package com.collectionloghelper.data;
 
 import java.util.List;
+import javax.annotation.Nullable;
 import lombok.Value;
 import net.runelite.api.coords.WorldPoint;
 
@@ -56,6 +57,16 @@ public class CollectionLogSource
 	List<Integer> cumulativeTrackObjectIds;
 	int cumulativeTrackThreshold;
 	List<CollectionLogItem> items;
+
+	/**
+	 * ISO 8601 date string (e.g. "2024-01-01") indicating when the meta-sensitive
+	 * recommendations for this source were last authored or verified. Null means no
+	 * date is known and the plugin will not surface a staleness annotation.
+	 *
+	 * <p>Backward compatible: existing JSON without this field deserialises to null.
+	 */
+	@Nullable
+	String metaAuthoredDate;
 
 	public RewardType getRewardType()
 	{

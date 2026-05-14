@@ -30,6 +30,7 @@ import com.collectionloghelper.data.RequirementsChecker;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -59,6 +60,8 @@ public class GuidanceBannerView extends JPanel
 	private final JPanel guidanceBannerPanel;
 	private final JLabel guidanceBannerLabel;
 	private final JLabel requirementsWarningLabel;
+	/** E2 — meta-update dating badge; hidden when metaAuthoredDate is null. */
+	private final JLabel metaAgeBadgeLabel;
 
 	// Per-source requirements section (quest / skill / diary rows)
 	private final RequirementsView requirementsView;
@@ -83,7 +86,7 @@ public class GuidanceBannerView extends JPanel
 			BorderFactory.createEmptyBorder(3, 6, 3, 6)
 		));
 		guidanceBannerPanel.setAlignmentX(CENTER_ALIGNMENT);
-		guidanceBannerPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 48));
+		guidanceBannerPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 64));
 		guidanceBannerPanel.setVisible(false);
 
 		guidanceBannerLabel = new JLabel();
@@ -98,6 +101,13 @@ public class GuidanceBannerView extends JPanel
 		requirementsWarningLabel.setAlignmentX(LEFT_ALIGNMENT);
 		requirementsWarningLabel.setVisible(false);
 		guidanceBannerPanel.add(requirementsWarningLabel);
+
+		// E2 — meta-update dating: shown only when metaAuthoredDate is set
+		metaAgeBadgeLabel = new JLabel();
+		metaAgeBadgeLabel.setFont(FontManager.getRunescapeSmallFont());
+		metaAgeBadgeLabel.setAlignmentX(LEFT_ALIGNMENT);
+		metaAgeBadgeLabel.setVisible(false);
+		guidanceBannerPanel.add(metaAgeBadgeLabel);
 
 		add(guidanceBannerPanel);
 
@@ -146,6 +156,8 @@ public class GuidanceBannerView extends JPanel
 		final List<String> unmet = requirementsChecker.getUnmetRequirements(sourceName);
 		final List<RequirementRow> rows =
 			requirementRows != null ? requirementRows : Collections.emptyList();
+		// E2 \u2014 compute badge outside EDT (pure computation)
+		final MetaAgeBadge badge = MetaAgeBadge.from(source.getMetaAuthoredDate(), LocalDate.now());
 
 		SwingUtilities.invokeLater(() ->
 		{
@@ -162,6 +174,20 @@ public class GuidanceBannerView extends JPanel
 			{
 				requirementsWarningLabel.setVisible(false);
 			}
+
+			// E2 \u2014 meta-update dating badge
+			if (badge != null)
+			{
+				metaAgeBadgeLabel.setText(badge.getLabel());
+				metaAgeBadgeLabel.setForeground(badge.getColor());
+				metaAgeBadgeLabel.setToolTipText(badge.getTooltip());
+				metaAgeBadgeLabel.setVisible(true);
+			}
+			else
+			{
+				metaAgeBadgeLabel.setVisible(false);
+			}
+
 			guidanceBannerPanel.revalidate();
 			if (guidanceBannerPanel.getParent() != null)
 			{
@@ -183,6 +209,7 @@ public class GuidanceBannerView extends JPanel
 		{
 			guidanceBannerPanel.setVisible(false);
 			requirementsWarningLabel.setVisible(false);
+			metaAgeBadgeLabel.setVisible(false);
 			guidanceBannerPanel.revalidate();
 			if (guidanceBannerPanel.getParent() != null)
 			{
