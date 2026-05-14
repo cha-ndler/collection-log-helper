@@ -52,6 +52,17 @@ public class CollectionLogSource
 	String interactAction;
 	List<String> dialogOptions;
 	List<GuidanceStep> guidanceSteps;
+
+	/**
+	 * Optional key naming a registered {@link com.collectionloghelper.guidance.helper.GuidanceHelper}
+	 * implementation that supplies steps for this source. When non-null the sequencer
+	 * delegates step generation to the helper instead of {@link #guidanceSteps}.
+	 *
+	 * <p>Null by default — existing JSON without this field deserialises unchanged.
+	 */
+	@Nullable
+	String guidanceHelperKey;
+
 	SourceRequirements requirements;
 	int cumulativeTrackItemId;
 	List<Integer> cumulativeTrackObjectIds;

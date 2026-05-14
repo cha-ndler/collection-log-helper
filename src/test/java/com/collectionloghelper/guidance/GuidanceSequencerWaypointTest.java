@@ -86,9 +86,12 @@ public class GuidanceSequencerWaypointTest
 		lenient().when(collectionState.isItemObtained(anyInt())).thenReturn(false);
 
 		Constructor<GuidanceSequencer> ctor = GuidanceSequencer.class.getDeclaredConstructor(
-			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class);
+			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class,
+			com.collectionloghelper.guidance.helper.GuidanceHelperRegistry.class);
 		ctor.setAccessible(true);
-		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker);
+		com.collectionloghelper.guidance.helper.GuidanceHelperRegistry helperRegistry =
+			org.mockito.Mockito.mock(com.collectionloghelper.guidance.helper.GuidanceHelperRegistry.class);
+		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker, helperRegistry);
 	}
 
 	// ── Helpers ───────────────────────────────────────────────────────────────
@@ -173,7 +176,8 @@ public class GuidanceSequencerWaypointTest
 		return new CollectionLogSource("Waypoint Test Source", CollectionLogCategory.BOSSES, 3200, 3400, 0,
 			60, 0, "Test Source", Collections.emptyList(),
 			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null,
-			Arrays.asList(steps), null, 0, null, 0, Collections.emptyList(), null /* metaAuthoredDate */);
+			Arrays.asList(steps),
+			null /* guidanceHelperKey */, null, 0, null, 0, Collections.emptyList(), null /* metaAuthoredDate */);
 	}
 
 	// ── Test cases ────────────────────────────────────────────────────────────

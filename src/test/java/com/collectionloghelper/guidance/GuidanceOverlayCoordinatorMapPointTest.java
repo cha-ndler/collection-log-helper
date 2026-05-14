@@ -266,6 +266,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			null,  // interactAction
 			null,  // dialogOptions
 			null,  // guidanceSteps — no multi-step
+			null,  // guidanceHelperKey
 			null,  // requirements
 			0,     // cumulativeTrackItemId
 			null,  // cumulativeTrackObjectIds
@@ -296,6 +297,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			null,
 			null,
 			Collections.emptyList(),  // empty guidanceSteps — skips multi-step branch
+			null,  // guidanceHelperKey
 			null,
 			0,
 			null,

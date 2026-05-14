@@ -168,6 +168,7 @@ public class GuidanceEventRouterTest
 			null,      // interactAction
 			null,      // dialogOptions
 			null,      // guidanceSteps
+			null,      // guidanceHelperKey
 			null,      // requirements
 			0,         // cumulativeTrackItemId
 			null,      // cumulativeTrackObjectIds
@@ -197,6 +198,7 @@ public class GuidanceEventRouterTest
 			0,
 			null,
 			0,
+			null,
 			null,
 			null,
 			null,

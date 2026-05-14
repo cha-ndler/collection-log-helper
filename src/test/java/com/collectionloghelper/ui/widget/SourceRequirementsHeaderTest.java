@@ -517,6 +517,7 @@ public class SourceRequirementsHeaderTest
 			/* interactAction */ null,
 			/* dialogOptions */ null,
 			/* guidanceSteps */ null,
+			/* guidanceHelperKey */ null,
 			requirements,
 			/* cumulativeTrackItemId */ 0,
 			/* cumulativeTrackObjectIds */ null,

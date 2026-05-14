@@ -50,7 +50,7 @@ public class GuidanceBannerViewTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.BOSSES, 0, 0, 0,
 			60, 0, null, null,
-			null, 0, null, 0, false, 0, null, 0, null, null, null, null, 0, null, 0,
+			null, 0, null, 0, false, 0, null, 0, null, null, null, null, null, 0, null, 0,
 			Collections.emptyList(), null);
 	}
 

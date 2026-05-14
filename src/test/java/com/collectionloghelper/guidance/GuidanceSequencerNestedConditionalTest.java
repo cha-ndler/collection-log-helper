@@ -86,9 +86,10 @@ public class GuidanceSequencerNestedConditionalTest
 		lenient().when(collectionState.isItemObtained(anyInt())).thenReturn(false);
 
 		Constructor<GuidanceSequencer> ctor = GuidanceSequencer.class.getDeclaredConstructor(
-			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class);
+			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class,
+				com.collectionloghelper.guidance.helper.GuidanceHelperRegistry.class);
 		ctor.setAccessible(true);
-		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker);
+		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker, null);
 	}
 
 	// ── 1. Flat conditional — identical to legacy ─────────────────────────────
@@ -534,9 +535,7 @@ public class GuidanceSequencerNestedConditionalTest
 			"Test Source", CollectionLogCategory.BOSSES, 3000, 3000, 0,
 			60, 0, "Test Source", Collections.emptyList(),
 			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null,
-			steps, null, 0, null, 0, Collections.emptyList(),
-			null /* metaAuthoredDate */
-		);
+			steps, null, null, 0, null, 0, Collections.emptyList(), null);
 		sequencer.startSequence(source, step -> {}, () -> {});
 	}
 }

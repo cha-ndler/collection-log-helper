@@ -32,6 +32,8 @@ import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.StepWaypoint;
 import com.collectionloghelper.data.Zone;
+import com.collectionloghelper.guidance.helper.GuidanceHelper;
+import com.collectionloghelper.guidance.helper.GuidanceHelperRegistry;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +55,7 @@ public class GuidanceSequencer
 	private final PlayerInventoryState inventoryState;
 	private final PlayerCollectionState collectionState;
 	private final RequirementsChecker requirementsChecker;
+	private final GuidanceHelperRegistry helperRegistry;
 
 	private volatile WorldPoint lastKnownPlayerLocation;
 	private volatile CollectionLogSource activeSource;
@@ -85,11 +88,12 @@ public class GuidanceSequencer
 
 	@Inject
 	private GuidanceSequencer(PlayerInventoryState inventoryState, PlayerCollectionState collectionState,
-		RequirementsChecker requirementsChecker)
+		RequirementsChecker requirementsChecker, GuidanceHelperRegistry helperRegistry)
 	{
 		this.inventoryState = inventoryState;
 		this.collectionState = collectionState;
 		this.requirementsChecker = requirementsChecker;
+		this.helperRegistry = helperRegistry;
 	}
 
 	/**
@@ -109,7 +113,19 @@ public class GuidanceSequencer
 		Runnable sequenceComplete)
 	{
 		this.activeSource = source;
-		this.steps = source.getGuidanceSteps();
+		// Route through Java helper when the source opts in, else fall back to JSON steps
+		GuidanceHelper helper = helperRegistry != null
+			? helperRegistry.get(source.getGuidanceHelperKey())
+			: null;
+		if (helper != null)
+		{
+			log.debug("Using Java helper '{}' for source {}", source.getGuidanceHelperKey(), source.getName());
+			this.steps = helper.getSteps(null, null);
+		}
+		else
+		{
+			this.steps = source.getGuidanceSteps();
+		}
 		this.currentIndex = 0;
 		this.loopIterationsCompleted = 0;
 		this.cumulativeActionCount = 0;
