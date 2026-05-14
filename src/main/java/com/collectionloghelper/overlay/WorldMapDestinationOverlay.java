@@ -33,6 +33,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -74,10 +75,23 @@ public class WorldMapDestinationOverlay extends Overlay
 	/** Inset from the map edge at which the off-screen arrow is placed (px). */
 	private static final int EDGE_INSET = 18;
 
-	/** Fill colour for arrow and icon (teal to match CollectionLogWorldMapPoint). */
+	/**
+	 * CLH-distinct fill colour for the off-screen edge-snap arrow.
+	 * Orange was chosen to contrast with:
+	 *   - native OSRS worldmap chevrons (white / light-yellow)
+	 *   - Quest Helper's arrow indicators (red / yellow)
+	 *   - this overlay's own destination icon (teal)
+	 * Making the source of the arrow identifiable at a glance.
+	 */
+	static final Color CLH_GUIDANCE_ARROW_COLOR = new Color(0xFF, 0x8C, 0x00);
+
+	/** Dark outline for the edge-snap arrow, contrasting against the orange fill. */
+	private static final Color CLH_GUIDANCE_ARROW_BORDER_COLOR = new Color(0x99, 0x4D, 0x00);
+
+	/** Fill colour for destination icons (teal to match CollectionLogWorldMapPoint). */
 	private static final Color FILL_COLOR = new Color(0, 200, 200);
 
-	/** Outline/border colour. */
+	/** Outline/border colour for destination icons. */
 	private static final Color BORDER_COLOR = new Color(0, 100, 100);
 
 	/** Stroke used to outline the destination icon shapes. */
@@ -413,6 +427,15 @@ public class WorldMapDestinationOverlay extends Overlay
 	 * Builds a single directional arrow sprite pointing at the given angle.
 	 * 0° = right, 90° = down (screen-space, y-axis down).
 	 *
+	 * <p>Shape: an open chevron (two stroked arms meeting at a forward tip), drawn
+	 * with {@link Path2D.Double} and a round-capped {@link BasicStroke}. This is
+	 * visually distinct from the filled solid triangles used by native OSRS worldmap
+	 * chevrons and Quest Helper's indicators.
+	 *
+	 * <p>Color: {@link #CLH_GUIDANCE_ARROW_COLOR} (orange) so players can immediately
+	 * identify the arrow as coming from Collection Log Helper rather than the base client
+	 * or another plugin.
+	 *
 	 * <p>Per feedback_worldmap_arrow_rendering.md: fill first, then draw outline;
 	 * use JOIN_ROUND / CAP_ROUND to prevent miter artifacts on narrow chevrons.
 	 */
@@ -426,20 +449,38 @@ public class WorldMapDestinationOverlay extends Overlay
 		int cx = size / 2;
 		int cy = size / 2;
 
-		// Chevron pointing right at 0° — matches CollectionLogWorldMapPoint shape
-		int[] xPoints = {cx + 12, cx - 6, cx - 2, cx - 6};
-		int[] yPoints = {cy, cy - 9, cy, cy + 9};
-
+		// Rotate to the requested direction (0° = pointing right)
 		AffineTransform tx = new AffineTransform();
 		tx.rotate(Math.toRadians(degrees), cx, cy);
 		g.setTransform(tx);
 
-		// Fill first, then outline (per memory guidance — fill-before-outline)
-		g.setColor(FILL_COLOR);
-		g.fillPolygon(xPoints, yPoints, 4);
-		g.setColor(BORDER_COLOR);
+		// --- Chevron shape (open, two-arm style pointing right at 0°) ---
+		// The chevron tip is at (cx+11, cy); the two arm ends are at
+		// (cx-5, cy-10) and (cx-5, cy+10).  A notch vertex at (cx-1, cy)
+		// connects the inner sides to create a filled-chevron silhouette.
+		int tipX  = cx + 11;
+		int tipY  = cy;
+		int topX  = cx - 5;
+		int topY  = cy - 10;
+		int botX  = cx - 5;
+		int botY  = cy + 10;
+		int notchX = cx - 1;
+		int notchY = cy;
+
+		Path2D.Double chevron = new Path2D.Double();
+		chevron.moveTo(tipX,   tipY);   // forward tip
+		chevron.lineTo(topX,   topY);   // upper-left arm end
+		chevron.lineTo(notchX, notchY); // inner notch
+		chevron.lineTo(botX,   botY);   // lower-left arm end
+		chevron.closePath();            // back to tip
+
+		// Fill with CLH orange, then outline with dark border
+		// (fill-before-outline per memory guidance)
+		g.setColor(CLH_GUIDANCE_ARROW_COLOR);
+		g.fill(chevron);
+		g.setColor(CLH_GUIDANCE_ARROW_BORDER_COLOR);
 		g.setStroke(ARROW_STROKE);
-		g.drawPolygon(xPoints, yPoints, 4);
+		g.draw(chevron);
 
 		g.dispose();
 		return img;

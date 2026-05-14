@@ -25,6 +25,7 @@
 package com.collectionloghelper.overlay;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -43,6 +44,8 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -288,6 +291,47 @@ public class WorldMapDestinationOverlayTest
 		// Must not throw; drawImage should be called (TILE icon rendered)
 		assertNull(result);
 		verifyDrew();
+	}
+
+	// -----------------------------------------------------------------------
+	// Color / style assertions (#430)
+	// -----------------------------------------------------------------------
+
+	/**
+	 * Asserts that {@link WorldMapDestinationOverlay#CLH_GUIDANCE_ARROW_COLOR} is
+	 * exactly the CLH-distinct orange chosen in #430 (0xFF8C00).
+	 *
+	 * <p>Render-path pixel verification is not feasible in a headless unit test
+	 * (the Graphics2D mock does not produce real pixels), but confirming the
+	 * constant value gives a regression guard — if the value is accidentally
+	 * changed, this test will fail before it reaches any review.
+	 */
+	@Test
+	public void clhGuidanceArrowColor_isDistinctOrange()
+	{
+		Color expected = new Color(0xFF, 0x8C, 0x00);
+		assertEquals(
+			"CLH_GUIDANCE_ARROW_COLOR must be the CLH-distinct orange (#FF8C00) defined in #430",
+			expected.getRGB(),
+			WorldMapDestinationOverlay.CLH_GUIDANCE_ARROW_COLOR.getRGB());
+	}
+
+	/**
+	 * Asserts that {@link WorldMapDestinationOverlay#CLH_GUIDANCE_ARROW_COLOR} is
+	 * non-null and not equal to the teal destination-icon color, confirming the
+	 * arrow uses a distinct identity from the on-screen icon.
+	 */
+	@Test
+	public void clhGuidanceArrowColor_isDistinctFromIconFillColor()
+	{
+		Color arrowColor = WorldMapDestinationOverlay.CLH_GUIDANCE_ARROW_COLOR;
+		assertNotNull("CLH_GUIDANCE_ARROW_COLOR must not be null", arrowColor);
+
+		// Teal icon color from FILL_COLOR constant
+		Color teal = new Color(0, 200, 200);
+		// RGB values must differ so arrow is visually distinguishable from icon
+		boolean sameRgb = (arrowColor.getRGB() == teal.getRGB());
+		assertEquals("Arrow color must differ from destination-icon teal fill", false, sameRgb);
 	}
 
 	// -----------------------------------------------------------------------
