@@ -138,7 +138,8 @@ public class GuidanceEventRouterTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 

@@ -330,7 +330,8 @@ public class GuidanceStepTest
 			null,           // dynamicItemObjectTiers
 			null,           // completionZone
 			null,           // conditionalAlternatives
-			null            // section
+			null,           // section
+			null            // waypoints
 		);
 	}
 
@@ -362,7 +363,8 @@ public class GuidanceStepTest
 			null,           // dynamicItemObjectTiers
 			null,           // completionZone
 			null,           // conditionalAlternatives
-			null            // section
+			null,           // section
+			null            // waypoints
 		);
 	}
 }
