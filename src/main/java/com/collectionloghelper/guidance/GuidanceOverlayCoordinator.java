@@ -410,9 +410,10 @@ public class GuidanceOverlayCoordinator
 			WorldPoint target = pendingShortestPathTarget;
 			pendingShortestPathTarget = null;
 			Map<String, Object> data = new HashMap<>();
-			if (client.getLocalPlayer() != null)
+			Player lp = client.getLocalPlayer();
+			if (lp != null)
 			{
-				data.put("start", client.getLocalPlayer().getWorldLocation());
+				data.put("start", lp.getWorldLocation());
 			}
 			data.put("target", target);
 			eventBus.post(new PluginMessage("shortestpath", "path", data));

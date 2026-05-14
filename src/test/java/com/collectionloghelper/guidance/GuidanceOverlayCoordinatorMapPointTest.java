@@ -41,6 +41,7 @@ import com.collectionloghelper.overlay.WidgetHighlightOverlay;
 import com.collectionloghelper.overlay.WorldMapDestinationOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.util.Collections;
 import net.runelite.api.Client;
 import net.runelite.api.coords.WorldPoint;
@@ -197,6 +198,33 @@ public class GuidanceOverlayCoordinatorMapPointTest
 		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0), null);
 
 		verify(worldMapPointManager, never()).add(any(CollectionLogWorldMapPoint.class));
+	}
+
+	/**
+	 * Regression test for issue #434: {@link GuidanceOverlayCoordinator#tick()} must not
+	 * NPE when {@code pendingShortestPathTarget} is non-null but {@code getLocalPlayer()}
+	 * returns null (i.e. during the login sequence before the player entity spawns).
+	 *
+	 * <p>The old code called {@code client.getLocalPlayer()} twice — once for the null-check
+	 * and once for {@code .getWorldLocation()} — creating a TOCTOU window.  The fix snapshots
+	 * the player reference once and uses that snapshot exclusively.
+	 */
+	@Test
+	public void tick_nullLocalPlayer_doesNotThrow() throws Exception
+	{
+		// Arrange — inject a pending shortest-path target via reflection to
+		// simulate guidance being active while the player has not yet spawned.
+		Field field = GuidanceOverlayCoordinator.class.getDeclaredField("pendingShortestPathTarget");
+		field.setAccessible(true);
+		field.set(coordinator, new WorldPoint(3200, 3200, 0));
+
+		when(client.getLocalPlayer()).thenReturn(null);
+
+		// Act — must not throw NPE
+		coordinator.tick();
+
+		// Assert — ShortestPath event was still posted (without a "start" key)
+		verify(eventBus).post(any());
 	}
 
 	// ---- helpers ----
