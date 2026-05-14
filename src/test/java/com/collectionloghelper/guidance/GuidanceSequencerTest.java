@@ -1871,4 +1871,46 @@ public class GuidanceSequencerTest
 		// onStepChanged fires to refresh the panel even if index did not change
 		assertNotNull("onStepChanged must fire on sync", lastStep.get());
 	}
+
+	/**
+	 * Regression test for #432.
+	 *
+	 * <p>When skipStep() is called and skipping the last step causes
+	 * skipSatisfiedSteps() to fire onSequenceComplete, which in turn calls
+	 * stopSequence() (nulling this.steps), the subsequent size() call in
+	 * skipStep() must not throw NPE.
+	 */
+	@Test
+	public void skipStep_afterSequenceComplete_doesNotThrow()
+	{
+		// Wire onComplete to call stopSequence(), mimicking GuidanceOverlayCoordinator
+		startSequence(
+			Arrays.asList(makeManualStep("Only step")),
+			s -> {},
+			() -> sequencer.stopSequence()
+		);
+
+		// Must not throw NullPointerException
+		sequencer.skipStep();
+
+		assertFalse("Sequencer must be inactive after skip completes sequence", sequencer.isActive());
+	}
+
+	/**
+	 * Regression test for #432 — variant: skipStep on already-stopped sequencer.
+	 *
+	 * <p>If skipStep() is called after the sequence has already been stopped
+	 * (steps == null), it must silently return without throwing.
+	 */
+	@Test
+	public void skipStep_whenStepsAlreadyNull_doesNotThrow()
+	{
+		startSequence(Arrays.asList(makeManualStep("Only step")));
+		sequencer.stopSequence();
+
+		// steps is now null; calling skipStep must be a no-op
+		sequencer.skipStep();
+
+		assertFalse(sequencer.isActive());
+	}
 }
