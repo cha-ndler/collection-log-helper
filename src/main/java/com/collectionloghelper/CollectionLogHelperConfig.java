@@ -61,6 +61,7 @@ public interface CollectionLogHelperConfig extends Config
 		return false;
 	}
 
+
 	@ConfigSection(
 		name = "Learning",
 		description = "Per-account learning features",
@@ -281,6 +282,20 @@ public interface CollectionLogHelperConfig extends Config
 		position = 0
 	)
 	default boolean learnKillTimes()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "enableTempleOsrsSync",
+		name = "TempleOSRS KC Sync",
+		description = "Enable the 'Sync KC from TempleOSRS' button in the panel. "
+			+ "When clicked the plugin fetches your boss/activity kill counts from "
+			+ "templeosrs.com and stores them locally for use in efficiency scoring.",
+		section = syncSection,
+		position = 1
+	)
+	default boolean enableTempleOsrsSync()
 	{
 		return false;
 	}
