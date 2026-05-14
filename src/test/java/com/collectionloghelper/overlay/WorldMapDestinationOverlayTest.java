@@ -232,6 +232,47 @@ public class WorldMapDestinationOverlayTest
 	}
 
 	// -----------------------------------------------------------------------
+	// mapPointActive: off-screen arrow suppressed when a WorldMapPoint is registered
+	// -----------------------------------------------------------------------
+
+	/**
+	 * When {@link WorldMapDestinationOverlay#setMapPointActive(boolean)} is {@code true}
+	 * and the target is off-screen, the overlay must NOT draw its own edge-snap arrow.
+	 * The {@link CollectionLogWorldMapPoint}'s snap arrow handles direction in that case
+	 * to prevent the duplicate arrow from #410.
+	 */
+	@Test
+	public void render_noArrow_whenTargetOffScreenAndMapPointActive()
+	{
+		wireFullSetup(TARGET_OFF_SCREEN, 1.0f);
+		overlay.setTarget(TARGET_OFF_SCREEN, WorldMapDestinationOverlay.StepIconType.TILE);
+		overlay.setMapPointActive(true);
+
+		Dimension result = overlay.render(graphics);
+
+		assertNull(result);
+		verifyNoDraw();
+	}
+
+	/**
+	 * When {@link WorldMapDestinationOverlay#setMapPointActive(boolean)} is {@code true}
+	 * but the target IS on-screen, the overlay must still draw the destination icon
+	 * (the on-screen icon is distinct from the map point's badge, so no duplication).
+	 */
+	@Test
+	public void render_drawsDestinationIcon_whenTargetOnScreenEvenIfMapPointActive()
+	{
+		wireFullSetup(TARGET_ON_SCREEN, 4.0f);
+		overlay.setTarget(TARGET_ON_SCREEN, WorldMapDestinationOverlay.StepIconType.TILE);
+		overlay.setMapPointActive(true);
+
+		Dimension result = overlay.render(graphics);
+
+		assertNull(result);
+		verifyDrew();
+	}
+
+	// -----------------------------------------------------------------------
 	// Null / default handling
 	// -----------------------------------------------------------------------
 

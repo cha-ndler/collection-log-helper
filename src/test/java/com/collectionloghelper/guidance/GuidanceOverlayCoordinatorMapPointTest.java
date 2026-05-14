@@ -62,20 +62,18 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Regression test for issue #410: double arrow on the world map when
- * {@code WorldMapDestinationOverlay} (B.5.5) and {@code CollectionLogWorldMapPoint}
- * are both active simultaneously.
+ * Tests for world-map point registration and the interaction between
+ * {@link CollectionLogWorldMapPoint} and {@link WorldMapDestinationOverlay}.
  *
- * <p>{@link CollectionLogWorldMapPoint} draws its own edge-snap chevron via
- * {@link CollectionLogWorldMapPoint#onEdgeSnap()}.  {@link WorldMapDestinationOverlay}
- * independently draws an edge-snap arrow in its {@code render()} path.  When both are
- * registered at the same time, two overlapping arrows appear on the world map.
+ * <p>Issue #429: {@link CollectionLogWorldMapPoint} must be registered via
+ * {@link WorldMapPointManager#add} so its {@code setJumpOnClick(true)} flag provides
+ * click-to-focus-worldmap behaviour on the world-map edge arrow.
  *
- * <p>The fix: {@link GuidanceOverlayCoordinator#activateGuidance} must NEVER call
- * {@link WorldMapPointManager#add(net.runelite.client.ui.overlay.worldmap.WorldMapPoint)}
- * with a {@link CollectionLogWorldMapPoint} while guidance is active.
- * {@link WorldMapDestinationOverlay} supersedes it for both the on-screen destination
- * icon and the off-screen directional arrow.
+ * <p>Issue #410: both {@link CollectionLogWorldMapPoint} and
+ * {@link WorldMapDestinationOverlay} render an edge-snap arrow when the destination is
+ * off-screen; showing both at once produces a duplicate. The fix: the coordinator adds
+ * the map point AND calls {@link WorldMapDestinationOverlay#setMapPointActive(boolean)}
+ * so the overlay suppresses its own off-screen arrow while the map point is active.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class GuidanceOverlayCoordinatorMapPointTest
@@ -169,35 +167,48 @@ public class GuidanceOverlayCoordinatorMapPointTest
 
 	/**
 	 * When a non-clue, non-step source with a world coordinate is activated,
-	 * {@link WorldMapPointManager#add} must NEVER be called with a
-	 * {@link CollectionLogWorldMapPoint}. The {@link WorldMapDestinationOverlay}
-	 * owns the world-map arrow; the legacy map point would produce a double arrow.
-	 *
-	 * <p>Closes cha-ndler/collection-log-helper#410.
+	 * {@link WorldMapPointManager#add} must be called with a
+	 * {@link CollectionLogWorldMapPoint} so that clicking the world-map edge arrow
+	 * focuses the world map on the destination (click-to-focus, #429).
 	 */
 	@Test
-	public void activateGuidance_nonClueSource_doesNotAddLegacyMapPoint()
+	public void activateGuidance_nonClueSource_addsMapPointForClickToFocus()
 	{
 		CollectionLogSource source = sourceAtCoords("Zulrah", 2268, 3073, 0);
 
 		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0), null);
 
-		// WorldMapDestinationOverlay handles the arrow — legacy map point must not be added.
-		verify(worldMapPointManager, never()).add(any(CollectionLogWorldMapPoint.class));
+		verify(worldMapPointManager).add(any(CollectionLogWorldMapPoint.class));
 	}
 
 	/**
 	 * When the source has an empty guidance-steps list (non-multi-step path), the same
-	 * contract applies: no {@link CollectionLogWorldMapPoint} must be registered.
+	 * contract applies: a {@link CollectionLogWorldMapPoint} must be registered.
 	 */
 	@Test
-	public void activateGuidance_emptyStepsSource_doesNotAddLegacyMapPoint()
+	public void activateGuidance_emptyStepsSource_addsMapPointForClickToFocus()
 	{
 		CollectionLogSource source = sourceAtCoordsWithEmptySteps("Barrows", 3565, 3289, 0);
 
 		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0), null);
 
-		verify(worldMapPointManager, never()).add(any(CollectionLogWorldMapPoint.class));
+		verify(worldMapPointManager).add(any(CollectionLogWorldMapPoint.class));
+	}
+
+	/**
+	 * After activating guidance with a world coordinate,
+	 * {@link WorldMapDestinationOverlay#setMapPointActive(boolean)} must be called with
+	 * {@code true} so the overlay suppresses its own edge-snap arrow and avoids a
+	 * duplicate alongside the map point's arrow (#410).
+	 */
+	@Test
+	public void activateGuidance_nonClueSource_suppressesDestinationOverlayEdgeArrow()
+	{
+		CollectionLogSource source = sourceAtCoords("Zulrah", 2268, 3073, 0);
+
+		coordinator.activateGuidance(source, new WorldPoint(3200, 3200, 0), null);
+
+		verify(worldMapDestinationOverlay).setMapPointActive(true);
 	}
 
 	/**

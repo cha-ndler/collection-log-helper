@@ -98,6 +98,15 @@ public class WorldMapDestinationOverlay extends Overlay
 	private volatile StepIconType iconType = StepIconType.TILE;
 
 	/**
+	 * When true, a {@link CollectionLogWorldMapPoint} is registered with the
+	 * {@link net.runelite.client.ui.overlay.worldmap.WorldMapPointManager} and its
+	 * edge-snap arrow already handles the off-screen direction indicator on the world
+	 * map. In that case this overlay skips its own off-screen arrow to prevent a
+	 * duplicate arrow (#410). The on-screen destination icon is still drawn.
+	 */
+	private volatile boolean mapPointActive;
+
+	/**
 	 * 8 pre-rendered directional arrow sprites (0°, 45°, 90°, …, 315°).
 	 * 0° = pointing right; angles increase clockwise (screen-space).
 	 * Allocated once at construction; never re-allocated per frame.
@@ -158,6 +167,23 @@ public class WorldMapDestinationOverlay extends Overlay
 		this.targetPoint = null;
 	}
 
+	/**
+	 * Controls whether a {@link CollectionLogWorldMapPoint} is currently registered
+	 * alongside this overlay.
+	 *
+	 * <p>When {@code true}, this overlay skips its off-screen edge arrow (the
+	 * {@link CollectionLogWorldMapPoint}'s snap arrow handles that visual) but continues
+	 * to draw the on-screen destination icon at the target tile. This prevents the
+	 * double-arrow regression described in #410 while still providing the click-to-focus
+	 * behaviour supplied by {@link CollectionLogWorldMapPoint#isJumpOnClick()}.
+	 *
+	 * @param active {@code true} when a map point is registered; {@code false} otherwise
+	 */
+	public void setMapPointActive(boolean active)
+	{
+		this.mapPointActive = active;
+	}
+
 	// -------------------------------------------------------------------------
 	// Overlay render
 	// -------------------------------------------------------------------------
@@ -209,8 +235,11 @@ public class WorldMapDestinationOverlay extends Overlay
 		{
 			renderDestinationIcon(graphics, targetMapPoint);
 		}
-		else
+		else if (!mapPointActive)
 		{
+			// Only draw the edge arrow when no CollectionLogWorldMapPoint is registered.
+			// When a map point is active its own edge-snap arrow provides the direction
+			// indicator; drawing here too would produce a duplicate arrow (#410).
 			Point playerMapPoint = mapWorldPointToGraphicsPoint(playerLocation, mapBounds);
 			renderOffScreenArrow(graphics, mapBounds, playerMapPoint, targetMapPoint);
 		}
