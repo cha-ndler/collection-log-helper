@@ -336,6 +336,22 @@ public class GuidanceEventRouterTest
 		verifyNoInteractions(authoringLogger);
 	}
 
+	@Test
+	public void testOnAnimationChangedNullLocalPlayerDoesNotThrow()
+	{
+		// Arrange — simulate login: getLocalPlayer() returns null (player not yet spawned)
+		when(config.guidanceAuthoring()).thenReturn(true);
+		when(client.getLocalPlayer()).thenReturn(null);
+		AnimationChanged event = new AnimationChanged();
+		event.setActor(localPlayer);
+
+		// Act — must not throw NPE
+		router.onAnimationChanged(event);
+
+		// Assert — nothing logged; handler bailed out on null player
+		verifyNoInteractions(authoringLogger);
+	}
+
 	// ========================================================================
 	// onNpcSpawned / onNpcDespawned
 	// ========================================================================
