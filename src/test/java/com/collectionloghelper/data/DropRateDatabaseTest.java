@@ -385,4 +385,93 @@ public class DropRateDatabaseTest
 			}
 		}
 	}
+
+	// ========================================================================
+	// Issue #306 Tier 3 backfill — CHAT_MESSAGE_RECEIVED upgrades
+	// ========================================================================
+
+	/**
+	 * Brimhaven Agility Arena final step must use CHAT_MESSAGE_RECEIVED with the
+	 * confirmed per-ticket award message (OSRS Wiki: Ticket_Dispenser).
+	 */
+	@Test
+	public void spotCheck_brimhavenAgilityArena_finalStep_isChatMessageReceived()
+	{
+		CollectionLogSource source = database.getSourceByName("Brimhaven Agility Arena");
+		assertNotNull("Brimhaven Agility Arena source must exist", source);
+
+		List<GuidanceStep> steps = source.getGuidanceSteps();
+		assertNotNull("Brimhaven Agility Arena must have guidance steps", steps);
+		assertFalse("Brimhaven Agility Arena must have at least one step", steps.isEmpty());
+
+		GuidanceStep finalStep = steps.get(steps.size() - 1);
+		assertEquals(
+			"Brimhaven Agility Arena final step must use CHAT_MESSAGE_RECEIVED",
+			CompletionCondition.CHAT_MESSAGE_RECEIVED,
+			finalStep.getCompletionCondition());
+		assertNotNull(
+			"Brimhaven Agility Arena final step must have a completionChatPattern",
+			finalStep.getCompletionChatPattern());
+		assertTrue(
+			"Brimhaven Agility Arena chat pattern must match ticket award message",
+			"You have received an Agility Arena Ticket and Brimhaven Voucher!"
+				.contains(finalStep.getCompletionChatPattern()));
+	}
+
+	/**
+	 * Pest Control final step must use CHAT_MESSAGE_RECEIVED with the confirmed
+	 * game-win message (OSRS Wiki: Pest_Control).
+	 */
+	@Test
+	public void spotCheck_pestControl_finalStep_isChatMessageReceived()
+	{
+		CollectionLogSource source = database.getSourceByName("Pest Control");
+		assertNotNull("Pest Control source must exist", source);
+
+		List<GuidanceStep> steps = source.getGuidanceSteps();
+		assertNotNull("Pest Control must have guidance steps", steps);
+		assertFalse("Pest Control must have at least one step", steps.isEmpty());
+
+		GuidanceStep finalStep = steps.get(steps.size() - 1);
+		assertEquals(
+			"Pest Control final step must use CHAT_MESSAGE_RECEIVED",
+			CompletionCondition.CHAT_MESSAGE_RECEIVED,
+			finalStep.getCompletionCondition());
+		assertNotNull(
+			"Pest Control final step must have a completionChatPattern",
+			finalStep.getCompletionChatPattern());
+		assertEquals(
+			"Pest Control chat pattern must match game-win message exactly",
+			"You have successfully defended the island!",
+			finalStep.getCompletionChatPattern());
+	}
+
+	/**
+	 * Every CHAT_MESSAGE_RECEIVED step in the database must have a non-null,
+	 * non-empty completionChatPattern (schema invariant).
+	 */
+	@Test
+	public void load_allChatMessageReceivedSteps_haveNonEmptyPattern()
+	{
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			if (source.getGuidanceSteps() == null)
+			{
+				continue;
+			}
+			for (GuidanceStep step : source.getGuidanceSteps())
+			{
+				if (step.getCompletionCondition() == CompletionCondition.CHAT_MESSAGE_RECEIVED)
+				{
+					String ctx = source.getName() + " / " + step.getDescription();
+					assertNotNull(
+						"CHAT_MESSAGE_RECEIVED step must have completionChatPattern: " + ctx,
+						step.getCompletionChatPattern());
+					assertFalse(
+						"CHAT_MESSAGE_RECEIVED step must have non-empty completionChatPattern: " + ctx,
+						step.getCompletionChatPattern().isEmpty());
+				}
+			}
+		}
+	}
 }
