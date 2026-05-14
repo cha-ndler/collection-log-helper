@@ -150,7 +150,8 @@ public class GuidanceStepSectionTest
 			0, 0,
 			null, null, null,
 			null,   // conditionalAlternatives
-			section
+			section,
+			null  // waypoints
 		);
 	}
 }

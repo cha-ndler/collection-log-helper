@@ -486,7 +486,8 @@ public class GuidanceSequencerNestedConditionalTest
 			null,           // dynamicItemObjectTiers
 			null,           // completionZone
 			null,           // conditionalAlternatives
-			null            // section
+			null, // section
+			null  // waypoints
 		);
 	}
 
@@ -518,7 +519,8 @@ public class GuidanceSequencerNestedConditionalTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			alternatives,
-			null   // section
+			null, // section
+			null  // waypoints
 		);
 	}
 
