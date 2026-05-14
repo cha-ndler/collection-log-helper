@@ -151,7 +151,8 @@ public class GuidanceStepSectionTest
 			null, null, null,
 			null,   // conditionalAlternatives
 			section,
-			null  // waypoints
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 }

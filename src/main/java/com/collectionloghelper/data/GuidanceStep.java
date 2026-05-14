@@ -235,6 +235,23 @@ public class GuidanceStep
 	@Nullable
 	List<StepWaypoint> waypoints;
 
+	/**
+	 * Optional key that activates per-tick dynamic target evaluation for this step.
+	 * When non-null, {@link com.collectionloghelper.guidance.GuidanceOverlayCoordinator}
+	 * looks up the corresponding
+	 * {@link com.collectionloghelper.guidance.DynamicTargetEvaluator} in the
+	 * {@link com.collectionloghelper.guidance.dynamic.DynamicTargetEvaluatorRegistry}
+	 * and calls it once per game tick.  The returned
+	 * {@link net.runelite.api.coords.WorldPoint} overrides the step's static
+	 * {@link #worldX}/{@link #worldY}/{@link #worldPlane} for that tick's overlay update.
+	 *
+	 * <p>Null by default — existing JSON without this field deserialises unchanged.
+	 * Production steps must NOT set this field; it is reserved for puzzle/dynamic
+	 * content authored specifically for dynamic evaluators (e.g. Wintertodt braziers).
+	 */
+	@Nullable
+	String dynamicTargetEvaluator;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
@@ -459,7 +476,8 @@ public class GuidanceStep
 			this.completionZone,
 			null, // merged steps don't carry alternatives (already resolved)
 			this.section,
-			null  // waypoints: merged steps inherit null; authors set waypoints on the base step
+			null, // waypoints: merged steps inherit null; authors set waypoints on the base step
+			this.dynamicTargetEvaluator
 		);
 	}
 }

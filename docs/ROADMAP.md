@@ -562,7 +562,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [ ] B4.3.4 — Barrows per-brother targeting  status: deferred  owner: —  updated: 2026-05-14  note: Flagged in #420 for human design review — `perItemRequiredItemIds` may not suffice; needs `perItemCompletionNpcId` or guidance-step redesign for the VARBIT-based kill-progress interaction.
 - [ ] B4.3.5 — Barracuda Trials per-trial mapping  status: deferred  owner: —  updated: 2026-05-14  note: Flagged in #420 — re-audit after Sailing mechanics stabilize before scoping.
 - [ ] B4.4 — Top Pick auto-drives per-item method choice (North Star UI alignment)  status: planned  owner: —  updated: 2026-05-13
-- [ ] B5 — Puzzle/dynamic step type                     status: planned       owner: —          updated: 2026-04-16
+- [/] B5 — Puzzle/dynamic step type                     status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #TBD  note: DynamicTargetEvaluator interface + registry + WintertodtBrazierEvaluator pilot. Coordinator tick() dispatches per-tick; regression guard ensures no production step carries the field.
 - [ ] B6 — Decision D-01 pilot (hybrid Java helper)     status: planned       owner: —          updated: 2026-04-16
 
 **Tier B.5 — UI parity with Quest Helper**

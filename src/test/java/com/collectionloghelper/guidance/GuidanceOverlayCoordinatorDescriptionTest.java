@@ -39,6 +39,7 @@ import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import com.collectionloghelper.overlay.WidgetHighlightOverlay;
+import com.collectionloghelper.guidance.dynamic.DynamicTargetEvaluatorRegistry;
 import com.collectionloghelper.overlay.WorldMapDestinationOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
@@ -101,6 +102,8 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 	@Mock
 	private GuidanceSequencer guidanceSequencer;
 	@Mock
+	private com.collectionloghelper.guidance.dynamic.DynamicTargetEvaluatorRegistry dynamicTargetEvaluatorRegistry;
+	@Mock
 	private RequirementsChecker requirementsChecker;
 	@Mock
 	private PlayerTravelCapabilities travelCapabilities;
@@ -147,6 +150,7 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 				EventBus.class,
 				CollectionLogHelperConfig.class,
 				GuidanceSequencer.class,
+				DynamicTargetEvaluatorRegistry.class,
 				RequirementsChecker.class,
 				PlayerTravelCapabilities.class,
 				PlayerInventoryState.class,
@@ -166,7 +170,7 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 		ctor.setAccessible(true);
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
-			guidanceSequencer, requirementsChecker, travelCapabilities,
+			guidanceSequencer, dynamicTargetEvaluatorRegistry, requirementsChecker, travelCapabilities,
 			playerInventoryState, itemManager, requiredItemResolver,
 			worldMapPointManager, infoBoxManager,
 			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
@@ -275,8 +279,9 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			null,           // dynamicItemObjectTiers
 			null,           // completionZone
 			null,           // conditionalAlternatives
-			null,           // section
-			null            // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 

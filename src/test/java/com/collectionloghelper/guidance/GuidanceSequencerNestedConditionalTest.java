@@ -487,7 +487,8 @@ public class GuidanceSequencerNestedConditionalTest
 			null,           // completionZone
 			null,           // conditionalAlternatives
 			null, // section
-			null  // waypoints
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -520,7 +521,8 @@ public class GuidanceSequencerNestedConditionalTest
 			null,  // completionZone
 			alternatives,
 			null, // section
-			null  // waypoints
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 

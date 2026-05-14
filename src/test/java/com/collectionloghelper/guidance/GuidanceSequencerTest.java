@@ -114,8 +114,9 @@ public class GuidanceSequencerTest
 			null,           // dynamicItemObjectTiers
 			null,           // completionZone
 			null,           // conditionalAlternatives
-			null,           // section
-			null            // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -146,8 +147,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -178,8 +180,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -210,8 +213,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -242,8 +246,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -274,8 +279,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -306,8 +312,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -339,8 +346,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -371,8 +379,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -403,8 +412,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -435,8 +445,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -807,8 +818,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 
 		List<GuidanceStep> steps = Arrays.asList(
@@ -1279,8 +1291,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			alternatives,
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -1513,8 +1526,9 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			Collections.emptyList(),  // empty list of alternatives
-			null,  // section
-			null   // waypoints
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 
 		List<GuidanceStep> steps = Arrays.asList(step);
