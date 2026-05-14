@@ -11308,7 +11308,8 @@
         "worldX": 2809,
         "worldY": 3194,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "You have received an Agility Arena Ticket"
       }
     ],
     "rewardType": "SHOP",
@@ -11579,7 +11580,8 @@
           "Intermediate",
           "Veteran"
         ],
-        "completionCondition": "MANUAL"
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "You have successfully defended the island!"
       }
     ],
     "rewardType": "SHOP",
@@ -18093,6 +18095,16 @@
       },
       {
         "description": "Kill Cyclopes for defender drops. Each kill costs 10 warrior guild tokens",
+        "perItemStepDescription": {
+          "8844": "Kill Cyclopes (no prerequisite) to receive a Bronze defender and start the chain.",
+          "8845": "Kill Cyclopes while holding a Bronze defender in inventory to receive an Iron defender.",
+          "8846": "Kill Cyclopes while holding an Iron defender in inventory to receive a Steel defender.",
+          "8847": "Kill Cyclopes while holding a Steel defender in inventory to receive a Black defender.",
+          "8848": "Kill Cyclopes while holding a Black defender in inventory to receive a Mithril defender.",
+          "8849": "Kill Cyclopes while holding a Mithril defender in inventory to receive an Adamant defender.",
+          "8850": "Kill Cyclopes while holding an Adamant defender in inventory to receive a Rune defender.",
+          "12954": "Kill Cyclopes while holding a Rune defender in inventory to receive the Dragon defender."
+        },
         "worldX": 2849,
         "worldY": 3543,
         "worldPlane": 2,

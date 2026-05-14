@@ -687,7 +687,8 @@ public class GuidanceSequencer
 	 */
 	public void advanceStep()
 	{
-		if (!active || steps == null)
+		final List<GuidanceStep> currentSteps = this.steps;
+		if (!active || currentSteps == null)
 		{
 			return;
 		}
@@ -705,12 +706,21 @@ public class GuidanceSequencer
 				currentIndex = targetIndex;
 				crossedWaypointIndex = 0;
 				skipSatisfiedSteps();
+
+				// skipSatisfiedSteps() may fire onSequenceComplete -> stopSequence(),
+				// nulling this.steps. Snapshot was captured above; use it for size checks.
+				if (this.steps == null)
+				{
+					// sequence completed (and cleaned up) inside skipSatisfiedSteps()
+					return;
+				}
+
 				if (active)
 				{
 					GuidanceStep step = getCurrentStep();
 					if (step != null)
 					{
-						log.info("Resumed at step {}/{}: {}", currentIndex + 1, steps.size(), step.getDescription());
+						log.info("Resumed at step {}/{}: {}", currentIndex + 1, currentSteps.size(), step.getDescription());
 						notifyStepChanged(step);
 					}
 				}
@@ -724,7 +734,15 @@ public class GuidanceSequencer
 		crossedWaypointIndex = 0;
 		skipSatisfiedSteps();
 
-		if (currentIndex >= steps.size())
+		// skipSatisfiedSteps() may fire onSequenceComplete -> stopSequence(),
+		// nulling this.steps. Snapshot was captured above; use it for size checks.
+		if (this.steps == null)
+		{
+			// sequence completed (and cleaned up) inside skipSatisfiedSteps()
+			return;
+		}
+
+		if (currentIndex >= currentSteps.size())
 		{
 			log.info("Guidance sequence complete for {}", activeSource != null ? activeSource.getName() : "?");
 			active = false;
@@ -738,7 +756,7 @@ public class GuidanceSequencer
 			GuidanceStep step = getCurrentStep();
 			if (step != null)
 			{
-				log.info("Advanced to step {}/{}: {}", currentIndex + 1, steps.size(), step.getDescription());
+				log.info("Advanced to step {}/{}: {}", currentIndex + 1, currentSteps.size(), step.getDescription());
 				notifyStepChanged(step);
 			}
 		}

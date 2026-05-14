@@ -354,6 +354,14 @@ public class GuidanceStep
 	 * first alternative whose requirements are met. If no alternative matches,
 	 * returns this step unchanged.
 	 *
+	 * <p><b>B3 — Nested conditional steps:</b> When the first matching alternative
+	 * carries {@link ConditionalAlternative#getNestedAlternatives() nestedAlternatives},
+	 * the evaluator merges the parent override first and then recurses: the nested list
+	 * is evaluated against the already-overridden step, and the first matching nested
+	 * alternative is applied on top. This process repeats for each depth level — the
+	 * tree is evaluated so deeper overrides win. The recursion terminates when there are
+	 * no further nested alternatives or no nested alternative matches.
+	 *
 	 * @param checker the requirements checker to evaluate alternatives against
 	 * @return the resolved step (may be this step or a merged copy)
 	 */
@@ -367,10 +375,41 @@ public class GuidanceStep
 		{
 			if (alt.getRequirements() != null && checker.meetsRequirements(alt.getRequirements()))
 			{
-				return mergeAlternative(alt);
+				return resolveAlternativeRecursive(this, alt, checker);
 			}
 		}
 		return this;
+	}
+
+	/**
+	 * Merges {@code alt} onto {@code base} and, if {@code alt} has nested alternatives,
+	 * recurses into the first matching one. Returns the fully-resolved step.
+	 *
+	 * <p>The recursive descent is bounded by the tree depth declared in the JSON data.
+	 * Nesting is structurally acyclic (child lists are inline declarations; parent
+	 * references are not possible), so infinite recursion cannot occur.
+	 */
+	private static GuidanceStep resolveAlternativeRecursive(GuidanceStep base,
+		ConditionalAlternative alt, RequirementsChecker checker)
+	{
+		GuidanceStep merged = base.mergeAlternative(alt);
+
+		List<ConditionalAlternative> nested = alt.getNestedAlternatives();
+		if (nested == null || nested.isEmpty())
+		{
+			return merged;
+		}
+
+		for (ConditionalAlternative nestedAlt : nested)
+		{
+			if (nestedAlt.getRequirements() != null
+				&& checker.meetsRequirements(nestedAlt.getRequirements()))
+			{
+				return resolveAlternativeRecursive(merged, nestedAlt, checker);
+			}
+		}
+		// No nested alternative matched — return the parent-level merge as-is.
+		return merged;
 	}
 
 	/**

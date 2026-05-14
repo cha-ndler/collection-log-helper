@@ -590,24 +590,32 @@ public class StepProgressViewTest
 	}
 
 	/**
-	 * Finds the required-items sub-panel inside {@code view}. It is the first
-	 * {@link JPanel} direct child of the StepProgressView.
+	 * Finds the required-items sub-panel inside {@code view}.
+	 * The layout order is: chipPanel (1st JPanel), requiredItemsPanel (2nd),
+	 * recommendedItemsPanel (3rd), sectionsPanel (4th).
+	 * This helper returns the 2nd JPanel (requiredItemsPanel).
 	 */
 	private static JPanel findRequiredItemsPanel(StepProgressView view)
 	{
+		int panelCount = 0;
 		for (Component c : view.getComponents())
 		{
 			if (c instanceof JPanel)
 			{
-				return (JPanel) c;
+				panelCount++;
+				if (panelCount == 2)
+				{
+					return (JPanel) c;
+				}
 			}
 		}
 		return null;
 	}
 
 	/**
-	 * Finds the recommended-items sub-panel inside {@code view}. It is the second
-	 * {@link JPanel} direct child of the StepProgressView (after requiredItemsPanel).
+	 * Finds the recommended-items sub-panel inside {@code view}. It is the third
+	 * {@link JPanel} direct child of the StepProgressView (chip panel, required,
+	 * then recommended).
 	 */
 	private static JPanel findRecommendedItemsPanel(StepProgressView view)
 	{
@@ -617,7 +625,7 @@ public class StepProgressViewTest
 			if (c instanceof JPanel)
 			{
 				panelCount++;
-				if (panelCount == 2)
+				if (panelCount == 3)
 				{
 					return (JPanel) c;
 				}
@@ -704,8 +712,8 @@ public class StepProgressViewTest
 	}
 
 	/**
-	 * Finds the sectionsPanel — the third {@link JPanel} direct child of the
-	 * StepProgressView (after requiredItemsPanel and recommendedItemsPanel).
+	 * Finds the sectionsPanel — the fourth {@link JPanel} direct child of the
+	 * StepProgressView (chip panel, required, recommended, then sections).
 	 */
 	private static JPanel findSectionsPanel(StepProgressView view)
 	{
@@ -715,7 +723,7 @@ public class StepProgressViewTest
 			if (c instanceof JPanel)
 			{
 				panelCount++;
-				if (panelCount == 3)
+				if (panelCount == 4)
 				{
 					return (JPanel) c;
 				}

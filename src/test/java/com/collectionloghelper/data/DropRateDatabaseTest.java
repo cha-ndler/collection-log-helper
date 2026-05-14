@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -352,6 +353,72 @@ public class DropRateDatabaseTest
 			step.getRecommendedItemIds());
 	}
 
+	// ========================================================================
+	// Charset regression — issue #433
+	// ========================================================================
+
+	/**
+	 * Verifies that em-dash characters in step descriptions are loaded correctly
+	 * as the Unicode em-dash (U+2014, "—") rather than the Windows-1252 mojibake
+	 * sequence "â€"" that results from reading UTF-8 bytes with the platform
+	 * default charset on Windows.
+	 *
+	 * <p>The Perilous Moons step 3 description ("… Each has unique mechanics — learn
+	 * the safe tiles …") is the known reproducer from issue #433.
+	 */
+	@Test
+	public void load_guidanceStepDescriptions_noCharsetCorruption()
+	{
+		final String MOJIBAKE = "â€”"; // UTF-8 em-dash bytes misread as Windows-1252
+		final String EM_DASH   = "—";              // correct em-dash
+
+		boolean foundAtLeastOneEmDash = false;
+
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			if (source.getGuidanceSteps() == null)
+			{
+				continue;
+			}
+			for (GuidanceStep step : source.getGuidanceSteps())
+			{
+				String desc = step.getDescription();
+				if (desc != null)
+				{
+					assertFalse(
+						"Mojibake em-dash detected in description for source '"
+							+ source.getName() + "': " + desc,
+						desc.contains(MOJIBAKE));
+					if (desc.contains(EM_DASH))
+					{
+						foundAtLeastOneEmDash = true;
+					}
+				}
+
+				if (step.getPerItemStepDescription() != null)
+				{
+					for (Map.Entry<Integer, String> entry : step.getPerItemStepDescription().entrySet())
+					{
+						String override = entry.getValue();
+						if (override != null)
+						{
+							assertFalse(
+								"Mojibake em-dash detected in perItemStepDescription (item "
+									+ entry.getKey() + ") for source '" + source.getName()
+									+ "': " + override,
+								override.contains(MOJIBAKE));
+						}
+					}
+				}
+			}
+		}
+
+		assertTrue(
+			"Expected at least one em-dash in guidance step descriptions — "
+				+ "test data may be empty or step sources changed",
+			foundAtLeastOneEmDash);
+	}
+
 	/**
 	 * Where recommendedItemIds is present in drop_rates.json (B.5.2b backfill),
 	 * each array must be non-empty, contain only positive item IDs, and have
@@ -381,6 +448,95 @@ public class DropRateDatabaseTest
 				{
 					assertTrue("recommendedItemIds must contain only positive IDs (got " + id + "): " + ctx,
 						id > 0);
+				}
+			}
+		}
+	}
+
+	// ========================================================================
+	// Issue #306 Tier 3 backfill — CHAT_MESSAGE_RECEIVED upgrades
+	// ========================================================================
+
+	/**
+	 * Brimhaven Agility Arena final step must use CHAT_MESSAGE_RECEIVED with the
+	 * confirmed per-ticket award message (OSRS Wiki: Ticket_Dispenser).
+	 */
+	@Test
+	public void spotCheck_brimhavenAgilityArena_finalStep_isChatMessageReceived()
+	{
+		CollectionLogSource source = database.getSourceByName("Brimhaven Agility Arena");
+		assertNotNull("Brimhaven Agility Arena source must exist", source);
+
+		List<GuidanceStep> steps = source.getGuidanceSteps();
+		assertNotNull("Brimhaven Agility Arena must have guidance steps", steps);
+		assertFalse("Brimhaven Agility Arena must have at least one step", steps.isEmpty());
+
+		GuidanceStep finalStep = steps.get(steps.size() - 1);
+		assertEquals(
+			"Brimhaven Agility Arena final step must use CHAT_MESSAGE_RECEIVED",
+			CompletionCondition.CHAT_MESSAGE_RECEIVED,
+			finalStep.getCompletionCondition());
+		assertNotNull(
+			"Brimhaven Agility Arena final step must have a completionChatPattern",
+			finalStep.getCompletionChatPattern());
+		assertTrue(
+			"Brimhaven Agility Arena chat pattern must match ticket award message",
+			"You have received an Agility Arena Ticket and Brimhaven Voucher!"
+				.contains(finalStep.getCompletionChatPattern()));
+	}
+
+	/**
+	 * Pest Control final step must use CHAT_MESSAGE_RECEIVED with the confirmed
+	 * game-win message (OSRS Wiki: Pest_Control).
+	 */
+	@Test
+	public void spotCheck_pestControl_finalStep_isChatMessageReceived()
+	{
+		CollectionLogSource source = database.getSourceByName("Pest Control");
+		assertNotNull("Pest Control source must exist", source);
+
+		List<GuidanceStep> steps = source.getGuidanceSteps();
+		assertNotNull("Pest Control must have guidance steps", steps);
+		assertFalse("Pest Control must have at least one step", steps.isEmpty());
+
+		GuidanceStep finalStep = steps.get(steps.size() - 1);
+		assertEquals(
+			"Pest Control final step must use CHAT_MESSAGE_RECEIVED",
+			CompletionCondition.CHAT_MESSAGE_RECEIVED,
+			finalStep.getCompletionCondition());
+		assertNotNull(
+			"Pest Control final step must have a completionChatPattern",
+			finalStep.getCompletionChatPattern());
+		assertEquals(
+			"Pest Control chat pattern must match game-win message exactly",
+			"You have successfully defended the island!",
+			finalStep.getCompletionChatPattern());
+	}
+
+	/**
+	 * Every CHAT_MESSAGE_RECEIVED step in the database must have a non-null,
+	 * non-empty completionChatPattern (schema invariant).
+	 */
+	@Test
+	public void load_allChatMessageReceivedSteps_haveNonEmptyPattern()
+	{
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			if (source.getGuidanceSteps() == null)
+			{
+				continue;
+			}
+			for (GuidanceStep step : source.getGuidanceSteps())
+			{
+				if (step.getCompletionCondition() == CompletionCondition.CHAT_MESSAGE_RECEIVED)
+				{
+					String ctx = source.getName() + " / " + step.getDescription();
+					assertNotNull(
+						"CHAT_MESSAGE_RECEIVED step must have completionChatPattern: " + ctx,
+						step.getCompletionChatPattern());
+					assertFalse(
+						"CHAT_MESSAGE_RECEIVED step must have non-empty completionChatPattern: " + ctx,
+						step.getCompletionChatPattern().isEmpty());
 				}
 			}
 		}

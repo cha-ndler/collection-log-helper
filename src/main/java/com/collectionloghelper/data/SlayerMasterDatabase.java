@@ -29,6 +29,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -67,7 +68,7 @@ public class SlayerMasterDatabase
 				return;
 			}
 
-			JsonObject root = gson.fromJson(new InputStreamReader(is), JsonObject.class);
+			JsonObject root = gson.fromJson(new InputStreamReader(is, StandardCharsets.UTF_8), JsonObject.class);
 			JsonObject masters = root.getAsJsonObject("masters");
 			if (masters == null)
 			{

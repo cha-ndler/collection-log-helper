@@ -1,0 +1,61 @@
+[
+  {
+    "name": "B3 Pilot Source",
+    "category": "BOSSES",
+    "worldX": 3000,
+    "worldY": 3000,
+    "worldPlane": 0,
+    "avgKillTime": 60,
+    "minKillTime": 0,
+    "displayName": "B3 Pilot Source",
+    "items": [
+      {
+        "id": 999001,
+        "name": "B3 Pilot Item",
+        "dropRate": 0.01,
+        "pointCost": 0,
+        "milestoneKills": 0,
+        "rewardType": "DROP"
+      }
+    ],
+    "rewardType": "DROP",
+    "guidanceSteps": [
+      {
+        "description": "Default: walk there manually",
+        "worldX": 3000,
+        "worldY": 3000,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "travelTip": "Walk south",
+        "conditionalAlternatives": [
+          {
+            "requirements": { "quests": ["LOST_CITY"] },
+            "description": "Level 1: use fairy ring",
+            "worldX": 2400,
+            "worldY": 4435,
+            "travelTip": "Use fairy ring BIP",
+            "nestedAlternatives": [
+              {
+                "requirements": { "skills": [{ "skill": "AGILITY", "level": 60 }] },
+                "description": "Level 2: agility shortcut near fairy ring",
+                "worldX": 2405,
+                "travelTip": "60 Agility shortcut",
+                "nestedAlternatives": [
+                  {
+                    "requirements": { "skills": [{ "skill": "AGILITY", "level": 80 }] },
+                    "travelTip": "80 Agility shortcut saves 2 extra tiles"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "description": "Kill the boss",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 9001
+      }
+    ]
+  }
+]
