@@ -1913,4 +1913,46 @@ public class GuidanceSequencerTest
 
 		assertFalse(sequencer.isActive());
 	}
+
+	/**
+	 * Regression test for #439.
+	 *
+	 * <p>When advanceStep() is called on a single-step sequence and
+	 * skipSatisfiedSteps() fires onSequenceComplete, which in turn calls
+	 * stopSequence() (nulling this.steps), the subsequent size() call in
+	 * advanceStep() must not throw NPE.
+	 */
+	@Test
+	public void advanceStep_afterSequenceComplete_doesNotThrow()
+	{
+		// Wire onComplete to call stopSequence(), mimicking GuidanceOverlayCoordinator
+		startSequence(
+			Arrays.asList(makeManualStep("Only step")),
+			s -> {},
+			() -> sequencer.stopSequence()
+		);
+
+		// Must not throw NullPointerException
+		sequencer.advanceStep();
+
+		assertFalse("Sequencer must be inactive after advance completes sequence", sequencer.isActive());
+	}
+
+	/**
+	 * Regression test for #439 — variant: advanceStep on already-stopped sequencer.
+	 *
+	 * <p>If advanceStep() is called after the sequence has already been stopped
+	 * (steps == null), it must silently return without throwing.
+	 */
+	@Test
+	public void advanceStep_whenStepsAlreadyNull_doesNotThrow()
+	{
+		startSequence(Arrays.asList(makeManualStep("Only step")));
+		sequencer.stopSequence();
+
+		// steps is now null; calling advanceStep must be a no-op
+		sequencer.advanceStep();
+
+		assertFalse(sequencer.isActive());
+	}
 }
