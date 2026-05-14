@@ -37,6 +37,8 @@ import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
 import com.collectionloghelper.data.RequirementRow;
 import com.collectionloghelper.data.RequirementsChecker;
+import com.collectionloghelper.guidance.DynamicTargetEvaluator;
+import com.collectionloghelper.guidance.dynamic.DynamicTargetEvaluatorRegistry;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
 import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
@@ -95,6 +97,7 @@ public class GuidanceOverlayCoordinator
 	private final EventBus eventBus;
 	private final CollectionLogHelperConfig config;
 	private final GuidanceSequencer guidanceSequencer;
+	private final DynamicTargetEvaluatorRegistry dynamicTargetEvaluatorRegistry;
 	private final RequirementsChecker requirementsChecker;
 	private final PlayerTravelCapabilities travelCapabilities;
 	private final PlayerInventoryState playerInventoryState;
@@ -168,6 +171,7 @@ public class GuidanceOverlayCoordinator
 		EventBus eventBus,
 		CollectionLogHelperConfig config,
 		GuidanceSequencer guidanceSequencer,
+		DynamicTargetEvaluatorRegistry dynamicTargetEvaluatorRegistry,
 		RequirementsChecker requirementsChecker,
 		PlayerTravelCapabilities travelCapabilities,
 		PlayerInventoryState playerInventoryState,
@@ -190,6 +194,7 @@ public class GuidanceOverlayCoordinator
 		this.eventBus = eventBus;
 		this.config = config;
 		this.guidanceSequencer = guidanceSequencer;
+		this.dynamicTargetEvaluatorRegistry = dynamicTargetEvaluatorRegistry;
 		this.requirementsChecker = requirementsChecker;
 		this.travelCapabilities = travelCapabilities;
 		this.playerInventoryState = playerInventoryState;
@@ -400,8 +405,10 @@ public class GuidanceOverlayCoordinator
 	}
 
 	/**
-	 * Called from the plugin's onGameTick. Handles world map arrow rotation
-	 * and dispatches the deferred ShortestPath "path" message.
+	 * Called from the plugin's onGameTick. Handles world map arrow rotation,
+	 * dispatches the deferred ShortestPath "path" message, and updates
+	 * dynamic target overlays for steps that carry a
+	 * {@link com.collectionloghelper.data.GuidanceStep#getDynamicTargetEvaluator()} key.
 	 */
 	public void tick()
 	{
@@ -420,8 +427,63 @@ public class GuidanceOverlayCoordinator
 			eventBus.post(new PluginMessage("shortestpath", "path", data));
 		}
 
+		// Dynamic target evaluator dispatch: update overlays each tick when the
+		// active step has a dynamicTargetEvaluator key.
+		tickDynamicTargetEvaluator();
+
 		// World map arrow rotation
 		updateWorldMapArrow();
+	}
+
+	/**
+	 * If the currently active guidance step has a non-null
+	 * {@link com.collectionloghelper.data.GuidanceStep#getDynamicTargetEvaluator()}
+	 * key, looks up the evaluator in the registry and calls it to obtain the
+	 * current target {@link WorldPoint}.  When the evaluator returns a non-null
+	 * point, pushes it to all location-sensitive overlays (minimap, world map,
+	 * overlay, hint arrow).  Returns silently when guidance is inactive, the
+	 * step carries no evaluator key, the key is unknown, or the evaluator
+	 * returns {@code null}.
+	 *
+	 * <p>Called on the client thread once per game tick via {@link #tick()}.
+	 */
+	private void tickDynamicTargetEvaluator()
+	{
+		if (!guidanceSequencer.isActive())
+		{
+			return;
+		}
+		GuidanceStep step = guidanceSequencer.getRawCurrentStep();
+		if (step == null || step.getDynamicTargetEvaluator() == null)
+		{
+			return;
+		}
+		DynamicTargetEvaluator evaluator = dynamicTargetEvaluatorRegistry.get(step.getDynamicTargetEvaluator());
+		if (evaluator == null)
+		{
+			return;
+		}
+		WorldPoint dynamicPoint = evaluator.evaluate(client, step);
+		if (dynamicPoint == null)
+		{
+			return;
+		}
+		guidanceOverlay.setTargetPoint(dynamicPoint);
+		guidanceMinimapOverlay.setTargetPoint(dynamicPoint);
+		worldMapRouteOverlay.setTargetPoint(dynamicPoint);
+		worldMapDestinationOverlay.setTarget(dynamicPoint, resolveStepIconType(step));
+		if (activeMapPoint != null)
+		{
+			worldMapPointManager.remove(activeMapPoint);
+		}
+		activeMapPoint = new CollectionLogWorldMapPoint(dynamicPoint,
+			step.resolveDescription(activeTargetItemId), collectionLogIcon);
+		worldMapPointManager.add(activeMapPoint);
+		worldMapDestinationOverlay.setMapPointActive(true);
+		if (shouldSetHintArrowTo(dynamicPoint))
+		{
+			client.setHintArrow(dynamicPoint);
+		}
 	}
 
 	/**

@@ -126,7 +126,8 @@ public class GuidanceSequencerWaypointTest
 			null, // completionZone
 			null, // conditionalAlternatives
 			null, // section
-			waypoints
+			waypoints,
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -162,7 +163,8 @@ public class GuidanceSequencerWaypointTest
 			null,
 			null,
 			null,
-			null
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
@@ -273,7 +275,8 @@ public class GuidanceSequencerWaypointTest
 			null,
 			null,
 			null,
-			null  // waypoints = null
+			null, // waypoints = null
+			null  // dynamicTargetEvaluator
 		);
 
 		AtomicBoolean stepAdvanced = new AtomicBoolean(false);
@@ -322,7 +325,8 @@ public class GuidanceSequencerWaypointTest
 			null,
 			null,
 			null,
-			Collections.emptyList()  // waypoints = empty list
+			Collections.emptyList(), // waypoints = empty list
+			null  // dynamicTargetEvaluator
 		);
 
 		AtomicBoolean stepAdvanced = new AtomicBoolean(false);
