@@ -593,7 +593,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 
 **Tier E — Alternative methods and meta intelligence**
 
-- [ ] E1 — Cross-source recommendation mode             status: planned       owner: —          updated: 2026-04-16
+- [/] E1 — Cross-source recommendation mode             status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #TBD  note: CrossSourceRanker + CrossSourceRecommendation + enableCrossSourceMode config flag; panel integration deferred.
 - [ ] E2 — Meta-update dating                           status: planned       owner: —          updated: 2026-04-16
 
 **Tier F — Social, imports, and long-tail polish**
