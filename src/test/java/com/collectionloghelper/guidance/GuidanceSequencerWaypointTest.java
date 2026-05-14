@@ -107,6 +107,7 @@ public class GuidanceSequencerWaypointTest
 			null, null,
 			null,  // perItemRequiredItemIds
 			null,  // recommendedItemIds
+			null, // perItemRecommendedItemIds
 			CompletionCondition.ARRIVE_AT_TILE,
 			0, 0, 5, 0,  // completionItemId, completionItemCount, completionDistance, completionNpcId
 			null,  // completionNpcIds
@@ -142,6 +143,7 @@ public class GuidanceSequencerWaypointTest
 			null, null,
 			null,
 			null,
+			null, // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null,
@@ -252,6 +254,7 @@ public class GuidanceSequencerWaypointTest
 			null, null,
 			null,
 			null,
+			null, // perItemRecommendedItemIds
 			CompletionCondition.ARRIVE_AT_TILE,
 			0, 0, 5, 0,
 			null,
@@ -300,6 +303,7 @@ public class GuidanceSequencerWaypointTest
 			null, null,
 			null,
 			null,
+			null, // perItemRecommendedItemIds
 			CompletionCondition.ARRIVE_AT_TILE,
 			0, 0, 5, 0,
 			null,

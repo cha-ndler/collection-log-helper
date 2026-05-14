@@ -313,6 +313,7 @@ public class GuidanceStepTest
 			null, null,     // travelTip, requiredItemIds
 			null,           // perItemRequiredItemIds
 			null,           // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,    // completionItemId, completionItemCount, completionDistance, completionNpcId
 			null,           // completionNpcIds
@@ -346,6 +347,7 @@ public class GuidanceStepTest
 			null, null,     // travelTip, requiredItemIds
 			null,           // perItemRequiredItemIds
 			null,           // recommendedItemIds
+			null,           // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,    // completionItemId, completionItemCount, completionDistance, completionNpcId
 			null,           // completionNpcIds

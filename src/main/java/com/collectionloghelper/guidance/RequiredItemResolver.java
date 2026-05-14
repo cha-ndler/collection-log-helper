@@ -133,7 +133,29 @@ public class RequiredItemResolver
 		{
 			return Collections.emptyList();
 		}
-		return resolveIds(step.getRecommendedItemIds());
+		return resolveIds(pickRecommendedItemIds(step));
+	}
+
+	/**
+	 * Selects the effective recommended-item list for a step.  Checks for a
+	 * per-item override via the coordinator's active target item ID before
+	 * falling back to the step's static {@code recommendedItemIds}.
+	 */
+	private List<Integer> pickRecommendedItemIds(GuidanceStep step)
+	{
+		if (step.getPerItemRecommendedItemIds() != null && coordinator != null)
+		{
+			Integer targetItemId = coordinator.getActiveTargetItemId();
+			if (targetItemId != null)
+			{
+				List<Integer> override = step.getPerItemRecommendedItemIds().get(targetItemId);
+				if (override != null)
+				{
+					return override;
+				}
+			}
+		}
+		return step.getRecommendedItemIds();
 	}
 
 	/**
