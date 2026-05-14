@@ -80,9 +80,10 @@ public class GuidanceSequencerTest
 		lenient().when(collectionState.isItemObtained(anyInt())).thenReturn(false);
 
 		Constructor<GuidanceSequencer> ctor = GuidanceSequencer.class.getDeclaredConstructor(
-			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class);
+			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class,
+				com.collectionloghelper.guidance.helper.GuidanceHelperRegistry.class);
 		ctor.setAccessible(true);
-		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker);
+		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker, null);
 	}
 
 	// ---- Helper methods ----
@@ -472,7 +473,7 @@ public class GuidanceSequencerTest
 		return new CollectionLogSource(name, CollectionLogCategory.BOSSES, 3000, 3000, 0,
 			60, 0, name, Collections.emptyList(),
 			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null,
-			steps, null, 0, null, cumulativeTrackThreshold, Collections.emptyList(), null);
+			steps, null, null, 0, null, cumulativeTrackThreshold, Collections.emptyList(), null);
 	}
 
 	private void startSequence(List<GuidanceStep> steps)

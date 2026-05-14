@@ -297,7 +297,7 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			null, 0, false, 0,
 			null, 0, null, null,
 			Arrays.asList(steps),
-			null, 0, null, 0,
+			null, null, 0, null, 0,
 			Collections.emptyList()
 		, null);
 	}
