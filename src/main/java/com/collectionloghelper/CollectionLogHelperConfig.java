@@ -320,4 +320,61 @@ public interface CollectionLogHelperConfig extends Config
 	{
 		return false;
 	}
+
+	// -------------------------------------------------------------------------
+	// POH teleport manual overrides (C1)
+	// These checkboxes let players declare POH teleport fixtures that varbit
+	// detection cannot confirm from outside the house. Resolution rule:
+	// varbit-detected positive OR config-override positive → has teleport.
+	// Only fixtures with unreliable outside-the-POH varbits have overrides here;
+	// varbit-detected fixtures (jewellery box, portal nexus, mounted pendants)
+	// are authoritative when positive and do not need a config override.
+	// -------------------------------------------------------------------------
+
+	@ConfigSection(
+		name = "POH Teleports",
+		description = "Manually declare POH teleport fixtures that cannot be reliably auto-detected outside the house",
+		position = 170,
+		closedByDefault = true
+	)
+	String pohSection = "poh";
+
+	@ConfigItem(
+		keyName = "manualPohMountedGlory",
+		name = "Has Mounted Glory",
+		description = "Check if your POH has a mounted Amulet of Glory (Construction 47). "
+			+ "Varbit detection is unreliable outside the house; this override is the primary detection path.",
+		section = pohSection,
+		position = 0
+	)
+	default boolean manualPohMountedGlory()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "manualPohSpiritTree",
+		name = "Has Spirit Tree",
+		description = "Check if your POH superior garden has a spirit tree or spirit tree & fairy ring "
+			+ "(Construction 75, Farming 83). Varbit detection is unreliable outside the house.",
+		section = pohSection,
+		position = 1
+	)
+	default boolean manualPohSpiritTree()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "manualPohFairyRing",
+		name = "Has Fairy Ring",
+		description = "Check if your POH superior garden has a fairy ring or spirit tree & fairy ring "
+			+ "(Construction 85). Varbit detection is unreliable outside the house.",
+		section = pohSection,
+		position = 2
+	)
+	default boolean manualPohFairyRing()
+	{
+		return false;
+	}
 }
