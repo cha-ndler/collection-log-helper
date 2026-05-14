@@ -42,6 +42,26 @@ public interface CollectionLogHelperConfig extends Config
 	String guidanceSection = "guidance";
 
 	@ConfigSection(
+		name = "Sync",
+		description = "External data sync settings",
+		position = 150,
+		closedByDefault = true
+	)
+	String syncSection = "sync";
+
+	@ConfigItem(
+		keyName = "enableCollectionLogNetImport",
+		name = "collectionlog.net import",
+		description = "Show a 'Sync from collectionlog.net' button in the panel to import your obtained items from collectionlog.net",
+		section = syncSection,
+		position = 0
+	)
+	default boolean enableCollectionLogNetImport()
+	{
+		return false;
+	}
+
+	@ConfigSection(
 		name = "Developer",
 		description = "Development tools for authoring guidance sequences",
 		position = 200,
