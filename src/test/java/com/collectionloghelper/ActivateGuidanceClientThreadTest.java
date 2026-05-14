@@ -131,6 +131,7 @@ public class ActivateGuidanceClientThreadTest
 			null,      // interactAction
 			null,      // dialogOptions
 			null,      // guidanceSteps
+			null,      // guidanceHelperKey
 			null,      // requirements
 			0,         // cumulativeTrackItemId
 			null,      // cumulativeTrackObjectIds

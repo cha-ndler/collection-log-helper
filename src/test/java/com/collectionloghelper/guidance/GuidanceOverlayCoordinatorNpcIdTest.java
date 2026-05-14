@@ -304,6 +304,7 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 			null, 0, false, 0,
 			null, 0, null, null,
 			Arrays.asList(steps),
+			null,
 			null, 0, null, 0,
 			Collections.emptyList()
 		, null);

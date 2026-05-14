@@ -378,11 +378,13 @@ public class DryStreakAnalyzerTest
 			null,       // interactAction
 			null,       // dialogOptions
 			null,       // guidanceSteps
+			null,       // guidanceHelperKey
 			null,       // requirements
 			0,          // cumulativeTrackItemId
 			null,       // cumulativeTrackObjectIds
 			0,          // cumulativeTrackThreshold
-			items
+			items,
+			null        // metaAuthoredDate
 		);
 	}
 }

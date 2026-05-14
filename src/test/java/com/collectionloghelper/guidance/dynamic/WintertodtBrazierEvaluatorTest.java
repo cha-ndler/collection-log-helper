@@ -209,7 +209,8 @@ public class WintertodtBrazierEvaluatorTest
 			0, null, null, null,
 			null, null,
 			null,  // perItemRequiredItemIds
-			null,  // recommendedItemIds
+			null,
+			null /* perItemRecommendedItemIds */,  // recommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null,  // completionNpcIds

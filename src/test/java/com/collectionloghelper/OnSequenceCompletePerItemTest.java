@@ -169,7 +169,8 @@ public class OnSequenceCompletePerItemTest
 			null, 0, false, 0,
 			null, 0, null, null,
 			null,
-			null, 0, null, 0,
-			Collections.emptyList(), null /* metaAuthoredDate */);
+			null, null, 0, null, 0,
+			Collections.emptyList()
+		, null);
 	}
 }
