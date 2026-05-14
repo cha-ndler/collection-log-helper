@@ -563,7 +563,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 
 **Tier B.5 — UI parity with Quest Helper**
 
-- [/] B.5.1 — Per-step item requirements panel          status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #<pr-number>
+- [/] B.5.1 — Per-step item requirements panel          status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #452
 - [ ] B.5.2 — Recommended items section                 status: planned       owner: —          updated: 2026-05-10  note: soft-recommended supplies below required; cha-ndler/collection-log-helper#382
 - [ ] B.5.3 — General requirements section              status: planned       owner: —          updated: 2026-05-10  note: surface quest/skill/diary prereqs in panel header (green/red); cha-ndler/collection-log-helper#382
 - [ ] B.5.4 — Collapsible step sections                 status: planned       owner: —          updated: 2026-05-10  note: `section` field on step, auto-expand active section; cha-ndler/collection-log-helper#382
