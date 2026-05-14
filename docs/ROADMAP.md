@@ -579,7 +579,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [ ] C4 — Skill-cape perk state                        status: planned       owner: —          updated: 2026-04-16
 - [ ] C5 — Partial-quest state                          status: planned       owner: —          updated: 2026-04-16
 - [ ] C6 — Wire into top-20 sources                     status: planned       owner: —          updated: 2026-04-16
-- [/] C7 — Player-capability debug overlay              status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #TBD
+- [/] C7 — Player-capability debug overlay              status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #459
 
 **Tier D — Coverage breadth**
 
