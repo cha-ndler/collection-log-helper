@@ -932,7 +932,8 @@ public class StepProgressViewTest
 			0, null, null,
 			0, 0,
 			null, null, null, null,
-			section
+			section,
+			null  // waypoints
 		);
 	}
 
@@ -958,7 +959,8 @@ public class StepProgressViewTest
 			0, null, null,
 			0, 0,
 			null, null, null, null,
-			null
+			null,
+			null  // waypoints
 		);
 	}
 }

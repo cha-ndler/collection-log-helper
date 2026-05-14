@@ -282,7 +282,8 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 			null,           // dynamicItemObjectTiers
 			null,           // completionZone
 			null,           // conditionalAlternatives
-			null            // section
+			null,           // section
+			null            // waypoints
 		);
 	}
 

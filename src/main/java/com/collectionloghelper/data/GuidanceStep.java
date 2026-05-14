@@ -212,6 +212,29 @@ public class GuidanceStep
 	 */
 	String section;
 
+	/**
+	 * Ordered list of waypoint tiles a player must cross to complete this step (B2).
+	 * Each waypoint has a tile coordinate and a per-waypoint crossing radius.
+	 *
+	 * <p>When non-null and non-empty, the sequencer tracks a per-step
+	 * crossed-waypoint index. On each game tick the player's position is compared
+	 * against the current waypoint; when the player enters its radius the index
+	 * advances. Waypoints must be crossed <em>in order</em> — crossing a later
+	 * waypoint before an earlier one does not advance the index. The step is
+	 * satisfied when all waypoints have been crossed in order.
+	 *
+	 * <p>Null or empty list preserves legacy single-target {@code ARRIVE_AT_TILE}
+	 * behaviour unchanged. This field is strictly additive: production data never
+	 * sets it until an explicit D-tier backfill PR adds waypoint sequences.
+	 *
+	 * <p>The step's {@link #worldX}/{@link #worldY}/{@link #completionDistance}
+	 * still serve as the logical destination for overlay rendering; authors should
+	 * set the final waypoint to the same coordinates so the minimap arrow and world
+	 * map route remain accurate.
+	 */
+	@Nullable
+	List<StepWaypoint> waypoints;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
@@ -396,7 +419,8 @@ public class GuidanceStep
 			this.dynamicItemObjectTiers,
 			this.completionZone,
 			null, // merged steps don't carry alternatives (already resolved)
-			this.section
+			this.section,
+			null  // waypoints: merged steps inherit null; authors set waypoints on the base step
 		);
 	}
 }
