@@ -75,7 +75,8 @@ public class StepSectionGrouperTest
 			0, 0,
 			null, null, null, null,
 			section,
-			null  // waypoints
+			null, // waypoints
+			null  // dynamicTargetEvaluator
 		);
 	}
 
