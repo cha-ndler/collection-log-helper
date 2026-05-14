@@ -571,7 +571,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [ ] B.5.4 — Collapsible step sections                 status: planned       owner: —          updated: 2026-05-10  note: `section` field on step, auto-expand active section; cha-ndler/collection-log-helper#382
 - [ ] B.5.5 — Per-step world map arrow + destination icon  status: planned    owner: —          updated: 2026-05-10  note: Quest-Helper-style arrow + NPC/object icon at step destination; cha-ndler/collection-log-helper#382
 - [ ] B.5.6 — Object/NPC outline-glow highlight style   status: planned       owner: —          updated: 2026-05-10  issue: cha-ndler/collection-log-helper#377
-- [ ] B.5.7 — Dialog choice highlighting polish         status: planned       owner: —          updated: 2026-05-10  note: audit existing `dialogHighlight` overlay; cha-ndler/collection-log-helper#382
+- [/] B.5.7 — Dialog choice highlighting polish         status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #449
 
 **Tier C — Player-aware guidance**
 
