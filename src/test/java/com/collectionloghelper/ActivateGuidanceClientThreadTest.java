@@ -135,7 +135,8 @@ public class ActivateGuidanceClientThreadTest
 			0,         // cumulativeTrackItemId
 			null,      // cumulativeTrackObjectIds
 			0,         // cumulativeTrackThreshold
-			null       // items
+			null,      // items
+			null       // metaAuthoredDate
 		);
 	}
 }
