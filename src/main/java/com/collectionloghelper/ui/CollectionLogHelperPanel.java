@@ -164,6 +164,9 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	private final Timer searchDebounceTimer;
 
+	/** "Sync KC from TempleOSRS" button; visible only when config.enableTempleOsrsSync() is true. */
+	private final JButton templeSyncButton;
+
 	private final Map<Mode, PanelModeController> modeControllers = new EnumMap<>(Mode.class);
 	private final PanelModeDispatcher<Mode> modeDispatcher = new PanelModeDispatcher<>(modeControllers);
 
@@ -173,6 +176,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private boolean guidanceActive = false;
 	private CollectionLogSource guidedSource = null;
 	private boolean inDetailView = false;
+	private Runnable templeSyncCallback;
 
 	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
 		DropRateDatabase database, PlayerCollectionState collectionState,
@@ -247,6 +251,23 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			}
 		});
 		controlsPanel.add(collectionLogNetSyncButton);
+
+		templeSyncButton = new JButton("Sync KC from TempleOSRS");
+		templeSyncButton.setFont(FontManager.getRunescapeSmallFont());
+		templeSyncButton.setAlignmentX(CENTER_ALIGNMENT);
+		templeSyncButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
+		templeSyncButton.setToolTipText("Fetch your boss/activity kill counts from templeosrs.com");
+		templeSyncButton.setVisible(config.enableTempleOsrsSync());
+		templeSyncButton.addActionListener(e ->
+		{
+			if (templeSyncCallback != null)
+			{
+				templeSyncButton.setEnabled(false);
+				templeSyncButton.setText("Syncing...");
+				templeSyncCallback.run();
+			}
+		});
+		controlsPanel.add(templeSyncButton);
 
 		clueSummaryView = new ClueSummaryView();
 		clueSummaryView.setAlignmentX(CENTER_ALIGNMENT);
@@ -505,6 +526,40 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	public void shutDown()
 	{
 		searchDebounceTimer.stop();
+	}
+
+	/**
+	 * Registers the callback invoked when the "Sync KC from TempleOSRS" button is clicked.
+	 * Must be called from the EDT or before the panel is shown.
+	 */
+	public void setTempleSyncCallback(Runnable callback)
+	{
+		this.templeSyncCallback = callback;
+	}
+
+	/**
+	 * Refreshes the visibility of the TempleOSRS sync button based on the current config.
+	 * Call after the config value changes.
+	 */
+	public void updateTempleSyncButtonVisibility()
+	{
+		SwingUtilities.invokeLater(() ->
+			templeSyncButton.setVisible(config.enableTempleOsrsSync()));
+	}
+
+	/**
+	 * Resets the TempleOSRS sync button to its idle state after a sync attempt completes.
+	 *
+	 * @param success whether the sync succeeded (affects button label)
+	 */
+	public void onTempleSyncComplete(boolean success)
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			templeSyncButton.setEnabled(true);
+			templeSyncButton.setText(
+				success ? "Synced KC from TempleOSRS" : "Sync KC from TempleOSRS");
+		});
 	}
 
 	public void rebuild()
