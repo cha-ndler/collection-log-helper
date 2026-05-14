@@ -25,10 +25,12 @@
 package com.collectionloghelper.overlay;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Stroke;
 import java.util.Arrays;
 import java.util.Collections;
 import net.runelite.api.Client;
@@ -37,10 +39,12 @@ import net.runelite.api.widgets.Widget;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -311,6 +315,81 @@ public class DialogHighlightOverlayTest
 		overlay.render(graphics);
 
 		verify(graphics).fillRect(anyInt(), anyInt(), anyInt(), anyInt());
+	}
+
+	// --- primary vs. secondary stroke ---
+
+	@Test
+	public void render_primaryOption_usesPrimaryStroke()
+	{
+		// The first entry in dialogOptions is primary; its border should use a thicker stroke.
+		overlay.setGuidanceActive(true);
+		overlay.setTargetDialogOptions(Collections.singletonList("yes"));
+
+		Widget option = mockOption("Yes please", new Rectangle(10, 20, 200, 16));
+		Widget container = mockContainer(new Widget[]{option});
+		when(client.getWidget(DIALOG_OPTION_GROUP, DIALOG_OPTION_CHILD)).thenReturn(container);
+		when(client.getWidget(NPC_DIALOG_GROUP, NPC_DIALOG_CONTINUE_CHILD)).thenReturn(null);
+
+		overlay.render(graphics);
+
+		ArgumentCaptor<Stroke> strokeCaptor = ArgumentCaptor.forClass(Stroke.class);
+		verify(graphics).setStroke(strokeCaptor.capture());
+		Stroke usedStroke = strokeCaptor.getValue();
+		assertTrue("Primary option should use a BasicStroke", usedStroke instanceof BasicStroke);
+		assertTrue("Primary stroke width should be > 1.0f",
+			((BasicStroke) usedStroke).getLineWidth() > 1.0f);
+	}
+
+	@Test
+	public void render_secondaryOption_usesSecondaryStroke()
+	{
+		// When both a primary and a secondary option are present, the secondary uses thin stroke.
+		overlay.setGuidanceActive(true);
+		// "bank" is primary, "yes" is secondary
+		overlay.setTargetDialogOptions(Arrays.asList("bank", "yes"));
+
+		Widget optionBank = mockOption("Use the Bank", new Rectangle(10, 20, 200, 16));
+		Widget optionYes  = mockOption("Yes", new Rectangle(10, 40, 200, 16));
+		Widget container  = mockContainer(new Widget[]{optionBank, optionYes});
+		when(client.getWidget(DIALOG_OPTION_GROUP, DIALOG_OPTION_CHILD)).thenReturn(container);
+		when(client.getWidget(NPC_DIALOG_GROUP, NPC_DIALOG_CONTINUE_CHILD)).thenReturn(null);
+
+		overlay.render(graphics);
+
+		ArgumentCaptor<Stroke> strokeCaptor = ArgumentCaptor.forClass(Stroke.class);
+		// Two setStroke calls: one for primary (bank) and one for secondary (yes)
+		verify(graphics, org.mockito.Mockito.times(2)).setStroke(strokeCaptor.capture());
+		java.util.List<Stroke> strokes = strokeCaptor.getAllValues();
+		float primaryWidth   = ((BasicStroke) strokes.get(0)).getLineWidth();
+		float secondaryWidth = ((BasicStroke) strokes.get(1)).getLineWidth();
+		assertTrue("Primary stroke must be thicker than secondary",
+			primaryWidth > secondaryWidth);
+	}
+
+	@Test
+	public void render_continuePrompt_usesPrimaryStroke()
+	{
+		// The continue prompt is the only available action; it is always primary.
+		overlay.setGuidanceActive(true);
+		overlay.setTargetDialogOptions(Collections.singletonList("teleport"));
+
+		when(client.getWidget(DIALOG_OPTION_GROUP, DIALOG_OPTION_CHILD)).thenReturn(null);
+
+		Widget continueWidget = mock(Widget.class);
+		when(continueWidget.isHidden()).thenReturn(false);
+		when(continueWidget.getText()).thenReturn("Click here to continue");
+		when(continueWidget.getBounds()).thenReturn(new Rectangle(50, 400, 300, 20));
+		when(client.getWidget(NPC_DIALOG_GROUP, NPC_DIALOG_CONTINUE_CHILD)).thenReturn(continueWidget);
+
+		overlay.render(graphics);
+
+		ArgumentCaptor<Stroke> strokeCaptor = ArgumentCaptor.forClass(Stroke.class);
+		verify(graphics).setStroke(strokeCaptor.capture());
+		Stroke usedStroke = strokeCaptor.getValue();
+		assertTrue("Continue prompt should use a BasicStroke", usedStroke instanceof BasicStroke);
+		assertTrue("Continue prompt stroke width should be > 1.0f",
+			((BasicStroke) usedStroke).getLineWidth() > 1.0f);
 	}
 
 	// --- helpers ---

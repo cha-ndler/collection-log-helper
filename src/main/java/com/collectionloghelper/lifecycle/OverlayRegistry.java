@@ -30,6 +30,7 @@ import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
 import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
+import com.collectionloghelper.overlay.PlayerCapabilityDebugOverlay;
 import com.collectionloghelper.overlay.WidgetHighlightOverlay;
 import com.collectionloghelper.overlay.WorldMapDestinationOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
@@ -55,6 +56,7 @@ public class OverlayRegistry
 	private final WorldMapDestinationOverlay worldMapDestinationOverlay;
 	private final GroundItemHighlightOverlay groundItemHighlightOverlay;
 	private final WidgetHighlightOverlay widgetHighlightOverlay;
+	private final PlayerCapabilityDebugOverlay playerCapabilityDebugOverlay;
 
 	@Inject
 	public OverlayRegistry(
@@ -67,7 +69,8 @@ public class OverlayRegistry
 		WorldMapRouteOverlay worldMapRouteOverlay,
 		WorldMapDestinationOverlay worldMapDestinationOverlay,
 		GroundItemHighlightOverlay groundItemHighlightOverlay,
-		WidgetHighlightOverlay widgetHighlightOverlay)
+		WidgetHighlightOverlay widgetHighlightOverlay,
+		PlayerCapabilityDebugOverlay playerCapabilityDebugOverlay)
 	{
 		this.overlayManager = overlayManager;
 		this.guidanceOverlay = guidanceOverlay;
@@ -79,6 +82,7 @@ public class OverlayRegistry
 		this.worldMapDestinationOverlay = worldMapDestinationOverlay;
 		this.groundItemHighlightOverlay = groundItemHighlightOverlay;
 		this.widgetHighlightOverlay = widgetHighlightOverlay;
+		this.playerCapabilityDebugOverlay = playerCapabilityDebugOverlay;
 	}
 
 	/** Adds all plugin overlays to the OverlayManager. Call from Plugin.startUp(). */
@@ -93,6 +97,7 @@ public class OverlayRegistry
 		overlayManager.add(worldMapDestinationOverlay);
 		overlayManager.add(groundItemHighlightOverlay);
 		overlayManager.add(widgetHighlightOverlay);
+		overlayManager.add(playerCapabilityDebugOverlay);
 	}
 
 	/** Removes all plugin overlays from the OverlayManager. Call from Plugin.shutDown(). */
@@ -107,5 +112,6 @@ public class OverlayRegistry
 		overlayManager.remove(worldMapDestinationOverlay);
 		overlayManager.remove(groundItemHighlightOverlay);
 		overlayManager.remove(widgetHighlightOverlay);
+		overlayManager.remove(playerCapabilityDebugOverlay);
 	}
 }

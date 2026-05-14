@@ -839,12 +839,21 @@ public class CollectionLogHelperPlugin extends Plugin
 		rankedSourcesDirty = true;
 		if (config.autoAdvanceGuidance())
 		{
-			// Auto-activate guidance for the next top efficiency pick
+			// Auto-activate guidance for the next top efficiency pick.
+			// Pass the best-item target ID (B4.4) so per-item overrides
+			// (perItemRequiredItemIds, perItemStepDescription, perItemNpcId)
+			// activate automatically without the user right-clicking an item.
 			List<ScoredItem> ranked = getRankedSources();
 			ranked.stream()
 				.filter(s -> !s.isLocked())
 				.findFirst()
-				.ifPresent(topPick -> activateGuidance(topPick.getSource()));
+				.ifPresent(topPick ->
+				{
+					Integer targetItemId = topPick.getBestItem() != null
+						? topPick.getBestItem().getItemId()
+						: null;
+					activateGuidance(topPick.getSource(), targetItemId);
+				});
 		}
 	}
 

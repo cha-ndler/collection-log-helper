@@ -212,6 +212,29 @@ public class GuidanceStep
 	 */
 	String section;
 
+	/**
+	 * Ordered list of waypoint tiles a player must cross to complete this step (B2).
+	 * Each waypoint has a tile coordinate and a per-waypoint crossing radius.
+	 *
+	 * <p>When non-null and non-empty, the sequencer tracks a per-step
+	 * crossed-waypoint index. On each game tick the player's position is compared
+	 * against the current waypoint; when the player enters its radius the index
+	 * advances. Waypoints must be crossed <em>in order</em> — crossing a later
+	 * waypoint before an earlier one does not advance the index. The step is
+	 * satisfied when all waypoints have been crossed in order.
+	 *
+	 * <p>Null or empty list preserves legacy single-target {@code ARRIVE_AT_TILE}
+	 * behaviour unchanged. This field is strictly additive: production data never
+	 * sets it until an explicit D-tier backfill PR adds waypoint sequences.
+	 *
+	 * <p>The step's {@link #worldX}/{@link #worldY}/{@link #completionDistance}
+	 * still serve as the logical destination for overlay rendering; authors should
+	 * set the final waypoint to the same coordinates so the minimap arrow and world
+	 * map route remain accurate.
+	 */
+	@Nullable
+	List<StepWaypoint> waypoints;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
@@ -331,6 +354,14 @@ public class GuidanceStep
 	 * first alternative whose requirements are met. If no alternative matches,
 	 * returns this step unchanged.
 	 *
+	 * <p><b>B3 — Nested conditional steps:</b> When the first matching alternative
+	 * carries {@link ConditionalAlternative#getNestedAlternatives() nestedAlternatives},
+	 * the evaluator merges the parent override first and then recurses: the nested list
+	 * is evaluated against the already-overridden step, and the first matching nested
+	 * alternative is applied on top. This process repeats for each depth level — the
+	 * tree is evaluated so deeper overrides win. The recursion terminates when there are
+	 * no further nested alternatives or no nested alternative matches.
+	 *
 	 * @param checker the requirements checker to evaluate alternatives against
 	 * @return the resolved step (may be this step or a merged copy)
 	 */
@@ -344,10 +375,41 @@ public class GuidanceStep
 		{
 			if (alt.getRequirements() != null && checker.meetsRequirements(alt.getRequirements()))
 			{
-				return mergeAlternative(alt);
+				return resolveAlternativeRecursive(this, alt, checker);
 			}
 		}
 		return this;
+	}
+
+	/**
+	 * Merges {@code alt} onto {@code base} and, if {@code alt} has nested alternatives,
+	 * recurses into the first matching one. Returns the fully-resolved step.
+	 *
+	 * <p>The recursive descent is bounded by the tree depth declared in the JSON data.
+	 * Nesting is structurally acyclic (child lists are inline declarations; parent
+	 * references are not possible), so infinite recursion cannot occur.
+	 */
+	private static GuidanceStep resolveAlternativeRecursive(GuidanceStep base,
+		ConditionalAlternative alt, RequirementsChecker checker)
+	{
+		GuidanceStep merged = base.mergeAlternative(alt);
+
+		List<ConditionalAlternative> nested = alt.getNestedAlternatives();
+		if (nested == null || nested.isEmpty())
+		{
+			return merged;
+		}
+
+		for (ConditionalAlternative nestedAlt : nested)
+		{
+			if (nestedAlt.getRequirements() != null
+				&& checker.meetsRequirements(nestedAlt.getRequirements()))
+			{
+				return resolveAlternativeRecursive(merged, nestedAlt, checker);
+			}
+		}
+		// No nested alternative matched — return the parent-level merge as-is.
+		return merged;
 	}
 
 	/**
@@ -396,7 +458,8 @@ public class GuidanceStep
 			this.dynamicItemObjectTiers,
 			this.completionZone,
 			null, // merged steps don't carry alternatives (already resolved)
-			this.section
+			this.section,
+			null  // waypoints: merged steps inherit null; authors set waypoints on the base step
 		);
 	}
 }

@@ -114,7 +114,8 @@ public class GuidanceSequencerTest
 			null,           // dynamicItemObjectTiers
 			null,           // completionZone
 			null,           // conditionalAlternatives
-			null            // section
+			null,           // section
+			null            // waypoints
 		);
 	}
 
@@ -145,7 +146,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -176,7 +178,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -207,7 +210,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -238,7 +242,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -269,7 +274,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -300,7 +306,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -332,7 +339,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -363,7 +371,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -394,7 +403,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -425,7 +435,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -796,7 +807,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			null,  // conditionalAlternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 
 		List<GuidanceStep> steps = Arrays.asList(
@@ -1267,7 +1279,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			alternatives,
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 	}
 
@@ -1282,7 +1295,8 @@ public class GuidanceSequencerTest
 			"Use fairy ring",  // override description
 			2400, 4435, null,  // override coordinates
 			"Fairy ring BIP",  // override travel tip
-			null, null, null, null, null, null  // no other overrides
+			null, null, null, null, null, null,  // no other overrides
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1310,7 +1324,8 @@ public class GuidanceSequencerTest
 			reqs,
 			"Teleport to Prifddinas", 3200, 6100, null,
 			"Prifddinas teleport",
-			null, null, null, null, null, null
+			null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1339,13 +1354,15 @@ public class GuidanceSequencerTest
 			reqs1,
 			"Fairy ring route", 2400, 4400, null,
 			"Fairy ring CKS",
-			null, null, null, null, null, null
+			null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 		ConditionalAlternative alt2 = new ConditionalAlternative(
 			reqs2,
 			"Agility shortcut", 2500, 3500, null,
 			"Use agility shortcut",
-			null, null, null, null, null, null
+			null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1374,7 +1391,8 @@ public class GuidanceSequencerTest
 			"Use fairy ring",  // override description
 			null, null, null,  // coordinates fall through
 			"Fairy ring BIP",  // override travel tip
-			null, null, null, null, null, null
+			null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1399,7 +1417,8 @@ public class GuidanceSequencerTest
 
 		ConditionalAlternative alt = new ConditionalAlternative(
 			reqs, "Alt route", 2000, 2000, null,
-			"Alt tip", null, null, null, null, null, null
+			"Alt tip", null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1431,7 +1450,8 @@ public class GuidanceSequencerTest
 			null,
 			CompletionCondition.NPC_TALKED_TO,  // override completion condition
 			null,
-			100  // override completionNpcId
+			100,  // override completionNpcId
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1493,7 +1513,8 @@ public class GuidanceSequencerTest
 			null,  // dynamicItemObjectTiers
 			null,  // completionZone
 			Collections.emptyList(),  // empty list of alternatives
-			null   // section
+			null,  // section
+			null   // waypoints
 		);
 
 		List<GuidanceStep> steps = Arrays.asList(step);
@@ -1510,7 +1531,8 @@ public class GuidanceSequencerTest
 		ConditionalAlternative alt = new ConditionalAlternative(
 			null,  // null requirements
 			"Should not be used", 2000, 2000, null,
-			null, null, null, null, null, null, null
+			null, null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep step = makeStepWithAlternatives(
@@ -1533,7 +1555,8 @@ public class GuidanceSequencerTest
 
 		ConditionalAlternative alt = new ConditionalAlternative(
 			reqs, "Dragon route", 2800, 3400, null,
-			"Teleport to Crandor", null, null, null, null, null, null
+			"Teleport to Crandor", null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep base = makeStepWithAlternatives(
@@ -1558,7 +1581,8 @@ public class GuidanceSequencerTest
 
 		ConditionalAlternative alt = new ConditionalAlternative(
 			reqs, "Elf route", null, null, null,
-			null, null, null, null, null, null, null
+			null, null, null, null, null, null, null,
+			null  // nestedAlternatives
 		);
 
 		GuidanceStep base = makeStepWithAlternatives(
@@ -1910,6 +1934,48 @@ public class GuidanceSequencerTest
 
 		// steps is now null; calling skipStep must be a no-op
 		sequencer.skipStep();
+
+		assertFalse(sequencer.isActive());
+	}
+
+	/**
+	 * Regression test for #439.
+	 *
+	 * <p>When advanceStep() is called on a single-step sequence and
+	 * skipSatisfiedSteps() fires onSequenceComplete, which in turn calls
+	 * stopSequence() (nulling this.steps), the subsequent size() call in
+	 * advanceStep() must not throw NPE.
+	 */
+	@Test
+	public void advanceStep_afterSequenceComplete_doesNotThrow()
+	{
+		// Wire onComplete to call stopSequence(), mimicking GuidanceOverlayCoordinator
+		startSequence(
+			Arrays.asList(makeManualStep("Only step")),
+			s -> {},
+			() -> sequencer.stopSequence()
+		);
+
+		// Must not throw NullPointerException
+		sequencer.advanceStep();
+
+		assertFalse("Sequencer must be inactive after advance completes sequence", sequencer.isActive());
+	}
+
+	/**
+	 * Regression test for #439 — variant: advanceStep on already-stopped sequencer.
+	 *
+	 * <p>If advanceStep() is called after the sequence has already been stopped
+	 * (steps == null), it must silently return without throwing.
+	 */
+	@Test
+	public void advanceStep_whenStepsAlreadyNull_doesNotThrow()
+	{
+		startSequence(Arrays.asList(makeManualStep("Only step")));
+		sequencer.stopSequence();
+
+		// steps is now null; calling advanceStep must be a no-op
+		sequencer.advanceStep();
 
 		assertFalse(sequencer.isActive());
 	}

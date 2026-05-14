@@ -546,8 +546,10 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 **Tier B — Guidance depth parity with Quest Helper**
 
 - [ ] B1 — Composable completion conditions             status: planned       owner: —          updated: 2026-04-16
-- [ ] B2 — Tile-sequence pathing                        status: planned       owner: —          updated: 2026-04-16
+- [/] B2 — Tile-sequence pathing                        status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #456
 - [ ] B3 — Nested conditional steps                     status: planned       owner: —          updated: 2026-04-16
+- [ ] B2 — Tile-sequence pathing                        status: planned       owner: —          updated: 2026-04-16
+- [/] B3 — Nested conditional steps                     status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #455
 - [/] B4 — Alternative-method modelling                 status: in-progress   owner: cha-ndler  updated: 2026-05-13  note: direction firmed up — see expanded section above. Sub-milestones:
 - [x] B4.1 — Per-item required-items override (Mort'ton POC)  status: done  owner: cha-ndler  updated: 2026-05-13  pr: #419  issue: #417  note: `perItemRequiredItemIds` schema field shipped + Mort'ton tier map for all 17 clog items + activation-chain propagation of target clog item ID through Plugin.activateGuidance(source, targetItemId) -> coordinator.activeTargetItemId -> RequiredItemResolver. Pre-existing bug where activeTargetItemId was set before deactivateGuidance() cleared it (silently null-ing the target before any resolver ran) was found and fixed in #421.
 - [x] B4.2 — Survey + audit of all sources for per-item method differentiation  status: done  owner: cha-ndler  updated: 2026-05-13  issue: #420  note: 225 sources audited; 5 Category-1 candidates found (Mort'ton already done; Perilous Moons + Shayzien + 3 more); Categories 2/3/4 produced 0 candidates (raids already split as separate sources; method-variant bosses have uniform drop tables). Missing source Larran's Small Chest also flagged.
@@ -555,35 +557,40 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [x] B4.3.0 — perItemStepDescription schema + coordinator wiring  status: done  owner: cha-ndler  updated: 2026-05-13  pr: #421  note: text-only per-item description override. Includes critical bug fix for B4.1's activeTargetItemId placement.
 - [x] B4.3.0b — perItemNpcId schema + coordinator wiring  status: done  owner: cha-ndler  updated: 2026-05-13  pr: #423  note: overlay retarget per-item. 4 getNpcId() coordinator sites updated; static -> instance method for resolveStepIconType.
 - [x] B4.3.1 — Shayzien Armour per-item step descriptions  status: done  owner: cha-ndler  updated: 2026-05-13  pr: #422  note: 25 clog items mapped across tiers 1-5 using perItemStepDescription. Tier read directly from existing milestoneKills field — zero wiki guesswork.
-- [/] B4.3.2 — Perilous Moons per-Moon retargeting + descriptions  status: in-progress  owner: cha-ndler  updated: 2026-05-13  note: data PR in flight. Uses BOTH perItemStepDescription and perItemNpcId. 12 of 13 clog items map to specific Moon NPC (13011 Blood / 13012 Eclipse / 13013 Blue); atlatl dart (28991) drops from all three so no override.
-- [ ] B4.3.3+ — Remaining Category-1 candidates from #420 (3 more sources)  status: planned  owner: —  updated: 2026-05-13
+- [x] B4.3.2 — Perilous Moons per-Moon retargeting + descriptions  status: done  owner: cha-ndler  updated: 2026-05-14  pr: #425 + #436  note: Uses BOTH perItemStepDescription and perItemNpcId. 12 of 13 clog items map to specific Moon NPC (13011 Blood / 13012 Eclipse / 13013 Blue); atlatl dart (28991) drops from all three so no override. #436 follow-up widened step 1 ARRIVE_AT_TILE distance 20 → 100 and inserted Cam Torum underground intermediate step (Fixes #431) after in-client validation found step 1 didn't auto-fire on quetzal-whistle approach.
+- [/] B4.3.3 — Cyclopes Defenders per-item descriptions  status: in-progress  owner: cha-ndler  updated: 2026-05-14  note: data PR in flight. 8 defender clog items mapped (Bronze → Dragon chain) via perItemStepDescription. Lowest-effort Category-1 candidate per #420 ranking.
+- [ ] B4.3.4 — Barrows per-brother targeting  status: deferred  owner: —  updated: 2026-05-14  note: Flagged in #420 for human design review — `perItemRequiredItemIds` may not suffice; needs `perItemCompletionNpcId` or guidance-step redesign for the VARBIT-based kill-progress interaction.
+- [ ] B4.3.5 — Barracuda Trials per-trial mapping  status: deferred  owner: —  updated: 2026-05-14  note: Flagged in #420 — re-audit after Sailing mechanics stabilize before scoping.
 - [ ] B4.4 — Top Pick auto-drives per-item method choice (North Star UI alignment)  status: planned  owner: —  updated: 2026-05-13
 - [ ] B5 — Puzzle/dynamic step type                     status: planned       owner: —          updated: 2026-04-16
 - [ ] B6 — Decision D-01 pilot (hybrid Java helper)     status: planned       owner: —          updated: 2026-04-16
 
 **Tier B.5 — UI parity with Quest Helper**
 
-- [ ] B.5.1 — Per-step item requirements panel          status: planned       owner: —          updated: 2026-05-10  note: bank-scan colored (green/white-with-info-icon/red); tracked under cha-ndler/collection-log-helper#382
+- [/] B.5.1 — Per-step item requirements panel          status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #452
 - [ ] B.5.2 — Recommended items section                 status: planned       owner: —          updated: 2026-05-10  note: soft-recommended supplies below required; cha-ndler/collection-log-helper#382
 - [ ] B.5.3 — General requirements section              status: planned       owner: —          updated: 2026-05-10  note: surface quest/skill/diary prereqs in panel header (green/red); cha-ndler/collection-log-helper#382
 - [/] B.5.4 — Collapsible step sections                 status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #458
 - [ ] B.5.5 — Per-step world map arrow + destination icon  status: planned    owner: —          updated: 2026-05-10  note: Quest-Helper-style arrow + NPC/object icon at step destination; cha-ndler/collection-log-helper#382
+- [/] B.5.3 — General requirements section              status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #457
+- [ ] B.5.4 — Collapsible step sections                 status: planned       owner: —          updated: 2026-05-10  note: `section` field on step, auto-expand active section; cha-ndler/collection-log-helper#382
+- [/] B.5.5 — Per-step world map arrow + destination icon  status: partial    owner: cha-ndler  updated: 2026-05-14  note: 5/6 sub-requirements confirmed shipped via #397 + #438 + #423; blocked on #430 (CLH-distinct orange arrow color — pending merge). Sub-reqs: (1) worldmap arrow per step — done (#397, WorldMapDestinationOverlay.setTarget wired in coordinator); (2) chevron shape — done (#397, 4-point notched polygon); (3) CLH-distinct color — pending (#430 adds orange #FF8C00 constant, not yet on master); (4) NPC/object/item icon at destination — done (#397, StepIconType enum + 3 sprite variants + resolveStepIconType); (5) worldmap point + arrow integration — done (#438, setMapPointActive suppresses double arrow); (6) per-item icon retargeting — done (#423, resolveNpcId used in resolveStepIconType).
 - [ ] B.5.6 — Object/NPC outline-glow highlight style   status: planned       owner: —          updated: 2026-05-10  issue: cha-ndler/collection-log-helper#377
-- [ ] B.5.7 — Dialog choice highlighting polish         status: planned       owner: —          updated: 2026-05-10  note: audit existing `dialogHighlight` overlay; cha-ndler/collection-log-helper#382
+- [/] B.5.7 — Dialog choice highlighting polish         status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #449
 
 **Tier C — Player-aware guidance**
 
 - [ ] C1 — POH teleport inventory model                 status: planned       owner: —          updated: 2026-04-16
 - [ ] C2 — Equipped-item state                          status: planned       owner: —          updated: 2026-04-16
-- [ ] C3 — Diary tier state                             status: planned       owner: —          updated: 2026-04-16
+- [/] C3 — Diary tier state                             status: in-progress   owner: —          updated: 2026-05-14  pr: #461
 - [ ] C4 — Skill-cape perk state                        status: planned       owner: —          updated: 2026-04-16
-- [ ] C5 — Partial-quest state                          status: planned       owner: —          updated: 2026-04-16
+- [/] C5 — Partial-quest state                          status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: cha-ndler/collection-log-helper#462
 - [ ] C6 — Wire into top-20 sources                     status: planned       owner: —          updated: 2026-04-16
-- [ ] C7 — Player-capability debug overlay              status: planned       owner: —          updated: 2026-04-16
+- [/] C7 — Player-capability debug overlay              status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #459
 
 **Tier D — Coverage breadth**
 
-- [/] D1 — Deep-guidance authoring bar                  status: in-progress   owner: cha-ndler  updated: 2026-04-17  pr: pending
+- [x] D1 — Deep-guidance authoring bar                  status: done          owner: cha-ndler  updated: 2026-05-14  pr: #358  note: 10-element authoring checklist + "How to use" threshold rule published in CONTRIBUTING.md § "Deep guidance bar"
 - [ ] D2 — Top-40 sources deep pass                     status: planned       owner: —          updated: 2026-04-16
 - [ ] D3 — Mid-tier sources deep pass                   status: planned       owner: —          updated: 2026-04-16
 - [ ] D4 — Long-tail sources deep pass                  status: planned       owner: —          updated: 2026-04-16
@@ -600,6 +607,6 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [ ] F2 — TempleOSRS KC sync                           status: planned       owner: —          updated: 2026-04-16
 - [ ] F3 — Per-account kill-time learning               status: planned       owner: —          updated: 2026-04-16
 - [ ] F4 — Dry-streak feed                              status: planned       owner: —          updated: 2026-04-16
-- [ ] F5 — JaCoCo + 80% gate                            status: planned       owner: —          updated: 2026-04-16
+- [/] F5 — JaCoCo + 80% gate                            status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #454  note: gate active at 45% threshold; follow-up to raise to 80% with overlay/UI test additions.
 - [ ] F6 — GitHub Actions CI                            status: planned       owner: —          updated: 2026-04-16
 - [ ] F7 — Issue #134 account-specific calcs            status: planned       owner: —          updated: 2026-04-16

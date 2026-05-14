@@ -9,7 +9,7 @@
 > - `[!]` — Regression / failed (file a new issue and cross-link)
 > - `[?]` — Inconclusive (couldn't reproduce / state-dependent)
 
-> **Last updated**: 2026-05-13 (validation pass post-#409)
+> **Last updated**: 2026-05-14 (session: continuous Tier B/B.5/C/E/F implementation)
 
 ---
 
@@ -451,6 +451,147 @@ Closes the regression discovered in the 2026-05-13 pre-fix validation pass: `Plu
 | 3 | Click Guide Me from the Item Detail view → guidance activates cleanly | `[x]` | Implicit — Barrows activation in T6 used this path. |
 | 4 | `client.log` grep `AssertionError` since boot → ZERO matches | `[x]` | T9 log audit confirmed: no AssertionError since 09:35 EDT boot. |
 | 5 | Regression: step-advance and skip (`c528d0ae`) still work | `[ ]` | Not specifically re-tested in 2026-05-13 pass; no evidence of regression. |
+
+---
+
+## PR #441 — feat(overlay): richer worldmap chevron + CLH-distinct color *(merged 2026-05-14)*
+
+Closes #430. Replaces the plain 4-point filled polygon edge-snap arrow on the world map with a `Path2D.Double` notched chevron shape. Arrow fill changes from teal to orange (`#FF8C00`) to distinguish the CLH source arrow from native OSRS worldmap chevrons and Quest Helper indicators. Destination icons (NPC/object/tile) retain their existing teal fill.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on any multi-step source with a worldX/worldY target. Open world map and pan so the destination is off-screen → edge-snap arrow appears at the map boundary in **orange** (not teal) | `[ ]` | |
+| 2 | Arrow shape: compare to the old PR #397 teal polygon — the new shape should look like a deeper-notched chevron with a dark-brown outline stroke, not a blunt filled triangle | `[ ]` | |
+| 3 | Pan so the destination is on-screen → the orange edge arrow disappears; teal destination icon (NPC/object/tile) appears at the target tile (icon color unchanged) | `[ ]` | |
+| 4 | Pan in all 8 cardinal/intercardinal directions with destination off-screen → arrow rotates correctly through all 8 pre-rendered orientations | `[ ]` | |
+| 5 | With a `CollectionLogWorldMapPoint` (collection-log item pin) active simultaneously → CLH guidance arrow is suppressed (mapPointActive=true path from #438 still respected) | `[ ]` | |
+| 6 | Stop guidance → orange arrow disappears from world map immediately | `[ ]` | |
+| 7 | Regression: teal destination icons (NPC silhouette, chest, diamond) are unchanged in color and shape | `[ ]` | |
+
+---
+
+## PR #443 — fix(charset): force UTF-8 when loading guidance step text *(merged 2026-05-14)*
+
+Fixes #433. `InputStreamReader` was opened without an explicit charset, defaulting to Windows-1252 on Windows hosts. This corrupted the three UTF-8 bytes of U+2014 (em-dash, `e2 80 94`) into `â€"` mojibake in the in-game overlay on Windows. Fix passes `StandardCharsets.UTF_8` to every `InputStreamReader` that opens a bundled JSON resource (`DropRateDatabase`, `SlayerMasterDatabase`, `VerifiedSceneIdRegistry`).
+
+| # | Issue | Test | Status | Notes |
+|---|---|---|---|---|
+| 1 | #433 | Activate guidance on **Perilous Moons** → step description containing an em-dash (e.g. step 3 "Travel to Cam Torum — enter via cave entrance") renders as `—` not `â€"` in the in-game overlay | `[ ]` | Primary reproducer from the issue |
+| 2 | #433 | Same check in the **side panel** step strip (not just the in-game overlay) → em-dash renders correctly | `[ ]` | |
+| 3 | #433 | Activate guidance on any source whose `perItemStepDescription` contains an em-dash → overlay shows the correct character | `[ ]` | |
+| 4 | — | Activate guidance on any source with ordinary ASCII step descriptions → text is unchanged (regression check, no corruption introduced) | `[ ]` | |
+| 5 | — | Open `client.log` after plugin startup → ZERO `MalformedInputException` or charset-related errors from `DropRateDatabase`, `SlayerMasterDatabase`, or `VerifiedSceneIdRegistry` | `[ ]` | |
+
+---
+
+## PR #444 — data(cyclopes): per-defender step descriptions (B4.3.3) *(merged 2026-05-14)*
+
+Closes B4.3.3 from #420. Backfills `perItemStepDescription` on the Cyclopes kill step (Warriors' Guild source step 2) for all 8 defender tiers: Bronze → Dragon. Each override names the tier being targeted and the defender that must be held in inventory for the drop to land. The static fallback description is preserved when no target item is set.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | In Efficient mode, identify the Warriors' Guild / Cyclopes source. Right-click **Iron defender** → Guide Me → activate guidance → in-game overlay step description mentions both "Iron" and "Bronze" (e.g. "Kill Cyclopes holding a Bronze defender to receive the Iron defender") | `[ ]` | |
+| 2 | Repeat for **Dragon defender** → description mentions "Dragon" and "Rune" | `[ ]` | |
+| 3 | Repeat for **Rune defender** → description mentions "Rune" and "Adamant" | `[ ]` | |
+| 4 | Activate guidance on Warriors' Guild without right-clicking a specific defender (no target item) → step description shows the generic static text ("Kill Cyclopes for defender drops..."), not a tier-specific override | `[ ]` | |
+| 5 | Side panel step strip: same tier-specific description appears in the panel (not just overlay) when a specific defender is targeted | `[ ]` | |
+| 6 | Regression: non-Cyclopes sources with `perItemStepDescription` (e.g. Perilous Moons with per-Moon NPC retarget) are unaffected | `[ ]` | |
+
+---
+
+## PR #445 — feat(guidance): B4.4 — Top Pick auto-advance carries per-item target ID *(merged 2026-05-14)*
+
+Closes the B4.4 milestone. When guidance auto-advances to the next Top Pick source after a sequence completes, the new session now activates with the per-item target ID set (from `ScoredItem.getBestItem().getItemId()`). Previously, auto-advance always used static 1-arg guidance, so per-item overrides (`perItemRequiredItemIds`, `perItemStepDescription`, `perItemNpcId`) were never lit up automatically.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source that will complete quickly (e.g. Shades of Mort'ton with all pre-conditions met and all items already in collection log except one). Complete the sequence → auto-advance fires and starts the next Top Pick source | `[ ]` | |
+| 2 | If the auto-advanced Top Pick source is Warriors' Guild (Cyclopes defenders), the guidance session should open with the specific next defender tier as the target — verify the overlay description is tier-specific (not the generic fallback) | `[ ]` | |
+| 3 | If the auto-advanced source does not use per-item overrides (e.g. a plain kill source) → guidance activates normally with null targetItemId (no regression; static description shown) | `[ ]` | |
+| 4 | Manual right-click Guide Me on any source still works as before (does not pass a per-item ID from the right-click NPC menu path) | `[ ]` | |
+| 5 | Stop guidance and manually Guide Me on the same source the auto-advance would have chosen → per-item target appears correctly via the manual path too (existing path unchanged) | `[ ]` | |
+
+---
+
+## PR #446 — fix(panel): prevent duplicate tier label on search-result row hover *(merged 2026-05-14)*
+
+Fixes #428. `ItemRowPanel.mouseExited` fired when the mouse moved from the row panel into any child component (icon, name label, source label, rate label), not only when the mouse truly left the row. Each spurious exit triggered `setBackground()` + `repaint()` that raced with in-flight child `JLabel` paints, smearing label text and producing ghost-text artefacts such as `Shayzien helm (1) (1)`. Fix: guard `mouseExited` with `!contains(e.getPoint())` so intra-row child transitions are ignored.
+
+| # | Issue | Test | Status | Notes |
+|---|---|---|---|---|
+| 1 | #428 | Switch to **Search** mode. Type "shay" → results load. Slowly hover over the **Shayzien helm (1)** row, deliberately moving between the icon, the name label, and the source label → item name renders as `Shayzien helm (1)` exactly once, no `(1) (1)` ghost text | `[ ]` | Primary reproducer |
+| 2 | #428 | Repeat with a row whose source label includes a tier or count suffix (e.g. `Rune scimitar (Slayer)`, `Bronze defender`) → no doubled suffix on hover | `[ ]` | |
+| 3 | — | Hover over a row and then move the mouse completely outside the panel → row background resets to default (mouseExited correctly fires on true boundary exit) | `[ ]` | |
+| 4 | — | Hover cycle: enter → move to child → move back to row background → exit → re-enter → row stays highlighted the whole time while inside (no background flicker) | `[ ]` | |
+| 5 | — | Regression: search results in Efficient and Category modes render row labels without artefacts (same ItemRowPanel paths used) | `[ ]` | |
+
+---
+
+## PR #448 — data(auto-completion): Tier 3 CHAT_MESSAGE_RECEIVED backfill for Pest Control and Brimhaven *(merged 2026-05-14)*
+
+Partially fixes #306. Upgrades the final step of Pest Control and Brimhaven Agility Arena from `MANUAL` to `CHAT_MESSAGE_RECEIVED` using in-game chat message patterns verified against the OSRS Wiki. The sequencer matches these patterns via `Pattern.compile(pattern).matcher(message).find()`.
+
+| # | Source | Test | Status | Notes |
+|---|---|---|---|---|
+| 1 | Pest Control | Complete a Pest Control game → on receiving the "You have successfully defended the island!" chat message, guidance auto-advances to the next step (or sequence completes) without a manual Skip click | `[ ]` | |
+| 2 | Pest Control | Fail a Pest Control round (portals breach) → guidance does NOT auto-advance (failure message differs from the success pattern) | `[ ]` | |
+| 3 | Brimhaven Agility Arena | Complete a ticket-earning obstacle → on receiving "You have received an Agility Arena Ticket" chat message, guidance auto-advances | `[ ]` | |
+| 4 | Brimhaven Agility Arena | Run obstacles that do not grant a ticket → guidance does NOT advance prematurely | `[ ]` | |
+| 5 | — | Regression: sources still on MANUAL completion (Soul Wars, Fishing Trawler, Volcanic Mine, Pyramid Plunder, Rogues' Den, Trouble Brewing) still require the user to click Skip/Next manually | `[ ]` | |
+
+---
+
+## PR #449 — feat(overlay): B.5.7 dialog highlight polish (color/flicker/primary) *(merged 2026-05-14)*
+
+B.5.7 follow-up to PRs #404 and #406. Three rendering issues fixed: `BasicStroke` now hoisted to class-level constants (`PRIMARY_STROKE` 2.5 px, `SECONDARY_STROKE` 1 px) rather than inheriting whatever stroke was on the context; a `PRIMARY_BORDER_ALPHA = 220` variant added so the first (preferred) dialog option gets a visually heavier highlight; `RenderingHints.VALUE_ANTIALIAS_ON` applied at render entry for smoother rect outlines. `Click here to continue` prompt always treated as primary.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with a `dialogChoice` step. Open that NPC's dialog → the matching option text box shows a **thick (~2.5 px) near-opaque border** | `[ ]` | |
+| 2 | If the step lists two acceptable options (e.g. "Yes" and "Continue"), the **first** option gets the thick primary border; the second gets a thin (1 px) secondary border | `[ ]` | |
+| 3 | A "Click here to continue" NPC continue prompt → renders with the thick primary border, not the thin secondary | `[ ]` | |
+| 4 | Open the dialog and watch for several seconds → no border flicker between frames (color-equality cache should prevent per-frame `Color` allocation) | `[ ]` | |
+| 5 | Display scaling >100% (if accessible in testing environment) → rect outlines appear smoother due to anti-aliasing hint | `[ ]` | |
+| 6 | Open a non-guidance dialog (bank NPC, Doomsayer, shop NPC) → NO dialog highlight appears (guidanceActive = false guard intact) | `[ ]` | |
+| 7 | Close dialog mid-guidance → highlight disappears; no lingering border on the widget | `[ ]` | |
+| 8 | `client.log` after 5 minutes of dialog interactions → ZERO `Uncaught exception` traces from `DialogHighlightOverlay` | `[ ]` | |
+
+---
+
+## PR #450 — data(sailing): triage island-instance vs port-based coord sources *(merged 2026-05-14)*
+
+Partially closes #314. Triages all 7 Sailing-related sources for `ARRIVE_AT_TILE` coord correctness. No JSON data changes — 4 sources confirmed RESOLVED (Port Piscarilius dock at 1824, 3691); 3 sources classified NEEDS-CAPTURE (instanced Sailing islands with no static cache coords).
+
+> No in-game validation is needed for the RESOLVED sources — their Port Piscarilius coords (1824, 3691) were confirmed via NPC/dock cache. The NEEDS-CAPTURE sources below require in-game authoring-log capture during a Sailing voyage before their coords can be corrected.
+
+| # | Issue | Source | NEEDS-CAPTURE test | Status | Notes |
+|---|---|---|---|---|---|
+| 1 | #314 | Lava Strykewyrm | Sail to Charred Island (60 Sailing required). Stand at the Charred Dungeon entrance. Record `WorldPoint` from RuneLite coordinate display. Compare to current coords in `drop_rates.json` — **expected mismatch** (current coords land in Isafdar/Tirannwn) | `[ ]` | Highest priority — guidance text is also wrong (copy-paste Wilderness text) |
+| 2 | #314 | Gryphon (slayer) | Sail to Great Conch island (45 Sailing; fairy ring CJQ). Stand at eastern or western cave entrance. Record `WorldPoint`. Compare to current coords ~(1456, 2880) — expected mismatch (those land ~101 tiles from Aldarin) | `[ ]` | |
+| 3 | #314 | Aquanite | Sail to Ynysdail (73 Sailing required). Enter Ynysdail Cavern. Stand at the entrance. Record `WorldPoint`. Determine if coords are static or instance-relative | `[ ]` | May already be plausible if Ynysdail is static; confirm before update |
+| 4 | — | Regression: Cutting Squid, Lost Schematics, Sea Treasures, Port Tasks all use Port Piscarilius dock (1824, 3691) → activate guidance on each and confirm the arrival tile overlays center on the Port Piscarilius dockside area | `[ ]` | RESOLVED sources — quick sanity check |
+
+---
+
+## PR #452 — feat(panel): B.5.1 per-step required-items chips with bank-scan colors *(merged 2026-05-14)*
+
+Implements B.5.1: adds `RequiredItemsChipPanel`, a horizontal strip of 28x28 item-icon chips rendered directly below the step-progress label in the guidance panel. Each chip has a 2-pixel colored border: green (held in inventory/equipment), white (found in last bank scan), or red (not found anywhere). White chips show tooltip "Items can be found in your: Bank". The chip strip coexists with the existing list-style "Items needed:" section added by PR #398.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on **Shades of Mort'ton** (step 1 has tinderbox + pyre logs + shade remains) → a horizontal row of 3 item-icon chips appears directly below the step-progress label in the side panel | `[ ]` | |
+| 2 | Item held in **inventory** → chip border is **green** | `[ ]` | |
+| 3 | Item **equipped** → chip border is **green** (same as inventory) | `[ ]` | |
+| 4 | Item **only in last bank scan** → chip border is **white**; hover the chip → tooltip reads "Items can be found in your: Bank" | `[ ]` | |
+| 5 | Item **missing from inventory, equipment, and bank** → chip border is **red** | `[ ]` | |
+| 6 | Activate guidance on a source whose current step has **no `requiredItemIds`** → chip strip is hidden (no blank row of empty chips) | `[ ]` | |
+| 7 | Pick up a missing item → chip transitions **red → green** within ~1 tick, no panel rebuild required | `[ ]` | |
+| 8 | Drop an item while it's still in bank → chip transitions **green → white** | `[ ]` | |
+| 9 | Step advance → chip strip refreshes to show the new step's required items in the same tick | `[ ]` | |
+| 10 | Open bank (refresh bank scan) then close → a chip that was red (item in bank, scan stale) transitions to white | `[ ]` | |
+| 11 | Stop guidance → chip strip disappears with the rest of the step strip | `[ ]` | |
+| 12 | Regression: the existing list-style "Items needed:" section (PR #398) still renders below the chip strip; both display surfaces active simultaneously | `[ ]` | |
+| 13 | `client.log` after 5 minutes of guidance with step transitions → ZERO `AssertionError` or `IllegalStateException` from `RequiredItemsChipPanel` or `ItemManager.getImage` | `[ ]` | |
 
 ---
 

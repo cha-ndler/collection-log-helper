@@ -24,6 +24,8 @@
  */
 package com.collectionloghelper.data;
 
+import java.util.List;
+import javax.annotation.Nullable;
 import lombok.Value;
 
 /**
@@ -31,6 +33,21 @@ import lombok.Value;
  * the sequencer evaluates each alternative's requirements in order and uses the first one
  * whose requirements are met. Only non-null fields override the base step — null fields
  * fall through to the parent step's values.
+ *
+ * <p><b>B3 — Nested conditional steps:</b> An alternative may itself carry a
+ * {@link #nestedAlternatives} list. When the outer alternative's requirements match, the
+ * evaluator applies its field overrides first and then recurses into
+ * {@code nestedAlternatives}, which are evaluated against the already-overridden step.
+ * The first matching nested alternative at each level wins, preserving the existing
+ * flat-alternative semantics at every depth.
+ *
+ * <p>Nesting is structurally tree-shaped (child lists are declared inline, not as
+ * references to other alternatives). Cycles are therefore impossible by construction
+ * — there is no mechanism to reference a parent or sibling node. Null/empty
+ * {@code nestedAlternatives} behaves identically to the legacy flat shape.
+ *
+ * <p>Production data does not use {@code nestedAlternatives} — the field deserialises as
+ * {@code null} when absent, keeping all existing JSON backwards-compatible.
  */
 @Value
 public class ConditionalAlternative
@@ -66,4 +83,15 @@ public class ConditionalAlternative
 
 	/** Override completion NPC ID (null = use parent step's). */
 	Integer completionNpcId;
+
+	/**
+	 * B3: Optional nested alternatives evaluated after this alternative's overrides
+	 * are applied. Null or empty means no further branching (legacy flat behaviour).
+	 * Evaluated in list order; the first matching nested alternative wins.
+	 *
+	 * <p>The tree is structurally acyclic — nested alternatives are inline declarations
+	 * and cannot reference ancestor nodes, so cycle detection is not required.
+	 */
+	@Nullable
+	List<ConditionalAlternative> nestedAlternatives;
 }

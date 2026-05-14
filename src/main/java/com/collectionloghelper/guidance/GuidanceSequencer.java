@@ -30,6 +30,7 @@ import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.RequirementsChecker;
+import com.collectionloghelper.data.StepWaypoint;
 import com.collectionloghelper.data.Zone;
 import java.util.HashMap;
 import java.util.List;
@@ -60,6 +61,13 @@ public class GuidanceSequencer
 	private volatile boolean active;
 	private volatile int loopIterationsCompleted;
 	private volatile int cumulativeActionCount;
+
+	/**
+	 * Number of waypoints the player has already crossed for the current step (B2).
+	 * Resets to 0 whenever the active step changes or the sequence restarts.
+	 * Only meaningful when the current step has a non-empty {@code waypoints} list.
+	 */
+	private volatile int crossedWaypointIndex;
 
 	/** Cached compiled pattern for the current step's chat completion regex. */
 	private Pattern compiledChatPattern;
@@ -105,6 +113,7 @@ public class GuidanceSequencer
 		this.currentIndex = 0;
 		this.loopIterationsCompleted = 0;
 		this.cumulativeActionCount = 0;
+		this.crossedWaypointIndex = 0;
 		this.resolvedAlternatives.clear();
 		this.onStepChanged = stepChanged;
 		this.onSequenceComplete = sequenceComplete;
@@ -134,6 +143,7 @@ public class GuidanceSequencer
 		activeSource = null;
 		steps = null;
 		currentIndex = 0;
+		crossedWaypointIndex = 0;
 		resolvedAlternatives.clear();
 		onStepChanged = null;
 		onSequenceComplete = null;
@@ -251,6 +261,7 @@ public class GuidanceSequencer
 		currentIndex = 0;
 		loopIterationsCompleted = 0;
 		cumulativeActionCount = 0;
+		crossedWaypointIndex = 0;
 		resolvedAlternatives.clear();
 		// Do NOT call skipSatisfiedSteps() — Reset forces step 0 unconditionally.
 
@@ -288,6 +299,7 @@ public class GuidanceSequencer
 
 		currentIndex = 0;
 		loopIterationsCompleted = 0;
+		crossedWaypointIndex = 0;
 		resolvedAlternatives.clear();
 		// Re-run the skip-chain to find the first unsatisfied step
 		skipSatisfiedSteps();
@@ -312,6 +324,16 @@ public class GuidanceSequencer
 	public int getCumulativeActionCount()
 	{
 		return cumulativeActionCount;
+	}
+
+	/**
+	 * Returns the number of waypoints crossed so far in the current step (B2).
+	 * Only meaningful when the active step has a non-empty {@code waypoints} list.
+	 * Resets to 0 whenever the sequencer advances, restarts, or stops.
+	 */
+	public int getCrossedWaypointIndex()
+	{
+		return crossedWaypointIndex;
 	}
 
 	/**
@@ -454,6 +476,38 @@ public class GuidanceSequencer
 		if (step.getCompletionCondition() == CompletionCondition.ARRIVE_AT_TILE
 			&& step.getWorldX() > 0)
 		{
+			// B2 — tile-sequence waypoint evaluation.
+			// When the step declares an ordered waypoint list, require each waypoint to be
+			// crossed in order before treating the step as complete.
+			List<StepWaypoint> stepWaypoints = step.getWaypoints();
+			if (stepWaypoints != null && !stepWaypoints.isEmpty())
+			{
+				if (crossedWaypointIndex < stepWaypoints.size())
+				{
+					StepWaypoint target = stepWaypoints.get(crossedWaypointIndex);
+					if (playerLocation.getPlane() == target.getPlane())
+					{
+						WorldPoint targetPoint = new WorldPoint(target.getWorldX(), target.getWorldY(), target.getPlane());
+						if (playerLocation.distanceTo2D(targetPoint) <= target.getRadius())
+						{
+							log.info("Step {} — crossed waypoint {}/{} at ({},{}) plane {}",
+								currentIndex + 1, crossedWaypointIndex + 1, stepWaypoints.size(),
+								target.getWorldX(), target.getWorldY(), target.getPlane());
+							crossedWaypointIndex++;
+						}
+					}
+				}
+				if (crossedWaypointIndex >= stepWaypoints.size())
+				{
+					log.info("Step {} complete (ARRIVE_AT_TILE via waypoint sequence: all {} waypoints crossed)",
+						currentIndex + 1, stepWaypoints.size());
+					advanceStep();
+				}
+				// Waypoint-mode: do not fall through to the legacy single-tile check.
+				return;
+			}
+
+			// Legacy single-tile arrival check (no waypoints declared).
 			if (cachedStepPointIndex != currentIndex)
 			{
 				cachedStepPointIndex = currentIndex;
@@ -594,6 +648,7 @@ public class GuidanceSequencer
 		}
 
 		loopIterationsCompleted = 0;
+		crossedWaypointIndex = 0;
 		currentIndex++;
 		skipSatisfiedSteps();
 
@@ -632,7 +687,8 @@ public class GuidanceSequencer
 	 */
 	public void advanceStep()
 	{
-		if (!active || steps == null)
+		final List<GuidanceStep> currentSteps = this.steps;
+		if (!active || currentSteps == null)
 		{
 			return;
 		}
@@ -648,13 +704,23 @@ public class GuidanceSequencer
 				log.info("Loop iteration {}/{} complete — looping back to step {}",
 					loopIterationsCompleted, completingStep.getLoopCount(), completingStep.getLoopBackToStep());
 				currentIndex = targetIndex;
+				crossedWaypointIndex = 0;
 				skipSatisfiedSteps();
+
+				// skipSatisfiedSteps() may fire onSequenceComplete -> stopSequence(),
+				// nulling this.steps. Snapshot was captured above; use it for size checks.
+				if (this.steps == null)
+				{
+					// sequence completed (and cleaned up) inside skipSatisfiedSteps()
+					return;
+				}
+
 				if (active)
 				{
 					GuidanceStep step = getCurrentStep();
 					if (step != null)
 					{
-						log.info("Resumed at step {}/{}: {}", currentIndex + 1, steps.size(), step.getDescription());
+						log.info("Resumed at step {}/{}: {}", currentIndex + 1, currentSteps.size(), step.getDescription());
 						notifyStepChanged(step);
 					}
 				}
@@ -665,9 +731,18 @@ public class GuidanceSequencer
 		}
 
 		currentIndex++;
+		crossedWaypointIndex = 0;
 		skipSatisfiedSteps();
 
-		if (currentIndex >= steps.size())
+		// skipSatisfiedSteps() may fire onSequenceComplete -> stopSequence(),
+		// nulling this.steps. Snapshot was captured above; use it for size checks.
+		if (this.steps == null)
+		{
+			// sequence completed (and cleaned up) inside skipSatisfiedSteps()
+			return;
+		}
+
+		if (currentIndex >= currentSteps.size())
 		{
 			log.info("Guidance sequence complete for {}", activeSource != null ? activeSource.getName() : "?");
 			active = false;
@@ -681,7 +756,7 @@ public class GuidanceSequencer
 			GuidanceStep step = getCurrentStep();
 			if (step != null)
 			{
-				log.info("Advanced to step {}/{}: {}", currentIndex + 1, steps.size(), step.getDescription());
+				log.info("Advanced to step {}/{}: {}", currentIndex + 1, currentSteps.size(), step.getDescription());
 				notifyStepChanged(step);
 			}
 		}
