@@ -76,7 +76,7 @@ public class SlayerStrategyCalculatorTest
 	{
 		return new CollectionLogSource(name, CollectionLogCategory.OTHER, 3000, 3000, 0,
 			60, 0, name, Collections.emptyList(),
-			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null, null, null, 0, null, 0, items);
+			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null, null, null, 0, null, 0, items, null);
 	}
 
 	private CollectionLogItem makeItem(int id, String name)

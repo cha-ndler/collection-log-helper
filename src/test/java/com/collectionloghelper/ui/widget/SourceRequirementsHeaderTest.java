@@ -521,7 +521,6 @@ public class SourceRequirementsHeaderTest
 			/* cumulativeTrackItemId */ 0,
 			/* cumulativeTrackObjectIds */ null,
 			/* cumulativeTrackThreshold */ 0,
-			Collections.emptyList()
-		);
+			Collections.emptyList(), null /* metaAuthoredDate */);
 	}
 }

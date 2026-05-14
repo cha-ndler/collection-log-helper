@@ -419,6 +419,27 @@ public class DropRateDatabaseTest
 			foundAtLeastOneEmDash);
 	}
 
+	// ========================================================================
+	// E2 — metaAuthoredDate regression: no production source should have it set
+	// ========================================================================
+
+	/**
+	 * Regression guard: the E2 plumbing ships without a production data backfill.
+	 * No source in drop_rates.json should carry a non-null metaAuthoredDate until
+	 * the Tier D sweep intentionally populates the field.
+	 */
+	@Test
+	public void load_noProductionSourceHasMetaAuthoredDate()
+	{
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			assertNull(
+				"Source '" + source.getName() + "' has metaAuthoredDate set; "
+					+ "production backfill is not part of this PR",
+				source.getMetaAuthoredDate());
+		}
+	}
+
 	/**
 	 * Where recommendedItemIds is present in drop_rates.json (B.5.2b backfill),
 	 * each array must be non-empty, contain only positive item IDs, and have
