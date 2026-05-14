@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -350,6 +351,72 @@ public class DropRateDatabaseTest
 		assertNotNull("Step must not be null", step);
 		assertNull("recommendedItemIds must be null when absent from JSON",
 			step.getRecommendedItemIds());
+	}
+
+	// ========================================================================
+	// Charset regression — issue #433
+	// ========================================================================
+
+	/**
+	 * Verifies that em-dash characters in step descriptions are loaded correctly
+	 * as the Unicode em-dash (U+2014, "—") rather than the Windows-1252 mojibake
+	 * sequence "â€"" that results from reading UTF-8 bytes with the platform
+	 * default charset on Windows.
+	 *
+	 * <p>The Perilous Moons step 3 description ("… Each has unique mechanics — learn
+	 * the safe tiles …") is the known reproducer from issue #433.
+	 */
+	@Test
+	public void load_guidanceStepDescriptions_noCharsetCorruption()
+	{
+		final String MOJIBAKE = "â€”"; // UTF-8 em-dash bytes misread as Windows-1252
+		final String EM_DASH   = "—";              // correct em-dash
+
+		boolean foundAtLeastOneEmDash = false;
+
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			if (source.getGuidanceSteps() == null)
+			{
+				continue;
+			}
+			for (GuidanceStep step : source.getGuidanceSteps())
+			{
+				String desc = step.getDescription();
+				if (desc != null)
+				{
+					assertFalse(
+						"Mojibake em-dash detected in description for source '"
+							+ source.getName() + "': " + desc,
+						desc.contains(MOJIBAKE));
+					if (desc.contains(EM_DASH))
+					{
+						foundAtLeastOneEmDash = true;
+					}
+				}
+
+				if (step.getPerItemStepDescription() != null)
+				{
+					for (Map.Entry<Integer, String> entry : step.getPerItemStepDescription().entrySet())
+					{
+						String override = entry.getValue();
+						if (override != null)
+						{
+							assertFalse(
+								"Mojibake em-dash detected in perItemStepDescription (item "
+									+ entry.getKey() + ") for source '" + source.getName()
+									+ "': " + override,
+								override.contains(MOJIBAKE));
+						}
+					}
+				}
+			}
+		}
+
+		assertTrue(
+			"Expected at least one em-dash in guidance step descriptions — "
+				+ "test data may be empty or step sources changed",
+			foundAtLeastOneEmDash);
 	}
 
 	/**
