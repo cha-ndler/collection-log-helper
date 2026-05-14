@@ -1,0 +1,70 @@
+[
+  {
+    "name": "B54 Pilot Source",
+    "category": "BOSSES",
+    "worldX": 2900,
+    "worldY": 3400,
+    "worldPlane": 0,
+    "killTimeSeconds": 120,
+    "items": [
+      {
+        "name": "Pilot drop",
+        "itemId": 9999901,
+        "dropRate": 0.01
+      }
+    ],
+    "guidanceSteps": [
+      {
+        "description": "Withdraw supplies from bank",
+        "completionCondition": "MANUAL",
+        "section": "Bank prep"
+      },
+      {
+        "description": "Pick up food from bank",
+        "completionCondition": "MANUAL",
+        "section": "Bank prep"
+      },
+      {
+        "description": "Teleport to destination",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "worldX": 2900,
+        "worldY": 3400,
+        "worldPlane": 0,
+        "section": "Travel"
+      },
+      {
+        "description": "Walk through the dungeon entrance",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "worldX": 2905,
+        "worldY": 3410,
+        "worldPlane": 0,
+        "section": "Travel"
+      },
+      {
+        "description": "Climb down the ladder",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "worldX": 2905,
+        "worldY": 3410,
+        "worldPlane": 1,
+        "section": "Travel"
+      },
+      {
+        "description": "Kill the boss",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 1234,
+        "section": "Combat"
+      },
+      {
+        "description": "Kill the boss again for the drop",
+        "completionCondition": "ITEM_OBTAINED",
+        "completionItemId": 9999901,
+        "section": "Combat"
+      },
+      {
+        "description": "Pick up the loot",
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      }
+    ]
+  }
+]
