@@ -267,7 +267,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			null,  // cumulativeTrackObjectIds
 			0,     // cumulativeTrackThreshold
 			Collections.emptyList()  // items
-		);
+		, null);
 	}
 
 	/** Builds a BOSSES source with coordinates and an explicitly empty guidanceSteps list. */
@@ -297,6 +297,6 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			null,
 			0,
 			Collections.emptyList()
-		);
+		, null);
 	}
 }

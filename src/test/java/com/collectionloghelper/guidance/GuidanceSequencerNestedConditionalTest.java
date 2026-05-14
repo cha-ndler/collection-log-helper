@@ -530,7 +530,9 @@ public class GuidanceSequencerNestedConditionalTest
 			"Test Source", CollectionLogCategory.BOSSES, 3000, 3000, 0,
 			60, 0, "Test Source", Collections.emptyList(),
 			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null,
-			steps, null, 0, null, 0, Collections.emptyList());
+			steps, null, 0, null, 0, Collections.emptyList(),
+			null /* metaAuthoredDate */
+		);
 		sequencer.startSequence(source, step -> {}, () -> {});
 	}
 }

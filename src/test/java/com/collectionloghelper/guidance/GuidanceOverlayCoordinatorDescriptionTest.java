@@ -293,6 +293,6 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			Arrays.asList(steps),
 			null, 0, null, 0,
 			Collections.emptyList()
-		);
+		, null);
 	}
 }

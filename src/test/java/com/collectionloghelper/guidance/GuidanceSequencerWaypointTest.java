@@ -169,7 +169,7 @@ public class GuidanceSequencerWaypointTest
 		return new CollectionLogSource("Waypoint Test Source", CollectionLogCategory.BOSSES, 3200, 3400, 0,
 			60, 0, "Test Source", Collections.emptyList(),
 			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null,
-			Arrays.asList(steps), null, 0, null, 0, Collections.emptyList());
+			Arrays.asList(steps), null, 0, null, 0, Collections.emptyList(), null /* metaAuthoredDate */);
 	}
 
 	// ── Test cases ────────────────────────────────────────────────────────────
