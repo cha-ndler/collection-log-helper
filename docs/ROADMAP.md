@@ -546,7 +546,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 **Tier B — Guidance depth parity with Quest Helper**
 
 - [ ] B1 — Composable completion conditions             status: planned       owner: —          updated: 2026-04-16
-- [ ] B2 — Tile-sequence pathing                        status: planned       owner: —          updated: 2026-04-16
+- [/] B2 — Tile-sequence pathing                        status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #456
 - [ ] B3 — Nested conditional steps                     status: planned       owner: —          updated: 2026-04-16
 - [/] B4 — Alternative-method modelling                 status: in-progress   owner: cha-ndler  updated: 2026-05-13  note: direction firmed up — see expanded section above. Sub-milestones:
 - [x] B4.1 — Per-item required-items override (Mort'ton POC)  status: done  owner: cha-ndler  updated: 2026-05-13  pr: #419  issue: #417  note: `perItemRequiredItemIds` schema field shipped + Mort'ton tier map for all 17 clog items + activation-chain propagation of target clog item ID through Plugin.activateGuidance(source, targetItemId) -> coordinator.activeTargetItemId -> RequiredItemResolver. Pre-existing bug where activeTargetItemId was set before deactivateGuidance() cleared it (silently null-ing the target before any resolver ran) was found and fixed in #421.
