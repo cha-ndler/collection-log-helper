@@ -563,7 +563,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [ ] B4.3.5 — Barracuda Trials per-trial mapping  status: deferred  owner: —  updated: 2026-05-14  note: Flagged in #420 — re-audit after Sailing mechanics stabilize before scoping.
 - [ ] B4.4 — Top Pick auto-drives per-item method choice (North Star UI alignment)  status: planned  owner: —  updated: 2026-05-13
 - [/] B5 — Puzzle/dynamic step type                     status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #473  note: DynamicTargetEvaluator interface + registry + WintertodtBrazierEvaluator pilot. Coordinator tick() dispatches per-tick; regression guard ensures no production step carries the field.
-- [ ] B6 — Decision D-01 pilot (hybrid Java helper)     status: planned       owner: —          updated: 2026-04-16
+- [/] B6 — Decision D-01 pilot (hybrid Java helper)     status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #474  note: GuidanceHelper interface + GuidanceHelperRegistry + CerberusHelper pilot (mirrors JSON steps). guidanceHelperKey field added to CollectionLogSource. Sequencer routes through helper when key is set. Regression test guards against premature production key. Build passes, all tests green.
 
 **Tier B.5 — UI parity with Quest Helper**
 

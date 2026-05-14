@@ -690,7 +690,8 @@ public class RequiredItemResolverTest
 			null,  // completionZone
 			null,  // conditionalAlternatives
 			null,  // section
-			null   // waypoints
+			null,  // waypoints
+			null   // dynamicTargetEvaluator
 		);
 	}
 }

@@ -243,11 +243,13 @@ public class DryStreakFeedModeControllerTest
 			null,
 			null,
 			null,
+			null /* guidanceHelperKey */,
 			null,
 			0,
 			null,
 			0,
-			Collections.emptyList()
+			Collections.emptyList(),
+			null /* metaAuthoredDate */
 		);
 	}
 }
