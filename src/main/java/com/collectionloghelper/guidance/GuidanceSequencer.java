@@ -587,16 +587,25 @@ public class GuidanceSequencer
 	 */
 	public void skipStep()
 	{
-		if (!active || steps == null)
+		final List<GuidanceStep> currentSteps = this.steps;
+		if (!active || currentSteps == null)
 		{
-			return;
+			return; // sequence already complete or never started
 		}
 
 		loopIterationsCompleted = 0;
 		currentIndex++;
 		skipSatisfiedSteps();
 
-		if (currentIndex >= steps.size())
+		// skipSatisfiedSteps() may fire onSequenceComplete -> stopSequence(),
+		// nulling this.steps. Snapshot was captured above; use it for size checks.
+		if (this.steps == null)
+		{
+			// sequence completed (and cleaned up) inside skipSatisfiedSteps()
+			return;
+		}
+
+		if (currentIndex >= currentSteps.size())
 		{
 			log.info("Guidance sequence complete (skipped) for {}",
 				activeSource != null ? activeSource.getName() : "?");
@@ -611,7 +620,7 @@ public class GuidanceSequencer
 			GuidanceStep step = getCurrentStep();
 			if (step != null)
 			{
-				log.info("Skipped to step {}/{}: {}", currentIndex + 1, steps.size(), step.getDescription());
+				log.info("Skipped to step {}/{}: {}", currentIndex + 1, currentSteps.size(), step.getDescription());
 				notifyStepChanged(step);
 			}
 		}
