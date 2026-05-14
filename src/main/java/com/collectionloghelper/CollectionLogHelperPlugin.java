@@ -41,6 +41,7 @@ import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
+import com.collectionloghelper.learning.DryStreakAnalyzer;
 import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
 import com.collectionloghelper.guidance.RequiredItemResolver;
@@ -176,6 +177,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private SlayerStrategyCalculator slayerStrategyCalculator;
 
 	@Inject
+	private DryStreakAnalyzer dryStreakAnalyzer;
+
+	@Inject
 	private PlayerTravelCapabilities travelCapabilities;
 
 	@Inject
@@ -255,6 +259,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			config, database, collectionState, calculator, clueEstimator,
 			itemManager, requirementsChecker, dataSyncState, slayerTaskState,
 			slayerStrategyCalculator, playerInventoryState, playerBankState,
+			dryStreakAnalyzer,
 			(java.util.function.BiConsumer<CollectionLogSource, Integer>) this::activateGuidance,
 			this::deactivateGuidance,
 			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()),

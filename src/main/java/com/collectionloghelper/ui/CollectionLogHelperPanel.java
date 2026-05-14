@@ -43,7 +43,9 @@ import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
+import com.collectionloghelper.learning.DryStreakAnalyzer;
 import com.collectionloghelper.ui.mode.CategoryModeController;
+import com.collectionloghelper.ui.mode.DryStreakFeedModeController;
 import com.collectionloghelper.ui.mode.EfficientModeController;
 import com.collectionloghelper.ui.mode.PanelModeController;
 import com.collectionloghelper.ui.mode.PanelModeDispatcher;
@@ -101,7 +103,8 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		CATEGORY_FOCUS("Category Focus"),
 		SEARCH("Search"),
 		PET_HUNT("Pet Hunt"),
-		STATISTICS("Statistics");
+		STATISTICS("Statistics"),
+		DRY_STREAK("Dry Streaks");
 
 		private final String displayName;
 
@@ -129,6 +132,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final DropRateDatabase database;
 	private final PlayerCollectionState collectionState;
 	private final EfficiencyCalculator calculator;
+	private DryStreakFeedModeController dryStreakFeedController;
 	private final ClueCompletionEstimator clueEstimator;
 	private final ItemManager itemManager;
 	private final RequirementsChecker requirementsChecker;
@@ -183,6 +187,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		SlayerStrategyCalculator slayerStrategyCalculator,
 		PlayerInventoryState inventoryState,
 		PlayerBankState bankState,
+		DryStreakAnalyzer dryStreakAnalyzer,
 		BiConsumer<CollectionLogSource, Integer> guidanceActivator, Runnable guidanceDeactivator,
 		Consumer<AfkFilter> afkFilterUpdater,
 		Consumer<EfficientSortMode> sortModeUpdater)
@@ -416,6 +421,10 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			new EfficientModeController(this, config, collectionState, calculator,
 				requirementsChecker, itemManager));
 
+		dryStreakFeedController = new DryStreakFeedModeController(this, collectionState,
+			dryStreakAnalyzer);
+		modeControllers.put(Mode.DRY_STREAK, dryStreakFeedController);
+
 		updateControlVisibility();
 	}
 
@@ -500,6 +509,21 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			revalidate();
 			repaint();
 		});
+	}
+
+	/**
+	 * Updates the kill counts available to the dry-streak feed. Call this after any
+	 * KC-data refresh (in-game varp update, TempleOSRS sync, etc.). A subsequent
+	 * {@link #rebuild()} is required to repaint the feed.
+	 *
+	 * @param killCounts map of source name to kill count; {@code null} is treated as empty
+	 */
+	public void updateDryStreakKillCounts(java.util.Map<String, Integer> killCounts)
+	{
+		if (dryStreakFeedController != null)
+		{
+			dryStreakFeedController.setKillCounts(killCounts);
+		}
 	}
 
 	public void shutDown()
