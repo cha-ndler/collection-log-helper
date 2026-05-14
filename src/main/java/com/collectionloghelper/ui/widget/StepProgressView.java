@@ -50,9 +50,16 @@ import net.runelite.client.util.AsyncBufferedImage;
 
 /**
  * Shared widget that displays the multi-step guidance progress bar,
- * the required-items subsection (with colour-coded availability), the
- * collapsible step sections (when any step carries a section label), and the
+ * the required-items chip strip (B.5.1 — {@link RequiredItemsChipPanel}),
+ * the collapsible step sections (when any step carries a section label), and the
  * Next Step / Skip buttons.
+ *
+ * <h3>Required-items chip strip (B.5.1)</h3>
+ * <p>The chip strip ({@link RequiredItemsChipPanel}) is rendered directly below
+ * the step-progress label in the flat layout.  Each chip is a 28x28 item icon
+ * with a colored border: green (held), white (in bank — tooltip reads
+ * "Items can be found in your: Bank"), or red (missing).  The strip hides
+ * itself when the active step has no required items.
  *
  * <h3>Section rendering (B.5.4)</h3>
  * <p>When the active source has at least one step with a non-null
@@ -91,6 +98,12 @@ public class StepProgressView extends JPanel
 	private final ItemManager itemManager;
 
 	private final JLabel stepProgressLabel;
+	/**
+	 * B.5.1 chip strip — rendered directly below the step-progress label in the
+	 * flat layout. Each chip is a 28x28 item icon with a colored border reflecting
+	 * item availability (green/white/red). Hidden when the step has no required items.
+	 */
+	private final RequiredItemsChipPanel chipPanel;
 	private final JPanel requiredItemsPanel;
 	private final JPanel recommendedItemsPanel;
 	/** Container rendered when the source uses section labels (sectioned mode). */
@@ -130,6 +143,12 @@ public class StepProgressView extends JPanel
 		stepProgressLabel.setForeground(new Color(80, 180, 255));
 		stepProgressLabel.setAlignmentX(LEFT_ALIGNMENT);
 		add(stepProgressLabel);
+
+		// B.5.1 chip strip — directly below the step description label
+		chipPanel = new RequiredItemsChipPanel(itemManager);
+		chipPanel.setAlignmentX(LEFT_ALIGNMENT);
+		add(chipPanel);
+		add(Box.createVerticalStrut(2));
 
 		requiredItemsPanel = new JPanel();
 		requiredItemsPanel.setLayout(new BoxLayout(requiredItemsPanel, BoxLayout.Y_AXIS));
@@ -327,14 +346,16 @@ public class StepProgressView extends JPanel
 
 			if (groups.isEmpty())
 			{
-				// Flat layout — hide sections, show required and recommended items inline
+				// Flat layout — hide sections, show chip strip + required/recommended items inline
 				sectionsPanel.setVisible(false);
+				chipPanel.update(rows);
 				updateRequiredItemDisplay(rows);
 				updateRecommendedItemDisplay(recRows);
 			}
 			else
 			{
-				// Sectioned layout — hide inline panels, render section blocks
+				// Sectioned layout — hide inline panels (including chip strip), render section blocks
+				chipPanel.update(Collections.<RequiredItemDisplay>emptyList());
 				requiredItemsPanel.removeAll();
 				requiredItemsPanel.setVisible(false);
 				recommendedItemsPanel.removeAll();
@@ -363,6 +384,7 @@ public class StepProgressView extends JPanel
 	{
 		SwingUtilities.invokeLater(() ->
 		{
+			chipPanel.update(Collections.<RequiredItemDisplay>emptyList());
 			requiredItemsPanel.removeAll();
 			requiredItemsPanel.setVisible(false);
 			recommendedItemsPanel.removeAll();
