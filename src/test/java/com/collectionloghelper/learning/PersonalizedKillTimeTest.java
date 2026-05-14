@@ -77,8 +77,7 @@ public class PersonalizedKillTimeTest
 			/* mutuallyExclusiveSources */ null, /* rollsPerKill */ 0,
 			/* aggregated */ false, /* afkLevel */ 0, /* travelTip */ null,
 			/* npcId */ 0, /* interactAction */ null, /* dialogOptions */ null,
-			/* guidanceSteps */ null,
-			null /* guidanceHelperKey */, /* requirements */ null,
+			/* guidanceSteps */ null, /* guidanceHelperKey */ null, /* requirements */ null,
 			/* cumulativeTrackItemId */ 0, /* cumulativeTrackObjectIds */ null,
 			/* cumulativeTrackThreshold */ 0,
 			Collections.emptyList(), null /* metaAuthoredDate */);
