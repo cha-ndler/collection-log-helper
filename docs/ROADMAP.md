@@ -600,6 +600,6 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [ ] F2 — TempleOSRS KC sync                           status: planned       owner: —          updated: 2026-04-16
 - [ ] F3 — Per-account kill-time learning               status: planned       owner: —          updated: 2026-04-16
 - [ ] F4 — Dry-streak feed                              status: planned       owner: —          updated: 2026-04-16
-- [ ] F5 — JaCoCo + 80% gate                            status: planned       owner: —          updated: 2026-04-16
+- [/] F5 — JaCoCo + 80% gate                            status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #454  note: gate active at 45% threshold; follow-up to raise to 80% with overlay/UI test additions.
 - [ ] F6 — GitHub Actions CI                            status: planned       owner: —          updated: 2026-04-16
 - [ ] F7 — Issue #134 account-specific calcs            status: planned       owner: —          updated: 2026-04-16
