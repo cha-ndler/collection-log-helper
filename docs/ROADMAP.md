@@ -601,5 +601,5 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [ ] F3 — Per-account kill-time learning               status: planned       owner: —          updated: 2026-04-16
 - [ ] F4 — Dry-streak feed                              status: planned       owner: —          updated: 2026-04-16
 - [ ] F5 — JaCoCo + 80% gate                            status: planned       owner: —          updated: 2026-04-16
-- [ ] F6 — GitHub Actions CI                            status: planned       owner: —          updated: 2026-04-16
+- [/] F6 — GitHub Actions CI                            status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #451  note: build+test workflow on PR/push; verify first CI run is green before moving to [x].
 - [ ] F7 — Issue #134 account-specific calcs            status: planned       owner: —          updated: 2026-04-16
