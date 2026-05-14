@@ -30,6 +30,9 @@ import com.collectionloghelper.sync.CollectionLogNetImporter;
 import com.collectionloghelper.sync.ImportResult;
 import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.DropRateDatabase;
+import com.collectionloghelper.sync.SourceKcStore;
+import com.collectionloghelper.sync.SyncResult;
+import com.collectionloghelper.sync.TempleOsrsKcSyncer;
 import com.collectionloghelper.data.PlayerBankState;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
@@ -56,8 +59,10 @@ import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -217,6 +222,12 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private KillTimeTracker killTimeTracker;
 
+	@Inject
+	private TempleOsrsKcSyncer templeOsrsKcSyncer;
+
+	@Inject
+	private SourceKcStore sourceKcStore;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -312,6 +323,9 @@ public class CollectionLogHelperPlugin extends Plugin
 			});
 		});
 
+		// Wire TempleOSRS KC sync button callback
+		panel.setTempleSyncCallback(this::onTempleSyncRequested);
+
 		// Wire coordinator with references it needs from the plugin
 		guidanceCoordinator.setPluginInstance(this);
 		guidanceCoordinator.setPanel(panel);
@@ -397,6 +411,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		killTimeTracker.reset();
 		deactivateGuidance();
 		syncStateCoordinator.reset();
+		sourceKcStore.clear();
+		templeOsrsKcSyncer.shutdown();
 		sourcesWithMissingItems.clear();
 		pendingPanelRebuild = false;
 		rankedSourcesDirty = true;
@@ -919,6 +935,98 @@ public class CollectionLogHelperPlugin extends Plugin
 	public void deactivateGuidance()
 	{
 		guidanceCoordinator.deactivateGuidance();
+	}
+
+	/**
+	 * Initiates an asynchronous TempleOSRS KC sync for the current player.
+	 *
+	 * <p>Triggered by the panel "Sync KC from TempleOSRS" button. The sync runs on
+	 * the {@link TempleOsrsKcSyncer} background thread; on completion the result is
+	 * applied on the EDT and the panel button is reset.
+	 *
+	 * <p>Fail-soft: any error is logged and surfaced as a chat message; no exception
+	 * reaches the caller.
+	 */
+	private void onTempleSyncRequested()
+	{
+		if (!config.enableTempleOsrsSync())
+		{
+			return;
+		}
+
+		String playerName = pluginDataManager.getCurrentPlayerName();
+		if (playerName == null || playerName.isEmpty())
+		{
+			log.warn("TempleOSRS sync requested but player name is not available");
+			if (panel != null)
+			{
+				panel.onTempleSyncComplete(false);
+			}
+			return;
+		}
+
+		log.info("Requesting TempleOSRS KC sync for '{}'", playerName);
+
+		java.util.concurrent.Future<SyncResult> future = templeOsrsKcSyncer.syncKc(playerName);
+
+		// Wait for the result on a separate thread so the EDT is not blocked
+		java.util.concurrent.Executors.newSingleThreadExecutor().submit(() ->
+		{
+			SyncResult result;
+			try
+			{
+				result = future.get(30, java.util.concurrent.TimeUnit.SECONDS);
+			}
+			catch (Exception e)
+			{
+				log.warn("TempleOSRS sync future failed for '{}': {}", playerName, e.getMessage());
+				result = SyncResult.failure("Sync timed out or failed: " + e.getMessage());
+			}
+
+			final SyncResult finalResult = result;
+			if (finalResult.isSuccess())
+			{
+				// Validate mapped names against the DB and apply only known sources
+				Map<String, Integer> validated = new java.util.HashMap<>();
+				for (Map.Entry<String, Integer> entry : finalResult.getKcBySource().entrySet())
+				{
+					if (database.getSourceByName(entry.getKey()) != null)
+					{
+						validated.put(entry.getKey(), entry.getValue());
+					}
+					else
+					{
+						log.debug("TempleOSRS KC entry '{}' not found in CLH database — skipping",
+							entry.getKey());
+					}
+				}
+				sourceKcStore.update(validated);
+				log.info("TempleOSRS KC sync complete: {} sources updated, {} skipped",
+					validated.size(), finalResult.getSkippedCount());
+
+				clientThread.invokeLater(() ->
+					client.addChatMessage(
+						net.runelite.api.ChatMessageType.GAMEMESSAGE, "",
+						"<col=00c8c8>[Collection Log Helper]</col> TempleOSRS KC synced: "
+							+ validated.size() + " sources updated.",
+						null));
+			}
+			else
+			{
+				log.warn("TempleOSRS KC sync failed: {}", finalResult.getErrorMessage());
+				clientThread.invokeLater(() ->
+					client.addChatMessage(
+						net.runelite.api.ChatMessageType.GAMEMESSAGE, "",
+						"<col=ff0000>[Collection Log Helper]</col> TempleOSRS KC sync failed: "
+							+ finalResult.getErrorMessage(),
+						null));
+			}
+
+			if (panel != null)
+			{
+				panel.onTempleSyncComplete(finalResult.isSuccess());
+			}
+		});
 	}
 
 	/**
