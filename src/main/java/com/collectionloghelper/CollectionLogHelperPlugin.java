@@ -44,6 +44,7 @@ import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
 import com.collectionloghelper.guidance.GuidanceSequencer;
 import com.collectionloghelper.guidance.RequiredItemResolver;
+import com.collectionloghelper.learning.KillTimeTracker;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.GuidanceEventRouter;
 import com.collectionloghelper.lifecycle.GuidanceUIState;
@@ -213,6 +214,10 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private CollectionLogNetImporter collectionLogNetImporter;
 
+	@Inject
+	private KillTimeTracker killTimeTracker;
+
+
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
 
@@ -347,6 +352,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceEventRouter.setOnFilterConfigChanged(this::onFilterConfigChanged);
 		eventBus.register(guidanceEventRouter);
 		eventBus.register(guidanceMovementTracker);
+		eventBus.register(killTimeTracker);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -387,6 +393,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		eventBus.unregister(sceneEventRouter);
 		eventBus.unregister(guidanceEventRouter);
 		eventBus.unregister(guidanceMovementTracker);
+		eventBus.unregister(killTimeTracker);
+		killTimeTracker.reset();
 		deactivateGuidance();
 		syncStateCoordinator.reset();
 		sourcesWithMissingItems.clear();
@@ -474,6 +482,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			playerBankState.reset();
 			playerInventoryState.reset();
 			travelCapabilities.reset();
+			killTimeTracker.reset();
 			pluginDataManager.reset();
 		}
 	}
@@ -702,7 +711,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Lazily init per-character data directory once player name is available
 		if (pluginDataManager.getCharacterDir() == null)
 		{
-			pluginDataManager.init();
+			if (pluginDataManager.init())
+			{
+				killTimeTracker.init(pluginDataManager.getCharacterDir());
+			}
 		}
 
 		// Deferred cache-fresh check: varps aren't loaded during LOGGED_IN or
