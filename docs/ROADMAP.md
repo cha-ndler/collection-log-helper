@@ -575,7 +575,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 
 - [ ] C1 — POH teleport inventory model                 status: planned       owner: —          updated: 2026-04-16
 - [ ] C2 — Equipped-item state                          status: planned       owner: —          updated: 2026-04-16
-- [ ] C3 — Diary tier state                             status: planned       owner: —          updated: 2026-04-16
+- [/] C3 — Diary tier state                             status: in-progress   owner: —          updated: 2026-05-14  pr: #461
 - [ ] C4 — Skill-cape perk state                        status: planned       owner: —          updated: 2026-04-16
 - [ ] C5 — Partial-quest state                          status: planned       owner: —          updated: 2026-04-16
 - [ ] C6 — Wire into top-20 sources                     status: planned       owner: —          updated: 2026-04-16
