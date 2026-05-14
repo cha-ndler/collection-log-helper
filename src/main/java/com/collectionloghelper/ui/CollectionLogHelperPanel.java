@@ -74,6 +74,7 @@ import java.util.function.Consumer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -138,6 +139,10 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	private final SyncStatusView syncStatusView;
 	private final ClueSummaryView clueSummaryView;
+	private final JButton collectionLogNetSyncButton;
+
+	/** Set by the plugin after construction; called when the sync button is clicked. */
+	private Runnable collectionLogNetImportCallback;
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<AfkFilter> afkFilterSelector;
@@ -225,6 +230,23 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		syncStatusView.setAlignmentX(CENTER_ALIGNMENT);
 		syncStatusView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(syncStatusView);
+
+		collectionLogNetSyncButton = new JButton("Sync from collectionlog.net");
+		collectionLogNetSyncButton.setAlignmentX(CENTER_ALIGNMENT);
+		collectionLogNetSyncButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 26));
+		collectionLogNetSyncButton.setFont(FontManager.getRunescapeSmallFont());
+		collectionLogNetSyncButton.setFocusPainted(false);
+		collectionLogNetSyncButton.setVisible(config.enableCollectionLogNetImport());
+		collectionLogNetSyncButton.addActionListener(e ->
+		{
+			if (collectionLogNetImportCallback != null)
+			{
+				collectionLogNetSyncButton.setEnabled(false);
+				collectionLogNetSyncButton.setText("Syncing...");
+				collectionLogNetImportCallback.run();
+			}
+		});
+		controlsPanel.add(collectionLogNetSyncButton);
 
 		clueSummaryView = new ClueSummaryView();
 		clueSummaryView.setAlignmentX(CENTER_ALIGNMENT);
@@ -434,6 +456,50 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	public void updateClueSummary(PlayerBankState bankState)
 	{
 		clueSummaryView.updateFromBankState(bankState);
+	}
+
+	/**
+	 * Wires the callback invoked when the "Sync from collectionlog.net" button is clicked.
+	 * Must be called from the EDT or before the panel is shown.
+	 */
+	public void setCollectionLogNetImportCallback(Runnable callback)
+	{
+		this.collectionLogNetImportCallback = callback;
+	}
+
+	/**
+	 * Resets the "Sync from collectionlog.net" button to its ready state and
+	 * shows a brief result message in the button text.  Safe to call from any thread.
+	 *
+	 * @param message short result message, e.g. "Synced 42 items from collectionlog.net"
+	 */
+	public void onCollectionLogNetImportComplete(String message)
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			collectionLogNetSyncButton.setEnabled(true);
+			collectionLogNetSyncButton.setText(message);
+		});
+	}
+
+	/**
+	 * Shows or hides the collectionlog.net sync button based on the config flag.
+	 * Call when the config section toggle changes.  Safe to call from any thread.
+	 */
+	public void updateCollectionLogNetImportButton()
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			boolean enabled = config.enableCollectionLogNetImport();
+			collectionLogNetSyncButton.setVisible(enabled);
+			if (enabled)
+			{
+				collectionLogNetSyncButton.setEnabled(true);
+				collectionLogNetSyncButton.setText("Sync from collectionlog.net");
+			}
+			revalidate();
+			repaint();
+		});
 	}
 
 	public void shutDown()
