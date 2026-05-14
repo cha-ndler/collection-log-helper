@@ -1,5 +1,7 @@
 # Collection Log Helper
 
+[![Build](https://github.com/cha-ndler/collection-log-helper/actions/workflows/build.yml/badge.svg)](https://github.com/cha-ndler/collection-log-helper/actions/workflows/build.yml)
+
 Ranks every collection log source by efficiency and guides you there step-by-step — like Quest Helper, but for the collection log.
 
 2,109 items across 225 sources. Drop rates wiki-verified. Kill times aligned with TempleOSRS EHB rates.
