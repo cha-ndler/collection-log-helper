@@ -256,4 +256,16 @@ public interface CollectionLogHelperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+		keyName = "enableCapabilityDebugOverlay",
+		name = "Player capability debug overlay",
+		description = "Developer-facing overlay showing detected player state (Tier C7). Shows combat level, key skills, spellbook, prayer book, slayer task, quest count, and POH status.",
+		section = developerSection,
+		position = 1
+	)
+	default boolean enableCapabilityDebugOverlay()
+	{
+		return false;
+	}
 }

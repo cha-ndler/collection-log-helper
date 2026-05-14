@@ -30,6 +30,7 @@ import com.collectionloghelper.overlay.GuidanceMinimapOverlay;
 import com.collectionloghelper.overlay.GuidanceOverlay;
 import com.collectionloghelper.overlay.ItemHighlightOverlay;
 import com.collectionloghelper.overlay.ObjectHighlightOverlay;
+import com.collectionloghelper.overlay.PlayerCapabilityDebugOverlay;
 import com.collectionloghelper.overlay.WidgetHighlightOverlay;
 import com.collectionloghelper.overlay.WorldMapDestinationOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
@@ -66,6 +67,8 @@ public class OverlayRegistryTest
 	private GroundItemHighlightOverlay groundItemHighlightOverlay;
 	@Mock
 	private WidgetHighlightOverlay widgetHighlightOverlay;
+	@Mock
+	private PlayerCapabilityDebugOverlay playerCapabilityDebugOverlay;
 
 	private OverlayRegistry registry;
 
@@ -82,7 +85,8 @@ public class OverlayRegistryTest
 			worldMapRouteOverlay,
 			worldMapDestinationOverlay,
 			groundItemHighlightOverlay,
-			widgetHighlightOverlay
+			widgetHighlightOverlay,
+			playerCapabilityDebugOverlay
 		);
 	}
 
@@ -157,13 +161,20 @@ public class OverlayRegistryTest
 	}
 
 	@Test
-	public void testRegisterAllAddsNineOverlays()
+	public void testRegisterAllAddsPlayerCapabilityDebugOverlay()
+	{
+		registry.registerAll();
+		verify(overlayManager).add(playerCapabilityDebugOverlay);
+	}
+
+	@Test
+	public void testRegisterAllAddsTenOverlays()
 	{
 		// Arrange + Act
 		registry.registerAll();
 
-		// Assert — exactly 9 add() calls, no more
-		verify(overlayManager, times(9)).add(any());
+		// Assert — exactly 10 add() calls, no more
+		verify(overlayManager, times(10)).add(any());
 	}
 
 	@Test
@@ -185,6 +196,7 @@ public class OverlayRegistryTest
 		inOrder.verify(overlayManager).add(worldMapDestinationOverlay);
 		inOrder.verify(overlayManager).add(groundItemHighlightOverlay);
 		inOrder.verify(overlayManager).add(widgetHighlightOverlay);
+		inOrder.verify(overlayManager).add(playerCapabilityDebugOverlay);
 	}
 
 	// ========================================================================
@@ -192,10 +204,17 @@ public class OverlayRegistryTest
 	// ========================================================================
 
 	@Test
-	public void testUnregisterAllRemovesNineOverlays()
+	public void testUnregisterAllRemovesPlayerCapabilityDebugOverlay()
 	{
 		registry.unregisterAll();
-		verify(overlayManager, times(9)).remove(any());
+		verify(overlayManager).remove(playerCapabilityDebugOverlay);
+	}
+
+	@Test
+	public void testUnregisterAllRemovesTenOverlays()
+	{
+		registry.unregisterAll();
+		verify(overlayManager, times(10)).remove(any());
 	}
 
 	@Test
@@ -277,6 +296,7 @@ public class OverlayRegistryTest
 		inOrder.verify(overlayManager).remove(worldMapDestinationOverlay);
 		inOrder.verify(overlayManager).remove(groundItemHighlightOverlay);
 		inOrder.verify(overlayManager).remove(widgetHighlightOverlay);
+		inOrder.verify(overlayManager).remove(playerCapabilityDebugOverlay);
 	}
 
 	// ========================================================================
@@ -311,6 +331,7 @@ public class OverlayRegistryTest
 		// Assert — add called twice for each overlay
 		verify(overlayManager, times(2)).add(guidanceOverlay);
 		verify(overlayManager, times(2)).add(widgetHighlightOverlay);
+		verify(overlayManager, times(2)).add(playerCapabilityDebugOverlay);
 	}
 
 	@Test
