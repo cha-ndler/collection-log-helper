@@ -108,6 +108,18 @@ public class GuidanceStep
 	 */
 	List<Integer> recommendedItemIds;
 
+	/**
+	 * Optional per-item override for recommendedItemIds.  When the active guidance has a
+	 * specific target collection-log item AND this map has an entry for that item, the
+	 * override list is used in place of {@link #recommendedItemIds}.  Falls back to the
+	 * static {@link #recommendedItemIds} when no override applies (null map, null target,
+	 * or target not present in the map).
+	 *
+	 * <p>Null by default — existing JSON without this field deserialises unchanged.
+	 */
+	@Nullable
+	Map<Integer, List<Integer>> perItemRecommendedItemIds;
+
 	/** How the system detects this step is complete. */
 	CompletionCondition completionCondition;
 
@@ -433,6 +445,7 @@ public class GuidanceStep
 			this.requiredItemIds,
 			this.perItemRequiredItemIds,
 			this.recommendedItemIds,
+			this.perItemRecommendedItemIds,
 			alt.getCompletionCondition() != null ? alt.getCompletionCondition() : this.completionCondition,
 			this.completionItemId,
 			this.completionItemCount,

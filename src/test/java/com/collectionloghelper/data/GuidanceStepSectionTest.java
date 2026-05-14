@@ -137,6 +137,7 @@ public class GuidanceStepSectionTest
 			null, null,
 			null,   // perItemRequiredItemIds
 			null,   // recommendedItemIds
+			null, // perItemRecommendedItemIds
 			CompletionCondition.MANUAL,
 			0, 0, 0, 0,
 			null,   // completionNpcIds
