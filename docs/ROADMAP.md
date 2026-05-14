@@ -603,7 +603,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 
 **Tier F — Social, imports, and long-tail polish**
 
-- [ ] F1 — collectionlog.net import                     status: planned       owner: —          updated: 2026-04-16
+- [/] F1 — collectionlog.net import                     status: in-progress   owner: cha-ndler  updated: 2026-05-14  pr: #465
 - [ ] F2 — TempleOSRS KC sync                           status: planned       owner: —          updated: 2026-04-16
 - [ ] F3 — Per-account kill-time learning               status: planned       owner: —          updated: 2026-04-16
 - [ ] F4 — Dry-streak feed                              status: planned       owner: —          updated: 2026-04-16

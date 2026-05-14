@@ -26,6 +26,8 @@ package com.collectionloghelper;
 
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.sync.CollectionLogNetImporter;
+import com.collectionloghelper.sync.ImportResult;
 import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.PlayerBankState;
@@ -56,6 +58,8 @@ import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
@@ -206,6 +210,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private com.collectionloghelper.guidance.GuidanceMovementTracker guidanceMovementTracker;
 
+	@Inject
+	private CollectionLogNetImporter collectionLogNetImporter;
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -260,6 +266,46 @@ public class CollectionLogHelperPlugin extends Plugin
 			() -> clientThread.invokeLater(guidanceSequencer::restartFromStep0),
 			() -> clientThread.invokeLater(guidanceSequencer::syncToCurrentState)
 		);
+
+		// Wire collectionlog.net import callback — fetches username from the logged-in player.
+		// Called from the EDT; submits async work and posts the result back via the panel method.
+		panel.setCollectionLogNetImportCallback(() ->
+		{
+			String username = client.getLocalPlayer() != null
+				? client.getLocalPlayer().getName()
+				: null;
+			if (username == null || username.isEmpty())
+			{
+				panel.onCollectionLogNetImportComplete("Log in first");
+				return;
+			}
+			Future<ImportResult> future =
+				collectionLogNetImporter.importProfile(username);
+			// Poll the result on a daemon thread so the EDT is not blocked
+			Executors.newSingleThreadExecutor(r ->
+			{
+				Thread t = new Thread(r, "clh-import-result-waiter");
+				t.setDaemon(true);
+				return t;
+			}).submit(() ->
+			{
+				try
+				{
+					ImportResult result = future.get();
+					panel.onCollectionLogNetImportComplete(result.toToastMessage());
+					if (result.isSuccess())
+					{
+						// Trigger a panel rebuild on the EDT
+						panel.rebuild();
+					}
+				}
+				catch (Exception e)
+				{
+					log.warn("collectionlog.net import result waiter failed", e);
+					panel.onCollectionLogNetImportComplete("collectionlog.net: error");
+				}
+			});
+		});
 
 		// Wire coordinator with references it needs from the plugin
 		guidanceCoordinator.setPluginInstance(this);
@@ -331,6 +377,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		chatCommandManager.unregisterCommand("clh");
 		authoringLogger.close();
+		collectionLogNetImporter.shutdown();
 		if (panel != null)
 		{
 			panel.shutDown();
