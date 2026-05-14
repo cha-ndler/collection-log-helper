@@ -62,6 +62,14 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigSection(
+		name = "Learning",
+		description = "Per-account learning features",
+		position = 160,
+		closedByDefault = true
+	)
+	String learningSection = "learning";
+
+	@ConfigSection(
 		name = "Developer",
 		description = "Development tools for authoring guidance sequences",
 		position = 200,
@@ -263,6 +271,18 @@ public interface CollectionLogHelperConfig extends Config
 	default Color overlayColor()
 	{
 		return new Color(0, 255, 255);
+	}
+
+	@ConfigItem(
+		keyName = "learnKillTimes",
+		name = "Learn Kill Times (opt-in)",
+		description = "Observe actual kill cycles and use your personal rolling average to refine efficiency estimates. Data is stored locally per account. Off by default.",
+		section = learningSection,
+		position = 0
+	)
+	default boolean learnKillTimes()
+	{
+		return false;
 	}
 
 	@ConfigItem(

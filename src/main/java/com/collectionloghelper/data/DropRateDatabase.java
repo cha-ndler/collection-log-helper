@@ -138,6 +138,16 @@ public class DropRateDatabase
 		return sourcesByNpcId.get(npcId);
 	}
 
+	/**
+	 * Returns the source name for the given NPC id, or {@code null} if no source maps to it.
+	 * Convenience accessor used by {@link com.collectionloghelper.learning.KillTimeTracker}.
+	 */
+	public String getSourceNameByNpcId(int npcId)
+	{
+		CollectionLogSource source = sourcesByNpcId.get(npcId);
+		return source != null ? source.getName() : null;
+	}
+
 	private void validateData()
 	{
 		for (CollectionLogSource source : sources)
