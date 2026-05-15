@@ -50,7 +50,16 @@ tasks.register('run', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
 	mainClass = 'com.collectionloghelper.CollectionLogHelperPluginTest'
 
-	jvmArgs "-ea"
+	// JDK 17+ requires explicit module opens for RuneLite's reflection paths.
+	// Without these, ReflectUtil.invalidateAnnotationCaches() throws
+	// InaccessibleObjectException during startup and reflection-heavy features
+	// (annotation cache busting, AWT/Swing internals, GPU plugin) degrade silently.
+	jvmArgs "-ea",
+		"--add-opens=java.base/java.lang=ALL-UNNAMED",
+		"--add-opens=java.base/java.lang.reflect=ALL-UNNAMED",
+		"--add-opens=java.base/java.util=ALL-UNNAMED",
+		"--add-opens=java.desktop/sun.awt=ALL-UNNAMED",
+		"--add-opens=java.desktop/javax.swing.text.html=ALL-UNNAMED"
 	args "--developer-mode", "--debug"
 }
 
