@@ -9,7 +9,7 @@
 > - `[!]` — Regression / failed (file a new issue and cross-link)
 > - `[?]` — Inconclusive (couldn't reproduce / state-dependent)
 
-> **Last updated**: 2026-05-14 (session: continuous Tier B/B.5/C/E/F implementation)
+> **Last updated**: 2026-05-15 (session: post-cascade validation pass for PRs #454–#476)
 
 ---
 
@@ -592,6 +592,275 @@ Implements B.5.1: adds `RequiredItemsChipPanel`, a horizontal strip of 28x28 ite
 | 11 | Stop guidance → chip strip disappears with the rest of the step strip | `[ ]` | |
 | 12 | Regression: the existing list-style "Items needed:" section (PR #398) still renders below the chip strip; both display surfaces active simultaneously | `[ ]` | |
 | 13 | `client.log` after 5 minutes of guidance with step transitions → ZERO `AssertionError` or `IllegalStateException` from `RequiredItemsChipPanel` or `ItemManager.getImage` | `[ ]` | |
+
+---
+
+## PR #455 — feat(guidance): B3 nested conditional steps *(merged 2026-05-14)*
+
+Adds `branches`/`children` schema support so a single step can branch on a condition. The sequencer descends into the matching branch and emits its sub-steps in order.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate any source whose guidance JSON declares a `branches` step (grep `drop_rates.json` / guidance JSONs for `branches`) → the step strip renders the resolved sub-steps in order | `[ ]` | |
+| 2 | Change the branch-deciding state (e.g. complete a precondition, equip an item) mid-guidance → the next tick re-resolves and the next step is the new branch's child | `[ ]` | |
+| 3 | Skip past a branch parent → no orphaned sub-step state | `[ ]` | |
+| 4 | `client.log` after 5 minutes guiding through a branched source → no `IllegalStateException` from the sequencer | `[ ]` | |
+
+---
+
+## PR #456 — feat(guidance): B2 tile-sequence pathing *(merged 2026-05-14)*
+
+Lets a single step declare a list of `tileSequence` waypoints. Sequencer advances waypoints in order with the same ARRIVE_AT_TILE distance heuristic.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate a source whose step uses `tileSequence` (grep `tileSequence` in `src/main/resources/com/collectionloghelper/`) → minimap arrow / world-map arrow target the **first** waypoint | `[ ]` | |
+| 2 | Walk to the first waypoint → the arrow advances to the second waypoint without the step itself advancing | `[ ]` | |
+| 3 | Reach the last waypoint → the step advances to the next step (not stuck on the final waypoint) | `[ ]` | |
+| 4 | Toggle Show Hint Arrow off → minimap arrow disappears but path display still updates per waypoint | `[ ]` | |
+
+---
+
+## PR #457 — feat(panel): B.5.3 source-level requirements header *(merged 2026-05-14)*
+
+New header band above the step strip listing source-level requirements (quest completions, skill levels, diary tiers) with met/unmet color coding.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with both quest and skill requirements (e.g. Cerberus → needs 91 Slayer + Ghosts Ahoy) → header band shows both rows | `[ ]` | |
+| 2 | Met requirement → row text is green | `[ ]` | |
+| 3 | Unmet requirement → row text is red with the gap value (e.g. "Slayer 87/91") | `[ ]` | |
+| 4 | Activate a source with no requirements → header band is hidden, no blank row | `[ ]` | |
+| 5 | Hover an unmet row → tooltip explains the gap | `[ ]` | |
+| 6 | Source with a diary requirement → row reads diary name + tier (e.g. "Western Hard") | `[ ]` | |
+| 7 | Switch sources without stopping → header rebuilds for the new source's requirements | `[ ]` | |
+
+---
+
+## PR #458 — feat(panel): B.5.4 collapsible step sections *(merged 2026-05-14)*
+
+Steps with the same `section` value group into a collapsible header. Active section auto-expands; others stay collapsed.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate a source whose guidance uses `section` (grep `"section":` in guidance JSONs) → steps render under collapsible section headers | `[ ]` | |
+| 2 | Active section auto-expands; non-active sections start collapsed | `[ ]` | |
+| 3 | Click a collapsed header → expands; click an expanded one → collapses | `[ ]` | |
+| 4 | Advance into a new section → that section auto-expands; previous section stays as user left it | `[ ]` | |
+| 5 | Source with no `section` declarations → no section headers (flat step list as before) | `[ ]` | |
+
+---
+
+## PR #459 — feat(overlay): C7 player-capability debug overlay *(merged 2026-05-14)*
+
+Dev-facing overlay showing the live `PlayerTravelCapabilities` state (quest flags, varbits, teleport access). Hidden behind a config toggle.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Plugin config → enable "Player capability debug overlay" → an overlay appears (top-left or movable) listing capability flags | `[ ]` | |
+| 2 | Toggle the config off → overlay disappears immediately, not after restart | `[ ]` | |
+| 3 | Each row shows true/false / value clearly (e.g. "fairyRings: true") | `[ ]` | |
+| 4 | Move the overlay via the standard RuneLite overlay drag → position persists | `[ ]` | |
+| 5 | `client.log` while overlay is on for 5 minutes → no exceptions from the overlay render path | `[ ]` | |
+
+---
+
+## PR #461 — feat(player): C3 diary tier state *(merged 2026-05-14)*
+
+Adds `DiaryTierState` so guidance / requirements can reference diary tiers (Easy/Medium/Hard/Elite) per region.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Open the plugin sidebar; with at least one diary completed at any tier, activate a source that reads diary tier (or check the C7 debug overlay if PR #459 is enabled) → diary tier shows the correct value | `[ ]` | |
+| 2 | Complete a diary tier mid-session → state updates within ~1 tick of the varbit change | `[ ]` | |
+| 3 | Source with diary requirement in header (PR #457) reflects current tier, not stale | `[ ]` | |
+
+---
+
+## PR #462 — feat(player): C5 quest-progress state beyond completion *(merged 2026-05-14)*
+
+Extends quest state from binary complete/not-complete to per-quest progress varbit so requirements can gate on partial completion.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | With a quest in IN_PROGRESS state, activate a source that requires partial progress (or check the C7 overlay) → the partial state surfaces correctly | `[ ]` | |
+| 2 | Advance the quest one step mid-session → state updates on the next tick | `[ ]` | |
+| 3 | Quest already COMPLETED → state still reads complete (regression check) | `[ ]` | |
+
+---
+
+## PR #463 — feat(player): C2 equipped-item state detection *(merged 2026-05-14)*
+
+`PlayerInventoryState` now tracks equipped items in addition to inventory. Required-item chips already turn green when an item is equipped (validated under PR #452); this PR is the underlying state.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Equip a `requiredItemIds` item (e.g. tinderbox on Mort'ton step 1) → chip turns green, tooltip "(equipped)" | `[ ]` | |
+| 2 | Unequip back to inventory → chip stays green, tooltip "(in inventory)" | `[ ]` | |
+| 3 | Move from equipped → bank → chip turns white, tooltip "(in bank)" | `[ ]` | |
+| 4 | Equip across both gear slot AND inventory copy → chip green; no duplicate counting that would flicker | `[ ]` | |
+
+---
+
+## PR #464 — feat(efficiency): E1 cross-source per-item recommendation mode *(merged 2026-05-14)*
+
+`CrossSourceRanker` + `CrossSourceRecommendation` + `enableCrossSourceMode` config flag. **Panel integration deferred** per ROADMAP — there is no user-visible UI yet. Validation is light.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Plugin config → toggle `enableCrossSourceMode` on/off → no errors / no panel breakage | `[ ]` | |
+| 2 | `client.log` does not log any `CrossSourceRanker` exception during 5 min of normal play with the flag on | `[ ]` | |
+| 3 | (Followup) once panel surface lands, re-validate ranking output | `[ ]` | deferred |
+
+---
+
+## PR #465 — feat(sync): F1 collectionlog.net profile import *(merged 2026-05-14)*
+
+Sidebar gets a "Sync from collectionlog.net" button that fetches the logged-in player's profile and marks every obtained item. Post-#476: response capped at 10 MB; daemon thread named `clh-http-result-waiter`.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Logged out → button text reads "Log in first" when clicked | `[ ]` | |
+| 2 | Logged in as a user with a public collectionlog.net profile → click → button text transitions through "Syncing…" → "Synced N items" within a few seconds | `[ ]` | |
+| 3 | Logged in as a username with no collectionlog.net profile → toast reads "user not found" or similar; no exception | `[ ]` | |
+| 4 | Panel rebuilds after a successful sync — obtained counts increase in Efficient / Statistics modes | `[ ]` | |
+| 5 | Click the button twice in quick succession → second click is debounced or queued; no double-import | `[ ]` | |
+| 6 | `client.log` after sync at INFO level → does NOT contain the player's RSN (post-#476: this was downgraded to DEBUG) | `[ ]` | |
+
+---
+
+## PR #466 — feat(learning): F3 per-account kill-time learning *(merged 2026-05-14)*
+
+Opt-in `KillTimeTracker` writes per-source kill-time observations to a per-character file. UI surface is minimal (Statistics mode may surface the learned value; primary effect is in efficiency math).
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Plugin config → enable `enablePersonalKillTimeLearning` → no error; debug log "KillTimeTracker enabled" or similar appears once | `[ ]` | |
+| 2 | Kill an NPC during a guidance session → expected per-character file path under `~/.runelite/collection-log-helper/<char>/` gains a kill-time entry | `[ ]` | |
+| 3 | Disable the flag → no further file writes (verify by file mtime) | `[ ]` | |
+| 4 | Switch characters → new character gets its own file, prior character's data untouched | `[ ]` | |
+
+---
+
+## PR #467 — feat(meta): E2 meta-update dating on recommendations *(merged 2026-05-14)*
+
+Drop-rate / kill-time recommendations carry an updated-on date so users can see how stale the data is.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Hover an entry in Efficient mode → tooltip or sub-line shows "Updated YYYY-MM-DD" or similar | `[ ]` | |
+| 2 | Cross-check the displayed date against the source's `metaUpdated` field in `drop_rates.json` | `[ ]` | |
+| 3 | Source with no `metaUpdated` → no broken "Updated null" text; either omitted or shows a sensible fallback | `[ ]` | |
+
+---
+
+## PR #468 — feat(sync): F2 TempleOSRS KC sync *(merged 2026-05-14)*
+
+Sidebar gets a "Sync KC from TempleOSRS" button mapping TempleOSRS activities to CLH sources. Post-#476: response capped at 1 MB; shares the `clh-http-result-waiter` daemon executor.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Logged in as a TempleOSRS-tracked RSN → click "Sync KC from TempleOSRS" → button transitions through "Syncing…" → "TempleOSRS KC synced: N sources updated" | `[ ]` | |
+| 2 | Chat receives `<col=00c8c8>[Collection Log Helper]</col> TempleOSRS KC synced: …` confirmation message | `[ ]` | |
+| 3 | A boss the player has KC on (e.g. Vorkath) shows the synced KC reflected in Efficient mode's per-source KC line | `[ ]` | |
+| 4 | TempleOSRS returns an unknown activity → debug log "TempleOSRS KC entry 'X' not found in CLH database — skipping" appears; sync still completes | `[ ]` | |
+| 5 | Unknown / typo'd RSN → fail-soft chat / button text; no exception | `[ ]` | |
+| 6 | `client.log` INFO level after sync → does NOT contain the RSN (post-#476 downgrade) | `[ ]` | |
+| 7 | Click the button twice → no thread accumulation; `jstack` or thread dump shows at most ONE `clh-http-result-waiter` thread (post-#476 leak fix) | `[ ]` | |
+
+---
+
+## PR #469 — feat(learning): F4 dry-streak feed *(merged 2026-05-14)*
+
+`DryStreakAnalyzer` surfaces the player's longest dry streaks per source. Likely a Statistics-mode panel section.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Open the Statistics mode (or wherever the dry-streak feed renders) → a list / table shows N "driest" sources with KC and expected-KC values | `[ ]` | |
+| 2 | Each row shows source name + current KC + "X.Yx expected" or similar | `[ ]` | |
+| 3 | Sources with KC=0 are omitted or shown last (don't dominate the list) | `[ ]` | |
+| 4 | After a successful sync (F1 or F2) that bumps a KC → the feed refreshes within a rebuild | `[ ]` | |
+| 5 | No source data → empty-state message rather than a broken table | `[ ]` | |
+
+---
+
+## PR #470 — feat(player): C1 POH teleport inventory *(merged 2026-05-14)*
+
+Tracks the player's POH teleport access (varbit-driven, with a config override). Powers source unlock checks where POH teleport is the canonical fast route.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Inside POH with mounted teleports → C7 debug overlay shows the corresponding teleport flags as true | `[ ]` | |
+| 2 | Override the config flag for a teleport you don't own → flag reflects override on next tick | `[ ]` | |
+| 3 | Source that requires a POH teleport (e.g. quest-cape with mounted glory) — requirements header (PR #457) treats it as met | `[ ]` | |
+| 4 | Leave POH and rebuild varbits — state remains consistent (no flap to false) | `[ ]` | |
+
+---
+
+## PR #471 — feat(player): C4 skill-cape perk state *(merged 2026-05-14)*
+
+Detects which skill capes the player owns (and which is currently equipped/in-POH-rack) to surface cape-perk availability.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Wear a skill cape → C7 debug overlay or relevant guidance treats the perk as available | `[ ]` | |
+| 2 | Have the cape in bank only (not equipped) → perk is still considered "owned" if the data model says ownership, NOT only equipped | `[ ]` | confirm intent: is "perk" gated on ownership or on equipped? both behaviours are valid; document expected |
+| 3 | No skill cape → perk is unavailable; requirements header reflects the gap | `[ ]` | |
+| 4 | Swap capes mid-session → perk state updates on next tick | `[ ]` | |
+
+---
+
+## PR #472 — feat(panel): B.5.2 recommended items section (advisory) *(merged 2026-05-14)*
+
+Below the required-items chips, a `recommendedItemIds` section shows nice-to-have items (food, prayer pots, etc.) advisory-only — no red borders, no completion gating.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate a source whose step has `recommendedItemIds` (grep `recommendedItemIds` in guidance resources) → a second chip strip appears labeled "Recommended" or similar, below the required chips | `[ ]` | |
+| 2 | Held recommended items render with a neutral / green border; missing ones render without a red border (advisory) | `[ ]` | |
+| 3 | Source with no `recommendedItemIds` → recommended strip is hidden, no empty header | `[ ]` | |
+| 4 | Switch sources without stopping → recommended strip refreshes; no leak from prior source | `[ ]` | |
+| 5 | Step advance → recommended strip swaps to the new step's recommendations in same tick | `[ ]` | |
+
+---
+
+## PR #473 — feat(guidance): B5 puzzle/dynamic step type (Wintertodt pilot) *(merged 2026-05-14)*
+
+`DynamicTargetEvaluator` interface + registry; `WintertodtBrazierEvaluator` is the pilot — its target retargets dynamically based on the active brazier each tick.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate Wintertodt guidance → during a game, the highlighted brazier is one of the live (lit) braziers, not a static cache point | `[ ]` | |
+| 2 | Brazier breaks / extinguishes → highlight retargets within ~1 tick to a different valid brazier | `[ ]` | |
+| 3 | Between games (lobby) → guidance does not crash; falls back to a sensible default target or pauses | `[ ]` | |
+| 4 | Stop guidance → all per-tick evaluator state is released; `client.log` shows no leak warnings | `[ ]` | |
+
+---
+
+## PR #474 — feat(guidance): B6 Java helper pilot — Cerberus *(merged 2026-05-14)*
+
+`GuidanceHelper` interface + `GuidanceHelperRegistry`; `CerberusHelper` is the pilot. The sequencer routes through the helper when a source declares a `guidanceHelperKey`. Currently mirrors the JSON steps as a no-op consistency check; future hooks will add ghost-color / soulflare logic.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate Cerberus guidance → behaviour is **identical** to pre-#474 master (steps render in same order, panel shows same chips) — pilot is a no-op mirror | `[ ]` | |
+| 2 | `client.log` on activation shows DEBUG "CerberusHelper attached" (or absence of any helper-related WARN) | `[ ]` | |
+| 3 | Stop guidance → no leftover helper state; reactivate → re-attaches cleanly | `[ ]` | |
+| 4 | Regression: activate a non-Cerberus source → no helper routing fires (regression guard) | `[ ]` | |
+
+---
+
+## PR #476 — fix(post-cascade): executor leak, duplicate sync block, HTTP size cap, RSN log level *(merged 2026-05-15)*
+
+Bug-fix bundle from the post-cascade review pass. Two HIGH (executor leak, duplicate cache-fresh block) and two MEDIUM (response size cap, RSN at info-level).
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Click "Sync from collectionlog.net" 5 times in succession → thread dump (`jstack <pid>`) or `client.log` thread state shows **at most ONE** `clh-http-result-waiter` thread alive | `[ ]` | |
+| 2 | Click "Sync KC from TempleOSRS" 5 times in succession → same: at most one `clh-http-result-waiter` thread alive | `[ ]` | |
+| 3 | Login with a cache-fresh state → SYNCED badge appears exactly once; chat does NOT receive two "Cache is fresh" lines; efficiency export runs exactly once (check via `client.log` for "exported" / "TempleOSRS KC sync complete" duplicates) | `[ ]` | |
+| 4 | RuneLite `client.log` at INFO level after any TempleOSRS or collectionlog.net sync → grep for your RSN → **zero matches** at INFO; matches only allowed at DEBUG/WARN | `[ ]` | |
+| 5 | (Hard to reproduce naturally) If a collectionlog.net or TempleOSRS response somehow exceeded the cap → button text reads service-unavailable / fail-soft; no OOM crash | `[?]` | optional — depends on injecting a synthetic large response |
 
 ---
 
