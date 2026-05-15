@@ -61,6 +61,9 @@ public class CollectionLogNetImporter
 {
 	static final String BASE_URL = "https://api.collectionlog.net/collectionlog/user/";
 
+	/** Hard cap on response body size to prevent OOM from a misbehaving/malicious server. */
+	private static final long MAX_RESPONSE_BYTES = 10L * 1024L * 1024L;
+
 	private final OkHttpClient httpClient;
 	private final Gson gson;
 	private final PlayerCollectionState collectionState;
@@ -140,7 +143,21 @@ public class CollectionLogNetImporter
 				return ImportResult.serviceUnavailable(code);
 			}
 
+			long contentLength = body.contentLength();
+			if (contentLength > MAX_RESPONSE_BYTES)
+			{
+				log.warn("collectionlog.net: response too large ({} bytes) for user '{}'",
+					contentLength, username);
+				return ImportResult.serviceUnavailable(code);
+			}
+
 			String json = body.string();
+			if (json.length() > MAX_RESPONSE_BYTES)
+			{
+				log.warn("collectionlog.net: response body exceeded {} bytes for user '{}'",
+					MAX_RESPONSE_BYTES, username);
+				return ImportResult.serviceUnavailable(code);
+			}
 			return parseAndMark(json, username);
 		}
 		catch (IOException e)
@@ -253,7 +270,7 @@ public class CollectionLogNetImporter
 				}
 			}
 
-			log.info("collectionlog.net import complete for '{}': {} items marked, {} skipped",
+			log.debug("collectionlog.net import complete for '{}': {} items marked, {} skipped",
 				username, marked, skipped);
 			return ImportResult.success(marked);
 		}

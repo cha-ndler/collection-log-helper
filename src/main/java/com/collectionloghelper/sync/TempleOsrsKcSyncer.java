@@ -70,6 +70,9 @@ public class TempleOsrsKcSyncer
 {
 	static final String BASE_URL = "https://templeosrs.com/api/player_info.php";
 
+	/** Hard cap on response body size to prevent OOM from a misbehaving/malicious server. */
+	private static final long MAX_RESPONSE_BYTES = 1L * 1024L * 1024L;
+
 	/**
 	 * Static name mapping from TempleOSRS display name to CLH source name.
 	 *
@@ -163,10 +166,29 @@ public class TempleOsrsKcSyncer
 				return SyncResult.failure(msg);
 			}
 
-			String body = response.body() != null ? response.body().string() : null;
-			if (body == null || body.isEmpty())
+			if (response.body() == null)
 			{
 				return SyncResult.failure("Empty response from TempleOSRS");
+			}
+
+			long contentLength = response.body().contentLength();
+			if (contentLength > MAX_RESPONSE_BYTES)
+			{
+				log.warn("TempleOSRS response too large ({} bytes) for user '{}'",
+					contentLength, username);
+				return SyncResult.failure("TempleOSRS response exceeded size cap");
+			}
+
+			String body = response.body().string();
+			if (body.isEmpty())
+			{
+				return SyncResult.failure("Empty response from TempleOSRS");
+			}
+			if (body.length() > MAX_RESPONSE_BYTES)
+			{
+				log.warn("TempleOSRS response body exceeded {} bytes for user '{}'",
+					MAX_RESPONSE_BYTES, username);
+				return SyncResult.failure("TempleOSRS response exceeded size cap");
 			}
 
 			return parseResponse(body);
