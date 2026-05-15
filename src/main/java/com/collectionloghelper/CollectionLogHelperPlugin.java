@@ -65,8 +65,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
@@ -242,8 +244,13 @@ public class CollectionLogHelperPlugin extends Plugin
 	private volatile boolean pendingTravelVarbitRefresh = false;
 	private BufferedImage collectionLogIcon;
 
-	// Deferred cache-fresh check: set once the full sync completes
-	private boolean hasCompletedFullSync;
+	/**
+	 * Daemon executor used to wait on async sync futures (collectionlog.net import,
+	 * TempleOSRS KC sync) off the EDT/client thread. Lazily created in startUp and
+	 * shut down in shutDown; one shared instance prevents the per-click executor
+	 * leak that the ad-hoc {@code Executors.newSingleThreadExecutor()} pattern caused.
+	 */
+	private ExecutorService httpResultExecutor;
 
 	/**
 	 * Player location cached on the client thread each game tick.
@@ -265,6 +272,13 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		database.load();
 		slayerMasterDatabase.load();
+
+		httpResultExecutor = Executors.newSingleThreadExecutor(r ->
+		{
+			Thread t = new Thread(r, "clh-http-result-waiter");
+			t.setDaemon(true);
+			return t;
+		});
 
 		panel = new CollectionLogHelperPanel(
 			config, database, collectionState, calculator, clueEstimator,
@@ -302,13 +316,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			}
 			Future<ImportResult> future =
 				collectionLogNetImporter.importProfile(username);
-			// Poll the result on a daemon thread so the EDT is not blocked
-			Executors.newSingleThreadExecutor(r ->
-			{
-				Thread t = new Thread(r, "clh-import-result-waiter");
-				t.setDaemon(true);
-				return t;
-			}).submit(() ->
+			// Poll the result on the shared daemon executor so the EDT is not blocked
+			httpResultExecutor.submit(() ->
 			{
 				try
 				{
@@ -418,6 +427,11 @@ public class CollectionLogHelperPlugin extends Plugin
 		syncStateCoordinator.reset();
 		sourceKcStore.clear();
 		templeOsrsKcSyncer.shutdown();
+		if (httpResultExecutor != null)
+		{
+			httpResultExecutor.shutdownNow();
+			httpResultExecutor = null;
+		}
 		sourcesWithMissingItems.clear();
 		pendingPanelRebuild = false;
 		rankedSourcesDirty = true;
@@ -738,37 +752,6 @@ public class CollectionLogHelperPlugin extends Plugin
 			}
 		}
 
-		// Deferred cache-fresh check: varps aren't loaded during LOGGED_IN or
-		// RuneScapeProfileChanged, so retry here once totalObtained becomes valid
-		if (!hasCompletedFullSync && collectionState.getTotalObtained() > 0
-			&& collectionState.isCacheFresh())
-		{
-			dataSyncState.setCollectionLogSynced(true);
-			hasCompletedFullSync = true;
-			log.info("Cache is fresh (varp {} matches last sync) — skipping sync prompt",
-				collectionState.getTotalObtained());
-
-			if (playerBankState.loadFromCache())
-			{
-				dataSyncState.setBankScanned(true);
-				log.info("Bank cache loaded — skipping bank scan prompt");
-			}
-
-			exportEfficiencyIfEnabled();
-
-			if (panel != null)
-			{
-				panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
-					collectionState.getTotalObtained());
-				panel.updateDataSyncWarning();
-			}
-			pendingPanelRebuild = true;
-			rankedSourcesDirty = true;
-
-			guidanceOverlay.setShowCollectionLogReminder(false);
-			guidanceOverlay.setShowBankReminder(false);
-		}
-
 		// Dispatch deferred ShortestPath "path" and world map arrow via coordinator
 		guidanceCoordinator.tick();
 
@@ -970,17 +953,17 @@ public class CollectionLogHelperPlugin extends Plugin
 			return;
 		}
 
-		log.info("Requesting TempleOSRS KC sync for '{}'", playerName);
+		log.debug("Requesting TempleOSRS KC sync for '{}'", playerName);
 
-		java.util.concurrent.Future<SyncResult> future = templeOsrsKcSyncer.syncKc(playerName);
+		Future<SyncResult> future = templeOsrsKcSyncer.syncKc(playerName);
 
-		// Wait for the result on a separate thread so the EDT is not blocked
-		java.util.concurrent.Executors.newSingleThreadExecutor().submit(() ->
+		// Wait for the result on the shared daemon executor so the EDT is not blocked
+		httpResultExecutor.submit(() ->
 		{
 			SyncResult result;
 			try
 			{
-				result = future.get(30, java.util.concurrent.TimeUnit.SECONDS);
+				result = future.get(30, TimeUnit.SECONDS);
 			}
 			catch (Exception e)
 			{
