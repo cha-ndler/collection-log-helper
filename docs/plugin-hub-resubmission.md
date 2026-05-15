@@ -71,10 +71,12 @@ The tag was originally drafted locally on 2026-04-17 (commit `b9518653`).  That 
 on 2026-05-10 (PRs #372, #384, #386–#394).  The tag will be deleted locally and re-cut on
 the current `master` HEAD once this CHANGELOG/doc refresh PR merges.
 
-**New earliest-push date**: 7 calendar days after the CHANGELOG/doc refresh PR merges to
-`master` (final merge in the v1.0.0-hub content set).  Assuming that merge lands on
-2026-05-12, the earliest push date is **2026-05-19**.  If any additional merges land
-during the window — for any reason — the clock resets to 7 days from the latest merge.
+**New earliest-push date**: 7 calendar days after the final merge in the v1.0.0-hub
+content set lands on `master`.  The Tier B/B.5/C/E/F cascade closed on 2026-05-14 and
+the JDK 17 build fix ([#475](../../pull/475)) merged 2026-05-15, so the earliest push
+date is **2026-05-22**.  If any additional merges land during the window — for any
+reason, including the post-cascade review fixes — the clock resets to 7 days from the
+latest merge.
 
 ---
 
