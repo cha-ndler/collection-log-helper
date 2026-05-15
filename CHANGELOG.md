@@ -4,6 +4,64 @@
 
 _(none — all queued changes folded into 1.0.0-hub below.)_
 
+## 1.0.0-hub — 2026-05-15
+
+### Added
+
+- **Composable guidance schema** — tile-sequence pathing (B2, [#456](../../pull/456)),
+  nested conditional steps (B3, [#455](../../pull/455)), and puzzle/dynamic step type
+  with `DynamicTargetEvaluator` + Wintertodt brazier pilot (B5, [#473](../../pull/473)).
+- **Hybrid Java helper pilot** — `GuidanceHelper` interface + registry routing in the
+  sequencer; Cerberus pilot (B6, [#474](../../pull/474)). Closes D-01.
+- **Per-step UI parity with Quest Helper** — required-items chips with bank-scan colors
+  (B.5.1, [#452](../../pull/452)), advisory recommended-items section
+  (B.5.2, [#472](../../pull/472)), source-level requirements header
+  (B.5.3, [#457](../../pull/457)), collapsible step sections
+  (B.5.4, [#458](../../pull/458)), dialog highlight polish
+  (B.5.7, [#449](../../pull/449)).
+- **Player-aware state model (Tier C)** — POH teleport inventory
+  (C1, [#470](../../pull/470)), equipped-item state (C2, [#463](../../pull/463)),
+  diary tier state (C3, [#461](../../pull/461)), skill-cape perk state
+  (C4, [#471](../../pull/471)), partial-quest state (C5, [#462](../../pull/462)),
+  and a dev-facing player-capability debug overlay (C7, [#459](../../pull/459)).
+- **Cross-source recommendation mode** — `CrossSourceRanker` +
+  `CrossSourceRecommendation` + `enableCrossSourceMode` config flag; panel integration
+  deferred (E1, [#464](../../pull/464)).
+- **Meta-update dating** — recommendations carry meta-update timestamps so stale
+  guidance is visible at a glance (E2, [#467](../../pull/467)).
+- **External profile sync** — collectionlog.net import (F1, [#465](../../pull/465))
+  and TempleOSRS KC sync (F2, [#468](../../pull/468)).
+- **Per-account kill-time learning (opt-in)** — `KillTimeTracker` + on-disk
+  personalized estimates per character with a config flag and 19 tests
+  (F3, [#466](../../pull/466)).
+- **Dry-streak feed** — surfaces the player's longest dry streaks per source
+  (F4, [#469](../../pull/469)).
+- **CI + coverage gate** — JaCoCo report + verification at 45% (F5, [#454](../../pull/454))
+  and GitHub Actions build+test workflow on PR/push (F6, [#451](../../pull/451)).
+
+### Fixed
+
+- **JDK 17 startup** — `gradlew run` no longer throws `InaccessibleObjectException` in
+  RuneLite's `ReflectUtil.invalidateAnnotationCaches` on JDK 17+; added five
+  `--add-opens` flags to the run task ([#475](../../pull/475)).
+- **Duplicate tier label on search hover** — search-result rows no longer show two
+  tier labels stacked ([#446](../../pull/446)).
+- **Tier 3 auto-completion backfill** — two sources gained
+  `CHAT_MESSAGE_RECEIVED`-based completion detection ([#448](../../pull/448),
+  [#306](../../issues/306)).
+
+### Notes
+
+- **Sailing island-instance vs port coords** — triaged ([#450](../../pull/450),
+  [#314](../../issues/314)); follow-up data PRs deferred until Sailing mechanics
+  stabilize.
+- **D1 deep-guidance bar** — closed retroactively ([#447](../../pull/447)) — the
+  10-element authoring checklist was already shipped in [#358](../../pull/358).
+- **B.5.5 worldmap arrow** — 5/6 sub-requirements confirmed shipped via prior PRs
+  ([#453](../../pull/453)); blocked on a pending color constant PR.
+- **In-game validation log** — `docs/in-game-validation-log.md` records the
+  2026-05-14 PR-batch validation pass ([#460](../../pull/460)).
+
 ## 1.0.0-hub — 2026-05-12
 
 ### Changed
