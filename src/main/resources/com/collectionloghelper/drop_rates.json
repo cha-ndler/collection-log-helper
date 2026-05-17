@@ -3661,7 +3661,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Kraken Cove north of Piscatoris Fishing Colony (fairy ring AKQ then run west)",
+        "description": "Travel to the Kraken Cove south-west of Piscatoris Fishing Colony (fairy ring AKQ then run west)",
         "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
@@ -10272,7 +10272,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Kraken Cove north of Piscatoris Fishing Colony (fairy ring AKQ then run west). 87 Slayer, on task only",
+        "description": "Travel to the Kraken Cove south-west of Piscatoris Fishing Colony (fairy ring AKQ then run west). 87 Slayer, on task only",
         "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
