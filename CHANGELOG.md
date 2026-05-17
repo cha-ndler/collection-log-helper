@@ -2,7 +2,18 @@
 
 ## Unreleased
 
-_(none — all queued changes folded into 1.0.0-hub below.)_
+### Fixed
+
+- **C7 player-capability debug overlay surfaces Tier C detection state** —
+  `PlayerCapabilityDebugOverlay` now renders one section per Tier-C detector
+  (C1 POH teleport inventory, C2 equipped items, C3 diary tiers per region,
+  C4 skill cape perks, C5 partial-quest sub-milestones) in addition to the
+  existing account summary. Unblocks in-game validation of PRs #461, #462,
+  #463, #470, #471 — previously the overlay only exposed top-level stats so
+  authors had no way to confirm those detectors were wiring up correctly.
+  The "Quests done" label is renamed to "Quest entries" to reduce confusion
+  vs. the in-game Quest List count (full reclassification tracked under
+  [#487](../../issues/487)). Closes [#486](../../issues/486).
 
 ## 1.0.0-hub — 2026-05-15
 
