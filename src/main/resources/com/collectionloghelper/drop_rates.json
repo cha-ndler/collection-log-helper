@@ -9679,7 +9679,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Asgarnian Ice Dungeon (fairy ring AKQ or Mudskipper Point teleport)",
+        "description": "Travel to the Asgarnian Ice Dungeon (fairy ring AIQ to Mudskipper Point, then run south)",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
@@ -19310,7 +19310,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Asgarnian Ice Dungeon (fairy ring AKQ). Use the tunnel shortcut with 60 Agility, or giantsoul amulet teleport",
+        "description": "Travel to the Asgarnian Ice Dungeon (fairy ring AIQ to Mudskipper Point, then run south). Use the tunnel shortcut with 60 Agility, or giantsoul amulet teleport",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
