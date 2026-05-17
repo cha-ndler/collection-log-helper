@@ -3661,13 +3661,13 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Kraken Cove in the Fremennik Slayer Dungeon (fairy ring AJR or slayer ring)",
+        "description": "Travel to the Kraken Cove north of Piscatoris Fishing Colony (fairy ring AKQ then run west)",
         "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Fairy ring AKQ, or Slayer ring to Stronghold Slayer Cave"
+        "travelTip": "Fairy ring AKQ then run west to Kraken Cove"
       },
       {
         "description": "Enter the crevice to access the Kraken's cave",
@@ -10272,7 +10272,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Kraken Cove (fairy ring AKQ or slayer ring to Fremennik Slayer Dungeon)",
+        "description": "Travel to the Kraken Cove north of Piscatoris Fishing Colony (fairy ring AKQ then run west). 87 Slayer, on task only",
         "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
