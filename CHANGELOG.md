@@ -2,7 +2,13 @@
 
 ## Unreleased
 
-_(none — all queued changes folded into 1.0.0-hub below.)_
+### Fixed
+
+- **Asgarnian Ice Dungeon fairy ring code corrected** — Royal Titans and Skeletal Wyverns
+  guidance previously routed via fairy ring AKQ, which actually teleports to Piscatoris
+  (Kandarin), not Asgarnia. Both step descriptions now use AIQ (Mudskipper Point, south
+  of Port Sarim, adjacent to the dungeon entrance). Closes
+  [#484](../../issues/484).
 
 ## 1.0.0-hub — 2026-05-15
 
