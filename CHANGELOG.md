@@ -4,6 +4,18 @@
 
 ### Fixed
 
+- **Kraken and Cave Kraken step descriptions corrected to point at Piscatoris** —
+  both sources had stale step descriptions referencing the "Fremennik Slayer
+  Dungeon" and a non-existent slayer-ring teleport to Kraken Cove. The
+  `worldX/worldY`, `npcId`, `locationDescription`, and source-level `travelTip`
+  fields were already correct (Piscatoris Fishing Colony, fairy ring `AKQ`); only
+  the per-step `description` (and step-level `travelTip` on the boss source) was
+  misleading. Descriptions now correctly state Kraken Cove is south-west of the
+  Piscatoris Fishing Colony, per the wiki. Closes
+  [#494](../../issues/494). Surfaced during the [#484](../../issues/484)
+  fairy-ring audit and rolled forward as part of the broader pre-hub data
+  pass tracked in [#495](../../issues/495).
+
 - **ARRIVE_AT_TILE auto-advance in instanced regions** — `resolvePlayerWorldLocation`
   now translates the player's local point back to overworld template coordinates
   via `WorldPoint.fromLocalInstance` when the player is inside an instanced
