@@ -2,7 +2,14 @@
 
 ## Unreleased
 
-_(none — all queued changes folded into 1.0.0-hub below.)_
+### Fixed
+
+- **C7 overlay quest-count row label disambiguated** — renamed `"Quests done"`
+  to `"Quests + miniquests"` and added a dim explanatory sub-row
+  `"(RuneLite enum count)"`. The previous label invited confusion when the
+  number exceeded the player-visible in-game Quest List count (e.g. 207 vs
+  179/179) because the RuneLite Quest enum includes miniquests + RFD
+  sub-entries. Closes [#487](../../issues/487).
 
 ## 1.0.0-hub — 2026-05-15
 

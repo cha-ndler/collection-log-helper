@@ -131,9 +131,17 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 			addRow("Task", "none");
 		}
 
-		// Quest completions (count of FINISHED quests, not the full list)
+		// Quest completions. The RuneLite Quest enum includes miniquests and
+		// some sub-entries (RFD subquests, etc.) as distinct values, so this
+		// count exceeds the player-visible "Completed N/N" shown in the in-game
+		// Quest List. Labeled "Quests + miniquests" to make the discrepancy
+		// self-explaining; see #487 for the longer-term reclassification.
 		int finishedCount = countFinishedQuests();
-		addRow("Quests done", String.valueOf(finishedCount));
+		addRow("Quests + miniquests", String.valueOf(finishedCount));
+		panelComponent.getChildren().add(LineComponent.builder()
+			.left("  (RuneLite enum count)")
+			.leftColor(new Color(140, 140, 140))
+			.build());
 
 		// POH availability
 		int pohLocation = safeVarbit(VARBIT_POH_LOCATION);
