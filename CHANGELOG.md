@@ -4,6 +4,16 @@
 
 ### Fixed
 
+- **Long step descriptions no longer overflow the guidance panel** —
+  `StepProgressView.showStep` now wraps the step text in
+  `<html><body style='width:220px'>…</body></html>` so Swing word-wraps
+  long step descriptions instead of stretching the JLabel's preferred
+  width past the panel's clip region. Most visible on clue tiers where
+  step strings like "Buy a sleek hairband from the Falador hairdresser"
+  pushed content outside the sidebar box. Closes
+  [#483](../../issues/483) (rendering half; the auto-advance half is
+  covered by [#485](../../issues/485)).
+
 - **Kraken and Cave Kraken step descriptions corrected to point at Piscatoris** —
   both sources had stale step descriptions referencing the "Fremennik Slayer
   Dungeon" and a non-existent slayer-ring teleport to Kraken Cove. The
