@@ -595,6 +595,233 @@ Implements B.5.1: adds `RequiredItemsChipPanel`, a horizontal strip of 28x28 ite
 
 ---
 
+## In-game validation pass — 2026-05-16 (unvalidated PRs #454–#476) (in-progress)
+
+The 2026-05-14 cascade merged ~24 PRs across Tiers B/B.5/C/E/F. None have a validation date yet. Pre-validation static review flagged 5 issues (#478–#482) that should be fixed in follow-up PRs but do NOT block in-game validation. Phased walkthrough below.
+
+> **2026-05-16 attempt 1 — not started.** A subagent walkthrough was launched to drive this rubric interactively. Dev client (`./gradlew run`) started successfully on JDK 17 — plugin registered all event subscribers, `CollectionLogHelperPlugin started`, RuneLite frame shown at 13:22:39 EDT (PR #475 verified). However the subagent environment did not have `AskUserQuestion` registered (deferred-tool manifest excluded it; keyword search returned no match), and the background gradle task was then killed externally before any rubric step could be exercised. All `[?]` rows below remain unchanged. Re-run from a session that has `AskUserQuestion` available, or have the parent agent drive the rubric directly using the runelite-dev MCP screenshot tools.
+
+### Phase 1 — Smoke (run first)
+
+Use the existing "Regression smoke test" section near the end of this file. Do not proceed to later phases if any smoke row fails.
+
+### Phase 2 — New dispatch paths (highest regression risk)
+
+#### PR #473 — B5 puzzle/dynamic step type (Wintertodt pilot) *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Activate guidance on Wintertodt → step description loads, hint arrow points at an active brazier | `[?]` | |
+| 2 | A brazier breaks mid-round → next tick, hint arrow / minimap arrow retargets to the next-nearest active brazier | `[?]` | |
+| 3 | All braziers active simultaneously → arrow points at nearest active | `[?]` | |
+| 4 | Round ends (subgame between waves) → no NPE / ConcurrentModification in `client.log` from `WintertodtBrazierEvaluator` or `GuidanceOverlayCoordinator.tick` | `[?]` | |
+
+#### PR #474 — B6 Java helper pilot (Cerberus) *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Activate guidance on Cerberus → sequence loads; step list matches JSON baseline (no missing or duplicated steps) | `[?]` | |
+| 2 | Walk through ghost phase → step transitions trigger correctly | `[?]` | |
+| 3 | Stop and restart guidance on Cerberus → clean cycle, no orphaned overlays | `[?]` | |
+| 4 | Activate any non-Cerberus source (e.g. Vorkath) → JSON sequencer still drives; helper does not incorrectly intercept | `[?]` | |
+
+#### PR #456 — B2 tile-sequence pathing *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with a `waypoints` step (check `drop_rates.json` for `"waypoints"` — if no source backfilled yet, mark N/A) | `[?]` | |
+| 2 | Walk across each waypoint in order → step completes only after the last waypoint is crossed | `[?]` | |
+| 3 | Teleport past a waypoint (skipping it) → step does not auto-complete | `[?]` | |
+
+#### PR #455 — B3 nested conditional steps *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with nested `conditionalAlternatives` (search `drop_rates.json` for nesting) | `[?]` | |
+| 2 | Player state matches nested branch → step text/target reflects the override | `[?]` | |
+| 3 | Player state changes mid-step → branch re-evaluates without restart | `[?]` | |
+
+### Phase 3 — Player-aware state (validate C1–C5 via the C7 debug overlay)
+
+#### PR #459 — C7 player-capability debug overlay *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Enable **Show Player Capability Debug Overlay** in config → overlay renders on the game screen | `[x]` | 2026-05-16: overlay renders with basic stats block |
+| 2 | Overlay shows: equipped items count, diary tiers per region, POH teleports detected, skill-cape perks detected, partial-quest state | `[!]` | 2026-05-16: **incomplete** — only basic stats (combat/skills/spellbook/prayer/task/quests/POH-yes-no). Missing C1 teleport inventory, C2 equipped, C3 diary per region, C4 cape perks, C5 sub-milestones. Filed #486. |
+| 3 | Toggle off → overlay disappears cleanly, no orphan render | `[?]` | not tested |
+
+#### PR #461 — C3 diary tier state *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | C7 overlay → diary state per region matches your actual diary completions (cross-check Achievement Diary tab in-game) | `[-]` | 2026-05-16: blocked — C7 does not surface diary state (#486) |
+| 2 | Region with no diary completed → all tiers show false | `[-]` | 2026-05-16: blocked — same as above (#486) |
+
+#### PR #462 — C5 partial-quest state *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Pick a mid-progress quest you've started but not completed → C7 overlay shows the correct partial state | `[!]` | 2026-05-16: overlay shows "Quests done: 207" but user has 179/179 in-game. Filed #487. Sub-milestone state not exposed (blocked by #486). |
+
+#### PR #463 — C2 equipped-item state *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | C7 overlay → equipped-item count matches your current equipment | `[-]` | 2026-05-16: blocked — overlay does not surface equipped items (#486) |
+| 2 | Equip a teleport-enabling item (Crafting cape, Max cape, Ring of Wealth) → appears in state on next tick | `[-]` | 2026-05-16: blocked — same as above (#486) |
+| 3 | Unequip → removed from state | `[-]` | 2026-05-16: blocked — same as above (#486) |
+
+#### PR #470 — C1 POH teleport inventory *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | C7 overlay → POH teleports detected match what you actually have built in your house | `[-]` | 2026-05-16: blocked — overlay shows "POH: yes" only, no teleport inventory (#486) |
+| 2 | Add a manual override in config → appears as enabled in overlay | `[/]` | 2026-05-16: 3 manual overrides exist (Mounted Glory, Spirit Tree, Fairy Ring) — toggling not verified via overlay (#486) |
+| 3 | Remove the manual override → state reverts to varbit-only | `[-]` | 2026-05-16: blocked — same as above (#486) |
+
+#### PR #471 — C4 skill-cape perk state *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | C7 overlay → skill cape perks match capes you own / skills at 99 | `[-]` | 2026-05-16: blocked — overlay does not surface skill cape perks (#486) |
+| 2 | Equip a different skill cape → state updates on next tick | `[-]` | 2026-05-16: blocked — same as above (#486) |
+
+### Phase 4 — External I/O
+
+#### PR #465 — F1 collectionlog.net profile import *(merged 2026-05-14, hardened in #476)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Open panel → "Import from collectionlog.net" button visible | `[!]` | 2026-05-16: **wrong widget** — implemented as a config checkbox in the Sync section, not a panel button. User confused whether toggling does anything. Filed #488. |
+| 2 | Click import with your RSN → returns success result with N items marked; panel refreshes | `[?]` | 2026-05-16: blocked — no clear action surface to trigger (#488) |
+| 3 | Import with a clearly-invalid RSN → returns "user not found" without crashing | `[?]` | 2026-05-16: blocked — same as above (#488) |
+| 4 | Disable network (airplane mode) mid-import → returns network-error result without hanging | `[?]` | 2026-05-16: blocked — same as above (#488) |
+
+#### PR #468 — F2 TempleOSRS KC sync *(merged 2026-05-14, hardened in #476)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Panel button "Sync from TempleOSRS" visible | `[!]` | 2026-05-16: same as F1 — implemented as config checkbox, not panel button. Filed #488. |
+| 2 | Sync with your RSN → KC values populate for activities TempleOSRS tracks | `[?]` | 2026-05-16: blocked — no clear action surface (#488) |
+| 3 | Sync with an invalid RSN → returns failure result cleanly | `[?]` | 2026-05-16: blocked — same as above (#488) |
+
+#### PR #466 — F3 per-account kill-time learning (opt-in) *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Enable **Learn Kill Times** in config | `[x]` | 2026-05-16: config checkbox present under Learning section |
+| 2 | Kill a single-target source (Vorkath, Cerberus, any boss) 5 times → debug log shows the rolling window populating | `[?]` | 2026-05-16: not exercised this session |
+| 3 | Verify `~/.runelite/profiles2/<profile>/clh/kill_times.json` exists with the entries | `[?]` | 2026-05-16: not exercised this session |
+| 4 | Restart client → values reload (verify via debug log line "loaded N sources from") | `[?]` | 2026-05-16: not exercised this session |
+| 5 | **KNOWN ISSUE #480** — watch for client-thread stutter on every kill | `[?]` | reference, not fail-blocking |
+| 6 | **KNOWN ISSUE #481** — try in a populated Wintertodt; expect poisoned averages | `[?]` | reference, not fail-blocking |
+
+#### PR #469 — F4 dry-streak feed *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Panel includes a "Dry Streak" mode/tab | `[x]` | 2026-05-16: Dry Streaks accordion visible in collection-log-items section |
+| 2 | Renders without NPE on a fresh account profile / on your synced account | `[x]` | 2026-05-16: renders empty-state hint "No KC data available. Kill counts will appear here once synced." — no crash. Depends on F2 sync (#488). |
+| 3 | Sort modes (by source / dryness class) work | `[?]` | 2026-05-16: blocked — no KC data to sort yet (depends on F2 #488) |
+
+### Phase 5 — UI / panel surface
+
+#### PR #457 — B.5.3 source-level requirements header *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with quest/skill/diary requirements → requirements header renders with green/red coloring | `[?]` | |
+| 2 | An unmet requirement renders red; a met one renders green | `[?]` | |
+
+#### PR #458 — B.5.4 collapsible step sections *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with `section` field on its steps → section headers visible | `[?]` | |
+| 2 | Active step's section is auto-expanded; non-active sections collapsed | `[?]` | |
+| 3 | Click a section header → expand/collapse works | `[?]` | |
+
+#### PR #472 — B.5.2 recommended items section *(merged 2026-05-14, supersedes #405)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with `recommendedItemIds` → recommended chip strip renders below the required strip | `[?]` | |
+| 2 | Color rules match the required strip (green/white/red) | `[?]` | |
+| 3 | Hover → tooltip shows item name | `[?]` | |
+
+#### PR #464 — E1 cross-source per-item recommendation *(merged 2026-05-14, panel integration deferred)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Enable cross-source mode flag in config | `[?]` | |
+| 2 | No regression to the existing panel modes | `[?]` | |
+| 3 | Debug log shows `CrossSourceRanker` running on recalc | `[?]` | |
+
+#### PR #467 — E2 meta-update dating *(merged 2026-05-14)*
+
+| step | description | status | notes |
+|---|---|---|---|
+| 1 | Activate guidance on a source with `metaUpdateDate` set → `MetaAgeBadge` shows the age | `[?]` | |
+| 2 | Source without `metaUpdateDate` → badge hidden, no NPE | `[?]` | |
+
+### Phase 6 — Build / CI / Infra
+
+| PR | description | status | notes |
+|---|---|---|---|
+| #475 | `./gradlew run` succeeds on JDK 17 without `InaccessibleObjectException` | `[x]` | verified 2026-05-16 (this session) |
+| #454 | `./gradlew build` runs JaCoCo and passes 45% threshold | `[x]` | verified 2026-05-16 (this session) |
+| #451 | GitHub Actions runs build+test on push | `[ ]` | verify on GitHub after next push; not in-game testable |
+| #476 | Plugin shutDown → no thread leak; sync actions don't double-fire | `[?]` | partly covered in F1/F2 phases above |
+
+#### Earlier PRs with rubric rows already in this log but no "validated" date
+
+Re-run the existing rubric rows for:
+- #441 worldmap chevron + CLH-distinct color
+- #443 UTF-8 charset fix
+- #444 Cyclopes per-defender descriptions
+- #445 B4.4 Top Pick auto-advance carries per-item target ID
+- #446 duplicate tier label fix
+- #448 Tier 3 CHAT_MESSAGE_RECEIVED backfill
+- #449 dialog highlight polish
+- #452 B.5.1 required-item chips
+
+---
+
+### Related issues filed during pre-validation review (2026-05-16)
+
+- `cha-ndler/collection-log-helper#478` — F1: injected ScheduledExecutorService for CollectionLogNetImporter
+- `cha-ndler/collection-log-helper#479` — F2: injected ScheduledExecutorService for TempleOsrsKcSyncer
+- `cha-ndler/collection-log-helper#480` — F3: KillTimeTracker.saveToDisk on client thread
+- `cha-ndler/collection-log-helper#481` — F3: KillTimeTracker records every NPC death (no ownership check)
+- `cha-ndler/collection-log-helper#482` — chore(test): JUnit 5 migration
+
+### Issues filed DURING in-game validation pass (2026-05-16)
+
+- `cha-ndler/collection-log-helper#483` — P1: Hard Treasure Trails panel rendering overlap + step auto-advance failure
+- `cha-ndler/collection-log-helper#484` — P2 data fix: wrong fairy ring code AKQ → AIQ for Asgarnian Ice Dungeon sources
+- `cha-ndler/collection-log-helper#485` — **P0 HUB BLOCKER**: ARRIVE_AT_TILE auto-advance not firing systemically (reproduces on Royal Titans + Hard Clue)
+- `cha-ndler/collection-log-helper#486` — P1: C7 debug overlay incomplete (missing C1-C5 detected state) — blocks Tier C validation
+- `cha-ndler/collection-log-helper#487` — P2: C5 "Quests done: 207" vs in-game 179/179
+- `cha-ndler/collection-log-helper#488` — **P1 HUB BLOCKER**: F1/F2 sync are config checkboxes, should be panel buttons (privacy-opt-in implications)
+
+### Phase result summary (2026-05-16)
+
+| Phase | What was validated | Result |
+|---|---|---|
+| **1 — Smoke** | All 6 items attempted | 3 pass, 1 partial (#362 pre-existing slayer/skilling 0/0 bug), 1 fail (#483 Hard Clue), 1 deferred |
+| **2 — Dispatch** | Royal Titans (proxy for B6) | Auto-advance failed → escalated to systemic #485. B5 Wintertodt, full B6 Cerberus, B2 waypoints, B3 nested NOT exercised — paused pending #485 fix |
+| **3 — Player state** | C7 overlay enabled, contents inspected | #486 + #487 filed. C1/C2/C3/C4/C5 detection layers cannot be validated until #486 fixed |
+| **4 — External I/O** | F1, F2, F4 inspected | #488 filed (F1+F2 UX bug). F4 renders correctly, depends on F2 sync working |
+| **5 — UI / panel** | Not exercised | Paused — lower priority than fixing P0/P1 blockers first |
+| **6 — Build/CI** | Already verified pre-walkthrough | #475, #454 pass; #451 verify on next GitHub push |
+
+### Pause note
+
+Validation paused 2026-05-16 after 6 hub-blocking-or-relevant issues surfaced. Resume after fixes for **#485 (auto-advance)** and **#488 (sync UX)** at minimum — those two alone block sensible re-validation of multiple downstream rubric rows.
+
+---
+
 ## Still-open bugs that closed PR #371 left unfixed
 
 These need fresh validation when a follow-up PR ships the real fix. The "still broken on master" column captures the regression baseline observed on 2026-05-10.
@@ -617,12 +844,12 @@ These need fresh validation when a follow-up PR ships the real fix. The "still b
 
 Quick check that core features still work end-to-end:
 
-- `[ ]` Sync collection log: open the in-game collection log widget once -> "Synced N items" reminder clears
-- `[ ]` Bank scan: open bank once -> "Open Bank to scan items" reminder clears
-- `[ ]` Switch between modes (Efficient / Category / Search / Pet Hunt / Statistics) -> no errors, panel renders for each
-- `[ ]` Activate guidance on a non-Mort'ton source (Vorkath, Cerberus, Wintertodt, a clue tier) -> panel + overlay render
-- `[ ]` Stop guidance, restart guidance on the same source -> clean cycle, no orphaned overlays or InfoBoxes
-- `[ ]` Close client, reopen -> bank scan cache restores correctly per RS profile (verify by re-opening Helper panel without re-banking)
+- `[x]` Sync collection log: open the in-game collection log widget once -> "Synced N items" reminder clears  *(2026-05-16: synced on login automatically; no reminder appeared because counts were already correct from prior session)*
+- `[x]` Bank scan: open bank once -> "Open Bank to scan items" reminder clears  *(2026-05-16: no reminder appeared; bank scan cache restored from prior session)*
+- `[/]` Switch between modes (Efficient / Category / Search / Pet Hunt / Statistics) -> no errors, panel renders for each  *(2026-05-16: all modes render; pre-existing #362 bug still present (Category Focus > Slayer / Skilling show "0/0"); the obtained-items render bug appears resolved)*
+- `[!]` Activate guidance on a non-Mort'ton source (Vorkath, Cerberus, Wintertodt, a clue tier) -> panel + overlay render  *(2026-05-16: TWO regressions on Hard Treasure Trails — (a) panel rendering overlaps outside its box; (b) step auto-advance not firing, had to manually progress steps. Screenshot: /tmp/clh-validation-2026-05-16/smoke-4-hard-clue-overlap.png. Needs new issue.)*
+- `[?]` Stop guidance, restart guidance on the same source -> clean cycle, no orphaned overlays or InfoBoxes  *(2026-05-16: not yet tested; smoke 4 already failed)*
+- `[?]` Close client, reopen -> bank scan cache restores correctly per RS profile (verify by re-opening Helper panel without re-banking)  *(2026-05-16: implicitly partly verified by Smoke 1 + Smoke 2 cache-restore behavior on login)*
 
 ---
 
