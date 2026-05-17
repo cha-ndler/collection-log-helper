@@ -4,11 +4,14 @@
 
 ### Fixed
 
-- **Asgarnian Ice Dungeon fairy ring code corrected** — Royal Titans and Skeletal Wyverns
-  guidance previously routed via fairy ring AKQ, which actually teleports to Piscatoris
-  (Kandarin), not Asgarnia. Both step descriptions now use AIQ (Mudskipper Point, south
-  of Port Sarim, adjacent to the dungeon entrance). Closes
-  [#484](../../issues/484).
+- **ARRIVE_AT_TILE auto-advance in instanced regions** — `resolvePlayerWorldLocation`
+  now translates the player's local point back to overworld template coordinates
+  via `WorldPoint.fromLocalInstance` when the player is inside an instanced
+  region (Royal Titans, raids, GWD, Vorkath, many quest/clue rooms). Without this,
+  the player's reported coords inside an instance never matched the static
+  `worldX/worldY` in `drop_rates.json`, so step auto-advance silently failed for
+  every guidance sequence that crossed into an instance. Closes
+  [#485](../../issues/485).
 
 ## 1.0.0-hub — 2026-05-15
 

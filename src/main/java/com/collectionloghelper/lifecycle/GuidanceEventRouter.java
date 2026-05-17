@@ -122,6 +122,16 @@ public class GuidanceEventRouter
 	 */
 	private Runnable onFilterConfigChanged;
 
+	/**
+	 * Callback fired when a sync-related config key changes
+	 * ({@link #KEY_ENABLE_COLLECTIONLOG_NET_IMPORT} or
+	 * {@link #KEY_ENABLE_TEMPLE_OSRS_SYNC}). The plugin uses this to refresh
+	 * the visibility of the panel sync buttons immediately, so toggling the
+	 * config checkbox makes the corresponding button appear without a panel
+	 * restart. Set once by the plugin in {@code startUp()}.
+	 */
+	private Runnable onSyncConfigChanged;
+
 	@Inject
 	public GuidanceEventRouter(
 		Client client,
@@ -170,6 +180,15 @@ public class GuidanceEventRouter
 	public void setOnFilterConfigChanged(Runnable callback)
 	{
 		this.onFilterConfigChanged = callback;
+	}
+
+	/**
+	 * Sets the callback fired when a sync-related config toggle changes.
+	 * Must be called from {@code Plugin.startUp()} before any events are processed.
+	 */
+	public void setOnSyncConfigChanged(Runnable callback)
+	{
+		this.onSyncConfigChanged = callback;
 	}
 
 	// ── Actor death ─────────────────────────────────────────────────────────
@@ -483,6 +502,10 @@ public class GuidanceEventRouter
 	static final String CONFIG_GROUP = "collectionloghelper";
 	/** Config key for the "Show Hint Arrow" toggle. */
 	static final String KEY_SHOW_HINT_ARROW = "showHintArrow";
+	/** Config key gating the panel button that triggers a collectionlog.net import. */
+	static final String KEY_ENABLE_COLLECTIONLOG_NET_IMPORT = "enableCollectionLogNetImport";
+	/** Config key gating the panel button that triggers a TempleOSRS KC sync. */
+	static final String KEY_ENABLE_TEMPLE_OSRS_SYNC = "enableTempleOsrsSync";
 
 	/**
 	 * Config keys that affect what the panel renders (which items appear,
@@ -548,6 +571,14 @@ public class GuidanceEventRouter
 		if (KEY_SHOW_HINT_ARROW.equals(key))
 		{
 			guidanceCoordinator.refreshHintArrow();
+			return;
+		}
+
+		if ((KEY_ENABLE_COLLECTIONLOG_NET_IMPORT.equals(key)
+			|| KEY_ENABLE_TEMPLE_OSRS_SYNC.equals(key))
+			&& onSyncConfigChanged != null)
+		{
+			onSyncConfigChanged.run();
 			return;
 		}
 

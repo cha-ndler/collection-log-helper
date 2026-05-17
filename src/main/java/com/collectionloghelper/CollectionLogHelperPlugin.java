@@ -378,6 +378,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceEventRouter.setActivateGuidanceCallback(
 			(java.util.function.Consumer<CollectionLogSource>) this::activateGuidance);
 		guidanceEventRouter.setOnFilterConfigChanged(this::onFilterConfigChanged);
+		guidanceEventRouter.setOnSyncConfigChanged(this::onSyncConfigChanged);
 		eventBus.register(guidanceEventRouter);
 		eventBus.register(guidanceMovementTracker);
 		eventBus.register(killTimeTracker);
@@ -880,6 +881,24 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	/**
+	 * Invoked by {@link GuidanceEventRouter} when one of the sync-related
+	 * config toggles ({@code enableCollectionLogNetImport} or
+	 * {@code enableTempleOsrsSync}) changes. Refreshes the visibility of the
+	 * corresponding panel button so toggling the checkbox makes the button
+	 * appear/disappear immediately, without a panel restart.
+	 *
+	 * <p>Closes cha-ndler/collection-log-helper#488 — previously the buttons
+	 * were created and added to the panel but their visibility was set only
+	 * once (in the panel constructor), so toggling the config did nothing
+	 * visible until the panel was rebuilt for some other reason.
+	 */
+	private void onSyncConfigChanged()
+	{
+		panel.updateCollectionLogNetImportButton();
+		panel.updateTempleSyncButtonVisibility();
+	}
+
+	/**
 	 * Returns a cached ranked efficiency list, recomputing only when the dirty flag is set.
 	 */
 	private List<ScoredItem> getRankedSources()
@@ -1028,16 +1047,25 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	/**
-	 * Resolve the player's real-world location, transforming boat-local
-	 * coordinates when the player is inside a sailing WorldEntity.
+	 * Resolve the player's real-world location, transforming local coordinates
+	 * back to template/overworld coordinates so they compare correctly against
+	 * the static {@code worldX/worldY} values in {@code drop_rates.json}.
 	 *
-	 * When sailing, the player's WorldView is the boat's inner view (not
-	 * top-level).  We find the owning WorldEntity and use
-	 * {@code transformToMainWorld} to map the player's local point back to
-	 * overworld coordinates.
+	 * Three cases:
+	 * <ol>
+	 *   <li><b>Standard top-level world view</b> — return {@code getWorldLocation()}.</li>
+	 *   <li><b>Instanced region</b> (CoX/ToB/ToA, GWD, Vorkath, Royal Titans, many
+	 *       quest/clue rooms, etc.) — {@code getWorldLocation()} returns
+	 *       instance-template coords that don't match the static JSON tile.
+	 *       Translate via {@link WorldPoint#fromLocalInstance(Client, LocalPoint)}
+	 *       to recover the overworld coords.</li>
+	 *   <li><b>Sailing WorldEntity</b> — player is inside a non-top-level
+	 *       WorldView; map the local point back through
+	 *       {@code transformToMainWorld}.</li>
+	 * </ol>
 	 *
-	 * Falls back to the plain {@code getWorldLocation()} if the WorldEntity
-	 * API is unavailable (older RuneLite) or on any error.
+	 * Falls back to plain {@code getWorldLocation()} on any error or when the
+	 * required API is unavailable.
 	 */
 	private WorldPoint resolvePlayerWorldLocation()
 	{
@@ -1052,6 +1080,22 @@ public class CollectionLogHelperPlugin extends Plugin
 			WorldView playerView = lp.getWorldView();
 			if (playerView == null || playerView.isTopLevel())
 			{
+				// Top-level view — handle instanced regions by translating
+				// the player's local point back to the overworld template tile.
+				// Without this, ARRIVE_AT_TILE checks in instanced bosses
+				// (Royal Titans, raids, etc.) never match the JSON coords.
+				if (client.isInInstancedRegion())
+				{
+					LocalPoint localPoint = lp.getLocalLocation();
+					if (localPoint != null)
+					{
+						WorldPoint templatePoint = WorldPoint.fromLocalInstance(client, localPoint);
+						if (templatePoint != null)
+						{
+							return templatePoint;
+						}
+					}
+				}
 				return fallback;
 			}
 
@@ -1076,7 +1120,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 		catch (Exception e)
 		{
-			log.debug("WorldEntity transform failed, using fallback location", e);
+			log.debug("Player-location resolution failed, using fallback", e);
 		}
 		return fallback;
 	}

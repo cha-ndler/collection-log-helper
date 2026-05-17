@@ -26,9 +26,20 @@ package com.collectionloghelper.overlay;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.SlayerTaskState;
+import com.collectionloghelper.player.DiaryRegion;
+import com.collectionloghelper.player.DiaryTier;
+import com.collectionloghelper.player.DiaryTierState;
+import com.collectionloghelper.player.EquippedItemState;
+import com.collectionloghelper.player.PlayerQuestProgressState;
+import com.collectionloghelper.player.PohTeleport;
+import com.collectionloghelper.player.PohTeleportInventory;
+import com.collectionloghelper.player.QuestSubMilestone;
+import com.collectionloghelper.player.SkillCapePerk;
+import com.collectionloghelper.player.SkillCapePerkState;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.runelite.api.Client;
@@ -44,6 +55,17 @@ import net.runelite.client.ui.overlay.components.TitleComponent;
 /**
  * Developer-facing overlay (Tier C7) that surfaces all detected player-capability
  * state so guidance authors can verify branching logic without attaching a debugger.
+ *
+ * <p>Renders three blocks:
+ * <ol>
+ *   <li><b>Account summary</b> — combat, key skills, spellbook, prayer book, slayer
+ *       task, quest enum count, POH built.</li>
+ *   <li><b>Tier C detection</b> — one section per detection layer:
+ *       C1 POH teleport inventory, C2 equipped items, C3 diary tiers per region,
+ *       C4 skill cape perks, C5 partial-quest sub-milestones.</li>
+ *   <li><b>Truncation</b> — sub-milestone lists are capped at {@link #MAX_SUBMILESTONES_SHOWN}
+ *       to keep the overlay manageable.</li>
+ * </ol>
  *
  * <p>Visible only when {@link CollectionLogHelperConfig#enableCapabilityDebugOverlay()}
  * is {@code true}. Disabled by default — zero impact on normal players.
@@ -67,20 +89,40 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 	private static final String[] PRAYER_BOOK_NAMES = {"Normal", "Ancient Curses"};
 
 	private static final Color TITLE_COLOR = new Color(255, 200, 0);
+	private static final Color SECTION_COLOR = new Color(120, 200, 255);
 	private static final Color LABEL_COLOR = new Color(180, 180, 180);
 	private static final Color VALUE_COLOR = Color.WHITE;
+	private static final Color VALUE_DIM = new Color(140, 140, 140);
+
+	/** Cap on sub-milestones rendered to avoid the overlay dominating the viewport. */
+	private static final int MAX_SUBMILESTONES_SHOWN = 8;
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
 	private final SlayerTaskState slayerTaskState;
+	private final PohTeleportInventory pohTeleportInventory;
+	private final EquippedItemState equippedItemState;
+	private final DiaryTierState diaryTierState;
+	private final SkillCapePerkState skillCapePerkState;
+	private final PlayerQuestProgressState questProgressState;
 
 	@Inject
 	PlayerCapabilityDebugOverlay(Client client, CollectionLogHelperConfig config,
-		SlayerTaskState slayerTaskState)
+		SlayerTaskState slayerTaskState,
+		PohTeleportInventory pohTeleportInventory,
+		EquippedItemState equippedItemState,
+		DiaryTierState diaryTierState,
+		SkillCapePerkState skillCapePerkState,
+		PlayerQuestProgressState questProgressState)
 	{
 		this.client = client;
 		this.config = config;
 		this.slayerTaskState = slayerTaskState;
+		this.pohTeleportInventory = pohTeleportInventory;
+		this.equippedItemState = equippedItemState;
+		this.diaryTierState = diaryTierState;
+		this.skillCapePerkState = skillCapePerkState;
+		this.questProgressState = questProgressState;
 		setPosition(OverlayPosition.TOP_RIGHT);
 		setPriority(PRIORITY_LOW);
 	}
@@ -99,28 +141,44 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 			.color(TITLE_COLOR)
 			.build());
 
+		renderAccountSummary();
+		renderSection("POH Teleports (C1)");
+		renderPohTeleports();
+		renderSection("Equipped (C2)");
+		renderEquipped();
+		renderSection("Diary tiers (C3)");
+		renderDiary();
+		renderSection("Cape perks (C4)");
+		renderCapePerks();
+		renderSection("Quest sub-milestones (C5)");
+		renderQuestSubMilestones();
+
+		return super.render(graphics);
+	}
+
+	// -------------------------------------------------------------------------
+	// Block: account summary (unchanged from pre-#486 behaviour)
+	// -------------------------------------------------------------------------
+
+	private void renderAccountSummary()
+	{
 		Player localPlayer = client.getLocalPlayer();
 
-		// Combat level
 		String combatLevel = localPlayer != null
 			? String.valueOf(localPlayer.getCombatLevel()) : "?";
 		addRow("Combat", combatLevel);
 
-		// Key skill levels relevant to access gating
 		addRow("Slayer", skillLevel(Skill.SLAYER));
 		addRow("Construction", skillLevel(Skill.CONSTRUCTION));
 		addRow("Farming", skillLevel(Skill.FARMING));
 		addRow("Magic", skillLevel(Skill.MAGIC));
 
-		// Active spellbook
 		int spellbookId = safeVarbit(VARBIT_ACTIVE_SPELLBOOK);
 		addRow("Spellbook", resolveArrayName(SPELLBOOK_NAMES, spellbookId));
 
-		// Active prayer book
 		int prayerBookId = safeVarbit(VARBIT_ACTIVE_PRAYER_BOOK);
 		addRow("Prayers", resolveArrayName(PRAYER_BOOK_NAMES, prayerBookId));
 
-		// Slayer task (creature + remaining count)
 		if (slayerTaskState.isTaskActive())
 		{
 			String task = slayerTaskState.getCreatureName() + " x" + slayerTaskState.getRemaining();
@@ -131,15 +189,109 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 			addRow("Task", "none");
 		}
 
-		// Quest completions (count of FINISHED quests, not the full list)
+		// "Quest entries" rather than "Quests done" — the RuneLite Quest enum
+		// counts miniquests and some sub-entries separately from the in-game
+		// Quest List, so this number can exceed the player's main-quest count
+		// (see #487 for the longer-term reclassification).
 		int finishedCount = countFinishedQuests();
-		addRow("Quests done", String.valueOf(finishedCount));
+		addRow("Quest entries", String.valueOf(finishedCount));
 
-		// POH availability
 		int pohLocation = safeVarbit(VARBIT_POH_LOCATION);
-		addRow("POH", pohLocation > 0 ? "yes" : "no");
+		addRow("POH built", pohLocation > 0 ? "yes" : "no");
+	}
 
-		return super.render(graphics);
+	// -------------------------------------------------------------------------
+	// Block: Tier C detection sections (added for #486)
+	// -------------------------------------------------------------------------
+
+	/** C1 — list every {@link PohTeleport} reported available. */
+	private void renderPohTeleports()
+	{
+		Set<PohTeleport> teleports = pohTeleportInventory.getAvailableTeleports();
+		if (teleports.isEmpty())
+		{
+			addDimRow("(none detected)");
+			return;
+		}
+		for (PohTeleport tele : PohTeleport.values())
+		{
+			if (teleports.contains(tele))
+			{
+				addRow(humanise(tele.name()), "yes");
+			}
+		}
+	}
+
+	/** C2 — count + first equipped item ID for sanity-check. Full list is large. */
+	private void renderEquipped()
+	{
+		Set<Integer> equipped = equippedItemState.getEquippedItems();
+		addRow("Items equipped", String.valueOf(equipped.size()));
+		if (!equipped.isEmpty())
+		{
+			// Show first item ID as a sanity check that detection is wired up.
+			int sample = equipped.iterator().next();
+			addRow("Sample item ID", String.valueOf(sample));
+		}
+	}
+
+	/** C3 — per region, render the highest completed tier (or "-" if none). */
+	private void renderDiary()
+	{
+		for (DiaryRegion region : DiaryRegion.values())
+		{
+			DiaryTier highest = highestCompletedTier(region);
+			addRow(humanise(region.name()), highest != null ? highest.name() : "-");
+		}
+	}
+
+	/** C4 — list every {@link SkillCapePerk} reported available. */
+	private void renderCapePerks()
+	{
+		int shown = 0;
+		for (SkillCapePerk perk : SkillCapePerk.values())
+		{
+			if (skillCapePerkState.hasPerkAvailable(perk))
+			{
+				addRow(humanise(perk.name()), "yes");
+				shown++;
+			}
+		}
+		if (shown == 0)
+		{
+			addDimRow("(none available)");
+		}
+	}
+
+	/**
+	 * C5 — list every completed {@link QuestSubMilestone}, capped at
+	 * {@link #MAX_SUBMILESTONES_SHOWN}.
+	 */
+	private void renderQuestSubMilestones()
+	{
+		int total = 0;
+		int shown = 0;
+		for (QuestSubMilestone milestone : QuestSubMilestone.values())
+		{
+			if (questProgressState.hasSubProgress(milestone))
+			{
+				total++;
+				if (shown < MAX_SUBMILESTONES_SHOWN)
+				{
+					addRow(humanise(milestone.name()), "yes");
+					shown++;
+				}
+			}
+		}
+		if (total == 0)
+		{
+			addDimRow("(none completed)");
+			return;
+		}
+		if (total > shown)
+		{
+			addDimRow("(+" + (total - shown) + " more)");
+		}
 	}
 
 	// -------------------------------------------------------------------------
@@ -153,6 +305,25 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 			.leftColor(LABEL_COLOR)
 			.right(value)
 			.rightColor(VALUE_COLOR)
+			.build());
+	}
+
+	private void addDimRow(String label)
+	{
+		panelComponent.getChildren().add(LineComponent.builder()
+			.left(label)
+			.leftColor(VALUE_DIM)
+			.build());
+	}
+
+	private void renderSection(String label)
+	{
+		panelComponent.getChildren().add(LineComponent.builder()
+			.left(" ")
+			.build());
+		panelComponent.getChildren().add(LineComponent.builder()
+			.left(label)
+			.leftColor(SECTION_COLOR)
 			.build());
 	}
 
@@ -207,5 +378,29 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 			}
 		}
 		return count;
+	}
+
+	private DiaryTier highestCompletedTier(DiaryRegion region)
+	{
+		DiaryTier highest = null;
+		for (DiaryTier tier : DiaryTier.values())
+		{
+			if (diaryTierState.hasDiary(region, tier))
+			{
+				highest = tier;
+			}
+		}
+		return highest;
+	}
+
+	/** Convert {@code FOO_BAR_BAZ} to {@code Foo bar baz} for display. */
+	private static String humanise(String upperSnake)
+	{
+		if (upperSnake == null || upperSnake.isEmpty())
+		{
+			return upperSnake;
+		}
+		String lower = upperSnake.toLowerCase().replace('_', ' ');
+		return Character.toUpperCase(lower.charAt(0)) + lower.substring(1);
 	}
 }
