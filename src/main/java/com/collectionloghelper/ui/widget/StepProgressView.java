@@ -351,8 +351,14 @@ public class StepProgressView extends JPanel
 
 		SwingUtilities.invokeLater(() ->
 		{
+			// Wrap inside a fixed-width <body> so Swing actually word-wraps long
+			// step descriptions instead of stretching the JLabel's preferred width
+			// past the panel's clip region — visible on clue tiers with long
+			// step text such as "Buy a sleek hairband from the Falador hairdresser",
+			// where the unwrapped label rendered outside the panel box (#483).
 			stepProgressLabel.setText(
-				"<html>Step " + current + "/" + total + ": " + description + "</html>");
+				"<html><body style='width:220px'>Step " + current + "/" + total + ": "
+					+ description + "</body></html>");
 			nextStepButton.setVisible(isManual);
 
 			if (groups.isEmpty())
