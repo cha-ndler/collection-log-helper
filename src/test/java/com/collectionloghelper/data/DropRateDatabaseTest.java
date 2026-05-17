@@ -354,25 +354,31 @@ public class DropRateDatabaseTest
 	}
 
 	// ========================================================================
-	// Charset regression — issue #433
+	// Charset regression - issue #433 / ASCII-only policy - issue #501
 	// ========================================================================
 
 	/**
-	 * Verifies that em-dash characters in step descriptions are loaded correctly
-	 * as the Unicode em-dash (U+2014, "—") rather than the Windows-1252 mojibake
-	 * sequence "â€"" that results from reading UTF-8 bytes with the platform
-	 * default charset on Windows.
+	 * Guards against two related corruption modes in guidance step descriptions:
 	 *
-	 * <p>The Perilous Moons step 3 description ("… Each has unique mechanics — learn
-	 * the safe tiles …") is the known reproducer from issue #433.
+	 * <ul>
+	 *   <li>Windows-1252 mojibake (e.g. UTF-8 em-dash bytes misread as cp1252)
+	 *       that results from reading UTF-8 with the platform default charset
+	 *       on Windows (issue #433).</li>
+	 *   <li>Any non-ASCII codepoint in description text. Per issue #501,
+	 *       drop_rates.json is ASCII-only; fancy punctuation (em-dash, smart
+	 *       quotes, ellipsis, non-breaking space) must be replaced with ASCII
+	 *       equivalents. The Gradle task {@code lintDropRates} enforces this on
+	 *       the raw file; this test extends the guarantee to the loaded model so
+	 *       it catches drift introduced via {@code perItemStepDescription}
+	 *       overrides or future merge accidents.</li>
+	 * </ul>
 	 */
 	@Test
 	public void load_guidanceStepDescriptions_noCharsetCorruption()
 	{
-		final String MOJIBAKE = "â€”"; // UTF-8 em-dash bytes misread as Windows-1252
-		final String EM_DASH   = "—";              // correct em-dash
-
-		boolean foundAtLeastOneEmDash = false;
+		// UTF-8 em-dash (0xE2 0x80 0x94) misread as cp1252 yields U+00E2 U+20AC U+201D.
+		// We detect the leading two codepoints, which uniquely indicate cp1252 mojibake.
+		final String MOJIBAKE_PREFIX = new String(new char[]{(char) 0x00E2, (char) 0x20AC});
 
 		for (CollectionLogSource source : database.getAllSources())
 		{
@@ -386,13 +392,10 @@ public class DropRateDatabaseTest
 				if (desc != null)
 				{
 					assertFalse(
-						"Mojibake em-dash detected in description for source '"
+						"Mojibake sequence detected in description for source '"
 							+ source.getName() + "': " + desc,
-						desc.contains(MOJIBAKE));
-					if (desc.contains(EM_DASH))
-					{
-						foundAtLeastOneEmDash = true;
-					}
+						desc.contains(MOJIBAKE_PREFIX));
+					assertAscii("description for source '" + source.getName() + "'", desc);
 				}
 
 				if (step.getPerItemStepDescription() != null)
@@ -403,20 +406,32 @@ public class DropRateDatabaseTest
 						if (override != null)
 						{
 							assertFalse(
-								"Mojibake em-dash detected in perItemStepDescription (item "
+								"Mojibake sequence detected in perItemStepDescription (item "
 									+ entry.getKey() + ") for source '" + source.getName()
 									+ "': " + override,
-								override.contains(MOJIBAKE));
+								override.contains(MOJIBAKE_PREFIX));
+							assertAscii(
+								"perItemStepDescription (item " + entry.getKey()
+									+ ") for source '" + source.getName() + "'",
+								override);
 						}
 					}
 				}
 			}
 		}
+	}
 
-		assertTrue(
-			"Expected at least one em-dash in guidance step descriptions — "
-				+ "test data may be empty or step sources changed",
-			foundAtLeastOneEmDash);
+	private static void assertAscii(String context, String value)
+	{
+		for (int i = 0; i < value.length(); i++)
+		{
+			int cp = value.codePointAt(i);
+			if (cp > 0x7F)
+			{
+				fail("Non-ASCII codepoint U+" + String.format("%04X", cp)
+					+ " at index " + i + " in " + context + ": " + value);
+			}
+		}
 	}
 
 	// ========================================================================
