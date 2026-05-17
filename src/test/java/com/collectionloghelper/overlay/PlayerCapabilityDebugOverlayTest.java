@@ -26,9 +26,15 @@ package com.collectionloghelper.overlay;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.SlayerTaskState;
+import com.collectionloghelper.player.DiaryTierState;
+import com.collectionloghelper.player.EquippedItemState;
+import com.collectionloghelper.player.PlayerQuestProgressState;
+import com.collectionloghelper.player.PohTeleportInventory;
+import com.collectionloghelper.player.SkillCapePerkState;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Collections;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
 import net.runelite.api.Skill;
@@ -40,6 +46,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -65,6 +72,21 @@ public class PlayerCapabilityDebugOverlayTest
 	@Mock
 	private SlayerTaskState slayerTaskState;
 
+	@Mock
+	private PohTeleportInventory pohTeleportInventory;
+
+	@Mock
+	private EquippedItemState equippedItemState;
+
+	@Mock
+	private DiaryTierState diaryTierState;
+
+	@Mock
+	private SkillCapePerkState skillCapePerkState;
+
+	@Mock
+	private PlayerQuestProgressState questProgressState;
+
 	/** Mock Graphics2D — suitable only for guard-clause tests (no actual rendering). */
 	@Mock
 	private Graphics2D mockGraphics;
@@ -83,9 +105,22 @@ public class PlayerCapabilityDebugOverlayTest
 	{
 		java.lang.reflect.Constructor<PlayerCapabilityDebugOverlay> ctor =
 			PlayerCapabilityDebugOverlay.class.getDeclaredConstructor(
-				Client.class, CollectionLogHelperConfig.class, SlayerTaskState.class);
+				Client.class, CollectionLogHelperConfig.class, SlayerTaskState.class,
+				PohTeleportInventory.class, EquippedItemState.class,
+				DiaryTierState.class, SkillCapePerkState.class,
+				PlayerQuestProgressState.class);
 		ctor.setAccessible(true);
-		overlay = ctor.newInstance(client, config, slayerTaskState);
+		overlay = ctor.newInstance(client, config, slayerTaskState,
+			pohTeleportInventory, equippedItemState,
+			diaryTierState, skillCapePerkState, questProgressState);
+
+		// Default mock behaviour: empty / false for all Tier-C state. Individual
+		// tests override as needed.
+		when(pohTeleportInventory.getAvailableTeleports()).thenReturn(Collections.emptySet());
+		when(equippedItemState.getEquippedItems()).thenReturn(Collections.emptySet());
+		when(diaryTierState.hasDiary(any(), any())).thenReturn(false);
+		when(skillCapePerkState.hasPerkAvailable(any())).thenReturn(false);
+		when(questProgressState.hasSubProgress(any())).thenReturn(false);
 
 		BufferedImage img = new BufferedImage(400, 300, BufferedImage.TYPE_INT_ARGB);
 		realGraphics = img.createGraphics();

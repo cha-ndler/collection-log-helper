@@ -4,17 +4,14 @@
 
 ### Fixed
 
-- **Sync panel buttons appear when the config toggle is enabled** — toggling
-  the `collectionlog.net import` or `TempleOSRS KC Sync` config item now
-  immediately shows/hides the corresponding sync button in the panel.
-  Previously the buttons existed but their visibility was set only once
-  (in the panel constructor), so flipping the config on did nothing visible
-  until the panel was rebuilt for some other reason. `GuidanceEventRouter`
-  now dispatches a new `onSyncConfigChanged` callback for these two keys,
-  and the plugin wires it to refresh both button visibilities. Also adds
-  an explicit tooltip to the collectionlog.net button so the per-click
-  third-party-API contract is visible on hover (the TempleOSRS button
-  already had one). Closes [#488](../../issues/488).
+- **ARRIVE_AT_TILE auto-advance in instanced regions** — `resolvePlayerWorldLocation`
+  now translates the player's local point back to overworld template coordinates
+  via `WorldPoint.fromLocalInstance` when the player is inside an instanced
+  region (Royal Titans, raids, GWD, Vorkath, many quest/clue rooms). Without this,
+  the player's reported coords inside an instance never matched the static
+  `worldX/worldY` in `drop_rates.json`, so step auto-advance silently failed for
+  every guidance sequence that crossed into an instance. Closes
+  [#485](../../issues/485).
 
 ## 1.0.0-hub — 2026-05-15
 
