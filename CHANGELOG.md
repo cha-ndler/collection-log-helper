@@ -2,7 +2,16 @@
 
 ## Unreleased
 
-_(none — all queued changes folded into 1.0.0-hub below.)_
+### Fixed
+
+- **ARRIVE_AT_TILE auto-advance in instanced regions** — `resolvePlayerWorldLocation`
+  now translates the player's local point back to overworld template coordinates
+  via `WorldPoint.fromLocalInstance` when the player is inside an instanced
+  region (Royal Titans, raids, GWD, Vorkath, many quest/clue rooms). Without this,
+  the player's reported coords inside an instance never matched the static
+  `worldX/worldY` in `drop_rates.json`, so step auto-advance silently failed for
+  every guidance sequence that crossed into an instance. Closes
+  [#485](../../issues/485).
 
 ## 1.0.0-hub — 2026-05-15
 
