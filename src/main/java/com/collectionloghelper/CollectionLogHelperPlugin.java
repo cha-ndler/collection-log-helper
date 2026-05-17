@@ -378,6 +378,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceEventRouter.setActivateGuidanceCallback(
 			(java.util.function.Consumer<CollectionLogSource>) this::activateGuidance);
 		guidanceEventRouter.setOnFilterConfigChanged(this::onFilterConfigChanged);
+		guidanceEventRouter.setOnSyncConfigChanged(this::onSyncConfigChanged);
 		eventBus.register(guidanceEventRouter);
 		eventBus.register(guidanceMovementTracker);
 		eventBus.register(killTimeTracker);
@@ -877,6 +878,24 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		rankedSourcesDirty = true;
 		pendingPanelRebuild = true;
+	}
+
+	/**
+	 * Invoked by {@link GuidanceEventRouter} when one of the sync-related
+	 * config toggles ({@code enableCollectionLogNetImport} or
+	 * {@code enableTempleOsrsSync}) changes. Refreshes the visibility of the
+	 * corresponding panel button so toggling the checkbox makes the button
+	 * appear/disappear immediately, without a panel restart.
+	 *
+	 * <p>Closes cha-ndler/collection-log-helper#488 — previously the buttons
+	 * were created and added to the panel but their visibility was set only
+	 * once (in the panel constructor), so toggling the config did nothing
+	 * visible until the panel was rebuilt for some other reason.
+	 */
+	private void onSyncConfigChanged()
+	{
+		panel.updateCollectionLogNetImportButton();
+		panel.updateTempleSyncButtonVisibility();
 	}
 
 	/**
