@@ -4,16 +4,14 @@
 
 ### Fixed
 
-- **C7 player-capability debug overlay surfaces Tier C detection state** —
-  `PlayerCapabilityDebugOverlay` now renders one section per Tier-C detector
-  (C1 POH teleport inventory, C2 equipped items, C3 diary tiers per region,
-  C4 skill cape perks, C5 partial-quest sub-milestones) in addition to the
-  existing account summary. Unblocks in-game validation of PRs #461, #462,
-  #463, #470, #471 — previously the overlay only exposed top-level stats so
-  authors had no way to confirm those detectors were wiring up correctly.
-  The "Quests done" label is renamed to "Quest entries" to reduce confusion
-  vs. the in-game Quest List count (full reclassification tracked under
-  [#487](../../issues/487)). Closes [#486](../../issues/486).
+- **ARRIVE_AT_TILE auto-advance in instanced regions** — `resolvePlayerWorldLocation`
+  now translates the player's local point back to overworld template coordinates
+  via `WorldPoint.fromLocalInstance` when the player is inside an instanced
+  region (Royal Titans, raids, GWD, Vorkath, many quest/clue rooms). Without this,
+  the player's reported coords inside an instance never matched the static
+  `worldX/worldY` in `drop_rates.json`, so step auto-advance silently failed for
+  every guidance sequence that crossed into an instance. Closes
+  [#485](../../issues/485).
 
 ## 1.0.0-hub — 2026-05-15
 
