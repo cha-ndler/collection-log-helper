@@ -91,6 +91,13 @@ public class StepProgressView extends JPanel
 	/** Tooltip suffix appended to items whose status is IN_BANK. */
 	private static final String IN_BANK_TOOLTIP_SUFFIX = " ℹ in bank";
 
+	/**
+	 * Inner-width budget (px) used to force Swing's JLabel HTML renderer to
+	 * word-wrap long step descriptions. Matches the usable column of the
+	 * default RuneLite plugin panel (~250px minus padding/scroll gutters).
+	 */
+	private static final int PANEL_TEXT_WRAP_WIDTH_PX = 220;
+
 	private static final Color BG = new Color(25, 35, 55);
 	private static final Color SECTION_HEADER_FG = new Color(200, 200, 200);
 	private static final Color SECTION_HEADER_ACTIVE_FG = new Color(80, 180, 255);
@@ -357,8 +364,8 @@ public class StepProgressView extends JPanel
 			// step text such as "Buy a sleek hairband from the Falador hairdresser",
 			// where the unwrapped label rendered outside the panel box (#483).
 			stepProgressLabel.setText(
-				"<html><body style='width:220px'>Step " + current + "/" + total + ": "
-					+ description + "</body></html>");
+				"<html><body style='width:" + PANEL_TEXT_WRAP_WIDTH_PX + "px'>Step "
+					+ current + "/" + total + ": " + description + "</body></html>");
 			nextStepButton.setVisible(isManual);
 
 			if (groups.isEmpty())
