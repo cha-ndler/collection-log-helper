@@ -245,6 +245,8 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		collectionLogNetSyncButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 26));
 		collectionLogNetSyncButton.setFont(FontManager.getRunescapeSmallFont());
 		collectionLogNetSyncButton.setFocusPainted(false);
+		collectionLogNetSyncButton.setToolTipText(
+			"Click to send your display name to collectionlog.net and import your obtained-items list");
 		collectionLogNetSyncButton.setVisible(config.enableCollectionLogNetImport());
 		collectionLogNetSyncButton.addActionListener(e ->
 		{
