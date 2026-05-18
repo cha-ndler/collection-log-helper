@@ -167,9 +167,11 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 				WidgetHighlightOverlay.class,
 				OverlayStepApplier.class,
 				WorldMapController.class,
-				DynamicTargetManager.class);
+				DynamicTargetManager.class,
+				NpcTrackerHelper.class);
 		ctor.setAccessible(true);
 		DynamicTargetManager dynamicTargetManager = newDynamicTargetManager(worldMapController);
+		NpcTrackerHelper npcTrackerHelper = newNpcTrackerHelper();
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
 			guidanceSequencer, requirementsChecker, travelCapabilities,
@@ -179,7 +181,7 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
-			overlayStepApplier, worldMapController, dynamicTargetManager);
+			overlayStepApplier, worldMapController, dynamicTargetManager, npcTrackerHelper);
 
 		when(requirementsChecker.getUnmetRequirements(any())).thenReturn(Collections.emptyList());
 		when(requirementsChecker.buildRequirementRows(any())).thenReturn(Collections.emptyList());
@@ -319,6 +321,14 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 		return ctor.newInstance(client, dynamicTargetEvaluatorRegistry, worldMapPointManager,
 			guidanceOverlay, guidanceMinimapOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay, worldMapController);
+	}
+
+	private NpcTrackerHelper newNpcTrackerHelper() throws Exception
+	{
+		Constructor<NpcTrackerHelper> ctor = NpcTrackerHelper.class.getDeclaredConstructor(
+			Client.class, ClientThread.class, GuidanceOverlay.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, clientThread, guidanceOverlay);
 	}
 
 	private OverlayStepApplier newOverlayStepApplier() throws Exception
