@@ -323,10 +323,21 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	public void setMode(Mode mode)
 	{
-		currentMode = mode;
+		// Route programmatic mode changes through the selector listener so the
+		// mode-controller lifecycle hooks (onModeDeactivated / onModeActivated)
+		// fire just like a user-driven selection. Mutating currentMode here
+		// before calling setSelectedMode(...) would cause the listener to see
+		// previous == next and short-circuit the dispatcher, silently breaking
+		// the contract for any controller that overrides those hooks.
+		if (mode == currentMode)
+		{
+			// Same-mode call: the combo listener won't fire, so apply the
+			// visibility + rebuild side effects directly.
+			updateControlVisibility();
+			rebuild();
+			return;
+		}
 		selectorControls.setSelectedMode(mode);
-		updateControlVisibility();
-		rebuild();
 	}
 
 	private void onModeSelected(Mode mode)

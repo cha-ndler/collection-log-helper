@@ -29,7 +29,11 @@ import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.EfficientSortMode;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.ui.CollectionLogHelperPanel.Mode;
+import com.collectionloghelper.ui.mode.PanelModeController;
+import com.collectionloghelper.ui.mode.PanelModeDispatcher;
 import java.awt.Component;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.JComboBox;
@@ -236,6 +240,128 @@ public class SelectorControlsPanelTest
 
 			assertEquals(Mode.STATISTICS, findCombo(panel, Mode.class).getSelectedItem());
 		});
+	}
+
+	/**
+	 * Regression guard for the PR #531 HIGH finding: a programmatic mode change
+	 * via {@link SelectorControlsPanel#setSelectedMode(Mode)} must fire the
+	 * {@code onModeChanged} callback so the owning panel can route the
+	 * transition through {@code PanelModeDispatcher.switchMode(...)} and fire
+	 * the controller lifecycle hooks. If the callback is skipped, lifecycle
+	 * hooks are silently dropped on programmatic transitions.
+	 */
+	@Test
+	public void setSelectedMode_firesModeChangedCallback_forDifferentMode() throws Exception
+	{
+		AtomicReference<Mode> sink = new AtomicReference<>();
+		SwingUtilities.invokeAndWait(() ->
+		{
+			SelectorControlsPanel panel = newPanel(Mode.EFFICIENT,
+				sink, new AtomicReference<>(), new AtomicReference<>(),
+				new AtomicInteger());
+
+			panel.setSelectedMode(Mode.SEARCH);
+		});
+		assertEquals(Mode.SEARCH, sink.get());
+	}
+
+	/**
+	 * Companion check: a no-op programmatic selection (already-selected mode)
+	 * must NOT fire the callback. The owning panel relies on this to know the
+	 * dispatcher would short-circuit anyway, and handles the same-mode side
+	 * effects (visibility + rebuild) directly.
+	 */
+	@Test
+	public void setSelectedMode_doesNotFireCallback_forSameMode() throws Exception
+	{
+		AtomicReference<Mode> sink = new AtomicReference<>();
+		SwingUtilities.invokeAndWait(() ->
+		{
+			SelectorControlsPanel panel = newPanel(Mode.EFFICIENT,
+				sink, new AtomicReference<>(), new AtomicReference<>(),
+				new AtomicInteger());
+
+			panel.setSelectedMode(Mode.EFFICIENT);
+		});
+		assertEquals(null, sink.get());
+	}
+
+	/**
+	 * End-to-end regression guard for PR #531 HIGH: simulates the owning
+	 * panel's wiring (selector → listener → {@link PanelModeDispatcher}) with
+	 * recording-fake controllers, and verifies that a programmatic transition
+	 * fires {@code onModeDeactivated()} on the leaving controller exactly once
+	 * and {@code onModeActivated()} on the entering controller exactly once.
+	 * Before the fix, {@code panel.setMode(...)} mutated {@code currentMode}
+	 * before dispatching, so the listener saw {@code previous == next} and the
+	 * dispatcher short-circuited — both hooks fired zero times.
+	 */
+	@Test
+	public void setSelectedMode_firesLifecycleHooksThroughDispatcher() throws Exception
+	{
+		RecordingController efficientController = new RecordingController();
+		RecordingController searchController = new RecordingController();
+
+		Map<Mode, PanelModeController> controllers = new EnumMap<>(Mode.class);
+		controllers.put(Mode.EFFICIENT, efficientController);
+		controllers.put(Mode.SEARCH, searchController);
+		PanelModeDispatcher<Mode> dispatcher = new PanelModeDispatcher<>(controllers);
+
+		AtomicReference<Mode> currentMode = new AtomicReference<>(Mode.EFFICIENT);
+		// Mirror the panel's onModeSelected listener: capture previous, write
+		// next, then dispatch.
+		java.util.function.Consumer<Mode> listener = nextMode ->
+		{
+			Mode previous = currentMode.get();
+			currentMode.set(nextMode);
+			dispatcher.switchMode(previous, nextMode);
+		};
+
+		SwingUtilities.invokeAndWait(() ->
+		{
+			SelectorControlsPanel panel = new SelectorControlsPanel(
+				config,
+				Mode.EFFICIENT,
+				listener,
+				afk -> { },
+				sort -> { },
+				() -> { });
+
+			// Mimic panel.setMode(Mode.SEARCH) under the fixed implementation:
+			// no pre-mutation, route entirely through the selector.
+			panel.setSelectedMode(Mode.SEARCH);
+		});
+
+		assertEquals(Mode.SEARCH, currentMode.get());
+		assertEquals(1, efficientController.deactivatedCount);
+		assertEquals(0, efficientController.activatedCount);
+		assertEquals(1, searchController.activatedCount);
+		assertEquals(0, searchController.deactivatedCount);
+	}
+
+	/** Recording-fake controller used by the end-to-end lifecycle test. */
+	private static final class RecordingController implements PanelModeController
+	{
+		int activatedCount = 0;
+		int deactivatedCount = 0;
+
+		@Override
+		public void buildView()
+		{
+			// No-op for the lifecycle test.
+		}
+
+		@Override
+		public void onModeActivated()
+		{
+			activatedCount++;
+		}
+
+		@Override
+		public void onModeDeactivated()
+		{
+			deactivatedCount++;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
