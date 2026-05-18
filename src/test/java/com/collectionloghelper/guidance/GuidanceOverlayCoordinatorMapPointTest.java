@@ -129,6 +129,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 	@Before
 	public void setUp() throws Exception
 	{
+		OverlayStepApplier overlayStepApplier = newOverlayStepApplier();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -152,7 +153,8 @@ public class GuidanceOverlayCoordinatorMapPointTest
 				WorldMapRouteOverlay.class,
 				WorldMapDestinationOverlay.class,
 				GroundItemHighlightOverlay.class,
-				WidgetHighlightOverlay.class);
+				WidgetHighlightOverlay.class,
+				OverlayStepApplier.class);
 		ctor.setAccessible(true);
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
@@ -162,7 +164,8 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
-			groundItemHighlightOverlay, widgetHighlightOverlay);
+			groundItemHighlightOverlay, widgetHighlightOverlay,
+			overlayStepApplier);
 
 		// Default stubs: no unmet requirements; buildRequirementRows called unconditionally
 		when(requirementsChecker.getUnmetRequirements(any())).thenReturn(Collections.emptyList());
@@ -245,6 +248,24 @@ public class GuidanceOverlayCoordinatorMapPointTest
 	// ---- helpers ----
 
 	/** Builds a minimal BOSSES source with coordinates but no guidance steps. */
+	private OverlayStepApplier newOverlayStepApplier() throws Exception
+	{
+		Constructor<OverlayStepApplier> ctor = OverlayStepApplier.class.getDeclaredConstructor(
+			Client.class, ClientThread.class, EventBus.class, CollectionLogHelperConfig.class,
+			GuidanceSequencer.class, PlayerTravelCapabilities.class, RequiredItemResolver.class,
+			WorldMapPointManager.class, GuidanceOverlay.class, GuidanceMinimapOverlay.class,
+			DialogHighlightOverlay.class, ObjectHighlightOverlay.class, ItemHighlightOverlay.class,
+			WorldMapRouteOverlay.class, WorldMapDestinationOverlay.class,
+			GroundItemHighlightOverlay.class, WidgetHighlightOverlay.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, clientThread, eventBus, config, guidanceSequencer,
+			travelCapabilities, requiredItemResolver, worldMapPointManager,
+			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
+			objectHighlightOverlay, itemHighlightOverlay,
+			worldMapRouteOverlay, worldMapDestinationOverlay,
+			groundItemHighlightOverlay, widgetHighlightOverlay);
+	}
+
 	private static CollectionLogSource sourceAtCoords(
 		String name, int x, int y, int plane)
 	{
