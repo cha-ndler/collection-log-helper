@@ -976,7 +976,7 @@ public class CollectionLogHelperPlugin extends Plugin
 					}
 					else
 					{
-						log.debug("TempleOSRS KC entry '{}' not found in CLH data.getDatabase() — skipping",
+						log.debug("TempleOSRS KC entry '{}' not found in CLH database - skipping",
 							entry.getKey());
 					}
 				}
