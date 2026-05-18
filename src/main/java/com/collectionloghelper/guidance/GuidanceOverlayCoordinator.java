@@ -114,6 +114,7 @@ public class GuidanceOverlayCoordinator
 	private final GroundItemHighlightOverlay groundItemHighlightOverlay;
 	private final WidgetHighlightOverlay widgetHighlightOverlay;
 	private final OverlayStepApplier overlayStepApplier;
+	private final WorldMapController worldMapController;
 
 	// -- Guidance UI state (previously in plugin) --
 
@@ -188,7 +189,8 @@ public class GuidanceOverlayCoordinator
 		WorldMapDestinationOverlay worldMapDestinationOverlay,
 		GroundItemHighlightOverlay groundItemHighlightOverlay,
 		WidgetHighlightOverlay widgetHighlightOverlay,
-		OverlayStepApplier overlayStepApplier)
+		OverlayStepApplier overlayStepApplier,
+		WorldMapController worldMapController)
 	{
 		this.client = client;
 		this.clientThread = clientThread;
@@ -213,6 +215,7 @@ public class GuidanceOverlayCoordinator
 		this.groundItemHighlightOverlay = groundItemHighlightOverlay;
 		this.widgetHighlightOverlay = widgetHighlightOverlay;
 		this.overlayStepApplier = overlayStepApplier;
+		this.worldMapController = worldMapController;
 	}
 
 	/**
@@ -434,7 +437,7 @@ public class GuidanceOverlayCoordinator
 		tickDynamicTargetEvaluator();
 
 		// World map arrow rotation
-		updateWorldMapArrow();
+		worldMapController.updateArrow(activeMapPoint);
 	}
 
 	/**
@@ -473,7 +476,7 @@ public class GuidanceOverlayCoordinator
 		guidanceOverlay.setTargetPoint(dynamicPoint);
 		guidanceMinimapOverlay.setTargetPoint(dynamicPoint);
 		worldMapRouteOverlay.setTargetPoint(dynamicPoint);
-		worldMapDestinationOverlay.setTarget(dynamicPoint, resolveStepIconType(step));
+		worldMapDestinationOverlay.setTarget(dynamicPoint, worldMapController.resolveStepIconType(step, activeTargetItemId));
 		if (activeMapPoint != null)
 		{
 			worldMapPointManager.remove(activeMapPoint);
@@ -482,7 +485,7 @@ public class GuidanceOverlayCoordinator
 			step.resolveDescription(activeTargetItemId), collectionLogIcon);
 		worldMapPointManager.add(activeMapPoint);
 		worldMapDestinationOverlay.setMapPointActive(true);
-		if (shouldSetHintArrowTo(dynamicPoint))
+		if (worldMapController.shouldSetHintArrowTo(dynamicPoint))
 		{
 			client.setHintArrow(dynamicPoint);
 		}
@@ -566,7 +569,9 @@ public class GuidanceOverlayCoordinator
 	{
 		OverlayStepApplier.Result result = overlayStepApplier.apply(step, sourceName, source,
 			new OverlayStepApplier.Input(activeTargetItemId, lastMessagedStepIndex, activeMapPoint, collectionLogIcon),
-			this::resolveStepIconType, this::shouldSetHintArrowTo, wp -> pendingShortestPathTarget = wp);
+			step1 -> worldMapController.resolveStepIconType(step1, activeTargetItemId),
+			worldMapController::shouldSetHintArrowTo,
+			wp -> pendingShortestPathTarget = wp);
 		lastMessagedStepIndex = result.lastMessagedStepIndex;
 		activeMapPoint = result.activeMapPoint;
 		applyDynamicItemObjectOverlays();
@@ -672,7 +677,7 @@ public class GuidanceOverlayCoordinator
 		{
 			client.clearHintArrow();
 
-			if (shouldSetHintArrowTo(worldPoint))
+			if (worldMapController.shouldSetHintArrowTo(worldPoint))
 			{
 				client.setHintArrow(worldPoint);
 			}
@@ -821,129 +826,18 @@ public class GuidanceOverlayCoordinator
 		}
 	}
 
-	private void updateWorldMapArrow()
-	{
-		if (activeMapPoint == null)
-		{
-			return;
-		}
-
-		net.runelite.api.worldmap.WorldMap worldMap = client.getWorldMap();
-		if (worldMap == null)
-		{
-			return;
-		}
-
-		net.runelite.api.Point mapCenter = worldMap.getWorldMapPosition();
-		if (mapCenter == null)
-		{
-			return;
-		}
-
-		WorldPoint target = activeMapPoint.getWorldPoint();
-		int dx = target.getX() - mapCenter.getX();
-		// World map Y is inverted (higher Y = further north = up on map)
-		int dy = target.getY() - mapCenter.getY();
-
-		// Map 8 octants to arrow directions
-		int degrees;
-		if (Math.abs(dx) > Math.abs(dy) * 2)
-		{
-			degrees = dx > 0 ? 0 : 180;
-		}
-		else if (Math.abs(dy) > Math.abs(dx) * 2)
-		{
-			degrees = dy > 0 ? 270 : 90;
-		}
-		else if (dx > 0)
-		{
-			degrees = dy > 0 ? 315 : 45;
-		}
-		else
-		{
-			degrees = dy > 0 ? 225 : 135;
-		}
-
-		activeMapPoint.rotateArrow(degrees);
-	}
-
 	/**
 	 * Re-applies the hint arrow against the current guidance step, respecting
 	 * {@code config.showHintArrow()}. Called by the config-change handler when
 	 * "Show Hint Arrow" is toggled mid-guidance so the change takes effect
 	 * immediately rather than at the next step transition.
 	 *
-	 * <p>When the toggle goes OFF (or guidance is inactive), the arrow is
-	 * cleared. When the toggle goes ON and a step with a world target is
-	 * active, the arrow is re-set at that target.
-	 *
-	 * <p>All client mutations are dispatched on the client thread.
+	 * <p>Delegates to {@link WorldMapController#refreshHintArrow(boolean, GuidanceStep)},
+	 * supplying the current sequencer activity flag and current step.</p>
 	 */
 	public void refreshHintArrow()
 	{
-		clientThread.invokeLater(() ->
-		{
-			client.clearHintArrow();
-
-			if (!guidanceSequencer.isActive())
-			{
-				return;
-			}
-
-			GuidanceStep step = guidanceSequencer.getCurrentStep();
-			if (step == null || step.getWorldX() <= 0)
-			{
-				return;
-			}
-
-			WorldPoint worldPoint = new WorldPoint(
-				step.getWorldX(), step.getWorldY(), step.getWorldPlane());
-			if (shouldSetHintArrowTo(worldPoint))
-			{
-				client.setHintArrow(worldPoint);
-			}
-		});
+		worldMapController.refreshHintArrow(guidanceSequencer.isActive(), guidanceSequencer.getCurrentStep());
 	}
 
-	/**
-	 * Decides whether a hint arrow should be placed at the given world point.
-	 * Snapshots getLocalPlayer() once to avoid TOCTOU races. Skips hint arrows
-	 * inside non-top-level WorldViews (e.g. sailing boats).
-	 */
-	private boolean shouldSetHintArrowTo(WorldPoint worldPoint)
-	{
-		if (!config.showHintArrow() || worldPoint == null)
-		{
-			return false;
-		}
-		Player lp = client.getLocalPlayer();
-		if (lp == null)
-		{
-			return false;
-		}
-		if (lp.getWorldView() != client.getTopLevelWorldView())
-		{
-			return false;
-		}
-		WorldPoint playerLoc = lp.getWorldLocation();
-		return playerLoc != null && playerLoc.getPlane() == worldPoint.getPlane();
-	}
-
-	/**
-	 * Determines the world-map destination icon type for a guidance step.
-	 * NPC steps use the NPC icon, object steps use the object/chest icon,
-	 * and all other steps use the generic tile diamond.
-	 */
-	private WorldMapDestinationOverlay.StepIconType resolveStepIconType(GuidanceStep step)
-	{
-		if (step.resolveNpcId(activeTargetItemId) > 0)
-		{
-			return WorldMapDestinationOverlay.StepIconType.NPC;
-		}
-		if (step.getObjectId() > 0 || (step.getObjectIds() != null && !step.getObjectIds().isEmpty()))
-		{
-			return WorldMapDestinationOverlay.StepIconType.OBJECT;
-		}
-		return WorldMapDestinationOverlay.StepIconType.TILE;
-	}
 }
