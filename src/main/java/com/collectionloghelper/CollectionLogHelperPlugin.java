@@ -41,6 +41,7 @@ import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.PlayerLocationResolver;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
 import com.collectionloghelper.lifecycle.SyncStateCoordinator;
+import com.collectionloghelper.lifecycle.VarbitChangeRouter;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
@@ -152,6 +153,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private PlayerLocationResolver playerLocationResolver;
+
+	@Inject
+	private VarbitChangeRouter varbitChangeRouter;
 
 
 	private CollectionLogHelperPanel panel;
@@ -294,6 +298,18 @@ public class CollectionLogHelperPlugin extends Plugin
 				pendingPanelRebuild = true;
 				rankedSourcesDirty = true;
 			});
+		varbitChangeRouter.setCallbacks(
+			() ->
+			{
+				pendingRequirementsRefresh = true;
+				pendingTravelVarbitRefresh = true;
+			},
+			this::rebuildSourcesWithMissingItems,
+			() ->
+			{
+				pendingPanelRebuild = true;
+				rankedSourcesDirty = true;
+			});
 		chatCommandManager.registerCommand("clh", chatEventHandler::onClhCommand);
 		log.info("Collection Log Helper started");
 	}
@@ -429,57 +445,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onVarbitChanged(VarbitChanged event)
 	{
-		// Runs on the client thread — safe to call client API
-		data.getCollectionState().refreshVarps();
-
-		// Authoring: log varbit changes (throttle to 1 per tick to avoid spam)
-		if (config.guidanceAuthoring() && client.getTickCount() != authoringLogger.getLastVarbitLogTick())
-		{
-			authoringLogger.setLastVarbitLogTick(client.getTickCount());
-			authoringLogger.log("VARBIT_CHANGED varbitId=%d value=%d",
-				event.getVarbitId(), event.getValue());
-		}
-
-		// Forward varbit change to guidance sequencer for VARBIT_AT_LEAST completion
-		guidance.getGuidanceSequencer().onVarbitChanged(event.getVarbitId(), event.getValue());
-
-		// Refresh Slayer task state and rebuild if the task changed
-		boolean wasActive = data.getSlayerTaskState().isTaskActive();
-		String oldCreature = data.getSlayerTaskState().getCreatureName();
-		int oldRemaining = data.getSlayerTaskState().getRemaining();
-		data.getSlayerTaskState().refresh();
-
-		boolean slayerChanged = wasActive != data.getSlayerTaskState().isTaskActive()
-			|| (data.getSlayerTaskState().getCreatureName() != null
-				&& !data.getSlayerTaskState().getCreatureName().equals(oldCreature))
-			|| data.getSlayerTaskState().getRemaining() != oldRemaining;
-
-		// Flag requirements and travel capabilities for refresh on next game tick (debounced).
-		// Quest states are varbits that fire hundreds of times during login,
-		// so we can't call refreshAccessibility() here — it scans all sources.
-		pendingRequirementsRefresh = true;
-		pendingTravelVarbitRefresh = true;
-
-		// Don't trigger rebuilds mid-scan; the settle logic in onGameTick
-		// will fire a single rebuild once script 4100 stops firing.
-		if (sync.getSyncStateCoordinator().isScriptScanActive())
-		{
-			return;
-		}
-
-		int currentCount = data.getCollectionState().getTotalObtained();
-		if (currentCount != sync.getSyncStateCoordinator().getLastObtainedCount())
-		{
-			sync.getSyncStateCoordinator().onCollectionStateChanged(currentCount);
-			rebuildSourcesWithMissingItems();
-			slayerChanged = true; // rebuild anyway
-		}
-
-		if (slayerChanged)
-		{
-			pendingPanelRebuild = true;
-			rankedSourcesDirty = true;
-		}
+		varbitChangeRouter.handle(event);
 	}
 
 	@Subscribe
