@@ -115,6 +115,34 @@ test {
 
 check.dependsOn jacocoTestCoverageVerification
 
+tasks.register('lintDropRates') {
+	group = 'verification'
+	description = 'Fails if drop_rates.json contains non-ASCII characters.'
+	def jsonFile = file('src/main/resources/com/collectionloghelper/drop_rates.json')
+	inputs.file(jsonFile)
+	doLast {
+		if (!jsonFile.exists()) {
+			throw new GradleException("Missing ${jsonFile}")
+		}
+		def violations = []
+		int lineNo = 0
+		jsonFile.eachLine('UTF-8') { line ->
+			lineNo++
+			for (int i = 0; i < line.length(); i++) {
+				int cp = line.codePointAt(i)
+				if (cp > 0x7f) {
+					violations << "  line ${lineNo} col ${i + 1}: codepoint U+${String.format('%04X', cp)} ('${new String(Character.toChars(cp))}')"
+					break
+				}
+			}
+		}
+		if (!violations.isEmpty()) {
+			throw new GradleException("Non-ASCII characters in drop_rates.json:\n" + violations.take(20).join("\n") + (violations.size() > 20 ? "\n  ... and ${violations.size() - 20} more" : "") + "\nPolicy: drop_rates.json must be ASCII-only. Replace fancy punctuation (em-dash, smart quotes, ellipsis, non-breaking space) with ASCII equivalents.")
+		}
+	}
+}
+check.dependsOn lintDropRates
+
 tasks.register('shadowJar', Jar) {
 	dependsOn configurations.runtimeClasspath
 	manifest {
