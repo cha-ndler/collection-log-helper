@@ -113,6 +113,7 @@ public class GuidanceOverlayCoordinator
 	private final WidgetHighlightOverlay widgetHighlightOverlay;
 	private final OverlayStepApplier overlayStepApplier;
 	private final OverlaySourceApplier overlaySourceApplier;
+	private final OverlayDeactivator overlayDeactivator;
 	private final WorldMapController worldMapController;
 	private final DynamicTargetManager dynamicTargetManager;
 	private final NpcTrackerHelper npcTrackerHelper;
@@ -184,6 +185,7 @@ public class GuidanceOverlayCoordinator
 		WidgetHighlightOverlay widgetHighlightOverlay,
 		OverlayStepApplier overlayStepApplier,
 		OverlaySourceApplier overlaySourceApplier,
+		OverlayDeactivator overlayDeactivator,
 		WorldMapController worldMapController,
 		DynamicTargetManager dynamicTargetManager,
 		NpcTrackerHelper npcTrackerHelper)
@@ -211,6 +213,7 @@ public class GuidanceOverlayCoordinator
 		this.widgetHighlightOverlay = widgetHighlightOverlay;
 		this.overlayStepApplier = overlayStepApplier;
 		this.overlaySourceApplier = overlaySourceApplier;
+		this.overlayDeactivator = overlayDeactivator;
 		this.worldMapController = worldMapController;
 		this.dynamicTargetManager = dynamicTargetManager;
 		this.npcTrackerHelper = npcTrackerHelper;
@@ -366,45 +369,11 @@ public class GuidanceOverlayCoordinator
 	{
 		activeTargetItemId = null;
 		lastMessagedStepIndex = -1;
-		npcTrackerHelper.clear();
-		if (activeInfoBox != null)
-		{
-			infoBoxManager.removeInfoBox(activeInfoBox);
-			activeInfoBox = null;
-		}
-		guidanceSequencer.stopSequence();
-		guidanceOverlay.clearTarget();
-		guidanceMinimapOverlay.clearTarget();
-		worldMapRouteOverlay.clearTarget();
-		worldMapDestinationOverlay.clearTarget();
-		worldMapDestinationOverlay.setMapPointActive(false);
-		dialogHighlightOverlay.clear();
-		objectHighlightOverlay.clearTarget();
-		itemHighlightOverlay.clearTarget();
-		groundItemHighlightOverlay.clearTargets();
-		widgetHighlightOverlay.clearHighlights();
-		activeMapPoint = null;
-		pendingShortestPathTarget = null;
-		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
-
-		clientThread.invokeLater(() ->
-		{
-			client.clearHintArrow();
-
-			if (config.useShortestPath())
-			{
-				eventBus.post(new PluginMessage("shortestpath", "clear"));
-			}
-		});
-
-		if (panel != null)
-		{
-			panel.hideClueGuidance();
-			panel.hideStepProgress();
-			panel.setGuidanceState(false, null, null);
-		}
-
-		log.debug("Guidance deactivated");
+		OverlayDeactivator.Result result = overlayDeactivator.deactivate(
+			new OverlayDeactivator.Input(activeInfoBox, pendingShortestPathTarget, panel));
+		activeMapPoint = result.activeMapPoint;
+		activeInfoBox = result.activeInfoBox;
+		pendingShortestPathTarget = result.pendingShortestPathTarget;
 	}
 
 	/**
@@ -595,24 +564,11 @@ public class GuidanceOverlayCoordinator
 
 	private void clearGuidanceOverlays()
 	{
-		npcTrackerHelper.clear();
-		guidanceOverlay.clearTarget();
-		guidanceMinimapOverlay.clearTarget();
-		worldMapRouteOverlay.clearTarget();
-		worldMapDestinationOverlay.clearTarget();
-		worldMapDestinationOverlay.setMapPointActive(false);
-		dialogHighlightOverlay.clear();
-		objectHighlightOverlay.clearTarget();
-		itemHighlightOverlay.clearTarget();
-		groundItemHighlightOverlay.clearTargets();
-		widgetHighlightOverlay.clearHighlights();
-		clientThread.invokeLater(() -> client.clearHintArrow());
-		activeMapPoint = null;
-		worldMapPointManager.removeIf(CollectionLogWorldMapPoint.class::isInstance);
-		if (panel != null)
-		{
-			panel.hideClueGuidance();
-		}
+		OverlayDeactivator.Result result = overlayDeactivator.clearOverlays(
+			new OverlayDeactivator.Input(activeInfoBox, pendingShortestPathTarget, panel));
+		activeMapPoint = result.activeMapPoint;
+		activeInfoBox = result.activeInfoBox;
+		pendingShortestPathTarget = result.pendingShortestPathTarget;
 	}
 
 	/**
