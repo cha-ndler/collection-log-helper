@@ -67,7 +67,6 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.NPC;
 import net.runelite.api.Player;
-import net.runelite.api.WorldView;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.EventBus;
@@ -82,8 +81,9 @@ import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
  * applying step data to overlays, managing the world map arrow, and tracking
  * the guidance NPC. Extracted from CollectionLogHelperPlugin to reduce its size.
  *
- * <p>Thread safety: {@link #trackedGuidanceNpc} is volatile because it is
- * written on the client thread (via NpcSpawned/NpcDespawned and scanForTrackedNpc)
+ * <p>Thread safety: the tracked guidance NPC reference is owned by
+ * {@link NpcTrackerHelper}, which marks it volatile because it is written
+ * on the client thread (via NpcSpawned/NpcDespawned and scanForTrackedNpc)
  * but read on the EDT by overlay render methods.</p>
  */
 @Slf4j
@@ -114,18 +114,12 @@ public class GuidanceOverlayCoordinator
 	private final OverlayStepApplier overlayStepApplier;
 	private final WorldMapController worldMapController;
 	private final DynamicTargetManager dynamicTargetManager;
+	private final NpcTrackerHelper npcTrackerHelper;
 
 	// -- Guidance UI state (previously in plugin) --
 
 	private CollectionLogWorldMapPoint activeMapPoint;
 	private GuidanceInfoBox activeInfoBox;
-
-	/**
-	 * Tracked NPC for guidance overlay. Written on client thread via
-	 * NpcSpawned/NpcDespawned and scanForTrackedNpc, read on EDT by
-	 * overlay render. Must remain volatile.
-	 */
-	private volatile NPC trackedGuidanceNpc;
 
 	/**
 	 * The collection-log item ID that was active when guidance was last activated,
@@ -189,7 +183,8 @@ public class GuidanceOverlayCoordinator
 		WidgetHighlightOverlay widgetHighlightOverlay,
 		OverlayStepApplier overlayStepApplier,
 		WorldMapController worldMapController,
-		DynamicTargetManager dynamicTargetManager)
+		DynamicTargetManager dynamicTargetManager,
+		NpcTrackerHelper npcTrackerHelper)
 	{
 		this.client = client;
 		this.clientThread = clientThread;
@@ -215,6 +210,7 @@ public class GuidanceOverlayCoordinator
 		this.overlayStepApplier = overlayStepApplier;
 		this.worldMapController = worldMapController;
 		this.dynamicTargetManager = dynamicTargetManager;
+		this.npcTrackerHelper = npcTrackerHelper;
 	}
 
 	/**
@@ -367,7 +363,7 @@ public class GuidanceOverlayCoordinator
 	{
 		activeTargetItemId = null;
 		lastMessagedStepIndex = -1;
-		trackedGuidanceNpc = null;
+		npcTrackerHelper.clear();
 		if (activeInfoBox != null)
 		{
 			infoBoxManager.removeInfoBox(activeInfoBox);
@@ -441,34 +437,21 @@ public class GuidanceOverlayCoordinator
 	}
 
 	/**
-	 * Handles an NPC spawn event. If guidance is active and the NPC matches
-	 * the current step's target, begins tracking it.
+	 * Handles an NPC spawn event by delegating to {@link NpcTrackerHelper},
+	 * passing the current sequencer / step / target-item context.
 	 */
 	public void onNpcSpawned(NPC npc)
 	{
-		if (guidanceSequencer.isActive() && trackedGuidanceNpc == null)
-		{
-			GuidanceStep step = guidanceSequencer.getRawCurrentStep();
-			if (step != null && step.resolveNpcId(activeTargetItemId) > 0
-				&& npc.getId() == step.resolveNpcId(activeTargetItemId))
-			{
-				trackedGuidanceNpc = npc;
-				guidanceOverlay.setTrackedNpc(npc);
-			}
-		}
+		npcTrackerHelper.onNpcSpawned(npc, guidanceSequencer.isActive(),
+			guidanceSequencer.getRawCurrentStep(), activeTargetItemId);
 	}
 
 	/**
-	 * Handles an NPC despawn event. Clears tracking if the despawned NPC
-	 * was the currently tracked guidance NPC.
+	 * Handles an NPC despawn event by delegating to {@link NpcTrackerHelper}.
 	 */
 	public void onNpcDespawned(NPC npc)
 	{
-		if (npc == trackedGuidanceNpc)
-		{
-			trackedGuidanceNpc = null;
-			guidanceOverlay.setTrackedNpc(null);
-		}
+		npcTrackerHelper.onNpcDespawned(npc);
 	}
 
 	/**
@@ -641,7 +624,7 @@ public class GuidanceOverlayCoordinator
 
 	private void clearGuidanceOverlays()
 	{
-		trackedGuidanceNpc = null;
+		npcTrackerHelper.clear();
 		guidanceOverlay.clearTarget();
 		guidanceMinimapOverlay.clearTarget();
 		worldMapRouteOverlay.clearTarget();
@@ -662,41 +645,6 @@ public class GuidanceOverlayCoordinator
 	}
 
 	/**
-	 * Scans currently loaded NPCs to find a match for the given step's target NPC ID.
-	 * Called once when a new step activates to seed the tracked NPC reference.
-	 */
-	private void scanForTrackedNpc(GuidanceStep step)
-	{
-		trackedGuidanceNpc = null;
-		guidanceOverlay.setTrackedNpc(null);
-
-		final int resolvedNpcId = step == null ? 0 : step.resolveNpcId(activeTargetItemId);
-		if (resolvedNpcId <= 0)
-		{
-			return;
-		}
-
-		final int targetNpcId = resolvedNpcId;
-		clientThread.invokeLater(() ->
-		{
-			WorldView wv = client.getTopLevelWorldView();
-			if (wv == null)
-			{
-				return;
-			}
-			for (NPC npc : wv.npcs())
-			{
-				if (npc != null && npc.getId() == targetNpcId)
-				{
-					trackedGuidanceNpc = npc;
-					guidanceOverlay.setTrackedNpc(npc);
-					break;
-				}
-			}
-		});
-	}
-
-	/**
 	 * Callback from GuidanceSequencer when the current step changes.
 	 */
 	private void onStepChanged(GuidanceStep step)
@@ -705,7 +653,7 @@ public class GuidanceOverlayCoordinator
 		CollectionLogSource activeSource = guidanceSequencer.getActiveSource();
 		String sourceName = activeSource != null ? activeSource.getName() : "";
 		applyStepToOverlays(step, sourceName, activeSource);
-		scanForTrackedNpc(step);
+		npcTrackerHelper.scanForTrackedNpc(step, activeTargetItemId);
 
 		// Update InfoBox progress
 		if (activeInfoBox != null)
