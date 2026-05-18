@@ -149,6 +149,7 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 		NpcTrackerHelper npcTrackerHelper = newNpcTrackerHelper();
 		OverlayDeactivator overlayDeactivator = newOverlayDeactivator(npcTrackerHelper);
 		StepChangeHandler stepChangeHandler = newStepChangeHandler();
+		DynamicItemObjectTierResolver dynamicItemObjectTierResolver = newDynamicItemObjectTierResolver();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -178,7 +179,8 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 				WorldMapController.class,
 				DynamicTargetManager.class,
 				NpcTrackerHelper.class,
-				StepChangeHandler.class);
+				StepChangeHandler.class,
+				DynamicItemObjectTierResolver.class);
 		ctor.setAccessible(true);
 		DynamicTargetManager dynamicTargetManager = newDynamicTargetManager(worldMapController);
 		coordinator = ctor.newInstance(
@@ -191,7 +193,8 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
 			overlayStepApplier, overlaySourceApplier, overlayDeactivator,
-			worldMapController, dynamicTargetManager, npcTrackerHelper, stepChangeHandler);
+			worldMapController, dynamicTargetManager, npcTrackerHelper, stepChangeHandler,
+			dynamicItemObjectTierResolver);
 
 		coordinator.setPanel(panel);
 
@@ -337,6 +340,14 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			ClientThread.class, GuidanceSequencer.class, RequiredItemResolver.class);
 		ctor.setAccessible(true);
 		return ctor.newInstance(clientThread, guidanceSequencer, requiredItemResolver);
+	}
+
+	private DynamicItemObjectTierResolver newDynamicItemObjectTierResolver() throws Exception
+	{
+		Constructor<DynamicItemObjectTierResolver> ctor =
+			DynamicItemObjectTierResolver.class.getDeclaredConstructor(PlayerInventoryState.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(playerInventoryState);
 	}
 
 	private OverlayStepApplier newOverlayStepApplier() throws Exception
