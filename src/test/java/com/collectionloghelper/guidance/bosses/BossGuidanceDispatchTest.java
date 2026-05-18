@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.collectionloghelper.guidance.helper;
+package com.collectionloghelper.guidance.bosses;
 
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
@@ -50,12 +50,12 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.lenient;
 
 /**
- * Verifies that GuidanceSequencer correctly dispatches to a GuidanceHelper when
+ * Verifies that GuidanceSequencer correctly dispatches to a BossGuidance when
  * the source has a non-null guidanceHelperKey, and falls back to JSON steps when
  * it does not.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class GuidanceHelperDispatchTest
+public class BossGuidanceDispatchTest
 {
 	@Mock
 	private PlayerInventoryState inventoryState;
@@ -64,7 +64,7 @@ public class GuidanceHelperDispatchTest
 	@Mock
 	private RequirementsChecker requirementsChecker;
 
-	private GuidanceHelperRegistry registry;
+	private BossGuidanceRegistry registry;
 	private GuidanceSequencer sequencer;
 
 	@Before
@@ -75,18 +75,18 @@ public class GuidanceHelperDispatchTest
 		lenient().when(inventoryState.hasAllItems(anyList())).thenReturn(true);
 		lenient().when(collectionState.isItemObtained(anyInt())).thenReturn(false);
 
-		Constructor<CerberusHelper> cerberusCtor = CerberusHelper.class.getDeclaredConstructor();
+		Constructor<CerberusGuidance> cerberusCtor = CerberusGuidance.class.getDeclaredConstructor();
 		cerberusCtor.setAccessible(true);
-		CerberusHelper cerberusHelper = cerberusCtor.newInstance();
+		CerberusGuidance cerberusGuidance = cerberusCtor.newInstance();
 
-		Constructor<GuidanceHelperRegistry> regCtor =
-			GuidanceHelperRegistry.class.getDeclaredConstructor(CerberusHelper.class);
+		Constructor<BossGuidanceRegistry> regCtor =
+			BossGuidanceRegistry.class.getDeclaredConstructor(CerberusGuidance.class);
 		regCtor.setAccessible(true);
-		registry = regCtor.newInstance(cerberusHelper);
+		registry = regCtor.newInstance(cerberusGuidance);
 
 		Constructor<GuidanceSequencer> seqCtor = GuidanceSequencer.class.getDeclaredConstructor(
 			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class,
-			GuidanceHelperRegistry.class);
+			BossGuidanceRegistry.class);
 		seqCtor.setAccessible(true);
 		sequencer = seqCtor.newInstance(inventoryState, collectionState, requirementsChecker, registry);
 	}
@@ -122,7 +122,7 @@ public class GuidanceHelperDispatchTest
 	}
 
 	@Test
-	public void startSequence_withCerberusHelperKey_usesHelperSteps()
+	public void startSequence_withCerberusHelperKey_usesBossSteps()
 	{
 		GuidanceStep jsonOnlyStep = makeManualStep("JSON-only step");
 		CollectionLogSource source = makeSource("Cerberus", "cerberus",
@@ -136,9 +136,9 @@ public class GuidanceHelperDispatchTest
 		assertNotNull("Current step must not be null", current);
 		assertEquals(CompletionCondition.ARRIVE_AT_TILE, current.getCompletionCondition());
 		assertEquals("Travel", current.getSection());
-		assertEquals("Sequencer must use 3 steps from CerberusHelper",
+		assertEquals("Sequencer must use 3 steps from CerberusGuidance",
 			3, sequencer.getTotalSteps());
-		assertFalse("JSON-only step must not appear when helper is used",
+		assertFalse("JSON-only step must not appear when boss guidance is used",
 			"JSON-only step".equals(current.getDescription()));
 	}
 

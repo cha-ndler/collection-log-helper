@@ -22,58 +22,58 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.collectionloghelper.guidance.helper;
+package com.collectionloghelper.guidance.bosses;
 
 import java.lang.reflect.Constructor;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class GuidanceHelperRegistryTest
+public class BossGuidanceRegistryTest
 {
-	private GuidanceHelperRegistry buildRegistry() throws Exception
+	private BossGuidanceRegistry buildRegistry() throws Exception
 	{
-		CerberusHelper cerberusHelper = buildCerberusHelper();
-		Constructor<GuidanceHelperRegistry> ctor =
-			GuidanceHelperRegistry.class.getDeclaredConstructor(CerberusHelper.class);
+		CerberusGuidance cerberusGuidance = buildCerberusGuidance();
+		Constructor<BossGuidanceRegistry> ctor =
+			BossGuidanceRegistry.class.getDeclaredConstructor(CerberusGuidance.class);
 		ctor.setAccessible(true);
-		return ctor.newInstance(cerberusHelper);
+		return ctor.newInstance(cerberusGuidance);
 	}
 
-	private CerberusHelper buildCerberusHelper() throws Exception
+	private CerberusGuidance buildCerberusGuidance() throws Exception
 	{
-		Constructor<CerberusHelper> ctor = CerberusHelper.class.getDeclaredConstructor();
+		Constructor<CerberusGuidance> ctor = CerberusGuidance.class.getDeclaredConstructor();
 		ctor.setAccessible(true);
 		return ctor.newInstance();
 	}
 
 	@Test
-	public void get_cerberusKey_returnsCerberusHelper() throws Exception
+	public void get_cerberusKey_returnsCerberusGuidance() throws Exception
 	{
-		GuidanceHelperRegistry registry = buildRegistry();
-		GuidanceHelper helper = registry.get("cerberus");
-		assertNotNull("Registry must return a helper for 'cerberus'", helper);
-		assertTrue("Helper must be a CerberusHelper", helper instanceof CerberusHelper);
+		BossGuidanceRegistry registry = buildRegistry();
+		BossGuidance boss = registry.get("cerberus");
+		assertNotNull("Registry must return boss guidance for 'cerberus'", boss);
+		assertTrue("Boss guidance must be a CerberusGuidance", boss instanceof CerberusGuidance);
 	}
 
 	@Test
 	public void get_nullKey_returnsNull() throws Exception
 	{
-		GuidanceHelperRegistry registry = buildRegistry();
+		BossGuidanceRegistry registry = buildRegistry();
 		assertNull("Registry must return null for null key", registry.get(null));
 	}
 
 	@Test
 	public void get_unknownKey_returnsNull() throws Exception
 	{
-		GuidanceHelperRegistry registry = buildRegistry();
+		BossGuidanceRegistry registry = buildRegistry();
 		assertNull("Registry must return null for unknown key", registry.get("zulrah"));
 	}
 
 	@Test
-	public void getAllHelpers_containsCerberus() throws Exception
+	public void getAllBosses_containsCerberus() throws Exception
 	{
-		GuidanceHelperRegistry registry = buildRegistry();
-		assertTrue("'cerberus' must be in getAllHelpers()", registry.getAllHelpers().containsKey("cerberus"));
+		BossGuidanceRegistry registry = buildRegistry();
+		assertTrue("'cerberus' must be in getAllBosses()", registry.getAllBosses().containsKey("cerberus"));
 	}
 }

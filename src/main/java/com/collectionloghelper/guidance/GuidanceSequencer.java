@@ -32,8 +32,8 @@ import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.StepWaypoint;
 import com.collectionloghelper.data.Zone;
-import com.collectionloghelper.guidance.helper.GuidanceHelper;
-import com.collectionloghelper.guidance.helper.GuidanceHelperRegistry;
+import com.collectionloghelper.guidance.bosses.BossGuidance;
+import com.collectionloghelper.guidance.bosses.BossGuidanceRegistry;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +55,7 @@ public class GuidanceSequencer
 	private final PlayerInventoryState inventoryState;
 	private final PlayerCollectionState collectionState;
 	private final RequirementsChecker requirementsChecker;
-	private final GuidanceHelperRegistry helperRegistry;
+	private final BossGuidanceRegistry bossRegistry;
 
 	private volatile WorldPoint lastKnownPlayerLocation;
 	private volatile CollectionLogSource activeSource;
@@ -88,12 +88,12 @@ public class GuidanceSequencer
 
 	@Inject
 	private GuidanceSequencer(PlayerInventoryState inventoryState, PlayerCollectionState collectionState,
-		RequirementsChecker requirementsChecker, GuidanceHelperRegistry helperRegistry)
+		RequirementsChecker requirementsChecker, BossGuidanceRegistry bossRegistry)
 	{
 		this.inventoryState = inventoryState;
 		this.collectionState = collectionState;
 		this.requirementsChecker = requirementsChecker;
-		this.helperRegistry = helperRegistry;
+		this.bossRegistry = bossRegistry;
 	}
 
 	/**
@@ -113,14 +113,14 @@ public class GuidanceSequencer
 		Runnable sequenceComplete)
 	{
 		this.activeSource = source;
-		// Route through Java helper when the source opts in, else fall back to JSON steps
-		GuidanceHelper helper = helperRegistry != null
-			? helperRegistry.get(source.getGuidanceHelperKey())
+		// Route through Java boss guidance when the source opts in, else fall back to JSON steps
+		BossGuidance boss = bossRegistry != null
+			? bossRegistry.get(source.getGuidanceHelperKey())
 			: null;
-		if (helper != null)
+		if (boss != null)
 		{
-			log.debug("Using Java helper '{}' for source {}", source.getGuidanceHelperKey(), source.getName());
-			this.steps = helper.getSteps(null, null);
+			log.debug("Using Java boss guidance '{}' for source {}", source.getGuidanceHelperKey(), source.getName());
+			this.steps = boss.getSteps(null, null);
 		}
 		else
 		{
