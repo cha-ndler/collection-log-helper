@@ -32,7 +32,7 @@ import com.collectionloghelper.di.DataModule;
 import com.collectionloghelper.di.EfficiencyModule;
 import com.collectionloghelper.di.GuidanceModule;
 import com.collectionloghelper.di.SyncModule;
-import com.collectionloghelper.sync.ImportResult;
+import com.collectionloghelper.sync.CollectionLogNetImportOrchestrator;
 import com.collectionloghelper.sync.LootSyncManager;
 import com.collectionloghelper.sync.TempleSyncOrchestrator;
 import com.collectionloghelper.efficiency.ScoredItem;
@@ -49,7 +49,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
@@ -146,6 +145,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	private TempleSyncOrchestrator templeSyncOrchestrator;
 
 	@Inject
+	private CollectionLogNetImportOrchestrator collectionLogNetImportOrchestrator;
+
+	@Inject
 	private ChatEventHandler chatEventHandler;
 
 	@Inject
@@ -213,40 +215,11 @@ public class CollectionLogHelperPlugin extends Plugin
 			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::syncToCurrentState)
 		);
 
-		// Wire collectionlog.net import callback — fetches username from the logged-in player.
-		// Called from the EDT; submits async work and posts the result back via the panel method.
-		panel.setCollectionLogNetImportCallback(() ->
-		{
-			String username = client.getLocalPlayer() != null
-				? client.getLocalPlayer().getName()
-				: null;
-			if (username == null || username.isEmpty())
-			{
-				panel.onCollectionLogNetImportComplete("Log in first");
-				return;
-			}
-			Future<ImportResult> future =
-				sync.getCollectionLogNetImporter().importProfile(username);
-			// Poll the result on the shared daemon executor so the EDT is not blocked
-			httpResultExecutor.submit(() ->
-			{
-				try
-				{
-					ImportResult result = future.get();
-					panel.onCollectionLogNetImportComplete(result.toToastMessage());
-					if (result.isSuccess())
-					{
-						// Trigger a panel rebuild on the EDT
-						panel.rebuild();
-					}
-				}
-				catch (Exception e)
-				{
-					log.warn("collectionlog.net import result waiter failed", e);
-					panel.onCollectionLogNetImportComplete("collectionlog.net: error");
-				}
-			});
-		});
+		// Wire collectionlog.net import callback — delegates to the orchestrator
+		// which resolves the player name, dispatches the import, and posts the
+		// result back through the panel.
+		panel.setCollectionLogNetImportCallback(
+			() -> collectionLogNetImportOrchestrator.requestImport(panel, httpResultExecutor));
 
 		// Wire TempleOSRS KC sync button callback
 		panel.setTempleSyncCallback(() -> templeSyncOrchestrator.requestSync(panel, httpResultExecutor));
