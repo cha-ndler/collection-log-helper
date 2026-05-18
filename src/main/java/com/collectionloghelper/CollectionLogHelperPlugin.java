@@ -29,6 +29,7 @@ import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.di.DataModule;
+import com.collectionloghelper.di.EfficiencyModule;
 import com.collectionloghelper.di.GuidanceModule;
 import com.collectionloghelper.sync.CollectionLogNetImporter;
 import com.collectionloghelper.sync.ImportResult;
@@ -37,11 +38,7 @@ import com.collectionloghelper.sync.SourceKcStore;
 import com.collectionloghelper.sync.SyncResult;
 import com.collectionloghelper.sync.TempleOsrsKcSyncer;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
-import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
-import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
-import com.collectionloghelper.learning.DryStreakAnalyzer;
-import com.collectionloghelper.learning.KillTimeTracker;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
@@ -135,22 +132,13 @@ public class CollectionLogHelperPlugin extends Plugin
 	private DataModule data;
 
 	@Inject
-	private EfficiencyCalculator calculator;
-
-	@Inject
-	private ClueCompletionEstimator clueEstimator;
+	private EfficiencyModule efficiency;
 
 	@Inject
 	private RequirementsChecker requirementsChecker;
 
 	@Inject
 	private GuidanceModule guidance;
-
-	@Inject
-	private SlayerStrategyCalculator slayerStrategyCalculator;
-
-	@Inject
-	private DryStreakAnalyzer dryStreakAnalyzer;
 
 	@Inject
 	private PlayerTravelCapabilities travelCapabilities;
@@ -169,9 +157,6 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private CollectionLogNetImporter collectionLogNetImporter;
-
-	@Inject
-	private KillTimeTracker killTimeTracker;
 
 	@Inject
 	private TempleOsrsKcSyncer templeOsrsKcSyncer;
@@ -229,10 +214,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		});
 
 		panel = new CollectionLogHelperPanel(
-			config, data.getDatabase(), data.getCollectionState(), calculator, clueEstimator,
+			config, data.getDatabase(), data.getCollectionState(), efficiency.getCalculator(), efficiency.getClueEstimator(),
 			itemManager, requirementsChecker, data.getDataSyncState(), data.getSlayerTaskState(),
-			slayerStrategyCalculator, data.getPlayerInventoryState(), data.getPlayerBankState(),
-			dryStreakAnalyzer,
+			efficiency.getSlayerStrategyCalculator(), data.getPlayerInventoryState(), data.getPlayerBankState(),
+			efficiency.getDryStreakAnalyzer(),
 			(java.util.function.BiConsumer<CollectionLogSource, Integer>) this::activateGuidance,
 			this::deactivateGuidance,
 			filter -> configManager.setConfiguration("collectionloghelper", "afkFilter", filter.name()),
@@ -329,7 +314,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidance.getGuidanceEventRouter().setOnSyncConfigChanged(this::onSyncConfigChanged);
 		eventBus.register(guidance.getGuidanceEventRouter());
 		eventBus.register(guidance.getGuidanceMovementTracker());
-		eventBus.register(killTimeTracker);
+		eventBus.register(efficiency.getKillTimeTracker());
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)
@@ -370,8 +355,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		eventBus.unregister(sceneEventRouter);
 		eventBus.unregister(guidance.getGuidanceEventRouter());
 		eventBus.unregister(guidance.getGuidanceMovementTracker());
-		eventBus.unregister(killTimeTracker);
-		killTimeTracker.reset();
+		eventBus.unregister(efficiency.getKillTimeTracker());
+		efficiency.getKillTimeTracker().reset();
 		deactivateGuidance();
 		syncStateCoordinator.reset();
 		sourceKcStore.clear();
@@ -452,7 +437,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			data.getCollectionState().clearState();
 			requirementsChecker.clearCache();
-			clueEstimator.resetBucket();
+			efficiency.getClueEstimator().resetBucket();
 			data.getSlayerTaskState().reset();
 			syncStateCoordinator.onGameStateLoginScreen();
 			syncStateCoordinator.setLastObtainedCount(-1);
@@ -466,7 +451,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			data.getPlayerBankState().reset();
 			data.getPlayerInventoryState().reset();
 			travelCapabilities.reset();
-			killTimeTracker.reset();
+			efficiency.getKillTimeTracker().reset();
 			data.getPluginDataManager().reset();
 		}
 	}
@@ -542,7 +527,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onStatChanged(StatChanged event)
 	{
-		clueEstimator.resetBucket();
+		efficiency.getClueEstimator().resetBucket();
 		pendingRequirementsRefresh = true;
 	}
 
@@ -632,7 +617,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			if (data.getPluginDataManager().init())
 			{
-				killTimeTracker.init(data.getPluginDataManager().getCharacterDir());
+				efficiency.getKillTimeTracker().init(data.getPluginDataManager().getCharacterDir());
 			}
 		}
 
@@ -705,7 +690,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			exportFile = new java.io.File(
 				net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
 		}
-		calculator.exportEfficiencyList(exportFile, client);
+		efficiency.getCalculator().exportEfficiencyList(exportFile, client);
 	}
 
 	/**
@@ -788,7 +773,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		if (rankedSourcesDirty || cachedRankedSources == null)
 		{
-			cachedRankedSources = calculator.rankByEfficiency();
+			cachedRankedSources = efficiency.getCalculator().rankByEfficiency();
 			rankedSourcesDirty = false;
 		}
 		return cachedRankedSources;
