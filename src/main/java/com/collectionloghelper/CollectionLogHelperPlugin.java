@@ -31,10 +31,9 @@ import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.di.DataModule;
 import com.collectionloghelper.di.EfficiencyModule;
 import com.collectionloghelper.di.GuidanceModule;
-import com.collectionloghelper.sync.CollectionLogNetImporter;
+import com.collectionloghelper.di.SyncModule;
 import com.collectionloghelper.sync.ImportResult;
 import com.collectionloghelper.sync.LootSyncManager;
-import com.collectionloghelper.sync.SourceKcStore;
 import com.collectionloghelper.sync.SyncResult;
 import com.collectionloghelper.sync.TempleOsrsKcSyncer;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
@@ -153,16 +152,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private AuthoringLogger authoringLogger;
 
 	@Inject
-	private SyncStateCoordinator syncStateCoordinator;
-
-	@Inject
-	private CollectionLogNetImporter collectionLogNetImporter;
-
-	@Inject
-	private TempleOsrsKcSyncer templeOsrsKcSyncer;
-
-	@Inject
-	private SourceKcStore sourceKcStore;
+	private SyncModule sync;
 
 	@Inject
 	private LootSyncManager lootSyncManager;
@@ -248,7 +238,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				return;
 			}
 			Future<ImportResult> future =
-				collectionLogNetImporter.importProfile(username);
+				sync.getCollectionLogNetImporter().importProfile(username);
 			// Poll the result on the shared daemon executor so the EDT is not blocked
 			httpResultExecutor.submit(() ->
 			{
@@ -327,7 +317,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				requirementsChecker.refreshAccessibility(data.getDatabase().getAllSources());
 				travelCapabilities.refreshQuestState();
 				travelCapabilities.refreshVarbits();
-				syncStateCoordinator.setLastObtainedCount(data.getCollectionState().getTotalObtained());
+				sync.getSyncStateCoordinator().setLastObtainedCount(data.getCollectionState().getTotalObtained());
 				rebuildSourcesWithMissingItems();
 				if (panel != null)
 				{
@@ -345,7 +335,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		chatCommandManager.unregisterCommand("clh");
 		authoringLogger.close();
-		collectionLogNetImporter.shutdown();
+		sync.getCollectionLogNetImporter().shutdown();
 		if (panel != null)
 		{
 			panel.shutDown();
@@ -358,9 +348,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		eventBus.unregister(efficiency.getKillTimeTracker());
 		efficiency.getKillTimeTracker().reset();
 		deactivateGuidance();
-		syncStateCoordinator.reset();
-		sourceKcStore.clear();
-		templeOsrsKcSyncer.shutdown();
+		sync.getSyncStateCoordinator().reset();
+		sync.getSourceKcStore().clear();
+		sync.getTempleOsrsKcSyncer().shutdown();
 		if (httpResultExecutor != null)
 		{
 			httpResultExecutor.shutdownNow();
@@ -392,7 +382,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			// LOGGED_IN fires multiple times during login/transitions.
 			// Only reset sync state on the first fire to avoid clearing
 			// collection log / bank sync flags mid-session.
-			syncStateCoordinator.onGameStateLoggedIn();
+			sync.getSyncStateCoordinator().onGameStateLoggedIn();
 			slayerRefreshPending = true;
 			clientThread.invokeLater(() ->
 			{
@@ -403,7 +393,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				travelCapabilities.refreshQuestState();
 				travelCapabilities.refreshVarbits();
 				data.getSlayerTaskState().refresh();
-				syncStateCoordinator.setLastObtainedCount(data.getCollectionState().getTotalObtained());
+				sync.getSyncStateCoordinator().setLastObtainedCount(data.getCollectionState().getTotalObtained());
 				rebuildSourcesWithMissingItems();
 
 				// Rescan scene for tracked objects after scene (re)load
@@ -439,8 +429,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			requirementsChecker.clearCache();
 			efficiency.getClueEstimator().resetBucket();
 			data.getSlayerTaskState().reset();
-			syncStateCoordinator.onGameStateLoginScreen();
-			syncStateCoordinator.setLastObtainedCount(-1);
+			sync.getSyncStateCoordinator().onGameStateLoginScreen();
+			sync.getSyncStateCoordinator().setLastObtainedCount(-1);
 			sourcesWithMissingItems.clear();
 			slayerRefreshPending = false;
 			pendingTravelVarbitRefresh = false;
@@ -504,15 +494,15 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		// Don't trigger rebuilds mid-scan; the settle logic in onGameTick
 		// will fire a single rebuild once script 4100 stops firing.
-		if (syncStateCoordinator.isScriptScanActive())
+		if (sync.getSyncStateCoordinator().isScriptScanActive())
 		{
 			return;
 		}
 
 		int currentCount = data.getCollectionState().getTotalObtained();
-		if (currentCount != syncStateCoordinator.getLastObtainedCount())
+		if (currentCount != sync.getSyncStateCoordinator().getLastObtainedCount())
 		{
-			syncStateCoordinator.onCollectionStateChanged(currentCount);
+			sync.getSyncStateCoordinator().onCollectionStateChanged(currentCount);
 			rebuildSourcesWithMissingItems();
 			slayerChanged = true; // rebuild anyway
 		}
@@ -587,7 +577,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	public void onScriptPreFired(ScriptPreFired event)
 	{
 		ScriptEvent se = event.getScriptEvent();
-		syncStateCoordinator.onScriptPreFired(event.getScriptId(), se != null ? se.getArguments() : null);
+		sync.getSyncStateCoordinator().onScriptPreFired(event.getScriptId(), se != null ? se.getArguments() : null);
 	}
 
 	@Subscribe
@@ -598,7 +588,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			pendingRequirementsRefresh = false;
 			boolean reqsChanged = requirementsChecker.refreshAccessibility(data.getDatabase().getAllSources());
-			if (reqsChanged && !syncStateCoordinator.isScriptScanActive())
+			if (reqsChanged && !sync.getSyncStateCoordinator().isScriptScanActive())
 			{
 				pendingPanelRebuild = true;
 				rankedSourcesDirty = true;
@@ -646,7 +636,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Deferred slayer task refresh — varps may not be loaded in the initial
 		// invokeLater after LOGGED_IN, so re-read a few ticks later when the
 		// server has definitely sent all varp data.
-		if (slayerRefreshPending && syncStateCoordinator.getLoginTickDelay() <= 7)
+		if (slayerRefreshPending && sync.getSyncStateCoordinator().getLoginTickDelay() <= 7)
 		{
 			slayerRefreshPending = false;
 			data.getSlayerTaskState().refresh();
@@ -655,7 +645,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Delegate all remaining sync-lifecycle logic to the coordinator
-		SyncStateCoordinator.SyncTickResult syncResult = syncStateCoordinator.tickSync(
+		SyncStateCoordinator.SyncTickResult syncResult = sync.getSyncStateCoordinator().tickSync(
 			panel,
 			() -> {
 				pendingPanelRebuild = true;
@@ -842,7 +832,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		log.debug("Requesting TempleOSRS KC sync for '{}'", playerName);
 
-		Future<SyncResult> future = templeOsrsKcSyncer.syncKc(playerName);
+		Future<SyncResult> future = sync.getTempleOsrsKcSyncer().syncKc(playerName);
 
 		// Wait for the result on the shared daemon executor so the EDT is not blocked
 		httpResultExecutor.submit(() ->
@@ -875,7 +865,7 @@ public class CollectionLogHelperPlugin extends Plugin
 							entry.getKey());
 					}
 				}
-				sourceKcStore.update(validated);
+				sync.getSourceKcStore().update(validated);
 				log.info("TempleOSRS KC sync complete: {} sources updated, {} skipped",
 					validated.size(), finalResult.getSkippedCount());
 
