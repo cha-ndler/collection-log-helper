@@ -99,9 +99,26 @@ public class PanelRebuildOrchestratorTest
 		// (Linux, JDK 17) have been observed to leave the model at its default
 		// (max=100, extent=10) when assertions read the value immediately after
 		// setValue, causing values like 123 to clamp to 90.
-		scrollPane.getVerticalScrollBar().setValues(0, 400, 0, 5000);
+		pinScrollBounds(scrollPane.getVerticalScrollBar());
 
 		orchestrator = new PanelRebuildOrchestrator(hostPanel, listContainer);
+	}
+
+	/**
+	 * Pin the given scrollbar's {@code BoundedRangeModel} to a wide, deterministic
+	 * range so subsequent {@link JScrollBar#setValue(int)} calls in tests are not
+	 * clamped by lazy viewport layout. Must be called immediately before any
+	 * {@code setValue(...)} in a test, because intervening Swing layout/validation
+	 * passes can otherwise re-clamp the model to its computed (viewport-derived)
+	 * bounds before assertions read the value back.
+	 *
+	 * Headless Linux + JDK 17 has exhibited this flake twice (#515 setUp,
+	 * #516 captureRecordsScrollPositionFromEnclosingScrollPane); this helper
+	 * centralises the workaround so future test methods cannot regress.
+	 */
+	private static void pinScrollBounds(JScrollBar bar)
+	{
+		bar.setValues(0, 400, 0, 5000);
 	}
 
 	private CategorySummaryPanel newCategoryPanel(CollectionLogCategory category)
@@ -134,6 +151,7 @@ public class PanelRebuildOrchestratorTest
 	@Test
 	public void captureRecordsScrollPositionFromEnclosingScrollPane()
 	{
+		pinScrollBounds(vBar());
 		vBar().setValue(250);
 
 		PanelRebuildOrchestrator.RebuildSnapshot snapshot = orchestrator.capture();
@@ -231,8 +249,10 @@ public class PanelRebuildOrchestratorTest
 	@Test
 	public void deferScrollRestoreSchedulesValueOnVerticalScrollBar() throws Exception
 	{
+		pinScrollBounds(vBar());
 		vBar().setValue(400);
 		PanelRebuildOrchestrator.RebuildSnapshot snapshot = orchestrator.capture();
+		pinScrollBounds(vBar());
 		vBar().setValue(0);
 
 		orchestrator.deferScrollRestore(snapshot);
@@ -246,6 +266,7 @@ public class PanelRebuildOrchestratorTest
 	public void deferScrollRestoreIsNoOpWhenScrollPositionIsZero() throws Exception
 	{
 		PanelRebuildOrchestrator.RebuildSnapshot snapshot = orchestrator.capture();
+		pinScrollBounds(vBar());
 		vBar().setValue(123);
 
 		orchestrator.deferScrollRestore(snapshot);
