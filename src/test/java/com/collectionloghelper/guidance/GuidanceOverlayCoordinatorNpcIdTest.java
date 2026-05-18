@@ -146,6 +146,7 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 		NpcTrackerHelper npcTrackerHelper = newNpcTrackerHelper();
 		OverlayDeactivator overlayDeactivator = newOverlayDeactivator(npcTrackerHelper);
 		StepChangeHandler stepChangeHandler = newStepChangeHandler();
+		DynamicItemObjectTierResolver dynamicItemObjectTierResolver = newDynamicItemObjectTierResolver();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -175,7 +176,8 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 				WorldMapController.class,
 				DynamicTargetManager.class,
 				NpcTrackerHelper.class,
-				StepChangeHandler.class);
+				StepChangeHandler.class,
+				DynamicItemObjectTierResolver.class);
 		ctor.setAccessible(true);
 		DynamicTargetManager dynamicTargetManager = newDynamicTargetManager(worldMapController);
 		coordinator = ctor.newInstance(
@@ -188,7 +190,8 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
 			overlayStepApplier, overlaySourceApplier, overlayDeactivator,
-			worldMapController, dynamicTargetManager, npcTrackerHelper, stepChangeHandler);
+			worldMapController, dynamicTargetManager, npcTrackerHelper, stepChangeHandler,
+			dynamicItemObjectTierResolver);
 
 		when(requirementsChecker.getUnmetRequirements(any())).thenReturn(Collections.emptyList());
 		when(requirementsChecker.buildRequirementRows(any())).thenReturn(Collections.emptyList());
@@ -344,6 +347,14 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 			ClientThread.class, GuidanceSequencer.class, RequiredItemResolver.class);
 		ctor.setAccessible(true);
 		return ctor.newInstance(clientThread, guidanceSequencer, requiredItemResolver);
+	}
+
+	private DynamicItemObjectTierResolver newDynamicItemObjectTierResolver() throws Exception
+	{
+		Constructor<DynamicItemObjectTierResolver> ctor =
+			DynamicItemObjectTierResolver.class.getDeclaredConstructor(PlayerInventoryState.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(playerInventoryState);
 	}
 
 	private OverlayStepApplier newOverlayStepApplier() throws Exception
