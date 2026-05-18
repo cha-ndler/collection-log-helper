@@ -32,6 +32,7 @@ import com.collectionloghelper.di.GuidanceModule;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
+import com.collectionloghelper.lifecycle.PlayerLocationResolver;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -77,6 +78,9 @@ public class OnSequenceCompletePerItemTest
 	@Mock
 	private EfficiencyCalculator calculator;
 
+	@Mock
+	private PlayerLocationResolver playerLocationResolver;
+
 	private CollectionLogHelperPlugin plugin;
 
 	@Before
@@ -91,6 +95,7 @@ public class OnSequenceCompletePerItemTest
 		EfficiencyModule efficiencyModule = new EfficiencyModule(
 			calculator, null, null, null, null);
 		injectField("efficiency", efficiencyModule);
+		injectField("playerLocationResolver", playerLocationResolver);
 
 		// Make clientThread.invokeLater execute the runnable immediately so
 		// coordinator.activateGuidance is reachable within the same test call.
