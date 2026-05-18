@@ -112,6 +112,7 @@ public class GuidanceOverlayCoordinator
 	private final GroundItemHighlightOverlay groundItemHighlightOverlay;
 	private final WidgetHighlightOverlay widgetHighlightOverlay;
 	private final OverlayStepApplier overlayStepApplier;
+	private final OverlaySourceApplier overlaySourceApplier;
 	private final WorldMapController worldMapController;
 	private final DynamicTargetManager dynamicTargetManager;
 	private final NpcTrackerHelper npcTrackerHelper;
@@ -182,6 +183,7 @@ public class GuidanceOverlayCoordinator
 		GroundItemHighlightOverlay groundItemHighlightOverlay,
 		WidgetHighlightOverlay widgetHighlightOverlay,
 		OverlayStepApplier overlayStepApplier,
+		OverlaySourceApplier overlaySourceApplier,
 		WorldMapController worldMapController,
 		DynamicTargetManager dynamicTargetManager,
 		NpcTrackerHelper npcTrackerHelper)
@@ -208,6 +210,7 @@ public class GuidanceOverlayCoordinator
 		this.groundItemHighlightOverlay = groundItemHighlightOverlay;
 		this.widgetHighlightOverlay = widgetHighlightOverlay;
 		this.overlayStepApplier = overlayStepApplier;
+		this.overlaySourceApplier = overlaySourceApplier;
 		this.worldMapController = worldMapController;
 		this.dynamicTargetManager = dynamicTargetManager;
 		this.npcTrackerHelper = npcTrackerHelper;
@@ -574,52 +577,20 @@ public class GuidanceOverlayCoordinator
 
 	/**
 	 * Applies a source's default location data to overlays (non-sequencer path).
+	 *
+	 * <p>Delegates to {@link OverlaySourceApplier} to keep this coordinator
+	 * focused on lifecycle/state ownership. The applier holds no mutable state
+	 * of its own; the {@code activeMapPoint} and {@code pendingShortestPathTarget}
+	 * fields stay owned here and are threaded through {@link OverlaySourceApplier.Input}
+	 * / {@link OverlaySourceApplier.Result}.</p>
 	 */
 	private void applySourceToOverlays(CollectionLogSource source)
 	{
-		WorldPoint worldPoint = source.getWorldPoint(requirementsChecker);
-		String displayName = source.getDisplayLocation(requirementsChecker);
-
-		guidanceOverlay.setTargetPoint(worldPoint);
-		guidanceOverlay.setTargetName(source.getName());
-		guidanceOverlay.setLocationDescription(displayName);
-		// Non-sequencer path: no step context, so no per-step item requirements.
-		guidanceOverlay.setRequiredItems(Collections.emptyList());
-		guidanceOverlay.setTravelTip(source.getTravelTip());
-		guidanceOverlay.setTargetNpcId(source.getNpcId());
-		guidanceOverlay.setInteractAction(source.getInteractAction());
-		dialogHighlightOverlay.setTargetDialogOptions(source.getDialogOptions());
-		dialogHighlightOverlay.setGuidanceActive(true);
-		guidanceMinimapOverlay.setTargetPoint(worldPoint);
-		worldMapRouteOverlay.setTargetPoint(worldPoint);
-		// Non-sequencer path: no step context, use generic TILE icon.
-		worldMapDestinationOverlay.setTarget(worldPoint, WorldMapDestinationOverlay.StepIconType.TILE);
-		// Register a CollectionLogWorldMapPoint for click-to-focus behaviour (#429).
-		// WorldMapDestinationOverlay suppresses its off-screen arrow while the map
-		// point is active to avoid a duplicate edge-snap arrow (#410).
-		if (activeMapPoint != null)
-		{
-			worldMapPointManager.remove(activeMapPoint);
-		}
-		activeMapPoint = new CollectionLogWorldMapPoint(worldPoint, displayName, collectionLogIcon);
-		worldMapPointManager.add(activeMapPoint);
-		worldMapDestinationOverlay.setMapPointActive(true);
-
-		clientThread.invokeLater(() ->
-		{
-			client.clearHintArrow();
-
-			if (worldMapController.shouldSetHintArrowTo(worldPoint))
-			{
-				client.setHintArrow(worldPoint);
-			}
-
-			if (config.useShortestPath())
-			{
-				eventBus.post(new PluginMessage("shortestpath", "clear"));
-				pendingShortestPathTarget = worldPoint;
-			}
-		});
+		OverlaySourceApplier.Result result = overlaySourceApplier.apply(source,
+			new OverlaySourceApplier.Input(activeMapPoint, collectionLogIcon),
+			worldMapController::shouldSetHintArrowTo,
+			wp -> pendingShortestPathTarget = wp);
+		activeMapPoint = result.activeMapPoint;
 	}
 
 	private void clearGuidanceOverlays()
