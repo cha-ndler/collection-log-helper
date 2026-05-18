@@ -150,6 +150,7 @@ public class DynamicTargetEvaluatorDispatchTest
 
 		OverlayStepApplier overlayStepApplier = newOverlayStepApplier();
 		WorldMapController worldMapController = newWorldMapController();
+		DynamicTargetManager dynamicTargetManager = newDynamicTargetManager(worldMapController);
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -157,7 +158,6 @@ public class DynamicTargetEvaluatorDispatchTest
 				EventBus.class,
 				CollectionLogHelperConfig.class,
 				GuidanceSequencer.class,
-				DynamicTargetEvaluatorRegistry.class,
 				RequirementsChecker.class,
 				PlayerTravelCapabilities.class,
 				PlayerInventoryState.class,
@@ -175,18 +175,19 @@ public class DynamicTargetEvaluatorDispatchTest
 				GroundItemHighlightOverlay.class,
 				WidgetHighlightOverlay.class,
 				OverlayStepApplier.class,
-				WorldMapController.class);
+				WorldMapController.class,
+				DynamicTargetManager.class);
 		ctor.setAccessible(true);
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
-			guidanceSequencer, registry, requirementsChecker, travelCapabilities,
+			guidanceSequencer, requirementsChecker, travelCapabilities,
 			playerInventoryState, itemManager, requiredItemResolver,
 			worldMapPointManager, infoBoxManager,
 			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
-			overlayStepApplier, worldMapController);
+			overlayStepApplier, worldMapController, dynamicTargetManager);
 
 		lenient().when(client.getLocalPlayer()).thenReturn(localPlayer);
 		lenient().when(localPlayer.getWorldLocation()).thenReturn(new WorldPoint(3200, 3200, 0));
@@ -282,6 +283,20 @@ public class DynamicTargetEvaluatorDispatchTest
 			Client.class, ClientThread.class, CollectionLogHelperConfig.class);
 		ctor.setAccessible(true);
 		return ctor.newInstance(client, clientThread, config);
+	}
+
+	private DynamicTargetManager newDynamicTargetManager(WorldMapController worldMapController)
+		throws Exception
+	{
+		Constructor<DynamicTargetManager> ctor = DynamicTargetManager.class.getDeclaredConstructor(
+			Client.class, DynamicTargetEvaluatorRegistry.class, WorldMapPointManager.class,
+			GuidanceOverlay.class, GuidanceMinimapOverlay.class,
+			WorldMapRouteOverlay.class, WorldMapDestinationOverlay.class,
+			WorldMapController.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, registry, worldMapPointManager,
+			guidanceOverlay, guidanceMinimapOverlay,
+			worldMapRouteOverlay, worldMapDestinationOverlay, worldMapController);
 	}
 
 	private OverlayStepApplier newOverlayStepApplier() throws Exception
