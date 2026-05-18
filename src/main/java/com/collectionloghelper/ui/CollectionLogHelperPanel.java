@@ -67,24 +67,18 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.ItemEvent;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
@@ -142,11 +136,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final ClueSummaryView clueSummaryView;
 	private final SyncButtonController syncButtonController;
 
-	private final JComboBox<Mode> modeSelector;
-	private final JComboBox<AfkFilter> afkFilterSelector;
-	private final JComboBox<EfficientSortMode> sortSelector;
-	private final JComboBox<CollectionLogCategory> categorySelector;
-	private final JTextField searchField;
+	private final SelectorControlsPanel selectorControls;
 	private final JLabel completionLabel;
 	private final JProgressBar completionProgressBar;
 	private final JPanel listContainer;
@@ -159,8 +149,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final SlayerStrategyView slayerStrategyView;
 	private final StepProgressView stepProgressView;
 	private final QuickGuidePanelView quickGuidePanelView;
-
-	private final Timer searchDebounceTimer;
 
 	private final Map<Mode, PanelModeController> modeControllers = new EnumMap<>(Mode.class);
 	private final PanelModeDispatcher<Mode> modeDispatcher = new PanelModeDispatcher<>(modeControllers);
@@ -259,95 +247,22 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 		controlsPanel.add(Box.createVerticalStrut(4));
 
-		modeSelector = new JComboBox<>(Mode.values());
-		modeSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
-		modeSelector.addItemListener(e ->
-		{
-			if (e.getStateChange() == ItemEvent.SELECTED)
+		selectorControls = new SelectorControlsPanel(
+			config,
+			currentMode,
+			this::onModeSelected,
+			afkFilter ->
 			{
-				Mode previous = currentMode;
-				currentMode = (Mode) e.getItem();
-				modeDispatcher.switchMode(previous, currentMode);
-				updateControlVisibility();
-				inDetailView = false;
+				afkFilterUpdater.accept(afkFilter);
 				rebuild();
-				resetScrollPosition();
-			}
-		});
-		controlsPanel.add(modeSelector);
-
-		afkFilterSelector = new JComboBox<>(AfkFilter.values());
-		afkFilterSelector.setSelectedItem(config.afkFilter());
-		afkFilterSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
-		afkFilterSelector.setVisible(currentMode == Mode.EFFICIENT || currentMode == Mode.PET_HUNT);
-		afkFilterSelector.addItemListener(e ->
-		{
-			if (e.getStateChange() == ItemEvent.SELECTED)
+			},
+			sortMode ->
 			{
-				AfkFilter selected = (AfkFilter) e.getItem();
-				afkFilterUpdater.accept(selected);
+				sortModeUpdater.accept(sortMode);
 				rebuild();
-			}
-		});
-		controlsPanel.add(afkFilterSelector);
-
-		sortSelector = new JComboBox<>(EfficientSortMode.values());
-		sortSelector.setSelectedItem(config.efficientSortMode());
-		sortSelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
-		sortSelector.setVisible(currentMode == Mode.EFFICIENT);
-		sortSelector.addItemListener(e ->
-		{
-			if (e.getStateChange() == ItemEvent.SELECTED)
-			{
-				EfficientSortMode selected = (EfficientSortMode) sortSelector.getSelectedItem();
-				if (selected != null)
-				{
-					sortModeUpdater.accept(selected);
-				}
-				rebuild();
-			}
-		});
-		controlsPanel.add(sortSelector);
-
-		categorySelector = new JComboBox<>(CollectionLogCategory.values());
-		categorySelector.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
-		categorySelector.setVisible(false);
-		categorySelector.addItemListener(e ->
-		{
-			if (e.getStateChange() == ItemEvent.SELECTED)
-			{
-				rebuild();
-			}
-		});
-		controlsPanel.add(categorySelector);
-
-		searchField = new JTextField();
-		searchField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
-		searchField.setVisible(false);
-		searchField.setToolTipText("Search by item name or source name");
-		searchDebounceTimer = new Timer(200, e -> rebuild());
-		searchDebounceTimer.setRepeats(false);
-		searchField.getDocument().addDocumentListener(new DocumentListener()
-		{
-			@Override
-			public void insertUpdate(DocumentEvent e)
-			{
-				searchDebounceTimer.restart();
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e)
-			{
-				searchDebounceTimer.restart();
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e)
-			{
-				searchDebounceTimer.restart();
-			}
-		});
-		controlsPanel.add(searchField);
+			},
+			this::rebuild);
+		controlsPanel.add(selectorControls);
 
 		add(controlsPanel, BorderLayout.NORTH);
 
@@ -409,9 +324,20 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	public void setMode(Mode mode)
 	{
 		currentMode = mode;
-		modeSelector.setSelectedItem(mode);
+		selectorControls.setSelectedMode(mode);
 		updateControlVisibility();
 		rebuild();
+	}
+
+	private void onModeSelected(Mode mode)
+	{
+		Mode previous = currentMode;
+		currentMode = mode;
+		modeDispatcher.switchMode(previous, currentMode);
+		updateControlVisibility();
+		inDetailView = false;
+		rebuild();
+		resetScrollPosition();
 	}
 
 	public void updateCompletionHeader()
@@ -486,7 +412,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	public void shutDown()
 	{
-		searchDebounceTimer.stop();
+		selectorControls.shutDown();
 	}
 
 	/**
@@ -721,11 +647,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	private void updateControlVisibility()
 	{
-		afkFilterSelector.setVisible(currentMode == Mode.EFFICIENT || currentMode == Mode.PET_HUNT
-			|| currentMode == Mode.CATEGORY_FOCUS);
-		sortSelector.setVisible(currentMode == Mode.EFFICIENT);
-		categorySelector.setVisible(currentMode == Mode.CATEGORY_FOCUS);
-		searchField.setVisible(currentMode == Mode.SEARCH);
+		selectorControls.updateVisibility(currentMode);
 	}
 
 	// ── PanelShellContext implementation ────────────────────────────────────
@@ -739,25 +661,25 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	@Override
 	public void switchToCategoryFocus(CollectionLogCategory category)
 	{
-		categorySelector.setSelectedItem(category);
-		modeSelector.setSelectedItem(Mode.CATEGORY_FOCUS);
+		selectorControls.setSelectedCategory(category);
+		selectorControls.setSelectedMode(Mode.CATEGORY_FOCUS);
 	}
 
 	@Override
 	public String getSearchQuery()
 	{
-		return searchField.getText() == null ? "" : searchField.getText().toLowerCase().trim();
+		return selectorControls.getSearchQuery();
 	}
 
 	@Override
 	public EfficientSortMode getEfficientSortMode()
 	{
-		return (EfficientSortMode) sortSelector.getSelectedItem();
+		return selectorControls.getSelectedSortMode();
 	}
 
 	@Override
 	public CollectionLogCategory getSelectedCategory()
 	{
-		return (CollectionLogCategory) categorySelector.getSelectedItem();
+		return selectorControls.getSelectedCategory();
 	}
 }
