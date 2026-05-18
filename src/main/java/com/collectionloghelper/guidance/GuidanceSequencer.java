@@ -56,6 +56,7 @@ public class GuidanceSequencer
 	private final BossGuidanceRegistry bossRegistry;
 	private final CompletionChecker completionChecker;
 	private final StepAdvancer stepAdvancer;
+	private final SequencerEventAdapter eventAdapter;
 
 	private volatile WorldPoint lastKnownPlayerLocation;
 	private volatile CollectionLogSource activeSource;
@@ -92,6 +93,7 @@ public class GuidanceSequencer
 		this.bossRegistry = bossRegistry;
 		this.completionChecker = new CompletionChecker(inventoryState, collectionState);
 		this.stepAdvancer = new StepAdvancer(this.completionChecker);
+		this.eventAdapter = new SequencerEventAdapter(this.completionChecker);
 	}
 
 	/**
@@ -530,13 +532,7 @@ public class GuidanceSequencer
 		{
 			return;
 		}
-
-		GuidanceStep step = getRawCurrentStep();
-		if (completionChecker.isNpcDeathSatisfying(step, npcId))
-		{
-			log.info("Step {} complete (ACTOR_DEATH: {})", currentIndex + 1, npcId);
-			advanceStep();
-		}
+		applyEventOutcome(eventAdapter.onNpcDeath(getRawCurrentStep(), currentIndex + 1, npcId));
 	}
 
 	/**
@@ -548,17 +544,10 @@ public class GuidanceSequencer
 		{
 			return;
 		}
-
-		GuidanceStep step = getRawCurrentStep();
-		CompletionChecker.ChatMatchResult chatResult =
-			completionChecker.evaluateChatMessage(step, message, chatPatternCache);
-		chatPatternCache = chatResult.cache();
-		if (chatResult.matched())
-		{
-			log.info("Step {} complete (CHAT_MESSAGE_RECEIVED: matched '{}')",
-				currentIndex + 1, step.getCompletionChatPattern());
-			advanceStep();
-		}
+		SequencerEventAdapter.EventOutcome outcome =
+			eventAdapter.onChatMessage(getRawCurrentStep(), currentIndex + 1, message, chatPatternCache);
+		chatPatternCache = outcome.chatCache();
+		applyEventOutcome(outcome);
 	}
 
 	/**
@@ -570,13 +559,7 @@ public class GuidanceSequencer
 		{
 			return;
 		}
-
-		GuidanceStep step = getRawCurrentStep();
-		if (completionChecker.isNpcInteractedSatisfying(step, npcId))
-		{
-			log.info("Step {} complete (NPC_TALKED_TO: {})", currentIndex + 1, npcId);
-			advanceStep();
-		}
+		applyEventOutcome(eventAdapter.onNpcInteracted(getRawCurrentStep(), currentIndex + 1, npcId));
 	}
 
 	/**
@@ -588,14 +571,22 @@ public class GuidanceSequencer
 		{
 			return;
 		}
+		applyEventOutcome(eventAdapter.onVarbitChanged(getRawCurrentStep(), currentIndex + 1, varbitId, value));
+	}
 
-		GuidanceStep step = getRawCurrentStep();
-		if (completionChecker.isVarbitAtLeastSatisfying(step, varbitId, value))
+	/**
+	 * Logs the adapter-supplied completion line and advances to the next step
+	 * when the event outcome reports the current step is satisfied. No-op
+	 * when the outcome is not satisfied.
+	 */
+	private void applyEventOutcome(SequencerEventAdapter.EventOutcome outcome)
+	{
+		if (!outcome.satisfied())
 		{
-			log.info("Step {} complete (VARBIT_AT_LEAST: varbit {} = {} >= {})",
-				currentIndex + 1, varbitId, value, step.getCompletionVarbitValue());
-			advanceStep();
+			return;
 		}
+		log.info("{}", outcome.completionLogMessage());
+		advanceStep();
 	}
 
 	/**
