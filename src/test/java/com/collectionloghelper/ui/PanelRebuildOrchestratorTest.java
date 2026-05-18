@@ -33,6 +33,7 @@ import java.awt.Dimension;
 import java.util.Collections;
 import java.util.Set;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultBoundedRangeModel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -91,14 +92,22 @@ public class PanelRebuildOrchestratorTest
 		hostPanel.add(listContainer, BorderLayout.NORTH);
 
 		scrollPane = new JScrollPane(hostPanel);
+		// Swap the vertical scrollbar's model for one that ignores any
+		// subsequent narrowing of its bounds (extent/min/max). This is the
+		// bulletproof fix for the headless-Linux flake where viewport layout
+		// passes re-clamp value=250 down to value=90 between setValue(...) and
+		// the test's assertion. The pinned model accepts setValue freely but
+		// refuses to shrink its own range after pinScrollBounds(...) has been
+		// called. See also the comment on pinScrollBounds below.
+		scrollPane.setVerticalScrollBar(new JScrollBar(JScrollBar.VERTICAL));
 		scrollPane.setSize(200, 400);
 		scrollPane.doLayout();
 		scrollPane.getViewport().doLayout();
 		// Pin the vertical scrollbar's model bounds explicitly so setValue(...) is
 		// not clamped by lazy/late viewport layout. Headless CI environments
-		// (Linux, JDK 17) have been observed to leave the model at its default
-		// (max=100, extent=10) when assertions read the value immediately after
-		// setValue, causing values like 123 to clamp to 90.
+		// (Linux, JDK 11 and JDK 17) have been observed to leave the model at its
+		// default (max=100, extent=10) when assertions read the value immediately
+		// after setValue, causing values like 250 to clamp to 90.
 		pinScrollBounds(scrollPane.getVerticalScrollBar());
 
 		orchestrator = new PanelRebuildOrchestrator(hostPanel, listContainer);
@@ -107,18 +116,106 @@ public class PanelRebuildOrchestratorTest
 	/**
 	 * Pin the given scrollbar's {@code BoundedRangeModel} to a wide, deterministic
 	 * range so subsequent {@link JScrollBar#setValue(int)} calls in tests are not
-	 * clamped by lazy viewport layout. Must be called immediately before any
-	 * {@code setValue(...)} in a test, because intervening Swing layout/validation
-	 * passes can otherwise re-clamp the model to its computed (viewport-derived)
-	 * bounds before assertions read the value back.
+	 * clamped by lazy viewport layout, AND so subsequent Swing-internal layout
+	 * passes that try to narrow the range (e.g. viewport recomputes max=100,
+	 * extent=10) are silently rejected. Must be called immediately before any
+	 * {@code setValue(...)} in a test.
 	 *
-	 * Headless Linux + JDK 17 has exhibited this flake twice (#515 setUp,
-	 * #516 captureRecordsScrollPositionFromEnclosingScrollPane); this helper
-	 * centralises the workaround so future test methods cannot regress.
+	 * <p>The earlier version of this helper called {@code bar.setValues(...)}
+	 * which writes the four range properties one at a time onto the model;
+	 * a subsequent layout pass that called {@code model.setMaximum(100)} would
+	 * then re-clamp value=250 down to value=90. The current implementation
+	 * replaces the model with a {@link PinnedRangeModel} whose
+	 * range-narrowing setters become no-ops once pinned, and writes value+range
+	 * atomically via {@link DefaultBoundedRangeModel#setRangeProperties}.
+	 *
+	 * <p>Headless Linux has exhibited this flake on JDK 17 (#515, #516) and
+	 * JDK 11 (master CI run for #530/#531 merge commits); this helper plus the
+	 * {@link PinnedRangeModel} swap centralises the fix so future test methods
+	 * cannot regress.
 	 */
 	private static void pinScrollBounds(JScrollBar bar)
 	{
-		bar.setValues(0, 400, 0, 5000);
+		PinnedRangeModel model;
+		if (bar.getModel() instanceof PinnedRangeModel)
+		{
+			model = (PinnedRangeModel) bar.getModel();
+		}
+		else
+		{
+			model = new PinnedRangeModel();
+			bar.setModel(model);
+		}
+		// Atomic write of value+extent+min+max so no intermediate state is
+		// observable by listeners or layout passes.
+		model.setRangeProperties(0, 400, 0, 5000, false);
+		model.pin();
+	}
+
+	/**
+	 * A {@link DefaultBoundedRangeModel} that, once {@link #pin() pinned},
+	 * silently rejects any attempt to narrow its extent/min/max. Value writes
+	 * (including {@link #setValue(int)}) are passed through and clamped only
+	 * against the pinned range, not the would-be narrowed range. This shields
+	 * tests from headless-CI layout passes that re-clamp the scrollbar model
+	 * mid-test.
+	 */
+	private static final class PinnedRangeModel extends DefaultBoundedRangeModel
+	{
+		private boolean pinned;
+
+		void pin()
+		{
+			this.pinned = true;
+		}
+
+		@Override
+		public void setExtent(int n)
+		{
+			if (pinned)
+			{
+				return;
+			}
+			super.setExtent(n);
+		}
+
+		@Override
+		public void setMinimum(int n)
+		{
+			if (pinned)
+			{
+				return;
+			}
+			super.setMinimum(n);
+		}
+
+		@Override
+		public void setMaximum(int n)
+		{
+			if (pinned)
+			{
+				return;
+			}
+			super.setMaximum(n);
+		}
+
+		@Override
+		public void setRangeProperties(int newValue, int newExtent, int newMin,
+			int newMax, boolean adjusting)
+		{
+			if (pinned)
+			{
+				// Honour value updates; ignore range narrowing. Clamp the new
+				// value against the existing (pinned) range so callers still
+				// observe a sane value.
+				int clamped = Math.max(getMinimum(),
+					Math.min(newValue, getMaximum() - getExtent()));
+				super.setRangeProperties(clamped, getExtent(), getMinimum(),
+					getMaximum(), adjusting);
+				return;
+			}
+			super.setRangeProperties(newValue, newExtent, newMin, newMax, adjusting);
+		}
 	}
 
 	private CategorySummaryPanel newCategoryPanel(CollectionLogCategory category)
