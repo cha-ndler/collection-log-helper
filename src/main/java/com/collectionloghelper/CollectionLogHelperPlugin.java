@@ -112,8 +112,8 @@ import net.runelite.client.util.Text;
 @Slf4j
 @PluginDescriptor(
 	name = "Collection Log Helper",
-	description = "Guides players through efficient collection log completion",
-	tags = {"collection", "log", "helper", "efficiency", "guide"}
+	description = "Guides players through efficient collection log completion with overlays and efficiency scoring",
+	tags = {"collection", "clog", "slayer", "clues", "efficiency", "guide"}
 )
 public class CollectionLogHelperPlugin extends Plugin
 {
