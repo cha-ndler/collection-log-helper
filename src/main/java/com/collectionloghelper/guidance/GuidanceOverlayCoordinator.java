@@ -117,6 +117,7 @@ public class GuidanceOverlayCoordinator
 	private final WorldMapController worldMapController;
 	private final DynamicTargetManager dynamicTargetManager;
 	private final NpcTrackerHelper npcTrackerHelper;
+	private final StepChangeHandler stepChangeHandler;
 
 	// -- Guidance UI state (previously in plugin) --
 
@@ -188,7 +189,8 @@ public class GuidanceOverlayCoordinator
 		OverlayDeactivator overlayDeactivator,
 		WorldMapController worldMapController,
 		DynamicTargetManager dynamicTargetManager,
-		NpcTrackerHelper npcTrackerHelper)
+		NpcTrackerHelper npcTrackerHelper,
+		StepChangeHandler stepChangeHandler)
 	{
 		this.client = client;
 		this.clientThread = clientThread;
@@ -217,6 +219,7 @@ public class GuidanceOverlayCoordinator
 		this.worldMapController = worldMapController;
 		this.dynamicTargetManager = dynamicTargetManager;
 		this.npcTrackerHelper = npcTrackerHelper;
+		this.stepChangeHandler = stepChangeHandler;
 	}
 
 	/**
@@ -573,6 +576,10 @@ public class GuidanceOverlayCoordinator
 
 	/**
 	 * Callback from GuidanceSequencer when the current step changes.
+	 * Performs the overlay clear + apply + NPC-tracker scan locally (those
+	 * paths mutate coordinator-owned state such as {@code lastMessagedStepIndex}
+	 * and {@code activeMapPoint}), then delegates the InfoBox/panel
+	 * progress refresh to {@link StepChangeHandler}.
 	 */
 	private void onStepChanged(GuidanceStep step)
 	{
@@ -582,55 +589,8 @@ public class GuidanceOverlayCoordinator
 		applyStepToOverlays(step, sourceName, activeSource);
 		npcTrackerHelper.scanForTrackedNpc(step, activeTargetItemId);
 
-		// Update InfoBox progress
-		if (activeInfoBox != null)
-		{
-			int current = guidanceSequencer.getCurrentIndex() + 1;
-			int total = guidanceSequencer.getTotalSteps();
-			activeInfoBox.setStepText(current + "/" + total);
-			String tooltip = step.getDescription();
-			if (guidanceSequencer.getCumulativeTrackThreshold() > 0)
-			{
-				tooltip += "\n" + guidanceSequencer.getCumulativeActionCount()
-					+ "/" + guidanceSequencer.getCumulativeTrackThreshold()
-					+ " actions tracked";
-			}
-			activeInfoBox.setTooltipText(tooltip);
-			if (current == total)
-			{
-				activeInfoBox.setTextColor(java.awt.Color.GREEN);
-			}
-		}
-
-		if (panel != null)
-		{
-			final int current = guidanceSequencer.getCurrentIndex() + 1;
-			final int total = guidanceSequencer.getTotalSteps();
-			final String desc = step.resolveDescription(activeTargetItemId);
-			final boolean isManual = step.getCompletionCondition() == CompletionCondition.MANUAL;
-			final GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
-			final CollectionLogSource stepChangeSource = guidanceSequencer.getActiveSource();
-			final List<GuidanceStep> sourceSteps = stepChangeSource != null
-				&& stepChangeSource.getGuidanceSteps() != null
-				? stepChangeSource.getGuidanceSteps() : Collections.emptyList();
-
-			// Push description + step progress to the panel immediately (safe from any thread
-			// because showStep dispatches to the EDT). Required-item resolution is deferred
-			// to the client thread because RequiredItemResolver.resolve() calls
-			// ItemManager.getItemComposition, which asserts caller-is-client-thread. See
-			// cha-ndler/collection-log-helper#388 for the original trace.
-			panel.updateStepProgress(current, total, desc, isManual,
-				Collections.emptyList(), Collections.emptyList(), sourceSteps);
-			clientThread.invokeLater(() ->
-			{
-				final List<RequiredItemDisplay> resolvedItems =
-					requiredItemResolver.resolve(rawStep);
-				final List<RequiredItemDisplay> resolvedRecommended =
-					requiredItemResolver.resolveRecommended(rawStep);
-				panel.updateStepProgress(current, total, desc, isManual,
-					resolvedItems, resolvedRecommended, sourceSteps);
-			});
-		}
+		stepChangeHandler.handle(step,
+			new StepChangeHandler.Input(activeInfoBox, panel, activeTargetItemId));
 	}
 
 	/**
