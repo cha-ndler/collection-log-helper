@@ -155,6 +155,7 @@ public class DynamicTargetEvaluatorDispatchTest
 		NpcTrackerHelper npcTrackerHelper = newNpcTrackerHelper();
 		OverlayDeactivator overlayDeactivator = newOverlayDeactivator(npcTrackerHelper);
 		StepChangeHandler stepChangeHandler = newStepChangeHandler();
+		DynamicItemObjectTierResolver dynamicItemObjectTierResolver = newDynamicItemObjectTierResolver();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -184,7 +185,8 @@ public class DynamicTargetEvaluatorDispatchTest
 				WorldMapController.class,
 				DynamicTargetManager.class,
 				NpcTrackerHelper.class,
-				StepChangeHandler.class);
+				StepChangeHandler.class,
+				DynamicItemObjectTierResolver.class);
 		ctor.setAccessible(true);
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
@@ -196,7 +198,8 @@ public class DynamicTargetEvaluatorDispatchTest
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
 			overlayStepApplier, overlaySourceApplier, overlayDeactivator,
-			worldMapController, dynamicTargetManager, npcTrackerHelper, stepChangeHandler);
+			worldMapController, dynamicTargetManager, npcTrackerHelper, stepChangeHandler,
+			dynamicItemObjectTierResolver);
 
 		lenient().when(client.getLocalPlayer()).thenReturn(localPlayer);
 		lenient().when(localPlayer.getWorldLocation()).thenReturn(new WorldPoint(3200, 3200, 0));
@@ -322,6 +325,14 @@ public class DynamicTargetEvaluatorDispatchTest
 			ClientThread.class, GuidanceSequencer.class, RequiredItemResolver.class);
 		ctor.setAccessible(true);
 		return ctor.newInstance(clientThread, guidanceSequencer, requiredItemResolver);
+	}
+
+	private DynamicItemObjectTierResolver newDynamicItemObjectTierResolver() throws Exception
+	{
+		Constructor<DynamicItemObjectTierResolver> ctor =
+			DynamicItemObjectTierResolver.class.getDeclaredConstructor(PlayerInventoryState.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(playerInventoryState);
 	}
 
 	private OverlayStepApplier newOverlayStepApplier() throws Exception
