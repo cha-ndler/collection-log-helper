@@ -38,6 +38,7 @@ import com.collectionloghelper.sync.TempleSyncOrchestrator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
+import com.collectionloghelper.lifecycle.PlayerLocationResolver;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
 import com.collectionloghelper.lifecycle.SyncStateCoordinator;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
@@ -55,10 +56,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.NPC;
-import net.runelite.api.Player;
-import net.runelite.api.WorldEntity;
-import net.runelite.api.WorldView;
-import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
@@ -151,6 +148,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private ChatEventHandler chatEventHandler;
 
+	@Inject
+	private PlayerLocationResolver playerLocationResolver;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -168,12 +168,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	 * leak that the ad-hoc {@code Executors.newSingleThreadExecutor()} pattern caused.
 	 */
 	private ExecutorService httpResultExecutor;
-
-	/**
-	 * Player location cached on the client thread each game tick.
-	 * Read by guidance sequencer and authoring log — volatile ensures visibility.
-	 */
-	private volatile WorldPoint cachedPlayerLocation;
 
 	private boolean slayerRefreshPending;
 
@@ -361,7 +355,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		pendingPanelRebuild = false;
 		rankedSourcesDirty = true;
 		cachedRankedSources = null;
-		cachedPlayerLocation = null;
+		playerLocationResolver.reset();
 		guidance.getGuidanceOverlay().setShowCollectionLogReminder(false);
 		guidance.getGuidanceOverlay().setShowBankReminder(false);
 		data.getDataSyncState().reset();
@@ -435,7 +429,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			sourcesWithMissingItems.clear();
 			slayerRefreshPending = false;
 			pendingTravelVarbitRefresh = false;
-			cachedPlayerLocation = null;
+			playerLocationResolver.reset();
 			guidance.getGuidanceOverlay().setShowCollectionLogReminder(false);
 			guidance.getGuidanceOverlay().setShowBankReminder(false);
 			data.getDataSyncState().reset();
@@ -582,20 +576,19 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidance.getGuidanceCoordinator().tick();
 
 		// Cache player location for guidance sequencer and authoring log (client thread only).
-		// When sailing, the player is inside a WorldEntity whose inner WorldView
-		// returns boat-local coords.  Detect this and transform to real-world
-		// coordinates via WorldEntity.transformToMainWorld().
-		// Ref: LlemonDuck/sailing SailingUtil, RuneLite WorldEntity API
+		// PlayerLocationResolver handles instanced regions and non-top-level WorldViews
+		// (e.g. sailing boats), translating to overworld coords so ARRIVE_AT_TILE checks
+		// match the static JSON tile.
 		if (client.getLocalPlayer() != null)
 		{
-			cachedPlayerLocation = resolvePlayerWorldLocation();
-			authoringLogger.setPlayerLocation(cachedPlayerLocation);
+			WorldPoint playerLocation = playerLocationResolver.resolveAndCache();
+			authoringLogger.setPlayerLocation(playerLocation);
 
 			// Check ARRIVE_AT_TILE completion for guidance sequencer
 			if (guidance.getGuidanceSequencer().isActive())
 			{
-				guidance.getGuidanceSequencer().setPlayerLocation(cachedPlayerLocation);
-				guidance.getGuidanceSequencer().onPlayerMoved(cachedPlayerLocation);
+				guidance.getGuidanceSequencer().setPlayerLocation(playerLocation);
+				guidance.getGuidanceSequencer().onPlayerMoved(playerLocation);
 			}
 
 		}
@@ -686,7 +679,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		// and related coordinator work require client-thread context.  Mirrors the
 		// step-advance / skip wrap added in commit c528d0ae.
 		clientThread.invokeLater(() -> guidance.getGuidanceCoordinator().activateGuidance(
-			source, cachedPlayerLocation, targetItemId));
+			source, playerLocationResolver.getCachedLocation(), targetItemId));
 	}
 
 	/**
@@ -777,85 +770,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		sourcesWithMissingItems = guidance.getGuidanceCoordinator().rebuildSourcesWithMissingItems(
 			data.getDatabase(), data.getCollectionState());
-	}
-
-	/**
-	 * Resolve the player's real-world location, transforming local coordinates
-	 * back to template/overworld coordinates so they compare correctly against
-	 * the static {@code worldX/worldY} values in {@code drop_rates.json}.
-	 *
-	 * Three cases:
-	 * <ol>
-	 *   <li><b>Standard top-level world view</b> — return {@code getWorldLocation()}.</li>
-	 *   <li><b>Instanced region</b> (CoX/ToB/ToA, GWD, Vorkath, Royal Titans, many
-	 *       quest/clue rooms, etc.) — {@code getWorldLocation()} returns
-	 *       instance-template coords that don't match the static JSON tile.
-	 *       Translate via {@link WorldPoint#fromLocalInstance(Client, LocalPoint)}
-	 *       to recover the overworld coords.</li>
-	 *   <li><b>Sailing WorldEntity</b> — player is inside a non-top-level
-	 *       WorldView; map the local point back through
-	 *       {@code transformToMainWorld}.</li>
-	 * </ol>
-	 *
-	 * Falls back to plain {@code getWorldLocation()} on any error or when the
-	 * required API is unavailable.
-	 */
-	private WorldPoint resolvePlayerWorldLocation()
-	{
-		Player lp = client.getLocalPlayer();
-		if (lp == null)
-		{
-			return null;
-		}
-		WorldPoint fallback = lp.getWorldLocation();
-		try
-		{
-			WorldView playerView = lp.getWorldView();
-			if (playerView == null || playerView.isTopLevel())
-			{
-				// Top-level view — handle instanced regions by translating
-				// the player's local point back to the overworld template tile.
-				// Without this, ARRIVE_AT_TILE checks in instanced bosses
-				// (Royal Titans, raids, etc.) never match the JSON coords.
-				if (client.isInInstancedRegion())
-				{
-					LocalPoint localPoint = lp.getLocalLocation();
-					if (localPoint != null)
-					{
-						WorldPoint templatePoint = WorldPoint.fromLocalInstance(client, localPoint);
-						if (templatePoint != null)
-						{
-							return templatePoint;
-						}
-					}
-				}
-				return fallback;
-			}
-
-			// Player is inside a non-top-level WorldView (e.g. a sailing boat).
-			// Find the WorldEntity whose inner WorldView matches the player's.
-			WorldView topLevel = client.getTopLevelWorldView();
-			for (WorldEntity entity : topLevel.worldEntities())
-			{
-				if (entity.getWorldView() == playerView)
-				{
-					LocalPoint playerLocal = lp.getLocalLocation();
-					LocalPoint mainLocal = entity.transformToMainWorld(playerLocal);
-					if (mainLocal != null)
-					{
-						return WorldPoint.fromLocal(topLevel,
-							mainLocal.getX(), mainLocal.getY(),
-							topLevel.getPlane());
-					}
-					break;
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			log.debug("Player-location resolution failed, using fallback", e);
-		}
-		return fallback;
 	}
 
 	@Provides
