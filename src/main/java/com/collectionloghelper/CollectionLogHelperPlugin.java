@@ -24,7 +24,7 @@
  */
 package com.collectionloghelper;
 
-import com.collectionloghelper.data.CollectionLogItem;
+import com.collectionloghelper.chat.ChatEventHandler;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
 import com.collectionloghelper.data.RequirementsChecker;
@@ -36,7 +36,6 @@ import com.collectionloghelper.sync.ImportResult;
 import com.collectionloghelper.sync.LootSyncManager;
 import com.collectionloghelper.sync.SyncResult;
 import com.collectionloghelper.sync.TempleOsrsKcSyncer;
-import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
@@ -54,12 +53,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.NPC;
@@ -90,7 +86,6 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.util.ImageUtil;
-import net.runelite.client.util.Text;
 
 @Slf4j
 @PluginDescriptor(
@@ -100,9 +95,6 @@ import net.runelite.client.util.Text;
 )
 public class CollectionLogHelperPlugin extends Plugin
 {
-	private static final Pattern COLLECTION_LOG_PATTERN =
-		Pattern.compile("New item added to your collection log: (.*)");
-
 	@Inject
 	private Client client;
 
@@ -156,6 +148,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private LootSyncManager lootSyncManager;
+
+	@Inject
+	private ChatEventHandler chatEventHandler;
 
 
 	private CollectionLogHelperPanel panel;
@@ -326,7 +321,14 @@ public class CollectionLogHelperPlugin extends Plugin
 			});
 		}
 
-		chatCommandManager.registerCommand("clh", this::onClhCommand);
+		chatEventHandler.setCallbacks(
+			this::getRankedSources,
+			() ->
+			{
+				pendingPanelRebuild = true;
+				rankedSourcesDirty = true;
+			});
+		chatCommandManager.registerCommand("clh", chatEventHandler::onClhCommand);
 		log.info("Collection Log Helper started");
 	}
 
@@ -524,41 +526,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onChatMessage(ChatMessage event)
 	{
-		if (event.getType() != ChatMessageType.GAMEMESSAGE
-			&& event.getType() != ChatMessageType.SPAM)
-		{
-			return;
-		}
-
-		if (config.guidanceAuthoring())
-		{
-			authoringLogger.log("CHAT type=%s msg='%s'", event.getType(), event.getMessage());
-		}
-
-		// Forward chat messages to guidance sequencer for CHAT_MESSAGE_RECEIVED condition
-		if (guidance.getGuidanceSequencer().isActive())
-		{
-			guidance.getGuidanceSequencer().onChatMessage(Text.removeTags(event.getMessage()));
-		}
-
-		Matcher matcher = COLLECTION_LOG_PATTERN.matcher(Text.removeTags(event.getMessage()));
-		if (matcher.find())
-		{
-			String itemName = matcher.group(1);
-			log.debug("New collection log item: {}", itemName);
-
-			// O(1) lookup by name instead of scanning all sources × items
-			CollectionLogItem item = data.getDatabase().getItemByName(itemName);
-			if (item != null)
-			{
-				data.getCollectionState().markItemObtained(item.getItemId());
-				guidance.getGuidanceSequencer().onItemObtained(item.getItemId());
-				log.debug("Marked item {} (ID: {}) as obtained", itemName, item.getItemId());
-			}
-
-			pendingPanelRebuild = true;
-			rankedSourcesDirty = true;
-		}
+		chatEventHandler.handleChatMessage(event);
 	}
 
 	@Subscribe
@@ -981,57 +949,6 @@ public class CollectionLogHelperPlugin extends Plugin
 			log.debug("Player-location resolution failed, using fallback", e);
 		}
 		return fallback;
-	}
-
-	private void onClhCommand(ChatMessage chatMessage, String message)
-	{
-		int obtained = data.getCollectionState().getTotalObtained();
-		int total = data.getCollectionState().getTotalPossible();
-		String progressLine;
-		if (total > 0)
-		{
-			double pct = (obtained * 100.0) / total;
-			progressLine = String.format("Collection Log: %d/%d (%.1f%%)", obtained, total, pct);
-		}
-		else
-		{
-			progressLine = "Collection Log: not synced";
-		}
-
-		String guidanceLine;
-		if (guidance.getGuidanceSequencer().isActive() && guidance.getGuidanceSequencer().getActiveSource() != null)
-		{
-			String sourceName = guidance.getGuidanceSequencer().getActiveSource().getName();
-			int step = guidance.getGuidanceSequencer().getCurrentIndex() + 1;
-			int totalSteps = guidance.getGuidanceSequencer().getTotalSteps();
-			guidanceLine = String.format("Guiding: %s step %d/%d", sourceName, step, totalSteps);
-		}
-		else
-		{
-			guidanceLine = "No active guidance";
-		}
-
-		String topPickLine;
-		List<ScoredItem> ranked = getRankedSources();
-		ScoredItem topPick = ranked.stream()
-			.filter(s -> !s.isLocked())
-			.findFirst()
-			.orElse(null);
-		if (topPick != null)
-		{
-			double hours = topPick.getScore() > 0 ? 100.0 / topPick.getScore() : 0;
-			String timeStr = ClueCompletionEstimator.formatTime((int) (hours * 3600));
-			topPickLine = String.format("Top pick: %s (~%s)", topPick.getSource().getName(), timeStr);
-		}
-		else
-		{
-			topPickLine = "Top pick: none available";
-		}
-
-		String output = "<col=00c8c8>[Collection Log Helper]</col> "
-			+ progressLine + " | " + guidanceLine + " | " + topPickLine;
-		clientThread.invokeLater(() ->
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", output, null));
 	}
 
 	@Provides
