@@ -152,7 +152,6 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 				EventBus.class,
 				CollectionLogHelperConfig.class,
 				GuidanceSequencer.class,
-				DynamicTargetEvaluatorRegistry.class,
 				RequirementsChecker.class,
 				PlayerTravelCapabilities.class,
 				PlayerInventoryState.class,
@@ -170,18 +169,20 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 				GroundItemHighlightOverlay.class,
 				WidgetHighlightOverlay.class,
 				OverlayStepApplier.class,
-				WorldMapController.class);
+				WorldMapController.class,
+				DynamicTargetManager.class);
 		ctor.setAccessible(true);
+		DynamicTargetManager dynamicTargetManager = newDynamicTargetManager(worldMapController);
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
-			guidanceSequencer, dynamicTargetEvaluatorRegistry, requirementsChecker, travelCapabilities,
+			guidanceSequencer, requirementsChecker, travelCapabilities,
 			playerInventoryState, itemManager, requiredItemResolver,
 			worldMapPointManager, infoBoxManager,
 			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
-			overlayStepApplier, worldMapController);
+			overlayStepApplier, worldMapController, dynamicTargetManager);
 
 		coordinator.setPanel(panel);
 
@@ -297,6 +298,20 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			Client.class, ClientThread.class, CollectionLogHelperConfig.class);
 		ctor.setAccessible(true);
 		return ctor.newInstance(client, clientThread, config);
+	}
+
+	private DynamicTargetManager newDynamicTargetManager(WorldMapController worldMapController)
+		throws Exception
+	{
+		Constructor<DynamicTargetManager> ctor = DynamicTargetManager.class.getDeclaredConstructor(
+			Client.class, DynamicTargetEvaluatorRegistry.class, WorldMapPointManager.class,
+			GuidanceOverlay.class, GuidanceMinimapOverlay.class,
+			WorldMapRouteOverlay.class, WorldMapDestinationOverlay.class,
+			WorldMapController.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, dynamicTargetEvaluatorRegistry, worldMapPointManager,
+			guidanceOverlay, guidanceMinimapOverlay,
+			worldMapRouteOverlay, worldMapDestinationOverlay, worldMapController);
 	}
 
 	private OverlayStepApplier newOverlayStepApplier() throws Exception
