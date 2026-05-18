@@ -27,6 +27,7 @@ package com.collectionloghelper;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.di.GuidanceModule;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
@@ -82,7 +83,9 @@ public class OnSequenceCompletePerItemTest
 	{
 		plugin = new CollectionLogHelperPlugin();
 		injectField("clientThread", clientThread);
-		injectField("guidanceCoordinator", guidanceCoordinator);
+		GuidanceModule guidanceModule = new GuidanceModule(
+			null, guidanceCoordinator, null, null, null, null, null, null);
+		injectField("guidance", guidanceModule);
 		injectField("config", config);
 		injectField("calculator", calculator);
 
