@@ -55,6 +55,7 @@ import com.collectionloghelper.ui.mode.SearchModeController;
 import com.collectionloghelper.ui.mode.StatisticsModeController;
 import com.collectionloghelper.ui.widget.ClueSummaryView;
 import com.collectionloghelper.ui.widget.GuidanceBannerView;
+import com.collectionloghelper.ui.widget.ListContainerScrollPane;
 import com.collectionloghelper.ui.widget.QuickGuidePanelView;
 import com.collectionloghelper.ui.widget.SlayerStrategyView;
 import com.collectionloghelper.ui.widget.StepProgressView;
@@ -66,7 +67,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -352,25 +352,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 		// === Content panel (center, CardLayout) ===
 		cardLayout = new CardLayout();
-		contentPanel = new JPanel(cardLayout)
-		{
-			@Override
-			public Dimension getPreferredSize()
-			{
-				for (Component comp : getComponents())
-				{
-					if (comp.isVisible())
-					{
-						Insets insets = getInsets();
-						Dimension d = comp.getPreferredSize();
-						return new Dimension(
-							d.width + insets.left + insets.right,
-							d.height + insets.top + insets.bottom);
-					}
-				}
-				return super.getPreferredSize();
-			}
-		};
+		contentPanel = new ListContainerScrollPane(cardLayout);
 		contentPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
 		listView = new JPanel(new BorderLayout());
