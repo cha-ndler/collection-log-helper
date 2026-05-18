@@ -64,14 +64,12 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -192,60 +190,27 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
 		setLayout(new BorderLayout());
 
-		// === Controls panel (north) ===
-		JPanel controlsPanel = new JPanel();
-		controlsPanel.setLayout(new BoxLayout(controlsPanel, BoxLayout.Y_AXIS));
-		controlsPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
-
-		completionLabel = new JLabel("Collection Log: 0/0 (0.0%)", SwingConstants.CENTER);
-		completionLabel.setFont(FontManager.getRunescapeBoldFont());
-		completionLabel.setForeground(Color.WHITE);
-		completionLabel.setAlignmentX(CENTER_ALIGNMENT);
-		completionLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0));
-		controlsPanel.add(completionLabel);
-
-		completionProgressBar = new JProgressBar(0, 1699);
-		completionProgressBar.setValue(0);
-		completionProgressBar.setPreferredSize(new Dimension(Integer.MAX_VALUE, 6));
-		completionProgressBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, 6));
-		completionProgressBar.setAlignmentX(CENTER_ALIGNMENT);
-		completionProgressBar.setBorderPainted(false);
-		completionProgressBar.setBackground(new Color(40, 40, 40));
-		completionProgressBar.setForeground(new Color(80, 200, 80));
-		completionProgressBar.setBorder(BorderFactory.createEmptyBorder(0, 4, 4, 4));
-		controlsPanel.add(completionProgressBar);
-
-		syncStatusView = new SyncStatusView(dataSyncState);
-		syncStatusView.setAlignmentX(CENTER_ALIGNMENT);
-		syncStatusView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-		controlsPanel.add(syncStatusView);
-
-		syncButtonController = new SyncButtonController(config, this);
-		controlsPanel.add(syncButtonController.getCollectionLogNetButton());
-		controlsPanel.add(syncButtonController.getTempleSyncButton());
-
-		clueSummaryView = new ClueSummaryView();
-		clueSummaryView.setAlignmentX(CENTER_ALIGNMENT);
-		clueSummaryView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-		controlsPanel.add(clueSummaryView);
-
-		slayerStrategyView = new SlayerStrategyView(slayerTaskState, slayerStrategyCalculator);
-		slayerStrategyView.setAlignmentX(CENTER_ALIGNMENT);
-		slayerStrategyView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-		controlsPanel.add(slayerStrategyView);
-
-		guidanceBannerView = new GuidanceBannerView(requirementsChecker);
-		guidanceBannerView.setAlignmentX(CENTER_ALIGNMENT);
-		guidanceBannerView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-		controlsPanel.add(guidanceBannerView);
-
-		stepProgressView = new StepProgressView(itemManager);
-		stepProgressView.setAlignmentX(CENTER_ALIGNMENT);
-		controlsPanel.add(stepProgressView);
-
-		quickGuidePanelView = new QuickGuidePanelView(guidanceActivator, guidanceDeactivator);
-
-		controlsPanel.add(Box.createVerticalStrut(4));
+		// === Controls panel (north) — static header widgets built by PanelHeaderBuilder ===
+		PanelHeaderBuilder.Result header = PanelHeaderBuilder.build(
+			config,
+			dataSyncState,
+			slayerTaskState,
+			slayerStrategyCalculator,
+			requirementsChecker,
+			itemManager,
+			guidanceActivator,
+			guidanceDeactivator,
+			this);
+		JPanel controlsPanel = header.controlsPanel;
+		completionLabel = header.completionLabel;
+		completionProgressBar = header.completionProgressBar;
+		syncStatusView = header.syncStatusView;
+		syncButtonController = header.syncButtonController;
+		clueSummaryView = header.clueSummaryView;
+		slayerStrategyView = header.slayerStrategyView;
+		guidanceBannerView = header.guidanceBannerView;
+		stepProgressView = header.stepProgressView;
+		quickGuidePanelView = header.quickGuidePanelView;
 
 		selectorControls = new SelectorControlsPanel(
 			config,
