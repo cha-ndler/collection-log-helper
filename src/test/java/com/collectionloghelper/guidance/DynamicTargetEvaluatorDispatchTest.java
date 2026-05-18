@@ -149,6 +149,7 @@ public class DynamicTargetEvaluatorDispatchTest
 		registry.register(STUB_KEY, (c, step) -> DYNAMIC_POINT);
 
 		OverlayStepApplier overlayStepApplier = newOverlayStepApplier();
+		WorldMapController worldMapController = newWorldMapController();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -173,7 +174,8 @@ public class DynamicTargetEvaluatorDispatchTest
 				WorldMapDestinationOverlay.class,
 				GroundItemHighlightOverlay.class,
 				WidgetHighlightOverlay.class,
-				OverlayStepApplier.class);
+				OverlayStepApplier.class,
+				WorldMapController.class);
 		ctor.setAccessible(true);
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
@@ -184,7 +186,7 @@ public class DynamicTargetEvaluatorDispatchTest
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
-			overlayStepApplier);
+			overlayStepApplier, worldMapController);
 
 		lenient().when(client.getLocalPlayer()).thenReturn(localPlayer);
 		lenient().when(localPlayer.getWorldLocation()).thenReturn(new WorldPoint(3200, 3200, 0));
@@ -273,6 +275,14 @@ public class DynamicTargetEvaluatorDispatchTest
 	}
 
 	// ── Helper ────────────────────────────────────────────────────────────────
+
+	private WorldMapController newWorldMapController() throws Exception
+	{
+		Constructor<WorldMapController> ctor = WorldMapController.class.getDeclaredConstructor(
+			Client.class, ClientThread.class, CollectionLogHelperConfig.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, clientThread, config);
+	}
 
 	private OverlayStepApplier newOverlayStepApplier() throws Exception
 	{
