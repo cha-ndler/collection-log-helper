@@ -130,6 +130,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 	public void setUp() throws Exception
 	{
 		OverlayStepApplier overlayStepApplier = newOverlayStepApplier();
+		OverlaySourceApplier overlaySourceApplier = newOverlaySourceApplier();
 		WorldMapController worldMapController = newWorldMapController();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
@@ -155,6 +156,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 				GroundItemHighlightOverlay.class,
 				WidgetHighlightOverlay.class,
 				OverlayStepApplier.class,
+				OverlaySourceApplier.class,
 				WorldMapController.class,
 				DynamicTargetManager.class,
 				NpcTrackerHelper.class);
@@ -170,7 +172,8 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
-			overlayStepApplier, worldMapController, dynamicTargetManager, npcTrackerHelper);
+			overlayStepApplier, overlaySourceApplier, worldMapController,
+			dynamicTargetManager, npcTrackerHelper);
 
 		// Default stubs: no unmet requirements; buildRequirementRows called unconditionally
 		when(requirementsChecker.getUnmetRequirements(any())).thenReturn(Collections.emptyList());
@@ -299,6 +302,20 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay);
+	}
+
+	private OverlaySourceApplier newOverlaySourceApplier() throws Exception
+	{
+		Constructor<OverlaySourceApplier> ctor = OverlaySourceApplier.class.getDeclaredConstructor(
+			Client.class, ClientThread.class, EventBus.class, CollectionLogHelperConfig.class,
+			RequirementsChecker.class, WorldMapPointManager.class,
+			GuidanceOverlay.class, GuidanceMinimapOverlay.class, DialogHighlightOverlay.class,
+			WorldMapRouteOverlay.class, WorldMapDestinationOverlay.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, clientThread, eventBus, config,
+			requirementsChecker, worldMapPointManager,
+			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
+			worldMapRouteOverlay, worldMapDestinationOverlay);
 	}
 
 	private static CollectionLogSource sourceAtCoords(
