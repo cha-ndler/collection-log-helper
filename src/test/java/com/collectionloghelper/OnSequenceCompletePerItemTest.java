@@ -27,6 +27,7 @@ package com.collectionloghelper;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.di.EfficiencyModule;
 import com.collectionloghelper.di.GuidanceModule;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
@@ -87,7 +88,9 @@ public class OnSequenceCompletePerItemTest
 			null, guidanceCoordinator, null, null, null, null, null, null);
 		injectField("guidance", guidanceModule);
 		injectField("config", config);
-		injectField("calculator", calculator);
+		EfficiencyModule efficiencyModule = new EfficiencyModule(
+			calculator, null, null, null, null);
+		injectField("efficiency", efficiencyModule);
 
 		// Make clientThread.invokeLater execute the runnable immediately so
 		// coordinator.activateGuidance is reachable within the same test call.
