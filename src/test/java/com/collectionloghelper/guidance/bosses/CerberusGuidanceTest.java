@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.collectionloghelper.guidance.helper;
+package com.collectionloghelper.guidance.bosses;
 
 import com.collectionloghelper.data.CompletionCondition;
 import com.collectionloghelper.data.GuidanceStep;
@@ -33,29 +33,29 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CerberusHelperTest
+public class CerberusGuidanceTest
 {
-	private CerberusHelper helper;
+	private CerberusGuidance guidance;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		Constructor<CerberusHelper> ctor = CerberusHelper.class.getDeclaredConstructor();
+		Constructor<CerberusGuidance> ctor = CerberusGuidance.class.getDeclaredConstructor();
 		ctor.setAccessible(true);
-		helper = ctor.newInstance();
+		guidance = ctor.newInstance();
 	}
 
 	@Test
 	public void getSteps_returnsThreeSteps()
 	{
-		List<GuidanceStep> steps = helper.getSteps(null, null);
-		assertEquals("Cerberus helper must produce exactly 3 steps", 3, steps.size());
+		List<GuidanceStep> steps = guidance.getSteps(null, null);
+		assertEquals("Cerberus guidance must produce exactly 3 steps", 3, steps.size());
 	}
 
 	@Test
 	public void getSteps_firstStep_isTravelToTaverley()
 	{
-		List<GuidanceStep> steps = helper.getSteps(null, null);
+		List<GuidanceStep> steps = guidance.getSteps(null, null);
 		GuidanceStep travelStep = steps.get(0);
 		assertEquals(CompletionCondition.ARRIVE_AT_TILE, travelStep.getCompletionCondition());
 		assertEquals("Travel", travelStep.getSection());
@@ -68,10 +68,10 @@ public class CerberusHelperTest
 	@Test
 	public void getSteps_secondStep_isGateStep()
 	{
-		List<GuidanceStep> steps = helper.getSteps(null, null);
+		List<GuidanceStep> steps = guidance.getSteps(null, null);
 		GuidanceStep gateStep = steps.get(1);
 		assertEquals(CompletionCondition.MANUAL, gateStep.getCompletionCondition());
-		assertEquals(CerberusHelper.IRON_WINCH_OBJECT_ID, gateStep.getObjectId());
+		assertEquals(CerberusGuidance.IRON_WINCH_OBJECT_ID, gateStep.getObjectId());
 		assertEquals("Turn", gateStep.getObjectInteractAction());
 		assertEquals("Travel", gateStep.getSection());
 	}
@@ -79,11 +79,11 @@ public class CerberusHelperTest
 	@Test
 	public void getSteps_thirdStep_isKillCerberus()
 	{
-		List<GuidanceStep> steps = helper.getSteps(null, null);
+		List<GuidanceStep> steps = guidance.getSteps(null, null);
 		GuidanceStep killStep = steps.get(2);
 		assertEquals(CompletionCondition.ACTOR_DEATH, killStep.getCompletionCondition());
-		assertEquals(CerberusHelper.CERBERUS_NPC_ID, killStep.getNpcId());
-		assertEquals(CerberusHelper.CERBERUS_NPC_ID, killStep.getCompletionNpcId());
+		assertEquals(CerberusGuidance.CERBERUS_NPC_ID, killStep.getNpcId());
+		assertEquals(CerberusGuidance.CERBERUS_NPC_ID, killStep.getCompletionNpcId());
 		assertEquals("Attack", killStep.getInteractAction());
 		assertEquals("Combat", killStep.getSection());
 		assertNotNull("Kill step must have recommended items", killStep.getRecommendedItemIds());
@@ -93,12 +93,12 @@ public class CerberusHelperTest
 	@Test
 	public void isStepSatisfied_alwaysReturnsFalse()
 	{
-		List<GuidanceStep> steps = helper.getSteps(null, null);
+		List<GuidanceStep> steps = guidance.getSteps(null, null);
 		for (int i = 0; i < steps.size(); i++)
 		{
 			assertFalse(
 				"isStepSatisfied must always return false for step " + i,
-				helper.isStepSatisfied(null, steps.get(i), i));
+				guidance.isStepSatisfied(null, steps.get(i), i));
 		}
 	}
 }

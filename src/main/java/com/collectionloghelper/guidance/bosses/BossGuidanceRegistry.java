@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.collectionloghelper.guidance.helper;
+package com.collectionloghelper.guidance.bosses;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,53 +33,53 @@ import javax.inject.Singleton;
 
 /**
  * Registry that maps {@code guidanceHelperKey} strings to their
- * {@link GuidanceHelper} implementations.
+ * {@link BossGuidance} implementations.
  *
  * <p>The registry is populated at plugin startup. When a
  * {@link com.collectionloghelper.data.CollectionLogSource} carries a non-null
  * {@code guidanceHelperKey}, the
  * {@link com.collectionloghelper.guidance.GuidanceSequencer} calls
- * {@link #get(String)} to retrieve the helper before starting a sequence.
+ * {@link #get(String)} to retrieve the boss guidance before starting a sequence.
  *
  * <p>Keys are lower-case strings matching the {@code guidanceHelperKey} field
  * value in {@code drop_rates.json} (e.g. {@code "cerberus"}).
  */
 @Singleton
-public class GuidanceHelperRegistry
+public class BossGuidanceRegistry
 {
-	private final Map<String, GuidanceHelper> helpers;
+	private final Map<String, BossGuidance> bosses;
 
 	@Inject
-	GuidanceHelperRegistry(CerberusHelper cerberusHelper)
+	BossGuidanceRegistry(CerberusGuidance cerberusGuidance)
 	{
-		Map<String, GuidanceHelper> map = new HashMap<>();
-		map.put("cerberus", cerberusHelper);
-		this.helpers = Collections.unmodifiableMap(map);
+		Map<String, BossGuidance> map = new HashMap<>();
+		map.put("cerberus", cerberusGuidance);
+		this.bosses = Collections.unmodifiableMap(map);
 	}
 
 	/**
-	 * Returns the {@link GuidanceHelper} registered for the given key, or
-	 * {@code null} if no helper is registered for that key.
+	 * Returns the {@link BossGuidance} registered for the given key, or
+	 * {@code null} if no boss guidance is registered for that key.
 	 *
 	 * @param key the {@code guidanceHelperKey} value from the source (may be null)
-	 * @return the registered helper, or {@code null}
+	 * @return the registered boss guidance, or {@code null}
 	 */
 	@Nullable
-	public GuidanceHelper get(@Nullable String key)
+	public BossGuidance get(@Nullable String key)
 	{
 		if (key == null)
 		{
 			return null;
 		}
-		return helpers.get(key);
+		return bosses.get(key);
 	}
 
 	/**
 	 * Returns an unmodifiable view of the full registry map.
 	 * Exposed for testing.
 	 */
-	public Map<String, GuidanceHelper> getAllHelpers()
+	public Map<String, BossGuidance> getAllBosses()
 	{
-		return helpers;
+		return bosses;
 	}
 }

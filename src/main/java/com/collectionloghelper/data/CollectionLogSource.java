@@ -54,9 +54,9 @@ public class CollectionLogSource
 	List<GuidanceStep> guidanceSteps;
 
 	/**
-	 * Optional key naming a registered {@link com.collectionloghelper.guidance.helper.GuidanceHelper}
+	 * Optional key naming a registered {@link com.collectionloghelper.guidance.bosses.BossGuidance}
 	 * implementation that supplies steps for this source. When non-null the sequencer
-	 * delegates step generation to the helper instead of {@link #guidanceSteps}.
+	 * delegates step generation to the boss guidance instead of {@link #guidanceSteps}.
 	 *
 	 * <p>Null by default — existing JSON without this field deserialises unchanged.
 	 */

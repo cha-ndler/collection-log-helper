@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.collectionloghelper.guidance.helper;
+package com.collectionloghelper.guidance.bosses;
 
 import com.collectionloghelper.data.GuidanceStep;
 import java.util.List;
@@ -33,17 +33,17 @@ import net.runelite.client.callback.ClientThread;
  * Optional escape hatch for sources that cannot be fully expressed in JSON.
  *
  * <p>When a {@link com.collectionloghelper.data.CollectionLogSource} has a
- * non-null {@code guidanceHelperKey}, the {@link GuidanceHelperRegistry}
+ * non-null {@code guidanceHelperKey}, the {@link BossGuidanceRegistry}
  * resolves it to an implementation of this interface. The
  * {@link com.collectionloghelper.guidance.GuidanceSequencer} then delegates
- * step generation and satisfaction checks to the helper instead of relying
- * solely on the source's {@code guidanceSteps} JSON list.
+ * step generation and satisfaction checks to the boss guidance instead of
+ * relying solely on the source's {@code guidanceSteps} JSON list.
  *
- * <p>This is the D-01 hybrid design: JSON stays primary; Java helpers are
- * the opt-in escape hatch for hard sources (dynamic re-render, arbitrary
+ * <p>This is the D-01 hybrid design: JSON stays primary; Java boss guidance
+ * is the opt-in escape hatch for hard sources (dynamic re-render, arbitrary
  * varbit predicates, puzzle logic).
  */
-public interface GuidanceHelper
+public interface BossGuidance
 {
 	/**
 	 * Returns the ordered list of guidance steps for this source.
@@ -68,8 +68,8 @@ public interface GuidanceHelper
 	 * satisfaction check should return {@code true} when appropriate.
 	 *
 	 * <p>For this pilot PR the implementation always returns {@code false}
-	 * (delegate to the default sequencer evaluation). Future helpers may
-	 * implement richer logic here.
+	 * (delegate to the default sequencer evaluation). Future implementations
+	 * may implement richer logic here.
 	 *
 	 * @param client    the RuneLite client
 	 * @param step      the step to evaluate
