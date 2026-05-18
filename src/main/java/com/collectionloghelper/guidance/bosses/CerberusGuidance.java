@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.collectionloghelper.guidance.helper;
+package com.collectionloghelper.guidance.bosses;
 
 import com.collectionloghelper.data.CompletionCondition;
 import com.collectionloghelper.data.GuidanceStep;
@@ -35,10 +35,10 @@ import net.runelite.api.Client;
 import net.runelite.client.callback.ClientThread;
 
 /**
- * Pilot Java helper for Cerberus (D-01 hybrid, B6).
+ * Pilot Java boss guidance for Cerberus (D-01 hybrid, B6).
  *
  * <p>This PR mirrors Cerberus's existing JSON guidance steps in Java code to
- * prove that the helper plumbing works end-to-end. The step data is
+ * prove that the boss-guidance plumbing works end-to-end. The step data is
  * intentionally identical to the JSON so that no behaviour changes occur when
  * the helper key is absent (plumbing-only milestone).
  *
@@ -47,7 +47,7 @@ import net.runelite.client.callback.ClientThread;
  * {@link com.collectionloghelper.guidance.GuidanceSequencer} logic.
  */
 @Singleton
-public class CerberusHelper implements GuidanceHelper
+public class CerberusGuidance implements BossGuidance
 {
 	/** NPC ID for Cerberus (all combat variants). */
 	static final int CERBERUS_NPC_ID = 5862;
@@ -60,7 +60,7 @@ public class CerberusHelper implements GuidanceHelper
 		Arrays.asList(2434, 3024, 12695));
 
 	@Inject
-	CerberusHelper()
+	CerberusGuidance()
 	{
 	}
 
