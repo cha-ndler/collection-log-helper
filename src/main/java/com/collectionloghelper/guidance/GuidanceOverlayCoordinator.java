@@ -37,7 +37,6 @@ import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
 import com.collectionloghelper.data.RequirementRow;
 import com.collectionloghelper.data.RequirementsChecker;
-import com.collectionloghelper.guidance.dynamic.DynamicTargetEvaluatorRegistry;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
 import com.collectionloghelper.overlay.GroundItemHighlightOverlay;
@@ -96,7 +95,6 @@ public class GuidanceOverlayCoordinator
 	private final EventBus eventBus;
 	private final CollectionLogHelperConfig config;
 	private final GuidanceSequencer guidanceSequencer;
-	private final DynamicTargetEvaluatorRegistry dynamicTargetEvaluatorRegistry;
 	private final RequirementsChecker requirementsChecker;
 	private final PlayerTravelCapabilities travelCapabilities;
 	private final PlayerInventoryState playerInventoryState;
@@ -115,6 +113,7 @@ public class GuidanceOverlayCoordinator
 	private final WidgetHighlightOverlay widgetHighlightOverlay;
 	private final OverlayStepApplier overlayStepApplier;
 	private final WorldMapController worldMapController;
+	private final DynamicTargetManager dynamicTargetManager;
 
 	// -- Guidance UI state (previously in plugin) --
 
@@ -172,7 +171,6 @@ public class GuidanceOverlayCoordinator
 		EventBus eventBus,
 		CollectionLogHelperConfig config,
 		GuidanceSequencer guidanceSequencer,
-		DynamicTargetEvaluatorRegistry dynamicTargetEvaluatorRegistry,
 		RequirementsChecker requirementsChecker,
 		PlayerTravelCapabilities travelCapabilities,
 		PlayerInventoryState playerInventoryState,
@@ -190,14 +188,14 @@ public class GuidanceOverlayCoordinator
 		GroundItemHighlightOverlay groundItemHighlightOverlay,
 		WidgetHighlightOverlay widgetHighlightOverlay,
 		OverlayStepApplier overlayStepApplier,
-		WorldMapController worldMapController)
+		WorldMapController worldMapController,
+		DynamicTargetManager dynamicTargetManager)
 	{
 		this.client = client;
 		this.clientThread = clientThread;
 		this.eventBus = eventBus;
 		this.config = config;
 		this.guidanceSequencer = guidanceSequencer;
-		this.dynamicTargetEvaluatorRegistry = dynamicTargetEvaluatorRegistry;
 		this.requirementsChecker = requirementsChecker;
 		this.travelCapabilities = travelCapabilities;
 		this.playerInventoryState = playerInventoryState;
@@ -216,6 +214,7 @@ public class GuidanceOverlayCoordinator
 		this.widgetHighlightOverlay = widgetHighlightOverlay;
 		this.overlayStepApplier = overlayStepApplier;
 		this.worldMapController = worldMapController;
+		this.dynamicTargetManager = dynamicTargetManager;
 	}
 
 	/**
@@ -432,63 +431,13 @@ public class GuidanceOverlayCoordinator
 			eventBus.post(new PluginMessage("shortestpath", "path", data));
 		}
 
-		// Dynamic target evaluator dispatch: update overlays each tick when the
-		// active step has a dynamicTargetEvaluator key.
-		tickDynamicTargetEvaluator();
+		// Dynamic target evaluator dispatch (delegated to DynamicTargetManager).
+		activeMapPoint = dynamicTargetManager.tick(new DynamicTargetManager.Input(
+			guidanceSequencer.isActive(), guidanceSequencer.getRawCurrentStep(),
+			activeMapPoint, activeTargetItemId, collectionLogIcon)).getActiveMapPoint();
 
 		// World map arrow rotation
 		worldMapController.updateArrow(activeMapPoint);
-	}
-
-	/**
-	 * If the currently active guidance step has a non-null
-	 * {@link com.collectionloghelper.data.GuidanceStep#getDynamicTargetEvaluator()}
-	 * key, looks up the evaluator in the registry and calls it to obtain the
-	 * current target {@link WorldPoint}.  When the evaluator returns a non-null
-	 * point, pushes it to all location-sensitive overlays (minimap, world map,
-	 * overlay, hint arrow).  Returns silently when guidance is inactive, the
-	 * step carries no evaluator key, the key is unknown, or the evaluator
-	 * returns {@code null}.
-	 *
-	 * <p>Called on the client thread once per game tick via {@link #tick()}.
-	 */
-	private void tickDynamicTargetEvaluator()
-	{
-		if (!guidanceSequencer.isActive())
-		{
-			return;
-		}
-		GuidanceStep step = guidanceSequencer.getRawCurrentStep();
-		if (step == null || step.getDynamicTargetEvaluator() == null)
-		{
-			return;
-		}
-		DynamicTargetEvaluator evaluator = dynamicTargetEvaluatorRegistry.get(step.getDynamicTargetEvaluator());
-		if (evaluator == null)
-		{
-			return;
-		}
-		WorldPoint dynamicPoint = evaluator.evaluate(client, step);
-		if (dynamicPoint == null)
-		{
-			return;
-		}
-		guidanceOverlay.setTargetPoint(dynamicPoint);
-		guidanceMinimapOverlay.setTargetPoint(dynamicPoint);
-		worldMapRouteOverlay.setTargetPoint(dynamicPoint);
-		worldMapDestinationOverlay.setTarget(dynamicPoint, worldMapController.resolveStepIconType(step, activeTargetItemId));
-		if (activeMapPoint != null)
-		{
-			worldMapPointManager.remove(activeMapPoint);
-		}
-		activeMapPoint = new CollectionLogWorldMapPoint(dynamicPoint,
-			step.resolveDescription(activeTargetItemId), collectionLogIcon);
-		worldMapPointManager.add(activeMapPoint);
-		worldMapDestinationOverlay.setMapPointActive(true);
-		if (worldMapController.shouldSetHintArrowTo(dynamicPoint))
-		{
-			client.setHintArrow(dynamicPoint);
-		}
 	}
 
 	/**
