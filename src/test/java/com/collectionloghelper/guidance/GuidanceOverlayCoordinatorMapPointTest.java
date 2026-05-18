@@ -134,6 +134,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 		WorldMapController worldMapController = newWorldMapController();
 		NpcTrackerHelper npcTrackerHelper = newNpcTrackerHelper();
 		OverlayDeactivator overlayDeactivator = newOverlayDeactivator(npcTrackerHelper);
+		StepChangeHandler stepChangeHandler = newStepChangeHandler();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -162,7 +163,8 @@ public class GuidanceOverlayCoordinatorMapPointTest
 				OverlayDeactivator.class,
 				WorldMapController.class,
 				DynamicTargetManager.class,
-				NpcTrackerHelper.class);
+				NpcTrackerHelper.class,
+				StepChangeHandler.class);
 		ctor.setAccessible(true);
 		DynamicTargetManager dynamicTargetManager = newDynamicTargetManager(worldMapController);
 		coordinator = ctor.newInstance(
@@ -175,7 +177,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
 			overlayStepApplier, overlaySourceApplier, overlayDeactivator,
-			worldMapController, dynamicTargetManager, npcTrackerHelper);
+			worldMapController, dynamicTargetManager, npcTrackerHelper, stepChangeHandler);
 
 		// Default stubs: no unmet requirements; buildRequirementRows called unconditionally
 		when(requirementsChecker.getUnmetRequirements(any())).thenReturn(Collections.emptyList());
@@ -285,6 +287,14 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			Client.class, ClientThread.class, GuidanceOverlay.class);
 		ctor.setAccessible(true);
 		return ctor.newInstance(client, clientThread, guidanceOverlay);
+	}
+
+	private StepChangeHandler newStepChangeHandler() throws Exception
+	{
+		Constructor<StepChangeHandler> ctor = StepChangeHandler.class.getDeclaredConstructor(
+			ClientThread.class, GuidanceSequencer.class, RequiredItemResolver.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(clientThread, guidanceSequencer, requiredItemResolver);
 	}
 
 	/** Builds a minimal BOSSES source with coordinates but no guidance steps. */
