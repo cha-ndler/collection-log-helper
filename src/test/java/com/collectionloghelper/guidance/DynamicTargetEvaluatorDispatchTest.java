@@ -154,6 +154,7 @@ public class DynamicTargetEvaluatorDispatchTest
 		DynamicTargetManager dynamicTargetManager = newDynamicTargetManager(worldMapController);
 		NpcTrackerHelper npcTrackerHelper = newNpcTrackerHelper();
 		OverlayDeactivator overlayDeactivator = newOverlayDeactivator(npcTrackerHelper);
+		StepChangeHandler stepChangeHandler = newStepChangeHandler();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -182,7 +183,8 @@ public class DynamicTargetEvaluatorDispatchTest
 				OverlayDeactivator.class,
 				WorldMapController.class,
 				DynamicTargetManager.class,
-				NpcTrackerHelper.class);
+				NpcTrackerHelper.class,
+				StepChangeHandler.class);
 		ctor.setAccessible(true);
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
@@ -194,7 +196,7 @@ public class DynamicTargetEvaluatorDispatchTest
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
 			overlayStepApplier, overlaySourceApplier, overlayDeactivator,
-			worldMapController, dynamicTargetManager, npcTrackerHelper);
+			worldMapController, dynamicTargetManager, npcTrackerHelper, stepChangeHandler);
 
 		lenient().when(client.getLocalPlayer()).thenReturn(localPlayer);
 		lenient().when(localPlayer.getWorldLocation()).thenReturn(new WorldPoint(3200, 3200, 0));
@@ -312,6 +314,14 @@ public class DynamicTargetEvaluatorDispatchTest
 			Client.class, ClientThread.class, GuidanceOverlay.class);
 		ctor.setAccessible(true);
 		return ctor.newInstance(client, clientThread, guidanceOverlay);
+	}
+
+	private StepChangeHandler newStepChangeHandler() throws Exception
+	{
+		Constructor<StepChangeHandler> ctor = StepChangeHandler.class.getDeclaredConstructor(
+			ClientThread.class, GuidanceSequencer.class, RequiredItemResolver.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(clientThread, guidanceSequencer, requiredItemResolver);
 	}
 
 	private OverlayStepApplier newOverlayStepApplier() throws Exception
