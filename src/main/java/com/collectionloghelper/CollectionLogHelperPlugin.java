@@ -31,6 +31,7 @@ import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.di.DataModule;
 import com.collectionloghelper.sync.CollectionLogNetImporter;
 import com.collectionloghelper.sync.ImportResult;
+import com.collectionloghelper.sync.LootSyncManager;
 import com.collectionloghelper.sync.SourceKcStore;
 import com.collectionloghelper.sync.SyncResult;
 import com.collectionloghelper.sync.TempleOsrsKcSyncer;
@@ -85,7 +86,6 @@ import net.runelite.api.events.ScriptPreFired;
 import net.runelite.api.ScriptEvent;
 import net.runelite.api.events.StatChanged;
 import net.runelite.api.events.VarbitChanged;
-import net.runelite.api.gameval.InventoryID;
 import net.runelite.api.gameval.ItemID;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatCommandManager;
@@ -95,7 +95,6 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.NpcLootReceived;
 import net.runelite.client.events.RuneScapeProfileChanged;
 import net.runelite.client.game.ItemManager;
-import net.runelite.client.game.ItemStack;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
@@ -206,6 +205,9 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private SourceKcStore sourceKcStore;
+
+	@Inject
+	private LootSyncManager lootSyncManager;
 
 
 	private CollectionLogHelperPanel panel;
@@ -614,78 +616,13 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onNpcLootReceived(NpcLootReceived event)
 	{
-		for (ItemStack itemStack : event.getItems())
-		{
-			int itemId = itemStack.getId();
-			CollectionLogItem item = data.getDatabase().getItemById(itemId);
-			if (item != null && !data.getCollectionState().isItemObtained(itemId))
-			{
-				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
-					"<col=00c8c8>[Collection Log Helper]</col> Collection log drop: " + item.getName(),
-					null);
-				guidanceSequencer.onItemObtained(itemId);
-			}
-		}
+		lootSyncManager.handleNpcLoot(event);
 	}
 
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged event)
 	{
-		log.debug("ItemContainerChanged fired: containerId={}, BANK={}, match={}",
-			event.getContainerId(), InventoryID.BANK, event.getContainerId() == InventoryID.BANK);
-
-		if (config.guidanceAuthoring())
-		{
-			authoringLogger.logContainerChange(event, client);
-		}
-
-		if (event.getContainerId() == InventoryID.INV)
-		{
-			net.runelite.api.ItemContainer invContainer = event.getItemContainer();
-			if (invContainer != null)
-			{
-				data.getPlayerInventoryState().scanInventory(invContainer);
-
-				if (guidanceSequencer.isActive())
-				{
-					guidanceSequencer.onInventoryChanged();
-					guidanceCoordinator.onItemContainerChanged();
-				}
-			}
-		}
-
-		if (event.getContainerId() == InventoryID.WORN)
-		{
-			net.runelite.api.ItemContainer equipContainer = event.getItemContainer();
-			if (equipContainer != null)
-			{
-				data.getPlayerInventoryState().scanEquipment(equipContainer);
-			}
-		}
-
-		if (event.getContainerId() == InventoryID.BANK)
-		{
-			// Scan bank for clue-related items and travel teleports every time it updates
-			net.runelite.api.ItemContainer bankContainer = event.getItemContainer();
-			if (bankContainer != null)
-			{
-				data.getPlayerBankState().scanBank(bankContainer);
-				travelCapabilities.scanBank(bankContainer);
-			}
-
-			if (!data.getDataSyncState().isBankScanned())
-			{
-				data.getDataSyncState().setBankScanned(true);
-				guidanceOverlay.setShowBankReminder(false);
-				log.info("Bank opened — marked as scanned for this session");
-			}
-
-			if (panel != null)
-			{
-				panel.updateDataSyncWarning();
-				panel.updateClueSummary(data.getPlayerBankState());
-			}
-		}
+		lootSyncManager.handleItemContainerChanged(event, panel);
 	}
 
 	@Subscribe
