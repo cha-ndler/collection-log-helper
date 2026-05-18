@@ -26,20 +26,14 @@ package com.collectionloghelper;
 
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.data.PlayerTravelCapabilities;
+import com.collectionloghelper.data.RequirementsChecker;
+import com.collectionloghelper.di.DataModule;
 import com.collectionloghelper.sync.CollectionLogNetImporter;
 import com.collectionloghelper.sync.ImportResult;
-import com.collectionloghelper.data.DataSyncState;
-import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.sync.SourceKcStore;
 import com.collectionloghelper.sync.SyncResult;
 import com.collectionloghelper.sync.TempleOsrsKcSyncer;
-import com.collectionloghelper.data.PlayerBankState;
-import com.collectionloghelper.data.PlayerCollectionState;
-import com.collectionloghelper.data.PlayerInventoryState;
-import com.collectionloghelper.data.PlayerTravelCapabilities;
-import com.collectionloghelper.data.RequirementsChecker;
-import com.collectionloghelper.data.SlayerMasterDatabase;
-import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
 import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
@@ -145,10 +139,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private ChatCommandManager chatCommandManager;
 
 	@Inject
-	private DropRateDatabase database;
-
-	@Inject
-	private PlayerCollectionState collectionState;
+	private DataModule data;
 
 	@Inject
 	private EfficiencyCalculator calculator;
@@ -166,21 +157,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	private ObjectHighlightOverlay objectHighlightOverlay;
 
 	@Inject
-	private DataSyncState dataSyncState;
-
-	@Inject
-	private PlayerBankState playerBankState;
-
-	@Inject
-	private PlayerInventoryState playerInventoryState;
-
-	@Inject
-	private SlayerTaskState slayerTaskState;
-
-	@Inject
-	private SlayerMasterDatabase slayerMasterDatabase;
-
-	@Inject
 	private SlayerStrategyCalculator slayerStrategyCalculator;
 
 	@Inject
@@ -188,9 +164,6 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private PlayerTravelCapabilities travelCapabilities;
-
-	@Inject
-	private com.collectionloghelper.data.PluginDataManager pluginDataManager;
 
 	@Inject
 	private GuidanceSequencer guidanceSequencer;
@@ -270,8 +243,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Override
 	protected void startUp() throws Exception
 	{
-		database.load();
-		slayerMasterDatabase.load();
+		data.getDatabase().load();
+		data.getSlayerMasterDatabase().load();
 
 		httpResultExecutor = Executors.newSingleThreadExecutor(r ->
 		{
@@ -281,9 +254,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		});
 
 		panel = new CollectionLogHelperPanel(
-			config, database, collectionState, calculator, clueEstimator,
-			itemManager, requirementsChecker, dataSyncState, slayerTaskState,
-			slayerStrategyCalculator, playerInventoryState, playerBankState,
+			config, data.getDatabase(), data.getCollectionState(), calculator, clueEstimator,
+			itemManager, requirementsChecker, data.getDataSyncState(), data.getSlayerTaskState(),
+			slayerStrategyCalculator, data.getPlayerInventoryState(), data.getPlayerBankState(),
 			dryStreakAnalyzer,
 			(java.util.function.BiConsumer<CollectionLogSource, Integer>) this::activateGuidance,
 			this::deactivateGuidance,
@@ -388,13 +361,13 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			clientThread.invokeLater(() ->
 			{
-				collectionState.refreshVarps();
-				collectionState.loadObtainedItems();
-				collectionState.captureRecentItems();
-				requirementsChecker.refreshAccessibility(database.getAllSources());
+				data.getCollectionState().refreshVarps();
+				data.getCollectionState().loadObtainedItems();
+				data.getCollectionState().captureRecentItems();
+				requirementsChecker.refreshAccessibility(data.getDatabase().getAllSources());
 				travelCapabilities.refreshQuestState();
 				travelCapabilities.refreshVarbits();
-				syncStateCoordinator.setLastObtainedCount(collectionState.getTotalObtained());
+				syncStateCoordinator.setLastObtainedCount(data.getCollectionState().getTotalObtained());
 				rebuildSourcesWithMissingItems();
 				if (panel != null)
 				{
@@ -440,13 +413,13 @@ public class CollectionLogHelperPlugin extends Plugin
 		cachedPlayerLocation = null;
 		guidanceOverlay.setShowCollectionLogReminder(false);
 		guidanceOverlay.setShowBankReminder(false);
-		dataSyncState.reset();
-		playerBankState.reset();
-		playerInventoryState.reset();
-		slayerTaskState.reset();
+		data.getDataSyncState().reset();
+		data.getPlayerBankState().reset();
+		data.getPlayerInventoryState().reset();
+		data.getSlayerTaskState().reset();
 		travelCapabilities.reset();
-		collectionState.clearState();
-		pluginDataManager.reset();
+		data.getCollectionState().clearState();
+		data.getPluginDataManager().reset();
 
 		log.info("Collection Log Helper stopped");
 	}
@@ -463,14 +436,14 @@ public class CollectionLogHelperPlugin extends Plugin
 			slayerRefreshPending = true;
 			clientThread.invokeLater(() ->
 			{
-				collectionState.refreshVarps();
-				collectionState.loadObtainedItems();
-				collectionState.captureRecentItems();
-				requirementsChecker.refreshAccessibility(database.getAllSources());
+				data.getCollectionState().refreshVarps();
+				data.getCollectionState().loadObtainedItems();
+				data.getCollectionState().captureRecentItems();
+				requirementsChecker.refreshAccessibility(data.getDatabase().getAllSources());
 				travelCapabilities.refreshQuestState();
 				travelCapabilities.refreshVarbits();
-				slayerTaskState.refresh();
-				syncStateCoordinator.setLastObtainedCount(collectionState.getTotalObtained());
+				data.getSlayerTaskState().refresh();
+				syncStateCoordinator.setLastObtainedCount(data.getCollectionState().getTotalObtained());
 				rebuildSourcesWithMissingItems();
 
 				// Rescan scene for tracked objects after scene (re)load
@@ -481,20 +454,20 @@ public class CollectionLogHelperPlugin extends Plugin
 
 				if (panel != null)
 				{
-					if (dataSyncState.isCollectionLogSynced()
-						&& collectionState.getTotalObtained() > 0)
+					if (data.getDataSyncState().isCollectionLogSynced()
+						&& data.getCollectionState().getTotalObtained() > 0)
 					{
 						panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
-							collectionState.getTotalObtained());
+							data.getCollectionState().getTotalObtained());
 					}
 					else
 					{
 						panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.NOT_SYNCED, 0);
 					}
 					panel.updateDataSyncWarning();
-					if (dataSyncState.isBankScanned())
+					if (data.getDataSyncState().isBankScanned())
 					{
-						panel.updateClueSummary(playerBankState);
+						panel.updateClueSummary(data.getPlayerBankState());
 					}
 					panel.rebuild();
 				}
@@ -502,10 +475,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 		else if (event.getGameState() == GameState.LOGIN_SCREEN)
 		{
-			collectionState.clearState();
+			data.getCollectionState().clearState();
 			requirementsChecker.clearCache();
 			clueEstimator.resetBucket();
-			slayerTaskState.reset();
+			data.getSlayerTaskState().reset();
 			syncStateCoordinator.onGameStateLoginScreen();
 			syncStateCoordinator.setLastObtainedCount(-1);
 			sourcesWithMissingItems.clear();
@@ -514,12 +487,12 @@ public class CollectionLogHelperPlugin extends Plugin
 			cachedPlayerLocation = null;
 			guidanceOverlay.setShowCollectionLogReminder(false);
 			guidanceOverlay.setShowBankReminder(false);
-			dataSyncState.reset();
-			playerBankState.reset();
-			playerInventoryState.reset();
+			data.getDataSyncState().reset();
+			data.getPlayerBankState().reset();
+			data.getPlayerInventoryState().reset();
 			travelCapabilities.reset();
 			killTimeTracker.reset();
-			pluginDataManager.reset();
+			data.getPluginDataManager().reset();
 		}
 	}
 
@@ -529,17 +502,17 @@ public class CollectionLogHelperPlugin extends Plugin
 		// RS profile is now available — pre-load cached obtained items so they're
 		// ready when onGameTick performs the cache-fresh check (varps aren't
 		// available yet during this event, so the full check happens in onGameTick).
-		collectionState.loadObtainedItems();
-		collectionState.captureRecentItems();
+		data.getCollectionState().loadObtainedItems();
+		data.getCollectionState().captureRecentItems();
 		log.debug("RuneScapeProfileChanged — loaded {} obtained items from RS profile",
-			collectionState.getTotalObtained());
+			data.getCollectionState().getTotalObtained());
 	}
 
 	@Subscribe
 	public void onVarbitChanged(VarbitChanged event)
 	{
 		// Runs on the client thread — safe to call client API
-		collectionState.refreshVarps();
+		data.getCollectionState().refreshVarps();
 
 		// Authoring: log varbit changes (throttle to 1 per tick to avoid spam)
 		if (config.guidanceAuthoring() && client.getTickCount() != authoringLogger.getLastVarbitLogTick())
@@ -553,15 +526,15 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidanceSequencer.onVarbitChanged(event.getVarbitId(), event.getValue());
 
 		// Refresh Slayer task state and rebuild if the task changed
-		boolean wasActive = slayerTaskState.isTaskActive();
-		String oldCreature = slayerTaskState.getCreatureName();
-		int oldRemaining = slayerTaskState.getRemaining();
-		slayerTaskState.refresh();
+		boolean wasActive = data.getSlayerTaskState().isTaskActive();
+		String oldCreature = data.getSlayerTaskState().getCreatureName();
+		int oldRemaining = data.getSlayerTaskState().getRemaining();
+		data.getSlayerTaskState().refresh();
 
-		boolean slayerChanged = wasActive != slayerTaskState.isTaskActive()
-			|| (slayerTaskState.getCreatureName() != null
-				&& !slayerTaskState.getCreatureName().equals(oldCreature))
-			|| slayerTaskState.getRemaining() != oldRemaining;
+		boolean slayerChanged = wasActive != data.getSlayerTaskState().isTaskActive()
+			|| (data.getSlayerTaskState().getCreatureName() != null
+				&& !data.getSlayerTaskState().getCreatureName().equals(oldCreature))
+			|| data.getSlayerTaskState().getRemaining() != oldRemaining;
 
 		// Flag requirements and travel capabilities for refresh on next game tick (debounced).
 		// Quest states are varbits that fire hundreds of times during login,
@@ -576,7 +549,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			return;
 		}
 
-		int currentCount = collectionState.getTotalObtained();
+		int currentCount = data.getCollectionState().getTotalObtained();
 		if (currentCount != syncStateCoordinator.getLastObtainedCount())
 		{
 			syncStateCoordinator.onCollectionStateChanged(currentCount);
@@ -625,10 +598,10 @@ public class CollectionLogHelperPlugin extends Plugin
 			log.debug("New collection log item: {}", itemName);
 
 			// O(1) lookup by name instead of scanning all sources × items
-			CollectionLogItem item = database.getItemByName(itemName);
+			CollectionLogItem item = data.getDatabase().getItemByName(itemName);
 			if (item != null)
 			{
-				collectionState.markItemObtained(item.getItemId());
+				data.getCollectionState().markItemObtained(item.getItemId());
 				guidanceSequencer.onItemObtained(item.getItemId());
 				log.debug("Marked item {} (ID: {}) as obtained", itemName, item.getItemId());
 			}
@@ -644,8 +617,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		for (ItemStack itemStack : event.getItems())
 		{
 			int itemId = itemStack.getId();
-			CollectionLogItem item = database.getItemById(itemId);
-			if (item != null && !collectionState.isItemObtained(itemId))
+			CollectionLogItem item = data.getDatabase().getItemById(itemId);
+			if (item != null && !data.getCollectionState().isItemObtained(itemId))
 			{
 				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
 					"<col=00c8c8>[Collection Log Helper]</col> Collection log drop: " + item.getName(),
@@ -671,7 +644,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			net.runelite.api.ItemContainer invContainer = event.getItemContainer();
 			if (invContainer != null)
 			{
-				playerInventoryState.scanInventory(invContainer);
+				data.getPlayerInventoryState().scanInventory(invContainer);
 
 				if (guidanceSequencer.isActive())
 				{
@@ -686,7 +659,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			net.runelite.api.ItemContainer equipContainer = event.getItemContainer();
 			if (equipContainer != null)
 			{
-				playerInventoryState.scanEquipment(equipContainer);
+				data.getPlayerInventoryState().scanEquipment(equipContainer);
 			}
 		}
 
@@ -696,13 +669,13 @@ public class CollectionLogHelperPlugin extends Plugin
 			net.runelite.api.ItemContainer bankContainer = event.getItemContainer();
 			if (bankContainer != null)
 			{
-				playerBankState.scanBank(bankContainer);
+				data.getPlayerBankState().scanBank(bankContainer);
 				travelCapabilities.scanBank(bankContainer);
 			}
 
-			if (!dataSyncState.isBankScanned())
+			if (!data.getDataSyncState().isBankScanned())
 			{
-				dataSyncState.setBankScanned(true);
+				data.getDataSyncState().setBankScanned(true);
 				guidanceOverlay.setShowBankReminder(false);
 				log.info("Bank opened — marked as scanned for this session");
 			}
@@ -710,7 +683,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (panel != null)
 			{
 				panel.updateDataSyncWarning();
-				panel.updateClueSummary(playerBankState);
+				panel.updateClueSummary(data.getPlayerBankState());
 			}
 		}
 	}
@@ -729,7 +702,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (pendingRequirementsRefresh)
 		{
 			pendingRequirementsRefresh = false;
-			boolean reqsChanged = requirementsChecker.refreshAccessibility(database.getAllSources());
+			boolean reqsChanged = requirementsChecker.refreshAccessibility(data.getDatabase().getAllSources());
 			if (reqsChanged && !syncStateCoordinator.isScriptScanActive())
 			{
 				pendingPanelRebuild = true;
@@ -745,11 +718,11 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Lazily init per-character data directory once player name is available
-		if (pluginDataManager.getCharacterDir() == null)
+		if (data.getPluginDataManager().getCharacterDir() == null)
 		{
-			if (pluginDataManager.init())
+			if (data.getPluginDataManager().init())
 			{
-				killTimeTracker.init(pluginDataManager.getCharacterDir());
+				killTimeTracker.init(data.getPluginDataManager().getCharacterDir());
 			}
 		}
 
@@ -781,7 +754,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		if (slayerRefreshPending && syncStateCoordinator.getLoginTickDelay() <= 7)
 		{
 			slayerRefreshPending = false;
-			slayerTaskState.refresh();
+			data.getSlayerTaskState().refresh();
 			pendingPanelRebuild = true;
 			rankedSourcesDirty = true;
 		}
@@ -815,7 +788,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		{
 			return;
 		}
-		java.io.File exportFile = pluginDataManager.getFile("efficiency-export.txt");
+		java.io.File exportFile = data.getPluginDataManager().getFile("efficiency-export.txt");
 		if (exportFile == null)
 		{
 			// Fallback if player name not yet available
@@ -961,7 +934,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			return;
 		}
 
-		String playerName = pluginDataManager.getCurrentPlayerName();
+		String playerName = data.getPluginDataManager().getCurrentPlayerName();
 		if (playerName == null || playerName.isEmpty())
 		{
 			log.warn("TempleOSRS sync requested but player name is not available");
@@ -997,13 +970,13 @@ public class CollectionLogHelperPlugin extends Plugin
 				Map<String, Integer> validated = new java.util.HashMap<>();
 				for (Map.Entry<String, Integer> entry : finalResult.getKcBySource().entrySet())
 				{
-					if (database.getSourceByName(entry.getKey()) != null)
+					if (data.getDatabase().getSourceByName(entry.getKey()) != null)
 					{
 						validated.put(entry.getKey(), entry.getValue());
 					}
 					else
 					{
-						log.debug("TempleOSRS KC entry '{}' not found in CLH database — skipping",
+						log.debug("TempleOSRS KC entry '{}' not found in CLH database - skipping",
 							entry.getKey());
 					}
 				}
@@ -1043,7 +1016,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private void rebuildSourcesWithMissingItems()
 	{
 		sourcesWithMissingItems = guidanceCoordinator.rebuildSourcesWithMissingItems(
-			database, collectionState);
+			data.getDatabase(), data.getCollectionState());
 	}
 
 	/**
@@ -1127,8 +1100,8 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	private void onClhCommand(ChatMessage chatMessage, String message)
 	{
-		int obtained = collectionState.getTotalObtained();
-		int total = collectionState.getTotalPossible();
+		int obtained = data.getCollectionState().getTotalObtained();
+		int total = data.getCollectionState().getTotalPossible();
 		String progressLine;
 		if (total > 0)
 		{
