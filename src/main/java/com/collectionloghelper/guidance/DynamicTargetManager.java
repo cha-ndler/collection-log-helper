@@ -45,11 +45,10 @@ import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
  *
  * <p>Pure extraction from {@link GuidanceOverlayCoordinator}: this manager
  * holds no mutable state of its own.  Coordinator state it needs to read
- * (active map point, current guidance step, sequencer activity, active
- * target item id, cached log icon) is passed in via the {@link Input}
- * carrier, and any state mutation the coordinator must apply (the new
- * active map point) is returned in {@link Result} so the coordinator
- * remains the single owner of guidance state.</p>
+ * (active map point, current guidance step, active target item id, cached
+ * log icon) is passed in as method arguments, and any state mutation the
+ * coordinator must apply (the new active map point) is returned directly
+ * so the coordinator remains the single owner of guidance state.</p>
  *
  * <p>Responsibilities:
  * <ul>
@@ -60,16 +59,22 @@ import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
  *   <li>Pushing the new target into the four location-sensitive overlays
  *       (in-world, minimap, world-map route, world-map destination).</li>
  *   <li>Refreshing the world map point in {@link WorldMapPointManager} and
- *       reporting the new map point back via {@link Result}.</li>
+ *       returning the new map point to the coordinator.</li>
  *   <li>Re-applying the hint arrow via {@link WorldMapController} when
  *       {@code config.showHintArrow()} is enabled and the local player is
  *       on a compatible plane / world view.</li>
  * </ul>
  *
- * <p>Called on the client thread once per game tick.  Returns silently
- * (with {@link Result#unchanged(CollectionLogWorldMapPoint)}) when guidance
- * is inactive, the step has no evaluator key, the key is unregistered, or
- * the evaluator returns {@code null}.</p>
+ * <p>Called on the client thread once per game tick <em>only when guidance
+ * is active</em> (the coordinator guards the call site).  Returns
+ * {@code null} when the step has no evaluator key, the key is unregistered,
+ * or the evaluator returns {@code null}; the coordinator treats {@code null}
+ * as "no change" and keeps its existing active map point.</p>
+ *
+ * <p>This signature is allocation-free on guard-fail paths (issue #527):
+ * inactive ticks bypass the call entirely (Option 1 — coordinator-side
+ * guard), and the three active-tick guard-fails return a cached {@code null}
+ * sentinel without constructing any wrapper objects.</p>
  */
 @Slf4j
 @Singleton
@@ -108,44 +113,54 @@ public class DynamicTargetManager
 	/**
 	 * Dispatches the dynamic-target evaluator for the active step (when present)
 	 * and pushes the resulting world point to all location-sensitive overlays.
-	 * Returns a {@link Result} describing any change to the coordinator's
-	 * {@code activeMapPoint} so the caller can apply it without this manager
-	 * needing direct access to coordinator state.
+	 *
+	 * <p><b>Precondition:</b> the caller has already verified that guidance is
+	 * active; this method does not re-check {@code guidanceSequencer.isActive()}.
+	 * The {@code !guidanceActive} guard was lifted to the coordinator call site
+	 * to avoid per-tick allocations on inactive ticks (issue #527, Option 1).</p>
+	 *
+	 * @param currentStep         the active guidance step, may be {@code null}
+	 * @param activeMapPoint      the coordinator's current active map point, may be {@code null}
+	 * @param activeTargetItemId  the active target item id, may be {@code null}
+	 * @param collectionLogIcon   the cached log icon for the new map point, may be {@code null}
+	 * @return the new {@link CollectionLogWorldMapPoint} when the evaluator fired and
+	 *         produced a fresh target, or {@code null} when no change occurred (the
+	 *         coordinator should keep its existing {@code activeMapPoint}).
 	 */
-	public Result tick(Input input)
+	@Nullable
+	public CollectionLogWorldMapPoint tick(
+		@Nullable GuidanceStep currentStep,
+		@Nullable CollectionLogWorldMapPoint activeMapPoint,
+		@Nullable Integer activeTargetItemId,
+		@Nullable BufferedImage collectionLogIcon)
 	{
-		if (!input.guidanceActive)
+		if (currentStep == null || currentStep.getDynamicTargetEvaluator() == null)
 		{
-			return Result.unchanged(input.activeMapPoint);
+			return null;
 		}
-		GuidanceStep step = input.currentStep;
-		if (step == null || step.getDynamicTargetEvaluator() == null)
-		{
-			return Result.unchanged(input.activeMapPoint);
-		}
-		DynamicTargetEvaluator evaluator = registry.get(step.getDynamicTargetEvaluator());
+		DynamicTargetEvaluator evaluator = registry.get(currentStep.getDynamicTargetEvaluator());
 		if (evaluator == null)
 		{
-			return Result.unchanged(input.activeMapPoint);
+			return null;
 		}
-		WorldPoint dynamicPoint = evaluator.evaluate(client, step);
+		WorldPoint dynamicPoint = evaluator.evaluate(client, currentStep);
 		if (dynamicPoint == null)
 		{
-			return Result.unchanged(input.activeMapPoint);
+			return null;
 		}
 
 		guidanceOverlay.setTargetPoint(dynamicPoint);
 		guidanceMinimapOverlay.setTargetPoint(dynamicPoint);
 		worldMapRouteOverlay.setTargetPoint(dynamicPoint);
 		worldMapDestinationOverlay.setTarget(dynamicPoint,
-			worldMapController.resolveStepIconType(step, input.activeTargetItemId));
+			worldMapController.resolveStepIconType(currentStep, activeTargetItemId));
 
-		if (input.activeMapPoint != null)
+		if (activeMapPoint != null)
 		{
-			worldMapPointManager.remove(input.activeMapPoint);
+			worldMapPointManager.remove(activeMapPoint);
 		}
 		CollectionLogWorldMapPoint newMapPoint = new CollectionLogWorldMapPoint(dynamicPoint,
-			step.resolveDescription(input.activeTargetItemId), input.collectionLogIcon);
+			currentStep.resolveDescription(activeTargetItemId), collectionLogIcon);
 		worldMapPointManager.add(newMapPoint);
 		worldMapDestinationOverlay.setMapPointActive(true);
 
@@ -154,81 +169,6 @@ public class DynamicTargetManager
 			client.setHintArrow(dynamicPoint);
 		}
 
-		return Result.changed(newMapPoint);
-	}
-
-	/**
-	 * Inputs the coordinator passes to {@link #tick(Input)}.  Mirrors the
-	 * subset of coordinator state the dynamic-target dispatch reads.
-	 */
-	public static final class Input
-	{
-		private final boolean guidanceActive;
-		@Nullable
-		private final GuidanceStep currentStep;
-		@Nullable
-		private final CollectionLogWorldMapPoint activeMapPoint;
-		@Nullable
-		private final Integer activeTargetItemId;
-		@Nullable
-		private final BufferedImage collectionLogIcon;
-
-		public Input(boolean guidanceActive,
-			@Nullable GuidanceStep currentStep,
-			@Nullable CollectionLogWorldMapPoint activeMapPoint,
-			@Nullable Integer activeTargetItemId,
-			@Nullable BufferedImage collectionLogIcon)
-		{
-			this.guidanceActive = guidanceActive;
-			this.currentStep = currentStep;
-			this.activeMapPoint = activeMapPoint;
-			this.activeTargetItemId = activeTargetItemId;
-			this.collectionLogIcon = collectionLogIcon;
-		}
-	}
-
-	/**
-	 * Result of a single {@link #tick(Input)} call.  Carries the (possibly
-	 * new) active world map point so the coordinator can replace its own
-	 * reference without exposing internal fields to this manager.
-	 */
-	public static final class Result
-	{
-		private final boolean changed;
-		@Nullable
-		private final CollectionLogWorldMapPoint activeMapPoint;
-
-		private Result(boolean changed, @Nullable CollectionLogWorldMapPoint activeMapPoint)
-		{
-			this.changed = changed;
-			this.activeMapPoint = activeMapPoint;
-		}
-
-		static Result changed(CollectionLogWorldMapPoint newPoint)
-		{
-			return new Result(true, newPoint);
-		}
-
-		static Result unchanged(@Nullable CollectionLogWorldMapPoint existingPoint)
-		{
-			return new Result(false, existingPoint);
-		}
-
-		/** True when the evaluator fired and a new active map point was produced. */
-		public boolean isChanged()
-		{
-			return changed;
-		}
-
-		/**
-		 * The active world map point the coordinator should now hold.  When
-		 * {@link #isChanged()} is false this is the input's existing point
-		 * (echoed for caller convenience).
-		 */
-		@Nullable
-		public CollectionLogWorldMapPoint getActiveMapPoint()
-		{
-			return activeMapPoint;
-		}
+		return newMapPoint;
 	}
 }
