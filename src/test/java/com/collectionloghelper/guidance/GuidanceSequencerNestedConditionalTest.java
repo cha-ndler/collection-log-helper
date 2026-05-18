@@ -87,7 +87,7 @@ public class GuidanceSequencerNestedConditionalTest
 
 		Constructor<GuidanceSequencer> ctor = GuidanceSequencer.class.getDeclaredConstructor(
 			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class,
-				com.collectionloghelper.guidance.helper.GuidanceHelperRegistry.class);
+				com.collectionloghelper.guidance.bosses.BossGuidanceRegistry.class);
 		ctor.setAccessible(true);
 		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker, null);
 	}

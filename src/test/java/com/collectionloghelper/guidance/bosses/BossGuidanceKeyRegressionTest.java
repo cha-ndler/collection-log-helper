@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.collectionloghelper.guidance.helper;
+package com.collectionloghelper.guidance.bosses;
 
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.DropRateDatabase;
@@ -41,10 +41,10 @@ import static org.junit.Assert.assertNull;
  *
  * <p>B6 adds the schema field but deliberately does not set it on any
  * production source yet. This test will fail if someone accidentally adds
- * the key to the JSON, reminding them to register the corresponding helper
- * before shipping.
+ * the key to the JSON, reminding them to register the corresponding boss
+ * guidance before shipping.
  */
-public class GuidanceHelperKeyRegressionTest
+public class BossGuidanceKeyRegressionTest
 {
 	private DropRateDatabase database;
 
@@ -67,7 +67,7 @@ public class GuidanceHelperKeyRegressionTest
 		{
 			assertNull(
 				"Production source '" + source.getName()
-					+ "' must not have guidanceHelperKey set until its helper is registered",
+					+ "' must not have guidanceHelperKey set until its boss guidance is registered",
 				source.getGuidanceHelperKey()
 			);
 		}
