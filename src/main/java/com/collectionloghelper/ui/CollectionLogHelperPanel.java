@@ -74,7 +74,6 @@ import java.util.function.Consumer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -141,10 +140,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	private final SyncStatusView syncStatusView;
 	private final ClueSummaryView clueSummaryView;
-	private final JButton collectionLogNetSyncButton;
-
-	/** Set by the plugin after construction; called when the sync button is clicked. */
-	private Runnable collectionLogNetImportCallback;
+	private final SyncButtonController syncButtonController;
 
 	private final JComboBox<Mode> modeSelector;
 	private final JComboBox<AfkFilter> afkFilterSelector;
@@ -166,9 +162,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	private final Timer searchDebounceTimer;
 
-	/** "Sync KC from TempleOSRS" button; visible only when config.enableTempleOsrsSync() is true. */
-	private final JButton templeSyncButton;
-
 	private final Map<Mode, PanelModeController> modeControllers = new EnumMap<>(Mode.class);
 	private final PanelModeDispatcher<Mode> modeDispatcher = new PanelModeDispatcher<>(modeControllers);
 	private final PanelRebuildOrchestrator rebuildOrchestrator;
@@ -179,7 +172,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private boolean guidanceActive = false;
 	private CollectionLogSource guidedSource = null;
 	private boolean inDetailView = false;
-	private Runnable templeSyncCallback;
 
 	public CollectionLogHelperPanel(CollectionLogHelperConfig config,
 		DropRateDatabase database, PlayerCollectionState collectionState,
@@ -239,41 +231,9 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		syncStatusView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(syncStatusView);
 
-		collectionLogNetSyncButton = new JButton("Sync from collectionlog.net");
-		collectionLogNetSyncButton.setAlignmentX(CENTER_ALIGNMENT);
-		collectionLogNetSyncButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 26));
-		collectionLogNetSyncButton.setFont(FontManager.getRunescapeSmallFont());
-		collectionLogNetSyncButton.setFocusPainted(false);
-		collectionLogNetSyncButton.setToolTipText(
-			"Click to send your display name to collectionlog.net and import your obtained-items list");
-		collectionLogNetSyncButton.setVisible(config.enableCollectionLogNetImport());
-		collectionLogNetSyncButton.addActionListener(e ->
-		{
-			if (collectionLogNetImportCallback != null)
-			{
-				collectionLogNetSyncButton.setEnabled(false);
-				collectionLogNetSyncButton.setText("Syncing...");
-				collectionLogNetImportCallback.run();
-			}
-		});
-		controlsPanel.add(collectionLogNetSyncButton);
-
-		templeSyncButton = new JButton("Sync KC from TempleOSRS");
-		templeSyncButton.setFont(FontManager.getRunescapeSmallFont());
-		templeSyncButton.setAlignmentX(CENTER_ALIGNMENT);
-		templeSyncButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
-		templeSyncButton.setToolTipText("Fetch your boss/activity kill counts from templeosrs.com");
-		templeSyncButton.setVisible(config.enableTempleOsrsSync());
-		templeSyncButton.addActionListener(e ->
-		{
-			if (templeSyncCallback != null)
-			{
-				templeSyncButton.setEnabled(false);
-				templeSyncButton.setText("Syncing...");
-				templeSyncCallback.run();
-			}
-		});
-		controlsPanel.add(templeSyncButton);
+		syncButtonController = new SyncButtonController(config, this);
+		controlsPanel.add(syncButtonController.getCollectionLogNetButton());
+		controlsPanel.add(syncButtonController.getTempleSyncButton());
 
 		clueSummaryView = new ClueSummaryView();
 		clueSummaryView.setAlignmentX(CENTER_ALIGNMENT);
@@ -496,42 +456,27 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	 */
 	public void setCollectionLogNetImportCallback(Runnable callback)
 	{
-		this.collectionLogNetImportCallback = callback;
+		syncButtonController.setCollectionLogNetImportCallback(callback);
 	}
 
 	/**
 	 * Resets the "Sync from collectionlog.net" button to its ready state and
-	 * shows a brief result message in the button text.  Safe to call from any thread.
+	 * shows a brief result message in the button text. Safe to call from any thread.
 	 *
 	 * @param message short result message, e.g. "Synced 42 items from collectionlog.net"
 	 */
 	public void onCollectionLogNetImportComplete(String message)
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			collectionLogNetSyncButton.setEnabled(true);
-			collectionLogNetSyncButton.setText(message);
-		});
+		syncButtonController.onCollectionLogNetImportComplete(message);
 	}
 
 	/**
 	 * Shows or hides the collectionlog.net sync button based on the config flag.
-	 * Call when the config section toggle changes.  Safe to call from any thread.
+	 * Call when the config section toggle changes. Safe to call from any thread.
 	 */
 	public void updateCollectionLogNetImportButton()
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			boolean enabled = config.enableCollectionLogNetImport();
-			collectionLogNetSyncButton.setVisible(enabled);
-			if (enabled)
-			{
-				collectionLogNetSyncButton.setEnabled(true);
-				collectionLogNetSyncButton.setText("Sync from collectionlog.net");
-			}
-			revalidate();
-			repaint();
-		});
+		syncButtonController.updateCollectionLogNetImportButton();
 	}
 
 	/**
@@ -560,7 +505,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	 */
 	public void setTempleSyncCallback(Runnable callback)
 	{
-		this.templeSyncCallback = callback;
+		syncButtonController.setTempleSyncCallback(callback);
 	}
 
 	/**
@@ -569,8 +514,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	 */
 	public void updateTempleSyncButtonVisibility()
 	{
-		SwingUtilities.invokeLater(() ->
-			templeSyncButton.setVisible(config.enableTempleOsrsSync()));
+		syncButtonController.updateTempleSyncButtonVisibility();
 	}
 
 	/**
@@ -580,12 +524,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	 */
 	public void onTempleSyncComplete(boolean success)
 	{
-		SwingUtilities.invokeLater(() ->
-		{
-			templeSyncButton.setEnabled(true);
-			templeSyncButton.setText(
-				success ? "Synced KC from TempleOSRS" : "Sync KC from TempleOSRS");
-		});
+		syncButtonController.onTempleSyncComplete(success);
 	}
 
 	public void rebuild()
