@@ -165,6 +165,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	private final Map<Mode, PanelModeController> modeControllers = new EnumMap<>(Mode.class);
 	private final PanelModeDispatcher<Mode> modeDispatcher = new PanelModeDispatcher<>(modeControllers);
 	private final PanelRebuildOrchestrator rebuildOrchestrator;
+	private final DetailViewBuilder detailViewBuilder;
 
 	private Mode currentMode = Mode.EFFICIENT;
 	private boolean rebuilding = false;
@@ -362,6 +363,13 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		listContainer.setBackground(ColorScheme.DARK_GRAY_COLOR);
 		listView.add(listContainer, BorderLayout.NORTH);
 		rebuildOrchestrator = new PanelRebuildOrchestrator(this, listContainer);
+		detailViewBuilder = new DetailViewBuilder(
+			collectionState,
+			requirementsChecker,
+			itemManager,
+			clueEstimator,
+			guidanceActivator,
+			guidanceDeactivator);
 
 		detailView = new JPanel(new BorderLayout());
 		detailView.setBackground(ColorScheme.DARK_GRAY_COLOR);
@@ -590,34 +598,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	@Override
 	public void showDetail(CollectionLogItem item, CollectionLogSource source)
 	{
-		boolean obtained = collectionState.isItemObtained(item.getItemId());
-		boolean locked = !requirementsChecker.isAccessible(source.getName());
-		boolean isGuidingThis = guidanceActive && guidedSource != null
-			&& guidedSource.getName().equals(source.getName());
-
-		int sourceTotal = source.getItems().size();
-		int sourceObtained = 0;
-		for (CollectionLogItem si : source.getItems())
-		{
-			if (collectionState.isItemObtained(si.getItemId()))
-			{
-				sourceObtained++;
-			}
-		}
-
-		detailView.removeAll();
-		ItemDetailPanel detail = new ItemDetailPanel(
-			item, source, obtained, locked,
-			requirementsChecker.getUnmetRequirements(source.getName()),
-			sourceObtained, sourceTotal,
-			itemManager, clueEstimator,
-			requirementsChecker.hasFairyRingAccess(),
-			this::showListView,
-			() -> guidanceActivator.accept(source, item.getItemId()),
-			() -> guidanceDeactivator.run(),
-			isGuidingThis
-		);
-		detailView.add(detail, BorderLayout.NORTH);
+		detailViewBuilder.populate(detailView, item, source, guidanceActive, guidedSource, this::showListView);
 		showDetailView();
 	}
 
