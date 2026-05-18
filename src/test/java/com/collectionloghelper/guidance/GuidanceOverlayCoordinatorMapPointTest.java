@@ -130,6 +130,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 	public void setUp() throws Exception
 	{
 		OverlayStepApplier overlayStepApplier = newOverlayStepApplier();
+		WorldMapController worldMapController = newWorldMapController();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -154,7 +155,8 @@ public class GuidanceOverlayCoordinatorMapPointTest
 				WorldMapDestinationOverlay.class,
 				GroundItemHighlightOverlay.class,
 				WidgetHighlightOverlay.class,
-				OverlayStepApplier.class);
+				OverlayStepApplier.class,
+				WorldMapController.class);
 		ctor.setAccessible(true);
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
@@ -165,7 +167,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
-			overlayStepApplier);
+			overlayStepApplier, worldMapController);
 
 		// Default stubs: no unmet requirements; buildRequirementRows called unconditionally
 		when(requirementsChecker.getUnmetRequirements(any())).thenReturn(Collections.emptyList());
@@ -246,6 +248,14 @@ public class GuidanceOverlayCoordinatorMapPointTest
 	}
 
 	// ---- helpers ----
+
+	private WorldMapController newWorldMapController() throws Exception
+	{
+		Constructor<WorldMapController> ctor = WorldMapController.class.getDeclaredConstructor(
+			Client.class, ClientThread.class, CollectionLogHelperConfig.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, clientThread, config);
+	}
 
 	/** Builds a minimal BOSSES source with coordinates but no guidance steps. */
 	private OverlayStepApplier newOverlayStepApplier() throws Exception

@@ -144,6 +144,7 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 	public void setUp() throws Exception
 	{
 		OverlayStepApplier overlayStepApplier = newOverlayStepApplier();
+		WorldMapController worldMapController = newWorldMapController();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -168,7 +169,8 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 				WorldMapDestinationOverlay.class,
 				GroundItemHighlightOverlay.class,
 				WidgetHighlightOverlay.class,
-				OverlayStepApplier.class);
+				OverlayStepApplier.class,
+				WorldMapController.class);
 		ctor.setAccessible(true);
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
@@ -179,7 +181,7 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
-			overlayStepApplier);
+			overlayStepApplier, worldMapController);
 
 		coordinator.setPanel(panel);
 
@@ -287,6 +289,14 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			null, // waypoints
 			null  // dynamicTargetEvaluator
 		);
+	}
+
+	private WorldMapController newWorldMapController() throws Exception
+	{
+		Constructor<WorldMapController> ctor = WorldMapController.class.getDeclaredConstructor(
+			Client.class, ClientThread.class, CollectionLogHelperConfig.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, clientThread, config);
 	}
 
 	private OverlayStepApplier newOverlayStepApplier() throws Exception
