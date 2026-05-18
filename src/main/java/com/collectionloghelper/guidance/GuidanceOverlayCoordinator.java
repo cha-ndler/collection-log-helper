@@ -31,7 +31,6 @@ import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.CompletionCondition;
 import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.GuidanceStep;
-import com.collectionloghelper.data.ItemObjectTier;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
@@ -50,7 +49,6 @@ import com.collectionloghelper.overlay.WorldMapDestinationOverlay;
 import com.collectionloghelper.overlay.WorldMapRouteOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -118,6 +116,7 @@ public class GuidanceOverlayCoordinator
 	private final DynamicTargetManager dynamicTargetManager;
 	private final NpcTrackerHelper npcTrackerHelper;
 	private final StepChangeHandler stepChangeHandler;
+	private final DynamicItemObjectTierResolver dynamicItemObjectTierResolver;
 
 	// -- Guidance UI state (previously in plugin) --
 
@@ -190,7 +189,8 @@ public class GuidanceOverlayCoordinator
 		WorldMapController worldMapController,
 		DynamicTargetManager dynamicTargetManager,
 		NpcTrackerHelper npcTrackerHelper,
-		StepChangeHandler stepChangeHandler)
+		StepChangeHandler stepChangeHandler,
+		DynamicItemObjectTierResolver dynamicItemObjectTierResolver)
 	{
 		this.client = client;
 		this.clientThread = clientThread;
@@ -220,6 +220,7 @@ public class GuidanceOverlayCoordinator
 		this.dynamicTargetManager = dynamicTargetManager;
 		this.npcTrackerHelper = npcTrackerHelper;
 		this.stepChangeHandler = stepChangeHandler;
+		this.dynamicItemObjectTierResolver = dynamicItemObjectTierResolver;
 	}
 
 	/**
@@ -486,64 +487,27 @@ public class GuidanceOverlayCoordinator
 
 	/**
 	 * Dynamically overrides overlays when the current step has dynamicItemObjectTiers.
-	 * Scans inventory for the lowest tier with matching items, then highlights
-	 * that tier's objects and the matching item. Called on step change and on
-	 * inventory change while a guidance sequence is active.
+	 * Delegates the tier-scan / inventory-match to
+	 * {@link DynamicItemObjectTierResolver}; the coordinator only owns the overlay
+	 * setter calls (we hold the overlay collaborators). The resolver returns
+	 * {@link DynamicItemObjectTierResolver.Result#EMPTY} as a cached singleton on
+	 * the no-match path, so this method allocates nothing per overlay refresh tick
+	 * when no tier matches.
+	 *
+	 * <p>Called on step change ({@link #applyStepToOverlays}) and on inventory
+	 * change while a guidance sequence is active
+	 * ({@link #onItemContainerChanged()}).</p>
 	 */
 	private void applyDynamicItemObjectOverlays()
 	{
-		GuidanceStep step = guidanceSequencer.getRawCurrentStep();
-		if (step == null || step.getDynamicItemObjectTiers() == null
-			|| step.getDynamicItemObjectTiers().isEmpty())
+		DynamicItemObjectTierResolver.Result result =
+			dynamicItemObjectTierResolver.resolve(guidanceSequencer.getRawCurrentStep());
+		if (result.hasMatch())
 		{
-			return;
-		}
-
-		// Collect ALL matching tiers so multiple keys highlight multiple chests
-		Set<Integer> matchedObjectIds = new HashSet<>();
-		List<Integer> matchedItemIds = new ArrayList<>();
-		String tooltipText = null;
-		String action = null;
-
-		for (ItemObjectTier tier : step.getDynamicItemObjectTiers())
-		{
-			if (tier.getItemIds() == null)
-			{
-				continue;
-			}
-			for (int itemId : tier.getItemIds())
-			{
-				if (playerInventoryState.hasItem(itemId))
-				{
-					if (tier.getObjectIds() != null && !tier.getObjectIds().isEmpty())
-					{
-						matchedObjectIds.addAll(tier.getObjectIds());
-					}
-					matchedItemIds.add(itemId);
-					if (action == null)
-					{
-						action = tier.getInteractAction() != null
-							? tier.getInteractAction()
-							: step.getObjectInteractAction();
-					}
-					if (tooltipText == null)
-					{
-						tooltipText = tier.getName() != null
-							? (action + " " + tier.getName())
-							: step.getDescription();
-					}
-					break; // Only match first key per tier (avoid duplicates)
-				}
-			}
-		}
-
-		if (!matchedObjectIds.isEmpty())
-		{
-			objectHighlightOverlay.setTargetObjectIds(matchedObjectIds);
-			objectHighlightOverlay.setObjectInteractAction(action);
-			objectHighlightOverlay.setTooltipText(
-				matchedItemIds.size() > 1 ? step.getDescription() : tooltipText);
-			itemHighlightOverlay.setTargetItemIds(matchedItemIds);
+			objectHighlightOverlay.setTargetObjectIds(result.getObjectIds());
+			objectHighlightOverlay.setObjectInteractAction(result.getAction());
+			objectHighlightOverlay.setTooltipText(result.getTooltipText());
+			itemHighlightOverlay.setTargetItemIds(result.getItemIds());
 		}
 	}
 

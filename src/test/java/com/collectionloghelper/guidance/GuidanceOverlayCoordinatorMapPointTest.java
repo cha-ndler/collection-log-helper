@@ -135,6 +135,7 @@ public class GuidanceOverlayCoordinatorMapPointTest
 		NpcTrackerHelper npcTrackerHelper = newNpcTrackerHelper();
 		OverlayDeactivator overlayDeactivator = newOverlayDeactivator(npcTrackerHelper);
 		StepChangeHandler stepChangeHandler = newStepChangeHandler();
+		DynamicItemObjectTierResolver dynamicItemObjectTierResolver = newDynamicItemObjectTierResolver();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -164,7 +165,8 @@ public class GuidanceOverlayCoordinatorMapPointTest
 				WorldMapController.class,
 				DynamicTargetManager.class,
 				NpcTrackerHelper.class,
-				StepChangeHandler.class);
+				StepChangeHandler.class,
+				DynamicItemObjectTierResolver.class);
 		ctor.setAccessible(true);
 		DynamicTargetManager dynamicTargetManager = newDynamicTargetManager(worldMapController);
 		coordinator = ctor.newInstance(
@@ -177,7 +179,8 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
 			overlayStepApplier, overlaySourceApplier, overlayDeactivator,
-			worldMapController, dynamicTargetManager, npcTrackerHelper, stepChangeHandler);
+			worldMapController, dynamicTargetManager, npcTrackerHelper, stepChangeHandler,
+			dynamicItemObjectTierResolver);
 
 		// Default stubs: no unmet requirements; buildRequirementRows called unconditionally
 		when(requirementsChecker.getUnmetRequirements(any())).thenReturn(Collections.emptyList());
@@ -295,6 +298,14 @@ public class GuidanceOverlayCoordinatorMapPointTest
 			ClientThread.class, GuidanceSequencer.class, RequiredItemResolver.class);
 		ctor.setAccessible(true);
 		return ctor.newInstance(clientThread, guidanceSequencer, requiredItemResolver);
+	}
+
+	private DynamicItemObjectTierResolver newDynamicItemObjectTierResolver() throws Exception
+	{
+		Constructor<DynamicItemObjectTierResolver> ctor =
+			DynamicItemObjectTierResolver.class.getDeclaredConstructor(PlayerInventoryState.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(playerInventoryState);
 	}
 
 	/** Builds a minimal BOSSES source with coordinates but no guidance steps. */
