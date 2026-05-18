@@ -55,6 +55,7 @@ public class GuidanceSequencer
 	private final RequirementsChecker requirementsChecker;
 	private final BossGuidanceRegistry bossRegistry;
 	private final CompletionChecker completionChecker;
+	private final StepAdvancer stepAdvancer;
 
 	private volatile WorldPoint lastKnownPlayerLocation;
 	private volatile CollectionLogSource activeSource;
@@ -90,6 +91,7 @@ public class GuidanceSequencer
 		this.requirementsChecker = requirementsChecker;
 		this.bossRegistry = bossRegistry;
 		this.completionChecker = new CompletionChecker(inventoryState, collectionState);
+		this.stepAdvancer = new StepAdvancer(this.completionChecker);
 	}
 
 	/**
@@ -290,7 +292,7 @@ public class GuidanceSequencer
 	 *
 	 * <p>Unlike Reset, Sync does NOT change {@link #active}, does NOT clear
 	 * callbacks, and does NOT stop/restart the underlying sequence — it only
-	 * moves the index forward (or backward, if {@link #isStepAlreadySatisfied}
+	 * moves the index forward (or backward, if step-satisfaction
 	 * semantics allow) to the correct position.
 	 *
 	 * <p>Always fires {@link #notifyStepChanged} so the panel and overlays
@@ -603,17 +605,8 @@ public class GuidanceSequencer
 	 */
 	public void skipStep()
 	{
-		final List<GuidanceStep> currentSteps = this.steps;
-		if (!active || currentSteps == null)
-		{
-			return; // sequence already complete or never started
-		}
-
-		loopIterationsCompleted = 0;
-		crossedWaypointIndex = 0;
-		currentIndex++;
-		skipSatisfiedSteps();
-		finishStepTransition(currentSteps, "Skipped to", "Guidance sequence complete (skipped)");
+		applyTransition(stepAdvancer.skip(buildTransitionInput()),
+			"Skipped to", "Guidance sequence complete (skipped)");
 	}
 
 	/**
@@ -622,122 +615,71 @@ public class GuidanceSequencer
 	 */
 	public void advanceStep()
 	{
-		final List<GuidanceStep> currentSteps = this.steps;
-		if (!active || currentSteps == null)
-		{
-			return;
-		}
-
-		// Check if the completing step has a loop
-		GuidanceStep completingStep = getRawCurrentStep();
-		if (completingStep != null && completingStep.getLoopBackToStep() > 0 && completingStep.getLoopCount() > 0)
-		{
-			loopIterationsCompleted++;
-			if (loopIterationsCompleted < completingStep.getLoopCount())
-			{
-				int targetIndex = completingStep.getLoopBackToStep() - 1; // convert 1-indexed to 0-indexed
-				log.info("Loop iteration {}/{} complete — looping back to step {}",
-					loopIterationsCompleted, completingStep.getLoopCount(), completingStep.getLoopBackToStep());
-				currentIndex = targetIndex;
-				crossedWaypointIndex = 0;
-				skipSatisfiedSteps();
-
-				// skipSatisfiedSteps() may fire onSequenceComplete -> stopSequence(),
-				// nulling this.steps. Snapshot was captured above; use it for size checks.
-				if (this.steps == null)
-				{
-					// sequence completed (and cleaned up) inside skipSatisfiedSteps()
-					return;
-				}
-
-				if (active)
-				{
-					GuidanceStep step = getCurrentStep();
-					if (step != null)
-					{
-						log.info("Resumed at step {}/{}: {}", currentIndex + 1, currentSteps.size(), step.getDescription());
-						notifyStepChanged(step);
-					}
-				}
-				return;
-			}
-			log.info("All {} loop iterations complete — advancing past loop", completingStep.getLoopCount());
-			loopIterationsCompleted = 0;
-		}
-
-		currentIndex++;
-		crossedWaypointIndex = 0;
-		skipSatisfiedSteps();
-		finishStepTransition(currentSteps, "Advanced to", "Guidance sequence complete");
+		applyTransition(stepAdvancer.advance(buildTransitionInput()),
+			"Advanced to", "Guidance sequence complete");
 	}
 
 	/**
-	 * Post-skip-chain finalizer shared by {@link #skipStep} and {@link #advanceStep}.
-	 * Handles the three cases produced by {@link #skipSatisfiedSteps}: sequence
-	 * cleaned up by {@link #stopSequence}, advanced past the final step, or
-	 * landed on a new step that needs a change notification.
+	 * Skips steps whose completion conditions are already satisfied. Used by
+	 * {@link #startSequence} and {@link #syncToCurrentState}; the result is
+	 * applied directly with no transition log line — the caller emits its own
+	 * step-started trace.
 	 */
-	private void finishStepTransition(List<GuidanceStep> currentSteps, String advancedLabel,
-		String completeLabel)
+	private void skipSatisfiedSteps()
 	{
-		// skipSatisfiedSteps() may fire onSequenceComplete -> stopSequence(), nulling this.steps.
-		if (this.steps == null)
+		StepAdvancer.SkipChainResult result = stepAdvancer.runSkipChain(
+			new StepAdvancer.SkipChainInput(currentIndex, steps, active, lastKnownPlayerLocation));
+		currentIndex = result.newIndex();
+		if (result.sequenceComplete())
+		{
+			log.info("All steps already satisfied for {}", activeSource != null ? activeSource.getName() : "?");
+			fireSequenceComplete();
+		}
+	}
+
+	private StepAdvancer.TransitionInput buildTransitionInput()
+	{
+		return new StepAdvancer.TransitionInput(currentIndex, loopIterationsCompleted, steps, active,
+			lastKnownPlayerLocation, getRawCurrentStep());
+	}
+
+	/**
+	 * Applies a {@link StepAdvancer.TransitionOutcome}: writes the new index
+	 * and loop counter, fires the appropriate log line, and either
+	 * {@code notifyStepChanged} or {@code onSequenceComplete}.
+	 */
+	private void applyTransition(StepAdvancer.TransitionOutcome outcome, String advancedLabel, String completeLabel)
+	{
+		if (outcome.noOp())
 		{
 			return;
 		}
-
-		if (currentIndex >= currentSteps.size())
+		final List<GuidanceStep> currentSteps = this.steps;
+		currentIndex = outcome.newIndex();
+		loopIterationsCompleted = outcome.newLoopIterationsCompleted();
+		crossedWaypointIndex = 0;
+		if (outcome.sequenceComplete())
 		{
 			log.info("{} for {}", completeLabel, activeSource != null ? activeSource.getName() : "?");
-			active = false;
-			if (onSequenceComplete != null)
-			{
-				onSequenceComplete.run();
-			}
+			fireSequenceComplete();
 			return;
 		}
-
 		GuidanceStep step = getCurrentStep();
 		if (step != null)
 		{
-			log.info("{} step {}/{}: {}", advancedLabel, currentIndex + 1, currentSteps.size(), step.getDescription());
+			String label = outcome.loopBackResume() ? "Resumed at" : advancedLabel;
+			log.info("{} step {}/{}: {}", label, currentIndex + 1, currentSteps.size(), step.getDescription());
 			notifyStepChanged(step);
 		}
 	}
 
-	/**
-	 * Skips steps whose completion conditions are already satisfied.
-	 */
-	private void skipSatisfiedSteps()
+	private void fireSequenceComplete()
 	{
-		while (active && steps != null && currentIndex < steps.size())
+		active = false;
+		if (onSequenceComplete != null)
 		{
-			GuidanceStep step = steps.get(currentIndex);
-			if (isStepAlreadySatisfied(step))
-			{
-				log.debug("Skipping already-satisfied step {}: {}", currentIndex + 1, step.getDescription());
-				currentIndex++;
-			}
-			else
-			{
-				break;
-			}
+			onSequenceComplete.run();
 		}
-
-		if (steps != null && currentIndex >= steps.size())
-		{
-			log.info("All steps already satisfied for {}", activeSource != null ? activeSource.getName() : "?");
-			active = false;
-			if (onSequenceComplete != null)
-			{
-				onSequenceComplete.run();
-			}
-		}
-	}
-
-	private boolean isStepAlreadySatisfied(GuidanceStep step)
-	{
-		return completionChecker.isStepAlreadySatisfied(step, lastKnownPlayerLocation);
 	}
 
 	private void notifyStepChanged(GuidanceStep step)
