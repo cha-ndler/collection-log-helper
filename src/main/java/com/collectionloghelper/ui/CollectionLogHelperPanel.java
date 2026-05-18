@@ -60,9 +60,7 @@ import com.collectionloghelper.ui.widget.SlayerStrategyView;
 import com.collectionloghelper.ui.widget.StepProgressView;
 import com.collectionloghelper.ui.widget.SyncStatusView;
 import java.util.EnumMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -173,6 +171,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	private final Map<Mode, PanelModeController> modeControllers = new EnumMap<>(Mode.class);
 	private final PanelModeDispatcher<Mode> modeDispatcher = new PanelModeDispatcher<>(modeControllers);
+	private final PanelRebuildOrchestrator rebuildOrchestrator;
 
 	private Mode currentMode = Mode.EFFICIENT;
 	private boolean rebuilding = false;
@@ -420,6 +419,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		listContainer.setLayout(new BoxLayout(listContainer, BoxLayout.Y_AXIS));
 		listContainer.setBackground(ColorScheme.DARK_GRAY_COLOR);
 		listView.add(listContainer, BorderLayout.NORTH);
+		rebuildOrchestrator = new PanelRebuildOrchestrator(this, listContainer);
 
 		detailView = new JPanel(new BorderLayout());
 		detailView.setBackground(ColorScheme.DARK_GRAY_COLOR);
@@ -601,28 +601,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			rebuilding = true;
 			try
 			{
-				// Save scroll position before rebuild
-				int savedScrollPosition = 0;
-				JScrollPane scrollPane = (JScrollPane) SwingUtilities.getAncestorOfClass(
-					JScrollPane.class, this);
-				if (scrollPane != null)
-				{
-					savedScrollPosition = scrollPane.getVerticalScrollBar().getValue();
-				}
-
-				// Save expanded category names before clearing
-				Set<String> expandedCategories = new HashSet<>();
-				for (Component comp : listContainer.getComponents())
-				{
-					if (comp instanceof CategorySummaryPanel)
-					{
-						CategorySummaryPanel csp = (CategorySummaryPanel) comp;
-						if (csp.isExpanded())
-						{
-							expandedCategories.add(csp.getCategoryName());
-						}
-					}
-				}
+				PanelRebuildOrchestrator.RebuildSnapshot snapshot = rebuildOrchestrator.capture();
 
 				SwingUtil.fastRemoveAll(listContainer);
 				updateCompletionHeader();
@@ -630,32 +609,14 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 				modeDispatcher.buildView(currentMode);
 
-				// Restore expanded category state
-				for (Component comp : listContainer.getComponents())
-				{
-					if (comp instanceof CategorySummaryPanel)
-					{
-						CategorySummaryPanel csp = (CategorySummaryPanel) comp;
-						if (expandedCategories.contains(csp.getCategoryName()))
-						{
-							csp.setExpanded(true);
-						}
-					}
-				}
+				rebuildOrchestrator.restoreExpanded(snapshot);
 
 				listContainer.revalidate();
 				listContainer.repaint();
 				if (!inDetailView)
 				{
 					showListView();
-
-					// Restore scroll position after rebuild
-					final int restorePosition = savedScrollPosition;
-					if (scrollPane != null && restorePosition > 0)
-					{
-						SwingUtilities.invokeLater(() ->
-							scrollPane.getVerticalScrollBar().setValue(restorePosition));
-					}
+					rebuildOrchestrator.deferScrollRestore(snapshot);
 				}
 			}
 			finally
