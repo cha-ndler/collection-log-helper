@@ -143,6 +143,8 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 		OverlayStepApplier overlayStepApplier = newOverlayStepApplier();
 		OverlaySourceApplier overlaySourceApplier = newOverlaySourceApplier();
 		WorldMapController worldMapController = newWorldMapController();
+		NpcTrackerHelper npcTrackerHelper = newNpcTrackerHelper();
+		OverlayDeactivator overlayDeactivator = newOverlayDeactivator(npcTrackerHelper);
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -168,12 +170,12 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 				WidgetHighlightOverlay.class,
 				OverlayStepApplier.class,
 				OverlaySourceApplier.class,
+				OverlayDeactivator.class,
 				WorldMapController.class,
 				DynamicTargetManager.class,
 				NpcTrackerHelper.class);
 		ctor.setAccessible(true);
 		DynamicTargetManager dynamicTargetManager = newDynamicTargetManager(worldMapController);
-		NpcTrackerHelper npcTrackerHelper = newNpcTrackerHelper();
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
 			guidanceSequencer, requirementsChecker, travelCapabilities,
@@ -183,8 +185,8 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
-			overlayStepApplier, overlaySourceApplier, worldMapController,
-			dynamicTargetManager, npcTrackerHelper);
+			overlayStepApplier, overlaySourceApplier, overlayDeactivator,
+			worldMapController, dynamicTargetManager, npcTrackerHelper);
 
 		when(requirementsChecker.getUnmetRequirements(any())).thenReturn(Collections.emptyList());
 		when(requirementsChecker.buildRequirementRows(any())).thenReturn(Collections.emptyList());
@@ -364,6 +366,26 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 			requirementsChecker, worldMapPointManager,
 			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay);
+	}
+
+	private OverlayDeactivator newOverlayDeactivator(NpcTrackerHelper npcTrackerHelper) throws Exception
+	{
+		Constructor<OverlayDeactivator> ctor = OverlayDeactivator.class.getDeclaredConstructor(
+			Client.class, ClientThread.class, EventBus.class, CollectionLogHelperConfig.class,
+			WorldMapPointManager.class, InfoBoxManager.class,
+			GuidanceOverlay.class, GuidanceMinimapOverlay.class, DialogHighlightOverlay.class,
+			ObjectHighlightOverlay.class, ItemHighlightOverlay.class,
+			WorldMapRouteOverlay.class, WorldMapDestinationOverlay.class,
+			GroundItemHighlightOverlay.class, WidgetHighlightOverlay.class,
+			NpcTrackerHelper.class, GuidanceSequencer.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, clientThread, eventBus, config,
+			worldMapPointManager, infoBoxManager,
+			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
+			objectHighlightOverlay, itemHighlightOverlay,
+			worldMapRouteOverlay, worldMapDestinationOverlay,
+			groundItemHighlightOverlay, widgetHighlightOverlay,
+			npcTrackerHelper, guidanceSequencer);
 	}
 
 	private static CollectionLogSource sourceWithSteps(String name, GuidanceStep... steps)
