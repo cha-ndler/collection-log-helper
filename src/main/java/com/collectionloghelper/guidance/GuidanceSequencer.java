@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -53,9 +52,9 @@ import net.runelite.api.coords.WorldPoint;
 public class GuidanceSequencer
 {
 	private final PlayerInventoryState inventoryState;
-	private final PlayerCollectionState collectionState;
 	private final RequirementsChecker requirementsChecker;
 	private final BossGuidanceRegistry bossRegistry;
+	private final CompletionChecker completionChecker;
 
 	private volatile WorldPoint lastKnownPlayerLocation;
 	private volatile CollectionLogSource activeSource;
@@ -73,12 +72,9 @@ public class GuidanceSequencer
 	private volatile int crossedWaypointIndex;
 
 	/** Cached compiled pattern for the current step's chat completion regex. */
-	private Pattern compiledChatPattern;
-	/** The source pattern string that produced compiledChatPattern, for invalidation. */
-	private String compiledChatPatternSource;
+	private CompletionChecker.ChatPatternCache chatPatternCache;
 	/** Cached WorldPoint for the current step's target location. */
-	private WorldPoint cachedStepPoint;
-	private int cachedStepPointIndex = -1;
+	private CompletionChecker.TilePointCache tilePointCache;
 
 	/** Cache of resolved alternatives keyed by step index. Cleared when a new sequence starts. */
 	private final Map<Integer, GuidanceStep> resolvedAlternatives = new HashMap<>();
@@ -91,9 +87,9 @@ public class GuidanceSequencer
 		RequirementsChecker requirementsChecker, BossGuidanceRegistry bossRegistry)
 	{
 		this.inventoryState = inventoryState;
-		this.collectionState = collectionState;
 		this.requirementsChecker = requirementsChecker;
 		this.bossRegistry = bossRegistry;
+		this.completionChecker = new CompletionChecker(inventoryState, collectionState);
 	}
 
 	/**
@@ -189,11 +185,7 @@ public class GuidanceSequencer
 	 */
 	public GuidanceStep getRawCurrentStep()
 	{
-		if (!active || steps == null || currentIndex >= steps.size())
-		{
-			return null;
-		}
-		return resolveStep(currentIndex);
+		return getCurrentStep();
 	}
 
 	/**
@@ -408,8 +400,7 @@ public class GuidanceSequencer
 		}
 
 		GuidanceStep step = getRawCurrentStep();
-		if (step != null && step.getCompletionCondition() == CompletionCondition.ITEM_OBTAINED
-			&& step.getCompletionItemId() == itemId)
+		if (completionChecker.isItemObtainedSatisfying(step, itemId))
 		{
 			log.info("Step {} complete (ITEM_OBTAINED: {})", currentIndex + 1, itemId);
 			advanceStep();
@@ -430,39 +421,29 @@ public class GuidanceSequencer
 		GuidanceStep step = getRawCurrentStep();
 
 		// Auto-advance if skipIfHasAnyItemIds is now satisfied (e.g., key just entered inventory)
-		if (step != null && step.getSkipIfHasAnyItemIds() != null)
+		CompletionChecker.SkipIfHasAnyResult skip = completionChecker.evaluateSkipIfHasAny(step);
+		if (skip.matched())
 		{
-			for (int itemId : step.getSkipIfHasAnyItemIds())
-			{
-				if (inventoryState.hasItem(itemId))
-				{
-					log.info("Step {} auto-advancing (skipIfHasAnyItemIds satisfied: item {})",
-						currentIndex + 1, itemId);
-					advanceStep();
-					return;
-				}
-			}
+			log.info("Step {} auto-advancing (skipIfHasAnyItemIds satisfied: item {})",
+				currentIndex + 1, skip.matchedItemId());
+			advanceStep();
+			return;
 		}
 
-		if (step != null && step.getCompletionItemId() > 0)
+		if (completionChecker.isInventoryHasItemSatisfying(step))
 		{
-			if (step.getCompletionCondition() == CompletionCondition.INVENTORY_HAS_ITEM
-				&& inventoryState.hasItemCount(step.getCompletionItemId(), step.getCompletionItemCount()))
-			{
-				log.info("Step {} complete (INVENTORY_HAS_ITEM: {} x{})",
-					currentIndex + 1, step.getCompletionItemId(), step.getCompletionItemCount());
-				advanceStep();
-				return;
-			}
+			log.info("Step {} complete (INVENTORY_HAS_ITEM: {} x{})",
+				currentIndex + 1, step.getCompletionItemId(), step.getCompletionItemCount());
+			advanceStep();
+			return;
+		}
 
-			if (step.getCompletionCondition() == CompletionCondition.INVENTORY_NOT_HAS_ITEM
-				&& !inventoryState.hasItem(step.getCompletionItemId()))
-			{
-				log.info("Step {} complete (INVENTORY_NOT_HAS_ITEM: {})",
-					currentIndex + 1, step.getCompletionItemId());
-				advanceStep();
-				return;
-			}
+		if (completionChecker.isInventoryNotHasItemSatisfying(step))
+		{
+			log.info("Step {} complete (INVENTORY_NOT_HAS_ITEM: {})",
+				currentIndex + 1, step.getCompletionItemId());
+			advanceStep();
+			return;
 		}
 
 		// Re-notify step changed in case bank routing status changed
@@ -492,28 +473,15 @@ public class GuidanceSequencer
 		if (step.getCompletionCondition() == CompletionCondition.ARRIVE_AT_TILE
 			&& step.getWorldX() > 0)
 		{
-			// B2 — tile-sequence waypoint evaluation.
-			// When the step declares an ordered waypoint list, require each waypoint to be
+			// B2 — when the step declares an ordered waypoint list, require each waypoint to be
 			// crossed in order before treating the step as complete.
 			List<StepWaypoint> stepWaypoints = step.getWaypoints();
 			if (stepWaypoints != null && !stepWaypoints.isEmpty())
 			{
-				if (crossedWaypointIndex < stepWaypoints.size())
-				{
-					StepWaypoint target = stepWaypoints.get(crossedWaypointIndex);
-					if (playerLocation.getPlane() == target.getPlane())
-					{
-						WorldPoint targetPoint = new WorldPoint(target.getWorldX(), target.getWorldY(), target.getPlane());
-						if (playerLocation.distanceTo2D(targetPoint) <= target.getRadius())
-						{
-							log.info("Step {} — crossed waypoint {}/{} at ({},{}) plane {}",
-								currentIndex + 1, crossedWaypointIndex + 1, stepWaypoints.size(),
-								target.getWorldX(), target.getWorldY(), target.getPlane());
-							crossedWaypointIndex++;
-						}
-					}
-				}
-				if (crossedWaypointIndex >= stepWaypoints.size())
+				CompletionChecker.WaypointProgressResult wp = completionChecker.evaluateWaypointProgress(
+					step, currentIndex + 1, playerLocation, crossedWaypointIndex);
+				crossedWaypointIndex = wp.crossedWaypointIndex();
+				if (wp.satisfied())
 				{
 					log.info("Step {} complete (ARRIVE_AT_TILE via waypoint sequence: all {} waypoints crossed)",
 						currentIndex + 1, stepWaypoints.size());
@@ -524,15 +492,10 @@ public class GuidanceSequencer
 			}
 
 			// Legacy single-tile arrival check (no waypoints declared).
-			if (cachedStepPointIndex != currentIndex)
-			{
-				cachedStepPointIndex = currentIndex;
-				cachedStepPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
-			}
-			WorldPoint stepPoint = cachedStepPoint;
-			int dist = playerLocation.distanceTo2D(stepPoint);
-			if (playerLocation.getPlane() == step.getWorldPlane()
-				&& dist <= step.getCompletionDistance())
+			CompletionChecker.ArriveAtTileResult tileResult =
+				completionChecker.evaluateArriveAtTile(step, currentIndex, playerLocation, tilePointCache);
+			tilePointCache = tileResult.cache();
+			if (tileResult.satisfied())
 			{
 				log.info("Step {} complete (ARRIVE_AT_TILE: within {} tiles, plane {})",
 					currentIndex + 1, step.getCompletionDistance(), step.getWorldPlane());
@@ -540,25 +503,19 @@ public class GuidanceSequencer
 			}
 		}
 
-		if (step.getCompletionCondition() == CompletionCondition.ARRIVE_AT_ZONE)
+		if (completionChecker.isArriveAtZoneSatisfying(step, playerLocation))
 		{
 			Zone zone = step.getZone();
-			if (zone != null && zone.contains(playerLocation))
-			{
-				log.info("Step {} complete (ARRIVE_AT_ZONE: player in zone [{},{} - {},{}] plane {})",
-					currentIndex + 1, zone.getMinX(), zone.getMinY(), zone.getMaxX(), zone.getMaxY(), zone.getPlane());
-				advanceStep();
-			}
+			log.info("Step {} complete (ARRIVE_AT_ZONE: player in zone [{},{} - {},{}] plane {})",
+				currentIndex + 1, zone.getMinX(), zone.getMinY(), zone.getMaxX(), zone.getMaxY(), zone.getPlane());
+			advanceStep();
 		}
 
-		if (step.getCompletionCondition() == CompletionCondition.PLAYER_ON_PLANE)
+		if (completionChecker.isPlayerOnPlaneSatisfying(step, playerLocation))
 		{
-			if (playerLocation.getPlane() == step.getWorldPlane())
-			{
-				log.info("Step {} complete (PLAYER_ON_PLANE: plane {})",
-					currentIndex + 1, step.getWorldPlane());
-				advanceStep();
-			}
+			log.info("Step {} complete (PLAYER_ON_PLANE: plane {})",
+				currentIndex + 1, step.getWorldPlane());
+			advanceStep();
 		}
 	}
 
@@ -573,8 +530,7 @@ public class GuidanceSequencer
 		}
 
 		GuidanceStep step = getRawCurrentStep();
-		if (step != null && step.getCompletionCondition() == CompletionCondition.ACTOR_DEATH
-			&& step.matchesCompletionNpc(npcId))
+		if (completionChecker.isNpcDeathSatisfying(step, npcId))
 		{
 			log.info("Step {} complete (ACTOR_DEATH: {})", currentIndex + 1, npcId);
 			advanceStep();
@@ -592,21 +548,14 @@ public class GuidanceSequencer
 		}
 
 		GuidanceStep step = getRawCurrentStep();
-		if (step != null && step.getCompletionCondition() == CompletionCondition.CHAT_MESSAGE_RECEIVED
-			&& step.getCompletionChatPattern() != null)
+		CompletionChecker.ChatMatchResult chatResult =
+			completionChecker.evaluateChatMessage(step, message, chatPatternCache);
+		chatPatternCache = chatResult.cache();
+		if (chatResult.matched())
 		{
-			String patternStr = step.getCompletionChatPattern();
-			if (!patternStr.equals(compiledChatPatternSource))
-			{
-				compiledChatPatternSource = patternStr;
-				compiledChatPattern = Pattern.compile(patternStr);
-			}
-			if (compiledChatPattern.matcher(message).find())
-			{
-				log.info("Step {} complete (CHAT_MESSAGE_RECEIVED: matched '{}')",
-					currentIndex + 1, step.getCompletionChatPattern());
-				advanceStep();
-			}
+			log.info("Step {} complete (CHAT_MESSAGE_RECEIVED: matched '{}')",
+				currentIndex + 1, step.getCompletionChatPattern());
+			advanceStep();
 		}
 	}
 
@@ -621,8 +570,7 @@ public class GuidanceSequencer
 		}
 
 		GuidanceStep step = getRawCurrentStep();
-		if (step != null && step.getCompletionCondition() == CompletionCondition.NPC_TALKED_TO
-			&& step.getCompletionNpcId() == npcId)
+		if (completionChecker.isNpcInteractedSatisfying(step, npcId))
 		{
 			log.info("Step {} complete (NPC_TALKED_TO: {})", currentIndex + 1, npcId);
 			advanceStep();
@@ -640,9 +588,7 @@ public class GuidanceSequencer
 		}
 
 		GuidanceStep step = getRawCurrentStep();
-		if (step != null && step.getCompletionCondition() == CompletionCondition.VARBIT_AT_LEAST
-			&& step.getCompletionVarbitId() == varbitId
-			&& value >= step.getCompletionVarbitValue())
+		if (completionChecker.isVarbitAtLeastSatisfying(step, varbitId, value))
 		{
 			log.info("Step {} complete (VARBIT_AT_LEAST: varbit {} = {} >= {})",
 				currentIndex + 1, varbitId, value, step.getCompletionVarbitValue());
@@ -667,34 +613,7 @@ public class GuidanceSequencer
 		crossedWaypointIndex = 0;
 		currentIndex++;
 		skipSatisfiedSteps();
-
-		// skipSatisfiedSteps() may fire onSequenceComplete -> stopSequence(),
-		// nulling this.steps. Snapshot was captured above; use it for size checks.
-		if (this.steps == null)
-		{
-			// sequence completed (and cleaned up) inside skipSatisfiedSteps()
-			return;
-		}
-
-		if (currentIndex >= currentSteps.size())
-		{
-			log.info("Guidance sequence complete (skipped) for {}",
-				activeSource != null ? activeSource.getName() : "?");
-			active = false;
-			if (onSequenceComplete != null)
-			{
-				onSequenceComplete.run();
-			}
-		}
-		else
-		{
-			GuidanceStep step = getCurrentStep();
-			if (step != null)
-			{
-				log.info("Skipped to step {}/{}: {}", currentIndex + 1, currentSteps.size(), step.getDescription());
-				notifyStepChanged(step);
-			}
-		}
+		finishStepTransition(currentSteps, "Skipped to", "Guidance sequence complete (skipped)");
 	}
 
 	/**
@@ -749,32 +668,40 @@ public class GuidanceSequencer
 		currentIndex++;
 		crossedWaypointIndex = 0;
 		skipSatisfiedSteps();
+		finishStepTransition(currentSteps, "Advanced to", "Guidance sequence complete");
+	}
 
-		// skipSatisfiedSteps() may fire onSequenceComplete -> stopSequence(),
-		// nulling this.steps. Snapshot was captured above; use it for size checks.
+	/**
+	 * Post-skip-chain finalizer shared by {@link #skipStep} and {@link #advanceStep}.
+	 * Handles the three cases produced by {@link #skipSatisfiedSteps}: sequence
+	 * cleaned up by {@link #stopSequence}, advanced past the final step, or
+	 * landed on a new step that needs a change notification.
+	 */
+	private void finishStepTransition(List<GuidanceStep> currentSteps, String advancedLabel,
+		String completeLabel)
+	{
+		// skipSatisfiedSteps() may fire onSequenceComplete -> stopSequence(), nulling this.steps.
 		if (this.steps == null)
 		{
-			// sequence completed (and cleaned up) inside skipSatisfiedSteps()
 			return;
 		}
 
 		if (currentIndex >= currentSteps.size())
 		{
-			log.info("Guidance sequence complete for {}", activeSource != null ? activeSource.getName() : "?");
+			log.info("{} for {}", completeLabel, activeSource != null ? activeSource.getName() : "?");
 			active = false;
 			if (onSequenceComplete != null)
 			{
 				onSequenceComplete.run();
 			}
+			return;
 		}
-		else
+
+		GuidanceStep step = getCurrentStep();
+		if (step != null)
 		{
-			GuidanceStep step = getCurrentStep();
-			if (step != null)
-			{
-				log.info("Advanced to step {}/{}: {}", currentIndex + 1, currentSteps.size(), step.getDescription());
-				notifyStepChanged(step);
-			}
+			log.info("{} step {}/{}: {}", advancedLabel, currentIndex + 1, currentSteps.size(), step.getDescription());
+			notifyStepChanged(step);
 		}
 	}
 
@@ -810,52 +737,7 @@ public class GuidanceSequencer
 
 	private boolean isStepAlreadySatisfied(GuidanceStep step)
 	{
-		// OR-logic skip: if inventory has ANY of these items, skip the step
-		if (step.getSkipIfHasAnyItemIds() != null && !step.getSkipIfHasAnyItemIds().isEmpty())
-		{
-			for (int itemId : step.getSkipIfHasAnyItemIds())
-			{
-				if (inventoryState.hasItem(itemId))
-				{
-					return true;
-				}
-			}
-		}
-
-		if (step.getCompletionCondition() == null)
-		{
-			return false;
-		}
-
-		switch (step.getCompletionCondition())
-		{
-			case INVENTORY_HAS_ITEM:
-				return step.getCompletionItemId() > 0
-					&& inventoryState.hasItemCount(step.getCompletionItemId(), step.getCompletionItemCount());
-			case INVENTORY_NOT_HAS_ITEM:
-				return step.getCompletionItemId() > 0 && !inventoryState.hasItem(step.getCompletionItemId());
-			case ITEM_OBTAINED:
-				return step.getCompletionItemId() > 0 && collectionState.isItemObtained(step.getCompletionItemId());
-			case ARRIVE_AT_TILE:
-				return lastKnownPlayerLocation != null && step.getWorldX() > 0
-					&& lastKnownPlayerLocation.getPlane() == step.getWorldPlane()
-					&& lastKnownPlayerLocation.distanceTo2D(
-						new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane()))
-					<= step.getCompletionDistance();
-			case ARRIVE_AT_ZONE:
-				Zone zone = step.getZone();
-				return lastKnownPlayerLocation != null && zone != null
-					&& zone.contains(lastKnownPlayerLocation);
-			case PLAYER_ON_PLANE:
-				return lastKnownPlayerLocation != null
-					&& lastKnownPlayerLocation.getPlane() == step.getWorldPlane();
-			case ACTOR_DEATH:
-			case CHAT_MESSAGE_RECEIVED:
-			case VARBIT_AT_LEAST:
-				return false;
-			default:
-				return false;
-		}
+		return completionChecker.isStepAlreadySatisfied(step, lastKnownPlayerLocation);
 	}
 
 	private void notifyStepChanged(GuidanceStep step)
