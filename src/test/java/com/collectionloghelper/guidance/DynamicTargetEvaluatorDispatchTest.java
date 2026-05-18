@@ -148,6 +148,7 @@ public class DynamicTargetEvaluatorDispatchTest
 		// Register a predictable stub evaluator
 		registry.register(STUB_KEY, (c, step) -> DYNAMIC_POINT);
 
+		OverlayStepApplier overlayStepApplier = newOverlayStepApplier();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
 				Client.class,
@@ -171,7 +172,8 @@ public class DynamicTargetEvaluatorDispatchTest
 				WorldMapRouteOverlay.class,
 				WorldMapDestinationOverlay.class,
 				GroundItemHighlightOverlay.class,
-				WidgetHighlightOverlay.class);
+				WidgetHighlightOverlay.class,
+				OverlayStepApplier.class);
 		ctor.setAccessible(true);
 		coordinator = ctor.newInstance(
 			client, clientThread, eventBus, config,
@@ -181,7 +183,8 @@ public class DynamicTargetEvaluatorDispatchTest
 			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
-			groundItemHighlightOverlay, widgetHighlightOverlay);
+			groundItemHighlightOverlay, widgetHighlightOverlay,
+			overlayStepApplier);
 
 		lenient().when(client.getLocalPlayer()).thenReturn(localPlayer);
 		lenient().when(localPlayer.getWorldLocation()).thenReturn(new WorldPoint(3200, 3200, 0));
@@ -270,6 +273,24 @@ public class DynamicTargetEvaluatorDispatchTest
 	}
 
 	// ── Helper ────────────────────────────────────────────────────────────────
+
+	private OverlayStepApplier newOverlayStepApplier() throws Exception
+	{
+		Constructor<OverlayStepApplier> ctor = OverlayStepApplier.class.getDeclaredConstructor(
+			Client.class, ClientThread.class, EventBus.class, CollectionLogHelperConfig.class,
+			GuidanceSequencer.class, PlayerTravelCapabilities.class, RequiredItemResolver.class,
+			WorldMapPointManager.class, GuidanceOverlay.class, GuidanceMinimapOverlay.class,
+			DialogHighlightOverlay.class, ObjectHighlightOverlay.class, ItemHighlightOverlay.class,
+			WorldMapRouteOverlay.class, WorldMapDestinationOverlay.class,
+			GroundItemHighlightOverlay.class, WidgetHighlightOverlay.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, clientThread, eventBus, config, guidanceSequencer,
+			travelCapabilities, requiredItemResolver, worldMapPointManager,
+			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
+			objectHighlightOverlay, itemHighlightOverlay,
+			worldMapRouteOverlay, worldMapDestinationOverlay,
+			groundItemHighlightOverlay, widgetHighlightOverlay);
+	}
 
 	private static GuidanceStep stepWithEvaluator(String evaluatorKey)
 	{

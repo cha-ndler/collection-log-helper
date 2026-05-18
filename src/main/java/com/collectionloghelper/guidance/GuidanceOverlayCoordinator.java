@@ -37,7 +37,6 @@ import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
 import com.collectionloghelper.data.RequirementRow;
 import com.collectionloghelper.data.RequirementsChecker;
-import com.collectionloghelper.guidance.DynamicTargetEvaluator;
 import com.collectionloghelper.guidance.dynamic.DynamicTargetEvaluatorRegistry;
 import com.collectionloghelper.overlay.CollectionLogWorldMapPoint;
 import com.collectionloghelper.overlay.DialogHighlightOverlay;
@@ -114,6 +113,7 @@ public class GuidanceOverlayCoordinator
 	private final WorldMapDestinationOverlay worldMapDestinationOverlay;
 	private final GroundItemHighlightOverlay groundItemHighlightOverlay;
 	private final WidgetHighlightOverlay widgetHighlightOverlay;
+	private final OverlayStepApplier overlayStepApplier;
 
 	// -- Guidance UI state (previously in plugin) --
 
@@ -187,7 +187,8 @@ public class GuidanceOverlayCoordinator
 		WorldMapRouteOverlay worldMapRouteOverlay,
 		WorldMapDestinationOverlay worldMapDestinationOverlay,
 		GroundItemHighlightOverlay groundItemHighlightOverlay,
-		WidgetHighlightOverlay widgetHighlightOverlay)
+		WidgetHighlightOverlay widgetHighlightOverlay,
+		OverlayStepApplier overlayStepApplier)
 	{
 		this.client = client;
 		this.clientThread = clientThread;
@@ -211,6 +212,7 @@ public class GuidanceOverlayCoordinator
 		this.worldMapDestinationOverlay = worldMapDestinationOverlay;
 		this.groundItemHighlightOverlay = groundItemHighlightOverlay;
 		this.widgetHighlightOverlay = widgetHighlightOverlay;
+		this.overlayStepApplier = overlayStepApplier;
 	}
 
 	/**
@@ -559,180 +561,14 @@ public class GuidanceOverlayCoordinator
 
 	// -- Private methods --
 
-	/**
-	 * Applies a single guidance step's data to all overlays.
-	 */
+	/** Applies a step to all overlays via {@link OverlayStepApplier}, then runs the dynamic override. */
 	private void applyStepToOverlays(GuidanceStep step, String sourceName, CollectionLogSource source)
 	{
-		// Send world message hint if this step has one (only once per step, not on re-notify)
-		int stepIndex = guidanceSequencer.getCurrentIndex();
-		if (step.getWorldMessage() != null && !step.getWorldMessage().isEmpty()
-			&& stepIndex != lastMessagedStepIndex)
-		{
-			lastMessagedStepIndex = stepIndex;
-			clientThread.invokeLater(() ->
-				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "",
-					"<col=00c8c8>[Collection Log Helper]</col> " + step.getWorldMessage(),
-					null));
-		}
-
-		// Set tile filter before target IDs so it's active during rescan
-		if (step.getObjectFilterTiles() != null && !step.getObjectFilterTiles().isEmpty())
-		{
-			List<WorldPoint> tiles = new ArrayList<>();
-			for (int[] t : step.getObjectFilterTiles())
-			{
-				if (t != null && t.length >= 3)
-				{
-					tiles.add(new WorldPoint(t[0], t[1], t[2]));
-				}
-			}
-			objectHighlightOverlay.setObjectFilterTiles(tiles);
-		}
-		else if (step.getObjectMaxDistance() > 0 && step.getWorldX() > 0)
-		{
-			objectHighlightOverlay.setObjectFilter(
-				new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane()),
-				step.getObjectMaxDistance());
-		}
-		else
-		{
-			objectHighlightOverlay.setObjectFilter(null, 0);
-		}
-		objectHighlightOverlay.setTargetObjectIds(step.getAllObjectIds());
-		objectHighlightOverlay.setObjectInteractAction(step.getObjectInteractAction());
-		objectHighlightOverlay.setUseItemOnObject(step.isUseItemOnObject());
-		objectHighlightOverlay.setTooltipText(step.resolveDescription(activeTargetItemId));
-
-		itemHighlightOverlay.setTargetItemIds(step.getHighlightItemIds());
-
-		groundItemHighlightOverlay.setTargetGroundItemIds(
-			step.getGroundItemIds() != null ? new HashSet<>(step.getGroundItemIds()) : null);
-
-		if (step.getHighlightWidgetIds() != null && step.getHighlightWidgetIds().length > 0)
-		{
-			List<int[]> widgets = new ArrayList<>();
-			for (int[] ref : step.getHighlightWidgetIds())
-			{
-				if (ref != null && ref.length >= 2)
-				{
-					widgets.add(ref);
-				}
-			}
-			widgetHighlightOverlay.setHighlightWidgets(widgets);
-		}
-		else
-		{
-			widgetHighlightOverlay.clearHighlights();
-		}
-
-		// Suppress tile highlight when ObjectHighlightOverlay handles the visual
-		guidanceOverlay.setSuppressTileHighlight(!step.getAllObjectIds().isEmpty());
-
-		// Resolve required-item availability for this step once and push to the
-		// overlay; the render loop must never touch inventory/bank state.
-		//
-		// MUST run on the client thread: RequiredItemResolver.resolve() calls
-		// ItemManager.getItemComposition(int), which asserts caller-is-client-
-		// thread. Calling from the EDT (which is where activateGuidance lives
-		// when triggered by a panel button click) throws AssertionError, aborts
-		// the rest of activateGuidance mid-flight, and leaves the panel state
-		// out of sync with the overlay state (overlay set, panel button stays
-		// "Guide Me"). See cha-ndler/collection-log-helper#388 for the trace
-		// that surfaced this. The deferral is cheap (~1 tick at worst) and
-		// idempotent against rapid step changes because each call wins.
-		final GuidanceStep stepForResolve = step;
-		clientThread.invokeLater(() ->
-			guidanceOverlay.setRequiredItems(requiredItemResolver.resolve(stepForResolve)));
-
-		if (step.getWorldX() > 0)
-		{
-			WorldPoint worldPoint = new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane());
-			guidanceOverlay.setTargetPoint(worldPoint);
-			guidanceOverlay.setTargetName(sourceName);
-			guidanceOverlay.setLocationDescription(step.resolveDescription(activeTargetItemId));
-			String rawTravelTip = step.getTravelTip();
-			if ((rawTravelTip == null || rawTravelTip.isEmpty()) && source != null)
-			{
-				rawTravelTip = source.getTravelTip();
-			}
-			String travelTip = travelCapabilities.selectBestTravelTip(rawTravelTip);
-			guidanceOverlay.setTravelTip(travelTip);
-			log.debug("Travel capabilities for step '{}': {}", step.getDescription(), travelCapabilities.getSummary());
-			guidanceOverlay.setTargetNpcId(step.resolveNpcId(activeTargetItemId));
-			guidanceOverlay.setInteractAction(step.getInteractAction());
-			dialogHighlightOverlay.setTargetDialogOptions(step.getDialogOptions());
-			dialogHighlightOverlay.setGuidanceActive(true);
-			guidanceMinimapOverlay.setTargetPoint(worldPoint);
-			worldMapRouteOverlay.setTargetPoint(worldPoint);
-			worldMapDestinationOverlay.setTarget(worldPoint, resolveStepIconType(step));
-			// Register a CollectionLogWorldMapPoint for click-to-focus behaviour
-			// (setJumpOnClick). WorldMapDestinationOverlay draws the on-screen icon
-			// but does not receive click events — only a WorldMapPoint does (#429).
-			// To avoid a double edge-snap arrow (#410), WorldMapDestinationOverlay
-			// suppresses its own off-screen arrow while the map point is active
-			// (see WorldMapDestinationOverlay.setMapPointActive).
-			if (activeMapPoint != null)
-			{
-				worldMapPointManager.remove(activeMapPoint);
-			}
-			activeMapPoint = new CollectionLogWorldMapPoint(worldPoint,
-				step.resolveDescription(activeTargetItemId), collectionLogIcon);
-			worldMapPointManager.add(activeMapPoint);
-			worldMapDestinationOverlay.setMapPointActive(true);
-
-			clientThread.invokeLater(() ->
-			{
-				client.clearHintArrow();
-
-				// Skip hint arrow inside Sailing instances -- surface world
-				// coords render at wrong positions in instanced WorldViews
-				if (shouldSetHintArrowTo(worldPoint))
-				{
-					client.setHintArrow(worldPoint);
-				}
-
-				if (config.useShortestPath())
-				{
-					eventBus.post(new PluginMessage("shortestpath", "clear"));
-					pendingShortestPathTarget = worldPoint;
-				}
-			});
-		}
-		else
-		{
-			// Step with no location -- clear previous target and show text overlay only.
-			// Dialog options are still applied here: a step may be a pure dialog-choice
-			// step with no world coordinates (e.g. "Choose the 'Yes' option").
-			dialogHighlightOverlay.setTargetDialogOptions(step.getDialogOptions());
-			dialogHighlightOverlay.setGuidanceActive(true);
-			guidanceOverlay.setTargetPoint(null);
-			guidanceOverlay.setTargetName(null);
-			guidanceOverlay.setTargetNpcId(0);
-			guidanceOverlay.setInteractAction(null);
-			guidanceOverlay.setLocationDescription(null);
-			guidanceOverlay.setTravelTip(null);
-			guidanceMinimapOverlay.setTargetPoint(null);
-			worldMapRouteOverlay.setTargetPoint(null);
-			worldMapDestinationOverlay.clearTarget();
-			worldMapDestinationOverlay.setMapPointActive(false);
-			if (activeMapPoint != null)
-			{
-				worldMapPointManager.remove(activeMapPoint);
-				activeMapPoint = null;
-			}
-			guidanceOverlay.setClueGuidanceText(step.resolveDescription(activeTargetItemId));
-			clientThread.invokeLater(() ->
-			{
-				client.clearHintArrow();
-				if (config.useShortestPath())
-				{
-					eventBus.post(new PluginMessage("shortestpath", "clear"));
-				}
-			});
-		}
-
-		// Dynamic overlay override for Shades of Mort'ton key/chest highlighting
+		OverlayStepApplier.Result result = overlayStepApplier.apply(step, sourceName, source,
+			new OverlayStepApplier.Input(activeTargetItemId, lastMessagedStepIndex, activeMapPoint, collectionLogIcon),
+			this::resolveStepIconType, this::shouldSetHintArrowTo, wp -> pendingShortestPathTarget = wp);
+		lastMessagedStepIndex = result.lastMessagedStepIndex;
+		activeMapPoint = result.activeMapPoint;
 		applyDynamicItemObjectOverlays();
 	}
 
