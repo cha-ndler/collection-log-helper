@@ -94,6 +94,12 @@ public class PanelRebuildOrchestratorTest
 		scrollPane.setSize(200, 400);
 		scrollPane.doLayout();
 		scrollPane.getViewport().doLayout();
+		// Pin the vertical scrollbar's model bounds explicitly so setValue(...) is
+		// not clamped by lazy/late viewport layout. Headless CI environments
+		// (Linux, JDK 17) have been observed to leave the model at its default
+		// (max=100, extent=10) when assertions read the value immediately after
+		// setValue, causing values like 123 to clamp to 90.
+		scrollPane.getVerticalScrollBar().setValues(0, 400, 0, 5000);
 
 		orchestrator = new PanelRebuildOrchestrator(hostPanel, listContainer);
 	}
