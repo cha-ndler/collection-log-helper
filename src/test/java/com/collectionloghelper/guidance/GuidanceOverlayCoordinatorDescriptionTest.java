@@ -144,6 +144,7 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 	public void setUp() throws Exception
 	{
 		OverlayStepApplier overlayStepApplier = newOverlayStepApplier();
+		OverlaySourceApplier overlaySourceApplier = newOverlaySourceApplier();
 		WorldMapController worldMapController = newWorldMapController();
 		Constructor<GuidanceOverlayCoordinator> ctor =
 			GuidanceOverlayCoordinator.class.getDeclaredConstructor(
@@ -169,6 +170,7 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 				GroundItemHighlightOverlay.class,
 				WidgetHighlightOverlay.class,
 				OverlayStepApplier.class,
+				OverlaySourceApplier.class,
 				WorldMapController.class,
 				DynamicTargetManager.class,
 				NpcTrackerHelper.class);
@@ -184,7 +186,8 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay,
-			overlayStepApplier, worldMapController, dynamicTargetManager, npcTrackerHelper);
+			overlayStepApplier, overlaySourceApplier, worldMapController,
+			dynamicTargetManager, npcTrackerHelper);
 
 		coordinator.setPanel(panel);
 
@@ -340,6 +343,20 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			objectHighlightOverlay, itemHighlightOverlay,
 			worldMapRouteOverlay, worldMapDestinationOverlay,
 			groundItemHighlightOverlay, widgetHighlightOverlay);
+	}
+
+	private OverlaySourceApplier newOverlaySourceApplier() throws Exception
+	{
+		Constructor<OverlaySourceApplier> ctor = OverlaySourceApplier.class.getDeclaredConstructor(
+			Client.class, ClientThread.class, EventBus.class, CollectionLogHelperConfig.class,
+			RequirementsChecker.class, WorldMapPointManager.class,
+			GuidanceOverlay.class, GuidanceMinimapOverlay.class, DialogHighlightOverlay.class,
+			WorldMapRouteOverlay.class, WorldMapDestinationOverlay.class);
+		ctor.setAccessible(true);
+		return ctor.newInstance(client, clientThread, eventBus, config,
+			requirementsChecker, worldMapPointManager,
+			guidanceOverlay, guidanceMinimapOverlay, dialogHighlightOverlay,
+			worldMapRouteOverlay, worldMapDestinationOverlay);
 	}
 
 	private static CollectionLogSource sourceWithSteps(String name, GuidanceStep... steps)
