@@ -26,6 +26,7 @@ package com.collectionloghelper;
 
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.di.GuidanceModule;
 import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
 import java.lang.reflect.Field;
 import net.runelite.client.callback.ClientThread;
@@ -66,7 +67,9 @@ public class ActivateGuidanceClientThreadTest
 	{
 		plugin = new CollectionLogHelperPlugin();
 		injectField("clientThread", clientThread);
-		injectField("guidanceCoordinator", guidanceCoordinator);
+		GuidanceModule guidanceModule = new GuidanceModule(
+			null, guidanceCoordinator, null, null, null, null, null, null);
+		injectField("guidance", guidanceModule);
 	}
 
 	/**

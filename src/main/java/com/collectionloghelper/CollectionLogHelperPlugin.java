@@ -29,6 +29,7 @@ import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.PlayerTravelCapabilities;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.di.DataModule;
+import com.collectionloghelper.di.GuidanceModule;
 import com.collectionloghelper.sync.CollectionLogNetImporter;
 import com.collectionloghelper.sync.ImportResult;
 import com.collectionloghelper.sync.LootSyncManager;
@@ -40,18 +41,11 @@ import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import com.collectionloghelper.learning.DryStreakAnalyzer;
-import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
-import com.collectionloghelper.guidance.GuidanceSequencer;
-import com.collectionloghelper.guidance.RequiredItemResolver;
 import com.collectionloghelper.learning.KillTimeTracker;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
-import com.collectionloghelper.lifecycle.GuidanceEventRouter;
-import com.collectionloghelper.lifecycle.GuidanceUIState;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
 import com.collectionloghelper.lifecycle.SyncStateCoordinator;
-import com.collectionloghelper.overlay.GuidanceOverlay;
-import com.collectionloghelper.overlay.ObjectHighlightOverlay;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
@@ -150,10 +144,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	private RequirementsChecker requirementsChecker;
 
 	@Inject
-	private GuidanceOverlay guidanceOverlay;
-
-	@Inject
-	private ObjectHighlightOverlay objectHighlightOverlay;
+	private GuidanceModule guidance;
 
 	@Inject
 	private SlayerStrategyCalculator slayerStrategyCalculator;
@@ -163,15 +154,6 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private PlayerTravelCapabilities travelCapabilities;
-
-	@Inject
-	private GuidanceSequencer guidanceSequencer;
-
-	@Inject
-	private GuidanceOverlayCoordinator guidanceCoordinator;
-
-	@Inject
-	private RequiredItemResolver requiredItemResolver;
 
 	@Inject
 	private OverlayRegistry overlayRegistry;
@@ -184,15 +166,6 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private SyncStateCoordinator syncStateCoordinator;
-
-	@Inject
-	private GuidanceUIState guidanceUIState;
-
-	@Inject
-	private GuidanceEventRouter guidanceEventRouter;
-
-	@Inject
-	private com.collectionloghelper.guidance.GuidanceMovementTracker guidanceMovementTracker;
 
 	@Inject
 	private CollectionLogNetImporter collectionLogNetImporter;
@@ -271,10 +244,10 @@ public class CollectionLogHelperPlugin extends Plugin
 		// that are client-thread-only, matching the pattern established in
 		// commits c528d0ae and cha-ndler/collection-log-helper#409.
 		panel.setStepCallbacks(
-			() -> clientThread.invokeLater(guidanceSequencer::advanceStep),
-			() -> clientThread.invokeLater(guidanceSequencer::skipStep),
-			() -> clientThread.invokeLater(guidanceSequencer::restartFromStep0),
-			() -> clientThread.invokeLater(guidanceSequencer::syncToCurrentState)
+			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::advanceStep),
+			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::skipStep),
+			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::restartFromStep0),
+			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::syncToCurrentState)
 		);
 
 		// Wire collectionlog.net import callback — fetches username from the logged-in player.
@@ -316,11 +289,11 @@ public class CollectionLogHelperPlugin extends Plugin
 		panel.setTempleSyncCallback(this::onTempleSyncRequested);
 
 		// Wire coordinator with references it needs from the plugin
-		guidanceCoordinator.setPluginInstance(this);
-		guidanceCoordinator.setPanel(panel);
-		guidanceCoordinator.setOnSequenceCompleteCallback(this::onSequenceComplete);
+		guidance.getGuidanceCoordinator().setPluginInstance(this);
+		guidance.getGuidanceCoordinator().setPanel(panel);
+		guidance.getGuidanceCoordinator().setOnSequenceCompleteCallback(this::onSequenceComplete);
 		// Wire coordinator into resolver (post-construction, avoids circular injection)
-		requiredItemResolver.setCoordinator(guidanceCoordinator);
+		guidance.getRequiredItemResolver().setCoordinator(guidance.getGuidanceCoordinator());
 
 		// Use a placeholder icon initially, then swap to the real item sprite once loaded
 		final BufferedImage placeholder = ImageUtil.loadImageResource(getClass(), "panel_icon.png");
@@ -334,7 +307,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		// AsyncBufferedImage may be blank at startup; onLoaded rebuilds the nav button
 		collectionLogIcon = itemManager.getImage(ItemID.COLLECTION_LOG);
-		guidanceCoordinator.setCollectionLogIcon(collectionLogIcon);
+		guidance.getGuidanceCoordinator().setCollectionLogIcon(collectionLogIcon);
 		((net.runelite.client.util.AsyncBufferedImage) collectionLogIcon).onLoaded(() ->
 		{
 			clientToolbar.removeNavigation(navButton);
@@ -349,13 +322,13 @@ public class CollectionLogHelperPlugin extends Plugin
 		overlayRegistry.registerAll();
 		sceneEventRouter.setAuthoringLogger(msg -> authoringLogger.log("%s", msg));
 		eventBus.register(sceneEventRouter);
-		guidanceEventRouter.setMissingItemsSupplier(() -> sourcesWithMissingItems);
-		guidanceEventRouter.setActivateGuidanceCallback(
+		guidance.getGuidanceEventRouter().setMissingItemsSupplier(() -> sourcesWithMissingItems);
+		guidance.getGuidanceEventRouter().setActivateGuidanceCallback(
 			(java.util.function.Consumer<CollectionLogSource>) this::activateGuidance);
-		guidanceEventRouter.setOnFilterConfigChanged(this::onFilterConfigChanged);
-		guidanceEventRouter.setOnSyncConfigChanged(this::onSyncConfigChanged);
-		eventBus.register(guidanceEventRouter);
-		eventBus.register(guidanceMovementTracker);
+		guidance.getGuidanceEventRouter().setOnFilterConfigChanged(this::onFilterConfigChanged);
+		guidance.getGuidanceEventRouter().setOnSyncConfigChanged(this::onSyncConfigChanged);
+		eventBus.register(guidance.getGuidanceEventRouter());
+		eventBus.register(guidance.getGuidanceMovementTracker());
 		eventBus.register(killTimeTracker);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
@@ -395,8 +368,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		clientToolbar.removeNavigation(navButton);
 		overlayRegistry.unregisterAll();
 		eventBus.unregister(sceneEventRouter);
-		eventBus.unregister(guidanceEventRouter);
-		eventBus.unregister(guidanceMovementTracker);
+		eventBus.unregister(guidance.getGuidanceEventRouter());
+		eventBus.unregister(guidance.getGuidanceMovementTracker());
 		eventBus.unregister(killTimeTracker);
 		killTimeTracker.reset();
 		deactivateGuidance();
@@ -413,8 +386,8 @@ public class CollectionLogHelperPlugin extends Plugin
 		rankedSourcesDirty = true;
 		cachedRankedSources = null;
 		cachedPlayerLocation = null;
-		guidanceOverlay.setShowCollectionLogReminder(false);
-		guidanceOverlay.setShowBankReminder(false);
+		guidance.getGuidanceOverlay().setShowCollectionLogReminder(false);
+		guidance.getGuidanceOverlay().setShowBankReminder(false);
 		data.getDataSyncState().reset();
 		data.getPlayerBankState().reset();
 		data.getPlayerInventoryState().reset();
@@ -449,7 +422,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				rebuildSourcesWithMissingItems();
 
 				// Rescan scene for tracked objects after scene (re)load
-				objectHighlightOverlay.rescanScene();
+				guidance.getObjectHighlightOverlay().rescanScene();
 
 				// Per-character dir and cache-fresh check are handled in
 				// onGameTick once varps and player name are available.
@@ -487,8 +460,8 @@ public class CollectionLogHelperPlugin extends Plugin
 			slayerRefreshPending = false;
 			pendingTravelVarbitRefresh = false;
 			cachedPlayerLocation = null;
-			guidanceOverlay.setShowCollectionLogReminder(false);
-			guidanceOverlay.setShowBankReminder(false);
+			guidance.getGuidanceOverlay().setShowCollectionLogReminder(false);
+			guidance.getGuidanceOverlay().setShowBankReminder(false);
 			data.getDataSyncState().reset();
 			data.getPlayerBankState().reset();
 			data.getPlayerInventoryState().reset();
@@ -525,7 +498,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Forward varbit change to guidance sequencer for VARBIT_AT_LEAST completion
-		guidanceSequencer.onVarbitChanged(event.getVarbitId(), event.getValue());
+		guidance.getGuidanceSequencer().onVarbitChanged(event.getVarbitId(), event.getValue());
 
 		// Refresh Slayer task state and rebuild if the task changed
 		boolean wasActive = data.getSlayerTaskState().isTaskActive();
@@ -588,9 +561,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Forward chat messages to guidance sequencer for CHAT_MESSAGE_RECEIVED condition
-		if (guidanceSequencer.isActive())
+		if (guidance.getGuidanceSequencer().isActive())
 		{
-			guidanceSequencer.onChatMessage(Text.removeTags(event.getMessage()));
+			guidance.getGuidanceSequencer().onChatMessage(Text.removeTags(event.getMessage()));
 		}
 
 		Matcher matcher = COLLECTION_LOG_PATTERN.matcher(Text.removeTags(event.getMessage()));
@@ -604,7 +577,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			if (item != null)
 			{
 				data.getCollectionState().markItemObtained(item.getItemId());
-				guidanceSequencer.onItemObtained(item.getItemId());
+				guidance.getGuidanceSequencer().onItemObtained(item.getItemId());
 				log.debug("Marked item {} (ID: {}) as obtained", itemName, item.getItemId());
 			}
 
@@ -664,7 +637,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		// Dispatch deferred ShortestPath "path" and world map arrow via coordinator
-		guidanceCoordinator.tick();
+		guidance.getGuidanceCoordinator().tick();
 
 		// Cache player location for guidance sequencer and authoring log (client thread only).
 		// When sailing, the player is inside a WorldEntity whose inner WorldView
@@ -677,10 +650,10 @@ public class CollectionLogHelperPlugin extends Plugin
 			authoringLogger.setPlayerLocation(cachedPlayerLocation);
 
 			// Check ARRIVE_AT_TILE completion for guidance sequencer
-			if (guidanceSequencer.isActive())
+			if (guidance.getGuidanceSequencer().isActive())
 			{
-				guidanceSequencer.setPlayerLocation(cachedPlayerLocation);
-				guidanceSequencer.onPlayerMoved(cachedPlayerLocation);
+				guidance.getGuidanceSequencer().setPlayerLocation(cachedPlayerLocation);
+				guidance.getGuidanceSequencer().onPlayerMoved(cachedPlayerLocation);
 			}
 
 		}
@@ -770,7 +743,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Route through the client thread: RequirementsChecker.buildRequirementRows
 		// and related coordinator work require client-thread context.  Mirrors the
 		// step-advance / skip wrap added in commit c528d0ae.
-		clientThread.invokeLater(() -> guidanceCoordinator.activateGuidance(
+		clientThread.invokeLater(() -> guidance.getGuidanceCoordinator().activateGuidance(
 			source, cachedPlayerLocation, targetItemId));
 	}
 
@@ -851,7 +824,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	public void deactivateGuidance()
 	{
-		guidanceCoordinator.deactivateGuidance();
+		guidance.getGuidanceCoordinator().deactivateGuidance();
 	}
 
 	/**
@@ -952,7 +925,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	 */
 	private void rebuildSourcesWithMissingItems()
 	{
-		sourcesWithMissingItems = guidanceCoordinator.rebuildSourcesWithMissingItems(
+		sourcesWithMissingItems = guidance.getGuidanceCoordinator().rebuildSourcesWithMissingItems(
 			data.getDatabase(), data.getCollectionState());
 	}
 
@@ -1051,11 +1024,11 @@ public class CollectionLogHelperPlugin extends Plugin
 		}
 
 		String guidanceLine;
-		if (guidanceSequencer.isActive() && guidanceSequencer.getActiveSource() != null)
+		if (guidance.getGuidanceSequencer().isActive() && guidance.getGuidanceSequencer().getActiveSource() != null)
 		{
-			String sourceName = guidanceSequencer.getActiveSource().getName();
-			int step = guidanceSequencer.getCurrentIndex() + 1;
-			int totalSteps = guidanceSequencer.getTotalSteps();
+			String sourceName = guidance.getGuidanceSequencer().getActiveSource().getName();
+			int step = guidance.getGuidanceSequencer().getCurrentIndex() + 1;
+			int totalSteps = guidance.getGuidanceSequencer().getTotalSteps();
 			guidanceLine = String.format("Guiding: %s step %d/%d", sourceName, step, totalSteps);
 		}
 		else
