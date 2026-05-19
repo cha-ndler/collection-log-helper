@@ -31,6 +31,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import org.mockito.ArgumentCaptor;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
@@ -478,5 +482,44 @@ public class GameTickOrchestratorTest
 		verify(guidanceCoordinator, times(1)).tick();
 		verify(syncStateCoordinator, times(1))
 			.tickSync(eq(panel), any(), any());
+	}
+
+	// ── exportEfficiency callback hoisted to a field (#541 follow-up) ────────
+
+	/**
+	 * The {@code exportEfficiencyIfEnabled} method-ref used to be created
+	 * inline per-tick in the call to {@code tickSync(...)}. It is now hoisted
+	 * to a final field initialized once in the constructor. This test asserts
+	 * the field is wired, is the same instance across ticks (i.e. not
+	 * reallocated per tick), and that invoking it dispatches to the underlying
+	 * handler.
+	 */
+	@Test
+	public void exportEfficiencyCallback_isHoistedAndInvokesHandler()
+	{
+		stubQuietSyncTick();
+		when(pluginDataManager.getCharacterDir()).thenReturn(new File("."));
+
+		ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
+
+		// Tick twice and capture the export callback both times.
+		orchestrator.tick();
+		orchestrator.tick();
+
+		verify(syncStateCoordinator, times(2))
+			.tickSync(any(), any(), captor.capture());
+
+		List<Runnable> captured = captor.getAllValues();
+		assertNotNull("export callback must be non-null on first tick", captured.get(0));
+		assertNotNull("export callback must be non-null on second tick", captured.get(1));
+		assertSame(
+			"export callback must be the same hoisted instance across ticks "
+				+ "(not reallocated per tick)",
+			captured.get(0), captured.get(1));
+
+		// Invoking the captured callback must dispatch to the underlying
+		// handler exactly as the inline method-ref did before the hoist.
+		captured.get(0).run();
+		verify(collectionStateChangeHandler).exportEfficiencyIfEnabled();
 	}
 }

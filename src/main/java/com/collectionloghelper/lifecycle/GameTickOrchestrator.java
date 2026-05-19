@@ -70,9 +70,12 @@ import net.runelite.api.coords.WorldPoint;
  * {@link BooleanSupplier} ("poll-and-clear") and {@link Runnable} ("set
  * dirty") callbacks, plus a {@link Supplier} for the nullable panel.
  *
- * <p>All callbacks are stored as fields in {@link #setCallbacks}, called
- * exactly once from {@code startUp()}. The tick body therefore invokes
- * pre-allocated lambdas -- no per-tick {@code new} sites. The only
+ * <p>All plugin-owned callbacks are stored as fields in {@link #setCallbacks},
+ * called exactly once from {@code startUp()}. The bound method-ref for
+ * {@code collectionStateChangeHandler::exportEfficiencyIfEnabled} is hoisted
+ * to a final field in the constructor for the same reason. The tick body
+ * therefore invokes pre-allocated lambdas/method-refs -- no per-tick
+ * {@code new} sites and no inline {@code ::} expressions. The only
  * non-primitive return values produced inside the hot path are:
  * <ul>
  *   <li>{@link SyncStateCoordinator.SyncTickResult} -- an enum, singleton.</li>
@@ -104,6 +107,11 @@ public class GameTickOrchestrator
 	private final PlayerLocationResolver playerLocationResolver;
 	private final AuthoringLogger authoringLogger;
 	private final CollectionStateChangeHandler collectionStateChangeHandler;
+
+	// Method-ref hoisted to a field so the tick body never allocates this
+	// bound reference per call. Wired once in the constructor since
+	// collectionStateChangeHandler is available at injection time.
+	private final Runnable exportEfficiencyCallback;
 
 	// All callbacks are wired once in startUp() and stored as fields so the
 	// tick body never allocates lambdas per call.
@@ -138,6 +146,7 @@ public class GameTickOrchestrator
 		this.playerLocationResolver = playerLocationResolver;
 		this.authoringLogger = authoringLogger;
 		this.collectionStateChangeHandler = collectionStateChangeHandler;
+		this.exportEfficiencyCallback = collectionStateChangeHandler::exportEfficiencyIfEnabled;
 	}
 
 	/**
@@ -255,7 +264,7 @@ public class GameTickOrchestrator
 			sync.getSyncStateCoordinator().tickSync(
 				panel,
 				markPanelRebuildAndRankedDirty,
-				collectionStateChangeHandler::exportEfficiencyIfEnabled);
+				exportEfficiencyCallback);
 		if (syncResult == SyncStateCoordinator.SyncTickResult.RANKED_DIRTY)
 		{
 			markRankedDirty.run();
