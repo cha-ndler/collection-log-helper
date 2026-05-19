@@ -27,9 +27,12 @@ package com.collectionloghelper.ui.widget;
 import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.guidance.RequiredItemDisplay;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.HashMap;
@@ -123,6 +126,7 @@ public class StepProgressView extends JPanel
 	private final JPanel sectionsPanel;
 	private final JButton nextStepButton;
 	private final JButton skipStepButton;
+	private final JButton stopButton;
 	private final JButton resetButton;
 	private final JButton syncButton;
 
@@ -134,6 +138,7 @@ public class StepProgressView extends JPanel
 
 	private Runnable stepAdvancer;
 	private Runnable stepSkipper;
+	private Runnable stepStopper;
 	private Runnable stepResetter;
 	private Runnable stepSyncer;
 
@@ -210,53 +215,145 @@ public class StepProgressView extends JPanel
 
 		stepButtonRow.add(Box.createHorizontalStrut(4));
 
-		skipStepButton = new JButton("Skip");
-		skipStepButton.setFont(FontManager.getRunescapeSmallFont());
-		skipStepButton.setBackground(new Color(80, 80, 80));
-		skipStepButton.setForeground(Color.WHITE);
-		skipStepButton.addActionListener(e ->
-		{
-			if (stepSkipper != null)
+		// Icon-driven controls (#547). The Reset button used to be labelled "Reset",
+		// which during validation read as "stop guidance" when it actually means
+		// "restart this task from step 1". The music-player-style glyphs disambiguate:
+		//   skip-next   → advance/skip (preserves existing Skip semantics)
+		//   stop square → deactivate guidance and clear overlays (NEW)
+		//   restart     → restart the current task from step 1
+		//   sync        → re-evaluate skip-chain against current collection-log state
+		skipStepButton = buildIconButton(
+			StepControlIcons.skipNext(ICON_IDLE_COLOR),
+			StepControlIcons.skipNext(ICON_HOVER_COLOR),
+			"Skip to next step",
+			ICON_BUTTON_BG,
+			e ->
 			{
-				stepSkipper.run();
-			}
-		});
+				if (stepSkipper != null)
+				{
+					stepSkipper.run();
+				}
+			});
 		stepButtonRow.add(skipStepButton);
 
 		stepButtonRow.add(Box.createHorizontalStrut(4));
 
-		resetButton = new JButton("Reset");
-		resetButton.setFont(FontManager.getRunescapeSmallFont());
-		resetButton.setBackground(new Color(70, 50, 50));
-		resetButton.setForeground(new Color(200, 200, 200));
-		resetButton.setToolTipText("Restart from step 1");
-		resetButton.addActionListener(e ->
-		{
-			if (stepResetter != null)
+		// Stop button — visually distinct (red tint) to emphasize that it terminates
+		// guidance and clears all overlays. Resolves the #547 "Reset doesn't stop"
+		// surprise by giving deactivation its own affordance.
+		stopButton = buildIconButton(
+			StepControlIcons.stop(STOP_ICON_IDLE_COLOR),
+			StepControlIcons.stop(STOP_ICON_HOVER_COLOR),
+			"Stop guidance — clear all overlays",
+			STOP_BUTTON_BG,
+			e ->
 			{
-				stepResetter.run();
-			}
-		});
+				if (stepStopper != null)
+				{
+					stepStopper.run();
+				}
+			});
+		stopButton.setBorder(BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(STOP_ICON_IDLE_COLOR, 1),
+			BorderFactory.createEmptyBorder(2, 2, 2, 2)
+		));
+		// buildIconButton() disables border painting for the clean icon-only look used
+		// by the other controls. The Stop button needs the red border to render so the
+		// destructive affordance is visually distinct, so re-enable border painting here.
+		stopButton.setBorderPainted(true);
+		stepButtonRow.add(stopButton);
+
+		stepButtonRow.add(Box.createHorizontalStrut(4));
+
+		resetButton = buildIconButton(
+			StepControlIcons.restart(ICON_IDLE_COLOR),
+			StepControlIcons.restart(ICON_HOVER_COLOR),
+			"Restart this task from the first step",
+			ICON_BUTTON_BG,
+			e ->
+			{
+				if (stepResetter != null)
+				{
+					stepResetter.run();
+				}
+			});
 		stepButtonRow.add(resetButton);
 
 		stepButtonRow.add(Box.createHorizontalStrut(4));
 
-		syncButton = new JButton("Sync");
-		syncButton.setFont(FontManager.getRunescapeSmallFont());
-		syncButton.setBackground(new Color(50, 60, 80));
-		syncButton.setForeground(new Color(200, 200, 200));
-		syncButton.setToolTipText("Re-evaluate current state");
-		syncButton.addActionListener(e ->
-		{
-			if (stepSyncer != null)
+		syncButton = buildIconButton(
+			StepControlIcons.sync(ICON_IDLE_COLOR),
+			StepControlIcons.sync(ICON_HOVER_COLOR),
+			"Sync collection-log state",
+			ICON_BUTTON_BG,
+			e ->
 			{
-				stepSyncer.run();
-			}
-		});
+				if (stepSyncer != null)
+				{
+					stepSyncer.run();
+				}
+			});
 		stepButtonRow.add(syncButton);
 
 		add(Box.createVerticalStrut(3));
 		add(stepButtonRow);
+	}
+
+	/** Idle-state icon tint for the non-destructive step controls. */
+	private static final Color ICON_IDLE_COLOR = new Color(200, 200, 200);
+	/** Hover-state icon tint for the non-destructive step controls. */
+	private static final Color ICON_HOVER_COLOR = new Color(255, 255, 255);
+	/** Background for the non-destructive step-control buttons. */
+	private static final Color ICON_BUTTON_BG = new Color(45, 55, 75);
+	/** Idle-state icon tint for the stop / deactivate button. */
+	private static final Color STOP_ICON_IDLE_COLOR = new Color(220, 110, 110);
+	/** Hover-state icon tint for the stop / deactivate button. */
+	private static final Color STOP_ICON_HOVER_COLOR = new Color(255, 150, 150);
+	/** Background for the stop / deactivate button. */
+	private static final Color STOP_BUTTON_BG = new Color(70, 40, 40);
+	/** Click-target size for each icon button (≥ 24x24 per the #547 acceptance criteria). */
+	private static final Dimension ICON_BUTTON_SIZE = new Dimension(28, 28);
+
+	/**
+	 * Builds a square icon-only {@link JButton} with hover icon swap, plain Swing
+	 * tooltip, and a 28x28 click target. Used to compose the #547 music-player
+	 * style step-control row.
+	 */
+	private static JButton buildIconButton(BufferedImage idle, BufferedImage hover,
+		String tooltip, Color background, java.awt.event.ActionListener listener)
+	{
+		final ImageIcon idleIcon = new ImageIcon(idle);
+		final ImageIcon hoverIcon = new ImageIcon(hover);
+		JButton button = new JButton(idleIcon);
+		button.setToolTipText(tooltip);
+		button.setBackground(background);
+		button.setForeground(Color.WHITE);
+		button.setFocusPainted(false);
+		button.setContentAreaFilled(true);
+		button.setOpaque(true);
+		button.setBorderPainted(false);
+		button.setMargin(new java.awt.Insets(0, 0, 0, 0));
+		button.setPreferredSize(ICON_BUTTON_SIZE);
+		button.setMinimumSize(ICON_BUTTON_SIZE);
+		button.setMaximumSize(ICON_BUTTON_SIZE);
+		button.setHorizontalAlignment(SwingConstants.CENTER);
+		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		button.addActionListener(listener);
+		button.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseEntered(MouseEvent e)
+			{
+				button.setIcon(hoverIcon);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e)
+			{
+				button.setIcon(idleIcon);
+			}
+		});
+		return button;
 	}
 
 	/**
@@ -282,6 +379,27 @@ public class StepProgressView extends JPanel
 	{
 		this.stepAdvancer = advancer;
 		this.stepSkipper = skipper;
+		this.stepResetter = resetter;
+		this.stepSyncer = syncer;
+	}
+
+	/**
+	 * Sets all five step-control callbacks introduced in #547: advance, skip,
+	 * stop (deactivate guidance), reset, and sync. Any callback may be {@code null}
+	 * (the corresponding button click will be a no-op).
+	 *
+	 * @param advancer  callback for the Next Step button
+	 * @param skipper   callback for the Skip icon button
+	 * @param stopper   callback for the Stop icon button (deactivate guidance, clear overlays)
+	 * @param resetter  callback for the Restart icon button (restart from step 1, no skip-chain)
+	 * @param syncer    callback for the Sync icon button (re-evaluate skip-chain against current state)
+	 */
+	public void setCallbacks(Runnable advancer, Runnable skipper, Runnable stopper,
+		Runnable resetter, Runnable syncer)
+	{
+		this.stepAdvancer = advancer;
+		this.stepSkipper = skipper;
+		this.stepStopper = stopper;
 		this.stepResetter = resetter;
 		this.stepSyncer = syncer;
 	}
