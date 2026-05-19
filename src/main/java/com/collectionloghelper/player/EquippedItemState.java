@@ -24,6 +24,7 @@
  */
 package com.collectionloghelper.player;
 
+import com.google.inject.ImplementedBy;
 import java.util.Set;
 
 /**
@@ -46,6 +47,7 @@ import java.util.Set;
  * }
  * }</pre>
  */
+@ImplementedBy(EquippedItemStateImpl.class)
 public interface EquippedItemState
 {
 	/**

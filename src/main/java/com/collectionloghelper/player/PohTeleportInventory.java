@@ -24,6 +24,7 @@
  */
 package com.collectionloghelper.player;
 
+import com.google.inject.ImplementedBy;
 import java.util.Set;
 
 /**
@@ -53,6 +54,7 @@ import java.util.Set;
  * <p>Wiring into Tier B guidance branching is deferred to milestone C6.
  * This interface is intentionally standalone for C1.
  */
+@ImplementedBy(PohTeleportInventoryImpl.class)
 public interface PohTeleportInventory
 {
 	/**
