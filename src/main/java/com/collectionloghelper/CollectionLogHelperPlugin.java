@@ -38,10 +38,10 @@ import com.collectionloghelper.sync.TempleSyncOrchestrator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.CollectionStateChangeHandler;
+import com.collectionloghelper.lifecycle.GameTickOrchestrator;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.PlayerLocationResolver;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
-import com.collectionloghelper.lifecycle.SyncStateCoordinator;
 import com.collectionloghelper.lifecycle.VarbitChangeRouter;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.google.inject.Provides;
@@ -56,8 +56,6 @@ import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
-import net.runelite.api.NPC;
-import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
@@ -161,6 +159,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private CollectionStateChangeHandler collectionStateChangeHandler;
 
+	@Inject
+	private GameTickOrchestrator gameTickOrchestrator;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -236,11 +237,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidance.getGuidanceCoordinator().setPluginInstance(this);
 		guidance.getGuidanceCoordinator().setPanel(panel);
 		collectionStateChangeHandler.setCallbacks(
-			() ->
-			{
-				pendingPanelRebuild = true;
-				rankedSourcesDirty = true;
-			},
+			this::markPanelRebuildAndRankedDirty,
 			this::getRankedSources,
 			this::activateGuidance);
 		guidance.getGuidanceCoordinator().setOnSequenceCompleteCallback(
@@ -278,7 +275,7 @@ public class CollectionLogHelperPlugin extends Plugin
 		guidance.getGuidanceEventRouter().setMissingItemsSupplier(() -> sourcesWithMissingItems);
 		guidance.getGuidanceEventRouter().setActivateGuidanceCallback(
 			(java.util.function.Consumer<CollectionLogSource>) this::activateGuidance);
-		guidance.getGuidanceEventRouter().setOnFilterConfigChanged(this::onFilterConfigChanged);
+		guidance.getGuidanceEventRouter().setOnFilterConfigChanged(this::markPanelRebuildAndRankedDirty);
 		guidance.getGuidanceEventRouter().setOnSyncConfigChanged(this::onSyncConfigChanged);
 		eventBus.register(guidance.getGuidanceEventRouter());
 		eventBus.register(guidance.getGuidanceMovementTracker());
@@ -306,11 +303,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		chatEventHandler.setCallbacks(
 			this::getRankedSources,
-			() ->
-			{
-				pendingPanelRebuild = true;
-				rankedSourcesDirty = true;
-			});
+			this::markPanelRebuildAndRankedDirty);
 		varbitChangeRouter.setCallbacks(
 			() ->
 			{
@@ -318,11 +311,18 @@ public class CollectionLogHelperPlugin extends Plugin
 				pendingTravelVarbitRefresh = true;
 			},
 			() -> sourcesWithMissingItems = collectionStateChangeHandler.rebuildSourcesWithMissingItems(),
-			() ->
-			{
-				pendingPanelRebuild = true;
-				rankedSourcesDirty = true;
-			});
+			this::markPanelRebuildAndRankedDirty);
+		// Wire the per-tick orchestrator. All lambdas below are allocated
+		// exactly once (here, during startUp) and stored as fields on the
+		// orchestrator so the hot path never allocates a Supplier/Runnable.
+		gameTickOrchestrator.setCallbacks(
+			this::pollRequirementsRefresh,
+			this::pollTravelVarbitRefresh,
+			this::pollSlayerRefresh,
+			this::pollPanelRebuild,
+			this::markPanelRebuildAndRankedDirty,
+			() -> rankedSourcesDirty = true,
+			() -> panel);
 		chatCommandManager.registerCommand("clh", chatEventHandler::onClhCommand);
 		log.info("Collection Log Helper started");
 	}
@@ -496,87 +496,7 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
-		// Debounced requirements refresh — flagged by onVarbitChanged, runs once per tick
-		if (pendingRequirementsRefresh)
-		{
-			pendingRequirementsRefresh = false;
-			boolean reqsChanged = requirementsChecker.refreshAccessibility(data.getDatabase().getAllSources());
-			if (reqsChanged && !sync.getSyncStateCoordinator().isScriptScanActive())
-			{
-				pendingPanelRebuild = true;
-				rankedSourcesDirty = true;
-			}
-		}
-
-		// Debounced travel varbit refresh — flagged by onVarbitChanged, runs once per tick
-		if (pendingTravelVarbitRefresh)
-		{
-			pendingTravelVarbitRefresh = false;
-			travelCapabilities.refreshVarbits();
-		}
-
-		// Lazily init per-character data directory once player name is available
-		if (data.getPluginDataManager().getCharacterDir() == null)
-		{
-			if (data.getPluginDataManager().init())
-			{
-				efficiency.getKillTimeTracker().init(data.getPluginDataManager().getCharacterDir());
-			}
-		}
-
-		// Dispatch deferred ShortestPath "path" and world map arrow via coordinator
-		guidance.getGuidanceCoordinator().tick();
-
-		// Cache player location for guidance sequencer and authoring log (client thread only).
-		// PlayerLocationResolver handles instanced regions and non-top-level WorldViews
-		// (e.g. sailing boats), translating to overworld coords so ARRIVE_AT_TILE checks
-		// match the static JSON tile.
-		if (client.getLocalPlayer() != null)
-		{
-			WorldPoint playerLocation = playerLocationResolver.resolveAndCache();
-			authoringLogger.setPlayerLocation(playerLocation);
-
-			// Check ARRIVE_AT_TILE completion for guidance sequencer
-			if (guidance.getGuidanceSequencer().isActive())
-			{
-				guidance.getGuidanceSequencer().setPlayerLocation(playerLocation);
-				guidance.getGuidanceSequencer().onPlayerMoved(playerLocation);
-			}
-
-		}
-
-		// Deferred slayer task refresh — varps may not be loaded in the initial
-		// invokeLater after LOGGED_IN, so re-read a few ticks later when the
-		// server has definitely sent all varp data.
-		if (slayerRefreshPending && sync.getSyncStateCoordinator().getLoginTickDelay() <= 7)
-		{
-			slayerRefreshPending = false;
-			data.getSlayerTaskState().refresh();
-			pendingPanelRebuild = true;
-			rankedSourcesDirty = true;
-		}
-
-		// Delegate all remaining sync-lifecycle logic to the coordinator
-		SyncStateCoordinator.SyncTickResult syncResult = sync.getSyncStateCoordinator().tickSync(
-			panel,
-			() -> {
-				pendingPanelRebuild = true;
-				rankedSourcesDirty = true;
-			},
-			collectionStateChangeHandler::exportEfficiencyIfEnabled
-		);
-		if (syncResult == SyncStateCoordinator.SyncTickResult.RANKED_DIRTY)
-		{
-			rankedSourcesDirty = true;
-		}
-
-		// Single coalesced rebuild per tick — all event handlers and checks above
-		// set pendingPanelRebuild instead of calling panel.rebuild() directly.
-		if (pendingPanelRebuild && panel != null)
-		{
-			pendingPanelRebuild = false;
-			panel.rebuild();
-		}
+		gameTickOrchestrator.tick();
 	}
 
 	/**
@@ -619,22 +539,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	/**
-	 * Callback invoked by {@link com.collectionloghelper.lifecycle.GuidanceEventRouter}
-	 * when a filter-affecting config key changes mid-session. Marks the
-	 * ranked-sources cache dirty and the panel-rebuild flag so the next
-	 * game-tick coalesces a single rebuild against the new filter state.
-	 *
-	 * <p>Closes cha-ndler/collection-log-helper#364 (Hide Locked Content
-	 * + sibling filter toggles previously stayed inert because nothing
-	 * listened for config changes).
-	 */
-	private void onFilterConfigChanged()
-	{
-		rankedSourcesDirty = true;
-		pendingPanelRebuild = true;
-	}
-
-	/**
 	 * Invoked by {@link GuidanceEventRouter} when one of the sync-related
 	 * config toggles ({@code enableCollectionLogNetImport} or
 	 * {@code enableTempleOsrsSync}) changes. Refreshes the visibility of the
@@ -650,6 +554,52 @@ public class CollectionLogHelperPlugin extends Plugin
 	{
 		panel.updateCollectionLogNetImportButton();
 		panel.updateTempleSyncButtonVisibility();
+	}
+
+	// ── Per-tick flag accessors wired into GameTickOrchestrator ───────────────
+	// Method references, allocated once by the JVM, avoid per-tick lambda
+	// allocation. Each poll method atomically reads-and-clears its flag.
+
+	private boolean pollRequirementsRefresh()
+	{
+		if (!pendingRequirementsRefresh) return false;
+		pendingRequirementsRefresh = false;
+		return true;
+	}
+
+	private boolean pollTravelVarbitRefresh()
+	{
+		if (!pendingTravelVarbitRefresh) return false;
+		pendingTravelVarbitRefresh = false;
+		return true;
+	}
+
+	private boolean pollSlayerRefresh()
+	{
+		if (!slayerRefreshPending) return false;
+		slayerRefreshPending = false;
+		return true;
+	}
+
+	private boolean pollPanelRebuild()
+	{
+		if (!pendingPanelRebuild) return false;
+		pendingPanelRebuild = false;
+		return true;
+	}
+
+	/**
+	 * Marks both the panel-rebuild flag and the ranked-sources-dirty flag so
+	 * the next game tick coalesces a single rebuild against fresh state.
+	 *
+	 * <p>Shared by the per-tick orchestrator, the varbit/chat/state-change
+	 * handlers, and the filter-config-changed callback (cha-ndler/collection-log-helper#364
+	 * -- filter toggles previously stayed inert because nothing listened).
+	 */
+	private void markPanelRebuildAndRankedDirty()
+	{
+		pendingPanelRebuild = true;
+		rankedSourcesDirty = true;
 	}
 
 	/**
