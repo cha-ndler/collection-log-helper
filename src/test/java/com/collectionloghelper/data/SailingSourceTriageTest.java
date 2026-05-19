@@ -234,7 +234,13 @@ public class SailingSourceTriageTest
 	 * a static overworld island north of Gwenith, reachable by rowboat or Sailing ship.
 	 * The underground cave coords (2275, 9880) = 3480 + 6400 are geographically plausible,
 	 * but the surface entrance step at (2218, 3477) cannot be verified against the static
-	 * NPC cache. Requires in-game capture to confirm ARRIVE_AT_TILE fires correctly.
+	 * NPC cache.
+	 *
+	 * <p>As of #555, the travel step uses ARRIVE_AT_ZONE covering both the surface
+	 * entrance band and the underground cavern interior on plane 0, so the
+	 * auto-advance no longer depends on satisfying the surface radius first.
+	 * In-game capture is still desirable to confirm the surface entrance coord, but
+	 * the predicate shape is now resilient either way.
 	 *
 	 * Wiki: https://oldschool.runescape.wiki/w/Aquanite
 	 */
@@ -249,10 +255,10 @@ public class SailingSourceTriageTest
 		assertNotNull("Aquanite guidance steps must not be null", steps);
 		assertEquals("Aquanite must have exactly 2 guidance steps", 2, steps.size());
 
-		// Step 0: ARRIVE_AT_TILE for the surface entrance area
+		// Step 0: ARRIVE_AT_ZONE covering surface entrance + underground cavern (#555).
 		GuidanceStep entranceStep = steps.get(0);
-		assertEquals("Aquanite step 0 must be ARRIVE_AT_TILE",
-			CompletionCondition.ARRIVE_AT_TILE, entranceStep.getCompletionCondition());
+		assertEquals("Aquanite step 0 must be ARRIVE_AT_ZONE after #555 batch migration",
+			CompletionCondition.ARRIVE_AT_ZONE, entranceStep.getCompletionCondition());
 		// Entrance near Tirannwn/Gwenith coast (unverified placeholder).
 		// TODO(#314): verify via in-game authoring log that this fires on Ynysdail surface.
 		assertEquals("Aquanite entrance step worldX placeholder", 2218, entranceStep.getWorldX());

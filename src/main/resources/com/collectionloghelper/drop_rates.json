@@ -1116,8 +1116,8 @@
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [1300, 3795, 1380, 10280, 0],
         "section": "Travel"
       },
       {
@@ -1329,8 +1329,8 @@
         "worldX": 3227,
         "worldY": 3108,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [3215, 3095, 3520, 9520, 0],
         "travelTip": "Fairy ring BIQ, or desert amulet to Kalphite Cave (with Hard Desert Diary)"
       },
       {
@@ -3163,8 +3163,8 @@
         "worldPlane": 0,
         "objectId": 34862,
         "objectInteractAction": "Climb-down",
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 8
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [1690, 3560, 1860, 9920, 0]
       },
       {
         "description": "Enter Forthos Dungeon and navigate to the spider area in the south. Enter Sarachnis' lair",
@@ -3665,8 +3665,8 @@
         "worldX": 2278,
         "worldY": 3611,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2260, 3600, 2290, 10030, 0],
         "travelTip": "Fairy ring AKQ then run west to Kraken Cove"
       },
       {
@@ -3754,8 +3754,8 @@
         "worldX": 2412,
         "worldY": 3061,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2370, 3050, 2420, 9460, 0],
         "travelTip": "Fairy ring BKP, or ring of dueling to Castle Wars + run south-west"
       },
       {
@@ -3951,8 +3951,8 @@
         "worldX": 3028,
         "worldY": 3842,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [3015, 3830, 3080, 10265, 0],
         "travelTip": "Burning amulet to Lava Maze (level 41 Wilderness)"
       },
       {
@@ -4098,8 +4098,8 @@
         "worldX": 3231,
         "worldY": 3936,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [3215, 3920, 3250, 10355, 0]
       },
       {
         "description": "Enter the Cavern to access Scorpia's underground lair",
@@ -7652,8 +7652,8 @@
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 100
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [1420, 3115, 1450, 9720, 0]
       },
       {
         "description": "Enter Cam Torum and make your way north through the city to the Neypotzli dungeon entrance",
@@ -8155,8 +8155,8 @@
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2690, 3600, 2810, 10050, 0]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Lumbridge Swamp caves",
@@ -8214,8 +8214,8 @@
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2690, 3600, 2810, 10050, 0]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Bring a bag of salt to finish them",
@@ -8287,8 +8287,8 @@
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2690, 3600, 2810, 10050, 0]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required",
@@ -8346,8 +8346,8 @@
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2690, 3600, 2810, 10050, 0]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or use Catacombs of Kourend",
@@ -8462,8 +8462,8 @@
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2690, 3600, 2810, 10050, 0]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required",
@@ -8977,8 +8977,8 @@
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2690, 3600, 2810, 10050, 0]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Catacombs of Kourend for burst tasks",
@@ -9043,8 +9043,8 @@
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2690, 3600, 2810, 10050, 0]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required",
@@ -9357,8 +9357,8 @@
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [1300, 3795, 1330, 10220, 0]
       },
       {
         "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
@@ -9537,8 +9537,8 @@
         "worldX": 3745,
         "worldY": 3777,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [3590, 3765, 3760, 10305, 0]
       },
       {
         "description": "Enter the Wyvern Cave. Elemental/mind/dragonfire shield required",
@@ -9617,8 +9617,8 @@
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2690, 3600, 2810, 10050, 0]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required",
@@ -9886,8 +9886,8 @@
         "worldX": 2218,
         "worldY": 3477,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [2210, 3465, 2290, 9895, 0]
       },
       {
         "description": "Kill Aquanites in Ynysdail Cavern (requires 73 Sailing). Use crush weapons for best accuracy",
@@ -10137,8 +10137,8 @@
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [1300, 3795, 1330, 10075, 0]
       },
       {
         "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
@@ -10520,8 +10520,8 @@
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [1300, 3795, 1330, 10205, 0]
       },
       {
         "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
@@ -11425,8 +11425,8 @@
         "worldX": 3360,
         "worldY": 3151,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [3345, 3140, 3380, 11500, 0]
       },
       {
         "description": "Talk to Kovac to select a commission. Bring metal bars (mithril+ recommended) from the bank",
@@ -16877,8 +16877,8 @@
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [1620, 3660, 1690, 10070, 0]
       },
       {
         "description": "Investigate the Statue of King Rada I to enter the Catacombs.",
