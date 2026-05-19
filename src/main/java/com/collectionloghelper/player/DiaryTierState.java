@@ -24,6 +24,8 @@
  */
 package com.collectionloghelper.player;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * Read-only view of a player's Achievement Diary completion state.
  * <p>
@@ -38,6 +40,7 @@ package com.collectionloghelper.player;
  * }
  * }</pre>
  */
+@ImplementedBy(DiaryTierStateImpl.class)
 public interface DiaryTierState
 {
 	/**

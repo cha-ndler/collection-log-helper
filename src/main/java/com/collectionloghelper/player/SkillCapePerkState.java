@@ -24,6 +24,8 @@
  */
 package com.collectionloghelper.player;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * Read-only view of which skill-cape perks are currently available to
  * the logged-in player.
@@ -52,6 +54,7 @@ package com.collectionloghelper.player;
  * }
  * }</pre>
  */
+@ImplementedBy(SkillCapePerkStateImpl.class)
 public interface SkillCapePerkState
 {
 	/**
