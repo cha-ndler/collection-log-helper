@@ -25,6 +25,8 @@
 package com.collectionloghelper.data;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -45,6 +47,7 @@ public class PlayerCollectionState
 
 	private final Client client;
 	private final ConfigManager configManager;
+	private final DropRateDatabase dropRateDatabase;
 
 	// Cached varp values — updated on client thread via refreshVarps(), safe to read from any thread
 	private volatile int totalObtained;
@@ -59,10 +62,11 @@ public class PlayerCollectionState
 	private final Set<Integer> obtainedItemIds = ConcurrentHashMap.newKeySet();
 
 	@Inject
-	private PlayerCollectionState(Client client, ConfigManager configManager)
+	private PlayerCollectionState(Client client, ConfigManager configManager, DropRateDatabase dropRateDatabase)
 	{
 		this.client = client;
 		this.configManager = configManager;
+		this.dropRateDatabase = dropRateDatabase;
 	}
 
 	/**
@@ -277,6 +281,11 @@ public class PlayerCollectionState
 				return minigamesCount;
 			case OTHER:
 				return otherCount;
+			case SLAYER:
+			case SKILLING:
+				// OSRS does not expose aggregate varps for these categories — derive from
+				// the source database, deduplicating item IDs that appear in multiple sources.
+				return countObtainedInCategory(category);
 			default:
 				return 0;
 		}
@@ -296,9 +305,74 @@ public class PlayerCollectionState
 				return minigamesMax;
 			case OTHER:
 				return otherMax;
+			case SLAYER:
+			case SKILLING:
+				// OSRS does not expose aggregate varps for these categories — derive from
+				// the source database, deduplicating item IDs that appear in multiple sources.
+				return countTotalInCategory(category);
 			default:
 				return 0;
 		}
+	}
+
+	/**
+	 * Returns the number of distinct obtained item IDs across all sources in the given category.
+	 * Deduplicates items that appear in multiple sources within the same category.
+	 */
+	private int countObtainedInCategory(CollectionLogCategory category)
+	{
+		if (dropRateDatabase == null)
+		{
+			return 0;
+		}
+		List<CollectionLogSource> sources = dropRateDatabase.getSourcesByCategory(category);
+		if (sources.isEmpty())
+		{
+			return 0;
+		}
+		Set<Integer> itemIds = new HashSet<>();
+		for (CollectionLogSource source : sources)
+		{
+			for (CollectionLogItem item : source.getItems())
+			{
+				itemIds.add(item.getItemId());
+			}
+		}
+		int obtained = 0;
+		for (Integer id : itemIds)
+		{
+			if (obtainedItemIds.contains(id))
+			{
+				obtained++;
+			}
+		}
+		return obtained;
+	}
+
+	/**
+	 * Returns the number of distinct item IDs across all sources in the given category.
+	 * Deduplicates items that appear in multiple sources within the same category.
+	 */
+	private int countTotalInCategory(CollectionLogCategory category)
+	{
+		if (dropRateDatabase == null)
+		{
+			return 0;
+		}
+		List<CollectionLogSource> sources = dropRateDatabase.getSourcesByCategory(category);
+		if (sources.isEmpty())
+		{
+			return 0;
+		}
+		Set<Integer> itemIds = new HashSet<>();
+		for (CollectionLogSource source : sources)
+		{
+			for (CollectionLogItem item : source.getItems())
+			{
+				itemIds.add(item.getItemId());
+			}
+		}
+		return itemIds.size();
 	}
 
 	public double getCompletionPercentage()
