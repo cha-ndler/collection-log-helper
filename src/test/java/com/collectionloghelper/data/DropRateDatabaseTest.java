@@ -27,8 +27,10 @@ package com.collectionloghelper.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import net.runelite.api.coords.WorldPoint;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -661,5 +663,98 @@ public class DropRateDatabaseTest
 		// Wrong plane must not match.
 		assertFalse("Zone must not match plane 1",
 			zone.contains(new net.runelite.api.coords.WorldPoint(1324, 3364, 1)));
+	}
+
+	/**
+	 * Regression test for #555: the 23 sources migrated from ARRIVE_AT_TILE to
+	 * ARRIVE_AT_ZONE in the batch follow-up to #553 must all have a step 0 that:
+	 *   1. Uses ARRIVE_AT_ZONE (not ARRIVE_AT_TILE).
+	 *   2. Declares a zone on plane 0 covering both a representative surface coord
+	 *      AND a representative underground coord for that source.
+	 *   3. Rejects plane 1+ (so the auto-advance doesn't fire on the floor above).
+	 *
+	 * <p>Modelled on the #548 Custodian Stalker regression test above. Each case
+	 * carries the source name, expected zone array, one surface coord that must be
+	 * inside the zone, and one underground coord that must also be inside. Coords
+	 * are sourced from the issue #555 audit table.
+	 */
+	@Test
+	public void regression_555_batchMigratedSources_useArriveAtZone()
+	{
+		Object[][] cases = new Object[][]
+		{
+			// { name, expectedZone, surfaceCoord, undergroundCoord }
+			{"Sarachnis",                  new int[]{1690, 3560, 1860, 9920, 0},  new WorldPoint(1701, 3574, 0),  new WorldPoint(1847, 9910, 0)},
+			{"Kraken",                     new int[]{2260, 3600, 2290, 10030, 0}, new WorldPoint(2278, 3611, 0),  new WorldPoint(2272, 10016, 0)},
+			{"Thermonuclear smoke devil",  new int[]{2370, 3050, 2420, 9460, 0},  new WorldPoint(2412, 3061, 0),  new WorldPoint(2379, 9452, 0)},
+			{"Alchemical Hydra",           new int[]{1300, 3795, 1380, 10280, 0}, new WorldPoint(1311, 3807, 0),  new WorldPoint(1364, 10265, 0)},
+			{"Wyrm",                       new int[]{1300, 3795, 1330, 10220, 0}, new WorldPoint(1311, 3807, 0),  new WorldPoint(1311, 10205, 0)},
+			{"Drake",                      new int[]{1300, 3795, 1330, 10075, 0}, new WorldPoint(1311, 3807, 0),  new WorldPoint(1310, 10057, 0)},
+			{"Hydra",                      new int[]{1300, 3795, 1330, 10205, 0}, new WorldPoint(1311, 3807, 0),  new WorldPoint(1310, 10190, 0)},
+			{"Cave Crawler",               new int[]{2690, 3600, 2810, 10050, 0}, new WorldPoint(2797, 3614, 0),  new WorldPoint(2788, 10000, 0)},
+			{"Rockslug",                   new int[]{2690, 3600, 2810, 10050, 0}, new WorldPoint(2797, 3614, 0),  new WorldPoint(2794, 10018, 0)},
+			{"Cockatrice",                 new int[]{2690, 3600, 2810, 10050, 0}, new WorldPoint(2797, 3614, 0),  new WorldPoint(2792, 10035, 0)},
+			{"Pyrefiend",                  new int[]{2690, 3600, 2810, 10050, 0}, new WorldPoint(2797, 3614, 0),  new WorldPoint(2761, 10008, 0)},
+			{"Basilisk",                   new int[]{2690, 3600, 2810, 10050, 0}, new WorldPoint(2797, 3614, 0),  new WorldPoint(2744, 10008, 0)},
+			{"Jelly",                      new int[]{2690, 3600, 2810, 10050, 0}, new WorldPoint(2797, 3614, 0),  new WorldPoint(2704, 10028, 0)},
+			{"Turoth",                     new int[]{2690, 3600, 2810, 10050, 0}, new WorldPoint(2797, 3614, 0),  new WorldPoint(2722, 10002, 0)},
+			{"Kurask",                     new int[]{2690, 3600, 2810, 10050, 0}, new WorldPoint(2797, 3614, 0),  new WorldPoint(2701, 9992, 0)},
+			{"Aquanite",                   new int[]{2210, 3465, 2290, 9895, 0},  new WorldPoint(2218, 3477, 0),  new WorldPoint(2275, 9880, 0)},
+			{"Fossil Island Wyvern",       new int[]{3590, 3765, 3760, 10305, 0}, new WorldPoint(3745, 3777, 0),  new WorldPoint(3602, 10290, 0)},
+			{"Catacombs of Kourend",       new int[]{1620, 3660, 1690, 10070, 0}, new WorldPoint(1636, 3673, 0),  new WorldPoint(1664, 10050, 0)},
+			{"Kalphite Queen",             new int[]{3215, 3095, 3520, 9520, 0},  new WorldPoint(3227, 3108, 0),  new WorldPoint(3471, 9506, 0)},
+			{"Scorpia",                    new int[]{3215, 3920, 3250, 10355, 0}, new WorldPoint(3231, 3936, 0),  new WorldPoint(3233, 10341, 0)},
+			{"Perilous Moons",             new int[]{1420, 3115, 1450, 9720, 0},  new WorldPoint(1435, 3131, 0),  new WorldPoint(1435, 9700, 0)},
+			{"Giants' Foundry",            new int[]{3345, 3140, 3380, 11500, 0}, new WorldPoint(3360, 3151, 0),  new WorldPoint(3365, 11489, 0)},
+			{"King Black Dragon",          new int[]{3015, 3830, 3080, 10265, 0}, new WorldPoint(3028, 3842, 0),  new WorldPoint(3067, 10253, 0)},
+		};
+
+		for (Object[] tc : cases)
+		{
+			String name = (String) tc[0];
+			int[] expectedZone = (int[]) tc[1];
+			WorldPoint surface = (WorldPoint) tc[2];
+			WorldPoint underground = (WorldPoint) tc[3];
+
+			CollectionLogSource source = null;
+			for (CollectionLogSource s : database.getAllSources())
+			{
+				if (name.equals(s.getName()))
+				{
+					source = s;
+					break;
+				}
+			}
+			assertNotNull("Source must exist in drop_rates.json: " + name, source);
+
+			List<GuidanceStep> steps = source.getGuidanceSteps();
+			assertNotNull("Source must have guidance steps: " + name, steps);
+			assertTrue("Source must have at least one guidance step: " + name, !steps.isEmpty());
+
+			GuidanceStep travelStep = steps.get(0);
+			assertEquals(
+				"Step 0 must use ARRIVE_AT_ZONE (issue #555): " + name,
+				CompletionCondition.ARRIVE_AT_ZONE, travelStep.getCompletionCondition());
+
+			Zone zone = travelStep.getZone();
+			assertNotNull("Step 0 must declare a completionZone: " + name, zone);
+			assertEquals("Zone must be on plane 0: " + name, 0, zone.getPlane());
+
+			// Surface entrance must be inside the zone (auto-advance must fire on arrival
+			// at the surface entrance, matching the prior ARRIVE_AT_TILE behaviour).
+			assertTrue("Zone must contain surface coord " + surface + " for " + name,
+				zone.contains(surface));
+
+			// Underground destination must also be inside the zone (auto-advance must fire
+			// even when the player descends without crossing the surface radius).
+			assertTrue("Zone must contain underground coord " + underground + " for " + name,
+				zone.contains(underground));
+
+			// Plane 1+ must never match — prevents false-positives on the floor above.
+			assertFalse("Zone must not match plane 1 at surface for " + name,
+				zone.contains(new WorldPoint(surface.getX(), surface.getY(), 1)));
+			assertFalse("Zone must not match plane 2 at surface for " + name,
+				zone.contains(new WorldPoint(surface.getX(), surface.getY(), 2)));
+		}
 	}
 }

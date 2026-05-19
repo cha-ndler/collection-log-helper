@@ -751,6 +751,74 @@ public class GuidanceSequencerTest
 		assertEquals(1, sequencer.getCurrentIndex());
 	}
 
+	/**
+	 * Regression test for #555: the batch ARRIVE_AT_ZONE migration applied to 23
+	 * travel-then-descend sources must produce zones that auto-advance the step
+	 * when the player arrives at the underground destination, not just the surface
+	 * entrance.
+	 *
+	 * <p>Loops over a representative subset of the migrated zones from
+	 * drop_rates.json and asserts that:
+	 *   - Starting outside the zone keeps the sequencer on step 0.
+	 *   - Arriving at the underground coord (the case the old ARRIVE_AT_TILE
+	 *     predicate could not satisfy) advances to step 1.
+	 *   - Plane 1 inside the X/Y rectangle does not advance.
+	 *
+	 * <p>The subset covers each distinct zone shape (single-source, multi-source
+	 * Karuulm cluster, shared Fremennik Slayer Dungeon zone, multi-region
+	 * wilderness, and the wide Kalphite Queen chamber span).
+	 */
+	@Test
+	public void testArriveAtZoneCompletesStepFromUnderground_batchMigratedZones()
+	{
+		// { minX, minY, maxX, maxY, plane, surfaceX, surfaceY, undergroundX, undergroundY, label }
+		Object[][] cases = new Object[][]
+		{
+			{1690, 3560, 1860, 9920, 0,  1701, 3574,  1847, 9910,  "Sarachnis (Forthos Dungeon)"},
+			{2260, 3600, 2290, 10030, 0, 2278, 3611,  2272, 10016, "Kraken Cove"},
+			{1300, 3795, 1380, 10280, 0, 1311, 3807,  1364, 10265, "Alchemical Hydra (Karuulm)"},
+			{2690, 3600, 2810, 10050, 0, 2797, 3614,  2701, 9992,  "Fremennik Slayer Dungeon shared"},
+			{3590, 3765, 3760, 10305, 0, 3745, 3777,  3602, 10290, "Fossil Island Wyvern Cave"},
+			{3215, 3095, 3520, 9520, 0,  3227, 3108,  3471, 9506,  "Kalphite Queen chamber (wide X)"},
+			{3215, 3920, 3250, 10355, 0, 3231, 3936,  3233, 10341, "Scorpia lair (Wilderness)"},
+		};
+
+		for (Object[] tc : cases)
+		{
+			int minX = (int) tc[0];
+			int minY = (int) tc[1];
+			int maxX = (int) tc[2];
+			int maxY = (int) tc[3];
+			int plane = (int) tc[4];
+			int sx = (int) tc[5];
+			int sy = (int) tc[6];
+			int ux = (int) tc[7];
+			int uy = (int) tc[8];
+			String label = (String) tc[9];
+
+			// Fresh sequence per case so onPlayerMoved state isn't carried over.
+			List<GuidanceStep> steps = Arrays.asList(
+				makeArriveAtZoneStep(minX, minY, maxX, maxY, plane),
+				makeManualStep("Arrived")
+			);
+			startSequence(steps);
+			assertEquals("initial index for " + label, 0, sequencer.getCurrentIndex());
+
+			// Far outside the zone — must not advance.
+			sequencer.onPlayerMoved(new WorldPoint(minX - 100, minY - 100, plane));
+			assertEquals("outside zone must not advance: " + label, 0, sequencer.getCurrentIndex());
+
+			// Wrong plane at the surface entrance — must not advance.
+			sequencer.onPlayerMoved(new WorldPoint(sx, sy, 1));
+			assertEquals("plane 1 must not advance: " + label, 0, sequencer.getCurrentIndex());
+
+			// Underground destination on correct plane — must advance. This is the
+			// case the old ARRIVE_AT_TILE predicate could not satisfy.
+			sequencer.onPlayerMoved(new WorldPoint(ux, uy, plane));
+			assertEquals("underground arrival must advance: " + label, 1, sequencer.getCurrentIndex());
+		}
+	}
+
 	@Test
 	public void testPlayerOnPlaneCompletesStep()
 	{
