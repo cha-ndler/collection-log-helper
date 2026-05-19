@@ -38,9 +38,11 @@ import com.collectionloghelper.sync.TempleSyncOrchestrator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
 import com.collectionloghelper.lifecycle.CollectionStateChangeHandler;
+import com.collectionloghelper.lifecycle.GameStateRouter;
 import com.collectionloghelper.lifecycle.GameTickOrchestrator;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.PlayerLocationResolver;
+import com.collectionloghelper.lifecycle.PluginShutdownRoutine;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
 import com.collectionloghelper.lifecycle.VarbitChangeRouter;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
@@ -161,6 +163,12 @@ public class CollectionLogHelperPlugin extends Plugin
 
 	@Inject
 	private GameTickOrchestrator gameTickOrchestrator;
+
+	@Inject
+	private GameStateRouter gameStateRouter;
+
+	@Inject
+	private PluginShutdownRoutine pluginShutdownRoutine;
 
 
 	private CollectionLogHelperPanel panel;
@@ -304,6 +312,17 @@ public class CollectionLogHelperPlugin extends Plugin
 		chatEventHandler.setCallbacks(
 			this::getRankedSources,
 			this::markPanelRebuildAndRankedDirty);
+		gameStateRouter.setCallbacks(
+			() -> panel,
+			collectionStateChangeHandler::rebuildSourcesWithMissingItems,
+			set -> sourcesWithMissingItems = set,
+			() -> sourcesWithMissingItems.clear(),
+			() -> slayerRefreshPending = true,
+			() ->
+			{
+				slayerRefreshPending = false;
+				pendingTravelVarbitRefresh = false;
+			});
 		varbitChangeRouter.setCallbacks(
 			() ->
 			{
@@ -330,117 +349,21 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Override
 	protected void shutDown() throws Exception
 	{
-		chatCommandManager.unregisterCommand("clh");
-		authoringLogger.close();
-		sync.getCollectionLogNetImporter().shutdown();
-		if (panel != null)
+		pluginShutdownRoutine.tearDown(panel, navButton, httpResultExecutor, () ->
 		{
-			panel.shutDown();
-		}
-		clientToolbar.removeNavigation(navButton);
-		overlayRegistry.unregisterAll();
-		eventBus.unregister(sceneEventRouter);
-		eventBus.unregister(guidance.getGuidanceEventRouter());
-		eventBus.unregister(guidance.getGuidanceMovementTracker());
-		eventBus.unregister(efficiency.getKillTimeTracker());
-		efficiency.getKillTimeTracker().reset();
-		deactivateGuidance();
-		sync.getSyncStateCoordinator().reset();
-		sync.getSourceKcStore().clear();
-		sync.getTempleOsrsKcSyncer().shutdown();
-		if (httpResultExecutor != null)
-		{
-			httpResultExecutor.shutdownNow();
-			httpResultExecutor = null;
-		}
-		sourcesWithMissingItems.clear();
-		pendingPanelRebuild = false;
-		rankedSourcesDirty = true;
-		cachedRankedSources = null;
-		playerLocationResolver.reset();
-		guidance.getGuidanceOverlay().setShowCollectionLogReminder(false);
-		guidance.getGuidanceOverlay().setShowBankReminder(false);
-		data.getDataSyncState().reset();
-		data.getPlayerBankState().reset();
-		data.getPlayerInventoryState().reset();
-		data.getSlayerTaskState().reset();
-		travelCapabilities.reset();
-		data.getCollectionState().clearState();
-		data.getPluginDataManager().reset();
-
+			sourcesWithMissingItems.clear();
+			pendingPanelRebuild = false;
+			rankedSourcesDirty = true;
+			cachedRankedSources = null;
+		});
+		httpResultExecutor = null;
 		log.info("Collection Log Helper stopped");
 	}
 
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged event)
 	{
-		if (event.getGameState() == GameState.LOGGED_IN)
-		{
-			// LOGGED_IN fires multiple times during login/transitions.
-			// Only reset sync state on the first fire to avoid clearing
-			// collection log / bank sync flags mid-session.
-			sync.getSyncStateCoordinator().onGameStateLoggedIn();
-			slayerRefreshPending = true;
-			clientThread.invokeLater(() ->
-			{
-				data.getCollectionState().refreshVarps();
-				data.getCollectionState().loadObtainedItems();
-				data.getCollectionState().captureRecentItems();
-				requirementsChecker.refreshAccessibility(data.getDatabase().getAllSources());
-				travelCapabilities.refreshQuestState();
-				travelCapabilities.refreshVarbits();
-				data.getSlayerTaskState().refresh();
-				sync.getSyncStateCoordinator().setLastObtainedCount(data.getCollectionState().getTotalObtained());
-				sourcesWithMissingItems = collectionStateChangeHandler.rebuildSourcesWithMissingItems();
-
-				// Rescan scene for tracked objects after scene (re)load
-				guidance.getObjectHighlightOverlay().rescanScene();
-
-				// Per-character dir and cache-fresh check are handled in
-				// onGameTick once varps and player name are available.
-
-				if (panel != null)
-				{
-					if (data.getDataSyncState().isCollectionLogSynced()
-						&& data.getCollectionState().getTotalObtained() > 0)
-					{
-						panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.SYNCED,
-							data.getCollectionState().getTotalObtained());
-					}
-					else
-					{
-						panel.updateSyncStatus(CollectionLogHelperPanel.SyncState.NOT_SYNCED, 0);
-					}
-					panel.updateDataSyncWarning();
-					if (data.getDataSyncState().isBankScanned())
-					{
-						panel.updateClueSummary(data.getPlayerBankState());
-					}
-					panel.rebuild();
-				}
-			});
-		}
-		else if (event.getGameState() == GameState.LOGIN_SCREEN)
-		{
-			data.getCollectionState().clearState();
-			requirementsChecker.clearCache();
-			efficiency.getClueEstimator().resetBucket();
-			data.getSlayerTaskState().reset();
-			sync.getSyncStateCoordinator().onGameStateLoginScreen();
-			sync.getSyncStateCoordinator().setLastObtainedCount(-1);
-			sourcesWithMissingItems.clear();
-			slayerRefreshPending = false;
-			pendingTravelVarbitRefresh = false;
-			playerLocationResolver.reset();
-			guidance.getGuidanceOverlay().setShowCollectionLogReminder(false);
-			guidance.getGuidanceOverlay().setShowBankReminder(false);
-			data.getDataSyncState().reset();
-			data.getPlayerBankState().reset();
-			data.getPlayerInventoryState().reset();
-			travelCapabilities.reset();
-			efficiency.getKillTimeTracker().reset();
-			data.getPluginDataManager().reset();
-		}
+		gameStateRouter.handle(event);
 	}
 
 	@Subscribe
