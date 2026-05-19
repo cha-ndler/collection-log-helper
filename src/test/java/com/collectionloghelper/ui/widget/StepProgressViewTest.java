@@ -765,56 +765,175 @@ public class StepProgressViewTest
 		return result;
 	}
 
-	// ── Reset / Sync button tests (#369) ────────────────────────────────────
+	// ── Icon-driven step-control button tests (#547) ────────────────────────
+	//
+	// Originally added for #369 to assert the Skip/Reset/Sync text buttons fired
+	// their callbacks. #547 replaced the text buttons with music-player style
+	// icon buttons (skip-next, stop, restart, sync) so these tests now locate
+	// the buttons by tooltip instead of by label text.
 
 	/**
-	 * After construction the Reset and Sync buttons must be present in the
-	 * step-button row (findable via findButtonByText).
+	 * Plain-English tooltip required by the #547 acceptance criteria, one per
+	 * action icon. These strings are the contract — UX validators read them as
+	 * the discoverability story for each control.
+	 */
+	private static final String TOOLTIP_SKIP = "Skip to next step";
+	private static final String TOOLTIP_STOP = "Stop guidance — clear all overlays";
+	private static final String TOOLTIP_RESTART = "Restart this task from the first step";
+	private static final String TOOLTIP_SYNC = "Sync collection-log state";
+
+	/**
+	 * After construction all four icon-driven controls (Skip, Stop, Restart,
+	 * Sync) must be present and resolvable by tooltip.
 	 */
 	@Test
-	public void construction_hasResetAndSyncButtons()
+	public void construction_hasAllFourIconButtons()
 	{
-		assertNotNull("Reset button must exist after construction", findButtonByText(view, "Reset"));
-		assertNotNull("Sync button must exist after construction", findButtonByText(view, "Sync"));
+		assertNotNull("Skip icon button must exist", findButtonByTooltip(view, TOOLTIP_SKIP));
+		assertNotNull("Stop icon button must exist", findButtonByTooltip(view, TOOLTIP_STOP));
+		assertNotNull("Restart icon button must exist", findButtonByTooltip(view, TOOLTIP_RESTART));
+		assertNotNull("Sync icon button must exist", findButtonByTooltip(view, TOOLTIP_SYNC));
 	}
 
 	/**
-	 * The Reset button must invoke the reset callback when clicked.
+	 * Icon buttons must render as icon-only — empty (or null) text so the glyph
+	 * is the sole visual affordance.
 	 */
 	@Test
-	public void resetButton_click_invokesResetCallback() throws Exception
+	public void iconButtons_haveNoText()
 	{
-		AtomicBoolean resetFired = new AtomicBoolean(false);
-		view.setCallbacks(() -> {}, () -> {}, () -> resetFired.set(true), () -> {});
+		for (String tooltip : new String[]{TOOLTIP_SKIP, TOOLTIP_STOP, TOOLTIP_RESTART, TOOLTIP_SYNC})
+		{
+			JButton btn = findButtonByTooltip(view, tooltip);
+			assertNotNull("Icon button for tooltip '" + tooltip + "' must exist", btn);
+			String text = btn.getText();
+			assertTrue("Icon button '" + tooltip + "' must have empty text but had '" + text + "'",
+				text == null || text.isEmpty());
+			assertNotNull("Icon button '" + tooltip + "' must have a graphic icon set",
+				btn.getIcon());
+		}
+	}
+
+	/**
+	 * Each icon button must offer a click target of at least 24x24 to satisfy the
+	 * #547 acceptance criteria.
+	 */
+	@Test
+	public void iconButtons_clickTargetAtLeast24x24()
+	{
+		for (String tooltip : new String[]{TOOLTIP_SKIP, TOOLTIP_STOP, TOOLTIP_RESTART, TOOLTIP_SYNC})
+		{
+			JButton btn = findButtonByTooltip(view, tooltip);
+			assertNotNull(btn);
+			java.awt.Dimension size = btn.getPreferredSize();
+			assertTrue("Icon button '" + tooltip + "' must be ≥24px wide (was " + size.width + ")",
+				size.width >= 24);
+			assertTrue("Icon button '" + tooltip + "' must be ≥24px tall (was " + size.height + ")",
+				size.height >= 24);
+		}
+	}
+
+	/**
+	 * The Skip icon button must invoke the skip callback when clicked.
+	 */
+	@Test
+	public void skipButton_click_invokesSkipCallback() throws Exception
+	{
+		AtomicBoolean fired = new AtomicBoolean(false);
+		view.setCallbacks(() -> {}, () -> fired.set(true), () -> {}, () -> {}, () -> {});
 		flushEdt();
 
-		JButton resetBtn = findButtonByText(view, "Reset");
-		assertNotNull("Reset button must be present", resetBtn);
-		SwingUtilities.invokeAndWait(() -> resetBtn.doClick());
+		JButton btn = findButtonByTooltip(view, TOOLTIP_SKIP);
+		assertNotNull(btn);
+		SwingUtilities.invokeAndWait(btn::doClick);
 
-		assertTrue("Reset callback must fire when Reset button is clicked", resetFired.get());
+		assertTrue("Skip callback must fire when Skip icon clicked", fired.get());
 	}
 
 	/**
-	 * The Sync button must invoke the sync callback when clicked.
+	 * The Stop icon button must invoke the stop callback when clicked.
+	 * This is the new affordance from #547 — replaces the surprise of "Reset
+	 * actually restarts the task" by giving deactivation its own icon.
+	 */
+	@Test
+	public void stopButton_click_invokesStopCallback() throws Exception
+	{
+		AtomicBoolean fired = new AtomicBoolean(false);
+		view.setCallbacks(() -> {}, () -> {}, () -> fired.set(true), () -> {}, () -> {});
+		flushEdt();
+
+		JButton btn = findButtonByTooltip(view, TOOLTIP_STOP);
+		assertNotNull(btn);
+		SwingUtilities.invokeAndWait(btn::doClick);
+
+		assertTrue("Stop callback must fire when Stop icon clicked", fired.get());
+	}
+
+	/**
+	 * The Restart icon button must invoke the reset callback when clicked.
+	 */
+	@Test
+	public void restartButton_click_invokesResetCallback() throws Exception
+	{
+		AtomicBoolean fired = new AtomicBoolean(false);
+		view.setCallbacks(() -> {}, () -> {}, () -> {}, () -> fired.set(true), () -> {});
+		flushEdt();
+
+		JButton btn = findButtonByTooltip(view, TOOLTIP_RESTART);
+		assertNotNull(btn);
+		SwingUtilities.invokeAndWait(btn::doClick);
+
+		assertTrue("Restart callback must fire when Restart icon clicked", fired.get());
+	}
+
+	/**
+	 * The Sync icon button must invoke the sync callback when clicked.
 	 */
 	@Test
 	public void syncButton_click_invokesSyncCallback() throws Exception
 	{
-		AtomicBoolean syncFired = new AtomicBoolean(false);
-		view.setCallbacks(() -> {}, () -> {}, () -> {}, () -> syncFired.set(true));
+		AtomicBoolean fired = new AtomicBoolean(false);
+		view.setCallbacks(() -> {}, () -> {}, () -> {}, () -> {}, () -> fired.set(true));
 		flushEdt();
 
-		JButton syncBtn = findButtonByText(view, "Sync");
-		assertNotNull("Sync button must be present", syncBtn);
-		SwingUtilities.invokeAndWait(() -> syncBtn.doClick());
+		JButton btn = findButtonByTooltip(view, TOOLTIP_SYNC);
+		assertNotNull(btn);
+		SwingUtilities.invokeAndWait(btn::doClick);
 
-		assertTrue("Sync callback must fire when Sync button is clicked", syncFired.get());
+		assertTrue("Sync callback must fire when Sync icon clicked", fired.get());
 	}
 
 	/**
-	 * setCallbacks(advancer, skipper) two-arg overload must remain valid after the
-	 * new four-arg overload is introduced — existing callers are not broken.
+	 * Behavioural compatibility for the legacy 4-arg setCallbacks overload
+	 * (advancer, skipper, resetter, syncer). Clicking restart/sync via the
+	 * icon buttons must still fire the corresponding callbacks after the
+	 * legacy overload is invoked.
+	 */
+	@Test
+	public void legacyFourArgSetCallbacks_stillRoutesRestartAndSync() throws Exception
+	{
+		AtomicBoolean resetFired = new AtomicBoolean(false);
+		AtomicBoolean syncFired = new AtomicBoolean(false);
+		view.setCallbacks(() -> {}, () -> {}, () -> resetFired.set(true), () -> syncFired.set(true));
+		flushEdt();
+
+		JButton restartBtn = findButtonByTooltip(view, TOOLTIP_RESTART);
+		JButton syncBtn = findButtonByTooltip(view, TOOLTIP_SYNC);
+		assertNotNull(restartBtn);
+		assertNotNull(syncBtn);
+		SwingUtilities.invokeAndWait(() ->
+		{
+			restartBtn.doClick();
+			syncBtn.doClick();
+		});
+
+		assertTrue("Legacy 4-arg overload must still route to restart", resetFired.get());
+		assertTrue("Legacy 4-arg overload must still route to sync", syncFired.get());
+	}
+
+	/**
+	 * setCallbacks(advancer, skipper) two-arg overload must remain valid — existing
+	 * callers must not break.
 	 */
 	@Test
 	public void setCallbacks_twoArg_doesNotThrow()
@@ -823,69 +942,88 @@ public class StepProgressViewTest
 	}
 
 	/**
-	 * When setCallbacks is called with null reset/sync callbacks, clicking the buttons
-	 * must not throw a NullPointerException.
+	 * When setCallbacks is called with null stop/reset/sync callbacks, clicking the
+	 * buttons must not throw a NullPointerException.
 	 */
 	@Test
-	public void resetAndSyncButtons_nullCallbacks_doNotThrow() throws Exception
+	public void iconButtons_nullCallbacks_doNotThrow() throws Exception
 	{
-		view.setCallbacks(() -> {}, () -> {}, null, null);
+		view.setCallbacks(() -> {}, () -> {}, null, null, null);
 		flushEdt();
 
-		JButton resetBtn = findButtonByText(view, "Reset");
-		JButton syncBtn = findButtonByText(view, "Sync");
-		assertNotNull(resetBtn);
+		JButton stopBtn = findButtonByTooltip(view, TOOLTIP_STOP);
+		JButton restartBtn = findButtonByTooltip(view, TOOLTIP_RESTART);
+		JButton syncBtn = findButtonByTooltip(view, TOOLTIP_SYNC);
+		assertNotNull(stopBtn);
+		assertNotNull(restartBtn);
 		assertNotNull(syncBtn);
 		SwingUtilities.invokeAndWait(() ->
 		{
-			resetBtn.doClick();
+			stopBtn.doClick();
+			restartBtn.doClick();
 			syncBtn.doClick();
 		});
 	}
 
 	/**
-	 * The Reset button has the tooltip "Restart from step 1".
+	 * Tooltip text contract — the exact plain-English strings the UX checklist
+	 * promises will appear on hover for each control.
 	 */
 	@Test
-	public void resetButton_hasExpectedTooltip()
+	public void iconButtons_haveExpectedTooltips()
 	{
-		JButton resetBtn = findButtonByText(view, "Reset");
-		assertNotNull(resetBtn);
-		assertEquals("Restart from step 1", resetBtn.getToolTipText());
+		assertEquals(TOOLTIP_SKIP, findButtonByTooltip(view, TOOLTIP_SKIP).getToolTipText());
+		assertEquals(TOOLTIP_STOP, findButtonByTooltip(view, TOOLTIP_STOP).getToolTipText());
+		assertEquals(TOOLTIP_RESTART, findButtonByTooltip(view, TOOLTIP_RESTART).getToolTipText());
+		assertEquals(TOOLTIP_SYNC, findButtonByTooltip(view, TOOLTIP_SYNC).getToolTipText());
 	}
 
-	/**
-	 * The Sync button has the tooltip "Re-evaluate current state".
-	 */
-	@Test
-	public void syncButton_hasExpectedTooltip()
-	{
-		JButton syncBtn = findButtonByText(view, "Sync");
-		assertNotNull(syncBtn);
-		assertEquals("Re-evaluate current state", syncBtn.getToolTipText());
-	}
-
-	// ── Helpers (Reset/Sync) ─────────────────────────────────────────────────
+	// ── Helpers (icon button row) ────────────────────────────────────────────
 
 	/**
 	 * Finds the first {@link JButton} anywhere in {@code root}'s component tree
-	 * whose text equals {@code text}. Searches recursively.
+	 * whose tooltip equals {@code tooltip}. Searches recursively. Used for the
+	 * #547 icon-button row where buttons have empty text.
 	 */
-	private static JButton findButtonByText(JPanel root, String text)
+	private static JButton findButtonByTooltip(JPanel root, String tooltip)
 	{
 		for (Component c : root.getComponents())
 		{
 			if (c instanceof JButton)
 			{
 				JButton btn = (JButton) c;
-				if (text.equals(btn.getText()))
+				if (tooltip.equals(btn.getToolTipText()))
 				{
 					return btn;
 				}
 			}
 			else if (c instanceof JPanel)
 			{
-				JButton found = findButtonInPanel((JPanel) c, text);
+				JButton found = findButtonByTooltipInPanel((JPanel) c, tooltip);
+				if (found != null)
+				{
+					return found;
+				}
+			}
+		}
+		return null;
+	}
+
+	private static JButton findButtonByTooltipInPanel(JPanel panel, String tooltip)
+	{
+		for (Component c : panel.getComponents())
+		{
+			if (c instanceof JButton)
+			{
+				JButton btn = (JButton) c;
+				if (tooltip.equals(btn.getToolTipText()))
+				{
+					return btn;
+				}
+			}
+			else if (c instanceof JPanel)
+			{
+				JButton found = findButtonByTooltipInPanel((JPanel) c, tooltip);
 				if (found != null)
 				{
 					return found;
