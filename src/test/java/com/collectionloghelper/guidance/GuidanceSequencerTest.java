@@ -224,6 +224,40 @@ public class GuidanceSequencerTest
 		);
 	}
 
+	private GuidanceStep makeArriveAtZoneStep(int minX, int minY, int maxX, int maxY, int plane)
+	{
+		return new GuidanceStep(
+			"Walk into zone",
+			null,  // perItemStepDescription
+			0, 0, 0,
+			0, null, null, null,
+			null, null,
+			null,  // perItemRequiredItemIds
+			null,  // recommendedItemIds
+			null,           // perItemRecommendedItemIds
+			CompletionCondition.ARRIVE_AT_ZONE,
+			0, 0, 0, 0,
+			null,  // completionNpcIds
+			null,
+			0, null, null,
+			null, null,
+			null,
+			0, 0,
+			false,
+			0,     // objectMaxDistance
+			null,  // objectFilterTiles
+			null,  // highlightWidgetIds
+			0, 0,  // loopBackToStep, loopCount
+			null,  // skipIfHasAnyItemIds
+			null,  // dynamicItemObjectTiers
+			new int[] {minX, minY, maxX, maxY, plane},  // completionZone
+			null,  // conditionalAlternatives
+			null, // section
+			null, // waypoints
+			null  // dynamicTargetEvaluator
+		);
+	}
+
 	private GuidanceStep makeNpcTalkedToStep(int npcId)
 	{
 		return new GuidanceStep(
@@ -668,6 +702,52 @@ public class GuidanceSequencerTest
 
 		// Within distance on correct plane
 		sequencer.onPlayerMoved(new WorldPoint(3003, 3002, 0));
+		assertEquals(1, sequencer.getCurrentIndex());
+	}
+
+	/**
+	 * Regression test for #548: a travel step that uses ARRIVE_AT_ZONE must auto-advance
+	 * when the player arrives anywhere inside the zone, including both the surface
+	 * approach and the underground destination (same plane, large Y range).
+	 *
+	 * <p>Matches the Custodian Stalker Step 1 shape: zone [1260, 3340, 1370, 9870, 0]
+	 * which spans both the surface entrance at (1324, 3364, 0) and the underground
+	 * Stalker Den interior at (~1301, 9820, 0). Before the fix, this step used a
+	 * 15-tile ARRIVE_AT_TILE radius that the player's pathfinding-to-squeeze-through
+	 * could bypass, leaving the step stuck at 1/3 until manual Skip.
+	 */
+	@Test
+	public void testArriveAtZoneCompletesStepFromSurfaceAndUnderground()
+	{
+		// Zone covers Custodia Pass surface (Y ~3360) + underground den (Y ~9820), plane 0.
+		List<GuidanceStep> surfaceArrival = Arrays.asList(
+			makeArriveAtZoneStep(1260, 3340, 1370, 9870, 0),
+			makeManualStep("Arrived")
+		);
+		startSequence(surfaceArrival);
+		assertEquals(0, sequencer.getCurrentIndex());
+
+		// Outside zone — must not advance.
+		sequencer.onPlayerMoved(new WorldPoint(1200, 3300, 0));
+		assertEquals(0, sequencer.getCurrentIndex());
+
+		// Wrong plane — must not advance even when X/Y are inside.
+		sequencer.onPlayerMoved(new WorldPoint(1324, 3364, 1));
+		assertEquals(0, sequencer.getCurrentIndex());
+
+		// Player arrives at the surface entrance — must advance.
+		sequencer.onPlayerMoved(new WorldPoint(1324, 3364, 0));
+		assertEquals(1, sequencer.getCurrentIndex());
+
+		// Independent run: same zone, player descends and arrives in the underground den.
+		List<GuidanceStep> undergroundArrival = Arrays.asList(
+			makeArriveAtZoneStep(1260, 3340, 1370, 9870, 0),
+			makeManualStep("Arrived")
+		);
+		startSequence(undergroundArrival);
+		assertEquals(0, sequencer.getCurrentIndex());
+
+		sequencer.onPlayerMoved(new WorldPoint(1301, 9820, 0));
 		assertEquals(1, sequencer.getCurrentIndex());
 	}
 

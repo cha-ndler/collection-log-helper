@@ -9823,8 +9823,8 @@
         "worldX": 1324,
         "worldY": 3364,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [1260, 3340, 1370, 9870, 0]
       },
       {
         "description": "Enter the Stalker Den through the cave entrance",
