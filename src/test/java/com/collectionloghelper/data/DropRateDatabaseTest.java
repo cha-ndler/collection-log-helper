@@ -608,4 +608,58 @@ public class DropRateDatabaseTest
 			}
 		}
 	}
+
+	/**
+	 * Regression test for #548: the Custodian Stalker source's first guidance step
+	 * (Travel to the Stalker Den entrance) must use ARRIVE_AT_ZONE with a zone that
+	 * covers both the surface entrance area and the underground den interior.
+	 *
+	 * <p>The prior ARRIVE_AT_TILE with a 15-tile radius around (1324, 3364, 0) could
+	 * be bypassed when the player's pathfinding-to-squeeze-through skipped the
+	 * proximity window, leaving step 1/3 stuck and requiring manual Skip. Switching
+	 * to a zone that includes both the surface approach (Y ~3360) and the
+	 * underground den (Y ~9820) on plane 0 guarantees the step auto-advances once
+	 * the player is anywhere meaningful inside the den region.
+	 */
+	@Test
+	public void regression_548_custodianStalker_step1_usesArriveAtZone()
+	{
+		CollectionLogSource custodianStalker = null;
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			if ("Custodian Stalker".equals(source.getName()))
+			{
+				custodianStalker = source;
+				break;
+			}
+		}
+		assertNotNull("Custodian Stalker source must exist in drop_rates.json", custodianStalker);
+
+		List<GuidanceStep> steps = custodianStalker.getGuidanceSteps();
+		assertNotNull("Custodian Stalker must have guidance steps", steps);
+		assertTrue("Custodian Stalker must have at least one guidance step", !steps.isEmpty());
+
+		GuidanceStep travelStep = steps.get(0);
+		assertEquals(
+			"Step 1 must use ARRIVE_AT_ZONE so arrival auto-advances via either surface "
+				+ "or underground (issue #548)",
+			CompletionCondition.ARRIVE_AT_ZONE, travelStep.getCompletionCondition());
+
+		Zone zone = travelStep.getZone();
+		assertNotNull("Step 1 must declare a completionZone for ARRIVE_AT_ZONE", zone);
+		assertEquals("Zone must be on plane 0", 0, zone.getPlane());
+
+		// Zone must contain the documented surface entrance object location.
+		assertTrue("Zone must contain the surface entrance at (1324, 3364, 0)",
+			zone.contains(new net.runelite.api.coords.WorldPoint(1324, 3364, 0)));
+
+		// Zone must also contain the underground den interior so a player who
+		// descends without crossing the surface radius still auto-advances.
+		assertTrue("Zone must contain the underground den interior at (1301, 9820, 0)",
+			zone.contains(new net.runelite.api.coords.WorldPoint(1301, 9820, 0)));
+
+		// Wrong plane must not match.
+		assertFalse("Zone must not match plane 1",
+			zone.contains(new net.runelite.api.coords.WorldPoint(1324, 3364, 1)));
+	}
 }
