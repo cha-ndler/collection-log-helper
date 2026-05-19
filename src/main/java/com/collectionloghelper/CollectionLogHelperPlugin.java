@@ -224,10 +224,14 @@ public class CollectionLogHelperPlugin extends Plugin
 		// so overlay rescans fire in the same game-frame as auto-completion
 		// events. Reset and Sync require RequirementsChecker / inventory state
 		// that are client-thread-only, matching the pattern established in
-		// commits c528d0ae and cha-ndler/collection-log-helper#409.
+		// commits c528d0ae and cha-ndler/collection-log-helper#409. The Stop
+		// icon (#547) delegates to the same deactivateGuidance() entry point
+		// already used by the Quick Guide panel header, so behavior is identical
+		// to the existing "Deactivate" affordance — only the surface is new.
 		panel.setStepCallbacks(
 			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::advanceStep),
 			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::skipStep),
+			() -> clientThread.invokeLater(this::deactivateGuidance),
 			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::restartFromStep0),
 			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::syncToCurrentState)
 		);
