@@ -870,6 +870,35 @@ public class StepProgressViewTest
 	}
 
 	/**
+	 * The Stop icon button must visually render its red border so the destructive
+	 * affordance is distinguishable from the non-destructive controls. The shared
+	 * {@code buildIconButton} helper disables border painting for a clean icon-only
+	 * look on Skip/Restart/Sync; the Stop button must re-enable it after the
+	 * explicit red border is applied, otherwise the border is silently dropped at
+	 * paint time and Stop looks identical to the other icons (#547 regression).
+	 */
+	@Test
+	public void stopButton_paintsRedBorder() throws Exception
+	{
+		JButton stopBtn = findButtonByTooltip(view, TOOLTIP_STOP);
+		assertNotNull("Stop icon button must exist", stopBtn);
+		assertTrue("Stop button must paint its border so the red outline is visible",
+			stopBtn.isBorderPainted());
+		assertNotNull("Stop button must carry an explicit border", stopBtn.getBorder());
+
+		// The other icon buttons must remain borderless for the clean icon-only look.
+		for (String tooltip : new String[]{TOOLTIP_SKIP, TOOLTIP_RESTART, TOOLTIP_SYNC})
+		{
+			JButton btn = findButtonByTooltip(view, tooltip);
+			assertNotNull(btn);
+			assertFalse(
+				"Non-destructive icon button '" + tooltip
+					+ "' must not paint a border (icon-only look)",
+				btn.isBorderPainted());
+		}
+	}
+
+	/**
 	 * The Restart icon button must invoke the reset callback when clicked.
 	 */
 	@Test

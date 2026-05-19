@@ -257,6 +257,10 @@ public class StepProgressView extends JPanel
 			BorderFactory.createLineBorder(STOP_ICON_IDLE_COLOR, 1),
 			BorderFactory.createEmptyBorder(2, 2, 2, 2)
 		));
+		// buildIconButton() disables border painting for the clean icon-only look used
+		// by the other controls. The Stop button needs the red border to render so the
+		// destructive affordance is visually distinct, so re-enable border painting here.
+		stopButton.setBorderPainted(true);
 		stepButtonRow.add(stopButton);
 
 		stepButtonRow.add(Box.createHorizontalStrut(4));
