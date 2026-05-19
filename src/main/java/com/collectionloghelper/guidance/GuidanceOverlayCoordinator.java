@@ -404,9 +404,18 @@ public class GuidanceOverlayCoordinator
 		}
 
 		// Dynamic target evaluator dispatch (delegated to DynamicTargetManager).
-		activeMapPoint = dynamicTargetManager.tick(new DynamicTargetManager.Input(
-			guidanceSequencer.isActive(), guidanceSequencer.getRawCurrentStep(),
-			activeMapPoint, activeTargetItemId, collectionLogIcon)).getActiveMapPoint();
+		// The active-guidance guard is held here (#527) so inactive ticks
+		// skip the call entirely and allocate nothing on the hot path.
+		if (guidanceSequencer.isActive())
+		{
+			CollectionLogWorldMapPoint newMapPoint = dynamicTargetManager.tick(
+				guidanceSequencer.getRawCurrentStep(),
+				activeMapPoint, activeTargetItemId, collectionLogIcon);
+			if (newMapPoint != null)
+			{
+				activeMapPoint = newMapPoint;
+			}
+		}
 
 		// World map arrow rotation
 		worldMapController.updateArrow(activeMapPoint);
