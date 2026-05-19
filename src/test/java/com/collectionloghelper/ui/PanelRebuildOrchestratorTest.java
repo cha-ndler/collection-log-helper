@@ -30,6 +30,7 @@ import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.util.Collections;
 import java.util.Set;
 import javax.swing.BoxLayout;
@@ -40,9 +41,12 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import net.runelite.client.game.ItemManager;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -60,6 +64,7 @@ import static org.mockito.Mockito.when;
  * of issue #503 god-class splits.
  */
 @RunWith(MockitoJUnitRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PanelRebuildOrchestratorTest
 {
 	@Mock
@@ -77,7 +82,7 @@ public class PanelRebuildOrchestratorTest
 	private PanelRebuildOrchestrator orchestrator;
 
 	@Before
-	public void setUp()
+	public void setUp() throws Exception
 	{
 		when(collectionState.getCategoryCount(any())).thenReturn(0);
 		when(collectionState.getCategoryMax(any())).thenReturn(10);
@@ -92,25 +97,63 @@ public class PanelRebuildOrchestratorTest
 		hostPanel.add(listContainer, BorderLayout.NORTH);
 
 		scrollPane = new JScrollPane(hostPanel);
-		// Swap the vertical scrollbar's model for one that ignores any
-		// subsequent narrowing of its bounds (extent/min/max). This is the
-		// bulletproof fix for the headless-Linux flake where viewport layout
-		// passes re-clamp value=250 down to value=90 between setValue(...) and
-		// the test's assertion. The pinned model accepts setValue freely but
-		// refuses to shrink its own range after pinScrollBounds(...) has been
-		// called. See also the comment on pinScrollBounds below.
-		scrollPane.setVerticalScrollBar(new JScrollBar(JScrollBar.VERTICAL));
+
+		// Build a vertical scrollbar whose model is *already* a pre-pinned
+		// PinnedRangeModel BEFORE the bar ever joins the scrollpane. This
+		// eliminates the only window during which JScrollPane / ScrollPaneLayout
+		// could narrow the bar's BoundedRangeModel during initial layout
+		// (previously the pin happened after scrollPane.doLayout(), leaving a
+		// brief headless-CI-only window where the model could be left at its
+		// default max=100 extent=10).
+		//
+		// Background: PR #536 introduced PinnedRangeModel to fix the headless
+		// Linux flake on captureRecordsScrollPositionFromEnclosingScrollPane and
+		// its two deferScrollRestore* peers, but pinned the model AFTER the
+		// initial JScrollPane layout. A subsequent full-suite test run reported
+		// the flake re-emerging in cross-test ordering, indicating shared Swing
+		// state (likely EDT events from sibling tests) was still landing on the
+		// bar between layout and pin. Pinning the model up-front closes that
+		// window, and the per-test @After drain + new-bar swap (below) closes
+		// the inverse window where this test's events could leak into the next.
+		JScrollBar bar = new JScrollBar(JScrollBar.VERTICAL);
+		PinnedRangeModel preModel = new PinnedRangeModel();
+		preModel.setRangeProperties(0, 400, 0, 5000, false);
+		preModel.pin();
+		bar.setModel(preModel);
+		scrollPane.setVerticalScrollBar(bar);
+
 		scrollPane.setSize(200, 400);
 		scrollPane.doLayout();
 		scrollPane.getViewport().doLayout();
-		// Pin the vertical scrollbar's model bounds explicitly so setValue(...) is
-		// not clamped by lazy/late viewport layout. Headless CI environments
-		// (Linux, JDK 11 and JDK 17) have been observed to leave the model at its
-		// default (max=100, extent=10) when assertions read the value immediately
-		// after setValue, causing values like 250 to clamp to 90.
+		// Idempotent re-pin: bar already has a PinnedRangeModel, this just
+		// re-asserts the canonical range so subsequent tests can rely on it.
 		pinScrollBounds(scrollPane.getVerticalScrollBar());
 
 		orchestrator = new PanelRebuildOrchestrator(hostPanel, listContainer);
+	}
+
+	/**
+	 * Drain the AWT EventQueue and unhook this test's vertical scrollbar so any
+	 * Swing events queued by this test method cannot leak into the next test's
+	 * fresh scrollpane / bar (and vice versa across the test class boundary).
+	 * Belt-and-braces guard for the headless Linux flake originally addressed
+	 * by #536: the per-test {@link #setUp()} already builds fresh components,
+	 * but pending EDT events can still target the old bar reference until they
+	 * drain.
+	 */
+	@After
+	public void tearDown() throws Exception
+	{
+		// Replace the scrollbar with a fresh, non-pinned one so any pending
+		// listeners on the pinned bar see a no-op recipient.
+		if (scrollPane != null)
+		{
+			scrollPane.setVerticalScrollBar(new JScrollBar(JScrollBar.VERTICAL));
+		}
+		// Block until the EDT is idle to ensure any invokeLater() scheduled by
+		// this test (e.g. deferScrollRestore) has fully run; otherwise it could
+		// fire during the next test's setUp.
+		EventQueue.invokeAndWait(() -> { /* drain */ });
 	}
 
 	/**
