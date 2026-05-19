@@ -4,6 +4,21 @@
 
 ### Fixed
 
+- **Plugin no longer fails to instantiate in a live RuneLite client** —
+  Guice could not resolve four C-tier player-state interfaces
+  (`DiaryTierState`, `EquippedItemState`, `PohTeleportInventory`,
+  `SkillCapePerkState`) because their `@Singleton` impls were enough to
+  JIT-bind the concrete class but nothing told Guice how to satisfy the
+  interface dependency injected into `PlayerCapabilityDebugOverlay`. The
+  failure was latent since [#459](../../pull/459) / [#461](../../pull/461)
+  and only surfaced on `./gradlew run` — unit tests passed because they
+  bind the impls directly. Fix adds `@ImplementedBy` to each interface
+  (smallest possible diff, no impl-body changes). New regression test
+  `CollectionLogHelperPluginInjectorTest` resolves each interface against
+  a minimal injector and fails at CI time if a future change drops the
+  annotation or adds another unbound interface dep. Closes
+  [#543](../../pull/543).
+
 - **Long step descriptions no longer overflow the guidance panel** —
   `StepProgressView.showStep` now wraps the step text in
   `<html><body style='width:220px'>…</body></html>` so Swing word-wraps
