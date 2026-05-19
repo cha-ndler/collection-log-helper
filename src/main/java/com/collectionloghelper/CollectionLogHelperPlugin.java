@@ -37,6 +37,7 @@ import com.collectionloghelper.sync.LootSyncManager;
 import com.collectionloghelper.sync.TempleSyncOrchestrator;
 import com.collectionloghelper.efficiency.ScoredItem;
 import com.collectionloghelper.lifecycle.AuthoringLogger;
+import com.collectionloghelper.lifecycle.CollectionStateChangeHandler;
 import com.collectionloghelper.lifecycle.OverlayRegistry;
 import com.collectionloghelper.lifecycle.PlayerLocationResolver;
 import com.collectionloghelper.lifecycle.SceneEventRouter;
@@ -157,6 +158,9 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private VarbitChangeRouter varbitChangeRouter;
 
+	@Inject
+	private CollectionStateChangeHandler collectionStateChangeHandler;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -231,7 +235,16 @@ public class CollectionLogHelperPlugin extends Plugin
 		// Wire coordinator with references it needs from the plugin
 		guidance.getGuidanceCoordinator().setPluginInstance(this);
 		guidance.getGuidanceCoordinator().setPanel(panel);
-		guidance.getGuidanceCoordinator().setOnSequenceCompleteCallback(this::onSequenceComplete);
+		collectionStateChangeHandler.setCallbacks(
+			() ->
+			{
+				pendingPanelRebuild = true;
+				rankedSourcesDirty = true;
+			},
+			this::getRankedSources,
+			this::activateGuidance);
+		guidance.getGuidanceCoordinator().setOnSequenceCompleteCallback(
+			collectionStateChangeHandler::handleSequenceComplete);
 		// Wire coordinator into resolver (post-construction, avoids circular injection)
 		guidance.getRequiredItemResolver().setCoordinator(guidance.getGuidanceCoordinator());
 
@@ -283,7 +296,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				travelCapabilities.refreshQuestState();
 				travelCapabilities.refreshVarbits();
 				sync.getSyncStateCoordinator().setLastObtainedCount(data.getCollectionState().getTotalObtained());
-				rebuildSourcesWithMissingItems();
+				sourcesWithMissingItems = collectionStateChangeHandler.rebuildSourcesWithMissingItems();
 				if (panel != null)
 				{
 					panel.rebuild();
@@ -304,7 +317,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				pendingRequirementsRefresh = true;
 				pendingTravelVarbitRefresh = true;
 			},
-			this::rebuildSourcesWithMissingItems,
+			() -> sourcesWithMissingItems = collectionStateChangeHandler.rebuildSourcesWithMissingItems(),
 			() ->
 			{
 				pendingPanelRebuild = true;
@@ -378,7 +391,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				travelCapabilities.refreshVarbits();
 				data.getSlayerTaskState().refresh();
 				sync.getSyncStateCoordinator().setLastObtainedCount(data.getCollectionState().getTotalObtained());
-				rebuildSourcesWithMissingItems();
+				sourcesWithMissingItems = collectionStateChangeHandler.rebuildSourcesWithMissingItems();
 
 				// Rescan scene for tracked objects after scene (re)load
 				guidance.getObjectHighlightOverlay().rescanScene();
@@ -550,7 +563,7 @@ public class CollectionLogHelperPlugin extends Plugin
 				pendingPanelRebuild = true;
 				rankedSourcesDirty = true;
 			},
-			this::exportEfficiencyIfEnabled
+			collectionStateChangeHandler::exportEfficiencyIfEnabled
 		);
 		if (syncResult == SyncStateCoordinator.SyncTickResult.RANKED_DIRTY)
 		{
@@ -564,22 +577,6 @@ public class CollectionLogHelperPlugin extends Plugin
 			pendingPanelRebuild = false;
 			panel.rebuild();
 		}
-	}
-
-	private void exportEfficiencyIfEnabled()
-	{
-		if (!config.exportEfficiencyLog())
-		{
-			return;
-		}
-		java.io.File exportFile = data.getPluginDataManager().getFile("efficiency-export.txt");
-		if (exportFile == null)
-		{
-			// Fallback if player name not yet available
-			exportFile = new java.io.File(
-				net.runelite.client.RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
-		}
-		efficiency.getCalculator().exportEfficiencyList(exportFile, client);
 	}
 
 	/**
@@ -668,47 +665,9 @@ public class CollectionLogHelperPlugin extends Plugin
 		return cachedRankedSources;
 	}
 
-	/**
-	 * Callback from coordinator when a guidance sequence completes.
-	 * Handles auto-advance to next source and panel rebuild.
-	 */
-	private void onSequenceComplete()
-	{
-		pendingPanelRebuild = true;
-		rankedSourcesDirty = true;
-		if (config.autoAdvanceGuidance())
-		{
-			// Auto-activate guidance for the next top efficiency pick.
-			// Pass the best-item target ID (B4.4) so per-item overrides
-			// (perItemRequiredItemIds, perItemStepDescription, perItemNpcId)
-			// activate automatically without the user right-clicking an item.
-			List<ScoredItem> ranked = getRankedSources();
-			ranked.stream()
-				.filter(s -> !s.isLocked())
-				.findFirst()
-				.ifPresent(topPick ->
-				{
-					Integer targetItemId = topPick.getBestItem() != null
-						? topPick.getBestItem().getItemId()
-						: null;
-					activateGuidance(topPick.getSource(), targetItemId);
-				});
-		}
-	}
-
 	public void deactivateGuidance()
 	{
 		guidance.getGuidanceCoordinator().deactivateGuidance();
-	}
-
-	/**
-	 * Rebuilds the cached set of source names that have at least one unobtained item.
-	 * Called when collection state changes to avoid per-menu-entry item scanning.
-	 */
-	private void rebuildSourcesWithMissingItems()
-	{
-		sourcesWithMissingItems = guidance.getGuidanceCoordinator().rebuildSourcesWithMissingItems(
-			data.getDatabase(), data.getCollectionState());
 	}
 
 	@Provides

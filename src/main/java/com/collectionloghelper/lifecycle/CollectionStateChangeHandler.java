@@ -1,0 +1,202 @@
+/*
+ * Copyright (c) 2025, cha-ndler
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+package com.collectionloghelper.lifecycle;
+
+import com.collectionloghelper.CollectionLogHelperConfig;
+import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.di.DataModule;
+import com.collectionloghelper.di.EfficiencyModule;
+import com.collectionloghelper.di.GuidanceModule;
+import com.collectionloghelper.efficiency.ScoredItem;
+import java.io.File;
+import java.util.List;
+import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.Client;
+import net.runelite.client.RuneLite;
+
+/**
+ * Owns the trio of collection-state lifecycle responsibilities that previously
+ * lived inline in {@link com.collectionloghelper.CollectionLogHelperPlugin}:
+ *
+ * <ol>
+ *   <li>{@link #handleSequenceComplete()} -- callback invoked by
+ *       {@code GuidanceOverlayCoordinator} when an active guidance sequence
+ *       finishes.  Flags a panel rebuild and ranked-source recompute, and
+ *       auto-activates guidance for the next top efficiency pick when
+ *       {@link CollectionLogHelperConfig#autoAdvanceGuidance()} is enabled.</li>
+ *   <li>{@link #rebuildSourcesWithMissingItems()} -- recomputes the cached set
+ *       of source names that still have unobtained items.  Returns the new
+ *       set so the plugin can assign it to its {@code sourcesWithMissingItems}
+ *       field (state ownership stays with the plugin to match
+ *       {@code shutDown}'s clear semantics).</li>
+ *   <li>{@link #exportEfficiencyIfEnabled()} -- writes the efficiency export
+ *       file when {@link CollectionLogHelperConfig#exportEfficiencyLog()} is
+ *       enabled.  Falls back to the global RuneLite directory if the
+ *       per-character data manager has not resolved a player name yet.</li>
+ * </ol>
+ *
+ * <p>The plugin wires three narrow callbacks once in {@code startUp()}:
+ * <ul>
+ *   <li>{@code onSequenceCompleteFlags} -- toggles {@code pendingPanelRebuild}
+ *       and {@code rankedSourcesDirty} on the plugin.</li>
+ *   <li>{@code rankedSourcesSupplier} -- returns the plugin's cached ranked
+ *       efficiency list so auto-advance picks the same top item the panel
+ *       would show.</li>
+ *   <li>{@code activateGuidanceCallback} -- delegates back to the plugin's
+ *       {@code activateGuidance(source, targetItemId)} so the client-thread
+ *       wrap stays in one place.</li>
+ * </ul>
+ *
+ * <p>Performance: {@link #handleSequenceComplete()} only fires when a guidance
+ * sequence completes (rare, user-driven).  Allocation discipline still holds
+ * on guard-fail paths -- when auto-advance is disabled the method returns
+ * after the flag callback with no allocations (see #527 / #523 lessons).
+ *
+ * <p>Part of issue #503 -- splitting {@code CollectionLogHelperPlugin} into
+ * focused collaborators (Wave 13).
+ */
+@Slf4j
+@Singleton
+public class CollectionStateChangeHandler
+{
+	private final Client client;
+	private final CollectionLogHelperConfig config;
+	private final DataModule data;
+	private final EfficiencyModule efficiency;
+	private final GuidanceModule guidance;
+
+	private Runnable onSequenceCompleteFlags;
+	private Supplier<List<ScoredItem>> rankedSourcesSupplier;
+	private BiConsumer<CollectionLogSource, Integer> activateGuidanceCallback;
+
+	@Inject
+	public CollectionStateChangeHandler(
+		Client client,
+		CollectionLogHelperConfig config,
+		DataModule data,
+		EfficiencyModule efficiency,
+		GuidanceModule guidance)
+	{
+		this.client = client;
+		this.config = config;
+		this.data = data;
+		this.efficiency = efficiency;
+		this.guidance = guidance;
+	}
+
+	/**
+	 * Wires plugin-owned callbacks. Called once from
+	 * {@code CollectionLogHelperPlugin.startUp()} after the plugin's private
+	 * state and panel are constructed. Kept off the constructor to avoid a
+	 * circular Guice dependency on the plugin itself.
+	 */
+	public void setCallbacks(
+		Runnable onSequenceCompleteFlags,
+		Supplier<List<ScoredItem>> rankedSourcesSupplier,
+		BiConsumer<CollectionLogSource, Integer> activateGuidanceCallback)
+	{
+		this.onSequenceCompleteFlags = onSequenceCompleteFlags;
+		this.rankedSourcesSupplier = rankedSourcesSupplier;
+		this.activateGuidanceCallback = activateGuidanceCallback;
+	}
+
+	/**
+	 * Callback invoked by {@code GuidanceOverlayCoordinator} when a guidance
+	 * sequence completes. Flags a panel rebuild and ranked-source recompute,
+	 * and -- if auto-advance is enabled -- activates guidance for the next
+	 * top efficiency pick (passing the best-item target id so per-item
+	 * overrides activate without requiring a user right-click).
+	 */
+	public void handleSequenceComplete()
+	{
+		if (onSequenceCompleteFlags != null)
+		{
+			onSequenceCompleteFlags.run();
+		}
+		if (!config.autoAdvanceGuidance())
+		{
+			return;
+		}
+		if (rankedSourcesSupplier == null || activateGuidanceCallback == null)
+		{
+			return;
+		}
+		List<ScoredItem> ranked = rankedSourcesSupplier.get();
+		if (ranked == null)
+		{
+			return;
+		}
+		ranked.stream()
+			.filter(s -> !s.isLocked())
+			.findFirst()
+			.ifPresent(topPick ->
+			{
+				Integer targetItemId = topPick.getBestItem() != null
+					? topPick.getBestItem().getItemId()
+					: null;
+				activateGuidanceCallback.accept(topPick.getSource(), targetItemId);
+			});
+	}
+
+	/**
+	 * Rebuilds and returns the set of source names that have at least one
+	 * unobtained item. The plugin assigns the result to its own
+	 * {@code sourcesWithMissingItems} field so the lifecycle reset in
+	 * {@code shutDown} retains its clear semantics.
+	 */
+	public Set<String> rebuildSourcesWithMissingItems()
+	{
+		return guidance.getGuidanceCoordinator().rebuildSourcesWithMissingItems(
+			data.getDatabase(), data.getCollectionState());
+	}
+
+	/**
+	 * Writes the efficiency export file when
+	 * {@link CollectionLogHelperConfig#exportEfficiencyLog()} is enabled.
+	 * No-op when the config is disabled. Falls back to the global RuneLite
+	 * directory if the per-character data manager has not resolved a player
+	 * name yet (login race condition).
+	 */
+	public void exportEfficiencyIfEnabled()
+	{
+		if (!config.exportEfficiencyLog())
+		{
+			return;
+		}
+		File exportFile = data.getPluginDataManager().getFile("efficiency-export.txt");
+		if (exportFile == null)
+		{
+			// Fallback if player name not yet available
+			exportFile = new File(
+				RuneLite.RUNELITE_DIR, "collection-log-efficiency-export.txt");
+		}
+		efficiency.getCalculator().exportEfficiencyList(exportFile, client);
+	}
+}

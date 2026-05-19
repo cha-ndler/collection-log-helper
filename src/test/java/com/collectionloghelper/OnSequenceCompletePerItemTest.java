@@ -27,15 +27,14 @@ package com.collectionloghelper;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.di.DataModule;
 import com.collectionloghelper.di.EfficiencyModule;
 import com.collectionloghelper.di.GuidanceModule;
-import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import com.collectionloghelper.efficiency.ScoredItem;
-import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
-import com.collectionloghelper.lifecycle.PlayerLocationResolver;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import com.collectionloghelper.lifecycle.CollectionStateChangeHandler;
 import java.util.Collections;
+import java.util.List;
+import java.util.function.BiConsumer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,22 +43,26 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests for B4.4: {@code onSequenceComplete()} must pass the best-item target ID
- * from the top-ranked {@link ScoredItem} to
- * {@link CollectionLogHelperPlugin#activateGuidance(CollectionLogSource, Integer)}
+ * Tests for B4.4: {@code handleSequenceComplete()} must pass the best-item
+ * target ID from the top-ranked {@link ScoredItem} to the wired
+ * {@code activateGuidance} callback (which in production is
+ * {@link CollectionLogHelperPlugin#activateGuidance(CollectionLogSource, Integer)})
  * when auto-advancing guidance after a sequence completes.
  *
  * <p>This ensures per-item overrides ({@code perItemRequiredItemIds},
  * {@code perItemStepDescription}, {@code perItemNpcId}) activate automatically
  * without the user right-clicking on a specific item.
+ *
+ * <p>Wave 13 of #503 moved {@code onSequenceComplete} from
+ * {@link CollectionLogHelperPlugin} into
+ * {@link CollectionStateChangeHandler}, so these tests now drive the handler
+ * directly via its callback wiring.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class OnSequenceCompletePerItemTest
@@ -67,107 +70,80 @@ public class OnSequenceCompletePerItemTest
 	private static final int BEST_ITEM_ID = 1234;
 
 	@Mock
-	private net.runelite.client.callback.ClientThread clientThread;
-
-	@Mock
-	private GuidanceOverlayCoordinator guidanceCoordinator;
+	private net.runelite.api.Client client;
 
 	@Mock
 	private CollectionLogHelperConfig config;
 
 	@Mock
-	private EfficiencyCalculator calculator;
+	private DataModule dataModule;
 
 	@Mock
-	private PlayerLocationResolver playerLocationResolver;
+	private EfficiencyModule efficiencyModule;
 
-	private CollectionLogHelperPlugin plugin;
+	@Mock
+	private GuidanceModule guidanceModule;
+
+	@Mock
+	@SuppressWarnings("unchecked")
+	private BiConsumer<CollectionLogSource, Integer> activateGuidanceCallback;
+
+	private CollectionStateChangeHandler handler;
+	private List<ScoredItem> rankedSources;
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
-		plugin = new CollectionLogHelperPlugin();
-		injectField("clientThread", clientThread);
-		GuidanceModule guidanceModule = new GuidanceModule(
-			null, guidanceCoordinator, null, null, null, null, null, null);
-		injectField("guidance", guidanceModule);
-		injectField("config", config);
-		EfficiencyModule efficiencyModule = new EfficiencyModule(
-			calculator, null, null, null, null);
-		injectField("efficiency", efficiencyModule);
-		injectField("playerLocationResolver", playerLocationResolver);
-
-		// Make clientThread.invokeLater execute the runnable immediately so
-		// coordinator.activateGuidance is reachable within the same test call.
-		doAnswer(inv ->
-		{
-			Runnable r = inv.getArgument(0);
-			r.run();
-			return null;
-		}).when(clientThread).invokeLater(any(Runnable.class));
-
+		handler = new CollectionStateChangeHandler(
+			client, config, dataModule, efficiencyModule, guidanceModule);
+		rankedSources = Collections.emptyList();
+		handler.setCallbacks(
+			() -> { /* flag toggle no-op for this test */ },
+			() -> rankedSources,
+			activateGuidanceCallback);
 		when(config.autoAdvanceGuidance()).thenReturn(true);
 	}
 
 	/**
 	 * When the top-ranked {@code ScoredItem} has a non-null {@code bestItem},
-	 * {@code onSequenceComplete} must call
-	 * {@code coordinator.activateGuidance(source, location, bestItem.getItemId())}.
+	 * {@code handleSequenceComplete} must call
+	 * {@code activateGuidanceCallback.accept(source, bestItem.getItemId())}.
 	 */
 	@Test
-	public void onSequenceComplete_withBestItem_passesBestItemIdToCoordinator() throws Exception
+	public void onSequenceComplete_withBestItem_passesBestItemIdToCallback()
 	{
 		CollectionLogSource source = minimalSource("Test Source");
 		CollectionLogItem bestItem = new CollectionLogItem(
 			BEST_ITEM_ID, "Test Item", 1.0 / 128, false, null, 0, 0, false, false);
 		ScoredItem topPick = new ScoredItem(source, 100.0, 1, "Best", false, 100.0, bestItem, 100.0);
+		rankedSources = Collections.singletonList(topPick);
 
-		when(calculator.rankByEfficiency()).thenReturn(Collections.singletonList(topPick));
-
-		invokeOnSequenceComplete();
+		handler.handleSequenceComplete();
 
 		ArgumentCaptor<Integer> itemIdCaptor = ArgumentCaptor.forClass(Integer.class);
-		verify(guidanceCoordinator).activateGuidance(eq(source), any(), itemIdCaptor.capture());
+		verify(activateGuidanceCallback).accept(eq(source), itemIdCaptor.capture());
 		assertEquals(BEST_ITEM_ID, (int) itemIdCaptor.getValue());
 	}
 
 	/**
 	 * When the top-ranked {@code ScoredItem} has {@code bestItem == null},
-	 * {@code onSequenceComplete} must call
-	 * {@code coordinator.activateGuidance(source, location, null)} and must not throw.
+	 * {@code handleSequenceComplete} must call
+	 * {@code activateGuidanceCallback.accept(source, null)} and must not throw.
 	 */
 	@Test
-	public void onSequenceComplete_withNullBestItem_passesNullTargetIdToCoordinator() throws Exception
+	public void onSequenceComplete_withNullBestItem_passesNullTargetIdToCallback()
 	{
 		CollectionLogSource source = minimalSource("Null Best Item Source");
 		// bestItem is null — pure-guaranteed source or no specific item identified
 		ScoredItem topPick = new ScoredItem(source, 50.0, 2, "Some reason", false, 50.0, null, 0.0);
+		rankedSources = Collections.singletonList(topPick);
 
-		when(calculator.rankByEfficiency()).thenReturn(Collections.singletonList(topPick));
+		handler.handleSequenceComplete();
 
-		invokeOnSequenceComplete();
-
-		verify(guidanceCoordinator).activateGuidance(eq(source), any(), isNull());
+		verify(activateGuidanceCallback).accept(eq(source), isNull());
 	}
 
 	// ── helpers ───────────────────────────────────────────────────────────────
-
-	/**
-	 * Invokes the private {@code onSequenceComplete()} method via reflection.
-	 */
-	private void invokeOnSequenceComplete() throws Exception
-	{
-		Method m = CollectionLogHelperPlugin.class.getDeclaredMethod("onSequenceComplete");
-		m.setAccessible(true);
-		m.invoke(plugin);
-	}
-
-	private void injectField(String fieldName, Object value) throws Exception
-	{
-		Field field = CollectionLogHelperPlugin.class.getDeclaredField(fieldName);
-		field.setAccessible(true);
-		field.set(plugin, value);
-	}
 
 	private static CollectionLogSource minimalSource(String name)
 	{
