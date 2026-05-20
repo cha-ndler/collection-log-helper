@@ -1,0 +1,20 @@
+{
+  "Mount Quidamortem": {
+    "worldX": 1233,
+    "worldY": 3573,
+    "worldPlane": 0,
+    "aliases": ["Chambers of Xeric", "Chambers", "Great Kourend raid"]
+  },
+  "Ver Sinhaza": {
+    "worldX": 3650,
+    "worldY": 3218,
+    "worldPlane": 0,
+    "aliases": ["Theatre of Blood", "Morytania theatre"]
+  },
+  "Necropolis": {
+    "worldX": 3234,
+    "worldY": 2784,
+    "worldPlane": 0,
+    "aliases": ["Tombs of Amascut", "Tombs", "Kharidian Desert tombs"]
+  }
+}
