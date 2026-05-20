@@ -1,0 +1,116 @@
+[
+  {
+    "name": "Chambers of Xeric",
+    "category": "RAIDS",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Chambers of Xeric",
+        "category": "RAIDS",
+        "check": "npc-id",
+        "field": "npcId+interactAction",
+        "current": "both missing",
+        "suggested": "set npcId + interactAction OR confirm 'instance lobby' style source",
+        "severity": "low",
+        "bucket": "flagged-research",
+        "note": "combat-style category but no npcId and no interactAction. May be intentional for raid lobbies but worth verifying."
+      }
+    ]
+  },
+  {
+    "name": "Chambers of Xeric (Challenge Mode)",
+    "category": "RAIDS",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Chambers of Xeric (Challenge Mode)",
+        "category": "RAIDS",
+        "check": "npc-id",
+        "field": "npcId+interactAction",
+        "current": "both missing",
+        "suggested": "set npcId + interactAction OR confirm 'instance lobby' style source",
+        "severity": "low",
+        "bucket": "flagged-research",
+        "note": "combat-style category but no npcId and no interactAction. May be intentional for raid lobbies but worth verifying."
+      }
+    ]
+  },
+  {
+    "name": "Theatre of Blood",
+    "category": "RAIDS",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Theatre of Blood",
+        "category": "RAIDS",
+        "check": "npc-id",
+        "field": "npcId+interactAction",
+        "current": "both missing",
+        "suggested": "set npcId + interactAction OR confirm 'instance lobby' style source",
+        "severity": "low",
+        "bucket": "flagged-research",
+        "note": "combat-style category but no npcId and no interactAction. May be intentional for raid lobbies but worth verifying."
+      }
+    ]
+  },
+  {
+    "name": "Theatre of Blood (Hard Mode)",
+    "category": "RAIDS",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Tombs of Amascut",
+    "category": "RAIDS",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Tombs of Amascut",
+        "category": "RAIDS",
+        "check": "npc-id",
+        "field": "npcId+interactAction",
+        "current": "both missing",
+        "suggested": "set npcId + interactAction OR confirm 'instance lobby' style source",
+        "severity": "low",
+        "bucket": "flagged-research",
+        "note": "combat-style category but no npcId and no interactAction. May be intentional for raid lobbies but worth verifying."
+      }
+    ]
+  },
+  {
+    "name": "Tombs of Amascut (300 Invocation)",
+    "category": "RAIDS",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Tombs of Amascut (300 Invocation)",
+        "category": "RAIDS",
+        "check": "npc-id",
+        "field": "npcId+interactAction",
+        "current": "both missing",
+        "suggested": "set npcId + interactAction OR confirm 'instance lobby' style source",
+        "severity": "low",
+        "bucket": "flagged-research",
+        "note": "combat-style category but no npcId and no interactAction. May be intentional for raid lobbies but worth verifying."
+      }
+    ]
+  },
+  {
+    "name": "Tombs of Amascut (500 Invocation)",
+    "category": "RAIDS",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Tombs of Amascut (500 Invocation)",
+        "category": "RAIDS",
+        "check": "npc-id",
+        "field": "npcId+interactAction",
+        "current": "both missing",
+        "suggested": "set npcId + interactAction OR confirm 'instance lobby' style source",
+        "severity": "low",
+        "bucket": "flagged-research",
+        "note": "combat-style category but no npcId and no interactAction. May be intentional for raid lobbies but worth verifying."
+      }
+    ]
+  }
+]
