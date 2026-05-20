@@ -104,11 +104,134 @@ ZONE_GROUPS: dict[str, list[str]] = {
     "karuulm": ["Mount Karuulm", "Karuulm", "Kebos Lowlands", "Kebos"],
     "slayer_tower": ["Slayer Tower"],
     "slayer_cave": ["Stronghold Slayer Cave"],
-    "zeah": ["Zeah"],
-    "asgarnia": ["Asgarnia"],
-    "misthalin": ["Misthalin"],
-    "karamja": ["Karamja"],
-    "tirannwn": ["Tirannwn"],
+    "zeah": [
+        "Zeah",
+        "Great Kourend",
+        "Hosidius",
+        "Shayzien",
+        "Lovakengj",
+        "Piscarilius",
+        "Arceuus",
+        "Kourend Castle",
+    ],
+    "asgarnia": [
+        "Asgarnia",
+        "Falador",
+        "Falador Park",
+        "Burthorpe",
+        "Taverley",
+        "Ice Mountain",
+        "Barbarian Village",
+        "Edgeville",
+        "Warriors' Guild",
+        "Warriors Guild",
+    ],
+    "misthalin": [
+        "Misthalin",
+        "Varrock",
+        "Lumbridge",
+        "Draynor Village",
+        "Champions' Guild",
+        "Champions Guild",
+        "Al Kharid",
+    ],
+    "karamja": [
+        "Karamja",
+        "Brimhaven",
+        "Shilo Village",
+        "Tai Bwo Wannai",
+        "Musa Point",
+        "Crandor",
+    ],
+    "tirannwn": [
+        "Tirannwn",
+        "Prifddinas",
+        "Lletya",
+        "Iorwerth",
+        "Isafdar",
+        "Tyras Camp",
+    ],
+    # Wilderness sub-locations -- same broad region as Wilderness, share zone
+    # group to avoid kraken-cascade false positives.
+    "wilderness_sub": [
+        "Revenant Caves",
+        "Pirates' Hideout",
+        "Pirates Hideout",
+        "Bandit Camp",
+        "Chaos Temple",
+        "Elder Chaos Temple",
+        "Lava Maze",
+        "Rogues' Castle",
+        "Rogues Castle",
+        "Fountain of Rune",
+    ],
+    # Kandarin / Seers' / Catherby / Camelot / Tree Gnome Stronghold cluster
+    "kandarin": [
+        "Kandarin",
+        "Seers' Village",
+        "Seers Village",
+        "Camelot",
+        "Catherby",
+        "Ardougne",
+        "Yanille",
+        "Tree Gnome Stronghold",
+        "Tree Gnome Village",
+        "Gnome Stronghold",
+        "Grand Tree",
+        "Baxtorian Falls",
+        "Ancient Cavern",
+    ],
+    # Feldip Hills and southern Kandarin / Yanille hunting areas
+    "feldip": [
+        "Feldip Hills",
+        "Feldip",
+        "Rantz",
+        "Oo'glog",
+        "Jiggig",
+    ],
+    # Kharidian Desert -- Pyramid Plunder / Sophanem / Jalsavrah / Smoke Dungeon
+    "kharidian": [
+        "Kharidian Desert",
+        "Sophanem",
+        "Jalsavrah",
+        "Pollnivneach",
+        "Nardah",
+        "Bedabin Camp",
+    ],
+    # Crash Site Cavern -- beneath Gnome Stronghold / Ape Atoll surface
+    "crash_site": [
+        "Crash Site Cavern",
+        "Crash Site",
+        "Ape Atoll",
+    ],
+    # Stronghold of Security -- beneath Barbarian Village in Asgarnia
+    "stronghold_security": [
+        "Stronghold of Security",
+        "Vault of War",
+        "Catacomb of Famine",
+        "Pit of Pestilence",
+        "Sepulchre of Death",
+    ],
+    # Fossil Island family
+    "fossil_island_family": [
+        "Fossil Island",
+        "House on the Hill",
+        "Museum Camp",
+    ],
+    # Lithkren -- isolated dragon vault zone
+    "lithkren": ["Lithkren", "Lithkren Vault"],
+    # Corsair Cove dungeon
+    "corsair": ["Corsair Cove", "Corsair Cove Dungeon"],
+    # Ardougne basement / Tower of Life
+    "tower_of_life": ["Tower of Life"],
+    # Zemouregal's Fort -- isolated zone so harness flags any cross-mention
+    # like "Shayzien Crypts" alongside "Zemouregal's Fort"
+    "zemouregal": ["Zemouregal's Fort", "Zemouregal Fort"],
+    # Camdozaal -- beneath Ice Mountain (shares asgarnia surface)
+    "camdozaal": [
+        "Ruins of Camdozaal",
+        "Camdozaal",
+    ],
     # Varlamore / post-Sailing zones (extension to close the gap surfaced in
     # #566/#567 -- harness was previously blind to kraken-cascade mismatches
     # across Civitas illa Fortis, Auburnvale, Quetzacalli Gorge, etc.).
@@ -253,6 +376,7 @@ RELATIVE_PREPOSITIONS = (
     "near ",
     "outside ",
     "below ",
+    "beneath ",
     "above ",
     "next to ",
 )
