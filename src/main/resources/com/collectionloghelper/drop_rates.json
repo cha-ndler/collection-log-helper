@@ -15993,8 +15993,8 @@
   {
     "name": "My Notes",
     "category": "OTHER",
-    "worldX": 2520,
-    "worldY": 3571,
+    "worldX": 1745,
+    "worldY": 5323,
     "worldPlane": 0,
     "killTimeSeconds": 10,
     "afkLevel": 2,
@@ -16207,8 +16207,8 @@
       },
       {
         "description": "Kill mithril dragons in the Ancient Cavern for ancient page drops.",
-        "worldX": 2520,
-        "worldY": 3571,
+        "worldX": 1745,
+        "worldY": 5323,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
@@ -26668,7 +26668,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Armoured Zombies in the Shayzien Crypts",
+        "description": "Kill Armoured Zombies at Zemouregal's Fort",
         "worldX": 3566,
         "worldY": 3390,
         "worldPlane": 0,
