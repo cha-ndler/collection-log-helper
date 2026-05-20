@@ -399,5 +399,143 @@
       "Prifddinas Iorwerth Dungeon",
       "Dark Beast lair"
     ]
+  },
+  "Tempoross Cove": {
+    "worldX": 3135,
+    "worldY": 2840,
+    "worldPlane": 0,
+    "aliases": ["Ruins of Unkah", "Crondis Island", "Tempoross arena"]
+  },
+  "Wintertodt Camp": {
+    "worldX": 1621,
+    "worldY": 3997,
+    "worldPlane": 0,
+    "aliases": ["Wintertodt", "Wintertodt arena", "Doors of Dinh"]
+  },
+  "Hallowed Sepulchre": {
+    "worldX": 3654,
+    "worldY": 3388,
+    "worldPlane": 0,
+    "aliases": ["Hallowed Sepulchre entrance", "Mausoleum Door", "Darkmeyer Sepulchre"]
+  },
+  "Temple of the Eye": {
+    "worldX": 3109,
+    "worldY": 3168,
+    "worldPlane": 0,
+    "aliases": ["Guardians of the Rift", "GotR arena", "Temple of the Eye lobby", "Abyssal Space"]
+  },
+  "Brimhaven Agility Arena": {
+    "worldX": 2809,
+    "worldY": 3194,
+    "worldPlane": 0,
+    "aliases": ["Brimhaven Arena", "Brimhaven Agility"]
+  },
+  "Giants' Foundry": {
+    "worldX": 3360,
+    "worldY": 3151,
+    "worldPlane": 0,
+    "aliases": ["Giant's Foundry", "Kovac foundry", "Varrock Foundry"]
+  },
+  "Void Knights' Outpost": {
+    "worldX": 2659,
+    "worldY": 2676,
+    "worldPlane": 0,
+    "aliases": ["Pest Control", "Void Knight Outpost", "Pest Control lander"]
+  },
+  "Mage Training Arena": {
+    "worldX": 3363,
+    "worldY": 3316,
+    "worldPlane": 0,
+    "aliases": ["MTA", "Mage Arena training", "Pizazz hall"]
+  },
+  "Mort'ton": {
+    "worldX": 3490,
+    "worldY": 3290,
+    "worldPlane": 0,
+    "aliases": ["Shades of Mort'ton", "Mort'ton temple", "Shade Catacombs", "Mortton"]
+  },
+  "Aldarin": {
+    "worldX": 1390,
+    "worldY": 2950,
+    "worldPlane": 0,
+    "aliases": ["Mastering Mixology", "Mixology lab", "Aldarin Mixology"]
+  },
+  "Volcanic Mine": {
+    "worldX": 3815,
+    "worldY": 3807,
+    "worldPlane": 0,
+    "aliases": ["Fossil Island volcano", "Volcanic Mine entrance"]
+  },
+  "Tithe Farm": {
+    "worldX": 1791,
+    "worldY": 3504,
+    "worldPlane": 0,
+    "aliases": ["Tithe Farm Hosidius", "Hosidius Tithe", "Golovanova field"]
+  },
+  "Tree Gnome Stronghold (restaurant)": {
+    "worldX": 2436,
+    "worldY": 3500,
+    "worldPlane": 0,
+    "aliases": ["Gianne's restaurant", "Grand Tree restaurant", "Gnome Restaurant"]
+  },
+  "Port Khazard": {
+    "worldX": 2661,
+    "worldY": 3164,
+    "worldPlane": 0,
+    "aliases": ["Fishing Trawler", "Khazard port", "Murphy trawler"]
+  },
+  "Burgh de Rott": {
+    "worldX": 3479,
+    "worldY": 3241,
+    "worldPlane": 0,
+    "aliases": ["Burgh de Rott Ramble", "Temple Trekking start", "Temple Trekking", "Paterdomus trek"]
+  },
+  "Rogues' Den": {
+    "worldX": 2907,
+    "worldY": 3537,
+    "worldPlane": 0,
+    "aliases": ["Rogues Den", "Burthorpe pub", "Toad and Chicken pub", "Rogue equipment maze"]
+  },
+  "Castle Wars": {
+    "worldX": 2440,
+    "worldY": 3089,
+    "worldPlane": 0,
+    "aliases": ["Castle Wars arena", "Lanthus arena", "Yanille Castle Wars"]
+  },
+  "Isle of Souls": {
+    "worldX": 2210,
+    "worldY": 2858,
+    "worldPlane": 0,
+    "aliases": ["Soul Wars", "Soul Wars lobby", "Nomad's island"]
+  },
+  "Ferox Enclave": {
+    "worldX": 3151,
+    "worldY": 3634,
+    "worldPlane": 0,
+    "aliases": ["Last Man Standing", "LMS Ferox", "Wilderness Resource Area entrance"]
+  },
+  "Auburnvale": {
+    "worldX": 1452,
+    "worldY": 3128,
+    "worldPlane": 0,
+    "aliases": ["Vale Totems", "Auburn Vale", "Auburn Valley", "Auburnvale totem"]
+  },
+  "Mos Le'Harmless": {
+    "worldX": 3812,
+    "worldY": 3021,
+    "worldPlane": 0,
+    "aliases": ["Trouble Brewing", "Cairn Isle", "Harmless Peninsula", "Mos Le Harmless brewery"]
+  },
+  "Mos Le'Harmless Cave": {
+    "worldX": 3740,
+    "worldY": 9373,
+    "worldPlane": 0,
+    "aliases": ["Cave Horror lair", "Mos Le'Harmless Caves"]
+  },
+  "Barbarian Outpost": {
+    "worldX": 2519,
+    "worldY": 3571,
+    "worldPlane": 0,
+    "aliases": ["Barbarian Assault", "Commander Connad outpost", "BA outpost"]
   }
 }
