@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Beginner Treasure Trails",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Scroll Cases",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Easy Treasure Trails",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Medium Treasure Trails",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Hard Treasure Trails",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Elite Treasure Trails",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Master Treasure Trails",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Hard Treasure Trail Rewards (Rare)",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Elite Treasure Trail Rewards (Rare)",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Master Treasure Trail Rewards (Rare)",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Shared Treasure Trail Rewards",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "The Mimic",
+    "category": "CLUES",
+    "bucket": "verified",
+    "findings": []
+  }
+]
