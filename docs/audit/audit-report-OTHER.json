@@ -1,0 +1,350 @@
+[
+  {
+    "name": "Revenants",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Brimstone Chest",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Larran's Big Chest",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Zombie Pirate Locker",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Boat Paints",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Champion's Challenge",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Chompy Bird Hunting",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Forestry",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Fossil Island Notes",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Glough's Experiments",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Hunter Guild",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Lost Schematics",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Monkey Backpacks",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "My Notes",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Ocean Encounters",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Sailing Misc",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Sea Treasures",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Pyramid Plunder",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Stronghold of Security",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Catacombs of Kourend",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Wilderness God Wars Dungeon",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Elven Crystal Chest",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Miscellaneous",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Random Events",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Camdozaal",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "TzHaar",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Cyclopes",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Elder Chaos Druids",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Shayzien Armour",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Creature Creation (Newtroost)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Creature Creation (Unicow)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Creature Creation (Spidine)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Creature Creation (Swordchick)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Creature Creation (Jubster)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Creature Creation (Frogeel)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Stingray (Boat Combat)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Albatross (Boat Combat)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Narwhal (Boat Combat)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Orcas (Boat Combat)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Great White Shark (Boat Combat)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Vampyre Kraken (Boat Combat)",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Small Salvage",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Fishy Salvage",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Barracuda Salvage",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Large Salvage",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Plundered Salvage",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Martial Salvage",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Fremennik Salvage",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Opulent Salvage",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Mithril Dragon",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Adamant Dragon",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Rune Dragon",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Ogress Shaman",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Armoured Zombie",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Prifddinas Elf",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Fountain of Rune",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Waterfiend",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Port Tasks",
+    "category": "OTHER",
+    "bucket": "verified",
+    "findings": []
+  }
+]
