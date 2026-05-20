@@ -98,6 +98,29 @@ ZONE_GROUPS: dict[str, list[str]] = {
     "misthalin": ["Misthalin"],
     "karamja": ["Karamja"],
     "tirannwn": ["Tirannwn"],
+    # Varlamore / post-Sailing zones (extension to close the gap surfaced in
+    # #566/#567 -- harness was previously blind to kraken-cascade mismatches
+    # across Civitas illa Fortis, Auburnvale, Quetzacalli Gorge, etc.).
+    "varlamore": [
+        "Varlamore",
+        "Civitas illa Fortis",
+        "Civitas",
+        "Hunter Guild",
+        "Auburnvale",
+        "Avium Savannah",
+        "Quetzacalli Gorge",
+        "Aldarin",
+        "Ralos Rise",
+        "Tonali",
+        "Vale Totems",
+    ],
+    # Misc minigame / post-2020 minigame zones not previously modelled.
+    "mos_lemarmless": ["Mos Le'Harmless", "Braindeath Island", "Cairn Isle"],
+    "isle_of_souls": ["Isle of Souls", "Soul Wars"],
+    "ferox": ["Ferox Enclave"],
+    "fossil_island": ["Fossil Island", "Volcanic Mine"],
+    "mort_morytania": ["Mort'ton", "Burgh de Rott", "Paterdomus", "Darkmeyer"],
+    "void_outpost": ["Void Knights' Outpost", "Pest Control"],
 }
 
 # Flat list, derived from ZONE_GROUPS.
