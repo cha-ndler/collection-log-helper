@@ -13854,11 +13854,11 @@
         "wikiPage": "Greenman_mask"
       }
     ],
-    "locationDescription": "Auburn Valley, north-west Varlamore",
+    "locationDescription": "Auburnvale, north-west Varlamore",
     "travelTip": "Quetzal whistle -> Varlamore",
     "guidanceSteps": [
       {
-        "description": "Travel to Auburn Valley, north-west Varlamore.",
+        "description": "Travel to Auburnvale, north-west Varlamore.",
         "worldX": 1452,
         "worldY": 3128,
         "worldPlane": 0,
@@ -13866,7 +13866,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Participate in Vale Totems events in Auburn Valley for unique rewards.",
+        "description": "Participate in Vale Totems events in Auburnvale for unique rewards.",
         "worldX": 1452,
         "worldY": 3128,
         "worldPlane": 0,
@@ -14193,7 +14193,7 @@
         "completionChatPattern": null
       },
       {
-        "description": "Play Trouble Brewing on Braindeath Island. Brew 'rum' by collecting ingredients and operating the distillery. Earn Pieces of Eight",
+        "description": "Play Trouble Brewing on Mos Le'Harmless. Brew 'rum' by collecting ingredients and operating the distillery. Earn Pieces of Eight",
         "worldX": 3810,
         "worldY": 3021,
         "worldPlane": 0,
