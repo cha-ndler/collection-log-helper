@@ -25070,8 +25070,8 @@
   {
     "name": "Underwater Crabs",
     "category": "SKILLING",
-    "worldX": 2987,
-    "worldY": 3033,
+    "worldX": 2978,
+    "worldY": 9181,
     "worldPlane": 0,
     "killTimeSeconds": 9,
     "requirements": {
