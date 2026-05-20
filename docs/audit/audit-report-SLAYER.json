@@ -1,0 +1,320 @@
+[
+  {
+    "name": "Demonic gorillas",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Lizardman shaman",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Tormented Demons",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Crawling Hand",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Cave Crawler",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Rockslug",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Cockatrice",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Pyrefiend",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Mogre",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Basilisk",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Terror Dog",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Infernal Mage",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Brine Rat",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Frost Nagua",
+    "category": "SLAYER",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Frost Nagua",
+        "category": "SLAYER",
+        "check": "coord",
+        "field": "worldX/worldY",
+        "current": "(1693, 3232)",
+        "suggested": "~(1362, 4511) [Ruins of Tapoyauik]",
+        "severity": "high",
+        "bucket": "flagged-research",
+        "note": "coords are 1610 tiles from canonical Ruins of Tapoyauik; tolerance is 50. Could be intentional (e.g. lobby vs. entrance) but verify against the Wiki."
+      }
+    ]
+  },
+  {
+    "name": "Sulphur Nagua",
+    "category": "SLAYER",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Sulphur Nagua",
+        "category": "SLAYER",
+        "check": "coord",
+        "field": "worldX/worldY",
+        "current": "(1440, 9602)",
+        "suggested": "~(1435, 3131) [Cam Torum]",
+        "severity": "high",
+        "bucket": "flagged-research",
+        "note": "coords are 6476 tiles from canonical Cam Torum; tolerance is 50. Could be intentional (e.g. lobby vs. entrance) but verify against the Wiki."
+      }
+    ]
+  },
+  {
+    "name": "Earthen Nagua",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Bloodveld",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Gryphon",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Jelly",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Turoth",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Warped Creature",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Cave Horror",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Aberrant Spectre",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Basilisk Knight",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Wyrm",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Lava Strykewyrm",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Dust Devil",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Fossil Island Wyvern",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Kurask",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Skeletal Wyvern",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Gargoyle",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Custodian Stalker",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Aquanite",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Nechryael",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Spiritual Mage",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Spiritual Mage (Zarosian)",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Drake",
+    "category": "SLAYER",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Drake",
+        "category": "SLAYER",
+        "check": "coord",
+        "field": "worldX/worldY",
+        "current": "(1310, 10057)",
+        "suggested": "~(1311, 10170) [Karuulm Slayer Dungeon]",
+        "severity": "high",
+        "bucket": "flagged-research",
+        "note": "coords are 114 tiles from canonical Karuulm Slayer Dungeon; tolerance is 50. Could be intentional (e.g. lobby vs. entrance) but verify against the Wiki."
+      }
+    ]
+  },
+  {
+    "name": "Abyssal Demon",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Cave Kraken",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Dark Beast",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Araxyte",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Smoke Devil",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Hydra",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Vyrewatch Sentinel",
+    "category": "SLAYER",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Superior Slayer Monster",
+    "category": "SLAYER",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Superior Slayer Monster",
+        "category": "SLAYER",
+        "check": "npc-id",
+        "field": "npcId+interactAction",
+        "current": "both missing",
+        "suggested": "set npcId + interactAction OR confirm 'instance lobby' style source",
+        "severity": "low",
+        "bucket": "flagged-research",
+        "note": "combat-style category but no npcId and no interactAction. May be intentional for raid lobbies but worth verifying."
+      }
+    ]
+  }
+]
