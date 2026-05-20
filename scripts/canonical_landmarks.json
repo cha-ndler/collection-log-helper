@@ -24,10 +24,16 @@
     "aliases": ["Varrock Grand Exchange", "clue reward hub"]
   },
   "God Wars Dungeon": {
+    "worldX": 2871,
+    "worldY": 5280,
+    "worldPlane": 2,
+    "aliases": ["GWD", "Saradomin Encampment", "Bandos Stronghold", "Armadyl Eyrie", "Zamorak Fortress", "Spiritual Mage area"]
+  },
+  "God Wars Dungeon entrance": {
     "worldX": 2918,
     "worldY": 3745,
     "worldPlane": 0,
-    "aliases": ["GWD", "God Wars Dungeon entrance", "Trollheim GWD"]
+    "aliases": ["GWD entrance", "Trollheim GWD", "Troll Stronghold GWD"]
   },
   "Taverley Dungeon": {
     "worldX": 2883,
@@ -39,7 +45,7 @@
     "worldX": 1308,
     "worldY": 3807,
     "worldPlane": 0,
-    "aliases": ["Karuulm Slayer Dungeon", "Mount Karuulm Slayer Dungeon"]
+    "aliases": ["Mount Karuulm surface", "Karuulm volcano"]
   },
   "Kalphite Lair": {
     "worldX": 3226,
@@ -123,7 +129,7 @@
     "worldX": 2404,
     "worldY": 3060,
     "worldPlane": 0,
-    "aliases": ["Smoke Dungeon", "Thermonuclear smoke devil lair"]
+    "aliases": ["Thermonuclear smoke devil lair", "Castle Wars Smoke Devil Dungeon"]
   },
   "Abyssal Nexus": {
     "worldX": 3039,
@@ -304,5 +310,94 @@
     "worldY": 9867,
     "worldPlane": 0,
     "aliases": ["Varrock Sewers Scurrius"]
+  },
+  "Karuulm Slayer Dungeon": {
+    "worldX": 1311,
+    "worldY": 10170,
+    "worldPlane": 0,
+    "aliases": [
+      "Karuulm Slayer Dungeon lower level",
+      "Karuulm Dungeon",
+      "Wyrm chamber",
+      "Drake chamber",
+      "Hydra chamber"
+    ]
+  },
+  "Smoke Dungeon": {
+    "worldX": 3310,
+    "worldY": 9404,
+    "worldPlane": 0,
+    "aliases": [
+      "Smoke Dungeon Kharidian",
+      "Kharidian Smoke Dungeon",
+      "Pollnivneach Smoke Dungeon"
+    ]
+  },
+  "God Wars Dungeon Ancient Prison": {
+    "worldX": 2904,
+    "worldY": 5203,
+    "worldPlane": 0,
+    "aliases": [
+      "Nex Ancient Prison",
+      "Zaros Encampment",
+      "Frozen Door",
+      "God Wars Dungeon, Ancient Prison"
+    ]
+  },
+  "Stronghold Slayer Cave": {
+    "worldX": 2432,
+    "worldY": 3422,
+    "worldPlane": 0,
+    "aliases": [
+      "Tree Gnome Stronghold Slayer Cave",
+      "Gnome Stronghold Slayer Cave"
+    ]
+  },
+  "Neypotzli": {
+    "worldX": 1440,
+    "worldY": 9602,
+    "worldPlane": 0,
+    "aliases": [
+      "Neypotzli volcanic caves",
+      "Sulphur Nagua cave",
+      "Neypotzli, Cam Torum"
+    ]
+  },
+  "Tonali Cavern": {
+    "worldX": 1309,
+    "worldY": 3104,
+    "worldPlane": 0,
+    "aliases": [
+      "Earthen Nagua cave",
+      "Tonali"
+    ]
+  },
+  "Stalker Den": {
+    "worldX": 1301,
+    "worldY": 9820,
+    "worldPlane": 0,
+    "aliases": [
+      "Custodia Pass Stalker Den",
+      "Custodian Stalker den"
+    ]
+  },
+  "Ynysdail Cavern": {
+    "worldX": 2275,
+    "worldY": 9880,
+    "worldPlane": 0,
+    "aliases": [
+      "Ynysdail Aquanite cave",
+      "Baxtorian Aquanite cave"
+    ]
+  },
+  "Iorwerth Dungeon": {
+    "worldX": 1920,
+    "worldY": 4672,
+    "worldPlane": 0,
+    "aliases": [
+      "Mourner Tunnels",
+      "Prifddinas Iorwerth Dungeon",
+      "Dark Beast lair"
+    ]
   }
 }
