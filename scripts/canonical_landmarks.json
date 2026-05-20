@@ -419,8 +419,8 @@
     "aliases": ["Hallowed Sepulchre entrance", "Mausoleum Door", "Darkmeyer Sepulchre"]
   },
   "Temple of the Eye": {
-    "worldX": 3613,
-    "worldY": 9483,
+    "worldX": 3109,
+    "worldY": 3168,
     "worldPlane": 0,
     "aliases": ["Guardians of the Rift", "GotR arena", "Temple of the Eye lobby", "Abyssal Space"]
   },
@@ -472,11 +472,11 @@
     "worldPlane": 0,
     "aliases": ["Tithe Farm Hosidius", "Hosidius Tithe", "Golovanova field"]
   },
-  "Tree Gnome Stronghold": {
+  "Tree Gnome Stronghold (restaurant)": {
     "worldX": 2436,
     "worldY": 3500,
     "worldPlane": 0,
-    "aliases": ["Gnome Stronghold", "Gianne's restaurant", "Grand Tree restaurant", "Gnome Restaurant"]
+    "aliases": ["Gianne's restaurant", "Grand Tree restaurant", "Gnome Restaurant"]
   },
   "Port Khazard": {
     "worldX": 2661,
@@ -525,6 +525,12 @@
     "worldY": 3021,
     "worldPlane": 0,
     "aliases": ["Trouble Brewing", "Cairn Isle", "Harmless Peninsula", "Mos Le Harmless brewery"]
+  },
+  "Mos Le'Harmless Cave": {
+    "worldX": 3740,
+    "worldY": 9373,
+    "worldPlane": 0,
+    "aliases": ["Cave Horror lair", "Mos Le'Harmless Caves"]
   },
   "Barbarian Outpost": {
     "worldX": 2519,
