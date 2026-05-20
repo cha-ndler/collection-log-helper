@@ -275,11 +275,11 @@
     "worldPlane": 0,
     "aliases": ["TzHaar city", "Karamja Volcano", "Fight Caves", "Inferno arena"]
   },
-  "Tar Swamp": {
+  "Tar Swamp, Fossil Island": {
     "worldX": 3683,
     "worldY": 3706,
     "worldPlane": 0,
-    "aliases": ["Deranged Archaeologist lair", "Fossil Island Tar Swamp"]
+    "aliases": ["Tar Swamp", "Deranged Archaeologist lair", "Fossil Island Tar Swamp"]
   },
   "Zul-Andra": {
     "worldX": 2268,
@@ -551,10 +551,16 @@
     "aliases": ["Deep sea fishing shoals", "Deep Sea Fishing hub", "Deep sea fishing", "Tempoross hub"]
   },
   "Hunter Guild": {
+    "worldX": 1565,
+    "worldY": 3047,
+    "worldPlane": 0,
+    "aliases": ["Hunter Guild Varlamore", "Avium Savannah Hunter Guild", "Hunter Guild building"]
+  },
+  "Colossal Wyrm Agility Course": {
     "worldX": 1651,
     "worldY": 2931,
     "worldPlane": 0,
-    "aliases": ["Colossal Wyrm Agility Course", "Colossal Wyrm Course", "Hunter Guild Varlamore", "Avium Savannah Hunter Guild"]
+    "aliases": ["Colossal Wyrm Course", "Avium Savannah Agility Course"]
   },
   "Varrock rooftop course": {
     "worldX": 3214,
@@ -627,5 +633,344 @@
     "worldY": 3325,
     "worldPlane": 0,
     "aliases": ["Darkmeyer city", "Vyrewatch Sentinel area", "Drakan's medallion destination"]
+  },
+  "Revenant Caves": {
+    "worldX": 3073,
+    "worldY": 3654,
+    "worldPlane": 0,
+    "aliases": ["Revenant Caves Wilderness", "Rev Caves", "Revenants lair", "Revenant Caves entrance"]
+  },
+  "Pirates' Hideout": {
+    "worldX": 3041,
+    "worldY": 3950,
+    "worldPlane": 0,
+    "aliases": ["Pirates Hideout", "Wilderness Pirates' Hideout", "Larran's big chest hideout"]
+  },
+  "Bandit Camp Wilderness": {
+    "worldX": 3038,
+    "worldY": 3700,
+    "worldPlane": 0,
+    "aliases": ["Bandit Camp", "Wilderness Bandit Camp", "Burning amulet Bandit Camp"]
+  },
+  "Chaos Temple Wilderness": {
+    "worldX": 3236,
+    "worldY": 3608,
+    "worldPlane": 0,
+    "aliases": ["Chaos Temple", "Wilderness Chaos Temple"]
+  },
+  "Champions' Guild": {
+    "worldX": 3191,
+    "worldY": 3361,
+    "worldPlane": 0,
+    "aliases": ["Champions Guild", "Champion's Challenge", "Varrock Champions' Guild"]
+  },
+  "Feldip Hills": {
+    "worldX": 2387,
+    "worldY": 3040,
+    "worldPlane": 0,
+    "aliases": ["Feldip", "Rantz", "Chompy hunting grounds", "Feldip Hills south of Rantz"]
+  },
+  "Seers' Village": {
+    "worldX": 2725,
+    "worldY": 3490,
+    "worldPlane": 0,
+    "aliases": ["Seers Village", "Seers' Village oak", "Camelot Seers'"]
+  },
+  "House on the Hill": {
+    "worldX": 3774,
+    "worldY": 3819,
+    "worldPlane": 0,
+    "aliases": ["House on the Hill Fossil Island", "Fossil Island house"]
+  },
+  "Crash Site Cavern": {
+    "worldX": 2130,
+    "worldY": 5647,
+    "worldPlane": 0,
+    "aliases": [
+      "Glough's Experiments lair",
+      "Crash Site Cavern beneath Ape Atoll",
+      "Crash Site Cavern beneath Gnome Stronghold",
+      "Crash Site"
+    ]
+  },
+  "Jalsavrah": {
+    "worldX": 3288,
+    "worldY": 2801,
+    "worldPlane": 0,
+    "aliases": ["Jalsavrah Pyramid", "Pyramid Plunder", "Sophanem Pyramid", "Sophanem"]
+  },
+  "Stronghold of Security": {
+    "worldX": 1859,
+    "worldY": 5243,
+    "worldPlane": 0,
+    "aliases": [
+      "Stronghold of Security beneath Barbarian Village",
+      "Vault of War",
+      "Catacomb of Famine",
+      "Pit of Pestilence",
+      "Sepulchre of Death"
+    ]
+  },
+  "Barbarian Village": {
+    "worldX": 3082,
+    "worldY": 3420,
+    "worldPlane": 0,
+    "aliases": ["Barbarian Village surface", "Stronghold of Security entrance"]
+  },
+  "Catacombs of Kourend underground": {
+    "worldX": 1664,
+    "worldY": 10050,
+    "worldPlane": 0,
+    "aliases": [
+      "Catacombs of Kourend beneath Kourend Castle",
+      "Catacombs interior",
+      "Skotizo arena"
+    ]
+  },
+  "Wilderness God Wars Dungeon entrance": {
+    "worldX": 3015,
+    "worldY": 3739,
+    "worldPlane": 0,
+    "aliases": [
+      "Wilderness GWD entrance",
+      "Wilderness God Wars Dungeon",
+      "Wildy GWD",
+      "God Wars Dungeon entrance in the Wilderness"
+    ]
+  },
+  "Prifddinas": {
+    "worldX": 3265,
+    "worldY": 6062,
+    "worldPlane": 0,
+    "aliases": [
+      "Prifddinas city",
+      "Elven Crystal Chest",
+      "Song of the Elves city",
+      "Iorwerth Camp Prifddinas"
+    ]
+  },
+  "Ice Mountain": {
+    "worldX": 3007,
+    "worldY": 3479,
+    "worldPlane": 0,
+    "aliases": ["Ice Mountain surface", "Edgeville Ice Mountain"]
+  },
+  "Ruins of Camdozaal": {
+    "worldX": 2957,
+    "worldY": 5774,
+    "worldPlane": 0,
+    "aliases": [
+      "Camdozaal",
+      "Below Ice Mountain",
+      "Camdozaal Ruins",
+      "Ruins of Camdozaal beneath Ice Mountain"
+    ]
+  },
+  "TzHaar City": {
+    "worldX": 2444,
+    "worldY": 5175,
+    "worldPlane": 0,
+    "aliases": [
+      "TzHaar City beneath the Karamja Volcano",
+      "TzHaar",
+      "Mor Ul Rek city",
+      "Karamja Volcano interior"
+    ]
+  },
+  "Warriors' Guild": {
+    "worldX": 2855,
+    "worldY": 3543,
+    "worldPlane": 0,
+    "aliases": [
+      "Warriors Guild",
+      "Burthorpe Warriors' Guild",
+      "Cyclopes room",
+      "Warrior guild defender"
+    ]
+  },
+  "Burthorpe": {
+    "worldX": 2898,
+    "worldY": 3535,
+    "worldPlane": 0,
+    "aliases": ["Burthorpe town", "Burthorpe Games Room"]
+  },
+  "Elder Chaos Temple": {
+    "worldX": 3232,
+    "worldY": 3621,
+    "worldPlane": 0,
+    "aliases": [
+      "Elder Chaos Temple Wilderness",
+      "Elder Chaos Druids",
+      "Wilderness Elder Chaos"
+    ]
+  },
+  "Shayzien Combat Ring": {
+    "worldX": 1516,
+    "worldY": 3617,
+    "worldPlane": 0,
+    "aliases": [
+      "Shayzien Combat Ring Great Kourend",
+      "Shayzien Soldiers",
+      "Shayzien Armour ring"
+    ]
+  },
+  "Tower of Life": {
+    "worldX": 2639,
+    "worldY": 3218,
+    "worldPlane": 0,
+    "aliases": [
+      "Tower of Life basement",
+      "Tower of Life south of Ardougne",
+      "Creature Creation altar"
+    ]
+  },
+  "Ancient Cavern": {
+    "worldX": 1745,
+    "worldY": 5323,
+    "worldPlane": 0,
+    "aliases": [
+      "Ancient Cavern beneath the Baxtorian Falls",
+      "Ancient Cavern Baxtorian",
+      "Mithril Dragon lair",
+      "Waterfiend lair",
+      "Otto's Grotto whirlpool"
+    ]
+  },
+  "Baxtorian Falls": {
+    "worldX": 2519,
+    "worldY": 3503,
+    "worldPlane": 0,
+    "aliases": ["Baxtorian Falls surface", "Otto's Grotto", "Otto Godblessed grotto"]
+  },
+  "Lithkren Vault": {
+    "worldX": 1568,
+    "worldY": 5062,
+    "worldPlane": 0,
+    "aliases": [
+      "Lithkren",
+      "Lithkren Vault Digsite pendant",
+      "Lithkren adamant dragon vault",
+      "Lithkren rune dragon vault"
+    ]
+  },
+  "Corsair Cove Dungeon": {
+    "worldX": 2459,
+    "worldY": 9488,
+    "worldPlane": 2,
+    "aliases": [
+      "Corsair Cove",
+      "Ogress Shaman lair",
+      "Corsair Cove dungeon"
+    ]
+  },
+  "Zemouregal's Fort": {
+    "worldX": 3566,
+    "worldY": 3390,
+    "worldPlane": 0,
+    "aliases": [
+      "Zemouregal Fort",
+      "Zemouregal's Fort north of Varrock",
+      "Armoured Zombie fort"
+    ]
+  },
+  "Fountain of Rune": {
+    "worldX": 3380,
+    "worldY": 3893,
+    "worldPlane": 0,
+    "aliases": [
+      "Fountain of Rune deep Wilderness",
+      "Wilderness Fountain of Rune",
+      "Wilderness sword 4 teleport"
+    ]
+  },
+  "Varrock": {
+    "worldX": 3210,
+    "worldY": 3424,
+    "worldPlane": 0,
+    "aliases": ["Varrock city", "Varrock central", "Varrock square"]
+  },
+  "Varrock west bank": {
+    "worldX": 3186,
+    "worldY": 3437,
+    "worldPlane": 0,
+    "aliases": ["Varrock west", "Varrock west bank stalls"]
+  },
+  "Lumbridge": {
+    "worldX": 3222,
+    "worldY": 3218,
+    "worldPlane": 0,
+    "aliases": ["Lumbridge castle", "Lumbridge town", "Lumbridge centre", "Lumbridge market"]
+  },
+  "Edgeville": {
+    "worldX": 3087,
+    "worldY": 3493,
+    "worldPlane": 0,
+    "aliases": ["Edgeville bank", "Edgeville town"]
+  },
+  "Camelot": {
+    "worldX": 2757,
+    "worldY": 3478,
+    "worldPlane": 0,
+    "aliases": ["Camelot castle", "Camelot teleport landing"]
+  },
+  "Catherby": {
+    "worldX": 2807,
+    "worldY": 3434,
+    "worldPlane": 0,
+    "aliases": ["Catherby beach", "Catherby fishing", "Catherby surface"]
+  },
+  "Ardougne": {
+    "worldX": 2662,
+    "worldY": 3305,
+    "worldPlane": 0,
+    "aliases": ["East Ardougne", "Ardougne market", "Ardougne city"]
+  },
+  "Yanille": {
+    "worldX": 2607,
+    "worldY": 3092,
+    "worldPlane": 0,
+    "aliases": ["Yanille town", "Yanille bank"]
+  },
+  "Falador town centre": {
+    "worldX": 2965,
+    "worldY": 3380,
+    "worldPlane": 0,
+    "aliases": ["Falador centre", "Falador town", "Falador square"]
+  },
+  "Al Kharid": {
+    "worldX": 3293,
+    "worldY": 3184,
+    "worldPlane": 0,
+    "aliases": ["Al Kharid bank", "Al Kharid town"]
+  },
+  "Lletya": {
+    "worldX": 2351,
+    "worldY": 3163,
+    "worldPlane": 0,
+    "aliases": ["Lletya elf town", "Lletya village"]
+  },
+  "Tree Gnome Stronghold": {
+    "worldX": 2436,
+    "worldY": 3500,
+    "worldPlane": 0,
+    "aliases": ["Gnome Stronghold", "Spirit tree Stronghold", "Grand Tree", "Tree Gnome Village", "Tree Gnome Stronghold restaurant"]
+  },
+  "Lumbridge Swamp": {
+    "worldX": 3204,
+    "worldY": 3175,
+    "worldPlane": 0,
+    "aliases": ["Lumbridge swamp caves", "Swamp boys hut", "Lumbridge swamp surface"]
+  },
+  "Fossil Island": {
+    "worldX": 3736,
+    "worldY": 3805,
+    "worldPlane": 0,
+    "aliases": ["Fossil Island surface", "Museum Camp", "Mushroom forest", "Fossil Island northern"]
+  },
+  "Wyvern Cave, Fossil Island": {
+    "worldX": 3602,
+    "worldY": 10290,
+    "worldPlane": 0,
+    "aliases": ["Wyvern Cave", "Fossil Island Wyvern Cave", "Wyvern Cave Fossil Island", "Ancient Wyvern lair"]
   }
 }
