@@ -18,5 +18,4 @@ Thumbs.db
 .env
 .env.*
 local.properties
-*.log.claude/
-.claude/
+*.log
