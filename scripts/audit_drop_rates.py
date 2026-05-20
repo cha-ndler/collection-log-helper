@@ -38,6 +38,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
@@ -169,13 +170,25 @@ def load_landmarks(path: Path) -> dict[str, dict[str, Any]]:
 # ---------------------------------------------------------------------------
 
 
+def _word_boundary_search(needle: str, haystack_lower: str) -> int:
+    """Return the start index of needle in haystack_lower with word boundaries
+    on both sides, or -1 if not found.
+
+    A "word" character is [a-z0-9_]. The boundary check uses regex \\b so e.g.
+    `GE` does NOT match `dungeon` but `GWD` matches `Trollheim GWD`.
+    """
+    pattern = r"\b" + re.escape(needle.lower()) + r"\b"
+    m = re.search(pattern, haystack_lower)
+    return m.start() if m else -1
+
+
 def extract_region_tokens(text: str) -> set[str]:
     if not text:
         return set()
     found: set[str] = set()
     lower = text.lower()
     for token in REGION_TOKENS:
-        if token.lower() in lower:
+        if _word_boundary_search(token, lower) >= 0:
             found.add(token)
     return found
 
@@ -228,8 +241,7 @@ def match_landmark(
     for name, data in landmarks.items():
         names_to_check = [name] + list(data.get("aliases", []))
         for n in names_to_check:
-            n_lower = n.lower()
-            idx = lower.find(n_lower)
+            idx = _word_boundary_search(n, lower)
             if idx < 0:
                 continue
             # Check the text immediately preceding the landmark name.

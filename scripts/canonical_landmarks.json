@@ -21,6 +21,288 @@
     "worldX": 3165,
     "worldY": 3487,
     "worldPlane": 0,
-    "aliases": ["Varrock Grand Exchange", "GE", "clue reward hub"]
+    "aliases": ["Varrock Grand Exchange", "clue reward hub"]
+  },
+  "God Wars Dungeon": {
+    "worldX": 2918,
+    "worldY": 3745,
+    "worldPlane": 0,
+    "aliases": ["GWD", "God Wars Dungeon entrance", "Trollheim GWD"]
+  },
+  "Taverley Dungeon": {
+    "worldX": 2883,
+    "worldY": 3397,
+    "worldPlane": 0,
+    "aliases": ["Taverley Dungeon entrance", "Cerberus lair"]
+  },
+  "Mount Karuulm": {
+    "worldX": 1308,
+    "worldY": 3807,
+    "worldPlane": 0,
+    "aliases": ["Karuulm Slayer Dungeon", "Mount Karuulm Slayer Dungeon"]
+  },
+  "Kalphite Lair": {
+    "worldX": 3226,
+    "worldY": 3108,
+    "worldPlane": 0,
+    "aliases": ["Kalphite Lair entrance", "Kalphite Queen lair"]
+  },
+  "Ancient Prison": {
+    "worldX": 2846,
+    "worldY": 3938,
+    "worldPlane": 0,
+    "aliases": ["Ancient Prison entrance", "Phantom Muspah lair", "Ghorrock Prison"]
+  },
+  "The Scar": {
+    "worldX": 3104,
+    "worldY": 3162,
+    "worldPlane": 0,
+    "aliases": ["Temple of the Eye Scar", "Leviathan lair"]
+  },
+  "Lassar Undercity": {
+    "worldX": 3007,
+    "worldY": 3477,
+    "worldPlane": 0,
+    "aliases": ["Lassar Undercity entrance", "Whisperer lair"]
+  },
+  "The Stranglewood": {
+    "worldX": 1175,
+    "worldY": 3424,
+    "worldPlane": 0,
+    "aliases": ["Stranglewood", "Vardorvis lair"]
+  },
+  "Slayer Tower": {
+    "worldX": 3427,
+    "worldY": 3543,
+    "worldPlane": 0,
+    "aliases": ["Slayer Tower rooftop", "Canifis Slayer Tower"]
+  },
+  "Slepe": {
+    "worldX": 3728,
+    "worldY": 3302,
+    "worldPlane": 0,
+    "aliases": ["Nightmare lair", "Slepe Sisterhood Sanctuary"]
+  },
+  "Forthos Dungeon": {
+    "worldX": 1701,
+    "worldY": 3574,
+    "worldPlane": 0,
+    "aliases": ["Sarachnis lair", "Forthos"]
+  },
+  "Falador Park": {
+    "worldX": 2987,
+    "worldY": 3376,
+    "worldPlane": 0,
+    "aliases": ["Giant Mole lair", "Falador centre park"]
+  },
+  "Varrock Sewers": {
+    "worldX": 3174,
+    "worldY": 3435,
+    "worldPlane": 0,
+    "aliases": ["Varrock sewer", "Bryophyta lair"]
+  },
+  "Edgeville Dungeon": {
+    "worldX": 3097,
+    "worldY": 3468,
+    "worldPlane": 0,
+    "aliases": ["Hill Giant Dungeon", "Obor lair"]
+  },
+  "Waterbirth Island": {
+    "worldX": 2521,
+    "worldY": 3740,
+    "worldPlane": 0,
+    "aliases": ["Dagannoth lair", "Waterbirth Dungeon"]
+  },
+  "Kraken Cove": {
+    "worldX": 2277,
+    "worldY": 3611,
+    "worldPlane": 0,
+    "aliases": ["Piscatoris Kraken Cove", "Kraken lair"]
+  },
+  "Smoke Devil Dungeon": {
+    "worldX": 2404,
+    "worldY": 3060,
+    "worldPlane": 0,
+    "aliases": ["Smoke Dungeon", "Thermonuclear smoke devil lair"]
+  },
+  "Abyssal Nexus": {
+    "worldX": 3039,
+    "worldY": 4763,
+    "worldPlane": 0,
+    "aliases": ["Abyssal Sire lair", "Abyss Nexus"]
+  },
+  "King Black Dragon Lair": {
+    "worldX": 3005,
+    "worldY": 3849,
+    "worldPlane": 0,
+    "aliases": ["KBD lair", "KBD"]
+  },
+  "Rogues' Castle": {
+    "worldX": 3261,
+    "worldY": 3927,
+    "worldPlane": 0,
+    "aliases": ["Chaos Elemental lair", "Rogues Castle"]
+  },
+  "Scorpia's Cave": {
+    "worldX": 3231,
+    "worldY": 3936,
+    "worldPlane": 0,
+    "aliases": ["Scorpia lair"]
+  },
+  "Lava Maze": {
+    "worldX": 2979,
+    "worldY": 3846,
+    "worldPlane": 0,
+    "aliases": ["Chaos Fanatic lair", "Lava Maze ruins"]
+  },
+  "Silk Chasm": {
+    "worldX": 3321,
+    "worldY": 3794,
+    "worldPlane": 0,
+    "aliases": ["Venenatis lair", "Venenatis den"]
+  },
+  "Vet'ion's Rest": {
+    "worldX": 3220,
+    "worldY": 3783,
+    "worldPlane": 0,
+    "aliases": ["Vet'ion lair", "Vetion lair"]
+  },
+  "Callisto's Den": {
+    "worldX": 3291,
+    "worldY": 3849,
+    "worldPlane": 0,
+    "aliases": ["Callisto lair"]
+  },
+  "Catacombs of Kourend": {
+    "worldX": 1636,
+    "worldY": 3673,
+    "worldPlane": 0,
+    "aliases": ["Skotizo lair", "Kourend catacombs"]
+  },
+  "Farming Guild": {
+    "worldX": 1233,
+    "worldY": 3731,
+    "worldPlane": 0,
+    "aliases": ["Hespori lair", "Farming Guild Hosidius"]
+  },
+  "The Gauntlet": {
+    "worldX": 3230,
+    "worldY": 6073,
+    "worldPlane": 0,
+    "aliases": ["Gauntlet Prifddinas", "Corrupted Gauntlet"]
+  },
+  "Barrows": {
+    "worldX": 3565,
+    "worldY": 3298,
+    "worldPlane": 0,
+    "aliases": ["Barrows tombs", "Mort'ton Barrows"]
+  },
+  "Zalcano's Prison": {
+    "worldX": 3031,
+    "worldY": 6048,
+    "worldPlane": 0,
+    "aliases": ["Zalcano lair", "Zalcano Prifddinas"]
+  },
+  "Fortis Colosseum": {
+    "worldX": 1794,
+    "worldY": 3107,
+    "worldPlane": 0,
+    "aliases": ["Colosseum", "Sol Heredit arena"]
+  },
+  "Morytania Spider Cave": {
+    "worldX": 3686,
+    "worldY": 3426,
+    "worldPlane": 0,
+    "aliases": ["Araxxor lair", "Araxyte lair"]
+  },
+  "Cam Torum": {
+    "worldX": 1435,
+    "worldY": 3131,
+    "worldPlane": 0,
+    "aliases": ["Cam Torum entrance", "Perilous Moons", "Ralos Rise"]
+  },
+  "The Darkfrost": {
+    "worldX": 1509,
+    "worldY": 3290,
+    "worldPlane": 0,
+    "aliases": ["Hueycoatl lair", "Darkfrost", "Hailstorm Mountains"]
+  },
+  "Yama's Domain": {
+    "worldX": 1503,
+    "worldY": 10091,
+    "worldPlane": 0,
+    "aliases": ["Yama lair", "Chasm of Fire", "Shayzien Chasm of Fire"]
+  },
+  "Ruins of Mokhaiotl": {
+    "worldX": 1311,
+    "worldY": 9520,
+    "worldPlane": 0,
+    "aliases": ["Mokhaiotl ruins", "Tlati Rainforest ruins"]
+  },
+  "Asgarnian Ice Dungeon": {
+    "worldX": 3008,
+    "worldY": 3150,
+    "worldPlane": 0,
+    "aliases": ["Royal Titans lair", "Ice Dungeon Asgarnia"]
+  },
+  "Ruins of Tapoyauik": {
+    "worldX": 1362,
+    "worldY": 4511,
+    "worldPlane": 0,
+    "aliases": ["Tapoyauik", "Amoxliatl lair"]
+  },
+  "Lumbridge cow field": {
+    "worldX": 3263,
+    "worldY": 3297,
+    "worldPlane": 0,
+    "aliases": ["Brutus lair", "Lumbridge cows"]
+  },
+  "Shellbane Gryphon Cave": {
+    "worldX": 13993,
+    "worldY": 9901,
+    "worldPlane": 0,
+    "aliases": ["The Great Conch", "Shellbane lair"]
+  },
+  "Mor Ul Rek": {
+    "worldX": 2439,
+    "worldY": 5172,
+    "worldPlane": 0,
+    "aliases": ["TzHaar city", "Karamja Volcano", "Fight Caves", "Inferno arena"]
+  },
+  "Tar Swamp": {
+    "worldX": 3683,
+    "worldY": 3706,
+    "worldPlane": 0,
+    "aliases": ["Deranged Archaeologist lair", "Fossil Island Tar Swamp"]
+  },
+  "Zul-Andra": {
+    "worldX": 2268,
+    "worldY": 3069,
+    "worldPlane": 0,
+    "aliases": ["Zulrah lair", "Tirannwn Zul-Andra"]
+  },
+  "Ungael": {
+    "worldX": 2272,
+    "worldY": 4054,
+    "worldPlane": 0,
+    "aliases": ["Vorkath lair", "Ungael Island"]
+  },
+  "Corporeal Beast Cave": {
+    "worldX": 2966,
+    "worldY": 4382,
+    "worldPlane": 0,
+    "aliases": ["Corp cave", "Corporeal Beast lair"]
+  },
+  "Crazy archaeologist ruins": {
+    "worldX": 2975,
+    "worldY": 3696,
+    "worldPlane": 0,
+    "aliases": ["Crazy archaeologist lair"]
+  },
+  "Scurrius lair": {
+    "worldX": 3299,
+    "worldY": 9867,
+    "worldPlane": 0,
+    "aliases": ["Varrock Sewers Scurrius"]
   }
 }
