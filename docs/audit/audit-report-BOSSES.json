@@ -1,0 +1,392 @@
+[
+  {
+    "name": "General Graardor",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Commander Zilyana",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "K'ril Tsutsaroth",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Kree'arra",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Zulrah",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Vorkath",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Cerberus",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Alchemical Hydra",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Corporeal Beast",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Kalphite Queen",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Phantom Muspah",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Duke Sucellus",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "The Leviathan",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "The Whisperer",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Vardorvis",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Duke Sucellus (Awakened)",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "The Leviathan (Awakened)",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "The Whisperer (Awakened)",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Vardorvis (Awakened)",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Grotesque Guardians",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "The Nightmare",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Phosani's Nightmare",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Nex",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Sarachnis",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Giant Mole",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Bryophyta",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Obor",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Dagannoth Rex",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Dagannoth Prime",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Dagannoth Supreme",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Kraken",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Thermonuclear smoke devil",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Abyssal Sire",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "King Black Dragon",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Chaos Elemental",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Scorpia",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Chaos Fanatic",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Venenatis",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Vet'ion",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Callisto",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Skotizo",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Hespori",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Corrupted Gauntlet",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "The Gauntlet",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Barrows",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Zalcano",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Sol Heredit",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Crazy archaeologist",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Araxxor",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Perilous Moons",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "The Hueycoatl",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Yama",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Doom of Mokhaiotl",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Royal Titans",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Amoxliatl",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Brutus",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Shellbane Gryphon",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "Scurrius",
+    "category": "BOSSES",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "Scurrius",
+        "category": "BOSSES",
+        "check": "coord",
+        "field": "worldX/worldY",
+        "current": "(3299, 9867)",
+        "suggested": "~(3174, 3435) [Varrock Sewers]",
+        "severity": "high",
+        "bucket": "flagged-research",
+        "note": "coords are 6557 tiles from canonical Varrock Sewers; tolerance is 50. Could be intentional (e.g. lobby vs. entrance) but verify against the Wiki."
+      }
+    ]
+  },
+  {
+    "name": "The Fight Caves",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  },
+  {
+    "name": "The Inferno",
+    "category": "BOSSES",
+    "bucket": "flagged-research",
+    "findings": [
+      {
+        "source_name": "The Inferno",
+        "category": "BOSSES",
+        "check": "coord",
+        "field": "worldX/worldY",
+        "current": "(2496, 5122)",
+        "suggested": "~(2439, 5172) [Mor Ul Rek]",
+        "severity": "high",
+        "bucket": "flagged-research",
+        "note": "coords are 107 tiles from canonical Mor Ul Rek; tolerance is 50. Could be intentional (e.g. lobby vs. entrance) but verify against the Wiki."
+      }
+    ]
+  },
+  {
+    "name": "Deranged Archaeologist",
+    "category": "BOSSES",
+    "bucket": "verified",
+    "findings": []
+  }
+]
