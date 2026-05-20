@@ -537,5 +537,95 @@
     "worldY": 3571,
     "worldPlane": 0,
     "aliases": ["Barbarian Assault", "Commander Connad outpost", "BA outpost"]
+  },
+  "Lake Molch": {
+    "worldX": 1366,
+    "worldY": 3641,
+    "worldPlane": 0,
+    "aliases": ["Molch Island", "Aerial Fishing lake", "Molch lake", "Lake Molch on Molch Island"]
+  },
+  "Deep Sea Fishing hub": {
+    "worldX": 1565,
+    "worldY": 3420,
+    "worldPlane": 0,
+    "aliases": ["Deep sea fishing shoals", "Deep Sea Fishing hub", "Deep sea fishing", "Tempoross hub"]
+  },
+  "Hunter Guild": {
+    "worldX": 1651,
+    "worldY": 2931,
+    "worldPlane": 0,
+    "aliases": ["Colossal Wyrm Agility Course", "Colossal Wyrm Course", "Hunter Guild Varlamore", "Avium Savannah Hunter Guild"]
+  },
+  "Varrock rooftop course": {
+    "worldX": 3214,
+    "worldY": 3414,
+    "worldPlane": 0,
+    "aliases": ["Varrock Rooftop Course", "Rooftop Agility Courses", "Varrock agility", "Varrock central rooftop"]
+  },
+  "Motherlode Mine": {
+    "worldX": 3726,
+    "worldY": 5680,
+    "worldPlane": 0,
+    "aliases": ["Motherlode Mine beneath Falador", "Motherlode", "MLM", "Falador Motherlode Mine"]
+  },
+  "Draynor Village seed market": {
+    "worldX": 3084,
+    "worldY": 3251,
+    "worldPlane": 0,
+    "aliases": ["Draynor Village", "Draynor seed stalls", "Master Farmer stalls", "Draynor market"]
+  },
+  "Wilderness chinchompa area": {
+    "worldX": 3143,
+    "worldY": 3771,
+    "worldPlane": 0,
+    "aliases": ["Wilderness black chinchompa hunting area", "Wilderness chins", "Black chinchompa Wilderness"]
+  },
+  "Ape Atoll teak trees": {
+    "worldX": 2766,
+    "worldY": 2698,
+    "worldPlane": 0,
+    "aliases": ["Ape Atoll", "Ape Atoll teaks", "Ape Atoll teak grove", "Marim teaks"]
+  },
+  "Shilo Village underground mine": {
+    "worldX": 2842,
+    "worldY": 9381,
+    "worldPlane": 0,
+    "aliases": ["Shilo Village mine", "Shilo gem mine", "Shilo gemstone mine", "Karamja gem mine"]
+  },
+  "Fishing Guild": {
+    "worldX": 2599,
+    "worldY": 3420,
+    "worldPlane": 0,
+    "aliases": ["Fishing Guild dock", "Guildmaster Jane dock", "Kandarin Fishing Guild"]
+  },
+  "Fire altar": {
+    "worldX": 2583,
+    "worldY": 4838,
+    "worldPlane": 0,
+    "aliases": ["Fire Altar", "Fire altar ruins", "Fire rune altar"]
+  },
+  "Mogre Camp": {
+    "worldX": 2978,
+    "worldY": 9181,
+    "worldPlane": 0,
+    "aliases": ["Mogre Camp underwater", "Underwater Mogre Camp", "Port Khazard underwater"]
+  },
+  "Mudskipper Point": {
+    "worldX": 2989,
+    "worldY": 3112,
+    "worldPlane": 0,
+    "aliases": ["Mudskipper Point peninsula", "Asgarnia south coast", "AIQ fairy ring"]
+  },
+  "Prifddinas south-east corner": {
+    "worldX": 3267,
+    "worldY": 6082,
+    "worldPlane": 0,
+    "aliases": ["Prifddinas, south-east corner", "Prifddinas SE corner", "Prifddinas rabbit corner"]
+  },
+  "Darkmeyer": {
+    "worldX": 3625,
+    "worldY": 3325,
+    "worldPlane": 0,
+    "aliases": ["Darkmeyer city", "Vyrewatch Sentinel area", "Drakan's medallion destination"]
   }
 }
