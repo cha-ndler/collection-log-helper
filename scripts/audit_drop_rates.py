@@ -83,7 +83,18 @@ BUCKET_ERROR = "error"
 # says "Xeric's talisman -> Chambers" without repeating "Great Kourend").
 ZONE_GROUPS: dict[str, list[str]] = {
     "raid_cox": ["Mount Quidamortem", "Chambers of Xeric", "Great Kourend"],
-    "raid_tob": ["Ver Sinhaza", "Theatre of Blood", "Morytania"],
+    "raid_tob": [
+        "Ver Sinhaza",
+        "Theatre of Blood",
+        "Morytania",
+        # Morytania sub-locations -- same broad region as ToB, so they share a
+        # zone group to avoid kraken-cascade false positives (e.g. Araxxor in
+        # the Morytania Spider Cave reached via Drakan's medallion -> Darkmeyer).
+        "Mort'ton",
+        "Burgh de Rott",
+        "Paterdomus",
+        "Darkmeyer",
+    ],
     "raid_toa": ["Necropolis", "Tombs of Amascut", "Kharidian Desert"],
     "catacombs": ["Catacombs of Kourend", "Catacombs"],
     "wilderness": ["Wilderness"],
@@ -98,6 +109,28 @@ ZONE_GROUPS: dict[str, list[str]] = {
     "misthalin": ["Misthalin"],
     "karamja": ["Karamja"],
     "tirannwn": ["Tirannwn"],
+    # Varlamore / post-Sailing zones (extension to close the gap surfaced in
+    # #566/#567 -- harness was previously blind to kraken-cascade mismatches
+    # across Civitas illa Fortis, Auburnvale, Quetzacalli Gorge, etc.).
+    "varlamore": [
+        "Varlamore",
+        "Civitas illa Fortis",
+        "Civitas",
+        "Hunter Guild",
+        "Auburnvale",
+        "Avium Savannah",
+        "Quetzacalli Gorge",
+        "Aldarin",
+        "Ralos Rise",
+        "Tonali",
+        "Vale Totems",
+    ],
+    # Misc minigame / post-2020 minigame zones not previously modelled.
+    "mos_lemarmless": ["Mos Le'Harmless", "Braindeath Island", "Cairn Isle"],
+    "isle_of_souls": ["Isle of Souls", "Soul Wars"],
+    "ferox": ["Ferox Enclave"],
+    "fossil_island": ["Fossil Island", "Volcanic Mine"],
+    "void_outpost": ["Void Knights' Outpost", "Pest Control"],
 }
 
 # Flat list, derived from ZONE_GROUPS.
@@ -226,18 +259,26 @@ RELATIVE_PREPOSITIONS = (
 
 
 def match_landmark(
-    location_desc: str, landmarks: dict[str, dict[str, Any]]
+    location_desc: str,
+    landmarks: dict[str, dict[str, Any]],
+    source_x: int | None = None,
+    source_y: int | None = None,
 ) -> tuple[str, dict[str, Any]] | None:
     """Return (name, landmark) of best match for a locationDescription, or
     None if no landmark name appears in the description AS A PRIMARY anchor.
 
     Skips matches where the landmark is referenced relatively
     ("south of Mount Quidamortem" should NOT anchor to Mount Quidamortem).
+
+    Tie-break: longest matched token wins; for same-length collisions, the
+    landmark whose stored coord is closest to the source coord wins. This
+    addresses the Aleph-flagged Neypotzli vs Cam Torum collision and keeps
+    multi-zone landmark seeds deterministic.
     """
     if not location_desc or not landmarks:
         return None
     lower = location_desc.lower()
-    candidates: list[tuple[str, dict[str, Any], int]] = []
+    candidates: list[tuple[str, dict[str, Any], int, int]] = []
     for name, data in landmarks.items():
         names_to_check = [name] + list(data.get("aliases", []))
         for n in names_to_check:
@@ -248,12 +289,26 @@ def match_landmark(
             preceding = lower[max(0, idx - 16) : idx]
             if any(prep in preceding for prep in RELATIVE_PREPOSITIONS):
                 continue  # relative reference; skip
-            candidates.append((name, data, len(n)))
+            # Compute coord distance to source if both available; otherwise
+            # use a large sentinel so length is the sole sort key.
+            lx, ly = data.get("worldX"), data.get("worldY")
+            if (
+                source_x is not None
+                and source_y is not None
+                and isinstance(lx, int)
+                and isinstance(ly, int)
+            ):
+                d = tile_distance(source_x, source_y, lx, ly)
+            else:
+                d = 10**9
+            candidates.append((name, data, len(n), d))
             break
     if not candidates:
         return None
-    candidates.sort(key=lambda c: c[2], reverse=True)
-    name, data, _ = candidates[0]
+    # Primary: longest matched token. Secondary: smallest coord distance.
+    # Tertiary: alphabetical name (stable, deterministic).
+    candidates.sort(key=lambda c: (-c[2], c[3], c[0]))
+    name, data, _, _ = candidates[0]
     return name, data
 
 
@@ -269,7 +324,8 @@ def check_coord_plausibility(
     name = source.get("name", "?")
     category = source.get("category", "?")
     loc = source.get("locationDescription") or ""
-    matched = match_landmark(loc, landmarks)
+    sx_for_match, sy_for_match = source.get("worldX"), source.get("worldY")
+    matched = match_landmark(loc, landmarks, sx_for_match, sy_for_match)
     if matched is None:
         return findings
     landmark_name, lm = matched
