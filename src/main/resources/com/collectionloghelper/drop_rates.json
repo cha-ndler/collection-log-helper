@@ -992,8 +992,8 @@
   {
     "name": "Alchemical Hydra",
     "category": "BOSSES",
-    "worldX": 1308,
-    "worldY": 3807,
+    "worldX": 1364,
+    "worldY": 10265,
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "ironKillTimeSeconds": 124,
@@ -9439,7 +9439,7 @@
     "name": "Dust Devil",
     "category": "SLAYER",
     "worldX": 3310,
-    "worldY": 2962,
+    "worldY": 9404,
     "worldPlane": 0,
     "killTimeSeconds": 6,
     "afkLevel": 2,
@@ -9466,7 +9466,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Smoke Dungeon, Kharidian Desert.",
+        "description": "Travel to the Pollnivneach well entrance for the Smoke Dungeon, Kharidian Desert.",
         "worldX": 3310,
         "worldY": 2962,
         "worldPlane": 0,
@@ -9476,7 +9476,7 @@
       {
         "description": "Kill Dust Devils in the Smoke Dungeon or Catacombs of Kourend. Requires face protection (slayer helm works). Burst/barrage in Catacombs for fast tasks",
         "worldX": 3310,
-        "worldY": 2962,
+        "worldY": 9404,
         "worldPlane": 0,
         "npcId": 423,
         "interactAction": "Attack",
