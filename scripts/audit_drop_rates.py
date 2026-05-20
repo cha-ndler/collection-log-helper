@@ -97,7 +97,20 @@ ZONE_GROUPS: dict[str, list[str]] = {
     ],
     "raid_toa": ["Necropolis", "Tombs of Amascut", "Kharidian Desert"],
     "catacombs": ["Catacombs of Kourend", "Catacombs"],
-    "wilderness": ["Wilderness"],
+    "wilderness": [
+        "Wilderness",
+        "Revenant Caves",
+        "Pirates' Hideout",
+        "Pirates Hideout",
+        "Bandit Camp",
+        "Chaos Temple",
+        "Elder Chaos Temple",
+        "Lava Maze",
+        "Rogues' Castle",
+        "Rogues Castle",
+        "Fountain of Rune",
+        "Wilderness God Wars Dungeon",
+    ],
     "gwd": ["God Wars Dungeon"],
     "fremennik": ["Fremennik Slayer Dungeon", "Fremennik"],
     "piscatoris": ["Piscatoris"],
@@ -125,6 +138,8 @@ ZONE_GROUPS: dict[str, list[str]] = {
         "Edgeville",
         "Warriors' Guild",
         "Warriors Guild",
+        "Ruins of Camdozaal",
+        "Camdozaal",
     ],
     "misthalin": [
         "Misthalin",
@@ -150,20 +165,6 @@ ZONE_GROUPS: dict[str, list[str]] = {
         "Iorwerth",
         "Isafdar",
         "Tyras Camp",
-    ],
-    # Wilderness sub-locations -- same broad region as Wilderness, share zone
-    # group to avoid kraken-cascade false positives.
-    "wilderness_sub": [
-        "Revenant Caves",
-        "Pirates' Hideout",
-        "Pirates Hideout",
-        "Bandit Camp",
-        "Chaos Temple",
-        "Elder Chaos Temple",
-        "Lava Maze",
-        "Rogues' Castle",
-        "Rogues Castle",
-        "Fountain of Rune",
     ],
     # Kandarin / Seers' / Catherby / Camelot / Tree Gnome Stronghold cluster
     "kandarin": [
@@ -227,11 +228,6 @@ ZONE_GROUPS: dict[str, list[str]] = {
     # Zemouregal's Fort -- isolated zone so harness flags any cross-mention
     # like "Shayzien Crypts" alongside "Zemouregal's Fort"
     "zemouregal": ["Zemouregal's Fort", "Zemouregal Fort"],
-    # Camdozaal -- beneath Ice Mountain (shares asgarnia surface)
-    "camdozaal": [
-        "Ruins of Camdozaal",
-        "Camdozaal",
-    ],
     # Varlamore / post-Sailing zones (extension to close the gap surfaced in
     # #566/#567 -- harness was previously blind to kraken-cascade mismatches
     # across Civitas illa Fortis, Auburnvale, Quetzacalli Gorge, etc.).

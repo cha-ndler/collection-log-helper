@@ -275,11 +275,11 @@
     "worldPlane": 0,
     "aliases": ["TzHaar city", "Karamja Volcano", "Fight Caves", "Inferno arena"]
   },
-  "Tar Swamp": {
+  "Tar Swamp, Fossil Island": {
     "worldX": 3683,
     "worldY": 3706,
     "worldPlane": 0,
-    "aliases": ["Deranged Archaeologist lair", "Fossil Island Tar Swamp"]
+    "aliases": ["Tar Swamp", "Deranged Archaeologist lair", "Fossil Island Tar Swamp"]
   },
   "Zul-Andra": {
     "worldX": 2268,
@@ -950,10 +950,10 @@
     "aliases": ["Lletya elf town", "Lletya village"]
   },
   "Tree Gnome Stronghold": {
-    "worldX": 2461,
-    "worldY": 3445,
+    "worldX": 2436,
+    "worldY": 3500,
     "worldPlane": 0,
-    "aliases": ["Gnome Stronghold", "Spirit tree Stronghold", "Grand Tree", "Tree Gnome Village"]
+    "aliases": ["Gnome Stronghold", "Spirit tree Stronghold", "Grand Tree", "Tree Gnome Village", "Tree Gnome Stronghold restaurant"]
   },
   "Lumbridge Swamp": {
     "worldX": 3204,
@@ -966,5 +966,11 @@
     "worldY": 3805,
     "worldPlane": 0,
     "aliases": ["Fossil Island surface", "Museum Camp", "Mushroom forest", "Fossil Island northern"]
+  },
+  "Wyvern Cave, Fossil Island": {
+    "worldX": 3602,
+    "worldY": 10290,
+    "worldPlane": 0,
+    "aliases": ["Wyvern Cave", "Fossil Island Wyvern Cave", "Wyvern Cave Fossil Island", "Ancient Wyvern lair"]
   }
 }
