@@ -16,5 +16,11 @@
     "worldY": 2784,
     "worldPlane": 0,
     "aliases": ["Tombs of Amascut", "Tombs", "Kharidian Desert tombs"]
+  },
+  "Grand Exchange": {
+    "worldX": 3165,
+    "worldY": 3487,
+    "worldPlane": 0,
+    "aliases": ["Varrock Grand Exchange", "GE", "clue reward hub"]
   }
 }
