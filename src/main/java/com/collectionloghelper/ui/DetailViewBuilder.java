@@ -57,6 +57,17 @@ public class DetailViewBuilder
 	private final BiConsumer<CollectionLogSource, Integer> guidanceActivator;
 	private final Runnable guidanceDeactivator;
 
+	/**
+	 * Most-recently-rendered detail panel. Held so that
+	 * {@link #syncGuidanceState(boolean, CollectionLogSource)} can reach the
+	 * currently-visible Guide Me / Stop Guidance button when guidance is
+	 * deactivated from a different surface (e.g., the step-control STOP icon
+	 * in {@code StepProgressView}). Mirrors the {@code lastGuideButton} held by
+	 * {@link com.collectionloghelper.ui.widget.QuickGuidePanelView}. See
+	 * cha-ndler/collection-log-helper#576.
+	 */
+	private ItemDetailPanel lastDetail;
+
 	public DetailViewBuilder(
 		PlayerCollectionState collectionState,
 		RequirementsChecker requirementsChecker,
@@ -119,6 +130,32 @@ public class DetailViewBuilder
 			isGuidingThis
 		);
 		target.add(detail, BorderLayout.NORTH);
+		lastDetail = detail;
+	}
+
+	/**
+	 * Syncs the most-recently-rendered detail panel's Guide Me / Stop Guidance
+	 * button to the canonical guidance-active state. Called from
+	 * {@link CollectionLogHelperPanel#setGuidanceState} so that deactivating
+	 * guidance from any surface — including the step-control STOP icon — flips
+	 * the source-level button back to "Guide Me" instead of leaving it stuck on
+	 * "Stop Guidance". Resolves cha-ndler/collection-log-helper#576.
+	 *
+	 * <p>Safe to call from any thread; the underlying button update is queued onto
+	 * the EDT by {@link ItemDetailPanel#syncGuidanceState}. A no-op when no detail
+	 * panel has been populated yet (e.g., the user has never entered detail view).
+	 *
+	 * @param active       whether guidance is now active
+	 * @param guidedSource the currently guided source (may be {@code null})
+	 */
+	public void syncGuidanceState(boolean active, CollectionLogSource guidedSource)
+	{
+		ItemDetailPanel detail = lastDetail;
+		if (detail == null)
+		{
+			return;
+		}
+		detail.syncGuidanceState(active, guidedSource);
 	}
 
 	private int countObtainedItems(CollectionLogSource source)

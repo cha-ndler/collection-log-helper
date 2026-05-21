@@ -524,6 +524,11 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			guidanceBannerView.hideGuidance();
 		}
 		quickGuidePanelView.syncGuidanceState(active, source);
+		// #576 — sync the source-level Guide Me / Stop Guidance button on the
+		// active item-detail card. Without this fan-out, deactivating guidance
+		// from the step-control STOP icon would update the Quick Guide button
+		// but leave the detail-view button stuck in "Stop Guidance" mode.
+		detailViewBuilder.syncGuidanceState(active, source);
 	}
 
 	public void showClueGuidance(CollectionLogSource source)
