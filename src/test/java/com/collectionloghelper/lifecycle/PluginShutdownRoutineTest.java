@@ -135,10 +135,14 @@ public class PluginShutdownRoutineTest
 	}
 
 	@Test
-	public void tearDown_shutsDownCollectionLogNetImporter()
+	public void tearDown_doesNotInteractWithCollectionLogNetImporter()
 	{
+		// #478: CollectionLogNetImporter no longer owns its executor; the
+		// runtime-provided ScheduledExecutorService is shut down by the
+		// RuneLite runtime, not by this routine.  The teardown must not
+		// invoke any method on the importer.
 		routine.tearDown(panel, navButton, executor, () -> { });
-		verify(collectionLogNetImporter).shutdown();
+		org.mockito.Mockito.verifyNoInteractions(collectionLogNetImporter);
 	}
 
 	@Test
@@ -187,7 +191,11 @@ public class PluginShutdownRoutineTest
 		verify(guidanceCoordinator).deactivateGuidance();
 		verify(syncStateCoordinator).reset();
 		verify(sourceKcStore).clear();
-		verify(templeOsrsKcSyncer).shutdown();
+		// #479: TempleOsrsKcSyncer no longer owns its executor; the
+		// runtime-provided ScheduledExecutorService is shut down by the
+		// RuneLite runtime, not by this routine.  The teardown must not
+		// invoke any method on the syncer.
+		org.mockito.Mockito.verifyNoInteractions(templeOsrsKcSyncer);
 		verify(playerLocationResolver).reset();
 		verify(guidanceOverlay).setShowCollectionLogReminder(false);
 		verify(guidanceOverlay).setShowBankReminder(false);

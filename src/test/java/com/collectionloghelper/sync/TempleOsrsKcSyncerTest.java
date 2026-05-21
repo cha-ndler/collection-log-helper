@@ -29,6 +29,8 @@ import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -36,6 +38,7 @@ import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -54,13 +57,22 @@ public class TempleOsrsKcSyncerTest
 	private OkHttpClient mockClient;
 	private TempleOsrsKcSyncer syncer;
 	private Gson gson;
+	private ScheduledExecutorService executor;
 
 	@BeforeEach
 	public void setUp()
 	{
 		mockClient = mock(OkHttpClient.class);
 		gson = new Gson();
-		syncer = new TempleOsrsKcSyncer(mockClient, gson);
+		// Single-thread scheduled executor stands in for the runtime-supplied scheduler.
+		executor = Executors.newSingleThreadScheduledExecutor();
+		syncer = new TempleOsrsKcSyncer(mockClient, gson, executor);
+	}
+
+	@AfterEach
+	public void tearDown()
+	{
+		executor.shutdownNow();
 	}
 
 	// ========================================================================

@@ -28,15 +28,16 @@ import com.collectionloghelper.data.PlayerCollectionState;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -109,15 +110,24 @@ public class CollectionLogNetImporterTest
 	private PlayerCollectionState mockCollectionState;
 
 	private final Gson gson = new Gson();
-	private final ExecutorService sameThread = Executors.newSingleThreadExecutor();
+	private ScheduledExecutorService sameThread;
 
 	private CollectionLogNetImporter importer;
 
 	@BeforeEach
 	public void setUp()
 	{
+		// Single-thread scheduled executor — deterministic enough for these tests
+		// and a reasonable stand-in for the runtime-supplied scheduler.
+		sameThread = Executors.newSingleThreadScheduledExecutor();
 		importer = new CollectionLogNetImporter(mockHttpClient, gson, mockCollectionState, sameThread);
 		when(mockHttpClient.newCall(any(Request.class))).thenReturn(mockCall);
+	}
+
+	@AfterEach
+	public void tearDown()
+	{
+		sameThread.shutdownNow();
 	}
 
 	// ── Happy path ────────────────────────────────────────────────────────────
