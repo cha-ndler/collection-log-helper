@@ -80,7 +80,7 @@ public class ItemRowPanelHoverTest
 			"Shayzien Armour", CollectionLogCategory.OTHER,
 			1516, 3617, 0, 36, 0, null, null, null, 0, null, 0, false, 2,
 			null, 0, null, null, null, null, null, 0, null, 0,
-			Collections.singletonList(item), null);
+			Collections.singletonList(item), null, null, null);
 
 		row = new ItemRowPanel(item, source, false, 0, false,
 			Collections.emptyList(), itemManager, () -> {});

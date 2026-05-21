@@ -507,7 +507,7 @@ public class GuidanceSequencerTest
 		return new CollectionLogSource(name, CollectionLogCategory.BOSSES, 3000, 3000, 0,
 			60, 0, name, Collections.emptyList(),
 			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null,
-			steps, null, null, 0, null, cumulativeTrackThreshold, Collections.emptyList(), null);
+			steps, null, null, 0, null, cumulativeTrackThreshold, Collections.emptyList(), null, null, null);
 	}
 
 	private void startSequence(List<GuidanceStep> steps)
