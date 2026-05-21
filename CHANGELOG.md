@@ -2,8 +2,88 @@
 
 ## Unreleased
 
+### Added
+
+- **Source-level Recommended gear strip + wiki strategy link** — the
+  guidance panel header now renders a chip strip for any source carrying
+  a `recommendedGearItemIds` field, advisory-only (no bank-scan colors),
+  and a "Strategy guide" link that opens the canonical wiki article in
+  the system browser. The strip and link both render below the existing
+  general requirements / required-items section so the established
+  hierarchy (mandatory → recommended → strategy) stays visually
+  consistent. Pilot data populates the field on a handful of high-impact
+  bossing sources; broader backfill is a separate data pass. Closes
+  [#573](../../issues/573) (PR [#584](../../pull/584)).
+- **`drop_rates.json` audit harness** — new `scripts/audit_drop_rates.py`
+  cross-checks every source's `worldX/worldY` / `npcId` / step
+  descriptions / fairy-ring codes against the in-repo wiki snapshot and
+  flags drift. Runs as part of the pre-hub data sweep tracked in
+  [#495](../../issues/495); harness landed alongside the RAIDS pass
+  ([#561](../../pull/561)) and was widened twice — once for large arenas
+  ([#586](../../pull/586), [#563](../../issues/563)) and once to fix a
+  longest-token bias that mismatched multi-city sources like "Edgeville
+  / Lumbridge" ([#594](../../issues/594), [#595](../../pull/595)).
+
+### Changed
+
+- **`F1`/`F2` sync components now receive a shared `ScheduledExecutorService` via DI** —
+  `CollectionLogNetSyncWorker` and `TempleOsrsSyncWorker` used to
+  `Executors.newSingleThreadScheduledExecutor()` in their own
+  constructors, which (a) leaked threads on plugin shutdown if a sync
+  was in flight and (b) made the workers untestable without spawning
+  real OS threads. They now receive the executor via `@Inject` from a
+  shared sync module that owns shutdown ordering. End-users will notice
+  cleaner client shutdown timing during a sync; the public sync UX is
+  unchanged. Closes [#478](../../issues/478) /
+  [#479](../../issues/479) (PR [#592](../../pull/592)).
+- **`F1`/`F2` config labels standardized + tooltips added** — the two
+  external-sync entries in the plugin config panel were inconsistently
+  named ("Enable collectionlog.net" vs "TempleOSRS sync"); both now
+  follow a `"Sync from <service>"` pattern and carry explanatory
+  tooltips that name the data each sync pulls and the rate limit the
+  client honors. Pure UX clean-up — no behavior change. Closes
+  [#577](../../issues/577) (PR [#582](../../pull/582)).
+- **Step-control buttons replaced with icon controls + tooltips** — the
+  per-step Skip / Reset / Sync text buttons inside the guidance side
+  panel were wide enough to push the panel wider than the standard
+  RuneLite sidebar on some skins. Replaced with three icon buttons
+  carrying tooltips that match the previous label text. The source-level
+  Stop Guidance button now uses the same STOP icon as the step-control
+  pause so the panel's two stop affordances no longer drift visually
+  ([#576](../../issues/576) / PR [#581](../../pull/581)). Closes
+  [#547](../../issues/547) (PR [#552](../../pull/552)).
+- **`CONTRIBUTING.md` trimmed to a focused quickstart** — the deep
+  guidance authoring bar, schema reference, audit playbook, and
+  per-source category taxonomy moved into a new
+  `docs/contributor-guide/` directory. `CONTRIBUTING.md` itself is now a
+  one-screen quickstart that links into the deeper docs. Closes
+  [#549](../../issues/549) (PR [#556](../../pull/556)).
+- **23 travel-then-descend sources migrated to `ARRIVE_AT_ZONE`** —
+  sources with a "travel to surface tile, then descend a ladder/stairs"
+  pattern (Custodian Stalker [#548](../../issues/548) /
+  [#553](../../pull/553) was the pilot;
+  [#558](../../pull/558) batched the remaining 23) used to depend on
+  `ARRIVE_AT_TILE` on the surface coordinate, which silently failed when
+  the player teleported directly underground. They now use
+  `ARRIVE_AT_ZONE` against the broader surface region, so the
+  travel-step auto-advance fires reliably regardless of how the player
+  reached the area. Closes [#555](../../issues/555).
+- **Plugin Hub self-review doc refreshed against current master** —
+  `docs/plugin-hub-review.md` re-audited; all previously-yellow items
+  closed and the table is now 0 Red. Cited in the upcoming hub
+  resubmission PR (PR [#593](../../pull/593)).
+
 ### Fixed
 
+- **GWD boss guidance step order corrected + duplicate kill step
+  dropped** — Armadyl, Bandos, Saradomin, and Zamorak GWD sources had
+  inverted step ordering (kill step listed before the boss-room entry
+  step) and a duplicate kill step at the end of each sequence. Both
+  artefacts dated back to the original GWD data pass and were missed by
+  the Pass 1 audit harness, which only checked coord / npcId drift and
+  not step-order coherence. Closes [#574](../../issues/574)
+  (PR [#579](../../pull/579)); harness gap captured for a follow-up
+  audit class.
 - **Plugin no longer fails to instantiate in a live RuneLite client** —
   Guice could not resolve four C-tier player-state interfaces
   (`DiaryTierState`, `EquippedItemState`, `PohTeleportInventory`,
@@ -49,6 +129,132 @@
   `worldX/worldY` in `drop_rates.json`, so step auto-advance silently failed for
   every guidance sequence that crossed into an instance. Closes
   [#485](../../issues/485).
+
+- **Fairy-ring code corrected to `AIQ` for the Asgarnian Ice Dungeon
+  travel step** — the Cave Krakens / Krakens travel step was emitting
+  `AKQ`, which lands at the Piscatoris Fishing Colony, not the
+  Asgarnian Ice Dungeon. Player-facing step text and the underlying
+  `travelTip` now both reference `AIQ`. Closes
+  [#484](../../issues/484) (PR [#493](../../pull/493)).
+
+- **Step descriptions wrap to the panel width** — long single-string
+  descriptions used to render mid-word truncated on narrow side panels
+  because the rendering path skipped the `<html>` wrapper added in
+  [#483](../../issues/483). The wrap now applies uniformly to every
+  step-rendering surface. Closes [#575](../../issues/575) (PR
+  [#580](../../pull/580)).
+
+- **`KillTimeTracker` disk I/O moved off the client thread + attribution
+  filtered to the local player** — the per-account kill-time learning
+  feature (`F3`) wrote to disk synchronously on every `ACTOR_DEATH`
+  observed in the scene, which (a) blocked the client tick under slow
+  disk and (b) attributed kills from nearby other players to the local
+  account. I/O now hops to the shared sync executor and attribution is
+  gated to `client.getLocalPlayer()`. Closes [#480](../../issues/480) /
+  [#481](../../issues/481) (PR [#589](../../pull/589)).
+
+- **`C7` debug overlay surfaces Tier C detection state + accurate quest
+  count** — the player-capability debug overlay shipped in
+  [#459](../../pull/459) showed each tier's bound impl but never
+  reflected whether that impl had detected current player state (e.g.
+  diary tier, equipped slot, POH teleport availability). The overlay
+  now renders detected state per tier and includes a corrected
+  partial-quest count (the previous string reflected total quests, not
+  partial-progress entries). Closes [#486](../../issues/486) /
+  [#487](../../issues/487) (PR [#583](../../pull/583)).
+
+- **Side-panel sync button visibility refreshes on config toggle** —
+  toggling `F1` / `F2` sync from the plugin config used to require a
+  panel rebuild for the sync button row to appear or disappear. The
+  panel now subscribes to the relevant config keys and refreshes the
+  sync button strip on the next tick. PR
+  [#492](../../pull/492).
+
+- **`SLAYER` and `SKILLING` category counts aggregate from the source
+  database** — both categories rendered "0/N" in the panel header
+  because the count aggregator only read the top-level category keys
+  and missed sub-categorized sources. Counts now sum from a
+  source-database walk so the header reflects actual completion.
+  Closes [#545](../../issues/545) (PR [#546](../../pull/546)).
+
+- **23 data corrections from the Pass 1 audit sweep** — the audit
+  harness from [#561](../../pull/561) was applied across CLUES
+  (PR [#562](../../pull/562), 12 sources clean), BOSSES
+  (PR [#564](../../pull/564), 61 sources triaged, 1 research issue
+  filed), SLAYER (PR [#567](../../pull/567), 45 sources, 2 surface→
+  underground coord fixes + 2 research issues), MINIGAMES
+  (PR [#568](../../pull/568), 25 sources, 4 wording fixes), SKILLING
+  (PR [#570](../../pull/570), 17 sources, 1 surface→underground fix),
+  OTHER (PR [#571](../../pull/571), 58 sources, 2 mismatches fixed),
+  RAIDS (PR [#561](../../pull/561), npc/coord fixes + ToB-HM cleanup in
+  PR [#585](../../pull/585)), and a follow-up Slayer pass for Frost
+  Nagua coord-vs-description drift + Lava Strykewyrm Charred Island
+  move (PRs [#587](../../pull/587), closes
+  [#565](../../issues/565) / [#566](../../issues/566)). Pass 1 closed
+  as part of [#495](../../issues/495).
+
+### Changed (refactors)
+
+- **`CollectionLogHelperPlugin` decomposed into routers, orchestrators,
+  and modules (#503)** — the plugin class dropped from 904 LOC to 555
+  LOC through a 25+ PR campaign. Event handling now flows through
+  dedicated routers (`GameStateRouter`,
+  `VarbitChangeRouter`, `SequencerEventAdapter`,
+  `ChatEventHandler`); per-tick work runs in `GameTickOrchestrator`;
+  shutdown sequencing lives in `PluginShutdownRoutine`; and Guice
+  bindings are split across `DataModule`, `EfficiencyModule`,
+  `GuidanceModule`, `SyncModule`
+  (PRs [#509](../../pull/509), [#514](../../pull/514),
+  [#518](../../pull/518), [#521](../../pull/521)). The panel was
+  similarly split — `PanelRebuildOrchestrator`,
+  `PanelHeaderBuilder`, `SelectorControlsPanel`,
+  `SyncButtonController`, `ListContainerScrollPane`, and
+  `DetailViewBuilder` are now stand-alone collaborators
+  (PRs [#513](../../pull/513), [#515](../../pull/515),
+  [#519](../../pull/519), [#522](../../pull/522),
+  [#531](../../pull/531), [#534](../../pull/534)). The guidance
+  coordinator and sequencer shed `WorldMapController`,
+  `NpcTrackerHelper`, `DynamicTargetManager`,
+  `DynamicItemObjectTierResolver`, `StepChangeHandler`,
+  `OverlayStepApplier`, `OverlayDeactivator`, `OverlaySourceApplier`,
+  `StepAdvancer`, and `CompletionChecker`
+  (PRs [#510](../../pull/510), [#512](../../pull/512),
+  [#516](../../pull/516), [#520](../../pull/520),
+  [#523](../../pull/523), [#526](../../pull/526),
+  [#529](../../pull/529), [#532](../../pull/532),
+  [#535](../../pull/535), [#537](../../pull/537)). Closes
+  [#503](../../issues/503) (umbrella PR [#542](../../pull/542)).
+  No user-visible behavior change; the result is a substantially
+  smaller core class and far better test isolation.
+
+- **`guidance.helper` package renamed to `guidance.bosses`** to match
+  the actual contents (boss-specific `GuidanceHelper` implementations,
+  e.g. `CerberusHelper`). Closes [#502](../../issues/502) (PR
+  [#508](../../pull/508)).
+
+### Changed (build hygiene)
+
+- **Allocation-free guard-fail paths in `DynamicTargetManager` +
+  hoisted `exportEfficiencyIfEnabled` field** — the per-tick guard-fail
+  path in `DynamicTargetManager` allocated a fresh `Optional` even when
+  no dynamic target was active (PR [#539](../../pull/539),
+  [#527](../../issues/527)), and `Plugin.exportEfficiencyIfEnabled`
+  resolved its config flag on every tick instead of caching it as a
+  field (PR [#554](../../pull/554), follow-up to
+  [#541](../../issues/541)). Both paths now run literal-zero
+  allocations on the steady-state tick.
+
+- **Non-ASCII guard on `drop_rates.json`** — the build now fails on
+  non-ASCII characters in `drop_rates.json` (em-dashes were the
+  recurring offender, sourced from Wiki copy-paste). Existing
+  em-dashes were replaced with ASCII equivalents in the same PR.
+  Closes [#501](../../issues/501) (PR [#507](../../pull/507)).
+
+- **Plugin metadata polish for hub resubmission** — `icon.png`
+  re-exported at the 48x72 convention the hub expects
+  (PR [#505](../../pull/505) / [#499](../../issues/499)) and plugin
+  description + tags refined to align with the hub's manifest schema
+  (PR [#506](../../pull/506) / [#500](../../issues/500)).
 
 ## 1.0.0-hub — 2026-05-15
 
