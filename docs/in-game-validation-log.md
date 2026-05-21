@@ -601,6 +601,8 @@ The 2026-05-14 cascade merged ~24 PRs across Tiers B/B.5/C/E/F. None have a vali
 
 > **2026-05-16 attempt 1 — not started.** A subagent walkthrough was launched to drive this rubric interactively. Dev client (`./gradlew run`) started successfully on JDK 17 — plugin registered all event subscribers, `CollectionLogHelperPlugin started`, RuneLite frame shown at 13:22:39 EDT (PR #475 verified). However the subagent environment did not have `AskUserQuestion` registered (deferred-tool manifest excluded it; keyword search returned no match), and the background gradle task was then killed externally before any rubric step could be exercised. All `[?]` rows below remain unchanged. Re-run from a session that has `AskUserQuestion` available, or have the parent agent drive the rubric directly using the runelite-dev MCP screenshot tools.
 
+> **2026-05-20 attempt 2 — partial pass.** Parent session drove the rubric directly via `AskUserQuestion` (subagent attempts hit the same blocker as attempt 1; pattern now encoded in memory). Full Pass 2 results recorded at [`docs/audit/pass2-validation-results.md`](audit/pass2-validation-results.md). ~14 of ~50 rubric rows exercised. **5 regressions filed** (#574 GWD step-order cascade, #575 panel text truncation, #576 STOP-button state desync, plus re-open requests on #486 + #487). **2 enhancements filed** (#573 Recommended UX + wiki strategy link, #577 F1/F2 polish). Phase 5 B.5.x rows green on General Graardor. Phase 2 B2 + Phase 4 F1/F2 invocation + C7 C1-C5 retest carry over to a future session.
+
 ### Phase 1 — Smoke (run first)
 
 Use the existing "Regression smoke test" section near the end of this file. Do not proceed to later phases if any smoke row fails.
@@ -648,7 +650,7 @@ Use the existing "Regression smoke test" section near the end of this file. Do n
 | step | description | status | notes |
 |---|---|---|---|
 | 1 | Enable **Show Player Capability Debug Overlay** in config → overlay renders on the game screen | `[x]` | 2026-05-16: overlay renders with basic stats block |
-| 2 | Overlay shows: equipped items count, diary tiers per region, POH teleports detected, skill-cape perks detected, partial-quest state | `[!]` | 2026-05-16: **incomplete** — only basic stats (combat/skills/spellbook/prayer/task/quests/POH-yes-no). Missing C1 teleport inventory, C2 equipped, C3 diary per region, C4 cape perks, C5 sub-milestones. Filed #486. |
+| 2 | Overlay shows: equipped items count, diary tiers per region, POH teleports detected, skill-cape perks detected, partial-quest state | `[!]` | 2026-05-16: **incomplete** — only basic stats (combat/skills/spellbook/prayer/task/quests/POH-yes-no). Missing C1 teleport inventory, C2 equipped, C3 diary per region, C4 cape perks, C5 sub-milestones. Filed #486. 2026-05-20: **re-confirmed broken** despite #486 close — C1 still "(none detected)", C2 still "0", C3 region labels render without completion data. Re-open request added on #486. |
 | 3 | Toggle off → overlay disappears cleanly, no orphan render | `[?]` | not tested |
 
 #### PR #461 — C3 diary tier state *(merged 2026-05-14)*
@@ -662,7 +664,7 @@ Use the existing "Regression smoke test" section near the end of this file. Do n
 
 | step | description | status | notes |
 |---|---|---|---|
-| 1 | Pick a mid-progress quest you've started but not completed → C7 overlay shows the correct partial state | `[!]` | 2026-05-16: overlay shows "Quests done: 207" but user has 179/179 in-game. Filed #487. Sub-milestone state not exposed (blocked by #486). |
+| 1 | Pick a mid-progress quest you've started but not completed → C7 overlay shows the correct partial state | `[!]` | 2026-05-16: overlay shows "Quests done: 207" but user has 179/179 in-game. Filed #487. Sub-milestone state not exposed (blocked by #486). 2026-05-20: re-confirmed — label renamed to "Quest entries: 207" but same wrong count. |
 
 #### PR #463 — C2 equipped-item state *(merged 2026-05-14)*
 
@@ -731,39 +733,39 @@ Use the existing "Regression smoke test" section near the end of this file. Do n
 
 | step | description | status | notes |
 |---|---|---|---|
-| 1 | Activate guidance on a source with quest/skill/diary requirements → requirements header renders with green/red coloring | `[?]` | |
-| 2 | An unmet requirement renders red; a met one renders green | `[?]` | |
+| 1 | Activate guidance on a source with quest/skill/diary requirements → requirements header renders with green/red coloring | `[x]` | 2026-05-20: General Graardor renders "Troll Stronghold — COMPLETED" + "Strength 70 — level 99/70" both green (player has both). |
+| 2 | An unmet requirement renders red; a met one renders green | `[x]` | 2026-05-20: green path verified. Red path not exercised this session (would need a source with an unmet requirement). |
 
 #### PR #458 — B.5.4 collapsible step sections *(merged 2026-05-14)*
 
 | step | description | status | notes |
 |---|---|---|---|
-| 1 | Activate guidance on a source with `section` field on its steps → section headers visible | `[?]` | |
-| 2 | Active step's section is auto-expanded; non-active sections collapsed | `[?]` | |
-| 3 | Click a section header → expand/collapse works | `[?]` | |
+| 1 | Activate guidance on a source with `section` field on its steps → section headers visible | `[x]` | 2026-05-20: Graardor shows "Travel (1 step)" + "Combat (3 steps)" headers. |
+| 2 | Active step's section is auto-expanded; non-active sections collapsed | `[x]` | 2026-05-20: per player visual confirmation. |
+| 3 | Click a section header → expand/collapse works | `[x]` | 2026-05-20: chevron animates, toggle clean. |
 
 #### PR #472 — B.5.2 recommended items section *(merged 2026-05-14, supersedes #405)*
 
 | step | description | status | notes |
 |---|---|---|---|
-| 1 | Activate guidance on a source with `recommendedItemIds` → recommended chip strip renders below the required strip | `[?]` | |
-| 2 | Color rules match the required strip (green/white/red) | `[?]` | |
-| 3 | Hover → tooltip shows item name | `[?]` | |
+| 1 | Activate guidance on a source with `recommendedItemIds` → recommended chip strip renders below the required strip | `[x]` | 2026-05-20: Graardor shows 3 chips (Saradomin brew, Prayer potion, Bandos godsword). Note: player suggested elevating Recommended above the step body + per-source wiki strategy link — filed #573 (enhancement, not regression). |
+| 2 | Color rules match the required strip (green/white/red) | `[x]` | 2026-05-20: Saradomin brew yellow/bank, Prayer potion green/inv, Bandos godsword white/bank-found. |
+| 3 | Hover → tooltip shows item name | `[?]` | not exercised — defer. |
 
 #### PR #464 — E1 cross-source per-item recommendation *(merged 2026-05-14, panel integration deferred)*
 
 | step | description | status | notes |
 |---|---|---|---|
-| 1 | Enable cross-source mode flag in config | `[?]` | |
-| 2 | No regression to the existing panel modes | `[?]` | |
-| 3 | Debug log shows `CrossSourceRanker` running on recalc | `[?]` | |
+| 1 | Enable cross-source mode flag in config | `[-]` | 2026-05-20: **blocked by design** — `enableCrossSourceMode` is `hidden = true` in config until panel integration ships (per CollectionLogHelperConfig.java:332). |
+| 2 | No regression to the existing panel modes | `[x]` | 2026-05-20: all 6 modes render (Efficient / Category Focus / Search / Pet Hunt / Statistics / Dry Streaks). |
+| 3 | Debug log shows `CrossSourceRanker` running on recalc | `[?]` | not exercised — flag is hidden, can't enable from config UI. |
 
 #### PR #467 — E2 meta-update dating *(merged 2026-05-14)*
 
 | step | description | status | notes |
 |---|---|---|---|
-| 1 | Activate guidance on a source with `metaUpdateDate` set → `MetaAgeBadge` shows the age | `[?]` | |
-| 2 | Source without `metaUpdateDate` → badge hidden, no NPE | `[?]` | |
+| 1 | Activate guidance on a source with `metaUpdateDate` set → `MetaAgeBadge` shows the age | `[-]` | 2026-05-20: **N/A** — zero sources have `metaUpdateDate` field set in `drop_rates.json`. |
+| 2 | Source without `metaUpdateDate` → badge hidden, no NPE | `[-]` | N/A — vacuously satisfied. |
 
 ### Phase 6 — Build / CI / Infra
 
