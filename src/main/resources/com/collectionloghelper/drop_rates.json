@@ -116,16 +116,6 @@
         "section": "Travel"
       },
       {
-        "description": "Kill General Graardor. Use Protect from Melee, pray Piety, and tank the minions. Kill Sergeant Steelwill first if you want to reduce damage taken",
-        "worldX": 2882,
-        "worldY": 5310,
-        "worldPlane": 2,
-        "objectId": 26415,
-        "objectInteractAction": "Move",
-        "completionCondition": "PLAYER_ON_PLANE",
-        "section": "Combat"
-      },
-      {
         "description": "Get 40 Bandos killcount by killing goblins, hobgoblins, or jogres in the main chamber",
         "worldX": 2862,
         "worldY": 5357,
@@ -136,7 +126,7 @@
         "section": "Combat"
       },
       {
-        "description": "Enter the Bandos boss room and kill General Graardor",
+        "description": "Enter the Bandos boss room and kill General Graardor. Use Protect from Melee, pray Piety, and tank the minions. Kill Sergeant Steelwill first if you want to reduce damage taken",
         "worldX": 2864,
         "worldY": 5360,
         "worldPlane": 2,
@@ -273,16 +263,6 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Commander Zilyana. Use Protect from Ranged and a crossbow. Kite her in a large loop around the room to avoid melee damage",
-        "worldX": 2882,
-        "worldY": 5310,
-        "worldPlane": 2,
-        "objectId": 26415,
-        "objectInteractAction": "Move",
-        "completionCondition": "PLAYER_ON_PLANE",
-        "section": "Combat"
-      },
-      {
         "description": "Get 40 Saradomin killcount by killing knights and spiritual warriors in the main chamber",
         "worldX": 2907,
         "worldY": 5265,
@@ -293,7 +273,7 @@
         "section": "Combat"
       },
       {
-        "description": "Enter the Saradomin boss room and kill Commander Zilyana",
+        "description": "Enter the Saradomin boss room and kill Commander Zilyana. Use Protect from Ranged and a crossbow. Kite her in a large loop around the room to avoid melee damage",
         "worldX": 2925,
         "worldY": 5265,
         "worldPlane": 2,
@@ -430,16 +410,6 @@
         "section": "Travel"
       },
       {
-        "description": "Kill K'ril Tsutsaroth. Use Protect from Melee and high-healing food. His special attack can hit through prayer. Shadow of Tumeken or arclight effective",
-        "worldX": 2882,
-        "worldY": 5310,
-        "worldPlane": 2,
-        "objectId": 26415,
-        "objectInteractAction": "Move",
-        "completionCondition": "PLAYER_ON_PLANE",
-        "section": "Combat"
-      },
-      {
         "description": "Get 40 Zamorak killcount by killing imps, werewolves, or vampyres in the main chamber",
         "worldX": 2914,
         "worldY": 5350,
@@ -450,7 +420,7 @@
         "section": "Combat"
       },
       {
-        "description": "Enter the Zamorak boss room and kill K'ril Tsutsaroth",
+        "description": "Enter the Zamorak boss room and kill K'ril Tsutsaroth. Use Protect from Melee and high-healing food. His special attack can hit through prayer. Shadow of Tumeken or arclight effective",
         "worldX": 2914,
         "worldY": 5350,
         "worldPlane": 2,
@@ -587,16 +557,6 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Kree'arra. Use Protect from Ranged and chinchompas or crossbow. Kite in a loop. All GWD bosses require 40 KC of the corresponding faction",
-        "worldX": 2882,
-        "worldY": 5310,
-        "worldPlane": 2,
-        "objectId": 26415,
-        "objectInteractAction": "Move",
-        "completionCondition": "PLAYER_ON_PLANE",
-        "section": "Combat"
-      },
-      {
         "description": "Get 40 Armadyl killcount by killing aviansie in the main chamber",
         "worldX": 2844,
         "worldY": 5280,
@@ -607,7 +567,7 @@
         "section": "Combat"
       },
       {
-        "description": "Use a mithril grapple to enter the Armadyl boss room and kill Kree'arra",
+        "description": "Use a mithril grapple to enter the Armadyl boss room and kill Kree'arra. Use Protect from Ranged and chinchompas or a crossbow. Kite in a loop to avoid the minions",
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,
