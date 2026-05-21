@@ -47,6 +47,7 @@ import net.runelite.api.Player;
 import net.runelite.api.Quest;
 import net.runelite.api.QuestState;
 import net.runelite.api.Skill;
+import net.runelite.api.VarPlayer;
 import net.runelite.client.ui.overlay.OverlayPanel;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.components.LineComponent;
@@ -59,7 +60,8 @@ import net.runelite.client.ui.overlay.components.TitleComponent;
  * <p>Renders three blocks:
  * <ol>
  *   <li><b>Account summary</b> — combat, key skills, spellbook, prayer book, slayer
- *       task, quest enum count, POH built.</li>
+ *       task, quest count (enum-derived ratio plus the in-game Quest Points
+ *       varplayer for cross-checking against the Quest List header), POH built.</li>
  *   <li><b>Tier C detection</b> — one section per detection layer:
  *       C1 POH teleport inventory, C2 equipped items, C3 diary tiers per region,
  *       C4 skill cape perks, C5 partial-quest sub-milestones.</li>
@@ -141,17 +143,17 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 			.color(TITLE_COLOR)
 			.build());
 
-		renderAccountSummary();
+		safeRender("Account", this::renderAccountSummary);
 		renderSection("POH Teleports (C1)");
-		renderPohTeleports();
+		safeRender("POH Teleports", this::renderPohTeleports);
 		renderSection("Equipped (C2)");
-		renderEquipped();
+		safeRender("Equipped", this::renderEquipped);
 		renderSection("Diary tiers (C3)");
-		renderDiary();
+		safeRender("Diary tiers", this::renderDiary);
 		renderSection("Cape perks (C4)");
-		renderCapePerks();
+		safeRender("Cape perks", this::renderCapePerks);
 		renderSection("Quest sub-milestones (C5)");
-		renderQuestSubMilestones();
+		safeRender("Quest sub-milestones", this::renderQuestSubMilestones);
 
 		return super.render(graphics);
 	}
@@ -189,12 +191,23 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 			addRow("Task", "none");
 		}
 
-		// "Quest entries" rather than "Quests done" — the RuneLite Quest enum
-		// counts miniquests and some sub-entries separately from the in-game
-		// Quest List, so this number can exceed the player's main-quest count
-		// (see #487 for the longer-term reclassification).
+		// Quest counts (#487):
+		//
+		// The RuneLite {@link Quest} enum mixes main quests, miniquests, and other
+		// quest-list sub-entries, so a naive `Quest.values()` walk produces a number
+		// (e.g. 207) that is larger than the in-game Quest List "Completed: X/Y"
+		// figure (e.g. 179/179 on a maxed account). We expose two complementary
+		// values so authors can cross-check against the live client:
+		//
+		//   - "Quests" — finished / total over the Quest enum surface. This is
+		//     the value our partial-quest detection (C5) actually operates on.
+		//   - "Quest points" — the in-game QP varplayer. Matches the number shown
+		//     under the Quest List header verbatim, giving an unambiguous sanity
+		//     check that doesn't depend on enum membership.
 		int finishedCount = countFinishedQuests();
-		addRow("Quest entries", String.valueOf(finishedCount));
+		int totalQuestEntries = Quest.values().length;
+		addRow("Quests", finishedCount + "/" + totalQuestEntries);
+		addRow("Quest points", String.valueOf(safeVarp(VarPlayer.QUEST_POINTS)));
 
 		int pohLocation = safeVarbit(VARBIT_POH_LOCATION);
 		addRow("POH built", pohLocation > 0 ? "yes" : "no");
@@ -316,6 +329,23 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 			.build());
 	}
 
+	/**
+	 * Run a section renderer and, if it throws or trips an NPE because a data
+	 * source is wired up incorrectly, emit a dim {@code (error)} row instead of
+	 * letting the exception bubble up and kill the overlay paint thread.
+	 */
+	private void safeRender(String sectionLabel, Runnable body)
+	{
+		try
+		{
+			body.run();
+		}
+		catch (Exception e)
+		{
+			addDimRow(sectionLabel + ": (error)");
+		}
+	}
+
 	private void renderSection(String label)
 	{
 		panelComponent.getChildren().add(LineComponent.builder()
@@ -344,6 +374,18 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 		try
 		{
 			return client.getVarbitValue(varbitId);
+		}
+		catch (Exception e)
+		{
+			return -1;
+		}
+	}
+
+	private int safeVarp(int varpId)
+	{
+		try
+		{
+			return client.getVarpValue(varpId);
 		}
 		catch (Exception e)
 		{
