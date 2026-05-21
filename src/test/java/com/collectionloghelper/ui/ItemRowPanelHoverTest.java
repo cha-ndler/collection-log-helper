@@ -33,17 +33,18 @@ import java.awt.event.MouseListener;
 import java.util.Collections;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.util.AsyncBufferedImage;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Regression tests for issue #428: the {@code mouseExited} handler on a
@@ -59,7 +60,8 @@ import static org.mockito.Mockito.when;
  * {@code e.getPoint()} is still within the panel's own bounds (which is
  * true for panel→child transitions but false when the mouse truly leaves).
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class ItemRowPanelHoverTest
 {
 	@Mock
@@ -68,7 +70,7 @@ public class ItemRowPanelHoverTest
 	private ItemRowPanel row;
 	private Color normalBg;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		AsyncBufferedImage image = mock(AsyncBufferedImage.class);
@@ -135,8 +137,8 @@ public class ItemRowPanelHoverTest
 	{
 		fireEnteredFromOutside();
 
-		assertNotEquals("entering the row must change the background to the hover colour",
-			normalBg, row.getBackground());
+		assertNotEquals(
+			normalBg, row.getBackground(),"entering the row must change the background to the hover colour");
 	}
 
 	@Test
@@ -148,8 +150,8 @@ public class ItemRowPanelHoverTest
 
 		fireExitedToOutside();
 
-		assertEquals("exiting the row boundary must restore the normal background",
-			normalBg, row.getBackground());
+		assertEquals(
+			normalBg, row.getBackground(),"exiting the row boundary must restore the normal background");
 	}
 
 	@Test
@@ -164,8 +166,8 @@ public class ItemRowPanelHoverTest
 		fireExitedToChild(); // exit point still within row bounds
 
 		assertEquals(
-			"exiting into a child component must NOT reset the hover background (issue #428)",
-			hoverBg, row.getBackground());
+			hoverBg, row.getBackground(),
+			"exiting into a child component must NOT reset the hover background (issue #428)");
 	}
 
 	@Test
@@ -175,7 +177,7 @@ public class ItemRowPanelHoverTest
 		fireEnteredFromOutside();
 		fireExitedToOutside();
 
-		assertEquals("full hover cycle must end at normal background",
-			normalBg, row.getBackground());
+		assertEquals(
+			normalBg, row.getBackground(),"full hover cycle must end at normal background");
 	}
 }

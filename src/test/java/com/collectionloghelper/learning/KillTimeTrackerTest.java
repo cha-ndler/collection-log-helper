@@ -34,17 +34,18 @@ import net.runelite.api.Hitsplat;
 import net.runelite.api.NPC;
 import net.runelite.api.events.ActorDeath;
 import net.runelite.api.events.HitsplatApplied;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.junit.jupiter.api.io.TempDir;
+import java.io.IOException;
 
 /**
  * Unit tests for {@link KillTimeTracker}.
@@ -54,7 +55,8 @@ import static org.mockito.Mockito.when;
  * directly so most tests do not depend on the RuneLite event bus.
  * Event-driven tests for attribution (#481) use real event objects with mocked actors.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class KillTimeTrackerTest
 {
 	private static final int NPC_ID = 42;
@@ -62,8 +64,8 @@ public class KillTimeTrackerTest
 	private static final String SOURCE_NAME = "Giant Mole";
 	private static final long T0 = 1_000_000L;
 
-	@Rule
-	public TemporaryFolder tmp = new TemporaryFolder();
+	@TempDir
+	public File tmp;
 
 	@Mock
 	private CollectionLogHelperConfig config;
@@ -73,7 +75,7 @@ public class KillTimeTrackerTest
 
 	private KillTimeTracker tracker;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		when(config.learnKillTimes()).thenReturn(true);
@@ -145,7 +147,7 @@ public class KillTimeTrackerTest
 		assertEquals(KillTimeTracker.WINDOW_SIZE, tracker.getObservationCount(SOURCE_NAME));
 		// avg must be > 30 because the 90 s sample replaced one 30 s sample
 		int avg = tracker.getLearnedKillTime(SOURCE_NAME).getAsInt();
-		assertTrue("Expected avg > 30 after eviction, got " + avg, avg > 30);
+		assertTrue( avg > 30,"Expected avg > 30 after eviction, got " + avg);
 	}
 
 	// ── Outlier rejection ───────────────────────────────────────────────────────
@@ -220,7 +222,7 @@ public class KillTimeTrackerTest
 	@Test
 	public void init_withCharacterDir_writesDataFileInThatDir() throws Exception
 	{
-		File characterDir = tmp.newFolder("Zezima");
+		File characterDir = newTempFolder(tmp, "Zezima");
 		tracker.init(characterDir);
 
 		tracker.recordKill(NPC_ID, T0);
@@ -230,14 +232,14 @@ public class KillTimeTrackerTest
 		tracker.reset();
 
 		File expected = new File(characterDir, KillTimeTracker.DATA_FILE_NAME);
-		assertTrue("kill_times.json should exist under characterDir", expected.exists());
+		assertTrue( expected.exists(),"kill_times.json should exist under characterDir");
 	}
 
 	@Test
 	public void twoDistinctCharacterDirs_dataIsIsolated() throws Exception
 	{
 		// Simulate one account
-		File acct1Dir = tmp.newFolder("Zezima");
+		File acct1Dir = newTempFolder(tmp, "Zezima");
 		tracker.init(acct1Dir);
 		tracker.recordKill(NPC_ID, T0);
 		tracker.recordKill(NPC_ID, T0 + 60_000L);
@@ -249,7 +251,7 @@ public class KillTimeTrackerTest
 
 		// Second account in its own directory starts with no data
 		KillTimeTracker tracker2 = new KillTimeTracker(config, database, new GsonBuilder().create());
-		File acct2Dir = tmp.newFolder("Lynx_Titan");
+		File acct2Dir = newTempFolder(tmp, "Lynx_Titan");
 		tracker2.init(acct2Dir);
 
 		assertFalse(tracker2.getLearnedKillTime(SOURCE_NAME).isPresent());
@@ -260,7 +262,7 @@ public class KillTimeTrackerTest
 	@Test
 	public void saveThenLoad_preservesWindow() throws Exception
 	{
-		File characterDir = tmp.newFolder("player");
+		File characterDir = newTempFolder(tmp, "player");
 		tracker.init(characterDir);
 
 		tracker.recordKill(NPC_ID, T0);
@@ -275,7 +277,7 @@ public class KillTimeTrackerTest
 		tracker2.init(characterDir);
 
 		OptionalInt loaded = tracker2.getLearnedKillTime(SOURCE_NAME);
-		assertTrue("Expected persisted data to survive round-trip", loaded.isPresent());
+		assertTrue( loaded.isPresent(),"Expected persisted data to survive round-trip");
 		assertEquals(45, loaded.getAsInt());
 	}
 
@@ -307,21 +309,21 @@ public class KillTimeTrackerTest
 	@Test
 	public void recordKill_doesNotWriteSynchronously_afterInit() throws Exception
 	{
-		File characterDir = tmp.newFolder("perfPlayer");
+		File characterDir = newTempFolder(tmp, "perfPlayer");
 		tracker.init(characterDir);
 		File dataFile = new File(characterDir, KillTimeTracker.DATA_FILE_NAME);
-		assertFalse("data file should not exist before any kill", dataFile.exists());
+		assertFalse( dataFile.exists(),"data file should not exist before any kill");
 
 		// Two kills => one sample recorded. The save is debounced for SAVE_DEBOUNCE_MS,
 		// so the file should NOT exist immediately after recordKill returns.
 		tracker.recordKill(NPC_ID, T0);
 		tracker.recordKill(NPC_ID, T0 + 60_000L);
-		assertFalse("data file must not be written synchronously inside recordKill (#480)",
-			dataFile.exists());
+		assertFalse(
+			dataFile.exists(),"data file must not be written synchronously inside recordKill (#480)");
 
 		// reset() drains the executor and flushes, so now the file must exist.
 		tracker.reset();
-		assertTrue("data file should be flushed by reset()", dataFile.exists());
+		assertTrue( dataFile.exists(),"data file should be flushed by reset()");
 	}
 
 	/**
@@ -334,7 +336,7 @@ public class KillTimeTrackerTest
 	@Test
 	public void recordKill_manyRapidKills_returnImmediately() throws Exception
 	{
-		File characterDir = tmp.newFolder("turboPlayer");
+		File characterDir = newTempFolder(tmp, "turboPlayer");
 		tracker.init(characterDir);
 
 		long startNanos = System.nanoTime();
@@ -350,8 +352,8 @@ public class KillTimeTrackerTest
 		// 100 calls should be sub-second even on slow CI. Generous budget = 500ms.
 		// The bug (#480) had each kill blocking on FileWriter, which on a slow disk
 		// can be 10-50ms per kill — 100 kills would push past the budget.
-		assertTrue("100 recordKill calls should be fast (<500ms), was " + elapsedMs + "ms",
-			elapsedMs < 500);
+		assertTrue(
+			elapsedMs < 500,"100 recordKill calls should be fast (<500ms), was " + elapsedMs + "ms");
 
 		tracker.reset();
 	}
@@ -399,8 +401,8 @@ public class KillTimeTrackerTest
 		// First kill: tag + die. Seeds the timer, no sample yet.
 		tracker.onHitsplatApplied(mineHitsplatOn(npc));
 		tracker.onActorDeath(deathOf(npc));
-		assertEquals("first attributed death seeds the timer, no sample",
-			0, tracker.getObservationCount(SOURCE_NAME));
+		assertEquals(
+			0, tracker.getObservationCount(SOURCE_NAME),"first attributed death seeds the timer, no sample");
 
 		// Sleep long enough to be above MIN_KILL_SECONDS = 3s (use 3.1s to be safe).
 		Thread.sleep(3_100L);
@@ -409,14 +411,14 @@ public class KillTimeTrackerTest
 		tracker.onHitsplatApplied(mineHitsplatOn(npc));
 		tracker.onActorDeath(deathOf(npc));
 
-		assertEquals("second attributed death records one sample",
-			1, tracker.getObservationCount(SOURCE_NAME));
+		assertEquals(
+			1, tracker.getObservationCount(SOURCE_NAME),"second attributed death records one sample");
 		OptionalInt result = tracker.getLearnedKillTime(SOURCE_NAME);
 		assertTrue(result.isPresent());
 		int learned = result.getAsInt();
-		assertTrue("learned kill time should be in plausible range, was " + learned,
+		assertTrue(
 			learned >= KillTimeTracker.MIN_KILL_SECONDS
-				&& learned <= KillTimeTracker.MAX_KILL_SECONDS);
+				&& learned <= KillTimeTracker.MAX_KILL_SECONDS,"learned kill time should be in plausible range, was " + learned);
 	}
 
 	/**
@@ -435,8 +437,8 @@ public class KillTimeTrackerTest
 		assertTrue(tracker.isPlayerDamaged(NPC_INDEX));
 
 		tracker.onActorDeath(deathOf(npc));
-		assertFalse("death should consume the player-damaged mark",
-			tracker.isPlayerDamaged(NPC_INDEX));
+		assertFalse(
+			tracker.isPlayerDamaged(NPC_INDEX),"death should consume the player-damaged mark");
 	}
 
 	/**
@@ -451,8 +453,8 @@ public class KillTimeTrackerTest
 		NPC npc = mock(NPC.class);
 
 		tracker.onHitsplatApplied(otherHitsplatOn(npc));
-		assertFalse("non-mine hitsplats must not mark attribution",
-			tracker.isPlayerDamaged(NPC_INDEX));
+		assertFalse(
+			tracker.isPlayerDamaged(NPC_INDEX),"non-mine hitsplats must not mark attribution");
 	}
 
 	/**
@@ -502,5 +504,19 @@ public class KillTimeTrackerTest
 		event.setActor(actor);
 		event.setHitsplat(hitsplat);
 		return event;
+	}
+
+	private static File newTempFile(File dir, String name) throws IOException
+	{
+		File f = new File(dir, name);
+		f.createNewFile();
+		return f;
+	}
+
+	private static File newTempFolder(File dir, String name) throws IOException
+	{
+		File f = new File(dir, name);
+		f.mkdirs();
+		return f;
 	}
 }

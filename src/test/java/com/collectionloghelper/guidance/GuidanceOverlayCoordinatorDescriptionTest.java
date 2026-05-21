@@ -55,14 +55,11 @@ import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -70,6 +67,10 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Tests that {@link GuidanceOverlayCoordinator#activateGuidance} passes the
@@ -84,7 +85,8 @@ import static org.mockito.Mockito.when;
  *       receives the static description.</li>
  * </ul>
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class GuidanceOverlayCoordinatorDescriptionTest
 {
 	private static final int TARGET_ITEM_ID = 1001;
@@ -140,7 +142,7 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 
 	private GuidanceOverlayCoordinator coordinator;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		OverlayStepApplier overlayStepApplier = newOverlayStepApplier();

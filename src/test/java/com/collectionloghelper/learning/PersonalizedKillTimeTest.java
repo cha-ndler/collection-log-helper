@@ -28,14 +28,15 @@ import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogSource;
 import java.util.Collections;
 import java.util.OptionalInt;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link PersonalizedKillTime}.
@@ -46,7 +47,8 @@ import static org.mockito.Mockito.when;
  * <p>{@link CollectionLogSource} is a Lombok {@code @Value} final class and cannot be mocked;
  * tests construct real instances via the all-args constructor helper.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class PersonalizedKillTimeTest
 {
 	private static final String SOURCE_NAME = "Giant Mole";
@@ -58,7 +60,7 @@ public class PersonalizedKillTimeTest
 
 	private PersonalizedKillTime personalizedKillTime;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		personalizedKillTime = new PersonalizedKillTime(tracker);

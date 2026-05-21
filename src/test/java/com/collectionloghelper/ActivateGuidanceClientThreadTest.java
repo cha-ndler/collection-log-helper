@@ -30,15 +30,16 @@ import com.collectionloghelper.di.GuidanceModule;
 import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
 import java.lang.reflect.Field;
 import net.runelite.client.callback.ClientThread;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Regression test: {@link CollectionLogHelperPlugin#activateGuidance} must dispatch
@@ -51,7 +52,8 @@ import static org.mockito.Mockito.verifyNoInteractions;
  * <p>See commit c528d0ae (step-advance / skip callbacks) for the canonical pattern
  * that this fix mirrors.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class ActivateGuidanceClientThreadTest
 {
 	@Mock
@@ -62,7 +64,7 @@ public class ActivateGuidanceClientThreadTest
 
 	private CollectionLogHelperPlugin plugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		plugin = new CollectionLogHelperPlugin();

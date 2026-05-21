@@ -35,18 +35,19 @@ import com.collectionloghelper.lifecycle.CollectionStateChangeHandler;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Tests for B4.4: {@code handleSequenceComplete()} must pass the best-item
@@ -64,7 +65,8 @@ import static org.mockito.Mockito.when;
  * {@link CollectionStateChangeHandler}, so these tests now drive the handler
  * directly via its callback wiring.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class OnSequenceCompletePerItemTest
 {
 	private static final int BEST_ITEM_ID = 1234;
@@ -91,7 +93,7 @@ public class OnSequenceCompletePerItemTest
 	private CollectionStateChangeHandler handler;
 	private List<ScoredItem> rankedSources;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		handler = new CollectionStateChangeHandler(

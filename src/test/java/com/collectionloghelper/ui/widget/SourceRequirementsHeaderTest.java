@@ -39,18 +39,19 @@ import java.util.Collections;
 import java.util.List;
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * B.5.3 integration tests for the source-level requirements header.
@@ -75,7 +76,8 @@ import static org.mockito.Mockito.when;
  * {@link net.runelite.api.Varbits} constant and reads it via
  * {@link Client#getVarbitValue}. There is no separate VARBIT row category.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class SourceRequirementsHeaderTest
 {
 	@Mock
@@ -84,7 +86,7 @@ public class SourceRequirementsHeaderTest
 	private RequirementsChecker checker;
 	private DropRateDatabase database;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<RequirementsChecker> ctor =
@@ -108,9 +110,9 @@ public class SourceRequirementsHeaderTest
 	public void buildRequirementRows_noRequirements_returnsEmpty()
 	{
 		CollectionLogSource source = findSource("Giant Mole");
-		assertNotNull("Giant Mole must exist in drop_rates.json", source);
+		assertNotNull( source,"Giant Mole must exist in drop_rates.json");
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
-		assertTrue("Source with no requirements must produce no rows", rows.isEmpty());
+		assertTrue( rows.isEmpty(),"Source with no requirements must produce no rows");
 	}
 
 	@Test
@@ -118,8 +120,8 @@ public class SourceRequirementsHeaderTest
 	{
 		RequirementsView view = new RequirementsView();
 		view.updateRows(Collections.emptyList());
-		assertFalse("RequirementsView must be hidden when there are no rows",
-			view.isVisible());
+		assertFalse(
+			view.isVisible(),"RequirementsView must be hidden when there are no rows");
 	}
 
 	// =========================================================================
@@ -139,14 +141,14 @@ public class SourceRequirementsHeaderTest
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
 
-		assertEquals("One quest row expected", 1, rows.size());
+		assertEquals( 1, rows.size(),"One quest row expected");
 		RequirementRow row = rows.get(0);
 		assertEquals(RequirementRow.Category.QUEST, row.getCategory());
-		assertTrue("Completed quest must be met", row.isMet());
+		assertTrue( row.isMet(),"Completed quest must be met");
 		assertEquals("COMPLETED", row.getStateText());
 		assertEquals(RequirementRow.COLOR_MET, row.getColor());
-		assertTrue("Label must contain quest name fragment",
-			row.getLabel().contains("Dragon Slayer"));
+		assertTrue(
+			row.getLabel().contains("Dragon Slayer"),"Label must contain quest name fragment");
 	}
 
 	@Test
@@ -163,7 +165,7 @@ public class SourceRequirementsHeaderTest
 
 		assertEquals(1, rows.size());
 		RequirementRow row = rows.get(0);
-		assertFalse("Not-started quest must be unmet", row.isMet());
+		assertFalse( row.isMet(),"Not-started quest must be unmet");
 		assertEquals("NOT STARTED", row.getStateText());
 		assertEquals(RequirementRow.COLOR_UNMET, row.getColor());
 	}
@@ -182,7 +184,7 @@ public class SourceRequirementsHeaderTest
 
 		assertEquals(1, rows.size());
 		RequirementRow row = rows.get(0);
-		assertFalse("In-progress quest must not count as met", row.isMet());
+		assertFalse( row.isMet(),"In-progress quest must not count as met");
 		assertEquals("IN PROGRESS", row.getStateText());
 		assertEquals(RequirementRow.COLOR_IN_PROGRESS, row.getColor());
 	}
@@ -205,12 +207,12 @@ public class SourceRequirementsHeaderTest
 		assertEquals(1, rows.size());
 		RequirementRow row = rows.get(0);
 		assertEquals(RequirementRow.Category.SKILL, row.getCategory());
-		assertTrue("Level 95 satisfies Slayer 91", row.isMet());
+		assertTrue( row.isMet(),"Level 95 satisfies Slayer 91");
 		assertEquals(RequirementRow.COLOR_MET, row.getColor());
-		assertTrue("Label must contain skill name and required level",
-			row.getLabel().contains("Slayer") && row.getLabel().contains("91"));
-		assertTrue("State text must include current and required levels",
-			row.getStateText().contains("95") && row.getStateText().contains("91"));
+		assertTrue(
+			row.getLabel().contains("Slayer") && row.getLabel().contains("91"),"Label must contain skill name and required level");
+		assertTrue(
+			row.getStateText().contains("95") && row.getStateText().contains("91"),"State text must include current and required levels");
 	}
 
 	@Test
@@ -226,7 +228,7 @@ public class SourceRequirementsHeaderTest
 
 		assertEquals(1, rows.size());
 		RequirementRow row = rows.get(0);
-		assertFalse("Level 80 does not meet Slayer 91", row.isMet());
+		assertFalse( row.isMet(),"Level 80 does not meet Slayer 91");
 		assertEquals(RequirementRow.COLOR_UNMET, row.getColor());
 	}
 
@@ -249,11 +251,11 @@ public class SourceRequirementsHeaderTest
 		assertEquals(1, rows.size());
 		RequirementRow row = rows.get(0);
 		assertEquals(RequirementRow.Category.DIARY, row.getCategory());
-		assertTrue("Completed diary must be met", row.isMet());
+		assertTrue( row.isMet(),"Completed diary must be met");
 		assertEquals("COMPLETED", row.getStateText());
 		assertEquals(RequirementRow.COLOR_MET, row.getColor());
-		assertTrue("Label must contain diary area name",
-			row.getLabel().contains("Ardougne"));
+		assertTrue(
+			row.getLabel().contains("Ardougne"),"Label must contain diary area name");
 	}
 
 	@Test
@@ -269,7 +271,7 @@ public class SourceRequirementsHeaderTest
 
 		assertEquals(1, rows.size());
 		RequirementRow row = rows.get(0);
-		assertFalse("Incomplete diary must be unmet", row.isMet());
+		assertFalse( row.isMet(),"Incomplete diary must be unmet");
 		assertEquals("NOT COMPLETED", row.getStateText());
 		assertEquals(RequirementRow.COLOR_UNMET, row.getColor());
 	}
@@ -293,12 +295,12 @@ public class SourceRequirementsHeaderTest
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
 
-		assertEquals("Quest + skill = 2 rows", 2, rows.size());
+		assertEquals( 2, rows.size(),"Quest + skill = 2 rows");
 		for (RequirementRow row : rows)
 		{
-			assertTrue("All-met: row '" + row.getLabel() + "' must be met", row.isMet());
-			assertEquals("All-met: row '" + row.getLabel() + "' must be green",
-				RequirementRow.COLOR_MET, row.getColor());
+			assertTrue( row.isMet(),"All-met: row '" + row.getLabel() + "' must be met");
+			assertEquals(
+				RequirementRow.COLOR_MET, row.getColor(),"All-met: row '" + row.getLabel() + "' must be green");
 		}
 	}
 
@@ -325,12 +327,12 @@ public class SourceRequirementsHeaderTest
 		// Quest row (index 0) — unmet
 		RequirementRow questRow = rows.get(0);
 		assertEquals(RequirementRow.Category.QUEST, questRow.getCategory());
-		assertFalse("Quest not started — must be unmet", questRow.isMet());
+		assertFalse( questRow.isMet(),"Quest not started — must be unmet");
 		assertEquals(RequirementRow.COLOR_UNMET, questRow.getColor());
 		// Skill row (index 1) — met
 		RequirementRow skillRow = rows.get(1);
 		assertEquals(RequirementRow.Category.SKILL, skillRow.getCategory());
-		assertTrue("Strength 80 meets 70 — must be met", skillRow.isMet());
+		assertTrue( skillRow.isMet(),"Strength 80 meets 70 — must be met");
 		assertEquals(RequirementRow.COLOR_MET, skillRow.getColor());
 	}
 
@@ -342,17 +344,17 @@ public class SourceRequirementsHeaderTest
 	public void integration_cerberus_hasSlayer91Requirement()
 	{
 		CollectionLogSource cerberus = findSource("Cerberus");
-		assertNotNull("Cerberus must exist in drop_rates.json", cerberus);
+		assertNotNull( cerberus,"Cerberus must exist in drop_rates.json");
 
 		SourceRequirements req = cerberus.getRequirements();
-		assertNotNull("Cerberus must have requirements", req);
-		assertNotNull("Cerberus must have skill requirements", req.getSkills());
-		assertFalse("Cerberus must have at least one skill requirement",
-			req.getSkills().isEmpty());
+		assertNotNull( req,"Cerberus must have requirements");
+		assertNotNull( req.getSkills(),"Cerberus must have skill requirements");
+		assertFalse(
+			req.getSkills().isEmpty(),"Cerberus must have at least one skill requirement");
 
 		boolean hasSlayer91 = req.getSkills().stream()
 			.anyMatch(s -> "SLAYER".equals(s.getSkill()) && s.getLevel() == 91);
-		assertTrue("Cerberus must require Slayer 91", hasSlayer91);
+		assertTrue( hasSlayer91,"Cerberus must require Slayer 91");
 	}
 
 	@Test
@@ -365,25 +367,25 @@ public class SourceRequirementsHeaderTest
 
 		List<RequirementRow> rows = checker.buildRequirementRows(cerberus);
 
-		assertFalse("Cerberus rows must not be empty", rows.isEmpty());
+		assertFalse( rows.isEmpty(),"Cerberus rows must not be empty");
 		boolean hasSlayerRow = rows.stream()
 			.anyMatch(r -> r.getCategory() == RequirementRow.Category.SKILL
 				&& r.getLabel().contains("Slayer")
 				&& r.getLabel().contains("91"));
-		assertTrue("Cerberus must have a Slayer 91 row in the header", hasSlayerRow);
+		assertTrue( hasSlayerRow,"Cerberus must have a Slayer 91 row in the header");
 	}
 
 	@Test
 	public void integration_vorkath_hasDragonSlayerIIQuestRequirement()
 	{
 		CollectionLogSource vorkath = findSource("Vorkath");
-		assertNotNull("Vorkath must exist in drop_rates.json", vorkath);
+		assertNotNull( vorkath,"Vorkath must exist in drop_rates.json");
 
 		SourceRequirements req = vorkath.getRequirements();
-		assertNotNull("Vorkath must have requirements", req);
-		assertNotNull("Vorkath must have quest requirements", req.getQuests());
-		assertTrue("Vorkath must require Dragon Slayer II",
-			req.getQuests().contains("DRAGON_SLAYER_II"));
+		assertNotNull( req,"Vorkath must have requirements");
+		assertNotNull( req.getQuests(),"Vorkath must have quest requirements");
+		assertTrue(
+			req.getQuests().contains("DRAGON_SLAYER_II"),"Vorkath must require Dragon Slayer II");
 	}
 
 	@Test
@@ -397,26 +399,26 @@ public class SourceRequirementsHeaderTest
 
 		List<RequirementRow> rows = checker.buildRequirementRows(vorkath);
 
-		assertFalse("Vorkath rows must not be empty", rows.isEmpty());
+		assertFalse( rows.isEmpty(),"Vorkath rows must not be empty");
 		boolean hasDSIIRow = rows.stream()
 			.anyMatch(r -> r.getCategory() == RequirementRow.Category.QUEST
 				&& r.getLabel().contains("Dragon Slayer"));
-		assertTrue("Vorkath must have a Dragon Slayer II quest row in the header",
-			hasDSIIRow);
+		assertTrue(
+			hasDSIIRow,"Vorkath must have a Dragon Slayer II quest row in the header");
 	}
 
 	@Test
 	public void integration_generalGraardor_hasQuestAndSkillRequirements()
 	{
 		CollectionLogSource graardor = findSource("General Graardor");
-		assertNotNull("General Graardor must exist in drop_rates.json", graardor);
+		assertNotNull( graardor,"General Graardor must exist in drop_rates.json");
 
 		SourceRequirements req = graardor.getRequirements();
-		assertNotNull("General Graardor must have requirements", req);
-		assertTrue("General Graardor must have quest requirements",
-			req.getQuests() != null && !req.getQuests().isEmpty());
-		assertTrue("General Graardor must have skill requirements",
-			req.getSkills() != null && !req.getSkills().isEmpty());
+		assertNotNull( req,"General Graardor must have requirements");
+		assertTrue(
+			req.getQuests() != null && !req.getQuests().isEmpty(),"General Graardor must have quest requirements");
+		assertTrue(
+			req.getSkills() != null && !req.getSkills().isEmpty(),"General Graardor must have skill requirements");
 	}
 
 	@Test
@@ -436,8 +438,8 @@ public class SourceRequirementsHeaderTest
 		boolean hasSkillRow = rows.stream()
 			.anyMatch(r -> r.getCategory() == RequirementRow.Category.SKILL);
 
-		assertTrue("General Graardor header must include a QUEST row", hasQuestRow);
-		assertTrue("General Graardor header must include a SKILL row", hasSkillRow);
+		assertTrue( hasQuestRow,"General Graardor header must include a QUEST row");
+		assertTrue( hasSkillRow,"General Graardor header must include a SKILL row");
 	}
 
 	// =========================================================================
@@ -451,8 +453,8 @@ public class SourceRequirementsHeaderTest
 			"Dragon Slayer II", "COMPLETED", RequirementRow.COLOR_MET, true);
 		RequirementsView view = new RequirementsView();
 		view.updateRows(Collections.singletonList(row));
-		assertTrue("RequirementsView must be visible when rows are provided",
-			view.isVisible());
+		assertTrue(
+			view.isVisible(),"RequirementsView must be visible when rows are provided");
 	}
 
 	@Test
@@ -478,7 +480,7 @@ public class SourceRequirementsHeaderTest
 				}
 			}
 		}
-		assertTrue("Diary row label must contain 'Ardougne Elite'", found);
+		assertTrue( found,"Diary row label must contain 'Ardougne Elite'");
 	}
 
 	// =========================================================================

@@ -43,20 +43,21 @@ import net.runelite.api.ItemComposition;
 import net.runelite.api.ItemContainer;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Integration test verifying that {@link RequiredItemsChipPanel} reads bank-scan
@@ -74,7 +75,8 @@ import static org.mockito.Mockito.when;
  * logic helpers are covered as pure functions in {@link RequiredItemsChipPanelTest}.
  * The full update() visibility path is confirmed in that class as well.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class BankScanIntegrationTest
 {
 	private static final int TINDERBOX = 590;
@@ -109,7 +111,7 @@ public class BankScanIntegrationTest
 	private PlayerInventoryState inventoryState;
 	private RequiredItemResolver resolver;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<PlayerBankState> bankCtor = PlayerBankState.class.getDeclaredConstructor(
@@ -154,14 +156,14 @@ public class BankScanIntegrationTest
 
 		List<RequiredItemDisplay> rows = resolver.resolve(step);
 
-		assertEquals("Must have 3 rows for 3 item IDs", 3, rows.size());
+		assertEquals( 3, rows.size(),"Must have 3 rows for 3 item IDs");
 		for (RequiredItemDisplay row : rows)
 		{
-			assertEquals("All items must be MISSING before any bank scan",
-				Status.MISSING, row.getStatus());
-			assertEquals("MISSING chip must have red border",
+			assertEquals(
+				Status.MISSING, row.getStatus(),"All items must be MISSING before any bank scan");
+			assertEquals(
 				RequiredItemDisplay.COLOR_MISSING,
-				RequiredItemsChipPanel.borderColorFor(row.getStatus()));
+				RequiredItemsChipPanel.borderColorFor(row.getStatus()),"MISSING chip must have red border");
 		}
 	}
 
@@ -193,23 +195,23 @@ public class BankScanIntegrationTest
 		RequiredItemDisplay pyreLogs = rows.get(1);
 		RequiredItemDisplay shadeRemains = rows.get(2);
 
-		assertEquals("Tinderbox not in bank must be MISSING", Status.MISSING, tinderbox.getStatus());
-		assertEquals("Pyre logs in bank must be IN_BANK", Status.IN_BANK, pyreLogs.getStatus());
-		assertEquals("Shade remains in bank must be IN_BANK", Status.IN_BANK, shadeRemains.getStatus());
+		assertEquals( Status.MISSING, tinderbox.getStatus(),"Tinderbox not in bank must be MISSING");
+		assertEquals( Status.IN_BANK, pyreLogs.getStatus(),"Pyre logs in bank must be IN_BANK");
+		assertEquals( Status.IN_BANK, shadeRemains.getStatus(),"Shade remains in bank must be IN_BANK");
 
 		// Chip styling
-		assertEquals("MISSING chip border must be red",
+		assertEquals(
 			RequiredItemDisplay.COLOR_MISSING,
-			RequiredItemsChipPanel.borderColorFor(tinderbox.getStatus()));
-		assertEquals("IN_BANK chip border must be white",
+			RequiredItemsChipPanel.borderColorFor(tinderbox.getStatus()),"MISSING chip border must be red");
+		assertEquals(
 			Color.WHITE,
-			RequiredItemsChipPanel.borderColorFor(pyreLogs.getStatus()));
-		assertEquals("IN_BANK chip tooltip must be Quest Helper bank message",
+			RequiredItemsChipPanel.borderColorFor(pyreLogs.getStatus()),"IN_BANK chip border must be white");
+		assertEquals(
 			RequiredItemsChipPanel.IN_BANK_TOOLTIP,
-			RequiredItemsChipPanel.tooltipFor(pyreLogs));
-		assertEquals("IN_BANK chip tooltip must be Quest Helper bank message",
+			RequiredItemsChipPanel.tooltipFor(pyreLogs),"IN_BANK chip tooltip must be Quest Helper bank message");
+		assertEquals(
 			RequiredItemsChipPanel.IN_BANK_TOOLTIP,
-			RequiredItemsChipPanel.tooltipFor(shadeRemains));
+			RequiredItemsChipPanel.tooltipFor(shadeRemains),"IN_BANK chip tooltip must be Quest Helper bank message");
 	}
 
 	/**
@@ -250,13 +252,13 @@ public class BankScanIntegrationTest
 		List<RequiredItemDisplay> rows = resolverWithInv.resolve(step);
 
 		assertEquals(3, rows.size());
-		assertEquals("Tinderbox in inventory must be HELD", Status.HELD, rows.get(0).getStatus());
-		assertEquals("Pyre logs only in bank must be IN_BANK", Status.IN_BANK, rows.get(1).getStatus());
-		assertEquals("Shade remains only in bank must be IN_BANK", Status.IN_BANK, rows.get(2).getStatus());
+		assertEquals( Status.HELD, rows.get(0).getStatus(),"Tinderbox in inventory must be HELD");
+		assertEquals( Status.IN_BANK, rows.get(1).getStatus(),"Pyre logs only in bank must be IN_BANK");
+		assertEquals( Status.IN_BANK, rows.get(2).getStatus(),"Shade remains only in bank must be IN_BANK");
 
-		assertEquals("HELD chip border must be green",
+		assertEquals(
 			RequiredItemDisplay.COLOR_HELD,
-			RequiredItemsChipPanel.borderColorFor(rows.get(0).getStatus()));
+			RequiredItemsChipPanel.borderColorFor(rows.get(0).getStatus()),"HELD chip border must be green");
 	}
 
 	/**
@@ -268,8 +270,8 @@ public class BankScanIntegrationTest
 	{
 		when(bankContainer.getItems()).thenReturn(new Item[0]);
 		bankState.scanBank(bankContainer);
-		assertFalse("hasBankItemData must be false after empty scan",
-			bankState.hasBankItemData());
+		assertFalse(
+			bankState.hasBankItemData(),"hasBankItemData must be false after empty scan");
 
 		GuidanceStep step = stepWith(Arrays.asList(TINDERBOX, PYRE_LOGS));
 		List<RequiredItemDisplay> rows = resolver.resolve(step);
@@ -289,24 +291,24 @@ public class BankScanIntegrationTest
 		// First scan: bank has TINDERBOX
 		when(bankContainer.getItems()).thenReturn(new Item[]{new Item(TINDERBOX, 1)});
 		bankState.scanBank(bankContainer);
-		assertTrue("TINDERBOX must be in bank after first scan", bankState.hasItem(TINDERBOX));
+		assertTrue( bankState.hasItem(TINDERBOX),"TINDERBOX must be in bank after first scan");
 
 		// Second scan: bank has only PYRE_LOGS
 		when(bankContainer.getItems()).thenReturn(new Item[]{new Item(PYRE_LOGS, 1)});
 		bankState.scanBank(bankContainer);
 
-		assertFalse("After rescan, TINDERBOX must no longer be in bank",
-			bankState.hasItem(TINDERBOX));
-		assertTrue("After rescan, PYRE_LOGS must be in bank", bankState.hasItem(PYRE_LOGS));
+		assertFalse(
+			bankState.hasItem(TINDERBOX),"After rescan, TINDERBOX must no longer be in bank");
+		assertTrue( bankState.hasItem(PYRE_LOGS),"After rescan, PYRE_LOGS must be in bank");
 
 		GuidanceStep step = stepWith(Arrays.asList(TINDERBOX, PYRE_LOGS));
 		List<RequiredItemDisplay> rows = resolver.resolve(step);
 
 		assertEquals(Status.MISSING, rows.get(0).getStatus());
 		assertEquals(Status.IN_BANK, rows.get(1).getStatus());
-		assertEquals("IN_BANK chip border must be white",
+		assertEquals(
 			Color.WHITE,
-			RequiredItemsChipPanel.borderColorFor(rows.get(1).getStatus()));
+			RequiredItemsChipPanel.borderColorFor(rows.get(1).getStatus()),"IN_BANK chip border must be white");
 	}
 
 	// ── Helpers ─────────────────────────────────────────────────────────────

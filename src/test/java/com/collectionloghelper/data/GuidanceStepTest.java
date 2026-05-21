@@ -29,11 +29,11 @@ import com.google.gson.GsonBuilder;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link GuidanceStep#resolveDescription(Integer)},
@@ -139,8 +139,8 @@ public class GuidanceStepTest
 		GuidanceStep step = gson.fromJson(json, GuidanceStep.class);
 
 		assertEquals("Kill soldiers", step.getDescription());
-		assertNull("perItemStepDescription should be null when absent from JSON",
-			step.getPerItemStepDescription());
+		assertNull(
+			step.getPerItemStepDescription(),"perItemStepDescription should be null when absent from JSON");
 	}
 
 	// ── Schema deserialisation: field present ─────────────────────────────────
@@ -198,10 +198,10 @@ public class GuidanceStepTest
 		GuidanceStep step = stepWithOverrides(CYCLOPES_STATIC_DESC, overrides);
 
 		String resolved = step.resolveDescription(IRON_DEFENDER);
-		assertTrue("Override for Iron defender must mention 'Iron'",
-			resolved.contains("Iron"));
-		assertTrue("Override for Iron defender must mention 'Bronze' (what to hold)",
-			resolved.contains("Bronze"));
+		assertTrue(
+			resolved.contains("Iron"),"Override for Iron defender must mention 'Iron'");
+		assertTrue(
+			resolved.contains("Bronze"),"Override for Iron defender must mention 'Bronze' (what to hold)");
 	}
 
 	/**
@@ -218,10 +218,10 @@ public class GuidanceStepTest
 		GuidanceStep step = stepWithOverrides(CYCLOPES_STATIC_DESC, overrides);
 
 		String resolved = step.resolveDescription(DRAGON_DEFENDER);
-		assertTrue("Dragon defender override must mention 'Dragon'",
-			resolved.contains("Dragon"));
-		assertTrue("Dragon defender override must mention 'Rune' (what to hold)",
-			resolved.contains("Rune"));
+		assertTrue(
+			resolved.contains("Dragon"),"Dragon defender override must mention 'Dragon'");
+		assertTrue(
+			resolved.contains("Rune"),"Dragon defender override must mention 'Rune' (what to hold)");
 	}
 
 	/**

@@ -31,13 +31,13 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link RequirementsView} (B.5.3 requirements section).
@@ -88,7 +88,7 @@ public class RequirementsViewTest
 			state, RequirementRow.COLOR_UNMET, false);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		view = new RequirementsView();
@@ -103,14 +103,14 @@ public class RequirementsViewTest
 	@Test
 	public void initiallyHidden()
 	{
-		assertFalse("RequirementsView should start hidden", view.isVisible());
+		assertFalse( view.isVisible(),"RequirementsView should start hidden");
 	}
 
 	@Test
 	public void updateRows_emptyList_hidden()
 	{
 		view.updateRows(Collections.emptyList());
-		assertFalse("Empty rows: view must remain hidden", view.isVisible());
+		assertFalse( view.isVisible(),"Empty rows: view must remain hidden");
 	}
 
 	@Test
@@ -121,7 +121,7 @@ public class RequirementsViewTest
 			metSkillRow("Agility 70", "level 75/70")
 		);
 		view.updateRows(rows);
-		assertTrue("All-met rows: view must be visible", view.isVisible());
+		assertTrue( view.isVisible(),"All-met rows: view must be visible");
 	}
 
 	@Test
@@ -133,9 +133,9 @@ public class RequirementsViewTest
 		view.updateRows(rows);
 
 		JLabel rowLabel = findFirstRowLabel(view);
-		assertNotNull("Expected at least one row label", rowLabel);
-		assertEquals("Met row must be green",
-			RequirementRow.COLOR_MET, rowLabel.getForeground());
+		assertNotNull( rowLabel,"Expected at least one row label");
+		assertEquals(
+			RequirementRow.COLOR_MET, rowLabel.getForeground(),"Met row must be green");
 	}
 
 	@Test
@@ -146,7 +146,7 @@ public class RequirementsViewTest
 			unmetSkillRow("Agility 70", "level 60/70")
 		);
 		view.updateRows(rows);
-		assertTrue("Mixed rows: view must be visible", view.isVisible());
+		assertTrue( view.isVisible(),"Mixed rows: view must be visible");
 	}
 
 	@Test
@@ -158,9 +158,9 @@ public class RequirementsViewTest
 		view.updateRows(rows);
 
 		JLabel rowLabel = findFirstRowLabel(view);
-		assertNotNull("Expected at least one row label", rowLabel);
-		assertEquals("Unmet row must be red",
-			RequirementRow.COLOR_UNMET, rowLabel.getForeground());
+		assertNotNull( rowLabel,"Expected at least one row label");
+		assertEquals(
+			RequirementRow.COLOR_UNMET, rowLabel.getForeground(),"Unmet row must be red");
 	}
 
 	@Test
@@ -173,8 +173,8 @@ public class RequirementsViewTest
 
 		JLabel rowLabel = findFirstRowLabel(view);
 		assertNotNull(rowLabel);
-		assertEquals("In-progress quest must be yellow",
-			RequirementRow.COLOR_IN_PROGRESS, rowLabel.getForeground());
+		assertEquals(
+			RequirementRow.COLOR_IN_PROGRESS, rowLabel.getForeground(),"In-progress quest must be yellow");
 	}
 
 	@Test
@@ -194,8 +194,8 @@ public class RequirementsViewTest
 		));
 		JLabel secondLabel = findFirstRowLabel(view);
 		assertNotNull(secondLabel);
-		assertEquals("After level-up, row must switch to green",
-			RequirementRow.COLOR_MET, secondLabel.getForeground());
+		assertEquals(
+			RequirementRow.COLOR_MET, secondLabel.getForeground(),"After level-up, row must switch to green");
 	}
 
 	@Test
@@ -206,7 +206,7 @@ public class RequirementsViewTest
 
 		view.hideRequirements();
 		flushEdt();
-		assertFalse("hideRequirements must hide the section", view.isVisible());
+		assertFalse( view.isVisible(),"hideRequirements must hide the section");
 	}
 
 	@Test
@@ -215,8 +215,8 @@ public class RequirementsViewTest
 		view.updateRows(Collections.singletonList(metQuestRow("Dragon Slayer II")));
 		view.hideRequirements();
 		flushEdt();
-		assertEquals("hideRequirements must remove all child components",
-			0, view.getComponentCount());
+		assertEquals(
+			0, view.getComponentCount(),"hideRequirements must remove all child components");
 	}
 
 	@Test
@@ -234,8 +234,8 @@ public class RequirementsViewTest
 
 		JLabel rowLabel = findFirstRowLabel(view);
 		assertNotNull(rowLabel);
-		assertTrue("Diary label must contain the diary name",
-			rowLabel.getText().contains("Lumbridge Elite"));
+		assertTrue(
+			rowLabel.getText().contains("Lumbridge Elite"),"Diary label must contain the diary name");
 		assertEquals(RequirementRow.COLOR_MET, rowLabel.getForeground());
 	}
 
@@ -247,8 +247,8 @@ public class RequirementsViewTest
 
 		JLabel rowLabel = findFirstRowLabel(view);
 		assertNotNull(rowLabel);
-		assertTrue("Row label must contain state text",
-			rowLabel.getText().contains("level 75/70"));
+		assertTrue(
+			rowLabel.getText().contains("level 75/70"),"Row label must contain state text");
 	}
 
 	// -------------------------------------------------------------------------

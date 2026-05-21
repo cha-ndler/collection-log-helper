@@ -57,22 +57,23 @@ import net.runelite.api.VarPlayer;
 import net.runelite.client.ui.overlay.components.LayoutableRenderableEntity;
 import net.runelite.client.ui.overlay.components.LineComponent;
 import net.runelite.client.ui.overlay.components.PanelComponent;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Tests for {@link PlayerCapabilityDebugOverlay} covering:
@@ -88,7 +89,8 @@ import static org.mockito.Mockito.when;
  *       in-game quest-points varplayer — guard against the #487 regression.</li>
  * </ul>
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class PlayerCapabilityDebugOverlayTest
 {
 	@Mock
@@ -128,7 +130,7 @@ public class PlayerCapabilityDebugOverlayTest
 
 	private PlayerCapabilityDebugOverlay overlay;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		java.lang.reflect.Constructor<PlayerCapabilityDebugOverlay> ctor =
@@ -221,8 +223,8 @@ public class PlayerCapabilityDebugOverlayTest
 
 		overlay.render(realGraphics);
 
-		assertEquals("expected Task row to include creature name and remaining",
-			"Abyssal demons x150", rightForLeft(panelRows(), "Task"));
+		assertEquals(
+			"Abyssal demons x150", rightForLeft(panelRows(), "Task"),"expected Task row to include creature name and remaining");
 	}
 
 	@Test
@@ -233,8 +235,8 @@ public class PlayerCapabilityDebugOverlayTest
 
 		overlay.render(realGraphics);
 
-		assertTrue("expected Task row to say 'none' when no slayer task is active",
-			rightForLeft(panelRows(), "Task").contains("none"));
+		assertTrue(
+			rightForLeft(panelRows(), "Task").contains("none"),"expected Task row to say 'none' when no slayer task is active");
 	}
 
 	// -------------------------------------------------------------------------
@@ -251,19 +253,19 @@ public class PlayerCapabilityDebugOverlayTest
 
 		List<Row> rows = panelRows();
 		String questsValue = rightForLeft(rows, "Quests");
-		assertTrue("expected Quests row to render as <finished>/<total>, got: " + questsValue,
-			questsValue.matches("\\d+/\\d+"));
-		assertEquals("expected Quests denominator to equal Quest.values().length",
-			Quest.values().length, parseDenominator(questsValue));
+		assertTrue(
+			questsValue.matches("\\d+/\\d+"),"expected Quests row to render as <finished>/<total>, got: " + questsValue);
+		assertEquals(
+			Quest.values().length, parseDenominator(questsValue),"expected Quests denominator to equal Quest.values().length");
 
-		assertEquals("expected Quest points to match VarPlayer.QUEST_POINTS",
-			"333", rightForLeft(rows, "Quest points"));
+		assertEquals(
+			"333", rightForLeft(rows, "Quest points"),"expected Quest points to match VarPlayer.QUEST_POINTS");
 
 		// #487 guard: ensure the old "Quest entries" label no longer ships.
 		for (Row r : rows)
 		{
-			assertFalse("did not expect legacy 'Quest entries' label after #487 fix",
-				"Quest entries".equals(r.left));
+			assertFalse(
+				"Quest entries".equals(r.left),"did not expect legacy 'Quest entries' label after #487 fix");
 		}
 	}
 
@@ -280,10 +282,10 @@ public class PlayerCapabilityDebugOverlayTest
 		overlay.render(realGraphics);
 
 		List<String> lefts = panelLeftStrings();
-		assertTrue("expected POH Teleports section header",
-			lefts.stream().anyMatch(s -> s.startsWith("POH Teleports")));
-		assertTrue("expected '(none detected)' placeholder when teleport set is empty",
-			lefts.contains("(none detected)"));
+		assertTrue(
+			lefts.stream().anyMatch(s -> s.startsWith("POH Teleports")),"expected POH Teleports section header");
+		assertTrue(
+			lefts.contains("(none detected)"),"expected '(none detected)' placeholder when teleport set is empty");
 	}
 
 	@Test
@@ -297,10 +299,10 @@ public class PlayerCapabilityDebugOverlayTest
 		overlay.render(realGraphics);
 
 		List<Row> rows = panelRows();
-		assertTrue("expected a row for the detected POH teleport",
+		assertTrue(
 			rows.stream().anyMatch(r -> "yes".equals(r.right)
 				&& r.left != null
-				&& !r.left.equals("POH built")));
+				&& !r.left.equals("POH built")),"expected a row for the detected POH teleport");
 	}
 
 	@Test
@@ -313,8 +315,8 @@ public class PlayerCapabilityDebugOverlayTest
 		overlay.render(realGraphics);
 
 		List<Row> rows = panelRows();
-		assertEquals("expected items-equipped count to reflect snapshot size",
-			"5", rightForLeft(rows, "Items equipped"));
+		assertEquals(
+			"5", rightForLeft(rows, "Items equipped"),"expected items-equipped count to reflect snapshot size");
 	}
 
 	@Test
@@ -330,11 +332,11 @@ public class PlayerCapabilityDebugOverlayTest
 		overlay.render(realGraphics);
 
 		List<Row> rows = panelRows();
-		assertEquals("expected Ardougne to render as ELITE",
-			"ELITE", rightForLeft(rows, humanise("ARDOUGNE")));
+		assertEquals(
+			"ELITE", rightForLeft(rows, humanise("ARDOUGNE")),"expected Ardougne to render as ELITE");
 		// Other regions still appear with "-"
-		assertEquals("expected Desert region (no diary stubbed) to render as '-'",
-			"-", rightForLeft(rows, humanise("DESERT")));
+		assertEquals(
+			"-", rightForLeft(rows, humanise("DESERT")),"expected Desert region (no diary stubbed) to render as '-'");
 	}
 
 	@Test
@@ -347,9 +349,9 @@ public class PlayerCapabilityDebugOverlayTest
 		overlay.render(realGraphics);
 
 		List<Row> rows = panelRows();
-		assertTrue("expected at least one cape-perk row marked 'yes'",
+		assertTrue(
 			rows.stream().anyMatch(r -> "yes".equals(r.right)
-				&& humanise(sample.name()).equals(r.left)));
+				&& humanise(sample.name()).equals(r.left)),"expected at least one cape-perk row marked 'yes'");
 	}
 
 	@Test
@@ -360,8 +362,8 @@ public class PlayerCapabilityDebugOverlayTest
 
 		overlay.render(realGraphics);
 
-		assertTrue("expected '(none available)' placeholder when no cape perks detected",
-			panelLeftStrings().contains("(none available)"));
+		assertTrue(
+			panelLeftStrings().contains("(none available)"),"expected '(none available)' placeholder when no cape perks detected");
 	}
 
 	@Test
@@ -374,9 +376,9 @@ public class PlayerCapabilityDebugOverlayTest
 		overlay.render(realGraphics);
 
 		List<Row> rows = panelRows();
-		assertTrue("expected at least one quest sub-milestone row marked 'yes'",
+		assertTrue(
 			rows.stream().anyMatch(r -> "yes".equals(r.right)
-				&& humanise(sample.name()).equals(r.left)));
+				&& humanise(sample.name()).equals(r.left)),"expected at least one quest sub-milestone row marked 'yes'");
 	}
 
 	@Test
@@ -387,8 +389,8 @@ public class PlayerCapabilityDebugOverlayTest
 
 		overlay.render(realGraphics);
 
-		assertTrue("expected '(none completed)' placeholder when no sub-milestones complete",
-			panelLeftStrings().contains("(none completed)"));
+		assertTrue(
+			panelLeftStrings().contains("(none completed)"),"expected '(none completed)' placeholder when no sub-milestones complete");
 	}
 
 	// -------------------------------------------------------------------------
@@ -407,11 +409,11 @@ public class PlayerCapabilityDebugOverlayTest
 		assertNotNull(result);
 
 		List<String> lefts = panelLeftStrings();
-		assertTrue("expected an '(error)' placeholder for the failing section",
-			lefts.stream().anyMatch(s -> s.contains("(error)")));
+		assertTrue(
+			lefts.stream().anyMatch(s -> s.contains("(error)")),"expected an '(error)' placeholder for the failing section");
 		// Subsequent sections still render.
-		assertTrue("expected Diary section to still render after upstream section failure",
-			lefts.stream().anyMatch(s -> s.startsWith("Diary tiers")));
+		assertTrue(
+			lefts.stream().anyMatch(s -> s.startsWith("Diary tiers")),"expected Diary section to still render after upstream section failure");
 	}
 
 	// -------------------------------------------------------------------------

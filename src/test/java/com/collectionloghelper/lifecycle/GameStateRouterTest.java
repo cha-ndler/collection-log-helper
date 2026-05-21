@@ -27,16 +27,13 @@ import java.util.Set;
 import net.runelite.api.GameState;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.client.callback.ClientThread;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -45,6 +42,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Tests for {@link GameStateRouter} -- the Wave 15 (#503) extraction that
@@ -61,7 +62,8 @@ import static org.mockito.Mockito.when;
  *   <li>Null-callback safety on both transition handlers.</li>
  * </ul>
  */
-@RunWith(MockitoJUnitRunner.Silent.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class GameStateRouterTest
 {
 	@Mock private ClientThread clientThread;
@@ -96,7 +98,7 @@ public class GameStateRouterTest
 	private boolean pendingTravelVarbitRefresh;
 	private boolean missingItemsCleared;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		sourcesWithMissingItems = new HashSet<>();
@@ -162,7 +164,7 @@ public class GameStateRouterTest
 
 		router.handle(gameStateEvent(GameState.LOGGED_IN));
 
-		assertTrue("slayerRefreshPending must be set so onGameTick refreshes Slayer", slayerRefreshPending);
+		assertTrue( slayerRefreshPending,"slayerRefreshPending must be set so onGameTick refreshes Slayer");
 	}
 
 	@Test
@@ -263,8 +265,8 @@ public class GameStateRouterTest
 
 		router.handle(gameStateEvent(GameState.LOGIN_SCREEN));
 
-		assertFalse("slayerRefreshPending must be cleared on logout", slayerRefreshPending);
-		assertFalse("pendingTravelVarbitRefresh must be cleared on logout", pendingTravelVarbitRefresh);
+		assertFalse( slayerRefreshPending,"slayerRefreshPending must be cleared on logout");
+		assertFalse( pendingTravelVarbitRefresh,"pendingTravelVarbitRefresh must be cleared on logout");
 	}
 
 	@Test
@@ -275,10 +277,10 @@ public class GameStateRouterTest
 
 		router.handle(gameStateEvent(GameState.LOGIN_SCREEN));
 
-		assertTrue("clearMissingItems callback must fire on logout", missingItemsCleared);
+		assertTrue( missingItemsCleared,"clearMissingItems callback must fire on logout");
 		// The clear() call mutates the seeded set in place -- reference unchanged
-		assertSame("missing-items reference must be the same plugin-owned set", before, sourcesWithMissingItems);
-		assertTrue("set must be empty after clear", sourcesWithMissingItems.isEmpty());
+		assertSame( before, sourcesWithMissingItems,"missing-items reference must be the same plugin-owned set");
+		assertTrue( sourcesWithMissingItems.isEmpty(),"set must be empty after clear");
 	}
 
 	@Test

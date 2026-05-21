@@ -39,17 +39,18 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link SelectorControlsPanel}: the helper that owns the
@@ -57,13 +58,14 @@ import static org.mockito.Mockito.when;
  * from {@link CollectionLogHelperPanel} as part of issue #503 god-class
  * splits.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class SelectorControlsPanelTest
 {
 	@Mock
 	private CollectionLogHelperConfig config;
 
-	@Before
+	@BeforeEach
 	public void seedConfig()
 	{
 		when(config.afkFilter()).thenReturn(AfkFilter.OFF);

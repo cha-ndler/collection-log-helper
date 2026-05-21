@@ -28,10 +28,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.lang.reflect.Field;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Backward-compatibility regression test for the B2 tile-sequence pathing schema
@@ -50,7 +50,7 @@ public class B2RegressionTest
 {
 	private DropRateDatabase database;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		database = new DropRateDatabase();
@@ -84,13 +84,13 @@ public class B2RegressionTest
 			for (GuidanceStep step : steps)
 			{
 				assertNull(
+					step.getWaypoints()
+				,
 					"B2 regression: source '" + source.getName()
 						+ "' step '" + step.getDescription()
 						+ "' unexpectedly has a non-null 'waypoints' list. "
 						+ "Production data must not use the B2 waypoints field "
-						+ "until a D-tier backfill PR is merged.",
-					step.getWaypoints()
-				);
+						+ "until a D-tier backfill PR is merged.");
 			}
 		}
 	}

@@ -42,21 +42,22 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import net.runelite.api.Client;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Tests for {@link CollectionStateChangeHandler} -- the Wave 13 (#503)
@@ -69,7 +70,8 @@ import static org.mockito.Mockito.when;
  * happy-path/no-op contract for the other two methods plus allocation-free
  * guard-fail behaviour.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class CollectionStateChangeHandlerTest
 {
 	@Mock private Client client;
@@ -91,7 +93,7 @@ public class CollectionStateChangeHandlerTest
 	private CollectionStateChangeHandler handler;
 	private boolean flagsCalled;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		handler = new CollectionStateChangeHandler(
@@ -110,7 +112,7 @@ public class CollectionStateChangeHandlerTest
 	{
 		when(config.autoAdvanceGuidance()).thenReturn(false);
 		handler.handleSequenceComplete();
-		assertTrue("flag callback must always fire so the panel rebuilds", flagsCalled);
+		assertTrue( flagsCalled,"flag callback must always fire so the panel rebuilds");
 	}
 
 	@Test
@@ -186,12 +188,12 @@ public class CollectionStateChangeHandlerTest
 
 		Set<String> result = handler.rebuildSourcesWithMissingItems();
 
-		assertSame("handler must return the coordinator's set verbatim", partitioned, result);
+		assertSame( partitioned, result,"handler must return the coordinator's set verbatim");
 		assertEquals(2, result.size());
-		assertTrue("incomplete sources included", result.contains("Source A"));
-		assertTrue("incomplete sources included", result.contains("Source C"));
-		assertFalse("complete sources excluded", result.contains("Source B"));
-		assertFalse("complete sources excluded", result.contains("Source D"));
+		assertTrue( result.contains("Source A"),"incomplete sources included");
+		assertTrue( result.contains("Source C"),"incomplete sources included");
+		assertFalse( result.contains("Source B"),"complete sources excluded");
+		assertFalse( result.contains("Source D"),"complete sources excluded");
 	}
 
 	// ── exportEfficiencyIfEnabled ─────────────────────────────────────────────
