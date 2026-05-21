@@ -5496,8 +5496,6 @@
     "mutuallyExclusiveSources": [
       "Theatre of Blood"
     ],
-    "npcId": 10852,
-    "interactAction": "Attack",
     "guidanceSteps": [
       {
         "description": "Use Drakan's medallion to teleport to Ver Sinhaza",
