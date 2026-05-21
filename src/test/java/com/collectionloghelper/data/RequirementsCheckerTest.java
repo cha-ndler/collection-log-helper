@@ -25,9 +25,9 @@
 package com.collectionloghelper.data;
 
 import net.runelite.api.Varbits;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RequirementsCheckerTest
 {
@@ -106,7 +106,7 @@ public class RequirementsCheckerTest
 	public void resolveDiaryVarbit_knownDiary_returnsPositiveVarbit()
 	{
 		int varbit = RequirementsChecker.resolveDiaryVarbit("ARDOUGNE_ELITE");
-		assertTrue("Known diary must resolve to a positive varbit ID", varbit > 0);
+		assertTrue( varbit > 0,"Known diary must resolve to a positive varbit ID");
 		assertEquals(Varbits.DIARY_ARDOUGNE_ELITE, varbit);
 	}
 
@@ -128,21 +128,21 @@ public class RequirementsCheckerTest
 	public void resolveDiaryVarbit_unknownDiary_returnsMinusOne()
 	{
 		int varbit = RequirementsChecker.resolveDiaryVarbit("NONEXISTENT_AREA_ELITE");
-		assertEquals("Unknown diary must return -1", -1, varbit);
+		assertEquals( -1, varbit,"Unknown diary must return -1");
 	}
 
 	@Test
 	public void resolveDiaryVarbit_nullInput_returnsMinusOne()
 	{
 		int varbit = RequirementsChecker.resolveDiaryVarbit(null);
-		assertEquals("Null diary must return -1", -1, varbit);
+		assertEquals( -1, varbit,"Null diary must return -1");
 	}
 
 	@Test
 	public void resolveDiaryVarbit_emptyInput_returnsMinusOne()
 	{
 		int varbit = RequirementsChecker.resolveDiaryVarbit("");
-		assertEquals("Empty diary must return -1", -1, varbit);
+		assertEquals( -1, varbit,"Empty diary must return -1");
 	}
 
 	@Test

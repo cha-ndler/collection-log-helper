@@ -25,9 +25,9 @@
 package com.collectionloghelper.guidance.bosses;
 
 import java.lang.reflect.Constructor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BossGuidanceRegistryTest
 {
@@ -52,28 +52,28 @@ public class BossGuidanceRegistryTest
 	{
 		BossGuidanceRegistry registry = buildRegistry();
 		BossGuidance boss = registry.get("cerberus");
-		assertNotNull("Registry must return boss guidance for 'cerberus'", boss);
-		assertTrue("Boss guidance must be a CerberusGuidance", boss instanceof CerberusGuidance);
+		assertNotNull( boss,"Registry must return boss guidance for 'cerberus'");
+		assertTrue( boss instanceof CerberusGuidance,"Boss guidance must be a CerberusGuidance");
 	}
 
 	@Test
 	public void get_nullKey_returnsNull() throws Exception
 	{
 		BossGuidanceRegistry registry = buildRegistry();
-		assertNull("Registry must return null for null key", registry.get(null));
+		assertNull( registry.get(null),"Registry must return null for null key");
 	}
 
 	@Test
 	public void get_unknownKey_returnsNull() throws Exception
 	{
 		BossGuidanceRegistry registry = buildRegistry();
-		assertNull("Registry must return null for unknown key", registry.get("zulrah"));
+		assertNull( registry.get("zulrah"),"Registry must return null for unknown key");
 	}
 
 	@Test
 	public void getAllBosses_containsCerberus() throws Exception
 	{
 		BossGuidanceRegistry registry = buildRegistry();
-		assertTrue("'cerberus' must be in getAllBosses()", registry.getAllBosses().containsKey("cerberus"));
+		assertTrue( registry.getAllBosses().containsKey("cerberus"),"'cerberus' must be in getAllBosses()");
 	}
 }

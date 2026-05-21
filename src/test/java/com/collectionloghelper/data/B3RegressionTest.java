@@ -28,10 +28,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.lang.reflect.Field;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * B3 regression guard — asserts that no entry in the production {@code drop_rates.json}
@@ -50,7 +50,7 @@ public class B3RegressionTest
 {
 	private DropRateDatabase database;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		database = new DropRateDatabase();
@@ -93,12 +93,12 @@ public class B3RegressionTest
 				{
 					checkedAlternatives++;
 					assertNull(
+						alt.getNestedAlternatives()
+					,
 						"Production source '" + source.getName() + "' has a ConditionalAlternative"
 							+ " with nestedAlternatives set — B3 shape is not yet permitted in"
 							+ " production data. Remove nestedAlternatives from this entry or"
-							+ " update this regression guard after explicit B3 validation.",
-						alt.getNestedAlternatives()
-					);
+							+ " update this regression guard after explicit B3 validation.");
 				}
 			}
 		}

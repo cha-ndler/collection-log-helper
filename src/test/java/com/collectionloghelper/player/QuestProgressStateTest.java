@@ -25,17 +25,18 @@
 package com.collectionloghelper.player;
 
 import net.runelite.api.Client;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link PlayerQuestProgressState}.
@@ -53,7 +54,8 @@ import static org.mockito.Mockito.when;
  * returned quest state, alongside {@code getVarpValue} for direct varplayer
  * milestones.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class QuestProgressStateTest
 {
 	private static final int VARP_LOST_CITY = 147;
@@ -75,7 +77,7 @@ public class QuestProgressStateTest
 	/** Backing array for getIntStack() — updated via stubScriptReturn(). */
 	private final int[] intStack = new int[]{QUEST_NOT_STARTED};
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		when(client.getIntStack()).thenReturn(intStack);
@@ -96,7 +98,7 @@ public class QuestProgressStateTest
 		// No refresh called — all milestones should return false
 		for (QuestSubMilestone m : QuestSubMilestone.values())
 		{
-			assertFalse("Expected false before refresh: " + m, state.hasSubProgress(m));
+			assertFalse( state.hasSubProgress(m),"Expected false before refresh: " + m);
 		}
 	}
 

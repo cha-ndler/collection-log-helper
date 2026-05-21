@@ -38,12 +38,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import net.runelite.api.Client;
 import net.runelite.client.callback.ClientThread;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -80,7 +80,7 @@ public class TempleSyncOrchestratorTest
 
 	private TempleSyncOrchestrator orchestrator;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		config = mock(CollectionLogHelperConfig.class);

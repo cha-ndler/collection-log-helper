@@ -29,11 +29,11 @@ import com.collectionloghelper.data.GuidanceStep;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link StepSectionGrouper}.
@@ -98,8 +98,8 @@ public class StepSectionGrouperTest
 	public void group_allNullSections_returnsEmptyForFlatLayout()
 	{
 		List<GuidanceStep> steps = Arrays.asList(step(null), step(null), step(null));
-		assertTrue("No sections set — must return empty list for flat layout",
-			StepSectionGrouper.group(steps).isEmpty());
+		assertTrue(
+			StepSectionGrouper.group(steps).isEmpty(),"No sections set — must return empty list for flat layout");
 	}
 
 	// ── Single section ───────────────────────────────────────────────────────

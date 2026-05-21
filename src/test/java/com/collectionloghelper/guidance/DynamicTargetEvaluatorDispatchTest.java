@@ -49,20 +49,21 @@ import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Tests the sequencer-dispatch path for dynamic target evaluators.
@@ -85,7 +86,8 @@ import static org.mockito.Mockito.when;
  *   <li>When the evaluator returns null, the tick path is a no-op.</li>
  * </ul>
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class DynamicTargetEvaluatorDispatchTest
 {
 	private static final WorldPoint DYNAMIC_POINT = new WorldPoint(1641, 4000, 0);
@@ -141,7 +143,7 @@ public class DynamicTargetEvaluatorDispatchTest
 
 	private static final String STUB_KEY = "test_stub_evaluator";
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		registry = new DynamicTargetEvaluatorRegistry();

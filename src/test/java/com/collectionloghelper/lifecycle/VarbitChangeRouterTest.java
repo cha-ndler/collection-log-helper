@@ -12,14 +12,11 @@ import com.collectionloghelper.di.SyncModule;
 import com.collectionloghelper.guidance.GuidanceSequencer;
 import net.runelite.api.Client;
 import net.runelite.api.events.VarbitChanged;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -27,8 +24,13 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class VarbitChangeRouterTest
 {
 	@Mock private Client client;
@@ -47,7 +49,7 @@ public class VarbitChangeRouterTest
 	private boolean onCollectionStateChangedCalled;
 	private boolean onSlayerTaskChangedCalled;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		when(dataModule.getCollectionState()).thenReturn(collectionState);
@@ -85,9 +87,9 @@ public class VarbitChangeRouterTest
 		verify(collectionState).refreshVarps();
 		verify(guidanceSequencer).onVarbitChanged(9999, 0);
 		verify(slayerTaskState).refresh();
-		assertTrue("flagRefreshes should always fire", flagRefreshesCalled);
-		assertFalse("no collection-state delta", onCollectionStateChangedCalled);
-		assertFalse("no slayer delta", onSlayerTaskChangedCalled);
+		assertTrue( flagRefreshesCalled,"flagRefreshes should always fire");
+		assertFalse( onCollectionStateChangedCalled,"no collection-state delta");
+		assertFalse( onSlayerTaskChangedCalled,"no slayer delta");
 	}
 
 	@Test
@@ -211,8 +213,8 @@ public class VarbitChangeRouterTest
 		when(syncStateCoordinator.getLastObtainedCount()).thenReturn(100);
 		router.handle(makeEvent(6, 0));
 		verify(syncStateCoordinator).onCollectionStateChanged(101);
-		assertTrue("obtained-count callback should fire", onCollectionStateChangedCalled);
-		assertTrue("slayer callback fires (new item forces rebuild)", onSlayerTaskChangedCalled);
+		assertTrue( onCollectionStateChangedCalled,"obtained-count callback should fire");
+		assertTrue( onSlayerTaskChangedCalled,"slayer callback fires (new item forces rebuild)");
 	}
 
 	@Test

@@ -33,14 +33,14 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import net.runelite.client.game.ItemManager;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link RequiredItemsChipPanel} — value-driven render path.
@@ -71,7 +71,7 @@ public class RequiredItemsChipPanelTest
 	private ItemManager itemManager;
 	private RequiredItemsChipPanel panel;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		itemManager = Mockito.mock(ItemManager.class);
@@ -89,7 +89,7 @@ public class RequiredItemsChipPanelTest
 	{
 		panel.update((List<RequiredItemDisplay>) null);
 		flushEdt();
-		assertFalse("Panel must be hidden for null list", panel.isVisible());
+		assertFalse( panel.isVisible(),"Panel must be hidden for null list");
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class RequiredItemsChipPanelTest
 	{
 		panel.update(Collections.<RequiredItemDisplay>emptyList());
 		flushEdt();
-		assertFalse("Panel must be hidden for empty list", panel.isVisible());
+		assertFalse( panel.isVisible(),"Panel must be hidden for empty list");
 	}
 
 	// ── Scenario 2: 3 items all in inventory → 3 green chips ────────────────
@@ -112,8 +112,8 @@ public class RequiredItemsChipPanelTest
 	public void borderColorFor_heldStatus_green()
 	{
 		Color color = RequiredItemsChipPanel.borderColorFor(Status.HELD);
-		assertEquals("HELD status must yield green border",
-			RequiredItemDisplay.COLOR_HELD, color);
+		assertEquals(
+			RequiredItemDisplay.COLOR_HELD, color,"HELD status must yield green border");
 	}
 
 	/**
@@ -123,8 +123,8 @@ public class RequiredItemsChipPanelTest
 	public void tooltipFor_heldStatus_itemName()
 	{
 		RequiredItemDisplay row = new RequiredItemDisplay(TINDERBOX, "Tinderbox", Status.HELD);
-		assertEquals("HELD tooltip must be item name",
-			"Tinderbox", RequiredItemsChipPanel.tooltipFor(row));
+		assertEquals(
+			"Tinderbox", RequiredItemsChipPanel.tooltipFor(row),"HELD tooltip must be item name");
 	}
 
 	/**
@@ -141,10 +141,10 @@ public class RequiredItemsChipPanelTest
 		for (RequiredItemDisplay row : rows)
 		{
 			JLabel chip = panel.buildChip(row);
-			assertNotNull("Chip must not be null", chip);
-			assertEquals("HELD chip must have green border",
+			assertNotNull( chip,"Chip must not be null");
+			assertEquals(
 				RequiredItemDisplay.COLOR_HELD,
-				RequiredItemsChipPanel.borderColorFor(row.getStatus()));
+				RequiredItemsChipPanel.borderColorFor(row.getStatus()),"HELD chip must have green border");
 		}
 	}
 
@@ -157,8 +157,8 @@ public class RequiredItemsChipPanelTest
 	public void borderColorFor_inBankStatus_white()
 	{
 		Color color = RequiredItemsChipPanel.borderColorFor(Status.IN_BANK);
-		assertEquals("IN_BANK status must yield white border",
-			Color.WHITE, color);
+		assertEquals(
+			Color.WHITE, color,"IN_BANK status must yield white border");
 	}
 
 	/**
@@ -168,9 +168,9 @@ public class RequiredItemsChipPanelTest
 	public void tooltipFor_inBankStatus_questHelperConvention()
 	{
 		RequiredItemDisplay row = new RequiredItemDisplay(PYRE_LOGS, "Pyre logs", Status.IN_BANK);
-		assertEquals("IN_BANK tooltip must be the Quest Helper bank message",
+		assertEquals(
 			RequiredItemsChipPanel.IN_BANK_TOOLTIP,
-			RequiredItemsChipPanel.tooltipFor(row));
+			RequiredItemsChipPanel.tooltipFor(row),"IN_BANK tooltip must be the Quest Helper bank message");
 	}
 
 	/**
@@ -189,17 +189,17 @@ public class RequiredItemsChipPanelTest
 		assertNotNull(heldChip);
 		assertNotNull(bankChip);
 
-		assertEquals("HELD chip border must be green",
+		assertEquals(
 			RequiredItemDisplay.COLOR_HELD,
-			RequiredItemsChipPanel.borderColorFor(held.getStatus()));
-		assertEquals("IN_BANK chip border must be white",
+			RequiredItemsChipPanel.borderColorFor(held.getStatus()),"HELD chip border must be green");
+		assertEquals(
 			Color.WHITE,
-			RequiredItemsChipPanel.borderColorFor(inBank.getStatus()));
+			RequiredItemsChipPanel.borderColorFor(inBank.getStatus()),"IN_BANK chip border must be white");
 
-		assertEquals("HELD chip tooltip must be item name",
-			"Tinderbox", heldChip.getToolTipText());
-		assertEquals("IN_BANK chip tooltip must be bank message",
-			RequiredItemsChipPanel.IN_BANK_TOOLTIP, bankChip.getToolTipText());
+		assertEquals(
+			"Tinderbox", heldChip.getToolTipText(),"HELD chip tooltip must be item name");
+		assertEquals(
+			RequiredItemsChipPanel.IN_BANK_TOOLTIP, bankChip.getToolTipText(),"IN_BANK chip tooltip must be bank message");
 	}
 
 	// ── Scenario 4: 3 items not held anywhere → 3 red chips ─────────────────
@@ -211,8 +211,8 @@ public class RequiredItemsChipPanelTest
 	public void borderColorFor_missingStatus_red()
 	{
 		Color color = RequiredItemsChipPanel.borderColorFor(Status.MISSING);
-		assertEquals("MISSING status must yield red border",
-			RequiredItemDisplay.COLOR_MISSING, color);
+		assertEquals(
+			RequiredItemDisplay.COLOR_MISSING, color,"MISSING status must yield red border");
 	}
 
 	/**
@@ -222,8 +222,8 @@ public class RequiredItemsChipPanelTest
 	public void tooltipFor_missingStatus_itemName()
 	{
 		RequiredItemDisplay row = new RequiredItemDisplay(SHADE_REMAINS, "Shade remains", Status.MISSING);
-		assertEquals("MISSING tooltip must be item name",
-			"Shade remains", RequiredItemsChipPanel.tooltipFor(row));
+		assertEquals(
+			"Shade remains", RequiredItemsChipPanel.tooltipFor(row),"MISSING tooltip must be item name");
 	}
 
 	/**
@@ -239,9 +239,9 @@ public class RequiredItemsChipPanelTest
 
 		for (RequiredItemDisplay row : rows)
 		{
-			assertEquals("MISSING chip must have red border",
+			assertEquals(
 				RequiredItemDisplay.COLOR_MISSING,
-				RequiredItemsChipPanel.borderColorFor(row.getStatus()));
+				RequiredItemsChipPanel.borderColorFor(row.getStatus()),"MISSING chip must have red border");
 		}
 	}
 
@@ -253,7 +253,7 @@ public class RequiredItemsChipPanelTest
 	@Test
 	public void afterConstruction_hidden()
 	{
-		assertFalse("Panel must start hidden", panel.isVisible());
+		assertFalse( panel.isVisible(),"Panel must start hidden");
 	}
 
 	/**
@@ -266,7 +266,7 @@ public class RequiredItemsChipPanelTest
 			new RequiredItemDisplay(TINDERBOX, "Tinderbox", Status.HELD));
 		panel.update(rows);
 		flushEdt();
-		assertTrue("Panel must be visible after update with non-empty list", panel.isVisible());
+		assertTrue( panel.isVisible(),"Panel must be visible after update with non-empty list");
 	}
 
 	/**
@@ -278,11 +278,11 @@ public class RequiredItemsChipPanelTest
 		panel.update(Collections.singletonList(
 			new RequiredItemDisplay(TINDERBOX, "Tinderbox", Status.HELD)));
 		flushEdt();
-		assertTrue("Panel visible after first non-empty update", panel.isVisible());
+		assertTrue( panel.isVisible(),"Panel visible after first non-empty update");
 
 		panel.update(Collections.<RequiredItemDisplay>emptyList());
 		flushEdt();
-		assertFalse("Panel must be hidden after second empty update", panel.isVisible());
+		assertFalse( panel.isVisible(),"Panel must be hidden after second empty update");
 	}
 
 	// ── All-statuses coverage ────────────────────────────────────────────────

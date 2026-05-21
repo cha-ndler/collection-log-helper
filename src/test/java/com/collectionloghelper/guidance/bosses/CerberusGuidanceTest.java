@@ -28,16 +28,16 @@ import com.collectionloghelper.data.CompletionCondition;
 import com.collectionloghelper.data.GuidanceStep;
 import java.lang.reflect.Constructor;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CerberusGuidanceTest
 {
 	private CerberusGuidance guidance;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<CerberusGuidance> ctor = CerberusGuidance.class.getDeclaredConstructor();
@@ -49,7 +49,7 @@ public class CerberusGuidanceTest
 	public void getSteps_returnsThreeSteps()
 	{
 		List<GuidanceStep> steps = guidance.getSteps(null, null);
-		assertEquals("Cerberus guidance must produce exactly 3 steps", 3, steps.size());
+		assertEquals( 3, steps.size(),"Cerberus guidance must produce exactly 3 steps");
 	}
 
 	@Test
@@ -86,8 +86,8 @@ public class CerberusGuidanceTest
 		assertEquals(CerberusGuidance.CERBERUS_NPC_ID, killStep.getCompletionNpcId());
 		assertEquals("Attack", killStep.getInteractAction());
 		assertEquals("Combat", killStep.getSection());
-		assertNotNull("Kill step must have recommended items", killStep.getRecommendedItemIds());
-		assertFalse("Recommended items must not be empty", killStep.getRecommendedItemIds().isEmpty());
+		assertNotNull( killStep.getRecommendedItemIds(),"Kill step must have recommended items");
+		assertFalse( killStep.getRecommendedItemIds().isEmpty(),"Recommended items must not be empty");
 	}
 
 	@Test
@@ -97,8 +97,8 @@ public class CerberusGuidanceTest
 		for (int i = 0; i < steps.size(); i++)
 		{
 			assertFalse(
-				"isStepSatisfied must always return false for step " + i,
-				guidance.isStepSatisfied(null, steps.get(i), i));
+				guidance.isStepSatisfied(null, steps.get(i), i),
+				"isStepSatisfied must always return false for step " + i);
 		}
 	}
 }

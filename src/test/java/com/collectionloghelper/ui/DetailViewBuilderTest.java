@@ -44,21 +44,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.util.AsyncBufferedImage;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link DetailViewBuilder}: the helper that populates the
@@ -66,7 +67,8 @@ import static org.mockito.Mockito.when;
  * {@link CollectionLogHelperPanel#showDetail} as part of the issue #503
  * god-class split.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class DetailViewBuilderTest
 {
 	@Mock
@@ -87,7 +89,7 @@ public class DetailViewBuilderTest
 	private AtomicInteger activatorItemId;
 	private AtomicInteger deactivatorCalls;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		// ItemManager.getImage(int) returns an AsyncBufferedImage that
@@ -173,10 +175,10 @@ public class DetailViewBuilderTest
 
 		builder.populate(target, item, source, false, null, () -> { });
 
-		assertEquals("Target should hold exactly one child (the ItemDetailPanel)",
-			1, target.getComponentCount());
+		assertEquals(
+			1, target.getComponentCount(),"Target should hold exactly one child (the ItemDetailPanel)");
 		Component child = target.getComponent(0);
-		assertTrue("Child must be an ItemDetailPanel", child instanceof ItemDetailPanel);
+		assertTrue( child instanceof ItemDetailPanel,"Child must be an ItemDetailPanel");
 		// The child should be pinned to NORTH on the BorderLayout target.
 		assertSame(child, ((BorderLayout) target.getLayout()).getLayoutComponent(BorderLayout.NORTH));
 	}
@@ -211,10 +213,10 @@ public class DetailViewBuilderTest
 		// Locate the Back button on the produced ItemDetailPanel and click it.
 		ItemDetailPanel detail = (ItemDetailPanel) target.getComponent(0);
 		javax.swing.JButton back = findFirstButton(detail, "Back");
-		assertNotNull("ItemDetailPanel should have a Back button", back);
+		assertNotNull( back,"ItemDetailPanel should have a Back button");
 		back.doClick();
 
-		assertEquals("Back callback should fire once", 1, backCalls.get());
+		assertEquals( 1, backCalls.get(),"Back callback should fire once");
 	}
 
 	@Test
@@ -228,14 +230,14 @@ public class DetailViewBuilderTest
 
 		ItemDetailPanel detail = (ItemDetailPanel) target.getComponent(0);
 		javax.swing.JButton guideMe = findFirstButton(detail, "Guide Me");
-		assertNotNull("ItemDetailPanel should have a Guide Me button", guideMe);
+		assertNotNull( guideMe,"ItemDetailPanel should have a Guide Me button");
 		guideMe.doClick();
 
-		assertSame("Guide Me should pass the source to the activator", source, activatorSource.get());
-		assertEquals("Guide Me should pass the clicked item's id to the activator",
-			101, activatorItemId.get());
-		assertEquals("Deactivator should not fire when guidance was inactive",
-			0, deactivatorCalls.get());
+		assertSame( source, activatorSource.get(),"Guide Me should pass the source to the activator");
+		assertEquals(
+			101, activatorItemId.get(),"Guide Me should pass the clicked item's id to the activator");
+		assertEquals(
+			0, deactivatorCalls.get(),"Deactivator should not fire when guidance was inactive");
 	}
 
 	@Test
@@ -250,12 +252,12 @@ public class DetailViewBuilderTest
 
 		ItemDetailPanel detail = (ItemDetailPanel) target.getComponent(0);
 		javax.swing.JButton stop = findFirstButton(detail, "Stop Guidance");
-		assertNotNull("ItemDetailPanel should expose a Stop Guidance button when guiding this source", stop);
+		assertNotNull( stop,"ItemDetailPanel should expose a Stop Guidance button when guiding this source");
 		stop.doClick();
 
-		assertEquals("Deactivator should fire once when Stop Guidance is clicked",
-			1, deactivatorCalls.get());
-		assertEquals("Activator must NOT fire when stopping guidance", -1, activatorItemId.get());
+		assertEquals(
+			1, deactivatorCalls.get(),"Deactivator should fire once when Stop Guidance is clicked");
+		assertEquals( -1, activatorItemId.get(),"Activator must NOT fire when stopping guidance");
 	}
 
 	/**
@@ -275,8 +277,8 @@ public class DetailViewBuilderTest
 		// source-level button reads "Stop Guidance".
 		builder.populate(target, item, source, true, source, () -> { });
 		ItemDetailPanel detail = (ItemDetailPanel) target.getComponent(0);
-		assertNotNull("Detail view should expose a Stop Guidance button before sync",
-			findFirstButton(detail, "Stop Guidance"));
+		assertNotNull(
+			findFirstButton(detail, "Stop Guidance"),"Detail view should expose a Stop Guidance button before sync");
 
 		// Simulate the step-control STOP icon path: GuidanceOverlayCoordinator
 		// .deactivateGuidance -> OverlayDeactivator -> panel.setGuidanceState(false, null, null)
@@ -284,10 +286,10 @@ public class DetailViewBuilderTest
 		builder.syncGuidanceState(false, null);
 		javax.swing.SwingUtilities.invokeAndWait(() -> { /* flush EDT */ });
 
-		assertNotNull("After sync the detail button must read 'Guide Me'",
-			findFirstButton(detail, "Guide Me"));
-		assertEquals("Stop Guidance button must no longer be present after sync",
-			null, findFirstButton(detail, "Stop Guidance"));
+		assertNotNull(
+			findFirstButton(detail, "Guide Me"),"After sync the detail button must read 'Guide Me'");
+		assertEquals(
+			null, findFirstButton(detail, "Stop Guidance"),"Stop Guidance button must no longer be present after sync");
 	}
 
 	/**
@@ -304,14 +306,14 @@ public class DetailViewBuilderTest
 
 		builder.populate(target, item, source, false, null, () -> { });
 		ItemDetailPanel detail = (ItemDetailPanel) target.getComponent(0);
-		assertNotNull("Initial detail view should show 'Guide Me'",
-			findFirstButton(detail, "Guide Me"));
+		assertNotNull(
+			findFirstButton(detail, "Guide Me"),"Initial detail view should show 'Guide Me'");
 
 		builder.syncGuidanceState(true, source);
 		javax.swing.SwingUtilities.invokeAndWait(() -> { /* flush EDT */ });
 
-		assertNotNull("After sync the detail button must read 'Stop Guidance'",
-			findFirstButton(detail, "Stop Guidance"));
+		assertNotNull(
+			findFirstButton(detail, "Stop Guidance"),"After sync the detail button must read 'Stop Guidance'");
 	}
 
 	/**
@@ -343,7 +345,7 @@ public class DetailViewBuilderTest
 
 		ItemDetailPanel detail = (ItemDetailPanel) target.getComponent(0);
 		JButton wikiStrategy = findFirstButton(detail, "Wiki Strategy");
-		assertNotNull("ItemDetailPanel should expose a Wiki Strategy button", wikiStrategy);
+		assertNotNull( wikiStrategy,"ItemDetailPanel should expose a Wiki Strategy button");
 		assertEquals("Wiki Strategy", wikiStrategy.getText());
 	}
 
@@ -400,9 +402,9 @@ public class DetailViewBuilderTest
 		javax.swing.SwingUtilities.invokeAndWait(() -> { /* flush */ });
 
 		SourceRecommendedItemsChipPanel strip = findFirstChipPanel(target);
-		assertNotNull("Source-level recommended chip panel must be present", strip);
-		assertTrue("Source-level recommended chip panel must be visible when override is non-empty",
-			strip.isVisible());
+		assertNotNull( strip,"Source-level recommended chip panel must be present");
+		assertTrue(
+			strip.isVisible(),"Source-level recommended chip panel must be visible when override is non-empty");
 	}
 
 	/**
@@ -421,9 +423,9 @@ public class DetailViewBuilderTest
 		javax.swing.SwingUtilities.invokeAndWait(() -> { /* flush */ });
 
 		SourceRecommendedItemsChipPanel strip = findFirstChipPanel(target);
-		assertNotNull("Source-level recommended chip panel must be present in the tree", strip);
-		assertEquals("Strip must be hidden when no recommended items exist",
-			false, strip.isVisible());
+		assertNotNull( strip,"Source-level recommended chip panel must be present in the tree");
+		assertEquals(
+			false, strip.isVisible(),"Strip must be hidden when no recommended items exist");
 	}
 
 	/**

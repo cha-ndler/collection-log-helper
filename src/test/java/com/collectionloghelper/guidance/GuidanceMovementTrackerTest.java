@@ -28,15 +28,16 @@ import net.runelite.api.Client;
 import net.runelite.api.Player;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.GameTick;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Event-level tests for {@link GuidanceMovementTracker} pinning the
@@ -45,7 +46,8 @@ import static org.mockito.Mockito.when;
  * happens during active guidance, and must NOT fire on ordinary walking,
  * first-tick baseline, or inactive guidance.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class GuidanceMovementTrackerTest
 {
 	@Mock
@@ -62,7 +64,7 @@ public class GuidanceMovementTrackerTest
 
 	private GuidanceMovementTracker tracker;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		tracker = new GuidanceMovementTracker(client, guidanceSequencer, guidanceCoordinator);

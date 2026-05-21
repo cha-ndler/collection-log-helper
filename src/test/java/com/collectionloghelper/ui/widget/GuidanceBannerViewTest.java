@@ -31,11 +31,11 @@ import com.collectionloghelper.data.RequirementsChecker;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Unit tests for {@link GuidanceBannerView}.
@@ -54,7 +54,7 @@ public class GuidanceBannerViewTest
 			Collections.emptyList(), null, null, null);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		requirementsChecker = Mockito.mock(RequirementsChecker.class);

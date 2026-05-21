@@ -32,19 +32,20 @@ import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link DynamicItemObjectTierResolver}. Pins the tier-resolution
@@ -60,7 +61,8 @@ import static org.mockito.Mockito.when;
  *   <li>No tier's items in inventory -- {@link DynamicItemObjectTierResolver.Result#EMPTY}.</li>
  * </ul>
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class DynamicItemObjectTierResolverTest
 {
 	private static final String STEP_DESC = "Loot the chest";
@@ -70,7 +72,7 @@ public class DynamicItemObjectTierResolverTest
 
 	private DynamicItemObjectTierResolver resolver;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<DynamicItemObjectTierResolver> ctor =
@@ -84,8 +86,8 @@ public class DynamicItemObjectTierResolverTest
 	{
 		DynamicItemObjectTierResolver.Result result = resolver.resolve(null);
 
-		assertSame("null step must return the EMPTY singleton (no allocation)",
-			DynamicItemObjectTierResolver.Result.EMPTY, result);
+		assertSame(
+			DynamicItemObjectTierResolver.Result.EMPTY, result,"null step must return the EMPTY singleton (no allocation)");
 		assertFalse(result.hasMatch());
 		verifyNoInteractions(playerInventoryState);
 	}
@@ -195,8 +197,8 @@ public class DynamicItemObjectTierResolverTest
 
 		DynamicItemObjectTierResolver.Result result = resolver.resolve(step);
 
-		assertSame("no-match path must return the EMPTY singleton (no allocation)",
-			DynamicItemObjectTierResolver.Result.EMPTY, result);
+		assertSame(
+			DynamicItemObjectTierResolver.Result.EMPTY, result,"no-match path must return the EMPTY singleton (no allocation)");
 		assertFalse(result.hasMatch());
 	}
 

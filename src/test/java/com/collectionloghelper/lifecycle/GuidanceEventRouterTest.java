@@ -56,20 +56,22 @@ import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.NpcDespawned;
 import net.runelite.api.events.NpcSpawned;
 import net.runelite.client.events.ConfigChanged;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class GuidanceEventRouterTest
 {
 	@Mock
@@ -210,7 +212,7 @@ public class GuidanceEventRouterTest
 		, null, null, null);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		router = new GuidanceEventRouter(
@@ -959,8 +961,8 @@ public class GuidanceEventRouterTest
 			router.onConfigChanged(event);
 		}
 
-		assertEquals("No filter rebuilds should fire for non-filter keys",
-			0, rebuildCount.get());
+		assertEquals(
+			0, rebuildCount.get(),"No filter rebuilds should fire for non-filter keys");
 	}
 
 	/**

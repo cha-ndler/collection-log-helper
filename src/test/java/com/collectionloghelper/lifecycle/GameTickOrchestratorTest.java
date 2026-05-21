@@ -23,18 +23,15 @@ import java.util.List;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
 import net.runelite.api.coords.WorldPoint;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.mockito.ArgumentCaptor;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
@@ -42,6 +39,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Tests for {@link GameTickOrchestrator} -- the Wave 14 (#503) extraction
@@ -51,7 +52,8 @@ import static org.mockito.Mockito.when;
  * <p>Covers all five responsibility branches independently, the allocation-
  * free no-op tick (no flags set, no player), and the coalesced panel rebuild.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class GameTickOrchestratorTest
 {
 	@Mock private Client client;
@@ -86,7 +88,7 @@ public class GameTickOrchestratorTest
 	private boolean rankedDirtyFlag;
 	private CollectionLogHelperPanel currentPanel;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		when(dataModule.getDatabase()).thenReturn(database);
@@ -177,7 +179,7 @@ public class GameTickOrchestratorTest
 		orchestrator.tick();
 
 		verify(requirementsChecker).refreshAccessibility(sources);
-		assertFalse("poll-and-clear must reset the flag", reqsFlag);
+		assertFalse( reqsFlag,"poll-and-clear must reset the flag");
 	}
 
 	@Test
@@ -196,7 +198,7 @@ public class GameTickOrchestratorTest
 		// consumed by the final coalesced rebuild in the same tick. Assert
 		// behaviorally: the panel got rebuilt and ranked dirty was set.
 		verify(panel).rebuild();
-		assertTrue("ranked sources marked dirty when reqs changed", rankedDirtyFlag);
+		assertTrue( rankedDirtyFlag,"ranked sources marked dirty when reqs changed");
 	}
 
 	@Test
@@ -211,8 +213,8 @@ public class GameTickOrchestratorTest
 
 		orchestrator.tick();
 
-		assertFalse("script-scan gates the dirty mark", panelRebuildFlag);
-		assertFalse("script-scan gates the dirty mark", rankedDirtyFlag);
+		assertFalse( panelRebuildFlag,"script-scan gates the dirty mark");
+		assertFalse( rankedDirtyFlag,"script-scan gates the dirty mark");
 	}
 
 	// ── (2) Travel varbit refresh ────────────────────────────────────────────
@@ -227,7 +229,7 @@ public class GameTickOrchestratorTest
 		orchestrator.tick();
 
 		verify(travelCapabilities).refreshVarbits();
-		assertFalse("poll-and-clear must reset the flag", travelFlag);
+		assertFalse( travelFlag,"poll-and-clear must reset the flag");
 	}
 
 	@Test
@@ -357,8 +359,8 @@ public class GameTickOrchestratorTest
 		// Slayer refresh sets panelRebuildFlag, which is then consumed by the
 		// final coalesced rebuild in the same tick. Assert behaviorally.
 		verify(panel).rebuild();
-		assertTrue("slayer refresh should mark ranked dirty", rankedDirtyFlag);
-		assertFalse("poll-and-clear must reset the flag", slayerFlag);
+		assertTrue( rankedDirtyFlag,"slayer refresh should mark ranked dirty");
+		assertFalse( slayerFlag,"poll-and-clear must reset the flag");
 	}
 
 	@Test
@@ -372,7 +374,7 @@ public class GameTickOrchestratorTest
 		orchestrator.tick();
 
 		verify(slayerTaskState, never()).refresh();
-		assertTrue("flag must remain set so a later tick handles it", slayerFlag);
+		assertTrue( slayerFlag,"flag must remain set so a later tick handles it");
 	}
 
 	// ── (5b) Sync tick + RANKED_DIRTY propagation ────────────────────────────
@@ -386,7 +388,7 @@ public class GameTickOrchestratorTest
 
 		orchestrator.tick();
 
-		assertTrue("RANKED_DIRTY result must mark ranked sources dirty", rankedDirtyFlag);
+		assertTrue( rankedDirtyFlag,"RANKED_DIRTY result must mark ranked sources dirty");
 	}
 
 	@Test
@@ -397,7 +399,7 @@ public class GameTickOrchestratorTest
 
 		orchestrator.tick();
 
-		assertFalse("CLEAN result must not mark ranked sources dirty", rankedDirtyFlag);
+		assertFalse( rankedDirtyFlag,"CLEAN result must not mark ranked sources dirty");
 	}
 
 	// ── (5c) Coalesced panel rebuild ─────────────────────────────────────────
@@ -445,7 +447,7 @@ public class GameTickOrchestratorTest
 		// Cannot verify on a null panel directly; the test is that no exception
 		// is thrown and the flag is left cleared by no one (the orchestrator
 		// short-circuits on null panel before calling pollPanelRebuild).
-		assertTrue("flag preserved when panel absent", panelRebuildFlag);
+		assertTrue( panelRebuildFlag,"flag preserved when panel absent");
 	}
 
 	// ── (no-op tick allocation profile) ──────────────────────────────────────
@@ -510,12 +512,12 @@ public class GameTickOrchestratorTest
 			.tickSync(any(), any(), captor.capture());
 
 		List<Runnable> captured = captor.getAllValues();
-		assertNotNull("export callback must be non-null on first tick", captured.get(0));
-		assertNotNull("export callback must be non-null on second tick", captured.get(1));
+		assertNotNull( captured.get(0),"export callback must be non-null on first tick");
+		assertNotNull( captured.get(1),"export callback must be non-null on second tick");
 		assertSame(
+			captured.get(0), captured.get(1),
 			"export callback must be the same hoisted instance across ticks "
-				+ "(not reallocated per tick)",
-			captured.get(0), captured.get(1));
+				+ "(not reallocated per tick)");
 
 		// Invoking the captured callback must dispatch to the underlying
 		// handler exactly as the inline method-ref did before the hoist.

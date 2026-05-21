@@ -31,18 +31,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link SyncButtonController}: the helper that owns the
@@ -50,7 +51,8 @@ import static org.mockito.Mockito.when;
  * Extracted from {@link CollectionLogHelperPanel} as part of issue #503
  * god-class splits.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class SyncButtonControllerTest
 {
 	@Mock
@@ -59,7 +61,7 @@ public class SyncButtonControllerTest
 	private JPanel hostPanel;
 	private SyncButtonController controller;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		when(config.enableCollectionLogNetImport()).thenReturn(true);
@@ -117,7 +119,7 @@ public class SyncButtonControllerTest
 			new ActionEvent(btn, ActionEvent.ACTION_PERFORMED, ""));
 
 		assertEquals(1, invocations.get());
-		assertFalse("button must be disabled while sync runs", btn.isEnabled());
+		assertFalse( btn.isEnabled(),"button must be disabled while sync runs");
 		assertEquals("Syncing...", btn.getText());
 	}
 

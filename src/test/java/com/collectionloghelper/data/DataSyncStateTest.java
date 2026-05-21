@@ -25,16 +25,16 @@
 package com.collectionloghelper.data;
 
 import java.lang.reflect.Constructor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DataSyncStateTest
 {
 	private DataSyncState syncState;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<DataSyncState> ctor = DataSyncState.class.getDeclaredConstructor();
