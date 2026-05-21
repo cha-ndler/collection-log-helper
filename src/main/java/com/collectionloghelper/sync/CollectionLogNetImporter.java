@@ -31,9 +31,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -67,28 +66,27 @@ public class CollectionLogNetImporter
 	private final OkHttpClient httpClient;
 	private final Gson gson;
 	private final PlayerCollectionState collectionState;
-	private final ExecutorService executor;
-
-	@Inject
-	CollectionLogNetImporter(OkHttpClient httpClient, Gson gson, PlayerCollectionState collectionState)
-	{
-		this.httpClient = httpClient;
-		this.gson = gson;
-		this.collectionState = collectionState;
-		this.executor = Executors.newSingleThreadExecutor(r ->
-		{
-			Thread t = new Thread(r, "clh-collectionlog-net-import");
-			t.setDaemon(true);
-			return t;
-		});
-	}
+	private final ScheduledExecutorService executor;
 
 	/**
-	 * Package-private constructor for testing — accepts an injected executor so
-	 * unit tests can use a same-thread executor without spawning real threads.
+	 * Constructs the importer with all dependencies supplied by Guice.
+	 *
+	 * <p>The {@link ScheduledExecutorService} is provided by the RuneLite runtime
+	 * (see {@code RuneLite.scheduledExecutorService}) — a shared, singleton pool
+	 * whose lifecycle is owned by the client rather than by this plugin.  Plugin
+	 * Hub convention favours this pattern over per-class
+	 * {@code Executors.newSingleThreadExecutor()} construction because it avoids
+	 * leaked threads on plugin restart and lets the runtime cap total worker
+	 * count across all plugins.
+	 *
+	 * @param httpClient HTTP client used for the collectionlog.net request
+	 * @param gson JSON parser
+	 * @param collectionState target store for obtained-item marks
+	 * @param executor shared scheduled executor provided by the runtime
 	 */
-	CollectionLogNetImporter(OkHttpClient httpClient, Gson gson,
-		PlayerCollectionState collectionState, ExecutorService executor)
+	@Inject
+	CollectionLogNetImporter(OkHttpClient httpClient, Gson gson, PlayerCollectionState collectionState,
+		ScheduledExecutorService executor)
 	{
 		this.httpClient = httpClient;
 		this.gson = gson;
@@ -305,11 +303,4 @@ public class CollectionLogNetImporter
 		return el.getAsJsonObject();
 	}
 
-	/**
-	 * Shuts down the background executor.  Safe to call multiple times.
-	 */
-	public void shutdown()
-	{
-		executor.shutdown();
-	}
 }
