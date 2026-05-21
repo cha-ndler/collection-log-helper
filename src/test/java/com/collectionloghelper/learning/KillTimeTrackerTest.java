@@ -29,6 +29,11 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.google.gson.GsonBuilder;
 import java.io.File;
 import java.util.OptionalInt;
+import net.runelite.api.Actor;
+import net.runelite.api.Hitsplat;
+import net.runelite.api.NPC;
+import net.runelite.api.events.ActorDeath;
+import net.runelite.api.events.HitsplatApplied;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,6 +43,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
@@ -45,12 +51,14 @@ import static org.mockito.Mockito.when;
  *
  * <p>Uses a temporary directory to exercise persistence without touching the
  * real filesystem. The {@code recordKill} package-visible method is called
- * directly so tests do not depend on the RuneLite event bus.
+ * directly so most tests do not depend on the RuneLite event bus.
+ * Event-driven tests for attribution (#481) use real event objects with mocked actors.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class KillTimeTrackerTest
 {
 	private static final int NPC_ID = 42;
+	private static final int NPC_INDEX = 7;
 	private static final String SOURCE_NAME = "Giant Mole";
 	private static final long T0 = 1_000_000L;
 
@@ -218,6 +226,9 @@ public class KillTimeTrackerTest
 		tracker.recordKill(NPC_ID, T0);
 		tracker.recordKill(NPC_ID, T0 + 60_000L);
 
+		// Drain debounced background writer so the file is on disk for the assertion.
+		tracker.reset();
+
 		File expected = new File(characterDir, KillTimeTracker.DATA_FILE_NAME);
 		assertTrue("kill_times.json should exist under characterDir", expected.exists());
 	}
@@ -232,7 +243,7 @@ public class KillTimeTrackerTest
 		tracker.recordKill(NPC_ID, T0 + 60_000L);
 		assertEquals(1, tracker.getObservationCount(SOURCE_NAME));
 
-		// Logout / switch account — state is cleared
+		// Logout / switch account — state is cleared (reset() flushes pending writes too)
 		tracker.reset();
 		assertEquals(0, tracker.getObservationCount(SOURCE_NAME));
 
@@ -255,6 +266,10 @@ public class KillTimeTrackerTest
 		tracker.recordKill(NPC_ID, T0);
 		tracker.recordKill(NPC_ID, T0 + 45_000L); // 45 s written to disk
 
+		// reset() drains the debounced background writer synchronously, so the data
+		// is guaranteed on disk before tracker2 loads it.
+		tracker.reset();
+
 		// New tracker instance reads from the same file
 		KillTimeTracker tracker2 = new KillTimeTracker(config, database, new GsonBuilder().create());
 		tracker2.init(characterDir);
@@ -275,5 +290,217 @@ public class KillTimeTrackerTest
 
 		assertEquals(0, tracker.getObservationCount(SOURCE_NAME));
 		assertFalse(tracker.getLearnedKillTime(SOURCE_NAME).isPresent());
+	}
+
+	// ── Issue #480: disk I/O off client thread ──────────────────────────────────
+
+	/**
+	 * Regression for #480: a kill-record loop at Wintertodt-style throughput must
+	 * not block on disk I/O. After {@code init()} the tracker installs a background
+	 * single-thread executor and {@code recordKill} only marks state dirty; it does
+	 * NOT perform a synchronous write per call.
+	 *
+	 * <p>We assert this by verifying that immediately after recording a kill, the
+	 * persisted file does NOT yet exist — it would exist if write were synchronous.
+	 * Then {@code reset()} drains the executor and the file appears.
+	 */
+	@Test
+	public void recordKill_doesNotWriteSynchronously_afterInit() throws Exception
+	{
+		File characterDir = tmp.newFolder("perfPlayer");
+		tracker.init(characterDir);
+		File dataFile = new File(characterDir, KillTimeTracker.DATA_FILE_NAME);
+		assertFalse("data file should not exist before any kill", dataFile.exists());
+
+		// Two kills => one sample recorded. The save is debounced for SAVE_DEBOUNCE_MS,
+		// so the file should NOT exist immediately after recordKill returns.
+		tracker.recordKill(NPC_ID, T0);
+		tracker.recordKill(NPC_ID, T0 + 60_000L);
+		assertFalse("data file must not be written synchronously inside recordKill (#480)",
+			dataFile.exists());
+
+		// reset() drains the executor and flushes, so now the file must exist.
+		tracker.reset();
+		assertTrue("data file should be flushed by reset()", dataFile.exists());
+	}
+
+	/**
+	 * Regression for #480: many rapid kills inside the debounce window coalesce
+	 * into a single disk write — the producer thread returns immediately.
+	 *
+	 * <p>This is a wall-clock budget check: 100 kills should complete in well under
+	 * the debounce window because they only mark state dirty.
+	 */
+	@Test
+	public void recordKill_manyRapidKills_returnImmediately() throws Exception
+	{
+		File characterDir = tmp.newFolder("turboPlayer");
+		tracker.init(characterDir);
+
+		long startNanos = System.nanoTime();
+		long t = T0;
+		tracker.recordKill(NPC_ID, t);
+		for (int i = 0; i < 100; i++)
+		{
+			t += 30_000L;
+			tracker.recordKill(NPC_ID, t);
+		}
+		long elapsedMs = (System.nanoTime() - startNanos) / 1_000_000L;
+
+		// 100 calls should be sub-second even on slow CI. Generous budget = 500ms.
+		// The bug (#480) had each kill blocking on FileWriter, which on a slow disk
+		// can be 10-50ms per kill — 100 kills would push past the budget.
+		assertTrue("100 recordKill calls should be fast (<500ms), was " + elapsedMs + "ms",
+			elapsedMs < 500);
+
+		tracker.reset();
+	}
+
+	// ── Issue #481: local-player attribution ────────────────────────────────────
+
+	/**
+	 * Regression for #481: deaths of NPCs the local player did NOT damage are
+	 * NOT recorded. This is the core fix — group content (CoX/ToB/ToA, Wintertodt,
+	 * Tempoross, GWD masses) used to poison the average with other players' kills.
+	 */
+	@Test
+	public void onActorDeath_unattributedNpc_doesNotRecord()
+	{
+		NPC npc = mock(NPC.class);
+		when(npc.getId()).thenReturn(NPC_ID);
+		when(npc.getIndex()).thenReturn(NPC_INDEX);
+
+		// First death starts no timer because the NPC was not tagged by the player.
+		tracker.onActorDeath(deathOf(npc));
+		// Even a "second" death is silently dropped because no attribution.
+		tracker.onActorDeath(deathOf(npc));
+
+		assertEquals(0, tracker.getObservationCount(SOURCE_NAME));
+		assertFalse(tracker.getLearnedKillTime(SOURCE_NAME).isPresent());
+	}
+
+	/**
+	 * Regression for #481: when the player tags and kills two NPCs spaced apart,
+	 * the elapsed time between attributed deaths is recorded in the rolling window.
+	 *
+	 * <p>Drives both event handlers end-to-end through the event bus methods (not the
+	 * package-visible {@code recordKill}), so this exercises the attribution gate
+	 * AND the time-between-deaths math together. Because {@code onActorDeath} reads
+	 * {@link System#currentTimeMillis()} we can't dictate the exact elapsed value;
+	 * we only assert that an observation was recorded and the value is plausible.
+	 */
+	@Test
+	public void onActorDeath_twoAttributedKills_recordsObservation() throws Exception
+	{
+		NPC npc = mock(NPC.class);
+		when(npc.getId()).thenReturn(NPC_ID);
+		when(npc.getIndex()).thenReturn(NPC_INDEX);
+
+		// First kill: tag + die. Seeds the timer, no sample yet.
+		tracker.onHitsplatApplied(mineHitsplatOn(npc));
+		tracker.onActorDeath(deathOf(npc));
+		assertEquals("first attributed death seeds the timer, no sample",
+			0, tracker.getObservationCount(SOURCE_NAME));
+
+		// Sleep long enough to be above MIN_KILL_SECONDS = 3s (use 3.1s to be safe).
+		Thread.sleep(3_100L);
+
+		// Second kill: tag + die. Now the elapsed time is recorded as a sample.
+		tracker.onHitsplatApplied(mineHitsplatOn(npc));
+		tracker.onActorDeath(deathOf(npc));
+
+		assertEquals("second attributed death records one sample",
+			1, tracker.getObservationCount(SOURCE_NAME));
+		OptionalInt result = tracker.getLearnedKillTime(SOURCE_NAME);
+		assertTrue(result.isPresent());
+		int learned = result.getAsInt();
+		assertTrue("learned kill time should be in plausible range, was " + learned,
+			learned >= KillTimeTracker.MIN_KILL_SECONDS
+				&& learned <= KillTimeTracker.MAX_KILL_SECONDS);
+	}
+
+	/**
+	 * Regression for #481: the "isMine" attribution mark is cleared after the
+	 * matching death event, so a respawned NPC reusing the same scene index
+	 * cannot inherit attribution from a previous kill.
+	 */
+	@Test
+	public void onActorDeath_clearsAttributionMark()
+	{
+		NPC npc = mock(NPC.class);
+		when(npc.getId()).thenReturn(NPC_ID);
+		when(npc.getIndex()).thenReturn(NPC_INDEX);
+
+		tracker.onHitsplatApplied(mineHitsplatOn(npc));
+		assertTrue(tracker.isPlayerDamaged(NPC_INDEX));
+
+		tracker.onActorDeath(deathOf(npc));
+		assertFalse("death should consume the player-damaged mark",
+			tracker.isPlayerDamaged(NPC_INDEX));
+	}
+
+	/**
+	 * Regression for #481: hitsplats from OTHER players ({@link Hitsplat#isMine()}
+	 * == false) do not mark an NPC as player-damaged.
+	 */
+	@Test
+	public void onHitsplatApplied_otherPlayersHitsplats_doNotMarkAttribution()
+	{
+		// No getIndex() stub — the production code returns before calling getIndex()
+		// when isMine() is false, so stubbing it would be flagged as unnecessary.
+		NPC npc = mock(NPC.class);
+
+		tracker.onHitsplatApplied(otherHitsplatOn(npc));
+		assertFalse("non-mine hitsplats must not mark attribution",
+			tracker.isPlayerDamaged(NPC_INDEX));
+	}
+
+	/**
+	 * Regression for #481: the feature flag gates both event handlers — when
+	 * disabled, no attribution marks are recorded.
+	 */
+	@Test
+	public void featureDisabled_attributionAndDeathEvents_areNoOps()
+	{
+		when(config.learnKillTimes()).thenReturn(false);
+
+		// No stubs on the NPC mock — both handlers must short-circuit at the feature
+		// flag check before touching the npc, so even an un-stubbed mock is safe.
+		NPC npc = mock(NPC.class);
+
+		tracker.onHitsplatApplied(mineHitsplatOn(npc));
+		assertFalse(tracker.isPlayerDamaged(NPC_INDEX));
+
+		tracker.onActorDeath(deathOf(npc));
+		assertEquals(0, tracker.getObservationCount(SOURCE_NAME));
+	}
+
+	// ── Test helpers ────────────────────────────────────────────────────────────
+
+	private static ActorDeath deathOf(Actor actor)
+	{
+		return new ActorDeath(actor);
+	}
+
+	private static HitsplatApplied mineHitsplatOn(Actor actor)
+	{
+		Hitsplat hitsplat = mock(Hitsplat.class);
+		when(hitsplat.isMine()).thenReturn(true);
+		HitsplatApplied event = new HitsplatApplied();
+		event.setActor(actor);
+		event.setHitsplat(hitsplat);
+		return event;
+	}
+
+	private static HitsplatApplied otherHitsplatOn(Actor actor)
+	{
+		// Mockito's default for boolean is false → isMine() returns false without stubbing,
+		// which is exactly what we want for an "other player" hitsplat. Stubbing to the
+		// default trips MockitoJUnitRunner.STRICT_STUBS as an unnecessary stubbing.
+		Hitsplat hitsplat = mock(Hitsplat.class);
+		HitsplatApplied event = new HitsplatApplied();
+		event.setActor(actor);
+		event.setHitsplat(hitsplat);
+		return event;
 	}
 }
