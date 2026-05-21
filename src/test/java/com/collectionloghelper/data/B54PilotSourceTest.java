@@ -34,11 +34,11 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * End-to-end grouping test using the B.5.4 pilot fixture
@@ -58,21 +58,21 @@ public class B54PilotSourceTest
 {
 	private List<GuidanceStep> steps;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Gson gson = new GsonBuilder().create();
 		Type listType = new TypeToken<List<CollectionLogSource>>() {}.getType();
 
 		InputStream is = getClass().getResourceAsStream("/com/collectionloghelper/b54_pilot_source.json");
-		assertNotNull("Pilot fixture must be present on classpath", is);
+		assertNotNull( is,"Pilot fixture must be present on classpath");
 
 		List<CollectionLogSource> sources = gson.fromJson(new InputStreamReader(is), listType);
-		assertEquals("Fixture must contain exactly one source", 1, sources.size());
+		assertEquals( 1, sources.size(),"Fixture must contain exactly one source");
 
 		steps = sources.get(0).getGuidanceSteps();
-		assertNotNull("Pilot source must have guidance steps", steps);
-		assertEquals("Pilot source must have exactly 8 guidance steps", 8, steps.size());
+		assertNotNull( steps,"Pilot source must have guidance steps");
+		assertEquals( 8, steps.size(),"Pilot source must have exactly 8 guidance steps");
 	}
 
 	@Test
@@ -92,7 +92,7 @@ public class B54PilotSourceTest
 	public void pilotFixture_grouper_producesFourGroups()
 	{
 		List<StepSectionGroup> groups = StepSectionGrouper.group(steps);
-		assertEquals("8 steps across 4 sections must produce 4 groups", 4, groups.size());
+		assertEquals( 4, groups.size(),"8 steps across 4 sections must produce 4 groups");
 	}
 
 	@Test

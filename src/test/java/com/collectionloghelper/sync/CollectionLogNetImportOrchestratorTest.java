@@ -32,11 +32,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
@@ -68,7 +68,7 @@ public class CollectionLogNetImportOrchestratorTest
 
 	private CollectionLogNetImportOrchestrator orchestrator;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		client = mock(Client.class);
@@ -131,7 +131,7 @@ public class CollectionLogNetImportOrchestratorTest
 
 		ArgumentCaptor<String> msg = ArgumentCaptor.forClass(String.class);
 		verify(panel).onCollectionLogNetImportComplete(msg.capture());
-		assertTrue("toast message should be non-empty", !msg.getValue().isEmpty());
+		assertTrue( !msg.getValue().isEmpty(),"toast message should be non-empty");
 		verify(panel).rebuild();
 	}
 

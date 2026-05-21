@@ -33,17 +33,18 @@ import java.awt.Component;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import net.runelite.client.game.ItemManager;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link PanelHeaderBuilder}: the helper that assembles the
@@ -52,7 +53,8 @@ import static org.mockito.Mockito.when;
  * guidance banner, step progress, quick-guide). Extracted from
  * {@link CollectionLogHelperPanel} as part of issue #503 god-class splits.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class PanelHeaderBuilderTest
 {
 	@Mock
@@ -70,7 +72,7 @@ public class PanelHeaderBuilderTest
 
 	private JPanel host;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		// SyncButtonController consults these config flags during construction.
@@ -98,10 +100,10 @@ public class PanelHeaderBuilderTest
 	{
 		PanelHeaderBuilder.Result result = build();
 
-		assertNotNull("result", result);
-		assertNotNull("controlsPanel", result.controlsPanel);
-		assertTrue("controlsPanel uses BoxLayout",
-			result.controlsPanel.getLayout() instanceof BoxLayout);
+		assertNotNull( result,"result");
+		assertNotNull( result.controlsPanel,"controlsPanel");
+		assertTrue(
+			result.controlsPanel.getLayout() instanceof BoxLayout,"controlsPanel uses BoxLayout");
 	}
 
 	@Test
@@ -109,15 +111,15 @@ public class PanelHeaderBuilderTest
 	{
 		PanelHeaderBuilder.Result result = build();
 
-		assertNotNull("completionLabel", result.completionLabel);
-		assertNotNull("completionProgressBar", result.completionProgressBar);
-		assertNotNull("syncStatusView", result.syncStatusView);
-		assertNotNull("syncButtonController", result.syncButtonController);
-		assertNotNull("clueSummaryView", result.clueSummaryView);
-		assertNotNull("slayerStrategyView", result.slayerStrategyView);
-		assertNotNull("guidanceBannerView", result.guidanceBannerView);
-		assertNotNull("stepProgressView", result.stepProgressView);
-		assertNotNull("quickGuidePanelView", result.quickGuidePanelView);
+		assertNotNull( result.completionLabel,"completionLabel");
+		assertNotNull( result.completionProgressBar,"completionProgressBar");
+		assertNotNull( result.syncStatusView,"syncStatusView");
+		assertNotNull( result.syncButtonController,"syncButtonController");
+		assertNotNull( result.clueSummaryView,"clueSummaryView");
+		assertNotNull( result.slayerStrategyView,"slayerStrategyView");
+		assertNotNull( result.guidanceBannerView,"guidanceBannerView");
+		assertNotNull( result.stepProgressView,"stepProgressView");
+		assertNotNull( result.quickGuidePanelView,"quickGuidePanelView");
 	}
 
 	@Test
@@ -144,21 +146,21 @@ public class PanelHeaderBuilderTest
 		PanelHeaderBuilder.Result result = build();
 		Component[] children = result.controlsPanel.getComponents();
 
-		assertSame("completion label first", result.completionLabel, children[0]);
-		assertSame("completion progress bar second", result.completionProgressBar, children[1]);
-		assertSame("sync status view third", result.syncStatusView, children[2]);
-		assertSame("collectionlog.net button fourth",
-			result.syncButtonController.getCollectionLogNetButton(), children[3]);
-		assertSame("temple sync button fifth",
-			result.syncButtonController.getTempleSyncButton(), children[4]);
-		assertSame("clue summary view", result.clueSummaryView, children[5]);
-		assertSame("slayer strategy view", result.slayerStrategyView, children[6]);
-		assertSame("guidance banner view", result.guidanceBannerView, children[7]);
-		assertSame("step progress view", result.stepProgressView, children[8]);
+		assertSame( result.completionLabel, children[0],"completion label first");
+		assertSame( result.completionProgressBar, children[1],"completion progress bar second");
+		assertSame( result.syncStatusView, children[2],"sync status view third");
+		assertSame(
+			result.syncButtonController.getCollectionLogNetButton(), children[3],"collectionlog.net button fourth");
+		assertSame(
+			result.syncButtonController.getTempleSyncButton(), children[4],"temple sync button fifth");
+		assertSame( result.clueSummaryView, children[5],"clue summary view");
+		assertSame( result.slayerStrategyView, children[6],"slayer strategy view");
+		assertSame( result.guidanceBannerView, children[7],"guidance banner view");
+		assertSame( result.stepProgressView, children[8],"step progress view");
 		// QuickGuidePanelView is intentionally NOT added to controlsPanel — it is
 		// shown contextually in the detail/list view. The trailing component
 		// must therefore be the vertical strut (Box.Filler).
-		assertTrue("trailing vertical strut present", children.length >= 10);
+		assertTrue( children.length >= 10,"trailing vertical strut present");
 	}
 
 	@Test
@@ -168,8 +170,8 @@ public class PanelHeaderBuilderTest
 
 		// QuickGuidePanelView is a factory, not a Component, so it cannot appear
 		// in the controlsPanel's child list — assert by counting and shape only.
-		assertNotNull("quickGuidePanelView factory created",
-			result.quickGuidePanelView);
+		assertNotNull(
+			result.quickGuidePanelView,"quickGuidePanelView factory created");
 	}
 
 	@Test

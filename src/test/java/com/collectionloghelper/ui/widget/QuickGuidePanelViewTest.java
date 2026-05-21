@@ -30,10 +30,10 @@ import com.collectionloghelper.efficiency.ScoredItem;
 import java.util.Collections;
 import java.util.function.BiConsumer;
 import javax.swing.JPanel;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Unit tests for {@link QuickGuidePanelView}.
@@ -44,7 +44,7 @@ public class QuickGuidePanelViewTest
 	private CollectionLogSource testSource;
 	private ScoredItem testItem;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		BiConsumer<CollectionLogSource, Integer> activator = (s, id) -> {};

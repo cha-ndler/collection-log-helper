@@ -28,15 +28,16 @@ import com.collectionloghelper.CollectionLogHelperConfig;
 import java.lang.reflect.Constructor;
 import java.util.Set;
 import net.runelite.api.Client;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link PohTeleportInventoryImpl}.
@@ -55,7 +56,8 @@ import static org.mockito.Mockito.*;
  *   <li>All enum values are exercised (no missing switch case)</li>
  * </ul>
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class PohTeleportInventoryImplTest
 {
 	// -------------------------------------------------------------------------
@@ -74,7 +76,7 @@ public class PohTeleportInventoryImplTest
 
 	private PohTeleportInventoryImpl inventory;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<PohTeleportInventoryImpl> ctor =
@@ -92,7 +94,7 @@ public class PohTeleportInventoryImplTest
 	{
 		for (PohTeleport t : PohTeleport.values())
 		{
-			assertFalse("Expected false before refresh for " + t, inventory.hasTeleport(t));
+			assertFalse( inventory.hasTeleport(t),"Expected false before refresh for " + t);
 		}
 	}
 
@@ -445,11 +447,14 @@ public class PohTeleportInventoryImplTest
 		assertTrue(available.contains(PohTeleport.FAIRY_RING));
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void getAvailableTeleports_returnedSetIsImmutable()
 	{
-		Set<PohTeleport> available = inventory.getAvailableTeleports();
-		available.add(PohTeleport.MOUNTED_GLORY); // must throw
+		assertThrows(UnsupportedOperationException.class, () ->
+		{
+			Set<PohTeleport> available = inventory.getAvailableTeleports();
+			available.add(PohTeleport.MOUNTED_GLORY); // must throw
+		});
 	}
 
 	// =========================================================================
@@ -465,7 +470,7 @@ public class PohTeleportInventoryImplTest
 		inventory.refresh();
 		for (PohTeleport t : PohTeleport.values())
 		{
-			assertFalse("Unexpected true for " + t, inventory.hasTeleport(t));
+			assertFalse( inventory.hasTeleport(t),"Unexpected true for " + t);
 		}
 	}
 }

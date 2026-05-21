@@ -35,14 +35,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import net.runelite.client.game.ItemManager;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link RecommendedItemsChipPanel} (B.5.2).
@@ -67,7 +67,7 @@ public class RecommendedItemsChipPanelTest
 	private ItemManager itemManager;
 	private RecommendedItemsChipPanel panel;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		itemManager = Mockito.mock(ItemManager.class);
@@ -82,7 +82,7 @@ public class RecommendedItemsChipPanelTest
 	{
 		panel.update((List<RequiredItemDisplay>) null);
 		flushEdt();
-		assertFalse("Panel must be hidden for null list", panel.isVisible());
+		assertFalse( panel.isVisible(),"Panel must be hidden for null list");
 	}
 
 	@Test
@@ -90,7 +90,7 @@ public class RecommendedItemsChipPanelTest
 	{
 		panel.update(Collections.<RequiredItemDisplay>emptyList());
 		flushEdt();
-		assertFalse("Panel must be hidden for empty list", panel.isVisible());
+		assertFalse( panel.isVisible(),"Panel must be hidden for empty list");
 	}
 
 	// ── Scenario 2: HELD → muted green border ────────────────────────────────
@@ -99,25 +99,25 @@ public class RecommendedItemsChipPanelTest
 	public void borderColorFor_heldStatus_mutedGreen()
 	{
 		Color color = RecommendedItemsChipPanel.borderColorFor(Status.HELD);
-		assertEquals("HELD status must yield muted green border",
-			RecommendedItemsChipPanel.COLOR_HELD_MUTED, color);
+		assertEquals(
+			RecommendedItemsChipPanel.COLOR_HELD_MUTED, color,"HELD status must yield muted green border");
 	}
 
 	@Test
 	public void heldMutedColor_hasReducedAlpha()
 	{
-		assertTrue("HELD muted colour must have alpha less than 255",
-			RecommendedItemsChipPanel.COLOR_HELD_MUTED.getAlpha() < 255);
-		assertFalse("Muted HELD colour must differ from required HELD colour",
-			RecommendedItemsChipPanel.COLOR_HELD_MUTED.equals(RequiredItemDisplay.COLOR_HELD));
+		assertTrue(
+			RecommendedItemsChipPanel.COLOR_HELD_MUTED.getAlpha() < 255,"HELD muted colour must have alpha less than 255");
+		assertFalse(
+			RecommendedItemsChipPanel.COLOR_HELD_MUTED.equals(RequiredItemDisplay.COLOR_HELD),"Muted HELD colour must differ from required HELD colour");
 	}
 
 	@Test
 	public void tooltipFor_heldStatus_itemName()
 	{
 		RequiredItemDisplay row = new RequiredItemDisplay(TINDERBOX, "Tinderbox", Status.HELD);
-		assertEquals("HELD tooltip must be item name",
-			"Tinderbox", RecommendedItemsChipPanel.tooltipFor(row));
+		assertEquals(
+			"Tinderbox", RecommendedItemsChipPanel.tooltipFor(row),"HELD tooltip must be item name");
 	}
 
 	// ── Scenario 3: IN_BANK → muted white border + bank tooltip ─────────────
@@ -126,17 +126,17 @@ public class RecommendedItemsChipPanelTest
 	public void borderColorFor_inBankStatus_mutedWhite()
 	{
 		Color color = RecommendedItemsChipPanel.borderColorFor(Status.IN_BANK);
-		assertEquals("IN_BANK status must yield muted off-white border",
-			RecommendedItemsChipPanel.COLOR_IN_BANK_MUTED, color);
+		assertEquals(
+			RecommendedItemsChipPanel.COLOR_IN_BANK_MUTED, color,"IN_BANK status must yield muted off-white border");
 	}
 
 	@Test
 	public void tooltipFor_inBankStatus_questHelperConvention()
 	{
 		RequiredItemDisplay row = new RequiredItemDisplay(PYRE_LOGS, "Pyre logs", Status.IN_BANK);
-		assertEquals("IN_BANK tooltip must be Quest Helper bank message",
+		assertEquals(
 			RecommendedItemsChipPanel.IN_BANK_TOOLTIP,
-			RecommendedItemsChipPanel.tooltipFor(row));
+			RecommendedItemsChipPanel.tooltipFor(row),"IN_BANK tooltip must be Quest Helper bank message");
 	}
 
 	// ── Scenario 4: MISSING → muted red border ───────────────────────────────
@@ -145,25 +145,25 @@ public class RecommendedItemsChipPanelTest
 	public void borderColorFor_missingStatus_mutedRed()
 	{
 		Color color = RecommendedItemsChipPanel.borderColorFor(Status.MISSING);
-		assertEquals("MISSING status must yield muted red border",
-			RecommendedItemsChipPanel.COLOR_MISSING_MUTED, color);
+		assertEquals(
+			RecommendedItemsChipPanel.COLOR_MISSING_MUTED, color,"MISSING status must yield muted red border");
 	}
 
 	@Test
 	public void missingMutedColor_hasReducedAlpha()
 	{
-		assertTrue("MISSING muted colour must have alpha less than 255",
-			RecommendedItemsChipPanel.COLOR_MISSING_MUTED.getAlpha() < 255);
-		assertFalse("Muted MISSING colour must differ from required MISSING colour",
-			RecommendedItemsChipPanel.COLOR_MISSING_MUTED.equals(RequiredItemDisplay.COLOR_MISSING));
+		assertTrue(
+			RecommendedItemsChipPanel.COLOR_MISSING_MUTED.getAlpha() < 255,"MISSING muted colour must have alpha less than 255");
+		assertFalse(
+			RecommendedItemsChipPanel.COLOR_MISSING_MUTED.equals(RequiredItemDisplay.COLOR_MISSING),"Muted MISSING colour must differ from required MISSING colour");
 	}
 
 	@Test
 	public void tooltipFor_missingStatus_itemName()
 	{
 		RequiredItemDisplay row = new RequiredItemDisplay(SHARK, "Shark", Status.MISSING);
-		assertEquals("MISSING tooltip must be item name",
-			"Shark", RecommendedItemsChipPanel.tooltipFor(row));
+		assertEquals(
+			"Shark", RecommendedItemsChipPanel.tooltipFor(row),"MISSING tooltip must be item name");
 	}
 
 	// ── All-statuses coverage ────────────────────────────────────────────────
@@ -187,9 +187,9 @@ public class RecommendedItemsChipPanelTest
 		RequiredItemDisplay row = new RequiredItemDisplay(TINDERBOX, "Tinderbox", Status.HELD);
 		JLabel chip = panel.buildChip(row);
 
-		assertNotNull("Chip must not be null", chip);
-		assertEquals("HELD chip tooltip must be item name",
-			"Tinderbox", chip.getToolTipText());
+		assertNotNull( chip,"Chip must not be null");
+		assertEquals(
+			"Tinderbox", chip.getToolTipText(),"HELD chip tooltip must be item name");
 	}
 
 	@Test
@@ -198,9 +198,9 @@ public class RecommendedItemsChipPanelTest
 		RequiredItemDisplay row = new RequiredItemDisplay(PYRE_LOGS, "Pyre logs", Status.IN_BANK);
 		JLabel chip = panel.buildChip(row);
 
-		assertNotNull("Chip must not be null", chip);
-		assertEquals("IN_BANK chip tooltip must be bank message",
-			RecommendedItemsChipPanel.IN_BANK_TOOLTIP, chip.getToolTipText());
+		assertNotNull( chip,"Chip must not be null");
+		assertEquals(
+			RecommendedItemsChipPanel.IN_BANK_TOOLTIP, chip.getToolTipText(),"IN_BANK chip tooltip must be bank message");
 	}
 
 	@Test
@@ -214,7 +214,7 @@ public class RecommendedItemsChipPanelTest
 		for (RequiredItemDisplay row : rows)
 		{
 			JLabel chip = panel.buildChip(row);
-			assertNotNull("Chip must not be null for status " + row.getStatus(), chip);
+			assertNotNull( chip,"Chip must not be null for status " + row.getStatus());
 		}
 	}
 
@@ -223,7 +223,7 @@ public class RecommendedItemsChipPanelTest
 	@Test
 	public void afterConstruction_hidden()
 	{
-		assertFalse("Panel must start hidden", panel.isVisible());
+		assertFalse( panel.isVisible(),"Panel must start hidden");
 	}
 
 	@Test
@@ -233,7 +233,7 @@ public class RecommendedItemsChipPanelTest
 			new RequiredItemDisplay(TINDERBOX, "Tinderbox", Status.HELD));
 		panel.update(rows);
 		flushEdt();
-		assertTrue("Panel must be visible after update with non-empty list", panel.isVisible());
+		assertTrue( panel.isVisible(),"Panel must be visible after update with non-empty list");
 	}
 
 	@Test
@@ -242,11 +242,11 @@ public class RecommendedItemsChipPanelTest
 		panel.update(Collections.singletonList(
 			new RequiredItemDisplay(TINDERBOX, "Tinderbox", Status.HELD)));
 		flushEdt();
-		assertTrue("Panel visible after first non-empty update", panel.isVisible());
+		assertTrue( panel.isVisible(),"Panel visible after first non-empty update");
 
 		panel.update(Collections.<RequiredItemDisplay>emptyList());
 		flushEdt();
-		assertFalse("Panel must be hidden after second empty update", panel.isVisible());
+		assertFalse( panel.isVisible(),"Panel must be hidden after second empty update");
 	}
 
 	// ── Heading text ─────────────────────────────────────────────────────────
@@ -271,7 +271,7 @@ public class RecommendedItemsChipPanelTest
 				break;
 			}
 		}
-		assertNotNull("Chip row panel must exist", chipRow);
+		assertNotNull( chipRow,"Chip row panel must exist");
 
 		boolean foundHeading = false;
 		for (Component c : chipRow.getComponents())
@@ -282,7 +282,7 @@ public class RecommendedItemsChipPanelTest
 				break;
 			}
 		}
-		assertTrue("Chip row must contain a 'Recommended:' heading label", foundHeading);
+		assertTrue( foundHeading,"Chip row must contain a 'Recommended:' heading label");
 	}
 
 	// ── Helpers ─────────────────────────────────────────────────────────────

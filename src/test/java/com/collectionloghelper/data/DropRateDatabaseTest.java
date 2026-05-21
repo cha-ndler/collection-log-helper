@@ -31,16 +31,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import net.runelite.api.coords.WorldPoint;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DropRateDatabaseTest
 {
 	private DropRateDatabase database;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		database = new DropRateDatabase();
@@ -62,7 +62,7 @@ public class DropRateDatabaseTest
 	public void load_populatesSources()
 	{
 		assertFalse(database.getAllSources().isEmpty());
-		assertTrue("Expected at least 200 sources", database.getAllSources().size() >= 200);
+		assertTrue( database.getAllSources().size() >= 200,"Expected at least 200 sources");
 	}
 
 	@Test
@@ -70,8 +70,8 @@ public class DropRateDatabaseTest
 	{
 		for (CollectionLogSource source : database.getAllSources())
 		{
-			assertNotNull("Source has null name", source.getName());
-			assertFalse("Source has empty name", source.getName().isEmpty());
+			assertNotNull( source.getName(),"Source has null name");
+			assertFalse( source.getName().isEmpty(),"Source has empty name");
 		}
 	}
 
@@ -80,8 +80,8 @@ public class DropRateDatabaseTest
 	{
 		for (CollectionLogSource source : database.getAllSources())
 		{
-			assertNotNull("Source '" + source.getName() + "' has null items", source.getItems());
-			assertFalse("Source '" + source.getName() + "' has no items", source.getItems().isEmpty());
+			assertNotNull( source.getItems(),"Source '" + source.getName() + "' has null items");
+			assertFalse( source.getItems().isEmpty(),"Source '" + source.getName() + "' has no items");
 		}
 	}
 
@@ -96,9 +96,9 @@ public class DropRateDatabaseTest
 				boolean hasPointCost = item.getPointCost() > 0;
 				boolean hasMilestone = item.getMilestoneKills() > 0;
 				assertTrue(
+					hasDropRate || hasPointCost || hasMilestone,
 					"Item '" + item.getName() + "' in source '" + source.getName()
-						+ "' has no drop rate, point cost, or milestone",
-					hasDropRate || hasPointCost || hasMilestone);
+						+ "' has no drop rate, point cost, or milestone");
 			}
 		}
 	}
@@ -111,9 +111,9 @@ public class DropRateDatabaseTest
 			for (CollectionLogItem item : source.getItems())
 			{
 				assertTrue(
+					item.getDropRate() <= 1.0,
 					"Item '" + item.getName() + "' in '" + source.getName()
-						+ "' has dropRate " + item.getDropRate() + " > 1.0",
-					item.getDropRate() <= 1.0);
+						+ "' has dropRate " + item.getDropRate() + " > 1.0");
 			}
 		}
 	}
@@ -123,7 +123,7 @@ public class DropRateDatabaseTest
 	{
 		for (CollectionLogSource source : database.getAllSources())
 		{
-			assertNotNull("Source '" + source.getName() + "' has null category", source.getCategory());
+			assertNotNull( source.getCategory(),"Source '" + source.getName() + "' has null category");
 		}
 	}
 
@@ -223,7 +223,7 @@ public class DropRateDatabaseTest
 				break;
 			}
 		}
-		assertNotNull("No source with NPC ID found", sourceWithNpc);
+		assertNotNull( sourceWithNpc,"No source with NPC ID found");
 
 		CollectionLogSource found = database.getSourceByNpcId(sourceWithNpc.getNpcId());
 		assertNotNull(found);
@@ -253,7 +253,7 @@ public class DropRateDatabaseTest
 		for (CollectionLogCategory cat : CollectionLogCategory.values())
 		{
 			List<CollectionLogSource> sources = database.getSourcesByCategory(cat);
-			assertFalse("Category " + cat + " has no sources", sources.isEmpty());
+			assertFalse( sources.isEmpty(),"Category " + cat + " has no sources");
 		}
 	}
 
@@ -261,10 +261,13 @@ public class DropRateDatabaseTest
 	// getAllSources — immutability
 	// ========================================================================
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void getAllSources_returnsUnmodifiableList()
 	{
-		database.getAllSources().add(null);
+		assertThrows(UnsupportedOperationException.class, () ->
+		{
+			database.getAllSources().add(null);
+		});
 	}
 
 	// ========================================================================
@@ -279,7 +282,7 @@ public class DropRateDatabaseTest
 			for (CollectionLogItem item : source.getItems())
 			{
 				CollectionLogItem found = database.getItemById(item.getItemId());
-				assertNotNull("Item ID " + item.getItemId() + " not found in index", found);
+				assertNotNull( found,"Item ID " + item.getItemId() + " not found in index");
 			}
 		}
 	}
@@ -324,12 +327,12 @@ public class DropRateDatabaseTest
 
 		GuidanceStep step = gson.fromJson(json, GuidanceStep.class);
 
-		assertNotNull("Step must not be null", step);
-		assertNotNull("requiredItemIds must be deserialised", step.getRequiredItemIds());
+		assertNotNull( step,"Step must not be null");
+		assertNotNull( step.getRequiredItemIds(),"requiredItemIds must be deserialised");
 		assertEquals(1, step.getRequiredItemIds().size());
 		assertEquals(Integer.valueOf(590), step.getRequiredItemIds().get(0));
 
-		assertNotNull("recommendedItemIds must be deserialised", step.getRecommendedItemIds());
+		assertNotNull( step.getRecommendedItemIds(),"recommendedItemIds must be deserialised");
 		assertEquals(2, step.getRecommendedItemIds().size());
 		assertEquals(Integer.valueOf(4151), step.getRecommendedItemIds().get(0));
 		assertEquals(Integer.valueOf(2440), step.getRecommendedItemIds().get(1));
@@ -350,9 +353,9 @@ public class DropRateDatabaseTest
 
 		GuidanceStep step = gson.fromJson(json, GuidanceStep.class);
 
-		assertNotNull("Step must not be null", step);
-		assertNull("recommendedItemIds must be null when absent from JSON",
-			step.getRecommendedItemIds());
+		assertNotNull( step,"Step must not be null");
+		assertNull(
+			step.getRecommendedItemIds(),"recommendedItemIds must be null when absent from JSON");
 	}
 
 	// ========================================================================
@@ -394,9 +397,9 @@ public class DropRateDatabaseTest
 				if (desc != null)
 				{
 					assertFalse(
+						desc.contains(MOJIBAKE_PREFIX),
 						"Mojibake sequence detected in description for source '"
-							+ source.getName() + "': " + desc,
-						desc.contains(MOJIBAKE_PREFIX));
+							+ source.getName() + "': " + desc);
 					assertAscii("description for source '" + source.getName() + "'", desc);
 				}
 
@@ -408,10 +411,10 @@ public class DropRateDatabaseTest
 						if (override != null)
 						{
 							assertFalse(
+								override.contains(MOJIBAKE_PREFIX),
 								"Mojibake sequence detected in perItemStepDescription (item "
 									+ entry.getKey() + ") for source '" + source.getName()
-									+ "': " + override,
-								override.contains(MOJIBAKE_PREFIX));
+									+ "': " + override);
 							assertAscii(
 								"perItemStepDescription (item " + entry.getKey()
 									+ ") for source '" + source.getName() + "'",
@@ -451,9 +454,9 @@ public class DropRateDatabaseTest
 		for (CollectionLogSource source : database.getAllSources())
 		{
 			assertNull(
+				source.getMetaAuthoredDate(),
 				"Source '" + source.getName() + "' has metaAuthoredDate set; "
-					+ "production backfill is not part of this PR",
-				source.getMetaAuthoredDate());
+					+ "production backfill is not part of this PR");
 		}
 	}
 
@@ -479,13 +482,13 @@ public class DropRateDatabaseTest
 					continue; // null is fine — most steps have no recommendedItemIds
 				}
 				String ctx = source.getName() + " / " + step.getDescription();
-				assertFalse("recommendedItemIds must not be empty: " + ctx, recommended.isEmpty());
-				assertTrue("recommendedItemIds must have at most 6 entries: " + ctx,
-					recommended.size() <= 6);
+				assertFalse( recommended.isEmpty(),"recommendedItemIds must not be empty: " + ctx);
+				assertTrue(
+					recommended.size() <= 6,"recommendedItemIds must have at most 6 entries: " + ctx);
 				for (int id : recommended)
 				{
-					assertTrue("recommendedItemIds must contain only positive IDs (got " + id + "): " + ctx,
-						id > 0);
+					assertTrue(
+						id > 0,"recommendedItemIds must contain only positive IDs (got " + id + "): " + ctx);
 				}
 			}
 		}
@@ -503,24 +506,24 @@ public class DropRateDatabaseTest
 	public void spotCheck_brimhavenAgilityArena_finalStep_isChatMessageReceived()
 	{
 		CollectionLogSource source = database.getSourceByName("Brimhaven Agility Arena");
-		assertNotNull("Brimhaven Agility Arena source must exist", source);
+		assertNotNull( source,"Brimhaven Agility Arena source must exist");
 
 		List<GuidanceStep> steps = source.getGuidanceSteps();
-		assertNotNull("Brimhaven Agility Arena must have guidance steps", steps);
-		assertFalse("Brimhaven Agility Arena must have at least one step", steps.isEmpty());
+		assertNotNull( steps,"Brimhaven Agility Arena must have guidance steps");
+		assertFalse( steps.isEmpty(),"Brimhaven Agility Arena must have at least one step");
 
 		GuidanceStep finalStep = steps.get(steps.size() - 1);
 		assertEquals(
-			"Brimhaven Agility Arena final step must use CHAT_MESSAGE_RECEIVED",
 			CompletionCondition.CHAT_MESSAGE_RECEIVED,
-			finalStep.getCompletionCondition());
+			finalStep.getCompletionCondition(),
+			"Brimhaven Agility Arena final step must use CHAT_MESSAGE_RECEIVED");
 		assertNotNull(
-			"Brimhaven Agility Arena final step must have a completionChatPattern",
-			finalStep.getCompletionChatPattern());
+			finalStep.getCompletionChatPattern(),
+			"Brimhaven Agility Arena final step must have a completionChatPattern");
 		assertTrue(
-			"Brimhaven Agility Arena chat pattern must match ticket award message",
 			"You have received an Agility Arena Ticket and Brimhaven Voucher!"
-				.contains(finalStep.getCompletionChatPattern()));
+				.contains(finalStep.getCompletionChatPattern()),
+			"Brimhaven Agility Arena chat pattern must match ticket award message");
 	}
 
 	/**
@@ -531,24 +534,24 @@ public class DropRateDatabaseTest
 	public void spotCheck_pestControl_finalStep_isChatMessageReceived()
 	{
 		CollectionLogSource source = database.getSourceByName("Pest Control");
-		assertNotNull("Pest Control source must exist", source);
+		assertNotNull( source,"Pest Control source must exist");
 
 		List<GuidanceStep> steps = source.getGuidanceSteps();
-		assertNotNull("Pest Control must have guidance steps", steps);
-		assertFalse("Pest Control must have at least one step", steps.isEmpty());
+		assertNotNull( steps,"Pest Control must have guidance steps");
+		assertFalse( steps.isEmpty(),"Pest Control must have at least one step");
 
 		GuidanceStep finalStep = steps.get(steps.size() - 1);
 		assertEquals(
-			"Pest Control final step must use CHAT_MESSAGE_RECEIVED",
 			CompletionCondition.CHAT_MESSAGE_RECEIVED,
-			finalStep.getCompletionCondition());
+			finalStep.getCompletionCondition(),
+			"Pest Control final step must use CHAT_MESSAGE_RECEIVED");
 		assertNotNull(
-			"Pest Control final step must have a completionChatPattern",
-			finalStep.getCompletionChatPattern());
+			finalStep.getCompletionChatPattern(),
+			"Pest Control final step must have a completionChatPattern");
 		assertEquals(
-			"Pest Control chat pattern must match game-win message exactly",
 			"You have successfully defended the island!",
-			finalStep.getCompletionChatPattern());
+			finalStep.getCompletionChatPattern(),
+			"Pest Control chat pattern must match game-win message exactly");
 	}
 
 	/**
@@ -570,11 +573,11 @@ public class DropRateDatabaseTest
 				{
 					String ctx = source.getName() + " / " + step.getDescription();
 					assertNotNull(
-						"CHAT_MESSAGE_RECEIVED step must have completionChatPattern: " + ctx,
-						step.getCompletionChatPattern());
+						step.getCompletionChatPattern(),
+						"CHAT_MESSAGE_RECEIVED step must have completionChatPattern: " + ctx);
 					assertFalse(
-						"CHAT_MESSAGE_RECEIVED step must have non-empty completionChatPattern: " + ctx,
-						step.getCompletionChatPattern().isEmpty());
+						step.getCompletionChatPattern().isEmpty(),
+						"CHAT_MESSAGE_RECEIVED step must have non-empty completionChatPattern: " + ctx);
 				}
 			}
 		}
@@ -604,9 +607,9 @@ public class DropRateDatabaseTest
 			for (GuidanceStep step : source.getGuidanceSteps())
 			{
 				assertNull(
+					step.getPerItemRecommendedItemIds(),
 					"perItemRecommendedItemIds must not be set in production data yet "
-						+ "(source: " + source.getName() + ")",
-					step.getPerItemRecommendedItemIds());
+						+ "(source: " + source.getName() + ")");
 			}
 		}
 	}
@@ -635,34 +638,34 @@ public class DropRateDatabaseTest
 				break;
 			}
 		}
-		assertNotNull("Custodian Stalker source must exist in drop_rates.json", custodianStalker);
+		assertNotNull( custodianStalker,"Custodian Stalker source must exist in drop_rates.json");
 
 		List<GuidanceStep> steps = custodianStalker.getGuidanceSteps();
-		assertNotNull("Custodian Stalker must have guidance steps", steps);
-		assertTrue("Custodian Stalker must have at least one guidance step", !steps.isEmpty());
+		assertNotNull( steps,"Custodian Stalker must have guidance steps");
+		assertTrue( !steps.isEmpty(),"Custodian Stalker must have at least one guidance step");
 
 		GuidanceStep travelStep = steps.get(0);
 		assertEquals(
+			CompletionCondition.ARRIVE_AT_ZONE, travelStep.getCompletionCondition(),
 			"Step 1 must use ARRIVE_AT_ZONE so arrival auto-advances via either surface "
-				+ "or underground (issue #548)",
-			CompletionCondition.ARRIVE_AT_ZONE, travelStep.getCompletionCondition());
+				+ "or underground (issue #548)");
 
 		Zone zone = travelStep.getZone();
-		assertNotNull("Step 1 must declare a completionZone for ARRIVE_AT_ZONE", zone);
-		assertEquals("Zone must be on plane 0", 0, zone.getPlane());
+		assertNotNull( zone,"Step 1 must declare a completionZone for ARRIVE_AT_ZONE");
+		assertEquals( 0, zone.getPlane(),"Zone must be on plane 0");
 
 		// Zone must contain the documented surface entrance object location.
-		assertTrue("Zone must contain the surface entrance at (1324, 3364, 0)",
-			zone.contains(new net.runelite.api.coords.WorldPoint(1324, 3364, 0)));
+		assertTrue(
+			zone.contains(new net.runelite.api.coords.WorldPoint(1324, 3364, 0)),"Zone must contain the surface entrance at (1324, 3364, 0)");
 
 		// Zone must also contain the underground den interior so a player who
 		// descends without crossing the surface radius still auto-advances.
-		assertTrue("Zone must contain the underground den interior at (1301, 9820, 0)",
-			zone.contains(new net.runelite.api.coords.WorldPoint(1301, 9820, 0)));
+		assertTrue(
+			zone.contains(new net.runelite.api.coords.WorldPoint(1301, 9820, 0)),"Zone must contain the underground den interior at (1301, 9820, 0)");
 
 		// Wrong plane must not match.
-		assertFalse("Zone must not match plane 1",
-			zone.contains(new net.runelite.api.coords.WorldPoint(1324, 3364, 1)));
+		assertFalse(
+			zone.contains(new net.runelite.api.coords.WorldPoint(1324, 3364, 1)),"Zone must not match plane 1");
 	}
 
 	/**
@@ -725,36 +728,36 @@ public class DropRateDatabaseTest
 					break;
 				}
 			}
-			assertNotNull("Source must exist in drop_rates.json: " + name, source);
+			assertNotNull( source,"Source must exist in drop_rates.json: " + name);
 
 			List<GuidanceStep> steps = source.getGuidanceSteps();
-			assertNotNull("Source must have guidance steps: " + name, steps);
-			assertTrue("Source must have at least one guidance step: " + name, !steps.isEmpty());
+			assertNotNull( steps,"Source must have guidance steps: " + name);
+			assertTrue( !steps.isEmpty(),"Source must have at least one guidance step: " + name);
 
 			GuidanceStep travelStep = steps.get(0);
 			assertEquals(
-				"Step 0 must use ARRIVE_AT_ZONE (issue #555): " + name,
-				CompletionCondition.ARRIVE_AT_ZONE, travelStep.getCompletionCondition());
+				CompletionCondition.ARRIVE_AT_ZONE, travelStep.getCompletionCondition(),
+				"Step 0 must use ARRIVE_AT_ZONE (issue #555): " + name);
 
 			Zone zone = travelStep.getZone();
-			assertNotNull("Step 0 must declare a completionZone: " + name, zone);
-			assertEquals("Zone must be on plane 0: " + name, 0, zone.getPlane());
+			assertNotNull( zone,"Step 0 must declare a completionZone: " + name);
+			assertEquals( 0, zone.getPlane(),"Zone must be on plane 0: " + name);
 
 			// Surface entrance must be inside the zone (auto-advance must fire on arrival
 			// at the surface entrance, matching the prior ARRIVE_AT_TILE behaviour).
-			assertTrue("Zone must contain surface coord " + surface + " for " + name,
-				zone.contains(surface));
+			assertTrue(
+				zone.contains(surface),"Zone must contain surface coord " + surface + " for " + name);
 
 			// Underground destination must also be inside the zone (auto-advance must fire
 			// even when the player descends without crossing the surface radius).
-			assertTrue("Zone must contain underground coord " + underground + " for " + name,
-				zone.contains(underground));
+			assertTrue(
+				zone.contains(underground),"Zone must contain underground coord " + underground + " for " + name);
 
 			// Plane 1+ must never match — prevents false-positives on the floor above.
-			assertFalse("Zone must not match plane 1 at surface for " + name,
-				zone.contains(new WorldPoint(surface.getX(), surface.getY(), 1)));
-			assertFalse("Zone must not match plane 2 at surface for " + name,
-				zone.contains(new WorldPoint(surface.getX(), surface.getY(), 2)));
+			assertFalse(
+				zone.contains(new WorldPoint(surface.getX(), surface.getY(), 1)),"Zone must not match plane 1 at surface for " + name);
+			assertFalse(
+				zone.contains(new WorldPoint(surface.getX(), surface.getY(), 2)),"Zone must not match plane 2 at surface for " + name);
 		}
 	}
 }

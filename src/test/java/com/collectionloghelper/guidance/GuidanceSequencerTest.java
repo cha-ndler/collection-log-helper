@@ -45,20 +45,22 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import net.runelite.api.coords.WorldPoint;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class GuidanceSequencerTest
 {
 	@Mock
@@ -70,7 +72,7 @@ public class GuidanceSequencerTest
 
 	private GuidanceSequencer sequencer;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		// Default: inventory is empty, no items obtained
@@ -802,20 +804,20 @@ public class GuidanceSequencerTest
 				makeManualStep("Arrived")
 			);
 			startSequence(steps);
-			assertEquals("initial index for " + label, 0, sequencer.getCurrentIndex());
+			assertEquals( 0, sequencer.getCurrentIndex(),"initial index for " + label);
 
 			// Far outside the zone — must not advance.
 			sequencer.onPlayerMoved(new WorldPoint(minX - 100, minY - 100, plane));
-			assertEquals("outside zone must not advance: " + label, 0, sequencer.getCurrentIndex());
+			assertEquals( 0, sequencer.getCurrentIndex(),"outside zone must not advance: " + label);
 
 			// Wrong plane at the surface entrance — must not advance.
 			sequencer.onPlayerMoved(new WorldPoint(sx, sy, 1));
-			assertEquals("plane 1 must not advance: " + label, 0, sequencer.getCurrentIndex());
+			assertEquals( 0, sequencer.getCurrentIndex(),"plane 1 must not advance: " + label);
 
 			// Underground destination on correct plane — must advance. This is the
 			// case the old ARRIVE_AT_TILE predicate could not satisfy.
 			sequencer.onPlayerMoved(new WorldPoint(ux, uy, plane));
-			assertEquals("underground arrival must advance: " + label, 1, sequencer.getCurrentIndex());
+			assertEquals( 1, sequencer.getCurrentIndex(),"underground arrival must advance: " + label);
 		}
 	}
 
@@ -1800,13 +1802,13 @@ public class GuidanceSequencerTest
 		}, () -> {});
 
 		// Skip-chain should have advanced past step 0 and landed on step 1
-		assertTrue("Sequencer should still be active", sequencer.isActive());
-		assertEquals("Should be at index 1 (step 2/3)", 1, sequencer.getCurrentIndex());
+		assertTrue( sequencer.isActive(),"Sequencer should still be active");
+		assertEquals( 1, sequencer.getCurrentIndex(),"Should be at index 1 (step 2/3)");
 
 		// onStepChanged must have been called with the landed step
-		assertNotNull("onStepChanged must be called after skip-chain", landedStep.get());
-		assertEquals("Landed step description must match", "Landed step", landedStep.get().getDescription());
-		assertEquals("Landed index must match current index", 1, landedIndex.get().intValue());
+		assertNotNull( landedStep.get(),"onStepChanged must be called after skip-chain");
+		assertEquals( "Landed step", landedStep.get().getDescription(),"Landed step description must match");
+		assertEquals( 1, landedIndex.get().intValue(),"Landed index must match current index");
 	}
 
 	/**
@@ -1833,12 +1835,12 @@ public class GuidanceSequencerTest
 		startSequence(steps, s -> receivedStep.set(s), () -> completed.set(true));
 
 		// Sequence should be complete and inactive
-		assertTrue("onSequenceComplete must fire", completed.get());
-		assertFalse("Sequencer must be inactive after all-satisfied sequence", sequencer.isActive());
+		assertTrue( completed.get(),"onSequenceComplete must fire");
+		assertFalse( sequencer.isActive(),"Sequencer must be inactive after all-satisfied sequence");
 
 		// onStepChanged must NOT have been called — there is no valid step to land on
-		assertNull("onStepChanged must not be called when all steps are already satisfied",
-			receivedStep.get());
+		assertNull(
+			receivedStep.get(),"onStepChanged must not be called when all steps are already satisfied");
 	}
 
 	/**
@@ -1863,12 +1865,12 @@ public class GuidanceSequencerTest
 		AtomicReference<GuidanceStep> landedStep = new AtomicReference<>();
 		startSequence(steps, s -> landedStep.set(s), () -> {});
 
-		assertTrue("Sequencer should be active", sequencer.isActive());
-		assertEquals("Should land on index 2", 2, sequencer.getCurrentIndex());
-		assertEquals("Total steps should be 5", 5, sequencer.getTotalSteps());
-		assertNotNull("onStepChanged must have fired", landedStep.get());
-		assertEquals("Landed step should be 'Pick up shade key'",
-			"Pick up shade key", landedStep.get().getDescription());
+		assertTrue( sequencer.isActive(),"Sequencer should be active");
+		assertEquals( 2, sequencer.getCurrentIndex(),"Should land on index 2");
+		assertEquals( 5, sequencer.getTotalSteps(),"Total steps should be 5");
+		assertNotNull( landedStep.get(),"onStepChanged must have fired");
+		assertEquals(
+			"Pick up shade key", landedStep.get().getDescription(),"Landed step should be 'Pick up shade key'");
 	}
 
 	// ---- restartFromStep0 tests (Reset button) ────────────────────────────
@@ -1896,9 +1898,9 @@ public class GuidanceSequencerTest
 		// Reset: must return to step 0 without skip-chain
 		sequencer.restartFromStep0();
 
-		assertTrue("Sequencer must remain active after reset", sequencer.isActive());
-		assertEquals("Index must be 0 after reset", 0, sequencer.getCurrentIndex());
-		assertNotNull("onStepChanged must fire after reset", lastStep.get());
+		assertTrue( sequencer.isActive(),"Sequencer must remain active after reset");
+		assertEquals( 0, sequencer.getCurrentIndex(),"Index must be 0 after reset");
+		assertNotNull( lastStep.get(),"onStepChanged must fire after reset");
 		assertEquals("Step 1", lastStep.get().getDescription());
 	}
 
@@ -1913,7 +1915,7 @@ public class GuidanceSequencerTest
 	public void testRestartFromStep0_forceStep0EvenIfSatisfied()
 	{
 		int itemId = 590;
-		// @Before already sets lenient defaults: hasItemCount and hasItem return false.
+		// @BeforeEach already sets lenient defaults: hasItemCount and hasItem return false.
 		// Startsequence skip-chain lands at step 0 because inventory is empty by default.
 
 		List<GuidanceStep> steps = Arrays.asList(
@@ -1922,7 +1924,7 @@ public class GuidanceSequencerTest
 		);
 
 		startSequence(steps);
-		assertEquals("Should start at step 0", 0, sequencer.getCurrentIndex());
+		assertEquals( 0, sequencer.getCurrentIndex(),"Should start at step 0");
 
 		// Now mock reports inventory has the item (player picked it up mid-session).
 		// INVENTORY_HAS_ITEM only checks hasItemCount; hasItem is not needed here.
@@ -1930,13 +1932,13 @@ public class GuidanceSequencerTest
 
 		// Sync forward so skip-chain pushes to step 1
 		sequencer.syncToCurrentState();
-		assertEquals("Sync should have advanced to step 1", 1, sequencer.getCurrentIndex());
+		assertEquals( 1, sequencer.getCurrentIndex(),"Sync should have advanced to step 1");
 
 		// Reset: force back to step 0 even though the condition is satisfied
 		sequencer.restartFromStep0();
 
-		assertEquals("restartFromStep0 must land on step 0 regardless of satisfaction",
-			0, sequencer.getCurrentIndex());
+		assertEquals(
+			0, sequencer.getCurrentIndex(),"restartFromStep0 must land on step 0 regardless of satisfaction");
 		assertTrue(sequencer.isActive());
 	}
 
@@ -1988,7 +1990,7 @@ public class GuidanceSequencerTest
 	public void testSyncToCurrentState_advancesToFirstUnsatisfiedStep()
 	{
 		int itemId = 590;
-		// @Before already sets lenient defaults: inventory empty, lands at step 0.
+		// @BeforeEach already sets lenient defaults: inventory empty, lands at step 0.
 
 		List<GuidanceStep> steps = Arrays.asList(
 			makeInventoryHasItemStep(itemId, 1), // step 0
@@ -1997,7 +1999,7 @@ public class GuidanceSequencerTest
 		);
 
 		startSequence(steps);
-		assertEquals("Should start at step 0", 0, sequencer.getCurrentIndex());
+		assertEquals( 0, sequencer.getCurrentIndex(),"Should start at step 0");
 
 		// Player picked up the item mid-session.
 		// INVENTORY_HAS_ITEM only checks hasItemCount; hasItem is not needed here.
@@ -2009,9 +2011,9 @@ public class GuidanceSequencerTest
 		// Sync: re-evaluate from step 0, should jump to step 1
 		sequencer.syncToCurrentState();
 
-		assertTrue("Sequencer must remain active after sync", sequencer.isActive());
-		assertEquals("Should advance to step 1 (first unsatisfied)", 1, sequencer.getCurrentIndex());
-		assertNotNull("onStepChanged must fire with new step", lastStep.get());
+		assertTrue( sequencer.isActive(),"Sequencer must remain active after sync");
+		assertEquals( 1, sequencer.getCurrentIndex(),"Should advance to step 1 (first unsatisfied)");
+		assertNotNull( lastStep.get(),"onStepChanged must fire with new step");
 		assertEquals("Step 2", lastStep.get().getDescription());
 	}
 
@@ -2031,9 +2033,9 @@ public class GuidanceSequencerTest
 
 		sequencer.syncToCurrentState();
 
-		assertTrue("Sequence must remain active after sync", sequencer.isActive());
-		assertFalse("onSequenceComplete must not fire on sync", completeFired.get());
-		assertNotNull("Active source must remain set after sync", sequencer.getActiveSource());
+		assertTrue( sequencer.isActive(),"Sequence must remain active after sync");
+		assertFalse( completeFired.get(),"onSequenceComplete must not fire on sync");
+		assertNotNull( sequencer.getActiveSource(),"Active source must remain set after sync");
 	}
 
 	/**
@@ -2068,9 +2070,9 @@ public class GuidanceSequencerTest
 		sequencer.setOnStepChanged(s -> lastStep.set(s));
 		sequencer.syncToCurrentState();
 
-		assertEquals("Index must not change when no steps are satisfied", 0, sequencer.getCurrentIndex());
+		assertEquals( 0, sequencer.getCurrentIndex(),"Index must not change when no steps are satisfied");
 		// onStepChanged fires to refresh the panel even if index did not change
-		assertNotNull("onStepChanged must fire on sync", lastStep.get());
+		assertNotNull( lastStep.get(),"onStepChanged must fire on sync");
 	}
 
 	/**
@@ -2094,7 +2096,7 @@ public class GuidanceSequencerTest
 		// Must not throw NullPointerException
 		sequencer.skipStep();
 
-		assertFalse("Sequencer must be inactive after skip completes sequence", sequencer.isActive());
+		assertFalse( sequencer.isActive(),"Sequencer must be inactive after skip completes sequence");
 	}
 
 	/**
@@ -2136,7 +2138,7 @@ public class GuidanceSequencerTest
 		// Must not throw NullPointerException
 		sequencer.advanceStep();
 
-		assertFalse("Sequencer must be inactive after advance completes sequence", sequencer.isActive());
+		assertFalse( sequencer.isActive(),"Sequencer must be inactive after advance completes sequence");
 	}
 
 	/**

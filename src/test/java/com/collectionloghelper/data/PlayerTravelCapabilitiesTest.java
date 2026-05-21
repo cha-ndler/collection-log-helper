@@ -27,15 +27,17 @@ package com.collectionloghelper.data;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import net.runelite.api.Client;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-import static org.junit.Assert.*;
-
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class PlayerTravelCapabilitiesTest
 {
 	@Mock
@@ -43,7 +45,7 @@ public class PlayerTravelCapabilitiesTest
 
 	private PlayerTravelCapabilities capabilities;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<PlayerTravelCapabilities> ctor =

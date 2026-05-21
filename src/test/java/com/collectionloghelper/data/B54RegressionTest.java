@@ -28,11 +28,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.lang.reflect.Field;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * B.5.4 production-data regression test.
@@ -52,7 +52,7 @@ public class B54RegressionTest
 {
 	private DropRateDatabase database;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		database = new DropRateDatabase();
@@ -73,7 +73,7 @@ public class B54RegressionTest
 	@Test
 	public void productionData_sectionWhenPresent_isNonBlank()
 	{
-		assertNotNull("Database must load successfully", database.getAllSources());
+		assertNotNull( database.getAllSources(),"Database must load successfully");
 
 		for (CollectionLogSource source : database.getAllSources())
 		{
@@ -90,11 +90,11 @@ public class B54RegressionTest
 					continue; // null is valid — step renders in flat layout
 				}
 				assertFalse(
+					section.trim().isEmpty()
+				,
 					"section must not be blank when present."
 						+ " Source: " + source.getName()
-						+ ", step: \"" + step.getDescription() + "\"",
-					section.trim().isEmpty()
-				);
+						+ ", step: \"" + step.getDescription() + "\"");
 			}
 		}
 	}

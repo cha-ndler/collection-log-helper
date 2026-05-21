@@ -28,10 +28,10 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for {@link ListContainerScrollPane}: the card-layout content
@@ -44,7 +44,7 @@ public class ListContainerScrollPaneTest
 	private ListContainerScrollPane container;
 	private CardLayout cardLayout;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		cardLayout = new CardLayout();

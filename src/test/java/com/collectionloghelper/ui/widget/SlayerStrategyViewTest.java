@@ -30,12 +30,12 @@ import java.util.Collections;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link SlayerStrategyView}.
@@ -46,7 +46,7 @@ public class SlayerStrategyViewTest
 	private SlayerStrategyCalculator calculator;
 	private SlayerStrategyView view;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		slayerTaskState = Mockito.mock(SlayerTaskState.class);
@@ -120,13 +120,13 @@ public class SlayerStrategyViewTest
 		// view.getComponents()[1] is the JPanel, not the button; the button sits one level deeper.
 		JPanel strategyPanel = (JPanel) view.getComponents()[1];
 		JButton toggle = (JButton) strategyPanel.getComponents()[0];
-		assertTrue("toggle should have an expand/collapse listener", toggle.getActionListeners().length > 0);
+		assertTrue( toggle.getActionListeners().length > 0,"toggle should have an expand/collapse listener");
 
 		SwingUtilities.invokeAndWait(toggle::doClick);
 
 		// After one click, toggle text should flip to the expanded glyph (▼).
-		assertTrue("toggle text should indicate expanded state after click",
-			toggle.getText().startsWith("\u25BC"));
+		assertTrue(
+			toggle.getText().startsWith("\u25BC"),"toggle text should indicate expanded state after click");
 	}
 
 	@Test
@@ -148,14 +148,14 @@ public class SlayerStrategyViewTest
 		JButton toggle = (JButton) strategyPanel.getComponents()[0];
 		String collapsedGlyph = "\u25B6";
 		String expandedGlyph = "\u25BC";
-		assertTrue("toggle should start collapsed", toggle.getText().startsWith(collapsedGlyph));
+		assertTrue( toggle.getText().startsWith(collapsedGlyph),"toggle should start collapsed");
 
 		SwingUtilities.invokeAndWait(toggle::doClick);
-		assertTrue("toggle should be expanded after first click",
-			toggle.getText().startsWith(expandedGlyph));
+		assertTrue(
+			toggle.getText().startsWith(expandedGlyph),"toggle should be expanded after first click");
 
 		SwingUtilities.invokeAndWait(toggle::doClick);
-		assertTrue("toggle should be collapsed after second click",
-			toggle.getText().startsWith(collapsedGlyph));
+		assertTrue(
+			toggle.getText().startsWith(collapsedGlyph),"toggle should be collapsed after second click");
 	}
 }

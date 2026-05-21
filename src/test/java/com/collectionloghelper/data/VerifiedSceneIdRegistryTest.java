@@ -27,16 +27,16 @@ package com.collectionloghelper.data;
 import com.google.gson.Gson;
 import java.util.List;
 import java.util.Optional;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class VerifiedSceneIdRegistryTest
 {
 	private VerifiedSceneIdRegistry registry;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		registry = VerifiedSceneIdRegistry.load(new Gson());
@@ -49,7 +49,7 @@ public class VerifiedSceneIdRegistryTest
 	@Test
 	public void load_succeeds_returnsNonEmptyRegistry()
 	{
-		assertFalse("Registry should contain at least one entry", registry.all().isEmpty());
+		assertFalse( registry.all().isEmpty(),"Registry should contain at least one entry");
 	}
 
 	@Test
@@ -57,8 +57,8 @@ public class VerifiedSceneIdRegistryTest
 	{
 		for (VerifiedSceneId entry : registry.all())
 		{
-			assertNotNull("objectName must not be null", entry.getObjectName());
-			assertFalse("objectName must not be blank", entry.getObjectName().isBlank());
+			assertNotNull( entry.getObjectName(),"objectName must not be null");
+			assertFalse( entry.getObjectName().isBlank(),"objectName must not be blank");
 		}
 	}
 
@@ -68,8 +68,8 @@ public class VerifiedSceneIdRegistryTest
 		for (VerifiedSceneId entry : registry.all())
 		{
 			assertTrue(
-				"examineId must be > 0 for " + entry.getObjectName(),
-				entry.getExamineId() > 0);
+				entry.getExamineId() > 0,
+				"examineId must be > 0 for " + entry.getObjectName());
 		}
 	}
 
@@ -78,10 +78,10 @@ public class VerifiedSceneIdRegistryTest
 	{
 		for (VerifiedSceneId entry : registry.all())
 		{
-			assertNotNull("sceneIds must not be null for " + entry.getObjectName(), entry.getSceneIds());
+			assertNotNull( entry.getSceneIds(),"sceneIds must not be null for " + entry.getObjectName());
 			assertFalse(
-				"sceneIds must not be empty for " + entry.getObjectName(),
-				entry.getSceneIds().isEmpty());
+				entry.getSceneIds().isEmpty(),
+				"sceneIds must not be empty for " + entry.getObjectName());
 		}
 	}
 
@@ -90,8 +90,8 @@ public class VerifiedSceneIdRegistryTest
 	{
 		for (VerifiedSceneId entry : registry.all())
 		{
-			assertNotNull("confidence must not be null for " + entry.getObjectName(), entry.getConfidence());
-			assertFalse("confidence must not be blank for " + entry.getObjectName(), entry.getConfidence().isBlank());
+			assertNotNull( entry.getConfidence(),"confidence must not be null for " + entry.getObjectName());
+			assertFalse( entry.getConfidence().isBlank(),"confidence must not be blank for " + entry.getObjectName());
 		}
 	}
 
@@ -100,8 +100,8 @@ public class VerifiedSceneIdRegistryTest
 	{
 		for (VerifiedSceneId entry : registry.all())
 		{
-			assertNotNull("source must not be null for " + entry.getObjectName(), entry.getSource());
-			assertFalse("source must not be blank for " + entry.getObjectName(), entry.getSource().isBlank());
+			assertNotNull( entry.getSource(),"source must not be null for " + entry.getObjectName());
+			assertFalse( entry.getSource().isBlank(),"source must not be blank for " + entry.getObjectName());
 		}
 	}
 
@@ -109,8 +109,8 @@ public class VerifiedSceneIdRegistryTest
 	public void load_atLeastTenEntries()
 	{
 		assertTrue(
-			"Expected at least 10 seeded entries, got " + registry.all().size(),
-			registry.all().size() >= 10);
+			registry.all().size() >= 10,
+			"Expected at least 10 seeded entries, got " + registry.all().size());
 	}
 
 	// ========================================================================
@@ -122,7 +122,7 @@ public class VerifiedSceneIdRegistryTest
 	{
 		// 58441 is the examine/cache ID for Shellbane Gryphon cave entrance
 		Optional<VerifiedSceneId> result = registry.lookupByExamineId(58441);
-		assertTrue("Shellbane Gryphon examine ID 58441 must be in the registry", result.isPresent());
+		assertTrue( result.isPresent(),"Shellbane Gryphon examine ID 58441 must be in the registry");
 		assertEquals("Shellbane Gryphon Cave entrance", result.get().getObjectName());
 	}
 
@@ -130,7 +130,7 @@ public class VerifiedSceneIdRegistryTest
 	public void lookupByExamineId_unknownId_empty()
 	{
 		Optional<VerifiedSceneId> result = registry.lookupByExamineId(999999);
-		assertFalse("Unknown examine ID must return empty", result.isPresent());
+		assertFalse( result.isPresent(),"Unknown examine ID must return empty");
 	}
 
 	// ========================================================================
@@ -142,7 +142,7 @@ public class VerifiedSceneIdRegistryTest
 	{
 		// 58439 is the actual scene tile ID rendered for the Shellbane Gryphon entrance
 		Optional<VerifiedSceneId> result = registry.lookupBySceneId(58439);
-		assertTrue("Shellbane Gryphon scene ID 58439 must be in the registry", result.isPresent());
+		assertTrue( result.isPresent(),"Shellbane Gryphon scene ID 58439 must be in the registry");
 		assertEquals("Shellbane Gryphon Cave entrance", result.get().getObjectName());
 	}
 
@@ -151,24 +151,27 @@ public class VerifiedSceneIdRegistryTest
 	{
 		// 29777 is the confirmed scene ID for Chambers of Xeric entrance
 		Optional<VerifiedSceneId> result = registry.lookupBySceneId(29777);
-		assertTrue("CoX scene ID 29777 must be in the registry", result.isPresent());
+		assertTrue( result.isPresent(),"CoX scene ID 29777 must be in the registry");
 	}
 
 	@Test
 	public void lookupBySceneId_unknownId_empty()
 	{
 		Optional<VerifiedSceneId> result = registry.lookupBySceneId(1);
-		assertFalse("Unknown scene ID must return empty", result.isPresent());
+		assertFalse( result.isPresent(),"Unknown scene ID must return empty");
 	}
 
 	// ========================================================================
 	// all — immutability
 	// ========================================================================
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void all_returnsUnmodifiableList()
 	{
-		registry.all().add(null);
+		assertThrows(UnsupportedOperationException.class, () ->
+		{
+			registry.all().add(null);
+		});
 	}
 
 	// ========================================================================
@@ -191,8 +194,8 @@ public class VerifiedSceneIdRegistryTest
 		// Theatre of Blood (32653): examine ID == scene ID, both should resolve the same entry
 		Optional<VerifiedSceneId> byExamine = registry.lookupByExamineId(32653);
 		Optional<VerifiedSceneId> byScene = registry.lookupBySceneId(32653);
-		assertTrue("ToB examine ID 32653 must be in registry", byExamine.isPresent());
-		assertTrue("ToB scene ID 32653 must be in registry", byScene.isPresent());
+		assertTrue( byExamine.isPresent(),"ToB examine ID 32653 must be in registry");
+		assertTrue( byScene.isPresent(),"ToB scene ID 32653 must be in registry");
 		assertEquals(byExamine.get().getObjectName(), byScene.get().getObjectName());
 	}
 
@@ -220,9 +223,9 @@ public class VerifiedSceneIdRegistryTest
 		VerifiedSceneIdRegistry loaded = VerifiedSceneIdRegistry.loadFromJson(json, new Gson());
 
 		assertEquals(
-			"Unsupported schema version must still yield entries (loader warns, does not drop)",
 			1,
-			loaded.all().size());
+			loaded.all().size(),
+			"Unsupported schema version must still yield entries (loader warns, does not drop)");
 		assertTrue(loaded.lookupByExamineId(11111).isPresent());
 		assertTrue(loaded.lookupBySceneId(11112).isPresent());
 	}
@@ -248,9 +251,9 @@ public class VerifiedSceneIdRegistryTest
 		VerifiedSceneIdRegistry loaded = VerifiedSceneIdRegistry.loadFromJson(json, new Gson());
 
 		assertEquals(
-			"Missing version field must be tolerated, not NPE or silently return empty",
 			1,
-			loaded.all().size());
+			loaded.all().size(),
+			"Missing version field must be tolerated, not NPE or silently return empty");
 		assertTrue(loaded.lookupByExamineId(22222).isPresent());
 	}
 
@@ -258,7 +261,7 @@ public class VerifiedSceneIdRegistryTest
 	public void loadFromJson_malformedJson_returnsEmpty()
 	{
 		VerifiedSceneIdRegistry loaded = VerifiedSceneIdRegistry.loadFromJson("{not valid json", new Gson());
-		assertTrue("Malformed JSON must return an empty registry, not throw", loaded.all().isEmpty());
+		assertTrue( loaded.all().isEmpty(),"Malformed JSON must return an empty registry, not throw");
 	}
 
 	// ========================================================================
@@ -271,7 +274,7 @@ public class VerifiedSceneIdRegistryTest
 		long divergent = registry.all().stream()
 			.filter(e -> !e.getSceneIds().contains(e.getExamineId()))
 			.count();
-		assertTrue("At least one divergent (examine != scene) entry must exist", divergent >= 1);
+		assertTrue( divergent >= 1,"At least one divergent (examine != scene) entry must exist");
 	}
 
 	@Test
@@ -280,11 +283,11 @@ public class VerifiedSceneIdRegistryTest
 		Optional<VerifiedSceneId> entry = registry.lookupByExamineId(58441);
 		assertTrue(entry.isPresent());
 		assertFalse(
-			"Shellbane examine ID 58441 must not appear in sceneIds list",
-			entry.get().getSceneIds().contains(58441));
+			entry.get().getSceneIds().contains(58441),
+			"Shellbane examine ID 58441 must not appear in sceneIds list");
 		assertTrue(
-			"Shellbane scene ID 58439 must appear in sceneIds list",
-			entry.get().getSceneIds().contains(58439));
+			entry.get().getSceneIds().contains(58439),
+			"Shellbane scene ID 58439 must appear in sceneIds list");
 	}
 
 	// ========================================================================

@@ -42,16 +42,17 @@ import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link CrossSourceRanker}.
@@ -64,7 +65,8 @@ import static org.mockito.Mockito.when;
  *   <li>Items with zero drop rates produce {@link Double#MAX_VALUE} expected seconds.</li>
  * </ul>
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class CrossSourceRankerTest
 {
 	@Mock
@@ -85,7 +87,7 @@ public class CrossSourceRankerTest
 	private EfficiencyCalculator efficiencyCalculator;
 	private CrossSourceRanker ranker;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		lenient().when(requirementsChecker.isAccessible(anyString())).thenReturn(true);

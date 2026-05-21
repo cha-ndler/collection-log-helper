@@ -27,18 +27,19 @@ import net.runelite.client.chat.ChatCommandManager;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.NavigationButton;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Tests for {@link PluginShutdownRoutine} -- the Wave 15 (#503) extraction
@@ -48,7 +49,8 @@ import static org.mockito.Mockito.when;
  * and executor (in case startUp failed early), and the plugin-private state
  * clear callback.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class PluginShutdownRoutineTest
 {
 	@Mock private ChatCommandManager chatCommandManager;
@@ -85,7 +87,7 @@ public class PluginShutdownRoutineTest
 	private NavigationButton navButton;
 	private PluginShutdownRoutine routine;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		when(syncModule.getCollectionLogNetImporter()).thenReturn(collectionLogNetImporter);
@@ -217,7 +219,7 @@ public class PluginShutdownRoutineTest
 	{
 		boolean[] called = {false};
 		routine.tearDown(panel, navButton, executor, () -> called[0] = true);
-		assertTrue("clearPluginState callback must fire once", called[0]);
+		assertTrue( called[0],"clearPluginState callback must fire once");
 	}
 
 	@Test

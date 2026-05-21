@@ -42,19 +42,21 @@ import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class EfficiencyCalculatorTest
 {
 	@Mock
@@ -74,7 +76,7 @@ public class EfficiencyCalculatorTest
 
 	private EfficiencyCalculator calculator;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		lenient().when(requirementsChecker.isAccessible(anyString())).thenReturn(true);
@@ -883,8 +885,8 @@ public class EfficiencyCalculatorTest
 		ScoredItem result = calculator.scoreSource(source, false);
 
 		assertNotNull(result);
-		assertTrue("Reasoning should mention variant source",
-			result.getReasoning().contains("(also: Chambers of Xeric (Challenge Mode))"));
+		assertTrue(
+			result.getReasoning().contains("(also: Chambers of Xeric (Challenge Mode))"),"Reasoning should mention variant source");
 	}
 
 	@Test
@@ -901,8 +903,8 @@ public class EfficiencyCalculatorTest
 		ScoredItem result = calculator.scoreSource(source, false);
 
 		assertNotNull(result);
-		assertTrue("Reasoning should mention both variants",
-			result.getReasoning().contains("(also: Tombs of Amascut (300 Invocation), Tombs of Amascut (500 Invocation))"));
+		assertTrue(
+			result.getReasoning().contains("(also: Tombs of Amascut (300 Invocation), Tombs of Amascut (500 Invocation))"),"Reasoning should mention both variants");
 	}
 
 	@Test
@@ -916,8 +918,8 @@ public class EfficiencyCalculatorTest
 		ScoredItem result = calculator.scoreSource(source, false);
 
 		assertNotNull(result);
-		assertFalse("Non-variant source should not have variant note",
-			result.getReasoning().contains("(also:"));
+		assertFalse(
+			result.getReasoning().contains("(also:"),"Non-variant source should not have variant note");
 	}
 
 	@Test
@@ -935,8 +937,8 @@ public class EfficiencyCalculatorTest
 
 		// Item obtained — both sources should return null (fully completed)
 		when(collectionState.isItemObtained(20997)).thenReturn(true);
-		assertNull("CoX should be null when shared item obtained", calculator.scoreSource(cox, false));
-		assertNull("CoX CM should be null when shared item obtained", calculator.scoreSource(coxCm, false));
+		assertNull( calculator.scoreSource(cox, false),"CoX should be null when shared item obtained");
+		assertNull( calculator.scoreSource(coxCm, false),"CoX CM should be null when shared item obtained");
 	}
 
 	// --- Iron account type ---
@@ -1154,8 +1156,8 @@ public class EfficiencyCalculatorTest
 
 		// Sanity: locked-flag is preserved (renderer needs it for the red border).
 		assertFalse(ranked.get(0).isLocked());
-		assertTrue("Middle source must still be flagged as locked for the renderer",
-			ranked.get(1).isLocked());
+		assertTrue(
+			ranked.get(1).isLocked(),"Middle source must still be flagged as locked for the renderer");
 		assertFalse(ranked.get(2).isLocked());
 	}
 
@@ -1286,7 +1288,7 @@ public class EfficiencyCalculatorTest
 		assertFalse(result.get(0).isLocked());
 		// Locked medium item interleaves at its natural score position (#2)
 		assertEquals("Medium", result.get(1).getItem().getName());
-		assertTrue("Locked item must be flagged but interleave by score", result.get(1).isLocked());
+		assertTrue( result.get(1).isLocked(),"Locked item must be flagged but interleave by score");
 		assertEquals("Slow", result.get(2).getItem().getName());
 		assertFalse(result.get(2).isLocked());
 	}
@@ -1455,7 +1457,7 @@ public class EfficiencyCalculatorTest
 		List<RankedCategoryItem> result =
 			calculator.rankItemsByEfficiencyForCategory(CollectionLogCategory.BOSSES, false);
 
-		assertEquals("Only the base item should appear — sequential item excluded", 1, result.size());
+		assertEquals( 1, result.size(),"Only the base item should appear — sequential item excluded");
 		assertEquals("Base item", result.get(0).getItem().getName());
 	}
 

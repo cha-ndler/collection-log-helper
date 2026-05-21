@@ -29,12 +29,12 @@ import com.google.gson.GsonBuilder;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * B3 — value-type tests for {@link ConditionalAlternative#getNestedAlternatives()}.
@@ -123,8 +123,8 @@ public class ConditionalAlternativeNestedTest
 		Gson gson = new GsonBuilder().create();
 		String json = "{\"description\":\"flat alt\"}";
 		ConditionalAlternative alt = gson.fromJson(json, ConditionalAlternative.class);
-		assertNull("nestedAlternatives should be null when absent from JSON",
-			alt.getNestedAlternatives());
+		assertNull(
+			alt.getNestedAlternatives(),"nestedAlternatives should be null when absent from JSON");
 	}
 
 	// ── Gson deserialisation: inline nested array ─────────────────────────────

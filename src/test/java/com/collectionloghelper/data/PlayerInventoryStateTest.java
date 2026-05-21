@@ -29,16 +29,18 @@ import java.util.Arrays;
 import java.util.Collections;
 import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class PlayerInventoryStateTest
 {
 	@Mock
@@ -49,7 +51,7 @@ public class PlayerInventoryStateTest
 
 	private PlayerInventoryState state;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<PlayerInventoryState> ctor = PlayerInventoryState.class.getDeclaredConstructor();
