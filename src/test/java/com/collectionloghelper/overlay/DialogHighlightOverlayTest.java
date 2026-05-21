@@ -36,20 +36,21 @@ import java.util.Collections;
 import net.runelite.api.Client;
 import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.widgets.Widget;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Tests for {@link DialogHighlightOverlay} covering:
@@ -62,7 +63,8 @@ import static org.mockito.Mockito.when;
  * - Widget state (text, textColor) is never mutated during render
  * - clear() resets all state so subsequent renders skip drawing
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class DialogHighlightOverlayTest
 {
 	private static final int DIALOG_OPTION_GROUP = InterfaceID.CHATMENU;
@@ -81,7 +83,7 @@ public class DialogHighlightOverlayTest
 
 	private DialogHighlightOverlay overlay;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		when(config.showOverlays()).thenReturn(true);
@@ -336,9 +338,9 @@ public class DialogHighlightOverlayTest
 		ArgumentCaptor<Stroke> strokeCaptor = ArgumentCaptor.forClass(Stroke.class);
 		verify(graphics).setStroke(strokeCaptor.capture());
 		Stroke usedStroke = strokeCaptor.getValue();
-		assertTrue("Primary option should use a BasicStroke", usedStroke instanceof BasicStroke);
-		assertTrue("Primary stroke width should be > 1.0f",
-			((BasicStroke) usedStroke).getLineWidth() > 1.0f);
+		assertTrue( usedStroke instanceof BasicStroke,"Primary option should use a BasicStroke");
+		assertTrue(
+			((BasicStroke) usedStroke).getLineWidth() > 1.0f,"Primary stroke width should be > 1.0f");
 	}
 
 	@Test
@@ -363,8 +365,8 @@ public class DialogHighlightOverlayTest
 		java.util.List<Stroke> strokes = strokeCaptor.getAllValues();
 		float primaryWidth   = ((BasicStroke) strokes.get(0)).getLineWidth();
 		float secondaryWidth = ((BasicStroke) strokes.get(1)).getLineWidth();
-		assertTrue("Primary stroke must be thicker than secondary",
-			primaryWidth > secondaryWidth);
+		assertTrue(
+			primaryWidth > secondaryWidth,"Primary stroke must be thicker than secondary");
 	}
 
 	@Test
@@ -387,9 +389,9 @@ public class DialogHighlightOverlayTest
 		ArgumentCaptor<Stroke> strokeCaptor = ArgumentCaptor.forClass(Stroke.class);
 		verify(graphics).setStroke(strokeCaptor.capture());
 		Stroke usedStroke = strokeCaptor.getValue();
-		assertTrue("Continue prompt should use a BasicStroke", usedStroke instanceof BasicStroke);
-		assertTrue("Continue prompt stroke width should be > 1.0f",
-			((BasicStroke) usedStroke).getLineWidth() > 1.0f);
+		assertTrue( usedStroke instanceof BasicStroke,"Continue prompt should use a BasicStroke");
+		assertTrue(
+			((BasicStroke) usedStroke).getLineWidth() > 1.0f,"Continue prompt stroke width should be > 1.0f");
 	}
 
 	// --- helpers ---

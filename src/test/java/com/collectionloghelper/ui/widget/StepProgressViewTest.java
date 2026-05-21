@@ -39,14 +39,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link StepProgressView}.
@@ -69,7 +69,7 @@ public class StepProgressViewTest
 	private ItemManager itemManager;
 	private StepProgressView view;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		itemManager = Mockito.mock(ItemManager.class);
@@ -140,7 +140,7 @@ public class StepProgressViewTest
 	@Test
 	public void afterConstruction_isNotVisible()
 	{
-		assertFalse("StepProgressView must start hidden", view.isVisible());
+		assertFalse( view.isVisible(),"StepProgressView must start hidden");
 	}
 
 	@Test
@@ -148,11 +148,11 @@ public class StepProgressViewTest
 	{
 		view.showStep(1, 3, "Do the thing", false, Collections.emptyList());
 		flushEdt();
-		assertTrue("showStep should make widget visible", view.isVisible());
+		assertTrue( view.isVisible(),"showStep should make widget visible");
 
 		view.hideStep();
 		flushEdt();
-		assertFalse("hideStep must make widget invisible", view.isVisible());
+		assertFalse( view.isVisible(),"hideStep must make widget invisible");
 	}
 
 	@Test
@@ -160,7 +160,7 @@ public class StepProgressViewTest
 	{
 		view.showStep(2, 4, "Pick up reward", true, Collections.emptyList());
 		flushEdt();
-		assertTrue("showStep must make widget visible", view.isVisible());
+		assertTrue( view.isVisible(),"showStep must make widget visible");
 	}
 
 	// ── Step-description wrap regression tests (issue #575) ─────────────────
@@ -184,12 +184,12 @@ public class StepProgressViewTest
 		flushEdt();
 
 		JLabel label = findStepProgressLabel(view);
-		assertNotNull("Step-progress label must be present", label);
+		assertNotNull( label,"Step-progress label must be present");
 		String rendered = label.getText();
-		assertNotNull("Step-progress label text must be set", rendered);
-		assertTrue("Rendered label must contain full description verbatim — "
-			+ "no mid-string truncation (#575). Actual: " + rendered,
-			rendered.contains(longDescription));
+		assertNotNull( rendered,"Step-progress label text must be set");
+		assertTrue(
+			rendered.contains(longDescription),"Rendered label must contain full description verbatim — "
+			+ "no mid-string truncation (#575). Actual: " + rendered);
 	}
 
 	/**
@@ -206,13 +206,13 @@ public class StepProgressViewTest
 		flushEdt();
 
 		JLabel label = findStepProgressLabel(view);
-		assertNotNull("Step-progress label must be present", label);
+		assertNotNull( label,"Step-progress label must be present");
 		String rendered = label.getText();
 		assertNotNull(rendered);
-		assertTrue("Reserved '<' character must be escaped. Actual: " + rendered,
-			rendered.contains("&lt;halberd&gt;"));
-		assertTrue("Reserved '&' character must be escaped. Actual: " + rendered,
-			rendered.contains("&amp;"));
+		assertTrue(
+			rendered.contains("&lt;halberd&gt;"),"Reserved '<' character must be escaped. Actual: " + rendered);
+		assertTrue(
+			rendered.contains("&amp;"),"Reserved '&' character must be escaped. Actual: " + rendered);
 	}
 
 	/**
@@ -241,8 +241,8 @@ public class StepProgressViewTest
 	{
 		view.showStep(1, 1, "no items", false, Collections.emptyList());
 		flushEdt();
-		assertFalse("Required-items panel must be hidden when item list is empty",
-			findRequiredItemsPanel(view).isVisible());
+		assertFalse(
+			findRequiredItemsPanel(view).isVisible(),"Required-items panel must be hidden when item list is empty");
 	}
 
 	/**
@@ -258,12 +258,12 @@ public class StepProgressViewTest
 		flushEdt();
 
 		JLabel nameLabel = findFirstNameLabel(view);
-		assertNotNull("Name label must be present for HELD row", nameLabel);
-		assertEquals("HELD row must use green colour",
-			RequiredItemDisplay.COLOR_HELD, nameLabel.getForeground());
-		assertFalse("HELD tooltip must not mention bank",
+		assertNotNull( nameLabel,"Name label must be present for HELD row");
+		assertEquals(
+			RequiredItemDisplay.COLOR_HELD, nameLabel.getForeground(),"HELD row must use green colour");
+		assertFalse(
 			nameLabel.getToolTipText() != null
-				&& nameLabel.getToolTipText().contains("in bank"));
+				&& nameLabel.getToolTipText().contains("in bank"),"HELD tooltip must not mention bank");
 	}
 
 	/**
@@ -280,11 +280,11 @@ public class StepProgressViewTest
 		flushEdt();
 
 		JLabel nameLabel = findFirstNameLabel(view);
-		assertNotNull("Name label must be present for IN_BANK row", nameLabel);
-		assertEquals("IN_BANK row must use white colour", Color.WHITE, nameLabel.getForeground());
-		assertTrue("IN_BANK tooltip must contain 'in bank' hint",
+		assertNotNull( nameLabel,"Name label must be present for IN_BANK row");
+		assertEquals( Color.WHITE, nameLabel.getForeground(),"IN_BANK row must use white colour");
+		assertTrue(
 			nameLabel.getToolTipText() != null
-				&& nameLabel.getToolTipText().contains("in bank"));
+				&& nameLabel.getToolTipText().contains("in bank"),"IN_BANK tooltip must contain 'in bank' hint");
 	}
 
 	/**
@@ -300,9 +300,9 @@ public class StepProgressViewTest
 		flushEdt();
 
 		JLabel nameLabel = findFirstNameLabel(view);
-		assertNotNull("Name label must be present for MISSING row", nameLabel);
-		assertEquals("MISSING row must use red colour",
-			RequiredItemDisplay.COLOR_MISSING, nameLabel.getForeground());
+		assertNotNull( nameLabel,"Name label must be present for MISSING row");
+		assertEquals(
+			RequiredItemDisplay.COLOR_MISSING, nameLabel.getForeground(),"MISSING row must use red colour");
 	}
 
 	/**
@@ -321,7 +321,7 @@ public class StepProgressViewTest
 		flushEdt();
 
 		List<JLabel> nameLabels = findAllNameLabels(view);
-		assertEquals("Must have exactly 3 name labels", 3, nameLabels.size());
+		assertEquals( 3, nameLabels.size(),"Must have exactly 3 name labels");
 		assertEquals(RequiredItemDisplay.COLOR_HELD, nameLabels.get(0).getForeground());
 		assertEquals(Color.WHITE, nameLabels.get(1).getForeground());
 		assertEquals(RequiredItemDisplay.COLOR_MISSING, nameLabels.get(2).getForeground());
@@ -340,8 +340,8 @@ public class StepProgressViewTest
 		flushEdt();
 
 		JLabel first = findFirstNameLabel(view);
-		assertEquals("Initially MISSING must be red",
-			RequiredItemDisplay.COLOR_MISSING, first.getForeground());
+		assertEquals(
+			RequiredItemDisplay.COLOR_MISSING, first.getForeground(),"Initially MISSING must be red");
 
 		// Second call: item is now HELD (player picked it up)
 		view.showStep(1, 1, "Collect item", false, Collections.singletonList(
@@ -349,8 +349,8 @@ public class StepProgressViewTest
 		flushEdt();
 
 		JLabel updated = findFirstNameLabel(view);
-		assertEquals("After transition to HELD must be green",
-			RequiredItemDisplay.COLOR_HELD, updated.getForeground());
+		assertEquals(
+			RequiredItemDisplay.COLOR_HELD, updated.getForeground(),"After transition to HELD must be green");
 	}
 
 	// ── Section rendering tests (B.5.4) ─────────────────────────────────────
@@ -367,9 +367,9 @@ public class StepProgressViewTest
 		flushEdt();
 
 		JPanel sectionsPanel = findSectionsPanel(view);
-		assertNotNull("sectionsPanel must be present in widget", sectionsPanel);
-		assertFalse("sectionsPanel must be hidden when no step has a section",
-			sectionsPanel.isVisible());
+		assertNotNull( sectionsPanel,"sectionsPanel must be present in widget");
+		assertFalse(
+			sectionsPanel.isVisible(),"sectionsPanel must be hidden when no step has a section");
 	}
 
 	/**
@@ -387,11 +387,11 @@ public class StepProgressViewTest
 
 		JPanel sectionsPanel = findSectionsPanel(view);
 		assertNotNull(sectionsPanel);
-		assertTrue("sectionsPanel must be visible when steps have sections",
-			sectionsPanel.isVisible());
+		assertTrue(
+			sectionsPanel.isVisible(),"sectionsPanel must be visible when steps have sections");
 		// At least two header buttons (one per section)
 		List<JButton> buttons = findAllButtons(sectionsPanel);
-		assertEquals("Must have one header button per section", 2, buttons.size());
+		assertEquals( 2, buttons.size(),"Must have one header button per section");
 	}
 
 	/**
@@ -412,17 +412,17 @@ public class StepProgressViewTest
 
 		JPanel sectionsPanel = findSectionsPanel(view);
 		List<JButton> buttons = findAllButtons(sectionsPanel);
-		assertEquals("Must have 3 header buttons (Travel, Combat, Travel)", 3, buttons.size());
+		assertEquals( 3, buttons.size(),"Must have 3 header buttons (Travel, Combat, Travel)");
 
 		// Travel (step 1) — not active, should be collapsed
-		assertTrue("Inactive section must start with collapse arrow",
-			buttons.get(0).getText().startsWith("▶"));
+		assertTrue(
+			buttons.get(0).getText().startsWith("▶"),"Inactive section must start with collapse arrow");
 		// Combat (step 2) — active, must be expanded
-		assertTrue("Active section must start with expand arrow",
-			buttons.get(1).getText().startsWith("▼"));
+		assertTrue(
+			buttons.get(1).getText().startsWith("▼"),"Active section must start with expand arrow");
 		// Travel (step 3) — not active, should be collapsed
-		assertTrue("Inactive section must start with collapse arrow",
-			buttons.get(2).getText().startsWith("▶"));
+		assertTrue(
+			buttons.get(2).getText().startsWith("▶"),"Inactive section must start with collapse arrow");
 	}
 
 	/**
@@ -449,8 +449,8 @@ public class StepProgressViewTest
 		List<JButton> buttons = findAllButtons(sectionsPanel);
 		assertEquals(2, buttons.size());
 		// "Travel" section (button index 1) must be force-expanded
-		assertTrue("New active section must show expanded arrow after step change",
-			buttons.get(1).getText().startsWith("▼"));
+		assertTrue(
+			buttons.get(1).getText().startsWith("▼"),"New active section must show expanded arrow after step change");
 	}
 
 	/**
@@ -470,8 +470,8 @@ public class StepProgressViewTest
 		// The flat requiredItemsPanel (first JPanel child) must be hidden in sectioned mode
 		JPanel reqPanel = findRequiredItemsPanel(view);
 		assertNotNull(reqPanel);
-		assertFalse("Inline required-items panel must be hidden in sectioned mode",
-			reqPanel.isVisible());
+		assertFalse(
+			reqPanel.isVisible(),"Inline required-items panel must be hidden in sectioned mode");
 	}
 
 	/**
@@ -483,11 +483,11 @@ public class StepProgressViewTest
 		List<GuidanceStep> steps = Collections.singletonList(stepWithSection("Combat"));
 		view.showStep(1, 1, "Fight", false, Collections.emptyList(), steps);
 		flushEdt();
-		assertTrue("sectionsPanel must be visible before hide", findSectionsPanel(view).isVisible());
+		assertTrue( findSectionsPanel(view).isVisible(),"sectionsPanel must be visible before hide");
 
 		view.hideStep();
 		flushEdt();
-		assertFalse("sectionsPanel must be hidden after hideStep", findSectionsPanel(view).isVisible());
+		assertFalse( findSectionsPanel(view).isVisible(),"sectionsPanel must be hidden after hideStep");
 	}
 
 	// ── Recommended-items subsection tests (B.5.2) ──────────────────────────
@@ -509,13 +509,13 @@ public class StepProgressViewTest
 		flushEdt();
 
 		JPanel recPanel = findRecommendedItemsPanel(view);
-		assertNotNull("recommendedItemsPanel must be present in widget", recPanel);
-		assertTrue("recommendedItemsPanel must be visible when rows are non-empty",
-			recPanel.isVisible());
+		assertNotNull( recPanel,"recommendedItemsPanel must be present in widget");
+		assertTrue(
+			recPanel.isVisible(),"recommendedItemsPanel must be visible when rows are non-empty");
 		// Required panel must be hidden since we passed empty
 		JPanel reqPanel = findRequiredItemsPanel(view);
-		assertFalse("Required items panel must be hidden when required list is empty",
-			reqPanel.isVisible());
+		assertFalse(
+			reqPanel.isVisible(),"Required items panel must be hidden when required list is empty");
 	}
 
 	/**
@@ -531,8 +531,8 @@ public class StepProgressViewTest
 		flushEdt();
 
 		JPanel recPanel = findRecommendedItemsPanel(view);
-		assertFalse("recommendedItemsPanel must be hidden when recommended list is empty",
-			recPanel.isVisible());
+		assertFalse(
+			recPanel.isVisible(),"recommendedItemsPanel must be hidden when recommended list is empty");
 	}
 
 	/**
@@ -549,10 +549,10 @@ public class StepProgressViewTest
 		view.showStep(1, 1, "Do thing", false, req, rec, Collections.<GuidanceStep>emptyList());
 		flushEdt();
 
-		assertTrue("Items needed panel must be visible when required list populated",
-			findRequiredItemsPanel(view).isVisible());
-		assertTrue("Recommended panel must be visible when recommended list populated",
-			findRecommendedItemsPanel(view).isVisible());
+		assertTrue(
+			findRequiredItemsPanel(view).isVisible(),"Items needed panel must be visible when required list populated");
+		assertTrue(
+			findRecommendedItemsPanel(view).isVisible(),"Recommended panel must be visible when recommended list populated");
 	}
 
 	/**
@@ -568,8 +568,8 @@ public class StepProgressViewTest
 
 		JLabel label = findFirstRecommendedNameLabel(view);
 		assertNotNull(label);
-		assertEquals("HELD recommended row must use green colour",
-			RequiredItemDisplay.COLOR_HELD, label.getForeground());
+		assertEquals(
+			RequiredItemDisplay.COLOR_HELD, label.getForeground(),"HELD recommended row must use green colour");
 	}
 
 	@Test
@@ -581,10 +581,10 @@ public class StepProgressViewTest
 
 		JLabel label = findFirstRecommendedNameLabel(view);
 		assertNotNull(label);
-		assertEquals("IN_BANK recommended row must use white colour",
-			Color.WHITE, label.getForeground());
-		assertTrue("IN_BANK recommended tooltip must contain 'in bank'",
-			label.getToolTipText() != null && label.getToolTipText().contains("in bank"));
+		assertEquals(
+			Color.WHITE, label.getForeground(),"IN_BANK recommended row must use white colour");
+		assertTrue(
+			label.getToolTipText() != null && label.getToolTipText().contains("in bank"),"IN_BANK recommended tooltip must contain 'in bank'");
 	}
 
 	@Test
@@ -596,8 +596,8 @@ public class StepProgressViewTest
 
 		JLabel label = findFirstRecommendedNameLabel(view);
 		assertNotNull(label);
-		assertEquals("MISSING recommended row must use red colour",
-			RequiredItemDisplay.COLOR_MISSING, label.getForeground());
+		assertEquals(
+			RequiredItemDisplay.COLOR_MISSING, label.getForeground(),"MISSING recommended row must use red colour");
 	}
 
 	/**
@@ -617,10 +617,10 @@ public class StepProgressViewTest
 		view.hideStep();
 		flushEdt();
 
-		assertFalse("Required panel must be hidden after hideStep",
-			findRequiredItemsPanel(view).isVisible());
-		assertFalse("Recommended panel must be hidden after hideStep",
-			findRecommendedItemsPanel(view).isVisible());
+		assertFalse(
+			findRequiredItemsPanel(view).isVisible(),"Required panel must be hidden after hideStep");
+		assertFalse(
+			findRecommendedItemsPanel(view).isVisible(),"Recommended panel must be hidden after hideStep");
 	}
 
 	/**
@@ -632,8 +632,8 @@ public class StepProgressViewTest
 	{
 		List<Integer> recIds = Arrays.asList(TINDERBOX_ID, PYRE_LOGS_ID);
 		GuidanceStep step = stepWithRecommendedItems(recIds);
-		assertEquals("recommendedItemIds must be accessible via getter",
-			recIds, step.getRecommendedItemIds());
+		assertEquals(
+			recIds, step.getRecommendedItemIds(),"recommendedItemIds must be accessible via getter");
 	}
 
 	/**
@@ -644,8 +644,8 @@ public class StepProgressViewTest
 	public void guidanceStep_recommendedItemIds_nullWhenAbsent()
 	{
 		GuidanceStep step = stepWithSection(null); // no recommendedItemIds
-		assertFalse("recommendedItemIds must be null when not set",
-			step.getRecommendedItemIds() != null);
+		assertFalse(
+			step.getRecommendedItemIds() != null,"recommendedItemIds must be null when not set");
 	}
 
 	// ── Helpers ─────────────────────────────────────────────────────────────
@@ -873,10 +873,10 @@ public class StepProgressViewTest
 	@Test
 	public void construction_hasAllFourIconButtons()
 	{
-		assertNotNull("Skip icon button must exist", findButtonByTooltip(view, TOOLTIP_SKIP));
-		assertNotNull("Stop icon button must exist", findButtonByTooltip(view, TOOLTIP_STOP));
-		assertNotNull("Restart icon button must exist", findButtonByTooltip(view, TOOLTIP_RESTART));
-		assertNotNull("Sync icon button must exist", findButtonByTooltip(view, TOOLTIP_SYNC));
+		assertNotNull( findButtonByTooltip(view, TOOLTIP_SKIP),"Skip icon button must exist");
+		assertNotNull( findButtonByTooltip(view, TOOLTIP_STOP),"Stop icon button must exist");
+		assertNotNull( findButtonByTooltip(view, TOOLTIP_RESTART),"Restart icon button must exist");
+		assertNotNull( findButtonByTooltip(view, TOOLTIP_SYNC),"Sync icon button must exist");
 	}
 
 	/**
@@ -889,12 +889,12 @@ public class StepProgressViewTest
 		for (String tooltip : new String[]{TOOLTIP_SKIP, TOOLTIP_STOP, TOOLTIP_RESTART, TOOLTIP_SYNC})
 		{
 			JButton btn = findButtonByTooltip(view, tooltip);
-			assertNotNull("Icon button for tooltip '" + tooltip + "' must exist", btn);
+			assertNotNull( btn,"Icon button for tooltip '" + tooltip + "' must exist");
 			String text = btn.getText();
-			assertTrue("Icon button '" + tooltip + "' must have empty text but had '" + text + "'",
-				text == null || text.isEmpty());
-			assertNotNull("Icon button '" + tooltip + "' must have a graphic icon set",
-				btn.getIcon());
+			assertTrue(
+				text == null || text.isEmpty(),"Icon button '" + tooltip + "' must have empty text but had '" + text + "'");
+			assertNotNull(
+				btn.getIcon(),"Icon button '" + tooltip + "' must have a graphic icon set");
 		}
 	}
 
@@ -910,10 +910,10 @@ public class StepProgressViewTest
 			JButton btn = findButtonByTooltip(view, tooltip);
 			assertNotNull(btn);
 			java.awt.Dimension size = btn.getPreferredSize();
-			assertTrue("Icon button '" + tooltip + "' must be ≥24px wide (was " + size.width + ")",
-				size.width >= 24);
-			assertTrue("Icon button '" + tooltip + "' must be ≥24px tall (was " + size.height + ")",
-				size.height >= 24);
+			assertTrue(
+				size.width >= 24,"Icon button '" + tooltip + "' must be ≥24px wide (was " + size.width + ")");
+			assertTrue(
+				size.height >= 24,"Icon button '" + tooltip + "' must be ≥24px tall (was " + size.height + ")");
 		}
 	}
 
@@ -931,7 +931,7 @@ public class StepProgressViewTest
 		assertNotNull(btn);
 		SwingUtilities.invokeAndWait(btn::doClick);
 
-		assertTrue("Skip callback must fire when Skip icon clicked", fired.get());
+		assertTrue( fired.get(),"Skip callback must fire when Skip icon clicked");
 	}
 
 	/**
@@ -950,7 +950,7 @@ public class StepProgressViewTest
 		assertNotNull(btn);
 		SwingUtilities.invokeAndWait(btn::doClick);
 
-		assertTrue("Stop callback must fire when Stop icon clicked", fired.get());
+		assertTrue( fired.get(),"Stop callback must fire when Stop icon clicked");
 	}
 
 	/**
@@ -965,10 +965,10 @@ public class StepProgressViewTest
 	public void stopButton_paintsRedBorder() throws Exception
 	{
 		JButton stopBtn = findButtonByTooltip(view, TOOLTIP_STOP);
-		assertNotNull("Stop icon button must exist", stopBtn);
-		assertTrue("Stop button must paint its border so the red outline is visible",
-			stopBtn.isBorderPainted());
-		assertNotNull("Stop button must carry an explicit border", stopBtn.getBorder());
+		assertNotNull( stopBtn,"Stop icon button must exist");
+		assertTrue(
+			stopBtn.isBorderPainted(),"Stop button must paint its border so the red outline is visible");
+		assertNotNull( stopBtn.getBorder(),"Stop button must carry an explicit border");
 
 		// The other icon buttons must remain borderless for the clean icon-only look.
 		for (String tooltip : new String[]{TOOLTIP_SKIP, TOOLTIP_RESTART, TOOLTIP_SYNC})
@@ -976,9 +976,9 @@ public class StepProgressViewTest
 			JButton btn = findButtonByTooltip(view, tooltip);
 			assertNotNull(btn);
 			assertFalse(
+				btn.isBorderPainted(),
 				"Non-destructive icon button '" + tooltip
-					+ "' must not paint a border (icon-only look)",
-				btn.isBorderPainted());
+					+ "' must not paint a border (icon-only look)");
 		}
 	}
 
@@ -996,7 +996,7 @@ public class StepProgressViewTest
 		assertNotNull(btn);
 		SwingUtilities.invokeAndWait(btn::doClick);
 
-		assertTrue("Restart callback must fire when Restart icon clicked", fired.get());
+		assertTrue( fired.get(),"Restart callback must fire when Restart icon clicked");
 	}
 
 	/**
@@ -1013,7 +1013,7 @@ public class StepProgressViewTest
 		assertNotNull(btn);
 		SwingUtilities.invokeAndWait(btn::doClick);
 
-		assertTrue("Sync callback must fire when Sync icon clicked", fired.get());
+		assertTrue( fired.get(),"Sync callback must fire when Sync icon clicked");
 	}
 
 	/**
@@ -1040,8 +1040,8 @@ public class StepProgressViewTest
 			syncBtn.doClick();
 		});
 
-		assertTrue("Legacy 4-arg overload must still route to restart", resetFired.get());
-		assertTrue("Legacy 4-arg overload must still route to sync", syncFired.get());
+		assertTrue( resetFired.get(),"Legacy 4-arg overload must still route to restart");
+		assertTrue( syncFired.get(),"Legacy 4-arg overload must still route to sync");
 	}
 
 	/**

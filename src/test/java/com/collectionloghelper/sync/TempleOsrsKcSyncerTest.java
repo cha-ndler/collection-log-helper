@@ -36,10 +36,10 @@ import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -55,7 +55,7 @@ public class TempleOsrsKcSyncerTest
 	private TempleOsrsKcSyncer syncer;
 	private Gson gson;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		mockClient = mock(OkHttpClient.class);
@@ -90,8 +90,8 @@ public class TempleOsrsKcSyncerTest
 		assertTrue(result.isSuccess());
 		assertNotNull(result.getKcBySource().get("Barrows"));
 		assertEquals(150, (int) result.getKcBySource().get("Barrows"));
-		assertNull("Should not contain raw TempleOSRS key",
-			result.getKcBySource().get("Barrows Chests"));
+		assertNull(
+			result.getKcBySource().get("Barrows Chests"),"Should not contain raw TempleOSRS key");
 	}
 
 	@Test
@@ -159,7 +159,7 @@ public class TempleOsrsKcSyncerTest
 		SyncResult result = syncer.parseResponse(json);
 
 		assertTrue(result.isSuccess());
-		assertNull("Zero KC should not be stored", result.getKcBySource().get("Zulrah"));
+		assertNull( result.getKcBySource().get("Zulrah"),"Zero KC should not be stored");
 		assertEquals(300, (int) result.getKcBySource().get("Vorkath"));
 	}
 

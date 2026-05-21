@@ -27,11 +27,11 @@ package com.collectionloghelper.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests for the {@code waypoints} field on {@link GuidanceStep} (B2 schema extension).
@@ -62,7 +62,7 @@ public class GuidanceStepWaypointTest
 
 		GuidanceStep step = gson.fromJson(json, GuidanceStep.class);
 
-		assertNull("waypoints should be null when absent from JSON", step.getWaypoints());
+		assertNull( step.getWaypoints(),"waypoints should be null when absent from JSON");
 	}
 
 	// ── Waypoints field present ───────────────────────────────────────────────
@@ -84,7 +84,7 @@ public class GuidanceStepWaypointTest
 
 		GuidanceStep step = gson.fromJson(json, GuidanceStep.class);
 
-		assertNotNull("waypoints should not be null", step.getWaypoints());
+		assertNotNull( step.getWaypoints(),"waypoints should not be null");
 		assertEquals(3, step.getWaypoints().size());
 	}
 

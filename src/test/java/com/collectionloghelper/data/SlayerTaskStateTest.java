@@ -29,17 +29,19 @@ import java.util.Collections;
 import net.runelite.api.Client;
 import net.runelite.api.gameval.DBTableID;
 import net.runelite.api.gameval.VarPlayerID;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class SlayerTaskStateTest
 {
 	@Mock
@@ -47,7 +49,7 @@ public class SlayerTaskStateTest
 
 	private SlayerTaskState taskState;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<SlayerTaskState> ctor = SlayerTaskState.class.getDeclaredConstructor(Client.class);

@@ -32,19 +32,21 @@ import com.collectionloghelper.efficiency.EfficiencyCalculator;
 import java.awt.Component;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class StatisticsModeControllerTest
 {
 	@Mock
@@ -61,7 +63,7 @@ public class StatisticsModeControllerTest
 
 	private StatisticsModeController controller;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		controller = new StatisticsModeController(shell, collectionState, database, calculator);
@@ -91,7 +93,7 @@ public class StatisticsModeControllerTest
 	@Test
 	public void buildViewSkipsEmptyCategories()
 	{
-		// Arrange — every category returns empty sources (set in @Before)
+		// Arrange — every category returns empty sources (set in @BeforeEach)
 
 		// Act
 		controller.buildView();

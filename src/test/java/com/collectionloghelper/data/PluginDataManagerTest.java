@@ -27,16 +27,18 @@ package com.collectionloghelper.data;
 import java.lang.reflect.Constructor;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class PluginDataManagerTest
 {
 	@Mock
@@ -47,7 +49,7 @@ public class PluginDataManagerTest
 
 	private PluginDataManager manager;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<PluginDataManager> ctor = PluginDataManager.class.getDeclaredConstructor(Client.class);
@@ -88,9 +90,9 @@ public class PluginDataManagerTest
 	{
 		// Angle brackets, slashes, and other filesystem-unsafe chars → underscore
 		String sanitized = PluginDataManager.sanitizeFileName("Player<test>/name");
-		assertFalse("Special chars should be replaced", sanitized.contains("<"));
-		assertFalse("Special chars should be replaced", sanitized.contains(">"));
-		assertFalse("Slash should be replaced", sanitized.contains("/"));
+		assertFalse( sanitized.contains("<"),"Special chars should be replaced");
+		assertFalse( sanitized.contains(">"),"Special chars should be replaced");
+		assertFalse( sanitized.contains("/"),"Slash should be replaced");
 	}
 
 	@Test

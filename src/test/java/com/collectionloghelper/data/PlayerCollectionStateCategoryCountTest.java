@@ -33,12 +33,12 @@ import java.util.List;
 import java.util.Set;
 import net.runelite.api.Client;
 import net.runelite.client.config.ConfigManager;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -56,7 +56,7 @@ public class PlayerCollectionStateCategoryCountTest
 	private DropRateDatabase database;
 	private PlayerCollectionState state;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		database = new DropRateDatabase();
@@ -115,7 +115,7 @@ public class PlayerCollectionStateCategoryCountTest
 	public void getCategoryCount_slayer_returnsAggregateOfObtainedSlayerItems() throws Exception
 	{
 		Set<Integer> slayerItemIds = collectCategoryItemIds(CollectionLogCategory.SLAYER);
-		assertTrue("Slayer category should have items in the source DB", slayerItemIds.size() > 0);
+		assertTrue( slayerItemIds.size() > 0,"Slayer category should have items in the source DB");
 
 		// Seed a deterministic subset.
 		Set<Integer> seeded = new HashSet<>();
@@ -132,8 +132,8 @@ public class PlayerCollectionStateCategoryCountTest
 		seedObtained(seeded);
 
 		int count = state.getCategoryCount(CollectionLogCategory.SLAYER);
-		assertEquals("SLAYER count should equal the deduplicated obtained slayer item count",
-			seeded.size(), count);
+		assertEquals(
+			seeded.size(), count,"SLAYER count should equal the deduplicated obtained slayer item count");
 	}
 
 	@Test
@@ -141,9 +141,9 @@ public class PlayerCollectionStateCategoryCountTest
 	{
 		Set<Integer> slayerItemIds = collectCategoryItemIds(CollectionLogCategory.SLAYER);
 		int max = state.getCategoryMax(CollectionLogCategory.SLAYER);
-		assertEquals("SLAYER max should equal deduplicated total of slayer item IDs",
-			slayerItemIds.size(), max);
-		assertTrue("SLAYER max should be > 0 (fix for #545)", max > 0);
+		assertEquals(
+			slayerItemIds.size(), max,"SLAYER max should equal deduplicated total of slayer item IDs");
+		assertTrue( max > 0,"SLAYER max should be > 0 (fix for #545)");
 	}
 
 	@Test
@@ -153,8 +153,8 @@ public class PlayerCollectionStateCategoryCountTest
 		Set<Integer> slayerItemIds = collectCategoryItemIds(CollectionLogCategory.SLAYER);
 		seedObtained(slayerItemIds);
 		int count = state.getCategoryCount(CollectionLogCategory.SLAYER);
-		assertEquals("Count with all slayer items obtained must equal deduplicated max",
-			slayerItemIds.size(), count);
+		assertEquals(
+			slayerItemIds.size(), count,"Count with all slayer items obtained must equal deduplicated max");
 	}
 
 	// ========================================================================
@@ -165,7 +165,7 @@ public class PlayerCollectionStateCategoryCountTest
 	public void getCategoryCount_skilling_returnsAggregateOfObtainedSkillingItems() throws Exception
 	{
 		Set<Integer> skillingItemIds = collectCategoryItemIds(CollectionLogCategory.SKILLING);
-		assertTrue("Skilling category should have items in the source DB", skillingItemIds.size() > 0);
+		assertTrue( skillingItemIds.size() > 0,"Skilling category should have items in the source DB");
 
 		Set<Integer> seeded = new HashSet<>();
 		int target = Math.min(3, skillingItemIds.size());
@@ -181,8 +181,8 @@ public class PlayerCollectionStateCategoryCountTest
 		seedObtained(seeded);
 
 		int count = state.getCategoryCount(CollectionLogCategory.SKILLING);
-		assertEquals("SKILLING count should equal deduplicated obtained skilling items",
-			seeded.size(), count);
+		assertEquals(
+			seeded.size(), count,"SKILLING count should equal deduplicated obtained skilling items");
 	}
 
 	@Test
@@ -190,9 +190,9 @@ public class PlayerCollectionStateCategoryCountTest
 	{
 		Set<Integer> skillingItemIds = collectCategoryItemIds(CollectionLogCategory.SKILLING);
 		int max = state.getCategoryMax(CollectionLogCategory.SKILLING);
-		assertEquals("SKILLING max should equal deduplicated total of skilling item IDs",
-			skillingItemIds.size(), max);
-		assertTrue("SKILLING max should be > 0 (fix for #545)", max > 0);
+		assertEquals(
+			skillingItemIds.size(), max,"SKILLING max should equal deduplicated total of skilling item IDs");
+		assertTrue( max > 0,"SKILLING max should be > 0 (fix for #545)");
 	}
 
 	// ========================================================================
@@ -209,10 +209,10 @@ public class PlayerCollectionStateCategoryCountTest
 		seeded.add(99999);
 		seedObtained(seeded);
 
-		assertEquals("BOSSES count must come from the bossesCount varp field, not source aggregation",
-			42, state.getCategoryCount(CollectionLogCategory.BOSSES));
-		assertEquals("BOSSES max must come from the bossesMax varp field, not source aggregation",
-			333, state.getCategoryMax(CollectionLogCategory.BOSSES));
+		assertEquals(
+			42, state.getCategoryCount(CollectionLogCategory.BOSSES),"BOSSES count must come from the bossesCount varp field, not source aggregation");
+		assertEquals(
+			333, state.getCategoryMax(CollectionLogCategory.BOSSES),"BOSSES max must come from the bossesMax varp field, not source aggregation");
 	}
 
 	@Test
@@ -279,15 +279,15 @@ public class PlayerCollectionStateCategoryCountTest
 			int count = state.getCategoryCount(category);
 			int max = state.getCategoryMax(category);
 
-			assertTrue("Category " + category + " returned negative count: " + count, count >= 0);
-			assertTrue("Category " + category + " returned negative max: " + max, max >= 0);
+			assertTrue( count >= 0,"Category " + category + " returned negative count: " + count);
+			assertTrue( max >= 0,"Category " + category + " returned negative max: " + max);
 			assertTrue(
-				"Category " + category + " has max < count (max=" + max + ", count=" + count + ")",
-				max >= count);
+				max >= count,
+				"Category " + category + " has max < count (max=" + max + ", count=" + count + ")");
 			assertTrue(
+				max > 0,
 				"Category " + category + " has 0 max — accessor likely missing an enum case "
-					+ "(see issue #545; extend the switch in PlayerCollectionState).",
-				max > 0);
+					+ "(see issue #545; extend the switch in PlayerCollectionState).");
 		}
 	}
 
@@ -300,9 +300,9 @@ public class PlayerCollectionStateCategoryCountTest
 		for (CollectionLogCategory category : CollectionLogCategory.values())
 		{
 			List<CollectionLogSource> sources = database.getSourcesByCategory(category);
-			assertNotNull("Category " + category + " returned null source list", sources);
-			assertTrue("Category " + category + " has no sources in drop_rates.json",
-				!sources.isEmpty());
+			assertNotNull( sources,"Category " + category + " returned null source list");
+			assertTrue(
+				!sources.isEmpty(),"Category " + category + " has no sources in drop_rates.json");
 		}
 	}
 }

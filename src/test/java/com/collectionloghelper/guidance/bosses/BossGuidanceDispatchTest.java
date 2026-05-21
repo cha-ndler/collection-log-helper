@@ -38,23 +38,25 @@ import java.lang.reflect.Constructor;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.lenient;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Verifies that GuidanceSequencer correctly dispatches to a BossGuidance when
  * the source has a non-null guidanceHelperKey, and falls back to JSON steps when
  * it does not.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class BossGuidanceDispatchTest
 {
 	@Mock
@@ -67,7 +69,7 @@ public class BossGuidanceDispatchTest
 	private BossGuidanceRegistry registry;
 	private GuidanceSequencer sequencer;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		lenient().when(inventoryState.hasItem(anyInt())).thenReturn(false);
@@ -131,15 +133,15 @@ public class BossGuidanceDispatchTest
 		AtomicReference<GuidanceStep> firstStep = new AtomicReference<>();
 		sequencer.startSequence(source, firstStep::set, () -> {});
 
-		assertTrue("Sequencer must be active", sequencer.isActive());
+		assertTrue( sequencer.isActive(),"Sequencer must be active");
 		GuidanceStep current = sequencer.getCurrentStep();
-		assertNotNull("Current step must not be null", current);
+		assertNotNull( current,"Current step must not be null");
 		assertEquals(CompletionCondition.ARRIVE_AT_TILE, current.getCompletionCondition());
 		assertEquals("Travel", current.getSection());
-		assertEquals("Sequencer must use 3 steps from CerberusGuidance",
-			3, sequencer.getTotalSteps());
-		assertFalse("JSON-only step must not appear when boss guidance is used",
-			"JSON-only step".equals(current.getDescription()));
+		assertEquals(
+			3, sequencer.getTotalSteps(),"Sequencer must use 3 steps from CerberusGuidance");
+		assertFalse(
+			"JSON-only step".equals(current.getDescription()),"JSON-only step must not appear when boss guidance is used");
 	}
 
 	@Test
@@ -151,12 +153,12 @@ public class BossGuidanceDispatchTest
 
 		sequencer.startSequence(source, s -> {}, () -> {});
 
-		assertTrue("Sequencer must be active", sequencer.isActive());
+		assertTrue( sequencer.isActive(),"Sequencer must be active");
 		GuidanceStep current = sequencer.getCurrentStep();
 		assertNotNull(current);
-		assertEquals("JSON step description must be used when no helper key",
-			"My JSON step", current.getDescription());
-		assertEquals("Only 1 JSON step", 1, sequencer.getTotalSteps());
+		assertEquals(
+			"My JSON step", current.getDescription(),"JSON step description must be used when no helper key");
+		assertEquals( 1, sequencer.getTotalSteps(),"Only 1 JSON step");
 	}
 
 	@Test
@@ -168,10 +170,10 @@ public class BossGuidanceDispatchTest
 
 		sequencer.startSequence(source, s -> {}, () -> {});
 
-		assertTrue("Sequencer must be active", sequencer.isActive());
+		assertTrue( sequencer.isActive(),"Sequencer must be active");
 		GuidanceStep current = sequencer.getCurrentStep();
 		assertNotNull(current);
-		assertEquals("Unknown helper key must fall back to JSON step",
-			"Fallback JSON step", current.getDescription());
+		assertEquals(
+			"Fallback JSON step", current.getDescription(),"Unknown helper key must fall back to JSON step");
 	}
 }

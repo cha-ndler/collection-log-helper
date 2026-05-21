@@ -37,10 +37,10 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import net.runelite.api.Client;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -91,10 +91,10 @@ public class CollectionLogHelperPluginInjectorTest
 
 		DiaryTierState instance = injector.getInstance(DiaryTierState.class);
 
-		assertNotNull("DiaryTierState must resolve via @ImplementedBy", instance);
+		assertNotNull( instance,"DiaryTierState must resolve via @ImplementedBy");
 		assertTrue(
-			"DiaryTierState must resolve to DiaryTierStateImpl",
-			instance instanceof DiaryTierStateImpl);
+			instance instanceof DiaryTierStateImpl,
+			"DiaryTierState must resolve to DiaryTierStateImpl");
 	}
 
 	@Test
@@ -104,10 +104,10 @@ public class CollectionLogHelperPluginInjectorTest
 
 		EquippedItemState instance = injector.getInstance(EquippedItemState.class);
 
-		assertNotNull("EquippedItemState must resolve via @ImplementedBy", instance);
+		assertNotNull( instance,"EquippedItemState must resolve via @ImplementedBy");
 		assertTrue(
-			"EquippedItemState must resolve to EquippedItemStateImpl",
-			instance instanceof EquippedItemStateImpl);
+			instance instanceof EquippedItemStateImpl,
+			"EquippedItemState must resolve to EquippedItemStateImpl");
 	}
 
 	@Test
@@ -117,10 +117,10 @@ public class CollectionLogHelperPluginInjectorTest
 
 		PohTeleportInventory instance = injector.getInstance(PohTeleportInventory.class);
 
-		assertNotNull("PohTeleportInventory must resolve via @ImplementedBy", instance);
+		assertNotNull( instance,"PohTeleportInventory must resolve via @ImplementedBy");
 		assertTrue(
-			"PohTeleportInventory must resolve to PohTeleportInventoryImpl",
-			instance instanceof PohTeleportInventoryImpl);
+			instance instanceof PohTeleportInventoryImpl,
+			"PohTeleportInventory must resolve to PohTeleportInventoryImpl");
 	}
 
 	@Test
@@ -130,10 +130,10 @@ public class CollectionLogHelperPluginInjectorTest
 
 		SkillCapePerkState instance = injector.getInstance(SkillCapePerkState.class);
 
-		assertNotNull("SkillCapePerkState must resolve via @ImplementedBy", instance);
+		assertNotNull( instance,"SkillCapePerkState must resolve via @ImplementedBy");
 		assertTrue(
-			"SkillCapePerkState must resolve to SkillCapePerkStateImpl",
-			instance instanceof SkillCapePerkStateImpl);
+			instance instanceof SkillCapePerkStateImpl,
+			"SkillCapePerkState must resolve to SkillCapePerkStateImpl");
 	}
 
 	/**

@@ -31,15 +31,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * B3 end-to-end pilot fixture test. Loads {@code b3_pilot_source.json} (a synthetic
@@ -47,7 +48,8 @@ import static org.mockito.Mockito.when;
  * that the nested structure is intact and that {@link GuidanceStep#resolveAlternative}
  * correctly applies overrides at each level.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class B3PilotFixtureTest
 {
 	@Mock
@@ -114,7 +116,7 @@ public class B3PilotFixtureTest
 		ConditionalAlternative level3 = level2.getNestedAlternatives().get(0);
 
 		assertEquals("80 Agility shortcut saves 2 extra tiles", level3.getTravelTip());
-		assertNull("Level 3 should have no further nesting", level3.getNestedAlternatives());
+		assertNull( level3.getNestedAlternatives(),"Level 3 should have no further nesting");
 	}
 
 	// ── resolveAlternative integration: all levels match ─────────────────────
@@ -190,7 +192,7 @@ public class B3PilotFixtureTest
 		Gson gson = new GsonBuilder().create();
 		InputStream is = getClass().getResourceAsStream(
 			"/com/collectionloghelper/data/b3_pilot_source.json");
-		assertNotNull("b3_pilot_source.json must be on the test classpath", is);
+		assertNotNull( is,"b3_pilot_source.json must be on the test classpath");
 
 		Type listType = new TypeToken<List<CollectionLogSource>>()
 		{

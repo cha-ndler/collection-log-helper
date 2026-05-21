@@ -25,11 +25,11 @@
 package com.collectionloghelper.ui.widget;
 
 import com.collectionloghelper.data.PlayerBankState;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Unit tests for {@link ClueSummaryView}.
@@ -39,7 +39,7 @@ public class ClueSummaryViewTest
 	private PlayerBankState bankState;
 	private ClueSummaryView view;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		bankState = Mockito.mock(PlayerBankState.class);

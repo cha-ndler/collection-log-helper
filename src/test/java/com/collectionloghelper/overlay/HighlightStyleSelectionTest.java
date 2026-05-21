@@ -26,10 +26,10 @@ package com.collectionloghelper.overlay;
 import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.NpcHighlightStyle;
 import com.collectionloghelper.ObjectHighlightStyle;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Verifies style-selection logic: enum values are well-formed, the default
@@ -54,7 +54,7 @@ public class HighlightStyleSelectionTest
 	{
 		for (NpcHighlightStyle style : NpcHighlightStyle.values())
 		{
-			assertNotNull("getName() must not be null for " + style, style.getName());
+			assertNotNull( style.getName(),"getName() must not be null for " + style);
 		}
 	}
 
@@ -95,7 +95,7 @@ public class HighlightStyleSelectionTest
 	{
 		for (ObjectHighlightStyle style : ObjectHighlightStyle.values())
 		{
-			assertNotNull("getName() must not be null for " + style, style.getName());
+			assertNotNull( style.getName(),"getName() must not be null for " + style);
 		}
 	}
 

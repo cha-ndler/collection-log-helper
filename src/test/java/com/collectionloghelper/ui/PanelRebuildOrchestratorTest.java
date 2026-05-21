@@ -42,22 +42,23 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import net.runelite.client.game.ItemManager;
-import org.junit.After;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link PanelRebuildOrchestrator}: the helper that snapshots
@@ -65,8 +66,9 @@ import static org.mockito.Mockito.when;
  * rebuild. Extracted from {@link CollectionLogHelperPanel#rebuild()} as part
  * of issue #503 god-class splits.
  */
-@RunWith(MockitoJUnitRunner.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class PanelRebuildOrchestratorTest
 {
 	@Mock
@@ -83,7 +85,7 @@ public class PanelRebuildOrchestratorTest
 	private JScrollPane scrollPane;
 	private PanelRebuildOrchestrator orchestrator;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		// Skip every test in this class on headless CI. The scrollbar layout race
@@ -92,10 +94,10 @@ public class PanelRebuildOrchestratorTest
 		// layout passes on headless Linux are not reliably gateable from inside
 		// the test thread, so gate the entire class out on headless and preserve
 		// coverage on real desktops.
-		Assume.assumeFalse(
+		Assumptions.assumeFalse(
+			GraphicsEnvironment.isHeadless(),
 			"PanelRebuildOrchestratorTest exercises live Swing scrollbar layout; "
-				+ "skipped on headless CI where layout passes are non-deterministic",
-			GraphicsEnvironment.isHeadless());
+				+ "skipped on headless CI where layout passes are non-deterministic");
 
 		when(collectionState.getCategoryCount(any())).thenReturn(0);
 		when(collectionState.getCategoryMax(any())).thenReturn(10);
@@ -126,7 +128,7 @@ public class PanelRebuildOrchestratorTest
 		// the flake re-emerging in cross-test ordering, indicating shared Swing
 		// state (likely EDT events from sibling tests) was still landing on the
 		// bar between layout and pin. Pinning the model up-front closes that
-		// window, and the per-test @After drain + new-bar swap (below) closes
+		// window, and the per-test @AfterEach drain + new-bar swap (below) closes
 		// the inverse window where this test's events could leak into the next.
 		JScrollBar bar = new JScrollBar(JScrollBar.VERTICAL);
 		PinnedRangeModel preModel = new PinnedRangeModel();
@@ -154,7 +156,7 @@ public class PanelRebuildOrchestratorTest
 	 * but pending EDT events can still target the old bar reference until they
 	 * drain.
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		// Replace the scrollbar with a fresh, non-pinned one so any pending
@@ -324,12 +326,12 @@ public class PanelRebuildOrchestratorTest
 	@Test
 	public void captureRecordsScrollPositionFromEnclosingScrollPane()
 	{
-		Assume.assumeFalse(
+		Assumptions.assumeFalse(
+			GraphicsEnvironment.isHeadless(),
 			"Headless environments (notably headless-Linux JDK 17 CI) do not "
 				+ "preserve JScrollBar.setValue across synchronous layout "
 				+ "passes reliably; see PRs #517, #536, #551 for prior "
-				+ "hardening attempts.",
-			GraphicsEnvironment.isHeadless());
+				+ "hardening attempts.");
 
 		pinScrollBounds(vBar());
 		vBar().setValue(250);
@@ -391,8 +393,8 @@ public class PanelRebuildOrchestratorTest
 
 		orchestrator.restoreExpanded(snapshot);
 
-		assertTrue("Bosses should be re-expanded", bosses2.isExpanded());
-		assertFalse("Raids was not in snapshot - must remain collapsed", raids2.isExpanded());
+		assertTrue( bosses2.isExpanded(),"Bosses should be re-expanded");
+		assertFalse( raids2.isExpanded(),"Raids was not in snapshot - must remain collapsed");
 	}
 
 	@Test
@@ -423,7 +425,7 @@ public class PanelRebuildOrchestratorTest
 
 		orchestrator.restoreExpanded(snapshot);
 
-		assertFalse("Raids was not in snapshot - must remain collapsed", raids.isExpanded());
+		assertFalse( raids.isExpanded(),"Raids was not in snapshot - must remain collapsed");
 	}
 
 	@Test

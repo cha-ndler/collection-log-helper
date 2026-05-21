@@ -39,17 +39,18 @@ import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * B3 — evaluator state-machine tests for nested conditional steps.
@@ -65,7 +66,8 @@ import static org.mockito.Mockito.when;
  *   <li>Nested alternatives are evaluated against the already-overridden step.</li>
  * </ol>
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class GuidanceSequencerNestedConditionalTest
 {
 	@Mock
@@ -77,7 +79,7 @@ public class GuidanceSequencerNestedConditionalTest
 
 	private GuidanceSequencer sequencer;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		lenient().when(inventoryState.hasItem(anyInt())).thenReturn(false);

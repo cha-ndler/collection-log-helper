@@ -31,17 +31,19 @@ import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.Skill;
 import net.runelite.api.gameval.ItemID;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class SkillCapePerkStateImplTest
 {
 	@Mock
@@ -52,7 +54,7 @@ public class SkillCapePerkStateImplTest
 
 	private SkillCapePerkStateImpl perkState;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<SkillCapePerkStateImpl> ctor =
@@ -70,8 +72,8 @@ public class SkillCapePerkStateImplTest
 	{
 		for (SkillCapePerk perk : SkillCapePerk.values())
 		{
-			assertFalse("Expected false before refresh for " + perk,
-				perkState.hasPerkAvailable(perk));
+			assertFalse(
+				perkState.hasPerkAvailable(perk),"Expected false before refresh for " + perk);
 		}
 	}
 
@@ -245,8 +247,8 @@ public class SkillCapePerkStateImplTest
 		perkState.refresh();
 		for (SkillCapePerk perk : SkillCapePerk.values())
 		{
-			assertFalse("Expected false at skill 98 for " + perk,
-				perkState.hasPerkAvailable(perk));
+			assertFalse(
+				perkState.hasPerkAvailable(perk),"Expected false at skill 98 for " + perk);
 		}
 	}
 
@@ -260,8 +262,8 @@ public class SkillCapePerkStateImplTest
 		stubNoEquipment();
 		when(client.getRealSkillLevel(any(Skill.class))).thenReturn(99);
 		perkState.refresh();
-		assertFalse("MAX_CAPE_TELES must not activate via owned-status fallback",
-			perkState.hasPerkAvailable(SkillCapePerk.MAX_CAPE_TELES));
+		assertFalse(
+			perkState.hasPerkAvailable(SkillCapePerk.MAX_CAPE_TELES),"MAX_CAPE_TELES must not activate via owned-status fallback");
 	}
 
 	// =========================================================================
@@ -276,8 +278,8 @@ public class SkillCapePerkStateImplTest
 		perkState.refresh();
 		for (SkillCapePerk perk : SkillCapePerk.values())
 		{
-			assertFalse("Expected false with null container for " + perk,
-				perkState.hasPerkAvailable(perk));
+			assertFalse(
+				perkState.hasPerkAvailable(perk),"Expected false with null container for " + perk);
 		}
 	}
 
@@ -295,8 +297,8 @@ public class SkillCapePerkStateImplTest
 		perkState.refresh();
 		for (SkillCapePerk perk : SkillCapePerk.values())
 		{
-			assertFalse("Expected false when client throws for " + perk,
-				perkState.hasPerkAvailable(perk));
+			assertFalse(
+				perkState.hasPerkAvailable(perk),"Expected false when client throws for " + perk);
 		}
 	}
 
@@ -315,8 +317,8 @@ public class SkillCapePerkStateImplTest
 
 		for (SkillCapePerk perk : SkillCapePerk.values())
 		{
-			assertFalse("Expected false after reset for " + perk,
-				perkState.hasPerkAvailable(perk));
+			assertFalse(
+				perkState.hasPerkAvailable(perk),"Expected false after reset for " + perk);
 		}
 	}
 

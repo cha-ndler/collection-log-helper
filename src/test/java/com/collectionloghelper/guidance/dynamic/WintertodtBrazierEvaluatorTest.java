@@ -36,17 +36,18 @@ import net.runelite.api.NPC;
 import net.runelite.api.Player;
 import net.runelite.api.WorldView;
 import net.runelite.api.coords.WorldPoint;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link WintertodtBrazierEvaluator} with a mocked {@link Client}.
@@ -62,7 +63,8 @@ import static org.mockito.Mockito.when;
  *   <li>Falls back to first found brazier when player location is unavailable.</li>
  * </ol>
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class WintertodtBrazierEvaluatorTest
 {
 	@Mock
@@ -78,7 +80,7 @@ public class WintertodtBrazierEvaluatorTest
 	/** A fixed player position inside the Wintertodt arena. */
 	private static final WorldPoint PLAYER_POS = new WorldPoint(1640, 4000, 0);
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		evaluator = new WintertodtBrazierEvaluator();
@@ -112,7 +114,7 @@ public class WintertodtBrazierEvaluatorTest
 	{
 		NPC broken = mockNpc(29314, new WorldPoint(1620, 4000, 0));
 		stubNpcs(Collections.singletonList(broken));
-		assertNull("Broken brazier (29314) must not be returned", evaluator.evaluate(client, dummyStep));
+		assertNull( evaluator.evaluate(client, dummyStep),"Broken brazier (29314) must not be returned");
 	}
 
 	@Test
@@ -120,7 +122,7 @@ public class WintertodtBrazierEvaluatorTest
 	{
 		NPC unlit = mockNpc(31926, new WorldPoint(1620, 4000, 0));
 		stubNpcs(Collections.singletonList(unlit));
-		assertNull("Unlit brazier (31926) must not be returned", evaluator.evaluate(client, dummyStep));
+		assertNull( evaluator.evaluate(client, dummyStep),"Unlit brazier (31926) must not be returned");
 	}
 
 	// ── Single lit brazier ────────────────────────────────────────────────────
@@ -157,8 +159,8 @@ public class WintertodtBrazierEvaluatorTest
 		NPC far  = mockNpc(WintertodtBrazierEvaluator.BRAZIER_LIT_2, farPoint);
 
 		stubNpcs(Arrays.asList(far, near));
-		assertEquals("Should return the nearest lit brazier", nearPoint,
-			evaluator.evaluate(client, dummyStep));
+		assertEquals( nearPoint,
+			evaluator.evaluate(client, dummyStep),"Should return the nearest lit brazier");
 	}
 
 	// ── No player location fallback ───────────────────────────────────────────
@@ -175,8 +177,8 @@ public class WintertodtBrazierEvaluatorTest
 		NPC second = mockNpc(WintertodtBrazierEvaluator.BRAZIER_LIT_2, secondPoint);
 
 		stubNpcs(Arrays.asList(first, second));
-		assertEquals("Should return the first found brazier when player location unavailable",
-			firstPoint, evaluator.evaluate(client, dummyStep));
+		assertEquals(
+			firstPoint, evaluator.evaluate(client, dummyStep),"Should return the first found brazier when player location unavailable");
 	}
 
 	// ── Helpers ───────────────────────────────────────────────────────────────

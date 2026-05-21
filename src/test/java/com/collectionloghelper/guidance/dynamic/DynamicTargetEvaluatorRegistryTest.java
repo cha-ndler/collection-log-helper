@@ -25,12 +25,12 @@
 package com.collectionloghelper.guidance.dynamic;
 
 import com.collectionloghelper.guidance.DynamicTargetEvaluator;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * Unit tests for {@link DynamicTargetEvaluatorRegistry}.
@@ -48,7 +48,7 @@ public class DynamicTargetEvaluatorRegistryTest
 {
 	private DynamicTargetEvaluatorRegistry registry;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		registry = new DynamicTargetEvaluatorRegistry();
@@ -58,7 +58,7 @@ public class DynamicTargetEvaluatorRegistryTest
 	public void get_wintertodtKey_returnsEvaluator()
 	{
 		DynamicTargetEvaluator evaluator = registry.get(DynamicTargetEvaluatorRegistry.WINTERTODT_ACTIVE_BRAZIER);
-		assertNotNull("Wintertodt evaluator must be registered at construction", evaluator);
+		assertNotNull( evaluator,"Wintertodt evaluator must be registered at construction");
 	}
 
 	@Test
@@ -73,13 +73,13 @@ public class DynamicTargetEvaluatorRegistryTest
 	@Test
 	public void get_unknownKey_returnsNull()
 	{
-		assertNull("Unknown key must return null", registry.get("does_not_exist"));
+		assertNull( registry.get("does_not_exist"),"Unknown key must return null");
 	}
 
 	@Test
 	public void get_nullKey_returnsNull()
 	{
-		assertNull("Null key must return null", registry.get(null));
+		assertNull( registry.get(null),"Null key must return null");
 	}
 
 	@Test
@@ -87,8 +87,8 @@ public class DynamicTargetEvaluatorRegistryTest
 	{
 		DynamicTargetEvaluator replacement = (client, step) -> null;
 		registry.register(DynamicTargetEvaluatorRegistry.WINTERTODT_ACTIVE_BRAZIER, replacement);
-		assertSame("register() must replace the existing evaluator",
-			replacement, registry.get(DynamicTargetEvaluatorRegistry.WINTERTODT_ACTIVE_BRAZIER));
+		assertSame(
+			replacement, registry.get(DynamicTargetEvaluatorRegistry.WINTERTODT_ACTIVE_BRAZIER),"register() must replace the existing evaluator");
 	}
 
 	@Test
@@ -103,6 +103,6 @@ public class DynamicTargetEvaluatorRegistryTest
 
 	private static void assertEquals(String expected, String actual)
 	{
-		org.junit.Assert.assertEquals(expected, actual);
+		org.junit.jupiter.api.Assertions.assertEquals(expected, actual);
 	}
 }

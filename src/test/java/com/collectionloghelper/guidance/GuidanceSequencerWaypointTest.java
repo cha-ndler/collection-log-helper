@@ -39,17 +39,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import net.runelite.api.coords.WorldPoint;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * State-machine tests for the B2 tile-sequence waypoint evaluation in
@@ -65,7 +66,8 @@ import static org.mockito.Mockito.lenient;
  *   <li>Partial crossing (not all waypoints done) → step not yet complete.</li>
  * </ol>
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class GuidanceSequencerWaypointTest
 {
 	@Mock
@@ -77,7 +79,7 @@ public class GuidanceSequencerWaypointTest
 
 	private GuidanceSequencer sequencer;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		lenient().when(inventoryState.hasItem(anyInt())).thenReturn(false);
@@ -205,17 +207,17 @@ public class GuidanceSequencerWaypointTest
 		// Cross waypoint 0
 		sequencer.onPlayerMoved(new WorldPoint(3100, 3100, 0));
 		assertEquals(1, sequencer.getCrossedWaypointIndex());
-		assertFalse("Step should not be complete after first waypoint", stepAdvanced.get());
+		assertFalse( stepAdvanced.get(),"Step should not be complete after first waypoint");
 
 		// Cross waypoint 1
 		sequencer.onPlayerMoved(new WorldPoint(3150, 3150, 0));
 		assertEquals(2, sequencer.getCrossedWaypointIndex());
-		assertFalse("Step should not be complete after second waypoint", stepAdvanced.get());
+		assertFalse( stepAdvanced.get(),"Step should not be complete after second waypoint");
 
 		// Cross waypoint 2 (final)
 		sequencer.onPlayerMoved(new WorldPoint(3200, 3400, 0));
 		// After final waypoint, sequencer advances to step 2 (manual step) and fires stepChanged
-		assertTrue("Step should be complete after all waypoints crossed", stepAdvanced.get());
+		assertTrue( stepAdvanced.get(),"Step should be complete after all waypoints crossed");
 		assertEquals(1, sequencer.getCurrentIndex()); // advanced to step index 1
 	}
 
@@ -240,8 +242,8 @@ public class GuidanceSequencerWaypointTest
 		sequencer.onPlayerMoved(new WorldPoint(3200, 3400, 0));
 
 		// Index should still be 0 — waypoint 0 has not been crossed
-		assertEquals("Waypoint index must not advance when out of order", 0, sequencer.getCrossedWaypointIndex());
-		assertEquals("Step should not have advanced", 0, sequencer.getCurrentIndex());
+		assertEquals( 0, sequencer.getCrossedWaypointIndex(),"Waypoint index must not advance when out of order");
+		assertEquals( 0, sequencer.getCurrentIndex(),"Step should not have advanced");
 	}
 
 	/**
@@ -293,7 +295,7 @@ public class GuidanceSequencerWaypointTest
 		// Arrive at the target tile
 		sequencer.onPlayerMoved(new WorldPoint(3200, 3400, 0));
 
-		assertTrue("Legacy ARRIVE_AT_TILE should still complete the step", stepAdvanced.get());
+		assertTrue( stepAdvanced.get(),"Legacy ARRIVE_AT_TILE should still complete the step");
 	}
 
 	/**
@@ -342,7 +344,7 @@ public class GuidanceSequencerWaypointTest
 
 		sequencer.onPlayerMoved(new WorldPoint(3200, 3400, 0));
 
-		assertTrue("Empty waypoints should behave like null (legacy path)", stepAdvanced.get());
+		assertTrue( stepAdvanced.get(),"Empty waypoints should behave like null (legacy path)");
 	}
 
 	/**
@@ -395,7 +397,7 @@ public class GuidanceSequencerWaypointTest
 		sequencer.onPlayerMoved(new WorldPoint(3100, 3100, 0));
 
 		assertEquals(0, sequencer.getCurrentIndex()); // still on step 0
-		assertTrue("Sequencer should still be active", sequencer.isActive());
+		assertTrue( sequencer.isActive(),"Sequencer should still be active");
 		assertEquals(1, sequencer.getCrossedWaypointIndex());
 	}
 }

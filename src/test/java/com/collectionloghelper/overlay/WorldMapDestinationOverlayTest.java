@@ -37,21 +37,22 @@ import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.worldmap.WorldMap;
 import net.runelite.api.worldmap.WorldMapData;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Tests for {@link WorldMapDestinationOverlay} covering:
@@ -64,7 +65,8 @@ import static org.mockito.Mockito.when;
  * - clearTarget() hides the overlay
  * - Null icon type defaults to TILE without throwing
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class WorldMapDestinationOverlayTest
 {
 	@Mock
@@ -102,7 +104,7 @@ public class WorldMapDestinationOverlayTest
 	 */
 	private static final WorldPoint TARGET_OFF_SCREEN = new WorldPoint(3500, 3500, 0);
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		when(config.showOverlays()).thenReturn(true);
@@ -311,9 +313,9 @@ public class WorldMapDestinationOverlayTest
 	{
 		Color expected = new Color(0xFF, 0x8C, 0x00);
 		assertEquals(
-			"CLH_GUIDANCE_ARROW_COLOR must be the CLH-distinct orange (#FF8C00) defined in #430",
 			expected.getRGB(),
-			WorldMapDestinationOverlay.CLH_GUIDANCE_ARROW_COLOR.getRGB());
+			WorldMapDestinationOverlay.CLH_GUIDANCE_ARROW_COLOR.getRGB(),
+			"CLH_GUIDANCE_ARROW_COLOR must be the CLH-distinct orange (#FF8C00) defined in #430");
 	}
 
 	/**
@@ -325,13 +327,13 @@ public class WorldMapDestinationOverlayTest
 	public void clhGuidanceArrowColor_isDistinctFromIconFillColor()
 	{
 		Color arrowColor = WorldMapDestinationOverlay.CLH_GUIDANCE_ARROW_COLOR;
-		assertNotNull("CLH_GUIDANCE_ARROW_COLOR must not be null", arrowColor);
+		assertNotNull( arrowColor,"CLH_GUIDANCE_ARROW_COLOR must not be null");
 
 		// Teal icon color from FILL_COLOR constant
 		Color teal = new Color(0, 200, 200);
 		// RGB values must differ so arrow is visually distinguishable from icon
 		boolean sameRgb = (arrowColor.getRGB() == teal.getRGB());
-		assertEquals("Arrow color must differ from destination-icon teal fill", false, sameRgb);
+		assertEquals( false, sameRgb,"Arrow color must differ from destination-icon teal fill");
 	}
 
 	// -----------------------------------------------------------------------

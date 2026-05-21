@@ -38,18 +38,19 @@ import net.runelite.api.Client;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.ui.overlay.worldmap.WorldMapPointManager;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link DynamicTargetManager}.
@@ -73,7 +74,8 @@ import static org.mockito.Mockito.verify;
  *       returns a fresh {@link CollectionLogWorldMapPoint}.</li>
  * </ul>
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class DynamicTargetManagerTest
 {
 	private static final WorldPoint DYNAMIC_POINT = new WorldPoint(3200, 3200, 0);
@@ -100,7 +102,7 @@ public class DynamicTargetManagerTest
 	private WorldMapController worldMapController;
 	private DynamicTargetManager manager;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		registry = new DynamicTargetEvaluatorRegistry();

@@ -26,11 +26,11 @@ package com.collectionloghelper.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Value-type tests for the {@code section} field added to {@link GuidanceStep} in B.5.4.
@@ -61,7 +61,7 @@ public class GuidanceStepSectionTest
 	public void getSection_null_returnsNull()
 	{
 		GuidanceStep step = stepWithSection(null);
-		assertNull("section must be null when constructed with null", step.getSection());
+		assertNull( step.getSection(),"section must be null when constructed with null");
 	}
 
 	// ── JSON deserialisation: backwards-compatible ───────────────────────────
@@ -71,7 +71,7 @@ public class GuidanceStepSectionTest
 	{
 		String json = "{\"description\":\"Kill the boss\",\"completionCondition\":\"MANUAL\"}";
 		GuidanceStep step = GSON.fromJson(json, GuidanceStep.class);
-		assertNull("section must be null when absent from JSON", step.getSection());
+		assertNull( step.getSection(),"section must be null when absent from JSON");
 	}
 
 	// ── JSON deserialisation: field present ──────────────────────────────────
@@ -110,8 +110,8 @@ public class GuidanceStepSectionTest
 		Mockito.when(checker.meetsRequirements(Mockito.any())).thenReturn(false);
 		// No conditionalAlternatives set; resolveAlternative returns this step unchanged
 		GuidanceStep resolved = step.resolveAlternative(checker);
-		assertEquals("section must be preserved when no alternative matches",
-			"Combat", resolved.getSection());
+		assertEquals(
+			"Combat", resolved.getSection(),"section must be preserved when no alternative matches");
 	}
 
 	@Test
@@ -121,8 +121,8 @@ public class GuidanceStepSectionTest
 		RequirementsChecker checker = Mockito.mock(RequirementsChecker.class);
 		Mockito.when(checker.meetsRequirements(Mockito.any())).thenReturn(true);
 		GuidanceStep resolved = step.resolveAlternative(checker);
-		assertEquals("section must be preserved when conditionalAlternatives is null",
-			"Loot", resolved.getSection());
+		assertEquals(
+			"Loot", resolved.getSection(),"section must be preserved when conditionalAlternatives is null");
 	}
 
 	// ── Helper ────────────────────────────────────────────────────────────────

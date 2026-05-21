@@ -34,15 +34,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 /**
  * Unit tests for {@link DryStreakAnalyzer}.
@@ -50,7 +51,8 @@ import static org.mockito.Mockito.when;
  * <p>Uses synthetic drop rates and KC data so the tests are deterministic and
  * independent of the production {@code drop_rates.json} fixture.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class DryStreakAnalyzerTest
 {
 	/** 1/128 drop rate — a common OSRS rare drop denomination. */
@@ -76,7 +78,7 @@ public class DryStreakAnalyzerTest
 	private CollectionLogSource sourceA;
 	private CollectionLogSource sourceB;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		analyzer = new DryStreakAnalyzer(database);
@@ -270,7 +272,7 @@ public class DryStreakAnalyzerTest
 
 		Map<String, Integer> kc = Collections.singletonMap("Boss Alpha", bigKc);
 		List<DryStreakEntry> result = analyzer.analyze(collectionState, kc);
-		assertTrue("Guaranteed items must be excluded from the dry-streak feed", result.isEmpty());
+		assertTrue( result.isEmpty(),"Guaranteed items must be excluded from the dry-streak feed");
 	}
 
 	@Test
@@ -283,7 +285,7 @@ public class DryStreakAnalyzerTest
 
 		Map<String, Integer> kc = Collections.singletonMap("Boss Alpha", 99999);
 		List<DryStreakEntry> result = analyzer.analyze(collectionState, kc);
-		assertTrue("Zero-rate items must be excluded from the dry-streak feed", result.isEmpty());
+		assertTrue( result.isEmpty(),"Zero-rate items must be excluded from the dry-streak feed");
 	}
 
 	@Test
@@ -298,7 +300,7 @@ public class DryStreakAnalyzerTest
 
 		Map<String, Integer> kc = Collections.singletonMap("Boss Alpha", bigKc);
 		List<DryStreakEntry> result = analyzer.analyze(collectionState, kc);
-		assertTrue("Obtained items must not appear in the dry-streak feed", result.isEmpty());
+		assertTrue( result.isEmpty(),"Obtained items must not appear in the dry-streak feed");
 	}
 
 	// ── analyze — sort order ─────────────────────────────────────────────────
@@ -328,8 +330,8 @@ public class DryStreakAnalyzerTest
 
 		assertEquals(2, result.size());
 		// First entry must have higher ratio
-		assertTrue("Feed must be sorted worst-streak-first",
-			result.get(0).getMultipleOfExpected() > result.get(1).getMultipleOfExpected());
+		assertTrue(
+			result.get(0).getMultipleOfExpected() > result.get(1).getMultipleOfExpected(),"Feed must be sorted worst-streak-first");
 		assertEquals(DrynessClass.VERY_DRY, result.get(0).getClassification());
 		assertEquals(DrynessClass.DRY, result.get(1).getClassification());
 	}
@@ -354,7 +356,7 @@ public class DryStreakAnalyzerTest
 		Map<String, Integer> kc = Collections.singletonMap("Two Item Boss", kcAtFourX);
 		List<DryStreakEntry> result = analyzer.analyze(collectionState, kc);
 
-		assertEquals("Both unobtained items from the same source must appear", 2, result.size());
+		assertEquals( 2, result.size(),"Both unobtained items from the same source must appear");
 	}
 
 	// ── helpers ─────────────────────────────────────────────────────────────

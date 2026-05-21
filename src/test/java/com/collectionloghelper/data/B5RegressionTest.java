@@ -29,10 +29,10 @@ import com.google.gson.GsonBuilder;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * B5 regression guard — asserts that no entry in the production
@@ -52,7 +52,7 @@ public class B5RegressionTest
 {
 	private DropRateDatabase database;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		database = new DropRateDatabase();
@@ -88,9 +88,9 @@ public class B5RegressionTest
 		}
 
 		assertTrue(
+			violations.isEmpty(),
 			"No production step should carry dynamicTargetEvaluator — this field is reserved "
 				+ "for deliberate B5 puzzle/dynamic data PRs. Violations:\n"
-				+ String.join("\n", violations),
-			violations.isEmpty());
+				+ String.join("\n", violations));
 	}
 }

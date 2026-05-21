@@ -36,21 +36,23 @@ import java.util.List;
 import java.util.Map;
 import net.runelite.api.ItemComposition;
 import net.runelite.client.game.ItemManager;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class RequiredItemResolverTest
 {
 	@Mock
@@ -88,7 +90,7 @@ public class RequiredItemResolverTest
 	private static final int BRONZE_LOCK = 25442;
 	private static final int GOLD_LOCK = 25454;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		resolver = new RequiredItemResolver(inventoryState, bankState, itemManager);
@@ -120,7 +122,7 @@ public class RequiredItemResolverTest
 	public void resolveReturnsEmptyForNullStep()
 	{
 		List<RequiredItemDisplay> result = resolver.resolve(null);
-		assertTrue("Null step must yield an empty result", result.isEmpty());
+		assertTrue( result.isEmpty(),"Null step must yield an empty result");
 	}
 
 	@Test
@@ -219,7 +221,7 @@ public class RequiredItemResolverTest
 		List<RequiredItemDisplay> rows = resolver.resolve(
 			stepWithRequiredItems(Arrays.asList(0, -1, TINDERBOX, null)));
 
-		assertEquals("Only the one valid id must produce a row", 1, rows.size());
+		assertEquals( 1, rows.size(),"Only the one valid id must produce a row");
 		assertEquals(Status.HELD, rows.get(0).getStatus());
 	}
 
@@ -269,8 +271,8 @@ public class RequiredItemResolverTest
 		List<RequiredItemDisplay> rows = resolver.resolve(
 			stepWithRequiredItems(Collections.singletonList(TINDERBOX)));
 
-		assertEquals("Item ID must be preserved in the display row so the panel can load the sprite",
-			TINDERBOX, rows.get(0).getItemId());
+		assertEquals(
+			TINDERBOX, rows.get(0).getItemId(),"Item ID must be preserved in the display row so the panel can load the sprite");
 	}
 
 	// ── resolveRecommended (B.5.2) ──────────────────────────────────────────
@@ -278,8 +280,8 @@ public class RequiredItemResolverTest
 	@Test
 	public void resolveRecommendedReturnsEmptyForNullStep()
 	{
-		assertTrue("Null step must yield an empty recommended result",
-			resolver.resolveRecommended(null).isEmpty());
+		assertTrue(
+			resolver.resolveRecommended(null).isEmpty(),"Null step must yield an empty recommended result");
 	}
 
 	@Test
@@ -374,7 +376,7 @@ public class RequiredItemResolverTest
 	{
 		// IDs <= 0 are invalid and must be skipped
 		List<RequiredItemDisplay> rows = resolver.resolveIds(Arrays.asList(0, -1, null));
-		assertTrue("Invalid item IDs must be skipped", rows.isEmpty());
+		assertTrue( rows.isEmpty(),"Invalid item IDs must be skipped");
 
 		// itemManager must never be called for invalid IDs
 		verify(itemManager, never()).getItemComposition(0);
@@ -415,8 +417,8 @@ public class RequiredItemResolverTest
 
 		List<RequiredItemDisplay> rows = resolver.resolve(step);
 
-		assertEquals("Override list must have 3 items (tinderbox + loar remains + loar pyre logs)",
-			3, rows.size());
+		assertEquals(
+			3, rows.size(),"Override list must have 3 items (tinderbox + loar remains + loar pyre logs)");
 		assertEquals(TINDERBOX, rows.get(0).getItemId());
 		assertEquals(LOAR_REMAINS, rows.get(1).getItemId());
 		assertEquals(LOAR_PYRE_LOGS, rows.get(2).getItemId());
@@ -440,7 +442,7 @@ public class RequiredItemResolverTest
 
 		List<RequiredItemDisplay> rows = resolver.resolve(step);
 
-		assertEquals("Must fall back to static required list (1 item)", 1, rows.size());
+		assertEquals( 1, rows.size(),"Must fall back to static required list (1 item)");
 		assertEquals(TINDERBOX, rows.get(0).getItemId());
 	}
 
@@ -462,7 +464,7 @@ public class RequiredItemResolverTest
 
 		List<RequiredItemDisplay> rows = resolver.resolve(step);
 
-		assertEquals("Must fall back to static list when target ID is not a map key", 1, rows.size());
+		assertEquals( 1, rows.size(),"Must fall back to static list when target ID is not a map key");
 		assertEquals(TINDERBOX, rows.get(0).getItemId());
 	}
 
@@ -483,7 +485,7 @@ public class RequiredItemResolverTest
 
 		List<RequiredItemDisplay> rows = resolver.resolve(step);
 
-		assertEquals("No map on step — must use static required list", 1, rows.size());
+		assertEquals( 1, rows.size(),"No map on step — must use static required list");
 		assertEquals(TINDERBOX, rows.get(0).getItemId());
 	}
 
@@ -507,7 +509,7 @@ public class RequiredItemResolverTest
 
 		List<RequiredItemDisplay> rows = resolverNoCoord.resolve(step);
 
-		assertEquals("No coordinator wired — must use static required list", 1, rows.size());
+		assertEquals( 1, rows.size(),"No coordinator wired — must use static required list");
 		assertEquals(TINDERBOX, rows.get(0).getItemId());
 	}
 
@@ -535,7 +537,7 @@ public class RequiredItemResolverTest
 
 		List<RequiredItemDisplay> rows = resolver.resolveRecommended(step);
 
-		assertEquals("Override list must have 2 items for BRONZE_LOCK target", 2, rows.size());
+		assertEquals( 2, rows.size(),"Override list must have 2 items for BRONZE_LOCK target");
 		assertEquals(TINDERBOX, rows.get(0).getItemId());
 		assertEquals(PYRE_LOGS, rows.get(1).getItemId());
 	}
@@ -556,7 +558,7 @@ public class RequiredItemResolverTest
 
 		List<RequiredItemDisplay> rows = resolver.resolveRecommended(step);
 
-		assertEquals("Must fall back to static recommended list (1 item)", 1, rows.size());
+		assertEquals( 1, rows.size(),"Must fall back to static recommended list (1 item)");
 		assertEquals(SHADE_REMAINS, rows.get(0).getItemId());
 	}
 
@@ -576,8 +578,8 @@ public class RequiredItemResolverTest
 
 		List<RequiredItemDisplay> rows = resolver.resolveRecommended(step);
 
-		assertEquals("Must fall back to static recommended list when target not in map",
-			1, rows.size());
+		assertEquals(
+			1, rows.size(),"Must fall back to static recommended list when target not in map");
 		assertEquals(SHADE_REMAINS, rows.get(0).getItemId());
 	}
 
@@ -594,7 +596,7 @@ public class RequiredItemResolverTest
 
 		List<RequiredItemDisplay> rows = resolver.resolveRecommended(step);
 
-		assertEquals("No map on step — must use static recommended list", 1, rows.size());
+		assertEquals( 1, rows.size(),"No map on step — must use static recommended list");
 		assertEquals(TINDERBOX, rows.get(0).getItemId());
 	}
 	// --- Helpers ---

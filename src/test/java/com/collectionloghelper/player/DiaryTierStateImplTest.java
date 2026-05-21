@@ -27,16 +27,18 @@ package com.collectionloghelper.player;
 import java.lang.reflect.Constructor;
 import net.runelite.api.Client;
 import net.runelite.api.Varbits;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class DiaryTierStateImplTest
 {
 	@Mock
@@ -44,7 +46,7 @@ public class DiaryTierStateImplTest
 
 	private DiaryTierStateImpl diaryState;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<DiaryTierStateImpl> ctor =
@@ -64,8 +66,8 @@ public class DiaryTierStateImplTest
 		{
 			for (DiaryTier tier : DiaryTier.values())
 			{
-				assertFalse("Expected false before refresh for " + region + " " + tier,
-					diaryState.hasDiary(region, tier));
+				assertFalse(
+					diaryState.hasDiary(region, tier),"Expected false before refresh for " + region + " " + tier);
 			}
 		}
 	}
@@ -208,8 +210,8 @@ public class DiaryTierStateImplTest
 
 		for (DiaryRegion region : DiaryRegion.values())
 		{
-			assertTrue("Expected EASY true for " + region,
-				diaryState.hasDiary(region, DiaryTier.EASY));
+			assertTrue(
+				diaryState.hasDiary(region, DiaryTier.EASY),"Expected EASY true for " + region);
 		}
 	}
 
@@ -230,8 +232,8 @@ public class DiaryTierStateImplTest
 		{
 			for (DiaryTier tier : DiaryTier.values())
 			{
-				assertFalse("Expected false when client throws for " + region + " " + tier,
-					diaryState.hasDiary(region, tier));
+				assertFalse(
+					diaryState.hasDiary(region, tier),"Expected false when client throws for " + region + " " + tier);
 			}
 		}
 	}
@@ -274,8 +276,8 @@ public class DiaryTierStateImplTest
 		{
 			for (DiaryTier tier : DiaryTier.values())
 			{
-				assertFalse("Expected false after reset for " + region + " " + tier,
-					diaryState.hasDiary(region, tier));
+				assertFalse(
+					diaryState.hasDiary(region, tier),"Expected false after reset for " + region + " " + tier);
 			}
 		}
 	}
