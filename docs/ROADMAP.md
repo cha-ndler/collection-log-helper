@@ -68,7 +68,7 @@ None of this is a reason to throw out the JSON model. It is a reason to decide e
 - Data correctness. 2,109 items ID-verified, drop rates audited twice.
 - Feature breadth. The `README.md` "Features" list is accurate and most of it has been used end-to-end.
 - Test coverage — 503 tests passing, critical services covered.
-- Build hygiene. `./gradlew build` clean. shadowJar 293 KB, runeLiteVersion pinned to 1.12.24, verification-metadata.xml committed.
+- Build hygiene. `./gradlew build` clean. shadowJar 293 KB, runeLiteVersion pinned to 1.12.26.3, verification-metadata.xml committed.
 - License, CREDITS.md, CONTRIBUTING.md, privacy — all present and correct.
 - Screenshots — exist in `docs/screenshots/`.
 
@@ -76,14 +76,14 @@ None of this is a reason to throw out the JSON model. It is a reason to decide e
 
 These are the items that would have made the previous PR cycle smoother.
 
-| Item | Why it matters for review | Effort |
-|------|---------------------------|--------|
-| **Panel decomposition** (1,661-LOC `CollectionLogHelperPanel`) | Reviewers look at LOC per file. This is the largest untouched god-object. Split into view controllers per mode (Efficient / Category / Search / Pet / Statistics) behind a shared panel shell. | 2-3 agent-days |
-| **Close/verify all merge-blocking open issues** (#319, #323 — already verified; #314, #306 need in-game capture or triage; #134 is P3) | A clean issue tracker signals maintenance discipline. | 0.5 day of triage + scheduling in-game capture |
-| **Stable tag + changelog cutover** | Tag a `v1.0.0-hub` commit with frozen CHANGELOG.md entry. Don't update it while the PR queues. | 0.5 day |
-| **Plugin Hub self-review checklist** | Run the Plugin Hub checklist (no premium-plugin-like features, no external-service calls without user opt-in, no PII, correct manifest icon/description/tags). Write the results into a `docs/plugin-hub-review.md` we can cite in the PR. | 1 day |
-| **Final LOC pass on `CollectionLogHelperPlugin`** | Aim for under 1,000 LOC on the plugin class. Extract the remaining event dispatch and any residual overlay wiring. | 1-2 days |
-| **Smoke-test onboarding flow** | Record a fresh-install walk-through video (or screenshot series) covering: install → open panel → sync log → Guide Me on a source → step auto-advance. Attach to PR. | 0.5 day |
+| Item | Status | Why it matters for review | Effort |
+|------|--------|---------------------------|--------|
+| **Panel decomposition** (1,661-LOC `CollectionLogHelperPanel`) | done — Panel now 677 LOC; #503 umbrella closed via #542 + 25+ extraction PRs | Reviewers look at LOC per file. This is the largest untouched god-object. Split into view controllers per mode (Efficient / Category / Search / Pet / Statistics) behind a shared panel shell. | 2-3 agent-days |
+| **Close/verify all merge-blocking open issues** (#319, #323 — already verified; #314, #306 need in-game capture or triage; #134 is P3) | mostly done — #319, #323, #306, #314 closed or labeled; remaining open hub-blockers tracked under #495 (Pass 2 in-game validation, partial), #134 (P3), #588 (Pass 2 follow-ups), #569 (audit harness research) | A clean issue tracker signals maintenance discipline. | 0.5 day of triage + scheduling in-game capture |
+| **Stable tag + changelog cutover** | pending — intentionally deferred until resubmission day (CHANGELOG `Unreleased` section refreshed in this PR; v1.0.0-hub-2 will be cut + frozen at resubmission, not before) | Tag a `v1.0.0-hub` commit with frozen CHANGELOG.md entry. Don't update it while the PR queues. | 0.5 day |
+| **Plugin Hub self-review checklist** | done — `docs/plugin-hub-review.md` refreshed against current master via [#593](../../pull/593); 0 Red entries | Run the Plugin Hub checklist (no premium-plugin-like features, no external-service calls without user opt-in, no PII, correct manifest icon/description/tags). Write the results into a `docs/plugin-hub-review.md` we can cite in the PR. | 1 day |
+| **Final LOC pass on `CollectionLogHelperPlugin`** | done — Plugin class now 555 LOC (target was <1,000) after #503 decomposition campaign | Aim for under 1,000 LOC on the plugin class. Extract the remaining event dispatch and any residual overlay wiring. | 1-2 days |
+| **Smoke-test onboarding flow** | blocked — requires an in-game capture session; queued behind #495 Pass 2 in-game validation work | Record a fresh-install walk-through video (or screenshot series) covering: install → open panel → sync log → Guide Me on a source → step auto-advance. Attach to PR. | 0.5 day |
 
 ### Recommendation: hold resubmission ~2 weeks
 
@@ -527,8 +527,8 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 **Tier A — Production polish for Plugin Hub resubmission**
 
 - [x] A1 — Panel decomposition                          status: done          owner: cha-ndler  updated: 2026-04-17  pr: #349  note: 5 mode controllers extracted (94–297 LOC each) behind PanelModeDispatcher; 468/468 tests green. Shell still 1,288 LOC (shared widgets) — follow-up A1b.
-- [x] A1b — Shell widget decomposition                   status: done          owner: cha-ndler  updated: 2026-04-17  pr: #351  note: 6 widgets extracted (SyncStatusView, ClueSummaryView, GuidanceBannerView, StepProgressView, SlayerStrategyView, QuickGuidePanelView); shell 1,288 → 698 LOC (−46%); 511 tests green. Shell didn't hit <600 target (final-field constructor overhead ~175 LOC) but is under the 800-LOC Plugin Hub flag threshold.
-- [x] A2 — Plugin class <1,000 LOC                       status: done          owner: cha-ndler  updated: 2026-04-17  pr: #347  note: 1,281 → 904 LOC via GuidanceEventRouter extraction
+- [x] A1b — Shell widget decomposition                   status: done          owner: cha-ndler  updated: 2026-05-20  pr: #351 + #503 follow-up  note: 6 widgets extracted in #351 (SyncStatusView, ClueSummaryView, GuidanceBannerView, StepProgressView, SlayerStrategyView, QuickGuidePanelView); shell 1,288 → 698 LOC (−46%) at #351. Subsequent #503 panel-decomposition campaign (PanelRebuildOrchestrator/PanelHeaderBuilder/SelectorControlsPanel/SyncButtonController/ListContainerScrollPane/DetailViewBuilder) drove the shell to 677 LOC.
+- [x] A2 — Plugin class <1,000 LOC                       status: done          owner: cha-ndler  updated: 2026-05-20  pr: #347 + #503 follow-up  note: 1,281 → 904 LOC at #347 via GuidanceEventRouter extraction; further reduced to 555 LOC across the #503 router/orchestrator extractions (GameStateRouter, VarbitChangeRouter, GameTickOrchestrator, ChatEventHandler, PluginShutdownRoutine, etc.) closed by #542.
 - [x] A3 — Issue triage & labels                         status: done          owner: cha-ndler  updated: 2026-04-17  note: GitHub-only — summary in #345; 10 labels created, #319 closed, #323/#314/#306/#134 labeled
 - [x] A4 — Plugin Hub self-review doc                    status: done          owner: cha-ndler  updated: 2026-04-17  pr: #346  note: 27 green / 3 yellow / 2 red — docs/plugin-hub-review.md
 - [x] A5 — Screenshots refresh                           status: done          owner: cha-ndler  updated: 2026-04-16  note: docs/screenshots/ populated
