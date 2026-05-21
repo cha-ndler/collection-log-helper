@@ -120,7 +120,7 @@ public class CrossSourceRankerTest
 		return new CollectionLogSource(name, CollectionLogCategory.BOSSES, 3000, 3000, 0,
 			killTimeSeconds, 0, name, Collections.emptyList(),
 			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null, null,
-			null /* guidanceHelperKey */, null, 0, null, 0, items, null /* metaAuthoredDate */);
+			null /* guidanceHelperKey */, null, 0, null, 0, items, null /* metaAuthoredDate */, null, null);
 	}
 
 	private CollectionLogItem makeItem(int id, String name, double dropRate)

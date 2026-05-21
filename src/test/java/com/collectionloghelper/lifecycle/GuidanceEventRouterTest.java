@@ -175,7 +175,7 @@ public class GuidanceEventRouterTest
 			0,         // cumulativeTrackThreshold
 			null,      // items
 			null       // metaAuthoredDate
-		);
+		, null, null);
 	}
 
 	/**
@@ -207,7 +207,7 @@ public class GuidanceEventRouterTest
 			objectIds,
 			0,
 			null
-		, null);
+		, null, null, null);
 	}
 
 	@Before

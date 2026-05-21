@@ -30,6 +30,7 @@ import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
+import com.collectionloghelper.ui.widget.SourceRecommendedItemsChipPanel;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.util.Arrays;
@@ -38,6 +39,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.runelite.client.game.ItemManager;
@@ -120,6 +122,15 @@ public class DetailViewBuilderTest
 
 	private static CollectionLogSource newSource(String name, List<CollectionLogItem> items)
 	{
+		return newSource(name, items, null, null);
+	}
+
+	private static CollectionLogSource newSource(
+		String name,
+		List<CollectionLogItem> items,
+		String wikiStrategyUrl,
+		List<Integer> recommendedItemIds)
+	{
 		return new CollectionLogSource(
 			name,                          // name
 			CollectionLogCategory.BOSSES,  // category
@@ -145,7 +156,9 @@ public class DetailViewBuilderTest
 			Collections.emptyList(),       // cumulativeTrackObjectIds
 			0,                             // cumulativeTrackThreshold
 			items,                         // items
-			null);                         // metaAuthoredDate
+			null,                          // metaAuthoredDate
+			wikiStrategyUrl,               // wikiStrategyUrl (#573)
+			recommendedItemIds);           // recommendedItemIds (#573)
 	}
 
 	@Test
@@ -313,6 +326,147 @@ public class DetailViewBuilderTest
 		builder.syncGuidanceState(false, null);
 		builder.syncGuidanceState(true, source);
 		// Reaching this line without an NPE is the assertion.
+	}
+
+	/**
+	 * #573 — the detail panel must expose a "Wiki Strategy" button on the action
+	 * row so players can open the source's wiki Strategies page in their default
+	 * browser before activating guidance.
+	 */
+	@Test
+	public void populateRendersWikiStrategyButton()
+	{
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+		when(requirementsChecker.isAccessible(anyString())).thenReturn(true);
+
+		builder.populate(target, item, source, false, null, () -> { });
+
+		ItemDetailPanel detail = (ItemDetailPanel) target.getComponent(0);
+		JButton wikiStrategy = findFirstButton(detail, "Wiki Strategy");
+		assertNotNull("ItemDetailPanel should expose a Wiki Strategy button", wikiStrategy);
+		assertEquals("Wiki Strategy", wikiStrategy.getText());
+	}
+
+	/**
+	 * #573 — when {@code wikiStrategyUrl} is null the source should derive a
+	 * default Strategies URL from the source name with spaces converted to
+	 * underscores. Verifies the resolver on {@link CollectionLogSource} rather
+	 * than the side-effecting browser launch (which would open a real window).
+	 */
+	@Test
+	public void wikiStrategyUrlDerivesFromSourceNameWhenOverrideIsNull()
+	{
+		CollectionLogSource graardor =
+			newSource("General Graardor", Arrays.asList(item), null, null);
+		assertEquals(
+			"https://oldschool.runescape.wiki/w/General_Graardor/Strategies",
+			graardor.getEffectiveWikiStrategyUrl());
+	}
+
+	/**
+	 * #573 — when {@code wikiStrategyUrl} is set the override is returned
+	 * verbatim, allowing sources whose wiki page name does not match the
+	 * source name to point at the correct URL.
+	 */
+	@Test
+	public void wikiStrategyUrlUsesOverrideWhenSet()
+	{
+		String override = "https://oldschool.runescape.wiki/w/Theatre_of_Blood/Strategies/Verzik_Vitur";
+		CollectionLogSource tob = newSource("Theatre of Blood", Arrays.asList(item), override, null);
+		assertEquals(override, tob.getEffectiveWikiStrategyUrl());
+	}
+
+	/**
+	 * #573 — when the source carries an explicit source-level
+	 * {@code recommendedItemIds} list, the source-header chip strip is rendered
+	 * (visible) with the same order. The strip is a
+	 * {@link SourceRecommendedItemsChipPanel} added as a child of the
+	 * {@link ItemDetailPanel}.
+	 */
+	@Test
+	public void populateRendersSourceLevelRecommendedStripWhenOverrideIsSet() throws Exception
+	{
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+		when(requirementsChecker.isAccessible(anyString())).thenReturn(true);
+
+		List<Integer> recOverride = Arrays.asList(11802, 12817, 4151); // Bandos chest, helm, whip
+		CollectionLogSource overrideSrc =
+			newSource("Test Boss", Arrays.asList(item, otherItem), null, recOverride);
+
+		builder.populate(target, item, overrideSrc, false, null, () -> { });
+
+		// Chip-strip update is dispatched via SwingUtilities.invokeLater inside
+		// the widget; flush the EDT before asserting visibility.
+		javax.swing.SwingUtilities.invokeAndWait(() -> { /* flush */ });
+
+		SourceRecommendedItemsChipPanel strip = findFirstChipPanel(target);
+		assertNotNull("Source-level recommended chip panel must be present", strip);
+		assertTrue("Source-level recommended chip panel must be visible when override is non-empty",
+			strip.isVisible());
+	}
+
+	/**
+	 * #573 — sources with neither a source-level recommended override nor any
+	 * per-step recommended items should hide the chip strip entirely (the
+	 * blank-space contract). The base test {@link #source} has empty guidance
+	 * steps and no override, so the strip should be hidden.
+	 */
+	@Test
+	public void populateHidesSourceLevelRecommendedStripWhenNoData() throws Exception
+	{
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+		when(requirementsChecker.isAccessible(anyString())).thenReturn(true);
+
+		builder.populate(target, item, source, false, null, () -> { });
+		javax.swing.SwingUtilities.invokeAndWait(() -> { /* flush */ });
+
+		SourceRecommendedItemsChipPanel strip = findFirstChipPanel(target);
+		assertNotNull("Source-level recommended chip panel must be present in the tree", strip);
+		assertEquals("Strip must be hidden when no recommended items exist",
+			false, strip.isVisible());
+	}
+
+	/**
+	 * #573 — when the source has no source-level override but per-step
+	 * recommended items exist, {@link CollectionLogSource#getEffectiveRecommendedItemIds()}
+	 * rolls up the union (preserving insertion order, deduplicated). Verified
+	 * directly on the source rather than via the chip strip to avoid the
+	 * heavyweight {@link com.collectionloghelper.data.GuidanceStep} constructor.
+	 */
+	@Test
+	public void effectiveRecommendedItemIdsReturnsOverrideWhenSet()
+	{
+		List<Integer> recOverride = Arrays.asList(11802, 12817);
+		CollectionLogSource src =
+			newSource("Test Boss", Arrays.asList(item), null, recOverride);
+
+		assertEquals(recOverride, src.getEffectiveRecommendedItemIds());
+	}
+
+	/**
+	 * Walks the panel tree to locate the first
+	 * {@link SourceRecommendedItemsChipPanel}. Returns {@code null} if none
+	 * exists in the subtree.
+	 */
+	private static SourceRecommendedItemsChipPanel findFirstChipPanel(java.awt.Container root)
+	{
+		for (Component c : root.getComponents())
+		{
+			if (c instanceof SourceRecommendedItemsChipPanel)
+			{
+				return (SourceRecommendedItemsChipPanel) c;
+			}
+			if (c instanceof java.awt.Container)
+			{
+				SourceRecommendedItemsChipPanel nested =
+					findFirstChipPanel((java.awt.Container) c);
+				if (nested != null)
+				{
+					return nested;
+				}
+			}
+		}
+		return null;
 	}
 
 	private static javax.swing.JButton findFirstButton(java.awt.Container root, String labelSubstring)

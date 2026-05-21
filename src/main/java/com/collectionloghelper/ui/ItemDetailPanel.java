@@ -28,6 +28,7 @@ import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.efficiency.ClueCompletionEstimator;
+import com.collectionloghelper.ui.widget.SourceRecommendedItemsChipPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -203,8 +204,18 @@ class ItemDetailPanel extends JPanel
 		infoLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
 		add(infoLabel);
 
-		// Action buttons
-		JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 8, 0));
+		// Source-level Recommended Gear chip strip (#573). Rendered above the
+		// action-button row so players can scan recommended kit before
+		// activating guidance. Hidden when the source has no recommended items
+		// (neither a source-level override nor any per-step recommendations).
+		SourceRecommendedItemsChipPanel sourceRecChips = new SourceRecommendedItemsChipPanel(itemManager);
+		sourceRecChips.setAlignmentX(LEFT_ALIGNMENT);
+		sourceRecChips.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
+		sourceRecChips.update(source.getEffectiveRecommendedItemIds());
+		add(sourceRecChips);
+
+		// Action buttons — three columns: Guide Me / Open Wiki / Wiki Strategy (#573).
+		JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 6, 0));
 		buttonPanel.setOpaque(false);
 		buttonPanel.setAlignmentX(LEFT_ALIGNMENT);
 		buttonPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 32));
@@ -237,6 +248,11 @@ class ItemDetailPanel extends JPanel
 		wikiButton.setToolTipText("Open wiki page for " + item.getName());
 		wikiButton.addActionListener(e -> openWiki(item));
 		buttonPanel.add(wikiButton);
+
+		JButton wikiStrategyButton = new JButton("Wiki Strategy");
+		wikiStrategyButton.setToolTipText("Open wiki strategies page for " + source.getName());
+		wikiStrategyButton.addActionListener(e -> openWikiStrategy(source));
+		buttonPanel.add(wikiStrategyButton);
 
 		add(buttonPanel);
 
@@ -320,6 +336,21 @@ class ItemDetailPanel extends JPanel
 			.build()
 			.toString();
 
+		LinkBrowser.browse(url);
+	}
+
+	/**
+	 * Opens the wiki Strategies page for the given source (#573). Resolves the
+	 * URL via {@link CollectionLogSource#getEffectiveWikiStrategyUrl()} which
+	 * prefers the per-source override and otherwise derives the URL from the
+	 * source name. The default browser is launched via
+	 * {@link LinkBrowser#browse(String)}.
+	 *
+	 * <p>Package-visible for tests to bypass the action-listener path.
+	 */
+	static void openWikiStrategy(CollectionLogSource source)
+	{
+		String url = source.getEffectiveWikiStrategyUrl();
 		LinkBrowser.browse(url);
 	}
 }

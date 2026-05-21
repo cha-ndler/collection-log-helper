@@ -177,7 +177,7 @@ public class GuidanceSequencerWaypointTest
 			60, 0, "Test Source", Collections.emptyList(),
 			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null,
 			Arrays.asList(steps),
-			null /* guidanceHelperKey */, null, 0, null, 0, Collections.emptyList(), null /* metaAuthoredDate */);
+			null /* guidanceHelperKey */, null, 0, null, 0, Collections.emptyList(), null /* metaAuthoredDate */, null, null);
 	}
 
 	// ── Test cases ────────────────────────────────────────────────────────────
