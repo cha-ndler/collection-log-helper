@@ -105,7 +105,8 @@
     "worldX": 3174,
     "worldY": 3435,
     "worldPlane": 0,
-    "aliases": ["Varrock sewer", "Bryophyta lair"]
+    "aliases": ["Varrock sewer", "Bryophyta lair"],
+    "radius": 7000
   },
   "Edgeville Dungeon": {
     "worldX": 3097,
@@ -255,7 +256,8 @@
     "worldX": 1362,
     "worldY": 4511,
     "worldPlane": 0,
-    "aliases": ["Tapoyauik", "Amoxliatl lair"]
+    "aliases": ["Tapoyauik", "Amoxliatl lair"],
+    "radius": 2000
   },
   "Lumbridge cow field": {
     "worldX": 3263,
@@ -273,7 +275,8 @@
     "worldX": 2439,
     "worldY": 5172,
     "worldPlane": 0,
-    "aliases": ["TzHaar city", "Karamja Volcano", "Fight Caves", "Inferno arena"]
+    "aliases": ["TzHaar city", "Karamja Volcano", "Fight Caves", "Inferno arena"],
+    "radius": 150
   },
   "Tar Swamp, Fossil Island": {
     "worldX": 3683,
@@ -321,7 +324,8 @@
       "Wyrm chamber",
       "Drake chamber",
       "Hydra chamber"
-    ]
+    ],
+    "radius": 200
   },
   "Smoke Dungeon": {
     "worldX": 3310,
@@ -691,7 +695,8 @@
       "Crash Site Cavern beneath Ape Atoll",
       "Crash Site Cavern beneath Gnome Stronghold",
       "Crash Site"
-    ]
+    ],
+    "radius": 3000
   },
   "Jalsavrah": {
     "worldX": 3288,

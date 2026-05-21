@@ -306,10 +306,16 @@ def load_landmarks(path: Path) -> dict[str, dict[str, Any]]:
       {
         "Mount Quidamortem": {
             "worldX": 1233, "worldY": 3573, "worldPlane": 0,
-            "aliases": ["Chambers of Xeric", "Chambers"]
+            "aliases": ["Chambers of Xeric", "Chambers"],
+            "radius": 150  // optional per-landmark tolerance override in tiles
         },
         ...
       }
+
+    The optional `radius` field overrides COORD_TOLERANCE_TILES for that one
+    landmark. Use it for large arenas (Mor Ul Rek, Karuulm Slayer Dungeon)
+    or landmarks that span surface + underground coord conventions
+    (Varrock Sewers). See #563.
     """
     if not path.exists():
         return {}
@@ -453,8 +459,18 @@ def check_coord_plausibility(
     sx, sy = source.get("worldX"), source.get("worldY")
     if None in (lx, ly, sx, sy):
         return findings
+    # Per-landmark radius override for large arenas / multi-zone landmarks
+    # (e.g. Mor Ul Rek is 100+ tiles wide; Varrock Sewers spans the surface
+    # manhole AND the underground room at +6432 Y; Karuulm Slayer Dungeon
+    # is a sprawling multi-room cave). Falls back to the global tolerance
+    # when no override is declared. See #563.
+    raw_radius = lm.get("radius")
+    if isinstance(raw_radius, int) and raw_radius > 0:
+        tolerance = raw_radius
+    else:
+        tolerance = COORD_TOLERANCE_TILES
     dist = tile_distance(sx, sy, lx, ly)
-    if dist > COORD_TOLERANCE_TILES:
+    if dist > tolerance:
         findings.append(
             Finding(
                 source_name=name,
@@ -467,7 +483,7 @@ def check_coord_plausibility(
                 bucket=BUCKET_RESEARCH,
                 note=(
                     f"coords are {dist} tiles from canonical {landmark_name}; "
-                    f"tolerance is {COORD_TOLERANCE_TILES}. Could be intentional "
+                    f"tolerance is {tolerance}. Could be intentional "
                     "(e.g. lobby vs. entrance) but verify against the Wiki."
                 ),
             )
