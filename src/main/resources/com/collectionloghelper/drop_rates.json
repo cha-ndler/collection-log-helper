@@ -8619,8 +8619,8 @@
   {
     "name": "Frost Nagua",
     "category": "SLAYER",
-    "worldX": 1693,
-    "worldY": 3232,
+    "worldX": 1362,
+    "worldY": 4511,
     "worldPlane": 0,
     "killTimeSeconds": 20,
     "afkLevel": 2,
@@ -8655,23 +8655,23 @@
         "wikiPage": "Pendant_of_ates_(inert)"
       }
     ],
-    "locationDescription": "Ruins of Tapoyauik, Cam Torum",
-    "travelTip": "Quetzal whistle -> Cam Torum",
+    "locationDescription": "Ruins of Tapoyauik, Twilight Temple (Varlamore)",
+    "travelTip": "Pendant of ates -> Twilight Temple, or quetzal whistle -> Varlamore",
     "npcId": 13728,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Ruins of Tapoyauik in Cam Torum, Varlamore (quetzal whistle)",
-        "worldX": 1693,
-        "worldY": 3232,
+        "description": "Travel to the Ruins of Tapoyauik beneath the Twilight Temple in Varlamore (pendant of ates teleports directly; requires The Heart of Darkness)",
+        "worldX": 1362,
+        "worldY": 4511,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20
       },
       {
-        "description": "Kill Frost Nagua in the icy caves of Varlamore. Use fire spells or crush weapons for weakness",
-        "worldX": 1693,
-        "worldY": 3232,
+        "description": "Kill Frost Nagua in the Ruins of Tapoyauik. Use fire spells or crush weapons for weakness",
+        "worldX": 1362,
+        "worldY": 4511,
         "worldPlane": 0,
         "npcId": 13728,
         "interactAction": "Attack",
@@ -9368,13 +9368,13 @@
         "wikiPage": "Dragon_metal_sheet"
       }
     ],
-    "locationDescription": "Charred Island",
-    "travelTip": "Quetzal whistle -> Varlamore",
+    "locationDescription": "Charred Dungeon, Charred Island",
+    "travelTip": "Sail from Void Knights' Outpost to Charred Island (requires 60 Sailing)",
     "npcId": 15500,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Wilderness Lava Strykewyrm area (level 34+). Use burning amulet to Bandit Camp",
+        "description": "Travel to Charred Island in the Unquiet Ocean (sail from Void Knights' Outpost; requires 60 Sailing). Descend into the Charred Dungeon via the dark hole in the northwest of the island",
         "worldX": 2150,
         "worldY": 2968,
         "worldPlane": 0,
@@ -9382,7 +9382,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Lava Strykewyrms in the Wilderness (level 34+). Use ice spells to freeze them, then attack with melee. Bring cheap gear for PKer risk",
+        "description": "Kill Lava Strykewyrms in the Charred Dungeon beneath Charred Island. Standard combat mechanics; no PKer risk",
         "worldX": 2150,
         "worldY": 2968,
         "worldPlane": 0,
