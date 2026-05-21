@@ -40,6 +40,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
@@ -55,6 +56,7 @@ class ItemDetailPanel extends JPanel
 	private static final Color LOCKED_COLOR = new Color(200, 80, 80);
 
 	private final JButton guideMeButton;
+	private final CollectionLogSource source;
 
 	ItemDetailPanel(CollectionLogItem item, CollectionLogSource source, boolean obtained,
 		boolean locked, List<String> unmetRequirements,
@@ -64,6 +66,8 @@ class ItemDetailPanel extends JPanel
 		Runnable onBack, Runnable onGuideMe, Runnable onStopGuidance,
 		boolean guidanceActive)
 	{
+		this.source = source;
+
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
@@ -256,6 +260,34 @@ class ItemDetailPanel extends JPanel
 			guideMeButton.setForeground(Color.WHITE);
 			guideMeButton.setToolTipText("Show overlays to guide you");
 		}
+	}
+
+	/**
+	 * Syncs this detail panel's Guide Me / Stop Guidance button to the canonical
+	 * guidance-active state held by {@link CollectionLogHelperPanel}.
+	 *
+	 * <p>Resolves cha-ndler/collection-log-helper#576: when the step-control row's
+	 * STOP icon deactivates guidance via
+	 * {@link com.collectionloghelper.guidance.GuidanceOverlayCoordinator#deactivateGuidance},
+	 * the panel's {@code setGuidanceState(false, null, null)} fan-out updates the
+	 * Quick Guide button but used to leave the source-level detail-view button stuck
+	 * in "Stop Guidance" mode. Routing both surfaces through the same sync entry
+	 * point keeps them in lockstep regardless of which control initiated the stop.
+	 *
+	 * <p>Safe to call from any thread; mirrors
+	 * {@link com.collectionloghelper.ui.widget.QuickGuidePanelView#syncGuidanceState}.
+	 *
+	 * @param active       whether guidance is now active
+	 * @param guidedSource the currently guided source (may be {@code null})
+	 */
+	void syncGuidanceState(boolean active, CollectionLogSource guidedSource)
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			boolean isGuidingThis = active && guidedSource != null
+				&& guidedSource.getName().equals(source.getName());
+			updateGuideButtonState(isGuidingThis);
+		});
 	}
 
 	private void appendInfoRow(StringBuilder sb, String label, String value)
