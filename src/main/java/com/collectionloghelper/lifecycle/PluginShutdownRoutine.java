@@ -52,18 +52,21 @@ import net.runelite.client.ui.NavigationButton;
  * <ol>
  *   <li>Unregister the {@code !clh} chat command.</li>
  *   <li>Close the authoring logger file handle.</li>
- *   <li>Shut down the collectionlog.net importer.</li>
  *   <li>Tear down the panel (if it was constructed).</li>
  *   <li>Remove the nav button from the client toolbar.</li>
  *   <li>Unregister overlays.</li>
  *   <li>Unregister event-bus listeners (scene router, guidance routers,
  *       movement tracker, kill-time tracker).</li>
  *   <li>Reset state on each collaborator
- *       (kill-time tracker, guidance, sync coordinator, kc store, TempleOSRS
- *       syncer, player location resolver, overlays, data sync state, bank
+ *       (kill-time tracker, guidance, sync coordinator, kc store,
+ *       player location resolver, overlays, data sync state, bank
  *       state, inventory state, slayer state, travel caps, collection state,
  *       plugin data manager).</li>
- *   <li>Shut down the shared HTTP result executor (if present).</li>
+ *   <li>Shut down the shared HTTP result executor (if present).  The
+ *       collectionlog.net importer and TempleOSRS syncer no longer manage
+ *       their own executors (#478, #479) -- the runtime-provided
+ *       {@code ScheduledExecutorService} they use is shut down by the
+ *       RuneLite runtime, not by this routine.</li>
  *   <li>Clear plugin-private state via the {@code clearPluginState}
  *       callback -- the plugin owns {@code sourcesWithMissingItems},
  *       {@code pendingPanelRebuild}, {@code rankedSourcesDirty}, and
@@ -143,7 +146,9 @@ public class PluginShutdownRoutine
 	{
 		chatCommandManager.unregisterCommand("clh");
 		authoringLogger.close();
-		sync.getCollectionLogNetImporter().shutdown();
+		// CollectionLogNetImporter no longer owns its executor (#478) -- the
+		// shared ScheduledExecutorService is now lifecycle-managed by the
+		// RuneLite runtime, so no per-class shutdown call is needed.
 		if (panel != null)
 		{
 			panel.shutDown();
@@ -158,7 +163,9 @@ public class PluginShutdownRoutine
 		guidance.getGuidanceCoordinator().deactivateGuidance();
 		sync.getSyncStateCoordinator().reset();
 		sync.getSourceKcStore().clear();
-		sync.getTempleOsrsKcSyncer().shutdown();
+		// TempleOsrsKcSyncer no longer owns its executor (#479) -- the shared
+		// ScheduledExecutorService is now lifecycle-managed by the RuneLite
+		// runtime, so no per-class shutdown call is needed.
 		if (httpResultExecutor != null)
 		{
 			httpResultExecutor.shutdownNow();

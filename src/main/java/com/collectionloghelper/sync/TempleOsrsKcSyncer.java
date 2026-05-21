@@ -32,9 +32,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -98,19 +97,29 @@ public class TempleOsrsKcSyncer
 
 	private final OkHttpClient okHttpClient;
 	private final Gson gson;
-	private final ExecutorService executor;
+	private final ScheduledExecutorService executor;
 
+	/**
+	 * Constructs the syncer with all dependencies supplied by Guice.
+	 *
+	 * <p>The {@link ScheduledExecutorService} is provided by the RuneLite runtime
+	 * (see {@code RuneLite.scheduledExecutorService}) — a shared, singleton pool
+	 * whose lifecycle is owned by the client rather than by this plugin.  Plugin
+	 * Hub convention favours this pattern over per-class
+	 * {@code Executors.newSingleThreadExecutor()} construction because it avoids
+	 * leaked threads on plugin restart and lets the runtime cap total worker
+	 * count across all plugins.
+	 *
+	 * @param okHttpClient HTTP client used for the TempleOSRS request
+	 * @param gson JSON parser
+	 * @param executor shared scheduled executor provided by the runtime
+	 */
 	@Inject
-	TempleOsrsKcSyncer(OkHttpClient okHttpClient, Gson gson)
+	TempleOsrsKcSyncer(OkHttpClient okHttpClient, Gson gson, ScheduledExecutorService executor)
 	{
 		this.okHttpClient = okHttpClient;
 		this.gson = gson;
-		this.executor = Executors.newSingleThreadExecutor(r ->
-		{
-			Thread t = new Thread(r, "clh-temple-sync");
-			t.setDaemon(true);
-			return t;
-		});
+		this.executor = executor;
 	}
 
 	/**
@@ -125,14 +134,6 @@ public class TempleOsrsKcSyncer
 	public Future<SyncResult> syncKc(String username)
 	{
 		return executor.submit(() -> doSync(username));
-	}
-
-	/**
-	 * Shuts down the internal executor. Call during plugin shutdown.
-	 */
-	public void shutdown()
-	{
-		executor.shutdownNow();
 	}
 
 	// ---- package-private for testing ----
