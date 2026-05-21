@@ -158,6 +158,6 @@ public class OnSequenceCompletePerItemTest
 			null,
 			null, null, 0, null, 0,
 			Collections.emptyList()
-		, null);
+		, null, null, null);
 	}
 }

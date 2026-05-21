@@ -49,7 +49,7 @@ public class CollectionLogSourceTest
 		return new CollectionLogSource(name, CollectionLogCategory.BOSSES, x, y, plane,
 			60, 0, locationDesc, waypoints,
 			null, 0, null, 0, false, 0, null, 0, null, null, null, null, null, 0, null, 0,
-			Collections.emptyList(), null);
+			Collections.emptyList(), null, null, null);
 
 	}
 
@@ -234,5 +234,154 @@ public class CollectionLogSourceTest
 		CollectionLogSource source = makeSource("Test", 3000, 3100, 0, "Default",
 			Arrays.asList(wp1, wp2));
 		assertEquals("Last", source.getDisplayLocation(checker));
+	}
+
+	// ========================================================================
+	// #573 — wiki Strategies URL derivation + per-source override
+	// ========================================================================
+
+	private CollectionLogSource makeSourceWith573(String name, String wikiOverride,
+		List<Integer> recommendedItemIds, List<GuidanceStep> guidanceSteps)
+	{
+		return new CollectionLogSource(name, CollectionLogCategory.BOSSES, 3000, 3000, 0,
+			60, 0, null, Collections.emptyList(),
+			null, 0, null, 0, false, 0, null, 0, null, null,
+			guidanceSteps != null ? guidanceSteps : Collections.<GuidanceStep>emptyList(),
+			null, null, 0, null, 0,
+			Collections.<CollectionLogItem>emptyList(), null,
+			wikiOverride, recommendedItemIds);
+	}
+
+	@Test
+	public void getEffectiveWikiStrategyUrl_derivesFromSourceNameWithUnderscores()
+	{
+		CollectionLogSource graardor = makeSourceWith573("General Graardor", null, null, null);
+		assertEquals(
+			"https://oldschool.runescape.wiki/w/General_Graardor/Strategies",
+			graardor.getEffectiveWikiStrategyUrl());
+	}
+
+	@Test
+	public void getEffectiveWikiStrategyUrl_returnsOverrideVerbatimWhenSet()
+	{
+		String url = "https://oldschool.runescape.wiki/w/Theatre_of_Blood/Strategies";
+		CollectionLogSource tob = makeSourceWith573("Theatre of Blood", url, null, null);
+		assertEquals(url, tob.getEffectiveWikiStrategyUrl());
+	}
+
+	@Test
+	public void getEffectiveWikiStrategyUrl_emptyOverrideFallsBackToDerivedUrl()
+	{
+		CollectionLogSource s = makeSourceWith573("Cerberus", "", null, null);
+		assertEquals("https://oldschool.runescape.wiki/w/Cerberus/Strategies",
+			s.getEffectiveWikiStrategyUrl());
+	}
+
+	@Test
+	public void getEffectiveWikiStrategyUrl_singleWordSourceName()
+	{
+		CollectionLogSource s = makeSourceWith573("Cerberus", null, null, null);
+		assertEquals("https://oldschool.runescape.wiki/w/Cerberus/Strategies",
+			s.getEffectiveWikiStrategyUrl());
+	}
+
+	// ========================================================================
+	// #573 — source-level recommended item rollup with optional override
+	// ========================================================================
+
+	@Test
+	public void getEffectiveRecommendedItemIds_returnsOverrideWhenSet()
+	{
+		List<Integer> override = Arrays.asList(11802, 12817, 4151);
+		CollectionLogSource s = makeSourceWith573("Test", null, override, null);
+		assertEquals(override, s.getEffectiveRecommendedItemIds());
+	}
+
+	@Test
+	public void getEffectiveRecommendedItemIds_emptyOverrideRollsUpFromSteps()
+	{
+		GuidanceStep step = stepWithRecommendedIds(Arrays.asList(100, 200));
+		CollectionLogSource s = makeSourceWith573("Test", null,
+			Collections.<Integer>emptyList(), Collections.singletonList(step));
+
+		assertEquals(Arrays.asList(100, 200), s.getEffectiveRecommendedItemIds());
+	}
+
+	@Test
+	public void getEffectiveRecommendedItemIds_nullOverrideRollsUpUnionAcrossSteps()
+	{
+		GuidanceStep s1 = stepWithRecommendedIds(Arrays.asList(100, 200));
+		GuidanceStep s2 = stepWithRecommendedIds(Arrays.asList(200, 300)); // dedupe 200
+		GuidanceStep s3 = stepWithRecommendedIds(Arrays.asList(400));
+		CollectionLogSource s = makeSourceWith573("Test", null, null, Arrays.asList(s1, s2, s3));
+
+		assertEquals("Rollup must dedupe and preserve insertion order",
+			Arrays.asList(100, 200, 300, 400), s.getEffectiveRecommendedItemIds());
+	}
+
+	@Test
+	public void getEffectiveRecommendedItemIds_skipsNullAndNonPositiveIds()
+	{
+		GuidanceStep s1 = stepWithRecommendedIds(Arrays.asList(0, -1, 100, null));
+		CollectionLogSource s = makeSourceWith573("Test", null, null, Collections.singletonList(s1));
+
+		assertEquals(Collections.singletonList(100), s.getEffectiveRecommendedItemIds());
+	}
+
+	@Test
+	public void getEffectiveRecommendedItemIds_emptyEverythingReturnsEmpty()
+	{
+		CollectionLogSource s = makeSourceWith573("Test", null, null, Collections.<GuidanceStep>emptyList());
+		assertTrue(s.getEffectiveRecommendedItemIds().isEmpty());
+	}
+
+	@Test
+	public void getEffectiveRecommendedItemIds_skipsStepsWithNullRecommendedList()
+	{
+		GuidanceStep withRec = stepWithRecommendedIds(Arrays.asList(100));
+		GuidanceStep withoutRec = stepWithRecommendedIds(null);
+		CollectionLogSource s = makeSourceWith573("Test", null, null,
+			Arrays.asList(withoutRec, withRec, withoutRec));
+
+		assertEquals(Collections.singletonList(100), s.getEffectiveRecommendedItemIds());
+	}
+
+	/**
+	 * Builds a minimal {@link GuidanceStep} carrying only the
+	 * {@code recommendedItemIds} field — every other slot is zero/empty/null.
+	 * Mirrors the pattern used in {@code GuidanceStepTest#stepWithOverrides}.
+	 */
+	private static GuidanceStep stepWithRecommendedIds(List<Integer> recommendedItemIds)
+	{
+		return new GuidanceStep(
+			"desc",
+			null,           // perItemStepDescription
+			0, 0, 0,        // worldX, worldY, worldPlane
+			0, null, null, null,  // npcId, perItemNpcId, interactAction, dialogOptions
+			null, null,     // travelTip, requiredItemIds
+			null,           // perItemRequiredItemIds
+			recommendedItemIds,
+			null,           // perItemRecommendedItemIds
+			CompletionCondition.MANUAL,
+			0, 0, 0, 0,    // completionItemId, completionItemCount, completionDistance, completionNpcId
+			null,           // completionNpcIds
+			null,           // worldMessage
+			0, null, null,  // objectId, objectIds, objectInteractAction
+			null, null,     // highlightItemIds, groundItemIds
+			null,           // completionChatPattern
+			0, 0,           // completionVarbitId, completionVarbitValue
+			false,          // useItemOnObject
+			0,              // objectMaxDistance
+			null,           // objectFilterTiles
+			null,           // highlightWidgetIds
+			0, 0,           // loopBackToStep, loopCount
+			null,           // skipIfHasAnyItemIds
+			null,           // dynamicItemObjectTiers
+			null,           // completionZone
+			null,           // conditionalAlternatives
+			null,           // section
+			null,           // waypoints
+			null            // dynamicTargetEvaluator
+		);
 	}
 }
