@@ -245,6 +245,76 @@ public class DetailViewBuilderTest
 		assertEquals("Activator must NOT fire when stopping guidance", -1, activatorItemId.get());
 	}
 
+	/**
+	 * Regression coverage for #576 — the step-control STOP icon used to stop
+	 * guidance without flipping the source-level Guide Me / Stop Guidance button
+	 * back to "Guide Me", leaving the two buttons desynced. After the fix, the
+	 * builder's {@code syncGuidanceState(false, null)} fan-out reaches the
+	 * currently-rendered detail panel and reverts its button.
+	 */
+	@Test
+	public void syncGuidanceStateFlipsStopGuidanceButtonBackToGuideMe() throws Exception
+	{
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+		when(requirementsChecker.isAccessible(anyString())).thenReturn(true);
+
+		// Render the detail view in the "currently guiding this source" state so the
+		// source-level button reads "Stop Guidance".
+		builder.populate(target, item, source, true, source, () -> { });
+		ItemDetailPanel detail = (ItemDetailPanel) target.getComponent(0);
+		assertNotNull("Detail view should expose a Stop Guidance button before sync",
+			findFirstButton(detail, "Stop Guidance"));
+
+		// Simulate the step-control STOP icon path: GuidanceOverlayCoordinator
+		// .deactivateGuidance -> OverlayDeactivator -> panel.setGuidanceState(false, null, null)
+		// -> detailViewBuilder.syncGuidanceState(false, null).
+		builder.syncGuidanceState(false, null);
+		javax.swing.SwingUtilities.invokeAndWait(() -> { /* flush EDT */ });
+
+		assertNotNull("After sync the detail button must read 'Guide Me'",
+			findFirstButton(detail, "Guide Me"));
+		assertEquals("Stop Guidance button must no longer be present after sync",
+			null, findFirstButton(detail, "Stop Guidance"));
+	}
+
+	/**
+	 * Guards the inverse direction: when guidance is re-activated for the same
+	 * source from another surface (e.g. the Top Pick "Guide Me" button), the
+	 * detail-view button should flip into "Stop Guidance" mode without needing a
+	 * detail-view rebuild.
+	 */
+	@Test
+	public void syncGuidanceStateFlipsGuideMeButtonToStopGuidanceWhenActivatedElsewhere() throws Exception
+	{
+		when(collectionState.isItemObtained(anyInt())).thenReturn(false);
+		when(requirementsChecker.isAccessible(anyString())).thenReturn(true);
+
+		builder.populate(target, item, source, false, null, () -> { });
+		ItemDetailPanel detail = (ItemDetailPanel) target.getComponent(0);
+		assertNotNull("Initial detail view should show 'Guide Me'",
+			findFirstButton(detail, "Guide Me"));
+
+		builder.syncGuidanceState(true, source);
+		javax.swing.SwingUtilities.invokeAndWait(() -> { /* flush EDT */ });
+
+		assertNotNull("After sync the detail button must read 'Stop Guidance'",
+			findFirstButton(detail, "Stop Guidance"));
+	}
+
+	/**
+	 * Sync calls before any detail view has been populated must be a safe no-op
+	 * (the user may toggle guidance from the Quick Guide panel before ever
+	 * entering detail view).
+	 */
+	@Test
+	public void syncGuidanceStateBeforePopulateIsNoOp()
+	{
+		// No populate() call — lastDetail is still null.
+		builder.syncGuidanceState(false, null);
+		builder.syncGuidanceState(true, source);
+		// Reaching this line without an NPE is the assertion.
+	}
+
 	private static javax.swing.JButton findFirstButton(java.awt.Container root, String labelSubstring)
 	{
 		for (Component c : root.getComponents())
