@@ -396,15 +396,30 @@ def match_landmark(
     Skips matches where the landmark is referenced relatively
     ("south of Mount Quidamortem" should NOT anchor to Mount Quidamortem).
 
-    Tie-break: longest matched token wins; for same-length collisions, the
-    landmark whose stored coord is closest to the source coord wins. This
-    addresses the Aleph-flagged Neypotzli vs Cam Torum collision and keeps
-    multi-zone landmark seeds deterministic.
+    Tie-break (in order):
+      1. Within-tolerance candidates beat outside-tolerance ones. This fixes
+         the multi-city longest-token bias (#594): for
+         "contracts in Falador, Varrock, Hosidius, and Ardougne" at Falador's
+         coord, the harness previously picked Ardougne because the bare
+         token was longer than Varrock and "Falador" wasn't an alias. Now any
+         candidate inside its own radius wins regardless of token length, so
+         the closest cited city wins on multi-city sources.
+      2. Longest matched token. Disambiguates landmarks whose names share
+         prefixes (e.g. "Catacombs of Kourend" vs "Catacombs of Kourend
+         underground").
+      3. Smallest coord distance. Breaks remaining same-length collisions
+         deterministically (Aleph-flagged Neypotzli vs Cam Torum, #563).
+      4. Alphabetical name as a final deterministic tiebreaker.
+
+    Only applies the "within tolerance" preference when source coords were
+    supplied. Callers that don't pass them get the legacy longest-token-first
+    behaviour.
     """
     if not location_desc or not landmarks:
         return None
     lower = location_desc.lower()
-    candidates: list[tuple[str, dict[str, Any], int, int]] = []
+    candidates: list[tuple[str, dict[str, Any], int, int, int]] = []
+    have_source_coords = source_x is not None and source_y is not None
     for name, data in landmarks.items():
         names_to_check = [name] + list(data.get("aliases", []))
         for n in names_to_check:
@@ -415,26 +430,33 @@ def match_landmark(
             preceding = lower[max(0, idx - 16) : idx]
             if any(prep in preceding for prep in RELATIVE_PREPOSITIONS):
                 continue  # relative reference; skip
-            # Compute coord distance to source if both available; otherwise
-            # use a large sentinel so length is the sole sort key.
             lx, ly = data.get("worldX"), data.get("worldY")
             if (
-                source_x is not None
-                and source_y is not None
+                have_source_coords
                 and isinstance(lx, int)
                 and isinstance(ly, int)
             ):
                 d = tile_distance(source_x, source_y, lx, ly)
+                # Resolve per-landmark radius the same way the coord check
+                # does, so the "in-tolerance" preference here matches what
+                # the downstream check would accept.
+                raw_radius = data.get("radius")
+                if isinstance(raw_radius, int) and raw_radius > 0:
+                    landmark_tolerance = raw_radius
+                else:
+                    landmark_tolerance = COORD_TOLERANCE_TILES
+                in_tolerance_rank = 0 if d <= landmark_tolerance else 1
             else:
                 d = 10**9
-            candidates.append((name, data, len(n), d))
+                in_tolerance_rank = 1  # neutral; never wins over real matches
+            candidates.append((name, data, len(n), d, in_tolerance_rank))
             break
     if not candidates:
         return None
-    # Primary: longest matched token. Secondary: smallest coord distance.
-    # Tertiary: alphabetical name (stable, deterministic).
-    candidates.sort(key=lambda c: (-c[2], c[3], c[0]))
-    name, data, _, _ = candidates[0]
+    # Sort key: (1) prefer in-tolerance, (2) longest token, (3) closest coord,
+    # (4) alphabetical name for deterministic order.
+    candidates.sort(key=lambda c: (c[4], -c[2], c[3], c[0]))
+    name, data, _, _, _ = candidates[0]
     return name, data
 
 
