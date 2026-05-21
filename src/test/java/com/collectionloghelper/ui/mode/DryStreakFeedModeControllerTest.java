@@ -250,6 +250,6 @@ public class DryStreakFeedModeControllerTest
 			0,
 			Collections.emptyList(),
 			null /* metaAuthoredDate */
-		);
+		, null, null);
 	}
 }

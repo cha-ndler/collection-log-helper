@@ -385,6 +385,6 @@ public class DryStreakAnalyzerTest
 			0,          // cumulativeTrackThreshold
 			items,
 			null        // metaAuthoredDate
-		);
+		, null, null);
 	}
 }

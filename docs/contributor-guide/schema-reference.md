@@ -61,6 +61,9 @@ Each source represents a single collection log category (e.g., "General Graardor
 | `requirements` | object | No | Quest and skill requirements. See [Requirements](#requirements) |
 | `guidanceSteps` | array | No | Ordered list of `GuidanceStep` objects. See [`GuidanceStep`](#guidancestep) |
 | `items` | array | Yes | List of `CollectionLogItem` objects |
+| `metaAuthoredDate` | string | No | ISO 8601 date (e.g. `"2024-01-01"`) indicating when meta-sensitive recommendations were last verified. Rendered as a color-coded age badge in the source header |
+| `wikiStrategyUrl` | string | No | Optional override for the wiki Strategies page URL surfaced by the "Wiki Strategy" button. Defaults to a URL derived from the source name with spaces replaced by underscores: `https://oldschool.runescape.wiki/w/<name>/Strategies` |
+| `recommendedItemIds` | int array | No | Optional source-level recommended-gear list rendered in the source detail header. When absent, the strip rolls up the union of per-step `recommendedItemIds` across all guidance steps |
 
 ## `CollectionLogItem`
 

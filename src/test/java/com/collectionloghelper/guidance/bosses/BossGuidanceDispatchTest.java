@@ -118,7 +118,7 @@ public class BossGuidanceDispatchTest
 			jsonSteps,
 			helperKey,
 			null, 0, null, 0, items, null /* metaAuthoredDate */
-		);
+		, null, null);
 	}
 
 	@Test

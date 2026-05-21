@@ -79,6 +79,31 @@ public class CollectionLogSource
 	@Nullable
 	String metaAuthoredDate;
 
+	/**
+	 * Optional override for the wiki Strategies page URL surfaced in the source
+	 * header (#573). When null, {@link #getEffectiveWikiStrategyUrl()} derives a
+	 * URL from the source name (e.g. {@code General Graardor} →
+	 * {@code https://oldschool.runescape.wiki/w/General_Graardor/Strategies}).
+	 * Sources whose wiki strategy page does not match the derived URL can override
+	 * with the full URL.
+	 *
+	 * <p>Backward compatible: existing JSON without this field deserialises to null.
+	 */
+	@Nullable
+	String wikiStrategyUrl;
+
+	/**
+	 * Optional source-level recommended gear item IDs (#573). When set, the
+	 * source-header recommended chip strip uses this list verbatim. When null,
+	 * {@link #getEffectiveRecommendedItemIds()} rolls up the union of per-step
+	 * {@code recommendedItemIds} from {@link #guidanceSteps} so authors don't
+	 * have to maintain two parallel lists.
+	 *
+	 * <p>Backward compatible: existing JSON without this field deserialises to null.
+	 */
+	@Nullable
+	List<Integer> recommendedItemIds;
+
 	public RewardType getRewardType()
 	{
 		return rewardType != null ? rewardType : RewardType.DROP;
@@ -146,5 +171,68 @@ public class CollectionLogSource
 			return locationDescription;
 		}
 		return name;
+	}
+
+	/**
+	 * Returns the effective wiki Strategies page URL for this source (#573).
+	 *
+	 * <p>If {@link #wikiStrategyUrl} is non-blank, returns it verbatim. Otherwise
+	 * derives a URL from {@link #name} using the OSRS Wiki convention of
+	 * replacing spaces with underscores and appending {@code /Strategies}:
+	 * <pre>https://oldschool.runescape.wiki/w/&lt;urlEncodedName&gt;/Strategies</pre>
+	 *
+	 * <p>The derived URL is a best-effort guess. Sources whose wiki page name
+	 * differs from the source name should set {@link #wikiStrategyUrl} explicitly.
+	 *
+	 * @return a non-null wiki Strategies URL
+	 */
+	public String getEffectiveWikiStrategyUrl()
+	{
+		if (wikiStrategyUrl != null && !wikiStrategyUrl.isEmpty())
+		{
+			return wikiStrategyUrl;
+		}
+		String slug = name == null ? "" : name.replace(' ', '_');
+		return "https://oldschool.runescape.wiki/w/" + slug + "/Strategies";
+	}
+
+	/**
+	 * Returns the effective source-level recommended-item IDs for the source
+	 * header chip strip (#573).
+	 *
+	 * <p>If {@link #recommendedItemIds} is non-empty, returns it. Otherwise rolls
+	 * up the union of per-step {@code recommendedItemIds} across
+	 * {@link #guidanceSteps}, preserving insertion order and deduplicating.
+	 * Returns an empty list when neither field has data.
+	 *
+	 * @return a non-null, possibly empty list of item IDs
+	 */
+	public List<Integer> getEffectiveRecommendedItemIds()
+	{
+		if (recommendedItemIds != null && !recommendedItemIds.isEmpty())
+		{
+			return recommendedItemIds;
+		}
+		if (guidanceSteps == null || guidanceSteps.isEmpty())
+		{
+			return java.util.Collections.emptyList();
+		}
+		java.util.LinkedHashSet<Integer> rollup = new java.util.LinkedHashSet<>();
+		for (GuidanceStep step : guidanceSteps)
+		{
+			List<Integer> stepIds = step.getRecommendedItemIds();
+			if (stepIds == null)
+			{
+				continue;
+			}
+			for (Integer id : stepIds)
+			{
+				if (id != null && id > 0)
+				{
+					rollup.add(id);
+				}
+			}
+		}
+		return new java.util.ArrayList<>(rollup);
 	}
 }
