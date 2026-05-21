@@ -96,10 +96,27 @@ public class StepProgressView extends JPanel
 
 	/**
 	 * Inner-width budget (px) used to force Swing's JLabel HTML renderer to
-	 * word-wrap long step descriptions. Matches the usable column of the
-	 * default RuneLite plugin panel (~250px minus padding/scroll gutters).
+	 * word-wrap long step descriptions.
+	 *
+	 * <p>RuneLite's {@code PluginPanel.PANEL_WIDTH} is 225px. The shell panel
+	 * adds a 6px empty border on each side (12px total) and this widget adds a
+	 * 1px line border plus a 6px empty border on each side (~14px total). When
+	 * scrollable content is present the vertical scrollbar consumes another
+	 * 17px ({@code PluginPanel.SCROLLBAR_WIDTH}). That leaves roughly
+	 * {@code 225 - 12 - 14 - 17 = 182px} of usable label width in the worst
+	 * case.
+	 *
+	 * <p>An earlier #497 fix used 220px, which is wider than the worst-case
+	 * usable space. When Swing's HTML renderer is asked to lay out at a width
+	 * larger than the paint-clip region, glyphs past the clip get dropped
+	 * silently (no end-of-string ellipsis), producing the mid-string
+	 * truncation reported in #575 (e.g. "Enter the Bandos boss room and
+	 * Graardor" — missing "kill General"). 170px sits a few px below the
+	 * worst-case usable width so the JLabel never asks the layout engine for
+	 * more horizontal space than the panel can actually paint, matching the
+	 * conservative wrap width used by {@link com.collectionloghelper.ui.ItemDetailPanel}.
 	 */
-	private static final int PANEL_TEXT_WRAP_WIDTH_PX = 220;
+	private static final int PANEL_TEXT_WRAP_WIDTH_PX = 170;
 
 	private static final Color BG = new Color(25, 35, 55);
 	private static final Color SECTION_HEADER_FG = new Color(200, 200, 200);
@@ -481,9 +498,13 @@ public class StepProgressView extends JPanel
 			// past the panel's clip region — visible on clue tiers with long
 			// step text such as "Buy a sleek hairband from the Falador hairdresser",
 			// where the unwrapped label rendered outside the panel box (#483).
+			// HTML-escape the description so any future text containing reserved
+			// characters (<, >, &) does not corrupt the rendered output. The
+			// step number/total are plain integers and are safe to inline.
 			stepProgressLabel.setText(
 				"<html><body style='width:" + PANEL_TEXT_WRAP_WIDTH_PX + "px'>Step "
-					+ current + "/" + total + ": " + description + "</body></html>");
+					+ current + "/" + total + ": " + escapeHtml(description)
+					+ "</body></html>");
 			nextStepButton.setVisible(isManual);
 
 			if (groups.isEmpty())
@@ -901,6 +922,35 @@ public class StepProgressView extends JPanel
 			BufferedImage scaled = scaleImage(asyncImage, 28, 28);
 			iconLabel.setIcon(new ImageIcon(scaled));
 		}
+	}
+
+	/**
+	 * Escapes HTML reserved characters in plain-text input so it can be safely
+	 * embedded inside a Swing HTML-rendered JLabel body. Returns an empty string
+	 * for {@code null} input. Used only for the step-description text which is
+	 * authored as plain text in {@code drop_rates.json} but might one day include
+	 * characters that the HTML renderer would otherwise interpret as markup.
+	 */
+	static String escapeHtml(String input)
+	{
+		if (input == null)
+		{
+			return "";
+		}
+		StringBuilder out = new StringBuilder(input.length());
+		for (int i = 0; i < input.length(); i++)
+		{
+			char c = input.charAt(i);
+			switch (c)
+			{
+				case '&': out.append("&amp;"); break;
+				case '<': out.append("&lt;"); break;
+				case '>': out.append("&gt;"); break;
+				case '"': out.append("&quot;"); break;
+				default: out.append(c); break;
+			}
+		}
+		return out.toString();
 	}
 
 	private static BufferedImage scaleImage(BufferedImage source, int width, int height)
