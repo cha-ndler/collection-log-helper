@@ -163,6 +163,73 @@ public class StepProgressViewTest
 		assertTrue("showStep must make widget visible", view.isVisible());
 	}
 
+	// ── Step-description wrap regression tests (issue #575) ─────────────────
+
+	/**
+	 * Regression for issue #575. The General Graardor kill-step description was
+	 * truncated mid-string in the side panel because the HTML wrap width was
+	 * larger than the worst-case usable label width in a RuneLite plugin panel
+	 * (panel = 225px, minus shell border, widget border, and scrollbar gutter).
+	 *
+	 * <p>The fix lowers the wrap width and HTML-escapes the description. This test
+	 * asserts the rendered HTML contains the full description verbatim — if the
+	 * wrap width drifts back up or the escaping breaks the inline text, this
+	 * test fails before the panel ever ships.
+	 */
+	@Test
+	public void showStep_longDescription_fullTextPresentInRenderedHtml() throws Exception
+	{
+		String longDescription = "Enter the Bandos boss room and kill General Graardor";
+		view.showStep(4, 5, longDescription, false, Collections.emptyList());
+		flushEdt();
+
+		JLabel label = findStepProgressLabel(view);
+		assertNotNull("Step-progress label must be present", label);
+		String rendered = label.getText();
+		assertNotNull("Step-progress label text must be set", rendered);
+		assertTrue("Rendered label must contain full description verbatim — "
+			+ "no mid-string truncation (#575). Actual: " + rendered,
+			rendered.contains(longDescription));
+	}
+
+	/**
+	 * Reserved HTML characters in the description must be escaped, otherwise the
+	 * Swing HTML renderer would either treat them as markup or silently corrupt
+	 * the output. This contract is asserted by checking that the rendered label
+	 * text escapes &lt;, &gt;, and &amp; rather than passing them through raw.
+	 */
+	@Test
+	public void showStep_descriptionWithHtmlReservedChars_escapesThem() throws Exception
+	{
+		String descriptionWithMarkup = "Use <halberd> & break the door";
+		view.showStep(1, 1, descriptionWithMarkup, false, Collections.emptyList());
+		flushEdt();
+
+		JLabel label = findStepProgressLabel(view);
+		assertNotNull("Step-progress label must be present", label);
+		String rendered = label.getText();
+		assertNotNull(rendered);
+		assertTrue("Reserved '<' character must be escaped. Actual: " + rendered,
+			rendered.contains("&lt;halberd&gt;"));
+		assertTrue("Reserved '&' character must be escaped. Actual: " + rendered,
+			rendered.contains("&amp;"));
+	}
+
+	/**
+	 * Pure helper-level test for the HTML escape function. Keeps the contract
+	 * pinned independently of the EDT-driven render path so it surfaces clearly
+	 * if the escape logic is ever broken.
+	 */
+	@Test
+	public void escapeHtml_handlesAllReservedCharsAndNull()
+	{
+		assertEquals("", StepProgressView.escapeHtml(null));
+		assertEquals("plain text", StepProgressView.escapeHtml("plain text"));
+		assertEquals("&lt;b&gt;bold&lt;/b&gt;", StepProgressView.escapeHtml("<b>bold</b>"));
+		assertEquals("a &amp; b", StepProgressView.escapeHtml("a & b"));
+		assertEquals("she said &quot;hi&quot;", StepProgressView.escapeHtml("she said \"hi\""));
+	}
+
 	// ── Required-items subsection tests (B.5.1) ─────────────────────────────
 
 	/**
@@ -661,6 +728,23 @@ public class StepProgressViewTest
 						return label;
 					}
 				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the step-progress label — the first direct-child {@link JLabel} of
+	 * the StepProgressView itself (constructed first in the BoxLayout). Used by
+	 * the #575 wrap-regression tests.
+	 */
+	private static JLabel findStepProgressLabel(StepProgressView view)
+	{
+		for (Component c : view.getComponents())
+		{
+			if (c instanceof JLabel)
+			{
+				return (JLabel) c;
 			}
 		}
 		return null;
