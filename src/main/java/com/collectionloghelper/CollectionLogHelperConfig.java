@@ -51,8 +51,10 @@ public interface CollectionLogHelperConfig extends Config
 
 	@ConfigItem(
 		keyName = "enableCollectionLogNetImport",
-		name = "collectionlog.net import",
-		description = "Show a 'Sync from collectionlog.net' button in the panel to import your obtained items from collectionlog.net",
+		name = "collectionlog.net Sync",
+		description = "Imports your collection log progress from collectionlog.net using your RSN. "
+			+ "Marks obtained items in the panel without needing to open the in-game collection log first. "
+			+ "Optional — without this, items are detected automatically once you open the collection log in-game.",
 		section = syncSection,
 		position = 0
 	)
@@ -289,9 +291,9 @@ public interface CollectionLogHelperConfig extends Config
 	@ConfigItem(
 		keyName = "enableTempleOsrsSync",
 		name = "TempleOSRS KC Sync",
-		description = "Enable the 'Sync KC from TempleOSRS' button in the panel. "
-			+ "When clicked the plugin fetches your boss/activity kill counts from "
-			+ "templeosrs.com and stores them locally for use in efficiency scoring.",
+		description = "Pulls your kill counts for tracked activities from TempleOSRS. "
+			+ "Powers the Dry Streak panel and tightens kill-time estimates per source. "
+			+ "Optional — without this, kill counts are learned per session via the Learn Kill Times option below.",
 		section = syncSection,
 		position = 1
 	)
