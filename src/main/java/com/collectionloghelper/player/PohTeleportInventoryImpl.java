@@ -32,6 +32,10 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
+import net.runelite.api.GameState;
+import net.runelite.api.events.GameStateChanged;
+import net.runelite.api.events.VarbitChanged;
+import net.runelite.client.eventbus.Subscribe;
 
 /**
  * RuneLite-backed implementation of {@link PohTeleportInventory}.
@@ -179,6 +183,34 @@ public class PohTeleportInventoryImpl implements PohTeleportInventory
 				+ "nexus={}, digsite={}, xerics={}",
 			varbitJewelleryBoxBasic, varbitJewelleryBoxFancy, varbitJewelleryBoxOrnate,
 			varbitPortalNexus, varbitDigsitePendant, varbitXericsTalisman);
+	}
+
+	/**
+	 * Refreshes the cached POH teleport snapshot whenever any varbit changes.
+	 *
+	 * <p>A broad refresh is acceptable here: only four varbits are read per
+	 * call, each via an {@code O(1)} client API call, so the cost is negligible
+	 * compared with the brittleness of filtering on the exact POH varbit IDs
+	 * (which can churn across game updates).
+	 */
+	@Subscribe
+	public void onVarbitChanged(VarbitChanged event)
+	{
+		refresh();
+	}
+
+	/**
+	 * Refreshes the POH teleport snapshot on transition to
+	 * {@link GameState#LOGGED_IN} so the first read after login sees fresh data.
+	 * Other transitions are ignored.
+	 */
+	@Subscribe
+	public void onGameStateChanged(GameStateChanged event)
+	{
+		if (event.getGameState() == GameState.LOGGED_IN)
+		{
+			refresh();
+		}
 	}
 
 	/** {@inheritDoc} */

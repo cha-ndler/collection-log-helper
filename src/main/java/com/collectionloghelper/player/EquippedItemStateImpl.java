@@ -36,6 +36,8 @@ import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.ItemID;
+import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.client.eventbus.Subscribe;
 
 /**
  * RuneLite-backed implementation of {@link EquippedItemState}.
@@ -220,6 +222,23 @@ public class EquippedItemStateImpl implements EquippedItemState
 			log.warn("EquippedItemState refresh failed", e);
 			// Retain previous snapshot rather than replacing with potentially
 			// partial data.
+		}
+	}
+
+	/**
+	 * Refreshes the equipment snapshot when the worn-items container changes.
+	 *
+	 * <p>Compares {@link ItemContainerChanged#getContainerId()} against the
+	 * {@code WORN} container id (the int-valued gameval constant). Other
+	 * containers (inventory, bank, etc.) are ignored so this handler is a
+	 * no-op for the vast majority of {@link ItemContainerChanged} events.
+	 */
+	@Subscribe
+	public void onItemContainerChanged(ItemContainerChanged event)
+	{
+		if (event.getContainerId() == net.runelite.api.gameval.InventoryID.WORN)
+		{
+			refresh();
 		}
 	}
 

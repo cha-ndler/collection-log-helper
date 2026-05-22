@@ -31,6 +31,8 @@ import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Varbits;
+import net.runelite.api.events.VarbitChanged;
+import net.runelite.client.eventbus.Subscribe;
 
 /**
  * RuneLite-backed implementation of {@link DiaryTierState}.
@@ -236,6 +238,23 @@ public class DiaryTierStateImpl implements DiaryTierState
 			}
 		}
 		log.debug("DiaryTierState refreshed");
+	}
+
+	/**
+	 * Refreshes the diary cache on any {@link VarbitChanged} event.
+	 *
+	 * <p>A broad refresh is used deliberately: filtering the event against the
+	 * 48 diary varbit IDs would require maintaining a 48-entry hot-path
+	 * {@code IntHashSet} lookup that must be kept in sync with every diary
+	 * varbit constant rename. Reading 48 client varbits per event is an
+	 * {@code O(1)} client API call per read and is dwarfed by the rest of the
+	 * varbit pipeline (Slayer task refresh, sequencer dispatch, etc.) already
+	 * running on the same event.
+	 */
+	@Subscribe
+	public void onVarbitChanged(VarbitChanged event)
+	{
+		refresh();
 	}
 
 	/** {@inheritDoc} */
