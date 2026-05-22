@@ -4965,6 +4965,9 @@
     "worldY": 3573,
     "worldPlane": 0,
     "killTimeSeconds": 1029,
+    "requirements": {
+      "skills": []
+    },
     "items": [
       {
         "itemId": 20997,
@@ -5102,7 +5105,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Xeric's talisman to teleport to the Chambers, or use the Raids board at Mount Quidamortem",
+        "description": "Use Xeric's talisman to teleport to Mount Quidamortem, or use the Raids board outside. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Vasa/Vespula, and a Dragon claws or Bandos godsword spec for Olm head phases",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5113,7 +5116,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room - combat, puzzle, and resource rooms - on your way to the final boss",
+        "description": "Enter the raid instance via the chamber barrier. Scout the rotation and prepare your inventory for the room order",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5121,7 +5124,15 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat the Great Olm in the final room. Dodge head attacks, run from crystals, and watch for flame wall specials",
+        "description": "Clear the combat, puzzle, and resource rooms on your way to the final chamber. Bank surplus loot at the supply chest before descending to Olm",
+        "worldX": 1233,
+        "worldY": 3573,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Defeat the Great Olm. Use Protect from Magic against the green-orb attack and Protect from Missiles against crystal chunks; dodge the falling crystals and step out of the fire walls. Spec the head between phases and watch for the red/green/purple sphere swap",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5131,7 +5142,8 @@
         "recommendedItemIds": [
           6685,
           3024,
-          13652
+          13652,
+          20997
         ]
       }
     ],
@@ -5146,6 +5158,9 @@
     "worldY": 3573,
     "worldPlane": 0,
     "killTimeSeconds": 1200,
+    "requirements": {
+      "skills": []
+    },
     "items": [
       {
         "itemId": 20997,
@@ -5343,7 +5358,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Xeric's talisman to teleport to the Chambers, or use the Raids board at Mount Quidamortem",
+        "description": "Use Xeric's talisman to teleport to Mount Quidamortem, or use the Raids board outside. Challenge Mode hits harder and lasts longer - bring Tbow, full brews/restores, extra prayer potions, and a Bandos godsword or Dragon claws spec for Olm",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5354,7 +5369,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the raid and scout rooms. Complete each room - combat, puzzle, and resource rooms - on your way to the final boss",
+        "description": "Enter the raid instance and toggle Challenge Mode at the barrier. Confirm the team scale and scout the rotation",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5362,7 +5377,15 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat the Great Olm in the final room. Dodge head attacks, run from crystals, and watch for flame wall specials",
+        "description": "Clear all combat, puzzle, and resource rooms. CM enemies have higher defence and damage - eat more aggressively and refresh prayer at every supply chest",
+        "worldX": 1233,
+        "worldY": 3573,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Defeat the Great Olm in Challenge Mode. Same prayer rules apply (Protect from Magic vs green orbs, Protect from Missiles vs crystal chunks) but head phases hit much harder; dodge falling crystals, walk through fire walls only with a water source, and spec the head every cycle",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -5372,7 +5395,8 @@
         "recommendedItemIds": [
           6685,
           3024,
-          13652
+          13652,
+          20997
         ]
       }
     ],
@@ -5543,7 +5567,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Drakan's medallion to teleport to Ver Sinhaza",
+        "description": "Use Drakan's medallion to teleport to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + diamond bolts (e) for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -5554,7 +5578,23 @@
         "section": "Travel"
       },
       {
-        "description": "Form a team and enter the Theatre. Fight through: The Maiden, Pestilent Bloat, Nylocas, Sotetseg, Xarpus, and finally Verzik Vitur",
+        "description": "Form a team at the party room and enter the Theatre. Cannot teleport out once inside - escape crystal or death are the only exits",
+        "worldX": 3650,
+        "worldY": 3218,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Clear The Maiden, Pestilent Bloat, Nylocas, Sotetseg, and Xarpus. Refresh supplies at each chest and prep gear for the Verzik fight",
+        "worldX": 3650,
+        "worldY": 3218,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Defeat Verzik Vitur. P1: pray Protect from Magic and dagger the Athanatos. P2: dodge red ball, switch prayers to match the Nylocas colour. P3: Tbow with diamond bolts (e), pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -5564,7 +5604,9 @@
         "recommendedItemIds": [
           6685,
           3024,
-          27690
+          27690,
+          22325,
+          20997
         ]
       }
     ],
@@ -5742,7 +5784,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Drakan's medallion to teleport to Ver Sinhaza",
+        "description": "Use Drakan's medallion to teleport to Ver Sinhaza. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + diamond bolts (e), Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -5753,7 +5795,23 @@
         "section": "Travel"
       },
       {
-        "description": "Form a team and enter the Theatre in Hard Mode. Fight through all rooms and defeat Verzik Vitur",
+        "description": "Form a team and toggle Hard Mode at the party room. Once inside the Theatre you cannot teleport out - escape crystal or death are the only exits",
+        "worldX": 3650,
+        "worldY": 3218,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Clear The Maiden, Pestilent Bloat, Nylocas (HM adds extra waves), Sotetseg, and Xarpus. Refresh supplies at each chest; conserve prayer potions for the Verzik fight",
+        "worldX": 3650,
+        "worldY": 3218,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Defeat Verzik Vitur in Hard Mode. P1: pray Protect from Magic and dagger the Athanatos. P2: dodge red ball, match prayer to Nylocas colour - HM spawns are denser. P3: Tbow with diamond bolts (e), pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -5763,7 +5821,9 @@
         "recommendedItemIds": [
           6685,
           3024,
-          27690
+          27690,
+          22325,
+          20997
         ]
       }
     ],
@@ -5777,6 +5837,12 @@
     "worldY": 2784,
     "worldPlane": 0,
     "killTimeSeconds": 1029,
+    "requirements": {
+      "quests": [
+        "BENEATH_CURSED_SANDS"
+      ],
+      "skills": []
+    },
     "items": [
       {
         "itemId": 26219,
@@ -6013,7 +6079,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use the Pharaoh's sceptre to teleport to the Necropolis, or use fairy ring AKP and run south",
+        "description": "Use the Pharaoh's sceptre to teleport to the Necropolis, or fairy ring AKP and run south. Bring Tbow or Bow of faerdhinen, Osmumten's fang for stab phases, Tumeken's shadow if owned, full brews/restores and prayer potions; set invocations under 150 raid level for entry-mode loot",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
@@ -6022,7 +6088,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the Tombs lobby. Set your invocation level and form a team or go solo",
+        "description": "Enter the Tombs lobby and set your invocations. Confirm raid level under 150 for entry mode, then form a team or queue solo at the party board",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
@@ -6030,7 +6096,15 @@
         "section": "Travel"
       },
       {
-        "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras), then defeat the Wardens boss at the end",
+        "description": "Complete the four path rooms in your preferred order: Crondis (Zebak), Het (Akkha), Apmeken (Ba-Ba), Scabaras (Kephri). Refresh supplies between rooms",
+        "worldX": 3234,
+        "worldY": 2784,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Defeat the Wardens. P1/P2: swap prayers to match the active Warden's style and break the obelisk. P3 (Tumeken's Warden): pray Protect from Magic against the energy ball volleys, dodge the obelisk hand-slam, swap prayers when the Warden mimics Akkha/Zebak/Ba-Ba/Kephri attacks",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
@@ -6039,7 +6113,9 @@
         "recommendedItemIds": [
           6685,
           3024,
-          21003
+          21003,
+          20997,
+          26219
         ],
         "section": "Combat"
       }
@@ -6055,6 +6131,12 @@
     "worldY": 2784,
     "worldPlane": 0,
     "killTimeSeconds": 1200,
+    "requirements": {
+      "quests": [
+        "BENEATH_CURSED_SANDS"
+      ],
+      "skills": []
+    },
     "items": [
       {
         "itemId": 26219,
@@ -6291,27 +6373,45 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use the Pharaoh's sceptre to teleport to the Necropolis, or use fairy ring AKP and run south",
+        "description": "Use the Pharaoh's sceptre to teleport to the Necropolis, or fairy ring AKP and run south. Bring Tbow or Bow of faerdhinen, Osmumten's fang, Tumeken's shadow if owned, full brews/restores; aim for invocations totalling raid level 300-450 for solid loot efficiency before entering",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Enter the Tombs lobby. Set your invocation level and form a team or go solo",
+        "description": "Enter the Tombs lobby and set your invocations to raid level 300. Form a team or queue solo at the party board",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras), then defeat the Wardens boss at the end",
+        "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras). At raid level 300 bosses hit noticeably harder - refresh supplies and prayer between rooms",
+        "worldX": 3234,
+        "worldY": 2784,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Defeat the Wardens at raid level 300. P1/P2: rotate prayers to match the active style and break the obelisk. P3 (Tumeken's Warden): pray Protect from Magic against the energy balls, dodge the obelisk hand-slam, swap prayers when the Warden mimics Akkha/Zebak/Ba-Ba/Kephri attacks",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your completed Tombs of Amascut: Expert Mode count is:"
+        "completionChatPattern": "Your completed Tombs of Amascut: Expert Mode count is:",
+        "recommendedItemIds": [
+          6685,
+          3024,
+          21003,
+          20997,
+          26219
+        ],
+        "section": "Combat"
       }
     ],
     "ironKillTimeSeconds": 1500,
@@ -6325,6 +6425,12 @@
     "worldY": 2784,
     "worldPlane": 0,
     "killTimeSeconds": 1440,
+    "requirements": {
+      "quests": [
+        "BENEATH_CURSED_SANDS"
+      ],
+      "skills": []
+    },
     "items": [
       {
         "itemId": 26219,
@@ -6561,27 +6667,45 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use the Pharaoh's sceptre to teleport to the Necropolis, or use fairy ring AKP and run south",
+        "description": "Use the Pharaoh's sceptre to teleport to the Necropolis, or fairy ring AKP and run south. At raid level 500 bring Tumeken's shadow or Tbow, Osmumten's fang, full brews/restores, extra prayer potions and a Soulreaper axe spec; gear must be top-tier or kill times balloon",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Enter the Tombs lobby. Set your invocation level and form a team or go solo",
+        "description": "Enter the Tombs lobby and set your invocations to raid level 500. Form a team or queue solo at the party board",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras), then defeat the Wardens boss at the end",
+        "description": "Complete the four path rooms at raid level 500. Bosses have +200% hitpoints/defence and +150% damage; eat aggressively, refresh prayer at every chest, and use the Lightbearer to spam Shadow specs",
+        "worldX": 3234,
+        "worldY": 2784,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Defeat the Wardens at raid level 500. P1/P2: rotate prayers to match the active style; obelisk health-bar is much longer. P3 (Tumeken's Warden): pray Protect from Magic against the energy balls, dodge the obelisk hand-slam, swap prayers exactly when the Warden mimics Akkha/Zebak/Ba-Ba/Kephri attacks - mistakes cost 30+ hp at this scale",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your completed Tombs of Amascut: Expert Mode count is:"
+        "completionChatPattern": "Your completed Tombs of Amascut: Expert Mode count is:",
+        "recommendedItemIds": [
+          6685,
+          3024,
+          21003,
+          27275,
+          26219
+        ],
+        "section": "Combat"
       }
     ],
     "ironKillTimeSeconds": 1680,
