@@ -39,6 +39,7 @@ import com.collectionloghelper.player.SkillCapePerkState;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.util.EnumSet;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -98,6 +99,56 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 
 	/** Cap on sub-milestones rendered to avoid the overlay dominating the viewport. */
 	private static final int MAX_SUBMILESTONES_SHOWN = 8;
+
+	/**
+	 * Quest enum entries that the in-game "Quests Completed: N/M" header does not count.
+	 *
+	 * <p>RuneLite's {@link Quest} enum exposes three kinds of entry:
+	 * <ol>
+	 *   <li>Main quests — counted by the in-game Quest List header.</li>
+	 *   <li>Miniquests — tracked in the Quest List but excluded from the N/M tally.</li>
+	 *   <li>Recipe for Disaster sub-entries — the parent {@code RECIPE_FOR_DISASTER} is a
+	 *       main quest, but its 10 sub-entries are tracked separately and excluded.</li>
+	 * </ol>
+	 *
+	 * <p>Filtering this set out of {@code Quest.values()} makes our overlay numerator
+	 * and denominator match the in-game tab on any account (#487).
+	 *
+	 * <p>List sourced from the OSRS Wiki Miniquest category and the RFD sub-quest list.
+	 * Add to this set when Jagex releases a new miniquest.
+	 */
+	private static final Set<Quest> NON_MAIN_QUEST_ENTRIES = EnumSet.of(
+		// 19 miniquests (OSRS Wiki: Miniquest category)
+		Quest.ALFRED_GRIMHANDS_BARCRAWL,
+		Quest.ENTER_THE_ABYSS,
+		Quest.THE_GENERALS_SHADOW,
+		Quest.BARBARIAN_TRAINING,
+		Quest.SKIPPY_AND_THE_MOGRES,
+		Quest.CURSE_OF_THE_EMPTY_LORD,
+		Quest.LAIR_OF_TARN_RAZORLOR,
+		Quest.BEAR_YOUR_SOUL,
+		Quest.THE_ENCHANTED_KEY,
+		Quest.MAGE_ARENA_I,
+		Quest.FAMILY_PEST,
+		Quest.MAGE_ARENA_II,
+		Quest.IN_SEARCH_OF_KNOWLEDGE,
+		Quest.DADDYS_HOME,
+		Quest.THE_FROZEN_DOOR,
+		Quest.HOPESPEARS_WILL,
+		Quest.INTO_THE_TOMBS,
+		Quest.HIS_FAITHFUL_SERVANTS,
+		Quest.VALE_TOTEMS,
+		// 10 Recipe for Disaster sub-entries (parent RECIPE_FOR_DISASTER stays in count)
+		Quest.RECIPE_FOR_DISASTER__ANOTHER_COOKS_QUEST,
+		Quest.RECIPE_FOR_DISASTER__MOUNTAIN_DWARF,
+		Quest.RECIPE_FOR_DISASTER__WARTFACE__BENTNOZE,
+		Quest.RECIPE_FOR_DISASTER__PIRATE_PETE,
+		Quest.RECIPE_FOR_DISASTER__LUMBRIDGE_GUIDE,
+		Quest.RECIPE_FOR_DISASTER__EVIL_DAVE,
+		Quest.RECIPE_FOR_DISASTER__SKRACH_UGLOGWEE,
+		Quest.RECIPE_FOR_DISASTER__SIR_AMIK_VARZE,
+		Quest.RECIPE_FOR_DISASTER__KING_AWOWOGEI,
+		Quest.RECIPE_FOR_DISASTER__CULINAROMANCER);
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
@@ -191,22 +242,12 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 			addRow("Task", "none");
 		}
 
-		// Quest counts (#487):
-		//
-		// The RuneLite {@link Quest} enum mixes main quests, miniquests, and other
-		// quest-list sub-entries, so a naive `Quest.values()` walk produces a number
-		// (e.g. 207) that is larger than the in-game Quest List "Completed: X/Y"
-		// figure (e.g. 179/179 on a maxed account). We expose two complementary
-		// values so authors can cross-check against the live client:
-		//
-		//   - "Quests" — finished / total over the Quest enum surface. This is
-		//     the value our partial-quest detection (C5) actually operates on.
-		//   - "Quest points" — the in-game QP varplayer. Matches the number shown
-		//     under the Quest List header verbatim, giving an unambiguous sanity
-		//     check that doesn't depend on enum membership.
+		// Quest counts (#487): walk Quest.values() but filter NON_MAIN_QUEST_ENTRIES
+		// so the row matches the in-game "Quests Completed: N/M" header. Quest points
+		// is the raw QP varplayer for a second independent cross-check.
 		int finishedCount = countFinishedQuests();
-		int totalQuestEntries = Quest.values().length;
-		addRow("Quests", finishedCount + "/" + totalQuestEntries);
+		int totalMainQuests = Quest.values().length - NON_MAIN_QUEST_ENTRIES.size();
+		addRow("Quests", finishedCount + "/" + totalMainQuests);
 		addRow("Quest points", String.valueOf(safeVarp(VarPlayer.QUEST_POINTS)));
 
 		int pohLocation = safeVarbit(VARBIT_POH_LOCATION);
@@ -407,6 +448,10 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 		int count = 0;
 		for (Quest quest : Quest.values())
 		{
+			if (NON_MAIN_QUEST_ENTRIES.contains(quest))
+			{
+				continue;
+			}
 			try
 			{
 				if (quest.getState(client) == QuestState.FINISHED)
