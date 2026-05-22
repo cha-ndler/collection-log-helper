@@ -4198,18 +4198,22 @@
       }
     ],
     "locationDescription": "King Black Dragon Lair, Wilderness",
-    "travelTip": "Burning amulet -> Lava Maze",
+    "travelTip": "Burning amulet -> Lava Maze, then climb down the ladder and pull the lever",
     "npcId": 239,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Lava Maze in the Wilderness",
+        "description": "Travel to the Lava Maze in the Wilderness with anti-dragon shield (or DFS), extended antifire potion, antipoison, and a stab weapon or ranged setup",
         "worldX": 3028,
         "worldY": 3842,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
         "completionZone": [3015, 3830, 3080, 10265, 0],
-        "travelTip": "Burning amulet to Lava Maze (level 41 Wilderness)"
+        "travelTip": "Burning amulet -> Lava Maze (level 41 Wilderness)",
+        "requiredItemIds": [
+          1540,
+          2452
+        ]
       },
       {
         "description": "Climb down the ladder west of the Lava Maze and pull the lever to teleport to the KBD Lair",
@@ -4221,7 +4225,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the King Black Dragon. Use anti-dragon shield + antifire potion. Protect from Magic and use ranged or melee with stab weapons",
+        "description": "Kill the King Black Dragon. Use Protect from Magic, keep an antifire potion active (the dragon also has a venom-laced melee attack), and fight with ranged or melee stab. The KBD uses dragonfire, magic, melee, ranged and a poison breath, so anti-dragon shield plus antifire is non-negotiable",
         "worldX": 2269,
         "worldY": 4705,
         "worldPlane": 0,
@@ -4490,7 +4494,7 @@
       }
     ],
     "locationDescription": "Silk Chasm, Wilderness",
-    "travelTip": "Burning amulet -> Bandit Camp",
+    "travelTip": "Burning amulet -> Bandit Camp, then run east to the Silk Chasm cave",
     "mutuallyExclusiveSources": [
       "Kalphite Queen",
       "Chaos Elemental",
@@ -4502,12 +4506,13 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Silk Chasm cave entrance in the Wilderness. Use burning amulet to Bandit Camp and run east",
+        "description": "Travel to the Silk Chasm cave entrance in the Wilderness with anti-pk gear, a Voidwaker / DWH spec weapon if available, and at least one super combat plus restore. Burning amulet to Bandit Camp then run east",
         "worldX": 3321,
         "worldY": 3794,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Burning amulet -> Bandit Camp + run east"
       },
       {
         "description": "Enter the Cave Entrance to access the Silk Chasm",
@@ -4516,10 +4521,11 @@
         "worldPlane": 0,
         "objectId": 47077,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 4
       },
       {
-        "description": "Kill Venenatis. Use Protect from Magic and watch for the web attack",
+        "description": "Kill Venenatis with melee using Protect from Magic. Venenatis attacks with magic and melee; the web special binds you in place and drains prayer/run energy, so pre-pot prayer and step away when the web lands. Kill the Venenatis spiderlings on sight - they hit hard and heal her if left alive",
         "worldX": 3332,
         "worldY": 3734,
         "worldPlane": 0,
@@ -4592,7 +4598,7 @@
       }
     ],
     "locationDescription": "Vet'ion's Rest, Wilderness",
-    "travelTip": "Burning amulet -> Bandit Camp",
+    "travelTip": "Burning amulet -> Chaos Temple, then run east to Vet'ion's Rest",
     "mutuallyExclusiveSources": [
       "Kalphite Queen",
       "Chaos Elemental",
@@ -4604,15 +4610,24 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Vet'ion in the Wilderness. Use burning amulet to Chaos Temple and run east",
+        "description": "Travel to Vet'ion's Rest in the Wilderness with a crush weapon (Inquisitor's mace, Soulreaper axe, or Saradomin sword), prayer potions, Saradomin brews, and a Voidwaker / DWH spec. Burning amulet to Chaos Temple, then run east",
+        "worldX": 3196,
+        "worldY": 3776,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [3180, 3760, 3230, 3800, 0],
+        "travelTip": "Burning amulet -> Chaos Temple + run east"
+      },
+      {
+        "description": "Arrive at Vet'ion's Rest and stack supplies. Pre-pot Super Combat / Ranging and turn on Piety / Rigour before engaging - Vet'ion's first attack lands the tick you draw aggro",
         "worldX": 3220,
         "worldY": 3783,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 5
       },
       {
-        "description": "Kill Vet'ion. Use crush weapons (Inquisitor's mace ideal). Watch for the lightning attack and kill Skeletal Hellhounds quickly",
+        "description": "Kill Vet'ion. Use Protect from Magic for his magic attack and swap to Protect from Missiles when he switches to a ranged attack. He spawns Skeletal Hellhounds at 75%, 50%, and 25% HP - kill them immediately or they will overwhelm you. Use a crush weapon since his stab and slash defence are higher",
         "worldX": 3220,
         "worldY": 3783,
         "worldPlane": 0,
@@ -4678,7 +4693,7 @@
       }
     ],
     "locationDescription": "Callisto's Den, Wilderness",
-    "travelTip": "Burning amulet -> Lava Maze",
+    "travelTip": "Burning amulet -> Chaos Temple, then run south-east into Callisto's Den",
     "mutuallyExclusiveSources": [
       "Kalphite Queen",
       "Chaos Elemental",
@@ -4690,15 +4705,24 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Callisto in the Wilderness. Use burning amulet to Chaos Temple and run south-east",
+        "description": "Travel to Callisto's Den in the Wilderness with a melee setup (Bandos / Torva, Voidwaker, Saradomin brews) and prayer potions. Burning amulet to Chaos Temple, then run south-east",
+        "worldX": 3265,
+        "worldY": 3832,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [3250, 3820, 3310, 3870, 0],
+        "travelTip": "Burning amulet -> Chaos Temple + run south-east"
+      },
+      {
+        "description": "Arrive at Callisto's Den and pre-pot Super Combat. Turn on Piety and Protect from Melee before engaging; Callisto deals heavy melee damage even at full health",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 5
       },
       {
-        "description": "Kill Callisto. Use Verac's or Arclight. Watch for the knockback shockwave and the healing cubs - kill cubs first",
+        "description": "Kill Callisto with melee using Protect from Melee - Callisto only attacks with melee. Stand on his tile so the bear-stomp shockwave (knockback that unequips ranged shields and stalls combat) hits at melee range. Kill Callisto cubs immediately on spawn; they heal him if left alive",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
@@ -7161,20 +7185,23 @@
       }
     ],
     "locationDescription": "Barrows, east of Mort'ton",
-    "travelTip": "Barrows teleport (Arceuus), or Mort'ton teleport, or Fairy ring BKR",
+    "travelTip": "Barrows teleport (Arceuus 83 Magic), Barrows teleport tablet, or Fairy ring BKR",
     "guidanceSteps": [
       {
-        "description": "Teleport to Barrows using the Arceuus spellbook or Barrows teleport tablet",
+        "description": "Teleport to Barrows with a spade, food, prayer potions, and a weapon for each style (Magic for Ahrim, Ranged for Karil, Melee for the four Melee brothers). Verac ignores Protect prayers - bring high-defence armour for him",
         "worldX": 3565,
         "worldY": 3298,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
         "travelTip": "Barrows teleport (Arceuus 83 Magic), Barrows teleport tablet, or Fairy ring BKR",
+        "requiredItemIds": [
+          952
+        ],
         "section": "Travel"
       },
       {
-        "description": "Dig on Dharok's mound (north-east) and kill Dharok the Wretched",
+        "description": "Dig on Dharok's mound (north-east) and kill Dharok the Wretched. Dharok uses Melee and hits harder the lower his HP - use Protect from Melee and finish him quickly with Magic (his weakness)",
         "worldX": 3575,
         "worldY": 3298,
         "worldPlane": 0,
@@ -7193,7 +7220,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Ahrim's mound (centre) and kill Ahrim the Blighted",
+        "description": "Dig on Ahrim's mound (centre) and kill Ahrim the Blighted. Ahrim uses Magic and can drain your Strength - use Protect from Magic and attack with Ranged (his weakness)",
         "worldX": 3566,
         "worldY": 3289,
         "worldPlane": 0,
@@ -7208,7 +7235,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Verac's mound (north-west) and kill Verac the Defiled",
+        "description": "Dig on Verac's mound (north-west) and kill Verac the Defiled. Verac's flail ignores Protect from Melee and armour - use Protect from Melee anyway to halve the chance, wear high-prayer gear, and attack with Melee (he is weak to Crush)",
         "worldX": 3557,
         "worldY": 3298,
         "worldPlane": 0,
@@ -7223,7 +7250,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Torag's mound (south-west) and kill Torag the Corrupted",
+        "description": "Dig on Torag's mound (south-west) and kill Torag the Corrupted. Torag uses Melee and can drain run energy - use Protect from Melee and attack with Magic (his weakness)",
         "worldX": 3553,
         "worldY": 3283,
         "worldPlane": 0,
@@ -7238,7 +7265,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Karil's mound (south) and kill Karil the Tainted",
+        "description": "Dig on Karil's mound (south) and kill Karil the Tainted. Karil uses Ranged and can halve your Agility - use Protect from Missiles and attack with Magic (his weakness)",
         "worldX": 3566,
         "worldY": 3275,
         "worldPlane": 0,
@@ -7253,7 +7280,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Guthan's mound (south-east) and kill Guthan the Infested",
+        "description": "Dig on Guthan's mound (south-east) and kill Guthan the Infested. Guthan uses Melee and his warspear heals him on hit - use Protect from Melee and attack with Ranged (his weakness)",
         "worldX": 3577,
         "worldY": 3283,
         "worldPlane": 0,
@@ -7268,15 +7295,16 @@
         "section": "Combat"
       },
       {
-        "description": "Find the brother whose crypt has a tunnel entrance and climb down into the tunnels",
+        "description": "Find the brother whose crypt has a tunnel entrance and climb down into the tunnels. The unmarked tunnel rotates each trip - look for the brother whose sarcophagus has the climb-down option",
         "worldX": 3565,
         "worldY": 3298,
         "worldPlane": 0,
-        "completionCondition": "MANUAL",
+        "completionCondition": "PLAYER_ON_PLANE",
+        "completionPlane": 0,
         "section": "Loot"
       },
       {
-        "description": "Navigate the tunnel maze to the centre room and search the chest for loot",
+        "description": "Navigate the tunnel maze to the centre room and search the chest for loot. Tunnel monsters drain prayer per hit - quick-prayer Protect from Magic between rooms. The brother you have not yet killed will spawn from the chest; finish him before claiming loot",
         "worldX": 3551,
         "worldY": 9694,
         "worldPlane": 0,
@@ -7388,34 +7416,55 @@
       }
     ],
     "locationDescription": "Tempoross Cove, south of Al Kharid",
-    "travelTip": "Grouping tele -> Tempoross",
+    "travelTip": "Minigame Grouping teleport -> Tempoross, or sail from the Ruins of Unkah",
     "npcId": 10584,
     "interactAction": "Talk-to",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "FISHING",
+          "level": 35
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Use the Grouping teleport or sail from Al Kharid docks to reach Tempoross Cove",
+        "description": "Travel to Tempoross Cove with a harpoon, hammer, rope, and optional bucket of water. Bring food only if low-level - Spirit pool restores at the end of each game",
         "worldX": 3135,
         "worldY": 2840,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "travelTip": "Minigame Grouping teleport -> Tempoross",
+        "requiredItemIds": [
+          311,
+          2347
+        ],
         "section": "Travel"
       },
       {
-        "description": "Board the boat when a game is starting. Fish harpoonfish, cook them on the cannons, then load them into the cannons to fire at Tempoross",
-        "worldX": 3135,
-        "worldY": 2840,
+        "description": "Wait at the departure point and talk to the Ruins of Unkah ferryman when a new game begins; the boat will sail you to Tempoross",
+        "worldX": 3141,
+        "worldY": 2837,
         "worldPlane": 0,
-        "requiredItemIds": [
-          311
-        ],
-        "completionCondition": "MANUAL",
-        "section": "Skilling"
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [3027, 2940, 3060, 2970, 0],
+        "section": "Travel"
       },
       {
-        "description": "After defeating Tempoross, search the reward pool for collection log drops. Higher participation gives more reward rolls",
-        "worldX": 3135,
-        "worldY": 2840,
+        "description": "Fish harpoonfish at the dark cloud spots, then run to a cannon and cook (use Fish on Cannon) and load the harpoonfish into the cannon. Watch for storm clouds (move out before lightning) and fix broken masts / totem poles when prompted",
+        "worldX": 3027,
+        "worldY": 2954,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Skilling",
+        "loopBackToStep": 2,
+        "loopCount": 6
+      },
+      {
+        "description": "When Tempoross sinks to 0 essence and is subdued, run to a reward pool and Fill your inventory to collect rewards. Higher total points (aim for 4500+) give more rolls at the unique table",
+        "worldX": 3027,
+        "worldY": 2954,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Tempoross subdued count is:",
@@ -7510,36 +7559,56 @@
       }
     ],
     "locationDescription": "Wintertodt Camp, northern Zeah",
-    "travelTip": "Games necklace -> Wintertodt",
+    "travelTip": "Games necklace -> Wintertodt Camp, or Lunar Isle teleport + boat from Port Sarim",
     "npcId": 7374,
     "interactAction": "Talk-to",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "FIREMAKING",
+          "level": 50
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Use a games necklace to teleport directly to the Wintertodt Camp, or take the boat from Port Sarim",
+        "description": "Travel to the Wintertodt Camp with a tinderbox, an axe (rune or better), a knife (optional but speeds up fletching), warm clothing (Pyromancer / Hunter outfit / hooded cloak) to reduce cold damage, and Rejuvenation potions or food",
         "worldX": 1621,
         "worldY": 3997,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "section": "Travel"
-      },
-      {
-        "description": "Enter the Wintertodt arena when the boss spawns. Chop bruma roots, fletch into kindling, then feed the braziers to earn points",
-        "worldX": 1621,
-        "worldY": 3997,
-        "worldPlane": 0,
-        "objectId": 29322,
-        "objectInteractAction": "Enter",
+        "travelTip": "Games necklace -> Wintertodt",
         "requiredItemIds": [
           590,
           1351
         ],
-        "completionCondition": "MANUAL",
-        "section": "Skilling"
+        "section": "Travel"
       },
       {
-        "description": "Earn 500+ points per game for maximum reward crates. Open crates for Pyromancer outfit, Tome of fire, and Phoenix pet",
-        "worldX": 1621,
+        "description": "Enter the Wintertodt arena via the doors when the next game starts (timer counts down at the Wintertodt camp)",
+        "worldX": 1630,
+        "worldY": 3982,
+        "worldPlane": 0,
+        "objectId": 29322,
+        "objectInteractAction": "Enter",
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [1605, 1565, 1645, 1605, 0],
+        "section": "Travel"
+      },
+      {
+        "description": "Chop bruma roots, fletch them into kindling (use Knife on bruma root), and feed kindling to the brazier closest to a Pyromancer. Re-light the brazier when it goes out and heal the Pyromancer with Rejuvenation potions. Move away from snow falls before they land and avoid the brazier energy bursts",
+        "worldX": 1626,
+        "worldY": 1577,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Skilling",
+        "loopBackToStep": 2,
+        "loopCount": 5
+      },
+      {
+        "description": "When Wintertodt's health hits zero, claim Supply crates from the box. Aim for 500+ points per game (4 crates) or 850+ (5 crates / Pyromancer outfit fast). Open crates for the Pyromancer outfit, Bruma torch, Warm gloves, Tome of fire pages, and Phoenix pet",
+        "worldX": 1640,
         "worldY": 3997,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
@@ -22976,44 +23045,47 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Open hard clue scrolls from bosses and high-level monsters. Complete multi-step clue chains with puzzle boxes",
+        "description": "Travel to the Grand Exchange with a spade, a charged ring of duelling / games necklace / amulet of glory for clue teleports, light food, and a Stamina potion. The Clue Scroll plugin in RuneLite will guide each individual step",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Grand Exchange teleport",
+        "requiredItemIds": [
+          952
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Buy Ninja impling jars from the Grand Exchange.",
+        "description": "Obtain a hard clue scroll from a slayer task drop (Jellies, Bloodvelds), boss drop (Sarachnis, Demonic gorillas), or by opening Ninja impling jars (1/25 per jar). Hard clues can also drop from hard clue bottles while fishing",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Loot",
+        "loopBackToStep": 1,
+        "loopCount": 1
       },
       {
-        "description": "Open jars to obtain hard clue scrolls (1/25 rate per jar).",
-        "worldX": 3165,
-        "worldY": 3487,
-        "worldPlane": 0,
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Hard clues add coordinate dig clues (bring spade), puzzle boxes, and Saradomin / Zamorak wizard fights - use Protect prayers matching the wizard's combat style",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Combat"
       },
       {
-        "description": "Open reward casket for collection log items.",
+        "description": "Open the reward casket for collection log items. Hard clue caskets roll the third-age, ranger, musketeer, and god-armour tables",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Reward"
       }
     ],
     "afkLevel": 1,
-    "travelTip": "Obtain from bosses, Jellies, or hard clue bottles while fishing"
+    "travelTip": "Obtain from slayer monsters, bosses, hard clue bottles, or Ninja impling jars"
   },
   {
     "name": "Elite Treasure Trails",
@@ -23440,45 +23512,48 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Open elite clue scrolls from bosses, Barrows, and elite content. Solve coordinate and map clues across Gielinor",
+        "description": "Travel to the Grand Exchange with a spade, a Stethoscope, a sextant + watch + chart (for coordinate clues), light-imbuable teleport jewellery, a Stamina potion, and combat gear for the elite double-agents and demi-boss fights",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Grand Exchange teleport",
+        "requiredItemIds": [
+          952
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Buy Dragon impling jars from the Grand Exchange.",
+        "description": "Obtain an elite clue scroll from a boss drop (Vorkath, Zulrah, Cerberus, Hydra, Barrows reward casket), a slayer monster, or by opening Dragon impling jars (1/50 per jar). Elite clues also drop from elite clue geodes while mining gem rocks and motherlode mine",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Loot",
+        "loopBackToStep": 1,
+        "loopCount": 1
       },
       {
-        "description": "Open jars to obtain elite clue scrolls (1/50 rate per jar).",
-        "worldX": 3165,
-        "worldY": 3487,
-        "worldPlane": 0,
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Elite clues add cryptic chains, hot/cold coordinates, dual cryptic clues with two locations per step, and level 84-210 elite double-agents - bring Protect from Melee and a Ranged or Magic weapon",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Combat"
       },
       {
-        "description": "Open reward casket for collection log items.",
+        "description": "Open the reward casket for collection log items. Elite caskets are the only source of Third-age druidic, Ring of nature, and Fremennik kilt drops",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Reward"
       }
     ],
     "ironKillTimeSeconds": 6000,
     "afkLevel": 1,
-    "travelTip": "Obtain from bosses, Barrows, or elite clue geodes while mining"
+    "travelTip": "Obtain from bosses, Barrows, slayer tasks, elite clue geodes while mining, or Dragon impling jars"
   },
   {
     "name": "Master Treasure Trails",
@@ -23836,38 +23911,50 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Open master clue scrolls from Watson or other masters. Complete the hardest clue steps requiring high stats and quest access",
+        "description": "Travel to the Grand Exchange with a spade, sextant + watch + chart, mirror shield (for double-agents), all teleport jewellery, a Stamina potion, prayer potions, and high-tier combat gear for the level 108-210 master double-agents and elite monster fights",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Grand Exchange teleport",
+        "requiredItemIds": [
+          952
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Obtain a master clue by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a rare drop from high-level PvM.",
-        "worldX": 3165,
-        "worldY": 3487,
+        "description": "Obtain a master clue scroll by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a 1/100 rare drop from completing any easy/medium/hard/elite casket",
+        "worldX": 1646,
+        "worldY": 3577,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "npcId": 7670,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL",
+        "section": "Loot",
+        "loopBackToStep": 1,
+        "loopCount": 1
       },
       {
-        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Master clues add 3-step puzzle chains, towel-bearing emote clues requiring full skilling outfits, and master double-agents that hit through Protect prayers - bring a Saradomin godsword for healing or Protect from Melee + brews",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Combat"
       },
       {
-        "description": "Open reward casket for collection log items.",
+        "description": "Open the reward casket for collection log items. Master caskets are the exclusive source of the 3rd-age druidic top tier (with elite), Bloodhound pet, and master-clue-only emote items (Ankou outfit, Mummy outfit, Bucket helm (g))",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Reward"
       }
     ],
     "ironKillTimeSeconds": 7200,
     "afkLevel": 1,
-    "travelTip": "Watson in Hosidius (trade in one of each tier), or from bosses"
+    "travelTip": "Trade one of each lower-tier clue to Watson in Hosidius, or as a rare drop from completing any easy/medium/hard/elite casket"
   },
   {
     "name": "Hard Treasure Trail Rewards (Rare)",
