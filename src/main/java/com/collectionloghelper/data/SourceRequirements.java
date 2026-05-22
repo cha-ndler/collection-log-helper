@@ -25,6 +25,7 @@
 package com.collectionloghelper.data;
 
 import java.util.List;
+import javax.annotation.Nullable;
 import lombok.Value;
 
 @Value
@@ -38,4 +39,40 @@ public class SourceRequirements
 	 * May be {@code null} when the source has no diary prerequisites.
 	 */
 	List<String> diaries;
+
+	/**
+	 * POH-fixture teleport requirements, e.g. {@code "MOUNTED_GLORY"},
+	 * {@code "JEWELLERY_BOX_FANCY"}. Each entry must be a
+	 * {@link com.collectionloghelper.player.PohTeleport} enum constant name.
+	 *
+	 * <p>Evaluated AND-wise against
+	 * {@code PohTeleportInventory.hasTeleport(...)}: the requirement is met
+	 * only when every listed teleport is available. Unrecognised names are
+	 * treated as unmet and logged.
+	 *
+	 * <p>{@code null} or empty when the source/alternative has no POH-fixture
+	 * prerequisite. Added by Tier B0 as a C6 prerequisite.
+	 */
+	@Nullable
+	List<String> pohTeleports;
+
+	/**
+	 * Equipped-item requirements expressed as RuneLite {@code ItemID} integers.
+	 *
+	 * <p>Evaluated AND-wise against
+	 * {@code EquippedItemState.hasEquipped(int)}: the requirement is met
+	 * only when every listed item ID is currently in the player's equipment
+	 * container.
+	 *
+	 * <p>Charge-aware fallback (e.g. an equipped Drakan's medallion at 0
+	 * charges) is the responsibility of the authoring layer — a conditional
+	 * alternative that depends on a chargeable equip should always be paired
+	 * with a non-equipped fallback alternative. See C6 §5 Q4 in
+	 * {@code docs/contributor-guide/c6-top-20-player-state-wiring-scoping.md}.
+	 *
+	 * <p>{@code null} or empty when the source/alternative has no equipped-item
+	 * prerequisite. Added by Tier B0 as a C6 prerequisite.
+	 */
+	@Nullable
+	List<Integer> equippedItemIds;
 }
