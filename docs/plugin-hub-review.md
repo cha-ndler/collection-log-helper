@@ -78,8 +78,8 @@ Previous baseline: `d4a2dbb1` (months ago, pre-Wave-21). This refresh reflects t
 | Test suite present | Green | 102 test files under `src/test/java`; 1,390 unit tests passing (0 skipped, 0 failures, 0 errors) | Up from 503 tests at previous baseline; JUnit 5.10.2 + Mockito 5.14.2 (migrated in #590/#591) |
 | No `System.out.println` / unguarded debug output in production code | Green | The only `pw.println()` calls in `EfficiencyCalculator.java` write to a developer export `PrintWriter` behind an explicit file-export method, not to stdout | |
 | Config group name is descriptive (avoids collision) | Green | `CollectionLogHelperConfig.java` line 34: `@ConfigGroup("collectionloghelper")` - fully qualified, no collision risk | Reviewer feedback from #11534 called out vague group names; ours is sufficiently specific |
-| Files within 800-line guideline | Green | All four #503 god-class targets are now under the 800 floor: `CollectionLogHelperPlugin.java` 555, `CollectionLogHelperPanel.java` 677, `GuidanceOverlayCoordinator.java` 600, `GuidanceSequencer.java` 683. `EfficiencyCalculator.java` at 851 is the only remaining file over 800 and is on the Tier B watch-list. | #503 closed across Waves 19-21; see "Post-#503 wins" section below |
-| No god-objects / obvious single-class doing everything | Green | Largest functional class is now `EfficiencyCalculator.java` at 851 LOC. Plugin class shrank from 2,192 -> 1,281 -> 555 (4x reduction). Panel class shrank from 1,661 -> 677. | Architecture decomposition substantially complete |
+| Files within 800-line guideline | Green | All five previously-flagged files now under the 800 floor: `CollectionLogHelperPlugin.java` 488, `CollectionLogHelperPanel.java` 605, `GuidanceOverlayCoordinator.java` 557, `GuidanceSequencer.java` 623, `EfficiencyCalculator.java` 777. | #503 closed across Waves 19-21; see "Post-#503 wins" section below |
+| No god-objects / obvious single-class doing everything | Green | Largest functional class is now `EfficiencyCalculator.java` at 777 LOC. Plugin class shrank from 2,192 -> 1,281 -> 488 (4.5x reduction). Panel class shrank from 1,661 -> 605. | Architecture decomposition substantially complete |
 | Overlay render-path allocations | Yellow | `plugin_hub_validate` flags 6 `new Color(...)` allocations in `DialogHighlightOverlay`, `GroundItemHighlightOverlay`, `WidgetHighlightOverlay`, and `WorldMapRouteOverlay`. All six are gated by a cache-invalidation check (`if (!color.equals(cachedColor)) { cachedFill = new Color(...); ... }`) so they only allocate on config-color change, not per-frame. | Validator false positive - reports the allocation site without analyzing the cache guard. Could replace with `ColorUtil.colorWithAlpha(base, alpha)` for stylistic consistency but no measurable performance benefit since the guard already eliminates per-frame allocation. Not a blocker. |
 
 ---
@@ -120,13 +120,13 @@ Previous baseline: `d4a2dbb1` (months ago, pre-Wave-21). This refresh reflects t
 ### Items resolved since previous baseline (`d4a2dbb1` -> `d1ee45ad`)
 
 1. **Red -> Green: `runelite-plugin` Gradle plugin missing** — Verified against `runelite/example-plugin` canonical template that no such convention plugin is required by Hub. The `plugin_hub_validate` finding is a false positive; will follow up against the validator tool itself.
-2. **Red -> Green: Files over 800 LOC** — All four #503 god-class targets now under the 800 floor (Plugin 555, Panel 677, Coordinator 600, Sequencer 683). Closed across Waves 19-21 of the roast remediation orchestration (#503).
+2. **Red -> Green: Files over 800 LOC** — All five previously-flagged files now under the 800 floor (Plugin 488, Panel 605, Coordinator 557, Sequencer 623, EfficiencyCalculator 777). Closed across Waves 19-21 of the roast remediation orchestration (#503); EfficiencyCalculator subsequently dropped below floor through downstream cleanups.
 3. **Yellow -> Green: `tags` filler word** — `helper` removed; current 6 tags are all activity-specific (`collection`, `clog`, `slayer`, `clues`, `efficiency`, `guide`).
 4. **Yellow -> Green: god-object trajectory on Plugin/Panel** — Plugin class shrank 2,192 -> 555 (4x reduction); Panel 1,661 -> 677 (2.5x reduction).
 
 ### Post-#503 wins worth noting at resubmission
 
-- **All four god-class targets under 800 LOC floor** (closes #503): Plugin 555, Panel 677, Coordinator 600, Sequencer 683.
+- **All five flagged files under 800 LOC floor** (closes #503 and clears the previous EfficiencyCalculator residual): Plugin 488, Panel 605, Coordinator 557, Sequencer 623, EfficiencyCalculator 777.
 - **Test suite tripled**: 503 -> 1,390 unit tests, all passing.
 - **JUnit 5 + Mockito 5 migration** (#590, #591): test framework on current LTS-era stack.
 - **F1/F2 ScheduledExecutorService injection** (#592): no more self-constructed executor threads in sync components.
@@ -134,7 +134,6 @@ Previous baseline: `d4a2dbb1` (months ago, pre-Wave-21). This refresh reflects t
 
 ### Remaining items (low priority, not blocking submission)
 
-- `EfficiencyCalculator.java` at 851 LOC (51 over floor) - on Tier B watch-list, no specific milestone yet.
 - 6 `new Color(...)` allocations in overlays could stylistically migrate to `ColorUtil.colorWithAlpha(base, alpha)`; current cache-guarded sites are functionally equivalent and not a perf concern.
 
 ### How to use this document

@@ -232,6 +232,24 @@
   e.g. `CerberusHelper`). Closes [#502](../../issues/502) (PR
   [#508](../../pull/508)).
 
+### Docs
+
+- **Hub-readiness state reconciled to current master** — `docs/ROADMAP.md`,
+  `docs/plugin-hub-review.md`, and `docs/plugin-hub-resubmission.md`
+  updated to reflect the post-Pass-2 state of the codebase: B4.3.3
+  (Cyclopes Defenders per-item descriptions, PR [#444](../../pull/444))
+  flipped from in-progress to done; B.5.5 (per-step world-map arrow +
+  destination icon, [#430](../../issues/430)) flipped from partial to
+  done after the CLH-distinct orange `#FF8C00` arrow colour landed via
+  PR [#583](../../pull/583); A6 status note rewritten to record that
+  every 2026-05-16 validation issue (#483–#488) is now closed and the
+  audit umbrella [#495](../../issues/495) is ready to close; LOC table
+  re-measured against current master (Plugin 488, Panel 605,
+  Coordinator 557, Sequencer 623, EfficiencyCalculator 777 — all five
+  under the 800 floor); earliest hub-resubmission push date pushed
+  from 2026-05-22 to 2026-05-28 to reflect today's documentation,
+  test-infra, and Pass-2 cleanup merges.
+
 ### Changed (build hygiene)
 
 - **Allocation-free guard-fail paths in `DynamicTargetManager` +
