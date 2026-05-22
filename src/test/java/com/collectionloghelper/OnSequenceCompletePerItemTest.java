@@ -102,7 +102,9 @@ public class OnSequenceCompletePerItemTest
 		handler.setCallbacks(
 			() -> { /* flag toggle no-op for this test */ },
 			() -> rankedSources,
-			activateGuidanceCallback);
+			activateGuidanceCallback,
+			() -> true,   // slot unlocked — these tests verify advance-to-next behaviour
+			() -> null);
 		when(config.autoAdvanceGuidance()).thenReturn(true);
 	}
 

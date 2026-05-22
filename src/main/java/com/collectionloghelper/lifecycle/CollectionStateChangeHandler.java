@@ -95,6 +95,18 @@ public class CollectionStateChangeHandler
 	private Runnable onSequenceCompleteFlags;
 	private Supplier<List<ScoredItem>> rankedSourcesSupplier;
 	private BiConsumer<CollectionLogSource, Integer> activateGuidanceCallback;
+	/**
+	 * Returns {@code true} when the active source's target collection-log slot
+	 * was unlocked during the sequence that just completed.  Wired to
+	 * {@link com.collectionloghelper.guidance.GuidanceSequencer#wasTargetSlotUnlocked()}.
+	 */
+	private Supplier<Boolean> targetSlotUnlockedSupplier;
+	/**
+	 * Returns the currently active {@link CollectionLogSource}, or {@code null}
+	 * when no guidance is active.  Wired to
+	 * {@link com.collectionloghelper.guidance.GuidanceSequencer#getActiveSource()}.
+	 */
+	private Supplier<CollectionLogSource> activeSourceSupplier;
 
 	@Inject
 	public CollectionStateChangeHandler(
@@ -120,19 +132,33 @@ public class CollectionStateChangeHandler
 	public void setCallbacks(
 		Runnable onSequenceCompleteFlags,
 		Supplier<List<ScoredItem>> rankedSourcesSupplier,
-		BiConsumer<CollectionLogSource, Integer> activateGuidanceCallback)
+		BiConsumer<CollectionLogSource, Integer> activateGuidanceCallback,
+		Supplier<Boolean> targetSlotUnlockedSupplier,
+		Supplier<CollectionLogSource> activeSourceSupplier)
 	{
 		this.onSequenceCompleteFlags = onSequenceCompleteFlags;
 		this.rankedSourcesSupplier = rankedSourcesSupplier;
 		this.activateGuidanceCallback = activateGuidanceCallback;
+		this.targetSlotUnlockedSupplier = targetSlotUnlockedSupplier;
+		this.activeSourceSupplier = activeSourceSupplier;
 	}
 
 	/**
 	 * Callback invoked by {@code GuidanceOverlayCoordinator} when a guidance
-	 * sequence completes. Flags a panel rebuild and ranked-source recompute,
-	 * and -- if auto-advance is enabled -- activates guidance for the next
-	 * top efficiency pick (passing the best-item target id so per-item
-	 * overrides activate without requiring a user right-click).
+	 * sequence completes.  Flags a panel rebuild and ranked-source recompute.
+	 *
+	 * <p>Auto-advance (when {@link CollectionLogHelperConfig#autoAdvanceGuidance()}
+	 * is enabled) now gates on whether the active source's target collection-log
+	 * slot actually unlocked during the sequence:
+	 * <ul>
+	 *   <li>Slot unlocked → advance to the next top efficiency pick as before.</li>
+	 *   <li>Slot NOT unlocked → re-activate guidance on the same source so the
+	 *       player loops (e.g., repeated boss kills) until the drop arrives.</li>
+	 * </ul>
+	 *
+	 * <p>This prevents the plugin from abandoning a source mid-grind just because
+	 * the player completed the last guidance step (e.g., "kill boss") without
+	 * receiving the target item.
 	 */
 	public void handleSequenceComplete()
 	{
@@ -144,7 +170,31 @@ public class CollectionStateChangeHandler
 		{
 			return;
 		}
-		if (rankedSourcesSupplier == null || activateGuidanceCallback == null)
+		if (activateGuidanceCallback == null)
+		{
+			return;
+		}
+
+		boolean slotUnlocked = targetSlotUnlockedSupplier != null
+			&& Boolean.TRUE.equals(targetSlotUnlockedSupplier.get());
+
+		if (!slotUnlocked)
+		{
+			// Target slot did not unlock — loop back on the same source.
+			CollectionLogSource currentSource = activeSourceSupplier != null
+				? activeSourceSupplier.get()
+				: null;
+			if (currentSource != null)
+			{
+				log.debug("Sequence complete but target slot not unlocked for {} — re-activating",
+					currentSource.getName());
+				activateGuidanceCallback.accept(currentSource, null);
+				return;
+			}
+			// No active source context available — fall through to normal advance.
+		}
+
+		if (rankedSourcesSupplier == null)
 		{
 			return;
 		}
