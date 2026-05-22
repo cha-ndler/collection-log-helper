@@ -92,6 +92,11 @@ public class PluginShutdownRoutine
 	private final DataModule data;
 	private final PlayerTravelCapabilities travelCapabilities;
 	private final PlayerLocationResolver playerLocationResolver;
+	private final com.collectionloghelper.player.PohTeleportInventory pohTeleportInventory;
+	private final com.collectionloghelper.player.EquippedItemState equippedItemState;
+	private final com.collectionloghelper.player.DiaryTierState diaryTierState;
+	private final com.collectionloghelper.player.SkillCapePerkState skillCapePerkState;
+	private final com.collectionloghelper.player.PlayerQuestProgressState playerQuestProgressState;
 
 	@Inject
 	public PluginShutdownRoutine(
@@ -106,7 +111,12 @@ public class PluginShutdownRoutine
 		EfficiencyModule efficiency,
 		DataModule data,
 		PlayerTravelCapabilities travelCapabilities,
-		PlayerLocationResolver playerLocationResolver)
+		PlayerLocationResolver playerLocationResolver,
+		com.collectionloghelper.player.PohTeleportInventory pohTeleportInventory,
+		com.collectionloghelper.player.EquippedItemState equippedItemState,
+		com.collectionloghelper.player.DiaryTierState diaryTierState,
+		com.collectionloghelper.player.SkillCapePerkState skillCapePerkState,
+		com.collectionloghelper.player.PlayerQuestProgressState playerQuestProgressState)
 	{
 		this.chatCommandManager = chatCommandManager;
 		this.authoringLogger = authoringLogger;
@@ -120,6 +130,11 @@ public class PluginShutdownRoutine
 		this.data = data;
 		this.travelCapabilities = travelCapabilities;
 		this.playerLocationResolver = playerLocationResolver;
+		this.pohTeleportInventory = pohTeleportInventory;
+		this.equippedItemState = equippedItemState;
+		this.diaryTierState = diaryTierState;
+		this.skillCapePerkState = skillCapePerkState;
+		this.playerQuestProgressState = playerQuestProgressState;
 	}
 
 	/**
@@ -159,6 +174,11 @@ public class PluginShutdownRoutine
 		eventBus.unregister(guidance.getGuidanceEventRouter());
 		eventBus.unregister(guidance.getGuidanceMovementTracker());
 		eventBus.unregister(efficiency.getKillTimeTracker());
+		eventBus.unregister(pohTeleportInventory);
+		eventBus.unregister(equippedItemState);
+		eventBus.unregister(diaryTierState);
+		eventBus.unregister(skillCapePerkState);
+		eventBus.unregister(playerQuestProgressState);
 		efficiency.getKillTimeTracker().reset();
 		guidance.getGuidanceCoordinator().deactivateGuidance();
 		sync.getSyncStateCoordinator().reset();

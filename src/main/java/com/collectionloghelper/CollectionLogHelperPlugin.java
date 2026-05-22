@@ -170,6 +170,24 @@ public class CollectionLogHelperPlugin extends Plugin
 	@Inject
 	private PluginShutdownRoutine pluginShutdownRoutine;
 
+	// Tier-C detectors. Each has @Subscribe handlers that refresh its own
+	// snapshot when the relevant game events fire; registering them on the
+	// event bus is what wires those handlers up (issue #611).
+	@Inject
+	private com.collectionloghelper.player.PohTeleportInventory pohTeleportInventory;
+
+	@Inject
+	private com.collectionloghelper.player.EquippedItemState equippedItemState;
+
+	@Inject
+	private com.collectionloghelper.player.DiaryTierState diaryTierState;
+
+	@Inject
+	private com.collectionloghelper.player.SkillCapePerkState skillCapePerkState;
+
+	@Inject
+	private com.collectionloghelper.player.PlayerQuestProgressState playerQuestProgressState;
+
 
 	private CollectionLogHelperPanel panel;
 	private NavigationButton navButton;
@@ -294,6 +312,14 @@ public class CollectionLogHelperPlugin extends Plugin
 		eventBus.register(guidance.getGuidanceEventRouter());
 		eventBus.register(guidance.getGuidanceMovementTracker());
 		eventBus.register(efficiency.getKillTimeTracker());
+
+		// Tier-C detectors: each has its own @Subscribe handlers (see issue #611)
+		// that keep its snapshot fresh in response to game events.
+		eventBus.register(pohTeleportInventory);
+		eventBus.register(equippedItemState);
+		eventBus.register(diaryTierState);
+		eventBus.register(skillCapePerkState);
+		eventBus.register(playerQuestProgressState);
 
 		// If already logged in (e.g., plugin enabled mid-session), load state
 		if (client.getGameState() == GameState.LOGGED_IN)

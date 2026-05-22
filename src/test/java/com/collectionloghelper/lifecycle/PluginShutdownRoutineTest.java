@@ -65,6 +65,11 @@ public class PluginShutdownRoutineTest
 	@Mock private DataModule dataModule;
 	@Mock private PlayerTravelCapabilities travelCapabilities;
 	@Mock private PlayerLocationResolver playerLocationResolver;
+	@Mock private com.collectionloghelper.player.PohTeleportInventory pohTeleportInventory;
+	@Mock private com.collectionloghelper.player.EquippedItemState equippedItemState;
+	@Mock private com.collectionloghelper.player.DiaryTierState diaryTierState;
+	@Mock private com.collectionloghelper.player.SkillCapePerkState skillCapePerkState;
+	@Mock private com.collectionloghelper.player.PlayerQuestProgressState playerQuestProgressState;
 
 	@Mock private CollectionLogNetImporter collectionLogNetImporter;
 	@Mock private SyncStateCoordinator syncStateCoordinator;
@@ -117,7 +122,9 @@ public class PluginShutdownRoutineTest
 		routine = new PluginShutdownRoutine(
 			chatCommandManager, authoringLogger, syncModule, clientToolbar, overlayRegistry,
 			eventBus, sceneEventRouter, guidanceModule, efficiencyModule, dataModule,
-			travelCapabilities, playerLocationResolver);
+			travelCapabilities, playerLocationResolver,
+			pohTeleportInventory, equippedItemState, diaryTierState,
+			skillCapePerkState, playerQuestProgressState);
 	}
 
 	@Test
