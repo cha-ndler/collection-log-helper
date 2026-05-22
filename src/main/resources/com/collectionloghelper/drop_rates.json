@@ -955,7 +955,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use a Key master teleport or teleport to your house in Taverley",
+        "description": "Use a Key master teleport or teleport to your house in Taverley. Requires a hellhound or Cerberus Slayer task to deal damage",
         "worldX": 1310,
         "worldY": 1251,
         "worldPlane": 0,
@@ -965,7 +965,7 @@
         "section": "Travel"
       },
       {
-        "description": "Turn an Iron Winch to open a gate and enter the boss arena. Requires a hellhound Slayer task",
+        "description": "Turn an Iron Winch to open the gate and enter the boss arena",
         "worldX": 1291,
         "worldY": 1254,
         "worldPlane": 0,
@@ -975,7 +975,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Cerberus. Protect from Magic, watch for the triple ghost special attack",
+        "description": "Kill Cerberus. She rotates Melee, Ranged, and Magic attacks - flick Protect from Magic when she rears back and fires a smooth black ball, Protect from Missiles when she kicks a translucent spiky ball, otherwise Protect from Melee. Every 10 attacks she summons three souls (Magic ghost, Ranged ghost, Melee ghost) - run to the matching tile under each soul before they reach her, or pray the soul's attack style. Bring Salve amulet (ei) and use Bandos godsword spec to drop her Defence",
         "worldX": 1240,
         "worldY": 1251,
         "worldPlane": 0,
@@ -1143,7 +1143,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Alchemical Hydra. Use the coloured vents to weaken each phase - walk over the correct vent matching the Hydra's colour",
+        "description": "Kill the Alchemical Hydra. Hydra rotates phases at 75%, 50%, 25% HP - Green/poison (lure to red south-east vent), Blue/electric (lure to green north-east vent), Red/flame (lure to blue north-west vent), then Enrage. The Hydra alternates Magic and Ranged auto-attacks; watch the head sway between basic attacks - Magic head sways one way, Ranged the other - flick Protect from Magic vs Magic and Protect from Missiles vs Ranged. Bring Toxic blowpipe and ranged tank gear; on the Flame phase dodge the fire walls and the lightning chase. 95 Slayer required; Hydra task only",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
@@ -1356,7 +1356,17 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Kalphite Queen (two forms: melee for first, ranged/magic for second)",
+        "description": "Kill the Kalphite Queen - Phase 1 (510 HP halved at 255). She rotates Magic and Ranged hits that ALWAYS land but can roll 0 damage; her Ranged attack drains 1 prayer point on a non-zero hit. Use Protect from Missiles (Ranged hits are more frequent and drain prayer) and tank her Magic. Fight her in melee range with crush gear (Bandos godsword spec, abyssal bludgeon, or Osmumten's fang) - standing in melee triggers her to use her melee attack 50% of the time, lowering her DPS. Bring an antidote++ or serpentine helm against the Kalphite Guardian poison on the way in",
+        "worldX": 3471,
+        "worldY": 9506,
+        "worldPlane": 0,
+        "npcId": 965,
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 965
+      },
+      {
+        "description": "Phase 2: when KQ flashes/shape-shifts at 50% HP she gains a wing-like form and her attack styles swap priorities - switch to Protect from Magic and use Ranged (twisted bow, blowpipe, or zaryte crossbow with Armadyl/Crystal armour). Stay outside melee range during phase 2 to avoid her stomp. Bring a few extra Saradomin brews if soloing without prayer flicks; the kill is over in 30-60 seconds with t-bow",
         "worldX": 3471,
         "worldY": 9506,
         "worldPlane": 0,
@@ -2803,7 +2813,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Grotesque Guardians on the Slayer Tower roof. Requires gargoyle Slayer task + brittle key. Dodge Dawn lightning and Dusk prison attack",
+        "description": "Kill the Grotesque Guardians on the Slayer Tower roof. Requires gargoyle Slayer task + brittle key + a rock hammer or thrownhammer to finish them off. Dusk (melee) and Dawn (ranged) fight together until one dies, then the survivor enrages - pray Melee against Dusk and Missiles against Dawn, swapping prayers when they switch attack styles. Dodge Dawn's lightning AoE (move 2 tiles when she raises her arms) and step out of Dusk's prison rocks. After the first Guardian dies, the survivor heals to full and gains a stomp special - move off the marked tile",
         "worldX": 3427,
         "worldY": 3543,
         "worldPlane": 2,
@@ -3453,7 +3463,7 @@
         "worldMessage": "Bring a spade and a light source"
       },
       {
-        "description": "Kill the Giant Mole. Bring Falador shield 3+ to track her location when she digs away. Use Dharok or twisted bow",
+        "description": "Kill the Giant Mole. She only attacks with Melee (max 21) - keep Protect from Melee on, and use stab weapons since her stab defence is lower than slash/crush. Below 50% HP she has a 25% chance per incoming hit to burrow to a new spot in the cave; bring Falador shield 3+ (or use Tumeken's Shadow whose splashes don't trigger burrow) to track her, plus a spade for re-entry if you log out. Dharok set with HP dropped via Locator orb / Dwarven rock cake clears her in 2-3 hits; cover your light source or her dirt will extinguish it",
         "worldX": 1759,
         "worldY": 5189,
         "worldPlane": 0,
@@ -3628,7 +3638,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Waterbirth Island via Rellekka docks or Lunar Isle teleport. Navigate the dungeon to the kings' lair",
+        "description": "Travel to Waterbirth Island via Rellekka docks (pay 1,000 gp without The Fremennik Trials, free after) or Lunar Isle teleport",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3636,7 +3646,14 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Rex. Use Magic (fire spells work best). Rex is weak to Magic and uses melee - Protect from Melee when nearby",
+        "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Bring a rune thrownaxe (or Mind Altar shortcut at 70 Agility) to pull only Rex",
+        "worldX": 2528,
+        "worldY": 3739,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill Dagannoth Rex. Rex attacks only with Melee - keep Protect from Melee on at all times when in melee range. Rex is weak to Magic and crush; fire spells (Fire Surge / Tumeken's Shadow) or a crush weapon work best. Lure him to the edge of the islet so Prime and Supreme cannot reach you - Rex has no ranged attack so safespotting from outside his melee range trivialises the fight. Bring antidote++ for Spinolyps in the moat",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3700,7 +3717,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Waterbirth Island via Rellekka docks or Lunar Isle teleport. Navigate the dungeon to the kings' lair",
+        "description": "Travel to Waterbirth Island via Rellekka docks (1,000 gp without The Fremennik Trials) or Lunar Isle teleport",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3708,7 +3725,14 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Prime. Use Ranged. Prime attacks with Magic - use Protect from Magic when targeting Prime",
+        "description": "Descend the Waterbirth Island Dungeon to floor 6 and reach the Kings' lair. Bring a rune thrownaxe (or pet rock + 70 Agility shortcut) to lure Prime away from Supreme and Rex",
+        "worldX": 2528,
+        "worldY": 3739,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill Dagannoth Prime. Prime attacks ONLY with Magic (3x3 AoE, max 50) - keep Protect from Magic on every tick or Prime will two-shot you. Prime is weak to Ranged; bring blowpipe or twisted bow with the highest Magic defence bonus possible (Karil's, Armadyl, or Crystal armour). Stand 2+ tiles away to avoid the AoE splash. Spinolyps in the moat poison; bring antidote++",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3772,7 +3796,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Waterbirth Island via Rellekka docks or Lunar Isle teleport. Navigate the dungeon to the kings' lair",
+        "description": "Travel to Waterbirth Island via Rellekka docks (1,000 gp without The Fremennik Trials) or Lunar Isle teleport",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3780,7 +3804,14 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill Dagannoth Supreme. Use Melee. Supreme attacks with Ranged - use Protect from Missiles when targeting Supreme",
+        "description": "Descend the Waterbirth Island Dungeon to floor 6 and reach the Kings' lair. Bring a rune thrownaxe to lure Supreme away from the other two Kings",
+        "worldX": 2528,
+        "worldY": 3739,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "description": "Kill Dagannoth Supreme. Supreme attacks ONLY with Ranged - keep Protect from Missiles on at all times. Supreme is weak to stab/slash and Melee is the strongest style here; Dragon scimitar, abyssal whip, or osmumten's fang with Bandos armour clears him fastest. His ranged attack hits everyone facing him, so position yourself so other players don't catch the splash. Spinolyps in the moat poison; bring antidote++",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -3883,7 +3914,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Kraken boss. Disturb the whirlpool, then attack the tentacles before focusing the boss. 87 Slayer required, on task only",
+        "description": "Kill the Kraken boss. Use a fishing explosive on the LARGE whirlpool to wake Kraken + all 4 tentacles at once (60 gp from any Slayer master); without it you must disturb the 4 smaller whirlpools first. Kraken and tentacles attack with a typeless magical-ranged hit (protection prayers do NOT block it - high magic defence reduces accuracy). Bring Trident of the seas/swamp and Occult necklace; Kraken is immune to Melee and Ranged deals 1/7 damage so Magic is mandatory. Stay above 45 HP - Kraken's max hit is 28. 87 Slayer + Cave kraken or Kraken task required",
         "worldX": 2272,
         "worldY": 10016,
         "worldPlane": 0,
@@ -4093,7 +4124,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Abyssal Sire. Stun the respiratory systems, then attack the Sire. Watch for poison pools and the teleport grab. 85 Slayer on task",
+        "description": "Kill the Abyssal Sire. Phase 1: stun the Sire with Shadow Barrage (100% stun chance) or deal 75 ranged/magic damage, then kill all 4 respiratory systems while the Sire is stunned - tentacles guarding them deactivate during stun. Phase 2 (50% HP): Sire walks to the centre; tentacles become inactive - melee him with Protect from Melee, watch for the teleport grab that drags you toward him. Phase 3 (25% HP): tentacles re-activate and Sire releases poison miasma pools - stay mobile, do NOT stand in green pools, keep Protect from Melee. Bandos chestplate/tassets + Abyssal bludgeon or scythe with Soulreaper axe clears phase 2-3 fastest. 85 Slayer + Abyssal demon task required",
         "worldX": 3039,
         "worldY": 4763,
         "worldPlane": 0,
