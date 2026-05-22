@@ -38,6 +38,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -177,57 +178,46 @@ public class StepProgressViewTest
 	 * test fails before the panel ever ships.
 	 */
 	@Test
-	public void showStep_longDescription_fullTextPresentInRenderedHtml() throws Exception
+	public void showStep_longDescription_fullTextPresentVerbatim() throws Exception
 	{
 		String longDescription = "Enter the Bandos boss room and kill General Graardor";
 		view.showStep(4, 5, longDescription, false, Collections.emptyList());
 		flushEdt();
 
-		JLabel label = findStepProgressLabel(view);
-		assertNotNull( label,"Step-progress label must be present");
-		String rendered = label.getText();
-		assertNotNull( rendered,"Step-progress label text must be set");
+		JTextArea area = findStepProgressArea(view);
+		assertNotNull(area, "Step-progress text area must be present");
+		String rendered = area.getText();
+		assertNotNull(rendered, "Step-progress text must be set");
 		assertTrue(
-			rendered.contains(longDescription),"Rendered label must contain full description verbatim — "
-			+ "no mid-string truncation (#575). Actual: " + rendered);
+			rendered.contains(longDescription),
+			"Rendered text must contain full description verbatim — no mid-string truncation (#575). Actual: "
+				+ rendered);
 	}
 
 	/**
-	 * Reserved HTML characters in the description must be escaped, otherwise the
-	 * Swing HTML renderer would either treat them as markup or silently corrupt
-	 * the output. This contract is asserted by checking that the rendered label
-	 * text escapes &lt;, &gt;, and &amp; rather than passing them through raw.
+	 * Description text is now rendered as plain text by a {@link JTextArea}, so
+	 * reserved characters that the prior HTML-rendered JLabel had to escape
+	 * (&lt;, &gt;, &amp;) must now appear verbatim. This pins the contract so a
+	 * future revert to HTML rendering — which would re-introduce both the wrap
+	 * truncation bug (#575) and the need for escaping — surfaces immediately.
 	 */
 	@Test
-	public void showStep_descriptionWithHtmlReservedChars_escapesThem() throws Exception
+	public void showStep_descriptionWithReservedChars_renderedVerbatim() throws Exception
 	{
 		String descriptionWithMarkup = "Use <halberd> & break the door";
 		view.showStep(1, 1, descriptionWithMarkup, false, Collections.emptyList());
 		flushEdt();
 
-		JLabel label = findStepProgressLabel(view);
-		assertNotNull( label,"Step-progress label must be present");
-		String rendered = label.getText();
+		JTextArea area = findStepProgressArea(view);
+		assertNotNull(area, "Step-progress text area must be present");
+		String rendered = area.getText();
 		assertNotNull(rendered);
 		assertTrue(
-			rendered.contains("&lt;halberd&gt;"),"Reserved '<' character must be escaped. Actual: " + rendered);
+			rendered.contains("<halberd>"),
+			"'<halberd>' must appear verbatim (no HTML escaping). Actual: " + rendered);
 		assertTrue(
-			rendered.contains("&amp;"),"Reserved '&' character must be escaped. Actual: " + rendered);
-	}
-
-	/**
-	 * Pure helper-level test for the HTML escape function. Keeps the contract
-	 * pinned independently of the EDT-driven render path so it surfaces clearly
-	 * if the escape logic is ever broken.
-	 */
-	@Test
-	public void escapeHtml_handlesAllReservedCharsAndNull()
-	{
-		assertEquals("", StepProgressView.escapeHtml(null));
-		assertEquals("plain text", StepProgressView.escapeHtml("plain text"));
-		assertEquals("&lt;b&gt;bold&lt;/b&gt;", StepProgressView.escapeHtml("<b>bold</b>"));
-		assertEquals("a &amp; b", StepProgressView.escapeHtml("a & b"));
-		assertEquals("she said &quot;hi&quot;", StepProgressView.escapeHtml("she said \"hi\""));
+			rendered.contains("& break"),
+			"'&' must appear verbatim (no HTML escaping). Actual: " + rendered);
 	}
 
 	// ── Required-items subsection tests (B.5.1) ─────────────────────────────
@@ -738,13 +728,13 @@ public class StepProgressViewTest
 	 * the StepProgressView itself (constructed first in the BoxLayout). Used by
 	 * the #575 wrap-regression tests.
 	 */
-	private static JLabel findStepProgressLabel(StepProgressView view)
+	private static JTextArea findStepProgressArea(StepProgressView view)
 	{
 		for (Component c : view.getComponents())
 		{
-			if (c instanceof JLabel)
+			if (c instanceof JTextArea)
 			{
-				return (JLabel) c;
+				return (JTextArea) c;
 			}
 		}
 		return null;
