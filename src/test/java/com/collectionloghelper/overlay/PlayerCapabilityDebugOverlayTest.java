@@ -68,7 +68,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -441,6 +444,44 @@ public class PlayerCapabilityDebugOverlayTest
 
 		assertTrue(
 			panelLeftStrings().contains("(none completed)"),"expected '(none completed)' placeholder when no sub-milestones complete");
+	}
+
+	// -------------------------------------------------------------------------
+	// #486 Pass-3 — overlay paint pulls a fresh snapshot from each state source
+	// -------------------------------------------------------------------------
+
+	@Test
+	public void render_invokesRefreshOnEachDetectionSource()
+	{
+		enableWithBaseStubs();
+
+		overlay.render(realGraphics);
+
+		// Each C1–C5 source must be refreshed during paint so the overlay shows
+		// live state even when nothing else in the plugin has wired refresh()
+		// into event handlers yet (#486 Pass-3 verdict).
+		verify(pohTeleportInventory, atLeastOnce()).refresh();
+		verify(equippedItemState, atLeastOnce()).refresh();
+		verify(diaryTierState, atLeastOnce()).refresh();
+		verify(skillCapePerkState, atLeastOnce()).refresh();
+		verify(questProgressState, atLeastOnce()).refresh();
+	}
+
+	@Test
+	public void render_refreshThrowing_doesNotBreakRemainingSources()
+	{
+		enableWithBaseStubs();
+		doThrow(new RuntimeException("simulated refresh failure"))
+			.when(equippedItemState).refresh();
+
+		// Must not bubble out of render; subsequent refreshes still run.
+		Dimension result = overlay.render(realGraphics);
+		assertNotNull(result);
+
+		verify(pohTeleportInventory, atLeastOnce()).refresh();
+		verify(diaryTierState, atLeastOnce()).refresh();
+		verify(skillCapePerkState, atLeastOnce()).refresh();
+		verify(questProgressState, atLeastOnce()).refresh();
 	}
 
 	// -------------------------------------------------------------------------
