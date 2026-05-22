@@ -113,6 +113,17 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
+        "requiredItemIds": [
+          11804
+        ],
+        "section": "Travel"
+      },
+      {
+        "description": "Descend into the God Wars Dungeon main chamber (plane 2)",
+        "worldX": 2862,
+        "worldY": 5357,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE",
         "section": "Travel"
       },
       {
@@ -126,7 +137,7 @@
         "section": "Combat"
       },
       {
-        "description": "Enter the Bandos boss room and kill General Graardor. Use Protect from Melee, pray Piety, and tank the minions. Kill Sergeant Steelwill first if you want to reduce damage taken",
+        "description": "Kill General Graardor. Protect from Melee, BGS or DWH spec to crash his defence, kill the ranged minion (Sergeant Grimspike) first if you can't tank both.",
         "worldX": 2864,
         "worldY": 5360,
         "worldPlane": 2,
@@ -260,6 +271,17 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
+        "requiredItemIds": [
+          12018
+        ],
+        "section": "Travel"
+      },
+      {
+        "description": "Descend into the God Wars Dungeon main chamber (plane 2)",
+        "worldX": 2907,
+        "worldY": 5265,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE",
         "section": "Travel"
       },
       {
@@ -273,7 +295,7 @@
         "section": "Combat"
       },
       {
-        "description": "Enter the Saradomin boss room and kill Commander Zilyana. Use Protect from Ranged and a crossbow. Kite her in a large loop around the room to avoid melee damage",
+        "description": "Kill Commander Zilyana. Protect from Magic, drop Bree (the ranged minion) first then Starlight, switch to Saradomin brews when Sara hits hard.",
         "worldX": 2925,
         "worldY": 5265,
         "worldPlane": 2,
@@ -407,6 +429,17 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
+        "requiredItemIds": [
+          2412
+        ],
+        "section": "Travel"
+      },
+      {
+        "description": "Descend into the God Wars Dungeon main chamber (plane 2)",
+        "worldX": 2914,
+        "worldY": 5350,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE",
         "section": "Travel"
       },
       {
@@ -420,7 +453,7 @@
         "section": "Combat"
       },
       {
-        "description": "Enter the Zamorak boss room and kill K'ril Tsutsaroth. Use Protect from Melee and high-healing food. His special attack can hit through prayer. Shadow of Tumeken or arclight effective",
+        "description": "Kill K'ril Tsutsaroth. Protect from Magic, eat through Balfrug + Tstanon prayer drain, watch for K'ril's curse mechanic which drains your prayer.",
         "worldX": 2914,
         "worldY": 5350,
         "worldPlane": 2,
@@ -554,6 +587,17 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
+        "requiredItemIds": [
+          9419
+        ],
+        "section": "Travel"
+      },
+      {
+        "description": "Descend into the God Wars Dungeon main chamber (plane 2)",
+        "worldX": 2844,
+        "worldY": 5280,
+        "worldPlane": 2,
+        "completionCondition": "PLAYER_ON_PLANE",
         "section": "Travel"
       },
       {
@@ -567,7 +611,7 @@
         "section": "Combat"
       },
       {
-        "description": "Use a mithril grapple to enter the Armadyl boss room and kill Kree'arra. Use Protect from Ranged and chinchompas or a crossbow. Kite in a loop to avoid the minions",
+        "description": "Kill Kree'arra. Protect from Missiles, use only ranged or magic (melee cannot hit), Armadyl crossbow with ruby/diamond bolts (e) is the standard loadout.",
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,
