@@ -255,8 +255,18 @@ public class PlayerCapabilityDebugOverlayTest
 		String questsValue = rightForLeft(rows, "Quests");
 		assertTrue(
 			questsValue.matches("\\d+/\\d+"),"expected Quests row to render as <finished>/<total>, got: " + questsValue);
+
+		// #487: denominator must exclude the 19 miniquests + 10 RFD sub-entries that
+		// the in-game "Quests Completed: N/M" header omits, so the overlay matches the
+		// quest tab exactly. Sanity bound: denominator < total enum length.
+		int denominator = parseDenominator(questsValue);
+		int expectedExclusions = readNonMainQuestEntries().size();
 		assertEquals(
-			Quest.values().length, parseDenominator(questsValue),"expected Quests denominator to equal Quest.values().length");
+			Quest.values().length - expectedExclusions, denominator,
+			"expected Quests denominator to equal main-quest count (Quest.values().length - NON_MAIN_QUEST_ENTRIES.size())");
+		assertTrue(
+			denominator < Quest.values().length,
+			"expected denominator to be smaller than Quest.values().length once miniquests/RFD subs are filtered");
 
 		assertEquals(
 			"333", rightForLeft(rows, "Quest points"),"expected Quest points to match VarPlayer.QUEST_POINTS");
@@ -266,6 +276,46 @@ public class PlayerCapabilityDebugOverlayTest
 		{
 			assertFalse(
 				"Quest entries".equals(r.left),"did not expect legacy 'Quest entries' label after #487 fix");
+		}
+	}
+
+	@Test
+	public void nonMainQuestEntries_excludesMiniquestsAndRfdSubEntries()
+	{
+		Set<Quest> excluded = readNonMainQuestEntries();
+
+		// 19 miniquests + 10 RFD sub-entries = 29 entries the in-game Quest List does not count.
+		assertEquals(29, excluded.size(),
+			"expected exactly 29 non-main quest entries (19 miniquests + 10 RFD sub-entries); update production code and this test together when Jagex releases a new miniquest");
+
+		// Spot-check representative miniquests from each release era.
+		assertTrue(excluded.contains(Quest.ALFRED_GRIMHANDS_BARCRAWL), "expected Alfred Grimhand's Barcrawl in exclusion set");
+		assertTrue(excluded.contains(Quest.MAGE_ARENA_II), "expected Mage Arena II in exclusion set");
+		assertTrue(excluded.contains(Quest.VALE_TOTEMS), "expected Vale Totems in exclusion set");
+
+		// Spot-check RFD sub-entries and confirm the parent main quest is NOT excluded.
+		assertTrue(excluded.contains(Quest.RECIPE_FOR_DISASTER__CULINAROMANCER),
+			"expected RFD culinaromancer sub-entry in exclusion set");
+		assertFalse(excluded.contains(Quest.RECIPE_FOR_DISASTER),
+			"parent RECIPE_FOR_DISASTER is a main quest and must not be excluded");
+
+		// Spot-check that a clear main quest is not excluded.
+		assertFalse(excluded.contains(Quest.DRAGON_SLAYER_I),
+			"Dragon Slayer I is a main quest and must not be excluded");
+	}
+
+	@SuppressWarnings("unchecked")
+	private Set<Quest> readNonMainQuestEntries()
+	{
+		try
+		{
+			Field field = PlayerCapabilityDebugOverlay.class.getDeclaredField("NON_MAIN_QUEST_ENTRIES");
+			field.setAccessible(true);
+			return (Set<Quest>) field.get(null);
+		}
+		catch (ReflectiveOperationException e)
+		{
+			throw new AssertionError("Unable to reflectively read NON_MAIN_QUEST_ENTRIES", e);
 		}
 	}
 
