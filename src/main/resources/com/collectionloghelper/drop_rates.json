@@ -745,11 +745,12 @@
         "worldPlane": 0,
         "objectId": 46241,
         "objectInteractAction": "Board",
-        "completionCondition": "MANUAL",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
         "section": "Travel"
       },
       {
-        "description": "Kill Zulrah. Learn the rotation patterns for efficient kills",
+        "description": "Kill Zulrah. Prayer rotates per form: green (Ranged form) -> Protect from Missiles, blue (Magic form) -> Protect from Magic, red (Melee form) -> Protect from Missiles, jad phase -> swap each attack. Bring a blowpipe + magic setup, swap gear on the rotation, and avoid the toxic clouds the snakelings spit",
         "worldX": 2268,
         "worldY": 3069,
         "worldPlane": 0,
@@ -857,7 +858,16 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Vorkath. Use Protect from Ranged for standard phase, dodge acid pools, and click the Zombified Spawn immediately when it appears",
+        "description": "Walk to the Vorkath arena north of Torfinn's drop-off and step inside the encounter tile",
+        "worldX": 2272,
+        "worldY": 4052,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 6,
+        "section": "Travel"
+      },
+      {
+        "description": "Kill Vorkath. Pray Protect from Magic during standard phases (the standard meta for melee, blowpipe, and bow setups), keep a super antifire active, sidestep the red acid puddles, walk diagonally to dodge the slow purple ice projectile, and click the Zombified Spawn the instant it appears (it deals ramping damage if ignored). Zombie axe and Bow of faerdhinen are the modern meta",
         "worldX": 2273,
         "worldY": 4049,
         "worldPlane": 0,
@@ -1169,6 +1179,9 @@
     "worldPlane": 0,
     "killTimeSeconds": 72,
     "ironKillTimeSeconds": 600,
+    "requirements": {
+      "skills": []
+    },
     "items": [
       {
         "itemId": 12829,
@@ -1227,7 +1240,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use a games necklace to teleport to the Corporeal Beast cave (level 21 Wilderness)",
+        "description": "Use a games necklace to teleport to the Corporeal Beast cave (the cave itself is not Wilderness, but the surface tile sits in level 21 Wilderness)",
         "worldX": 2966,
         "worldY": 4382,
         "worldPlane": 0,
@@ -1244,7 +1257,7 @@
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Run past the dark energy core room to the boss chamber",
+        "description": "Run east to the boss chamber entrance and step inside the lair",
         "worldX": 2981,
         "worldY": 4382,
         "worldPlane": 2,
@@ -1252,7 +1265,7 @@
         "completionDistance": 15
       },
       {
-        "description": "Kill the Corporeal Beast. Spec with Dragon Warhammer/BGS to reduce its Defence, then use a zamorakian spear or equivalent",
+        "description": "Kill the Corporeal Beast. Pray Protect from Magic the whole fight (its magic attacks are higher damage, more accurate, and more frequent than the melee attack). Corp takes ONLY full damage from a stab weapon - Zamorakian spear / Zamorakian hasta / Osmumten's fang are the canon picks (Voidwaker can spec but the non-stab autoattack is halved). Open with a Dragon warhammer or BGS spec to drop its Defence, kill the small dark energy core every time it splits or it heals Corp, and never stand directly under the boss (the stomp hits 30-51 through prayer). Bring expensive supplies - kills are slow",
         "worldX": 2981,
         "worldY": 4382,
         "worldPlane": 2,
@@ -1435,7 +1448,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use icy basalt to teleport to Weiss, or Ring of Shadows. Enter the Ancient Prison south of town",
+        "description": "Use icy basalt to teleport to Weiss, or Ring of Shadows -> Ghorrock Dungeon. Enter the salt mine staircase in Snowflake and My Arm's hut",
         "worldX": 2846,
         "worldY": 3940,
         "worldPlane": 0,
@@ -1443,7 +1456,15 @@
         "completionDistance": 20
       },
       {
-        "description": "Kill the Phantom Muspah. Switch prayers between Protect from Magic (ranged form) and Protect from Missiles (melee form). Dodge shield attacks and freeze specials",
+        "description": "Run south through Ghorrock Dungeon and step onto the Ancient Prison entrance tile",
+        "worldX": 3338,
+        "worldY": 10303,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 12
+      },
+      {
+        "description": "Kill the Phantom Muspah. Ranged form (sitting) -> Protect from Missiles by default and swap to Protect from Magic the instant it stands up and charges the purple prayer-drain orb. Shielded/Melee form -> Protect from Magic. Dodge the cyan teleport heal-orbs (do NOT stand on the spike tile during a transformation), and Bow of faerdhinen / Tbow are the modern meta",
         "worldX": 2846,
         "worldY": 3940,
         "worldPlane": 0,
@@ -2968,7 +2989,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Disturb The Nightmare to start the fight. Protect from the active pillar attacks, run from parasites, and break the healing totems",
+        "description": "Disturb The Nightmare to start the fight. Prayer rotates per attack animation: overhead-staff wind-up -> Protect from Magic, claws sweep -> Protect from Melee, crossbow-style stance -> Protect from Missiles. Bring a Sanguinesti staff plus a crush weapon (Inquisitor's mace / Soulreaper axe), kill the parasites quickly to avoid sanity drops and Hitpoints damage, and break the healing totems each phase. One unprotected mistake in a group will wipe the team",
         "worldX": 3806,
         "worldY": 9757,
         "worldPlane": 1,
@@ -3152,7 +3173,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Fight Phosani's Nightmare solo. This is a harder version with no downtime between phases",
+        "description": "Fight Phosani's Nightmare solo. Same prayer rotation as The Nightmare but tighter and faster: overhead-staff -> Protect from Magic, claws -> Protect from Melee, crossbow stance -> Protect from Missiles. Sleepwalker minions chase you and must be killed (Sanguinesti heals while burning them down), parasites still drain sanity, and the husk attack will mirror your gear so bring max gear you can lose. Hard to solo without high stats and prayer flicking",
         "worldX": 3806,
         "worldY": 9757,
         "worldPlane": 1,
@@ -6776,22 +6797,38 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Prifddinas via crystal seed teleport or charter ship. The Gauntlet entrance is in the north-west of the city",
+        "description": "Teleport to Prifddinas via teleport crystal / house tablet and run north-west to the Gauntlet portal in Lletya district",
+        "worldX": 3230,
+        "worldY": 6073,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
+      },
+      {
+        "description": "Talk to the Gauntlet NPC and pick Enter -> Corrupted challenge to start the harder instance",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0,
         "npcId": 9020,
         "interactAction": "Talk-to",
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "MANUAL"
       },
       {
-        "description": "Complete the Corrupted Gauntlet. Gather resources, craft armour and weapons, then defeat the Corrupted Hunllef. Tier 3 armour + staff/halberd/bow recommended",
+        "description": "Prep phase (corrupted mobs hit harder and have higher Defence): gather paddlefish + linum tirinum + raw chompy meat + corrupted shards, kill a demi-boss for the perfected weapon upgrade, and craft perfected corrupted tier 3 armour + perfected corrupted staff/halberd/bow at the singing bowl. Corrupted gear is required for full damage on Corrupted Hunllef",
+        "worldX": 1920,
+        "worldY": 5681,
+        "worldPlane": 1,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Fight the Corrupted Hunllef. Same attack-style rotation as standard (Magic / Ranged swap every 4 attacks per the skull above its head) but it hits noticeably harder and swaps to its own protection prayer faster - flick your protection prayer Magic / Missiles in time with its skull and swap your own attack style every rotation. Run behind a pillar to break line of sight during the tornado enrage and never stand on a tornado tile",
+        "worldX": 1920,
+        "worldY": 5681,
+        "worldPlane": 1,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Corrupted Gauntlet completion count is:",
-        "worldX": 3230,
-        "worldY": 6073,
-        "worldPlane": 0
+        "section": "Combat"
       }
     ],
     "rewardType": "MIXED",
@@ -6861,22 +6898,38 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Prifddinas via crystal seed teleport or charter ship. The Gauntlet entrance is in the north-west of the city",
+        "description": "Teleport to Prifddinas via teleport crystal / house tablet and run north-west to the Gauntlet portal in Lletya district",
+        "worldX": 3230,
+        "worldY": 6073,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15
+      },
+      {
+        "description": "Talk to the Gauntlet NPC and pick Enter -> Standard challenge to start the instance",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0,
         "npcId": 9020,
         "interactAction": "Talk-to",
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionCondition": "MANUAL"
       },
       {
-        "description": "Complete the Gauntlet. Gather resources, craft armour and weapons, then defeat the Crystalline Hunllef",
+        "description": "Prep phase (about 7-9 minutes): gather paddlefish + linum tirinum + raw chompy meat + crystal shards, mine ore from crystal deposits, chop bark from phren roots, kill weak/strong monsters for weapon frames, and find a demi-boss for the perfected weapon upgrade. Craft a basic then perfected weapon + tier 3 armour at the singing bowl before the timer expires",
+        "worldX": 1920,
+        "worldY": 5681,
+        "worldPlane": 1,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Fight the Crystalline Hunllef. Hunllef rotates between Ranged (orange skull, projectile) and Magic (blue skull, projectile) every 4 attacks - pray Protect from Missiles for ranged, Protect from Magic for magic, and switch the instant the skull above its head changes. Swap your own attack style each rotation (Hunllef enters a protection prayer that blocks the style you just used). Run behind a pillar during the tornado enrage phase and never stand still",
+        "worldX": 1920,
+        "worldY": 5681,
+        "worldPlane": 1,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Gauntlet completion count is:",
-        "worldX": 3230,
-        "worldY": 6073,
-        "worldPlane": 0
+        "section": "Combat"
       }
     ],
     "rewardType": "MIXED",
