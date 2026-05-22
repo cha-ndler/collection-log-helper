@@ -102,7 +102,9 @@ public class CollectionStateChangeHandlerTest
 		handler.setCallbacks(
 			() -> flagsCalled = true,
 			Collections::emptyList,
-			activateGuidanceCallback);
+			activateGuidanceCallback,
+			() -> true,   // slot unlocked by default so existing advance tests still pass
+			() -> null);
 	}
 
 	// ── handleSequenceComplete ────────────────────────────────────────────────
@@ -144,7 +146,9 @@ public class CollectionStateChangeHandlerTest
 		handler.setCallbacks(
 			() -> flagsCalled = true,
 			() -> java.util.Arrays.asList(locked, unlocked),
-			activateGuidanceCallback);
+			activateGuidanceCallback,
+			() -> true,
+			() -> null);
 		handler.handleSequenceComplete();
 		verify(activateGuidanceCallback).accept(unlockedSource, null);
 		verify(activateGuidanceCallback, never()).accept(lockedSource, null);
@@ -157,7 +161,9 @@ public class CollectionStateChangeHandlerTest
 		handler.setCallbacks(
 			() -> flagsCalled = true,
 			() -> null,
-			activateGuidanceCallback);
+			activateGuidanceCallback,
+			() -> true,
+			() -> null);
 		handler.handleSequenceComplete();
 		verifyNoInteractions(activateGuidanceCallback);
 	}
@@ -166,7 +172,7 @@ public class CollectionStateChangeHandlerTest
 	public void handleSequenceComplete_nullCallbacks_doNotNpe()
 	{
 		when(config.autoAdvanceGuidance()).thenReturn(true);
-		handler.setCallbacks(null, null, null);
+		handler.setCallbacks(null, null, null, null, null);
 		// Must complete without throwing
 		handler.handleSequenceComplete();
 	}
@@ -234,6 +240,54 @@ public class CollectionStateChangeHandlerTest
 
 		// Fallback path still invokes the calculator with some non-null file
 		verify(calculator).exportEfficiencyList(any(File.class), any());
+	}
+
+	// ── slot-unlock gate (#598) ───────────────────────────────────────────────
+
+	/**
+	 * Regression: last step completes, target slot did NOT unlock.
+	 * Auto-advance must loop back on the same source, not advance to the next one.
+	 */
+	@Test
+	public void handleSequenceComplete_slotNotUnlocked_reActivatesSameSource()
+	{
+		when(config.autoAdvanceGuidance()).thenReturn(true);
+		CollectionLogSource activeSource = minimalSource("Active Source");
+		CollectionLogSource nextSource = minimalSource("Next Source");
+		ScoredItem nextItem = new ScoredItem(nextSource, 50.0, 1, "N", false, 50.0, null, 50.0);
+		handler.setCallbacks(
+			() -> flagsCalled = true,
+			() -> java.util.Collections.singletonList(nextItem),
+			activateGuidanceCallback,
+			() -> false,              // slot did NOT unlock
+			() -> activeSource);     // active source at sequence-complete time
+		handler.handleSequenceComplete();
+		// Must re-activate the current source, not advance to nextSource
+		verify(activateGuidanceCallback).accept(activeSource, null);
+		verify(activateGuidanceCallback, never()).accept(nextSource, null);
+	}
+
+	/**
+	 * Regression: last step completes, target slot DID unlock.
+	 * Auto-advance must fire on the next top-ranked source.
+	 */
+	@Test
+	public void handleSequenceComplete_slotUnlocked_advancesToNextSource()
+	{
+		when(config.autoAdvanceGuidance()).thenReturn(true);
+		CollectionLogSource activeSource = minimalSource("Active Source");
+		CollectionLogSource nextSource = minimalSource("Next Source");
+		ScoredItem nextItem = new ScoredItem(nextSource, 50.0, 1, "N", false, 50.0, null, 50.0);
+		handler.setCallbacks(
+			() -> flagsCalled = true,
+			() -> java.util.Collections.singletonList(nextItem),
+			activateGuidanceCallback,
+			() -> true,              // slot DID unlock
+			() -> activeSource);
+		handler.handleSequenceComplete();
+		// Must advance to the next ranked source, not loop back
+		verify(activateGuidanceCallback).accept(nextSource, null);
+		verify(activateGuidanceCallback, never()).accept(activeSource, null);
 	}
 
 	// ── helpers ───────────────────────────────────────────────────────────────
