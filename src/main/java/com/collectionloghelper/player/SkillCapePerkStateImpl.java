@@ -37,6 +37,9 @@ import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.Skill;
+import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.api.events.StatChanged;
+import net.runelite.client.eventbus.Subscribe;
 
 /**
  * RuneLite-backed implementation of {@link SkillCapePerkState}.
@@ -124,6 +127,37 @@ public class SkillCapePerkStateImpl implements SkillCapePerkState
 		}
 		cache = Collections.unmodifiableMap(next);
 		log.debug("SkillCapePerkState refreshed");
+	}
+
+	/**
+	 * Refreshes the perk-availability cache when the worn or inventory container
+	 * changes. Inventory matters because a player may carry a cape they own and
+	 * swap to it on demand (Max cape teleport menu, etc.).
+	 */
+	@Subscribe
+	public void onItemContainerChanged(ItemContainerChanged event)
+	{
+		int containerId = event.getContainerId();
+		if (containerId == net.runelite.api.gameval.InventoryID.WORN
+			|| containerId == net.runelite.api.gameval.InventoryID.INV)
+		{
+			refresh();
+		}
+	}
+
+	/**
+	 * Refreshes the perk-availability cache on any {@link StatChanged} event.
+	 *
+	 * <p>Hitting level 99 in any skill unlocks a new cape perk, so a stat-level
+	 * change can flip {@link #hasPerkAvailable(SkillCapePerk)} from {@code false}
+	 * to {@code true}. {@link StatChanged} fires per-skill on level changes
+	 * (and at login bootstrap) — frequency is low enough that the {@code O(n)}
+	 * cape scan (n &lt;= number of perks) is acceptable without filtering.
+	 */
+	@Subscribe
+	public void onStatChanged(StatChanged event)
+	{
+		refresh();
 	}
 
 	/** {@inheritDoc} */

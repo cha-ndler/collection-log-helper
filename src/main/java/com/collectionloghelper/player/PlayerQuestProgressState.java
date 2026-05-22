@@ -32,6 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Quest;
 import net.runelite.api.QuestState;
+import net.runelite.api.events.VarbitChanged;
+import net.runelite.client.eventbus.Subscribe;
 
 /**
  * Live implementation of {@link QuestProgressState}.
@@ -125,6 +127,22 @@ public class PlayerQuestProgressState implements QuestProgressState
 
 		snapshot = next;
 		log.debug("QuestProgressState refreshed: {}", next);
+	}
+
+	/**
+	 * Refreshes the quest-milestone snapshot on any {@link VarbitChanged} event.
+	 *
+	 * <p>Quest progression is driven by a mix of varplayer values (Lost City,
+	 * Plague City, Biohazard) and {@link Quest#getState(Client)} reads (RFD
+	 * sub-quests, Fairytale II, Children of the Sun). Quest varplayer/varbit
+	 * IDs span the full varbit space and change at every game update, so a
+	 * targeted filter is brittle. The full refresh is cheap (one varp read +
+	 * a small fixed number of {@code QUEST_STATUS_GET} script calls).
+	 */
+	@Subscribe
+	public void onVarbitChanged(VarbitChanged event)
+	{
+		refresh();
 	}
 
 	@Override
