@@ -84,6 +84,16 @@ public class GuidanceSequencer
 	private Consumer<GuidanceStep> onStepChanged;
 	private Runnable onSequenceComplete;
 
+	/**
+	 * Set to {@code true} when {@link #onItemObtained(int)} detects that the
+	 * obtained item belongs to the active source's target item list.  Reset to
+	 * {@code false} each time a new sequence starts.  Callers (e.g.,
+	 * {@code CollectionStateChangeHandler}) read this via
+	 * {@link #wasTargetSlotUnlocked()} to decide whether the sequence completing
+	 * means the collection-log slot actually changed.
+	 */
+	private volatile boolean targetSlotUnlocked;
+
 	@Inject
 	private GuidanceSequencer(PlayerInventoryState inventoryState, PlayerCollectionState collectionState,
 		RequirementsChecker requirementsChecker, BossGuidanceRegistry bossRegistry)
@@ -133,6 +143,7 @@ public class GuidanceSequencer
 		this.resolvedAlternatives.clear();
 		this.onStepChanged = stepChanged;
 		this.onSequenceComplete = sequenceComplete;
+		this.targetSlotUnlocked = false;
 		this.active = true;
 
 		// Skip any steps whose conditions are already met
@@ -394,7 +405,8 @@ public class GuidanceSequencer
 	}
 
 	/**
-	 * Called when a collection log item is obtained. Checks ITEM_OBTAINED condition.
+	 * Called when a collection log item is obtained. Checks ITEM_OBTAINED condition
+	 * and sets {@link #targetSlotUnlocked} if the item belongs to the active source.
 	 */
 	public void onItemObtained(int itemId)
 	{
@@ -403,12 +415,41 @@ public class GuidanceSequencer
 			return;
 		}
 
+		// Flag if the obtained item is one of this source's target collection-log slots.
+		if (!targetSlotUnlocked && activeSource != null && activeSource.getItems() != null)
+		{
+			for (com.collectionloghelper.data.CollectionLogItem item : activeSource.getItems())
+			{
+				if (item.getItemId() == itemId)
+				{
+					targetSlotUnlocked = true;
+					log.info("Target slot unlocked for {} (itemId={})", activeSource.getName(), itemId);
+					break;
+				}
+			}
+		}
+
 		GuidanceStep step = getRawCurrentStep();
 		if (completionChecker.isItemObtainedSatisfying(step, itemId))
 		{
 			log.info("Step {} complete (ITEM_OBTAINED: {})", currentIndex + 1, itemId);
 			advanceStep();
 		}
+	}
+
+	/**
+	 * Returns {@code true} if any of the active source's collection-log target
+	 * items were obtained since the current sequence started.  Used by
+	 * {@code CollectionStateChangeHandler} to gate auto-advance: only advance
+	 * to the next source when the slot actually unlocked, not merely because the
+	 * final guidance step completed.
+	 *
+	 * <p>Returns {@code false} after {@link #startSequence} until
+	 * {@link #onItemObtained} confirms a target item was received.</p>
+	 */
+	public boolean wasTargetSlotUnlocked()
+	{
+		return targetSlotUnlocked;
 	}
 
 	/**
