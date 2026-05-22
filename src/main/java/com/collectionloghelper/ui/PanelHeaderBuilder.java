@@ -133,7 +133,7 @@ final class PanelHeaderBuilder
 		slayerStrategyView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(slayerStrategyView);
 
-		GuidanceBannerView guidanceBannerView = new GuidanceBannerView(requirementsChecker);
+		GuidanceBannerView guidanceBannerView = new GuidanceBannerView(requirementsChecker, itemManager);
 		guidanceBannerView.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		guidanceBannerView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(guidanceBannerView);
