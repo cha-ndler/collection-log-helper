@@ -184,9 +184,15 @@ public class StepProgressView extends JPanel
 		chipPanel.setAlignmentX(LEFT_ALIGNMENT);
 		add(chipPanel);
 
-		// B.5.2 chip strip — directly below the required-items chips
+		// B.5.2 chip strip — kept in the layout for backwards compatibility with
+		// test helpers that locate components by ordinal position, but permanently
+		// hidden. The source-level Recommended chip strip rendered by
+		// GuidanceBannerView (#599) replaces this per-step strip so recommended
+		// kit is visible from step 1 instead of only when the active step itself
+		// carries recommended items.
 		recChipPanel = new RecommendedItemsChipPanel(itemManager);
 		recChipPanel.setAlignmentX(LEFT_ALIGNMENT);
+		recChipPanel.setVisible(false);
 		add(recChipPanel);
 		add(Box.createVerticalStrut(2));
 
@@ -509,18 +515,19 @@ public class StepProgressView extends JPanel
 
 			if (groups.isEmpty())
 			{
-				// Flat layout — hide sections, show chip strip + required/recommended items inline
+				// Flat layout — hide sections, show chip strip + required/recommended items inline.
+				// recChipPanel is intentionally not updated; it was hoisted to source-level
+				// (#599) and is permanently hidden in this widget.
 				sectionsPanel.setVisible(false);
 				chipPanel.update(rows);
-				recChipPanel.update(recRows);
 				updateRequiredItemDisplay(rows);
 				updateRecommendedItemDisplay(recRows);
 			}
 			else
 			{
-				// Sectioned layout — hide inline panels (including chip strip), render section blocks
+				// Sectioned layout — hide inline panels (including chip strip), render section blocks.
+				// recChipPanel is intentionally not updated; see #599.
 				chipPanel.update(Collections.<RequiredItemDisplay>emptyList());
-				recChipPanel.update(Collections.<RequiredItemDisplay>emptyList());
 				requiredItemsPanel.removeAll();
 				requiredItemsPanel.setVisible(false);
 				recommendedItemsPanel.removeAll();
