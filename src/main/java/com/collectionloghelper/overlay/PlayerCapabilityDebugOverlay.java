@@ -188,6 +188,15 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 			return null;
 		}
 
+		// #486 Pass-3 fix: the C1–C5 state sources have no event-subscriber that
+		// calls refresh() yet, so without a pull here their snapshots stay empty
+		// even on a maxed account. Overlay paint runs on the client thread, so
+		// it is safe to invoke refresh() directly. Each refresh() is internally
+		// try/catch-guarded and retains the previous snapshot on failure; we
+		// wrap them defensively anyway so a single bad source cannot break the
+		// overlay paint pass.
+		refreshDetectionSources();
+
 		panelComponent.getChildren().clear();
 		panelComponent.getChildren().add(TitleComponent.builder()
 			.text("CLH Capability Debug")
@@ -207,6 +216,40 @@ public class PlayerCapabilityDebugOverlay extends OverlayPanel
 		safeRender("Quest sub-milestones", this::renderQuestSubMilestones);
 
 		return super.render(graphics);
+	}
+
+	/**
+	 * Pull-refresh each C1–C5 state source on the overlay paint thread (which
+	 * is the client thread for RuneLite overlays). Each call is wrapped so a
+	 * thrown exception in one source cannot prevent the rest from refreshing.
+	 *
+	 * <p>This is the diagnostic-overlay's workaround for the missing event-driven
+	 * refresh wiring on the underlying detector classes (PR #461, #462, #463,
+	 * #470). Once those classes gain proper {@code @Subscribe} handlers in
+	 * lifecycle routers, this pull can be removed without changing the overlay
+	 * output — but until then it is what makes the C1–C5 rows actually show
+	 * the player's live state.
+	 */
+	private void refreshDetectionSources()
+	{
+		tryRefresh(pohTeleportInventory::refresh);
+		tryRefresh(equippedItemState::refresh);
+		tryRefresh(diaryTierState::refresh);
+		tryRefresh(skillCapePerkState::refresh);
+		tryRefresh(questProgressState::refresh);
+	}
+
+	private static void tryRefresh(Runnable refresher)
+	{
+		try
+		{
+			refresher.run();
+		}
+		catch (Exception ignored)
+		{
+			// Snapshot retained by the source's own catch block; rendering
+			// continues so the remaining sections still show fresh data.
+		}
 	}
 
 	// -------------------------------------------------------------------------
