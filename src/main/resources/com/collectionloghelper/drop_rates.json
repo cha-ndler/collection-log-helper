@@ -1465,6 +1465,12 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ],
+      "skills": [
+        {
+          "skill": "MINING",
+          "level": 65
+        }
       ]
     },
     "items": [
@@ -1555,12 +1561,16 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to Ghorrock Dungeon, or travel via Weiss Salt Mine",
+        "description": "Use Ring of Shadows to teleport to Ghorrock Dungeon, or travel via Weiss Salt Mine. Bring crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          28327
+        ],
+        "section": "Travel"
       },
       {
         "description": "Navigate through Ghorrock Prison to the Asylum stairs",
@@ -1569,17 +1579,28 @@
         "worldPlane": 2,
         "objectId": 49100,
         "objectInteractAction": "Climb",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill Duke Sucellus. Use Protect from Melee, dodge the falling ice, and avoid the blue mushroom gas clouds",
+        "description": "Enter the Asylum arena to start the fight",
+        "worldX": 2846,
+        "worldY": 3938,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 6,
+        "section": "Combat"
+      },
+      {
+        "description": "Kill Duke Sucellus. Mine arder powder, musca powder and salax salt from the asylum vents, craft arder-musca poisons, then use Protect from Melee with crush weapons (Bandos godsword or Inquisitor's mace) since Duke resists slash and stab. Dodge the falling ice patches and stay clear of the gas vents.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
         "npcId": 12191,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12191
+        "completionNpcId": 12191,
+        "section": "Combat"
       }
     ],
     "ironKillTimeSeconds": 150,
@@ -1596,6 +1617,12 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ],
+      "skills": [
+        {
+          "skill": "RANGED",
+          "level": 70
+        }
       ]
     },
     "items": [
@@ -1686,12 +1713,16 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to The Scar, or rowboat from beneath the Wizards's Tower",
+        "description": "Use Ring of Shadows to teleport to The Scar, or take the rowboat in the Wizards' Tower basement. Bring ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          28327
+        ],
+        "section": "Travel"
       },
       {
         "description": "Climb the handholds to enter The Leviathan's arena",
@@ -1700,17 +1731,28 @@
         "worldPlane": 0,
         "objectId": 47592,
         "objectInteractAction": "Climb",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill The Leviathan. Dodge the boulder attacks, use Protect from Magic during ranged phase, and destroy the Shadow Leeches",
+        "description": "Arrive in The Leviathan's instance",
+        "worldX": 3104,
+        "worldY": 3162,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 6,
+        "section": "Combat"
+      },
+      {
+        "description": "Kill The Leviathan. Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee) and step at least one tile away from the falling-debris warning at the end of each volley to avoid the permanent rock spawns that one-shot lower-defence accounts.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
         "npcId": 12214,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12214
+        "completionNpcId": 12214,
+        "section": "Combat"
       }
     ],
     "afkLevel": 0
@@ -1725,6 +1767,12 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ],
+      "skills": [
+        {
+          "skill": "RANGED",
+          "level": 75
+        }
       ]
     },
     "items": [
@@ -1815,12 +1863,17 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to Lassar Undercity, or enter the sinkhole north-west of Camdozaal",
+        "description": "Use Ring of Shadows to teleport to Lassar Undercity, or enter the sinkhole north-west of Camdozaal. Bring the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)), prayer potions, and Saradomin brews.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          28327,
+          28357
+        ],
+        "section": "Travel"
       },
       {
         "description": "Climb the rope down the sinkhole to enter Lassar Undercity",
@@ -1829,17 +1882,34 @@
         "worldPlane": 0,
         "objectId": 48197,
         "objectInteractAction": "Climb-rope",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "requiredItemIds": [
+          28357
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Kill The Whisperer. Dodge the tentacle attacks in the pillared room, switch prayers for the Screech attack, and step on the correct tiles during the shadow phase",
+        "description": "Disturb the Odd Figure to start the fight",
+        "worldX": 3007,
+        "worldY": 3477,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 6,
+        "requiredItemIds": [
+          28357
+        ],
+        "section": "Combat"
+      },
+      {
+        "description": "Kill The Whisperer. Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys, use the blackstone fragment to enter the Shadow Realm and step on the four correct tiles to bank her shield, and keep your sanity bar above zero or you will die in 10 ticks.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
         "npcId": 12204,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12204
+        "completionNpcId": 12204,
+        "section": "Combat"
       }
     ],
     "ironKillTimeSeconds": 210,
@@ -1856,6 +1926,12 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ],
+      "skills": [
+        {
+          "skill": "ATTACK",
+          "level": 70
+        }
       ]
     },
     "items": [
@@ -1946,12 +2022,16 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to The Stranglewood, or walk from the Kourend Woodland",
+        "description": "Use Ring of Shadows to teleport to The Stranglewood, or walk from the Kourend Woodland. Bring slash weapon (Saeldor or Soulreaper axe) since Vardorvis is weakest to slash, prayer potions, Saradomin brews, and high-tier melee armour.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          28327
+        ],
+        "section": "Travel"
       },
       {
         "description": "Enter the Stranglewood Temple to reach the boss arena. Climb over the rocks to start the fight",
@@ -1960,17 +2040,28 @@
         "worldPlane": 0,
         "objectId": 48723,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill Vardorvis. Use Protect from Melee, dodge the axes, and kill the Strangled spawns quickly before they heal the boss",
+        "description": "Arrive in Vardorvis' instance",
+        "worldX": 1175,
+        "worldY": 3424,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 6,
+        "section": "Combat"
+      },
+      {
+        "description": "Kill Vardorvis. Use Protect from Melee with slash weapons (Soulreaper axe or Blade of Saeldor) since he resists stab and crush, keep moving to dodge the spinning axes spawned from ground cracks (they one-shot if you stand still late-fight), and kill the Strangled spawns immediately or they will heal him.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
         "npcId": 12223,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12223
+        "completionNpcId": 12223,
+        "section": "Combat"
       }
     ],
     "afkLevel": 0
@@ -1986,6 +2077,12 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ],
+      "skills": [
+        {
+          "skill": "MINING",
+          "level": 65
+        }
       ]
     },
     "items": [
@@ -2076,12 +2173,17 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to Ghorrock Dungeon, or travel via Weiss Salt Mine",
+        "description": "Use Ring of Shadows to teleport to Ghorrock Dungeon, or travel via Weiss Salt Mine. Bring an Awakener's orb to enable the Awakened fight, crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          28327,
+          28334
+        ],
+        "section": "Travel"
       },
       {
         "description": "Navigate through Ghorrock Prison to the Asylum stairs",
@@ -2090,17 +2192,34 @@
         "worldPlane": 2,
         "objectId": 49100,
         "objectInteractAction": "Climb",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "requiredItemIds": [
+          28334
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Kill Duke Sucellus (Awakened). Use Protect from Melee, dodge the falling ice, and avoid the blue mushroom gas clouds. Awakened mode has enhanced mechanics and higher stats",
+        "description": "Enter the Asylum gates and select 'Yes' when prompted to consume the Awakener's orb",
+        "worldX": 2846,
+        "worldY": 3938,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 6,
+        "requiredItemIds": [
+          28334
+        ],
+        "section": "Combat"
+      },
+      {
+        "description": "Kill Duke Sucellus (Awakened). Repeat the salt-vent cycle to craft arder-musca poisons, then use Protect from Melee with crush weapons (Bandos godsword or Inquisitor's mace) since Duke resists slash and stab. Awakened version hits harder and adds a second extremity orientation - dodge the falling ice patches and avoid gas vents or you will die through brews.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
         "npcId": 12191,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12191
+        "completionNpcId": 12191,
+        "section": "Combat"
       }
     ],
     "afkLevel": 0
@@ -2116,6 +2235,12 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ],
+      "skills": [
+        {
+          "skill": "RANGED",
+          "level": 75
+        }
       ]
     },
     "items": [
@@ -2206,31 +2331,50 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to The Scar, or rowboat from beneath the Wizards's Tower",
+        "description": "Use Ring of Shadows to teleport to The Scar, or take the rowboat in the Wizards' Tower basement. Bring an Awakener's orb to enable the Awakened fight, ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          28327,
+          28334
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Climb the handholds to enter The Leviathan's arena",
+        "description": "Climb the handholds with the Awakener's orb in your inventory and select 'Yes' when prompted",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
         "objectId": 47592,
         "objectInteractAction": "Climb",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "requiredItemIds": [
+          28334
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Kill The Leviathan (Awakened). Dodge the boulder attacks, use Protect from Magic during ranged phase, and destroy the Shadow Leeches. Awakened mode has enhanced mechanics and higher stats",
+        "description": "Arrive in The Leviathan (Awakened) instance",
+        "worldX": 3104,
+        "worldY": 3162,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 6,
+        "section": "Combat"
+      },
+      {
+        "description": "Kill The Leviathan (Awakened). Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee). Awakened-mode volleys arrive faster and add a Rocks phase you must outrun, and you must step away from the end-of-volley debris warning to avoid permanent rock spawns that one-shot you.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
         "npcId": 12214,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12214
+        "completionNpcId": 12214,
+        "section": "Combat"
       }
     ],
     "afkLevel": 0
@@ -2245,6 +2389,12 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ],
+      "skills": [
+        {
+          "skill": "RANGED",
+          "level": 80
+        }
       ]
     },
     "items": [
@@ -2335,12 +2485,18 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to Lassar Undercity, or enter the sinkhole north-west of Camdozaal",
+        "description": "Use Ring of Shadows to teleport to Lassar Undercity, or enter the sinkhole north-west of Camdozaal. Bring an Awakener's orb to enable the Awakened fight, the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)), prayer potions, and Saradomin brews.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          28327,
+          28334,
+          28357
+        ],
+        "section": "Travel"
       },
       {
         "description": "Climb the rope down the sinkhole to enter Lassar Undercity",
@@ -2349,17 +2505,36 @@
         "worldPlane": 0,
         "objectId": 48197,
         "objectInteractAction": "Climb-rope",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "requiredItemIds": [
+          28334,
+          28357
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Kill The Whisperer (Awakened). Dodge the tentacle attacks in the pillared room, switch prayers for the Screech attack, and step on the correct tiles during the shadow phase. Awakened mode has enhanced mechanics and higher stats",
+        "description": "Disturb the Odd Figure with the Awakener's orb in inventory and select 'Yes' when prompted",
+        "worldX": 3007,
+        "worldY": 3477,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 6,
+        "requiredItemIds": [
+          28334,
+          28357
+        ],
+        "section": "Combat"
+      },
+      {
+        "description": "Kill The Whisperer (Awakened). Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys, hop into the Shadow Realm with the blackstone fragment to break the four shadow tiles before her shield resets, and never let your sanity bar fully deplete or you will die within 10 ticks. Awakened-mode tentacle patterns chain into the screech attack faster.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
         "npcId": 12204,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12204
+        "completionNpcId": 12204,
+        "section": "Combat"
       }
     ],
     "ironKillTimeSeconds": 300,
@@ -2376,6 +2551,12 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
+      ],
+      "skills": [
+        {
+          "skill": "ATTACK",
+          "level": 75
+        }
       ]
     },
     "items": [
@@ -2466,31 +2647,50 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to The Stranglewood, or walk from the Kourend Woodland",
+        "description": "Use Ring of Shadows to teleport to The Stranglewood, or walk from the Kourend Woodland. Bring an Awakener's orb to enable the Awakened fight, slash weapon (Soulreaper axe or Blade of Saeldor) since Vardorvis is weakest to slash, prayer potions, Saradomin brews, and high-tier melee armour.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          28327,
+          28334
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Enter the Stranglewood Temple to reach the boss arena. Awakened mode has enhanced stats and mechanics",
+        "description": "Enter the Stranglewood Temple, then climb the rocks with the Awakener's orb in inventory and select 'Yes' when prompted",
         "worldX": 1174,
         "worldY": 3428,
         "worldPlane": 0,
         "objectId": 48723,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "requiredItemIds": [
+          28334
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Kill Vardorvis (Awakened). Use Protect from Melee, dodge the axes, and kill the Strangled spawns quickly before they heal the boss. Awakened mode has enhanced mechanics and higher stats",
+        "description": "Arrive in Vardorvis (Awakened) instance",
+        "worldX": 1175,
+        "worldY": 3424,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 6,
+        "section": "Combat"
+      },
+      {
+        "description": "Kill Vardorvis (Awakened). Use Protect from Melee with slash weapons (Soulreaper axe or Blade of Saeldor) since he resists stab and crush, keep moving in a controlled pattern to dodge the axes spawned from ground cracks (Awakened mode adds an extra axe at high HP), and kill the Strangled spawns immediately or they will heal him through your damage.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
         "npcId": 12223,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12223
+        "completionNpcId": 12223,
+        "section": "Combat"
       }
     ],
     "afkLevel": 0
