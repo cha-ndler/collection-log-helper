@@ -9,18 +9,18 @@ Readiness gate for the `v1.0.0-hub` resubmission to `runelite/plugin-hub`.
 All Tier-A milestones must be `[x] done` in [docs/ROADMAP.md — Status log](ROADMAP.md#9-status-log)
 before the tag is pushed.
 
-Current state (as of 2026-05-12):
+Current state (as of 2026-05-21):
 
 | Milestone | Status |
 |-----------|--------|
 | A1 — Panel decomposition | [x] done — PR #349 |
-| A1b — Shell widget decomposition | [x] done — PR #351 |
-| A2 — Plugin class < 1,000 LOC | [x] done — PR #347 |
+| A1b — Shell widget decomposition | [x] done — PR #351 + #503 follow-up |
+| A2 — Plugin class < 1,000 LOC | [x] done — PR #347 + #503 follow-up (now 488 LOC) |
 | A3 — Issue triage and labels | [x] done |
 | A4 — Plugin Hub self-review doc | [x] done — PR #346 |
 | A5 — Screenshots refresh | [x] done |
 | A5.1–A5.6 — Data sourcing infrastructure | [x] done |
-| A6 — Tag v1.0.0-hub (this milestone) | [/] in-progress — tag re-cut pending |
+| A6 — Tag v1.0.0-hub (this milestone) | [?] blocked — quiet-week countdown restarts from latest merge |
 
 The originally-drafted tag from 2026-04-17 (commit `b9518653`, mapping to PR #357) is stale.
 Between that commit and the current `master` HEAD, 13 PRs landed — RuneLite client bump,
@@ -46,12 +46,12 @@ Expected result: empty list.  If any P1 bugs are open, resolve them before pushi
 
 `docs/plugin-hub-review.md` must have no un-triaged **Red** items.
 
-Current open reds (as of 2026-05-12):
+Current open reds (as of 2026-05-21):
 
 | Item | Mitigation |
 |------|-----------|
-| `runelite-plugin` Gradle plugin missing | Investigate whether Hub CI requires `com.openosrs.externalplugin`; add if needed. Low-risk: the build passes without it and no reviewer comment cited it explicitly in #11156. |
-| Files > 800 LOC | Resolved by A1/A1b: `CollectionLogHelperPanel` shell is now 698 LOC; `CollectionLogHelperPlugin` is 904 LOC (borderline, not over). Residuals: `GuidanceOverlayCoordinator` (859), `EfficiencyCalculator` (754), `GuidanceSequencer` (719) — all functional, acceptable at submission. Re-measure residuals after the 2026-05-10 fix burst before submission. |
+| `runelite-plugin` Gradle plugin missing | Verified false positive: `runelite/example-plugin` canonical template does not apply this plugin either. The `plugin_hub_validate` finding is a tool issue, not a Hub requirement. |
+| Files > 800 LOC | Resolved across the #503 roast remediation campaign and downstream cleanups. Current measurements: `CollectionLogHelperPlugin.java` 488, `CollectionLogHelperPanel.java` 605, `GuidanceOverlayCoordinator.java` 557, `GuidanceSequencer.java` 623, `EfficiencyCalculator.java` 777 — all five under the 800 floor. |
 
 Re-run `mcp__plugin_runelite-dev-toolkit_runelite-dev__plugin_hub_validate` on the tag commit to
 confirm no new findings before opening the PR.
@@ -72,11 +72,10 @@ on 2026-05-10 (PRs #372, #384, #386–#394).  The tag will be deleted locally an
 the current `master` HEAD once this CHANGELOG/doc refresh PR merges.
 
 **New earliest-push date**: 7 calendar days after the final merge in the v1.0.0-hub
-content set lands on `master`.  The Tier B/B.5/C/E/F cascade closed on 2026-05-14 and
-the JDK 17 build fix ([#475](../../pull/475)) merged 2026-05-15, so the earliest push
-date is **2026-05-22**.  If any additional merges land during the window — for any
-reason, including the post-cascade review fixes — the clock resets to 7 days from the
-latest merge.
+content set lands on `master`. The Pass 2 regression burst and follow-up test/CI work
+landed on 2026-05-21 (PRs #580–#596), so the earliest push date is **2026-05-28**.
+If any additional merges land during the window — for any reason, including the
+post-cascade review fixes — the clock resets to 7 days from the latest merge.
 
 ---
 
