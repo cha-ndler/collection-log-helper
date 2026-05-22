@@ -52,9 +52,7 @@ public interface CollectionLogHelperConfig extends Config
 	@ConfigItem(
 		keyName = "enableCollectionLogNetImport",
 		name = "collectionlog.net Sync",
-		description = "Imports your collection log progress from collectionlog.net using your RSN. "
-			+ "Marks obtained items in the panel without needing to open the in-game collection log first. "
-			+ "Optional — without this, items are detected automatically once you open the collection log in-game.",
+		description = "Pulls collection-log progress from collectionlog.net by RSN.",
 		section = syncSection,
 		position = 0
 	)
@@ -291,9 +289,7 @@ public interface CollectionLogHelperConfig extends Config
 	@ConfigItem(
 		keyName = "enableTempleOsrsSync",
 		name = "TempleOSRS KC Sync",
-		description = "Pulls your kill counts for tracked activities from TempleOSRS. "
-			+ "Powers the Dry Streak panel and tightens kill-time estimates per source. "
-			+ "Optional — without this, kill counts are learned per session via the Learn Kill Times option below.",
+		description = "Pulls per-source kill counts from TempleOSRS by RSN.",
 		section = syncSection,
 		position = 1
 	)
