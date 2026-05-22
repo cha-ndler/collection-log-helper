@@ -453,7 +453,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill K'ril Tsutsaroth. Protect from Magic, eat through Balfrug + Tstanon prayer drain, watch for K'ril's curse mechanic which drains your prayer.",
+        "description": "Kill K'ril Tsutsaroth. Protect from Melee, eat through Balfrug + Tstanon prayer drain, watch for K'ril's curse special which strips your prayer in one hit.",
         "worldX": 2914,
         "worldY": 5350,
         "worldPlane": 2,
