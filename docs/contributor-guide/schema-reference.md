@@ -204,7 +204,7 @@ Only non-null fields in the alternative override the base step — null fields f
 
 ## Requirements
 
-Sources can specify quest and skill requirements. Locked sources are indicated in the UI and can be hidden.
+Sources can specify quest, skill, achievement-diary, POH-teleport, and equipped-item requirements. All five fields are optional and nullable; an absent field places no constraint. Locked sources are indicated in the UI and can be hidden.
 
 ```json
 {
@@ -212,10 +212,25 @@ Sources can specify quest and skill requirements. Locked sources are indicated i
     "quests": ["SONG_OF_THE_ELVES"],
     "skills": [
       {"skill": "SLAYER", "level": 95}
-    ]
+    ],
+    "diaries": ["KANDARIN_ELITE"],
+    "pohTeleports": ["JEWELLERY_BOX_FANCY"],
+    "equippedItemIds": [22557]
   }
 }
 ```
+
+| Field | Type | Description |
+|---|---|---|
+| `quests` | `string[]` | `net.runelite.api.Quest` enum names; FINISHED semantics. |
+| `skills` | `SkillRequirement[]` | Each entry: `{"skill": "<Skill enum>", "level": <int>}` — real-level threshold. |
+| `diaries` | `string[]` | Flat `<AREA>_<TIER>` strings (e.g. `"KANDARIN_ELITE"`); resolved to `Varbits.DIARY_<NAME>`. |
+| `pohTeleports` | `string[]` | `com.collectionloghelper.player.PohTeleport` enum names (`MOUNTED_GLORY`, `JEWELLERY_BOX_FANCY`, etc.); AND-evaluated against `PohTeleportInventory.hasTeleport(...)`. Added in B0 (#623). |
+| `equippedItemIds` | `int[]` | RuneLite ItemID integers; AND-evaluated against `EquippedItemState.hasEquipped(int)`. Caution: `hasEquipped(...)` returns true even at 0 charges — any conditional alternative gating on a chargeable equip (Drakan's medallion, ring of shadows, Quetzal whistle) must pair with a non-equipped fallback alternative. Added in B0 (#623). |
+
+All five fields participate in a single AND-conjunction: the requirement is met only when every populated field's clause passes. An empty list (`[]`) is vacuously true; null (or absent) skips the clause entirely.
+
+`SourceRequirements` is also the type of `ConditionalAlternative.requirements`, so all five fields are usable at the step-alternative level for first-match-wins branch selection.
 
 ## Waypoints
 
