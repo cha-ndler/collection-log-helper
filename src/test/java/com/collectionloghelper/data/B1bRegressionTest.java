@@ -46,9 +46,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <ul>
  *   <li>Carry exactly one {@code conditionalAlternatives} entry.</li>
  *   <li>That entry's {@code requirements.equippedItemIds} must equal
- *       {@code [22400]} (worn Drakan's medallion ItemID — verified via the
- *       wiki infobox + RuneLite ItemID.java + NullItemID.NULL_22401 placeholder
- *       hint; see {@code .claude/memory/feedback_item_id_cross_validation.md}).</li>
+ *       {@code [22400]} (worn Drakan's medallion ItemID, verified via the
+ *       wiki infobox plus RuneLite ItemID.java plus the
+ *       NullItemID.NULL_22401 placeholder-slot hint).</li>
  *   <li>That entry must override {@code description} and {@code travelTip}.</li>
  *   <li>The base step's description must NOT mention "Drakan's medallion" —
  *       the base must always be a working no-equip fallback per the C6 scoping
