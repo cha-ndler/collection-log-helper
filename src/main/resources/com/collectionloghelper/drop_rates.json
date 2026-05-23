@@ -3000,12 +3000,21 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Drakan's medallion to teleport to Slepe, or walk via Canifis",
+        "description": "Walk to Slepe via Canifis (Kharyrll teleport or fairy ring CKS, then run south through Mort'ton).",
         "worldX": 3728,
         "worldY": 3302,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "equippedItemIds": [22400]
+            },
+            "description": "Use Drakan's medallion to teleport directly to Slepe.",
+            "travelTip": "Drakan's medallion -> Slepe"
+          }
+        ]
       },
       {
         "description": "Climb down the stairs in Slepe church to enter the Sisterhood Sanctuary",
@@ -3183,12 +3192,21 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Drakan's medallion to teleport to Slepe, or walk via Canifis",
+        "description": "Walk to Slepe via Canifis (Kharyrll teleport or fairy ring CKS, then run south through Mort'ton).",
         "worldX": 3728,
         "worldY": 3302,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "equippedItemIds": [22400]
+            },
+            "description": "Use Drakan's medallion to teleport directly to Slepe.",
+            "travelTip": "Drakan's medallion -> Slepe"
+          }
+        ]
       },
       {
         "description": "Climb down the stairs in Slepe church to enter the Sisterhood Sanctuary",
@@ -5669,7 +5687,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Drakan's medallion to teleport to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + diamond bolts (e) for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
+        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Bring Scythe of vitur (or Soulreaper axe), Tbow + diamond bolts (e) for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -5677,6 +5695,15 @@
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "equippedItemIds": [22400]
+            },
+            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + diamond bolts (e) for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
+            "travelTip": "Drakan's medallion -> Ver Sinhaza"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -5886,7 +5913,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Drakan's medallion to teleport to Ver Sinhaza. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + diamond bolts (e), Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
+        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + diamond bolts (e), Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -5894,6 +5921,15 @@
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "equippedItemIds": [22400]
+            },
+            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + diamond bolts (e), Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
+            "travelTip": "Drakan's medallion -> Ver Sinhaza"
+          }
+        ],
         "section": "Travel"
       },
       {
