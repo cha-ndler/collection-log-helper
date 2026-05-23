@@ -431,12 +431,12 @@ public class GuidanceSequencerNestedConditionalTest
 
 	private SourceRequirements makeQuestReq(String questName)
 	{
-		return new SourceRequirements(Arrays.asList(questName), null, null);
+		return new SourceRequirements(Arrays.asList(questName), null, null, null, null);
 	}
 
 	private SourceRequirements makeSkillReq(String skill, int level)
 	{
-		return new SourceRequirements(null, Arrays.asList(new SkillRequirement(skill, level)), null);
+		return new SourceRequirements(null, Arrays.asList(new SkillRequirement(skill, level)), null, null, null);
 	}
 
 	/**
