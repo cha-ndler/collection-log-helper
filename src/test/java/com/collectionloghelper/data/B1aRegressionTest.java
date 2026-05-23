@@ -46,9 +46,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <ul>
  *   <li>Carry exactly one {@code conditionalAlternatives} entry.</li>
  *   <li>That entry's {@code requirements.equippedItemIds} must equal
- *       {@code [28327]} (charged Ring of shadows worn ItemID — verified via
- *       abextm cache viewer; see
- *       {@code .claude/memory/feedback_item_id_cross_validation.md}).</li>
+ *       {@code [28327]} (charged Ring of shadows worn ItemID, verified via
+ *       the abextm cache viewer plus RuneLite ItemID.java plus the
+ *       NullItemID.NULL_28328 placeholder-slot hint).</li>
  *   <li>That entry must override {@code description} and {@code travelTip}.</li>
  *   <li>The base step's description must NOT mention "Ring of Shadows" — the
  *       base must always be a working no-equip fallback per the C6 scoping
