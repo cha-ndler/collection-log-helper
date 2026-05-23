@@ -6223,6 +6223,15 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "diaries": ["DESERT_HARD"]
+            },
+            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). Bring Tbow or Bow of faerdhinen, Osmumten's fang for stab phases, Tumeken's shadow if owned, full brews/restores and prayer potions; set invocations under 150 raid level for entry-mode loot",
+            "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -6517,6 +6526,15 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "diaries": ["DESERT_HARD"]
+            },
+            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). Bring Tbow or Bow of faerdhinen, Osmumten's fang, Tumeken's shadow if owned, full brews/restores; aim for invocations totalling raid level 300-450 for solid loot efficiency before entering",
+            "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -6811,6 +6829,15 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "diaries": ["DESERT_HARD"]
+            },
+            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). At raid level 500 bring Tumeken's shadow or Tbow, Osmumten's fang, full brews/restores, extra prayer potions and a Soulreaper axe spec; gear must be top-tier or kill times balloon",
+            "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -6919,7 +6946,16 @@
         "worldY": 6073,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "diaries": ["WESTERN_ELITE"]
+            },
+            "description": "Operate the Crystal teleport seed for the rub-on-cape variant (Western Provinces Elite diary attaches the Prifddinas teleport to your max / quest / achievement cape, so you can teleport from anywhere without dedicating an inventory slot to the seed). Then run north-west to the Gauntlet portal in Lletya district",
+            "travelTip": "Cape Crystal teleport -> Prifddinas (Western Provinces Elite diary unlock)"
+          }
+        ]
       },
       {
         "description": "Talk to the Gauntlet NPC and pick Enter -> Corrupted challenge to start the harder instance",
@@ -7020,7 +7056,16 @@
         "worldY": 6073,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "diaries": ["WESTERN_ELITE"]
+            },
+            "description": "Operate the Crystal teleport seed for the rub-on-cape variant (Western Provinces Elite diary attaches the Prifddinas teleport to your max / quest / achievement cape, so you can teleport from anywhere without dedicating an inventory slot to the seed). Then run north-west to the Gauntlet portal in Lletya district",
+            "travelTip": "Cape Crystal teleport -> Prifddinas (Western Provinces Elite diary unlock)"
+          }
+        ]
       },
       {
         "description": "Talk to the Gauntlet NPC and pick Enter -> Standard challenge to start the instance",
