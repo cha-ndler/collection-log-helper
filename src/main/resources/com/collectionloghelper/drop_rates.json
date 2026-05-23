@@ -116,6 +116,15 @@
         "requiredItemIds": [
           11804
         ],
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": ["JEWELLERY_BOX_FANCY"]
+            },
+            "description": "POH jewellery box -> Combat bracelet -> Warriors' Guild, then run north via Death Plateau to the God Wars Dungeon entrance",
+            "travelTip": "POH Combat bracelet -> Warriors' Guild -> run north to GWD"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -273,6 +282,15 @@
         "completionDistance": 8,
         "requiredItemIds": [
           12018
+        ],
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": ["JEWELLERY_BOX_FANCY"]
+            },
+            "description": "POH jewellery box -> Combat bracelet -> Warriors' Guild, then run north via Death Plateau to the God Wars Dungeon entrance",
+            "travelTip": "POH Combat bracelet -> Warriors' Guild -> run north to GWD"
+          }
         ],
         "section": "Travel"
       },
@@ -432,6 +450,15 @@
         "requiredItemIds": [
           2412
         ],
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": ["JEWELLERY_BOX_FANCY"]
+            },
+            "description": "POH jewellery box -> Combat bracelet -> Warriors' Guild, then run north via Death Plateau to the God Wars Dungeon entrance",
+            "travelTip": "POH Combat bracelet -> Warriors' Guild -> run north to GWD"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -590,6 +617,15 @@
         "requiredItemIds": [
           9419
         ],
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": ["JEWELLERY_BOX_FANCY"]
+            },
+            "description": "POH jewellery box -> Combat bracelet -> Warriors' Guild, then run north via Death Plateau to the God Wars Dungeon entrance",
+            "travelTip": "POH Combat bracelet -> Warriors' Guild -> run north to GWD"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -736,6 +772,15 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
         "travelTip": "Zul-andra teleport scroll (fastest), or fairy ring BJS + run east",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": ["FAIRY_RING"]
+            },
+            "description": "Use the POH superior garden fairy ring (dramen/lunar staff equipped) to dial AKQ, then run east to Zul-Andra",
+            "travelTip": "POH superior garden fairy ring -> AKQ -> run east to Zul-Andra"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -844,6 +889,15 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
         "travelTip": "Lunar Isle teleport + talk to banker, Rellekka house portal, or Fremennik sea boots",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": ["MOUNTED_GLORY"]
+            },
+            "description": "POH mounted glory -> Edgeville fallback, then use a games necklace or other transport north to Rellekka docks and sail to Ungael",
+            "travelTip": "POH mounted glory -> Edgeville -> route north to Rellekka docks"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -1245,7 +1299,16 @@
         "worldY": 4382,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": ["JEWELLERY_BOX_FANCY"]
+            },
+            "description": "POH jewellery box -> Games necklace -> Wilderness Volcano, then run south to the lever room and pull the lever to enter the Corporeal Beast cave",
+            "travelTip": "POH Games necklace -> Wilderness Volcano -> south to lever room"
+          }
+        ]
       },
       {
         "description": "Enter the cave to reach the underground lair",
@@ -5233,6 +5296,15 @@
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": ["XERICS_TALISMAN"]
+            },
+            "description": "POH mounted Xeric's talisman -> Xeric's Glade, then run south to the Chambers of Xeric entrance. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Vasa/Vespula, and a Dragon claws or Bandos godsword spec for Olm head phases",
+            "travelTip": "POH mounted Xeric's talisman -> Xeric's Glade -> run south to CoX"
+          }
+        ],
         "section": "Travel"
       },
       {
