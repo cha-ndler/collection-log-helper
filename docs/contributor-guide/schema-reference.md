@@ -215,7 +215,7 @@ Sources can specify quest, skill, achievement-diary, POH-teleport, and equipped-
     ],
     "diaries": ["KANDARIN_ELITE"],
     "pohTeleports": ["JEWELLERY_BOX_FANCY"],
-    "equippedItemIds": [22557]
+    "equippedItemIds": [22400]
   }
 }
 ```
