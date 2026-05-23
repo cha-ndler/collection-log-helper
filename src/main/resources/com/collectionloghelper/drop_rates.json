@@ -1592,14 +1592,20 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to Ghorrock Dungeon, or travel via Weiss Salt Mine. Bring crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
+        "description": "Travel to Ghorrock Prison via the Weiss Salt Mine. Bring crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "requiredItemIds": [
-          28327
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "equippedItemIds": [28327]
+            },
+            "description": "Use Ring of Shadows -> Ghorrock Dungeon to teleport directly. Bring crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
+            "travelTip": "Ring of Shadows -> Ghorrock Dungeon"
+          }
         ],
         "section": "Travel"
       },
@@ -1744,14 +1750,20 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to The Scar, or take the rowboat in the Wizards' Tower basement. Bring ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
+        "description": "Travel to The Scar by taking the rowboat in the Wizards' Tower basement. Bring ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "requiredItemIds": [
-          28327
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "equippedItemIds": [28327]
+            },
+            "description": "Use Ring of Shadows -> The Scar to teleport directly. Bring ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
+            "travelTip": "Ring of Shadows -> The Scar"
+          }
         ],
         "section": "Travel"
       },
@@ -1894,15 +1906,23 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to Lassar Undercity, or enter the sinkhole north-west of Camdozaal. Bring the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)), prayer potions, and Saradomin brews.",
+        "description": "Travel to Lassar Undercity by entering the sinkhole north-west of Camdozaal. Bring the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)), prayer potions, and Saradomin brews.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
         "requiredItemIds": [
-          28327,
           28357
+        ],
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "equippedItemIds": [28327]
+            },
+            "description": "Use Ring of Shadows -> Lassar Undercity to teleport directly. Bring the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)), prayer potions, and Saradomin brews.",
+            "travelTip": "Ring of Shadows -> Lassar Undercity"
+          }
         ],
         "section": "Travel"
       },
@@ -2053,14 +2073,20 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to The Stranglewood, or walk from the Kourend Woodland. Bring slash weapon (Saeldor or Soulreaper axe) since Vardorvis is weakest to slash, prayer potions, Saradomin brews, and high-tier melee armour.",
+        "description": "Travel to The Stranglewood by walking from the Kourend Woodland. Bring slash weapon (Saeldor or Soulreaper axe) since Vardorvis is weakest to slash, prayer potions, Saradomin brews, and high-tier melee armour.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "requiredItemIds": [
-          28327
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "equippedItemIds": [28327]
+            },
+            "description": "Use Ring of Shadows -> The Stranglewood to teleport directly. Bring slash weapon (Saeldor or Soulreaper axe) since Vardorvis is weakest to slash, prayer potions, Saradomin brews, and high-tier melee armour.",
+            "travelTip": "Ring of Shadows -> The Stranglewood"
+          }
         ],
         "section": "Travel"
       },
