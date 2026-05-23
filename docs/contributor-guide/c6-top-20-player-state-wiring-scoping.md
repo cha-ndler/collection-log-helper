@@ -156,7 +156,7 @@ Four batches, grouped by **detector** (not by source), so each batch can be revi
 - B2 third because POH-teleport routes are a smaller subset and several share the same authored alternative across GWD bosses.
 - B3 last because diary shortcuts stack on top of branches authored in B1/B2 — easier to add a `diaries` clause to an existing alternative than to thread a separate diary-only alternative through.
 
-**Estimated PR count:** 4 PRs (1 Tier B schema + 3 Tier C data). Total touched sources: 20 (each appears in at least one batch, with the inventory-teleport subset of 5 sources deferred to a future C-extension milestone per §5 Q9). If schedule pressure demands, B3 can run in parallel with B0 since it doesn't depend on the new fields.
+**Estimated PR count:** 4 PRs (1 Tier B schema + 3 Tier C data). Batch coverage: **19 of 20** sources appear in at least one of B1/B2/B3 (row 15 Phantom Muspah is C5-only after the §5 Q9 correction, folded into the C5-handled-inline note in this same table). The inventory-teleport subset of 5 sources is deferred to a future C-extension milestone per §5 Q9. If schedule pressure demands, B3 can run in parallel with B0 since it doesn't depend on the new fields.
 
 ---
 
