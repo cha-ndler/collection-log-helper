@@ -24,6 +24,9 @@
  */
 package com.collectionloghelper.data;
 
+import com.collectionloghelper.player.EquippedItemState;
+import com.collectionloghelper.player.PohTeleport;
+import com.collectionloghelper.player.PohTeleportInventory;
 import java.awt.Color;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -45,15 +48,21 @@ import net.runelite.api.Varbits;
 public class RequirementsChecker
 {
 	private final Client client;
+	private final PohTeleportInventory pohTeleportInventory;
+	private final EquippedItemState equippedItemState;
 
 	private volatile Map<String, Boolean> accessibilityCache = Collections.emptyMap();
 	private volatile Map<String, List<String>> unmetCache = Collections.emptyMap();
 	private volatile boolean fairyRingAccess = false;
 
 	@Inject
-	private RequirementsChecker(Client client)
+	private RequirementsChecker(Client client,
+		PohTeleportInventory pohTeleportInventory,
+		EquippedItemState equippedItemState)
 	{
 		this.client = client;
+		this.pohTeleportInventory = pohTeleportInventory;
+		this.equippedItemState = equippedItemState;
 	}
 
 	/**
@@ -333,6 +342,41 @@ public class RequirementsChecker
 				catch (IllegalArgumentException e)
 				{
 					log.warn("Unknown skill enum: {}", skillReq.getSkill());
+				}
+			}
+		}
+
+		if (requirements.getPohTeleports() != null)
+		{
+			for (String teleportName : requirements.getPohTeleports())
+			{
+				try
+				{
+					PohTeleport teleport = PohTeleport.valueOf(teleportName);
+					if (!pohTeleportInventory.hasTeleport(teleport))
+					{
+						unmet.add("POH teleport: " + formatEnumName(teleportName));
+					}
+				}
+				catch (IllegalArgumentException e)
+				{
+					log.warn("Unknown POH teleport enum: {}", teleportName);
+					unmet.add("POH teleport: " + formatEnumName(teleportName));
+				}
+			}
+		}
+
+		if (requirements.getEquippedItemIds() != null)
+		{
+			for (Integer itemId : requirements.getEquippedItemIds())
+			{
+				if (itemId == null)
+				{
+					continue;
+				}
+				if (!equippedItemState.hasEquipped(itemId))
+				{
+					unmet.add("Equipped item: " + itemId);
 				}
 			}
 		}
