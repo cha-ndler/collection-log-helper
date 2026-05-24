@@ -119,6 +119,13 @@
         "conditionalAlternatives": [
           {
             "requirements": {
+              "diaries": ["FREMENNIK_HARD"]
+            },
+            "description": "Trollheim teleport not required: use the Fremennik Hard diary unlocks (e.g. Lighthouse-area transport) plus the Goblin Village agility shortcut to reach the God Wars Dungeon entrance overland",
+            "travelTip": "Fremennik Hard diary route -> Goblin Village shortcut -> GWD"
+          },
+          {
+            "requirements": {
               "pohTeleports": ["JEWELLERY_BOX_FANCY"]
             },
             "description": "POH jewellery box -> Combat bracelet -> Warriors' Guild, then run north via Death Plateau to the God Wars Dungeon entrance",
@@ -892,10 +899,17 @@
         "conditionalAlternatives": [
           {
             "requirements": {
+              "diaries": ["FREMENNIK_HARD"]
+            },
+            "description": "Fremennik cape teleport directly to Rellekka, then run north to the docks and sail to Ungael via Torfinn (Lighthouse-via-Rellekka route)",
+            "travelTip": "Fremennik cape -> Rellekka -> run north to docks -> Torfinn"
+          },
+          {
+            "requirements": {
               "pohTeleports": ["MOUNTED_GLORY"]
             },
-            "description": "POH mounted glory -> Edgeville fallback, then use a games necklace or other transport north to Rellekka docks and sail to Ungael",
-            "travelTip": "POH mounted glory -> Edgeville -> route north to Rellekka docks"
+            "description": "POH mounted glory -> Edgeville fallback, then onward to Rellekka docks via available northern transport (no Fremennik teleport assumed) and sail to Ungael",
+            "travelTip": "POH mounted glory -> Edgeville -> onward to Rellekka docks"
           }
         ],
         "section": "Travel"
@@ -5297,6 +5311,13 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
         "conditionalAlternatives": [
+          {
+            "requirements": {
+              "diaries": ["KOUREND_HARD"]
+            },
+            "description": "Kourend Hard diary: use the Xeric's Heart teleport inside Lovakengj to land roughly two tiles from the Chambers of Xeric prep room. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Vasa/Vespula, and a Dragon claws or Bandos godsword spec for Olm head phases",
+            "travelTip": "Kourend Hard: Xeric's Heart teleport (Lovakengj) -> 2 tiles to prep room"
+          },
           {
             "requirements": {
               "pohTeleports": ["XERICS_TALISMAN"]
