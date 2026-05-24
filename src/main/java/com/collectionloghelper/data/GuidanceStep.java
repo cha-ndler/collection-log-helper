@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import com.collectionloghelper.data.condition.ConditionNode;
+import com.collectionloghelper.data.condition.ConditionNodeDeserializer;
+import com.google.gson.annotations.JsonAdapter;
 import javax.annotation.Nullable;
 import lombok.Value;
 
@@ -284,6 +286,7 @@ public class GuidanceStep
 	 * this field. Phase 3 (separate PR) introduces the first pilot wiring.
 	 */
 	@Nullable
+	@JsonAdapter(ConditionNodeDeserializer.class)
 	ConditionNode conditionTree;
 
 	public int getCompletionDistance()
