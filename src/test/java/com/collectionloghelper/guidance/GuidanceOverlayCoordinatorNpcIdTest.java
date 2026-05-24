@@ -309,7 +309,8 @@ public class GuidanceOverlayCoordinatorNpcIdTest
 			null,           // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 

@@ -120,7 +120,8 @@ public class GuidanceSequencerTest
 			null,           // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -154,7 +155,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -188,7 +190,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -222,7 +225,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -256,7 +260,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -290,7 +295,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -324,7 +330,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -358,7 +365,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -393,7 +401,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -427,7 +436,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -461,7 +471,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -495,7 +506,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -983,7 +995,8 @@ public class GuidanceSequencerTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 
 		List<GuidanceStep> steps = Arrays.asList(
@@ -1457,7 +1470,8 @@ public class GuidanceSequencerTest
 			alternatives,
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -1693,7 +1707,8 @@ public class GuidanceSequencerTest
 			Collections.emptyList(),  // empty list of alternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 
 		List<GuidanceStep> steps = Arrays.asList(step);

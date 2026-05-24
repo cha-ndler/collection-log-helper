@@ -252,7 +252,8 @@ public class DynamicTargetManagerTest
 			null,  // conditionalAlternatives
 			null,  // section
 			null,  // waypoints
-			evaluatorKey  // dynamicTargetEvaluator
+			evaluatorKey,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 

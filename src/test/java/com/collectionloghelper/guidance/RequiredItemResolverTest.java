@@ -653,7 +653,8 @@ public class RequiredItemResolverTest
 			null,  // conditionalAlternatives
 			null, // section
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -693,7 +694,8 @@ public class RequiredItemResolverTest
 			null,  // conditionalAlternatives
 			null,  // section
 			null,  // waypoints
-			null   // dynamicTargetEvaluator
+			null,   // dynamicTargetEvaluator
+			null   // conditionTree
 		);
 	}
 }
