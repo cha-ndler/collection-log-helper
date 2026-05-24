@@ -39,19 +39,36 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * B1 Phase 1+2 migration guard.
+ * B1 migration guard.
  *
  * <p>The B1 schema landing is strictly additive: a new {@code conditionTree}
- * slot on {@link GuidanceStep}, but zero existing production sources opt in.
- * This test loads the full production {@code drop_rates.json} and asserts that
- * every step on every source has a null {@code conditionTree}. Phase 3 (a
- * separate later PR) is the first opportunity to flip a single source.
+ * slot on {@link GuidanceStep}. Phase 1+2 opted no production source in.
+ * Phase 3 begins flipping a small number of pilot sources where the flat
+ * enum genuinely misrepresents completion. Each pilot must be listed in
+ * {@link #PHASE_3_PILOT_SOURCES} so this guard distinguishes intentional
+ * pilots from accidental opt-ins.
  *
  * <p>Mirrors the B2 / B3 / B5 regression-guard pattern: walk the database,
  * accumulate violations, fail with one readable message.
  */
 public class B1MigrationTest
 {
+	/**
+	 * Sources that have intentionally opted into {@code conditionTree} via
+	 * B1 Phase 3 pilots. Any new entry here must come in the same PR as the
+	 * {@code drop_rates.json} edit that adds the tree, and that PR must also
+	 * ship a structural regression test under
+	 * {@code src/test/java/com/collectionloghelper/data/}.
+	 *
+	 * <p>Current pilots:
+	 * <ul>
+	 *   <li>Trouble Brewing - victory-drop step, see
+	 *       {@code TroubleBrewingConditionTreePilotTest}.</li>
+	 * </ul>
+	 */
+	private static final java.util.Set<String> PHASE_3_PILOT_SOURCES =
+		java.util.Set.of("Trouble Brewing");
+
 	private DropRateDatabase database;
 
 	@BeforeEach
@@ -68,7 +85,7 @@ public class B1MigrationTest
 	}
 
 	@Test
-	public void everyStepHasNullConditionTree()
+	public void onlyAllowlistedPilotsCarryConditionTree()
 	{
 		List<String> violations = new ArrayList<>();
 
@@ -79,6 +96,7 @@ public class B1MigrationTest
 			{
 				continue;
 			}
+			boolean isPilot = PHASE_3_PILOT_SOURCES.contains(source.getName());
 			for (int i = 0; i < steps.size(); i++)
 			{
 				GuidanceStep step = steps.get(i);
@@ -86,16 +104,17 @@ public class B1MigrationTest
 				{
 					continue;
 				}
-				if (step.getConditionTree() != null)
+				if (step.getConditionTree() != null && !isPilot)
 				{
 					violations.add(source.getName() + " step " + (i + 1)
-						+ " has non-null conditionTree; Phase 1+2 must not pilot any source");
+						+ " has non-null conditionTree but is not in PHASE_3_PILOT_SOURCES; "
+						+ "add the source name to the allowlist and ship a structural test alongside the JSON edit");
 				}
 			}
 		}
 
 		assertTrue(violations.isEmpty(),
-			"B1 Phase 1+2 invariant violated. No production source may set conditionTree until Phase 3. Violations:\n"
+			"B1 conditionTree opt-in invariant violated. Only allowlisted Phase 3 pilots may set conditionTree. Violations:\n"
 				+ String.join("\n", violations));
 	}
 
