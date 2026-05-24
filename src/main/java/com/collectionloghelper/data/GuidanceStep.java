@@ -29,6 +29,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import com.collectionloghelper.data.condition.ConditionNode;
 import javax.annotation.Nullable;
 import lombok.Value;
 
@@ -264,6 +265,27 @@ public class GuidanceStep
 	@Nullable
 	String dynamicTargetEvaluator;
 
+	/**
+	 * Optional composable boolean tree (AND / OR / NOT over the 11 atomic
+	 * {@link CompletionCondition} leaves) describing when this step is
+	 * complete (B1 Phase 1+2).
+	 *
+	 * <p>When non-null, the tree wins over the flat {@link #completionCondition}
+	 * enum + supporting fields. When null (the default for all 225 existing
+	 * sources), the legacy flat-enum path runs unchanged.
+	 *
+	 * <p>JSON shape is documented in
+	 * {@link com.collectionloghelper.data.condition.ConditionNodeDeserializer}.
+	 * Authors should only set this field when the step's completion is genuinely
+	 * conjunctive or disjunctive over multiple atomic conditions; a single-leaf
+	 * tree adds no value over the flat enum.
+	 *
+	 * <p>Phase 1+2 lands the schema and evaluator; no production source sets
+	 * this field. Phase 3 (separate PR) introduces the first pilot wiring.
+	 */
+	@Nullable
+	ConditionNode conditionTree;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
@@ -490,7 +512,8 @@ public class GuidanceStep
 			null, // merged steps don't carry alternatives (already resolved)
 			this.section,
 			null, // waypoints: merged steps inherit null; authors set waypoints on the base step
-			this.dynamicTargetEvaluator
+			this.dynamicTargetEvaluator,
+			this.conditionTree // tree is inherited from base; alternatives do not override it in B1
 		);
 	}
 }
