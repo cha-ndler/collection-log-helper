@@ -3679,38 +3679,73 @@
       }
     ],
     "locationDescription": "Forthos Dungeon, Hosidius",
-    "travelTip": "Xeric's talisman -> Heart",
+    "travelTip": "Xeric's talisman -> Heart, then run south-east to Forthos trapdoor",
+    "requirements": {},
     "npcId": 8713,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Xeric's talisman (Xeric's Heart) to teleport to central Kourend, then run south to Forthos Dungeon",
+        "description": "Travel to the Forthos Dungeon, Hosidius. Bring a crush weapon (Sarachnis cudgel / Inquisitor's mace / Bandos godsword for spec), Saradomin brews, super restores, prayer potions, and a Slayer helmet on-task. Use Xeric's talisman to Heart and run south-east to the Forthos trapdoor north of Hosidius",
         "worldX": 1701,
         "worldY": 3574,
         "worldPlane": 0,
         "objectId": 34862,
         "objectInteractAction": "Climb-down",
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1690, 3560, 1860, 9920, 0]
+        "completionZone": [1690, 3560, 1860, 9920, 0],
+        "travelTip": "Xeric's talisman -> Heart, or Hosidius lodestone + run north",
+        "requiredItemIds": [
+          23528,
+          6685,
+          3024,
+          2434
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Enter Forthos Dungeon and navigate to the spider area in the south. Enter Sarachnis' lair",
+        "description": "Inside Forthos Dungeon, follow the south-west tunnel to Sarachnis' lair and enter the crypt to start the encounter",
         "worldX": 1847,
         "worldY": 9910,
         "worldPlane": 0,
         "objectId": 34858,
         "objectInteractAction": "Enter-crypt",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "section": "Travel"
       },
       {
-        "description": "Kill Sarachnis. Use crush weapons, protect from ranged when she's red, protect from magic when blue. Kill the spawns quickly",
+        "description": "Kill Sarachnis. Use a crush weapon - her stab and slash defence is huge. Flick prayers: Protect from Magic when her body glows red, Protect from Ranged when she glows yellow. Kill the spawned Sarachnis spiderlings the instant they appear or they will out-damage you. Stay at least one tile off the wall so spawns have a path to you and do not stack damage.",
         "worldX": 1847,
         "worldY": 9910,
         "worldPlane": 0,
         "npcId": 8713,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8713
+        "completionNpcId": 8713,
+        "section": "Combat",
+        "recommendedItemIds": [
+          23528,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Loot the Giant egg sac and any uniques before they decay, then exit the crypt for the next kill",
+        "worldX": 1847,
+        "worldY": 9910,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to Hosidius bank when low on supplies to restock brews, restores, and prayer potions",
+        "worldX": 1646,
+        "worldY": 3667,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 1
@@ -4293,37 +4328,82 @@
       }
     ],
     "locationDescription": "Smoke Devil Dungeon, south of Castle Wars",
-    "travelTip": "Castle Wars tele -> south",
+    "travelTip": "Fairy ring BKP, or Castle Wars teleport + run south-west",
     "npcId": 499,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Smoke Devil Dungeon south of Castle Wars",
+        "description": "Travel to the Smoke Devil Dungeon south of Castle Wars. Bring a facemask or Slayer helmet (mandatory - smoke devil area without one chokes you constantly), magic gear, Trident of the Swamp/Seas or Tumeken's shadow, prayer potions, and Saradomin brews. Fastest route is fairy ring BKP, or teleport to Castle Wars and run south-west to the cave entrance",
         "worldX": 2412,
         "worldY": 3061,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
         "completionZone": [2370, 3050, 2420, 9460, 0],
-        "travelTip": "Fairy ring BKP, or ring of dueling to Castle Wars + run south-west"
+        "travelTip": "Fairy ring BKP, or Castle Wars teleport + run south-west",
+        "requiredItemIds": [
+          1506,
+          2434,
+          6685
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Enter the Smoky cave. Requires a Smoke devil Slayer task",
+        "description": "Enter the smoky cave. A facemask, Slayer helmet, or Masked earmuffs is required to survive the dungeon's smoke without constant damage. Active Smoke devil Slayer task is required to attack the Thermonuclear smoke devil",
         "worldX": 2412,
         "worldY": 3061,
         "worldPlane": 0,
         "objectId": 30176,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "requiredItemIds": [
+          1506
+        ],
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "section": "Travel"
       },
       {
-        "description": "Navigate to the boss area in the north-west and kill the Thermonuclear smoke devil",
+        "description": "Navigate north-west through the smoke devil cave to the Thermonuclear boss room. Take care of the regular smoke devils on the way if Protect from Magic is not flicked",
+        "worldX": 2379,
+        "worldY": 9452,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Travel"
+      },
+      {
+        "description": "Kill the Thermonuclear smoke devil. Use Protect from Magic - it hits 30s+ through no prayer. Stay back at max distance with Trident of the Swamp/Seas or Tumeken's shadow; safe-spot the boss behind a rock so you can flick the prayer easily. Bring an Occult necklace yourself once it drops - the boss is the source of it.",
         "worldX": 2379,
         "worldY": 9452,
         "worldPlane": 0,
         "npcId": 499,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 499
+        "completionNpcId": 499,
+        "section": "Combat",
+        "recommendedItemIds": [
+          11907,
+          12002,
+          1506,
+          2434,
+          6685
+        ]
+      },
+      {
+        "description": "Loot the drop pile, then either reset for another kill or bank if low on prayer potions and food",
+        "worldX": 2379,
+        "worldY": 9452,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to the Castle Wars bank to restock supplies between trips",
+        "worldX": 2440,
+        "worldY": 3083,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 1
@@ -5214,12 +5294,38 @@
       }
     ],
     "locationDescription": "Catacombs of Kourend (requires Dark totem from Catacomb monsters)",
-    "travelTip": "Xeric's talisman -> Heart",
+    "travelTip": "Xeric's talisman -> Heart, then run south to the Dark Altar",
+    "requirements": {},
     "npcId": 7286,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use dark totem on the Dark Altar in the Catacombs of Kourend. Requires 3 totem pieces from Catacomb monsters",
+        "description": "Bank for Skotizo. Bring Arclight (or Emberlight) for the demonbane bonus, Saradomin brews, super restores, Protect from Magic prayer potions, and 3 Dark totem pieces. Tank gear and Protect from Magic recommended - Skotizo hits through the protection on every attack.",
+        "worldX": 1638,
+        "worldY": 3673,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          19675,
+          6685,
+          3024,
+          2434
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Teleport with Xeric's talisman to Xeric's Heart, then run south-east through the Catacombs of Kourend toward the Dark Altar",
+        "worldX": 1636,
+        "worldY": 3673,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "travelTip": "Xeric's talisman -> Heart, or Kourend lodestone + run south",
+        "section": "Travel"
+      },
+      {
+        "description": "Use the Dark totem on the Dark Altar in the Catacombs to spawn Skotizo. The totem is assembled from three pieces (Dark totem top / middle / base) dropped by Catacomb monsters and combined at the altar",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
@@ -5227,17 +5333,34 @@
           19685
         ],
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 5,
+        "section": "Travel"
       },
       {
-        "description": "Kill Skotizo. Destroy the Awakened Altars around the room to weaken him, use Arclight for massive damage bonus",
+        "description": "Kill Skotizo. Use Protect from Magic and attack the four Awakened Altars around the arena as soon as they spawn - leaving them alive amplifies Skotizo's damage dramatically. Arclight (or upgraded Emberlight) gives huge accuracy and damage against demons. Drink prayer potions on cooldown; Skotizo's magic still hits through the protection.",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
         "npcId": 7286,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 7286
+        "completionNpcId": 7286,
+        "section": "Combat",
+        "recommendedItemIds": [
+          19675,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Return to bank to restock supplies and farm more Dark totem pieces before the next Skotizo spawn",
+        "worldX": 1638,
+        "worldY": 3673,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "ironKillTimeSeconds": 3600,
@@ -5290,12 +5413,26 @@
       }
     ],
     "locationDescription": "Farming Guild, Hosidius",
-    "travelTip": "Fairy ring CIR -> Farming Guild",
+    "travelTip": "Fairy ring CIR -> Farming Guild south room, or Skills necklace -> Farming Guild",
     "npcId": 8583,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Farming Guild (fairy ring CIR or Skills necklace). Plant a Hespori seed in the Hespori patch (requires 65 Farming)",
+        "description": "Bank for Hespori. Bring a Hespori seed, secateurs (magic secateurs preferred), spade, your best melee or magic weapon (Trident / Whip / Scythe all fine), a Saradomin brew and prayer potion, and at least one teleport home. The patch is in the south room of the Farming Guild and requires 65 Farming to access.",
+        "worldX": 1647,
+        "worldY": 3667,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          22875,
+          952,
+          5343
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Farming Guild south room. Fairy ring CIR is the fastest route; Skills necklace to Farming Guild is the unquested fallback. Plant the Hespori seed in the Hespori patch (requires 65 Farming) and wait for it to grow",
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
@@ -5304,11 +5441,21 @@
           952
         ],
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20,
+        "completionDistance": 15,
+        "travelTip": "Fairy ring CIR (Farming Guild), or Skills necklace -> Farming Guild",
         "section": "Travel"
       },
       {
-        "description": "Kill Hespori. Use Protect from Magic, avoid the flower special attacks. Can only be fought when fully grown (~32 hours after planting)",
+        "description": "Check the Hespori patch when ready (~32 hours after planting). The patch icon shows a glowing flower when the Hespori is fully grown and ready to fight",
+        "worldX": 1233,
+        "worldY": 3731,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 3,
+        "section": "Combat"
+      },
+      {
+        "description": "Kill Hespori. Use Protect from Magic for the entire fight. Hespori summons three flowers each phase that auto-target you with binding roots; kill them in order (white, then red, then blue) or they will stack damage. After three flower waves Hespori becomes attackable - bring high accuracy gear since her defence is huge. Magic secateurs increase yield from the seeds dropped on death.",
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
@@ -5318,9 +5465,28 @@
         "completionNpcId": 8583,
         "section": "Combat",
         "recommendedItemIds": [
+          11197,
+          22324,
           385,
           2434
         ]
+      },
+      {
+        "description": "Use secateurs on the dead Hespori to harvest seeds, then collect the Bottomless compost bucket if it dropped. Replant another Hespori seed for the next 32-hour cycle if you have one",
+        "worldX": 1233,
+        "worldY": 3731,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Teleport back to Hosidius bank to deposit seeds and the bottomless compost bucket if obtained",
+        "worldX": 1647,
+        "worldY": 3667,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 1
@@ -8036,27 +8202,72 @@
       }
     ],
     "locationDescription": "Zalcano's Prison, Prifddinas",
-    "travelTip": "Teleport crystal -> Prifddinas",
+    "travelTip": "Crystal teleport seed -> Prifddinas, or Teleport crystal",
     "npcId": 9049,
     "interactAction": "Mine",
     "guidanceSteps": [
       {
-        "description": "Travel to Prifddinas via crystal seed teleport. Zalcano is in the south-east mining area",
+        "description": "Bank for Zalcano. Bring a Dragon pickaxe (or Crystal pickaxe), Smiths uniform pieces if owned, a Goldsmith gauntlets for bonus XP, a few stamina potions, and one teleport home. Combat gear not required - Zalcano is a skilling boss. Mining and Smithing 70+ each are recommended for viable points per hour.",
+        "worldX": 3162,
+        "worldY": 6109,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          11920
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to Prifddinas via Crystal teleport seed (or charged Teleport crystal). Run south-east to the Trahaearn mining area then enter Zalcano's chamber",
         "worldX": 3031,
         "worldY": 6048,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Crystal teleport seed -> Prifddinas, or Lletya teleport + run north",
+        "section": "Travel"
       },
       {
-        "description": "Defeat Zalcano. Mine the glowing rocks, smith tephra into refined tephra at the furnace, then throw it at Zalcano. Repeat until she falls, then mine her for damage",
+        "description": "Enter the Zalcano chamber portal. The group fight starts as soon as you arrive on the mining tiles - you can join in progress",
+        "worldX": 3031,
+        "worldY": 6048,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Travel"
+      },
+      {
+        "description": "Defeat Zalcano. Cycle: mine glowing tephra rocks, smith tephra at the furnace into imbued tephra, then throw imbued tephra at Zalcano. When she falls to her knees, switch to your pickaxe and mine her for direct damage. Avoid the red projectile target tiles (heavy damage), and run out of the green falling-rock circles. Wear weight-reducing gear (Graceful) to save run energy across the long fight.",
         "worldX": 3031,
         "worldY": 6048,
         "worldPlane": 0,
         "npcId": 9049,
         "interactAction": "Mine",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 9049
+        "completionNpcId": 9049,
+        "section": "Combat",
+        "recommendedItemIds": [
+          11920,
+          23762
+        ]
+      },
+      {
+        "description": "Pick up the Tetsu / Virtus / Aurora dye-mould reward, plus any Zalcano shards or Crystal tool seeds dropped. Drops appear at your feet once the fight ends",
+        "worldX": 3031,
+        "worldY": 6048,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Either start a new Zalcano fight by re-entering the portal, or teleport back to Prifddinas bank to deposit drops and restock stamina potions",
+        "worldX": 3162,
+        "worldY": 6109,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ]
   },
@@ -8529,28 +8740,37 @@
       }
     ],
     "locationDescription": "Cam Torum entrance, Ralos Rise",
-    "travelTip": "Quetzal whistle -> Cam Torum",
+    "travelTip": "Quetzal whistle -> Cam Torum, or Civitas illa Fortis lodestone + run east",
     "npcId": 13011,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Perilous Moons dungeon beneath Cam Torum, Varlamore. Use quetzal whistle or Varlamore teleport",
+        "description": "Travel to the Perilous Moons dungeon beneath Cam Torum, Varlamore. Before leaving the bank, equip a Dual macuahuitl or Blue moon spear for melee, Bowfa for ranged, Ancient sceptre / Trident for magic - all three styles rotate during the fight. Pack Saradomin brews, super restores, prayer potions, sharks, and your Quetzal whistle for the trip.",
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1420, 3115, 1450, 9720, 0]
+        "completionZone": [1420, 3115, 1450, 9720, 0],
+        "travelTip": "Quetzal whistle -> Cam Torum, or Civitas illa Fortis lodestone + run east",
+        "requiredItemIds": [
+          29271,
+          6685,
+          3024,
+          2434
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Enter Cam Torum and make your way north through the city to the Neypotzli dungeon entrance",
+        "description": "Enter Cam Torum and make your way north through the city to the Neypotzli dungeon entrance, then descend into the Perilous Moons arena",
         "worldX": 1435,
         "worldY": 9700,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 80
+        "completionDistance": 80,
+        "section": "Travel"
       },
       {
-        "description": "Complete Perilous Moons. Fight the three Moon bosses in sequence. Each has unique mechanics - learn the safe tiles and prayer switches",
+        "description": "Complete Perilous Moons. Fight Blue Moon (magic, freezes you to ice tiles - step off them), Eclipse Moon (melee, summons mirror clones, kill the real one), and Blood Moon (ranged, teleports around the arena - it auto-targets the same style you used last hit, so rotate styles to control its prayer). Each kill drops a Lunar key; use all three on the Lunar Chest for unique drops.",
         "perItemStepDescription": {
           "29019": "Fight the Blue Moon and open the Lunar Chest to receive your Blue Moon armour.",
           "29013": "Fight the Blue Moon and open the Lunar Chest to receive your Blue Moon armour.",
@@ -8585,7 +8805,33 @@
         },
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 13011
+        "completionNpcId": 13011,
+        "section": "Combat",
+        "recommendedItemIds": [
+          28997,
+          28988,
+          11785,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "After all three moons die, open the Lunar Chest in the centre of the arena for armour pieces and unique drops. Empty the chest before resetting the dungeon",
+        "worldX": 1435,
+        "worldY": 3131,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Teleport back to Civitas illa Fortis bank to restock supplies for the next dungeon run",
+        "worldX": 1593,
+        "worldY": 3091,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "ironKillTimeSeconds": 240
@@ -20720,36 +20966,86 @@
       }
     ],
     "locationDescription": "Varrock Sewers",
-    "travelTip": "Varrock teleport -> sewers",
+    "travelTip": "Varrock teleport -> south manhole, or Edgeville teleport + run south",
+    "requirements": {},
     "npcId": 7222,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Varrock Sewers via the manhole behind Varrock Palace or south of Edgeville bank",
+        "description": "Bank for Scurrius. Bring a mid-tier melee weapon (Dragon scimitar / Saradomin sword / Abyssal whip), food (Sharks or Monkfish), one prayer potion, and a Crumble Undead spell if mage. Scurrius is one of the lowest-tier bosses in the game - full Bandos / Torva is overkill; Barrows tier is plenty.",
+        "worldX": 3253,
+        "worldY": 3420,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          385,
+          2434
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to Varrock Sewers via the manhole behind Varrock Palace or south of Edgeville bank. Use the Varrock teleport for the fastest route",
+        "worldX": 3237,
+        "worldY": 3458,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "travelTip": "Varrock teleport -> south manhole, or Edgeville teleport + run south",
+        "section": "Travel"
+      },
+      {
+        "description": "Climb down the manhole to enter Varrock Sewers, then run east through the sewers to the Scurrius arena",
+        "worldX": 3237,
+        "worldY": 3458,
+        "worldPlane": 0,
+        "objectId": 882,
+        "objectInteractAction": "Climb-down",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "section": "Travel"
+      },
+      {
+        "description": "Find a Scurrius portal in the sewers and enter to start the instanced fight",
         "worldX": 3299,
         "worldY": 9867,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 5,
+        "section": "Travel"
       },
       {
-        "description": "Climb down the manhole to enter Varrock Sewers.",
-        "worldX": 3299,
-        "worldY": 9867,
-        "worldPlane": 0,
-        "objectId": 882,
-        "objectInteractAction": "Climb-down",
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Kill Scurrius in the Varrock Sewers. Dodge the falling rocks and kill the giant rats that heal the boss. Low-level boss suitable for mid-game players",
+        "description": "Kill Scurrius. Stand under the boss for melee, dodge the falling rocks (red tiles), and kill the Giant rat spawns immediately - they heal Scurrius if left alive. Use Protect from Missiles to negate his ranged-style auto. Easy first-boss fight that often drops the Scurrius' spine (rune pouch upgrade).",
         "worldX": 3299,
         "worldY": 9867,
         "worldPlane": 0,
         "npcId": 7222,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 7222
+        "completionNpcId": 7222,
+        "section": "Combat",
+        "recommendedItemIds": [
+          4587,
+          385,
+          2434
+        ]
+      },
+      {
+        "description": "Loot Scurrius' drop pile then leave the instance via the portal. Re-enter for another kill or return to bank if low on food",
+        "worldX": 3299,
+        "worldY": 9867,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to Varrock west bank to restock food before the next set of kills",
+        "worldX": 3186,
+        "worldY": 3437,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "ironKillTimeSeconds": 80,
