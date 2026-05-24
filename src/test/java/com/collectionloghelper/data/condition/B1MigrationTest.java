@@ -64,10 +64,12 @@ public class B1MigrationTest
 	 * <ul>
 	 *   <li>Trouble Brewing - victory-drop step, see
 	 *       {@code TroubleBrewingConditionTreePilotTest}.</li>
+	 *   <li>Wintertodt - brazier-light / pyromancer-heal step, see
+	 *       {@code WintertodtConditionTreePilotTest}.</li>
 	 * </ul>
 	 */
 	private static final java.util.Set<String> PHASE_3_PILOT_SOURCES =
-		java.util.Set.of("Trouble Brewing");
+		java.util.Set.of("Trouble Brewing", "Wintertodt");
 
 	private DropRateDatabase database;
 
