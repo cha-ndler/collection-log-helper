@@ -587,6 +587,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 - [x] C4 — Skill-cape perk state                        status: done          owner: cha-ndler  updated: 2026-05-14  pr: #471
 - [x] C5 — Partial-quest state                          status: done          owner: cha-ndler  updated: 2026-05-14  pr: #462
 - [x] C6 — Wire into top-20 sources                     status: done          owner: cha-ndler  updated: 2026-05-23  note: All in-scope batches landed per #621 scoping. B0 schema #623 -> B1 C2-equipped-items #625 + #626 + #627 + #628 -> B2 C1-POH-teleports #630 -> B3 C3-diaries non-overlap #631 + overlap (stacked on B2) #632. C4 deferred (zero top-20 applications per scoping sec. 2); C5 covered by existing `requirements.quests` field.
+  - 2026-05-24: C-extension closed — 5 deferred inventory-teleport sources wired via #650 using #640 (inventoryItemIds AND) + #645 (inventoryItemIdsAny OR). #628 deferral resolved.
 - [x] C7 — Player-capability debug overlay              status: done          owner: cha-ndler  updated: 2026-05-14  pr: #459
 
 **Tier D — Coverage breadth**
