@@ -148,13 +148,15 @@ public class C6B2RegressionTest
 			GuidanceStep firstStep = source.getGuidanceSteps().get(0);
 			List<ConditionalAlternative> alternatives = firstStep.getConditionalAlternatives();
 			assertNotNull(alternatives, name + ": first step must declare conditionalAlternatives");
-			assertEquals(
-				1,
-				alternatives.size(),
-				name + ": expected exactly one conditional alternative for the POH-teleport route; found "
-					+ alternatives.size());
+			assertFalse(
+				alternatives.isEmpty(),
+				name + ": expected at least one conditional alternative for the POH-teleport route");
 
-			ConditionalAlternative alt = alternatives.get(0);
+			ConditionalAlternative alt = findPohAlternative(alternatives, expectedPoh);
+			assertNotNull(alt,
+				name + ": expected a conditional alternative with pohTeleports = " + expectedPoh
+					+ ", but none matched (other alternatives may exist via later batches)");
+
 			SourceRequirements altReqs = alt.getRequirements();
 			assertNotNull(altReqs, name + ": conditional alternative must declare requirements");
 			assertNotNull(altReqs.getPohTeleports(), name + ": requirements.pohTeleports must be set");
@@ -174,6 +176,25 @@ public class C6B2RegressionTest
 				alt.getTravelTip().toUpperCase().contains("POH"),
 				name + ": alternative travelTip should mention POH; got: " + alt.getTravelTip());
 		}
+	}
+
+	private static ConditionalAlternative findPohAlternative(
+		List<ConditionalAlternative> alternatives, List<String> expectedPoh)
+	{
+		for (ConditionalAlternative candidate : alternatives)
+		{
+			SourceRequirements reqs = candidate.getRequirements();
+			if (reqs == null)
+			{
+				continue;
+			}
+			List<String> pohTeleports = reqs.getPohTeleports();
+			if (pohTeleports != null && pohTeleports.equals(expectedPoh))
+			{
+				return candidate;
+			}
+		}
+		return null;
 	}
 
 	@Test
