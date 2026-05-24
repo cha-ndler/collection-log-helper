@@ -30,6 +30,7 @@ import com.collectionloghelper.data.DropRateDatabase;
 import com.collectionloghelper.data.RequirementRow;
 import com.collectionloghelper.data.RequirementsChecker;
 import com.collectionloghelper.data.SkillRequirement;
+import com.collectionloghelper.data.PlayerInventoryState;
 import com.collectionloghelper.data.SourceRequirements;
 import com.collectionloghelper.player.EquippedItemState;
 import com.collectionloghelper.player.PohTeleportInventory;
@@ -91,6 +92,9 @@ public class SourceRequirementsHeaderTest
 	@Mock
 	private EquippedItemState equippedItemState;
 
+	@Mock
+	private PlayerInventoryState playerInventoryState;
+
 	private RequirementsChecker checker;
 	private DropRateDatabase database;
 
@@ -99,9 +103,10 @@ public class SourceRequirementsHeaderTest
 	{
 		Constructor<RequirementsChecker> ctor =
 			RequirementsChecker.class.getDeclaredConstructor(
-				Client.class, PohTeleportInventory.class, EquippedItemState.class);
+				Client.class, PohTeleportInventory.class, EquippedItemState.class,
+				PlayerInventoryState.class);
 		ctor.setAccessible(true);
-		checker = ctor.newInstance(client, pohTeleportInventory, equippedItemState);
+		checker = ctor.newInstance(client, pohTeleportInventory, equippedItemState, playerInventoryState);
 
 		database = new DropRateDatabase();
 		Gson gson = new GsonBuilder().create();
@@ -145,7 +150,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getIntStack()).thenReturn(new int[]{2});
 
 		SourceRequirements req = new SourceRequirements(
-			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null);
+			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Vorkath", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -167,7 +172,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getIntStack()).thenReturn(new int[]{1});
 
 		SourceRequirements req = new SourceRequirements(
-			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null);
+			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Vorkath", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -186,7 +191,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getIntStack()).thenReturn(new int[]{0});
 
 		SourceRequirements req = new SourceRequirements(
-			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null);
+			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Vorkath", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -208,7 +213,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getRealSkillLevel(Skill.SLAYER)).thenReturn(95);
 
 		SourceRequirements req = new SourceRequirements(
-			null, Collections.singletonList(new SkillRequirement("SLAYER", 91)), null, null, null);
+			null, Collections.singletonList(new SkillRequirement("SLAYER", 91)), null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Cerberus", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -230,7 +235,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getRealSkillLevel(Skill.SLAYER)).thenReturn(80);
 
 		SourceRequirements req = new SourceRequirements(
-			null, Collections.singletonList(new SkillRequirement("SLAYER", 91)), null, null, null);
+			null, Collections.singletonList(new SkillRequirement("SLAYER", 91)), null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Cerberus", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -252,7 +257,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getVarbitValue(ArgumentMatchers.anyInt())).thenReturn(1);
 
 		SourceRequirements req = new SourceRequirements(
-			null, null, Collections.singletonList("ARDOUGNE_ELITE"), null, null);
+			null, null, Collections.singletonList("ARDOUGNE_ELITE"), null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Zulrah", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -273,7 +278,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getVarbitValue(ArgumentMatchers.anyInt())).thenReturn(0);
 
 		SourceRequirements req = new SourceRequirements(
-			null, null, Collections.singletonList("ARDOUGNE_ELITE"), null, null);
+			null, null, Collections.singletonList("ARDOUGNE_ELITE"), null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Zulrah", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -299,7 +304,7 @@ public class SourceRequirementsHeaderTest
 		SourceRequirements req = new SourceRequirements(
 			Collections.singletonList("TROLL_STRONGHOLD"),
 			Collections.singletonList(new SkillRequirement("STRENGTH", 70)),
-			null, null, null);
+			null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("General Graardor", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -327,7 +332,7 @@ public class SourceRequirementsHeaderTest
 		SourceRequirements req = new SourceRequirements(
 			Collections.singletonList("TROLL_STRONGHOLD"),
 			Collections.singletonList(new SkillRequirement("STRENGTH", 70)),
-			null, null, null);
+			null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("General Graardor", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);

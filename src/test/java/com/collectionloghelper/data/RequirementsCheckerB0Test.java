@@ -76,6 +76,9 @@ public class RequirementsCheckerB0Test
 	@Mock
 	private EquippedItemState equippedItemState;
 
+	@Mock
+	private PlayerInventoryState playerInventoryState;
+
 	private RequirementsChecker checker;
 
 	@BeforeEach
@@ -83,9 +86,10 @@ public class RequirementsCheckerB0Test
 	{
 		// The @Inject constructor is private — use reflection to construct without Guice.
 		Constructor<RequirementsChecker> ctor = RequirementsChecker.class.getDeclaredConstructor(
-			Client.class, PohTeleportInventory.class, EquippedItemState.class);
+			Client.class, PohTeleportInventory.class, EquippedItemState.class,
+			PlayerInventoryState.class);
 		ctor.setAccessible(true);
-		checker = ctor.newInstance(client, pohTeleportInventory, equippedItemState);
+		checker = ctor.newInstance(client, pohTeleportInventory, equippedItemState, playerInventoryState);
 	}
 
 	// ── null requirements ───────────────────────────────────────────────────
@@ -130,7 +134,7 @@ public class RequirementsCheckerB0Test
 		SourceRequirements req = new SourceRequirements(
 			null, null, null,
 			Arrays.asList("JEWELLERY_BOX_FANCY", "FAIRY_RING"),
-			null);
+			null, null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -140,7 +144,7 @@ public class RequirementsCheckerB0Test
 		SourceRequirements req = new SourceRequirements(
 			null, null, null,
 			Collections.emptyList(),
-			null);
+			null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -169,7 +173,7 @@ public class RequirementsCheckerB0Test
 		lenient().when(equippedItemState.hasEquipped(DRAKANS_MEDALLION)).thenReturn(false);
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null,
-			Arrays.asList(RING_OF_SHADOWS, DRAKANS_MEDALLION));
+			Arrays.asList(RING_OF_SHADOWS, DRAKANS_MEDALLION), null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -178,7 +182,7 @@ public class RequirementsCheckerB0Test
 	{
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null,
-			Collections.emptyList());
+			Collections.emptyList(), null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -195,7 +199,7 @@ public class RequirementsCheckerB0Test
 			Collections.singletonList(new SkillRequirement("STRENGTH", 70)),
 			null,
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
-			Collections.singletonList(RING_OF_SHADOWS));
+			Collections.singletonList(RING_OF_SHADOWS), null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -209,7 +213,7 @@ public class RequirementsCheckerB0Test
 			Collections.singletonList(new SkillRequirement("STRENGTH", 70)),
 			null,
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
-			null);
+			null, null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -221,7 +225,7 @@ public class RequirementsCheckerB0Test
 		SourceRequirements req = new SourceRequirements(
 			null, null, null,
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
-			Collections.singletonList(RING_OF_SHADOWS));
+			Collections.singletonList(RING_OF_SHADOWS), null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -243,7 +247,7 @@ public class RequirementsCheckerB0Test
 			altWithReq("Fast: POH + ring", new SourceRequirements(
 				null, null, null,
 				Collections.singletonList("JEWELLERY_BOX_FANCY"),
-				Collections.singletonList(RING_OF_SHADOWS))),
+				Collections.singletonList(RING_OF_SHADOWS), null)),
 			altWithReq("Slow: ring only", equippedReq(RING_OF_SHADOWS)));
 
 		assertEquals("Fast: POH + ring", selectFirstMatching(alts));
@@ -260,7 +264,7 @@ public class RequirementsCheckerB0Test
 			altWithReq("Fast: POH + ring", new SourceRequirements(
 				null, null, null,
 				Collections.singletonList("JEWELLERY_BOX_FANCY"),
-				Collections.singletonList(RING_OF_SHADOWS))),
+				Collections.singletonList(RING_OF_SHADOWS), null)),
 			altWithReq("Slow: ring only", equippedReq(RING_OF_SHADOWS)));
 
 		assertEquals("Slow: ring only", selectFirstMatching(alts));
@@ -286,14 +290,14 @@ public class RequirementsCheckerB0Test
 		return new SourceRequirements(
 			null, null, null,
 			Collections.singletonList(teleportName),
-			null);
+			null, null);
 	}
 
 	private static SourceRequirements equippedReq(int itemId)
 	{
 		return new SourceRequirements(
 			null, null, null, null,
-			Collections.singletonList(itemId));
+			Collections.singletonList(itemId), null);
 	}
 
 	private static ConditionalAlternative altWithReq(String description, SourceRequirements requirements)

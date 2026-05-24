@@ -50,6 +50,7 @@ public class RequirementsChecker
 	private final Client client;
 	private final PohTeleportInventory pohTeleportInventory;
 	private final EquippedItemState equippedItemState;
+	private final PlayerInventoryState playerInventoryState;
 
 	private volatile Map<String, Boolean> accessibilityCache = Collections.emptyMap();
 	private volatile Map<String, List<String>> unmetCache = Collections.emptyMap();
@@ -58,11 +59,13 @@ public class RequirementsChecker
 	@Inject
 	private RequirementsChecker(Client client,
 		PohTeleportInventory pohTeleportInventory,
-		EquippedItemState equippedItemState)
+		EquippedItemState equippedItemState,
+		PlayerInventoryState playerInventoryState)
 	{
 		this.client = client;
 		this.pohTeleportInventory = pohTeleportInventory;
 		this.equippedItemState = equippedItemState;
+		this.playerInventoryState = playerInventoryState;
 	}
 
 	/**
@@ -377,6 +380,21 @@ public class RequirementsChecker
 				if (!equippedItemState.hasEquipped(itemId))
 				{
 					unmet.add("Equipped item: " + itemId);
+				}
+			}
+		}
+
+		if (requirements.getInventoryItemIds() != null)
+		{
+			for (Integer itemId : requirements.getInventoryItemIds())
+			{
+				if (itemId == null)
+				{
+					continue;
+				}
+				if (!playerInventoryState.hasItem(itemId))
+				{
+					unmet.add("Inventory item: " + itemId);
 				}
 			}
 		}

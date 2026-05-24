@@ -75,4 +75,31 @@ public class SourceRequirements
 	 */
 	@Nullable
 	List<Integer> equippedItemIds;
+
+	/**
+	 * Inventory-item requirements expressed as RuneLite {@code ItemID} integers.
+	 *
+	 * <p>Evaluated AND-wise against
+	 * {@code PlayerInventoryState.hasItem(int)}: the requirement is met only
+	 * when every listed item ID is currently present in the player's regular
+	 * inventory container. {@code null} entries inside the list are skipped.
+	 *
+	 * <p>Use this field for teleport vectors that are right-clicked from the
+	 * inventory regardless of whether the item is wieldable. Examples:
+	 * Pharaoh's sceptre's Jaltevas teleport, Crystal teleport seed, Quetzal
+	 * whistle, and Zul-andra teleport scroll all check the player's inventory,
+	 * not the equipment container. Wieldable jewellery whose canonical
+	 * teleport is from the equipment slot (Drakan's medallion, Ring of
+	 * Shadows) should continue to use {@code equippedItemIds} instead.
+	 *
+	 * <p>For an OR-semantic over multiple charge-tier variants of the same
+	 * item (e.g. Pharaoh's sceptre charges 1-5), a future
+	 * {@code inventoryItemIdsAny} field is planned but not yet authored.
+	 *
+	 * <p>{@code null} or empty when the source/alternative has no
+	 * inventory-item prerequisite. Added by the Wave-1 follow-up to close the
+	 * inventory-vs-equipped distinction left open by Tier B0.
+	 */
+	@Nullable
+	List<Integer> inventoryItemIds;
 }
