@@ -93,8 +93,8 @@ public class SourceRequirements
 	 * Shadows) should continue to use {@code equippedItemIds} instead.
 	 *
 	 * <p>For an OR-semantic over multiple charge-tier variants of the same
-	 * item (e.g. Pharaoh's sceptre charges 1-5), a future
-	 * {@code inventoryItemIdsAny} field is planned but not yet authored.
+	 * item (e.g. Pharaoh's sceptre charges 1-5), use the companion
+	 * {@link #inventoryItemIdsAny} field instead.
 	 *
 	 * <p>{@code null} or empty when the source/alternative has no
 	 * inventory-item prerequisite. Added by the Wave-1 follow-up to close the
@@ -102,4 +102,41 @@ public class SourceRequirements
 	 */
 	@Nullable
 	List<Integer> inventoryItemIds;
+
+	/**
+	 * Inventory-item requirements expressed as RuneLite {@code ItemID} integers
+	 * with OR-semantics across the listed IDs.
+	 *
+	 * <p>Evaluated via {@code PlayerInventoryState.hasItem(int)} as an
+	 * any-match: the requirement is met when the player's regular inventory
+	 * contains AT LEAST ONE of the listed item IDs. {@code null} entries
+	 * inside the list are skipped. An empty list is treated as vacuously
+	 * satisfied to match the existing pattern on the AND-semantic siblings
+	 * ({@link #pohTeleports}, {@link #equippedItemIds},
+	 * {@link #inventoryItemIds}).
+	 *
+	 * <p>Use this field for inventory-teleport vectors that have multiple
+	 * functionally-equivalent charge-tier or revision variants, all of which
+	 * should satisfy the same requirement. Examples:
+	 * <ul>
+	 *   <li>Pharaoh's sceptre charges 1-5 plus Jeweled (6 IDs) for Tombs of
+	 *       Amascut's Jaltevas teleport;</li>
+	 *   <li>Quetzal whistle basic / enhanced / perfected / perfected-infinite
+	 *       for Phantom Muspah;</li>
+	 *   <li>Teleport crystal charge-tier variants for The Gauntlet and
+	 *       Corrupted Gauntlet.</li>
+	 * </ul>
+	 *
+	 * <p>The OR clause AND-combines with every other field on
+	 * {@link SourceRequirements}, including {@link #inventoryItemIds}: a
+	 * source that sets both lists requires every ID in
+	 * {@code inventoryItemIds} AND at least one ID from
+	 * {@code inventoryItemIdsAny}.
+	 *
+	 * <p>{@code null} or empty when the source/alternative has no
+	 * any-of-inventory prerequisite. Added by the Wave-7c follow-up to mirror
+	 * the AND-semantic {@link #inventoryItemIds} added in the prior PR.
+	 */
+	@Nullable
+	List<Integer> inventoryItemIdsAny;
 }
