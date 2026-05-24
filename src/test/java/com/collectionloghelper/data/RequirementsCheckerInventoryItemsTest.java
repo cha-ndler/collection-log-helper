@@ -111,7 +111,7 @@ public class RequirementsCheckerInventoryItemsTest
 	{
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null, null,
-			Collections.emptyList());
+			Collections.emptyList(), null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -142,7 +142,7 @@ public class RequirementsCheckerInventoryItemsTest
 		lenient().when(playerInventoryState.hasItem(QUETZAL_WHISTLE)).thenReturn(true);
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null, null,
-			Arrays.asList(PHARAOHS_SCEPTRE_5, QUETZAL_WHISTLE));
+			Arrays.asList(PHARAOHS_SCEPTRE_5, QUETZAL_WHISTLE), null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -153,7 +153,7 @@ public class RequirementsCheckerInventoryItemsTest
 		lenient().when(playerInventoryState.hasItem(QUETZAL_WHISTLE)).thenReturn(false);
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null, null,
-			Arrays.asList(PHARAOHS_SCEPTRE_5, QUETZAL_WHISTLE));
+			Arrays.asList(PHARAOHS_SCEPTRE_5, QUETZAL_WHISTLE), null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -165,7 +165,7 @@ public class RequirementsCheckerInventoryItemsTest
 		lenient().when(playerInventoryState.hasItem(PHARAOHS_SCEPTRE_5)).thenReturn(true);
 		List<Integer> ids = Arrays.asList(null, PHARAOHS_SCEPTRE_5);
 		SourceRequirements req = new SourceRequirements(
-			null, null, null, null, null, ids);
+			null, null, null, null, null, ids, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -181,7 +181,7 @@ public class RequirementsCheckerInventoryItemsTest
 			null, null, null,
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
 			Collections.singletonList(RING_OF_SHADOWS),
-			Collections.singletonList(PHARAOHS_SCEPTRE_5));
+			Collections.singletonList(PHARAOHS_SCEPTRE_5), null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -195,7 +195,7 @@ public class RequirementsCheckerInventoryItemsTest
 			null, null, null,
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
 			Collections.singletonList(RING_OF_SHADOWS),
-			Collections.singletonList(PHARAOHS_SCEPTRE_5));
+			Collections.singletonList(PHARAOHS_SCEPTRE_5), null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -208,7 +208,7 @@ public class RequirementsCheckerInventoryItemsTest
 			null, null, null,
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
 			null,
-			Collections.singletonList(PHARAOHS_SCEPTRE_5));
+			Collections.singletonList(PHARAOHS_SCEPTRE_5), null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -245,7 +245,7 @@ public class RequirementsCheckerInventoryItemsTest
 	{
 		return new SourceRequirements(
 			null, null, null, null, null,
-			Collections.singletonList(itemId));
+			Collections.singletonList(itemId), null);
 	}
 
 	private static ConditionalAlternative altWithReq(String description, SourceRequirements requirements)

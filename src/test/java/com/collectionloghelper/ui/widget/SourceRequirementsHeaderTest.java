@@ -150,7 +150,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getIntStack()).thenReturn(new int[]{2});
 
 		SourceRequirements req = new SourceRequirements(
-			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null, null);
+			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Vorkath", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -172,7 +172,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getIntStack()).thenReturn(new int[]{1});
 
 		SourceRequirements req = new SourceRequirements(
-			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null, null);
+			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Vorkath", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -191,7 +191,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getIntStack()).thenReturn(new int[]{0});
 
 		SourceRequirements req = new SourceRequirements(
-			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null, null);
+			Collections.singletonList("DRAGON_SLAYER_II"), null, null, null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Vorkath", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -213,7 +213,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getRealSkillLevel(Skill.SLAYER)).thenReturn(95);
 
 		SourceRequirements req = new SourceRequirements(
-			null, Collections.singletonList(new SkillRequirement("SLAYER", 91)), null, null, null, null);
+			null, Collections.singletonList(new SkillRequirement("SLAYER", 91)), null, null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Cerberus", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -235,7 +235,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getRealSkillLevel(Skill.SLAYER)).thenReturn(80);
 
 		SourceRequirements req = new SourceRequirements(
-			null, Collections.singletonList(new SkillRequirement("SLAYER", 91)), null, null, null, null);
+			null, Collections.singletonList(new SkillRequirement("SLAYER", 91)), null, null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Cerberus", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -257,7 +257,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getVarbitValue(ArgumentMatchers.anyInt())).thenReturn(1);
 
 		SourceRequirements req = new SourceRequirements(
-			null, null, Collections.singletonList("ARDOUGNE_ELITE"), null, null, null);
+			null, null, Collections.singletonList("ARDOUGNE_ELITE"), null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Zulrah", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -278,7 +278,7 @@ public class SourceRequirementsHeaderTest
 		when(client.getVarbitValue(ArgumentMatchers.anyInt())).thenReturn(0);
 
 		SourceRequirements req = new SourceRequirements(
-			null, null, Collections.singletonList("ARDOUGNE_ELITE"), null, null, null);
+			null, null, Collections.singletonList("ARDOUGNE_ELITE"), null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("Zulrah", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -304,7 +304,7 @@ public class SourceRequirementsHeaderTest
 		SourceRequirements req = new SourceRequirements(
 			Collections.singletonList("TROLL_STRONGHOLD"),
 			Collections.singletonList(new SkillRequirement("STRENGTH", 70)),
-			null, null, null, null);
+			null, null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("General Graardor", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
@@ -332,7 +332,7 @@ public class SourceRequirementsHeaderTest
 		SourceRequirements req = new SourceRequirements(
 			Collections.singletonList("TROLL_STRONGHOLD"),
 			Collections.singletonList(new SkillRequirement("STRENGTH", 70)),
-			null, null, null, null);
+			null, null, null, null, null);
 		CollectionLogSource source = makeSourceWithRequirements("General Graardor", req);
 
 		List<RequirementRow> rows = checker.buildRequirementRows(source);
