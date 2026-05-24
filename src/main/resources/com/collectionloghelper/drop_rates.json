@@ -7975,7 +7975,13 @@
         "completionCondition": "MANUAL",
         "section": "Skilling",
         "loopBackToStep": 2,
-        "loopCount": 5
+        "loopCount": 5,
+        "conditionTree": {
+          "or": [
+            { "chat_message_received": "The Wintertodt has been subdued" },
+            { "chat_message_received": "Your Wintertodt subdued count is:" }
+          ]
+        }
       },
       {
         "description": "When Wintertodt's health hits zero, claim Supply crates from the box. Aim for 500+ points per game (4 crates) or 850+ (5 crates / Pyromancer outfit fast). Open crates for the Pyromancer outfit, Bruma torch, Warm gloves, Tome of fire pages, and Phoenix pet",
