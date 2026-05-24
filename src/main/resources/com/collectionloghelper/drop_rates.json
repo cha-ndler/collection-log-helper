@@ -2293,7 +2293,7 @@
       }
     ],
     "locationDescription": "Ghorrock Prison, accessed via Weiss",
-    "travelTip": "Ring of Shadows -> Ghorrock Dungeon",
+    "travelTip": "Ring of Shadows -> Ghorrock Dungeon (Awakener's orb required)",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
@@ -2307,12 +2307,29 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to Ghorrock Dungeon, or travel via Weiss Salt Mine. Bring an Awakener's orb to enable the Awakened fight, crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
+        "description": "Bank at Ferox Enclave for Duke Sucellus (Awakened). Awakened hits roughly 2x harder than the base fight; bring a full inventory of Saradomin brews and super restores, prayer potions, super combat potion, a pickaxe for the salt vents, an Awakener's orb (one per kill), and a Ring of Shadows for fast re-entry. Crush is mandatory - Bandos godsword for spec, Inquisitor's mace or Saradomin sword as main weapon.",
+        "worldX": 3129,
+        "worldY": 3636,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          28334,
+          28327,
+          6685,
+          3024,
+          2434
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to Ghorrock Prison. Ring of Shadows -> Ghorrock Dungeon is the fastest route once charged; otherwise teleport to Weiss and run north into the salt mine. Bring the Awakener's orb in your inventory before you start the fight or the orb prompt will not appear.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "travelTip": "Ring of Shadows -> Ghorrock Dungeon, or Weiss teleport + run",
         "requiredItemIds": [
           28327,
           28334
@@ -2333,7 +2350,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the Asylum gates and select 'Yes' when prompted to consume the Awakener's orb",
+        "description": "Enter the Asylum gates and select 'Yes' when prompted to consume the Awakener's orb. Confirm you are in the Awakened instance before engaging - the orb is consumed only when you accept the prompt.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
@@ -2345,7 +2362,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Duke Sucellus (Awakened). Repeat the salt-vent cycle to craft arder-musca poisons, then use Protect from Melee with crush weapons (Bandos godsword or Inquisitor's mace) since Duke resists slash and stab. Awakened version hits harder and adds a second extremity orientation - dodge the falling ice patches and avoid gas vents or you will die through brews.",
+        "description": "Kill Duke Sucellus (Awakened). Mine arder powder + musca powder + salax salt from the asylum vents and craft arder-musca poison to weaken Duke before each phase. Use Protect from Melee with crush weapons (Bandos godsword or Inquisitor's mace) - Duke resists slash and stab. Awakened-mode mechanics: ice patches fall in a tighter pattern, gas vents activate one tick earlier, and Duke gains a second extremity orientation halfway through the fight. Step diagonally off ice patches the moment they spawn or you will tick-die through brews.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
@@ -2353,7 +2370,32 @@
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12191,
-        "section": "Combat"
+        "section": "Combat",
+        "recommendedItemIds": [
+          24417,
+          11804,
+          6685,
+          3024,
+          2434,
+          28327
+        ]
+      },
+      {
+        "description": "Loot the Awakened reward chest. Awakened tables roll the same uniques as the base fight at roughly 3x the rate, plus the awakened-only orb-charge drops. Pick up any Awakener's orbs from the floor before leaving",
+        "worldX": 2846,
+        "worldY": 3938,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to Ferox Enclave bank to restock brews, super restores, prayer potions, and another Awakener's orb before the next kill",
+        "worldX": 3129,
+        "worldY": 3636,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
@@ -2451,7 +2493,7 @@
       }
     ],
     "locationDescription": "The Scar, accessed via Temple of the Eye beneath Wizards' Tower",
-    "travelTip": "Ring of Shadows -> The Scar",
+    "travelTip": "Ring of Shadows -> The Scar (Awakener's orb required)",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
@@ -2465,12 +2507,30 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to The Scar, or take the rowboat in the Wizards' Tower basement. Bring an Awakener's orb to enable the Awakened fight, ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
+        "description": "Bank at Ferox Enclave for The Leviathan (Awakened). Awakened Leviathan punishes prayer flicks and adds a permanent-rock phase, so bring a full inventory of Saradomin brews and super restores, prayer potions, ranged potion, diamond bolts (e), an Awakener's orb (one per kill), and a Ring of Shadows. Bow of faerdhinen (c) or Twisted bow with Masori armour is the standard meta; Tumeken's shadow is an alternate single-style setup.",
+        "worldX": 3129,
+        "worldY": 3636,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          28334,
+          28327,
+          6685,
+          3024,
+          2434,
+          9244
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to The Scar entrance beneath the Wizards' Tower. Ring of Shadows -> The Scar is the fastest route; otherwise take the rowboat in the Wizards' Tower basement. Keep the Awakener's orb in your inventory before climbing in.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "travelTip": "Ring of Shadows -> The Scar, or Wizards' Tower basement rowboat",
         "requiredItemIds": [
           28327,
           28334
@@ -2478,7 +2538,7 @@
         "section": "Travel"
       },
       {
-        "description": "Climb the handholds with the Awakener's orb in your inventory and select 'Yes' when prompted",
+        "description": "Climb the handholds with the Awakener's orb in your inventory and select 'Yes' when prompted to enter the Awakened instance",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -2491,7 +2551,7 @@
         "section": "Travel"
       },
       {
-        "description": "Arrive in The Leviathan (Awakened) instance",
+        "description": "Arrive in The Leviathan (Awakened) instance and confirm the orb prompt accepted",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -2500,7 +2560,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill The Leviathan (Awakened). Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee). Awakened-mode volleys arrive faster and add a Rocks phase you must outrun, and you must step away from the end-of-volley debris warning to avoid permanent rock spawns that one-shot you.",
+        "description": "Kill The Leviathan (Awakened). Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee) - getting flicks wrong in Awakened mode is a near-instant death. Awakened-mode volley speed is roughly 2 ticks faster, the Rocks phase adds 6-8 thrown rocks you must run between, and the end-of-volley debris warning leaves permanent spike spawns - step at least 2 tiles off the warning tile or take a 60+ unprotectable hit. Spec with Voidwaker on the Rocks phase to skip it.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -2508,7 +2568,32 @@
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12214,
-        "section": "Combat"
+        "section": "Combat",
+        "recommendedItemIds": [
+          25865,
+          20997,
+          27277,
+          6685,
+          3024,
+          28327
+        ]
+      },
+      {
+        "description": "Loot the Awakened reward chest. Awakened rolls Venator vestige and Leviathan's lure at roughly 3x the base rate, plus a chance at additional Awakener's orbs",
+        "worldX": 3104,
+        "worldY": 3162,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to Ferox Enclave bank to restock brews, super restores, prayer potions, ranged potions, and another Awakener's orb before the next kill",
+        "worldX": 3129,
+        "worldY": 3636,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
@@ -2605,7 +2690,7 @@
       }
     ],
     "locationDescription": "Lassar Undercity entrance, Ice Mountain",
-    "travelTip": "Ring of Shadows -> Lassar Undercity",
+    "travelTip": "Ring of Shadows -> Lassar Undercity (Awakener's orb + blackstone fragment required)",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
@@ -2619,12 +2704,31 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to Lassar Undercity, or enter the sinkhole north-west of Camdozaal. Bring an Awakener's orb to enable the Awakened fight, the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)), prayer potions, and Saradomin brews.",
+        "description": "Bank at Ferox Enclave for The Whisperer (Awakened). Awakened Whisperer is widely considered the hardest of the four; tentacle patterns chain into the screech attack twice as fast, and a single missed prayer flick can chain-hit through brews. Bring a full inventory of Saradomin brews and super restores, prayer potions, ranged potion, diamond bolts (e), an Awakener's orb (one per kill), the blackstone fragment (required to enter the Shadow Realm), and a Ring of Shadows. Bow of faerdhinen (c) plus Masori is the standard meta.",
+        "worldX": 3129,
+        "worldY": 3636,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          28334,
+          28357,
+          28327,
+          6685,
+          3024,
+          2434,
+          9244
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Lassar Undercity sinkhole at the foot of Ice Mountain. Ring of Shadows -> Lassar Undercity is the fastest route; otherwise teleport to Falador and run east, or use the Camdozaal mine entrance and run north-west. The blackstone fragment must be in your inventory before you climb in.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "travelTip": "Ring of Shadows -> Lassar Undercity, or Falador teleport + east run",
         "requiredItemIds": [
           28327,
           28334,
@@ -2647,7 +2751,7 @@
         "section": "Travel"
       },
       {
-        "description": "Disturb the Odd Figure with the Awakener's orb in inventory and select 'Yes' when prompted",
+        "description": "Disturb the Odd Figure with the Awakener's orb in inventory and select 'Yes' when prompted to start the Awakened fight",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
@@ -2660,7 +2764,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill The Whisperer (Awakened). Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys, hop into the Shadow Realm with the blackstone fragment to break the four shadow tiles before her shield resets, and never let your sanity bar fully deplete or you will die within 10 ticks. Awakened-mode tentacle patterns chain into the screech attack faster.",
+        "description": "Kill The Whisperer (Awakened). Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys. Use the blackstone fragment to hop into the Shadow Realm and break the four shadow tiles before her shield resets - missing one resets her shield to full and extends the kill 30 seconds. Never let your sanity bar fully deplete or you take a 10-tick degen that hits for 10 per tick. Awakened-mode: tentacle patterns chain into the screech attack roughly twice as fast, and the Shadow Realm has 3 extra shadow puddles to dodge. Switch prayers a tick early on every volley.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
@@ -2668,7 +2772,32 @@
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12204,
-        "section": "Combat"
+        "section": "Combat",
+        "recommendedItemIds": [
+          25865,
+          20997,
+          27277,
+          6685,
+          3024,
+          28327
+        ]
+      },
+      {
+        "description": "Loot the Awakened reward chest. Awakened rolls Bellator vestige and Siren's staff at roughly 3x the base rate; the blackstone fragment is reusable and stays in your inventory after the fight",
+        "worldX": 3007,
+        "worldY": 3477,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to Ferox Enclave bank to restock brews, super restores, prayer potions, ranged potions, and another Awakener's orb before the next kill",
+        "worldX": 3129,
+        "worldY": 3636,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "ironKillTimeSeconds": 300,
@@ -2767,7 +2896,7 @@
       }
     ],
     "locationDescription": "The Stranglewood, south of Mount Quidamortem",
-    "travelTip": "Ring of Shadows -> The Stranglewood",
+    "travelTip": "Ring of Shadows -> The Stranglewood (Awakener's orb required)",
     "mutuallyExclusiveSources": [
       "Duke Sucellus",
       "The Leviathan",
@@ -2781,12 +2910,29 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use Ring of Shadows to teleport to The Stranglewood, or walk from the Kourend Woodland. Bring an Awakener's orb to enable the Awakened fight, slash weapon (Soulreaper axe or Blade of Saeldor) since Vardorvis is weakest to slash, prayer potions, Saradomin brews, and high-tier melee armour.",
+        "description": "Bank at Ferox Enclave for Vardorvis (Awakened). The Awakened axe pattern is roughly 1 axe denser per phase and adds a heal-spawn enrage at low HP. Bring a full inventory of Saradomin brews and super restores, prayer potions, super combat potion, an Awakener's orb (one per kill), and a Ring of Shadows. Slash mainhand: Scythe of Vitur (BiS) or Soulreaper axe; Blade of Saeldor (c) is the trade-off pick. Voidwaker for spec on the Strangled spawn waves.",
+        "worldX": 3129,
+        "worldY": 3636,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          28334,
+          28327,
+          6685,
+          3024,
+          2434
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to The Stranglewood, south of Mount Quidamortem. Ring of Shadows -> The Stranglewood is the fastest route; otherwise teleport to Mount Quidamortem and run south through the temple ruins. Keep the Awakener's orb in your inventory before entering the temple.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "travelTip": "Ring of Shadows -> The Stranglewood, or Mount Quidamortem teleport + south run",
         "requiredItemIds": [
           28327,
           28334
@@ -2794,7 +2940,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the Stranglewood Temple, then climb the rocks with the Awakener's orb in inventory and select 'Yes' when prompted",
+        "description": "Enter the Stranglewood Temple, then climb the rocks with the Awakener's orb in inventory and select 'Yes' when prompted to enter the Awakened instance",
         "worldX": 1174,
         "worldY": 3428,
         "worldPlane": 0,
@@ -2807,7 +2953,7 @@
         "section": "Travel"
       },
       {
-        "description": "Arrive in Vardorvis (Awakened) instance",
+        "description": "Arrive in the Vardorvis (Awakened) arena and confirm the orb prompt accepted",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
@@ -2816,7 +2962,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Vardorvis (Awakened). Use Protect from Melee with slash weapons (Soulreaper axe or Blade of Saeldor) since he resists stab and crush, keep moving in a controlled pattern to dodge the axes spawned from ground cracks (Awakened mode adds an extra axe at high HP), and kill the Strangled spawns immediately or they will heal him through your damage.",
+        "description": "Kill Vardorvis (Awakened). Use Protect from Melee with slash weapons (Scythe of Vitur, Soulreaper axe, or Blade of Saeldor) - he resists stab and crush. Move in a controlled diagonal pattern to dodge the axes spawned from ground cracks; Awakened-mode adds 1 extra axe per phase and tightens the spawn cadence at high HP. Kill the Strangled spawns the moment they appear or they heal him for 15-25 per tick. On the sub-25% enrage, prayer-flick to skip the head-slam and Voidwaker spec the spawn waves to keep pressure.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
@@ -2824,7 +2970,32 @@
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 12223,
-        "section": "Combat"
+        "section": "Combat",
+        "recommendedItemIds": [
+          22325,
+          28338,
+          24551,
+          6685,
+          3024,
+          28327
+        ]
+      },
+      {
+        "description": "Loot the Awakened reward chest. Awakened rolls Ultor vestige and Executioner's axe head at roughly 3x the base rate; pick up any Awakener's orbs from the floor",
+        "worldX": 1175,
+        "worldY": 3424,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to Ferox Enclave bank to restock brews, super restores, prayer potions, and another Awakener's orb before the next kill",
+        "worldX": 3129,
+        "worldY": 3636,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
