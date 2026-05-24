@@ -98,7 +98,8 @@ public class CerberusGuidance implements BossGuidance
 			null,              // conditionalAlternatives
 			"Travel",          // section
 			null,              // waypoints
-			null               // dynamicTargetEvaluator
+			null,              // dynamicTargetEvaluator
+			null               // conditionTree
 		);
 
 		GuidanceStep gateStep = new GuidanceStep(
@@ -133,7 +134,8 @@ public class CerberusGuidance implements BossGuidance
 			null,              // conditionalAlternatives
 			"Travel",          // section
 			null,              // waypoints
-			null               // dynamicTargetEvaluator
+			null,              // dynamicTargetEvaluator
+			null               // conditionTree
 		);
 
 		GuidanceStep killStep = new GuidanceStep(
@@ -167,7 +169,8 @@ public class CerberusGuidance implements BossGuidance
 			null,              // conditionalAlternatives
 			"Combat",          // section
 			null,              // waypoints
-			null               // dynamicTargetEvaluator
+			null,              // dynamicTargetEvaluator
+			null               // conditionTree
 		);
 
 		return Arrays.asList(travelStep, gateStep, killStep);

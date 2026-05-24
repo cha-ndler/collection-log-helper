@@ -1185,7 +1185,8 @@ public class StepProgressViewTest
 			null, null, null, null,
 			section,
 			null, // waypoints
-			null  // dynamicTargetEvaluator
+			null,  // dynamicTargetEvaluator
+			null  // conditionTree
 		);
 	}
 
@@ -1214,7 +1215,8 @@ public class StepProgressViewTest
 			null, null, null, null,
 			null, // section
 			null, // waypoints
-			null   // dynamicTargetEvaluator
+			null,   // dynamicTargetEvaluator
+			null   // conditionTree
 		);
 	}
 }
