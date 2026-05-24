@@ -7,7 +7,7 @@
 >
 > Combined with Quest-Helper-level step-by-step guidance — *where to go, what to equip, what to bring, exact tile* — plus current-meta knowledge that updates as Jagex updates the game. Math + automation + meta intelligence in one plugin.
 
-> **Status**: Living document. Update the status block at the end of each milestone or agent session. Last reviewed: 2026-05-23.
+> **Status**: Living document. Update the status block at the end of each milestone or agent session. Last reviewed: 2026-05-24.
 
 ---
 
@@ -593,7 +593,7 @@ Focus: god-object decomposition, build hardening, test expansion. Resulted in th
 
 - [x] D1 — Deep-guidance authoring bar                  status: done          owner: cha-ndler  updated: 2026-05-14  pr: #358  note: 10-element authoring checklist + "How to use" threshold rule published in docs/contributor-guide/deep-guidance-bar.md (moved from CONTRIBUTING.md § "Deep guidance bar" by #549)
 - [x] D2 — Top-40 sources deep pass                     status: done         owner: cha-ndler  updated: 2026-05-22  pr: #609 + #612 + #613 + #614 + #615 + #617 + #618 + #620  note: Scoping doc landed via #609; tracking issue #610. All 6 batches merged this session: batch 1 GWD bosses (#612) + K'ril hotfix (#613), batch 2 DT2 (#614 — 8 sources incl. Awakened variants), batch 3 raids (#615 — 7 sources incl. CoX CM + ToA 300/500), batch 4 top solo bosses (#617 — 8 sources, also fixed 3 latent prior-data prayer-call bugs on Vorkath/Muspah/Corp), batch 5 slayer + classic (#618 — 10 sources), batch 6 wildy + Barrows + clues + minigames (#620 — 7 sources). 40 top-farmed sources now sit at the 10-element deep-guidance bar; per-batch audit-test guards keep regressions caught at CI time. Next milestone is D3 (mid-tier sources).
-- [ ] D3 — Mid-tier sources deep pass                   status: planned       owner: —          updated: 2026-04-16
+- [x] D3 — Mid-tier sources deep pass                   status: done         owner: cha-ndler  updated: 2026-05-24  pr: #636 + #639 + #642 + #643 + #644 + #646  note: Scoping doc landed via #635. All 6 batches merged this session: batch 1 2024-2025 boss releases (#636 — 6 sources), batch 2 DT2 Awakened variants (#639 — 4 sources), batch 3 capstone PvM + nostalgic instances (#642 — 4 sources), batch 4 mid-tier bosses (#643 — 7 sources), batch 5 mid-popularity slayer sources (#644 — 9 sources), batch 6 skilling minigames + lower clue tiers (#646 — 11 sources). 41 sources total (40-source plan + 1 overshoot) now sit at the 10-element deep-guidance bar. Next milestone is D4 (long-tail sources).
 - [ ] D4 — Long-tail sources deep pass                  status: planned       owner: —          updated: 2026-04-16
 - [ ] D5 — Retrofit all sources to Tier B/C branch      status: planned       owner: —          updated: 2026-04-16
 
