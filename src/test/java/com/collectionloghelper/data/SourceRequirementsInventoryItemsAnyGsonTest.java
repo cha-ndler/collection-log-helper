@@ -38,44 +38,48 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Gson deserialisation tests for the {@code inventoryItemIds} field on
- * {@link SourceRequirements}.
+ * Gson deserialisation tests for the {@code inventoryItemIdsAny} OR-semantic
+ * field on {@link SourceRequirements}.
  *
  * <p>Covers absent / null / empty / single-element / multi-element JSON shapes,
- * legacy backwards compatibility, and Gson behaviour on malformed input. The
- * field is purely additive: existing drop_rates.json sources that omit it must
- * continue to deserialise with {@code getInventoryItemIds() == null}.
+ * backwards compatibility with the existing six-field schema, and Gson
+ * behaviour on malformed input. The field is purely additive: existing
+ * drop_rates.json sources that omit it must continue to deserialise with
+ * {@code getInventoryItemIdsAny() == null}.
  *
- * <p>Pairs with {@link SourceRequirementsB0Test} which covers the same matrix
- * for {@code pohTeleports} and {@code equippedItemIds} introduced by Tier B0
- * (PR #623). This class adds the same coverage for the inventory-item field
- * that closes the wieldable-but-used-from-inventory teleport gap left by B0.
+ * <p>Pairs with {@link SourceRequirementsInventoryItemsGsonTest} which covers
+ * the AND-semantic sibling {@code inventoryItemIds}. This class adds the same
+ * coverage for the OR-semantic field that closes the multi-charge-tier
+ * teleport gap (Pharaoh's sceptre 1-5 + Jeweled, Quetzal whistle tiers,
+ * Crystal teleport charge tiers).
  */
-public class SourceRequirementsInventoryItemsGsonTest
+public class SourceRequirementsInventoryItemsAnyGsonTest
 {
 	private static final Gson GSON = new GsonBuilder().create();
 
 	// -- Backwards compatibility -------------------------------------------------
 
 	@Test
-	public void deserialise_legacyJsonWithoutField_inventoryItemIdsIsNull()
+	public void deserialise_legacyJsonWithoutField_inventoryItemIdsAnyIsNull()
 	{
 		String json = "{\"quests\":[\"DESERT_TREASURE_II\"]}";
 		SourceRequirements req = GSON.fromJson(json, SourceRequirements.class);
-		assertNull(req.getInventoryItemIds());
+		assertNull(req.getInventoryItemIdsAny());
 	}
 
 	@Test
-	public void deserialise_legacyJsonWithAllPriorFields_inventoryItemIdsIsNull()
+	public void deserialise_legacyJsonWithAllPriorFields_inventoryItemIdsAnyIsNull()
 	{
-		// Sanity guard: legacy JSON that exercises every pre-existing field must
-		// still produce a parsed object with inventoryItemIds == null.
+		// Sanity guard: legacy JSON that exercises every pre-existing field,
+		// including the AND-semantic inventoryItemIds, must still produce a
+		// parsed object with inventoryItemIdsAny == null.
 		String json = "{"
 			+ "\"quests\":[\"DESERT_TREASURE_II\"],"
 			+ "\"skills\":[{\"skill\":\"SLAYER\",\"level\":95}],"
 			+ "\"diaries\":[\"FREMENNIK_HARD\"],"
 			+ "\"pohTeleports\":[\"JEWELLERY_BOX_FANCY\"],"
-			+ "\"equippedItemIds\":[22557]"
+			+ "\"equippedItemIds\":[22557],"
+			+ "\"inventoryItemIds\":[12938]"
 			+ "}";
 		SourceRequirements req = GSON.fromJson(json, SourceRequirements.class);
 		assertEquals(Collections.singletonList("DESERT_TREASURE_II"), req.getQuests());
@@ -83,82 +87,85 @@ public class SourceRequirementsInventoryItemsGsonTest
 		assertEquals(Collections.singletonList("FREMENNIK_HARD"), req.getDiaries());
 		assertEquals(Collections.singletonList("JEWELLERY_BOX_FANCY"), req.getPohTeleports());
 		assertEquals(Collections.singletonList(22557), req.getEquippedItemIds());
-		assertNull(req.getInventoryItemIds());
+		assertEquals(Collections.singletonList(12938), req.getInventoryItemIds());
+		assertNull(req.getInventoryItemIdsAny());
 	}
 
 	// -- Field-only shapes -------------------------------------------------------
 
 	@Test
-	public void deserialise_inventoryItemIdsNull_isNull()
+	public void deserialise_inventoryItemIdsAnyNull_isNull()
 	{
-		String json = "{\"inventoryItemIds\":null}";
+		String json = "{\"inventoryItemIdsAny\":null}";
 		SourceRequirements req = GSON.fromJson(json, SourceRequirements.class);
-		assertNull(req.getInventoryItemIds());
+		assertNull(req.getInventoryItemIdsAny());
 	}
 
 	@Test
-	public void deserialise_inventoryItemIdsEmpty_isEmptyNotNull()
+	public void deserialise_inventoryItemIdsAnyEmpty_isEmptyNotNull()
 	{
-		String json = "{\"inventoryItemIds\":[]}";
+		String json = "{\"inventoryItemIdsAny\":[]}";
 		SourceRequirements req = GSON.fromJson(json, SourceRequirements.class);
-		assertNotNull(req.getInventoryItemIds());
-		assertTrue(req.getInventoryItemIds().isEmpty());
+		assertNotNull(req.getInventoryItemIdsAny());
+		assertTrue(req.getInventoryItemIdsAny().isEmpty());
 	}
 
 	@Test
-	public void deserialise_inventoryItemIdsSingle_oneItem()
+	public void deserialise_inventoryItemIdsAnySingle_oneItem()
 	{
 		// Pharaoh's sceptre charges-5 placeholder ID; value chosen for shape, not lookup.
-		String json = "{\"inventoryItemIds\":[26945]}";
+		String json = "{\"inventoryItemIdsAny\":[26945]}";
 		SourceRequirements req = GSON.fromJson(json, SourceRequirements.class);
-		assertEquals(Collections.singletonList(26945), req.getInventoryItemIds());
+		assertEquals(Collections.singletonList(26945), req.getInventoryItemIdsAny());
 	}
 
 	@Test
-	public void deserialise_inventoryItemIdsMultiple_preservesOrder()
+	public void deserialise_inventoryItemIdsAnyMultiple_preservesOrder()
 	{
-		// Zul-andra teleport scroll + Quetzal whistle + Crystal teleport seed placeholders.
-		String json = "{\"inventoryItemIds\":[12938,29782,23959]}";
+		// Pharaoh's sceptre charges 1-5 plus Jeweled: 6-tier multi-charge variant
+		// set, exactly the shape this field exists to express.
+		String json = "{\"inventoryItemIdsAny\":[26945,26946,26947,26948,26949,26950]}";
 		SourceRequirements req = GSON.fromJson(json, SourceRequirements.class);
-		assertEquals(Arrays.asList(12938, 29782, 23959), req.getInventoryItemIds());
+		assertEquals(Arrays.asList(26945, 26946, 26947, 26948, 26949, 26950),
+			req.getInventoryItemIdsAny());
 	}
 
 	@Test
-	public void deserialise_inventoryItemIdsNegativeId_parsed()
+	public void deserialise_inventoryItemIdsAnyNegativeId_parsed()
 	{
 		// Gson does not validate item-ID positivity at parse time; that contract
 		// lives in the evaluator (RequirementsChecker) and the lint layer above.
-		// This test pins current behaviour so a future evaluator-side guard is
-		// an explicit decision rather than an accidental break.
-		String json = "{\"inventoryItemIds\":[-1]}";
+		// Mirrors the AND-semantic sibling so the malformed-input contract is
+		// uniform across both inventory fields.
+		String json = "{\"inventoryItemIdsAny\":[-1]}";
 		SourceRequirements req = GSON.fromJson(json, SourceRequirements.class);
-		assertEquals(Collections.singletonList(-1), req.getInventoryItemIds());
+		assertEquals(Collections.singletonList(-1), req.getInventoryItemIdsAny());
 	}
 
 	@Test
-	public void deserialise_inventoryItemIdsContainingString_throws()
+	public void deserialise_inventoryItemIdsAnyContainingString_throws()
 	{
 		// Mirrors Gson's default strict number-parsing for typed list elements.
-		String json = "{\"inventoryItemIds\":[\"not-an-int\"]}";
+		String json = "{\"inventoryItemIdsAny\":[\"not-an-int\"]}";
 		assertThrows(JsonSyntaxException.class,
 			() -> GSON.fromJson(json, SourceRequirements.class));
 	}
 
 	@Test
-	public void deserialise_inventoryItemIdsContainingFloat_throws()
+	public void deserialise_inventoryItemIdsAnyContainingFloat_throws()
 	{
 		// Gson rejects non-integer JSON numbers for the declared Integer element
-		// type. This pins current behaviour so the malformed-input contract is
+		// type. Pins current behaviour so the malformed-input contract is
 		// explicit rather than implicit.
-		String json = "{\"inventoryItemIds\":[26945.7]}";
+		String json = "{\"inventoryItemIdsAny\":[26945.7]}";
 		assertThrows(JsonSyntaxException.class,
 			() -> GSON.fromJson(json, SourceRequirements.class));
 	}
 
-	// -- All six fields populated -----------------------------------------------
+	// -- All seven fields populated ---------------------------------------------
 
 	@Test
-	public void deserialise_allSixFieldsPopulated_parsesAll()
+	public void deserialise_allSevenFieldsPopulated_parsesAll()
 	{
 		String json = "{"
 			+ "\"quests\":[\"TROLL_STRONGHOLD\"],"
@@ -166,7 +173,8 @@ public class SourceRequirementsInventoryItemsGsonTest
 			+ "\"diaries\":[\"FREMENNIK_HARD\"],"
 			+ "\"pohTeleports\":[\"JEWELLERY_BOX_FANCY\"],"
 			+ "\"equippedItemIds\":[22557],"
-			+ "\"inventoryItemIds\":[26945,23959]"
+			+ "\"inventoryItemIds\":[12938],"
+			+ "\"inventoryItemIdsAny\":[26945,26946,26947]"
 			+ "}";
 		SourceRequirements req = GSON.fromJson(json, SourceRequirements.class);
 		assertEquals(Collections.singletonList("TROLL_STRONGHOLD"), req.getQuests());
@@ -174,40 +182,56 @@ public class SourceRequirementsInventoryItemsGsonTest
 		assertEquals(Collections.singletonList("FREMENNIK_HARD"), req.getDiaries());
 		assertEquals(Collections.singletonList("JEWELLERY_BOX_FANCY"), req.getPohTeleports());
 		assertEquals(Collections.singletonList(22557), req.getEquippedItemIds());
-		assertEquals(Arrays.asList(26945, 23959), req.getInventoryItemIds());
+		assertEquals(Collections.singletonList(12938), req.getInventoryItemIds());
+		assertEquals(Arrays.asList(26945, 26946, 26947), req.getInventoryItemIdsAny());
 	}
 
 	// -- equals / hashCode -------------------------------------------------------
 
 	@Test
-	public void equals_sameInventoryItemIds_areEqual()
+	public void equals_sameInventoryItemIdsAny_areEqual()
 	{
 		SourceRequirements a = new SourceRequirements(
-			null, null, null, null, null,
-			Arrays.asList(26945, 23959), null);
+			null, null, null, null, null, null,
+			Arrays.asList(26945, 26946));
 		SourceRequirements b = new SourceRequirements(
-			null, null, null, null, null,
-			Arrays.asList(26945, 23959), null);
+			null, null, null, null, null, null,
+			Arrays.asList(26945, 26946));
 		assertEquals(a, b);
 		assertEquals(a.hashCode(), b.hashCode());
 	}
 
 	@Test
-	public void equals_differingInventoryItemIds_notEqual()
+	public void equals_differingInventoryItemIdsAny_notEqual()
 	{
 		SourceRequirements a = new SourceRequirements(
+			null, null, null, null, null, null,
+			Collections.singletonList(26945));
+		SourceRequirements b = new SourceRequirements(
+			null, null, null, null, null, null,
+			Collections.singletonList(26946));
+		assertTrue(!a.equals(b));
+	}
+
+	@Test
+	public void equals_inventoryItemIdsAnyVsInventoryItemIds_notEqual()
+	{
+		// The two list fields are distinct positional slots even when populated
+		// with identical IDs. equals/hashCode must distinguish them, otherwise
+		// the evaluator would not be able to choose AND vs OR semantics.
+		SourceRequirements andOnly = new SourceRequirements(
 			null, null, null, null, null,
 			Collections.singletonList(26945), null);
-		SourceRequirements b = new SourceRequirements(
-			null, null, null, null, null,
-			Collections.singletonList(23959), null);
-		assertTrue(!a.equals(b));
+		SourceRequirements anyOnly = new SourceRequirements(
+			null, null, null, null, null, null,
+			Collections.singletonList(26945));
+		assertTrue(!andOnly.equals(anyOnly));
 	}
 
 	// -- Round-trip --------------------------------------------------------------
 
 	@Test
-	public void gsonRoundTrip_withInventoryItemIds_preservesStructure()
+	public void gsonRoundTrip_withInventoryItemIdsAny_preservesStructure()
 	{
 		SourceRequirements original = new SourceRequirements(
 			Collections.singletonList("DESERT_TREASURE_II"),
@@ -215,7 +239,8 @@ public class SourceRequirementsInventoryItemsGsonTest
 			Collections.singletonList("FREMENNIK_HARD"),
 			Arrays.asList("JEWELLERY_BOX_FANCY"),
 			Arrays.asList(22557),
-			Arrays.asList(26945, 23959), null);
+			Arrays.asList(12938),
+			Arrays.asList(26945, 26946, 26947, 26948, 26949, 26950));
 		String json = GSON.toJson(original);
 		SourceRequirements restored = GSON.fromJson(json, SourceRequirements.class);
 		assertEquals(original, restored);

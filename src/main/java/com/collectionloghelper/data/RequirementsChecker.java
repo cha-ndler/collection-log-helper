@@ -399,6 +399,33 @@ public class RequirementsChecker
 			}
 		}
 
+		if (requirements.getInventoryItemIdsAny() != null
+			&& !requirements.getInventoryItemIdsAny().isEmpty())
+		{
+			boolean anyHeld = false;
+			boolean sawNonNull = false;
+			for (Integer itemId : requirements.getInventoryItemIdsAny())
+			{
+				if (itemId == null)
+				{
+					continue;
+				}
+				sawNonNull = true;
+				if (playerInventoryState.hasItem(itemId))
+				{
+					anyHeld = true;
+					break;
+				}
+			}
+			// An all-null list collapses to "no real entries", which matches the
+			// vacuous-empty contract on the AND-semantic siblings: skip the check.
+			if (sawNonNull && !anyHeld)
+			{
+				unmet.add("Inventory item (any of): "
+					+ requirements.getInventoryItemIdsAny());
+			}
+		}
+
 		return unmet;
 	}
 
