@@ -15096,7 +15096,13 @@
         "objectInteractAction": null,
         "highlightItemIds": null,
         "useItemOnObject": false,
-        "completionChatPattern": null
+        "completionChatPattern": null,
+        "conditionTree": {
+          "and": [
+            { "arrive_at_zone": [3805, 3017, 3815, 3024, 0] },
+            { "not": { "inventory_has_item": 1929 } }
+          ]
+        }
       }
     ],
     "cumulativeTrackItemId": 1929,
