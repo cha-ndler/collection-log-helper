@@ -46,13 +46,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *
  * <p>This test mirrors
  * {@link DropRateDatabaseTest#load_recommendedItemIds_whenPresent_areValidAndBounded}
- * and asserts {@code requiredItemIds.size() <= 6} on every step in
- * {@code drop_rates.json}. The cap matches the existing
- * {@code recommendedItemIds <= 6} discipline; 5 is the stricter visual
- * sweet-spot the audit recommends as a long-term target, but seven sources
- * (Drake, Guardians of the Rift, Hydra, Mahogany Homes, Skeletal Wyvern, The
- * Fight Caves, The Inferno) are still at length 6 today and will be trimmed
- * in follow-up data-only PRs before the cap is tightened to 5.
+ * and asserts {@code requiredItemIds.size() <= 5} on every step in
+ * {@code drop_rates.json}. Five chips is the visual sweet-spot the audit
+ * recommends; it is stricter than the {@code recommendedItemIds <= 6}
+ * discipline because the chip row is the only authoring surface that
+ * actually clips. PR #654 trimmed the worst three offenders and seeded
+ * this guard at threshold 6; this PR trims the remaining seven (Drake,
+ * Guardians of the Rift, Hydra, Mahogany Homes, Skeletal Wyvern, The Fight
+ * Caves, The Inferno) and tightens the cap to 5.
  *
  * <p>Trim least-essential items (or move them to
  * {@code recommendedItemIds} when its own {@code <= 6} cap permits) when this
@@ -61,7 +62,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RequiredItemIdsUiCapTest
 {
 	/** Maximum entries per {@code requiredItemIds} list before chip overflow. */
-	private static final int MAX_REQUIRED_ITEM_IDS = 6;
+	private static final int MAX_REQUIRED_ITEM_IDS = 5;
 
 	private DropRateDatabase database;
 
