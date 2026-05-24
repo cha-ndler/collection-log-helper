@@ -383,7 +383,8 @@ public class CollectionLogSourceTest
 			null,           // conditionalAlternatives
 			null,           // section
 			null,           // waypoints
-			null            // dynamicTargetEvaluator
+			null,            // dynamicTargetEvaluator
+			null            // conditionTree
 		);
 	}
 }
