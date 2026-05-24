@@ -5214,12 +5214,29 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Crash Site Cavern entrance, north-west of the Grand Tree.",
+        "description": "Bank for Demonic gorillas. Bring a ranged setup (Bow of faerdhinen or Toxic blowpipe with rune/amethyst darts) plus a melee swap (Scythe or Ghrazi rapier), Saradomin brews, super restores, prayer potions, and a few sharks. The gorillas hit hard through prayer when you tank a wrong style, so a tank-shield swap or extra brews are worth packing.",
+        "worldX": 2461,
+        "worldY": 3444,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          6685,
+          3024,
+          2434,
+          385
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Crash Site Cavern entrance, north-west of the Grand Tree. Fastest routes are spirit tree to Gnome Stronghold, or Royal seed pod for free accounts after Monkey Madness II.",
         "worldX": 2027,
         "worldY": 5613,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Spirit tree -> Gnome Stronghold, then run north-west to the crash site",
+        "section": "Travel"
       },
       {
         "description": "Enter the Crash Site Cavern beneath the Gnome Stronghold",
@@ -5228,17 +5245,44 @@
         "worldPlane": 0,
         "objectId": 28686,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill Demonic gorillas in the Crash Site Cavern. Switch prayers based on their attack style. They change after 3 missed hits. Use ranged + melee switch",
+        "description": "Kill Demonic gorillas in the Crash Site Cavern. They cycle through Protect from Melee / Magic / Range after every three successful hits of the same style, so swap your style each time the prayer flips. Dodge the falling-boulder special (run one tile when the ground turns red) and the Magic-special purple orb (hits for up to 30 through prayer). Bow of faerdhinen or Toxic blowpipe + Ghrazi rapier on the swap is the modern meta.",
         "worldX": 2405,
         "worldY": 3419,
         "worldPlane": 0,
         "npcId": 7144,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 7144
+        "completionNpcId": 7144,
+        "section": "Combat",
+        "recommendedItemIds": [
+          25865,
+          12926,
+          22324,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Loot the ballista parts, Zenyte shards, and Monkey tails. Banking back to Edgeville or Castle Wars is the standard cycle; the spirit tree network gives you a fast return for the next trip.",
+        "worldX": 2405,
+        "worldY": 3419,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank when low on supplies. Spirit tree to Tree Gnome Village or Royal seed pod, then home teleport / Edgeville for a fast restock cycle.",
+        "worldX": 2461,
+        "worldY": 3444,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
@@ -5250,6 +5294,7 @@
     "worldY": 3686,
     "worldPlane": 0,
     "killTimeSeconds": 30,
+    "requirements": {},
     "items": [
       {
         "itemId": 13576,
@@ -5265,22 +5310,66 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Lizardman Temple or Canyon in Shayzien (Xeric's talisman or fairy ring DJR)",
+        "description": "Bank for Lizardman shamans. Bring your best crush weapon (Inquisitor's mace, Saradomin sword, or Soulreaper axe), Saradomin brews, super restores, super combat potion, prayer potions, and a few sharks. Slayer task is recommended for the Dragon warhammer rate - confirm one is active before leaving Shayzien.",
+        "worldX": 1504,
+        "worldY": 3633,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          6685,
+          3024,
+          2434,
+          12695,
+          385
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Lizardman Temple or Canyon in Shayzien. Xeric's talisman to Lookout drops you right next to the canyon entrance; fairy ring DJR is the unquested fallback.",
         "worldX": 1472,
         "worldY": 3686,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Xeric's talisman -> Lookout, or fairy ring DJR",
+        "section": "Travel"
       },
       {
-        "description": "Kill Lizardman shamans. Dodge the acid pool and explosive spawn attacks. Stand near a wall to prevent being jumped on. Slayer task recommended for rates",
+        "description": "Kill Lizardman shamans in the canyon. Stand with your back against a wall to prevent the shamans from leaping on you and resetting your aggro. Step one tile off the green spawn pool as soon as it appears - the spawn explodes for 20+ damage if you stand on it. Use your crush weapon for the Dragon warhammer / Lizardman fang rare drops.",
         "worldX": 1472,
         "worldY": 3686,
         "worldPlane": 0,
         "npcId": 6766,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 6766
+        "completionNpcId": 6766,
+        "section": "Combat",
+        "recommendedItemIds": [
+          24417,
+          28338,
+          6685,
+          3024,
+          2434,
+          12695
+        ]
+      },
+      {
+        "description": "Loot the Dragon warhammer / Xeric's talisman pieces and ranarr seed stacks. Drag-loot the Lizardman fangs for Xeric's talisman charges before banking.",
+        "worldX": 1472,
+        "worldY": 3686,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank when supplies run low. Xeric's talisman -> Glade is the fastest cycle back to a Shayzien bank.",
+        "worldX": 1504,
+        "worldY": 3633,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 1
@@ -8982,22 +9071,82 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Use a Guthixian temple teleport or attract a light creature with a sapphire lantern in the Chasm of Tears.",
+        "description": "Bank for Tormented Demons. Bring a melee weapon (Scythe of Vitur / Soulreaper axe), a ranged weapon (Bow of faerdhinen or Tbow with diamond bolts (e)), a magic switch (Tumeken's shadow or Trident), Darklight or an Emberlight for the shield-break phase, Saradomin brews, super restores, prayer potions, super combat potion, and a Guthixian temple teleport.",
+        "worldX": 3087,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          6746,
+          29684,
+          6685,
+          3024,
+          2434,
+          12695
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Use a Guthixian temple teleport to drop straight into the Chasm of Tears. The fallback unquested route is attracting a light creature in the chasm with a sapphire lantern - much slower but works without a teleport scroll.",
         "worldX": 4100,
         "worldY": 4415,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 8
+        "completionDistance": 8,
+        "requiredItemIds": [
+          29684
+        ],
+        "travelTip": "Guthixian temple teleport scroll (recommended), or sapphire lantern + light creature in the chasm",
+        "section": "Travel"
       },
       {
-        "description": "Kill Tormented Demons. Switch attack styles to break their protection prayers. Use fire spells + Darklight to remove their shield",
+        "description": "Hit the demon with Darklight (or Emberlight) special attack to break its shield. Once the shield is down, it will cycle protection prayers - swap your style between melee / ranged / magic on every two successful hits to keep accuracy up. Use fire spells or Smoke Burst for the magic phase to take advantage of their fire weakness.",
+        "worldX": 4100,
+        "worldY": 4415,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 3,
+        "requiredItemIds": [
+          6746
+        ],
+        "section": "Combat"
+      },
+      {
+        "description": "Kill the Tormented Demon. Dodge the floor-flame patches by stepping one tile in any direction when they ignite, and step out of the molten spray cone (the demon telegraphs it by raising both arms). Three-style rotation: hit twice with melee, swap to ranged for two hits, then magic for two hits - the demon's protection prayer always lags behind your last successful style by one cycle, so the swap keeps your accuracy high. Burning claw + Tormented synapse are the marquee rare drops.",
         "worldX": 4100,
         "worldY": 4415,
         "worldPlane": 0,
         "npcId": 13599,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 13599
+        "completionNpcId": 13599,
+        "section": "Combat",
+        "recommendedItemIds": [
+          22325,
+          25865,
+          27277,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Loot the rares (Burning claw, Tormented synapse, Guthixian temple teleport scroll). The teleport scroll drop chance is high - they fund the next trip's travel cost.",
+        "worldX": 4100,
+        "worldY": 4415,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank when supplies run low. Drop teleport from the Chasm of Tears, or use a home teleport / Guthixian temple teleport again from a bank tile.",
+        "worldX": 3087,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
@@ -10589,12 +10738,21 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm (fairy ring CIR or Battlefront teleport). Enter the Karuulm Slayer Dungeon",
+        "description": "Travel to Mount Karuulm. Bring boots of stone (mandatory to prevent passive heat damage in the Karuulm dungeon - or use granite or Cerberus boots), Dragon hunter lance, super combat, prayer potions, a few Saradomin brews, super restores, and sharks. Slayer task recommended for the dragon-tier rare drops. Fairy ring CIR drops you right at the dungeon entrance; Rada's blessing teleport to Mount Karuulm is the unquested alternative.",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1300, 3795, 1330, 10220, 0]
+        "completionZone": [1300, 3795, 1330, 10220, 0],
+        "travelTip": "Fairy ring CIR -> Mount Karuulm, or Rada's blessing 3/4 teleport",
+        "requiredItemIds": [
+          23037,
+          22978,
+          12695,
+          2434,
+          3024
+        ],
+        "section": "Travel"
       },
       {
         "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
@@ -10603,17 +10761,44 @@
         "worldPlane": 0,
         "objectId": 34359,
         "objectInteractAction": "Activate",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill Wyrms in the Karuulm Slayer Dungeon. Pray Magic or use boots of stone. Found on the first level (62 Slayer)",
+        "description": "Kill Wyrms on the first level (62 Slayer). Pray Magic for their ranged-magic breath - they hit through prayer for 1s only and you can long-range safespot from outside their attack range with a Dragon hunter lance or Dragon hunter crossbow. Boots of stone keep the heat tick from grinding through your HP. The shortcut safespot tile near the east wall lets you AFK chunks of the task while you stack the rares.",
         "worldX": 1311,
         "worldY": 10205,
         "worldPlane": 0,
         "npcId": 8610,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8610
+        "completionNpcId": 8610,
+        "section": "Combat",
+        "recommendedItemIds": [
+          22978,
+          21012,
+          23037,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Loot the dragon-tier rares (Dragon sword, Dragon harpoon, Dragon thrownaxe, Dragon knife) and the regular drops. Hop floors between worlds if Wyrms get tagged by other slayers.",
+        "worldX": 1311,
+        "worldY": 10205,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank when supplies run low. Take the elevator back up and use fairy ring CIR + your favourite bank teleport (Castle Wars / Edgeville home).",
+        "worldX": 1647,
+        "worldY": 3667,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ]
   },
@@ -10915,22 +11100,78 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Asgarnian Ice Dungeon (fairy ring AIQ to Mudskipper Point, then run south)",
+        "description": "Bank for Skeletal Wyverns. Bring an Elemental / Mind / Dragonfire shield (mandatory - wyverns spam icy breath that ignores normal antifire), Dragon hunter crossbow or Toxic blowpipe for the ranged safespot, prayer potions, super restores, and a few sharks. Bring a Stamina potion for the run from Mudskipper Point.",
+        "worldX": 3013,
+        "worldY": 3245,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          11283,
+          21012,
+          2434,
+          3024,
+          12625,
+          385
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Asgarnian Ice Dungeon. Fairy ring AIQ to Mudskipper Point and run south is the fastest route; Port Sarim charter + run south is the unfairy-ring fallback.",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Fairy ring AIQ -> Mudskipper Point, then run south to the dungeon entrance",
+        "section": "Travel"
       },
       {
-        "description": "Kill Skeletal Wyverns in the Asgarnian Ice Dungeon. Use elemental/mind/dragonfire shield for ice breath protection. Range safespot available",
+        "description": "Enter the Asgarnian Ice Dungeon ladder and run east to the Skeletal Wyvern room.",
+        "worldX": 3008,
+        "worldY": 3150,
+        "worldPlane": 0,
+        "objectId": 30100,
+        "objectInteractAction": "Climb-down",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Travel"
+      },
+      {
+        "description": "Kill Skeletal Wyverns. Equipped Elemental / Mind / Dragonfire shield is mandatory - the icy breath ignores normal antifire and hits for 50+ without one. Use the ranged safespot tile behind the north-west pillar with a Dragon hunter crossbow or blowpipe to take no damage on most kills. Pray ranged for the close-range tail attack if you need to melee.",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
         "npcId": 465,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 465
+        "completionNpcId": 465,
+        "section": "Combat",
+        "recommendedItemIds": [
+          21012,
+          12926,
+          11283,
+          2434,
+          3024,
+          385
+        ]
+      },
+      {
+        "description": "Loot the Draconic visage and Granite legs. Long Bones (5 Construction XP each) and the Wyvern visage drop weight makes this a hands-off task.",
+        "worldX": 3008,
+        "worldY": 3150,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank when supplies run low. Climb back up the ladder, fairy ring AIQ + favourite bank teleport.",
+        "worldX": 3013,
+        "worldY": 3245,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ]
   },
@@ -10979,31 +11220,76 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Slayer Tower (slayer ring or fairy ring CKS)",
+        "description": "Bank for Gargoyles. Bring a Rock hammer (mandatory - Gargoyles must be smashed at low HP or they revive), your best crush weapon (Inquisitor's mace, Saradomin sword, or Granite hammer), super combat potion, prayer potions, and a few sharks. Granite maul tagging is fine for fast tasks; Gargoyle smasher perk auto-finishes them once a Rock hammer is in your inventory.",
+        "worldX": 3445,
+        "worldY": 3470,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          4162,
+          24417,
+          12695,
+          2434,
+          385
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Slayer Tower. Slayer ring teleport to Slayer Tower is the fastest route; fairy ring CKS (Canifis -> walk north) is the unquested fallback.",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Slayer ring -> Slayer Tower, or fairy ring CKS + walk north",
+        "section": "Travel"
       },
       {
-        "description": "Climb to the top floor of the Slayer Tower. Rock hammer required to finish",
+        "description": "Climb to the top floor of the Slayer Tower.",
         "worldX": 3429,
         "worldY": 3535,
         "worldPlane": 2,
         "objectId": 2119,
         "objectInteractAction": "Climb-up",
-        "completionCondition": "PLAYER_ON_PLANE"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Travel"
       },
       {
-        "description": "Kill Gargoyles on the Slayer Tower top floor. Finish with rock hammer when low HP. Auto-smash with Gargoyle smasher perk (75 Slayer)",
+        "description": "Kill Gargoyles on the top floor. Once a Gargoyle drops below 9 HP, smash it with a Rock hammer (or the Gargoyle smasher perk auto-smashes for you above 75 Slayer). Granite maul spec is the fastest finisher for 2-tick tasks. Watch for the boost-the-HP trick on early Slayer accounts - if you over-damage them they reset to full HP.",
         "worldX": 3429,
         "worldY": 3534,
         "worldPlane": 2,
         "npcId": 412,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 412
+        "completionNpcId": 412,
+        "section": "Combat",
+        "recommendedItemIds": [
+          4162,
+          24417,
+          4153,
+          12695,
+          2434,
+          385
+        ]
+      },
+      {
+        "description": "Loot the Granite maul (3-tick spec weapon), Mystic robe top (dark), and Adamant boots. Granite mauls stack high - high alch them for GP between tasks.",
+        "worldX": 3429,
+        "worldY": 3534,
+        "worldPlane": 2,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank when supplies run low. Climb down the ladder, slayer ring to Edgeville or fairy ring CKS to Canifis bank.",
+        "worldX": 3445,
+        "worldY": 3470,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ]
   },
@@ -11369,31 +11655,68 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm (fairy ring CIR). Enter the Karuulm Slayer Dungeon, go to mid level",
+        "description": "Travel to Mount Karuulm. Bring boots of stone (mandatory - the Karuulm heat tick will eat through your HP without them), Dragon hunter lance, super combat, prayer potions, Saradomin brews, super restores, and a few sharks. Karuulm-friendly footwear (boots of stone / granite / Cerberus boots) is non-negotiable. Fairy ring CIR drops you right at the dungeon entrance; Rada's blessing 3/4 teleport is the unquested alternative.",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1300, 3795, 1330, 10075, 0]
+        "completionZone": [1300, 3795, 1330, 10075, 0],
+        "travelTip": "Fairy ring CIR -> Mount Karuulm, or Rada's blessing 3/4",
+        "requiredItemIds": [
+          23037,
+          22978,
+          12695,
+          6685,
+          3024,
+          2434
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
+        "description": "Take the elevator down into the Karuulm Slayer Dungeon, then descend to the mid level (Drake floor).",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
         "objectId": 34359,
         "objectInteractAction": "Activate",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill Drakes in the Karuulm Slayer Dungeon. Dodge the volcanic breath attack by moving. Use boots of stone (84 Slayer)",
+        "description": "Kill Drakes on the mid level (84 Slayer). Move one tile when you see the dragonfire breath telegraph (orange beam under your feet) - it hits up to 40 if you stand still. Pray Magic for the standard ranged-magic style; Dragon hunter lance + super combat gets sub-12s kill times. The room safespot tile at the south-east edge lets you AFK most of the task with prayer potions.",
         "worldX": 1310,
         "worldY": 10057,
         "worldPlane": 0,
         "npcId": 8612,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8612
+        "completionNpcId": 8612,
+        "section": "Combat",
+        "recommendedItemIds": [
+          22978,
+          23037,
+          12695,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Loot Drake's claw and Drake's tooth. The Boots of brimstone upgrade (combine claw + boots of stone) is the milestone craft worth saving for.",
+        "worldX": 1310,
+        "worldY": 10057,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank when supplies run low. Take the elevator back up and use fairy ring CIR + favourite bank teleport.",
+        "worldX": 1647,
+        "worldY": 3667,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ]
   },
@@ -11752,31 +12075,68 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm (fairy ring CIR). Enter Karuulm Slayer Dungeon, descend to lowest level",
+        "description": "Travel to Mount Karuulm. Bring boots of stone (mandatory heat protection), Dragon hunter lance for the dragonbane bonus, super combat, prayer potions, Saradomin brews, super restores, antidote++, and a few sharks. Karuulm-friendly footwear is non-negotiable on this floor. Fairy ring CIR drops you right at the dungeon entrance; Rada's blessing 3/4 is the unquested alternative.",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1300, 3795, 1330, 10205, 0]
+        "completionZone": [1300, 3795, 1330, 10205, 0],
+        "travelTip": "Fairy ring CIR -> Mount Karuulm, or Rada's blessing 3/4",
+        "requiredItemIds": [
+          23037,
+          22978,
+          12695,
+          6685,
+          3024,
+          2434
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
+        "description": "Take the elevator down into the Karuulm Slayer Dungeon, then descend to the lowest floor (Hydra floor, 95 Slayer).",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
         "objectId": 34359,
         "objectInteractAction": "Activate",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill Hydras in the Karuulm Slayer Dungeon lower level. Dodge the fire and poison attacks. Use boots of stone (95 Slayer)",
+        "description": "Kill Hydras on the lower level. Pray against the active style (Magic first, then Ranged after three hits - just like Alchemical Hydra). Move one tile when the fire-puddle telegraph appears under your feet to avoid the 30+ burn tick. Drink antidote++ between kills - their venom attack ticks for 6+ even after they die. Dragon hunter lance + super combat gets sub-15s kill times.",
         "worldX": 1310,
         "worldY": 10190,
         "worldPlane": 0,
         "npcId": 8609,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8609
+        "completionNpcId": 8609,
+        "section": "Combat",
+        "recommendedItemIds": [
+          22978,
+          23037,
+          12695,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Loot the Hydra's fang / eye / heart and Hydra tail. The three Brimstone ring components require all three pieces in order (Wiki's requiresPrevious flag).",
+        "worldX": 1310,
+        "worldY": 10190,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank when supplies run low. Take the elevator back up and use fairy ring CIR + favourite bank teleport.",
+        "worldX": 1647,
+        "worldY": 3667,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ]
   },
@@ -11808,22 +12168,69 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Darkmeyer via Drakan medallion or Morytania teleport. Blisterwood weapon required",
+        "description": "Bank for Vyrewatch Sentinels. Bring a Blisterwood flail (mandatory - Sentinels are immune to all non-blisterwood weapons) or an Ivandis flail as a fallback, your best magic gear (an Amulet of blood fury is BIS for the lifesteal), prayer potions, super restores, and Saradomin brews. Vyre noble outfit can speed up the disguise step but is not required for combat.",
+        "worldX": 3631,
+        "worldY": 3303,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          24699,
+          22398,
+          6685,
+          3024,
+          2434
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to Darkmeyer. Drakan's medallion to Darkmeyer is the fastest route; Canifis lodestone + walk south is the fallback if the medallion is unequipped.",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          22400
+        ],
+        "travelTip": "Drakan's medallion -> Darkmeyer, or Canifis lodestone + walk south",
+        "section": "Travel"
       },
       {
-        "description": "Kill Vyrewatch Sentinels in Darkmeyer. Requires flail of ivandis or blisterwood weapon. Good blood shard farming spot",
+        "description": "Kill Vyrewatch Sentinels in the central Darkmeyer square. Blisterwood flail (or Ivandis flail) is mandatory - any non-blisterwood weapon does zero damage. Use Protect from Melee for the standard attack; the Sentinels do not phase or have special mechanics, so the fight is essentially a Slayer-XP loop tuned for the Blood shard drop. Amulet of blood fury speccing keeps your HP topped without brews.",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
         "npcId": 9756,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 9756
+        "completionNpcId": 9756,
+        "section": "Combat",
+        "recommendedItemIds": [
+          24699,
+          22398,
+          6685,
+          3024,
+          2434,
+          385
+        ]
+      },
+      {
+        "description": "Loot Blood shards (1/5000 drop rate). Charge an Amulet of fury into an Amulet of blood fury at 1000 Blood shards or sell shards directly for GP.",
+        "worldX": 3631,
+        "worldY": 3325,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank when supplies run low. Drakan's medallion to Ver Sinhaza or Canifis lodestone for the fastest bank cycle.",
+        "worldX": 3631,
+        "worldY": 3303,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "mutuallyExclusiveSources": [
