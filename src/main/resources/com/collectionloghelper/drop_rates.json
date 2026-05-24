@@ -9010,6 +9010,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 72,
     "ironKillTimeSeconds": 180,
+    "requirements": {},
     "items": [
       {
         "itemId": 23285,
@@ -9127,44 +9128,62 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Open beginner clue scrolls from various low-level activities. Complete the steps to earn rewards",
+        "description": "Travel to the Grand Exchange with a Spade, a charged Ring of duelling for Castle Wars / Duel arena teleports, and a Stamina potion. The RuneLite Clue Scroll plugin will guide each individual step in-game; no combat gear is needed for beginner clues.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Grand Exchange teleport",
+        "requiredItemIds": [
+          952,
+          2552
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Buy Young impling jars from the Grand Exchange.",
+        "description": "Obtain a beginner clue scroll. Lowest-tier monsters (chickens, cows, men, goblins) drop them at ~1/50; Hans in Lumbridge gives a free one per day on the H.A.M. encampment task; Young impling jars open to a beginner clue at 1/25.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Loot",
+        "loopBackToStep": 1,
+        "loopCount": 1,
+        "recommendedItemIds": [
+          952,
+          2552,
+          11240
+        ]
       },
       {
-        "description": "Open jars to obtain beginner clue scrolls (1/25 rate per jar).",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Beginner clues are short (1-5 steps) and cover Lumbridge / Varrock / Falador / Draynor only. No combat encounters - skip the world-3 sandwich lady wave by accepting whichever sandwich she offers first.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Combat"
       },
       {
-        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
-        "worldX": 0,
-        "worldY": 0,
+        "description": "Open the reward casket for collection log items. Beginner caskets roll the Mole / Frog / Bear / Demon slippers, Jester cape, Shoulder parrot, Monk's robe (t), Amulet of defence (t), and Sandwich lady cosmetic set.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Reward"
       },
       {
-        "description": "Open reward casket for collection log items.",
-        "worldX": 0,
-        "worldY": 0,
+        "description": "Bank rewards at the Grand Exchange and pick up the next beginner clue / impling jar before resuming the loop.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 1,
-    "travelTip": "Obtain from low-level monsters or Hans in Lumbridge"
+    "travelTip": "Obtain from low-level monsters, Young impling jars, or Hans in Lumbridge"
   },
   {
     "name": "Revenants",
@@ -12199,35 +12218,78 @@
     "travelTip": "Drakan's medallion -> Darkmeyer",
     "guidanceSteps": [
       {
-        "description": "Use Drakan's medallion to teleport to Darkmeyer. Head to the Mausoleum Door in the south-east",
+        "description": "Bank for the Hallowed Sepulchre. Bring stamina potions, a few sharks for emergencies, a Hallowed grapple if you own one, and your Drakan's medallion. Wear weight-reducing gear (full Graceful is the standard) - rooftop agility shoes work too. No combat gear needed; the agility floors are non-combat.",
         "worldX": 3654,
         "worldY": 3385,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 20,
+        "requiredItemIds": [
+          22400,
+          12625,
+          385
+        ],
+        "section": "Bank prep"
       },
       {
-        "description": "Enter the Mausoleum Door to access the Hallowed Sepulchre",
+        "description": "Use Drakan's medallion to teleport to Darkmeyer. Head to the Mausoleum Door in the south-east of Darkmeyer (south of the bank, near the canal).",
+        "worldX": 3654,
+        "worldY": 3385,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "travelTip": "Drakan's medallion -> Darkmeyer",
+        "section": "Travel"
+      },
+      {
+        "description": "Enter the Mausoleum Door to access the Hallowed Sepulchre lobby. Talk to the spirit if it is your first visit, then climb the ladder into floor 1.",
         "worldX": 3654,
         "worldY": 3385,
         "worldPlane": 0,
         "objectId": 38574,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Complete the agility floors, looting coffins along the way for hallowed marks and rare drops. Higher floors have better drop rates",
+        "description": "Run the floors in order: 1, 2, 3, 4 (then 5 at 72+ Agility). Loot every brown coffin you pass for Hallowed marks. Strange old lockpick / Ring of endurance / Dark dye / Dark acorn rare drops only roll on floor 5 grand coffins, so prioritise getting to floor 5 every run once you can.",
         "worldX": 3654,
         "worldY": 3385,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Sepulchre",
+        "recommendedItemIds": [
+          24721,
+          24723,
+          24725,
+          11851,
+          385
+        ]
       },
       {
-        "description": "Spend hallowed marks at the reward shop near the entrance for collection log items",
+        "description": "On floor 5, the grand coffins behind the locked doors are the high-value loot. Use a Hallowed focus / symbol / grapple where the layout calls for it, sprint through arrow traps with stamina potions up, and finish the floor before the timer ends to keep the bonus loot roll.",
         "worldX": 3654,
         "worldY": 3385,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Sepulchre"
+      },
+      {
+        "description": "Spend Hallowed marks at the reward shop near the entrance. The Ring of endurance and Strange old lockpick come from the floor-5 grand coffins; everything else is bought with marks (Hallowed grapple/focus/symbol/hammer 100 marks, Hallowed ring 250 marks, Dark dye 300, Dark acorn 3000).",
+        "worldX": 3654,
+        "worldY": 3385,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Reward"
+      },
+      {
+        "description": "Teleport back to Darkmeyer bank with Drakan's medallion to bank Hallowed marks and any rare drops, then restock stamina potions and food before the next run.",
+        "worldX": 3658,
+        "worldY": 3370,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "MIXED",
@@ -12396,31 +12458,76 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Temple of the Eye, accessed via portal in Wizards' Tower basement.",
+        "description": "Bank for Guardians of the Rift. Bring all four pouches (giant / large / medium / small) for essence carrying, a chisel for cutting guardian fragments, a Pickaxe (rune or better) for mining the altar fragments, and a few teleports home. No combat gear needed.",
+        "worldX": 3185,
+        "worldY": 3436,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          1755,
+          1275,
+          5509,
+          5510,
+          5512,
+          5514
+        ],
+        "section": "Bank prep"
+      },
+      {
+        "description": "Travel to Temple of the Eye via the portal in Wizards' Tower basement. Arceuus library teleport + run south-west or Mind altar teleport is also viable.",
         "worldX": 3109,
         "worldY": 3168,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Arceuus library tele -> Temple of the Eye, or Mind altar tele",
+        "section": "Travel"
       },
       {
-        "description": "Pass through the barrier to enter the Guardians of the Rift arena.",
+        "description": "Pass through the barrier to enter the Guardians of the Rift arena and wait for the next game to start.",
         "worldX": 3109,
         "worldY": 3168,
         "worldPlane": 0,
         "objectId": 43700,
         "objectInteractAction": "Pass",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Play Guardians of the Rift minigame rounds to earn rewards.",
-        "worldX": 3109,
-        "worldY": 3168,
+        "description": "Mine the central guardian altar fragments, cut them with the chisel to make guardian stones, deposit stones into the elemental and catalytic pillars to earn rift points, then craft runes at the rift each round. Aim for 150+ total points per round to roll the unique table; high MVP score (3000+) maximises Abyssal pearl gain.",
+        "worldX": 3614,
+        "worldY": 9484,
         "worldPlane": 0,
         "npcId": 12179,
         "interactAction": "Talk-to",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your Guardians of the Rift count is:"
+        "completionChatPattern": "Your Guardians of the Rift count is:",
+        "section": "Minigame",
+        "recommendedItemIds": [
+          1755,
+          11920,
+          26784,
+          5514,
+          26908
+        ]
+      },
+      {
+        "description": "Hand in any Intricate pouches you obtained to receive bonus rewards (Abyssal pearls / rare uniques). Then spend Abyssal pearls at the reward guardian for the Hat / Robe top / Robe bottoms / Boots / Ring of the elements / Guardian's eye.",
+        "worldX": 3624,
+        "worldY": 9486,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Reward"
+      },
+      {
+        "description": "Teleport home from the Temple lobby once you have enough Abyssal pearls and runes banked. Restock essence and pouches before the next session.",
+        "worldX": 3185,
+        "worldY": 3436,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "MIXED",
@@ -12657,37 +12764,64 @@
     "travelTip": "Grouping tele -> Giants' Foundry",
     "guidanceSteps": [
       {
-        "description": "Use the Grouping teleport to reach Giants' Foundry, or teleport to Falador and run south-east",
+        "description": "Travel to Giants' Foundry. Bring 28 of your highest-tier metal bars (steel and above; mithril or higher recommended for faster reputation) plus an Ammo mould if you want bonus reputation. No combat gear needed. Sleeping Giants quest + 15 Smithing required to enter. Use the Grouping teleport for the fastest route; Falador tele + run south-east is the unquested fallback.",
         "worldX": 3360,
         "worldY": 3151,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [3345, 3140, 3380, 11500, 0]
+        "completionZone": [3345, 3140, 3380, 11500, 0],
+        "travelTip": "Grouping tele -> Giants' Foundry, or Falador tele + run south-east",
+        "requiredItemIds": [
+          2353,
+          2359,
+          2361,
+          2363
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Talk to Kovac to select a commission. Bring metal bars (mithril+ recommended) from the bank",
+        "description": "Talk to Kovac to select a commission. Higher-quality commissions (longer swords / better metals) reward more reputation per minute.",
         "worldX": 3365,
         "worldY": 11489,
         "worldPlane": 0,
         "npcId": 11472,
         "interactAction": "Talk-to",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Foundry"
       },
       {
-        "description": "Pour the metal into the crucible, then use the trip hammer, grindstone, and polishing wheel to shape the sword. Match the target profile shown on the heat gauge",
+        "description": "Pour metal into the crucible, then move the sword through the trip hammer, grindstone, and polishing wheel in order to shape the blade. Match the target profile shown on the heat gauge each step - the closer you match, the more reputation per sword. The optimal pattern is hammer x2, grindstone x1, polish x1, cycling until the gauge is full.",
         "worldX": 3365,
         "worldY": 11489,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Foundry",
+        "recommendedItemIds": [
+          2347,
+          2353,
+          2363,
+          2361,
+          2359
+        ]
       },
       {
-        "description": "Hand in the finished sword to Kovac for reputation points. Spend points at his shop for collection log items",
+        "description": "Hand in the finished sword to Kovac for reputation points. Stack reputation, then spend at his shop for the Smiths outfit (4000 each top/trousers, 3500 boots/gloves), Colossal blade (5000), Double ammo mould (2000), Kovac's grog (300), Ore pack (200), or Smithing catalyst (15).",
         "worldX": 3365,
         "worldY": 11489,
         "worldPlane": 0,
         "npcId": 11472,
         "interactAction": "Talk-to",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Reward"
+      },
+      {
+        "description": "Return to the bank to restock bars before the next commission cycle. Falador tele + run south-east, or use the Grouping tele again if your group teleport is set there.",
+        "worldX": 2945,
+        "worldY": 3367,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "SHOP",
@@ -13164,7 +13298,13 @@
         ],
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "You attempt to light the funeral pyre",
-        "section": "Skilling"
+        "section": "Skilling",
+        "recommendedItemIds": [
+          590,
+          25630,
+          3404,
+          3446
+        ]
       },
       {
         "description": "Pick up your shade key from the reward pillar inside the temple.",
@@ -13509,6 +13649,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 300,
     "afkLevel": 1,
+    "requirements": {},
     "items": [
       {
         "itemId": 24872,
@@ -13584,22 +13725,76 @@
       }
     ],
     "locationDescription": "Mahogany Homes, contracts available in Falador, Varrock, Hosidius, and Ardougne",
-    "travelTip": "Varies by contract city",
+    "travelTip": "Ardougne cloak -> Ardougne, or Falador tele for the starting city",
     "guidanceSteps": [
       {
-        "description": "Travel to Mahogany Homes, contracts available in Falador, Varrock, Hosidius, and Ardougne.",
+        "description": "Bank for Mahogany Homes. Bring a Saw (Crystal saw if you have one for the +3 boost), a Hammer, the Plank sack if you own one, and one stack each of Mahogany / Teak / Oak / Regular planks (8 of each is enough for several contracts). A few teleports home or to the contract cities saves a lot of time.",
+        "worldX": 2965,
+        "worldY": 3382,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          8794,
+          2347,
+          960,
+          8778,
+          8780,
+          8782
+        ],
+        "section": "Bank prep"
+      },
+      {
+        "description": "Travel to Amy in Falador east of the Falador shield shop to pick up your starting contract. Higher Construction levels unlock the Carpenter (Adept 20+, Expert 50+, Master 70+) tiers - each pays more points per contract.",
         "worldX": 2954,
         "worldY": 3369,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 8,
+        "travelTip": "Falador tele -> Amy at the Falador east bank",
+        "section": "Travel"
       },
       {
-        "description": "Complete Mahogany Homes contracts from Amy to earn carpenter's points for rewards.",
+        "description": "Talk to Amy and accept a contract. She will direct you to Falador, Varrock, Hosidius, or East Ardougne - teleport directly to the contract city. Higher tiers (Adept / Expert / Master) ignore the starter Falador-only contracts.",
         "worldX": 2954,
         "worldY": 3369,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL",
+        "section": "Travel"
+      },
+      {
+        "description": "At the contract house, repair every broken hotspot in the order shown. Right-click each broken object and use the correct plank tier (Master = Mahogany only). Use the Crystal saw boost if your Construction level is borderline. Reporting to the owner finishes the contract and credits the carpenter's points.",
+        "worldX": 2954,
+        "worldY": 3369,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Contract",
+        "recommendedItemIds": [
+          8794,
+          2347,
+          25629,
+          8780,
+          8782
+        ]
+      },
+      {
+        "description": "Return to Amy in the contract city to hand in - the contract auto-rerolls into a new one in the same city until you choose to teleport away. Spend Carpenter's points at her shop for the Carpenter's outfit (helmet 400, shirt 800, trousers 600, boots 200), Amy's saw (500), Hosidius blueprints (2000), Plank sack (350), or Supply crates (25).",
+        "worldX": 2954,
+        "worldY": 3369,
+        "worldPlane": 0,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL",
+        "section": "Reward"
+      },
+      {
+        "description": "Teleport back to a bank to restock planks when your inventory runs low. Falador east bank is closest to Amy; West Ardougne bank is closest to Ardougne contracts.",
+        "worldX": 2965,
+        "worldY": 3382,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "SHOP",
@@ -13693,19 +13888,65 @@
     "travelTip": "Quetzal whistle -> Varlamore",
     "guidanceSteps": [
       {
-        "description": "Travel to Mastering Mixology, Aldarin in Varlamore.",
+        "description": "Bank for Mastering Mixology. Bring a Quetzal whistle (or other Varlamore teleport), a Reagent pouch if you own one to auto-deposit paste, and a few teleports home. The minigame supplies all herbs and vials in the lobby; you do not need to bring herblore reagents.",
+        "worldX": 1592,
+        "worldY": 3092,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          29271
+        ],
+        "section": "Bank prep"
+      },
+      {
+        "description": "Travel to Aldarin in southern Varlamore. Quetzal whistle is the fastest route; Civitas illa Fortis teleport + run south-west also works.",
         "worldX": 1389,
         "worldY": 2955,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15,
+        "travelTip": "Quetzal whistle -> Aldarin, or Civitas illa Fortis tele + run south-west",
+        "section": "Travel"
       },
       {
-        "description": "Mix potions at the Mixology station to earn Mox, Aga, and Lye for rewards.",
+        "description": "Talk to the Mixologist to start the minigame and enter the lab. You need 60 Herblore + Children of the Sun started.",
         "worldX": 1389,
         "worldY": 2955,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
+      },
+      {
+        "description": "Mix potions at the Mixology station to earn Mox (orange), Aga (green), and Lye (blue) resin. Optimal cycle: grind the herb, add to vial, agitate at the correct station, then deposit the finished potion. Watch the order indicators - over-agitating turns the potion into paste (wasted XP). Reagent pouch auto-stores paste so you don't need to walk to deposit boxes.",
+        "worldX": 1393,
+        "worldY": 2937,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Minigame",
+        "recommendedItemIds": [
+          29996,
+          29992,
+          30002,
+          29974
+        ]
+      },
+      {
+        "description": "Spend resin at the Mixology shop. Alchemist labcoat / pants / gloves cost 8750 each Mox/Aga/Lye; Prescription goggles 24950 each; Alchemist's amulet 19950 each; Reagent pouch 40100 each; Chugging barrel 49850 each. Buy the Reagent pouch early - it cuts paste-walk overhead by 90%.",
+        "worldX": 1389,
+        "worldY": 2955,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Reward"
+      },
+      {
+        "description": "Teleport back to Civitas illa Fortis or your home bank to deposit any rewards. No restock is needed - the lab supplies everything.",
+        "worldX": 1592,
+        "worldY": 3092,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "SHOP",
@@ -13807,19 +14048,69 @@
     "travelTip": "Digsite pendant -> Fossil Island",
     "guidanceSteps": [
       {
-        "description": "Travel to Volcanic Mine, north-east Fossil Island volcano.",
+        "description": "Bank for Volcanic Mine. Bring your best Pickaxe (Dragon or Crystal preferred for fewer fails), full Prospector / Mining cape outfit for the XP bonus, Stamina potions for low-Agility accounts, and some food. Energy management is the main hazard - falling rocks chip away HP and stability. Bone Voyage + 50 Mining required.",
+        "worldX": 3739,
+        "worldY": 3804,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          11920,
+          12625,
+          385
+        ],
+        "section": "Bank prep"
+      },
+      {
+        "description": "Travel to the Fossil Island volcano in the north-east. Digsite pendant teleport goes straight to the Mushroom Forest then run north-east, or use Fairy ring DLR for the closest fairy ring fallback.",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15,
+        "travelTip": "Digsite pendant -> Mushroom Forest + run NE, or Fairy ring DLR",
+        "section": "Travel"
       },
       {
-        "description": "Mine ore in the Volcanic Mine. Work in a team to mine boulders into the lava vortex for bonus points. Check stability and dodge falling rocks",
+        "description": "Enter the Volcanic Mine entrance and join a game lobby. Worlds 408/409 are the official VM theme worlds; solo runs are possible but team play multiplies points/hour by 3-5x.",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
+      },
+      {
+        "description": "Mine ore from one of the three coloured walls (red/green/blue) and deposit the resulting boulders into the central lava vortex to keep the platform stable. Each colour fuels a different vent - keep all three vents balanced or the platform collapses and the game ends. Dodge falling rocks (predicted by ground shadows), eat when HP drops below 50%, and aim for 150+ points per round to maximise the unique table roll.",
+        "worldX": 3815,
+        "worldY": 3807,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Minigame",
+        "recommendedItemIds": [
+          11920,
+          23680,
+          12013,
+          12014,
+          12015,
+          12016
+        ]
+      },
+      {
+        "description": "Exit the mine after the round ends to bank your points and ores. Spend points at Petrified Pete's shop for Prospector pieces (boots 21k, legs 34k, jacket 39k, helmet 26k each), Dragon pickaxe broken (4000), Volcanic mine teleport (200), Large water container (10000), or Ash covered tome (40000).",
+        "worldX": 3815,
+        "worldY": 3807,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Reward"
+      },
+      {
+        "description": "Teleport back to the Fossil Island bank chest to restock and bank the round's loot before the next game.",
+        "worldX": 3739,
+        "worldY": 3804,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "SHOP",
@@ -21490,6 +21781,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 80,
     "ironKillTimeSeconds": 180,
+    "requirements": {},
     "items": [
       {
         "itemId": 12221,
@@ -22412,44 +22704,64 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Open easy clue scrolls from low-level monsters or skilling. Complete cryptic clues, emote clues, and map clues",
+        "description": "Travel to the Grand Exchange with a Spade, a charged Ring of duelling, Amulet of glory, and Games necklace for teleport coverage, and a Stamina potion. The RuneLite Clue Scroll plugin handles the per-step routing in-game; no combat gear is needed (no easy-clue combat encounters).",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Grand Exchange teleport",
+        "requiredItemIds": [
+          952,
+          2552,
+          1712,
+          3853
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Buy Gourmet impling jars from the Grand Exchange.",
+        "description": "Obtain an easy clue scroll. Low-level monsters (Cave bugs, Cave crawlers, Minotaurs, low-level skeletons), H.A.M. members at the H.A.M. hideout, and Hosidius farmhands all drop easy clues at ~1/100. Gourmet impling jars open to an easy clue at 1/25. Easy clue bottles also drop while fishing at any spot.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Loot",
+        "loopBackToStep": 1,
+        "loopCount": 1,
+        "recommendedItemIds": [
+          952,
+          2552,
+          11242
+        ]
       },
       {
-        "description": "Open jars to obtain easy clue scrolls (1/25 rate per jar).",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Easy clues add cryptic clues, emote clues, and 6 anagram clues. Always wear the exact emote-clue costume the clue requests - missing one piece resets the puzzle.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Combat"
       },
       {
-        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
-        "worldX": 0,
-        "worldY": 0,
+        "description": "Open the reward casket for collection log items. Easy caskets roll the bronze / iron / studded leather (t/g) trim/gold sets, Wooden shield (g), Highwayman mask, Beret colour set, Black pickaxe, Team capes 0/i/x, and the Golden chef / apron / Bob's shirts.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Reward"
       },
       {
-        "description": "Open reward casket for collection log items.",
-        "worldX": 0,
-        "worldY": 0,
+        "description": "Bank rewards at the Grand Exchange. Restock impling jars and travel consumables before opening the next easy clue.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 1,
-    "travelTip": "Obtain from low-level monsters, H.A.M. members, or pickpocketing"
+    "travelTip": "Obtain from low-level monsters, Gourmet impling jars, H.A.M. members, or pickpocketing"
   },
   {
     "name": "Medium Treasure Trails",
@@ -22459,6 +22771,7 @@
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "ironKillTimeSeconds": 360,
+    "requirements": {},
     "items": [
       {
         "itemId": 2577,
@@ -23269,44 +23582,66 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Open medium clue scrolls from mid-level content. Complete coordinate clues, puzzle boxes, and anagram clues",
+        "description": "Travel to the Grand Exchange with a Spade, a charged Ring of duelling, Amulet of glory, Games necklace, and Skills necklace for teleport coverage, plus a Stamina potion and a Pestle and mortar (for grinding cocktail-recipe ingredients on the cryptic step). Bring a few sharks and a teleport home in case a mid-level coordinate clue spawns a level 30-50 enemy. The RuneLite Clue Scroll plugin handles per-step routing.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Grand Exchange teleport",
+        "requiredItemIds": [
+          952,
+          2552,
+          1712,
+          3853,
+          233
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Buy Eclectic impling jars from the Grand Exchange.",
+        "description": "Obtain a medium clue scroll. Mid-level monsters (Cyclops, Cockatrice, Pyrefiends, Earth warriors, Otherworldly beings) drop them at ~1/200; Eclectic impling jars open to a medium clue at 1/25; Falconry kebbits drop them at 1/350. Hard / Elite clue caskets occasionally drop a medium clue as a bonus.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Loot",
+        "loopBackToStep": 1,
+        "loopCount": 1,
+        "recommendedItemIds": [
+          952,
+          2552,
+          11246,
+          385
+        ]
       },
       {
-        "description": "Open jars to obtain medium clue scrolls (1/25 rate per jar).",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Medium clues introduce coordinate clues (Spade required), puzzle boxes, and mid-level wizard fights (level 27 Saradomin / Zamorak / Guthix wizards) - use Protect from Magic when one spawns. Always carry a Sextant / Watch / Chart from Trinitus before the clue starts for instant coordinate solves.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Combat"
       },
       {
-        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
-        "worldX": 0,
-        "worldY": 0,
+        "description": "Open the reward casket for collection log items. Medium caskets roll Ranger boots (1/1133), Wizard boots, the black / mithril / adamant trim/gold sets, Holy / Unholy / Saradomin / Zamorak / Guthix book covers, Camo / Lederhosen / Beekeeper / Mime sets, Climbing boots (g), and the Black pickaxe.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Reward"
       },
       {
-        "description": "Open reward casket for collection log items.",
-        "worldX": 0,
-        "worldY": 0,
+        "description": "Bank rewards at the Grand Exchange. Restock impling jars and travel consumables before opening the next medium clue.",
+        "worldX": 3165,
+        "worldY": 3487,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 1,
-    "travelTip": "Obtain from mid-level monsters, eclectic implings, or Falconry"
+    "travelTip": "Obtain from mid-level monsters, Eclectic impling jars, or Falconry"
   },
   {
     "name": "Hard Treasure Trails",
