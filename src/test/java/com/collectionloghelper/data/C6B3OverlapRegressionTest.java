@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * C6 B3 (B2-overlap follow-up) regression guard — locks the C3 diary-tier
+ * C6 B3 (B2-overlap follow-up) regression guard - locks the C3 diary-tier
  * conditional alternatives that had to wait for B2's POH-teleport authoring
  * (PR #630) to land before they could be stacked ahead of the existing
  * POH alternatives.
