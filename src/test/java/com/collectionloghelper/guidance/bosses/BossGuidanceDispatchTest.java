@@ -104,7 +104,8 @@ public class BossGuidanceDispatchTest
 			0, null, null, null, null, null,
 			0, 0, false, 0, null, null, 0, 0, null, null, null, null, null,
 			null /* waypoints */, null /* dynamicTargetEvaluator */,
-			null /* conditionTree */
+			null /* conditionTree */,
+			null /* perItemStepPriority */
 		);
 	}
 

@@ -420,7 +420,8 @@ public class DynamicTargetEvaluatorDispatchTest
 			null,  // section
 			null,  // waypoints
 			evaluatorKey,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 }

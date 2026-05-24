@@ -346,7 +346,8 @@ public class BankScanIntegrationTest
 			null, // section
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 }

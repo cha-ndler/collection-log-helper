@@ -654,7 +654,8 @@ public class RequiredItemResolverTest
 			null, // section
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 
@@ -695,7 +696,8 @@ public class RequiredItemResolverTest
 			null,  // section
 			null,  // waypoints
 			null,   // dynamicTargetEvaluator
-			null   // conditionTree
+			null,   // conditionTree
+			null   // perItemStepPriority
 		);
 	}
 }

@@ -303,7 +303,8 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			null, // section
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 
