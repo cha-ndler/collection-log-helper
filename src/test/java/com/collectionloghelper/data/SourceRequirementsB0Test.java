@@ -155,11 +155,11 @@ public class SourceRequirementsB0Test
 		SourceRequirements a = new SourceRequirements(
 			null, null, null,
 			Collections.singletonList("MOUNTED_GLORY"),
-			Collections.singletonList(22557));
+			Collections.singletonList(22557), null);
 		SourceRequirements b = new SourceRequirements(
 			null, null, null,
 			Collections.singletonList("MOUNTED_GLORY"),
-			Collections.singletonList(22557));
+			Collections.singletonList(22557), null);
 		assertEquals(a, b);
 		assertEquals(a.hashCode(), b.hashCode());
 	}
@@ -170,11 +170,11 @@ public class SourceRequirementsB0Test
 		SourceRequirements a = new SourceRequirements(
 			null, null, null,
 			Collections.singletonList("MOUNTED_GLORY"),
-			null);
+			null, null);
 		SourceRequirements b = new SourceRequirements(
 			null, null, null,
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
-			null);
+			null, null);
 		assertTrue(!a.equals(b));
 	}
 
@@ -188,7 +188,7 @@ public class SourceRequirementsB0Test
 			null,
 			Collections.singletonList("FREMENNIK_HARD"),
 			Arrays.asList("JEWELLERY_BOX_FANCY", "MOUNTED_GLORY"),
-			Arrays.asList(22557, 28266));
+			Arrays.asList(22557, 28266), null);
 		String json = GSON.toJson(original);
 		SourceRequirements restored = GSON.fromJson(json, SourceRequirements.class);
 		assertEquals(original, restored);
