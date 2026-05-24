@@ -8168,36 +8168,72 @@
       }
     ],
     "locationDescription": "Morytania Spider Cave",
-    "travelTip": "Drakan's medallion -> Darkmeyer",
+    "travelTip": "Drakan's medallion -> Darkmeyer, or fairy ring CLS",
     "npcId": 13668,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Araxyte Cave in north-east Morytania (fairy ring CLS or Darkmeyer teleport)",
+        "description": "Bank for Araxxor. Bring Saradomin brews, super restores, and combat potions; mage gear for path 1 (Aviansie/Spitting), melee tank for path 2 (Mirror), ranged for path 3 (Minions). A salve amulet (ei) and crush weapon (Inquisitor's mace, Soulreaper axe, or Scythe) are the standard meta picks.",
+        "worldX": 3087,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          6685,
+          3024,
+          2434
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Araxyte Cave in north-east Morytania. Drakan's medallion to Darkmeyer then run east, or fairy ring CLS for the fastest unquested route",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Drakan's medallion -> Darkmeyer -> run east, or fairy ring CLS",
+        "section": "Travel"
       },
       {
-        "description": "Enter the cave and navigate to the Araxxor arena",
+        "description": "Enter the Araxyte hive and descend to the Araxxor arena. The first encounter is randomly assigned one of three paths; subsequent kills cycle through the remaining two",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
         "objectId": 42594,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "section": "Travel"
       },
       {
-        "description": "Kill Araxxor. 3-phase spider boss with acid, darkness, and minion mechanics. Use crush weapons and Protect from Melee. Watch for the web cocoon special",
+        "description": "Kill Araxxor. Three rotating paths: Path 1 (Aviansie) - use magic to break acid spitting; Path 2 (Mirror) - tank with Protect from Melee and high def, ignore the reflection; Path 3 (Minions) - kill spiderlings before they reach you. Phase 4 (final) requires Protect from Magic, dodge the web cocoon special, and pop minions with chinchompas if you brought them. Sip super combat / overload between phases.",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
         "npcId": 13668,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 13668
+        "completionNpcId": 13668,
+        "section": "Combat",
+        "recommendedItemIds": [
+          22325,
+          12006,
+          6685,
+          2434,
+          3024,
+          12695
+        ]
+      },
+      {
+        "description": "Return to bank to restock brews, restores, and combat potions before the next kill",
+        "worldX": 3087,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
@@ -19693,27 +19729,68 @@
       }
     ],
     "locationDescription": "The Darkfrost, Hailstorm Mountains in Varlamore",
-    "travelTip": "Quetzal whistle -> Varlamore",
+    "travelTip": "Quetzal whistle -> Hueycoatl arena, or Civitas illa Fortis lodestone",
     "npcId": 14009,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Hueycoatl Arena in Cam Torum, Varlamore. Use quetzal whistle or Varlamore teleport",
+        "description": "Bank for The Hueycoatl. Bring a quetzal whistle, prayer potions, brews/sharks, and a dragonbane weapon (dragon hunter lance/crossbow/wand). Make sure your hide-pickup task is set; the fight pulls you across 4 anchor points so wear lightweight armour for run energy.",
+        "worldX": 1593,
+        "worldY": 3091,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          29271,
+          2434,
+          385
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Hueycoatl Arena in the Hailstorm Mountains, Varlamore. Use the quetzal whistle for the fastest route, or Civitas illa Fortis lodestone and run west",
         "worldX": 1509,
         "worldY": 3290,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Quetzal whistle -> Hueycoatl, or Civitas illa Fortis lodestone -> run west",
+        "section": "Travel"
       },
       {
-        "description": "Kill The Hueycoatl. Dodge the fire breath and tail sweep attacks. Destroy the egg nests when they spawn to prevent add waves",
+        "description": "Kill The Hueycoatl. The fight cycles across 4 anchor pillars - Hueycoatl rams a different pillar each phase. Run to the active pillar and DPS the head while it is bound. Dodge red tiles (fire breath / tail slam), kill the egg nest adds before they hatch, and use Protect from Magic on the final phase enrage. Dragon hunter wand or dragon hunter crossbow are the meta picks.",
         "worldX": 1509,
         "worldY": 3290,
         "worldPlane": 0,
         "npcId": 14009,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 14009
+        "completionNpcId": 14009,
+        "section": "Combat",
+        "recommendedItemIds": [
+          30070,
+          22325,
+          2434,
+          6685,
+          3024
+        ]
+      },
+      {
+        "description": "Loot the Hueycoatl reward chest in the arena. Pick up Hueycoatl hide and any unique drops before leaving",
+        "worldX": 1509,
+        "worldY": 3290,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank to restock supplies for the next kill",
+        "worldX": 1593,
+        "worldY": 3091,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "ironKillTimeSeconds": 400,
@@ -19813,27 +19890,77 @@
       }
     ],
     "locationDescription": "Yama's Domain, Chasm of Fire beneath Shayzien",
-    "travelTip": "Xeric's talisman -> Heart",
+    "travelTip": "Chasm teleport scroll, or Xeric's talisman -> Heart -> south to chasm",
     "npcId": 14176,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Chasm of Yama beneath Cam Torum, Varlamore. Use quetzal whistle or the chasm teleport scroll",
+        "description": "Bank for Yama. Bring Saradomin brews, super restores, prayer pots, and ranged-tank gear (Karil's top + Masori, Bowfa or Zaryte crossbow). Yama is melee-and-magic style hybrid; Protect from Magic is the primary prayer. Bring a chasm teleport scroll for repeat trips.",
+        "worldX": 1641,
+        "worldY": 3673,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          6685,
+          3024,
+          2434,
+          30775
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Chasm of Fire beneath Shayzien, Varlamore. Use a chasm teleport scroll for the fastest route, or Xeric's talisman to Heart and run south",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Chasm teleport scroll (one-tick), or Xeric's talisman -> Heart -> run south through chasm",
+        "section": "Travel"
       },
       {
-        "description": "Kill Yama. This is a group boss (duo+ recommended). Use Protect from Melee, dodge the slam attacks, and destroy the soul totems",
+        "description": "Form a party of 2-4 and enter Yama's instance. Solo is possible at endgame but DPS check is brutal; duo is the standard. Make sure all members have prayer pots and brews.",
+        "worldX": 1503,
+        "worldY": 10091,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Travel"
+      },
+      {
+        "description": "Kill Yama. Protect from Magic, dodge the floor-fire patches and the demonic tallow slams, kill the spawned imps fast. On the enrage phase Yama leaps to a new chasm tile - reposition immediately or eat through the unprotected hit. Scythe of Vitur or Soulreaper axe for melee DPS; Bowfa or Tbow for ranged tank role.",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
         "npcId": 14176,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 14176
+        "completionNpcId": 14176,
+        "section": "Combat",
+        "recommendedItemIds": [
+          22325,
+          25867,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Loot the chest after Yama dies for Oathplate shards, Dossiers, and unique drops. Open Forgotten lockboxes at a bank for bonus loot",
+        "worldX": 1503,
+        "worldY": 10091,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank to restock brews, restores, prayer potions, and a chasm teleport scroll before the next kill",
+        "worldX": 1641,
+        "worldY": 3673,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
@@ -19898,27 +20025,78 @@
       }
     ],
     "locationDescription": "Ruins of Mokhaiotl, beneath Tlati Rainforest in Varlamore",
-    "travelTip": "Quetzal whistle -> Varlamore",
+    "travelTip": "Quetzal whistle -> Mokhaiotl waystone, or Civitas illa Fortis lodestone",
     "npcId": 14707,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Ruins of Mokhaiotl beneath the Tlati Rainforest, Varlamore. Use quetzal whistle to reach the area",
+        "description": "Bank for a Mokhaiotl delve. Bring a Mokhaiotl waystone, full Saradomin brews, super restores, prayer pots, super combat potion, and your best melee setup (Scythe is BiS for the boss but Soulreaper axe works). Bring chinchompas or magic for the early-depth swarm phases.",
+        "worldX": 1593,
+        "worldY": 3091,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          31099,
+          6685,
+          3024,
+          2434,
+          12695
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Ruins of Mokhaiotl beneath the Tlati Rainforest, Varlamore. Use a Mokhaiotl waystone for direct teleport, or Civitas illa Fortis lodestone and run west to the rainforest entrance",
         "worldX": 1311,
         "worldY": 9520,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Mokhaiotl waystone -> direct teleport, or Civitas illa Fortis -> run west",
+        "section": "Travel"
       },
       {
-        "description": "Complete the Doom delve. Fight through progressive floors of increasing difficulty. Higher floors have better unique drop rates",
+        "description": "Enter the Mokhaiotl delve instance. Each delve is a sequence of depth floors 1-10 (or further). Unique drop rates improve with depth, with depth 9 considered the standard speed-target for ironmen and depth 10+ for max-rate hunters.",
+        "worldX": 1311,
+        "worldY": 9520,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat"
+      },
+      {
+        "description": "Fight through the depth floors. Each depth has a different mechanic rotation (slam, projectile, shadow tiles). Protect from Magic for shadow phases, Protect from Melee when Doom closes the gap. Watch for the shadow-clone phase from depth 5+ and pre-pot before each floor's boss segment. Doom of Mokhaiotl is the depth-end fight - kill it to claim the delve reward.",
         "worldX": 1311,
         "worldY": 9520,
         "worldPlane": 0,
         "npcId": 14707,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 14707
+        "completionNpcId": 14707,
+        "section": "Combat",
+        "recommendedItemIds": [
+          22325,
+          27277,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Claim the delve reward chest. Higher depths bias the loot toward Avernic treads / Eye of ayak / Mokhaiotl cloth. Bank Mokhaiotl waystones for repeat trips",
+        "worldX": 1311,
+        "worldY": 9520,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank to restock brews, restores, prayer pots, and a fresh Mokhaiotl waystone",
+        "worldX": 1593,
+        "worldY": 3091,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
@@ -19930,6 +20108,7 @@
     "worldY": 3150,
     "worldPlane": 0,
     "killTimeSeconds": 60,
+    "requirements": {},
     "items": [
       {
         "itemId": 30626,
@@ -19984,27 +20163,76 @@
       }
     ],
     "locationDescription": "Asgarnian Ice Dungeon, south of Port Sarim",
-    "travelTip": "Port Sarim -> Ice Dungeon",
+    "travelTip": "Giantsoul amulet -> direct teleport, or fairy ring AIQ -> run south",
     "npcId": 12596,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Asgarnian Ice Dungeon (fairy ring AIQ to Mudskipper Point, then run south). Use the tunnel shortcut with 60 Agility, or giantsoul amulet teleport",
+        "description": "Bank for Royal Titans. Bring a swap setup - ranged (rune crossbow or better) for the wave 1 movement phase and melee (Saradomin sword, Scythe, or Soulreaper axe) for the static arena phase. Stock prayer potions, sharks, and either a Giantsoul amulet or Skills necklace for re-entry.",
+        "worldX": 3094,
+        "worldY": 3491,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          2434,
+          385,
+          30638
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Asgarnian Ice Dungeon entrance south of Port Sarim. Giantsoul amulet teleports directly to the boss tunnel; otherwise fairy ring AIQ to Mudskipper Point and run south, then use the level-60 Agility tunnel shortcut west of the dungeon ladder",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Giantsoul amulet -> tunnel, or fairy ring AIQ -> south + 60 Agility shortcut",
+        "section": "Travel"
       },
       {
-        "description": "Kill both Royal Titans (Eldric + Branda). Duo recommended. Focus DPS on both evenly - if one falls first, the other enrages. Dodge the ice/fire waves and elemental spawns",
+        "description": "Enter the Royal Titans tunnel and start an instance (solo or duo). Duo is the standard - solo is doable but DPS check is tight; a partner can join during the fight as long as no titan has lost more than 25% HP",
+        "worldX": 3008,
+        "worldY": 3150,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Travel"
+      },
+      {
+        "description": "Kill both Royal Titans (Eldric the Ice King + Branda the Fire Queen). Phase 1: the giants walk between two arenas - chase with ranged, swap to melee when they enter the arena. Protect from Melee blocks their 3x5 stomp AoE. Phase 2 (one giant below 35% HP): both lock to the arena and cast an arena-wide spell - stand on the converging safe tile. Keep their HP even; if one dies first the survivor enrages and ignores prayer.",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
         "npcId": 12596,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12596
+        "completionNpcId": 12596,
+        "section": "Combat",
+        "recommendedItemIds": [
+          22325,
+          11785,
+          2434,
+          385,
+          6685
+        ]
+      },
+      {
+        "description": "Loot the reward chest by the tunnel scoreboard. Charge a Giantsoul amulet from any uncharged drop with desiccated pages for fast re-entry",
+        "worldX": 3008,
+        "worldY": 3150,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank to restock food and prayer potions before the next kill",
+        "worldX": 3094,
+        "worldY": 3491,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "ironKillTimeSeconds": 90,
@@ -20021,6 +20249,12 @@
     "requirements": {
       "quests": [
         "THE_HEART_OF_DARKNESS"
+      ],
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 48
+        }
       ]
     },
     "items": [
@@ -20063,27 +20297,67 @@
       }
     ],
     "locationDescription": "Ruins of Tapoyauik, Varlamore",
-    "travelTip": "Quetzal whistle -> Varlamore",
+    "travelTip": "Quetzal whistle -> Tapoyauik, or Civitas illa Fortis lodestone",
     "npcId": 13685,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Amoxliatl's lair in Cam Torum, Varlamore. Use quetzal whistle or Varlamore teleport",
+        "description": "Bank for Amoxliatl. Bring a quetzal whistle, prayer pots, sharks, and your best melee setup (Scythe of Vitur or Soulreaper axe). Amoxliatl is a Slayer monster (48 Slayer); also stock magic for the secondary kill style and a Pendant of ates for the teleport once you have one.",
+        "worldX": 1593,
+        "worldY": 3091,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          29271,
+          2434,
+          385
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Ruins of Tapoyauik, Varlamore. Use a quetzal whistle to fly directly to the ruins, or Civitas illa Fortis lodestone and run south. Pendant of ates teleport (uncharged drops from Amoxliatl) skips the run entirely once charged",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Quetzal whistle -> Tapoyauik, or Pendant of ates once charged",
+        "section": "Travel"
       },
       {
-        "description": "Kill Amoxliatl. Dodge the ice attacks and use Protect from Magic. Collect frozen tears during the fight for additional rewards",
+        "description": "Kill Amoxliatl. Protect from Magic for the freeze-and-bind ice projectile. Stand adjacent for melee uptime; step out of the ice-crystal AoE tiles when they spawn. Frozen tears drop on the floor mid-fight - pick them up before the next attack as they despawn fast. Standard meta: Scythe of Vitur with Slayer helm + Avernic defender + Inquisitor's armour.",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
         "npcId": 13685,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 13685
+        "completionNpcId": 13685,
+        "section": "Combat",
+        "recommendedItemIds": [
+          22325,
+          24444,
+          2434,
+          385
+        ]
+      },
+      {
+        "description": "Loot Amoxliatl's drops and pick up any remaining frozen tears on the ground before the boss respawns",
+        "worldX": 1362,
+        "worldY": 4511,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to bank to restock food, prayer pots, and another quetzal whistle if needed",
+        "worldX": 1593,
+        "worldY": 3091,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "MIXED",
