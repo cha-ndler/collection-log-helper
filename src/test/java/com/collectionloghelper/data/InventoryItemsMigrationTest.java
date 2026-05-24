@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,20 +40,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Migration guard for the additive {@code inventoryItemIds} field on
  * {@link SourceRequirements}.
  *
- * <p>This PR adds the field, evaluator wiring, and Gson coverage but performs
- * zero pilot wiring in production data. This test walks the full production
- * {@code drop_rates.json} and asserts that every {@link SourceRequirements}
- * instance reached via top-level source requirements, conditional-alternative
- * requirements (flat and nested), and waypoint requirements has a null
- * {@code inventoryItemIds}. The first opportunity to flip a single source is a
- * separate later data PR.
+ * <p>The schema-addition PR (#640) shipped the field, evaluator wiring, and
+ * Gson coverage with zero production data using it. The C-extension data
+ * wiring PR then wires a small allowlist of sources via the AND-semantic
+ * {@code inventoryItemIds}: today only Zulrah's inventory scroll alternative
+ * is in this set. Every other {@link SourceRequirements} instance reached
+ * via top-level source requirements, conditional-alternative requirements
+ * (flat and nested), and waypoint requirements must still leave the field
+ * null.
  *
  * <p>Mirrors {@code B1MigrationTest}, {@code B1aRegressionTest}, and
  * {@code B1bRegressionTest}: walk the database, accumulate violations, fail
- * with one readable message.
+ * with one readable message. Positive coverage of the wired sources lives in
+ * {@link CExtensionInventoryTeleportRegressionTest}.
  */
 public class InventoryItemsMigrationTest
 {
+	/**
+	 * Sources allowed to set {@code inventoryItemIds} per the C-extension data
+	 * wiring PR. Any other source that flips this field will trip the
+	 * migration guard and force an explicit allowlist update.
+	 */
+	private static final Set<String> ALLOWED_SOURCES = Set.of("Zulrah");
+
 	private DropRateDatabase database;
 
 	@BeforeEach
@@ -87,13 +97,19 @@ public class InventoryItemsMigrationTest
 		}
 
 		assertTrue(violations.isEmpty(),
-			"inventoryItemIds invariant violated. No production source may set inventoryItemIds in this PR; pilot wiring lands in a follow-up data PR. Violations:\n"
+			"inventoryItemIds invariant violated. Only sources in the C-extension allowlist "
+				+ ALLOWED_SOURCES + " may set inventoryItemIds; new entries require an explicit "
+				+ "ALLOWED_SOURCES update plus matching CExtensionInventoryTeleportRegressionTest coverage. Violations:\n"
 				+ String.join("\n", violations));
 	}
 
 	private static void checkSource(CollectionLogSource source, List<String> violations)
 	{
 		String sourceName = source.getName();
+		if (ALLOWED_SOURCES.contains(sourceName))
+		{
+			return;
+		}
 		checkRequirements(sourceName + " (top-level requirements)", source.getRequirements(), violations);
 
 		// CollectionLogSource owns the requirement-bearing Waypoint list. GuidanceStep
