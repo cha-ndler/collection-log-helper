@@ -3590,15 +3590,32 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance",
+        "description": "Bank for Nex. Bring Saradomin brews, super restores, prayer potions, sharks, super combat potions, and a Frozen key (or its four pieces). Standard meta is Scythe of Vitur or Soulreaper axe for melee + Twisted bow / Tbow for range; bring a Zaryte crossbow with diamond bolts (e) for solo specs. Salve amulet (ei) is BIS for the helm slot.",
+        "worldX": 3087,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          6685,
+          3024,
+          2434,
+          385
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Teleport to Trollheim and run north to the God Wars Dungeon entrance. Fallback: walk from Death Plateau if Eadgar's Ruse is not complete",
         "worldX": 2918,
         "worldY": 3745,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 8
+        "completionDistance": 8,
+        "travelTip": "Trollheim teleport -> run north, or walk from Death Plateau",
+        "section": "Travel"
       },
       {
-        "description": "Enter the main dungeon and head to the frozen door to access the Ancient Prison",
+        "description": "Enter the main dungeon and head to the frozen door to access the Ancient Prison. Requires the Frozen key (assembled from the four shard halves) to open the door",
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
@@ -3608,26 +3625,54 @@
         ],
         "objectInteractAction": "Open",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 8
+        "completionDistance": 8,
+        "section": "Travel"
       },
       {
-        "description": "Get 40 Zaros killcount by killing Ancient Warriors, Mages, and Rangers in the Ancient Prison",
+        "description": "Get 40 Zaros killcount by killing Ancient Warriors, Mages, and Rangers in the Ancient Prison. Use the appropriate protect prayer per attacker style; the killcount carries across trips until Nex is engaged",
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
         "completionCondition": "VARBIT_AT_LEAST",
         "completionVarbitId": 13080,
-        "completionVarbitValue": 40
+        "completionVarbitValue": 40,
+        "section": "Combat"
       },
       {
-        "description": "Kill Nex in the Ancient Prison. 4-phase fight: Smoke (Protect from Magic), Shadow (avoid shadow), Blood (do not attack during siphon), Ice (Protect from Magic). Team recommended",
+        "description": "Kill Nex in the Ancient Prison. Four-phase fight: Smoke (Protect from Magic, dodge smoke clouds), Shadow (Protect from Magic, run from the shadow target marker), Blood (Protect from Melee, stop attacking during the siphon or she heals), Ice (Protect from Magic, free frozen teammates with melee). Pop the icicle wall on Ice phase fast; she enrages below 25%. Team-scale recommended (4-7 players); solo is possible but slow with Tumeken's shadow.",
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
         "npcId": 11278,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 11278
+        "completionNpcId": 11278,
+        "section": "Combat",
+        "recommendedItemIds": [
+          22325,
+          20997,
+          27277,
+          6685,
+          3024,
+          12695
+        ]
+      },
+      {
+        "description": "Loot the drop pile under Nex; uniques split based on damage contribution. Pick up Nihil shards for extending Ancient ceremonial robes too",
+        "worldX": 2905,
+        "worldY": 5190,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Teleport back to Edgeville bank to restock brews, restores, prayer potions, and sharks before the next trip",
+        "worldX": 3087,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
@@ -8160,38 +8205,91 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use the Quetzal whistle to reach Varlamore, then travel to the Fortis Colosseum.",
+        "description": "Bank at Civitas illa Fortis for the Colosseum. Bring Saradomin brews, super restores, ranging potions, sharks, a Quetzal whistle (or fast teleport), and a Sunfire fanatic / Crystal armour ranged setup. Meta loadout is Bow of faerdhinen (c) with Crystal helm/body/legs + Pegasian boots + Necklace of anguish; bring a Voidwaker or Volatile nature staff spec for damage windows. Take 4-6 brews, 6-8 restores, 6 ranging potions, sharks to fill the rest, and at least 5 Sunfire splinters in case you reset on early waves.",
+        "worldX": 1593,
+        "worldY": 3091,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          6685,
+          3024,
+          2444,
+          385,
+          29271
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Use the Quetzal whistle to reach Varlamore, then run north-east to the Fortis Colosseum entrance",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 12,
+        "travelTip": "Quetzal whistle -> Civitas illa Fortis -> run NE",
+        "section": "Travel"
       },
       {
-        "description": "Enter the Fortis Colosseum. Survive 12 waves of gladiators, then fight Sol Heredit. Choose modifiers wisely between waves",
+        "description": "Enter the Fortis Colosseum. Talk to Minimus and queue a run. The 12 waves scale by modifier stack - pick Quartet / Mantimayhem only after farming the early uniques",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
         "objectId": 50749,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 5,
+        "section": "Travel"
       },
       {
-        "description": "Talk to Minimus to start a Colosseum run. Fight through 12 waves of increasingly difficult enemies.",
+        "description": "Clear waves 1-11. Use Protect from Missiles vs Fremennik Archers, Protect from Melee vs Manticores, and step under Serpent Shamans to break their long-range chain. Drink Sunfire splinters when low; do not over-stack modifiers if you are still learning the wave",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Combat",
+        "recommendedItemIds": [
+          25865,
+          27690,
+          2444,
+          3024,
+          385
+        ]
       },
       {
-        "description": "Defeat Sol Heredit in the final wave. He has multiple attack styles and powerful special attacks - learn the mechanics for consistent clears",
+        "description": "Defeat Sol Heredit on wave 12. He cycles three melee specials: Triple Spear (move 2 tiles perpendicular), Triple Shield (run 4 tiles away then back), and Spear Wall (run to the wall opposite his facing). His shockwave attack is unavoidable - take it with full HP and Protect from Melee on. Use the white pillar to stall his shield slam and keep up Crystal armour set effect.",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
         "npcId": 12610,
         "interactAction": "Attack",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your Fortis Colosseum completion count is:"
+        "completionChatPattern": "Your Fortis Colosseum completion count is:",
+        "section": "Combat",
+        "recommendedItemIds": [
+          25865,
+          27690,
+          6685,
+          3024,
+          2444
+        ]
+      },
+      {
+        "description": "Loot the reward chest at the Colosseum exit. Sunfire splinters and Echo crystals roll on every clear; Tonalztics and Dizana's quiver are the rare drops",
+        "worldX": 1794,
+        "worldY": 3107,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Return to Civitas illa Fortis bank to restock brews, restores, ranging potions, and sharks before the next attempt",
+        "worldX": 1593,
+        "worldY": 3091,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "MIXED",
@@ -20797,22 +20895,94 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Mor Ul Rek (TzHaar city) via fairy ring BLP, or use Karamja gloves 4. Enter the Fight Caves",
+        "description": "Bank for the Fight Caves. Bring Saradomin brews, super restores, prayer potions, ranging potions, sharks/anglerfish, and a Stamina potion. Meta loadout is a Toxic blowpipe (amethyst/dragon darts) for waves 1-62 + Twisted bow or Bow of faerdhinen (c) for Jad; bring full ranged tank (Karil's, Black d'hide, or Crystal armour). Take 4 brews, 6 restores, 1 prayer potion, 4 ranging potions, 1 stamina, fill the rest with sharks.",
+        "worldX": 2925,
+        "worldY": 3174,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          6685,
+          3024,
+          2434,
+          2444,
+          385,
+          12625
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to Mor Ul Rek (TzHaar city) via fairy ring BLP, or use Karamja gloves 4 / TzHaar teleport scroll. Run north-east to the Fight Cave entrance",
         "worldX": 2439,
         "worldY": 5172,
         "worldPlane": 0,
         "npcId": 2180,
         "interactAction": "Talk-to",
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Fairy ring BLP -> run NE, or Karamja gloves 4 -> Ship to Karamja -> run east",
+        "section": "Travel"
       },
       {
-        "description": "Complete the Fight Caves. Survive 63 waves of TzHaar monsters, then defeat TzTok-Jad. Use the Italy Rock safespot and switch prayers on Jad's attacks",
-        "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your TzTok-Jad kill count is:",
+        "description": "Talk to TzHaar-Mej-Jal to enter the Fight Cave. The instance is private once started; you cannot resupply mid-run",
         "worldX": 2439,
         "worldY": 5172,
-        "worldPlane": 0
+        "worldPlane": 0,
+        "npcId": 2180,
+        "interactAction": "Talk-to",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "section": "Travel"
+      },
+      {
+        "description": "Clear waves 1-62. Use Protect from Magic against Tz-Kih (level 22) and Yt-MejKot (180); Protect from Missiles against Tz-Kek (45) and Tok-Xil (90); Protect from Melee against Yt-HurKot (108) when healing Jad. Always pillar manip the larger spawns - stand so the pillar is between you and the new wave to control aggro stacking. Drop melee minions (Yt-MejKot, Ket-Zek) by tanking on the south pillar.",
+        "worldX": 2401,
+        "worldY": 5093,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat",
+        "recommendedItemIds": [
+          12926,
+          25865,
+          2444,
+          385,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Defeat TzTok-Jad on wave 63. Pray Protect from Missiles when he rears back (ranged attack) and Protect from Magic when he stomps (magic attack); the cue is roughly 3 ticks before the projectile lands. When he hits half HP, 4 Yt-HurKot healers spawn - kill them or aggro them off Jad to stop the heal cycle. Stand on the Italy Rock (the rock that looks like a boot) to deny line-of-sight from a healer wave if you get overwhelmed.",
+        "worldX": 2401,
+        "worldY": 5093,
+        "worldPlane": 0,
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your TzTok-Jad kill count is:",
+        "section": "Combat",
+        "recommendedItemIds": [
+          20997,
+          25865,
+          6685,
+          2444,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Pick up the Fire cape drop on the rocks where Jad died. Tzrek-jad (pet) rolls 1/200 on Jad's death - it spawns inside the cave so loot before you leave",
+        "worldX": 2401,
+        "worldY": 5093,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Talk to TzHaar-Mej-Jal to leave the cave, then teleport back to a bank to restock before the next attempt",
+        "worldX": 2925,
+        "worldY": 3174,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "MIXED",
@@ -20854,7 +21024,24 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Mor Ul Rek via fairy ring BLP. Sacrifice a fire cape to enter the Inferno",
+        "description": "Bank for the Inferno. Mandatory: Fire cape (sacrificed on entry). Bring Saradomin brews, super restores, prayer potions, ranging potions, super combat potions, sharks/anglerfish, a Stamina potion, and Sanfew serums for venom on Jal-Xil hits. Meta loadout is Tumeken's shadow + Twisted bow + Bow of faerdhinen (c) + Voidwaker; full Masori (f) range armour + Crystal helm + Pegasian boots + Necklace of anguish. Take 8 brews, 8 restores, 3 ranging, 1 super combat, 1 stamina, 2 sanfew, and fill the rest with anglerfish.",
+        "worldX": 2925,
+        "worldY": 3174,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [
+          6570,
+          6685,
+          3024,
+          2434,
+          2444,
+          13441
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to Mor Ul Rek via fairy ring BLP. Run east to the Inferno entrance near TzHaar-Ket-Keh",
         "worldX": 2496,
         "worldY": 5122,
         "worldPlane": 0,
@@ -20864,15 +21051,89 @@
           6570
         ],
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Fairy ring BLP -> run east, bring Fire cape to sacrifice",
+        "section": "Travel"
       },
       {
-        "description": "Complete the Inferno. Survive 69 waves including triple Jad, then defeat TzKal-Zuk. Master prayer flicking, blob/bat positioning, and the shield mechanic",
-        "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Your TzKal-Zuk kill count is:",
+        "description": "Talk to TzHaar-Ket-Keh and sacrifice your Fire cape to enter. The cape is consumed and you get an Infernal cape only on success - the instance is private and one-shot per attempt",
         "worldX": 2496,
         "worldY": 5122,
-        "worldPlane": 0
+        "worldPlane": 0,
+        "npcId": 7690,
+        "interactAction": "Talk-to",
+        "requiredItemIds": [
+          6570
+        ],
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "section": "Travel"
+      },
+      {
+        "description": "Clear waves 1-66. Stack-up positioning is the entire game: pillar 4 (NW) and pillar 1 (S) are the standard anchors. Pray Magic vs Jal-Zek (mages) and Jal-Xil (rangers), Ranged vs Jal-Imkot (melee meleers) and Jal-AkRek-Mej, and Melee vs Jal-MejRah (bats) when adjacent. Blob (Jal-Xil) shots split into mage+range halves - 1-tick prayer flick to drop both. Healers (Jal-AkRek-Ket) come in twos and stack heals on Zuk - drag them off-screen. Always keep at least 4 brews + 4 restores in the bag entering wave 67.",
+        "worldX": 2273,
+        "worldY": 5341,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat",
+        "recommendedItemIds": [
+          27277,
+          20997,
+          25865,
+          27690,
+          6685,
+          3024
+        ]
+      },
+      {
+        "description": "Triple-Jad wave 67. Each Jad rotates Magic / Ranged prayers independently - the cue is the rear-back animation. Kill the centre Jad first, then the south, then the north; the order minimises overlap on healer waves. Stand in the south-west corner with line-of-sight blocked on the north Jad until the others die. Do not use Tumeken's shadow on Jads - they have high magic defence; swap to Twisted bow.",
+        "worldX": 2273,
+        "worldY": 5341,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Combat",
+        "recommendedItemIds": [
+          20997,
+          6685,
+          3024,
+          2434,
+          2444,
+          13441
+        ]
+      },
+      {
+        "description": "Defeat TzKal-Zuk on wave 69. He hits a fixed-tile attack that follows your previous tile - move 1 tile every 4 ticks (4-tick shuffle). The Igneous shield NPC (Jal-MejJak) spawns once and absorbs one Zuk hit when stood behind - use it at the second healer set spawn. At 480 HP, two healers (Jal-MejJak healers) spawn from the south - 1-tick aggro them off Zuk by attacking each once then leaving range. At 240 HP, the second healer set spawns; same drill. Tumeken's shadow is BIS for Zuk; switch to Twisted bow if low on shadow charges.",
+        "worldX": 2273,
+        "worldY": 5341,
+        "worldPlane": 0,
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Your TzKal-Zuk kill count is:",
+        "section": "Combat",
+        "recommendedItemIds": [
+          27277,
+          20997,
+          27690,
+          6685,
+          3024,
+          2434
+        ]
+      },
+      {
+        "description": "Pick up the Infernal cape under TzKal-Zuk. Jal-nib-rek (pet) rolls 1/100 on Zuk's death; spawns inside the instance so loot before talking to TzHaar-Ket-Keh",
+        "worldX": 2273,
+        "worldY": 5341,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Loot"
+      },
+      {
+        "description": "Talk to TzHaar-Ket-Keh to leave, then teleport back to a bank to restock for the next attempt. A successful run also unlocks the new Fire cape recolour",
+        "worldX": 2925,
+        "worldY": 3174,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "MIXED",
