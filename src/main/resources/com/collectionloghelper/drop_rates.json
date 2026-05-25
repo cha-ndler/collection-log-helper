@@ -31704,11 +31704,6 @@
     ],
     "locationDescription": "Fountain of Rune, south of the Blighted Volcano (level 47-48 Wilderness)",
     "travelTip": "Wilderness sword 4 -> Fountain of Rune (unlimited); or Wilderness sword 3 (one daily)",
-    "requirements": {
-      "quests": [
-        "HEROES_QUEST"
-      ]
-    },
     "guidanceSteps": [
       {
         "description": "Travel to the Fountain of Rune in deep Wilderness (level 47-48). Wilderness sword 4 provides an unlimited direct teleport. Wilderness sword 3 gives one free daily teleport. PKer risk -- bring only what you are willing to lose. Bring an inventory of uncharged amulets of glory (up to 26).",

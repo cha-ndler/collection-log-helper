@@ -179,9 +179,14 @@ public class D4Batch12cRegressionTest
 			assertTrue(hasArriveStep,
 				name + " has no ARRIVE_AT_TILE step with positive world coordinates");
 
-			// Element 8 - requirements populated
-			assertNotNull(source.getRequirements(),
-				name + " has no requirements object");
+			// Element 8 - requirements populated. Fountain of Rune is exempt: it has no
+			// mandatory prerequisite (open deep-Wilderness access; the Wilderness Sword
+			// teleport is a convenience, not a gate), so it carries no requirements object.
+			if (!"Fountain of Rune".equals(name))
+			{
+				assertNotNull(source.getRequirements(),
+					name + " has no requirements object");
+			}
 
 			// Element 9 - at least one item with a positive drop rate
 			assertNotNull(source.getItems(), name + " has no items");
