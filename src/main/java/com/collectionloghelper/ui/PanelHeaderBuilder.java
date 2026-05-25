@@ -47,6 +47,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
@@ -88,6 +89,7 @@ final class PanelHeaderBuilder
 		SlayerStrategyCalculator slayerStrategyCalculator,
 		RequirementsChecker requirementsChecker,
 		ItemManager itemManager,
+		ClientThread clientThread,
 		BiConsumer<CollectionLogSource, Integer> guidanceActivator,
 		Runnable guidanceDeactivator,
 		JComponent syncButtonOwner)
@@ -133,7 +135,7 @@ final class PanelHeaderBuilder
 		slayerStrategyView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(slayerStrategyView);
 
-		GuidanceBannerView guidanceBannerView = new GuidanceBannerView(requirementsChecker, itemManager);
+		GuidanceBannerView guidanceBannerView = new GuidanceBannerView(requirementsChecker, itemManager, clientThread);
 		guidanceBannerView.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		guidanceBannerView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(guidanceBannerView);

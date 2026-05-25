@@ -90,6 +90,7 @@ public class PanelHeaderBuilderTest
 			slayerStrategyCalculator,
 			requirementsChecker,
 			itemManager,
+			null, // clientThread not available in unit tests; chip tooltips degrade to "Item <id>"
 			(source, count) -> { /* no-op */ },
 			() -> { /* no-op */ },
 			host);
