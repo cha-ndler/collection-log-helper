@@ -81,7 +81,6 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.PluginPanel;
-import net.runelite.client.util.SwingUtil;
 
 public class CollectionLogHelperPanel extends PluginPanel implements PanelShellContext
 {
@@ -434,7 +433,14 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			{
 				PanelRebuildOrchestrator.RebuildSnapshot snapshot = rebuildOrchestrator.capture();
 
-				SwingUtil.fastRemoveAll(listContainer);
+				// Plain removeAll() rather than SwingUtil.fastRemoveAll(): the latter
+				// pumps pending AWT events mid-rebuild, which lets Swing paint the
+				// now-empty container before buildView() repopulates it -- the visible
+				// flash on frequent updates (e.g. every XP drop while on a Slayer task).
+				// removeAll() does not pump, so the EDT stays inside this runnable from
+				// clear through repopulate to the single revalidate/repaint below, and
+				// no empty intermediate frame is ever painted.
+				listContainer.removeAll();
 				updateCompletionHeader();
 				slayerStrategyView.refresh();
 

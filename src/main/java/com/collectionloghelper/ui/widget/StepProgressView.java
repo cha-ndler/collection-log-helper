@@ -140,6 +140,30 @@ public class StepProgressView extends JPanel
 	 */
 	private final Map<String, Boolean> sectionExpandState = new HashMap<>();
 
+	/**
+	 * Last-rendered inputs, used by {@link #showStep} to skip a teardown/rebuild when
+	 * the incoming render is identical to the one already on screen (#681).
+	 *
+	 * <p>Rationale: while guidance is active, {@code GuidanceSequencer.onInventoryChanged}
+	 * re-notifies the current (unchanged) step on every inventory change — effectively
+	 * every action during activities like Shades of Mort'ton. Each re-notify reaches
+	 * {@code showStep}; without this guard the item rows are torn down ({@code removeAll})
+	 * and rebuilt every time, making the "Items needed" section visibly flash. When the
+	 * full render signature is unchanged we return early and leave Swing untouched.
+	 *
+	 * <p>These fields are only ever read/written inside the {@code SwingUtilities.invokeLater}
+	 * body of {@link #showStep}, i.e. exclusively on the EDT, so no volatile/synchronization
+	 * is needed. {@code lastRenderValid} is {@code false} until the first render completes.
+	 */
+	private boolean lastRenderValid = false;
+	private int lastCurrent;
+	private int lastTotal;
+	private boolean lastIsManual;
+	private String lastDescription;
+	private List<RequiredItemDisplay> lastRows = Collections.emptyList();
+	private List<RequiredItemDisplay> lastRecRows = Collections.emptyList();
+	private List<StepSectionGroup> lastGroups = Collections.emptyList();
+
 	private Runnable stepAdvancer;
 	private Runnable stepSkipper;
 	private Runnable stepStopper;
@@ -493,6 +517,32 @@ public class StepProgressView extends JPanel
 
 		SwingUtilities.invokeLater(() ->
 		{
+			// Idempotency guard (#681): when the full render signature is identical to
+			// what is already on screen, skip the teardown/rebuild entirely. This makes a
+			// same-step re-notify (fired on every inventory change while guidance is active)
+			// a no-op instead of a visible flash. Section grouping is compared via the
+			// computed StepSectionGroup list, which carries Lombok-generated equals/hashCode,
+			// so List.equals gives a true content comparison. Runs on the EDT only.
+			if (lastRenderValid
+				&& lastCurrent == current
+				&& lastTotal == total
+				&& lastIsManual == isManual
+				&& java.util.Objects.equals(lastDescription, description)
+				&& lastRows.equals(rows)
+				&& lastRecRows.equals(recRows)
+				&& lastGroups.equals(groups))
+			{
+				return;
+			}
+			lastRenderValid = true;
+			lastCurrent = current;
+			lastTotal = total;
+			lastIsManual = isManual;
+			lastDescription = description;
+			lastRows = new java.util.ArrayList<>(rows);
+			lastRecRows = new java.util.ArrayList<>(recRows);
+			lastGroups = new java.util.ArrayList<>(groups);
+
 			// Plain-text setText on a JTextArea word-wraps from the actual rendered
 			// width — no HTML, no pixel-width budget, no escaping needed. Previous
 			// JLabel + <html><body width=...> approach dropped glyphs at the wrap
@@ -545,6 +595,10 @@ public class StepProgressView extends JPanel
 	{
 		SwingUtilities.invokeLater(() ->
 		{
+			// Invalidate the #681 idempotency cache: after a hide the panels are torn
+			// down, so the next showStep must rebuild even if its inputs match the
+			// last shown step.
+			lastRenderValid = false;
 			chipPanel.update(Collections.<RequiredItemDisplay>emptyList());
 			recChipPanel.update(Collections.<RequiredItemDisplay>emptyList());
 			requiredItemsPanel.removeAll();
