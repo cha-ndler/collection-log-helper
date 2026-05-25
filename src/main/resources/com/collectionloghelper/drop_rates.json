@@ -16260,7 +16260,8 @@
     "locationDescription": "Awarded for completing clue scroll milestones across all tiers",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange to manage clue scroll caskets.",
+        "section": "Overview",
+        "description": "Scroll cases are milestone rewards awarded after completing a set number of clue scrolls of each tier. They are not hunted directly; they accumulate automatically as you complete clues.",
         "worldX": 3213,
         "worldY": 3424,
         "worldPlane": 0,
@@ -16268,16 +16269,20 @@
         "completionDistance": 20
       },
       {
-        "description": "Complete clue scrolls of all tiers to earn milestone scroll cases.",
+        "section": "Earning Cases",
+        "description": "Complete clue scrolls of all tiers. Minor cases unlock at 50 completions per tier; major cases unlock at tier-specific higher thresholds. Cases are awarded automatically upon reaching the milestone.",
         "worldX": 3213,
         "worldY": 3424,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
     ],
+    "requirements": {
+      "skills": []
+    },
     "afkLevel": 1,
     "rewardType": "MILESTONE",
-    "travelTip": "Obtain from various activities, open for random tier clue"
+    "travelTip": "Scroll cases are milestone rewards - complete clue scrolls of each tier to earn them automatically"
   },
   {
     "name": "Castle Wars",
@@ -28085,7 +28090,8 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Complete hard clue scrolls for a chance at 3rd age armour, gilded items, and other rare mega-rares",
+        "section": "Overview",
+        "description": "Rare sub-table for hard clue scrolls. Full kill-loop guidance is on the Hard Treasure Trails parent activity. Complete hard clues for a chance at 3rd age armour, gilded items, and other mega-rares.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -28093,36 +28099,35 @@
         "completionDistance": 20
       },
       {
-        "description": "Buy Ninja impling jars from the Grand Exchange.",
+        "section": "Getting Clues",
+        "description": "Obtain hard clue scrolls via PvM (Hellhounds, Kalphite Queen, etc.), skilling, or Ninja impling jars (approx 1/25 per jar) from the Grand Exchange.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Open jars to obtain hard clue scrolls (1/25 rate per jar).",
-        "worldX": 3165,
-        "worldY": 3487,
-        "worldPlane": 0,
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "section": "Completing Clues",
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance.",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Open reward casket for collection log items.",
+        "section": "Reward",
+        "description": "Open the hard casket. Rare table rolls at approx 1/5765 per casket; each 3rd age item is approx 1/42000, each gilded item approx 1/7143 per casket.",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
     ],
+    "requirements": {
+      "skills": []
+    },
     "afkLevel": 1,
-    "travelTip": "Complete hard clue scrolls for mega-rare table rolls"
+    "travelTip": "Complete hard clue scrolls for rare sub-table rolls - see Hard Treasure Trails for full guidance"
   },
   {
     "name": "Elite Treasure Trail Rewards (Rare)",
@@ -28409,7 +28414,8 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Complete elite clue scrolls for a chance at 3rd age items, rangers tunic, and other mega-rare rewards",
+        "section": "Overview",
+        "description": "Rare sub-table for elite clue scrolls. Full kill-loop guidance is on the Elite Treasure Trails parent activity. Complete elite clues for a chance at 3rd age items, ranger boots, rangers tunic, and other mega-rare rewards.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -28417,36 +28423,35 @@
         "completionDistance": 20
       },
       {
-        "description": "Buy Dragon impling jars from the Grand Exchange.",
+        "section": "Getting Clues",
+        "description": "Obtain elite clue scrolls via PvM (Abyssal Sire, Zulrah, etc.), skilling, or Dragon impling jars (approx 1/50 per jar) from the Grand Exchange.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Open jars to obtain elite clue scrolls (1/50 rate per jar).",
-        "worldX": 3165,
-        "worldY": 3487,
-        "worldPlane": 0,
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "section": "Completing Clues",
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance.",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Open reward casket for collection log items.",
+        "section": "Reward",
+        "description": "Open the elite casket. Rare table rolls at approx 1/5765 per casket; each 3rd age item is approx 1/50000 per casket.",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
     ],
+    "requirements": {
+      "skills": []
+    },
     "afkLevel": 1,
-    "travelTip": "Complete elite clue scrolls for mega-rare table rolls"
+    "travelTip": "Complete elite clue scrolls for rare sub-table rolls - see Elite Treasure Trails for full guidance"
   },
   {
     "name": "Master Treasure Trail Rewards (Rare)",
@@ -28790,7 +28795,8 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Complete master clue scrolls for a chance at 3rd age pickaxe/axe, bloodhound pet, and other mega-rares",
+        "section": "Overview",
+        "description": "Rare sub-table for master clue scrolls. Full kill-loop guidance is on the Master Treasure Trails parent activity. Complete master clues for a chance at 3rd age pickaxe/axe, druidic robes, ring of 3rd age, bloodhound pet, and other mega-rares.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -28798,29 +28804,35 @@
         "completionDistance": 20
       },
       {
-        "description": "Obtain a master clue by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a rare drop from high-level PvM.",
+        "section": "Getting Clues",
+        "description": "Obtain master clues by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a rare drop from high-level PvM.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Complete clue steps using the RuneLite Clue Scroll plugin.",
+        "section": "Completing Clues",
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance.",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Open reward casket for collection log items.",
+        "section": "Reward",
+        "description": "Open the master casket. Rare table rolls at approx 1/3567 per casket; each 3rd age item is approx 1/53000 per casket. Bloodhound pet chance is approx 1/1000.",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
     ],
+    "requirements": {
+      "skills": []
+    },
     "afkLevel": 1,
-    "travelTip": "Complete master clue scrolls for mega-rare table rolls"
+    "travelTip": "Complete master clue scrolls for rare sub-table rolls - see Master Treasure Trails for full guidance"
   },
   {
     "name": "Shared Treasure Trail Rewards",
@@ -29177,7 +29189,8 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Complete any tier of treasure trail for shared reward table items like clue nests and teleport scrolls",
+        "section": "Overview",
+        "description": "Shared reward table for all clue tiers. Full kill-loop guidance is on the individual Treasure Trails parent activities (Easy, Medium, Hard, Elite, Master). All tiers share pages, blessings, firelighters, and teleport scrolls.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -29185,29 +29198,35 @@
         "completionDistance": 20
       },
       {
-        "description": "Buy impling jars from the Grand Exchange for your target clue tier (Young for beginner, Gourmet for easy, Eclectic for medium, Ninja for hard).",
+        "section": "Getting Clues",
+        "description": "Complete clue scrolls of any tier. Refer to the parent tier activity for the most efficient clue acquisition method.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Open jars to obtain clue scrolls, then complete clue steps using the RuneLite Clue Scroll plugin.",
+        "section": "Completing Clues",
+        "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Open reward casket for collection log items.",
+        "section": "Reward",
+        "description": "Open reward casket for shared table items. Blessings and god pages each appear at approx 1/266 per casket across all tiers that include them.",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
     ],
+    "requirements": {
+      "skills": []
+    },
     "afkLevel": 1,
-    "travelTip": "Complete any tier clue scroll for shared reward table"
+    "travelTip": "Complete any tier clue scroll for shared reward table - see individual tier activities for full guidance"
   },
   {
     "name": "The Mimic",
@@ -29229,7 +29248,8 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Enable The Mimic via Watson and open elite+ caskets for a chance to fight the Mimic boss for unique rewards",
+        "section": "Prerequisites",
+        "description": "Enable Mimic encounters via the Strange casket in Watson's house in Hosidius (no quest required). Watson is located south-east of the Hosidius vinery. Once enabled, elite and master caskets have a 1/35 chance to become a Mimic encounter.",
         "worldX": 3164,
         "worldY": 3489,
         "worldPlane": 0,
@@ -29237,15 +29257,27 @@
         "completionDistance": 20
       },
       {
-        "description": "Complete master clue scrolls until The Mimic spawns (1/15 chance per casket). Enable Mimic encounters via the Strange casket in Watson's house if not already enabled.",
+        "section": "Getting the Encounter",
+        "description": "Complete master clue scrolls. Each master casket opened has approx 1/35 chance to trigger The Mimic. Full guidance on obtaining master clues is on the Master Treasure Trails parent activity.",
+        "worldX": 3164,
+        "worldY": 3489,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
+      },
+      {
+        "section": "Reward",
+        "description": "Defeat The Mimic to receive the Ring of 3rd age (approx 1/38 drop rate from the Mimic). The Mimic also drops clue casket rewards on death.",
         "worldX": 3164,
         "worldY": 3489,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       }
     ],
+    "requirements": {
+      "skills": []
+    },
     "afkLevel": 1,
-    "travelTip": "Enable via Watson, then open elite+ caskets for Mimic chance"
+    "travelTip": "Enable via Watson in Hosidius, then complete master clue scrolls for Mimic encounters"
   },
   {
     "name": "Thieving (Seed Stalls)",
