@@ -527,30 +527,35 @@ public class DropRateDatabaseTest
 	}
 
 	/**
-	 * Pest Control final step must use CHAT_MESSAGE_RECEIVED with the confirmed
-	 * game-win message (OSRS Wiki: Pest_Control).
+	 * Pest Control round step must use CHAT_MESSAGE_RECEIVED with the confirmed
+	 * game-win message (OSRS Wiki: Pest_Control). The deep-guidance pass added a
+	 * Travel, Queue, Round, and Reward step; the round step (index 2) carries the
+	 * win detection and loop-back, while the final step is a MANUAL reward step.
 	 */
 	@Test
 	public void spotCheck_pestControl_finalStep_isChatMessageReceived()
 	{
 		CollectionLogSource source = database.getSourceByName("Pest Control");
-		assertNotNull( source,"Pest Control source must exist");
+		assertNotNull(source, "Pest Control source must exist");
 
 		List<GuidanceStep> steps = source.getGuidanceSteps();
-		assertNotNull( steps,"Pest Control must have guidance steps");
-		assertFalse( steps.isEmpty(),"Pest Control must have at least one step");
+		assertNotNull(steps, "Pest Control must have guidance steps");
+		assertTrue(steps.size() >= 3,
+			"Pest Control must have at least 3 steps after the deep-guidance pass");
 
-		GuidanceStep finalStep = steps.get(steps.size() - 1);
-		assertEquals(
-			CompletionCondition.CHAT_MESSAGE_RECEIVED,
-			finalStep.getCompletionCondition(),
-			"Pest Control final step must use CHAT_MESSAGE_RECEIVED");
+		// Round step is the one with CHAT_MESSAGE_RECEIVED and loopBackToStep
+		GuidanceStep roundStep = steps.stream()
+			.filter(s -> s.getCompletionCondition() == CompletionCondition.CHAT_MESSAGE_RECEIVED)
+			.findFirst()
+			.orElse(null);
+		assertNotNull(roundStep,
+			"Pest Control must have a CHAT_MESSAGE_RECEIVED step (round completion)");
 		assertNotNull(
-			finalStep.getCompletionChatPattern(),
-			"Pest Control final step must have a completionChatPattern");
+			roundStep.getCompletionChatPattern(),
+			"Pest Control round step must have a completionChatPattern");
 		assertEquals(
 			"You have successfully defended the island!",
-			finalStep.getCompletionChatPattern(),
+			roundStep.getCompletionChatPattern(),
 			"Pest Control chat pattern must match game-win message exactly");
 	}
 
