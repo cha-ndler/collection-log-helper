@@ -25,6 +25,7 @@
 package com.collectionloghelper.player;
 
 import net.runelite.api.Client;
+import net.runelite.client.callback.ClientThread;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -72,6 +73,9 @@ public class QuestProgressStateTest
 	@Mock
 	private Client client;
 
+	@Mock
+	private ClientThread clientThread;
+
 	private PlayerQuestProgressState state;
 
 	/** Backing array for getIntStack() — updated via stubScriptReturn(). */
@@ -85,7 +89,7 @@ public class QuestProgressStateTest
 		// Default all varplayer reads to 0 (not started)
 		when(client.getVarpValue(anyInt())).thenReturn(0);
 
-		state = new PlayerQuestProgressState(client);
+		state = new PlayerQuestProgressState(client, clientThread);
 	}
 
 	// -----------------------------------------------------------------------

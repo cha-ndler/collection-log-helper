@@ -27,6 +27,7 @@ package com.collectionloghelper.player;
 import java.lang.reflect.Constructor;
 import net.runelite.api.Client;
 import net.runelite.api.events.VarbitChanged;
+import net.runelite.client.callback.ClientThread;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,6 +36,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 /**
@@ -48,15 +50,25 @@ public class PlayerQuestProgressStateSubscribeTest
 	@Mock
 	private Client client;
 
+	@Mock
+	private ClientThread clientThread;
+
 	private PlayerQuestProgressState detector;
 
 	@BeforeEach
 	public void setUp() throws Exception
 	{
 		Constructor<PlayerQuestProgressState> ctor =
-			PlayerQuestProgressState.class.getDeclaredConstructor(Client.class);
+			PlayerQuestProgressState.class.getDeclaredConstructor(Client.class, ClientThread.class);
 		ctor.setAccessible(true);
-		detector = ctor.newInstance(client);
+		detector = ctor.newInstance(client, clientThread);
+
+		// Run the deferred refresh synchronously so the assertions below observe
+		// the updated snapshot immediately.
+		doAnswer(inv -> {
+			((Runnable) inv.getArgument(0)).run();
+			return null;
+		}).when(clientThread).invokeLater(any(Runnable.class));
 	}
 
 	@Test
