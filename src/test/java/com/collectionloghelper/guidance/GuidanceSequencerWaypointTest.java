@@ -133,7 +133,8 @@ public class GuidanceSequencerWaypointTest
 			null, // section
 			waypoints,
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 
@@ -171,7 +172,8 @@ public class GuidanceSequencerWaypointTest
 			null,
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 
@@ -285,7 +287,8 @@ public class GuidanceSequencerWaypointTest
 			null,
 			null, // waypoints = null
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 
 		AtomicBoolean stepAdvanced = new AtomicBoolean(false);
@@ -336,7 +339,8 @@ public class GuidanceSequencerWaypointTest
 			null,
 			Collections.emptyList(), // waypoints = empty list
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 
 		AtomicBoolean stepAdvanced = new AtomicBoolean(false);
