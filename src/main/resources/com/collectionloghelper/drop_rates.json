@@ -29517,14 +29517,16 @@
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for small salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Obtain"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29580,14 +29582,16 @@
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for fishy salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Obtain"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29643,14 +29647,16 @@
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for barracuda salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Obtain"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29699,14 +29705,16 @@
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for large salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Obtain"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29762,14 +29770,16 @@
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for plundered salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Obtain"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29832,14 +29842,16 @@
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for martial salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Obtain"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29888,14 +29900,16 @@
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for fremennik salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Obtain"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29979,14 +29993,16 @@
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Board your boat, sail out to find shipwreck salvage encounters. Sort salvage at any port's salvaging station for opulent salvage rewards.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Obtain"
       }
     ],
     "mutuallyExclusiveSources": [
