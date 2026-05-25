@@ -15677,33 +15677,63 @@
         "wikiPage": "Gnome_goggles"
       }
     ],
-    "locationDescription": "Tree Gnome Stronghold - deliver to Captain Ninto or Captain Daerkin",
-    "travelTip": "Spirit tree -> Stronghold",
+    "locationDescription": "Grand Tree, Tree Gnome Stronghold - deliver to Captain Ninto or Captain Daerkin",
+    "travelTip": "Spirit tree -> Tree Gnome Stronghold (Grand Tree); fallback: walk north from Ardougne or use Gnome glider",
     "mutuallyExclusiveSources": [
       "Gnome Restaurant (Seed Pods)"
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Tree Gnome Stronghold - deliver to Captain Ninto or Captain Daerkin.",
+        "description": "Travel to the Grand Tree in Tree Gnome Stronghold. Talk to Gianne jnr. on the west end of the ground floor to get a hard delivery order.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Spirit tree -> Tree Gnome Stronghold; fallback: Gnome glider or walk north from East Ardougne",
+        "section": "Travel"
       },
       {
-        "description": "Get a hard delivery order from Gianne jnr. Re-roll until assigned Captain Ninto or Captain Daerkin. Cook and deliver for a chance at Gnome scarf or Gnome goggles.",
+        "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Captain Ninto or Captain Daerkin, decline and wait 5m30s for another order, or do an easy order while waiting. Only Captain Ninto and Captain Daerkin give Gnome scarf and Gnome goggles.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
-        "npcId": 4572,
+        "npcId": 2547,
         "interactAction": "Talk-to",
         "dialogOptions": [
-          "I'll take a hard one",
-          "hard",
-          "deliver"
+          "I'll take a hard one"
         ],
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Order"
+      },
+      {
+        "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your inventory if unsure of the recipe. Deliver the finished dish to Captain Ninto (south-west of the Stronghold gate) or Captain Daerkin (Gnome stronghold entrance) within the time limit.",
+        "worldX": 2436,
+        "worldY": 3500,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Delivery"
+      },
+      {
+        "description": "Collect your reward. Hard deliveries on time award reward tokens redeemable for food rewards and a chance at Gnome scarf or Gnome goggles.",
+        "worldX": 2436,
+        "worldY": 3500,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Reward"
+      },
+      {
+        "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Captain Ninto or Captain Daerkin is assigned to maximise scarf/goggles drop rate.",
+        "worldX": 2436,
+        "worldY": 3500,
+        "worldPlane": 0,
+        "npcId": 2547,
+        "interactAction": "Talk-to",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "loopBackToStep": 1,
+        "loopCount": 0,
+        "section": "Travel"
       }
     ],
     "afkLevel": 1
@@ -15821,22 +15851,61 @@
       }
     ],
     "locationDescription": "Temple Trekking, between Burgh de Rott and Paterdomus",
-    "travelTip": "Drakan's medallion -> Burgh de Rott, or Minigame tele",
+    "travelTip": "Drakan's medallion -> Burgh de Rott, or Minigame tele -> Temple Trekking; fallback: fairy ring BKR (Canifis) then run south-west",
     "guidanceSteps": [
       {
-        "description": "Travel to Temple Trekking, between Burgh de Rott and Paterdomus.",
+        "description": "Travel to Burgh de Rott and speak to Rolayne Twickit (hard) to begin a trek. Bring food, combat gear, and a bow or staff for ranged puzzle events.",
         "worldX": 3479,
         "worldY": 3241,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Drakan's medallion -> Burgh de Rott is fastest; Minigame tele also works; fallback: fairy ring BKR (Canifis) run south-west",
+        "npcId": 1563,
+        "interactAction": "Talk-to",
+        "recommendedItemIds": [
+          11802,
+          11926,
+          21012
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Escort NPCs on treks between Burgh de Rott and Paterdomus. Choose harder routes for better reward chances. Complete both directions for all rewards",
+        "description": "Choose the hardest route and strongest follower (Rolayne Twickit) for the best Lumberjack outfit drop chance. Hard route, hard follower gives the highest token reward multiplier.",
         "worldX": 3479,
         "worldY": 3241,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "npcId": 1563,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL",
+        "section": "Setup"
+      },
+      {
+        "description": "Escort the follower through Morytania to Paterdomus. Protect the follower during combat events - if it dies the trek fails. Use Protect from Melee against Nail Beasts; solve bog and bridge puzzle events by clicking the correct path tiles. You do not need to kill all monsters, just keep the follower alive.",
+        "worldX": 3479,
+        "worldY": 3241,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Trek"
+      },
+      {
+        "description": "Claim your reward token at Paterdomus and exchange it with the token trader for a Lumberjack outfit piece. Hard treks yield more tokens per run.",
+        "worldX": 3477,
+        "worldY": 3239,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Reward"
+      },
+      {
+        "description": "Run back to Burgh de Rott to start another trek. Use Drakan's medallion or Minigame tele to reset quickly.",
+        "worldX": 3479,
+        "worldY": 3241,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "loopBackToStep": 1,
+        "loopCount": 0,
+        "section": "Travel"
       }
     ]
   },
@@ -16906,23 +16975,59 @@
         "wikiPage": "Greenman_mask"
       }
     ],
-    "locationDescription": "Auburnvale, north-west Varlamore",
-    "travelTip": "Quetzal whistle -> Varlamore",
+    "locationDescription": "Auburn Valley, north-west Varlamore",
+    "travelTip": "Quetzal Transport System -> Varlamore (requires Twilight's Promise); fallback: Achilka's boats to Gloomthorn Trail from Kastori or Tal Teklan",
+    "requirements": {
+      "quests": [
+        "VALE_TOTEMS"
+      ],
+      "skills": [
+        {
+          "skill": "FLETCHING",
+          "level": 20
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to Auburnvale, north-west Varlamore.",
+        "description": "Travel to Auburn Valley in north-west Varlamore. Bring an axe and a knife (or fletching knife) - you can cut logs on-site from trees in the valley.",
         "worldX": 1452,
         "worldY": 3128,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Quetzal Transport to Varlamore then run north-west; fallback: Achilka's boats to Gloomthorn Trail",
+        "recommendedItemIds": [
+          1349,
+          946
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Participate in Vale Totems events in Auburnvale for unique rewards.",
+        "description": "Identify the 3 active spirit types near each totem site (out of 5 variants). Carve 4 decorations matching those spirits onto the totem. Correct carvings maximise offerings left by visiting ents every 48 seconds.",
         "worldX": 1452,
         "worldY": 3128,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Setup"
+      },
+      {
+        "description": "Run between the 8 totem sites around the valley maintaining and decorating totems. Activate ent trails (step on both trail markers) to double offerings on the next ent visit and gain 4 boosted XP actions. Totems deplete after each ent visit and must be rebuilt with 1 log plus 4 fletched decorations.",
+        "worldX": 1452,
+        "worldY": 3128,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Activity"
+      },
+      {
+        "description": "Collect vale offerings from completed totems after ent visits. Exchange offerings at the reward trader for Bow string spool, Fletching knife, Ent branch, or Greenman mask.",
+        "worldX": 1452,
+        "worldY": 3128,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "loopBackToStep": 1,
+        "loopCount": 0,
+        "section": "Reward"
       }
     ],
     "rewardType": "MIXED"
@@ -29542,33 +29647,63 @@
         "wikiPage": "Grand_seed_pod"
       }
     ],
-    "locationDescription": "Tree Gnome Stronghold - deliver to Wingstone, Penwie, Brambickle, or Prof. Manglethorp",
-    "travelTip": "Spirit tree -> Stronghold",
+    "locationDescription": "Grand Tree, Tree Gnome Stronghold - deliver to Wingstone, Penwie, Brambickle, or Prof. Manglethorp",
+    "travelTip": "Spirit tree -> Tree Gnome Stronghold (Grand Tree); fallback: walk north from Ardougne or use Gnome glider",
     "mutuallyExclusiveSources": [
       "Gnome Restaurant (Scarfs)"
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Tree Gnome Stronghold - deliver to Wingstone, Penwie, Brambickle, or Prof. Manglethorp.",
+        "description": "Travel to the Grand Tree in Tree Gnome Stronghold. Talk to Gianne jnr. on the west end of the ground floor to get a hard delivery order.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Spirit tree -> Tree Gnome Stronghold; fallback: Gnome glider or walk north from East Ardougne",
+        "section": "Travel"
       },
       {
-        "description": "Get a hard delivery order from Gianne jnr. Re-roll until assigned Wingstone, Penwie, Brambickle, or Prof. Manglethorp. Cook and deliver for a chance at Mint cake or Grand seed pod.",
+        "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Wingstone, Penwie, Brambickle, or Prof. Manglethorp, decline and wait 5m30s or complete an easy order. Only these four customers give Mint cake or Grand seed pod.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
-        "npcId": 4572,
+        "npcId": 2547,
         "interactAction": "Talk-to",
         "dialogOptions": [
-          "I'll take a hard one",
-          "hard",
-          "deliver"
+          "I'll take a hard one"
         ],
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Order"
+      },
+      {
+        "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your inventory if unsure of the recipe. Deliver the finished dish to the assigned customer within the 11-minute time limit. Customer locations vary across Gielinor - check the delivery box for the destination.",
+        "worldX": 2436,
+        "worldY": 3500,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Delivery"
+      },
+      {
+        "description": "Collect your reward. Hard deliveries on time award reward tokens redeemable for food rewards and a chance at Mint cake or Grand seed pod.",
+        "worldX": 2436,
+        "worldY": 3500,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Reward"
+      },
+      {
+        "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Wingstone, Penwie, Brambickle, or Prof. Manglethorp is assigned to maximise seed pod and mint cake drop rate.",
+        "worldX": 2436,
+        "worldY": 3500,
+        "worldPlane": 0,
+        "npcId": 2547,
+        "interactAction": "Talk-to",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "loopBackToStep": 1,
+        "loopCount": 0,
+        "section": "Travel"
       }
     ],
     "afkLevel": 1
