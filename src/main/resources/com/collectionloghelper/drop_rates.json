@@ -10628,7 +10628,7 @@
     ],
     "locationDescription": "Ruins of Tapoyauik, beneath Twilight Temple, Varlamore",
     "travelTip": "Pendant of ates -> Ruins of Tapoyauik (requires The Heart of Darkness), or quetzal whistle -> Civitas illa Fortis -> walk south",
-    "npcId": 13728,
+    "npcId": 13788,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
@@ -10664,10 +10664,10 @@
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
-        "npcId": 13728,
+        "npcId": 13788,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 13728,
+        "completionNpcId": 13788,
         "section": "Combat",
         "recommendedItemIds": [
           8010,
