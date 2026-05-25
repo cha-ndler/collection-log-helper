@@ -6166,6 +6166,7 @@
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "recommendedItemIds": [20997, 13652, 6685, 3024, 11804],
         "section": "Travel"
       },
       {
@@ -7229,6 +7230,7 @@
             "travelTip": "Inventory Pharaoh's sceptre -> Jaltevas -> Necropolis"
           }
         ],
+        "recommendedItemIds": [26219, 27275, 20997, 6685, 3024],
         "section": "Travel"
       },
       {
@@ -7539,6 +7541,7 @@
             "travelTip": "Inventory Pharaoh's sceptre -> Jaltevas -> Necropolis"
           }
         ],
+        "recommendedItemIds": [26219, 27275, 20997, 6685, 3024],
         "section": "Travel"
       },
       {
