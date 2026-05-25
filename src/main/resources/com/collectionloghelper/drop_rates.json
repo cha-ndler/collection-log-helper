@@ -28644,13 +28644,12 @@
         "section": "Travel"
       },
       {
-        "description": "Dive into the underwater entrance at Mudskipper Point. Equip your fishbowl helmet and diving apparatus before diving. The entrance is on the south side of the point.",
-        "worldX": 2987,
-        "worldY": 3033,
+        "description": "Equip your fishbowl helmet and diving apparatus, then dive into the underwater entrance on the south side of Mudskipper Point to descend to the Mogre Camp underwater area.",
+        "worldX": 2978,
+        "worldY": 9181,
         "worldPlane": 0,
-        "objectId": 10905,
-        "objectInteractAction": "Dive-into",
-        "completionCondition": "PLAYER_ON_PLANE",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
         "section": "Travel"
       },
       {
