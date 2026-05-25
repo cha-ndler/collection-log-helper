@@ -9876,34 +9876,70 @@
       }
     ],
     "locationDescription": "Revenant Caves, Wilderness",
-    "travelTip": "Burning amulet -> Rev Caves",
+    "travelTip": "Burning amulet -> Bandit Camp -> Rev Caves",
     "guidanceSteps": [
       {
-        "description": "Travel to the Revenant Caves in the Wilderness (level 28-34). Burning amulet to Bandit Camp, run north-east",
+        "description": "Bank in Edgeville or Ferox Enclave. Bring cheap ranged gear, Bracelet of ethereum (prevents revenant passive damage), looting bag, burning amulet, food, and prayer potions. Only risk what you are willing to lose - this is multi-combat Wilderness (level 28-34).",
+        "worldX": 3094,
+        "worldY": 3492,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "requiredItemIds": [
+          21816,
+          21167
+        ],
+        "recommendedItemIds": [
+          12926,
+          21816,
+          1514,
+          391,
+          2434,
+          2444
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Revenant Caves entrance. Rub the burning amulet and teleport to Bandit Camp, then run north-east to the cave entrance at level 28 Wilderness. Watch for PKers along the route.",
         "worldX": 3073,
         "worldY": 3654,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 5,
+        "travelTip": "Burning amulet -> Bandit Camp -> run north-east",
+        "section": "Travel"
       },
       {
-        "description": "Enter the Revenant Caves (100k coin fee). Warning: this is Wilderness.",
-        "worldX": 3073,
-        "worldY": 3654,
+        "description": "Pay the 100,000-coin entry fee and enter the Revenant Caves. Activate the Bracelet of ethereum to negate revenant passive damage. Warning: the caves are deep Wilderness and multi-combat.",
+        "worldX": 3136,
+        "worldY": 3672,
         "worldPlane": 0,
         "objectId": 31555,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Travel"
       },
       {
-        "description": "Kill revenants in the caves for unique drops. Bring risk - it's multi-combat Wilderness.",
-        "worldX": 3073,
-        "worldY": 3654,
+        "description": "Kill revenants in the caves for unique drops. Use Protect from Magic or Protect from Missiles based on the revenant type. The Bracelet of ethereum negates passive damage. Stay alert for PKers - this is one of the most contested multi-combat Wilderness zones. Loot into the looting bag immediately and teleport out if threatened.",
+        "worldX": 3136,
+        "worldY": 3672,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 7881,
+        "recommendedItemIds": [
+          12926,
+          21816,
+          1514,
+          391,
+          2434,
+          2444
+        ],
+        "section": "Combat"
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "npcId": 7881,
+    "aggregated": true
   },
   {
     "name": "Crawling Hand",
@@ -17942,25 +17978,48 @@
       }
     ],
     "locationDescription": "Champions' Guild south of Varrock",
-    "travelTip": "Varrock teleport -> south",
+    "travelTip": "Varrock teleport -> Champions' Guild",
     "guidanceSteps": [
       {
-        "description": "Travel to Champions' Guild south of Varrock.",
+        "description": "Farm the relevant monsters for champion scrolls (1/5,000 drop): imp, goblin, skeleton, zombie, giant, hobgoblin, ghoul, earth warrior, jogre, and lesser demon. Each scroll type drops from only its corresponding monster type.",
         "worldX": 3191,
         "worldY": 3361,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Preparation"
       },
       {
-        "description": "Collect champion scrolls from monsters, then defeat champions in the guild arena.",
+        "description": "Travel to Champions' Guild south of Varrock. Use the Varrock teleport and run south. The guild requires 32 Quest Points to enter.",
         "worldX": 3191,
         "worldY": 3361,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "travelTip": "Varrock teleport -> run south to Champions' Guild",
+        "section": "Travel"
+      },
+      {
+        "description": "Challenge a champion in the arena by handing a champion scroll to Larxia. Each champion uses a specific combat style - use appropriate protection prayer. Defeat all 10 champions to unlock the Champions' cape and the Champion of Champions fight.",
+        "worldX": 3191,
+        "worldY": 3356,
+        "worldPlane": 0,
+        "completionCondition": "ACTOR_DEATH",
+        "recommendedItemIds": [
+          4151,
+          11832,
+          2444,
+          391
+        ],
+        "section": "Combat"
       }
     ],
-    "rewardType": "MIXED"
+    "rewardType": "MIXED",
+    "requirements": {
+      "quests": [
+        "DRAGON_SLAYER_I"
+      ]
+    }
   },
   {
     "name": "Chompy Bird Hunting",
@@ -18398,7 +18457,7 @@
       }
     ],
     "locationDescription": "Seers' Village oak south of bank (W444 meta), NOT Woodcutting Guild",
-    "travelTip": "Camelot teleport -> Seers'",
+    "travelTip": "Camelot teleport -> Seers' Village",
     "waypoints": [
       {
         "name": "Prifddinas yews, SE bank",
@@ -18420,23 +18479,39 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Seers' Village oak south of bank (W444 meta), NOT Woodcutting Guild.",
+        "description": "Travel to a Forestry-active woodcutting area. Seers' Village oak trees south of the bank on a W444 Forestry world are the most common hub. Use the Camelot teleport and run south-east from the bank.",
         "worldX": 2725,
         "worldY": 3490,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15,
+        "travelTip": "Camelot teleport -> run south-east to Seers' Village oaks",
+        "section": "Travel"
       },
       {
-        "description": "Participate in Forestry events while woodcutting for unique log rewards.",
+        "description": "Chop trees on a Forestry world. Events spawn periodically (pheasant, flower, poacher, tree spirit, bee hive, roots). Participate in each event for Anima-infused bark and Forestry points. Spend points at the Forestry Shop for lumberjack and Forestry outfit pieces, log basket, and log brace. Rare unique drops (fox whistle, golden pheasant egg, petal garland) come directly from events.",
         "worldX": 2725,
         "worldY": 3490,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "recommendedItemIds": [
+          1513,
+          6739,
+          11736
+        ],
+        "section": "Activity"
       }
     ],
     "rewardType": "MIXED",
-    "pointsPerHour": 1800
+    "pointsPerHour": 1800,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "WOODCUTTING",
+          "level": 1
+        }
+      ]
+    }
   },
   {
     "name": "Fossil Island Notes",
@@ -18723,22 +18798,29 @@
       }
     ],
     "locationDescription": "Hunter Guild in Avium Savannah, Varlamore",
-    "travelTip": "Quetzal whistle -> Varlamore",
+    "travelTip": "Quetzal whistle -> Varlamore -> Hunter Guild",
     "guidanceSteps": [
       {
-        "description": "Travel to Hunter Guild in Avium Savannah, Varlamore.",
+        "description": "Travel to the Hunter Guild in Avium Savannah, Varlamore. Use the Quetzal whistle to teleport to Varlamore, then run south-west to the guild. Requires 46 Hunter and completion of Children of the Sun.",
         "worldX": 1579,
         "worldY": 3069,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15,
+        "travelTip": "Quetzal whistle -> Varlamore -> run south-west to Hunter Guild",
+        "section": "Travel"
       },
       {
-        "description": "Complete Hunter Guild activities in Avium Savannah for guild rewards.",
+        "description": "Complete Hunter Guild activities in the Avium Savannah. Track and catch creatures in the guild hunting grounds for Hunter Guild points. Spend points at the guild reward shop for guild-exclusive items. Higher Hunter levels unlock additional creature types and greater point rewards.",
         "worldX": 1579,
         "worldY": 3069,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "recommendedItemIds": [
+          10159,
+          10033
+        ],
+        "section": "Activity"
       }
     ],
     "rewardType": "MIXED"
@@ -19174,36 +19256,35 @@
       }
     ],
     "locationDescription": "Ancient Cavern beneath the Baxtorian Falls",
-    "travelTip": "Barbarian Assault tele -> falls",
+    "travelTip": "Barbarian Outpost teleport -> Ancient Cavern",
     "guidanceSteps": [
       {
-        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost.",
-        "worldX": 2512,
-        "worldY": 3509,
+        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost. Use a games necklace (Barbarian Outpost teleport), then run south to Otto's Grotto by the river. Dive into the whirlpool to enter the Ancient Cavern.",
+        "worldX": 2501,
+        "worldY": 3487,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 10,
+        "travelTip": "Games necklace -> Barbarian Outpost -> run south to Otto's Grotto",
+        "section": "Travel"
       },
       {
-        "description": "Dive into the whirlpool to enter the Ancient Cavern.",
-        "worldX": 2512,
-        "worldY": 3509,
-        "worldPlane": 0,
-        "objectIds": [
-          25274,
-          25275
-        ],
-        "objectInteractAction": "Dive-in",
-        "completionCondition": "MANUAL"
-      },
-      {
-        "description": "Kill mithril dragons in the Ancient Cavern for ancient page drops.",
+        "description": "In the Ancient Cavern, rummage barbarian skeletons (1/13 chance per rummage) for ancient pages, or kill mithril dragons for page drops. Collect all 26 ancient pages (pages 1-26) to fill My Notes. Bring antifire potions and antidragon shield when fighting mithril dragons.",
         "worldX": 1745,
         "worldY": 5323,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "recommendedItemIds": [
+          12791,
+          2444,
+          391,
+          4151,
+          2452
+        ],
+        "section": "Combat"
       }
-    ]
+    ],
+    "requirements": {}
   },
   {
     "name": "Ocean Encounters",
@@ -19801,22 +19882,71 @@
     "travelTip": "Pharaoh's sceptre -> Jalsavrah",
     "guidanceSteps": [
       {
-        "description": "Travel to the Jalsavrah Pyramid in Sophanem (pharaoh sceptre teleport or carpet ride). Speak to the Guardian Mummy",
+        "description": "Bank and prepare: Pharaoh's sceptre (charged), lockpick, superantipoisons, prayer potions, and food. Bring 43+ Prayer for Protect from Melee to ignore mummy and scarab damage. Completion of Contact! is strongly recommended for nearby banking. Need 71 Thieving minimum to access the grand gold chest (the only Pharaoh's sceptre source).",
         "worldX": 3288,
         "worldY": 2801,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          26945
+        ],
+        "recommendedItemIds": [
+          26945,
+          1523,
+          2448,
+          2434,
+          391
+        ],
+        "section": "Bank"
       },
       {
-        "description": "Loot the grand gold chest on the last floor of Pyramid Plunder.",
+        "description": "Use the Pharaoh's sceptre to teleport into the Jalsavrah Pyramid lobby. Speak to the Guardian Mummy to start the 5-minute timer. Without a charged sceptre, take the magic carpet from Pollnivneach south to Sophanem for 400 coins.",
         "worldX": 3288,
         "worldY": 2801,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "travelTip": "Pharaoh's sceptre -> Jalsavrah; or carpet Pollnivneach -> Sophanem",
+        "section": "Travel"
+      },
+      {
+        "description": "Rush through rooms 1-7, looting urns and sarcophagi only. Use Protect from Melee to ignore mummies and scarabs. At room 8 (requires 91 Thieving), loot the grand gold chest which exclusively yields the Pharaoh's sceptre. Recharge the sceptre at the Guardian Mummy between runs.",
+        "worldX": 3289,
+        "worldY": 2799,
+        "worldPlane": 2,
+        "completionCondition": "MANUAL",
+        "recommendedItemIds": [
+          1523,
+          2448,
+          2434,
+          391
+        ],
+        "section": "Activity"
+      },
+      {
+        "description": "After completing the run, recharge your Pharaoh's sceptre by speaking to the Guardian Mummy. Bank at the Sophanem Dungeon bank (requires Contact!), then restart the minigame.",
+        "worldX": 3288,
+        "worldY": 2801,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "loopBackToStep": 1,
+        "section": "Bank"
       }
     ],
-    "aggregated": false
+    "aggregated": false,
+    "requirements": {
+      "quests": [
+        "ICTHLARINS_LITTLE_HELPER"
+      ],
+      "skills": [
+        {
+          "skill": "THIEVING",
+          "level": 21
+        }
+      ]
+    }
   },
   {
     "name": "Stronghold of Security",
@@ -19857,25 +19987,34 @@
       }
     ],
     "locationDescription": "Stronghold of Security beneath Barbarian Village",
-    "travelTip": "Skull sceptre -> Barbarian Village",
+    "travelTip": "Edgeville teleport -> run south to Barbarian Village mine",
     "guidanceSteps": [
       {
-        "description": "Travel to Stronghold of Security beneath Barbarian Village.",
-        "worldX": 1859,
-        "worldY": 5243,
+        "description": "Travel to Stronghold of Security beneath Barbarian Village. Use an Edgeville teleport (amulet of glory or Edgeville home teleport), then run south-east to Barbarian Village and descend the well or ladder in the central mine.",
+        "worldX": 3230,
+        "worldY": 3398,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Edgeville teleport -> run south to Barbarian Village -> descend well",
+        "section": "Travel"
       },
       {
-        "description": "Kill Stronghold of Security monsters for skull sceptre pieces.",
-        "worldX": 1859,
-        "worldY": 5243,
+        "description": "Kill monsters on each floor for skull sceptre pieces: Floor 1 (Vault of War) - minotaurs drop the right skull half; Floor 2 (Catacomb of Famine) - flesh crawlers and other monsters drop the left skull half; Floor 3 (Pit of Pestilence) - catablepons drop the top of sceptre; Floor 4 (Sepulchre of Death) - ankous drop the bottom of sceptre.",
+        "worldX": 3230,
+        "worldY": 9844,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "recommendedItemIds": [
+          4151,
+          391,
+          2444
+        ],
+        "section": "Combat"
       }
     ],
-    "aggregated": true
+    "aggregated": true,
+    "requirements": {}
   },
   {
     "name": "Catacombs of Kourend",
@@ -19911,10 +20050,10 @@
       }
     ],
     "locationDescription": "Catacombs of Kourend beneath Kourend Castle",
-    "travelTip": "Xeric's talisman -> Heart",
+    "travelTip": "Xeric's talisman (Xeric's Heart) -> Kourend Castle",
     "guidanceSteps": [
       {
-        "description": "Travel to Kourend Castle via Xeric talisman (Xeric Heart) or fairy ring CIS. Enter catacombs via the statue",
+        "description": "Travel to Kourend Castle. Fastest: Xeric's talisman (Xeric's Heart) teleports directly outside the statue. Alternatives: Kourend Castle Teleport spell (requires Client of Kourend), fairy ring CIS, or a POH portal attuned to Kourend Castle.",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
@@ -19925,26 +20064,53 @@
           1690,
           10070,
           0
-        ]
+        ],
+        "travelTip": "Xeric's talisman (Xeric's Heart); or fairy ring CIS",
+        "section": "Travel"
       },
       {
-        "description": "Investigate the Statue of King Rada I to enter the Catacombs.",
+        "description": "Investigate the Statue of King Rada I in the castle courtyard to enter the Catacombs of Kourend.",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
         "objectId": 27785,
         "objectInteractAction": "Investigate",
-        "completionCondition": "MANUAL"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Travel"
       },
       {
-        "description": "Kill monsters in the Catacombs of Kourend for dark totem pieces.",
+        "description": "Bank and prepare combat gear for your chosen Catacombs monster. Prayer potions are essential - burying bones inside the Catacombs restores Prayer points. A bonecrusher with prayer-restoring bones extends trips. Note: dwarf multicannons cannot be used here.",
+        "worldX": 1636,
+        "worldY": 3673,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "recommendedItemIds": [
+          12791,
+          2444,
+          391,
+          6685
+        ],
+        "section": "Bank"
+      },
+      {
+        "description": "Kill monsters in the Catacombs for dark totem pieces (base, middle, top - each 1/500 from any monster). Burying bones restores Prayer. Popular Slayer tasks here include abyssal demons, nechryaels, dark beasts, and skeletal wyverns. Combine Slayer trips with totem piece hunting for efficient farming.",
         "worldX": 1664,
         "worldY": 10050,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ACTOR_DEATH",
+        "recommendedItemIds": [
+          12791,
+          2444,
+          391,
+          6685,
+          13652
+        ],
+        "section": "Combat"
       }
     ],
-    "aggregated": true
+    "aggregated": true,
+    "requirements": {}
   },
   {
     "name": "Wilderness God Wars Dungeon",
@@ -20358,22 +20524,15 @@
       }
     ],
     "locationDescription": "Various locations throughout Gielinor",
-    "travelTip": "Varies by activity",
+    "travelTip": "Varies by item - see step description",
     "guidanceSteps": [
       {
-        "description": "Check the Collection Log for miscellaneous items from random events, miniquests, and other activities.",
-        "worldX": 3222,
-        "worldY": 3218,
+        "description": "The Miscellaneous tab collects items with no dedicated source. Key items and primary sources: Big bass/swordfish/shark (big-net fishing or Fishing Trawler), Long/curved bone (giant/big bones drops), Giant key (Hill Giants), Mossy key (Moss Giants), Xeric's talisman (Lizardmen Brutes/Shamans), Mining gloves set (Mining Guild shop), Herbi (Herbiboar), Merfolk trident (Tempoross), Dragon metal pieces (Vorkath). Check each item's Wiki page for its specific drop source.",
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
-      },
-      {
-        "description": "Obtain miscellaneous collection log items from various activities.",
-        "worldX": 3222,
-        "worldY": 3218,
-        "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Activity"
       }
     ],
     "aggregated": true,
@@ -20387,7 +20546,8 @@
       "Prifddinas Elf",
       "Fountain of Rune",
       "Prifddinas Rabbit"
-    ]
+    ],
+    "requirements": {}
   },
   {
     "name": "Random Events",
@@ -20706,22 +20866,30 @@
       }
     ],
     "locationDescription": "Ruins of Camdozaal beneath Ice Mountain",
-    "travelTip": "Lassar teleport -> Ice Mountain",
+    "travelTip": "Lassar teleport -> Ice Mountain -> Camdozaal",
     "guidanceSteps": [
       {
-        "description": "Travel to Ruins of Camdozaal beneath Ice Mountain.",
-        "worldX": 2957,
-        "worldY": 5774,
+        "description": "Travel to the Ruins of Camdozaal beneath Ice Mountain. Cast Lassar Teleport (Ancient Magicks, requires Desert Treasure I), then run south to the Ice Mountain entrance. Alternatively, use amulet of glory to Edgeville and run east to Ice Mountain.",
+        "worldX": 3012,
+        "worldY": 3451,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Lassar teleport -> Ice Mountain; or glory -> Edgeville -> run east",
+        "section": "Travel"
       },
       {
-        "description": "Mine, smith, and fish in the Ruins of Camdozaal for unique Camdozaal items.",
-        "worldX": 2957,
-        "worldY": 5774,
+        "description": "Mine barronite deposits, smith at the ancient anvils, or fish in the underground lake for Camdozaal-specific drops including the barronite handle, mace head, shard, and crushed barronite. The barronite mace is assembled from components obtained here.",
+        "worldX": 3012,
+        "worldY": 9849,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "recommendedItemIds": [
+          1265,
+          311,
+          1205
+        ],
+        "section": "Activity"
       }
     ],
     "rewardType": "MIXED"
@@ -21049,29 +21217,36 @@
       }
     ],
     "locationDescription": "TzHaar City beneath the Karamja Volcano",
-    "travelTip": "Fairy ring BLP -> TzHaar",
+    "travelTip": "Fairy ring BLP -> TzHaar City",
     "npcId": 2173,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to TzHaar City beneath the Karamja Volcano.",
-        "worldX": 2444,
-        "worldY": 5175,
+        "description": "Travel to TzHaar City beneath the Karamja Volcano. Fastest routes: fairy ring BLP, or a POH portal attuned to TzHaar. Alternatively, use the trapdoor south of the Shilo Village mine or the tokkul entrance in Mor Ul Rek (requires fire cape).",
+        "worldX": 2452,
+        "worldY": 5144,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 20,
+        "travelTip": "Fairy ring BLP; or POH portal -> TzHaar",
+        "section": "Travel"
       },
       {
-        "description": "Kill TzHaar creatures in Mor Ul Rek or sell items at TzHaar shops for Tokkul. Buy uncut onyx from the gem shop",
-        "worldX": 2444,
-        "worldY": 5175,
+        "description": "Kill TzHaar-Ket, TzHaar-Mej, or TzHaar-Xil in the city for tokkul and rare drops. The uncut onyx is bought from the TzHaar-Hur gem store for 300,000 tokkul (significantly cheaper with Karamja diary completion). Use Protect from Melee against TzHaar-Ket and Protect from Magic against TzHaar-Mej.",
+        "worldX": 2452,
+        "worldY": 5144,
         "worldPlane": 0,
-        "npcId": 2173,
-        "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 2173
+        "recommendedItemIds": [
+          6570,
+          11832,
+          391,
+          2444
+        ],
+        "section": "Combat"
       }
-    ]
+    ],
+    "requirements": {}
   },
   {
     "name": "Cyclopes",
@@ -31136,27 +31311,38 @@
       }
     ],
     "locationDescription": "Port tasks from sailing ports",
-    "travelTip": "Sailors' amulet to any port, accept tasks from notice board",
+    "travelTip": "Sailors' amulet -> any port -> notice board",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
+        "description": "Travel to any Sailing port. Use the Sailors' amulet for fast teleportation, or walk to Port Sarim docks. Accept tasks from the Port Notice Board at the port.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Sailors' amulet -> any port; or walk to Port Sarim",
+        "section": "Travel"
       },
       {
-        "description": "Accept port tasks from notice boards at Sailing ports. Complete tasks for Sailing XP and rewards.",
-        "worldX": 1824,
-        "worldY": 3691,
+        "description": "Accept and complete port tasks from the Port Notice Board. Completing tasks rewards Sailing XP and occasionally unique items: Soup (1/4,500 task reward) and Shark paint (1/36 salvage reward). Tasks are repeatable and vary by port and Sailing level.",
+        "worldX": 3055,
+        "worldY": 3245,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Activity"
       }
     ],
     "mutuallyExclusiveSources": [
       "Boat Paints"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 1
+        }
+      ]
+    }
   },
   {
     "name": "Prifddinas Rabbit",
