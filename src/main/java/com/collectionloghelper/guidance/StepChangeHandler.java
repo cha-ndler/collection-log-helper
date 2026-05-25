@@ -65,6 +65,21 @@ public class StepChangeHandler
 	private final GuidanceSequencer guidanceSequencer;
 	private final RequiredItemResolver requiredItemResolver;
 
+	/**
+	 * Zero-based index of the last step this handler pushed to the panel, or {@code -1}
+	 * before the first push. Used to distinguish a genuine step CHANGE from a re-notify
+	 * of the SAME step (#681).
+	 *
+	 * <p>On a same-step re-notify — fired by {@code GuidanceSequencer.onInventoryChanged}
+	 * on every inventory change while guidance is active — the immediate empty-items push
+	 * is skipped so the "Items needed" section never blinks empty→full. The empty push
+	 * exists only to show step text snappily on a real step change while item names resolve
+	 * off the EDT (see #388); on a re-notify the items are already on screen and resolving
+	 * directly (then relying on the {@code StepProgressView} idempotency guard) avoids the
+	 * intermediate empty frame entirely.</p>
+	 */
+	private int lastShownStepIndex = -1;
+
 	@Inject
 	StepChangeHandler(
 		ClientThread clientThread,
@@ -121,13 +136,30 @@ public class StepChangeHandler
 				&& stepChangeSource.getGuidanceSteps() != null
 				? stepChangeSource.getGuidanceSteps() : Collections.emptyList();
 
+			// Distinguish a genuine step CHANGE from a re-notify of the SAME step (#681).
+			// onInventoryChanged re-notifies the current step on every inventory change;
+			// on those re-notifies the items are already on screen, so the immediate empty
+			// push would needlessly clear them and cause a visible flash.
+			final int currentIndex = guidanceSequencer.getCurrentIndex();
+			final boolean sameStepRenotify = currentIndex == lastShownStepIndex;
+			lastShownStepIndex = currentIndex;
+
 			// Push description + step progress to the panel immediately (safe from any thread
 			// because showStep dispatches to the EDT). Required-item resolution is deferred
 			// to the client thread because RequiredItemResolver.resolve() calls
 			// ItemManager.getItemComposition, which asserts caller-is-client-thread. See
 			// cha-ndler/collection-log-helper#388 for the original trace.
-			in.panel.updateStepProgress(current, total, desc, isManual,
-				Collections.emptyList(), Collections.emptyList(), sourceSteps);
+			//
+			// On a genuine step change we do the two-phase push: empty items immediately
+			// (snappy step text), resolved items ~1 tick later. On a same-step re-notify we
+			// SKIP the empty push and go straight to resolving — combined with the
+			// StepProgressView idempotency guard (#681) an unchanged re-notify is a complete
+			// no-op and one whose item availability changed updates in place with no blink.
+			if (!sameStepRenotify)
+			{
+				in.panel.updateStepProgress(current, total, desc, isManual,
+					Collections.emptyList(), Collections.emptyList(), sourceSteps);
+			}
 			final CollectionLogHelperPanel panelRef = in.panel;
 			clientThread.invokeLater(() ->
 			{
