@@ -75,6 +75,34 @@
 
 ### Fixed
 
+- **Login no longer hangs at "Connecting to server"** — quest-progress
+  tracking called `Quest.getState` (which runs the `QUEST_STATUS_GET`
+  clientscript) directly inside `onVarbitChanged`. During login a
+  `VarbitChanged` is posted from inside an executing clientscript, so the
+  nested script call tripped `AssertionError: scripts are not reentrant`
+  and aborted the login script, leaving the client stuck at the loading
+  screen. The refresh is now deferred onto the client thread via
+  `ClientThread.invokeLater` with a coalescing guard so the login varbit
+  storm triggers a single refresh. Closes
+  [#676](../../issues/676) (PR [#677](../../pull/677)).
+- **Guidance side panel no longer flashes on every inventory change** —
+  while guidance was active, `GuidanceSequencer.onInventoryChanged`
+  re-notified the unchanged step on every `ItemContainerChanged`, and the
+  step-progress update did a two-phase (empty → resolved) push that tore
+  down and rebuilt the "Items needed" rows each time, blinking the section
+  on every banked/looted item. `StepProgressView.showStep` is now
+  idempotent (skips the rebuild when the rendered content is unchanged) and
+  the empty intermediate push is skipped on a same-step re-notify, so the
+  section updates in place with no flash while staying live. Bundled with a
+  flicker-free panel rebuild (plain `removeAll` instead of
+  `SwingUtil.fastRemoveAll`, which pumped AWT events mid-rebuild) and an
+  idempotent recommended-gear chip strip; also catches the off-EDT
+  `ItemManager.getItemComposition` assertion that was aborting the chip
+  build mid-strip. Closes [#681](../../issues/681)
+  (PR [#682](../../pull/682)). Follow-ups filed:
+  [#678](../../issues/678) (skill-enum data typo),
+  [#679](../../issues/679) (resolve chip item names on the client thread),
+  [#680](../../issues/680) (Requirements label formatting).
 - **GWD boss guidance step order corrected + duplicate kill step
   dropped** — Armadyl, Bandos, Saradomin, and Zamorak GWD sources had
   inverted step ordering (kill step listed before the boss-room entry
