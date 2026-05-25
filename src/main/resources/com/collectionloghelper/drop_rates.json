@@ -20558,26 +20558,73 @@
         "wikiPage": "Ecumenical_key"
       }
     ],
-    "locationDescription": "God Wars Dungeon entrance in the Wilderness",
-    "travelTip": "Cemetery teleport -> run east",
+    "locationDescription": "God Wars Dungeon entrance in the Wilderness (level 28 Wilderness)",
+    "travelTip": "Cemetery teleport (Arceuus) -> run east; or Dareeyak teleport (Desert Treasure I) -> run south",
+    "waypoints": [
+      {
+        "description": "Arceuus spellbook required: cast Cemetery Teleport and run east to the cave entrance.",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "worldX": 3015,
+        "worldY": 3739,
+        "worldPlane": 0
+      },
+      {
+        "description": "No spellbook unlock: run north from Ferox Enclave or use a burning amulet to Bandit Camp and run north-west.",
+        "completionCondition": "ARRIVE_AT_TILE",
+        "worldX": 3015,
+        "worldY": 3739,
+        "worldPlane": 0
+      }
+    ],
     "guidanceSteps": [
       {
-        "description": "Travel to God Wars Dungeon entrance in the Wilderness.",
+        "description": "Travel to the Wilderness God Wars Dungeon cave entrance (level 28 Wilderness, east of The Forgotten Cemetery). Bring Protect from Magic/Ranged and a god item to suppress aggression. PKer risk -- this is an open-PvP multi-combat area. Cemetery Teleport (Arceuus) is the fastest route; Ferox Enclave run is the safest.",
         "worldX": 3015,
         "worldY": 3739,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Kill monsters in the Wilderness God Wars Dungeon for ecumenical keys.",
+        "description": "Pass the entrance obstacle: south-east jutting wall requires 60 Agility, or north-west boulder requires 60 Strength. Temporary boosts work for both. The obstacle room is single-way combat.",
         "worldX": 3015,
         "worldY": 3739,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Enter dungeon"
+      },
+      {
+        "description": "Inside the main dungeon (multi-combat). Equip a god item matching the faction you are farming to stop their followers attacking you. Kill GWD monsters for ecumenical keys (1/60 chance). Avoid the centre -- all factions fight here and PKers enter via the same chokepoint.",
+        "worldX": 3015,
+        "worldY": 3739,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Kill",
+        "recommendedItemIds": [
+          13239,
+          11832,
+          12829
+        ]
+      },
+      {
+        "description": "Once keyed out or inventory full, teleport away immediately (Wilderness level allows teleportation from this dungeon). Ecumenical keys are used to skip the kill count requirement at any GWD boss.",
+        "worldX": 3015,
+        "worldY": 3739,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Exit"
       }
     ],
-    "aggregated": false
+    "aggregated": false,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "AGILITY",
+          "level": 60
+        }
+      ]
+    }
   },
   {
     "name": "Elven Crystal Chest",
@@ -21188,22 +21235,15 @@
       }
     ],
     "locationDescription": "Random event encounters throughout Gielinor",
-    "travelTip": "Triggered randomly while skilling",
+    "travelTip": "",
     "guidanceSteps": [
       {
-        "description": "Travel to Random event encounters throughout Gielinor.",
+        "description": "Random events trigger passively during normal play. No travel or special action is required -- simply play the game and respond to random events when they appear.",
         "worldX": 3222,
         "worldY": 3218,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
-      },
-      {
-        "description": "Complete random events encountered throughout Gielinor.",
-        "worldX": 3222,
-        "worldY": 3218,
-        "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Passive"
       }
     ],
     "rewardType": "MIXED"
@@ -29886,23 +29926,36 @@
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
+    "travelTip": "Sailors' amulet -> The Pandemonium or nearest port, board boat",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
+        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port. Walk to your boat's gangplank.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock); Port Roberts/Red Rock/Deepfin Point if markers activated",
+        "requiredItemIds": [
+          32399
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack stingrays when they appear, then Harvest defeated stingrays for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat and sail into open water. Stingrays are sea encounters requiring a cannon facility (28 Sailing) with cannonballs loaded. No special mechanics -- fire cannon until dead, then Harvest the carcass for Ray barbs (1/30). Repair at a Shipwright when hull is damaged.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
+        "npcId": 15218,
+        "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 15218
+        "completionNpcId": 15218,
+        "section": "Combat",
+        "recommendedItemIds": [
+          32399,
+          31916,
+          385
+        ]
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29914,7 +29967,7 @@
       "skills": [
         {
           "skill": "SAILING",
-          "level": 50
+          "level": 28
         }
       ]
     }
@@ -31596,28 +31649,36 @@
         "wikiPage": "Enhanced_crystal_teleport_seed"
       }
     ],
-    "locationDescription": "Prifddinas, accessed after Song of the Elves",
-    "travelTip": "Teleport crystal -> Prifddinas",
+    "locationDescription": "Prifddinas, accessible after Song of the Elves",
+    "travelTip": "Teleport crystal or enhanced crystal teleport seed -> Prifddinas",
     "requirements": {
       "quests": [
         "SONG_OF_THE_ELVES"
+      ],
+      "skills": [
+        {
+          "skill": "THIEVING",
+          "level": 85
+        }
       ]
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Prifddinas, accessed after Song of the Elves.",
+        "description": "Travel to Prifddinas using a teleport crystal or enhanced crystal teleport seed. Requires Song of the Elves completion.",
         "worldX": 3279,
         "worldY": 6072,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
-        "description": "Travel to Prifddinas and kill elves for enhanced crystal teleport seeds.",
+        "description": "Pickpocket elves in Prifddinas (85 Thieving). Each successful pickpocket has a 1/1024 chance of yielding an enhanced crystal teleport seed. Wearing the Ardougne cloak 4 or a dodgy necklace reduces failure rate significantly.",
         "worldX": 3279,
         "worldY": 6072,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Pickpocket"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -31641,26 +31702,30 @@
         "wikiPage": "Amulet_of_eternal_glory"
       }
     ],
-    "locationDescription": "Fountain of Rune, deep Wilderness",
-    "travelTip": "Wilderness sword 4 -> Fountain of Rune",
+    "locationDescription": "Fountain of Rune, south of the Blighted Volcano (level 47-48 Wilderness)",
+    "travelTip": "Wilderness sword 4 -> Fountain of Rune (unlimited); or Wilderness sword 3 (one daily)",
+    "requirements": {
+      "quests": [
+        "HEROES_QUEST"
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to Fountain of Rune, deep Wilderness.",
+        "description": "Travel to the Fountain of Rune in deep Wilderness (level 47-48). Wilderness sword 4 provides an unlimited direct teleport. Wilderness sword 3 gives one free daily teleport. PKer risk -- bring only what you are willing to lose. Bring an inventory of uncharged amulets of glory (up to 26).",
         "worldX": 3375,
         "worldY": 3893,
         "worldPlane": 0,
-        "requiredItemIds": [
-          1704
-        ],
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Charge amulets of glory at the Fountain of Rune in the Wilderness.",
+        "description": "Right-click the Fountain of Rune and select Charge to enchant all dragonstone jewellery in your inventory. Each amulet of glory charged has a 1/25000 chance of becoming an amulet of eternal glory. Charging glory requires completion of Heroes' Quest.",
         "worldX": 3375,
         "worldY": 3893,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Charge"
       }
     ],
     "mutuallyExclusiveSources": [
