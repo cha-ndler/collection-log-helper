@@ -6325,7 +6325,13 @@
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "recommendedItemIds": [20997, 13652, 6685, 3024, 11804],
+        "recommendedItemIds": [
+          20997,
+          13652,
+          6685,
+          3024,
+          11804
+        ],
         "section": "Travel"
       },
       {
@@ -7413,7 +7419,13 @@
             "travelTip": "Inventory Pharaoh's sceptre -> Jaltevas -> Necropolis"
           }
         ],
-        "recommendedItemIds": [26219, 27275, 20997, 6685, 3024],
+        "recommendedItemIds": [
+          26219,
+          27275,
+          20997,
+          6685,
+          3024
+        ],
         "section": "Travel"
       },
       {
@@ -7734,7 +7746,13 @@
             "travelTip": "Inventory Pharaoh's sceptre -> Jaltevas -> Necropolis"
           }
         ],
-        "recommendedItemIds": [26219, 27275, 20997, 6685, 3024],
+        "recommendedItemIds": [
+          26219,
+          27275,
+          20997,
+          6685,
+          3024
+        ],
         "section": "Travel"
       },
       {
@@ -10310,7 +10328,8 @@
           2810,
           10050,
           0
-        ]
+        ],
+        "section": "Travel"
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required",
@@ -10319,7 +10338,11 @@
         "worldPlane": 0,
         "objectId": 2123,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel",
+        "requiredItemIds": [
+          4156
+        ]
       },
       {
         "description": "Kill Basilisks in the Fremennik Slayer Dungeon. Requires mirror shield equipped (40 Slayer)",
@@ -10329,7 +10352,13 @@
         "npcId": 417,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 417
+        "completionNpcId": 417,
+        "section": "Combat",
+        "recommendedItemIds": [
+          1215,
+          4156,
+          385
+        ]
       }
     ]
   },
@@ -10965,7 +10994,8 @@
         "worldY": 4636,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
         "description": "Kill Warped Creatures in the Warped area beneath Lumbridge Swamp. Requires completion of Song of the Elves",
@@ -10975,7 +11005,12 @@
         "npcId": 12490,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 12490
+        "completionNpcId": 12490,
+        "section": "Combat",
+        "recommendedItemIds": [
+          1215,
+          385
+        ]
       }
     ]
   },
@@ -11018,7 +11053,8 @@
         "worldY": 9373,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
         "description": "Enter the cave on the north side of the island. Witchwood icon required",
@@ -11027,7 +11063,11 @@
         "worldPlane": 0,
         "objectId": 3650,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel",
+        "requiredItemIds": [
+          9470
+        ]
       },
       {
         "description": "Kill Cave Horrors in the Mos Le Harmless cave. Requires witchwood icon necklace equipped to prevent stat drain (58 Slayer)",
@@ -11037,7 +11077,13 @@
         "npcId": 1047,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 1047
+        "completionNpcId": 1047,
+        "section": "Combat",
+        "recommendedItemIds": [
+          1215,
+          385,
+          9470
+        ]
       }
     ]
   },
@@ -11145,7 +11191,11 @@
         "worldY": 4240,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel",
+        "requiredItemIds": [
+          4156
+        ]
       },
       {
         "description": "Kill Basilisk Knights in the Jormungand's Prison. Requires mirror shield or V's shield equipped. Use Protect from Magic",
@@ -11155,7 +11205,13 @@
         "npcId": 9293,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 9293
+        "completionNpcId": 9293,
+        "section": "Combat",
+        "recommendedItemIds": [
+          4587,
+          4156,
+          385
+        ]
       }
     ],
     "afkLevel": 1
@@ -11322,7 +11378,8 @@
         "worldY": 2968,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Kill Lava Strykewyrms in the Charred Dungeon beneath Charred Island. Standard combat mechanics; no PKer risk",
@@ -11332,7 +11389,13 @@
         "npcId": 15500,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 15500
+        "completionNpcId": 15500,
+        "section": "Combat",
+        "recommendedItemIds": [
+          31996,
+          1215,
+          385
+        ]
       }
     ]
   },
@@ -11445,7 +11508,8 @@
           3760,
           10305,
           0
-        ]
+        ],
+        "section": "Travel"
       },
       {
         "description": "Enter the Wyvern Cave. Elemental/mind/dragonfire shield required",
@@ -11454,7 +11518,8 @@
         "worldPlane": 0,
         "objectId": 30869,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
         "description": "Kill Fossil Island Wyverns in the Wyvern Cave. Requires elemental/mind/dragonfire shield for ice breath (66 Slayer)",
@@ -11464,7 +11529,13 @@
         "npcId": 7794,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 7794
+        "completionNpcId": 7794,
+        "section": "Combat",
+        "recommendedItemIds": [
+          9731,
+          2890,
+          385
+        ]
       }
     ]
   },
@@ -11962,7 +12033,8 @@
         "worldY": 3535,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Climb to the top floor. Burst/barrage death spawns in Catacombs for fast XP",
@@ -11971,7 +12043,8 @@
         "worldPlane": 2,
         "objectId": 2119,
         "objectInteractAction": "Climb-up",
-        "completionCondition": "PLAYER_ON_PLANE"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Travel"
       },
       {
         "description": "Kill Nechryaels in the Slayer Tower or Catacombs of Kourend. Burst/barrage the death spawns in Catacombs for fast tasks (80 Slayer)",
@@ -11981,7 +12054,13 @@
         "npcId": 11,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 11
+        "completionNpcId": 11,
+        "section": "Combat",
+        "recommendedItemIds": [
+          1215,
+          4151,
+          385
+        ]
       }
     ]
   },
@@ -12021,7 +12100,8 @@
         "worldY": 5280,
         "worldPlane": 2,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
         "description": "Kill Spiritual Mages in the God Wars Dungeon. Requires 83 Slayer. Found in all four god chambers - equip the corresponding god item for protection",
@@ -12031,7 +12111,13 @@
         "npcId": 2212,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 2212
+        "completionNpcId": 2212,
+        "section": "Combat",
+        "recommendedItemIds": [
+          11840,
+          1215,
+          385
+        ]
       }
     ]
   },
@@ -12106,7 +12192,8 @@
         "worldY": 5203,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
         "description": "Kill Zarosian Spiritual Mages in Nex's Prison. Requires 83 Slayer and frozen key to access the Ancient Prison",
@@ -12116,7 +12203,13 @@
         "npcId": 11292,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 11292
+        "completionNpcId": 11292,
+        "section": "Combat",
+        "recommendedItemIds": [
+          11840,
+          26221,
+          385
+        ]
       }
     ]
   },
@@ -12278,7 +12371,8 @@
         "worldY": 3535,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Climb to the top floor. Burst/barrage in Catacombs for fastest tasks",
@@ -12287,7 +12381,8 @@
         "worldPlane": 2,
         "objectId": 2119,
         "objectInteractAction": "Climb-up",
-        "completionCondition": "PLAYER_ON_PLANE"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Travel"
       },
       {
         "description": "Kill Abyssal Demons in the Slayer Tower or Catacombs. They teleport around. Use burst/barrage in Catacombs for efficient tasks (85 Slayer)",
@@ -12297,7 +12392,13 @@
         "npcId": 415,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 415
+        "completionNpcId": 415,
+        "section": "Combat",
+        "recommendedItemIds": [
+          4151,
+          1215,
+          13652
+        ]
       }
     ]
   },
@@ -12344,7 +12445,8 @@
         "worldY": 3611,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Enter the Kraken Cove entrance. 87 Slayer, on task only",
@@ -12353,7 +12455,8 @@
         "worldPlane": 0,
         "objectId": 30177,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
         "description": "Kill the Kraken boss or regular cave krakens. Disturb the whirlpool to start, attack tentacles first. 87 Slayer, on task only",
@@ -12363,7 +12466,13 @@
         "npcId": 492,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 492
+        "completionNpcId": 492,
+        "section": "Combat",
+        "recommendedItemIds": [
+          11908,
+          12002,
+          385
+        ]
       }
     ]
   },
@@ -12406,7 +12515,8 @@
         "worldY": 4672,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
         "description": "Kill Dark Beasts in the Mourner Tunnels or Catacombs of Kourend. Use Protect from Melee. High Defence - use accurate weapon styles",
@@ -12416,7 +12526,13 @@
         "npcId": 4005,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 4005
+        "completionNpcId": 4005,
+        "section": "Combat",
+        "recommendedItemIds": [
+          861,
+          11235,
+          385
+        ]
       }
     ]
   },
@@ -12455,7 +12571,8 @@
         "worldY": 3407,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Enter the Araxyte Cave (north-east Darkmeyer). Use crush weapons for best accuracy",
@@ -12464,7 +12581,8 @@
         "worldPlane": 0,
         "objectId": 42594,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
         "description": "Kill Araxytes in the Araxyte Cave (north-east of Darkmeyer). Dodge the web and venom attacks. Use melee with crush (92 Slayer)",
@@ -12474,7 +12592,13 @@
         "npcId": 13667,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 13667
+        "completionNpcId": 13667,
+        "section": "Combat",
+        "recommendedItemIds": [
+          29806,
+          4153,
+          385
+        ]
       }
     ],
     "afkLevel": 1
@@ -12515,7 +12639,8 @@
         "worldY": 3061,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Kill Smoke Devils in the Smoke Devil Dungeon. Requires face protection (slayer helm works). Burst/barrage task for fast completion",
@@ -12525,7 +12650,13 @@
         "npcId": 498,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 498
+        "completionNpcId": 498,
+        "section": "Combat",
+        "recommendedItemIds": [
+          12002,
+          385,
+          4083
+        ]
       }
     ]
   },
