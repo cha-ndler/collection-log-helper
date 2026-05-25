@@ -493,7 +493,8 @@ public class GuidanceSequencerNestedConditionalTest
 			null, // section
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 
@@ -529,7 +530,8 @@ public class GuidanceSequencerNestedConditionalTest
 			null, // section
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 

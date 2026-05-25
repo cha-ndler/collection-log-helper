@@ -177,7 +177,8 @@ public class B1GuidanceStepIntegrationTest
 			0, null, null, null, null, null,
 			0, 0, false, 0, null, null, 0, 0, null, null, null, null, null,
 			null /* waypoints */, null /* dynamicTargetEvaluator */,
-			tree
+			tree,
+			null /* perItemStepPriority */
 		);
 	}
 

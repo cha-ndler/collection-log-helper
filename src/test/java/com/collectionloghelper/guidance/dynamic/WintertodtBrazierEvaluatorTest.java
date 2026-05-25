@@ -233,7 +233,8 @@ public class WintertodtBrazierEvaluatorTest
 			null,  // section
 			null,  // waypoints
 			DynamicTargetEvaluatorRegistry.WINTERTODT_ACTIVE_BRAZIER,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 }

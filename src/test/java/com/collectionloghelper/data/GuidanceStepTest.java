@@ -334,7 +334,8 @@ public class GuidanceStepTest
 			null, // section
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 
@@ -370,7 +371,8 @@ public class GuidanceStepTest
 			null, // section
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
-			null  // conditionTree
+			null,  // conditionTree
+			null  // perItemStepPriority
 		);
 	}
 }

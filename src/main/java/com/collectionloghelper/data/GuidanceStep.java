@@ -289,6 +289,27 @@ public class GuidanceStep
 	@JsonAdapter(ConditionNodeDeserializer.class)
 	ConditionNode conditionTree;
 
+	/**
+	 * Optional per-item step priority map (B4.3.4 Phase 1+2).  Maps a clog item
+	 * ID to a numeric priority that the sequencer's step-selection logic can
+	 * consult when an active target item is set.  Steps not present in the map
+	 * resolve to priority 0 (the default).  Higher numeric values indicate
+	 * higher priority for the indicated item.
+	 *
+	 * <p>Intended use: multi-step sources where each step "owns" a subset of
+	 * the source's clog items (e.g. Barrows' six per-brother kill steps, each
+	 * owning that brother's four set pieces).  When the player picks a target
+	 * item, the sequencer can prefer the step that owns it without changing
+	 * the underlying trip mechanics or completion detection.
+	 *
+	 * <p>Null by default. Existing JSON without this field deserialises
+	 * unchanged. Phase 1+2 lands the schema and the {@link #resolvePriority}
+	 * helper; no production source sets this field. Phase 3 (separate later
+	 * PR) introduces the first pilot wiring (Barrows per-brother).
+	 */
+	@Nullable
+	Map<Integer, Integer> perItemStepPriority;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
@@ -341,6 +362,33 @@ public class GuidanceStep
 			}
 		}
 		return npcId;
+	}
+
+	/**
+	 * Resolves the per-item step priority for this step given the active
+	 * guidance target item (B4.3.4 Phase 1+2). When {@link #perItemStepPriority}
+	 * has an entry for {@code targetItemId}, that priority is returned.
+	 * Returns 0 (the default priority) when the map is null, {@code targetItemId}
+	 * is null, or no entry exists for the target.
+	 *
+	 * <p>Phase 1+2 ships only the resolver. No production source sets
+	 * {@code perItemStepPriority}, so this method always returns 0 in the
+	 * current data set. Sequencer integration (Phase 3+) is a later PR.
+	 *
+	 * @param targetItemId the clog item ID the player is hunting, or {@code null}
+	 * @return the resolved priority (0 when no override applies)
+	 */
+	public int resolvePriority(@Nullable Integer targetItemId)
+	{
+		if (targetItemId != null && perItemStepPriority != null)
+		{
+			Integer override = perItemStepPriority.get(targetItemId);
+			if (override != null)
+			{
+				return override;
+			}
+		}
+		return 0;
 	}
 
 	/**
@@ -516,7 +564,8 @@ public class GuidanceStep
 			this.section,
 			null, // waypoints: merged steps inherit null; authors set waypoints on the base step
 			this.dynamicTargetEvaluator,
-			this.conditionTree // tree is inherited from base; alternatives do not override it in B1
+			this.conditionTree, // tree is inherited from base; alternatives do not override it in B1
+			this.perItemStepPriority // priority map inherited from base; alternatives do not override it in B4.3.4
 		);
 	}
 }
