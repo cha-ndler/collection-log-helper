@@ -6325,7 +6325,13 @@
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "recommendedItemIds": [20997, 13652, 6685, 3024, 11804],
+        "recommendedItemIds": [
+          20997,
+          13652,
+          6685,
+          3024,
+          11804
+        ],
         "section": "Travel"
       },
       {
@@ -7413,7 +7419,13 @@
             "travelTip": "Inventory Pharaoh's sceptre -> Jaltevas -> Necropolis"
           }
         ],
-        "recommendedItemIds": [26219, 27275, 20997, 6685, 3024],
+        "recommendedItemIds": [
+          26219,
+          27275,
+          20997,
+          6685,
+          3024
+        ],
         "section": "Travel"
       },
       {
@@ -7734,7 +7746,13 @@
             "travelTip": "Inventory Pharaoh's sceptre -> Jaltevas -> Necropolis"
           }
         ],
-        "recommendedItemIds": [26219, 27275, 20997, 6685, 3024],
+        "recommendedItemIds": [
+          26219,
+          27275,
+          20997,
+          6685,
+          3024
+        ],
         "section": "Travel"
       },
       {
@@ -10337,7 +10355,7 @@
     "name": "Terror Dog",
     "category": "SLAYER",
     "worldX": 3149,
-    "worldY": 4663,
+    "worldY": 4647,
     "worldPlane": 0,
     "killTimeSeconds": 18,
     "afkLevel": 2,
@@ -10361,28 +10379,54 @@
         "wikiPage": "Granite_helm"
       }
     ],
-    "locationDescription": "Tarn's Lair, Abandoned Mine",
-    "travelTip": "Slayer ring -> Tarn's Lair",
+    "locationDescription": "Tarn's Lair, Abandoned Mine (requires Haunted Mine quest)",
+    "travelTip": "Slayer ring -> Tarn's Lair (fastest), or fairy ring AJR -> run east to Abandoned Mine",
     "npcId": 6474,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Abandoned Mine beneath Troll Stronghold (fairy ring AJR to Fremennik, then north)",
-        "worldX": 3149,
-        "worldY": 4663,
+        "description": "Bank and prepare for Terror Dogs. They have high Attack; bring food and prayer potions. Haunted Mine quest is required for access to Tarn's Lair",
+        "worldX": 3087,
+        "worldY": 3493,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 8,
+        "section": "Bank"
       },
       {
-        "description": "Kill Terror Dogs beneath the Troll Stronghold. Access via the tunnel during/after Troll Stronghold quest",
+        "description": "Teleport to Tarn's Lair using a Slayer ring (fastest direct teleport). Alternatively, use fairy ring AJR to Fremennik Province and run east to the Abandoned Mine entrance",
+        "worldX": 3414,
+        "worldY": 3232,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "travelTip": "Slayer ring -> Tarn's Lair, or fairy ring AJR -> run east to Abandoned Mine entrance",
+        "section": "Travel"
+      },
+      {
+        "description": "Navigate through the Abandoned Mine tunnels to reach Tarn's Lair where Terror Dogs are found",
         "worldX": 3149,
-        "worldY": 4663,
+        "worldY": 4647,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "section": "Travel"
+      },
+      {
+        "description": "Kill Terror Dogs. Protect from Melee; melee damage only. High Attack stat - bring food especially at lower levels. No phase mechanics or special attacks",
+        "worldX": 3149,
+        "worldY": 4647,
         "worldPlane": 0,
         "npcId": 6474,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 6474
+        "completionNpcId": 6474,
+        "section": "Combat",
+        "recommendedItemIds": [
+          4151,
+          4087,
+          385
+        ]
       }
     ]
   },
@@ -10544,28 +10588,54 @@
         "wikiPage": "Pendant_of_ates_(inert)"
       }
     ],
-    "locationDescription": "Ruins of Tapoyauik, Twilight Temple (Varlamore)",
-    "travelTip": "Pendant of ates -> Twilight Temple, or quetzal whistle -> Varlamore",
+    "locationDescription": "Ruins of Tapoyauik, beneath Twilight Temple, Varlamore",
+    "travelTip": "Pendant of ates -> Ruins of Tapoyauik (requires The Heart of Darkness), or quetzal whistle -> Civitas illa Fortis -> walk south",
     "npcId": 13728,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Ruins of Tapoyauik beneath the Twilight Temple in Varlamore (pendant of ates teleports directly; requires The Heart of Darkness)",
+        "description": "Bank and prepare for Frost Nagua. Fire-spell magic or melee crush gear works best; spectral undead so Salve amulet (ei) outperforms Slayer helmet on task",
+        "worldX": 3087,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
+      },
+      {
+        "description": "Use the Pendant of ates to teleport directly to the Ruins of Tapoyauik (requires The Heart of Darkness). Without the pendant, use quetzal whistle to Civitas illa Fortis then walk south to the Twilight Temple entrance",
+        "worldX": 1350,
+        "worldY": 3050,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 25,
+        "travelTip": "Pendant of ates -> Ruins of Tapoyauik, or quetzal whistle -> Civitas illa Fortis -> walk south",
+        "section": "Travel"
+      },
+      {
+        "description": "Enter the Ruins of Tapoyauik beneath the Twilight Temple",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Kill Frost Nagua in the Ruins of Tapoyauik. Use fire spells or crush weapons for weakness",
+        "description": "Kill Frost Nagua. Protect from Melee; fire spells deal bonus damage. Spectral undead - Salve amulet (ei) gives a stronger bonus than Slayer helmet on task. No phase mechanics",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
         "npcId": 13728,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 13728
+        "completionNpcId": 13728,
+        "section": "Combat",
+        "recommendedItemIds": [
+          8010,
+          6918,
+          12695
+        ]
       }
     ]
   },
@@ -10594,28 +10664,54 @@
         "wikiPage": "Sulphur_blades"
       }
     ],
-    "locationDescription": "Neypotzli, Cam Torum",
-    "travelTip": "Quetzal whistle -> Cam Torum",
+    "locationDescription": "Neypotzli, beneath Cam Torum, Varlamore",
+    "travelTip": "Quetzal whistle -> Cam Torum -> Neypotzli cave entrance",
     "npcId": 13033,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Neypotzli in Cam Torum, Varlamore (quetzal whistle)",
+        "description": "Bank and prepare for Sulphur Nagua. Bring melee or ranged gear; spectral undead so Salve amulet (ei) outperforms Slayer helmet on task",
+        "worldX": 3087,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
+      },
+      {
+        "description": "Use the quetzal whistle to travel to Cam Torum in Varlamore, then enter the Neypotzli volcanic cave beneath the city",
+        "worldX": 1440,
+        "worldY": 3210,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "travelTip": "Quetzal whistle -> Cam Torum -> Neypotzli cave entrance",
+        "section": "Travel"
+      },
+      {
+        "description": "Descend into the Neypotzli volcanic cave",
         "worldX": 1440,
         "worldY": 9602,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
-        "description": "Kill Sulphur Nagua in the volcanic caves of Varlamore",
+        "description": "Kill Sulphur Nagua. Protect from Melee; melee damage only. Spectral undead - Salve amulet (ei) outperforms Slayer helmet on task. No phase mechanics or special attacks",
         "worldX": 1440,
         "worldY": 9602,
         "worldPlane": 0,
         "npcId": 13033,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 13033
+        "completionNpcId": 13033,
+        "section": "Combat",
+        "recommendedItemIds": [
+          4151,
+          4087,
+          12695
+        ]
       }
     ]
   },
@@ -10623,7 +10719,7 @@
     "name": "Earthen Nagua",
     "category": "SLAYER",
     "worldX": 1309,
-    "worldY": 3104,
+    "worldY": 9450,
     "worldPlane": 0,
     "killTimeSeconds": 13,
     "afkLevel": 2,
@@ -10644,28 +10740,54 @@
         "wikiPage": "Earthbound_tecpatl"
       }
     ],
-    "locationDescription": "Tonali Cavern, Cam Torum",
-    "travelTip": "Quetzal whistle -> Cam Torum",
+    "locationDescription": "Tonali Cavern, beneath Cam Torum, Varlamore",
+    "travelTip": "Quetzal whistle -> Cam Torum -> Tonali Cavern entrance",
     "npcId": 14420,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Tonali Cavern beneath Cam Torum, Varlamore (quetzal whistle)",
+        "description": "Bank and prepare for Earthen Nagua. Bring melee or ranged gear; they are spectral undead so Salve amulet (ei) outperforms Slayer helmet on task. No consumable key required",
+        "worldX": 3087,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
+      },
+      {
+        "description": "Use the quetzal whistle to travel to Cam Torum in Varlamore, then enter the Tonali Cavern beneath the city",
         "worldX": 1309,
         "worldY": 3104,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Quetzal whistle -> Cam Torum -> Tonali Cavern entrance",
+        "section": "Travel"
       },
       {
-        "description": "Kill Earthen Nagua in the Tonali Cavern beneath Cam Torum, Varlamore",
+        "description": "Descend into the Tonali Cavern",
         "worldX": 1309,
-        "worldY": 3104,
+        "worldY": 9450,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "section": "Travel"
+      },
+      {
+        "description": "Kill Earthen Nagua. Protect from Melee; spectral undead weak to slash. Salve amulet (ei) gives a stronger damage bonus than Slayer helmet on task. No phase mechanics or special attacks",
+        "worldX": 1309,
+        "worldY": 9450,
         "worldPlane": 0,
         "npcId": 14420,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 14420
+        "completionNpcId": 14420,
+        "section": "Combat",
+        "recommendedItemIds": [
+          4151,
+          4087,
+          12695
+        ]
       }
     ]
   },
@@ -10764,28 +10886,45 @@
         "wikiPage": "Horn_of_plenty"
       }
     ],
-    "locationDescription": "Great Conch, Unquiet Ocean",
-    "travelTip": "Fairy ring CJQ -> Great Conch",
+    "locationDescription": "Great Conch, Unquiet Ocean (requires Troubled Tortugans + Sailing access)",
+    "travelTip": "Fairy ring CJQ -> Great Conch (requires Troubled Tortugans + Sailing access)",
     "npcId": 14857,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Sail to Great Conch island in the Unquiet Ocean. Requires Sailing level to access",
+        "description": "Bank and prepare for Gryphon. Standard melee or ranged gear; no special consumables required. Requires Troubled Tortugans quest and Sailing access to reach Great Conch island",
+        "worldX": 3087,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to Great Conch island in the Unquiet Ocean via fairy ring CJQ (requires Troubled Tortugans quest and Sailing access). Without the fairy ring, sail from the nearest port",
         "worldX": 1456,
         "worldY": 2880,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Fairy ring CJQ -> Great Conch, or sail from nearest port",
+        "section": "Travel"
       },
       {
-        "description": "Kill Gryphons on the islands accessible via Sailing. Standard combat - no special mechanics",
+        "description": "Kill Gryphons on Great Conch. Protect from Melee; melee combat only, no special attacks. Gryphon feather drops every kill and is used to craft ammunition. The Horn of plenty is the rare unique at 1/2500",
         "worldX": 1456,
         "worldY": 2880,
         "worldPlane": 0,
         "npcId": 14857,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 14857
+        "completionNpcId": 14857,
+        "section": "Combat",
+        "recommendedItemIds": [
+          4151,
+          4087,
+          2364
+        ]
       }
     ]
   },
@@ -11827,12 +11966,12 @@
       }
     ],
     "locationDescription": "Stalker Den, beneath Custodia Pass, Varlamore",
-    "travelTip": "Fairy ring AIS -> Auburnvale, enter Stalker Den",
+    "travelTip": "Fairy ring AIS -> Auburnvale -> run south to Stalker Den entrance",
     "npcId": 14704,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Stalker Den entrance south of Custodia Pass, Varlamore",
+        "description": "Travel to the Stalker Den entrance south of Custodia Pass, Varlamore (fairy ring AIS to Auburnvale, run south). Requires Shadows of Custodia quest. Bring melee gear and food; Elder Custodian Stalkers apply a Bleed effect from infected spore patches - no key required to enter",
         "worldX": 1324,
         "worldY": 3364,
         "worldPlane": 0,
@@ -11843,26 +11982,35 @@
           1370,
           9870,
           0
-        ]
+        ],
+        "travelTip": "Fairy ring AIS -> Auburnvale -> run south to Stalker Den",
+        "section": "Travel"
       },
       {
-        "description": "Enter the Stalker Den through the cave entrance",
+        "description": "Squeeze through the cave entrance to enter the Stalker Den",
         "worldX": 1324,
         "worldY": 3364,
         "worldPlane": 0,
         "objectId": 57279,
         "objectInteractAction": "Squeeze-through",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill Elder Custodian Stalkers in the Stalker Den, Custodia Pass. Higher tier variants drop rarer uniques",
+        "description": "Kill Custodian Stalkers. Protect from Melee; Elder variants apply a Bleed - move off infected spore patches when they appear. Cannon works in the multi-combat south-western area. Higher-tier variants (mature, elder) have better rates on Antler guard and Alchemist's signet",
         "worldX": 1301,
         "worldY": 9820,
         "worldPlane": 0,
         "npcId": 14704,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 14704
+        "completionNpcId": 14704,
+        "section": "Combat",
+        "recommendedItemIds": [
+          4151,
+          4087,
+          392
+        ]
       }
     ]
   },
@@ -11895,13 +12043,13 @@
         "wikiPage": "Aquanite_tendon"
       }
     ],
-    "locationDescription": "Ynysdail Cavern, beneath Ynysdail (73 Sailing)",
-    "travelTip": "Sail to Ynysdail (73 Sailing)",
+    "locationDescription": "Ynysdail Cavern, beneath Ynysdail island (73 Sailing required)",
+    "travelTip": "Sail to Ynysdail (73 Sailing required), then enter Ynysdail Cavern",
     "npcId": 15497,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ynysdail Cavern entrance, west of Baxtorian Falls (73 Sailing required).",
+        "description": "Sail to Ynysdail island and enter Ynysdail Cavern underground (73 Sailing required, 78 Slayer to kill). Bring a crush weapon (Abyssal bludgeon, Inquisitor's mace) for best accuracy; Aquanite tendon is extremely rare (1/3500)",
         "worldX": 2218,
         "worldY": 3477,
         "worldPlane": 0,
@@ -11912,17 +12060,25 @@
           2290,
           9895,
           0
-        ]
+        ],
+        "travelTip": "Sail to Ynysdail (73 Sailing required)",
+        "section": "Travel"
       },
       {
-        "description": "Kill Aquanites in Ynysdail Cavern (requires 73 Sailing). Use crush weapons for best accuracy",
+        "description": "Kill Aquanites in Ynysdail Cavern. Protect from Melee; melee damage only. Use a crush weapon for best accuracy. No special attacks or phase mechanics",
         "worldX": 2275,
         "worldY": 9880,
         "worldPlane": 0,
         "npcId": 15497,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 15497
+        "completionNpcId": 15497,
+        "section": "Combat",
+        "recommendedItemIds": [
+          13263,
+          4087,
+          12695
+        ]
       }
     ]
   },
@@ -12882,6 +13038,14 @@
     "worldPlane": 0,
     "killTimeSeconds": 3000,
     "afkLevel": 2,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 5
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 20724,
@@ -12912,23 +13076,24 @@
         "wikiPage": "Dust_battlestaff"
       }
     ],
-    "locationDescription": "Slayer Tower, Morytania (varies)",
-    "travelTip": "Slayer ring -> Slayer Tower",
+    "locationDescription": "Any slayer task area (task-agnostic; superior variants spawn during any eligible task)",
+    "travelTip": "",
     "guidanceSteps": [
       {
-        "description": "Travel to Slayer Tower, Morytania (varies).",
+        "description": "This rare table applies on any slayer task above the superior-unlock level. Superior monsters have a 1/200 spawn chance in place of a standard monster while on the matching task. Unlock the Bigger and Badder reward (50 Slayer points) in the Slayer reward shop to enable superior spawns. Slayer level 5 is the minimum to receive any task",
         "worldX": 3429,
         "worldY": 3534,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionCondition": "MANUAL",
+        "section": "Note"
       },
       {
-        "description": "Kill superior slayer monsters that spawn while on task (1/200 chance with unlock).",
+        "description": "Kill the superior monster when it spawns. Superiors are significantly stronger than the base variant - bring extra food and prayer potions. They share the attack style of the base monster. On death they roll from this shared rare table (Imbued heart, Eternal gem, Mist battlestaff, Dust battlestaff) in addition to their normal drops",
         "worldX": 3429,
         "worldY": 3534,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Combat"
       }
     ],
     "mutuallyExclusiveSources": [
