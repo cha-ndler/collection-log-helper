@@ -14212,7 +14212,8 @@
     "travelTip": "Minigame tele -> Pest Control",
     "guidanceSteps": [
       {
-        "description": "Travel to Void Knights' Outpost, south of Port Sarim.",
+        "section": "Travel",
+        "description": "Travel to Void Knights' Outpost south of Port Sarim. Use the Minigame teleport (Pest Control) for the fastest route.",
         "worldX": 2659,
         "worldY": 2676,
         "worldPlane": 0,
@@ -14220,7 +14221,8 @@
         "completionDistance": 20
       },
       {
-        "description": "Board a lander to play Pest Control. Defend the Void Knight by destroying all 4 portals. Earn commendation points for the Void Knight set pieces",
+        "section": "Queue",
+        "description": "Board the lander matching your combat level (Novice <100, Intermediate 100-150, Veteran 150+). Wait for the lander to fill and depart to the island.",
         "worldX": 2659,
         "worldY": 2676,
         "worldPlane": 0,
@@ -14229,8 +14231,32 @@
           "Intermediate",
           "Veteran"
         ],
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionDistance": 5
+      },
+      {
+        "section": "Round",
+        "description": "Destroy all 4 portals while defending the Void Knight. Use Protect from Melee when swarmed by spinners near the Void Knight. Prioritise portals over kills - the game ends instantly if the Void Knight falls.",
+        "worldX": 2659,
+        "worldY": 2676,
+        "worldPlane": 0,
+        "recommendedItemIds": [
+          8839,
+          8840,
+          11665
+        ],
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "You have successfully defended the island!"
+        "completionChatPattern": "You have successfully defended the island!",
+        "loopBackToStep": 1,
+        "loopCount": 0
+      },
+      {
+        "section": "Reward",
+        "description": "Commendation points are awarded automatically after each won round. Spend at the Void Knight Commendations shop for Void armour pieces (150-650 pts each).",
+        "worldX": 2659,
+        "worldY": 2676,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL"
       }
     ],
     "rewardType": "SHOP",
@@ -15583,7 +15609,8 @@
     "travelTip": "Xeric's talisman -> Hosidius",
     "guidanceSteps": [
       {
-        "description": "Travel to the Tithe Farm in Hosidius (Xeric talisman Xeric Heart or fairy ring CIR then south)",
+        "section": "Travel",
+        "description": "Travel to Tithe Farm in Hosidius via Xeric's talisman (Xeric's Heart) or fairy ring CIR then walk south. Requires 34% Hosidius favour and 34 Farming.",
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
@@ -15591,10 +15618,35 @@
         "completionDistance": 20
       },
       {
-        "description": "Plant and harvest Golovanova fruit to earn Tithe Farm points for rewards.",
+        "section": "Setup",
+        "description": "Bring seeds scaled to your Farming level (Golovanova at 34+, Logavano at 54+, Bologano at 74+), a watering can or Gricoller's can, and stamina potions for long sessions.",
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
+        "recommendedItemIds": [
+          13353,
+          13639
+        ],
+        "completionCondition": "MANUAL"
+      },
+      {
+        "section": "Skilling",
+        "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harvest when fully grown. Higher-tier seeds give more points per hour; aim for 74+ Tithe Farm points per round to trigger bonus rewards.",
+        "worldX": 1791,
+        "worldY": 3504,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "loopBackToStep": 2,
+        "loopCount": 0
+      },
+      {
+        "section": "Reward",
+        "description": "Spend Tithe Farm points at Gricoller's exchange for the Farmer's outfit (400 pts total), Seed box (250 pts), Herb sack (250 pts), or Gricoller's can (200 pts).",
+        "worldX": 1791,
+        "worldY": 3504,
+        "worldPlane": 0,
+        "npcId": 7638,
+        "interactAction": "Trade",
         "completionCondition": "MANUAL"
       }
     ],
@@ -16325,7 +16377,8 @@
     "travelTip": "Minigame tele -> Castle Wars",
     "guidanceSteps": [
       {
-        "description": "Travel to Castle Wars arena, south of Observatory.",
+        "section": "Travel",
+        "description": "Travel to Castle Wars via the Minigame teleport. The arena entrance is south of the Observatory.",
         "worldX": 2440,
         "worldY": 3089,
         "worldPlane": 0,
@@ -16333,7 +16386,8 @@
         "completionDistance": 20
       },
       {
-        "description": "Play Castle Wars by capturing the enemy flag and defending your own. Earn tickets to buy gold decorative armour from Lanthus",
+        "section": "Queue",
+        "description": "Enter a team portal (Saradomin, Zamorak, or Guthix for a balanced game). Wait in the lobby until the 20-minute game begins.",
         "worldX": 2440,
         "worldY": 3089,
         "worldPlane": 0,
@@ -16344,6 +16398,33 @@
           "Zamorak",
           "Guthix"
         ],
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionDistance": 5
+      },
+      {
+        "section": "Round",
+        "description": "Capture the enemy flag from their castle and return it to your own base to score tickets. Bring explosives to destroy barricades or use a catapult to slow attackers. Each successful capture earns 1 Castle Wars ticket.",
+        "worldX": 2440,
+        "worldY": 3089,
+        "worldPlane": 0,
+        "recommendedItemIds": [
+          4071,
+          4069,
+          4068
+        ],
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "The game has ended",
+        "loopBackToStep": 1,
+        "loopCount": 0
+      },
+      {
+        "section": "Reward",
+        "description": "Spend Castle Wars tickets at Lanthus's shop for decorative armour. Gold armour sets are the most expensive (500-800 pts per piece) and require many games.",
+        "worldX": 2440,
+        "worldY": 3089,
+        "worldPlane": 0,
+        "npcId": 1295,
+        "interactAction": "Trade",
         "completionCondition": "MANUAL"
       }
     ],
@@ -16390,7 +16471,8 @@
     "travelTip": "Minigame tele -> Soul Wars",
     "guidanceSteps": [
       {
-        "description": "Travel to Isle of Souls, west of Edgeville.",
+        "section": "Travel",
+        "description": "Travel to Isle of Souls via the Minigame teleport (Soul Wars) or the portal west of Edgeville.",
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
@@ -16398,7 +16480,8 @@
         "completionDistance": 20
       },
       {
-        "description": "Talk to Nomad or enter the Soul Wars Portal to join a game.",
+        "section": "Queue",
+        "description": "Talk to Nomad or enter the Soul Wars portal to join a team (blue or red). Wait in the lobby until the game starts.",
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
@@ -16408,6 +16491,32 @@
           "Join",
           "Yes"
         ],
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionDistance": 5
+      },
+      {
+        "section": "Round",
+        "description": "Kill enemies to collect soul fragments, then offer them at the Soul obelisk to weaken the opposing Avatar. When the Avatar reaches 0 soul fragments, attack and kill it. Use Protect from Magic when fighting the Avatar directly.",
+        "worldX": 2210,
+        "worldY": 2858,
+        "worldPlane": 0,
+        "recommendedItemIds": [
+          25340,
+          25346
+        ],
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "The game has ended",
+        "loopBackToStep": 1,
+        "loopCount": 0
+      },
+      {
+        "section": "Reward",
+        "description": "Collect Zeal tokens from Nomad after each game. Spend on the Ectoplasmator (2500), Soul cape (2500), or Unsired shards. The Lil' creator pet has a 1/400 drop rate from the reward chest.",
+        "worldX": 2210,
+        "worldY": 2858,
+        "worldPlane": 0,
+        "npcId": 8521,
+        "interactAction": "Trade",
         "completionCondition": "MANUAL"
       }
     ],
@@ -16714,7 +16823,8 @@
     "travelTip": "Minigame tele -> LMS",
     "guidanceSteps": [
       {
-        "description": "Travel to Ferox Enclave, north of Varrock in the Wilderness.",
+        "section": "Travel",
+        "description": "Travel to Ferox Enclave via the Minigame teleport (Last Man Standing). The LMS lobby is on the island east of the enclave.",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
@@ -16722,7 +16832,32 @@
         "completionDistance": 20
       },
       {
-        "description": "Play Last Man Standing - a battle royale minigame on the island east of Ferox Enclave. Earn points to buy the Halos and Dragon Claws ornament kit",
+        "section": "Queue",
+        "description": "Enter the LMS lobby building and choose Competitive or Casual mode. Competitive earns more points per match but requires staking coins to enter.",
+        "worldX": 3151,
+        "worldY": 3634,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionDistance": 5
+      },
+      {
+        "section": "Round",
+        "description": "Scavenge weapons, armour, and food from supply crates on the island. Fight other players; the last player standing wins. Prioritise securing food and a weapon early; loot defeated players mid-game.",
+        "worldX": 3151,
+        "worldY": 3634,
+        "worldPlane": 0,
+        "recommendedItemIds": [
+          24219,
+          24192
+        ],
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "The game has ended",
+        "loopBackToStep": 1,
+        "loopCount": 0
+      },
+      {
+        "section": "Reward",
+        "description": "Earn points per match (more for placements and kills). Spend at the LMS shop on Halos (450 pts), Ornate maul handle (15 pts), cosmetic paints, or the Guthixian icon (500 pts).",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
@@ -17107,7 +17242,8 @@
         "objectInteractAction": null,
         "highlightItemIds": null,
         "useItemOnObject": false,
-        "completionChatPattern": null
+        "completionChatPattern": null,
+        "section": "Travel"
       },
       {
         "description": "Play Trouble Brewing on Mos Le'Harmless. Brew 'rum' by collecting ingredients and operating the distillery. Earn Pieces of Eight",
@@ -17133,7 +17269,8 @@
         "objectInteractAction": null,
         "highlightItemIds": null,
         "useItemOnObject": false,
-        "completionChatPattern": null
+        "completionChatPattern": null,
+        "section": "Queue"
       },
       {
         "description": "Take 25 buckets from the workbench using Take-5 to fill with water for brewing",
@@ -17156,7 +17293,8 @@
         "objectInteractAction": "Take-Tool",
         "highlightItemIds": null,
         "useItemOnObject": false,
-        "completionChatPattern": null
+        "completionChatPattern": null,
+        "section": "Brewing"
       },
       {
         "description": "Fill buckets at the water pumps and use them in the brewing process",
@@ -17181,7 +17319,8 @@
           1925
         ],
         "useItemOnObject": true,
-        "completionChatPattern": null
+        "completionChatPattern": null,
+        "section": "Brewing"
       },
       {
         "description": "Climb ladder to upper floor",
@@ -17207,7 +17346,8 @@
         "objectInteractAction": "Climb-up",
         "highlightItemIds": null,
         "useItemOnObject": false,
-        "completionChatPattern": null
+        "completionChatPattern": null,
+        "section": "Brewing"
       },
       {
         "description": "Empty buckets of water into the hopper",
@@ -17247,7 +17387,8 @@
             2
           ]
         ],
-        "completionChatPattern": null
+        "completionChatPattern": null,
+        "section": "Brewing"
       },
       {
         "description": "Climb ladder back to ground floor",
@@ -17275,7 +17416,8 @@
         "useItemOnObject": false,
         "completionChatPattern": null,
         "loopBackToStep": 4,
-        "loopCount": 3
+        "loopCount": 3,
+        "section": "Brewing"
       },
       {
         "description": "AFK until the game ends, then spend Pieces of Eight on rewards",
@@ -17316,7 +17458,8 @@
               }
             }
           ]
-        }
+        },
+        "section": "Reward"
       }
     ],
     "cumulativeTrackItemId": 1929,
@@ -17443,7 +17586,8 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Barbarian Assault outpost (games necklace or fairy ring CLQ)",
+        "section": "Travel",
+        "description": "Travel to Barbarian Outpost north of Baxtorian Falls via the Minigame teleport (Barbarian Assault) or a games necklace.",
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
@@ -17452,20 +17596,41 @@
         "completionDistance": 15
       },
       {
-        "description": "Play rounds to earn honour points. Buy gambles from Commander Connad for rare pet chance",
+        "section": "Queue",
+        "description": "Talk to Captain Cain to join a team of 5. Choose your role: Attacker, Collector, Defender, or Healer. Each role uses a different mechanic and earns role-specific honour points per wave.",
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
+        "npcId": 5257,
+        "interactAction": "Talk-to",
         "dialogOptions": [
           "Attacker",
           "Defender",
           "Collector",
           "Healer"
         ],
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionDistance": 5
       },
       {
-        "description": "Buy rewards from Commander Connad",
+        "section": "Round",
+        "description": "Complete all 10 waves and defeat the Penance Queen. Always use the egg or bait type announced on your role's call panel - using the wrong type wastes points. On wave 10, Collectors must power the Egg launcher by depositing eggs into it to damage the Queen.",
+        "worldX": 2519,
+        "worldY": 3571,
+        "worldPlane": 0,
+        "recommendedItemIds": [
+          10551,
+          10553,
+          10555
+        ],
+        "completionCondition": "CHAT_MESSAGE_RECEIVED",
+        "completionChatPattern": "Congratulations, you've beaten the Penance Queen",
+        "loopBackToStep": 1,
+        "loopCount": 0
+      },
+      {
+        "section": "Reward",
+        "description": "Spend honour points at Commander Connad's shop: Fighter torso (1500 pts), Penance skirt (1500 pts), role hats (1100 pts each). Buy Gambles (500 pts) for a chance at the Pet penance queen (1/1000 per gamble).",
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
