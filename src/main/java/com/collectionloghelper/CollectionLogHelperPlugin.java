@@ -230,7 +230,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		panel = new CollectionLogHelperPanel(
 			config, data.getDatabase(), data.getCollectionState(), efficiency.getCalculator(), efficiency.getClueEstimator(),
-			itemManager, requirementsChecker, data.getDataSyncState(), data.getSlayerTaskState(),
+			itemManager, clientThread, requirementsChecker, data.getDataSyncState(), data.getSlayerTaskState(),
 			efficiency.getSlayerStrategyCalculator(), data.getPlayerInventoryState(), data.getPlayerBankState(),
 			efficiency.getDryStreakAnalyzer(),
 			(java.util.function.BiConsumer<CollectionLogSource, Integer>) this::activateGuidance,

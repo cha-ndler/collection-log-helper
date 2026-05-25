@@ -56,7 +56,8 @@ public class RequirementsCheckerTest
 	@Test
 	public void formatEnumName_mixedRomanNumerals()
 	{
-		assertEquals("Song Of The Elves IV", RequirementsChecker.formatEnumName("SONG_OF_THE_ELVES_IV"));
+		// "of" and "the" are connector words — they stay lowercase mid-name
+		assertEquals("Song of the Elves IV", RequirementsChecker.formatEnumName("SONG_OF_THE_ELVES_IV"));
 	}
 
 	@Test
@@ -69,7 +70,8 @@ public class RequirementsCheckerTest
 	public void formatEnumName_consecutiveUnderscores()
 	{
 		// Fairytale II has double underscore in enum: FAIRYTALE_II__CURE_A_QUEEN
-		assertEquals("Fairytale II Cure A Queen",
+		// "a" is a connector word so it stays lowercase mid-name
+		assertEquals("Fairytale II Cure a Queen",
 			RequirementsChecker.formatEnumName("FAIRYTALE_II__CURE_A_QUEEN"));
 	}
 
@@ -96,6 +98,43 @@ public class RequirementsCheckerTest
 	public void formatEnumName_romanNumeralVII()
 	{
 		assertEquals("Part VII", RequirementsChecker.formatEnumName("PART_VII"));
+	}
+
+	// #680 — connector words and apostrophe overrides
+
+	@Test
+	public void formatEnumName_connectorOf_isLowercase()
+	{
+		assertEquals("Shades of Mort'ton", RequirementsChecker.formatEnumName("SHADES_OF_MORTTON"));
+	}
+
+	@Test
+	public void formatEnumName_connectorThe_isLowercase()
+	{
+		// "the" mid-name stays lowercase; first word is always capitalised
+		assertEquals("Song of the Elves IV", RequirementsChecker.formatEnumName("SONG_OF_THE_ELVES_IV"));
+	}
+
+	@Test
+	public void formatEnumName_firstWordAlwaysCapitalised()
+	{
+		// Even when the first token is a connector word it must be capitalised;
+		// "and" in the middle stays lowercase
+		assertEquals("Of Mice and Men", RequirementsChecker.formatEnumName("OF_MICE_AND_MEN"));
+	}
+
+	@Test
+	public void formatEnumName_connectorAnd_isLowercase()
+	{
+		assertEquals("Rum Deal", RequirementsChecker.formatEnumName("RUM_DEAL")); // sanity — no connector
+		assertEquals("Rune and Ruin", RequirementsChecker.formatEnumName("RUNE_AND_RUIN")); // "and" lowercase
+	}
+
+	@Test
+	public void formatEnumName_dragonSlayerUnchanged()
+	{
+		// Regression: non-connector words still title-cased normally
+		assertEquals("Dragon Slayer", RequirementsChecker.formatEnumName("DRAGON_SLAYER"));
 	}
 
 	// =========================================================================
