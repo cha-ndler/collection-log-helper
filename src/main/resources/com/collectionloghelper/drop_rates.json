@@ -3903,35 +3903,56 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Varrock Sewers (manhole behind Varrock Palace or in Edgeville Dungeon)",
+        "description": "Bank in Varrock west bank. Required: Mossy key (farmed from Moss giants in Varrock Sewers / Brimhaven dungeon / Ardougne). Bring melee gear (Salve amulet (ei) is BiS - Bryophyta is undead), super combat, food, prayer potions, and an Amulet of glory for the return teleport",
+        "worldX": 3185,
+        "worldY": 3439,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [22374, 12695, 6685, 2434, 1704],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Varrock Sewers via the manhole behind Varrock Palace (preferred) or via the Edgeville Dungeon ladder. The manhole route lands you 10 tiles north of Bryophyta's gate",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
-        "travelTip": "Varrock teleport -> sewers",
-        "requiredItemIds": [
-          22374
-        ],
-        "completionCondition": "INVENTORY_HAS_ITEM",
-        "completionItemId": 22374
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "travelTip": "Varrock teleport -> Varrock Palace manhole -> sewers",
+        "section": "Travel"
       },
       {
-        "description": "Use the Mossy key on the gate to enter Bryophyta's lair.",
+        "description": "Use the Mossy key on the gate to enter Bryophyta's lair. The key is consumed on use - each kill needs a fresh key, so the farm rate is gated by moss giant key drops (~1/16)",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
         "objectId": 32534,
         "objectInteractAction": "Open",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "requiredItemIds": [22374],
+        "section": "Travel"
       },
       {
-        "description": "Kill Bryophyta. Requires mossy key to enter. Kill the Growthlings that heal her, use magic or ranged",
+        "description": "Kill Bryophyta. Use Protect from Melee and attack with a strong crush or slash weapon (Bryophyta has high stab defence). Kill the Growthlings the moment they spawn - each living Growthling heals Bryophyta for 3 HP per tick, so leaving one alive negates your DPS. Salve amulet (ei) is mandatory for the +20% melee bonus against this undead boss",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
         "npcId": 8195,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 8195
+        "completionNpcId": 8195,
+        "section": "Combat",
+        "recommendedItemIds": [4151, 12018, 6685, 2434, 385]
+      },
+      {
+        "description": "Teleport out via Amulet of glory or a Varrock teleport tab. Restock a fresh Mossy key + supplies before the next kill - the fight is gated by key drops, not supplies",
+        "worldX": 3185,
+        "worldY": 3439,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "ironKillTimeSeconds": 514
@@ -3959,35 +3980,56 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Edgeville Dungeon or Varrock Sewers hill giant area",
+        "description": "Bank in Edgeville. Required: Giant key (farmed from hill giants in Edgeville Dungeon or Varrock Sewers - ~1/64 drop rate). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport. The fight is short but Obor hits ~25 with melee, so brews are wasteful here - sharks are sufficient",
+        "worldX": 3093,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [20754, 12695, 385, 2434, 1704],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Edgeville Dungeon and descend to the hill giant area. Amulet of glory -> Edgeville then run east into the trapdoor north of the bank. The dungeon entrance puts you 8 tiles from Obor's gate",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
-        "travelTip": "Edgeville respawn/glory -> dungeon",
-        "requiredItemIds": [
-          20754
-        ],
-        "completionCondition": "INVENTORY_HAS_ITEM",
-        "completionItemId": 20754
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "travelTip": "Amulet of glory -> Edgeville -> trapdoor -> hill giant section",
+        "section": "Travel"
       },
       {
-        "description": "Use the Giant key on the gate to enter Obor's lair.",
+        "description": "Use the Giant key on the gate to enter Obor's lair. The key is consumed - each kill needs a fresh key, so per-trip farm rate is gated by hill giant key drops",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
         "objectId": 29486,
         "objectInteractAction": "Open",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "requiredItemIds": [20754],
+        "section": "Travel"
       },
       {
-        "description": "Kill Obor. Requires giant key to enter. Use Protect from Melee and a strong melee weapon",
+        "description": "Kill Obor. Use Protect from Melee and attack with the strongest melee weapon available - Obor has weak defence but a 25-damage smash auto. Stand under him to bait the melee animation; he occasionally throws a small boulder for ~8 ranged damage that ignores Protect from Melee. Sip prayer potion every ~3 kills to keep Protect from Melee active",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
         "npcId": 7416,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 7416
+        "completionNpcId": 7416,
+        "section": "Combat",
+        "recommendedItemIds": [4151, 11832, 6585, 385, 2434]
+      },
+      {
+        "description": "Teleport out via Amulet of glory after Obor dies. Restock a fresh Giant key + supplies before the next kill - the farm is bottlenecked by key drops, not by trip duration",
+        "worldX": 3093,
+        "worldY": 3493,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "ironKillTimeSeconds": 450
@@ -4711,22 +4753,45 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Chaos Elemental in deep Wilderness (level 50+). Use burning amulet to Lava Maze and run west",
+        "description": "Bank in Ferox Enclave or Edgeville. Bring cheap gear only - the Chaos Elemental disarms and unequips items, so risking BiS is wasteful. Standard kit is Karil's leathertop, ranged or DDS specials, looting bag, burning amulet, and a couple of sharks. Carry a glory for emergency teleport and a one-click logout setup",
+        "worldX": 3151,
+        "worldY": 3635,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [21167, 11941, 1704, 385, 2434],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to Rogues' Castle in deep Wilderness (level 50+). Rub the burning amulet for the Lava Maze teleport then run north-west to the castle ruin. Stay alert for PKers along the way - the Multi-combat band starts a few tiles north of Lava Maze",
         "worldX": 3261,
         "worldY": 3927,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Burning amulet -> Lava Maze, run north-west to Rogues' Castle",
+        "section": "Travel"
       },
       {
-        "description": "Kill the Chaos Elemental. Wear cheap gear - it can unequip your items. Use Protect from Magic and bring high-healing food",
+        "description": "Kill the Chaos Elemental. Use Protect from Magic, attack with ranged or a special-weapon setup, and pick loot back up immediately if you get disarmed. The boss heals modestly between phases but has no combat triggers. If you spot a PKer, log out at the south wall - the safe tile is on the outer perimeter of the ruin",
         "worldX": 3261,
         "worldY": 3927,
         "worldPlane": 0,
         "npcId": 2054,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 2054
+        "completionNpcId": 2054,
+        "section": "Combat",
+        "recommendedItemIds": [4827, 4151, 12924, 385, 1704]
+      },
+      {
+        "description": "Stash loot in the looting bag, then teleport out via glory or burning amulet. Recharge amulets at Ferox Enclave fountain and resupply from the bank before re-entering the Wilderness",
+        "worldX": 3151,
+        "worldY": 3635,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
@@ -4784,31 +4849,46 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Scorpion Pit in deep Wilderness (level ~53). Use burning amulet to Lava Maze and run south",
+        "description": "Bank in Ferox Enclave then travel to the Scorpion Pit in deep Wilderness (level ~53). Bring anti-venom+, a high-tier crush or stab weapon, prayer potions, food, and a Wilderness-cheap kit (Karil's leathertop / Black d'hide) - Scorpia's guardians inflict venom that ticks 6 per hit and burns through brews quickly. Burning amulet -> Lava Maze then run south-west; or web-walk down via the Chaos Elemental ladder. Scorpia is in multi-combat so a PKer team will land specs together - swap to a one-click logout if you spot dots on the minimap",
         "worldX": 3231,
         "worldY": 3936,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [3215, 3920, 3250, 10355, 0]
+        "completionZone": [3215, 3920, 3250, 10355, 0],
+        "travelTip": "Burning amulet -> Lava Maze, run south-west to Scorpion Pit",
+        "requiredItemIds": [21167, 5952, 1704, 385, 2434],
+        "section": "Travel"
       },
       {
-        "description": "Enter the Cavern to access Scorpia's underground lair",
+        "description": "Enter the Cavern to access Scorpia's underground lair. The cave is single-combat once you descend, which lets you absorb a single PK spec without instantly stacking out",
         "worldX": 3231,
         "worldY": 3936,
         "worldPlane": 0,
         "objectId": 26762,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill Scorpia. Watch for the healing prayer special and Scorpia's Guardians",
+        "description": "Kill Scorpia. Use Protect from Melee, attack with crush (Bandos godsword, Inquisitor's mace) or stab to bypass her defence, and pre-pot anti-venom+. At ~33% HP Scorpia spawns two Scorpia's Guardians that heal her - kill them on sight or DPS Scorpia faster than the heal tick. Sip super combat / overload mid-fight if you brought one",
         "worldX": 3233,
         "worldY": 10341,
         "worldPlane": 0,
         "npcId": 6615,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 6615
+        "completionNpcId": 6615,
+        "section": "Combat",
+        "recommendedItemIds": [11804, 11865, 6685, 5952, 2434]
+      },
+      {
+        "description": "Stash loot in the looting bag, climb out of the cavern, and teleport via burning amulet or glory. Recharge at Ferox Enclave fountain before re-entering",
+        "worldX": 3151,
+        "worldY": 3635,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ]
   },
@@ -4851,22 +4931,45 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Chaos Fanatic in the Wilderness (level 42). Use burning amulet to Bandit Camp and run north-west",
+        "description": "Bank in Ferox Enclave. Cheap-kit setup: Karil's leathertop or Black d'hide, ranged weapon, prayer potions, a few sharks, looting bag, and a glory + burning amulet. Chaos Fanatic is in single-combat, so the main PK risk is being stuck mid-kill when a roamer arrives - keep a one-click logout setup",
+        "worldX": 3151,
+        "worldY": 3635,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [21167, 11941, 1704, 385, 2434],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Chaos Fanatic camp in the Wilderness (level 42). Burning amulet -> Lava Maze then run south-west past the lava pits, or web-walk via the Mage of Zamorak teleport (Lvl-60 Magic). Watch for PKers along the canyon corridor",
         "worldX": 2979,
         "worldY": 3846,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Burning amulet -> Lava Maze, run south-west to the Chaos Fanatic camp",
+        "section": "Travel"
       },
       {
-        "description": "Kill the Chaos Fanatic. Use Protect from Magic and stand in melee range to avoid the multi-hit projectile",
+        "description": "Kill the Chaos Fanatic. Use Protect from Magic and stand 1-2 tiles away (range is fine) - the multi-hit projectile splash deals 4-12 if you cluster with the spawn point. The boss has a self-damage tantrum animation that briefly stuns it; capitalise with a special attack. Logout on the south rocks if a PKer triggers",
         "worldX": 2979,
         "worldY": 3846,
         "worldPlane": 0,
         "npcId": 6619,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 6619
+        "completionNpcId": 6619,
+        "section": "Combat",
+        "recommendedItemIds": [12924, 4151, 11865, 385, 2434]
+      },
+      {
+        "description": "Stash drops in the looting bag and teleport via burning amulet or glory. Recharge amulets at Ferox Enclave fountain and bank loot from the looting bag before the next trip",
+        "worldX": 3151,
+        "worldY": 3635,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ]
   },
@@ -8681,22 +8784,45 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Crazy Archaeologist in the Ruins of Camdozaal area (Wilderness level 23). Use Games necklace to Corporeal Beast and run south",
+        "description": "Bank in Ferox Enclave. Cheap-kit: Karil's leathertop / Black d'hide, melee or ranged weapon, prayer pots, sharks, looting bag, glory + burning amulet. The fight is short so a 5-6 minute trip kit is sufficient. Bring an extra glory for the emergency teleport tile",
+        "worldX": 3151,
+        "worldY": 3635,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [21167, 11941, 1704, 385, 2434],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Crazy Archaeologist ruins south of the Lava Maze (Wilderness level 23). Burning amulet -> Bandit Camp then run north-west, or web-walk via the south-of-Lava-Maze ladder. The ruin sits in single-combat so once Crazy is engaged a PKer needs to wait their turn",
         "worldX": 2975,
         "worldY": 3696,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Burning amulet -> Bandit Camp, run north-west to the ruins",
+        "section": "Travel"
       },
       {
-        "description": "Kill the Crazy archaeologist. Dodge the book rain special attack (move 2 tiles) and use Protect from Missiles",
+        "description": "Kill the Crazy archaeologist. Use Protect from Missiles to negate the basic ranged auto. When you see the 'Rain of knowledge!' overhead text, move at least 2 tiles in any direction within 2 ticks - the book rain hits every tile under the original cluster for 25+ damage and can stack-kill in cheap gear. Reset to your original tile after the rain lands. Sip a brew if you missed the dodge",
         "worldX": 2975,
         "worldY": 3696,
         "worldPlane": 0,
         "npcId": 6618,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 6618
+        "completionNpcId": 6618,
+        "section": "Combat",
+        "recommendedItemIds": [4151, 11865, 6685, 385, 2434]
+      },
+      {
+        "description": "Stash drops in the looting bag and teleport via glory or burning amulet. Recharge amulets at Ferox Enclave fountain before the next trip",
+        "worldX": 3151,
+        "worldY": 3635,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ]
   },
@@ -21673,28 +21799,51 @@
         "wikiPage": "Cow_slippers"
       }
     ],
-    "locationDescription": "Lumbridge cow field",
-    "travelTip": "Quetzal whistle -> Varlamore, or Civitas illa Fortis teleport",
+    "locationDescription": "Lumbridge cow field (post-quest Brutus encounter)",
+    "travelTip": "Lumbridge teleport -> cow field",
     "npcId": 15626,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Colosseum in Civitas illa Fortis, Varlamore. Use quetzal whistle to Varlamore",
+        "description": "Bank in Lumbridge. Required: 'The Ides of Milk' quest complete. Bring melee gear (any tier above mithril works - Brutus has low defence and ~200 HP), prayer potions, food, and a Lumbridge teleport. The Cow slippers / Bottomless milk bucket are joke drops with very low realistic engagement value, so cheap gear is fine",
+        "worldX": 3221,
+        "worldY": 3219,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [12695, 385, 2434, 4151, 1704],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Lumbridge cow field. Lumbridge teleport puts you 12 tiles south of Brutus' spawn - run north past the chicken coop and through the gate into the cow pen",
         "worldX": 3263,
         "worldY": 3297,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Lumbridge teleport -> run north into the cow pen",
+        "section": "Travel"
       },
       {
-        "description": "Kill Brutus. This is a straightforward melee boss. Use Protect from Melee and bring high-level gear",
+        "description": "Kill Brutus. Use Protect from Melee and attack with any decent melee weapon - Brutus is a straightforward fight with only a slam auto-attack and a low-damage stomp. Sip prayer potion every 4-5 kills. The fight is designed as a joke encounter for the Mooleta / Cow slippers cosmetic drops; do not waste BiS supplies",
         "worldX": 3263,
         "worldY": 3297,
         "worldPlane": 0,
         "npcId": 15626,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 15626
+        "completionNpcId": 15626,
+        "section": "Combat",
+        "recommendedItemIds": [4151, 11865, 6585, 385, 2434]
+      },
+      {
+        "description": "Pick up any drops and teleport back to Lumbridge to restock. Brutus respawns immediately - the per-trip restock is gated only by your potion / food supply",
+        "worldX": 3221,
+        "worldY": 3219,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "afkLevel": 0
@@ -21755,31 +21904,55 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Shellbane Gryphon Cave, The Great Conch.",
+        "description": "Bank in Civitas illa Fortis (Varlamore). Required: 51 Slayer and 'Troubled Tortugans' quest complete. Bring ranged or magic gear (Shellbane Gryphon resists melee), prayer potions, food, Slayer helmet (i) on-task for the bonus, and a Quetzal whistle for the return teleport",
+        "worldX": 1626,
+        "worldY": 3093,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [24417, 11865, 6685, 2434, 12924],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to The Great Conch and locate the Shellbane Gryphon Cave entrance on the eastern beach. Quetzal whistle -> Great Conch then run east to the cliff-side cave mouth",
         "worldX": 13993,
         "worldY": 9901,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Quetzal whistle -> The Great Conch, run east to the cave mouth",
+        "section": "Travel"
       },
       {
-        "description": "Enter the cave and fight the Shellbane Gryphon. Requires 51 Slayer. Use Protect from Melee",
+        "description": "Enter the cave to descend to the Shellbane Gryphon arena. The cave is instanced, so no other players will interfere with the fight",
         "worldX": 13993,
         "worldY": 9901,
         "worldPlane": 0,
         "objectId": 58439,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
       },
       {
-        "description": "Kill the Shellbane Gryphon. Use Protect from Melee and dodge the wing gust attack. 51 Slayer required",
+        "description": "Kill the Shellbane Gryphon. Use Protect from Melee for the slam auto, then swap to Protect from Missiles when the gryphon takes flight for the wing-gust special. Attack with ranged (blowpipe / crossbow) or magic - melee is heavily resisted. Sip ranging / magic potion mid-fight to keep DPS high. On-task with Slayer helmet (i) for the +16.67% damage bonus is the standard farm setup",
         "worldX": 13993,
         "worldY": 9901,
         "worldPlane": 0,
         "npcId": 14860,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 14860
+        "completionNpcId": 14860,
+        "section": "Combat",
+        "recommendedItemIds": [12924, 11865, 6685, 2434, 385]
+      },
+      {
+        "description": "Pick up the Gryphon feather (1/kill) and any rares, then exit the cave and teleport via Quetzal whistle to restock. Belle's folly (tarnished) is the main unique chase at 1/256",
+        "worldX": 1626,
+        "worldY": 3093,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
     "rewardType": "MIXED",
@@ -22201,22 +22374,45 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Fossil Island via boat from Digsite. The Deranged Archaeologist is on the south coast",
+        "description": "Bank in Varrock east bank or use the Bank deposit chest on Fossil Island (Museum Camp). Bring melee or ranged gear, prayer potions, food, and a Digsite pendant for the return teleport. The fight is non-Wilderness so BiS gear is safe to bring - no PK risk and no item loss on death within the island",
+        "worldX": 3253,
+        "worldY": 3420,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "requiredItemIds": [23713, 12695, 6685, 2434, 11865],
+        "section": "Bank"
+      },
+      {
+        "description": "Travel to the Tar Swamp on the south coast of Fossil Island. Digsite pendant -> Fossil Island then run south through the Mushroom Forest. Bone Voyage must be complete to access Fossil Island",
         "worldX": 3683,
         "worldY": 3706,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Digsite pendant -> Fossil Island, run south through Mushroom Forest",
+        "section": "Travel"
       },
       {
-        "description": "Kill the Deranged Archaeologist. Dodge the book rain attack and use Protect from Missiles. Easier version of Crazy archaeologist",
+        "description": "Kill the Deranged Archaeologist. Use Protect from Missiles to negate the basic ranged auto. When the 'Learn to read!' overhead text appears, step 2+ tiles within 2 ticks to dodge the book rain - same mechanic as Crazy archaeologist but the splash zone is slightly smaller. This is a popular early-account boss for the Fedora cosmetic and the Steel ring slayer-task drop",
         "worldX": 3683,
         "worldY": 3706,
         "worldPlane": 0,
         "npcId": 7806,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 7806
+        "completionNpcId": 7806,
+        "section": "Combat",
+        "recommendedItemIds": [12924, 11865, 6585, 385, 2434]
+      },
+      {
+        "description": "Teleport out via Digsite pendant after the kill. Restock at Varrock east bank or the Fossil Island deposit box before the next trip",
+        "worldX": 3253,
+        "worldY": 3420,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ]
   },
