@@ -13119,19 +13119,24 @@
     "travelTip": "Fairy ring CIR -> Karuulm",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm near Konar (fairy ring CIR). Open Brimstone chests with brimstone keys",
+        "description": "Travel to Mount Karuulm near Konar (fairy ring CIR). Bring brimstone keys earned from Konar slayer tasks.",
         "worldX": 1309,
         "worldY": 3785,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Open the Brimstone chest with brimstone keys earned from Konar slayer tasks.",
         "worldX": 1309,
         "worldY": 3785,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Open chest",
+        "requiredItemIds": [
+          23083
+        ]
       }
     ]
   },
@@ -13170,19 +13175,24 @@
     "travelTip": "Obelisk -> lvl 35 Wildy",
     "guidanceSteps": [
       {
-        "description": "Travel to the Wilderness chest locations (level 23 or 39). Use Larran's keys from Wilderness Slayer",
+        "description": "Travel to the ship west of Pirates' Hideout (level 39 Wilderness). Use Larran's keys from Wilderness Slayer creatures assigned by Krystilia.",
         "worldX": 3018,
         "worldY": 3955,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Open Larran's big chest with Larran's keys dropped by Wilderness slayer creatures.",
         "worldX": 3018,
         "worldY": 3955,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Open chest",
+        "requiredItemIds": [
+          23490
+        ]
       }
     ],
     "ironKillTimeSeconds": 1029
@@ -13279,19 +13289,24 @@
     "travelTip": "Burning amulet -> Bandit Camp",
     "guidanceSteps": [
       {
-        "description": "Travel to East of Chaos Temple, level 14 Wilderness.",
+        "description": "Travel to the zombie pirate ship east of the Chaos Temple (level 14 Wilderness). Bring zombie pirate keys dropped by zombie pirates on the ship.",
         "worldX": 3373,
         "worldY": 3625,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Kill zombie pirates and use locker keys on the pirate lockers for loot.",
         "worldX": 3373,
         "worldY": 3625,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Open locker",
+        "requiredItemIds": [
+          29449
+        ]
       }
     ]
   },
@@ -18510,21 +18525,28 @@
     "travelTip": "Digsite pendant -> Fossil Island",
     "guidanceSteps": [
       {
-        "description": "Travel to House on the Hill, Fossil Island.",
+        "description": "Travel to the House on the Hill on Fossil Island (digsite pendant or barge). Complete island activities to earn notes: build camp utilities, use magic mushtrees, use enriched bones on machines.",
         "worldX": 3774,
         "worldY": 3819,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Search the House on the Hill displays and complete activities for fossil notes.",
         "worldX": 3774,
         "worldY": 3819,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Collect notes"
       }
-    ]
+    ],
+    "requirements": {
+      "quests": [
+        "BONE_VOYAGE"
+      ]
+    }
   },
   {
     "name": "Glough's Experiments",
@@ -18827,23 +18849,33 @@
     "travelTip": "Port Sarim docks -> sail",
     "guidanceSteps": [
       {
-        "description": "Sail to discoverable Sailing islands and search for Lost Schematics. Higher Sailing unlocks more islands",
+        "description": "Sail to discoverable islands via Port Sarim docks. Higher Sailing level unlocks more islands and schematic types.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Find lost schematics while exploring islands during Sailing voyages.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Find schematics"
       }
     ],
     "rewardType": "SHOP",
-    "pointsPerHour": 2
+    "pointsPerHour": 2,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 1
+        }
+      ]
+    }
   },
   {
     "name": "Monkey Backpacks",
@@ -18922,19 +18954,21 @@
     "travelTip": "Fairy ring CLR -> Ape Atoll",
     "guidanceSteps": [
       {
-        "description": "Travel to the Ape Atoll Agility Course (fairy ring CLR then navigate to course). Complete laps for monkey pieces",
+        "description": "Travel to the Ape Atoll Agility Course (fairy ring CLR, requires Monkey Madness II). Course starts at the top of the agility ladder.",
         "worldX": 2764,
         "worldY": 2703,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
         "description": "Complete laps of the Ape Atoll Agility Course to earn monkey backpack variants.",
         "worldX": 2764,
         "worldY": 2703,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Complete laps"
       }
     ],
     "rewardType": "MILESTONE",
@@ -19982,23 +20016,33 @@
     "travelTip": "Teleport crystal -> Prifddinas",
     "guidanceSteps": [
       {
-        "description": "Travel to Elven Crystal Chest in Prifddinas.",
+        "description": "Travel to the Tower of Voices upper level in Prifddinas (teleport crystal or enhanced crystal teleport seed). Bring enhanced crystal keys.",
         "worldX": 3272,
         "worldY": 6084,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
         "description": "Open the Elven Crystal Chest in Prifddinas.",
         "worldX": 3272,
         "worldY": 6084,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Open chest",
+        "requiredItemIds": [
+          23951
+        ]
       }
     ],
     "aggregated": false,
-    "ironKillTimeSeconds": 600
+    "ironKillTimeSeconds": 600,
+    "requirements": {
+      "quests": [
+        "SONG_OF_THE_ELVES"
+      ]
+    }
   },
   {
     "name": "Miscellaneous",
