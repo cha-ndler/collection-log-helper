@@ -18124,29 +18124,42 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Feldip Hills south of Rantz (fairy ring AKS). Bring ogre bellows and bloated toads",
+        "description": "Travel to the Feldip Hills south of Rantz (fairy ring AKS). Bank for ogre bellows and an ogre bow (or comp ogre bow) before travelling. Bring bloated toads as bait.",
         "worldX": 2387,
         "worldY": 3040,
         "worldPlane": 0,
         "requiredItemIds": [
-          2883
+          2883,
+          2886
         ],
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Hunt and kill Chompy birds in the Feldip Hills using ogre bellows + bloated toads. Need Western Provinces diary kills for elite hats",
+        "description": "Hunt and kill Chompy birds using bloated toads as bait (place toad on the ground near a pond). Claim hats from Rantz at kill milestones (30 kills for first hat, up to 4000 for the final set). Elite Western Provinces Diary gives a 1/500 Chompy chick pet chance per kill.",
         "worldX": 2387,
         "worldY": 3040,
         "worldPlane": 0,
         "npcId": 1475,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 1475
+        "completionNpcId": 1475,
+        "recommendedItemIds": [
+          2541,
+          2883,
+          4740
+        ],
+        "section": "Combat"
       }
     ],
     "rewardType": "MILESTONE",
-    "afkLevel": 1
+    "afkLevel": 1,
+    "requirements": {
+      "quests": [
+        "BIG_CHOMPY_BIRD_HUNTING"
+      ]
+    }
   },
   {
     "name": "Forestry",
@@ -18576,31 +18589,40 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Crash Site Cavern entrance, north-west of the Grand Tree.",
-        "worldX": 2027,
-        "worldY": 5613,
+        "description": "Travel to the Grand Tree in the Gnome Stronghold (spirit tree). Head north-west to the Crash Site Cavern entrance.",
+        "worldX": 2462,
+        "worldY": 3495,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Enter the Crash Site Cavern beneath the Gnome Stronghold via the entrance north of the Tree Gnome Village",
-        "worldX": 2027,
-        "worldY": 5613,
+        "description": "Climb down into the Crash Site Cavern through the entrance north-west of the Grand Tree.",
+        "worldX": 2130,
+        "worldY": 5647,
         "worldPlane": 0,
         "objectId": 28686,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Kill Glough's Experiments.",
+        "description": "Kill Glough's Experiments in the Crash Site Cavern. They use melee and ranged attacks. Bring antifire protection and Protect from Missiles. Zenyte shard is the primary rare drop.",
         "worldX": 2130,
         "worldY": 5647,
         "worldPlane": 0,
         "npcId": 7144,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 7144
+        "completionNpcId": 7144,
+        "recommendedItemIds": [
+          2452,
+          2436,
+          379
+        ],
+        "section": "Combat"
       }
     ]
   },
@@ -21062,24 +21084,29 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Warriors' Guild in Burthorpe",
+        "description": "Travel to the Warriors' Guild in Burthorpe (games necklace). Bring warrior guild tokens to access the Cyclopes room.",
         "worldX": 2849,
         "worldY": 3543,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "requiredItemIds": [
+          8851
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Climb the stairs to the top floor Cyclopes room. Bring warrior guild tokens",
+        "description": "Climb the stairs to the top-floor Cyclopes room (north-east of the guild).",
         "worldX": 2849,
         "worldY": 3543,
         "worldPlane": 2,
         "objectId": 16671,
         "objectInteractAction": "Climb-up",
-        "completionCondition": "PLAYER_ON_PLANE"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Travel"
       },
       {
-        "description": "Kill Cyclopes for defender drops. Each kill costs 10 warrior guild tokens",
+        "description": "Kill Cyclopes for defender drops. Each kill costs 10 warrior guild tokens. Hold the current tier defender in inventory to unlock the next tier. Protect from Melee recommended.",
         "perItemStepDescription": {
           "8844": "Kill Cyclopes (no prerequisite) to receive a Bronze defender and start the chain.",
           "8845": "Kill Cyclopes while holding a Bronze defender in inventory to receive an Iron defender.",
@@ -21096,9 +21123,27 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2137,
         "npcId": 2137,
-        "interactAction": "Attack"
+        "interactAction": "Attack",
+        "recommendedItemIds": [
+          8851,
+          379,
+          2436
+        ],
+        "section": "Combat"
       }
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "ATTACK",
+          "level": 65
+        },
+        {
+          "skill": "STRENGTH",
+          "level": 65
+        }
+      ]
+    }
   },
   {
     "name": "Elder Chaos Druids",
@@ -21137,22 +21182,29 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Elder Chaos Temple, Wilderness.",
+        "description": "Travel to the Elder Chaos Temple in the Wilderness (burning amulet to Chaos Temple, level 13 wilderness). Bring Protect Item prayer and an escape teleport.",
         "worldX": 3232,
         "worldY": 3621,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Kill Elder Chaos Druids in the Wilderness (level 13). They drop the Elder chaos robe set. Watch for PKers",
+        "description": "Kill Elder Chaos Druids at the Chaos Temple (level 13 Wilderness). They drop the Elder chaos robe set. Watch for PKers -- keep Protect Item active and have an escape teleport ready.",
         "worldX": 3232,
         "worldY": 3621,
         "worldPlane": 0,
         "npcId": 6607,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 6607
+        "completionNpcId": 6607,
+        "recommendedItemIds": [
+          2436,
+          3040,
+          379
+        ],
+        "section": "Combat"
       }
     ]
   },
@@ -21683,22 +21735,31 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Tower of Life, south of Ardougne (Eye of newt + Feather).",
+        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring raw chicken and eye of newt as ingredients.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          2138,
+          219
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Create and kill Newtroosts in the Tower of Life. Use raw chicken + eye of newt on the altar",
+        "description": "Place raw chicken and eye of newt on the Altar of Life to create a Newtroost, then kill it. Use Protect from Melee if food is running low.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "npcId": 3605,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 3605
+        "completionNpcId": 3605,
+        "recommendedItemIds": [
+          379
+        ],
+        "section": "Combat"
       }
     ]
   },
@@ -21744,22 +21805,31 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Tower of Life, south of Ardougne (Cowhide + Unicorn horn).",
+        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring raw beef and unicorn horn as ingredients.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          2132,
+          237
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Create and kill Unicows in the Tower of Life. Use cowhide + unicorn horn on the altar",
+        "description": "Place raw beef and unicorn horn on the Altar of Life to create a Unicow, then kill it.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "npcId": 3601,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 3601
+        "completionNpcId": 3601,
+        "recommendedItemIds": [
+          379
+        ],
+        "section": "Combat"
       }
     ]
   },
@@ -21805,22 +21875,31 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Tower of Life, south of Ardougne (Red spiders' eggs + Raw sardine).",
+        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring red spiders' eggs and raw sardine as ingredients.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          223,
+          331
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Create and kill Spidines in the Tower of Life. Use red spider eggs + raw sardine on the altar",
+        "description": "Place red spiders' eggs and raw sardine on the Altar of Life to create a Spidine, then kill it.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "npcId": 3602,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 3602
+        "completionNpcId": 3602,
+        "recommendedItemIds": [
+          379
+        ],
+        "section": "Combat"
       }
     ]
   },
@@ -21866,22 +21945,31 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Tower of Life, south of Ardougne (Raw swordfish + Raw chicken).",
+        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring raw swordfish and raw chicken as ingredients.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          371,
+          2138
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Create and kill Swordchicks in the Tower of Life. Use raw chicken + metal sword on the altar",
+        "description": "Place raw swordfish and raw chicken on the Altar of Life to create a Swordchick, then kill it.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "npcId": 3603,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 3603
+        "completionNpcId": 3603,
+        "recommendedItemIds": [
+          379
+        ],
+        "section": "Combat"
       }
     ]
   },
@@ -21927,22 +22015,31 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Tower of Life, south of Ardougne (Raw jubbly + Raw lobster).",
+        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring raw jubbly and raw lobster as ingredients. Raw jubbly requires Recipe for Disaster partial completion.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          7566,
+          377
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Create and kill Jubsters in the Tower of Life. Use raw shrimps + raw cake on the altar",
+        "description": "Place raw jubbly and raw lobster on the Altar of Life to create a Jubster, then kill it.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "npcId": 3604,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 3604
+        "completionNpcId": 3604,
+        "recommendedItemIds": [
+          379
+        ],
+        "section": "Combat"
       }
     ]
   },
@@ -21988,22 +22085,31 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Tower of Life, south of Ardougne (Raw cave eel + Giant frog legs).",
+        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring raw lobster and red spiders' eggs as ingredients.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "requiredItemIds": [
+          377,
+          223
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Create and kill Frogeels in the Tower of Life. Use raw cave eel + giant frog legs on the altar",
+        "description": "Place raw lobster and red spiders' eggs on the Altar of Life to create a Frogeel, then kill it.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "npcId": 3600,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 3600
+        "completionNpcId": 3600,
+        "recommendedItemIds": [
+          379
+        ],
+        "section": "Combat"
       }
     ]
   },
@@ -30233,15 +30339,16 @@
     "travelTip": "Barbarian Outpost -> dive into whirlpool",
     "guidanceSteps": [
       {
-        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost.",
+        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost (games necklace). Barbarian Fishing training is required to dive into the whirlpool.",
         "worldX": 2512,
         "worldY": 3509,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
-        "description": "Dive into the whirlpool to enter the Ancient Cavern.",
+        "description": "Dive into the whirlpool south of Otto's Grotto to enter the Ancient Cavern.",
         "worldX": 2512,
         "worldY": 3509,
         "worldPlane": 0,
@@ -30250,17 +30357,24 @@
           25275
         ],
         "objectInteractAction": "Dive-in",
-        "completionCondition": "MANUAL"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Travel"
       },
       {
-        "description": "Travel to the Ancient Cavern beneath Baxtorian Falls and kill mithril dragons.",
+        "description": "Kill mithril dragons in the Ancient Cavern. Use extended antifire and Protect from Magic. Chewed bones unlock the Ourg bones prayer XP method. Ancient pages and Dragon full helm are the rarest drops.",
         "worldX": 1745,
         "worldY": 5323,
         "worldPlane": 0,
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2919,
         "npcId": 2919,
-        "interactAction": "Attack"
+        "interactAction": "Attack",
+        "recommendedItemIds": [
+          11951,
+          2436,
+          379
+        ],
+        "section": "Combat"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -30323,22 +30437,32 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Lithkren Vault, accessed via Digsite pendant.",
+        "description": "Travel to Lithkren Vault using a Digsite pendant (4). The vault entrance is on Lithkren island.",
         "worldX": 1568,
         "worldY": 5062,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "requiredItemIds": [
+          11194
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Travel to the Lithkren Vault and kill adamant dragons.",
+        "description": "Kill adamant dragons in the Lithkren Vault. Use extended antifire or super antifire and Protect from Magic. Dragonbreath is lethal without antifire protection. Dragon metal slice and Dragon limbs are the rare drops.",
         "worldX": 1568,
         "worldY": 5062,
         "worldPlane": 0,
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 8030,
         "npcId": 8030,
-        "interactAction": "Attack"
+        "interactAction": "Attack",
+        "recommendedItemIds": [
+          11951,
+          2436,
+          379
+        ],
+        "section": "Combat"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -30401,22 +30525,32 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Lithkren Vault, accessed via Digsite pendant.",
+        "description": "Travel to Lithkren Vault using a Digsite pendant (4). The vault entrance is on Lithkren island.",
         "worldX": 1587,
         "worldY": 5075,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "requiredItemIds": [
+          11194
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Travel to the Lithkren Vault and kill rune dragons.",
+        "description": "Kill rune dragons in the Lithkren Vault. Use extended antifire or super antifire and Protect from Magic. Move away from electric sparks during their special attack. Dragon metal lump and Dragon limbs are the rare drops.",
         "worldX": 1587,
         "worldY": 5075,
         "worldPlane": 0,
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 8031,
         "npcId": 8031,
-        "interactAction": "Attack"
+        "interactAction": "Attack",
+        "recommendedItemIds": [
+          11951,
+          2436,
+          379
+        ],
+        "section": "Combat"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -30462,36 +30596,49 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Corsair Cove Dungeon (spirit tree to Corsair Cove or charter ship)",
+        "description": "Travel to the Corsair Cove (spirit tree or charter ship from Port Sarim). Head south to the cave dungeon entrance.",
         "worldX": 2459,
         "worldY": 9488,
         "worldPlane": 2,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Enter the dungeon through the cave entrance south of the cove",
+        "description": "Enter the Corsair Cove Dungeon through the cave entrance south of the cove.",
         "worldX": 2459,
         "worldY": 9488,
         "worldPlane": 2,
         "objectId": 31791,
         "objectInteractAction": "Enter",
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
-        "description": "Kill Ogress Shamans in the Corsair Cove Dungeon",
+        "description": "Kill Ogress Shamans in the Corsair Cove Dungeon. They use Magic attacks -- Protect from Magic strongly recommended. Shaman mask is the rare cosmetic drop.",
         "worldX": 2459,
         "worldY": 9488,
         "worldPlane": 2,
         "npcId": 7991,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 7991
+        "completionNpcId": 7991,
+        "recommendedItemIds": [
+          2436,
+          379
+        ],
+        "section": "Combat"
       }
     ],
     "mutuallyExclusiveSources": [
       "Miscellaneous"
-    ]
+    ],
+    "requirements": {
+      "quests": [
+        "THE_CORSAIR_CURSE"
+      ]
+    }
   },
   {
     "name": "Armoured Zombie",
@@ -30549,22 +30696,28 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Zemouregal's Fort, north of Varrock.",
+        "description": "Travel to Zemouregal's Fort, north of Varrock (Varrock teleport, then walk north past the Grand Exchange). Requires Defender of Varrock quest.",
         "worldX": 3566,
         "worldY": 3390,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Travel"
       },
       {
-        "description": "Kill Armoured Zombies at Zemouregal's Fort",
+        "description": "Kill Armoured Zombies at Zemouregal's Fort. Use Crumble Undead or melee. Broken zombie axe, Broken zombie helmet, and Champion scroll (zombie) are the rare drops.",
         "worldX": 3566,
         "worldY": 3390,
         "worldPlane": 0,
         "npcId": 14113,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 14113
+        "completionNpcId": 14113,
+        "recommendedItemIds": [
+          565,
+          379
+        ],
+        "section": "Combat"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -30766,15 +30919,16 @@
     "travelTip": "Barbarian Outpost -> dive into whirlpool",
     "guidanceSteps": [
       {
-        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost.",
+        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost (games necklace). Barbarian Fishing training is required to dive into the whirlpool.",
         "worldX": 2512,
         "worldY": 3509,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "section": "Travel"
       },
       {
-        "description": "Dive into the whirlpool to enter the Ancient Cavern.",
+        "description": "Dive into the whirlpool south of Otto's Grotto to enter the Ancient Cavern.",
         "worldX": 2512,
         "worldY": 3509,
         "worldPlane": 0,
@@ -30783,17 +30937,23 @@
           25275
         ],
         "objectInteractAction": "Dive-in",
-        "completionCondition": "MANUAL"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Travel"
       },
       {
-        "description": "Travel to the Ancient Cavern and kill waterfiends.",
+        "description": "Kill waterfiends in the lower level of the Ancient Cavern. Use Protect from Magic. Mist battlestaff is the rare drop.",
         "worldX": 1745,
         "worldY": 5323,
         "worldPlane": 0,
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2916,
         "npcId": 2916,
-        "interactAction": "Attack"
+        "interactAction": "Attack",
+        "recommendedItemIds": [
+          2436,
+          379
+        ],
+        "section": "Combat"
       }
     ],
     "mutuallyExclusiveSources": [
