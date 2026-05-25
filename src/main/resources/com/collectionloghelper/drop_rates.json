@@ -16793,7 +16793,7 @@
     "travelTip": "Quetzal Transport System -> Varlamore (requires Twilight's Promise); fallback: Achilka's boats to Gloomthorn Trail from Kastori or Tal Teklan",
     "requirements": {
       "quests": [
-        "VALE_TOTEMS_MINIQUEST"
+        "VALE_TOTEMS"
       ],
       "skills": [
         {
