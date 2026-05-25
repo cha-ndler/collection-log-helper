@@ -116,6 +116,46 @@ This bar is the authoring target for [Tier D (D2-D4)](../ROADMAP.md#tier-d--cove
 
 ---
 
+## Long-tail bar (relaxed, for low-engagement sources)
+
+The 10-element bar above is calibrated for content the community actively grinds. For sources where realistic per-account farming time is sub-hour-per-year -- random-event drops, salvage-table chances, sub-page clue rare-reward tables, low-level slayer monsters -- several elements are inappropriate or wasteful. Requiring a full 10-element treatment for these sources costs authoring effort with no meaningful player benefit.
+
+**The long-tail bar** is an explicit alternative to the full bar. It consists of five elements:
+
+| Element | Required? | Notes |
+|---------|-----------|-------|
+| **E1 -- Travel tip with teleport hierarchy** | Yes | Same standard as the full bar. Even a one-step "use fairy ring" note is better than nothing. |
+| **E2 -- Tile-sequence or auto-arrival waypoint** | Yes | Every meaningful location change must use `ARRIVE_AT_TILE` or equivalent. `MANUAL` only where state cannot be detected. |
+| **E6 -- Bank-and-return detection** | When applicable | Required whenever a consumable key or access item can be absent from inventory. Omit only if the source is reachable and completable with zero special items. |
+| **E8 -- Account-state prerequisites** | Yes | `requirements.quests` and `requirements.skills` must reflect the minimum access gate. |
+| **E9 -- Drop rate confidence** | Yes | Sourced from the correct tier per decision D-03. `independent` and `rollsPerKill` set correctly. |
+
+**Elements dropped vs the full bar, and why:**
+
+- **E3 (gear recommendation / skilling kit)** -- N/A for sources with no combat mechanic (salvage tables, chest opens, random-event drops). Where E3 does apply (low-level slayer monsters), a one-sentence note suffices -- the full-bar standard is overkill.
+- **E4 (kill-loop / activity-loop detection)** -- N/A for one-shot interactions: open chest, hand in salvage, receive random-event drop. No cycle exists to loop.
+- **E5 (safespot or strategy note)** -- N/A for sources with no combat mechanic. Low-level slayer monsters with no phase mechanics or punishing specials also qualify; use judgment.
+- **E7 (inventory loadout)** -- Often empty for sources reachable in starter gear. Omit when the source requires no consumable items to enter or complete. If a key or access item is needed, E6 bank-and-return already covers it.
+- **E10 (author date stamp and source citations)** -- Still required, but a single citation line covering an entire batch of similar sources (e.g., all eight salvage tables in one PR description) is acceptable rather than per-source citations.
+
+**Which D4 batches author against the long-tail bar:**
+
+Batches 5 and 6 (low- and mid-high slayer-monster clusters), Batch 8 (salvage tables), parts of Batches 9 and 10 (Creature Creation and "open chest" OTHER sources), and the clue rare-reward sub-tables in Batch 12 -- approximately 80 of the 144 D4 sources (~55 %). See the [D4 scoping doc §4 depth-bar exemption summary](d4-long-tail-scoping.md#4-batching-plan) for the per-batch breakdown.
+
+Everything not listed above -- Batches 1 (wilderness bosses), 2 (raid mode variants), 3 and 4 (skilling), 7 (recent slayer additions), 11 (Sailing-adjacent), the minigame half of Batch 12, and all D2/D3 sources -- stays at the full 10-element bar.
+
+**Long-tail bar checklist:**
+
+Before marking a long-tail source authored, verify all five required elements are present or the "when applicable" element is explicitly waived (with reason):
+
+- [ ] **Travel tip** -- `travelTip` set; at least one `waypoints` fallback if the primary tip requires a quest unlock
+- [ ] **Auto-arrival** -- every meaningful location change uses `ARRIVE_AT_TILE`, `ARRIVE_AT_ZONE`, or `PLAYER_ON_PLANE`; `MANUAL` only where state cannot be detected
+- [ ] **Bank-and-return** (when applicable) -- any consumable access item declared in `requiredItemIds` on the earliest step that needs it; waived with reason when the source needs no special items
+- [ ] **Prerequisites** -- `requirements.quests` and `requirements.skills` reflect the minimum access gate
+- [ ] **Drop rate confidence** -- rates sourced from the correct tier; `independent` and `rollsPerKill` set correctly; PR description cites source
+
+---
+
 ## Deep guidance checklist
 
 Before marking a source fully authored, verify all 10 elements are present or explicitly waived (with reason):
