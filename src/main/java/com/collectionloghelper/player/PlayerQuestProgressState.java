@@ -33,6 +33,7 @@ import net.runelite.api.Client;
 import net.runelite.api.Quest;
 import net.runelite.api.QuestState;
 import net.runelite.api.events.VarbitChanged;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.Subscribe;
 
 /**
@@ -82,6 +83,7 @@ public class PlayerQuestProgressState implements QuestProgressState
 	private static final int BIOHAZARD_COMPLETE_VALUE = 30;
 
 	private final Client client;
+	private final ClientThread clientThread;
 
 	/**
 	 * Cached snapshot of all milestone states.
@@ -90,10 +92,17 @@ public class PlayerQuestProgressState implements QuestProgressState
 	 */
 	private volatile Map<QuestSubMilestone, Boolean> snapshot = emptySnapshot();
 
+	/**
+	 * Guard ensuring the per-tick varbit storm coalesces into a single deferred
+	 * refresh. Accessed only on the client thread, so no volatile is needed.
+	 */
+	private boolean refreshQueued;
+
 	@Inject
-	PlayerQuestProgressState(Client client)
+	PlayerQuestProgressState(Client client, ClientThread clientThread)
 	{
 		this.client = client;
+		this.clientThread = clientThread;
 	}
 
 	@Override
@@ -138,11 +147,31 @@ public class PlayerQuestProgressState implements QuestProgressState
 	 * IDs span the full varbit space and change at every game update, so a
 	 * targeted filter is brittle. The full refresh is cheap (one varp read +
 	 * a small fixed number of {@code QUEST_STATUS_GET} script calls).
+	 *
+	 * <p>The refresh is deferred onto the client thread: {@code VarbitChanged}
+	 * can be posted from inside an executing client script (e.g. during login),
+	 * and the {@code QUEST_STATUS_GET} script run by {@link Quest#getState(Client)}
+	 * is not reentrant. Deferring runs it outside the current script context,
+	 * and a guard flag coalesces the per-tick varbit storm into one refresh.
 	 */
 	@Subscribe
 	public void onVarbitChanged(VarbitChanged event)
 	{
-		refresh();
+		// Quest.getState() runs the QUEST_STATUS_GET script. VarbitChanged can be
+		// posted from inside an executing script (e.g. during login), and scripts
+		// are not reentrant. Defer the refresh onto the client thread so the script
+		// runs outside the current script context, and coalesce the per-tick varbit
+		// storm into a single refresh.
+		if (refreshQueued)
+		{
+			return;
+		}
+		refreshQueued = true;
+		clientThread.invokeLater(() ->
+		{
+			refreshQueued = false;
+			refresh();
+		});
 	}
 
 	@Override
