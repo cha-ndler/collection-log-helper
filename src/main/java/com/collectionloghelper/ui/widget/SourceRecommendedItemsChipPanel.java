@@ -93,6 +93,15 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 	/** The horizontal row that holds the heading label and chip labels. */
 	private final JPanel chipRow;
 
+	/**
+	 * Item IDs rendered on the last successful build. {@link #update(List)} is a
+	 * no-op when called again with an equal list -- without this guard the strip
+	 * tears down ({@code removeAll}) and reloads its async icons on every guidance
+	 * refresh, which manifested as a subtle flash on frequent updates (e.g. each
+	 * XP drop while guidance was active). Touched only on the EDT.
+	 */
+	private List<Integer> lastRenderedIds = null;
+
 	public SourceRecommendedItemsChipPanel(ItemManager itemManager)
 	{
 		this.itemManager = itemManager;
@@ -124,6 +133,15 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 
 		SwingUtilities.invokeLater(() ->
 		{
+			// Idempotent: if the same IDs are already rendered, do nothing. This
+			// stops the strip from rebuilding (and reloading async icons) on every
+			// guidance refresh -- the subtle per-update flash.
+			if (safeIds.equals(lastRenderedIds))
+			{
+				return;
+			}
+			lastRenderedIds = new java.util.ArrayList<>(safeIds);
+
 			chipRow.removeAll();
 
 			if (safeIds.isEmpty())
@@ -245,9 +263,18 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 				return comp.getName();
 			}
 		}
-		catch (RuntimeException ignored)
+		catch (RuntimeException | AssertionError ignored)
 		{
-			// Some test contexts don't wire up ItemManager fully.
+			// Two cases fall through to the id-based fallback:
+			//   1. Some test contexts don't wire up ItemManager fully (RuntimeException).
+			//   2. getItemComposition asserts "must be called on client thread" when
+			//      invoked from the EDT (this widget rebuilds on the EDT). That assertion
+			//      is an AssertionError (an Error, not a RuntimeException); before it was
+			//      caught here it propagated out of buildChip and aborted the whole
+			//      update() lambda mid-strip, leaving the chip row emptied -- the visible
+			//      flash on every rebuild while guidance is active. Catching it lets the
+			//      strip finish building atomically. Proper name resolution on the client
+			//      thread is tracked separately (see issue for off-thread ItemManager use).
 		}
 		return "Item " + itemId;
 	}
