@@ -343,6 +343,122 @@ public class StepProgressViewTest
 			RequiredItemDisplay.COLOR_HELD, updated.getForeground(),"After transition to HELD must be green");
 	}
 
+	// ── Idempotent-render tests (#681) ──────────────────────────────────────
+	//
+	// While guidance is active, GuidanceSequencer.onInventoryChanged re-notifies the
+	// current (unchanged) step on every inventory change. Each re-notify reaches
+	// showStep; without an idempotency guard the item rows are torn down (removeAll)
+	// and rebuilt every time, making the "Items needed" section visibly flash. The
+	// guard skips the rebuild when the full render signature is unchanged. These tests
+	// pin that contract via component identity: a true rebuild replaces the row JPanel
+	// instances, an idempotent skip leaves the exact same instances in place.
+
+	/**
+	 * A second showStep with byte-for-byte identical inputs must NOT rebuild: the row
+	 * panel instances must be the same objects as after the first call (no removeAll,
+	 * no teardown → no flash). This is the core #681 fix.
+	 */
+	@Test
+	public void showStep_identicalSecondCall_doesNotRebuild() throws Exception
+	{
+		List<RequiredItemDisplay> rows = Collections.singletonList(
+			new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.MISSING));
+
+		view.showStep(1, 3, "Collect item", false, rows);
+		flushEdt();
+		List<Component> firstRows = rowComponents(findRequiredItemsPanel(view));
+		assertFalse(firstRows.isEmpty(), "First render must produce rows");
+
+		// Re-notify of the same step with identical resolved items (the inventory-change case)
+		view.showStep(1, 3, "Collect item", false,
+			Collections.singletonList(new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.MISSING)));
+		flushEdt();
+		List<Component> secondRows = rowComponents(findRequiredItemsPanel(view));
+
+		assertEquals(firstRows.size(), secondRows.size(), "Row count must be unchanged");
+		for (int i = 0; i < firstRows.size(); i++)
+		{
+			assertTrue(
+				firstRows.get(i) == secondRows.get(i),
+				"Identical re-notify must reuse the same row instances (no rebuild) — #681");
+		}
+	}
+
+	/**
+	 * A second showStep with CHANGED content (item availability flipped) must rebuild:
+	 * the row panel instances must be replaced so the new colour/status is rendered.
+	 * Liveness must be preserved — only redundant re-notifies are skipped.
+	 */
+	@Test
+	public void showStep_changedSecondCall_rebuilds() throws Exception
+	{
+		view.showStep(1, 3, "Collect item", false, Collections.singletonList(
+			new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.MISSING)));
+		flushEdt();
+		List<Component> firstRows = rowComponents(findRequiredItemsPanel(view));
+		assertFalse(firstRows.isEmpty());
+
+		// Player picked the item up — status flips MISSING → HELD, must re-render
+		view.showStep(1, 3, "Collect item", false, Collections.singletonList(
+			new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.HELD)));
+		flushEdt();
+		List<Component> secondRows = rowComponents(findRequiredItemsPanel(view));
+
+		assertTrue(
+			firstRows.isEmpty() || secondRows.isEmpty() || firstRows.get(0) != secondRows.get(0),
+			"Changed content must rebuild row instances (liveness preserved)");
+		JLabel updated = findFirstNameLabel(view);
+		assertEquals(
+			RequiredItemDisplay.COLOR_HELD, updated.getForeground(),
+			"Changed re-notify must render the new HELD colour");
+	}
+
+	/**
+	 * After hideStep the idempotency cache must be invalidated: a subsequent showStep
+	 * with inputs identical to the pre-hide render must rebuild (the panels were torn
+	 * down by hideStep, so reusing the cache would leave them empty).
+	 */
+	@Test
+	public void showStep_afterHide_rebuildsEvenIfIdentical() throws Exception
+	{
+		List<RequiredItemDisplay> rows = Collections.singletonList(
+			new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.HELD));
+
+		view.showStep(1, 1, "Do thing", false, rows);
+		flushEdt();
+		view.hideStep();
+		flushEdt();
+
+		view.showStep(1, 1, "Do thing", false,
+			Collections.singletonList(new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.HELD)));
+		flushEdt();
+
+		assertTrue(
+			findRequiredItemsPanel(view).isVisible(),
+			"showStep after hideStep must rebuild and re-show the items panel");
+		assertFalse(
+			rowComponents(findRequiredItemsPanel(view)).isEmpty(),
+			"Items panel must contain rows again after a re-show");
+	}
+
+	/** Returns the row JPanel children of {@code panel} (the per-item rows, excluding labels/struts). */
+	private static List<Component> rowComponents(JPanel panel)
+	{
+		List<Component> rows = new java.util.ArrayList<>();
+		if (panel == null)
+		{
+			return rows;
+		}
+		for (Component c : panel.getComponents())
+		{
+			if (c instanceof JPanel)
+			{
+				rows.add(c);
+			}
+		}
+		return rows;
+	}
+
 	// ── Section rendering tests (B.5.4) ─────────────────────────────────────
 
 	/**
