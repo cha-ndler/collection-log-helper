@@ -119,14 +119,18 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": ["FREMENNIK_HARD"]
+              "diaries": [
+                "FREMENNIK_HARD"
+              ]
             },
             "description": "Trollheim teleport not required: use the Fremennik Hard diary unlocks (e.g. Lighthouse-area transport) plus the Goblin Village agility shortcut to reach the God Wars Dungeon entrance overland",
             "travelTip": "Fremennik Hard diary route -> Goblin Village shortcut -> GWD"
           },
           {
             "requirements": {
-              "pohTeleports": ["JEWELLERY_BOX_FANCY"]
+              "pohTeleports": [
+                "JEWELLERY_BOX_FANCY"
+              ]
             },
             "description": "POH jewellery box -> Combat bracelet -> Warriors' Guild, then run north via Death Plateau to the God Wars Dungeon entrance",
             "travelTip": "POH Combat bracelet -> Warriors' Guild -> run north to GWD"
@@ -293,7 +297,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "pohTeleports": ["JEWELLERY_BOX_FANCY"]
+              "pohTeleports": [
+                "JEWELLERY_BOX_FANCY"
+              ]
             },
             "description": "POH jewellery box -> Combat bracelet -> Warriors' Guild, then run north via Death Plateau to the God Wars Dungeon entrance",
             "travelTip": "POH Combat bracelet -> Warriors' Guild -> run north to GWD"
@@ -460,7 +466,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "pohTeleports": ["JEWELLERY_BOX_FANCY"]
+              "pohTeleports": [
+                "JEWELLERY_BOX_FANCY"
+              ]
             },
             "description": "POH jewellery box -> Combat bracelet -> Warriors' Guild, then run north via Death Plateau to the God Wars Dungeon entrance",
             "travelTip": "POH Combat bracelet -> Warriors' Guild -> run north to GWD"
@@ -627,7 +635,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "pohTeleports": ["JEWELLERY_BOX_FANCY"]
+              "pohTeleports": [
+                "JEWELLERY_BOX_FANCY"
+              ]
             },
             "description": "POH jewellery box -> Combat bracelet -> Warriors' Guild, then run north via Death Plateau to the God Wars Dungeon entrance",
             "travelTip": "POH Combat bracelet -> Warriors' Guild -> run north to GWD"
@@ -782,14 +792,18 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "pohTeleports": ["FAIRY_RING"]
+              "pohTeleports": [
+                "FAIRY_RING"
+              ]
             },
             "description": "Use the POH superior garden fairy ring (dramen/lunar staff equipped) to dial AKQ, then run east to Zul-Andra",
             "travelTip": "POH superior garden fairy ring -> AKQ -> run east to Zul-Andra"
           },
           {
             "requirements": {
-              "inventoryItemIds": [12938]
+              "inventoryItemIds": [
+                12938
+              ]
             },
             "description": "Right-click the Zul-andra teleport scroll in your inventory to land directly at Zul-Andra, then board the Sacrificial boat",
             "travelTip": "Inventory Zul-andra teleport scroll -> Zul-Andra"
@@ -906,14 +920,18 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": ["FREMENNIK_HARD"]
+              "diaries": [
+                "FREMENNIK_HARD"
+              ]
             },
             "description": "Fremennik cape teleport directly to Rellekka, then run north to the docks and sail to Ungael via Torfinn (Lighthouse-via-Rellekka route)",
             "travelTip": "Fremennik cape -> Rellekka -> run north to docks -> Torfinn"
           },
           {
             "requirements": {
-              "pohTeleports": ["MOUNTED_GLORY"]
+              "pohTeleports": [
+                "MOUNTED_GLORY"
+              ]
             },
             "description": "POH mounted glory -> Edgeville fallback, then onward to Rellekka docks via available northern transport (no Fremennik teleport assumed) and sail to Ungael",
             "travelTip": "POH mounted glory -> Edgeville -> onward to Rellekka docks"
@@ -1206,7 +1224,13 @@
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1300, 3795, 1380, 10280, 0],
+        "completionZone": [
+          1300,
+          3795,
+          1380,
+          10280,
+          0
+        ],
         "section": "Travel"
       },
       {
@@ -1324,7 +1348,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "pohTeleports": ["JEWELLERY_BOX_FANCY"]
+              "pohTeleports": [
+                "JEWELLERY_BOX_FANCY"
+              ]
             },
             "description": "POH jewellery box -> Games necklace -> Wilderness Volcano, then run south to the lever room and pull the lever to enter the Corporeal Beast cave",
             "travelTip": "POH Games necklace -> Wilderness Volcano -> south to lever room"
@@ -1431,7 +1457,13 @@
         "worldY": 3108,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [3215, 3095, 3520, 9520, 0],
+        "completionZone": [
+          3215,
+          3095,
+          3520,
+          9520,
+          0
+        ],
         "travelTip": "Fairy ring BIQ, or desert amulet to Kalphite Cave (with Hard Desert Diary)"
       },
       {
@@ -1551,7 +1583,12 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "inventoryItemIdsAny": [29271, 29273, 29275, 33120]
+              "inventoryItemIdsAny": [
+                29271,
+                29273,
+                29275,
+                33120
+              ]
             },
             "description": "Right-click your Quetzal whistle (basic / enhanced / perfected / perfected-infinite) in the inventory and pick the Phantom Muspah destination to land directly at the Ancient Prison entrance, skipping the Weiss -> Ghorrock overland route",
             "travelTip": "Inventory Quetzal whistle -> Phantom Muspah"
@@ -1694,7 +1731,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "equippedItemIds": [28327]
+              "equippedItemIds": [
+                28327
+              ]
             },
             "description": "Use Ring of Shadows -> Ghorrock Dungeon to teleport directly. Bring crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
             "travelTip": "Ring of Shadows -> Ghorrock Dungeon"
@@ -1852,7 +1891,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "equippedItemIds": [28327]
+              "equippedItemIds": [
+                28327
+              ]
             },
             "description": "Use Ring of Shadows -> The Scar to teleport directly. Bring ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
             "travelTip": "Ring of Shadows -> The Scar"
@@ -2011,7 +2052,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "equippedItemIds": [28327]
+              "equippedItemIds": [
+                28327
+              ]
             },
             "description": "Use Ring of Shadows -> Lassar Undercity to teleport directly. Bring the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)), prayer potions, and Saradomin brews.",
             "travelTip": "Ring of Shadows -> Lassar Undercity"
@@ -2175,7 +2218,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "equippedItemIds": [28327]
+              "equippedItemIds": [
+                28327
+              ]
             },
             "description": "Use Ring of Shadows -> The Stranglewood to teleport directly. Bring slash weapon (Saeldor or Soulreaper axe) since Vardorvis is weakest to slash, prayer potions, Saradomin brews, and high-tier melee armour.",
             "travelTip": "Ring of Shadows -> The Stranglewood"
@@ -3270,7 +3315,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "equippedItemIds": [22400]
+              "equippedItemIds": [
+                22400
+              ]
             },
             "description": "Use Drakan's medallion to teleport directly to Slepe.",
             "travelTip": "Drakan's medallion -> Slepe"
@@ -3462,7 +3509,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "equippedItemIds": [22400]
+              "equippedItemIds": [
+                22400
+              ]
             },
             "description": "Use Drakan's medallion to teleport directly to Slepe.",
             "travelTip": "Drakan's medallion -> Slepe"
@@ -3750,7 +3799,13 @@
         "objectId": 34862,
         "objectInteractAction": "Climb-down",
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1690, 3560, 1860, 9920, 0],
+        "completionZone": [
+          1690,
+          3560,
+          1860,
+          9920,
+          0
+        ],
         "travelTip": "Xeric's talisman -> Heart, or Hosidius lodestone + run north",
         "requiredItemIds": [
           23528,
@@ -3909,7 +3964,13 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
-        "requiredItemIds": [22374, 12695, 6685, 2434, 1704],
+        "requiredItemIds": [
+          22374,
+          12695,
+          6685,
+          2434,
+          1704
+        ],
         "section": "Bank"
       },
       {
@@ -3930,7 +3991,9 @@
         "objectId": 32534,
         "objectInteractAction": "Open",
         "completionCondition": "MANUAL",
-        "requiredItemIds": [22374],
+        "requiredItemIds": [
+          22374
+        ],
         "section": "Travel"
       },
       {
@@ -3943,7 +4006,13 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 8195,
         "section": "Combat",
-        "recommendedItemIds": [4151, 12018, 6685, 2434, 385]
+        "recommendedItemIds": [
+          4151,
+          12018,
+          6685,
+          2434,
+          385
+        ]
       },
       {
         "description": "Teleport out via Amulet of glory or a Varrock teleport tab. Restock a fresh Mossy key + supplies before the next kill - the fight is gated by key drops, not supplies",
@@ -3986,7 +4055,13 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
-        "requiredItemIds": [20754, 12695, 385, 2434, 1704],
+        "requiredItemIds": [
+          20754,
+          12695,
+          385,
+          2434,
+          1704
+        ],
         "section": "Bank"
       },
       {
@@ -4007,7 +4082,9 @@
         "objectId": 29486,
         "objectInteractAction": "Open",
         "completionCondition": "MANUAL",
-        "requiredItemIds": [20754],
+        "requiredItemIds": [
+          20754
+        ],
         "section": "Travel"
       },
       {
@@ -4020,7 +4097,13 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 7416,
         "section": "Combat",
-        "recommendedItemIds": [4151, 11832, 6585, 385, 2434]
+        "recommendedItemIds": [
+          4151,
+          11832,
+          6585,
+          385,
+          2434
+        ]
       },
       {
         "description": "Teleport out via Amulet of glory after Obor dies. Restock a fresh Giant key + supplies before the next kill - the farm is bottlenecked by key drops, not by trip duration",
@@ -4349,7 +4432,13 @@
         "worldY": 3611,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2260, 3600, 2290, 10030, 0],
+        "completionZone": [
+          2260,
+          3600,
+          2290,
+          10030,
+          0
+        ],
         "travelTip": "Fairy ring AKQ then run west to Kraken Cove"
       },
       {
@@ -4438,7 +4527,13 @@
         "worldY": 3061,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2370, 3050, 2420, 9460, 0],
+        "completionZone": [
+          2370,
+          3050,
+          2420,
+          9460,
+          0
+        ],
         "travelTip": "Fairy ring BKP, or Castle Wars teleport + run south-west",
         "requiredItemIds": [
           1506,
@@ -4680,7 +4775,13 @@
         "worldY": 3842,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [3015, 3830, 3080, 10265, 0],
+        "completionZone": [
+          3015,
+          3830,
+          3080,
+          10265,
+          0
+        ],
         "travelTip": "Burning amulet -> Lava Maze (level 41 Wilderness)",
         "requiredItemIds": [
           1540,
@@ -4759,7 +4860,13 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
-        "requiredItemIds": [21167, 11941, 1704, 385, 2434],
+        "requiredItemIds": [
+          21167,
+          11941,
+          1704,
+          385,
+          2434
+        ],
         "section": "Bank"
       },
       {
@@ -4782,7 +4889,13 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 2054,
         "section": "Combat",
-        "recommendedItemIds": [4827, 4151, 12924, 385, 1704]
+        "recommendedItemIds": [
+          4827,
+          4151,
+          12924,
+          385,
+          1704
+        ]
       },
       {
         "description": "Stash loot in the looting bag, then teleport out via glory or burning amulet. Recharge amulets at Ferox Enclave fountain and resupply from the bank before re-entering the Wilderness",
@@ -4854,9 +4967,21 @@
         "worldY": 3936,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [3215, 3920, 3250, 10355, 0],
+        "completionZone": [
+          3215,
+          3920,
+          3250,
+          10355,
+          0
+        ],
         "travelTip": "Burning amulet -> Lava Maze, run south-west to Scorpion Pit",
-        "requiredItemIds": [21167, 5952, 1704, 385, 2434],
+        "requiredItemIds": [
+          21167,
+          5952,
+          1704,
+          385,
+          2434
+        ],
         "section": "Travel"
       },
       {
@@ -4879,7 +5004,13 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 6615,
         "section": "Combat",
-        "recommendedItemIds": [11804, 11865, 6685, 5952, 2434]
+        "recommendedItemIds": [
+          11804,
+          11865,
+          6685,
+          5952,
+          2434
+        ]
       },
       {
         "description": "Stash loot in the looting bag, climb out of the cavern, and teleport via burning amulet or glory. Recharge at Ferox Enclave fountain before re-entering",
@@ -4937,7 +5068,13 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
-        "requiredItemIds": [21167, 11941, 1704, 385, 2434],
+        "requiredItemIds": [
+          21167,
+          11941,
+          1704,
+          385,
+          2434
+        ],
         "section": "Bank"
       },
       {
@@ -4960,7 +5097,13 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 6619,
         "section": "Combat",
-        "recommendedItemIds": [12924, 4151, 11865, 385, 2434]
+        "recommendedItemIds": [
+          12924,
+          4151,
+          11865,
+          385,
+          2434
+        ]
       },
       {
         "description": "Stash drops in the looting bag and teleport via burning amulet or glory. Recharge amulets at Ferox Enclave fountain and bank loot from the looting bag before the next trip",
@@ -5148,7 +5291,13 @@
         "worldY": 3776,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [3180, 3760, 3230, 3800, 0],
+        "completionZone": [
+          3180,
+          3760,
+          3230,
+          3800,
+          0
+        ],
         "travelTip": "Burning amulet -> Chaos Temple + run east"
       },
       {
@@ -5243,7 +5392,13 @@
         "worldY": 3832,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [3250, 3820, 3310, 3870, 0],
+        "completionZone": [
+          3250,
+          3820,
+          3310,
+          3870,
+          0
+        ],
         "travelTip": "Burning amulet -> Chaos Temple + run south-east"
       },
       {
@@ -5900,14 +6055,18 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": ["KOUREND_HARD"]
+              "diaries": [
+                "KOUREND_HARD"
+              ]
             },
             "description": "Kourend Hard diary: use the Xeric's Heart teleport inside Lovakengj to land roughly two tiles from the Chambers of Xeric prep room. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Vasa/Vespula, and a Dragon claws or Bandos godsword spec for Olm head phases",
             "travelTip": "Kourend Hard: Xeric's Heart teleport (Lovakengj) -> 2 tiles to prep room"
           },
           {
             "requirements": {
-              "pohTeleports": ["XERICS_TALISMAN"]
+              "pohTeleports": [
+                "XERICS_TALISMAN"
+              ]
             },
             "description": "POH mounted Xeric's talisman -> Xeric's Glade, then run south to the Chambers of Xeric entrance. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Vasa/Vespula, and a Dragon claws or Bandos godsword spec for Olm head phases",
             "travelTip": "POH mounted Xeric's talisman -> Xeric's Glade -> run south to CoX"
@@ -6379,7 +6538,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "equippedItemIds": [22400]
+              "equippedItemIds": [
+                22400
+              ]
             },
             "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + diamond bolts (e) for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
             "travelTip": "Drakan's medallion -> Ver Sinhaza"
@@ -6605,7 +6766,9 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "equippedItemIds": [22400]
+              "equippedItemIds": [
+                22400
+              ]
             },
             "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + diamond bolts (e), Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
             "travelTip": "Drakan's medallion -> Ver Sinhaza"
@@ -6907,14 +7070,24 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": ["DESERT_HARD"]
+              "diaries": [
+                "DESERT_HARD"
+              ]
             },
             "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). Bring Tbow or Bow of faerdhinen, Osmumten's fang for stab phases, Tumeken's shadow if owned, full brews/restores and prayer potions; set invocations under 150 raid level for entry-mode loot",
             "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
           },
           {
             "requirements": {
-              "inventoryItemIdsAny": [26945, 26946, 26947, 26948, 26949, 26950, 26951]
+              "inventoryItemIdsAny": [
+                26945,
+                26946,
+                26947,
+                26948,
+                26949,
+                26950,
+                26951
+              ]
             },
             "description": "Right-click any tier of Pharaoh's sceptre in your inventory (uncharged tiers 1-3 / charged / jeweled) and pick Jaltevas to land at the Necropolis entrance. Bring Tbow or Bow of faerdhinen, Osmumten's fang for stab phases, Tumeken's shadow if owned, full brews/restores and prayer potions; set invocations under 150 raid level for entry-mode loot",
             "travelTip": "Inventory Pharaoh's sceptre -> Jaltevas -> Necropolis"
@@ -7217,14 +7390,24 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": ["DESERT_HARD"]
+              "diaries": [
+                "DESERT_HARD"
+              ]
             },
             "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). Bring Tbow or Bow of faerdhinen, Osmumten's fang, Tumeken's shadow if owned, full brews/restores; aim for invocations totalling raid level 300-450 for solid loot efficiency before entering",
             "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
           },
           {
             "requirements": {
-              "inventoryItemIdsAny": [26945, 26946, 26947, 26948, 26949, 26950, 26951]
+              "inventoryItemIdsAny": [
+                26945,
+                26946,
+                26947,
+                26948,
+                26949,
+                26950,
+                26951
+              ]
             },
             "description": "Right-click any tier of Pharaoh's sceptre in your inventory (uncharged tiers 1-3 / charged / jeweled) and pick Jaltevas to land at the Necropolis entrance. Bring Tbow or Bow of faerdhinen, Osmumten's fang, Tumeken's shadow if owned, full brews/restores; aim for invocations totalling raid level 300-450 for solid loot efficiency before entering",
             "travelTip": "Inventory Pharaoh's sceptre -> Jaltevas -> Necropolis"
@@ -7528,14 +7711,24 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": ["DESERT_HARD"]
+              "diaries": [
+                "DESERT_HARD"
+              ]
             },
             "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). At raid level 500 bring Tumeken's shadow or Tbow, Osmumten's fang, full brews/restores, extra prayer potions and a Soulreaper axe spec; gear must be top-tier or kill times balloon",
             "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
           },
           {
             "requirements": {
-              "inventoryItemIdsAny": [26945, 26946, 26947, 26948, 26949, 26950, 26951]
+              "inventoryItemIdsAny": [
+                26945,
+                26946,
+                26947,
+                26948,
+                26949,
+                26950,
+                26951
+              ]
             },
             "description": "Right-click any tier of Pharaoh's sceptre in your inventory (uncharged tiers 1-3 / charged / jeweled) and pick Jaltevas to land at the Necropolis entrance. At raid level 500 bring Tumeken's shadow or Tbow, Osmumten's fang, full brews/restores, extra prayer potions and a Soulreaper axe spec; gear must be top-tier or kill times balloon",
             "travelTip": "Inventory Pharaoh's sceptre -> Jaltevas -> Necropolis"
@@ -7654,14 +7847,19 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": ["WESTERN_ELITE"]
+              "diaries": [
+                "WESTERN_ELITE"
+              ]
             },
             "description": "Operate the Crystal teleport seed for the rub-on-cape variant (Western Provinces Elite diary attaches the Prifddinas teleport to your max / quest / achievement cape, so you can teleport from anywhere without dedicating an inventory slot to the seed). Then run north-west to the Gauntlet portal in Lletya district",
             "travelTip": "Cape Crystal teleport -> Prifddinas (Western Provinces Elite diary unlock)"
           },
           {
             "requirements": {
-              "inventoryItemIdsAny": [23904, 23858]
+              "inventoryItemIdsAny": [
+                23904,
+                23858
+              ]
             },
             "description": "Right-click your Teleport crystal (regular or HM-charged) in the inventory and pick Prifddinas, then run north-west to the Gauntlet portal in Lletya district",
             "travelTip": "Inventory Teleport crystal -> Prifddinas"
@@ -7771,14 +7969,19 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": ["WESTERN_ELITE"]
+              "diaries": [
+                "WESTERN_ELITE"
+              ]
             },
             "description": "Operate the Crystal teleport seed for the rub-on-cape variant (Western Provinces Elite diary attaches the Prifddinas teleport to your max / quest / achievement cape, so you can teleport from anywhere without dedicating an inventory slot to the seed). Then run north-west to the Gauntlet portal in Lletya district",
             "travelTip": "Cape Crystal teleport -> Prifddinas (Western Provinces Elite diary unlock)"
           },
           {
             "requirements": {
-              "inventoryItemIdsAny": [23904, 23858]
+              "inventoryItemIdsAny": [
+                23904,
+                23858
+              ]
             },
             "description": "Right-click your Teleport crystal (regular or HM-charged) in the inventory and pick Prifddinas, then run north-west to the Gauntlet portal in Lletya district",
             "travelTip": "Inventory Teleport crystal -> Prifddinas"
@@ -8273,7 +8476,13 @@
         "worldY": 2837,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [3027, 2940, 3060, 2970, 0],
+        "completionZone": [
+          3027,
+          2940,
+          3060,
+          2970,
+          0
+        ],
         "section": "Travel"
       },
       {
@@ -8418,7 +8627,13 @@
         "objectId": 29322,
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1605, 1565, 1645, 1605, 0],
+        "completionZone": [
+          1605,
+          1565,
+          1645,
+          1605,
+          0
+        ],
         "section": "Travel"
       },
       {
@@ -8432,8 +8647,12 @@
         "loopCount": 5,
         "conditionTree": {
           "or": [
-            { "chat_message_received": "The Wintertodt has been subdued" },
-            { "chat_message_received": "Your Wintertodt subdued count is:" }
+            {
+              "chat_message_received": "The Wintertodt has been subdued"
+            },
+            {
+              "chat_message_received": "Your Wintertodt subdued count is:"
+            }
           ]
         }
       },
@@ -8793,7 +9012,13 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
-        "requiredItemIds": [21167, 11941, 1704, 385, 2434],
+        "requiredItemIds": [
+          21167,
+          11941,
+          1704,
+          385,
+          2434
+        ],
         "section": "Bank"
       },
       {
@@ -8816,7 +9041,13 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 6618,
         "section": "Combat",
-        "recommendedItemIds": [4151, 11865, 6685, 385, 2434]
+        "recommendedItemIds": [
+          4151,
+          11865,
+          6685,
+          385,
+          2434
+        ]
       },
       {
         "description": "Stash drops in the looting bag and teleport via glory or burning amulet. Recharge amulets at Ferox Enclave fountain before the next trip",
@@ -9120,7 +9351,13 @@
         "worldY": 3131,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1420, 3115, 1450, 9720, 0],
+        "completionZone": [
+          1420,
+          3115,
+          1450,
+          9720,
+          0
+        ],
         "travelTip": "Quetzal whistle -> Cam Torum, or Civitas illa Fortis lodestone + run east",
         "requiredItemIds": [
           29271,
@@ -9736,7 +9973,13 @@
         "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2690, 3600, 2810, 10050, 0]
+        "completionZone": [
+          2690,
+          3600,
+          2810,
+          10050,
+          0
+        ]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Lumbridge Swamp caves",
@@ -9795,7 +10038,13 @@
         "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2690, 3600, 2810, 10050, 0]
+        "completionZone": [
+          2690,
+          3600,
+          2810,
+          10050,
+          0
+        ]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Bring a bag of salt to finish them",
@@ -9868,7 +10117,13 @@
         "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2690, 3600, 2810, 10050, 0]
+        "completionZone": [
+          2690,
+          3600,
+          2810,
+          10050,
+          0
+        ]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required",
@@ -9927,7 +10182,13 @@
         "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2690, 3600, 2810, 10050, 0]
+        "completionZone": [
+          2690,
+          3600,
+          2810,
+          10050,
+          0
+        ]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or use Catacombs of Kourend",
@@ -10043,7 +10304,13 @@
         "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2690, 3600, 2810, 10050, 0]
+        "completionZone": [
+          2690,
+          3600,
+          2810,
+          10050,
+          0
+        ]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required",
@@ -10558,7 +10825,13 @@
         "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2690, 3600, 2810, 10050, 0]
+        "completionZone": [
+          2690,
+          3600,
+          2810,
+          10050,
+          0
+        ]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Catacombs of Kourend for burst tasks",
@@ -10624,7 +10897,13 @@
         "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2690, 3600, 2810, 10050, 0]
+        "completionZone": [
+          2690,
+          3600,
+          2810,
+          10050,
+          0
+        ]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required",
@@ -10938,7 +11217,13 @@
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1300, 3795, 1330, 10220, 0],
+        "completionZone": [
+          1300,
+          3795,
+          1330,
+          10220,
+          0
+        ],
         "travelTip": "Fairy ring CIR -> Mount Karuulm, or Rada's blessing 3/4 teleport",
         "requiredItemIds": [
           23037,
@@ -11154,7 +11439,13 @@
         "worldY": 3777,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [3590, 3765, 3760, 10305, 0]
+        "completionZone": [
+          3590,
+          3765,
+          3760,
+          10305,
+          0
+        ]
       },
       {
         "description": "Enter the Wyvern Cave. Elemental/mind/dragonfire shield required",
@@ -11234,7 +11525,13 @@
         "worldY": 3614,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2690, 3600, 2810, 10050, 0]
+        "completionZone": [
+          2690,
+          3600,
+          2810,
+          10050,
+          0
+        ]
       },
       {
         "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required",
@@ -11540,7 +11837,13 @@
         "worldY": 3364,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1260, 3340, 1370, 9870, 0]
+        "completionZone": [
+          1260,
+          3340,
+          1370,
+          9870,
+          0
+        ]
       },
       {
         "description": "Enter the Stalker Den through the cave entrance",
@@ -11603,7 +11906,13 @@
         "worldY": 3477,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [2210, 3465, 2290, 9895, 0]
+        "completionZone": [
+          2210,
+          3465,
+          2290,
+          9895,
+          0
+        ]
       },
       {
         "description": "Kill Aquanites in Ynysdail Cavern (requires 73 Sailing). Use crush weapons for best accuracy",
@@ -11854,7 +12163,13 @@
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1300, 3795, 1330, 10075, 0],
+        "completionZone": [
+          1300,
+          3795,
+          1330,
+          10075,
+          0
+        ],
         "travelTip": "Fairy ring CIR -> Mount Karuulm, or Rada's blessing 3/4",
         "requiredItemIds": [
           23037,
@@ -12273,7 +12588,13 @@
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1300, 3795, 1330, 10205, 0],
+        "completionZone": [
+          1300,
+          3795,
+          1330,
+          10205,
+          0
+        ],
         "travelTip": "Fairy ring CIR -> Mount Karuulm, or Rada's blessing 3/4",
         "requiredItemIds": [
           23037,
@@ -13348,7 +13669,13 @@
         "worldY": 3151,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [3345, 3140, 3380, 11500, 0],
+        "completionZone": [
+          3345,
+          3140,
+          3380,
+          11500,
+          0
+        ],
         "travelTip": "Grouping tele -> Giants' Foundry, or Falador tele + run south-east",
         "requiredItemIds": [
           2353,
@@ -13803,20 +14130,76 @@
           590
         ],
         "perItemRequiredItemIds": {
-          "25442": [590, 3396, 3438],
-          "25445": [590, 3398, 3440],
-          "25448": [590, 3400, 3442],
-          "25451": [590, 3402, 3444],
-          "25454": [590, 3404, 3446],
-          "25434": [590, 3404, 3446],
-          "25436": [590, 3404, 3446],
-          "25438": [590, 3404, 3446],
-          "25440": [590, 3404, 3446],
-          "25474": [590, 3404, 3446],
-          "25476": [590, 3404, 3446],
-          "3470": [590, 3404, 3446],
-          "12851": [590, 3404, 3446],
-          "25630": [590, 3404, 3446]
+          "25442": [
+            590,
+            3396,
+            3438
+          ],
+          "25445": [
+            590,
+            3398,
+            3440
+          ],
+          "25448": [
+            590,
+            3400,
+            3442
+          ],
+          "25451": [
+            590,
+            3402,
+            3444
+          ],
+          "25454": [
+            590,
+            3404,
+            3446
+          ],
+          "25434": [
+            590,
+            3404,
+            3446
+          ],
+          "25436": [
+            590,
+            3404,
+            3446
+          ],
+          "25438": [
+            590,
+            3404,
+            3446
+          ],
+          "25440": [
+            590,
+            3404,
+            3446
+          ],
+          "25474": [
+            590,
+            3404,
+            3446
+          ],
+          "25476": [
+            590,
+            3404,
+            3446
+          ],
+          "3470": [
+            590,
+            3404,
+            3446
+          ],
+          "12851": [
+            590,
+            3404,
+            3446
+          ],
+          "25630": [
+            590,
+            3404,
+            3446
+          ]
         },
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 25,
@@ -13833,20 +14216,76 @@
           590
         ],
         "perItemRequiredItemIds": {
-          "25442": [590, 3396, 3438],
-          "25445": [590, 3398, 3440],
-          "25448": [590, 3400, 3442],
-          "25451": [590, 3402, 3444],
-          "25454": [590, 3404, 3446],
-          "25434": [590, 3404, 3446],
-          "25436": [590, 3404, 3446],
-          "25438": [590, 3404, 3446],
-          "25440": [590, 3404, 3446],
-          "25474": [590, 3404, 3446],
-          "25476": [590, 3404, 3446],
-          "3470": [590, 3404, 3446],
-          "12851": [590, 3404, 3446],
-          "25630": [590, 3404, 3446]
+          "25442": [
+            590,
+            3396,
+            3438
+          ],
+          "25445": [
+            590,
+            3398,
+            3440
+          ],
+          "25448": [
+            590,
+            3400,
+            3442
+          ],
+          "25451": [
+            590,
+            3402,
+            3444
+          ],
+          "25454": [
+            590,
+            3404,
+            3446
+          ],
+          "25434": [
+            590,
+            3404,
+            3446
+          ],
+          "25436": [
+            590,
+            3404,
+            3446
+          ],
+          "25438": [
+            590,
+            3404,
+            3446
+          ],
+          "25440": [
+            590,
+            3404,
+            3446
+          ],
+          "25474": [
+            590,
+            3404,
+            3446
+          ],
+          "25476": [
+            590,
+            3404,
+            3446
+          ],
+          "3470": [
+            590,
+            3404,
+            3446
+          ],
+          "12851": [
+            590,
+            3404,
+            3446
+          ],
+          "25630": [
+            590,
+            3404,
+            3446
+          ]
         },
         "skipIfHasAnyItemIds": [
           3450,
@@ -16489,8 +16928,20 @@
         "completionChatPattern": null,
         "conditionTree": {
           "and": [
-            { "arrive_at_zone": [3805, 3017, 3815, 3024, 0] },
-            { "not": { "inventory_has_item": 1929 } }
+            {
+              "arrive_at_zone": [
+                3805,
+                3017,
+                3815,
+                3024,
+                0
+              ]
+            },
+            {
+              "not": {
+                "inventory_has_item": 1929
+              }
+            }
           ]
         }
       }
@@ -16860,27 +17311,71 @@
       }
     ],
     "locationDescription": "Lake Molch on Molch Island",
-    "travelTip": "Fairy ring DJR -> Molch",
+    "travelTip": "Fairy ring DJR -> Shayzien, then boat from Lake Molch dock to Molch Island",
     "guidanceSteps": [
       {
-        "description": "Travel to Lake Molch on Molch Island (fairy ring DJR to Shayzien, then boat from Molch)",
+        "description": "Bank for aerial fishing. Both hands must be free (no weapon/shield/glove slot items) for the cormorant glove. Alry the Angler on Molch Island provides a cormorant and glove for free each session. 43 Fishing and 35 Hunter required.",
         "worldX": 1379,
         "worldY": 3634,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Bank prep"
       },
       {
-        "description": "Catch fish using cormorants at Lake Molch on Molch Island. Requires 35 Hunter and 43 Fishing. Trade fish with Alry the Angler for Molch pearls",
+        "description": "Travel to Lake Molch on Molch Island. Fairy ring DJR teleports near Shayzien; run southwest to the Lake Molch dock and take the boat to Molch Island. Alternatively Tithe Farm teleport (Hosidius) and run north-west.",
         "worldX": 1379,
         "worldY": 3634,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "travelTip": "Fairy ring DJR -> Shayzien -> Lake Molch dock -> boat to Molch Island",
+        "section": "Travel"
+      },
+      {
+        "description": "Collect king worms on the island or use fish offcuts as bait. Equip the cormorant glove from Alry the Angler, then send the cormorant at nearby fishing pools. Aim for pools within 3 tiles (1 catch per tick maximum). Cut caught fish with a knife for stackable fish offcuts (3 Cooking XP each) to use as bait.",
+        "worldX": 1379,
+        "worldY": 3634,
+        "worldPlane": 0,
+        "npcId": 8523,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL",
+        "section": "Fish",
+        "recommendedItemIds": [
+          22846,
+          22844,
+          22842,
+          1733
+        ],
+        "loopBackToStep": 3,
+        "loopCount": 0
+      },
+      {
+        "description": "Trade caught fish with Alry the Angler for Molch pearls (bluegill=1, common tench=2, violet perch=3, cerulean twitch=4). Spend pearls at his shop for Angler outfit (100 each), Pearl rods (100-150), or Fish sack (1000). Golden tench drops directly while fishing.",
+        "worldX": 1379,
+        "worldY": 3634,
+        "worldPlane": 0,
+        "npcId": 8523,
+        "interactAction": "Trade",
+        "completionCondition": "MANUAL",
+        "section": "Reward"
       }
     ],
     "rewardType": "MIXED",
     "pointsPerHour": 32,
-    "afkLevel": 1
+    "afkLevel": 1,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "FISHING",
+          "level": 43
+        },
+        {
+          "skill": "HUNTER",
+          "level": 35
+        }
+      ]
+    }
   },
   {
     "name": "Boat Paints",
@@ -18830,25 +19325,58 @@
       }
     ],
     "locationDescription": "Deep sea fishing shoals",
-    "travelTip": "Sail to deep sea fishing shoals",
+    "travelTip": "Port Roberts dock -> sail to trawling shoal (68 Fishing + Sailing required)",
     "guidanceSteps": [
       {
-        "description": "Travel to the Deep Sea Fishing hub via Guildmaster Jane on Fishing Guild dock (requires 68 Fishing)",
+        "description": "Bank for deep sea trawling. Bring a trawling net (from Netmaster or Sailing shops), stamina potions, and food. 68 Fishing and basic Sailing required. Speak to Netmaster Kellan at the Rolling Tide pub in Port Roberts for an introduction.",
         "worldX": 1565,
         "worldY": 3420,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "section": "Bank prep"
       },
       {
-        "description": "Fish at the deep sea fishing shoals for rare colored fish.",
+        "description": "Sail out from Port Roberts dock to locate a trawling shoal (fish shoal icon on the world map). Use a fathom stone for cardinal direction guidance or a fathom pearl for the minimap arrow. Shoal routes are cyclical so returning players can predict stop locations.",
         "worldX": 1565,
         "worldY": 3420,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
+      },
+      {
+        "description": "Lower your trawling net when in range of a shoal. Watch the depth indicator - when a shoal stops it moves to shallow or deep depth; match your net depth or catch rates halve. Higher-tier nets required for multi-depth shoals. Rare coloured fish (Giant blue krill, Golden haddock, Orangefin, Huge halibut, Purplefin, Swift marlin) are the collection log items.",
+        "worldX": 1565,
+        "worldY": 3420,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Fish",
+        "loopBackToStep": 3,
+        "loopCount": 0
+      },
+      {
+        "description": "Return to port and bank your catch at Port Roberts when your hold is full. Coloured fish are the rare unique items; common deep sea fish provide Cooking XP.",
+        "worldX": 1565,
+        "worldY": 3420,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "section": "Bank"
       }
     ],
-    "aggregated": true
+    "aggregated": true,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "FISHING",
+          "level": 68
+        },
+        {
+          "skill": "SAILING",
+          "level": 1
+        }
+      ]
+    }
   },
   {
     "name": "Pyramid Plunder",
@@ -18989,7 +19517,13 @@
         "worldY": 3673,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionZone": [1620, 3660, 1690, 10070, 0]
+        "completionZone": [
+          1620,
+          3660,
+          1690,
+          10070,
+          0
+        ]
       },
       {
         "description": "Investigate the Statue of King Rada I to enter the Catacombs.",
@@ -20648,26 +21182,79 @@
       }
     ],
     "locationDescription": "Motherlode Mine beneath Falador",
-    "travelTip": "Falador teleport -> mine",
+    "travelTip": "Skills necklace -> Mining Guild entrance, run east into Dwarven Mine",
     "guidanceSteps": [
       {
-        "description": "Travel to Motherlode Mine beneath Falador.",
+        "description": "Bank for Motherlode Mine. Bring your best pickaxe (dragon or crystal), a coal bag and gem bag if unlocked, and stamina potions. 30 Mining required; upper level needs 72 Mining and 100 golden nuggets one-time.",
+        "worldX": 3013,
+        "worldY": 3355,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "requiredItemIds": [
+          11920,
+          25627
+        ],
+        "section": "Bank prep"
+      },
+      {
+        "description": "Travel to Motherlode Mine beneath Falador. Skills necklace to the Mining Guild entrance is fastest. Alternatively Falador teleport then Dwarven Mine entrance in north-east Falador.",
         "worldX": 3726,
         "worldY": 5680,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Skills necklace -> Mining Guild entrance; or Falador tele + Dwarven Mine NE Falador",
+        "section": "Travel"
       },
       {
-        "description": "Mine pay-dirt in the Motherlode Mine and clean it for golden nugget rewards.",
+        "description": "Mine pay-dirt from ore veins. Each vein lasts 23-27 seconds (36-40 on upper level). Use the coal bag to carry extra capacity. Amulet of glory increases uncut gem rates from veins.",
         "worldX": 3726,
         "worldY": 5680,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Mine",
+        "recommendedItemIds": [
+          11920,
+          12625,
+          25627,
+          25628,
+          1712
+        ]
+      },
+      {
+        "description": "Deposit pay-dirt into the hopper. Wait at the sack near Prospector Percy for cleaned ores and golden nuggets. Upper level hopper needs 72 Mining and 100 nuggets one-time unlock, and gives roughly 10% more nuggets per hour.",
+        "worldX": 3748,
+        "worldY": 5666,
+        "worldPlane": 0,
+        "objectId": 26674,
+        "objectInteractAction": "Deposit",
+        "completionCondition": "MANUAL",
+        "section": "Mine",
+        "loopBackToStep": 3,
+        "loopCount": 0
+      },
+      {
+        "description": "Spend golden nuggets at Prospector Percy shop: helmet (40), jacket (60), legs (40), boots (40), coal bag (100), gem bag (100). Prioritise coal bag and gem bag for immediate efficiency gains. Bank chest beside Percy is accessible without requirements.",
+        "worldX": 3728,
+        "worldY": 5693,
+        "worldPlane": 0,
+        "npcId": 6712,
+        "interactAction": "Talk-to",
+        "completionCondition": "MANUAL",
+        "section": "Reward"
       }
     ],
     "rewardType": "SHOP",
-    "pointsPerHour": 8
+    "pointsPerHour": 8,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "MINING",
+          "level": 30
+        }
+      ]
+    }
   },
   {
     "name": "Shooting Stars",
@@ -21845,7 +22432,13 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
-        "requiredItemIds": [12695, 385, 2434, 4151, 1704],
+        "requiredItemIds": [
+          12695,
+          385,
+          2434,
+          4151,
+          1704
+        ],
         "section": "Bank"
       },
       {
@@ -21868,7 +22461,13 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 15626,
         "section": "Combat",
-        "recommendedItemIds": [4151, 11865, 6585, 385, 2434]
+        "recommendedItemIds": [
+          4151,
+          11865,
+          6585,
+          385,
+          2434
+        ]
       },
       {
         "description": "Pick up any drops and teleport back to Lumbridge to restock. Brutus respawns immediately - the per-trip restock is gated only by your potion / food supply",
@@ -21944,7 +22543,13 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
-        "requiredItemIds": [24417, 11865, 6685, 2434, 12924],
+        "requiredItemIds": [
+          24417,
+          11865,
+          6685,
+          2434,
+          12924
+        ],
         "section": "Bank"
       },
       {
@@ -21977,7 +22582,13 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 14860,
         "section": "Combat",
-        "recommendedItemIds": [12924, 11865, 6685, 2434, 385]
+        "recommendedItemIds": [
+          12924,
+          11865,
+          6685,
+          2434,
+          385
+        ]
       },
       {
         "description": "Pick up the Gryphon feather (1/kill) and any rares, then exit the cave and teleport via Quetzal whistle to restock. Belle's folly (tarnished) is the main unique chase at 1/256",
@@ -22414,7 +23025,13 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
-        "requiredItemIds": [23713, 12695, 6685, 2434, 11865],
+        "requiredItemIds": [
+          23713,
+          12695,
+          6685,
+          2434,
+          11865
+        ],
         "section": "Bank"
       },
       {
@@ -22437,7 +23054,13 @@
         "completionCondition": "ACTOR_DEATH",
         "completionNpcId": 7806,
         "section": "Combat",
-        "recommendedItemIds": [12924, 11865, 6585, 385, 2434]
+        "recommendedItemIds": [
+          12924,
+          11865,
+          6585,
+          385,
+          2434
+        ]
       },
       {
         "description": "Teleport out via Digsite pendant after the kill. Restock at Varrock east bank or the Fossil Island deposit box before the next trip",
@@ -27641,25 +28264,64 @@
       }
     ],
     "locationDescription": "Ape Atoll teak trees",
-    "travelTip": "Teleport to Ape Atoll or fairy ring CLR",
+    "travelTip": "Fairy ring BJR -> Isle of Souls (no req); or Ape Atoll tele for 2-tick",
     "guidanceSteps": [
       {
-        "description": "Travel to the Ape Atoll teak trees (fairy ring CLR) or Fossil Island hardwood grove",
+        "description": "Bank for teak chopping. Bring your best axe (dragon or crystal for highest success rate). 35 Woodcutting required. Isle of Souls is best with no extra requirements. Ape Atoll or Prifddinas are optimal for 2-tick manipulation (bring a knife and kebbit claws or karambwanji for the tick cycle).",
+        "worldX": 2200,
+        "worldY": 2858,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "requiredItemIds": [
+          20736,
+          6739
+        ],
+        "section": "Bank prep"
+      },
+      {
+        "description": "Travel to teak trees. Isle of Souls: fairy ring BJR (no requirements). Ape Atoll: Ape Atoll teleport then run to southern grove. Fossil Island: Digsite pendant. Locus Oasis (Varlamore): Quetzal Transport to Outer Fortis, run to grove.",
         "worldX": 2770,
         "worldY": 2700,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Fairy ring BJR -> Isle of Souls; Ape Atoll tele for 2-tick; Digsite pendant -> Fossil Island",
+        "section": "Travel"
       },
       {
-        "description": "Chop teak logs at the teak tree patch. Use dragon axe or better for efficiency. Fossil Island grove offers better bird nest rates due to humidify",
+        "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-tick method at Ape Atoll or Prifddinas: use knife on bait on tick 1, click tree on tick 2. Bird nests drop to the ground (1/256 chance) and despawn after 2 minutes - collect for bonus value.",
         "worldX": 2770,
         "worldY": 2700,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Woodcut",
+        "recommendedItemIds": [
+          20736,
+          6739
+        ],
+        "loopBackToStep": 3,
+        "loopCount": 0
+      },
+      {
+        "description": "Drop logs (power-chop) or bank at the nearest bank. Isle of Souls: bank chest near fairy ring. Fossil Island: run to northern bank chest. Locus Oasis: Quetzal Transport to Auburnvale bank. Ape Atoll: no nearby bank - power-chop recommended.",
+        "worldX": 2200,
+        "worldY": 2858,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "section": "Bank"
       }
     ],
-    "afkLevel": 2
+    "afkLevel": 2,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "WOODCUTTING",
+          "level": 35
+        }
+      ]
+    }
   },
   {
     "name": "Mining (Gemstone Rocks)",
@@ -27678,25 +28340,69 @@
       }
     ],
     "locationDescription": "Shilo Village underground mine",
-    "travelTip": "Cart ride to Shilo Village -> enter underground mine",
+    "travelTip": "Shilo Village teleport -> enter underground mine",
     "guidanceSteps": [
       {
-        "description": "Travel to Shilo Village underground mine.",
+        "description": "Bank for gemstone rock mining. Bring your best pickaxe (dragon or crystal), a gem bag from the Motherlode Mine shop, and an amulet of glory for increased gem rates. Shilo Village quest required to access the underground mine.",
+        "worldX": 2851,
+        "worldY": 2953,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "requiredItemIds": [
+          11920,
+          25628
+        ],
+        "section": "Bank prep"
+      },
+      {
+        "description": "Travel to Shilo Village underground mine. Teleport to Shilo Village via Karamja gloves 3/4, then enter the underground mine on the south side. Brimhaven cart ride also works.",
         "worldX": 2842,
         "worldY": 9381,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Karamja gloves 3/4 tele to Shilo Village; or Brimhaven cart ride",
+        "section": "Travel"
       },
       {
-        "description": "Travel to the Shilo Village underground mine and mine gemstone rocks.",
+        "description": "Mine gemstone rocks (sapphire, emerald, ruby, diamond, opal, jade, red topaz) in the underground mine. Each mining action rolls for the Rock golem pet (approximately 1/5000 per gem, scaled by gem tier). Dragon or crystal pickaxe maximises pet rolls per hour.",
         "worldX": 2842,
         "worldY": 9381,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Mine",
+        "recommendedItemIds": [
+          11920,
+          12625,
+          25628,
+          1712
+        ],
+        "loopBackToStep": 3,
+        "loopCount": 0
+      },
+      {
+        "description": "Bank gems once your inventory is full. The gem bag holds up to 60 uncut gems to delay banking. Shilo Village bank is immediately above the underground mine entrance.",
+        "worldX": 2852,
+        "worldY": 2954,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 8,
+        "section": "Bank"
       }
     ],
-    "afkLevel": 2
+    "afkLevel": 2,
+    "requirements": {
+      "quests": [
+        "SHILO_VILLAGE"
+      ],
+      "skills": [
+        {
+          "skill": "MINING",
+          "level": 40
+        }
+      ]
+    }
   },
   {
     "name": "Fishing (Swordfish)",
@@ -27722,25 +28428,63 @@
       }
     ],
     "locationDescription": "Fishing Guild",
-    "travelTip": "Skills necklace teleport to Fishing Guild",
+    "travelTip": "Skills necklace -> Fishing Guild; or Camelot tele + run to Catherby",
     "guidanceSteps": [
       {
-        "description": "Travel to the Fishing Guild (skills necklace) or Catherby beach for swordfish spots",
+        "description": "Bank for swordfish fishing. Bring a harpoon (or use barehand fishing at 55 Strength and Agility for higher XP). Fishing Guild entrance requires 68 Fishing (boostable from 63). Catherby works from 50 Fishing with no guild requirement.",
+        "worldX": 2573,
+        "worldY": 3441,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "requiredItemIds": [
+          311
+        ],
+        "section": "Bank prep"
+      },
+      {
+        "description": "Travel to the Fishing Guild (68 Fishing, boostable). Skills necklace teleports directly to the guild entrance. Alternatively Camelot teleport and run south to Catherby beach swordfish spots.",
         "worldX": 2604,
         "worldY": 3414,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Skills necklace -> Fishing Guild; Camelot tele -> Catherby (no guild level req)",
+        "section": "Travel"
       },
       {
-        "description": "Travel to the Fishing Guild and harpoon swordfish.",
+        "description": "Harpoon swordfish at harpoon spots. Each catch rolls the Heron pet and Big swordfish. Heron pet rate scales with Fishing level. Barehand fishing (55 Strength + Agility required) gives higher XP at the same drop rates. Guild bank is among the closest to a fishing spot in the game.",
         "worldX": 2604,
         "worldY": 3414,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Fish",
+        "recommendedItemIds": [
+          311,
+          12637
+        ],
+        "loopBackToStep": 3,
+        "loopCount": 0
+      },
+      {
+        "description": "Bank at the Fishing Guild bank chest (very close to fishing spots) or drop fish if power-fishing for XP.",
+        "worldX": 2573,
+        "worldY": 3441,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "section": "Bank"
       }
     ],
-    "afkLevel": 3
+    "afkLevel": 3,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "FISHING",
+          "level": 50
+        }
+      ]
+    }
   },
   {
     "name": "Runecrafting (Fire Runes)",
@@ -27874,25 +28618,71 @@
       }
     ],
     "locationDescription": "Mogre Camp, underwater south of Mudskipper Point",
-    "travelTip": "Fairy ring AIQ -> Mudskipper Point, dive underwater",
+    "travelTip": "Fairy ring AIQ -> Mudskipper Point; or Amulet of glory -> Draynor + run",
     "guidanceSteps": [
       {
-        "description": "Travel to Mogre Camp, underwater south of Mudskipper Point.",
+        "description": "Bank for Mogre Camp. Bring a weapon for level 23 underwater crabs, food, fishbowl helmet and diving apparatus to breathe underwater. Recipe for Disaster (Pirate Pete subquest) required to enter the underwater area.",
+        "worldX": 2943,
+        "worldY": 3197,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 10,
+        "requiredItemIds": [
+          7535,
+          7534
+        ],
+        "section": "Bank prep"
+      },
+      {
+        "description": "Travel to Mudskipper Point. Fairy ring AIQ teleports to the Feldip area; run north-west to Mudskipper Point. Alternatively amulet of glory to Draynor Village then run south-west along the coast.",
         "worldX": 2987,
         "worldY": 3033,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15,
+        "travelTip": "Fairy ring AIQ -> Mudskipper Point (run NW); or Amulet of glory -> Draynor + run SW",
+        "section": "Travel"
       },
       {
-        "description": "Travel to Mudskipper Point, dive underwater and kill crabs (level 23) for claw and shell drops.",
+        "description": "Dive into the underwater entrance at Mudskipper Point. Equip your fishbowl helmet and diving apparatus before diving. The entrance is on the south side of the point.",
         "worldX": 2987,
         "worldY": 3033,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "objectId": 10905,
+        "objectInteractAction": "Dive-into",
+        "completionCondition": "PLAYER_ON_PLANE",
+        "section": "Travel"
+      },
+      {
+        "description": "Kill underwater crabs (combat level 23) in the Mogre Camp. Fresh crab claw drops at 1/8 and fresh crab shell at 1/8 - used to craft crab claw and shell equipment. Any melee weapon works. Mogres (level 60) share the area if you need their drops.",
+        "worldX": 2978,
+        "worldY": 9181,
+        "worldPlane": 0,
+        "npcId": 2592,
+        "interactAction": "Attack",
+        "completionCondition": "MANUAL",
+        "section": "Kill",
+        "recommendedItemIds": [
+          7535,
+          7534,
+          7462
+        ],
+        "loopBackToStep": 4,
+        "loopCount": 0
+      },
+      {
+        "description": "Surface via the underwater exit and bank fresh crab claws and shells at Port Sarim or Draynor Village once your inventory is full.",
+        "worldX": 2987,
+        "worldY": 3033,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "section": "Bank"
       }
     ],
-    "afkLevel": 2
+    "afkLevel": 2,
+    "npcId": 2592,
+    "interactAction": "Attack"
   },
   {
     "name": "Gnome Restaurant (Seed Pods)",
@@ -29478,22 +30268,46 @@
       }
     ],
     "locationDescription": "Cut squid caught while Sailing",
-    "travelTip": "Port Sarim docks -> sail to catch squid",
+    "travelTip": "Port Piscarilius sailing dock -> sail to squid fishing spots",
     "guidanceSteps": [
       {
-        "description": "Travel to Cut squid caught while Sailing.",
+        "description": "Bank for squid cutting. Bring a knife for hand-cutting (most beak rolls per squid) or use the boat chum station for faster throughput. Jumbo squid give 1/512 per cut; swordtip squid give 1/1024. Sailing level 45 required. Spirit flakes or rada's blessing can double catches.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 15,
+        "section": "Bank prep"
       },
       {
-        "description": "Cut squid obtained from Sailing to find squid beaks.",
+        "description": "Sail from Port Piscarilius to squid lantern fishing spots. A chum station (2 fish/tick), advanced chum station (3/tick), or chum spreader (4/tick) on your boat speeds processing significantly and can yield multiple beaks per tick.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Travel"
+      },
+      {
+        "description": "Cut squid with a knife or use the boat chum station. If your inventory is full when a beak drops, offcuts drop to the ground automatically to make room. Fish offcuts and fine fish offcuts from cutting are useful bait for crab trapping and aerial fishing.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Activity",
+        "recommendedItemIds": [
+          946
+        ],
+        "loopBackToStep": 3,
+        "loopCount": 0
+      },
+      {
+        "description": "Bank squid beaks at Port Piscarilius once you have obtained one (or after processing a full hold). Squid beaks are used to craft wooden blowpipes.",
+        "worldX": 1824,
+        "worldY": 3691,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "section": "Bank"
       }
     ],
     "mutuallyExclusiveSources": [
