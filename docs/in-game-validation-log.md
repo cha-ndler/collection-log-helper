@@ -9,7 +9,7 @@
 > - `[!]` — Regression / failed (file a new issue and cross-link)
 > - `[?]` — Inconclusive (couldn't reproduce / state-dependent)
 
-> **Last updated**: 2026-05-14 (session: continuous Tier B/B.5/C/E/F implementation)
+> **Last updated**: 2026-05-25 (session: in-game validation + bug-fix — login crash #677, guidance panel flash #682)
 
 ---
 
@@ -21,6 +21,33 @@
 4. Add a short note (or screenshot path) whenever something is off.
 5. If a regression is found, file a GitHub issue and link it from the note column.
 6. When every row in a PR section is `[x]`, append the validation date to the section header and consider the work closed.
+
+---
+
+## PR #677 — Login reentrancy crash fix *(merged 2026-05-25, validated 2026-05-25)*
+
+Closes #676. `PlayerQuestProgressState.onVarbitChanged` ran `Quest.getState` (a clientscript) mid-login-script → `AssertionError: scripts are not reentrant`, hanging the client at "Connecting to server...". Fixed by deferring the refresh via `ClientThread.invokeLater` with a coalescing guard.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Log in on a populated account; reaches the game world (no hang at "Connecting to server") | `[x]` | 2026-05-25: `LOGGED_IN` reached; no `scripts are not reentrant` in the log across multiple logins. |
+| 2 | No `scripts are not reentrant` AssertionError during the login varbit storm | `[x]` | 2026-05-25: zero occurrences. |
+| 3 | Quest-dependent state populates after login (Lost City / RFD / Fairytale II milestones resolve) | `[x]` | 2026-05-25: `QuestProgressState refreshed` shows all milestones resolving correctly. |
+
+---
+
+## PR #682 — Guidance panel flash on inventory change *(merged 2026-05-25, validated 2026-05-25)*
+
+Closes #681. `GuidanceSequencer.onInventoryChanged` re-notified the unchanged step on every `ItemContainerChanged`, blinking the "Items needed" section. Fixed via idempotent `StepProgressView.showStep` + skipping the empty re-notify push; bundled with flicker-free `removeAll` rebuild, idempotent recommended-chip strip, and an off-EDT `getItemComposition` catch.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | Activate guidance on a Slayer/minigame source; gain XP / change inventory repeatedly — "Items needed" section does NOT flash | `[x]` | 2026-05-25: no flash on XP drops; confirmed live on Shades of Mort'ton. |
+| 2 | "Items needed" status stays live — items tick to satisfied as you withdraw/loot them (liveness preserved) | `[x]` | 2026-05-25: updated correctly when looting items from bank for the Mort'ton task. |
+| 3 | Recommended-gear chip strip renders without crashing on guidance activation (#679 off-EDT catch) | `[x]` | 2026-05-25: chips render; zero `must be called on client thread` errors this session. |
+| 4 | No regression to the list rebuild / mode switching (flicker-free `removeAll`) | `[x]` | 2026-05-25: panel renders normally; full test suite green (1668 tests). |
+
+> Follow-ups still open (filed this session, unfixed by design): **#678** (skill enum `RUNECRAFTING` → `RUNECRAFT`), **#679** (resolve chip item names on the client thread — proper fix; the #682 catch only stops the crash), **#680** (Requirements row formats "Shades Of Mortton" instead of "Shades of Mort'ton").
 
 ---
 
