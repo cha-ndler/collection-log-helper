@@ -429,8 +429,53 @@ public class RequirementsChecker
 		return unmet;
 	}
 
+	/**
+	 * Overrides for quest/source enum names that naive title-casing mis-formats.
+	 *
+	 * <p>Covers two classes of problem:
+	 * <ul>
+	 *   <li>Connector words ("of", "the", "and", "in", "a", "to") that should be
+	 *       lowercase in the middle of a name.</li>
+	 *   <li>Names containing apostrophes or other punctuation that is lost when
+	 *       the enum constant was defined (e.g. {@code SHADES_OF_MORTTON} →
+	 *       {@code "Shades of Mort'ton"}).</li>
+	 * </ul>
+	 *
+	 * <p>Keys are the raw enum-constant strings (uppercase, underscores).
+	 * Values are the exact display strings to use instead of the generated one.
+	 */
+	private static final java.util.Map<String, String> ENUM_NAME_OVERRIDES;
+
+	static
+	{
+		java.util.Map<String, String> m = new java.util.HashMap<>();
+		// Apostrophe names — naive split loses the punctuation
+		m.put("SHADES_OF_MORTTON", "Shades of Mort'ton");
+		m.put("ICTHLARIN_S_LITTLE_HELPER", "Icthlarin's Little Helper");
+		m.put("ENAKHRA_S_LAMENT", "Enakhra's Lament");
+		m.put("RATCATCHERS", "Ratcatchers"); // no change needed, just guard
+		ENUM_NAME_OVERRIDES = java.util.Collections.unmodifiableMap(m);
+	}
+
+	/**
+	 * Words that should remain lowercase when appearing in the middle of a
+	 * formatted name (English connector/preposition/article set).
+	 */
+	private static final java.util.Set<String> LOWERCASE_CONNECTORS =
+		java.util.Collections.unmodifiableSet(new java.util.HashSet<>(java.util.Arrays.asList(
+			"of", "the", "and", "in", "a", "an", "to", "for", "at", "by", "or"
+		)));
+
 	static String formatEnumName(String enumName)
 	{
+		// Check the override map first — handles apostrophes and other
+		// punctuation that can't be reconstructed from the enum constant name.
+		String override = ENUM_NAME_OVERRIDES.get(enumName);
+		if (override != null)
+		{
+			return override;
+		}
+
 		String[] parts = enumName.split("_");
 		StringBuilder sb = new StringBuilder();
 		boolean first = true;
@@ -445,16 +490,27 @@ public class RequirementsChecker
 			{
 				sb.append(' ');
 			}
-			first = false;
-			if (part.matches("[IVX]+"))
+			String lower = part.toLowerCase();
+			if (first)
+			{
+				// Always capitalise the first word
+				sb.append(part.charAt(0)).append(part.substring(1).toLowerCase());
+			}
+			else if (part.matches("[IVX]+"))
 			{
 				// Roman numerals stay uppercase
 				sb.append(part);
+			}
+			else if (LOWERCASE_CONNECTORS.contains(lower))
+			{
+				// Connector words stay lowercase mid-name
+				sb.append(lower);
 			}
 			else
 			{
 				sb.append(part.charAt(0)).append(part.substring(1).toLowerCase());
 			}
+			first = false;
 		}
 		return sb.toString();
 	}

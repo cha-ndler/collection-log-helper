@@ -31,6 +31,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.Nullable;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -40,6 +41,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import net.runelite.api.ItemComposition;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.util.AsyncBufferedImage;
@@ -90,6 +92,14 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 
 	private final ItemManager itemManager;
 
+	/**
+	 * Optional client thread used to resolve item names off the EDT.
+	 * When {@code null} (e.g. in {@link com.collectionloghelper.ui.ItemDetailPanel}
+	 * or unit tests), tooltips degrade gracefully to {@code "Item <id>"}.
+	 */
+	@Nullable
+	private final ClientThread clientThread;
+
 	/** The horizontal row that holds the heading label and chip labels. */
 	private final JPanel chipRow;
 
@@ -102,9 +112,32 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 	 */
 	private List<Integer> lastRenderedIds = null;
 
+	/**
+	 * Constructs the panel without a client thread. Chip tooltips will always
+	 * show {@code "Item <id>"} rather than the resolved item name. Use this
+	 * constructor from call sites that don't have access to {@link ClientThread}
+	 * (e.g. {@link com.collectionloghelper.ui.ItemDetailPanel}).
+	 */
 	public SourceRecommendedItemsChipPanel(ItemManager itemManager)
 	{
+		this(itemManager, null);
+	}
+
+	/**
+	 * Constructs the panel with an optional client thread for async name
+	 * resolution. When {@code clientThread} is non-null, each chip's tooltip
+	 * is resolved on the client thread and then applied on the EDT — ensuring
+	 * {@link ItemManager#getItemComposition} is never called from the EDT.
+	 *
+	 * @param itemManager  the item manager (may be {@code null} in unit tests)
+	 * @param clientThread the client thread for deferred name lookup, or
+	 *                     {@code null} to skip name resolution
+	 */
+	public SourceRecommendedItemsChipPanel(@Nullable ItemManager itemManager,
+		@Nullable ClientThread clientThread)
+	{
 		this.itemManager = itemManager;
+		this.clientThread = clientThread;
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(BG);
@@ -181,8 +214,11 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 
 	/**
 	 * Builds a single chip label: a fixed-size icon placeholder surrounded by a
-	 * 1-pixel muted neutral border. The icon and tooltip are loaded
-	 * asynchronously when {@code itemManager} can resolve them.
+	 * 1-pixel muted neutral border. The icon is loaded asynchronously via
+	 * {@link #loadChipIcon}. The tooltip is initially set to {@code "Item <id>"}
+	 * and then updated asynchronously on the client thread (if one is available)
+	 * to avoid calling {@link ItemManager#getItemComposition} from the EDT, which
+	 * throws {@code AssertionError: must be called on client thread}.
 	 *
 	 * <p>Package-visible for test reflection.
 	 */
@@ -198,14 +234,45 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 		chip.setBackground(BG);
 		chip.setOpaque(true);
 
-		// Tooltip — item name when resolvable; fall back to the raw ID so
-		// players can spot-check missing names in dev builds.
-		String tooltip = lookupName(itemId);
-		chip.setToolTipText(tooltip);
+		// Safe placeholder — never calls getItemComposition on the EDT.
+		chip.setToolTipText("Item " + itemId);
+
+		// Resolve the real item name on the client thread, then push it back to
+		// the EDT. This is a no-op when clientThread is null (e.g. ItemDetailPanel
+		// call site or unit tests), leaving the placeholder tooltip in place.
+		resolveNameAsync(itemId, chip);
 
 		loadChipIcon(itemId, chip);
 
 		return chip;
+	}
+
+	/**
+	 * Schedules an item-name lookup on the client thread and, when done, applies
+	 * the result as the chip's tooltip text on the EDT. No-op when
+	 * {@code clientThread} or {@code itemManager} is null.
+	 */
+	private void resolveNameAsync(int itemId, JLabel chip)
+	{
+		if (clientThread == null || itemManager == null)
+		{
+			return;
+		}
+		clientThread.invokeLater(() ->
+		{
+			String name;
+			try
+			{
+				ItemComposition comp = itemManager.getItemComposition(itemId);
+				name = (comp != null && comp.getName() != null) ? comp.getName() : "Item " + itemId;
+			}
+			catch (Exception ex)
+			{
+				name = "Item " + itemId;
+			}
+			final String resolvedName = name;
+			SwingUtilities.invokeLater(() -> chip.setToolTipText(resolvedName));
+		});
 	}
 
 	/**
@@ -243,40 +310,6 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 		{
 			applyIcon.run();
 		}
-	}
-
-	/**
-	 * Returns the item name for {@code itemId} via {@link ItemManager#getItemComposition},
-	 * falling back to {@code "Item " + itemId} if the lookup fails or returns null.
-	 */
-	private String lookupName(int itemId)
-	{
-		if (itemManager == null)
-		{
-			return "Item " + itemId;
-		}
-		try
-		{
-			ItemComposition comp = itemManager.getItemComposition(itemId);
-			if (comp != null && comp.getName() != null)
-			{
-				return comp.getName();
-			}
-		}
-		catch (RuntimeException | AssertionError ignored)
-		{
-			// Two cases fall through to the id-based fallback:
-			//   1. Some test contexts don't wire up ItemManager fully (RuntimeException).
-			//   2. getItemComposition asserts "must be called on client thread" when
-			//      invoked from the EDT (this widget rebuilds on the EDT). That assertion
-			//      is an AssertionError (an Error, not a RuntimeException); before it was
-			//      caught here it propagated out of buildChip and aborted the whole
-			//      update() lambda mid-strip, leaving the chip row emptied -- the visible
-			//      flash on every rebuild while guidance is active. Catching it lets the
-			//      strip finish building atomically. Proper name resolution on the client
-			//      thread is tracked separately (see issue for off-thread ItemManager use).
-		}
-		return "Item " + itemId;
 	}
 
 	private static BufferedImage scaleImage(BufferedImage source, int width, int height)
