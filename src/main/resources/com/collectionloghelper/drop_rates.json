@@ -3813,6 +3813,17 @@
           3024,
           2434
         ],
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "XERICS_TALISMAN"
+              ]
+            },
+            "description": "POH mounted Xeric's talisman -> Xeric's Heart, then run south-east to the Forthos trapdoor north of Hosidius",
+            "travelTip": "POH Xeric's talisman -> Heart -> run south-east to Forthos trapdoor"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -3910,7 +3921,18 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Falador teleport, or ring of wealth to Falador"
+        "travelTip": "Falador teleport, or ring of wealth to Falador",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "JEWELLERY_BOX_ORNATE"
+              ]
+            },
+            "description": "POH jewellery box -> Ring of wealth -> Falador, then run north-east to Falador Park",
+            "travelTip": "POH Ring of wealth -> Falador -> run north-east to Falador Park"
+          }
+        ]
       },
       {
         "description": "Dig on a mole hill with a spade to enter the Giant Mole's lair",
@@ -4061,6 +4083,17 @@
           385,
           2434,
           1704
+        ],
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "MOUNTED_GLORY"
+              ]
+            },
+            "description": "POH mounted glory -> Edgeville, landing directly at the Edgeville bank to restock before entering the Edgeville Dungeon",
+            "travelTip": "POH mounted glory -> Edgeville bank"
+          }
         ],
         "section": "Bank"
       },
@@ -11317,6 +11350,17 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "JEWELLERY_BOX_FANCY"
+              ]
+            },
+            "description": "POH jewellery box -> Combat bracelet -> Ranging Guild, then run south-east along the road to the Slayer Tower entrance",
+            "travelTip": "POH Combat bracelet -> Ranging Guild -> run south-east to Slayer Tower"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -12252,6 +12296,17 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "JEWELLERY_BOX_FANCY"
+              ]
+            },
+            "description": "POH jewellery box -> Combat bracelet -> Ranging Guild, then run south-east along the road to the Slayer Tower entrance",
+            "travelTip": "POH Combat bracelet -> Ranging Guild -> run south-east to Slayer Tower"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -12590,6 +12645,17 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "JEWELLERY_BOX_FANCY"
+              ]
+            },
+            "description": "POH jewellery box -> Combat bracelet -> Ranging Guild, then run south-east along the road to the Slayer Tower entrance",
+            "travelTip": "POH Combat bracelet -> Ranging Guild -> run south-east to Slayer Tower"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -12734,6 +12800,17 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "FAIRY_RING"
+              ]
+            },
+            "description": "POH superior garden fairy ring (dramen/lunar staff equipped) -> dial CIQ to land directly at the Iorwerth Dungeon entrance in Prifddinas",
+            "travelTip": "POH fairy ring -> CIQ -> Iorwerth Dungeon entrance"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -12858,6 +12935,17 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "JEWELLERY_BOX_BASIC"
+              ]
+            },
+            "description": "POH jewellery box -> Ring of dueling -> Castle Wars, then run south to the Smoke Devil Dungeon entrance",
+            "travelTip": "POH Ring of dueling -> Castle Wars -> run south to Smoke Devil Dungeon"
+          }
+        ],
         "section": "Travel"
       },
       {
