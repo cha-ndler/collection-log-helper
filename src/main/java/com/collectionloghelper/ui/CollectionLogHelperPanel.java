@@ -77,6 +77,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
@@ -163,6 +164,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		DropRateDatabase database, PlayerCollectionState collectionState,
 		EfficiencyCalculator calculator, ClueCompletionEstimator clueEstimator,
 		ItemManager itemManager,
+		ClientThread clientThread,
 		RequirementsChecker requirementsChecker, DataSyncState dataSyncState,
 		SlayerTaskState slayerTaskState,
 		SlayerStrategyCalculator slayerStrategyCalculator,
@@ -197,6 +199,7 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			slayerStrategyCalculator,
 			requirementsChecker,
 			itemManager,
+			clientThread,
 			guidanceActivator,
 			guidanceDeactivator,
 			this);

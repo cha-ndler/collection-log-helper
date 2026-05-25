@@ -38,6 +38,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.FontManager;
 
@@ -83,14 +84,29 @@ public class GuidanceBannerView extends JPanel
 	/**
 	 * Legacy 1-arg constructor retained for tests that do not exercise the
 	 * source-level Recommended chip strip. New production callers should use
-	 * {@link #GuidanceBannerView(RequirementsChecker, ItemManager)}.
+	 * {@link #GuidanceBannerView(RequirementsChecker, ItemManager, ClientThread)}.
 	 */
 	public GuidanceBannerView(RequirementsChecker requirementsChecker)
 	{
-		this(requirementsChecker, null);
+		this(requirementsChecker, null, null);
 	}
 
+	/**
+	 * 2-arg constructor retained for call sites that have {@link ItemManager}
+	 * but not {@link ClientThread}. Chip tooltips degrade to {@code "Item <id>"}.
+	 */
 	public GuidanceBannerView(RequirementsChecker requirementsChecker, ItemManager itemManager)
+	{
+		this(requirementsChecker, itemManager, null);
+	}
+
+	/**
+	 * Full constructor. When {@code clientThread} is non-null the recommended-gear
+	 * chip tooltips are resolved on the client thread, avoiding the EDT assertion
+	 * in {@link net.runelite.client.game.ItemManager#getItemComposition}.
+	 */
+	public GuidanceBannerView(RequirementsChecker requirementsChecker, ItemManager itemManager,
+		ClientThread clientThread)
 	{
 		this.requirementsChecker = requirementsChecker;
 
@@ -143,7 +159,7 @@ public class GuidanceBannerView extends JPanel
 		// CollectionLogSource.getEffectiveRecommendedItemIds().
 		if (itemManager != null)
 		{
-			recommendedChipPanel = new SourceRecommendedItemsChipPanel(itemManager);
+			recommendedChipPanel = new SourceRecommendedItemsChipPanel(itemManager, clientThread);
 			recommendedChipPanel.setAlignmentX(LEFT_ALIGNMENT);
 			recommendedChipPanel.setBorder(BorderFactory.createEmptyBorder(2, 0, 4, 0));
 			add(recommendedChipPanel);
