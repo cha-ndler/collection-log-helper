@@ -13858,23 +13858,60 @@
       }
     ],
     "locationDescription": "Brimhaven Agility Arena, east of Brimhaven",
-    "travelTip": "Fairy ring CKR -> Brimhaven",
+    "travelTip": "Fairy ring CKR -> Brimhaven, or charter ship to Brimhaven",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "AGILITY",
+          "level": 40
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to Brimhaven Agility Arena, east of Brimhaven.",
+        "description": "Travel to Brimhaven Agility Arena east of Brimhaven. Fairy ring CKR is fastest; alternatively charter ship to Brimhaven from any coastal port. Pay 200gp entrance fee to Cap'n Izzy No-Beard at the door",
         "worldX": 2809,
         "worldY": 3194,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Fairy ring CKR -> run east to arena entrance",
+        "section": "Travel"
       },
       {
-        "description": "Complete laps in the Brimhaven Agility Arena to earn agility tickets for rewards.",
+        "description": "Navigate the obstacle course inside the arena. Follow the blinking yellow arrow to the marked obstacle - only the highlighted obstacle awards a ticket. Tag it, then follow the next arrow. Avoid traps (spinning blades, dart traps) that deal damage",
+        "worldX": 2809,
+        "worldY": 3194,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "recommendedItemIds": [
+          13237,
+          13238,
+          13239,
+          13240,
+          13241,
+          13242
+        ],
+        "section": "Activity"
+      },
+      {
+        "description": "Continue tagging highlighted obstacles to accumulate tickets. Prioritise the marked obstacle each time the arrow changes - missing it resets the ticket timer",
+        "worldX": 2809,
+        "worldY": 3194,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Activity",
+        "loopBackToStep": 1,
+        "loopCount": 0
+      },
+      {
+        "description": "Exchange agility tickets with Cap'n Izzy No-Beard for Brimhaven Graceful recolours (250 tickets each piece) or the Pirate's hook (800 tickets). The full Graceful set takes 1500 tickets total",
         "worldX": 2809,
         "worldY": 3194,
         "worldPlane": 0,
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "You have received an Agility Arena Ticket"
+        "completionChatPattern": "You have received an Agility Arena Ticket",
+        "section": "Reward"
       }
     ],
     "rewardType": "SHOP",
@@ -14297,22 +14334,56 @@
       }
     ],
     "locationDescription": "Mage Training Arena, north-east of Al Kharid",
-    "travelTip": "Ring of dueling -> Emir's Arena",
+    "travelTip": "Ring of dueling -> Emir's Arena, then run north-east",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "MAGIC",
+          "level": 7
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to Mage Training Arena, north-east of Al Kharid.",
+        "description": "Travel to the Mage Training Arena north-east of Al Kharid. Ring of dueling to Emir's Arena is fastest; alternatively teleport to Al Kharid and run north-east past the Duel Arena ruins",
         "worldX": 3363,
         "worldY": 3316,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Ring of dueling -> Emir's Arena, run north-east",
+        "section": "Travel"
       },
       {
-        "description": "Earn pizazz points from the four training rooms to buy rewards from the shop.",
+        "description": "Enter one of the four training rooms. Telekinetic: move statues with Telekinetic Grab. Alchemy: High Alch the correct items. Enchanting: Lvl-1 Enchant jewelry. Graveyard (needs Bones to Peaches unlocked): convert bones. Each room awards its own coloured pizazz points",
+        "worldX": 3374,
+        "worldY": 3316,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "recommendedItemIds": [
+          564,
+          558,
+          562
+        ],
+        "section": "Activity"
+      },
+      {
+        "description": "Bank to restock runes and repeat training rooms until you have enough pizazz points for your target reward. Aim for the Graveyard room once Bones to Peaches is unlocked - it is the fastest pizazz per hour",
         "worldX": 3363,
         "worldY": 3316,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Activity",
+        "loopBackToStep": 1,
+        "loopCount": 0
+      },
+      {
+        "description": "When you have enough pizazz points, visit the reward shop inside the arena to purchase Infinity armour pieces, wands, Mage's book, or Bones to Peaches. The Master wand (17 pizazz of each type) and Mage's book are the primary targets",
+        "worldX": 3363,
+        "worldY": 3316,
+        "worldPlane": 0,
+        "completionCondition": "MANUAL",
+        "section": "Reward"
       }
     ],
     "rewardType": "SHOP",
@@ -15648,22 +15719,61 @@
       }
     ],
     "locationDescription": "Fishing Trawler, Port Khazard",
-    "travelTip": "Minigame tele -> Trawler",
+    "travelTip": "Minigame tele -> Fishing Trawler, or fairy ring BKP -> Port Khazard",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "FISHING",
+          "level": 15
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to Port Khazard (fairy ring BKP or Ardougne teleport). Board Murphy's trawler",
+        "description": "Travel to Port Khazard. Use the Minigame Grouping teleport (Fishing Trawler) for the fastest route, or fairy ring BKP then run south. Bring bailing buckets and rope for repairs",
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Minigame tele -> Fishing Trawler, or fairy ring BKP -> run south",
+        "requiredItemIds": [
+          1925,
+          954
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Board Murphy's trawler at Port Khazard. Bail water and repair nets during the 5-minute voyage. Angler's outfit pieces are 1/8 per trawler reward",
+        "description": "Talk to Murphy and board the trawler when the game is ready to depart",
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "PLAYER_ON_PLANE",
+        "targetPlane": 1,
+        "section": "Activity"
+      },
+      {
+        "description": "During the 10-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope. Bailing continuously maximises your loot share. Two or more unrepaired nets will end the trip early",
+        "worldX": 2661,
+        "worldY": 3164,
+        "worldPlane": 1,
+        "completionCondition": "MANUAL",
+        "recommendedItemIds": [
+          1925,
+          954
+        ],
+        "section": "Activity",
+        "loopBackToStep": 2,
+        "loopCount": 0
+      },
+      {
+        "description": "When the trawler returns to Port Khazard, collect your fish haul from Murphy. Each Angler outfit piece has approximately a 1-in-12 chance per completed voyage. Bank and board again for the next run",
+        "worldX": 2661,
+        "worldY": 3164,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "section": "Reward"
       }
     ]
   },
@@ -15787,22 +15897,71 @@
       }
     ],
     "locationDescription": "Rogues' Den beneath the Burthorpe pub",
-    "travelTip": "Games necklace -> Burthorpe",
+    "travelTip": "Games necklace -> Burthorpe, enter trapdoor in the pub basement",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "THIEVING",
+          "level": 50
+        },
+        {
+          "skill": "AGILITY",
+          "level": 50
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to Rogues' Den beneath the Burthorpe pub.",
+        "description": "Travel to Burthorpe via Games necklace teleport. Enter the pub (Toad and Chicken) and use the trapdoor in the basement to reach Rogues' Den. Bring no weapons or armour - the maze requires light carry weight for some obstacles",
         "worldX": 2907,
         "worldY": 3537,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Games necklace -> Burthorpe, trapdoor in pub basement",
+        "section": "Travel"
       },
       {
-        "description": "Complete the Rogues' Den maze to earn pieces of the rogue equipment set.",
+        "description": "Navigate the maze using Thieving and Agility. Avoid pressure pads (step around them), pick locks on doors, and cross balance beams. Failing an obstacle teleports you to the start - wear nothing in armour slots to minimise failures",
         "worldX": 2907,
         "worldY": 3537,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [
+          3033,
+          4970,
+          3060,
+          4990,
+          1
+        ],
+        "recommendedItemIds": [
+          13237,
+          13238,
+          13239,
+          13240,
+          13241,
+          13242
+        ],
+        "section": "Activity"
+      },
+      {
+        "description": "At the end of the maze, search the safe to receive a random piece of rogue equipment. Each piece has approximately a 5-in-8 chance per run. All 5 pieces are required for the full set",
+        "worldX": 3033,
+        "worldY": 4980,
+        "worldPlane": 1,
+        "completionCondition": "MANUAL",
+        "section": "Reward"
+      },
+      {
+        "description": "To get remaining pieces, return through the trapdoor in the pub basement and repeat the maze. The maze layout is fixed - memorise the safe route to complete runs in under 3 minutes",
+        "worldX": 2907,
+        "worldY": 3537,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "section": "Travel",
+        "loopBackToStep": 1,
+        "loopCount": 0
       }
     ],
     "afkLevel": 0
