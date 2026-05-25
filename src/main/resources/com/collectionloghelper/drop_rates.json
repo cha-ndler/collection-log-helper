@@ -19878,22 +19878,27 @@
       }
     ],
     "locationDescription": "Colossal Wyrm Agility Course in Avium Savannah, Varlamore",
-    "travelTip": "Quetzal whistle -> Varlamore",
+    "travelTip": "Quetzal transport whistle -> Civitas illa Fortis, run south-west to Avium Savannah; or Colossal wyrm teleport scroll (purchased from Telia)",
     "guidanceSteps": [
       {
-        "description": "Travel to Colossal Wyrm Agility Course in Avium Savannah, Varlamore.",
+        "description": "Travel to the Colossal Wyrm Agility Course in Avium Savannah, Varlamore. Requires Children of the Sun and 50 Agility. Use the quetzal transport whistle to Civitas illa Fortis then run south-west, or use a Colossal wyrm teleport scroll.",
         "worldX": 1652,
         "worldY": 2931,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Quetzal whistle -> Civitas illa Fortis -> run south-west; or Colossal wyrm teleport scroll",
+        "section": "Travel"
       },
       {
-        "description": "Run the Colossal Wyrm Agility Course for marks of grace and termite rewards.",
+        "description": "Complete laps of the Colossal Wyrm Agility Course for Varlamore marks of grace and termite currency. Collect marks when they appear on obstacles - they despawn after 10 minutes. Spend marks at Telia for Varlamore graceful pieces and Calcified acorns. Higher Agility level increases lap speed and mark rate.",
         "worldX": 1652,
         "worldY": 2931,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Skilling",
+        "loopBackToStep": 1,
+        "loopCount": 20
       }
     ],
     "rewardType": "SHOP",
@@ -19979,22 +19984,35 @@
       }
     ],
     "locationDescription": "Rooftop Agility Courses, starting at Varrock",
-    "travelTip": "Varrock teleport -> course start",
+    "travelTip": "Camelot teleport -> Seers' Village rooftop (best marks/hr at 60+); Varrock teleport for lower-level courses",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "AGILITY",
+          "level": 10
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to Rooftop Agility Courses, starting at Varrock.",
+        "description": "Travel to your best rooftop course. Seers' Village (60+ Agility, Camelot teleport) gives the most marks per hour. Use Varrock (10+), Canifis (40+), Falador (50+), or Pollnivneach (70+) depending on your level.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 25,
+        "travelTip": "Camelot teleport -> Seers' Village rooftop (60+ Agility); Varrock teleport for Varrock rooftop (10+)",
+        "section": "Travel"
       },
       {
-        "description": "Complete rooftop agility courses for marks of grace (Graceful set, recolours).",
+        "description": "Complete rooftop agility laps. Collect marks of grace when they appear on the course - they despawn after 10 minutes. Equipping graceful reduces run drain by 30% per piece. Aim for the highest-level course available to maximise marks per hour.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Skilling",
+        "loopBackToStep": 1,
+        "loopCount": 20
       }
     ],
     "rewardType": "SHOP",
@@ -20676,23 +20694,36 @@
         "independent": true
       }
     ],
-    "locationDescription": "Crashed shooting stars found throughout Gielinor",
-    "travelTip": "POH telescope -> nearest teleport",
+    "locationDescription": "Crashed shooting stars found throughout Gielinor (spawn every ~90 minutes per world)",
+    "travelTip": "POH mahogany telescope -> pinpoints star landing within 2 minutes; use the nearest teleport for that region; or join the Shooting Stars grouping channel for crowd-sourced locations",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "MINING",
+          "level": 10
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Look for crashed shooting stars using a telescope in your POH, or check the star tracker on the mining guild notice board.",
+        "description": "Locate the next crashed star. Use a telescope in your player-owned house Study (mahogany telescope gives a 2-minute window). Alternatively join the Shooting Stars grouping chat or use a community star-tracker site. Stars fall every 85-95 minutes and vary in size (tier 1-9). Teleport to the region the telescope indicates.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 25,
+        "travelTip": "Use POH telescope to identify region, then teleport there; or Shooting Stars grouping channel",
+        "section": "Scout"
       },
       {
-        "description": "Mine crashed shooting stars found throughout Gielinor for star dust.",
+        "description": "Mine the crashed star. Stars degrade through tiers as miners chip away at them - being the first miner awards double stardust for 300 dust mined. Talk to the Star Sprite that emerges from the core (visible when star reaches tier 1) to receive bonus stardust. Collect stardust and exchange at Dusuri's Star Shop (Mining Guild, Falador) for Celestial ring and Star fragments.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Mine",
+        "loopBackToStep": 0,
+        "loopCount": 20
       }
     ],
     "rewardType": "SHOP",
@@ -27506,23 +27537,36 @@
         "wikiPage": "Rocky"
       }
     ],
-    "locationDescription": "Draynor Village seed market",
-    "travelTip": "Draynor Village teleport or Lumbridge Home teleport -> walk west",
+    "locationDescription": "Draynor Village seed market, or Hosidius seed stall (no guard aggression)",
+    "travelTip": "Amulet of glory -> Draynor Village; or Tithe Farm teleport -> Hosidius seed stall for safer thieving",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "THIEVING",
+          "level": 27
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to the Draynor Village seed market stall (Amulet of glory to Draynor or Lumbridge teleport)",
+        "description": "Travel to a seed stall. Draynor Village (Amulet of glory) is accessible early; Hosidius seed stall (Kourend) has no market guard and is preferred at higher levels. The Rocky pet is the only collection log drop from seed stalls.",
         "worldX": 3080,
         "worldY": 3252,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Amulet of glory -> Draynor Village; or Tithe Farm teleport -> Hosidius seed stall",
+        "section": "Travel"
       },
       {
-        "description": "Steal from seed stalls in Draynor Village for the Master Farmer outfit pieces.",
+        "description": "Steal from seed stalls (27 Thieving required). At Draynor, dodge the market guard to avoid being stunned - click an adjacent stall or move away when the guard faces you. At Hosidius there is no guard. Rocky pet chance is approximately 1/34,000 per steal at base rate.",
         "worldX": 3080,
         "worldY": 3252,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Skilling",
+        "loopBackToStep": 1,
+        "loopCount": 50
       }
     ],
     "afkLevel": 2
@@ -27543,23 +27587,36 @@
         "wikiPage": "Baby_chinchompa"
       }
     ],
-    "locationDescription": "Wilderness black chinchompa hunting area",
-    "travelTip": "Wilderness Obelisk to level 35 -> run east",
+    "locationDescription": "Wilderness black chinchompa hunting area (level 32 Wilderness)",
+    "travelTip": "Edgeville lever -> Wilderness Volcano -> run south-east to level 32-36; or Wilderness Obelisk level 35 teleport",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "HUNTER",
+          "level": 73
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to Wilderness black chinchompa hunting area.",
+        "description": "Travel to the black chinchompa hunting area in level 32-36 Wilderness. Bring only what you can afford to lose - PKers actively target this area. Use the Edgeville lever to reach the Wilderness quickly. A spring trap or box trap and emergency teleport are recommended.",
         "worldX": 3143,
         "worldY": 3771,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Edgeville lever -> Wilderness Volcano -> run south-east; or Wilderness Obelisk level 35",
+        "section": "Travel"
       },
       {
-        "description": "Catch black chinchompas in the Wilderness (level 32-36). Bring minimal risk - PKers frequent this area. Best caught with box traps at 80+ Hunter",
+        "description": "Set box traps to catch black chinchompas (73 Hunter required). Stay alert for PKers approaching from any direction - keep a teleport ready. Always check the mini-map for nearby players. Inventory fills quickly so bank or drop when full.",
         "worldX": 3143,
         "worldY": 3771,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Skilling",
+        "loopBackToStep": 1,
+        "loopCount": 10
       }
     ],
     "afkLevel": 0
@@ -27698,23 +27755,39 @@
         "wikiPage": "Rift_guardian"
       }
     ],
-    "locationDescription": "Fire altar",
-    "travelTip": "Ring of dueling to Duel Arena -> enter fire altar ruins with fire talisman/tiara",
+    "locationDescription": "Fire Altar, north-east of Al Kharid",
+    "travelTip": "Ring of dueling -> Duel Arena (Al Kharid) -> run north-east to fire altar ruins; or Abyss (requires Enter the Abyss miniquest, omit glory/prayer for PvP danger)",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "RUNECRAFTING",
+          "level": 14
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to the Fire Altar via the Abyss or duel ring to Al Kharid then run north",
+        "description": "Travel to the Fire Altar north-east of Al Kharid. Bring a fire tiara (wear it to enter freely) or a fire talisman. Equip a large pouch and medium pouch to carry more essence per trip. Ring of dueling to Duel Arena is the standard banking method - use it to teleport to Castle Wars bank between trips.",
         "worldX": 2583,
         "worldY": 4838,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Ring of dueling -> Duel Arena -> run north-east to fire altar ruins",
+        "requiredItemIds": [
+          6527
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Travel to the Fire altar and craft fire runes.",
+        "description": "Craft fire runes at the altar (14 Runecrafting required). Click the altar to craft all essence in inventory and pouches. Use Ring of dueling to teleport to Castle Wars bank, refill essence, then repeat. Rift guardian pet chance applies each time you craft runes. Lava rune crafting (via combo rune method) is faster XP but requires Earth runes.",
         "worldX": 2583,
         "worldY": 4838,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Skilling",
+        "loopBackToStep": 0,
+        "loopCount": 50
       }
     ],
     "afkLevel": 1
@@ -27735,23 +27808,36 @@
         "wikiPage": "Tangleroot"
       }
     ],
-    "locationDescription": "Farming Guild",
-    "travelTip": "Fairy ring CIR -> Farming Guild",
+    "locationDescription": "Fruit tree patches: Gnome Stronghold, Lleyta, Brimhaven, Catherby, Tree Gnome Village, Farming Guild (75+)",
+    "travelTip": "Spirit tree -> Gnome Stronghold (patch 1); Gnome glider to Lleyta; Brimhaven via boat; Skills necklace -> Catherby; fairy ring CIR -> Farming Guild (75+ Farming)",
+    "requirements": {
+      "skills": [
+        {
+          "skill": "FARMING",
+          "level": 27
+        }
+      ]
+    },
     "guidanceSteps": [
       {
-        "description": "Travel to the Farming Guild (fairy ring CIR) or any fruit tree patch for farming runs",
+        "description": "Start a fruit tree run. Plant saplings at all available patches: Gnome Stronghold (spirit tree), Lleyta (gnome glider), Brimhaven (Charter ship or Ardougne cloak 2+), Catherby (skills necklace or Camelot teleport), Tree Gnome Village (fairy ring CLR), and Farming Guild (75+ Farming, fairy ring CIR). Pay the nearby gardener to protect each tree from disease.",
         "worldX": 1249,
         "worldY": 3719,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 30,
+        "travelTip": "Fairy ring CIR -> Farming Guild; spirit tree -> Gnome Stronghold; gnome glider to Lleyta",
+        "section": "Plant"
       },
       {
-        "description": "Travel to the Farming Guild and check health of fruit trees.",
+        "description": "Wait approximately 16 hours for fruit trees to fully grow (each tree takes 8 growth cycles at ~2 hours each). Tangleroot pet chance applies each time you check health of any fully grown tree. Return to all patches and check health to claim XP and log progress. Re-plant immediately to maximise pet attempts over time.",
         "worldX": 1249,
         "worldY": 3719,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Harvest",
+        "loopBackToStep": 0,
+        "loopCount": 50
       }
     ],
     "afkLevel": 3
@@ -29643,8 +29729,8 @@
         "milestoneKills": 1
       }
     ],
-    "locationDescription": "Prifddinas, south-east corner",
-    "travelTip": "Teleport crystal -> Prifddinas",
+    "locationDescription": "Prifddinas, south-east corner (Ithell district)",
+    "travelTip": "Teleport crystal or Moonclan teleport -> Prifddinas; or fairy ring AJS -> run north",
     "requirements": {
       "quests": [
         "SONG_OF_THE_ELVES"
@@ -29654,22 +29740,25 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the south-east corner of Prifddinas (crystal seed teleport). Requires Song of the Elves",
+        "description": "Travel to Prifddinas (requires Song of the Elves). Use a teleport crystal, Moonclan teleport, or fairy ring AJS. The rabbit spawns in the south-east corner of the city (Ithell district).",
         "worldX": 3267,
         "worldY": 6082,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 15
+        "completionDistance": 15,
+        "travelTip": "Teleport crystal -> Prifddinas; or fairy ring AJS -> run north",
+        "section": "Travel"
       },
       {
-        "description": "Find and kill the Prifddinas rabbit for the crystal grail.",
+        "description": "Locate and kill the Prifddinas Rabbit in the south-east corner of the city. The rabbit has very low combat level (level 2) so any attack style works. This is a one-off guaranteed drop - only one Crystal grail exists.",
         "worldX": 3267,
         "worldY": 6082,
         "worldPlane": 0,
         "npcId": 9118,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 9118
+        "completionNpcId": 9118,
+        "section": "Kill"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29694,27 +29783,43 @@
       }
     ],
     "locationDescription": "Darkmeyer, Morytania",
-    "travelTip": "Drakan's medallion -> Darkmeyer",
+    "travelTip": "Drakan's medallion -> Darkmeyer; or Kharyrll teleport (Ancient Magicks) -> run north",
     "requirements": {
       "quests": [
         "SINS_OF_THE_FATHER"
+      ],
+      "skills": [
+        {
+          "skill": "THIEVING",
+          "level": 82
+        }
       ]
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Darkmeyer via Drakan medallion. Pickpocket Vyrewatch Sentinels for blood shards",
+        "description": "Travel to Darkmeyer via Drakan's medallion (Sins of the Father required). Equip vyre noble clothing (top, legs, shoes) before entering - without it Vyrewatch Sentinels will attack rather than let you pickpocket them.",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "travelTip": "Drakan's medallion -> Darkmeyer; or Kharyrll teleport -> run north",
+        "requiredItemIds": [
+          24774,
+          24775,
+          24776
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Travel to Darkmeyer and pickpocket vyres for blood shards.",
+        "description": "Pickpocket Vyrewatch Sentinels (82 Thieving required). Wear vyre noble robes to avoid aggression. Blood shards drop at approximately 1/5000 per pickpocket. Rogue's outfit doubles pickpocket loot. Use Dodgy necklace to avoid stun/damage on failure.",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Skilling",
+        "loopBackToStep": 1,
+        "loopCount": 50
       }
     ],
     "mutuallyExclusiveSources": [
