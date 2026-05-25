@@ -17814,22 +17814,25 @@
       }
     ],
     "locationDescription": "Port Sarim docks, obtained via various Sailing activities",
-    "travelTip": "Sailors' amulet to any port, board boat, sail and sort salvage",
+    "travelTip": "Sailors' amulet -> any port, complete port tasks or salvage for paints",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port.",
+        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock)",
+        "section": "Travel"
       },
       {
-        "description": "Board your boat and sail. Defeat sea creatures and sort salvage for a chance at boat paint drops.",
+        "description": "Board your boat and earn boat paints through Sailing activities: port tasks (Shark paint, common), Barracuda Trials Marlin rank (Barracuda paint), Martial salvage (Salvor's paint, rare), kraken variant drops (Inky paint, rare). Deity paints require fully charting the corresponding ocean and completing an NPC hand-in. Apply paints at the Shipyard boat schematics board (25 Construction required).",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Activity"
       }
     ],
     "rewardType": "MIXED",
@@ -17842,6 +17845,10 @@
         {
           "skill": "SAILING",
           "level": 28
+        },
+        {
+          "skill": "CONSTRUCTION",
+          "level": 25
         }
       ]
     }
@@ -19308,22 +19315,25 @@
       }
     ],
     "locationDescription": "Open ocean during Sailing voyages",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to encounters",
+    "travelTip": "Sailors' amulet -> any port, board boat and sail to trigger encounters",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port.",
+        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock)",
+        "section": "Travel"
       },
       {
-        "description": "Board your boat and sail into open water. Engage random ocean encounters as they appear.",
+        "description": "Board your boat and sail. Ocean encounters spawn randomly while sailing (even turning in place). Types include lost crates (loot), giant clams (pearl crafting), lost caskets (clue reward rolls), castaway rescues (XP), and clue turtles (clue scrolls). Encounters despawn after 60 seconds without interaction. A keg filled with kraken ink stout increases encounter rate by 4%.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Activity"
       }
     ],
     "rewardType": "MILESTONE",
@@ -19431,22 +19441,25 @@
       }
     ],
     "locationDescription": "Various Sailing activities and island exploration",
-    "travelTip": "Sailors' amulet to any port, board boat, sail",
+    "travelTip": "Sailors' amulet -> any port, board boat for various Sailing activities",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port.",
+        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock)",
+        "section": "Travel"
       },
       {
-        "description": "Board your boat and participate in various Sailing activities including voyages and island exploration.",
+        "description": "Board your boat and participate in Sailing activities: shipwreck salvaging (dragon materials, Boat bottle, Facility bottle), boat combat encounters (Dragon nails, Dragon cannon barrel, Bottled storm), and ocean encounters (Echo pearl). Higher Sailing levels unlock better shipwrecks and stronger sea encounters with improved rare drop rates.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Activity"
       }
     ],
     "mutuallyExclusiveSources": [
@@ -19464,7 +19477,15 @@
       "Martial Salvage",
       "Fremennik Salvage",
       "Opulent Salvage"
-    ]
+    ],
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 15
+        }
+      ]
+    }
   },
   {
     "name": "Sea Treasures",
@@ -19612,22 +19633,25 @@
       }
     ],
     "locationDescription": "Salvaging and treasure hunting during Sailing voyages",
-    "travelTip": "Sailors' amulet to any port, complete sea treasure voyages",
+    "travelTip": "Sailors' amulet -> any port, accept sea treasure task from notice board",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port. Accept a sea treasure task from the port notice board.",
+        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock)",
+        "section": "Travel"
       },
       {
-        "description": "Complete sea treasure voyages from port notice boards. Higher Sailing levels unlock better treasures.",
+        "description": "Board your boat and navigate to the marked sea treasure location. Interact with the treasure spot to collect Medallion fragments (1-8, combine to form Sailors' amulet (inert)) and rare antique junk: Rusty locket, Mouldy block, Dull knife, Broken compass, Rusty coin, Broken sextant, Mouldy doll, Smashed mirror. Higher Sailing levels unlock better treasure voyages.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
-        "completionCondition": "MANUAL"
+        "completionCondition": "MANUAL",
+        "section": "Activity"
       }
     ],
     "rewardType": "MIXED",
@@ -29280,23 +29304,36 @@
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
+    "travelTip": "Sailors' amulet -> The Pandemonium or nearest port, board boat",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port. Walk to your boat's gangplank.",
+        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock); Port Roberts/Red Rock/Deepfin Point if markers activated",
+        "requiredItemIds": [
+          32399
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack albatrosss when they appear, then Harvest defeated albatro for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat and sail into open water. Albatrosses are sea encounters requiring a cannon to engage. Load cannonballs before engaging. No special mechanics -- fire cannon until dead, then Harvest the carcass for loot.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
+        "npcId": 15224,
+        "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 15224
+        "completionNpcId": 15224,
+        "section": "Combat",
+        "recommendedItemIds": [
+          32399,
+          31916,
+          385
+        ]
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29353,23 +29390,36 @@
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
+    "travelTip": "Sailors' amulet -> The Pandemonium or nearest port, board boat",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port. Walk to your boat's gangplank.",
+        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock); Port Roberts/Red Rock/Deepfin Point if markers activated",
+        "requiredItemIds": [
+          32399
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack narwhals when they appear, then Harvest defeated narwhals for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat and sail. Narwhals are sea encounters; engage with your cannon. No special mechanics -- fire cannon until dead, then Harvest the carcass for loot including Narwhal horn (1/20) and Dragon nails.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
+        "npcId": 15202,
+        "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 15202
+        "completionNpcId": 15202,
+        "section": "Combat",
+        "recommendedItemIds": [
+          32399,
+          31916,
+          385
+        ]
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29426,23 +29476,36 @@
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
+    "travelTip": "Sailors' amulet -> The Pandemonium or nearest port, board boat",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port. Walk to your boat's gangplank.",
+        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock); Port Roberts/Red Rock/Deepfin Point if markers activated",
+        "requiredItemIds": [
+          32399
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack orcas when they appear, then Harvest defeated orcas for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat and sail. Orcas are sea encounters at Sailing 80+; engage with your cannon. Orcas have higher HP than earlier encounters -- use the strongest cannonball tier your cannon supports. Harvest the carcass after the kill.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
+        "npcId": 15204,
+        "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 15204
+        "completionNpcId": 15204,
+        "section": "Combat",
+        "recommendedItemIds": [
+          32399,
+          31916,
+          385
+        ]
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29506,23 +29569,36 @@
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
+    "travelTip": "Sailors' amulet -> The Pandemonium or nearest port, board boat",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port. Walk to your boat's gangplank.",
+        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock); Port Roberts/Red Rock/Deepfin Point if markers activated",
+        "requiredItemIds": [
+          32399
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack great white sharks when they appear, then Harvest defeated great white sharks for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat and sail. Great white sharks are aggressive sea encounters at Sailing 75+. Engage with your cannon -- the shark moves toward your boat. Fire cannon until dead, then Harvest the carcass for loot including Dragon metal sheet and Broken dragon hook.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
+        "npcId": 15200,
+        "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 15200
+        "completionNpcId": 15200,
+        "section": "Combat",
+        "recommendedItemIds": [
+          32399,
+          31916,
+          385
+        ]
       }
     ],
     "mutuallyExclusiveSources": [
@@ -29593,23 +29669,36 @@
       }
     ],
     "locationDescription": "Boat combat encounters while Sailing",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to encounter",
+    "travelTip": "Sailors' amulet -> The Pandemonium or nearest port, board boat",
     "guidanceSteps": [
       {
-        "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port. Walk to your boat's gangplank.",
+        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock); Port Roberts/Red Rock/Deepfin Point if markers activated",
+        "requiredItemIds": [
+          32399
+        ],
+        "section": "Travel"
       },
       {
-        "description": "Board your boat via the dock gangplank, select your boat, and sail into open water. Requires a cannon facility (28 Sailing) with cannonballs loaded. Attack vampyre krakens when they appear, then Harvest defeated vampyre krakens for loot. Repair at a Shipwright when needed.",
+        "description": "Board your boat and sail. Vampyre krakens are aggressive sea encounters at Sailing 78+. Use Protect from Magic while manning the cannon -- krakens deal magic-based tentacle attacks. Fire cannon until dead, then Harvest the carcass for a chance at Bottled storm (1/512) and Inky paint (1/1500).",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
+        "npcId": 15212,
+        "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
-        "completionNpcId": 15212
+        "completionNpcId": 15212,
+        "section": "Combat",
+        "recommendedItemIds": [
+          32399,
+          31916,
+          385
+        ]
       }
     ],
     "mutuallyExclusiveSources": [
