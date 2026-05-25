@@ -19880,7 +19880,7 @@
     "aggregated": false,
     "requirements": {
       "quests": [
-        "ICTHLARIN_LITTLE_HELPER"
+        "ICTHLARINS_LITTLE_HELPER"
       ],
       "skills": [
         {
