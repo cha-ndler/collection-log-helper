@@ -4117,6 +4117,21 @@
             },
             "description": "POH mounted glory -> Edgeville, landing directly at the Edgeville bank to restock before entering the Edgeville Dungeon",
             "travelTip": "POH mounted glory -> Edgeville bank"
+          },
+          {
+            "requirements": {
+              "inventoryItemIdsAny": [
+                1706,
+                1708,
+                1710,
+                1712,
+                11976,
+                11978,
+                19707
+              ]
+            },
+            "description": "Rub an Amulet of glory from your inventory and select Edgeville to land at the Edgeville bank, then run east to the dungeon trapdoor north of the bank.",
+            "travelTip": "Amulet of glory (inventory) -> Edgeville bank"
           }
         ],
         "section": "Bank"
@@ -5152,6 +5167,24 @@
           1704,
           385,
           2434
+        ],
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "inventoryItemIdsAny": [
+                2552,
+                2554,
+                2556,
+                2558,
+                2560,
+                2562,
+                2564,
+                2566
+              ]
+            },
+            "description": "Rub a Ring of dueling from your inventory and select Ferox Enclave to bank instantly, restock the cheap kit, and recharge amulets at the fountain before entering the Wilderness.",
+            "travelTip": "Ring of dueling (inventory) -> Ferox Enclave bank"
+          }
         ],
         "section": "Bank"
       },
@@ -9985,6 +10018,23 @@
           391,
           2434,
           2444
+        ],
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "inventoryItemIdsAny": [
+                1706,
+                1708,
+                1710,
+                1712,
+                11976,
+                11978,
+                19707
+              ]
+            },
+            "description": "Rub an Amulet of glory from your inventory and select Edgeville to bank at the Edgeville bank, restock the cheap Wilderness kit, then head north toward the Revenant Caves.",
+            "travelTip": "Amulet of glory (inventory) -> Edgeville bank"
+          }
         ],
         "section": "Bank"
       },
@@ -16845,7 +16895,25 @@
         "worldY": 3089,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "inventoryItemIdsAny": [
+                2552,
+                2554,
+                2556,
+                2558,
+                2560,
+                2562,
+                2564,
+                2566
+              ]
+            },
+            "description": "Rub a Ring of dueling from your inventory and select Castle Wars to teleport straight to the arena lobby, skipping the Minigame teleport interface and its cooldown.",
+            "travelTip": "Ring of dueling (inventory) -> Castle Wars"
+          }
+        ]
       },
       {
         "section": "Queue",
