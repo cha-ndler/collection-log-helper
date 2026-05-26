@@ -180,6 +180,8 @@ public class B1GuidanceStepIntegrationTest
 			tree,
 						null, /* perItemStepPriority */
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 

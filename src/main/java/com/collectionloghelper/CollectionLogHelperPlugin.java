@@ -275,6 +275,10 @@ public class CollectionLogHelperPlugin extends Plugin
 			collectionStateChangeHandler::handleSequenceComplete);
 		// Wire coordinator into resolver (post-construction, avoids circular injection)
 		guidance.getRequiredItemResolver().setCoordinator(guidance.getGuidanceCoordinator());
+		// Wire the active-target supplier into the sequencer for #719 restock detection
+		// (post-construction, same circular-injection avoidance as the resolver above).
+		guidance.getGuidanceSequencer().setActiveTargetSupplier(
+			guidance.getGuidanceCoordinator()::getActiveTargetItemId);
 
 		// Use a placeholder icon initially, then swap to the real item sprite once loaded
 		final BufferedImage placeholder = ImageUtil.loadImageResource(getClass(), "panel_icon.png");

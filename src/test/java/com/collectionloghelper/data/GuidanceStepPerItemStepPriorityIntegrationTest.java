@@ -173,6 +173,8 @@ public class GuidanceStepPerItemStepPriorityIntegrationTest
 			null,                       // conditionTree
 						perItemStepPriority, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 }
