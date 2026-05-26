@@ -195,6 +195,8 @@ public class PerItemStepPriorityEvaluatorTest
 			null,                       // conditionTree
 						perItemStepPriority, // perItemStepPriority (under test)
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 }

@@ -102,6 +102,8 @@ public class CerberusGuidance implements BossGuidance
 			null,              // conditionTree
 			null,              // perItemStepPriority
 			null               // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 
 		GuidanceStep gateStep = new GuidanceStep(
@@ -140,6 +142,8 @@ public class CerberusGuidance implements BossGuidance
 			null,              // conditionTree
 			null,              // perItemStepPriority
 			null               // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 
 		GuidanceStep killStep = new GuidanceStep(
@@ -177,6 +181,8 @@ public class CerberusGuidance implements BossGuidance
 			null,              // conditionTree
 			null,              // perItemStepPriority
 			null               // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 
 		return Arrays.asList(travelStep, gateStep, killStep);

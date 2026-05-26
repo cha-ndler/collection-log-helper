@@ -136,6 +136,8 @@ public class GuidanceSequencerWaypointTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 
@@ -176,6 +178,8 @@ public class GuidanceSequencerWaypointTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 
@@ -292,6 +296,8 @@ public class GuidanceSequencerWaypointTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 
 		AtomicBoolean stepAdvanced = new AtomicBoolean(false);
@@ -345,6 +351,8 @@ public class GuidanceSequencerWaypointTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 
 		AtomicBoolean stepAdvanced = new AtomicBoolean(false);
