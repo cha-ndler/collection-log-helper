@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Verifies style-selection logic: enum values are well-formed, the default
@@ -140,5 +141,14 @@ public class HighlightStyleSelectionTest
 		{
 		};
 		assertEquals(ObjectHighlightStyle.OUTLINE_GLOW, cfg.objectHighlightStyle());
+	}
+
+	@Test
+	public void config_showGuidanceTargetMarkerDefaultsTrue()
+	{
+		CollectionLogHelperConfig cfg = new CollectionLogHelperConfig()
+		{
+		};
+		assertTrue(cfg.showGuidanceTargetMarker());
 	}
 }
