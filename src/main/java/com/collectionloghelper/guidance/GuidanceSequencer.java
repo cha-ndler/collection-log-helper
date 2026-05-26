@@ -407,6 +407,16 @@ public class GuidanceSequencer
 	/**
 	 * Called when a collection log item is obtained. Checks ITEM_OBTAINED condition
 	 * and sets {@link #targetSlotUnlocked} if the item belongs to the active source.
+	 *
+	 * <p>When the obtained item is one of the active source's target collection-log
+	 * slots, the guidance for that source is logically finished regardless of the
+	 * current step / inventory state (e.g., the player still holds a chest key) — so
+	 * the sequence is completed immediately. This routes through the normal
+	 * {@code onSequenceComplete} callback, which deactivates guidance and lets the
+	 * auto-advance logic roll to the next Top Pick (the target-slot-unlocked flag is
+	 * already set, so {@link #wasTargetSlotUnlocked()} reports {@code true}). Without
+	 * this, guidance could stay pinned on a completed item because the final step's
+	 * own completion condition (inventory / chat) had not yet fired (#708).
 	 */
 	public void onItemObtained(int itemId)
 	{
@@ -423,8 +433,12 @@ public class GuidanceSequencer
 				if (item.getItemId() == itemId)
 				{
 					targetSlotUnlocked = true;
-					log.info("Target slot unlocked for {} (itemId={})", activeSource.getName(), itemId);
-					break;
+					log.info("Target slot unlocked for {} (itemId={}) — completing guidance",
+						activeSource.getName(), itemId);
+					// The guided collection-log item was obtained: the sequence is done,
+					// even if the final step's completion condition has not fired yet.
+					fireSequenceComplete();
+					return;
 				}
 			}
 		}
