@@ -134,7 +134,7 @@ public class RequirementsCheckerB0Test
 		SourceRequirements req = new SourceRequirements(
 			null, null, null,
 			Arrays.asList("JEWELLERY_BOX_FANCY", "FAIRY_RING"),
-			null, null, null);
+			null, null, null, null, null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -144,7 +144,7 @@ public class RequirementsCheckerB0Test
 		SourceRequirements req = new SourceRequirements(
 			null, null, null,
 			Collections.emptyList(),
-			null, null, null);
+			null, null, null, null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -173,7 +173,7 @@ public class RequirementsCheckerB0Test
 		lenient().when(equippedItemState.hasEquipped(DRAKANS_MEDALLION)).thenReturn(false);
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null,
-			Arrays.asList(RING_OF_SHADOWS, DRAKANS_MEDALLION), null, null);
+			Arrays.asList(RING_OF_SHADOWS, DRAKANS_MEDALLION), null, null, null, null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -182,7 +182,7 @@ public class RequirementsCheckerB0Test
 	{
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null,
-			Collections.emptyList(), null, null);
+			Collections.emptyList(), null, null, null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -199,7 +199,7 @@ public class RequirementsCheckerB0Test
 			Collections.singletonList(new SkillRequirement("STRENGTH", 70)),
 			null,
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
-			Collections.singletonList(RING_OF_SHADOWS), null, null);
+			Collections.singletonList(RING_OF_SHADOWS), null, null, null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -213,7 +213,7 @@ public class RequirementsCheckerB0Test
 			Collections.singletonList(new SkillRequirement("STRENGTH", 70)),
 			null,
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
-			null, null, null);
+			null, null, null, null, null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -225,7 +225,7 @@ public class RequirementsCheckerB0Test
 		SourceRequirements req = new SourceRequirements(
 			null, null, null,
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
-			Collections.singletonList(RING_OF_SHADOWS), null, null);
+			Collections.singletonList(RING_OF_SHADOWS), null, null, null, null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -247,7 +247,7 @@ public class RequirementsCheckerB0Test
 			altWithReq("Fast: POH + ring", new SourceRequirements(
 				null, null, null,
 				Collections.singletonList("JEWELLERY_BOX_FANCY"),
-				Collections.singletonList(RING_OF_SHADOWS), null, null)),
+				Collections.singletonList(RING_OF_SHADOWS), null, null, null, null)),
 			altWithReq("Slow: ring only", equippedReq(RING_OF_SHADOWS)));
 
 		assertEquals("Fast: POH + ring", selectFirstMatching(alts));
@@ -264,7 +264,7 @@ public class RequirementsCheckerB0Test
 			altWithReq("Fast: POH + ring", new SourceRequirements(
 				null, null, null,
 				Collections.singletonList("JEWELLERY_BOX_FANCY"),
-				Collections.singletonList(RING_OF_SHADOWS), null, null)),
+				Collections.singletonList(RING_OF_SHADOWS), null, null, null, null)),
 			altWithReq("Slow: ring only", equippedReq(RING_OF_SHADOWS)));
 
 		assertEquals("Slow: ring only", selectFirstMatching(alts));
@@ -290,14 +290,14 @@ public class RequirementsCheckerB0Test
 		return new SourceRequirements(
 			null, null, null,
 			Collections.singletonList(teleportName),
-			null, null, null);
+			null, null, null, null, null);
 	}
 
 	private static SourceRequirements equippedReq(int itemId)
 	{
 		return new SourceRequirements(
 			null, null, null, null,
-			Collections.singletonList(itemId), null, null);
+			Collections.singletonList(itemId), null, null, null, null);
 	}
 
 	private static ConditionalAlternative altWithReq(String description, SourceRequirements requirements)
