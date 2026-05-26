@@ -442,7 +442,10 @@ public class RequirementsChecker
 				}
 				catch (IllegalArgumentException e)
 				{
+					// Fail closed: an unverifiable requirement must not silently
+					// promise a shortcut the player may not qualify for.
 					log.warn("Unknown quest enum: {}", questName);
+					unmet.add("Quest started: " + formatEnumName(questName));
 				}
 			}
 		}
@@ -463,7 +466,10 @@ public class RequirementsChecker
 				}
 				catch (IllegalArgumentException e)
 				{
+					// Fail closed: an unverifiable requirement must not silently
+					// promise a shortcut the player may not qualify for.
 					log.warn("Unknown skill enum: {}", skillName);
+					unmet.add("Skill cape: " + formatEnumName(skillName));
 				}
 			}
 		}

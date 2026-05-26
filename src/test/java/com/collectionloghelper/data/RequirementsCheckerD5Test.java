@@ -117,11 +117,11 @@ public class RequirementsCheckerD5Test
 	}
 
 	@Test
-	public void meetsRequirements_unknownQuestMilestoneEnum_isTrue()
+	public void meetsRequirements_unknownQuestMilestoneEnum_isFalse()
 	{
-		// Fail-closed resolution logs a warning; an unresolved name is skipped,
-		// so a requirement consisting only of an unknown name has no unmet entry.
-		assertTrue(checker.meetsRequirements(questMilestoneReq("DOES_NOT_EXIST")));
+		// Fail closed: an unresolvable quest name cannot be verified, so the
+		// requirement is treated as unmet rather than promising the shortcut.
+		assertFalse(checker.meetsRequirements(questMilestoneReq("DOES_NOT_EXIST")));
 	}
 
 	// -- skillCapePerks ---------------------------------------------------------
@@ -149,12 +149,12 @@ public class RequirementsCheckerD5Test
 	}
 
 	@Test
-	public void meetsRequirements_unknownSkillCapePerkEnum_isTrue()
+	public void meetsRequirements_unknownSkillCapePerkEnum_isFalse()
 	{
-		// Fail-closed: unknown skill name is skipped, so an otherwise-empty
-		// requirement has no unmet entry. (RUNECRAFTING is intentionally wrong;
+		// Fail closed: an unresolvable skill name cannot be verified, so the
+		// requirement is treated as unmet. (RUNECRAFTING is intentionally wrong;
 		// the real constant is RUNECRAFT.)
-		assertTrue(checker.meetsRequirements(skillCapePerkReq("RUNECRAFTING")));
+		assertFalse(checker.meetsRequirements(skillCapePerkReq("RUNECRAFTING")));
 	}
 
 	// -- Helpers ----------------------------------------------------------------
