@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -186,8 +187,19 @@ public class D5SchemaMigrationTest
 
 	// -- skillCapePerks walk ----------------------------------------------------
 
+	// D5-H wired skill-cape-perk alternatives on these sources; they are exempt
+	// from the "skillCapePerks must be null" invariant.
+	private static final Set<String> SKILL_CAPE_ALLOWED = Set.of(
+		"Hespori",
+		"Farming (Fruit Trees)",
+		"Black Chinchompas");
+
 	private static void checkSourceSkillCapePerks(CollectionLogSource source, List<String> violations)
 	{
+		if (SKILL_CAPE_ALLOWED.contains(source.getName()))
+		{
+			return;
+		}
 		String sourceName = source.getName();
 		checkRequirementsSkillCapePerks(sourceName + " (top-level requirements)",
 			source.getRequirements(), violations);
