@@ -47,14 +47,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
-import net.runelite.client.callback.ClientThread;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 
 /**
  * Builds the static header section of {@link CollectionLogHelperPanel}: completion
- * label, progress bar, sync status, sync buttons, clue summary, slayer strategy,
+ * label, progress bar, sync status, clue summary, slayer strategy,
  * guidance banner, and step progress views. Extracted from
  * {@link CollectionLogHelperPanel} as part of the issue #503 god-class split.
  *
@@ -89,26 +88,28 @@ final class PanelHeaderBuilder
 		SlayerStrategyCalculator slayerStrategyCalculator,
 		RequirementsChecker requirementsChecker,
 		ItemManager itemManager,
-		ClientThread clientThread,
 		BiConsumer<CollectionLogSource, Integer> guidanceActivator,
-		Runnable guidanceDeactivator,
-		JComponent syncButtonOwner)
+		Runnable guidanceDeactivator)
 	{
 		JPanel controlsPanel = new JPanel();
 		controlsPanel.setLayout(new BoxLayout(controlsPanel, BoxLayout.Y_AXIS));
 		controlsPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
 
-		JLabel completionLabel = new JLabel("Collection Log: 0/0 (0.0%)", SwingConstants.CENTER);
+		JLabel completionLabel = new JLabel("Collection Log", SwingConstants.CENTER);
 		completionLabel.setFont(FontManager.getRunescapeBoldFont());
 		completionLabel.setForeground(Color.WHITE);
 		completionLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		completionLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0));
 		controlsPanel.add(completionLabel);
 
+		// The count/percentage is painted as the overlaid string on the progress
+		// bar (rather than a separate label) so it never clips at the panel width.
 		JProgressBar completionProgressBar = new JProgressBar(0, 1699);
 		completionProgressBar.setValue(0);
-		completionProgressBar.setPreferredSize(new Dimension(Integer.MAX_VALUE, 6));
-		completionProgressBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, 6));
+		completionProgressBar.setStringPainted(true);
+		completionProgressBar.setString("0 / 0  (0.0%)");
+		completionProgressBar.setPreferredSize(new Dimension(Integer.MAX_VALUE, 16));
+		completionProgressBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, 16));
 		completionProgressBar.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		completionProgressBar.setBorderPainted(false);
 		completionProgressBar.setBackground(new Color(40, 40, 40));
@@ -121,10 +122,6 @@ final class PanelHeaderBuilder
 		syncStatusView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(syncStatusView);
 
-		SyncButtonController syncButtonController = new SyncButtonController(config, syncButtonOwner);
-		controlsPanel.add(syncButtonController.getCollectionLogNetButton());
-		controlsPanel.add(syncButtonController.getTempleSyncButton());
-
 		ClueSummaryView clueSummaryView = new ClueSummaryView();
 		clueSummaryView.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		clueSummaryView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
@@ -135,7 +132,7 @@ final class PanelHeaderBuilder
 		slayerStrategyView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(slayerStrategyView);
 
-		GuidanceBannerView guidanceBannerView = new GuidanceBannerView(requirementsChecker, itemManager, clientThread);
+		GuidanceBannerView guidanceBannerView = new GuidanceBannerView(requirementsChecker, itemManager);
 		guidanceBannerView.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		guidanceBannerView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		controlsPanel.add(guidanceBannerView);
@@ -153,7 +150,6 @@ final class PanelHeaderBuilder
 			completionLabel,
 			completionProgressBar,
 			syncStatusView,
-			syncButtonController,
 			clueSummaryView,
 			slayerStrategyView,
 			guidanceBannerView,
@@ -172,7 +168,6 @@ final class PanelHeaderBuilder
 		final JLabel completionLabel;
 		final JProgressBar completionProgressBar;
 		final SyncStatusView syncStatusView;
-		final SyncButtonController syncButtonController;
 		final ClueSummaryView clueSummaryView;
 		final SlayerStrategyView slayerStrategyView;
 		final GuidanceBannerView guidanceBannerView;
@@ -183,7 +178,6 @@ final class PanelHeaderBuilder
 			JLabel completionLabel,
 			JProgressBar completionProgressBar,
 			SyncStatusView syncStatusView,
-			SyncButtonController syncButtonController,
 			ClueSummaryView clueSummaryView,
 			SlayerStrategyView slayerStrategyView,
 			GuidanceBannerView guidanceBannerView,
@@ -194,7 +188,6 @@ final class PanelHeaderBuilder
 			this.completionLabel = completionLabel;
 			this.completionProgressBar = completionProgressBar;
 			this.syncStatusView = syncStatusView;
-			this.syncButtonController = syncButtonController;
 			this.clueSummaryView = clueSummaryView;
 			this.slayerStrategyView = slayerStrategyView;
 			this.guidanceBannerView = guidanceBannerView;

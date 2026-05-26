@@ -34,12 +34,11 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 
 /**
- * Orchestrates an end-to-end collectionlog.net profile import triggered from
- * the panel "Import from collectionlog.net" button.
+ * Orchestrates an end-to-end collectionlog.net profile import triggered by the
+ * per-login auto-sync.
  *
- * <p>Owns the logic that previously lived inline in the plugin's
- * {@code startUp} method (callback wired via
- * {@link CollectionLogHelperPanel#setCollectionLogNetImportCallback(Runnable)}):
+ * <p>Owns the collectionlog.net import logic, invoked by the per-login
+ * auto-sync wired in the plugin's {@code startUp} method:
  * <ul>
  *   <li>Resolves the logged-in player's name from {@link Client}.</li>
  *   <li>Submits the import to {@link CollectionLogNetImporter} and awaits the
