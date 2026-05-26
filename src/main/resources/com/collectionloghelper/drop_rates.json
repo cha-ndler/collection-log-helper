@@ -14060,7 +14060,9 @@
           1755,
           11920,
           26784,
-          5514,
+          5514
+        ],
+        "activityObtainableItemIds": [
           26908
         ]
       },
@@ -14214,7 +14216,7 @@
         "worldY": 3194,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
-        "recommendedItemIds": [
+        "activityObtainableItemIds": [
           13237,
           13238,
           13239,
@@ -15985,6 +15987,9 @@
         "worldY": 3504,
         "worldPlane": 0,
         "recommendedItemIds": [
+          13353
+        ],
+        "activityObtainableItemIds": [
           13353,
           13639
         ],
