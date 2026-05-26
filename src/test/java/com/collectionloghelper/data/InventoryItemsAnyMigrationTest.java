@@ -70,7 +70,14 @@ public class InventoryItemsAnyMigrationTest
 		"Tombs of Amascut (500 Invocation)",
 		"Phantom Muspah",
 		"The Gauntlet",
-		"Corrupted Gauntlet");
+		"Corrupted Gauntlet",
+		// D5 batch F: inventory-teleport alternatives (Xeric's talisman / Slayer ring
+		// rub-from-inventory variants). Positive coverage in D5FBranchRegressionTest.
+		"Sarachnis",
+		"Nechryael",
+		"Gargoyle",
+		"Kurask",
+		"Bloodveld");
 
 	private DropRateDatabase database;
 
