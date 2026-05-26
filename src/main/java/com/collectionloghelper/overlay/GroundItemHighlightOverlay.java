@@ -47,6 +47,7 @@ import net.runelite.api.Point;
 import net.runelite.api.Tile;
 import net.runelite.api.TileItem;
 import net.runelite.api.coords.LocalPoint;
+import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
@@ -68,10 +69,10 @@ public class GroundItemHighlightOverlay extends Overlay
 
 	/**
 	 * Floating collection-log marker drawn above each highlighted ground item.
-	 * The glyph is rasterised once at construction so the render hot-path
-	 * performs no IO or allocation.
+	 * Assigned in the constructor (not inline) so the injected {@link ItemManager}
+	 * is available to resolve the real collection-log sprite (#720).
 	 */
-	private final GuidanceTargetMarker targetMarker = new GuidanceTargetMarker();
+	private final GuidanceTargetMarker targetMarker;
 
 	private volatile Set<Integer> targetGroundItemIds = Collections.emptySet();
 
@@ -85,10 +86,11 @@ public class GroundItemHighlightOverlay extends Overlay
 	private Color cachedFillColor;
 
 	@Inject
-	private GroundItemHighlightOverlay(Client client, CollectionLogHelperConfig config)
+	private GroundItemHighlightOverlay(Client client, CollectionLogHelperConfig config, ItemManager itemManager)
 	{
 		this.client = client;
 		this.config = config;
+		this.targetMarker = new GuidanceTargetMarker(itemManager);
 		setPosition(OverlayPosition.DYNAMIC);
 		setLayer(OverlayLayer.ABOVE_SCENE);
 	}

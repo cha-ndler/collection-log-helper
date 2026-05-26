@@ -27,32 +27,39 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import net.runelite.api.Client;
+import net.runelite.api.ItemID;
 import net.runelite.client.callback.ClientThread;
+import net.runelite.client.game.ItemManager;
+import net.runelite.client.util.AsyncBufferedImage;
 import com.collectionloghelper.CollectionLogHelperConfig;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
- * Verifies the floating guidance target marker glyph is rasterised once at
- * construction (the render hot-path must not perform IO or allocation). The
- * earlier implementation (#714) blitted the 16x16 panel book PNG resized to
- * 18px, which read as an illegible blue blob on the target. The marker is now a
- * programmatically-drawn book glyph that floats above the target. The in-world
- * projection cannot be exercised headless, so these tests confirm the glyph
- * builds, has positive dimensions, and that both overlays hold a marker
- * instance.
+ * Verifies the floating guidance target marker. The marker now renders the real
+ * collection-log book item sprite ({@code ItemID.COLLECTION_LOG}) once it loads
+ * from {@link ItemManager} (#720), falling back to a programmatically-drawn book
+ * glyph rasterised once at construction while the async sprite loads (or when no
+ * {@link ItemManager} is available). The in-world projection cannot be exercised
+ * headless, so these tests confirm the glyph builds, the sprite is preferred once
+ * resolved, null local points are no-ops, and both overlays hold a marker.
  */
 public class GuidanceTargetMarkerTest
 {
 	@Test
 	public void glyphIsBuiltWithPositiveDimensions()
 	{
-		GuidanceTargetMarker marker = new GuidanceTargetMarker();
+		GuidanceTargetMarker marker = new GuidanceTargetMarker(null);
 		BufferedImage glyph = readGlyph(marker);
 		assertNotNull(glyph, "marker glyph should be rasterised at construction");
 		assertTrue(glyph.getWidth() > 0, "glyph width should be positive");
@@ -60,9 +67,33 @@ public class GuidanceTargetMarkerTest
 	}
 
 	@Test
+	public void fallsBackToGlyphWhenNoItemManager()
+	{
+		GuidanceTargetMarker marker = new GuidanceTargetMarker(null);
+		assertSame(readGlyph(marker), resolveImage(marker),
+			"with no ItemManager the marker must render the fallback glyph");
+	}
+
+	@Test
+	public void requestsCollectionLogSpriteAndShowsGlyphUntilLoaded()
+	{
+		// getImage returns an AsyncBufferedImage that has not finished loading, so
+		// the marker keeps showing the glyph until the async onLoaded callback fires.
+		AsyncBufferedImage sprite = mock(AsyncBufferedImage.class);
+		ItemManager itemManager = mock(ItemManager.class);
+		lenient().when(itemManager.getImage(anyInt())).thenReturn(sprite);
+
+		GuidanceTargetMarker marker = new GuidanceTargetMarker(itemManager);
+		assertSame(readGlyph(marker), resolveImage(marker),
+			"glyph shown until the async sprite reports loaded");
+		// The marker must request the real collection-log book sprite, not some other item.
+		verify(itemManager).getImage(ItemID.COLLECTION_LOG);
+	}
+
+	@Test
 	public void drawWithNullLocalPointIsNoOp()
 	{
-		GuidanceTargetMarker marker = new GuidanceTargetMarker();
+		GuidanceTargetMarker marker = new GuidanceTargetMarker(null);
 		Client client = mock(Client.class);
 		BufferedImage canvas = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = canvas.createGraphics();
@@ -82,11 +113,12 @@ public class GuidanceTargetMarkerTest
 		Client client = mock(Client.class);
 		ClientThread clientThread = mock(ClientThread.class);
 		CollectionLogHelperConfig config = mock(CollectionLogHelperConfig.class);
+		ItemManager itemManager = mock(ItemManager.class);
 
-		Constructor<ObjectHighlightOverlay> ctor = ObjectHighlightOverlay.class
-			.getDeclaredConstructor(Client.class, ClientThread.class, CollectionLogHelperConfig.class);
+		Constructor<ObjectHighlightOverlay> ctor = ObjectHighlightOverlay.class.getDeclaredConstructor(
+			Client.class, ClientThread.class, CollectionLogHelperConfig.class, ItemManager.class);
 		ctor.setAccessible(true);
-		ObjectHighlightOverlay overlay = ctor.newInstance(client, clientThread, config);
+		ObjectHighlightOverlay overlay = ctor.newInstance(client, clientThread, config, itemManager);
 
 		assertNotNull(readMarker(overlay), "object overlay should hold a target marker");
 	}
@@ -96,13 +128,28 @@ public class GuidanceTargetMarkerTest
 	{
 		Client client = mock(Client.class);
 		CollectionLogHelperConfig config = mock(CollectionLogHelperConfig.class);
+		ItemManager itemManager = mock(ItemManager.class);
 
 		Constructor<GroundItemHighlightOverlay> ctor = GroundItemHighlightOverlay.class
-			.getDeclaredConstructor(Client.class, CollectionLogHelperConfig.class);
+			.getDeclaredConstructor(Client.class, CollectionLogHelperConfig.class, ItemManager.class);
 		ctor.setAccessible(true);
-		GroundItemHighlightOverlay overlay = ctor.newInstance(client, config);
+		GroundItemHighlightOverlay overlay = ctor.newInstance(client, config, itemManager);
 
 		assertNotNull(readMarker(overlay), "ground-item overlay should hold a target marker");
+	}
+
+	private static BufferedImage resolveImage(GuidanceTargetMarker marker)
+	{
+		try
+		{
+			Method m = GuidanceTargetMarker.class.getDeclaredMethod("resolveImage");
+			m.setAccessible(true);
+			return (BufferedImage) m.invoke(marker);
+		}
+		catch (ReflectiveOperationException e)
+		{
+			throw new IllegalStateException(e);
+		}
 	}
 
 	private static BufferedImage readGlyph(GuidanceTargetMarker marker)

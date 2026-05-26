@@ -50,6 +50,7 @@ import net.runelite.api.TileObject;
 import net.runelite.api.WallObject;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
@@ -70,11 +71,11 @@ public class ObjectHighlightOverlay extends Overlay
 	private final CollectionLogHelperConfig config;
 
 	/**
-	 * Floating collection-log marker drawn above each highlighted target. The glyph
-	 * is rasterised once at construction so the render hot-path performs no IO or
-	 * allocation.
+	 * Floating collection-log marker drawn above each highlighted target. Assigned
+	 * in the constructor (not inline) so the injected {@link ItemManager} is
+	 * available to resolve the real collection-log sprite (#720).
 	 */
-	private final GuidanceTargetMarker targetMarker = new GuidanceTargetMarker();
+	private final GuidanceTargetMarker targetMarker;
 
 	@Inject
 	private TooltipManager tooltipManager;
@@ -99,11 +100,13 @@ public class ObjectHighlightOverlay extends Overlay
 	private volatile List<TileObject> matchedObjects = Collections.emptyList();
 
 	@Inject
-	private ObjectHighlightOverlay(Client client, ClientThread clientThread, CollectionLogHelperConfig config)
+	private ObjectHighlightOverlay(Client client, ClientThread clientThread, CollectionLogHelperConfig config,
+		ItemManager itemManager)
 	{
 		this.client = client;
 		this.clientThread = clientThread;
 		this.config = config;
+		this.targetMarker = new GuidanceTargetMarker(itemManager);
 		setPosition(OverlayPosition.DYNAMIC);
 		setLayer(OverlayLayer.ABOVE_SCENE);
 	}
