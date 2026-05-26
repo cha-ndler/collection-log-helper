@@ -31,6 +31,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -52,6 +53,16 @@ public class SyncStatusView extends JPanel
 	private static final Color SYNC_SYNCED_COLOR = new Color(50, 200, 50);
 	private static final Color DATA_WARNING_COLOR = new Color(220, 50, 50);
 
+	/** Status dot shown to the left of the label: amber = not synced. */
+	private static final ImageIcon DOT_NOT_SYNCED =
+		new ImageIcon(StatusIcons.statusDot(SYNC_NOT_SYNCED_COLOR));
+	/** Status dot shown to the left of the label: cyan = syncing. */
+	private static final ImageIcon DOT_SYNCING =
+		new ImageIcon(StatusIcons.statusDot(SYNC_SYNCING_COLOR));
+	/** Status dot shown to the left of the label: green = synced. */
+	private static final ImageIcon DOT_SYNCED =
+		new ImageIcon(StatusIcons.statusDot(SYNC_SYNCED_COLOR));
+
 	private final DataSyncState dataSyncState;
 
 	private final JLabel syncStatusLabel;
@@ -67,6 +78,8 @@ public class SyncStatusView extends JPanel
 		syncStatusLabel = new JLabel("Open Collection Log to sync", SwingConstants.CENTER);
 		syncStatusLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.ITALIC));
 		syncStatusLabel.setForeground(SYNC_NOT_SYNCED_COLOR);
+		syncStatusLabel.setIcon(DOT_NOT_SYNCED);
+		syncStatusLabel.setIconTextGap(4);
 		syncStatusLabel.setAlignmentX(CENTER_ALIGNMENT);
 		syncStatusLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
 		syncStatusLabel.setToolTipText("Syncs automatically when you open the Collection Log in-game");
@@ -97,20 +110,43 @@ public class SyncStatusView extends JPanel
 					syncStatusLabel.setText("Open Collection Log to sync");
 					syncStatusLabel.setFont(smallFont.deriveFont(Font.ITALIC));
 					syncStatusLabel.setForeground(SYNC_NOT_SYNCED_COLOR);
+					syncStatusLabel.setIcon(DOT_NOT_SYNCED);
 					break;
 				case SYNCING:
 					syncStatusLabel.setText("Syncing...");
 					syncStatusLabel.setFont(smallFont.deriveFont(Font.ITALIC));
 					syncStatusLabel.setForeground(SYNC_SYNCING_COLOR);
+					syncStatusLabel.setIcon(DOT_SYNCING);
 					break;
 				case SYNCED:
 					syncStatusLabel.setText("Synced (" + itemCount + " items)");
 					syncStatusLabel.setFont(smallFont.deriveFont(Font.PLAIN));
 					syncStatusLabel.setForeground(SYNC_SYNCED_COLOR);
+					syncStatusLabel.setIcon(DOT_SYNCED);
 					break;
 				default:
 					break;
 			}
+		});
+	}
+
+	/**
+	 * Shows a brief, one-line status message in the sync-status label. Used by
+	 * the auto-sync-on-login flows (collectionlog.net import, TempleOSRS KC)
+	 * to report their result without a dedicated widget or chat spam.
+	 * Safe to call from any thread.
+	 *
+	 * @param message short result message, e.g. "Imported 42 items from collectionlog.net"
+	 * @param success whether the operation succeeded (drives the label colour)
+	 */
+	public void showTransientStatus(String message, boolean success)
+	{
+		SwingUtilities.invokeLater(() ->
+		{
+			syncStatusLabel.setText(message);
+			syncStatusLabel.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.PLAIN));
+			syncStatusLabel.setForeground(success ? SYNC_SYNCED_COLOR : SYNC_NOT_SYNCED_COLOR);
+			syncStatusLabel.setIcon(success ? DOT_SYNCED : DOT_NOT_SYNCED);
 		});
 	}
 

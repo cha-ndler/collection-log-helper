@@ -230,7 +230,7 @@ public class CollectionLogHelperPlugin extends Plugin
 
 		panel = new CollectionLogHelperPanel(
 			config, data.getDatabase(), data.getCollectionState(), efficiency.getCalculator(), efficiency.getClueEstimator(),
-			itemManager, clientThread, requirementsChecker, data.getDataSyncState(), data.getSlayerTaskState(),
+			itemManager, requirementsChecker, data.getDataSyncState(), data.getSlayerTaskState(),
 			efficiency.getSlayerStrategyCalculator(), data.getPlayerInventoryState(), data.getPlayerBankState(),
 			efficiency.getDryStreakAnalyzer(),
 			(java.util.function.BiConsumer<CollectionLogSource, Integer>) this::activateGuidance,
@@ -254,14 +254,13 @@ public class CollectionLogHelperPlugin extends Plugin
 			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::syncToCurrentState)
 		);
 
-		// Wire collectionlog.net import callback — delegates to the orchestrator
-		// which resolves the player name, dispatches the import, and posts the
-		// result back through the panel.
-		panel.setCollectionLogNetImportCallback(
-			() -> collectionLogNetImportOrchestrator.requestImport(panel, httpResultExecutor));
-
-		// Wire TempleOSRS KC sync button callback
-		panel.setTempleSyncCallback(() -> templeSyncOrchestrator.requestSync(panel, httpResultExecutor));
+		// Wire the per-login auto-sync callbacks into the sync coordinator. These
+		// reuse the same orchestrator entry points the old sync buttons invoked;
+		// the coordinator fires them once per login (a few ticks after LOGGED_IN)
+		// and only when the corresponding config flag is enabled.
+		sync.getSyncStateCoordinator().setAutoLoginSyncCallbacks(
+			() -> collectionLogNetImportOrchestrator.requestImport(panel, httpResultExecutor),
+			() -> templeSyncOrchestrator.requestSync(panel, httpResultExecutor));
 
 		// Wire coordinator with references it needs from the plugin
 		guidance.getGuidanceCoordinator().setPluginInstance(this);
@@ -496,19 +495,16 @@ public class CollectionLogHelperPlugin extends Plugin
 	/**
 	 * Invoked by {@link GuidanceEventRouter} when one of the sync-related
 	 * config toggles ({@code enableCollectionLogNetImport} or
-	 * {@code enableTempleOsrsSync}) changes. Refreshes the visibility of the
-	 * corresponding panel button so toggling the checkbox makes the button
-	 * appear/disappear immediately, without a panel restart.
+	 * {@code enableTempleOsrsSync}) changes.
 	 *
-	 * <p>Closes cha-ndler/collection-log-helper#488 — previously the buttons
-	 * were created and added to the panel but their visibility was set only
-	 * once (in the panel constructor), so toggling the config did nothing
-	 * visible until the panel was rebuilt for some other reason.
+	 * <p>The toggles now gate the per-login auto-sync rather than a visible
+	 * panel button, and the sync coordinator reads the live config value each
+	 * login, so no immediate UI refresh is required when a flag changes
+	 * mid-session — the new value simply takes effect on the next login.
 	 */
 	private void onSyncConfigChanged()
 	{
-		panel.updateCollectionLogNetImportButton();
-		panel.updateTempleSyncButtonVisibility();
+		// No-op: auto-sync gating is evaluated live on the next login.
 	}
 
 	// ── Per-tick flag accessors wired into GameTickOrchestrator ───────────────
