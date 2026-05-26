@@ -15067,10 +15067,10 @@
         "completionChatPattern": "You attempt to light the funeral pyre",
         "section": "Skilling",
         "recommendedItemIds": [
-          590,
-          25630,
-          3404,
-          3446
+          25630
+        ],
+        "activityObtainableItemIds": [
+          3404
         ]
       },
       {

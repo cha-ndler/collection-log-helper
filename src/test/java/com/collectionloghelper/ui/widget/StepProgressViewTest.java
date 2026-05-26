@@ -317,6 +317,56 @@ public class StepProgressViewTest
 	}
 
 	/**
+	 * Phase 2 guidance-items redesign: a required row whose id is in the active
+	 * step's activityObtainableItemIds gets a muted "(from activity)" suffix label,
+	 * while the item name keeps its ownership colour.
+	 */
+	@Test
+	public void showStep_activityObtainable_appendsFromActivitySuffix() throws Exception
+	{
+		view.showStep(2, 6, "Burn the shade remains", false,
+			Collections.singletonList(
+				new RequiredItemDisplay(SHADE_REMAINS_ID, "Fiyr remains", Status.HELD)),
+			Collections.<RequiredItemDisplay>emptyList(),
+			Collections.<GuidanceStep>emptyList(),
+			Collections.singleton(SHADE_REMAINS_ID));
+		flushEdt();
+
+		// The name label keeps its ownership colour.
+		JLabel nameLabel = findFirstNameLabel(view);
+		assertNotNull(nameLabel, "Name label must be present");
+		assertEquals(RequiredItemDisplay.COLOR_HELD, nameLabel.getForeground(),
+			"ownership colour must be unchanged for activity-obtainable rows");
+
+		// A second, muted label carries the "(from activity)" suffix.
+		List<JLabel> labels = findAllNameLabels(view);
+		boolean hasSuffix = labels.stream()
+			.anyMatch(l -> l.getText() != null && l.getText().contains("(from activity)"));
+		assertTrue(hasSuffix, "a '(from activity)' suffix label must be rendered");
+	}
+
+	/**
+	 * A required row whose id is NOT in activityObtainableItemIds must render with
+	 * no "(from activity)" suffix label.
+	 */
+	@Test
+	public void showStep_notActivityObtainable_noSuffix() throws Exception
+	{
+		view.showStep(1, 3, "Bring the tinderbox", false,
+			Collections.singletonList(
+				new RequiredItemDisplay(TINDERBOX_ID, "Tinderbox", Status.HELD)),
+			Collections.<RequiredItemDisplay>emptyList(),
+			Collections.<GuidanceStep>emptyList(),
+			Collections.<Integer>emptySet());
+		flushEdt();
+
+		List<JLabel> labels = findAllNameLabels(view);
+		boolean hasSuffix = labels.stream()
+			.anyMatch(l -> l.getText() != null && l.getText().contains("(from activity)"));
+		assertFalse(hasSuffix, "no suffix when the row id is not activity-obtainable");
+	}
+
+	/**
 	 * State transition: colours must update when showStep is called a second time
 	 * with different availability data for the same item.
 	 */
@@ -1302,7 +1352,8 @@ public class StepProgressViewTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -1333,7 +1384,8 @@ public class StepProgressViewTest
 			null, // waypoints
 			null,   // dynamicTargetEvaluator
 			null,   // conditionTree
-			null   // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 }

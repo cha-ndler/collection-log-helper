@@ -167,8 +167,11 @@ public class StepChangeHandler
 					requiredItemResolver.resolve(rawStep);
 				final List<RequiredItemDisplay> resolvedRecommended =
 					requiredItemResolver.resolveRecommended(rawStep);
+				final java.util.Set<Integer> activityIds = rawStep != null
+					? new java.util.HashSet<>(rawStep.getActivityObtainableItemIds())
+					: Collections.emptySet();
 				panelRef.updateStepProgress(current, total, desc, isManual,
-					resolvedItems, resolvedRecommended, sourceSteps);
+					resolvedItems, resolvedRecommended, sourceSteps, activityIds);
 			});
 		}
 	}
