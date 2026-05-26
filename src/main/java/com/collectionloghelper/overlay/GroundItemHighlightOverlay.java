@@ -33,7 +33,6 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
 import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,7 +50,6 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
-import net.runelite.client.util.ImageUtil;
 
 @Slf4j
 @Singleton
@@ -61,8 +59,6 @@ public class GroundItemHighlightOverlay extends Overlay
 	private static final int ARROW_WIDTH = 12;
 	private static final int ARROW_GAP = 5;
 	private static final int TEXT_HEIGHT_OFFSET = 50;
-	private static final int MARKER_SIZE = 18;
-	private static final int MARKER_HEIGHT_OFFSET = 90;
 	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
 	private static final Font BOLD_12 = new Font(Font.DIALOG, Font.BOLD, 12);
 
@@ -71,10 +67,11 @@ public class GroundItemHighlightOverlay extends Overlay
 	private final Polygon arrowPolygon = new Polygon();
 
 	/**
-	 * Marker icon drawn over each highlighted ground item. Loaded and resized
-	 * once at construction so the render hot-path performs no IO or allocation.
+	 * Floating collection-log marker drawn above each highlighted ground item.
+	 * The glyph is rasterised once at construction so the render hot-path
+	 * performs no IO or allocation.
 	 */
-	private final BufferedImage markerIcon;
+	private final GuidanceTargetMarker targetMarker = new GuidanceTargetMarker();
 
 	private volatile Set<Integer> targetGroundItemIds = Collections.emptySet();
 
@@ -92,28 +89,8 @@ public class GroundItemHighlightOverlay extends Overlay
 	{
 		this.client = client;
 		this.config = config;
-		this.markerIcon = loadMarkerIcon();
 		setPosition(OverlayPosition.DYNAMIC);
 		setLayer(OverlayLayer.ABOVE_SCENE);
-	}
-
-	private static BufferedImage loadMarkerIcon()
-	{
-		try
-		{
-			BufferedImage raw = ImageUtil.loadImageResource(
-				GroundItemHighlightOverlay.class, "/com/collectionloghelper/panel_icon.png");
-			if (raw == null)
-			{
-				return null;
-			}
-			return ImageUtil.resizeImage(raw, MARKER_SIZE, MARKER_SIZE);
-		}
-		catch (RuntimeException e)
-		{
-			log.warn("Failed to load guidance target marker icon", e);
-			return null;
-		}
 	}
 
 	public void setTargetGroundItemIds(Set<Integer> itemIds)
@@ -224,22 +201,17 @@ public class GroundItemHighlightOverlay extends Overlay
 	}
 
 	/**
-	 * Draws the cached marker icon centered above the ground item's on-screen
-	 * position. No-op when the icon failed to load, the config toggle is off,
-	 * or the tile has no projectable canvas location. Allocates nothing here.
+	 * Draws the floating collection-log marker above the ground item's on-screen
+	 * position. No-op when the config toggle is off or the tile has no
+	 * projectable canvas location. Allocates nothing here.
 	 */
 	private void drawTargetMarker(Graphics2D graphics, LocalPoint localPoint)
 	{
-		if (markerIcon == null || !config.showGuidanceTargetMarker())
+		if (!config.showGuidanceTargetMarker())
 		{
 			return;
 		}
-		Point canvasPoint = Perspective.getCanvasImageLocation(
-			client, localPoint, markerIcon, MARKER_HEIGHT_OFFSET);
-		if (canvasPoint != null)
-		{
-			graphics.drawImage(markerIcon, canvasPoint.getX(), canvasPoint.getY(), null);
-		}
+		targetMarker.draw(graphics, client, localPoint);
 	}
 
 
