@@ -3836,6 +3836,16 @@
             },
             "description": "POH mounted Xeric's talisman -> Xeric's Heart, then run south-east to the Forthos trapdoor north of Hosidius",
             "travelTip": "POH Xeric's talisman -> Heart -> run south-east to Forthos trapdoor"
+          },
+          {
+            "requirements": {
+              "inventoryItemIdsAny": [
+                13393,
+                18465
+              ]
+            },
+            "description": "Rub the Xeric's talisman in your inventory and pick Xeric's Heart, then run south-east to the Forthos trapdoor north of Hosidius - faster than the Hosidius lodestone overland route",
+            "travelTip": "Inventory Xeric's talisman -> Heart -> run south-east to Forthos trapdoor"
           }
         ],
         "section": "Travel"
@@ -10981,6 +10991,25 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "inventoryItemIdsAny": [
+                11866,
+                11867,
+                11868,
+                11869,
+                11870,
+                11871,
+                11872,
+                11873,
+                21268
+              ]
+            },
+            "description": "Rub the Slayer ring in your inventory and pick Slayer Tower to land at the ground-floor entrance, then climb to the first floor - skipping the fairy ring CKS walk from Canifis",
+            "travelTip": "Inventory Slayer ring -> Slayer Tower entrance"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -11891,6 +11920,25 @@
           10050,
           0
         ],
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "inventoryItemIdsAny": [
+                11866,
+                11867,
+                11868,
+                11869,
+                11870,
+                11871,
+                11872,
+                11873,
+                21268
+              ]
+            },
+            "description": "Rub the Slayer ring in your inventory and pick Fremennik Slayer Dungeon to land just inside the entrance, skipping the overland run east from Rellekka",
+            "travelTip": "Inventory Slayer ring -> Fremennik Slayer Dungeon entrance"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -12096,6 +12144,25 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
         "travelTip": "Slayer ring -> Slayer Tower, or fairy ring CKS + walk north",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "inventoryItemIdsAny": [
+                11866,
+                11867,
+                11868,
+                11869,
+                11870,
+                11871,
+                11872,
+                11873,
+                21268
+              ]
+            },
+            "description": "Rub the Slayer ring in your inventory and pick Slayer Tower to land at the ground-floor entrance, then climb to the top floor - skipping the fairy ring CKS walk from Canifis",
+            "travelTip": "Inventory Slayer ring -> Slayer Tower entrance"
+          }
+        ],
         "section": "Travel"
       },
       {
@@ -12351,6 +12418,23 @@
             },
             "description": "POH jewellery box -> Combat bracelet -> Ranging Guild, then run south-east along the road to the Slayer Tower entrance",
             "travelTip": "POH Combat bracelet -> Ranging Guild -> run south-east to Slayer Tower"
+          },
+          {
+            "requirements": {
+              "inventoryItemIdsAny": [
+                11866,
+                11867,
+                11868,
+                11869,
+                11870,
+                11871,
+                11872,
+                11873,
+                21268
+              ]
+            },
+            "description": "Rub the Slayer ring in your inventory and pick Slayer Tower to land at the ground-floor entrance, then climb to the top floor - quicker than the fairy ring CKS walk from Canifis",
+            "travelTip": "Inventory Slayer ring -> Slayer Tower entrance"
           }
         ],
         "section": "Travel"
