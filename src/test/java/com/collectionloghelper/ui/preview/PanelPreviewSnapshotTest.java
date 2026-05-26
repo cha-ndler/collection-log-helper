@@ -27,15 +27,22 @@ package com.collectionloghelper.ui.preview;
 import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.collectionloghelper.ui.CollectionLogHelperPanel.Mode;
+import com.collectionloghelper.ui.widget.SourceRecommendedItemsChipPanel;
 import java.awt.image.BufferedImage;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.PluginPanel;
+import net.runelite.client.util.AsyncBufferedImage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -93,6 +100,86 @@ public class PanelPreviewSnapshotTest
 				.mode(Mode.EFFICIENT)
 				.slayerTaskActive(true)
 				.longLabels(true));
+	}
+
+	/**
+	 * Standalone render of just the source-level "Recommended:" chip strip with
+	 * enough chips (6) to force wrapping at the real 225px side-panel width. This
+	 * proves the heading sits on its own full-width line and the chips wrap onto
+	 * additional rows instead of clipping at the right edge (#573 fix). The chip
+	 * panel is hosted inside a vertical-BoxLayout container that mirrors the real
+	 * call sites (GuidanceBannerView / ItemDetailPanel).
+	 */
+	@Test
+	public void recommendedStripWrapScenario() throws Exception
+	{
+		AtomicReference<JPanel> hostRef = new AtomicReference<>();
+		AtomicReference<BufferedImage> result = new AtomicReference<>();
+		AtomicReference<Exception> error = new AtomicReference<>();
+
+		// Ten item IDs: a 30px chip plus 3px gaps fits about six per 225px row, so
+		// ten chips must wrap onto multiple rows. Real OSRS item IDs (gear) so
+		// icons load if present.
+		final List<Integer> itemIds = Arrays.asList(
+			11832, 11834, 11836, 4151, 11802, 12954, 11806, 11808, 11810, 11812);
+
+		SwingUtilities.invokeAndWait(() ->
+		{
+			try
+			{
+				ItemManager itemManager = Mockito.mock(ItemManager.class);
+				Mockito.when(itemManager.getImage(Mockito.anyInt())).thenAnswer(
+					inv -> new AsyncBufferedImage(null, 32, 32, BufferedImage.TYPE_INT_ARGB));
+
+				SourceRecommendedItemsChipPanel strip =
+					new SourceRecommendedItemsChipPanel(itemManager);
+				strip.update(itemIds);
+
+				JPanel host = new JPanel();
+				host.setLayout(new javax.swing.BoxLayout(host, javax.swing.BoxLayout.Y_AXIS));
+				host.add(strip);
+				hostRef.set(host);
+			}
+			catch (Exception e)
+			{
+				error.set(e);
+			}
+		});
+		if (error.get() != null)
+		{
+			throw error.get();
+		}
+
+		// Second EDT task: the strip's update() invokeLater has now run.
+		SwingUtilities.invokeAndWait(() ->
+		{
+			try
+			{
+				result.set(PanelSnapshot.render(hostRef.get(), WIDTH));
+			}
+			catch (Exception e)
+			{
+				error.set(e);
+			}
+		});
+		if (error.get() != null)
+		{
+			throw error.get();
+		}
+
+		BufferedImage img = result.get();
+		Path out = OUT_DIR.resolve("recommended-strip-wrap.png");
+		PanelSnapshot.writePng(img, out);
+
+		assertTrue(Files.exists(out), "PNG not written: " + out.toAbsolutePath());
+		assertTrue(Files.size(out) > 0, "PNG is empty: " + out.toAbsolutePath());
+		assertEquals(WIDTH, img.getWidth(), "render width must equal PANEL_WIDTH");
+		// Heading line + at least two wrapped chip rows => clearly taller than a
+		// single 30px chip row. Guards against the FlowLayout single-line-height pit.
+		// CHIP_SIZE is 30 (28px icon + 1px border each side); two rows + heading
+		// must exceed 60px.
+		assertTrue(img.getHeight() > 60,
+			"strip height (" + img.getHeight() + ") too short to have wrapped");
 	}
 
 	private void renderScenario(String name, PanelPreviewFixtures.Scenario scenario) throws Exception

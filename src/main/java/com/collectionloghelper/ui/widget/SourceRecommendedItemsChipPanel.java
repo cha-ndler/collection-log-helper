@@ -25,15 +25,18 @@
 package com.collectionloghelper.ui.widget;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nullable;
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -47,8 +50,14 @@ import net.runelite.client.ui.FontManager;
 import net.runelite.client.util.AsyncBufferedImage;
 
 /**
- * A horizontal strip of item-icon chips rendered in the source-detail header
- * for the source-level "Recommended Gear" list (#573).
+ * A "Recommended:" heading on its own full-width line followed by a strip of
+ * item-icon chips that wrap onto additional lines, rendered in the source-detail
+ * header for the source-level "Recommended Gear" list (#573).
+ *
+ * <p>The chips live in a {@link WrapLayout} container so that at the narrow
+ * 225px side-panel width several chips flow onto multiple rows instead of
+ * overflowing and clipping the rightmost chip(s). The heading matches the
+ * full-width style of the sibling "Requirements:" section.
  *
  * <p>This differs from {@link RecommendedItemsChipPanel} in three ways:
  * <ul>
@@ -87,8 +96,14 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 	/** Muted neutral border — chip strip is informational only at this surface. */
 	static final Color BORDER_COLOR = new Color(180, 180, 180, 160);
 
-	/** Heading text shown to the left of the chip row. */
+	/** Heading text shown on its own full-width line above the chip strip. */
 	static final String HEADING_TEXT = "Recommended:";
+
+	/** Horizontal gap between wrapped chips, in pixels. */
+	private static final int CHIP_HGAP = 3;
+
+	/** Vertical gap between wrapped chip rows, in pixels. */
+	private static final int CHIP_VGAP = 3;
 
 	private final ItemManager itemManager;
 
@@ -100,7 +115,14 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 	@Nullable
 	private final ClientThread clientThread;
 
-	/** The horizontal row that holds the heading label and chip labels. */
+	/** Full-width heading line ("Recommended:") shown above the chip strip. */
+	private final JLabel heading;
+
+	/**
+	 * The wrapping container that holds the chip labels. Uses {@link WrapLayout}
+	 * so chips flow onto additional rows at narrow panel widths instead of
+	 * clipping at the right edge.
+	 */
 	private final JPanel chipRow;
 
 	/**
@@ -144,8 +166,16 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 		setAlignmentX(LEFT_ALIGNMENT);
 		setVisible(false);
 
-		chipRow = new JPanel();
-		chipRow.setLayout(new BoxLayout(chipRow, BoxLayout.X_AXIS));
+		heading = new JLabel(HEADING_TEXT);
+		heading.setFont(FontManager.getRunescapeSmallFont());
+		heading.setForeground(new Color(150, 150, 150));
+		heading.setAlignmentX(LEFT_ALIGNMENT);
+		add(heading);
+
+		// LEADING-aligned WrapLayout: chips fill left-to-right and wrap onto a new
+		// row when they exceed the panel width, so none clip. Zero left/right inset
+		// keeps the strip flush with the heading and the surrounding blocks.
+		chipRow = new JPanel(new WrapLayout(FlowLayout.LEADING, CHIP_HGAP, CHIP_VGAP));
 		chipRow.setBackground(BG);
 		chipRow.setAlignmentX(LEFT_ALIGNMENT);
 		add(chipRow);
@@ -183,13 +213,6 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 				return;
 			}
 
-			JLabel heading = new JLabel(HEADING_TEXT);
-			heading.setFont(FontManager.getRunescapeSmallFont());
-			heading.setForeground(new Color(150, 150, 150));
-			heading.setAlignmentX(LEFT_ALIGNMENT);
-			chipRow.add(heading);
-			chipRow.add(Box.createHorizontalStrut(6));
-
 			for (Integer itemId : safeIds)
 			{
 				if (itemId == null || itemId <= 0)
@@ -198,7 +221,6 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 				}
 				JLabel chip = buildChip(itemId);
 				chipRow.add(chip);
-				chipRow.add(Box.createHorizontalStrut(3));
 			}
 
 			setVisible(true);
@@ -321,5 +343,128 @@ public class SourceRecommendedItemsChipPanel extends JPanel
 		g.drawImage(source, 0, 0, width, height, null);
 		g.dispose();
 		return scaled;
+	}
+
+	/**
+	 * A {@link FlowLayout} that wraps its components onto additional rows and,
+	 * crucially, reports a preferred size whose <em>height</em> reflects the
+	 * wrapped row count at the container's actual (target) width.
+	 *
+	 * <p>Plain {@code FlowLayout} always reports a single-row preferred height,
+	 * so when nested inside a vertical {@code BoxLayout} it is given only enough
+	 * vertical space for one row and the wrapped rows are clipped. This subclass
+	 * computes the height by laying the children out against the available width
+	 * (taken from the container, an ancestor with a non-zero width, or the
+	 * preferred row width as a last resort), so the parent {@code BoxLayout}
+	 * allocates the correct vertical space.
+	 *
+	 * <p>Adapted from the long-standing public-domain "WrapLayout" pattern
+	 * (a FlowLayout that computes wrapped preferred height); trimmed to the
+	 * single LEADING use case this panel needs.
+	 */
+	static final class WrapLayout extends FlowLayout
+	{
+		WrapLayout(int align, int hgap, int vgap)
+		{
+			super(align, hgap, vgap);
+		}
+
+		@Override
+		public Dimension preferredLayoutSize(Container target)
+		{
+			return layoutSize(target, true);
+		}
+
+		@Override
+		public Dimension minimumLayoutSize(Container target)
+		{
+			Dimension minimum = layoutSize(target, false);
+			minimum.width -= (getHgap() + 1);
+			return minimum;
+		}
+
+		/**
+		 * Computes the layout size, flowing children onto rows constrained to the
+		 * effective target width and summing the resulting row heights.
+		 */
+		private Dimension layoutSize(Container target, boolean preferred)
+		{
+			synchronized (target.getTreeLock())
+			{
+				int targetWidth = resolveTargetWidth(target);
+
+				Insets insets = target.getInsets();
+				int horizontalInsetsAndGap = insets.left + insets.right + (getHgap() * 2);
+				int maxWidth = targetWidth - horizontalInsetsAndGap;
+
+				Dimension dim = new Dimension(0, 0);
+				int rowWidth = 0;
+				int rowHeight = 0;
+
+				int memberCount = target.getComponentCount();
+				for (int i = 0; i < memberCount; i++)
+				{
+					Component m = target.getComponent(i);
+					if (!m.isVisible())
+					{
+						continue;
+					}
+					Dimension d = preferred ? m.getPreferredSize() : m.getMinimumSize();
+
+					// Wrap to a new row when the next chip would exceed the width.
+					if (rowWidth + d.width > maxWidth)
+					{
+						addRow(dim, rowWidth, rowHeight);
+						rowWidth = 0;
+						rowHeight = 0;
+					}
+
+					if (rowWidth != 0)
+					{
+						rowWidth += getHgap();
+					}
+
+					rowWidth += d.width;
+					rowHeight = Math.max(rowHeight, d.height);
+				}
+
+				addRow(dim, rowWidth, rowHeight);
+
+				dim.width += horizontalInsetsAndGap;
+				dim.height += insets.top + insets.bottom + (getVgap() * 2);
+				return dim;
+			}
+		}
+
+		/**
+		 * Returns a usable width for wrapping: the target's own width if laid out,
+		 * else the nearest ancestor with a non-zero width, else the target's
+		 * preferred width (single-row fallback before the first real layout pass).
+		 */
+		private int resolveTargetWidth(Container target)
+		{
+			int width = target.getWidth();
+			Container ancestor = target.getParent();
+			while (width == 0 && ancestor != null)
+			{
+				width = ancestor.getWidth();
+				ancestor = ancestor.getParent();
+			}
+			if (width == 0)
+			{
+				width = target.getPreferredSize().width;
+			}
+			return width;
+		}
+
+		private void addRow(Dimension dim, int rowWidth, int rowHeight)
+		{
+			dim.width = Math.max(dim.width, rowWidth);
+			if (dim.height > 0)
+			{
+				dim.height += getVgap();
+			}
+			dim.height += rowHeight;
+		}
 	}
 }
