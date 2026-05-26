@@ -122,7 +122,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -158,7 +159,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -194,7 +196,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -230,7 +233,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -266,7 +270,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -302,7 +307,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -338,7 +344,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -374,7 +381,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -411,7 +419,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -447,7 +456,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -483,7 +493,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -519,7 +530,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -1009,7 +1021,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 
 		List<GuidanceStep> steps = Arrays.asList(
@@ -1485,7 +1498,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
@@ -1723,7 +1737,8 @@ public class GuidanceSequencerTest
 			null, // waypoints
 			null,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 
 		List<GuidanceStep> steps = Arrays.asList(step);

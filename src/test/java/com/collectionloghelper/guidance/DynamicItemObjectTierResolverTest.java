@@ -299,7 +299,8 @@ public class DynamicItemObjectTierResolverTest
 			null,           // waypoints
 			null,            // dynamicTargetEvaluator
 			null,            // conditionTree
-			null            // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 }

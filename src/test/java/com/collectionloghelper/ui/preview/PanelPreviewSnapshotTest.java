@@ -265,6 +265,79 @@ public class PanelPreviewSnapshotTest
 		assertTrue(img.getHeight() > 50, "render height too small (" + img.getHeight() + ")");
 	}
 
+	/**
+	 * Phase 2 guidance-items redesign (Shades of Mort'ton pilot): renders a
+	 * {@link StepProgressView} flat layout for the burn step. "Items needed" carries
+	 * the on-site Fiyr remains tagged with "(from activity)"; "Recommended" shows the
+	 * single convenience aid (Flamtaer bag) instead of the old material list. Proves
+	 * the aids-only recommended section and the muted on-site tag render correctly.
+	 */
+	@Test
+	public void shadesActivityObtainableScenario() throws Exception
+	{
+		final int fiyrRemainsId = 3404;  // shade remains, obtained on-site
+		final int tinderboxId = 590;     // brought material
+		final int flamtaerBagId = 25630; // convenience aid (the one recommended item)
+
+		final List<RequiredItemDisplay> required = Arrays.asList(
+			new RequiredItemDisplay(tinderboxId, "Tinderbox", Status.HELD),
+			new RequiredItemDisplay(fiyrRemainsId, "Fiyr remains", Status.HELD));
+		final List<RequiredItemDisplay> recommended = Arrays.asList(
+			new RequiredItemDisplay(flamtaerBagId, "Flamtaer bag", Status.IN_BANK));
+		final java.util.Set<Integer> activityIds = java.util.Collections.singleton(fiyrRemainsId);
+
+		AtomicReference<StepProgressView> viewRef = new AtomicReference<>();
+		AtomicReference<BufferedImage> result = new AtomicReference<>();
+		AtomicReference<Exception> error = new AtomicReference<>();
+
+		SwingUtilities.invokeAndWait(() ->
+		{
+			try
+			{
+				ItemManager itemManager = Mockito.mock(ItemManager.class);
+				Mockito.when(itemManager.getImage(Mockito.anyInt())).thenReturn(null);
+
+				StepProgressView view = new StepProgressView(itemManager);
+				view.showStep(2, 6, "Burn shade remains on the funeral pyres", false,
+					required, recommended, java.util.Collections.emptyList(), activityIds);
+				viewRef.set(view);
+			}
+			catch (Exception e)
+			{
+				error.set(e);
+			}
+		});
+		if (error.get() != null)
+		{
+			throw error.get();
+		}
+
+		SwingUtilities.invokeAndWait(() ->
+		{
+			try
+			{
+				result.set(PanelSnapshot.render(viewRef.get(), WIDTH));
+			}
+			catch (Exception e)
+			{
+				error.set(e);
+			}
+		});
+		if (error.get() != null)
+		{
+			throw error.get();
+		}
+
+		BufferedImage img = result.get();
+		Path out = OUT_DIR.resolve("shades-activity-obtainable.png");
+		PanelSnapshot.writePng(img, out);
+
+		assertTrue(Files.exists(out), "PNG not written: " + out.toAbsolutePath());
+		assertTrue(Files.size(out) > 0, "PNG is empty: " + out.toAbsolutePath());
+		assertEquals(WIDTH, img.getWidth(), "render width must equal PANEL_WIDTH");
+		assertTrue(img.getHeight() > 50, "render height too small (" + img.getHeight() + ")");
+	}
+
 	private void renderScenario(String name, PanelPreviewFixtures.Scenario scenario) throws Exception
 	{
 		BufferedImage img = buildAndRenderOnEdt(scenario);

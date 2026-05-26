@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -95,6 +96,14 @@ public class StepProgressView extends JPanel
 {
 	/** Tooltip suffix appended to items whose status is IN_BANK. */
 	private static final String IN_BANK_TOOLTIP_SUFFIX = " ℹ in bank";
+
+	/** Visible suffix appended to item rows obtained during the step's activity. */
+	private static final String FROM_ACTIVITY_SUFFIX = " (from activity)";
+	/** Tooltip note explaining the "(from activity)" tag. */
+	private static final String FROM_ACTIVITY_TOOLTIP_SUFFIX =
+		" - obtained during the activity; no need to bring it";
+	/** Muted-gray colour for the "(from activity)" suffix label. */
+	private static final Color FROM_ACTIVITY_FG = new Color(140, 140, 140);
 
 	private static final Color BG = new Color(25, 35, 55);
 	private static final Color SECTION_HEADER_FG = new Color(200, 200, 200);
@@ -164,6 +173,7 @@ public class StepProgressView extends JPanel
 	private List<RequiredItemDisplay> lastRows = Collections.emptyList();
 	private List<RequiredItemDisplay> lastRecRows = Collections.emptyList();
 	private List<StepSectionGroup> lastGroups = Collections.emptyList();
+	private Set<Integer> lastActivityIds = Collections.emptySet();
 
 	private Runnable stepAdvancer;
 	private Runnable stepSkipper;
@@ -508,12 +518,44 @@ public class StepProgressView extends JPanel
 		List<RequiredItemDisplay> requiredItems, List<RequiredItemDisplay> recommendedItems,
 		List<GuidanceStep> allSteps)
 	{
+		showStep(current, total, description, isManual, requiredItems, recommendedItems,
+			allSteps, Collections.<Integer>emptySet());
+	}
+
+	/**
+	 * Shows and populates the step progress panel, additionally tagging any item
+	 * row whose id is in {@code activityObtainableIds} with a muted "(from activity)"
+	 * suffix (Phase 2 guidance-items redesign). The suffix is informational only and
+	 * does not change the row's ownership colour.
+	 * Safe to call from any thread.
+	 *
+	 * @param current               one-based step index
+	 * @param total                 total number of steps
+	 * @param description           human-readable step description
+	 * @param isManual              whether the Next Step button should be shown
+	 * @param requiredItems         pre-resolved required-item display rows (may be
+	 *                              {@code null} or empty)
+	 * @param recommendedItems      pre-resolved recommended-item display rows (may be
+	 *                              {@code null} or empty); hidden when empty
+	 * @param allSteps              full ordered step list for the active source; used to
+	 *                              compute section groups. Pass an empty list to force flat
+	 *                              layout.
+	 * @param activityObtainableIds item IDs obtained during the active step's activity;
+	 *                              rows with these ids get the "(from activity)" tag (may
+	 *                              be {@code null} or empty)
+	 */
+	public void showStep(int current, int total, String description, boolean isManual,
+		List<RequiredItemDisplay> requiredItems, List<RequiredItemDisplay> recommendedItems,
+		List<GuidanceStep> allSteps, Set<Integer> activityObtainableIds)
+	{
 		final List<RequiredItemDisplay> rows =
 			requiredItems != null ? requiredItems : Collections.emptyList();
 		final List<RequiredItemDisplay> recRows =
 			recommendedItems != null ? recommendedItems : Collections.emptyList();
 		final List<GuidanceStep> steps =
 			allSteps != null ? allSteps : Collections.emptyList();
+		final Set<Integer> activityIds =
+			activityObtainableIds != null ? activityObtainableIds : Collections.emptySet();
 		final List<StepSectionGroup> groups = StepSectionGrouper.group(steps);
 
 		SwingUtilities.invokeLater(() ->
@@ -531,7 +573,8 @@ public class StepProgressView extends JPanel
 				&& java.util.Objects.equals(lastDescription, description)
 				&& lastRows.equals(rows)
 				&& lastRecRows.equals(recRows)
-				&& lastGroups.equals(groups))
+				&& lastGroups.equals(groups)
+				&& lastActivityIds.equals(activityIds))
 			{
 				return;
 			}
@@ -543,6 +586,7 @@ public class StepProgressView extends JPanel
 			lastRows = new java.util.ArrayList<>(rows);
 			lastRecRows = new java.util.ArrayList<>(recRows);
 			lastGroups = new java.util.ArrayList<>(groups);
+			lastActivityIds = new java.util.HashSet<>(activityIds);
 
 			// Plain-text setText on a JTextArea word-wraps from the actual rendered
 			// width — no HTML, no pixel-width budget, no escaping needed. Previous
@@ -562,8 +606,8 @@ public class StepProgressView extends JPanel
 				// (it was hoisted to source-level, #599).
 				sectionsPanel.setVisible(false);
 				chipPanel.update(Collections.<RequiredItemDisplay>emptyList());
-				updateRequiredItemDisplay(rows);
-				updateRecommendedItemDisplay(dedupRecommended(rows, recRows));
+				updateRequiredItemDisplay(rows, activityIds);
+				updateRecommendedItemDisplay(dedupRecommended(rows, recRows), activityIds);
 			}
 			else
 			{
@@ -574,7 +618,7 @@ public class StepProgressView extends JPanel
 				requiredItemsPanel.setVisible(false);
 				recommendedItemsPanel.removeAll();
 				recommendedItemsPanel.setVisible(false);
-				updateSectionDisplay(groups, current, rows, recRows);
+				updateSectionDisplay(groups, current, rows, recRows, activityIds);
 			}
 
 			setVisible(true);
@@ -602,6 +646,7 @@ public class StepProgressView extends JPanel
 			// down, so the next showStep must rebuild even if its inputs match the
 			// last shown step.
 			lastRenderValid = false;
+			lastActivityIds = Collections.emptySet();
 			chipPanel.update(Collections.<RequiredItemDisplay>emptyList());
 			recChipPanel.update(Collections.<RequiredItemDisplay>emptyList());
 			requiredItemsPanel.removeAll();
@@ -639,6 +684,22 @@ public class StepProgressView extends JPanel
 	void updateSectionDisplay(List<StepSectionGroup> groups, int activeStepIndex,
 		List<RequiredItemDisplay> requiredItems, List<RequiredItemDisplay> recommendedItems)
 	{
+		updateSectionDisplay(groups, activeStepIndex, requiredItems, recommendedItems,
+			Collections.<Integer>emptySet());
+	}
+
+	/**
+	 * Section-display variant that also tags activity-obtainable item rows.
+	 * Must be called on the EDT.
+	 *
+	 * @param activityObtainableIds item IDs obtained during the active step's activity
+	 */
+	void updateSectionDisplay(List<StepSectionGroup> groups, int activeStepIndex,
+		List<RequiredItemDisplay> requiredItems, List<RequiredItemDisplay> recommendedItems,
+		Set<Integer> activityObtainableIds)
+	{
+		final Set<Integer> activityIds =
+			activityObtainableIds != null ? activityObtainableIds : Collections.emptySet();
 		sectionsPanel.removeAll();
 
 		String activeSectionName = StepSectionGrouper.sectionNameFor(groups, activeStepIndex);
@@ -655,7 +716,7 @@ public class StepProgressView extends JPanel
 			boolean expanded = sectionExpandState.getOrDefault(group.getName(), Boolean.FALSE);
 
 			JPanel block = buildSectionBlock(group, isActiveSection, expanded,
-				activeStepIndex, requiredItems, recommendedItems);
+				activeStepIndex, requiredItems, recommendedItems, activityIds);
 			block.setAlignmentX(LEFT_ALIGNMENT);
 			sectionsPanel.add(block);
 			sectionsPanel.add(Box.createVerticalStrut(2));
@@ -685,7 +746,7 @@ public class StepProgressView extends JPanel
 	 */
 	private JPanel buildSectionBlock(StepSectionGroup group, boolean isActiveSection,
 		boolean expanded, int activeStepIndex, List<RequiredItemDisplay> requiredItems,
-		List<RequiredItemDisplay> recommendedItems)
+		List<RequiredItemDisplay> recommendedItems, Set<Integer> activityObtainableIds)
 	{
 		JPanel block = new JPanel();
 		block.setLayout(new BoxLayout(block, BoxLayout.Y_AXIS));
@@ -730,7 +791,7 @@ public class StepProgressView extends JPanel
 
 				for (RequiredItemDisplay row : requiredItems)
 				{
-					JPanel rowPanel = buildItemRow(row);
+					JPanel rowPanel = buildItemRow(row, activityObtainableIds);
 					rowPanel.setAlignmentX(LEFT_ALIGNMENT);
 					itemsInSection.add(rowPanel);
 					itemsInSection.add(Box.createVerticalStrut(2));
@@ -759,7 +820,7 @@ public class StepProgressView extends JPanel
 
 				for (RequiredItemDisplay row : recForStep)
 				{
-					JPanel rowPanel = buildItemRow(row);
+					JPanel rowPanel = buildItemRow(row, activityObtainableIds);
 					rowPanel.setAlignmentX(LEFT_ALIGNMENT);
 					recInSection.add(rowPanel);
 					recInSection.add(Box.createVerticalStrut(2));
@@ -865,7 +926,15 @@ public class StepProgressView extends JPanel
 	 */
 	void updateRequiredItemDisplay(List<RequiredItemDisplay> rows)
 	{
-		updateItemSubsection(requiredItemsPanel, "Items needed:", rows);
+		updateRequiredItemDisplay(rows, Collections.<Integer>emptySet());
+	}
+
+	/**
+	 * Required-items variant that tags activity-obtainable rows. Must be called on the EDT.
+	 */
+	void updateRequiredItemDisplay(List<RequiredItemDisplay> rows, Set<Integer> activityObtainableIds)
+	{
+		updateItemSubsection(requiredItemsPanel, "Items needed:", rows, activityObtainableIds);
 	}
 
 	/**
@@ -880,7 +949,15 @@ public class StepProgressView extends JPanel
 	 */
 	void updateRecommendedItemDisplay(List<RequiredItemDisplay> rows)
 	{
-		updateItemSubsection(recommendedItemsPanel, "Recommended:", rows);
+		updateRecommendedItemDisplay(rows, Collections.<Integer>emptySet());
+	}
+
+	/**
+	 * Recommended-items variant that tags activity-obtainable rows. Must be called on the EDT.
+	 */
+	void updateRecommendedItemDisplay(List<RequiredItemDisplay> rows, Set<Integer> activityObtainableIds)
+	{
+		updateItemSubsection(recommendedItemsPanel, "Recommended:", rows, activityObtainableIds);
 	}
 
 	/**
@@ -890,7 +967,7 @@ public class StepProgressView extends JPanel
 	 * Must be called on the EDT.
 	 */
 	private void updateItemSubsection(JPanel panel, String headerText,
-		List<RequiredItemDisplay> rows)
+		List<RequiredItemDisplay> rows, Set<Integer> activityObtainableIds)
 	{
 		panel.removeAll();
 
@@ -910,7 +987,7 @@ public class StepProgressView extends JPanel
 
 		for (RequiredItemDisplay row : rows)
 		{
-			JPanel rowPanel = buildItemRow(row);
+			JPanel rowPanel = buildItemRow(row, activityObtainableIds);
 			rowPanel.setAlignmentX(LEFT_ALIGNMENT);
 			panel.add(rowPanel);
 			panel.add(Box.createVerticalStrut(2));
@@ -937,6 +1014,21 @@ public class StepProgressView extends JPanel
 	 */
 	private JPanel buildItemRow(RequiredItemDisplay row)
 	{
+		return buildItemRow(row, Collections.<Integer>emptySet());
+	}
+
+	/**
+	 * Builds a single item row, appending a muted-gray " (from activity)" suffix
+	 * when the row's item id is in {@code activityObtainableIds}. The item name keeps
+	 * its ownership colour (green/gold/red); only the appended suffix is muted, signalling
+	 * the item is obtained on-site during the step's activity and need not be brought.
+	 *
+	 * <p>The suffix is a second {@link JLabel} so the name colour is untouched. No icon
+	 * is rendered (the compact text list keeps long item lists from overflowing the
+	 * 225px side panel).
+	 */
+	private JPanel buildItemRow(RequiredItemDisplay row, Set<Integer> activityObtainableIds)
+	{
 		JPanel rowPanel = new JPanel();
 		rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
 		rowPanel.setBackground(BG);
@@ -962,13 +1054,27 @@ public class StepProgressView extends JPanel
 				break;
 		}
 
+		final boolean fromActivity =
+			activityObtainableIds != null && activityObtainableIds.contains(row.getItemId());
+
 		JLabel nameLabel = new JLabel(row.getName());
 		nameLabel.setFont(FontManager.getRunescapeSmallFont());
 		nameLabel.setForeground(nameColor);
-		nameLabel.setToolTipText(row.getName() + tooltipSuffix);
+		nameLabel.setToolTipText(row.getName() + tooltipSuffix
+			+ (fromActivity ? FROM_ACTIVITY_TOOLTIP_SUFFIX : ""));
 		nameLabel.setAlignmentX(LEFT_ALIGNMENT);
 
 		rowPanel.add(nameLabel);
+
+		if (fromActivity)
+		{
+			JLabel activityLabel = new JLabel(FROM_ACTIVITY_SUFFIX);
+			activityLabel.setFont(FontManager.getRunescapeSmallFont());
+			activityLabel.setForeground(FROM_ACTIVITY_FG);
+			activityLabel.setToolTipText(row.getName() + FROM_ACTIVITY_TOOLTIP_SUFFIX);
+			activityLabel.setAlignmentX(LEFT_ALIGNMENT);
+			rowPanel.add(activityLabel);
+		}
 
 		return rowPanel;
 	}
