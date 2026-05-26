@@ -33,6 +33,7 @@ import java.awt.Font;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -54,6 +55,14 @@ import net.runelite.client.ui.FontManager;
 public class SlayerStrategyView extends JPanel
 {
 	private static final Color SLAYER_TASK_COLOR = new Color(180, 80, 220);
+	/** Tint for the collapse chevron, matching the toggle label colour. */
+	private static final Color CHEVRON_COLOR = new Color(180, 80, 220);
+	/** Right-pointing chevron shown when the strategy panel is collapsed. */
+	private static final ImageIcon CHEVRON_RIGHT_ICON =
+		new ImageIcon(StatusIcons.chevronRight(CHEVRON_COLOR));
+	/** Down-pointing chevron shown when the strategy panel is expanded. */
+	private static final ImageIcon CHEVRON_DOWN_ICON =
+		new ImageIcon(StatusIcons.chevronDown(CHEVRON_COLOR));
 
 	private final SlayerTaskState slayerTaskState;
 	private final SlayerStrategyCalculator slayerStrategyCalculator;
@@ -95,7 +104,10 @@ public class SlayerStrategyView extends JPanel
 		slayerStrategyPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		slayerStrategyPanel.setVisible(false);
 
-		strategyToggle = new JButton("\u25B6 Slayer Strategy");
+		strategyToggle = new JButton("Slayer Strategy");
+		strategyToggle.setIcon(CHEVRON_RIGHT_ICON);
+		strategyToggle.setIconTextGap(4);
+		strategyToggle.setHorizontalAlignment(SwingConstants.LEFT);
 		strategyToggle.setFont(FontManager.getRunescapeSmallFont().deriveFont(Font.BOLD));
 		strategyToggle.setForeground(new Color(180, 80, 220));
 		strategyToggle.setBackground(new Color(35, 25, 50));
@@ -107,7 +119,7 @@ public class SlayerStrategyView extends JPanel
 		strategyToggle.addActionListener(e ->
 		{
 			expanded = !expanded;
-			strategyToggle.setText((expanded ? "\u25BC " : "\u25B6 ") + "Slayer Strategy");
+			strategyToggle.setIcon(expanded ? CHEVRON_DOWN_ICON : CHEVRON_RIGHT_ICON);
 			updateStrategyContent();
 		});
 		slayerStrategyPanel.add(strategyToggle);
@@ -126,10 +138,17 @@ public class SlayerStrategyView extends JPanel
 	 * Re-reads {@link SlayerTaskState} and {@link SlayerStrategyCalculator} and
 	 * updates both the task label and strategy panel accordingly.
 	 * Must be called on the EDT (invoked from the shell's rebuild path).
+	 *
+	 * @param slayerContext whether the panel is currently showing a
+	 *                      slayer-related context (e.g. Category Focus on the
+	 *                      Slayer category). When {@code false} the task label
+	 *                      and strategy panel stay hidden even if a task is
+	 *                      active, so the advisor never pins itself to the top of
+	 *                      the panel in unrelated modes.
 	 */
-	public void refresh()
+	public void refresh(boolean slayerContext)
 	{
-		if (slayerTaskState.isTaskActive())
+		if (slayerContext && slayerTaskState.isTaskActive())
 		{
 			final String creature = slayerTaskState.getCreatureName();
 			final int remaining = slayerTaskState.getRemaining();
