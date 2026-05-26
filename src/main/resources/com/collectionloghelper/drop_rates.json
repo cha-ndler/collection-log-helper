@@ -5959,7 +5959,18 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
         "travelTip": "Fairy ring CIR (Farming Guild), or Skills necklace -> Farming Guild",
-        "section": "Travel"
+        "section": "Travel",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "skillCapePerks": [
+                "FARMING"
+              ]
+            },
+            "description": "Farming cape: teleport straight into the Farming Guild (lands near the bank), then walk to the south room and plant the Hespori seed. Skips the fairy ring hop entirely",
+            "travelTip": "Farming cape -> Farming Guild -> south room"
+          }
+        ]
       },
       {
         "description": "Check the Hespori patch when ready (~32 hours after planting). The patch icon shows a glowing flower when the Hespori is fully grown and ready to fight",
@@ -29734,7 +29745,18 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
         "travelTip": "Edgeville lever -> Wilderness Volcano -> run south-east; or Wilderness Obelisk level 35",
-        "section": "Travel"
+        "section": "Travel",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "skillCapePerks": [
+                "HUNTER"
+              ]
+            },
+            "description": "Hunter cape: teleport straight to the black chinchompa Wilderness hunting area (five uses per day), skipping the Edgeville lever and the long run south-east through the Wilderness. Still bank only what you can afford to lose - PKers patrol here",
+            "travelTip": "Hunter cape -> black chinchompa area (5/day)"
+          }
+        ]
       },
       {
         "description": "Set box traps to catch black chinchompas (73 Hunter required). Stay alert for PKers approaching from any direction - keep a teleport ready. Always check the mini-map for nearby players. Inventory fills quickly so bank or drop when full.",
@@ -30076,7 +30098,18 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 30,
         "travelTip": "Fairy ring CIR -> Farming Guild; spirit tree -> Gnome Stronghold; gnome glider to Lleyta",
-        "section": "Plant"
+        "section": "Plant",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "skillCapePerks": [
+                "FARMING"
+              ]
+            },
+            "description": "Farming cape: teleport directly to the Farming Guild for its fruit tree patch (75+ Farming), skipping the fairy ring CIR hop, and the guild bank and spirit tree are a few tiles away for the rest of the run",
+            "travelTip": "Farming cape -> Farming Guild fruit tree patch"
+          }
+        ]
       },
       {
         "description": "Wait approximately 16 hours for fruit trees to fully grow (each tree takes 8 growth cycles at ~2 hours each). Tangleroot pet chance applies each time you check health of any fully grown tree. Return to all patches and check health to claim XP and log progress. Re-plant immediately to maximise pet attempts over time.",
