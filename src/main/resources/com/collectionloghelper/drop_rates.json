@@ -1231,7 +1231,14 @@
           10280,
           0
         ],
-        "section": "Travel"
+        "section": "Travel",
+        "conditionalAlternatives": [
+          {
+            "requirements": { "diaries": ["KOUREND_ELITE"] },
+            "description": "Use Rada's blessing 4 to teleport directly to the top of Mount Karuulm, then descend the dungeon entrance immediately below. Saves the fairy ring detour entirely.",
+            "travelTip": "Rada's blessing 4 -> Mount Karuulm summit (Kourend Elite Diary)"
+          }
+        ]
       },
       {
         "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
@@ -1464,7 +1471,14 @@
           9520,
           0
         ],
-        "travelTip": "Fairy ring BIQ, or desert amulet to Kalphite Cave (with Hard Desert Diary)"
+        "travelTip": "Fairy ring BIQ, or desert amulet to Kalphite Cave (with Hard Desert Diary)",
+        "conditionalAlternatives": [
+          {
+            "requirements": { "diaries": ["DESERT_HARD"] },
+            "description": "Use the desert amulet 4 to teleport directly to the Kalphite Cave entrance, eliminating the fairy ring detour.",
+            "travelTip": "Desert amulet 4 -> Kalphite Cave (Hard Desert Diary reward)"
+          }
+        ]
       },
       {
         "description": "Climb down the first tunnel entrance (use a rope if first time)",
@@ -4174,7 +4188,14 @@
         "worldY": 3740,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": { "diaries": ["FREMENNIK_HARD"] },
+            "description": "Rub the enchanted lyre to teleport directly to Rellekka, then take Jarvald's boat to Waterbirth Island for free. Hard Fremennik Diary removes the 1,000 gp boat fee.",
+            "travelTip": "Enchanted lyre -> Rellekka -> free Jarvald boat (Hard Fremennik Diary)"
+          }
+        ]
       },
       {
         "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Bring a rune thrownaxe (or Mind Altar shortcut at 70 Agility) to pull only Rex",
@@ -4253,7 +4274,14 @@
         "worldY": 3740,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": { "diaries": ["FREMENNIK_HARD"] },
+            "description": "Rub the enchanted lyre to teleport directly to Rellekka, then take Jarvald's boat to Waterbirth Island for free. Hard Fremennik Diary removes the 1,000 gp boat fee.",
+            "travelTip": "Enchanted lyre -> Rellekka -> free Jarvald boat (Hard Fremennik Diary)"
+          }
+        ]
       },
       {
         "description": "Descend the Waterbirth Island Dungeon to floor 6 and reach the Kings' lair. Bring a rune thrownaxe (or pet rock + 70 Agility shortcut) to lure Prime away from Supreme and Rex",
@@ -4332,7 +4360,14 @@
         "worldY": 3740,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20
+        "completionDistance": 20,
+        "conditionalAlternatives": [
+          {
+            "requirements": { "diaries": ["FREMENNIK_HARD"] },
+            "description": "Rub the enchanted lyre to teleport directly to Rellekka, then take Jarvald's boat to Waterbirth Island for free. Hard Fremennik Diary removes the 1,000 gp boat fee.",
+            "travelTip": "Enchanted lyre -> Rellekka -> free Jarvald boat (Hard Fremennik Diary)"
+          }
+        ]
       },
       {
         "description": "Descend the Waterbirth Island Dungeon to floor 6 and reach the Kings' lair. Bring a rune thrownaxe to lure Supreme away from the other two Kings",
