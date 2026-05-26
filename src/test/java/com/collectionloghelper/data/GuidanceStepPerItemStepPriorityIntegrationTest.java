@@ -171,7 +171,8 @@ public class GuidanceStepPerItemStepPriorityIntegrationTest
 			null,                       // waypoints
 			null,                       // dynamicTargetEvaluator
 			null,                       // conditionTree
-			perItemStepPriority         // perItemStepPriority
+						perItemStepPriority, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 }

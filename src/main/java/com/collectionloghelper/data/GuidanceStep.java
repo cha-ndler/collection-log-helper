@@ -310,9 +310,38 @@ public class GuidanceStep
 	@Nullable
 	Map<Integer, Integer> perItemStepPriority;
 
+	/**
+	 * Item IDs the player obtains DURING this step's activity and therefore need
+	 * not bring from the bank (Phase 2 guidance-items redesign). Examples: shade
+	 * remains dropped by shades killed on-site, or keys produced by cremation.
+	 *
+	 * <p>Used purely for display: the panel appends a muted "(from activity)" tag
+	 * to any required- or recommended-item row whose id is in this list, so the
+	 * player can tell at a glance that an item is sourced on-site rather than
+	 * carried in. It does NOT change ownership colouring or completion logic.
+	 *
+	 * <p>Null by default. Existing JSON without this field deserialises unchanged.
+	 * Use {@link #getActivityObtainableItemIds()} for a non-null view.
+	 */
+	@Nullable
+	List<Integer> activityObtainableItemIds;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
+	}
+
+	/**
+	 * Returns the activity-obtainable item IDs for this step, never null.
+	 * Falls back to an empty list when the JSON omits the field.
+	 *
+	 * <p>Custom getter: Lombok's {@code @Value} skips generating an accessor when
+	 * one is declared by hand, so callers get a guaranteed non-null list instead
+	 * of the raw nullable field.
+	 */
+	public List<Integer> getActivityObtainableItemIds()
+	{
+		return activityObtainableItemIds != null ? activityObtainableItemIds : Collections.emptyList();
 	}
 
 	public int getCompletionItemCount()
@@ -565,7 +594,8 @@ public class GuidanceStep
 			null, // waypoints: merged steps inherit null; authors set waypoints on the base step
 			this.dynamicTargetEvaluator,
 			this.conditionTree, // tree is inherited from base; alternatives do not override it in B1
-			this.perItemStepPriority // priority map inherited from base; alternatives do not override it in B4.3.4
+			this.perItemStepPriority, // priority map inherited from base; alternatives do not override it in B4.3.4
+			this.activityObtainableItemIds // activity-obtainable IDs inherited from base; alternatives do not override
 		);
 	}
 }

@@ -555,6 +555,24 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			requiredItems, recommendedItems, allSteps);
 	}
 
+	/**
+	 * Step-progress update variant that additionally tags item rows whose id is in
+	 * {@code activityObtainableIds} with a muted "(from activity)" suffix
+	 * (Phase 2 guidance-items redesign).
+	 *
+	 * @param activityObtainableIds item IDs obtained during the active step's activity;
+	 *                              may be {@code null} or empty
+	 */
+	public void updateStepProgress(int current, int total, String description, boolean isManual,
+		List<RequiredItemDisplay> requiredItems,
+		List<RequiredItemDisplay> recommendedItems,
+		List<com.collectionloghelper.data.GuidanceStep> allSteps,
+		java.util.Set<Integer> activityObtainableIds)
+	{
+		stepProgressView.showStep(current, total, description, isManual,
+			requiredItems, recommendedItems, allSteps, activityObtainableIds);
+	}
+
 	/** Hides the step progress banner. */
 	public void hideStepProgress()
 	{

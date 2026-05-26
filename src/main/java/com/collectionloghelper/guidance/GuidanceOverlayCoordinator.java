@@ -339,8 +339,11 @@ public class GuidanceOverlayCoordinator
 						requiredItemResolver.resolve(rawForResolve);
 					final List<RequiredItemDisplay> resolvedRecommended =
 						requiredItemResolver.resolveRecommended(rawForResolve);
+					final java.util.Set<Integer> activityIds = rawForResolve != null
+						? new java.util.HashSet<>(rawForResolve.getActivityObtainableItemIds())
+						: java.util.Collections.emptySet();
 					panel.updateStepProgress(landedIdx, stepTotal, stepDesc, stepManual,
-						resolvedItems, resolvedRecommended, sourceSteps);
+						resolvedItems, resolvedRecommended, sourceSteps, activityIds);
 				});
 			}
 			// Add InfoBox showing the correct landed step (not always "1/N")
