@@ -138,6 +138,38 @@ public class GuidanceOverlayCoordinator
 	/** Last guidance step index for which a worldMessage was sent (prevents spam). */
 	private int lastMessagedStepIndex = -1;
 
+	/**
+	 * Identity of the step whose data was last applied to the in-game overlays by
+	 * {@link #onStepChanged(GuidanceStep)}, or {@code -1} / {@code null} before the
+	 * first application. Used to distinguish a genuine step CHANGE from a re-notify
+	 * of the SAME step (#683).
+	 *
+	 * <p>{@code GuidanceSequencer.onInventoryChanged} re-notifies the current
+	 * (unchanged) step on every {@code ItemContainerChanged} while guidance is
+	 * active - effectively every action during activities like Shades of Mort'ton.
+	 * Each re-notify reaches {@link #onStepChanged(GuidanceStep)}, which previously
+	 * tore down ({@link #clearGuidanceOverlays()}) and rebuilt
+	 * ({@link #applyStepToOverlays(GuidanceStep, String, CollectionLogSource)}) the
+	 * in-game blue box / highlights every time, producing a visible blink.</p>
+	 *
+	 * <p>This mirrors the side-panel idempotency guards added in #681
+	 * ({@code StepProgressView.lastRenderValid} + {@code StepChangeHandler.lastShownStepIndex}):
+	 * track the last-applied identity and early-return when an incoming re-notify
+	 * matches. Identity is the sequencer step index PLUS the resolved
+	 * {@link GuidanceStep} reference - the index catches ordinary re-notifies and the
+	 * step reference catches a same-index conditional-alternative swap (resolved steps
+	 * are cached per index by the sequencer, so reference identity is stable and a
+	 * genuine swap yields a different object). Reset to the sentinel by
+	 * {@link #deactivateGuidance()} so re-activating any source re-applies on the
+	 * first step.</p>
+	 *
+	 * <p>Read/written only on the path that fires {@code onStepChanged} (the client
+	 * thread that drives the sequencer), so no synchronization is needed.</p>
+	 */
+	private int lastAppliedOverlayStepIndex = -1;
+	@Nullable
+	private GuidanceStep lastAppliedOverlayStep;
+
 	/** Pending ShortestPath target -- set after "clear", sent as "path" on the next game tick. */
 	private WorldPoint pendingShortestPathTarget;
 
@@ -373,6 +405,11 @@ public class GuidanceOverlayCoordinator
 	{
 		activeTargetItemId = null;
 		lastMessagedStepIndex = -1;
+		// Reset the #683 overlay idempotency identity so re-activating any source
+		// (including the same one) re-applies overlays on its first step instead of
+		// being suppressed as a "same step" re-notify.
+		lastAppliedOverlayStepIndex = -1;
+		lastAppliedOverlayStep = null;
 		OverlayDeactivator.Result result = overlayDeactivator.deactivate(
 			new OverlayDeactivator.Input(activeInfoBox, pendingShortestPathTarget, panel));
 		activeMapPoint = result.activeMapPoint;
@@ -548,19 +585,42 @@ public class GuidanceOverlayCoordinator
 	}
 
 	/**
-	 * Callback from GuidanceSequencer when the current step changes.
-	 * Performs the overlay clear + apply + NPC-tracker scan locally (those
-	 * paths mutate coordinator-owned state such as {@code lastMessagedStepIndex}
-	 * and {@code activeMapPoint}), then delegates the InfoBox/panel
-	 * progress refresh to {@link StepChangeHandler}.
+	 * Callback from GuidanceSequencer when the current step changes (or is re-notified).
+	 * On a genuine step change, performs the overlay clear + apply + NPC-tracker scan
+	 * locally (those paths mutate coordinator-owned state such as
+	 * {@code lastMessagedStepIndex} and {@code activeMapPoint}). On a same-step re-notify
+	 * (fired by {@code GuidanceSequencer.onInventoryChanged} on every inventory change)
+	 * the clear + re-apply is skipped to avoid an overlay blink (#683). The InfoBox/panel
+	 * progress refresh is always delegated to {@link StepChangeHandler}, whose own #681
+	 * guards keep an unchanged re-notify a no-op.
 	 */
 	private void onStepChanged(GuidanceStep step)
 	{
-		clearGuidanceOverlays();
-		CollectionLogSource activeSource = guidanceSequencer.getActiveSource();
-		String sourceName = activeSource != null ? activeSource.getName() : "";
-		applyStepToOverlays(step, sourceName, activeSource);
-		npcTrackerHelper.scanForTrackedNpc(step, activeTargetItemId);
+		// Same-step idempotency guard (#683), mirroring the side-panel guards from #681
+		// (StepProgressView.lastRenderValid / StepChangeHandler.lastShownStepIndex).
+		// onInventoryChanged re-notifies the current (unchanged) step on every inventory
+		// change while guidance is active; without this guard each re-notify clears and
+		// re-applies the in-game overlays, producing a visible blink. Identity is the
+		// sequencer step index plus the resolved step reference (catches a same-index
+		// conditional-alternative swap). When both match the last application this is a
+		// redundant re-notify, so skip the clear + re-apply entirely.
+		//
+		// The StepChangeHandler delegation below is NOT skipped: its own #681 guards make
+		// an unchanged re-notify a no-op while still letting genuine item-availability
+		// changes update the panel in place.
+		final int currentIndex = guidanceSequencer.getCurrentIndex();
+		final boolean sameStepRenotify = lastAppliedOverlayStepIndex == currentIndex
+			&& lastAppliedOverlayStep == step;
+		if (!sameStepRenotify)
+		{
+			lastAppliedOverlayStepIndex = currentIndex;
+			lastAppliedOverlayStep = step;
+			clearGuidanceOverlays();
+			CollectionLogSource applySource = guidanceSequencer.getActiveSource();
+			String applySourceName = applySource != null ? applySource.getName() : "";
+			applyStepToOverlays(step, applySourceName, applySource);
+			npcTrackerHelper.scanForTrackedNpc(step, activeTargetItemId);
+		}
 
 		stepChangeHandler.handle(step,
 			new StepChangeHandler.Input(activeInfoBox, panel, activeTargetItemId));
