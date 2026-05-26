@@ -417,6 +417,13 @@ public class GuidanceSequencer
 	 * already set, so {@link #wasTargetSlotUnlocked()} reports {@code true}). Without
 	 * this, guidance could stay pinned on a completed item because the final step's
 	 * own completion condition (inventory / chat) had not yet fired (#708).
+	 *
+	 * <p>The auto-complete shortcut only applies to single-pass guidance. When the
+	 * current step is mid-loop (it declares a loop-back and the loop is not yet
+	 * exhausted, e.g. Shades of Mort'ton cycling chest opens), obtaining a target
+	 * item only records the unlock flag and falls through to the normal
+	 * step-completion / loop-back path — completing the sequence here would kill the
+	 * loop and leave stale highlights (#715).
 	 */
 	public void onItemObtained(int itemId)
 	{
@@ -433,6 +440,15 @@ public class GuidanceSequencer
 				if (item.getItemId() == itemId)
 				{
 					targetSlotUnlocked = true;
+					if (isCurrentStepMidLoop())
+					{
+						// Looping source mid-loop: do NOT complete the sequence. Record the
+						// unlock and let the normal step-completion / loop-back logic continue
+						// cycling the loop.
+						log.info("Target slot unlocked for {} (itemId={}) mid-loop — keeping guidance active",
+							activeSource.getName(), itemId);
+						break;
+					}
 					log.info("Target slot unlocked for {} (itemId={}) — completing guidance",
 						activeSource.getName(), itemId);
 					// The guided collection-log item was obtained: the sequence is done,
@@ -717,6 +733,26 @@ public class GuidanceSequencer
 			log.info("{} step {}/{}: {}", label, currentIndex + 1, currentSteps.size(), step.getDescription());
 			notifyStepChanged(step);
 		}
+	}
+
+	/**
+	 * Returns {@code true} when the current step is part of an active, not-yet-exhausted
+	 * loop. A step loops when it declares both {@code loopBackToStep > 0} and
+	 * {@code loopCount > 0}; the loop is still active while more iterations remain.
+	 *
+	 * <p>The exhaustion test mirrors {@link StepAdvancer#advance}: completing the step
+	 * increments the iteration counter, and the loop only continues while
+	 * {@code loopIterationsCompleted + 1 < loopCount}. On the final iteration this
+	 * returns {@code false}, so a genuinely-last loop pass still allows the sequence to
+	 * complete normally.
+	 */
+	private boolean isCurrentStepMidLoop()
+	{
+		GuidanceStep step = getRawCurrentStep();
+		return step != null
+			&& step.getLoopBackToStep() > 0
+			&& step.getLoopCount() > 0
+			&& loopIterationsCompleted + 1 < step.getLoopCount();
 	}
 
 	private void fireSequenceComplete()
