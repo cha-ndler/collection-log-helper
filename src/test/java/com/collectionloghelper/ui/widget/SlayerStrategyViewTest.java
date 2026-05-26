@@ -27,6 +27,7 @@ package com.collectionloghelper.ui.widget;
 import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import java.util.Collections;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -35,6 +36,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -64,7 +67,23 @@ public class SlayerStrategyViewTest
 	public void refresh_noActiveTask_doesNotThrow()
 	{
 		Mockito.when(slayerTaskState.isTaskActive()).thenReturn(false);
-		view.refresh();
+		view.refresh(true);
+	}
+
+	@Test
+	public void refresh_activeTask_notSlayerContext_staysHidden()
+	{
+		Mockito.when(slayerTaskState.isTaskActive()).thenReturn(true);
+		Mockito.when(slayerTaskState.getCreatureName()).thenReturn("Abyssal Demons");
+		Mockito.when(slayerTaskState.getRemaining()).thenReturn(120);
+
+		view.refresh(false);
+
+		// view.getComponents()[0] is the task label; [1] is the strategy panel.
+		assertTrue(!view.getComponents()[0].isVisible(),
+			"task label must stay hidden outside slayer context");
+		assertTrue(!view.getComponents()[1].isVisible(),
+			"strategy panel must stay hidden outside slayer context");
 	}
 
 	@Test
@@ -74,7 +93,7 @@ public class SlayerStrategyViewTest
 		Mockito.when(slayerTaskState.getCreatureName()).thenReturn("Abyssal Demons");
 		Mockito.when(slayerTaskState.getRemaining()).thenReturn(120);
 		Mockito.when(calculator.getRecommendedMaster()).thenReturn("Duradel");
-		view.refresh();
+		view.refresh(true);
 	}
 
 	@Test
@@ -84,7 +103,7 @@ public class SlayerStrategyViewTest
 		Mockito.when(slayerTaskState.getCreatureName()).thenReturn("Cows");
 		Mockito.when(slayerTaskState.getRemaining()).thenReturn(10);
 		Mockito.when(calculator.getRecommendedMaster()).thenReturn(null);
-		view.refresh();
+		view.refresh(true);
 	}
 
 	@Test
@@ -98,7 +117,7 @@ public class SlayerStrategyViewTest
 		Mockito.when(calculator.getUsefulSourcesForCreature(null))
 			.thenReturn(Collections.emptyList());
 		Mockito.when(calculator.getMissingItemsForCreature(null)).thenReturn(0);
-		view.refresh();
+		view.refresh(true);
 	}
 
 	@Test
@@ -114,7 +133,7 @@ public class SlayerStrategyViewTest
 		Mockito.when(calculator.getRecommendedBlockList("Duradel"))
 			.thenReturn(Collections.emptyList());
 
-		view.refresh();
+		view.refresh(true);
 
 		// Drill down to the toggle button: view → slayerStrategyPanel (JPanel) → strategyToggle (JButton).
 		// view.getComponents()[1] is the JPanel, not the button; the button sits one level deeper.
@@ -122,11 +141,16 @@ public class SlayerStrategyViewTest
 		JButton toggle = (JButton) strategyPanel.getComponents()[0];
 		assertTrue( toggle.getActionListeners().length > 0,"toggle should have an expand/collapse listener");
 
+		// Collapse state is carried by the chevron icon (right = collapsed,
+		// down = expanded), not by an ASCII glyph in the label text.
+		Icon collapsedIcon = toggle.getIcon();
+		assertNotNull(collapsedIcon, "toggle should show a chevron icon when collapsed");
+
 		SwingUtilities.invokeAndWait(toggle::doClick);
 
-		// After one click, toggle text should flip to the expanded glyph (▼).
-		assertTrue(
-			toggle.getText().startsWith("\u25BC"),"toggle text should indicate expanded state after click");
+		// After one click, the chevron icon should flip to the expanded variant.
+		assertNotSame(collapsedIcon, toggle.getIcon(),
+			"toggle icon should change to indicate expanded state after click");
 	}
 
 	@Test
@@ -142,20 +166,21 @@ public class SlayerStrategyViewTest
 		Mockito.when(calculator.getRecommendedBlockList("Konar"))
 			.thenReturn(Collections.singletonList("Easy Task"));
 
-		view.refresh();
+		view.refresh(true);
 
 		JPanel strategyPanel = (JPanel) view.getComponents()[1];
 		JButton toggle = (JButton) strategyPanel.getComponents()[0];
-		String collapsedGlyph = "\u25B6";
-		String expandedGlyph = "\u25BC";
-		assertTrue( toggle.getText().startsWith(collapsedGlyph),"toggle should start collapsed");
+
+		// State is shown by the chevron icon: the collapsed and expanded variants
+		// are distinct instances, so toggling swaps the icon back and forth.
+		Icon collapsedIcon = toggle.getIcon();
+		assertNotNull(collapsedIcon, "toggle should start collapsed with a chevron icon");
 
 		SwingUtilities.invokeAndWait(toggle::doClick);
-		assertTrue(
-			toggle.getText().startsWith(expandedGlyph),"toggle should be expanded after first click");
+		Icon expandedIcon = toggle.getIcon();
+		assertNotSame(collapsedIcon, expandedIcon, "toggle should be expanded after first click");
 
 		SwingUtilities.invokeAndWait(toggle::doClick);
-		assertTrue(
-			toggle.getText().startsWith(collapsedGlyph),"toggle should be collapsed after second click");
+		assertSame(collapsedIcon, toggle.getIcon(), "toggle should be collapsed after second click");
 	}
 }

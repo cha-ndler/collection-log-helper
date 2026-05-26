@@ -238,7 +238,14 @@ public class SlayerStrategyCalculator
 
 	/**
 	 * Returns true if the given Slayer creature maps to any collection log
-	 * source that has at least one missing item.
+	 * source that has at least one missing item AND whose unique drops genuinely
+	 * require an active Slayer task.
+	 * <p>
+	 * Sources that are freely farmable off-task (per
+	 * {@link SlayerCreatureDatabase#isTaskOnlySource(String)}) are excluded: they
+	 * provide no reason to keep this task assigned or to choose a master for it,
+	 * so they must not influence the block list, best-master recommendation, or
+	 * the useful-task probability that drives master comparison.
 	 */
 	private boolean hasAnyMissingItems(String creatureName)
 	{
@@ -250,6 +257,10 @@ public class SlayerStrategyCalculator
 
 		for (String sourceName : sourceNames)
 		{
+			if (!SlayerCreatureDatabase.isTaskOnlySource(sourceName))
+			{
+				continue;
+			}
 			CollectionLogSource source = dropRateDatabase.getSourceByName(sourceName);
 			if (source == null)
 			{

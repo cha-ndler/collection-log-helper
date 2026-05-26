@@ -27,6 +27,7 @@ package com.collectionloghelper.ui.preview;
 import com.collectionloghelper.AfkFilter;
 import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.EfficientSortMode;
+import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.data.CollectionLogSource;
 import com.collectionloghelper.data.DataSyncState;
 import com.collectionloghelper.data.DropRateDatabase;
@@ -90,6 +91,7 @@ public final class PanelPreviewFixtures
 		private Mode mode = Mode.EFFICIENT;
 		private boolean slayerTaskActive = false;
 		private boolean longLabels = false;
+		private CollectionLogCategory focusCategory = null;
 
 		public Scenario mode(Mode m)
 		{
@@ -106,6 +108,18 @@ public final class PanelPreviewFixtures
 		public Scenario longLabels(boolean on)
 		{
 			this.longLabels = on;
+			return this;
+		}
+
+		/**
+		 * Drives the panel into Category Focus mode on the given category via the
+		 * real selector path (mirrors a user picking a category). Overrides
+		 * {@link #mode(Mode)} for the focus-mode scenarios.
+		 */
+		public Scenario focusCategory(CollectionLogCategory category)
+		{
+			this.focusCategory = category;
+			this.mode = Mode.CATEGORY_FOCUS;
 			return this;
 		}
 	}
@@ -206,7 +220,16 @@ public final class PanelPreviewFixtures
 			inventoryState, bankState, dryStreakAnalyzer,
 			guidanceActivator, guidanceDeactivator, afkFilterUpdater, sortModeUpdater);
 
-		panel.setMode(scenario.mode);
+		if (scenario.focusCategory != null)
+		{
+			// Real selector path: sets the category and flips to Category Focus,
+			// which is the only context where the slayer advisor should surface.
+			panel.switchToCategoryFocus(scenario.focusCategory);
+		}
+		else
+		{
+			panel.setMode(scenario.mode);
+		}
 		return panel;
 	}
 
