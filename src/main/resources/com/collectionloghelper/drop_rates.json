@@ -21635,7 +21635,18 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
         "travelTip": "Quetzal whistle -> Civitas illa Fortis -> run south-west; or Colossal wyrm teleport scroll",
-        "section": "Travel"
+        "section": "Travel",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "FAIRY_RING"
+              ]
+            },
+            "description": "Travel to the Colossal Wyrm Agility Course in Avium Savannah, Varlamore. Requires Children of the Sun and 50 Agility. Use your POH superior-garden fairy ring with code AJP to land in the centre of Avium Savannah, then run south to the course - no teleport scroll or quetzal whistle needed.",
+            "travelTip": "POH fairy ring -> AJP -> centre of Avium Savannah -> run south to the course"
+          }
+        ]
       },
       {
         "description": "Complete laps of the Colossal Wyrm Agility Course for Varlamore marks of grace and termite currency. Collect marks when they appear on obstacles - they despawn after 10 minutes. Spend marks at Telia for Varlamore graceful pieces and Calcified acorns. Higher Agility level increases lap speed and mark rate.",
