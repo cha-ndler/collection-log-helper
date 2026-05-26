@@ -107,6 +107,8 @@ public class BossGuidanceDispatchTest
 			null /* conditionTree */,
 						null, /* perItemStepPriority */
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 

@@ -236,6 +236,8 @@ public class WintertodtBrazierEvaluatorTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 }

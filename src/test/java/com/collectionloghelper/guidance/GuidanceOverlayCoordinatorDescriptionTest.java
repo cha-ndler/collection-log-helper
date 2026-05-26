@@ -306,6 +306,8 @@ public class GuidanceOverlayCoordinatorDescriptionTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 
