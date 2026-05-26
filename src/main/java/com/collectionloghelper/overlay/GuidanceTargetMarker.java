@@ -29,49 +29,66 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import javax.annotation.Nullable;
 import net.runelite.api.Client;
+import net.runelite.api.ItemID;
 import net.runelite.api.Perspective;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
+import net.runelite.client.game.ItemManager;
+import net.runelite.client.util.AsyncBufferedImage;
 
 /**
  * Shared floating "collection-log target" marker for in-world guidance overlays.
  *
- * <p>The previous implementation (#714) drew the panel's 16x16 cyan-on-transparent
- * book PNG resized to 18px directly on top of the target. At that size the PNG is
- * illegible against the game world - it reads as a blue blob with a line - and
- * sitting on the target rather than above it hid the object. This helper instead
- * draws a clean, programmatic book glyph (the same Java2D drawn-icon approach used
- * by the panel's status/step icons) and projects it ABOVE the target with a
- * vertical pixel offset, quest-helper style.
+ * <p>Renders the real OSRS collection-log book item sprite
+ * ({@link ItemID#COLLECTION_LOG}) floating ABOVE the target with a vertical pixel
+ * offset, quest-helper style — the same sprite the world-map destination overlay
+ * uses, for visual consistency (#720). The sprite is fetched once from
+ * {@link ItemManager} and cached; because {@code getImage} returns an
+ * {@link AsyncBufferedImage} that fills in on a later client tick, a programmatic
+ * book glyph is drawn as a fallback until the sprite has loaded (and remains the
+ * marker if no {@link ItemManager} is available).
  *
- * <p>The glyph is rasterised once into a {@link BufferedImage} at construction so
- * the render hot-path performs no allocation and no IO - it only projects a point
- * and blits the cached image.
+ * <p>Both the glyph and the resolved sprite are cached, so the render hot-path
+ * performs no allocation and no IO - it only projects a point and blits an image.
  */
 final class GuidanceTargetMarker
 {
 	/** Glyph canvas size in pixels - large enough to be legible as a small book. */
 	private static final int SIZE = 26;
 
-	/** Pixels to lift the glyph above the target's canvas point so it floats clear. */
+	/** Pixels to lift the marker above the target's canvas point so it floats clear. */
 	private static final int HEIGHT_OFFSET = 80;
 
 	private static final Color BOOK_FILL = new Color(0xE8, 0xC4, 0x6A);
 	private static final Color BOOK_OUTLINE = Color.BLACK;
 	private static final Color PAGE_LINE = new Color(0x3A, 0x2A, 0x10);
 
+	@Nullable
+	private final ItemManager itemManager;
+
+	/** Programmatic fallback glyph, drawn until the real item sprite has loaded. */
 	private final BufferedImage glyph;
 
-	GuidanceTargetMarker()
+	/** Real collection-log book sprite, lazily resolved from {@link ItemManager}. */
+	@Nullable
+	private BufferedImage sprite;
+
+	/** True once {@link #sprite} has finished loading and is safe to blit. */
+	private volatile boolean spriteReady;
+
+	GuidanceTargetMarker(@Nullable ItemManager itemManager)
 	{
+		this.itemManager = itemManager;
 		this.glyph = buildGlyph();
 	}
 
 	/**
-	 * Projects the target's local point to the canvas and blits the cached glyph
-	 * centred horizontally and floating {@link #HEIGHT_OFFSET} pixels above it.
-	 * No-op when the point cannot be projected. Allocates nothing.
+	 * Projects the target's local point to the canvas and blits the marker centred
+	 * horizontally and floating {@link #HEIGHT_OFFSET} pixels above it. Prefers the
+	 * real collection-log sprite once loaded, falling back to the glyph meanwhile.
+	 * No-op when the point cannot be projected. Allocates nothing on the hot path.
 	 */
 	void draw(Graphics2D graphics, Client client, LocalPoint localPoint)
 	{
@@ -79,11 +96,40 @@ final class GuidanceTargetMarker
 		{
 			return;
 		}
-		Point canvasPoint = Perspective.getCanvasImageLocation(client, localPoint, glyph, HEIGHT_OFFSET);
+		BufferedImage image = resolveImage();
+		Point canvasPoint = Perspective.getCanvasImageLocation(client, localPoint, image, HEIGHT_OFFSET);
 		if (canvasPoint != null)
 		{
-			graphics.drawImage(glyph, canvasPoint.getX(), canvasPoint.getY(), null);
+			graphics.drawImage(image, canvasPoint.getX(), canvasPoint.getY(), null);
 		}
+	}
+
+	/**
+	 * Returns the real collection-log sprite once it has loaded, otherwise the
+	 * fallback glyph. The sprite request is made lazily on first draw and cached;
+	 * {@link AsyncBufferedImage#onLoaded} flips {@link #spriteReady} when the pixels
+	 * are ready so we never blit a half-loaded (transparent) image.
+	 */
+	private BufferedImage resolveImage()
+	{
+		if (spriteReady && sprite != null)
+		{
+			return sprite;
+		}
+		if (sprite == null && itemManager != null)
+		{
+			BufferedImage requested = itemManager.getImage(ItemID.COLLECTION_LOG);
+			sprite = requested;
+			if (requested instanceof AsyncBufferedImage)
+			{
+				((AsyncBufferedImage) requested).onLoaded(() -> spriteReady = true);
+			}
+			else if (requested != null)
+			{
+				spriteReady = true;
+			}
+		}
+		return spriteReady && sprite != null ? sprite : glyph;
 	}
 
 	/**
