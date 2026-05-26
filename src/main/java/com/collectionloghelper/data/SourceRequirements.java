@@ -139,4 +139,53 @@ public class SourceRequirements
 	 */
 	@Nullable
 	List<Integer> inventoryItemIdsAny;
+
+	/**
+	 * Quest-milestone requirements expressed as RuneLite {@code Quest} enum
+	 * constant names, e.g. {@code "FAIRYTALE_II__CURE_A_QUEEN"}.
+	 *
+	 * <p>Looser than the {@link #quests} field: where {@code quests} requires
+	 * the quest to be {@code FINISHED}, an entry here is satisfied as soon as
+	 * the quest has been STARTED. Evaluated AND-wise via
+	 * {@code Quest.valueOf(name).getState(client)}: the requirement is met only
+	 * when every listed quest is {@code IN_PROGRESS} or {@code FINISHED} (i.e.
+	 * not {@code NOT_STARTED}). This covers the case where requiring full
+	 * completion is over-restrictive — a travel vector or unlock that becomes
+	 * available the moment the quest is begun.
+	 *
+	 * <p>Unrecognised names are treated as unmet and logged, mirroring the
+	 * fail-closed resolution used by {@link #quests} and {@link #pohTeleports}.
+	 *
+	 * <p>{@code null} or empty when the source/alternative has no
+	 * quest-started prerequisite. Added by the D5 schema PR; data wiring
+	 * stacks on this in a later PR.
+	 */
+	@Nullable
+	List<String> questMilestones;
+
+	/**
+	 * Skill-cape travel-perk requirements expressed as RuneLite {@code Skill}
+	 * enum constant names, e.g. {@code "CRAFTING"}, {@code "FARMING"},
+	 * {@code "SLAYER"}, {@code "HUNTER"}, {@code "CONSTRUCTION"}.
+	 * (Note: the runecrafting constant is {@code RUNECRAFT}, not
+	 * {@code RUNECRAFTING}.)
+	 *
+	 * <p>A skill-cape teleport/travel perk is available only to a player who
+	 * owns the corresponding cape, and owning the cape requires level 99 in
+	 * that skill. This field uses that level-99 threshold as a proxy for cape
+	 * ownership: it is the necessary condition, not proof the player has
+	 * actually purchased and is wearing the cape. Evaluated AND-wise via
+	 * {@code client.getRealSkillLevel(Skill.valueOf(name))}: the requirement
+	 * is met only when the player's level in every listed skill is
+	 * {@code >= 99}.
+	 *
+	 * <p>Unrecognised names are treated as unmet and logged, mirroring the
+	 * fail-closed resolution used by {@link #skills} and {@link #pohTeleports}.
+	 *
+	 * <p>{@code null} or empty when the source/alternative has no
+	 * skill-cape-perk prerequisite. Added by the D5 schema PR; data wiring
+	 * stacks on this in a later PR.
+	 */
+	@Nullable
+	List<String> skillCapePerks;
 }

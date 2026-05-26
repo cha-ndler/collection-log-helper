@@ -113,7 +113,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 	{
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null, null, null,
-			Collections.emptyList());
+			Collections.emptyList(), null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -146,7 +146,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 		lenient().when(playerInventoryState.hasItem(PHARAOHS_SCEPTRE_3)).thenReturn(false);
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null, null, null,
-			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4, PHARAOHS_SCEPTRE_3));
+			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4, PHARAOHS_SCEPTRE_3), null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -158,7 +158,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 		lenient().when(playerInventoryState.hasItem(PHARAOHS_SCEPTRE_3)).thenReturn(false);
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null, null, null,
-			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4, PHARAOHS_SCEPTRE_3));
+			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4, PHARAOHS_SCEPTRE_3), null, null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -170,7 +170,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 		lenient().when(playerInventoryState.hasItem(PHARAOHS_SCEPTRE_4)).thenReturn(true);
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null, null, null,
-			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4));
+			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4), null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -182,7 +182,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 		lenient().when(playerInventoryState.hasItem(PHARAOHS_SCEPTRE_5)).thenReturn(true);
 		List<Integer> ids = Arrays.asList(null, PHARAOHS_SCEPTRE_5);
 		SourceRequirements req = new SourceRequirements(
-			null, null, null, null, null, null, ids);
+			null, null, null, null, null, null, ids, null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -194,7 +194,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 		// AND-semantic siblings' empty-list behaviour.
 		List<Integer> ids = Arrays.asList((Integer) null, (Integer) null);
 		SourceRequirements req = new SourceRequirements(
-			null, null, null, null, null, null, ids);
+			null, null, null, null, null, null, ids, null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -209,7 +209,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 			null, null, null, null,
 			Collections.singletonList(RING_OF_SHADOWS),
 			null,
-			Collections.singletonList(PHARAOHS_SCEPTRE_5));
+			Collections.singletonList(PHARAOHS_SCEPTRE_5), null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -224,7 +224,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 			null, null, null, null,
 			Collections.singletonList(RING_OF_SHADOWS),
 			null,
-			Collections.singletonList(PHARAOHS_SCEPTRE_5));
+			Collections.singletonList(PHARAOHS_SCEPTRE_5), null, null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -238,7 +238,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 			Collections.singletonList("JEWELLERY_BOX_FANCY"),
 			null,
 			null,
-			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4));
+			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4), null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -256,7 +256,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null, null,
 			Collections.singletonList(QUETZAL_WHISTLE),
-			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4));
+			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4), null, null);
 		assertTrue(checker.meetsRequirements(req));
 	}
 
@@ -269,7 +269,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null, null,
 			Collections.singletonList(QUETZAL_WHISTLE),
-			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4));
+			Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4), null, null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -281,7 +281,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 		SourceRequirements req = new SourceRequirements(
 			null, null, null, null, null,
 			Collections.singletonList(QUETZAL_WHISTLE),
-			Collections.singletonList(PHARAOHS_SCEPTRE_5));
+			Collections.singletonList(PHARAOHS_SCEPTRE_5), null, null);
 		assertFalse(checker.meetsRequirements(req));
 	}
 
@@ -296,7 +296,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 		List<ConditionalAlternative> alts = Arrays.asList(
 			altWithReq("Fast: Pharaoh sceptre any tier",
 				new SourceRequirements(null, null, null, null, null, null,
-					Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4))),
+					Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4), null, null)),
 			altWithReq("Slow: walk", null));
 
 		assertEquals("Fast: Pharaoh sceptre any tier", selectFirstMatching(alts));
@@ -312,10 +312,10 @@ public class RequirementsCheckerInventoryItemsAnyTest
 		List<ConditionalAlternative> alts = Arrays.asList(
 			altWithReq("Fast: Pharaoh sceptre any tier",
 				new SourceRequirements(null, null, null, null, null, null,
-					Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4))),
+					Arrays.asList(PHARAOHS_SCEPTRE_5, PHARAOHS_SCEPTRE_4), null, null)),
 			altWithReq("Fallback: Quetzal whistle inventory",
 				new SourceRequirements(null, null, null, null, null,
-					Collections.singletonList(QUETZAL_WHISTLE), null)));
+					Collections.singletonList(QUETZAL_WHISTLE), null, null, null)));
 
 		assertEquals("Fallback: Quetzal whistle inventory", selectFirstMatching(alts));
 	}
@@ -326,7 +326,7 @@ public class RequirementsCheckerInventoryItemsAnyTest
 	{
 		return new SourceRequirements(
 			null, null, null, null, null, null,
-			Collections.singletonList(itemId));
+			Collections.singletonList(itemId), null, null);
 	}
 
 	private static ConditionalAlternative altWithReq(String description, SourceRequirements requirements)

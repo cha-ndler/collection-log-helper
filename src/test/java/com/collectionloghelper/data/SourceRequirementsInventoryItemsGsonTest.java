@@ -184,10 +184,10 @@ public class SourceRequirementsInventoryItemsGsonTest
 	{
 		SourceRequirements a = new SourceRequirements(
 			null, null, null, null, null,
-			Arrays.asList(26945, 23959), null);
+			Arrays.asList(26945, 23959), null, null, null);
 		SourceRequirements b = new SourceRequirements(
 			null, null, null, null, null,
-			Arrays.asList(26945, 23959), null);
+			Arrays.asList(26945, 23959), null, null, null);
 		assertEquals(a, b);
 		assertEquals(a.hashCode(), b.hashCode());
 	}
@@ -197,10 +197,10 @@ public class SourceRequirementsInventoryItemsGsonTest
 	{
 		SourceRequirements a = new SourceRequirements(
 			null, null, null, null, null,
-			Collections.singletonList(26945), null);
+			Collections.singletonList(26945), null, null, null);
 		SourceRequirements b = new SourceRequirements(
 			null, null, null, null, null,
-			Collections.singletonList(23959), null);
+			Collections.singletonList(23959), null, null, null);
 		assertTrue(!a.equals(b));
 	}
 
@@ -215,7 +215,7 @@ public class SourceRequirementsInventoryItemsGsonTest
 			Collections.singletonList("FREMENNIK_HARD"),
 			Arrays.asList("JEWELLERY_BOX_FANCY"),
 			Arrays.asList(22557),
-			Arrays.asList(26945, 23959), null);
+			Arrays.asList(26945, 23959), null, null, null);
 		String json = GSON.toJson(original);
 		SourceRequirements restored = GSON.fromJson(json, SourceRequirements.class);
 		assertEquals(original, restored);
