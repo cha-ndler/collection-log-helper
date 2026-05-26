@@ -45,20 +45,20 @@ public interface CollectionLogHelperConfig extends Config
 		name = "Sync",
 		description = "External data sync settings",
 		position = 150,
-		closedByDefault = true
+		closedByDefault = false
 	)
 	String syncSection = "sync";
 
 	@ConfigItem(
 		keyName = "enableCollectionLogNetImport",
-		name = "collectionlog.net Sync",
-		description = "Pulls collection-log progress from collectionlog.net by RSN.",
+		name = "Auto-sync collectionlog.net on login",
+		description = "Automatically imports your obtained-items list from collectionlog.net (by RSN) shortly after login. Disable here to turn the auto-import off.",
 		section = syncSection,
 		position = 0
 	)
 	default boolean enableCollectionLogNetImport()
 	{
-		return false;
+		return true;
 	}
 
 
@@ -288,14 +288,14 @@ public interface CollectionLogHelperConfig extends Config
 
 	@ConfigItem(
 		keyName = "enableTempleOsrsSync",
-		name = "TempleOSRS KC Sync",
-		description = "Pulls per-source kill counts from TempleOSRS by RSN.",
+		name = "Auto-sync TempleOSRS KC on login",
+		description = "Automatically pulls your per-source kill counts from TempleOSRS (by RSN) shortly after login. Disable here to turn the auto-sync off.",
 		section = syncSection,
 		position = 1
 	)
 	default boolean enableTempleOsrsSync()
 	{
-		return false;
+		return true;
 	}
 
 	@ConfigItem(

@@ -31,7 +31,6 @@ import com.collectionloghelper.data.SlayerTaskState;
 import com.collectionloghelper.efficiency.SlayerStrategyCalculator;
 import java.awt.Component;
 import javax.swing.BoxLayout;
-import javax.swing.JPanel;
 import net.runelite.client.game.ItemManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,7 +39,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.quality.Strictness;
@@ -49,7 +47,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 /**
  * Unit tests for {@link PanelHeaderBuilder}: the helper that assembles the
  * static header section of {@link CollectionLogHelperPanel} (completion
- * label/bar, sync status, sync buttons, clue summary, slayer strategy,
+ * label/bar, sync status, clue summary, slayer strategy,
  * guidance banner, step progress, quick-guide). Extracted from
  * {@link CollectionLogHelperPanel} as part of issue #503 god-class splits.
  */
@@ -70,15 +68,9 @@ public class PanelHeaderBuilderTest
 	@Mock
 	private ItemManager itemManager;
 
-	private JPanel host;
-
 	@BeforeEach
 	public void setUp()
 	{
-		// SyncButtonController consults these config flags during construction.
-		when(config.enableCollectionLogNetImport()).thenReturn(true);
-		when(config.enableTempleOsrsSync()).thenReturn(true);
-		host = new JPanel();
 	}
 
 	private PanelHeaderBuilder.Result build()
@@ -90,10 +82,8 @@ public class PanelHeaderBuilderTest
 			slayerStrategyCalculator,
 			requirementsChecker,
 			itemManager,
-			null, // clientThread not available in unit tests; chip tooltips degrade to "Item <id>"
 			(source, count) -> { /* no-op */ },
-			() -> { /* no-op */ },
-			host);
+			() -> { /* no-op */ });
 	}
 
 	@Test
@@ -115,7 +105,6 @@ public class PanelHeaderBuilderTest
 		assertNotNull( result.completionLabel,"completionLabel");
 		assertNotNull( result.completionProgressBar,"completionProgressBar");
 		assertNotNull( result.syncStatusView,"syncStatusView");
-		assertNotNull( result.syncButtonController,"syncButtonController");
 		assertNotNull( result.clueSummaryView,"clueSummaryView");
 		assertNotNull( result.slayerStrategyView,"slayerStrategyView");
 		assertNotNull( result.guidanceBannerView,"guidanceBannerView");
@@ -124,11 +113,11 @@ public class PanelHeaderBuilderTest
 	}
 
 	@Test
-	public void completionLabelInitialTextMatchesEmptyState()
+	public void completionLabelIsStaticTitle()
 	{
 		PanelHeaderBuilder.Result result = build();
 
-		assertEquals("Collection Log: 0/0 (0.0%)", result.completionLabel.getText());
+		assertEquals("Collection Log", result.completionLabel.getText());
 	}
 
 	@Test
@@ -139,6 +128,7 @@ public class PanelHeaderBuilderTest
 		assertEquals(0, result.completionProgressBar.getMinimum());
 		assertEquals(1699, result.completionProgressBar.getMaximum());
 		assertEquals(0, result.completionProgressBar.getValue());
+		assertTrue(result.completionProgressBar.isStringPainted(), "count painted on bar");
 	}
 
 	@Test
@@ -150,18 +140,14 @@ public class PanelHeaderBuilderTest
 		assertSame( result.completionLabel, children[0],"completion label first");
 		assertSame( result.completionProgressBar, children[1],"completion progress bar second");
 		assertSame( result.syncStatusView, children[2],"sync status view third");
-		assertSame(
-			result.syncButtonController.getCollectionLogNetButton(), children[3],"collectionlog.net button fourth");
-		assertSame(
-			result.syncButtonController.getTempleSyncButton(), children[4],"temple sync button fifth");
-		assertSame( result.clueSummaryView, children[5],"clue summary view");
-		assertSame( result.slayerStrategyView, children[6],"slayer strategy view");
-		assertSame( result.guidanceBannerView, children[7],"guidance banner view");
-		assertSame( result.stepProgressView, children[8],"step progress view");
+		assertSame( result.clueSummaryView, children[3],"clue summary view fourth");
+		assertSame( result.slayerStrategyView, children[4],"slayer strategy view fifth");
+		assertSame( result.guidanceBannerView, children[5],"guidance banner view sixth");
+		assertSame( result.stepProgressView, children[6],"step progress view seventh");
 		// QuickGuidePanelView is intentionally NOT added to controlsPanel — it is
 		// shown contextually in the detail/list view. The trailing component
 		// must therefore be the vertical strut (Box.Filler).
-		assertTrue( children.length >= 10,"trailing vertical strut present");
+		assertTrue( children.length >= 8,"trailing vertical strut present");
 	}
 
 	@Test
@@ -184,6 +170,6 @@ public class PanelHeaderBuilderTest
 		// Each invocation creates fresh widget instances; the builder holds no state.
 		assertTrue(a.controlsPanel != b.controlsPanel);
 		assertTrue(a.completionLabel != b.completionLabel);
-		assertTrue(a.syncButtonController != b.syncButtonController);
+		assertTrue(a.completionProgressBar != b.completionProgressBar);
 	}
 }

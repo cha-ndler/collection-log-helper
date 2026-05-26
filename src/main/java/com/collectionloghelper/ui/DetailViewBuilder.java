@@ -42,8 +42,8 @@ import net.runelite.client.game.ItemManager;
  * as part of the issue #503 god-class split.
  *
  * <p>This class is intentionally not a Guice {@code @Singleton}; it is
- * panel-constructed alongside {@link PanelRebuildOrchestrator} and
- * {@link SyncButtonController}. It holds collaborators that supply the data
+ * panel-constructed alongside {@link PanelRebuildOrchestrator}. It holds
+ * collaborators that supply the data
  * needed to render an item-detail card (obtained state, accessibility,
  * per-source obtained-of-total counts, fairy-ring access, etc.) and exposes a
  * single {@link #populate} method that wires up the view's callbacks.</p>
