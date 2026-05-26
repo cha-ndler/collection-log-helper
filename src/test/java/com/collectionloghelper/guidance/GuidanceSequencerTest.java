@@ -761,6 +761,79 @@ public class GuidanceSequencerTest
 		assertEquals(0, sequencer.getCurrentIndex());
 	}
 
+	/**
+	 * Regression test for #715: for a multi-step LOOPING source (e.g. Shades of
+	 * Mort'ton), obtaining a target collection-log item mid-loop must NOT deactivate
+	 * guidance. PR #713 added an auto-complete shortcut on target obtain; for an
+	 * active, not-yet-exhausted loop that shortcut killed the loop-back. The unlock
+	 * flag is still recorded, but guidance stays active and the loop logic proceeds.
+	 */
+	@Test
+	public void testObtainingTargetItemMidLoopKeepsGuidanceActive()
+	{
+		int targetItemId = 28163;
+
+		// Step 2 loops back to step 1 three times.
+		List<GuidanceStep> steps = Arrays.asList(
+			makeManualStep("Light a shade"),
+			makeLoopingStep("Open the chest", CompletionCondition.ACTOR_DEATH, 100, 1, 3)
+		);
+
+		AtomicBoolean completed = new AtomicBoolean(false);
+		CollectionLogSource source = makeSourceWithItems("Shades of Mort'ton", steps,
+			Arrays.asList(makeItem(targetItemId, "Bronze locks")));
+		sequencer.startSequence(source, s -> {}, () -> completed.set(true));
+
+		// Advance onto the looping step (index 1), loop not yet started.
+		sequencer.advanceStep();
+		assertEquals(1, sequencer.getCurrentIndex());
+		assertEquals(0, sequencer.getLoopIterationsCompleted());
+
+		// Obtaining the target item mid-loop must NOT deactivate guidance.
+		sequencer.onItemObtained(targetItemId);
+
+		assertTrue(sequencer.wasTargetSlotUnlocked(), "unlock flag still recorded");
+		assertFalse(completed.get(), "sequence-complete must NOT fire mid-loop");
+		assertTrue(sequencer.isActive(), "guidance must stay active mid-loop");
+
+		// Loop logic still proceeds: completing the step loops back to step 1.
+		sequencer.onNpcDeath(100);
+		assertEquals(1, sequencer.getLoopIterationsCompleted());
+		assertEquals(0, sequencer.getCurrentIndex());
+		assertTrue(sequencer.isActive());
+	}
+
+	/**
+	 * Companion to #715: a single-pass (non-looping) source must preserve #713's
+	 * behavior — obtaining the target item fires completion and deactivates guidance.
+	 */
+	@Test
+	public void testObtainingTargetItemSinglePassStillCompletes()
+	{
+		int targetItemId = 28163;
+
+		// No loop on any step.
+		List<GuidanceStep> steps = Arrays.asList(
+			makeManualStep("Travel"),
+			makeManualStep("Open the chest")
+		);
+
+		AtomicBoolean completed = new AtomicBoolean(false);
+		CollectionLogSource source = makeSourceWithItems("Some Boss", steps,
+			Arrays.asList(makeItem(targetItemId, "Pet")));
+		sequencer.startSequence(source, s -> {}, () -> completed.set(true));
+
+		sequencer.advanceStep();
+		assertEquals(1, sequencer.getCurrentIndex());
+		assertTrue(sequencer.isActive());
+
+		sequencer.onItemObtained(targetItemId);
+
+		assertTrue(sequencer.wasTargetSlotUnlocked());
+		assertTrue(completed.get(), "single-pass target obtain must fire completion (#713)");
+		assertFalse(sequencer.isActive(), "single-pass target obtain must deactivate guidance");
+	}
+
 	@Test
 	public void testInventoryHasItemCompletesStep()
 	{
