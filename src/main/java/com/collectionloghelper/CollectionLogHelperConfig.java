@@ -239,11 +239,23 @@ public interface CollectionLogHelperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "showGuidanceTargetMarker",
+		name = "Show Target Marker",
+		description = "Draw a small marker icon over the highlighted guidance target",
+		section = guidanceSection,
+		position = 3
+	)
+	default boolean showGuidanceTargetMarker()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "showHintArrow",
 		name = "Show Hint Arrow",
 		description = "Show the in-game yellow hint arrow at the guidance target",
 		section = guidanceSection,
-		position = 3
+		position = 4
 	)
 	default boolean showHintArrow()
 	{
@@ -255,7 +267,7 @@ public interface CollectionLogHelperConfig extends Config
 		name = "Shortest Path Integration",
 		description = "Request a path from the Shortest Path plugin (if installed) when guidance is activated",
 		section = guidanceSection,
-		position = 4
+		position = 5
 	)
 	default boolean useShortestPath()
 	{
@@ -267,7 +279,7 @@ public interface CollectionLogHelperConfig extends Config
 		name = "Overlay Color",
 		description = "Color used for guidance overlays",
 		section = guidanceSection,
-		position = 5
+		position = 6
 	)
 	default Color overlayColor()
 	{
