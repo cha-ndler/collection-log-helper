@@ -8825,7 +8825,18 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
         "travelTip": "Crystal teleport seed -> Prifddinas, or Lletya teleport + run north",
-        "section": "Travel"
+        "section": "Travel",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "FAIRY_RING"
+              ]
+            },
+            "description": "POH fairy ring -> BIS (Prifddinas), then run south-east to the Trahaearn mining area and enter Zalcano's chamber",
+            "travelTip": "POH fairy ring BIS -> Prifddinas -> run SE to Zalcano"
+          }
+        ]
       },
       {
         "description": "Enter the Zalcano chamber portal. The group fight starts as soon as you arrive on the mining tiles - you can join in progress",
@@ -15679,7 +15690,18 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
         "travelTip": "Digsite pendant -> Mushroom Forest + run NE, or Fairy ring DLR",
-        "section": "Travel"
+        "section": "Travel",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "DIGSITE_PENDANT"
+              ]
+            },
+            "description": "POH mounted digsite pendant -> Fossil Island, then run north-east to the Volcanic Mine entrance",
+            "travelTip": "POH digsite pendant -> Fossil Island -> run NE to Volcanic Mine"
+          }
+        ]
       },
       {
         "description": "Enter the Volcanic Mine entrance and join a game lobby. Worlds 408/409 are the official VM theme worlds; solo runs are possible but team play multiplies points/hour by 3-5x.",
@@ -20623,7 +20645,18 @@
           0
         ],
         "travelTip": "Xeric's talisman (Xeric's Heart); or fairy ring CIS",
-        "section": "Travel"
+        "section": "Travel",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "XERICS_TALISMAN"
+              ]
+            },
+            "description": "POH mounted Xeric's talisman -> Xeric's Heart, then run south to the Kourend Castle statue entrance",
+            "travelTip": "POH Xeric's talisman -> Xeric's Heart -> run south to Catacombs statue"
+          }
+        ]
       },
       {
         "description": "Investigate the Statue of King Rada I in the castle courtyard to enter the Catacombs of Kourend.",
@@ -22419,7 +22452,18 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
         "travelTip": "Skills necklace -> Mining Guild entrance; or Falador tele + Dwarven Mine NE Falador",
-        "section": "Travel"
+        "section": "Travel",
+        "conditionalAlternatives": [
+          {
+            "requirements": {
+              "pohTeleports": [
+                "JEWELLERY_BOX_FANCY"
+              ]
+            },
+            "description": "POH jewellery box -> Skills necklace -> Mining Guild entrance, then run east into the Dwarven Mine to Motherlode Mine",
+            "travelTip": "POH Skills necklace -> Mining Guild -> run east to Motherlode Mine"
+          }
+        ]
       },
       {
         "description": "Mine pay-dirt from ore veins. Each vein lasts 23-27 seconds (36-40 on upper level). Use the coal bag to carry extra capacity. Amulet of glory increases uncut gem rates from veins.",
