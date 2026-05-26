@@ -66,6 +66,17 @@ public class ActivityObtainableItemsTest
 	/** Flamtaer bag - the single convenience aid kept under Recommended. */
 	private static final int FLAMTAER_BAG = 25630;
 
+	/** Brimhaven Agility Arena Graceful recolour pieces - earned on-site via tickets. */
+	private static final List<Integer> BRIMHAVEN_GRACEFUL =
+		List.of(13237, 13238, 13239, 13240, 13241, 13242);
+
+	/** Gricoller's can - aids watering AND is a Tithe Farm reward, so it sits in both lists. */
+	private static final int GRICOLLERS_CAN = 13353;
+	/** Seed box - purely a Tithe Farm reward, not used mid-round. */
+	private static final int SEED_BOX = 13639;
+	/** Intricate pouch - handed out by the GotR Rewards Guardian after a game, not brought. */
+	private static final int INTRICATE_POUCH = 26908;
+
 	private static List<CollectionLogSource> sources;
 
 	@BeforeAll
@@ -108,11 +119,18 @@ public class ActivityObtainableItemsTest
 	@Test
 	public void mostSources_haveNoActivityObtainableField()
 	{
-		// The field is a narrow, opt-in pilot: only Shades of Mort'ton uses it.
-		// Every OTHER source must leave it null so the existing data is untouched.
+		// The field is opt-in: the Shades of Mort'ton pilot plus the Batch 1-3
+		// re-authoring (Brimhaven Agility Arena, Tithe Farm, Guardians of the Rift)
+		// are the only users. Every OTHER source must leave it null so the
+		// existing data is untouched.
+		List<String> knownUsers = List.of(
+			"Shades of Mort'ton",
+			"Brimhaven Agility Arena",
+			"Tithe Farm",
+			"Guardians of the Rift");
 		for (CollectionLogSource src : sources)
 		{
-			if ("Shades of Mort'ton".equals(src.getName()) || src.getGuidanceSteps() == null)
+			if (knownUsers.contains(src.getName()) || src.getGuidanceSteps() == null)
 			{
 				continue;
 			}
@@ -122,6 +140,93 @@ public class ActivityObtainableItemsTest
 					"non-pilot source '" + src.getName()
 						+ "' must not set activityObtainableItemIds");
 			}
+		}
+	}
+
+	@Test
+	public void brimhaven_gracefulPieces_movedToActivityObtainable()
+	{
+		CollectionLogSource brimhaven = sources.stream()
+			.filter(s -> "Brimhaven Agility Arena".equals(s.getName()))
+			.findFirst()
+			.orElseThrow(() -> new AssertionError("Brimhaven Agility Arena source missing"));
+		assertNotNull(brimhaven.getGuidanceSteps(), "Brimhaven must have guidance steps");
+
+		// The Graceful recolour pieces are earned on-site via tickets, so they must
+		// live in activityObtainableItemIds and never in any recommended list.
+		boolean tagged = brimhaven.getGuidanceSteps().stream()
+			.anyMatch(step -> step.getActivityObtainableItemIds().containsAll(BRIMHAVEN_GRACEFUL));
+		assertTrue(tagged,
+			"Brimhaven must tag the Graceful recolour pieces as obtained on-site");
+
+		for (GuidanceStep step : brimhaven.getGuidanceSteps())
+		{
+			List<Integer> recommended = step.getRecommendedItemIds();
+			if (recommended == null)
+			{
+				continue;
+			}
+			for (int pieceId : BRIMHAVEN_GRACEFUL)
+			{
+				assertFalse(recommended.contains(pieceId),
+					"on-site Graceful piece " + pieceId
+						+ " must not appear in Brimhaven recommendedItemIds");
+			}
+		}
+	}
+
+	@Test
+	public void titheFarm_gricollersCan_inBothLists_seedBoxObtainableOnly()
+	{
+		CollectionLogSource tithe = sourceByName("Tithe Farm");
+		assertNotNull(tithe.getGuidanceSteps(), "Tithe Farm must have guidance steps");
+
+		// Gricoller's can aids watering AND is a reward, so it must appear in both
+		// the recommended aids and the on-site obtainable list. The Seed box is a
+		// pure reward and must only be tagged as obtained on-site.
+		GuidanceStep setupStep = tithe.getGuidanceSteps().stream()
+			.filter(s -> !s.getActivityObtainableItemIds().isEmpty())
+			.findFirst()
+			.orElseThrow(() -> new AssertionError(
+				"Tithe Farm must have a step with activityObtainableItemIds"));
+
+		List<Integer> recommended = setupStep.getRecommendedItemIds();
+		assertNotNull(recommended, "Tithe Farm setup step keeps a recommended list");
+		assertTrue(recommended.contains(GRICOLLERS_CAN),
+			"Gricoller's can must stay in recommended (it aids watering)");
+		assertFalse(recommended.contains(SEED_BOX),
+			"Seed box is a pure reward and must leave the recommended list");
+
+		List<Integer> obtainable = setupStep.getActivityObtainableItemIds();
+		assertTrue(obtainable.contains(GRICOLLERS_CAN),
+			"Gricoller's can must also be tagged as obtained on-site");
+		assertTrue(obtainable.contains(SEED_BOX),
+			"Seed box must be tagged as obtained on-site");
+	}
+
+	@Test
+	public void guardiansOfTheRift_intricatePouch_movedToActivityObtainable()
+	{
+		CollectionLogSource gotr = sourceByName("Guardians of the Rift");
+		assertNotNull(gotr.getGuidanceSteps(), "GotR must have guidance steps");
+
+		// The Intricate pouch is handed out by the Rewards Guardian after a game,
+		// so it must live in activityObtainableItemIds and never in any recommended
+		// list. The brought tools (chisel, pickaxe, pouches) stay in recommended.
+		boolean tagged = gotr.getGuidanceSteps().stream()
+			.anyMatch(step -> step.getActivityObtainableItemIds().contains(INTRICATE_POUCH));
+		assertTrue(tagged,
+			"GotR must tag the Intricate pouch as obtained on-site");
+
+		for (GuidanceStep step : gotr.getGuidanceSteps())
+		{
+			List<Integer> recommended = step.getRecommendedItemIds();
+			if (recommended == null)
+			{
+				continue;
+			}
+			assertFalse(recommended.contains(INTRICATE_POUCH),
+				"the on-site Intricate pouch must not appear in GotR recommendedItemIds");
 		}
 	}
 
@@ -149,13 +254,19 @@ public class ActivityObtainableItemsTest
 			"the Flamtaer bag is the one convenience aid kept under Recommended");
 	}
 
+	/** Locates a source by exact name or fails the test. */
+	private static CollectionLogSource sourceByName(String name)
+	{
+		return sources.stream()
+			.filter(s -> name.equals(s.getName()))
+			.findFirst()
+			.orElseThrow(() -> new AssertionError(name + " source missing"));
+	}
+
 	/** Locates the Shades "burn shade remains" step (the only step with the activity field). */
 	private static GuidanceStep shadesBurnStep()
 	{
-		CollectionLogSource shades = sources.stream()
-			.filter(s -> "Shades of Mort'ton".equals(s.getName()))
-			.findFirst()
-			.orElseThrow(() -> new AssertionError("Shades of Mort'ton source missing"));
+		CollectionLogSource shades = sourceByName("Shades of Mort'ton");
 		assertNotNull(shades.getGuidanceSteps(), "Shades must have guidance steps");
 		return shades.getGuidanceSteps().stream()
 			.filter(s -> !s.getActivityObtainableItemIds().isEmpty())
