@@ -301,6 +301,8 @@ public class DynamicItemObjectTierResolverTest
 			null,            // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 }

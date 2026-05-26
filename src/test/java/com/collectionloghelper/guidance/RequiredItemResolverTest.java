@@ -657,6 +657,8 @@ public class RequiredItemResolverTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 
@@ -700,6 +702,8 @@ public class RequiredItemResolverTest
 			null,   // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 }

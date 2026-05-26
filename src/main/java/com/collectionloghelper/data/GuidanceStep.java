@@ -326,6 +326,24 @@ public class GuidanceStep
 	@Nullable
 	List<Integer> activityObtainableItemIds;
 
+	/**
+	 * Consumable "fuel" item IDs for a looping activity step. When the player holds
+	 * NONE of these AND the target collection-log slot is not yet obtained, the
+	 * guidance sequencer treats the loop as depleted and resets to the earliest step
+	 * whose required items the player is missing (the restock / bank step). This is
+	 * how looping sources recover when the player runs dry (e.g. Shades of Mort'ton:
+	 * out of shade keys AND out of remains/logs to make more) instead of staying
+	 * pinned on the final loop step (#719).
+	 *
+	 * <p>List ONLY consumables — never reusable tools (a tinderbox, a chisel), since
+	 * the player always holds those and their presence would suppress the reset.
+	 *
+	 * <p>Null by default. Existing JSON without this field deserialises unchanged.
+	 * Use {@link #getRestockIfMissingAllItemIds()} for a non-null view.
+	 */
+	@Nullable
+	List<Integer> restockIfMissingAllItemIds;
+
 	public int getCompletionDistance()
 	{
 		return completionDistance > 0 ? completionDistance : 5;
@@ -342,6 +360,18 @@ public class GuidanceStep
 	public List<Integer> getActivityObtainableItemIds()
 	{
 		return activityObtainableItemIds != null ? activityObtainableItemIds : Collections.emptyList();
+	}
+
+	/**
+	 * Returns the restock-fuel item IDs for this step, never null. Falls back to an
+	 * empty list when the JSON omits the field.
+	 *
+	 * <p>Custom getter: Lombok's {@code @Value} skips generating an accessor when
+	 * one is declared by hand, so callers get a guaranteed non-null list.
+	 */
+	public List<Integer> getRestockIfMissingAllItemIds()
+	{
+		return restockIfMissingAllItemIds != null ? restockIfMissingAllItemIds : Collections.emptyList();
 	}
 
 	public int getCompletionItemCount()
@@ -595,7 +625,8 @@ public class GuidanceStep
 			this.dynamicTargetEvaluator,
 			this.conditionTree, // tree is inherited from base; alternatives do not override it in B1
 			this.perItemStepPriority, // priority map inherited from base; alternatives do not override it in B4.3.4
-			this.activityObtainableItemIds // activity-obtainable IDs inherited from base; alternatives do not override
+			this.activityObtainableItemIds, // activity-obtainable IDs inherited from base; alternatives do not override
+			this.restockIfMissingAllItemIds // restock-fuel IDs inherited from base; alternatives do not override
 		);
 	}
 }

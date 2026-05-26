@@ -80,6 +80,8 @@ public class StepSectionGrouperTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 

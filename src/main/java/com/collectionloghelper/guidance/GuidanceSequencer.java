@@ -94,6 +94,28 @@ public class GuidanceSequencer
 	 */
 	private volatile boolean targetSlotUnlocked;
 
+	/**
+	 * Supplies the active guidance target collection-log item id, used to resolve
+	 * {@code perItemRequiredItemIds} overrides during depletion / restock detection.
+	 * Wired via {@link #setActiveTargetSupplier} after construction to avoid a
+	 * circular Guice injection (the coordinator already injects this sequencer).
+	 * Null-safe: when unset, depletion logic falls back to the step's static
+	 * {@code requiredItemIds}.
+	 */
+	private java.util.function.Supplier<Integer> activeTargetItemIdSupplier;
+
+	/**
+	 * True while guidance is parked on a restock step after the active looping step
+	 * ran out of fuel ({@code restockIfMissingAllItemIds}, #719). While latched,
+	 * {@link #onPlayerMoved} does not auto-advance (so a location-gated bank step
+	 * does not immediately complete by arrival). Cleared once the player holds all
+	 * of the restock step's required items, or when the sequence stops / restarts.
+	 */
+	private volatile boolean awaitingRestock;
+
+	/** Index (0-based) of the restock step guidance was reset to; valid only while {@link #awaitingRestock}. */
+	private volatile int restockStepIndex;
+
 	@Inject
 	private GuidanceSequencer(PlayerInventoryState inventoryState, PlayerCollectionState collectionState,
 		RequirementsChecker requirementsChecker, BossGuidanceRegistry bossRegistry)
@@ -113,6 +135,17 @@ public class GuidanceSequencer
 	public void setPlayerLocation(WorldPoint location)
 	{
 		this.lastKnownPlayerLocation = location;
+	}
+
+	/**
+	 * Wires the active-target-item-id supplier used by depletion / restock
+	 * detection to resolve {@code perItemRequiredItemIds} overrides. Must be called
+	 * once during plugin startup, after both the coordinator and this sequencer are
+	 * constructed by Guice (mirrors {@code RequiredItemResolver.setCoordinator}).
+	 */
+	public void setActiveTargetSupplier(java.util.function.Supplier<Integer> supplier)
+	{
+		this.activeTargetItemIdSupplier = supplier;
 	}
 
 	/**
@@ -144,10 +177,16 @@ public class GuidanceSequencer
 		this.onStepChanged = stepChanged;
 		this.onSequenceComplete = sequenceComplete;
 		this.targetSlotUnlocked = false;
+		this.awaitingRestock = false;
+		this.restockStepIndex = 0;
 		this.active = true;
 
 		// Skip any steps whose conditions are already met
 		skipSatisfiedSteps();
+
+		// Mid-activity activation while already depleted (e.g. in the Shades
+		// catacombs with no keys and no remains) — park on the restock step.
+		checkDepletionAndMaybeReset();
 
 		if (active)
 		{
@@ -171,6 +210,8 @@ public class GuidanceSequencer
 		steps = null;
 		currentIndex = 0;
 		crossedWaypointIndex = 0;
+		awaitingRestock = false;
+		restockStepIndex = 0;
 		resolvedAlternatives.clear();
 		onStepChanged = null;
 		onSequenceComplete = null;
@@ -285,6 +326,8 @@ public class GuidanceSequencer
 		loopIterationsCompleted = 0;
 		cumulativeActionCount = 0;
 		crossedWaypointIndex = 0;
+		awaitingRestock = false;
+		restockStepIndex = 0;
 		resolvedAlternatives.clear();
 		// Do NOT call skipSatisfiedSteps() — Reset forces step 0 unconditionally.
 
@@ -323,6 +366,8 @@ public class GuidanceSequencer
 		currentIndex = 0;
 		loopIterationsCompleted = 0;
 		crossedWaypointIndex = 0;
+		awaitingRestock = false;
+		restockStepIndex = 0;
 		resolvedAlternatives.clear();
 		// Re-run the skip-chain to find the first unsatisfied step
 		skipSatisfiedSteps();
@@ -334,6 +379,9 @@ public class GuidanceSequencer
 				activeSource != null ? activeSource.getName() : "?");
 			return;
 		}
+
+		// If the player synced while depleted, park on the restock step.
+		checkDepletionAndMaybeReset();
 
 		GuidanceStep step = getCurrentStep();
 		if (step != null)
@@ -493,6 +541,25 @@ public class GuidanceSequencer
 			return;
 		}
 
+		// Restock latch (#719): while parked on a restock step, ignore other
+		// inventory-driven advances until the player has re-acquired all of that
+		// step's required items, then resume normal guidance.
+		if (awaitingRestock)
+		{
+			if (playerHasAllRequiredItems(getRawCurrentStep()))
+			{
+				awaitingRestock = false;
+				log.info("Restock complete at step {} — resuming guidance for {}",
+					restockStepIndex + 1, activeSource != null ? activeSource.getName() : "?");
+				GuidanceStep resumed = getCurrentStep();
+				if (resumed != null)
+				{
+					notifyStepChanged(resumed);
+				}
+			}
+			return;
+		}
+
 		GuidanceStep step = getRawCurrentStep();
 
 		// Auto-advance if skipIfHasAnyItemIds is now satisfied (e.g., key just entered inventory)
@@ -521,6 +588,18 @@ public class GuidanceSequencer
 			return;
 		}
 
+		// Loop-fuel depletion (#719): if the active looping step just ran dry,
+		// park on the restock step instead of staying stuck on a MANUAL loop step.
+		if (checkDepletionAndMaybeReset())
+		{
+			GuidanceStep restockStep = getCurrentStep();
+			if (restockStep != null)
+			{
+				notifyStepChanged(restockStep);
+			}
+			return;
+		}
+
 		// Re-notify step changed in case bank routing status changed
 		GuidanceStep current = getCurrentStep();
 		if (current != null)
@@ -535,6 +614,16 @@ public class GuidanceSequencer
 	public void onPlayerMoved(WorldPoint playerLocation)
 	{
 		if (!active || playerLocation == null)
+		{
+			return;
+		}
+
+		// While parked on a restock step (#719), suppress location-based
+		// auto-advance so a bank step gated by ARRIVE_AT_TILE / ARRIVE_AT_ZONE
+		// does not immediately complete just because the player is standing
+		// there. The latch clears via onInventoryChanged once the player has
+		// restocked the step's required items.
+		if (awaitingRestock)
 		{
 			return;
 		}
@@ -753,6 +842,152 @@ public class GuidanceSequencer
 			&& step.getLoopBackToStep() > 0
 			&& step.getLoopCount() > 0
 			&& loopIterationsCompleted + 1 < step.getLoopCount();
+	}
+
+	/**
+	 * Loop-fuel depletion check (#719). When the current step declares
+	 * {@code restockIfMissingAllItemIds}, the player holds NONE of those consumables,
+	 * and the target collection-log slot is not yet obtained, the loop has run dry.
+	 * Parks guidance on the earliest step whose required items the player is missing
+	 * (the restock / bank step) and latches {@link #awaitingRestock}.
+	 *
+	 * <p>Pure state mutation — does NOT notify listeners. Callers that act on a
+	 * {@code true} return fire their own {@link #notifyStepChanged}. Returns
+	 * {@code false} (no-op) when not depleted, when no restock target can be found,
+	 * or when already awaiting restock.
+	 */
+	private boolean checkDepletionAndMaybeReset()
+	{
+		if (!active || awaitingRestock || targetSlotUnlocked)
+		{
+			return false;
+		}
+		GuidanceStep step = getRawCurrentStep();
+		if (step == null)
+		{
+			return false;
+		}
+		List<Integer> fuel = step.getRestockIfMissingAllItemIds();
+		if (fuel.isEmpty() || !playerHasNoneOf(fuel))
+		{
+			return false;
+		}
+		int restockIdx = findEarliestStepMissingRequiredItems();
+		if (restockIdx < 0)
+		{
+			// Nothing to restock (player still holds every required item) — leave
+			// the player on the current step rather than forcing a pointless reset.
+			return false;
+		}
+		log.info("Loop depleted at step {}/{} for {} — parking on restock step {}",
+			currentIndex + 1, steps.size(),
+			activeSource != null ? activeSource.getName() : "?", restockIdx + 1);
+		currentIndex = restockIdx;
+		restockStepIndex = restockIdx;
+		loopIterationsCompleted = 0;
+		crossedWaypointIndex = 0;
+		awaitingRestock = true;
+		return true;
+	}
+
+	/**
+	 * Returns the index of the earliest step whose effective required items the
+	 * player is currently missing at least one of, or -1 when no such step exists.
+	 * Used as the restock target for {@link #checkDepletionAndMaybeReset}.
+	 */
+	private int findEarliestStepMissingRequiredItems()
+	{
+		if (steps == null)
+		{
+			return -1;
+		}
+		for (int i = 0; i < steps.size(); i++)
+		{
+			List<Integer> required = effectiveRequiredItemIds(steps.get(i));
+			if (required == null || required.isEmpty())
+			{
+				continue;
+			}
+			for (Integer id : required)
+			{
+				if (id != null && id > 0 && !playerHolds(id))
+				{
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * Returns the effective required-item list for a step: the
+	 * {@code perItemRequiredItemIds} override for the active target item when
+	 * present, otherwise the step's static {@code requiredItemIds}.
+	 */
+	private List<Integer> effectiveRequiredItemIds(GuidanceStep step)
+	{
+		if (step == null)
+		{
+			return null;
+		}
+		if (step.getPerItemRequiredItemIds() != null && activeTargetItemIdSupplier != null)
+		{
+			Integer target = activeTargetItemIdSupplier.get();
+			if (target != null)
+			{
+				List<Integer> override = step.getPerItemRequiredItemIds().get(target);
+				if (override != null)
+				{
+					return override;
+				}
+			}
+		}
+		return step.getRequiredItemIds();
+	}
+
+	/** Returns true if the player currently holds {@code itemId} (inventory or equipped). */
+	private boolean playerHolds(int itemId)
+	{
+		return inventoryState.hasItem(itemId) || inventoryState.hasEquippedItem(itemId);
+	}
+
+	/** Returns true if the player holds none of the given item ids (and the list is non-empty). */
+	private boolean playerHasNoneOf(List<Integer> ids)
+	{
+		if (ids == null || ids.isEmpty())
+		{
+			return false;
+		}
+		for (Integer id : ids)
+		{
+			if (id != null && id > 0 && playerHolds(id))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Returns true if the player holds every effective required item for the step.
+	 * Used to release the restock latch once the player has re-banked. An empty
+	 * required list counts as satisfied.
+	 */
+	private boolean playerHasAllRequiredItems(GuidanceStep step)
+	{
+		List<Integer> required = effectiveRequiredItemIds(step);
+		if (required == null || required.isEmpty())
+		{
+			return true;
+		}
+		for (Integer id : required)
+		{
+			if (id != null && id > 0 && !playerHolds(id))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private void fireSequenceComplete()

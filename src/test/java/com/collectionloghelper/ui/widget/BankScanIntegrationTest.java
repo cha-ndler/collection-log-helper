@@ -349,6 +349,8 @@ public class BankScanIntegrationTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 }

@@ -337,6 +337,8 @@ public class GuidanceStepTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 
@@ -375,6 +377,8 @@ public class GuidanceStepTest
 			null,  // conditionTree
 						null, // perItemStepPriority
 						null  // activityObtainableItemIds
+		
+			, null // restockIfMissingAllItemIds (#719)
 		);
 	}
 }
