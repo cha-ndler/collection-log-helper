@@ -31,7 +31,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Shape;
-import java.awt.image.BufferedImage;
 import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +43,6 @@ import net.runelite.client.callback.ClientThread;
 import net.runelite.api.DecorativeObject;
 import net.runelite.api.GameObject;
 import net.runelite.api.GroundObject;
-import net.runelite.api.Perspective;
 import net.runelite.api.Point;
 import net.runelite.api.Scene;
 import net.runelite.api.Tile;
@@ -58,7 +56,6 @@ import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
-import net.runelite.client.util.ImageUtil;
 
 @Slf4j
 @Singleton
@@ -67,18 +64,17 @@ public class ObjectHighlightOverlay extends Overlay
 	private static final BasicStroke STROKE_1_5 = new BasicStroke(1.5f);
 	private static final int GLOW_OUTLINE_WIDTH = 2;
 	private static final int GLOW_FEATHER = 4;
-	private static final int MARKER_SIZE = 18;
-	private static final int MARKER_HEIGHT_OFFSET = 60;
 
 	private final Client client;
 	private final ClientThread clientThread;
 	private final CollectionLogHelperConfig config;
 
 	/**
-	 * Marker icon drawn over each highlighted target. Loaded and resized once
-	 * at construction so the render hot-path performs no IO or allocation.
+	 * Floating collection-log marker drawn above each highlighted target. The glyph
+	 * is rasterised once at construction so the render hot-path performs no IO or
+	 * allocation.
 	 */
-	private final BufferedImage markerIcon;
+	private final GuidanceTargetMarker targetMarker = new GuidanceTargetMarker();
 
 	@Inject
 	private TooltipManager tooltipManager;
@@ -108,28 +104,8 @@ public class ObjectHighlightOverlay extends Overlay
 		this.client = client;
 		this.clientThread = clientThread;
 		this.config = config;
-		this.markerIcon = loadMarkerIcon();
 		setPosition(OverlayPosition.DYNAMIC);
 		setLayer(OverlayLayer.ABOVE_SCENE);
-	}
-
-	private static BufferedImage loadMarkerIcon()
-	{
-		try
-		{
-			BufferedImage raw = ImageUtil.loadImageResource(
-				ObjectHighlightOverlay.class, "/com/collectionloghelper/panel_icon.png");
-			if (raw == null)
-			{
-				return null;
-			}
-			return ImageUtil.resizeImage(raw, MARKER_SIZE, MARKER_SIZE);
-		}
-		catch (RuntimeException e)
-		{
-			log.warn("Failed to load guidance target marker icon", e);
-			return null;
-		}
 	}
 
 	public void setTargetObjectId(int objectId)
@@ -356,22 +332,17 @@ public class ObjectHighlightOverlay extends Overlay
 	}
 
 	/**
-	 * Draws the cached marker icon centered above the target's on-screen position.
-	 * No-op when the icon failed to load, the config toggle is off, or the target
-	 * has no projectable canvas location. Allocates nothing on the render path.
+	 * Draws the floating collection-log marker above the target's on-screen
+	 * position. No-op when the config toggle is off or the target has no
+	 * projectable canvas location. Allocates nothing on the render path.
 	 */
 	private void drawTargetMarker(Graphics2D graphics, LocalPoint localPoint)
 	{
-		if (markerIcon == null || localPoint == null || !config.showGuidanceTargetMarker())
+		if (!config.showGuidanceTargetMarker())
 		{
 			return;
 		}
-		Point canvasPoint = Perspective.getCanvasImageLocation(
-			client, localPoint, markerIcon, MARKER_HEIGHT_OFFSET);
-		if (canvasPoint != null)
-		{
-			graphics.drawImage(markerIcon, canvasPoint.getX(), canvasPoint.getY(), null);
-		}
+		targetMarker.draw(graphics, client, localPoint);
 	}
 
 	private boolean passesTileFilter(TileObject obj)
