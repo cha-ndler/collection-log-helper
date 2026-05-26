@@ -426,6 +426,48 @@ public class RequirementsChecker
 			}
 		}
 
+		if (requirements.getQuestMilestones() != null)
+		{
+			for (String questName : requirements.getQuestMilestones())
+			{
+				try
+				{
+					Quest quest = Quest.valueOf(questName);
+					// Looser than the quests field: STARTED is enough. Met when
+					// IN_PROGRESS or FINISHED, i.e. anything other than NOT_STARTED.
+					if (quest.getState(client) == QuestState.NOT_STARTED)
+					{
+						unmet.add("Quest started: " + formatEnumName(questName));
+					}
+				}
+				catch (IllegalArgumentException e)
+				{
+					log.warn("Unknown quest enum: {}", questName);
+				}
+			}
+		}
+
+		if (requirements.getSkillCapePerks() != null)
+		{
+			for (String skillName : requirements.getSkillCapePerks())
+			{
+				try
+				{
+					Skill skill = Skill.valueOf(skillName);
+					// Level-99 proxy: owning the skill cape (and its travel perk)
+					// requires level 99 in the named skill.
+					if (client.getRealSkillLevel(skill) < 99)
+					{
+						unmet.add("Skill cape: " + formatEnumName(skillName));
+					}
+				}
+				catch (IllegalArgumentException e)
+				{
+					log.warn("Unknown skill enum: {}", skillName);
+				}
+			}
+		}
+
 		return unmet;
 	}
 
