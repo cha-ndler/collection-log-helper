@@ -2,6 +2,7 @@
 build
 out/
 net/
+preview-out/
 
 .idea/
 *.iml

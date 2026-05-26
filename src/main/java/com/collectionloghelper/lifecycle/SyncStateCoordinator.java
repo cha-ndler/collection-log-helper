@@ -104,6 +104,25 @@ public class SyncStateCoordinator
 	/** True once the collection log notification setting has been checked this session. */
 	private boolean clogNotificationChecked;
 
+	/** True once the per-login auto-sync (collectionlog.net + TempleOSRS) has fired this session. */
+	private boolean autoLoginSyncFired;
+
+	/**
+	 * Fired once per login (a few ticks after LOGGED_IN, when the display name
+	 * and clog data are ready) to auto-import from collectionlog.net. Gated by
+	 * {@code config.enableCollectionLogNetImport()}. Set by the plugin in
+	 * {@code startUp()}; may be {@code null} during startup races.
+	 */
+	private Runnable collectionLogNetAutoSync;
+
+	/**
+	 * Fired once per login (alongside {@link #collectionLogNetAutoSync}) to
+	 * auto-sync kill counts from TempleOSRS. Gated by
+	 * {@code config.enableTempleOsrsSync()}. Set by the plugin in
+	 * {@code startUp()}; may be {@code null} during startup races.
+	 */
+	private Runnable templeOsrsAutoSync;
+
 	@Inject
 	SyncStateCoordinator(
 		Client client,
@@ -119,6 +138,21 @@ public class SyncStateCoordinator
 		this.dataSyncState = dataSyncState;
 		this.playerBankState = playerBankState;
 		this.guidanceOverlay = guidanceOverlay;
+	}
+
+	/**
+	 * Wires the per-login auto-sync callbacks. Called once from
+	 * {@code CollectionLogHelperPlugin.startUp()} after the panel is built. Each
+	 * callback is the same orchestrator entry point the old sync buttons used.
+	 * Either may be {@code null} to disable that auto-sync.
+	 *
+	 * @param collectionLogNetAutoSync triggers a collectionlog.net import
+	 * @param templeOsrsAutoSync       triggers a TempleOSRS KC sync
+	 */
+	public void setAutoLoginSyncCallbacks(Runnable collectionLogNetAutoSync, Runnable templeOsrsAutoSync)
+	{
+		this.collectionLogNetAutoSync = collectionLogNetAutoSync;
+		this.templeOsrsAutoSync = templeOsrsAutoSync;
 	}
 
 	// ---- Public accessors used by the plugin ----
@@ -307,6 +341,27 @@ public class SyncStateCoordinator
 			}
 		}
 
+		// One-time auto-sync a few ticks after login, once the display name and
+		// clog varps are ready (loginTickDelay starts at 10 on LOGGED_IN, so
+		// firing at 3 leaves ~7 ticks of settle time). Each branch is gated by
+		// its config flag and a non-null orchestrator callback; the
+		// autoLoginSyncFired guard ensures this runs at most once per login.
+		if (!autoLoginSyncFired && loginTickDelay > 0 && loginTickDelay <= 3
+			&& client.getGameState() == GameState.LOGGED_IN)
+		{
+			autoLoginSyncFired = true;
+			if (collectionLogNetAutoSync != null && config.enableCollectionLogNetImport())
+			{
+				log.debug("Auto-sync on login: triggering collectionlog.net import");
+				collectionLogNetAutoSync.run();
+			}
+			if (templeOsrsAutoSync != null && config.enableTempleOsrsSync())
+			{
+				log.debug("Auto-sync on login: triggering TempleOSRS KC sync");
+				templeOsrsAutoSync.run();
+			}
+		}
+
 		// Send one-time sync reminders after login
 		if (loginTickDelay > 0)
 		{
@@ -383,6 +438,7 @@ public class SyncStateCoordinator
 		syncReminderSent = false;
 		clogNotificationChecked = false;
 		loginTickDelay = 0;
+		autoLoginSyncFired = false;
 	}
 
 	/**
@@ -409,6 +465,7 @@ public class SyncStateCoordinator
 		clogNotificationChecked = false;
 		loginTickDelay = 0;
 		scriptScanItemCount = 0;
+		autoLoginSyncFired = false;
 	}
 
 	// ---- Private helpers ----

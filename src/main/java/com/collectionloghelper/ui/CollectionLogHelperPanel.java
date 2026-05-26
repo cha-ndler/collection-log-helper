@@ -77,7 +77,6 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import net.runelite.client.callback.ClientThread;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
@@ -132,7 +131,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 
 	private final SyncStatusView syncStatusView;
 	private final ClueSummaryView clueSummaryView;
-	private final SyncButtonController syncButtonController;
 
 	private final SelectorControlsPanel selectorControls;
 	private final JLabel completionLabel;
@@ -164,7 +162,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		DropRateDatabase database, PlayerCollectionState collectionState,
 		EfficiencyCalculator calculator, ClueCompletionEstimator clueEstimator,
 		ItemManager itemManager,
-		ClientThread clientThread,
 		RequirementsChecker requirementsChecker, DataSyncState dataSyncState,
 		SlayerTaskState slayerTaskState,
 		SlayerStrategyCalculator slayerStrategyCalculator,
@@ -199,15 +196,12 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 			slayerStrategyCalculator,
 			requirementsChecker,
 			itemManager,
-			clientThread,
 			guidanceActivator,
-			guidanceDeactivator,
-			this);
+			guidanceDeactivator);
 		JPanel controlsPanel = header.controlsPanel;
 		completionLabel = header.completionLabel;
 		completionProgressBar = header.completionProgressBar;
 		syncStatusView = header.syncStatusView;
-		syncButtonController = header.syncButtonController;
 		clueSummaryView = header.clueSummaryView;
 		slayerStrategyView = header.slayerStrategyView;
 		guidanceBannerView = header.guidanceBannerView;
@@ -323,9 +317,9 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 		int obtained = collectionState.getTotalObtained();
 		int total = collectionState.getTotalPossible();
 		double pct = collectionState.getCompletionPercentage();
-		completionLabel.setText(String.format("Collection Log: %d/%d (%.1f%%)", obtained, total, pct));
 		completionProgressBar.setMaximum(Math.max(total, 1));
 		completionProgressBar.setValue(obtained);
+		completionProgressBar.setString(String.format("%d / %d  (%.1f%%)", obtained, total, pct));
 	}
 
 
@@ -345,32 +339,14 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	}
 
 	/**
-	 * Wires the callback invoked when the "Sync from collectionlog.net" button is clicked.
-	 * Must be called from the EDT or before the panel is shown.
-	 */
-	public void setCollectionLogNetImportCallback(Runnable callback)
-	{
-		syncButtonController.setCollectionLogNetImportCallback(callback);
-	}
-
-	/**
-	 * Resets the "Sync from collectionlog.net" button to its ready state and
-	 * shows a brief result message in the button text. Safe to call from any thread.
+	 * Reports the result of an auto collectionlog.net import as a brief, one-line
+	 * status in the sync-status view. Safe to call from any thread.
 	 *
-	 * @param message short result message, e.g. "Synced 42 items from collectionlog.net"
+	 * @param message short result message, e.g. "Imported 42 items from collectionlog.net"
 	 */
 	public void onCollectionLogNetImportComplete(String message)
 	{
-		syncButtonController.onCollectionLogNetImportComplete(message);
-	}
-
-	/**
-	 * Shows or hides the collectionlog.net sync button based on the config flag.
-	 * Call when the config section toggle changes. Safe to call from any thread.
-	 */
-	public void updateCollectionLogNetImportButton()
-	{
-		syncButtonController.updateCollectionLogNetImportButton();
+		syncStatusView.showTransientStatus(message, true);
 	}
 
 	/**
@@ -394,31 +370,15 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	}
 
 	/**
-	 * Registers the callback invoked when the "Sync KC from TempleOSRS" button is clicked.
-	 * Must be called from the EDT or before the panel is shown.
-	 */
-	public void setTempleSyncCallback(Runnable callback)
-	{
-		syncButtonController.setTempleSyncCallback(callback);
-	}
-
-	/**
-	 * Refreshes the visibility of the TempleOSRS sync button based on the current config.
-	 * Call after the config value changes.
-	 */
-	public void updateTempleSyncButtonVisibility()
-	{
-		syncButtonController.updateTempleSyncButtonVisibility();
-	}
-
-	/**
-	 * Resets the TempleOSRS sync button to its idle state after a sync attempt completes.
+	 * Reports the result of an auto TempleOSRS KC sync as a brief, one-line
+	 * status in the sync-status view. Safe to call from any thread.
 	 *
-	 * @param success whether the sync succeeded (affects button label)
+	 * @param success whether the sync succeeded
 	 */
 	public void onTempleSyncComplete(boolean success)
 	{
-		syncButtonController.onTempleSyncComplete(success);
+		syncStatusView.showTransientStatus(
+			success ? "Synced KC from TempleOSRS" : "TempleOSRS KC sync failed", success);
 	}
 
 	public void rebuild()
