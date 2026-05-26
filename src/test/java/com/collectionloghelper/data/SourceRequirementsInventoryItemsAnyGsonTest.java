@@ -193,10 +193,10 @@ public class SourceRequirementsInventoryItemsAnyGsonTest
 	{
 		SourceRequirements a = new SourceRequirements(
 			null, null, null, null, null, null,
-			Arrays.asList(26945, 26946));
+			Arrays.asList(26945, 26946), null, null);
 		SourceRequirements b = new SourceRequirements(
 			null, null, null, null, null, null,
-			Arrays.asList(26945, 26946));
+			Arrays.asList(26945, 26946), null, null);
 		assertEquals(a, b);
 		assertEquals(a.hashCode(), b.hashCode());
 	}
@@ -206,10 +206,10 @@ public class SourceRequirementsInventoryItemsAnyGsonTest
 	{
 		SourceRequirements a = new SourceRequirements(
 			null, null, null, null, null, null,
-			Collections.singletonList(26945));
+			Collections.singletonList(26945), null, null);
 		SourceRequirements b = new SourceRequirements(
 			null, null, null, null, null, null,
-			Collections.singletonList(26946));
+			Collections.singletonList(26946), null, null);
 		assertTrue(!a.equals(b));
 	}
 
@@ -221,10 +221,10 @@ public class SourceRequirementsInventoryItemsAnyGsonTest
 		// the evaluator would not be able to choose AND vs OR semantics.
 		SourceRequirements andOnly = new SourceRequirements(
 			null, null, null, null, null,
-			Collections.singletonList(26945), null);
+			Collections.singletonList(26945), null, null, null);
 		SourceRequirements anyOnly = new SourceRequirements(
 			null, null, null, null, null, null,
-			Collections.singletonList(26945));
+			Collections.singletonList(26945), null, null);
 		assertTrue(!andOnly.equals(anyOnly));
 	}
 
@@ -240,7 +240,7 @@ public class SourceRequirementsInventoryItemsAnyGsonTest
 			Arrays.asList("JEWELLERY_BOX_FANCY"),
 			Arrays.asList(22557),
 			Arrays.asList(12938),
-			Arrays.asList(26945, 26946, 26947, 26948, 26949, 26950));
+			Arrays.asList(26945, 26946, 26947, 26948, 26949, 26950), null, null);
 		String json = GSON.toJson(original);
 		SourceRequirements restored = GSON.fromJson(json, SourceRequirements.class);
 		assertEquals(original, restored);
