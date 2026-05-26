@@ -24,6 +24,7 @@
  */
 package com.collectionloghelper.ui.preview;
 
+import com.collectionloghelper.data.CollectionLogCategory;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.collectionloghelper.ui.CollectionLogHelperPanel.Mode;
 import java.awt.image.BufferedImage;
@@ -67,10 +68,21 @@ public class PanelPreviewSnapshotTest
 	@Test
 	public void slayerTaskActiveScenario() throws Exception
 	{
-		// An active slayer task in the default EFFICIENT mode, exercising the
-		// strategy view's populated render path.
+		// An active task in the default EFFICIENT mode must NOT surface the slayer
+		// advisor at the top of the panel; the banner is gated to slayer context.
 		renderScenario("slayer-task-active",
 			PanelPreviewFixtures.scenario().mode(Mode.EFFICIENT).slayerTaskActive(true));
+	}
+
+	@Test
+	public void slayerCategoryFocusScenario() throws Exception
+	{
+		// Category Focus on the Slayer category with an active task: this is the
+		// only context where the slayer task label + strategy advisor appear.
+		renderScenario("slayer-category-focus",
+			PanelPreviewFixtures.scenario()
+				.focusCategory(CollectionLogCategory.SLAYER)
+				.slayerTaskActive(true));
 	}
 
 	@Test

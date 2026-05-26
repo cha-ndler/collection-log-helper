@@ -27,6 +27,7 @@ package com.collectionloghelper.ui.widget;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -35,8 +36,13 @@ import java.awt.image.BufferedImage;
  * avoids bundling third-party icon-set PNGs and lets the colour be themed per
  * state without keeping multiple PNG variants in sync.
  *
- * <p>Provides a solid status dot ({@link #statusDot(Color)}) for the sync-status
- * indicator.
+ * <p>Provides:
+ * <ul>
+ *   <li>collapse chevrons ({@link #chevronRight(Color)} / {@link #chevronDown(Color)})
+ *       for collapsible-section toggles;</li>
+ *   <li>a solid status dot ({@link #statusDot(Color)}) for the sync-status
+ *       indicator.</li>
+ * </ul>
  *
  * <p>Each factory returns a freshly-allocated {@link BufferedImage}.
  */
@@ -47,6 +53,54 @@ final class StatusIcons
 
 	private StatusIcons()
 	{
+	}
+
+	/**
+	 * Right-pointing chevron - the collapsed-state affordance for a collapsible
+	 * toggle. Replaces an ASCII right-triangle while keeping the same visual cue.
+	 */
+	static BufferedImage chevronRight(Color color)
+	{
+		BufferedImage img = blank();
+		Graphics2D g = prepare(img, color);
+		try
+		{
+			Path2D.Float tri = new Path2D.Float();
+			tri.moveTo(4.5f, 3f);
+			tri.lineTo(10f, 7f);
+			tri.lineTo(4.5f, 11f);
+			tri.closePath();
+			g.fill(tri);
+		}
+		finally
+		{
+			g.dispose();
+		}
+		return img;
+	}
+
+	/**
+	 * Down-pointing chevron - the expanded-state affordance for a collapsible
+	 * toggle.
+	 */
+	static BufferedImage chevronDown(Color color)
+	{
+		BufferedImage img = blank();
+		Graphics2D g = prepare(img, color);
+		try
+		{
+			Path2D.Float tri = new Path2D.Float();
+			tri.moveTo(3f, 4.5f);
+			tri.lineTo(7f, 10f);
+			tri.lineTo(11f, 4.5f);
+			tri.closePath();
+			g.fill(tri);
+		}
+		finally
+		{
+			g.dispose();
+		}
+		return img;
 	}
 
 	/**
