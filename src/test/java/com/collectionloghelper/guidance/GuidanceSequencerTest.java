@@ -548,6 +548,20 @@ public class GuidanceSequencerTest
 			steps, null, null, 0, null, cumulativeTrackThreshold, Collections.emptyList(), null, null, null);
 	}
 
+	private CollectionLogSource makeSourceWithItems(String name, List<GuidanceStep> steps,
+		List<CollectionLogItem> items)
+	{
+		return new CollectionLogSource(name, CollectionLogCategory.BOSSES, 3000, 3000, 0,
+			60, 0, name, Collections.emptyList(),
+			RewardType.DROP, 0, null, 1, false, 0, null, 0, null, null,
+			steps, null, null, 0, null, 0, items, null, null, null);
+	}
+
+	private CollectionLogItem makeItem(int itemId, String name)
+	{
+		return new CollectionLogItem(itemId, name, 0.0, false, null, 0, 0, false, false);
+	}
+
 	private void startSequence(List<GuidanceStep> steps)
 	{
 		startSequence(steps, s -> {}, () -> {});
@@ -670,6 +684,81 @@ public class GuidanceSequencerTest
 		sequencer.onItemObtained(targetItemId);
 		assertEquals(1, sequencer.getCurrentIndex());
 		assertEquals("After obtain", sequencer.getCurrentStep().getDescription());
+	}
+
+	/**
+	 * Regression test for #708: obtaining the active source's target collection-log
+	 * item must complete (and thus deactivate) guidance immediately, even when the
+	 * current step's own completion condition has not fired and inventory state is
+	 * still "incomplete" (e.g., Shades of Mort'ton — player obtains "Bronze locks"
+	 * while still holding a shade key on the final chest-opening step).
+	 *
+	 * <p>Before the fix, {@code onItemObtained} only set the target-slot-unlocked
+	 * flag and waited for the step/inventory condition to advance the sequence, so
+	 * guidance stayed pinned on the completed item indefinitely.
+	 */
+	@Test
+	public void testObtainingTargetItemCompletesGuidanceRegardlessOfStepState()
+	{
+		int targetItemId = 28163; // arbitrary clog item id (e.g. "Bronze locks")
+		int keyItemId = 4178;     // a consumable the player still holds
+
+		// Final step completes only when the key leaves the inventory — NOT obtained-based.
+		List<GuidanceStep> steps = Arrays.asList(
+			makeManualStep("Travel to Mort'ton"),
+			makeStep(CompletionCondition.INVENTORY_NOT_HAS_ITEM, keyItemId)
+		);
+
+		// Player still holds the key, so the final step's own condition is unsatisfied.
+		when(inventoryState.hasItem(keyItemId)).thenReturn(true);
+
+		AtomicBoolean completed = new AtomicBoolean(false);
+		CollectionLogSource source = makeSourceWithItems("Shades of Mort'ton", steps,
+			Arrays.asList(makeItem(targetItemId, "Bronze locks")));
+		sequencer.startSequence(source, s -> {}, () -> completed.set(true));
+
+		// Advance onto the final (chest-opening) step; it must not auto-complete.
+		sequencer.advanceStep();
+		assertEquals(1, sequencer.getCurrentIndex());
+		assertTrue(sequencer.isActive());
+		assertFalse(completed.get());
+
+		// Obtaining the target collection-log item must complete guidance now,
+		// even though the key is still in the inventory.
+		sequencer.onItemObtained(targetItemId);
+
+		assertTrue(sequencer.wasTargetSlotUnlocked());
+		assertTrue(completed.get(), "sequence-complete callback must fire on target obtain");
+		assertFalse(sequencer.isActive(), "guidance must deactivate on target obtain");
+	}
+
+	/**
+	 * Companion guard for #708: obtaining a collection-log item that is NOT the
+	 * active source's target must not complete or deactivate guidance. This keeps
+	 * the auto-stop scoped to the guided target only.
+	 */
+	@Test
+	public void testObtainingNonTargetItemDoesNotCompleteGuidance()
+	{
+		int targetItemId = 28163;
+		int unrelatedItemId = 99999;
+
+		List<GuidanceStep> steps = Arrays.asList(
+			makeManualStep("Step 1"),
+			makeManualStep("Step 2")
+		);
+
+		AtomicBoolean completed = new AtomicBoolean(false);
+		CollectionLogSource source = makeSourceWithItems("Shades of Mort'ton", steps,
+			Arrays.asList(makeItem(targetItemId, "Bronze locks")));
+		sequencer.startSequence(source, s -> {}, () -> completed.set(true));
+
+		sequencer.onItemObtained(unrelatedItemId);
+
+		assertFalse(sequencer.wasTargetSlotUnlocked());
+		assertFalse(completed.get());
+		assertTrue(sequencer.isActive());
+		assertEquals(0, sequencer.getCurrentIndex());
 	}
 
 	@Test
