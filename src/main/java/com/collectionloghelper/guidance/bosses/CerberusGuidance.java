@@ -100,7 +100,8 @@ public class CerberusGuidance implements BossGuidance
 			null,              // waypoints
 			null,              // dynamicTargetEvaluator
 			null,              // conditionTree
-			null               // perItemStepPriority
+			null,              // perItemStepPriority
+			null               // activityObtainableItemIds
 		);
 
 		GuidanceStep gateStep = new GuidanceStep(
@@ -137,7 +138,8 @@ public class CerberusGuidance implements BossGuidance
 			null,              // waypoints
 			null,              // dynamicTargetEvaluator
 			null,              // conditionTree
-			null               // perItemStepPriority
+			null,              // perItemStepPriority
+			null               // activityObtainableItemIds
 		);
 
 		GuidanceStep killStep = new GuidanceStep(
@@ -173,7 +175,8 @@ public class CerberusGuidance implements BossGuidance
 			null,              // waypoints
 			null,              // dynamicTargetEvaluator
 			null,              // conditionTree
-			null               // perItemStepPriority
+			null,              // perItemStepPriority
+			null               // activityObtainableItemIds
 		);
 
 		return Arrays.asList(travelStep, gateStep, killStep);

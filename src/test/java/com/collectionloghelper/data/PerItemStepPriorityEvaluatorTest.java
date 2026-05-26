@@ -193,7 +193,8 @@ public class PerItemStepPriorityEvaluatorTest
 			null,                       // waypoints
 			null,                       // dynamicTargetEvaluator
 			null,                       // conditionTree
-			perItemStepPriority         // perItemStepPriority (under test)
+						perItemStepPriority, // perItemStepPriority (under test)
+						null  // activityObtainableItemIds
 		);
 	}
 }

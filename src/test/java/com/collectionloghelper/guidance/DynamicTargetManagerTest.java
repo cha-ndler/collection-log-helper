@@ -254,7 +254,8 @@ public class DynamicTargetManagerTest
 			null,  // waypoints
 			evaluatorKey,  // dynamicTargetEvaluator
 			null,  // conditionTree
-			null  // perItemStepPriority
+						null, // perItemStepPriority
+						null  // activityObtainableItemIds
 		);
 	}
 
