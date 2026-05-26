@@ -160,7 +160,13 @@ public class GuidanceBannerView extends JPanel
 		if (itemManager != null)
 		{
 			recommendedChipPanel = new SourceRecommendedItemsChipPanel(itemManager, clientThread);
-			recommendedChipPanel.setAlignmentX(LEFT_ALIGNMENT);
+			// Match the sibling "Requirements:" section: CENTER_ALIGNMENT plus a
+			// full-width maximum so the BoxLayout stretches the strip across the
+			// panel instead of shrinking it to the chips' preferred width (which
+			// reads as a narrow, off-centre block). Content inside the panel stays
+			// left-aligned via the heading/chip-row alignmentX.
+			recommendedChipPanel.setAlignmentX(CENTER_ALIGNMENT);
+			recommendedChipPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 			recommendedChipPanel.setBorder(BorderFactory.createEmptyBorder(2, 0, 4, 0));
 			add(recommendedChipPanel);
 		}
