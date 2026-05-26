@@ -77,7 +77,12 @@ public class InventoryItemsAnyMigrationTest
 		"Nechryael",
 		"Gargoyle",
 		"Kurask",
-		"Bloodveld");
+		"Bloodveld",
+		// D5 batch E - inventory teleport jewellery (charged-tier inventoryItemIdsAny)
+		"Castle Wars",
+		"Chaos Fanatic",
+		"Obor",
+		"Revenants");
 
 	private DropRateDatabase database;
 
