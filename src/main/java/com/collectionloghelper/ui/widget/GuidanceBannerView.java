@@ -68,15 +68,6 @@ public class GuidanceBannerView extends JPanel
 	// Per-source requirements section (quest / skill / diary rows)
 	private final RequirementsView requirementsView;
 
-	/**
-	 * Source-level Recommended Gear chip strip (#599). Rendered directly below
-	 * the per-source requirements section so recommended kit is visible from
-	 * step 1, not buried below the active step body. Null when constructed via
-	 * the legacy 1-arg constructor (no {@link ItemManager} available — strip is
-	 * silently omitted in that path).
-	 */
-	private final SourceRecommendedItemsChipPanel recommendedChipPanel;
-
 	// Clue-guidance banner (purple/blue)
 	private final JPanel clueGuidanceBanner;
 	private final JLabel clueGuidanceLabel;
@@ -152,28 +143,6 @@ public class GuidanceBannerView extends JPanel
 		requirementsView.setAlignmentX(CENTER_ALIGNMENT);
 		requirementsView.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		add(requirementsView);
-
-		// Source-level Recommended chip strip (#599) — rendered directly below
-		// the requirements section so it is visible from step 1 of guidance.
-		// Hidden by default; populated in showGuidance from
-		// CollectionLogSource.getEffectiveRecommendedItemIds().
-		if (itemManager != null)
-		{
-			recommendedChipPanel = new SourceRecommendedItemsChipPanel(itemManager, clientThread);
-			// Match the sibling "Requirements:" section: CENTER_ALIGNMENT plus a
-			// full-width maximum so the BoxLayout stretches the strip across the
-			// panel instead of shrinking it to the chips' preferred width (which
-			// reads as a narrow, off-centre block). Content inside the panel stays
-			// left-aligned via the heading/chip-row alignmentX.
-			recommendedChipPanel.setAlignmentX(CENTER_ALIGNMENT);
-			recommendedChipPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-			recommendedChipPanel.setBorder(BorderFactory.createEmptyBorder(2, 0, 4, 0));
-			add(recommendedChipPanel);
-		}
-		else
-		{
-			recommendedChipPanel = null;
-		}
 
 		// Clue guidance banner (hidden by default)
 		clueGuidanceBanner = new JPanel(new BorderLayout());
@@ -255,13 +224,6 @@ public class GuidanceBannerView extends JPanel
 
 		// Delegate to RequirementsView \u2014 hides itself when rows is empty
 		requirementsView.showRequirements(rows);
-
-		// #599 \u2014 populate source-level Recommended chip strip. Hides itself when
-		// the source has no effective recommended items.
-		if (recommendedChipPanel != null)
-		{
-			recommendedChipPanel.update(source.getEffectiveRecommendedItemIds());
-		}
 	}
 
 	/**
@@ -282,10 +244,6 @@ public class GuidanceBannerView extends JPanel
 			}
 		});
 		requirementsView.hideRequirements();
-		if (recommendedChipPanel != null)
-		{
-			recommendedChipPanel.update(Collections.<Integer>emptyList());
-		}
 	}
 
 	/**

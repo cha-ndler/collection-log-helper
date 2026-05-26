@@ -30,7 +30,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -50,7 +49,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.FontManager;
-import net.runelite.client.util.AsyncBufferedImage;
 
 /**
  * Shared widget that displays the multi-step guidance progress bar,
@@ -58,12 +56,15 @@ import net.runelite.client.util.AsyncBufferedImage;
  * the collapsible step sections (when any step carries a section label), and the
  * Next Step / Skip buttons.
  *
- * <h3>Required-items chip strip (B.5.1)</h3>
- * <p>The chip strip ({@link RequiredItemsChipPanel}) is rendered directly below
- * the step-progress label in the flat layout.  Each chip is a 28x28 item icon
- * with a colored border: green (held), white (in bank — tooltip reads
- * "Items can be found in your: Bank"), or red (missing).  The strip hides
- * itself when the active step has no required items.
+ * <h3>Required / recommended item text lists</h3>
+ * <p>Required-item and recommended-item rows render as a compact, icon-free
+ * color-coded text list: each row is a single line showing the item name
+ * coloured green (held), gold (in bank - tooltip suffix "in bank"), or red
+ * (missing). Rows stack vertically so long lists stay compact at the 225px
+ * side-panel width. Within a step, a recommended item that already appears in
+ * "Items needed" is filtered out (compared by item id). The legacy icon-chip
+ * strip ({@link RequiredItemsChipPanel}) is retained in the component tree but
+ * fed an empty list (hidden) so items render only once, as text.
  *
  * <h3>Section rendering (B.5.4)</h3>
  * <p>When the active source has at least one step with a non-null
@@ -554,13 +555,15 @@ public class StepProgressView extends JPanel
 
 			if (groups.isEmpty())
 			{
-				// Flat layout — hide sections, show chip strip + required/recommended items inline.
-				// recChipPanel is intentionally not updated; it was hoisted to source-level
-				// (#599) and is permanently hidden in this widget.
+				// Flat layout - hide sections, show required/recommended items as compact
+				// text lists. The icon chip strip (chipPanel) is intentionally fed an empty
+				// list so it hides: the text list is now the single display for required
+				// items (no double-render of icons + text). recChipPanel is likewise unused
+				// (it was hoisted to source-level, #599).
 				sectionsPanel.setVisible(false);
-				chipPanel.update(rows);
+				chipPanel.update(Collections.<RequiredItemDisplay>emptyList());
 				updateRequiredItemDisplay(rows);
-				updateRecommendedItemDisplay(recRows);
+				updateRecommendedItemDisplay(dedupRecommended(rows, recRows));
 			}
 			else
 			{
@@ -736,7 +739,9 @@ public class StepProgressView extends JPanel
 				body.add(itemsInSection);
 			}
 
-			if (isActive && recommendedItems != null && !recommendedItems.isEmpty())
+			List<RequiredItemDisplay> recForStep =
+				isActive ? dedupRecommended(requiredItems, recommendedItems) : Collections.emptyList();
+			if (isActive && !recForStep.isEmpty())
 			{
 				JPanel recInSection = new JPanel();
 				recInSection.setLayout(new BoxLayout(recInSection, BoxLayout.Y_AXIS));
@@ -752,7 +757,7 @@ public class StepProgressView extends JPanel
 				recInSection.add(recLabel);
 				recInSection.add(Box.createVerticalStrut(2));
 
-				for (RequiredItemDisplay row : recommendedItems)
+				for (RequiredItemDisplay row : recForStep)
 				{
 					JPanel rowPanel = buildItemRow(row);
 					rowPanel.setAlignmentX(LEFT_ALIGNMENT);
@@ -809,17 +814,48 @@ public class StepProgressView extends JPanel
 		return arrow + sectionName + " (" + stepCount + " step" + (stepCount == 1 ? "" : "s") + ")";
 	}
 
+	/**
+	 * Filters {@code recommended} so it excludes any item already present in
+	 * {@code required} (compared by item id). Within a single step an item that is
+	 * already in "Items needed" must not be repeated under "Recommended".
+	 * Order of the surviving recommended rows is preserved.
+	 */
+	private static List<RequiredItemDisplay> dedupRecommended(
+		List<RequiredItemDisplay> required, List<RequiredItemDisplay> recommended)
+	{
+		if (recommended == null || recommended.isEmpty()
+			|| required == null || required.isEmpty())
+		{
+			return recommended != null ? recommended : Collections.emptyList();
+		}
+
+		java.util.Set<Integer> requiredIds = new java.util.HashSet<>();
+		for (RequiredItemDisplay row : required)
+		{
+			requiredIds.add(row.getItemId());
+		}
+
+		List<RequiredItemDisplay> filtered = new java.util.ArrayList<>(recommended.size());
+		for (RequiredItemDisplay row : recommended)
+		{
+			if (!requiredIds.contains(row.getItemId()))
+			{
+				filtered.add(row);
+			}
+		}
+		return filtered;
+	}
+
 	// ── Flat required/recommended-items display ─────────────────────────────
 
 	/**
 	 * Rebuilds the required-items subsection from pre-resolved display rows.
 	 *
-	 * <p>Each row shows a 28×28 item sprite icon followed by the item name.
-	 * The name label is coloured by availability:
+	 * <p>Each row is a single-line, icon-free text label coloured by availability:
 	 * <ul>
-	 *   <li><b>Green</b> — held in inventory or equipped</li>
-	 *   <li><b>White</b> (+ tooltip suffix "ℹ in bank") — present in last bank scan</li>
-	 *   <li><b>Red</b> — not found anywhere</li>
+	 *   <li><b>Green</b> - held in inventory or equipped</li>
+	 *   <li><b>Gold</b> (+ tooltip suffix "in bank") - present in last bank scan</li>
+	 *   <li><b>Red</b> - not found anywhere</li>
 	 * </ul>
 	 * The subsection is hidden when {@code rows} is empty.
 	 * Must be called on the EDT.
@@ -835,7 +871,7 @@ public class StepProgressView extends JPanel
 	/**
 	 * Rebuilds the recommended-items subsection from pre-resolved display rows.
 	 * Uses the same row layout as {@link #updateRequiredItemDisplay} so colouring
-	 * (green/white+ℹ/red) is identical.
+	 * (green/gold/red) is identical.
 	 * The subsection is hidden when {@code rows} is empty.
 	 * Must be called on the EDT.
 	 *
@@ -886,25 +922,27 @@ public class StepProgressView extends JPanel
 	}
 
 	/**
-	 * Builds a single item row: a 28×28 sprite icon + a name label coloured
-	 * by the row's availability status.
+	 * Builds a single item row: a single-line name label coloured by the row's
+	 * availability status. No icon is rendered (the compact text list keeps long
+	 * item lists from overflowing the 225px side panel).
+	 *
+	 * <ul>
+	 *   <li><b>Green</b> ({@link RequiredItemDisplay#COLOR_HELD}) - held in inventory
+	 *       or equipped</li>
+	 *   <li><b>Gold</b> ({@link RequiredItemDisplay#COLOR_IN_BANK}) (+ tooltip suffix
+	 *       "in bank") - present in last bank scan</li>
+	 *   <li><b>Red</b> ({@link RequiredItemDisplay#COLOR_MISSING}) - not found
+	 *       anywhere</li>
+	 * </ul>
 	 */
 	private JPanel buildItemRow(RequiredItemDisplay row)
 	{
 		JPanel rowPanel = new JPanel();
 		rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
 		rowPanel.setBackground(BG);
-		rowPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 32));
+		rowPanel.setAlignmentX(LEFT_ALIGNMENT);
+		rowPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 16));
 
-		// --- Icon ---
-		JLabel iconLabel = new JLabel();
-		iconLabel.setPreferredSize(new Dimension(28, 28));
-		iconLabel.setMinimumSize(new Dimension(28, 28));
-		iconLabel.setMaximumSize(new Dimension(28, 28));
-		iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		iconLabel.setVerticalAlignment(SwingConstants.CENTER);
-
-		// --- Name label ---
 		Color nameColor;
 		String tooltipSuffix;
 		switch (row.getStatus())
@@ -914,7 +952,7 @@ public class StepProgressView extends JPanel
 				tooltipSuffix = "";
 				break;
 			case IN_BANK:
-				nameColor = Color.WHITE;
+				nameColor = RequiredItemDisplay.COLOR_IN_BANK;
 				tooltipSuffix = IN_BANK_TOOLTIP_SUFFIX;
 				break;
 			case MISSING:
@@ -928,58 +966,10 @@ public class StepProgressView extends JPanel
 		nameLabel.setFont(FontManager.getRunescapeSmallFont());
 		nameLabel.setForeground(nameColor);
 		nameLabel.setToolTipText(row.getName() + tooltipSuffix);
-		iconLabel.setToolTipText(row.getName() + tooltipSuffix);
+		nameLabel.setAlignmentX(LEFT_ALIGNMENT);
 
-		rowPanel.add(iconLabel);
-		rowPanel.add(Box.createHorizontalStrut(4));
 		rowPanel.add(nameLabel);
 
-		// Load sprite asynchronously; itemManager.getImage is safe to call on the EDT.
-		if (row.getItemId() > 0)
-		{
-			loadItemIcon(row.getItemId(), iconLabel);
-		}
-
 		return rowPanel;
-	}
-
-	/**
-	 * Loads the item sprite for the given item ID into {@code iconLabel} asynchronously.
-	 * Called after the row panel is constructed so the icon appears as soon as the
-	 * image is available. Safe to call when {@code itemManager} has no image for the
-	 * given ID (e.g., in tests) — the icon label is simply left empty.
-	 */
-	void loadItemIcon(int itemId, JLabel iconLabel)
-	{
-		AsyncBufferedImage asyncImage = itemManager.getImage(itemId);
-		if (asyncImage == null)
-		{
-			return;
-		}
-		asyncImage.onLoaded(() ->
-		{
-			if (asyncImage.getWidth() > 0)
-			{
-				BufferedImage scaled = scaleImage(asyncImage, 28, 28);
-				iconLabel.setIcon(new ImageIcon(scaled));
-				iconLabel.revalidate();
-				iconLabel.repaint();
-			}
-		});
-		// Apply synchronously in case the image is already loaded
-		if (asyncImage.getWidth() > 0)
-		{
-			BufferedImage scaled = scaleImage(asyncImage, 28, 28);
-			iconLabel.setIcon(new ImageIcon(scaled));
-		}
-	}
-
-	private static BufferedImage scaleImage(BufferedImage source, int width, int height)
-	{
-		BufferedImage scaled = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = scaled.createGraphics();
-		g.drawImage(source, 0, 0, width, height, null);
-		g.dispose();
-		return scaled;
 	}
 }

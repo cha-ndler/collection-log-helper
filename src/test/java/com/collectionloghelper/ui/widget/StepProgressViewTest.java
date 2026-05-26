@@ -29,7 +29,6 @@ import com.collectionloghelper.data.GuidanceStep;
 import com.collectionloghelper.guidance.RequiredItemDisplay;
 import com.collectionloghelper.guidance.RequiredItemDisplay.Status;
 import net.runelite.client.game.ItemManager;
-import java.awt.Color;
 import java.awt.Component;
 import java.util.Arrays;
 import java.util.Collections;
@@ -271,7 +270,7 @@ public class StepProgressViewTest
 
 		JLabel nameLabel = findFirstNameLabel(view);
 		assertNotNull( nameLabel,"Name label must be present for IN_BANK row");
-		assertEquals( Color.WHITE, nameLabel.getForeground(),"IN_BANK row must use white colour");
+		assertEquals( RequiredItemDisplay.COLOR_IN_BANK, nameLabel.getForeground(),"IN_BANK row must use gold colour");
 		assertTrue(
 			nameLabel.getToolTipText() != null
 				&& nameLabel.getToolTipText().contains("in bank"),"IN_BANK tooltip must contain 'in bank' hint");
@@ -313,7 +312,7 @@ public class StepProgressViewTest
 		List<JLabel> nameLabels = findAllNameLabels(view);
 		assertEquals( 3, nameLabels.size(),"Must have exactly 3 name labels");
 		assertEquals(RequiredItemDisplay.COLOR_HELD, nameLabels.get(0).getForeground());
-		assertEquals(Color.WHITE, nameLabels.get(1).getForeground());
+		assertEquals(RequiredItemDisplay.COLOR_IN_BANK, nameLabels.get(1).getForeground());
 		assertEquals(RequiredItemDisplay.COLOR_MISSING, nameLabels.get(2).getForeground());
 	}
 
@@ -688,7 +687,7 @@ public class StepProgressViewTest
 		JLabel label = findFirstRecommendedNameLabel(view);
 		assertNotNull(label);
 		assertEquals(
-			Color.WHITE, label.getForeground(),"IN_BANK recommended row must use white colour");
+			RequiredItemDisplay.COLOR_IN_BANK, label.getForeground(),"IN_BANK recommended row must use gold colour");
 		assertTrue(
 			label.getToolTipText() != null && label.getToolTipText().contains("in bank"),"IN_BANK recommended tooltip must contain 'in bank'");
 	}

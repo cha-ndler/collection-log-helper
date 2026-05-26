@@ -25,9 +25,12 @@
 package com.collectionloghelper.ui.preview;
 
 import com.collectionloghelper.data.CollectionLogCategory;
+import com.collectionloghelper.guidance.RequiredItemDisplay;
+import com.collectionloghelper.guidance.RequiredItemDisplay.Status;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
 import com.collectionloghelper.ui.CollectionLogHelperPanel.Mode;
 import com.collectionloghelper.ui.widget.SourceRecommendedItemsChipPanel;
+import com.collectionloghelper.ui.widget.StepProgressView;
 import java.awt.image.BufferedImage;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -180,6 +183,86 @@ public class PanelPreviewSnapshotTest
 		// must exceed 60px.
 		assertTrue(img.getHeight() > 60,
 			"strip height (" + img.getHeight() + ") too short to have wrapped");
+	}
+
+	/**
+	 * Phase 1 guidance items redesign: renders a {@link StepProgressView} (flat
+	 * layout) with a mix of required and recommended items across all three
+	 * statuses (HELD / IN_BANK / MISSING), plus one recommended item whose id
+	 * duplicates a required item (to prove the dedup filter drops it). Proves the
+	 * compact color-coded text list renders icon-free, three-coloured, deduped,
+	 * and unclipped at the real 225px side-panel width.
+	 */
+	@Test
+	public void guidanceItemsTextListScenario() throws Exception
+	{
+		final int heldId = 590;     // Tinderbox
+		final int inBankId = 3438;  // Pyre logs
+		final int missingId = 3392; // Loar remains
+		final int recMissingId = 4151; // Abyssal whip (recommended, missing)
+
+		final List<RequiredItemDisplay> required = Arrays.asList(
+			new RequiredItemDisplay(heldId, "Tinderbox", Status.HELD),
+			new RequiredItemDisplay(inBankId, "Pyre logs", Status.IN_BANK),
+			new RequiredItemDisplay(missingId, "Loar remains", Status.MISSING));
+
+		// Recommended list includes a duplicate of the HELD required item
+		// (heldId) which the dedup filter must drop, plus one genuinely new item.
+		final List<RequiredItemDisplay> recommended = Arrays.asList(
+			new RequiredItemDisplay(heldId, "Tinderbox", Status.HELD),
+			new RequiredItemDisplay(recMissingId, "Abyssal whip", Status.MISSING));
+
+		AtomicReference<StepProgressView> viewRef = new AtomicReference<>();
+		AtomicReference<BufferedImage> result = new AtomicReference<>();
+		AtomicReference<Exception> error = new AtomicReference<>();
+
+		SwingUtilities.invokeAndWait(() ->
+		{
+			try
+			{
+				ItemManager itemManager = Mockito.mock(ItemManager.class);
+				Mockito.when(itemManager.getImage(Mockito.anyInt())).thenReturn(null);
+
+				StepProgressView view = new StepProgressView(itemManager);
+				view.showStep(2, 6, "Light the pyre and defeat the shade", false,
+					required, recommended, java.util.Collections.emptyList());
+				viewRef.set(view);
+			}
+			catch (Exception e)
+			{
+				error.set(e);
+			}
+		});
+		if (error.get() != null)
+		{
+			throw error.get();
+		}
+
+		// Second EDT task: the showStep invokeLater has now run and populated rows.
+		SwingUtilities.invokeAndWait(() ->
+		{
+			try
+			{
+				result.set(PanelSnapshot.render(viewRef.get(), WIDTH));
+			}
+			catch (Exception e)
+			{
+				error.set(e);
+			}
+		});
+		if (error.get() != null)
+		{
+			throw error.get();
+		}
+
+		BufferedImage img = result.get();
+		Path out = OUT_DIR.resolve("guidance-items-textlist.png");
+		PanelSnapshot.writePng(img, out);
+
+		assertTrue(Files.exists(out), "PNG not written: " + out.toAbsolutePath());
+		assertTrue(Files.size(out) > 0, "PNG is empty: " + out.toAbsolutePath());
+		assertEquals(WIDTH, img.getWidth(), "render width must equal PANEL_WIDTH");
+		assertTrue(img.getHeight() > 50, "render height too small (" + img.getHeight() + ")");
 	}
 
 	private void renderScenario(String name, PanelPreviewFixtures.Scenario scenario) throws Exception
