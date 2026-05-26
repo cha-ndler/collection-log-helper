@@ -31,6 +31,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.image.BufferedImage;
 import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,24 +53,32 @@ import net.runelite.api.WallObject;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.ui.overlay.Overlay;
-import net.runelite.client.ui.overlay.OverlayUtil;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
+import net.runelite.client.util.ImageUtil;
 
 @Slf4j
 @Singleton
 public class ObjectHighlightOverlay extends Overlay
 {
-	private static final int TEXT_HEIGHT_OFFSET = 130;
 	private static final BasicStroke STROKE_1_5 = new BasicStroke(1.5f);
-	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
+	private static final int GLOW_OUTLINE_WIDTH = 2;
+	private static final int GLOW_FEATHER = 4;
+	private static final int MARKER_SIZE = 18;
+	private static final int MARKER_HEIGHT_OFFSET = 60;
 
 	private final Client client;
 	private final ClientThread clientThread;
 	private final CollectionLogHelperConfig config;
+
+	/**
+	 * Marker icon drawn over each highlighted target. Loaded and resized once
+	 * at construction so the render hot-path performs no IO or allocation.
+	 */
+	private final BufferedImage markerIcon;
 
 	@Inject
 	private TooltipManager tooltipManager;
@@ -84,7 +93,6 @@ public class ObjectHighlightOverlay extends Overlay
 	private volatile WorldPoint filterTile;
 	private volatile int filterMaxDistance;
 	private volatile List<WorldPoint> filterTiles;
-	private volatile String cachedDisplayText;
 
 	/**
 	 * Cached list of scene objects matching targetObjectIds.
@@ -100,8 +108,28 @@ public class ObjectHighlightOverlay extends Overlay
 		this.client = client;
 		this.clientThread = clientThread;
 		this.config = config;
+		this.markerIcon = loadMarkerIcon();
 		setPosition(OverlayPosition.DYNAMIC);
 		setLayer(OverlayLayer.ABOVE_SCENE);
+	}
+
+	private static BufferedImage loadMarkerIcon()
+	{
+		try
+		{
+			BufferedImage raw = ImageUtil.loadImageResource(
+				ObjectHighlightOverlay.class, "/com/collectionloghelper/panel_icon.png");
+			if (raw == null)
+			{
+				return null;
+			}
+			return ImageUtil.resizeImage(raw, MARKER_SIZE, MARKER_SIZE);
+		}
+		catch (RuntimeException e)
+		{
+			log.warn("Failed to load guidance target marker icon", e);
+			return null;
+		}
 	}
 
 	public void setTargetObjectId(int objectId)
@@ -119,13 +147,11 @@ public class ObjectHighlightOverlay extends Overlay
 	public void setObjectInteractAction(String action)
 	{
 		this.objectInteractAction = action;
-		rebuildDisplayText(action, this.useItemOnObject);
 	}
 
 	public void setUseItemOnObject(boolean value)
 	{
 		this.useItemOnObject = value;
-		rebuildDisplayText(this.objectInteractAction, value);
 	}
 
 	public void setTooltipText(String text)
@@ -171,19 +197,6 @@ public class ObjectHighlightOverlay extends Overlay
 		this.filterMaxDistance = 0;
 		this.filterTiles = null;
 		this.matchedObjects = Collections.emptyList();
-		this.cachedDisplayText = null;
-	}
-
-	private void rebuildDisplayText(String action, boolean useItem)
-	{
-		if (action != null)
-		{
-			cachedDisplayText = useItem ? "Use " + action + " \u2192" : action;
-		}
-		else
-		{
-			cachedDisplayText = null;
-		}
 	}
 
 	/**
@@ -305,7 +318,6 @@ public class ObjectHighlightOverlay extends Overlay
 		// Snapshot volatile fields to prevent thread-safety races
 		final List<TileObject> objects = this.matchedObjects;
 		final String action = this.objectInteractAction;
-		final boolean useItem = this.useItemOnObject;
 		final String tipText = this.tooltipText;
 
 		if (objects.isEmpty() || !config.showOverlays())
@@ -324,30 +336,42 @@ public class ObjectHighlightOverlay extends Overlay
 			LocalPoint localPoint = obj.getLocalLocation();
 			if (style == ObjectHighlightStyle.OUTLINE_GLOW)
 			{
-				// Wide feathered outline produces a soft glow effect around the model.
-				// outlineWidth=6 feather=4 (max) gives visible glow without performance cost.
-				modelOutlineRenderer.drawOutline(obj, 6, overlayColor, 4);
-				// Render action label above the object (tooltip not available without hull hitbox)
-				String displayText = this.cachedDisplayText;
-				if (localPoint != null && displayText != null)
-				{
-					Point textPoint = Perspective.getCanvasTextLocation(
-						client, graphics, localPoint, displayText, TEXT_HEIGHT_OFFSET);
-					if (textPoint != null)
-					{
-						OverlayUtil.renderTextLocation(graphics, textPoint, displayText, overlayColor);
-					}
-				}
+				// Thin feathered outline produces a clean single glow (matching the
+				// catacomb-chest reference look) rather than a thick stacked band.
+				// outlineWidth=2 feather=4 gives a soft edge without a heavy cluttered cluster
+				// when many objects match (e.g. funeral pyres at Shades of Mort'ton).
+				modelOutlineRenderer.drawOutline(obj, GLOW_OUTLINE_WIDTH, overlayColor, GLOW_FEATHER);
 			}
 			else
 			{
 				Shape hull = getHull(obj);
-				tooltipShown |= renderObjectHighlight(graphics, hull, localPoint,
-					overlayColor, action, useItem, mousePos, builtTooltip, tooltipShown);
+				tooltipShown |= renderObjectHighlight(graphics, hull,
+					overlayColor, mousePos, builtTooltip, tooltipShown);
 			}
+
+			drawTargetMarker(graphics, localPoint);
 		}
 
 		return null;
+	}
+
+	/**
+	 * Draws the cached marker icon centered above the target's on-screen position.
+	 * No-op when the icon failed to load, the config toggle is off, or the target
+	 * has no projectable canvas location. Allocates nothing on the render path.
+	 */
+	private void drawTargetMarker(Graphics2D graphics, LocalPoint localPoint)
+	{
+		if (markerIcon == null || localPoint == null || !config.showGuidanceTargetMarker())
+		{
+			return;
+		}
+		Point canvasPoint = Perspective.getCanvasImageLocation(
+			client, localPoint, markerIcon, MARKER_HEIGHT_OFFSET);
+		if (canvasPoint != null)
+		{
+			graphics.drawImage(markerIcon, canvasPoint.getX(), canvasPoint.getY(), null);
+		}
 	}
 
 	private boolean passesTileFilter(TileObject obj)
@@ -403,9 +427,8 @@ public class ObjectHighlightOverlay extends Overlay
 		return null;
 	}
 
-	private boolean renderObjectHighlight(Graphics2D graphics, Shape hull, LocalPoint localPoint,
-		Color overlayColor, String action, boolean useItem,
-		Point mousePos, String builtTooltip, boolean tooltipAlreadyShown)
+	private boolean renderObjectHighlight(Graphics2D graphics, Shape hull,
+		Color overlayColor, Point mousePos, String builtTooltip, boolean tooltipAlreadyShown)
 	{
 		boolean showedTooltip = false;
 		if (hull != null)
@@ -420,18 +443,6 @@ public class ObjectHighlightOverlay extends Overlay
 			{
 				tooltipManager.add(new Tooltip(builtTooltip));
 				showedTooltip = true;
-			}
-		}
-
-		// Render action text above the object
-		String displayText = this.cachedDisplayText;
-		if (localPoint != null && displayText != null)
-		{
-			Point textPoint = Perspective.getCanvasTextLocation(
-				client, graphics, localPoint, displayText, TEXT_HEIGHT_OFFSET);
-			if (textPoint != null)
-			{
-				OverlayUtil.renderTextLocation(graphics, textPoint, displayText, overlayColor);
 			}
 		}
 		return showedTooltip;
