@@ -624,9 +624,40 @@ public class GuidanceOverlayCoordinator
 			applyStepToOverlays(step, applySourceName, applySource);
 			npcTrackerHelper.scanForTrackedNpc(step, activeTargetItemId);
 		}
+		else
+		{
+			// Same-step re-notify (fired on every inventory change while guidance is
+			// active, e.g. a bank withdrawal during Shades of Mort'ton). The overlay
+			// clear + re-apply above is skipped to avoid a visual blink (#683), but
+			// that path is also the only one that re-pushes the overlay's required-item
+			// availability via OverlayStepApplier. Without re-resolving here the overlay
+			// keeps a stale availability snapshot from step entry while the side panel
+			// (StepChangeHandler, below) re-resolves on every re-notify -- so a freshly
+			// scanned bank item shows "(bank)" in the panel but not the overlay (#717).
+			// Re-resolve here through the same RequiredItemResolver the panel uses so
+			// both surfaces share one availability source.
+			refreshOverlayRequiredItems(step);
+		}
 
 		stepChangeHandler.handle(step,
 			new StepChangeHandler.Input(activeInfoBox, panel, activeTargetItemId));
+	}
+
+	/**
+	 * Re-resolves the given step's required-item availability and pushes it to the
+	 * in-game overlay, keeping the overlay's "Item requirements" list in sync with the
+	 * side panel on same-step re-notifies (#717).
+	 *
+	 * <p>Runs on the client thread because {@link RequiredItemResolver#resolve} calls
+	 * {@link net.runelite.client.game.ItemManager#getItemComposition}, which asserts
+	 * caller-is-client-thread (see #388). Mirrors the deferred-resolve pattern in
+	 * {@link OverlayStepApplier} and {@link StepChangeHandler}.</p>
+	 */
+	private void refreshOverlayRequiredItems(GuidanceStep step)
+	{
+		final GuidanceStep stepForResolve = step;
+		clientThread.invokeLater(() ->
+			guidanceOverlay.setRequiredItems(requiredItemResolver.resolve(stepForResolve)));
 	}
 
 	/**
