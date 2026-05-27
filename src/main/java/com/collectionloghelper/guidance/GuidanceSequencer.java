@@ -184,6 +184,11 @@ public class GuidanceSequencer
 		// Skip any steps whose conditions are already met
 		skipSatisfiedSteps();
 
+		// Mid-activity re-sync (#719): if the player is already standing in a
+		// later step's confirmable area AND holds that step's required items,
+		// jump them forward to it instead of starting at step 1.
+		advanceToFurthestSatisfiedState();
+
 		// Mid-activity activation while already depleted (e.g. in the Shades
 		// catacombs with no keys and no remains) — park on the restock step.
 		checkDepletionAndMaybeReset();
@@ -379,6 +384,10 @@ public class GuidanceSequencer
 				activeSource != null ? activeSource.getName() : "?");
 			return;
 		}
+
+		// State-derived forward jump (#719): land on the furthest step whose
+		// area + required items the player demonstrably satisfies.
+		advanceToFurthestSatisfiedState();
 
 		// If the player synced while depleted, park on the restock step.
 		checkDepletionAndMaybeReset();
@@ -953,6 +962,78 @@ public class GuidanceSequencer
 			}
 		}
 		return -1;
+	}
+
+	/**
+	 * Mid-activity state-derivation (#719). Scans forward from the current index
+	 * for the FURTHEST-along step whose <em>area is positively confirmed</em>
+	 * (player within the step's {@code completionDistance} of its
+	 * {@code worldX/worldY/worldPlane}, or inside its {@code completionZone}) AND
+	 * whose effective required items the player fully holds. When such a step is
+	 * found, jumps {@link #currentIndex} to it so an activation mid-activity lands
+	 * the player where they actually are (e.g. already in the Shades catacomb
+	 * holding keys → the open-chests step) instead of step 1.
+	 *
+	 * <p>Conservative by design: a step whose location cannot be confirmed (no
+	 * coordinates and no zone, or the player's last-known location is unknown) is
+	 * never treated as a forward target — wrong-forward placement is worse than
+	 * starting earlier. No-op when nothing later qualifies, so it composes cleanly
+	 * with the skip-chain (already run) and the depletion/restock check (run
+	 * after). Pure index mutation — does not notify listeners.
+	 */
+	private void advanceToFurthestSatisfiedState()
+	{
+		if (!active || steps == null || lastKnownPlayerLocation == null)
+		{
+			return;
+		}
+		int furthest = -1;
+		for (int i = currentIndex + 1; i < steps.size(); i++)
+		{
+			GuidanceStep step = steps.get(i);
+			if (playerIsConfirmablyInStepArea(step) && playerHasAllRequiredItems(step))
+			{
+				furthest = i;
+			}
+		}
+		if (furthest > currentIndex)
+		{
+			log.info("State-derived start: player is in step {}/{}'s area holding its items — "
+				+ "starting there instead of step {}", furthest + 1, steps.size(), currentIndex + 1);
+			currentIndex = furthest;
+			loopIterationsCompleted = 0;
+			crossedWaypointIndex = 0;
+		}
+	}
+
+	/**
+	 * Returns true only when the player's last-known location can be POSITIVELY
+	 * confirmed to be inside the given step's area — either within the step's
+	 * {@code completionDistance} of its {@code worldX/worldY/worldPlane} tile, or
+	 * inside its {@code completionZone}. A step that declares neither a tile
+	 * ({@code worldX <= 0}) nor a zone returns {@code false}: its position is
+	 * unconfirmable, so it must not be treated as a state-derived jump target.
+	 */
+	private boolean playerIsConfirmablyInStepArea(GuidanceStep step)
+	{
+		if (step == null || lastKnownPlayerLocation == null)
+		{
+			return false;
+		}
+		Zone zone = step.getZone();
+		if (zone != null && zone.contains(lastKnownPlayerLocation))
+		{
+			return true;
+		}
+		if (step.getWorldX() > 0
+			&& lastKnownPlayerLocation.getPlane() == step.getWorldPlane()
+			&& lastKnownPlayerLocation.distanceTo2D(
+				new WorldPoint(step.getWorldX(), step.getWorldY(), step.getWorldPlane()))
+				<= step.getCompletionDistance())
+		{
+			return true;
+		}
+		return false;
 	}
 
 	/**
