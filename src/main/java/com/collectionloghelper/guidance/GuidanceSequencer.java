@@ -562,9 +562,18 @@ public class GuidanceSequencer
 
 		GuidanceStep step = getRawCurrentStep();
 
-		// Auto-advance if skipIfHasAnyItemIds is now satisfied (e.g., key just entered inventory)
+		// Auto-advance if skipIfHasAnyItemIds is now satisfied (e.g., key just entered inventory).
+		//
+		// Exception (#707): in a looping / restock activity the player must keep
+		// gathering many of a recurring item (e.g. several Shade keys per catacomb
+		// run) before moving on. Auto-advancing off the gather step after the FIRST
+		// pickup clears its in-game highlight prematurely, so the player loses sight
+		// of the remaining keys to collect. While the sequence is a looping/restock
+		// activity, suppress the skip auto-advance so the gather step — and its
+		// highlight — stays active until the player advances manually (Next/Skip) or
+		// the loop naturally re-enters it.
 		CompletionChecker.SkipIfHasAnyResult skip = completionChecker.evaluateSkipIfHasAny(step);
-		if (skip.matched())
+		if (skip.matched() && !isRecurringGatherSequence())
 		{
 			log.info("Step {} auto-advancing (skipIfHasAnyItemIds satisfied: item {})",
 				currentIndex + 1, skip.matchedItemId());
@@ -842,6 +851,33 @@ public class GuidanceSequencer
 			&& step.getLoopBackToStep() > 0
 			&& step.getLoopCount() > 0
 			&& loopIterationsCompleted + 1 < step.getLoopCount();
+	}
+
+	/**
+	 * Returns {@code true} when the active sequence is a looping / restock activity
+	 * — i.e. any step declares loop-fuel via {@code restockIfMissingAllItemIds}
+	 * (#719). Such sequences expect the player to keep gathering many of a recurring
+	 * consumable, so the gather step's {@code skipIfHasAnyItemIds} auto-advance is
+	 * suppressed to keep that step's highlight active past the first pickup (#707).
+	 *
+	 * <p>Reuses the existing restock-fuel signal rather than introducing a new
+	 * schema field: a sequence only carries that field when it is built around a
+	 * consume-many loop.
+	 */
+	private boolean isRecurringGatherSequence()
+	{
+		if (steps == null)
+		{
+			return false;
+		}
+		for (GuidanceStep step : steps)
+		{
+			if (step != null && !step.getRestockIfMissingAllItemIds().isEmpty())
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
