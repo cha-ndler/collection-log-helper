@@ -165,6 +165,35 @@ public class GuidanceSequencerRestockTest
 		assertFalse(awaitingRestock());
 	}
 
+	/**
+	 * #707: in a looping / restock activity the gather step highlights a recurring
+	 * item (the shade keys). Obtaining the first key must NOT auto-advance off that
+	 * step via {@code skipIfHasAnyItemIds}, so the in-game highlight persists while
+	 * the player keeps collecting. The gather step stays active (its highlight target
+	 * unchanged) until the player advances manually or the loop re-enters it.
+	 */
+	@Test
+	public void recurringGatherStepKeepsHighlightAfterFirstPickup() throws Exception
+	{
+		AtomicReference<GuidanceStep> lastStep = new AtomicReference<>();
+		sequencer.setPlayerLocation(new WorldPoint(0, 0, 0));
+		sequencer.startSequence(makeSource(gatherLoopSteps()), lastStep::set, () -> { });
+
+		// Precondition: parked on the gather step (index 0) highlighting the keys.
+		assertEquals(0, sequencer.getCurrentIndex(), "precondition: on the gather step");
+		assertEquals(Collections.singletonList(KEY), lastStep.get().getGroundItemIds(),
+			"precondition: gather step highlights the recurring key");
+
+		// Player picks up ONE key — skipIfHasAnyItemIds would normally auto-advance.
+		when(inventoryState.hasItem(KEY)).thenReturn(true);
+		sequencer.onInventoryChanged();
+
+		assertEquals(0, sequencer.getCurrentIndex(),
+			"recurring gather step must stay active so its highlight persists past the first pickup");
+		assertEquals(Collections.singletonList(KEY), lastStep.get().getGroundItemIds(),
+			"highlight target should remain the recurring key");
+	}
+
 	// ---- Scenario helpers ----
 
 	private void startAtLoopStep(AtomicReference<GuidanceStep> lastStep)
@@ -179,6 +208,62 @@ public class GuidanceSequencerRestockTest
 			sequencer.advanceStep();
 		}
 		assertEquals(LOOP_STEP_INDEX, sequencer.getCurrentIndex(), "precondition: parked on the loop step");
+	}
+
+	/**
+	 * Minimal looping gather sequence (#707): a gather step that highlights the
+	 * recurring key on the ground and declares {@code skipIfHasAnyItemIds}, followed
+	 * by a MANUAL loop step carrying the restock fuel (which marks the whole sequence
+	 * as a looping / restock activity).
+	 */
+	private List<GuidanceStep> gatherLoopSteps()
+	{
+		return Arrays.asList(
+			gatherStep("Pick up your shade key", Collections.singletonList(KEY)),
+			step("Open chests matching your shade keys", null,
+				CompletionCondition.MANUAL, 0, 1, 50, Collections.singletonList(KEY)));
+	}
+
+	/**
+	 * Builds a gather step that highlights {@code keyIds} on the ground and skips
+	 * itself once the player holds any of them. Used to model #707's recurring
+	 * pickup step.
+	 */
+	private GuidanceStep gatherStep(String description, List<Integer> keyIds)
+	{
+		return new GuidanceStep(
+			description,
+			null,                  // perItemStepDescription
+			0, 0, 0,               // worldX, worldY, worldPlane
+			0, null, null, null,   // npcId, perItemNpcId, interactAction, dialogOptions
+			null, null,            // travelTip, requiredItemIds
+			null,                  // perItemRequiredItemIds
+			null,                  // recommendedItemIds
+			null,                  // perItemRecommendedItemIds
+			CompletionCondition.MANUAL,
+			0, 0, 0, 0,            // completionItemId, completionItemCount, completionDistance, completionNpcId
+			null,                  // completionNpcIds
+			null,                  // worldMessage
+			0, null, null,         // objectId, objectIds, objectInteractAction
+			null, keyIds,          // highlightItemIds, groundItemIds
+			null,                  // completionChatPattern
+			0, 0,                  // completionVarbitId, completionVarbitValue
+			false,                 // useItemOnObject
+			0,                     // objectMaxDistance
+			null,                  // objectFilterTiles
+			null,                  // highlightWidgetIds
+			0, 0,                  // loopBackToStep, loopCount
+			keyIds,                // skipIfHasAnyItemIds
+			null,                  // dynamicItemObjectTiers
+			null,                  // completionZone
+			null,                  // conditionalAlternatives
+			null,                  // section
+			null,                  // waypoints
+			null,                  // dynamicTargetEvaluator
+			null,                  // conditionTree
+			null,                  // perItemStepPriority
+			null,                  // activityObtainableItemIds
+			null);                 // restockIfMissingAllItemIds
 	}
 
 	private List<GuidanceStep> shadesLikeSteps()
