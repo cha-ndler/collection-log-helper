@@ -18499,10 +18499,7 @@
         "completionCondition": "MANUAL",
         "section": "Fish",
         "recommendedItemIds": [
-          22846,
-          22844,
-          22842,
-          1733
+          946
         ],
         "loopBackToStep": 3,
         "loopCount": 0
@@ -30027,7 +30024,9 @@
         "section": "Fish",
         "recommendedItemIds": [
           311,
-          12637
+          21028,
+          21031,
+          23762
         ],
         "loopBackToStep": 3,
         "loopCount": 0
