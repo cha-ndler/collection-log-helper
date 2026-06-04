@@ -3324,8 +3324,14 @@
         "worldX": 3728,
         "worldY": 3302,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [
+          3700,
+          3290,
+          3770,
+          3360,
+          0
+        ],
         "conditionalAlternatives": [
           {
             "requirements": {
@@ -3518,8 +3524,14 @@
         "worldX": 3728,
         "worldY": 3302,
         "worldPlane": 0,
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [
+          3700,
+          3290,
+          3770,
+          3360,
+          0
+        ],
         "conditionalAlternatives": [
           {
             "requirements": {
