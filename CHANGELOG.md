@@ -75,6 +75,15 @@
 
 ### Fixed
 
+- **Nightmare / Phosani's Nightmare travel step now auto-advances on
+  teleport and shortcut entry to Slepe** — step 1 used an
+  `ARRIVE_AT_TILE` completion with a 20-tile radius anchored at the Slepe
+  church stairs (3728,3302). A Drakan's medallion teleport lands near
+  (3730,3340), about 38 tiles north, so the radius never registered and
+  the whole guidance chain froze on entry. Both sources now use an
+  `ARRIVE_AT_ZONE` over Slepe town (`[3700,3290,3770,3360,0]`) that
+  catches teleport, shortcut, and walk-in arrival; the overlay still
+  points at the stairs (PR [#731](../../pull/731)).
 - **Login no longer hangs at "Connecting to server"** — quest-progress
   tracking called `Quest.getState` (which runs the `QUEST_STATUS_GET`
   clientscript) directly inside `onVarbitChanged`. During login a
