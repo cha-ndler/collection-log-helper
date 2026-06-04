@@ -9,7 +9,44 @@
 > - `[!]` — Regression / failed (file a new issue and cross-link)
 > - `[?]` — Inconclusive (couldn't reproduce / state-dependent)
 
-> **Last updated**: 2026-05-25 (session: in-game validation + bug-fix — login crash #677, guidance panel flash #682)
+> **Last updated**: 2026-05-27 (session: Wave 1 regression + #699-#727 UX-wave pass, HEAD 48134711)
+
+---
+
+## Validation pass — Wave 1 (smoke + hub regressions + #699-#727 UX) — 2026-05-27 *(HEAD 48134711)*
+
+Operator-driven pass after the #699-#727 panel/guidance UX wave merged with no validation records. Earlier hub blockers (#485/#483/#486/#487/#488/#611) are all CLOSED, clearing the 2026-05-16 pause. Operator went AFK in Castle Wars partway through, so travel/active-play rows were deferred; stationary panel/overlay/debug-overlay rows were completed (verified by screenshot + log).
+
+### Summary
+- PASS: 9  ·  FAIL: 1  ·  DEFERRED (needs active play): 7
+
+| # | Status | Note |
+|---|---|---|
+| Smoke 1 — client loads, no stack traces | `[x]` | Booted 08:00:23 `Collection Log Helper started`; no CLH exception/AssertionError in login storm. Only ERROR is `shortestpath.transport` (different plugin — noise). |
+| Smoke 2 — login no hang (#677) | `[x]` | Reached game world, zero `scripts are not reentrant`. |
+| Smoke 3 — 6 panel modes render | `[x]` | Efficient/Category/Search/Pet Hunt/Statistics/Dry Streaks all clean. |
+| Smoke 4 — guidance activates panel+overlay | `[x]` | Non-Mort'ton source: button→Stop, step strip + overlay both render, state in sync. |
+| Reg 1 (#485 class) — ARRIVE_AT_TILE auto-advance | `[!]` | **FAIL — Phosani's Nightmare.** Teleported to Slepe via Drakan's medallion + entered via shortcut; step 1/4 (`ARRIVE_AT_TILE` (3728,3302) r=20) never fired, froze whole chain. Object 32637 stairs verified at (3727,3300) → stored coord correct to 2 tiles → **predicate code is fine; it's a data/design gap**: tile-radius arrival can't catch teleport/shortcut entry that lands >20 tiles away. #727 exonerated (only jumps forward, logs "State-derived start" — never logged). Manual Skip advances fine → **isolated, NOT systemic** (unlike the original #485). Logged here; issue draft ready, not yet filed (operator: "just log it"). |
+| Reg 3 (#486/#487/#611) — C7 debug overlay | `[x]` | C1 teleport inventory, C2 equipped, C3 diary-per-region, C4 cape perks, C5 sub-milestones all populated; quest count reads correct (#487 fixed). |
+| #699 — panel header | `[x]` | Count overlaid on green progress bar (`820/17xx (48.2%)`), `● Synced` indicator, **no manual sync buttons** (auto-sync-on-login). |
+| #457/#401 — requirements header | `[x]` | Green `Priest in Peril — COMPLETED` (Phosani's) + `Shades of Mort'ton — COMPLETED` (Shades), above the step strip. |
+| #458/#402 — collapsible step sections | `[x]` | Shades: `▼ Bank prep (1 step)` auto-expanded (active), `▶ Skilling (1 step)` / `▶ Loot (3 steps)` collapsed. |
+| #705 — color-coded item text list | `[x]` | Shades step 1 "Items needed": Tinderbox gold (in bank), Phrin remains + Oak pyre logs red (missing). Palette matches constants `HELD (40,180,40)` / `IN_BANK (200,180,40)` / `MISSING (200,40,40)`. Renders as text list, not chips. |
+| #443 — UTF-8 overlay charset | `[x]` | (incidental) Phosani's overlay step text renders `->` and apostrophes with no mojibake. |
+| Reg 2 (#483) — Hard Clue panel/advance | `[-]` | DEFERRED — needs a hard clue + travel. |
+| #472 — recommended chips | `[-]` | DEFERRED — no Recommended section on Shades step 1; needs a step that carries `recommendedItemIds`. |
+| #713/#718 — auto-stop on clog obtain (not mid-loop) | `[-]` | DEFERRED — needs obtaining a target item. |
+| #721 — restock reset on depleted loop | `[-]` | DEFERRED — needs Shades catacomb key/remains depletion. |
+| #714/#715/#720 — object glow + book marker | `[-]` | DEFERRED — needs target NPC/object in render distance. |
+| #726 — overlay/panel item-availability sync | `[-]` | DEFERRED — needs a target step with items + target in view. |
+| #727 — start-step forward jump | `[~]` | Negative-tested only: activating from Castle Wars (no confirmable area) correctly did NOT false-jump. Positive jump (activate mid-activity in a confirmable area) still to exercise. |
+
+### Reg 1 reproducer (issue draft — not yet filed)
+1. Have Drakan's medallion (Sins of the Father complete). Stand anywhere far from Slepe.
+2. Guide Me on Phosani's Nightmare → opens step 1/4 (`Walk to Slepe`).
+3. Drakan's medallion → Slepe (lands ~3730,3336) and/or enter the sanctuary via the shortcut.
+4. Observe: step stays 1/4; never auto-advances; whole chain frozen. Manual Skip works.
+- Root cause: step 1 `ARRIVE_AT_TILE` at the church stairs (3728,3302) r=20; medallion/shortcut entry lands >20 tiles away, so arrival never registers. Fix on the data side (ARRIVE_AT_ZONE over Slepe, or add the shortcut/landing as a completion waypoint). Audit other teleport-entry travel steps for the same gap.
 
 ---
 
