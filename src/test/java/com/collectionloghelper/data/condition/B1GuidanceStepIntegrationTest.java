@@ -202,7 +202,19 @@ public class B1GuidanceStepIntegrationTest
 
 	private static void seedInventory(PlayerInventoryState inv, Map<Integer, Integer> idsAndCounts) throws Exception
 	{
-		Class<?> snapshotClass = Class.forName("com.collectionloghelper.data.PlayerInventoryState$InventorySnapshot");
+		Class<?> snapshotClass = null;
+		for (Class<?> declared : PlayerInventoryState.class.getDeclaredClasses())
+		{
+			if ("InventorySnapshot".equals(declared.getSimpleName()))
+			{
+				snapshotClass = declared;
+				break;
+			}
+		}
+		if (snapshotClass == null)
+		{
+			throw new IllegalStateException("InventorySnapshot nested class not found");
+		}
 		Constructor<?> sctor = snapshotClass.getDeclaredConstructor(Set.class, Map.class);
 		sctor.setAccessible(true);
 		Set<Integer> ids = new HashSet<>(idsAndCounts.keySet());
