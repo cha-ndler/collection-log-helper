@@ -46,15 +46,18 @@ Expected result: empty list.  If any P1 bugs are open, resolve them before pushi
 
 `docs/plugin-hub-review.md` must have no un-triaged **Red** items.
 
-Current open reds (as of 2026-05-21):
+**Latest re-run: 2026-06-04, HEAD `618313c8` — `plugin_hub_validate` reports 0 critical / 0 high.** All remaining findings are MEDIUM and are either resolved or triaged below.
 
-| Item | Mitigation |
-|------|-----------|
-| `runelite-plugin` Gradle plugin missing | Verified false positive: `runelite/example-plugin` canonical template does not apply this plugin either. The `plugin_hub_validate` finding is a tool issue, not a Hub requirement. |
-| Files > 800 LOC | Resolved across the #503 roast remediation campaign and downstream cleanups. Current measurements: `CollectionLogHelperPlugin.java` 488, `CollectionLogHelperPanel.java` 605, `GuidanceOverlayCoordinator.java` 557, `GuidanceSequencer.java` 623, `EfficiencyCalculator.java` 777 — all five under the 800 floor. |
+| Item | Severity | Mitigation |
+|------|----------|-----------|
+| `runelite-plugin` Gradle plugin missing | medium | Verified false positive: `runelite/example-plugin` canonical template does not apply this plugin either. The `plugin_hub_validate` finding is a tool issue, not a Hub requirement. |
+| Files > 800 LOC | (resolved) | Resolved across the #503 roast remediation campaign and downstream cleanups. Current measurements: `CollectionLogHelperPlugin.java` 488, `CollectionLogHelperPanel.java` 605, `GuidanceOverlayCoordinator.java` 557, `GuidanceSequencer.java` 623, `EfficiencyCalculator.java` 777 — all five under the 800 floor. |
+| `forbidden-api:Class.forName` x2 (test files) | (resolved) | Two CRITICAL findings appeared after the 2026-05-22 B1 batch added `B1GuidanceStepIntegrationTest` / `ConditionNodeEvaluatorTest`, whose `seedInventory` helpers used `Class.forName("...$InventorySnapshot")` to load a private nested class. **Resolved by PR #733** - replaced with `PlayerInventoryState.class.getDeclaredClasses()` simple-name lookup (not a forbidden API); `./gradlew test` stays green (1752). Re-run confirms both criticals gone. |
+| `overlay:alloc-in-render:Color` x6 | medium | Verified false positive. The flagged `new Color(...)` lines (`DialogHighlightOverlay` 107/109/111, `GroundItemHighlightOverlay` 156, `WidgetHighlightOverlay` 105, `WorldMapRouteOverlay` 134) are each guarded by an `if (!color.equals(cachedColor))` config-change check, so they allocate only when the user changes the overlay colour in config - **not per frame**. The allocation is lexically inside `render()` (so the static rule flags it) but is a memoised recompute that runs ~once. The colour is config-driven and recomputes on change, so it cannot be a `private final` constant; the guarded-cache pattern is already the optimal idiom. No change warranted. |
 
 Re-run `mcp__plugin_runelite-dev-toolkit_runelite-dev__plugin_hub_validate` on the tag commit to
-confirm no new findings before opening the PR.
+confirm no new findings before opening the PR. As of 2026-06-04 the gate is green: 0 critical / 0 high,
+all mediums triaged above.
 
 ---
 
