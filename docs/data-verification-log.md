@@ -32,7 +32,7 @@
 | 3 | Amoxliatl | BOSSES | - | - | 1 (2026-06-07) |
 | 4 | Araxxor | BOSSES | - | - | 4 (2026-06-07) |
 | 5 | Barrows | BOSSES | 2026-06-07 | - | - |
-| 6 | Brutus | BOSSES | - | - | - |
+| 6 | Brutus | BOSSES | - | - | 1 (2026-06-07) |
 | 7 | Bryophyta | BOSSES | - | - | - |
 | 8 | Callisto | BOSSES | - | - | - |
 | 9 | Cerberus | BOSSES | - | - | - |
@@ -329,4 +329,11 @@ when a Findings block is added for that source._
 - ours: see list above
 - authoritative: wikiPage should match the item name (Araxyte_venom_sack, Jar_of_venom, Araxyte_head, Noxious_blade, Noxious_pommel)
 - action: fix the 5 shuffled wikiPage values; "view on wiki" links currently open the wrong page. needs human call.
+- status: open
+
+### Brutus - guidanceSteps[0].requiredItemIds - low
+- check: required-vs-recommended sanity check. Bank step hard-gates on [12695 Super combat potion(4), 385 Shark, 2434 Prayer potion(4), 4151 Abyssal whip, 1704 Amulet of glory] - gear + consumables, none access-gating. This directly contradicts the same step's own text ("any tier above mithril works ... cheap gear is fine", "do not waste BiS supplies"). The only real gate (The Ides of Milk quest) is correctly in `requirements`. 4151/385/2434 also recur in step 3's recommendedItemIds.
+- ours: requiredItemIds = `[12695, 385, 2434, 4151, 1704]`
+- authoritative: these are recommendations (and the step text says cheap gear suffices); not requirements
+- action: empty/trim requiredItemIds to genuine gates (none beyond the quest); move gear/consumables to recommendedItemIds. needs human call.
 - status: open
