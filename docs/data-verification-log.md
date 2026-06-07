@@ -28,7 +28,7 @@
 | # | Source | Category | Data verified (V1) | In-game (V2) | Open findings |
 |---|--------|----------|--------------------|--------------|---------------|
 | 1 | Abyssal Sire | BOSSES | - | - | 3 (2026-06-07) |
-| 2 | Alchemical Hydra | BOSSES | - | - | - |
+| 2 | Alchemical Hydra | BOSSES | - | - | 1 (2026-06-07) |
 | 3 | Amoxliatl | BOSSES | - | - | - |
 | 4 | Araxxor | BOSSES | - | - | - |
 | 5 | Barrows | BOSSES | - | - | - |
@@ -287,4 +287,11 @@ when a Findings block is added for that source._
 - ours: description "Enter one of the Sire chambers through an Eye" + `interactAction = "Peek"`
 - authoritative: Peek on the Eye = player-count check only; chamber entry is a separate walk-in
 - action: reword step to separate "peek to check the chamber is empty" from "walk into the chamber", or drop the Peek framing. needs human call.
+- status: open
+
+### Alchemical Hydra - waypoints[0] "Fairy ring CIR" coords - high
+- check: coordinate_helper. The waypoint named "Fairy ring CIR" is placed at the Mount Karuulm summit/dungeon area, not at the CIR fairy ring. OSRS Wiki `Map:Fairy rings` gives CIR at (1302, 3762); our coord (1310, 3810) coincides with the Mount Karuulm map centre (1311, 3807 per the Mount Karuulm wiki Map), i.e. ~48 tiles north of the actual ring at the volcano base. (Per the convention in source #1, a "Fairy ring X" waypoint should be the ring's arrival tile, as Abyssal Sire's DIP step is.)
+- ours: `worldX=1310, worldY=3810` (plane 0)
+- authoritative: CIR fairy ring = `1302, 3762` (OSRS Wiki Map:Fairy rings)
+- action: set the "Fairy ring CIR" waypoint to 1302,3762. Note: fairy-ring travel works by menu code regardless, so impact is a misplaced map marker, not broken travel - but coords are graded high per this log's rubric. needs human call.
 - status: open
