@@ -29,7 +29,7 @@
 |---|--------|----------|--------------------|--------------|---------------|
 | 1 | Abyssal Sire | BOSSES | - | - | 3 (2026-06-07) |
 | 2 | Alchemical Hydra | BOSSES | - | - | 1 (2026-06-07) |
-| 3 | Amoxliatl | BOSSES | - | - | - |
+| 3 | Amoxliatl | BOSSES | - | - | 1 (2026-06-07) |
 | 4 | Araxxor | BOSSES | - | - | - |
 | 5 | Barrows | BOSSES | - | - | - |
 | 6 | Brutus | BOSSES | - | - | - |
@@ -294,4 +294,11 @@ when a Findings block is added for that source._
 - ours: `worldX=1310, worldY=3810` (plane 0)
 - authoritative: CIR fairy ring = `1302, 3762` (OSRS Wiki Map:Fairy rings)
 - action: set the "Fairy ring CIR" waypoint to 1302,3762. Note: fairy-ring travel works by menu code regardless, so impact is a misplaced map marker, not broken travel - but coords are graded high per this log's rubric. needs human call.
+- status: open
+
+### Amoxliatl - guidanceSteps[0].requiredItemIds - low
+- check: required-vs-recommended sanity check. `requiredItemIds` is documented as "items that must be in inventory before this step can proceed" (a hard gate). The Bank step gates on [29271 Basic quetzal whistle, 2434 Prayer potion(4), 385 Shark]. Prayer potion(4) and Shark are generic consumables, not access-gating items - and both ids are *also* listed in step 3's `recommendedItemIds` (22325,24444,2434,385), so the generator already treats them as recommendations. The real access gates (The Heart of Darkness quest, 48 Slayer) are correctly in `requirements`. Quetzal whistle is borderline (travel convenience; lodestone + run south is the documented alternative).
+- ours: requiredItemIds = `[29271, 2434, 385]` (Quetzal whistle, Prayer potion(4), Shark)
+- authoritative: consumables (2434, 385) are recommendations, not requirements; only access-gating items belong in requiredItemIds
+- action: move 2434 + 385 out of requiredItemIds (they already appear in recommendedItemIds); reconsider whether the quetzal whistle should be required given the lodestone alternative. needs human call.
 - status: open
