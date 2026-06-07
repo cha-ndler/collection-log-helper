@@ -50,7 +50,7 @@
 | 21 | Duke Sucellus | BOSSES | - | - | - |
 | 22 | Duke Sucellus (Awakened) | BOSSES | - | - | - |
 | 23 | General Graardor | BOSSES | - | - | - |
-| 24 | Giant Mole | BOSSES | - | - | - |
+| 24 | Giant Mole | BOSSES | - | - | 1 (high: missing clog item) |
 | 25 | Grotesque Guardians | BOSSES | - | - | - |
 | 26 | Hespori | BOSSES | - | - | - |
 | 27 | K'ril Tsutsaroth | BOSSES | - | - | - |
@@ -112,7 +112,7 @@
 | 83 | Gargoyle | SLAYER | - | - | - |
 | 84 | Gryphon | SLAYER | - | - | - |
 | 85 | Hydra | SLAYER | - | - | - |
-| 86 | Infernal Mage | SLAYER | - | - | - |
+| 86 | Infernal Mage | SLAYER | - | - | 1 (high: Mystic (dark) set - placement TBD) |
 | 87 | Jelly | SLAYER | - | - | - |
 | 88 | Kurask | SLAYER | - | - | - |
 | 89 | Lava Strykewyrm | SLAYER | - | - | - |
@@ -194,7 +194,7 @@
 | 165 | Hunter Guild | OTHER | - | - | - |
 | 166 | Large Salvage | OTHER | - | - | - |
 | 167 | Larran's Big Chest | OTHER | - | - | - |
-| 168 | Lost Schematics | OTHER | - | - | - |
+| 168 | Lost Schematics | OTHER | - | - | 1 (high: missing clog item) |
 | 169 | Martial Salvage | OTHER | - | - | - |
 | 170 | Miscellaneous | OTHER | - | - | - |
 | 171 | Mithril Dragon | OTHER | - | - | - |
@@ -268,4 +268,81 @@ when a Findings block is added for that source._
 - status: open
 -->
 
-_No findings yet._
+### Giant Mole - clog items (completeness) - high
+- check: TempleOSRS canonical clog sweep (2026-06-07), `temple_lookup` clog dimension
+- ours: Giant Mole lists 3 clog items - Baby mole (12646), Mole claw (7416), Mole skin (7418)
+- authoritative: TempleOSRS `giant_mole` lists 4 -> `[12646, 7418, 7416, 33382]`. Receipt
+  (items.php): `33382 -> "Immaculate mole skin"`. Item is absent from our entire dataset.
+- action: add Immaculate mole skin (id 33382) to the Giant Mole source. Giant Mole is its
+  only obtainable source, so this is a true coverage hole (efficiency calc can never route
+  the player here for it).
+- status: open
+
+### Lost Schematics - clog items (completeness) - high
+- check: TempleOSRS canonical clog sweep (2026-06-07), `temple_lookup` clog dimension
+- ours: Lost Schematics lists 11 schematics (32401-32410, 33143)
+- authoritative: TempleOSRS `lost_schematics` lists 12; we are missing one. Receipt
+  (items.php): `33423 -> "Bosun's workbench schematic"`; categories.php `lost_schematics`
+  contains 33423. Item is absent from our entire dataset.
+- action: add Bosun's workbench schematic (id 33423) to the Lost Schematics source.
+- status: open
+
+### Slayer (Mystic (dark) set) - clog items (completeness) - high
+- check: TempleOSRS canonical clog sweep (2026-06-07), `temple_lookup` clog dimension
+- ours: we list 4 of the 5 Mystic (dark) pieces, split across slayer sources -
+  Mystic hat (dark) 4099 + Mystic boots (dark) 4107 (Infernal Mage),
+  Mystic robe bottom (dark) 4103 (Aberrant Spectre), Mystic robe top (dark) 4101 (Gargoyle).
+  Mystic gloves (dark) is on no source.
+- authoritative: TempleOSRS clog item `4105 -> "Mystic gloves (dark)"` (items.php); present in
+  the `slayer` category set. Item is absent from our entire dataset - the lone missing piece
+  of a set we otherwise carry.
+- action: add Mystic gloves (dark) (id 4105). Placement is a judgment call (which slayer
+  monster's drop table) - the per-source loop should decide; the existing set pieces sit on
+  Infernal Mage / Aberrant Spectre / Gargoyle.
+- status: open
+
+## TempleOSRS canonical clog sweep - 2026-06-07
+
+One bulk sweep over all 225 sources (not a per-source loop). `temple_lookup` wraps two
+TempleOSRS endpoints; this sweep pulled both in full (the MCP wrapper truncates to 8 KB, so
+the canonical endpoints were fetched untruncated with the same User-Agent):
+- **canonical clog item ids** - `collection-log/items.php` (1701 items, id -> name)
+- **full source -> item map** - `collection-log/categories.php` (122 source slugs)
+
+Each of our 225 sources was matched to its TempleOSRS clog source (with aliases for renames
+and for Temple's coarser buckets - combined Dagannoth Kings, wilderness trios, awakened DT2
+variants folded into base, raid challenge/hard/invocation tiers folded into base, single
+`slayer` aggregate). Two diffs were run:
+
+| Check | Rule | Result |
+|-------|------|--------|
+| **blocker** | our item id != canonical clog id (matched by name) | **0** - every one of our items uses the canonical clog id |
+| **high** | a clog item obtainable from a source but absent from our dataset | **3** (above) |
+
+- **Canonical id coverage:** every item across all 225 sources resolves to a valid canonical
+  clog id; 0 id mismatches, 0 unverifiable items. **No blockers.**
+- **Completeness coverage:** 1698 / 1701 canonical clog items are present in our data. The 3
+  missing are the high findings above.
+- **Multi-source caveat honored:** a clog item that drops from several sources and that we
+  list anywhere is treated as covered (multi-source = expected) and was not flagged. The
+  per-source "missing" noise (e.g. Dragon warhammer not under our `Miscellaneous` bucket but
+  correctly under Lizardman shaman) was therefore excluded - only items absent from the
+  entire dataset are flagged.
+
+**Scope / not auditable against Temple (50 of 225 sources):** TempleOSRS's clog taxonomy has
+no distinct source for these, so per-source attribution could not be cross-checked here
+(their *items* were still covered by the dataset-level id + completeness checks above). They
+are our plugin's finer-grained farming sources: all Salvage tiers (8), Boat Combat targets
+(6), Creature Creation variants (6), most granular Skilling sub-sources (Deep Sea Fishing,
+Thieving Seed Stalls, Black Chinchompas, Woodcutting Teak, Mining Gemstone, Fishing
+Swordfish, Runecrafting Fire, Farming Fruit Trees, Underwater Crabs, Cutting Squid,
+Prifddinas Rabbit, Pickpocketing Darkmeyer Vyre), plus Brimstone Chest, Larran's Big Chest,
+Zombie Pirate Locker, Sailing Misc, Pyramid Plunder, Stronghold of Security, Catacombs of
+Kourend, Wilderness God Wars Dungeon, Elven Crystal Chest, Mithril/Adamant/Rune Dragon,
+Ogress Shaman, Armoured Zombie, Prifddinas Elf, Fountain of Rune, Waterfiend, Port Tasks,
+Demonic gorillas, Superior Slayer Monster.
+
+> This sweep completed only the `temple_lookup` clog dimension of V1. It does **not** stamp
+> V1 for any source on its own - coords, cache-diff, drop rates (already verified accurate
+> per the sweep scope), and required-item checks remain. Drop rates were intentionally not
+> re-checked. The per-source loop is now judgment-only for the clog-item dimension.
