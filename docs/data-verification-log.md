@@ -36,7 +36,7 @@
 | 7 | Bryophyta | BOSSES | - | - | 1 (2026-06-07) |
 | 8 | Callisto | BOSSES | - | - | 1 (2026-06-07) |
 | 9 | Cerberus | BOSSES | 2026-06-07 | - | - |
-| 10 | Chaos Elemental | BOSSES | - | - | - |
+| 10 | Chaos Elemental | BOSSES | - | - | 3 (2026-06-07) |
 | 11 | Chaos Fanatic | BOSSES | - | - | - |
 | 12 | Commander Zilyana | BOSSES | - | - | - |
 | 13 | Corporeal Beast | BOSSES | - | - | - |
@@ -350,4 +350,25 @@ when a Findings block is added for that source._
 - ours: "run south-east" (x3 strings)
 - authoritative: from Chaos Temple (3234,3634) to Callisto's Den (~3291,3849) the direction is north / north-east
 - action: change "south-east" to "north-east" (or "north") in the three travel strings. needs human call. (Minor: item 27667 display name "Claws of Callisto" vs in-game/GE "Claws of callisto" - casing only, id correct, not logged as a separate finding.)
+- status: open
+
+### Chaos Elemental - guidanceSteps[0].requiredItemIds (incl. wrong Burning amulet variant) - high
+- check: cross_check_ids + required-vs-recommended. requiredItemIds = [21167, 11941 Looting bag, 1704 Amulet of glory, 385 Shark, 2434 Prayer potion(4)]. (a) 21167 is a DUPLICATE-variant id of "Burning amulet(5)" - the canonical Burning amulet(5) is 21166 (per the Burning amulet wiki infobox: ids 21166/21169/21171/21173/21175); osrsbox shows 21166/21167/21168 all as "Burning amulet(5)" so 21167/21168 are duplicates. A player holding the normal 21166 amulet would NOT satisfy an exact-id requirement on 21167. (b) None of these items access-gate Chaos Elemental (no quest/skill needed; deep Wilderness is open) - they are travel/QoL/consumables.
+- ours: requiredItemIds = `[21167, 11941, 1704, 385, 2434]`
+- authoritative: canonical Burning amulet(5) = 21166; and none of the list is a true requirement
+- action: if a burning amulet must be referenced use 21166 (or accept all charge ids 21166/21169/21171/21173/21175); move travel/consumables out of requiredItemIds. needs human call.
+- status: open
+
+### Chaos Elemental - travel direction (north-west vs north-east) - low
+- check: coordinate_helper. Step 2 says "Burning amulet -> Lava Maze, run north-west to Rogues' Castle" (description + travelTip). Burning amulet Lava Maze lands at (3028, 3842) (level 41 Wilderness, per Burning amulet wiki); Rogues' Castle / Chaos Elemental tile is (3261, 3927) = +233 EAST and +85 north -> north-east (mostly east), not north-west. "North-west" walks toward the Wilderness Agility / GDZ, away from the castle.
+- ours: "run north-west" (x2 strings)
+- authoritative: from Lava Maze (3028,3842) to Rogues' Castle (3261,3927) the direction is north-east / east
+- action: change "north-west" to "north-east" in the two travel strings. needs human call.
+- status: open
+
+### Chaos Elemental - guidanceSteps[2].recommendedItemIds (contradicts cheap-gear advice) - low
+- check: required-vs-recommended sanity check. recommendedItemIds = [4827 Comp ogre bow, 4151 Abyssal whip, 12924 Toxic blowpipe (empty), 385 Shark, 1704 Amulet of glory]. The step (and step 0) repeatedly stress "bring cheap gear only - the Chaos Elemental disarms and unequips items, so risking BiS is wasteful", yet the rec list pairs a deliberately-cheap Comp ogre bow with high-value Abyssal whip + Toxic blowpipe - internally contradictory guidance.
+- ours: recommendedItemIds = `[4827, 4151, 12924, 385, 1704]`
+- authoritative: recommendations should be consistent with the cheap-gear framing (cheap ranged + DDS spec per the prose), not BiS melee/blowpipe
+- action: reconcile the rec list with the cheap-gear advice (drop whip/blowpipe or soften the prose). needs human call.
 - status: open
