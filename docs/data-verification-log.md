@@ -37,7 +37,7 @@
 | 8 | Callisto | BOSSES | - | - | 1 (2026-06-07) |
 | 9 | Cerberus | BOSSES | 2026-06-07 | - | - |
 | 10 | Chaos Elemental | BOSSES | - | - | 3 (2026-06-07) |
-| 11 | Chaos Fanatic | BOSSES | - | - | - |
+| 11 | Chaos Fanatic | BOSSES | - | - | 1 (2026-06-07) |
 | 12 | Commander Zilyana | BOSSES | - | - | - |
 | 13 | Corporeal Beast | BOSSES | - | - | - |
 | 14 | Corrupted Gauntlet | BOSSES | - | - | - |
@@ -371,4 +371,11 @@ when a Findings block is added for that source._
 - ours: recommendedItemIds = `[4827, 4151, 12924, 385, 1704]`
 - authoritative: recommendations should be consistent with the cheap-gear framing (cheap ranged + DDS spec per the prose), not BiS melee/blowpipe
 - action: reconcile the rec list with the cheap-gear advice (drop whip/blowpipe or soften the prose). needs human call.
+- status: open
+
+### Chaos Fanatic - guidanceSteps[0].requiredItemIds (same Burning amulet variant bug) - high
+- check: cross_check_ids + required-vs-recommended. requiredItemIds = [21167, 11941 Looting bag, 1704 Amulet of glory, 385 Shark, 2434 Prayer potion(4)] - identical to Chaos Elemental. 21167 is a DUPLICATE-variant of "Burning amulet(5)" (canonical 21166; osrsbox shows 21166/21167/21168 all "Burning amulet(5)"), so an exact-id inventory check on 21167 won't match a player's normal 21166 amulet. None of the list access-gates Chaos Fanatic (level 42 Wilderness, no quest/skill).
+- ours: requiredItemIds = `[21167, 11941, 1704, 385, 2434]`
+- authoritative: canonical Burning amulet(5) = 21166; none of the list is a true requirement
+- action: use 21166 (or all charge ids) if a burning amulet is referenced; move travel/consumables to recommendedItemIds. Same fix as Chaos Elemental. needs human call.
 - status: open
