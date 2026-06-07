@@ -34,7 +34,7 @@
 | 5 | Barrows | BOSSES | 2026-06-07 | - | - |
 | 6 | Brutus | BOSSES | - | - | 1 (2026-06-07) |
 | 7 | Bryophyta | BOSSES | - | - | 1 (2026-06-07) |
-| 8 | Callisto | BOSSES | - | - | - |
+| 8 | Callisto | BOSSES | - | - | 1 (2026-06-07) |
 | 9 | Cerberus | BOSSES | - | - | - |
 | 10 | Chaos Elemental | BOSSES | - | - | - |
 | 11 | Chaos Fanatic | BOSSES | - | - | - |
@@ -343,4 +343,11 @@ when a Findings block is added for that source._
 - ours: step 0 requiredItemIds = `[22374, 12695, 6685, 2434, 1704]`
 - authoritative: only the Mossy key (22374) is access-gating; the rest are recommendations
 - action: keep 22374, move 12695/6685/2434/1704 to recommendedItemIds. needs human call.
+- status: open
+
+### Callisto - travel direction (south-east vs north-east) - low
+- check: coordinate_helper. Travel text says "Burning amulet -> Chaos Temple, then run south-east into Callisto's Den" (top-level travelTip + guidanceSteps[0].description + guidanceSteps[0].travelTip). Burning amulet Chaos Temple lands at (3234, 3634) (level 15 Wilderness, per Burning amulet wiki); Callisto's Den / boss tile is (3291, 3849). That is +57 east and +215 NORTH -> the run is north-east (mostly north), not south-east. Following "south-east" walks the player away from the Den (and toward lower Wilderness).
+- ours: "run south-east" (x3 strings)
+- authoritative: from Chaos Temple (3234,3634) to Callisto's Den (~3291,3849) the direction is north / north-east
+- action: change "south-east" to "north-east" (or "north") in the three travel strings. needs human call. (Minor: item 27667 display name "Claws of Callisto" vs in-game/GE "Claws of callisto" - casing only, id correct, not logged as a separate finding.)
 - status: open
