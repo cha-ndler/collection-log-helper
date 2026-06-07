@@ -31,7 +31,7 @@
 | 2 | Alchemical Hydra | BOSSES | - | - | 1 (2026-06-07) |
 | 3 | Amoxliatl | BOSSES | - | - | 1 (2026-06-07) |
 | 4 | Araxxor | BOSSES | - | - | 4 (2026-06-07) |
-| 5 | Barrows | BOSSES | - | - | - |
+| 5 | Barrows | BOSSES | 2026-06-07 | - | - |
 | 6 | Brutus | BOSSES | - | - | - |
 | 7 | Bryophyta | BOSSES | - | - | - |
 | 8 | Callisto | BOSSES | - | - | - |
