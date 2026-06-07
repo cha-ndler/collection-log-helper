@@ -33,7 +33,7 @@
 | 4 | Araxxor | BOSSES | - | - | 4 (2026-06-07) |
 | 5 | Barrows | BOSSES | 2026-06-07 | - | - |
 | 6 | Brutus | BOSSES | - | - | 1 (2026-06-07) |
-| 7 | Bryophyta | BOSSES | - | - | - |
+| 7 | Bryophyta | BOSSES | - | - | 1 (2026-06-07) |
 | 8 | Callisto | BOSSES | - | - | - |
 | 9 | Cerberus | BOSSES | - | - | - |
 | 10 | Chaos Elemental | BOSSES | - | - | - |
@@ -336,4 +336,11 @@ when a Findings block is added for that source._
 - ours: requiredItemIds = `[12695, 385, 2434, 4151, 1704]`
 - authoritative: these are recommendations (and the step text says cheap gear suffices); not requirements
 - action: empty/trim requiredItemIds to genuine gates (none beyond the quest); move gear/consumables to recommendedItemIds. needs human call.
+- status: open
+
+### Bryophyta - guidanceSteps[0].requiredItemIds - low
+- check: required-vs-recommended sanity check. The Bank step gates on [22374 Mossy key, 12695 Super combat potion(4), 6685 Saradomin brew(4), 2434 Prayer potion(4), 1704 Amulet of glory]. The Mossy key IS a correct access gate (and step 3 correctly gates on [22374] alone), but 12695/6685/2434/1704 are gear+consumables, not requirements (6685/2434 also appear in step 4 recommendedItemIds).
+- ours: step 0 requiredItemIds = `[22374, 12695, 6685, 2434, 1704]`
+- authoritative: only the Mossy key (22374) is access-gating; the rest are recommendations
+- action: keep 22374, move 12695/6685/2434/1704 to recommendedItemIds. needs human call.
 - status: open
