@@ -30,7 +30,7 @@
 | 1 | Abyssal Sire | BOSSES | - | - | 3 (2026-06-07) |
 | 2 | Alchemical Hydra | BOSSES | - | - | 1 (2026-06-07) |
 | 3 | Amoxliatl | BOSSES | - | - | 1 (2026-06-07) |
-| 4 | Araxxor | BOSSES | - | - | - |
+| 4 | Araxxor | BOSSES | - | - | 4 (2026-06-07) |
 | 5 | Barrows | BOSSES | - | - | - |
 | 6 | Brutus | BOSSES | - | - | - |
 | 7 | Bryophyta | BOSSES | - | - | - |
@@ -301,4 +301,32 @@ when a Findings block is added for that source._
 - ours: requiredItemIds = `[29271, 2434, 385]` (Quetzal whistle, Prayer potion(4), Shark)
 - authoritative: consumables (2434, 385) are recommendations, not requirements; only access-gating items belong in requiredItemIds
 - action: move 2434 + 385 out of requiredItemIds (they already appear in recommendedItemIds); reconsider whether the quetzal whistle should be required given the lodestone alternative. needs human call.
+- status: open
+
+### Araxxor - requirements (missing Slayer + wrong quest) - high
+- check: cache_diff_check / compare_source vs OSRS wiki. Wiki: "Araxxor ... requiring level 92 Slayer and access to Morytania to kill." Our `requirements` has NO skills entry (Slayer 92 omitted entirely) and lists quest SINS_OF_THE_FATHER. Morytania access is Priest in Peril, not Sins of the Father; SotF only provides Drakan's medallion travel, and the cave is reachable unquested via fairy ring (the data's own step text says "fastest unquested route"). The Cave (Morytania Spider Cave) wiki page lists `quest = No` for entry.
+- ours: `requirements = {quests: [SINS_OF_THE_FATHER]}` (no skills)
+- authoritative: 92 Slayer (hard requirement) + Morytania access (Priest in Peril). Sins of the Father is NOT required.
+- action: add SLAYER 92 to requirements; replace/justify the quest gate (Morytania access via Priest in Peril) and drop SINS_OF_THE_FATHER as a hard requirement. needs human call.
+- status: open
+
+### Araxxor - travel fairy ring code (CLS vs ALQ) - high
+- check: coordinate_helper. Travel guidance routes via "fairy ring CLS" in three places (top-level travelTip, guidanceSteps[1].description, guidanceSteps[1].travelTip). Map:Fairy rings puts CLS at (2682, 3081) - south-west, ~1000 tiles from the NE-Morytania spider cave (entrance ~3657,3407). The Morytania Spider Cave wiki gives the actual quickest ring as ALQ ("fairy ring code ALQ, then running south past the small bridge").
+- ours: "fairy ring CLS" (travelTip + step 2 description + step 2 travelTip)
+- authoritative: fairy ring ALQ (per Morytania Spider Cave wiki)
+- action: replace CLS with ALQ in all three travel strings. needs human call.
+- status: open
+
+### Araxxor - guidanceSteps[0].requiredItemIds - low
+- check: required-vs-recommended sanity check. Bank step hard-gates on [6685 Saradomin brew(4), 3024 Super restore(4), 2434 Prayer potion(4)] - all generic consumables, not access gates; 6685/3024/2434 also appear in step 3's recommendedItemIds.
+- ours: requiredItemIds = `[6685, 3024, 2434]`
+- authoritative: these are recommendations, not requirements
+- action: move them out of requiredItemIds (already in recommendedItemIds). needs human call.
+- status: open
+
+### Araxxor - items[].wikiPage (shuffled) - low
+- check: cross_check_ids surfaced name<->wikiPage mismatches. itemIds and names are all correct (verified vs wiki), but 5 wikiPage links point to the wrong item's page: 29784 Araxyte venom sack -> "Araxyte_fang"; 29786 Jar of venom -> "Araxyte_head"; 29788 Araxyte head -> "Noxious_blade"; 29792 Noxious blade -> "Noxious_pommel"; 29794 Noxious pommel -> "Rax". (29790/29781/29782/29799/29836 wikiPage values are correct.)
+- ours: see list above
+- authoritative: wikiPage should match the item name (Araxyte_venom_sack, Jar_of_venom, Araxyte_head, Noxious_blade, Noxious_pommel)
+- action: fix the 5 shuffled wikiPage values; "view on wiki" links currently open the wrong page. needs human call.
 - status: open
