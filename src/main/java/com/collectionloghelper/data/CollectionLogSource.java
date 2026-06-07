@@ -26,10 +26,15 @@ package com.collectionloghelper.data;
 
 import java.util.List;
 import javax.annotation.Nullable;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Value;
 import net.runelite.api.coords.WorldPoint;
 
 @Value
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@Builder
 public class CollectionLogSource
 {
 	String name;
