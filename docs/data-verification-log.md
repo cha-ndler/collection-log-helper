@@ -35,7 +35,7 @@
 | 6 | Brutus | BOSSES | - | - | 1 (2026-06-07) |
 | 7 | Bryophyta | BOSSES | - | - | 1 (2026-06-07) |
 | 8 | Callisto | BOSSES | - | - | 1 (2026-06-07) |
-| 9 | Cerberus | BOSSES | - | - | - |
+| 9 | Cerberus | BOSSES | 2026-06-07 | - | - |
 | 10 | Chaos Elemental | BOSSES | - | - | - |
 | 11 | Chaos Fanatic | BOSSES | - | - | - |
 | 12 | Commander Zilyana | BOSSES | - | - | - |
