@@ -38,7 +38,7 @@
 | 9 | Cerberus | BOSSES | 2026-06-07 | - | - |
 | 10 | Chaos Elemental | BOSSES | - | - | 3 (2026-06-07) |
 | 11 | Chaos Fanatic | BOSSES | - | - | 1 (2026-06-07) |
-| 12 | Commander Zilyana | BOSSES | - | - | - |
+| 12 | Commander Zilyana | BOSSES | - | - | 1 (2026-06-07) |
 | 13 | Corporeal Beast | BOSSES | - | - | - |
 | 14 | Corrupted Gauntlet | BOSSES | - | - | - |
 | 15 | Crazy archaeologist | BOSSES | - | - | - |
@@ -378,4 +378,11 @@ when a Findings block is added for that source._
 - ours: requiredItemIds = `[21167, 11941, 1704, 385, 2434]`
 - authoritative: canonical Burning amulet(5) = 21166; none of the list is a true requirement
 - action: use 21166 (or all charge ids) if a burning amulet is referenced; move travel/consumables to recommendedItemIds. Same fix as Chaos Elemental. needs human call.
+- status: open
+
+### Commander Zilyana - guidanceSteps[0].requiredItemIds (irrelevant Salve amulet) - high
+- check: cross_check_ids + required-vs-recommended. Step 0 is "Teleport to Trollheim and run north to the GWD entrance" with requiredItemIds = [12018]. 12018 = Salve amulet(ei) (per Salve amulet(ei) wiki, ids 12018/25278/26782). Salve amulet has no effect on Commander Zilyana (she is not undead) and is irrelevant to a Trollheim teleport/travel step; hard-gating step 0 on it is wrong. The real access gates (Troll Stronghold quest for Trollheim, 70 Agility for the GWD descent / Saradomin room) are already in `requirements`.
+- ours: guidanceSteps[0].requiredItemIds = `[12018]` (Salve amulet (ei))
+- authoritative: no item is required to teleport to Trollheim; Salve amulet is not relevant to Zilyana
+- action: remove 12018 from this step's requiredItemIds (likely an erroneous/leftover id). needs human call. (Note: step 3 objectId 26504 "Open" - the Saradomin room door - could not be authoritatively confirmed via wiki/osrsbox object data; not contradicted, so not logged as a finding.)
 - status: open
