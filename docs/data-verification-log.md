@@ -386,3 +386,38 @@ when a Findings block is added for that source._
 - authoritative: no item is required to teleport to Trollheim; Salve amulet is not relevant to Zilyana
 - action: remove 12018 from this step's requiredItemIds (likely an erroneous/leftover id). needs human call. (Note: step 3 objectId 26504 "Open" - the Saradomin room door - could not be authoritatively confirmed via wiki/osrsbox object data; not contradicted, so not logged as a finding.)
 - status: open
+
+## Batch 2026-06-07 (V1) summary
+
+First V1 batch: sources #1-#12 (BOSSES, alphabetical). Method: each itemId/name cross-checked
+vs the OSRS Wiki item-id mapping + per-item wiki infobox + osrsbox-db; drop rates vs the wiki
+drop tables; NPC/object ids vs osrsbox / wiki; coords vs wiki Map: data and RuneLite source;
+required-vs-recommended by the field's "must be in inventory to proceed" semantics. No source
+data was edited.
+
+- **Verified clean (2):** Barrows (#5), Cerberus (#9) - every check passed.
+- **With findings (10):** the other ten. 17 findings total: 1 blocker, 7 high, 9 low.
+
+Systematic (machine-generation) patterns worth a single bulk fix rather than per-source:
+1. **requiredItemIds stuffed with consumables/gear** (Amoxliatl, Araxxor, Brutus, Bryophyta,
+   Chaos Elemental, Chaos Fanatic, Commander Zilyana). The field means "must be in inventory to
+   proceed", but it's loaded with food/potions/weapons that don't gate access. Genuine gates
+   were handled correctly where present (Barrows Spade, Bryophyta/Chaos Fanatic-step Mossy key).
+2. **Burning amulet(5) duplicate-variant id 21167** used in requiredItemIds (Chaos Elemental,
+   Chaos Fanatic). Canonical is 21166; an exact-id check on 21167 won't match a real amulet.
+3. **Duplicate/wrong item variants** also at Abyssal Sire (Unsired 25624 dup of canonical 13273
+   - the one blocker).
+4. **Travel-string errors:** wrong fairy-ring code (Araxxor CLS->ALQ), wrong cardinal directions
+   (Callisto south-east->north-east; Chaos Elemental north-west->north-east), wrong waypoint coord
+   (Alchemical Hydra Fairy ring CIR 1310,3810 -> 1302,3762).
+5. **Wrong/incomplete access requirements:** Araxxor missing Slayer 92 and listing the wrong quest
+   (SINS_OF_THE_FATHER vs Morytania access); Commander Zilyana step-0 requiring an irrelevant
+   Salve amulet(ei).
+6. **Shuffled wikiPage links** (Araxxor - 5 items point to the wrong wiki page).
+
+Drop rates were accurate across the board - every rate checked matched the wiki (incl. non-obvious
+ones: Cerberus crystals 1/520 not 1/512, Key master teleport 1/65 not 1/64, Barrows 1/350.14 +
+Bolt rack 0.6026). No missing or extra collection-log items found in any source.
+
+All work committed on branch `verify/2026-06-07` (one commit per source); master untouched.
+Next V1 queue position: #13 Corporeal Beast.
