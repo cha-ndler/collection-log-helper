@@ -27,7 +27,7 @@
 
 | # | Source | Category | Data verified (V1) | In-game (V2) | Open findings |
 |---|--------|----------|--------------------|--------------|---------------|
-| 1 | Abyssal Sire | BOSSES | - | - | - |
+| 1 | Abyssal Sire | BOSSES | - | - | 3 (2026-06-07) |
 | 2 | Alchemical Hydra | BOSSES | - | - | - |
 | 3 | Amoxliatl | BOSSES | - | - | - |
 | 4 | Araxxor | BOSSES | - | - | - |
@@ -268,4 +268,23 @@ when a Findings block is added for that source._
 - status: open
 -->
 
-_No findings yet._
+### Abyssal Sire - items[].itemId (Unsired) - blocker
+- check: cross_check_ids + temple_lookup (wrong-variant). OSRS Wiki `Unsired` infobox lists `id = 13273`; osrsbox-db reports BOTH 13273 and 25624 as "Unsired" but flags **25624 `duplicate = True`** while 13273 is the canonical (`duplicate = False`). Released 2015 — its real id is the low one.
+- ours: `25624`
+- authoritative: `13273` (canonical, non-duplicate Unsired)
+- action: change Unsired itemId 25624 -> 13273. The in-game collection log / RuneLite keys off the canonical item; the duplicate id will never match the player's logged item. needs human call to confirm against a live collection-log dump before the fix PR.
+- status: open
+
+### Abyssal Sire - guidanceSteps[1].npcId (Eye step) - high
+- check: cache_diff_check + coordinate_helper. Step "Enter one of the Sire chambers through an Eye" stores `npcId = 6479`, but 6479 is a **game object** ("Eye (Abyssal Nexus)", object ids 6479,6480 per wiki), NOT an NPC (absent from osrsbox monsters-json; outside the Sire's 5886-5908 NPC block). `GuidanceStep` has a dedicated `objectId`/`objectIds` field; as an `npcId` it resolves to no NPC and the step's interaction target is unreachable.
+- ours: `npcId = 6479`
+- authoritative: 6479/6480 are OBJECT ids for the Eye; the field should be `objectId`, not `npcId`
+- action: move 6479 from npcId to objectId (or objectIds [6479,6480]) for this step. needs human call: confirm the plugin's intended object-interaction modeling for "Peek".
+- status: open
+
+### Abyssal Sire - guidanceSteps[1] description/interactAction - low
+- check: compare_source vs OSRS wiki ("Eye (Abyssal Nexus)"). Description claims peeking the Eye *enters* a Sire chamber; the wiki states the Eye's "Peek" option only reports **how many players are in the lair** - it does not enter a chamber (entry is by walking into the chamber opening). Misleading guidance prose paired with the wrong action verb.
+- ours: description "Enter one of the Sire chambers through an Eye" + `interactAction = "Peek"`
+- authoritative: Peek on the Eye = player-count check only; chamber entry is a separate walk-in
+- action: reword step to separate "peek to check the chamber is empty" from "walk into the chamber", or drop the Peek framing. needs human call.
+- status: open
