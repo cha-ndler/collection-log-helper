@@ -3895,6 +3895,13 @@
         "isPet": false,
         "wikiPage": "Mole_skin",
         "milestoneKills": 1
+      },
+      {
+        "itemId": 33382,
+        "name": "Immaculate mole skin",
+        "dropRate": 0.02,
+        "isPet": false,
+        "wikiPage": "Immaculate_mole_skin"
       }
     ],
     "locationDescription": "Falador Park",
