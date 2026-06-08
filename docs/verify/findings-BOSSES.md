@@ -119,7 +119,7 @@ cache-confirmed and was not flagged.
 - **domain-skeptic:** STANDS ×2 (The Whisperer adjudicated separately; Duke/Leviathan/Vardorvis adjudicated together, per-source STANDS). Refutation vectors worked and failed: no hidden area/fight skill gate; Duke's vent-mining imposes no Mining level; Awakened adds only the orb (so a *higher* level for the identical encounter is incoherent); the wiki's only efficiency suggestions are unrelated (e.g. Magic 90+/Prayer 77+ for Augury) and live in no "requirement."
 - **why it matters:** `requirements.skills` is the field the plugin uses to gate/lock a source. A DT2-complete account below the listed level can fight these bosses but would be wrongly locked out of the source. Same schema shape that, for General Graardor, correctly encodes the real Strength-70 GWD gate — so this is a functional defect, not a cosmetic note.
 - **action (for the separate fix PR):** remove the `skills` array from `requirements` on all 8 entries; **keep** `quests: ["DESERT_TREASURE_II__THE_FALLEN_EMPIRE"]`.
-- **status:** open
+- **status:** resolved 2026-06-07 (removed `skills` from all 8 DT2 entries; updated `Dt2DeepGuidanceAuditTest` to assert the DT2 quest gate instead of the fabricated skill gate; `lintDropRates build` green)
 
 ### F2 — Araxxor: travel guidance cites fairy ring `CLS`, which lands in Kandarin (Yanille), not Morytania — high
 - **Source:** Araxxor (npcId 13668).
