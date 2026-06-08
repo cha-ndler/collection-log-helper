@@ -16140,7 +16140,7 @@
       }
     ],
     "locationDescription": "Fishing Trawler, Port Khazard",
-    "travelTip": "Minigame tele -> Fishing Trawler, or fairy ring BKP -> Port Khazard",
+    "travelTip": "Minigame tele -> Fishing Trawler, or fairy ring DJP -> Port Khazard",
     "requirements": {
       "skills": [
         {
@@ -16151,13 +16151,13 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Port Khazard. Use the Minigame Grouping teleport (Fishing Trawler) for the fastest route, or fairy ring BKP then run south. Bring bailing buckets and rope for repairs",
+        "description": "Travel to Port Khazard. Use the Minigame Grouping teleport (Fishing Trawler) for the fastest route, or fairy ring DJP then run south. Bring bailing buckets and rope for repairs",
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Minigame tele -> Fishing Trawler, or fairy ring BKP -> run south",
+        "travelTip": "Minigame tele -> Fishing Trawler, or fairy ring DJP -> run south",
         "requiredItemIds": [
           1925,
           954
