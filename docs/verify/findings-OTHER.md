@@ -112,6 +112,7 @@ coverage) and is reported under the Newtroost finding.
 - **domain-skeptic:** STANDS (low) — survived every applicable refutation vector.
 - **Suggested fix (not applied):** `requiredItemIds` `[2132, 237]` → `[1739, 237]`; both
   step descriptions "raw beef and unicorn horn" → "cowhide and unicorn horn".
+- **status:** resolved 2026-06-07 (id swapped 2132->1739 (Cowhide), both descriptions updated; cache-confirmed; `lintDropRates build` green).
 
 ### 4. Pyramid Plunder — Pharaoh's sceptre source/level guidance is wrong and self-contradictory  — severity: low
 
