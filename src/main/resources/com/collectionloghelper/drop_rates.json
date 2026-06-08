@@ -23146,20 +23146,20 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring raw lobster and red spiders' eggs as ingredients.",
+        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring raw cave eel and giant frog legs as ingredients.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
         "requiredItemIds": [
-          377,
-          223
+          5001,
+          4517
         ],
         "section": "Travel"
       },
       {
-        "description": "Place raw lobster and red spiders' eggs on the Altar of Life to create a Frogeel, then kill it.",
+        "description": "Place raw cave eel and giant frog legs on the Altar of Life to create a Frogeel, then kill it.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
