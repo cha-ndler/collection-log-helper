@@ -134,6 +134,28 @@ public class PlayerQuestProgressState implements QuestProgressState
 			return;
 		}
 
+		applyRefresh(next);
+	}
+
+	/**
+	 * Stores the freshly-resolved milestone map and logs it, but only when it
+	 * differs from the current snapshot (#738).
+	 *
+	 * <p>{@code onVarbitChanged} fires {@code refresh()} on every tick a quest
+	 * varbit changes — observed ~2x/second during normal play. Without this guard
+	 * the identical map was re-stored and {@code log.debug}'d every such tick,
+	 * dominating {@code client.log}. Guarding on content equality keeps the log to
+	 * one line per genuine milestone change.
+	 *
+	 * <p>Package-private so the coalescing decision can be unit-tested without
+	 * mocking the client-script reads in the {@code populate*} helpers.
+	 */
+	void applyRefresh(Map<QuestSubMilestone, Boolean> next)
+	{
+		if (next.equals(snapshot))
+		{
+			return;
+		}
 		snapshot = next;
 		log.debug("QuestProgressState refreshed: {}", next);
 	}
