@@ -24,7 +24,7 @@ calc can never route a player to). IDs of items we *do* carry are clean (0 wrong
   (items.php): `33423 -> "Bosun's workbench schematic"`; categories.php `lost_schematics`
   contains 33423. Item is absent from our entire dataset.
 - action: add Bosun's workbench schematic (id 33423) to the Lost Schematics source.
-- status: open
+- status: resolved 2026-06-07 (added Bosun's workbench schematic 33423 matching the other 11 schematics' convention - dropRate 1.0, pointCost 1, independent true; id cache-confirmed; `lintDropRates build` green)
 
 ### Slayer (Mystic (dark) set) - clog items (completeness) - high
 - check: TempleOSRS canonical clog sweep (2026-06-07), `temple_lookup` clog dimension
