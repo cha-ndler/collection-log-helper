@@ -15823,13 +15823,13 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to the Fossil Island volcano in the north-east. Digsite pendant teleport goes straight to the Mushroom Forest then run north-east, or use Fairy ring DLR for the closest fairy ring fallback.",
+        "description": "Travel to the Fossil Island volcano in the north-east. Digsite pendant teleport goes straight to the Mushroom Forest then run north-east.",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Digsite pendant -> Mushroom Forest + run NE, or Fairy ring DLR",
+        "travelTip": "Digsite pendant -> Mushroom Forest + run NE",
         "section": "Travel",
         "conditionalAlternatives": [
           {
