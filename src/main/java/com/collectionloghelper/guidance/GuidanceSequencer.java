@@ -179,6 +179,11 @@ public class GuidanceSequencer
 		this.targetSlotUnlocked = false;
 		this.awaitingRestock = false;
 		this.restockStepIndex = 0;
+		// Reset the step-keyed completion caches (#737). tilePointCache is keyed by
+		// step index only, so a new source whose step N is also ARRIVE_AT_TILE would
+		// otherwise be evaluated against the prior source's tile cached for index N.
+		this.tilePointCache = null;
+		this.chatPatternCache = null;
 		this.active = true;
 
 		// Skip any steps whose conditions are already met
@@ -218,6 +223,8 @@ public class GuidanceSequencer
 		awaitingRestock = false;
 		restockStepIndex = 0;
 		resolvedAlternatives.clear();
+		tilePointCache = null;
+		chatPatternCache = null;
 		onStepChanged = null;
 		onSequenceComplete = null;
 	}
@@ -334,6 +341,8 @@ public class GuidanceSequencer
 		awaitingRestock = false;
 		restockStepIndex = 0;
 		resolvedAlternatives.clear();
+		tilePointCache = null;
+		chatPatternCache = null;
 		// Do NOT call skipSatisfiedSteps() — Reset forces step 0 unconditionally.
 
 		GuidanceStep step = getCurrentStep();
@@ -374,6 +383,8 @@ public class GuidanceSequencer
 		awaitingRestock = false;
 		restockStepIndex = 0;
 		resolvedAlternatives.clear();
+		tilePointCache = null;
+		chatPatternCache = null;
 		// Re-run the skip-chain to find the first unsatisfied step
 		skipSatisfiedSteps();
 
