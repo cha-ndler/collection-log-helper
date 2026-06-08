@@ -1640,12 +1640,6 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
-      ],
-      "skills": [
-        {
-          "skill": "MINING",
-          "level": 65
-        }
       ]
     },
     "items": [
@@ -1800,12 +1794,6 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
-      ],
-      "skills": [
-        {
-          "skill": "RANGED",
-          "level": 70
-        }
       ]
     },
     "items": [
@@ -1958,12 +1946,6 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
-      ],
-      "skills": [
-        {
-          "skill": "RANGED",
-          "level": 75
-        }
       ]
     },
     "items": [
@@ -2127,12 +2109,6 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
-      ],
-      "skills": [
-        {
-          "skill": "ATTACK",
-          "level": 70
-        }
       ]
     },
     "items": [
@@ -2286,12 +2262,6 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
-      ],
-      "skills": [
-        {
-          "skill": "MINING",
-          "level": 65
-        }
       ]
     },
     "items": [
@@ -2486,12 +2456,6 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
-      ],
-      "skills": [
-        {
-          "skill": "RANGED",
-          "level": 75
-        }
       ]
     },
     "items": [
@@ -2682,12 +2646,6 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
-      ],
-      "skills": [
-        {
-          "skill": "RANGED",
-          "level": 80
-        }
       ]
     },
     "items": [
@@ -2886,12 +2844,6 @@
     "requirements": {
       "quests": [
         "DESERT_TREASURE_II__THE_FALLEN_EMPIRE"
-      ],
-      "skills": [
-        {
-          "skill": "ATTACK",
-          "level": 75
-        }
       ]
     },
     "items": [
