@@ -147,6 +147,51 @@ tasks.register('lintDropRates') {
 }
 check.dependsOn lintDropRates
 
+// Observability: regenerate the guidance-audit scoreboard (docs/guidance-audit/status.md).
+// Derives three numbers from real guidance-audit tier output -- the guidance-config analyzer
+// JSON + its calibration trust-gate, the GuidanceConfigInvariantsRegressionTest ratchet result,
+// the findings backlog, and the latest acceptance run -- and never fabricates a value. Depends on
+// `test` + `lintDropRates` so the artifacts it reads are freshly produced. Not wired into `check`:
+// it is a read-only report that shells out to python/git, and must never fail a build.
+tasks.register('guidanceStatus') {
+	group = 'verification'
+	description = 'Regenerates docs/guidance-audit/status.md from the guidance-audit tiers.'
+	dependsOn 'test', 'lintDropRates'
+	def python = (findProperty('pythonExe') ?: 'python').toString()
+	def analyzerJson = file('docs/guidance-audit/guidance-config-audit.json')
+	def analyzerScript = file('scripts/audit_guidance_config.py')
+	def statusScript = file('scripts/guidance_status.py')
+	doLast {
+		analyzerJson.parentFile.mkdirs()
+		// Full analyzer report -> the raw artifact behind corpus-pass-rate.
+		exec {
+			commandLine python, analyzerScript, '--json-output', analyzerJson
+			standardOutput = new ByteArrayOutputStream()
+			ignoreExitValue = true
+		}
+		// Calibration trust-gate: exit 0 = PASS, non-zero = FAIL. Captured, not build-fatal here.
+		def calibResult = exec {
+			commandLine python, analyzerScript, '--calibrate'
+			standardOutput = new ByteArrayOutputStream()
+			ignoreExitValue = true
+		}
+		def calibration = calibResult.exitValue == 0 ? 'pass' : 'fail'
+		def headOut = new ByteArrayOutputStream()
+		exec {
+			commandLine 'git', 'rev-parse', '--short', 'HEAD'
+			standardOutput = headOut
+			ignoreExitValue = true
+		}
+		def head = headOut.toString().trim()
+		if (!head) {
+			head = 'unknown'
+		}
+		exec {
+			commandLine python, statusScript, '--head', head, '--calibration', calibration
+		}
+	}
+}
+
 tasks.register('shadowJar', Jar) {
 	dependsOn configurations.runtimeClasspath
 	manifest {
