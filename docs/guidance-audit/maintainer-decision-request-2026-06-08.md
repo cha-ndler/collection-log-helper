@@ -29,11 +29,13 @@ is the acceptance FAIL).
 **Why not statically decidable.** The 5 do **not** share one fix; 3 of them have the *wrong condition*
 entirely. The intent question — is the kill the completion gate (complete-on-kill, the
 General-Graardor single-kill pattern at `CompletionChecker.java:131`) or is this a *persistent farming
-step* meant never to auto-advance? — is a design call.
+step* meant never to auto-advance? — is a design call. ("Complete-on-kill" = the single-kill
+matcher `GuidanceStep.matchesCompletionNpc` driven by `CompletionChecker.isNpcDeathSatisfying`
+(`:128-133`), as used by single-kill bosses such as General Graardor.)
 
 | Source | step | Finding | Decision needed |
 |--------|------|---------|-----------------|
-| TzHaar | s1 | "Kill TzHaar-Ket/Mej/Xil in the city." Clog = obsidian equipment from city TzHaar. | complete-on-kill vs persistent. **If complete-on-kill**, cache-verified city ids are staged: Ket `2173-2179,2186`; Xil `2167-2172`; Mej `2154-2160`; Hur `2161-2166` (Hur drops obsidian rings but is omitted from the step text — include-or-not is a call). Fight Cave / Inferno `Jal-*` deliberately excluded. |
+| TzHaar | s1 | "Kill TzHaar-Ket/Mej/Xil in the city." Clog = obsidian equipment from city TzHaar. | complete-on-kill vs persistent. **If complete-on-kill**, cache-verified city ids are staged (apply via `completionNpcIds`): Ket `2173-2179,2186`; Xil `2167-2172`; Mej `2154-2160`; Hur `2161-2166` (Hur drops obsidian rings but is omitted from the step text — include-or-not is a call). Fight Cave / Inferno `Jal-*` deliberately excluded. |
 | Stronghold of Security | s1 | "Kill monsters on each floor for skull sceptre pieces" — 4 floors (minotaurs, flesh crawlers, catablepon, ankou). | complete-on-kill vs persistent. If complete-on-kill, a large 4-floor `completionNpcIds` list (each floor needs a cache lookup). |
 | My Notes | s1 | "**Rummage** barbarian skeletons for ancient pages." | **Wrong condition** — a rummage is not a kill. `ACTOR_DEATH` is incorrect; likely `MANUAL` or a chat/item completion. |
 | Catacombs of Kourend | s3 | "Dark totem pieces 1/500 from **any** Catacombs monster." | **Not enumerable** as `completionNpcIds`. Wants a different completion model (match-any sentinel, or accept it as a persistent step). |
