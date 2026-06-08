@@ -12109,6 +12109,68 @@
     ]
   },
   {
+    "name": "Twisted Banshee",
+    "category": "SLAYER",
+    "worldX": 1612,
+    "worldY": 9994,
+    "worldPlane": 0,
+    "killTimeSeconds": 6,
+    "afkLevel": 2,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 15
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": 4105,
+        "name": "Mystic gloves (dark)",
+        "dropRate": 0.003906,
+        "isPet": false,
+        "wikiPage": "Mystic_gloves_(dark)"
+      }
+    ],
+    "locationDescription": "Catacombs of Kourend",
+    "travelTip": "Xeric's talisman -> Xeric's Heart, or fairy ring CIS -> Kourend Castle then descend into the Catacombs",
+    "npcId": 7272,
+    "interactAction": "Attack",
+    "guidanceSteps": [
+      {
+        "description": "Travel to the Catacombs of Kourend. Bring earmuffs or a slayer helmet (mandatory for Banshees) plus combat gear.",
+        "worldX": 1664,
+        "worldY": 10050,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 20,
+        "travelTip": "Xeric's talisman -> Xeric's Heart, or fairy ring CIS -> Kourend Castle then descend",
+        "section": "Travel"
+      },
+      {
+        "description": "Find the Twisted Banshees in the Catacombs of Kourend. Earmuffs or a slayer helmet are required or they hit hard.",
+        "worldX": 1612,
+        "worldY": 9994,
+        "worldPlane": 0,
+        "completionCondition": "ARRIVE_AT_TILE",
+        "completionDistance": 15,
+        "section": "Travel"
+      },
+      {
+        "description": "Kill Twisted Banshees (15 Slayer, Banshees category). Mystic gloves (dark) drop at 1/256.",
+        "worldX": 1612,
+        "worldY": 9994,
+        "worldPlane": 0,
+        "npcId": 7272,
+        "interactAction": "Attack",
+        "completionCondition": "ACTOR_DEATH",
+        "completionNpcId": 7272,
+        "section": "Combat"
+      }
+    ]
+  },
+  {
     "name": "Gargoyle",
     "category": "SLAYER",
     "worldX": 3429,
