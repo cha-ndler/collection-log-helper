@@ -10611,7 +10611,7 @@
       }
     ],
     "locationDescription": "Tarn's Lair, Abandoned Mine (requires Haunted Mine quest)",
-    "travelTip": "Slayer ring -> Tarn's Lair (fastest), or fairy ring AJR -> run east to Abandoned Mine",
+    "travelTip": "Slayer ring -> Tarn's Lair (fastest), or fairy ring BIQ -> Salve shortcut (50 Agility) -> run south to Abandoned Mine",
     "npcId": 6474,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -10625,13 +10625,13 @@
         "section": "Bank"
       },
       {
-        "description": "Teleport to Tarn's Lair using a Slayer ring (fastest direct teleport). Alternatively, use fairy ring AJR to Fremennik Province and run east to the Abandoned Mine entrance",
+        "description": "Teleport to Tarn's Lair using a Slayer ring (fastest direct teleport). Alternatively, use fairy ring BIQ, cross the Salve shortcut (50 Agility), and run south to the Abandoned Mine entrance",
         "worldX": 3414,
         "worldY": 3232,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Slayer ring -> Tarn's Lair, or fairy ring AJR -> run east to Abandoned Mine entrance",
+        "travelTip": "Slayer ring -> Tarn's Lair, or fairy ring BIQ -> Salve shortcut (50 Agility) -> run south to Abandoned Mine entrance",
         "section": "Travel"
       },
       {
