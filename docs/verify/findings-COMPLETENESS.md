@@ -38,5 +38,9 @@ calc can never route a player to). IDs of items we *do* carry are clean (0 wrong
 - action: add Mystic gloves (dark) (id 4105). Placement is a judgment call (which slayer
   monster's drop table) - the per-source loop should decide; the existing set pieces sit on
   Infernal Mage / Aberrant Spectre / Gargoyle.
-- status: open
+- status: resolved 2026-06-08 (placement decided with data owner: the gloves drop ONLY from
+  Banshees - none of the existing dark-mystic sources actually drop them - so added a new
+  `Twisted Banshee` SLAYER source (npc 7272, Catacombs of Kourend, Slayer 15) carrying the
+  gloves at 1/256. npcId/rate/slayer-level confirmed via npc_lookup + wiki_lookup; id 4105
+  cache-confirmed; `lintDropRates build` green).
 
