@@ -123,6 +123,26 @@ condition to `ARRIVE_AT_TILE` (the `worldX/worldY` are already present) where a 
 the right gate. Zone bounds need wiki/coordinate verification. (These 5 sources also appear in
 C2 — fixing both in the same per-source PR is natural.)
 
+**Per-source investigation (2026-06-08) — NOT a "box the existing coord" fix; routed to the
+maintainer.** All 5 centers verify correct via `coordinate_helper` (Void Knights' Outpost,
+Castle Wars, Isle of Souls, Ferox Enclave, Barbarian Outpost). But two findings make a blind
+zone-around-the-coord fix wrong:
+
+- **`ARRIVE_AT_TILE` is the wrong direction.** The #485-class FAIL already logged in
+  `in-game-validation-log.md` (Phosani's `ARRIVE_AT_TILE` r=20 never fired on teleport/shortcut
+  entry) shows a tile gate can't catch teleport landings — and players *teleport* into
+  minigames. So a zone is correct; the author's `ARRIVE_AT_ZONE` choice was right.
+- **But the zone is not a box around `worldX/worldY`.** Pest Control step[1] is "*board the
+  lander*" — its coord is the lander/outpost where the player **already stands** when the step
+  activates, so a zone there completes immediately. The real "arrived" target is the Pest
+  Control **island** (separate, effectively instanced coords), which the data does not carry.
+- **Barbarian Assault step[1] is a condition-type mismatch**, not a missing zone: "*Talk to
+  Captain Cain*" should be `NPC_TALKED_TO`, not `ARRIVE_AT_ZONE`.
+
+Each of the 5 needs a per-step "what does *arrived* mean here" decision plus, for the
+transport cases, the destination (instanced) coordinates — a judgment + in-game-coordinate task,
+not statically decidable. **Routed to the maintainer.**
+
 ### N2 — `PohTeleportInventoryImpl` unconditional `log.debug` per varbit · MEDIUM · CODE
 `onVarbitChanged → refresh()` (`PohTeleportInventoryImpl.java:182`) logs 6 formatted booleans on
 **every** varbit with no coalescing and no equality guard (`:196-200`) — the #738 log-spam class,
@@ -152,16 +172,29 @@ change (mirror `SlayerTaskState`, which guards correctly).
 
 ---
 
-## Suggested PR order (data-first is fully validatable without the live game)
+## Status (2026-06-08 autonomous pass)
 
-1. **C4** (#737 tilePointCache reset) — code, unambiguous, unit-testable. *(done first: highest
-   severity, lowest domain risk.)*
-2. **C5** (#738 quest-log guard) + **N2** (PohTeleport guard) — code, unit-testable.
-3. **C1** (5 ACTOR_DEATH npc ids) — data; cache-verify each id, domain-skeptic gate.
-4. **N1** (5 ARRIVE_AT_ZONE) + the overlapping **C2** loop entries for those 5 minigames — data,
-   per source.
-5. **C2** remainder (self-loop dead config removal vs real loopCount) — data, per source.
-6. **C3** (#729 Shades any-of-items completion) — data + small engine support if needed.
-7. **Phase 5:** every durable invariant above becomes a JUnit regression test under
-   `src/test/java/com/collectionloghelper/data/` so the class can never regress; wire
-   `audit_guidance_config.py --calibrate` into `check`.
+**Shipped as PRs (code/test, statically verifiable, none merged — awaiting review):**
+
+- **C4** (#737 tilePointCache reset) — PR #770, regression test included.
+- **C5** (#738 quest-log guard) — PR #771.
+- **N2** (PohTeleport log guard) — PR #772.
+- **N3** (SkillCapePerk XP-only refresh skip) — PR #774.
+- **Phase 5 ratchet** — PR #773: JUnit `GuidanceConfigInvariantsRegressionTest` locks every
+  invariant above in CI (hard-zero guards + ceilings 5/23/5 that may only shrink). The analyzer
+  + this doc are PR #769.
+
+**Routed to the maintainer (needs a judgment/intent decision or in-game coordinates — NOT
+statically decidable, so deliberately not guessed):**
+
+- **C1** (5 ACTOR_DEATH) — complete-on-kill vs persistent-step; 3 of 5 also have a wrong
+  condition (rummage / any-monster / wrong-step). TzHaar city ids staged above.
+- **N1** (5 ARRIVE_AT_ZONE) — per-step "what does *arrived* mean" + instanced destination
+  coords; Barbarian Assault is a condition-type mismatch. See the per-source investigation above.
+- **C2** (23 loop steps) — per source: was looping intended (`loopCount`) or vestigial
+  (`loopBackToStep` removal)? ~7 are self-loops.
+- **C3** (#729 Shades) — needs an any-of-items completion (B1 `conditionTree`), a small engine
+  feature + in-game validation.
+
+When a routed item is resolved and lands, decrement the matching ceiling constant in
+`GuidanceConfigInvariantsRegressionTest` so the ratchet stays tight.
