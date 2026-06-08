@@ -170,19 +170,48 @@ public class PohTeleportInventoryImpl implements PohTeleportInventory
 	@Override
 	public void refresh()
 	{
+		// onVarbitChanged fires refresh() on every varbit, so log only when a POH
+		// teleport flag actually flips — otherwise this line spams client.log on
+		// every unrelated varbit change, identical payload each time (#738 sibling).
+		if (recomputeFlags())
+		{
+			log.debug("PohTeleportInventory refreshed: jboxBasic={}, jboxFancy={}, jboxOrnate={}, "
+					+ "nexus={}, digsite={}, xerics={}",
+				varbitJewelleryBoxBasic, varbitJewelleryBoxFancy, varbitJewelleryBoxOrnate,
+				varbitPortalNexus, varbitDigsitePendant, varbitXericsTalisman);
+		}
+	}
+
+	/**
+	 * Reads the four POH varbits, updates the six cached flags, and returns whether
+	 * any flag changed. Package-private so the change-detection that gates the
+	 * refresh log can be unit-tested by mocking the varbit reads.
+	 */
+	boolean recomputeFlags()
+	{
 		int jewelleryBox = readVarbit(VARBIT_JEWELLERY_BOX);
-		varbitJewelleryBoxBasic = jewelleryBox >= 1;
-		varbitJewelleryBoxFancy = jewelleryBox >= 2;
-		varbitJewelleryBoxOrnate = jewelleryBox >= 3;
+		boolean basic = jewelleryBox >= 1;
+		boolean fancy = jewelleryBox >= 2;
+		boolean ornate = jewelleryBox >= 3;
+		boolean nexus = readVarbit(VARBIT_PORTAL_NEXUS) != 0;
+		boolean digsite = readVarbit(VARBIT_MOUNTED_DIGSITE) != 0;
+		boolean xerics = readVarbit(VARBIT_MOUNTED_XERICS) != 0;
 
-		varbitPortalNexus = readVarbit(VARBIT_PORTAL_NEXUS) != 0;
-		varbitDigsitePendant = readVarbit(VARBIT_MOUNTED_DIGSITE) != 0;
-		varbitXericsTalisman = readVarbit(VARBIT_MOUNTED_XERICS) != 0;
+		boolean changed = basic != varbitJewelleryBoxBasic
+			|| fancy != varbitJewelleryBoxFancy
+			|| ornate != varbitJewelleryBoxOrnate
+			|| nexus != varbitPortalNexus
+			|| digsite != varbitDigsitePendant
+			|| xerics != varbitXericsTalisman;
 
-		log.debug("PohTeleportInventory refreshed: jboxBasic={}, jboxFancy={}, jboxOrnate={}, "
-				+ "nexus={}, digsite={}, xerics={}",
-			varbitJewelleryBoxBasic, varbitJewelleryBoxFancy, varbitJewelleryBoxOrnate,
-			varbitPortalNexus, varbitDigsitePendant, varbitXericsTalisman);
+		varbitJewelleryBoxBasic = basic;
+		varbitJewelleryBoxFancy = fancy;
+		varbitJewelleryBoxOrnate = ornate;
+		varbitPortalNexus = nexus;
+		varbitDigsitePendant = digsite;
+		varbitXericsTalisman = xerics;
+
+		return changed;
 	}
 
 	/**
