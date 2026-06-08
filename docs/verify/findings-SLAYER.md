@@ -43,6 +43,7 @@ Verification of every `SLAYER` source in
   confirmed, so the recommendation still functions.
 - **Suggested fix (data owner):** replace the AJR clause with "fairy ring **BIQ**, cross the Salve
   shortcut (50 Agility) and run **south**," or drop the fairy-ring alternative entirely.
+- **status:** resolved 2026-06-07 (swapped AJR -> BIQ + Salve shortcut (50 Agility) + run south in all 3 Terror Dog strings; the Slayer-ring route is unchanged; `lintDropRates build` green).
 
 ### 2. Spiritual Mage — invalid fairy-ring route to the God Wars Dungeon
 
