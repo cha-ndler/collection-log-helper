@@ -9,7 +9,35 @@
 > - `[!]` — Regression / failed (file a new issue and cross-link)
 > - `[?]` — Inconclusive (couldn't reproduce / state-dependent)
 
-> **Last updated**: 2026-05-27 (session: Wave 1 regression + #699-#727 UX-wave pass, HEAD 48134711)
+> **Last updated**: 2026-06-08 (session: actuation-seam calibration; #485 confirmed fixed, #729 control)
+
+---
+
+## Actuation-seam calibration — 2026-06-08 *(dev bridge harness 0.2, LOGIN_SCREEN)*
+
+Calibration of the runelite-dev actuation seam before any acceptance-gate runner. Drove two
+known cases through the dev bridge (`guidance.activate` -> `event.inject` -> `state.read`) with
+synthetic local events only (no account, no game input). Full receipts:
+`docs/guidance-audit/acceptance-runs/2026-06-08.md`.
+
+| # | Status | Note |
+|---|--------|------|
+| #485 Phosani teleport-entry | `[x]` | **Fixed (does NOT reproduce).** Synthetic Drakan landing (3730,3336) advanced step 0->1 via `ARRIVE_AT_ZONE [3700,3290,3770,3360,0]` (client.log 09:22:12). PR #731 closed the 2026-05-27 Reg 1 freeze. |
+| #729 Shades MANUAL step 3 | `[x]` | **Observer control.** Drove to index 2 (MANUAL "Pick up shade key"); injected playerMoved/chat/varbit -> stayed index 2 (no "Step 3 complete" line). Proves the harness detects genuine non-advance. |
+| Visual canvas tier (arrow/overlay at target) | `[-]` | SKIPPED — login is manual; not logged in. Only overlay STATE asserted. |
+
+**Gate + runner outcome:** the literal gate ("build the runner only if BOTH known failures
+reproduce") was NOT met (#485 is fixed), but the operator explicitly opted to proceed with the
+full runner. Runner built (session-orchestrated over the dev bridge; no harness rebuild) and run.
+Full receipts: `docs/guidance-audit/acceptance-runs/2026-06-08.md`.
+
+| Acceptance-run result | Status | Note |
+|---|---|---|
+| Seam drives all condition types to completion (LOGIN_SCREEN) | `[x]` | General Graardor (TILE+PLANE+VARBIT+DEATH) and The Nightmare (ZONE+PLANE+TILE+CHAT) both driven to full sequence completion. |
+| Visual/overlay tier (logged in) | `[x]` | Guidance overlay/panel renders live on activation (screenshot local-only; RSN withheld). |
+| Finding 1 (harness) - logged-in synthetic location advancement is non-deterministic | `[x]` | Controlled A/B: General Graardor advances at LOGIN_SCREEN, identical injects inert while LOGGED_IN (`GameTickOrchestrator:247` re-feeds real position each tick). Runner must run at the login screen. |
+| Finding 2 (data) - 5 ACTOR_DEATH steps have no completion NPC id | `[!]` | Catacombs of Kourend, TzHaar, Stronghold of Security, Champion's Challenge, My Notes - cannot auto-advance in real play. Follow-up fix needed (wire ids / match-any / MANUAL). |
+| Per-source sweep of remaining 4 sources | `[~]` | Curtailed by mid-run login-state change; condition-redundant with the two PASS sources. Re-run at login screen to complete. |
 
 ---
 
