@@ -14202,24 +14202,16 @@
       }
     ],
     "locationDescription": "Brimhaven Agility Arena, east of Brimhaven",
-    "travelTip": "Fairy ring CKR -> Brimhaven, or charter ship to Brimhaven",
-    "requirements": {
-      "skills": [
-        {
-          "skill": "AGILITY",
-          "level": 40
-        }
-      ]
-    },
+    "travelTip": "Charter ship to Brimhaven",
     "guidanceSteps": [
       {
-        "description": "Travel to Brimhaven Agility Arena east of Brimhaven. Fairy ring CKR is fastest; alternatively charter ship to Brimhaven from any coastal port. Pay 200gp entrance fee to Cap'n Izzy No-Beard at the door",
+        "description": "Travel to Brimhaven Agility Arena east of Brimhaven. Charter ship to Brimhaven from any coastal port. Pay 200gp entrance fee to Cap'n Izzy No-Beard at the door",
         "worldX": 2809,
         "worldY": 3194,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Fairy ring CKR -> run east to arena entrance",
+        "travelTip": "Charter ship to Brimhaven -> run east to arena entrance",
         "section": "Travel"
       },
       {
