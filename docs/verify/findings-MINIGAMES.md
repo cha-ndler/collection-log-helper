@@ -121,6 +121,7 @@ cache-confirmed and was not flagged.
   from Khazard. The correct code is `DJP`.
 - **domain-skeptic:** `STANDS` (low) — route shape is right, only the code letters are wrong; does not
   hide the source or affect ids.
+- **status:** resolved 2026-06-07 (swapped `BKP` -> `DJP` in all 3 Fishing Trawler strings; smoke-devil `BKP` left untouched; `lintDropRates build` green).
 
 ## Considered & not logged
 
