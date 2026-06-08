@@ -91,6 +91,7 @@ coverage) and is reported under the Newtroost finding.
 - **domain-skeptic:** STANDS (high) — survived every refutation vector.
 - **Suggested fix (not applied):** `requiredItemIds` `[377, 223]` → `[5001, 4517]`; both
   step descriptions → "raw cave eel and giant frog legs".
+- **status:** resolved 2026-06-07 (ids swapped to `[5001, 4517]`, both descriptions updated; new ids cache-confirmed; `lintDropRates build` green).
 
 ### 3. Creature Creation (Unicow) — wrong creation ingredient  — severity: low
 
