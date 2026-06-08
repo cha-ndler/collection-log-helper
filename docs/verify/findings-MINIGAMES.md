@@ -86,6 +86,7 @@ cache-confirmed and was not flagged.
   rewards; the multi-source / variant / account-type vectors do not apply.
 - **Suggested fix (separate PR):** drop the gate, or model it as a soft/efficiency note (~20–40 Agility),
   not a blocking requirement.
+- **status:** resolved 2026-06-07 (removed the `requirements` block - it held only the fabricated AGILITY 40; the source has no real access gate; `lintDropRates build` green).
 
 ### Finding 2 — Brimhaven Agility Arena: wrong fairy ring code `CKR` — severity low
 
@@ -97,6 +98,7 @@ cache-confirmed and was not flagged.
   ~191 tiles **south** (`coordinate_helper` distance). The route is a long run north, not "east", and CKR
   is not a sensible Brimhaven approach.
 - **domain-skeptic:** `STANDS` (low) — travel-hint accuracy only; does not hide the source or affect ids.
+- **status:** resolved 2026-06-07 (struck the `CKR` clause from all 3 strings; kept the charter-ship route; `lintDropRates build` green).
 
 ### Finding 3 — Volcanic Mine: fabricated fairy ring `DLR` fallback — severity low
 
