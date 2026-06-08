@@ -33,11 +33,11 @@ Full receipts: `docs/guidance-audit/acceptance-runs/2026-06-08.md`.
 
 | Acceptance-run result | Status | Note |
 |---|---|---|
-| Seam drives all condition types to completion (LOGIN_SCREEN) | `[x]` | General Graardor (TILE+PLANE+VARBIT+DEATH) and The Nightmare (ZONE+PLANE+TILE+CHAT) both driven to full sequence completion. |
+| Seam drives all reachable condition types to full completion | `[x]` | 4 sources driven to sequence-complete: General Graardor, The Nightmare, Zulrah, Barrows - covering TILE, ZONE, PLAYER_ON_PLANE, VARBIT, ACTOR_DEATH, CHAT. |
 | Visual/overlay tier (logged in) | `[x]` | Guidance overlay/panel renders live on activation (screenshot local-only; RSN withheld). |
-| Finding 1 (harness) - logged-in synthetic location advancement is non-deterministic | `[x]` | Controlled A/B: General Graardor advances at LOGIN_SCREEN, identical injects inert while LOGGED_IN (`GameTickOrchestrator:247` re-feeds real position each tick). Runner must run at the login screen. |
+| Finding 1 (harness reliability) - synthetic ARRIVE_AT_TILE completion is state-dependent | `[x]` | NOT a login-state confound (an earlier draft's claim was refuted). Single-inject ARRIVE_AT_TILE completes on a fresh client but is unreliable after account-load (Graardor/Zulrah/Vorkath/Vet'ion/Skotizo travel steps); move-away-then-arrive recovers it inconsistently. Non-tile conditions reliable in all states. Harness limitation, not a real-player bug. |
 | Finding 2 (data) - 5 ACTOR_DEATH steps have no completion NPC id | `[!]` | Catacombs of Kourend, TzHaar, Stronghold of Security, Champion's Challenge, My Notes - cannot auto-advance in real play. Follow-up fix needed (wire ids / match-any / MANUAL). |
-| Per-source sweep of remaining 4 sources | `[~]` | Curtailed by mid-run login-state change; condition-redundant with the two PASS sources. Re-run at login screen to complete. |
+| Per-source sweep (8 selected) | `[~]` | 4 PASS (full completion), 2 calibration PASS, 3 PARTIAL (Finding-1 TILE quirk), Catacombs static-FAIL (Finding 2). Recommended harness follow-up: a `guidance.advance` (manual-Next) bridge action to step past the quirk and drive MANUAL/INVENTORY steps. |
 
 ---
 
