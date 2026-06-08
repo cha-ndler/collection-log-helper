@@ -22866,20 +22866,20 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring raw beef and unicorn horn as ingredients.",
+        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring cowhide and unicorn horn as ingredients.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
         "requiredItemIds": [
-          2132,
+          1739,
           237
         ],
         "section": "Travel"
       },
       {
-        "description": "Place raw beef and unicorn horn on the Altar of Life to create a Unicow, then kill it.",
+        "description": "Place cowhide and unicorn horn on the Altar of Life to create a Unicow, then kill it.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
