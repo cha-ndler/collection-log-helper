@@ -135,7 +135,7 @@ cache-confirmed and was not flagged.
   - `wiki_updates` (Araxxor): `count: 0` since 2024-08-01 → not staleness drift.
 - **domain-skeptic:** STANDS. Vectors failed: `CLS` is not in/near Morytania; no fairy ring serves the Araxyte cave; even the nearest Morytania code `CKS` (Canifis) does not reach it, so the fix is to **strike the fairy-ring claim**, not swap `CLS`→`CKS` while keeping "fastest unquested route."
 - **action (for the separate fix PR):** remove the `fairy ring CLS` clause from all three strings; keep the Drakan's medallion → Darkmeyer route.
-- **status:** open
+- **status:** resolved 2026-06-07 (struck the `fairy ring CLS` clause from all 3 Araxxor strings; kept the Drakan's medallion route; `lintDropRates build` green)
 
 ---
 

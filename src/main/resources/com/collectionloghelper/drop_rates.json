@@ -9314,7 +9314,7 @@
       }
     ],
     "locationDescription": "Morytania Spider Cave",
-    "travelTip": "Drakan's medallion -> Darkmeyer, or fairy ring CLS",
+    "travelTip": "Drakan's medallion -> Darkmeyer",
     "npcId": 13668,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -9333,13 +9333,13 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Araxyte Cave in north-east Morytania. Drakan's medallion to Darkmeyer then run east, or fairy ring CLS for the fastest unquested route",
+        "description": "Travel to the Araxyte Cave in north-east Morytania. Drakan's medallion to Darkmeyer then run east",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Drakan's medallion -> Darkmeyer -> run east, or fairy ring CLS",
+        "travelTip": "Drakan's medallion -> Darkmeyer -> run east",
         "section": "Travel"
       },
       {
