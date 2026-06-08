@@ -45,6 +45,8 @@ Chambers of Xeric and Chambers of Xeric (Challenge Mode) passed all checks with 
 
 **Skeptic:** STANDS — high. Ran all refutation vectors (multi-source / variant / account-type / staleness via `wiki_updates` count=0 / requirement-nuance); none rescued the value.
 
+**status:** resolved 2026-06-07 (set `requirements.quests` to `["PRIEST_IN_PERIL"]` on Theatre of Blood and Theatre of Blood (Hard Mode); `lintDropRates build` green).
+
 ---
 
 ## F2 — Drakan's medallion → Ver Sinhaza waypoint requires the wrong quest (Low) — STANDS
@@ -59,6 +61,8 @@ Chambers of Xeric and Chambers of Xeric (Challenge Mode) passed all checks with 
 **Why it stands:** The "after completion of Sins of the Father" parenthetical attaches to the **Darkmeyer** destination only. The Ver Sinhaza teleport is available immediately on obtaining the medallion (i.e. completing A Taste of Hope). The file itself already distinguishes the two gates correctly for the Darkmeyer waypoints (line 32387), so this is an isolated wrong-quest gate, not a convention. Blast radius is low (worst case the plugin suggests the slower Canifis-walk fallback for AToH-but-not-SotF accounts; it never routes a player somewhere they cannot go). Note: `Theatre of Blood (Hard Mode)` has **no** `waypoints` array, so this finding is confined to the regular source.
 
 **Skeptic:** STANDS — low.
+
+**status:** resolved 2026-06-07 (set the "Drakan's medallion to Ver Sinhaza" waypoint `requirements.quests` to `["A_TASTE_OF_HOPE"]`; `lintDropRates build` green).
 
 ---
 
