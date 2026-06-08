@@ -72,6 +72,7 @@ Prifddinas Rabbit, Pickpocketing Darkmeyer Vyre.
 - **domain-skeptic:** STANDS (low).
 - **Suggested fix (not applied):** Fishing 68 → 69 in the requirements block; correct the
   prose at lines 20604 and 20607 to "69 Fishing".
+- **status:** resolved 2026-06-07 (Fishing 68->69 in requirements + both prose strings; Sailing 1 left as-is; `lintDropRates build` green).
 
 ---
 
