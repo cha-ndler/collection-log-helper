@@ -25,8 +25,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * D2 batch 2 audit guard — asserts the four DT2 awakened-style boss sources exist
- * by name, each carries at least three guidance steps after the deep-guidance pass,
- * and each declares a source-level skill requirement.
+ * by name and each carries at least three guidance steps after the deep-guidance pass.
+ * DT2 bosses are gated only by the Desert Treasure II quest; they carry no skill-level
+ * access requirement (the wiki lists none), so no skill requirement is asserted here.
  */
 public class Dt2DeepGuidanceAuditTest
 {
@@ -67,10 +68,11 @@ public class Dt2DeepGuidanceAuditTest
 			assertTrue(source.getGuidanceSteps().size() >= 3,
 				name + " has fewer than 3 guidance steps");
 			assertNotNull(source.getRequirements(), name + " has no source-level requirements");
-			assertNotNull(source.getRequirements().getSkills(),
-				name + " has no source-level skill requirements");
-			assertTrue(!source.getRequirements().getSkills().isEmpty(),
-				name + " source-level skill requirements list is empty");
+			assertNotNull(source.getRequirements().getQuests(),
+				name + " has no source-level quest requirements");
+			assertTrue(source.getRequirements().getQuests().stream()
+					.anyMatch(q -> q.startsWith("DESERT_TREASURE_II")),
+				name + " is not gated on the Desert Treasure II quest");
 		}
 	}
 }
