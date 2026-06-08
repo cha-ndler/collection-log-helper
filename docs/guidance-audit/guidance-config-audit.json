@@ -1,0 +1,1892 @@
+[
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Cerberus",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Turn an Iron Winch to open the gate and enter the boss arena"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Alchemical Hydra",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Take the elevator down into the Karuulm Slayer Dungeon."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Alchemical Hydra",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Navigate past the regular hydras to the Alchemical Hydra instance. Requires Slayer task."
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Kalphite Queen",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Climb down the first tunnel entrance (use a rope if first time)"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Kalphite Queen",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Navigate to the second tunnel and climb down to the Kalphite Queen chamber"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Duke Sucellus",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Navigate through Ghorrock Prison to the Asylum stairs"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "The Leviathan",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Climb the handholds to enter The Leviathan's arena"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "The Whisperer",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Climb the rope down the sinkhole to enter Lassar Undercity"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Vardorvis",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Stranglewood Temple to reach the boss arena. Climb over the rocks to start the fight"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Duke Sucellus (Awakened)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Navigate through Ghorrock Prison to the Asylum stairs"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Duke Sucellus (Awakened)",
+    "step_index": 5,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the Awakened reward chest. Awakened tables roll the same uniques as the base fight at roughly 3x the rate, plus the"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "The Leviathan (Awakened)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Climb the handholds with the Awakener's orb in your inventory and select 'Yes' when prompted to enter the Awakened insta"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "The Leviathan (Awakened)",
+    "step_index": 5,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the Awakened reward chest. Awakened rolls Venator vestige and Leviathan's lure at roughly 3x the base rate, plus a "
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "The Whisperer (Awakened)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Climb the rope down the sinkhole to enter Lassar Undercity"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "The Whisperer (Awakened)",
+    "step_index": 5,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the Awakened reward chest. Awakened rolls Bellator vestige and Siren's staff at roughly 3x the base rate; the black"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Vardorvis (Awakened)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Stranglewood Temple, then climb the rocks with the Awakener's orb in inventory and select 'Yes' when prompted "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Vardorvis (Awakened)",
+    "step_index": 5,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the Awakened reward chest. Awakened rolls Ultor vestige and Executioner's axe head at roughly 3x the base rate; pic"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Grotesque Guardians",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Go through the roof entrance to reach the Grotesque Guardians."
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Phosani's Nightmare",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Drink from the Pool of Nightmare to enter Phosani's dream"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Nex",
+    "step_index": 5,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the drop pile under Nex; uniques split based on damage contribution. Pick up Nihil shards for extending Ancient cer"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Sarachnis",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the Giant egg sac and any uniques before they decay, then exit the crypt for the next kill"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Bryophyta",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Use the Mossy key on the gate to enter Bryophyta's lair. The key is consumed on use - each kill needs a fresh key, so th"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Obor",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Use the Giant key on the gate to enter Obor's lair. The key is consumed - each kill needs a fresh key, so per-trip farm "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Dagannoth Rex",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Bring a rune thrownaxe (or Mi"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Dagannoth Prime",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Descend the Waterbirth Island Dungeon to floor 6 and reach the Kings' lair. Bring a rune thrownaxe (or pet rock + 70 Agi"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Dagannoth Supreme",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Descend the Waterbirth Island Dungeon to floor 6 and reach the Kings' lair. Bring a rune thrownaxe to lure Supreme away "
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Kraken",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the crevice to access the Kraken's cave"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Thermonuclear smoke devil",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the drop pile, then either reset for another kill or bank if low on prayer potions and food"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Abyssal Sire",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter one of the Sire chambers through an Eye"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "King Black Dragon",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Climb down the ladder west of the Lava Maze and pull the lever to teleport to the KBD Lair"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Scorpia",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Cavern to access Scorpia's underground lair. The cave is single-combat once you descend, which lets you absorb"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Demonic gorillas",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Crash Site Cavern beneath the Gnome Stronghold"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Demonic gorillas",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the ballista parts, Zenyte shards, and Monkey tails. Banking back to Edgeville or Castle Wars is the standard cycle"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Lizardman shaman",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the Dragon warhammer / Xeric's talisman pieces and ranarr seed stacks. Drag-loot the Lizardman fangs for Xeric's ta"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Hespori",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Use secateurs on the dead Hespori to harvest seeds, then collect the Bottomless compost bucket if it dropped. Replant an"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Chambers of Xeric",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Enter the raid instance via the chamber barrier. Scout the rotation and prepare your inventory for the room order"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Chambers of Xeric",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Clear the combat, puzzle, and resource rooms on your way to the final chamber. Bank surplus loot at the supply chest bef"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Chambers of Xeric (Challenge Mode)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Enter the raid instance and toggle Challenge Mode at the barrier. Confirm the team scale and scout the rotation"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Chambers of Xeric (Challenge Mode)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Clear all combat, puzzle, and resource rooms. CM enemies have higher defence and damage - eat more aggressively and refr"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Theatre of Blood",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Form a team at the party room and enter the Theatre. Cannot teleport out once inside - escape crystal or death are the o"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Theatre of Blood",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Clear The Maiden, Pestilent Bloat, Nylocas, Sotetseg, and Xarpus. Refresh supplies at each chest and prep gear for the V"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Theatre of Blood (Hard Mode)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Form a team and toggle Hard Mode at the party room. Once inside the Theatre you cannot teleport out - escape crystal or "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Theatre of Blood (Hard Mode)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Clear The Maiden, Pestilent Bloat, Nylocas (HM adds extra waves), Sotetseg, and Xarpus. Refresh supplies at each chest; "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Tombs of Amascut",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Enter the Tombs lobby and set your invocations. Confirm raid level under 150 for entry mode, then form a team or queue s"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Tombs of Amascut",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete the four path rooms in your preferred order: Crondis (Zebak), Het (Akkha), Apmeken (Ba-Ba), Scabaras (Kephri). "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Tombs of Amascut (300 Invocation)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Enter the Tombs lobby and set your invocations to raid level 300. Form a team or queue solo at the party board"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Tombs of Amascut (300 Invocation)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras). At raid level 300 bosses hit noticeably harder - refresh"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Tombs of Amascut (500 Invocation)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Enter the Tombs lobby and set your invocations to raid level 500. Form a team or queue solo at the party board"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Tombs of Amascut (500 Invocation)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete the four path rooms at raid level 500. Bosses have +200% hitpoints/defence and +150% damage; eat aggressively, "
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Corrupted Gauntlet",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Talk to the Gauntlet NPC and pick Enter -> Corrupted challenge to start the harder instance"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Corrupted Gauntlet",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Prep phase (corrupted mobs hit harder and have higher Defence): gather paddlefish + linum tirinum + raw chompy meat + co"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "The Gauntlet",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Talk to the Gauntlet NPC and pick Enter -> Standard challenge to start the instance"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "The Gauntlet",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Prep phase (about 7-9 minutes): gather paddlefish + linum tirinum + raw chompy meat + crystal shards, mine ore from crys"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Tempoross",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Fish harpoonfish at the dark cloud spots, then run to a cannon and cook (use Fish on Cannon) and load the harpoonfish in"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Wintertodt",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Chop bruma roots, fletch them into kindling (use Knife on bruma root), and feed kindling to the brazier closest to a Pyr"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Zalcano",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Pick up the Tetsu / Virtus / Aurora dye-mould reward, plus any Zalcano shards or Crystal tool seeds dropped. Drops appea"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Sol Heredit",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Clear waves 1-11. Use Protect from Missiles vs Fremennik Archers, Protect from Melee vs Manticores, and step under Serpe"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Sol Heredit",
+    "step_index": 5,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the reward chest at the Colosseum exit. Sunfire splinters and Echo crystals roll on every clear; Tonalztics and Diz"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Perilous Moons",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "After all three moons die, open the Lunar Chest in the centre of the arena for armour pieces and unique drops. Empty the"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Tormented Demons",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the rares (Burning claw, Tormented synapse, Guthixian temple teleport scroll). The teleport scroll drop chance is h"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Beginner Treasure Trails",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Obtain a beginner clue scroll. Lowest-tier monsters (chickens, cows, men, goblins) drop them at ~1/50; Hans in Lumbridge"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Beginner Treasure Trails",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Beginner clues are short (1-5 steps) and cover Lumbridge /"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Beginner Treasure Trails",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Open the reward casket for collection log items. Beginner caskets roll the Mole / Frog / Bear / Demon slippers, Jester c"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Cave Crawler",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Lumbridge Swamp caves"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Rockslug",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Bring a bag of salt to finish them"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Cockatrice",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Pyrefiend",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or use Catacombs of Kourend"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Basilisk",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Jelly",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Catacombs of Kourend for burst tasks"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Turoth",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Cave Horror",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the cave on the north side of the island. Witchwood icon required"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Wyrm",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Take the elevator down into the Karuulm Slayer Dungeon."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Wyrm",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the dragon-tier rares (Dragon sword, Dragon harpoon, Dragon thrownaxe, Dragon knife) and the regular drops. Hop flo"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Fossil Island Wyvern",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Wyvern Cave. Elemental/mind/dragonfire shield required"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Kurask",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Skeletal Wyvern",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the Draconic visage and Granite legs. Long Bones (5 Construction XP each) and the Wyvern visage drop weight makes t"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Gargoyle",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the Granite maul (3-tick spec weapon), Mystic robe top (dark), and Adamant boots. Granite mauls stack high - high a"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Custodian Stalker",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Squeeze through the cave entrance to enter the Stalker Den"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Drake",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Take the elevator down into the Karuulm Slayer Dungeon, then descend to the mid level (Drake floor)."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Drake",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot Drake's claw and Drake's tooth. The Boots of brimstone upgrade (combine claw + boots of stone) is the milestone cra"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Cave Kraken",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Kraken Cove entrance. 87 Slayer, on task only"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Araxyte",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Araxyte Cave (north-east Darkmeyer). Use crush weapons for best accuracy"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Hydra",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Take the elevator down into the Karuulm Slayer Dungeon, then descend to the lowest floor (Hydra floor, 95 Slayer)."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Hydra",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the Hydra's fang / eye / heart and Hydra tail. The three Brimstone ring components require all three pieces in orde"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Vyrewatch Sentinel",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot Blood shards (1/5000 drop rate). Charge an Amulet of fury into an Amulet of blood fury at 1000 Blood shards or sell"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Superior Slayer Monster",
+    "step_index": 0,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "This rare table applies on any slayer task above the superior-unlock level. Superior monsters have a 1/200 spawn chance "
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Hallowed Sepulchre",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the Mausoleum Door to access the Hallowed Sepulchre lobby. Talk to the spirit if it is your first visit, then clim"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Hallowed Sepulchre",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Run the floors in order: 1, 2, 3, 4 (then 5 at 72+ Agility). Loot every brown coffin you pass for Hallowed marks. Strang"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Hallowed Sepulchre",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "On floor 5, the grand coffins behind the locked doors are the high-value loot. Use a Hallowed focus / symbol / grapple w"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Hallowed Sepulchre",
+    "step_index": 5,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Spend Hallowed marks at the reward shop near the entrance. The Ring of endurance and Strange old lockpick come from the "
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Guardians of the Rift",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Pass through the barrier to enter the Guardians of the Rift arena and wait for the next game to start."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Guardians of the Rift",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Hand in any Intricate pouches you obtained to receive bonus rewards (Abyssal pearls / rare uniques). Then spend Abyssal "
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Brimhaven Agility Arena",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Continue tagging highlighted obstacles to accumulate tickets. Prioritise the marked obstacle each time the arrow changes"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Brimhaven Agility Arena",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Navigate the obstacle course inside the arena. Follow the blinking yellow arrow to the marked obstacle - only the highli"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Brimhaven Agility Arena",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Continue tagging highlighted obstacles to accumulate tickets. Prioritise the marked obstacle each time the arrow changes"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Giants' Foundry",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Talk to Kovac to select a commission. Higher-quality commissions (longer swords / better metals) reward more reputation "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Giants' Foundry",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Pour metal into the crucible, then move the sword through the trip hammer, grindstone, and polishing wheel in order to s"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Giants' Foundry",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Hand in the finished sword to Kovac for reputation points. Stack reputation, then spend at his shop for the Smiths outfi"
+  },
+  {
+    "detector": "D1",
+    "severity": "MEDIUM",
+    "source": "Pest Control",
+    "step_index": 1,
+    "condition": "ARRIVE_AT_ZONE",
+    "message": "ARRIVE_AT_ZONE step missing required field (completionZone of length 5) -> never auto-advances",
+    "description": "Board the lander matching your combat level (Novice <100, Intermediate 100-150, Veteran 150+). Wait for the lander to fi"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Pest Control",
+    "step_index": 2,
+    "condition": "CHAT_MESSAGE_RECEIVED",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Destroy all 4 portals while defending the Void Knight. Use Protect from Melee when swarmed by spinners near the Void Kni"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Mage Training Arena",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Bank to restock runes and repeat training rooms until you have enough pizazz points for your target reward. Aim for the "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Mage Training Arena",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Enter one of the four training rooms. Telekinetic: move statues with Telekinetic Grab. Alchemy: High Alch the correct it"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Mage Training Arena",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Bank to restock runes and repeat training rooms until you have enough pizazz points for your target reward. Aim for the "
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Shades of Mort'ton",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Pick up your shade key from the reward pillar inside the temple."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Mahogany Homes",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Talk to Amy and accept a contract. She will direct you to Falador, Varrock, Hosidius, or East Ardougne - teleport direct"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Mahogany Homes",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "At the contract house, repair every broken hotspot in the order shown. Right-click each broken object and use the correc"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Mahogany Homes",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Return to Amy in the contract city to hand in - the contract auto-rerolls into a new one in the same city until you choo"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Mastering Mixology",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Talk to the Mixologist to start the minigame and enter the lab. You need 60 Herblore + Children of the Sun started."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Mastering Mixology",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Mix potions at the Mixology station to earn Mox (orange), Aga (green), and Lye (blue) resin. Optimal cycle: grind the he"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Mastering Mixology",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Spend resin at the Mixology shop. Alchemist labcoat / pants / gloves cost 8750 each Mox/Aga/Lye; Prescription goggles 24"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Volcanic Mine",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Enter the Volcanic Mine entrance and join a game lobby. Worlds 408/409 are the official VM theme worlds; solo runs are p"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Volcanic Mine",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Mine ore from one of the three coloured walls (red/green/blue) and deposit the resulting boulders into the central lava "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Volcanic Mine",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Exit the mine after the round ends to bank your points and ores. Spend points at Petrified Pete's shop for Prospector pi"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Tithe Farm",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=2 but loopCount=0 -> loop never engages",
+    "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harv"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Tithe Farm",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Bring seeds scaled to your Farming level (Golovanova at 34+, Logavano at 54+, Bologano at 74+), a watering can or Gricol"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Tithe Farm",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harv"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Gnome Restaurant (Scarfs)",
+    "step_index": 4,
+    "condition": "ARRIVE_AT_TILE",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Captain Ninto or Captain Daerkin is assigned to maxi"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Gnome Restaurant (Scarfs)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Captain Ninto or Captain Dae"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Gnome Restaurant (Scarfs)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Gnome Restaurant (Scarfs)",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Collect your reward. Hard deliveries on time award reward tokens redeemable for food rewards and a chance at Gnome scarf"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Fishing Trawler",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=2 but loopCount=0 -> loop never engages",
+    "description": "During the 10-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope. B"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Fishing Trawler",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "During the 10-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope. B"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Temple Trekking",
+    "step_index": 4,
+    "condition": "ARRIVE_AT_TILE",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Run back to Burgh de Rott to start another trek. Use Drakan's medallion or Minigame tele to reset quickly."
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Temple Trekking",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Choose the hardest route and strongest follower (Rolayne Twickit) for the best Lumberjack outfit drop chance. Hard route"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Temple Trekking",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Escort the follower through Morytania to Paterdomus. Protect the follower during combat events - if it dies the trek fai"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Temple Trekking",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Claim your reward token at Paterdomus and exchange it with the token trader for a Lumberjack outfit piece. Hard treks yi"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Rogues' Den",
+    "step_index": 3,
+    "condition": "ARRIVE_AT_TILE",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "To get remaining pieces, return through the trapdoor in the pub basement and repeat the maze. The maze layout is fixed -"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Rogues' Den",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "At the end of the maze, search the safe to receive a random piece of rogue equipment. Each piece has approximately a 5-i"
+  },
+  {
+    "detector": "D1",
+    "severity": "MEDIUM",
+    "source": "Castle Wars",
+    "step_index": 1,
+    "condition": "ARRIVE_AT_ZONE",
+    "message": "ARRIVE_AT_ZONE step missing required field (completionZone of length 5) -> never auto-advances",
+    "description": "Enter a team portal (Saradomin, Zamorak, or Guthix for a balanced game). Wait in the lobby until the 20-minute game begi"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Castle Wars",
+    "step_index": 2,
+    "condition": "CHAT_MESSAGE_RECEIVED",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Capture the enemy flag from their castle and return it to your own base to score tickets. Bring explosives to destroy ba"
+  },
+  {
+    "detector": "D1",
+    "severity": "MEDIUM",
+    "source": "Soul Wars",
+    "step_index": 1,
+    "condition": "ARRIVE_AT_ZONE",
+    "message": "ARRIVE_AT_ZONE step missing required field (completionZone of length 5) -> never auto-advances",
+    "description": "Talk to Nomad or enter the Soul Wars portal to join a team (blue or red). Wait in the lobby until the game starts."
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Soul Wars",
+    "step_index": 2,
+    "condition": "CHAT_MESSAGE_RECEIVED",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Kill enemies to collect soul fragments, then offer them at the Soul obelisk to weaken the opposing Avatar. When the Avat"
+  },
+  {
+    "detector": "D1",
+    "severity": "MEDIUM",
+    "source": "Last Man Standing",
+    "step_index": 1,
+    "condition": "ARRIVE_AT_ZONE",
+    "message": "ARRIVE_AT_ZONE step missing required field (completionZone of length 5) -> never auto-advances",
+    "description": "Enter the LMS lobby building and choose Competitive or Casual mode. Competitive earns more points per match but requires"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Last Man Standing",
+    "step_index": 2,
+    "condition": "CHAT_MESSAGE_RECEIVED",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Scavenge weapons, armour, and food from supply crates on the island. Fight other players; the last player standing wins."
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Vale Totems",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Collect vale offerings from completed totems after ent visits. Exchange offerings at the reward trader for Bow string sp"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Vale Totems",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Identify the 3 active spirit types near each totem site (out of 5 variants). Carve 4 decorations matching those spirits "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Vale Totems",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Run between the 8 totem sites around the valley maintaining and decorating totems. Activate ent trails (step on both tra"
+  },
+  {
+    "detector": "D1",
+    "severity": "MEDIUM",
+    "source": "Barbarian Assault",
+    "step_index": 1,
+    "condition": "ARRIVE_AT_ZONE",
+    "message": "ARRIVE_AT_ZONE step missing required field (completionZone of length 5) -> never auto-advances",
+    "description": "Talk to Captain Cain to join a team of 5. Choose your role: Attacker, Collector, Defender, or Healer. Each role uses a d"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Barbarian Assault",
+    "step_index": 2,
+    "condition": "CHAT_MESSAGE_RECEIVED",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Complete all 10 waves and defeat the Penance Queen. Always use the egg or bait type announced on your role's call panel "
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Aerial Fishing",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
+    "description": "Collect king worms on the island or use fish offcuts as bait. Equip the cormorant glove from Alry the Angler, then send "
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Aerial Fishing",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Collect king worms on the island or use fish offcuts as bait. Equip the cormorant glove from Alry the Angler, then send "
+  },
+  {
+    "detector": "D1",
+    "severity": "MEDIUM",
+    "source": "Champion's Challenge",
+    "step_index": 2,
+    "condition": "ACTOR_DEATH",
+    "message": "ACTOR_DEATH step missing required field (completionNpcId > 0 or completionNpcIds non-empty) -> never auto-advances",
+    "description": "Challenge a champion in the arena by handing a champion scroll to Larxia. Each champion uses a specific combat style - u"
+  },
+  {
+    "detector": "D1",
+    "severity": "MEDIUM",
+    "source": "My Notes",
+    "step_index": 1,
+    "condition": "ACTOR_DEATH",
+    "message": "ACTOR_DEATH step missing required field (completionNpcId > 0 or completionNpcIds non-empty) -> never auto-advances",
+    "description": "In the Ancient Cavern, rummage barbarian skeletons (1/13 chance per rummage) for ancient pages, or kill mithril dragons "
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Deep Sea Fishing",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
+    "description": "Lower your trawling net when in range of a shoal. Watch the depth indicator - when a shoal stops it moves to shallow or "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Deep Sea Fishing",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Sail out from Port Roberts dock to locate a trawling shoal (fish shoal icon on the world map). Use a fathom stone for ca"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Deep Sea Fishing",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Lower your trawling net when in range of a shoal. Watch the depth indicator - when a shoal stops it moves to shallow or "
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Pyramid Plunder",
+    "step_index": 3,
+    "condition": "ARRIVE_AT_TILE",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "After completing the run, recharge your Pharaoh's sceptre by speaking to the Guardian Mummy. Bank at the Sophanem Dungeo"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Pyramid Plunder",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Rush through rooms 1-7, looting urns and sarcophagi only. Use Protect from Melee to ignore mummies and scarabs. At room "
+  },
+  {
+    "detector": "D1",
+    "severity": "MEDIUM",
+    "source": "Stronghold of Security",
+    "step_index": 1,
+    "condition": "ACTOR_DEATH",
+    "message": "ACTOR_DEATH step missing required field (completionNpcId > 0 or completionNpcIds non-empty) -> never auto-advances",
+    "description": "Kill monsters on each floor for skull sceptre pieces: Floor 1 (Vault of War) - minotaurs drop the right skull half; Floo"
+  },
+  {
+    "detector": "D1",
+    "severity": "MEDIUM",
+    "source": "Catacombs of Kourend",
+    "step_index": 3,
+    "condition": "ACTOR_DEATH",
+    "message": "ACTOR_DEATH step missing required field (completionNpcId > 0 or completionNpcIds non-empty) -> never auto-advances",
+    "description": "Kill monsters in the Catacombs for dark totem pieces (base, middle, top - each 1/500 from any monster). Burying bones re"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Wilderness God Wars Dungeon",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Pass the entrance obstacle: south-east jutting wall requires 60 Agility, or north-west boulder requires 60 Strength. Tem"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Wilderness God Wars Dungeon",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Inside the main dungeon (multi-combat). Equip a god item matching the faction you are farming to stop their followers at"
+  },
+  {
+    "detector": "D1",
+    "severity": "MEDIUM",
+    "source": "TzHaar",
+    "step_index": 1,
+    "condition": "ACTOR_DEATH",
+    "message": "ACTOR_DEATH step missing required field (completionNpcId > 0 or completionNpcIds non-empty) -> never auto-advances",
+    "description": "Kill TzHaar-Ket, TzHaar-Mej, or TzHaar-Xil in the city for tokkul and rare drops. The uncut onyx is bought from the TzHa"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Motherlode Mine",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
+    "description": "Deposit pay-dirt into the hopper. Wait at the sack near Prospector Percy for cleaned ores and golden nuggets. Upper leve"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Motherlode Mine",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Mine pay-dirt from ore veins. Each vein lasts 23-27 seconds (36-40 on upper level). Use the coal bag to carry extra capa"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Motherlode Mine",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Deposit pay-dirt into the hopper. Wait at the sack near Prospector Percy for cleaned ores and golden nuggets. Upper leve"
+  },
+  {
+    "detector": "D1b",
+    "severity": "LOW",
+    "source": "Shooting Stars",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "loopCount=20 but loopBackToStep=0 -> loopCount has no effect",
+    "description": "Mine the crashed star. Stars degrade through tiers as miners chip away at them - being the first miner awards double sta"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "The Hueycoatl",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the Hueycoatl reward chest in the arena. Pick up Hueycoatl hide and any unique drops before leaving"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Yama",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Form a party of 2-4 and enter Yama's instance. Solo is possible at endgame but DPS check is brutal; duo is the standard."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Yama",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the chest after Yama dies for Oathplate shards, Dossiers, and unique drops. Open Forgotten lockboxes at a bank for "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Doom of Mokhaiotl",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Enter the Mokhaiotl delve instance. Each delve is a sequence of depth floors 1-10 (or further). Unique drop rates improv"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Doom of Mokhaiotl",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Claim the delve reward chest. Higher depths bias the loot toward Avernic treads / Eye of ayak / Mokhaiotl cloth. Bank Mo"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Royal Titans",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Enter the Royal Titans tunnel and start an instance (solo or duo). Duo is the standard - solo is doable but DPS check is"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Royal Titans",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot the reward chest by the tunnel scoreboard. Charge a Giantsoul amulet from any uncharged drop with desiccated pages "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Amoxliatl",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot Amoxliatl's drops and pick up any remaining frozen tears on the ground before the boss respawns"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Shellbane Gryphon",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Enter the cave to descend to the Shellbane Gryphon arena. The cave is instanced, so no other players will interfere with"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Scurrius",
+    "step_index": 5,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Loot Scurrius' drop pile then leave the instance via the portal. Re-enter for another kill or return to bank if low on f"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "The Fight Caves",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Clear waves 1-62. Use Protect from Magic against Tz-Kih (level 22) and Yt-MejKot (180); Protect from Missiles against Tz"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "The Fight Caves",
+    "step_index": 5,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Pick up the Fire cape drop on the rocks where Jad died. Tzrek-jad (pet) rolls 1/200 on Jad's death - it spawns inside th"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "The Inferno",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Clear waves 1-66. Stack-up positioning is the entire game: pillar 4 (NW) and pillar 1 (S) are the standard anchors. Pray"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "The Inferno",
+    "step_index": 4,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Triple-Jad wave 67. Each Jad rotates Magic / Ranged prayers independently - the cue is the rear-back animation. Kill the"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "The Inferno",
+    "step_index": 6,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Pick up the Infernal cape under TzKal-Zuk. Jal-nib-rek (pet) rolls 1/100 on Zuk's death; spawns inside the instance so l"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Easy Treasure Trails",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Obtain an easy clue scroll. Low-level monsters (Cave bugs, Cave crawlers, Minotaurs, low-level skeletons), H.A.M. member"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Easy Treasure Trails",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Easy clues add cryptic clues, emote clues, and 6 anagram c"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Easy Treasure Trails",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Open the reward casket for collection log items. Easy caskets roll the bronze / iron / studded leather (t/g) trim/gold s"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Medium Treasure Trails",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Obtain a medium clue scroll. Mid-level monsters (Cyclops, Cockatrice, Pyrefiends, Earth warriors, Otherworldly beings) d"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Medium Treasure Trails",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Medium clues introduce coordinate clues (Spade required), "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Medium Treasure Trails",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Open the reward casket for collection log items. Medium caskets roll Ranger boots (1/1133), Wizard boots, the black / mi"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Hard Treasure Trails",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Obtain a hard clue scroll from a slayer task drop (Jellies, Bloodvelds), boss drop (Sarachnis, Demonic gorillas), or by "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Hard Treasure Trails",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Hard clues add coordinate dig clues (bring spade), puzzle "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Elite Treasure Trails",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Obtain an elite clue scroll from a boss drop (Vorkath, Zulrah, Cerberus, Hydra, Barrows reward casket), a slayer monster"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Elite Treasure Trails",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Elite clues add cryptic chains, hot/cold coordinates, dual"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Master Treasure Trails",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Obtain a master clue scroll by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a "
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Master Treasure Trails",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Master clues add 3-step puzzle chains, towel-bearing emote"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Hard Treasure Trail Rewards (Rare)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Obtain hard clue scrolls via PvM (Hellhounds, Kalphite Queen, etc.), skilling, or Ninja impling jars (approx 1/25 per ja"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Hard Treasure Trail Rewards (Rare)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Elite Treasure Trail Rewards (Rare)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Obtain elite clue scrolls via PvM (Abyssal Sire, Zulrah, etc.), skilling, or Dragon impling jars (approx 1/50 per jar) f"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Elite Treasure Trail Rewards (Rare)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Master Treasure Trail Rewards (Rare)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Obtain master clues by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a rare dro"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Master Treasure Trail Rewards (Rare)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Shared Treasure Trail Rewards",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete clue scrolls of any tier. Refer to the parent tier activity for the most efficient clue acquisition method."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Shared Treasure Trail Rewards",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance."
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "The Mimic",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Complete master clue scrolls. Each master casket opened has approx 1/35 chance to trigger The Mimic. Full guidance on ob"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Woodcutting (Teak Trees)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
+    "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-t"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Woodcutting (Teak Trees)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-t"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Mining (Gemstone Rocks)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
+    "description": "Mine gemstone rocks (sapphire, emerald, ruby, diamond, opal, jade, red topaz) in the underground mine. Each mining actio"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Mining (Gemstone Rocks)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Mine gemstone rocks (sapphire, emerald, ruby, diamond, opal, jade, red topaz) in the underground mine. Each mining actio"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Fishing (Swordfish)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
+    "description": "Harpoon swordfish at harpoon spots. Each catch rolls the Heron pet and Big swordfish. Heron pet rate scales with Fishing"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Fishing (Swordfish)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Harpoon swordfish at harpoon spots. Each catch rolls the Heron pet and Big swordfish. Heron pet rate scales with Fishing"
+  },
+  {
+    "detector": "D1b",
+    "severity": "LOW",
+    "source": "Runecrafting (Fire Runes)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "loopCount=50 but loopBackToStep=0 -> loopCount has no effect",
+    "description": "Craft fire runes at the altar (14 Runecrafting required). Click the altar to craft all essence in inventory and pouches."
+  },
+  {
+    "detector": "D1b",
+    "severity": "LOW",
+    "source": "Farming (Fruit Trees)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "loopCount=50 but loopBackToStep=0 -> loopCount has no effect",
+    "description": "Wait approximately 16 hours for fruit trees to fully grow (each tree takes 8 growth cycles at ~2 hours each). Tangleroot"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Underwater Crabs",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=4 but loopCount=0 -> loop never engages",
+    "description": "Kill underwater crabs (combat level 23) in the Mogre Camp. Fresh crab claw drops at 1/8 and fresh crab shell at 1/8 - us"
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Underwater Crabs",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Kill underwater crabs (combat level 23) in the Mogre Camp. Fresh crab claw drops at 1/8 and fresh crab shell at 1/8 - us"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Gnome Restaurant (Seed Pods)",
+    "step_index": 4,
+    "condition": "ARRIVE_AT_TILE",
+    "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
+    "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Wingstone, Penwie, Brambickle, or Prof. Manglethorp "
+  },
+  {
+    "detector": "D2",
+    "severity": "MEDIUM",
+    "source": "Gnome Restaurant (Seed Pods)",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
+    "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Wingstone, Penwie, Brambickl"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Gnome Restaurant (Seed Pods)",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Gnome Restaurant (Seed Pods)",
+    "step_index": 3,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Collect your reward. Hard deliveries on time award reward tokens redeemable for food rewards and a chance at Mint cake o"
+  },
+  {
+    "detector": "D1b",
+    "severity": "MEDIUM",
+    "source": "Cutting Squid",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
+    "description": "Cut squid with a knife or use the boat chum station. If your inventory is full when a beak drops, offcuts drop to the gr"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Cutting Squid",
+    "step_index": 1,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Sail from Port Piscarilius to squid lantern fishing spots. A chum station (2 fish/tick), advanced chum station (3/tick),"
+  },
+  {
+    "detector": "D2",
+    "severity": "LOW",
+    "source": "Cutting Squid",
+    "step_index": 2,
+    "condition": "MANUAL",
+    "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
+    "description": "Cut squid with a knife or use the boat chum station. If your inventory is full when a beak drops, offcuts drop to the gr"
+  }
+]
