@@ -81,6 +81,13 @@ public class SkillCapePerkStateImpl implements SkillCapePerkState
 	 */
 	private volatile Map<SkillCapePerk, Boolean> cache;
 
+	/**
+	 * Last-seen real (unboosted) level per skill, used to suppress redundant
+	 * refreshes on XP-only {@link StatChanged} events. Accessed only on the client
+	 * thread, so no synchronization is needed.
+	 */
+	private final Map<Skill, Integer> lastRealLevel = new EnumMap<>(Skill.class);
+
 	@Inject
 	SkillCapePerkStateImpl(Client client)
 	{
@@ -150,13 +157,22 @@ public class SkillCapePerkStateImpl implements SkillCapePerkState
 	 *
 	 * <p>Hitting level 99 in any skill unlocks a new cape perk, so a stat-level
 	 * change can flip {@link #hasPerkAvailable(SkillCapePerk)} from {@code false}
-	 * to {@code true}. {@link StatChanged} fires per-skill on level changes
-	 * (and at login bootstrap) — frequency is low enough that the {@code O(n)}
-	 * cape scan (n &lt;= number of perks) is acceptable without filtering.
+	 * to {@code true}. {@link StatChanged}, however, fires on every XP drop — not
+	 * just on level-ups — so it can arrive many times per second while training.
+	 * The perk fallback depends only on the real level, so a refresh is skipped
+	 * unless the changed skill's real level actually moved.
 	 */
 	@Subscribe
 	public void onStatChanged(StatChanged event)
 	{
+		Skill skill = event.getSkill();
+		int level = event.getLevel();
+		Integer previous = lastRealLevel.put(skill, level);
+		if (previous != null && previous == level)
+		{
+			// XP-only change at the same real level — perk availability cannot change.
+			return;
+		}
 		refresh();
 	}
 
@@ -165,6 +181,7 @@ public class SkillCapePerkStateImpl implements SkillCapePerkState
 	public void reset()
 	{
 		cache = buildEmptyCache();
+		lastRealLevel.clear();
 		log.debug("SkillCapePerkState reset");
 	}
 

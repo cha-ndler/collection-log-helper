@@ -122,4 +122,32 @@ public class SkillCapePerkStateImplSubscribeTest
 		assertTrue(detector.hasPerkAvailable(SkillCapePerk.MAGIC_SPELLBOOK_SWAP));
 	}
 
+	@Test
+	public void onStatChanged_sameLevelXpOnly_doesNotRefreshAgain()
+	{
+		when(client.getItemContainer(InventoryID.EQUIPMENT)).thenReturn(null);
+		when(client.getRealSkillLevel(any(Skill.class))).thenReturn(50);
+
+		// First event at level 50 refreshes; the second is an XP-only drop at the
+		// same real level and must be skipped (StatChanged fires on every XP gain).
+		detector.onStatChanged(new StatChanged(Skill.ATTACK, 100_000, 50, 50));
+		detector.onStatChanged(new StatChanged(Skill.ATTACK, 100_500, 50, 50));
+
+		// One refresh -> one equipment read.
+		verify(client, times(1)).getItemContainer(InventoryID.EQUIPMENT);
+	}
+
+	@Test
+	public void onStatChanged_levelChange_refreshesAgain()
+	{
+		when(client.getItemContainer(InventoryID.EQUIPMENT)).thenReturn(null);
+		when(client.getRealSkillLevel(any(Skill.class))).thenReturn(50);
+
+		// A genuine level change can unlock a cape perk, so it must refresh.
+		detector.onStatChanged(new StatChanged(Skill.ATTACK, 100_000, 50, 50));
+		detector.onStatChanged(new StatChanged(Skill.ATTACK, 110_000, 51, 51));
+
+		verify(client, times(2)).getItemContainer(InventoryID.EQUIPMENT);
+	}
+
 }
