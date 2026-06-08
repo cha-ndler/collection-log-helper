@@ -31987,7 +31987,7 @@
     "travelTip": "Port Piscarilius sailing dock -> sail to squid fishing spots",
     "guidanceSteps": [
       {
-        "description": "Bank for squid cutting. Bring a knife for hand-cutting (most beak rolls per squid) or use the boat chum station for faster throughput. Jumbo squid give 1/512 per cut; swordtip squid give 1/1024. Sailing level 45 required. Spirit flakes or rada's blessing can double catches.",
+        "description": "Bank for squid cutting. Bring a knife for hand-cutting (most beak rolls per squid) or use the boat chum station for faster throughput. Jumbo squid give 1/512 per cut; swordtip squid give 1/1024. Sailing 47 and Fishing 52 required (lantern harpooning). Spirit flakes or rada's blessing can double catches.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -32033,7 +32033,11 @@
       "skills": [
         {
           "skill": "SAILING",
-          "level": 45
+          "level": 47
+        },
+        {
+          "skill": "FISHING",
+          "level": 52
         }
       ]
     }
