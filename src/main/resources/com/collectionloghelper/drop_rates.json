@@ -12523,7 +12523,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the God Wars Dungeon (fairy ring AJQ then south, or Trollheim teleport)",
+        "description": "Travel to the God Wars Dungeon (Trollheim teleport)",
         "worldX": 2844,
         "worldY": 5280,
         "worldPlane": 2,

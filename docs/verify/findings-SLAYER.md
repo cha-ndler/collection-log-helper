@@ -59,6 +59,7 @@ Verification of every `SLAYER` source in
   the parenthetical fairy-ring clause is bad.
 - **Suggested fix (data owner):** drop the "fairy ring AJQ then south, or " clause, leaving
   *"Travel to the God Wars Dungeon (Trollheim teleport)"*, matching the already-correct `travelTip`.
+- **status:** resolved 2026-06-07 (struck the AJQ clause; left "Travel to the God Wars Dungeon (Trollheim teleport)"; `lintDropRates build` green).
 
 ---
 
