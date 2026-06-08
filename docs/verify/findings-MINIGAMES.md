@@ -108,6 +108,7 @@ cache-confirmed and was not flagged.
 - **Why it's wrong:** there is no fairy-ring route to the Volcanic Mine; DLR lands in Tirannwn. (The
   top-level `travelTip` "Digsite pendant -> Fossil Island" is correct — only the DLR addition is wrong.)
 - **domain-skeptic:** `STANDS` (low) — misleading fallback hint; does not hide the source or affect ids.
+- **status:** resolved 2026-06-07 (struck the `DLR` clause from both strings; kept the Digsite-pendant route; `lintDropRates build` green).
 
 ### Finding 4 — Fishing Trawler: wrong fairy ring code `BKP` — severity low
 
