@@ -6513,7 +6513,7 @@
     "killTimeSeconds": 1200,
     "requirements": {
       "quests": [
-        "A_TASTE_OF_HOPE"
+        "PRIEST_IN_PERIL"
       ]
     },
     "items": [
@@ -6649,7 +6649,7 @@
         "worldPlane": 0,
         "requirements": {
           "quests": [
-            "SINS_OF_THE_FATHER"
+            "A_TASTE_OF_HOPE"
           ]
         }
       },
@@ -6738,7 +6738,7 @@
     "ironKillTimeSeconds": 1620,
     "requirements": {
       "quests": [
-        "A_TASTE_OF_HOPE"
+        "PRIEST_IN_PERIL"
       ]
     },
     "items": [
