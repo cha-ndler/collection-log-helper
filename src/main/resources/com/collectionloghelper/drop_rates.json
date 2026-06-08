@@ -19676,6 +19676,15 @@
         "wikiPage": "Ballistic_attractor_schematic",
         "pointCost": 1,
         "independent": true
+      },
+      {
+        "itemId": 33423,
+        "name": "Bosun's workbench schematic",
+        "dropRate": 1.0,
+        "isPet": false,
+        "wikiPage": "Bosun%27s_workbench_schematic",
+        "pointCost": 1,
+        "independent": true
       }
     ],
     "locationDescription": "Various islands discovered through Sailing",
