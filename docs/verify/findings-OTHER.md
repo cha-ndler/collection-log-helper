@@ -71,6 +71,7 @@ coverage) and is reported under the Newtroost finding.
   surfaced the 219→Grimy torstol id error.
 - **Suggested fix (not applied):** `requiredItemIds` `[2138, 219]` → `[221, 314]`; both
   step descriptions "raw chicken and eye of newt" → "eye of newt and feather".
+- **status:** resolved 2026-06-07 (ids swapped to `[221, 314]`, both descriptions updated; new ids cache-confirmed via `cross_check_ids`; `lintDropRates build` green).
 
 ### 2. Creature Creation (Frogeel) — wrong creation ingredients (cross-creature copy/paste)  — severity: high
 

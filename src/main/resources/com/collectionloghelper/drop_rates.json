@@ -22844,20 +22844,20 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring raw chicken and eye of newt as ingredients.",
+        "description": "Travel to the Tower of Life dungeon (fairy ring DJP), south of Ardougne. Bring eye of newt and feather as ingredients.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
         "requiredItemIds": [
-          2138,
-          219
+          221,
+          314
         ],
         "section": "Travel"
       },
       {
-        "description": "Place raw chicken and eye of newt on the Altar of Life to create a Newtroost, then kill it. Use Protect from Melee if food is running low.",
+        "description": "Place eye of newt and feather on the Altar of Life to create a Newtroost, then kill it. Use Protect from Melee if food is running low.",
         "worldX": 2639,
         "worldY": 3218,
         "worldPlane": 0,
