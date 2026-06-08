@@ -1,0 +1,289 @@
+#!/usr/bin/env python3
+"""Static guidance-correctness analyzer for `drop_rates.json`.
+
+Re-derives, by reading the data alone, the class of guidance-step config bugs
+that the maintainer has been finding by hand in-game. Every invariant asserted
+here is grounded in the live completion semantics of the guidance engine; the
+source citation for each rule is recorded next to the detector so a reviewer can
+confirm the rule against the Java rather than trusting a linter heuristic.
+
+Detectors implemented (the statically-decidable, data-level classes):
+
+  D1  Data-invariant violations — a step whose `completionCondition` is missing
+      the field(s) the engine REQUIRES for that condition to ever fire. Derived
+      from CompletionChecker + StepAdvancer:
+        * ITEM_OBTAINED / INVENTORY_HAS_ITEM / INVENTORY_NOT_HAS_ITEM
+              require completionItemId > 0
+              (CompletionChecker.java:96-121, 322-327)
+        * ARRIVE_AT_TILE   requires worldX > 0
+              (CompletionChecker.java:236, 329)
+        * ARRIVE_AT_ZONE   requires completionZone of length 5
+              (GuidanceStep.getZone, CompletionChecker.java:169-170)
+        * NPC_TALKED_TO    requires completionNpcId > 0
+              (CompletionChecker.java:142-143)
+        * ACTOR_DEATH      requires completionNpcId > 0 OR non-empty
+                           completionNpcIds (matchesCompletionNpc;
+              CompletionChecker.java:131-132, GuidanceStep.java:458-475)
+        * CHAT_MESSAGE_RECEIVED requires completionChatPattern
+              (CompletionChecker.java:269-270)
+        * VARBIT_AT_LEAST  requires completionVarbitId > 0
+              (CompletionChecker.java:153-154)
+        * PLAYER_ON_PLANE  always satisfiable (no required field)
+
+  D1b Loop-config violations — derived from StepAdvancer.advance
+      (StepAdvancer.java:135-137): a loop runs only when BOTH
+      loopBackToStep > 0 AND loopCount > 0.
+        * loopBackToStep > 0 but loopCount <= 0  -> never loops (the #739/B bug)
+        * loopCount > 0 but loopBackToStep <= 0  -> dead loopCount (no effect)
+        * loopBackToStep out of 1..len range     -> would index out of bounds
+                           (nextIndex = loopBackToStep - 1; StepAdvancer.java:142)
+
+  D2  Auto-advance dead-ends — a non-final MANUAL step blocks the hands-free
+      guidance flow because the engine never auto-completes MANUAL
+      (CompletionChecker.isStepAlreadySatisfied returns false for it once parked;
+      MANUAL is absent from every satisfying-evaluation path). Severity is raised
+      when the step already carries a wireable completion signal
+      (skipIfHasAnyItemIds / groundItemIds / completionItemId / npcId / objectId),
+      because that means a real auto-completion exists but isn't wired — the #729
+      Shades-of-Mort'ton class.
+
+This harness is side-effect-free: it never edits drop_rates.json.
+
+Usage:
+    python scripts/audit_guidance_config.py [--data PATH] [--json-output PATH]
+    python scripts/audit_guidance_config.py --calibrate   # assert known counts
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from dataclasses import dataclass, asdict
+from pathlib import Path
+from typing import Any, Optional
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_DATA_PATH = (
+    REPO_ROOT / "src" / "main" / "resources" / "com" / "collectionloghelper" / "drop_rates.json"
+)
+
+# Conditions and the field each one REQUIRES to ever auto-complete.
+# Value is a predicate over the raw step dict.
+def _has_item(s):       return int(s.get("completionItemId", 0) or 0) > 0
+def _has_world_x(s):    return int(s.get("worldX", 0) or 0) > 0
+def _has_zone(s):       return isinstance(s.get("completionZone"), list) and len(s["completionZone"]) == 5
+def _has_talk_npc(s):   return int(s.get("completionNpcId", 0) or 0) > 0
+def _has_death_npc(s):  return int(s.get("completionNpcId", 0) or 0) > 0 or bool(s.get("completionNpcIds"))
+def _has_chat(s):       return bool(s.get("completionChatPattern"))
+def _has_varbit(s):     return int(s.get("completionVarbitId", 0) or 0) > 0
+
+REQUIRED_FIELD = {
+    "ITEM_OBTAINED":        (_has_item,     "completionItemId > 0"),
+    "INVENTORY_HAS_ITEM":   (_has_item,     "completionItemId > 0"),
+    "INVENTORY_NOT_HAS_ITEM": (_has_item,   "completionItemId > 0"),
+    "ARRIVE_AT_TILE":       (_has_world_x,  "worldX > 0"),
+    "ARRIVE_AT_ZONE":       (_has_zone,     "completionZone of length 5"),
+    "NPC_TALKED_TO":        (_has_talk_npc, "completionNpcId > 0"),
+    "ACTOR_DEATH":          (_has_death_npc, "completionNpcId > 0 or completionNpcIds non-empty"),
+    "CHAT_MESSAGE_RECEIVED": (_has_chat,    "completionChatPattern set"),
+    "VARBIT_AT_LEAST":      (_has_varbit,   "completionVarbitId > 0"),
+    # PLAYER_ON_PLANE: always satisfiable; MANUAL: handled by D2.
+}
+
+WIREABLE_SIGNAL_FIELDS = ("skipIfHasAnyItemIds", "groundItemIds")
+
+
+@dataclass
+class Finding:
+    detector: str        # D1 / D1b / D2
+    severity: str        # HIGH / MEDIUM / LOW
+    source: str
+    step_index: int      # 0-based index into guidanceSteps
+    condition: Optional[str]
+    message: str
+    description: str
+
+    def key(self):
+        return (self.detector, self.source, self.step_index, self.message)
+
+
+def _steps(source: dict) -> list:
+    return source.get("guidanceSteps") or []
+
+
+def detect_d1(source: dict) -> list[Finding]:
+    out = []
+    name = source.get("name", "?")
+    steps = _steps(source)
+    for i, st in enumerate(steps):
+        cond = st.get("completionCondition")
+        if cond not in REQUIRED_FIELD:
+            continue
+        pred, desc = REQUIRED_FIELD[cond]
+        if not pred(st):
+            out.append(Finding(
+                detector="D1",
+                severity="MEDIUM",
+                source=name,
+                step_index=i,
+                condition=cond,
+                message=f"{cond} step missing required field ({desc}) -> never auto-advances",
+                description=(st.get("description") or "")[:120],
+            ))
+    return out
+
+
+def detect_d1b(source: dict) -> list[Finding]:
+    out = []
+    name = source.get("name", "?")
+    steps = _steps(source)
+    n = len(steps)
+    for i, st in enumerate(steps):
+        lbs = int(st.get("loopBackToStep", 0) or 0)
+        lc = int(st.get("loopCount", 0) or 0)
+        if lbs > 0 and lc <= 0:
+            out.append(Finding(
+                detector="D1b", severity="MEDIUM", source=name, step_index=i,
+                condition=st.get("completionCondition"),
+                message=f"loopBackToStep={lbs} but loopCount={lc} -> loop never engages",
+                description=(st.get("description") or "")[:120],
+            ))
+        if lc > 0 and lbs <= 0:
+            out.append(Finding(
+                detector="D1b", severity="LOW", source=name, step_index=i,
+                condition=st.get("completionCondition"),
+                message=f"loopCount={lc} but loopBackToStep={lbs} -> loopCount has no effect",
+                description=(st.get("description") or "")[:120],
+            ))
+        if lbs > 0 and not (1 <= lbs <= n):
+            out.append(Finding(
+                detector="D1b", severity="HIGH", source=name, step_index=i,
+                condition=st.get("completionCondition"),
+                message=f"loopBackToStep={lbs} is outside 1..{n} -> out-of-range loop target",
+                description=(st.get("description") or "")[:120],
+            ))
+    return out
+
+
+def detect_d2(source: dict) -> list[Finding]:
+    out = []
+    name = source.get("name", "?")
+    steps = _steps(source)
+    n = len(steps)
+    for i, st in enumerate(steps):
+        if st.get("completionCondition") != "MANUAL":
+            continue
+        if i == n - 1:
+            continue  # a final MANUAL step ends the sequence; nothing to dead-end into
+        has_signal = (
+            any(st.get(f) for f in WIREABLE_SIGNAL_FIELDS)
+            or int(st.get("completionItemId", 0) or 0) > 0
+            or int(st.get("npcId", 0) or 0) > 0
+            or int(st.get("objectId", 0) or 0) > 0
+            or bool(st.get("objectIds"))
+        )
+        sev = "MEDIUM" if has_signal else "LOW"
+        why = ("carries a wireable completion signal "
+               "(skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired"
+               if has_signal else "no obvious auto-completion signal available")
+        out.append(Finding(
+            detector="D2", severity=sev, source=name, step_index=i,
+            condition="MANUAL",
+            message=f"non-final MANUAL step blocks hands-free auto-advance; {why}",
+            description=(st.get("description") or "")[:120],
+        ))
+    return out
+
+
+def analyze(data: list) -> list[Finding]:
+    findings = []
+    for source in data:
+        findings.extend(detect_d1(source))
+        findings.extend(detect_d1b(source))
+        findings.extend(detect_d2(source))
+    return findings
+
+
+def load(path: Path) -> list:
+    with open(path, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+SEV_ORDER = {"HIGH": 0, "MEDIUM": 1, "LOW": 2}
+
+
+def print_report(findings: list[Finding]) -> None:
+    by_det: dict[str, list[Finding]] = {}
+    for f in findings:
+        by_det.setdefault(f.detector, []).append(f)
+    for det in ("D1", "D1b", "D2"):
+        fs = by_det.get(det, [])
+        print(f"\n=== {det}: {len(fs)} finding(s) ===")
+        for f in sorted(fs, key=lambda x: (SEV_ORDER[x.severity], x.source, x.step_index)):
+            print(f"  [{f.severity:<6}] {f.source} step[{f.step_index}] "
+                  f"({f.condition}): {f.message}")
+            if f.description:
+                print(f"            \"{f.description}\"")
+    print(f"\nTotal findings: {len(findings)}")
+
+
+def calibrate(findings: list[Finding]) -> int:
+    """Assert the analyzer re-derives the known-bug counts from #739/#729."""
+    actor_death_missing = [f for f in findings
+                           if f.detector == "D1" and f.condition == "ACTOR_DEATH"]
+    loop_never = [f for f in findings
+                  if f.detector == "D1b" and "loop never engages" in f.message]
+    shades = [f for f in findings
+              if f.detector == "D2" and f.source.startswith("Shades of Mort")]
+
+    ok = True
+    print("CALIBRATION (expected from issues #739 / #729):")
+
+    def check(label, got, expect):
+        nonlocal ok
+        status = "PASS" if got == expect else "FAIL"
+        if got != expect:
+            ok = False
+        print(f"  [{status}] {label}: got {got}, expect {expect}")
+
+    check("D1 ACTOR_DEATH missing npc id (#739/A)", len(actor_death_missing), 5)
+    # #739/B title states "~23". The engine-true count (loopBackToStep>0 AND
+    # loopCount<=0, per StepAdvancer.java:135-137) is exactly 23. The "22" cited
+    # in some earlier hand passes was an off-by-one approximation; 23 is correct.
+    check("D1b loopBackToStep w/ loopCount=0 never loops (#739/B)", len(loop_never), 23)
+    # #729: Shades of Mort'ton has at least one non-final MANUAL dead-end.
+    check("D2 Shades of Mort'ton MANUAL dead-end present (#729)",
+          1 if len(shades) >= 1 else 0, 1)
+
+    if actor_death_missing:
+        print("  ACTOR_DEATH-missing sources:",
+              sorted({f.source for f in actor_death_missing}))
+    print("\nCALIBRATION", "PASS" if ok else "FAIL")
+    return 0 if ok else 1
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--data", type=Path, default=DEFAULT_DATA_PATH)
+    ap.add_argument("--json-output", type=Path, default=None)
+    ap.add_argument("--calibrate", action="store_true",
+                    help="assert the analyzer re-derives known-bug counts")
+    args = ap.parse_args(argv)
+
+    data = load(args.data)
+    findings = analyze(data)
+
+    if args.json_output:
+        args.json_output.write_text(
+            json.dumps([asdict(f) for f in findings], indent=2), encoding="utf-8")
+
+    print_report(findings)
+
+    if args.calibrate:
+        return calibrate(findings)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
