@@ -47,6 +47,7 @@ Prifddinas Rabbit, Pickpocketing Darkmeyer Vyre.
 - **domain-skeptic:** STANDS (high). Both prongs survived every refutation vector.
 - **Suggested fix (not applied):** Sailing 45 → 47, and add `{ "skill": "FISHING",
   "level": 52 }`. Update the guidance prose at line 32030 accordingly.
+- **status:** resolved 2026-06-07 (Sailing 45->47 and added Fishing 52; prose updated to "Sailing 47 and Fishing 52 required (lantern harpooning)"; `lintDropRates build` green).
 
 ### 2. Deep Sea Fishing — Fishing gate off by one  — severity: low
 
