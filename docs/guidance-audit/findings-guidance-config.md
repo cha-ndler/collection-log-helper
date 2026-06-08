@@ -30,6 +30,33 @@ check is not automatable.
 for single. If a kill is not really the gate, change the condition. IDs from the abextm cache
 via `npc_lookup`; gate each through the domain-skeptic before committing.
 
+**Per-source analysis (2026-06-08) — this class needs a maintainer INTENT decision, not a blind
+id backfill.** Drilling into all 5 revealed they do NOT share one fix:
+
+- **TzHaar** step[1] — "Kill TzHaar-Ket/Mej/Xil in the city." Clog items are the obsidian
+  equipment, which drop from the city TzHaar. Cache-verified city ids ready to apply IF the
+  complete-on-kill option is chosen: Ket `2173-2179,2186`; Xil `2167-2172`; Mej `2154-2160`;
+  Hur `2161-2166` (Hur drops the obsidian rings but is omitted from the step text — include-or-not
+  is a call). The Fight Cave / Inferno `Jal-*` variants are deliberately excluded.
+- **Stronghold of Security** step[1] — "Kill monsters on each floor for skull sceptre pieces"
+  spans 4 floors (minotaurs, flesh crawlers, catablepon, ankou). Large multi-id list; each
+  floor monster needs a cache lookup.
+- **My Notes** step[1] — "**rummage** barbarian skeletons for ancient pages." This is a *rummage*
+  action, not a kill — `ACTOR_DEATH` is the wrong condition entirely. Likely `MANUAL` or an
+  item/chat completion.
+- **Catacombs of Kourend** step[3] — "dark totem pieces 1/500 from **any** Catacombs monster."
+  Not practically enumerable as `completionNpcIds`; wants a different completion model.
+- **Champion's Challenge** step[2] — the clog items (champion scrolls) drop from the regular
+  monsters in step[0], NOT from the arena champion. The arena kill is not the clog gate.
+
+**The intent question (applies to TzHaar + Stronghold too):** these are terminal farming steps.
+`ACTOR_DEATH` + ids makes guidance *complete after one kill* (the General Graardor pattern,
+`CompletionChecker.java:131`). The alternative is that they are meant to be *persistent* farming
+steps that intentionally never auto-advance — in which case the fix is to change the condition,
+not add ids. **Routed to the maintainer to decide complete-on-kill vs persistent-step before any
+data edit** — the analyzer flags the defect; the resolution is a judgment call, not statically
+decidable.
+
 ### C2 — #739/B · 23 `loopBackToStep` steps with `loopCount` 0/absent → loop never engages · MEDIUM · DATA
 A loop runs only when `loopBackToStep > 0 && loopCount > 0` (`StepAdvancer.java:135-137`). All 23
 set `loopBackToStep` but leave `loopCount` 0/absent. Full list (source / step / lbs / lc):
