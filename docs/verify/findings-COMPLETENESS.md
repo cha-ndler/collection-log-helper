@@ -15,7 +15,7 @@ calc can never route a player to). IDs of items we *do* carry are clean (0 wrong
 - action: add Immaculate mole skin (id 33382) to the Giant Mole source. Giant Mole is its
   only obtainable source, so this is a true coverage hole (efficiency calc can never route
   the player here for it).
-- status: open
+- status: resolved 2026-06-07 (added Immaculate mole skin 33382, dropRate 0.02 (wiki 1/50), wikiPage Immaculate_mole_skin; id cache-confirmed; `lintDropRates build` green)
 
 ### Lost Schematics - clog items (completeness) - high
 - check: TempleOSRS canonical clog sweep (2026-06-07), `temple_lookup` clog dimension
