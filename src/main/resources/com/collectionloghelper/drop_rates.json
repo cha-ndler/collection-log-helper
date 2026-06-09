@@ -22775,7 +22775,7 @@
         "objectInteractAction": "Deposit",
         "completionCondition": "MANUAL",
         "section": "Mine",
-        "loopBackToStep": 3,
+        "loopBackToStep": 4,
         "loopCount": 0
       },
       {
