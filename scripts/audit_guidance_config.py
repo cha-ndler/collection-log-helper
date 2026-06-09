@@ -37,15 +37,24 @@ Detectors implemented (the statically-decidable, data-level classes):
         * loopCount > 0 but loopBackToStep <= 0  -> dead loopCount (no effect)
         * loopBackToStep out of 1..len range     -> would index out of bounds
                            (nextIndex = loopBackToStep - 1; StepAdvancer.java:142)
+      A "never loops" finding whose loopBackToStep targets its OWN step (a
+      self-loop) is flagged by_design: it cannot express a multi-step loop and is
+      the deliberate D4 E4 "activity loop" marker every skilling source must carry
+      (D4Batch3RegressionTest asserts loopBackToStep>0). Only the earlier-target
+      "never loops" findings are the real #739/B intended-loop-broken bug.
 
   D2  Auto-advance dead-ends — a non-final MANUAL step blocks the hands-free
       guidance flow because the engine never auto-completes MANUAL
       (CompletionChecker.isStepAlreadySatisfied returns false for it once parked;
-      MANUAL is absent from every satisfying-evaluation path). Severity is raised
-      when the step already carries a wireable completion signal
-      (skipIfHasAnyItemIds / groundItemIds / completionItemId / npcId / objectId),
-      because that means a real auto-completion exists but isn't wired — the #729
-      Shades-of-Mort'ton class.
+      MANUAL is absent from every satisfying-evaluation path). signal_kind records
+      whether the step carries an ITEM signal (skipIfHasAnyItemIds / groundItemIds /
+      completionItemId — could drive an auto-complete) vs a HIGHLIGHT-only signal
+      (npcId / objectId — overlay-only, never completes a step). Only an item-signal
+      MANUAL is a candidate unwired dead-end (the #729 class). An item-signal MANUAL
+      inside a recurring-gather sequence is flagged by_design: the signal is
+      intentionally suppressed (GuidanceSequencer.isRecurringGatherSequence,
+      #707/#715/#719), onItemObtained completes the sequence, and the conditionTree
+      any-of-items vehicle is not wired into the live engine.
 
 This harness is side-effect-free: it never edits drop_rates.json.
 
@@ -103,6 +112,16 @@ class Finding:
     condition: Optional[str]
     message: str
     description: str
+    # ---- structural classification (additive; consumed by the board discriminator) ----
+    # by_design marks a finding that is mechanically true (the detector fired) but is NOT
+    # a player-facing bug, with the rationale recorded so a reviewer can confirm it against
+    # the engine rather than trusting a name match. The raw detector counts (and therefore
+    # --calibrate) are unaffected; only the REAL/by-design split downstream reads these.
+    by_design: bool = False
+    by_design_reason: Optional[str] = None
+    signal_kind: Optional[str] = None       # D2 only: "item" | "highlight" | "none"
+    loop_back_to_step: Optional[int] = None  # D1b only
+    loop_count: Optional[int] = None         # D1b only
 
     def key(self):
         return (self.detector, self.source, self.step_index, self.message)
@@ -143,11 +162,29 @@ def detect_d1b(source: dict) -> list[Finding]:
         lbs = int(st.get("loopBackToStep", 0) or 0)
         lc = int(st.get("loopCount", 0) or 0)
         if lbs > 0 and lc <= 0:
+            # A self-loop (loopBackToStep targets its OWN step, lbs == i + 1) cannot express
+            # a multi-step loop and is inert with loopCount<=0 (StepAdvancer.java:135-137).
+            # It is not a broken loop: it is the deliberate marker the D4 "activity loop"
+            # contract requires for skilling sources (D4Batch3RegressionTest E4 asserts
+            # loopBackToStep>0). Such grinds are open-ended and complete via onItemObtained,
+            # not a counted loop. By-design; only the earlier-target loops (lbs != i + 1) are
+            # the #739/B "intended loop silently broken" bug.
+            self_loop = (lbs == i + 1)
             out.append(Finding(
                 detector="D1b", severity="MEDIUM", source=name, step_index=i,
                 condition=st.get("completionCondition"),
                 message=f"loopBackToStep={lbs} but loopCount={lc} -> loop never engages",
                 description=(st.get("description") or "")[:120],
+                by_design=self_loop,
+                by_design_reason=(
+                    "self-loop: loopBackToStep targets its own step, so it cannot express a "
+                    "multi-step loop and is inert with loopCount<=0; it is the deliberate D4 "
+                    "E4 'activity loop' marker for an open-ended skilling grind "
+                    "(D4Batch3RegressionTest requires loopBackToStep>0), which completes via "
+                    "onItemObtained, not a counted loop"
+                ) if self_loop else None,
+                loop_back_to_step=lbs,
+                loop_count=lc,
             ))
         if lc > 0 and lbs <= 0:
             out.append(Finding(
@@ -171,27 +208,52 @@ def detect_d2(source: dict) -> list[Finding]:
     name = source.get("name", "?")
     steps = _steps(source)
     n = len(steps)
+    # A recurring-gather sequence (any step declares restockIfMissingAllItemIds) makes the
+    # engine deliberately SUPPRESS the skipIfHasAnyItemIds auto-advance so a gather step's
+    # highlight survives past the first pickup (GuidanceSequencer.isRecurringGatherSequence,
+    # #707/#715/#719); the sequence still completes via onItemObtained.
+    recurring_gather = any(s.get("restockIfMissingAllItemIds") for s in steps)
     for i, st in enumerate(steps):
         if st.get("completionCondition") != "MANUAL":
             continue
         if i == n - 1:
             continue  # a final MANUAL step ends the sequence; nothing to dead-end into
-        has_signal = (
+        # An ITEM signal (skipIfHasAnyItemIds/groundItemIds/completionItemId) could drive an
+        # auto-complete; a HIGHLIGHT signal (npc/object id) is overlay-only and never
+        # completes a step. Only an item signal makes a MANUAL step a candidate dead-end.
+        item_signal = (
             any(st.get(f) for f in WIREABLE_SIGNAL_FIELDS)
             or int(st.get("completionItemId", 0) or 0) > 0
-            or int(st.get("npcId", 0) or 0) > 0
+        )
+        highlight_signal = (
+            int(st.get("npcId", 0) or 0) > 0
             or int(st.get("objectId", 0) or 0) > 0
             or bool(st.get("objectIds"))
         )
+        signal_kind = "item" if item_signal else ("highlight" if highlight_signal else "none")
+        has_signal = item_signal or highlight_signal
         sev = "MEDIUM" if has_signal else "LOW"
         why = ("carries a wireable completion signal "
                "(skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired"
                if has_signal else "no obvious auto-completion signal available")
+        # The item signal exists but is intentionally suppressed in a recurring-gather
+        # sequence, and the conditionTree any-of-items vehicle is not wired into the live
+        # engine -- so this is the by-design #729 case, not an unwired-bug dead-end.
+        by_design = item_signal and recurring_gather
         out.append(Finding(
             detector="D2", severity=sev, source=name, step_index=i,
             condition="MANUAL",
             message=f"non-final MANUAL step blocks hands-free auto-advance; {why}",
             description=(st.get("description") or "")[:120],
+            signal_kind=signal_kind,
+            by_design=by_design,
+            by_design_reason=(
+                "recurring-gather sequence (a step declares restockIfMissingAllItemIds): the "
+                "skipIfHasAnyItemIds advance is intentionally suppressed "
+                "(GuidanceSequencer.isRecurringGatherSequence, #707/#715/#719) and "
+                "onItemObtained completes the sequence; the conditionTree any-of-items vehicle "
+                "is not wired into the live engine -- by-design MANUAL (#729)"
+            ) if by_design else None,
         ))
     return out
 
@@ -229,13 +291,27 @@ def print_report(findings: list[Finding]) -> None:
 
 
 def calibrate(findings: list[Finding]) -> int:
-    """Assert the analyzer re-derives the known-bug counts from #739/#729."""
+    """Assert the analyzer re-derives the known-bug counts from #739/#729.
+
+    Two layers are locked here:
+      * RAW detector counts (the mechanical truth the maintainer found by hand) --
+        these never change as the by-design split is refined, so they remain the
+        trust anchor that the detectors are faithful.
+      * The BY-DESIGN split (the re-triage): how many of the raw findings are
+        provably not player-facing bugs, and why. Locking these makes the
+        discriminator un-regressable -- a future edit cannot silently reclassify a
+        real defect as by-design (the count would move and fail here).
+    """
     actor_death_missing = [f for f in findings
                            if f.detector == "D1" and f.condition == "ACTOR_DEATH"]
     loop_never = [f for f in findings
                   if f.detector == "D1b" and "loop never engages" in f.message]
+    loop_never_self = [f for f in loop_never if f.by_design]
+    loop_never_real = [f for f in loop_never if not f.by_design]
     shades = [f for f in findings
               if f.detector == "D2" and f.source.startswith("Shades of Mort")]
+    d2_item_signal = [f for f in findings if f.detector == "D2" and f.signal_kind == "item"]
+    d2_item_real = [f for f in d2_item_signal if not f.by_design]
 
     ok = True
     print("CALIBRATION (expected from issues #739 / #729):")
@@ -247,18 +323,31 @@ def calibrate(findings: list[Finding]) -> int:
             ok = False
         print(f"  [{status}] {label}: got {got}, expect {expect}")
 
+    # ---- raw detector counts (unchanged trust anchor) ----
     check("D1 ACTOR_DEATH missing npc id (#739/A)", len(actor_death_missing), 5)
     # #739/B title states "~23". The engine-true count (loopBackToStep>0 AND
     # loopCount<=0, per StepAdvancer.java:135-137) is exactly 23. The "22" cited
     # in some earlier hand passes was an off-by-one approximation; 23 is correct.
-    check("D1b loopBackToStep w/ loopCount=0 never loops (#739/B)", len(loop_never), 23)
+    check("D1b loopBackToStep w/ loopCount=0 never loops (#739/B), raw", len(loop_never), 23)
     # #729: Shades of Mort'ton has at least one non-final MANUAL dead-end.
     check("D2 Shades of Mort'ton MANUAL dead-end present (#729)",
           1 if len(shades) >= 1 else 0, 1)
 
+    # ---- by-design split (re-triage lock) ----
+    # 7 self-loops are the D4 E4 'activity loop' markers (all skilling Batch-3 sources);
+    # the remaining 16 earlier-target loops are the real #739/B intended-loop-broken bug.
+    check("D1b self-loop by-design (D4 E4 markers)", len(loop_never_self), 7)
+    check("D1b earlier-target loop-never REAL (#739/B)", len(loop_never_real), 16)
+    # The lone item-signal MANUAL (Shades) is by-design (recurring-gather suppression +
+    # unwired conditionTree); no item-signal MANUAL is a real unwired dead-end.
+    check("D2 item-signal MANUAL real (unwired dead-end)", len(d2_item_real), 0)
+
     if actor_death_missing:
         print("  ACTOR_DEATH-missing sources:",
               sorted({f.source for f in actor_death_missing}))
+    if loop_never_self:
+        print("  self-loop (by-design) sources:",
+              sorted({f.source for f in loop_never_self}))
     print("\nCALIBRATION", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 

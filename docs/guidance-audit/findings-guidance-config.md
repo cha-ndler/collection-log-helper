@@ -68,21 +68,52 @@ s4 (1/0), Last Man Standing s2 (1/0), Mage Training Arena s2 (1/0), Mining (Gems
 Rogues' Den s3 (1/0), Soul Wars s2 (1/0), Temple Trekking s4 (1/0), Tithe Farm s2 (2/0),
 Underwater Crabs s3 (4/0), Vale Totems s3 (1/0), Woodcutting (Teak Trees) s2 (3/0).
 
-**Per-source judgment required (do NOT blanket-set `loopCount`).** Most are *self-loops*
-(`loopBackToStep` points at the step itself) where the step is a "repeat the activity" step that
-only auto-completes on `ITEM_OBTAINED` anyway — for those the stray `loopBackToStep` is dead
-config and should be **removed**. Where the loop is meant to re-run an earlier sub-sequence
-(e.g. Gnome Restaurant s4 → s1, Motherlode s3 → s3-relative), set a real `loopCount`. Decide
-each against the step semantics.
+**Split (2026-06 re-triage): 7 self-loops are by-design, 16 earlier-target loops are the real bug.**
+An earlier note claimed the self-loops (`loopBackToStep` points at the step itself) were vestigial
+dead config to be *removed*. That is wrong, and the build proves it: all 7 self-loop sources
+(Aerial Fishing, Deep Sea Fishing, Woodcutting (Teak Trees), Mining (Gemstone Rocks),
+Fishing (Swordfish), Underwater Crabs, Cutting Squid) are D4 Batch-3 skilling sources, and
+`D4Batch3RegressionTest` E4 ("activity loop mandatory") asserts `loopBackToStep > 0` for them —
+removing it turns that test red. A self-loop with `loopCount<=0` is inert at runtime
+(`StepAdvancer.java:135-137`) and a single-step loop is meaningless, so the self-loop is the
+deliberate display marker for an open-ended grind that completes via `onItemObtained`, **not** a
+broken loop. The analyzer now flags these `by_design` (see "Not a fix backlog"), and `--calibrate`
+locks the 7/16 split.
 
-### C3 — #729 · Shades of Mort'ton step[2] `MANUAL` → never auto-advances · MEDIUM · DATA
-Step "Pick up your shade key…" is `MANUAL` but already enumerates every shade-key id in
-`groundItemIds` + `skipIfHasAnyItemIds`, so "player now holds a key" is a known completion signal
-that just isn't wired. The flat `completionItemId` is a single int and cannot express "any of
-~25 keys". **Fix:** wire an any-of-items completion (B1 `conditionTree` OR-of-`INVENTORY_HAS_ITEM`,
-or a new completion mode), then drop `MANUAL`. This is the only D2 finding with a concrete
-unwired item signal — the other 51 MANUAL "kill/loot" MEDIUM steps use `npcId` for overlay
-highlight only and are by-design (see "Not a fix backlog").
+**C2 is therefore the remaining 16 earlier-target loops** (`loopBackToStep` points at an *earlier*
+step): Barbarian Assault s2, Brimhaven Agility Arena s2, Castle Wars s2, Fishing Trawler s2,
+Gnome Restaurant (Scarfs) s4, Gnome Restaurant (Seed Pods) s4, Last Man Standing s2,
+Mage Training Arena s2, Motherlode Mine s3, Pest Control s2, Pyramid Plunder s3, Rogues' Den s3,
+Soul Wars s2, Temple Trekking s4, Tithe Farm s2, Vale Totems s3. **Per-source judgment required:**
+was the multi-step loop intended (set a real `loopCount`, e.g. Gnome Restaurant s4 → s1,
+Motherlode s3 → relative) or vestigial (remove `loopBackToStep`)? Decide each against the step
+semantics.
+
+### C3 — #729 · Shades of Mort'ton step[2] `MANUAL` → **RESOLVED: by-design** · MEDIUM · DATA
+Step "Pick up your shade key…" is `MANUAL` and enumerates every shade-key id in `groundItemIds` +
+`skipIfHasAnyItemIds`, which *looks* like an unwired "player now holds a key" completion signal.
+On inspection it is by-design, not an unwired bug — three engine facts (2026-06 re-triage):
+
+1. **The B1 `conditionTree` is not wired into the live engine.** `conditionTree` is deserialized
+   onto `GuidanceStep` and unit-tested in isolation, but no production code evaluates
+   `step.getConditionTree()` in the completion path — so "wire an OR-of-`INVENTORY_HAS_ITEM` via
+   `conditionTree`, drop `MANUAL`" would leave the step with no firing condition. That is an engine
+   feature, not a data edit.
+2. **The OR-of-items advance already exists and is deliberately suppressed here.**
+   `onInventoryChanged` (`GuidanceSequencer.java:595-602`) advances on `skipIfHasAnyItemIds`
+   regardless of `completionCondition`, and step[2] already declares all 25 keys there. It is gated
+   off by `!isRecurringGatherSequence()` (`:596`, `:887-901`): Shades step[4] carries
+   `restockIfMissingAllItemIds` + a real 50-iteration loop, so the gather highlight is intentionally
+   kept past the first pickup (#707/#715/#719).
+3. **`onItemObtained` (`GuidanceSequencer.java:496-536`) already force-completes the sequence** when
+   the clog slot unlocks, so step[2] `MANUAL` is not a player-facing dead-end. The 2026-06-08
+   acceptance run uses exactly this non-advance as its observer-control (by-design).
+
+So `MANUAL` is correct, like the other 51 highlight-only MANUAL steps. The analyzer flags this
+`by_design` (item-signal MANUAL in a recurring-gather sequence) and `--calibrate` locks "0 real
+item-signal MANUAL." **Optional future enhancement (not a bug, not blocking the board):** wire
+`conditionTree` into the engine and add an any-of-items completion that coexists with the #707
+suppression — tracked as an engine enhancement, not a guidance-data finding.
 
 ### C4 — #737 · `tilePointCache` never reset → stale-tile auto-advance after source switch · HIGH · CODE
 `GuidanceSequencer.tilePointCache` (`GuidanceSequencer.java:79`) is keyed by step-index only
@@ -162,9 +193,17 @@ change (mirror `SlayerTaskState`, which guards correctly).
 
 ## Not a fix backlog (audited, by-design)
 
-- **51 `MANUAL` non-final steps with `npcId`/`objectId` only** (D2 MEDIUM minus Shades): the id is
-  for overlay highlight; completion is the clog item on a later step. By-design. Confirmed: only
-  1 of 52 carries an unwired item signal (#729). Do not mass-convert.
+- **7 self-loop `loopBackToStep` markers** (D1b, `loopBackToStep` targets its own step): the D4 E4
+  "activity loop" markers that every Batch-3 skilling source must carry
+  (`D4Batch3RegressionTest`); inert at runtime and not a broken loop (open-ended grinds complete via
+  `onItemObtained`). Sources: Aerial Fishing, Deep Sea Fishing, Woodcutting (Teak Trees),
+  Mining (Gemstone Rocks), Fishing (Swordfish), Underwater Crabs, Cutting Squid. Flagged
+  `by_design`; do not remove (breaks E4). See C2.
+- **Shades of Mort'ton step[2] `MANUAL`** (D2, item-signal in a recurring-gather sequence): the
+  `skipIfHasAnyItemIds` advance is intentionally suppressed (#707/#715/#719) and `onItemObtained`
+  completes the sequence; the `conditionTree` vehicle is unwired. Flagged `by_design`. See C3.
+- **51 `MANUAL` non-final steps with `npcId`/`objectId` only** (D2 MEDIUM, highlight-only signal):
+  the id is for overlay highlight; completion is the clog item on a later step. By-design.
 - **122 `MANUAL` "loot the chest / hop worlds" steps** (D2 LOW): terminal-ish flavor steps with no
   auto-completion signal; intentionally manual. Advisory only.
 - **3 `loopCount` set with `loopBackToStep` 0** (D1b LOW): dead `loopCount`, cosmetic; remove for
@@ -191,10 +230,17 @@ statically decidable, so deliberately not guessed):**
   condition (rummage / any-monster / wrong-step). TzHaar city ids staged above.
 - **N1** (5 ARRIVE_AT_ZONE) — per-step "what does *arrived* mean" + instanced destination
   coords; Barbarian Assault is a condition-type mismatch. See the per-source investigation above.
-- **C2** (23 loop steps) — per source: was looping intended (`loopCount`) or vestigial
-  (`loopBackToStep` removal)? ~7 are self-loops.
-- **C3** (#729 Shades) — needs an any-of-items completion (B1 `conditionTree`), a small engine
-  feature + in-game validation.
+- **C2** (16 earlier-target loop steps) — per source: was the multi-step loop intended
+  (`loopCount`) or vestigial (`loopBackToStep` removal)? (The 7 self-loops are by-design, above.)
+
+**Closed as by-design (2026-06 re-triage — not bugs, no data edit):**
+
+- **C3 — Shades** (#729) — the unwired-signal premise is false: `conditionTree` is not engine-wired,
+  the OR-of-items advance is intentionally suppressed for this recurring-gather source
+  (#707/#715/#719), and `onItemObtained` already completes the sequence. Optional engine
+  enhancement noted in the C3 section, not a guidance-data finding.
+- **C2 self-loops** (7) — D4 E4 "activity loop" markers; removing them breaks
+  `D4Batch3RegressionTest`.
 
 When a routed item is resolved and lands, decrement the matching ceiling constant in
 `GuidanceConfigInvariantsRegressionTest` so the ratchet stays tight.

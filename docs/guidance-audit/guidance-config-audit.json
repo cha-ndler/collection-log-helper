@@ -6,7 +6,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Turn an Iron Winch to open the gate and enter the boss arena"
+    "description": "Turn an Iron Winch to open the gate and enter the boss arena",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -15,7 +20,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Take the elevator down into the Karuulm Slayer Dungeon."
+    "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -24,7 +34,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Navigate past the regular hydras to the Alchemical Hydra instance. Requires Slayer task."
+    "description": "Navigate past the regular hydras to the Alchemical Hydra instance. Requires Slayer task.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -33,7 +48,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Climb down the first tunnel entrance (use a rope if first time)"
+    "description": "Climb down the first tunnel entrance (use a rope if first time)",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -42,7 +62,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Navigate to the second tunnel and climb down to the Kalphite Queen chamber"
+    "description": "Navigate to the second tunnel and climb down to the Kalphite Queen chamber",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -51,7 +76,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Navigate through Ghorrock Prison to the Asylum stairs"
+    "description": "Navigate through Ghorrock Prison to the Asylum stairs",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -60,7 +90,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Climb the handholds to enter The Leviathan's arena"
+    "description": "Climb the handholds to enter The Leviathan's arena",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -69,7 +104,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Climb the rope down the sinkhole to enter Lassar Undercity"
+    "description": "Climb the rope down the sinkhole to enter Lassar Undercity",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -78,7 +118,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Stranglewood Temple to reach the boss arena. Climb over the rocks to start the fight"
+    "description": "Enter the Stranglewood Temple to reach the boss arena. Climb over the rocks to start the fight",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -87,7 +132,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Navigate through Ghorrock Prison to the Asylum stairs"
+    "description": "Navigate through Ghorrock Prison to the Asylum stairs",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -96,7 +146,12 @@
     "step_index": 5,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the Awakened reward chest. Awakened tables roll the same uniques as the base fight at roughly 3x the rate, plus the"
+    "description": "Loot the Awakened reward chest. Awakened tables roll the same uniques as the base fight at roughly 3x the rate, plus the",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -105,7 +160,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Climb the handholds with the Awakener's orb in your inventory and select 'Yes' when prompted to enter the Awakened insta"
+    "description": "Climb the handholds with the Awakener's orb in your inventory and select 'Yes' when prompted to enter the Awakened insta",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -114,7 +174,12 @@
     "step_index": 5,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the Awakened reward chest. Awakened rolls Venator vestige and Leviathan's lure at roughly 3x the base rate, plus a "
+    "description": "Loot the Awakened reward chest. Awakened rolls Venator vestige and Leviathan's lure at roughly 3x the base rate, plus a ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -123,7 +188,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Climb the rope down the sinkhole to enter Lassar Undercity"
+    "description": "Climb the rope down the sinkhole to enter Lassar Undercity",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -132,7 +202,12 @@
     "step_index": 5,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the Awakened reward chest. Awakened rolls Bellator vestige and Siren's staff at roughly 3x the base rate; the black"
+    "description": "Loot the Awakened reward chest. Awakened rolls Bellator vestige and Siren's staff at roughly 3x the base rate; the black",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -141,7 +216,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Stranglewood Temple, then climb the rocks with the Awakener's orb in inventory and select 'Yes' when prompted "
+    "description": "Enter the Stranglewood Temple, then climb the rocks with the Awakener's orb in inventory and select 'Yes' when prompted ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -150,7 +230,12 @@
     "step_index": 5,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the Awakened reward chest. Awakened rolls Ultor vestige and Executioner's axe head at roughly 3x the base rate; pic"
+    "description": "Loot the Awakened reward chest. Awakened rolls Ultor vestige and Executioner's axe head at roughly 3x the base rate; pic",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -159,7 +244,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Go through the roof entrance to reach the Grotesque Guardians."
+    "description": "Go through the roof entrance to reach the Grotesque Guardians.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -168,7 +258,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Drink from the Pool of Nightmare to enter Phosani's dream"
+    "description": "Drink from the Pool of Nightmare to enter Phosani's dream",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -177,7 +272,12 @@
     "step_index": 5,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the drop pile under Nex; uniques split based on damage contribution. Pick up Nihil shards for extending Ancient cer"
+    "description": "Loot the drop pile under Nex; uniques split based on damage contribution. Pick up Nihil shards for extending Ancient cer",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -186,7 +286,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the Giant egg sac and any uniques before they decay, then exit the crypt for the next kill"
+    "description": "Loot the Giant egg sac and any uniques before they decay, then exit the crypt for the next kill",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -195,7 +300,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Use the Mossy key on the gate to enter Bryophyta's lair. The key is consumed on use - each kill needs a fresh key, so th"
+    "description": "Use the Mossy key on the gate to enter Bryophyta's lair. The key is consumed on use - each kill needs a fresh key, so th",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -204,7 +314,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Use the Giant key on the gate to enter Obor's lair. The key is consumed - each kill needs a fresh key, so per-trip farm "
+    "description": "Use the Giant key on the gate to enter Obor's lair. The key is consumed - each kill needs a fresh key, so per-trip farm ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -213,7 +328,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Bring a rune thrownaxe (or Mi"
+    "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Bring a rune thrownaxe (or Mi",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -222,7 +342,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Descend the Waterbirth Island Dungeon to floor 6 and reach the Kings' lair. Bring a rune thrownaxe (or pet rock + 70 Agi"
+    "description": "Descend the Waterbirth Island Dungeon to floor 6 and reach the Kings' lair. Bring a rune thrownaxe (or pet rock + 70 Agi",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -231,7 +356,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Descend the Waterbirth Island Dungeon to floor 6 and reach the Kings' lair. Bring a rune thrownaxe to lure Supreme away "
+    "description": "Descend the Waterbirth Island Dungeon to floor 6 and reach the Kings' lair. Bring a rune thrownaxe to lure Supreme away ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -240,7 +370,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the crevice to access the Kraken's cave"
+    "description": "Enter the crevice to access the Kraken's cave",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -249,7 +384,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the drop pile, then either reset for another kill or bank if low on prayer potions and food"
+    "description": "Loot the drop pile, then either reset for another kill or bank if low on prayer potions and food",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -258,7 +398,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter one of the Sire chambers through an Eye"
+    "description": "Enter one of the Sire chambers through an Eye",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -267,7 +412,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Climb down the ladder west of the Lava Maze and pull the lever to teleport to the KBD Lair"
+    "description": "Climb down the ladder west of the Lava Maze and pull the lever to teleport to the KBD Lair",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -276,7 +426,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Cavern to access Scorpia's underground lair. The cave is single-combat once you descend, which lets you absorb"
+    "description": "Enter the Cavern to access Scorpia's underground lair. The cave is single-combat once you descend, which lets you absorb",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -285,7 +440,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Crash Site Cavern beneath the Gnome Stronghold"
+    "description": "Enter the Crash Site Cavern beneath the Gnome Stronghold",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -294,7 +454,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the ballista parts, Zenyte shards, and Monkey tails. Banking back to Edgeville or Castle Wars is the standard cycle"
+    "description": "Loot the ballista parts, Zenyte shards, and Monkey tails. Banking back to Edgeville or Castle Wars is the standard cycle",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -303,7 +468,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the Dragon warhammer / Xeric's talisman pieces and ranarr seed stacks. Drag-loot the Lizardman fangs for Xeric's ta"
+    "description": "Loot the Dragon warhammer / Xeric's talisman pieces and ranarr seed stacks. Drag-loot the Lizardman fangs for Xeric's ta",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -312,7 +482,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Use secateurs on the dead Hespori to harvest seeds, then collect the Bottomless compost bucket if it dropped. Replant an"
+    "description": "Use secateurs on the dead Hespori to harvest seeds, then collect the Bottomless compost bucket if it dropped. Replant an",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -321,7 +496,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Enter the raid instance via the chamber barrier. Scout the rotation and prepare your inventory for the room order"
+    "description": "Enter the raid instance via the chamber barrier. Scout the rotation and prepare your inventory for the room order",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -330,7 +510,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Clear the combat, puzzle, and resource rooms on your way to the final chamber. Bank surplus loot at the supply chest bef"
+    "description": "Clear the combat, puzzle, and resource rooms on your way to the final chamber. Bank surplus loot at the supply chest bef",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -339,7 +524,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Enter the raid instance and toggle Challenge Mode at the barrier. Confirm the team scale and scout the rotation"
+    "description": "Enter the raid instance and toggle Challenge Mode at the barrier. Confirm the team scale and scout the rotation",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -348,7 +538,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Clear all combat, puzzle, and resource rooms. CM enemies have higher defence and damage - eat more aggressively and refr"
+    "description": "Clear all combat, puzzle, and resource rooms. CM enemies have higher defence and damage - eat more aggressively and refr",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -357,7 +552,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Form a team at the party room and enter the Theatre. Cannot teleport out once inside - escape crystal or death are the o"
+    "description": "Form a team at the party room and enter the Theatre. Cannot teleport out once inside - escape crystal or death are the o",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -366,7 +566,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Clear The Maiden, Pestilent Bloat, Nylocas, Sotetseg, and Xarpus. Refresh supplies at each chest and prep gear for the V"
+    "description": "Clear The Maiden, Pestilent Bloat, Nylocas, Sotetseg, and Xarpus. Refresh supplies at each chest and prep gear for the V",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -375,7 +580,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Form a team and toggle Hard Mode at the party room. Once inside the Theatre you cannot teleport out - escape crystal or "
+    "description": "Form a team and toggle Hard Mode at the party room. Once inside the Theatre you cannot teleport out - escape crystal or ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -384,7 +594,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Clear The Maiden, Pestilent Bloat, Nylocas (HM adds extra waves), Sotetseg, and Xarpus. Refresh supplies at each chest; "
+    "description": "Clear The Maiden, Pestilent Bloat, Nylocas (HM adds extra waves), Sotetseg, and Xarpus. Refresh supplies at each chest; ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -393,7 +608,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Enter the Tombs lobby and set your invocations. Confirm raid level under 150 for entry mode, then form a team or queue s"
+    "description": "Enter the Tombs lobby and set your invocations. Confirm raid level under 150 for entry mode, then form a team or queue s",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -402,7 +622,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete the four path rooms in your preferred order: Crondis (Zebak), Het (Akkha), Apmeken (Ba-Ba), Scabaras (Kephri). "
+    "description": "Complete the four path rooms in your preferred order: Crondis (Zebak), Het (Akkha), Apmeken (Ba-Ba), Scabaras (Kephri). ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -411,7 +636,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Enter the Tombs lobby and set your invocations to raid level 300. Form a team or queue solo at the party board"
+    "description": "Enter the Tombs lobby and set your invocations to raid level 300. Form a team or queue solo at the party board",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -420,7 +650,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras). At raid level 300 bosses hit noticeably harder - refresh"
+    "description": "Complete the four path rooms (Crondis, Het, Apmeken, Scabaras). At raid level 300 bosses hit noticeably harder - refresh",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -429,7 +664,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Enter the Tombs lobby and set your invocations to raid level 500. Form a team or queue solo at the party board"
+    "description": "Enter the Tombs lobby and set your invocations to raid level 500. Form a team or queue solo at the party board",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -438,7 +678,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete the four path rooms at raid level 500. Bosses have +200% hitpoints/defence and +150% damage; eat aggressively, "
+    "description": "Complete the four path rooms at raid level 500. Bosses have +200% hitpoints/defence and +150% damage; eat aggressively, ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -447,7 +692,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Talk to the Gauntlet NPC and pick Enter -> Corrupted challenge to start the harder instance"
+    "description": "Talk to the Gauntlet NPC and pick Enter -> Corrupted challenge to start the harder instance",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -456,7 +706,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Prep phase (corrupted mobs hit harder and have higher Defence): gather paddlefish + linum tirinum + raw chompy meat + co"
+    "description": "Prep phase (corrupted mobs hit harder and have higher Defence): gather paddlefish + linum tirinum + raw chompy meat + co",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -465,7 +720,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Talk to the Gauntlet NPC and pick Enter -> Standard challenge to start the instance"
+    "description": "Talk to the Gauntlet NPC and pick Enter -> Standard challenge to start the instance",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -474,7 +734,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Prep phase (about 7-9 minutes): gather paddlefish + linum tirinum + raw chompy meat + crystal shards, mine ore from crys"
+    "description": "Prep phase (about 7-9 minutes): gather paddlefish + linum tirinum + raw chompy meat + crystal shards, mine ore from crys",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -483,7 +748,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Fish harpoonfish at the dark cloud spots, then run to a cannon and cook (use Fish on Cannon) and load the harpoonfish in"
+    "description": "Fish harpoonfish at the dark cloud spots, then run to a cannon and cook (use Fish on Cannon) and load the harpoonfish in",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -492,7 +762,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Chop bruma roots, fletch them into kindling (use Knife on bruma root), and feed kindling to the brazier closest to a Pyr"
+    "description": "Chop bruma roots, fletch them into kindling (use Knife on bruma root), and feed kindling to the brazier closest to a Pyr",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -501,7 +776,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Pick up the Tetsu / Virtus / Aurora dye-mould reward, plus any Zalcano shards or Crystal tool seeds dropped. Drops appea"
+    "description": "Pick up the Tetsu / Virtus / Aurora dye-mould reward, plus any Zalcano shards or Crystal tool seeds dropped. Drops appea",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -510,7 +790,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Clear waves 1-11. Use Protect from Missiles vs Fremennik Archers, Protect from Melee vs Manticores, and step under Serpe"
+    "description": "Clear waves 1-11. Use Protect from Missiles vs Fremennik Archers, Protect from Melee vs Manticores, and step under Serpe",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -519,7 +804,12 @@
     "step_index": 5,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the reward chest at the Colosseum exit. Sunfire splinters and Echo crystals roll on every clear; Tonalztics and Diz"
+    "description": "Loot the reward chest at the Colosseum exit. Sunfire splinters and Echo crystals roll on every clear; Tonalztics and Diz",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -528,7 +818,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "After all three moons die, open the Lunar Chest in the centre of the arena for armour pieces and unique drops. Empty the"
+    "description": "After all three moons die, open the Lunar Chest in the centre of the arena for armour pieces and unique drops. Empty the",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -537,7 +832,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the rares (Burning claw, Tormented synapse, Guthixian temple teleport scroll). The teleport scroll drop chance is h"
+    "description": "Loot the rares (Burning claw, Tormented synapse, Guthixian temple teleport scroll). The teleport scroll drop chance is h",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -546,7 +846,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Obtain a beginner clue scroll. Lowest-tier monsters (chickens, cows, men, goblins) drop them at ~1/50; Hans in Lumbridge"
+    "description": "Obtain a beginner clue scroll. Lowest-tier monsters (chickens, cows, men, goblins) drop them at ~1/50; Hans in Lumbridge",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -555,7 +860,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Beginner clues are short (1-5 steps) and cover Lumbridge /"
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Beginner clues are short (1-5 steps) and cover Lumbridge /",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -564,7 +874,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Open the reward casket for collection log items. Beginner caskets roll the Mole / Frog / Bear / Demon slippers, Jester c"
+    "description": "Open the reward casket for collection log items. Beginner caskets roll the Mole / Frog / Bear / Demon slippers, Jester c",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -573,7 +888,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Lumbridge Swamp caves"
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Lumbridge Swamp caves",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -582,7 +902,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Bring a bag of salt to finish them"
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Bring a bag of salt to finish them",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -591,7 +916,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required"
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -600,7 +930,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or use Catacombs of Kourend"
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or use Catacombs of Kourend",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -609,7 +944,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required"
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Mirror shield required",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -618,7 +958,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Catacombs of Kourend for burst tasks"
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or Catacombs of Kourend for burst tasks",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -627,7 +972,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required"
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -636,7 +986,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the cave on the north side of the island. Witchwood icon required"
+    "description": "Enter the cave on the north side of the island. Witchwood icon required",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -645,7 +1000,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Take the elevator down into the Karuulm Slayer Dungeon."
+    "description": "Take the elevator down into the Karuulm Slayer Dungeon.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -654,7 +1014,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the dragon-tier rares (Dragon sword, Dragon harpoon, Dragon thrownaxe, Dragon knife) and the regular drops. Hop flo"
+    "description": "Loot the dragon-tier rares (Dragon sword, Dragon harpoon, Dragon thrownaxe, Dragon knife) and the regular drops. Hop flo",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -663,7 +1028,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Wyvern Cave. Elemental/mind/dragonfire shield required"
+    "description": "Enter the Wyvern Cave. Elemental/mind/dragonfire shield required",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -672,7 +1042,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required"
+    "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR). Leaf-bladed weapons required",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -681,7 +1056,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the Draconic visage and Granite legs. Long Bones (5 Construction XP each) and the Wyvern visage drop weight makes t"
+    "description": "Loot the Draconic visage and Granite legs. Long Bones (5 Construction XP each) and the Wyvern visage drop weight makes t",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -690,7 +1070,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the Granite maul (3-tick spec weapon), Mystic robe top (dark), and Adamant boots. Granite mauls stack high - high a"
+    "description": "Loot the Granite maul (3-tick spec weapon), Mystic robe top (dark), and Adamant boots. Granite mauls stack high - high a",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -699,7 +1084,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Squeeze through the cave entrance to enter the Stalker Den"
+    "description": "Squeeze through the cave entrance to enter the Stalker Den",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -708,7 +1098,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Take the elevator down into the Karuulm Slayer Dungeon, then descend to the mid level (Drake floor)."
+    "description": "Take the elevator down into the Karuulm Slayer Dungeon, then descend to the mid level (Drake floor).",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -717,7 +1112,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot Drake's claw and Drake's tooth. The Boots of brimstone upgrade (combine claw + boots of stone) is the milestone cra"
+    "description": "Loot Drake's claw and Drake's tooth. The Boots of brimstone upgrade (combine claw + boots of stone) is the milestone cra",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -726,7 +1126,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Kraken Cove entrance. 87 Slayer, on task only"
+    "description": "Enter the Kraken Cove entrance. 87 Slayer, on task only",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -735,7 +1140,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Araxyte Cave (north-east Darkmeyer). Use crush weapons for best accuracy"
+    "description": "Enter the Araxyte Cave (north-east Darkmeyer). Use crush weapons for best accuracy",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -744,7 +1154,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Take the elevator down into the Karuulm Slayer Dungeon, then descend to the lowest floor (Hydra floor, 95 Slayer)."
+    "description": "Take the elevator down into the Karuulm Slayer Dungeon, then descend to the lowest floor (Hydra floor, 95 Slayer).",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -753,7 +1168,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the Hydra's fang / eye / heart and Hydra tail. The three Brimstone ring components require all three pieces in orde"
+    "description": "Loot the Hydra's fang / eye / heart and Hydra tail. The three Brimstone ring components require all three pieces in orde",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -762,7 +1182,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot Blood shards (1/5000 drop rate). Charge an Amulet of fury into an Amulet of blood fury at 1000 Blood shards or sell"
+    "description": "Loot Blood shards (1/5000 drop rate). Charge an Amulet of fury into an Amulet of blood fury at 1000 Blood shards or sell",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -771,7 +1196,12 @@
     "step_index": 0,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "This rare table applies on any slayer task above the superior-unlock level. Superior monsters have a 1/200 spawn chance "
+    "description": "This rare table applies on any slayer task above the superior-unlock level. Superior monsters have a 1/200 spawn chance ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -780,7 +1210,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the Mausoleum Door to access the Hallowed Sepulchre lobby. Talk to the spirit if it is your first visit, then clim"
+    "description": "Enter the Mausoleum Door to access the Hallowed Sepulchre lobby. Talk to the spirit if it is your first visit, then clim",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -789,7 +1224,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Run the floors in order: 1, 2, 3, 4 (then 5 at 72+ Agility). Loot every brown coffin you pass for Hallowed marks. Strang"
+    "description": "Run the floors in order: 1, 2, 3, 4 (then 5 at 72+ Agility). Loot every brown coffin you pass for Hallowed marks. Strang",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -798,7 +1238,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "On floor 5, the grand coffins behind the locked doors are the high-value loot. Use a Hallowed focus / symbol / grapple w"
+    "description": "On floor 5, the grand coffins behind the locked doors are the high-value loot. Use a Hallowed focus / symbol / grapple w",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -807,7 +1252,12 @@
     "step_index": 5,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Spend Hallowed marks at the reward shop near the entrance. The Ring of endurance and Strange old lockpick come from the "
+    "description": "Spend Hallowed marks at the reward shop near the entrance. The Ring of endurance and Strange old lockpick come from the ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -816,7 +1266,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Pass through the barrier to enter the Guardians of the Rift arena and wait for the next game to start."
+    "description": "Pass through the barrier to enter the Guardians of the Rift arena and wait for the next game to start.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -825,7 +1280,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Hand in any Intricate pouches you obtained to receive bonus rewards (Abyssal pearls / rare uniques). Then spend Abyssal "
+    "description": "Hand in any Intricate pouches you obtained to receive bonus rewards (Abyssal pearls / rare uniques). Then spend Abyssal ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -834,7 +1294,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Continue tagging highlighted obstacles to accumulate tickets. Prioritise the marked obstacle each time the arrow changes"
+    "description": "Continue tagging highlighted obstacles to accumulate tickets. Prioritise the marked obstacle each time the arrow changes",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -843,7 +1308,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Navigate the obstacle course inside the arena. Follow the blinking yellow arrow to the marked obstacle - only the highli"
+    "description": "Navigate the obstacle course inside the arena. Follow the blinking yellow arrow to the marked obstacle - only the highli",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -852,7 +1322,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Continue tagging highlighted obstacles to accumulate tickets. Prioritise the marked obstacle each time the arrow changes"
+    "description": "Continue tagging highlighted obstacles to accumulate tickets. Prioritise the marked obstacle each time the arrow changes",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -861,7 +1336,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Talk to Kovac to select a commission. Higher-quality commissions (longer swords / better metals) reward more reputation "
+    "description": "Talk to Kovac to select a commission. Higher-quality commissions (longer swords / better metals) reward more reputation ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -870,7 +1350,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Pour metal into the crucible, then move the sword through the trip hammer, grindstone, and polishing wheel in order to s"
+    "description": "Pour metal into the crucible, then move the sword through the trip hammer, grindstone, and polishing wheel in order to s",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -879,7 +1364,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Hand in the finished sword to Kovac for reputation points. Stack reputation, then spend at his shop for the Smiths outfi"
+    "description": "Hand in the finished sword to Kovac for reputation points. Stack reputation, then spend at his shop for the Smiths outfi",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1",
@@ -888,7 +1378,12 @@
     "step_index": 1,
     "condition": "ARRIVE_AT_ZONE",
     "message": "ARRIVE_AT_ZONE step missing required field (completionZone of length 5) -> never auto-advances",
-    "description": "Board the lander matching your combat level (Novice <100, Intermediate 100-150, Veteran 150+). Wait for the lander to fi"
+    "description": "Board the lander matching your combat level (Novice <100, Intermediate 100-150, Veteran 150+). Wait for the lander to fi",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -897,7 +1392,12 @@
     "step_index": 2,
     "condition": "CHAT_MESSAGE_RECEIVED",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Destroy all 4 portals while defending the Void Knight. Use Protect from Melee when swarmed by spinners near the Void Kni"
+    "description": "Destroy all 4 portals while defending the Void Knight. Use Protect from Melee when swarmed by spinners near the Void Kni",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D1b",
@@ -906,7 +1406,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Bank to restock runes and repeat training rooms until you have enough pizazz points for your target reward. Aim for the "
+    "description": "Bank to restock runes and repeat training rooms until you have enough pizazz points for your target reward. Aim for the ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -915,7 +1420,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Enter one of the four training rooms. Telekinetic: move statues with Telekinetic Grab. Alchemy: High Alch the correct it"
+    "description": "Enter one of the four training rooms. Telekinetic: move statues with Telekinetic Grab. Alchemy: High Alch the correct it",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -924,7 +1434,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Bank to restock runes and repeat training rooms until you have enough pizazz points for your target reward. Aim for the "
+    "description": "Bank to restock runes and repeat training rooms until you have enough pizazz points for your target reward. Aim for the ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -933,7 +1448,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Pick up your shade key from the reward pillar inside the temple."
+    "description": "Pick up your shade key from the reward pillar inside the temple.",
+    "by_design": true,
+    "by_design_reason": "recurring-gather sequence (a step declares restockIfMissingAllItemIds): the skipIfHasAnyItemIds advance is intentionally suppressed (GuidanceSequencer.isRecurringGatherSequence, #707/#715/#719) and onItemObtained completes the sequence; the conditionTree any-of-items vehicle is not wired into the live engine -- by-design MANUAL (#729)",
+    "signal_kind": "item",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -942,7 +1462,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Talk to Amy and accept a contract. She will direct you to Falador, Varrock, Hosidius, or East Ardougne - teleport direct"
+    "description": "Talk to Amy and accept a contract. She will direct you to Falador, Varrock, Hosidius, or East Ardougne - teleport direct",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -951,7 +1476,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "At the contract house, repair every broken hotspot in the order shown. Right-click each broken object and use the correc"
+    "description": "At the contract house, repair every broken hotspot in the order shown. Right-click each broken object and use the correc",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -960,7 +1490,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Return to Amy in the contract city to hand in - the contract auto-rerolls into a new one in the same city until you choo"
+    "description": "Return to Amy in the contract city to hand in - the contract auto-rerolls into a new one in the same city until you choo",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -969,7 +1504,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Talk to the Mixologist to start the minigame and enter the lab. You need 60 Herblore + Children of the Sun started."
+    "description": "Talk to the Mixologist to start the minigame and enter the lab. You need 60 Herblore + Children of the Sun started.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -978,7 +1518,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Mix potions at the Mixology station to earn Mox (orange), Aga (green), and Lye (blue) resin. Optimal cycle: grind the he"
+    "description": "Mix potions at the Mixology station to earn Mox (orange), Aga (green), and Lye (blue) resin. Optimal cycle: grind the he",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -987,7 +1532,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Spend resin at the Mixology shop. Alchemist labcoat / pants / gloves cost 8750 each Mox/Aga/Lye; Prescription goggles 24"
+    "description": "Spend resin at the Mixology shop. Alchemist labcoat / pants / gloves cost 8750 each Mox/Aga/Lye; Prescription goggles 24",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -996,7 +1546,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Enter the Volcanic Mine entrance and join a game lobby. Worlds 408/409 are the official VM theme worlds; solo runs are p"
+    "description": "Enter the Volcanic Mine entrance and join a game lobby. Worlds 408/409 are the official VM theme worlds; solo runs are p",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1005,7 +1560,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Mine ore from one of the three coloured walls (red/green/blue) and deposit the resulting boulders into the central lava "
+    "description": "Mine ore from one of the three coloured walls (red/green/blue) and deposit the resulting boulders into the central lava ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1014,7 +1574,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Exit the mine after the round ends to bank your points and ores. Spend points at Petrified Pete's shop for Prospector pi"
+    "description": "Exit the mine after the round ends to bank your points and ores. Spend points at Petrified Pete's shop for Prospector pi",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1023,7 +1588,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "loopBackToStep=2 but loopCount=0 -> loop never engages",
-    "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harv"
+    "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harv",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 2,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1032,7 +1602,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Bring seeds scaled to your Farming level (Golovanova at 34+, Logavano at 54+, Bologano at 74+), a watering can or Gricol"
+    "description": "Bring seeds scaled to your Farming level (Golovanova at 34+, Logavano at 54+, Bologano at 74+), a watering can or Gricol",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1041,7 +1616,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harv"
+    "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harv",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1050,7 +1630,12 @@
     "step_index": 4,
     "condition": "ARRIVE_AT_TILE",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Captain Ninto or Captain Daerkin is assigned to maxi"
+    "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Captain Ninto or Captain Daerkin is assigned to maxi",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1059,7 +1644,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Captain Ninto or Captain Dae"
+    "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Captain Ninto or Captain Dae",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1068,7 +1658,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your"
+    "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1077,7 +1672,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Collect your reward. Hard deliveries on time award reward tokens redeemable for food rewards and a chance at Gnome scarf"
+    "description": "Collect your reward. Hard deliveries on time award reward tokens redeemable for food rewards and a chance at Gnome scarf",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1086,7 +1686,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "loopBackToStep=2 but loopCount=0 -> loop never engages",
-    "description": "During the 10-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope. B"
+    "description": "During the 10-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope. B",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 2,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1095,7 +1700,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "During the 10-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope. B"
+    "description": "During the 10-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope. B",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1104,7 +1714,12 @@
     "step_index": 4,
     "condition": "ARRIVE_AT_TILE",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Run back to Burgh de Rott to start another trek. Use Drakan's medallion or Minigame tele to reset quickly."
+    "description": "Run back to Burgh de Rott to start another trek. Use Drakan's medallion or Minigame tele to reset quickly.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1113,7 +1728,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Choose the hardest route and strongest follower (Rolayne Twickit) for the best Lumberjack outfit drop chance. Hard route"
+    "description": "Choose the hardest route and strongest follower (Rolayne Twickit) for the best Lumberjack outfit drop chance. Hard route",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1122,7 +1742,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Escort the follower through Morytania to Paterdomus. Protect the follower during combat events - if it dies the trek fai"
+    "description": "Escort the follower through Morytania to Paterdomus. Protect the follower during combat events - if it dies the trek fai",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1131,7 +1756,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Claim your reward token at Paterdomus and exchange it with the token trader for a Lumberjack outfit piece. Hard treks yi"
+    "description": "Claim your reward token at Paterdomus and exchange it with the token trader for a Lumberjack outfit piece. Hard treks yi",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1140,7 +1770,12 @@
     "step_index": 3,
     "condition": "ARRIVE_AT_TILE",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "To get remaining pieces, return through the trapdoor in the pub basement and repeat the maze. The maze layout is fixed -"
+    "description": "To get remaining pieces, return through the trapdoor in the pub basement and repeat the maze. The maze layout is fixed -",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1149,7 +1784,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "At the end of the maze, search the safe to receive a random piece of rogue equipment. Each piece has approximately a 5-i"
+    "description": "At the end of the maze, search the safe to receive a random piece of rogue equipment. Each piece has approximately a 5-i",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1",
@@ -1158,7 +1798,12 @@
     "step_index": 1,
     "condition": "ARRIVE_AT_ZONE",
     "message": "ARRIVE_AT_ZONE step missing required field (completionZone of length 5) -> never auto-advances",
-    "description": "Enter a team portal (Saradomin, Zamorak, or Guthix for a balanced game). Wait in the lobby until the 20-minute game begi"
+    "description": "Enter a team portal (Saradomin, Zamorak, or Guthix for a balanced game). Wait in the lobby until the 20-minute game begi",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1167,7 +1812,12 @@
     "step_index": 2,
     "condition": "CHAT_MESSAGE_RECEIVED",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Capture the enemy flag from their castle and return it to your own base to score tickets. Bring explosives to destroy ba"
+    "description": "Capture the enemy flag from their castle and return it to your own base to score tickets. Bring explosives to destroy ba",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D1",
@@ -1176,7 +1826,12 @@
     "step_index": 1,
     "condition": "ARRIVE_AT_ZONE",
     "message": "ARRIVE_AT_ZONE step missing required field (completionZone of length 5) -> never auto-advances",
-    "description": "Talk to Nomad or enter the Soul Wars portal to join a team (blue or red). Wait in the lobby until the game starts."
+    "description": "Talk to Nomad or enter the Soul Wars portal to join a team (blue or red). Wait in the lobby until the game starts.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1185,7 +1840,12 @@
     "step_index": 2,
     "condition": "CHAT_MESSAGE_RECEIVED",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Kill enemies to collect soul fragments, then offer them at the Soul obelisk to weaken the opposing Avatar. When the Avat"
+    "description": "Kill enemies to collect soul fragments, then offer them at the Soul obelisk to weaken the opposing Avatar. When the Avat",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D1",
@@ -1194,7 +1854,12 @@
     "step_index": 1,
     "condition": "ARRIVE_AT_ZONE",
     "message": "ARRIVE_AT_ZONE step missing required field (completionZone of length 5) -> never auto-advances",
-    "description": "Enter the LMS lobby building and choose Competitive or Casual mode. Competitive earns more points per match but requires"
+    "description": "Enter the LMS lobby building and choose Competitive or Casual mode. Competitive earns more points per match but requires",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1203,7 +1868,12 @@
     "step_index": 2,
     "condition": "CHAT_MESSAGE_RECEIVED",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Scavenge weapons, armour, and food from supply crates on the island. Fight other players; the last player standing wins."
+    "description": "Scavenge weapons, armour, and food from supply crates on the island. Fight other players; the last player standing wins.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D1b",
@@ -1212,7 +1882,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Collect vale offerings from completed totems after ent visits. Exchange offerings at the reward trader for Bow string sp"
+    "description": "Collect vale offerings from completed totems after ent visits. Exchange offerings at the reward trader for Bow string sp",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1221,7 +1896,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Identify the 3 active spirit types near each totem site (out of 5 variants). Carve 4 decorations matching those spirits "
+    "description": "Identify the 3 active spirit types near each totem site (out of 5 variants). Carve 4 decorations matching those spirits ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1230,7 +1910,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Run between the 8 totem sites around the valley maintaining and decorating totems. Activate ent trails (step on both tra"
+    "description": "Run between the 8 totem sites around the valley maintaining and decorating totems. Activate ent trails (step on both tra",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1",
@@ -1239,7 +1924,12 @@
     "step_index": 1,
     "condition": "ARRIVE_AT_ZONE",
     "message": "ARRIVE_AT_ZONE step missing required field (completionZone of length 5) -> never auto-advances",
-    "description": "Talk to Captain Cain to join a team of 5. Choose your role: Attacker, Collector, Defender, or Healer. Each role uses a d"
+    "description": "Talk to Captain Cain to join a team of 5. Choose your role: Attacker, Collector, Defender, or Healer. Each role uses a d",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1248,7 +1938,12 @@
     "step_index": 2,
     "condition": "CHAT_MESSAGE_RECEIVED",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Complete all 10 waves and defeat the Penance Queen. Always use the egg or bait type announced on your role's call panel "
+    "description": "Complete all 10 waves and defeat the Penance Queen. Always use the egg or bait type announced on your role's call panel ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D1b",
@@ -1257,7 +1952,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
-    "description": "Collect king worms on the island or use fish offcuts as bait. Equip the cormorant glove from Alry the Angler, then send "
+    "description": "Collect king worms on the island or use fish offcuts as bait. Equip the cormorant glove from Alry the Angler, then send ",
+    "by_design": true,
+    "by_design_reason": "self-loop: loopBackToStep targets its own step, so it cannot express a multi-step loop and is inert with loopCount<=0; it is the deliberate D4 E4 'activity loop' marker for an open-ended skilling grind (D4Batch3RegressionTest requires loopBackToStep>0), which completes via onItemObtained, not a counted loop",
+    "signal_kind": null,
+    "loop_back_to_step": 3,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1266,7 +1966,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Collect king worms on the island or use fish offcuts as bait. Equip the cormorant glove from Alry the Angler, then send "
+    "description": "Collect king worms on the island or use fish offcuts as bait. Equip the cormorant glove from Alry the Angler, then send ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1",
@@ -1275,7 +1980,12 @@
     "step_index": 2,
     "condition": "ACTOR_DEATH",
     "message": "ACTOR_DEATH step missing required field (completionNpcId > 0 or completionNpcIds non-empty) -> never auto-advances",
-    "description": "Challenge a champion in the arena by handing a champion scroll to Larxia. Each champion uses a specific combat style - u"
+    "description": "Challenge a champion in the arena by handing a champion scroll to Larxia. Each champion uses a specific combat style - u",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1",
@@ -1284,7 +1994,12 @@
     "step_index": 1,
     "condition": "ACTOR_DEATH",
     "message": "ACTOR_DEATH step missing required field (completionNpcId > 0 or completionNpcIds non-empty) -> never auto-advances",
-    "description": "In the Ancient Cavern, rummage barbarian skeletons (1/13 chance per rummage) for ancient pages, or kill mithril dragons "
+    "description": "In the Ancient Cavern, rummage barbarian skeletons (1/13 chance per rummage) for ancient pages, or kill mithril dragons ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1293,7 +2008,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
-    "description": "Lower your trawling net when in range of a shoal. Watch the depth indicator - when a shoal stops it moves to shallow or "
+    "description": "Lower your trawling net when in range of a shoal. Watch the depth indicator - when a shoal stops it moves to shallow or ",
+    "by_design": true,
+    "by_design_reason": "self-loop: loopBackToStep targets its own step, so it cannot express a multi-step loop and is inert with loopCount<=0; it is the deliberate D4 E4 'activity loop' marker for an open-ended skilling grind (D4Batch3RegressionTest requires loopBackToStep>0), which completes via onItemObtained, not a counted loop",
+    "signal_kind": null,
+    "loop_back_to_step": 3,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1302,7 +2022,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Sail out from Port Roberts dock to locate a trawling shoal (fish shoal icon on the world map). Use a fathom stone for ca"
+    "description": "Sail out from Port Roberts dock to locate a trawling shoal (fish shoal icon on the world map). Use a fathom stone for ca",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1311,7 +2036,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Lower your trawling net when in range of a shoal. Watch the depth indicator - when a shoal stops it moves to shallow or "
+    "description": "Lower your trawling net when in range of a shoal. Watch the depth indicator - when a shoal stops it moves to shallow or ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1320,7 +2050,12 @@
     "step_index": 3,
     "condition": "ARRIVE_AT_TILE",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "After completing the run, recharge your Pharaoh's sceptre by speaking to the Guardian Mummy. Bank at the Sophanem Dungeo"
+    "description": "After completing the run, recharge your Pharaoh's sceptre by speaking to the Guardian Mummy. Bank at the Sophanem Dungeo",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1329,7 +2064,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Rush through rooms 1-7, looting urns and sarcophagi only. Use Protect from Melee to ignore mummies and scarabs. At room "
+    "description": "Rush through rooms 1-7, looting urns and sarcophagi only. Use Protect from Melee to ignore mummies and scarabs. At room ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1",
@@ -1338,7 +2078,12 @@
     "step_index": 1,
     "condition": "ACTOR_DEATH",
     "message": "ACTOR_DEATH step missing required field (completionNpcId > 0 or completionNpcIds non-empty) -> never auto-advances",
-    "description": "Kill monsters on each floor for skull sceptre pieces: Floor 1 (Vault of War) - minotaurs drop the right skull half; Floo"
+    "description": "Kill monsters on each floor for skull sceptre pieces: Floor 1 (Vault of War) - minotaurs drop the right skull half; Floo",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1",
@@ -1347,7 +2092,12 @@
     "step_index": 3,
     "condition": "ACTOR_DEATH",
     "message": "ACTOR_DEATH step missing required field (completionNpcId > 0 or completionNpcIds non-empty) -> never auto-advances",
-    "description": "Kill monsters in the Catacombs for dark totem pieces (base, middle, top - each 1/500 from any monster). Burying bones re"
+    "description": "Kill monsters in the Catacombs for dark totem pieces (base, middle, top - each 1/500 from any monster). Burying bones re",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1356,7 +2106,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Pass the entrance obstacle: south-east jutting wall requires 60 Agility, or north-west boulder requires 60 Strength. Tem"
+    "description": "Pass the entrance obstacle: south-east jutting wall requires 60 Agility, or north-west boulder requires 60 Strength. Tem",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1365,7 +2120,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Inside the main dungeon (multi-combat). Equip a god item matching the faction you are farming to stop their followers at"
+    "description": "Inside the main dungeon (multi-combat). Equip a god item matching the faction you are farming to stop their followers at",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1",
@@ -1374,7 +2134,12 @@
     "step_index": 1,
     "condition": "ACTOR_DEATH",
     "message": "ACTOR_DEATH step missing required field (completionNpcId > 0 or completionNpcIds non-empty) -> never auto-advances",
-    "description": "Kill TzHaar-Ket, TzHaar-Mej, or TzHaar-Xil in the city for tokkul and rare drops. The uncut onyx is bought from the TzHa"
+    "description": "Kill TzHaar-Ket, TzHaar-Mej, or TzHaar-Xil in the city for tokkul and rare drops. The uncut onyx is bought from the TzHa",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1383,7 +2148,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
-    "description": "Deposit pay-dirt into the hopper. Wait at the sack near Prospector Percy for cleaned ores and golden nuggets. Upper leve"
+    "description": "Deposit pay-dirt into the hopper. Wait at the sack near Prospector Percy for cleaned ores and golden nuggets. Upper leve",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 3,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1392,7 +2162,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Mine pay-dirt from ore veins. Each vein lasts 23-27 seconds (36-40 on upper level). Use the coal bag to carry extra capa"
+    "description": "Mine pay-dirt from ore veins. Each vein lasts 23-27 seconds (36-40 on upper level). Use the coal bag to carry extra capa",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1401,7 +2176,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Deposit pay-dirt into the hopper. Wait at the sack near Prospector Percy for cleaned ores and golden nuggets. Upper leve"
+    "description": "Deposit pay-dirt into the hopper. Wait at the sack near Prospector Percy for cleaned ores and golden nuggets. Upper leve",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1410,7 +2190,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "loopCount=20 but loopBackToStep=0 -> loopCount has no effect",
-    "description": "Mine the crashed star. Stars degrade through tiers as miners chip away at them - being the first miner awards double sta"
+    "description": "Mine the crashed star. Stars degrade through tiers as miners chip away at them - being the first miner awards double sta",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1419,7 +2204,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the Hueycoatl reward chest in the arena. Pick up Hueycoatl hide and any unique drops before leaving"
+    "description": "Loot the Hueycoatl reward chest in the arena. Pick up Hueycoatl hide and any unique drops before leaving",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1428,7 +2218,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Form a party of 2-4 and enter Yama's instance. Solo is possible at endgame but DPS check is brutal; duo is the standard."
+    "description": "Form a party of 2-4 and enter Yama's instance. Solo is possible at endgame but DPS check is brutal; duo is the standard.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1437,7 +2232,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the chest after Yama dies for Oathplate shards, Dossiers, and unique drops. Open Forgotten lockboxes at a bank for "
+    "description": "Loot the chest after Yama dies for Oathplate shards, Dossiers, and unique drops. Open Forgotten lockboxes at a bank for ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1446,7 +2246,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Enter the Mokhaiotl delve instance. Each delve is a sequence of depth floors 1-10 (or further). Unique drop rates improv"
+    "description": "Enter the Mokhaiotl delve instance. Each delve is a sequence of depth floors 1-10 (or further). Unique drop rates improv",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1455,7 +2260,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Claim the delve reward chest. Higher depths bias the loot toward Avernic treads / Eye of ayak / Mokhaiotl cloth. Bank Mo"
+    "description": "Claim the delve reward chest. Higher depths bias the loot toward Avernic treads / Eye of ayak / Mokhaiotl cloth. Bank Mo",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1464,7 +2274,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Enter the Royal Titans tunnel and start an instance (solo or duo). Duo is the standard - solo is doable but DPS check is"
+    "description": "Enter the Royal Titans tunnel and start an instance (solo or duo). Duo is the standard - solo is doable but DPS check is",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1473,7 +2288,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot the reward chest by the tunnel scoreboard. Charge a Giantsoul amulet from any uncharged drop with desiccated pages "
+    "description": "Loot the reward chest by the tunnel scoreboard. Charge a Giantsoul amulet from any uncharged drop with desiccated pages ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1482,7 +2302,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot Amoxliatl's drops and pick up any remaining frozen tears on the ground before the boss respawns"
+    "description": "Loot Amoxliatl's drops and pick up any remaining frozen tears on the ground before the boss respawns",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1491,7 +2316,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Enter the cave to descend to the Shellbane Gryphon arena. The cave is instanced, so no other players will interfere with"
+    "description": "Enter the cave to descend to the Shellbane Gryphon arena. The cave is instanced, so no other players will interfere with",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1500,7 +2330,12 @@
     "step_index": 5,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Loot Scurrius' drop pile then leave the instance via the portal. Re-enter for another kill or return to bank if low on f"
+    "description": "Loot Scurrius' drop pile then leave the instance via the portal. Re-enter for another kill or return to bank if low on f",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1509,7 +2344,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Clear waves 1-62. Use Protect from Magic against Tz-Kih (level 22) and Yt-MejKot (180); Protect from Missiles against Tz"
+    "description": "Clear waves 1-62. Use Protect from Magic against Tz-Kih (level 22) and Yt-MejKot (180); Protect from Missiles against Tz",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1518,7 +2358,12 @@
     "step_index": 5,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Pick up the Fire cape drop on the rocks where Jad died. Tzrek-jad (pet) rolls 1/200 on Jad's death - it spawns inside th"
+    "description": "Pick up the Fire cape drop on the rocks where Jad died. Tzrek-jad (pet) rolls 1/200 on Jad's death - it spawns inside th",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1527,7 +2372,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Clear waves 1-66. Stack-up positioning is the entire game: pillar 4 (NW) and pillar 1 (S) are the standard anchors. Pray"
+    "description": "Clear waves 1-66. Stack-up positioning is the entire game: pillar 4 (NW) and pillar 1 (S) are the standard anchors. Pray",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1536,7 +2386,12 @@
     "step_index": 4,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Triple-Jad wave 67. Each Jad rotates Magic / Ranged prayers independently - the cue is the rear-back animation. Kill the"
+    "description": "Triple-Jad wave 67. Each Jad rotates Magic / Ranged prayers independently - the cue is the rear-back animation. Kill the",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1545,7 +2400,12 @@
     "step_index": 6,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Pick up the Infernal cape under TzKal-Zuk. Jal-nib-rek (pet) rolls 1/100 on Zuk's death; spawns inside the instance so l"
+    "description": "Pick up the Infernal cape under TzKal-Zuk. Jal-nib-rek (pet) rolls 1/100 on Zuk's death; spawns inside the instance so l",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1554,7 +2414,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Obtain an easy clue scroll. Low-level monsters (Cave bugs, Cave crawlers, Minotaurs, low-level skeletons), H.A.M. member"
+    "description": "Obtain an easy clue scroll. Low-level monsters (Cave bugs, Cave crawlers, Minotaurs, low-level skeletons), H.A.M. member",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1563,7 +2428,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Easy clues add cryptic clues, emote clues, and 6 anagram c"
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Easy clues add cryptic clues, emote clues, and 6 anagram c",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1572,7 +2442,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Open the reward casket for collection log items. Easy caskets roll the bronze / iron / studded leather (t/g) trim/gold s"
+    "description": "Open the reward casket for collection log items. Easy caskets roll the bronze / iron / studded leather (t/g) trim/gold s",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1581,7 +2456,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Obtain a medium clue scroll. Mid-level monsters (Cyclops, Cockatrice, Pyrefiends, Earth warriors, Otherworldly beings) d"
+    "description": "Obtain a medium clue scroll. Mid-level monsters (Cyclops, Cockatrice, Pyrefiends, Earth warriors, Otherworldly beings) d",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1590,7 +2470,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Medium clues introduce coordinate clues (Spade required), "
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Medium clues introduce coordinate clues (Spade required), ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1599,7 +2484,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Open the reward casket for collection log items. Medium caskets roll Ranger boots (1/1133), Wizard boots, the black / mi"
+    "description": "Open the reward casket for collection log items. Medium caskets roll Ranger boots (1/1133), Wizard boots, the black / mi",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1608,7 +2498,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Obtain a hard clue scroll from a slayer task drop (Jellies, Bloodvelds), boss drop (Sarachnis, Demonic gorillas), or by "
+    "description": "Obtain a hard clue scroll from a slayer task drop (Jellies, Bloodvelds), boss drop (Sarachnis, Demonic gorillas), or by ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1617,7 +2512,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Hard clues add coordinate dig clues (bring spade), puzzle "
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Hard clues add coordinate dig clues (bring spade), puzzle ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1626,7 +2526,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Obtain an elite clue scroll from a boss drop (Vorkath, Zulrah, Cerberus, Hydra, Barrows reward casket), a slayer monster"
+    "description": "Obtain an elite clue scroll from a boss drop (Vorkath, Zulrah, Cerberus, Hydra, Barrows reward casket), a slayer monster",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1635,7 +2540,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Elite clues add cryptic chains, hot/cold coordinates, dual"
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Elite clues add cryptic chains, hot/cold coordinates, dual",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1644,7 +2554,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Obtain a master clue scroll by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a "
+    "description": "Obtain a master clue scroll by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1653,7 +2568,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Master clues add 3-step puzzle chains, towel-bearing emote"
+    "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Master clues add 3-step puzzle chains, towel-bearing emote",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1662,7 +2582,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Obtain hard clue scrolls via PvM (Hellhounds, Kalphite Queen, etc.), skilling, or Ninja impling jars (approx 1/25 per ja"
+    "description": "Obtain hard clue scrolls via PvM (Hellhounds, Kalphite Queen, etc.), skilling, or Ninja impling jars (approx 1/25 per ja",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1671,7 +2596,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance."
+    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1680,7 +2610,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Obtain elite clue scrolls via PvM (Abyssal Sire, Zulrah, etc.), skilling, or Dragon impling jars (approx 1/50 per jar) f"
+    "description": "Obtain elite clue scrolls via PvM (Abyssal Sire, Zulrah, etc.), skilling, or Dragon impling jars (approx 1/50 per jar) f",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1689,7 +2624,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance."
+    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1698,7 +2638,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Obtain master clues by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a rare dro"
+    "description": "Obtain master clues by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a rare dro",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1707,7 +2652,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance."
+    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1716,7 +2666,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete clue scrolls of any tier. Refer to the parent tier activity for the most efficient clue acquisition method."
+    "description": "Complete clue scrolls of any tier. Refer to the parent tier activity for the most efficient clue acquisition method.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1725,7 +2680,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance."
+    "description": "Complete clue steps using the RuneLite Clue Scroll plugin for step-by-step guidance.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1734,7 +2694,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Complete master clue scrolls. Each master casket opened has approx 1/35 chance to trigger The Mimic. Full guidance on ob"
+    "description": "Complete master clue scrolls. Each master casket opened has approx 1/35 chance to trigger The Mimic. Full guidance on ob",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1743,7 +2708,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
-    "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-t"
+    "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-t",
+    "by_design": true,
+    "by_design_reason": "self-loop: loopBackToStep targets its own step, so it cannot express a multi-step loop and is inert with loopCount<=0; it is the deliberate D4 E4 'activity loop' marker for an open-ended skilling grind (D4Batch3RegressionTest requires loopBackToStep>0), which completes via onItemObtained, not a counted loop",
+    "signal_kind": null,
+    "loop_back_to_step": 3,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1752,7 +2722,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-t"
+    "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-t",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1761,7 +2736,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
-    "description": "Mine gemstone rocks (sapphire, emerald, ruby, diamond, opal, jade, red topaz) in the underground mine. Each mining actio"
+    "description": "Mine gemstone rocks (sapphire, emerald, ruby, diamond, opal, jade, red topaz) in the underground mine. Each mining actio",
+    "by_design": true,
+    "by_design_reason": "self-loop: loopBackToStep targets its own step, so it cannot express a multi-step loop and is inert with loopCount<=0; it is the deliberate D4 E4 'activity loop' marker for an open-ended skilling grind (D4Batch3RegressionTest requires loopBackToStep>0), which completes via onItemObtained, not a counted loop",
+    "signal_kind": null,
+    "loop_back_to_step": 3,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1770,7 +2750,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Mine gemstone rocks (sapphire, emerald, ruby, diamond, opal, jade, red topaz) in the underground mine. Each mining actio"
+    "description": "Mine gemstone rocks (sapphire, emerald, ruby, diamond, opal, jade, red topaz) in the underground mine. Each mining actio",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1779,7 +2764,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
-    "description": "Harpoon swordfish at harpoon spots. Each catch rolls the Heron pet and Big swordfish. Heron pet rate scales with Fishing"
+    "description": "Harpoon swordfish at harpoon spots. Each catch rolls the Heron pet and Big swordfish. Heron pet rate scales with Fishing",
+    "by_design": true,
+    "by_design_reason": "self-loop: loopBackToStep targets its own step, so it cannot express a multi-step loop and is inert with loopCount<=0; it is the deliberate D4 E4 'activity loop' marker for an open-ended skilling grind (D4Batch3RegressionTest requires loopBackToStep>0), which completes via onItemObtained, not a counted loop",
+    "signal_kind": null,
+    "loop_back_to_step": 3,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1788,7 +2778,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Harpoon swordfish at harpoon spots. Each catch rolls the Heron pet and Big swordfish. Heron pet rate scales with Fishing"
+    "description": "Harpoon swordfish at harpoon spots. Each catch rolls the Heron pet and Big swordfish. Heron pet rate scales with Fishing",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1797,7 +2792,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "loopCount=50 but loopBackToStep=0 -> loopCount has no effect",
-    "description": "Craft fire runes at the altar (14 Runecrafting required). Click the altar to craft all essence in inventory and pouches."
+    "description": "Craft fire runes at the altar (14 Runecrafting required). Click the altar to craft all essence in inventory and pouches.",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1806,7 +2806,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "loopCount=50 but loopBackToStep=0 -> loopCount has no effect",
-    "description": "Wait approximately 16 hours for fruit trees to fully grow (each tree takes 8 growth cycles at ~2 hours each). Tangleroot"
+    "description": "Wait approximately 16 hours for fruit trees to fully grow (each tree takes 8 growth cycles at ~2 hours each). Tangleroot",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1815,7 +2820,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "loopBackToStep=4 but loopCount=0 -> loop never engages",
-    "description": "Kill underwater crabs (combat level 23) in the Mogre Camp. Fresh crab claw drops at 1/8 and fresh crab shell at 1/8 - us"
+    "description": "Kill underwater crabs (combat level 23) in the Mogre Camp. Fresh crab claw drops at 1/8 and fresh crab shell at 1/8 - us",
+    "by_design": true,
+    "by_design_reason": "self-loop: loopBackToStep targets its own step, so it cannot express a multi-step loop and is inert with loopCount<=0; it is the deliberate D4 E4 'activity loop' marker for an open-ended skilling grind (D4Batch3RegressionTest requires loopBackToStep>0), which completes via onItemObtained, not a counted loop",
+    "signal_kind": null,
+    "loop_back_to_step": 4,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1824,7 +2834,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Kill underwater crabs (combat level 23) in the Mogre Camp. Fresh crab claw drops at 1/8 and fresh crab shell at 1/8 - us"
+    "description": "Kill underwater crabs (combat level 23) in the Mogre Camp. Fresh crab claw drops at 1/8 and fresh crab shell at 1/8 - us",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1833,7 +2848,12 @@
     "step_index": 4,
     "condition": "ARRIVE_AT_TILE",
     "message": "loopBackToStep=1 but loopCount=0 -> loop never engages",
-    "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Wingstone, Penwie, Brambickle, or Prof. Manglethorp "
+    "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Wingstone, Penwie, Brambickle, or Prof. Manglethorp ",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": null,
+    "loop_back_to_step": 1,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1842,7 +2862,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; carries a wireable completion signal (skipIfHasAnyItemIds/groundItemIds/item/npc/object) that is not wired",
-    "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Wingstone, Penwie, Brambickl"
+    "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Wingstone, Penwie, Brambickl",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "highlight",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1851,7 +2876,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your"
+    "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1860,7 +2890,12 @@
     "step_index": 3,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Collect your reward. Hard deliveries on time award reward tokens redeemable for food rewards and a chance at Mint cake o"
+    "description": "Collect your reward. Hard deliveries on time award reward tokens redeemable for food rewards and a chance at Mint cake o",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D1b",
@@ -1869,7 +2904,12 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "loopBackToStep=3 but loopCount=0 -> loop never engages",
-    "description": "Cut squid with a knife or use the boat chum station. If your inventory is full when a beak drops, offcuts drop to the gr"
+    "description": "Cut squid with a knife or use the boat chum station. If your inventory is full when a beak drops, offcuts drop to the gr",
+    "by_design": true,
+    "by_design_reason": "self-loop: loopBackToStep targets its own step, so it cannot express a multi-step loop and is inert with loopCount<=0; it is the deliberate D4 E4 'activity loop' marker for an open-ended skilling grind (D4Batch3RegressionTest requires loopBackToStep>0), which completes via onItemObtained, not a counted loop",
+    "signal_kind": null,
+    "loop_back_to_step": 3,
+    "loop_count": 0
   },
   {
     "detector": "D2",
@@ -1878,7 +2918,12 @@
     "step_index": 1,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Sail from Port Piscarilius to squid lantern fishing spots. A chum station (2 fish/tick), advanced chum station (3/tick),"
+    "description": "Sail from Port Piscarilius to squid lantern fishing spots. A chum station (2 fish/tick), advanced chum station (3/tick),",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   },
   {
     "detector": "D2",
@@ -1887,6 +2932,11 @@
     "step_index": 2,
     "condition": "MANUAL",
     "message": "non-final MANUAL step blocks hands-free auto-advance; no obvious auto-completion signal available",
-    "description": "Cut squid with a knife or use the boat chum station. If your inventory is full when a beak drops, offcuts drop to the gr"
+    "description": "Cut squid with a knife or use the boat chum station. If your inventory is full when a beak drops, offcuts drop to the gr",
+    "by_design": false,
+    "by_design_reason": null,
+    "signal_kind": "none",
+    "loop_back_to_step": null,
+    "loop_count": null
   }
 ]
