@@ -41,6 +41,26 @@ Full receipts: `docs/guidance-audit/acceptance-runs/2026-06-08.md`.
 
 ---
 
+## N1 ARRIVE_AT_ZONE completion + C2 inert-loop cleanup (minigames) — pending in-game validation
+
+Five minigame Queue steps used `ARRIVE_AT_ZONE` with no `completionZone` (could never
+auto-advance) and carried a co-located `loopBackToStep`+`loopCount:0` round step that never
+engages the engine. Player-facing condition changes below need an in-game pass to confirm the
+Queue step auto-advances when the player enters the boxed arena/lobby (or talks to the NPC).
+Zone corners cited from authoritative spawns: Captain Cain 1657 @ (2534,3568); Castle Wars
+arena region 9520 (Zamorak flag 2371,3133 / Saradomin flag 2428,3074); Nomad 10555 @
+(2212,2857); Lisa 7320 @ (3141,3636).
+
+| Source | Player-facing change to validate | Status | Branch | Re-validated |
+|--------|----------------------------------|--------|--------|--------------|
+| Barbarian Assault | Queue step now completes on talking to Captain Cain (NPC_TALKED_TO, npcId 1657) instead of a zoneless ARRIVE_AT_ZONE; round step no longer carries an inert loop | `[ ]` | fix/n1-arrive-zone-conditions | `[ ]` |
+| Castle Wars | Queue step auto-advances when player enters the arena zone `[2368,3072,2432,3135,0]` (region 9520) after a team portal | `[ ]` | fix/n1-arrive-zone-conditions | `[ ]` |
+| Soul Wars | Queue step auto-advances when player is in the Isle of Souls lobby zone `[2190,2840,2240,2880,0]` (Nomad's camp) | `[ ]` | fix/n1-arrive-zone-conditions | `[ ]` |
+| Last Man Standing | Queue step auto-advances when player is in the Ferox LMS lobby zone `[3125,3622,3160,3648,0]` (around Lisa) | `[ ]` | fix/n1-arrive-zone-conditions | `[ ]` |
+| Pest Control | Queue step is now MANUAL (deferred): the stored coord is the outpost the player already stands on; the true target is the instanced Pest Control island whose coords the data lacks. **TODO: capture the on-island arena coords in-game and upgrade this step back to ARRIVE_AT_ZONE with a real completionZone.** | `[ ]` | fix/n1-arrive-zone-conditions | `[ ]` |
+
+---
+
 ## Validation pass — Wave 1 (smoke + hub regressions + #699-#727 UX) — 2026-05-27 *(HEAD 48134711)*
 
 Operator-driven pass after the #699-#727 panel/guidance UX wave merged with no validation records. Earlier hub blockers (#485/#483/#486/#487/#488/#611) are all CLOSED, clearing the 2026-05-16 pause. Operator went AFK in Castle Wars partway through, so travel/active-play rows were deferred; stationary panel/overlay/debug-overlay rows were completed (verified by screenshot + log).
