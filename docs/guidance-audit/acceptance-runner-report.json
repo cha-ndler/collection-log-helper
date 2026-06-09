@@ -1,0 +1,1822 @@
+{
+  "generatedFrom": "src/main/resources/com/collectionloghelper/drop_rates.json",
+  "selection": {
+    "mode": "all"
+  },
+  "partial": false,
+  "selected": [
+    "General Graardor",
+    "Commander Zilyana",
+    "K'ril Tsutsaroth",
+    "Kree'arra",
+    "Zulrah",
+    "Vorkath",
+    "Cerberus",
+    "Alchemical Hydra",
+    "Corporeal Beast",
+    "Kalphite Queen",
+    "Phantom Muspah",
+    "Duke Sucellus",
+    "The Leviathan",
+    "The Whisperer",
+    "Vardorvis",
+    "Duke Sucellus (Awakened)",
+    "The Leviathan (Awakened)",
+    "The Whisperer (Awakened)",
+    "Vardorvis (Awakened)",
+    "Grotesque Guardians",
+    "The Nightmare",
+    "Phosani's Nightmare",
+    "Nex",
+    "Sarachnis",
+    "Giant Mole",
+    "Bryophyta",
+    "Obor",
+    "Dagannoth Rex",
+    "Dagannoth Prime",
+    "Dagannoth Supreme",
+    "Kraken",
+    "Thermonuclear smoke devil",
+    "Abyssal Sire",
+    "King Black Dragon",
+    "Chaos Elemental",
+    "Scorpia",
+    "Chaos Fanatic",
+    "Venenatis",
+    "Vet'ion",
+    "Callisto",
+    "Demonic gorillas",
+    "Lizardman shaman",
+    "Skotizo",
+    "Hespori",
+    "Chambers of Xeric",
+    "Chambers of Xeric (Challenge Mode)",
+    "Theatre of Blood",
+    "Theatre of Blood (Hard Mode)",
+    "Tombs of Amascut",
+    "Tombs of Amascut (300 Invocation)",
+    "Tombs of Amascut (500 Invocation)",
+    "Corrupted Gauntlet",
+    "The Gauntlet",
+    "Barrows",
+    "Tempoross",
+    "Wintertodt",
+    "Zalcano",
+    "Sol Heredit",
+    "Crazy archaeologist",
+    "Araxxor",
+    "Perilous Moons",
+    "Tormented Demons",
+    "Beginner Treasure Trails",
+    "Revenants",
+    "Crawling Hand",
+    "Cave Crawler",
+    "Rockslug",
+    "Cockatrice",
+    "Pyrefiend",
+    "Mogre",
+    "Basilisk",
+    "Terror Dog",
+    "Infernal Mage",
+    "Brine Rat",
+    "Frost Nagua",
+    "Sulphur Nagua",
+    "Earthen Nagua",
+    "Bloodveld",
+    "Gryphon",
+    "Jelly",
+    "Turoth",
+    "Warped Creature",
+    "Cave Horror",
+    "Aberrant Spectre",
+    "Basilisk Knight",
+    "Wyrm",
+    "Lava Strykewyrm",
+    "Dust Devil",
+    "Fossil Island Wyvern",
+    "Kurask",
+    "Skeletal Wyvern",
+    "Twisted Banshee",
+    "Gargoyle",
+    "Custodian Stalker",
+    "Aquanite",
+    "Nechryael",
+    "Spiritual Mage",
+    "Spiritual Mage (Zarosian)",
+    "Drake",
+    "Abyssal Demon",
+    "Cave Kraken",
+    "Dark Beast",
+    "Araxyte",
+    "Smoke Devil",
+    "Hydra",
+    "Vyrewatch Sentinel",
+    "Brimstone Chest",
+    "Larran's Big Chest",
+    "Superior Slayer Monster",
+    "Zombie Pirate Locker",
+    "Hallowed Sepulchre",
+    "Guardians of the Rift",
+    "Brimhaven Agility Arena",
+    "Giants' Foundry",
+    "Pest Control",
+    "Mage Training Arena",
+    "Shades of Mort'ton",
+    "Mahogany Homes",
+    "Mastering Mixology",
+    "Volcanic Mine",
+    "Tithe Farm",
+    "Gnome Restaurant (Scarfs)",
+    "Fishing Trawler",
+    "Temple Trekking",
+    "Rogues' Den",
+    "Scroll Cases",
+    "Castle Wars",
+    "Soul Wars",
+    "Last Man Standing",
+    "Vale Totems",
+    "Trouble Brewing",
+    "Barbarian Assault",
+    "Barracuda Trials",
+    "Aerial Fishing",
+    "Boat Paints",
+    "Champion's Challenge",
+    "Chompy Bird Hunting",
+    "Forestry",
+    "Fossil Island Notes",
+    "Glough's Experiments",
+    "Hunter Guild",
+    "Lost Schematics",
+    "Monkey Backpacks",
+    "My Notes",
+    "Ocean Encounters",
+    "Sailing Misc",
+    "Sea Treasures",
+    "Deep Sea Fishing",
+    "Pyramid Plunder",
+    "Stronghold of Security",
+    "Catacombs of Kourend",
+    "Wilderness God Wars Dungeon",
+    "Elven Crystal Chest",
+    "Miscellaneous",
+    "Random Events",
+    "Camdozaal",
+    "Colossal Wyrm Agility",
+    "Rooftop Agility",
+    "TzHaar",
+    "Cyclopes",
+    "Elder Chaos Druids",
+    "Shayzien Armour",
+    "Motherlode Mine",
+    "Shooting Stars",
+    "Creature Creation (Newtroost)",
+    "Creature Creation (Unicow)",
+    "Creature Creation (Spidine)",
+    "Creature Creation (Swordchick)",
+    "Creature Creation (Jubster)",
+    "Creature Creation (Frogeel)",
+    "The Hueycoatl",
+    "Yama",
+    "Doom of Mokhaiotl",
+    "Royal Titans",
+    "Amoxliatl",
+    "Brutus",
+    "Shellbane Gryphon",
+    "Scurrius",
+    "The Fight Caves",
+    "The Inferno",
+    "Deranged Archaeologist",
+    "Easy Treasure Trails",
+    "Medium Treasure Trails",
+    "Hard Treasure Trails",
+    "Elite Treasure Trails",
+    "Master Treasure Trails",
+    "Hard Treasure Trail Rewards (Rare)",
+    "Elite Treasure Trail Rewards (Rare)",
+    "Master Treasure Trail Rewards (Rare)",
+    "Shared Treasure Trail Rewards",
+    "The Mimic",
+    "Thieving (Seed Stalls)",
+    "Black Chinchompas",
+    "Woodcutting (Teak Trees)",
+    "Mining (Gemstone Rocks)",
+    "Fishing (Swordfish)",
+    "Runecrafting (Fire Runes)",
+    "Farming (Fruit Trees)",
+    "Underwater Crabs",
+    "Gnome Restaurant (Seed Pods)",
+    "Stingray (Boat Combat)",
+    "Albatross (Boat Combat)",
+    "Narwhal (Boat Combat)",
+    "Orcas (Boat Combat)",
+    "Great White Shark (Boat Combat)",
+    "Vampyre Kraken (Boat Combat)",
+    "Small Salvage",
+    "Fishy Salvage",
+    "Barracuda Salvage",
+    "Large Salvage",
+    "Plundered Salvage",
+    "Martial Salvage",
+    "Fremennik Salvage",
+    "Opulent Salvage",
+    "Mithril Dragon",
+    "Adamant Dragon",
+    "Rune Dragon",
+    "Ogress Shaman",
+    "Armoured Zombie",
+    "Cutting Squid",
+    "Prifddinas Elf",
+    "Fountain of Rune",
+    "Waterfiend",
+    "Port Tasks",
+    "Prifddinas Rabbit",
+    "Pickpocketing Darkmeyer Vyre"
+  ],
+  "results": [
+    {
+      "source": "General Graardor",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 8
+    },
+    {
+      "source": "Commander Zilyana",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 8
+    },
+    {
+      "source": "K'ril Tsutsaroth",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 8
+    },
+    {
+      "source": "Kree'arra",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 8
+    },
+    {
+      "source": "Zulrah",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 10
+    },
+    {
+      "source": "Vorkath",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 6
+    },
+    {
+      "source": "Cerberus",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 13231",
+      "itemCount": 7
+    },
+    {
+      "source": "Alchemical Hydra",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 22971",
+      "itemCount": 11
+    },
+    {
+      "source": "Corporeal Beast",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 7
+    },
+    {
+      "source": "Kalphite Queen",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 7981",
+      "itemCount": 6
+    },
+    {
+      "source": "Phantom Muspah",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 6
+    },
+    {
+      "source": "Duke Sucellus",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 28281",
+      "itemCount": 10
+    },
+    {
+      "source": "The Leviathan",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 28283",
+      "itemCount": 10
+    },
+    {
+      "source": "The Whisperer",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 28279",
+      "itemCount": 10
+    },
+    {
+      "source": "Vardorvis",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 28285",
+      "itemCount": 10
+    },
+    {
+      "source": "Duke Sucellus (Awakened)",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 28281",
+      "itemCount": 10
+    },
+    {
+      "source": "The Leviathan (Awakened)",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 28283",
+      "itemCount": 10
+    },
+    {
+      "source": "The Whisperer (Awakened)",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 28279",
+      "itemCount": 10
+    },
+    {
+      "source": "Vardorvis (Awakened)",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 28285",
+      "itemCount": 10
+    },
+    {
+      "source": "Grotesque Guardians",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 21726",
+      "itemCount": 8
+    },
+    {
+      "source": "Nex",
+      "status": "PASS",
+      "lastStep": 5,
+      "reason": "force-completed at step 5 (MANUAL) via clog item 26376",
+      "itemCount": 8
+    },
+    {
+      "source": "Sarachnis",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 23528",
+      "itemCount": 5
+    },
+    {
+      "source": "Giant Mole",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 4
+    },
+    {
+      "source": "Bryophyta",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 22372",
+      "itemCount": 1
+    },
+    {
+      "source": "Obor",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 20756",
+      "itemCount": 1
+    },
+    {
+      "source": "Dagannoth Rex",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 6737",
+      "itemCount": 4
+    },
+    {
+      "source": "Dagannoth Prime",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 6731",
+      "itemCount": 4
+    },
+    {
+      "source": "Dagannoth Supreme",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 6733",
+      "itemCount": 4
+    },
+    {
+      "source": "Kraken",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 11905",
+      "itemCount": 4
+    },
+    {
+      "source": "Thermonuclear smoke devil",
+      "status": "PASS",
+      "lastStep": 4,
+      "reason": "force-completed at step 4 (MANUAL) via clog item 12002",
+      "itemCount": 5
+    },
+    {
+      "source": "Abyssal Sire",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 13265",
+      "itemCount": 9
+    },
+    {
+      "source": "King Black Dragon",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 11920",
+      "itemCount": 4
+    },
+    {
+      "source": "Chaos Elemental",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ARRIVE_AT_TILE)",
+      "itemCount": 3
+    },
+    {
+      "source": "Scorpia",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 11930",
+      "itemCount": 4
+    },
+    {
+      "source": "Chaos Fanatic",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ARRIVE_AT_TILE)",
+      "itemCount": 3
+    },
+    {
+      "source": "Venenatis",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 6
+    },
+    {
+      "source": "Vet'ion",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 7
+    },
+    {
+      "source": "Callisto",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 6
+    },
+    {
+      "source": "Demonic gorillas",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 19529",
+      "itemCount": 6
+    },
+    {
+      "source": "Lizardman shaman",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 13576",
+      "itemCount": 1
+    },
+    {
+      "source": "Skotizo",
+      "status": "PASS",
+      "lastStep": 4,
+      "reason": "completed after step 4 (ARRIVE_AT_TILE)",
+      "itemCount": 6
+    },
+    {
+      "source": "Hespori",
+      "status": "PASS",
+      "lastStep": 4,
+      "reason": "force-completed at step 4 (MANUAL) via clog item 22994",
+      "itemCount": 4
+    },
+    {
+      "source": "Chambers of Xeric",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 20997",
+      "itemCount": 16
+    },
+    {
+      "source": "Chambers of Xeric (Challenge Mode)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 20997",
+      "itemCount": 23
+    },
+    {
+      "source": "Theatre of Blood",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 22486",
+      "itemCount": 14
+    },
+    {
+      "source": "Theatre of Blood (Hard Mode)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 22486",
+      "itemCount": 17
+    },
+    {
+      "source": "Tombs of Amascut",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 26219",
+      "itemCount": 27
+    },
+    {
+      "source": "Tombs of Amascut (300 Invocation)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 26219",
+      "itemCount": 27
+    },
+    {
+      "source": "Tombs of Amascut (500 Invocation)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 26219",
+      "itemCount": 27
+    },
+    {
+      "source": "Corrupted Gauntlet",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 4207",
+      "itemCount": 5
+    },
+    {
+      "source": "The Gauntlet",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 4207",
+      "itemCount": 5
+    },
+    {
+      "source": "Zalcano",
+      "status": "PASS",
+      "lastStep": 4,
+      "reason": "force-completed at step 4 (MANUAL) via clog item 23908",
+      "itemCount": 4
+    },
+    {
+      "source": "Sol Heredit",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 28947",
+      "itemCount": 9
+    },
+    {
+      "source": "Crazy archaeologist",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ARRIVE_AT_TILE)",
+      "itemCount": 3
+    },
+    {
+      "source": "Araxxor",
+      "status": "PASS",
+      "lastStep": 4,
+      "reason": "completed after step 4 (ARRIVE_AT_TILE)",
+      "itemCount": 10
+    },
+    {
+      "source": "Perilous Moons",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 29019",
+      "itemCount": 13
+    },
+    {
+      "source": "Tormented Demons",
+      "status": "PASS",
+      "lastStep": 4,
+      "reason": "force-completed at step 4 (MANUAL) via clog item 29574",
+      "itemCount": 3
+    },
+    {
+      "source": "Beginner Treasure Trails",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 23285",
+      "itemCount": 16
+    },
+    {
+      "source": "Crawling Hand",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Cave Crawler",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 4119",
+      "itemCount": 1
+    },
+    {
+      "source": "Rockslug",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 4115",
+      "itemCount": 1
+    },
+    {
+      "source": "Cockatrice",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 7976",
+      "itemCount": 3
+    },
+    {
+      "source": "Pyrefiend",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 4123",
+      "itemCount": 1
+    },
+    {
+      "source": "Mogre",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 2
+    },
+    {
+      "source": "Basilisk",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 7977",
+      "itemCount": 1
+    },
+    {
+      "source": "Terror Dog",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Infernal Mage",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 2
+    },
+    {
+      "source": "Brine Rat",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Frost Nagua",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 3
+    },
+    {
+      "source": "Sulphur Nagua",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Earthen Nagua",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Bloodveld",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Gryphon",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 2
+    },
+    {
+      "source": "Jelly",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 4127",
+      "itemCount": 1
+    },
+    {
+      "source": "Turoth",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 11902",
+      "itemCount": 2
+    },
+    {
+      "source": "Warped Creature",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Cave Horror",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 8901",
+      "itemCount": 1
+    },
+    {
+      "source": "Aberrant Spectre",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Basilisk Knight",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 2
+    },
+    {
+      "source": "Wyrm",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 21009",
+      "itemCount": 4
+    },
+    {
+      "source": "Lava Strykewyrm",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Dust Devil",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Fossil Island Wyvern",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 21637",
+      "itemCount": 3
+    },
+    {
+      "source": "Kurask",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 7978",
+      "itemCount": 4
+    },
+    {
+      "source": "Skeletal Wyvern",
+      "status": "PASS",
+      "lastStep": 4,
+      "reason": "force-completed at step 4 (MANUAL) via clog item 6809",
+      "itemCount": 2
+    },
+    {
+      "source": "Twisted Banshee",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Gargoyle",
+      "status": "PASS",
+      "lastStep": 4,
+      "reason": "force-completed at step 4 (MANUAL) via clog item 4153",
+      "itemCount": 3
+    },
+    {
+      "source": "Custodian Stalker",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31086",
+      "itemCount": 3
+    },
+    {
+      "source": "Aquanite",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Nechryael",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Spiritual Mage",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Spiritual Mage (Zarosian)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 6
+    },
+    {
+      "source": "Drake",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 22957",
+      "itemCount": 2
+    },
+    {
+      "source": "Abyssal Demon",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 3
+    },
+    {
+      "source": "Cave Kraken",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 11908",
+      "itemCount": 2
+    },
+    {
+      "source": "Dark Beast",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Araxyte",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 29806",
+      "itemCount": 1
+    },
+    {
+      "source": "Smoke Devil",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Hydra",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 22971",
+      "itemCount": 4
+    },
+    {
+      "source": "Vyrewatch Sentinel",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 24777",
+      "itemCount": 1
+    },
+    {
+      "source": "Brimstone Chest",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 23047",
+      "itemCount": 6
+    },
+    {
+      "source": "Larran's Big Chest",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 24288",
+      "itemCount": 3
+    },
+    {
+      "source": "Superior Slayer Monster",
+      "status": "PASS",
+      "lastStep": 0,
+      "reason": "force-completed at step 0 (MANUAL) via clog item 20724",
+      "itemCount": 4
+    },
+    {
+      "source": "Zombie Pirate Locker",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 29455",
+      "itemCount": 1
+    },
+    {
+      "source": "Hallowed Sepulchre",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 24711",
+      "itemCount": 16
+    },
+    {
+      "source": "Guardians of the Rift",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 26798",
+      "itemCount": 17
+    },
+    {
+      "source": "Brimhaven Agility Arena",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 2997",
+      "itemCount": 10
+    },
+    {
+      "source": "Giants' Foundry",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 27023",
+      "itemCount": 9
+    },
+    {
+      "source": "Pest Control",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 8839",
+      "itemCount": 10
+    },
+    {
+      "source": "Mage Training Arena",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 6918",
+      "itemCount": 11
+    },
+    {
+      "source": "Shades of Mort'ton",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 3470",
+      "itemCount": 14
+    },
+    {
+      "source": "Mahogany Homes",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 24872",
+      "itemCount": 8
+    },
+    {
+      "source": "Mastering Mixology",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 29978",
+      "itemCount": 7
+    },
+    {
+      "source": "Volcanic Mine",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 21697",
+      "itemCount": 8
+    },
+    {
+      "source": "Tithe Farm",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 13646",
+      "itemCount": 7
+    },
+    {
+      "source": "Gnome Restaurant (Scarfs)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 9470",
+      "itemCount": 2
+    },
+    {
+      "source": "Temple Trekking",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 10941",
+      "itemCount": 4
+    },
+    {
+      "source": "Rogues' Den",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 5554",
+      "itemCount": 5
+    },
+    {
+      "source": "Scroll Cases",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 30902",
+      "itemCount": 13
+    },
+    {
+      "source": "Castle Wars",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 4071",
+      "itemCount": 39
+    },
+    {
+      "source": "Soul Wars",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 25340",
+      "itemCount": 3
+    },
+    {
+      "source": "Last Man Standing",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 24189",
+      "itemCount": 32
+    },
+    {
+      "source": "Vale Totems",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31052",
+      "itemCount": 4
+    },
+    {
+      "source": "Trouble Brewing",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (INVENTORY_HAS_ITEM) via clog item 8959",
+      "itemCount": 30
+    },
+    {
+      "source": "Barbarian Assault",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 10548",
+      "itemCount": 11
+    },
+    {
+      "source": "Barracuda Trials",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31732",
+      "itemCount": 10
+    },
+    {
+      "source": "Aerial Fishing",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 13258",
+      "itemCount": 9
+    },
+    {
+      "source": "Boat Paints",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 32087",
+      "itemCount": 11
+    },
+    {
+      "source": "Champion's Challenge",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 6803",
+      "itemCount": 11
+    },
+    {
+      "source": "Chompy Bird Hunting",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 19
+    },
+    {
+      "source": "Forestry",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 28626",
+      "itemCount": 23
+    },
+    {
+      "source": "Fossil Island Notes",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 21664",
+      "itemCount": 10
+    },
+    {
+      "source": "Glough's Experiments",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 6
+    },
+    {
+      "source": "Hunter Guild",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 29263",
+      "itemCount": 6
+    },
+    {
+      "source": "Lost Schematics",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 32401",
+      "itemCount": 12
+    },
+    {
+      "source": "Monkey Backpacks",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 24862",
+      "itemCount": 6
+    },
+    {
+      "source": "My Notes",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 11341",
+      "itemCount": 26
+    },
+    {
+      "source": "Ocean Encounters",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31770",
+      "itemCount": 11
+    },
+    {
+      "source": "Sailing Misc",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31996",
+      "itemCount": 12
+    },
+    {
+      "source": "Sea Treasures",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 32388",
+      "itemCount": 17
+    },
+    {
+      "source": "Deep Sea Fishing",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31408",
+      "itemCount": 6
+    },
+    {
+      "source": "Pyramid Plunder",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 26945",
+      "itemCount": 1
+    },
+    {
+      "source": "Stronghold of Security",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 9007",
+      "itemCount": 4
+    },
+    {
+      "source": "Wilderness God Wars Dungeon",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 11942",
+      "itemCount": 1
+    },
+    {
+      "source": "Elven Crystal Chest",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 24034",
+      "itemCount": 6
+    },
+    {
+      "source": "Miscellaneous",
+      "status": "PASS",
+      "lastStep": 0,
+      "reason": "force-completed at step 0 (MANUAL) via clog item 1249",
+      "itemCount": 38
+    },
+    {
+      "source": "Random Events",
+      "status": "PASS",
+      "lastStep": 0,
+      "reason": "force-completed at step 0 (MANUAL) via clog item 3057",
+      "itemCount": 23
+    },
+    {
+      "source": "Camdozaal",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 25641",
+      "itemCount": 10
+    },
+    {
+      "source": "TzHaar",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 6522",
+      "itemCount": 10
+    },
+    {
+      "source": "Cyclopes",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 8
+    },
+    {
+      "source": "Elder Chaos Druids",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 3
+    },
+    {
+      "source": "Shayzien Armour",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 13359",
+      "itemCount": 25
+    },
+    {
+      "source": "Motherlode Mine",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 12013",
+      "itemCount": 6
+    },
+    {
+      "source": "Shooting Stars",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 25539",
+      "itemCount": 2
+    },
+    {
+      "source": "Creature Creation (Newtroost)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 2
+    },
+    {
+      "source": "Creature Creation (Unicow)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 2
+    },
+    {
+      "source": "Creature Creation (Spidine)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 2
+    },
+    {
+      "source": "Creature Creation (Swordchick)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 2
+    },
+    {
+      "source": "Creature Creation (Jubster)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 2
+    },
+    {
+      "source": "Creature Creation (Frogeel)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 2
+    },
+    {
+      "source": "The Hueycoatl",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 30070",
+      "itemCount": 6
+    },
+    {
+      "source": "Yama",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 30775",
+      "itemCount": 11
+    },
+    {
+      "source": "Doom of Mokhaiotl",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 31088",
+      "itemCount": 6
+    },
+    {
+      "source": "Royal Titans",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 30626",
+      "itemCount": 7
+    },
+    {
+      "source": "Amoxliatl",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 29889",
+      "itemCount": 5
+    },
+    {
+      "source": "Brutus",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ARRIVE_AT_TILE)",
+      "itemCount": 4
+    },
+    {
+      "source": "Shellbane Gryphon",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 31285",
+      "itemCount": 4
+    },
+    {
+      "source": "Scurrius",
+      "status": "PASS",
+      "lastStep": 5,
+      "reason": "force-completed at step 5 (MANUAL) via clog item 28801",
+      "itemCount": 2
+    },
+    {
+      "source": "The Fight Caves",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 13225",
+      "itemCount": 2
+    },
+    {
+      "source": "The Inferno",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 21291",
+      "itemCount": 2
+    },
+    {
+      "source": "Deranged Archaeologist",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ARRIVE_AT_TILE)",
+      "itemCount": 1
+    },
+    {
+      "source": "Easy Treasure Trails",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 12221",
+      "itemCount": 131
+    },
+    {
+      "source": "Medium Treasure Trails",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 2577",
+      "itemCount": 115
+    },
+    {
+      "source": "Hard Treasure Trails",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 2657",
+      "itemCount": 134
+    },
+    {
+      "source": "Elite Treasure Trails",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 12538",
+      "itemCount": 59
+    },
+    {
+      "source": "Master Treasure Trails",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 20065",
+      "itemCount": 49
+    },
+    {
+      "source": "Hard Treasure Trail Rewards (Rare)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 10350",
+      "itemCount": 24
+    },
+    {
+      "source": "Elite Treasure Trail Rewards (Rare)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 10350",
+      "itemCount": 39
+    },
+    {
+      "source": "Master Treasure Trail Rewards (Rare)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 10350",
+      "itemCount": 47
+    },
+    {
+      "source": "Shared Treasure Trail Rewards",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 3827",
+      "itemCount": 49
+    },
+    {
+      "source": "The Mimic",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 23185",
+      "itemCount": 1
+    },
+    {
+      "source": "Woodcutting (Teak Trees)",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 13322",
+      "itemCount": 1
+    },
+    {
+      "source": "Mining (Gemstone Rocks)",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 13321",
+      "itemCount": 1
+    },
+    {
+      "source": "Fishing (Swordfish)",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 13320",
+      "itemCount": 2
+    },
+    {
+      "source": "Runecrafting (Fire Runes)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 20665",
+      "itemCount": 1
+    },
+    {
+      "source": "Farming (Fruit Trees)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 20661",
+      "itemCount": 1
+    },
+    {
+      "source": "Underwater Crabs",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 7536",
+      "itemCount": 2
+    },
+    {
+      "source": "Gnome Restaurant (Seed Pods)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 9475",
+      "itemCount": 2
+    },
+    {
+      "source": "Stingray (Boat Combat)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Albatross (Boat Combat)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "Narwhal (Boat Combat)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 4
+    },
+    {
+      "source": "Orcas (Boat Combat)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 4
+    },
+    {
+      "source": "Great White Shark (Boat Combat)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 5
+    },
+    {
+      "source": "Vampyre Kraken (Boat Combat)",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 6
+    },
+    {
+      "source": "Small Salvage",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31989",
+      "itemCount": 3
+    },
+    {
+      "source": "Fishy Salvage",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31989",
+      "itemCount": 3
+    },
+    {
+      "source": "Barracuda Salvage",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31989",
+      "itemCount": 3
+    },
+    {
+      "source": "Large Salvage",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 32398",
+      "itemCount": 2
+    },
+    {
+      "source": "Plundered Salvage",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31916",
+      "itemCount": 3
+    },
+    {
+      "source": "Martial Salvage",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 32099",
+      "itemCount": 4
+    },
+    {
+      "source": "Fremennik Salvage",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 32398",
+      "itemCount": 2
+    },
+    {
+      "source": "Opulent Salvage",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31406",
+      "itemCount": 7
+    },
+    {
+      "source": "Mithril Dragon",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 31
+    },
+    {
+      "source": "Adamant Dragon",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 5
+    },
+    {
+      "source": "Rune Dragon",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 5
+    },
+    {
+      "source": "Ogress Shaman",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 3
+    },
+    {
+      "source": "Armoured Zombie",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 5
+    },
+    {
+      "source": "Cutting Squid",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31572",
+      "itemCount": 1
+    },
+    {
+      "source": "Prifddinas Elf",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 23959",
+      "itemCount": 1
+    },
+    {
+      "source": "Fountain of Rune",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 19707",
+      "itemCount": 1
+    },
+    {
+      "source": "Waterfiend",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "completed after step 2 (ACTOR_DEATH)",
+      "itemCount": 3
+    },
+    {
+      "source": "Port Tasks",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "force-completed at step 1 (MANUAL) via clog item 31283",
+      "itemCount": 2
+    },
+    {
+      "source": "Prifddinas Rabbit",
+      "status": "PASS",
+      "lastStep": 1,
+      "reason": "completed after step 1 (ACTOR_DEATH)",
+      "itemCount": 1
+    },
+    {
+      "source": "The Nightmare",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (CHAT_MESSAGE_RECEIVED)",
+      "itemCount": 10
+    },
+    {
+      "source": "Phosani's Nightmare",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 24422",
+      "itemCount": 12
+    },
+    {
+      "source": "Barrows",
+      "status": "PASS",
+      "lastStep": 8,
+      "reason": "completed after step 8 (CHAT_MESSAGE_RECEIVED)",
+      "itemCount": 25
+    },
+    {
+      "source": "Tempoross",
+      "status": "PARTIAL",
+      "lastStep": 2,
+      "reason": "advanced then stuck at step 2 (MANUAL)",
+      "itemCount": 12
+    },
+    {
+      "source": "Wintertodt",
+      "status": "PARTIAL",
+      "lastStep": 2,
+      "reason": "advanced then stuck at step 2 (MANUAL)",
+      "itemCount": 10
+    },
+    {
+      "source": "Revenants",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 14
+    },
+    {
+      "source": "Fishing Trawler",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 13258",
+      "itemCount": 4
+    },
+    {
+      "source": "Catacombs of Kourend",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 19679",
+      "itemCount": 3
+    },
+    {
+      "source": "Colossal Wyrm Agility",
+      "status": "PARTIAL",
+      "lastStep": 1,
+      "reason": "advanced then stuck at step 1 (MANUAL)",
+      "itemCount": 9
+    },
+    {
+      "source": "Rooftop Agility",
+      "status": "PARTIAL",
+      "lastStep": 1,
+      "reason": "advanced then stuck at step 1 (MANUAL)",
+      "itemCount": 8
+    },
+    {
+      "source": "Thieving (Seed Stalls)",
+      "status": "PARTIAL",
+      "lastStep": 1,
+      "reason": "advanced then stuck at step 1 (MANUAL)",
+      "itemCount": 1
+    },
+    {
+      "source": "Black Chinchompas",
+      "status": "PARTIAL",
+      "lastStep": 1,
+      "reason": "advanced then stuck at step 1 (MANUAL)",
+      "itemCount": 1
+    },
+    {
+      "source": "Pickpocketing Darkmeyer Vyre",
+      "status": "PARTIAL",
+      "lastStep": 1,
+      "reason": "advanced then stuck at step 1 (MANUAL)",
+      "itemCount": 1
+    }
+  ],
+  "confidencePct": 98.01,
+  "passCount": 219,
+  "total": 226
+}
