@@ -13,6 +13,20 @@
 
 ---
 
+## PR fix/c1-actor-death-manual — C1: terminal multi-item ACTOR_DEATH steps → MANUAL *(pending merge)*
+
+Finding C1: 5 terminal "kill repeatedly for drops" steps on MULTI-ITEM clog sources used `ACTOR_DEATH` with no completion NPC id, so they would auto-complete after a single kill (or never advance, depending on engine path) instead of staying live until the whole item set is obtained. Each step is now `MANUAL` (the sequence force-completes via `onItemObtained` as items land); kept/added `completionNpcIds` on TzHaar + Stronghold for overlay highlight only. Verify each source stays on its combat step across multiple kills and only advances/completes when the relevant clog items are actually obtained.
+
+| # | Test | Status | Notes |
+|---|---|---|---|
+| 1 | My Notes step[1]: in the Ancient Cavern, rummage barbarian skeletons / kill mithril dragons — step does NOT auto-complete after one kill/rummage; advances only as ancient pages are obtained | `[ ]` | |
+| 2 | Champion's Challenge step[2]: kill regular monsters for champion scrolls — step stays live; does not complete off the arena champion kill | `[ ]` | |
+| 3 | Catacombs of Kourend step[3]: kill any Catacombs monster — step stays live across kills; advances only as dark totem pieces drop (1/500) | `[ ]` | |
+| 4 | TzHaar step[1]: kill city TzHaar (Ket/Xil/Mej/Hur) — step stays live; overlay highlights the TzHaar NPCs via `completionNpcIds`; does not complete on a single kill | `[ ]` | |
+| 5 | Stronghold of Security step[1]: kill floor monsters (minotaur/flesh crawler/catablepon/ankou) — step stays live; overlay highlights via `completionNpcIds`; advances only as skull sceptre pieces drop | `[ ]` | |
+
+---
+
 ## Actuation-seam calibration — 2026-06-08 *(dev bridge harness 0.2, LOGIN_SCREEN)*
 
 Calibration of the runelite-dev actuation seam before any acceptance-gate runner. Drove two
