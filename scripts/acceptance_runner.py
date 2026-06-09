@@ -188,7 +188,21 @@ class BridgeClient:
         }
         tmp = self.dir / "command.json.tmp"
         tmp.write_text(json.dumps(payload), encoding="utf-8")
-        os.replace(tmp, self.command_file)
+        # Windows: the harness can hold command.json open at the instant we
+        # rename over it, which raises PermissionError (WinError 5). Retry the
+        # atomic replace briefly, then fall back to a direct write.
+        for _ in range(40):
+            try:
+                os.replace(tmp, self.command_file)
+                break
+            except PermissionError:
+                time.sleep(0.05)
+        else:
+            self.command_file.write_text(json.dumps(payload), encoding="utf-8")
+            try:
+                tmp.unlink()
+            except OSError:
+                pass
 
         deadline = time.time() + self.timeout_s
         while time.time() < deadline:
