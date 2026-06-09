@@ -14257,9 +14257,7 @@
         "worldY": 3194,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
-        "section": "Activity",
-        "loopBackToStep": 1,
-        "loopCount": 0
+        "section": "Activity"
       },
       {
         "description": "Exchange agility tickets with Cap'n Izzy No-Beard for Brimhaven Graceful recolours (250 tickets each piece) or the Pirate's hook (800 tickets). The full Graceful set takes 1500 tickets total",
@@ -14753,9 +14751,7 @@
         "worldY": 3316,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
-        "section": "Activity",
-        "loopBackToStep": 1,
-        "loopCount": 0
+        "section": "Activity"
       },
       {
         "description": "When you have enough pizazz points, visit the reward shop inside the arena to purchase Infinity armour pieces, wands, Mage's book, or Bones to Peaches. The Master wand (17 pizazz of each type) and Mage's book are the primary targets",
@@ -16060,9 +16056,7 @@
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
-        "completionCondition": "MANUAL",
-        "loopBackToStep": 2,
-        "loopCount": 0
+        "completionCondition": "MANUAL"
       },
       {
         "section": "Reward",
@@ -16156,8 +16150,6 @@
         "interactAction": "Talk-to",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "loopBackToStep": 1,
-        "loopCount": 0,
         "section": "Travel"
       }
     ],
@@ -16249,9 +16241,7 @@
           1925,
           954
         ],
-        "section": "Activity",
-        "loopBackToStep": 2,
-        "loopCount": 0
+        "section": "Activity"
       },
       {
         "description": "When the trawler returns to Port Khazard, collect your fish haul from Murphy. Each Angler outfit piece has approximately a 1-in-12 chance per completed voyage. Bank and board again for the next run",
@@ -16367,8 +16357,6 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "loopBackToStep": 1,
-        "loopCount": 0,
         "section": "Travel"
       }
     ]
@@ -16485,9 +16473,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "section": "Travel",
-        "loopBackToStep": 1,
-        "loopCount": 0
+        "section": "Travel"
       }
     ],
     "afkLevel": 0
@@ -17576,8 +17562,6 @@
         "worldY": 3128,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
-        "loopBackToStep": 1,
-        "loopCount": 0,
         "section": "Reward"
       }
     ],
@@ -20756,7 +20740,6 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "loopBackToStep": 1,
         "section": "Bank"
       }
     ],
@@ -30424,8 +30407,6 @@
         "interactAction": "Talk-to",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "loopBackToStep": 1,
-        "loopCount": 0,
         "section": "Travel"
       }
     ],
