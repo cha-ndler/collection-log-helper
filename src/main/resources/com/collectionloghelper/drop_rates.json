@@ -16059,9 +16059,7 @@
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
-        "completionCondition": "MANUAL",
-        "loopBackToStep": 2,
-        "loopCount": 0
+        "completionCondition": "MANUAL"
       },
       {
         "section": "Reward",
@@ -16246,9 +16244,7 @@
           1925,
           954
         ],
-        "section": "Activity",
-        "loopBackToStep": 2,
-        "loopCount": 0
+        "section": "Activity"
       },
       {
         "description": "When the trawler returns to Port Khazard, collect your fish haul from Murphy. Each Angler outfit piece has approximately a 1-in-12 chance per completed voyage. Bank and board again for the next run",
@@ -22722,9 +22718,7 @@
         "objectId": 26674,
         "objectInteractAction": "Deposit",
         "completionCondition": "MANUAL",
-        "section": "Mine",
-        "loopBackToStep": 3,
-        "loopCount": 0
+        "section": "Mine"
       },
       {
         "description": "Spend golden nuggets at Prospector Percy shop: helmet (40), jacket (60), legs (40), boots (40), coal bag (100), gem bag (100). Prioritise coal bag and gem bag for immediate efficiency gains. Bank chest beside Percy is accessible without requirements.",
