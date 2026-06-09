@@ -49,6 +49,25 @@ def _clamp(v: int) -> int:
     return v if v >= 0 else 0
 
 
+# ARRIVE_AT_TILE move-away distance. The engine only registers an arrival after
+# a genuine position change away-then-back; +40 proved too small to clear some
+# completionDistance radii (Catacombs needed ~64 tiles in a manual drive), so we
+# move a full +128 away before arriving.
+_MOVE_AWAY_OFFSET = 128
+
+
+def _other_plane(wp: int) -> int:
+    """A DIFFERENT plane than `wp`, used to force a PLAYER_ON_PLANE transition.
+
+    PLAYER_ON_PLANE completes when playerLocation.getPlane() == worldPlane
+    (CompletionChecker.isPlayerOnPlaneSatisfying). Completion is evaluated on a
+    later game-tick, so a single same-plane inject can no-op if the engine
+    already thinks the player is on that plane. Injecting a move at a different
+    plane first guarantees the subsequent same-plane inject is a real change.
+    """
+    return 1 if wp == 0 else 0
+
+
 def synthesize_events(step: dict, clog_item_ids: list) -> list:
     """Map one guidance step to the synthetic event(s) that complete it.
 
@@ -68,9 +87,11 @@ def synthesize_events(step: dict, clog_item_ids: list) -> list:
         wy = step.get("worldY", 0)
         wp = step.get("worldPlane", 0)
         # Move AWAY then ARRIVE -- a single arrive is unreliable post-login
-        # (FINDING-1). Clamp the +40 away-tile to never go negative.
+        # (FINDING-1). Clamp the away-tile to never go negative. +128 (was +40):
+        # a manual Catacombs drive needed ~64 tiles before the arrival registered.
         return [
-            {"type": "playerMoved", "x": _clamp(wx + 40), "y": _clamp(wy + 40), "plane": wp},
+            {"type": "playerMoved", "x": _clamp(wx + _MOVE_AWAY_OFFSET),
+             "y": _clamp(wy + _MOVE_AWAY_OFFSET), "plane": wp},
             {"type": "playerMoved", "x": _clamp(wx), "y": _clamp(wy), "plane": wp},
         ]
 
@@ -87,13 +108,17 @@ def synthesize_events(step: dict, clog_item_ids: list) -> list:
         ]
 
     if cond == "PLAYER_ON_PLANE":
+        wx = step.get("worldX", 0)
+        wy = step.get("worldY", 0)
+        wp = step.get("worldPlane", 0)
+        # Emit a plane TRANSITION: inject at a different plane first, then at the
+        # target plane, so the engine sees an actual plane change (mirrors the
+        # move-away-then-arrive pattern for tiles). A single same-plane inject can
+        # no-op when the engine already believes the player is on that plane.
         return [
-            {
-                "type": "playerMoved",
-                "x": step.get("worldX", 0),
-                "y": step.get("worldY", 0),
-                "plane": step.get("worldPlane", 0),
-            }
+            {"type": "playerMoved", "x": _clamp(wx), "y": _clamp(wy),
+             "plane": _other_plane(wp)},
+            {"type": "playerMoved", "x": _clamp(wx), "y": _clamp(wy), "plane": wp},
         ]
 
     if cond == "NPC_TALKED_TO":
@@ -261,6 +286,32 @@ def _is_complete(state: dict, source_name: str) -> bool:
 # step conditions with no synthetic driver -> may need force-complete
 _NO_DRIVER = {"MANUAL", "INVENTORY_HAS_ITEM", "INVENTORY_NOT_HAS_ITEM"}
 
+# Completion checks run on a later game-tick (CompletionChecker is driven from
+# GameTick / PlayerChanged), so a single state.read right after an inject can be
+# one tick too early. Re-read a few times before concluding a step is stuck.
+_SETTLE_READS = 4
+_SETTLE_DELAY_S = 0.15
+
+
+def _read_until(client: BridgeClient, name: str, prev_index: int) -> dict:
+    """Re-read state until the sequence completes or the step index advances.
+
+    Polls `state.read` up to `_SETTLE_READS` times with `_SETTLE_DELAY_S`
+    between reads. Returns as soon as the engine reports complete or
+    currentStepIndex moved past `prev_index`; otherwise returns the last read.
+    The first read is immediate (no pre-sleep) so the common already-settled
+    case stays fast.
+    """
+    state = client.read_state()
+    for _ in range(_SETTLE_READS - 1):
+        if _is_complete(state, name):
+            return state
+        if state.get("currentStepIndex", prev_index) > prev_index:
+            return state
+        time.sleep(_SETTLE_DELAY_S)
+        state = client.read_state()
+    return state
+
 
 def run_source(source: dict, client: BridgeClient) -> dict:
     """Drive a single source end to end through the live bridge.
@@ -322,7 +373,10 @@ def run_source(source: dict, client: BridgeClient) -> dict:
         events = synthesize_events(step, items)
         for ev in events:
             client.inject(ev)
-        state = client.read_state()
+        # Completion is often one tick late -- re-read a few times before
+        # concluding the step is stuck (covers ACTOR_DEATH/PLAYER_ON_PLANE/
+        # ARRIVE_AT_TILE that complete on the next GameTick).
+        state = _read_until(client, name, prev_index)
 
         if _is_complete(state, name):
             advanced = True
@@ -336,11 +390,16 @@ def run_source(source: dict, client: BridgeClient) -> dict:
             advanced = True
             continue
 
-        # Did not advance. For a no-driver terminal-ish step, force-complete via
-        # the source's first clog item (engine onItemObtained finishes it).
+        # Did not advance. For a no-driver step (MANUAL / INVENTORY_*) at ANY
+        # position -- not just the terminal one -- force-complete via the
+        # source's first clog item. The engine's onItemObtained completes the
+        # whole sequence regardless of step index (validated live on Catacombs),
+        # mirroring the real in-game clog gate. This is legitimate ONLY for
+        # no-driver steps: a step that SHOULD advance on a synthetic event but
+        # does not is a real bug and must NOT be masked here.
         if cond in _NO_DRIVER and items:
             client.inject({"type": "itemObtained", "itemId": items[0]})
-            state = client.read_state()
+            state = _read_until(client, name, cur_index)
             if _is_complete(state, name):
                 advanced = True
                 result["status"] = "PASS"
