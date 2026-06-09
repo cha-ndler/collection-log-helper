@@ -38,6 +38,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
+# Gate 4 threshold: minimum item-weighted guidance-drive confidence to stay GREEN.
+CONFIDENCE_GATE_PCT = 95
+
 DEFAULT_DATA = (
     REPO_ROOT / "src" / "main" / "resources" / "com" / "collectionloghelper" / "drop_rates.json"
 )
@@ -52,6 +55,7 @@ DEFAULT_RATCHET_XML = (
 )
 DEFAULT_FINDINGS = GA / "findings-guidance-config.md"
 DEFAULT_ACCEPTANCE_DIR = GA / "acceptance-runs"
+DEFAULT_DRIVE_REPORT = GA / "acceptance-runner-report.json"
 DEFAULT_OUTPUT = GA / "status.md"
 
 # Links in status.md resolve relative to its own directory on GitHub.
@@ -215,6 +219,27 @@ def parse_acceptance(acceptance_dir: Path) -> dict | None:
     }
 
 
+def parse_drive_report(report_path: Path) -> dict | None:
+    """Gate 4: item-weighted guidance-drive confidence from the acceptance-runner.
+
+    Reads `acceptance-runner-report.json` produced by
+    `scripts/acceptance_runner.py` (the live-bridge sweep). Returns None when the
+    artifact is absent -- the board reports "not yet measured" and does NOT block.
+    """
+    if not report_path.exists():
+        return None
+    with report_path.open(encoding="utf-8") as fh:
+        rep = json.load(fh)
+    confidence = float(rep.get("confidencePct", 0.0))
+    return {
+        "confidencePct": confidence,
+        "passCount": rep.get("passCount"),
+        "total": rep.get("total"),
+        "selected": rep.get("selected", []),
+        "meets_gate": confidence >= CONFIDENCE_GATE_PCT,
+    }
+
+
 def pct(n: int, d: int) -> str:
     return f"{(100.0 * n / d):.1f}%" if d else "n/a"
 
@@ -228,9 +253,11 @@ def render(
     ratchet: dict | None,
     findings: dict | None,
     acceptance: dict | None,
+    drive: dict | None,
     analyzer_json: Path,
     ratchet_xml: Path,
     findings_md: Path,
+    drive_report: Path,
 ) -> str:
     o: list[str] = []
     o.append("# Guidance-audit scoreboard")
@@ -275,6 +302,20 @@ def render(
         c3 = "**not yet measured**"
         c3s = f"no run table under `{rel(DEFAULT_ACCEPTANCE_DIR)}/`"
     o.append(f"| 3 | acceptance-gate % | {c3} | {c3s} |")
+
+    # 4. guidance-drive confidence %
+    if drive is not None:
+        gate = "PASS" if drive["meets_gate"] else "BELOW GATE"
+        c4 = (
+            f"**{drive['confidencePct']:.1f}%** item-weighted "
+            f"({drive['passCount']}/{drive['total']} sources PASS); "
+            f"gate {CONFIDENCE_GATE_PCT}% {gate}"
+        )
+        c4s = f"[`{rel(drive_report)}`]({href(drive_report)})"
+    else:
+        c4 = "not yet measured"
+        c4s = f"no `{rel(drive_report)}` -- run `scripts/acceptance_runner.py` live"
+    o.append(f"| 4 | guidance-drive confidence % | {c4} | {c4s} |")
     o.append("")
 
     # ---- 1 detail ----
@@ -374,6 +415,29 @@ def render(
         )
     o.append("")
 
+    # ---- 4 detail ----
+    o.append("## 4. Guidance-drive confidence %")
+    o.append("")
+    if drive is not None:
+        gate = "meets" if drive["meets_gate"] else "BELOW"
+        o.append(
+            f"The acceptance-runner "
+            f"([`{rel(drive_report)}`]({href(drive_report)})) drove "
+            f"**{drive['total']}** selected source(s) through the live bridge by "
+            f"synthesizing each step's completion event; "
+            f"**{drive['passCount']}** drove fully to completion. Item-weighted "
+            f"confidence (clog items in PASS sources / clog items selected) is "
+            f"**{drive['confidencePct']:.1f}%**, which **{gate}** the "
+            f"`CONFIDENCE_GATE_PCT = {CONFIDENCE_GATE_PCT}` threshold."
+        )
+    else:
+        o.append(
+            f"**Not yet measured** -- no `{rel(drive_report)}`. Generate it with a "
+            "live run of `scripts/acceptance_runner.py --all` (or `--sample N`) "
+            "against a running dev client. Until then this gate does not block."
+        )
+    o.append("")
+
     # ---- recommendation ----
     o.append("## Recommendation implied by the board")
     o.append("")
@@ -389,6 +453,8 @@ def render(
         and acceptance is not None
         and acceptance.get("sample")
         and not acceptance["fail"]
+        # gate 4: if measured it must meet the threshold; unmeasured does not block.
+        and (drive is None or drive["meets_gate"])
     )
     if green:
         o.append(
@@ -420,6 +486,13 @@ def render(
             )
         if acceptance is None:
             reasons.append("acceptance-gate not yet measured")
+        if drive is not None and not drive["meets_gate"]:
+            reasons.append(
+                f"guidance-drive confidence {drive['confidencePct']:.1f}% is below "
+                f"the {CONFIDENCE_GATE_PCT}% gate"
+            )
+        elif drive is None:
+            reasons.append("guidance-drive confidence not yet measured")
         o.append("NOT GREEN -- resubmission blocked until resolved:")
         o.append("")
         for r in reasons:
@@ -435,6 +508,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--ratchet-xml", type=Path, default=DEFAULT_RATCHET_XML)
     p.add_argument("--findings", type=Path, default=DEFAULT_FINDINGS)
     p.add_argument("--acceptance-dir", type=Path, default=DEFAULT_ACCEPTANCE_DIR)
+    p.add_argument("--drive-report", type=Path, default=DEFAULT_DRIVE_REPORT)
     p.add_argument(
         "--calibration",
         choices=("pass", "fail", "unknown"),
@@ -457,9 +531,11 @@ def main(argv: list[str] | None = None) -> int:
         ratchet=parse_ratchet_xml(args.ratchet_xml),
         findings=parse_findings(args.findings),
         acceptance=parse_acceptance(args.acceptance_dir),
+        drive=parse_drive_report(args.drive_report),
         analyzer_json=args.analyzer_json,
         ratchet_xml=args.ratchet_xml,
         findings_md=args.findings,
+        drive_report=args.drive_report,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(md, encoding="utf-8")
