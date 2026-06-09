@@ -323,21 +323,22 @@ def calibrate(findings: list[Finding]) -> int:
             ok = False
         print(f"  [{status}] {label}: got {got}, expect {expect}")
 
-    # ---- raw detector counts (unchanged trust anchor) ----
-    check("D1 ACTOR_DEATH missing npc id (#739/A)", len(actor_death_missing), 5)
-    # #739/B title states "~23". The engine-true count (loopBackToStep>0 AND
-    # loopCount<=0, per StepAdvancer.java:135-137) is exactly 23. The "22" cited
-    # in some earlier hand passes was an off-by-one approximation; 23 is correct.
-    check("D1b loopBackToStep w/ loopCount=0 never loops (#739/B), raw", len(loop_never), 23)
+    # ---- raw detector counts (post-fix baseline; the C1/N1/C2 fixes in #781/#782/#783
+    # changed the underlying data, so these were re-derived 2026-06-09) ----
+    check("D1 ACTOR_DEATH missing npc id (#739/A)", len(actor_death_missing), 0)
+    # #739/B was 23 raw on the pre-fix data (16 earlier-target bugs + 7 self-loops).
+    # The 16 earlier-target loops were removed in #782/#783 and Motherlode Mine was
+    # converted to a self-loop for sibling consistency, leaving 8 by-design self-loops.
+    check("D1b loopBackToStep w/ loopCount=0 never loops (#739/B), raw", len(loop_never), 8)
     # #729: Shades of Mort'ton has at least one non-final MANUAL dead-end.
     check("D2 Shades of Mort'ton MANUAL dead-end present (#729)",
           1 if len(shades) >= 1 else 0, 1)
 
     # ---- by-design split (re-triage lock) ----
-    # 7 self-loops are the D4 E4 'activity loop' markers (all skilling Batch-3 sources);
-    # the remaining 16 earlier-target loops are the real #739/B intended-loop-broken bug.
-    check("D1b self-loop by-design (D4 E4 markers)", len(loop_never_self), 7)
-    check("D1b earlier-target loop-never REAL (#739/B)", len(loop_never_real), 16)
+    # 8 self-loops are the D4 E4 'activity loop' markers (all 8 skilling Batch-3 sources,
+    # incl. Motherlode Mine); the 16 earlier-target real bugs were all resolved (#782/#783).
+    check("D1b self-loop by-design (D4 E4 markers)", len(loop_never_self), 8)
+    check("D1b earlier-target loop-never REAL (#739/B)", len(loop_never_real), 0)
     # The lone item-signal MANUAL (Shades) is by-design (recurring-gather suppression +
     # unwired conditionTree); no item-signal MANUAL is a real unwired dead-end.
     check("D2 item-signal MANUAL real (unwired dead-end)", len(d2_item_real), 0)
