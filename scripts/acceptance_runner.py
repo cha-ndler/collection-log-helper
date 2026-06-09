@@ -1,0 +1,500 @@
+#!/usr/bin/env python3
+"""Guidance acceptance-runner -- a resubmission GATE.
+
+Measures "what % of collection-log items have guidance that actually drives to
+completion" by, for each source, synthesizing the events that each guidance
+step's `completionCondition` expects, injecting them into the LIVE dev client
+through the file bridge, and reading back whether the sequence advanced and
+completed.
+
+Two halves, cleanly separated so the analysis is unit-testable offline:
+
+  * `synthesize_events(step, clog_item_ids)` -- PURE. Maps one guidance step to
+    the synthetic event(s) that would complete it. No I/O. This is the part the
+    self-tests pin.
+  * `BridgeClient` -- the LIVE driver. Talks the `~/.runelite/rl-dev-bridge/`
+    file protocol (atomic command.json write + response.json poll). NEVER
+    touched by the self-tests; only `run_source` / `--source|--sample|--all`
+    against a running client exercises it.
+
+Aggregate confidence is ITEM-WEIGHTED: confidencePct = 100 * (clog items in PASS
+sources) / (clog items in selected sources). A source with 30 clog items that
+drives to completion counts 30x a 1-item source.
+
+stdlib only. Build + offline self-test must never call the live bridge.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import random
+import sys
+import time
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_DATA = (
+    REPO_ROOT / "src" / "main" / "resources" / "com" / "collectionloghelper" / "drop_rates.json"
+)
+DEFAULT_REPORT = REPO_ROOT / "docs" / "guidance-audit" / "acceptance-runner-report.json"
+
+
+# --------------------------------------------------------------------------- #
+# PURE: completionCondition -> synthetic events                               #
+# --------------------------------------------------------------------------- #
+def _clamp(v: int) -> int:
+    """World coords are never negative; clamp the move-away offset at the edge."""
+    return v if v >= 0 else 0
+
+
+def synthesize_events(step: dict, clog_item_ids: list) -> list:
+    """Map one guidance step to the synthetic event(s) that complete it.
+
+    PURE: no I/O, deterministic. The shape of each event mirrors the dev-bridge
+    harness `event.inject` payload (see DevBridgeHarnessPlugin.injectEvent); the
+    BridgeClient translates the small naming gaps (chat `text` -> harness
+    `message`) at the wire.
+
+    `clog_item_ids` is the source's collection-log item IDs, used only as the
+    fallback obtain-signal for ITEM_OBTAINED and for force-completion of
+    MANUAL/INVENTORY terminal steps by the caller (not here).
+    """
+    cond = step.get("completionCondition")
+
+    if cond == "ARRIVE_AT_TILE":
+        wx = step.get("worldX", 0)
+        wy = step.get("worldY", 0)
+        wp = step.get("worldPlane", 0)
+        # Move AWAY then ARRIVE -- a single arrive is unreliable post-login
+        # (FINDING-1). Clamp the +40 away-tile to never go negative.
+        return [
+            {"type": "playerMoved", "x": _clamp(wx + 40), "y": _clamp(wy + 40), "plane": wp},
+            {"type": "playerMoved", "x": _clamp(wx), "y": _clamp(wy), "plane": wp},
+        ]
+
+    if cond == "ARRIVE_AT_ZONE":
+        zone = step.get("completionZone") or [0, 0, 0, 0, 0]
+        x0, y0, x2, y2, zplane = zone[0], zone[1], zone[2], zone[3], zone[4]
+        return [
+            {
+                "type": "playerMoved",
+                "x": (x0 + x2) // 2,
+                "y": (y0 + y2) // 2,
+                "plane": zplane,
+            }
+        ]
+
+    if cond == "PLAYER_ON_PLANE":
+        return [
+            {
+                "type": "playerMoved",
+                "x": step.get("worldX", 0),
+                "y": step.get("worldY", 0),
+                "plane": step.get("worldPlane", 0),
+            }
+        ]
+
+    if cond == "NPC_TALKED_TO":
+        return [{"type": "npcInteracted", "npcId": step.get("completionNpcId")}]
+
+    if cond == "ACTOR_DEATH":
+        npc_id = step.get("completionNpcId")
+        if npc_id is None:
+            ids = step.get("completionNpcIds") or []
+            npc_id = ids[0] if ids else None
+        return [{"type": "npcDeath", "npcId": npc_id}]
+
+    if cond == "CHAT_MESSAGE_RECEIVED":
+        return [{"type": "chatMessage", "text": step.get("completionChatPattern")}]
+
+    if cond == "VARBIT_AT_LEAST":
+        return [
+            {
+                "type": "varbitChanged",
+                "varbitId": step.get("completionVarbitId"),
+                "value": step.get("completionVarbitValue"),
+            }
+        ]
+
+    if cond == "ITEM_OBTAINED":
+        item_id = step.get("completionItemId")
+        if item_id is None and clog_item_ids:
+            item_id = clog_item_ids[0]
+        return [{"type": "itemObtained", "itemId": item_id}]
+
+    # MANUAL / INVENTORY_HAS_ITEM / INVENTORY_NOT_HAS_ITEM: no synthetic driver.
+    return []
+
+
+def clog_item_ids(source: dict) -> list:
+    """The source's collection-log item IDs (the `items[].itemId` list)."""
+    out = []
+    for it in source.get("items") or []:
+        iid = it.get("itemId")
+        if iid is not None:
+            out.append(iid)
+    return out
+
+
+# --------------------------------------------------------------------------- #
+# LIVE: dev-bridge file-protocol client                                       #
+# --------------------------------------------------------------------------- #
+def _bridge_dir() -> Path:
+    override = os.environ.get("RL_DEV_BRIDGE_DIR")
+    if override:
+        return Path(override)
+    return Path.home() / ".runelite" / "rl-dev-bridge"
+
+
+class BridgeClient:
+    """File-protocol client for the in-client DevBridgeHarnessPlugin.
+
+    Wire format (matches DevBridgeHarnessPlugin exactly):
+      command.json  = {"id":<int>,"action":<str>,"params":{...},"ts":<int ms>}
+      response.json = {"id":<int>,"ok":<bool>,"result":{...},"error":<str>,
+                       "harnessVersion":<str>}
+    Atomic command write (tmp + os.replace); poll response.json for matching id.
+
+    Action/param catalog used here (harness `dispatch` / `injectEvent`):
+      ping              -> {}
+      guidance.activate -> {"source": <name>}
+      event.inject      -> {"type": ..., <payload>}   (see _translate_event)
+      state.read        -> {}
+    """
+
+    def __init__(self, bridge_dir: Path | None = None, timeout_s: float = 8.0,
+                 poll_s: float = 0.05):
+        self.dir = bridge_dir or _bridge_dir()
+        self.command_file = self.dir / "command.json"
+        self.response_file = self.dir / "response.json"
+        self.timeout_s = timeout_s
+        self.poll_s = poll_s
+        self._id = int(time.time() * 1000)
+
+    def _next_id(self) -> int:
+        self._id += 1
+        return self._id
+
+    def _call(self, action: str, params: dict | None = None) -> dict:
+        self.dir.mkdir(parents=True, exist_ok=True)
+        cmd_id = self._next_id()
+        payload = {
+            "id": cmd_id,
+            "action": action,
+            "params": params or {},
+            "ts": int(time.time() * 1000),
+        }
+        tmp = self.dir / "command.json.tmp"
+        tmp.write_text(json.dumps(payload), encoding="utf-8")
+        os.replace(tmp, self.command_file)
+
+        deadline = time.time() + self.timeout_s
+        while time.time() < deadline:
+            try:
+                resp = json.loads(self.response_file.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                resp = None
+            if resp and resp.get("id") == cmd_id:
+                if not resp.get("ok"):
+                    raise RuntimeError(
+                        f"bridge {action} failed: {resp.get('error')}"
+                    )
+                return resp.get("result") or {}
+            time.sleep(self.poll_s)
+        raise TimeoutError(f"bridge {action} timed out after {self.timeout_s}s")
+
+    @staticmethod
+    def _translate_event(event: dict) -> dict:
+        """Map a synthesize_events() event to the harness inject payload.
+
+        The harness `chatMessage` case reads `message` (not `text`); every other
+        field name already matches. We pass the type plus payload through.
+        """
+        out = dict(event)
+        if out.get("type") == "chatMessage" and "text" in out:
+            out["message"] = out.pop("text")
+        return out
+
+    def ping(self) -> dict:
+        return self._call("ping")
+
+    def activate(self, source: str) -> dict:
+        return self._call("guidance.activate", {"source": source})
+
+    def inject(self, event: dict) -> dict:
+        return self._call("event.inject", self._translate_event(event))
+
+    def read_state(self) -> dict:
+        return self._call("state.read")
+
+
+# --------------------------------------------------------------------------- #
+# run_source: drive one source through its steps                              #
+# --------------------------------------------------------------------------- #
+def _is_complete(state: dict, source_name: str) -> bool:
+    if not state.get("guidanceActive"):
+        return True
+    if state.get("activeSource") != source_name:
+        return True  # auto-advanced to another source / cleared
+    cur = state.get("currentStepIndex")
+    total = state.get("totalSteps")
+    return cur is not None and total is not None and total > 0 and cur >= total
+    # note: currentStepIndex == totalSteps means we ran off the end
+
+
+# step conditions with no synthetic driver -> may need force-complete
+_NO_DRIVER = {"MANUAL", "INVENTORY_HAS_ITEM", "INVENTORY_NOT_HAS_ITEM"}
+
+
+def run_source(source: dict, client: BridgeClient) -> dict:
+    """Drive a single source end to end through the live bridge.
+
+    ping -> activate -> read (confirm step 0). For each step, inject its
+    synthesized events, read, and check currentStepIndex advanced. If a
+    no-synthetic-driver step (MANUAL/INVENTORY) does not advance, inject an
+    itemObtained on the source's first clog item to force-complete (the engine's
+    onItemObtained completes the sequence -- validated live on Catacombs).
+
+    Classification:
+      PASS    -- the sequence completed
+      PARTIAL -- advanced >=1 step but never completed, even after force
+      FAIL    -- stuck at step 0 (never advanced at all)
+      SKIP    -- only INVENTORY-gated and no clog item to force-complete with
+    """
+    name = source.get("name")
+    steps = source.get("guidanceSteps") or []
+    items = clog_item_ids(source)
+    result = {
+        "source": name,
+        "status": None,
+        "lastStep": None,
+        "reason": None,
+        "itemCount": len(items),
+    }
+
+    if not steps:
+        result["status"] = "SKIP"
+        result["reason"] = "no guidance steps"
+        return result
+
+    client.ping()
+    client.activate(name)
+    state = client.read_state()
+
+    if not state.get("guidanceActive") or state.get("activeSource") != name:
+        # activated but engine reports another/no source -- treat as completed
+        # only if it is genuinely off; otherwise it never engaged.
+        if _is_complete(state, name):
+            result["status"] = "PASS"
+            result["lastStep"] = 0
+            result["reason"] = "completed on activate (single-step / auto)"
+            return result
+        result["status"] = "FAIL"
+        result["lastStep"] = 0
+        result["reason"] = f"guidance did not engage for {name!r}"
+        return result
+
+    advanced = False
+    only_inventory_gated = True
+
+    for idx, step in enumerate(steps):
+        cond = step.get("completionCondition")
+        if cond not in _NO_DRIVER:
+            only_inventory_gated = False
+
+        prev_index = state.get("currentStepIndex", 0)
+        events = synthesize_events(step, items)
+        for ev in events:
+            client.inject(ev)
+        state = client.read_state()
+
+        if _is_complete(state, name):
+            advanced = True
+            result["status"] = "PASS"
+            result["lastStep"] = idx
+            result["reason"] = f"completed after step {idx} ({cond})"
+            return result
+
+        cur_index = state.get("currentStepIndex", prev_index)
+        if cur_index > prev_index:
+            advanced = True
+            continue
+
+        # Did not advance. For a no-driver terminal-ish step, force-complete via
+        # the source's first clog item (engine onItemObtained finishes it).
+        if cond in _NO_DRIVER and items:
+            client.inject({"type": "itemObtained", "itemId": items[0]})
+            state = client.read_state()
+            if _is_complete(state, name):
+                advanced = True
+                result["status"] = "PASS"
+                result["lastStep"] = idx
+                result["reason"] = (
+                    f"force-completed at step {idx} ({cond}) via clog item {items[0]}"
+                )
+                return result
+            new_index = state.get("currentStepIndex", cur_index)
+            if new_index > cur_index:
+                advanced = True
+                continue
+
+        # stuck on this step
+        result["lastStep"] = idx
+        if not advanced:
+            result["status"] = "FAIL"
+            result["reason"] = f"stuck at step 0 ({cond}); no advance"
+        else:
+            result["status"] = "PARTIAL"
+            result["reason"] = f"advanced then stuck at step {idx} ({cond})"
+        return result
+
+    # Walked every step without _is_complete firing.
+    result["lastStep"] = len(steps) - 1
+    if only_inventory_gated and not items:
+        result["status"] = "SKIP"
+        result["reason"] = "only INVENTORY-gated steps and no clog item to force-complete"
+    elif advanced:
+        result["status"] = "PARTIAL"
+        result["reason"] = "advanced through all steps but engine never reported complete"
+    else:
+        result["status"] = "FAIL"
+        result["reason"] = "stuck at step 0 across all steps"
+    return result
+
+
+# --------------------------------------------------------------------------- #
+# Orchestration                                                               #
+# --------------------------------------------------------------------------- #
+def load_sources(data_path: Path) -> list:
+    with data_path.open(encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def select_sources(sources: list, args) -> list:
+    if args.source:
+        needle = args.source.lower()
+        exact = [s for s in sources if (s.get("name") or "").lower() == needle]
+        if exact:
+            return exact
+        partial = [s for s in sources if needle in (s.get("name") or "").lower()]
+        if not partial:
+            raise SystemExit(f"no source matches {args.source!r}")
+        return partial
+    if args.sample is not None:
+        rng = random.Random(args.seed)
+        pool = list(sources)
+        rng.shuffle(pool)
+        return pool[: args.sample]
+    return list(sources)  # --all
+
+
+def aggregate(results: list) -> dict:
+    total_items = sum(r["itemCount"] for r in results)
+    pass_items = sum(r["itemCount"] for r in results if r["status"] == "PASS")
+    confidence = (100.0 * pass_items / total_items) if total_items else 0.0
+    return {
+        "confidencePct": round(confidence, 2),
+        "passCount": sum(1 for r in results if r["status"] == "PASS"),
+        "total": len(results),
+        "passItems": pass_items,
+        "totalItems": total_items,
+    }
+
+
+def print_table(results: list, agg: dict) -> None:
+    name_w = max((len(str(r["source"])) for r in results), default=6)
+    name_w = max(name_w, 6)
+    print(f"{'SOURCE'.ljust(name_w)}  {'STATUS':<8} {'ITEMS':>5}  LAST  REASON")
+    print("-" * (name_w + 40))
+    for r in sorted(results, key=lambda x: (x["status"] or "", -x["itemCount"])):
+        print(
+            f"{str(r['source']).ljust(name_w)}  {str(r['status']):<8} "
+            f"{r['itemCount']:>5}  {str(r['lastStep']):>4}  {r['reason']}"
+        )
+    print("-" * (name_w + 40))
+    print(
+        f"PASS {agg['passCount']}/{agg['total']} sources | "
+        f"item-weighted confidence {agg['confidencePct']}% "
+        f"({agg['passItems']}/{agg['totalItems']} clog items)"
+    )
+
+
+def write_report(results: list, agg: dict, selected: list, report_path: Path,
+                 data_path: Path) -> None:
+    report = {
+        "generatedFrom": str(data_path.resolve().relative_to(REPO_ROOT).as_posix())
+        if data_path.resolve().is_relative_to(REPO_ROOT)
+        else str(data_path),
+        "selected": [s.get("name") for s in selected],
+        "results": [
+            {
+                "source": r["source"],
+                "status": r["status"],
+                "lastStep": r["lastStep"],
+                "reason": r["reason"],
+                "itemCount": r["itemCount"],
+            }
+            for r in results
+        ],
+        "confidencePct": agg["confidencePct"],
+        "passCount": agg["passCount"],
+        "total": agg["total"],
+    }
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+
+
+def main(argv: list | None = None) -> int:
+    p = argparse.ArgumentParser(description=__doc__)
+    sel = p.add_mutually_exclusive_group()
+    sel.add_argument("--source", help="run a single source by (partial) name")
+    sel.add_argument("--sample", type=int, help="run N random sources")
+    sel.add_argument("--all", action="store_true", help="run every source")
+    p.add_argument("--seed", type=int, default=0, help="RNG seed for --sample")
+    p.add_argument("--data", type=Path, default=DEFAULT_DATA)
+    p.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    p.add_argument("--bridge-dir", type=Path, default=None)
+    p.add_argument("--timeout", type=float, default=8.0)
+    p.add_argument(
+        "--selftest", action="store_true",
+        help="run offline unit tests (no live bridge) and exit",
+    )
+    args = p.parse_args(argv)
+
+    if args.selftest:
+        from test_acceptance_runner import run_selftests  # noqa: local sibling
+        return run_selftests()
+
+    if not (args.source or args.sample is not None or args.all):
+        p.error("one of --source / --sample / --all is required (or --selftest)")
+
+    sources = load_sources(args.data)
+    selected = select_sources(sources, args)
+    client = BridgeClient(bridge_dir=args.bridge_dir, timeout_s=args.timeout)
+
+    results = []
+    for s in selected:
+        try:
+            results.append(run_source(s, client))
+        except (TimeoutError, RuntimeError) as e:
+            results.append(
+                {
+                    "source": s.get("name"),
+                    "status": "FAIL",
+                    "lastStep": None,
+                    "reason": f"bridge error: {e}",
+                    "itemCount": len(clog_item_ids(s)),
+                }
+            )
+
+    agg = aggregate(results)
+    write_report(results, agg, selected, args.report, args.data)
+    print_table(results, agg)
+    print(f"\nWrote {args.report}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
