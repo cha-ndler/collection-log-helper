@@ -59,9 +59,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class GuidanceConfigInvariantsRegressionTest
 {
 	// Known backlog ceilings as of master @ 3015c35d. DECREMENT as fixes land.
-	private static final int ACTOR_DEATH_MISSING_NPC_CEILING = 5;   // #739/A
-	private static final int LOOP_NEVER_ENGAGES_CEILING = 18;       // #739/B
-	private static final int ARRIVE_AT_ZONE_MISSING_ZONE_CEILING = 0; // NEW (N1)
+	private static final int ACTOR_DEATH_MISSING_NPC_CEILING = 0;   // #739/A (C1 -> MANUAL)
+	private static final int LOOP_NEVER_ENGAGES_CEILING = 18;       // #739/B (N1 batch removed 5)
+	private static final int ARRIVE_AT_ZONE_MISSING_ZONE_CEILING = 0; // #739 N1 resolved
 
 	private DropRateDatabase database;
 
