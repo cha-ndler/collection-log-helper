@@ -22855,9 +22855,7 @@
         "worldY": 3414,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
-        "section": "Mine",
-        "loopBackToStep": 0,
-        "loopCount": 20
+        "section": "Mine"
       }
     ],
     "rewardType": "SHOP",
@@ -30168,9 +30166,7 @@
         "worldY": 4838,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
-        "section": "Skilling",
-        "loopBackToStep": 0,
-        "loopCount": 50
+        "section": "Skilling"
       }
     ],
     "afkLevel": 1
@@ -30229,9 +30225,7 @@
         "worldY": 3719,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
-        "section": "Harvest",
-        "loopBackToStep": 0,
-        "loopCount": 50
+        "section": "Harvest"
       }
     ],
     "afkLevel": 3
