@@ -6,6 +6,11 @@ on:
   push:
     branches: [master]
 
+# Single source of truth for the merge gate. `./gradlew build` runs compile + the full test
+# suite + `check`, which wires in `lintDropRates` and the guidance-config invariant ratchet
+# (GuidanceConfigInvariantsRegressionTest). A green `build` job therefore proves the data and
+# guidance gates as well as the code, and is the required status check for auto-merge.
+# JDK 11 matches the RuneLite Plugin Hub build environment.
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,10 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 11
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '11'
           distribution: 'temurin'
 
       - name: Cache Gradle packages
@@ -28,10 +33,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle-
 
-      - name: Build and test
-        run: ./gradlew build
+      - name: Build, test, check (compile + tests + lintDropRates + guidance ratchet)
+        run: ./gradlew build --no-daemon
 
-      - name: Upload test results
+      - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:

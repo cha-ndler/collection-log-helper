@@ -14574,8 +14574,7 @@
           "Intermediate",
           "Veteran"
         ],
-        "completionCondition": "ARRIVE_AT_ZONE",
-        "completionDistance": 5
+        "completionCondition": "MANUAL"
       },
       {
         "section": "Round",
@@ -14589,9 +14588,7 @@
           11665
         ],
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "You have successfully defended the island!",
-        "loopBackToStep": 1,
-        "loopCount": 0
+        "completionChatPattern": "You have successfully defended the island!"
       },
       {
         "section": "Reward",
@@ -17007,7 +17004,14 @@
           "Guthix"
         ],
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionDistance": 5
+        "completionDistance": 5,
+        "completionZone": [
+          2368,
+          3072,
+          2432,
+          3135,
+          0
+        ]
       },
       {
         "section": "Round",
@@ -17021,9 +17025,7 @@
           4068
         ],
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "The game has ended",
-        "loopBackToStep": 1,
-        "loopCount": 0
+        "completionChatPattern": "The game has ended"
       },
       {
         "section": "Reward",
@@ -17100,7 +17102,14 @@
           "Yes"
         ],
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionDistance": 5
+        "completionDistance": 5,
+        "completionZone": [
+          2190,
+          2840,
+          2240,
+          2880,
+          0
+        ]
       },
       {
         "section": "Round",
@@ -17113,9 +17122,7 @@
           25346
         ],
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "The game has ended",
-        "loopBackToStep": 1,
-        "loopCount": 0
+        "completionChatPattern": "The game has ended"
       },
       {
         "section": "Reward",
@@ -17446,7 +17453,14 @@
         "worldY": 3634,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_ZONE",
-        "completionDistance": 5
+        "completionDistance": 5,
+        "completionZone": [
+          3125,
+          3622,
+          3160,
+          3648,
+          0
+        ]
       },
       {
         "section": "Round",
@@ -17459,9 +17473,7 @@
           24192
         ],
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "The game has ended",
-        "loopBackToStep": 1,
-        "loopCount": 0
+        "completionChatPattern": "The game has ended"
       },
       {
         "section": "Reward",
@@ -18245,7 +18257,7 @@
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
-        "npcId": 5257,
+        "npcId": 1657,
         "interactAction": "Talk-to",
         "dialogOptions": [
           "Attacker",
@@ -18253,8 +18265,8 @@
           "Collector",
           "Healer"
         ],
-        "completionCondition": "ARRIVE_AT_ZONE",
-        "completionDistance": 5
+        "completionCondition": "NPC_TALKED_TO",
+        "completionNpcId": 1657
       },
       {
         "section": "Round",
@@ -18268,9 +18280,7 @@
           10555
         ],
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
-        "completionChatPattern": "Congratulations, you've beaten the Penance Queen",
-        "loopBackToStep": 1,
-        "loopCount": 0
+        "completionChatPattern": "Congratulations, you've beaten the Penance Queen"
       },
       {
         "section": "Reward",
