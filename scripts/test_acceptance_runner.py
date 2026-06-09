@@ -9,8 +9,11 @@ via `acceptance_runner.py --selftest`.
 
 from __future__ import annotations
 
+import json
 import sys
+import tempfile
 import unittest
+from pathlib import Path
 
 import acceptance_runner as ar
 
@@ -364,6 +367,258 @@ class RunSourceTest(unittest.TestCase):
         self.assertEqual(res["lastStep"], 1)
         # never injected an itemObtained for a drivable step
         self.assertTrue(all(e["type"] != "itemObtained" for e in client.injects))
+
+
+class CountingClient(FakeClient):
+    """FakeClient that counts read_state() calls, to prove the fast path."""
+
+    def __init__(self, *a, **k):
+        super().__init__(*a, **k)
+        self.reads = 0
+
+    def read_state(self):
+        self.reads += 1
+        return super().read_state()
+
+
+class FastPathTest(unittest.TestCase):
+    """The per-step read budget must NOT be consumed when a step advances on
+    the first read."""
+
+    def setUp(self):
+        self._sleep = ar.time.sleep
+        self._slept = []
+        ar.time.sleep = lambda *a, **_k: self._slept.append(a)
+
+    def tearDown(self):
+        ar.time.sleep = self._sleep
+
+    def test_first_success_does_not_consume_budget(self):
+        # A single ACTOR_DEATH step that completes IMMEDIATELY on the first read:
+        # _read_until must do exactly one read and never sleep.
+        src = {
+            "name": "Insta Boss",
+            "items": [{"itemId": 42}],
+            "guidanceSteps": [
+                {"completionCondition": "ACTOR_DEATH", "completionNpcId": 1},
+            ],
+        }
+        plan = [
+            {"match": lambda e: e["type"] == "npcDeath",
+             "action": {"complete": True}},  # no deferReads -> immediate
+        ]
+        client = CountingClient("Insta Boss", 1, plan)
+        res = ar.run_source(src, client)
+        self.assertEqual(res["status"], "PASS", res["reason"])
+        # activate read (1) + the single in-loop _read_until read (1) = 2 reads,
+        # and zero sleeps inside _read_until (fast path returned on read #1).
+        self.assertEqual(client.reads, 2, "fast path should not re-read")
+        self.assertEqual(self._slept, [], "fast path should not sleep")
+
+    def test_stuck_step_does_consume_budget(self):
+        # A genuinely-stuck DRIVABLE step exhausts the (now 3-read) budget:
+        # _read_until reads 3 times and sleeps 2 times between them.
+        src = {
+            "name": "Stuck Boss",
+            "items": [{"itemId": 9}],
+            "guidanceSteps": [
+                {"completionCondition": "ACTOR_DEATH", "completionNpcId": 1},
+            ],
+        }
+        client = CountingClient("Stuck Boss", 1, [])  # nothing advances
+        res = ar.run_source(src, client)
+        self.assertEqual(res["status"], "FAIL", res["reason"])
+        # activate read (1) + _SETTLE_READS reads in _read_until.
+        self.assertEqual(client.reads, 1 + ar._SETTLE_READS)
+        self.assertEqual(len(self._slept), ar._SETTLE_READS - 1)
+
+
+def _src(name, items, steps):
+    return {"name": name, "items": [{"itemId": i} for i in items],
+            "guidanceSteps": steps}
+
+
+class _Args:
+    """Minimal stand-in for the argparse namespace fields resume reads."""
+
+    def __init__(self, source=None, sample=None, seed=0, all=False, fresh=False):
+        self.source = source
+        self.sample = sample
+        self.seed = seed
+        self.all = all
+        self.fresh = fresh
+
+
+class ResumeReportTest(unittest.TestCase):
+    """Incremental write + resume/skip-PASS + --fresh, all offline."""
+
+    def setUp(self):
+        self._dir = tempfile.TemporaryDirectory()
+        self.report = Path(self._dir.name) / "report.json"
+        self.data = ar.DEFAULT_DATA  # only used for the generatedFrom string
+
+    def tearDown(self):
+        self._dir.cleanup()
+
+    def _write(self, results, selected, signature, partial):
+        ar.write_report(results, selected, self.report, self.data,
+                        signature, partial)
+
+    def test_incremental_write_is_valid_json_with_partial_flag(self):
+        sig = {"mode": "all"}
+        selected = [{"name": "A"}, {"name": "B"}]
+        r1 = [{"source": "A", "status": "PASS", "lastStep": 0,
+               "reason": "ok", "itemCount": 5}]
+        self._write(r1, selected, sig, partial=True)
+        doc = json.loads(self.report.read_text(encoding="utf-8"))
+        self.assertTrue(doc["partial"])
+        self.assertEqual(doc["selection"], sig)
+        self.assertEqual(doc["passCount"], 1)
+        self.assertEqual(doc["confidencePct"], 100.0)  # over results-so-far
+        # final write of full selection flips partial -> False
+        r2 = r1 + [{"source": "B", "status": "FAIL", "lastStep": 0,
+                    "reason": "stuck", "itemCount": 5}]
+        self._write(r2, selected, sig, partial=False)
+        doc = json.loads(self.report.read_text(encoding="utf-8"))
+        self.assertFalse(doc["partial"])
+        self.assertEqual(doc["passCount"], 1)
+        self.assertEqual(doc["confidencePct"], 50.0)
+
+    def test_resume_loads_pass_only_when_signature_matches(self):
+        sig = {"mode": "sample", "seed": 0, "sample": 2}
+        results = [
+            {"source": "A", "status": "PASS", "lastStep": 1, "reason": "ok",
+             "itemCount": 3},
+            {"source": "B", "status": "FAIL", "lastStep": 0, "reason": "x",
+             "itemCount": 2},
+        ]
+        self._write(results, [{"name": "A"}, {"name": "B"}], sig, partial=False)
+        # same signature -> PASS A loaded, FAIL B NOT loaded (re-driven)
+        loaded = ar.load_prior_results(self.report, sig)
+        self.assertEqual(set(loaded), {"A"})
+        # different seed -> treated as fresh (nothing loaded)
+        self.assertEqual(
+            ar.load_prior_results(self.report,
+                                  {"mode": "sample", "seed": 7, "sample": 2}),
+            {},
+        )
+        # different mode -> fresh
+        self.assertEqual(ar.load_prior_results(self.report, {"mode": "all"}), {})
+
+    def test_load_prior_results_missing_report_is_fresh(self):
+        self.assertEqual(
+            ar.load_prior_results(self.report / "nope.json", {"mode": "all"}), {}
+        )
+
+    def test_selection_signature_modes(self):
+        self.assertEqual(ar.selection_signature(_Args(all=True)), {"mode": "all"})
+        self.assertEqual(
+            ar.selection_signature(_Args(source="Zulrah")),
+            {"mode": "source", "source": "Zulrah"},
+        )
+        self.assertEqual(
+            ar.selection_signature(_Args(sample=20, seed=3)),
+            {"mode": "sample", "seed": 3, "sample": 20},
+        )
+
+    def test_main_resume_skips_pass_and_redrives_non_pass(self):
+        # End-to-end main() with a stub BridgeClient (NO live bridge). Prior
+        # report has A=PASS, B=FAIL; resume must skip A and re-drive B (which the
+        # stub now completes).
+        sig = {"mode": "all"}
+        prior = [
+            {"source": "A", "status": "PASS", "lastStep": 0, "reason": "ok",
+             "itemCount": 4},
+            {"source": "B", "status": "FAIL", "lastStep": 0, "reason": "stuck",
+             "itemCount": 2},
+        ]
+        self._write(prior, [{"name": "A"}, {"name": "B"}], sig, partial=False)
+
+        data = [
+            _src("A", [4], [{"completionCondition": "MANUAL"}]),
+            _src("B", [2], [{"completionCondition": "ACTOR_DEATH",
+                             "completionNpcId": 1}]),
+        ]
+        data_path = Path(self._dir.name) / "data.json"
+        data_path.write_text(json.dumps(data), encoding="utf-8")
+
+        driven = []
+
+        class StubClient:
+            def __init__(self, *a, **k):
+                pass
+
+            def ping(self):
+                return {}
+
+            def activate(self, source):
+                driven.append(source)
+                return {}
+
+            def inject(self, event):
+                return {}
+
+            def read_state(self):
+                # always report the (only) source complete on first read
+                return {"guidanceActive": False}
+
+        orig_client = ar.BridgeClient
+        ar.BridgeClient = StubClient
+        try:
+            rc = ar.main([
+                "--all", "--data", str(data_path), "--report", str(self.report),
+            ])
+        finally:
+            ar.BridgeClient = orig_client
+
+        self.assertEqual(rc, 0)
+        # A was skipped (never activated); only B was driven.
+        self.assertEqual(driven, ["B"])
+        doc = json.loads(self.report.read_text(encoding="utf-8"))
+        self.assertFalse(doc["partial"])
+        by = {r["source"]: r for r in doc["results"]}
+        self.assertEqual(by["A"]["status"], "PASS")  # carried over
+        self.assertEqual(by["B"]["status"], "PASS")  # re-driven, now passes
+        self.assertEqual(doc["total"], 2)
+
+    def test_main_fresh_ignores_prior(self):
+        sig = {"mode": "all"}
+        prior = [{"source": "A", "status": "PASS", "lastStep": 0, "reason": "ok",
+                  "itemCount": 4}]
+        self._write(prior, [{"name": "A"}], sig, partial=False)
+        data = [_src("A", [4], [{"completionCondition": "MANUAL"}])]
+        data_path = Path(self._dir.name) / "data.json"
+        data_path.write_text(json.dumps(data), encoding="utf-8")
+
+        driven = []
+
+        class StubClient:
+            def __init__(self, *a, **k):
+                pass
+
+            def ping(self):
+                return {}
+
+            def activate(self, source):
+                driven.append(source)
+                return {}
+
+            def inject(self, event):
+                return {}
+
+            def read_state(self):
+                return {"guidanceActive": False}
+
+        orig_client = ar.BridgeClient
+        ar.BridgeClient = StubClient
+        try:
+            ar.main(["--all", "--fresh", "--data", str(data_path),
+                     "--report", str(self.report)])
+        finally:
+            ar.BridgeClient = orig_client
+
+        # --fresh -> A IS re-driven despite prior PASS.
+        self.assertEqual(driven, ["A"])
 
 
 def run_selftests() -> int:

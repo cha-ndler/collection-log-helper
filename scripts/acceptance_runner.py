@@ -42,6 +42,34 @@ DEFAULT_REPORT = REPO_ROOT / "docs" / "guidance-audit" / "acceptance-runner-repo
 
 
 # --------------------------------------------------------------------------- #
+# Atomic write (shared by command.json + the incremental report)              #
+# --------------------------------------------------------------------------- #
+def atomic_write_text(path: Path, text: str, *, encoding: str = "utf-8") -> None:
+    """Write `text` to `path` atomically (tmp + os.replace).
+
+    On Windows the destination can be held open by another process at the
+    instant we rename over it, which raises PermissionError (WinError 5). Retry
+    the replace briefly, then fall back to a direct write. Reused for both the
+    dev-bridge command.json and the incremental acceptance report so the
+    interrupt-safe-write logic lives in exactly one place.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(text, encoding=encoding)
+    for _ in range(40):
+        try:
+            os.replace(tmp, path)
+            return
+        except PermissionError:
+            time.sleep(0.05)
+    path.write_text(text, encoding=encoding)
+    try:
+        tmp.unlink()
+    except OSError:
+        pass
+
+
+# --------------------------------------------------------------------------- #
 # PURE: completionCondition -> synthetic events                               #
 # --------------------------------------------------------------------------- #
 def _clamp(v: int) -> int:
@@ -189,7 +217,7 @@ class BridgeClient:
       state.read        -> {}
     """
 
-    def __init__(self, bridge_dir: Path | None = None, timeout_s: float = 8.0,
+    def __init__(self, bridge_dir: Path | None = None, timeout_s: float = 4.0,
                  poll_s: float = 0.05):
         self.dir = bridge_dir or _bridge_dir()
         self.command_file = self.dir / "command.json"
@@ -211,23 +239,9 @@ class BridgeClient:
             "params": params or {},
             "ts": int(time.time() * 1000),
         }
-        tmp = self.dir / "command.json.tmp"
-        tmp.write_text(json.dumps(payload), encoding="utf-8")
-        # Windows: the harness can hold command.json open at the instant we
-        # rename over it, which raises PermissionError (WinError 5). Retry the
-        # atomic replace briefly, then fall back to a direct write.
-        for _ in range(40):
-            try:
-                os.replace(tmp, self.command_file)
-                break
-            except PermissionError:
-                time.sleep(0.05)
-        else:
-            self.command_file.write_text(json.dumps(payload), encoding="utf-8")
-            try:
-                tmp.unlink()
-            except OSError:
-                pass
+        # Atomic command write (shared helper handles the Windows WinError-5
+        # lock retry + direct-write fallback).
+        atomic_write_text(self.command_file, json.dumps(payload))
 
         deadline = time.time() + self.timeout_s
         while time.time() < deadline:
@@ -289,18 +303,26 @@ _NO_DRIVER = {"MANUAL", "INVENTORY_HAS_ITEM", "INVENTORY_NOT_HAS_ITEM"}
 # Completion checks run on a later game-tick (CompletionChecker is driven from
 # GameTick / PlayerChanged), so a single state.read right after an inject can be
 # one tick too early. Re-read a few times before concluding a step is stuck.
-_SETTLE_READS = 4
-_SETTLE_DELAY_S = 0.15
+# FAST PATH: _read_until returns the instant the step advances/completes on the
+# first read; the multi-read budget is ONLY spent on a step that has not yet
+# moved. Because almost every step advances on read #1, the typical full pass
+# never pays the stuck budget -- so it is tuned modestly (3 attempts x 120ms,
+# down from 4 x 150ms) to bound the cost of the rare genuinely-deferred step
+# without weakening the tick-deferral coverage the regression tests pin.
+_SETTLE_READS = 3
+_SETTLE_DELAY_S = 0.12
 
 
 def _read_until(client: BridgeClient, name: str, prev_index: int) -> dict:
     """Re-read state until the sequence completes or the step index advances.
 
-    Polls `state.read` up to `_SETTLE_READS` times with `_SETTLE_DELAY_S`
-    between reads. Returns as soon as the engine reports complete or
-    currentStepIndex moved past `prev_index`; otherwise returns the last read.
-    The first read is immediate (no pre-sleep) so the common already-settled
-    case stays fast.
+    FAST PATH: the first read is immediate (no pre-sleep) and, if the engine
+    already reports complete or currentStepIndex moved past `prev_index`, we
+    return WITHOUT consuming any of the stuck budget or sleeping. Only a step
+    that has NOT advanced on read #1 spends the remaining `_SETTLE_READS - 1`
+    re-reads (with `_SETTLE_DELAY_S` between them), covering tick-deferred
+    completion (ACTOR_DEATH / PLAYER_ON_PLANE / ARRIVE_AT_TILE that land on the
+    next GameTick). Otherwise returns the last read.
     """
     state = client.read_state()
     for _ in range(_SETTLE_READS - 1):
@@ -494,12 +516,29 @@ def print_table(results: list, agg: dict) -> None:
     )
 
 
-def write_report(results: list, agg: dict, selected: list, report_path: Path,
-                 data_path: Path) -> None:
-    report = {
+def selection_signature(args) -> dict:
+    """A stable descriptor of WHICH sources a run targets.
+
+    Resume only reuses a prior report whose signature matches the current run's
+    selection, so e.g. a `--sample 20 --seed 0` report is never reused for a
+    `--sample 20 --seed 7` (or `--all`) invocation. `--source` matches on the
+    same needle; `--sample` matches on the same seed AND N.
+    """
+    if args.source:
+        return {"mode": "source", "source": args.source}
+    if args.sample is not None:
+        return {"mode": "sample", "seed": args.seed, "sample": args.sample}
+    return {"mode": "all"}
+
+
+def build_report(results: list, agg: dict, selected: list, data_path: Path,
+                 signature: dict, partial: bool) -> dict:
+    return {
         "generatedFrom": str(data_path.resolve().relative_to(REPO_ROOT).as_posix())
         if data_path.resolve().is_relative_to(REPO_ROOT)
         else str(data_path),
+        "selection": signature,
+        "partial": partial,
         "selected": [s.get("name") for s in selected],
         "results": [
             {
@@ -515,8 +554,39 @@ def write_report(results: list, agg: dict, selected: list, report_path: Path,
         "passCount": agg["passCount"],
         "total": agg["total"],
     }
-    report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+
+
+def write_report(results: list, selected: list, report_path: Path,
+                 data_path: Path, signature: dict, partial: bool) -> None:
+    """Atomically (re)write the report over the results gathered SO FAR.
+
+    Called after every source so an interrupted run keeps completed results.
+    `confidencePct`/`passCount` are recomputed each write over results-so-far;
+    `partial` is True until the full selection has been driven.
+    """
+    agg = aggregate(results)
+    report = build_report(results, agg, selected, data_path, signature, partial)
+    atomic_write_text(report_path, json.dumps(report, indent=2) + "\n")
+
+
+def load_prior_results(report_path: Path, signature: dict) -> dict:
+    """Load PASS results from a prior report iff its selection matches.
+
+    Returns {source_name: result_dict} for sources recorded as PASS, so a resume
+    can skip re-driving them. A missing/unreadable report, or one whose
+    `selection` signature differs from the current run, yields {} (fresh start).
+    """
+    try:
+        prior = json.loads(report_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    if prior.get("selection") != signature:
+        return {}
+    out = {}
+    for r in prior.get("results") or []:
+        if r.get("status") == "PASS" and r.get("source") is not None:
+            out[r["source"]] = r
+    return out
 
 
 def main(argv: list | None = None) -> int:
@@ -529,7 +599,15 @@ def main(argv: list | None = None) -> int:
     p.add_argument("--data", type=Path, default=DEFAULT_DATA)
     p.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     p.add_argument("--bridge-dir", type=Path, default=None)
-    p.add_argument("--timeout", type=float, default=8.0)
+    p.add_argument(
+        "--timeout", type=float, default=4.0,
+        help="per-call bridge response timeout in seconds (default 4; the "
+             "harness normally responds sub-second)",
+    )
+    p.add_argument(
+        "--fresh", action="store_true",
+        help="ignore any existing report and re-drive every selected source",
+    )
     p.add_argument(
         "--selftest", action="store_true",
         help="run offline unit tests (no live bridge) and exit",
@@ -545,10 +623,25 @@ def main(argv: list | None = None) -> int:
 
     sources = load_sources(args.data)
     selected = select_sources(sources, args)
+    signature = selection_signature(args)
     client = BridgeClient(bridge_dir=args.bridge_dir, timeout_s=args.timeout)
 
-    results = []
-    for s in selected:
+    # Resume: load PASS results from a prior matching report and skip re-driving
+    # them. PARTIAL/FAIL/SKIP are intentionally re-driven so fixes get
+    # re-measured. --fresh ignores any prior report entirely.
+    prior_pass = {} if args.fresh else load_prior_results(args.report, signature)
+    to_drive = [s for s in selected if s.get("name") not in prior_pass]
+    if prior_pass:
+        print(
+            f"resuming: {len(prior_pass)} PASS loaded, {len(to_drive)} to drive."
+        )
+
+    # Seed results with the carried-over PASS rows (in selection order) so the
+    # incremental report is complete from the first write.
+    results = [prior_pass[s.get("name")] for s in selected
+               if s.get("name") in prior_pass]
+
+    for s in to_drive:
         try:
             results.append(run_source(s, client))
         except (TimeoutError, RuntimeError) as e:
@@ -561,9 +654,15 @@ def main(argv: list | None = None) -> int:
                     "itemCount": len(clog_item_ids(s)),
                 }
             )
+        # Incremental checkpoint after EACH source so an interrupt (reboot,
+        # Ctrl-C) preserves everything completed so far.
+        partial = len(results) < len(selected)
+        write_report(results, selected, args.report, args.data, signature, partial)
 
+    # Final write flips partial -> False even when nothing was driven (full
+    # resume of an already-complete selection).
+    write_report(results, selected, args.report, args.data, signature, False)
     agg = aggregate(results)
-    write_report(results, agg, selected, args.report, args.data)
     print_table(results, agg)
     print(f"\nWrote {args.report}")
     return 0
