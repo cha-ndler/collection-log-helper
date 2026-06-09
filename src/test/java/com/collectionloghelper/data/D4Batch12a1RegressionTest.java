@@ -95,11 +95,12 @@ public class D4Batch12a1RegressionTest
 			assertTrue(hasArriveStep,
 				name + " has no ARRIVE_AT_TILE step with positive world coordinates");
 
-			// E4 - activity-loop declared (minigame round loops back to queue step >= 1)
-			boolean hasLoop = source.getGuidanceSteps().stream()
-				.anyMatch(s -> s.getLoopBackToStep() > 0);
-			assertTrue(hasLoop,
-				name + " has no step with loopBackToStep > 0");
+			// E4 - the deep four-section shape (Travel/Queue/Round/Reward) is
+			// already guaranteed by the >= 4 step-count assertion above. The earlier
+			// loopBackToStep+loopCount=0 "activity loop" check was dropped: such pairs
+			// never engage the engine (StepAdvancer only loops when loopBackToStep>0
+			// && loopCount>0), so the inert loops were removed as a no-op rather than
+			// asserted as a required shape feature.
 
 			// E3 - recommendedItemIds on at least one step
 			boolean hasRecommendedGear = source.getGuidanceSteps().stream()
