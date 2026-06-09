@@ -211,27 +211,28 @@ change (mirror `SlayerTaskState`, which guards correctly).
 
 ---
 
-## Status (2026-06-08 autonomous pass)
+## Status (2026-06-08 autonomous pass; 2026-06-09 — C1/N1/C2 resolved + merged)
 
-**Shipped as PRs (code/test, statically verifiable, none merged — awaiting review):**
+**Shipped as PRs (merged to master):**
 
 - **C4** (#737 tilePointCache reset) — PR #770, regression test included.
 - **C5** (#738 quest-log guard) — PR #771.
 - **N2** (PohTeleport log guard) — PR #772.
 - **N3** (SkillCapePerk XP-only refresh skip) — PR #774.
 - **Phase 5 ratchet** — PR #773: JUnit `GuidanceConfigInvariantsRegressionTest` locks every
-  invariant above in CI (hard-zero guards + ceilings 5/23/5 that may only shrink). The analyzer
-  + this doc are PR #769.
+  invariant above in CI. The analyzer + this doc are PR #769.
+- **C1** (5 ACTOR_DEATH → MANUAL) — PR #781: terminal multi-item combat steps complete via
+  `onItemObtained`; My Notes / Champion's Challenge / Catacombs are wrong-mechanic corrections;
+  TzHaar / Stronghold keep cache-cited `completionNpcIds` for highlight only. Clears the
+  Catacombs static dead-end.
+- **N1** (5 ARRIVE_AT_ZONE) — PR #783: Barbarian Assault → `NPC_TALKED_TO` (Captain Cain 1657);
+  Castle Wars / Soul Wars / LMS → `completionZone`; Pest Control → `MANUAL` (instanced island
+  coords deferred to in-game capture).
+- **C2** (16 earlier-target inert loops) — PRs #783 (5) + #782 (11): inert `loopBackToStep`
+  removed (behavior-preserving); Motherlode Mine converted to a self-loop for sibling
+  consistency with the other Batch-3 E4 grinds.
 
-**Routed to the maintainer (needs a judgment/intent decision or in-game coordinates — NOT
-statically decidable, so deliberately not guessed):**
-
-- **C1** (5 ACTOR_DEATH) — complete-on-kill vs persistent-step; 3 of 5 also have a wrong
-  condition (rummage / any-monster / wrong-step). TzHaar city ids staged above.
-- **N1** (5 ARRIVE_AT_ZONE) — per-step "what does *arrived* mean" + instanced destination
-  coords; Barbarian Assault is a condition-type mismatch. See the per-source investigation above.
-- **C2** (16 earlier-target loop steps) — per source: was the multi-step loop intended
-  (`loopCount`) or vestigial (`loopBackToStep` removal)? (The 7 self-loops are by-design, above.)
+**Routed to the maintainer:** None — C1/N1/C2 are all resolved and merged (above).
 
 **Closed as by-design (2026-06 re-triage — not bugs, no data edit):**
 
@@ -239,8 +240,8 @@ statically decidable, so deliberately not guessed):**
   the OR-of-items advance is intentionally suppressed for this recurring-gather source
   (#707/#715/#719), and `onItemObtained` already completes the sequence. Optional engine
   enhancement noted in the C3 section, not a guidance-data finding.
-- **C2 self-loops** (7) — D4 E4 "activity loop" markers; removing them breaks
-  `D4Batch3RegressionTest`.
+- **8 self-loops** — D4 E4 "activity loop" markers (all 8 Batch-3 skilling sources, incl.
+  Motherlode Mine); removing them breaks `D4Batch3RegressionTest`.
 
 When a routed item is resolved and lands, decrement the matching ceiling constant in
 `GuidanceConfigInvariantsRegressionTest` so the ratchet stays tight.
