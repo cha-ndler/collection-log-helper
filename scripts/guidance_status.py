@@ -77,28 +77,39 @@ def count_sources(data_path: Path) -> int | None:
 
 
 def is_real_data_finding(f: dict) -> bool:
-    """Whether an analyzer finding is one the discriminator classified REAL.
+    """Whether an analyzer finding is a REAL player-facing guidance bug.
 
-    Encodes the four REAL data-finding classes adjudicated in
-    `docs/guidance-audit/findings-guidance-config.md` (NOT a fresh judgement) --
-    these are exactly C1/N1/C2/C3, the same four counted as open in metric 2:
-      * D1  -- any "missing required completion field" / can-never-fire step.
-               This is BOTH C1 (ACTOR_DEATH, #739/A) AND N1 (ARRIVE_AT_ZONE) --
-               so it is deliberately broader than `audit_guidance_config.py`'s
-               `--calibrate` gate, which only re-derives the known #739/A
-               ACTOR_DEATH count; N1 was surfaced later and is equally real.
-      * D1b -- only those whose message is "loop never engages" (loopCount=0),
-               i.e. C2 / #739/B. (loopBackToStep-set-but-lc cosmetic hits excluded.)
-      * D2  -- only Shades of Mort'ton (C3 / #729), the lone MANUAL with an
-               unwired item signal. The other 173 MANUAL D2 hits are by-design.
+    Reads the analyzer's structural `by_design` / `signal_kind` classification
+    (`scripts/audit_guidance_config.py`, locked by its `--calibrate` gate) rather
+    than matching source names -- so the split is auditable against the engine and
+    cannot silently drift:
+
+      * Anything the analyzer flagged `by_design` is NOT a bug, regardless of class
+        (the #775 lesson). Two by-design classes exist today:
+          - D1b self-loops (loopBackToStep targets its own step): the D4 E4
+            "activity loop" markers required of skilling sources -- inert, not a
+            broken loop.
+          - D2 item-signal MANUAL inside a recurring-gather sequence (Shades, C3):
+            the skipIfHasAnyItemIds advance is intentionally suppressed
+            (#707/#715/#719), onItemObtained completes the sequence, and the
+            conditionTree any-of-items vehicle is not wired into the live engine.
+      * D1  -- any can-never-fire step (missing the required completion field):
+               C1 (ACTOR_DEATH, #739/A) AND N1 (ARRIVE_AT_ZONE).
+      * D1b -- "loop never engages" findings that are NOT by-design self-loops, i.e.
+               the 16 earlier-target loops -- the real #739/B intended-loop-broken bug.
+      * D2  -- an ITEM-signal MANUAL (signal_kind == "item") that is NOT by-design,
+               i.e. a genuinely unwired item dead-end. Highlight-only MANUAL steps
+               (npc/object id) never auto-complete and are excluded.
     """
+    if f.get("by_design"):
+        return False
     det = f.get("detector")
     if det == "D1":
         return True
     if det == "D1b":
         return "loop never engages" in f.get("message", "")
     if det == "D2":
-        return f.get("source", "").startswith("Shades of Mort")
+        return f.get("signal_kind") == "item"
     return False
 
 
@@ -274,11 +285,12 @@ def render(
             f"Of **{total}** sources, **{analyzer['passing']}** carry no REAL "
             f"guidance-config finding. The static analyzer "
             f"(`scripts/audit_guidance_config.py`) emits {analyzer['findings_total']} "
-            f"raw findings; filtering to the discriminator's four REAL data classes "
-            f"(C1/N1 can-never-fire, C2 loop-never, C3 Shades) leaves "
+            f"raw findings; filtering to the REAL data classes "
+            f"(C1/N1 can-never-fire, C2 earlier-target loop-never) leaves "
             f"**{analyzer['real_instances']}** real instances across "
-            f"**{len(analyzer['real_sources'])}** sources (the rest are by-design "
-            f"MANUAL/cosmetic hits -- the #775 lesson: an artifact is never a bug)."
+            f"**{len(analyzer['real_sources'])}** sources (the rest are by-design -- "
+            f"E4 self-loop markers, the Shades recurring-gather MANUAL, and "
+            f"highlight-only/cosmetic hits -- the #775 lesson: an artifact is never a bug)."
         )
         o.append("")
         o.append("| Detector | Raw findings |")
