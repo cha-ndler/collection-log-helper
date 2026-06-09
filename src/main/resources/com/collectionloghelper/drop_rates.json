@@ -22774,7 +22774,9 @@
         "objectId": 26674,
         "objectInteractAction": "Deposit",
         "completionCondition": "MANUAL",
-        "section": "Mine"
+        "section": "Mine",
+        "loopBackToStep": 3,
+        "loopCount": 0
       },
       {
         "description": "Spend golden nuggets at Prospector Percy shop: helmet (40), jacket (60), legs (40), boots (40), coal bag (100), gem bag (100). Prioritise coal bag and gem bag for immediate efficiency gains. Bank chest beside Percy is accessible without requirements.",
