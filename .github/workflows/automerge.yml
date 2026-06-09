@@ -1,0 +1,30 @@
+name: Auto-merge
+
+# Criteria-gated auto-merge for the autonomous development loop.
+#
+# A PR merges automatically ONLY when BOTH criteria hold:
+#   1. it carries the `automerge` label (explicit per-PR opt-in — the bot or a human applies
+#      it; data/guidance PRs that need a judgment call simply do not get labelled), and
+#   2. the required `build` status check (see ci.yml) is green — which transitively proves
+#      compile + full test suite + lintDropRates + the guidance-config invariant ratchet.
+#
+# This satisfies the "never blind-merge to master" intent while removing the manual click for
+# verified-green mechanical PRs. Merges are squash-only. Removing the label cancels auto-merge.
+on:
+  pull_request:
+    types: [labeled, unlabeled, opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    if: contains(github.event.pull_request.labels.*.name, 'automerge') && github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable native auto-merge (squash); GitHub completes it when required checks pass
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: gh pr merge --auto --squash "$PR_URL"
