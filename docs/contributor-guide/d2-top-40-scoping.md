@@ -14,10 +14,10 @@ This file is the *plan*. Each follow-up PR delivers one batch of 5-10 source fix
 |---|---|---|
 | **A. Canonical endgame content** | Raids (3 + ToB HM), GWD bosses (4), DT2 bosses (4), top solo bosses (Vorkath, Zulrah, Muspah, Nightmare, Corp, Gauntlets) | Locked-in by community consensus as "the list everyone farms." No quantitative signal needed. |
 | **B. TempleOSRS boss popularity rankings** | TempleOSRS hiscores `/efficiency/player-stats` aggregate KC tables | Empirical KC-per-player-week ordering across all tracked bosses. Top-30 boss tab is the canonical popularity proxy in OSRS analytics. |
-| **C. Loghunters audit popularity** | [`feedback_loghunters_audit.md`](../../.claude/runelite-dev-memory/feedback_loghunters_audit.md), [`reference_loghunters.md`](../../.claude/runelite-dev-memory/reference_loghunters.md) | Sources with the highest sample sizes on Loghunters spreadsheets are the ones the community is actually grinding. Anything with >100k recorded KC qualifies. |
+| **C. Loghunters audit popularity** | Loghunters community drop-log spreadsheets (maintainer audit notes) | Sources with the highest sample sizes on Loghunters spreadsheets are the ones the community is actually grinding. Anything with >100k recorded KC qualifies. |
 | **D. Clue-tier engagement** | Hard/Elite/Master clue casket KC across TempleOSRS + Wiki community polls | Clues are the dominant non-boss farm. Beginner/Easy/Medium are skipped in D2 (rolled into D3 long-tail) because their rare-table tail is much shorter. |
 | **E. Slayer task frequency** | Wiki task-weighting tables for Duradel + Konar + Nieve | Confirms which slayer bosses are routinely on-task and therefore farmed by accounts past 80 Slayer. |
-| **F. RuneLite plugin author intuition** (`osrs-expert` / `runelite-plugin-dev`) | This repo's skill set | Sanity-checks the empirical list against current 2026 meta — e.g., DT2 bosses ranking far above pre-2024 slayer bosses now that the awakened orbs and virtus drops are entrenched. |
+| **F. RuneLite plugin author intuition** | Maintainer meta judgment | Sanity-checks the empirical list against current 2026 meta — e.g., DT2 bosses ranking far above pre-2024 slayer bosses now that the awakened orbs and virtus drops are entrenched. |
 
 **Excluded from D2 (deferred to D3/D4):**
 - Skilling sources beyond Wintertodt / Tempoross (Hespori, Zalcano, Mahogany Homes, etc. — moved to D3).
