@@ -18,7 +18,6 @@ import com.collectionloghelper.guidance.GuidanceMovementTracker;
 import com.collectionloghelper.guidance.GuidanceOverlayCoordinator;
 import com.collectionloghelper.learning.KillTimeTracker;
 import com.collectionloghelper.overlay.GuidanceOverlay;
-import com.collectionloghelper.sync.CollectionLogNetImporter;
 import com.collectionloghelper.sync.SourceKcStore;
 import com.collectionloghelper.sync.TempleOsrsKcSyncer;
 import com.collectionloghelper.ui.CollectionLogHelperPanel;
@@ -71,7 +70,6 @@ public class PluginShutdownRoutineTest
 	@Mock private com.collectionloghelper.player.SkillCapePerkState skillCapePerkState;
 	@Mock private com.collectionloghelper.player.PlayerQuestProgressState playerQuestProgressState;
 
-	@Mock private CollectionLogNetImporter collectionLogNetImporter;
 	@Mock private SyncStateCoordinator syncStateCoordinator;
 	@Mock private SourceKcStore sourceKcStore;
 	@Mock private TempleOsrsKcSyncer templeOsrsKcSyncer;
@@ -95,7 +93,6 @@ public class PluginShutdownRoutineTest
 	@BeforeEach
 	public void setUp()
 	{
-		when(syncModule.getCollectionLogNetImporter()).thenReturn(collectionLogNetImporter);
 		when(syncModule.getSyncStateCoordinator()).thenReturn(syncStateCoordinator);
 		when(syncModule.getSourceKcStore()).thenReturn(sourceKcStore);
 		when(syncModule.getTempleOsrsKcSyncer()).thenReturn(templeOsrsKcSyncer);
@@ -139,17 +136,6 @@ public class PluginShutdownRoutineTest
 	{
 		routine.tearDown(panel, navButton, executor, () -> { });
 		verify(authoringLogger).close();
-	}
-
-	@Test
-	public void tearDown_doesNotInteractWithCollectionLogNetImporter()
-	{
-		// #478: CollectionLogNetImporter no longer owns its executor; the
-		// runtime-provided ScheduledExecutorService is shut down by the
-		// RuneLite runtime, not by this routine.  The teardown must not
-		// invoke any method on the importer.
-		routine.tearDown(panel, navButton, executor, () -> { });
-		org.mockito.Mockito.verifyNoInteractions(collectionLogNetImporter);
 	}
 
 	@Test

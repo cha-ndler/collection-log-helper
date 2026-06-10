@@ -25,7 +25,6 @@
 package com.collectionloghelper.di;
 
 import com.collectionloghelper.lifecycle.SyncStateCoordinator;
-import com.collectionloghelper.sync.CollectionLogNetImporter;
 import com.collectionloghelper.sync.SourceKcStore;
 import com.collectionloghelper.sync.TempleOsrsKcSyncer;
 import javax.inject.Inject;
@@ -35,7 +34,7 @@ import lombok.Getter;
 /**
  * Aggregate holder for the plugin's sync-layer Guice singletons.
  *
- * <p>Groups the four sync/import dependencies that {@code CollectionLogHelperPlugin}
+ * <p>Groups the sync dependencies that {@code CollectionLogHelperPlugin}
  * previously injected individually, reducing the plugin's {@code @Inject} field count
  * and providing a single seam for sync-layer wiring.
  *
@@ -46,19 +45,16 @@ import lombok.Getter;
 public class SyncModule
 {
 	private final SyncStateCoordinator syncStateCoordinator;
-	private final CollectionLogNetImporter collectionLogNetImporter;
 	private final TempleOsrsKcSyncer templeOsrsKcSyncer;
 	private final SourceKcStore sourceKcStore;
 
 	@Inject
 	public SyncModule(
 		SyncStateCoordinator syncStateCoordinator,
-		CollectionLogNetImporter collectionLogNetImporter,
 		TempleOsrsKcSyncer templeOsrsKcSyncer,
 		SourceKcStore sourceKcStore)
 	{
 		this.syncStateCoordinator = syncStateCoordinator;
-		this.collectionLogNetImporter = collectionLogNetImporter;
 		this.templeOsrsKcSyncer = templeOsrsKcSyncer;
 		this.sourceKcStore = sourceKcStore;
 	}

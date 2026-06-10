@@ -132,11 +132,10 @@ public class SyncStatusView extends JPanel
 
 	/**
 	 * Shows a brief, one-line status message in the sync-status label. Used by
-	 * the auto-sync-on-login flows (collectionlog.net import, TempleOSRS KC)
-	 * to report their result without a dedicated widget or chat spam.
-	 * Safe to call from any thread.
+	 * the TempleOSRS auto-sync-on-login flow to report its result without a
+	 * dedicated widget or chat spam. Safe to call from any thread.
 	 *
-	 * @param message short result message, e.g. "Imported 42 items from collectionlog.net"
+	 * @param message short result message, e.g. "Synced KC from TempleOSRS"
 	 * @param success whether the operation succeeded (drives the label colour)
 	 */
 	public void showTransientStatus(String message, boolean success)

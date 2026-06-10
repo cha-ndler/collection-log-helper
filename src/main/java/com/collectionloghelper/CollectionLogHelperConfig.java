@@ -49,19 +49,6 @@ public interface CollectionLogHelperConfig extends Config
 	)
 	String syncSection = "sync";
 
-	@ConfigItem(
-		keyName = "enableCollectionLogNetImport",
-		name = "Auto-sync collectionlog.net on login",
-		description = "Automatically imports your obtained-items list from collectionlog.net shortly after login. This submits your RSN to a third-party server (collectionlog.net). Off by default; enable to turn the auto-import on.",
-		section = syncSection,
-		position = 0
-	)
-	default boolean enableCollectionLogNetImport()
-	{
-		return false;
-	}
-
-
 	@ConfigSection(
 		name = "Learning",
 		description = "Per-account learning features",
