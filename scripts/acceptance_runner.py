@@ -435,6 +435,26 @@ def run_source(source: dict, client: BridgeClient) -> dict:
                 advanced = True
                 continue
 
+            # Looping ACTIVITY source: the engine recognizes the clog item as a
+            # target slot but intentionally keeps guidance active so the grind loop
+            # continues (GuidanceSequencer.onItemObtained, mid-loop branch). The
+            # slot-unlock IS the success here -- the sequence staying active is
+            # by-design, not a stuck step. Classify PASS only when the latest read
+            # confirms the target slot unlocked on the same active source.
+            if (
+                state.get("guidanceActive")
+                and state.get("activeSource") == name
+                and state.get("targetSlotUnlocked")
+            ):
+                advanced = True
+                result["status"] = "PASS"
+                result["lastStep"] = idx
+                result["reason"] = (
+                    "target slot unlocked; guidance correctly keeps the activity "
+                    "loop active (by-design)"
+                )
+                return result
+
         # stuck on this step
         result["lastStep"] = idx
         if not advanced:

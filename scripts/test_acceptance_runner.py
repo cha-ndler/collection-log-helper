@@ -222,6 +222,7 @@ class FakeClient:
         self.plan = plan  # list of dicts describing how injects mutate state
         self.idx = 0
         self.done = False
+        self.slot_unlocked = False
         self.injects = []
         self._pending = None  # (target_state, reads_remaining)
 
@@ -249,6 +250,10 @@ class FakeClient:
             self.idx = action["advanceTo"]
         if action.get("complete"):
             self.done = True
+        if action.get("slotUnlocked"):
+            # Looping ACTIVITY source: the target slot unlocks but guidance stays
+            # active (the engine keeps the grind loop running by design).
+            self.slot_unlocked = True
 
     def read_state(self):
         if self._pending is not None:
@@ -261,6 +266,7 @@ class FakeClient:
             "activeSource": self.name,
             "currentStepIndex": self.idx,
             "totalSteps": self.total,
+            "targetSlotUnlocked": self.slot_unlocked,
         }
 
 
@@ -323,6 +329,57 @@ class RunSourceTest(unittest.TestCase):
         self.assertEqual(res["status"], "PASS", res["reason"])
         self.assertEqual(res["lastStep"], 1)
         self.assertIn("force-completed", res["reason"])
+
+    def test_looping_activity_slot_unlock_passes(self):
+        # Tempoross/Wintertodt-style looping ACTIVITY source: step 0 ARRIVE
+        # advances, step 1 MANUAL is mid-loop. The force-complete itemObtained
+        # unlocks the target slot but the engine intentionally KEEPS guidance
+        # active (the grind loop continues by design). The slot-unlock IS the
+        # success: must PASS, not PARTIAL.
+        src = {
+            "name": "Tempoross",
+            "items": [{"itemId": 25564}],
+            "guidanceSteps": [
+                {"completionCondition": "ARRIVE_AT_TILE", "worldX": 5, "worldY": 5,
+                 "worldPlane": 0},
+                {"completionCondition": "MANUAL"},
+            ],
+        }
+        plan = [
+            {"match": lambda e: e["type"] == "playerMoved" and e.get("x") == 5,
+             "action": {"advanceTo": 1}},
+            # itemObtained unlocks the slot but does NOT complete (mid-loop).
+            {"match": lambda e: e["type"] == "itemObtained",
+             "action": {"slotUnlocked": True}},
+        ]
+        client = FakeClient("Tempoross", 2, plan)
+        res = ar.run_source(src, client)
+        self.assertEqual(res["status"], "PASS", res["reason"])
+        self.assertEqual(res["lastStep"], 1)
+        self.assertIn("target slot unlocked", res["reason"])
+
+    def test_active_no_slot_unlock_stays_partial(self):
+        # Same shape but the force-complete does NOT unlock the slot (engine still
+        # active, targetSlotUnlocked false). This is a genuinely-stuck no-driver
+        # step, NOT a by-design loop: must stay PARTIAL.
+        src = {
+            "name": "Mystery Activity",
+            "items": [{"itemId": 25564}],
+            "guidanceSteps": [
+                {"completionCondition": "ARRIVE_AT_TILE", "worldX": 5, "worldY": 5,
+                 "worldPlane": 0},
+                {"completionCondition": "MANUAL"},
+            ],
+        }
+        plan = [
+            {"match": lambda e: e["type"] == "playerMoved" and e.get("x") == 5,
+             "action": {"advanceTo": 1}},
+            # itemObtained does nothing -> still active, slot NOT unlocked.
+        ]
+        client = FakeClient("Mystery Activity", 2, plan)
+        res = ar.run_source(src, client)
+        self.assertEqual(res["status"], "PARTIAL", res["reason"])
+        self.assertEqual(res["lastStep"], 1)
 
     def test_player_on_plane_transition_completes(self):
         # The transition shape (other-plane then target-plane) drives the engine.
