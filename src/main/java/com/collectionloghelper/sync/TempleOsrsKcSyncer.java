@@ -24,6 +24,7 @@
  */
 package com.collectionloghelper.sync;
 
+import com.collectionloghelper.CollectionLogHelperConfig;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -98,6 +99,7 @@ public class TempleOsrsKcSyncer
 	private final OkHttpClient okHttpClient;
 	private final Gson gson;
 	private final ScheduledExecutorService executor;
+	private final CollectionLogHelperConfig config;
 
 	/**
 	 * Constructs the syncer with all dependencies supplied by Guice.
@@ -113,13 +115,17 @@ public class TempleOsrsKcSyncer
 	 * @param okHttpClient HTTP client used for the TempleOSRS request
 	 * @param gson JSON parser
 	 * @param executor shared scheduled executor provided by the runtime
+	 * @param config plugin config — re-checked immediately before the request so
+	 *               the RSN is never submitted while the sync is disabled
 	 */
 	@Inject
-	TempleOsrsKcSyncer(OkHttpClient okHttpClient, Gson gson, ScheduledExecutorService executor)
+	TempleOsrsKcSyncer(OkHttpClient okHttpClient, Gson gson, ScheduledExecutorService executor,
+		CollectionLogHelperConfig config)
 	{
 		this.okHttpClient = okHttpClient;
 		this.gson = gson;
 		this.executor = executor;
+		this.config = config;
 	}
 
 	/**
@@ -144,6 +150,16 @@ public class TempleOsrsKcSyncer
 	 */
 	SyncResult doSync(String username)
 	{
+		// Re-check the consent flag immediately before issuing the request: this
+		// runs asynchronously after the orchestrator's check, so the player could
+		// have disabled the sync in between. The RSN must never leave the client
+		// while the sync is off.
+		if (!config.enableTempleOsrsSync())
+		{
+			log.debug("TempleOSRS sync disabled in config; skipping request for '{}'", username);
+			return SyncResult.failure("TempleOSRS sync is disabled in settings");
+		}
+
 		if (username == null || username.trim().isEmpty())
 		{
 			return SyncResult.failure("Username is empty");
