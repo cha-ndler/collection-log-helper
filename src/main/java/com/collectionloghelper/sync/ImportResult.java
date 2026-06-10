@@ -39,7 +39,9 @@ public final class ImportResult
 		/** The service returned a non-404 error or a network error occurred. */
 		SERVICE_UNAVAILABLE,
 		/** The response body could not be parsed as expected JSON. */
-		MALFORMED_RESPONSE
+		MALFORMED_RESPONSE,
+		/** The import is disabled in config; no request was sent. */
+		DISABLED
 	}
 
 	private final Status status;
@@ -73,6 +75,12 @@ public final class ImportResult
 	public static ImportResult malformedResponse()
 	{
 		return new ImportResult(Status.MALFORMED_RESPONSE, 0, null, 0);
+	}
+
+	/** No request was sent because the import is disabled in config. */
+	public static ImportResult disabled()
+	{
+		return new ImportResult(Status.DISABLED, 0, null, 0);
 	}
 
 	public Status getStatus()
@@ -115,6 +123,8 @@ public final class ImportResult
 				return "collectionlog.net: service unavailable";
 			case MALFORMED_RESPONSE:
 				return "collectionlog.net: unexpected response format";
+			case DISABLED:
+				return "collectionlog.net sync is disabled in settings";
 			default:
 				return "collectionlog.net: unknown error";
 		}

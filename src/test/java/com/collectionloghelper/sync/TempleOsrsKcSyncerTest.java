@@ -24,6 +24,7 @@
  */
 package com.collectionloghelper.sync;
 
+import com.collectionloghelper.CollectionLogHelperConfig;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
@@ -45,6 +46,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -58,6 +61,7 @@ public class TempleOsrsKcSyncerTest
 	private TempleOsrsKcSyncer syncer;
 	private Gson gson;
 	private ScheduledExecutorService executor;
+	private CollectionLogHelperConfig mockConfig;
 
 	@BeforeEach
 	public void setUp()
@@ -66,7 +70,9 @@ public class TempleOsrsKcSyncerTest
 		gson = new Gson();
 		// Single-thread scheduled executor stands in for the runtime-supplied scheduler.
 		executor = Executors.newSingleThreadScheduledExecutor();
-		syncer = new TempleOsrsKcSyncer(mockClient, gson, executor);
+		mockConfig = mock(CollectionLogHelperConfig.class);
+		when(mockConfig.enableTempleOsrsSync()).thenReturn(true);
+		syncer = new TempleOsrsKcSyncer(mockClient, gson, executor, mockConfig);
 	}
 
 	@AfterEach
@@ -327,6 +333,18 @@ public class TempleOsrsKcSyncerTest
 	// ========================================================================
 	// doSync — HTTP-level failure modes (mocked OkHttpClient)
 	// ========================================================================
+
+	@Test
+	public void doSync_disabledByConfig_doesNotExecuteRequest() throws IOException
+	{
+		when(mockConfig.enableTempleOsrsSync()).thenReturn(false);
+
+		SyncResult result = syncer.doSync("TestPlayer");
+
+		assertFalse(result.isSuccess());
+		// The privacy-critical assertion: the RSN never reached the network.
+		verify(mockClient, never()).newCall(any(Request.class));
+	}
 
 	@Test
 	public void doSync_emptyUsername_returnsFailure()
