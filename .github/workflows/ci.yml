@@ -43,3 +43,26 @@ jobs:
           name: test-results
           path: build/reports/tests/
           retention-days: 7
+
+  # The repo's verification scripts under scripts/ are stdlib-only Python. The
+  # Gradle build does not exercise them (the guidanceStatus task that shells out
+  # to them is standalone, not wired into `check`), so this job builds them in
+  # CI directly: a byte-compile pass over every script catches syntax breakage,
+  # and the acceptance-runner unit suite pins the synthesize-events contract.
+  scripts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Byte-compile all scripts (build check)
+        run: python -m py_compile scripts/*.py
+
+      - name: Run acceptance-runner unit tests
+        working-directory: scripts
+        run: python -m unittest test_acceptance_runner -v
