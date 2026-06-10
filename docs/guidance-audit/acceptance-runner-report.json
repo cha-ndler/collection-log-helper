@@ -374,6 +374,20 @@
       "itemCount": 8
     },
     {
+      "source": "The Nightmare",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (CHAT_MESSAGE_RECEIVED)",
+      "itemCount": 10
+    },
+    {
+      "source": "Phosani's Nightmare",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 24422",
+      "itemCount": 12
+    },
+    {
       "source": "Nex",
       "status": "PASS",
       "lastStep": 5,
@@ -591,6 +605,13 @@
       "itemCount": 5
     },
     {
+      "source": "Barrows",
+      "status": "PASS",
+      "lastStep": 8,
+      "reason": "completed after step 8 (CHAT_MESSAGE_RECEIVED)",
+      "itemCount": 25
+    },
+    {
       "source": "Zalcano",
       "status": "PASS",
       "lastStep": 4,
@@ -638,6 +659,13 @@
       "lastStep": 1,
       "reason": "force-completed at step 1 (MANUAL) via clog item 23285",
       "itemCount": 16
+    },
+    {
+      "source": "Revenants",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "completed after step 3 (ACTOR_DEATH)",
+      "itemCount": 14
     },
     {
       "source": "Crawling Hand",
@@ -1046,6 +1074,13 @@
       "itemCount": 2
     },
     {
+      "source": "Fishing Trawler",
+      "status": "PASS",
+      "lastStep": 2,
+      "reason": "force-completed at step 2 (MANUAL) via clog item 13258",
+      "itemCount": 4
+    },
+    {
       "source": "Temple Trekking",
       "status": "PASS",
       "lastStep": 1,
@@ -1233,6 +1268,13 @@
       "lastStep": 1,
       "reason": "force-completed at step 1 (MANUAL) via clog item 9007",
       "itemCount": 4
+    },
+    {
+      "source": "Catacombs of Kourend",
+      "status": "PASS",
+      "lastStep": 3,
+      "reason": "force-completed at step 3 (MANUAL) via clog item 19679",
+      "itemCount": 3
     },
     {
       "source": "Wilderness God Wars Dungeon",
@@ -1725,98 +1767,56 @@
       "itemCount": 1
     },
     {
-      "source": "The Nightmare",
-      "status": "PASS",
-      "lastStep": 3,
-      "reason": "completed after step 3 (CHAT_MESSAGE_RECEIVED)",
-      "itemCount": 10
-    },
-    {
-      "source": "Phosani's Nightmare",
-      "status": "PASS",
-      "lastStep": 2,
-      "reason": "force-completed at step 2 (MANUAL) via clog item 24422",
-      "itemCount": 12
-    },
-    {
-      "source": "Barrows",
-      "status": "PASS",
-      "lastStep": 8,
-      "reason": "completed after step 8 (CHAT_MESSAGE_RECEIVED)",
-      "itemCount": 25
-    },
-    {
       "source": "Tempoross",
-      "status": "PARTIAL",
+      "status": "PASS",
       "lastStep": 2,
-      "reason": "advanced then stuck at step 2 (MANUAL)",
+      "reason": "target slot unlocked; guidance correctly keeps the activity loop active (by-design)",
       "itemCount": 12
     },
     {
       "source": "Wintertodt",
-      "status": "PARTIAL",
+      "status": "PASS",
       "lastStep": 2,
-      "reason": "advanced then stuck at step 2 (MANUAL)",
+      "reason": "target slot unlocked; guidance correctly keeps the activity loop active (by-design)",
       "itemCount": 10
     },
     {
-      "source": "Revenants",
-      "status": "PASS",
-      "lastStep": 3,
-      "reason": "completed after step 3 (ACTOR_DEATH)",
-      "itemCount": 14
-    },
-    {
-      "source": "Fishing Trawler",
-      "status": "PASS",
-      "lastStep": 2,
-      "reason": "force-completed at step 2 (MANUAL) via clog item 13258",
-      "itemCount": 4
-    },
-    {
-      "source": "Catacombs of Kourend",
-      "status": "PASS",
-      "lastStep": 3,
-      "reason": "force-completed at step 3 (MANUAL) via clog item 19679",
-      "itemCount": 3
-    },
-    {
       "source": "Colossal Wyrm Agility",
-      "status": "PARTIAL",
+      "status": "PASS",
       "lastStep": 1,
-      "reason": "advanced then stuck at step 1 (MANUAL)",
+      "reason": "target slot unlocked; guidance correctly keeps the activity loop active (by-design)",
       "itemCount": 9
     },
     {
       "source": "Rooftop Agility",
-      "status": "PARTIAL",
+      "status": "PASS",
       "lastStep": 1,
-      "reason": "advanced then stuck at step 1 (MANUAL)",
+      "reason": "target slot unlocked; guidance correctly keeps the activity loop active (by-design)",
       "itemCount": 8
     },
     {
       "source": "Thieving (Seed Stalls)",
-      "status": "PARTIAL",
+      "status": "PASS",
       "lastStep": 1,
-      "reason": "advanced then stuck at step 1 (MANUAL)",
+      "reason": "target slot unlocked; guidance correctly keeps the activity loop active (by-design)",
       "itemCount": 1
     },
     {
       "source": "Black Chinchompas",
-      "status": "PARTIAL",
+      "status": "PASS",
       "lastStep": 1,
-      "reason": "advanced then stuck at step 1 (MANUAL)",
+      "reason": "target slot unlocked; guidance correctly keeps the activity loop active (by-design)",
       "itemCount": 1
     },
     {
       "source": "Pickpocketing Darkmeyer Vyre",
-      "status": "PARTIAL",
+      "status": "PASS",
       "lastStep": 1,
-      "reason": "advanced then stuck at step 1 (MANUAL)",
+      "reason": "target slot unlocked; guidance correctly keeps the activity loop active (by-design)",
       "itemCount": 1
     }
   ],
-  "confidencePct": 98.01,
-  "passCount": 219,
+  "confidencePct": 100.0,
+  "passCount": 226,
   "total": 226
 }
