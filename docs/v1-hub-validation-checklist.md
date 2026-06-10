@@ -31,7 +31,7 @@ Each was an explicit hub blocker. Issue is CLOSED; needs one clean confirm on cu
 - [~] **T1.1 (#485 class)** ARRIVE_AT_TILE auto-advance on a travel source. The 05-27 Phosani's FAIL was an isolated teleport/shortcut data gap (now fixed code-side by PR #731, see T3.1). Still need a clean in-game confirm on a *walk-in* travel source that the systemic #485 fix holds — in-game-only, tracked in `post-merge-ux-confirmation.md`.
 - [ ] **T1.2 (#483)** Hard Treasure Trails → panel renders inside its box (no overlap) AND steps auto-advance *(needs a hard clue)*
 - [x] **T1.3 (#486/#487/#611)** C7 debug overlay surfaces C1-C5 detected state + correct quest count *(05-27)*
-- [ ] **T1.4 (#488/#577)** collectionlog.net + TempleOSRS sync are usable action surfaces with clear opt-in; sync populates data, invalid RSN fails cleanly, offline fails without hanging
+- [~] **T1.4 (#488/#577)** collectionlog.net + TempleOSRS sync are usable action surfaces with clear opt-in; sync populates data, invalid RSN fails cleanly, offline fails without hanging. **OPT-IN HARDENED CODE-SIDE (2026-06-10, PR #795)**: both sync flags now default OFF, their config descriptions state the request "submits your RSN to a third-party server", and the consent flag is re-checked immediately before each outbound request (`CollectionLogNetImporter.doImport` / `TempleOsrsKcSyncer.doSync`) so the RSN cannot leave the client while disabled. Remaining sub-clauses (sync populates data, invalid RSN fails cleanly, offline fails without hanging) are live-play only — tracked in `post-merge-ux-confirmation.md` / `needs-human.md`.
 - [~] **T1.5 (#484)** Asgarnian Ice Dungeon sources use fairy ring AIQ (not AKQ) → guidance points to the right ring. **DATA CONFIRMED CORRECT (2026-06-04)**: all Asgarnian Ice Dungeon entries in `drop_rates.json` already read `AIQ` (the Mudskipper Point ring); the `AKQ` occurrences are correctly the Piscatoris/Kraken sources. No code change needed. In-game "ring points right" confirm is the only remaining step — tracked in `post-merge-ux-confirmation.md`.
 
 ## Tier 2 — #699–#727 UX wave (never recorded; core advertised guidance UX)
@@ -64,7 +64,7 @@ The largest unvalidated block. Panel-side rows cleared 05-27; active-play rows s
 | Tier | Total | Done | Still required |
 |---|---|---|---|
 | T0 instant-rejection | 7 | 4 | 3 |
-| T1 hub-blocker confirms | 5 | 1 | 4 (T1.1 + T1.5 now code-complete, in-game confirm only) |
+| T1 hub-blocker confirms | 5 | 1 | 4 (T1.1 + T1.4 + T1.5 now code-complete, in-game confirm only) |
 | T2 #699-#727 UX wave | 14 | 5 | 9 |
 | T3 open FAIL | 1 | 1 (code-complete) | 0 blocking |
 | **Total** | **27** | **10** | **17** |
