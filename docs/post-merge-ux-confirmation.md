@@ -10,6 +10,13 @@
 
 ---
 
+> **2026-06-10 session**: every recipe below is now confirmed — Slepe zone fires for both
+> the medallion landing (06-08 receipt) and the walk-in path (synthetic north-edge tile +
+> a real on-foot ARRIVE_AT_ZONE on another source), overlay anchor unchanged, log clean,
+> and the AIQ ring text confirmed on the live overlay. The matching checklist rows
+> (T1.1 / T1.5 / T3.1 / T0.5) are flipped `[x]` in `v1-hub-validation-checklist.md`;
+> receipts in `guidance-audit/acceptance-runs/2026-06-10.md`.
+
 ## 2026-06-04 — PR #731 (T3.1 / T1.1): Slepe arrival now `ARRIVE_AT_ZONE`
 
 **What changed**: Step 1 of both **The Nightmare** and **Phosani's Nightmare** travel sources changed from `ARRIVE_AT_TILE` (church stairs 3728,3302, radius 20) to `ARRIVE_AT_ZONE [3700,3290,3770,3360,0]` covering Slepe town. The overlay/hint-arrow still anchors at the church stairs; only the *auto-advance trigger* widened.
