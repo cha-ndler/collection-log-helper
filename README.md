@@ -92,6 +92,14 @@ Ranks every collection log source by efficiency and guides you there step-by-ste
 
 </details>
 
+## How collection-log reading works
+
+To know which items you've already obtained, the plugin briefly drives the in-game collection-log **search** mode: it calls `client.menuAction(...)` on the log's Search toggle and `client.runScript(...)`, which makes the client fire its per-item script (`4100`) once for each obtained item, then immediately switches back so the search UI doesn't visibly flash. This is a **read-only scan of your own, already-open collection log** — it does not automate gameplay, interact with the world, or transmit your log anywhere. The scan result stays on your machine.
+
+The only outbound network call is the separate **opt-in, off-by-default** TempleOSRS kill-count sync, which sends your RuneScape name to `templeosrs.com` solely to fetch per-source kill counts, and only after you enable it (the consent flag is re-checked immediately before each request).
+
+This widget-scripting technique for reading the collection log is the same one used by the established [TempleOSRS](https://templeosrs.com) and WikiSync (RuneLite's `wiki` plugin) integrations. The implementation lives in `SyncStateCoordinator#triggerSearchModeScan`.
+
 ## Building
 
 ```bash
