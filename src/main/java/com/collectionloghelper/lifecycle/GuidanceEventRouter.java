@@ -124,11 +124,10 @@ public class GuidanceEventRouter
 
 	/**
 	 * Callback fired when a sync-related config key changes
-	 * ({@link #KEY_ENABLE_COLLECTIONLOG_NET_IMPORT} or
-	 * {@link #KEY_ENABLE_TEMPLE_OSRS_SYNC}). The plugin uses this to refresh
-	 * the visibility of the panel sync buttons immediately, so toggling the
-	 * config checkbox makes the corresponding button appear without a panel
-	 * restart. Set once by the plugin in {@code startUp()}.
+	 * ({@link #KEY_ENABLE_TEMPLE_OSRS_SYNC}). The plugin uses this to refresh
+	 * the visibility of the panel sync button immediately, so toggling the
+	 * config checkbox makes the button appear without a panel restart. Set once
+	 * by the plugin in {@code startUp()}.
 	 */
 	private Runnable onSyncConfigChanged;
 
@@ -502,8 +501,6 @@ public class GuidanceEventRouter
 	static final String CONFIG_GROUP = "collectionloghelper";
 	/** Config key for the "Show Hint Arrow" toggle. */
 	static final String KEY_SHOW_HINT_ARROW = "showHintArrow";
-	/** Config key gating the panel button that triggers a collectionlog.net import. */
-	static final String KEY_ENABLE_COLLECTIONLOG_NET_IMPORT = "enableCollectionLogNetImport";
 	/** Config key gating the panel button that triggers a TempleOSRS KC sync. */
 	static final String KEY_ENABLE_TEMPLE_OSRS_SYNC = "enableTempleOsrsSync";
 
@@ -574,9 +571,7 @@ public class GuidanceEventRouter
 			return;
 		}
 
-		if ((KEY_ENABLE_COLLECTIONLOG_NET_IMPORT.equals(key)
-			|| KEY_ENABLE_TEMPLE_OSRS_SYNC.equals(key))
-			&& onSyncConfigChanged != null)
+		if (KEY_ENABLE_TEMPLE_OSRS_SYNC.equals(key) && onSyncConfigChanged != null)
 		{
 			onSyncConfigChanged.run();
 			return;

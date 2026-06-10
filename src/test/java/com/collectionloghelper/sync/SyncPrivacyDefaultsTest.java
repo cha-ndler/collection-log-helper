@@ -32,9 +32,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Privacy-posture guards for the two external-sync features. Both submit the
- * player's RSN to a third-party server, so they must default to OFF and their
- * config descriptions must say so explicitly (Plugin Hub requirement).
+ * Privacy-posture guard for the external-sync feature. TempleOSRS sync submits
+ * the player's RSN to a third-party server, so it must default to OFF and its
+ * config description must say so explicitly (Plugin Hub requirement).
  */
 public class SyncPrivacyDefaultsTest
 {
@@ -43,23 +43,10 @@ public class SyncPrivacyDefaultsTest
 	};
 
 	@Test
-	public void collectionLogNetImportDefaultsOff()
-	{
-		assertFalse(config.enableCollectionLogNetImport(),
-			"collectionlog.net auto-import must default OFF — it submits the RSN to a third-party server");
-	}
-
-	@Test
 	public void templeOsrsSyncDefaultsOff()
 	{
 		assertFalse(config.enableTempleOsrsSync(),
 			"TempleOSRS auto-sync must default OFF — it submits the RSN to a third-party server");
-	}
-
-	@Test
-	public void collectionLogNetImportDescriptionWarnsAboutThirdParty() throws Exception
-	{
-		assertDescriptionMentionsThirdParty("enableCollectionLogNetImport");
 	}
 
 	@Test

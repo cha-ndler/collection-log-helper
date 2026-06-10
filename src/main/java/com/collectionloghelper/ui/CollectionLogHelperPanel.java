@@ -339,17 +339,6 @@ public class CollectionLogHelperPanel extends PluginPanel implements PanelShellC
 	}
 
 	/**
-	 * Reports the result of an auto collectionlog.net import as a brief, one-line
-	 * status in the sync-status view. Safe to call from any thread.
-	 *
-	 * @param message short result message, e.g. "Imported 42 items from collectionlog.net"
-	 */
-	public void onCollectionLogNetImportComplete(String message)
-	{
-		syncStatusView.showTransientStatus(message, true);
-	}
-
-	/**
 	 * Updates the kill counts available to the dry-streak feed. Call this after any
 	 * KC-data refresh (in-game varp update, TempleOSRS sync, etc.). A subsequent
 	 * {@link #rebuild()} is required to repaint the feed.
