@@ -52,13 +52,13 @@ public interface CollectionLogHelperConfig extends Config
 	@ConfigItem(
 		keyName = "enableCollectionLogNetImport",
 		name = "Auto-sync collectionlog.net on login",
-		description = "Automatically imports your obtained-items list from collectionlog.net (by RSN) shortly after login. Disable here to turn the auto-import off.",
+		description = "Automatically imports your obtained-items list from collectionlog.net shortly after login. This submits your RSN to a third-party server (collectionlog.net). Off by default; enable to turn the auto-import on.",
 		section = syncSection,
 		position = 0
 	)
 	default boolean enableCollectionLogNetImport()
 	{
-		return true;
+		return false;
 	}
 
 
@@ -301,13 +301,13 @@ public interface CollectionLogHelperConfig extends Config
 	@ConfigItem(
 		keyName = "enableTempleOsrsSync",
 		name = "Auto-sync TempleOSRS KC on login",
-		description = "Automatically pulls your per-source kill counts from TempleOSRS (by RSN) shortly after login. Disable here to turn the auto-sync off.",
+		description = "Automatically pulls your per-source kill counts from TempleOSRS shortly after login. This submits your RSN to a third-party server (templeosrs.com). Off by default; enable to turn the auto-sync on.",
 		section = syncSection,
 		position = 1
 	)
 	default boolean enableTempleOsrsSync()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(

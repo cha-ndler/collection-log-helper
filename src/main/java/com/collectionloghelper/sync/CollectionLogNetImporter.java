@@ -24,6 +24,7 @@
  */
 package com.collectionloghelper.sync;
 
+import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -67,6 +68,7 @@ public class CollectionLogNetImporter
 	private final Gson gson;
 	private final PlayerCollectionState collectionState;
 	private final ScheduledExecutorService executor;
+	private final CollectionLogHelperConfig config;
 
 	/**
 	 * Constructs the importer with all dependencies supplied by Guice.
@@ -83,15 +85,18 @@ public class CollectionLogNetImporter
 	 * @param gson JSON parser
 	 * @param collectionState target store for obtained-item marks
 	 * @param executor shared scheduled executor provided by the runtime
+	 * @param config plugin config — re-checked immediately before the request so
+	 *               the RSN is never submitted while the import is disabled
 	 */
 	@Inject
 	CollectionLogNetImporter(OkHttpClient httpClient, Gson gson, PlayerCollectionState collectionState,
-		ScheduledExecutorService executor)
+		ScheduledExecutorService executor, CollectionLogHelperConfig config)
 	{
 		this.httpClient = httpClient;
 		this.gson = gson;
 		this.collectionState = collectionState;
 		this.executor = executor;
+		this.config = config;
 	}
 
 	/**
@@ -109,6 +114,16 @@ public class CollectionLogNetImporter
 
 	private ImportResult doImport(String username)
 	{
+		// Re-check the consent flag immediately before issuing the request: this
+		// runs asynchronously after the orchestrator's check, so the player could
+		// have disabled the import in between. The RSN must never leave the client
+		// while the import is off.
+		if (!config.enableCollectionLogNetImport())
+		{
+			log.debug("collectionlog.net import disabled in config; skipping request for '{}'", username);
+			return ImportResult.disabled();
+		}
+
 		String url = BASE_URL + encodeUsername(username);
 		log.debug("Fetching collectionlog.net profile for '{}' from {}", username, url);
 
