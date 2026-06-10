@@ -151,7 +151,6 @@ public final class PanelPreviewFixtures
 		Mockito.when(config.efficientSortMode()).thenReturn(EfficientSortMode.EFFICIENCY);
 		Mockito.when(config.hideObtainedItems()).thenReturn(false);
 		Mockito.when(config.hideLockedContent()).thenReturn(false);
-		Mockito.when(config.enableCollectionLogNetImport()).thenReturn(true);
 		Mockito.when(config.enableTempleOsrsSync()).thenReturn(true);
 		pool.put(CollectionLogHelperConfig.class, config);
 

@@ -32,7 +32,6 @@ import com.collectionloghelper.di.DataModule;
 import com.collectionloghelper.di.EfficiencyModule;
 import com.collectionloghelper.di.GuidanceModule;
 import com.collectionloghelper.di.SyncModule;
-import com.collectionloghelper.sync.CollectionLogNetImportOrchestrator;
 import com.collectionloghelper.sync.LootSyncManager;
 import com.collectionloghelper.sync.TempleSyncOrchestrator;
 import com.collectionloghelper.efficiency.ScoredItem;
@@ -147,9 +146,6 @@ public class CollectionLogHelperPlugin extends Plugin
 	private TempleSyncOrchestrator templeSyncOrchestrator;
 
 	@Inject
-	private CollectionLogNetImportOrchestrator collectionLogNetImportOrchestrator;
-
-	@Inject
 	private ChatEventHandler chatEventHandler;
 
 	@Inject
@@ -254,12 +250,11 @@ public class CollectionLogHelperPlugin extends Plugin
 			() -> clientThread.invokeLater(guidance.getGuidanceSequencer()::syncToCurrentState)
 		);
 
-		// Wire the per-login auto-sync callbacks into the sync coordinator. These
-		// reuse the same orchestrator entry points the old sync buttons invoked;
-		// the coordinator fires them once per login (a few ticks after LOGGED_IN)
-		// and only when the corresponding config flag is enabled.
+		// Wire the per-login TempleOSRS auto-sync callback into the sync
+		// coordinator. It reuses the same orchestrator entry point the old sync
+		// button invoked; the coordinator fires it once per login (a few ticks
+		// after LOGGED_IN) and only when the config flag is enabled (default off).
 		sync.getSyncStateCoordinator().setAutoLoginSyncCallbacks(
-			() -> collectionLogNetImportOrchestrator.requestImport(panel, httpResultExecutor),
 			() -> templeSyncOrchestrator.requestSync(panel, httpResultExecutor));
 
 		// Wire coordinator with references it needs from the plugin
@@ -497,9 +492,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	}
 
 	/**
-	 * Invoked by {@link GuidanceEventRouter} when one of the sync-related
-	 * config toggles ({@code enableCollectionLogNetImport} or
-	 * {@code enableTempleOsrsSync}) changes.
+	 * Invoked by {@link GuidanceEventRouter} when the sync-related config toggle
+	 * ({@code enableTempleOsrsSync}) changes.
 	 *
 	 * <p>The toggles now gate the per-login auto-sync rather than a visible
 	 * panel button, and the sync coordinator reads the live config value each

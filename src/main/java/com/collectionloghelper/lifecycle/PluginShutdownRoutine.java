@@ -161,9 +161,6 @@ public class PluginShutdownRoutine
 	{
 		chatCommandManager.unregisterCommand("clh");
 		authoringLogger.close();
-		// CollectionLogNetImporter no longer owns its executor (#478) -- the
-		// shared ScheduledExecutorService is now lifecycle-managed by the
-		// RuneLite runtime, so no per-class shutdown call is needed.
 		if (panel != null)
 		{
 			panel.shutDown();
