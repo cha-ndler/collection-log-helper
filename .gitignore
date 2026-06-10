@@ -23,3 +23,7 @@ local.properties
 # Python bytecode
 __pycache__/
 *.pyc
+
+# Generated audit reports (written by scripts/audit_drop_rates.py)
+audit-report-*.json
+audit-report-*.md
