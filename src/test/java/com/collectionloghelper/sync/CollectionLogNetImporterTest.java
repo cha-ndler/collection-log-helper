@@ -24,6 +24,7 @@
  */
 package com.collectionloghelper.sync;
 
+import com.collectionloghelper.CollectionLogHelperConfig;
 import com.collectionloghelper.data.PlayerCollectionState;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -109,6 +110,9 @@ public class CollectionLogNetImporterTest
 	@Mock
 	private PlayerCollectionState mockCollectionState;
 
+	@Mock
+	private CollectionLogHelperConfig mockConfig;
+
 	private final Gson gson = new Gson();
 	private ScheduledExecutorService sameThread;
 
@@ -120,7 +124,8 @@ public class CollectionLogNetImporterTest
 		// Single-thread scheduled executor — deterministic enough for these tests
 		// and a reasonable stand-in for the runtime-supplied scheduler.
 		sameThread = Executors.newSingleThreadScheduledExecutor();
-		importer = new CollectionLogNetImporter(mockHttpClient, gson, mockCollectionState, sameThread);
+		when(mockConfig.enableCollectionLogNetImport()).thenReturn(true);
+		importer = new CollectionLogNetImporter(mockHttpClient, gson, mockCollectionState, sameThread, mockConfig);
 		when(mockHttpClient.newCall(any(Request.class))).thenReturn(mockCall);
 	}
 
@@ -309,6 +314,22 @@ public class CollectionLogNetImporterTest
 
 		get(importer.importProfile("Zezima"));
 
+		verify(mockCollectionState, never()).markItemObtained(anyInt());
+	}
+
+	// ── Disabled by config — no request must leave the client ─────────────────
+
+	@Test
+	public void importDisabled_doesNotExecuteRequest() throws Exception
+	{
+		when(mockConfig.enableCollectionLogNetImport()).thenReturn(false);
+
+		ImportResult result = get(importer.importProfile("Zezima"));
+
+		assertFalse(result.isSuccess());
+		assertEquals(ImportResult.Status.DISABLED, result.getStatus());
+		// The privacy-critical assertion: the RSN never reached the network.
+		verify(mockHttpClient, never()).newCall(any(Request.class));
 		verify(mockCollectionState, never()).markItemObtained(anyInt());
 	}
 
