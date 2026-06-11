@@ -498,14 +498,15 @@
       },
       {
         "description": "Kill K'ril Tsutsaroth. Protect from Melee, eat through Balfrug + Tstanon prayer drain, watch for K'ril's curse special which strips your prayer in one hit.",
-        "worldX": 2914,
-        "worldY": 5350,
+        "worldX": 2925,
+        "worldY": 5322,
         "worldPlane": 2,
         "objectId": 26505,
         "objectInteractAction": "Open",
         "npcId": 3129,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 15,
         "completionNpcId": 3129,
         "section": "Combat",
         "recommendedItemIds": [
