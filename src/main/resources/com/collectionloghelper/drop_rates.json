@@ -9063,7 +9063,7 @@
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
-        "npcId": 12610,
+        "npcId": 12821,
         "interactAction": "Attack",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Fortis Colosseum completion count is:",
