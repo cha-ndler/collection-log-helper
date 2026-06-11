@@ -52,7 +52,9 @@ import static org.mockito.Mockito.verify;
  * glyph rasterised once at construction while the async sprite loads (or when no
  * {@link ItemManager} is available). The in-world projection cannot be exercised
  * headless, so these tests confirm the glyph builds, the sprite is preferred once
- * resolved, null local points are no-ops, and both overlays hold a marker.
+ * resolved, null local points are no-ops, and all three highlight overlays
+ * (object, ground-item, and the NPC path in {@code GuidanceOverlay}) hold a
+ * marker.
  */
 public class GuidanceTargetMarkerTest
 {
@@ -136,6 +138,23 @@ public class GuidanceTargetMarkerTest
 		GroundItemHighlightOverlay overlay = ctor.newInstance(client, config, itemManager);
 
 		assertNotNull(readMarker(overlay), "ground-item overlay should hold a target marker");
+	}
+
+	@Test
+	public void guidanceOverlayHoldsMarkerInstance() throws Exception
+	{
+		// #802: NPC kill/talk targets must get the same floating book marker as
+		// objects and ground items. The NPC highlight lives in GuidanceOverlay.
+		Client client = mock(Client.class);
+		CollectionLogHelperConfig config = mock(CollectionLogHelperConfig.class);
+		ItemManager itemManager = mock(ItemManager.class);
+
+		Constructor<GuidanceOverlay> ctor = GuidanceOverlay.class.getDeclaredConstructor(
+			Client.class, CollectionLogHelperConfig.class, ItemManager.class);
+		ctor.setAccessible(true);
+		GuidanceOverlay overlay = ctor.newInstance(client, config, itemManager);
+
+		assertNotNull(readMarker(overlay), "guidance (NPC) overlay should hold a target marker");
 	}
 
 	private static BufferedImage resolveImage(GuidanceTargetMarker marker)
