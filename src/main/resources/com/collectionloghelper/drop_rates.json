@@ -9063,7 +9063,7 @@
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
-        "npcId": 12610,
+        "npcId": 12821,
         "interactAction": "Attack",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Fortis Colosseum completion count is:",
@@ -16071,8 +16071,8 @@
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
-        "npcId": 7638,
-        "interactAction": "Trade",
+        "npcId": 6920,
+        "interactAction": "Rewards",
         "completionCondition": "MANUAL"
       }
     ],
@@ -17123,7 +17123,7 @@
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
-        "npcId": 8521,
+        "npcId": 10528,
         "interactAction": "Trade",
         "completionCondition": "MANUAL"
       }
@@ -18279,7 +18279,7 @@
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
-        "npcId": 5258,
+        "npcId": 1656,
         "interactAction": "Talk-to",
         "completionCondition": "MANUAL"
       }
@@ -18535,7 +18535,7 @@
         "worldX": 1379,
         "worldY": 3634,
         "worldPlane": 0,
-        "npcId": 8523,
+        "npcId": 8521,
         "interactAction": "Trade",
         "completionCondition": "MANUAL",
         "section": "Reward"
@@ -28388,7 +28388,7 @@
         "worldX": 1646,
         "worldY": 3577,
         "worldPlane": 0,
-        "npcId": 7670,
+        "npcId": 7303,
         "interactAction": "Talk-to",
         "completionCondition": "MANUAL",
         "section": "Loot",
