@@ -28388,7 +28388,7 @@
         "worldX": 1646,
         "worldY": 3577,
         "worldPlane": 0,
-        "npcId": 7670,
+        "npcId": 7303,
         "interactAction": "Talk-to",
         "completionCondition": "MANUAL",
         "section": "Loot",
