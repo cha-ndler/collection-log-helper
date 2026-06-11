@@ -18,16 +18,16 @@ request). The remaining sub-clauses are live-play only.
 |---|---|---|---|
 | 1 | Open the plugin config → **Sync** section on a fresh profile. | Both "Auto-sync collectionlog.net on login" and "Auto-sync TempleOSRS KC on login" are **unchecked by default**; each description reads that it submits your RSN to a third-party server. | T1.4 opt-in default (code-confirmed; eyeball only) |
 | 2 | Enable **TempleOSRS** sync, log in with a valid RSN that has KC on TempleOSRS, wait a few ticks after `LOGGED_IN`. | Per-source kill counts populate (panel KC / synced indicator updates); no hang. | T1.4 "sync populates data" |
-| 3 | Enable **collectionlog.net** import, log in with a valid RSN present on collectionlog.net. | Obtained-items list imports and the panel rebuilds; toast confirms item count. | T1.4 "sync populates data" |
+| 3 | ~~Enable **collectionlog.net** import...~~ **RETIRED by PR #798** (2026-06-10): the importer was removed entirely — collectionlog.net is archived and its API defunct, so this sub-clause is permanently moot. | n/a | T1.4 (closed by removal) |
 | 4 | With a flag enabled, log in with an **invalid / non-existent RSN**. | Fails cleanly — clear "user not found" / failure toast, no stack trace, no UI freeze. | T1.4 "invalid RSN fails cleanly" |
 | 5 | ~~Offline failure~~ **EVIDENCED LIVE 2026-06-10**: `api.collectionlog.net` DNS is dead in the wild; the importer failed gracefully (`UnknownHostException` → WARN, no hang, no freeze) on a real login. | `[x]` — organic equivalent of the offline test observed. | T1.4 "offline fails without hanging" |
 | 6 | With a flag enabled, log in, then **disable** the flag during the few-tick window before the request fires (best-effort race check). | No request leaves the client once disabled (consent re-check at `doImport`/`doSync`). | T1.4 / PR #795 consent re-check |
 
 > **2026-06-10 note**: TempleOSRS round-trip confirmed clean on a real login ("KC sync
-> complete: 0 sources updated, 7 skipped" + toast). `api.collectionlog.net` appears dead
-> (DNS NXDOMAIN) — row 3 (collectionlog.net populates data) may be permanently
-> unsatisfiable; consider whether the import feature should be retired or repointed
-> before hub submission.
+> complete: 0 sources updated, 7 skipped" + toast). `api.collectionlog.net` is dead
+> (DNS NXDOMAIN) — and PR #798 (merged the same day) removed the importer entirely, so
+> every remaining T1.4 sub-clause (populate-with-data, invalid-RSN, consent-race) is
+> **TempleOSRS-only** from here on.
 
 ---
 
