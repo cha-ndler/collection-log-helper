@@ -166,6 +166,7 @@
         "npcId": 2215,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 30,
         "completionNpcId": 2215,
         "section": "Combat",
         "recommendedItemIds": [
@@ -327,14 +328,15 @@
       },
       {
         "description": "Kill Commander Zilyana. Protect from Magic, drop Bree (the ranged minion) first then Starlight, switch to Saradomin brews when Sara hits hard.",
-        "worldX": 2925,
-        "worldY": 5265,
-        "worldPlane": 2,
+        "worldX": 2897,
+        "worldY": 5269,
+        "worldPlane": 0,
         "objectId": 26504,
         "objectInteractAction": "Open",
         "npcId": 2205,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 30,
         "completionNpcId": 2205,
         "section": "Combat",
         "recommendedItemIds": [
@@ -496,14 +498,15 @@
       },
       {
         "description": "Kill K'ril Tsutsaroth. Protect from Melee, eat through Balfrug + Tstanon prayer drain, watch for K'ril's curse special which strips your prayer in one hit.",
-        "worldX": 2914,
-        "worldY": 5350,
+        "worldX": 2925,
+        "worldY": 5322,
         "worldPlane": 2,
         "objectId": 26505,
         "objectInteractAction": "Open",
         "npcId": 3129,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 15,
         "completionNpcId": 3129,
         "section": "Combat",
         "recommendedItemIds": [
@@ -665,8 +668,8 @@
       },
       {
         "description": "Kill Kree'arra. Protect from Missiles, use only ranged or magic (melee cannot hit), Armadyl crossbow with ruby/diamond bolts (e) is the standard loadout.",
-        "worldX": 2844,
-        "worldY": 5280,
+        "worldX": 2832,
+        "worldY": 5302,
         "worldPlane": 2,
         "objectId": 26502,
         "objectInteractAction": "Open",
@@ -676,6 +679,7 @@
           9419
         ],
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 15,
         "completionNpcId": 3162,
         "section": "Combat",
         "recommendedItemIds": [
@@ -1085,6 +1089,7 @@
         "npcId": 5862,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 140,
         "completionNpcId": 5862,
         "section": "Combat",
         "recommendedItemIds": [
@@ -1266,6 +1271,7 @@
         "npcId": 8621,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 20,
         "completionNpcId": 8621,
         "section": "Combat",
         "recommendedItemIds": [
@@ -1389,6 +1395,7 @@
         "npcId": 319,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 25,
         "completionNpcId": 319
       }
     ],
@@ -1506,6 +1513,7 @@
         "npcId": 965,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 25,
         "completionNpcId": 965
       },
       {
@@ -1516,6 +1524,7 @@
         "npcId": 965,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 25,
         "completionNpcId": 965
       }
     ],
@@ -9063,7 +9072,7 @@
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
-        "npcId": 12610,
+        "npcId": 12821,
         "interactAction": "Attack",
         "completionCondition": "CHAT_MESSAGE_RECEIVED",
         "completionChatPattern": "Your Fortis Colosseum completion count is:",
@@ -16071,8 +16080,8 @@
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
-        "npcId": 7638,
-        "interactAction": "Trade",
+        "npcId": 6920,
+        "interactAction": "Rewards",
         "completionCondition": "MANUAL"
       }
     ],
@@ -17123,7 +17132,7 @@
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
-        "npcId": 8521,
+        "npcId": 10528,
         "interactAction": "Trade",
         "completionCondition": "MANUAL"
       }
@@ -18279,7 +18288,7 @@
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
-        "npcId": 5258,
+        "npcId": 1656,
         "interactAction": "Talk-to",
         "completionCondition": "MANUAL"
       }
@@ -18535,7 +18544,7 @@
         "worldX": 1379,
         "worldY": 3634,
         "worldPlane": 0,
-        "npcId": 8523,
+        "npcId": 8521,
         "interactAction": "Trade",
         "completionCondition": "MANUAL",
         "section": "Reward"
@@ -28388,7 +28397,7 @@
         "worldX": 1646,
         "worldY": 3577,
         "worldPlane": 0,
-        "npcId": 7670,
+        "npcId": 7303,
         "interactAction": "Talk-to",
         "completionCondition": "MANUAL",
         "section": "Loot",

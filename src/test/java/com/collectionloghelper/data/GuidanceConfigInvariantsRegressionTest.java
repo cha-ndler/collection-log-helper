@@ -74,7 +74,7 @@ public class GuidanceConfigInvariantsRegressionTest
 	 * unknowable are by-design members of this backlog (#775) and will stay
 	 * above zero.
 	 */
-	private static final int AREA_UNCONFIRMABLE_KILL_STEP_CEILING = 347;
+	private static final int AREA_UNCONFIRMABLE_KILL_STEP_CEILING = 338;
 
 	private DropRateDatabase database;
 
