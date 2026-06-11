@@ -3948,6 +3948,7 @@
         "npcId": 5779,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 60,
         "completionNpcId": 5779
       }
     ]
@@ -17019,7 +17020,7 @@
         "worldX": 2440,
         "worldY": 3089,
         "worldPlane": 0,
-        "npcId": 1295,
+        "npcId": 11650,
         "interactAction": "Trade",
         "completionCondition": "MANUAL"
       }

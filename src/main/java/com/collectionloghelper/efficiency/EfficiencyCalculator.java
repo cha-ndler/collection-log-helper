@@ -815,11 +815,14 @@ public class EfficiencyCalculator
 				}
 				pw.println();
 			}
-			log.info("Exported efficiency list to {}", outputFile.getAbsolutePath());
+			// Log the file name only — the full path embeds the player name (T0.7)
+			log.info("Exported efficiency list to {} in the player data directory", outputFile.getName());
 		}
 		catch (IOException e)
 		{
-			log.error("Failed to export efficiency list", e);
+			// No throwable attached: an IO exception message embeds the full
+			// per-player path (T0.7) — the exception type is diagnostic enough
+			log.error("Failed to export efficiency list: {}", e.getClass().getSimpleName());
 		}
 	}
 

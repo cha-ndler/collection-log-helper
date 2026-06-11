@@ -62,6 +62,19 @@ public class GuidanceConfigInvariantsRegressionTest
 	private static final int ACTOR_DEATH_MISSING_NPC_CEILING = 0;   // #739/A (C1 -> MANUAL)
 	private static final int LOOP_NEVER_ENGAGES_CEILING = 8;        // #739/B: 15 earlier-target removed; 8 by-design remain (7 self-loops + Motherlode Batch-3 E4 marker)
 	private static final int ARRIVE_AT_ZONE_MISSING_ZONE_CEILING = 0; // #739 N1 resolved
+	/**
+	 * #803: ACTOR_DEATH/MANUAL steps with worldX/Y but no EXPLICIT
+	 * completionDistance or completionZone are only confirmable within the
+	 * 5-tile default radius (GuidanceStep.getCompletionDistance), so the #727
+	 * state-derived start cannot land on them from most of a boss room. Area
+	 * fields on these steps are jump-confirmation only -- the completion
+	 * trigger is unchanged. DECREMENT as the corpus audit closes steps (Giant
+	 * Mole was the first); the class detector is tracked toolkit-side
+	 * (runelite-dev-toolkit#50). Instanced-arena steps whose live coords are
+	 * unknowable are by-design members of this backlog (#775) and will stay
+	 * above zero.
+	 */
+	private static final int AREA_UNCONFIRMABLE_KILL_STEP_CEILING = 347;
 
 	private DropRateDatabase database;
 
@@ -195,6 +208,42 @@ public class GuidanceConfigInvariantsRegressionTest
 			"ARRIVE_AT_ZONE steps with no completionZone never auto-advance "
 				+ "(GuidanceStep.getZone / CompletionChecker.java:169-170); ceiling is "
 				+ ARRIVE_AT_ZONE_MISSING_ZONE_CEILING + " but found " + bad.size() + ": " + bad);
+	}
+
+	@Test
+	@DisplayName("area-unconfirmable kill/manual step backlog does not grow (#803)")
+	public void areaUnconfirmableKillStepRatchet() throws Exception
+	{
+		// getCompletionDistance() substitutes a 5-tile default, so the ratchet
+		// must read the raw field to detect a missing EXPLICIT area.
+		Field rawDistance = GuidanceStep.class.getDeclaredField("completionDistance");
+		rawDistance.setAccessible(true);
+		List<String> bad = new ArrayList<>();
+		for (CollectionLogSource source : database.getAllSources())
+		{
+			List<GuidanceStep> steps = source.getGuidanceSteps();
+			if (steps == null)
+			{
+				continue;
+			}
+			for (int i = 0; i < steps.size(); i++)
+			{
+				GuidanceStep step = steps.get(i);
+				CompletionCondition cond = step.getCompletionCondition();
+				if ((cond == CompletionCondition.ACTOR_DEATH || cond == CompletionCondition.MANUAL)
+					&& step.getWorldX() > 0
+					&& rawDistance.getInt(step) <= 0
+					&& step.getZone() == null)
+				{
+					bad.add(source.getName() + " step[" + i + "]");
+				}
+			}
+		}
+		assertTrue(bad.size() <= AREA_UNCONFIRMABLE_KILL_STEP_CEILING,
+			"ACTOR_DEATH/MANUAL steps with worldX/Y but no explicit completionDistance/zone are "
+				+ "invisible to the state-derived start beyond the 5-tile default "
+				+ "(GuidanceSequencer.playerIsConfirmablyInStepArea); ceiling is "
+				+ AREA_UNCONFIRMABLE_KILL_STEP_CEILING + " but found " + bad.size());
 	}
 
 	// ---- helper -------------------------------------------------------------
