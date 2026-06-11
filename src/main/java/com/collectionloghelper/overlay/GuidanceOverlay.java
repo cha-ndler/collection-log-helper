@@ -48,6 +48,7 @@ import net.runelite.api.Player;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPanel;
 import net.runelite.client.ui.overlay.OverlayPosition;
@@ -78,6 +79,9 @@ public class GuidanceOverlay extends OverlayPanel
 	private final Client client;
 	private final CollectionLogHelperConfig config;
 
+	/** Shared floating collection-log book marker, drawn above NPC targets (#802). */
+	private final GuidanceTargetMarker targetMarker;
+
 	@Inject
 	private TooltipManager tooltipManager;
 
@@ -104,10 +108,11 @@ public class GuidanceOverlay extends OverlayPanel
 	private volatile String cachedNpcLabel;
 
 	@Inject
-	private GuidanceOverlay(Client client, CollectionLogHelperConfig config)
+	private GuidanceOverlay(Client client, CollectionLogHelperConfig config, ItemManager itemManager)
 	{
 		this.client = client;
 		this.config = config;
+		this.targetMarker = new GuidanceTargetMarker(itemManager);
 		setPosition(OverlayPosition.TOP_LEFT);
 		setLayer(OverlayLayer.ABOVE_SCENE);
 		setMovable(true);
@@ -320,6 +325,8 @@ public class GuidanceOverlay extends OverlayPanel
 			}
 		}
 
+		drawTargetMarker(graphics, npc);
+
 		// Draw downward-pointing arrow above the NPC (reuse hull from HULL case if available)
 		Shape arrowHull = npc.getConvexHull();
 		if (arrowHull != null)
@@ -355,6 +362,25 @@ public class GuidanceOverlay extends OverlayPanel
 				renderOutlinedText(graphics, textPoint, label, overlayColor);
 			}
 		}
+	}
+
+	/**
+	 * Draws the floating collection-log marker above the NPC, same float-above
+	 * pattern as the object and ground-item overlays (#802). The z-offset is
+	 * {@code getLogicalHeight()}-relative (local height units) so the marker
+	 * clears the model and the action label, which renders at
+	 * {@code logicalHeight + ARROW_HEIGHT + ARROW_GAP + 40}. No-op when the
+	 * config toggle is off. The shared marker caches its sprite/glyph, so the
+	 * render path allocates nothing per frame.
+	 */
+	private void drawTargetMarker(Graphics2D graphics, NPC npc)
+	{
+		if (!config.showGuidanceTargetMarker())
+		{
+			return;
+		}
+		targetMarker.draw(graphics, client, npc.getLocalLocation(),
+			npc.getLogicalHeight() + ARROW_HEIGHT + ARROW_GAP + 90);
 	}
 
 	/**
