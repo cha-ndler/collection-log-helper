@@ -55,6 +55,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -188,9 +189,12 @@ public class GuidanceOverlayCoordinator
 	/**
 	 * Optional callback invoked after a guidance sequence completes and overlays
 	 * are cleared. Used by the plugin for auto-advance and panel rebuild logic.
+	 * Receives the source whose sequence just completed — captured BEFORE
+	 * deactivation, because deactivating stops the sequencer and nulls its
+	 * active source (#801).
 	 */
 	@Setter
-	private Runnable onSequenceCompleteCallback;
+	private Consumer<CollectionLogSource> onSequenceCompleteCallback;
 
 	@Inject
 	GuidanceOverlayCoordinator(
@@ -667,13 +671,16 @@ public class GuidanceOverlayCoordinator
 	 */
 	private void onSequenceComplete()
 	{
-		String sourceName = guidanceSequencer.getActiveSource() != null
-			? guidanceSequencer.getActiveSource().getName() : "unknown";
+		// Capture BEFORE deactivateGuidance(): deactivation stops the sequencer
+		// and nulls its active source, which is exactly how the not-unlocked
+		// re-activate guard lost its source context live (#801).
+		CollectionLogSource completedSource = guidanceSequencer.getActiveSource();
+		String sourceName = completedSource != null ? completedSource.getName() : "unknown";
 		deactivateGuidance();
 		log.debug("Guidance sequence complete for {}", sourceName);
 		if (onSequenceCompleteCallback != null)
 		{
-			onSequenceCompleteCallback.run();
+			onSequenceCompleteCallback.accept(completedSource);
 		}
 	}
 
