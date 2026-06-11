@@ -765,4 +765,74 @@ public class DropRateDatabaseTest
 				zone.contains(new WorldPoint(surface.getX(), surface.getY(), 2)),"Zone must not match plane 2 at surface for " + name);
 		}
 	}
+
+	/**
+	 * Regression test for #806: dungeon-entrance steps (an entrance object the
+	 * player climbs/enters) must complete on the INSIDE of the destination, not
+	 * on surface proximity. The live bug: Thermonuclear step 2's
+	 * ARRIVE_AT_TILE r=10 auto-completed on the SURFACE while the player was
+	 * still outside the cave, so the entrance glow vanished in a narrow
+	 * proximity band (Scurrius's manhole step could even insta-complete,
+	 * because the preceding travel step ends within its radius).
+	 *
+	 * <p>Each case carries the source name, the entrance step index, the
+	 * surface entrance coord that must NOT complete the step, the underground
+	 * landing coord, and the next step's coord (both must be inside the zone so
+	 * entry always completes the step).
+	 */
+	@Test
+	public void regression_806_entranceSteps_completeOnInsideNotSurfaceProximity()
+	{
+		Object[][] cases = new Object[][]
+		{
+			// { name, stepIndex, surfaceEntrance, undergroundLanding, nextStepCoord }
+			{"Thermonuclear smoke devil", 1, new WorldPoint(2412, 3061, 0), new WorldPoint(2411, 9461, 0), new WorldPoint(2379, 9452, 0)},
+			{"Scurrius",                  2, new WorldPoint(3237, 3458, 0), new WorldPoint(3237, 9858, 0), new WorldPoint(3299, 9867, 0)},
+		};
+
+		for (Object[] tc : cases)
+		{
+			String name = (String) tc[0];
+			int stepIndex = (Integer) tc[1];
+			WorldPoint surface = (WorldPoint) tc[2];
+			WorldPoint landing = (WorldPoint) tc[3];
+			WorldPoint nextStep = (WorldPoint) tc[4];
+
+			CollectionLogSource source = null;
+			for (CollectionLogSource s : database.getAllSources())
+			{
+				if (name.equals(s.getName()))
+				{
+					source = s;
+					break;
+				}
+			}
+			assertNotNull(source, "Source must exist in drop_rates.json: " + name);
+
+			List<GuidanceStep> steps = source.getGuidanceSteps();
+			assertNotNull(steps, "Source must have guidance steps: " + name);
+			assertTrue(steps.size() > stepIndex, name + " must have a step " + stepIndex);
+
+			GuidanceStep entranceStep = steps.get(stepIndex);
+			assertTrue(entranceStep.getObjectId() > 0,
+				"Entrance step must keep its entrance object target: " + name);
+			assertEquals(
+				CompletionCondition.ARRIVE_AT_ZONE, entranceStep.getCompletionCondition(),
+				"Entrance step must complete by zone, not surface proximity (#806): " + name);
+
+			Zone zone = entranceStep.getZone();
+			assertNotNull(zone, "Entrance step must declare a completionZone: " + name);
+
+			// The #806 bug: standing at the surface entrance must NOT complete the step.
+			assertFalse(zone.contains(surface),
+				"Surface entrance " + surface + " must be OUTSIDE the completion zone for " + name);
+
+			// Entering must always complete it: the landing tile and the next step's
+			// destination are both inside.
+			assertTrue(zone.contains(landing),
+				"Underground landing " + landing + " must be inside the zone for " + name);
+			assertTrue(zone.contains(nextStep),
+				"Next step coord " + nextStep + " must be inside the zone for " + name);
+		}
+	}
 }
