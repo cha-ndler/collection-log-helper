@@ -75,13 +75,14 @@ public class PluginDataManager
 		File pluginDir = new File(RuneLite.RUNELITE_DIR, PLUGIN_DIR_NAME);
 		characterDir = new File(pluginDir, safeName);
 
+		// The per-character path embeds the player name — never log it (T0.7)
 		if (!characterDir.exists() && !characterDir.mkdirs())
 		{
-			log.error("Failed to create plugin data directory: {}", characterDir.getAbsolutePath());
+			log.error("Failed to create plugin data directory under {}", pluginDir.getAbsolutePath());
 			return false;
 		}
 
-		log.debug("Plugin data directory ready: {}", characterDir.getAbsolutePath());
+		log.debug("Plugin data directory ready");
 		return true;
 	}
 
