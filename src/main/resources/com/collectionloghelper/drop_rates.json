@@ -668,8 +668,8 @@
       },
       {
         "description": "Kill Kree'arra. Protect from Missiles, use only ranged or magic (melee cannot hit), Armadyl crossbow with ruby/diamond bolts (e) is the standard loadout.",
-        "worldX": 2844,
-        "worldY": 5280,
+        "worldX": 2832,
+        "worldY": 5302,
         "worldPlane": 2,
         "objectId": 26502,
         "objectInteractAction": "Open",
@@ -679,6 +679,7 @@
           9419
         ],
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 15,
         "completionNpcId": 3162,
         "section": "Combat",
         "recommendedItemIds": [
