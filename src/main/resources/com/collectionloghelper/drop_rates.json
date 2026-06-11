@@ -16071,8 +16071,8 @@
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
-        "npcId": 7638,
-        "interactAction": "Trade",
+        "npcId": 6920,
+        "interactAction": "Rewards",
         "completionCondition": "MANUAL"
       }
     ],
