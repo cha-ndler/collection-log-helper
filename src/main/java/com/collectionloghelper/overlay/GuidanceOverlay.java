@@ -62,9 +62,12 @@ public class GuidanceOverlay extends OverlayPanel
 	private static final Dimension PANEL_PREFERRED_SIZE = new Dimension(MAX_PANEL_WIDTH, 0);
 	/**
 	 * Clearance above an NPC's {@code getLogicalHeight()} for the floating
-	 * collection-log marker, in local height units (#802).
+	 * collection-log marker, in local height units (#802). 40 was not enough —
+	 * the icon overlapped large models (confirmed live on Giant Mole); 90
+	 * matches the headroom the marker effectively had before the arrow/text
+	 * stack was removed.
 	 */
-	private static final int MARKER_CLEARANCE = 40;
+	private static final int MARKER_CLEARANCE = 90;
 	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
 	private static final Color TITLE_COLOR = new Color(255, 200, 0);
 	private static final Color TRAVEL_COLOR = new Color(100, 200, 255);
