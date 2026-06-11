@@ -4616,8 +4616,14 @@
         "requiredItemIds": [
           1506
         ],
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 10,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [
+          2350,
+          9400,
+          2432,
+          9472,
+          0
+        ],
         "section": "Travel"
       },
       {
@@ -24261,8 +24267,14 @@
         "worldPlane": 0,
         "objectId": 882,
         "objectInteractAction": "Climb-down",
-        "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 10,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [
+          3225,
+          9850,
+          3325,
+          9890,
+          0
+        ],
         "section": "Travel"
       },
       {
