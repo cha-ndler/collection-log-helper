@@ -328,14 +328,15 @@
       },
       {
         "description": "Kill Commander Zilyana. Protect from Magic, drop Bree (the ranged minion) first then Starlight, switch to Saradomin brews when Sara hits hard.",
-        "worldX": 2925,
-        "worldY": 5265,
-        "worldPlane": 2,
+        "worldX": 2897,
+        "worldY": 5269,
+        "worldPlane": 0,
         "objectId": 26504,
         "objectInteractAction": "Open",
         "npcId": 2205,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 30,
         "completionNpcId": 2205,
         "section": "Combat",
         "recommendedItemIds": [
