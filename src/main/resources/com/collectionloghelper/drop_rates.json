@@ -1395,6 +1395,7 @@
         "npcId": 319,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 25,
         "completionNpcId": 319
       }
     ],
