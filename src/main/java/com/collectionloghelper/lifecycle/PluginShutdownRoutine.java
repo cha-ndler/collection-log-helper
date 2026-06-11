@@ -63,10 +63,9 @@ import net.runelite.client.ui.NavigationButton;
  *       state, inventory state, slayer state, travel caps, collection state,
  *       plugin data manager).</li>
  *   <li>Shut down the shared HTTP result executor (if present).  The
- *       collectionlog.net importer and TempleOSRS syncer no longer manage
- *       their own executors (#478, #479) -- the runtime-provided
- *       {@code ScheduledExecutorService} they use is shut down by the
- *       RuneLite runtime, not by this routine.</li>
+ *       TempleOSRS syncer no longer manages its own executor (#478, #479)
+ *       -- the runtime-provided {@code ScheduledExecutorService} it uses is
+ *       shut down by the RuneLite runtime, not by this routine.</li>
  *   <li>Clear plugin-private state via the {@code clearPluginState}
  *       callback -- the plugin owns {@code sourcesWithMissingItems},
  *       {@code pendingPanelRebuild}, {@code rankedSourcesDirty}, and
