@@ -264,8 +264,7 @@ public class CollectionLogHelperPlugin extends Plugin
 			this::markPanelRebuildAndRankedDirty,
 			this::getRankedSources,
 			this::activateGuidance,
-			guidance.getGuidanceSequencer()::wasTargetSlotUnlocked,
-			guidance.getGuidanceSequencer()::getActiveSource);
+			guidance.getGuidanceSequencer()::wasTargetSlotUnlocked);
 		guidance.getGuidanceCoordinator().setOnSequenceCompleteCallback(
 			collectionStateChangeHandler::handleSequenceComplete);
 		// Wire coordinator into resolver (post-construction, avoids circular injection)

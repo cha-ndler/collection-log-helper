@@ -25,7 +25,9 @@
 package com.collectionloghelper.lifecycle;
 
 import com.collectionloghelper.CollectionLogHelperConfig;
+import com.collectionloghelper.data.CollectionLogItem;
 import com.collectionloghelper.data.CollectionLogSource;
+import com.collectionloghelper.data.PlayerCollectionState;
 import com.collectionloghelper.di.DataModule;
 import com.collectionloghelper.di.EfficiencyModule;
 import com.collectionloghelper.di.GuidanceModule;
@@ -35,6 +37,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +49,7 @@ import net.runelite.client.RuneLite;
  * lived inline in {@link com.collectionloghelper.CollectionLogHelperPlugin}:
  *
  * <ol>
- *   <li>{@link #handleSequenceComplete()} -- callback invoked by
+ *   <li>{@link #handleSequenceComplete(CollectionLogSource)} -- callback invoked by
  *       {@code GuidanceOverlayCoordinator} when an active guidance sequence
  *       finishes.  Flags a panel rebuild and ranked-source recompute, and
  *       auto-activates guidance for the next top efficiency pick when
@@ -62,7 +65,7 @@ import net.runelite.client.RuneLite;
  *       per-character data manager has not resolved a player name yet.</li>
  * </ol>
  *
- * <p>The plugin wires three narrow callbacks once in {@code startUp()}:
+ * <p>The plugin wires four narrow callbacks once in {@code startUp()}:
  * <ul>
  *   <li>{@code onSequenceCompleteFlags} -- toggles {@code pendingPanelRebuild}
  *       and {@code rankedSourcesDirty} on the plugin.</li>
@@ -74,7 +77,7 @@ import net.runelite.client.RuneLite;
  *       wrap stays in one place.</li>
  * </ul>
  *
- * <p>Performance: {@link #handleSequenceComplete()} only fires when a guidance
+ * <p>Performance: {@link #handleSequenceComplete(CollectionLogSource)} only fires when a guidance
  * sequence completes (rare, user-driven).  Allocation discipline still holds
  * on guard-fail paths -- when auto-advance is disabled the method returns
  * after the flag callback with no allocations (see #527 / #523 lessons).
@@ -101,12 +104,6 @@ public class CollectionStateChangeHandler
 	 * {@link com.collectionloghelper.guidance.GuidanceSequencer#wasTargetSlotUnlocked()}.
 	 */
 	private Supplier<Boolean> targetSlotUnlockedSupplier;
-	/**
-	 * Returns the currently active {@link CollectionLogSource}, or {@code null}
-	 * when no guidance is active.  Wired to
-	 * {@link com.collectionloghelper.guidance.GuidanceSequencer#getActiveSource()}.
-	 */
-	private Supplier<CollectionLogSource> activeSourceSupplier;
 
 	@Inject
 	public CollectionStateChangeHandler(
@@ -133,14 +130,12 @@ public class CollectionStateChangeHandler
 		Runnable onSequenceCompleteFlags,
 		Supplier<List<ScoredItem>> rankedSourcesSupplier,
 		BiConsumer<CollectionLogSource, Integer> activateGuidanceCallback,
-		Supplier<Boolean> targetSlotUnlockedSupplier,
-		Supplier<CollectionLogSource> activeSourceSupplier)
+		Supplier<Boolean> targetSlotUnlockedSupplier)
 	{
 		this.onSequenceCompleteFlags = onSequenceCompleteFlags;
 		this.rankedSourcesSupplier = rankedSourcesSupplier;
 		this.activateGuidanceCallback = activateGuidanceCallback;
 		this.targetSlotUnlockedSupplier = targetSlotUnlockedSupplier;
-		this.activeSourceSupplier = activeSourceSupplier;
 	}
 
 	/**
@@ -148,19 +143,30 @@ public class CollectionStateChangeHandler
 	 * sequence completes.  Flags a panel rebuild and ranked-source recompute.
 	 *
 	 * <p>Auto-advance (when {@link CollectionLogHelperConfig#autoAdvanceGuidance()}
-	 * is enabled) now gates on whether the active source's target collection-log
+	 * is enabled) gates on whether the completed source's target collection-log
 	 * slot actually unlocked during the sequence:
 	 * <ul>
 	 *   <li>Slot unlocked → advance to the next top efficiency pick as before.</li>
-	 *   <li>Slot NOT unlocked → re-activate guidance on the same source so the
-	 *       player loops (e.g., repeated boss kills) until the drop arrives.</li>
+	 *   <li>Slot NOT unlocked and the source still has missing items →
+	 *       re-activate guidance on the same source so the player loops
+	 *       (e.g., repeated boss kills) until the drop arrives.</li>
+	 *   <li>Slot NOT unlocked but every item is already obtained → advance; a
+	 *       fully-obtained source can only ever complete drop-less, so
+	 *       re-activating it would loop forever (#801, live Castle Wars case).</li>
 	 * </ul>
 	 *
 	 * <p>This prevents the plugin from abandoning a source mid-grind just because
 	 * the player completed the last guidance step (e.g., "kill boss") without
 	 * receiving the target item.
+	 *
+	 * @param completedSource the source whose sequence just completed, captured
+	 *                        by the coordinator BEFORE deactivation — by callback
+	 *                        time the sequencer's own active source is already
+	 *                        null (#801). May be {@code null} when no source
+	 *                        context exists, in which case auto-advance falls
+	 *                        through to the ranked pick.
 	 */
-	public void handleSequenceComplete()
+	public void handleSequenceComplete(@Nullable CollectionLogSource completedSource)
 	{
 		if (onSequenceCompleteFlags != null)
 		{
@@ -178,20 +184,20 @@ public class CollectionStateChangeHandler
 		boolean slotUnlocked = targetSlotUnlockedSupplier != null
 			&& Boolean.TRUE.equals(targetSlotUnlockedSupplier.get());
 
-		if (!slotUnlocked)
+		if (!slotUnlocked && completedSource != null)
 		{
-			// Target slot did not unlock — loop back on the same source.
-			CollectionLogSource currentSource = activeSourceSupplier != null
-				? activeSourceSupplier.get()
-				: null;
-			if (currentSource != null)
+			if (hasMissingItems(completedSource))
 			{
+				// Target slot did not unlock — loop back on the same source.
 				log.debug("Sequence complete but target slot not unlocked for {} — re-activating",
-					currentSource.getName());
-				activateGuidanceCallback.accept(currentSource, null);
+					completedSource.getName());
+				activateGuidanceCallback.accept(completedSource, null);
 				return;
 			}
-			// No active source context available — fall through to normal advance.
+			// Every item already obtained: this source can only ever complete
+			// drop-less. Fall through to the ranked advance instead of looping.
+			log.debug("Sequence complete for {} with no missing items — advancing",
+				completedSource.getName());
 		}
 
 		if (rankedSourcesSupplier == null)
@@ -213,6 +219,29 @@ public class CollectionStateChangeHandler
 					: null;
 				activateGuidanceCallback.accept(topPick.getSource(), targetItemId);
 			});
+	}
+
+	/**
+	 * Returns true when the source still has at least one unobtained
+	 * collection-log item. Guards the not-unlocked re-activation loop: a
+	 * fully-obtained source must advance, never re-loop (#801).
+	 */
+	private boolean hasMissingItems(CollectionLogSource source)
+	{
+		List<CollectionLogItem> items = source.getItems();
+		if (items == null)
+		{
+			return false;
+		}
+		PlayerCollectionState collectionState = data.getCollectionState();
+		for (CollectionLogItem item : items)
+		{
+			if (!collectionState.isItemObtained(item.getItemId()))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
