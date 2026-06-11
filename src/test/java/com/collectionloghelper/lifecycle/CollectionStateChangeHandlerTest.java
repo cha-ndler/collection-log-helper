@@ -103,8 +103,7 @@ public class CollectionStateChangeHandlerTest
 			() -> flagsCalled = true,
 			Collections::emptyList,
 			activateGuidanceCallback,
-			() -> true,   // slot unlocked by default so existing advance tests still pass
-			() -> null);
+			() -> true);   // slot unlocked by default so existing advance tests still pass
 	}
 
 	// ── handleSequenceComplete ────────────────────────────────────────────────
@@ -113,7 +112,7 @@ public class CollectionStateChangeHandlerTest
 	public void handleSequenceComplete_alwaysFiresFlagCallback()
 	{
 		when(config.autoAdvanceGuidance()).thenReturn(false);
-		handler.handleSequenceComplete();
+		handler.handleSequenceComplete(null);
 		assertTrue( flagsCalled,"flag callback must always fire so the panel rebuilds");
 	}
 
@@ -121,7 +120,7 @@ public class CollectionStateChangeHandlerTest
 	public void handleSequenceComplete_autoAdvanceDisabled_doesNotActivate()
 	{
 		when(config.autoAdvanceGuidance()).thenReturn(false);
-		handler.handleSequenceComplete();
+		handler.handleSequenceComplete(null);
 		verifyNoInteractions(activateGuidanceCallback);
 	}
 
@@ -130,7 +129,7 @@ public class CollectionStateChangeHandlerTest
 	{
 		when(config.autoAdvanceGuidance()).thenReturn(true);
 		// supplier already returns Collections.emptyList()
-		handler.handleSequenceComplete();
+		handler.handleSequenceComplete(null);
 		verifyNoInteractions(activateGuidanceCallback);
 		assertTrue(flagsCalled);
 	}
@@ -147,9 +146,8 @@ public class CollectionStateChangeHandlerTest
 			() -> flagsCalled = true,
 			() -> java.util.Arrays.asList(locked, unlocked),
 			activateGuidanceCallback,
-			() -> true,
-			() -> null);
-		handler.handleSequenceComplete();
+			() -> true);
+		handler.handleSequenceComplete(null);
 		verify(activateGuidanceCallback).accept(unlockedSource, null);
 		verify(activateGuidanceCallback, never()).accept(lockedSource, null);
 	}
@@ -162,9 +160,8 @@ public class CollectionStateChangeHandlerTest
 			() -> flagsCalled = true,
 			() -> null,
 			activateGuidanceCallback,
-			() -> true,
-			() -> null);
-		handler.handleSequenceComplete();
+			() -> true);
+		handler.handleSequenceComplete(null);
 		verifyNoInteractions(activateGuidanceCallback);
 	}
 
@@ -172,9 +169,9 @@ public class CollectionStateChangeHandlerTest
 	public void handleSequenceComplete_nullCallbacks_doNotNpe()
 	{
 		when(config.autoAdvanceGuidance()).thenReturn(true);
-		handler.setCallbacks(null, null, null, null, null);
+		handler.setCallbacks(null, null, null, null);
 		// Must complete without throwing
-		handler.handleSequenceComplete();
+		handler.handleSequenceComplete(null);
 	}
 
 	// ── rebuildSourcesWithMissingItems ────────────────────────────────────────
@@ -245,26 +242,52 @@ public class CollectionStateChangeHandlerTest
 	// ── slot-unlock gate (#598) ───────────────────────────────────────────────
 
 	/**
-	 * Regression: last step completes, target slot did NOT unlock.
+	 * Regression: last step completes, target slot did NOT unlock and the
+	 * source still has missing items.
 	 * Auto-advance must loop back on the same source, not advance to the next one.
 	 */
 	@Test
 	public void handleSequenceComplete_slotNotUnlocked_reActivatesSameSource()
 	{
 		when(config.autoAdvanceGuidance()).thenReturn(true);
-		CollectionLogSource activeSource = minimalSource("Active Source");
+		when(dataModule.getCollectionState()).thenReturn(collectionState);
+		when(collectionState.isItemObtained(org.mockito.ArgumentMatchers.anyInt())).thenReturn(false);
+		CollectionLogSource completedSource = sourceWithOneItem("Active Source");
 		CollectionLogSource nextSource = minimalSource("Next Source");
 		ScoredItem nextItem = new ScoredItem(nextSource, 50.0, 1, "N", false, 50.0, null, 50.0);
 		handler.setCallbacks(
 			() -> flagsCalled = true,
 			() -> java.util.Collections.singletonList(nextItem),
 			activateGuidanceCallback,
-			() -> false,              // slot did NOT unlock
-			() -> activeSource);     // active source at sequence-complete time
-		handler.handleSequenceComplete();
-		// Must re-activate the current source, not advance to nextSource
-		verify(activateGuidanceCallback).accept(activeSource, null);
+			() -> false);             // slot did NOT unlock
+		handler.handleSequenceComplete(completedSource);
+		// Must re-activate the completed source, not advance to nextSource
+		verify(activateGuidanceCallback).accept(completedSource, null);
 		verify(activateGuidanceCallback, never()).accept(nextSource, null);
+	}
+
+	/**
+	 * Regression (#801, live Castle Wars case): slot did NOT unlock but every
+	 * item of the completed source is already obtained. Re-activating would
+	 * loop forever — auto-advance must move to the next ranked source.
+	 */
+	@Test
+	public void handleSequenceComplete_slotNotUnlocked_fullyObtainedSource_advances()
+	{
+		when(config.autoAdvanceGuidance()).thenReturn(true);
+		when(dataModule.getCollectionState()).thenReturn(collectionState);
+		when(collectionState.isItemObtained(org.mockito.ArgumentMatchers.anyInt())).thenReturn(true);
+		CollectionLogSource completedSource = sourceWithOneItem("Castle Wars");
+		CollectionLogSource nextSource = minimalSource("Next Source");
+		ScoredItem nextItem = new ScoredItem(nextSource, 50.0, 1, "N", false, 50.0, null, 50.0);
+		handler.setCallbacks(
+			() -> flagsCalled = true,
+			() -> java.util.Collections.singletonList(nextItem),
+			activateGuidanceCallback,
+			() -> false);             // slot did NOT unlock
+		handler.handleSequenceComplete(completedSource);
+		verify(activateGuidanceCallback).accept(nextSource, null);
+		verify(activateGuidanceCallback, never()).accept(completedSource, null);
 	}
 
 	/**
@@ -275,19 +298,18 @@ public class CollectionStateChangeHandlerTest
 	public void handleSequenceComplete_slotUnlocked_advancesToNextSource()
 	{
 		when(config.autoAdvanceGuidance()).thenReturn(true);
-		CollectionLogSource activeSource = minimalSource("Active Source");
+		CollectionLogSource completedSource = sourceWithOneItem("Active Source");
 		CollectionLogSource nextSource = minimalSource("Next Source");
 		ScoredItem nextItem = new ScoredItem(nextSource, 50.0, 1, "N", false, 50.0, null, 50.0);
 		handler.setCallbacks(
 			() -> flagsCalled = true,
 			() -> java.util.Collections.singletonList(nextItem),
 			activateGuidanceCallback,
-			() -> true,              // slot DID unlock
-			() -> activeSource);
-		handler.handleSequenceComplete();
+			() -> true);              // slot DID unlock
+		handler.handleSequenceComplete(completedSource);
 		// Must advance to the next ranked source, not loop back
 		verify(activateGuidanceCallback).accept(nextSource, null);
-		verify(activateGuidanceCallback, never()).accept(activeSource, null);
+		verify(activateGuidanceCallback, never()).accept(completedSource, null);
 	}
 
 	// ── helpers ───────────────────────────────────────────────────────────────
@@ -305,6 +327,25 @@ public class CollectionStateChangeHandlerTest
 			null,
 			null, null, 0, null, 0,
 			Collections.emptyList()
+		, null, null, null);
+	}
+
+	/** Like {@link #minimalSource} but with one collection-log item, so the
+	 * #801 missing-items guard has something to evaluate. */
+	private static CollectionLogSource sourceWithOneItem(String name)
+	{
+		return new CollectionLogSource(
+			name,
+			CollectionLogCategory.BOSSES,
+			0, 0, 0,
+			0, 0,
+			null, null, null, 0.0,
+			null, 0, false, 0,
+			null, 0, null, null,
+			null,
+			null, null, 0, null, 0,
+			Collections.singletonList(new com.collectionloghelper.data.CollectionLogItem(
+				1234, "Test Item", 1.0 / 128, false, null, 0, 0, false, false))
 		, null, null, null);
 	}
 }

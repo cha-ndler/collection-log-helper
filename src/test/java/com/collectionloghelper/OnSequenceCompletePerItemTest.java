@@ -103,8 +103,7 @@ public class OnSequenceCompletePerItemTest
 			() -> { /* flag toggle no-op for this test */ },
 			() -> rankedSources,
 			activateGuidanceCallback,
-			() -> true,   // slot unlocked — these tests verify advance-to-next behaviour
-			() -> null);
+			() -> true);   // slot unlocked — these tests verify advance-to-next behaviour
 		when(config.autoAdvanceGuidance()).thenReturn(true);
 	}
 
@@ -122,7 +121,7 @@ public class OnSequenceCompletePerItemTest
 		ScoredItem topPick = new ScoredItem(source, 100.0, 1, "Best", false, 100.0, bestItem, 100.0);
 		rankedSources = Collections.singletonList(topPick);
 
-		handler.handleSequenceComplete();
+		handler.handleSequenceComplete(null);
 
 		ArgumentCaptor<Integer> itemIdCaptor = ArgumentCaptor.forClass(Integer.class);
 		verify(activateGuidanceCallback).accept(eq(source), itemIdCaptor.capture());
@@ -142,7 +141,7 @@ public class OnSequenceCompletePerItemTest
 		ScoredItem topPick = new ScoredItem(source, 50.0, 2, "Some reason", false, 50.0, null, 0.0);
 		rankedSources = Collections.singletonList(topPick);
 
-		handler.handleSequenceComplete();
+		handler.handleSequenceComplete(null);
 
 		verify(activateGuidanceCallback).accept(eq(source), isNull());
 	}
