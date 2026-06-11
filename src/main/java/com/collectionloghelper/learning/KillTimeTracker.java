@@ -364,11 +364,15 @@ public class KillTimeTracker
 					windows.put(entry.getKey(), deque);
 				}
 			}
-			log.debug("KillTimeTracker: loaded {} sources from {}", windows.size(), dataFile);
+			// Log the file name only — the full path embeds the player name (T0.7)
+			log.debug("KillTimeTracker: loaded {} sources from {}", windows.size(), dataFile.getName());
 		}
 		catch (IOException e)
 		{
-			log.warn("KillTimeTracker: failed to load {}", dataFile, e);
+			// No throwable attached: an IO exception message embeds the full
+			// per-player path (T0.7) — the exception type is diagnostic enough
+			log.warn("KillTimeTracker: failed to load {}: {}",
+				dataFile.getName(), e.getClass().getSimpleName());
 		}
 	}
 
@@ -467,7 +471,8 @@ public class KillTimeTracker
 		}
 		catch (IOException e)
 		{
-			log.warn("KillTimeTracker: failed to save {}", dataFile, e);
+			log.warn("KillTimeTracker: failed to save {}: {}",
+				dataFile.getName(), e.getClass().getSimpleName());
 			// Re-mark dirty so the next scheduleSave retries.
 			dirty.set(true);
 		}

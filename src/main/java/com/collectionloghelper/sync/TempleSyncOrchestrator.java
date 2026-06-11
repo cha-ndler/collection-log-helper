@@ -130,15 +130,16 @@ public class TempleSyncOrchestrator
 			return;
 		}
 
-		log.debug("Requesting TempleOSRS KC sync for '{}'", playerName);
+		// Never log the RSN itself (T0.7)
+		log.debug("Requesting TempleOSRS KC sync for the current player");
 
 		Future<SyncResult> future = templeOsrsKcSyncer.syncKc(playerName);
 
 		// Wait for the result on the shared daemon executor so the EDT is not blocked
-		resultExecutor.submit(() -> awaitResult(future, playerName, panel));
+		resultExecutor.submit(() -> awaitResult(future, panel));
 	}
 
-	private void awaitResult(Future<SyncResult> future, String playerName, CollectionLogHelperPanel panel)
+	private void awaitResult(Future<SyncResult> future, CollectionLogHelperPanel panel)
 	{
 		SyncResult result;
 		try
@@ -147,7 +148,7 @@ public class TempleSyncOrchestrator
 		}
 		catch (Exception e)
 		{
-			log.warn("TempleOSRS sync future failed for '{}': {}", playerName, e.getMessage());
+			log.warn("TempleOSRS sync future failed: {}", e.getMessage());
 			result = SyncResult.failure("Sync timed out or failed: " + e.getMessage());
 		}
 
