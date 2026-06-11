@@ -1089,6 +1089,7 @@
         "npcId": 5862,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 140,
         "completionNpcId": 5862,
         "section": "Combat",
         "recommendedItemIds": [
