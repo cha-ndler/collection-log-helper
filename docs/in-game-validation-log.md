@@ -9,7 +9,44 @@
 > - `[!]` — Regression / failed (file a new issue and cross-link)
 > - `[?]` — Inconclusive (couldn't reproduce / state-dependent)
 
-> **Last updated**: 2026-06-08 (session: actuation-seam calibration; #485 confirmed fixed, #729 control)
+> **Last updated**: 2026-06-10 (session: operator + actuation seam; 14 checklist rows closed, 6 findings filed)
+
+---
+
+## Validation session — 2026-06-10 *(operator live + dev bridge harness 0.2; full receipts in `guidance-audit/acceptance-runs/2026-06-10.md`)*
+
+Hybrid pass: synthetic local events drove engine states while the operator drove real
+teleports, walks, banking, and combat. Every verdict is anchored to a raw client.log line,
+a bridge `state.read`, or a screenshot under `docs/screenshots/validation-2026-06-10/`.
+
+| Row | Status | One-line reason |
+|---|---|---|
+| T0.5 zero CLH traces in active play | `[x]` | 12-min real Giant Mole combat window: 0 CLH frames/WARNs (lone NPE = worldhopper, foreign). |
+| T0.6 stop→restart clean cycle | `[x]` | Zulrah activate→stop→re-activate: state + overlay clean both ways, no orphans. |
+| T0.7 privacy (no RSN/coords in logs) | `[!]` | CLH logs the RSN at INFO/WARN (efficiency export + sync lines) — issue filed; behind opt-in flags. |
+| T1.1 walk-in travel auto-advance | `[x]` | Real on-foot ARRIVE_AT_ZONE fired (Smoke Devil zone 14:58:18) + synthetic Slepe north-edge walk-in. |
+| T1.2 Hard Trails panel + advance | `[x]` | Long text inside its box; GE arrival auto-advanced step 1→2; clue steps MANUAL by design. |
+| T1.4 sync surfaces | `[~]` | TempleOSRS round-trip clean + dead collectionlog.net host failed gracefully (no hang); populate/invalid-RSN/consent-race remain needs-human. |
+| T1.5 AIQ fairy ring | `[x]` | Skeletal Wyvern overlay reads "Fairy ring AIQ -> Mudskipper Point" (desc + travel tip). |
+| T2.6 Recommended strip + bank-scan colors | `[x]` | Flamtaer bag red MISSING below Tinderbox gold IN_BANK; green HELD closed on Swordfish. |
+| T2.7 "(from activity)" tag | `[x]` | Tithe Farm renders "Gricoller's can (from activity)"; tag needs req/rec id overlap (only Tithe has one). |
+| T2.8 auto-stop on obtain / not mid-loop | `[x]` | Wyvern: "completing guidance" on obtain; Shades loop step: "mid-loop — keeping guidance active". |
+| T2.9 depletion reset + re-bank latch | `[x]` | Real deposit → "Loop depleted... parking on restock step 1"; real withdraw → "Restock complete... resuming". |
+| T2.10 glow thin + book marker | `[x]` | Object variant full PASS (smoky cave: outline + book sprite). NPC variant: glow clean but no marker → issue filed. |
+| T2.11 recurring highlight past first pickup | `[ ]` | needs-human: requires repeated real ground pickups on a recurring-gather source (recipe in needs-human.md). |
+| T2.12 overlay vs panel availability | `[x]` | Wyvern bank step: 5 items, mixed states, overlay == panel == bridge state, item-for-item. |
+| T2.13 mid-activity forward start (positive) | `[x]` | Two literal "State-derived start" receipts (Giant Mole in-lair, Castle Wars lobby) + park landing on kill step. |
+| T2.14 Swordfish/Aerial recommended data | `[x]` | Dragon+Infernal harpoon (no halo); Knife (no pearl-rod typo); statuses live against real bank. |
+| T3.1 Slepe ARRIVE_AT_ZONE confirm | `[x]` | Zone fires for walk-in (this session) and medallion landing (06-08); overlay anchor unchanged. |
+
+**Findings logged** (issues to file; fix separately): (1) drop-less sequence completion abandons the grind —
+re-activate guard reads a null source because `deactivateGuidance()` runs before the
+completion callback (live repro x2 on Giant Mole); (2) NPC targets never render the
+clog-book marker (`GuidanceTargetMarker` only wired to object/ground-item overlays);
+(3) boss kill steps lack `completionDistance`/zone so mid-room activation strands on the
+travel step; (4) RSN written to client.log; (5) Castle Wars Lanthus npcId 1295 is
+"Mort'ton local" — Lanthus is 11650 (cache receipt; no glow observed); (6) entrance-object
+highlight only renders in a surface-proximity sweet spot — should persist until actual entry.
 
 ---
 
