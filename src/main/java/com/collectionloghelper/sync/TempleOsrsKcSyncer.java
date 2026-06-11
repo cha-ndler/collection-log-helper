@@ -156,7 +156,7 @@ public class TempleOsrsKcSyncer
 		// while the sync is off.
 		if (!config.enableTempleOsrsSync())
 		{
-			log.debug("TempleOSRS sync disabled in config; skipping request for '{}'", username);
+			log.debug("TempleOSRS sync disabled in config; skipping request");
 			return SyncResult.failure("TempleOSRS sync is disabled in settings");
 		}
 
@@ -165,8 +165,9 @@ public class TempleOsrsKcSyncer
 			return SyncResult.failure("Username is empty");
 		}
 
+		// The URL embeds the RSN — never log the name or the full URL (T0.7)
 		String url = BASE_URL + "?player=" + encodeUsername(username.trim());
-		log.debug("Fetching TempleOSRS KC for '{}': {}", username, url);
+		log.debug("Fetching TempleOSRS KC for the current player");
 
 		Request request = new Request.Builder()
 			.url(url)
@@ -177,8 +178,8 @@ public class TempleOsrsKcSyncer
 		{
 			if (!response.isSuccessful())
 			{
-				String msg = "TempleOSRS returned HTTP " + response.code()
-					+ " for user '" + username + "'";
+				// The failure message is re-logged and posted to chat — keep it RSN-free
+				String msg = "TempleOSRS returned HTTP " + response.code();
 				log.warn(msg);
 				return SyncResult.failure(msg);
 			}
@@ -191,8 +192,7 @@ public class TempleOsrsKcSyncer
 			long contentLength = response.body().contentLength();
 			if (contentLength > MAX_RESPONSE_BYTES)
 			{
-				log.warn("TempleOSRS response too large ({} bytes) for user '{}'",
-					contentLength, username);
+				log.warn("TempleOSRS response too large ({} bytes)", contentLength);
 				return SyncResult.failure("TempleOSRS response exceeded size cap");
 			}
 
@@ -203,8 +203,7 @@ public class TempleOsrsKcSyncer
 			}
 			if (body.length() > MAX_RESPONSE_BYTES)
 			{
-				log.warn("TempleOSRS response body exceeded {} bytes for user '{}'",
-					MAX_RESPONSE_BYTES, username);
+				log.warn("TempleOSRS response body exceeded {} bytes", MAX_RESPONSE_BYTES);
 				return SyncResult.failure("TempleOSRS response exceeded size cap");
 			}
 
@@ -212,14 +211,12 @@ public class TempleOsrsKcSyncer
 		}
 		catch (IOException e)
 		{
-			log.warn("Network error fetching TempleOSRS KC for '{}': {}",
-				username, e.getMessage());
+			log.warn("Network error fetching TempleOSRS KC: {}", e.getMessage());
 			return SyncResult.failure("Network error: " + e.getMessage());
 		}
 		catch (Exception e)
 		{
-			log.warn("Unexpected error fetching TempleOSRS KC for '{}': {}",
-				username, e.getMessage());
+			log.warn("Unexpected error fetching TempleOSRS KC: {}", e.getMessage());
 			return SyncResult.failure("Unexpected error: " + e.getMessage());
 		}
 	}
