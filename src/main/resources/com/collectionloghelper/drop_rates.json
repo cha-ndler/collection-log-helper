@@ -18279,7 +18279,7 @@
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
-        "npcId": 5258,
+        "npcId": 1656,
         "interactAction": "Talk-to",
         "completionCondition": "MANUAL"
       }
