@@ -195,8 +195,8 @@ public class CollectionLogHelperPlugin extends Plugin
 	private BufferedImage collectionLogIcon;
 
 	/**
-	 * Daemon executor used to wait on async sync futures (collectionlog.net import,
-	 * TempleOSRS KC sync) off the EDT/client thread. Lazily created in startUp and
+	 * Daemon executor used to wait on async sync futures (TempleOSRS KC sync)
+	 * off the EDT/client thread. Lazily created in startUp and
 	 * shut down in shutDown; one shared instance prevents the per-click executor
 	 * leak that the ad-hoc {@code Executors.newSingleThreadExecutor()} pattern caused.
 	 */
