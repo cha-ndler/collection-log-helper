@@ -58,7 +58,13 @@ final class GuidanceTargetMarker
 	/** Glyph canvas size in pixels - large enough to be legible as a small book. */
 	private static final int SIZE = 26;
 
-	/** Pixels to lift the marker above the target's canvas point so it floats clear. */
+	/**
+	 * Default z-offset lifting the marker above the target, in LOCAL HEIGHT
+	 * UNITS (the {@code zOffset} of
+	 * {@link Perspective#getCanvasImageLocation}), not screen pixels. Suits
+	 * ground-anchored targets (objects, ground items); entity targets must pass
+	 * a {@code getLogicalHeight()}-relative offset instead (#802).
+	 */
 	private static final int HEIGHT_OFFSET = 80;
 
 	private static final Color BOOK_FILL = new Color(0xE8, 0xC4, 0x6A);
@@ -92,12 +98,23 @@ final class GuidanceTargetMarker
 	 */
 	void draw(Graphics2D graphics, Client client, LocalPoint localPoint)
 	{
+		draw(graphics, client, localPoint, HEIGHT_OFFSET);
+	}
+
+	/**
+	 * As {@link #draw(Graphics2D, Client, LocalPoint)} but with an explicit
+	 * z-offset in local height units — entity targets pass their
+	 * {@code getLogicalHeight()} plus clearance so the marker floats above the
+	 * model instead of blitting into it (#802).
+	 */
+	void draw(Graphics2D graphics, Client client, LocalPoint localPoint, int zOffset)
+	{
 		if (localPoint == null)
 		{
 			return;
 		}
 		BufferedImage image = resolveImage();
-		Point canvasPoint = Perspective.getCanvasImageLocation(client, localPoint, image, HEIGHT_OFFSET);
+		Point canvasPoint = Perspective.getCanvasImageLocation(client, localPoint, image, zOffset);
 		if (canvasPoint != null)
 		{
 			graphics.drawImage(image, canvasPoint.getX(), canvasPoint.getY(), null);
