@@ -166,6 +166,7 @@
         "npcId": 2215,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 30,
         "completionNpcId": 2215,
         "section": "Combat",
         "recommendedItemIds": [
@@ -327,14 +328,15 @@
       },
       {
         "description": "Kill Commander Zilyana. Protect from Magic, drop Bree (the ranged minion) first then Starlight, switch to Saradomin brews when Sara hits hard.",
-        "worldX": 2925,
-        "worldY": 5265,
-        "worldPlane": 2,
+        "worldX": 2897,
+        "worldY": 5269,
+        "worldPlane": 0,
         "objectId": 26504,
         "objectInteractAction": "Open",
         "npcId": 2205,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 30,
         "completionNpcId": 2205,
         "section": "Combat",
         "recommendedItemIds": [
@@ -496,14 +498,15 @@
       },
       {
         "description": "Kill K'ril Tsutsaroth. Protect from Melee, eat through Balfrug + Tstanon prayer drain, watch for K'ril's curse special which strips your prayer in one hit.",
-        "worldX": 2914,
-        "worldY": 5350,
+        "worldX": 2925,
+        "worldY": 5322,
         "worldPlane": 2,
         "objectId": 26505,
         "objectInteractAction": "Open",
         "npcId": 3129,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 15,
         "completionNpcId": 3129,
         "section": "Combat",
         "recommendedItemIds": [
@@ -665,8 +668,8 @@
       },
       {
         "description": "Kill Kree'arra. Protect from Missiles, use only ranged or magic (melee cannot hit), Armadyl crossbow with ruby/diamond bolts (e) is the standard loadout.",
-        "worldX": 2844,
-        "worldY": 5280,
+        "worldX": 2832,
+        "worldY": 5302,
         "worldPlane": 2,
         "objectId": 26502,
         "objectInteractAction": "Open",
@@ -676,6 +679,7 @@
           9419
         ],
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 15,
         "completionNpcId": 3162,
         "section": "Combat",
         "recommendedItemIds": [
@@ -1085,6 +1089,7 @@
         "npcId": 5862,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 140,
         "completionNpcId": 5862,
         "section": "Combat",
         "recommendedItemIds": [
@@ -1266,6 +1271,7 @@
         "npcId": 8621,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 20,
         "completionNpcId": 8621,
         "section": "Combat",
         "recommendedItemIds": [
@@ -1389,6 +1395,7 @@
         "npcId": 319,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 25,
         "completionNpcId": 319
       }
     ],
@@ -1506,6 +1513,7 @@
         "npcId": 965,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 25,
         "completionNpcId": 965
       },
       {
@@ -1516,6 +1524,7 @@
         "npcId": 965,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
+        "completionDistance": 25,
         "completionNpcId": 965
       }
     ],
