@@ -17123,7 +17123,7 @@
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
-        "npcId": 8521,
+        "npcId": 10528,
         "interactAction": "Trade",
         "completionCondition": "MANUAL"
       }
