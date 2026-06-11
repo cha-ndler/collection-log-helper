@@ -18535,7 +18535,7 @@
         "worldX": 1379,
         "worldY": 3634,
         "worldPlane": 0,
-        "npcId": 8523,
+        "npcId": 8521,
         "interactAction": "Trade",
         "completionCondition": "MANUAL",
         "section": "Reward"
