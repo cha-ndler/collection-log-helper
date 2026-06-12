@@ -1893,7 +1893,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to The Scar by taking the rowboat in the Wizards' Tower basement. Bring ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
+        "description": "Travel to The Scar. From the Wizards' Tower basement portal, pass through the Temple of the Eye to the Abyssal Rift, then head east to Wizard Persten's camp and take the rowboat to the Leviathan's island. Bring ranged setup (Bow of faerdhinen, Zaryte crossbow, or Twisted bow) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -1906,7 +1906,7 @@
                 28327
               ]
             },
-            "description": "Use Ring of Shadows -> The Scar to teleport directly. Bring ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
+            "description": "Use Ring of Shadows -> The Scar to teleport directly, then take the rowboat at Wizard Persten's camp east of the Abyssal Rift. Bring ranged setup (Bow of faerdhinen, Zaryte crossbow, or Twisted bow) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
             "travelTip": "Ring of Shadows -> The Scar"
           }
         ],
@@ -1932,7 +1932,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill The Leviathan. Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee) and step at least one tile away from the falling-debris warning at the end of each volley to avoid the permanent rock spawns that one-shot lower-defence accounts.",
+        "description": "Kill The Leviathan. Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee) and step at least one tile away from the falling-debris warning at the end of each volley to avoid the permanent rock spawns that restrict movement and can block line of sight for the remainder of the fight.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
