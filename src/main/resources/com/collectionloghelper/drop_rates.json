@@ -6642,7 +6642,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Bring Scythe of vitur (or Soulreaper axe), Tbow + diamond bolts (e) for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
+        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -6657,7 +6657,7 @@
                 22400
               ]
             },
-            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + diamond bolts (e) for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
+            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
             "travelTip": "Drakan's medallion -> Ver Sinhaza"
           }
         ],
@@ -6672,7 +6672,7 @@
         "section": "Combat"
       },
       {
-        "description": "Clear The Maiden, Pestilent Bloat, Nylocas, Sotetseg, and Xarpus. Refresh supplies at each chest and prep gear for the Verzik fight",
+        "description": "Clear The Maiden, Pestilent Bloat, Nylocas, Sotetseg, and Xarpus. Refresh supplies at the chests after Bloat and Sotetseg and prep gear for the Verzik fight",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -6680,7 +6680,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat Verzik Vitur. P1: pray Protect from Magic and dagger the Athanatos. P2: dodge red ball, switch prayers to match the Nylocas colour. P3: Tbow with diamond bolts (e), pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
+        "description": "Defeat Verzik Vitur. P1: pray Protect from Magic and dagger the Athanatos. P2: dodge the purple projectile, switch prayers to match the Nylocas colour. P3: Tbow with dragon arrows, pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
