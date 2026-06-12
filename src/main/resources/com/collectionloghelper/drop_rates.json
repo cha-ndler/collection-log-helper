@@ -13597,7 +13597,7 @@
     "travelTip": "",
     "guidanceSteps": [
       {
-        "description": "This rare table applies on any slayer task above the superior-unlock level. Superior monsters have a 1/200 spawn chance in place of a standard monster while on the matching task. Unlock the Bigger and Badder reward (50 Slayer points) in the Slayer reward shop to enable superior spawns. Slayer level 5 is the minimum to receive any task",
+        "description": "This rare table applies on any slayer task above the superior-unlock level. Superior monsters have a 1/200 spawn chance in place of a standard monster while on the matching task. Unlock the Bigger and Badder reward (50 Slayer points) in the Slayer reward shop to enable superior spawns. Slayer level 5 is the minimum required to kill a Crawling Hand, the lowest monster with a superior variant",
         "worldX": 3429,
         "worldY": 3534,
         "worldPlane": 0,
