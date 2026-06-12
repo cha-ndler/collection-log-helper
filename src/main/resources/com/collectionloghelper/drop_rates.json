@@ -13020,7 +13020,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Iorwerth Dungeon in Prifddinas (crystal seed teleport) or Mourner Tunnels",
+        "description": "Travel to the Iorwerth Dungeon in Prifddinas (teleport crystal) or Mourner Tunnels",
         "worldX": 1920,
         "worldY": 4672,
         "worldPlane": 0,
@@ -13033,14 +13033,14 @@
                 "FAIRY_RING"
               ]
             },
-            "description": "POH superior garden fairy ring (dramen/lunar staff equipped) -> dial CIQ to land directly at the Iorwerth Dungeon entrance in Prifddinas",
-            "travelTip": "POH fairy ring -> CIQ -> Iorwerth Dungeon entrance"
+            "description": "No fairy ring leads to Prifddinas. Use a teleport crystal to reach Prifddinas, then enter the Iorwerth Dungeon to the south.",
+            "travelTip": "Teleport crystal -> Prifddinas -> Iorwerth Dungeon"
           }
         ],
         "section": "Travel"
       },
       {
-        "description": "Kill Dark Beasts in the Mourner Tunnels or Catacombs of Kourend. Use Protect from Melee. High Defence - use accurate weapon styles",
+        "description": "Kill Dark Beasts in the Mourner Tunnels or Iorwerth Dungeon. Use Protect from Melee. High Defence - use accurate weapon styles",
         "worldX": 1920,
         "worldY": 4672,
         "worldPlane": 0,
