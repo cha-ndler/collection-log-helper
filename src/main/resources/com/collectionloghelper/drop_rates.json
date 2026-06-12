@@ -3524,7 +3524,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Fight Phosani's Nightmare solo. Same prayer rotation as The Nightmare but tighter and faster: overhead-staff -> Protect from Magic, claws -> Protect from Melee, crossbow stance -> Protect from Missiles. Sleepwalker minions chase you and must be killed (Sanguinesti heals while burning them down), parasites still drain sanity, and the husk attack will mirror your gear so bring max gear you can lose. Hard to solo without high stats and prayer flicking",
+        "description": "Fight Phosani's Nightmare solo. Same prayer rotation as The Nightmare but tighter and faster: overhead-staff -> Protect from Magic, claws -> Protect from Melee, crossbow stance -> Protect from Missiles. Sleepwalkers spawn at phase end and walk toward Phosani -- kill them before they reach her or each one that does triggers an increasingly lethal blast. Parasites attach to you and burst after ~18 ticks dealing massive damage, then heal Phosani until killed -- drink Sanfew serum or Relicym's balm before the burst to reduce damage. Husks have fixed attack styles: blue (magic) and green (ranged) -- kill the ranged husk first in phases 1-2. Hard to solo without high stats and prayer flicking.",
         "worldX": 3806,
         "worldY": 9757,
         "worldPlane": 1,
