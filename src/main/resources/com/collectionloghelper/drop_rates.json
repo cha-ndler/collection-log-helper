@@ -9842,7 +9842,7 @@
         "section": "Travel"
       },
       {
-        "description": "Obtain a beginner clue scroll. Lowest-tier monsters (chickens, cows, men, goblins) drop them at ~1/50; Hans in Lumbridge gives a free one per day on the H.A.M. encampment task; Young impling jars open to a beginner clue at 1/25.",
+        "description": "Obtain a beginner clue scroll. Lowest-tier monsters (chickens, cows, men, goblins) drop them at ~1/50. Young impling jars also open to a beginner clue at 1/25.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -9857,7 +9857,7 @@
         ]
       },
       {
-        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Beginner clues are short (1-5 steps) and cover Lumbridge / Varrock / Falador / Draynor only. No combat encounters - skip the world-3 sandwich lady wave by accepting whichever sandwich she offers first.",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Beginner clues are short (1-3 steps) and cover starter areas including Lumbridge, Varrock, Falador, Draynor, and Al Kharid. No combat encounters required.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -9883,7 +9883,7 @@
       }
     ],
     "afkLevel": 1,
-    "travelTip": "Obtain from low-level monsters, Young impling jars, or Hans in Lumbridge"
+    "travelTip": "Obtain from low-level monsters or Young impling jars"
   },
   {
     "name": "Revenants",
