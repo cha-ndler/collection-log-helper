@@ -123,8 +123,8 @@
                 "FREMENNIK_HARD"
               ]
             },
-            "description": "Trollheim teleport not required: use the Fremennik Hard diary unlocks (e.g. Lighthouse-area transport) plus the Goblin Village agility shortcut to reach the God Wars Dungeon entrance overland",
-            "travelTip": "Fremennik Hard diary route -> Goblin Village shortcut -> GWD"
+            "description": "Fremennik Hard diary: stony basalt teleports to top of Troll Stronghold (requires Making Friends with My Arm). Run south-east down to the God Wars Dungeon entrance from there.",
+            "travelTip": "Stony basalt -> Troll Stronghold top -> run south-east to GWD"
           },
           {
             "requirements": {
