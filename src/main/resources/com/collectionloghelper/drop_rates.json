@@ -3835,7 +3835,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Sarachnis. Use a crush weapon - her stab and slash defence is huge. Flick prayers: Protect from Magic when her body glows red, Protect from Ranged when she glows yellow. Kill the spawned Sarachnis spiderlings the instant they appear or they will out-damage you. Stay at least one tile off the wall so spawns have a path to you and do not stack damage.",
+        "description": "Kill Sarachnis. Use a crush weapon - her stab and slash defence is huge. Flick prayers: Protect from Magic when her body glows red, Protect from Ranged when she glows yellow. Prioritise killing the magic-using spawn; the melee spawn can be tanked if your defensive bonuses are sufficient. All remaining spawns die automatically when Sarachnis is killed. Standing on tiles directly adjacent to walls puts you out of her melee range; pray Protect from Missiles there to nullify all her damage, though spawn damage is unaffected by wall positioning.",
         "worldX": 1847,
         "worldY": 9910,
         "worldPlane": 0,
