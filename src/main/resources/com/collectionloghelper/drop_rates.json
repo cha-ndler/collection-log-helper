@@ -13344,7 +13344,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Vyrewatch Sentinels. Bring a Blisterwood flail (mandatory - Sentinels are immune to all non-blisterwood weapons) or an Ivandis flail as a fallback, your best magic gear (an Amulet of blood fury is BIS for the lifesteal), prayer potions, super restores, and Saradomin brews. Vyre noble outfit can speed up the disguise step but is not required for combat.",
+        "description": "Bank for Vyrewatch Sentinels. Bring a Blisterwood flail (mandatory - Sentinels are immune to all non-blisterwood weapons) or an Ivandis flail as a fallback, your best melee gear (Amulet of rancour is BIS neck; Amulet of blood fury is a budget option), prayer potions, super restores, and Saradomin brews. Vyre noble outfit can speed up the disguise step but is not required for combat.",
         "worldX": 3631,
         "worldY": 3303,
         "worldPlane": 0,
@@ -13373,7 +13373,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Vyrewatch Sentinels in the central Darkmeyer square. Blisterwood flail (or Ivandis flail) is mandatory - any non-blisterwood weapon does zero damage. Use Protect from Melee for the standard attack; the Sentinels do not phase or have special mechanics, so the fight is essentially a Slayer-XP loop tuned for the Blood shard drop. Amulet of blood fury speccing keeps your HP topped without brews.",
+        "description": "Kill Vyrewatch Sentinels in the upper and middle tiers of Darkmeyer. Blisterwood flail (or Ivandis flail) is mandatory - any non-blisterwood weapon does zero damage. Use Protect from Melee for the standard attack; the Sentinels do not phase or have special mechanics, so the fight is essentially a Slayer-XP loop tuned for the Blood shard drop.",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
@@ -13400,7 +13400,7 @@
         "section": "Loot"
       },
       {
-        "description": "Return to bank when supplies run low. Drakan's medallion to Ver Sinhaza or Canifis lodestone for the fastest bank cycle.",
+        "description": "Return to bank when supplies run low. Walk north to the Darkmeyer bank (on-site, upper tier, next to an altar). No teleport needed.",
         "worldX": 3631,
         "worldY": 3303,
         "worldPlane": 0,
