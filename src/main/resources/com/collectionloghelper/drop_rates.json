@@ -1264,7 +1264,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Alchemical Hydra. Hydra rotates phases at 75%, 50%, 25% HP - Green/poison (lure to red south-east vent), Blue/electric (lure to green north-east vent), Red/flame (lure to blue north-west vent), then Enrage. The Hydra alternates Magic and Ranged auto-attacks; watch the head sway between basic attacks - Magic head sways one way, Ranged the other - flick Protect from Magic vs Magic and Protect from Missiles vs Ranged. Bring Toxic blowpipe and ranged tank gear; on the Flame phase dodge the fire walls and the lightning chase. 95 Slayer required; Hydra task only",
+        "description": "Kill the Alchemical Hydra. Hydra rotates phases at 75%, 50%, 25% HP - Green/poison (lure to red south-east vent), Blue/electric (lure to green north-east vent), Red/flame (lure to blue north-west vent), then Enrage. The Hydra alternates Magic and Ranged auto-attacks; watch for the head sway after every three attacks as a signal that the style is changing - flick Protect from Magic vs Magic and Protect from Missiles vs Ranged. Bring Toxic blowpipe and ranged tank gear; on the Blue/electric phase dodge the lightning; on the Flame/red phase dodge the fire walls. 95 Slayer required; Hydra task only",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
