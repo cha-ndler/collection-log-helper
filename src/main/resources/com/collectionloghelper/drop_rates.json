@@ -9484,7 +9484,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Perilous Moons dungeon beneath Cam Torum, Varlamore. Before leaving the bank, equip a Dual macuahuitl or Blue moon spear for melee, Bowfa for ranged, Ancient sceptre / Trident for magic - all three styles rotate during the fight. Pack Saradomin brews, super restores, prayer potions, sharks, and your Quetzal whistle for the trip.",
+        "description": "Travel to the Perilous Moons dungeon beneath Cam Torum, Varlamore. Before leaving the bank, equip melee weapons only - each moon is weak to a specific melee style (Eclipse=stab, Blue=crush, Blood=slash) and has +500 ranged and magic defence. Bring a stab weapon, crush weapon, and slash weapon. Pack Saradomin brews, super restores, prayer potions, sharks, and your Quetzal whistle for the trip.",
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
@@ -9515,7 +9515,7 @@
         "section": "Travel"
       },
       {
-        "description": "Complete Perilous Moons. Fight Blue Moon (magic, freezes you to ice tiles - step off them), Eclipse Moon (melee, summons mirror clones, kill the real one), and Blood Moon (ranged, teleports around the arena - it auto-targets the same style you used last hit, so rotate styles to control its prayer). Each kill drops a Lunar key; use all three on the Lunar Chest for unique drops.",
+        "description": "Complete Perilous Moons. All three moons are melee-only bosses (ranged and magic are heavily resisted). Blue Moon (typeless melee, weak to crush) - hits freeze your hands causing missed attacks; weapon-freeze special places your weapon in an ice block, punch it to retrieve while dodging icy spikes. Eclipse Moon (melee, weak to stab) - clone special binds you in the centre while clones attack in waves; face your character toward each clone as it spawns to parry and return damage. Blood Moon (typeless melee, weak to slash) - alternates Blood Rain (move off blood pools) and Blood Jaguar (run to glyph and attack the jaguar) specials. After all three are dead, claim the Lunar Chest in the Ancient Shrine (all three moons must be defeated on first visit; 3 moons = 6 loot rolls).",
         "perItemStepDescription": {
           "29019": "Fight the Blue Moon and open the Lunar Chest to receive your Blue Moon armour.",
           "29013": "Fight the Blue Moon and open the Lunar Chest to receive your Blue Moon armour.",
@@ -9562,7 +9562,7 @@
         ]
       },
       {
-        "description": "After all three moons die, open the Lunar Chest in the centre of the arena for armour pieces and unique drops. Empty the chest before resetting the dungeon",
+        "description": "After all three moons die, head south into the Ancient Shrine within Neypotzli and claim the Lunar Chest for armour pieces and unique drops. Empty the chest before resetting the dungeon",
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
