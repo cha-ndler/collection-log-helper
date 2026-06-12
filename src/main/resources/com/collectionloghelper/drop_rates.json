@@ -6164,15 +6164,6 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": [
-                "KOUREND_HARD"
-              ]
-            },
-            "description": "Xeric's talisman -> Xeric's Honour to reach Mount Quidamortem summit, then run to the Chambers of Xeric entrance. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Skeletal Mystics, and a Dragon claws or Bandos godsword spec for Olm head phases",
-            "travelTip": "Xeric's talisman -> Xeric's Honour (Mount Quidamortem summit) -> run to CoX"
-          },
-          {
-            "requirements": {
               "pohTeleports": [
                 "XERICS_TALISMAN"
               ]
