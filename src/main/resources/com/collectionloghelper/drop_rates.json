@@ -7189,8 +7189,8 @@
                 "DESERT_HARD"
               ]
             },
-            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). Bring Tbow or Bow of faerdhinen, Osmumten's fang for stab phases, Tumeken's shadow if owned, full brews/restores and prayer potions; set invocations under 150 raid level for entry-mode loot",
-            "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
+            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary raises the sceptre's max charge capacity to 50; still requires recharging at Jalsavrah when depleted). Bring Tbow or Bow of faerdhinen, Osmumten's fang for stab phases, Tumeken's shadow if owned, full brews/restores and prayer potions; set invocations under 150 raid level for entry-mode loot",
+            "travelTip": "Pharaoh's sceptre -> Necropolis (up to 50 charges via Desert Hard diary)"
           },
           {
             "requirements": {
@@ -7227,7 +7227,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat the Wardens. P1/P2: swap prayers to match the active Warden's style and break the obelisk. P3 (Tumeken's Warden): pray Protect from Magic against the energy ball volleys, dodge the obelisk hand-slam, swap prayers when the Warden mimics Akkha/Zebak/Ba-Ba/Kephri attacks",
+        "description": "Defeat the Wardens. P1/P2: swap prayers to match the active Warden's style and break the obelisk. P3 is whichever Warden was not fought in P2. Tumeken's Warden P3 summons Zebak and Ba-Ba phantoms; Elidinis' Warden P3 summons Akkha and Kephri phantoms. Pray Protect from Magic against the energy ball volleys, dodge the obelisk hand-slam, and swap prayers when the Warden mimics its phantom bosses' attacks",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
