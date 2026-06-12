@@ -3011,3 +3011,1053 @@ Run summary: 40 sources processed; 26 with confirmed findings; clean: Basilisk, 
 - **Skeptic reasoning:** The guidance text at line 13624 reads: "Bring zombie pirate keys dropped by zombie pirates on the ship." The phrase 'on the ship' unambiguously places the key-dropping zombie pirates at the shipwreck. The wiki is explicit that keys are dropped at the Chaos Temple, not on the ship: 'Zombie pirate keys are dropped by zombie pirates found at the Wilderness Chaos Temple. They are used to open the pirates' lockers on the shipwreck located on the coast east of the Chaos Temple.' The ship is where the lockers are opened; the temple is where keys are farmed. The guidance text inverts this, sending the player to farm keys at the wrong location.
 
 Tranche 3 total: 65 confirmed findings.
+# Tranche 4: sources 111-150 (minigames and activities)
+
+Run summary: 40 sources processed; 36 with confirmed findings; clean: Trouble Brewing, Barracuda Trials, Glough's Experiments, My Notes.
+
+## Hallowed Sepulchre
+
+### [blocker] C6: Floor 5 requires 92 Agility, not 72. The guidance understates the requirement by 20 levels -- a player at 72 Agility cannot access floor 5 at all.
+
+- **Data says:** Run the floors in order: 1, 2, 3, 4 (then 5 at 72+ Agility). Loot every brown coffin you pass for Hallowed marks.
+- **Wiki says (raw):** Floor 5: Agility 92 Agility
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Hallowed_Sepulchre
+- **Suggested fix:** Change '72+ Agility' to '92+ Agility' in guidanceSteps[3].description.
+- **Skeptic receipt:** wiki_lookup('Hallowed Sepulchre'): '**Floor 5: [Agility 92 Agility]' (floor requirements list); finding receipt: 'Floor 5: Agility 92 Agility'
+- **Skeptic reasoning:** The data at guidanceSteps[3] reads 'then 5 at 72+ Agility'. The authoritative floor-access requirement for floor 5 is 92 Agility. The wiki_lookup on 'Hallowed Sepulchre' returned the requirements list with the entry '**Floor 5:' paired with 'Agility 92 Agility' -- matching the finding's own receipt verbatim. No boostable gate, no account-type variation, no variant item angle applies here. The Ring of endurance equip requirement (70 Agility) and the entry-level requirement (52 Agility) are the only other Agility gates in the Sepulchre context, and neither is 72. The 72 figure does not correspond to any known Sepulchre mechanic. The data understates the requirement by 20 levels.
+
+### [high] C8: Dark dye and Dark acorn are reward shop purchases (300 and 3,000 hallowed marks respectively), not drops from floor 5 grand coffins. Additionally, Strange old lockpick drops from coffins on all floors (1/200 floor 1 through 1/40 floor 5), not exclusively floor 5. Only Ring of endurance is floor-5 grand coffin exclusive. The guidance lumps all four items together incorrectly.
+
+- **Data says:** Strange old lockpick / Ring of endurance / Dark dye / Dark acorn rare drops only roll on floor 5 grand coffins, so prioritise getting to floor 5 every run once you can.
+- **Wiki says (raw):** It can be purchased from the Mysterious Hallowed Goods shop for 300 hallowed marks. [Dark dye] / Dark acorn [cost] 3,000 [hallowed marks]
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Dark_dye
+- **Suggested fix:** Revise guidanceSteps[3].description to reflect that only Ring of endurance is an exclusive floor-5 grand coffin drop; Strange old lockpick drops from all floors (better odds on higher floors); Dark dye and Dark acorn are purchased from the reward shop with hallowed marks.
+- **Skeptic receipt:** wiki_lookup('Dark dye'): 'It can be purchased from the Mysterious Hallowed Goods shop for 300 hallowed marks.' | wiki_lookup('Dark acorn'): 'It is purchased from the Mysterious Stranger's Mysterious Hallowed Goods shop for 3,000 hallowed marks.' | wiki_lookup('Strange old lockpick'): 'The drop rate is 1/200 for the 1st floor, 1/120 for the 2nd floor, 1/90 for the 3rd floor, 1/60 for the 4th floor and 1/40 for the 5th floor.' | wiki_lookup('Ring of endurance'): 'a potential reward from the Grand Hallowed Coffin on the final floor of the Hallowed Sepulchre'
+- **Skeptic reasoning:** The data at guidanceSteps[3] states: 'Strange old lockpick / Ring of endurance / Dark dye / Dark acorn rare drops only roll on floor 5 grand coffins'. Three of the four items are wrong: (1) Dark dye is a shop purchase at 300 hallowed marks, not a coffin drop; (2) Dark acorn is a shop purchase at 3,000 hallowed marks, not a coffin drop; (3) Strange old lockpick drops from coffins on ALL five floors at rates 1/200 (floor 1) through 1/40 (floor 5), not exclusively floor 5. Only Ring of endurance is correctly characterised as a floor-5 grand coffin exclusive. The later guidanceStep[5] already corrects this ('The Ring of endurance and Strange old lockpick come from the floor-5 grand coffins; everything else is bought with marks') but step[3] still contains the false claim and would mislead players reading only that step. The multi-source and variant-item refutation vectors do not apply -- this is a plain factual error about drop mechanism and floor exclusivity.
+
+### [high] C4: The guidance says the Mausoleum Door is in the south-east of Darkmeyer, but the wiki states the Hallowed Sepulchre is on the north-east side of Darkmeyer. The directional claim is inverted.
+
+- **Data says:** Head to the Mausoleum Door in the south-east of Darkmeyer (south of the bank, near the canal).
+- **Wiki says (raw):** The Hallowed Sepulchre is located on the north east side of Darkmeyer.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Hallowed_Sepulchre
+- **Suggested fix:** Change 'south-east of Darkmeyer' to 'north-east of Darkmeyer' in guidanceSteps[1].description.
+- **Skeptic receipt:** wiki_lookup('Hallowed Sepulchre'): 'The Hallowed Sepulchre is located on the north east side of Darkmeyer.' | wiki_lookup('Mysterious Hallowed Goods'): 'found on the north-eastern corner of Darkmeyer.'
+- **Skeptic reasoning:** The data at guidanceSteps[1] reads 'Head to the Mausoleum Door in the south-east of Darkmeyer'. The wiki_lookup on 'Hallowed Sepulchre' directly states 'The Hallowed Sepulchre is located on the north east side of Darkmeyer.' The wiki_lookup on 'Mysterious Hallowed Goods' (the reward shop at the same complex) further states it is 'found on the north-eastern corner of Darkmeyer.' Both independent wiki pages agree on north-east. The data's 'south-east' is a direct directional inversion. No account-type or progress-gate nuance applies to entrance location.
+
+## Guardians of the Rift
+
+### [medium] C3: The plugin restricts the pickaxe requirement to 'rune or better', but the wiki specifies any pickaxe is sufficient. Players with lower-tier pickaxes (bronze through adamant) are incorrectly told their pickaxe is inadequate.
+
+- **Data says:** A Pickaxe (rune or better) is needed for mining the altar fragments
+- **Wiki says (raw):** "Any [pickaxe](/w/Pickaxe)"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Guardians_of_the_Rift
+- **Suggested fix:** Change pickaxe description from 'rune or better' to 'any pickaxe'.
+- **Skeptic receipt:** Wiki (wiki_lookup + WebFetch): "Any pickaxe" -- listed as a requirement with no tier qualifier. Data line 14063: "a Pickaxe (rune or better) for mining the altar fragments".
+- **Skeptic reasoning:** The wiki states the pickaxe requirement is 'Any pickaxe' with no tier restriction. The guidance step at line 14063 of drop_rates.json says 'a Pickaxe (rune or better) for mining the altar fragments', which incorrectly excludes bronze through adamant pickaxes. The wiki_lookup and WebFetch both confirm the unrestricted requirement.
+
+### [high] C6: The wiki's travel section lists seven routes to reach Guardians of the Rift and does not include any Arceuus teleport. Directing players to use an Arceuus teleport would send them to the wrong location.
+
+- **Data says:** Arceuus teleport leads to Temple of the Eye
+- **Wiki says (raw):** Travel methods listed: "The amulet of the eye teleport", "A Minigame Teleport through any spellbook or the Grouping tab to Guardians of the Rift", "A necklace of passage teleport to the Wizards' Tower", "Fairy ring code DIS to the Wizards' Tower", "An amulet of glory teleport to Draynor Village and walking south", "Lumbridge Home Teleport and walking south-west", "Teleporting to the Scar via ring of shadows, requiring Desert Treasure II"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Guardians_of_the_Rift
+- **Suggested fix:** Remove the Arceuus teleport claim. Use one of the wiki-confirmed routes: amulet of the eye, minigame teleport, necklace of passage to Wizards' Tower, or fairy ring DIS.
+- **Skeptic receipt:** Wiki (wiki_lookup): travel methods are 'The amulet of the eye teleport', 'A Minigame Teleport through any spellbook or the Grouping tab to Guardians of the Rift', 'A necklace of passage teleport to the Wizards' Tower', 'Fairy ring code DIS to the Wizards' Tower', 'An amulet of glory teleport to Draynor Village and walking south', 'Lumbridge Home Teleport and walking south-west', 'Teleporting to the Scar via ring of shadows, requiring Desert Treasure II'. No Arceuus teleport listed. Data line 14054: "travelTip": "Arceuus teleport -> Temple".
+- **Skeptic reasoning:** The top-level travelTip field (line 14054) says 'Arceuus teleport -> Temple'. The Arceuus spellbook contains no teleport to the Wizards' Tower or Temple of the Eye. The wiki lists seven travel methods and none involve any Arceuus spellbook teleport. This would misdirect players.
+
+### [high] C7: Neither an Arceuus library teleport nor a Mind altar teleport appears anywhere in the wiki's travel section for this minigame. Both routes are fabricated.
+
+- **Data says:** Arceuus library teleport is a viable route to Temple of the Eye (via Wizards' Tower portal or Mind altar teleport)
+- **Wiki says (raw):** Travel methods listed: "The amulet of the eye teleport", "A Minigame Teleport through any spellbook or the Grouping tab to Guardians of the Rift", "A necklace of passage teleport to the Wizards' Tower", "Fairy ring code DIS to the Wizards' Tower", "An amulet of glory teleport to Draynor Village and walking south", "Lumbridge Home Teleport and walking south-west", "Teleporting to the Scar via ring of shadows, requiring Desert Treasure II"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Guardians_of_the_Rift
+- **Suggested fix:** Remove both the Arceuus library teleport and Mind altar teleport claims. Replace with wiki-confirmed routes.
+- **Skeptic receipt:** Wiki (wiki_lookup): seven travel methods listed -- no Arceuus library teleport. Data line 14079: "Arceuus library teleport + run south-west or Mind altar teleport is also viable". Data line 14085 travelTip: "Arceuus library tele -> Temple of the Eye, or Mind altar tele".
+- **Skeptic reasoning:** Guidance step 2 (line 14079) says 'Arceuus library teleport + run south-west or Mind altar teleport is also viable', and its travelTip (line 14085) repeats 'Arceuus library tele -> Temple of the Eye, or Mind altar tele'. The Arceuus library teleport does not land near Wizards' Tower or the Temple of the Eye. Neither route appears in the wiki's travel section. This is the same underlying data error as C6 expressed in a guidance step rather than the top-level travelTip field.
+
+### [high] C8: The Mind altar teleport does not appear in the wiki's travel methods for Guardians of the Rift. The Mind altar is not near the Temple of the Eye and this route would mislead players.
+
+- **Data says:** Mind altar teleport is a viable route to Temple of the Eye
+- **Wiki says (raw):** Travel methods listed: "The amulet of the eye teleport", "A Minigame Teleport through any spellbook or the Grouping tab to Guardians of the Rift", "A necklace of passage teleport to the Wizards' Tower", "Fairy ring code DIS to the Wizards' Tower", "An amulet of glory teleport to Draynor Village and walking south", "Lumbridge Home Teleport and walking south-west", "Teleporting to the Scar via ring of shadows, requiring Desert Treasure II"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Guardians_of_the_Rift
+- **Suggested fix:** Remove Mind altar teleport. Use minigame teleport or necklace of passage to Wizards' Tower instead.
+- **Skeptic receipt:** Wiki (wiki_lookup): seven travel methods listed -- no Mind altar teleport. Data line 14079: "Mind altar teleport is also viable". Data line 14085 travelTip: "Arceuus library tele -> Temple of the Eye, or Mind altar tele".
+- **Skeptic reasoning:** The Mind altar teleport (Arceuus spellbook) deposits the player at the Mind altar, which is north of Falador. The Wizards' Tower is south of Draynor -- these are on opposite sides of the map. The wiki's travel section contains no Mind altar teleport among the seven listed methods. This is part of the same guidance step error as C6/C7.
+
+### [blocker] C12: The 150-point threshold is outdated. The wiki explicitly states it was increased to 300. Players following this guidance would underperform thinking 150 points is enough when the current threshold is 300.
+
+- **Data says:** Aiming for 150+ total points per round rolls the unique table
+- **Wiki says (raw):** "The minimum points threshold required to receive the large experience drop at the end of the minigame has been increased from 150 to 300."
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Guardians_of_the_Rift
+- **Suggested fix:** Update the point threshold from 150 to 300 to reflect the current game state.
+- **Skeptic receipt:** Wiki (WebFetch): "The minimum points threshold required to receive the large experience drop at the end of the minigame has been increased from 150 to 300." Data line 14099: "Aim for 150+ total points per round to roll the unique table".
+- **Skeptic reasoning:** The wiki explicitly states the threshold was updated from 150 to 300. The guidance step (line 14099) still says 'Aim for 150+ total points per round to roll the unique table', which is the old value. This is a stale guidance claim contradicted by an explicit wiki patch note.
+
+### [medium] C14: The wiki lists intricate pouch rewards as tarnished locket, lost bag, runes, dragon items, and hard clue. Abyssal pearls are not listed as a possible reward from intricate pouches. The 'rare uniques' framing is not verified.
+
+- **Data says:** Intricate pouches obtained during the minigame can be handed in for bonus rewards (Abyssal pearls / rare uniques)
+- **Wiki says (raw):** "Can give a tarnished locket or a lost bag. Grants a random amount of runes or one of several dragon items. Also has a chance at granting a hard clue."
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Guardians_of_the_Rift
+- **Suggested fix:** Remove Abyssal pearls from the list of intricate pouch rewards. Correct to: tarnished locket, lost bag, runes, dragon items, hard clue scroll.
+- **Skeptic receipt:** Wiki (WebFetch, Intricate pouch page): reward list is blood essence (1/200), lamp (1/15), tarnished locket (1/40), lost bag (1/60), rune quantities (astral/blood/chaos/cosmic/death/law/nature/soul), shield left half, dragon spear, crystal key, dragon med helm, pure essence (500-1000 noted), clue scroll hard (1/10). No Abyssal pearls listed. Data line 14119: 'Abyssal pearls / rare uniques'.
+- **Skeptic reasoning:** The wiki's Intricate pouch page lists every possible reward: blood essence, lamp, tarnished locket, lost bag, rune quantities, shield left half, dragon spear, crystal key, dragon med helm, pure essence, and clue scroll (hard). Abyssal pearls do not appear. Guidance step at line 14119 says 'Hand in any Intricate pouches you obtained to receive bonus rewards (Abyssal pearls / rare uniques)', which incorrectly attributes Abyssal pearl drops to intricate pouch hand-ins. Abyssal pearls are earned from the Rewards Guardian after a completed game, not from opening intricate pouches.
+
+## Brimhaven Agility Arena
+
+### [blocker] C7: Wrong NPC and wrong cost. The wiki names Pirate Jackie the Fruit as the reward exchanger (not Cap'n Izzy No-Beard). The graceful recolour costs 250 vouchers for the full set, not 250 per piece -- the guidance overstates the cost by a factor of 6.
+
+- **Data says:** Exchange agility tickets with Cap'n Izzy No-Beard for Brimhaven Graceful recolours (250 tickets each piece) or the Pirate's hook (800 tickets). The full Graceful set takes 1500 tickets total
+- **Wiki says (raw):** The tickets and vouchers can be traded in to Pirate Jackie the Fruit for Agility experience and a selection of items respectively. ... The graceful recolour costs 250 Brimhaven vouchers to recolour the full uncoloured graceful outfit.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Brimhaven_Agility_Arena
+- **Suggested fix:** Replace 'Cap'n Izzy No-Beard' with 'Pirate Jackie the Fruit' as the exchange NPC. Change '250 tickets each piece' to '250 tickets for the full set'.
+- **Skeptic receipt:** wiki_lookup (Brimhaven Agility Arena): 'The tickets and vouchers can be traded in to Pirate Jackie the Fruit for Agility experience and a selection of items respectively.' | Agility Arena Store page: 'Graceful Recolour -- 250 vouchers' (single line item, full set). | Cap'n Izzy No-Beard page: collects 200-coin entry fee and sells Agility cape only -- no ticket/voucher exchange role.
+- **Skeptic reasoning:** Two distinct errors confirmed by authoritative sources. (1) NPC: The wiki_lookup raw output for Brimhaven Agility Arena states verbatim: 'The tickets and vouchers can be traded in to Pirate Jackie the Fruit for Agility experience and a selection of items respectively.' Cap'n Izzy No-Beard's wiki page confirms his only roles are collecting the 200-coin entry fee and selling the Agility cape -- he does not exchange tickets or vouchers for rewards. (2) Cost: The Agility Arena Store wiki page lists 'Graceful Recolour' as a single line item at 250 vouchers for the full set, not 250 per piece. The data's '250 tickets each piece' assertion and the derived '1500 tickets total' are both wrong. The finding's two sub-claims survive all refutation vectors: this is not a multi-source item issue, not a variant issue, not account-type dependent, and the wiki is current.
+
+### [high] C8: Wrong NPC. The Pirate's hook is purchased from Pirate Jackie the Fruit, not Cap'n Izzy No-Beard. The 800 voucher cost is correct.
+
+- **Data says:** Exchange agility tickets with Cap'n Izzy No-Beard for Brimhaven Graceful recolours (250 tickets each piece) or the Pirate's hook (800 tickets).
+- **Wiki says (raw):** It can be purchased from Pirate Jackie the Fruit for 800 Brimhaven vouchers.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Pirate%27s_hook
+- **Suggested fix:** Replace 'Cap'n Izzy No-Beard' with 'Pirate Jackie the Fruit' as the exchange NPC for the Pirate's hook.
+- **Skeptic receipt:** Pirate's hook wiki page: 'It can be purchased from Pirate Jackie the Fruit for 800 Brimhaven vouchers.' | Cap'n Izzy No-Beard wiki page: entry fee collector and Agility cape vendor only -- no voucher exchange.
+- **Skeptic reasoning:** The wrong-NPC sub-claim is confirmed. The Pirate's hook wiki page states: 'It can be purchased from Pirate Jackie the Fruit for 800 Brimhaven vouchers.' The data attributes the exchange to Cap'n Izzy No-Beard, who has no exchange role per his wiki page. The 800-voucher cost is correct. This finding is narrower than C7 but the NPC error is real and independently confirmed by the Pirate's hook page.
+
+### [high] C9: The full Brimhaven Graceful recolour costs 250 vouchers for the entire set, not 1500. The data's 1500 figure comes from incorrectly treating 250 as a per-piece cost multiplied across 6 pieces -- that per-piece assumption is wrong.
+
+- **Data says:** The full Graceful set takes 1500 tickets total
+- **Wiki says (raw):** The graceful recolour costs 250 Brimhaven vouchers to recolour the full uncoloured graceful outfit.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Brimhaven_Agility_Arena
+- **Suggested fix:** Change 'The full Graceful set takes 1500 tickets total' to 'The full Graceful set takes 250 tickets total'.
+- **Skeptic receipt:** Agility Arena Store wiki page: 'Graceful Recolour -- 250 vouchers' (single line item; the page does not list separate per-piece costs). | Brimhaven Agility Arena wiki page: 'The graceful recolour costs 250 Brimhaven vouchers to recolour the full uncoloured graceful outfit.'
+- **Skeptic reasoning:** The Agility Arena Store wiki page lists 'Graceful Recolour' as a single line item costing 250 vouchers -- not per piece, but for the full set bundle. The data's '1500 tickets total' figure is derived from incorrectly treating 250 as a per-piece cost across 6 pieces (6 x 250 = 1500). The actual cost is 250 vouchers for the complete recolour. This is not a multi-source ambiguity, variant issue, or account-type gate -- it is a flat factual error confirmed by the store's exchange table. The finding survives all refutation vectors.
+
+## Giants' Foundry
+
+### [high] C5: The item is called 'Double ammo mould' (not 'Ammo mould'), it is purchased FROM the Foundry shop for 2,000 reputation -- it is not brought in to receive reputation. The wiki contains no mention of the mould granting 'bonus reputation'. The claim inverts the direction of the reputation transaction.
+
+- **Data says:** An Ammo mould can be brought to receive bonus reputation
+- **Wiki says (raw):** The Double ammo mould costs 2,000 Foundry Reputation points. Can only be purchased if the player has completed the Dwarf Cannon quest.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Giants'_Foundry
+- **Suggested fix:** Correct to: 'The Double ammo mould can be purchased from the Foundry Reward Shop for 2,000 Foundry Reputation (requires Dwarf Cannon quest).'
+- **Skeptic receipt:** Rewards table (direct wiki fetch, oldschool.runescape.wiki/w/Giants'_Foundry): 'Double ammo mould | 2,000 [Foundry Reputation] | Can only be purchased if the player has completed the Dwarf Cannon quest.' Double ammo mould item page (direct fetch): 'makes cannonballs twice as fast compared to a regular ammo mould, making 8 cannonballs rather than 4 (and using 2 metal bars rather than 1) per action.' No text on either page describes any mould being brought to the foundry to receive reputation.
+- **Skeptic reasoning:** The data claim contains two independent errors that both survive every refutation vector. First, the item name is wrong: the wiki names it 'Double ammo mould', not 'Ammo mould'. Second, and more critically, the direction of the reputation transaction is fully inverted: the Double ammo mould is purchased FROM the Foundry Reward Shop for 2,000 Foundry Reputation -- a player spends reputation to acquire it. The wiki contains no mechanic, on the main page or the Strategies page, in which any mould is brought to the foundry to receive or generate bonus reputation. The item's actual function (once purchased) is faster cannonball production outside the minigame entirely. No multi-source item argument applies (this is a shop purchase, not a drop). No variant-ID ambiguity applies (the mould is not in the collection log as a drop). The finding stands on direct wiki evidence.
+
+### [high] C7: Falador teleport is not listed among the travel methods on the wiki. Giants' Foundry is located in the Kharidian Desert area (Giants' Plateau), and Falador is in the far north-west of Misthalin -- running south-east from Falador does not lead to Giants' Foundry. The wiki's fallback routes are Amulet of glory to Al Kharid, Ring of dueling to Emir's Arena, gnome glider, or Lumbridge toll gate.
+
+- **Data says:** Falador teleport followed by running south-east is an unquested fallback route to Giants' Foundry
+- **Wiki says (raw):** The Giants' Foundry is located in a cave beneath the Giants' Plateau. Players can get there by using: Using Minigame Teleport through the spellbook or the Grouping tab to the Giants' Foundry; An amulet of glory teleport to the Al Kharid Palace; A ring of dueling teleport to the Emir's Arena; The gnome glider flight to Kar-Hewo; The toll gate from Lumbridge.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Giants'_Foundry
+- **Suggested fix:** Replace Falador teleport fallback with a correct alternative such as: 'Amulet of glory to Al Kharid Palace, then run south' or 'Ring of dueling to Emir's Arena, then run west.'
+- **Skeptic receipt:** wiki_lookup raw output (Giants' Foundry, direct MCP call): 'The Giants' Foundry is located in a cave beneath the Giants' Plateau. Players can get there by using: Using Minigame Teleport through the spellbook or the Grouping tab to the Giants' Foundry; An amulet of glory teleport to the Al Kharid Palace; A ring of dueling teleport to the Emir's Arena; The gnome glider flight to Kar-Hewo; The toll gate from Lumbridge.' Falador does not appear. wiki_lookup infobox: 'Location: Giants' Plateau | leagueRegion = Desert'. Strategies page fetch: no mention of Falador or any travel routes.
+- **Skeptic reasoning:** Falador is in northern Asgarnia (~2965, 3380). Giants' Foundry is beneath Giants' Plateau in the Kharidian Desert, east of Al Kharid (~3295, 3110) -- over 400 tiles away in the opposite direction. Running south-east from Falador leads through Draynor and Lumbridge, not to Al Kharid or the Desert. The wiki's exhaustive travel list -- fetched directly -- makes no mention of Falador in any form. All four listed unquested fallback options (Amulet of glory to Al Kharid Palace, Ring of dueling to Emir's Arena, gnome glider to Kar-Hewo, toll gate from Lumbridge) are desert-adjacent or direct, not Falador-adjacent. The C7 finding is not a misread of the wiki quote; the Falador route is simply absent from the wiki and is geographically incoherent for this destination.
+
+## Pest Control
+
+### [blocker] C4: Novice lander minimum is combat level 40 (not 'below 100'). The data frames this as an upper bound when the wiki defines it as a lower bound minimum.
+
+- **Data says:** Novice lander is for combat level below 100
+- **Wiki says (raw):** The only requirement to participate in Pest Control is a combat level of 40, 70 or 100 for Novice, Intermediate and Veteran games respectively.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Pest_Control
+- **Suggested fix:** Change Novice description to 'combat level 40+' (minimum 40).
+- **Skeptic receipt:** "The only requirement to participate in Pest Control is a combat level of 40, 70 or 100 for Novice, Intermediate and Veteran games respectively." -- https://oldschool.runescape.wiki/w/Pest_Control
+- **Skeptic reasoning:** The wiki defines the Novice lander minimum as combat level 40 with no upper bound. Describing it as 'below 100' inverts the mechanic entirely -- it is a lower-bound entry requirement, not an upper-bound cap. No wiki text supports a maximum combat level for any lander. The framing 'below 100' would mislead a level 40-99 player into thinking they cannot board the Novice lander after reaching 100, which is false.
+
+### [blocker] C5: Intermediate lander minimum is combat level 70, not 100-150. The claimed range is wrong on both ends.
+
+- **Data says:** Intermediate lander is for combat level 100-150
+- **Wiki says (raw):** The only requirement to participate in Pest Control is a combat level of 40, 70 or 100 for Novice, Intermediate and Veteran games respectively.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Pest_Control
+- **Suggested fix:** Change Intermediate description to 'combat level 70+' (minimum 70).
+- **Skeptic receipt:** "The only requirement to participate in Pest Control is a combat level of 40, 70 or 100 for Novice, Intermediate and Veteran games respectively." -- https://oldschool.runescape.wiki/w/Pest_Control
+- **Skeptic reasoning:** The wiki specifies combat level 70 as the Intermediate lander minimum. The data claims '100-150', which puts the lower bound at the Veteran threshold (100) and invents an upper bound of 150 that has no wiki basis whatsoever. Both ends of the stated range are wrong.
+
+### [blocker] C6: Veteran lander minimum is combat level 100, not 150. The claimed threshold of 150 is 50 levels too high and would misdirect players.
+
+- **Data says:** Veteran lander is for combat level 150 and above
+- **Wiki says (raw):** The only requirement to participate in Pest Control is a combat level of 40, 70 or 100 for Novice, Intermediate and Veteran games respectively.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Pest_Control
+- **Suggested fix:** Change Veteran description to 'combat level 100+' (minimum 100).
+- **Skeptic receipt:** "The only requirement to participate in Pest Control is a combat level of 40, 70 or 100 for Novice, Intermediate and Veteran games respectively." -- https://oldschool.runescape.wiki/w/Pest_Control
+- **Skeptic reasoning:** The wiki specifies combat level 100 as the Veteran lander minimum. The data claims 150+, which is 50 levels too high and has no basis in any wiki text. A player at combat level 100-149 would be wrongly told they cannot access the Veteran lander.
+
+### [high] C8: Spinners prioritise healing portals, not swarming the Void Knight. The claimed behaviour is factually wrong and would cause players to misunderstand when and why Spinners are dangerous.
+
+- **Data says:** Spinners swarm near the Void Knight during combat
+- **Wiki says (raw):** Spinners repair nearby portals at a rapid speed.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Pest_Control/Strategies
+- **Suggested fix:** Change description to reflect that Spinners repair/heal portals and must be killed to make portals vulnerable again.
+- **Skeptic receipt:** Spinner page: "Their role is to repair the portal they came from, and they should be defeated if the portals are to be destroyed quickly." Strategies page: "Spinners repair nearby portals at a rapid speed. Since they often prevent players from destroying the portals quickly...they are the first priority to kill."
+- **Skeptic reasoning:** Both the Spinner wiki page and the Strategies page are unambiguous: Spinners repair portals, they do not swarm the Void Knight. The Spinner page states 'Their role is to repair the portal they came from.' The Strategies page states 'Spinners repair nearby portals at a rapid speed.' Neither source places Spinners near the Void Knight. The data's described behavior is factually incorrect.
+
+### [high] C10: The wiki's strategy page explicitly inverts this: Spinners must be killed first because they can render portals invulnerable. Prioritising portals over Spinner kills is contra-indicated.
+
+- **Data says:** Portals should be prioritized over kills in strategy
+- **Wiki says (raw):** Spinners are the first priority to kill, even if the portal they surround is still protected. Multiple Spinners will stack their repair effects, rendering a portal effectively invulnerable.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Pest_Control/Strategies
+- **Suggested fix:** Change guidance to: kill Spinners first (they heal portals and stack their repair effects making portals invulnerable), then destroy the portal.
+- **Skeptic receipt:** "Spinners are the first priority to kill, even if the portal they surround is still protected. Multiple Spinners will stack their repair effects, rendering a portal effectively invulnerable." -- https://oldschool.runescape.wiki/w/Pest_Control/Strategies
+- **Skeptic reasoning:** The Strategies page explicitly inverts the data's stated priority. The wiki says Spinners must be killed first -- even before the portal becomes vulnerable -- because stacked Spinner healing renders a portal effectively invulnerable. Guidance that tells players to prioritize portals over Spinner kills directly contradicts this and would cause game-losing behavior.
+
+## Mage Training Arena
+
+### [medium] C3: Direction from Emir's Arena is north, not north-east. The wiki states the arena is 'located to the north of the Emir's Arena' and the travel method is 'running north', not running north-east.
+
+- **Data says:** Ring of dueling to Emir's Arena is fastest; alternatively teleport to Al Kharid and run north-east past the Duel Arena ruins
+- **Wiki says (raw):** A ring of dueling teleport to the Al Kharid Emir's Arena and running north
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mage_Training_Arena
+- **Suggested fix:** Change 'run north-east' to 'run north' in guidanceSteps[0].description and travelTip. The arena is north of Emir's Arena, not north-east.
+- **Skeptic receipt:** wiki_lookup raw: 'A ring of dueling teleport to the Al Kharid Emir\'s Arena and running north.' and 'The Mage Training Arena is located north of the Emir\'s Arena and north-east of Al Kharid.'
+- **Skeptic reasoning:** The travelTip (line 14748) and guidanceSteps[0].description (line 14742) both say 'run north-east' after the Ring of Dueling teleport to Emir's Arena. The wiki is unambiguous that the direction from Emir's Arena is north, not north-east. The 'north-east' geography is correct only for the direction from Al Kharid itself. The data conflates two distinct geographic facts and gives the wrong compass bearing for the Ring of Dueling route specifically.
+
+### [medium] C7: The Enchanting Chamber accepts all enchant spell levels (Lvl-1 through Lvl-7), and players earn more pizazz points per cast at higher levels. Advising 'Lvl-1 Enchant' is misleading -- players should use the highest enchant spell available.
+
+- **Data says:** Enchanting: Lvl-1 Enchant jewelry
+- **Wiki says (raw):** Players will receive 1 Enchantment Pizazz point per level of Enchantment spell cast. The article indicates players should use 'The highest enchant jewellery spell' they have access to, ranging from Level 1 through Level 7 Enchant.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mage_Training_Arena
+- **Suggested fix:** Change 'Lvl-1 Enchant jewelry' to 'Enchant jewelry (highest spell level available)' or similar to reflect that higher-level enchants yield more pizazz points per cast.
+- **Skeptic receipt:** wiki_lookup raw: 'The highest enchant jewellery spell (Lvl-1 Enchant, Lvl-2 Enchant, Lvl-3 Enchant, Lvl-4 Enchant, Lvl-5 Enchant, Lvl-6 Enchant, optionally Lvl-7 Enchant) the player has access to'
+- **Skeptic reasoning:** The guidance step at line 14752 lists 'Enchanting: Lvl-1 Enchant jewelry' as the Enchanting room activity. Read in full context this is a room-description line, not a minimum-entry note, and it names a specific spell rather than 'use the highest available.' The wiki explicitly states players should use the highest enchant spell they have access to, since pizazz points equal the spell level per cast. Naming Lvl-1 as the spell to use is genuinely misleading for any account above level 7 Magic.
+
+### [medium] C8: The Graveyard room does NOT require Bones to Peaches -- Bones to Bananas also works and is available without any unlock. The claim implies the room is gated behind Bones to Peaches, which is incorrect.
+
+- **Data says:** Graveyard (needs Bones to Peaches unlocked): convert bones
+- **Wiki says (raw):** collect bones from the ground, convert into fruit using Bones to Bananas or Bones to Peaches, and deposit in food chutes
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mage_Training_Arena
+- **Suggested fix:** Remove the '(needs Bones to Peaches unlocked)' gate from the Graveyard room description. Bones to Bananas is sufficient. The Bones to Peaches note is only relevant for the efficiency tip in step 2/3.
+- **Skeptic receipt:** wiki_lookup raw: 'Bones To Bananas or Bones To Peaches' (listed as the two valid spells, no gate implied). Creature Graveyard page: 'use the Bones to Bananas or Bones to Peaches spells to turn them into bananas or peaches respectively' with no entry requirement stated.
+- **Skeptic reasoning:** The guidance step at line 14752 says 'Graveyard (needs Bones to Peaches unlocked): convert bones', implying the room is gated behind the Bones to Peaches unlock. The wiki and the Creature Graveyard page both confirm Bones to Bananas also works with no unlock required. The room is not gated -- Bones to Peaches is an efficiency unlock, not an access requirement. The parenthetical phrasing 'needs Bones to Peaches unlocked' is factually incorrect as a gate description.
+
+### [blocker] C11: The Master wand costs hundreds to thousands of pizazz points per type, not '17 pizazz of each type'. This is completely wrong by multiple orders of magnitude and would severely mislead players about the effort required.
+
+- **Data says:** The Master wand (17 pizazz of each type) and Mage's book are the primary targets
+- **Wiki says (raw):** the master wand...the price of 480 Telekinetic, 480 Graveyard, 4800 Enchantment, and 530 Alchemist pizazz points. [full upgrade path]; Master wand (Upgrade): 240 Telekinetic, 240 Graveyard, 2400 Enchantment, 240 Alchemist pizazz points
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mage_Training_Arena
+- **Suggested fix:** Replace '17 pizazz of each type' with the correct costs. The upgrade cost (requiring Teacher wand in inventory) is 240 Telekinetic, 240 Graveyard, 2400 Enchantment, and 240 Alchemist pizazz points. The full cumulative cost from scratch is 480 Telekinetic, 480 Graveyard, 4800 Enchantment, and 530 Alchemist pizazz points.
+- **Skeptic receipt:** Master wand wiki page: 'From scratch, buying the master wand and all of its three prerequisite wands requires: 480 Telekinetic pizazz points, 530 Alchemist pizazz points, 4800 Enchantment pizazz points, 480 Graveyard pizazz points.' Upgrade cost (with Teacher wand): '240 Telekinetic, 240 Alchemist, 2400 Enchantment, 240 Graveyard pizazz points.'
+- **Skeptic reasoning:** The guidance step at line 14773 tells players 'The Master wand (17 pizazz of each type)'. The value 17 is the plugin's internal pointCost field for the Master wand item entry -- it is an artefact of the plugin's data model, not the in-game pizazz cost. The actual cost to obtain the Master wand (via the upgrade path with Teacher wand in inventory) is 240 Telekinetic, 240 Graveyard, 2400 Enchantment, and 240 Alchemist pizazz points. The cumulative cost from scratch is 480/480/4800/530. '17 pizazz of each type' is wrong by more than an order of magnitude and would severely mislead players about the effort required.
+
+## Shades of Mort'ton
+
+### [medium] C9: The reward pillar/pedestal where shade keys appear is located near the funeral pyres (south and west sides of town), not inside the temple. The temple is north of town; the pyres are on the south and west sides. A player following this guidance step would look inside the temple for a key that actually spawns at the pyre where they just burned the shade remains.
+
+- **Data says:** Pick up your shade key from the reward pillar inside the temple.
+- **Wiki says (raw):** An animation of a shade's spirit will float up into the air, then either a key or a stack of coins will appear on the pedestal nearby.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Shades_of_Mort%27ton_(minigame)
+- **Suggested fix:** Change description to: "Pick up your shade key from the pedestal next to the funeral pyre." Remove the "inside the temple" qualifier -- the reward appears at the pyre location, not inside the temple.
+- **Skeptic receipt:** Mort'ton wiki (https://oldschool.runescape.wiki/w/Mort%27ton): 'North of the town is the Flamtaer temple' / 'On the south and west sides of the town are funeral pyres for burning shade remains.' Funeral pyre wiki (https://oldschool.runescape.wiki/w/Funeral_pyre): 'This will burn the remains and cause a reward (either coins or a shade key) to appear on the nearby stone stand.' Shades of Mort'ton minigame wiki: 'An animation of a shade's spirit will float up into the air, then either a key or a stack of coins will appear on the pedestal nearby.'
+- **Skeptic reasoning:** Three independent wiki sources establish that the reward pedestal is adjacent to the funeral pyre, and that pyres are geographically separate from the temple. The Mort'ton wiki states verbatim: 'North of the town is the Flamtaer temple' and 'On the south and west sides of the town are funeral pyres for burning shade remains.' The Funeral pyre wiki states rewards appear on 'the nearby stone stand' -- nearby the pyre, not inside the temple. The guidance step says 'Pick up your shade key from the reward pillar inside the temple', which directs the player to the wrong location: the temple is north of town while the reward pedestal is adjacent to the pyres on the south and west edges. No refutation vector applies: this is not a multi-source clog item issue, not a variant ID issue, not account-type-dependent, and the wiki has not changed recently (zero edits in the past 7 days). The contradiction is direct and geography-specific.
+
+## Mahogany Homes
+
+### [high] C5: All three tier names in the guidance are wrong. The wiki defines four tiers: Beginner (1), Novice (20), Adept (50), Expert (70). There is no Master tier. The guidance calls the level-20 tier 'Adept' (should be Novice), the level-50 tier 'Expert' (should be Adept), and invents a non-existent 'Master' tier at level 70 (should be Expert).
+
+- **Data says:** Higher Construction levels unlock the Carpenter (Adept 20+, Expert 50+, Master 70+) tiers
+- **Wiki says (raw):** Higher tier contracts are unlocked with higher Construction levels. Beginner contracts can be started at level 1, Novice at level 20, Adept at level 50 and Expert at level 70.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mahogany_Homes
+- **Suggested fix:** Replace '(Adept 20+, Expert 50+, Master 70+)' with '(Novice 20+, Adept 50+, Expert 70+)' to match the four wiki-defined tiers.
+- **Skeptic receipt:** wiki_lookup raw output: 'Four types of contract are available: Beginner (level 1), Novice (level 20), Adept (level 50), and Expert (level 70).' WebFetch: 'Beginner (level 1), Novice (level 20), Adept (level 50), Expert (level 70).' No 'Master' tier appears anywhere in either source.
+- **Skeptic reasoning:** The data labels the level-20 tier 'Adept', the level-50 tier 'Expert', and invents a 'Master' tier at level 70. The wiki and the raw wiki_lookup output both define exactly four tiers with specific names: Beginner (1), Novice (20), Adept (50), Expert (70). 'Master' does not exist anywhere on the wiki page. All three tier names in the guidance are wrong. The level numbers are correct but assigned to wrong names.
+
+### [medium] C6: The tier names cited (Adept / Expert / Master) are all wrong -- the correct names are Novice / Adept / Expert. 'Master' does not exist. The underlying mechanic (higher tiers unlocking contracts beyond Falador) may be correct, but the tier names are fabricated.
+
+- **Data says:** Higher tiers (Adept / Expert / Master) ignore the starter Falador-only contracts.
+- **Wiki says (raw):** Higher tier contracts are unlocked with higher Construction levels. Beginner contracts can be started at level 1, Novice at level 20, Adept at level 50 and Expert at level 70.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mahogany_Homes
+- **Suggested fix:** Replace '(Adept / Expert / Master)' with '(Novice / Adept / Expert)' to use the correct wiki tier names.
+- **Skeptic receipt:** wiki_lookup raw output: 'Four types of contract are available: Beginner (level 1), Novice (level 20), Adept (level 50), and Expert (level 70).' WebFetch confirms identical tier list. 'Master' appears in neither source.
+- **Skeptic reasoning:** The guidance reads 'Higher tiers (Adept / Expert / Master) ignore the starter Falador-only contracts.' The correct tier names for levels above Beginner are Novice, Adept, and Expert. 'Master' does not exist. 'Adept' in the guidance maps to the level-20 slot (correct name: Novice), 'Expert' maps to level-50 (correct name: Adept), and 'Master' maps to level-70 (correct name: Expert). All three names are shifted by one tier relative to the canonical list.
+
+### [medium] C7: There is no Master tier. The mahogany-plank tier is Expert (level 70). Labelling it 'Master' references a tier that does not exist in the game.
+
+- **Data says:** use the correct plank tier (Master = Mahogany only)
+- **Wiki says (raw):** Higher tier contracts are unlocked with higher Construction levels. Beginner contracts can be started at level 1, Novice at level 20, Adept at level 50 and Expert at level 70.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mahogany_Homes
+- **Suggested fix:** Replace 'Master = Mahogany only' with 'Expert = Mahogany only' to use the correct tier name.
+- **Skeptic receipt:** wiki_lookup raw output: 'Expert (level 70)' is the highest tier. WebFetch plank types: 'Expert: Mahogany planks.' No 'Master' tier in either source.
+- **Skeptic reasoning:** The data says 'Master = Mahogany only.' The wiki defines no Master tier. The level-70 tier is Expert, and Expert contracts use mahogany planks. The plank assignment is correct but the tier name is wrong. This is the same fabricated 'Master' label appearing in C5 and C6, here applied specifically to the plank-tier association.
+
+### [high] C9: Mahogany Homes contracts are in East Ardougne, not West Ardougne. West Ardougne is a separate walled city with no bank accessible to players doing construction contracts there. Directing players to the West Ardougne bank sends them across the city wall to the wrong side of Ardougne.
+
+- **Data says:** West Ardougne bank is closest to Ardougne contracts.
+- **Wiki says (raw):** Four cities have contracts: Falador, Varrock, East Ardougne, and Hosidius
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mahogany_Homes
+- **Suggested fix:** Replace 'West Ardougne bank' with 'East Ardougne bank' (or 'Ardougne north/south bank') since contracts are in East Ardougne.
+- **Skeptic receipt:** Mahogany Homes wiki (wiki_lookup): 'Amy will provide the player with a contract for one of several possible houses in one of four locations: south-east Falador, north-east or southern Varrock, southern or central Hosidius, or throughout East Ardougne.' West Ardougne wiki fetch: 'there is no bank mentioned in West Ardougne... For banking, players would need to travel to East Ardougne or another location with banking facilities.'
+- **Skeptic reasoning:** The guidance step at line 15630 directs players to 'West Ardougne bank' for restocking. The wiki confirms contracts are in East Ardougne, not West Ardougne. West Ardougne has no bank -- the West Ardougne wiki page lists no banking facility and explicitly notes it only accessible to players who have started Plague City. Directing players to a non-existent bank in the wrong half of Ardougne is a genuine navigation error.
+
+## Mastering Mixology
+
+### [high] C2: The reagent pouch stores herblore secondary ingredients (snape grass, wine of zamorak, etc.) for traditional potion-making. It has no functionality related to paste or the Mastering Mixology minigame. The 'auto-deposit paste' claim is fabricated.
+
+- **Data says:** a Reagent pouch if you own one to auto-deposit paste
+- **Wiki says (raw):** Stores up to 26 of each secondary ingredient used in Herblore. Requires Herblore 81 to use.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mastering_Mixology
+- **Suggested fix:** Remove references to the reagent pouch auto-depositing paste. The reagent pouch is not relevant to the Mastering Mixology minigame.
+- **Skeptic receipt:** Reagent pouch wiki: 'Stores up to 26 of each secondary ingredient used in Herblore. Requires Herblore 81 to use.' Mastering Mixology wiki: no mention of reagent pouch interacting with paste or deposit boxes anywhere on the page.
+- **Skeptic reasoning:** The reagent pouch is purchasable from the Mastering Mixology shop, but its in-game function is storing herblore secondary ingredients for standard Herblore, not paste. The guidance text at drop_rates.json line 15730 claims it 'auto-deposit[s] paste' -- no such mechanic exists. The wiki page for Reagent pouch and the Mastering Mixology page both confirm it has no paste-storage or deposit-box interaction inside the minigame.
+
+### [medium] C3: The guidance describes Aldarin as being 'in southern Varlamore' implying it is part of the Varlamore mainland. The wiki describes it as an island off the south-west coast -- a distinct geographic entity only reachable by sea/teleport, not by running south from Varlamore.
+
+- **Data says:** Travel to Aldarin in southern Varlamore.
+- **Wiki says (raw):** Aldarin is a large island off the south-west coast of Varlamore.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Aldarin
+- **Suggested fix:** Change 'Aldarin in southern Varlamore' to 'Aldarin, an island off the south-west coast of Varlamore'.
+- **Skeptic receipt:** Aldarin wiki: 'Aldarin is a large island off the south-west coast of Varlamore.'
+- **Skeptic reasoning:** The guidance at drop_rates.json line 15742 describes the destination as 'Aldarin in southern Varlamore', implying it is a mainland location reachable overland. The wiki is explicit that Aldarin is a separate island, not part of the Varlamore landmass, which is material to travel advice -- a player cannot simply run there from Varlamore.
+
+### [high] C4: Civitas illa Fortis is the capital of Varlamore on the mainland. Aldarin is a large island off the south-west coast of Varlamore reachable only by ship, fairy ring, quetzal transport, or minigame teleport. The wiki lists no Civitas illa Fortis route to Aldarin.
+
+- **Data says:** Civitas illa Fortis teleport + run south-west also works.
+- **Wiki says (raw):** The wiki lists transport options as: Minigame Teleport, Fairy ring CKQ, Quetzal Transport System to Aldarin then run north, Ship from Sunset Coast, Player-owned house on Aldarin, Charter ship to Aldarin, Pendant of Ates. Civitas illa Fortis is not listed.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mastering_Mixology
+- **Suggested fix:** Remove 'Civitas illa Fortis teleport + run south-west'. Replace with an accurate alternative such as 'Fairy ring CKQ' or 'Minigame teleport'.
+- **Skeptic receipt:** Mastering Mixology wiki transport options: 'Minigame Teleport... fairy ring code CKQ and run south-east... Quetzal Transport System to Aldarin, then run north... Ship ride from Sunset Coast (requires 20 coins), then run due south... player-owned house on Aldarin... Charter a charter ship to Aldarin... Pendant of Ates...' Civitas illa Fortis is not listed. Aldarin wiki: 'Aldarin is a large island off the south-west coast of Varlamore.'
+- **Skeptic reasoning:** The guidance at drop_rates.json lines 15742 and 15748 states 'Civitas illa Fortis teleport + run south-west also works.' Aldarin is an island separated from the Varlamore mainland by sea -- there is no overland running route from Civitas illa Fortis. The wiki's exhaustive transport list does not include this route.
+
+### [blocker] C6: The data states 'Children of the Sun started' but the wiki requires full completion of the quest. A player who has only started the quest would be denied entry.
+
+- **Data says:** You need 60 Herblore + Children of the Sun started.
+- **Wiki says (raw):** Participating in mixology requires level 60 Herblore [not boostable] and completion of Children of the Sun
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mastering_Mixology
+- **Suggested fix:** Change 'Children of the Sun started' to 'Children of the Sun completed'.
+- **Skeptic receipt:** Mastering Mixology wiki: 'Participating in mixology requires level 60 Herblore [not boostable] and completion of Children of the Sun.' PlayerQuestProgressState.java line 253-255: '// Children of the Sun -- must be fully complete for Varlamore access' / 'out.put(QuestSubMilestone.CHILDREN_OF_THE_SUN_COMPLETE, isQuestFinished(Quest.CHILDREN_OF_THE_SUN));'
+- **Skeptic reasoning:** The guidance step text at drop_rates.json line 15752 says 'You need 60 Herblore + Children of the Sun started.' The wiki requires full completion, not merely starting the quest. The requirements block in the JSON correctly uses the 'quests' field (which maps to QuestState.FINISHED per SourceRequirements.java line 34 and PlayerQuestProgressState.java line 254-255), but the human-readable guidance description contradicts the requirement by saying 'started.'
+
+### [medium] C8: The wiki describes a correction mechanic that explicitly states mistakes can be fixed 'without wasting any paste.' There is no mechanic described anywhere on the wiki where over-agitation converts a potion into paste.
+
+- **Data says:** over-agitating turns the potion into paste (wasted XP)
+- **Wiki says (raw):** If all three spots in the mixer are full, pulling any of the levers will also override the oldest element selected. This allows for correcting mistakes without wasting any paste.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mastering_Mixology
+- **Suggested fix:** Remove the over-agitation claim. If a warning about order indicators is still desired, base it on the actual mechanic: pulling the wrong lever overrides the oldest input, which can be corrected without paste waste.
+- **Skeptic receipt:** Mastering Mixology wiki: 'If all three spots in the mixer are full, pulling any of the levers will also override the oldest element selected. This allows for correcting mistakes without wasting any paste.'
+- **Skeptic reasoning:** The guidance at drop_rates.json line 15760 states 'over-agitating turns the potion into paste (wasted XP).' The wiki describes no such mechanic. The correction mechanic explicitly states that mistakes can be resolved without any waste.
+
+### [high] C9: Same fabrication as C2: the reagent pouch stores herblore secondaries for standard herblore, not paste for Mastering Mixology. There is no 'deposit box walk' mechanic described anywhere on the wiki.
+
+- **Data says:** Reagent pouch auto-stores paste so you don't need to walk to deposit boxes.
+- **Wiki says (raw):** Stores up to 26 of each secondary ingredient used in Herblore. Requires Herblore 81 to use.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mastering_Mixology
+- **Suggested fix:** Remove all reagent pouch paste-storage claims from guidanceSteps[3]. The item is irrelevant to this minigame.
+- **Skeptic receipt:** Reagent pouch wiki: 'Stores up to 26 of each secondary ingredient used in Herblore. Requires Herblore 81 to use.' The Mastering Mixology wiki page describes no deposit-box walk mechanic and does not mention the reagent pouch having any in-minigame function.
+- **Skeptic reasoning:** The guidance at drop_rates.json line 15760 claims 'Reagent pouch auto-stores paste so you don't need to walk to deposit boxes.' This is fabricated -- the reagent pouch stores herblore secondary ingredients for standard Herblore potions, not paste produced inside the Mastering Mixology minigame. There is no 'deposit box walk' mechanic on the wiki.
+
+### [blocker] C18: The guidance tells players not to bring herbs because the lab supplies them. The wiki states the opposite -- players must bring their own clean herbs or unfinished potions. A player following this guidance would arrive with no herbs and be unable to make any potions.
+
+- **Data says:** The minigame supplies all herbs and vials in the lobby; you do not need to bring herblore reagents.
+- **Wiki says (raw):** Clean herbs or the corresponding unfinished potions must be brought to refine into paste.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mastering_Mixology
+- **Suggested fix:** Remove the claim that the lab supplies herbs/vials. Change to: 'Bring clean herbs or unfinished potions -- the lab does not supply them. A bank chest is available on-site.'
+- **Skeptic receipt:** Mastering Mixology wiki: 'Clean herbs or the corresponding unfinished potions must be brought to refine into paste. There is a bank chest available. Herbs must be un-noted.'
+- **Skeptic reasoning:** The guidance step at drop_rates.json line 15730 states 'The minigame supplies all herbs and vials in the lobby; you do not need to bring herblore reagents.' The wiki is unambiguous that players must supply their own herbs, and the bank chest exists specifically to support restocking them.
+
+### [blocker] C19: The step-5 guidance reinforces the false claim that no supplies are needed. The wiki confirms players must supply their own herbs. The bank chest is on-site precisely because players need to restock herbs.
+
+- **Data says:** No restock is needed - the lab supplies everything.
+- **Wiki says (raw):** Clean herbs or the corresponding unfinished potions must be brought to refine into paste. There is a bank chest available.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mastering_Mixology
+- **Suggested fix:** Remove 'the lab supplies everything'. Change to: 'Use the on-site bank chest to restock herbs as needed.'
+- **Skeptic receipt:** Mastering Mixology wiki: 'Clean herbs or the corresponding unfinished potions must be brought to refine into paste. There is a bank chest available.'
+- **Skeptic reasoning:** The guidance step at drop_rates.json line 15782 states 'No restock is needed - the lab supplies everything.' The wiki confirms the opposite: players must bring their own herbs, and the on-site bank chest exists precisely to support restocking between runs.
+
+### [medium] C20: Aldarin is an island with no direct running route to Civitas illa Fortis. Suggesting 'Civitas illa Fortis teleport' as a banking method after Mixology is misleading -- there is no such teleport from the minigame, and a player would still need to travel from Civitas to a bank. The Minigame Teleport or a POH teleport would be standard routes.
+
+- **Data says:** Teleport back to Civitas illa Fortis or your home bank to deposit any rewards.
+- **Wiki says (raw):** The wiki lists no Civitas illa Fortis teleport connection to the Mastering Mixology area. Transport options listed are Minigame Teleport, Fairy ring CKQ, Quetzal Transport System, Ship from Sunset Coast, Player house on Aldarin, Charter ship, Pendant of Ates.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mastering_Mixology
+- **Suggested fix:** Replace 'Civitas illa Fortis' with an accurate egress: e.g., 'Use the Grouping interface minigame teleport to leave, or teleport to your player-owned house on Aldarin, then use the on-site bank chest.'
+- **Skeptic receipt:** Mastering Mixology wiki transport options (exhaustive list): 'Minigame Teleport... fairy ring code CKQ... Quetzal Transport System to Aldarin... Ship ride from Sunset Coast... player-owned house on Aldarin... Charter a charter ship to Aldarin... Pendant of Ates...' No Civitas illa Fortis egress listed. Aldarin wiki: 'Aldarin is a large island off the south-west coast of Varlamore.'
+- **Skeptic reasoning:** The guidance step at drop_rates.json line 15782 tells players to 'Teleport back to Civitas illa Fortis' after the minigame. Aldarin is an island; the wiki lists no teleport from the minigame area to Civitas illa Fortis. No such egress route exists. The standard egress is the Minigame Teleport or a player-owned house teleport on Aldarin itself.
+
+## Volcanic Mine
+
+### [medium] C6: Falling rocks (stalactites/meteorites) deal HP damage only. The wiki never states they reduce mine stability. Stability is managed exclusively through the gas chambers (A, B, C) -- keeping pressure in the 40-60% range. Claiming stalactites also 'chip away stability' is an invented mechanic.
+
+- **Data says:** Falling rocks in Volcanic Mine chip away HP and stability
+- **Wiki says (raw):** stalactites will start falling from the ceiling which will damage any players they land on for upwards of 25 damage
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Suggested fix:** Remove 'and stability' from the description. Falling rocks deal HP damage only; stability is controlled via the gas chamber vent mechanics.
+- **Skeptic receipt:** "Stalactites will start falling from the ceiling which will damage any players they land on for upwards of 25 damage." -- wiki_lookup + WebFetch of https://oldschool.runescape.wiki/w/Volcanic_Mine. Stability mechanic quote: "The pressure of each chamber should be kept around 40-60%, or else the mine stability will start to decrease."
+- **Skeptic reasoning:** The wiki states stalactites deal HP damage only -- 'stalactites will start falling from the ceiling which will damage any players they land on for upwards of 25 damage.' Mine stability is controlled exclusively by gas chamber pressure (the 40-60% range). No wiki text links stalactite falls to any stability reduction. The claim that falling rocks 'chip away stability' is an invented mechanic not described anywhere on the page.
+
+### [high] C9: The Digsite pendant (standard charge) teleports to the Digsite area, not the Mushroom Forest. The Mushroom Forest is not a pendant destination at all. The route from the barge landing is east to the rope anchor, not north-east from a forest.
+
+- **Data says:** Digsite pendant teleport takes you to the Mushroom Forest, then run north-east to Volcanic Mine
+- **Wiki says (raw):** Digsite pendant to the Digsite, travel to Fossil Island via the barge, then go East and climb up the Rope anchor (requires Agility 64)
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Suggested fix:** Replace 'Digsite pendant teleport takes you to the Mushroom Forest, then run north-east' with the correct route: Digsite pendant to the Digsite -> barge to Fossil Island -> run east and climb the rope anchor (requires 64 Agility). Alternatively, describe the Fossil Island charge: pendant to House on the Hill -> Mycelium Transportation System to Verdant Valley -> run east then north to the mine.
+- **Skeptic receipt:** "Digsite pendant to the Digsite, travel to Fossil Island via the barge, then go East and climb up the Rope anchor" -- wiki_lookup output from https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Skeptic reasoning:** The wiki lists the Digsite pendant route as: 'Digsite pendant to the Digsite, travel to Fossil Island via the barge, then go East and climb up the Rope anchor (requires Agility 64).' The pendant does not teleport to the Mushroom Forest -- that is not a pendant destination at all. The direction from the barge landing is east to the rope anchor, not north-east from a forest.
+
+### [medium] C10: The Fossil Island charge of the Digsite pendant lands at House on the Hill, not a generic 'Fossil Island' arrival point. The onward route is east-then-north (via Mycelium Transport to Verdant Valley), not simply 'north-east.'
+
+- **Data says:** POH mounted digsite pendant teleports to Fossil Island, then run north-east to Volcanic Mine
+- **Wiki says (raw):** Digsite pendant to House on the Hill, then Mycelium Transportation System to Verdant Valley, then run east below the lava, then run north
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Suggested fix:** Update to: 'POH mounted digsite pendant teleports to House on the Hill -> use Mycelium Transportation System to Verdant Valley -> run east below the lava then north to Volcanic Mine.'
+- **Skeptic receipt:** "Digsite pendant to House on the Hill, then Mycelium Transportation System to Verdant Valley, then run east below the lava, then run north" -- wiki_lookup output from https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Skeptic reasoning:** The wiki gives the Fossil Island pendant destination as 'House on the Hill', not a generic 'Fossil Island' arrival. The onward route is 'Mycelium Transportation System to Verdant Valley, then run east below the lava, then run north' -- not simply 'north-east'. The data's phrasing 'teleports to Fossil Island, then run north-east' is imprecise enough to be materially misleading about the actual route.
+
+### [high] C11: The wiki lists World 323 (United States west) as the official Volcanic Mine world. Worlds 408 and 409 are not mentioned anywhere on the page.
+
+- **Data says:** Worlds 408 and 409 are the official Volcanic Mine theme worlds
+- **Wiki says (raw):** World 323
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Suggested fix:** Replace worlds 408 and 409 with World 323.
+- **Skeptic receipt:** Wiki worlds table returns World 323 (United States west, Members) as the sole official world -- WebFetch of https://oldschool.runescape.wiki/w/Volcanic_Mine section '(3) Official World Number'
+- **Skeptic reasoning:** The wiki lists exactly one official Volcanic Mine world: World 323 (United States west, Members). Worlds 408 and 409 do not appear anywhere on the page.
+
+### [medium] C12: The wiki describes no multiplier system for team vs solo play. Points are individually earned by each player based on their own contributions (capping vents, mining ore). The '3-5x multiplier' figure is not supported by the wiki.
+
+- **Data says:** Team play in Volcanic Mine multiplies points/hour by 3-5x compared to solo
+- **Wiki says (raw):** Points are awarded individually based on performance regardless of team size.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Suggested fix:** Remove or rephrase the multiplier claim. Team play improves efficiency by allowing role specialisation (dedicated cappers vs miners), enabling the full boulder bonus to be completed -- but there is no stated numeric multiplier.
+- **Skeptic receipt:** "The page does not mention points multipliers based on team size or any differential point earning between team and solo play." -- WebFetch of https://oldschool.runescape.wiki/w/Volcanic_Mine section '(4) Points Multipliers for Team vs Solo'
+- **Skeptic reasoning:** The wiki describes no points multiplier for team vs solo play. Points are earned individually based on personal contributions. The '3-5x multiplier' figure has no basis on the page. Team play improves efficiency through role specialisation and enabling the boulder bonus, but no numeric multiplier is stated.
+
+### [medium] C13: The three venting features are gas chambers labelled A, B, and C on the overlay -- not coloured walls named red, green, and blue. The wiki makes no mention of wall colours as a game mechanic.
+
+- **Data says:** Volcanic Mine has three coloured walls: red, green, and blue
+- **Wiki says (raw):** The gas chambers are marked on the minigame overlay as A, B, and C.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Suggested fix:** Replace 'three coloured walls: red, green, and blue' with 'three gas chambers labelled A, B, and C.'
+- **Skeptic receipt:** "The gas chambers are marked on the minigame overlay as A, B, and C." -- WebFetch of https://oldschool.runescape.wiki/w/Volcanic_Mine section '(2) Gas Chambers'
+- **Skeptic reasoning:** The wiki describes gas chambers labelled A, B, and C on the minigame overlay. There are no 'coloured walls named red, green, and blue' described anywhere on the page. The colour-wall framing does not correspond to any mechanic on the Volcanic Mine wiki page.
+
+### [medium] C14: This claim is based on the incorrect colour-wall framing from C13. The actual mechanic involves gas chambers (A/B/C) that players cap or uncap to maintain pressure between 40-60%. There are no 'coloured walls that fuel vents.'
+
+- **Data says:** Each coloured wall in Volcanic Mine fuels a different vent
+- **Wiki says (raw):** Players can block the gas chambers with a large rock to increase gas pressure, or remove the large rock to decrease gas pressure.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Suggested fix:** Rephrase to describe the gas chamber pressure mechanic: players cap or uncap chambers A, B, and C to keep gas pressure in the 40-60% range and maintain mine stability.
+- **Skeptic receipt:** "Players can block the gas chambers with a large rock to increase gas pressure, or remove the large rock to decrease gas pressure." and "The pressure of each chamber should be kept around 40-60%, or else the mine stability will start to decrease." -- WebFetch of https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Skeptic reasoning:** This claim is derived from the incorrect colour-wall framing of C13. The actual mechanic is gas chambers (A/B/C) that players cap or uncap with large rocks to control pressure between 40-60%. There are no coloured walls and no 'vents fuelled by walls.' The description is a fabrication that builds on C13's false premise.
+
+### [medium] C17: The wiki does not describe a 150-point threshold for maximising the unique reward table roll. No such scoring gate appears anywhere on the page. The claim appears to be fabricated or confused with a different minigame.
+
+- **Data says:** Scoring 150+ points per round in Volcanic Mine maximizes unique table roll chance
+- **Wiki says (raw):** The document mentions earning points but does not specify a 150-point threshold for unique items.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Volcanic_Mine
+- **Suggested fix:** Remove the 150-point unique threshold claim, or source the actual point threshold from the wiki's rewards section if one exists.
+- **Skeptic receipt:** "No mention of a 150-point threshold for unique reward rolls appears on this page." -- WebFetch of https://oldschool.runescape.wiki/w/Volcanic_Mine section '(5) 150-Point Threshold for Unique Rewards'
+- **Skeptic reasoning:** The wiki contains no mention of a 150-point threshold for maximising the unique reward table roll chance. No such scoring gate appears on the page. The claim is not supported by any authoritative source.
+
+## Tithe Farm
+
+### [medium] C1: Xeric's talisman teleports to Xeric's Glade (not Xeric's Heart). Using the wrong talisman destination would place the player at a different location.
+
+- **Data says:** Travel to Tithe Farm in Hosidius via Xeric's talisman (Xeric's Heart) or fairy ring CIR then walk south.
+- **Wiki says (raw):** Use a Xeric's talisman to teleport to Xeric's Glade and go south-east
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Tithe_Farm
+- **Suggested fix:** Change 'Xeric's Heart' to 'Xeric's Glade' in guidanceSteps[0].description.
+- **Skeptic receipt:** wiki_lookup raw output: 'Use a Xeric's talisman to teleport to Xeric's Glade and go south-east'
+- **Skeptic reasoning:** The data guidance says 'Xeric's Heart' as the talisman destination. Both the WebFetch of the wiki page and the wiki_lookup MCP return the same raw text: 'Use a Xeric's talisman to teleport to Xeric's Glade and go south-east.' Xeric's Heart and Xeric's Glade are distinct talisman teleport destinations; a player following the data guidance would land at the wrong location. The fix is to replace 'Xeric's Heart' with 'Xeric's Glade' in guidanceSteps[0].description.
+
+### [high] C2: Fairy ring code CIR does not lead near Tithe Farm. The correct code is AKR (Hosidius Vinery). A player following this guidance would teleport to the wrong location entirely.
+
+- **Data says:** Travel to Tithe Farm in Hosidius via Xeric's talisman (Xeric's Heart) or fairy ring CIR then walk south.
+- **Wiki says (raw):** Use the fairy ring AKR to teleport to the Hosidius Vinery and go south
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Tithe_Farm
+- **Suggested fix:** Change 'fairy ring CIR' to 'fairy ring AKR' in guidanceSteps[0].description.
+- **Skeptic receipt:** wiki_lookup raw output: 'Use the fairy ring , to teleport to the Hosidius Vinery and go south' (AKR confirmed by WebFetch: 'Use the fairy ring AKR, to teleport to the Hosidius Vinery and go south')
+- **Skeptic reasoning:** The data guidance says 'fairy ring CIR'. Both the WebFetch and wiki_lookup MCP return: 'Use the fairy ring AKR, to teleport to the Hosidius Vinery and go south.' CIR is not a fairy ring code that leads to Tithe Farm. A player using CIR would be teleported to the wrong location entirely. The fix is to replace 'CIR' with 'AKR'.
+
+### [medium] C3: Hosidius favour requirement was removed in January 2024. The guidance still lists '34% Hosidius favour' as a gate, which is no longer required and may mislead players into grinding favour unnecessarily.
+
+- **Data says:** Travel to Tithe Farm in Hosidius via Xeric's talisman (Xeric's Heart) or fairy ring CIR then walk south. Requires 34% Hosidius favour and 34 Farming.
+- **Wiki says (raw):** The Tithe Farm can now be accessed starting at level 34 Farming as Kourend Favour has been removed.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Tithe_Farm
+- **Suggested fix:** Remove '34% Hosidius favour' from the requirements text in guidanceSteps[0].description. The only access gate is 34 Farming.
+- **Skeptic receipt:** WebFetch raw output: 'As of January 10, 2024: "The Tithe Farm can now be accessed starting at level 34 Farming as Kourend Favour has been removed."'
+- **Skeptic reasoning:** The data guidance lists '34% Hosidius favour' as an access gate. The WebFetch confirms that as of January 10, 2024, this requirement was removed: 'The Tithe Farm can now be accessed starting at level 34 Farming as Kourend Favour has been removed.' wiki_updates returns zero changes since 2024-01-01, meaning this removal is stable and current. The sole access gate is 34 Farming. Leaving the favour requirement in guidance would mislead players into grinding favour unnecessarily.
+
+### [blocker] C6: Logavano seeds require level 74, not 54. The data has Logavano and Bologano inverted: Logavano is listed at 54+ but the wiki confirms Logavano=74, Bologano=54. A player would bring the wrong seeds for their level.
+
+- **Data says:** Bring seeds scaled to your Farming level (Golovanova at 34+, Logavano at 54+, Bologano at 74+)
+- **Wiki says (raw):** Bolivano seeds ( Farming 54 ) ... Logavano seeds ( Farming 74 )
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Tithe_Farm
+- **Suggested fix:** Swap the seed levels in guidanceSteps[1].description: 'Golovanova at 34+, Bologano at 54+, Logavano at 74+'. This corrects the inversion.
+- **Skeptic receipt:** wiki_lookup raw output: 'Golovanova seeds () / Bologano seeds () / Logavano seeds ()' and WebFetch: 'Golovanova seeds (Farming 34) / Bologano seeds (Farming 54) / Logavano seeds (Farming 74)'
+- **Skeptic reasoning:** The data lists 'Logavano at 54+'. Both sources confirm Logavano requires Farming 74, not 54. The correct seed tier order is Golovanova=34, Bologano=54, Logavano=74. The data has Logavano and Bologano level thresholds inverted. This is the same inversion as C7; both must be corrected together by swapping the two level values in the guidance text.
+
+### [blocker] C7: Bologano seeds require level 54, not 74. The data has Logavano and Bologano inverted: Bologano is listed at 74+ but the wiki confirms Bologano=54, Logavano=74. This is the same inversion as C6 -- both claims must be fixed together.
+
+- **Data says:** Bring seeds scaled to your Farming level (Golovanova at 34+, Logavano at 54+, Bologano at 74+)
+- **Wiki says (raw):** Bolivano seeds ( Farming 54 ) ... Logavano seeds ( Farming 74 )
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Tithe_Farm
+- **Suggested fix:** Swap the seed levels in guidanceSteps[1].description: 'Golovanova at 34+, Bologano at 54+, Logavano at 74+'. This corrects the inversion.
+- **Skeptic receipt:** WebFetch raw output: 'Bologano seeds (Farming 54)' and 'Logavano seeds (Farming 74)'
+- **Skeptic reasoning:** The data lists 'Bologano at 74+'. Both sources confirm Bologano requires Farming 54, not 74. This is the mirror half of the C6 inversion. The fix is the same: swap the level assignments so Bologano=54 and Logavano=74.
+
+### [low] C10: Bonus rewards are triggered by depositing the 75th fruit (not by reaching 74+ points). The threshold is fruit count, not a points total, and the threshold is 75 fruits (not 74+). The guidance conflates two different metrics.
+
+- **Data says:** aim for 74+ Tithe Farm points per round to trigger bonus rewards
+- **Wiki says (raw):** Players receive bonus experience of 250 times the harvest experience rate when depositing the 75th fruit ... double experience is awarded for the 75th through 100th fruit added to the sack, and 2 bonus points are awarded to players when they add the 100th fruit.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Tithe_Farm
+- **Suggested fix:** Change 'aim for 74+ Tithe Farm points per round to trigger bonus rewards' to 'aim to deposit all 100 fruits per round; bonus experience begins at the 75th fruit deposited'.
+- **Skeptic receipt:** WebFetch raw output: 'Players receive bonus experience of 250 times the harvest experience rate when depositing the 75th fruit...Additionally, double experience is awarded for the 75th through 100th fruit added to the sack, and 2 bonus points are awarded to players when they add the 100th fruit.' Points formula: 'For every 3 plants a player deposits in the sack, they will earn 1 point and for every 100 plants deposited, they will earn an additional 2 points.'
+- **Skeptic reasoning:** The data says 'aim for 74+ Tithe Farm points per round to trigger bonus rewards.' The wiki defines no such threshold. The documented bonus trigger is fruit count, not points: 'Players receive bonus experience of 250 times the harvest experience rate when depositing the 75th fruit...double experience is awarded for the 75th through 100th fruit.' The points formula is: 1 point per 3 fruits deposited, plus 2 bonus points at the 100th fruit, making a full round worth ~35 points total. 74 points per round is arithmetically impossible in a single round (would require 222+ fruits; the farm only has 100 deposit slots per round). The guidance conflates two different metrics and cites an unreachable threshold.
+
+## Gnome Restaurant (Scarfs)
+
+### [medium] C1: Wrong floor designation. The claim says 'ground floor' (floor 0 in OSRS UK notation) but the wiki says '1st floor[UK] / 2nd floor[US]', which is one floor above the ground floor. A player following this guidance would search the wrong level of the Grand Tree.
+
+- **Data says:** Gianne jnr. is located on the west end of the ground floor at the Grand Tree
+- **Wiki says (raw):** talk to Gianne jnr. on the west end of the 1st floor[UK]2nd floor[US] of the Grand Tree
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Gnome_Restaurant
+- **Suggested fix:** Change 'ground floor' to '1st floor (2nd floor US)' or equivalently 'first floor above ground level' of the Grand Tree to match the wiki's floor numbering.
+- **Skeptic receipt:** wiki_lookup(Gnome Restaurant): 'talk to Gianne jnr. on the west end of the [FloorNumber uk=1] of the Grand Tree' | wiki_lookup(Grand Tree): 'The Gnome Restaurant minigame is on second level' | data line 16122: 'Talk to Gianne jnr. on the west end of the ground floor to get a hard delivery order.'
+- **Skeptic reasoning:** The data file (line 16122) reads: "Talk to Gianne jnr. on the west end of the ground floor to get a hard delivery order." The Gnome Restaurant wiki page uses the FloorNumber template rendered as '1st floor[UK] / 2nd floor[US]', and the Grand Tree article states 'The Gnome Restaurant minigame is on second level' (i.e. UK 1st floor, one level above ground). The worldPlane:0 coordinate on that guidance step is the exterior travel waypoint outside the tree, not validation of the floor description. A player reading 'ground floor' would search floor 0 of the Grand Tree and not find Gianne jnr., who is one floor above. No account type or progress state places Gianne jnr. on the ground floor.
+
+### [high] C5: Completely wrong location for Captain Ninto. The claim places him south-west of the Gnome Stronghold gate, but the wiki states he is in the dwarf bar beneath White Wolf Mountain -- a different region entirely. A player following this guidance would waste significant time searching the wrong area.
+
+- **Data says:** Captain Ninto is located south-west of the Stronghold gate
+- **Wiki says (raw):** In the dwarf bar beneath White Wolf Mountain.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Gnome_Restaurant
+- **Suggested fix:** Update Captain Ninto's location to 'in the dwarf bar beneath White Wolf Mountain'.
+- **Skeptic receipt:** npc_lookup(Captain Ninto): 'Location: White Wolf Tunnel' (abextm cache, NPC ID 2569) | wiki_lookup(Captain Ninto): 'inside the dwarven passage under the White Wolf Mountain (Sindarpos)' | data line 16145: 'Captain Ninto (south-west of the Stronghold gate)'
+- **Skeptic reasoning:** The data file (line 16145) states Captain Ninto is 'south-west of the Stronghold gate.' The npc_lookup (abextm cache) returns Location: 'White Wolf Tunnel' for NPC ID 2569. The Captain Ninto wiki page confirms: 'Captain Ninto is a drunk, off-duty Gnome glider pilot that can be found inside the dwarven passage under the White Wolf Mountain (Sindarpos).' White Wolf Mountain / the dwarven tunnel is a completely different region from the Tree Gnome Stronghold gate. There is no account state or game version where Captain Ninto is south-west of the Stronghold gate.
+
+### [high] C6: Completely wrong location for Captain Daerkin. The claim places him at the Gnome Stronghold entrance, but the wiki states he is at the top of the south-western arena in Emir's Arena -- a completely different region. A player following this guidance would be sent to entirely the wrong part of the map.
+
+- **Data says:** Captain Daerkin is located at the Gnome stronghold entrance
+- **Wiki says (raw):** Top of the south-western arena in Emir's Arena.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Gnome_Restaurant
+- **Suggested fix:** Update Captain Daerkin's location to 'top of the south-western arena in Emir's Arena'.
+- **Skeptic receipt:** npc_lookup(Captain Daerkin): 'Location: Emir's Arena' (abextm cache, NPC ID 2570) | wiki_lookup(Captain Daerkin): 'enjoys watching fights at the Emir's Arena viewing area' | data line 16145: 'Captain Daerkin (Gnome stronghold entrance)'
+- **Skeptic reasoning:** The data file (line 16145) states Captain Daerkin is at 'Gnome stronghold entrance.' The npc_lookup (abextm cache) returns Location: 'Emir's Arena' for NPC ID 2570. The Captain Daerkin wiki page confirms: 'Captain Daerkin is an off-duty gnome glider pilot who enjoys watching fights at the Emir's Arena viewing area.' Emir's Arena is in the desert, entirely separate from the Tree Gnome Stronghold. There is no game state where Captain Daerkin is at the Gnome stronghold entrance.
+
+## Fishing Trawler
+
+### [high] C6: The voyage duration is stated as 10 minutes in the guidance, but the wiki clearly states it is 5 minutes. A player following this guidance would expect a voyage twice as long as the actual one.
+
+- **Data says:** During the 10-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope.
+- **Wiki says (raw):** To play, board Murphy's trawling boat and work to prevent it from sinking for 5 minutes as it trawls the sea.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Fishing_Trawler
+- **Suggested fix:** Change '10-minute voyage' to '5-minute voyage' in guidanceSteps[2].description.
+- **Skeptic receipt:** "To play, board Murphy's trawling boat and work to prevent it from sinking for 5 minutes as it trawls the sea." -- https://oldschool.runescape.wiki/w/Fishing_Trawler
+- **Skeptic reasoning:** The data states '10-minute voyage' in guidanceSteps[2].description (line 16251). The wiki is unambiguous: 'work to prevent it from sinking for 5 minutes as it trawls the sea.' The voyage is 5 minutes, not 10. A player following this guidance would expect a voyage twice the actual length. The receipt directly contradicts the data value with no variant or account-type caveat.
+
+### [blocker] C10: The guidance fabricates a trip-ending mechanic for unrepaired nets. The wiki explicitly states the only loss condition is water level rising too high; unrepaired nets only reduce fish catch -- they do not end the trip early. This could mislead players into ignoring water bailing (the actual loss condition) while over-prioritising net repair.
+
+- **Data says:** Two or more unrepaired nets will end the trip early
+- **Wiki says (raw):** The only way to lose is if the water level gets too high before the time is up. [...] While the net is torn, it will not catch any fish, so it is advisable to fix a ripped net as quickly as possible.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Fishing_Trawler
+- **Suggested fix:** Remove the sentence 'Two or more unrepaired nets will end the trip early' from guidanceSteps[2].description. Replace with an accurate note such as 'Unrepaired nets catch no fish, so fix them quickly to maximise your haul.'
+- **Skeptic receipt:** "The only way to lose is if the water level gets too high before the time is up. The boat will sink, ending the game." and "While the net is torn, it will not catch any fish, so it is advisable to fix a ripped net as quickly as possible." -- https://oldschool.runescape.wiki/w/Fishing_Trawler
+- **Skeptic reasoning:** The data claims 'Two or more unrepaired nets will end the trip early' (line 16251). The wiki explicitly defines the sole loss condition as water level, not nets: 'The only way to lose is if the water level gets too high before the time is up. The boat will sink, ending the game.' For torn nets, the wiki states only: 'While the net is torn, it will not catch any fish, so it is advisable to fix a ripped net as quickly as possible.' No trip-ending mechanic for nets exists in any form. The data fabricates a loss condition that does not exist, which could mislead players into neglecting bailing (the actual loss condition) in favour of net repair.
+
+### [medium] C11: The guidance directs the player to collect rewards from Murphy, but the wiki states rewards are obtained by inspecting the trawler net, not by talking to Murphy. A player following this step as written would look for the wrong interaction.
+
+- **Data says:** When the trawler returns to Port Khazard, collect your fish haul from Murphy.
+- **Wiki says (raw):** Upon successfully returning to the Port Khazard dock, players who contributed at least 50 points can inspect the trawler net for their reward.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Fishing_Trawler
+- **Suggested fix:** Change 'collect your fish haul from Murphy' to 'inspect the trawler net to collect your fish haul' in guidanceSteps[3].description.
+- **Skeptic receipt:** "Upon successfully returning to the Port Khazard dock, players who contributed at least 50 points can inspect the trawler net for their reward." -- https://oldschool.runescape.wiki/w/Fishing_Trawler
+- **Skeptic reasoning:** The data instructs players to 'collect your fish haul from Murphy' (line 16263). The wiki states rewards are obtained by a different interaction entirely: 'players who contributed at least 50 points can inspect the trawler net for their reward.' Murphy is the NPC used to board the trawler, not the reward source. A player following the guidance as written would attempt to talk to Murphy at the end rather than inspect the net, missing the reward interaction. The receipt directly establishes the correct mechanic.
+
+## Temple Trekking
+
+### [blocker] C12: Rolayne Twickit is described as the 'strongest follower' but the wiki explicitly states she has 'very low Attack, Defence, and Hitpoints' -- she is the weakest/hardest follower, not the strongest. A player following this guidance who expects an easy escort will instead face the most dangerous trek variant.
+
+- **Data says:** Choose the hardest route and strongest follower (Rolayne Twickit) for the best Lumberjack outfit drop chance.
+- **Wiki says (raw):** They have very low Attack, Defence, and Hitpoints, and five monsters will appear in combat events.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Temple_Trekking
+- **Suggested fix:** Replace 'strongest follower (Rolayne Twickit)' with 'weakest follower (Rolayne Twickit)' -- she is chosen for maximum challenge/rewards, not because she is strong.
+- **Skeptic receipt:** wiki_lookup Temple Trekking: 'Escorting weaker followers means a greater number of monsters will attack when a monster attack event occurs.' WebFetch Temple Trekking followers section: 'Rolayne Twickit belongs to the hard difficulty tier and has notably weak defensive capabilities, making escort missions substantially more demanding.'
+- **Skeptic reasoning:** The data calls Rolayne Twickit the 'strongest follower' but the wiki is unambiguous: she belongs to the hard/weak difficulty tier with 'very low Attack, Defence, and Hitpoints.' She is the weakest follower, chosen because her weakness makes the trek harder (more monsters, more points). The descriptor 'strongest' is factually inverted and will confuse players about the risk level.
+
+### [blocker] C1: The guidance claims Drakan's medallion teleports to Burgh de Rott, but the wiki confirms it teleports to Ver Sinhaza, Darkmeyer, and Slepe -- never Burgh de Rott. Following this tip would strand players in the wrong city with no direct route to the trek start.
+
+- **Data says:** Drakan's medallion -> Burgh de Rott is fastest; ... Drakan's medallion -> Burgh de Rott
+- **Wiki says (raw):** It allows unlimited teleportation to Ver Sinhaza, Darkmeyer (after completion of Sins of the Father), and the Sisterhood Sanctuary under Slepe.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Drakan%27s_medallion
+- **Suggested fix:** Replace 'Drakan's medallion -> Burgh de Rott' with 'Drakan's medallion -> Ver Sinhaza, then run south to Burgh de Rott' (or remove and substitute a correct route such as Morytania legs 3 teleport to Burgh de Rott).
+- **Skeptic receipt:** wiki_lookup Drakan's medallion: 'It allows unlimited teleportation to Ver Sinhaza, Darkmeyer (after completion of Sins of the Father), and the Sisterhood Sanctuary under Slepe.' wiki_lookup Temple Trekking travel routes: 'Drakan's medallion to Ver Sinhaza' (not Burgh de Rott).
+- **Skeptic reasoning:** The data states 'Drakan's medallion -> Burgh de Rott' as the fastest travel route, implying a direct teleport to Burgh de Rott. The medallion has no such destination. The wiki confirms it teleports to Ver Sinhaza, Darkmeyer, and Slepe only. The Temple Trekking wiki page itself lists the correct route as 'Drakan's medallion to Ver Sinhaza.' The shorthand misleads players about where they will land.
+
+### [high] C3: The data labels fairy ring BKR as 'Canifis' but the wiki identifies CKS -- not BKR -- as the Canifis fairy ring. BKR is located in Mort Myre Swamp south of Canifis.
+
+- **Data says:** fairy ring BKR (Canifis) run south-west
+- **Wiki says (raw):** Fairy ring code CKS (Canifis)
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Temple_Trekking
+- **Suggested fix:** Replace 'fairy ring BKR (Canifis)' with 'fairy ring CKS (Canifis)' or 'fairy ring BKR (Mort Myre Swamp)' depending on which ring is actually intended as the fallback route.
+- **Skeptic receipt:** WebFetch fairy rings: BKR = 'Morytania: Mort Myre Swamp, south of Canifis'; CKS = 'Morytania: Canifis.'
+- **Skeptic reasoning:** The data labels fairy ring BKR as '(Canifis)' but BKR teleports to Mort Myre Swamp, south of Canifis. CKS is the actual Canifis fairy ring. The parenthetical mislabels the ring and could send players to the wrong location or cause confusion about which ring to dial.
+
+### [medium] C4: BKR places players in Mort Myre Swamp; the wiki describes Burgh de Rott as reachable by taking the swamp boat to the south-east from BKR, not by running south-west. The direction 'south-west' is inconsistent with how Burgh de Rott is reached from BKR.
+
+- **Data says:** fairy ring BKR (Canifis) run south-west
+- **Wiki says (raw):** Swamp boat south-east (towards Barrows and Burgh de Rott).
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Fairy_ring
+- **Suggested fix:** Correct the direction or replace with a more accurate route description (e.g. take the swamp boat south-east toward Burgh de Rott).
+- **Skeptic receipt:** WebFetch fairy rings, BKR row: 'Swamp boat south-east (towards Barrows and Burgh de Rott).'
+- **Skeptic reasoning:** The data instructs players to 'run south-west' from BKR to reach Burgh de Rott. BKR lands in Mort Myre Swamp. The correct route from BKR toward Burgh de Rott uses the swamp boat going south-east, not running south-west. The direction is wrong and would strand players in the swamp.
+
+## Rogues' Den
+
+### [medium] C4: The wiki states no items can be brought or worn inside at all -- there is no mechanic where 'light carry weight' helps with specific obstacles. The data implies weight management is a strategy, but the real rule is a blanket no-items restriction.
+
+- **Data says:** Bring no weapons or armour - the maze requires light carry weight for some obstacles
+- **Wiki says (raw):** "no items can be brought or worn inside" and "Enter the Rogues' Den without any items in your inventory or equipped"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Rogues%27_Den
+- **Suggested fix:** Replace 'the maze requires light carry weight for some obstacles' with 'the maze requires no items -- all inventory and equipment is stripped on entry'.
+- **Skeptic receipt:** Wiki (WebFetch): 'no items can be brought or worn inside' | 'The document contains no information regarding how weight or carrying capacity affects obstacle success rates.'
+- **Skeptic reasoning:** The wiki states a blanket no-items rule on maze entry: 'no items can be brought or worn inside.' The WebFetch also confirms there is no weight mechanic mentioned anywhere on the page -- weight cannot affect obstacle success because players enter with zero items. The data's implication that 'light carry weight helps with some obstacles' describes a mechanic that does not exist.
+
+### [medium] C8: 'Balance beams' is not an obstacle type listed on the wiki. The wiki lists contortion bars, pendulums, spinning blades, ledges, floor blades, wall traps, and floor traps -- no balance beams.
+
+- **Data says:** Navigate the maze using Thieving and Agility. Avoid pressure pads (step around them), pick locks on doors, and cross balance beams.
+- **Wiki says (raw):** The obstacles mentioned are: contortion bars, pendulums, spinning blades, ledges, floor blades, wall traps, and floor traps. This term does not appear anywhere in the article.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Rogues%27_Den
+- **Suggested fix:** Remove 'balance beams' from the list of obstacles. Replace with an accurate obstacle type such as 'contortion bars' or 'pendulums'.
+- **Skeptic receipt:** Wiki (WebFetch) obstacle list: 'Floor traps, Spinning blades on pedestals, Contortion Bars, Pendulums, Wall traps, Ledges (hand-hold ledges or bridges), Floor blades, Moving blades hidden in walls, Rogue Guards' -- 'balance beams' absent.
+- **Skeptic reasoning:** The wiki's obstacle list (verbatim from WebFetch) is: floor traps, spinning blades on pedestals, contortion bars, pendulums, wall traps, ledges (hand-hold ledges or bridges), floor blades, moving blades hidden in walls, and rogue guards. 'Balance beams' does not appear anywhere on the page. The closest real obstacle to a balance beam is 'ledges,' which involves crossing a gap -- not a beam mechanic. The term 'balance beams' is fabricated and should be removed.
+
+### [high] C10: The data frames armour as optional but inadvisable ('wear nothing in armour slots to minimise failures'), implying players could choose to wear armour. The wiki states no items can be worn inside at all -- armour is not permitted, not merely inadvisable.
+
+- **Data says:** wear nothing in armour slots to minimise failures
+- **Wiki says (raw):** "no items can be brought or worn inside" and "Enter the Rogues' Den without any items in your inventory or equipped"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Rogues%27_Den
+- **Suggested fix:** Change to reflect the actual rule: players cannot wear any items inside the maze. Remove the implication that wearing armour is a choice that increases failure odds.
+- **Skeptic receipt:** Wiki (WebFetch): 'no items can be brought or worn inside' -- blanket prohibition, not an advisory.
+- **Skeptic reasoning:** The data says 'wear nothing in armour slots to minimise failures,' phrasing the no-armour rule as optional advice to improve odds. The wiki is unambiguous that wearing items is prohibited outright: 'no items can be brought or worn inside.' Players have no choice in the matter -- the game enforces the restriction on entry. Framing it as a failure-rate optimisation misrepresents a hard game rule as a strategic preference.
+
+### [medium] C12: The wiki states the reward is either a Rogue kit or a Rogue's equipment crate (which allows selecting a specific piece) -- not a random piece of rogue equipment given directly. The reward mechanism and naming are both wrong.
+
+- **Data says:** search the safe to receive a random piece of rogue equipment
+- **Wiki says (raw):** "Players will also receive 12 experience per stat level drained" plus "one of the following items: Rogue kit...or Rogue's equipment crate" (a crate allowing selection of specific equipment pieces, not direct equipment)
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Rogues%27_Den
+- **Suggested fix:** Update to: 'search a wall safe to receive either a Rogue kit or a Rogue's equipment crate (which lets you choose a specific piece)'.
+- **Skeptic receipt:** Wiki (WebFetch): 'a Rogue's equipment crate or a Rogue kit. The crate lets players choose one piece of rogue equipment, or alternatively select a rogue kit instead.'
+- **Skeptic reasoning:** The data says players 'receive a random piece of rogue equipment.' The wiki states the reward is 'a Rogue's equipment crate or a Rogue kit' -- the crate allows the player to choose a specific piece, meaning it is neither random nor direct equipment. Two errors: (1) the reward is a crate/kit, not equipment directly, and (2) the player selects the piece; it is not randomised.
+
+### [blocker] C14: The data instructs players to exit via the trapdoor in the pub basement after completing the maze, but the wiki states that cracking a wall safe automatically teleports players back to the lobby. Players are not manually navigating back to a trapdoor to exit.
+
+- **Data says:** To get remaining pieces, return through the trapdoor in the pub basement and repeat the maze.
+- **Wiki says (raw):** "Cracking the safe teleports players back to the lobby"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Rogues%27_Den
+- **Suggested fix:** Replace the exit instruction with: 'Cracking a wall safe at the end of the maze teleports you back to the lobby. Re-enter via the trapdoor in the pub to repeat the maze.'
+- **Skeptic receipt:** Wiki (WebFetch): 'Cracking the safe teleports players back to the lobby'
+- **Skeptic reasoning:** The data instructs players to 'return through the trapdoor in the pub basement' to exit after a run. The wiki states the exit is automatic: 'Cracking the safe teleports players back to the lobby.' Players do not manually navigate back to any trapdoor -- they are teleported to the lobby on safe crack. The instruction to use a trapdoor is mechanically wrong.
+
+### [low] C16: The wiki gives the standard route time as ~3 minutes 40 seconds, not under 3 minutes. The 'under 3 minutes' figure only applies to the Level 80 Thieving shortcut route, which is not universally accessible.
+
+- **Data says:** memorise the safe route to complete runs in under 3 minutes
+- **Wiki says (raw):** "a single run can take about 3 minutes and 40 seconds to complete" (without shortcut); "With the level 80 Thieving shortcut, runs only take about 2 minutes"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Rogues%27_Den
+- **Suggested fix:** Update to reflect the realistic standard time: 'memorise the safe route to complete runs in approximately 3-4 minutes (under 2 minutes with the level 80 Thieving shortcut)'.
+- **Skeptic receipt:** Wiki (WebFetch): 'a single run can take about 3 minutes and 40 seconds' (no shortcut); 'With the level 80 Thieving shortcut, runs only take about 2 minutes to complete.'
+- **Skeptic reasoning:** The data claims 'under 3 minutes' as a general target for a memorised run. The wiki gives the standard completion time as approximately 3 minutes 40 seconds, with the level 80 Thieving shortcut reducing this to approximately 2 minutes. 'Under 3 minutes' is only achievable via the level 80 shortcut, which is not universally accessible. Presenting it as a general aspiration misstates the expected time for most players.
+
+## Scroll Cases
+
+### [medium] C4: The claim that minor cases unlock at 50 completions 'per tier' is incorrect for Easy (100) and Medium (100) tiers. Only Beginner, Hard, and Elite minor cases require 50 completions; Master requires 25. The guidance step overgeneralises to a single threshold of 50 that does not apply to two of the six tiers.
+
+- **Data says:** Minor cases unlock at 50 completions per tier
+- **Wiki says (raw):** | Easy | 100 | 200 |
+| Medium | 100 | 250 |
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Scroll_case
+- **Suggested fix:** Replace 'Minor cases unlock at 50 completions per tier' with tier-specific thresholds, e.g. 'Minor cases unlock at 50 (Beginner/Hard/Elite), 100 (Easy/Medium), or 25 (Master) completions depending on the tier.'
+- **Skeptic receipt:** Wiki table (WebFetch, https://oldschool.runescape.wiki/w/Scroll_case): Beginner Minor=50, Easy Minor=100, Medium Minor=100, Hard Minor=50, Elite Minor=50, Master Minor=25. Data file line 16629: "description": "Complete clue scrolls of all tiers. Minor cases unlock at 50 completions per tier; major cases unlock at tier-specific higher thresholds."
+- **Skeptic reasoning:** The guidance step at drop_rates.json line 16629 reads: "Minor cases unlock at 50 completions per tier". The wiki and the file's own milestoneKills fields both contradict this: Easy minor = 100, Medium minor = 100, Master minor = 25. Only Beginner (50), Hard (50), and Elite (50) match the stated threshold. The phrase 'per tier' implies a uniform value across all tiers, which is false for three of the six tiers. The per-item milestoneKills data in the same source entry is correct; only the summary guidance text is wrong.
+
+## Castle Wars
+
+### [high] C10: Flag captures earn 1 point (toward the game score), not 1 ticket. Tickets are awarded at game end based on the match outcome: 4 tickets for a shut-out win, 3 for a regular win or draw-with-points, 2 for a scoreless draw (on dedicated worlds). A player following this guidance would misunderstand the reward economy -- expecting 1 ticket per capture when in reality they earn 2-4 tickets at the end of a 20-minute game.
+
+- **Data says:** Each successful capture earns 1 Castle Wars ticket.
+- **Wiki says (raw):** The aim of the game is to take the enemy's standard (flag) from their castle and return it to the standard in your own castle, gaining one point each time.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Castle_Wars
+- **Suggested fix:** Change to: 'Each flag capture earns 1 point toward your team's score. Tickets are awarded at game end based on the result -- 4 for a shut-out win (1-0), 3 for a regular win or draw with points, 2 for a scoreless draw (on dedicated Castle Wars worlds).'
+- **Skeptic receipt:** Wiki verbatim (https://oldschool.runescape.wiki/w/Castle_Wars): "The aim of the game is to take the enemy's standard (flag) from their castle and return it to the standard in your own castle, gaining one point each time." End-of-game ticket table: "Shut-out win (1-0) = 4 tickets to winning team, 2 tickets for losing team. Regular win (2-1) = 3 tickets to the winning team, 2 tickets for the losing team. Scoreless Draw (0-0) = 2 tickets for both teams. Draw with points (1-1) = 3 tickets for both teams." Additionally: "At least 15 minutes spent in the game is required to earn tickets and plaudits."
+- **Skeptic reasoning:** The data file (line 17020 of drop_rates.json) reads: "Each successful capture earns 1 Castle Wars ticket." This conflates the in-round scoring mechanic with the end-of-game ticket reward. The wiki is explicit that flag captures earn points, not tickets: "gaining one point each time." Tickets are awarded only at game end based on match outcome -- on dedicated Castle Wars worlds: 4 tickets for a shut-out win, 3 for a regular win or draw-with-points, 2 for a scoreless draw. The per-capture wording is a genuine factual error in the guidance step that would mislead a player about the reward economy.
+
+## Soul Wars
+
+### [blocker] C13: Both the Avatar of Creation and Avatar of Destruction use Crush (melee) attacks. The correct prayer is Protect from Melee, not Protect from Magic. Advising Protect from Magic leaves the player fully exposed to melee damage.
+
+- **Data says:** Use Protect from Magic when fighting the Avatar directly.
+- **Wiki says (raw):** Praying Protect from Melee negates both the Hitpoints and Prayer drain.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Avatar_of_Creation
+- **Suggested fix:** Change "Use Protect from Magic when fighting the Avatar directly." to "Use Protect from Melee when fighting the Avatar directly."
+- **Skeptic receipt:** Avatar of Creation wiki: 'Its attack targets all red team players standing in front of it, and drains prayer points equal to the Damage dealt to the player. Praying Protect from Melee negates both the Hitpoints and Prayer drain.' Avatar of Destruction wiki: identical phrasing -- 'Praying Protect from Melee negates both the Hitpoints and Prayer drain.'
+- **Skeptic reasoning:** Both avatars use melee attacks and the correct prayer is Protect from Melee. The wiki page for Avatar of Creation states explicitly: 'Praying Protect from Melee negates both the Hitpoints and Prayer drain.' The Avatar of Destruction page is identical. The guidance step at line 17118 says 'Use Protect from Magic when fighting the Avatar directly.' -- that is the wrong prayer and leaves the player fully exposed to melee damage and prayer drain. No multi-source, variant, or account-type vector rescues this; it is a straightforward prayer recommendation error.
+
+### [high] C15: The Ectoplasmator costs 250 Zeal tokens, not 2500. The data overstates the cost by a factor of 10, which would mislead players about how long they need to grind.
+
+- **Data says:** Spend on the Ectoplasmator (2500)
+- **Wiki says (raw):** Requiring 40 Prayer, it can be purchased from Nomad on the Isle of Souls for 250 Zeal Tokens.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Ectoplasmator
+- **Suggested fix:** Change the Ectoplasmator cost in the description from 2500 to 250.
+- **Skeptic receipt:** Ectoplasmator wiki: 'Requiring 40 Prayer, it can be purchased from Nomad on the Isle of Souls for 250 Zeal Tokens.'
+- **Skeptic reasoning:** The Ectoplasmator costs 250 Zeal Tokens, not 2500. The guidance step (line 17131) displays the cost parenthetically as '(2500)', which is a 10x overstatement. The wiki page is unambiguous and has not been edited in the past week. No staleness or variant explanation applies -- the item has a single price in the Nomad shop.
+
+### [medium] C17: Unsired shards are not purchasable with Zeal tokens. The Zeal token reward shop (Nomad) does not carry them. Listing them as a Zeal reward is fabricated and will mislead players.
+
+- **Data says:** Spend on the Ectoplasmator (2500), Soul cape (2500), or Unsired shards.
+- **Wiki says (raw):** No unsired shards or unsired-related items are listed in the rewards section of this page.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Zeal_Tokens
+- **Suggested fix:** Remove 'Unsired shards' from the Zeal token reward description.
+- **Skeptic receipt:** Nomad wiki shop table (full enumeration): '/30}}|name=Spoils of war}} /10}}|name=Blighted entangle sack ... /10}}|name=Blighted super restore(4)...' -- no Unsired shards present anywhere in the shop listing.
+- **Skeptic reasoning:** 'Unsired shards' do not exist in the Nomad/Soul Wars reward shop. 'Unsired' is an item from the Abyssal Sire, entirely unrelated to Soul Wars. The Nomad wiki page enumerates the full shop: Spoils of war (30 Zeal), Blighted entangle sack, Blighted teleport spell sack, Blighted vengeance sack, Blighted ancient ice sack, Blighted manta ray, Blighted anglerfish, Blighted karambwan, Blighted super restore(4), plus the Ectoplasmator and Soul cape. No 'Unsired shards' appear anywhere in that list. The guidance text at line 17131 listing them as a Zeal spend option is fabricated and will mislead players.
+
+### [medium] C18: There is no 'reward chest' -- the pet comes from Spoils of War, a purchasable item costing 30 Zeal tokens from Nomad. While the 1/400 rate is correct, calling the source a 'reward chest' is inaccurate and may confuse players looking for the wrong thing.
+
+- **Data says:** The Lil' creator pet has a 1/400 drop rate from the reward chest.
+- **Wiki says (raw):** The Lil' Creator is a pet obtained from spoils of war in Soul Wars. [...] Purchase from Nomad on the Isle of Souls for 30 Zeal Tokens [...] The Soul Wars pet rate is 1/400. The roll happens on the crate separately from the loot table.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Spoils_of_war
+- **Suggested fix:** Change 'reward chest' to 'Spoils of War (30 Zeal each)'.
+- **Skeptic receipt:** Spoils of war wiki: 'The spoils of war is a reward from the Soul Wars Minigame. It can be purchased from Nomad on the Isle of Souls for 30 Zeal Tokens.' Avatar of Creation wiki: 'A pet version of the Avatar of Creation, Lil' creator, can be obtained as a possible reward from opening spoils of war.'
+- **Skeptic reasoning:** There is no in-game object called a 'reward chest' in Soul Wars. The item that contains the Lil' creator pet is called 'Spoils of war' and costs 30 Zeal Tokens from Nomad. The guidance text at line 17131 says 'The Lil' creator pet has a 1/400 drop rate from the reward chest' -- 'reward chest' is not the name of any Soul Wars object. The pet rate of 1/400 (0.0025) is consistent with the data. Only the source name is wrong. Severity is low rather than medium, as the mechanic is correct but the item name will cause player confusion when looking for the source.
+
+## Last Man Standing
+
+### [medium] C1: The LMS lobby (where you speak to Lisa to enter) is at Ferox Enclave itself, not on a separate island east of it. The island is the match arena, not the lobby location. No directional 'east' description appears anywhere on the wiki page.
+
+- **Data says:** LMS lobby is on the island east of Ferox Enclave
+- **Wiki says (raw):** Players can begin the minigame by speaking to Lisa, located in Ferox Enclave.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Last_Man_Standing
+- **Suggested fix:** Change guidance to: 'The LMS lobby is at Ferox Enclave -- speak to Lisa to enter a game.'
+- **Skeptic receipt:** Wiki infobox: 'Location: Ferox Enclave'. Wiki body: 'Players can begin the minigame by speaking to Lisa, located in Ferox Enclave.' Wiki image caption: 'The Last Man Standing lobby in Ferox Enclave.'
+- **Skeptic reasoning:** The wiki establishes unambiguously that Lisa -- and the LMS lobby -- is at Ferox Enclave itself, not on any island east of it. The match arena is the island players are transported to after entering; the lobby where you speak to Lisa is at the enclave. No 'east of Ferox Enclave' directional description appears anywhere on the wiki page. The data description is factually wrong about the lobby location.
+
+### [blocker] C4: Competitive mode no longer requires any coin stake/entry fee -- it was removed in March 2020. The current gate is a stat requirement (750 total + 30 QP, or 1,500 total), not a coin payment. Telling players they need to stake coins would cause confusion and incorrectly describe the mode's access barrier.
+
+- **Data says:** Competitive mode requires staking coins to enter
+- **Wiki says (raw):** Competitive Mode entry fee has been removed. [...] Participating in Competitive and High Stakes requires players to have a minimum total level of 750 and 30 Quest points, or a minimum total level of 1,500 if they have less than 30 Quest points.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Last_Man_Standing
+- **Suggested fix:** Replace 'requires staking coins to enter' with the current requirement: requires 750+ total level and 30+ quest points (or 1,500+ total level with fewer than 30 QP).
+- **Skeptic receipt:** Wiki body: 'High Stakes - Like competitive mode, but players must pay 500,000 coins to enter.' And: 'Participating in Competitive and High Stakes requires players to have a minimum total level of 750 and 30 Quest points, or a minimum total level of 1,500 if they have less than 30 Quest points.' No coin requirement is listed for Competitive alone.
+- **Skeptic reasoning:** Competitive mode carries no coin entry fee -- only High Stakes does. The wiki explicitly separates the two: Competitive is free to enter (gated by stat/QP requirements), while High Stakes requires 500,000 coins. Describing Competitive as 'requires staking coins to enter' conflates it with High Stakes and will mislead players. The stat gate applies to both Competitive and High Stakes but is not a coin payment.
+
+### [medium] C5: Loot chests (opened with bloody/bloodier keys) contain weapons and armour (offensive and defensive gear tables), but NOT food. Food (sharks, brews, serums) is part of the fixed starting loadout given to every player on entry, not obtained from chests. The 'food' component of this claim is fabricated.
+
+- **Data says:** Supply crates on the island contain weapons, armour, and food
+- **Wiki says (raw):** To improve their chance of survival, players must loot chests throughout the island with bloody keys and bloodier keys. Chests opened with bloody keys will roll for an item from two loot tables, one of which contains offensive gear, and the other defensive, while bloodier keys access an upgraded offensive loot table.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Last_Man_Standing
+- **Suggested fix:** Remove 'and food' from the supply crate description. Clarify that food comes from the starting loadout, while chests provide weapons and armour.
+- **Skeptic receipt:** Wiki body: 'A player's supplies are limited to 10 sharks, 3 Saradomin brews, 2 Sanfew serums, and 1 each of every other potion for their loadout.' And: 'Chests opened with bloody keys will roll for an item from two loot tables, one of which contains offensive gear, and the other defensive, while bloodier keys access an upgraded offensive loot table.' No food items appear on any chest loot table.
+- **Skeptic reasoning:** Food in LMS comes exclusively from the fixed starting loadout distributed before each match, not from any chest or crate on the island. The island chests (opened with bloody keys and bloodier keys) roll only from offensive and defensive gear loot tables -- no food items appear on any chest loot table. Stating that 'supply crates on the island contain weapons, armour, and food' is wrong on the food component; food cannot be obtained from island chests under any game mechanic described on the wiki.
+
+## Vale Totems
+
+### [medium] C14: Totems do NOT deplete after every ent visit. They lose one durability point per ent visit and only collapse when fully depleted -- which takes 2 visits for oak, up to 7 for redwood. The guidance implies players must rebuild every cycle, which is misleading for players using higher-tier logs.
+
+- **Data says:** Totems deplete after each ent visit
+- **Wiki says (raw):** "Totems will lose one durability for each ent that visits and will need to be rebuilt once the totem is depleted." "The starting durability of a totem is based on the type of wood used. An oak totem starts with a durability of 2, whereas a redwood totem starts with a durability of 7."
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Vale_Totems
+- **Suggested fix:** Change to: 'Totems lose 1 durability per ent visit (e.g. oak totems last 2 visits; redwood last 7) and must be rebuilt once depleted.'
+- **Skeptic receipt:** "Totems will lose one durability for each ent that visits and will need to be rebuilt once the totem is depleted. [...] An oak totem starts with a durability of 2, whereas a redwood totem starts with a durability of 7." -- https://oldschool.runescape.wiki/w/Vale_Totems (wiki_lookup output, no recent changes per wiki_updates)
+- **Skeptic reasoning:** The guidance text at drop_rates.json line 17568 reads: 'Totems deplete after each ent visit and must be rebuilt with 1 log plus 4 fletched decorations.' The word 'deplete' means fully exhausted, implying a rebuild is required after every single ent visit. The wiki directly contradicts this: totems lose only one durability per ent visit and are only depleted (requiring rebuild) when all durability is gone -- a minimum of 2 visits for oak and up to 7 for redwood. No wood type in the game depletes in a single visit. The multi-source, variant, and account-type refutation vectors do not apply here -- this is a plain mechanical description error in the guidance text. No recent wiki changes were found (0 changes since 2026-06-05). The finding stands on a verbatim wiki receipt.
+
+## Barbarian Assault
+
+### [high] C18: The high gamble (which is the gamble that gives the pet) costs 500 honour points AND requires 1 queen kill. The claim omits the queen kill requirement entirely. A player who has never killed the Penance Queen cannot access the high gamble regardless of their honour points total.
+
+- **Data says:** Buy Gambles (500 pts) for a chance at the Pet penance queen (1/1000 per gamble).
+- **Wiki says (raw):** High: 500 and 1 queen kill
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Barbarian_Assault/Rewards
+- **Suggested fix:** Update to: 'High Gambles (500 pts + 1 queen kill) give a chance at the Pet penance queen.' The queen kill prerequisite is a hard gate and must be surfaced.
+- **Skeptic receipt:** Barbarian Assault/Gambles wiki table: 'Level: High | Honour points needed: 500 and 1 queen kill | Required wave: 1 or higher'
+- **Skeptic reasoning:** The Gambles wiki page explicitly lists the high gamble cost as '500 and 1 queen kill'. The data states only '500 pts', omitting the queen kill prerequisite entirely. A player with 500 honour points but zero queen kills cannot access the high gamble at all -- the queen kill is a hard binary gate, not a soft recommendation. Omitting it from the guidance will send players to the gamble NPC prematurely and they will be unable to proceed. This is a genuine missing requirement.
+
+## Aerial Fishing
+
+### [high] C7: Tithe Farm teleport is not documented as a travel route to Lake Molch. The wiki's documented routes are fairy ring DJR, Skills necklace to Farming Guild (run south-east), and Kharedst's memoirs/book of the dead to Shayzien. No Tithe Farm method appears anywhere in the relevant wiki pages.
+
+- **Data says:** Tithe Farm teleport (Hosidius) is an alternative access method that leads north-west to Lake Molch
+- **Wiki says (raw):** To reach the island in the centre of Lake Molch, the player must take a boat at one of the three docks located on the northern, western, and eastern shores of the lake. [Northern or Eastern dock:] fairy ring DJR to the chasm of fire and either run south-west for the eastern dock or west for the northern dock. [Eastern dock:] Teleport to Shayzien using Kharedst's memoirs or the book of the dead and run west. [Western dock:] a skills necklace to teleport to the Farming Guild and run south-east through Molch.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Molch_Island
+- **Suggested fix:** Remove the Tithe Farm teleport travel option. Replace with one of the documented routes: Skills necklace to Farming Guild then run south-east, or Kharedst's memoirs/book of the dead teleport to Shayzien then run west.
+- **Skeptic receipt:** Lake Molch wiki transport section (fetched 2026-06-12): "use a skills necklace to teleport to the Farming Guild and run south-east through Molch" / "teleport to Shayzien using Kharedst's memoirs or the book of the dead and run west" / "use fairy ring DJR to the chasm of fire and either run south-west for the eastern dock or west for the northern dock" / "use any Rada's blessing to teleport to the Kourend Woodland, then travel to C: Shayzien West using the nearby Lovakengj Minecart Network". No Tithe Farm or Hosidius teleport appears.
+- **Skeptic reasoning:** The Lake Molch wiki page documents four route families to the lake: fairy ring DJR, Kharedst's memoirs/book of the dead to Shayzien, skills necklace to Farming Guild (run south-east), and Rada's blessing to Kourend Woodland + Lovakengj minecart. Tithe Farm is situated in south-east Hosidius and does not appear anywhere in the transportation section. No Hosidius teleport of any kind is listed as a route to Lake Molch. The data's claim that a Tithe Farm (Hosidius) teleport leads north-west to Lake Molch is unsupported by the wiki and geographically inverted -- Lake Molch is west of Hosidius city, not north-west of Tithe Farm in a way that makes it a documented or efficient route.
+
+### [medium] C11: The wiki describes optimal range as the player's 3x3 reach (directly adjacent, i.e. Chebyshev distance 1). The claim states 'within 3 tiles' which overstates the optimal range. A 3x3 reach means 1 tile in any direction, not 3 tiles.
+
+- **Data says:** Pools must be within 3 tiles for the cormorant to fish them
+- **Wiki says (raw):** The shortest wait occurs after targeting a fishing spot within the player's 3x3 reach (i.e. directly adjacent to the player) whereby the Cormorant will be available again on the next tick.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Aerial_Fishing
+- **Suggested fix:** Update to reflect that the optimal range is directly adjacent to the player (within the player's 3x3 reach / 1 tile), not 3 tiles.
+- **Skeptic receipt:** Aerial Fishing wiki page (fetched 2026-06-12): "The shortest wait occurs after targeting a fishing spot within the player's 3x3 reach (i.e. directly adjacent to the player) whereby the Cormorant will be available again on the next tick."
+- **Skeptic reasoning:** The wiki is explicit that the optimal range is the player's 3x3 reach, which it defines parenthetically as 'directly adjacent to the player' -- this is Chebyshev distance 1, meaning only the 8 immediately surrounding tiles. The data claim of 'within 3 tiles' describes a 7x7 area (Chebyshev distance 3), which is three times larger than the actual optimal range. This is a factual overstatement of the mechanic. The wiki's parenthetical 'i.e. directly adjacent' leaves no ambiguity. However, note that the severity is low-to-medium at most: the cormorant will still fish spots beyond 1 tile, just with a longer return wait -- so 'within 3 tiles' is not wholly incorrect as a usable range, only incorrect as the *optimal* range description.
+
+### [low] C14: The wiki shows 3.5 Cooking XP for bluegill (the most commonly caught fish), not 3. The claim rounds down incorrectly. Other fish yield 10, 20, or 25 XP per cut, so '3 XP per offcut' is only approximately correct for bluegill and wrong for all other species.
+
+- **Data says:** Cutting a fish produces 3 Cooking XP per offcut
+- **Wiki says (raw):** Bluegill | 43 | 11.5 | 35 | 16.5 | 1 | 3.5 (Cooking XP column shows 3.5 for bluegill, 10 for common tench, 20 for mottled eel, 25 for greater siren)
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Aerial_Fishing
+- **Suggested fix:** Update to '3.5 Cooking XP per offcut (for bluegill)' or note that XP varies by fish type (3.5 for bluegill, 10 for common tench, 20 for mottled eel, 25 for greater siren).
+- **Skeptic receipt:** Aerial Fishing wiki fish table (fetched 2026-06-12): Bluegill Cooking XP = 3.5, Common tench = 10, Mottled eel = 20, Greater siren = 25. Bluegill individual page confirms: "Cutting the fish provides 3.5 Cooking experience."
+- **Skeptic reasoning:** The data states '3 Cooking XP per offcut' as a flat value. The wiki table shows bluegill gives 3.5 XP (not 3), common tench gives 10 XP, mottled eel gives 20 XP, and greater siren gives 25 XP. The claimed value of 3 XP is wrong for every species: it rounds down the most common fish (bluegill) and is an order of magnitude off for the others. This is a genuine data error, not a rounding convention or variant issue.
+
+### [blocker] C15: Two fish names ('violet perch', 'cerulean twitch') do not exist in OSRS aerial fishing. The actual species are mottled eel and greater siren. Additionally, the mechanic is wrong: Molch pearls are not obtained by trading fish to Alry -- they are random drops (1/100 to 1/75 chance) received alongside a regular catch. Following this guidance step as written would have players attempting to trade fish that cannot be traded.
+
+- **Data says:** Caught fish can be traded with Alry the Angler for Molch pearls (bluegill=1, common tench=2, violet perch=3, cerulean twitch=4)
+- **Wiki says (raw):** When fishing within Lake Molch, each catch has a 1/100 to 1/75 chance of giving Molch pearls in addition to the player's catch, which scales based on the player's Fishing and Hunter levels. [Fish species table lists:] Bluegill, Common tench, Mottled eel, Greater siren. [No fish named violet perch or cerulean twitch are mentioned anywhere on the page.]
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Aerial_Fishing
+- **Suggested fix:** Replace 'violet perch' with 'mottled eel' and 'cerulean twitch' with 'greater siren'. Correct the mechanic: Molch pearls drop randomly alongside catches (chance scales with Fishing+Hunter level); they are not obtained by trading fish to Alry. The pearl exchange rates per fish type (=1, =2, =3, =4) are not documented on the wiki and should be removed or sourced.
+- **Skeptic receipt:** Aerial Fishing wiki fish table (fetched 2026-06-12): species listed are bluegill, common tench, mottled eel, greater siren -- 'violet perch' and 'cerulean twitch' absent. Molch pearl wiki page: "Each catch has a 1/100 to 1/75 chance of giving Molch pearls in addition to the player's catch, which scales based on the player's Fishing and Hunter levels." Alry the Angler wiki page: "He teaches the player Aerial fishing and sells fishing-related items in exchange for Molch pearls" -- no fish-for-pearls trade exists; only golden tench -> 100 pearls is documented.
+- **Skeptic reasoning:** Two fish names in the data ('violet perch', 'cerulean twitch') do not exist in OSRS. The four aerial fishing species are exclusively bluegill, common tench, mottled eel, and greater siren -- confirmed by the wiki fish table. Additionally the Molch pearl acquisition mechanic is completely wrong: pearls are not obtained by trading fish to Alry at tiered rates (1/2/3/4 per fish type). They are random drops received alongside catches at a 1/100 to 1/75 chance scaling with Fishing and Hunter levels. The only item Alry accepts for pearls is the golden tench (a rare catch), which yields 100 pearls flat. No per-species pearl exchange rate (=1, =2, =3, =4) is documented or exists in the game.
+
+## Boat Paints
+
+### [high] C9: The plugin states 25 Construction is required to apply boat paints, but the wiki consistently states the Construction requirement is 20, not 25. This is confirmed across the Boat trim page and multiple individual paint pages (Shark paint, Barracuda paint, Saradominist paint).
+
+- **Data says:** 25 Construction level is required to apply boat paints
+- **Wiki says (raw):** Each trim requires 25 Sailing and 20 Construction.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Boat_trim
+- **Suggested fix:** Change the Construction requirement in guidanceSteps[1].description from 25 to 20.
+- **Skeptic receipt:** wiki_lookup (Trims page): "Each trim requires 25 Sailing and 20 Construction." | WebFetch (Shark paint page): "Trimming a boat requires level 25 Sailing and 20 Construction."
+- **Skeptic reasoning:** The plugin stores CONSTRUCTION: 25 in requirements.skills (drop_rates.json line 18703) and repeats '25 Construction required' in the guidance step text (line 18682). The wiki is unambiguous and doubly confirmed: the Trims page states 'Each trim requires 25 Sailing and 20 Construction' and the Shark paint individual page states 'Trimming a boat requires level 25 Sailing and 20 Construction.' No refutation vector applies -- this is not a variant item issue, not multi-source, not account-type-dependent, and wiki_updates returned zero recent changes to this page. The Construction requirement in both the requirements block and the guidance step text must be corrected from 25 to 20.
+
+### [high] C10: The plugin states the Sailing requirement for Boat Paints is 28, but the wiki consistently states 25 Sailing is required to apply a trim. Level 28 Sailing unlocks the Bronze cannon (a shipbuilding part), not boat paint application. The gate in requirements.skills[0] should be 25, not 28.
+
+- **Data says:** 28 Sailing level is required for Boat Paints
+- **Wiki says (raw):** Each trim requires 25 Sailing and 20 Construction.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Boat_trim
+- **Suggested fix:** Change the Sailing skill requirement from 28 to 25 in requirements.skills[0].
+- **Skeptic receipt:** wiki_lookup (Trims page): "Each trim requires 25 Sailing and 20 Construction." | WebFetch (Shark paint page): "Trimming a boat requires level 25 Sailing and 20 Construction." | WebFetch (Sailing#Levels): "Level 28 Sailing unlocks: The Bronze cannon, described as the 'first cannon for boat combat.' Level 28 does not unlock any boat-trim features."
+- **Skeptic reasoning:** The plugin stores SAILING: 28 in requirements.skills (drop_rates.json line 18699). The wiki states the requirement to apply any trim is 25 Sailing, confirmed on both the Trims page and the Shark paint page. The Sailing level table (WebFetch of Sailing#Levels) confirms level 28 exclusively unlocks the Bronze cannon -- the first cannon for boat combat -- with no relationship to trim or paint application. Level 28 is a materially wrong gate that would block players with 25-27 Sailing from being recommended this source despite being eligible. No refutation vector applies -- this is not a progress-gate nuance or account-type variant; the correct application gate is a flat 25 Sailing across all account types.
+
+## Champion's Challenge
+
+### [blocker] C7: Dragon Slayer I is not a requirement for Champion's Challenge. The wiki lists only two requirements: members server access and 32 quest points. Dragon Slayer I appears in the Champions' Guild template as a navigational link because the quest starts there, but it is not a prerequisite for Champion's Challenge.
+
+- **Data says:** Dragon Slayer I is a quest requirement for this source
+- **Wiki says (raw):** a player must be on a members server and have at least 32 quest points.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Champion%27s_Challenge
+- **Suggested fix:** Remove Dragon Slayer I from requirements.quests. The only gate is 32 quest points (already captured in C3) and members access.
+- **Skeptic receipt:** Champions' Challenge wiki (live fetch): "In order to be eligible to receive a champion's scroll, a player must be on a members server and have at least 32 quest points." -- No mention of Dragon Slayer I as a requirement anywhere on the page. Champions' Guild wiki body text: "The Champions' Guild is located south of Varrock and is accessible to players with at least 32 quest points. It has Scavvo's Rune Store and Valaine's Shop of Champions, and is also the starting point of the free-to-play quest, Dragon Slayer I." -- Dragon Slayer I is the starting point of a quest here, not a prerequisite.
+- **Skeptic reasoning:** Both the Champions' Challenge wiki page and the Champions' Guild wiki page confirm that Dragon Slayer I is not a requirement for Champion's Challenge or for entering the guild. The Champion's Challenge page states requirements verbatim as only members-server access and 32 quest points. Dragon Slayer I is mentioned solely as a quest that starts at the guild, not as a gate. If the plugin's data lists Dragon Slayer I as a quest requirement for this source, that is a genuine data error with no refutation vector available -- no multi-source ambiguity, no variant, no account-type specificity applies here.
+
+## Chompy Bird Hunting
+
+### [medium] C1: The guidance says the hunting area is south of Rantz, but the wiki states the 3 ponds are west of Rantz. A player following the guidance would search in the wrong direction.
+
+- **Data says:** The activity location is in Feldip Hills, south of Rantz
+- **Wiki says (raw):** 3 ponds in the Feldip Hills west of Rantz (fairy ring code AKS)
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Chompy_Bird_Hunting
+- **Suggested fix:** Change 'south of Rantz' to 'west of Rantz' in guidanceSteps[0].description.
+- **Skeptic receipt:** Wiki (https://oldschool.runescape.wiki/w/Chompy_bird_hunting): "3 ponds in the Feldip Hills west of Rantz (fairy ring code AKS)". NPC spawn data: Rantz (NPC 1470) at (2630, 2981, plane 0); Feldip Hills ogre/hunting cluster at X?2568-2614 -- west of Rantz.
+- **Skeptic reasoning:** The wiki page explicitly states the Feldip Hills hunting ponds are 'west of Rantz', not south. Rantz's primary spawn is at coordinate (2630, 2981). In the OSRS coordinate system X increases eastward, so 'west of Rantz' means lower X values -- consistent with the ogre/hunting activity cluster at X?2560-2614 confirmed by NPC spawn data. A player directed 'south of Rantz' (lower Y) would search in an entirely different area and miss the ponds. None of the refutation vectors apply: this is a plain directional string in a guidance description, not a multi-source item, not a variant ID, not account-type-dependent, and the wiki is current (the page describes post-Big Chompy Bird Hunting quest content that has not changed). The finding is a genuine data error.
+
+## Forestry
+
+### [high] C2: No oak trees exist at Seers' Village per the wiki. The wiki lists Seers' Village as having maple trees (north of bank) and yew trees (church). Oak trees are located at Draynor Village (east of bank). The guidance directs players to oak trees at Seers' Village, which do not exist there.
+
+- **Data says:** Seers' Village oak trees south of the bank on a W444 Forestry world are the most common hub.
+- **Wiki says (raw):** Maple: Seers village - North of the bank, there are 4 trees. Yew: Seers village - In the church court yard entrance there are 3 trees. Oak: Draynor village - East side of the bank, there are 3 trees.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Forestry
+- **Suggested fix:** Change tree type from 'oak' to 'maple' (north of bank) or 'yew' (church). The locationDescription and guidanceSteps[0].description should reference maple or yew trees, not oak, at Seers' Village.
+- **Skeptic receipt:** Wiki (https://oldschool.runescape.wiki/w/Forestry): "Oak: Draynor village - East side of the bank, there are 3 trees." and "Maple: Seers village - North of the bank, there are 4 trees."
+- **Skeptic reasoning:** The wiki's official Forestry locations table places oak trees at Draynor Village (east of bank), not Seers' Village. The Seers' Village hub is maple trees, north of the bank. The data guidance text on line 19298 says 'Seers' Village oak trees south of the bank' -- wrong tree type and wrong sub-location relative to the bank. No account-type or progress gate creates an oak-at-Seers exception; the Forestry location table is universal. The waypoint coordinate (2725, 3490) is south of the bank (bankers sit at y?3495 per objects_near), consistent with the text -- but the wiki's Seers' Village Forestry hub is maples north of the bank, not oaks south of it.
+
+### [high] C4: The wiki places the Seers' Village maple trees north of the bank, not south-east. The guidance tells players to run south-east from the bank, which is the wrong direction for the nearest Seers' Village trees. (The south-east direction also compounds the wrong tree-type issue from C2.)
+
+- **Data says:** Use the Camelot teleport and run south-east from the bank.
+- **Wiki says (raw):** Maple: Seers village - North of the bank, there are 4 trees.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Forestry
+- **Suggested fix:** If the hub is updated to maple trees, change direction from 'south-east' to 'north' -- the maples are north of the Seers' Village bank per the wiki.
+- **Skeptic receipt:** Wiki (https://oldschool.runescape.wiki/w/Forestry): "Maple: Seers village - North of the bank, there are 4 trees."
+- **Skeptic reasoning:** The wiki places the Seers' Village Forestry hub (maple trees) north of the bank. The data guidance on line 19298 says 'run south-east from the bank.' South-east from the Seers' Village bank leads toward the courthouse/agility wall area, not toward any official Forestry hub. Even treating C2 and C4 as a single flawed guidance string, the direction is independently wrong: the correct direction for the Seers' Village maple hub is north, not south-east.
+
+### [medium] C5: 'Tree spirit' is not a Forestry event. The wiki lists exactly nine named events and none is called 'tree spirit'. This appears to be a confused reference to the old Woodcutting random event (Tree Spirit) which is unrelated to the Forestry activity.
+
+- **Data says:** Events spawn periodically (pheasant, flower, poacher, tree spirit, bee hive, roots).
+- **Wiki says (raw):** The nine Forestry event types are: Rising Roots, Struggling Sapling, Flowering Tree, Woodcutting Leprechaun, Beehive, Friendly Ent, Poachers, Enchantment Ritual, Pheasant Control. There is no 'tree spirit' event listed on the page.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Forestry
+- **Suggested fix:** Remove 'tree spirit' from the event list in guidanceSteps[1].description. Replace with accurate event names, e.g.: 'pheasant, flower, poacher, beehive, roots, ent, enchantment ritual, leprechaun'.
+- **Skeptic receipt:** Wiki (https://oldschool.runescape.wiki/w/Forestry) nine events listed: "Rising Roots, Struggling Sapling, Flowering Tree, Woodcutting Leprechaun, Beehive, Friendly Ent, Poachers, Enchantment Ritual, Pheasant Control" -- no 'tree spirit' event exists in Forestry.
+- **Skeptic reasoning:** The wiki enumerates exactly nine Forestry events; none is called 'tree spirit': Rising Roots, Struggling Sapling, Flowering Tree, Woodcutting Leprechaun, Beehive, Friendly Ent, Poachers, Enchantment Ritual, Pheasant Control. The data guidance on line 19308 includes 'tree spirit' in the event list. 'Tree Spirit' is a removed legacy Woodcutting random event (removed ~2012) with no relation to the Forestry activity. There is no account-type or progress gate that surfaces a 'tree spirit' event in Forestry. wiki_updates shows no Forestry page changes since 2025-01-01, so this is not a staleness issue.
+
+### [low] C6: The wiki uses 'Anima-infused bark' as the sole currency name throughout. There is no distinct 'Forestry points' currency -- the guidance lists them as two separate reward types, but the wiki treats Anima-infused bark as the single reward currency for events and shop purchases.
+
+- **Data says:** Participate in each event for Anima-infused bark and Forestry points.
+- **Wiki says (raw):** Reward currency [Anima-infused bark]
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Forestry
+- **Suggested fix:** Change 'Anima-infused bark and Forestry points' to just 'Anima-infused bark' in guidanceSteps[1].description. The shop references in C7/C8 ('Spend points at the Forestry Shop') should also be updated to 'Spend Anima-infused bark at the Forestry Shop'.
+- **Skeptic receipt:** Wiki (https://oldschool.runescape.wiki/w/Forestry) infobox: "Reward currency: Anima-infused bark" -- sole currency named throughout the page; no 'Forestry points' currency mentioned anywhere.
+- **Skeptic reasoning:** The wiki names a single reward currency throughout: 'Anima-infused bark' (infobox: 'Reward currency: Anima-infused bark'). There is no separate 'Forestry points' currency. The data guidance on line 19308 reads 'Anima-infused bark and Forestry points' as if they are two distinct reward types. The internal schema uses a pointCost field to represent Anima-infused bark shop costs, but that is a schema implementation detail -- no player-facing currency called 'Forestry points' exists in the game.
+
+## Fossil Island Notes
+
+### [medium] C7: The guidance says to search 'displays' but the wiki consistently describes the searchable objects as 'stone chests'. There are no 'displays' in the House on the Hill -- the interactive objects that yield notes are stone chests requiring 100 numulite each. A player looking for 'displays' may not recognise the stone chests as the correct object.
+
+- **Data says:** Search the House on the Hill displays and complete activities for fossil notes.
+- **Wiki says (raw):** Within both floors of the House, there are five stone chests with a search option. Searching the stone chest will ask for a numulite. After inserting the numulite, the chest will give the search option to insert 100 numulites into the hole. The chests have a chance of having nothing happen, dealing damage, or giving one of various notes.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/House_on_the_Hill
+- **Suggested fix:** Change 'Search the House on the Hill displays' to 'Search the stone chests in the House on the Hill (100 numulite each) and complete activities for fossil notes.'
+- **Skeptic receipt:** Within both floors of the House, there are five stone chests with a search option. Searching the stone chest will ask for a numulite. After inserting the numulite, the chest will give the search option to insert 100 numulites into the hole. The chests have a chance of having nothing happen, dealing damage, or giving one of various notes. -- wiki_lookup("House on the Hill")
+- **Skeptic reasoning:** The data uses the word 'displays' to describe the interactive objects players must find in the House on the Hill. The wiki_lookup output for 'House on the Hill' names these objects 'stone chests' in every reference on the page and makes no mention of any object called 'displays.' There are no objects labelled 'displays' in the House on the Hill -- the only interactable note-yielding objects are the five stone chests that cost 100 numulite to search. No multi-source, variant, account-type, or staleness vector applies; this is a guidance-text accuracy issue where the non-standard term 'displays' could cause a player to fail to identify the correct clickable object. The wiki receipt directly contradicts the data wording.
+
+## Hunter Guild
+
+### [medium] C3: Direction from teleport is wrong. The data says run south-west; the wiki says north-west (from fairy ring AJP). More importantly, the quetzal whistle teleports players directly to 'the quetzal landing zone in front of the guild' -- no running is required at all when using the whistle.
+
+- **Data says:** run south-west to the guild
+- **Wiki says (raw):** use the fairy ring AJP and run north-west to reach the Hunters Guild
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Hunter_Guild
+- **Suggested fix:** Remove the south-west direction. If retaining travel instructions: 'Use the Quetzal whistle to teleport directly to the guild landing zone.' If referencing fairy ring: 'Fairy ring AJP, then run north-west to the guild.'
+- **Skeptic receipt:** Wiki Hunter Guild page: 'A quetzal whistle teleports players to the quetzal landing zone in front of the guild.' and 'Use the fairy ring [AJP] and run north-west to reach the Hunters Guild.'
+- **Skeptic reasoning:** The quetzal whistle teleports directly to the landing zone in front of the guild -- no running in any direction is needed when using that method. The only travel method that involves running is the fairy ring, and that direction is north-west (not south-west). The guidance step says 'Use the Quetzal whistle to teleport to Varlamore, then run south-west to the guild,' which is wrong on both counts: the whistle drops the player at the guild entrance (no run needed), and the fairy-ring direction is north-west. Neither variant of south-west running is supported.
+
+### [blocker] C7: There is no Hunter Guild points currency. The guild's reward mechanic is Hunters' Rumours, which award Hunter XP and hunters' loot sacks of varying quality -- not a spendable points currency. Guidance telling players to accumulate 'Hunter Guild points' to spend at a 'reward shop' describes a mechanic that does not exist.
+
+- **Data says:** Track and catch creatures in the guild hunting grounds for Hunter Guild points. Spend points at the guild reward shop for guild-exclusive items.
+- **Wiki says (raw):** Completing Hunters' Rumours rewards the player with additional Hunter experience and a hunters' loot sack, the quality of which depends on the tier of the rumour assigned.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Hunter%27s_rumour
+- **Suggested fix:** Replace with the actual mechanic: 'Complete Hunters\' Rumours assigned by a Guild Hunter. Each completed rumour rewards Hunter XP and a hunters\' loot sack (quality scales with rumour tier: Novice/Adept/Expert/Master). Milestone completions (10, 25, 100, 250 rumours) unlock quetzal whistle blueprints and other rewards.'
+- **Skeptic receipt:** Wiki Hunters' Rumours page: 'Completing Hunters' Rumours rewards the player with additional Hunter experience and a hunters' loot sack, the quality of which depends on the tier of the rumour assigned.' Wiki Hunter Guild page: 'Completing Hunters' Rumours reward the player with Hunter experience and a hunter's loot sack; the quality of these depend on the tier of the rumour assigned. Hunter's loot sacks typically contain various hunter meats, furs, and blessed bone shards, and may also reward unique items like the guild hunter outfit and huntsman's kit.'
+- **Skeptic reasoning:** No 'Hunter Guild points' currency exists. The guidance step text reads: 'Track and catch creatures in the guild hunting grounds for Hunter Guild points. Spend points at the guild reward shop for guild-exclusive items.' The actual mechanic is Hunters' Rumours, which reward Hunter XP and hunters' loot sacks of varying quality -- not a spendable points currency. The guild-exclusive items (quetzal whistle blueprints, guild hunter outfit, huntsman's kit, Quetzin) come from loot sacks and rumour milestones, not a points shop. This is a fabricated mechanic description, not a game mechanic simplification.
+
+### [blocker] C8: No points-based reward shop exists at the Hunter Guild. The wiki describes the guild's shops as Imia's Supplies, Pellem's Fur Store, and The Burrow (general shops) -- not a points-redemption reward shop. The fabricated 'guild-exclusive reward shop' mechanic does not exist.
+
+- **Data says:** Items at the Hunter Guild reward shop are exclusive to the guild
+- **Wiki says (raw):** Completing Hunters' Rumours rewards the player with additional Hunter experience and a hunters' loot sack, the quality of which depends on the tier of the rumour assigned.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Hunter%27s_rumour
+- **Suggested fix:** Remove the reward shop claim. The guild-exclusive items (quetzal whistle blueprints) are unlocked via rumour milestones, not purchased from a shop with points.
+- **Skeptic receipt:** Wiki Hunter Guild page: 'players who have completed ten Hunters' Rumours can [unlock quetzal whistles]' and 'Completing Hunters' Rumours reward the player with Hunter experience and a hunter's loot sack.' No points shop is mentioned anywhere on the Hunter Guild wiki page.
+- **Skeptic reasoning:** No points-based reward shop exists at the Hunter Guild. The guild's actual shops (Imia's Supplies, Pellem's Fur Store, The Burrow pub) are general supply shops, not points-redemption stores. Guild-exclusive items such as quetzal whistle blueprints are unlocked by completing rumour milestones (e.g., 10 rumours unlocks the whistle), not purchased with an accumulated points currency. The claim that guild-exclusive items are available via a 'reward shop' describes a mechanic that does not exist in the game.
+
+### [high] C10: There are no Hunter Guild points, so the claim that higher levels give greater point rewards is doubly wrong. Higher Hunter levels do unlock higher rumour tiers (Adept 57, Expert 72, Master 91) which award better-quality loot sacks -- but this is loot sack quality scaling, not a points currency.
+
+- **Data says:** Higher Hunter levels provide greater Hunter Guild point rewards
+- **Wiki says (raw):** Completing Hunters' Rumours rewards the player with additional Hunter experience and a hunters' loot sack, the quality of which depends on the tier of the rumour assigned.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Hunter%27s_rumour
+- **Suggested fix:** Replace with: 'Higher Hunter levels unlock higher rumour tiers (Adept at 57, Expert at 72, Master at 91), which reward higher-quality hunters\' loot sacks.'
+- **Skeptic receipt:** Wiki Hunters' Rumours page tier table: 'Novice [level not shown] | Adept [57] | Expert [72] | Master [91, also requires At First Light]' and 'Completing Hunters' Rumours rewards the player with additional Hunter experience and a hunters' loot sack, the quality of which depends on the tier of the rumour assigned.' No points currency or points-scaling mechanic is described anywhere.
+- **Skeptic reasoning:** Because no 'Hunter Guild points' currency exists (confirmed by C7/C8), the claim that 'Higher Hunter levels provide greater Hunter Guild point rewards' is doubly wrong: there are no points, and the guidance text compounds the fabricated mechanic. What is true is that higher Hunter levels unlock higher rumour tiers (Adept at 57, Expert at 72, Master at 91 + At First Light), which award higher-quality loot sacks -- but this is tier-gated loot sack quality, not a points scaling system. The guidance step text actively misleads players about how the activity works.
+
+## Lost Schematics
+
+### [high] C5: The plugin sets the gate at Sailing level 1, but the lowest-level schematic (Salvaging station) requires Sailing 42. No lost schematic is accessible at level 1.
+
+- **Data says:** "skill": "SAILING", "level": 1
+- **Wiki says (raw):** Salvaging station schematic | 42 [the lowest entry in the full schematic requirements table; no schematic is listed below Sailing 42]
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Lost_schematics
+- **Suggested fix:** Change the SAILING skill requirement from level 1 to level 42 (the minimum needed for the first lockbox schematic, the Salvaging station schematic).
+- **Skeptic receipt:** From https://oldschool.runescape.wiki/w/Lost_schematics (WebFetch, rendered table): 'Salvaging station schematic | 42 | Lockbox (Chinchompa Island)' ... 'Dragon keel schematic | 87 | Lockbox (Grimstone)'. Quest schematics: 'Ballistic attractor schematic | Ava | Completion of Animal Magnetism and Pandemonium' and 'Bosun's workbench schematic | Elder Raley (Level 52) | Completion of The Red Reef'. Wiki text: 'You cannot boost your Sailing level to moor on islands you would not normally have the level for.' The lowest Sailing level for any lockbox schematic is 42; no schematic is accessible at Sailing level 1.
+- **Skeptic reasoning:** The wiki confirms that the Lost Schematics source has no Sailing level 1 access gate. All ten lockbox schematics are gated by per-island Sailing level requirements ranging from 42 to 87 -- the lowest being the Salvaging station schematic at Sailing 42. The two quest-awarded schematics (Ballistic attractor, Bosun's workbench) require no Sailing level at all but are gated by quest completion (Animal Magnetism + Pandemonium, and The Red Reef respectively). The current data entry lists only `SAILING level: 1` as the sole requirement, which is wrong on two counts: it misrepresents the minimum Sailing level for the island-based schematics (should be 42, not 1), and it omits the quest requirements for the non-island schematics entirely. No game mechanic makes Sailing level 1 a correct access gate for this source. The `level: 1` pattern used for Port Tasks and Deep Sea Trawling (where Sailing 1 genuinely allows access) does not apply here -- the wiki explicitly states that players cannot boost to access islands above their level, meaning the level gates are hard per-island requirements, not soft activity floors.
+
+## Monkey Backpacks
+
+### [high] C2: The guidance claims Monkey Madness II is the access gate for the Ape Atoll Agility Course. The wiki shows only partial Monkey Madness I (Chapter 2) is required for course access. Monkey Madness II is relevant only for obtaining the backpack variants, not for entering the course.
+
+- **Data says:** Monkey Madness II quest is required to access the Ape Atoll Agility Course
+- **Wiki says (raw):** Access to this course requires partial completion of Monkey Madness I, up to Chapter 2.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Ape_Atoll_Agility_Course
+- **Suggested fix:** Change the access gate requirement to 'partial completion of Monkey Madness I (up to Chapter 2)'. The Monkey Madness II requirement should be noted separately as a prerequisite for backpack drop eligibility, not course access.
+- **Skeptic receipt:** wiki_lookup: 'Access to this course requires partial completion of Monkey Madness I, up to Chapter 2.' (https://oldschool.runescape.wiki/w/Ape_Atoll_Agility_Course)
+- **Skeptic reasoning:** The wiki is unambiguous that course access requires only partial completion of Monkey Madness I (up to Chapter 2), not Monkey Madness II. No refutation vector applies: this is not account-type dependent (all accounts share the same access gate), the wiki page has had zero recent changes since 2025-01-01 (wiki_updates returned count:0), and the receipt is a direct quote -- not a paraphrase. MM II is relevant only for backpack drop eligibility, not course entry. The data erroneously gates course access behind MM II.
+
+### [medium] C3: The guidance describes the course start as 'the top of an agility ladder'. The wiki identifies the first obstacle as a Stepping stone with no agility ladder at the start of the course.
+
+- **Data says:** The Ape Atoll Agility Course starts at the top of an agility ladder
+- **Wiki says (raw):** The course begins with a "Stepping stone" obstacle that rewards 40 Agility experience. There is no agility ladder mentioned as a starting point.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Ape_Atoll_Agility_Course
+- **Suggested fix:** Update the description of the course starting point to reference the stepping stone area near Marim rather than 'the top of an agility ladder'.
+- **Skeptic receipt:** WebFetch obstacle table: '1. Stepping Stone (40 XP), 2. Tropical Tree - Climb (40 XP), 3. Monkeybars (40 XP), 4. Skull Slope (60 XP), 5. Rope (100 XP), 6. Tropical Tree - Climb-down (0 XP)' -- no agility ladder present. (https://oldschool.runescape.wiki/w/Ape_Atoll_Agility_Course)
+- **Skeptic reasoning:** The obstacle table from the wiki lists the first obstacle as 'Stepping Stone (40 XP)', not an agility ladder. The course has six obstacles in order: Stepping Stone, Tropical Tree (climb), Monkeybars, Skull Slope, Rope, Tropical Tree (climb-down). No agility ladder appears anywhere in the course. The wiki_updates tool returned zero changes to this page since 2025-01-01, ruling out staleness. No multi-source or variant vector applies. The data's description of a starting 'agility ladder' does not match the course layout.
+
+## Ocean Encounters
+
+### [medium] C1: The wiki describes four fixed named destinations unlocked via Sailors' Markers -- there is no 'nearest activated port' routing mechanic. The amulet gives a menu of unlocked destinations; it does not dynamically select the nearest one.
+
+- **Data says:** Sailors' amulet is used to teleport to The Pandemonium or nearest activated port
+- **Wiki says (raw):** The amulet allows the player to teleport to the Pandemonium, Port Roberts, Red Rock, and Deepfin Point. In order to make use of the amulet's destinations, the player must activate their corresponding Sailors' Marker there.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Sailors%27_amulet
+- **Suggested fix:** Replace 'nearest activated port' with 'any port whose Sailors\' Marker you have activated' (or similar). E.g.: 'Use the Sailors\' amulet to teleport to The Pandemonium or any port where you have activated the Sailors\' Marker.'
+- **Skeptic receipt:** "The amulet allows the player to teleport to the Pandemonium, Port Roberts, Red Rock, and Deepfin Point. In order to make use of the amulet's destinations, the player must activate their corresponding Sailors' Marker there." / "The teleport to The Pandemonium is unlocked by default. To use the teleports to Port Roberts, Red Rock, and Deepfin Point, the player must first inspect the Sailors' Marker on their docks." -- wiki_lookup: Sailors' amulet (https://oldschool.runescape.wiki/w/Sailors'_amulet)
+- **Skeptic reasoning:** The wiki page for the Sailors' amulet describes four fixed, individually named teleport destinations (The Pandemonium, Port Roberts, Red Rock, Deepfin Point), each unlocked by inspecting the corresponding Sailors' Marker. The Pandemonium is unlocked by default; the others require per-port marker activation. There is no proximity-based 'nearest activated port' routing mechanic anywhere on the page. The guidance text's phrase 'nearest activated port' implies a dynamic auto-select that does not exist -- the amulet gives a menu of individually unlocked fixed destinations.
+
+### [medium] C3: The wiki is explicit that the spawn timer only counts down while the boat is moving and pauses when stationary. Turning in place is stationary, so encounters do not spawn while turning in place -- the parenthetical '(not moving)' directly contradicts the wiki mechanic.
+
+- **Data says:** Ocean encounters spawn randomly while sailing, including when turning in place (not moving)
+- **Wiki says (raw):** When a boat is moving, a 120 tick (72 second) timer counts down, and when it hits zero, an event has a 1/6 chance to spawn. The timer pauses if a boat is stationary or if the player disembarks.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Ocean_encounter
+- **Suggested fix:** Remove the 'including when turning in place (not moving)' clause. The description should note that encounters only spawn while the boat is actively moving.
+- **Skeptic receipt:** "When a boat is moving, a 120 tick (72 second) timer counts down, and when it hits zero, an event has a 1/6 chance to spawn. [...] The timer pauses if a boat is stationary or if the player disembarks" / "As long as a boat is moving, its speed does not influence the spawn chance or duration between spawns." -- wiki_lookup: Ocean encounters (https://oldschool.runescape.wiki/w/Ocean_encounters)
+- **Skeptic reasoning:** The wiki page for Ocean encounters is unambiguous: the 120-tick spawn timer counts down only while the boat is moving and explicitly pauses when the boat is stationary. 'Turning in place' is a stationary state (no translational movement through the water), so no spawn timer progress occurs while turning. The data's parenthetical '(not moving)' directly contradicts the documented mechanic. Additionally, the wiki notes that boat speed does not influence spawn rate, which confirms the only relevant variable is whether the boat is moving at all -- not how fast. No wiki staleness applies: zero edits to the Ocean encounters page since 2026-01-01.
+
+## Sailing Misc
+
+### [medium] C2: The amulet does not teleport to the 'nearest activated port' -- it has four fixed, named destinations unlocked individually by inspecting Sailors' Markers at each dock. There is no dynamic nearest-port selection. The description implies context-aware routing that does not exist.
+
+- **Data says:** Sailors' amulet can teleport to 'your nearest activated port'
+- **Wiki says (raw):** The teleport to The Pandemonium is unlocked by default. [Other destinations: Port Roberts (requires Sailing 50), Red Rock (requires Sailing 52), Deepfin Point (requires Sailing 67). Players must first inspect the corresponding Sailors' Marker at their docks to unlock each teleport option.]
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Sailors%27_amulet
+- **Suggested fix:** Replace 'your nearest activated port' with 'a chosen unlocked port (Pandemonium by default; others require inspecting the Sailors' Marker at Port Roberts, Red Rock, or Deepfin Point)'.
+- **Skeptic receipt:** Wiki (Sailors' amulet): 'The teleport to The Pandemonium is unlocked by default. To use the teleports to Port Roberts, Red Rock, and Deepfin Point, the player must first inspect the Sailors' Marker on their docks.' Data line 20358: 'Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port.'
+- **Skeptic reasoning:** The guidance description text at line 20358 says 'your nearest activated port', implying dynamic context-aware routing to the geographically closest unlocked destination. The wiki is unambiguous: the amulet has four fixed named destinations (Pandemonium unlocked by default; Port Roberts, Red Rock, and Deepfin Point each unlocked individually by inspecting the Sailors' Marker at that specific dock). The player selects which unlocked destination to teleport to -- there is no nearest-port routing logic. Notably, the travelTip on the same step already correctly says 'The Pandemonium (default unlock)', which partially contradicts the description's 'nearest activated port' framing. The description text is misleading about how the amulet works.
+
+### [high] C9: Echo pearl is a boat combat drop from Dolphins and Orcas, not an ocean encounter reward. Ocean encounters give pearls ranging from tiny to radiant (plus clue scrolls, cocktails, etc.), but not Echo pearl. Sending players to grind ocean encounters for Echo pearl would waste real effort.
+
+- **Data says:** Ocean encounters yield Echo pearl
+- **Wiki says (raw):** An echo pearl is an item dropped by dolphins and orcas. [Dolphin (Combat level 22): Drop rate 1/1,200; Orca (Combat level 205): Drop rate 1/70 or 1/35.]
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Echo_pearl
+- **Suggested fix:** Move Echo pearl to the boat combat description (alongside Dragon nails, Dragon cannon barrel, Bottled storm) rather than ocean encounters. Correct the source to 'dropped by Dolphins and Orcas during boat combat'.
+- **Skeptic receipt:** Wiki (Dolphin drop table): 'Echo pearl | qty: 1 | rarity: 1/1200'. Wiki (Orca drop table): 'Echo pearl | qty: 1 | rarity: 1/70'. Wiki (Ocean encounters page): full reward table lists strong winds, mysterious glow, lost crate, castaway, giant clam, clue turtle, Ocean Man, lost casket -- no Echo pearl entry. Data line 20363: 'ocean encounters (Echo pearl)'.
+- **Skeptic reasoning:** The guidance text at line 20363 explicitly parenthesises Echo pearl as an ocean encounter reward: 'ocean encounters (Echo pearl)'. The wiki's Ocean encounters page lists every ocean encounter type and its possible rewards (strong winds, mysterious glow, lost crate, castaway, giant clam, clue turtle, Ocean Man, lost casket) -- Echo pearl does not appear in any of them. The Dolphin and Orca drop tables confirm Echo pearl is exclusively a boat combat drop. Placing Echo pearl under ocean encounters would send players grinding the wrong activity entirely.
+
+## Sea Treasures
+
+### [blocker] C3: Medallion fragments 1-8 combine into the Medallion of the Deep, not the Sailors' amulet (inert). The Sailors' amulet (inert) is obtained through shipwreck salvaging at rates of 1/300 to 1/2,000 depending on salvage type. These are two entirely separate items with different obtain methods. Following the current guidance step would lead a player to believe collecting medallion fragments is how they get a Sailors' amulet -- that is factually wrong.
+
+- **Data says:** Interact with the treasure spot to collect Medallion fragments (1-8, combine to form Sailors' amulet (inert))
+- **Wiki says (raw):** There are eight of these fragments, which are assembled into the Medallion of the Deep, an item that allows the wielder to breathe underwater.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Medallion_fragment
+- **Suggested fix:** Change 'Medallion fragments (1-8, combine to form Sailors' amulet (inert))' to 'Medallion fragments (1-8, combine to form Medallion of the Deep)'. The Sailors' amulet (inert) should be noted separately as obtained from shipwreck salvaging (see Sailors'_amulet_(inert) wiki page).
+- **Skeptic receipt:** wiki_lookup('Medallion fragment'): 'There are eight of these fragments, which are assembled into the Medallion of the Deep, an item that allows the wielder to breathe underwater.' | wiki_lookup('Sailors\' amulet'): 'The sailors\' amulet is an item that can be obtained as loot when sorting through salvage obtained from shipwreck salvaging.'
+- **Skeptic reasoning:** The guidance step states that Medallion fragments 1-8 'combine to form Sailors' amulet (inert)'. The wiki_lookup on 'Medallion fragment' returns verbatim: 'There are eight of these fragments, which are assembled into the Medallion of the Deep, an item that allows the wielder to breathe underwater.' The wiki_lookup on 'Sailors' amulet' confirms it is an entirely separate item: 'The sailors' amulet is an item that can be obtained as loot when sorting through salvage obtained from shipwreck salvaging.' No variant mechanic, no multi-source overlap, and no account-type gate resolves this -- the data names the wrong assembly product for Medallion fragments. The receipt is unambiguous and the finding stands as a blocker.
+
+## Deep Sea Fishing
+
+### [high] C3: The guidance instructs players to obtain a trawling net 'from Netmaster or Sailing shops', but the wiki shows nets are boat facilities built via Construction -- they are not purchasable items carried in inventory. Netmaster Kellan is purely an informational NPC. Directing players to a shop that does not exist wastes real effort.
+
+- **Data says:** Bring a trawling net (from Netmaster or Sailing shops)
+- **Wiki says (raw):** The wiki describes trawling nets only through construction recipes: each net type lists specific Materials and Construction XP values (e.g. Rope trawling net: 'Rope x7, Teak plank x4, Steel bar x4, Lead bar x2' with 458 Construction XP). Netmaster Kellan 'provides an in-game explanation on the basics of deep sea trawling' -- no shop inventory is described. No sailing shop selling pre-made nets is mentioned anywhere on the page.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Deep_sea_trawling
+- **Suggested fix:** Remove '(from Netmaster or Sailing shops)'. Trawling nets are boat facilities built via Construction, not items obtained from a vendor. Guidance should instead note that the boat must have a trawling net facility built before heading out.
+- **Skeptic receipt:** wiki_lookup (Trawling net): 'A trawling net is a type of facility that can be installed on player-owned skiffs and sloops.' Materials table shows Rope trawling net requires 'x7 [rope], x4 [teak plank], x4 [steel bar], x2 [lead bar]' built at a facility hotspot. wiki_lookup (Rope trawling net): 'It can be built at the corresponding facility hotspot, requiring level 56 Sailing and 45 Construction.' wiki_lookup (Deep sea trawling): 'Netmaster Kellan, a retired trawler found at the Rolling Tide pub in Port Roberts, provides an in-game explanation on the basics of deep sea trawling.' -- No vendor sale of nets is described anywhere.
+- **Skeptic reasoning:** The guidance says 'Bring a trawling net (from Netmaster or Sailing shops)' -- this frames a trawling net as a carried inventory item purchasable from a vendor. The wiki is unambiguous: trawling nets are boat facilities installed via Construction materials; they are never sold by any shop NPC. Netmaster Kellan is confirmed as purely informational. No Sailing shop selling pre-made nets exists. The guidance will mislead players into searching for a non-existent vendor item before their trip.
+
+## Pyramid Plunder
+
+### [high] C3: The grand gold chest is present in every room starting from room 1 (21 Thieving). The 71 Thieving figure is the requirement to enter room 6, not a gate on the grand gold chest itself. A player with 21+ Thieving can access the chest in room 1.
+
+- **Data says:** Need 71 Thieving minimum to access the grand gold chest
+- **Wiki says (raw):** There is a golden chest in the centre of each room. [...] Every ten levels thereafter will grant entrance to the more valuable rooms, up to level 91. [Room 1: 21+, Room 2: 31+, Room 3: 41+, Room 4: 51+, Room 5: 61+, Room 6: 71+, Room 7: 81+, Room 8: 91+]
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Pyramid_Plunder
+- **Suggested fix:** Remove the 71 Thieving gate on the grand gold chest, or clarify it as the room 6 access requirement. The chest is available in all rooms; the minimum to enter the minigame at all is 21 Thieving (room 1).
+- **Skeptic receipt:** Pyramid Plunder wiki (via wiki_lookup): 'At least 21 Thieving is necessary to start the game. Every ten levels thereafter will grant entrance to the more valuable rooms, up to level 91.' Room table: Room 1: 21+, Room 2: 31+, Room 3: 41+, Room 4: 51+, Room 5: 61+, Room 6: 71+, Room 7: 81+, Room 8: 91+. 'There is a golden chest in the centre of each room.' The 71 figure is room 6's entry requirement, not a gate on the golden chest generically.
+- **Skeptic reasoning:** The data at line 20710 states 'Need 71 Thieving minimum to access the grand gold chest (the only Pharaoh's sceptre source).' The wiki confirms the golden chest is present in every room, with room 1 accessible at 21 Thieving and room 8 (the optimal target) requiring 91 Thieving. The figure 71 corresponds to room 6 only -- it is neither the minimum to access any golden chest (21) nor the requirement for the room the guidance step later identifies as the target (91, per line 20739). The finding correctly identifies the 71 level as misattributed. The parenthetical claim that the grand gold chest is 'the only Pharaoh's sceptre source' is also contradicted -- the sceptre drops from sarcophagi as well -- but that error is covered under C8. The 71 figure standing alone as a chest-access gate is a genuine data error.
+
+### [blocker] C8: The grand gold chest does not exclusively yield the Pharaoh's sceptre. It primarily yields artefacts and only rarely contains a sceptre. Describing it as an exclusive sceptre source is factually inverted -- the sceptre is the rare outcome, not the guaranteed one.
+
+- **Data says:** The grand gold chest exclusively yields the Pharaoh's sceptre
+- **Wiki says (raw):** There is a golden chest in the centre of each room. The player will always open it instantly, and may rarely find a Pharaoh's sceptre inside one.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Pyramid_Plunder
+- **Suggested fix:** Change the description to state that the grand gold chest yields artefacts and may rarely contain a Pharaoh's sceptre, rather than claiming it exclusively yields the sceptre.
+- **Skeptic receipt:** Pharaoh's sceptre wiki (via wiki_lookup): 'Pharaoh's sceptres are a very rare reward received from the golden chests and sarcophagi during the Pyramid Plunder minigame.' Pyramid Plunder wiki: 'There is a golden chest in the centre of each room. The player will always open it instantly, and may rarely find a Pharaoh's sceptre inside one.' The sceptre is rare (not exclusive), and sarcophagi are a confirmed parallel source.
+- **Skeptic reasoning:** The data at line 20739 states the grand gold chest 'exclusively yields the Pharaoh's sceptre.' This is doubly wrong. First, the wiki states the sceptre is a rare outcome ('may rarely find a Pharaoh's sceptre inside one'), not the exclusive yield -- the chest can be opened without producing a sceptre, and artefacts are the primary loot. Second, the sceptre is obtainable from sarcophagi as well as golden chests, so even framing the chest as the exclusive sceptre source is incorrect. 'Exclusively yields' inverts the rarity relationship and ignores sarcophagi as a confirmed second sceptre source. The finding stands on both counts with direct wiki receipts.
+
+## Stronghold of Security
+
+### [blocker] C6: Flesh crawlers drop the bottom of sceptre, not the left skull half. The guidance has the drop assignments for flesh crawlers (Floor 2) and ankous (Floor 4) inverted.
+
+- **Data says:** Floor 2 (Catacomb of Famine) - flesh crawlers and other monsters drop the left skull half
+- **Wiki says (raw):** level 28/35/41 flesh crawlers, which drop the bottom of sceptre for the skull sceptre
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Stronghold_of_Security
+- **Suggested fix:** Change 'flesh crawlers and other monsters drop the left skull half' to 'flesh crawlers drop the bottom of sceptre'
+- **Skeptic receipt:** Flesh Crawler drop table (wiki_lookup): 'Bottom of sceptre | qty: 1 | rarity: 3/100'. Skull Sceptre wiki (WebFetch): 'Bottom of Sceptre - dropped by flesh crawlers on the second level'. Stronghold of Security wiki (WebFetch): 'Level 2 - Catacomb of Famine: Flesh crawlers drop the bottom of sceptre'.
+- **Skeptic reasoning:** The data claims flesh crawlers (Floor 2, Catacomb of Famine) drop the left skull half. All three independent sources agree this is wrong: flesh crawlers drop the bottom of sceptre. The Flesh Crawler wiki drop table is unambiguous, the Skull Sceptre wiki states 'dropped by flesh crawlers on the second level' for the bottom of sceptre, and the Stronghold of Security page confirms 'Flesh crawlers drop the bottom of sceptre'. The left skull half belongs to ankous on Floor 4. This is the same inversion described in C8.
+
+### [blocker] C8: Ankous drop the left skull half, not the bottom of sceptre. The guidance has the drop assignments for ankous (Floor 4) and flesh crawlers (Floor 2) inverted.
+
+- **Data says:** Floor 4 (Sepulchre of Death) - ankous drop the bottom of sceptre
+- **Wiki says (raw):** level 75/82/86 ankou, which drop the left skull half for the skull sceptre
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Stronghold_of_Security
+- **Suggested fix:** Change 'ankous drop the bottom of sceptre' to 'ankous drop the left skull half'
+- **Skeptic receipt:** Ankou drop table (wiki_lookup): 'Left skull half | qty: 1 | rarity: 3/100' -- no bottom of sceptre entry present. Skull Sceptre wiki (WebFetch): 'Left Skull Half - dropped by ankou on the fourth level'. Stronghold of Security wiki (WebFetch): 'Level 4 - Sepulchre of Death: Ankou drop the left skull half'.
+- **Skeptic reasoning:** The data claims ankous (Floor 4, Sepulchre of Death) drop the bottom of sceptre. All three independent sources agree this is wrong: ankous drop the left skull half. The Ankou wiki drop table lists 'Left skull half | qty: 1 | rarity: 3/100' with no bottom of sceptre entry anywhere. The Skull Sceptre wiki states 'dropped by ankou on the fourth level' for the left skull half. The bottom of sceptre belongs to flesh crawlers on Floor 2. This is the same inversion described in C6.
+
+Tranche 4 total: 108 confirmed findings.
