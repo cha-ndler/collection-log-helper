@@ -64,7 +64,7 @@ final class GuidanceTargetMarker
 	 * item sprite is ~36x32; 0.6 brings it to a compact ~22x19. Scaled once on
 	 * load and cached, so the render hot path stays allocation-free.
 	 */
-	private static final float MARKER_SCALE = 0.6f;
+	private static final float MARKER_SCALE = 0.75f;
 
 	/**
 	 * Default z-offset lifting the marker above the target, in LOCAL HEIGHT
