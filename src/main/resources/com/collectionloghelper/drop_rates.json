@@ -11319,7 +11319,7 @@
       }
     ],
     "locationDescription": "Poison Waste Dungeon, Tirannwn",
-    "travelTip": "Tirannwn quiver -> Poison Waste",
+    "travelTip": "Spirit tree to Poison Waste, then walk west to dungeon entrance.",
     "npcId": 12490,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -11333,7 +11333,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Warped Creatures in the Warped area beneath Lumbridge Swamp. Requires completion of Song of the Elves",
+        "description": "Kill Warped Creatures in the Poison Waste Dungeon, Tirannwn. Requires completion of The Path of Glouphrie.",
         "worldX": 2032,
         "worldY": 4636,
         "worldPlane": 0,
