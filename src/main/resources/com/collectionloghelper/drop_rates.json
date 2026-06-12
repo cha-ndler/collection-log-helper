@@ -7836,8 +7836,8 @@
                 "DESERT_HARD"
               ]
             },
-            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). At raid level 500 bring Tumeken's shadow or Tbow, Osmumten's fang, full brews/restores, extra prayer potions and a Soulreaper axe spec; gear must be top-tier or kill times balloon",
-            "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
+            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary raises the sceptre charge cap to 50, up from 25, reducing how often it needs recharging at the desert lectern). At raid level 500 bring Tumeken's shadow or Tbow, Osmumten's fang, full brews/restores, extra prayer potions and a Soulreaper axe spec; gear must be top-tier or kill times balloon",
+            "travelTip": "Pharaoh's sceptre -> Necropolis (50 charges with Desert Hard diary)"
           },
           {
             "requirements": {
@@ -7881,7 +7881,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat the Wardens at raid level 500. P1/P2: rotate prayers to match the active style; obelisk health-bar is much longer. P3 (Tumeken's Warden): pray Protect from Magic against the energy balls, dodge the obelisk hand-slam, swap prayers exactly when the Warden mimics Akkha/Zebak/Ba-Ba/Kephri attacks - mistakes cost 30+ hp at this scale",
+        "description": "Defeat the Wardens at raid level 500. P1/P2: rotate prayers to match the active style; obelisk health-bar is much longer. P3 phantoms depend on which Warden enraged: Tumeken's Warden summons Zebak and Ba-Ba phantoms; Elidinis' Warden summons Akkha and Kephri phantoms. Pray to each phantom's attack style and dodge the obelisk hand-slam - mistakes cost 30+ hp at this scale",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
