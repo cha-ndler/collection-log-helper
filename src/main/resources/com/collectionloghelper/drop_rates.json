@@ -800,8 +800,8 @@
                 "FAIRY_RING"
               ]
             },
-            "description": "Use the POH superior garden fairy ring (dramen/lunar staff equipped) to dial AKQ, then run east to Zul-Andra",
-            "travelTip": "POH superior garden fairy ring -> AKQ -> run east to Zul-Andra"
+            "description": "Use the POH superior garden fairy ring (dramen/lunar staff equipped) to dial BJS, then run east to Zul-Andra",
+            "travelTip": "POH superior garden fairy ring -> BJS -> run east to Zul-Andra"
           },
           {
             "requirements": {
@@ -827,7 +827,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Zulrah. Prayer rotates per form: green (Ranged form) -> Protect from Missiles, blue (Magic form) -> Protect from Magic, red (Melee form) -> Protect from Missiles, jad phase -> swap each attack. Bring a blowpipe + magic setup, swap gear on the rotation, and avoid the toxic clouds the snakelings spit",
+        "description": "Kill Zulrah. Prayer rotates per form: green (Ranged form) -> Protect from Missiles, blue (Magic form) -> Protect from Magic, red (Melee form) -> Protect from Melee, jad phase -> swap each attack. Bring a blowpipe + magic setup, swap gear on the rotation, and avoid the toxic clouds Zulrah summons",
         "worldX": 2268,
         "worldY": 3069,
         "worldPlane": 0,
