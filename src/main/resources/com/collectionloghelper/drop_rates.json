@@ -5384,7 +5384,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Vet'ion's Rest in the Wilderness with a crush weapon (Inquisitor's mace, Soulreaper axe, or Saradomin sword), prayer potions, Saradomin brews, and a Voidwaker / DWH spec. Burning amulet to Chaos Temple, then run east",
+        "description": "Travel to Vet'ion's Rest in the Wilderness with a crush weapon (Inquisitor's mace or Soulreaper axe), prayer potions, Saradomin brews, and a Voidwaker / DWH spec. Burning amulet to Chaos Temple, then run east",
         "worldX": 3196,
         "worldY": 3776,
         "worldPlane": 0,
@@ -5407,7 +5407,7 @@
         "completionDistance": 5
       },
       {
-        "description": "Kill Vet'ion. Use Protect from Magic for his magic attack and swap to Protect from Missiles when he switches to a ranged attack. He spawns Skeletal Hellhounds at 75%, 50%, and 25% HP - kill them immediately or they will overwhelm you. Use a crush weapon since his stab and slash defence are higher",
+        "description": "Kill Vet'ion. Use Protect from Magic throughout - he attacks with magic only. Skeletal Hellhounds spawn at 50% HP in his first form; Greater Skeletal Hellhounds spawn at 50% HP in his enraged second form - kill them immediately as they grant him full damage immunity while alive. Use crush attacks since his stab and slash defence are very high",
         "worldX": 3220,
         "worldY": 3783,
         "worldPlane": 0,
