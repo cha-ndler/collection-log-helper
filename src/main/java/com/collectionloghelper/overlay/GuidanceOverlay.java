@@ -187,18 +187,58 @@ public class GuidanceOverlay extends OverlayPanel
 			return null;
 		}
 
-		// Skip world rendering if player is on a different plane than the target
 		Player localPlayer = client.getLocalPlayer();
+
+		// NPC highlighting — use event-driven tracked NPC (set via onNpcSpawned/onNpcDespawned).
+		// This is INDEPENDENT of the step-tile resolution below: inside instanced arenas the
+		// step's overworld tile can never resolve to the local scene, but the tracked NPC lives
+		// in the real scene and must still be highlighted. Plane-gate against the NPC's
+		// OWN world location, not the step tile's plane.
+		boolean npcHighlighted = false;
+		NPC npc = this.trackedNpc;
+		if (localPlayer != null
+			&& shouldDrawNpcHighlight(npcId, npc, localPlayer.getWorldLocation().getPlane()))
+		{
+			renderNpcHighlight(graphics, npc, overlayColor, action, locDesc);
+			renderRecorder.recordNpc(npcId);
+			npcHighlighted = true;
+		}
+
+		// Skip world tile rendering if player is on a different plane than the target tile.
 		boolean samePlane = localPlayer != null
 			&& localPlayer.getWorldLocation().getPlane() == point.getPlane();
 
-		// Tile highlight rendering
+		// Tile highlight rendering — resolve the step tile to the local scene.
 		net.runelite.api.WorldView wv = client.getTopLevelWorldView();
 		LocalPoint localPoint = samePlane && wv != null
 			? LocalPoint.fromWorld(wv, point) : null;
-		if (localPoint == null)
+
+		// Tile highlight rendering (skip if NPC is already highlighted nearby,
+		// or if an object highlight is handling the visual for this step)
+		if (localPoint != null && !npcHighlighted && !suppressTileHighlight)
 		{
-			// Target tile is not on screen — show compact direction panel
+			Polygon poly = Perspective.getCanvasTilePoly(client, localPoint);
+			if (poly != null)
+			{
+				OverlayUtil.renderPolygon(graphics, poly, overlayColor, cachedFillColor50,
+					STROKE_2);
+				renderRecorder.recordTile(point);
+
+				if (name != null)
+				{
+					Point tileTextPoint = Perspective.getCanvasTextLocation(client, graphics, localPoint, name, 150);
+					if (tileTextPoint != null)
+					{
+						OverlayUtil.renderTextLocation(graphics, tileTextPoint, name, overlayColor);
+					}
+				}
+			}
+		}
+
+		// Compact direction panel fallback: render only when NOTHING world-anchored was drawn —
+		// no NPC highlighted AND the step tile could not be resolved to the local scene.
+		if (!npcHighlighted && localPoint == null)
+		{
 			if (name != null)
 			{
 				panelComponent.getChildren().clear();
@@ -236,41 +276,6 @@ public class GuidanceOverlay extends OverlayPanel
 			return null;
 		}
 
-		// NPC highlighting — use event-driven tracked NPC (set via onNpcSpawned/onNpcDespawned)
-		boolean npcHighlighted = false;
-		if (npcId > 0)
-		{
-			NPC npc = this.trackedNpc;
-			if (npc != null && npc.getId() == npcId)
-			{
-				renderNpcHighlight(graphics, npc, overlayColor, action, locDesc);
-				renderRecorder.recordNpc(npcId);
-				npcHighlighted = true;
-			}
-		}
-
-		// Tile highlight rendering (skip if NPC is already highlighted nearby,
-		// or if an object highlight is handling the visual for this step)
-		if (!npcHighlighted && !suppressTileHighlight)
-		{
-			Polygon poly = Perspective.getCanvasTilePoly(client, localPoint);
-			if (poly != null)
-			{
-				OverlayUtil.renderPolygon(graphics, poly, overlayColor, cachedFillColor50,
-					STROKE_2);
-				renderRecorder.recordTile(point);
-
-				if (name != null)
-				{
-					Point tileTextPoint = Perspective.getCanvasTextLocation(client, graphics, localPoint, name, 150);
-					if (tileTextPoint != null)
-					{
-						OverlayUtil.renderTextLocation(graphics, tileTextPoint, name, overlayColor);
-					}
-				}
-			}
-		}
-
 		// When the target is on-screen we normally skip the side panel, but a
 		// required-items list still needs to be visible so the player can
 		// confirm they have what the step needs (or notice what's missing).
@@ -284,6 +289,23 @@ public class GuidanceOverlay extends OverlayPanel
 		}
 
 		return null;
+	}
+
+	/**
+	 * Pure decision for whether the tracked NPC highlight should be drawn this
+	 * frame. Extracted so the instanced-arena reachability (highlight is
+	 * independent of step-tile resolution) can be unit-tested without the
+	 * RuneLite render scaffolding. The NPC is plane-gated against its OWN plane,
+	 * never the step tile's.
+	 */
+	static boolean shouldDrawNpcHighlight(int stepNpcId, NPC trackedNpc, int localPlayerPlane)
+	{
+		if (stepNpcId <= 0 || trackedNpc == null || trackedNpc.getId() != stepNpcId)
+		{
+			return false;
+		}
+		WorldPoint npcLoc = trackedNpc.getWorldLocation();
+		return npcLoc != null && npcLoc.getPlane() == localPlayerPlane;
 	}
 
 	/**
@@ -368,7 +390,7 @@ public class GuidanceOverlay extends OverlayPanel
 	private void drawTargetMarker(Graphics2D graphics, NPC npc)
 	{
 		boolean markerOn = config.showGuidanceTargetMarker();
-		int zOffset = npc.getLogicalHeight() + ARROW_HEIGHT + ARROW_GAP + 90;
+		int zOffset = npc.getLogicalHeight() + MARKER_CLEARANCE;
 		// Record the per-target draw decision for the dev bridge: bookMarker
 		// reflects whether the marker actually drew (the #802/#811 assertion).
 		renderRecorder.recordTarget("npc", npc.getId(), markerOn, zOffset);
@@ -377,55 +399,6 @@ public class GuidanceOverlay extends OverlayPanel
 			return;
 		}
 		targetMarker.draw(graphics, client, npc.getLocalLocation(), zOffset);
-	}
-
-	/**
-	 * Draws a downward-pointing arrow at the given position, with a black outline
-	 * for visibility. The tip of the arrow is at (x, tipY).
-	 */
-	private void renderDirectionArrow(Graphics2D graphics, int x, int tipY, Color color)
-	{
-		int halfW = ARROW_WIDTH / 2;
-		int topY = tipY - ARROW_HEIGHT;
-
-		arrowPolygon.reset();
-		arrowPolygon.addPoint(x, tipY);
-		arrowPolygon.addPoint(x + halfW, topY);
-		arrowPolygon.addPoint(x - halfW, topY);
-
-		// Colored fill first, then black outline on top
-		graphics.setColor(color);
-		graphics.fillPolygon(arrowPolygon);
-
-		graphics.setColor(Color.BLACK);
-		graphics.setStroke(STROKE_2);
-		graphics.drawPolygon(arrowPolygon);
-	}
-
-	/**
-	 * Renders text with a dark outline for readability against any background.
-	 */
-	private void renderOutlinedText(Graphics2D graphics, Point point, String text, Color color)
-	{
-		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		graphics.setFont(BOLD_12);
-		FontMetrics fm = graphics.getFontMetrics();
-		int x = point.getX() - fm.stringWidth(text) / 2;
-		int y = point.getY();
-
-		// Black outline
-		graphics.setColor(Color.BLACK);
-		graphics.drawString(text, x + 1, y + 1);
-		graphics.drawString(text, x - 1, y - 1);
-		graphics.drawString(text, x + 1, y - 1);
-		graphics.drawString(text, x - 1, y + 1);
-
-		// Colored text
-		graphics.setColor(color);
-		graphics.drawString(text, x, y);
-		targetMarker.draw(graphics, client, npc.getLocalLocation(),
-			npc.getLogicalHeight() + MARKER_CLEARANCE);
 	}
 
 	private void updateCachedColors(Color overlayColor)
