@@ -5473,7 +5473,7 @@
       }
     ],
     "locationDescription": "Callisto's Den, Wilderness",
-    "travelTip": "Burning amulet -> Chaos Temple, then run south-east into Callisto's Den",
+    "travelTip": "Burning amulet -> Chaos Temple, then run north into Callisto's Den",
     "mutuallyExclusiveSources": [
       "Kalphite Queen",
       "Chaos Elemental",
@@ -5485,7 +5485,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Callisto's Den in the Wilderness with a melee setup (Bandos / Torva, Voidwaker, Saradomin brews) and prayer potions. Burning amulet to Chaos Temple, then run south-east",
+        "description": "Travel to Callisto's Den in the Wilderness with a ranged setup (Masori or equivalent ranged armour, Webweaver bow or crossbow, Saradomin brews) and prayer potions. Burning amulet to Chaos Temple, then run north",
         "worldX": 3265,
         "worldY": 3832,
         "worldPlane": 0,
@@ -5497,10 +5497,10 @@
           3870,
           0
         ],
-        "travelTip": "Burning amulet -> Chaos Temple + run south-east"
+        "travelTip": "Burning amulet -> Chaos Temple + run north"
       },
       {
-        "description": "Arrive at Callisto's Den and pre-pot Super Combat. Turn on Piety and Protect from Melee before engaging; Callisto deals heavy melee damage even at full health",
+        "description": "Arrive at Callisto's Den and pre-pot Divine ranging potion. Turn on Rigour (or Eagle Eye) and Protect from Magic before engaging; melee combat is not advised as Callisto deals very high melee damage even through Protect from Melee",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
@@ -5508,7 +5508,7 @@
         "completionDistance": 5
       },
       {
-        "description": "Kill Callisto with melee using Protect from Melee - Callisto only attacks with melee. Stand on his tile so the bear-stomp shockwave (knockback that unequips ranged shields and stalls combat) hits at melee range. Kill Callisto cubs immediately on spawn; they heal him if left alive",
+        "description": "Kill Callisto with ranged using Protect from Magic. Callisto uses melee, ranged (if out of reach), and a slow magic attack - Protect from Magic fully negates the magic attack and prevents the knockback/stun. At 66% and 33% HP Callisto deploys bear traps that snare and damage if stepped on. Protect from Melee only reduces his melee damage by ~50% so stay at range",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
