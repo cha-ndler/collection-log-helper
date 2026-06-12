@@ -3639,7 +3639,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Bank for Nex. Bring Saradomin brews, super restores, prayer potions, sharks, super combat potions, and a Frozen key (or its four pieces). Standard meta is Scythe of Vitur or Soulreaper axe for melee + Twisted bow / Tbow for range; bring a Zaryte crossbow with diamond bolts (e) for solo specs. Salve amulet (ei) is BIS for the helm slot.",
+        "description": "Bank for Nex. Bring Saradomin brews, super restores, prayer potions, sharks, super combat potions, and a Frozen key (or its four pieces). Standard meta is Scythe of Vitur or Soulreaper axe for melee + Twisted bow / Tbow for range; bring a Zaryte crossbow with diamond bolts (e) for solo specs. Recommended amulet slot: Amulet of blood fury or Necklace of anguish (Salve amulet (ei) gives no bonus at Nex as she is not undead).",
         "worldX": 3087,
         "worldY": 3493,
         "worldPlane": 0,
@@ -3688,7 +3688,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Nex in the Ancient Prison. Four-phase fight: Smoke (Protect from Magic, dodge smoke clouds), Shadow (Protect from Magic, run from the shadow target marker), Blood (Protect from Melee, stop attacking during the siphon or she heals), Ice (Protect from Magic, free frozen teammates with melee). Pop the icicle wall on Ice phase fast; she enrages below 25%. Team-scale recommended (4-7 players); solo is possible but slow with Tumeken's shadow.",
+        "description": "Kill Nex in the Ancient Prison. Five-phase fight: Smoke (Protect from Melee, stand in melee distance, dodge smoke clouds), Shadow (Protect from Missiles, stand far away to reduce shadow shot damage), Blood (Protect from Magic, stop attacking during the siphon or she heals), Ice (Protect from Magic, free frozen teammates with melee), Zaros (Protect from Melee, she heals 500 HP and gains Soul Split). Pop the icicle wall on Ice phase fast; Zaros phase begins at 20% HP. Team-scale recommended (4-7 players); solo is possible but slow with Tumeken's shadow.",
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
@@ -3707,7 +3707,7 @@
         ]
       },
       {
-        "description": "Loot the drop pile under Nex; uniques split based on damage contribution. Pick up Nihil shards for extending Ancient ceremonial robes too",
+        "description": "Loot the drop pile under Nex; uniques split based on damage contribution. Pick up Nihil shards (used to brew ancient brews via herblore, and to craft a Zaryte crossbow with a Nihil horn and Armadyl crossbow).",
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
