@@ -5679,7 +5679,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Lizardman shamans. Bring your best crush weapon (Inquisitor's mace, Saradomin sword, or Soulreaper axe), Saradomin brews, super restores, super combat potion, prayer potions, and a few sharks. Slayer task is recommended for the Dragon warhammer rate - confirm one is active before leaving Shayzien.",
+        "description": "Bank for Lizardman shamans. Bring your best stab weapon (Ghrazi rapier or Osmumten's fang), Saradomin brews, super restores, super combat potion, prayer potions, and a few sharks. Slayer task is recommended for the Dragon warhammer rate - confirm one is active before leaving Shayzien.",
         "worldX": 1504,
         "worldY": 3633,
         "worldPlane": 0,
@@ -5705,7 +5705,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Lizardman shamans in the canyon. Stand with your back against a wall to prevent the shamans from leaping on you and resetting your aggro. Step one tile off the green spawn pool as soon as it appears - the spawn explodes for 20+ damage if you stand on it. Use your crush weapon for the Dragon warhammer / Lizardman fang rare drops.",
+        "description": "Kill Lizardman shamans in the canyon. Stand with your back against a wall to prevent the shamans from leaping on you and resetting your aggro. Move at least 3 tiles from the purple spawns as soon as they appear - the spawn explodes for 8-10 damage within 2 tiles. Use your stab weapon for the Dragon warhammer / Lizardman fang rare drops.",
         "worldX": 1472,
         "worldY": 3686,
         "worldPlane": 0,
@@ -5732,7 +5732,7 @@
         "section": "Loot"
       },
       {
-        "description": "Return to bank when supplies run low. Xeric's talisman -> Glade is the fastest cycle back to a Shayzien bank.",
+        "description": "Return to bank when supplies run low. Xeric's talisman -> Lookout is the fastest cycle back to a Shayzien bank.",
         "worldX": 1504,
         "worldY": 3633,
         "worldPlane": 0,
