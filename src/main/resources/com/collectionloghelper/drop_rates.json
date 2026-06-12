@@ -8390,7 +8390,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Verac's mound (north-west) and kill Verac the Defiled. Verac's flail ignores Protect from Melee and armour - use Protect from Melee anyway to halve the chance, wear high-prayer gear, and attack with Melee (he is weak to Crush)",
+        "description": "Dig on Verac's mound (north-west) and kill Verac the Defiled. Verac's flail ignores Protect from Melee and armour - use Protect from Melee anyway (it fully negates 75% of his attacks; only 25% bypass prayer), wear high-prayer gear, and attack with Magic (his weakness)",
         "worldX": 3557,
         "worldY": 3298,
         "worldPlane": 0,
@@ -8420,7 +8420,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Karil's mound (south) and kill Karil the Tainted. Karil uses Ranged and can halve your Agility - use Protect from Missiles and attack with Magic (his weakness)",
+        "description": "Dig on Karil's mound (south) and kill Karil the Tainted. Karil uses Ranged and can reduce your Agility by 20% on a 25% chance per hit - use Protect from Missiles and attack with Magic (his weakness)",
         "worldX": 3566,
         "worldY": 3275,
         "worldPlane": 0,
@@ -8435,7 +8435,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Guthan's mound (south-east) and kill Guthan the Infested. Guthan uses Melee and his warspear heals him on hit - use Protect from Melee and attack with Ranged (his weakness)",
+        "description": "Dig on Guthan's mound (south-east) and kill Guthan the Infested. Guthan uses Melee and his warspear heals him on hit - use Protect from Melee and attack with Magic (his weakness)",
         "worldX": 3577,
         "worldY": 3283,
         "worldPlane": 0,
