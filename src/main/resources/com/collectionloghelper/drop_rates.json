@@ -1365,8 +1365,8 @@
                 "JEWELLERY_BOX_FANCY"
               ]
             },
-            "description": "POH jewellery box -> Games necklace -> Wilderness Volcano, then run south to the lever room and pull the lever to enter the Corporeal Beast cave",
-            "travelTip": "POH Games necklace -> Wilderness Volcano -> south to lever room"
+            "description": "Use the POH jewellery box (Fancy or higher) to access a Games necklace and teleport directly to the Corporeal Beast cave",
+            "travelTip": "POH jewellery box -> Games necklace -> Corporeal Beast"
           }
         ]
       },
