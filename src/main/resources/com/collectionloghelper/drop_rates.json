@@ -8733,7 +8733,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to the Wintertodt Camp with a tinderbox, an axe (rune or better), a knife (optional but speeds up fletching), warm clothing (Pyromancer / Hunter outfit / hooded cloak) to reduce cold damage, and Rejuvenation potions or food",
+        "description": "Travel to the Wintertodt Camp with a tinderbox, an axe (rune or better), a knife (optional but speeds up fletching), warm clothing (Pyromancer outfit / Clue hunter outfit / Wolf cloak) to reduce cold damage, and Rejuvenation potions or food",
         "worldX": 1621,
         "worldY": 3997,
         "worldPlane": 0,
@@ -8784,7 +8784,7 @@
         }
       },
       {
-        "description": "When Wintertodt's health hits zero, claim Supply crates from the box. Aim for 500+ points per game (4 crates) or 850+ (5 crates / Pyromancer outfit fast). Open crates for the Pyromancer outfit, Bruma torch, Warm gloves, Tome of fire pages, and Phoenix pet",
+        "description": "When Wintertodt's health hits zero, claim rewards from the reward cart. Aim for 500+ points per game (2 rolls) or 1000+ (3 rolls) or 1500+ (4 rolls / Pyromancer outfit fast). Open crates for the Pyromancer outfit, Bruma torch, Warm gloves, Tome of fire pages, and Phoenix pet",
         "worldX": 1640,
         "worldY": 3997,
         "worldPlane": 0,
