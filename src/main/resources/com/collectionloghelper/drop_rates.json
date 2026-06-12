@@ -2745,7 +2745,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank at Ferox Enclave for The Whisperer (Awakened). Awakened Whisperer is widely considered the hardest of the four; tentacle patterns chain into the screech attack twice as fast, and a single missed prayer flick can chain-hit through brews. Bring a full inventory of Saradomin brews and super restores, prayer potions, ranged potion, diamond bolts (e), an Awakener's orb (one per kill), the blackstone fragment (required to enter the Shadow Realm), and a Ring of Shadows. Bow of faerdhinen (c) plus Masori is the standard meta.",
+        "description": "Bank at Ferox Enclave for The Whisperer (Awakened). Awakened Whisperer is widely considered the hardest of the four; more tentacles (7 in X formation, 6 in + formation vs 4), and a single missed prayer flick can cause rapid damage. Magic is the combat meta: use Tumeken's Shadow or Harmonised Nightmare Staff with Ancestral robes. Bring 12-13 prayer potions (4-dose), 3-4 anglerfish or manta rays, a rune pouch (ice spells and thralls), a Venator bow with arrows for the Soul Siphon phase, a special attack weapon (Eldritch Nightmare Staff recommended), an Awakener's orb (one per kill), and the blackstone fragment (required to enter the Shadow Realm).",
         "worldX": 3129,
         "worldY": 3636,
         "worldPlane": 0,
@@ -2803,7 +2803,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill The Whisperer (Awakened). Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys. Use the blackstone fragment to hop into the Shadow Realm and break the four shadow tiles before her shield resets - missing one resets her shield to full and extends the kill 30 seconds. Never let your sanity bar fully deplete or you take a 10-tick degen that hits for 10 per tick. Awakened-mode: tentacle patterns chain into the screech attack roughly twice as fast, and the Shadow Realm has 3 extra shadow puddles to dodge. Switch prayers a tick early on every volley.",
+        "description": "Kill The Whisperer (Awakened). Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys. Use the blackstone fragment to hop into the Shadow Realm and break the four shadow tiles before her shield resets - missing one resets her shield to full and extends the kill 30 seconds. Never let your sanity bar fully deplete; full depletion causes near-instant death within 10 ticks - teleport immediately if this occurs. Awakened-mode: more tentacles (7 in X formation, 6 in + formation vs 4 in base); Soul Siphon has 16 souls (up from 12) with a 21-second timer. Switch prayers a tick early on every volley.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
@@ -2830,7 +2830,7 @@
         "section": "Loot"
       },
       {
-        "description": "Return to Ferox Enclave bank to restock brews, super restores, prayer potions, ranged potions, and another Awakener's orb before the next kill",
+        "description": "Return to Ferox Enclave bank to restock prayer potions, food (anglerfish or manta rays), rune pouch supplies, and another Awakener's orb before the next kill",
         "worldX": 3129,
         "worldY": 3636,
         "worldPlane": 0,
