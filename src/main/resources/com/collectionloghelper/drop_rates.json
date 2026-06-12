@@ -3985,7 +3985,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Varrock west bank. Required: Mossy key (farmed from Moss giants in Varrock Sewers / Brimhaven dungeon / Ardougne). Bring melee gear (Salve amulet (ei) is BiS - Bryophyta is undead), super combat, food, prayer potions, and an Amulet of glory for the return teleport",
+        "description": "Bank in Varrock west bank. Required: Mossy key (farmed from Moss giants in Varrock Sewers or Brimhaven Dungeon at 1/150, or 1/75 on a moss giant Slayer task). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport",
         "worldX": 3185,
         "worldY": 3439,
         "worldPlane": 0,
@@ -4001,7 +4001,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Varrock Sewers via the manhole behind Varrock Palace (preferred) or via the Edgeville Dungeon ladder. The manhole route lands you 10 tiles north of Bryophyta's gate",
+        "description": "Travel to the Varrock Sewers via the manhole just east of Varrock Palace (preferred) or via the Edgeville Dungeon pipe shortcut near Vannaka (requires 51 Agility). The manhole route lands you 10 tiles north of Bryophyta's gate",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
@@ -4011,7 +4011,7 @@
         "section": "Travel"
       },
       {
-        "description": "Use the Mossy key on the gate to enter Bryophyta's lair. The key is consumed on use - each kill needs a fresh key, so the farm rate is gated by moss giant key drops (~1/16)",
+        "description": "Use the Mossy key on the gate to unlock Bryophyta's lair for the first time. The key is NOT consumed when opening the gate, and subsequent visits do not require a key - the lair stays open after the first unlock",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
@@ -4024,7 +4024,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Bryophyta. Use Protect from Melee and attack with a strong crush or slash weapon (Bryophyta has high stab defence). Kill the Growthlings the moment they spawn - each living Growthling heals Bryophyta for 3 HP per tick, so leaving one alive negates your DPS. Salve amulet (ei) is mandatory for the +20% melee bonus against this undead boss",
+        "description": "Kill Bryophyta. Activate Protect from Magic before entering or immediately on entry. All melee styles are equally effective (no elevated stab defence; 50% fire magic weakness). Kill Growthlings the moment they spawn - Bryophyta is immune to all damage (except poison and venom) while any Growthling is alive",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
@@ -4035,14 +4035,13 @@
         "section": "Combat",
         "recommendedItemIds": [
           4151,
-          12018,
           6685,
           2434,
           385
         ]
       },
       {
-        "description": "Teleport out via Amulet of glory or a Varrock teleport tab. Restock a fresh Mossy key + supplies before the next kill - the fight is gated by key drops, not supplies",
+        "description": "Teleport out via Amulet of glory or a Varrock teleport tab. Restock supplies before the next kill",
         "worldX": 3185,
         "worldY": 3439,
         "worldPlane": 0,
