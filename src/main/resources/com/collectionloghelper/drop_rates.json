@@ -3127,7 +3127,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Grotesque Guardians on the Slayer Tower roof. Requires gargoyle Slayer task + brittle key + a rock hammer or thrownhammer to finish them off. Dusk (melee) and Dawn (ranged) fight together until one dies, then the survivor enrages - pray Melee against Dusk and Missiles against Dawn, swapping prayers when they switch attack styles. Dodge Dawn's lightning AoE (move 2 tiles when she raises her arms) and step out of Dusk's prison rocks. After the first Guardian dies, the survivor heals to full and gains a stomp special - move off the marked tile",
+        "description": "Kill the Grotesque Guardians on the Slayer Tower roof. Requires gargoyle Slayer task + brittle key + a rock hammer or thrownhammer to finish them off. Phase 1: fight Dawn solo (Dusk is fully immune); use ranged, magic, or a halberd as she is airborne. Phase 2: fight Dusk solo. Phase 3 (lightning charge): both are temporarily invulnerable; move off any vortex that spawns on your tile (one-second colour warning). Pray Melee against Dusk and Missiles against Dawn, swapping when they switch styles. Do not stand under Dusk; doing so triggers a trample dealing up to 40 damage. After Dawn dies, Dusk absorbs her essence and his stats are significantly boosted (Attack 300, Strength/Magic/Ranged 250, Defence 150) for the final phase.",
         "worldX": 3427,
         "worldY": 3543,
         "worldPlane": 2,
@@ -3510,7 +3510,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Fight Phosani's Nightmare solo. Same prayer rotation as The Nightmare but tighter and faster: overhead-staff -> Protect from Magic, claws -> Protect from Melee, crossbow stance -> Protect from Missiles. Sleepwalker minions chase you and must be killed (Sanguinesti heals while burning them down), parasites still drain sanity, and the husk attack will mirror your gear so bring max gear you can lose. Hard to solo without high stats and prayer flicking",
+        "description": "Fight Phosani's Nightmare solo. Same prayer rotation as The Nightmare but tighter and faster: overhead-staff -> Protect from Magic, claws -> Protect from Melee, crossbow stance -> Protect from Missiles. Sleepwalkers spawn at phase end and walk toward Phosani -- kill them before they reach her or each one that does triggers an increasingly lethal blast. Parasites attach to you and burst after ~18 ticks dealing massive damage, then heal Phosani until killed -- drink Sanfew serum or Relicym's balm before the burst to reduce damage. Husks have fixed attack styles: blue (magic) and green (ranged) -- kill the ranged husk first in phases 1-2. Hard to solo without high stats and prayer flicking.",
         "worldX": 3806,
         "worldY": 9757,
         "worldPlane": 1,
