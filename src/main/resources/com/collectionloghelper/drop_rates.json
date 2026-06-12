@@ -2361,7 +2361,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank at Ferox Enclave for Duke Sucellus (Awakened). Awakened hits roughly 2x harder than the base fight; bring a full inventory of Saradomin brews and super restores, prayer potions, super combat potion, a pickaxe for the salt vents, an Awakener's orb (one per kill), and a Ring of Shadows for fast re-entry. Crush is mandatory - Bandos godsword for spec, Inquisitor's mace or Saradomin sword as main weapon.",
+        "description": "Bank at Ferox Enclave for Duke Sucellus (Awakened). Awakened hits roughly 2x harder than the base fight; bring a full inventory of Saradomin brews and super restores, prayer potions, super combat potion, a pickaxe for the salt vents, an Awakener's orb (one per kill), and a Ring of Shadows for fast re-entry. Slash is preferred - Bandos godsword for spec, use a slash weapon (Scythe of vitur, Emberlight, or Soulreaper axe) as main weapon.",
         "worldX": 3129,
         "worldY": 3636,
         "worldPlane": 0,
@@ -2416,7 +2416,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Duke Sucellus (Awakened). Mine arder powder + musca powder + salax salt from the asylum vents and craft arder-musca poison to weaken Duke before each phase. Use Protect from Melee with crush weapons (Bandos godsword or Inquisitor's mace) - Duke resists slash and stab. Awakened-mode mechanics: ice patches fall in a tighter pattern, gas vents activate one tick earlier, and Duke gains a second extremity orientation halfway through the fight. Step diagonally off ice patches the moment they spawn or you will tick-die through brews.",
+        "description": "Kill Duke Sucellus (Awakened). Mine arder powder + musca powder + salax salt from the asylum vents and craft arder-musca poison to weaken Duke before each phase. Use Protect from Melee with slash weapons (Bandos godsword for spec, slash main weapon) - Duke resists stab and crush. Awakened-mode mechanics: ice patches fall in a tighter pattern, gas vents activate one tick earlier, and Duke gains a second extremity orientation halfway through the fight. Step diagonally off ice patches the moment they spawn or you will tick-die through brews.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
