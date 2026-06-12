@@ -4231,20 +4231,20 @@
         "conditionalAlternatives": [
           {
             "requirements": { "diaries": ["FREMENNIK_HARD"] },
-            "description": "Rub the enchanted lyre to teleport directly to Rellekka, then take Jarvald's boat to Waterbirth Island for free. Hard Fremennik Diary removes the 1,000 gp boat fee.",
-            "travelTip": "Enchanted lyre -> Rellekka -> free Jarvald boat (Hard Fremennik Diary)"
+            "description": "Rub the enchanted lyre (Hard Fremennik Diary unlocks Waterbirth Island as a direct destination) to teleport straight to Waterbirth Island, skipping the Rellekka boat entirely.",
+            "travelTip": "Enchanted lyre -> Waterbirth Island direct (Hard Fremennik Diary)"
           }
         ]
       },
       {
-        "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Bring a rune thrownaxe (or Mind Altar shortcut at 70 Agility) to pull only Rex",
+        "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Use a rune thrownaxe special attack on the middle (western) door to bounce through and destroy all three locked doors blocking the lair entrance. Alternatively, bypass the doors via the 85 Agility shortcut at the highest point of Waterbirth Island, or use the 81 Agility shortcut to room 14",
         "worldX": 2528,
         "worldY": 3739,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Dagannoth Rex. Rex attacks only with Melee - keep Protect from Melee on at all times when in melee range. Rex is weak to Magic and crush; fire spells (Fire Surge / Tumeken's Shadow) or a crush weapon work best. Lure him to the edge of the islet so Prime and Supreme cannot reach you - Rex has no ranged attack so safespotting from outside his melee range trivialises the fight. Bring antidote++ for Spinolyps in the moat",
+        "description": "Kill Dagannoth Rex. Rex attacks only with Melee - keep Protect from Melee on at all times when in melee range. Rex is weak to Magic only (+255 defence vs all melee styles); use earth spells (35% elemental weakness) or a powered staff such as Tumeken's Shadow. Slayer Dart and Iban Blast are also effective. Lure him to the edge of the islet so Prime and Supreme cannot reach you - Rex has no ranged attack so safespotting from outside his melee range trivialises the fight. Bring antidote++ for Spinolyps in the moat",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
