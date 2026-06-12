@@ -9999,7 +9999,7 @@
     "travelTip": "Burning amulet -> Bandit Camp -> Rev Caves",
     "guidanceSteps": [
       {
-        "description": "Bank in Edgeville or Ferox Enclave. Bring cheap ranged gear, Bracelet of ethereum (prevents revenant passive damage), looting bag, burning amulet, food, and prayer potions. Only risk what you are willing to lose - this is multi-combat Wilderness (level 28-34).",
+        "description": "Bank in Edgeville or Ferox Enclave. Bring cheap ranged gear, Bracelet of ethereum (reduces revenant damage by 75%), looting bag, burning amulet, food, and prayer potions. Only risk what you are willing to lose - this is singles-plus combat Wilderness (level 28-34).",
         "worldX": 3094,
         "worldY": 3492,
         "worldPlane": 0,
@@ -10037,7 +10037,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Revenant Caves entrance. Rub the burning amulet and teleport to Bandit Camp, then run north-east to the cave entrance at level 28 Wilderness. Watch for PKers along the route.",
+        "description": "Travel to the Revenant Caves entrance. Rub the burning amulet and teleport to Bandit Camp, then run north-east to the cave entrance at level 26 Wilderness. Watch for PKers along the route.",
         "worldX": 3073,
         "worldY": 3654,
         "worldPlane": 0,
@@ -10047,7 +10047,7 @@
         "section": "Travel"
       },
       {
-        "description": "Pay the 100,000-coin entry fee and enter the Revenant Caves. Activate the Bracelet of ethereum to negate revenant passive damage. Warning: the caves are deep Wilderness and multi-combat.",
+        "description": "Pay the 100,000-coin entry fee and enter the Revenant Caves. Activate the Bracelet of ethereum to reduce revenant damage by 75%. Warning: the caves are deep Wilderness and singles-plus combat.",
         "worldX": 3136,
         "worldY": 3672,
         "worldPlane": 0,
@@ -10057,7 +10057,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill revenants in the caves for unique drops. Use Protect from Magic or Protect from Missiles based on the revenant type. The Bracelet of ethereum negates passive damage. Stay alert for PKers - this is one of the most contested multi-combat Wilderness zones. Loot into the looting bag immediately and teleport out if threatened.",
+        "description": "Kill revenants in the caves for unique drops. Revenants use all three combat styles and adapt to your weakness - use Protect from Melee, Magic, or Missiles as appropriate. The Bracelet of ethereum reduces revenant damage by 75%. Stay alert for PKers - this is one of the most contested singles-plus combat Wilderness zones. Loot into the looting bag immediately and teleport out if threatened.",
         "worldX": 3136,
         "worldY": 3672,
         "worldPlane": 0,
