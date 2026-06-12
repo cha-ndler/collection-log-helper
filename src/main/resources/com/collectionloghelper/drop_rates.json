@@ -10867,7 +10867,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank and prepare for Sulphur Nagua. Bring melee or ranged gear; spectral undead so Salve amulet (ei) outperforms Slayer helmet on task",
+        "description": "Bank and prepare for Sulphur Nagua. Bring melee or ranged gear; spectral but NOT undead so Salve amulet has no effect - use Slayer helmet on task",
         "worldX": 3087,
         "worldY": 3493,
         "worldPlane": 0,
@@ -10895,7 +10895,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Sulphur Nagua. Protect from Melee; melee damage only. Spectral undead - Salve amulet (ei) outperforms Slayer helmet on task. No phase mechanics or special attacks",
+        "description": "Kill Sulphur Nagua. Protect from Melee; melee damage only. Spectral but NOT undead - Salve amulet has no effect; use Slayer helmet on task. No phase mechanics; special attack every 5 hits drains 5 prayer points if in melee range - step away to avoid it",
         "worldX": 1440,
         "worldY": 9602,
         "worldPlane": 0,
