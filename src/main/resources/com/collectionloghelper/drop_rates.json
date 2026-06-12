@@ -8087,7 +8087,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Teleport to Prifddinas via teleport crystal / house tablet and run north-west to the Gauntlet portal in Lletya district",
+        "description": "Teleport to Prifddinas via teleport crystal / house tablet and run north-west to the Gauntlet portal in Amlodd district",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0,
@@ -8100,7 +8100,7 @@
                 "WESTERN_ELITE"
               ]
             },
-            "description": "Operate the Crystal teleport seed for the rub-on-cape variant (Western Provinces Elite diary attaches the Prifddinas teleport to your max / quest / achievement cape, so you can teleport from anywhere without dedicating an inventory slot to the seed). Then run north-west to the Gauntlet portal in Lletya district",
+            "description": "Operate the Crystal teleport seed for the rub-on-cape variant (Western Provinces Elite diary attaches the Prifddinas teleport to your max / quest / achievement cape, so you can teleport from anywhere without dedicating an inventory slot to the seed). Then run north-west to the Gauntlet portal in Amlodd district",
             "travelTip": "Cape Crystal teleport -> Prifddinas (Western Provinces Elite diary unlock)"
           },
           {
@@ -8110,7 +8110,7 @@
                 23858
               ]
             },
-            "description": "Right-click your Teleport crystal (regular or HM-charged) in the inventory and pick Prifddinas, then run north-west to the Gauntlet portal in Lletya district",
+            "description": "Right-click your Teleport crystal (regular or HM-charged) in the inventory and pick Prifddinas, then run north-west to the Gauntlet portal in Amlodd district",
             "travelTip": "Inventory Teleport crystal -> Prifddinas"
           }
         ]
@@ -8125,7 +8125,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Prep phase (about 7-9 minutes): gather paddlefish + linum tirinum + raw chompy meat + crystal shards, mine ore from crystal deposits, chop bark from phren roots, kill weak/strong monsters for weapon frames, and find a demi-boss for the perfected weapon upgrade. Craft a basic then perfected weapon + tier 3 armour at the singing bowl before the timer expires",
+        "description": "Prep phase (10 minutes): gather paddlefish + linum tirinum + crystal shards, mine ore from crystal deposits, chop bark from phren roots, kill weak/strong monsters for weapon frames, and find a demi-boss for the perfected weapon upgrade. Craft a basic then perfected weapon + tier 3 armour at the singing bowl before the timer expires",
         "worldX": 1920,
         "worldY": 5681,
         "worldPlane": 1,
