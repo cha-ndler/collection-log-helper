@@ -10786,12 +10786,12 @@
       }
     ],
     "locationDescription": "Ruins of Tapoyauik, beneath Twilight Temple, Varlamore",
-    "travelTip": "Pendant of ates -> Ruins of Tapoyauik (requires The Heart of Darkness), or quetzal whistle -> Civitas illa Fortis -> walk south",
+    "travelTip": "Pendant of ates -> Twilight Temple (requires The Heart of Darkness), or quetzal whistle -> Civitas illa Fortis -> walk south",
     "npcId": 13788,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank and prepare for Frost Nagua. Fire-spell magic or melee crush gear works best; spectral undead so Salve amulet (ei) outperforms Slayer helmet on task",
+        "description": "Bank and prepare for Frost Nagua. Fire-spell magic or melee stab gear works best; spectral (not undead) so Slayer helmet applies on task",
         "worldX": 3087,
         "worldY": 3493,
         "worldPlane": 0,
@@ -10800,13 +10800,13 @@
         "section": "Bank"
       },
       {
-        "description": "Use the Pendant of ates to teleport directly to the Ruins of Tapoyauik (requires The Heart of Darkness). Without the pendant, use quetzal whistle to Civitas illa Fortis then walk south to the Twilight Temple entrance",
+        "description": "Use the Pendant of ates to teleport to the Twilight Temple (requires The Heart of Darkness). Without the pendant, use quetzal whistle to Civitas illa Fortis then walk south to the Twilight Temple entrance",
         "worldX": 1350,
         "worldY": 3050,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 25,
-        "travelTip": "Pendant of ates -> Ruins of Tapoyauik, or quetzal whistle -> Civitas illa Fortis -> walk south",
+        "travelTip": "Pendant of ates -> Twilight Temple, or quetzal whistle -> Civitas illa Fortis -> walk south",
         "section": "Travel"
       },
       {
@@ -10819,7 +10819,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Frost Nagua. Protect from Melee; fire spells deal bonus damage. Spectral undead - Salve amulet (ei) gives a stronger bonus than Slayer helmet on task. No phase mechanics",
+        "description": "Kill Frost Nagua. Protect from Magic; fire spells deal bonus damage. Spectral (not undead) - Slayer helmet applies on task. No phase mechanics",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
