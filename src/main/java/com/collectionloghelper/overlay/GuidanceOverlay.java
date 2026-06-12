@@ -184,7 +184,7 @@ public class GuidanceOverlay extends OverlayPanel
 		// NPC highlighting — use event-driven tracked NPC (set via onNpcSpawned/onNpcDespawned).
 		// This is INDEPENDENT of the step-tile resolution below: inside instanced arenas the
 		// step's overworld tile can never resolve to the local scene, but the tracked NPC lives
-		// in the real scene and must still be highlighted (#807). Plane-gate against the NPC's
+		// in the real scene and must still be highlighted. Plane-gate against the NPC's
 		// OWN world location, not the step tile's plane.
 		boolean npcHighlighted = false;
 		NPC npc = this.trackedNpc;
