@@ -11617,7 +11617,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm. Bring boots of stone (mandatory to prevent passive heat damage in the Karuulm dungeon - or use granite or Cerberus boots), Dragon hunter lance, super combat, prayer potions, a few Saradomin brews, super restores, and sharks. Slayer task recommended for the dragon-tier rare drops. Fairy ring CIR drops you right at the dungeon entrance; Rada's blessing teleport to Mount Karuulm is the unquested alternative.",
+        "description": "Travel to Mount Karuulm. Bring boots of stone (mandatory to prevent passive heat damage in the Karuulm dungeon - or use boots of brimstone or granite boots), Dragon hunter lance, super combat, prayer potions, a few Saradomin brews, super restores, and sharks. Slayer task recommended for the dragon-tier rare drops. Fairy ring CIR drops you right at the dungeon entrance; Rada's blessing teleport to Mount Karuulm is the unquested alternative.",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
@@ -11650,7 +11650,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Wyrms on the first level (62 Slayer). Pray Magic for their ranged-magic breath - they hit through prayer for 1s only and you can long-range safespot from outside their attack range with a Dragon hunter lance or Dragon hunter crossbow. Boots of stone keep the heat tick from grinding through your HP. The shortcut safespot tile near the east wall lets you AFK chunks of the task while you stack the rares.",
+        "description": "Kill Wyrms on the first level (62 Slayer). Pray Magic for their magic attacks. You can safespot from outside their 6-square attack range using a Dragon hunter crossbow or other ranged weapon. Boots of stone keep the heat tick from grinding through your HP. The shortcut safespot tile near the east wall lets you AFK chunks of the task while you stack the rares.",
         "worldX": 1311,
         "worldY": 10205,
         "worldPlane": 0,
