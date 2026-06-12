@@ -5921,7 +5921,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Hespori. Bring a Hespori seed, secateurs (magic secateurs preferred), spade, your best melee or magic weapon (Trident / Whip / Scythe all fine), a Saradomin brew and prayer potion, and at least one teleport home. The patch is in the south room of the Farming Guild and requires 65 Farming to access.",
+        "description": "Bank for Hespori. Bring a Hespori seed, secateurs (magic secateurs preferred), spade, your best melee or magic weapon (Trident / Whip / Scythe all fine), a Saradomin brew and prayer potion, and at least one teleport home. The patch is in the west wing cave of the Farming Guild and requires 65 Farming to access.",
         "worldX": 1647,
         "worldY": 3667,
         "worldPlane": 0,
@@ -5935,7 +5935,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Farming Guild south room. Fairy ring CIR is the fastest route; Skills necklace to Farming Guild is the unquested fallback. Plant the Hespori seed in the Hespori patch (requires 65 Farming) and wait for it to grow",
+        "description": "Travel to the Farming Guild west wing cave. Fairy ring CIR is the fastest route; Skills necklace to Farming Guild is the unquested fallback. Plant the Hespori seed in the Hespori patch (requires 65 Farming) and wait for it to grow",
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
@@ -5954,8 +5954,8 @@
                 "FARMING"
               ]
             },
-            "description": "Farming cape: teleport straight into the Farming Guild (lands near the bank), then walk to the south room and plant the Hespori seed. Skips the fairy ring hop entirely",
-            "travelTip": "Farming cape -> Farming Guild -> south room"
+            "description": "Farming cape: teleport straight into the Farming Guild (lands near the bank), then walk to the west wing cave and plant the Hespori seed. Skips the fairy ring hop entirely",
+            "travelTip": "Farming cape -> Farming Guild -> west wing cave"
           }
         ]
       },
@@ -5969,7 +5969,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Hespori. Use Protect from Magic for the entire fight. Hespori summons three flowers each phase that auto-target you with binding roots; kill them in order (white, then red, then blue) or they will stack damage. After three flower waves Hespori becomes attackable - bring high accuracy gear since her defence is huge. Magic secateurs increase yield from the seeds dropped on death.",
+        "description": "Kill Hespori. Use Protect from Magic for the entire fight. Four flower buds surround Hespori and keep her invulnerable; kill all four buds (each dies in one hit from any weapon, any order) to make Hespori attackable. Buds re-open at 66% and 33% health. Hespori uses a vine entangle special attack - move away when targeted. Bring high accuracy gear for Hespori herself. Magic secateurs increase seed yield on death.",
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
