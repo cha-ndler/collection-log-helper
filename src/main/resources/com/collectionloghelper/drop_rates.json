@@ -12750,7 +12750,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm. Bring boots of stone (mandatory - the Karuulm heat tick will eat through your HP without them), Dragon hunter lance, super combat, prayer potions, Saradomin brews, super restores, and a few sharks. Karuulm-friendly footwear (boots of stone / granite / Cerberus boots) is non-negotiable. Fairy ring CIR drops you right at the dungeon entrance; Rada's blessing 3/4 teleport is the unquested alternative.",
+        "description": "Travel to Mount Karuulm. Bring boots of stone (mandatory - the Karuulm heat tick will eat through your HP without them), Dragon hunter lance, super combat, prayer potions, Saradomin brews, super restores, and a few sharks. Karuulm-friendly footwear (boots of stone / granite / Cerberus boots) is non-negotiable. Fairy ring CIR - short walk north up the volcano to the dungeon entrance; Rada's blessing 3/4 (requires Kourend & Kebos Hard Diary) teleports straight to the dungeon.",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
@@ -12783,7 +12783,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Drakes on the mid level (84 Slayer). Move one tile when you see the dragonfire breath telegraph (orange beam under your feet) - it hits up to 40 if you stand still. Pray Magic for the standard ranged-magic style; Dragon hunter lance + super combat gets sub-12s kill times. The room safespot tile at the south-east edge lets you AFK most of the task with prayer potions.",
+        "description": "Kill Drakes on the mid level (84 Slayer). Move one tile when you see the dragonfire breath telegraph (orange beam under your feet) - it deals up to 32 damage (four hits of up to 8 each) if you stand still. Pray Missiles (Protect from Missiles) for the standard ranged attack style; Dragon hunter lance + super combat gets sub-12s kill times. The room safespot tile at the south-east edge lets you AFK most of the task with prayer potions.",
         "worldX": 1310,
         "worldY": 10057,
         "worldPlane": 0,
