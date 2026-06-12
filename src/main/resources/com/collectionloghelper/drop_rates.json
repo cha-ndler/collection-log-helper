@@ -2571,13 +2571,13 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to The Scar entrance beneath the Wizards' Tower. Ring of Shadows -> The Scar is the fastest route; otherwise take the rowboat in the Wizards' Tower basement. Keep the Awakener's orb in your inventory before climbing in.",
+        "description": "Travel to The Scar entrance beneath the Wizards' Tower. Ring of Shadows -> The Scar is the fastest route. Keep the Awakener's orb in your inventory before climbing in.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Ring of Shadows -> The Scar, or Wizards' Tower basement rowboat",
+        "travelTip": "Ring of Shadows -> The Scar",
         "requiredItemIds": [
           28327,
           28334
@@ -2607,7 +2607,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill The Leviathan (Awakened). Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee) - getting flicks wrong in Awakened mode is a near-instant death. Awakened-mode volley speed is roughly 2 ticks faster, the Rocks phase adds 6-8 thrown rocks you must run between, and the end-of-volley debris warning leaves permanent spike spawns - step at least 2 tiles off the warning tile or take a 60+ unprotectable hit. Spec with Voidwaker on the Rocks phase to skip it.",
+        "description": "Kill The Leviathan (Awakened). Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee) - getting flicks wrong in Awakened mode is a near-instant death. Awakened-mode volley speed is roughly 2 ticks faster, and end-of-volley roar drops 5 permanent debris pieces in a '+' formation - step at least 1 tile off the warning tile to avoid the debris (the roar itself deals up to 7 chip damage regardless). Spec with Voidwaker on the Rocks phase to skip it.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
