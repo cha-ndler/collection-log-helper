@@ -13279,7 +13279,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Hydras on the lower level. Pray against the active style (Magic first, then Ranged after three hits - just like Alchemical Hydra). Move one tile when the fire-puddle telegraph appears under your feet to avoid the 30+ burn tick. Drink antidote++ between kills - their venom attack ticks for 6+ even after they die. Dragon hunter lance + super combat gets sub-15s kill times.",
+        "description": "Kill Hydras on the lower level. Hydra starts on a random style (Magic or Ranged), switching after every three attacks regardless of hit/miss - watch the animation to determine the opening style and switch protection prayer accordingly. Move one tile when a poison splat telegraph (light green orb) appears under your feet to avoid 4 poison damage every two ticks (halved if poison-immune). Drink antidote++ between kills. Dragon hunter lance + super combat gets sub-15s kill times.",
         "worldX": 1310,
         "worldY": 10190,
         "worldPlane": 0,
