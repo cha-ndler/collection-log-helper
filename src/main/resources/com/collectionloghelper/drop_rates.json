@@ -8087,15 +8087,6 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": [
-                "WESTERN_ELITE"
-              ]
-            },
-            "description": "Operate the Crystal teleport seed for the rub-on-cape variant (Western Provinces Elite diary attaches the Prifddinas teleport to your max / quest / achievement cape, so you can teleport from anywhere without dedicating an inventory slot to the seed). Then run north-west to the Gauntlet portal in Amlodd district",
-            "travelTip": "Cape Crystal teleport -> Prifddinas (Western Provinces Elite diary unlock)"
-          },
-          {
-            "requirements": {
               "inventoryItemIdsAny": [
                 23904,
                 23858
