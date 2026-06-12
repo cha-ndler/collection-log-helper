@@ -2247,7 +2247,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Vardorvis. Use Protect from Melee with slash weapons (Soulreaper axe or Blade of Saeldor) since he resists stab and crush, keep moving to dodge the spinning axes spawned from ground cracks (they one-shot if you stand still late-fight), and kill the Strangled spawns immediately or they will heal him.",
+        "description": "Kill Vardorvis. Use Protect from Melee with slash weapons (Soulreaper axe or Blade of Saeldor) since he resists stab and crush. Dodge the swinging axes released across the arena by the Strangler's tendrils (more axes spawn as HP drops). Step away from ground cracks caused by the Darting Spikes attack before they erupt into tendrils.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
