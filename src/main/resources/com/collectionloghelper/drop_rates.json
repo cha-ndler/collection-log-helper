@@ -5583,7 +5583,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Demonic gorillas. Bring a ranged setup (Bow of faerdhinen or Toxic blowpipe with rune/amethyst darts) plus a melee swap (Scythe or Ghrazi rapier), Saradomin brews, super restores, prayer potions, and a few sharks. The gorillas hit hard through prayer when you tank a wrong style, so a tank-shield swap or extra brews are worth packing.",
+        "description": "Bank for Demonic gorillas. Bring a ranged setup (Bow of faerdhinen or Toxic blowpipe with rune/amethyst darts) plus a melee swap (Emberlight or Arclight for the demonbane bonus), Saradomin brews, super restores, prayer potions, and a few sharks. Keep protection prayers active and swap styles to match the gorilla's attack - missing prayers will drain supplies fast.",
         "worldX": 2461,
         "worldY": 3444,
         "worldPlane": 0,
@@ -5618,7 +5618,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Demonic gorillas in the Crash Site Cavern. They cycle through Protect from Melee / Magic / Range after every three successful hits of the same style, so swap your style each time the prayer flips. Dodge the falling-boulder special (run one tile when the ground turns red) and the Magic-special purple orb (hits for up to 30 through prayer). Bow of faerdhinen or Toxic blowpipe + Ghrazi rapier on the swap is the modern meta.",
+        "description": "Kill Demonic gorillas in the Crash Site Cavern. They switch attack style after three missed hits in a row (blocked by prayer counts as missed), so watch for the style change and swap your protection prayer accordingly. Dodge the falling-boulder special (run one tile when the ground turns red) and the magic attack (a green orb, up to 30 damage - blocked by Protect from Magic). Use Emberlight or Arclight for the melee swap as demonic gorillas are demons and take bonus damage from demonbane weapons. Toxic blowpipe or Bow of faerdhinen works well for ranged.",
         "worldX": 2405,
         "worldY": 3419,
         "worldPlane": 0,
