@@ -30,12 +30,8 @@ import com.collectionloghelper.guidance.RequiredItemDisplay;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.util.Collections;
 import java.util.List;
@@ -64,11 +60,15 @@ public class GuidanceOverlay extends OverlayPanel
 {
 	private static final int MAX_PANEL_WIDTH = 200;
 	private static final Dimension PANEL_PREFERRED_SIZE = new Dimension(MAX_PANEL_WIDTH, 0);
-	private static final int ARROW_HEIGHT = 14;
-	private static final int ARROW_WIDTH = 12;
-	private static final int ARROW_GAP = 5;
+	/**
+	 * Clearance above an NPC's {@code getLogicalHeight()} for the floating
+	 * collection-log marker, in local height units (#802). 40 was not enough —
+	 * the icon overlapped large models (confirmed live on Giant Mole); 90
+	 * matches the headroom the marker effectively had before the arrow/text
+	 * stack was removed.
+	 */
+	private static final int MARKER_CLEARANCE = 90;
 	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
-	private static final Font BOLD_12 = new Font(Font.DIALOG, Font.BOLD, 12);
 	private static final Color TITLE_COLOR = new Color(255, 200, 0);
 	private static final Color TRAVEL_COLOR = new Color(100, 200, 255);
 	private static final Color ACTION_COLOR = new Color(100, 255, 100);
@@ -103,12 +103,10 @@ public class GuidanceOverlay extends OverlayPanel
 	private volatile boolean suppressTileHighlight;
 	private volatile NPC trackedNpc;
 	private volatile List<RequiredItemDisplay> requiredItems = Collections.emptyList();
-	private final Polygon arrowPolygon = new Polygon();
 	private Color cachedOverlayColor;
 	private Color cachedFillColor50;
 	private Color cachedFillColor30;
 	private volatile String cachedTravelLabel;
-	private volatile String cachedNpcLabel;
 
 	@Inject
 	private GuidanceOverlay(Client client, CollectionLogHelperConfig config, ItemManager itemManager)
@@ -339,40 +337,21 @@ public class GuidanceOverlay extends OverlayPanel
 
 		drawTargetMarker(graphics, npc);
 
-		// Draw downward-pointing arrow above the NPC (reuse hull from HULL case if available)
-		Shape arrowHull = npc.getConvexHull();
-		if (arrowHull != null)
+		// The collection-log marker is the only above-the-model decoration: no
+		// floating arrow or action text. The action/location info stays
+		// discoverable via the hover tooltip on the NPC hull.
+		Shape hoverHull = npc.getConvexHull();
+		if (hoverHull != null)
 		{
-			Rectangle bounds = arrowHull.getBounds();
-			int arrowX = (int) bounds.getCenterX();
-			int arrowTipY = (int) bounds.getMinY() - ARROW_GAP;
-			renderDirectionArrow(graphics, arrowX, arrowTipY, overlayColor);
-
-			// Show tooltip when mouse hovers over the NPC hull
 			String builtTooltip = OverlayTooltipHelper.buildTooltip(locDesc, action);
 			if (builtTooltip != null)
 			{
 				Point mousePos = client.getMouseCanvasPosition();
-				if (mousePos != null && arrowHull.contains(mousePos.getX(), mousePos.getY()))
+				if (mousePos != null && hoverHull.contains(mousePos.getX(), mousePos.getY()))
 				{
 					tooltipManager.add(new Tooltip(builtTooltip));
 					renderRecorder.recordTooltip(builtTooltip);
 				}
-			}
-		}
-
-		// Render action text above the NPC and arrow
-		LocalPoint npcLocal = npc.getLocalLocation();
-		if (npcLocal != null)
-		{
-			String label = cachedNpcLabel != null ? cachedNpcLabel : npc.getName();
-
-			Point textPoint = Perspective.getCanvasTextLocation(
-				client, graphics, npcLocal, label,
-				npc.getLogicalHeight() + ARROW_HEIGHT + ARROW_GAP + 40);
-			if (textPoint != null)
-			{
-				renderOutlinedText(graphics, textPoint, label, overlayColor);
 			}
 		}
 	}
@@ -381,10 +360,10 @@ public class GuidanceOverlay extends OverlayPanel
 	 * Draws the floating collection-log marker above the NPC, same float-above
 	 * pattern as the object and ground-item overlays (#802). The z-offset is
 	 * {@code getLogicalHeight()}-relative (local height units) so the marker
-	 * clears the model and the action label, which renders at
-	 * {@code logicalHeight + ARROW_HEIGHT + ARROW_GAP + 40}. No-op when the
-	 * config toggle is off. The shared marker caches its sprite/glyph, so the
-	 * render path allocates nothing per frame.
+	 * floats just clear of the model — it is the only above-the-model
+	 * decoration (no arrow or action text). No-op when the config toggle is
+	 * off. The shared marker caches its sprite/glyph, so the render path
+	 * allocates nothing per frame.
 	 */
 	private void drawTargetMarker(Graphics2D graphics, NPC npc)
 	{
@@ -445,6 +424,8 @@ public class GuidanceOverlay extends OverlayPanel
 		// Colored text
 		graphics.setColor(color);
 		graphics.drawString(text, x, y);
+		targetMarker.draw(graphics, client, npc.getLocalLocation(),
+			npc.getLogicalHeight() + MARKER_CLEARANCE);
 	}
 
 	private void updateCachedColors(Color overlayColor)
@@ -494,7 +475,6 @@ public class GuidanceOverlay extends OverlayPanel
 	public void setInteractAction(String action)
 	{
 		this.interactAction = action;
-		rebuildNpcLabel(action, this.trackedNpc);
 	}
 
 	public void setSuppressTileHighlight(boolean suppress)
@@ -515,7 +495,6 @@ public class GuidanceOverlay extends OverlayPanel
 	public void setTrackedNpc(NPC npc)
 	{
 		this.trackedNpc = npc;
-		rebuildNpcLabel(this.interactAction, npc);
 	}
 
 	/**
@@ -542,23 +521,7 @@ public class GuidanceOverlay extends OverlayPanel
 		suppressTileHighlight = false;
 		trackedNpc = null;
 		cachedTravelLabel = null;
-		cachedNpcLabel = null;
 		requiredItems = Collections.emptyList();
-	}
-
-	private void rebuildNpcLabel(String action, NPC npc)
-	{
-		if (npc != null)
-		{
-			String npcName = npc.getName();
-			cachedNpcLabel = (action != null)
-				? action + " " + npcName
-				: npcName;
-		}
-		else
-		{
-			cachedNpcLabel = null;
-		}
 	}
 
 	private void addSyncRemindersIfNeeded(boolean logReminder, boolean bankReminder)
