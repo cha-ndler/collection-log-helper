@@ -59,10 +59,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *   <li>Phantom Muspah: no prior alternatives, new inventory-any
  *       alternative at [0] listing the 4 {@code HG_QUETZALWHISTLE_*}
  *       ItemID variants (29271, 29273, 29275, 33120).</li>
- *   <li>Corrupted Gauntlet / The Gauntlet: existing diary
- *       (WESTERN_ELITE) alternative at [0], new inventory-any
- *       alternative at [1] listing {@code GAUNTLET_TELEPORT_CRYSTAL}
- *       (23904) and {@code GAUNTLET_TELEPORT_CRYSTAL_HM} (23858).</li>
+ *   <li>Corrupted Gauntlet / The Gauntlet: inventory-any alternative at
+ *       [0] listing {@code GAUNTLET_TELEPORT_CRYSTAL} (23904) and
+ *       {@code GAUNTLET_TELEPORT_CRYSTAL_HM} (23858). (The WESTERN_ELITE
+ *       diary alternative that used to sit at [0] was removed by the
+ *       wiki-meta audit as fabricated.)</li>
  * </ul>
  *
  * <p>Mirrors {@code C6B3OverlapRegressionTest} (stacked-alternative shape)
@@ -106,10 +107,15 @@ public class CExtensionInventoryTeleportRegressionTest
 			new InventorySpec(1, false, ZULANDRA_SCROLL, 2));
 		map.put("Phantom Muspah",
 			new InventorySpec(0, true, QUETZAL_WHISTLE_VARIANTS, 1));
+		// Wiki-meta audit fix: the WESTERN_ELITE diary alternative both
+		// Gauntlet sources used to stack ahead of the inventory alternative
+		// was fabricated (the Elite Western diary attaches no Prifddinas
+		// teleport to any cape), so the inventory alternative is now the
+		// only conditional alternative, at index 0.
 		map.put("Corrupted Gauntlet",
-			new InventorySpec(1, true, GAUNTLET_TELEPORT_CRYSTAL_VARIANTS, 2));
+			new InventorySpec(0, true, GAUNTLET_TELEPORT_CRYSTAL_VARIANTS, 1));
 		map.put("The Gauntlet",
-			new InventorySpec(1, true, GAUNTLET_TELEPORT_CRYSTAL_VARIANTS, 2));
+			new InventorySpec(0, true, GAUNTLET_TELEPORT_CRYSTAL_VARIANTS, 1));
 		return map;
 	}
 
@@ -233,14 +239,20 @@ public class CExtensionInventoryTeleportRegressionTest
 				name + ": pre-existing DESERT_HARD diary alternative must remain at index 0");
 		}
 
-		// Gauntlets: existing WESTERN_ELITE diary at [0] must survive.
+		// Gauntlets: the fabricated WESTERN_ELITE diary alternative must NOT
+		// return (wiki-meta audit: the Elite Western diary attaches no
+		// Prifddinas teleport to any cape).
 		for (String name : List.of("Corrupted Gauntlet", "The Gauntlet"))
 		{
-			ConditionalAlternative diary =
-				findSource(name).getGuidanceSteps().get(0).getConditionalAlternatives().get(0);
-			assertNotNull(diary.getRequirements());
-			assertEquals(List.of("WESTERN_ELITE"), diary.getRequirements().getDiaries(),
-				name + ": pre-existing WESTERN_ELITE diary alternative must remain at index 0");
+			for (ConditionalAlternative alt
+				: findSource(name).getGuidanceSteps().get(0).getConditionalAlternatives())
+			{
+				if (alt.getRequirements() != null && alt.getRequirements().getDiaries() != null)
+				{
+					assertFalse(alt.getRequirements().getDiaries().contains("WESTERN_ELITE"),
+						name + ": the fabricated WESTERN_ELITE diary alternative must not be reintroduced");
+				}
+			}
 		}
 	}
 
