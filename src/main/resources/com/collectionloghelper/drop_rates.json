@@ -24261,6 +24261,10 @@
         "worldY": 3458,
         "worldPlane": 0,
         "objectId": 882,
+        "objectIds": [
+          881,
+          882
+        ],
         "objectInteractAction": "Climb-down",
         "completionCondition": "ARRIVE_AT_ZONE",
         "completionZone": [
