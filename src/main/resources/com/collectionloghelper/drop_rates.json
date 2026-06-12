@@ -964,7 +964,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Vorkath. Pray Protect from Magic during standard phases (the standard meta for melee, blowpipe, and bow setups), keep a super antifire active, sidestep the red acid puddles, walk diagonally to dodge the slow purple ice projectile, and click the Zombified Spawn the instant it appears (it deals ramping damage if ignored). Zombie axe and Bow of faerdhinen are the modern meta",
+        "description": "Kill Vorkath. Pray Protect from Magic during standard phases, keep a super antifire active, sidestep the acid puddles during the Rapid Fire phase. When frozen by the ice attack, cast Crumble Undead on the Zombified Spawn before it reaches you (explodes on contact for up to 60 damage based on remaining HP). Dragon Hunter Lance and Bow of faerdhinen are the primary meta weapons",
         "worldX": 2273,
         "worldY": 4049,
         "worldPlane": 0,
