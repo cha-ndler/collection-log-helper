@@ -2366,3 +2366,648 @@ Run summary: 40 sources processed; 33 with confirmed findings; clean: Kraken, Ch
 - **Skeptic reasoning:** Same defect as C3: the drop_rates.json guidance step references Catacombs of Kourend as a Pyrefiend location, but the wiki's six listed locations do not include it (verified twice). Pyrefiends do not spawn in the Catacombs of Kourend. This is a real wrong-location reference, not legitimate game behavior, variant, or account-type nuance. Confirmed high. This finding is a duplicate of C3 (both target the single 'or Catacombs of Kourend' phrase at line 10410); a single edit removing the Catacombs reference resolves both -- they should not be logged as two separate fixes.
 
 Tranche 2 total: 141 confirmed findings.
+# Tranche 3: sources 71-110 (slayer monsters)
+
+Note: the first tranche-3 run was invalidated by a spend-limit outage that killed the
+skeptic stage mid-run; this is the full re-run (skeptic stage on a smaller model).
+
+Run summary: 40 sources processed; 26 with confirmed findings; clean: Basilisk, Infernal Mage, Gryphon, Jelly, Turoth, Basilisk Knight, Dust Devil, Kurask, Spiritual Mage, Spiritual Mage (Zarosian), Abyssal Demon, Cave Kraken, Smoke Devil, Brimstone Chest.
+
+## Terror Dog
+
+### [high] C3: The fairy ring code is BIP, not BIQ. BIQ leads to the Kharidian Desert near the Kalphite Hive -- an entirely wrong region. A player following this guidance would teleport to the desert and find no path to Tarn's Lair.
+
+- **Data says:** Fairy ring BIQ can be used to reach the location
+- **Wiki says (raw):** By fairy ring BIP (50 Agility needed) and then walking south.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Tarn%27s_Lair
+- **Suggested fix:** Change BIQ to BIP in guidanceSteps[1].description.
+- **Skeptic receipt:** Fairy rings wiki: 'BIP - Islands: South-west of Mort Myre Swamp, on the river Salve with an agility shortcut requiring level 50.' / 'BIQ - Located near the Kalphite Hive in the Kharidian Desert.' Tarn's Lair wiki: 'By fairy ring (50 Agility needed) and then walking south.'
+- **Skeptic reasoning:** Two independent wiki sources confirm the correct fairy ring code is BIP, not BIQ. The Tarn's Lair wiki page states: 'By fairy ring (50 Agility needed) and then walking south.' -- the rendered code in that bracket is BIP as confirmed by the fairy rings page. The fairy rings page explicitly maps BIP to 'South-west of Mort Myre Swamp, on the river Salve' (the correct Morytania approach for Tarn's Lair) and BIQ to the Kalphite Hive in the Kharidian Desert. These are two entirely different rings in two different regions. No multi-source item variant, account-type, or staleness vector applies -- this is a plain wrong code in the guidance text. No recent wiki changes were found (zero edits to the Fairy ring page since 2026-01-01), confirming the current authoritative code is BIP.
+
+## Brine Rat
+
+### [medium] C3: The guidance adds 'near Rellekka lighthouse' as a locating landmark for the entrance, but the wiki does not associate the lighthouse with this entrance at all. The Lighthouse is north of the Barbarian Outpost (west of Rellekka), a separate area entirely. The wiki identifies the windswept tree's position as 'east of Olaf Hradson and south-east of the Rellekka Hunter area' -- no lighthouse mentioned. The fabricated landmark could mislead players toward the wrong area.
+
+- **Data says:** Dig with a spade south of the Windswept Tree near Rellekka lighthouse to enter
+- **Wiki says (raw):** dig with a spade south of the windswept tree, which is on a plateau east of Olaf Hradson and south-east of the Rellekka Hunter area
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Brine_Rat_Cavern
+- **Suggested fix:** Remove 'near Rellekka lighthouse' from the description. Use the wiki-accurate landmark instead: 'Dig with a spade south of the Windswept Tree (south-east of the Rellekka Hunter area) to enter.'
+- **Skeptic receipt:** Brine Rat Cavern wiki: 'The Brine Rat Cavern is in the north-eastern region of the Fremennik Province... Players can enter the dungeon by digging with a spade south of the windswept tree, which is on a plateau east of Olaf Hradson and south-east of the Rellekka Hunter area.' Lighthouse wiki: 'The Lighthouse is an area north of the Barbarian Outpost.'
+- **Skeptic reasoning:** The guidance text says 'near Rellekka lighthouse' as a locating landmark for the Brine Rat Cavern entrance. The wiki confirms the cavern entrance is in the north-eastern Fremennik Province, east of Olaf Hradson and south-east of the Rellekka Hunter area. The Lighthouse wiki page explicitly places it north of the Barbarian Outpost -- which is on the western side of the Fremennik Province, a completely different area. The two locations are geographically separated by most of the Fremennik Province. Pointing a player 'near the Rellekka lighthouse' would direct them to the wrong region entirely. No refutation vector applies: this is not a multi-source item issue, not a variant, not account-type-specific, and not a staleness issue -- the geography is stable game content.
+
+## Frost Nagua
+
+### [blocker] C4: The guidance tells players to use Protect from Melee, but Frost Nagua's attack style is Magic. The wiki explicitly states Protect from Magic negates all damage from their basic attacks. Following this guidance means taking full magic damage every kill.
+
+- **Data says:** Kill Frost Nagua. Protect from Melee; fire spells deal bonus damage.
+- **Wiki says (raw):** Protect from Magic will negate all damage from their basic attacks.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Frost_Nagua
+- **Suggested fix:** Replace 'Protect from Melee' with 'Protect from Magic' in guidanceSteps[3].description.
+- **Skeptic receipt:** WebFetch https://oldschool.runescape.wiki/w/Frost_Nagua: '1) Attack Style/Type: "[Magic]" - The monster uses magic-based attacks.' '4) Recommended Prayer: "Protect from Magic will negate all damage from their basic attacks."'
+- **Skeptic reasoning:** The data at drop_rates.json line 10804 says 'Protect from Melee; fire spells deal bonus damage.' The wiki page for Frost Nagua explicitly states the monster uses Magic-based attacks and 'Protect from Magic will negate all damage from their basic attacks.' WebFetch of https://oldschool.runescape.wiki/w/Frost_Nagua confirms attack style is '[Magic]' and recommended prayer is 'Protect from Magic.' Telling players to use Protect from Melee against a Magic-attacking monster means they take full magic damage every kill.
+
+### [high] C2: The guidance classifies Frost Nagua as 'spectral undead', but the wiki lists only 'Attribute: Spectral'. There is no undead attribute. Spectral and undead are separate monster attributes in OSRS; Salve amulet (ei) only provides its bonus against undead monsters, not spectral ones.
+
+- **Data says:** Spectral undead so Salve amulet (ei) outperforms Slayer helmet on task
+- **Wiki says (raw):** Attribute: Spectral
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Frost_Nagua
+- **Suggested fix:** Remove 'undead' from the classification -- Frost Nagua is 'spectral' only. Update both guidanceSteps[0] and guidanceSteps[3] to remove 'undead' from the description.
+- **Skeptic receipt:** WebFetch https://oldschool.runescape.wiki/w/Frost_Nagua: '2) Monster Attributes: "[Spectral]" - It is classified as a spectral creature.' No undead attribute is listed.
+- **Skeptic reasoning:** The data at line 10776 says 'spectral undead so Salve amulet (ei) outperforms Slayer helmet on task.' WebFetch of the Frost Nagua wiki page confirms the only listed attribute is 'Spectral' -- there is no 'undead' attribute. Spectral and undead are distinct OSRS monster attributes. The 'undead' classification in the data description is factually wrong.
+
+### [blocker] C3: Because Frost Nagua has only the Spectral attribute (not undead), the Salve amulet (ei) does not grant its undead damage/accuracy bonus on them. Advising players to equip Salve amulet (ei) over their Slayer helmet while on task is materially wrong -- Slayer helmet's on-task bonus would apply, while Salve amulet's undead bonus would not.
+
+- **Data says:** spectral undead so Salve amulet (ei) outperforms Slayer helmet on task
+- **Wiki says (raw):** Attribute: Spectral
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Frost_Nagua
+- **Suggested fix:** Remove the Salve amulet (ei) recommendation from guidanceSteps[0] and guidanceSteps[3]. On task, the Slayer helmet is the correct choice. Off task, no special amulet advantage applies from Salve.
+- **Skeptic receipt:** WebFetch https://oldschool.runescape.wiki/w/Salve_amulet_(ei): 'the Salve amulet(ei) specifically works on monsters with the undead attribute. The exact text states: "Increases melee, ranged and magic damage & accuracy by 20% against the undead." There is no mention of the amulet working on spectral monsters or any other attributes--it is exclusively designed for undead enemies.'
+- **Skeptic reasoning:** Frost Nagua has only the Spectral attribute, not undead. WebFetch of https://oldschool.runescape.wiki/w/Salve_amulet_(ei) confirms the amulet works exclusively on undead monsters: 'Increases melee, ranged and magic damage & accuracy by 20% against the undead.' Since Frost Nagua is not undead, the Salve amulet (ei) provides no bonus against them. The data at lines 10776 and 10804 recommending Salve (ei) over the Slayer helmet on task is materially incorrect -- the Slayer helmet's on-task bonus applies and Salve (ei)'s undead bonus does not.
+
+### [medium] C1: The guidance recommends melee crush specifically, but the wiki's defensive stats show Frost Nagua has +10 crush defence, +50 slash defence, and +0 stab defence. If melee is used, stab is the lowest-resistance style, not crush. There is no crush weakness -- recommending crush over stab misguides melee users.
+
+- **Data says:** Fire-spell magic or melee crush gear works best
+- **Wiki says (raw):** Stab: "+0", Slash: "+50", Crush: "+10"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Frost_Nagua
+- **Suggested fix:** Replace 'melee crush gear' with 'melee stab gear' in guidanceSteps[0].description to match the wiki's defensive stats (crush +10, stab +0).
+- **Skeptic receipt:** WebFetch https://oldschool.runescape.wiki/w/Frost_Nagua: '3) Defensive Stats (exact values): Stab: "+0" | Slash: "+50" | Crush: "+10" | Magic: "+60" | Ranged (Light/Standard/Heavy): "+200"'
+- **Skeptic reasoning:** The data at line 10776 says 'melee crush gear works best.' WebFetch of the Frost Nagua wiki page returns defensive stats: Stab +0, Slash +50, Crush +10. Stab has zero defence (+0) while crush has +10 resistance. If melee is used, stab is strictly the lowest-resistance style. The guidance recommending crush over stab is incorrect for melee users.
+
+### [medium] C9: The Pendant of ates teleports to the Twilight Temple (near the lift), not to the Ruins of Tapoyauik directly. The Ruins are beneath the Temple and accessed via that lift. The travelTip and guidanceSteps[1] description misstate the teleport destination as 'Ruins of Tapoyauik' rather than 'Twilight Temple'.
+
+- **Data says:** Pendant of ates -> Ruins of Tapoyauik (requires The Heart of Darkness)
+- **Wiki says (raw):** The pendant of ates can teleport directly to the Twilight Temple, near the lift.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Ruins_of_Tapoyauik
+- **Suggested fix:** Update the travelTip and guidanceSteps[1] description to say the Pendant of ates teleports to the Twilight Temple (near the lift), from which you descend into the Ruins of Tapoyauik.
+- **Skeptic receipt:** WebFetch https://oldschool.runescape.wiki/w/Ruins_of_Tapoyauik: '"The pendant of ates can teleport directly to the Twilight Temple, near the lift." From there, you access the dungeon via the lift platform.'
+- **Skeptic reasoning:** The data at line 10785 says 'Use the Pendant of ates to teleport directly to the Ruins of Tapoyauik.' WebFetch of https://oldschool.runescape.wiki/w/Ruins_of_Tapoyauik confirms the pendant lands at the Twilight Temple, not inside the Ruins: 'The pendant of ates can teleport directly to the Twilight Temple, near the lift.' The Ruins are a separate underground area accessed via the lift after the teleport. Note that drop_rates.json line 10795 already has a distinct step 'Enter the Ruins of Tapoyauik beneath the Twilight Temple,' confirming the guidance architecture already treats the Temple arrival and the Ruins descent as separate steps -- making the 'teleport directly to the Ruins' label on line 10785 a factual mislabel of the teleport tile.
+
+## Sulphur Nagua
+
+### [blocker] C1: Sulphur Nagua are spectral but NOT undead. The Salve amulet (ei) has zero effect on them. The guidance incorrectly labels them 'spectral undead' and recommends Salve amulet over Slayer helmet -- the Slayer helmet is actually superior on task. This is an inverted combat meta that actively misleads the player.
+
+- **Data says:** spectral undead so Salve amulet (ei) outperforms Slayer helmet on task
+- **Wiki says (raw):** They are spectral creatures but not undead, meaning the Ectoplasmator will provide prayer experience for defeating them, but the Salve amulet and its variants will not affect them.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Sulphur_Nagua
+- **Suggested fix:** Replace 'spectral undead so Salve amulet (ei) outperforms Slayer helmet on task' with 'spectral but NOT undead -- Salve amulet has no effect; use Slayer helmet on task'.
+- **Skeptic receipt:** "They are spectral creatures but not undead, meaning the Ectoplasmator will provide prayer experience for defeating them, but the Salve amulet and its variants will not affect them." -- https://oldschool.runescape.wiki/w/Sulphur_Nagua (fetched 2026-06-12, zero wiki changes since 2026-01-01 per wiki_updates)
+- **Skeptic reasoning:** The data at drop_rates.json lines 10852 and 10880 calls Sulphur Nagua 'spectral undead' and states 'Salve amulet (ei) outperforms Slayer helmet on task' in both the bank-prep and combat guidance steps. The wiki directly refutes both sub-claims: the creatures are spectral but explicitly NOT undead, and the Salve amulet and all its variants have zero effect on them. The Slayer helmet is therefore unconditionally superior on task. This is a live inverted combat meta actively misleading players into equipping a dead-weight item.
+
+### [medium] C4: The claim 'no special attacks' is false. Sulphur Nagua have a prayer-draining special attack triggered every five attacks. Players who step away in time can avoid the drain, but the attack exists and the guidance misstates this.
+
+- **Data says:** No phase mechanics or special attacks
+- **Wiki says (raw):** After five attacks they will use a special attack in which they raise their weapon, and if the player remains within their melee range (including diagonal spaces) after three ticks, they will have 5 prayer points drained.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Sulphur_Nagua
+- **Suggested fix:** Replace 'No phase mechanics or special attacks' with 'No phase mechanics; special attack every 5 hits drains 5 prayer points if you remain in melee range -- step away to avoid it'.
+- **Skeptic receipt:** "After five attacks they will use a special attack in which they raise their weapon, and if the player remains within their melee range (including diagonal spaces) after three ticks, they will have 5 prayer points drained." -- https://oldschool.runescape.wiki/w/Sulphur_Nagua (fetched 2026-06-12)
+- **Skeptic reasoning:** The combat guidance step at drop_rates.json line 10880 explicitly states 'No phase mechanics or special attacks'. The wiki documents a named special attack that triggers every five attacks: the creature raises its weapon, and if the player remains in melee range (including diagonal tiles) for three ticks afterward, 5 prayer points are drained. The attack is avoidable by stepping away but it unambiguously exists, making the 'no special attacks' claim false. No account-type or progress dependency applies -- the mechanic is present for all players.
+
+### [high] C8: The plugin only gates on Slayer 48 but the wiki states partial completion of the quest Perilous Moons is required to access Neypotzli at all. A player who meets only the Slayer level will be unable to enter the area. This is a missing hard gate.
+
+- **Data says:** requirements.skills[0]: SLAYER level 48
+- **Wiki says (raw):** Partial completion of Perilous Moons is required for access.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Sulphur_Nagua
+- **Suggested fix:** Add a quest requirement for 'Perilous Moons' (partial completion) to the requirements block alongside the Slayer 48 skill requirement.
+- **Skeptic receipt:** "Sulphur nagua are slayer monsters that require level 48 Slayer to kill. They are found in the Ancient Prison within Neypotzli, accessed from the south-west entrance of the antechamber. Partial completion of Perilous Moons is required for access." -- https://oldschool.runescape.wiki/w/Sulphur_Nagua (fetched 2026-06-12)
+- **Skeptic reasoning:** The requirements block at drop_rates.json lines 10829-10835 contains only SLAYER level 48. The wiki states that partial completion of Perilous Moons is a separate hard access gate for Neypotzli, where Sulphur Nagua are exclusively found. A player who has Slayer 48 but has not partially completed Perilous Moons cannot enter the area at all. Perilous Moons is a standard members quest with no ironman or account-type carve-out, so this gate is universal -- refutation vector 3 does not apply.
+
+## Earthen Nagua
+
+### [blocker] C1: The salve amulet (ei) recommendation is predicated on Earthen Nagua being undead. The wiki classifies them as 'Spectral creature', not undead. If the salve does not trigger on spectral creatures, this guidance leads players to use a suboptimal amulet slot on task.
+
+- **Data says:** they are spectral undead so Salve amulet (ei) outperforms Slayer helmet on task
+- **Wiki says (raw):** Type: Spectral creature
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Earthen_Nagua
+- **Suggested fix:** Confirm in-game or via wiki whether 'Spectral creature' type triggers salve amulet bonuses. If not, replace with Slayer helmet on task recommendation.
+- **Skeptic receipt:** Earthen Nagua wiki: attribute = 'Spectral' only -- no Undead attribute listed. Salve amulet (ei) wiki: 'Increases melee, ranged and magic damage & accuracy by 20% against the undead.' Spectral creature wiki: 'Most spectral creatures also classify as undead (attribute), and are therefore weak to the effects of the salve amulet and its upgraded variants, however, this does not apply to all spectral creatures.'
+- **Skeptic reasoning:** The data at line 10928 calls Earthen Nagua 'spectral undead' and recommends Salve amulet (ei) outperforms Slayer helmet on task. Two wiki receipts refute the underlying premise: (a) the Earthen Nagua wiki page lists only 'Spectral' as the monster's attribute -- 'Undead' is absent from the infobox; (b) the Salve amulet (ei) wiki states its bonus applies only to undead monsters ('Increases melee, ranged and magic damage & accuracy by 20% against the undead'); (c) the Spectral creature page explicitly warns 'this does not apply to all spectral creatures' re salve. Earthen Nagua is spectral but not undead, so the salve does not apply and the on-task recommendation to use it over the Slayer helmet is wrong.
+
+### [blocker] C2: Earthen Nagua are classified as 'Spectral creature' on the wiki, not 'spectral undead'. Salve amulet bonuses apply to undead monsters; if Earthen Nagua are not undead, the salve amulet (ei) recommendation is wrong and following it would result in worse DPS than using a Slayer helmet on task.
+
+- **Data says:** they are spectral undead so Salve amulet (ei) outperforms Slayer helmet on task
+- **Wiki says (raw):** Type: Spectral creature
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Earthen_Nagua
+- **Suggested fix:** Remove 'spectral undead' and replace with 'spectral creature'. Verify whether Salve amulet (ei) actually applies to spectral creatures before keeping C1's recommendation; if it does not, correct C1 to recommend Slayer helmet on task instead.
+- **Skeptic receipt:** Earthen Nagua wiki infobox: attribute listed is 'Spectral' -- Undead attribute is absent. Spectral creature wiki: Earthen Nagua (Normal, Reinforced, Weakened variants) all appear in the spectral creature table without any undead designation.
+- **Skeptic reasoning:** This is the same underlying fact as C1 -- the data labels Earthen Nagua 'spectral undead' but the wiki confirms the only attribute tag is 'Spectral'. C2 specifically targets the label 'spectral undead' in the guidance text (line 10928 and 10956). That label is factually wrong and causes the incorrect salve recommendation. Both the type label and the salve guidance are errors traceable to the same false premise.
+
+### [high] C4: The guidance says to travel to Cam Torum via quetzal whistle and then enter Tonali Cavern 'beneath the city'. The wiki lists the closest Quetzal Transport System stops as Tal Teklan or Kastori -- not Cam Torum. Directing players to Cam Torum adds unnecessary travel distance.
+
+- **Data says:** Use the quetzal whistle to travel to Cam Torum in Varlamore, then enter the Tonali Cavern beneath the city
+- **Wiki says (raw):** Mokhaiotl waystones can be used to teleport directly inside the Ruins of Mokhaiotl, then run south to the cavern. The pendant of ates can be used to teleport to Kastori just east of the cavern's entrances. The Quetzal Transport System can be used to land at Tal Teklan or Kastori, both near the cavern's entrances.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Tonali_Cavern
+- **Suggested fix:** Update the travel step to use the Kastori or Tal Teklan quetzal stop, which the wiki confirms are 'near the cavern's entrances', rather than routing through Cam Torum.
+- **Skeptic receipt:** Tonali Cavern wiki: 'The Quetzal Transport System can be used to land at Tal Teklan or Kastori, both near the cavern's entrances.' Cam Torum is not mentioned as a routing option for Tonali Cavern.
+- **Skeptic reasoning:** Line 10937 instructs players to 'Use the quetzal whistle to travel to Cam Torum in Varlamore, then enter the Tonali Cavern beneath the city.' The Tonali Cavern wiki page does not list Cam Torum as a Quetzal Transport System stop for reaching this dungeon. The two listed stops are Tal Teklan and Kastori, described as 'both near the cavern's entrances'. Cam Torum is a separate Varlamore location and routing through it adds unnecessary travel distance compared to Kastori, which is east of the cavern entrances.
+
+### [high] C5: The data claims Tonali Cavern is beneath Cam Torum. The wiki states it is beneath the Crypt of Tonali in the Tlati Rainforest -- a different location entirely. This misdirects players to look under Cam Torum rather than the correct area.
+
+- **Data says:** locationDescription: "Tonali Cavern, beneath Cam Torum, Varlamore" / guidanceSteps[1].description: "enter the Tonali Cavern beneath the city"
+- **Wiki says (raw):** The Tonali Cavern is a dungeon located beneath the Crypt of Tonali in the Tlati Rainforest region of Varlamore.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Tonali_Cavern
+- **Suggested fix:** Update locationDescription to 'Tonali Cavern, beneath the Crypt of Tonali, Tlati Rainforest, Varlamore' and fix the guidance step description accordingly.
+- **Skeptic receipt:** Tonali Cavern wiki: 'The Tonali Cavern is a dungeon located beneath the Crypt of Tonali in the Tlati Rainforest region of Varlamore.' Cam Torum is not mentioned in the location description.
+- **Skeptic reasoning:** Line 10922 sets locationDescription to 'Tonali Cavern, beneath Cam Torum, Varlamore'. The wiki is unambiguous: Tonali Cavern is beneath the Crypt of Tonali in the Tlati Rainforest, not beneath Cam Torum. These are distinct locations in Varlamore. The misdescription would direct players to the wrong area of the map.
+
+### [blocker] C7: The data says Earthen Nagua are 'weak to slash'. The wiki states their primary weakness is Air (15%), and that below 60% HP they become MORE resistant to slash (not weaker). Using slash throughout the fight is suboptimal and becomes worse in the second phase.
+
+- **Data says:** spectral undead weak to slash
+- **Wiki says (raw):** Air: 15% weakness ... When an earthen nagua is damaged after falling below 60% health, they enter a reinforced form, shifting their defences to be more resistant to slash while being weaker to crush.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Earthen_Nagua
+- **Suggested fix:** Correct the weakness to Air (15%). Add a note that below 60% HP the nagua shifts to being weak to crush, and that a crush special attack can shatter its armour to 0 melee defence.
+- **Skeptic receipt:** Earthen Nagua wiki: Air elemental weakness 15%. Phase mechanic: 'When an earthen nagua is damaged after falling below 60% health, they enter a reinforced form, shifting their defences to be more resistant to slash while being weaker to crush weapons.'
+- **Skeptic reasoning:** Line 10956 states 'spectral undead weak to slash.' The wiki establishes two facts that contradict this: (1) the monster's elemental weakness is Air at 15%, not slash; (2) in the reinforced phase (below 60% HP) the nagua explicitly becomes MORE resistant to slash -- 'shifting their defences to be more resistant to slash while being weaker to crush weapons.' Calling slash the weakness is wrong in both phases; Air is the true primary weakness and crush becomes relevant in phase 2.
+
+### [blocker] C8: The data claims there are no phase mechanics. The wiki explicitly describes a phase transition at 60% HP where the nagua enters a 'reinforced form' with shifted defences. Ignoring this mechanic leads players to continue using slash when they should switch to crush.
+
+- **Data says:** No phase mechanics or special attacks
+- **Wiki says (raw):** When an earthen nagua is damaged after falling below 60% health, they enter a reinforced form, shifting their defences to be more resistant to slash while being weaker to crush.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Earthen_Nagua
+- **Suggested fix:** Remove the 'No phase mechanics' claim. Add a note that below 60% HP the nagua reinforces, shifting weakness from slash to crush.
+- **Skeptic receipt:** Earthen Nagua wiki: 'When an earthen nagua is damaged after falling below 60% health, they enter a reinforced form, shifting their defences to be more resistant to slash while being weaker to crush weapons.'
+- **Skeptic reasoning:** Line 10956 states 'No phase mechanics or special attacks.' The wiki directly contradicts 'No phase mechanics': at 60% HP the nagua transitions to a reinforced form with shifted defences. This is a meaningful combat phase change that affects the correct weapon style to use. The claim is factually wrong.
+
+## Bloodveld
+
+### [high] C6: The wiki shows Bloodvelds have equal (+0) defence against all attack styles including ranged, and explicitly lists 'No elemental weakness'. There is no ranged weakness. The wiki instead emphasises that players should use armour with high Magic defence (such as dragonhide) because the Bloodveld's attack accuracy is checked against the player's magic defence, not melee defence. Claiming a ranged weakness is factually wrong and will mislead players into thinking ranged is the preferred combat style when the wiki implies magic-defence gear (typically ranged/hybrid) matters, but not because of a ranged weakness on the monster.
+
+- **Data says:** Bloodvelds are weak to ranged
+- **Wiki says (raw):** Ranged: +0 [defence bonus in the combat stats table -- all defence bonuses (stab, slash, crush, magic, ranged) are +0; the page states 'No elemental weakness']
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Bloodveld
+- **Suggested fix:** Remove the 'weak to ranged' claim. Bloodvelds have no specific weakness. The correct guidance is to wear armour with high Magic defence (e.g. dragonhide) to reduce the accuracy of their magical-melee attacks, not to use ranged weapons because of a combat triangle weakness.
+- **Skeptic receipt:** WebFetch (Bloodveld wiki): 'All defensive bonuses are +0 across stab, slash, crush, magic, and ranged categories. The creature has No elemental weakness.' and 'it is the player's magic defence (rather than their melee defence) that is used to determine the accuracy of the bloodveld's attack.' WebFetch (Mutated Bloodveld wiki): 'All defensive stats are listed as +0: Stab, Slash, Crush bonuses: +0 / Magic defence: +0 / Ranged defence (all types): +0 / No elemental weaknesses are noted.'
+- **Skeptic reasoning:** The wiki explicitly states all Bloodveld defensive bonuses are +0 across every attack style including ranged, and lists 'No elemental weakness'. The Bloodveld's attack is magical melee checked against the player's magic defence stat -- this informs gear choice (wear dragonhide for magic defence), but it is not a weakness of the Bloodveld to ranged attacks. Claiming a ranged weakness is a factual error that would mislead players about the combat triangle. The wiki receipt directly contradicts 'weak to ranged'.
+
+## Warped Creature
+
+### [blocker] C3: The gate is wrong. Warped Creatures require completion of The Path of Glouphrie, not Song of the Elves. Song of the Elves unlocks Prifddinas. A player following this guidance would grind a completely unrelated grandmaster quest (Song of the Elves) and still be unable to access Warped Creatures.
+
+- **Data says:** Warped Creatures require completion of Song of the Elves
+- **Wiki says (raw):** Ability to unlock Warped creatures as a Slayer task which drop the warped sceptre [unlocked by completing The Path of Glouphrie]
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Path_of_Glouphrie
+- **Suggested fix:** Replace 'Song of the Elves' with 'The Path of Glouphrie' as the quest gate in guidanceSteps[1].description.
+- **Skeptic receipt:** wiki_lookup('Slayer task/Warped creatures'): '|otherreq = The Path of Glouphrie' ... 'Warped creatures are found exclusively in the Poison Waste Dungeon, requiring completion of The Path of Glouphrie.'
+- **Skeptic reasoning:** The plugin's guidanceSteps description text reads 'Requires completion of Song of the Elves'. The OSRS Wiki Slayer task page for Warped creatures has the infobox field '|otherreq = The Path of Glouphrie' and the body reads 'Warped creatures are found exclusively in the Poison Waste Dungeon, requiring completion of The Path of Glouphrie.' Song of the Elves is the grandmaster elf-city quest that unlocks Prifddinas -- it has no connection to Warped Creatures or the Poison Waste Dungeon. The two quests gate entirely different content. A player directed to complete Song of the Elves would invest a grandmaster quest and still be unable to access Warped Creatures.
+
+### [blocker] C4: The location is entirely wrong. Warped Creatures are found exclusively in the Poison Waste Dungeon in Tirannwn, not beneath Lumbridge Swamp. There is no 'Warped area beneath Lumbridge Swamp' in OSRS -- this appears to be a fabricated or confused location (possibly a conflation with Warped Jellies in the Catacombs of Kourend, or with the Lumbridge Swamp Caves).
+
+- **Data says:** Warped Creatures are in the Warped area beneath Lumbridge Swamp
+- **Wiki says (raw):** Warped creatures are found exclusively in the Poison Waste Dungeon
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Warped_Creature
+- **Suggested fix:** Replace the location description with 'Poison Waste Dungeon, Tirannwn' consistent with C1 and the wiki.
+- **Skeptic receipt:** wiki_lookup('Slayer task/Warped creatures'): 'Warped Tortoise ... Locations: Poison Waste Dungeon | Warped Terrorbird ... Locations: Poison Waste Dungeon | Mutated Tortoise ... Locations: Poison Waste Dungeon'. wiki_lookup('Poison Waste Dungeon'): 'The dungeon is in a canyon east of the Poison Waste. It is technically in Tirannwn...' Plugin data field: locationDescription = 'Poison Waste Dungeon, Tirannwn' (correct); guidanceSteps description = 'Warped area beneath Lumbridge Swamp' (wrong).
+- **Skeptic reasoning:** The plugin's guidanceSteps description text reads 'Kill Warped Creatures in the Warped area beneath Lumbridge Swamp.' No location called 'Warped area beneath Lumbridge Swamp' exists in OSRS. The wiki Slayer task page, the Poison Waste Dungeon article, and the monster tables all place these creatures exclusively in the Poison Waste Dungeon in Tirannwn. The plugin's own top-level locationDescription field ('Poison Waste Dungeon, Tirannwn') is correct, confirming this is an isolated error in the guidance step text only.
+
+### [high] C2: No item called a 'Tirannwn quiver' exists in OSRS. The wiki lists spirit trees (fastest), grapple via fairy ring BKP, and walking from Castle Wars as the travel options to the Poison Waste Dungeon. Players following this travelTip would search for a non-existent item.
+
+- **Data says:** Travel to Warped Creatures can be done via Tirannwn quiver to Poison Waste
+- **Wiki says (raw):** The entrance to the dungeon is west of the spirit tree, along the edge of the poison waste. [Travel methods listed:] spirit trees (fastest); a crossbow and mithril grapple to cross the river; fairy ring BKP; walking from Castle Wars.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Poison_Waste_Dungeon
+- **Suggested fix:** Replace the travelTip with an accurate travel method, e.g. 'Use the spirit tree network to reach the Poison Waste spirit tree (unlocked by The Path of Glouphrie), then walk west to the dungeon entrance.'
+- **Skeptic receipt:** WebFetch('https://oldschool.runescape.wiki/w/Special:Search?search=Tirannwn+quiver'): 'no item called Tirannwn quiver exists in OSRS ... The wiki even prompts users to Create the page Tirannwn quiver since it doesn't exist.' wiki_lookup('Poison Waste Dungeon'): 'The dungeon can be accessed by spirit trees (fastest) or by using a crossbow and mithril grapple to cross the river. The grapple location can be accessed by the fairy ring BKP ... or by walking from Castle Wars.' Western Provinces Diary wiki: reward is 'Western banner' with teleport to Piscatoris Fishing Colony -- no Poison Waste teleport at any tier.
+- **Skeptic reasoning:** The plugin's travelTip reads 'Tirannwn quiver -> Poison Waste'. No item named 'Tirannwn quiver' exists in OSRS: the RuneLite ItemID constants return zero matches for TIRANNWN_QUIVER, the wiki search returns no page for the item and prompts to create it, and the Western Provinces Diary reward (the only Tirannwn-region diary) is the Western banner, which teleports to Piscatoris Fishing Colony, not the Poison Waste. The Poison Waste Dungeon article lists only two travel methods -- spirit trees (fastest) and crossbow+mithril grapple via fairy ring BKP or walking from Castle Wars -- with no quiver mentioned. Players following this travelTip would search for a non-existent item.
+
+## Cave Horror
+
+### [high] C3: The Cave Horror special attack deals HP damage (10% of base Hitpoints), not a stat drain. The wiki makes no mention of any stat drain mechanic. The guidance description is factually wrong about the type of effect.
+
+- **Data says:** Cave Horrors drain player stats during combat
+- **Wiki says (raw):** special attack which always deals damage equal to 10% of the player's base Hitpoints level
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Cave_Horror
+- **Suggested fix:** Update guidanceSteps[2].description to describe the special attack as dealing damage equal to 10% of the player's base Hitpoints level, not a stat drain.
+- **Skeptic receipt:** Cave Horror wiki: "The cave horrors have a special attack which always deals damage equal to 10% of the player's base Hitpoints level, rounded down" -- no stat drain mechanic is mentioned anywhere on the page.
+- **Skeptic reasoning:** The Cave Horror guidance at guidanceSteps[2].description (drop_rates.json line 11390) reads: 'Kill Cave Horrors in the Mos Le Harmless cave. Requires witchwood icon necklace equipped to prevent stat drain (58 Slayer)'. The wiki contains no stat drain mechanic for Cave Horrors. The special attack is purely HP-damage based. The label 'stat drain' is factually wrong and would mislead players about the nature of the threat.
+
+### [high] C4: Two errors: (1) there is no stat drain to prevent -- the special attack deals HP damage; (2) the witchwood icon does not prevent the damage but converts the guaranteed-damage scream into a regular attack roll that can be defended against normally. Telling players it 'prevents stat drain' misdescribes both the mechanic and the icon's effect.
+
+- **Data says:** A witchwood icon necklace must be equipped to prevent stat drain from Cave Horrors
+- **Wiki says (raw):** Wearing the icon does not negate all damage from the scream, it instead causes the scream attack to roll as a regular attack.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Witchwood_icon
+- **Suggested fix:** Update guidanceSteps[2].description to say the witchwood icon converts the Cave Horror's guaranteed-damage scream attack into a regular attack roll, rather than 'preventing stat drain'.
+- **Skeptic receipt:** Witchwood icon wiki: "Wearing the icon does not negate all damage from the scream, it instead causes the scream attack to roll as a regular attack." Cave Horror wiki: "This special attack can be partially avoided by wearing a witchwood icon, OR completely nullified by having Protect from Melee activated" -- partial avoidance via regular attack roll, not prevention of a stat drain.
+- **Skeptic reasoning:** The guidance says the witchwood icon 'prevent[s] stat drain'. Both halves of this are wrong. First, there is no stat drain -- the scream deals HP damage (10% of base Hitpoints). Second, the witchwood icon does not prevent the effect; it converts the guaranteed-damage scream into a regular attack roll that can be blocked or missed. Describing it as preventing a stat drain misdescribes both the Cave Horror's mechanic and the icon's actual function.
+
+## Aberrant Spectre
+
+### [blocker] C5: The Ranging Guild is in Kandarin (between Ardougne and Seers' Village). The Slayer Tower is near Canifis in Morytania -- a completely different region of the game world. Running south-east from the Ranging Guild leads toward East Ardougne, not anywhere near the Slayer Tower. A player following this guidance would travel in entirely the wrong direction.
+
+- **Data says:** From Ranging Guild, running south-east along the road leads to Slayer Tower entrance
+- **Wiki says (raw):** The Ranging Guild is 'East of Hemenster, between Ardougne and Seers' Village.' Adjacent locations: North: Seers' Village, South: East Ardougne, East: Sorcerer's Tower, West: Fishing Guild.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Ranging_Guild
+- **Suggested fix:** Remove this alternative entirely, or replace with a correct route to Slayer Tower (e.g. Fairy ring CKS lands just south of the tower, or slayer ring teleports directly to the tower entrance).
+- **Skeptic receipt:** wiki_lookup Ranging Guild: 'Location: East of Hemenster, between Ardougne and Seers' Village ... leagueRegion = Kandarin'. wiki_lookup Slayer Tower: 'The tower is located north-west of Canifis ... Location: Morytania'. These are different regions; no road between Ranging Guild and Slayer Tower exists.
+- **Skeptic reasoning:** The Ranging Guild is definitively in Kandarin (between Ardougne and Seers' Village). The Slayer Tower is in Morytania, north-west of Canifis. These are entirely separate regions with no road connecting them. Running south-east from the Ranging Guild leads toward East Ardougne, not toward Morytania or the Slayer Tower. Any guidance step describing this route would send a player in completely the wrong direction.
+
+## Wyrm
+
+### [high] C1: Cerberus boots are not listed anywhere on the wiki as valid heat protection for the Karuulm Slayer Dungeon. The three valid options are boots of stone, boots of brimstone, and granite boots. A player following this guidance who equips Cerberus boots would take continuous heat damage.
+
+- **Data says:** Boots of stone are mandatory to prevent passive heat damage in the Karuulm dungeon; granite boots or Cerberus boots are acceptable alternatives
+- **Wiki says (raw):** players who wish to explore further beyond the entrance chamber must wear the boots of stone, boots of brimstone or granite boots to protect themselves from the extreme heat of the dungeon floor.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Karuulm_Slayer_Dungeon
+- **Suggested fix:** Replace 'Cerberus boots' with 'boots of brimstone' to match the three wiki-confirmed alternatives: boots of stone, boots of brimstone, and granite boots.
+- **Skeptic receipt:** Karuulm Slayer Dungeon wiki (wiki_lookup): 'players who wish to explore further beyond the entrance chamber must wear the boots of stone, boots of brimstone or granite boots to protect themselves from the extreme heat of the dungeon floor.' Boots of stone wiki (wiki_lookup): 'Boots of stone can be used on a drake's claw to upgrade them into boots of brimstone, which have increased stats and can also be worn as an alternative within the Karuulm Slayer Dungeon, along with granite boots.' Cerberus boots wiki_lookup: '#REDIRECT Cerberus#Uniques' -- no such footwear item exists.
+- **Skeptic reasoning:** The guidance step at line 11602 of drop_rates.json names 'Cerberus boots' as a valid heat-protection alternative for the Karuulm Slayer Dungeon. 'Cerberus boots' is not a real OSRS item -- the wiki page redirects to the Cerberus boss uniques and no such item exists in-game. The three valid options confirmed by the Karuulm Slayer Dungeon wiki page are boots of stone, boots of brimstone, and granite boots. The intended item is boots of brimstone (crafted by applying a drake's claw to boots of stone). A player following this guidance cannot equip 'Cerberus boots' for heat protection because the item does not exist under that name.
+
+### [blocker] C7: The wiki describes no prayer-bypass mechanic for Wyrms whatsoever. It recommends Protect from Magic as a straightforward defensive option with no caveat about the prayer being bypassed or ineffective for any window. This claim appears fabricated and would cause players to mismanage their prayer/health expectations.
+
+- **Data says:** Wyrms hit through prayer for 1 second only
+- **Wiki says (raw):** using a form of magic protection, such as Protect from Magic, or armour with high magic defence bonuses like dragonhide armour, a viable method for killing wyrms.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Wyrm
+- **Suggested fix:** Remove the 'hits through prayer for 1 second' claim entirely. Wyrms do not have a prayer bypass mechanic per the wiki. Guidance should simply recommend Protect from Magic.
+- **Skeptic receipt:** Wyrm wiki (WebFetch): 'The wiki contains no information indicating that Wyrms have any mechanic to bypass or penetrate Protect from Magic.' Wyrm wiki (wiki_lookup combat section): using 'a form of magic protection, such as Protect from Magic, or armour with high magic defence bonuses like dragonhide armour, a viable method for killing wyrms' -- no prayer-bypass caveat present anywhere on the page.
+- **Skeptic reasoning:** The guidance step at line 11635 of drop_rates.json states 'they hit through prayer for 1s only'. The OSRS wiki page for Wyrm contains no prayer-bypass or prayer-penetration mechanic whatsoever. Wyrms use magic attacks at distance and Protect from Magic is described as a straightforward defensive option with no caveat about a penetration window. This claim appears to be a fabricated mechanic not present in the game, and would cause players to mismanage prayer usage and health expectations.
+
+### [high] C8: The wiki describes the safespot as a ranged safespot (staying 6+ squares away). The Dragon hunter lance (DHL) is a melee weapon and cannot be used at a ranged safespot -- only the Dragon hunter crossbow (DHC) applies here. Listing the DHL as usable at this safespot is incorrect.
+
+- **Data says:** You can long-range safespot Wyrms from outside their attack range using a Dragon hunter lance or Dragon hunter crossbow
+- **Wiki says (raw):** attack and then lure them to the corner to trap them, allowing players to range them at a specific spot while staying out of their magic attack range of 6 squares.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Wyrm
+- **Suggested fix:** Remove Dragon hunter lance from the safespot description. Only Dragon hunter crossbow (and other ranged dragonbane weapons) can be used at the 6-square ranged safespot. DHL is melee and cannot be used at range.
+- **Skeptic receipt:** Wyrm wiki (WebFetch): 'lure [wyrms] to the corner to trap them, allowing players to range them at a specific spot while staying out of their magic attack range of 6 squares.' And: 'The Dragon hunter lance is a melee weapon, and safespotting requires ranged attacks to maintain distance. No, the Dragon hunter lance cannot be effectively used at the safespot.'
+- **Skeptic reasoning:** The guidance step at line 11635 of drop_rates.json states 'you can long-range safespot from outside their attack range with a Dragon hunter lance or Dragon hunter crossbow'. The Dragon hunter lance is a melee weapon requiring adjacency (1-tile range) and cannot be used at a 6-square ranged safespot. The wiki safespot is explicitly a ranged safespot that requires staying beyond the Wyrm's 6-square magic attack range. Listing the Dragon hunter lance as usable at this safespot is mechanically impossible -- only the Dragon hunter crossbow (and other ranged weapons) can be used there.
+
+## Lava Strykewyrm
+
+### [blocker] C7: Lava Strykewyrms have at least two significant special mechanics: (1) a conditional combat style switch (melee at close range, ranged at distance) that affects safespotting and protection prayer choices, and (2) fire spells heal them equal to damage dealt. A player following guidance that dismisses these as non-existent could use fire spells and actively heal the monster, materially failing the kill.
+
+- **Data says:** Lava Strykewyrms use standard combat mechanics with no special phases or mechanics
+- **Wiki says (raw):** they use only melee when attacked from within one tile range of them, and only ranged when attacked from a distance. Fire spells will heal them equal to the amount hit. all damage can be avoided with protection prayers.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Lava_Strykewyrm
+- **Suggested fix:** Replace the 'standard combat mechanics' claim with accurate guidance: use Protect from Ranged when attacking at distance, avoid fire spells entirely (they heal the strykewyrm), and note the melee/ranged style switch based on distance.
+- **Skeptic receipt:** "they use only melee when attacked from within one tile range of them, and only ranged when attacked from a distance. Fire spells will heal them equal to the amount hit. all damage can be avoided with protection prayers." -- https://oldschool.runescape.wiki/w/Lava_Strykewyrm (WebFetch)
+- **Skeptic reasoning:** The guidance text at drop_rates.json line 11716 reads 'Standard combat mechanics; no PKer risk'. The wiki documents at least two mechanics that are materially non-standard and player-harmful if unknown: (1) fire spells restore the creature's HP equal to damage dealt -- a player reading 'standard combat' who uses fire magic actively heals the monster; (2) the creature switches between melee-only (within 1 tile) and ranged-only (at distance), which determines the correct protection prayer. The phrase 'standard combat mechanics' actively suppresses this information. The fire-spell healing interaction in particular is a trap a player will fall into if not warned. wiki_updates confirms zero recent changes to the Strykewyrm page, so this is not a staleness issue -- the mechanic is real and current. No refutation vector applies: this is not a multi-source ID question, not a variant, not account-type gated, and the wiki receipt is a direct, unparaphrased quote.
+
+## Fossil Island Wyvern
+
+### [medium] C2: No shield is required to enter the Wyvern Cave. The only entry gates are: an active Slayer task for the northern (task-only) cavern, or nothing for the southern cavern. The wiki lists no shield as a cave-entry prerequisite. The elemental/mind/dragonfire shields provide in-combat protection against ice breath but are not an entry gate.
+
+- **Data says:** Elemental/mind/dragonfire shield is required to enter Wyvern Cave
+- **Wiki says (raw):** the northern cavern is monitored by Weve (Steve's son) who only allows players on a Slayer task to kill the wyverns inside; the wyverns in the southern cavern can be killed at any time.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Wyvern_Cave
+- **Suggested fix:** Change the guidance step description from framing the shield as required to enter the cave, to framing it as required protection against ice breath while fighting wyverns inside. The gate for cave entry is the Slayer task, not the shield.
+- **Skeptic receipt:** Wiki: 'the northern cavern is monitored by Weve (Steve's son) who only allows players on a Slayer task to kill the wyverns inside; the wyverns in the southern cavern can be killed at any time.' -- no shield listed as entry requirement. Data line 11848: "description": "Enter the Wyvern Cave. Elemental/mind/dragonfire shield required", "section": "Travel", objectInteractAction: "Enter".
+- **Skeptic reasoning:** The wiki confirms the only cave-entry gates are: a Slayer task (northern cavern only) or nothing at all (southern cavern). No shield is checked at the door. The data at line 11848 places shield language on the Travel/Enter step -- 'Enter the Wyvern Cave. Elemental/mind/dragonfire shield required' -- which falsely frames the shield as a cave-entry prerequisite. The shield is an in-combat protection against ice breath, not a door check. This is a genuine misframing: the shield language belongs only on the kill step (which already correctly says 'Requires elemental/mind/dragonfire shield for ice breath' at line 11858), not on the Enter action. The suggested fix is correct: remove or rephrase the shield note on the entry step so it no longer implies an entry gate.
+
+## Skeletal Wyvern
+
+### [medium] C8: The dungeon entrance is a trapdoor, not a ladder. Functionally equivalent but the description is factually wrong.
+
+- **Data says:** Asgarnian Ice Dungeon is entered via a ladder that you climb down
+- **Wiki says (raw):** You enter via a "trapdoor" located south of Port Sarim and north of Mudskipper Point.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Asgarnian_Ice_Dungeon
+- **Suggested fix:** Change 'ladder' to 'trapdoor' in guidanceSteps[2].description.
+- **Skeptic receipt:** Asgarnian Ice Dungeon wiki: 'found south of Port Sarim and north of Mudskipper Point, under a trapdoor.'
+- **Skeptic reasoning:** The Asgarnian Ice Dungeon entrance is a trapdoor, not a ladder. The wiki states it is 'found south of Port Sarim and north of Mudskipper Point, under a trapdoor.' A guidance description calling it a ladder is factually wrong. The two objects are not mechanically equivalent from a player-facing description standpoint -- a trapdoor is a distinct interactive object in OSRS. No refutation vector applies: this is not a multi-source item, not a variant, not account-type-dependent, and the wiki receipt is unambiguous.
+
+### [high] C9: The guidance says to run east, but the wiki says to run north first and then east. A player following the guidance would head east immediately from the entrance and get lost or end up in the wrong section of the dungeon.
+
+- **Data says:** The Skeletal Wyvern room is reached by running east from the Asgarnian Ice Dungeon ladder entrance
+- **Wiki says (raw):** first run north and then run east to find an open space
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Skeletal_Wyvern/Strategies
+- **Suggested fix:** Update guidanceSteps[2].description to say 'run north then east' to reach the Skeletal Wyvern chamber.
+- **Skeptic receipt:** Skeletal Wyvern/Strategies wiki: 'first run north and then run east to find an open space with ice warriors and ice giants. The entrance to the wyverns' lair can be found on the southern wall of this room.'
+- **Skeptic reasoning:** The Strategies page gives explicit step-by-step directions: run north first, then east. Guidance that says only 'run east' from the entrance omits the required northward leg. The dungeon layout means running directly east from the entrance does not lead to the wyvern chamber. The wiki quote is unambiguous and the directional omission would mislead a player. No refutation vector applies.
+
+### [blocker] C12: No 'tail attack' exists in the wiki. The three attack styles are Ranged, Slash, and Icy breath -- no separate tail attack is listed or described. The prayer guidance (Protect from Missiles) is correct, but attributing it to a fabricated 'tail attack' is wrong and could cause confusion about the actual combat mechanics.
+
+- **Data says:** Skeletal Wyvern has a close-range tail attack that can be protected against with Protect from Missiles prayer
+- **Wiki says (raw):** Attack styles: Ranged, Slash, Icy breath. "Protect from Missiles is the suggested Prayer to use against them due to the amount of range damage skeletal wyverns do"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Skeletal_Wyvern
+- **Suggested fix:** Remove the 'close-range tail attack' language. Protect from Missiles applies to the ranged attack. Update guidanceSteps[3].description to reflect the actual attack styles: melee (slash), ranged, and icy breath.
+- **Skeptic receipt:** Skeletal Wyvern wiki: attack styles listed as 'Ranged, Slash, Icy breath' -- no tail attack appears. Prayer guidance: 'Protect from Missiles is the suggested Prayer to use against them due to the amount of range damage skeletal wyverns do.'
+- **Skeptic reasoning:** The wiki lists exactly three attack styles: 'Ranged, Slash, Icy breath.' There is no 'tail attack' described anywhere on the Skeletal Wyvern page or Strategies page. Protect from Missiles is the correct prayer recommendation, but attributing it to a fabricated 'close-range tail attack' misrepresents the actual combat mechanic. The three real attack styles are melee slash (close range), ranged (6-tile range), and icy breath. No OSRS mechanic or variant creates a distinct 'tail attack' object for Skeletal Wyverns.
+
+### [blocker] C13: Two errors: (1) Long Bones are not a Skeletal Wyvern drop -- the wiki does not list Skeletal Wyverns among the sources for Long Bones. (2) The XP value is wrong: Long Bones give 4,500 Construction XP (via Barlak), not 5 XP. Both the drop source and the XP figure are incorrect.
+
+- **Data says:** Long Bones are a drop from Skeletal Wyverns worth 5 Construction XP each
+- **Wiki says (raw):** Long bones provide 4,500 Construction experience when traded to Barlak in Dorgesh-Kaan
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Long_bone
+- **Suggested fix:** Remove the Long Bones claim from guidanceSteps[4].description entirely, or replace with an accurate Skeletal Wyvern drop note. If Long Bones are intended, verify the drop source first -- they do not appear on the Skeletal Wyvern drop table.
+- **Skeptic receipt:** Long Bone wiki: 'Skeletal Wyvern is not listed as a source of long bones.' XP: 'players with level 30+ Construction receive 4,500 Construction XP per bone.' Skeletal Wyvern drop table (wiki_lookup, 36 entries): no Long Bone entry present.
+- **Skeptic reasoning:** Two distinct errors are both confirmed. (1) The Long Bone wiki page lists over 80 monster sources and Skeletal Wyvern does not appear among them. The wiki_lookup drop table for Skeletal Wyvern also contains no Long Bone entry across all 36 drops. (2) Long Bones give 4,500 Construction XP when traded to Barlak, not 5 XP. Both the drop attribution and the XP figure are wrong.
+
+### [blocker] C14: Skeletal Wyverns drop the draconic visage, not the wyvern visage. The wiki explicitly calls this out as a common misconception. Players relying on this guidance would be grinding the wrong monster for a wyvern visage.
+
+- **Data says:** Wyvern visage is a drop from Skeletal Wyverns
+- **Wiki says (raw):** Unlike the wyverns that reside within Fossil Island, skeletal wyverns do not drop the wyvern visage; rather, they drop the draconic visage.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Skeletal_Wyvern
+- **Suggested fix:** Change 'Wyvern visage' to 'Draconic visage' in guidanceSteps[4].description.
+- **Skeptic receipt:** Skeletal Wyvern wiki: 'Unlike the wyverns that reside within Fossil Island, skeletal wyverns do not drop the wyvern visage; rather, they drop the draconic visage.' wiki_lookup drop table: 'Draconic visage | qty: 1 | rarity: 1/10000' -- wyvern visage absent from all 36 drop entries.
+- **Skeptic reasoning:** The Skeletal Wyvern wiki page explicitly states the monster drops a draconic visage, not a wyvern visage, and calls out the distinction directly. The wiki_lookup drop table confirms only 'Draconic visage | qty: 1 | rarity: 1/10000' -- no wyvern visage entry exists. The wiki quote preemptively addresses this as a known point of confusion between Skeletal Wyverns and the Fossil Island wyvern variants.
+
+## Twisted Banshee
+
+### [medium] C4: The guidance describes the no-protection penalty as Banshees dealing 'increased damage', but the actual mechanic is a fixed 7 damage hit plus heavy stat drains across multiple skills. 'Increased damage' misrepresents the effect -- it is a stat-drain debuff, not a damage multiplier. A player reading this would not understand they are taking passive stat drain hits, which affects their decision-making (e.g., Prayer drain means they lose protection prayers faster, Attack/Strength drain reduces their DPS).
+
+- **Data says:** Without earmuffs or a slayer helmet, Banshees hit hard (deal increased damage)
+- **Wiki says (raw):** the player to take 7 damage and have their stats greatly reduced in Attack, Strength, Defence, Ranged, Magic, Prayer, and Agility with every attack received
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Twisted_Banshee
+- **Suggested fix:** Change to: 'Without earmuffs or a slayer helmet, each attack deals 7 damage and heavily drains your Attack, Strength, Defence, Ranged, Magic, Prayer, and Agility stats.'
+- **Skeptic receipt:** Wiki text (https://oldschool.runescape.wiki/w/Twisted_Banshee): "cause the player to take 7 damage and have their stats greatly reduced in Attack, Strength, Defence, Ranged, Magic, Prayer, and Agility with every attack received"
+- **Skeptic reasoning:** The data guidance describes the no-protection penalty as Banshees 'dealing increased damage', but the wiki is unambiguous that the mechanic is a fixed 7-damage hit combined with heavy stat drain across Attack, Strength, Defence, Ranged, Magic, Prayer, and Agility on every attack received. 'Increased damage' is wrong on both counts: the damage value is fixed (not a multiplier or increase over normal), and the description omits the multi-skill stat drain entirely -- which is the mechanically significant part of the penalty. A player reading 'hits hard' would not understand they are losing Prayer points (and thus protection prayers) and DPS stats on every single hit. No refutation vector applies: this is not a multi-source item issue, not a variant id issue, not account-type-specific, and the wiki page is current. The finding stands.
+
+### [low] C3: The travel tip describes fairy ring CIS as going to Kourend Castle and then descending, but CIS lands at Demon's Run -- a northeast entrance directly into the Catacombs, bypassing Kourend Castle entirely. The route is internally inconsistent (CIS and Kourend Castle are separate access points, not a chain). A player using CIS would arrive near the Catacombs entrance directly, not at Kourend Castle. Low severity because either leg of the instruction still gets the player there; no effort is truly wasted.
+
+- **Data says:** Travel to Twisted Banshees via Xeric's talisman to Xeric's Heart, or fairy ring CIS then Kourend Castle then descend into the Catacombs
+- **Wiki says (raw):** Fairy rings: "CIS" and "DJR" codes provide quick access ... fairy ring CIS reaches Demon's Run (northeast)
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Catacombs_of_Kourend
+- **Suggested fix:** Split into distinct routes: 'Xeric's talisman (Xeric's Heart) -> enter Catacombs at King Rada I statue; or fairy ring CIS -> Demon's Run northeast entrance directly into the Catacombs; or Kourend Castle teleport -> descend into the Catacombs.'
+- **Skeptic receipt:** Wiki text (https://oldschool.runescape.wiki/w/Catacombs_of_Kourend): "Once the exit has been used it can be quickly accessed via fairy ring CIS and running east." -- CIS lands at Demon's Run, a direct northeast Catacombs surface entrance, not at Kourend Castle.
+- **Skeptic reasoning:** The data chains fairy ring CIS with Kourend Castle as a single route ('fairy ring CIS then Kourend Castle then descend'), but CIS lands at Demon's Run -- a northeast surface entrance that leads directly into the Catacombs. CIS and the Kourend Castle statue entrance are two distinct, independent access points; they cannot be chained. A player following the data's route as written would be confused: after arriving at Demon's Run via CIS they are already at a Catacombs entrance and there is no Kourend Castle step involved. The finding's low-severity characterisation is fair (a player would eventually reach the Catacombs), but the route description is genuinely incoherent as authored. The wiki confirms CIS goes to Demon's Run, not to Kourend Castle.
+
+## Gargoyle
+
+### [low] C10: The wiki states no Slayer level requirement for the perk itself -- only a cost of 120 Slayer points. The 75 Slayer level is the requirement to receive gargoyles as a Slayer task, not a requirement to purchase or use the perk. Attributing '75+ Slayer' as the perk's gate is technically a misattribution, though in practice no player would encounter the perk without already having 75+ Slayer.
+
+- **Data says:** Gargoyle smasher perk auto-smashes Gargoyles for players with 75+ Slayer
+- **Wiki says (raw):** players can buy the 'Gargoyle Smasher' perk from Slayer Masters for 120 Slayer points, which will automatically smash the gargoyle when it falls to 9 or lower Hitpoints, provided that the player has a rock hammer (or equivalent) in their inventory.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Gargoyle
+- **Suggested fix:** Rephrase to: 'The Gargoyle Smasher perk (120 Slayer points) auto-smashes gargoyles at 9 HP or lower when a rock hammer is in inventory -- no separate Slayer level requirement for the perk itself.'
+- **Skeptic receipt:** Wiki (fetched directly): 'players can buy the Gargoyle Smasher perk from Slayer Masters for 120 Slayer points, which will automatically smash the gargoyle when it falls to 9 or lower Hitpoints, provided that the player has a rock hammer (or equivalent) in their inventory.' -- no Slayer level requirement stated for the perk itself.
+- **Skeptic reasoning:** The data attributes '75+ Slayer' as the operative gate for the Gargoyle Smasher perk. The wiki is unambiguous: the perk costs 120 Slayer points and carries no stated Slayer level requirement of its own. The 75 Slayer level is a requirement to be assigned gargoyles as a Slayer task and to damage them -- it is not a requirement to purchase or activate the Gargoyle Smasher perk. Presenting '75+ Slayer' as the perk's gate misattributes a task-assignment requirement as a perk-purchase requirement. While in practice no player encounters the perk without 75 Slayer, the description as written creates a false causal link between the perk and the Slayer level.
+
+### [blocker] C12: The wiki describes no HP-reset or 'boost-the-HP trick' mechanic for gargoyles whatsoever. This appears to be a fabricated mechanic. Following this guidance step could cause a player to deliberately restrict their damage output based on a mechanic that does not exist in the game.
+
+- **Data says:** Gargoyles have a mechanic where over-damaging them resets their HP to full (boost-the-HP trick)
+- **Wiki says (raw):** In order to kill a gargoyle, a rock hammer, a rock thrownhammer, or a granite hammer must be used when they reach 8 or lower Hitpoints.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Gargoyle
+- **Suggested fix:** Remove or replace this step entirely -- no such HP-reset mechanic exists for gargoyles per the wiki.
+- **Skeptic receipt:** Wiki (fetched): 'In order to kill a gargoyle, a rock hammer, a rock thrownhammer, or a granite hammer must be used when they reach 8 or lower Hitpoints.' -- zero mention of any HP-reset, over-damage penalty, or 'boost-the-HP trick' anywhere on the page. The mechanic does not exist.
+- **Skeptic reasoning:** The Gargoyle wiki page contains no mention of any HP-reset or 'boost-the-HP trick' mechanic whatsoever. Gargoyles do not have an over-damage HP-reset mechanic in OSRS. Guidance instructing a player to deliberately limit their damage output based on this non-existent mechanic would actively harm their efficiency and is flatly incorrect.
+
+### [medium] C13: The wiki describes the granite maul's special attack as 'an instant attack', which is understood in the community to be a 1-tick special (it fires outside the normal attack cycle). Labelling it as '3-tick' contradicts the wiki and the known mechanic -- 3 ticks is the weapon's normal attack speed, not its special attack speed.
+
+- **Data says:** Granite mauls are 3-tick spec weapons
+- **Wiki says (raw):** Quick Smash, consumes 60% of the player's special attack energy and deals an instant attack.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Granite_maul
+- **Suggested fix:** Correct to: 'Granite mauls have a 1-tick (instant) special attack that fires outside the normal attack cycle, costing 60% special attack energy.'
+- **Skeptic receipt:** Wiki (fetched): 'The granite maul's special attack, Quick Smash, consumes 60% of the player's special attack energy and deals an instant attack.' -- 'instant', not '3-tick'. The wiki provides no tick count for the spec because it fires outside the normal attack cycle.
+- **Skeptic reasoning:** The granite maul's special attack Quick Smash is explicitly described by the wiki as 'an instant attack' -- meaning it fires outside the normal attack cycle, not on a 3-tick delay. The granite maul's normal attack speed is 7 ticks (4.2 seconds), and '3-tick' does not describe any aspect of the weapon or its special attack. Labelling the spec as '3-tick' directly contradicts the wiki's 'instant attack' description and the universally understood community mechanic. This is a material error: players making decisions about using the granite maul spec for finishing gargoyles would have a wrong mental model of the weapon's timing.
+
+## Custodian Stalker
+
+### [medium] C4: The guidance tells players to 'move off infected spore patches when they appear', implying ground patches to dodge. The wiki describes no such mechanic -- the elder stalker directly douses the player in spores (a targeted attack, blockable by Protect from Magic), not patches placed on the ground. The guidance implies a positional dodge mechanic that does not exist.
+
+- **Data says:** move off infected spore patches when they appear
+- **Wiki says (raw):** Once they reach 20% health, they can perform a special attack where they stomp the ground and douse the player in spores. The attack can miss or be blocked by Protect from Magic, but if it hits, it will cause the player to bleed for 9 total damage over 15 ticks (9 seconds).
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Elder_custodian_stalker
+- **Suggested fix:** Replace 'move off infected spore patches when they appear' with 'the spore attack causes Bleed -- use Protect from Magic to block it or accept the 9 damage and heal through it'.
+- **Skeptic receipt:** WebFetch (Elder custodian stalker): "The stalker 'stomp[s] the ground and douse[s] the player in spores.' This attack targets the player directly rather than creating environmental ground patches. The spore attack can miss or be blocked by Protect from Magic." WebFetch (Stalker Den): "there are no descriptions of infected spore patches, area-denial mechanics, environmental hazards, or ground objects that players must dodge or move away from."
+- **Skeptic reasoning:** The guidance step in drop_rates.json (line 12368) reads: "Elder variants apply a Bleed - move off infected spore patches when they appear." This implies a positional ground-patch mechanic requiring the player to reposition. The wiki establishes no such mechanic exists. The Elder custodian stalker's spore attack targets the player directly (not via ground objects) and is blockable by Protect from Magic -- the correct player response is to use the prayer, not to move. The Stalker Den wiki page confirms zero ground hazard or area-denial mechanics in the dungeon. The guidance actively misdirects players toward repositioning when they should be praying Protect from Magic.
+
+### [medium] C6: The guidance claims 'mature, elder' variants have better rates on Alchemist's signet. The wiki shows the Mature custodian stalker does not drop Alchemist's signet at all -- only Elder and Ancient Custodian are sources. Lumping mature in as having 'better rates' on this item is incorrect; mature is not a source.
+
+- **Data says:** Higher-tier variants (mature, elder) have better rates on Antler guard and Alchemist's signet
+- **Wiki says (raw):** Antler Guard" - described as a tertiary drop with a 1/800 rarity [for mature]; Elder custodian stalker drops [Alchemist's signet] at 2/124 rarity [and Ancient Custodian at 3 x 2/124]; [Mature custodian stalker drops section contains no Alchemist's signet entry]
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Mature_custodian_stalker
+- **Suggested fix:** Change 'Higher-tier variants (mature, elder) have better rates on Antler guard and Alchemist's signet' to 'Elder/Ancient variants have better rates on Antler guard and are the only sources of Alchemist's signet; mature drops Antler guard at a lower rate (1/800 vs 1/650) and does not drop Alchemist's signet'.
+- **Skeptic receipt:** wiki_lookup (Mature custodian stalker) -- full 16-entry drop table: Big bones, Steel cannonball, Air rune, Fire rune, Rune arrow, Death rune, Pure essence, Monkfish, Broken antler, Mithril bar, Raw beef, Huasca seed, Coins, Antler guard (1/800), Long bone, Curved bone. No Alchemist's signet entry. wiki_lookup (Elder custodian stalker): "Alchemist's signet | qty: 1 | rarity: 2/124"
+- **Skeptic reasoning:** The guidance step (line 12368) states 'Higher-tier variants (mature, elder) have better rates on Antler guard and Alchemist's signet', presenting mature as a source of Alchemist's signet. The wiki_lookup for Mature custodian stalker returns 16 drop entries with no Alchemist's signet anywhere in the table. Only Elder custodian stalker drops Alchemist's signet (2/124). Mature drops Antler guard at 1/800 versus Elder's 1/650 -- so the Antler guard tier claim is correct, but grouping mature into the Alchemist's signet claim is factually wrong.
+
+## Aquanite
+
+### [blocker] C3: Crush is wrong. Aquanites have +80 Crush defence (tied for highest). The correct meta is Slash to sever the lure, then Stab (Ghrazi rapier). Recommending Abyssal bludgeon or Inquisitor's mace actively works against the player.
+
+- **Data says:** Crush weapon (Abyssal bludgeon, Inquisitor's mace) recommended for best accuracy against Aquanites
+- **Wiki says (raw):** Ghrazi rapier for consistent stab damage ... if an Aquanite is hit with a slash attack, its lure will be severed and its stab Defence will be reduced by 50 (from 60 to 10)
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Aquanite/Strategies
+- **Suggested fix:** Replace crush recommendation with: use a fast slash weapon (whip, scimitar) to sever the lure on the first hit, reducing Stab defence from 60 to 10, then switch to a high-accuracy stab weapon (e.g. Ghrazi rapier) for the kill.
+- **Skeptic receipt:** Defence bonuses from wiki: Stab +60, Slash +80, Crush +80. Strategies page: "a fast 4-tick slash weapon such as a Scimitar or Abyssal whip is recommended" [for severing the lure]; primary stab weapons include Ghrazi rapier and Osmumten's fang. "The wiki does not mention Abyssal bludgeon or Inquisitor's mace in the Aquanite strategies guide."
+- **Skeptic reasoning:** The wiki defence table shows Crush defence +80 (tied with Slash for highest, worse than post-lure-sever Stab which drops to +10). The strategies page names zero crush weapons; it explicitly recommends a 4-tick slash weapon to sever the lure then a stab weapon (Ghrazi rapier / Osmumten's fang) for the kill. Abyssal bludgeon and Inquisitor's mace are not mentioned anywhere on the strategies page. Recommending a crush weapon steers the player into the worst defence bracket and bypasses the core lure mechanic entirely.
+
+### [blocker] C4: Aquanites attack exclusively with Magic, not melee. Protect from Melee offers zero damage reduction and will result in taking full Magic hits.
+
+- **Data says:** Protect from Melee prayer is the appropriate defensive protection against Aquanites
+- **Wiki says (raw):** Aquanites attack with Magic and have high accuracy, so using Protect from Magic is highly recommended.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Aquanite/Strategies
+- **Suggested fix:** Change to Protect from Magic.
+- **Skeptic receipt:** wiki_lookup + WebFetch (Aquanite main page): Attack Style: "Magic", Max Hit: 18, Attack Speed: "5 ticks (3.0 seconds)". Strategies page: "Aquanites attack with Magic and have high accuracy, so using Protect from Magic is highly recommended."
+- **Skeptic reasoning:** Aquanites have a single attack style: Magic. The strategies page is unambiguous that Protect from Magic is the correct prayer. Protect from Melee provides no mitigation against a Magic-only attacker. No account-type, progress, or variant consideration changes this -- there is no melee phase or alternate form. This is a direct inversion with zero legitimate-game-mechanic defence.
+
+### [blocker] C5: Aquanites attack exclusively with Magic (max hit 18), not melee. This claim is a direct inversion of their attack style.
+
+- **Data says:** Aquanites deal melee damage only
+- **Wiki says (raw):** Magic" with a max hit of 18, attacking every "5 ticks (3.0 seconds)"
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Aquanite
+- **Suggested fix:** Change to: Aquanites attack with Magic only (max hit 18, 5-tick attack speed). Use Protect from Magic.
+- **Skeptic receipt:** WebFetch (https://oldschool.runescape.wiki/w/Aquanite): Attack Style: "Magic", Max Hit: 18, Attack Speed: "5 ticks (3.0 seconds)". npc_lookup: Aggressive: No, Poisonous: No -- no melee attack style listed.
+- **Skeptic reasoning:** The main Aquanite wiki page lists the attack style as Magic (only), max hit 18, attack speed 5 ticks. The NPC lookup confirms combat level 145 / HP 180 with no melee attack noted. There is no melee phase, no alternate form, and no account-type variation that makes this correct for any player. The claim is a direct factual inversion.
+
+### [medium] C6: Aquanites have a notable lure mechanic: one slash hit severs the lure, permanently reducing Stab defence by 50 for that kill. Omitting this understates the combat complexity and causes players to miss a meaningful accuracy boost.
+
+- **Data says:** Aquanites have no special attacks or phase mechanics
+- **Wiki says (raw):** if an Aquanite is hit with a slash attack, its lure will be severed and its stab Defence will be reduced by 50 (from 60 to 10), displaying the message Your attack cuts off the aquanite's lure! ... dealing damage is not required to sever the lure
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Aquanite/Strategies
+- **Suggested fix:** Add a note about the lure mechanic: a single slash attack severs the lure (no damage required), reducing Stab defence from 60 to 10, significantly improving accuracy with subsequent stab attacks.
+- **Skeptic receipt:** WebFetch (https://oldschool.runescape.wiki/w/Aquanite): "When attacked with slash weapons, the aquanite's lure can be severed, reducing stab defence by 50 points (from 60 to 10). The attack 'does not need to deal damage to sever the lure.'" Strategies page: "if an Aquanite is hit with a slash attack, its lure will be severed and its stab Defence will be reduced by 50 (from 60 to 10)."
+- **Skeptic reasoning:** The lure mechanic is explicitly documented on the strategies page and cross-confirmed by the main page. It is not a minor flavour detail -- it reduces Stab defence from +60 to +10, a 50-point swing that materially affects accuracy for the recommended weapon style. The main page also notes the lure does not need to deal damage to be severed. Omitting this from guidance leaves players with no knowledge of the single most impactful combat mechanic for this monster. wiki_updates returns zero Aquanite changes since 2025-01-01, so this is not a staleness issue -- the mechanic is current.
+
+## Nechryael
+
+### [medium] C3: Direction from Ranging Guild to Slayer Tower is stated as south-east, but the Slayer Tower is north-west of Canifis and well to the north-east of the Ranging Guild (which sits between Seers' Village and East Ardougne). The correct run direction from the Ranging Guild teleport is north-east, not south-east.
+
+- **Data says:** POH jewellery box can summon Combat bracelet to teleport to Ranging Guild, from which Slayer Tower can be reached by running south-east
+- **Wiki says (raw):** The tower is located north-west of Canifis.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Slayer_Tower
+- **Suggested fix:** Change 'running south-east' to 'running north-east' in the conditionalAlternatives description for guidanceSteps[0].
+- **Skeptic receipt:** coordinate_helper distance (2655,3445) -> (3429,3535): Euclidean 779.2 tiles, Chebyshev 774. Delta-X = +774 (east), Delta-Y = +90 (north). wiki_lookup Slayer Tower: 'The tower is located north-west of Canifis.' wiki_lookup Ranging Guild: 'located between Seers Village and East Ardougne' / 'A charged combat bracelet will teleport just outside the entrance.' drop_rates.json line 12497-12498: description: 'POH jewellery box -> Combat bracelet -> Ranging Guild, then run south-east along the road to the Slayer Tower entrance', travelTip: 'POH Combat bracelet -> Ranging Guild -> run south-east to Slayer Tower'
+- **Skeptic reasoning:** The data text 'run south-east along the road to the Slayer Tower entrance' is geometrically wrong. The Ranging Guild Combat bracelet teleport destination is at approximately (2655, 3445). The Slayer Tower ground-floor entrance guidance target is (3429, 3535). Delta-X = +774 (east), Delta-Y = +90 (north). The Slayer Tower is east-northeast of the Ranging Guild -- not south-east. 'South-east' requires a negative delta-Y (player moves south), which is the opposite of what the geometry shows. The wiki receipt ('The tower is located north-west of Canifis') is consistent: Canifis is at ~(3494, 3485) and the tower at ~(3428, 3547), confirming the tower is NW of Canifis and therefore well to the east of Kandarin. The suggested fix of 'north-east' lands in the correct compass quadrant (positive X, positive Y) and is acceptable as casual guidance text, though 'east' would be marginally more precise (bearing is ~6.6 degrees north of due east). The core error -- 'south-east' instead of 'east/north-east' -- is a genuine directional inversion that would actively mislead a player.
+
+## Drake
+
+### [blocker] C6: The maximum dragonfire breath damage is 4 hits of up to 8 = 32, not 40. The claim overstates the max hit by 8.
+
+- **Data says:** Dragonfire breath hits up to 40 damage if you stand still
+- **Wiki says (raw):** deals 6-8 damage for four hits if the player is struck by the projectile
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Drake
+- **Suggested fix:** Change '40 damage' to '32 damage (up to 8 per hit, four hits)' to match the wiki's stated 6-8 damage per hit mechanic.
+- **Skeptic receipt:** Drake/Strategies page: 'After seven auto-attacks, drakes will launch a volcanic breath towards the player's current position, which deals 6-8 damage for four hits if the player is struck by the projectile.' Drake infobox max hit field: '32 (Dragonfire)'
+- **Skeptic reasoning:** The wiki states the dragonfire breath deals '6-8 damage for four hits' giving a maximum of 32, not 40. The Drake infobox also lists '32 (Dragonfire)' as the max hit. The data value of 40 overstates the ceiling by 8 damage and is not supported by any mechanic or protection calculation on the wiki.
+
+### [blocker] C7: Drakes' standard attacks are Ranged -- the correct prayer is Protect from Missiles, not Protect from Magic. Advising Magic prayer leaves the player fully exposed to their normal attacks.
+
+- **Data says:** Pray Magic for the standard ranged-magic attack style
+- **Wiki says (raw):** Normal ranged attacks of drakes can be fully blocked by Protect from Missiles.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Drake/Strategies
+- **Suggested fix:** Change 'Pray Magic' to 'Pray Missiles (Protect from Missiles)' to match Drake's ranged attack style.
+- **Skeptic receipt:** Drake/Strategies: 'Drakes use both ranged and ranged melee, so melee armour is recommended against their attacks.' and 'Drakes normal ranged attacks can be fully blocked by Protect from Missiles.' and 'Together, a player can take no damage when using Protect from Missiles and dragonfire protection, if attacking from at least 1 tile away.' No Protect from Magic recommendation appears anywhere on the strategies page.
+- **Skeptic reasoning:** Drake's standard attack style is Ranged, not Magic. The wiki is unambiguous that Protect from Missiles is the correct prayer. Advising 'Pray Magic' leaves the player fully exposed to Drake's normal attacks. No Drake attack style listed on the wiki is Magic-based.
+
+### [medium] C3: Rada's blessing 3 requires completing the Kourend & Kebos Hard Diary -- it is not 'unquested.' Describing it as unquested misstates the unlock requirement.
+
+- **Data says:** Rada's blessing 3/4 teleport is an unquested alternative to fairy ring CIR for reaching Mount Karuulm
+- **Wiki says (raw):** Players may use Rada's blessing 3 or higher, which is unlocked after completing the Kourend & Kebos Hard Diary, to teleport straight to the dungeon using 'Mount Karuulm' option.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Karuulm_Slayer_Dungeon
+- **Suggested fix:** Remove 'unquested' and replace with 'requires Kourend & Kebos Hard Diary' or simply omit the qualifier.
+- **Skeptic receipt:** wiki_lookup Karuulm Slayer Dungeon: 'Players may use Rada's blessing 3 or higher, which is unlocked after completing the Kourend & Kebos Hard Diary.' Kourend & Kebos Diary wiki: Hard tier quest requirements include 'The Ascent of Arceuus', 'The Depths of Despair', 'Dream Mentor', 'The Forsaken Tower', 'The Queen of Thieves', 'Tale of the Righteous'.
+- **Skeptic reasoning:** Rada's blessing 3 is unlocked via the Kourend & Kebos Hard Diary, which itself requires completing six quests: The Ascent of Arceuus, The Depths of Despair, Dream Mentor, The Forsaken Tower, The Queen of Thieves, and Tale of the Righteous. Describing this teleport as 'unquested' is incorrect -- it sits behind a substantial quest gate. The finding's suggested fix (replace 'unquested' with 'requires Kourend & Kebos Hard Diary') is accurate.
+
+### [low] C2: The fairy ring CIR does not land at the dungeon entrance -- the mountain and dungeon entrance are a short walk north of the ring. 'Right at the entrance' overstates proximity.
+
+- **Data says:** Fairy ring CIR drops you right at the dungeon entrance
+- **Wiki says (raw):** Players can get there via the fairy ring CIR. The mountain is a short walk north of this fairy ring.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Karuulm_Slayer_Dungeon
+- **Suggested fix:** Change to 'Fairy ring CIR -- short walk north up the volcano to the dungeon entrance.'
+- **Skeptic receipt:** wiki_lookup Karuulm Slayer Dungeon: 'Players can get there via the fairy ring . The mountain is a short walk north of this fairy ring.'
+- **Skeptic reasoning:** The wiki explicitly states the fairy ring CIR lands at a point from which 'the mountain is a short walk north.' The dungeon entrance is at the top of the mountain volcano. Describing the ring as dropping you 'right at the dungeon entrance' overstates proximity in a way that could mislead a player expecting to be at the entrance. The wiki quote contradicts the 'right at the entrance' phrasing directly.
+
+## Dark Beast
+
+### [high] C3: Dark Beasts no longer exist in the Catacombs of Kourend; they were removed in the 25 July 2019 update. Sending players there would find no Dark Beasts.
+
+- **Data says:** Dark Beasts can be found in the Catacombs of Kourend
+- **Wiki says (raw):** Dark beasts were added to Iorwerth Dungeon and removed from Kourend Catacombs for thematic reasons.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Dark_beast
+- **Suggested fix:** Remove the Catacombs of Kourend from the list of Dark Beast locations in guidanceSteps[1].description. The two valid locations are the Iorwerth Dungeon and the Mourner Tunnels.
+- **Skeptic receipt:** WebFetch Dark_beast: "Dark Beasts were previously located in the Catacombs of Kourend. According to the update log, 'Dark beasts were added to Iorwerth Dungeon and removed from Katacombs of Kourend for thematic reasons' on July 25, 2019, coinciding with the Song of the Elves update." Current locations: Mourner Tunnels (19 spawns), Iorwerth Dungeon (10 spawns). Data line 13025: "Kill Dark Beasts in the Mourner Tunnels or Catacombs of Kourend."
+- **Skeptic reasoning:** The guidance step at drop_rates.json line 13025 reads: "Kill Dark Beasts in the Mourner Tunnels or Catacombs of Kourend." The wiki confirms Dark Beasts were removed from the Catacombs of Kourend on 25 July 2019 as part of the Song of the Elves update and relocated to the Iorwerth Dungeon. The two valid locations today are Mourner Tunnels and Iorwerth Dungeon. Sending players to the Catacombs of Kourend will find no Dark Beasts.
+
+### [blocker] C5: Fairy ring code CIQ teleports to north-west of Yanille in Kandarin, not to Prifddinas or the Iorwerth Dungeon entrance. Following this guidance would take the player to entirely the wrong location.
+
+- **Data says:** POH superior garden fairy ring with dramen staff or lunar staff equipped can dial CIQ to reach the Iorwerth Dungeon entrance in Prifddinas
+- **Wiki says (raw):** Kandarin: North-west of Yanille
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Fairy_ring
+- **Suggested fix:** Remove or correct the CIQ fairy ring alternative for reaching the Iorwerth Dungeon. There is no fairy ring code that leads to Prifddinas. The correct travel method is a Teleport crystal (or eternal teleport crystal) to Prifddinas after completing Song of the Elves.
+- **Skeptic receipt:** WebFetch Fairy_ring full code table: "CIQ | North-west of Yanille" and "DIQ | Player-owned house (superior garden)". No code maps to Prifddinas or Iorwerth Dungeon. Data line 13018: "POH superior garden fairy ring (dramen/lunar staff equipped) -> dial CIQ to land directly at the Iorwerth Dungeon entrance in Prifddinas".
+- **Skeptic reasoning:** The guidance step at drop_rates.json line 13018 claims CIQ leads to "the Iorwerth Dungeon entrance in Prifddinas". The full fairy ring code table from the wiki shows CIQ = "North-west of Yanille" in Kandarin. No fairy ring code in the entire 55-code table leads to Prifddinas or the Iorwerth Dungeon. DIQ leads to a player-owned house superior garden (not outbound to Prifddinas). Following this guidance would take the player to the wrong continent entirely.
+
+### [medium] C4: The item that teleports to Prifddinas is the Teleport crystal (or eternal teleport crystal), not the crystal seed. The crystal teleport seed is the depleted/uncharged form and cannot teleport on its own -- it must be recharged by Eluned into a teleport crystal first.
+
+- **Data says:** Teleport via crystal seed to reach Prifddinas for the Iorwerth Dungeon
+- **Wiki says (raw):** can teleport a player to the elven village of Lletya (and Prifddinas upon completion of the Song of the Elves quest)
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Teleport_crystal
+- **Suggested fix:** Change 'crystal seed' to 'teleport crystal (or eternal teleport crystal)' in guidanceSteps[0].description.
+- **Skeptic receipt:** WebFetch Teleport_crystal: "A teleport crystal is a small crystal which can teleport a player to the elven village of Lletya (and Prifddinas upon completion of the Song of the Elves quest)." WebFetch Crystal_teleport_seed: "the crystal teleport seed is a depleted teleport crystal that has run out of charges ... the seed cannot teleport players independently. It must be recharged first before use." Data line 13005: "(crystal seed teleport)". Data line 13000 (travelTip): "Teleport crystal -> Prifddinas".
+- **Skeptic reasoning:** The guidance step at drop_rates.json line 13005 says "(crystal seed teleport)". The crystal teleport seed is the depleted, uncharged form of a teleport crystal -- it cannot teleport players on its own. It must be recharged by Eluned into a functional teleport crystal first. The item that actually teleports to Prifddinas (post-Song of the Elves) is the teleport crystal or eternal teleport crystal, not the seed. The travelTip field at line 13000 correctly says "Teleport crystal -> Prifddinas", creating an internal inconsistency within the same entry.
+
+## Araxyte
+
+### [blocker] C3: The wiki documents no web attack mechanic for Araxytes. There is no dodgeable web projectile described anywhere on the page. This claim appears to be fabricated -- Araxytes have a single standard crush attack. Guidance telling players to dodge web attacks is incorrect and would be confusing in-game.
+
+- **Data says:** Araxytes perform web attacks that players must dodge
+- **Wiki says (raw):** The wiki contains no description of any web attack mechanic for Araxytes. Attack style: Crush with 4 ticks (2.4 seconds) attack speed and max hit of 13.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Araxyte
+- **Suggested fix:** Remove the web attack dodge step entirely. The only special consideration the wiki notes is managing venom -- replace with guidance to use antivenoms/antipoison.
+- **Skeptic receipt:** wiki_lookup (Araxyte): Attack style Crush, attack speed 4 ticks, max hit 13. No special attacks section present. npc_lookup: 'Poisonous: Yes (venom)' -- no web-attack attribute. Morytania Spider Cave wiki: 'The caves are full of araxytes that are capable of inflicting venom.' No web attack or dodgeable projectile mentioned on either page.
+- **Skeptic reasoning:** The wiki page for Araxyte documents a single Crush attack (4-tick, max hit 13/17), venom on hit, and no special attack section whatsoever. The Morytania Spider Cave page mentions only that araxytes 'are capable of inflicting venom' -- no web projectile, no web mechanic, no dodgeable attack of any kind appears on either page. The npc_lookup returns no special-attack flag. There is no authoritative source in any consulted tool that describes a web attack mechanic for Araxytes. Guidance instructing players to dodge web attacks describes a mechanic that does not exist.
+
+### [medium] C4: The wiki confirms Araxytes inflict venom (Poisonous: Yes (venom)), but describes no dodgeable venom attack mechanic. Venom is a passive affliction managed with antivenoms, not something players can dodge. Framing it as a 'dodge' mechanic is misleading and could cause players to waste time trying to avoid it rather than using the correct counter-item.
+
+- **Data says:** Araxytes perform venom attacks that players must dodge
+- **Wiki says (raw):** it is dangerous to fight them without prayer and a method to stave off venom
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Araxyte
+- **Suggested fix:** Change the guidance from 'dodge venom attacks' to 'bring antivenoms or a serpentine helm to counter venom'.
+- **Skeptic receipt:** Araxyte wiki: 'it is dangerous to fight them without prayer and a method to stave off venom' -- prescribes item counter, not dodging. npc_lookup: 'Poisonous: Yes (venom)' -- confirms venom is a passive on-hit affliction, not a projectile. No dodgeable venom mechanic described on either the Araxyte or Morytania Spider Cave wiki pages.
+- **Skeptic reasoning:** Venom from Araxytes is real and confirmed by both the wiki and npc_lookup. However, OSRS venom from standard melee monsters is applied passively on a successful melee hit -- it is not a projectile or a mechanic that can be dodged. The wiki prescribes an item-based counter ('a method to stave off venom'), not an avoidance manoeuvre. Framing this as a 'dodge venom attacks' guidance step is mechanically incorrect: there is no venom projectile to dodge. The correct guidance is to bring antivenoms, antidotes, or a serpentine helm. The finding's diagnosis of the framing error is sound and the receipt supports it.
+
+## Hydra
+
+### [blocker] C5: The claim that Hydra starts with Magic is wrong -- the wiki states it starts with a random combat style. Additionally the wiki says 'three attacks' (regardless of whether they hit), not 'three hits'. A player following this guidance and pre-praying Protect from Magic would be praying incorrectly roughly half the time from the first attack.
+
+- **Data says:** Hydra switches attack styles: Magic first, then Ranged after three hits (like Alchemical Hydra)
+- **Wiki says (raw):** Hydras start off with a random combat style at the start of the battle, switching after three attacks, regardless if they hit or not.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Hydra
+- **Suggested fix:** Change to: 'Hydra starts on a random combat style (Magic or Ranged), switching after every three attacks regardless of hit/miss -- watch its animation to determine the opening style and switch protection prayer accordingly.'
+- **Skeptic receipt:** Wiki verbatim: 'Hydras start off with a random combat style at the start of the battle, switching after three attacks, regardless if they hit or not.'
+- **Skeptic reasoning:** The guidance text at line 13264 of drop_rates.json states 'Pray against the active style (Magic first, then Ranged after three hits - just like Alchemical Hydra).' The wiki authoritatively contradicts both sub-claims. First, the starting style is not fixed to Magic -- it is random. Second, the switch trigger is 'three attacks, regardless if they hit or not,' not 'three hits.' A player following this guidance would pre-pray Protect from Magic incorrectly roughly half the time when the Hydra opens on Ranged, and would misunderstand the switch timing by conflating attacks with successful hits. Both errors survive all refutation vectors: this is not a multi-source item issue, not a variant issue, not account-type-specific, and the wiki page has had zero edits since January 2026 (wiki_updates confirmed 0 changes). The Alchemical Hydra comparison compounds the error -- the Alchemical Hydra does have fixed phase ordering, but the regular Hydra does not.
+
+### [medium] C6: The wiki describes the special attack as poison splats (light green orbs), not fire puddles. Calling them 'fire-puddle telegraphs' misidentifies both the damage type and the visual. The mechanic description (tile under your feet + two random tiles) is otherwise correct.
+
+- **Data says:** Hydra uses fire-puddle telegraphs under your feet as a mechanic
+- **Wiki says (raw):** the middle head of the hydra will spit poison at three random tiles (one at the player's location, two elsewhere), dealing 4 poison damage every two ticks (or 1 to 2 damage if the player has poison immunity). ... poison splats, which are light green orbs
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Hydra
+- **Suggested fix:** Replace 'fire-puddle telegraphs' with 'poison splat telegraphs' (light green orbs).
+- **Skeptic receipt:** Wiki verbatim: 'the middle head of the hydra will spit poison at three random tiles (one at the player's location, two elsewhere), dealing 4 poison damage every two ticks (or 1 to 2 damage if the player has poison immunity) when the player is standing on one. The initial splat has a 3x3 AoE.' The wiki also notes the projectiles are 'light green orbs' (poison splats), not fire.
+- **Skeptic reasoning:** The guidance text calls the special attack 'fire-puddle telegraphs.' The wiki describes the mechanic as poison splats -- 'light green orbs' -- dealing poison damage, not fire damage. In OSRS, 'fire puddles' are a distinct visual and mechanical concept associated with content like Vorkath's acid/fire phase. Calling poison splats 'fire puddles' misidentifies both the damage type (poison vs fire) and the visual appearance (light green orbs vs fire/orange puddles). The mechanic description of 'tile under your feet' is directionally correct, but the name and damage type are wrong. No refutation vector applies: this is not a variant or multi-source issue, there is no account-type nuance, and the wiki page is current (0 changes since January 2026).
+
+### [blocker] C7: The wiki gives the special attack damage as 4 poison damage every two ticks, not '30+ burn damage ticks'. The '30+' figure is fabricated and the damage type is poison, not burn/fire. A player acting on this guidance would severely misestimate the threat level.
+
+- **Data says:** Fire-puddles deal 30+ burn damage ticks and can be avoided by moving one tile
+- **Wiki says (raw):** dealing 4 poison damage every two ticks (or 1 to 2 damage if the player has poison immunity)
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Hydra
+- **Suggested fix:** Replace '30+ burn damage ticks' with '4 poison damage every two ticks (halved if poison-immune)' and correct 'fire-puddles' to 'poison splats'.
+- **Skeptic receipt:** Wiki verbatim: 'dealing 4 poison damage every two ticks (or 1 to 2 damage if the player has poison immunity)'
+- **Skeptic reasoning:** The guidance text states 'avoid the 30+ burn tick.' The wiki gives the damage as '4 poison damage every two ticks (or 1 to 2 damage if the player has poison immunity).' The '30+' figure has no basis in the wiki or any known game data -- the maximum possible from a single poison splat tick is 4 damage. The damage type is 'poison,' not 'burn' (burn is a separate mechanic in OSRS, e.g. from the Nagua quest reward weapon). Combined with C6, the guidance misnames the visual (fire-puddle), misidentifies the damage type (burn vs poison), and wildly overstates the damage (30+ vs 4). A player following this guidance would misestimate the threat level and might overbrew or misprioritize their avoidance relative to actual combat damage. No refutation vector applies.
+
+### [high] C8: The wiki describes poison splat attacks, not venom. Venom and poison are distinct mechanics in OSRS (venom escalates and requires Antidote++/Serpentine helm to cure; poison does not escalate). The wiki lists the Hydra's special attack as a poison splat dealing 4 damage every two ticks, with no mention of venom being inflicted on the player by this mechanic.
+
+- **Data says:** Hydra uses venom attacks that tick for 6+ damage even after the boss dies
+- **Wiki says (raw):** the middle head of the hydra will spit poison at three random tiles (one at the player's location, two elsewhere), dealing 4 poison damage every two ticks
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Hydra
+- **Suggested fix:** Replace 'venom attacks' with 'poison splat attacks'. Remove the '6+ damage' claim and replace with '4 poison damage every two ticks'. Clarify that poison immunity (e.g. from prayer or items) halves this to 1-2 damage.
+- **Skeptic receipt:** Wiki verbatim: 'the middle head of the hydra will spit poison at three random tiles (one at the player's location, two elsewhere), dealing 4 poison damage every two ticks (or 1 to 2 damage if the player has poison immunity).' No mention of venom being inflicted on the player, no mention of damage persisting after death.
+- **Skeptic reasoning:** The guidance text states 'their venom attack ticks for 6+ even after they die.' Three distinct errors: (1) The damage type is poison, not venom -- these are mechanically distinct in OSRS; venom escalates and requires Antidote++ or a Serpentine helm to cure, while poison does not escalate. The wiki consistently uses 'poison' for this mechanic and never mentions venom being applied to the player. (2) The damage figure '6+' is contradicted by the wiki's explicit '4 poison damage every two ticks.' (3) The 'even after they die' claim has no wiki support. The guidance text already correctly recommends Antidote++ (which cures both), so the antidote advice is sound -- but the justification framing it as 'venom...after death' is fabricated. No refutation vector applies: this is not a multi-source or variant issue, there is no account-type nuance, and the wiki page is current.
+
+## Vyrewatch Sentinel
+
+### [medium] C3: The wiki's strategies page lists Amulet of rancour as the top (BIS) neck slot item for both DPS and AFK prayer setups at Vyrewatch Sentinels. Amulet of blood fury is not mentioned anywhere in the strategies page. The guidance step incorrectly names blood fury as BIS.
+
+- **Data says:** an Amulet of blood fury is BIS for the lifesteal
+- **Wiki says (raw):** Amulet of rancour" is listed first in the Neck slot for both DPS and AFK Prayer equipment tables.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Vyrewatch_Sentinel/Strategies
+- **Suggested fix:** Replace 'an Amulet of blood fury is BIS for the lifesteal' with 'an Amulet of rancour is BIS; Amulet of blood fury is a budget option'.
+- **Skeptic receipt:** Strategies page neck slot (DPS): 'Amulet of rancour, Amulet of torture, Amulet of fury, Amulet of strength, Amulet of glory'. Strategies page neck slot (AFK/Prayer): 'Amulet of rancour / Dragonbone necklace, Amulet of torture, Amulet of fury'. Blood fury: not mentioned on the strategies page. Rancour stats: Stab/Slash/Crush +25, Strength +12. Blood fury stats: Stab/Slash/Crush +20, Strength +8.
+- **Skeptic reasoning:** The strategies page lists Amulet of rancour as the top neck-slot item in both the DPS and AFK/prayer gear tables. Amulet of blood fury does not appear anywhere on the strategies page. The rancour (released 28 August 2024 with Araxxor) outperforms blood fury on every melee stat: +25 vs +20 attack, +12 vs +8 strength. Calling blood fury BIS is flatly wrong for this content as of current wiki state.
+
+### [medium] C7: The wiki describes Sentinels as patrolling 'the streets of the upper class areas of Darkmeyer', not a 'central Darkmeyer square'. The Darkmeyer page also confirms they patrol 'throughout the middle tier' and 'throughout the upper tier' with 19 spawn locations. The 'central square' framing is not supported by the wiki and could direct players to the wrong area.
+
+- **Data says:** Kill Vyrewatch Sentinels in the central Darkmeyer square.
+- **Wiki says (raw):** They can be found prowling the streets of the upper class areas of Darkmeyer, in search of unruly humans to snack on.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Vyrewatch_Sentinel
+- **Suggested fix:** Replace 'in the central Darkmeyer square' with 'in the upper-class areas (upper and middle tiers) of Darkmeyer'.
+- **Skeptic receipt:** Darkmeyer wiki (middle tier): 'Vyrewatch Sentinels patrolling throughout the middle tier.' Darkmeyer wiki (upper tier): 'Vyrewatch Sentinels patrolling throughout the upper tier.' Bank location: 'A bank' listed under upper tier features. No mention of 'central square' anywhere on the Darkmeyer article. Vyrewatch Sentinel main page: 'They can be found prowling the streets of the upper class areas of Darkmeyer.'
+- **Skeptic reasoning:** The phrase 'central Darkmeyer square' does not correspond to any named or described area in Darkmeyer. The Darkmeyer wiki confirms Sentinels patrol two distinct tiers -- the middle tier and the upper tier -- with 19 spawn locations spread across both. There is no 'central square'. The bank (relevant to pathing) is in the upper tier. 'Central square' is geographically inaccurate and could misdirect players away from the upper-tier spawn cluster near the bank.
+
+### [medium] C11: The strategies page does not mention the Amulet of blood fury at all. The recommended BIS neck slot is the Amulet of rancour. The claim that blood fury 'keeps your HP topped without brews' is unsupported and inconsistent with the wiki's gear recommendations for this content.
+
+- **Data says:** Amulet of blood fury speccing keeps your HP topped without brews.
+- **Wiki says (raw):** Amulet of rancour" is listed first in the Neck slot for both DPS and AFK Prayer equipment tables.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Vyrewatch_Sentinel/Strategies
+- **Suggested fix:** Remove the blood fury claim from the combat step or demote it to a budget option. Reference the Amulet of rancour as the wiki-recommended BIS piece.
+- **Skeptic receipt:** Blood fury passive: 'When dealing melee damage, the amulet grants a passive 20% chance to heal 30% of the damage dealt on any hit.' (No special attack exists.) Strategies page neck slot (DPS): 'Amulet of rancour, Amulet of torture, Amulet of fury...' Blood fury: not mentioned anywhere on the strategies page.
+- **Skeptic reasoning:** Two independent errors. First, the Amulet of blood fury has no special attack -- it has a passive 20% chance to heal 30% of melee damage dealt. Calling this 'speccing' is a mechanical misstatement. Second, the strategies page does not mention blood fury at all; the wiki-recommended BIS neck slot is the Amulet of rancour for both DPS and sustained AFK play. The claim is wrong on both mechanics and meta.
+
+### [high] C12: The wiki explicitly states Sentinels can be killed 'next to an altar and bank', and the strategies page confirms 'run north to the Bank area. There is a Bank and an Altar.' There is a bank directly in Darkmeyer. Guiding players to teleport via Drakan's medallion to Ver Sinhaza or to Canifis lodestone for banking is strictly worse than walking to the on-site Darkmeyer bank, wasting real time per trip.
+
+- **Data says:** Return to bank when supplies run low. Drakan's medallion to Ver Sinhaza or Canifis lodestone for the fastest bank cycle.
+- **Wiki says (raw):** They are often killed off task as a low-effort money maker because they can be killed next to an altar and bank
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Vyrewatch_Sentinel
+- **Suggested fix:** Replace the banking step with: 'Walk north to the Darkmeyer bank (on-site, next to an altar). The bank and altar are within the Darkmeyer upper tier near the sentinel spawn area.'
+- **Skeptic receipt:** Strategies page: 'run north to the Bank area. There is a Bank and an Altar.' Sentinel main page: 'They are often killed off task as a low-effort money maker because they can be killed next to an altar and bank.' Darkmeyer wiki (upper tier): 'A bank' listed as upper-tier feature -- the same tier Sentinels patrol.
+- **Skeptic reasoning:** There is a bank directly inside Darkmeyer, in the upper tier where Sentinels patrol. The strategies page explicitly instructs players to 'run north to the Bank area. There is a Bank and an Altar.' The main Sentinel wiki page states they 'can be killed next to an altar and bank.' Guiding players to teleport via Drakan's medallion to Ver Sinhaza or to the Canifis lodestone for banking is strictly worse than using the on-site Darkmeyer bank -- it wastes multiple teleport slots and real time per trip.
+
+## Larran's Big Chest
+
+### [high] C2: The chest is near Pirates' Hideout which the wiki places at Wilderness level 54, not level 39. Level 39 is mid-Wilderness; level 54 is deep Wilderness. This matters for PK risk assessment -- a player preparing for level 39 Wilderness (expecting combat range vulnerability of ~+9 levels) will be severely underprepared for level 54 deep Wilderness exposure.
+
+- **Data says:** Travel to the ship west of Pirates' Hideout (level 39 Wilderness).
+- **Wiki says (raw):** Wilderness level: 54
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Pirates%27_Hideout
+- **Suggested fix:** Change 'level 39 Wilderness' to 'level 54 Wilderness' in guidanceSteps[0].description.
+- **Skeptic receipt:** Pirates' Hideout wiki infobox: 'Wilderness level: 54' (for the hideout building east of the ship). Chest coordinates from drop_rates.json line 13511-13513: worldX=3018, worldY=3955, worldPlane=0. Formula: floor((3955-3520)/8)+1 = floor(54.375)+1 = 55. Guidance text from drop_rates.json line 13510: 'Travel to the ship west of Pirates' Hideout (level 39 Wilderness).'
+- **Skeptic reasoning:** The guidance text in drop_rates.json reads 'Travel to the ship west of Pirates' Hideout (level 39 Wilderness).' The chest coordinates in the same entry are worldX=3018, worldY=3955. Applying the standard OSRS Wilderness level formula -- floor((Y - 3520) / 8) + 1 -- yields floor((3955 - 3520) / 8) + 1 = floor(54.375) + 1 = 55. Cross-checked against the Pirates' Hideout wiki page, which places the hideout building (slightly east of the ship) at Wilderness level 54. The ship is one level deeper still at level 55. 'Level 39' is mid-Wilderness and is categorically wrong for this location. The finding's proposed fix of 'level 54' is also slightly imprecise -- the chest coordinates resolve to level 55 -- but the core finding (level 39 is wrong; the chest is in deep Wilderness ~54-55) is confirmed. Note: the finding's receipt ('Wilderness level: 54') is from the Pirates' Hideout page (the building), not the chest's own page, which does not state a Wilderness level number. The authoritative anchor is the chest's own worldY=3955 coordinate, which the data entry itself provides.
+
+## Superior Slayer Monster
+
+### [medium] C3: The claim that Slayer level 5 is the minimum to receive any task is wrong. Turael (and Spria) have no Slayer level requirement, so tasks can be received at level 1. Level 5 is the minimum Slayer level required to kill a Crawling Hand (the lowest monster with a superior variant), not to receive any task. The guidance step conflates the lowest superior-unlock monster requirement with a universal task-receiving minimum.
+
+- **Data says:** Slayer level 5 is the minimum to receive any task
+- **Wiki says (raw):** All but two Slayer Masters have a Combat level requirement, and the final Slayer Master also has a Slayer level requirement. [Turael has None listed under requirements, meaning tasks are available at level 1 Slayer.]
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Slayer
+- **Suggested fix:** Change 'Slayer level 5 is the minimum to receive any task' to 'Slayer level 5 is the minimum required to kill a Crawling Hand, the lowest monster with a superior variant'.
+- **Skeptic receipt:** Wiki (https://oldschool.runescape.wiki/w/Slayer_Masters): "They have no minimum combat or Slayer level requirements before players may receive assignments." [Turael/Spria row: Combat=None, Slayer=None, Quest=None]. Wiki (https://oldschool.runescape.wiki/w/Crawling_Hand): "require level 5 Slayer to kill." Wiki (https://oldschool.runescape.wiki/w/Superior_slayer_monster): Lowest superior is Crushing Hand at Slayer level 5 (from Crawling Hand). Data text (drop_rates.json:13582): "Slayer level 5 is the minimum to receive any task"
+- **Skeptic reasoning:** The guidance step at drop_rates.json line 13582 states: "Slayer level 5 is the minimum to receive any task." This is factually wrong. The OSRS Wiki Slayer Masters page confirms Turael and Spria have no Slayer level requirement: "They have no minimum combat or Slayer level requirements before players may receive assignments." Tasks are available at Slayer level 1. Slayer level 5 is the minimum to *kill* a Crawling Hand -- which is the lowest monster with a superior variant (its superior is the Crushing Hand) -- not the minimum to receive any task. The guidance text conflates a monster kill requirement with a task-receiving minimum. The fix is narrow: change the sentence to correctly describe why level 5 is relevant in this context (i.e., it is the Slayer level required to kill a Crawling Hand, the lowest superior-variant monster), rather than misstate it as a universal task-receiving floor.
+
+## Zombie Pirate Locker
+
+### [medium] C3: The guidance says keys are dropped 'on the ship,' but the wiki specifies keys are dropped by zombie pirates at the Chaos Temple. The ship is where the lockers are, not where the key-dropping zombie pirates are farmed. There is only a lone single zombie pirate NPC at the shipwreck; the main population (and key drops) are at the temple.
+
+- **Data says:** Zombie pirate keys are dropped by zombie pirates on the ship
+- **Wiki says (raw):** Zombie pirate keys are dropped by zombie pirates found at the Wilderness Chaos Temple. They are used to open the pirates' lockers on the shipwreck located on the coast east of the Chaos Temple.
+- **Wiki URL:** https://oldschool.runescape.wiki/w/Zombie_pirate_key
+- **Suggested fix:** Change to: 'Zombie pirate keys are dropped by zombie pirates at the Chaos Temple' (or similar), making clear the key-farming happens at the temple, not on the ship.
+- **Skeptic receipt:** wiki_lookup 'Zombie pirate key': "Zombie pirate keys are dropped by zombie pirates found at the Wilderness Chaos Temple. They are used to open the pirates' lockers on the shipwreck located on the coast east of the Chaos Temple."
+- **Skeptic reasoning:** The guidance text at line 13624 reads: "Bring zombie pirate keys dropped by zombie pirates on the ship." The phrase 'on the ship' unambiguously places the key-dropping zombie pirates at the shipwreck. The wiki is explicit that keys are dropped at the Chaos Temple, not on the ship: 'Zombie pirate keys are dropped by zombie pirates found at the Wilderness Chaos Temple. They are used to open the pirates' lockers on the shipwreck located on the coast east of the Chaos Temple.' The ship is where the lockers are opened; the temple is where keys are farmed. The guidance text inverts this, sending the player to farm keys at the wrong location.
+
+Tranche 3 total: 65 confirmed findings.
