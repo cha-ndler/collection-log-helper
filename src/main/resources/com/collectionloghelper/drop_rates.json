@@ -12357,7 +12357,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Stalker Den entrance south of Custodia Pass, Varlamore (fairy ring AIS to Auburnvale, run south). Requires Shadows of Custodia quest. Bring melee gear and food; Elder Custodian Stalkers apply a Bleed effect from infected spore patches - no key required to enter",
+        "description": "Travel to the Stalker Den entrance south of Custodia Pass, Varlamore (fairy ring AIS to Auburnvale, run south). Requires Shadows of Custodia quest. Bring melee gear and food; Elder Custodian Stalkers apply a Bleed via a targeted spore attack - no key required to enter",
         "worldX": 1324,
         "worldY": 3364,
         "worldPlane": 0,
@@ -12383,7 +12383,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Custodian Stalkers. Protect from Melee; Elder variants apply a Bleed - move off infected spore patches when they appear. Cannon works in the multi-combat south-western area. Higher-tier variants (mature, elder) have better rates on Antler guard and Alchemist's signet",
+        "description": "Kill Custodian Stalkers. Protect from Melee; at 20% HP Elder variants douse the player in spores (targeted Bleed attack) - use Protect from Magic to block it or heal through the 9 damage. Cannon works in the multi-combat south-western area. Elder/Ancient variants have better rates on Antler guard and are the only sources of Alchemist's signet; mature drops Antler guard at a lower rate and does not drop Alchemist's signet",
         "worldX": 1301,
         "worldY": 9820,
         "worldPlane": 0,
