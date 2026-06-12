@@ -10937,13 +10937,13 @@
         "wikiPage": "Earthbound_tecpatl"
       }
     ],
-    "locationDescription": "Tonali Cavern, beneath Cam Torum, Varlamore",
-    "travelTip": "Quetzal whistle -> Cam Torum -> Tonali Cavern entrance",
+    "locationDescription": "Tonali Cavern, beneath the Crypt of Tonali, Tlati Rainforest, Varlamore",
+    "travelTip": "Quetzal whistle -> Kastori -> run west to Tonali Cavern entrance",
     "npcId": 14420,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank and prepare for Earthen Nagua. Bring melee or ranged gear; they are spectral undead so Salve amulet (ei) outperforms Slayer helmet on task. No consumable key required",
+        "description": "Bank and prepare for Earthen Nagua. Bring melee or ranged gear; use Slayer helmet on task. No consumable key required",
         "worldX": 3087,
         "worldY": 3493,
         "worldPlane": 0,
@@ -10952,13 +10952,13 @@
         "section": "Bank"
       },
       {
-        "description": "Use the quetzal whistle to travel to Cam Torum in Varlamore, then enter the Tonali Cavern beneath the city",
+        "description": "Use the quetzal whistle to travel to Kastori in Varlamore, then run west to the Tonali Cavern entrance beneath the Crypt of Tonali",
         "worldX": 1309,
         "worldY": 3104,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Quetzal whistle -> Cam Torum -> Tonali Cavern entrance",
+        "travelTip": "Quetzal whistle -> Kastori -> run west to Tonali Cavern entrance",
         "section": "Travel"
       },
       {
@@ -10971,7 +10971,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Earthen Nagua. Protect from Melee; spectral undead weak to slash. Salve amulet (ei) gives a stronger damage bonus than Slayer helmet on task. No phase mechanics or special attacks",
+        "description": "Kill Earthen Nagua. Protect from Melee; weak to Air (15%). Use slash above 60% HP; below 60% HP nagua reinforces and shifts weaker to crush, more resistant to slash. Use Slayer helmet on task",
         "worldX": 1309,
         "worldY": 9450,
         "worldPlane": 0,
