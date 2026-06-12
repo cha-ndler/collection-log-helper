@@ -4385,7 +4385,7 @@
       }
     ],
     "locationDescription": "Waterbirth Island, Rellekka",
-    "travelTip": "Lunar Isle tele -> Rellekka",
+    "travelTip": "Waterbirth Teleport (Lunar spellbook) -> Waterbirth Island",
     "mutuallyExclusiveSources": [
       "Dagannoth Rex",
       "Dagannoth Prime"
@@ -4394,7 +4394,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Waterbirth Island via Rellekka docks (1,000 gp without The Fremennik Trials) or Lunar Isle teleport",
+        "description": "Travel to Waterbirth Island via Rellekka docks (1,000 gp without The Fremennik Trials) or Waterbirth Teleport (Lunar spellbook)",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -4403,8 +4403,8 @@
         "conditionalAlternatives": [
           {
             "requirements": { "diaries": ["FREMENNIK_HARD"] },
-            "description": "Rub the enchanted lyre to teleport directly to Rellekka, then take Jarvald's boat to Waterbirth Island for free. Hard Fremennik Diary removes the 1,000 gp boat fee.",
-            "travelTip": "Enchanted lyre -> Rellekka -> free Jarvald boat (Hard Fremennik Diary)"
+            "description": "Rub the enchanted lyre to teleport directly to Waterbirth Island. Hard Fremennik Diary adds Waterbirth Island as a lyre teleport destination, skipping the boat entirely.",
+            "travelTip": "Enchanted lyre -> Waterbirth Island (Hard Fremennik Diary)"
           }
         ]
       },
@@ -4416,7 +4416,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Dagannoth Supreme. Supreme attacks ONLY with Ranged - keep Protect from Missiles on at all times. Supreme is weak to stab/slash and Melee is the strongest style here; Dragon scimitar, abyssal whip, or osmumten's fang with Bandos armour clears him fastest. His ranged attack hits everyone facing him, so position yourself so other players don't catch the splash. Spinolyps in the moat poison; bring antidote++",
+        "description": "Kill Dagannoth Supreme. Supreme attacks ONLY with Ranged - keep Protect from Missiles on at all times. Supreme is weak to Melee (stab, slash, and crush equally); Dragon scimitar, abyssal whip, or osmumten's fang with Bandos armour clears him fastest. His ranged attack hits everyone facing him, so position yourself so other players don't catch the splash. Spinolyps in the moat poison; bring antidote++",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
