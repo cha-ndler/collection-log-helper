@@ -6153,7 +6153,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Use Xeric's talisman to teleport to Mount Quidamortem, or use the Raids board outside. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Vasa/Vespula, and a Dragon claws or Bandos godsword spec for Olm head phases",
+        "description": "Use Xeric's talisman to teleport to Mount Quidamortem, or use the Raids board outside. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Skeletal Mystics, and a Dragon claws or Bandos godsword spec for Olm head phases",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
@@ -6168,8 +6168,8 @@
                 "KOUREND_HARD"
               ]
             },
-            "description": "Kourend Hard diary: use the Xeric's Heart teleport inside Lovakengj to land roughly two tiles from the Chambers of Xeric prep room. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Vasa/Vespula, and a Dragon claws or Bandos godsword spec for Olm head phases",
-            "travelTip": "Kourend Hard: Xeric's Heart teleport (Lovakengj) -> 2 tiles to prep room"
+            "description": "Xeric's talisman -> Xeric's Honour to reach Mount Quidamortem summit, then run to the Chambers of Xeric entrance. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Skeletal Mystics, and a Dragon claws or Bandos godsword spec for Olm head phases",
+            "travelTip": "Xeric's talisman -> Xeric's Honour (Mount Quidamortem summit) -> run to CoX"
           },
           {
             "requirements": {
@@ -6177,7 +6177,7 @@
                 "XERICS_TALISMAN"
               ]
             },
-            "description": "POH mounted Xeric's talisman -> Xeric's Glade, then run south to the Chambers of Xeric entrance. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Vasa/Vespula, and a Dragon claws or Bandos godsword spec for Olm head phases",
+            "description": "POH mounted Xeric's talisman -> Xeric's Glade, then run south to the Chambers of Xeric entrance. Bring Tbow or Bow of faerdhinen, full brews/restores, Salve (ei) for Skeletal Mystics, and a Dragon claws or Bandos godsword spec for Olm head phases",
             "travelTip": "POH mounted Xeric's talisman -> Xeric's Glade -> run south to CoX"
           }
         ],
@@ -6200,7 +6200,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat the Great Olm. Use Protect from Magic against the green-orb attack and Protect from Missiles against crystal chunks; dodge the falling crystals and step out of the fire walls. Spec the head between phases and watch for the red/green/purple sphere swap",
+        "description": "Defeat the Great Olm. Use Protect from Missiles against the green sphere (accuracy) and Protect from Magic against the purple sphere (magical power); dodge falling crystals and step out of fire walls. Spec the head between phases and watch for the sphere swap",
         "worldX": 1233,
         "worldY": 3573,
         "worldPlane": 0,
