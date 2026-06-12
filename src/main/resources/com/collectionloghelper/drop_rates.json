@@ -1602,21 +1602,7 @@
         "worldY": 3940,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20,
-        "conditionalAlternatives": [
-          {
-            "requirements": {
-              "inventoryItemIdsAny": [
-                29271,
-                29273,
-                29275,
-                33120
-              ]
-            },
-            "description": "Right-click your Quetzal whistle (basic / enhanced / perfected / perfected-infinite) in the inventory and pick the Phantom Muspah destination to land directly at the Ancient Prison entrance, skipping the Weiss -> Ghorrock overland route",
-            "travelTip": "Inventory Quetzal whistle -> Phantom Muspah"
-          }
-        ]
+        "completionDistance": 20
       },
       {
         "description": "Run south through Ghorrock Dungeon and step onto the Ancient Prison entrance tile",
@@ -1627,7 +1613,7 @@
         "completionDistance": 12
       },
       {
-        "description": "Kill the Phantom Muspah. Ranged form (sitting) -> Protect from Missiles by default and swap to Protect from Magic the instant it stands up and charges the purple prayer-drain orb. Shielded/Melee form -> Protect from Magic. Dodge the cyan teleport heal-orbs (do NOT stand on the spike tile during a transformation), and Bow of faerdhinen / Tbow are the modern meta",
+        "description": "Kill the Phantom Muspah. Ranged form (sitting) -> Protect from Missiles by default and swap to Protect from Magic the instant it stands up and charges the purple prayer-drain orb. Shielded/Melee form -> Protect from Melee. Dodge spikes during form changes (do NOT stand on the spike tile during a transformation, as they heal Muspah on hit), and Bow of faerdhinen / Tbow are the modern meta",
         "worldX": 2846,
         "worldY": 3940,
         "worldPlane": 0,
