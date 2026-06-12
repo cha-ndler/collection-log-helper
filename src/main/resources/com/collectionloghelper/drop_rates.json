@@ -1739,7 +1739,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ghorrock Prison via the Weiss Salt Mine. Bring crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
+        "description": "Travel to Ghorrock Prison via the Weiss Salt Mine. Bring a slash weapon (scythe of vitur, emberlight, or soulreaper axe), Saradomin brews, super restores, and a pickaxe for the salt vents.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
@@ -1752,14 +1752,14 @@
                 28327
               ]
             },
-            "description": "Use Ring of Shadows -> Ghorrock Dungeon to teleport directly. Bring crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
+            "description": "Use Ring of Shadows -> Ghorrock Dungeon to teleport directly. Bring a slash weapon (scythe of vitur, emberlight, or soulreaper axe), Saradomin brews, super restores, and a pickaxe for the salt vents.",
             "travelTip": "Ring of Shadows -> Ghorrock Dungeon"
           }
         ],
         "section": "Travel"
       },
       {
-        "description": "Navigate through Ghorrock Prison to the Asylum stairs",
+        "description": "Navigate through Ghorrock Prison to the Asylum stairs. Watch for falling ice in the corridors near the second staircase - step off the shadow before it strikes.",
         "worldX": 2973,
         "worldY": 6440,
         "worldPlane": 2,
@@ -1778,7 +1778,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Duke Sucellus. Mine arder powder, musca powder and salax salt from the asylum vents, craft arder-musca poisons, then use Protect from Melee with crush weapons (Bandos godsword or Inquisitor's mace) since Duke resists slash and stab. Dodge the falling ice patches and stay clear of the gas vents.",
+        "description": "Kill Duke Sucellus. While Duke is asleep, mine arder powder, musca powder and salax salt from the asylum vents and craft arder-musca poisons to wake him. Use Protect from Melee with a slash weapon (Duke is weak to slash; crush weapons will frequently miss due to his high crush Defence). Stay clear of the gas vents.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
