@@ -8866,18 +8866,7 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
         "travelTip": "Crystal teleport seed -> Prifddinas, or Lletya teleport + run north",
-        "section": "Travel",
-        "conditionalAlternatives": [
-          {
-            "requirements": {
-              "pohTeleports": [
-                "FAIRY_RING"
-              ]
-            },
-            "description": "Spirit tree to Prifddinas, then run south-east to the Trahaearn mining area and enter Zalcano's chamber",
-            "travelTip": "Spirit tree -> Prifddinas -> run SE to Zalcano"
-          }
-        ]
+        "section": "Travel"
       },
       {
         "description": "Enter the Zalcano chamber portal. The group fight starts as soon as you arrive on the mining tiles - you can join in progress",
