@@ -23568,7 +23568,7 @@
       }
     ],
     "locationDescription": "Ruins of Mokhaiotl, beneath Tlati Rainforest in Varlamore",
-    "travelTip": "Quetzal whistle -> Mokhaiotl waystone, or Civitas illa Fortis lodestone",
+    "travelTip": "Mokhaiotl waystone -> direct teleport, or Quetzal whistle -> Tal Teklan then run east to the Tonali Cavern",
     "npcId": 14707,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -23589,13 +23589,13 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Ruins of Mokhaiotl beneath the Tlati Rainforest, Varlamore. Use a Mokhaiotl waystone for direct teleport, or Civitas illa Fortis lodestone and run west to the rainforest entrance",
+        "description": "Travel to the Ruins of Mokhaiotl, Varlamore. Use a Mokhaiotl waystone for a direct teleport, or take a Quetzal whistle to Tal Teklan and run east to the Tonali Cavern entrance",
         "worldX": 1311,
         "worldY": 9520,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Mokhaiotl waystone -> direct teleport, or Civitas illa Fortis -> run west",
+        "travelTip": "Mokhaiotl waystone -> direct teleport, or Quetzal whistle -> Tal Teklan, run east to the Tonali Cavern",
         "section": "Travel"
       },
       {
