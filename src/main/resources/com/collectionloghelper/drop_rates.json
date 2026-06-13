@@ -13588,7 +13588,7 @@
     "travelTip": "Burning amulet -> Bandit Camp",
     "guidanceSteps": [
       {
-        "description": "Travel to the zombie pirate ship east of the Chaos Temple (level 14 Wilderness). Bring zombie pirate keys dropped by zombie pirates on the ship.",
+        "description": "Travel to the zombie pirate ship east of the Chaos Temple (level 14 Wilderness). Bring zombie pirate keys dropped by zombie pirates at the Chaos Temple.",
         "worldX": 3373,
         "worldY": 3625,
         "worldPlane": 0,
