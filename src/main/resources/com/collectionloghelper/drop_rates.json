@@ -5809,7 +5809,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Xeric's talisman -> Heart, or Kourend lodestone + run south",
+        "travelTip": "Xeric's talisman -> Heart, or Kourend Castle Teleport (lands at the Catacombs entrance)",
         "section": "Travel"
       },
       {
