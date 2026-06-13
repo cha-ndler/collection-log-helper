@@ -23955,7 +23955,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Lumbridge. Required: 'The Ides of Milk' quest complete. Bring melee gear (any tier above mithril works - Brutus has low defence and ~200 HP), prayer potions, food, and a Lumbridge teleport. The Cow slippers / Bottomless milk bucket are joke drops with very low realistic engagement value, so cheap gear is fine",
+        "description": "Bank in Lumbridge. Required: 'The Ides of Milk' quest complete. Bring melee gear (any tier above mithril works - Brutus has low defence and only ~58 HP), prayer potions, food, and a Lumbridge teleport. The Cow slippers / Bottomless milk bucket are joke drops with very low realistic engagement value, so cheap gear is fine",
         "worldX": 3221,
         "worldY": 3219,
         "worldPlane": 0,
@@ -23981,7 +23981,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Brutus. Use Protect from Melee and attack with any decent melee weapon - Brutus is a straightforward fight with only a slam auto-attack and a low-damage stomp. Sip prayer potion every 4-5 kills. The fight is designed as a joke encounter for the Mooleta / Cow slippers cosmetic drops; do not waste BiS supplies",
+        "description": "Kill Brutus. Use Protect from Melee against the basic melee attack and hit with any decent melee weapon. Brutus also has two special attacks that each give you a few ticks to step out of the way - watch for the animation cue and move. Sip prayer potion every 4-5 kills. The fight is a low-stakes encounter for the Mooleta / Cow slippers cosmetic drops; do not waste BiS supplies",
         "worldX": 3263,
         "worldY": 3297,
         "worldPlane": 0,
