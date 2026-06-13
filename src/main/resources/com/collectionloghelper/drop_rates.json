@@ -12086,7 +12086,7 @@
       }
     ],
     "locationDescription": "Catacombs of Kourend",
-    "travelTip": "Xeric's talisman -> Xeric's Heart, or fairy ring CIS -> Kourend Castle then descend into the Catacombs",
+    "travelTip": "Xeric's talisman -> Xeric's Heart then enter Catacombs at King Rada I statue; or fairy ring CIS -> Demon's Run northeast entrance directly into the Catacombs",
     "npcId": 7272,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -12097,11 +12097,11 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Xeric's talisman -> Xeric's Heart, or fairy ring CIS -> Kourend Castle then descend",
+        "travelTip": "Xeric's talisman -> Xeric's Heart then enter Catacombs at King Rada I statue; or fairy ring CIS -> Demon's Run northeast entrance directly into the Catacombs",
         "section": "Travel"
       },
       {
-        "description": "Find the Twisted Banshees in the Catacombs of Kourend. Earmuffs or a slayer helmet are required or they hit hard.",
+        "description": "Find the Twisted Banshees in the Catacombs of Kourend. Without earmuffs or a slayer helmet, each attack deals 7 damage and heavily drains Attack, Strength, Defence, Ranged, Magic, Prayer, and Agility.",
         "worldX": 1612,
         "worldY": 9994,
         "worldPlane": 0,
