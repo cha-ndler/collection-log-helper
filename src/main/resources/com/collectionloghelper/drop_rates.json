@@ -23433,7 +23433,7 @@
       }
     ],
     "locationDescription": "Yama's Domain, Chasm of Fire beneath Shayzien",
-    "travelTip": "Chasm teleport scroll, or Xeric's talisman -> Heart -> south to chasm",
+    "travelTip": "Chasm teleport scroll -> Chasm of Fire",
     "npcId": 14176,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -23453,17 +23453,17 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Chasm of Fire beneath Shayzien, Varlamore. Use a chasm teleport scroll for the fastest route, or Xeric's talisman to Heart and run south",
+        "description": "Travel to the Chasm of Fire in north-west Shayzien, Great Kourend. Use a chasm teleport scroll for the fastest route",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Chasm teleport scroll (one-tick), or Xeric's talisman -> Heart -> run south through chasm",
+        "travelTip": "Chasm teleport scroll (one-tick) -> Chasm of Fire",
         "section": "Travel"
       },
       {
-        "description": "Form a party of 2-4 and enter Yama's instance. Solo is possible at endgame but DPS check is brutal; duo is the standard. Make sure all members have prayer pots and brews.",
+        "description": "Form a party of up to 2 (solo or duo) and enter Yama's instance. Solo is possible at endgame but the DPS check is brutal; duo is the standard. Make sure all members have prayer pots and brews.",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
