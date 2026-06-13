@@ -30079,7 +30079,7 @@
       }
     ],
     "locationDescription": "Fire Altar, north-east of Al Kharid",
-    "travelTip": "Ring of dueling -> Duel Arena (Al Kharid) -> run north-east to fire altar ruins; or Abyss (requires Enter the Abyss miniquest, omit glory/prayer for PvP danger)",
+    "travelTip": "Ring of dueling -> Emir's Arena (Al Kharid) -> run north-east to fire altar ruins; or Abyss (requires Enter the Abyss miniquest, omit glory/prayer for PvP danger)",
     "requirements": {
       "skills": [
         {
@@ -30090,13 +30090,13 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to the Fire Altar north-east of Al Kharid. Bring a fire tiara (wear it to enter freely) or a fire talisman. Equip a large pouch and medium pouch to carry more essence per trip. Ring of dueling to Duel Arena is the standard banking method - use it to teleport to Castle Wars bank between trips.",
+        "description": "Travel to the Fire Altar north-east of Al Kharid. Bring a fire tiara (wear it to enter freely) or a fire talisman. Equip a large pouch and medium pouch to carry more essence per trip. Ring of dueling to Emir's Arena is the standard banking method - use it to teleport to the Castle Wars or Ferox Enclave bank between trips.",
         "worldX": 2583,
         "worldY": 4838,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Ring of dueling -> Duel Arena -> run north-east to fire altar ruins",
+        "travelTip": "Ring of dueling -> Emir's Arena -> run north-east to fire altar ruins",
         "requiredItemIds": [
           6527
         ],
@@ -30221,7 +30221,7 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to Mudskipper Point. Fairy ring AIQ teleports to the Feldip area; run north-west to Mudskipper Point. Alternatively amulet of glory to Draynor Village then run south-west along the coast.",
+        "description": "Travel to Mudskipper Point. Fairy ring AIQ teleports directly to Mudskipper Point. Alternatively amulet of glory to Draynor Village then run south-west along the coast.",
         "worldX": 2987,
         "worldY": 3033,
         "worldPlane": 0,
@@ -31620,7 +31620,7 @@
     "travelTip": "Barbarian Outpost -> dive into whirlpool",
     "guidanceSteps": [
       {
-        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost (games necklace). Barbarian Fishing training is required to dive into the whirlpool.",
+        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost (games necklace). Barbarian Firemaking training (the pyre-ship part of the Barbarian Training miniquest) is required to dive into the whirlpool.",
         "worldX": 2512,
         "worldY": 3509,
         "worldPlane": 0,
@@ -31642,7 +31642,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill mithril dragons in the Ancient Cavern. Use extended antifire and Protect from Magic. Chewed bones unlock the Ourg bones prayer XP method. Ancient pages and Dragon full helm are the rarest drops.",
+        "description": "Kill mithril dragons in the Ancient Cavern. Use extended antifire and Protect from Magic. Chewed bones can be offered on a pyre ship for a chance at the Dragon full helm. Ancient pages and Dragon full helm are the rarest drops.",
         "worldX": 1745,
         "worldY": 5323,
         "worldPlane": 0,
@@ -32211,7 +32211,7 @@
     "travelTip": "Barbarian Outpost -> dive into whirlpool",
     "guidanceSteps": [
       {
-        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost (games necklace). Barbarian Fishing training is required to dive into the whirlpool.",
+        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost (games necklace). Barbarian Firemaking training (the pyre-ship part of the Barbarian Training miniquest) is required to dive into the whirlpool.",
         "worldX": 2512,
         "worldY": 3509,
         "worldPlane": 0,
