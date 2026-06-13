@@ -175,7 +175,7 @@ public class GuidanceStepTest
 	private static final int DRAGON_DEFENDER = 12954;
 
 	private static final String CYCLOPES_STATIC_DESC =
-		"Kill Cyclopes for defender drops. Each kill costs 10 warrior guild tokens";
+		"Kill Cyclopes for defender drops. Warrior guild tokens are spent on entry (10) and another 10 each minute inside the room";
 
 	/**
 	 * Verifies that resolveDescription returns the Iron defender override text
