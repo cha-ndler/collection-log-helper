@@ -4062,7 +4062,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Edgeville. Required: Giant key (farmed from hill giants in Edgeville Dungeon or Varrock Sewers - ~1/64 drop rate). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport. The fight is short but Obor hits ~25 with melee, so brews are wasteful here - sharks are sufficient",
+        "description": "Bank in Edgeville. Required: Giant key (farmed from hill giants in Edgeville Dungeon at ~1/128; rate is 1/64 only inside Wilderness). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport. The fight is short but Obor hits up to 22 with melee, so brews are wasteful here - sharks are sufficient",
         "worldX": 3093,
         "worldY": 3493,
         "worldPlane": 0,
@@ -4097,14 +4097,14 @@
                 19707
               ]
             },
-            "description": "Rub an Amulet of glory from your inventory and select Edgeville to land at the Edgeville bank, then run east to the dungeon trapdoor north of the bank.",
+            "description": "Rub an Amulet of glory from your inventory and select Edgeville to land at the Edgeville bank, then run east to the dungeon trapdoor south of the bank.",
             "travelTip": "Amulet of glory (inventory) -> Edgeville bank"
           }
         ],
         "section": "Bank"
       },
       {
-        "description": "Travel to the Edgeville Dungeon and descend to the hill giant area. Amulet of glory -> Edgeville then run east into the trapdoor north of the bank. The dungeon entrance puts you 8 tiles from Obor's gate",
+        "description": "Travel to the Edgeville Dungeon and descend to the hill giant area. Amulet of glory -> Edgeville then run east into the trapdoor south of the bank (ruined house). The dungeon entrance puts you 8 tiles from Obor's gate",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -4114,7 +4114,7 @@
         "section": "Travel"
       },
       {
-        "description": "Use the Giant key on the gate to enter Obor's lair. The key is consumed - each kill needs a fresh key, so per-trip farm rate is gated by hill giant key drops",
+        "description": "Use the Giant key on the gate to enter Obor's lair. The key is NOT consumed to open the gate. A key is consumed when you open the loot chest inside - one key per chest open, so per-trip farm rate is gated by hill giant key drops",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -4127,7 +4127,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Obor. Use Protect from Melee and attack with the strongest melee weapon available - Obor has weak defence but a 25-damage smash auto. Stand under him to bait the melee animation; he occasionally throws a small boulder for ~8 ranged damage that ignores Protect from Melee. Sip prayer potion every ~3 kills to keep Protect from Melee active",
+        "description": "Kill Obor. Use Protect from Missiles and attack with the strongest melee weapon available - Obor has weak defence. His melee max hit is 22; his ranged slam (boulder) max hit is 26 (13 with Protect from Missiles active). Stand with your back against a wall to limit knockback displacement from his slam attack. Sip prayer potion as needed to keep Protect from Missiles active",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -4145,7 +4145,7 @@
         ]
       },
       {
-        "description": "Teleport out via Amulet of glory after Obor dies. Restock a fresh Giant key + supplies before the next kill - the farm is bottlenecked by key drops, not by trip duration",
+        "description": "Teleport out via Amulet of glory after Obor dies. Restock a Giant key + supplies before the next kill - one key is consumed when opening the loot chest, so the farm is bottlenecked by key drops, not by trip duration",
         "worldX": 3093,
         "worldY": 3493,
         "worldPlane": 0,
