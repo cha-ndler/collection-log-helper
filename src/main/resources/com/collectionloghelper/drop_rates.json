@@ -13289,7 +13289,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to Darkmeyer. Drakan's medallion to Darkmeyer is the fastest route; Canifis lodestone + walk south is the fallback if the medallion is unequipped.",
+        "description": "Travel to Darkmeyer. Drakan's medallion to Darkmeyer is the fastest route (every player with Darkmeyer access has the medallion from Sins of the Father).",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
@@ -13298,7 +13298,7 @@
         "requiredItemIds": [
           22400
         ],
-        "travelTip": "Drakan's medallion -> Darkmeyer, or Canifis lodestone + walk south",
+        "travelTip": "Drakan's medallion -> Darkmeyer",
         "section": "Travel"
       },
       {
