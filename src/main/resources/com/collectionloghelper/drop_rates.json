@@ -20861,7 +20861,7 @@
         "section": "Bank"
       },
       {
-        "description": "Kill monsters in the Catacombs for dark totem pieces (base, middle, top - each 1/500 from any monster). Burying bones restores Prayer. Popular Slayer tasks here include abyssal demons, nechryaels, dark beasts, and skeletal wyverns. Combine Slayer trips with totem piece hunting for efficient farming.",
+        "description": "Kill monsters in the Catacombs for dark totem pieces (base, middle, top - each 1/500 from any monster). Burying bones restores Prayer. Popular Slayer tasks here include abyssal demons, nechryaels, hellhounds, and brutal black dragons. Combine Slayer trips with totem piece hunting for efficient farming.",
         "worldX": 1664,
         "worldY": 10050,
         "worldPlane": 0,
@@ -20897,7 +20897,7 @@
       }
     ],
     "locationDescription": "God Wars Dungeon entrance in the Wilderness (level 28 Wilderness)",
-    "travelTip": "Cemetery teleport (Arceuus) -> run east; or Dareeyak teleport (Desert Treasure I) -> run south",
+    "travelTip": "Cemetery teleport (Arceuus) -> run east; or Dareeyak teleport (Desert Treasure I) -> run north-east",
     "waypoints": [
       {
         "description": "Arceuus spellbook required: cast Cemetery Teleport and run east to the cave entrance.",
@@ -21341,7 +21341,7 @@
     "travelTip": "Varies by item - see step description",
     "guidanceSteps": [
       {
-        "description": "The Miscellaneous tab collects items with no dedicated source. Key items and primary sources: Big bass/swordfish/shark (big-net fishing or Fishing Trawler), Long/curved bone (giant/big bones drops), Giant key (Hill Giants), Mossy key (Moss Giants), Xeric's talisman (Lizardmen Brutes/Shamans), Mining gloves set (Mining Guild shop), Herbi (Herbiboar), Merfolk trident (Tempoross), Dragon metal pieces (Vorkath). Check each item's Wiki page for its specific drop source.",
+        "description": "The Miscellaneous tab collects items with no dedicated source. Key items and primary sources: Big bass/swordfish/shark (big-net fishing or Fishing Trawler), Long/curved bone (giant/big bones drops), Giant key (Hill Giants), Mossy key (Moss Giants), Xeric's talisman (Lizardmen Brutes/Shamans), Mining gloves set (Mining Guild shop), Herbi (Herbiboar), Merfolk trident (Mairin's Market, Fossil Island - 400 mermaid's tears), Dragon metal slice/lump (Adamant/Rune Dragons). Check each item's Wiki page for its specific drop source.",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
@@ -21676,13 +21676,13 @@
     "travelTip": "Lassar teleport -> Ice Mountain -> Camdozaal",
     "guidanceSteps": [
       {
-        "description": "Travel to the Ruins of Camdozaal beneath Ice Mountain. Cast Lassar Teleport (Ancient Magicks, requires Desert Treasure I), then run south to the Ice Mountain entrance. Alternatively, use amulet of glory to Edgeville and run east to Ice Mountain.",
+        "description": "Travel to the Ruins of Camdozaal beneath Ice Mountain. Cast Lassar Teleport (Ancient Magicks, requires Desert Treasure I) to the top of Ice Mountain, then head down the west side to the Camdozaal entrance (Level 68 Agility shortcut available). Alternatively, use amulet of glory to Edgeville and run west to Ice Mountain.",
         "worldX": 3012,
         "worldY": 3451,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Lassar teleport -> Ice Mountain; or glory -> Edgeville -> run east",
+        "travelTip": "Lassar teleport -> Ice Mountain; or glory -> Edgeville -> run west",
         "section": "Travel"
       },
       {
@@ -21802,7 +21802,7 @@
       }
     ],
     "locationDescription": "Colossal Wyrm Agility Course in Avium Savannah, Varlamore",
-    "travelTip": "Quetzal transport whistle -> Civitas illa Fortis, run south-west to Avium Savannah; or Colossal wyrm teleport scroll (purchased from Telia)",
+    "travelTip": "Quetzal transport whistle -> Civitas illa Fortis, run south-west to Avium Savannah; or Colossal wyrm teleport scroll (bought from Worm Tongue for 40 termites, or the Grand Exchange)",
     "guidanceSteps": [
       {
         "description": "Travel to the Colossal Wyrm Agility Course in Avium Savannah, Varlamore. Requires Children of the Sun and 50 Agility. Use the quetzal transport whistle to Civitas illa Fortis then run south-west, or use a Colossal wyrm teleport scroll.",
@@ -21826,7 +21826,7 @@
         ]
       },
       {
-        "description": "Complete laps of the Colossal Wyrm Agility Course for Varlamore marks of grace and termite currency. Collect marks when they appear on obstacles - they despawn after 10 minutes. Spend marks at Telia for Varlamore graceful pieces and Calcified acorns. Higher Agility level increases lap speed and mark rate.",
+        "description": "Complete laps of the Colossal Wyrm Agility Course to earn termites (the course's currency). Spend termites at Worm Tongue's Wares for the Graceful crafting kit (re-skins graceful to the Varlamore theme) and Calcified acorns. Higher Agility level increases lap speed and termite rate.",
         "worldX": 1652,
         "worldY": 2931,
         "worldPlane": 0,
@@ -21930,7 +21930,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to your best rooftop course. Seers' Village (60+ Agility, Camelot teleport) gives the most marks per hour. Use Varrock (10+), Canifis (40+), Falador (50+), or Pollnivneach (70+) depending on your level.",
+        "description": "Travel to your best rooftop course. Canifis (40+ Agility) gives the most marks per hour thanks to its higher spawn rate; Seers' Village (60+, Camelot teleport) is best for Agility XP. Lower-level options: Varrock (30+), Falador (50+), or Pollnivneach (70+).",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
@@ -21940,7 +21940,7 @@
         "section": "Travel"
       },
       {
-        "description": "Complete rooftop agility laps. Collect marks of grace when they appear on the course - they despawn after 10 minutes. Equipping graceful reduces run drain by 30% per piece. Aim for the highest-level course available to maximise marks per hour.",
+        "description": "Complete rooftop agility laps. Collect marks of grace when they appear on the course - they despawn after 10 minutes. The full graceful outfit increases run energy restoration by 30% (about +3-4% per piece plus a 10% full-set bonus). Aim for the highest-level course available to maximise marks per hour.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
@@ -22196,7 +22196,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Cyclopes for defender drops. Each kill costs 10 warrior guild tokens. Hold the current tier defender in inventory to unlock the next tier. Protect from Melee recommended.",
+        "description": "Kill Cyclopes for defender drops. Warrior guild tokens are spent on entry (10) and another 10 each minute inside the room - bring a large supply. Hold the current tier defender in inventory to unlock the next tier. Protect from Melee recommended.",
         "perItemStepDescription": {
           "8844": "Kill Cyclopes (no prerequisite) to receive a Bronze defender and start the chain.",
           "8845": "Kill Cyclopes while holding a Bronze defender in inventory to receive an Iron defender.",
@@ -24342,7 +24342,7 @@
         ]
       },
       {
-        "description": "Defeat TzTok-Jad on wave 63. Pray Protect from Missiles when he rears back (ranged attack) and Protect from Magic when he stomps (magic attack); the cue is roughly 3 ticks before the projectile lands. When he hits half HP, 4 Yt-HurKot healers spawn - kill them or aggro them off Jad to stop the heal cycle. Stand on the Italy Rock (the rock that looks like a boot) to deny line-of-sight from a healer wave if you get overwhelmed.",
+        "description": "Defeat TzTok-Jad on wave 63. Pray Protect from Missiles when he slams/stomps his front legs (ranged attack) and Protect from Magic when he rears up and dangles his front legs (magic attack); the cue is roughly 3 ticks before the projectile lands. When he hits half HP, 4 Yt-HurKot healers spawn - kill them or aggro them off Jad to stop the heal cycle. Stand on the Italy Rock (the rock that looks like a boot) to deny line-of-sight from a healer wave if you get overwhelmed.",
         "worldX": 2401,
         "worldY": 5093,
         "worldPlane": 0,
@@ -24583,7 +24583,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Deranged Archaeologist. Use Protect from Missiles to negate the basic ranged auto. When the 'Learn to read!' overhead text appears, step 2+ tiles within 2 ticks to dodge the book rain - same mechanic as Crazy archaeologist but the splash zone is slightly smaller. This is a popular early-account boss for the Fedora cosmetic and the Steel ring slayer-task drop",
+        "description": "Kill the Deranged Archaeologist. Use Protect from Missiles to negate the basic ranged auto. When the 'Learn to read!' overhead text appears, step 2+ tiles within 2 ticks to dodge the book rain - same mechanic as Crazy archaeologist but the splash zone is slightly smaller. This is a popular early-account boss for the Steel ring slayer-task drop. (Note: the Fedora is dropped by the Crazy Archaeologist in the Wilderness, not the Deranged Archaeologist.)",
         "worldX": 3683,
         "worldY": 3706,
         "worldPlane": 0,
