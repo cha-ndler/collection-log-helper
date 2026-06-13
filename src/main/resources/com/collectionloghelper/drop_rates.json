@@ -24081,7 +24081,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to The Great Conch and locate the Shellbane Gryphon Cave entrance on the eastern beach. Quetzal whistle -> Great Conch then run east to the cliff-side cave mouth",
+        "description": "Travel to The Great Conch and locate the Shellbane Gryphon Cave entrance in the centre of the island, north of fairy ring CJQ. Take fairy ring CJQ or a Quetzal whistle to The Great Conch, then head north to the cave entrance",
         "worldX": 13993,
         "worldY": 9901,
         "worldPlane": 0,
@@ -24119,7 +24119,7 @@
         ]
       },
       {
-        "description": "Pick up the Gryphon feather (1/kill) and any rares, then exit the cave and teleport via Quetzal whistle to restock. Belle's folly (tarnished) is the main unique chase at 1/256",
+        "description": "Pick up the Gryphon feathers (7-10 guaranteed per kill) and any rares, then exit the cave and teleport via Quetzal whistle to restock. Belle's folly (tarnished) is the main unique chase at 1/256",
         "worldX": 1626,
         "worldY": 3093,
         "worldPlane": 0,
