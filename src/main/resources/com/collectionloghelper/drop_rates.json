@@ -5154,14 +5154,14 @@
                 2566
               ]
             },
-            "description": "Rub a Ring of dueling from your inventory and select Ferox Enclave to bank instantly, restock the cheap kit, and recharge amulets at the fountain before entering the Wilderness.",
+            "description": "Rub a Ring of dueling from your inventory and select Ferox Enclave to bank instantly and restock the cheap kit before entering the Wilderness.",
             "travelTip": "Ring of dueling (inventory) -> Ferox Enclave bank"
           }
         ],
         "section": "Bank"
       },
       {
-        "description": "Travel to the Chaos Fanatic camp in the Wilderness (level 42). Burning amulet -> Lava Maze then run south-west past the lava pits, or web-walk via the Mage of Zamorak teleport (Lvl-60 Magic). Watch for PKers along the canyon corridor",
+        "description": "Travel to the Chaos Fanatic camp in the Wilderness (level 42). Burning amulet -> Lava Maze, run south-west past the lava pits. Alternatively, cast Ghorrock Teleport or use a POH obelisk (hard Wilderness Diary) to select level 44 Wilderness. Watch for PKers along the canyon corridor",
         "worldX": 2979,
         "worldY": 3846,
         "worldPlane": 0,
@@ -5171,7 +5171,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Chaos Fanatic. Use Protect from Magic and stand 1-2 tiles away (range is fine) - the multi-hit projectile splash deals 4-12 if you cluster with the spawn point. The boss has a self-damage tantrum animation that briefly stuns it; capitalise with a special attack. Logout on the south rocks if a PKer triggers",
+        "description": "Kill the Chaos Fanatic. Use Protect from Magic. Move away from the green AoE projectile landing spot to avoid the explosion. The boss can disarm your weapon or shield (like Chaos Elemental); keep a spare equipped or in inventory. Logout on the south rocks if a PKer triggers",
         "worldX": 2979,
         "worldY": 3846,
         "worldPlane": 0,
@@ -5189,7 +5189,7 @@
         ]
       },
       {
-        "description": "Stash drops in the looting bag and teleport via burning amulet or glory. Recharge amulets at Ferox Enclave fountain and bank loot from the looting bag before the next trip",
+        "description": "Stash drops in the looting bag and teleport via burning amulet or glory. Bank loot from the looting bag at Ferox Enclave before the next trip",
         "worldX": 3151,
         "worldY": 3635,
         "worldPlane": 0,
