@@ -32295,7 +32295,7 @@
         "section": "Travel"
       },
       {
-        "description": "Accept and complete port tasks from the Port Notice Board. Completing tasks rewards Sailing XP and occasionally unique items: Soup (1/4,500 task reward) and Shark paint (1/36 salvage reward). Tasks are repeatable and vary by port and Sailing level.",
+        "description": "Accept and complete port tasks from the Port Notice Board. Completing tasks rewards Sailing XP and occasionally unique items: Soup (1/4,500 task reward) and Shark paint (port task reward). Tasks are repeatable and vary by port and Sailing level.",
         "worldX": 3055,
         "worldY": 3245,
         "worldPlane": 0,
