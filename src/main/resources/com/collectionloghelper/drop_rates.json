@@ -12002,13 +12002,13 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Asgarnian Ice Dungeon. Fairy ring AIQ to Mudskipper Point and run south is the fastest route; Port Sarim charter + run south is the unfairy-ring fallback.",
+        "description": "Travel to the Asgarnian Ice Dungeon. Fairy ring AIQ to Mudskipper Point and run north-east is the fastest route; Port Sarim charter + run south is the unfairy-ring fallback.",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Fairy ring AIQ -> Mudskipper Point, then run south to the dungeon entrance",
+        "travelTip": "Fairy ring AIQ -> Mudskipper Point, then run north-east to the dungeon entrance",
         "section": "Travel"
       },
       {
