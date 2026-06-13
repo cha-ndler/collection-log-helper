@@ -59,6 +59,14 @@ final class GuidanceTargetMarker
 	private static final int SIZE = 26;
 
 	/**
+	 * Blanket downscale applied to the resolved marker image so it sits above a
+	 * target without dominating small NPCs/objects. The native collection-log
+	 * item sprite is ~36x32; 0.6 brings it to a compact ~22x19. Scaled once on
+	 * load and cached, so the render hot path stays allocation-free.
+	 */
+	private static final float MARKER_SCALE = 0.75f;
+
+	/**
 	 * Default z-offset lifting the marker above the target, in LOCAL HEIGHT
 	 * UNITS (the {@code zOffset} of
 	 * {@link Perspective#getCanvasImageLocation}), not screen pixels. Suits
@@ -80,6 +88,10 @@ final class GuidanceTargetMarker
 	/** Real collection-log book sprite, lazily resolved from {@link ItemManager}. */
 	@Nullable
 	private BufferedImage sprite;
+
+	/** {@link #MARKER_SCALE}-downscaled copy of {@link #sprite}, built once on load. */
+	@Nullable
+	private BufferedImage scaledSprite;
 
 	/** True once {@link #sprite} has finished loading and is safe to blit. */
 	private volatile boolean spriteReady;
@@ -129,9 +141,9 @@ final class GuidanceTargetMarker
 	 */
 	private BufferedImage resolveImage()
 	{
-		if (spriteReady && sprite != null)
+		if (spriteReady && scaledSprite != null)
 		{
-			return sprite;
+			return scaledSprite;
 		}
 		if (sprite == null && itemManager != null)
 		{
@@ -146,7 +158,37 @@ final class GuidanceTargetMarker
 				spriteReady = true;
 			}
 		}
-		return spriteReady && sprite != null ? sprite : glyph;
+		if (spriteReady && sprite != null)
+		{
+			// Build the downscaled copy once, on the client thread (render), after
+			// the async pixels have filled in. Cached so the hot path never scales.
+			if (scaledSprite == null)
+			{
+				scaledSprite = scale(sprite, MARKER_SCALE);
+			}
+			return scaledSprite;
+		}
+		return glyph;
+	}
+
+	/** Smoothly downscale {@code src} by {@code factor} into a fresh ARGB image. */
+	private static BufferedImage scale(BufferedImage src, float factor)
+	{
+		int w = Math.max(1, Math.round(src.getWidth() * factor));
+		int h = Math.max(1, Math.round(src.getHeight() * factor));
+		BufferedImage dst = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = dst.createGraphics();
+		try
+		{
+			g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+			g.drawImage(src, 0, 0, w, h, null);
+		}
+		finally
+		{
+			g.dispose();
+		}
+		return dst;
 	}
 
 	/**
