@@ -9279,7 +9279,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Araxxor. Bring Saradomin brews, super restores, and combat potions; mage gear for path 1 (Aviansie/Spitting), melee tank for path 2 (Mirror), ranged for path 3 (Minions). A salve amulet (ei) and crush weapon (Inquisitor's mace, Soulreaper axe, or Scythe) are the standard meta picks.",
+        "description": "Bank for Araxxor. Bring Saradomin brews, super restores, and combat potions. Use melee (scythe, Inquisitor's mace, or Soulreaper axe) or ranged; bring a halberd for mirrorback araxytes. Saradomin brews and super restores for sustain.",
         "worldX": 3087,
         "worldY": 3493,
         "worldPlane": 0,
@@ -9303,7 +9303,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the Araxyte hive and descend to the Araxxor arena. The first encounter is randomly assigned one of three paths; subsequent kills cycle through the remaining two",
+        "description": "Enter the Araxyte hive and descend to the Araxxor arena. Each fight, eggs hatch in one of three fixed patterns (Green>White>Red, White>Red>Green, or Red>Green>White) determining which araxyte type spawns first.",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
@@ -9314,7 +9314,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Araxxor. Three rotating paths: Path 1 (Aviansie) - use magic to break acid spitting; Path 2 (Mirror) - tank with Protect from Melee and high def, ignore the reflection; Path 3 (Minions) - kill spiderlings before they reach you. Phase 4 (final) requires Protect from Magic, dodge the web cocoon special, and pop minions with chinchompas if you brought them. Sip super combat / overload between phases.",
+        "description": "Kill Araxxor. Acidic araxytes (green eggs) explode into acid pools on death - kill them quickly and avoid the pools. Mirrorback araxytes (white eggs) recoil 50% of melee damage - attack with ranged, magic, or a halberd from one tile away to ignore the deflection. Ruptura araxytes (red eggs) spawn spiderlings - kill them before they reach you. Phase 4 enrage: Araxxor replaces melee with a 1x3 cleave attack; use Protect from Melee to reduce damage and stand under Araxxor to shrink the cleave to 1x1. Sip super combat between phases.",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
