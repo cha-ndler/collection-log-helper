@@ -29728,8 +29728,8 @@
         "wikiPage": "Rocky"
       }
     ],
-    "locationDescription": "Draynor Village seed market, or Hosidius seed stall (no guard aggression)",
-    "travelTip": "Amulet of glory -> Draynor Village; or Tithe Farm teleport -> Hosidius seed stall for safer thieving",
+    "locationDescription": "Draynor Village seed stall",
+    "travelTip": "Amulet of glory -> Draynor Village",
     "requirements": {
       "skills": [
         {
@@ -29740,17 +29740,17 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to a seed stall. Draynor Village (Amulet of glory) is accessible early; Hosidius seed stall (Kourend) has no market guard and is preferred at higher levels. The Rocky pet is the only collection log drop from seed stalls.",
+        "description": "Travel to the Draynor Village seed stall (Amulet of glory). It is the only thievable seed stall - the Hosidius seed stall is decorative scenery and cannot be stolen from. The Rocky pet is the only collection log drop from seed stalls.",
         "worldX": 3080,
         "worldY": 3252,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Amulet of glory -> Draynor Village; or Tithe Farm teleport -> Hosidius seed stall",
+        "travelTip": "Amulet of glory -> Draynor Village",
         "section": "Travel"
       },
       {
-        "description": "Steal from seed stalls (27 Thieving required). At Draynor, dodge the market guard to avoid being stunned - click an adjacent stall or move away when the guard faces you. At Hosidius there is no guard. Rocky pet chance is approximately 1/34,000 per steal at base rate.",
+        "description": "Steal from the Draynor Village seed stall (27 Thieving required). Dodge the market guard to avoid being stunned - click an adjacent stall or move away when the guard faces you. Rocky pet chance is approximately 1/34,000 per steal at base rate.",
         "worldX": 3080,
         "worldY": 3252,
         "worldPlane": 0,
