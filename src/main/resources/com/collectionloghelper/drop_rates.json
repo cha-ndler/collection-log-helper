@@ -3779,7 +3779,7 @@
           9920,
           0
         ],
-        "travelTip": "Xeric's talisman -> Heart, or Hosidius lodestone + run north",
+        "travelTip": "Xeric's talisman -> Heart, then run to the Forthos Ruins",
         "requiredItemIds": [
           23528,
           6685,
@@ -3803,7 +3803,7 @@
                 18465
               ]
             },
-            "description": "Rub the Xeric's talisman in your inventory and pick Xeric's Heart, then run south-east to the Forthos trapdoor north of Hosidius - faster than the Hosidius lodestone overland route",
+            "description": "Rub the Xeric's talisman in your inventory and pick Xeric's Heart, then run south-east to the Forthos trapdoor north of Hosidius",
             "travelTip": "Inventory Xeric's talisman -> Heart -> run south-east to Forthos trapdoor"
           }
         ],
@@ -5809,7 +5809,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Xeric's talisman -> Heart, or Kourend lodestone + run south",
+        "travelTip": "Xeric's talisman -> Heart, or Kourend Castle Teleport (lands at the Catacombs entrance)",
         "section": "Travel"
       },
       {
@@ -23840,7 +23840,7 @@
       }
     ],
     "locationDescription": "Ruins of Tapoyauik, Varlamore",
-    "travelTip": "Quetzal whistle -> Tapoyauik, or Civitas illa Fortis lodestone",
+    "travelTip": "Quetzal whistle -> Tapoyauik, or Civitas illa Fortis Teleport (standard spell)",
     "npcId": 13685,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -23859,7 +23859,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Ruins of Tapoyauik, Varlamore. Use a quetzal whistle to fly directly to the ruins, or Civitas illa Fortis lodestone and run south. Pendant of ates teleport (uncharged drops from Amoxliatl) skips the run entirely once charged",
+        "description": "Travel to the Ruins of Tapoyauik, Varlamore. Use a quetzal whistle to fly directly to the ruins, or Civitas illa Fortis Teleport (standard spell) and run south. Pendant of ates teleport (uncharged drops from Amoxliatl) skips the run entirely once charged",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
