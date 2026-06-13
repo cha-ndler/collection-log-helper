@@ -23706,7 +23706,7 @@
       }
     ],
     "locationDescription": "Asgarnian Ice Dungeon, south of Port Sarim",
-    "travelTip": "Giantsoul amulet -> direct teleport, or fairy ring AIQ -> run south",
+    "travelTip": "Giantsoul amulet -> direct teleport, or fairy ring AIQ -> Mudskipper Point then run north-east",
     "npcId": 12596,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -23725,7 +23725,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Asgarnian Ice Dungeon entrance south of Port Sarim. Giantsoul amulet teleports directly to the boss tunnel; otherwise fairy ring AIQ to Mudskipper Point and run south, then use the level-60 Agility tunnel shortcut west of the dungeon ladder",
+        "description": "Travel to the Asgarnian Ice Dungeon entrance south of Port Sarim. Giantsoul amulet teleports directly to the boss tunnel; otherwise fairy ring AIQ to Mudskipper Point and run north-east, then use the level-60 Agility tunnel shortcut west of the dungeon ladder",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
