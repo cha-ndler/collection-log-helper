@@ -56,28 +56,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *   <li>Zulrah: existing POH (FAIRY_RING) alternative at [0], new
  *       inventory alternative at [1] listing
  *       {@code TELEPORTSCROLL_ZULANDRA} (12938).</li>
- *   <li>Phantom Muspah: no prior alternatives, new inventory-any
- *       alternative at [0] listing the 4 {@code HG_QUETZALWHISTLE_*}
- *       ItemID variants (29271, 29273, 29275, 33120).</li>
- *   <li>Corrupted Gauntlet / The Gauntlet: existing diary
- *       (WESTERN_ELITE) alternative at [0], new inventory-any
- *       alternative at [1] listing {@code GAUNTLET_TELEPORT_CRYSTAL}
- *       (23904) and {@code GAUNTLET_TELEPORT_CRYSTAL_HM} (23858).</li>
+ *   <li>Corrupted Gauntlet / The Gauntlet: inventory-any alternative at
+ *       [0] listing {@code GAUNTLET_TELEPORT_CRYSTAL} (23904) and
+ *       {@code GAUNTLET_TELEPORT_CRYSTAL_HM} (23858). (The WESTERN_ELITE
+ *       diary alternative that used to sit at [0] was removed by the
+ *       wiki-meta audit as fabricated.)</li>
  * </ul>
  *
  * <p>Mirrors {@code C6B3OverlapRegressionTest} (stacked-alternative shape)
- * for ToA/Zulrah/Gauntlets, and the unstacked first-alternative shape used
- * by {@code C6B2RegressionTest} for the Muspah insertion.
+ * for ToA/Zulrah/Gauntlets.
+ *
+ * <p>The original wave-8a Phantom Muspah entry (Quetzal-whistle inventory
+ * alternative) was removed from the corpus: the Quetzal Transport System
+ * serves Varlamore landing sites only and has no Muspah destination.
  */
 public class CExtensionInventoryTeleportRegressionTest
 {
 	/** Pharaoh's sceptre variants: uncharged tiers 1-3, charged, charged_initial (jeweled). */
 	private static final List<Integer> PHARAOHS_SCEPTRE_VARIANTS = List.of(
 		26945, 26946, 26947, 26948, 26949, 26950, 26951);
-
-	/** Quetzal whistle variants: basic, enhanced, perfected, perfected-infinite. */
-	private static final List<Integer> QUETZAL_WHISTLE_VARIANTS = List.of(
-		29271, 29273, 29275, 33120);
 
 	/** Teleport crystal variants for Prifddinas: regular + Hard-Mode-charged. */
 	private static final List<Integer> GAUNTLET_TELEPORT_CRYSTAL_VARIANTS = List.of(
@@ -104,12 +101,15 @@ public class CExtensionInventoryTeleportRegressionTest
 			new InventorySpec(1, true, PHARAOHS_SCEPTRE_VARIANTS, 2));
 		map.put("Zulrah",
 			new InventorySpec(1, false, ZULANDRA_SCROLL, 2));
-		map.put("Phantom Muspah",
-			new InventorySpec(0, true, QUETZAL_WHISTLE_VARIANTS, 1));
+		// Wiki-meta audit fix: the WESTERN_ELITE diary alternative both
+		// Gauntlet sources used to stack ahead of the inventory alternative
+		// was fabricated (the Elite Western diary attaches no Prifddinas
+		// teleport to any cape), so the inventory alternative is now the
+		// only conditional alternative, at index 0.
 		map.put("Corrupted Gauntlet",
-			new InventorySpec(1, true, GAUNTLET_TELEPORT_CRYSTAL_VARIANTS, 2));
+			new InventorySpec(0, true, GAUNTLET_TELEPORT_CRYSTAL_VARIANTS, 1));
 		map.put("The Gauntlet",
-			new InventorySpec(1, true, GAUNTLET_TELEPORT_CRYSTAL_VARIANTS, 2));
+			new InventorySpec(0, true, GAUNTLET_TELEPORT_CRYSTAL_VARIANTS, 1));
 		return map;
 	}
 
@@ -128,7 +128,6 @@ public class CExtensionInventoryTeleportRegressionTest
 		map.put("Tombs of Amascut (300 Invocation)", "Pharaoh's sceptre to teleport to the Necropolis");
 		map.put("Tombs of Amascut (500 Invocation)", "Pharaoh's sceptre to teleport to the Necropolis");
 		map.put("Zulrah", "using a Zul-andra teleport scroll");
-		map.put("Phantom Muspah", "icy basalt to teleport to Weiss");
 		map.put("Corrupted Gauntlet", "Teleport to Prifddinas via teleport crystal");
 		map.put("The Gauntlet", "Teleport to Prifddinas via teleport crystal");
 		return map;
@@ -233,14 +232,20 @@ public class CExtensionInventoryTeleportRegressionTest
 				name + ": pre-existing DESERT_HARD diary alternative must remain at index 0");
 		}
 
-		// Gauntlets: existing WESTERN_ELITE diary at [0] must survive.
+		// Gauntlets: the fabricated WESTERN_ELITE diary alternative must NOT
+		// return (wiki-meta audit: the Elite Western diary attaches no
+		// Prifddinas teleport to any cape).
 		for (String name : List.of("Corrupted Gauntlet", "The Gauntlet"))
 		{
-			ConditionalAlternative diary =
-				findSource(name).getGuidanceSteps().get(0).getConditionalAlternatives().get(0);
-			assertNotNull(diary.getRequirements());
-			assertEquals(List.of("WESTERN_ELITE"), diary.getRequirements().getDiaries(),
-				name + ": pre-existing WESTERN_ELITE diary alternative must remain at index 0");
+			for (ConditionalAlternative alt
+				: findSource(name).getGuidanceSteps().get(0).getConditionalAlternatives())
+			{
+				if (alt.getRequirements() != null && alt.getRequirements().getDiaries() != null)
+				{
+					assertFalse(alt.getRequirements().getDiaries().contains("WESTERN_ELITE"),
+						name + ": the fabricated WESTERN_ELITE diary alternative must not be reintroduced");
+				}
+			}
 		}
 	}
 
@@ -267,11 +272,14 @@ public class CExtensionInventoryTeleportRegressionTest
 	}
 
 	@Test
-	public void allFiveSourceFamiliesArePresentInDatabase()
+	public void allRemainingSourceFamiliesArePresentInDatabase()
 	{
-		// Cardinality lock: 7 JSON entries across the 5 deferred-source families.
-		assertEquals(7, SPECS.size(),
-			"C-extension wave-8a covers exactly 7 source entries (ToA x 3 + Zulrah + Muspah + Gauntlet x 2)");
+		// Cardinality lock: 6 JSON entries across the 4 remaining source families.
+		// The Phantom Muspah Quetzal-whistle alternative was removed: the Quetzal
+		// Transport System serves Varlamore landing sites only and has no Muspah
+		// destination, so the alternative it asserted was fabricated.
+		assertEquals(6, SPECS.size(),
+			"C-extension wave-8a covers exactly 6 source entries (ToA x 3 + Zulrah + Gauntlet x 2)");
 		for (String name : SPECS.keySet())
 		{
 			assertNotNull(findSource(name),
