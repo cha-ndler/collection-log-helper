@@ -9625,7 +9625,7 @@
         "section": "Bank"
       },
       {
-        "description": "Use a Guthixian temple teleport to drop straight into the Chasm of Tears. The fallback unquested route is attracting a light creature in the chasm with a sapphire lantern - much slower but works without a teleport scroll.",
+        "description": "Use a Guthixian temple teleport to travel directly to the Ancient Guthixian Temple entrance. The fallback unquested route is attracting a light creature in the chasm with a sapphire lantern - much slower but works without a teleport scroll.",
         "worldX": 4100,
         "worldY": 4415,
         "worldPlane": 0,
@@ -9638,7 +9638,7 @@
         "section": "Travel"
       },
       {
-        "description": "Hit the demon with Darklight (or Emberlight) special attack to break its shield. Once the shield is down, it will cycle protection prayers - swap your style between melee / ranged / magic on every two successful hits to keep accuracy up. Use fire spells or Smoke Burst for the magic phase to take advantage of their fire weakness.",
+        "description": "The fire shield drops after your first hit and after each fire bomb attack - demonbane weapons (Darklight, Emberlight) bypass the 20% damage reduction entirely. Switch combat style after dealing roughly 150 damage to trigger the demon's prayer swap, then swap to a different style to keep accuracy up. Use water spells (e.g. Water Surge) for the magic phase to exploit their 30% elemental weakness to water.",
         "worldX": 4100,
         "worldY": 4415,
         "worldPlane": 0,
@@ -9650,7 +9650,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill the Tormented Demon. Dodge the floor-flame patches by stepping one tile in any direction when they ignite, and step out of the molten spray cone (the demon telegraphs it by raising both arms). Three-style rotation: hit twice with melee, swap to ranged for two hits, then magic for two hits - the demon's protection prayer always lags behind your last successful style by one cycle, so the swap keeps your accuracy high. Burning claw + Tormented synapse are the marquee rare drops.",
+        "description": "Kill the Tormented Demon. Dodge floor-flame patches by stepping one tile when they ignite. When the demon binds you in place, a fire bomb lands on your tile and a second on a random adjacent tile - pre-move before the bind to reduce damage. Switch style after dealing roughly 150 damage (about 25% of the demon's HP) - at that threshold it updates its protection prayer to match your last style, so swap to a different style immediately. Burning claw + Tormented synapse are the marquee rare drops.",
         "worldX": 4100,
         "worldY": 4415,
         "worldPlane": 0,
