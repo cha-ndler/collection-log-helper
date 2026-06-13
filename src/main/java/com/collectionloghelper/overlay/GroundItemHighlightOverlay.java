@@ -67,6 +67,9 @@ public class GroundItemHighlightOverlay extends Overlay
 	private final CollectionLogHelperConfig config;
 	private final Polygon arrowPolygon = new Polygon();
 
+	@Inject
+	private RenderStateRecorder renderRecorder;
+
 	/**
 	 * Floating collection-log marker drawn above each highlighted ground item.
 	 * Assigned in the constructor (not inline) so the injected {@link ItemManager}
@@ -146,6 +149,11 @@ public class GroundItemHighlightOverlay extends Overlay
 
 		if (items.isEmpty() || !config.showOverlays())
 		{
+			// Ground-item highlight renders last in the guidance pass, so it is the
+			// natural frame closer for the dev-bridge render-state recorder. Publish
+			// even with nothing to draw so the snapshot reflects this frame. No-op
+			// (single volatile check) unless the dev harness enabled recording.
+			renderRecorder.publish(client.getTickCount());
 			return null;
 		}
 
@@ -160,8 +168,13 @@ public class GroundItemHighlightOverlay extends Overlay
 		for (TrackedGroundItem tracked : items)
 		{
 			renderGroundItemHighlight(graphics, tracked, overlayColor);
+			// Dev-bridge render-state: this ground item drew this frame.
+			renderRecorder.recordGroundItem(tracked.item.getId());
+			renderRecorder.recordTarget("groundItem", tracked.item.getId(),
+				config.showGuidanceTargetMarker(), 80);
 		}
 
+		renderRecorder.publish(client.getTickCount());
 		return null;
 	}
 
