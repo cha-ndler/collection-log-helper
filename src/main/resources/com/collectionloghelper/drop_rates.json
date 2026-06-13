@@ -20897,7 +20897,7 @@
       }
     ],
     "locationDescription": "God Wars Dungeon entrance in the Wilderness (level 28 Wilderness)",
-    "travelTip": "Cemetery teleport (Arceuus) -> run east; or Dareeyak teleport (Desert Treasure I) -> run south",
+    "travelTip": "Cemetery teleport (Arceuus) -> run east; or Dareeyak teleport (Desert Treasure I) -> run north-east",
     "waypoints": [
       {
         "description": "Arceuus spellbook required: cast Cemetery Teleport and run east to the cave entrance.",
