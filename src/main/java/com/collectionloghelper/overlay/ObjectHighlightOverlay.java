@@ -83,6 +83,9 @@ public class ObjectHighlightOverlay extends Overlay
 	@Inject
 	private ModelOutlineRenderer modelOutlineRenderer;
 
+	@Inject
+	private RenderStateRecorder renderRecorder;
+
 	private volatile Set<Integer> targetObjectIds = Collections.emptySet();
 	private volatile String objectInteractAction;
 	private volatile boolean useItemOnObject;
@@ -329,6 +332,9 @@ public class ObjectHighlightOverlay extends Overlay
 			}
 
 			drawTargetMarker(graphics, localPoint);
+			// Dev-bridge render-state: this object highlight drew this frame.
+			renderRecorder.recordObject(obj.getId());
+			renderRecorder.recordTarget("object", obj.getId(), config.showGuidanceTargetMarker(), 80);
 		}
 
 		return null;
@@ -416,6 +422,7 @@ public class ObjectHighlightOverlay extends Overlay
 				&& mousePos != null && hull.contains(mousePos.getX(), mousePos.getY()))
 			{
 				tooltipManager.add(new Tooltip(builtTooltip));
+				renderRecorder.recordTooltip(builtTooltip);
 				showedTooltip = true;
 			}
 		}
