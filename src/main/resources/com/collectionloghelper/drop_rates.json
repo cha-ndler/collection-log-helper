@@ -12820,17 +12820,6 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "conditionalAlternatives": [
-          {
-            "requirements": {
-              "pohTeleports": [
-                "JEWELLERY_BOX_FANCY"
-              ]
-            },
-            "description": "POH jewellery box -> Combat bracelet -> Ranging Guild, then run south-east along the road to the Slayer Tower entrance",
-            "travelTip": "POH Combat bracelet -> Ranging Guild -> run south-east to Slayer Tower"
-          }
-        ],
         "section": "Travel"
       },
       {
