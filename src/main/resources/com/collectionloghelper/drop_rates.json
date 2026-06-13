@@ -800,8 +800,8 @@
                 "FAIRY_RING"
               ]
             },
-            "description": "Use the POH superior garden fairy ring (dramen/lunar staff equipped) to dial AKQ, then run east to Zul-Andra",
-            "travelTip": "POH superior garden fairy ring -> AKQ -> run east to Zul-Andra"
+            "description": "Use the POH superior garden fairy ring (dramen/lunar staff equipped) to dial BJS, then run east to Zul-Andra",
+            "travelTip": "POH superior garden fairy ring -> BJS -> run east to Zul-Andra"
           },
           {
             "requirements": {
@@ -827,7 +827,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Zulrah. Prayer rotates per form: green (Ranged form) -> Protect from Missiles, blue (Magic form) -> Protect from Magic, red (Melee form) -> Protect from Missiles, jad phase -> swap each attack. Bring a blowpipe + magic setup, swap gear on the rotation, and avoid the toxic clouds the snakelings spit",
+        "description": "Kill Zulrah. Prayer rotates per form: green (Ranged form) -> Protect from Missiles, blue (Magic form) -> Protect from Magic, red (Melee form) -> Protect from Melee, jad phase -> swap each attack. Bring a blowpipe + magic setup, swap gear on the rotation, and avoid the toxic clouds Zulrah summons",
         "worldX": 2268,
         "worldY": 3069,
         "worldPlane": 0,
@@ -1264,7 +1264,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Alchemical Hydra. Hydra rotates phases at 75%, 50%, 25% HP - Green/poison (lure to red south-east vent), Blue/electric (lure to green north-east vent), Red/flame (lure to blue north-west vent), then Enrage. The Hydra alternates Magic and Ranged auto-attacks; watch the head sway between basic attacks - Magic head sways one way, Ranged the other - flick Protect from Magic vs Magic and Protect from Missiles vs Ranged. Bring Toxic blowpipe and ranged tank gear; on the Flame phase dodge the fire walls and the lightning chase. 95 Slayer required; Hydra task only",
+        "description": "Kill the Alchemical Hydra. Hydra rotates phases at 75%, 50%, 25% HP - Green/poison (lure to red south-east vent), Blue/electric (lure to green north-east vent), Red/flame (lure to blue north-west vent), then Enrage. The Hydra alternates Magic and Ranged auto-attacks; watch for the head sway after every three attacks as a signal that the style is changing - flick Protect from Magic vs Magic and Protect from Missiles vs Ranged. Bring Toxic blowpipe and ranged tank gear; on the Blue/electric phase dodge the lightning; on the Flame/red phase dodge the fire walls. 95 Slayer required; Hydra task only",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
@@ -1602,21 +1602,7 @@
         "worldY": 3940,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20,
-        "conditionalAlternatives": [
-          {
-            "requirements": {
-              "inventoryItemIdsAny": [
-                29271,
-                29273,
-                29275,
-                33120
-              ]
-            },
-            "description": "Right-click your Quetzal whistle (basic / enhanced / perfected / perfected-infinite) in the inventory and pick the Phantom Muspah destination to land directly at the Ancient Prison entrance, skipping the Weiss -> Ghorrock overland route",
-            "travelTip": "Inventory Quetzal whistle -> Phantom Muspah"
-          }
-        ]
+        "completionDistance": 20
       },
       {
         "description": "Run south through Ghorrock Dungeon and step onto the Ancient Prison entrance tile",
@@ -1627,7 +1613,7 @@
         "completionDistance": 12
       },
       {
-        "description": "Kill the Phantom Muspah. Ranged form (sitting) -> Protect from Missiles by default and swap to Protect from Magic the instant it stands up and charges the purple prayer-drain orb. Shielded/Melee form -> Protect from Magic. Dodge the cyan teleport heal-orbs (do NOT stand on the spike tile during a transformation), and Bow of faerdhinen / Tbow are the modern meta",
+        "description": "Kill the Phantom Muspah. Ranged form (sitting) -> Protect from Missiles by default and swap to Protect from Magic the instant it stands up and charges the purple prayer-drain orb. Shielded/Melee form -> Protect from Melee. Dodge spikes during form changes (do NOT stand on the spike tile during a transformation, as they heal Muspah on hit), and Bow of faerdhinen / Tbow are the modern meta",
         "worldX": 2846,
         "worldY": 3940,
         "worldPlane": 0,
@@ -3141,7 +3127,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Grotesque Guardians on the Slayer Tower roof. Requires gargoyle Slayer task + brittle key + a rock hammer or thrownhammer to finish them off. Dusk (melee) and Dawn (ranged) fight together until one dies, then the survivor enrages - pray Melee against Dusk and Missiles against Dawn, swapping prayers when they switch attack styles. Dodge Dawn's lightning AoE (move 2 tiles when she raises her arms) and step out of Dusk's prison rocks. After the first Guardian dies, the survivor heals to full and gains a stomp special - move off the marked tile",
+        "description": "Kill the Grotesque Guardians on the Slayer Tower roof. Requires gargoyle Slayer task + brittle key + a rock hammer or thrownhammer to finish them off. Phase 1: fight Dawn solo (Dusk is fully immune); use ranged, magic, or a halberd as she is airborne. Phase 2: fight Dusk solo. Phase 3 (lightning charge): both are temporarily invulnerable; move off any vortex that spawns on your tile (one-second colour warning). Pray Melee against Dusk and Missiles against Dawn, swapping when they switch styles. Do not stand under Dusk; doing so triggers a trample dealing up to 40 damage. After Dawn dies, Dusk absorbs her essence and his stats are significantly boosted (Attack 300, Strength/Magic/Ranged 250, Defence 150) for the final phase.",
         "worldX": 3427,
         "worldY": 3543,
         "worldPlane": 2,
@@ -3524,7 +3510,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Fight Phosani's Nightmare solo. Same prayer rotation as The Nightmare but tighter and faster: overhead-staff -> Protect from Magic, claws -> Protect from Melee, crossbow stance -> Protect from Missiles. Sleepwalker minions chase you and must be killed (Sanguinesti heals while burning them down), parasites still drain sanity, and the husk attack will mirror your gear so bring max gear you can lose. Hard to solo without high stats and prayer flicking",
+        "description": "Fight Phosani's Nightmare solo. Same prayer rotation as The Nightmare but tighter and faster: overhead-staff -> Protect from Magic, claws -> Protect from Melee, crossbow stance -> Protect from Missiles. Sleepwalkers spawn at phase end and walk toward Phosani -- kill them before they reach her or each one that does triggers an increasingly lethal blast. Parasites attach to you and burst after ~18 ticks dealing massive damage, then heal Phosani until killed -- drink Sanfew serum or Relicym's balm before the burst to reduce damage. Husks have fixed attack styles: blue (magic) and green (ranged) -- kill the ranged husk first in phases 1-2. Hard to solo without high stats and prayer flicking.",
         "worldX": 3806,
         "worldY": 9757,
         "worldPlane": 1,
@@ -4076,7 +4062,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Edgeville. Required: Giant key (farmed from hill giants in Edgeville Dungeon or Varrock Sewers - ~1/64 drop rate). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport. The fight is short but Obor hits ~25 with melee, so brews are wasteful here - sharks are sufficient",
+        "description": "Bank in Edgeville. Required: Giant key (farmed from hill giants in Edgeville Dungeon at ~1/128; rate is 1/64 only inside Wilderness). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport. The fight is short but Obor hits up to 22 with melee, so brews are wasteful here - sharks are sufficient",
         "worldX": 3093,
         "worldY": 3493,
         "worldPlane": 0,
@@ -4111,14 +4097,14 @@
                 19707
               ]
             },
-            "description": "Rub an Amulet of glory from your inventory and select Edgeville to land at the Edgeville bank, then run east to the dungeon trapdoor north of the bank.",
+            "description": "Rub an Amulet of glory from your inventory and select Edgeville to land at the Edgeville bank, then run east to the dungeon trapdoor south of the bank.",
             "travelTip": "Amulet of glory (inventory) -> Edgeville bank"
           }
         ],
         "section": "Bank"
       },
       {
-        "description": "Travel to the Edgeville Dungeon and descend to the hill giant area. Amulet of glory -> Edgeville then run east into the trapdoor north of the bank. The dungeon entrance puts you 8 tiles from Obor's gate",
+        "description": "Travel to the Edgeville Dungeon and descend to the hill giant area. Amulet of glory -> Edgeville then run east into the trapdoor south of the bank (ruined house). The dungeon entrance puts you 8 tiles from Obor's gate",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -4128,7 +4114,7 @@
         "section": "Travel"
       },
       {
-        "description": "Use the Giant key on the gate to enter Obor's lair. The key is consumed - each kill needs a fresh key, so per-trip farm rate is gated by hill giant key drops",
+        "description": "Use the Giant key on the gate to enter Obor's lair. The key is NOT consumed to open the gate. A key is consumed when you open the loot chest inside - one key per chest open, so per-trip farm rate is gated by hill giant key drops",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -4141,7 +4127,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Obor. Use Protect from Melee and attack with the strongest melee weapon available - Obor has weak defence but a 25-damage smash auto. Stand under him to bait the melee animation; he occasionally throws a small boulder for ~8 ranged damage that ignores Protect from Melee. Sip prayer potion every ~3 kills to keep Protect from Melee active",
+        "description": "Kill Obor. Use Protect from Missiles and attack with the strongest melee weapon available - Obor has weak defence. His melee max hit is 22; his ranged slam (boulder) max hit is 26 (13 with Protect from Missiles active). Stand with your back against a wall to limit knockback displacement from his slam attack. Sip prayer potion as needed to keep Protect from Missiles active",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -4159,7 +4145,7 @@
         ]
       },
       {
-        "description": "Teleport out via Amulet of glory after Obor dies. Restock a fresh Giant key + supplies before the next kill - the farm is bottlenecked by key drops, not by trip duration",
+        "description": "Teleport out via Amulet of glory after Obor dies. Restock a Giant key + supplies before the next kill - one key is consumed when opening the loot chest, so the farm is bottlenecked by key drops, not by trip duration",
         "worldX": 3093,
         "worldY": 3493,
         "worldPlane": 0,
@@ -4231,20 +4217,20 @@
         "conditionalAlternatives": [
           {
             "requirements": { "diaries": ["FREMENNIK_HARD"] },
-            "description": "Rub the enchanted lyre to teleport directly to Rellekka, then take Jarvald's boat to Waterbirth Island for free. Hard Fremennik Diary removes the 1,000 gp boat fee.",
-            "travelTip": "Enchanted lyre -> Rellekka -> free Jarvald boat (Hard Fremennik Diary)"
+            "description": "Rub the enchanted lyre (Hard Fremennik Diary unlocks Waterbirth Island as a direct destination) to teleport straight to Waterbirth Island, skipping the Rellekka boat entirely.",
+            "travelTip": "Enchanted lyre -> Waterbirth Island direct (Hard Fremennik Diary)"
           }
         ]
       },
       {
-        "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Bring a rune thrownaxe (or Mind Altar shortcut at 70 Agility) to pull only Rex",
+        "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Use a rune thrownaxe special attack on the middle (western) door to bounce through and destroy all three locked doors blocking the lair entrance. Alternatively, bypass the doors via the 85 Agility shortcut at the highest point of Waterbirth Island, or use the 81 Agility shortcut to room 14",
         "worldX": 2528,
         "worldY": 3739,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Dagannoth Rex. Rex attacks only with Melee - keep Protect from Melee on at all times when in melee range. Rex is weak to Magic and crush; fire spells (Fire Surge / Tumeken's Shadow) or a crush weapon work best. Lure him to the edge of the islet so Prime and Supreme cannot reach you - Rex has no ranged attack so safespotting from outside his melee range trivialises the fight. Bring antidote++ for Spinolyps in the moat",
+        "description": "Kill Dagannoth Rex. Rex attacks only with Melee - keep Protect from Melee on at all times when in melee range. Rex is weak to Magic only (+255 defence vs all melee styles); use earth spells (35% elemental weakness) or a powered staff such as Tumeken's Shadow. Slayer Dart and Iban Blast are also effective. Lure him to the edge of the islet so Prime and Supreme cannot reach you - Rex has no ranged attack so safespotting from outside his melee range trivialises the fight. Bring antidote++ for Spinolyps in the moat",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -24151,18 +24137,17 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Civitas illa Fortis (Varlamore). Required: 51 Slayer and 'Troubled Tortugans' quest complete. Bring ranged or magic gear (Shellbane Gryphon resists melee), prayer potions, food, Slayer helmet (i) on-task for the bonus, and a Quetzal whistle for the return teleport",
+        "description": "Bank in Civitas illa Fortis (Varlamore). Requires an active gryphon Slayer task - the boss cannot be attacked off-task. Required: 51 Slayer and 'Troubled Tortugans' quest complete. Bring strong melee gear, a Tortugan shield (REQUIRED - heavy damage without it), equipped weight >= 40kg to counter the knockback special, prayer potions, food, Slayer helmet (i) on-task, and a Quetzal whistle for the return teleport",
         "worldX": 1626,
         "worldY": 3093,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
         "requiredItemIds": [
-          24417,
+          31398,
           11865,
           6685,
-          2434,
-          12924
+          2434
         ],
         "section": "Bank"
       },
@@ -24187,7 +24172,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Shellbane Gryphon. Use Protect from Melee for the slam auto, then swap to Protect from Missiles when the gryphon takes flight for the wing-gust special. Attack with ranged (blowpipe / crossbow) or magic - melee is heavily resisted. Sip ranging / magic potion mid-fight to keep DPS high. On-task with Slayer helmet (i) for the +16.67% damage bonus is the standard farm setup",
+        "description": "Kill the Shellbane Gryphon. Active gryphon Slayer task required. Use Protect from Melee; the gryphon is primarily weak to melee - attack with your best melee setup. Keep the Tortugan shield equipped at all times (heavy damage without it). Maintain >= 40kg equipped weight to counter the knockback special attack. Respond to the corrosive spit (move) and whirlwind (move) specials as they occur. Slayer helmet (i) on-task for the damage bonus",
         "worldX": 13993,
         "worldY": 9901,
         "worldPlane": 0,
@@ -24197,7 +24182,7 @@
         "completionNpcId": 14860,
         "section": "Combat",
         "recommendedItemIds": [
-          12924,
+          31398,
           11865,
           6685,
           2434,
@@ -24276,6 +24261,10 @@
         "worldY": 3458,
         "worldPlane": 0,
         "objectId": 882,
+        "objectIds": [
+          881,
+          882
+        ],
         "objectInteractAction": "Climb-down",
         "completionCondition": "ARRIVE_AT_ZONE",
         "completionZone": [
