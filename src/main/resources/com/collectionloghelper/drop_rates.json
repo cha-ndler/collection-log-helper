@@ -3292,7 +3292,7 @@
         ]
       },
       {
-        "description": "Climb down the stairs in Slepe church to enter the Sisterhood Sanctuary",
+        "description": "Climb down the stairs in the small building south of the graveyard in Slepe to enter the Sisterhood Sanctuary",
         "worldX": 3728,
         "worldY": 3302,
         "worldPlane": 0,
@@ -3301,7 +3301,7 @@
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Run south to The Nightmare's arena in the Sisterhood Sanctuary",
+        "description": "Run north to The Nightmare's arena in the Sisterhood Sanctuary",
         "worldX": 3806,
         "worldY": 9757,
         "worldPlane": 1,
@@ -3309,7 +3309,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Disturb The Nightmare to start the fight. Prayer rotates per attack animation: overhead-staff wind-up -> Protect from Magic, claws sweep -> Protect from Melee, crossbow-style stance -> Protect from Missiles. Bring a Sanguinesti staff plus a crush weapon (Inquisitor's mace / Soulreaper axe), kill the parasites quickly to avoid sanity drops and Hitpoints damage, and break the healing totems each phase. One unprotected mistake in a group will wipe the team",
+        "description": "Disturb The Nightmare to start the fight. Prayer rotates per attack animation: overhead-staff wind-up -> Protect from Magic, claws sweep -> Protect from Melee, crossbow-style stance -> Protect from Missiles. Bring a Sanguinesti staff plus a crush weapon (Inquisitor's mace / Soulreaper axe), kill parasites before they burst out (uncontrolled parasites deal massive HP damage then heal the Nightmare), and charge the four corner totems each phase (fully charged totems deal 800 damage to the Nightmare). One unprotected mistake in a group will wipe the team",
         "worldX": 3806,
         "worldY": 9757,
         "worldPlane": 1,
