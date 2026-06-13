@@ -23,7 +23,7 @@ a bridge `state.read`, or a screenshot under `docs/screenshots/validation-2026-0
 |---|---|---|
 | T0.5 zero CLH traces in active play | `[x]` | 12-min real Giant Mole combat window: 0 CLH frames/WARNs (lone NPE = worldhopper, foreign). |
 | T0.6 stop→restart clean cycle | `[x]` | Zulrah activate→stop→re-activate: state + overlay clean both ways, no orphans. |
-| T0.7 privacy (no RSN/coords in logs) | `[!]` | CLH logs the RSN at INFO/WARN (efficiency export + sync lines) — issue filed; behind opt-in flags. |
+| T0.7 privacy (no RSN/coords in logs) | `[x]` | Fixed (#804/PR #807) + live-confirmed 2026-06-11: 0 RSN hits across 10,830 CLH log lines over a full login+sync+export window; redacted "for the current player" phrasing live. See acceptance-runs/2026-06-11.md. |
 | T1.1 walk-in travel auto-advance | `[x]` | Real on-foot ARRIVE_AT_ZONE fired (Smoke Devil zone 14:58:18) + synthetic Slepe north-edge walk-in. |
 | T1.2 Hard Trails panel + advance | `[x]` | Long text inside its box; GE arrival auto-advanced step 1→2; clue steps MANUAL by design. |
 | T1.4 sync surfaces | `[~]` | TempleOSRS round-trip clean + dead collectionlog.net host failed gracefully (no hang); populate/invalid-RSN/consent-race remain needs-human. |
@@ -33,7 +33,7 @@ a bridge `state.read`, or a screenshot under `docs/screenshots/validation-2026-0
 | T2.8 auto-stop on obtain / not mid-loop | `[x]` | Wyvern: "completing guidance" on obtain; Shades loop step: "mid-loop — keeping guidance active". |
 | T2.9 depletion reset + re-bank latch | `[x]` | Real deposit → "Loop depleted... parking on restock step 1"; real withdraw → "Restock complete... resuming". |
 | T2.10 glow thin + book marker | `[x]` | Object variant full PASS (smoky cave: outline + book sprite). NPC variant: glow clean but no marker → issue filed. |
-| T2.11 recurring highlight past first pickup | `[ ]` | needs-human: requires repeated real ground pickups on a recurring-gather source (recipe in needs-human.md). |
+| T2.11 recurring highlight past first pickup | `[x]` | Logic-confirmed live 2026-06-11 (Shades gather step): key pickup did NOT auto-advance — `isRecurringGatherSequence()` suppression held, step stayed 3/5, no `auto-advancing` log line. (Surfaced pre-existing Shades data bugs #821/#822, separate from this assertion.) |
 | T2.12 overlay vs panel availability | `[x]` | Wyvern bank step: 5 items, mixed states, overlay == panel == bridge state, item-for-item. |
 | T2.13 mid-activity forward start (positive) | `[x]` | Two literal "State-derived start" receipts (Giant Mole in-lair, Castle Wars lobby) + park landing on kill step. |
 | T2.14 Swordfish/Aerial recommended data | `[x]` | Dragon+Infernal harpoon (no halo); Knife (no pearl-rod typo); statuses live against real bank. |
@@ -47,6 +47,14 @@ clog-book marker (`GuidanceTargetMarker` only wired to object/ground-item overla
 travel step; (4) RSN written to client.log; (5) Castle Wars Lanthus npcId 1295 is
 "Mort'ton local" — Lanthus is 11650 (cache receipt; no glow observed); (6) entrance-object
 highlight only renders in a surface-proximity sweet spot — should persist until actual entry.
+
+**2026-06-11 follow-up** (full receipts: `acceptance-runs/2026-06-11.md`): all six findings
+above are fixed and merged (#801–#806 → #807–#812) and now **live-confirmed PASS** this
+session — T0.7, #801, #803, #802 (now icon-only marker on tall + short NPCs, PR #816), and
+both #806 entrances. T2.11 logic-confirmed. New quality/data issues surfaced live and filed:
+#817 (tooltip overflow), #818 (Slayer-helmet requirement), #819→#820 (manhole closed
+highlight), #821 (Shades reward-pillar), #822 (gather-step "press Next" hint); each fix class
+also became a toolkit corpus-completeness detector (toolkit #58–#62).
 
 ---
 
