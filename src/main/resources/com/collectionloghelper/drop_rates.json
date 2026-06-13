@@ -11404,7 +11404,7 @@
         ]
       },
       {
-        "description": "Kill Cave Horrors in the Mos Le Harmless cave. Requires witchwood icon necklace equipped to prevent stat drain (58 Slayer)",
+        "description": "Kill Cave Horrors in the Mos Le Harmless cave. Without a witchwood icon equipped, the scream special attack always deals 10% of base HP as damage; wearing the icon converts the scream into a regular attack roll (58 Slayer)",
         "worldX": 3740,
         "worldY": 9373,
         "worldPlane": 0,
