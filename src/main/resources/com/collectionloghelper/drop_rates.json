@@ -5789,7 +5789,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Skotizo. Bring Arclight (or Emberlight) for the demonbane bonus, Saradomin brews, super restores, Protect from Magic prayer potions, and 3 Dark totem pieces. Tank gear and Protect from Magic recommended - Skotizo hits through the protection on every attack.",
+        "description": "Bank for Skotizo. Bring Arclight (or Emberlight) for the demonbane bonus, Saradomin brews, super restores, prayer potions, and 3 Dark totem pieces. Use Protect from Melee as your primary prayer; wear high Magic Defence gear (e.g. black dragonhide) to absorb his magic attacks.",
         "worldX": 1638,
         "worldY": 3673,
         "worldPlane": 0,
@@ -5814,7 +5814,7 @@
         "section": "Travel"
       },
       {
-        "description": "Use the Dark totem on the Dark Altar in the Catacombs to spawn Skotizo. The totem is assembled from three pieces (Dark totem top / middle / base) dropped by Catacomb monsters and combined at the altar",
+        "description": "Use the Dark totem on the Dark Altar in the Catacombs to spawn Skotizo. Combine the three pieces (Dark totem base / middle / top) in your inventory first - they are dropped by Catacomb monsters.",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
@@ -5826,7 +5826,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Skotizo. Use Protect from Magic and attack the four Awakened Altars around the arena as soon as they spawn - leaving them alive amplifies Skotizo's damage dramatically. Arclight (or upgraded Emberlight) gives huge accuracy and damage against demons. Drink prayer potions on cooldown; Skotizo's magic still hits through the protection.",
+        "description": "Kill Skotizo. Use Protect from Melee in melee range; switch to Protect from Magic when running to disable the four Awakened Altars. Disable altars quickly - each active altar reduces your damage dealt to Skotizo by 25% (up to 100% with non-demonbane weapons, 15% each up to 60% with Arclight/Emberlight). Arclight (or Emberlight) gives huge accuracy and damage against demons.",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
