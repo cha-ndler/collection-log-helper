@@ -355,6 +355,51 @@ public class GuidanceSequencer
 	}
 
 	/**
+	 * Forces the active sequence directly to {@code index} (0-based), bypassing
+	 * the skip-chain and state-derived start so the step under {@code index} is
+	 * shown regardless of player position. Resets the per-step transient state
+	 * (loop iteration counter, crossed-waypoint progress, restock latch, and the
+	 * step-keyed completion caches) so the target step behaves as a fresh arrival,
+	 * then fires the same step-changed notification the normal advance path fires.
+	 *
+	 * <p>The sequence stays active and all callbacks are preserved. Intended for
+	 * the dev actuation bridge ({@code guidance.gotoStep}) so a validation run can
+	 * jump straight to a specific step.
+	 *
+	 * @throws IllegalStateException     when no sequence is active
+	 * @throws IndexOutOfBoundsException when {@code index} is outside 0..size-1
+	 */
+	public void forceStepIndex(int index)
+	{
+		if (!active || steps == null)
+		{
+			throw new IllegalStateException("no active sequence");
+		}
+		if (index < 0 || index >= steps.size())
+		{
+			throw new IndexOutOfBoundsException(
+				"stepIndex " + index + " out of range 0.." + (steps.size() - 1));
+		}
+
+		currentIndex = index;
+		loopIterationsCompleted = 0;
+		crossedWaypointIndex = 0;
+		awaitingRestock = false;
+		restockStepIndex = 0;
+		resolvedAlternatives.clear();
+		tilePointCache = null;
+		chatPatternCache = null;
+
+		GuidanceStep step = getCurrentStep();
+		if (step != null)
+		{
+			log.info("Guidance forced to step {}/{} for {}",
+				currentIndex + 1, steps.size(), activeSource != null ? activeSource.getName() : "?");
+			notifyStepChanged(step);
+		}
+	}
+
+	/**
 	 * Re-evaluates the activation skip-chain from step 0 against current player
 	 * state and jumps to the first unsatisfied step. Used by the Sync button to
 	 * let the user catch up after picking up items or travelling while guidance
