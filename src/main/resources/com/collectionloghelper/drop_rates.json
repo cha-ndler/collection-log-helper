@@ -24476,7 +24476,7 @@
         ]
       },
       {
-        "description": "Triple-Jad wave 67. Each Jad rotates Magic / Ranged prayers independently - the cue is the rear-back animation. Kill the centre Jad first, then the south, then the north; the order minimises overlap on healer waves. Stand in the south-west corner with line-of-sight blocked on the north Jad until the others die. Do not use Tumeken's shadow on Jads - they have high magic defence; swap to Twisted bow.",
+        "description": "Triple-Jad wave 68. Each Jad rotates Magic / Ranged prayers independently - the cue is the rear-back animation. Kill the centre Jad first, then the south, then the north; the order minimises overlap on healer waves. Stand in the south-west corner with line-of-sight blocked on the north Jad until the others die. Do not use Tumeken's shadow on Jads - they have high magic defence; swap to Twisted bow.",
         "worldX": 2273,
         "worldY": 5341,
         "worldPlane": 0,
@@ -24492,7 +24492,7 @@
         ]
       },
       {
-        "description": "Defeat TzKal-Zuk on wave 69. He hits a fixed-tile attack that follows your previous tile - move 1 tile every 4 ticks (4-tick shuffle). The Igneous shield NPC (Jal-MejJak) spawns once and absorbs one Zuk hit when stood behind - use it at the second healer set spawn. At 480 HP, two healers (Jal-MejJak healers) spawn from the south - 1-tick aggro them off Zuk by attacking each once then leaving range. At 240 HP, the second healer set spawns; same drill. Tumeken's shadow is BIS for Zuk; switch to Twisted bow if low on shadow charges.",
+        "description": "Defeat TzKal-Zuk on wave 69. He hits a fixed-tile attack that follows your previous tile - move 1 tile every 4 ticks (4-tick shuffle). Stay behind the moving shield to block his hits. At 480 HP, a JalTok-Jad spawns and attacks the shield - aggro or kill it so it does not break your cover. At 240 HP, Zuk becomes enraged (attacks ~3 ticks faster) and summons four Jal-MejJak healers - 1-tick aggro them off Zuk by attacking each once then leaving range. Tumeken's shadow is BIS for Zuk; switch to Twisted bow if low on shadow charges.",
         "worldX": 2273,
         "worldY": 5341,
         "worldPlane": 0,
