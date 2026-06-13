@@ -12423,7 +12423,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Sail to Ynysdail island and enter Ynysdail Cavern underground (73 Sailing required, 78 Slayer to kill). Bring a crush weapon (Abyssal bludgeon, Inquisitor's mace) for best accuracy; Aquanite tendon is extremely rare (1/3500)",
+        "description": "Sail to Ynysdail island and enter Ynysdail Cavern underground (73 Sailing required, 78 Slayer to kill). Bring a fast slash weapon (whip, scimitar) and a stab weapon (Ghrazi rapier, Osmumten's fang); Aquanite tendon is extremely rare (1/3500)",
         "worldX": 2218,
         "worldY": 3477,
         "worldPlane": 0,
@@ -12439,7 +12439,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Aquanites in Ynysdail Cavern. Protect from Melee; melee damage only. Use a crush weapon for best accuracy. No special attacks or phase mechanics",
+        "description": "Kill Aquanites in Ynysdail Cavern. Protect from Magic (Magic attacks only, max hit 18). Open with a fast slash weapon (whip or scimitar) to sever the lure (reduces Stab defence from 60 to 10, no damage required), then finish with a stab weapon (Ghrazi rapier, Osmumten's fang) for best accuracy",
         "worldX": 2275,
         "worldY": 9880,
         "worldPlane": 0,
@@ -12449,7 +12449,6 @@
         "completionNpcId": 15497,
         "section": "Combat",
         "recommendedItemIds": [
-          13263,
           4087,
           12695
         ]
