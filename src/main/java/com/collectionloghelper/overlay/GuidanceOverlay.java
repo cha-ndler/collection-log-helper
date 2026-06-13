@@ -30,12 +30,8 @@ import com.collectionloghelper.guidance.RequiredItemDisplay;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.util.Collections;
 import java.util.List;
@@ -64,11 +60,15 @@ public class GuidanceOverlay extends OverlayPanel
 {
 	private static final int MAX_PANEL_WIDTH = 200;
 	private static final Dimension PANEL_PREFERRED_SIZE = new Dimension(MAX_PANEL_WIDTH, 0);
-	private static final int ARROW_HEIGHT = 14;
-	private static final int ARROW_WIDTH = 12;
-	private static final int ARROW_GAP = 5;
+	/**
+	 * Clearance above an NPC's {@code getLogicalHeight()} for the floating
+	 * collection-log marker, in local height units (#802). 40 was not enough —
+	 * the icon overlapped large models (confirmed live on Giant Mole); 90
+	 * matches the headroom the marker effectively had before the arrow/text
+	 * stack was removed.
+	 */
+	private static final int MARKER_CLEARANCE = 90;
 	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
-	private static final Font BOLD_12 = new Font(Font.DIALOG, Font.BOLD, 12);
 	private static final Color TITLE_COLOR = new Color(255, 200, 0);
 	private static final Color TRAVEL_COLOR = new Color(100, 200, 255);
 	private static final Color ACTION_COLOR = new Color(100, 255, 100);
@@ -88,6 +88,9 @@ public class GuidanceOverlay extends OverlayPanel
 	@Inject
 	private ModelOutlineRenderer modelOutlineRenderer;
 
+	@Inject
+	private RenderStateRecorder renderRecorder;
+
 	private volatile WorldPoint targetPoint;
 	private volatile String targetName;
 	private volatile String locationDescription;
@@ -100,12 +103,10 @@ public class GuidanceOverlay extends OverlayPanel
 	private volatile boolean suppressTileHighlight;
 	private volatile NPC trackedNpc;
 	private volatile List<RequiredItemDisplay> requiredItems = Collections.emptyList();
-	private final Polygon arrowPolygon = new Polygon();
 	private Color cachedOverlayColor;
 	private Color cachedFillColor50;
 	private Color cachedFillColor30;
 	private volatile String cachedTravelLabel;
-	private volatile String cachedNpcLabel;
 
 	@Inject
 	private GuidanceOverlay(Client client, CollectionLogHelperConfig config, ItemManager itemManager)
@@ -134,6 +135,13 @@ public class GuidanceOverlay extends OverlayPanel
 		final boolean logReminder = this.showCollectionLogReminder;
 		final boolean bankReminder = this.showBankReminder;
 		final List<RequiredItemDisplay> items = this.requiredItems;
+
+		// Open the per-frame render-state recording for the dev bridge. No-op
+		// (single volatile check) unless the dev harness enabled the recorder.
+		// GuidanceOverlay is the natural frame opener — it owns the NPC highlight
+		// and the tile. "Active" here means this overlay has a guidance target to
+		// draw this frame.
+		renderRecorder.beginFrame(point != null || npcId > 0 || clueText != null);
 
 		Color overlayColor = config.overlayColor();
 		updateCachedColors(overlayColor);
@@ -179,18 +187,58 @@ public class GuidanceOverlay extends OverlayPanel
 			return null;
 		}
 
-		// Skip world rendering if player is on a different plane than the target
 		Player localPlayer = client.getLocalPlayer();
+
+		// NPC highlighting — use event-driven tracked NPC (set via onNpcSpawned/onNpcDespawned).
+		// This is INDEPENDENT of the step-tile resolution below: inside instanced arenas the
+		// step's overworld tile can never resolve to the local scene, but the tracked NPC lives
+		// in the real scene and must still be highlighted. Plane-gate against the NPC's
+		// OWN world location, not the step tile's plane.
+		boolean npcHighlighted = false;
+		NPC npc = this.trackedNpc;
+		if (localPlayer != null
+			&& shouldDrawNpcHighlight(npcId, npc, localPlayer.getWorldLocation().getPlane()))
+		{
+			renderNpcHighlight(graphics, npc, overlayColor, action, locDesc);
+			renderRecorder.recordNpc(npcId);
+			npcHighlighted = true;
+		}
+
+		// Skip world tile rendering if player is on a different plane than the target tile.
 		boolean samePlane = localPlayer != null
 			&& localPlayer.getWorldLocation().getPlane() == point.getPlane();
 
-		// Tile highlight rendering
+		// Tile highlight rendering — resolve the step tile to the local scene.
 		net.runelite.api.WorldView wv = client.getTopLevelWorldView();
 		LocalPoint localPoint = samePlane && wv != null
 			? LocalPoint.fromWorld(wv, point) : null;
-		if (localPoint == null)
+
+		// Tile highlight rendering (skip if NPC is already highlighted nearby,
+		// or if an object highlight is handling the visual for this step)
+		if (localPoint != null && !npcHighlighted && !suppressTileHighlight)
 		{
-			// Target tile is not on screen — show compact direction panel
+			Polygon poly = Perspective.getCanvasTilePoly(client, localPoint);
+			if (poly != null)
+			{
+				OverlayUtil.renderPolygon(graphics, poly, overlayColor, cachedFillColor50,
+					STROKE_2);
+				renderRecorder.recordTile(point);
+
+				if (name != null)
+				{
+					Point tileTextPoint = Perspective.getCanvasTextLocation(client, graphics, localPoint, name, 150);
+					if (tileTextPoint != null)
+					{
+						OverlayUtil.renderTextLocation(graphics, tileTextPoint, name, overlayColor);
+					}
+				}
+			}
+		}
+
+		// Compact direction panel fallback: render only when NOTHING world-anchored was drawn —
+		// no NPC highlighted AND the step tile could not be resolved to the local scene.
+		if (!npcHighlighted && localPoint == null)
+		{
 			if (name != null)
 			{
 				panelComponent.getChildren().clear();
@@ -228,39 +276,6 @@ public class GuidanceOverlay extends OverlayPanel
 			return null;
 		}
 
-		// NPC highlighting — use event-driven tracked NPC (set via onNpcSpawned/onNpcDespawned)
-		boolean npcHighlighted = false;
-		if (npcId > 0)
-		{
-			NPC npc = this.trackedNpc;
-			if (npc != null && npc.getId() == npcId)
-			{
-				renderNpcHighlight(graphics, npc, overlayColor, action, locDesc);
-				npcHighlighted = true;
-			}
-		}
-
-		// Tile highlight rendering (skip if NPC is already highlighted nearby,
-		// or if an object highlight is handling the visual for this step)
-		if (!npcHighlighted && !suppressTileHighlight)
-		{
-			Polygon poly = Perspective.getCanvasTilePoly(client, localPoint);
-			if (poly != null)
-			{
-				OverlayUtil.renderPolygon(graphics, poly, overlayColor, cachedFillColor50,
-					STROKE_2);
-
-				if (name != null)
-				{
-					Point tileTextPoint = Perspective.getCanvasTextLocation(client, graphics, localPoint, name, 150);
-					if (tileTextPoint != null)
-					{
-						OverlayUtil.renderTextLocation(graphics, tileTextPoint, name, overlayColor);
-					}
-				}
-			}
-		}
-
 		// When the target is on-screen we normally skip the side panel, but a
 		// required-items list still needs to be visible so the player can
 		// confirm they have what the step needs (or notice what's missing).
@@ -274,6 +289,23 @@ public class GuidanceOverlay extends OverlayPanel
 		}
 
 		return null;
+	}
+
+	/**
+	 * Pure decision for whether the tracked NPC highlight should be drawn this
+	 * frame. Extracted so the instanced-arena reachability (highlight is
+	 * independent of step-tile resolution) can be unit-tested without the
+	 * RuneLite render scaffolding. The NPC is plane-gated against its OWN plane,
+	 * never the step tile's.
+	 */
+	static boolean shouldDrawNpcHighlight(int stepNpcId, NPC trackedNpc, int localPlayerPlane)
+	{
+		if (stepNpcId <= 0 || trackedNpc == null || trackedNpc.getId() != stepNpcId)
+		{
+			return false;
+		}
+		WorldPoint npcLoc = trackedNpc.getWorldLocation();
+		return npcLoc != null && npcLoc.getPlane() == localPlayerPlane;
 	}
 
 	/**
@@ -327,39 +359,21 @@ public class GuidanceOverlay extends OverlayPanel
 
 		drawTargetMarker(graphics, npc);
 
-		// Draw downward-pointing arrow above the NPC (reuse hull from HULL case if available)
-		Shape arrowHull = npc.getConvexHull();
-		if (arrowHull != null)
+		// The collection-log marker is the only above-the-model decoration: no
+		// floating arrow or action text. The action/location info stays
+		// discoverable via the hover tooltip on the NPC hull.
+		Shape hoverHull = npc.getConvexHull();
+		if (hoverHull != null)
 		{
-			Rectangle bounds = arrowHull.getBounds();
-			int arrowX = (int) bounds.getCenterX();
-			int arrowTipY = (int) bounds.getMinY() - ARROW_GAP;
-			renderDirectionArrow(graphics, arrowX, arrowTipY, overlayColor);
-
-			// Show tooltip when mouse hovers over the NPC hull
 			String builtTooltip = OverlayTooltipHelper.buildTooltip(locDesc, action);
 			if (builtTooltip != null)
 			{
 				Point mousePos = client.getMouseCanvasPosition();
-				if (mousePos != null && arrowHull.contains(mousePos.getX(), mousePos.getY()))
+				if (mousePos != null && hoverHull.contains(mousePos.getX(), mousePos.getY()))
 				{
 					tooltipManager.add(new Tooltip(builtTooltip));
+					renderRecorder.recordTooltip(builtTooltip);
 				}
-			}
-		}
-
-		// Render action text above the NPC and arrow
-		LocalPoint npcLocal = npc.getLocalLocation();
-		if (npcLocal != null)
-		{
-			String label = cachedNpcLabel != null ? cachedNpcLabel : npc.getName();
-
-			Point textPoint = Perspective.getCanvasTextLocation(
-				client, graphics, npcLocal, label,
-				npc.getLogicalHeight() + ARROW_HEIGHT + ARROW_GAP + 40);
-			if (textPoint != null)
-			{
-				renderOutlinedText(graphics, textPoint, label, overlayColor);
 			}
 		}
 	}
@@ -368,66 +382,23 @@ public class GuidanceOverlay extends OverlayPanel
 	 * Draws the floating collection-log marker above the NPC, same float-above
 	 * pattern as the object and ground-item overlays (#802). The z-offset is
 	 * {@code getLogicalHeight()}-relative (local height units) so the marker
-	 * clears the model and the action label, which renders at
-	 * {@code logicalHeight + ARROW_HEIGHT + ARROW_GAP + 40}. No-op when the
-	 * config toggle is off. The shared marker caches its sprite/glyph, so the
-	 * render path allocates nothing per frame.
+	 * floats just clear of the model — it is the only above-the-model
+	 * decoration (no arrow or action text). No-op when the config toggle is
+	 * off. The shared marker caches its sprite/glyph, so the render path
+	 * allocates nothing per frame.
 	 */
 	private void drawTargetMarker(Graphics2D graphics, NPC npc)
 	{
-		if (!config.showGuidanceTargetMarker())
+		boolean markerOn = config.showGuidanceTargetMarker();
+		int zOffset = npc.getLogicalHeight() + MARKER_CLEARANCE;
+		// Record the per-target draw decision for the dev bridge: bookMarker
+		// reflects whether the marker actually drew (the #802/#811 assertion).
+		renderRecorder.recordTarget("npc", npc.getId(), markerOn, zOffset);
+		if (!markerOn)
 		{
 			return;
 		}
-		targetMarker.draw(graphics, client, npc.getLocalLocation(),
-			npc.getLogicalHeight() + ARROW_HEIGHT + ARROW_GAP + 90);
-	}
-
-	/**
-	 * Draws a downward-pointing arrow at the given position, with a black outline
-	 * for visibility. The tip of the arrow is at (x, tipY).
-	 */
-	private void renderDirectionArrow(Graphics2D graphics, int x, int tipY, Color color)
-	{
-		int halfW = ARROW_WIDTH / 2;
-		int topY = tipY - ARROW_HEIGHT;
-
-		arrowPolygon.reset();
-		arrowPolygon.addPoint(x, tipY);
-		arrowPolygon.addPoint(x + halfW, topY);
-		arrowPolygon.addPoint(x - halfW, topY);
-
-		// Colored fill first, then black outline on top
-		graphics.setColor(color);
-		graphics.fillPolygon(arrowPolygon);
-
-		graphics.setColor(Color.BLACK);
-		graphics.setStroke(STROKE_2);
-		graphics.drawPolygon(arrowPolygon);
-	}
-
-	/**
-	 * Renders text with a dark outline for readability against any background.
-	 */
-	private void renderOutlinedText(Graphics2D graphics, Point point, String text, Color color)
-	{
-		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		graphics.setFont(BOLD_12);
-		FontMetrics fm = graphics.getFontMetrics();
-		int x = point.getX() - fm.stringWidth(text) / 2;
-		int y = point.getY();
-
-		// Black outline
-		graphics.setColor(Color.BLACK);
-		graphics.drawString(text, x + 1, y + 1);
-		graphics.drawString(text, x - 1, y - 1);
-		graphics.drawString(text, x + 1, y - 1);
-		graphics.drawString(text, x - 1, y + 1);
-
-		// Colored text
-		graphics.setColor(color);
-		graphics.drawString(text, x, y);
+		targetMarker.draw(graphics, client, npc.getLocalLocation(), zOffset);
 	}
 
 	private void updateCachedColors(Color overlayColor)
@@ -477,7 +448,6 @@ public class GuidanceOverlay extends OverlayPanel
 	public void setInteractAction(String action)
 	{
 		this.interactAction = action;
-		rebuildNpcLabel(action, this.trackedNpc);
 	}
 
 	public void setSuppressTileHighlight(boolean suppress)
@@ -498,7 +468,6 @@ public class GuidanceOverlay extends OverlayPanel
 	public void setTrackedNpc(NPC npc)
 	{
 		this.trackedNpc = npc;
-		rebuildNpcLabel(this.interactAction, npc);
 	}
 
 	/**
@@ -525,23 +494,7 @@ public class GuidanceOverlay extends OverlayPanel
 		suppressTileHighlight = false;
 		trackedNpc = null;
 		cachedTravelLabel = null;
-		cachedNpcLabel = null;
 		requiredItems = Collections.emptyList();
-	}
-
-	private void rebuildNpcLabel(String action, NPC npc)
-	{
-		if (npc != null)
-		{
-			String npcName = npc.getName();
-			cachedNpcLabel = (action != null)
-				? action + " " + npcName
-				: npcName;
-		}
-		else
-		{
-			cachedNpcLabel = null;
-		}
 	}
 
 	private void addSyncRemindersIfNeeded(boolean logReminder, boolean bankReminder)
