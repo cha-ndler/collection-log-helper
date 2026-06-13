@@ -4602,7 +4602,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the smoky cave. A facemask, Slayer helmet, or Masked earmuffs is required to survive the dungeon's smoke without constant damage. Active Smoke devil Slayer task is required to attack the Thermonuclear smoke devil",
+        "description": "Enter the smoky cave. A facemask, gas mask, or Slayer helmet is required to survive the dungeon's smoke without constant damage. Active Smoke devil Slayer task is required to attack the Thermonuclear smoke devil",
         "worldX": 2412,
         "worldY": 3061,
         "worldPlane": 0,
@@ -4622,7 +4622,7 @@
         "section": "Travel"
       },
       {
-        "description": "Navigate north-west through the smoke devil cave to the Thermonuclear boss room. Take care of the regular smoke devils on the way if Protect from Magic is not flicked",
+        "description": "Navigate north-west through the smoke devil cave to the Thermonuclear boss room. Take care of the regular smoke devils on the way if Protect from Missiles is not flicked",
         "worldX": 2379,
         "worldY": 9452,
         "worldPlane": 0,
@@ -4631,7 +4631,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Thermonuclear smoke devil. Use Protect from Magic - it hits 30s+ through no prayer. Stay back at max distance with Trident of the Swamp/Seas or Tumeken's shadow; safe-spot the boss behind a rock so you can flick the prayer easily. Bring an Occult necklace yourself once it drops - the boss is the source of it.",
+        "description": "Kill the Thermonuclear smoke devil. Its attack is typeless (max hit 8); no protection prayer reduces it. Use Piety for melee or Redemption for magic. Stay at max distance with Trident of the Swamp/Seas or Tumeken's shadow - magic has 9-tile range vs the boss's 8-tile attack range, so freeze it and step back to exploit this gap. No static rock safe-spot exists; the boss walks through obstacles to prevent it. Bring an Occult necklace yourself once it drops - the boss is the source of it.",
         "worldX": 2379,
         "worldY": 9452,
         "worldPlane": 0,
