@@ -22196,7 +22196,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Cyclopes for defender drops. Each kill costs 10 warrior guild tokens. Hold the current tier defender in inventory to unlock the next tier. Protect from Melee recommended.",
+        "description": "Kill Cyclopes for defender drops. Warrior guild tokens are spent on entry (10) and another 10 each minute inside the room - bring a large supply. Hold the current tier defender in inventory to unlock the next tier. Protect from Melee recommended.",
         "perItemStepDescription": {
           "8844": "Kill Cyclopes (no prerequisite) to receive a Bronze defender and start the chain.",
           "8845": "Kill Cyclopes while holding a Bronze defender in inventory to receive an Iron defender.",
