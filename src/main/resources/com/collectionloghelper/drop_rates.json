@@ -32122,7 +32122,7 @@
         "section": "Travel"
       },
       {
-        "description": "Pickpocket elves in Prifddinas (85 Thieving). Each successful pickpocket has a 1/1024 chance of yielding an enhanced crystal teleport seed. Wearing the Ardougne cloak 4 or a dodgy necklace reduces failure rate significantly.",
+        "description": "Pickpocket elves in Prifddinas (85 Thieving). Each successful pickpocket has a 1/1024 chance of yielding an enhanced crystal teleport seed. The Ardougne cloak 3 (Hard Diary reward) gives a 10% increased pickpocket success chance; a dodgy necklace gives a 25% chance to avoid the stun and damage when a pickpocket fails.",
         "worldX": 3279,
         "worldY": 6072,
         "worldPlane": 0,
