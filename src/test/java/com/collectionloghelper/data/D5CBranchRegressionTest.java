@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *
  * <p>Wired sources and diary constants:
  * <ul>
- *   <li>Kalphite Queen      — {@code DESERT_HARD}</li>
+ *   <li>Kalphite Queen      — {@code DESERT_ELITE}</li>
  *   <li>Dagannoth Rex       — {@code FREMENNIK_HARD}</li>
  *   <li>Dagannoth Prime     — {@code FREMENNIK_HARD}</li>
  *   <li>Dagannoth Supreme   — {@code FREMENNIK_HARD}</li>
@@ -69,7 +69,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class D5CBranchRegressionTest
 {
-	private static final String DESERT_HARD = "DESERT_HARD";
+	// Wiki-meta audit fix: the desert amulet 4 teleport described by the KQ
+	// alternative is an Elite Desert Diary reward, not Hard.
+	private static final String DESERT_ELITE = "DESERT_ELITE";
 	private static final String FREMENNIK_HARD = "FREMENNIK_HARD";
 	private static final String KOUREND_ELITE = "KOUREND_ELITE";
 
@@ -82,7 +84,7 @@ public class D5CBranchRegressionTest
 	private static Map<String, String> buildExpected()
 	{
 		Map<String, String> map = new LinkedHashMap<>();
-		map.put("Kalphite Queen", DESERT_HARD);
+		map.put("Kalphite Queen", DESERT_ELITE);
 		map.put("Dagannoth Rex", FREMENNIK_HARD);
 		map.put("Dagannoth Prime", FREMENNIK_HARD);
 		map.put("Dagannoth Supreme", FREMENNIK_HARD);
