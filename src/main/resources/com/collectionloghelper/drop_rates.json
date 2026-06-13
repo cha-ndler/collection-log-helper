@@ -31969,18 +31969,18 @@
         "wikiPage": "Broken_zombie_helmet"
       }
     ],
-    "locationDescription": "Zemouregal's Fort, north of Varrock",
+    "locationDescription": "Zemouregal's Fort, in the far north (Troll Country, near Ghorrock)",
     "travelTip": "Varrock teleport -> north to fort",
     "npcId": 14113,
     "interactAction": "Attack",
     "requirements": {
       "quests": [
-        "DEFENDER_OF_VARROCK"
+        "THE_CURSE_OF_ARRAV"
       ]
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Zemouregal's Fort, north of Varrock (Varrock teleport, then walk north past the Grand Exchange). Requires Defender of Varrock quest.",
+        "description": "Travel to Zemouregal's Fort in the far north of Troll Country (near Ghorrock). Requires The Curse of Arrav quest.",
         "worldX": 3566,
         "worldY": 3390,
         "worldPlane": 0,
