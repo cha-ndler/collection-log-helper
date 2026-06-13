@@ -43,14 +43,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * wired on slayer and mid-tier boss sources:
  *
  * <ul>
- *   <li>Abyssal Demon / Aberrant Spectre / Nechryael:
- *       {@code JEWELLERY_BOX_FANCY} -&gt; Combat bracelet -&gt; Ranging Guild.</li>
  *   <li>Smoke Devil: {@code JEWELLERY_BOX_BASIC} -&gt; Ring of dueling -&gt; Castle Wars.</li>
- *   <li>Dark Beast: {@code FAIRY_RING} -&gt; CIQ -&gt; Iorwerth Dungeon.</li>
  *   <li>Sarachnis: {@code XERICS_TALISMAN} -&gt; Xeric's Heart.</li>
  *   <li>Giant Mole: {@code JEWELLERY_BOX_ORNATE} -&gt; Ring of wealth -&gt; Falador.</li>
  *   <li>Obor: {@code MOUNTED_GLORY} -&gt; Edgeville bank.</li>
  * </ul>
+ *
+ * <p>The Abyssal Demon / Aberrant Spectre / Nechryael ({@code JEWELLERY_BOX_FANCY}
+ * -&gt; Combat bracelet -&gt; Ranging Guild) and Dark Beast ({@code FAIRY_RING} -&gt;
+ * CIQ) entries were dropped: the wiki-meta audit confirmed those routes are
+ * fabricated. The Ranging Guild is in Kandarin, ~770 tiles from the Morytania
+ * Slayer Tower with no connecting road; no fairy ring reaches Prifddinas. The
+ * combat-bracelet/fairy-ring teleports do not help reach those targets, so the
+ * conditional alternatives were removed from the data and are no longer guarded
+ * here. See issue #916.
  *
  * <p>For each source the wired guidance step must:
  * <ul>
@@ -68,10 +74,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class D5ABranchRegressionTest
 {
 	private static final String JEWELLERY_BOX_BASIC = "JEWELLERY_BOX_BASIC";
-	private static final String JEWELLERY_BOX_FANCY = "JEWELLERY_BOX_FANCY";
 	private static final String JEWELLERY_BOX_ORNATE = "JEWELLERY_BOX_ORNATE";
 	private static final String MOUNTED_GLORY = "MOUNTED_GLORY";
-	private static final String FAIRY_RING = "FAIRY_RING";
 	private static final String XERICS_TALISMAN = "XERICS_TALISMAN";
 
 	/**
@@ -83,11 +87,7 @@ public class D5ABranchRegressionTest
 	private static Map<String, StepExpectation> buildExpected()
 	{
 		Map<String, StepExpectation> map = new LinkedHashMap<>();
-		map.put("Abyssal Demon",    new StepExpectation(0, List.of(JEWELLERY_BOX_FANCY),  "Slayer Tower top floor (slayer ring)"));
-		map.put("Aberrant Spectre", new StepExpectation(0, List.of(JEWELLERY_BOX_FANCY),  "Slayer Tower (slayer ring or fairy ring CKS)"));
-		map.put("Nechryael",        new StepExpectation(0, List.of(JEWELLERY_BOX_FANCY),  "Slayer Tower (slayer ring or fairy ring CKS)"));
 		map.put("Smoke Devil",      new StepExpectation(0, List.of(JEWELLERY_BOX_BASIC),  "Smoke Devil Dungeon south of Castle Wars"));
-		map.put("Dark Beast",       new StepExpectation(0, List.of(FAIRY_RING),            "Iorwerth Dungeon in Prifddinas"));
 		map.put("Sarachnis",        new StepExpectation(0, List.of(XERICS_TALISMAN),       "Forthos Dungeon, Hosidius"));
 		map.put("Giant Mole",       new StepExpectation(0, List.of(JEWELLERY_BOX_ORNATE), "Falador Park"));
 		map.put("Obor",             new StepExpectation(0, List.of(MOUNTED_GLORY),         "Bank in Edgeville"));
@@ -185,8 +185,8 @@ public class D5ABranchRegressionTest
 		{
 			assertNotNull(findSource(name), "Expected source missing from drop_rates.json: " + name);
 		}
-		assertEquals(8, EXPECTED.size(),
-			"D5 batch A covers exactly 8 sources");
+		assertEquals(4, EXPECTED.size(),
+			"D5 batch A covers exactly 4 sources (fabricated POH routes dropped per #916)");
 	}
 
 	private static ConditionalAlternative findPohAlternative(
