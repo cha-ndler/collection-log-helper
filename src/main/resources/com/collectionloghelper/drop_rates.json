@@ -9426,7 +9426,7 @@
       }
     ],
     "locationDescription": "Cam Torum entrance, Ralos Rise",
-    "travelTip": "Quetzal whistle -> Cam Torum, or Civitas illa Fortis lodestone + run east",
+    "travelTip": "Quetzal whistle -> Cam Torum, or Civitas illa Fortis Teleport (standard spell) + run east",
     "npcId": 13011,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -9443,7 +9443,7 @@
           9720,
           0
         ],
-        "travelTip": "Quetzal whistle -> Cam Torum, or Civitas illa Fortis lodestone + run east",
+        "travelTip": "Quetzal whistle -> Cam Torum, or Civitas illa Fortis Teleport (standard spell) + run east",
         "requiredItemIds": [
           29271,
           6685,
