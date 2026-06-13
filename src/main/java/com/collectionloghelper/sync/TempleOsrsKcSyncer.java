@@ -30,9 +30,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
@@ -46,18 +49,35 @@ import okhttp3.Response;
  * Fetches boss/activity kill counts from the TempleOSRS API and maps them to
  * CLH source names.
  *
- * <p>API endpoint: {@code GET https://templeosrs.com/api/player_info.php?player={username}}
+ * <p>API endpoint:
+ * {@code GET https://templeosrs.com/api/player_stats.php?player={username}&bosses=1}
+ *
+ * <p>The {@code player_info.php} endpoint was previously used by mistake: it returns
+ * only account metadata (username, country, game-mode flags, last-checked timestamps)
+ * and contains no kill-count data, so every entry was rejected as non-numeric and the
+ * sync mapped zero sources. {@code player_stats.php} is the endpoint that actually
+ * carries per-boss KCs.
  *
  * <p>Response shape (simplified):
  * <pre>
  * {
  *   "data": {
- *     "Abyssal Sire": 0,
- *     "K'ril Tsutsaroth": 100,
+ *     "info":  { "Username": "...", ... },   // account metadata, skipped
+ *     "date":  "2026-06-11 19:26:28",          // skipped
+ *     "Overall": 2277, "Overall_rank": 1, ...  // skill stats, skipped
+ *     "Abyssal Sire": 0,                        // boss KC (flat key)
+ *     "K'ril Tsutsaroth": 100,                  // boss KC (flat key)
+ *     "Zulrah_ehb": 7.3,                        // derived metadata, skipped
  *     ...
  *   }
  * }
  * </pre>
+ *
+ * <p>Boss/activity KCs sit alongside skill stats and several families of derived
+ * metadata in the same flat {@code data} object. Metadata is distinguished by key
+ * shape — derived-stat suffixes ({@code _rank}, {@code _level}, {@code _ehp},
+ * {@code _ehb}, {@code _xp}), the fixed skill names, and the {@code info}/{@code date}
+ * fields — and is skipped quietly rather than counted as a rejected anomaly.
  *
  * <p>Fail-soft: any HTTP error, parse failure, or timeout yields
  * {@link SyncResult#failure(String)}; no exception propagates to the caller.
@@ -68,10 +88,36 @@ import okhttp3.Response;
 @Singleton
 public class TempleOsrsKcSyncer
 {
-	static final String BASE_URL = "https://templeosrs.com/api/player_info.php";
+	static final String BASE_URL = "https://templeosrs.com/api/player_stats.php";
 
 	/** Hard cap on response body size to prevent OOM from a misbehaving/malicious server. */
 	private static final long MAX_RESPONSE_BYTES = 1L * 1024L * 1024L;
+
+	/**
+	 * Key-name suffixes used by TempleOSRS for derived per-skill/per-boss metadata
+	 * (e.g. {@code Zulrah_ehb}, {@code Overall_rank}). Any {@code data} key ending in
+	 * one of these is metadata, not a KC, and is skipped quietly.
+	 */
+	private static final String[] METADATA_SUFFIXES = {"_rank", "_level", "_ehp", "_ehb", "_xp"};
+
+	/**
+	 * Fixed account-metadata keys in the {@code data} object that are neither skill
+	 * stats nor boss KCs. {@code info} is an object and {@code date} is a string, so
+	 * both are already non-primitive/non-numeric, but listing them keeps the skip
+	 * explicit and self-documenting.
+	 */
+	private static final Set<String> METADATA_KEYS = new HashSet<>(Arrays.asList("info", "date"));
+
+	/**
+	 * Base skill names TempleOSRS reports as bare integer keys (alongside their
+	 * {@code _rank}/{@code _level}/{@code _ehp} siblings). These collide in shape with
+	 * boss KCs (bare integer values) so they must be filtered by name.
+	 */
+	private static final Set<String> SKILL_NAMES = new HashSet<>(Arrays.asList(
+		"Overall", "Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer",
+		"Magic", "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking",
+		"Crafting", "Smithing", "Mining", "Herblore", "Agility", "Thieving", "Slayer",
+		"Farming", "Runecraft", "Hunter", "Construction", "Sailing", "Ehp", "Ehb"));
 
 	/**
 	 * Static name mapping from TempleOSRS display name to CLH source name.
@@ -166,7 +212,8 @@ public class TempleOsrsKcSyncer
 		}
 
 		// The URL embeds the RSN — never log the name or the full URL (T0.7)
-		String url = BASE_URL + "?player=" + encodeUsername(username.trim());
+		// bosses=1 asks player_stats.php to include per-boss KCs in the data object.
+		String url = BASE_URL + "?player=" + encodeUsername(username.trim()) + "&bosses=1";
 		log.debug("Fetching TempleOSRS KC for the current player");
 
 		Request request = new Request.Builder()
@@ -224,7 +271,9 @@ public class TempleOsrsKcSyncer
 	/**
 	 * Parses the TempleOSRS JSON response into a {@link SyncResult}.
 	 *
-	 * <p>Expected shape: {@code {"data": {"Boss Name": 100, ...}}}
+	 * <p>Expected shape: {@code {"data": {"info": {...}, "Overall": 2277, "Boss Name": 100, ...}}}
+	 * — boss KCs are flat integer keys mixed in with skill stats and account metadata
+	 * (see {@link #mapActivitiesToSources}).
 	 */
 	SyncResult parseResponse(String json)
 	{
@@ -256,10 +305,16 @@ public class TempleOsrsKcSyncer
 	 *
 	 * <p>Mapping strategy:
 	 * <ol>
+	 *   <li>Account metadata and skill-stat keys are skipped quietly by key shape
+	 *       (see {@link #isMetadataKey}) and never counted as anomalies</li>
 	 *   <li>Explicit override in {@link #TEMPLE_TO_CLH}</li>
 	 *   <li>Identity — return the name as-is (caller validates against the DB)</li>
 	 *   <li>Zero-KC entries are skipped (player has not done that activity)</li>
 	 * </ol>
+	 *
+	 * <p>The {@code skipped} count reported on the result reflects only genuine KC
+	 * entries that failed to parse as a positive integer — not the metadata keys,
+	 * which are an expected part of the {@code player_stats.php} payload.
 	 */
 	SyncResult mapActivitiesToSources(JsonObject data)
 	{
@@ -270,6 +325,13 @@ public class TempleOsrsKcSyncer
 		{
 			String templeName = entry.getKey();
 			JsonElement kcEl = entry.getValue();
+
+			// Account metadata and skill stats share the data object with boss KCs;
+			// skip them by key shape so they never inflate the skipped/anomaly count.
+			if (isMetadataKey(templeName))
+			{
+				continue;
+			}
 
 			if (!kcEl.isJsonPrimitive())
 			{
@@ -302,6 +364,31 @@ public class TempleOsrsKcSyncer
 		log.debug("TempleOSRS KC mapped {} sources, skipped {} non-numeric entries",
 			result.size(), skipped);
 		return SyncResult.success(result, skipped);
+	}
+
+	/**
+	 * Returns {@code true} if a {@code data} key is account metadata or a skill stat
+	 * rather than a boss/activity kill count.
+	 *
+	 * <p>Metadata is identified by shape: the fixed {@code info}/{@code date} keys, any
+	 * key ending in a derived-stat suffix ({@code _rank}, {@code _level}, {@code _ehp},
+	 * {@code _ehb}, {@code _xp}), or a bare skill name ({@code Overall}, {@code Attack},
+	 * &hellip;). Everything else is treated as a candidate KC entry.
+	 */
+	boolean isMetadataKey(String key)
+	{
+		if (METADATA_KEYS.contains(key) || SKILL_NAMES.contains(key))
+		{
+			return true;
+		}
+		for (String suffix : METADATA_SUFFIXES)
+		{
+			if (key.endsWith(suffix))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
