@@ -29843,7 +29843,7 @@
     "travelTip": "Fairy ring BJP -> Isle of Souls (no req); or Ape Atoll tele for 2-tick",
     "guidanceSteps": [
       {
-        "description": "Bank for teak chopping. Bring your best axe (dragon or crystal for highest success rate). 35 Woodcutting required. Isle of Souls is best with no extra requirements. Ape Atoll or Prifddinas are optimal for 2-tick manipulation (bring a knife and kebbit claws or karambwanji for the tick cycle).",
+        "description": "Bank for teak chopping. Bring your best axe (dragon or crystal for highest success rate). 35 Woodcutting required. Isle of Souls is best with no extra requirements. Ape Atoll/Isle of Souls (birds) or Prifddinas (rabbits) are optimal for 2-tick manipulation, where you auto-retaliate to a monster hitting you every 2 ticks while clicking the tree.",
         "worldX": 2200,
         "worldY": 2858,
         "worldPlane": 0,
@@ -29866,7 +29866,7 @@
         "section": "Travel"
       },
       {
-        "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-tick method at Ape Atoll or Prifddinas: use knife on bait on tick 1, click tree on tick 2. Bird nests drop to the ground (1/256 chance) and despawn after 2 minutes - collect for bonus value.",
+        "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-tick method at Ape Atoll or Prifddinas: let a monster attack you every 2 ticks (birds at Ape Atoll, rabbits at Prifddinas) and click the tree on auto-retaliate. Bird nests drop to the ground (1/256 chance) and despawn after 2 minutes - collect for bonus value.",
         "worldX": 2770,
         "worldY": 2700,
         "worldPlane": 0,
