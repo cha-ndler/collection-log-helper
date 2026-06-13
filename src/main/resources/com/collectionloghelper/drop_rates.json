@@ -24175,7 +24175,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to Varrock Sewers via the manhole behind Varrock Palace or south of Edgeville bank. Use the Varrock teleport for the fastest route",
+        "description": "Travel to Varrock Sewers via the manhole just east of Varrock Palace or south of Edgeville bank. Use the Varrock teleport for the fastest route",
         "worldX": 3237,
         "worldY": 3458,
         "worldPlane": 0,
@@ -24215,7 +24215,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Scurrius. Stand under the boss for melee, dodge the falling rocks (red tiles), and kill the Giant rat spawns immediately - they heal Scurrius if left alive. Use Protect from Missiles to negate his ranged-style auto. Easy first-boss fight that often drops the Scurrius' spine (rune pouch upgrade).",
+        "description": "Kill Scurrius. Stand under the boss for melee, dodge the falling rocks (red tiles), and kill the Giant rat spawns immediately to disrupt the fight. Scurrius heals from the Food Piles between phases (not from the rats), so push damage through the phase transitions. Use Protect from Missiles to negate his ranged-style auto. Easy first-boss fight that often drops the Scurrius' spine (rune pouch upgrade).",
         "worldX": 3299,
         "worldY": 9867,
         "worldPlane": 0,
