@@ -6855,7 +6855,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + diamond bolts (e), Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
+        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + dragon arrows, Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -6870,7 +6870,7 @@
                 22400
               ]
             },
-            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + diamond bolts (e), Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
+            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + dragon arrows, Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
             "travelTip": "Drakan's medallion -> Ver Sinhaza"
           }
         ],
@@ -6893,7 +6893,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat Verzik Vitur in Hard Mode. P1: pray Protect from Magic and dagger the Athanatos. P2: dodge red ball, match prayer to Nylocas colour - HM spawns are denser. P3: Tbow with diamond bolts (e), pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
+        "description": "Defeat Verzik Vitur in Hard Mode. P1: take turns using the Dawnbringer special attack to damage Verzik, hide behind a pillar between turns. P2: dodge urnbombs, poison or venom the Nylocas Athanatos to burst them into Verzik, match prayer to Nylocas colour - HM spawns are denser. P3: Tbow with dragon arrows, pray Protect from Magic, never stand on a tornado",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
