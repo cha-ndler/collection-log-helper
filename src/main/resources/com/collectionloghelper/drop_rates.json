@@ -497,7 +497,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill K'ril Tsutsaroth. Protect from Melee, eat through Balfrug + Tstanon prayer drain, watch for K'ril's curse special which strips your prayer in one hit.",
+        "description": "Kill K'ril Tsutsaroth. Protect from Melee; Balfrug deals magic damage (up to 16) and Tstanon deals melee damage (up to 15). Watch for K'ril's Prayer Smash special which deals 35-49 damage and drains half your current prayer points.",
         "worldX": 2925,
         "worldY": 5322,
         "worldPlane": 2,
@@ -800,8 +800,8 @@
                 "FAIRY_RING"
               ]
             },
-            "description": "Use the POH superior garden fairy ring (dramen/lunar staff equipped) to dial AKQ, then run east to Zul-Andra",
-            "travelTip": "POH superior garden fairy ring -> AKQ -> run east to Zul-Andra"
+            "description": "Use the POH superior garden fairy ring (dramen/lunar staff equipped) to dial BJS, then run east to Zul-Andra",
+            "travelTip": "POH superior garden fairy ring -> BJS -> run east to Zul-Andra"
           },
           {
             "requirements": {
@@ -827,7 +827,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Zulrah. Prayer rotates per form: green (Ranged form) -> Protect from Missiles, blue (Magic form) -> Protect from Magic, red (Melee form) -> Protect from Missiles, jad phase -> swap each attack. Bring a blowpipe + magic setup, swap gear on the rotation, and avoid the toxic clouds the snakelings spit",
+        "description": "Kill Zulrah. Prayer rotates per form: green (Ranged form) -> Protect from Missiles, blue (Magic form) -> Protect from Magic, red (Melee form) -> Protect from Melee, jad phase -> swap each attack. Bring a blowpipe + magic setup, swap gear on the rotation, and avoid the toxic clouds Zulrah summons",
         "worldX": 2268,
         "worldY": 3069,
         "worldPlane": 0,
@@ -964,7 +964,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Vorkath. Pray Protect from Magic during standard phases (the standard meta for melee, blowpipe, and bow setups), keep a super antifire active, sidestep the red acid puddles, walk diagonally to dodge the slow purple ice projectile, and click the Zombified Spawn the instant it appears (it deals ramping damage if ignored). Zombie axe and Bow of faerdhinen are the modern meta",
+        "description": "Kill Vorkath. Pray Protect from Magic during standard phases, keep a super antifire active, sidestep the acid puddles during the Rapid Fire phase. When frozen by the ice attack, cast Crumble Undead on the Zombified Spawn before it reaches you (explodes on contact for up to 60 damage based on remaining HP). Dragon Hunter Lance and Bow of faerdhinen are the primary meta weapons",
         "worldX": 2273,
         "worldY": 4049,
         "worldPlane": 0,
@@ -1082,7 +1082,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Cerberus. She rotates Melee, Ranged, and Magic attacks - flick Protect from Magic when she rears back and fires a smooth black ball, Protect from Missiles when she kicks a translucent spiky ball, otherwise Protect from Melee. Every 10 attacks she summons three souls (Magic ghost, Ranged ghost, Melee ghost) - run to the matching tile under each soul before they reach her, or pray the soul's attack style. Bring Salve amulet (ei) and use Bandos godsword spec to drop her Defence",
+        "description": "Kill Cerberus. She rotates Melee, Ranged, and Magic attacks - flick Protect from Magic when she lowers her head and fires a smooth black ball, Protect from Missiles when she kicks a translucent spiky ball, otherwise Protect from Melee. Every 7 attacks once below 400 HP she summons three souls (Magic ghost, Ranged ghost, Melee ghost) - run to the matching tile under each soul before they reach her, or pray the soul's attack style. Use Bandos godsword spec to drop her Defence",
         "worldX": 1240,
         "worldY": 1251,
         "worldPlane": 0,
@@ -1264,7 +1264,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Alchemical Hydra. Hydra rotates phases at 75%, 50%, 25% HP - Green/poison (lure to red south-east vent), Blue/electric (lure to green north-east vent), Red/flame (lure to blue north-west vent), then Enrage. The Hydra alternates Magic and Ranged auto-attacks; watch the head sway between basic attacks - Magic head sways one way, Ranged the other - flick Protect from Magic vs Magic and Protect from Missiles vs Ranged. Bring Toxic blowpipe and ranged tank gear; on the Flame phase dodge the fire walls and the lightning chase. 95 Slayer required; Hydra task only",
+        "description": "Kill the Alchemical Hydra. Hydra rotates phases at 75%, 50%, 25% HP - Green/poison (lure to red south-east vent), Blue/electric (lure to green north-east vent), Red/flame (lure to blue north-west vent), then Enrage. The Hydra alternates Magic and Ranged auto-attacks; watch for the head sway after every three attacks as a signal that the style is changing - flick Protect from Magic vs Magic and Protect from Missiles vs Ranged. Bring Toxic blowpipe and ranged tank gear; on the Blue/electric phase dodge the lightning; on the Flame/red phase dodge the fire walls. 95 Slayer required; Hydra task only",
         "worldX": 1364,
         "worldY": 10265,
         "worldPlane": 0,
@@ -1365,8 +1365,8 @@
                 "JEWELLERY_BOX_FANCY"
               ]
             },
-            "description": "POH jewellery box -> Games necklace -> Wilderness Volcano, then run south to the lever room and pull the lever to enter the Corporeal Beast cave",
-            "travelTip": "POH Games necklace -> Wilderness Volcano -> south to lever room"
+            "description": "Use the POH jewellery box (Fancy or higher) to access a Games necklace and teleport directly to the Corporeal Beast cave",
+            "travelTip": "POH jewellery box -> Games necklace -> Corporeal Beast"
           }
         ]
       },
@@ -1725,7 +1725,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Ghorrock Prison via the Weiss Salt Mine. Bring crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
+        "description": "Travel to Ghorrock Prison via the Weiss Salt Mine. Bring a slash weapon (scythe of vitur, emberlight, or soulreaper axe), Saradomin brews, super restores, and a pickaxe for the salt vents.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
@@ -1738,14 +1738,14 @@
                 28327
               ]
             },
-            "description": "Use Ring of Shadows -> Ghorrock Dungeon to teleport directly. Bring crush weapon (Bandos godsword or Inquisitor's mace), Saradomin brews, super restores, and a pickaxe for the salt vents.",
+            "description": "Use Ring of Shadows -> Ghorrock Dungeon to teleport directly. Bring a slash weapon (scythe of vitur, emberlight, or soulreaper axe), Saradomin brews, super restores, and a pickaxe for the salt vents.",
             "travelTip": "Ring of Shadows -> Ghorrock Dungeon"
           }
         ],
         "section": "Travel"
       },
       {
-        "description": "Navigate through Ghorrock Prison to the Asylum stairs",
+        "description": "Navigate through Ghorrock Prison to the Asylum stairs. Watch for falling ice in the corridors near the second staircase - step off the shadow before it strikes.",
         "worldX": 2973,
         "worldY": 6440,
         "worldPlane": 2,
@@ -1764,7 +1764,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Duke Sucellus. Mine arder powder, musca powder and salax salt from the asylum vents, craft arder-musca poisons, then use Protect from Melee with crush weapons (Bandos godsword or Inquisitor's mace) since Duke resists slash and stab. Dodge the falling ice patches and stay clear of the gas vents.",
+        "description": "Kill Duke Sucellus. While Duke is asleep, mine arder powder, musca powder and salax salt from the asylum vents and craft arder-musca poisons to wake him. Use Protect from Melee with a slash weapon (Duke is weak to slash; crush weapons will frequently miss due to his high crush Defence). Stay clear of the gas vents.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
@@ -1879,7 +1879,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to The Scar by taking the rowboat in the Wizards' Tower basement. Bring ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
+        "description": "Travel to The Scar. From the Wizards' Tower basement portal, pass through the Temple of the Eye to the Abyssal Rift, then head east to Wizard Persten's camp and take the rowboat to the Leviathan's island. Bring ranged setup (Bow of faerdhinen, Zaryte crossbow, or Twisted bow) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -1892,7 +1892,7 @@
                 28327
               ]
             },
-            "description": "Use Ring of Shadows -> The Scar to teleport directly. Bring ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
+            "description": "Use Ring of Shadows -> The Scar to teleport directly, then take the rowboat at Wizard Persten's camp east of the Abyssal Rift. Bring ranged setup (Bow of faerdhinen, Zaryte crossbow, or Twisted bow) or magic with Tumeken's shadow, prayer potions, and Saradomin brews.",
             "travelTip": "Ring of Shadows -> The Scar"
           }
         ],
@@ -1918,7 +1918,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill The Leviathan. Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee) and step at least one tile away from the falling-debris warning at the end of each volley to avoid the permanent rock spawns that one-shot lower-defence accounts.",
+        "description": "Kill The Leviathan. Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee) and step at least one tile away from the falling-debris warning at the end of each volley to avoid the permanent rock spawns that restrict movement and can block line of sight for the remainder of the fight.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -2031,7 +2031,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Lassar Undercity by entering the sinkhole north-west of Camdozaal. Bring the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)), prayer potions, and Saradomin brews.",
+        "description": "Travel to Lassar Undercity by entering the sinkhole north-west of Camdozaal. Bring the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Venator bow for the souls phase), prayer potions, and Saradomin brews.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
@@ -2047,7 +2047,7 @@
                 28327
               ]
             },
-            "description": "Use Ring of Shadows -> Lassar Undercity to teleport directly. Bring the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Twisted bow with diamond bolts (e)), prayer potions, and Saradomin brews.",
+            "description": "Use Ring of Shadows -> Lassar Undercity to teleport directly. Bring the blackstone fragment (required to start the fight), ranged setup (Bow of faerdhinen or Venator bow for the souls phase), prayer potions, and Saradomin brews.",
             "travelTip": "Ring of Shadows -> Lassar Undercity"
           }
         ],
@@ -2079,7 +2079,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill The Whisperer. Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys, use the blackstone fragment to enter the Shadow Realm and step on the four correct tiles to bank her shield, and keep your sanity bar above zero or you will die in 10 ticks.",
+        "description": "Kill The Whisperer. Switch Protect from Missiles for purple-barb ranged volleys and Protect from Magic for blue-orb magic volleys. During the Soul Siphon special attack, activate the blackstone fragment to enter the Shadow Realm and kill at least one full set of lost souls (grouped by chant phrase) before the 20-tick timer expires; failure deals 50 damage and heals her 100 HP. Keep your sanity bar above zero or you will die in 10 ticks.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
@@ -2233,7 +2233,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Vardorvis. Use Protect from Melee with slash weapons (Soulreaper axe or Blade of Saeldor) since he resists stab and crush, keep moving to dodge the spinning axes spawned from ground cracks (they one-shot if you stand still late-fight), and kill the Strangled spawns immediately or they will heal him.",
+        "description": "Kill Vardorvis. Use Protect from Melee with slash weapons (Soulreaper axe or Blade of Saeldor) since he resists stab and crush. Dodge the swinging axes released across the arena by the Strangler's tendrils (more axes spawn as HP drops). Step away from ground cracks caused by the Darting Spikes attack before they erupt into tendrils.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
@@ -2347,7 +2347,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank at Ferox Enclave for Duke Sucellus (Awakened). Awakened hits roughly 2x harder than the base fight; bring a full inventory of Saradomin brews and super restores, prayer potions, super combat potion, a pickaxe for the salt vents, an Awakener's orb (one per kill), and a Ring of Shadows for fast re-entry. Crush is mandatory - Bandos godsword for spec, Inquisitor's mace or Saradomin sword as main weapon.",
+        "description": "Bank at Ferox Enclave for Duke Sucellus (Awakened). Awakened hits roughly 2x harder than the base fight; bring a full inventory of Saradomin brews and super restores, prayer potions, super combat potion, a pickaxe for the salt vents, an Awakener's orb (one per kill), and a Ring of Shadows for fast re-entry. Slash is preferred - Bandos godsword for spec, use a slash weapon (Scythe of vitur, Emberlight, or Soulreaper axe) as main weapon.",
         "worldX": 3129,
         "worldY": 3636,
         "worldPlane": 0,
@@ -2402,7 +2402,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Duke Sucellus (Awakened). Mine arder powder + musca powder + salax salt from the asylum vents and craft arder-musca poison to weaken Duke before each phase. Use Protect from Melee with crush weapons (Bandos godsword or Inquisitor's mace) - Duke resists slash and stab. Awakened-mode mechanics: ice patches fall in a tighter pattern, gas vents activate one tick earlier, and Duke gains a second extremity orientation halfway through the fight. Step diagonally off ice patches the moment they spawn or you will tick-die through brews.",
+        "description": "Kill Duke Sucellus (Awakened). Mine arder powder + musca powder + salax salt from the asylum vents and craft arder-musca poison to weaken Duke before each phase. Use Protect from Melee with slash weapons (Bandos godsword for spec, slash main weapon) - Duke resists stab and crush. Awakened-mode mechanics: ice patches fall in a tighter pattern, gas vents activate one tick earlier, and Duke gains a second extremity orientation halfway through the fight. Step diagonally off ice patches the moment they spawn or you will tick-die through brews.",
         "worldX": 2846,
         "worldY": 3938,
         "worldPlane": 0,
@@ -2557,13 +2557,13 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to The Scar entrance beneath the Wizards' Tower. Ring of Shadows -> The Scar is the fastest route; otherwise take the rowboat in the Wizards' Tower basement. Keep the Awakener's orb in your inventory before climbing in.",
+        "description": "Travel to The Scar entrance beneath the Wizards' Tower. Ring of Shadows -> The Scar is the fastest route. Keep the Awakener's orb in your inventory before climbing in.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Ring of Shadows -> The Scar, or Wizards' Tower basement rowboat",
+        "travelTip": "Ring of Shadows -> The Scar",
         "requiredItemIds": [
           28327,
           28334
@@ -2593,7 +2593,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill The Leviathan (Awakened). Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee) - getting flicks wrong in Awakened mode is a near-instant death. Awakened-mode volley speed is roughly 2 ticks faster, the Rocks phase adds 6-8 thrown rocks you must run between, and the end-of-volley debris warning leaves permanent spike spawns - step at least 2 tiles off the warning tile or take a 60+ unprotectable hit. Spec with Voidwaker on the Rocks phase to skip it.",
+        "description": "Kill The Leviathan (Awakened). Switch protection prayers to match the orb colour on its head (blue = Magic, green = Ranged, orange = Melee) - getting flicks wrong in Awakened mode is a near-instant death. Awakened-mode volley speed is roughly 2 ticks faster, and end-of-volley roar drops 5 permanent debris pieces in a '+' formation - step at least 1 tile off the warning tile to avoid the debris (the roar itself deals up to 7 chip damage regardless). Spec with Voidwaker on the Rocks phase to skip it.",
         "worldX": 3104,
         "worldY": 3162,
         "worldPlane": 0,
@@ -2731,7 +2731,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank at Ferox Enclave for The Whisperer (Awakened). Awakened Whisperer is widely considered the hardest of the four; tentacle patterns chain into the screech attack twice as fast, and a single missed prayer flick can chain-hit through brews. Bring a full inventory of Saradomin brews and super restores, prayer potions, ranged potion, diamond bolts (e), an Awakener's orb (one per kill), the blackstone fragment (required to enter the Shadow Realm), and a Ring of Shadows. Bow of faerdhinen (c) plus Masori is the standard meta.",
+        "description": "Bank at Ferox Enclave for The Whisperer (Awakened). Awakened Whisperer is widely considered the hardest of the four; more tentacles (7 in X formation, 6 in + formation vs 4), and a single missed prayer flick can cause rapid damage. Magic is the combat meta: use Tumeken's Shadow or Harmonised Nightmare Staff with Ancestral robes. Bring 12-13 prayer potions (4-dose), 3-4 anglerfish or manta rays, a rune pouch (ice spells and thralls), a Venator bow with arrows for the Soul Siphon phase, a special attack weapon (Eldritch Nightmare Staff recommended), an Awakener's orb (one per kill), and the blackstone fragment (required to enter the Shadow Realm).",
         "worldX": 3129,
         "worldY": 3636,
         "worldPlane": 0,
@@ -2789,7 +2789,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill The Whisperer (Awakened). Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys. Use the blackstone fragment to hop into the Shadow Realm and break the four shadow tiles before her shield resets - missing one resets her shield to full and extends the kill 30 seconds. Never let your sanity bar fully deplete or you take a 10-tick degen that hits for 10 per tick. Awakened-mode: tentacle patterns chain into the screech attack roughly twice as fast, and the Shadow Realm has 3 extra shadow puddles to dodge. Switch prayers a tick early on every volley.",
+        "description": "Kill The Whisperer (Awakened). Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys. Use the blackstone fragment to hop into the Shadow Realm and break the four shadow tiles before her shield resets - missing one resets her shield to full and extends the kill 30 seconds. Never let your sanity bar fully deplete; full depletion causes near-instant death within 10 ticks - teleport immediately if this occurs. Awakened-mode: more tentacles (7 in X formation, 6 in + formation vs 4 in base); Soul Siphon has 16 souls (up from 12) with a 21-second timer. Switch prayers a tick early on every volley.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
@@ -2816,7 +2816,7 @@
         "section": "Loot"
       },
       {
-        "description": "Return to Ferox Enclave bank to restock brews, super restores, prayer potions, ranged potions, and another Awakener's orb before the next kill",
+        "description": "Return to Ferox Enclave bank to restock prayer potions, food (anglerfish or manta rays), rune pouch supplies, and another Awakener's orb before the next kill",
         "worldX": 3129,
         "worldY": 3636,
         "worldPlane": 0,
@@ -2929,7 +2929,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank at Ferox Enclave for Vardorvis (Awakened). The Awakened axe pattern is roughly 1 axe denser per phase and adds a heal-spawn enrage at low HP. Bring a full inventory of Saradomin brews and super restores, prayer potions, super combat potion, an Awakener's orb (one per kill), and a Ring of Shadows. Slash mainhand: Scythe of Vitur (BiS) or Soulreaper axe; Blade of Saeldor (c) is the trade-off pick. Voidwaker for spec on the Strangled spawn waves.",
+        "description": "Bank at Ferox Enclave for Vardorvis (Awakened). Awakened mode doubles HP to 1400, grants stat-drain immunity, adds 1 extra axe per phase, and increases axe/bleed/spore damage. Bring a full inventory of Saradomin brews and super restores, prayer potions, super combat potion, an Awakener's orb (one per kill), and a Ring of Shadows. Slash mainhand: Soulreaper axe (BiS; his 2x2 size inhibits Scythe of Vitur) or Blade of Saeldor (c). Voidwaker spec Vardorvis at kill-start when his defence is maximised.",
         "worldX": 3129,
         "worldY": 3636,
         "worldPlane": 0,
@@ -2981,7 +2981,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Vardorvis (Awakened). Use Protect from Melee with slash weapons (Scythe of Vitur, Soulreaper axe, or Blade of Saeldor) - he resists stab and crush. Move in a controlled diagonal pattern to dodge the axes spawned from ground cracks; Awakened-mode adds 1 extra axe per phase and tightens the spawn cadence at high HP. Kill the Strangled spawns the moment they appear or they heal him for 15-25 per tick. On the sub-25% enrage, prayer-flick to skip the head-slam and Voidwaker spec the spawn waves to keep pressure.",
+        "description": "Kill Vardorvis (Awakened). Use Protect from Melee with slash weapons (Soulreaper axe or Blade of Saeldor) - he resists stab and crush and his 2x2 size inhibits the Scythe. Move in a controlled diagonal pattern to dodge the axes spawned from ground cracks; Awakened-mode adds 1 extra axe per phase. At sub-33% HP he enters enrage with faster axe cadence; block his Head Gaze projectile with Protect from Missiles to avoid prayer drain. Spec Vardorvis with Voidwaker at kill-start to exploit max defence.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
@@ -3292,7 +3292,7 @@
         ]
       },
       {
-        "description": "Climb down the stairs in Slepe church to enter the Sisterhood Sanctuary",
+        "description": "Climb down the stairs in the small building south of the graveyard in Slepe to enter the Sisterhood Sanctuary",
         "worldX": 3728,
         "worldY": 3302,
         "worldPlane": 0,
@@ -3301,7 +3301,7 @@
         "completionCondition": "PLAYER_ON_PLANE"
       },
       {
-        "description": "Run south to The Nightmare's arena in the Sisterhood Sanctuary",
+        "description": "Run north to The Nightmare's arena in the Sisterhood Sanctuary",
         "worldX": 3806,
         "worldY": 9757,
         "worldPlane": 1,
@@ -3309,7 +3309,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Disturb The Nightmare to start the fight. Prayer rotates per attack animation: overhead-staff wind-up -> Protect from Magic, claws sweep -> Protect from Melee, crossbow-style stance -> Protect from Missiles. Bring a Sanguinesti staff plus a crush weapon (Inquisitor's mace / Soulreaper axe), kill the parasites quickly to avoid sanity drops and Hitpoints damage, and break the healing totems each phase. One unprotected mistake in a group will wipe the team",
+        "description": "Disturb The Nightmare to start the fight. Prayer rotates per attack animation: overhead-staff wind-up -> Protect from Magic, claws sweep -> Protect from Melee, crossbow-style stance -> Protect from Missiles. Bring a Sanguinesti staff plus a crush weapon (Inquisitor's mace / Soulreaper axe), kill parasites before they burst out (uncontrolled parasites deal massive HP damage then heal the Nightmare), and charge the four corner totems each phase (fully charged totems deal 800 damage to the Nightmare). One unprotected mistake in a group will wipe the team",
         "worldX": 3806,
         "worldY": 9757,
         "worldPlane": 1,
@@ -3625,7 +3625,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Bank for Nex. Bring Saradomin brews, super restores, prayer potions, sharks, super combat potions, and a Frozen key (or its four pieces). Standard meta is Scythe of Vitur or Soulreaper axe for melee + Twisted bow / Tbow for range; bring a Zaryte crossbow with diamond bolts (e) for solo specs. Salve amulet (ei) is BIS for the helm slot.",
+        "description": "Bank for Nex. Bring Saradomin brews, super restores, prayer potions, sharks, super combat potions, and a Frozen key (or its four pieces). Standard meta is Scythe of Vitur or Soulreaper axe for melee + Twisted bow / Tbow for range; bring a Zaryte crossbow with diamond bolts (e) for solo specs. Recommended amulet slot: Amulet of blood fury or Necklace of anguish (Salve amulet (ei) gives no bonus at Nex as she is not undead).",
         "worldX": 3087,
         "worldY": 3493,
         "worldPlane": 0,
@@ -3674,7 +3674,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Nex in the Ancient Prison. Four-phase fight: Smoke (Protect from Magic, dodge smoke clouds), Shadow (Protect from Magic, run from the shadow target marker), Blood (Protect from Melee, stop attacking during the siphon or she heals), Ice (Protect from Magic, free frozen teammates with melee). Pop the icicle wall on Ice phase fast; she enrages below 25%. Team-scale recommended (4-7 players); solo is possible but slow with Tumeken's shadow.",
+        "description": "Kill Nex in the Ancient Prison. Five-phase fight: Smoke (Protect from Melee, stand in melee distance, dodge smoke clouds), Shadow (Protect from Missiles, stand far away to reduce shadow shot damage), Blood (Protect from Magic, stop attacking during the siphon or she heals), Ice (Protect from Magic, free frozen teammates with melee), Zaros (Protect from Melee, she heals 500 HP and gains Soul Split). Pop the icicle wall on Ice phase fast; Zaros phase begins at 20% HP. Team-scale recommended (4-7 players); solo is possible but slow with Tumeken's shadow.",
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
@@ -3693,7 +3693,7 @@
         ]
       },
       {
-        "description": "Loot the drop pile under Nex; uniques split based on damage contribution. Pick up Nihil shards for extending Ancient ceremonial robes too",
+        "description": "Loot the drop pile under Nex; uniques split based on damage contribution. Pick up Nihil shards (used to brew ancient brews via herblore, and to craft a Zaryte crossbow with a Nihil horn and Armadyl crossbow).",
         "worldX": 2905,
         "worldY": 5190,
         "worldPlane": 0,
@@ -3821,7 +3821,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Sarachnis. Use a crush weapon - her stab and slash defence is huge. Flick prayers: Protect from Magic when her body glows red, Protect from Ranged when she glows yellow. Kill the spawned Sarachnis spiderlings the instant they appear or they will out-damage you. Stay at least one tile off the wall so spawns have a path to you and do not stack damage.",
+        "description": "Kill Sarachnis. Use a crush weapon - her stab and slash defence is huge. Flick prayers: Protect from Magic when her body glows red, Protect from Ranged when she glows yellow. Prioritise killing the magic-using spawn; the melee spawn can be tanked if your defensive bonuses are sufficient. All remaining spawns die automatically when Sarachnis is killed. Standing on tiles directly adjacent to walls puts you out of her melee range; pray Protect from Missiles there to nullify all her damage, though spawn damage is unaffected by wall positioning.",
         "worldX": 1847,
         "worldY": 9910,
         "worldPlane": 0,
@@ -3971,7 +3971,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Varrock west bank. Required: Mossy key (farmed from Moss giants in Varrock Sewers / Brimhaven dungeon / Ardougne). Bring melee gear (Salve amulet (ei) is BiS - Bryophyta is undead), super combat, food, prayer potions, and an Amulet of glory for the return teleport",
+        "description": "Bank in Varrock west bank. Required: Mossy key (farmed from Moss giants in Varrock Sewers or Brimhaven Dungeon at 1/150, or 1/75 on a moss giant Slayer task). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport",
         "worldX": 3185,
         "worldY": 3439,
         "worldPlane": 0,
@@ -3987,7 +3987,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Varrock Sewers via the manhole behind Varrock Palace (preferred) or via the Edgeville Dungeon ladder. The manhole route lands you 10 tiles north of Bryophyta's gate",
+        "description": "Travel to the Varrock Sewers via the manhole just east of Varrock Palace (preferred) or via the Edgeville Dungeon pipe shortcut near Vannaka (requires 51 Agility). The manhole route lands you 10 tiles north of Bryophyta's gate",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
@@ -3997,7 +3997,7 @@
         "section": "Travel"
       },
       {
-        "description": "Use the Mossy key on the gate to enter Bryophyta's lair. The key is consumed on use - each kill needs a fresh key, so the farm rate is gated by moss giant key drops (~1/16)",
+        "description": "Use the Mossy key on the gate to unlock Bryophyta's lair for the first time. The key is NOT consumed when opening the gate, and subsequent visits do not require a key - the lair stays open after the first unlock",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
@@ -4010,7 +4010,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Bryophyta. Use Protect from Melee and attack with a strong crush or slash weapon (Bryophyta has high stab defence). Kill the Growthlings the moment they spawn - each living Growthling heals Bryophyta for 3 HP per tick, so leaving one alive negates your DPS. Salve amulet (ei) is mandatory for the +20% melee bonus against this undead boss",
+        "description": "Kill Bryophyta. Activate Protect from Magic before entering or immediately on entry. All melee styles are equally effective (no elevated stab defence; 50% fire magic weakness). Kill Growthlings the moment they spawn - Bryophyta is immune to all damage (except poison and venom) while any Growthling is alive",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
@@ -4021,14 +4021,13 @@
         "section": "Combat",
         "recommendedItemIds": [
           4151,
-          12018,
           6685,
           2434,
           385
         ]
       },
       {
-        "description": "Teleport out via Amulet of glory or a Varrock teleport tab. Restock a fresh Mossy key + supplies before the next kill - the fight is gated by key drops, not supplies",
+        "description": "Teleport out via Amulet of glory or a Varrock teleport tab. Restock supplies before the next kill",
         "worldX": 3185,
         "worldY": 3439,
         "worldPlane": 0,
@@ -4062,7 +4061,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Edgeville. Required: Giant key (farmed from hill giants in Edgeville Dungeon or Varrock Sewers - ~1/64 drop rate). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport. The fight is short but Obor hits ~25 with melee, so brews are wasteful here - sharks are sufficient",
+        "description": "Bank in Edgeville. Required: Giant key (farmed from hill giants in Edgeville Dungeon at ~1/128; rate is 1/64 only inside Wilderness). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport. The fight is short but Obor hits up to 22 with melee, so brews are wasteful here - sharks are sufficient",
         "worldX": 3093,
         "worldY": 3493,
         "worldPlane": 0,
@@ -4097,14 +4096,14 @@
                 19707
               ]
             },
-            "description": "Rub an Amulet of glory from your inventory and select Edgeville to land at the Edgeville bank, then run east to the dungeon trapdoor north of the bank.",
+            "description": "Rub an Amulet of glory from your inventory and select Edgeville to land at the Edgeville bank, then run east to the dungeon trapdoor south of the bank.",
             "travelTip": "Amulet of glory (inventory) -> Edgeville bank"
           }
         ],
         "section": "Bank"
       },
       {
-        "description": "Travel to the Edgeville Dungeon and descend to the hill giant area. Amulet of glory -> Edgeville then run east into the trapdoor north of the bank. The dungeon entrance puts you 8 tiles from Obor's gate",
+        "description": "Travel to the Edgeville Dungeon and descend to the hill giant area. Amulet of glory -> Edgeville then run east into the trapdoor south of the bank (ruined house). The dungeon entrance puts you 8 tiles from Obor's gate",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -4114,7 +4113,7 @@
         "section": "Travel"
       },
       {
-        "description": "Use the Giant key on the gate to enter Obor's lair. The key is consumed - each kill needs a fresh key, so per-trip farm rate is gated by hill giant key drops",
+        "description": "Use the Giant key on the gate to enter Obor's lair. The key is NOT consumed to open the gate. A key is consumed when you open the loot chest inside - one key per chest open, so per-trip farm rate is gated by hill giant key drops",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -4127,7 +4126,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Obor. Use Protect from Melee and attack with the strongest melee weapon available - Obor has weak defence but a 25-damage smash auto. Stand under him to bait the melee animation; he occasionally throws a small boulder for ~8 ranged damage that ignores Protect from Melee. Sip prayer potion every ~3 kills to keep Protect from Melee active",
+        "description": "Kill Obor. Use Protect from Missiles and attack with the strongest melee weapon available - Obor has weak defence. His melee max hit is 22; his ranged slam (boulder) max hit is 26 (13 with Protect from Missiles active). Stand with your back against a wall to limit knockback displacement from his slam attack. Sip prayer potion as needed to keep Protect from Missiles active",
         "worldX": 3097,
         "worldY": 3468,
         "worldPlane": 0,
@@ -4145,7 +4144,7 @@
         ]
       },
       {
-        "description": "Teleport out via Amulet of glory after Obor dies. Restock a fresh Giant key + supplies before the next kill - the farm is bottlenecked by key drops, not by trip duration",
+        "description": "Teleport out via Amulet of glory after Obor dies. Restock a Giant key + supplies before the next kill - one key is consumed when opening the loot chest, so the farm is bottlenecked by key drops, not by trip duration",
         "worldX": 3093,
         "worldY": 3493,
         "worldPlane": 0,
@@ -4217,20 +4216,20 @@
         "conditionalAlternatives": [
           {
             "requirements": { "diaries": ["FREMENNIK_HARD"] },
-            "description": "Rub the enchanted lyre to teleport directly to Rellekka, then take Jarvald's boat to Waterbirth Island for free. Hard Fremennik Diary removes the 1,000 gp boat fee.",
-            "travelTip": "Enchanted lyre -> Rellekka -> free Jarvald boat (Hard Fremennik Diary)"
+            "description": "Rub the enchanted lyre (Hard Fremennik Diary unlocks Waterbirth Island as a direct destination) to teleport straight to Waterbirth Island, skipping the Rellekka boat entirely.",
+            "travelTip": "Enchanted lyre -> Waterbirth Island direct (Hard Fremennik Diary)"
           }
         ]
       },
       {
-        "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Bring a rune thrownaxe (or Mind Altar shortcut at 70 Agility) to pull only Rex",
+        "description": "Climb down the Waterbirth Island Dungeon ladder and navigate to floor 6 - the Kings' lair. Use a rune thrownaxe special attack on the middle (western) door to bounce through and destroy all three locked doors blocking the lair entrance. Alternatively, bypass the doors via the 85 Agility shortcut at the highest point of Waterbirth Island, or use the 81 Agility shortcut to room 14",
         "worldX": 2528,
         "worldY": 3739,
         "worldPlane": 0,
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Dagannoth Rex. Rex attacks only with Melee - keep Protect from Melee on at all times when in melee range. Rex is weak to Magic and crush; fire spells (Fire Surge / Tumeken's Shadow) or a crush weapon work best. Lure him to the edge of the islet so Prime and Supreme cannot reach you - Rex has no ranged attack so safespotting from outside his melee range trivialises the fight. Bring antidote++ for Spinolyps in the moat",
+        "description": "Kill Dagannoth Rex. Rex attacks only with Melee - keep Protect from Melee on at all times when in melee range. Rex is weak to Magic only (+255 defence vs all melee styles); use earth spells (35% elemental weakness) or a powered staff such as Tumeken's Shadow. Slayer Dart and Iban Blast are also effective. Lure him to the edge of the islet so Prime and Supreme cannot reach you - Rex has no ranged attack so safespotting from outside his melee range trivialises the fight. Bring antidote++ for Spinolyps in the moat",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -4371,7 +4370,7 @@
       }
     ],
     "locationDescription": "Waterbirth Island, Rellekka",
-    "travelTip": "Lunar Isle tele -> Rellekka",
+    "travelTip": "Waterbirth Teleport (Lunar spellbook) -> Waterbirth Island",
     "mutuallyExclusiveSources": [
       "Dagannoth Rex",
       "Dagannoth Prime"
@@ -4380,7 +4379,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Waterbirth Island via Rellekka docks (1,000 gp without The Fremennik Trials) or Lunar Isle teleport",
+        "description": "Travel to Waterbirth Island via Rellekka docks (1,000 gp without The Fremennik Trials) or Waterbirth Teleport (Lunar spellbook)",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -4389,8 +4388,8 @@
         "conditionalAlternatives": [
           {
             "requirements": { "diaries": ["FREMENNIK_HARD"] },
-            "description": "Rub the enchanted lyre to teleport directly to Rellekka, then take Jarvald's boat to Waterbirth Island for free. Hard Fremennik Diary removes the 1,000 gp boat fee.",
-            "travelTip": "Enchanted lyre -> Rellekka -> free Jarvald boat (Hard Fremennik Diary)"
+            "description": "Rub the enchanted lyre to teleport directly to Waterbirth Island. Hard Fremennik Diary adds Waterbirth Island as a lyre teleport destination, skipping the boat entirely.",
+            "travelTip": "Enchanted lyre -> Waterbirth Island (Hard Fremennik Diary)"
           }
         ]
       },
@@ -4402,7 +4401,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill Dagannoth Supreme. Supreme attacks ONLY with Ranged - keep Protect from Missiles on at all times. Supreme is weak to stab/slash and Melee is the strongest style here; Dragon scimitar, abyssal whip, or osmumten's fang with Bandos armour clears him fastest. His ranged attack hits everyone facing him, so position yourself so other players don't catch the splash. Spinolyps in the moat poison; bring antidote++",
+        "description": "Kill Dagannoth Supreme. Supreme attacks ONLY with Ranged - keep Protect from Missiles on at all times. Supreme is weak to Melee (stab, slash, and crush equally); Dragon scimitar, abyssal whip, or osmumten's fang with Bandos armour clears him fastest. His ranged attack hits everyone facing him, so position yourself so other players don't catch the splash. Spinolyps in the moat poison; bring antidote++",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
@@ -4603,7 +4602,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the smoky cave. A facemask, Slayer helmet, or Masked earmuffs is required to survive the dungeon's smoke without constant damage. Active Smoke devil Slayer task is required to attack the Thermonuclear smoke devil",
+        "description": "Enter the smoky cave. A facemask, gas mask, or Slayer helmet is required to survive the dungeon's smoke without constant damage. Active Smoke devil Slayer task is required to attack the Thermonuclear smoke devil",
         "worldX": 2412,
         "worldY": 3061,
         "worldPlane": 0,
@@ -4623,7 +4622,7 @@
         "section": "Travel"
       },
       {
-        "description": "Navigate north-west through the smoke devil cave to the Thermonuclear boss room. Take care of the regular smoke devils on the way if Protect from Magic is not flicked",
+        "description": "Navigate north-west through the smoke devil cave to the Thermonuclear boss room. Take care of the regular smoke devils on the way if Protect from Missiles is not flicked",
         "worldX": 2379,
         "worldY": 9452,
         "worldPlane": 0,
@@ -4632,7 +4631,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Thermonuclear smoke devil. Use Protect from Magic - it hits 30s+ through no prayer. Stay back at max distance with Trident of the Swamp/Seas or Tumeken's shadow; safe-spot the boss behind a rock so you can flick the prayer easily. Bring an Occult necklace yourself once it drops - the boss is the source of it.",
+        "description": "Kill the Thermonuclear smoke devil. Its attack is typeless (max hit 8); no protection prayer reduces it. Use Piety for melee or Redemption for magic. Stay at max distance with Trident of the Swamp/Seas or Tumeken's shadow - magic has 9-tile range vs the boss's 8-tile attack range, so freeze it and step back to exploit this gap. No static rock safe-spot exists; the boss walks through obstacles to prevent it. Bring an Occult necklace yourself once it drops - the boss is the source of it.",
         "worldX": 2379,
         "worldY": 9452,
         "worldPlane": 0,
@@ -4778,7 +4777,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Abyssal Sire. Phase 1: stun the Sire with Shadow Barrage (100% stun chance) or deal 75 ranged/magic damage, then kill all 4 respiratory systems while the Sire is stunned - tentacles guarding them deactivate during stun. Phase 2 (50% HP): Sire walks to the centre; tentacles become inactive - melee him with Protect from Melee, watch for the teleport grab that drags you toward him. Phase 3 (25% HP): tentacles re-activate and Sire releases poison miasma pools - stay mobile, do NOT stand in green pools, keep Protect from Melee. Bandos chestplate/tassets + Abyssal bludgeon or scythe with Soulreaper axe clears phase 2-3 fastest. 85 Slayer + Abyssal demon task required",
+        "description": "Kill the Abyssal Sire. Phase 1: stun the Sire with Shadow Barrage (100% stun chance) or deal 75 ranged/magic damage, then kill all 4 respiratory systems while the Sire is stunned - tentacles guarding them deactivate during stun. Phase 2 (50% HP): Sire walks to the centre; tentacles become inactive - melee him with Protect from Melee, watch for the teleport grab that drags you toward him. Phase 3 (~50% HP, <210 health): tentacles re-activate and Sire releases miasma pools - switch to Protect from Missiles (spawns deal ranged damage; Sire no longer melees), stay mobile, do NOT stand in green pools. Bandos chestplate/tassets + Abyssal bludgeon or scythe with Soulreaper axe clears phase 2-3 fastest. 85 Slayer + Abyssal demon task required",
         "worldX": 3039,
         "worldY": 4763,
         "worldPlane": 0,
@@ -4864,7 +4863,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the King Black Dragon. Use Protect from Magic, keep an antifire potion active (the dragon also has a venom-laced melee attack), and fight with ranged or melee stab. The KBD uses dragonfire, magic, melee, ranged and a poison breath, so anti-dragon shield plus antifire is non-negotiable",
+        "description": "Kill the King Black Dragon. Use Protect from Melee when fighting at melee distance (use Protect from Magic only if using a two-handed ranged or magic setup such as twisted bow). Keep an antifire potion active and equip an anti-dragon shield. KBD uses melee (stab) and four dragonfire variants (normal, shock, ice, poison); its toxic breath inflicts poison starting at 8 damage, so bring antipoison or antidote++.",
         "worldX": 2269,
         "worldY": 4705,
         "worldPlane": 0,
@@ -4946,7 +4945,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Chaos Elemental. Use Protect from Magic, attack with ranged or a special-weapon setup, and pick loot back up immediately if you get disarmed. The boss heals modestly between phases but has no combat triggers. If you spot a PKer, log out at the south wall - the safe tile is on the outer perimeter of the ruin",
+        "description": "Kill the Chaos Elemental. Use Protect from Magic, attack with ranged or a special-weapon setup, and pick loot back up immediately if you get disarmed. If you spot a PKer, log out at the south wall - the safe tile is on the outer perimeter of the ruin",
         "worldX": 3261,
         "worldY": 3927,
         "worldPlane": 0,
@@ -5028,7 +5027,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Ferox Enclave then travel to the Scorpion Pit in deep Wilderness (level ~53). Bring anti-venom+, a high-tier crush or stab weapon, prayer potions, food, and a Wilderness-cheap kit (Karil's leathertop / Black d'hide) - Scorpia's guardians inflict venom that ticks 6 per hit and burns through brews quickly. Burning amulet -> Lava Maze then run south-west; or web-walk down via the Chaos Elemental ladder. Scorpia is in multi-combat so a PKer team will land specs together - swap to a one-click logout if you spot dots on the minimap",
+        "description": "Bank in Ferox Enclave then travel to the Scorpion Pit in deep Wilderness (level ~53). Bring anti-venom+, a high-tier stab weapon, prayer potions, food, and a Wilderness-cheap kit (Karil's leathertop / Black d'hide) - Scorpia's guardians inflict poison starting at 6 damage and burn through brews quickly. Burning amulet -> Lava Maze then run south-west; or web-walk down via the Chaos Elemental ladder. Scorpia is in multi-combat so a PKer team will land specs together - swap to a one-click logout if you spot dots on the minimap",
         "worldX": 3231,
         "worldY": 3936,
         "worldPlane": 0,
@@ -5061,7 +5060,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Scorpia. Use Protect from Melee, attack with crush (Bandos godsword, Inquisitor's mace) or stab to bypass her defence, and pre-pot anti-venom+. At ~33% HP Scorpia spawns two Scorpia's Guardians that heal her - kill them on sight or DPS Scorpia faster than the heal tick. Sip super combat / overload mid-fight if you brought one",
+        "description": "Kill Scorpia. Use Protect from Missiles to block damage from her guardians, attack with stab (her lowest melee defence), and pre-pot anti-venom+. At ~50% HP Scorpia spawns two Scorpia's Guardians that heal her - kill them on sight or DPS Scorpia faster than the heal tick. Sip super combat / overload mid-fight if you brought one",
         "worldX": 3233,
         "worldY": 10341,
         "worldPlane": 0,
@@ -5155,14 +5154,14 @@
                 2566
               ]
             },
-            "description": "Rub a Ring of dueling from your inventory and select Ferox Enclave to bank instantly, restock the cheap kit, and recharge amulets at the fountain before entering the Wilderness.",
+            "description": "Rub a Ring of dueling from your inventory and select Ferox Enclave to bank instantly and restock the cheap kit before entering the Wilderness.",
             "travelTip": "Ring of dueling (inventory) -> Ferox Enclave bank"
           }
         ],
         "section": "Bank"
       },
       {
-        "description": "Travel to the Chaos Fanatic camp in the Wilderness (level 42). Burning amulet -> Lava Maze then run south-west past the lava pits, or web-walk via the Mage of Zamorak teleport (Lvl-60 Magic). Watch for PKers along the canyon corridor",
+        "description": "Travel to the Chaos Fanatic camp in the Wilderness (level 42). Burning amulet -> Lava Maze, run south-west past the lava pits. Alternatively, cast Ghorrock Teleport or use a POH obelisk (hard Wilderness Diary) to select level 44 Wilderness. Watch for PKers along the canyon corridor",
         "worldX": 2979,
         "worldY": 3846,
         "worldPlane": 0,
@@ -5172,7 +5171,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Chaos Fanatic. Use Protect from Magic and stand 1-2 tiles away (range is fine) - the multi-hit projectile splash deals 4-12 if you cluster with the spawn point. The boss has a self-damage tantrum animation that briefly stuns it; capitalise with a special attack. Logout on the south rocks if a PKer triggers",
+        "description": "Kill the Chaos Fanatic. Use Protect from Magic. Move away from the green AoE projectile landing spot to avoid the explosion. The boss can disarm your weapon or shield (like Chaos Elemental); keep a spare equipped or in inventory. Logout on the south rocks if a PKer triggers",
         "worldX": 2979,
         "worldY": 3846,
         "worldPlane": 0,
@@ -5190,7 +5189,7 @@
         ]
       },
       {
-        "description": "Stash drops in the looting bag and teleport via burning amulet or glory. Recharge amulets at Ferox Enclave fountain and bank loot from the looting bag before the next trip",
+        "description": "Stash drops in the looting bag and teleport via burning amulet or glory. Bank loot from the looting bag at Ferox Enclave before the next trip",
         "worldX": 3151,
         "worldY": 3635,
         "worldPlane": 0,
@@ -5254,7 +5253,7 @@
       }
     ],
     "locationDescription": "Silk Chasm, Wilderness",
-    "travelTip": "Burning amulet -> Bandit Camp, then run east to the Silk Chasm cave",
+    "travelTip": "Wilderness crabs teleport (fastest); or Waka canoe (57 Woodcutting) to reach the Silk Chasm cave",
     "mutuallyExclusiveSources": [
       "Kalphite Queen",
       "Chaos Elemental",
@@ -5266,13 +5265,13 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Silk Chasm cave entrance in the Wilderness with anti-pk gear, a Voidwaker / DWH spec weapon if available, and at least one super combat plus restore. Burning amulet to Bandit Camp then run east",
+        "description": "Travel to the Silk Chasm cave entrance in the Wilderness with anti-pk gear, a Voidwaker / DWH spec weapon if available, and at least one super combat plus restore. Use Wilderness crabs teleport (fastest) or Waka canoe (57 Woodcutting)",
         "worldX": 3321,
         "worldY": 3794,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Burning amulet -> Bandit Camp + run east"
+        "travelTip": "Wilderness crabs teleport (fastest); or Waka canoe with 57 Woodcutting"
       },
       {
         "description": "Enter the Cave Entrance to access the Silk Chasm",
@@ -5285,7 +5284,7 @@
         "completionDistance": 4
       },
       {
-        "description": "Kill Venenatis with melee using Protect from Magic. Venenatis attacks with magic and melee; the web special binds you in place and drains prayer/run energy, so pre-pot prayer and step away when the web lands. Kill the Venenatis spiderlings on sight - they hit hard and heal her if left alive",
+        "description": "Kill Venenatis with melee. She cycles 8 ranged attacks then 8 magic attacks - switch between Protect from Missiles and Protect from Magic each phase. Venenatis attacks with melee, ranged, and magic; the web special binds you in place and drains prayer/run energy, so pre-pot prayer and step away when the web lands. Kill Venenatis spiderlings on sight - they drain your prayer, boost her damage, and allow her to hit through protection prayers if left alive",
         "worldX": 3332,
         "worldY": 3734,
         "worldPlane": 0,
@@ -5370,7 +5369,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Vet'ion's Rest in the Wilderness with a crush weapon (Inquisitor's mace, Soulreaper axe, or Saradomin sword), prayer potions, Saradomin brews, and a Voidwaker / DWH spec. Burning amulet to Chaos Temple, then run east",
+        "description": "Travel to Vet'ion's Rest in the Wilderness with a crush weapon (Inquisitor's mace or Soulreaper axe), prayer potions, Saradomin brews, and a Voidwaker / DWH spec. Burning amulet to Chaos Temple, then run east",
         "worldX": 3196,
         "worldY": 3776,
         "worldPlane": 0,
@@ -5393,7 +5392,7 @@
         "completionDistance": 5
       },
       {
-        "description": "Kill Vet'ion. Use Protect from Magic for his magic attack and swap to Protect from Missiles when he switches to a ranged attack. He spawns Skeletal Hellhounds at 75%, 50%, and 25% HP - kill them immediately or they will overwhelm you. Use a crush weapon since his stab and slash defence are higher",
+        "description": "Kill Vet'ion. Use Protect from Magic throughout - he attacks with magic only. Skeletal Hellhounds spawn at 50% HP in his first form; Greater Skeletal Hellhounds spawn at 50% HP in his enraged second form - kill them immediately as they grant him full damage immunity while alive. Use crush attacks since his stab and slash defence are very high",
         "worldX": 3220,
         "worldY": 3783,
         "worldPlane": 0,
@@ -5459,7 +5458,7 @@
       }
     ],
     "locationDescription": "Callisto's Den, Wilderness",
-    "travelTip": "Burning amulet -> Chaos Temple, then run south-east into Callisto's Den",
+    "travelTip": "Burning amulet -> Chaos Temple, then run north into Callisto's Den",
     "mutuallyExclusiveSources": [
       "Kalphite Queen",
       "Chaos Elemental",
@@ -5471,7 +5470,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Callisto's Den in the Wilderness with a melee setup (Bandos / Torva, Voidwaker, Saradomin brews) and prayer potions. Burning amulet to Chaos Temple, then run south-east",
+        "description": "Travel to Callisto's Den in the Wilderness with a ranged setup (Masori or equivalent ranged armour, Webweaver bow or crossbow, Saradomin brews) and prayer potions. Burning amulet to Chaos Temple, then run north",
         "worldX": 3265,
         "worldY": 3832,
         "worldPlane": 0,
@@ -5483,10 +5482,10 @@
           3870,
           0
         ],
-        "travelTip": "Burning amulet -> Chaos Temple + run south-east"
+        "travelTip": "Burning amulet -> Chaos Temple + run north"
       },
       {
-        "description": "Arrive at Callisto's Den and pre-pot Super Combat. Turn on Piety and Protect from Melee before engaging; Callisto deals heavy melee damage even at full health",
+        "description": "Arrive at Callisto's Den and pre-pot Divine ranging potion. Turn on Rigour (or Eagle Eye) and Protect from Magic before engaging; melee combat is not advised as Callisto deals very high melee damage even through Protect from Melee",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
@@ -5494,7 +5493,7 @@
         "completionDistance": 5
       },
       {
-        "description": "Kill Callisto with melee using Protect from Melee - Callisto only attacks with melee. Stand on his tile so the bear-stomp shockwave (knockback that unequips ranged shields and stalls combat) hits at melee range. Kill Callisto cubs immediately on spawn; they heal him if left alive",
+        "description": "Kill Callisto with ranged using Protect from Magic. Callisto uses melee, ranged (if out of reach), and a slow magic attack - Protect from Magic fully negates the magic attack and prevents the knockback/stun. At 66% and 33% HP Callisto deploys bear traps that snare and damage if stepped on. Protect from Melee only reduces his melee damage by ~50% so stay at range",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
@@ -5569,7 +5568,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Demonic gorillas. Bring a ranged setup (Bow of faerdhinen or Toxic blowpipe with rune/amethyst darts) plus a melee swap (Scythe or Ghrazi rapier), Saradomin brews, super restores, prayer potions, and a few sharks. The gorillas hit hard through prayer when you tank a wrong style, so a tank-shield swap or extra brews are worth packing.",
+        "description": "Bank for Demonic gorillas. Bring a ranged setup (Bow of faerdhinen or Toxic blowpipe with rune/amethyst darts) plus a melee swap (Emberlight or Arclight for the demonbane bonus), Saradomin brews, super restores, prayer potions, and a few sharks. Keep protection prayers active and swap styles to match the gorilla's attack - missing prayers will drain supplies fast.",
         "worldX": 2461,
         "worldY": 3444,
         "worldPlane": 0,
@@ -5604,7 +5603,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Demonic gorillas in the Crash Site Cavern. They cycle through Protect from Melee / Magic / Range after every three successful hits of the same style, so swap your style each time the prayer flips. Dodge the falling-boulder special (run one tile when the ground turns red) and the Magic-special purple orb (hits for up to 30 through prayer). Bow of faerdhinen or Toxic blowpipe + Ghrazi rapier on the swap is the modern meta.",
+        "description": "Kill Demonic gorillas in the Crash Site Cavern. They switch attack style after three missed hits in a row (blocked by prayer counts as missed), so watch for the style change and swap your protection prayer accordingly. Dodge the falling-boulder special (run one tile when the ground turns red) and the magic attack (a green orb, up to 30 damage - blocked by Protect from Magic). Use Emberlight or Arclight for the melee swap as demonic gorillas are demons and take bonus damage from demonbane weapons. Toxic blowpipe or Bow of faerdhinen works well for ranged.",
         "worldX": 2405,
         "worldY": 3419,
         "worldPlane": 0,
@@ -5665,7 +5664,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Lizardman shamans. Bring your best crush weapon (Inquisitor's mace, Saradomin sword, or Soulreaper axe), Saradomin brews, super restores, super combat potion, prayer potions, and a few sharks. Slayer task is recommended for the Dragon warhammer rate - confirm one is active before leaving Shayzien.",
+        "description": "Bank for Lizardman shamans. Bring your best stab weapon (Ghrazi rapier or Osmumten's fang), Saradomin brews, super restores, super combat potion, prayer potions, and a few sharks. Slayer task is recommended for the Dragon warhammer rate - confirm one is active before leaving Shayzien.",
         "worldX": 1504,
         "worldY": 3633,
         "worldPlane": 0,
@@ -5691,7 +5690,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Lizardman shamans in the canyon. Stand with your back against a wall to prevent the shamans from leaping on you and resetting your aggro. Step one tile off the green spawn pool as soon as it appears - the spawn explodes for 20+ damage if you stand on it. Use your crush weapon for the Dragon warhammer / Lizardman fang rare drops.",
+        "description": "Kill Lizardman shamans in the canyon. Stand with your back against a wall to prevent the shamans from leaping on you and resetting your aggro. Move at least 3 tiles from the purple spawns as soon as they appear - the spawn explodes for 8-10 damage within 2 tiles. Use your stab weapon for the Dragon warhammer / Lizardman fang rare drops.",
         "worldX": 1472,
         "worldY": 3686,
         "worldPlane": 0,
@@ -5718,7 +5717,7 @@
         "section": "Loot"
       },
       {
-        "description": "Return to bank when supplies run low. Xeric's talisman -> Glade is the fastest cycle back to a Shayzien bank.",
+        "description": "Return to bank when supplies run low. Xeric's talisman -> Lookout is the fastest cycle back to a Shayzien bank.",
         "worldX": 1504,
         "worldY": 3633,
         "worldPlane": 0,
@@ -5789,7 +5788,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Skotizo. Bring Arclight (or Emberlight) for the demonbane bonus, Saradomin brews, super restores, Protect from Magic prayer potions, and 3 Dark totem pieces. Tank gear and Protect from Magic recommended - Skotizo hits through the protection on every attack.",
+        "description": "Bank for Skotizo. Bring Arclight (or Emberlight) for the demonbane bonus, Saradomin brews, super restores, prayer potions, and 3 Dark totem pieces. Use Protect from Melee as your primary prayer; wear high Magic Defence gear (e.g. black dragonhide) to absorb his magic attacks.",
         "worldX": 1638,
         "worldY": 3673,
         "worldPlane": 0,
@@ -5814,7 +5813,7 @@
         "section": "Travel"
       },
       {
-        "description": "Use the Dark totem on the Dark Altar in the Catacombs to spawn Skotizo. The totem is assembled from three pieces (Dark totem top / middle / base) dropped by Catacomb monsters and combined at the altar",
+        "description": "Use the Dark totem on the Dark Altar in the Catacombs to spawn Skotizo. Combine the three pieces (Dark totem base / middle / top) in your inventory first - they are dropped by Catacomb monsters.",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
@@ -5826,7 +5825,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Skotizo. Use Protect from Magic and attack the four Awakened Altars around the arena as soon as they spawn - leaving them alive amplifies Skotizo's damage dramatically. Arclight (or upgraded Emberlight) gives huge accuracy and damage against demons. Drink prayer potions on cooldown; Skotizo's magic still hits through the protection.",
+        "description": "Kill Skotizo. Use Protect from Melee in melee range; switch to Protect from Magic when running to disable the four Awakened Altars. Disable altars quickly - each active altar reduces your damage dealt to Skotizo by 25% (up to 100% with non-demonbane weapons, 15% each up to 60% with Arclight/Emberlight). Arclight (or Emberlight) gives huge accuracy and damage against demons.",
         "worldX": 1636,
         "worldY": 3673,
         "worldPlane": 0,
@@ -5907,7 +5906,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Hespori. Bring a Hespori seed, secateurs (magic secateurs preferred), spade, your best melee or magic weapon (Trident / Whip / Scythe all fine), a Saradomin brew and prayer potion, and at least one teleport home. The patch is in the south room of the Farming Guild and requires 65 Farming to access.",
+        "description": "Bank for Hespori. Bring a Hespori seed, secateurs (magic secateurs preferred), spade, your best melee or magic weapon (Trident / Whip / Scythe all fine), a Saradomin brew and prayer potion, and at least one teleport home. The patch is in the west wing cave of the Farming Guild and requires 65 Farming to access.",
         "worldX": 1647,
         "worldY": 3667,
         "worldPlane": 0,
@@ -5921,7 +5920,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Farming Guild south room. Fairy ring CIR is the fastest route; Skills necklace to Farming Guild is the unquested fallback. Plant the Hespori seed in the Hespori patch (requires 65 Farming) and wait for it to grow",
+        "description": "Travel to the Farming Guild west wing cave. Fairy ring CIR is the fastest route; Skills necklace to Farming Guild is the unquested fallback. Plant the Hespori seed in the Hespori patch (requires 65 Farming) and wait for it to grow",
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
@@ -5940,8 +5939,8 @@
                 "FARMING"
               ]
             },
-            "description": "Farming cape: teleport straight into the Farming Guild (lands near the bank), then walk to the south room and plant the Hespori seed. Skips the fairy ring hop entirely",
-            "travelTip": "Farming cape -> Farming Guild -> south room"
+            "description": "Farming cape: teleport straight into the Farming Guild (lands near the bank), then walk to the west wing cave and plant the Hespori seed. Skips the fairy ring hop entirely",
+            "travelTip": "Farming cape -> Farming Guild -> west wing cave"
           }
         ]
       },
@@ -5955,7 +5954,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Hespori. Use Protect from Magic for the entire fight. Hespori summons three flowers each phase that auto-target you with binding roots; kill them in order (white, then red, then blue) or they will stack damage. After three flower waves Hespori becomes attackable - bring high accuracy gear since her defence is huge. Magic secateurs increase yield from the seeds dropped on death.",
+        "description": "Kill Hespori. Use Protect from Magic for the entire fight. Four flower buds surround Hespori and keep her invulnerable; kill all four buds (each dies in one hit from any weapon, any order) to make Hespori attackable. Buds re-open at 66% and 33% health. Hespori uses a vine entangle special attack - move away when targeted. Bring high accuracy gear for Hespori herself. Magic secateurs increase seed yield on death.",
         "worldX": 1233,
         "worldY": 3731,
         "worldPlane": 0,
@@ -6628,7 +6627,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Bring Scythe of vitur (or Soulreaper axe), Tbow + diamond bolts (e) for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
+        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -6643,7 +6642,7 @@
                 22400
               ]
             },
-            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + diamond bolts (e) for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
+            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
             "travelTip": "Drakan's medallion -> Ver Sinhaza"
           }
         ],
@@ -6658,7 +6657,7 @@
         "section": "Combat"
       },
       {
-        "description": "Clear The Maiden, Pestilent Bloat, Nylocas, Sotetseg, and Xarpus. Refresh supplies at each chest and prep gear for the Verzik fight",
+        "description": "Clear The Maiden, Pestilent Bloat, Nylocas, Sotetseg, and Xarpus. Refresh supplies at the chests after Bloat and Sotetseg and prep gear for the Verzik fight",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -6666,7 +6665,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat Verzik Vitur. P1: pray Protect from Magic and dagger the Athanatos. P2: dodge red ball, switch prayers to match the Nylocas colour. P3: Tbow with diamond bolts (e), pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
+        "description": "Defeat Verzik Vitur. P1: pray Protect from Magic and dagger the Athanatos. P2: dodge the purple projectile, switch prayers to match the Nylocas colour. P3: Tbow with dragon arrows, pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -6856,7 +6855,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + diamond bolts (e), Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
+        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + dragon arrows, Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -6871,7 +6870,7 @@
                 22400
               ]
             },
-            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + diamond bolts (e), Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
+            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Hard Mode hits noticeably harder - bring Scythe of vitur, Tbow + dragon arrows, Sanguinesti staff, Soulreaper axe for spec, full brews/restores and extra prayer potions; expect tighter Nylo waves and a longer Verzik fight",
             "travelTip": "Drakan's medallion -> Ver Sinhaza"
           }
         ],
@@ -6894,7 +6893,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat Verzik Vitur in Hard Mode. P1: pray Protect from Magic and dagger the Athanatos. P2: dodge red ball, match prayer to Nylocas colour - HM spawns are denser. P3: Tbow with diamond bolts (e), pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
+        "description": "Defeat Verzik Vitur in Hard Mode. P1: take turns using the Dawnbringer special attack to damage Verzik, hide behind a pillar between turns. P2: dodge urnbombs, poison or venom the Nylocas Athanatos to burst them into Verzik, match prayer to Nylocas colour - HM spawns are denser. P3: Tbow with dragon arrows, pray Protect from Magic, never stand on a tornado",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -7175,8 +7174,8 @@
                 "DESERT_HARD"
               ]
             },
-            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). Bring Tbow or Bow of faerdhinen, Osmumten's fang for stab phases, Tumeken's shadow if owned, full brews/restores and prayer potions; set invocations under 150 raid level for entry-mode loot",
-            "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
+            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary raises the sceptre's max charge capacity to 50; still requires recharging at Jalsavrah when depleted). Bring Tbow or Bow of faerdhinen, Osmumten's fang for stab phases, Tumeken's shadow if owned, full brews/restores and prayer potions; set invocations under 150 raid level for entry-mode loot",
+            "travelTip": "Pharaoh's sceptre -> Necropolis (up to 50 charges via Desert Hard diary)"
           },
           {
             "requirements": {
@@ -7213,7 +7212,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat the Wardens. P1/P2: swap prayers to match the active Warden's style and break the obelisk. P3 (Tumeken's Warden): pray Protect from Magic against the energy ball volleys, dodge the obelisk hand-slam, swap prayers when the Warden mimics Akkha/Zebak/Ba-Ba/Kephri attacks",
+        "description": "Defeat the Wardens. P1/P2: swap prayers to match the active Warden's style and break the obelisk. P3 is whichever Warden was not fought in P2. Tumeken's Warden P3 summons Zebak and Ba-Ba phantoms; Elidinis' Warden P3 summons Akkha and Kephri phantoms. Pray Protect from Magic against the energy ball volleys, dodge the obelisk hand-slam, and swap prayers when the Warden mimics its phantom bosses' attacks",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
@@ -7495,8 +7494,8 @@
                 "DESERT_HARD"
               ]
             },
-            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). Bring Tbow or Bow of faerdhinen, Osmumten's fang, Tumeken's shadow if owned, full brews/restores; aim for invocations totalling raid level 300-450 for solid loot efficiency before entering",
-            "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
+            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary increases the sceptre to 50 charges per recharge, 100 with Elite diary, reducing recharge trips to the desert lectern). Bring Tbow or Bow of faerdhinen, Osmumten's fang, Tumeken's shadow if owned, full brews/restores; aim for invocations totalling raid level 300-450 for solid loot efficiency before entering",
+            "travelTip": "Pharaoh's sceptre -> Necropolis (50 charges via Desert Hard diary, 100 with Elite)"
           },
           {
             "requirements": {
@@ -7540,7 +7539,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat the Wardens at raid level 300. P1/P2: rotate prayers to match the active style and break the obelisk. P3 (Tumeken's Warden): pray Protect from Magic against the energy balls, dodge the obelisk hand-slam, swap prayers when the Warden mimics Akkha/Zebak/Ba-Ba/Kephri attacks",
+        "description": "Defeat the Wardens at raid level 300. P1/P2: rotate prayers to match the active style and break the obelisk. P3 (Tumeken's Warden): pray Protect from Magic against the energy balls, dodge the obelisk hand-slam, swap prayers when the Warden mimics Zebak/Ba-Ba attacks (Elidinis' Warden mimics Akkha/Kephri instead)",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
@@ -7822,8 +7821,8 @@
                 "DESERT_HARD"
               ]
             },
-            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). At raid level 500 bring Tumeken's shadow or Tbow, Osmumten's fang, full brews/restores, extra prayer potions and a Soulreaper axe spec; gear must be top-tier or kill times balloon",
-            "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
+            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary raises the sceptre charge cap to 50, up from 25, reducing how often it needs recharging at the desert lectern). At raid level 500 bring Tumeken's shadow or Tbow, Osmumten's fang, full brews/restores, extra prayer potions and a Soulreaper axe spec; gear must be top-tier or kill times balloon",
+            "travelTip": "Pharaoh's sceptre -> Necropolis (50 charges with Desert Hard diary)"
           },
           {
             "requirements": {
@@ -7867,7 +7866,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat the Wardens at raid level 500. P1/P2: rotate prayers to match the active style; obelisk health-bar is much longer. P3 (Tumeken's Warden): pray Protect from Magic against the energy balls, dodge the obelisk hand-slam, swap prayers exactly when the Warden mimics Akkha/Zebak/Ba-Ba/Kephri attacks - mistakes cost 30+ hp at this scale",
+        "description": "Defeat the Wardens at raid level 500. P1/P2: rotate prayers to match the active style; obelisk health-bar is much longer. P3 phantoms depend on which Warden enraged: Tumeken's Warden summons Zebak and Ba-Ba phantoms; Elidinis' Warden summons Akkha and Kephri phantoms. Pray to each phantom's attack style and dodge the obelisk hand-slam - mistakes cost 30+ hp at this scale",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
@@ -8376,7 +8375,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Verac's mound (north-west) and kill Verac the Defiled. Verac's flail ignores Protect from Melee and armour - use Protect from Melee anyway to halve the chance, wear high-prayer gear, and attack with Melee (he is weak to Crush)",
+        "description": "Dig on Verac's mound (north-west) and kill Verac the Defiled. Verac's flail ignores Protect from Melee and armour - use Protect from Melee anyway (it fully negates 75% of his attacks; only 25% bypass prayer), wear high-prayer gear, and attack with Magic (his weakness)",
         "worldX": 3557,
         "worldY": 3298,
         "worldPlane": 0,
@@ -8406,7 +8405,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Karil's mound (south) and kill Karil the Tainted. Karil uses Ranged and can halve your Agility - use Protect from Missiles and attack with Magic (his weakness)",
+        "description": "Dig on Karil's mound (south) and kill Karil the Tainted. Karil uses Ranged and can reduce your Agility by 20% on a 25% chance per hit - use Protect from Missiles and attack with Magic (his weakness)",
         "worldX": 3566,
         "worldY": 3275,
         "worldPlane": 0,
@@ -8421,7 +8420,7 @@
         "section": "Combat"
       },
       {
-        "description": "Dig on Guthan's mound (south-east) and kill Guthan the Infested. Guthan uses Melee and his warspear heals him on hit - use Protect from Melee and attack with Ranged (his weakness)",
+        "description": "Dig on Guthan's mound (south-east) and kill Guthan the Infested. Guthan uses Melee and his warspear heals him on hit - use Protect from Melee and attack with Magic (his weakness)",
         "worldX": 3577,
         "worldY": 3283,
         "worldPlane": 0,
@@ -8557,7 +8556,7 @@
       }
     ],
     "locationDescription": "Tempoross Cove, south of Al Kharid",
-    "travelTip": "Minigame Grouping teleport -> Tempoross, or sail from the Ruins of Unkah",
+    "travelTip": "Ferryman Sathwood ferry south of Al Kharid bank, or sail from Ruins of Unkah dock",
     "npcId": 10584,
     "interactAction": "Talk-to",
     "requirements": {
@@ -8576,7 +8575,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Minigame Grouping teleport -> Tempoross",
+        "travelTip": "Ferryman Sathwood ferry south of Al Kharid bank",
         "requiredItemIds": [
           311,
           2347
@@ -8599,7 +8598,7 @@
         "section": "Travel"
       },
       {
-        "description": "Fish harpoonfish at the dark cloud spots, then run to a cannon and cook (use Fish on Cannon) and load the harpoonfish into the cannon. Watch for storm clouds (move out before lightning) and fix broken masts / totem poles when prompted",
+        "description": "Fish harpoonfish at the fishing spots (double spots preferred), then cook at the shrine and load cooked harpoonfish into the cannon ammunition crate. Move away from dark clouds before lightning strikes and fix broken masts / totem poles when prompted",
         "worldX": 3027,
         "worldY": 2954,
         "worldPlane": 0,
@@ -8719,7 +8718,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to the Wintertodt Camp with a tinderbox, an axe (rune or better), a knife (optional but speeds up fletching), warm clothing (Pyromancer / Hunter outfit / hooded cloak) to reduce cold damage, and Rejuvenation potions or food",
+        "description": "Travel to the Wintertodt Camp with a tinderbox, an axe (rune or better), a knife (optional but speeds up fletching), warm clothing (Pyromancer outfit / Clue hunter outfit / Wolf cloak) to reduce cold damage, and Rejuvenation potions or food",
         "worldX": 1621,
         "worldY": 3997,
         "worldPlane": 0,
@@ -8770,7 +8769,7 @@
         }
       },
       {
-        "description": "When Wintertodt's health hits zero, claim Supply crates from the box. Aim for 500+ points per game (4 crates) or 850+ (5 crates / Pyromancer outfit fast). Open crates for the Pyromancer outfit, Bruma torch, Warm gloves, Tome of fire pages, and Phoenix pet",
+        "description": "When Wintertodt's health hits zero, claim rewards from the reward cart. Aim for 500+ points per game (2 rolls) or 1000+ (3 rolls) or 1500+ (4 rolls / Pyromancer outfit fast). Open crates for the Pyromancer outfit, Bruma torch, Warm gloves, Tome of fire pages, and Phoenix pet",
         "worldX": 1640,
         "worldY": 3997,
         "worldPlane": 0,
@@ -9002,7 +9001,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Bank at Civitas illa Fortis for the Colosseum. Bring Saradomin brews, super restores, ranging potions, sharks, a Quetzal whistle (or fast teleport), and a Sunfire fanatic / Crystal armour ranged setup. Meta loadout is Bow of faerdhinen (c) with Crystal helm/body/legs + Pegasian boots + Necklace of anguish; bring a Voidwaker or Volatile nature staff spec for damage windows. Take 4-6 brews, 6-8 restores, 6 ranging potions, sharks to fill the rest, and at least 5 Sunfire splinters in case you reset on early waves.",
+        "description": "Bank at Civitas illa Fortis for the Colosseum. Bring Saradomin brews, super restores, ranging potions, sharks, a Quetzal whistle (or fast teleport), and a Sunfire fanatic / Crystal armour ranged setup. Meta loadout is Bow of faerdhinen (c) with Crystal helm/body/legs + Pegasian boots + Necklace of anguish; bring a Voidwaker or Volatile nature staff spec for damage windows. Take 4-6 brews, 6-8 restores, 6 ranging potions, and sharks to fill the rest.",
         "worldX": 1593,
         "worldY": 3091,
         "worldPlane": 0,
@@ -9039,7 +9038,7 @@
         "section": "Travel"
       },
       {
-        "description": "Clear waves 1-11. Use Protect from Missiles vs Fremennik Archers, Protect from Melee vs Manticores, and step under Serpent Shamans to break their long-range chain. Drink Sunfire splinters when low; do not over-stack modifiers if you are still learning the wave",
+        "description": "Clear waves 1-11. Use Protect from Missiles vs Fremennik Archers. Against Manticores, prayer-flick through their triple-hit sequence: the first two hits are ranged then magic (or magic then ranged), and the final hit is always melee - flick Protect from Missiles, Protect from Magic, then Protect from Melee in order. Step under Serpent Shamans to break their long-range chain. Do not over-stack modifiers if you are still learning the waves.",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -9054,7 +9053,7 @@
         ]
       },
       {
-        "description": "Defeat Sol Heredit on wave 12. He cycles three melee specials: Triple Spear (move 2 tiles perpendicular), Triple Shield (run 4 tiles away then back), and Spear Wall (run to the wall opposite his facing). His shockwave attack is unavoidable - take it with full HP and Protect from Melee on. Use the white pillar to stall his shield slam and keep up Crystal armour set effect.",
+        "description": "Defeat Sol Heredit on wave 12. His AoE attacks are unaffected by prayer and must be dodged by movement. Spear 1 (always opens the fight): move back from his centre or edge tiles. Spear 2: move to any off-centre tile. Shield 1: move 1 tile back. Shield 2: move 2 tiles back. Below 90% HP he uses Triple Parry - activate Protect from Melee on the tick before each of his three spear hits. Below 75% HP he uses Grapple - he calls a body part and you must click the item in that equipment slot within 4 ticks. Keep up Crystal armour set effect.",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -9146,13 +9145,13 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Crazy Archaeologist ruins south of the Lava Maze (Wilderness level 23). Burning amulet -> Bandit Camp then run north-west, or web-walk via the south-of-Lava-Maze ladder. The ruin sits in single-combat so once Crazy is engaged a PKer needs to wait their turn",
+        "description": "Travel to the Crazy Archaeologist ruins south of the Lava Maze (Wilderness level 23). Burning amulet -> Bandit Camp then run west, or web-walk via the south-of-Lava-Maze ladder. The ruin sits in single-combat so once Crazy is engaged a PKer needs to wait their turn",
         "worldX": 2975,
         "worldY": 3696,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Burning amulet -> Bandit Camp, run north-west to the ruins",
+        "travelTip": "Burning amulet -> Bandit Camp, run west to the ruins",
         "section": "Travel"
       },
       {
@@ -9280,7 +9279,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Araxxor. Bring Saradomin brews, super restores, and combat potions; mage gear for path 1 (Aviansie/Spitting), melee tank for path 2 (Mirror), ranged for path 3 (Minions). A salve amulet (ei) and crush weapon (Inquisitor's mace, Soulreaper axe, or Scythe) are the standard meta picks.",
+        "description": "Bank for Araxxor. Bring Saradomin brews, super restores, and combat potions. Use melee (scythe, Inquisitor's mace, or Soulreaper axe) or ranged; bring a halberd for mirrorback araxytes. Saradomin brews and super restores for sustain.",
         "worldX": 3087,
         "worldY": 3493,
         "worldPlane": 0,
@@ -9304,7 +9303,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the Araxyte hive and descend to the Araxxor arena. The first encounter is randomly assigned one of three paths; subsequent kills cycle through the remaining two",
+        "description": "Enter the Araxyte hive and descend to the Araxxor arena. Each fight, eggs hatch in one of three fixed patterns (Green>White>Red, White>Red>Green, or Red>Green>White) determining which araxyte type spawns first.",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
@@ -9315,7 +9314,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Araxxor. Three rotating paths: Path 1 (Aviansie) - use magic to break acid spitting; Path 2 (Mirror) - tank with Protect from Melee and high def, ignore the reflection; Path 3 (Minions) - kill spiderlings before they reach you. Phase 4 (final) requires Protect from Magic, dodge the web cocoon special, and pop minions with chinchompas if you brought them. Sip super combat / overload between phases.",
+        "description": "Kill Araxxor. Acidic araxytes (green eggs) explode into acid pools on death - kill them quickly and avoid the pools. Mirrorback araxytes (white eggs) recoil 50% of melee damage - attack with ranged, magic, or a halberd from one tile away to ignore the deflection. Ruptura araxytes (red eggs) spawn spiderlings - kill them before they reach you. Phase 4 enrage: Araxxor replaces melee with a 1x3 cleave attack; use Protect from Melee to reduce damage and stand under Araxxor to shrink the cleave to 1x1. Sip super combat between phases.",
         "worldX": 3686,
         "worldY": 3426,
         "worldPlane": 0,
@@ -9470,7 +9469,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Perilous Moons dungeon beneath Cam Torum, Varlamore. Before leaving the bank, equip a Dual macuahuitl or Blue moon spear for melee, Bowfa for ranged, Ancient sceptre / Trident for magic - all three styles rotate during the fight. Pack Saradomin brews, super restores, prayer potions, sharks, and your Quetzal whistle for the trip.",
+        "description": "Travel to the Perilous Moons dungeon beneath Cam Torum, Varlamore. Before leaving the bank, equip melee weapons only - each moon is weak to a specific melee style (Eclipse=stab, Blue=crush, Blood=slash) and has +500 ranged and magic defence. Bring a stab weapon, crush weapon, and slash weapon. Pack Saradomin brews, super restores, prayer potions, sharks, and your Quetzal whistle for the trip.",
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
@@ -9501,7 +9500,7 @@
         "section": "Travel"
       },
       {
-        "description": "Complete Perilous Moons. Fight Blue Moon (magic, freezes you to ice tiles - step off them), Eclipse Moon (melee, summons mirror clones, kill the real one), and Blood Moon (ranged, teleports around the arena - it auto-targets the same style you used last hit, so rotate styles to control its prayer). Each kill drops a Lunar key; use all three on the Lunar Chest for unique drops.",
+        "description": "Complete Perilous Moons. All three moons are melee-only bosses (ranged and magic are heavily resisted). Blue Moon (typeless melee, weak to crush) - hits freeze your hands causing missed attacks; weapon-freeze special places your weapon in an ice block, punch it to retrieve while dodging icy spikes. Eclipse Moon (melee, weak to stab) - clone special binds you in the centre while clones attack in waves; face your character toward each clone as it spawns to parry and return damage. Blood Moon (typeless melee, weak to slash) - alternates Blood Rain (move off blood pools) and Blood Jaguar (run to glyph and attack the jaguar) specials. After all three are dead, claim the Lunar Chest in the Ancient Shrine (all three moons must be defeated on first visit; 3 moons = 6 loot rolls).",
         "perItemStepDescription": {
           "29019": "Fight the Blue Moon and open the Lunar Chest to receive your Blue Moon armour.",
           "29013": "Fight the Blue Moon and open the Lunar Chest to receive your Blue Moon armour.",
@@ -9548,7 +9547,7 @@
         ]
       },
       {
-        "description": "After all three moons die, open the Lunar Chest in the centre of the arena for armour pieces and unique drops. Empty the chest before resetting the dungeon",
+        "description": "After all three moons die, head south into the Ancient Shrine within Neypotzli and claim the Lunar Chest for armour pieces and unique drops. Empty the chest before resetting the dungeon",
         "worldX": 1435,
         "worldY": 3131,
         "worldPlane": 0,
@@ -9625,7 +9624,7 @@
         "section": "Bank"
       },
       {
-        "description": "Use a Guthixian temple teleport to drop straight into the Chasm of Tears. The fallback unquested route is attracting a light creature in the chasm with a sapphire lantern - much slower but works without a teleport scroll.",
+        "description": "Use a Guthixian temple teleport to travel directly to the Ancient Guthixian Temple entrance. The fallback unquested route is attracting a light creature in the chasm with a sapphire lantern - much slower but works without a teleport scroll.",
         "worldX": 4100,
         "worldY": 4415,
         "worldPlane": 0,
@@ -9638,7 +9637,7 @@
         "section": "Travel"
       },
       {
-        "description": "Hit the demon with Darklight (or Emberlight) special attack to break its shield. Once the shield is down, it will cycle protection prayers - swap your style between melee / ranged / magic on every two successful hits to keep accuracy up. Use fire spells or Smoke Burst for the magic phase to take advantage of their fire weakness.",
+        "description": "The fire shield drops after your first hit and after each fire bomb attack - demonbane weapons (Darklight, Emberlight) bypass the 20% damage reduction entirely. Switch combat style after dealing roughly 150 damage to trigger the demon's prayer swap, then swap to a different style to keep accuracy up. Use water spells (e.g. Water Surge) for the magic phase to exploit their 30% elemental weakness to water.",
         "worldX": 4100,
         "worldY": 4415,
         "worldPlane": 0,
@@ -9650,7 +9649,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill the Tormented Demon. Dodge the floor-flame patches by stepping one tile in any direction when they ignite, and step out of the molten spray cone (the demon telegraphs it by raising both arms). Three-style rotation: hit twice with melee, swap to ranged for two hits, then magic for two hits - the demon's protection prayer always lags behind your last successful style by one cycle, so the swap keeps your accuracy high. Burning claw + Tormented synapse are the marquee rare drops.",
+        "description": "Kill the Tormented Demon. Dodge floor-flame patches by stepping one tile when they ignite. When the demon binds you in place, a fire bomb lands on your tile and a second on a random adjacent tile - pre-move before the bind to reduce damage. Switch style after dealing roughly 150 damage (about 25% of the demon's HP) - at that threshold it updates its protection prayer to match your last style, so swap to a different style immediately. Burning claw + Tormented synapse are the marquee rare drops.",
         "worldX": 4100,
         "worldY": 4415,
         "worldPlane": 0,
@@ -9828,7 +9827,7 @@
         "section": "Travel"
       },
       {
-        "description": "Obtain a beginner clue scroll. Lowest-tier monsters (chickens, cows, men, goblins) drop them at ~1/50; Hans in Lumbridge gives a free one per day on the H.A.M. encampment task; Young impling jars open to a beginner clue at 1/25.",
+        "description": "Obtain a beginner clue scroll. Lowest-tier monsters (chickens, cows, men, goblins) drop them at ~1/50. Young impling jars also open to a beginner clue at 1/25.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -9843,7 +9842,7 @@
         ]
       },
       {
-        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Beginner clues are short (1-5 steps) and cover Lumbridge / Varrock / Falador / Draynor only. No combat encounters - skip the world-3 sandwich lady wave by accepting whichever sandwich she offers first.",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Beginner clues are short (1-3 steps) and cover starter areas including Lumbridge, Varrock, Falador, Draynor, and Al Kharid. No combat encounters required.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -9869,7 +9868,7 @@
       }
     ],
     "afkLevel": 1,
-    "travelTip": "Obtain from low-level monsters, Young impling jars, or Hans in Lumbridge"
+    "travelTip": "Obtain from low-level monsters or Young impling jars"
   },
   {
     "name": "Revenants",
@@ -9985,7 +9984,7 @@
     "travelTip": "Burning amulet -> Bandit Camp -> Rev Caves",
     "guidanceSteps": [
       {
-        "description": "Bank in Edgeville or Ferox Enclave. Bring cheap ranged gear, Bracelet of ethereum (prevents revenant passive damage), looting bag, burning amulet, food, and prayer potions. Only risk what you are willing to lose - this is multi-combat Wilderness (level 28-34).",
+        "description": "Bank in Edgeville or Ferox Enclave. Bring cheap ranged gear, Bracelet of ethereum (reduces revenant damage by 75%), looting bag, burning amulet, food, and prayer potions. Only risk what you are willing to lose - this is singles-plus combat Wilderness (level 28-34).",
         "worldX": 3094,
         "worldY": 3492,
         "worldPlane": 0,
@@ -10023,7 +10022,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Revenant Caves entrance. Rub the burning amulet and teleport to Bandit Camp, then run north-east to the cave entrance at level 28 Wilderness. Watch for PKers along the route.",
+        "description": "Travel to the Revenant Caves entrance. Rub the burning amulet and teleport to Bandit Camp, then run north-east to the cave entrance at level 26 Wilderness. Watch for PKers along the route.",
         "worldX": 3073,
         "worldY": 3654,
         "worldPlane": 0,
@@ -10033,7 +10032,7 @@
         "section": "Travel"
       },
       {
-        "description": "Pay the 100,000-coin entry fee and enter the Revenant Caves. Activate the Bracelet of ethereum to negate revenant passive damage. Warning: the caves are deep Wilderness and multi-combat.",
+        "description": "Pay the 100,000-coin entry fee and enter the Revenant Caves. Activate the Bracelet of ethereum to reduce revenant damage by 75%. Warning: the caves are deep Wilderness and singles-plus combat.",
         "worldX": 3136,
         "worldY": 3672,
         "worldPlane": 0,
@@ -10043,7 +10042,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill revenants in the caves for unique drops. Use Protect from Magic or Protect from Missiles based on the revenant type. The Bracelet of ethereum negates passive damage. Stay alert for PKers - this is one of the most contested multi-combat Wilderness zones. Loot into the looting bag immediately and teleport out if threatened.",
+        "description": "Kill revenants in the caves for unique drops. Revenants use all three combat styles and adapt to your weakness - use Protect from Melee, Magic, or Missiles as appropriate. The Bracelet of ethereum reduces revenant damage by 75%. Stay alert for PKers - this is one of the most contested singles-plus combat Wilderness zones. Loot into the looting bag immediately and teleport out if threatened.",
         "worldX": 3136,
         "worldY": 3672,
         "worldPlane": 0,
@@ -10383,7 +10382,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or use Catacombs of Kourend",
+        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR).",
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
@@ -10393,7 +10392,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Pyrefiends in the Fremennik Slayer Dungeon or Catacombs of Kourend (30 Slayer). Use Protect from Magic",
+        "description": "Kill Pyrefiends in the Fremennik Slayer Dungeon (30 Slayer). Wear dragonhide for magic defence; use Protect from Melee (43 Prayer) to avoid damage.",
         "worldX": 2761,
         "worldY": 10008,
         "worldPlane": 0,
@@ -11319,7 +11318,7 @@
       }
     ],
     "locationDescription": "Poison Waste Dungeon, Tirannwn",
-    "travelTip": "Tirannwn quiver -> Poison Waste",
+    "travelTip": "Spirit tree to Poison Waste, then walk west to dungeon entrance.",
     "npcId": 12490,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -11333,7 +11332,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Warped Creatures in the Warped area beneath Lumbridge Swamp. Requires completion of Song of the Elves",
+        "description": "Kill Warped Creatures in the Poison Waste Dungeon, Tirannwn. Requires completion of The Path of Glouphrie.",
         "worldX": 2032,
         "worldY": 4636,
         "worldPlane": 0,
@@ -11405,7 +11404,7 @@
         ]
       },
       {
-        "description": "Kill Cave Horrors in the Mos Le Harmless cave. Requires witchwood icon necklace equipped to prevent stat drain (58 Slayer)",
+        "description": "Kill Cave Horrors in the Mos Le Harmless cave. Without a witchwood icon equipped, the scream special attack always deals 10% of base HP as damage; wearing the icon converts the scream into a regular attack roll (58 Slayer)",
         "worldX": 3740,
         "worldY": 9373,
         "worldPlane": 0,
@@ -11459,17 +11458,6 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "conditionalAlternatives": [
-          {
-            "requirements": {
-              "pohTeleports": [
-                "JEWELLERY_BOX_FANCY"
-              ]
-            },
-            "description": "POH jewellery box -> Combat bracelet -> Ranging Guild, then run south-east along the road to the Slayer Tower entrance",
-            "travelTip": "POH Combat bracelet -> Ranging Guild -> run south-east to Slayer Tower"
-          }
-        ],
         "section": "Travel"
       },
       {
@@ -11617,7 +11605,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Mount Karuulm. Bring boots of stone (mandatory to prevent passive heat damage in the Karuulm dungeon - or use granite or Cerberus boots), Dragon hunter lance, super combat, prayer potions, a few Saradomin brews, super restores, and sharks. Slayer task recommended for the dragon-tier rare drops. Fairy ring CIR drops you right at the dungeon entrance; Rada's blessing teleport to Mount Karuulm is the unquested alternative.",
+        "description": "Travel to Mount Karuulm. Bring boots of stone (mandatory to prevent passive heat damage in the Karuulm dungeon - or use boots of brimstone or granite boots), Dragon hunter lance, super combat, prayer potions, a few Saradomin brews, super restores, and sharks. Slayer task recommended for the dragon-tier rare drops. Fairy ring CIR drops you right at the dungeon entrance; Rada's blessing teleport to Mount Karuulm is the unquested alternative.",
         "worldX": 1311,
         "worldY": 3807,
         "worldPlane": 0,
@@ -11650,7 +11638,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Wyrms on the first level (62 Slayer). Pray Magic for their ranged-magic breath - they hit through prayer for 1s only and you can long-range safespot from outside their attack range with a Dragon hunter lance or Dragon hunter crossbow. Boots of stone keep the heat tick from grinding through your HP. The shortcut safespot tile near the east wall lets you AFK chunks of the task while you stack the rares.",
+        "description": "Kill Wyrms on the first level (62 Slayer). Pray Magic for their magic attacks. You can safespot from outside their 6-square attack range using a Dragon hunter crossbow or other ranged weapon. Boots of stone keep the heat tick from grinding through your HP. The shortcut safespot tile near the east wall lets you AFK chunks of the task while you stack the rares.",
         "worldX": 1311,
         "worldY": 10205,
         "worldPlane": 0,
@@ -13019,7 +13007,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Iorwerth Dungeon in Prifddinas (crystal seed teleport) or Mourner Tunnels",
+        "description": "Travel to the Iorwerth Dungeon in Prifddinas (teleport crystal) or Mourner Tunnels",
         "worldX": 1920,
         "worldY": 4672,
         "worldPlane": 0,
@@ -13032,14 +13020,14 @@
                 "FAIRY_RING"
               ]
             },
-            "description": "POH superior garden fairy ring (dramen/lunar staff equipped) -> dial CIQ to land directly at the Iorwerth Dungeon entrance in Prifddinas",
-            "travelTip": "POH fairy ring -> CIQ -> Iorwerth Dungeon entrance"
+            "description": "No fairy ring leads to Prifddinas. Use a teleport crystal to reach Prifddinas, then enter the Iorwerth Dungeon to the south.",
+            "travelTip": "Teleport crystal -> Prifddinas -> Iorwerth Dungeon"
           }
         ],
         "section": "Travel"
       },
       {
-        "description": "Kill Dark Beasts in the Mourner Tunnels or Catacombs of Kourend. Use Protect from Melee. High Defence - use accurate weapon styles",
+        "description": "Kill Dark Beasts in the Mourner Tunnels or Iorwerth Dungeon. Use Protect from Melee. High Defence - use accurate weapon styles",
         "worldX": 1920,
         "worldY": 4672,
         "worldPlane": 0,
@@ -13278,7 +13266,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Hydras on the lower level. Pray against the active style (Magic first, then Ranged after three hits - just like Alchemical Hydra). Move one tile when the fire-puddle telegraph appears under your feet to avoid the 30+ burn tick. Drink antidote++ between kills - their venom attack ticks for 6+ even after they die. Dragon hunter lance + super combat gets sub-15s kill times.",
+        "description": "Kill Hydras on the lower level. Hydra starts on a random style (Magic or Ranged), switching after every three attacks regardless of hit/miss - watch the animation to determine the opening style and switch protection prayer accordingly. Move one tile when a poison splat telegraph (light green orb) appears under your feet to avoid 4 poison damage every two ticks (halved if poison-immune). Drink antidote++ between kills. Dragon hunter lance + super combat gets sub-15s kill times.",
         "worldX": 1310,
         "worldY": 10190,
         "worldPlane": 0,
@@ -13343,7 +13331,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Vyrewatch Sentinels. Bring a Blisterwood flail (mandatory - Sentinels are immune to all non-blisterwood weapons) or an Ivandis flail as a fallback, your best magic gear (an Amulet of blood fury is BIS for the lifesteal), prayer potions, super restores, and Saradomin brews. Vyre noble outfit can speed up the disguise step but is not required for combat.",
+        "description": "Bank for Vyrewatch Sentinels. Bring a Blisterwood flail (mandatory - Sentinels are immune to all non-blisterwood weapons) or an Ivandis flail as a fallback, your best melee gear (Amulet of rancour is BIS neck; Amulet of blood fury is a budget option), prayer potions, super restores, and Saradomin brews. Vyre noble outfit can speed up the disguise step but is not required for combat.",
         "worldX": 3631,
         "worldY": 3303,
         "worldPlane": 0,
@@ -13372,7 +13360,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Vyrewatch Sentinels in the central Darkmeyer square. Blisterwood flail (or Ivandis flail) is mandatory - any non-blisterwood weapon does zero damage. Use Protect from Melee for the standard attack; the Sentinels do not phase or have special mechanics, so the fight is essentially a Slayer-XP loop tuned for the Blood shard drop. Amulet of blood fury speccing keeps your HP topped without brews.",
+        "description": "Kill Vyrewatch Sentinels in the upper and middle tiers of Darkmeyer. Blisterwood flail (or Ivandis flail) is mandatory - any non-blisterwood weapon does zero damage. Use Protect from Melee for the standard attack; the Sentinels do not phase or have special mechanics, so the fight is essentially a Slayer-XP loop tuned for the Blood shard drop.",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
@@ -13399,7 +13387,7 @@
         "section": "Loot"
       },
       {
-        "description": "Return to bank when supplies run low. Drakan's medallion to Ver Sinhaza or Canifis lodestone for the fastest bank cycle.",
+        "description": "Return to bank when supplies run low. Walk north to the Darkmeyer bank (on-site, upper tier, next to an altar). No teleport needed.",
         "worldX": 3631,
         "worldY": 3303,
         "worldPlane": 0,
