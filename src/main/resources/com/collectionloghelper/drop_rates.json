@@ -26453,7 +26453,7 @@
         ]
       },
       {
-        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Medium clues introduce coordinate clues (Spade required), puzzle boxes, and mid-level wizard fights (level 27 Saradomin / Zamorak / Guthix wizards) - use Protect from Magic when one spawns. Always carry a Sextant / Watch / Chart from Trinitus before the clue starts for instant coordinate solves.",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Medium clues introduce coordinate clues (Spade required) and puzzle boxes (no antagonist fights - combat steps start at hard clues). A Sextant (Murphy at Port Khazard), Watch (Brother Kojo at the Clock Tower), and Chart (the Observatory professor) solve coordinate clues, though the plugin handles them automatically.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
