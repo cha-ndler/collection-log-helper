@@ -29682,7 +29682,7 @@
     "guidanceSteps": [
       {
         "section": "Prerequisites",
-        "description": "Enable Mimic encounters via the Strange casket in Watson's house in Hosidius (no quest required). Watson is located south-east of the Hosidius vinery. Once enabled, elite and master caskets have a 1/35 chance to become a Mimic encounter.",
+        "description": "Enable Mimic encounters via the Strange casket in Watson's house in Hosidius (no quest required). Watson is located south-east of the Hosidius vinery. Once enabled, an elite casket has a 1/35 chance and a master casket a 1/15 chance to become a Mimic encounter.",
         "worldX": 3164,
         "worldY": 3489,
         "worldPlane": 0,
@@ -29691,7 +29691,7 @@
       },
       {
         "section": "Getting the Encounter",
-        "description": "Complete master clue scrolls. Each master casket opened has approx 1/35 chance to trigger The Mimic. Full guidance on obtaining master clues is on the Master Treasure Trails parent activity.",
+        "description": "Complete master clue scrolls. Each master casket opened has approx 1/15 chance to trigger The Mimic. Full guidance on obtaining master clues is on the Master Treasure Trails parent activity.",
         "worldX": 3164,
         "worldY": 3489,
         "worldPlane": 0,
