@@ -2929,7 +2929,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank at Ferox Enclave for Vardorvis (Awakened). The Awakened axe pattern is roughly 1 axe denser per phase and adds a heal-spawn enrage at low HP. Bring a full inventory of Saradomin brews and super restores, prayer potions, super combat potion, an Awakener's orb (one per kill), and a Ring of Shadows. Slash mainhand: Scythe of Vitur (BiS) or Soulreaper axe; Blade of Saeldor (c) is the trade-off pick. Voidwaker for spec on the Strangled spawn waves.",
+        "description": "Bank at Ferox Enclave for Vardorvis (Awakened). Awakened mode doubles HP to 1400, grants stat-drain immunity, adds 1 extra axe per phase, and increases axe/bleed/spore damage. Bring a full inventory of Saradomin brews and super restores, prayer potions, super combat potion, an Awakener's orb (one per kill), and a Ring of Shadows. Slash mainhand: Soulreaper axe (BiS; his 2x2 size inhibits Scythe of Vitur) or Blade of Saeldor (c). Voidwaker spec Vardorvis at kill-start when his defence is maximised.",
         "worldX": 3129,
         "worldY": 3636,
         "worldPlane": 0,
@@ -2981,7 +2981,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill Vardorvis (Awakened). Use Protect from Melee with slash weapons (Scythe of Vitur, Soulreaper axe, or Blade of Saeldor) - he resists stab and crush. Move in a controlled diagonal pattern to dodge the axes spawned from ground cracks; Awakened-mode adds 1 extra axe per phase and tightens the spawn cadence at high HP. Kill the Strangled spawns the moment they appear or they heal him for 15-25 per tick. On the sub-25% enrage, prayer-flick to skip the head-slam and Voidwaker spec the spawn waves to keep pressure.",
+        "description": "Kill Vardorvis (Awakened). Use Protect from Melee with slash weapons (Soulreaper axe or Blade of Saeldor) - he resists stab and crush and his 2x2 size inhibits the Scythe. Move in a controlled diagonal pattern to dodge the axes spawned from ground cracks; Awakened-mode adds 1 extra axe per phase. At sub-33% HP he enters enrage with faster axe cadence; block his Head Gaze projectile with Protect from Missiles to avoid prayer drain. Spec Vardorvis with Voidwaker at kill-start to exploit max defence.",
         "worldX": 1175,
         "worldY": 3424,
         "worldPlane": 0,
