@@ -29860,7 +29860,7 @@
       }
     ],
     "locationDescription": "Ape Atoll teak trees",
-    "travelTip": "Fairy ring BJR -> Isle of Souls (no req); or Ape Atoll tele for 2-tick",
+    "travelTip": "Fairy ring BJP -> Isle of Souls (no req); or Ape Atoll tele for 2-tick",
     "guidanceSteps": [
       {
         "description": "Bank for teak chopping. Bring your best axe (dragon or crystal for highest success rate). 35 Woodcutting required. Isle of Souls is best with no extra requirements. Ape Atoll or Prifddinas are optimal for 2-tick manipulation (bring a knife and kebbit claws or karambwanji for the tick cycle).",
@@ -29876,13 +29876,13 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to teak trees. Isle of Souls: fairy ring BJR (no requirements). Ape Atoll: Ape Atoll teleport then run to southern grove. Fossil Island: Digsite pendant. Locus Oasis (Varlamore): Quetzal Transport to Outer Fortis, run to grove.",
+        "description": "Travel to teak trees. Isle of Souls: fairy ring BJP (no requirements). Ape Atoll: Ape Atoll teleport then run to southern grove. Fossil Island: Digsite pendant. Locus Oasis (Varlamore): Quetzal Transport to Outer Fortis, run to grove.",
         "worldX": 2770,
         "worldY": 2700,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Fairy ring BJR -> Isle of Souls; Ape Atoll tele for 2-tick; Digsite pendant -> Fossil Island",
+        "travelTip": "Fairy ring BJP -> Isle of Souls; Ape Atoll tele for 2-tick; Digsite pendant -> Fossil Island",
         "section": "Travel"
       },
       {
