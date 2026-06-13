@@ -92,24 +92,46 @@ public class C6B3OverlapRegressionTest
 	}
 
 	@Test
-	public void chambersOfXericStacksKourendHardAheadOfXericsTalisman()
+	public void chambersOfXericNoLongerCarriesKourendHardDiaryAlternative()
 	{
-		assertStackedDiaryAndPoh(
-			"Chambers of Xeric",
-			KOUREND_HARD,
-			"XERICS_TALISMAN",
-			"Xeric's Heart",
-			"Use Xeric's talisman to teleport to Mount Quidamortem");
+		// Wiki-meta audit fix: the KOUREND_HARD alternative claimed Xeric's
+		// Heart lands near the CoX prep room and is a Kourend Hard unlock;
+		// Xeric's Heart teleports to Kourend Castle and no diary gates any
+		// Xeric's talisman destination. The alternative was removed and must
+		// not be reintroduced; B2's POH alternative is preserved.
+		CollectionLogSource source = findSource("Chambers of Xeric");
+		assertNotNull(source, "Expected source: Chambers of Xeric");
+		GuidanceStep firstStep = source.getGuidanceSteps().get(0);
+		assertTrue(
+			firstStep.getDescription().contains("Use Xeric's talisman to teleport to Mount Quidamortem"),
+			"Chambers of Xeric: base step description should keep the talisman route; got: "
+				+ firstStep.getDescription());
+		List<ConditionalAlternative> alternatives = firstStep.getConditionalAlternatives();
+		assertNotNull(alternatives, "Chambers of Xeric: first step must declare conditionalAlternatives");
+		for (ConditionalAlternative alt : alternatives)
+		{
+			if (alt.getRequirements() != null && alt.getRequirements().getDiaries() != null)
+			{
+				assertTrue(!alt.getRequirements().getDiaries().contains(KOUREND_HARD),
+					"Chambers of Xeric: fabricated KOUREND_HARD alternative must not be reintroduced");
+			}
+		}
+		ConditionalAlternative pohAlt = findPohAlternative(alternatives, "XERICS_TALISMAN");
+		assertNotNull(pohAlt, "Chambers of Xeric: B2's XERICS_TALISMAN POH alternative must be preserved");
 	}
 
 	@Test
 	public void generalGraardorStacksFremennikHardAheadOfJewelleryBox()
 	{
+		// Diary-alternative keyword updated with the wiki-meta audit fix: the
+		// Hard Fremennik reward is the stony basalt teleport to the top of
+		// Troll Stronghold (the previously described Lighthouse transport and
+		// Goblin Village shortcut do not exist).
 		assertStackedDiaryAndPoh(
 			"General Graardor",
 			FREMENNIK_HARD,
 			"JEWELLERY_BOX_FANCY",
-			"Goblin Village",
+			"Troll Stronghold",
 			"Teleport to Trollheim and run north to the God Wars Dungeon entrance");
 	}
 
