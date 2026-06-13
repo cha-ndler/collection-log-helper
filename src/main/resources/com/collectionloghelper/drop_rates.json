@@ -1602,21 +1602,7 @@
         "worldY": 3940,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
-        "completionDistance": 20,
-        "conditionalAlternatives": [
-          {
-            "requirements": {
-              "inventoryItemIdsAny": [
-                29271,
-                29273,
-                29275,
-                33120
-              ]
-            },
-            "description": "Right-click your Quetzal whistle (basic / enhanced / perfected / perfected-infinite) in the inventory and pick the Phantom Muspah destination to land directly at the Ancient Prison entrance, skipping the Weiss -> Ghorrock overland route",
-            "travelTip": "Inventory Quetzal whistle -> Phantom Muspah"
-          }
-        ]
+        "completionDistance": 20
       },
       {
         "description": "Run south through Ghorrock Dungeon and step onto the Ancient Prison entrance tile",
@@ -1627,7 +1613,7 @@
         "completionDistance": 12
       },
       {
-        "description": "Kill the Phantom Muspah. Ranged form (sitting) -> Protect from Missiles by default and swap to Protect from Magic the instant it stands up and charges the purple prayer-drain orb. Shielded/Melee form -> Protect from Magic. Dodge the cyan teleport heal-orbs (do NOT stand on the spike tile during a transformation), and Bow of faerdhinen / Tbow are the modern meta",
+        "description": "Kill the Phantom Muspah. Ranged form (sitting) -> Protect from Missiles by default and swap to Protect from Magic the instant it stands up and charges the purple prayer-drain orb. Shielded/Melee form -> Protect from Melee. Dodge spikes during form changes (do NOT stand on the spike tile during a transformation, as they heal Muspah on hit), and Bow of faerdhinen / Tbow are the modern meta",
         "worldX": 2846,
         "worldY": 3940,
         "worldPlane": 0,
@@ -3141,7 +3127,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Grotesque Guardians on the Slayer Tower roof. Requires gargoyle Slayer task + brittle key + a rock hammer or thrownhammer to finish them off. Dusk (melee) and Dawn (ranged) fight together until one dies, then the survivor enrages - pray Melee against Dusk and Missiles against Dawn, swapping prayers when they switch attack styles. Dodge Dawn's lightning AoE (move 2 tiles when she raises her arms) and step out of Dusk's prison rocks. After the first Guardian dies, the survivor heals to full and gains a stomp special - move off the marked tile",
+        "description": "Kill the Grotesque Guardians on the Slayer Tower roof. Requires gargoyle Slayer task + brittle key + a rock hammer or thrownhammer to finish them off. Phase 1: fight Dawn solo (Dusk is fully immune); use ranged, magic, or a halberd as she is airborne. Phase 2: fight Dusk solo. Phase 3 (lightning charge): both are temporarily invulnerable; move off any vortex that spawns on your tile (one-second colour warning). Pray Melee against Dusk and Missiles against Dawn, swapping when they switch styles. Do not stand under Dusk; doing so triggers a trample dealing up to 40 damage. After Dawn dies, Dusk absorbs her essence and his stats are significantly boosted (Attack 300, Strength/Magic/Ranged 250, Defence 150) for the final phase.",
         "worldX": 3427,
         "worldY": 3543,
         "worldPlane": 2,
@@ -3524,7 +3510,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Fight Phosani's Nightmare solo. Same prayer rotation as The Nightmare but tighter and faster: overhead-staff -> Protect from Magic, claws -> Protect from Melee, crossbow stance -> Protect from Missiles. Sleepwalker minions chase you and must be killed (Sanguinesti heals while burning them down), parasites still drain sanity, and the husk attack will mirror your gear so bring max gear you can lose. Hard to solo without high stats and prayer flicking",
+        "description": "Fight Phosani's Nightmare solo. Same prayer rotation as The Nightmare but tighter and faster: overhead-staff -> Protect from Magic, claws -> Protect from Melee, crossbow stance -> Protect from Missiles. Sleepwalkers spawn at phase end and walk toward Phosani -- kill them before they reach her or each one that does triggers an increasingly lethal blast. Parasites attach to you and burst after ~18 ticks dealing massive damage, then heal Phosani until killed -- drink Sanfew serum or Relicym's balm before the burst to reduce damage. Husks have fixed attack styles: blue (magic) and green (ranged) -- kill the ranged husk first in phases 1-2. Hard to solo without high stats and prayer flicking.",
         "worldX": 3806,
         "worldY": 9757,
         "worldPlane": 1,
@@ -24151,18 +24137,17 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Civitas illa Fortis (Varlamore). Required: 51 Slayer and 'Troubled Tortugans' quest complete. Bring ranged or magic gear (Shellbane Gryphon resists melee), prayer potions, food, Slayer helmet (i) on-task for the bonus, and a Quetzal whistle for the return teleport",
+        "description": "Bank in Civitas illa Fortis (Varlamore). Requires an active gryphon Slayer task - the boss cannot be attacked off-task. Required: 51 Slayer and 'Troubled Tortugans' quest complete. Bring strong melee gear, a Tortugan shield (REQUIRED - heavy damage without it), equipped weight >= 40kg to counter the knockback special, prayer potions, food, Slayer helmet (i) on-task, and a Quetzal whistle for the return teleport",
         "worldX": 1626,
         "worldY": 3093,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
         "requiredItemIds": [
-          24417,
+          31398,
           11865,
           6685,
-          2434,
-          12924
+          2434
         ],
         "section": "Bank"
       },
@@ -24187,7 +24172,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill the Shellbane Gryphon. Use Protect from Melee for the slam auto, then swap to Protect from Missiles when the gryphon takes flight for the wing-gust special. Attack with ranged (blowpipe / crossbow) or magic - melee is heavily resisted. Sip ranging / magic potion mid-fight to keep DPS high. On-task with Slayer helmet (i) for the +16.67% damage bonus is the standard farm setup",
+        "description": "Kill the Shellbane Gryphon. Active gryphon Slayer task required. Use Protect from Melee; the gryphon is primarily weak to melee - attack with your best melee setup. Keep the Tortugan shield equipped at all times (heavy damage without it). Maintain >= 40kg equipped weight to counter the knockback special attack. Respond to the corrosive spit (move) and whirlwind (move) specials as they occur. Slayer helmet (i) on-task for the damage bonus",
         "worldX": 13993,
         "worldY": 9901,
         "worldPlane": 0,
@@ -24197,7 +24182,7 @@
         "completionNpcId": 14860,
         "section": "Combat",
         "recommendedItemIds": [
-          12924,
+          31398,
           11865,
           6685,
           2434,
@@ -24276,6 +24261,10 @@
         "worldY": 3458,
         "worldPlane": 0,
         "objectId": 882,
+        "objectIds": [
+          881,
+          882
+        ],
         "objectInteractAction": "Climb-down",
         "completionCondition": "ARRIVE_AT_ZONE",
         "completionZone": [
