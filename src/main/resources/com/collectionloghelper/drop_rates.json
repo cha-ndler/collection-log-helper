@@ -12050,7 +12050,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the Asgarnian Ice Dungeon ladder and run east to the Skeletal Wyvern room.",
+        "description": "Enter the Asgarnian Ice Dungeon trapdoor, then run north then east to reach the Skeletal Wyvern chamber.",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
@@ -12061,7 +12061,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Skeletal Wyverns. Equipped Elemental / Mind / Dragonfire shield is mandatory - the icy breath ignores normal antifire and hits for 50+ without one. Use the ranged safespot tile behind the north-west pillar with a Dragon hunter crossbow or blowpipe to take no damage on most kills. Pray ranged for the close-range tail attack if you need to melee.",
+        "description": "Kill Skeletal Wyverns. Equipped Elemental / Mind / Dragonfire shield is mandatory - the icy breath ignores normal antifire and hits for 50+ without one. Use the ranged safespot tile behind the north-west pillar with a Dragon hunter crossbow or blowpipe to take no damage on most kills. Pray Protect from Missiles for their ranged attacks if safespotting is not possible.",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
@@ -12080,7 +12080,7 @@
         ]
       },
       {
-        "description": "Loot the Draconic visage and Granite legs. Long Bones (5 Construction XP each) and the Wyvern visage drop weight makes this a hands-off task.",
+        "description": "Loot the Draconic visage and Granite legs. Skeletal Wyverns drop the Draconic visage, not the Wyvern visage.",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
