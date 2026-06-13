@@ -11681,7 +11681,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Lava Strykewyrms in the Charred Dungeon beneath Charred Island. Standard combat mechanics; no PKer risk",
+        "description": "Kill Lava Strykewyrms in the Charred Dungeon beneath Charred Island. Use Protect from Ranged when attacking at distance; they switch to melee-only within 1 tile. Do not use fire spells - they heal the strykewyrm equal to the damage dealt.",
         "worldX": 2150,
         "worldY": 2968,
         "worldPlane": 0,
