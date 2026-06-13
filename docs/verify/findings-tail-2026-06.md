@@ -867,3 +867,24 @@ Phase 3 semantic audit of the never-audited source tail. Pipeline: sonnet wiki-v
 - **Wiki URL:** https://oldschool.runescape.wiki/w/Darkmeyer
 - **Suggested fix:** Change 'run north' to 'run south-east' (through Mort Myre Swamp toward Meiyerditch, then into the Sanguinesti region). Darkmeyer is deep in the south-east of Morytania; Canifis is in the north-west. North of Canifis leads to the Slayer Tower, not Darkmeyer.
 - **Skeptic receipt:** Data (drop_rates.json line 32387): "travelTip": "Drakan's medallion -> Darkmeyer; or Kharyrll teleport (Ancient Magicks) -> run north"; source worldX/worldY = 3631/3325.  coordinate_helper identify (3631,3325): "Darkmeyer — 27 tiles from center" / Region 14387. coordinate_helper identify (3493,3473) [Kharyrll/Canifis landing]: "Canifis — 16 tiles from center" / Region 13878. coordinate_helper distance (3493,3473)->(3631,3325): "Chebyshev (game movement): 148 tiles". Vector = +138 x (east), -148 y (SOUTH).  wiki_lookup Darkmeyer (https://oldschool.runescape.wiki/w/Darkmeyer): "Darkmeyer is the capital city of Morytania located in the Sanguinesti region, north of Meiyerditch. ... Darkmeyer and Meiyerditch ... with Darkmeyer making up the northern half of the region and Meiyerditch the southern half." (Sanguinesti is the deep south-east of Morytania; Canifis sits in the north-west.)
+
+---
+
+## Phase R — retroactive class-sweep decisions (2026-06-13)
+
+### [resolved] "Duel Arena" → Emir's Arena (stale area rename)
+
+- **Class:** literal `\bduel arena\b` in guidance prose. 2 corpus hits (Beginner Treasure Trails L9778, Mage Training Arena L14657).
+- **Receipt:** OSRS Wiki, Emir's Arena: "also known as the Al Kharid PvP Arena, is a minigame that **replaced the Duel Arena** ... Players will arrive here if they use the ring of dueling teleport." Renamed 13 July 2022; complex restored ("once again being used as a fighting ground"), not "ruins".
+- **Action:** swept both, one PR per source (PR #977 Beginner TT, PR #978 Mage Training Arena). Corpus has 0 "Duel Arena" refs after merge.
+
+### [DEFERRED — beta-volatile] "Sailors' amulet → any port" (Sailing teleport imprecision)
+
+- **Class:** travelTips claiming the Sailors' amulet teleports to "any port" (e.g. "Sailors' amulet -> any port"). ~22 such teleport-tip occurrences across Sailing salvage/encounter sources.
+- **Ground truth (OSRS Wiki, Sailors' amulet):** "The amulet allows the player to teleport to **the Pandemonium, Port Roberts, Red Rock, and Deepfin Point**. In order to make use of the amulet's destinations, the player must activate their corresponding Sailors' Marker there." The Pandemonium is the only default; the other three require unlocks (Red Rock also gates on partial completion of The Red Reef). So "any port" is literally wrong — it reaches 4 specific gated destinations.
+- **Why deferred (not swept):**
+  1. **Sailing is still in beta — not a live skill.** The guidance cannot be in-game validated and the wiki is beta documentation subject to change at release.
+  2. **The correct replacement is genuinely uncertain.** Default Pandemonium vs. unlocked-ports-only, and where the player's boat docks for the "board boat, sail to salvage" steps, are not pinnable to a phrasing that survives both the domain-skeptic AND release-day mechanics changes.
+  3. High churn (22+ edits) of guidance no live player uses, likely needing redo at launch.
+- **Note:** the separate `description` phrasing "Sort salvage at **any port's** salvaging station" is a different, plausibly-correct functional claim (salvaging stations exist at the reachable ports) — NOT in scope for this defect.
+- **Revisit:** when Sailing launches and port mechanics stabilize, re-grep `Sailors'? amulet.*any port` and sweep with a verified replacement; a literal detector is then worthwhile.
