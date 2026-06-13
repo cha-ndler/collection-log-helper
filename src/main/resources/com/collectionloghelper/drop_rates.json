@@ -30134,8 +30134,8 @@
         "wikiPage": "Tangleroot"
       }
     ],
-    "locationDescription": "Fruit tree patches: Gnome Stronghold, Lleyta, Brimhaven, Catherby, Tree Gnome Village, Farming Guild (75+)",
-    "travelTip": "Spirit tree -> Gnome Stronghold (patch 1); Gnome glider to Lleyta; Brimhaven via boat; Skills necklace -> Catherby; fairy ring CIR -> Farming Guild (75+ Farming)",
+    "locationDescription": "Fruit tree patches: Gnome Stronghold, Lleyta, Brimhaven, Catherby, Tree Gnome Village, Farming Guild (85+)",
+    "travelTip": "Spirit tree -> Gnome Stronghold (patch 1); Gnome glider to Lleyta; Brimhaven via boat; Catherby teleport -> Catherby; fairy ring CIR -> Farming Guild (85+ Farming for the fruit tree patch)",
     "requirements": {
       "skills": [
         {
@@ -30146,7 +30146,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Start a fruit tree run. Plant saplings at all available patches: Gnome Stronghold (spirit tree), Lleyta (gnome glider), Brimhaven (Charter ship or Ardougne cloak 2+), Catherby (skills necklace or Camelot teleport), Tree Gnome Village (fairy ring CLR), and Farming Guild (75+ Farming, fairy ring CIR). Pay the nearby gardener to protect each tree from disease.",
+        "description": "Start a fruit tree run. Plant saplings at all available patches: Gnome Stronghold (spirit tree), Lleyta (gnome glider), Brimhaven (Charter ship or Ardougne cloak 2+), Catherby (Catherby teleport or Camelot teleport), Tree Gnome Village (fairy ring CLR), and Farming Guild (85+ Farming, fairy ring CIR). Pay the nearby gardener to protect each tree from disease.",
         "worldX": 1249,
         "worldY": 3719,
         "worldPlane": 0,
@@ -30161,13 +30161,13 @@
                 "FARMING"
               ]
             },
-            "description": "Farming cape: teleport directly to the Farming Guild for its fruit tree patch (75+ Farming), skipping the fairy ring CIR hop, and the guild bank and spirit tree are a few tiles away for the rest of the run",
+            "description": "Farming cape: teleport directly to the Farming Guild for its fruit tree patch (85+ Farming), skipping the fairy ring CIR hop, and the guild bank and spirit tree are a few tiles away for the rest of the run",
             "travelTip": "Farming cape -> Farming Guild fruit tree patch"
           }
         ]
       },
       {
-        "description": "Wait approximately 16 hours for fruit trees to fully grow (each tree takes 8 growth cycles at ~2 hours each). Tangleroot pet chance applies each time you check health of any fully grown tree. Return to all patches and check health to claim XP and log progress. Re-plant immediately to maximise pet attempts over time.",
+        "description": "Wait approximately 16 hours for fruit trees to fully grow (each tree takes 6 growth cycles at ~160 minutes each). Tangleroot pet chance applies each time you check health of any fully grown tree. Return to all patches and check health to claim XP and log progress. Re-plant immediately to maximise pet attempts over time.",
         "worldX": 1249,
         "worldY": 3719,
         "worldPlane": 0,
