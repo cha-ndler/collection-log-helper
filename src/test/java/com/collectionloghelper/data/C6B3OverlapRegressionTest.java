@@ -123,11 +123,15 @@ public class C6B3OverlapRegressionTest
 	@Test
 	public void generalGraardorStacksFremennikHardAheadOfJewelleryBox()
 	{
+		// Diary-alternative keyword updated with the wiki-meta audit fix: the
+		// Hard Fremennik reward is the stony basalt teleport to the top of
+		// Troll Stronghold (the previously described Lighthouse transport and
+		// Goblin Village shortcut do not exist).
 		assertStackedDiaryAndPoh(
 			"General Graardor",
 			FREMENNIK_HARD,
 			"JEWELLERY_BOX_FANCY",
-			"Goblin Village",
+			"Troll Stronghold",
 			"Teleport to Trollheim and run north to the God Wars Dungeon entrance");
 	}
 
