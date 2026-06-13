@@ -7941,7 +7941,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Teleport to Prifddinas via teleport crystal / house tablet and run north-west to the Gauntlet portal in Lletya district",
+        "description": "Teleport to Prifddinas via teleport crystal / house tablet and run north-west to the Gauntlet portal in Amlodd district",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0,
@@ -7950,21 +7950,12 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": [
-                "WESTERN_ELITE"
-              ]
-            },
-            "description": "Operate the Crystal teleport seed for the rub-on-cape variant (Western Provinces Elite diary attaches the Prifddinas teleport to your max / quest / achievement cape, so you can teleport from anywhere without dedicating an inventory slot to the seed). Then run north-west to the Gauntlet portal in Lletya district",
-            "travelTip": "Cape Crystal teleport -> Prifddinas (Western Provinces Elite diary unlock)"
-          },
-          {
-            "requirements": {
               "inventoryItemIdsAny": [
                 23904,
                 23858
               ]
             },
-            "description": "Right-click your Teleport crystal (regular or HM-charged) in the inventory and pick Prifddinas, then run north-west to the Gauntlet portal in Lletya district",
+            "description": "Right-click your Teleport crystal (regular or HM-charged) in the inventory and pick Prifddinas, then run north-west to the Gauntlet portal in Amlodd district",
             "travelTip": "Inventory Teleport crystal -> Prifddinas"
           }
         ]
@@ -7979,7 +7970,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Prep phase (corrupted mobs hit harder and have higher Defence): gather paddlefish + linum tirinum + raw chompy meat + corrupted shards, kill a demi-boss for the perfected weapon upgrade, and craft perfected corrupted tier 3 armour + perfected corrupted staff/halberd/bow at the singing bowl. Corrupted gear is required for full damage on Corrupted Hunllef",
+        "description": "Prep phase (corrupted mobs hit harder and have higher Defence): gather paddlefish + linum tirinum + phren bark + grym leaves + corrupted shards, kill a demi-boss for the perfected weapon upgrade, and craft perfected corrupted tier 3 armour + perfected corrupted staff/halberd/bow at the singing bowl. Corrupted gear is required for full damage on Corrupted Hunllef",
         "worldX": 1920,
         "worldY": 5681,
         "worldPlane": 1,
@@ -7987,7 +7978,7 @@
         "section": "Combat"
       },
       {
-        "description": "Fight the Corrupted Hunllef. Same attack-style rotation as standard (Magic / Ranged swap every 4 attacks per the skull above its head) but it hits noticeably harder and swaps to its own protection prayer faster - flick your protection prayer Magic / Missiles in time with its skull and swap your own attack style every rotation. Run behind a pillar to break line of sight during the tornado enrage and never stand on a tornado tile",
+        "description": "Fight the Corrupted Hunllef. Same attack-style rotation as standard (Magic / Ranged swap every 4 attacks per the skull above its head) but it hits noticeably harder - flick your protection prayer Magic / Missiles in time with its skull and swap your own attack style every rotation. Run behind a pillar to break line of sight during the tornado enrage and never stand on a tornado tile",
         "worldX": 1920,
         "worldY": 5681,
         "worldPlane": 1,
@@ -8063,7 +8054,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Teleport to Prifddinas via teleport crystal / house tablet and run north-west to the Gauntlet portal in Lletya district",
+        "description": "Teleport to Prifddinas via teleport crystal / house tablet and run north-west to the Gauntlet portal in Amlodd district",
         "worldX": 3230,
         "worldY": 6073,
         "worldPlane": 0,
@@ -8072,21 +8063,12 @@
         "conditionalAlternatives": [
           {
             "requirements": {
-              "diaries": [
-                "WESTERN_ELITE"
-              ]
-            },
-            "description": "Operate the Crystal teleport seed for the rub-on-cape variant (Western Provinces Elite diary attaches the Prifddinas teleport to your max / quest / achievement cape, so you can teleport from anywhere without dedicating an inventory slot to the seed). Then run north-west to the Gauntlet portal in Lletya district",
-            "travelTip": "Cape Crystal teleport -> Prifddinas (Western Provinces Elite diary unlock)"
-          },
-          {
-            "requirements": {
               "inventoryItemIdsAny": [
                 23904,
                 23858
               ]
             },
-            "description": "Right-click your Teleport crystal (regular or HM-charged) in the inventory and pick Prifddinas, then run north-west to the Gauntlet portal in Lletya district",
+            "description": "Right-click your Teleport crystal (regular or HM-charged) in the inventory and pick Prifddinas, then run north-west to the Gauntlet portal in Amlodd district",
             "travelTip": "Inventory Teleport crystal -> Prifddinas"
           }
         ]
@@ -8101,7 +8083,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Prep phase (about 7-9 minutes): gather paddlefish + linum tirinum + raw chompy meat + crystal shards, mine ore from crystal deposits, chop bark from phren roots, kill weak/strong monsters for weapon frames, and find a demi-boss for the perfected weapon upgrade. Craft a basic then perfected weapon + tier 3 armour at the singing bowl before the timer expires",
+        "description": "Prep phase (10 minutes): gather paddlefish + linum tirinum + crystal shards, mine ore from crystal deposits, chop bark from phren roots, kill weak/strong monsters for weapon frames, and find a demi-boss for the perfected weapon upgrade. Craft a basic then perfected weapon + tier 3 armour at the singing bowl before the timer expires",
         "worldX": 1920,
         "worldY": 5681,
         "worldPlane": 1,
