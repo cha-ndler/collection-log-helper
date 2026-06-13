@@ -497,7 +497,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill K'ril Tsutsaroth. Protect from Melee, eat through Balfrug + Tstanon prayer drain, watch for K'ril's curse special which strips your prayer in one hit.",
+        "description": "Kill K'ril Tsutsaroth. Protect from Melee; Balfrug deals magic damage (up to 16) and Tstanon deals melee damage (up to 15). Watch for K'ril's Prayer Smash special which deals 35-49 damage and drains half your current prayer points.",
         "worldX": 2925,
         "worldY": 5322,
         "worldPlane": 2,
