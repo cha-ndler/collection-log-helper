@@ -1082,7 +1082,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Cerberus. She rotates Melee, Ranged, and Magic attacks - flick Protect from Magic when she rears back and fires a smooth black ball, Protect from Missiles when she kicks a translucent spiky ball, otherwise Protect from Melee. Every 10 attacks she summons three souls (Magic ghost, Ranged ghost, Melee ghost) - run to the matching tile under each soul before they reach her, or pray the soul's attack style. Bring Salve amulet (ei) and use Bandos godsword spec to drop her Defence",
+        "description": "Kill Cerberus. She rotates Melee, Ranged, and Magic attacks - flick Protect from Magic when she lowers her head and fires a smooth black ball, Protect from Missiles when she kicks a translucent spiky ball, otherwise Protect from Melee. Every 7 attacks once below 400 HP she summons three souls (Magic ghost, Ranged ghost, Melee ghost) - run to the matching tile under each soul before they reach her, or pray the soul's attack style. Use Bandos godsword spec to drop her Defence",
         "worldX": 1240,
         "worldY": 1251,
         "worldPlane": 0,
