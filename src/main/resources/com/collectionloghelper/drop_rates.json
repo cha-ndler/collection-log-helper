@@ -22771,7 +22771,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Locate the next crashed star. Use a telescope in your player-owned house Study (mahogany telescope gives a 2-minute window). Alternatively join the Shooting Stars grouping chat or use a community star-tracker site. Stars fall every 85-95 minutes and vary in size (tier 1-9). Teleport to the region the telescope indicates.",
+        "description": "Locate the next crashed star. Use a telescope in your player-owned house Study (mahogany telescope gives a 2-minute window). Alternatively join the Shooting Stars grouping chat or use a community star-tracker site. Stars fall roughly every 90 minutes (a 75-105 minute window) and vary in size (tier 1-9). Teleport to the region the telescope indicates.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
@@ -22781,7 +22781,7 @@
         "section": "Scout"
       },
       {
-        "description": "Mine the crashed star. Stars degrade through tiers as miners chip away at them - being the first miner awards double stardust for 300 dust mined. Talk to the Star Sprite that emerges from the core (visible when star reaches tier 1) to receive bonus stardust. Collect stardust and exchange at Dusuri's Star Shop (Mining Guild, Falador) for Celestial ring and Star fragments.",
+        "description": "Mine the crashed star. Stars degrade through tiers as miners chip away at them - being the first miner awards double stardust for 300 dust mined. Collect stardust while mining and exchange it at Dusuri's Star Shop (Mining Guild, Falador) for Celestial ring and Star fragments.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
@@ -23433,7 +23433,7 @@
       }
     ],
     "locationDescription": "Yama's Domain, Chasm of Fire beneath Shayzien",
-    "travelTip": "Chasm teleport scroll, or Xeric's talisman -> Heart -> south to chasm",
+    "travelTip": "Chasm teleport scroll -> Chasm of Fire",
     "npcId": 14176,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -23453,17 +23453,17 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Chasm of Fire beneath Shayzien, Varlamore. Use a chasm teleport scroll for the fastest route, or Xeric's talisman to Heart and run south",
+        "description": "Travel to the Chasm of Fire in north-west Shayzien, Great Kourend. Use a chasm teleport scroll for the fastest route",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Chasm teleport scroll (one-tick), or Xeric's talisman -> Heart -> run south through chasm",
+        "travelTip": "Chasm teleport scroll (one-tick) -> Chasm of Fire",
         "section": "Travel"
       },
       {
-        "description": "Form a party of 2-4 and enter Yama's instance. Solo is possible at endgame but DPS check is brutal; duo is the standard. Make sure all members have prayer pots and brews.",
+        "description": "Form a party of up to 2 (solo or duo) and enter Yama's instance. Solo is possible at endgame but the DPS check is brutal; duo is the standard. Make sure all members have prayer pots and brews.",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
