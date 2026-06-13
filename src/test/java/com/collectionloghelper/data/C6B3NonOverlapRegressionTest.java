@@ -33,6 +33,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -114,15 +115,31 @@ public class C6B3NonOverlapRegressionTest
 	}
 
 	@Test
-	public void gauntletSourcesCarryWesternEliteDiaryAlternative()
+	public void gauntletSourcesNoLongerCarryWesternEliteDiaryAlternative()
 	{
+		// Wiki-meta audit fix: the WESTERN_ELITE alternative claimed the
+		// Elite Western diary attaches a Prifddinas teleport to capes; no
+		// such reward exists, so the alternative was removed and must not
+		// be reintroduced.
 		for (String name : GAUNTLET_SOURCES)
 		{
-			assertSourceHasDiaryAlternative(
-				name,
-				WESTERN_ELITE,
-				"Crystal teleport",
-				"Western Provinces Elite diary");
+			CollectionLogSource source = findSource(name);
+			assertNotNull(source, "Expected source: " + name);
+			for (GuidanceStep step : source.getGuidanceSteps())
+			{
+				if (step.getConditionalAlternatives() == null)
+				{
+					continue;
+				}
+				for (ConditionalAlternative alt : step.getConditionalAlternatives())
+				{
+					if (alt.getRequirements() != null && alt.getRequirements().getDiaries() != null)
+					{
+						assertFalse(alt.getRequirements().getDiaries().contains(WESTERN_ELITE),
+							name + ": fabricated WESTERN_ELITE alternative must not be reintroduced");
+					}
+				}
+			}
 		}
 	}
 

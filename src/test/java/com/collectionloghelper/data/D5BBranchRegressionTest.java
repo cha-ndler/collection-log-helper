@@ -43,7 +43,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * wired on skilling and wilderness sources:
  *
  * <ul>
- *   <li>Zalcano: {@code FAIRY_RING} -&gt; BIS (Prifddinas).</li>
+ *   <li>(Zalcano was removed by the wiki-meta audit: fairy ring code BIS
+ *       does not exist and Prifddinas has no fairy ring destination.)</li>
  *   <li>Volcanic Mine: {@code DIGSITE_PENDANT} -&gt; Fossil Island.</li>
  *   <li>Catacombs of Kourend: {@code XERICS_TALISMAN} -&gt; Xeric's Heart.</li>
  *   <li>Motherlode Mine: {@code JEWELLERY_BOX_FANCY} -&gt; Skills necklace -&gt; Mining Guild.</li>
@@ -66,7 +67,6 @@ public class D5BBranchRegressionTest
 	private static Map<String, List<String>> buildExpected()
 	{
 		Map<String, List<String>> map = new LinkedHashMap<>();
-		map.put("Zalcano",              List.of("FAIRY_RING"));
 		map.put("Volcanic Mine",        List.of("DIGSITE_PENDANT"));
 		map.put("Catacombs of Kourend", List.of("XERICS_TALISMAN"));
 		map.put("Motherlode Mine",      List.of("JEWELLERY_BOX_FANCY"));
@@ -143,7 +143,7 @@ public class D5BBranchRegressionTest
 		{
 			assertNotNull(findSource(name), "Expected source missing from drop_rates.json: " + name);
 		}
-		assertEquals(4, EXPECTED.size(), "D5 batch B (partial) covers exactly 4 sources");
+		assertEquals(3, EXPECTED.size(), "D5 batch B (partial) covers exactly 3 sources");
 	}
 
 	private static ConditionalAlternative findPohAlternative(
