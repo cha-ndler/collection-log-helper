@@ -31969,18 +31969,18 @@
         "wikiPage": "Broken_zombie_helmet"
       }
     ],
-    "locationDescription": "Zemouregal's Fort, north of Varrock",
+    "locationDescription": "Zemouregal's Fort, in the far north (Troll Country, near Ghorrock)",
     "travelTip": "Varrock teleport -> north to fort",
     "npcId": 14113,
     "interactAction": "Attack",
     "requirements": {
       "quests": [
-        "DEFENDER_OF_VARROCK"
+        "THE_CURSE_OF_ARRAV"
       ]
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Zemouregal's Fort, north of Varrock (Varrock teleport, then walk north past the Grand Exchange). Requires Defender of Varrock quest.",
+        "description": "Travel to Zemouregal's Fort in the far north of Troll Country (near Ghorrock). Requires The Curse of Arrav quest.",
         "worldX": 3566,
         "worldY": 3390,
         "worldPlane": 0,
@@ -32333,7 +32333,7 @@
         "milestoneKills": 1
       }
     ],
-    "locationDescription": "Prifddinas, south-east corner (Ithell district)",
+    "locationDescription": "Elven rabbit cave, Gwenith Hunter area north of Prifddinas",
     "travelTip": "Teleport crystal or Moonclan teleport -> Prifddinas; or fairy ring AJS -> run north",
     "requirements": {
       "quests": [
@@ -32344,7 +32344,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Prifddinas (requires Song of the Elves). Use a teleport crystal, Moonclan teleport, or fairy ring AJS. The rabbit spawns in the south-east corner of the city (Ithell district).",
+        "description": "Travel to Prifddinas (requires Song of the Elves). Use a teleport crystal, Moonclan teleport, or fairy ring AJS. The rabbit is in the Elven rabbit cave in the Gwenith Hunter area north of the city - exit through the northern gates and head north.",
         "worldX": 3267,
         "worldY": 6082,
         "worldPlane": 0,
@@ -32354,7 +32354,7 @@
         "section": "Travel"
       },
       {
-        "description": "Locate and kill the Prifddinas Rabbit in the south-east corner of the city. The rabbit has very low combat level (level 2) so any attack style works. This is a one-off guaranteed drop - only one Crystal grail exists.",
+        "description": "Locate and kill the Prifddinas Rabbit in the Elven rabbit cave (Gwenith Hunter area, north of the city). The rabbit has very low combat level (level 2) so any attack style works. This is a one-off guaranteed drop - only one Crystal grail exists.",
         "worldX": 3267,
         "worldY": 6082,
         "worldPlane": 0,
