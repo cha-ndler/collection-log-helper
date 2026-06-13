@@ -10382,7 +10382,7 @@
         "section": "Travel"
       },
       {
-        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR) or use Catacombs of Kourend",
+        "description": "Enter the Fremennik Slayer Dungeon (fairy ring AJR).",
         "worldX": 2797,
         "worldY": 3614,
         "worldPlane": 0,
@@ -10392,7 +10392,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Pyrefiends in the Fremennik Slayer Dungeon or Catacombs of Kourend (30 Slayer). Use Protect from Magic",
+        "description": "Kill Pyrefiends in the Fremennik Slayer Dungeon (30 Slayer). Wear dragonhide for magic defence; use Protect from Melee (43 Prayer) to avoid damage.",
         "worldX": 2761,
         "worldY": 10008,
         "worldPlane": 0,
