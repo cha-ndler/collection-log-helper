@@ -308,6 +308,103 @@ public class TempleOsrsKcSyncerTest
 	}
 
 	// ========================================================================
+	// player_stats.php payload shape — the real endpoint (regression for the
+	// player_info.php endpoint bug, where the syncer mapped zero sources)
+	// ========================================================================
+
+	/**
+	 * Trimmed fixture of the real {@code player_stats.php?...&bosses=1} response: boss
+	 * KCs are flat integer keys mixed in with the {@code info} object, the {@code date}
+	 * string, skill stats, and derived {@code _rank}/{@code _level}/{@code _ehp}/
+	 * {@code _ehb} metadata. Built from a verified live response; the player name is
+	 * a placeholder and never a real RSN.
+	 */
+	private static final String PLAYER_STATS_FIXTURE = "{\"data\": {"
+		+ "\"info\": {\"Username\": \"ExamplePlayer\", \"Country\": \"-\", \"Game mode\": 0,"
+		+ " \"Clan preference\": null, \"Last checked\": \"2026-06-11 19:26:28\"},"
+		+ "\"date\": \"2026-06-11 19:26:28\","
+		+ "\"Overall\": 2277, \"Overall_rank\": 1, \"Overall_level\": 2277, \"Overall_ehp\": 1234.5,"
+		+ "\"Attack\": 200000000, \"Attack_rank\": 5, \"Attack_level\": 99, \"Attack_ehp\": 0,"
+		+ "\"Zulrah\": 341, \"Zulrah_ehb\": 7.3,"
+		+ "\"Vorkath\": 2781, \"Vorkath_ehb\": 55.6,"
+		+ "\"Cerberus\": 2657, \"Cerberus_ehb\": 44.4,"
+		+ "\"Barrows Chests\": 1833,"
+		+ "\"The Whisperer\": 2450, \"The Whisperer_ehb\": 12.0,"
+		+ "\"Abyssal Sire\": 0, \"Abyssal Sire_ehb\": 0"
+		+ "}}";
+
+	@Test
+	public void parseResponse_playerStatsShape_mapsBossKcAndSkipsMetadataQuietly()
+	{
+		SyncResult result = syncer.parseResponse(PLAYER_STATS_FIXTURE);
+
+		assertTrue(result.isSuccess());
+
+		// Boss KCs are mapped from their flat keys.
+		assertEquals(341, (int) result.getKcBySource().get("Zulrah"));
+		assertEquals(2781, (int) result.getKcBySource().get("Vorkath"));
+		assertEquals(2657, (int) result.getKcBySource().get("Cerberus"));
+		assertEquals(1833, (int) result.getKcBySource().get("Barrows"));
+		assertEquals(2450, (int) result.getKcBySource().get("The Whisperer"));
+
+		// Only the five positive-KC bosses are present (Abyssal Sire is 0 -> skipped).
+		assertEquals(5, result.getKcBySource().size());
+
+		// Account metadata and skill stats must NOT be mapped as sources...
+		assertNull(result.getKcBySource().get("Overall"));
+		assertNull(result.getKcBySource().get("Attack"));
+		assertNull(result.getKcBySource().get("info"));
+		assertNull(result.getKcBySource().get("date"));
+		assertNull(result.getKcBySource().get("Zulrah_ehb"));
+		assertNull(result.getKcBySource().get("Overall_rank"));
+
+		// ...and they must NOT be counted as skipped/anomalous entries either.
+		assertEquals(0, result.getSkippedCount(),
+			"Metadata keys are expected payload, not non-numeric anomalies");
+	}
+
+	@Test
+	public void parseResponse_playerInfoMetadataOnlyShape_mapsZeroSources()
+	{
+		// The OLD player_info.php payload: account metadata only, no KC data. The
+		// previous syncer fetched this and mapped zero sources. With player_stats.php
+		// this shape can still appear nested as the "info" object; if it ever arrives
+		// at the top level it must yield zero mapped sources and no false anomalies.
+		String metadataOnly = "{\"data\": {"
+			+ "\"Username\": \"ExamplePlayer\", \"Country\": \"-\", \"Game mode\": 0,"
+			+ " \"GIM\": 0, \"F2p\": 0, \"Banned\": 0, \"Disqualified\": 0,"
+			+ " \"Clan preference\": null, \"Last checked\": \"2026-06-11 19:26:28\","
+			+ " \"Last changed\": \"2026-06-11 19:26:28\""
+			+ "}}";
+
+		SyncResult result = syncer.parseResponse(metadataOnly);
+
+		assertTrue(result.isSuccess());
+		assertTrue(result.getKcBySource().isEmpty(),
+			"Metadata-only payload must map zero KC sources");
+	}
+
+	@Test
+	public void isMetadataKey_classifiesMetadataAndBossKeys()
+	{
+		// Metadata: fixed keys, skill names, and derived-stat suffixes.
+		assertTrue(syncer.isMetadataKey("info"));
+		assertTrue(syncer.isMetadataKey("date"));
+		assertTrue(syncer.isMetadataKey("Overall"));
+		assertTrue(syncer.isMetadataKey("Attack"));
+		assertTrue(syncer.isMetadataKey("Attack_rank"));
+		assertTrue(syncer.isMetadataKey("Attack_level"));
+		assertTrue(syncer.isMetadataKey("Attack_ehp"));
+		assertTrue(syncer.isMetadataKey("Zulrah_ehb"));
+
+		// Boss/activity keys are NOT metadata.
+		assertFalse(syncer.isMetadataKey("Zulrah"));
+		assertFalse(syncer.isMetadataKey("Barrows Chests"));
+		assertFalse(syncer.isMetadataKey("The Whisperer"));
+		assertFalse(syncer.isMetadataKey("K'ril Tsutsaroth"));
+	}
+
+	// ========================================================================
 	// resolveClhName
 	// ========================================================================
 
