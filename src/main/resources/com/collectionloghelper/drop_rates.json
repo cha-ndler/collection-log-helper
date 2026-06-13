@@ -31620,7 +31620,7 @@
     "travelTip": "Barbarian Outpost -> dive into whirlpool",
     "guidanceSteps": [
       {
-        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost (games necklace). Barbarian Fishing training is required to dive into the whirlpool.",
+        "description": "Travel to Otto's Grotto, south of the Barbarian Outpost (games necklace). Barbarian Firemaking training (the pyre-ship part of the Barbarian Training miniquest) is required to dive into the whirlpool.",
         "worldX": 2512,
         "worldY": 3509,
         "worldPlane": 0,
@@ -31642,7 +31642,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill mithril dragons in the Ancient Cavern. Use extended antifire and Protect from Magic. Chewed bones unlock the Ourg bones prayer XP method. Ancient pages and Dragon full helm are the rarest drops.",
+        "description": "Kill mithril dragons in the Ancient Cavern. Use extended antifire and Protect from Magic. Chewed bones can be offered on a pyre ship for a chance at the Dragon full helm. Ancient pages and Dragon full helm are the rarest drops.",
         "worldX": 1745,
         "worldY": 5323,
         "worldPlane": 0,
