@@ -25573,7 +25573,7 @@
         ]
       },
       {
-        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Easy clues add cryptic clues, emote clues, and 6 anagram clues. Always wear the exact emote-clue costume the clue requests - missing one piece resets the puzzle.",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Easy clues add cryptic clues, emote clues, map clues, and music clues (no anagram or coordinate clues at this tier). Always wear the exact emote-clue costume the clue requests - missing one piece resets the puzzle.",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
