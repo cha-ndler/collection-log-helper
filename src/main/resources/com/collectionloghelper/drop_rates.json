@@ -30007,7 +30007,7 @@
     "travelTip": "Skills necklace -> Fishing Guild; or Camelot tele + run to Catherby",
     "guidanceSteps": [
       {
-        "description": "Bank for swordfish fishing. Bring a harpoon (or use barehand fishing at 55 Strength and Agility for higher XP). Fishing Guild entrance requires 68 Fishing (boostable from 63). Catherby works from 50 Fishing with no guild requirement.",
+        "description": "Bank for swordfish fishing. Bring a harpoon (or use barehand fishing - 70 Fishing and 50 Strength, no Agility requirement - for higher XP). Fishing Guild entrance requires 68 Fishing (boostable from 63). Catherby works from 50 Fishing with no guild requirement.",
         "worldX": 2573,
         "worldY": 3441,
         "worldPlane": 0,
@@ -30029,7 +30029,7 @@
         "section": "Travel"
       },
       {
-        "description": "Harpoon swordfish at harpoon spots. Each catch rolls the Heron pet and Big swordfish. Heron pet rate scales with Fishing level. Barehand fishing (55 Strength + Agility required) gives higher XP at the same drop rates. Guild bank is among the closest to a fishing spot in the game.",
+        "description": "Harpoon swordfish at harpoon spots. Each catch rolls the Heron pet and Big swordfish. Heron pet rate scales with Fishing level. Barehand fishing (70 Fishing and 50 Strength required, no Agility) gives higher XP at the same drop rates. Guild bank is among the closest to a fishing spot in the game.",
         "worldX": 2604,
         "worldY": 3414,
         "worldPlane": 0,
