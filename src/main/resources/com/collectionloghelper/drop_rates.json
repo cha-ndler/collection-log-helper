@@ -7494,8 +7494,8 @@
                 "DESERT_HARD"
               ]
             },
-            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary makes the sceptre unlimited-charge, so you can spam-teleport without recharging at the desert lectern). Bring Tbow or Bow of faerdhinen, Osmumten's fang, Tumeken's shadow if owned, full brews/restores; aim for invocations totalling raid level 300-450 for solid loot efficiency before entering",
-            "travelTip": "Pharaoh's sceptre -> Necropolis (unlimited charges via Desert Hard diary)"
+            "description": "Pharaoh's sceptre to the Necropolis (Desert Hard diary increases the sceptre to 50 charges per recharge, 100 with Elite diary, reducing recharge trips to the desert lectern). Bring Tbow or Bow of faerdhinen, Osmumten's fang, Tumeken's shadow if owned, full brews/restores; aim for invocations totalling raid level 300-450 for solid loot efficiency before entering",
+            "travelTip": "Pharaoh's sceptre -> Necropolis (50 charges via Desert Hard diary, 100 with Elite)"
           },
           {
             "requirements": {
@@ -7539,7 +7539,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat the Wardens at raid level 300. P1/P2: rotate prayers to match the active style and break the obelisk. P3 (Tumeken's Warden): pray Protect from Magic against the energy balls, dodge the obelisk hand-slam, swap prayers when the Warden mimics Akkha/Zebak/Ba-Ba/Kephri attacks",
+        "description": "Defeat the Wardens at raid level 300. P1/P2: rotate prayers to match the active style and break the obelisk. P3 (Tumeken's Warden): pray Protect from Magic against the energy balls, dodge the obelisk hand-slam, swap prayers when the Warden mimics Zebak/Ba-Ba attacks (Elidinis' Warden mimics Akkha/Kephri instead)",
         "worldX": 3234,
         "worldY": 2784,
         "worldPlane": 0,
