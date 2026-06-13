@@ -29932,13 +29932,13 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to Shilo Village underground mine. Teleport to Shilo Village via Karamja gloves 3/4, then enter the underground mine on the south side. Brimhaven cart ride also works.",
+        "description": "Travel to the Shilo Village underground gem mine (requires the Medium Karamja Diary to enter). Karamja gloves 3 (Hard Karamja Diary) or 4 teleport directly into the underground mine; otherwise reach Shilo Village (Brimhaven cart ride) and climb down to the underground level.",
         "worldX": 2842,
         "worldY": 9381,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Karamja gloves 3/4 tele to Shilo Village; or Brimhaven cart ride",
+        "travelTip": "Karamja gloves 3/4 -> directly into the underground mine; or Brimhaven cart ride to Shilo Village",
         "section": "Travel"
       },
       {
@@ -29958,7 +29958,7 @@
         "loopCount": 0
       },
       {
-        "description": "Bank gems once your inventory is full. The gem bag holds up to 60 uncut gems to delay banking. Shilo Village bank is immediately above the underground mine entrance.",
+        "description": "Bank gems once your inventory is full. The gem bag holds up to 60 of each uncut gem type (300 total) to delay banking. Shilo Village bank is immediately above the underground mine entrance.",
         "worldX": 2852,
         "worldY": 2954,
         "worldPlane": 0,
@@ -29971,6 +29971,9 @@
     "requirements": {
       "quests": [
         "SHILO_VILLAGE"
+      ],
+      "diaries": [
+        "KARAMJA_MEDIUM"
       ],
       "skills": [
         {
