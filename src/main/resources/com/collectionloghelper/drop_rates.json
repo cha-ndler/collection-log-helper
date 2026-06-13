@@ -32387,7 +32387,7 @@
       }
     ],
     "locationDescription": "Darkmeyer, Morytania",
-    "travelTip": "Drakan's medallion -> Darkmeyer; or Kharyrll teleport (Ancient Magicks) -> run north",
+    "travelTip": "Drakan's medallion -> Darkmeyer; or Kharyrll teleport (Ancient Magicks) -> Canifis then travel south-east",
     "requirements": {
       "quests": [
         "SINS_OF_THE_FATHER"
@@ -32407,7 +32407,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Drakan's medallion -> Darkmeyer; or Kharyrll teleport -> run north",
+        "travelTip": "Drakan's medallion -> Darkmeyer; or Kharyrll teleport -> Canifis then travel south-east",
         "requiredItemIds": [
           24774,
           24775,
