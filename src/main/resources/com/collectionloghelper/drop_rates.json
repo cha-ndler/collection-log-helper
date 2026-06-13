@@ -5254,7 +5254,7 @@
       }
     ],
     "locationDescription": "Silk Chasm, Wilderness",
-    "travelTip": "Burning amulet -> Bandit Camp, then run east to the Silk Chasm cave",
+    "travelTip": "Wilderness crabs teleport (fastest); or Waka canoe (57 Woodcutting) to reach the Silk Chasm cave",
     "mutuallyExclusiveSources": [
       "Kalphite Queen",
       "Chaos Elemental",
@@ -5266,13 +5266,13 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Silk Chasm cave entrance in the Wilderness with anti-pk gear, a Voidwaker / DWH spec weapon if available, and at least one super combat plus restore. Burning amulet to Bandit Camp then run east",
+        "description": "Travel to the Silk Chasm cave entrance in the Wilderness with anti-pk gear, a Voidwaker / DWH spec weapon if available, and at least one super combat plus restore. Use Wilderness crabs teleport (fastest) or Waka canoe (57 Woodcutting)",
         "worldX": 3321,
         "worldY": 3794,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Burning amulet -> Bandit Camp + run east"
+        "travelTip": "Wilderness crabs teleport (fastest); or Waka canoe with 57 Woodcutting"
       },
       {
         "description": "Enter the Cave Entrance to access the Silk Chasm",
@@ -5285,7 +5285,7 @@
         "completionDistance": 4
       },
       {
-        "description": "Kill Venenatis with melee using Protect from Magic. Venenatis attacks with magic and melee; the web special binds you in place and drains prayer/run energy, so pre-pot prayer and step away when the web lands. Kill the Venenatis spiderlings on sight - they hit hard and heal her if left alive",
+        "description": "Kill Venenatis with melee. She cycles 8 ranged attacks then 8 magic attacks - switch between Protect from Missiles and Protect from Magic each phase. Venenatis attacks with melee, ranged, and magic; the web special binds you in place and drains prayer/run energy, so pre-pot prayer and step away when the web lands. Kill Venenatis spiderlings on sight - they drain your prayer, boost her damage, and allow her to hit through protection prayers if left alive",
         "worldX": 3332,
         "worldY": 3734,
         "worldPlane": 0,
