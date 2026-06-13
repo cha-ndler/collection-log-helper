@@ -21676,13 +21676,13 @@
     "travelTip": "Lassar teleport -> Ice Mountain -> Camdozaal",
     "guidanceSteps": [
       {
-        "description": "Travel to the Ruins of Camdozaal beneath Ice Mountain. Cast Lassar Teleport (Ancient Magicks, requires Desert Treasure I), then run south to the Ice Mountain entrance. Alternatively, use amulet of glory to Edgeville and run east to Ice Mountain.",
+        "description": "Travel to the Ruins of Camdozaal beneath Ice Mountain. Cast Lassar Teleport (Ancient Magicks, requires Desert Treasure I) to the top of Ice Mountain, then head down the west side to the Camdozaal entrance (Level 68 Agility shortcut available). Alternatively, use amulet of glory to Edgeville and run west to Ice Mountain.",
         "worldX": 3012,
         "worldY": 3451,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Lassar teleport -> Ice Mountain; or glory -> Edgeville -> run east",
+        "travelTip": "Lassar teleport -> Ice Mountain; or glory -> Edgeville -> run west",
         "section": "Travel"
       },
       {
