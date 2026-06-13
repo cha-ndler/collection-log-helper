@@ -5028,7 +5028,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Ferox Enclave then travel to the Scorpion Pit in deep Wilderness (level ~53). Bring anti-venom+, a high-tier crush or stab weapon, prayer potions, food, and a Wilderness-cheap kit (Karil's leathertop / Black d'hide) - Scorpia's guardians inflict venom that ticks 6 per hit and burns through brews quickly. Burning amulet -> Lava Maze then run south-west; or web-walk down via the Chaos Elemental ladder. Scorpia is in multi-combat so a PKer team will land specs together - swap to a one-click logout if you spot dots on the minimap",
+        "description": "Bank in Ferox Enclave then travel to the Scorpion Pit in deep Wilderness (level ~53). Bring anti-venom+, a high-tier stab weapon, prayer potions, food, and a Wilderness-cheap kit (Karil's leathertop / Black d'hide) - Scorpia's guardians inflict poison starting at 6 damage and burn through brews quickly. Burning amulet -> Lava Maze then run south-west; or web-walk down via the Chaos Elemental ladder. Scorpia is in multi-combat so a PKer team will land specs together - swap to a one-click logout if you spot dots on the minimap",
         "worldX": 3231,
         "worldY": 3936,
         "worldPlane": 0,
@@ -5061,7 +5061,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Scorpia. Use Protect from Melee, attack with crush (Bandos godsword, Inquisitor's mace) or stab to bypass her defence, and pre-pot anti-venom+. At ~33% HP Scorpia spawns two Scorpia's Guardians that heal her - kill them on sight or DPS Scorpia faster than the heal tick. Sip super combat / overload mid-fight if you brought one",
+        "description": "Kill Scorpia. Use Protect from Missiles to block damage from her guardians, attack with stab (her lowest melee defence), and pre-pot anti-venom+. At ~50% HP Scorpia spawns two Scorpia's Guardians that heal her - kill them on sight or DPS Scorpia faster than the heal tick. Sip super combat / overload mid-fight if you brought one",
         "worldX": 3233,
         "worldY": 10341,
         "worldPlane": 0,
