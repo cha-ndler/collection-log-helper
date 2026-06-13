@@ -27899,7 +27899,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange with a spade, a Stethoscope, a sextant + watch + chart (for coordinate clues), light-imbuable teleport jewellery, a Stamina potion, and combat gear for the elite double-agents and demi-boss fights",
+        "description": "Travel to the Grand Exchange with a spade, a Stethoscope, a sextant + watch + chart (for coordinate clues), light-imbuable teleport jewellery, a Stamina potion, and combat gear for the Armadylean/Bandosian guards (coordinate clues) and demi-boss fights",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -27912,7 +27912,7 @@
         "section": "Travel"
       },
       {
-        "description": "Obtain an elite clue scroll from a boss drop (Vorkath, Zulrah, Cerberus, Hydra, Barrows reward casket), a slayer monster, or by opening Dragon impling jars (1/50 per jar). Elite clues also drop from elite clue geodes while mining gem rocks and motherlode mine",
+        "description": "Obtain an elite clue scroll from a boss drop (Vorkath, Zulrah, Cerberus, Hydra, Barrows reward casket), a slayer monster, or by opening Dragon impling jars (1/50 per jar). Elite clues also drop from elite clue geodes while mining gem rocks and ore rocks (gold, mithril, adamantite, runite)",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
@@ -27922,7 +27922,7 @@
         "loopCount": 1
       },
       {
-        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Elite clues add cryptic chains, hot/cold coordinates, dual cryptic clues with two locations per step, and level 84-210 elite double-agents - bring Protect from Melee and a Ranged or Magic weapon",
+        "description": "Complete all clue steps with the RuneLite Clue Scroll plugin. Elite clues add cryptic chains, hot/cold coordinates, dual cryptic clues with two locations per step, and Armadylean or Bandosian guards on coordinate clues (elite clues have no double-agents) - bring Protect from Melee and a Ranged or Magic weapon",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
