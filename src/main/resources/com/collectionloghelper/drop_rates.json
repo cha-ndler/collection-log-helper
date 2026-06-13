@@ -21341,7 +21341,7 @@
     "travelTip": "Varies by item - see step description",
     "guidanceSteps": [
       {
-        "description": "The Miscellaneous tab collects items with no dedicated source. Key items and primary sources: Big bass/swordfish/shark (big-net fishing or Fishing Trawler), Long/curved bone (giant/big bones drops), Giant key (Hill Giants), Mossy key (Moss Giants), Xeric's talisman (Lizardmen Brutes/Shamans), Mining gloves set (Mining Guild shop), Herbi (Herbiboar), Merfolk trident (Tempoross), Dragon metal pieces (Vorkath). Check each item's Wiki page for its specific drop source.",
+        "description": "The Miscellaneous tab collects items with no dedicated source. Key items and primary sources: Big bass/swordfish/shark (big-net fishing or Fishing Trawler), Long/curved bone (giant/big bones drops), Giant key (Hill Giants), Mossy key (Moss Giants), Xeric's talisman (Lizardmen Brutes/Shamans), Mining gloves set (Mining Guild shop), Herbi (Herbiboar), Merfolk trident (Mairin's Market, Fossil Island - 400 mermaid's tears), Dragon metal slice/lump (Adamant/Rune Dragons). Check each item's Wiki page for its specific drop source.",
         "worldX": 0,
         "worldY": 0,
         "worldPlane": 0,
