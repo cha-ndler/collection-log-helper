@@ -21930,7 +21930,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to your best rooftop course. Seers' Village (60+ Agility, Camelot teleport) gives the most marks per hour. Use Varrock (10+), Canifis (40+), Falador (50+), or Pollnivneach (70+) depending on your level.",
+        "description": "Travel to your best rooftop course. Canifis (40+ Agility) gives the most marks per hour thanks to its higher spawn rate; Seers' Village (60+, Camelot teleport) is best for Agility XP. Lower-level options: Varrock (30+), Falador (50+), or Pollnivneach (70+).",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
@@ -21940,7 +21940,7 @@
         "section": "Travel"
       },
       {
-        "description": "Complete rooftop agility laps. Collect marks of grace when they appear on the course - they despawn after 10 minutes. Equipping graceful reduces run drain by 30% per piece. Aim for the highest-level course available to maximise marks per hour.",
+        "description": "Complete rooftop agility laps. Collect marks of grace when they appear on the course - they despawn after 10 minutes. The full graceful outfit increases run energy restoration by 30% (about +3-4% per piece plus a 10% full-set bonus). Aim for the highest-level course available to maximise marks per hour.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
