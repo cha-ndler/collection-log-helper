@@ -23272,7 +23272,7 @@
       }
     ],
     "locationDescription": "The Darkfrost, Hailstorm Mountains in Varlamore",
-    "travelTip": "Quetzal whistle -> Hueycoatl arena, or Civitas illa Fortis lodestone",
+    "travelTip": "Quetzal whistle -> Hueycoatl arena, or Quetzal Transport System -> Quetzacalli Gorge -> run to the Darkfrost",
     "npcId": 14009,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -23291,17 +23291,17 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Hueycoatl Arena in the Hailstorm Mountains, Varlamore. Use the quetzal whistle for the fastest route, or Civitas illa Fortis lodestone and run west",
+        "description": "Travel to the Hueycoatl arena (the Darkfrost) in the Hailstorm Mountains, Varlamore. Use the quetzal whistle for the fastest route, or take the Quetzal Transport System to Quetzacalli Gorge and run to the Darkfrost (the pendant of ates teleports directly once unlocked)",
         "worldX": 1509,
         "worldY": 3290,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Quetzal whistle -> Hueycoatl, or Civitas illa Fortis lodestone -> run west",
+        "travelTip": "Quetzal whistle -> Hueycoatl, or Quetzal Transport System -> Quetzacalli Gorge -> run to the Darkfrost",
         "section": "Travel"
       },
       {
-        "description": "Kill The Hueycoatl. The fight cycles across 4 anchor pillars - Hueycoatl rams a different pillar each phase. Run to the active pillar and DPS the head while it is bound. Dodge red tiles (fire breath / tail slam), kill the egg nest adds before they hatch, and use Protect from Magic on the final phase enrage. Dragon hunter wand or dragon hunter crossbow are the meta picks.",
+        "description": "Kill The Hueycoatl. Three pillars stand west of the head - blue (Protect from Magic), red (Protect from Melee), and green (Protect from Missiles). Charge them by praying the protection prayer matching each pillar's colour; once all three are charged the path opens and the head can be attacked. Dodge red tiles (fire breath / tail slam), kill the egg nest adds before they hatch, and use Protect from Magic on the final phase enrage. Dragon hunter wand or dragon hunter crossbow are the meta picks.",
         "worldX": 1509,
         "worldY": 3290,
         "worldPlane": 0,
