@@ -21802,7 +21802,7 @@
       }
     ],
     "locationDescription": "Colossal Wyrm Agility Course in Avium Savannah, Varlamore",
-    "travelTip": "Quetzal transport whistle -> Civitas illa Fortis, run south-west to Avium Savannah; or Colossal wyrm teleport scroll (purchased from Telia)",
+    "travelTip": "Quetzal transport whistle -> Civitas illa Fortis, run south-west to Avium Savannah; or Colossal wyrm teleport scroll (bought from Worm Tongue for 40 termites, or the Grand Exchange)",
     "guidanceSteps": [
       {
         "description": "Travel to the Colossal Wyrm Agility Course in Avium Savannah, Varlamore. Requires Children of the Sun and 50 Agility. Use the quetzal transport whistle to Civitas illa Fortis then run south-west, or use a Colossal wyrm teleport scroll.",
@@ -21826,7 +21826,7 @@
         ]
       },
       {
-        "description": "Complete laps of the Colossal Wyrm Agility Course for Varlamore marks of grace and termite currency. Collect marks when they appear on obstacles - they despawn after 10 minutes. Spend marks at Telia for Varlamore graceful pieces and Calcified acorns. Higher Agility level increases lap speed and mark rate.",
+        "description": "Complete laps of the Colossal Wyrm Agility Course to earn termites (the course's currency). Spend termites at Worm Tongue's Wares for the Graceful crafting kit (re-skins graceful to the Varlamore theme) and Calcified acorns. Higher Agility level increases lap speed and termite rate.",
         "worldX": 1652,
         "worldY": 2931,
         "worldPlane": 0,
