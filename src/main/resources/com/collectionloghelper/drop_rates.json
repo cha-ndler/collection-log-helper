@@ -9001,7 +9001,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Bank at Civitas illa Fortis for the Colosseum. Bring Saradomin brews, super restores, ranging potions, sharks, a Quetzal whistle (or fast teleport), and a Sunfire fanatic / Crystal armour ranged setup. Meta loadout is Bow of faerdhinen (c) with Crystal helm/body/legs + Pegasian boots + Necklace of anguish; bring a Voidwaker or Volatile nature staff spec for damage windows. Take 4-6 brews, 6-8 restores, 6 ranging potions, sharks to fill the rest, and at least 5 Sunfire splinters in case you reset on early waves.",
+        "description": "Bank at Civitas illa Fortis for the Colosseum. Bring Saradomin brews, super restores, ranging potions, sharks, a Quetzal whistle (or fast teleport), and a Sunfire fanatic / Crystal armour ranged setup. Meta loadout is Bow of faerdhinen (c) with Crystal helm/body/legs + Pegasian boots + Necklace of anguish; bring a Voidwaker or Volatile nature staff spec for damage windows. Take 4-6 brews, 6-8 restores, 6 ranging potions, and sharks to fill the rest.",
         "worldX": 1593,
         "worldY": 3091,
         "worldPlane": 0,
@@ -9038,7 +9038,7 @@
         "section": "Travel"
       },
       {
-        "description": "Clear waves 1-11. Use Protect from Missiles vs Fremennik Archers, Protect from Melee vs Manticores, and step under Serpent Shamans to break their long-range chain. Drink Sunfire splinters when low; do not over-stack modifiers if you are still learning the wave",
+        "description": "Clear waves 1-11. Use Protect from Missiles vs Fremennik Archers. Against Manticores, prayer-flick through their triple-hit sequence: the first two hits are ranged then magic (or magic then ranged), and the final hit is always melee - flick Protect from Missiles, Protect from Magic, then Protect from Melee in order. Step under Serpent Shamans to break their long-range chain. Do not over-stack modifiers if you are still learning the waves.",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
@@ -9053,7 +9053,7 @@
         ]
       },
       {
-        "description": "Defeat Sol Heredit on wave 12. He cycles three melee specials: Triple Spear (move 2 tiles perpendicular), Triple Shield (run 4 tiles away then back), and Spear Wall (run to the wall opposite his facing). His shockwave attack is unavoidable - take it with full HP and Protect from Melee on. Use the white pillar to stall his shield slam and keep up Crystal armour set effect.",
+        "description": "Defeat Sol Heredit on wave 12. His AoE attacks are unaffected by prayer and must be dodged by movement. Spear 1 (always opens the fight): move back from his centre or edge tiles. Spear 2: move to any off-centre tile. Shield 1: move 1 tile back. Shield 2: move 2 tiles back. Below 90% HP he uses Triple Parry - activate Protect from Melee on the tick before each of his three spear hits. Below 75% HP he uses Grapple - he calls a body part and you must click the item in that equipment slot within 4 ticks. Keep up Crystal armour set effect.",
         "worldX": 1794,
         "worldY": 3107,
         "worldPlane": 0,
