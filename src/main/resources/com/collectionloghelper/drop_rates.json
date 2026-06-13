@@ -4863,7 +4863,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the King Black Dragon. Use Protect from Magic, keep an antifire potion active (the dragon also has a venom-laced melee attack), and fight with ranged or melee stab. The KBD uses dragonfire, magic, melee, ranged and a poison breath, so anti-dragon shield plus antifire is non-negotiable",
+        "description": "Kill the King Black Dragon. Use Protect from Melee when fighting at melee distance (use Protect from Magic only if using a two-handed ranged or magic setup such as twisted bow). Keep an antifire potion active and equip an anti-dragon shield. KBD uses melee (stab) and four dragonfire variants (normal, shock, ice, poison); its toxic breath inflicts poison starting at 8 damage, so bring antipoison or antidote++.",
         "worldX": 2269,
         "worldY": 4705,
         "worldPlane": 0,
