@@ -4777,7 +4777,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Abyssal Sire. Phase 1: stun the Sire with Shadow Barrage (100% stun chance) or deal 75 ranged/magic damage, then kill all 4 respiratory systems while the Sire is stunned - tentacles guarding them deactivate during stun. Phase 2 (50% HP): Sire walks to the centre; tentacles become inactive - melee him with Protect from Melee, watch for the teleport grab that drags you toward him. Phase 3 (25% HP): tentacles re-activate and Sire releases poison miasma pools - stay mobile, do NOT stand in green pools, keep Protect from Melee. Bandos chestplate/tassets + Abyssal bludgeon or scythe with Soulreaper axe clears phase 2-3 fastest. 85 Slayer + Abyssal demon task required",
+        "description": "Kill the Abyssal Sire. Phase 1: stun the Sire with Shadow Barrage (100% stun chance) or deal 75 ranged/magic damage, then kill all 4 respiratory systems while the Sire is stunned - tentacles guarding them deactivate during stun. Phase 2 (50% HP): Sire walks to the centre; tentacles become inactive - melee him with Protect from Melee, watch for the teleport grab that drags you toward him. Phase 3 (~50% HP, <210 health): tentacles re-activate and Sire releases miasma pools - switch to Protect from Missiles (spawns deal ranged damage; Sire no longer melees), stay mobile, do NOT stand in green pools. Bandos chestplate/tassets + Abyssal bludgeon or scythe with Soulreaper axe clears phase 2-3 fastest. 85 Slayer + Abyssal demon task required",
         "worldX": 3039,
         "worldY": 4763,
         "worldPlane": 0,
