@@ -1478,12 +1478,12 @@
           9520,
           0
         ],
-        "travelTip": "Fairy ring BIQ, or desert amulet to Kalphite Cave (with Hard Desert Diary)",
+        "travelTip": "Fairy ring BIQ, or desert amulet to Kalphite Cave (with Elite Desert Diary)",
         "conditionalAlternatives": [
           {
-            "requirements": { "diaries": ["DESERT_HARD"] },
+            "requirements": { "diaries": ["DESERT_ELITE"] },
             "description": "Use the desert amulet 4 to teleport directly to the Kalphite Cave entrance, eliminating the fairy ring detour.",
-            "travelTip": "Desert amulet 4 -> Kalphite Cave (Hard Desert Diary reward)"
+            "travelTip": "Desert amulet 4 -> Kalphite Cave (Elite Desert Diary reward)"
           }
         ]
       },
