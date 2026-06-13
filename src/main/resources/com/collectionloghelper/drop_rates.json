@@ -12002,13 +12002,13 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Asgarnian Ice Dungeon. Fairy ring AIQ to Mudskipper Point and run south is the fastest route; Port Sarim charter + run south is the unfairy-ring fallback.",
+        "description": "Travel to the Asgarnian Ice Dungeon. Fairy ring AIQ to Mudskipper Point and run north-east is the fastest route; Port Sarim charter + run south is the unfairy-ring fallback.",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Fairy ring AIQ -> Mudskipper Point, then run south to the dungeon entrance",
+        "travelTip": "Fairy ring AIQ -> Mudskipper Point, then run north-east to the dungeon entrance",
         "section": "Travel"
       },
       {
@@ -22771,7 +22771,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Locate the next crashed star. Use a telescope in your player-owned house Study (mahogany telescope gives a 2-minute window). Alternatively join the Shooting Stars grouping chat or use a community star-tracker site. Stars fall every 85-95 minutes and vary in size (tier 1-9). Teleport to the region the telescope indicates.",
+        "description": "Locate the next crashed star. Use a telescope in your player-owned house Study (mahogany telescope gives a 2-minute window). Alternatively join the Shooting Stars grouping chat or use a community star-tracker site. Stars fall roughly every 90 minutes (a 75-105 minute window) and vary in size (tier 1-9). Teleport to the region the telescope indicates.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
@@ -22781,7 +22781,7 @@
         "section": "Scout"
       },
       {
-        "description": "Mine the crashed star. Stars degrade through tiers as miners chip away at them - being the first miner awards double stardust for 300 dust mined. Talk to the Star Sprite that emerges from the core (visible when star reaches tier 1) to receive bonus stardust. Collect stardust and exchange at Dusuri's Star Shop (Mining Guild, Falador) for Celestial ring and Star fragments.",
+        "description": "Mine the crashed star. Stars degrade through tiers as miners chip away at them - being the first miner awards double stardust for 300 dust mined. Collect stardust while mining and exchange it at Dusuri's Star Shop (Mining Guild, Falador) for Celestial ring and Star fragments.",
         "worldX": 3214,
         "worldY": 3414,
         "worldPlane": 0,
@@ -23433,7 +23433,7 @@
       }
     ],
     "locationDescription": "Yama's Domain, Chasm of Fire beneath Shayzien",
-    "travelTip": "Chasm teleport scroll, or Xeric's talisman -> Heart -> south to chasm",
+    "travelTip": "Chasm teleport scroll -> Chasm of Fire",
     "npcId": 14176,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -23453,17 +23453,17 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Chasm of Fire beneath Shayzien, Varlamore. Use a chasm teleport scroll for the fastest route, or Xeric's talisman to Heart and run south",
+        "description": "Travel to the Chasm of Fire in north-west Shayzien, Great Kourend. Use a chasm teleport scroll for the fastest route",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Chasm teleport scroll (one-tick), or Xeric's talisman -> Heart -> run south through chasm",
+        "travelTip": "Chasm teleport scroll (one-tick) -> Chasm of Fire",
         "section": "Travel"
       },
       {
-        "description": "Form a party of 2-4 and enter Yama's instance. Solo is possible at endgame but DPS check is brutal; duo is the standard. Make sure all members have prayer pots and brews.",
+        "description": "Form a party of up to 2 (solo or duo) and enter Yama's instance. Solo is possible at endgame but the DPS check is brutal; duo is the standard. Make sure all members have prayer pots and brews.",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
@@ -23706,7 +23706,7 @@
       }
     ],
     "locationDescription": "Asgarnian Ice Dungeon, south of Port Sarim",
-    "travelTip": "Giantsoul amulet -> direct teleport, or fairy ring AIQ -> run south",
+    "travelTip": "Giantsoul amulet -> direct teleport, or fairy ring AIQ -> Mudskipper Point then run north-east",
     "npcId": 12596,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -23725,7 +23725,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Asgarnian Ice Dungeon entrance south of Port Sarim. Giantsoul amulet teleports directly to the boss tunnel; otherwise fairy ring AIQ to Mudskipper Point and run south, then use the level-60 Agility tunnel shortcut west of the dungeon ladder",
+        "description": "Travel to the Asgarnian Ice Dungeon entrance south of Port Sarim. Giantsoul amulet teleports directly to the boss tunnel; otherwise fairy ring AIQ to Mudskipper Point and run north-east, then use the level-60 Agility tunnel shortcut west of the dungeon ladder",
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
@@ -23955,7 +23955,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Lumbridge. Required: 'The Ides of Milk' quest complete. Bring melee gear (any tier above mithril works - Brutus has low defence and ~200 HP), prayer potions, food, and a Lumbridge teleport. The Cow slippers / Bottomless milk bucket are joke drops with very low realistic engagement value, so cheap gear is fine",
+        "description": "Bank in Lumbridge. Required: 'The Ides of Milk' quest complete. Bring melee gear (any tier above mithril works - Brutus has low defence and only ~58 HP), prayer potions, food, and a Lumbridge teleport. The Cow slippers / Bottomless milk bucket are joke drops with very low realistic engagement value, so cheap gear is fine",
         "worldX": 3221,
         "worldY": 3219,
         "worldPlane": 0,
@@ -23981,7 +23981,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Brutus. Use Protect from Melee and attack with any decent melee weapon - Brutus is a straightforward fight with only a slam auto-attack and a low-damage stomp. Sip prayer potion every 4-5 kills. The fight is designed as a joke encounter for the Mooleta / Cow slippers cosmetic drops; do not waste BiS supplies",
+        "description": "Kill Brutus. Use Protect from Melee against the basic melee attack and hit with any decent melee weapon. Brutus also has two special attacks that each give you a few ticks to step out of the way - watch for the animation cue and move. Sip prayer potion every 4-5 kills. The fight is a low-stakes encounter for the Mooleta / Cow slippers cosmetic drops; do not waste BiS supplies",
         "worldX": 3263,
         "worldY": 3297,
         "worldPlane": 0,
@@ -24081,7 +24081,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to The Great Conch and locate the Shellbane Gryphon Cave entrance on the eastern beach. Quetzal whistle -> Great Conch then run east to the cliff-side cave mouth",
+        "description": "Travel to The Great Conch and locate the Shellbane Gryphon Cave entrance in the centre of the island, north of fairy ring CJQ. Take fairy ring CJQ or a Quetzal whistle to The Great Conch, then head north to the cave entrance",
         "worldX": 13993,
         "worldY": 9901,
         "worldPlane": 0,
@@ -24119,7 +24119,7 @@
         ]
       },
       {
-        "description": "Pick up the Gryphon feather (1/kill) and any rares, then exit the cave and teleport via Quetzal whistle to restock. Belle's folly (tarnished) is the main unique chase at 1/256",
+        "description": "Pick up the Gryphon feathers (7-10 guaranteed per kill) and any rares, then exit the cave and teleport via Quetzal whistle to restock. Belle's folly (tarnished) is the main unique chase at 1/256",
         "worldX": 1626,
         "worldY": 3093,
         "worldPlane": 0,
@@ -24175,7 +24175,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to Varrock Sewers via the manhole behind Varrock Palace or south of Edgeville bank. Use the Varrock teleport for the fastest route",
+        "description": "Travel to Varrock Sewers via the manhole just east of Varrock Palace or south of Edgeville bank. Use the Varrock teleport for the fastest route",
         "worldX": 3237,
         "worldY": 3458,
         "worldPlane": 0,
@@ -24215,7 +24215,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Scurrius. Stand under the boss for melee, dodge the falling rocks (red tiles), and kill the Giant rat spawns immediately - they heal Scurrius if left alive. Use Protect from Missiles to negate his ranged-style auto. Easy first-boss fight that often drops the Scurrius' spine (rune pouch upgrade).",
+        "description": "Kill Scurrius. Stand under the boss for melee, dodge the falling rocks (red tiles), and kill the Giant rat spawns immediately to disrupt the fight. Scurrius heals from the Food Piles between phases (not from the rats), so push damage through the phase transitions. Use Protect from Missiles to negate his ranged-style auto. Easy first-boss fight that often drops the Scurrius' spine (rune pouch upgrade).",
         "worldX": 3299,
         "worldY": 9867,
         "worldPlane": 0,
@@ -24476,7 +24476,7 @@
         ]
       },
       {
-        "description": "Triple-Jad wave 67. Each Jad rotates Magic / Ranged prayers independently - the cue is the rear-back animation. Kill the centre Jad first, then the south, then the north; the order minimises overlap on healer waves. Stand in the south-west corner with line-of-sight blocked on the north Jad until the others die. Do not use Tumeken's shadow on Jads - they have high magic defence; swap to Twisted bow.",
+        "description": "Triple-Jad wave 68. Each Jad rotates Magic / Ranged prayers independently - the cue is the rear-back animation. Kill the centre Jad first, then the south, then the north; the order minimises overlap on healer waves. Stand in the south-west corner with line-of-sight blocked on the north Jad until the others die. Do not use Tumeken's shadow on Jads - they have high magic defence; swap to Twisted bow.",
         "worldX": 2273,
         "worldY": 5341,
         "worldPlane": 0,
@@ -24492,7 +24492,7 @@
         ]
       },
       {
-        "description": "Defeat TzKal-Zuk on wave 69. He hits a fixed-tile attack that follows your previous tile - move 1 tile every 4 ticks (4-tick shuffle). The Igneous shield NPC (Jal-MejJak) spawns once and absorbs one Zuk hit when stood behind - use it at the second healer set spawn. At 480 HP, two healers (Jal-MejJak healers) spawn from the south - 1-tick aggro them off Zuk by attacking each once then leaving range. At 240 HP, the second healer set spawns; same drill. Tumeken's shadow is BIS for Zuk; switch to Twisted bow if low on shadow charges.",
+        "description": "Defeat TzKal-Zuk on wave 69. He hits a fixed-tile attack that follows your previous tile - move 1 tile every 4 ticks (4-tick shuffle). Stay behind the moving shield to block his hits. At 480 HP, a JalTok-Jad spawns and attacks the shield - aggro or kill it so it does not break your cover. At 240 HP, Zuk becomes enraged (attacks ~3 ticks faster) and summons four Jal-MejJak healers - 1-tick aggro them off Zuk by attacking each once then leaving range. Tumeken's shadow is BIS for Zuk; switch to Twisted bow if low on shadow charges.",
         "worldX": 2273,
         "worldY": 5341,
         "worldPlane": 0,
@@ -28298,7 +28298,7 @@
     "locationDescription": "Grand Exchange",
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Exchange with a spade, sextant + watch + chart, mirror shield (for double-agents), all teleport jewellery, a Stamina potion, prayer potions, and high-tier combat gear for the level 108-210 master double-agents and elite monster fights",
+        "description": "Travel to the Grand Exchange with a spade, sextant + watch + chart, mirror shield (for double-agents), all teleport jewellery, a Stamina potion, prayer potions, and high-tier combat gear for the level 141 master double-agents and elite monster fights",
         "worldX": 3165,
         "worldY": 3487,
         "worldPlane": 0,
