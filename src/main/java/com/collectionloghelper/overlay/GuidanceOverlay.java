@@ -88,6 +88,9 @@ public class GuidanceOverlay extends OverlayPanel
 	@Inject
 	private ModelOutlineRenderer modelOutlineRenderer;
 
+	@Inject
+	private RenderStateRecorder renderRecorder;
+
 	private volatile WorldPoint targetPoint;
 	private volatile String targetName;
 	private volatile String locationDescription;
@@ -132,6 +135,13 @@ public class GuidanceOverlay extends OverlayPanel
 		final boolean logReminder = this.showCollectionLogReminder;
 		final boolean bankReminder = this.showBankReminder;
 		final List<RequiredItemDisplay> items = this.requiredItems;
+
+		// Open the per-frame render-state recording for the dev bridge. No-op
+		// (single volatile check) unless the dev harness enabled the recorder.
+		// GuidanceOverlay is the natural frame opener — it owns the NPC highlight
+		// and the tile. "Active" here means this overlay has a guidance target to
+		// draw this frame.
+		renderRecorder.beginFrame(point != null || npcId > 0 || clueText != null);
 
 		Color overlayColor = config.overlayColor();
 		updateCachedColors(overlayColor);
@@ -190,6 +200,7 @@ public class GuidanceOverlay extends OverlayPanel
 			&& shouldDrawNpcHighlight(npcId, npc, localPlayer.getWorldLocation().getPlane()))
 		{
 			renderNpcHighlight(graphics, npc, overlayColor, action, locDesc);
+			renderRecorder.recordNpc(npcId);
 			npcHighlighted = true;
 		}
 
@@ -211,6 +222,7 @@ public class GuidanceOverlay extends OverlayPanel
 			{
 				OverlayUtil.renderPolygon(graphics, poly, overlayColor, cachedFillColor50,
 					STROKE_2);
+				renderRecorder.recordTile(point);
 
 				if (name != null)
 				{
@@ -360,6 +372,7 @@ public class GuidanceOverlay extends OverlayPanel
 				if (mousePos != null && hoverHull.contains(mousePos.getX(), mousePos.getY()))
 				{
 					tooltipManager.add(new Tooltip(builtTooltip));
+					renderRecorder.recordTooltip(builtTooltip);
 				}
 			}
 		}
@@ -376,12 +389,16 @@ public class GuidanceOverlay extends OverlayPanel
 	 */
 	private void drawTargetMarker(Graphics2D graphics, NPC npc)
 	{
-		if (!config.showGuidanceTargetMarker())
+		boolean markerOn = config.showGuidanceTargetMarker();
+		int zOffset = npc.getLogicalHeight() + MARKER_CLEARANCE;
+		// Record the per-target draw decision for the dev bridge: bookMarker
+		// reflects whether the marker actually drew (the #802/#811 assertion).
+		renderRecorder.recordTarget("npc", npc.getId(), markerOn, zOffset);
+		if (!markerOn)
 		{
 			return;
 		}
-		targetMarker.draw(graphics, client, npc.getLocalLocation(),
-			npc.getLogicalHeight() + MARKER_CLEARANCE);
+		targetMarker.draw(graphics, client, npc.getLocalLocation(), zOffset);
 	}
 
 	private void updateCachedColors(Color overlayColor)
