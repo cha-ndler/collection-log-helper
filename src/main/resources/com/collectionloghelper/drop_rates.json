@@ -8832,7 +8832,7 @@
     "interactAction": "Mine",
     "guidanceSteps": [
       {
-        "description": "Bank for Zalcano. Bring a Dragon pickaxe (or Crystal pickaxe), Smiths uniform pieces if owned, a Goldsmith gauntlets for bonus XP, a few stamina potions, and one teleport home. Combat gear not required - Zalcano is a skilling boss. Mining and Smithing 70+ each are recommended for viable points per hour.",
+        "description": "Bank for Zalcano. Bring a Dragon pickaxe (or Crystal pickaxe), a few stamina potions, and one teleport home. Combat gear not required - Zalcano is a skilling boss. Mining and Smithing 70+ each are recommended for viable points per hour.",
         "worldX": 3162,
         "worldY": 6109,
         "worldPlane": 0,
@@ -8851,18 +8851,7 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
         "travelTip": "Crystal teleport seed -> Prifddinas, or Lletya teleport + run north",
-        "section": "Travel",
-        "conditionalAlternatives": [
-          {
-            "requirements": {
-              "pohTeleports": [
-                "FAIRY_RING"
-              ]
-            },
-            "description": "POH fairy ring -> BIS (Prifddinas), then run south-east to the Trahaearn mining area and enter Zalcano's chamber",
-            "travelTip": "POH fairy ring BIS -> Prifddinas -> run SE to Zalcano"
-          }
-        ]
+        "section": "Travel"
       },
       {
         "description": "Enter the Zalcano chamber portal. The group fight starts as soon as you arrive on the mining tiles - you can join in progress",
@@ -8874,7 +8863,7 @@
         "section": "Travel"
       },
       {
-        "description": "Defeat Zalcano. Cycle: mine glowing tephra rocks, smith tephra at the furnace into imbued tephra, then throw imbued tephra at Zalcano. When she falls to her knees, switch to your pickaxe and mine her for direct damage. Avoid the red projectile target tiles (heavy damage), and run out of the green falling-rock circles. Wear weight-reducing gear (Graceful) to save run energy across the long fight.",
+        "description": "Defeat Zalcano. Cycle: mine glowing tephra rocks, refine tephra at the eastern furnace, imbue refined tephra at the western altar, then throw imbued tephra at Zalcano. When she falls to her knees, switch to your pickaxe and mine her for direct damage. Avoid the red projectile target tiles (heavy damage), and run out of the green falling-rock circles. Wear weight-reducing gear (Graceful) to save run energy across the long fight.",
         "worldX": 3031,
         "worldY": 6048,
         "worldPlane": 0,
@@ -8889,7 +8878,7 @@
         ]
       },
       {
-        "description": "Pick up the Tetsu / Virtus / Aurora dye-mould reward, plus any Zalcano shards or Crystal tool seeds dropped. Drops appear at your feet once the fight ends",
+        "description": "Pick up any Zalcano shards, Crystal tool seeds, or Uncut onyx dropped. Drops appear at your feet once the fight ends.",
         "worldX": 3031,
         "worldY": 6048,
         "worldPlane": 0,
