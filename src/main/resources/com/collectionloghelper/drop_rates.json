@@ -12222,7 +12222,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Gargoyles on the top floor. Once a Gargoyle drops below 9 HP, smash it with a Rock hammer (or the Gargoyle smasher perk auto-smashes for you above 75 Slayer). Granite maul spec is the fastest finisher for 2-tick tasks. Watch for the boost-the-HP trick on early Slayer accounts - if you over-damage them they reset to full HP.",
+        "description": "Kill Gargoyles on the top floor. Once a Gargoyle drops to 8 HP or lower, smash it with a Rock hammer (or the Gargoyle Smasher perk, costing 120 Slayer points, auto-smashes provided a rock hammer is in your inventory). Granite maul Quick Smash (instant special, 60% spec energy) is the fastest finisher.",
         "worldX": 3429,
         "worldY": 3534,
         "worldPlane": 2,
@@ -12241,7 +12241,7 @@
         ]
       },
       {
-        "description": "Loot the Granite maul (3-tick spec weapon), Mystic robe top (dark), and Adamant boots. Granite mauls stack high - high alch them for GP between tasks.",
+        "description": "Loot the Granite maul (instant Quick Smash special attack), Mystic robe top (dark), and Adamant boots. Granite mauls stack high - high alch them for GP between tasks.",
         "worldX": 3429,
         "worldY": 3534,
         "worldPlane": 2,
