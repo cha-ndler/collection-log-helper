@@ -9145,13 +9145,13 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Crazy Archaeologist ruins south of the Lava Maze (Wilderness level 23). Burning amulet -> Bandit Camp then run north-west, or web-walk via the south-of-Lava-Maze ladder. The ruin sits in single-combat so once Crazy is engaged a PKer needs to wait their turn",
+        "description": "Travel to the Crazy Archaeologist ruins south of the Lava Maze (Wilderness level 23). Burning amulet -> Bandit Camp then run west, or web-walk via the south-of-Lava-Maze ladder. The ruin sits in single-combat so once Crazy is engaged a PKer needs to wait their turn",
         "worldX": 2975,
         "worldY": 3696,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Burning amulet -> Bandit Camp, run north-west to the ruins",
+        "travelTip": "Burning amulet -> Bandit Camp, run west to the ruins",
         "section": "Travel"
       },
       {
