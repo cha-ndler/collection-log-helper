@@ -8556,7 +8556,7 @@
       }
     ],
     "locationDescription": "Tempoross Cove, south of Al Kharid",
-    "travelTip": "Minigame Grouping teleport -> Tempoross, or sail from the Ruins of Unkah",
+    "travelTip": "Ferryman Sathwood ferry south of Al Kharid bank, or sail from Ruins of Unkah dock",
     "npcId": 10584,
     "interactAction": "Talk-to",
     "requirements": {
@@ -8575,7 +8575,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Minigame Grouping teleport -> Tempoross",
+        "travelTip": "Ferryman Sathwood ferry south of Al Kharid bank",
         "requiredItemIds": [
           311,
           2347
@@ -8598,7 +8598,7 @@
         "section": "Travel"
       },
       {
-        "description": "Fish harpoonfish at the dark cloud spots, then run to a cannon and cook (use Fish on Cannon) and load the harpoonfish into the cannon. Watch for storm clouds (move out before lightning) and fix broken masts / totem poles when prompted",
+        "description": "Fish harpoonfish at the fishing spots (double spots preferred), then cook at the shrine and load cooked harpoonfish into the cannon ammunition crate. Move away from dark clouds before lightning strikes and fix broken masts / totem poles when prompted",
         "worldX": 3027,
         "worldY": 2954,
         "worldPlane": 0,
