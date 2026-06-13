@@ -29843,7 +29843,7 @@
     "travelTip": "Fairy ring BJP -> Isle of Souls (no req); or Ape Atoll tele for 2-tick",
     "guidanceSteps": [
       {
-        "description": "Bank for teak chopping. Bring your best axe (dragon or crystal for highest success rate). 35 Woodcutting required. Isle of Souls is best with no extra requirements. Ape Atoll or Prifddinas are optimal for 2-tick manipulation (bring a knife and kebbit claws or karambwanji for the tick cycle).",
+        "description": "Bank for teak chopping. Bring your best axe (dragon or crystal for highest success rate). 35 Woodcutting required. Isle of Souls is best with no extra requirements. Ape Atoll/Isle of Souls (birds) or Prifddinas (rabbits) are optimal for 2-tick manipulation, where you auto-retaliate to a monster hitting you every 2 ticks while clicking the tree.",
         "worldX": 2200,
         "worldY": 2858,
         "worldPlane": 0,
@@ -29866,7 +29866,7 @@
         "section": "Travel"
       },
       {
-        "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-tick method at Ape Atoll or Prifddinas: use knife on bait on tick 1, click tree on tick 2. Bird nests drop to the ground (1/256 chance) and despawn after 2 minutes - collect for bonus value.",
+        "description": "Chop teak logs. AFK method: stand between two trees and click the other when one falls (each respawns in 9 seconds). 2-tick method at Ape Atoll or Prifddinas: let a monster attack you every 2 ticks (birds at Ape Atoll, rabbits at Prifddinas) and click the tree on auto-retaliate. Bird nests drop to the ground (1/256 chance) and despawn after 2 minutes - collect for bonus value.",
         "worldX": 2770,
         "worldY": 2700,
         "worldPlane": 0,
@@ -29932,13 +29932,13 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to Shilo Village underground mine. Teleport to Shilo Village via Karamja gloves 3/4, then enter the underground mine on the south side. Brimhaven cart ride also works.",
+        "description": "Travel to the Shilo Village underground gem mine (requires the Medium Karamja Diary to enter). Karamja gloves 3 (Hard Karamja Diary) or 4 teleport directly into the underground mine; otherwise reach Shilo Village (Brimhaven cart ride) and climb down to the underground level.",
         "worldX": 2842,
         "worldY": 9381,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Karamja gloves 3/4 tele to Shilo Village; or Brimhaven cart ride",
+        "travelTip": "Karamja gloves 3/4 -> directly into the underground mine; or Brimhaven cart ride to Shilo Village",
         "section": "Travel"
       },
       {
@@ -29958,7 +29958,7 @@
         "loopCount": 0
       },
       {
-        "description": "Bank gems once your inventory is full. The gem bag holds up to 60 uncut gems to delay banking. Shilo Village bank is immediately above the underground mine entrance.",
+        "description": "Bank gems once your inventory is full. The gem bag holds up to 60 of each uncut gem type (300 total) to delay banking. Shilo Village bank is immediately above the underground mine entrance.",
         "worldX": 2852,
         "worldY": 2954,
         "worldPlane": 0,
@@ -29971,6 +29971,9 @@
     "requirements": {
       "quests": [
         "SHILO_VILLAGE"
+      ],
+      "diaries": [
+        "KARAMJA_MEDIUM"
       ],
       "skills": [
         {
