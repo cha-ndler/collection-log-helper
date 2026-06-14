@@ -18581,7 +18581,7 @@
       }
     ],
     "locationDescription": "Port Sarim docks, obtained via various Sailing activities",
-    "travelTip": "Sailors' amulet -> any port, complete port tasks or salvage for paints",
+    "travelTip": "Sailors' amulet -> The Pandemonium or nearest port, complete port tasks or salvage for paints",
     "guidanceSteps": [
       {
         "worldX": 1824,
@@ -20136,7 +20136,7 @@
       }
     ],
     "locationDescription": "Open ocean during Sailing voyages",
-    "travelTip": "Sailors' amulet -> any port, board boat and sail to trigger encounters",
+    "travelTip": "Sailors' amulet -> The Pandemonium or nearest port, board boat and sail to trigger encounters",
     "guidanceSteps": [
       {
         "worldX": 1824,
@@ -30948,7 +30948,7 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
+    "travelTip": "Sailors' amulet to The Pandemonium or nearest port, board boat, sail to salvage",
     "guidanceSteps": [
       {
         "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
@@ -31013,7 +31013,7 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
+    "travelTip": "Sailors' amulet to The Pandemonium or nearest port, board boat, sail to salvage",
     "guidanceSteps": [
       {
         "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
@@ -31071,7 +31071,7 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
+    "travelTip": "Sailors' amulet to The Pandemonium or nearest port, board boat, sail to salvage",
     "guidanceSteps": [
       {
         "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
@@ -31208,7 +31208,7 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
+    "travelTip": "Sailors' amulet to The Pandemonium or nearest port, board boat, sail to salvage",
     "guidanceSteps": [
       {
         "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
@@ -31266,7 +31266,7 @@
       }
     ],
     "locationDescription": "Sorting salvage obtained from Sailing voyages",
-    "travelTip": "Sailors' amulet to any port, board boat, sail to salvage",
+    "travelTip": "Sailors' amulet to The Pandemonium or nearest port, board boat, sail to salvage",
     "guidanceSteps": [
       {
         "description": "Travel to any Sailing port. Use Sailors' amulet for fast teleport, or walk to Port Sarim docks.",
