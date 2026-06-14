@@ -24009,8 +24009,8 @@
   {
     "name": "Shellbane Gryphon",
     "category": "BOSSES",
-    "worldX": 13993,
-    "worldY": 9901,
+    "worldX": 3176,
+    "worldY": 2477,
     "worldPlane": 0,
     "killTimeSeconds": 36,
     "requirements": {
@@ -24078,8 +24078,8 @@
       },
       {
         "description": "Travel to The Great Conch and locate the Shellbane Gryphon Cave entrance in the centre of the island, north of fairy ring CJQ. Take fairy ring CJQ or a Quetzal whistle to The Great Conch, then head north to the cave entrance",
-        "worldX": 13993,
-        "worldY": 9901,
+        "worldX": 3176,
+        "worldY": 2477,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
@@ -24088,8 +24088,8 @@
       },
       {
         "description": "Enter the cave to descend to the Shellbane Gryphon arena. The cave is instanced, so no other players will interfere with the fight",
-        "worldX": 13993,
-        "worldY": 9901,
+        "worldX": 3176,
+        "worldY": 2477,
         "worldPlane": 0,
         "objectId": 58439,
         "objectInteractAction": "Enter",
@@ -24098,8 +24098,8 @@
       },
       {
         "description": "Kill the Shellbane Gryphon. Active gryphon Slayer task required. Use Protect from Melee; the gryphon is primarily weak to melee - attack with your best melee setup. Keep the Tortugan shield equipped at all times (heavy damage without it). Maintain >= 40kg equipped weight to counter the knockback special attack. Respond to the corrosive spit (move) and whirlwind (move) specials as they occur. Slayer helmet (i) on-task for the damage bonus",
-        "worldX": 13993,
-        "worldY": 9901,
+        "worldX": 3176,
+        "worldY": 2477,
         "worldPlane": 0,
         "npcId": 14860,
         "interactAction": "Attack",
