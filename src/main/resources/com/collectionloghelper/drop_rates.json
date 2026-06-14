@@ -32282,7 +32282,7 @@
       }
     ],
     "locationDescription": "Port tasks from sailing ports",
-    "travelTip": "Sailors' amulet -> any port -> notice board",
+    "travelTip": "Sailors' amulet -> The Pandemonium or nearest port -> notice board",
     "guidanceSteps": [
       {
         "description": "Travel to any Sailing port. Use the Sailors' amulet for fast teleportation, or walk to Port Sarim docks. Accept tasks from the Port Notice Board at the port.",
@@ -32291,7 +32291,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Sailors' amulet -> any port; or walk to Port Sarim",
+        "travelTip": "Sailors' amulet -> The Pandemonium or nearest port; or walk to Port Sarim",
         "section": "Travel"
       },
       {
