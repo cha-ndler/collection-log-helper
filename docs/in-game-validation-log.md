@@ -9,7 +9,50 @@
 > - `[!]` — Regression / failed (file a new issue and cross-link)
 > - `[?]` — Inconclusive (couldn't reproduce / state-dependent)
 
-> **Last updated**: 2026-06-10 (session: operator + actuation seam; 14 checklist rows closed, 6 findings filed)
+> **Last updated**: 2026-06-14 (session: autonomous validation battery + actuation-seam restore)
+
+---
+
+## Validation session — 2026-06-14 *(autonomous battery + actuation-seam restore)*
+
+**Autonomous battery — GREEN.** Data integrity (`validate_drop_rates` cache_ids clean,
+`run_corpus_detectors` at baseline 10+332, `guidance_lint`/`lintDropRates`/python audit
+within baseline), guidance behavior, and submission readiness (`build test` green,
+`plugin_hub_validate` 0 critical/high) all at/within baseline. One real finding fixed:
+Shellbane Gryphon carried out-of-bounds placeholder `(13993,9901)` on its source coord +
+guidance steps 2-4; corrected to `(3176,2477,0)` (cache spawn of entrance object 58439,
+wiki-corroborated The Great Conch), domain-skeptic STANDS, `travel_path_verify` now ok=true
+→ PR #998. The 6 `overlay:alloc-in-render:Color` lint hits are tool false-positives (all are
+the change-guarded `cached*` pattern) — toolkit-lint fix, not code churn.
+
+**Actuation seam — RESTORED and live-confirmed at the login screen.** The git-excluded
+`devharness` package was absent in this clone; reconstructed `DevBridgeHarness` (wired to real
+CLH symbols) + `DevHarnessLauncher` in the test source set. Three root causes fixed:
+(1) missing package → ClassNotFoundException; (2) harness resolved from the root injector →
+Guice `ConfigurationException` on the `guidance` field — now resolved from the plugin's child
+injector via `PluginManager`; (3) tick subscribers don't fire at the login screen → added a
+fixed-interval poller thread driving `poll()` via `clientThread.invokeLater`. Harness v0.5.
+
+| Smoke | Status | Receipt |
+|---|---|---|
+| `ping` | `[x]` | `{ok:true, pong:true, version:"0.5"}` round-trip. |
+| `guidance.gotoStep` + `state.read` | `[x]` | gotoStep Scurrius#3 → state.read `currentStepIndex:3/7`, correct stepDescription. |
+| `render.read` | `[x]` plumbing | Valid response, `snapshotTick:-1` (documented "no frame yet" sentinel — correct at login screen; in-world highlight assertion needs a logged-in scene). |
+| `guidance.stop` | `[x]` | `{stopped:true}`. |
+| `mask_player_names` | n/a | No runtime mask config exists in the plugin; masking = log redaction (T0.7, #804/#807, already confirmed) + the MCP screenshot-mask tool on captured images. Not a bridge action. |
+
+**Live-play follow-up (operator logged in on main account; seam-monitored via log + state.read):**
+
+| Item | Status | Receipt |
+|---|---|---|
+| T1.4 TempleOSRS KC sync populates | `[x]` | Operator screenshot: chat `TempleOSRS KC synced: 52 sources updated` + panel "Synced KC from TempleOSRS"; no hang. |
+| T2.11 recurring-gather highlight persists past first pickup | `[x]` | Shades of Mort'ton: burned all remains, guidance **stayed on step 3/5 (gather/pick-up-key)** through pickups instead of auto-advancing — `isRecurringGatherSequence()` suppression held (state.read `currentStepIndex:2`); operator manually skipped to proceed. |
+| #730 ground-item text label | `[!]` → fixed | Live: ground-item overlay still drew the "Steel key…" text label next to the icon. Dropped the label (icon/arrow/marker kept) → **PR #999**. |
+| #822 MANUAL/loop step reads as "stuck" | `[!]` open | Both at gather (3/5) and terminal loop (5/5, "Open chests") the MANUAL step sits with no "keep going — press Next/Stop when done" affordance; operator had to manually skip / saw it hang at 5/5 after keys depleted. Possible depletion-latch miss. |
+| T1.4 invalid-RSN fails cleanly | `[?]` | Not testable on a Jagex-account login. |
+
+**Still OPERATOR (deferred):** in-world `render.read` highlight assertion for #802/#827 in an
+*instanced arena* (the seam can drive it once inside one — gotoStep + render.read, no travel needed).
 
 ---
 
