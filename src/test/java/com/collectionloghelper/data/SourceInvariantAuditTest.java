@@ -58,6 +58,17 @@ public class SourceInvariantAuditTest
 	 */
 	private static final Set<String> SINGLE_STEP_ALLOWLIST = Set.of("Miscellaneous", "Random Events");
 
+	/**
+	 * Legal OSRS world-coordinate envelope (mirrors the toolkit's travel_path_verify bounds).
+	 * A coordinate outside this range is a placeholder/garbage value, not a real tile. This
+	 * guards against the Shellbane-class bug (PR #998) where positive-but-impossible coords
+	 * (worldX=13993, worldY=9901) passed the non-positive check below yet were never reachable.
+	 */
+	private static final int MIN_WORLD_X = 900;
+	private static final int MAX_WORLD_X = 4500;
+	private static final int MIN_WORLD_Y = 1100;
+	private static final int MAX_WORLD_Y = 13500;
+
 	private DropRateDatabase database;
 
 	@BeforeEach
@@ -144,11 +155,46 @@ public class SourceInvariantAuditTest
 					+ source.getKillTimeSeconds() + ", ironKillTimeSeconds="
 					+ source.getIronKillTimeSeconds() + ")");
 			}
+
+			// 7. Coordinates that are set must fall within the legal OSRS world envelope.
+			//    Source coords are always set (guarded as positive above); step coords are
+			//    optional (0,0 means "no anchor" and is skipped, matching travel_path_verify).
+			if (source.getWorldX() > 0 && source.getWorldY() > 0)
+			{
+				checkCoordBounds(violations, name, "primary location",
+					source.getWorldX(), source.getWorldY());
+			}
+			if (steps != null)
+			{
+				for (int i = 0; i < steps.size(); i++)
+				{
+					GuidanceStep step = steps.get(i);
+					if (step.getWorldX() != 0 && step.getWorldY() != 0)
+					{
+						checkCoordBounds(violations, name, "step index " + i,
+							step.getWorldX(), step.getWorldY());
+					}
+				}
+			}
 		}
 
 		assertTrue(
 			violations.isEmpty(),
 			"Source authoring-invariant violations (" + violations.size() + "):\n"
 				+ String.join("\n", violations));
+	}
+
+	/**
+	 * Records a violation if (x, y) falls outside the legal OSRS world envelope. Catches
+	 * positive-but-impossible placeholder coordinates that the non-positive guard misses.
+	 */
+	private static void checkCoordBounds(List<String> violations, String name, String where, int x, int y)
+	{
+		if (x < MIN_WORLD_X || x > MAX_WORLD_X || y < MIN_WORLD_Y || y > MAX_WORLD_Y)
+		{
+			violations.add("'" + name + "' " + where + " coordinate out of legal world bounds (worldX="
+				+ x + ", worldY=" + y + "); expected x in [" + MIN_WORLD_X + "," + MAX_WORLD_X
+				+ "], y in [" + MIN_WORLD_Y + "," + MAX_WORLD_Y + "]");
+		}
 	}
 }
