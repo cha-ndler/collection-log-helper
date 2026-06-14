@@ -30670,7 +30670,7 @@
       {
         "itemId": 31996,
         "name": "Dragon metal sheet",
-        "dropRate": 0.000651,
+        "dropRate": 0.005,
         "isPet": false,
         "wikiPage": "Dragon_metal_sheet"
       },
@@ -30684,7 +30684,7 @@
       {
         "itemId": 31961,
         "name": "Broken dragon hook",
-        "dropRate": 0.000978,
+        "dropRate": 0.002,
         "isPet": false,
         "wikiPage": "Broken_dragon_hook"
       },
