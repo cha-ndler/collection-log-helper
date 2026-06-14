@@ -30770,7 +30770,7 @@
       {
         "itemId": 31996,
         "name": "Dragon metal sheet",
-        "dropRate": 0.001953,
+        "dropRate": 0.006667,
         "isPet": false,
         "wikiPage": "Dragon_metal_sheet"
       },
@@ -30784,7 +30784,7 @@
       {
         "itemId": 31949,
         "name": "Bottled storm",
-        "dropRate": 0.001953,
+        "dropRate": 0.003333,
         "isPet": false,
         "wikiPage": "Bottled_storm"
       },
