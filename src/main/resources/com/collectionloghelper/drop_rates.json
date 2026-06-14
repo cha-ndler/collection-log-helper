@@ -18594,7 +18594,7 @@
         "section": "Travel"
       },
       {
-        "description": "Board your boat and earn boat paints through Sailing activities: port tasks (Shark paint, common), Barracuda Trials Marlin rank (Barracuda paint), Martial salvage (Salvor's paint, rare), kraken variant drops (Inky paint, rare). Deity paints require fully charting the corresponding ocean and completing an NPC hand-in. Apply paints at the Shipyard boat schematics board (25 Construction required).",
+        "description": "Board your boat and earn boat paints through Sailing activities: port tasks (Shark paint, common), Barracuda Trials Marlin rank (Barracuda paint), Martial salvage (Salvor's paint, rare), kraken variant drops (Inky paint, rare). Deity paints require fully charting the corresponding ocean and completing an NPC hand-in. Apply paints at the Shipyard boat schematics board (20 Construction required).",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -18611,11 +18611,7 @@
       "skills": [
         {
           "skill": "SAILING",
-          "level": 28
-        },
-        {
-          "skill": "CONSTRUCTION",
-          "level": 25
+          "level": 1
         }
       ]
     }
