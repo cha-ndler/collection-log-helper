@@ -28,11 +28,8 @@ import com.collectionloghelper.CollectionLogHelperConfig;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.awt.RenderingHints;
 import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,9 +38,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.runelite.api.Client;
-import net.runelite.api.ItemComposition;
 import net.runelite.api.Perspective;
-import net.runelite.api.Point;
 import net.runelite.api.Tile;
 import net.runelite.api.TileItem;
 import net.runelite.api.coords.LocalPoint;
@@ -59,9 +54,7 @@ public class GroundItemHighlightOverlay extends Overlay
 	private static final int ARROW_HEIGHT = 14;
 	private static final int ARROW_WIDTH = 12;
 	private static final int ARROW_GAP = 5;
-	private static final int TEXT_HEIGHT_OFFSET = 50;
 	private static final BasicStroke STROKE_2 = new BasicStroke(2.0f);
-	private static final Font BOLD_12 = new Font(Font.DIALOG, Font.BOLD, 12);
 
 	private final Client client;
 	private final CollectionLogHelperConfig config;
@@ -122,9 +115,7 @@ public class GroundItemHighlightOverlay extends Overlay
 			return;
 		}
 		List<TrackedGroundItem> current = new ArrayList<>(matchedItems);
-		ItemComposition comp = client.getItemDefinition(item.getId());
-		String name = comp != null ? comp.getName() : null;
-		current.add(new TrackedGroundItem(item, tile, name));
+		current.add(new TrackedGroundItem(item, tile));
 		matchedItems = current;
 	}
 
@@ -201,17 +192,6 @@ public class GroundItemHighlightOverlay extends Overlay
 			renderDirectionArrow(graphics, arrowX, arrowTipY, overlayColor);
 		}
 
-		// Render item name above the tile
-		if (tracked.itemName != null)
-		{
-			Point textPoint = Perspective.getCanvasTextLocation(
-				client, graphics, localPoint, tracked.itemName, TEXT_HEIGHT_OFFSET);
-			if (textPoint != null)
-			{
-				renderOutlinedText(graphics, textPoint, tracked.itemName, overlayColor);
-			}
-		}
-
 		drawTargetMarker(graphics, localPoint);
 	}
 
@@ -249,36 +229,15 @@ public class GroundItemHighlightOverlay extends Overlay
 		graphics.drawPolygon(arrowPolygon);
 	}
 
-	private void renderOutlinedText(Graphics2D graphics, Point point, String text, Color color)
-	{
-		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		graphics.setFont(BOLD_12);
-		FontMetrics fm = graphics.getFontMetrics();
-		int x = point.getX() - fm.stringWidth(text) / 2;
-		int y = point.getY();
-
-		graphics.setColor(Color.BLACK);
-		graphics.drawString(text, x + 1, y + 1);
-		graphics.drawString(text, x - 1, y - 1);
-		graphics.drawString(text, x + 1, y - 1);
-		graphics.drawString(text, x - 1, y + 1);
-
-		graphics.setColor(color);
-		graphics.drawString(text, x, y);
-	}
-
 	private static class TrackedGroundItem
 	{
 		final TileItem item;
 		final Tile tile;
-		final String itemName;
 
-		TrackedGroundItem(TileItem item, Tile tile, String itemName)
+		TrackedGroundItem(TileItem item, Tile tile)
 		{
 			this.item = item;
 			this.tile = tile;
-			this.itemName = itemName;
 		}
 	}
 }
