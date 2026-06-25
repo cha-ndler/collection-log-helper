@@ -31842,9 +31842,9 @@
   {
     "name": "Ogress Shaman",
     "category": "OTHER",
-    "worldX": 2459,
-    "worldY": 9488,
-    "worldPlane": 2,
+    "worldX": 2002,
+    "worldY": 8989,
+    "worldPlane": 1,
     "killTimeSeconds": 14,
     "afkLevel": 2,
     "items": [
@@ -31877,18 +31877,18 @@
     "guidanceSteps": [
       {
         "description": "Travel to the Corsair Cove (spirit tree or charter ship from Port Sarim). Head south to the cave dungeon entrance.",
-        "worldX": 2459,
-        "worldY": 9488,
-        "worldPlane": 2,
+        "worldX": 2523,
+        "worldY": 2861,
+        "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
         "section": "Travel"
       },
       {
         "description": "Enter the Corsair Cove Dungeon through the cave entrance south of the cove.",
-        "worldX": 2459,
-        "worldY": 9488,
-        "worldPlane": 2,
+        "worldX": 2523,
+        "worldY": 2861,
+        "worldPlane": 0,
         "objectId": 31791,
         "objectInteractAction": "Enter",
         "completionCondition": "ARRIVE_AT_TILE",
@@ -31897,9 +31897,9 @@
       },
       {
         "description": "Kill Ogress Shamans in the Corsair Cove Dungeon. They use Magic attacks -- Protect from Magic strongly recommended. Shaman mask is the rare cosmetic drop.",
-        "worldX": 2459,
-        "worldY": 9488,
-        "worldPlane": 2,
+        "worldX": 2002,
+        "worldY": 8989,
+        "worldPlane": 1,
         "npcId": 7991,
         "interactAction": "Attack",
         "completionCondition": "ACTOR_DEATH",
