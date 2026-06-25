@@ -12016,8 +12016,6 @@
         "worldX": 3008,
         "worldY": 3150,
         "worldPlane": 0,
-        "objectId": 30100,
-        "objectInteractAction": "Climb-down",
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
         "section": "Travel"
