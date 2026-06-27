@@ -23824,13 +23824,6 @@
         "isPet": true,
         "wikiPage": "Moxi",
         "independent": true
-      },
-      {
-        "itemId": 30088,
-        "name": "Huasca seed",
-        "dropRate": 0.017241,
-        "isPet": false,
-        "wikiPage": "Huasca_seed"
       }
     ],
     "locationDescription": "Ruins of Tapoyauik, Varlamore",
