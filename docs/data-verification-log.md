@@ -268,4 +268,72 @@ when a Findings block is added for that source._
 - status: open
 -->
 
-_No findings yet._
+### 2026-06-25 session — full drop-rate leg + step-coord sweep complete (4 fixes); id leg blocked, membership leg started
+
+**Skeletal Wyvern - guidanceSteps[2].objectId - defect (FIXED)**
+- check: P3 step-level semantic coord/id sweep (objectId-spawns-near-coord)
+- ours: `objectId 30100` ("Climb-down") on the AID trapdoor travel step
+- authoritative: cache `object_lookup(30100)` = "Armed Forces Report" (Varlamore
+  readable, no actions, sole spawn (1538,10224)) — not a trapdoor; coord (3008,3150)
+  is correct (Thurgo/AID entrance)
+- action: removed objectId + objectInteractAction (no cache-confirmed AID-trapdoor
+  id to substitute; step is ARRIVE_AT_TILE coord-gated). Skeptic: SURVIVES.
+- status: merged (#1004 / PR #1005)
+
+**BOSSES drop-rate leg — COMPLETE (61/61 reconciled or deferred), 0 real defects.**
+Effective-rate cases verified CORRECT and skeptic-refuted (do NOT re-flag):
+- Zulrah uniques 1/512 (twice-per-kill main table) and mutagens ~2/13107 — correct.
+- Royal Titans (via "Eldric the Ice King") uniques 1/75, Giantsoul amulet 1/16,
+  pet Bran 1/1500 (double-roll) — correct; coord (3008,3150) AID is correct (not a
+  Varlamore boss — accessed via the Asgarnian Ice Dungeon).
+- Fight Caves Tzrek-jad 1/67 and Inferno Jal-nib-rek 1/43 — wiki's combined
+  on-Slayer-task + cape-gamble effective rates (not the bare 1/200 / 1/100) — correct.
+- DT2 quartz 1/200 / tablets 1/25 vs wiki 1/206.6 / 1/25.8 — intentional rounding.
+
+**DEFERRED (BOSSES, unverifiable via wiki_lookup — prose-only pages, need alt source):**
+- Sol Heredit (Fortis Colosseum) — glory-weighted rewards, no parseable table.
+- Perilous Moons (Lunar Chest) — moons-subdued scaling, no parseable table.
+
+**Non-coord id-layer flags (deferred to the blocked cache-id leg, opcode-160 / tk#92):**
+- Motherlode Mine npcId 6712 — cache `npc_lookup` null; mejrs = "Guard" (Ardougne);
+  coord is correct MLM. Re-check under `validate_drop_rates --check cache_ids` once
+  the MCP server restarts.
+
+**Item-id leg (DoD #1): BLOCKED** — `cross_check_ids` still throws `7938: unknown
+opcode 160`. Patch re-applied to the live `0.5.27/mcp/bundle.mjs` (auto-update wiped
+the prior patch); needs an MCP server restart to go live. tk#92.
+
+**DROP-RATE LEG (DoD #3) — COMPLETE across all 7 categories / 226 sources.**
+3 rate defects found, skeptic-survived, and fixed (+ the Skeletal Wyvern coord/id fix above):
+
+**Lava Strykewyrm - Dragon metal sheet (31996) - rate defect (FIXED)**
+- ours 0.0025 (1/400, stale pre-Sailing); wiki 1/115 (rate increased in the Sailing
+  era; Sailing live 2025-11-19). action: -> 0.008696. Skeptic SURVIVES (high).
+- status: merged (#1006 / PR #1007)
+
+**Fishing (Swordfish) - Big swordfish (7991) - rate defect (FIXED)**
+- ours 0.000833 (1/1200); wiki 1/2500 per raw swordfish caught. Self-contradicted by
+  the same item at 0.0004 under Miscellaneous; Rada's doubling is clog-excluded.
+  action: -> 0.0004. Skeptic SURVIVES (low). status: merged (#1008 / PR #1009)
+
+**Mithril Dragon - Dragon full helm (11335) - rate defect (FIXED)**
+- ours 0.000122 (1/8192, 2^13); wiki 1/32768 (2^15) — transcription typo, ~4x too
+  generous. action: -> 0.0000305. Skeptic SURVIVES (high). status: PR #1011 (automerge)
+
+**Clean categories (0 defects):** RAIDS (7 — point/level tables internally consistent,
+ToA-500 caps modeled correctly), MINIGAMES (25 — point-shop deferred, RNG rates match),
+CLUES (12 — per-clue effective-rate formula reconciles all tiers).
+
+**False positives caught by cite-or-discard / skeptic-gate (do NOT re-flag):**
+- Lizardman shaman Dragon warhammer 1/3000 is CORRECT (buffed from 1/5000 on
+  2024-05-29) — NOT a defect.
+- Vyrewatch Sentinel Blood shard 1/1500 — correct.
+- All Sailing "Boat Combat" rates CONFIRMED live (Great White Shark metal sheet 1/200,
+  Vampyre Kraken 1/150, Narwhal horn 1/20, etc.) — Sailing is live content, verify don't defer.
+
+**Rate DEFERRED (no single parseable wiki table — point-shop / aggregate / composite):**
+Sol Heredit, Perilous Moons (BOSSES); ~23 OTHER aggregate/point-shop sources;
+~11 MINIGAMES point-shops; Shared Treasure Trail Rewards (CLUES composite). Reasons logged.
+
+_REMAINING before DoD closes: item-id leg (#1, blocked on MCP restart);
+TempleOSRS clog-membership leg (#4, pilot launched); operator seam round (#7, P5)._
