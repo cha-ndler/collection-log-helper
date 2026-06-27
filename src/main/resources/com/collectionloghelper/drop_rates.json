@@ -3086,13 +3086,6 @@
         "isPet": true,
         "wikiPage": "Noon",
         "independent": true
-      },
-      {
-        "itemId": 4153,
-        "name": "Granite maul",
-        "dropRate": 0.004,
-        "isPet": false,
-        "wikiPage": "Granite_maul"
       }
     ],
     "locationDescription": "Slayer Tower rooftop, Morytania",
@@ -29995,7 +29988,7 @@
       {
         "itemId": 7991,
         "name": "Big swordfish",
-        "dropRate": 0.000833,
+        "dropRate": 0.0004,
         "isPet": false,
         "wikiPage": "Big_swordfish"
       }
