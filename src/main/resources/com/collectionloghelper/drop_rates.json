@@ -3086,13 +3086,6 @@
         "isPet": true,
         "wikiPage": "Noon",
         "independent": true
-      },
-      {
-        "itemId": 4153,
-        "name": "Granite maul",
-        "dropRate": 0.004,
-        "isPet": false,
-        "wikiPage": "Granite_maul"
       }
     ],
     "locationDescription": "Slayer Tower rooftop, Morytania",
