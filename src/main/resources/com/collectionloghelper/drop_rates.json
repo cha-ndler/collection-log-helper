@@ -16532,7 +16532,7 @@
       },
       {
         "section": "Earning Cases",
-        "description": "Complete clue scrolls of all tiers. Minor cases unlock at 50 completions per tier; major cases unlock at tier-specific higher thresholds. Cases are awarded automatically upon reaching the milestone.",
+        "description": "Complete clue scrolls of all tiers. Minor cases unlock at 50 (Beginner/Hard/Elite), 100 (Easy/Medium), or 25 (Master) completions depending on the tier; major cases unlock at tier-specific higher thresholds. Cases are awarded automatically upon reaching the milestone.",
         "worldX": 3213,
         "worldY": 3424,
         "worldPlane": 0,
