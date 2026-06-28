@@ -557,8 +557,8 @@ public class GuidanceOverlayCoordinator
 	 */
 	private void applyDynamicItemObjectOverlays()
 	{
-		DynamicItemObjectTierResolver.Result result =
-			dynamicItemObjectTierResolver.resolve(guidanceSequencer.getRawCurrentStep());
+		GuidanceStep step = guidanceSequencer.getRawCurrentStep();
+		DynamicItemObjectTierResolver.Result result = dynamicItemObjectTierResolver.resolve(step);
 		if (result.hasMatch())
 		{
 			objectHighlightOverlay.setTargetObjectIds(result.getObjectIds());
@@ -566,6 +566,25 @@ public class GuidanceOverlayCoordinator
 			objectHighlightOverlay.setTooltipText(result.getTooltipText());
 			itemHighlightOverlay.setTargetItemIds(result.getItemIds());
 		}
+		else if (stepHasDynamicTiers(step))
+		{
+			// F3 (stale highlight): a tier-driven step whose tiers no longer match the
+			// inventory (e.g. the player just used their last shade key) must CLEAR its
+			// highlight, not leave the previous tier's object/item outlined. The
+			// highlight on such a step is purely a function of held items, so no static
+			// fallback applies. Only fires for dynamic-tier steps, so steps with a
+			// plain static objectId highlight are untouched.
+			objectHighlightOverlay.clearTarget();
+			itemHighlightOverlay.clearTarget();
+		}
+	}
+
+	/** True when the step declares inventory-driven dynamic object tiers. */
+	private static boolean stepHasDynamicTiers(@Nullable GuidanceStep step)
+	{
+		return step != null
+			&& step.getDynamicItemObjectTiers() != null
+			&& !step.getDynamicItemObjectTiers().isEmpty();
 	}
 
 	/**
