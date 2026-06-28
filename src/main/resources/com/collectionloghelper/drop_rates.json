@@ -15950,7 +15950,7 @@
     "guidanceSteps": [
       {
         "section": "Travel",
-        "description": "Travel to Tithe Farm in Hosidius via Xeric's talisman (Xeric's Heart) or fairy ring CIR then walk south. Requires 34% Hosidius favour and 34 Farming.",
+        "description": "Travel to Tithe Farm in Hosidius via Xeric's talisman (Xeric's Glade) or fairy ring AKR then walk south. Requires 34 Farming.",
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
@@ -15959,7 +15959,7 @@
       },
       {
         "section": "Setup",
-        "description": "Bring seeds scaled to your Farming level (Golovanova at 34+, Logavano at 54+, Bologano at 74+), a watering can or Gricoller's can, and stamina potions for long sessions.",
+        "description": "Bring seeds scaled to your Farming level (Golovanova at 34+, Bologano at 54+, Logavano at 74+), a watering can or Gricoller's can, and stamina potions for long sessions.",
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
@@ -15974,7 +15974,7 @@
       },
       {
         "section": "Skilling",
-        "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harvest when fully grown. Higher-tier seeds give more points per hour; aim for 74+ Tithe Farm points per round to trigger bonus rewards.",
+        "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harvest when fully grown. Higher-tier seeds give more points per hour; deposit all 100 fruit per round (bonus experience begins at the 75th fruit deposited).",
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
