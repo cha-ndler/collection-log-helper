@@ -15793,7 +15793,7 @@
     "travelTip": "Digsite pendant -> Fossil Island",
     "guidanceSteps": [
       {
-        "description": "Bank for Volcanic Mine. Bring your best Pickaxe (Dragon or Crystal preferred for fewer fails), full Prospector / Mining cape outfit for the XP bonus, Stamina potions for low-Agility accounts, and some food. Energy management is the main hazard - falling rocks chip away HP and stability. Bone Voyage + 50 Mining required.",
+        "description": "Bank for Volcanic Mine. Bring your best Pickaxe (Dragon or Crystal preferred for fewer fails), full Prospector / Mining cape outfit for the XP bonus, Stamina potions for low-Agility accounts, and some food. Energy management is the main hazard - falling rocks chip away HP. Bone Voyage + 50 Mining required.",
         "worldX": 3739,
         "worldY": 3804,
         "worldPlane": 0,
@@ -15807,13 +15807,13 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to the Fossil Island volcano in the north-east. Digsite pendant teleport goes straight to the Mushroom Forest then run north-east.",
+        "description": "Travel to the Fossil Island volcano in the north-east. Digsite pendant teleports to the Digsite; take the barge to Fossil Island, then head east and climb the Rope anchor (64 Agility).",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Digsite pendant -> Mushroom Forest + run NE",
+        "travelTip": "Digsite pendant -> the Digsite -> barge to Fossil Island -> Rope anchor (64 Agility)",
         "section": "Travel",
         "conditionalAlternatives": [
           {
@@ -15828,7 +15828,7 @@
         ]
       },
       {
-        "description": "Enter the Volcanic Mine entrance and join a game lobby. Worlds 408/409 are the official VM theme worlds; solo runs are possible but team play multiplies points/hour by 3-5x.",
+        "description": "Enter the Volcanic Mine entrance and join a game lobby. World 323 (US west) is the official VM theme world; solo runs are possible but team play multiplies points/hour by 3-5x.",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
@@ -15836,7 +15836,7 @@
         "section": "Travel"
       },
       {
-        "description": "Mine ore from one of the three coloured walls (red/green/blue) and deposit the resulting boulders into the central lava vortex to keep the platform stable. Each colour fuels a different vent - keep all three vents balanced or the platform collapses and the game ends. Dodge falling rocks (predicted by ground shadows), eat when HP drops below 50%, and aim for 150+ points per round to maximise the unique table roll.",
+        "description": "Mine the boulder in the lava channel for ore fragments and points; fully mining it drops it into the lava vortex at the north end for +100 points to everyone. Block or unblock the three gas chambers (marked A, B and C on the overlay) with large rocks to keep each chamber's pressure around 40-60%, or the mine stability starts to fall and the round ends early. Dodge falling rocks (predicted by ground shadows), eat when HP drops below 50%, and aim for 150+ points per round to maximise the unique table roll.",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
