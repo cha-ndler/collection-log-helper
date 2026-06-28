@@ -16025,7 +16025,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Tree in Tree Gnome Stronghold. Talk to Gianne jnr. on the west end of the ground floor to get a hard delivery order.",
+        "description": "Travel to the Grand Tree in Tree Gnome Stronghold. Talk to Gianne jnr. on the west end of the 1st floor (US 2nd floor) / one level above ground to get a hard delivery order.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
@@ -16048,7 +16048,7 @@
         "section": "Order"
       },
       {
-        "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your inventory if unsure of the recipe. Deliver the finished dish to Captain Ninto (south-west of the Stronghold gate) or Captain Daerkin (Gnome stronghold entrance) within the time limit.",
+        "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree 1st floor (US 2nd floor) / one level above ground. Use the recipe book in your inventory if unsure of the recipe. Deliver the finished dish to Captain Ninto (in the dwarf bar / White Wolf Tunnel beneath White Wolf Mountain) or Captain Daerkin (at Emir's Arena, south-western arena viewing area) within the time limit.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
