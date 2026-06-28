@@ -18190,7 +18190,7 @@
       },
       {
         "section": "Reward",
-        "description": "Spend honour points at Commander Connad's shop: Fighter torso (1500 pts), Penance skirt (1500 pts), role hats (1100 pts each). Buy Gambles (500 pts) for a chance at the Pet penance queen (1/1000 per gamble).",
+        "description": "Spend honour points at Commander Connad's shop: Fighter torso (1500 pts), Penance skirt (1500 pts), role hats (1100 pts each). Buy Gambles (500 pts + 1 Penance Queen kill) for a chance at the Pet penance queen (1/1000 per gamble).",
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
