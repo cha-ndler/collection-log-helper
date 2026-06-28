@@ -13740,7 +13740,7 @@
         "section": "Bank prep"
       },
       {
-        "description": "Use Drakan's medallion to teleport to Darkmeyer. Head to the Mausoleum Door in the south-east of Darkmeyer (south of the bank, near the canal).",
+        "description": "Use Drakan's medallion to teleport to Darkmeyer. Head to the Mausoleum Door in the north-east of Darkmeyer (north-east of the bank, near the canal).",
         "worldX": 3654,
         "worldY": 3385,
         "worldPlane": 0,
@@ -13760,7 +13760,7 @@
         "section": "Travel"
       },
       {
-        "description": "Run the floors in order: 1, 2, 3, 4 (then 5 at 72+ Agility). Loot every brown coffin you pass for Hallowed marks. Strange old lockpick / Ring of endurance / Dark dye / Dark acorn rare drops only roll on floor 5 grand coffins, so prioritise getting to floor 5 every run once you can.",
+        "description": "Run the floors in order: 1, 2, 3, 4 (then 5 at 92+ Agility). Loot every brown coffin you pass for Hallowed marks. Strange old lockpick drops from coffins on every floor (better odds the higher you go); only the Ring of endurance is exclusive to floor-5 grand coffins, so prioritise getting to floor 5 every run once you can. Dark dye and Dark acorn are bought from the reward shop with marks, not dropped.",
         "worldX": 3654,
         "worldY": 3385,
         "worldPlane": 0,
@@ -13957,7 +13957,7 @@
       }
     ],
     "locationDescription": "Temple of the Eye, accessed via portal in Wizards' Tower basement",
-    "travelTip": "Arceuus teleport -> Temple",
+    "travelTip": "Minigame Teleport / Amulet of the eye -> Temple of the Eye",
     "npcId": 12179,
     "interactAction": "Talk-to",
     "dialogOptions": [
@@ -13966,7 +13966,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Bank for Guardians of the Rift. Bring all four pouches (giant / large / medium / small) for essence carrying, a chisel for cutting guardian fragments, a Pickaxe (rune or better) for mining the altar fragments, and a few teleports home. No combat gear needed.",
+        "description": "Bank for Guardians of the Rift. Bring all four pouches (giant / large / medium / small) for essence carrying, a chisel for cutting guardian fragments, any pickaxe for mining the altar fragments, and a few teleports home. No combat gear needed.",
         "worldX": 3185,
         "worldY": 3436,
         "worldPlane": 0,
@@ -13982,13 +13982,13 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to Temple of the Eye via the portal in Wizards' Tower basement. Arceuus library teleport + run south-west or Mind altar teleport is also viable.",
+        "description": "Travel to Temple of the Eye via the portal in Wizards' Tower basement. Minigame Teleport or necklace of passage to Wizards' Tower is also viable.",
         "worldX": 3109,
         "worldY": 3168,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Arceuus library tele -> Temple of the Eye, or Mind altar tele",
+        "travelTip": "Minigame Teleport / necklace of passage -> Wizards' Tower -> Temple of the Eye",
         "section": "Travel"
       },
       {
@@ -14002,7 +14002,7 @@
         "section": "Travel"
       },
       {
-        "description": "Mine the central guardian altar fragments, cut them with the chisel to make guardian stones, deposit stones into the elemental and catalytic pillars to earn rift points, then craft runes at the rift each round. Aim for 150+ total points per round to roll the unique table; high MVP score (3000+) maximises Abyssal pearl gain.",
+        "description": "Mine the central guardian altar fragments, cut them with the chisel to make guardian stones, deposit stones into the elemental and catalytic pillars to earn rift points, then craft runes at the rift each round. Aim for 300+ total points per round to roll the unique table; high MVP score (3000+) maximises Abyssal pearl gain.",
         "worldX": 3614,
         "worldY": 9484,
         "worldPlane": 0,
@@ -14022,7 +14022,7 @@
         ]
       },
       {
-        "description": "Hand in any Intricate pouches you obtained to receive bonus rewards (Abyssal pearls / rare uniques). Then spend Abyssal pearls at the reward guardian for the Hat / Robe top / Robe bottoms / Boots / Ring of the elements / Guardian's eye.",
+        "description": "Hand in any Intricate pouches you obtained to receive bonus rewards (tarnished locket / lost bag / runes / dragon items / hard clue). Then spend Abyssal pearls at the reward guardian for the Hat / Robe top / Robe bottoms / Boots / Ring of the elements / Guardian's eye.",
         "worldX": 3624,
         "worldY": 9486,
         "worldPlane": 0,
@@ -14182,7 +14182,7 @@
         "section": "Activity"
       },
       {
-        "description": "Exchange agility tickets with Cap'n Izzy No-Beard for Brimhaven Graceful recolours (250 tickets each piece) or the Pirate's hook (800 tickets). The full Graceful set takes 1500 tickets total",
+        "description": "Exchange agility tickets with Pirate Jackie the Fruit for Brimhaven Graceful recolours (250 vouchers for the full set) or the Pirate's hook (800 tickets).",
         "worldX": 2809,
         "worldY": 3194,
         "worldPlane": 0,
@@ -14300,7 +14300,7 @@
     "travelTip": "Grouping tele -> Giants' Foundry",
     "guidanceSteps": [
       {
-        "description": "Travel to Giants' Foundry. Bring 28 of your highest-tier metal bars (steel and above; mithril or higher recommended for faster reputation) plus an Ammo mould if you want bonus reputation. No combat gear needed. Sleeping Giants quest + 15 Smithing required to enter. Use the Grouping teleport for the fastest route; Falador tele + run south-east is the unquested fallback.",
+        "description": "Travel to Giants' Foundry. Bring 28 of your highest-tier metal bars (steel and above; mithril or higher recommended for faster reputation). No combat gear needed. Sleeping Giants quest + 15 Smithing required to enter. Use the Grouping teleport for the fastest route; Falador tele + run south-east is the unquested fallback.",
         "worldX": 3360,
         "worldY": 3151,
         "worldPlane": 0,
@@ -15633,7 +15633,7 @@
     "travelTip": "Quetzal whistle -> Varlamore",
     "guidanceSteps": [
       {
-        "description": "Bank for Mastering Mixology. Bring a Quetzal whistle (or other Varlamore teleport), a Reagent pouch if you own one to auto-deposit paste, and a few teleports home. The minigame supplies all herbs and vials in the lobby; you do not need to bring herblore reagents.",
+        "description": "Bank for Mastering Mixology. Bring a Quetzal whistle (or other Varlamore teleport), and a few teleports home. Bring clean (un-noted) herbs or unfinished potions - the lab does not supply them. An on-site bank chest is available.",
         "worldX": 1592,
         "worldY": 3092,
         "worldPlane": 0,
@@ -15645,17 +15645,17 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to Aldarin in southern Varlamore. Quetzal whistle is the fastest route; Civitas illa Fortis teleport + run south-west also works.",
+        "description": "Travel to Aldarin in southern Varlamore. Quetzal whistle is the fastest route; the Minigame Teleport or a fairy ring also work. Aldarin is an island, so there is no overland walking route.",
         "worldX": 1389,
         "worldY": 2955,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Quetzal whistle -> Aldarin, or Civitas illa Fortis tele + run south-west",
+        "travelTip": "Quetzal whistle -> Aldarin (or Minigame Teleport / fairy ring)",
         "section": "Travel"
       },
       {
-        "description": "Talk to the Mixologist to start the minigame and enter the lab. You need 60 Herblore + Children of the Sun started.",
+        "description": "Talk to the Mixologist to start the minigame and enter the lab. You need 60 Herblore + Children of the Sun completed.",
         "worldX": 1389,
         "worldY": 2955,
         "worldPlane": 0,
@@ -15663,7 +15663,7 @@
         "section": "Travel"
       },
       {
-        "description": "Mix potions at the Mixology station to earn Mox (orange), Aga (green), and Lye (blue) resin. Optimal cycle: grind the herb, add to vial, agitate at the correct station, then deposit the finished potion. Watch the order indicators - over-agitating turns the potion into paste (wasted XP). Reagent pouch auto-stores paste so you don't need to walk to deposit boxes.",
+        "description": "Mix potions at the Mixology station to earn Mox (orange), Aga (green), and Lye (blue) resin. Optimal cycle: grind the herb, add to vial, agitate at the correct station, then deposit the finished potion. Watch the order indicators - over-agitating turns the potion into paste (wasted XP).",
         "worldX": 1393,
         "worldY": 2937,
         "worldPlane": 0,
@@ -15685,7 +15685,7 @@
         "section": "Reward"
       },
       {
-        "description": "Teleport back to Civitas illa Fortis or your home bank to deposit any rewards. No restock is needed - the lab supplies everything.",
+        "description": "Teleport back to Civitas illa Fortis or your home bank to deposit any rewards. Use the on-site bank chest to restock herbs between runs.",
         "worldX": 1592,
         "worldY": 3092,
         "worldPlane": 0,
@@ -15793,7 +15793,7 @@
     "travelTip": "Digsite pendant -> Fossil Island",
     "guidanceSteps": [
       {
-        "description": "Bank for Volcanic Mine. Bring your best Pickaxe (Dragon or Crystal preferred for fewer fails), full Prospector / Mining cape outfit for the XP bonus, Stamina potions for low-Agility accounts, and some food. Energy management is the main hazard - falling rocks chip away HP and stability. Bone Voyage + 50 Mining required.",
+        "description": "Bank for Volcanic Mine. Bring your best Pickaxe (Dragon or Crystal preferred for fewer fails), full Prospector / Mining cape outfit for the XP bonus, Stamina potions for low-Agility accounts, and some food. Energy management is the main hazard - falling rocks chip away HP. Bone Voyage + 50 Mining required.",
         "worldX": 3739,
         "worldY": 3804,
         "worldPlane": 0,
@@ -15807,13 +15807,13 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to the Fossil Island volcano in the north-east. Digsite pendant teleport goes straight to the Mushroom Forest then run north-east.",
+        "description": "Travel to the Fossil Island volcano in the north-east. Digsite pendant teleports to the Digsite; take the barge to Fossil Island, then head east and climb the Rope anchor (64 Agility).",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Digsite pendant -> Mushroom Forest + run NE",
+        "travelTip": "Digsite pendant -> the Digsite -> barge to Fossil Island -> Rope anchor (64 Agility)",
         "section": "Travel",
         "conditionalAlternatives": [
           {
@@ -15828,7 +15828,7 @@
         ]
       },
       {
-        "description": "Enter the Volcanic Mine entrance and join a game lobby. Worlds 408/409 are the official VM theme worlds; solo runs are possible but team play multiplies points/hour by 3-5x.",
+        "description": "Enter the Volcanic Mine entrance and join a game lobby. World 323 (US west) is the official VM theme world; solo runs are possible but team play multiplies points/hour by 3-5x.",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
@@ -15836,7 +15836,7 @@
         "section": "Travel"
       },
       {
-        "description": "Mine ore from one of the three coloured walls (red/green/blue) and deposit the resulting boulders into the central lava vortex to keep the platform stable. Each colour fuels a different vent - keep all three vents balanced or the platform collapses and the game ends. Dodge falling rocks (predicted by ground shadows), eat when HP drops below 50%, and aim for 150+ points per round to maximise the unique table roll.",
+        "description": "Mine the boulder in the lava channel for ore fragments and points; fully mining it drops it into the lava vortex at the north end for +100 points to everyone. Block or unblock the three gas chambers (marked A, B and C on the overlay) with large rocks to keep each chamber's pressure around 40-60%, or the mine stability starts to fall and the round ends early. Dodge falling rocks (predicted by ground shadows), eat when HP drops below 50%, and aim for 150+ points per round to maximise the unique table roll.",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
@@ -15950,7 +15950,7 @@
     "guidanceSteps": [
       {
         "section": "Travel",
-        "description": "Travel to Tithe Farm in Hosidius via Xeric's talisman (Xeric's Heart) or fairy ring CIR then walk south. Requires 34% Hosidius favour and 34 Farming.",
+        "description": "Travel to Tithe Farm in Hosidius via Xeric's talisman (Xeric's Glade) or fairy ring AKR then walk south. Requires 34 Farming.",
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
@@ -15959,7 +15959,7 @@
       },
       {
         "section": "Setup",
-        "description": "Bring seeds scaled to your Farming level (Golovanova at 34+, Logavano at 54+, Bologano at 74+), a watering can or Gricoller's can, and stamina potions for long sessions.",
+        "description": "Bring seeds scaled to your Farming level (Golovanova at 34+, Bologano at 54+, Logavano at 74+), a watering can or Gricoller's can, and stamina potions for long sessions.",
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
@@ -15974,7 +15974,7 @@
       },
       {
         "section": "Skilling",
-        "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harvest when fully grown. Higher-tier seeds give more points per hour; aim for 74+ Tithe Farm points per round to trigger bonus rewards.",
+        "description": "Plant seeds in patches, water them before the timer expires (watch the plant stage indicator above each patch), and harvest when fully grown. Higher-tier seeds give more points per hour; deposit all 100 fruit per round (bonus experience begins at the 75th fruit deposited).",
         "worldX": 1791,
         "worldY": 3504,
         "worldPlane": 0,
@@ -16025,7 +16025,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Tree in Tree Gnome Stronghold. Talk to Gianne jnr. on the west end of the ground floor to get a hard delivery order.",
+        "description": "Travel to the Grand Tree in Tree Gnome Stronghold. Talk to Gianne jnr. on the west end of the 1st floor (US 2nd floor) / one level above ground to get a hard delivery order.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
@@ -16048,7 +16048,7 @@
         "section": "Order"
       },
       {
-        "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your inventory if unsure of the recipe. Deliver the finished dish to Captain Ninto (south-west of the Stronghold gate) or Captain Daerkin (Gnome stronghold entrance) within the time limit.",
+        "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree 1st floor (US 2nd floor) / one level above ground. Use the recipe book in your inventory if unsure of the recipe. Deliver the finished dish to Captain Ninto (in the dwarf bar / White Wolf Tunnel beneath White Wolf Mountain) or Captain Daerkin (at Emir's Arena, south-western arena viewing area) within the time limit.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
@@ -16227,7 +16227,7 @@
       }
     ],
     "locationDescription": "Temple Trekking, between Burgh de Rott and Paterdomus",
-    "travelTip": "Drakan's medallion -> Burgh de Rott, or Minigame tele -> Temple Trekking; fallback: fairy ring BKR (Canifis) then run south-west",
+    "travelTip": "Drakan's medallion -> Ver Sinhaza, then run south-west to Burgh de Rott, or Minigame tele -> Temple Trekking; fallback: fairy ring CKS (Canifis) then run south-west",
     "guidanceSteps": [
       {
         "description": "Travel to Burgh de Rott and speak to Rolayne Twickit (hard) to begin a trek. Bring food, combat gear, and a bow or staff for ranged puzzle events.",
@@ -16236,7 +16236,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Drakan's medallion -> Burgh de Rott is fastest; Minigame tele also works; fallback: fairy ring BKR (Canifis) run south-west",
+        "travelTip": "Drakan's medallion -> Ver Sinhaza, then run south-west to Burgh de Rott is fastest; Minigame tele also works; fallback: fairy ring CKS (Canifis) run south-west",
         "npcId": 1563,
         "interactAction": "Talk-to",
         "recommendedItemIds": [
@@ -16247,7 +16247,7 @@
         "section": "Travel"
       },
       {
-        "description": "Choose the hardest route and strongest follower (Rolayne Twickit) for the best Lumberjack outfit drop chance. Hard route, hard follower gives the highest token reward multiplier.",
+        "description": "Choose the hardest route and weakest (hard-tier) follower (Rolayne Twickit) for the best Lumberjack outfit drop chance. Hard route, hard follower gives the highest token reward multiplier.",
         "worldX": 3479,
         "worldY": 3241,
         "worldPlane": 0,
@@ -16348,7 +16348,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Burthorpe via Games necklace teleport. Enter the pub (Toad and Chicken) and use the trapdoor in the basement to reach Rogues' Den. Bring no weapons or armour - the maze requires light carry weight for some obstacles",
+        "description": "Travel to Burthorpe via Games necklace teleport. Enter the pub (Toad and Chicken) and use the trapdoor in the basement to reach Rogues' Den. Bring no weapons or armour - all inventory and worn items are stripped on entry, so bring nothing",
         "worldX": 2907,
         "worldY": 3537,
         "worldPlane": 0,
@@ -16358,7 +16358,7 @@
         "section": "Travel"
       },
       {
-        "description": "Navigate the maze using Thieving and Agility. Avoid pressure pads (step around them), pick locks on doors, and cross balance beams. Failing an obstacle teleports you to the start - wear nothing in armour slots to minimise failures",
+        "description": "Navigate the maze using Thieving and Agility. Avoid pressure pads (step around them), pick locks on doors, and navigate contortion bars and pendulums. Failing an obstacle teleports you to the start - all worn items are removed on entry, so you cannot wear armour inside the maze",
         "worldX": 2907,
         "worldY": 3537,
         "worldPlane": 0,
@@ -16381,7 +16381,7 @@
         "section": "Activity"
       },
       {
-        "description": "At the end of the maze, search the safe to receive a random piece of rogue equipment. Each piece has approximately a 5-in-8 chance per run. All 5 pieces are required for the full set",
+        "description": "At the end of the maze, crack the safe to receive a Rogue's equipment crate or a Rogue kit; the crate lets you choose a specific piece. All 5 pieces are required for the full set",
         "worldX": 3033,
         "worldY": 4980,
         "worldPlane": 1,
@@ -16389,7 +16389,7 @@
         "section": "Reward"
       },
       {
-        "description": "To get remaining pieces, return through the trapdoor in the pub basement and repeat the maze. The maze layout is fixed - memorise the safe route to complete runs in under 3 minutes",
+        "description": "Cracking the safe teleports you to the lobby; re-enter the maze doorway to start the next run. The maze layout is fixed - memorise the route to complete runs in about 3-4 minutes (~2 minutes with the level 80 Thieving shortcut)",
         "worldX": 2907,
         "worldY": 3537,
         "worldPlane": 0,
@@ -16532,7 +16532,7 @@
       },
       {
         "section": "Earning Cases",
-        "description": "Complete clue scrolls of all tiers. Minor cases unlock at 50 completions per tier; major cases unlock at tier-specific higher thresholds. Cases are awarded automatically upon reaching the milestone.",
+        "description": "Complete clue scrolls of all tiers. Minor cases unlock at 50 (Beginner/Hard/Elite), 100 (Easy/Medium), or 25 (Master) completions depending on the tier; major cases unlock at tier-specific higher thresholds. Cases are awarded automatically upon reaching the milestone.",
         "worldX": 3213,
         "worldY": 3424,
         "worldPlane": 0,
@@ -16923,7 +16923,7 @@
       },
       {
         "section": "Round",
-        "description": "Capture the enemy flag from their castle and return it to your own base to score tickets. Bring explosives to destroy barricades or use a catapult to slow attackers. Each successful capture earns 1 Castle Wars ticket.",
+        "description": "Capture the enemy flag from their castle and return it to your own base to score a point for your team. Bring explosives to destroy barricades or use a catapult to slow attackers. The team with the most points after 20 minutes wins; Castle Wars tickets are awarded at the end of the game based on the result (more for a win, fewer for a draw).",
         "worldX": 2440,
         "worldY": 3089,
         "worldPlane": 0,
@@ -17021,7 +17021,7 @@
       },
       {
         "section": "Round",
-        "description": "Kill enemies to collect soul fragments, then offer them at the Soul obelisk to weaken the opposing Avatar. When the Avatar reaches 0 soul fragments, attack and kill it. Use Protect from Magic when fighting the Avatar directly.",
+        "description": "Kill enemies to collect soul fragments, then offer them at the Soul obelisk to weaken the opposing Avatar. When the Avatar reaches 0 soul fragments, attack and kill it. Use Protect from Melee when fighting the Avatar directly.",
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
@@ -17034,7 +17034,7 @@
       },
       {
         "section": "Reward",
-        "description": "Collect Zeal tokens from Nomad after each game. Spend on the Ectoplasmator (2500), Soul cape (2500), or Unsired shards. The Lil' creator pet has a 1/400 drop rate from the reward chest.",
+        "description": "Collect Zeal tokens from Nomad after each game. Spend on the Ectoplasmator (250), Soul cape (2500). The Lil' creator pet has a 1/400 drop rate from spoils of war (30 Zeal each from Nomad).",
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
@@ -17347,7 +17347,7 @@
     "guidanceSteps": [
       {
         "section": "Travel",
-        "description": "Travel to Ferox Enclave via the Minigame teleport (Last Man Standing). The LMS lobby is on the island east of the enclave.",
+        "description": "Travel to Ferox Enclave via the Minigame teleport (Last Man Standing). The LMS lobby is at Ferox Enclave - speak to Lisa to enter a game.",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
@@ -17356,7 +17356,7 @@
       },
       {
         "section": "Queue",
-        "description": "Enter the LMS lobby building and choose Competitive or Casual mode. Competitive earns more points per match but requires staking coins to enter.",
+        "description": "Enter the LMS lobby building and choose Competitive or Casual mode. Competitive earns more points per match but requires 750+ total level and 30+ quest points (or 1,500+ total level with fewer than 30 QP).",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
@@ -17372,7 +17372,7 @@
       },
       {
         "section": "Round",
-        "description": "Scavenge weapons, armour, and food from supply crates on the island. Fight other players; the last player standing wins. Prioritise securing food and a weapon early; loot defeated players mid-game.",
+        "description": "Scavenge weapons and armour from supply crates on the island. Fight other players; the last player standing wins. Prioritise securing food and a weapon early; loot defeated players mid-game.",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
@@ -17471,7 +17471,7 @@
         "section": "Setup"
       },
       {
-        "description": "Run between the 8 totem sites around the valley maintaining and decorating totems. Activate ent trails (step on both trail markers) to double offerings on the next ent visit and gain 4 boosted XP actions. Totems deplete after each ent visit and must be rebuilt with 1 log plus 4 fletched decorations.",
+        "description": "Run between the 8 totem sites around the valley maintaining and decorating totems. Activate ent trails (step on both trail markers) to double offerings on the next ent visit and gain 4 boosted XP actions. Totems lose 1 durability per ent visit and only need rebuilding (1 log plus 4 fletched decorations) once fully depleted; higher-tier logs survive more visits before depleting.",
         "worldX": 1452,
         "worldY": 3128,
         "worldPlane": 0,
@@ -18190,7 +18190,7 @@
       },
       {
         "section": "Reward",
-        "description": "Spend honour points at Commander Connad's shop: Fighter torso (1500 pts), Penance skirt (1500 pts), role hats (1100 pts each). Buy Gambles (500 pts) for a chance at the Pet penance queen (1/1000 per gamble).",
+        "description": "Spend honour points at Commander Connad's shop: Fighter torso (1500 pts), Penance skirt (1500 pts), role hats (1100 pts each). Buy Gambles (500 pts + 1 Penance Queen kill) for a chance at the Pet penance queen (1/1000 per gamble).",
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
@@ -19334,7 +19334,7 @@
         "section": "Travel"
       },
       {
-        "description": "Search the House on the Hill displays and complete activities for fossil notes.",
+        "description": "Search the stone chests in the House on the Hill (numulites required, 100 per search) and complete activities for fossil notes.",
         "worldX": 3774,
         "worldY": 3819,
         "worldPlane": 0,
@@ -19519,17 +19519,17 @@
     "travelTip": "Quetzal whistle -> Varlamore -> Hunter Guild",
     "guidanceSteps": [
       {
-        "description": "Travel to the Hunter Guild in Avium Savannah, Varlamore. Use the Quetzal whistle to teleport to Varlamore, then run south-west to the guild. Requires 46 Hunter and completion of Children of the Sun.",
+        "description": "Travel to the Hunter Guild in Avium Savannah, Varlamore. Use the Quetzal whistle to teleport straight to the landing zone in front of the guild (no running needed); the fairy ring is the only run-based route, north-west to the guild. Requires 46 Hunter and completion of Children of the Sun.",
         "worldX": 1579,
         "worldY": 3069,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Quetzal whistle -> Varlamore -> run south-west to Hunter Guild",
+        "travelTip": "Quetzal whistle -> landing zone in front of Hunter Guild",
         "section": "Travel"
       },
       {
-        "description": "Complete Hunter Guild activities in the Avium Savannah. Track and catch creatures in the guild hunting grounds for Hunter Guild points. Spend points at the guild reward shop for guild-exclusive items. Higher Hunter levels unlock additional creature types and greater point rewards.",
+        "description": "Complete Hunters' Rumours from a Guild Hunter in the Avium Savannah. Each rumour tasks you with tracking and catching a specific creature, rewarding Hunter experience and a hunters' loot sack whose quality scales with the rumour tier. Guild-exclusive items (guild hunter outfit, huntsman's kit, quetzal whistles, Quetzin) come from loot sacks and rumour-milestone unlocks. Higher Hunter levels unlock higher rumour tiers (Adept, Expert, Master), which award higher-quality loot sacks.",
         "worldX": 1579,
         "worldY": 3069,
         "worldPlane": 0,
@@ -19770,7 +19770,7 @@
     "travelTip": "Fairy ring CLR -> Ape Atoll",
     "guidanceSteps": [
       {
-        "description": "Travel to the Ape Atoll Agility Course (fairy ring CLR, requires Monkey Madness II). Course starts at the top of the agility ladder.",
+        "description": "Travel to the Ape Atoll Agility Course (fairy ring CLR, requires Monkey Madness II). The course begins at the stepping-stone obstacle near Marim.",
         "worldX": 2764,
         "worldY": 2703,
         "worldPlane": 0,
@@ -20454,7 +20454,7 @@
         "section": "Travel"
       },
       {
-        "description": "Board your boat and navigate to the marked sea treasure location. Interact with the treasure spot to collect Medallion fragments (1-8, combine to form Sailors' amulet (inert)) and rare antique junk: Rusty locket, Mouldy block, Dull knife, Broken compass, Rusty coin, Broken sextant, Mouldy doll, Smashed mirror. Higher Sailing levels unlock better treasure voyages.",
+        "description": "Board your boat and navigate to the marked sea treasure location. Interact with the treasure spot to collect Medallion fragments (1-8, combine to form Medallion of the Deep) and rare antique junk: Rusty locket, Mouldy block, Dull knife, Broken compass, Rusty coin, Broken sextant, Mouldy doll, Smashed mirror. Higher Sailing levels unlock better treasure voyages.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -20609,7 +20609,7 @@
     "travelTip": "Pharaoh's sceptre -> Jalsavrah",
     "guidanceSteps": [
       {
-        "description": "Bank and prepare: Pharaoh's sceptre (charged), lockpick, superantipoisons, prayer potions, and food. Bring 43+ Prayer for Protect from Melee to ignore mummy and scarab damage. Completion of Contact! is strongly recommended for nearby banking. Need 71 Thieving minimum to access the grand gold chest (the only Pharaoh's sceptre source).",
+        "description": "Bank and prepare: Pharaoh's sceptre (charged), lockpick, superantipoisons, prayer potions, and food. Bring 43+ Prayer for Protect from Melee to ignore mummy and scarab damage. Completion of Contact! is strongly recommended for nearby banking. Need 21 Thieving to enter the minigame; higher levels (up to 91) unlock the more valuable rooms with better sceptre odds. The Pharaoh's sceptre can drop from the golden chests and sarcophagi.",
         "worldX": 3288,
         "worldY": 2801,
         "worldPlane": 0,
@@ -20638,7 +20638,7 @@
         "section": "Travel"
       },
       {
-        "description": "Rush through rooms 1-7, looting urns and sarcophagi only. Use Protect from Melee to ignore mummies and scarabs. At room 8 (requires 91 Thieving), loot the grand gold chest which exclusively yields the Pharaoh's sceptre. Recharge the sceptre at the Guardian Mummy between runs.",
+        "description": "Rush through rooms 1-7, looting urns and sarcophagi only. Use Protect from Melee to ignore mummies and scarabs. At room 8 (requires 91 Thieving), loot the golden chest; it and the sarcophagi mostly yield artefacts but rarely give the Pharaoh's sceptre, with the best odds in the highest rooms. Recharge the sceptre at the Guardian Mummy between runs.",
         "worldX": 3289,
         "worldY": 2799,
         "worldPlane": 2,
@@ -20726,7 +20726,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill monsters on each floor for skull sceptre pieces: Floor 1 (Vault of War) - minotaurs drop the right skull half; Floor 2 (Catacomb of Famine) - flesh crawlers and other monsters drop the left skull half; Floor 3 (Pit of Pestilence) - catablepons drop the top of sceptre; Floor 4 (Sepulchre of Death) - ankous drop the bottom of sceptre.",
+        "description": "Kill monsters on each floor for skull sceptre pieces: Floor 1 (Vault of War) - minotaurs drop the right skull half; Floor 2 (Catacomb of Famine) - flesh crawlers drop the bottom of sceptre; Floor 3 (Pit of Pestilence) - catablepons drop the top of sceptre; Floor 4 (Sepulchre of Death) - ankous drop the left skull half.",
         "worldX": 3230,
         "worldY": 9844,
         "worldPlane": 0,
@@ -30293,7 +30293,7 @@
         "section": "Travel"
       },
       {
-        "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Wingstone, Penwie, Brambickle, or Prof. Manglethorp, decline and wait 5m30s or complete an easy order. Only these four customers give Mint cake or Grand seed pod.",
+        "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Wingstone, Penwie, Brambickle, or Prof. Manglethorp, decline and wait 5m30s or complete an easy order. All four give Grand seed pod, but only Wingstone, Penwie, and Brambickle also give Mint cake (Prof. Manglethorp gives no Mint cake).",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
@@ -30322,7 +30322,7 @@
         "section": "Reward"
       },
       {
-        "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Wingstone, Penwie, Brambickle, or Prof. Manglethorp is assigned to maximise seed pod and mint cake drop rate.",
+        "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Wingstone, Penwie, Brambickle, or Prof. Manglethorp is assigned to maximise Grand seed pod rate. For Mint cake, only Wingstone, Penwie, and Brambickle qualify (Prof. Manglethorp gives no Mint cake).",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
@@ -30370,7 +30370,7 @@
         "section": "Travel"
       },
       {
-        "description": "Board your boat and sail into open water. Stingrays are sea encounters requiring a cannon facility (28 Sailing) with cannonballs loaded. No special mechanics -- fire cannon until dead, then Harvest the carcass for Ray barbs (1/30). Repair at a Shipwright when hull is damaged.",
+        "description": "Board your boat and sail to the Stingrays in the Unquiet, Sunset, or Shrouded Oceans. They are directly-attackable sea monsters (combat level 92) -- Attack them, safespotting across the nearby rock formations where possible. Harvest the carcass for Ray barbs (1/30). Repair at a Shipwright when your hull is damaged.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
