@@ -17021,7 +17021,7 @@
       },
       {
         "section": "Round",
-        "description": "Kill enemies to collect soul fragments, then offer them at the Soul obelisk to weaken the opposing Avatar. When the Avatar reaches 0 soul fragments, attack and kill it. Use Protect from Magic when fighting the Avatar directly.",
+        "description": "Kill enemies to collect soul fragments, then offer them at the Soul obelisk to weaken the opposing Avatar. When the Avatar reaches 0 soul fragments, attack and kill it. Use Protect from Melee when fighting the Avatar directly.",
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
@@ -17034,7 +17034,7 @@
       },
       {
         "section": "Reward",
-        "description": "Collect Zeal tokens from Nomad after each game. Spend on the Ectoplasmator (2500), Soul cape (2500), or Unsired shards. The Lil' creator pet has a 1/400 drop rate from the reward chest.",
+        "description": "Collect Zeal tokens from Nomad after each game. Spend on the Ectoplasmator (250), Soul cape (2500). The Lil' creator pet has a 1/400 drop rate from spoils of war (30 Zeal each from Nomad).",
         "worldX": 2210,
         "worldY": 2858,
         "worldPlane": 0,
