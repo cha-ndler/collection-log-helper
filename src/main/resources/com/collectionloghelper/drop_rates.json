@@ -18917,13 +18917,13 @@
         "independent": true
       }
     ],
-    "locationDescription": "Feldip Hills, south of Rantz",
+    "locationDescription": "Feldip Hills, west of Rantz",
     "travelTip": "Fairy ring AKS -> Feldip",
     "npcId": 1475,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Feldip Hills south of Rantz (fairy ring AKS). Bank for ogre bellows and an ogre bow (or comp ogre bow) before travelling. Bring bloated toads as bait.",
+        "description": "Travel to the Feldip Hills west of Rantz (fairy ring AKS). Bank for ogre bellows and an ogre bow (or comp ogre bow) before travelling. Bring bloated toads as bait.",
         "worldX": 2387,
         "worldY": 3040,
         "worldPlane": 0,
