@@ -20726,7 +20726,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill monsters on each floor for skull sceptre pieces: Floor 1 (Vault of War) - minotaurs drop the right skull half; Floor 2 (Catacomb of Famine) - flesh crawlers and other monsters drop the left skull half; Floor 3 (Pit of Pestilence) - catablepons drop the top of sceptre; Floor 4 (Sepulchre of Death) - ankous drop the bottom of sceptre.",
+        "description": "Kill monsters on each floor for skull sceptre pieces: Floor 1 (Vault of War) - minotaurs drop the right skull half; Floor 2 (Catacomb of Famine) - flesh crawlers drop the bottom of sceptre; Floor 3 (Pit of Pestilence) - catablepons drop the top of sceptre; Floor 4 (Sepulchre of Death) - ankous drop the left skull half.",
         "worldX": 3230,
         "worldY": 9844,
         "worldPlane": 0,
