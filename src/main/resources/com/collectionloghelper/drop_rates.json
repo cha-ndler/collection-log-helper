@@ -17347,7 +17347,7 @@
     "guidanceSteps": [
       {
         "section": "Travel",
-        "description": "Travel to Ferox Enclave via the Minigame teleport (Last Man Standing). The LMS lobby is on the island east of the enclave.",
+        "description": "Travel to Ferox Enclave via the Minigame teleport (Last Man Standing). The LMS lobby is at Ferox Enclave - speak to Lisa to enter a game.",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
@@ -17356,7 +17356,7 @@
       },
       {
         "section": "Queue",
-        "description": "Enter the LMS lobby building and choose Competitive or Casual mode. Competitive earns more points per match but requires staking coins to enter.",
+        "description": "Enter the LMS lobby building and choose Competitive or Casual mode. Competitive earns more points per match but requires 750+ total level and 30+ quest points (or 1,500+ total level with fewer than 30 QP).",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
@@ -17372,7 +17372,7 @@
       },
       {
         "section": "Round",
-        "description": "Scavenge weapons, armour, and food from supply crates on the island. Fight other players; the last player standing wins. Prioritise securing food and a weapon early; loot defeated players mid-game.",
+        "description": "Scavenge weapons and armour from supply crates on the island. Fight other players; the last player standing wins. Prioritise securing food and a weapon early; loot defeated players mid-game.",
         "worldX": 3151,
         "worldY": 3634,
         "worldPlane": 0,
