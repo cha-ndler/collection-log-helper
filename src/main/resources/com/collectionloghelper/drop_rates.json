@@ -20538,7 +20538,7 @@
     "travelTip": "Port Roberts dock -> sail to trawling shoal (69 Fishing + Sailing required)",
     "guidanceSteps": [
       {
-        "description": "Bank for deep sea trawling. Bring a trawling net (from Netmaster or Sailing shops), stamina potions, and food. 69 Fishing and basic Sailing required. Speak to Netmaster Kellan at the Rolling Tide pub in Port Roberts for an introduction.",
+        "description": "Bank for deep sea trawling. Your boat must have a trawling net facility built via Construction at a hotspot before heading out; carry stamina potions and food. 69 Fishing and basic Sailing required. Speak to Netmaster Kellan at the Rolling Tide pub in Port Roberts for an introduction (he is informational, not a vendor).",
         "worldX": 1565,
         "worldY": 3420,
         "worldPlane": 0,
