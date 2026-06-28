@@ -20257,12 +20257,12 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port.",
+        "description": "Use Sailors' amulet to teleport to a chosen unlocked port (The Pandemonium by default; Port Roberts, Red Rock, or Deepfin Point each require inspecting that dock's Sailors' Marker).",
         "travelTip": "Sailors' amulet -> The Pandemonium (default unlock)",
         "section": "Travel"
       },
       {
-        "description": "Board your boat and participate in Sailing activities: shipwreck salvaging (dragon materials, Boat bottle, Facility bottle), boat combat encounters (Dragon nails, Dragon cannon barrel, Bottled storm), and ocean encounters (Echo pearl). Higher Sailing levels unlock better shipwrecks and stronger sea encounters with improved rare drop rates.",
+        "description": "Board your boat and participate in Sailing activities: shipwreck salvaging (dragon materials, Boat bottle, Facility bottle), boat combat encounters (Dragon nails, Dragon cannon barrel, Bottled storm, Echo pearl from dolphins/orcas), and ocean encounters. Higher Sailing levels unlock better shipwrecks and stronger sea encounters with improved rare drop rates.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
