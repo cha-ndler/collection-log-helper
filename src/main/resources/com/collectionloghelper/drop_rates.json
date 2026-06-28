@@ -13740,7 +13740,7 @@
         "section": "Bank prep"
       },
       {
-        "description": "Use Drakan's medallion to teleport to Darkmeyer. Head to the Mausoleum Door in the south-east of Darkmeyer (south of the bank, near the canal).",
+        "description": "Use Drakan's medallion to teleport to Darkmeyer. Head to the Mausoleum Door in the north-east of Darkmeyer (north-east of the bank, near the canal).",
         "worldX": 3654,
         "worldY": 3385,
         "worldPlane": 0,
@@ -13760,7 +13760,7 @@
         "section": "Travel"
       },
       {
-        "description": "Run the floors in order: 1, 2, 3, 4 (then 5 at 72+ Agility). Loot every brown coffin you pass for Hallowed marks. Strange old lockpick / Ring of endurance / Dark dye / Dark acorn rare drops only roll on floor 5 grand coffins, so prioritise getting to floor 5 every run once you can.",
+        "description": "Run the floors in order: 1, 2, 3, 4 (then 5 at 92+ Agility). Loot every brown coffin you pass for Hallowed marks. Strange old lockpick drops from coffins on every floor (better odds the higher you go); only the Ring of endurance is exclusive to floor-5 grand coffins, so prioritise getting to floor 5 every run once you can. Dark dye and Dark acorn are bought from the reward shop with marks, not dropped.",
         "worldX": 3654,
         "worldY": 3385,
         "worldPlane": 0,
