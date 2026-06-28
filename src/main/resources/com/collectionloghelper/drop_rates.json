@@ -17471,7 +17471,7 @@
         "section": "Setup"
       },
       {
-        "description": "Run between the 8 totem sites around the valley maintaining and decorating totems. Activate ent trails (step on both trail markers) to double offerings on the next ent visit and gain 4 boosted XP actions. Totems deplete after each ent visit and must be rebuilt with 1 log plus 4 fletched decorations.",
+        "description": "Run between the 8 totem sites around the valley maintaining and decorating totems. Activate ent trails (step on both trail markers) to double offerings on the next ent visit and gain 4 boosted XP actions. Totems lose 1 durability per ent visit and only need rebuilding (1 log plus 4 fletched decorations) once fully depleted; higher-tier logs survive more visits before depleting.",
         "worldX": 1452,
         "worldY": 3128,
         "worldPlane": 0,
