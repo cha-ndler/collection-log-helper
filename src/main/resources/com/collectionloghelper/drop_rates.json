@@ -16348,7 +16348,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Burthorpe via Games necklace teleport. Enter the pub (Toad and Chicken) and use the trapdoor in the basement to reach Rogues' Den. Bring no weapons or armour - the maze requires light carry weight for some obstacles",
+        "description": "Travel to Burthorpe via Games necklace teleport. Enter the pub (Toad and Chicken) and use the trapdoor in the basement to reach Rogues' Den. Bring no weapons or armour - all inventory and worn items are stripped on entry, so bring nothing",
         "worldX": 2907,
         "worldY": 3537,
         "worldPlane": 0,
@@ -16358,7 +16358,7 @@
         "section": "Travel"
       },
       {
-        "description": "Navigate the maze using Thieving and Agility. Avoid pressure pads (step around them), pick locks on doors, and cross balance beams. Failing an obstacle teleports you to the start - wear nothing in armour slots to minimise failures",
+        "description": "Navigate the maze using Thieving and Agility. Avoid pressure pads (step around them), pick locks on doors, and navigate contortion bars and pendulums. Failing an obstacle teleports you to the start - all worn items are removed on entry, so you cannot wear armour inside the maze",
         "worldX": 2907,
         "worldY": 3537,
         "worldPlane": 0,
@@ -16381,7 +16381,7 @@
         "section": "Activity"
       },
       {
-        "description": "At the end of the maze, search the safe to receive a random piece of rogue equipment. Each piece has approximately a 5-in-8 chance per run. All 5 pieces are required for the full set",
+        "description": "At the end of the maze, crack the safe to receive a Rogue's equipment crate or a Rogue kit; the crate lets you choose a specific piece. All 5 pieces are required for the full set",
         "worldX": 3033,
         "worldY": 4980,
         "worldPlane": 1,
@@ -16389,7 +16389,7 @@
         "section": "Reward"
       },
       {
-        "description": "To get remaining pieces, return through the trapdoor in the pub basement and repeat the maze. The maze layout is fixed - memorise the safe route to complete runs in under 3 minutes",
+        "description": "Cracking the safe teleports you to the lobby; re-enter the maze doorway to start the next run. The maze layout is fixed - memorise the route to complete runs in about 3-4 minutes (~2 minutes with the level 80 Thieving shortcut)",
         "worldX": 2907,
         "worldY": 3537,
         "worldPlane": 0,
