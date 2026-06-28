@@ -18732,12 +18732,7 @@
         "section": "Combat"
       }
     ],
-    "rewardType": "MIXED",
-    "requirements": {
-      "quests": [
-        "DRAGON_SLAYER_I"
-      ]
-    }
+    "rewardType": "MIXED"
   },
   {
     "name": "Chompy Bird Hunting",
