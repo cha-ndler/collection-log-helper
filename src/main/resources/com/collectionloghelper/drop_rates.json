@@ -15633,7 +15633,7 @@
     "travelTip": "Quetzal whistle -> Varlamore",
     "guidanceSteps": [
       {
-        "description": "Bank for Mastering Mixology. Bring a Quetzal whistle (or other Varlamore teleport), a Reagent pouch if you own one to auto-deposit paste, and a few teleports home. The minigame supplies all herbs and vials in the lobby; you do not need to bring herblore reagents.",
+        "description": "Bank for Mastering Mixology. Bring a Quetzal whistle (or other Varlamore teleport), and a few teleports home. Bring clean (un-noted) herbs or unfinished potions - the lab does not supply them. An on-site bank chest is available.",
         "worldX": 1592,
         "worldY": 3092,
         "worldPlane": 0,
@@ -15645,17 +15645,17 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to Aldarin in southern Varlamore. Quetzal whistle is the fastest route; Civitas illa Fortis teleport + run south-west also works.",
+        "description": "Travel to Aldarin in southern Varlamore. Quetzal whistle is the fastest route; the Minigame Teleport or a fairy ring also work. Aldarin is an island, so there is no overland walking route.",
         "worldX": 1389,
         "worldY": 2955,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Quetzal whistle -> Aldarin, or Civitas illa Fortis tele + run south-west",
+        "travelTip": "Quetzal whistle -> Aldarin (or Minigame Teleport / fairy ring)",
         "section": "Travel"
       },
       {
-        "description": "Talk to the Mixologist to start the minigame and enter the lab. You need 60 Herblore + Children of the Sun started.",
+        "description": "Talk to the Mixologist to start the minigame and enter the lab. You need 60 Herblore + Children of the Sun completed.",
         "worldX": 1389,
         "worldY": 2955,
         "worldPlane": 0,
@@ -15663,7 +15663,7 @@
         "section": "Travel"
       },
       {
-        "description": "Mix potions at the Mixology station to earn Mox (orange), Aga (green), and Lye (blue) resin. Optimal cycle: grind the herb, add to vial, agitate at the correct station, then deposit the finished potion. Watch the order indicators - over-agitating turns the potion into paste (wasted XP). Reagent pouch auto-stores paste so you don't need to walk to deposit boxes.",
+        "description": "Mix potions at the Mixology station to earn Mox (orange), Aga (green), and Lye (blue) resin. Optimal cycle: grind the herb, add to vial, agitate at the correct station, then deposit the finished potion. Watch the order indicators - over-agitating turns the potion into paste (wasted XP).",
         "worldX": 1393,
         "worldY": 2937,
         "worldPlane": 0,
@@ -15685,7 +15685,7 @@
         "section": "Reward"
       },
       {
-        "description": "Teleport back to Civitas illa Fortis or your home bank to deposit any rewards. No restock is needed - the lab supplies everything.",
+        "description": "Teleport back to Civitas illa Fortis or your home bank to deposit any rewards. Use the on-site bank chest to restock herbs between runs.",
         "worldX": 1592,
         "worldY": 3092,
         "worldPlane": 0,
