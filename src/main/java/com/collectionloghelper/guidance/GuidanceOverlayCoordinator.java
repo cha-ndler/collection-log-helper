@@ -490,6 +490,10 @@ public class GuidanceOverlayCoordinator
 	{
 		if (guidanceSequencer.isActive())
 		{
+			// State-driven loop: inventory is the primary signal for which loop step
+			// the player should be on (have keys -> chests; ran dry -> bank). No-op
+			// for linear sources and when the resolved step is unchanged.
+			guidanceSequencer.reDeriveState();
 			applyDynamicItemObjectOverlays();
 		}
 	}
