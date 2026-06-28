@@ -20609,7 +20609,7 @@
     "travelTip": "Pharaoh's sceptre -> Jalsavrah",
     "guidanceSteps": [
       {
-        "description": "Bank and prepare: Pharaoh's sceptre (charged), lockpick, superantipoisons, prayer potions, and food. Bring 43+ Prayer for Protect from Melee to ignore mummy and scarab damage. Completion of Contact! is strongly recommended for nearby banking. Need 71 Thieving minimum to access the grand gold chest (the only Pharaoh's sceptre source).",
+        "description": "Bank and prepare: Pharaoh's sceptre (charged), lockpick, superantipoisons, prayer potions, and food. Bring 43+ Prayer for Protect from Melee to ignore mummy and scarab damage. Completion of Contact! is strongly recommended for nearby banking. Need 21 Thieving to enter the minigame; higher levels (up to 91) unlock the more valuable rooms with better sceptre odds. The Pharaoh's sceptre can drop from the golden chests and sarcophagi.",
         "worldX": 3288,
         "worldY": 2801,
         "worldPlane": 0,
@@ -20638,7 +20638,7 @@
         "section": "Travel"
       },
       {
-        "description": "Rush through rooms 1-7, looting urns and sarcophagi only. Use Protect from Melee to ignore mummies and scarabs. At room 8 (requires 91 Thieving), loot the grand gold chest which exclusively yields the Pharaoh's sceptre. Recharge the sceptre at the Guardian Mummy between runs.",
+        "description": "Rush through rooms 1-7, looting urns and sarcophagi only. Use Protect from Melee to ignore mummies and scarabs. At room 8 (requires 91 Thieving), loot the golden chest; it and the sarcophagi mostly yield artefacts but rarely give the Pharaoh's sceptre, with the best odds in the highest rooms. Recharge the sceptre at the Guardian Mummy between runs.",
         "worldX": 3289,
         "worldY": 2799,
         "worldPlane": 2,
