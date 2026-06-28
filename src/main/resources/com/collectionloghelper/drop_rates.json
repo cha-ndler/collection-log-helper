@@ -19174,7 +19174,7 @@
         "independent": true
       }
     ],
-    "locationDescription": "Seers' Village oak south of bank (W444 meta), NOT Woodcutting Guild",
+    "locationDescription": "Seers' Village maple north of bank (W444 meta), NOT Woodcutting Guild",
     "travelTip": "Camelot teleport -> Seers' Village",
     "waypoints": [
       {
@@ -19189,7 +19189,7 @@
         }
       },
       {
-        "name": "Seers' Village oak south of bank (W444 meta)",
+        "name": "Seers' Village maple north of bank (W444 meta)",
         "worldX": 2725,
         "worldY": 3490,
         "worldPlane": 0
@@ -19197,17 +19197,17 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to a Forestry-active woodcutting area. Seers' Village oak trees south of the bank on a W444 Forestry world are the most common hub. Use the Camelot teleport and run south-east from the bank.",
+        "description": "Travel to a Forestry-active woodcutting area. Seers' Village maple trees north of the bank on a W444 Forestry world are the most common hub. Use the Camelot teleport and run north from the bank.",
         "worldX": 2725,
         "worldY": 3490,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Camelot teleport -> run south-east to Seers' Village oaks",
+        "travelTip": "Camelot teleport -> run north to Seers' Village maples",
         "section": "Travel"
       },
       {
-        "description": "Chop trees on a Forestry world. Events spawn periodically (pheasant, flower, poacher, tree spirit, bee hive, roots). Participate in each event for Anima-infused bark and Forestry points. Spend points at the Forestry Shop for lumberjack and Forestry outfit pieces, log basket, and log brace. Rare unique drops (fox whistle, golden pheasant egg, petal garland) come directly from events.",
+        "description": "Chop trees on a Forestry world. Events spawn periodically (pheasant, flower, poacher, bee hive, roots). Participate in each event for Anima-infused bark. Spend Anima-infused bark at the Forestry Shop for lumberjack and Forestry outfit pieces, log basket, and log brace. Rare unique drops (fox whistle, golden pheasant egg, petal garland) come directly from events.",
         "worldX": 2725,
         "worldY": 3490,
         "worldPlane": 0,
