@@ -16923,7 +16923,7 @@
       },
       {
         "section": "Round",
-        "description": "Capture the enemy flag from their castle and return it to your own base to score tickets. Bring explosives to destroy barricades or use a catapult to slow attackers. Each successful capture earns 1 Castle Wars ticket.",
+        "description": "Capture the enemy flag from their castle and return it to your own base to score a point for your team. Bring explosives to destroy barricades or use a catapult to slow attackers. The team with the most points after 20 minutes wins; Castle Wars tickets are awarded at the end of the game based on the result (more for a win, fewer for a draw).",
         "worldX": 2440,
         "worldY": 3089,
         "worldPlane": 0,
