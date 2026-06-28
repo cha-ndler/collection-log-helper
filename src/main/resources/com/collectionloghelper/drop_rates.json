@@ -18431,7 +18431,7 @@
         "section": "Travel"
       },
       {
-        "description": "Collect king worms on the island or use fish offcuts as bait. Equip the cormorant glove from Alry the Angler, then send the cormorant at nearby fishing pools. Aim for pools within 3 tiles (1 catch per tick maximum). Cut caught fish with a knife for stackable fish offcuts (3 Cooking XP each) to use as bait.",
+        "description": "Collect king worms on the island or use fish offcuts as bait. Equip the cormorant glove from Alry the Angler, then send the cormorant at nearby fishing pools. Aim for pools directly adjacent (within the player's 3x3 reach / 1 tile) for 1 catch per tick maximum. Cut caught fish with a knife for stackable fish offcuts (Cooking XP varies by fish: 3.5 bluegill, 10 common tench, 20 mottled eel, 25 greater siren) to use as bait.",
         "worldX": 1379,
         "worldY": 3634,
         "worldPlane": 0,
@@ -18446,7 +18446,7 @@
         "loopCount": 0
       },
       {
-        "description": "Trade caught fish with Alry the Angler for Molch pearls (bluegill=1, common tench=2, violet perch=3, cerulean twitch=4). Spend pearls at his shop for Angler outfit (100 each), Pearl rods (100-150), or Fish sack (1000). Golden tench drops directly while fishing.",
+        "description": "Molch pearls drop randomly alongside your catches (about 1/100 to 1/75, scaling with your Fishing and Hunter levels); the four fish caught are bluegill, common tench, mottled eel, and greater siren. You can also exchange a golden tench with Alry the Angler for 100 Molch pearls. Spend pearls at his shop for the Angler outfit (100 each), Pearl rods (100-150), or the Fish sack (1000).",
         "worldX": 1379,
         "worldY": 3634,
         "worldPlane": 0,
