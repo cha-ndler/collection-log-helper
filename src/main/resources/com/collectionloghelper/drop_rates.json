@@ -30293,7 +30293,7 @@
         "section": "Travel"
       },
       {
-        "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Wingstone, Penwie, Brambickle, or Prof. Manglethorp, decline and wait 5m30s or complete an easy order. Only these four customers give Mint cake or Grand seed pod.",
+        "description": "Ask Gianne jnr. for a hard delivery (11-minute time limit). If the assigned customer is not Wingstone, Penwie, Brambickle, or Prof. Manglethorp, decline and wait 5m30s or complete an easy order. All four give Grand seed pod, but only Wingstone, Penwie, and Brambickle also give Mint cake (Prof. Manglethorp gives no Mint cake).",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
@@ -30322,7 +30322,7 @@
         "section": "Reward"
       },
       {
-        "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Wingstone, Penwie, Brambickle, or Prof. Manglethorp is assigned to maximise seed pod and mint cake drop rate.",
+        "description": "Return to Gianne jnr. for the next hard order. Re-roll orders until Wingstone, Penwie, Brambickle, or Prof. Manglethorp is assigned to maximise Grand seed pod rate. For Mint cake, only Wingstone, Penwie, and Brambickle qualify (Prof. Manglethorp gives no Mint cake).",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
