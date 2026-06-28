@@ -20136,7 +20136,7 @@
         "section": "Travel"
       },
       {
-        "description": "Board your boat and sail. Ocean encounters spawn randomly while sailing (even turning in place). Types include lost crates (loot), giant clams (pearl crafting), lost caskets (clue reward rolls), castaway rescues (XP), and clue turtles (clue scrolls). Encounters despawn after 60 seconds without interaction. A keg filled with kraken ink stout increases encounter rate by 4%.",
+        "description": "Board your boat and sail. Ocean encounters spawn randomly while sailing. Types include lost crates (loot), giant clams (pearl crafting), lost caskets (clue reward rolls), castaway rescues (XP), and clue turtles (clue scrolls). Encounters despawn after 60 seconds without interaction. A keg filled with kraken ink stout increases encounter rate by 4%.",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
