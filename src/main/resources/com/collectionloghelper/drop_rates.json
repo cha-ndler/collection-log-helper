@@ -16227,7 +16227,7 @@
       }
     ],
     "locationDescription": "Temple Trekking, between Burgh de Rott and Paterdomus",
-    "travelTip": "Drakan's medallion -> Burgh de Rott, or Minigame tele -> Temple Trekking; fallback: fairy ring BKR (Canifis) then run south-west",
+    "travelTip": "Drakan's medallion -> Ver Sinhaza, then run south-west to Burgh de Rott, or Minigame tele -> Temple Trekking; fallback: fairy ring CKS (Canifis) then run south-west",
     "guidanceSteps": [
       {
         "description": "Travel to Burgh de Rott and speak to Rolayne Twickit (hard) to begin a trek. Bring food, combat gear, and a bow or staff for ranged puzzle events.",
@@ -16236,7 +16236,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Drakan's medallion -> Burgh de Rott is fastest; Minigame tele also works; fallback: fairy ring BKR (Canifis) run south-west",
+        "travelTip": "Drakan's medallion -> Ver Sinhaza, then run south-west to Burgh de Rott is fastest; Minigame tele also works; fallback: fairy ring CKS (Canifis) run south-west",
         "npcId": 1563,
         "interactAction": "Talk-to",
         "recommendedItemIds": [
@@ -16247,7 +16247,7 @@
         "section": "Travel"
       },
       {
-        "description": "Choose the hardest route and strongest follower (Rolayne Twickit) for the best Lumberjack outfit drop chance. Hard route, hard follower gives the highest token reward multiplier.",
+        "description": "Choose the hardest route and weakest (hard-tier) follower (Rolayne Twickit) for the best Lumberjack outfit drop chance. Hard route, hard follower gives the highest token reward multiplier.",
         "worldX": 3479,
         "worldY": 3241,
         "worldPlane": 0,
