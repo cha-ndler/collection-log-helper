@@ -139,6 +139,13 @@ public class GuidanceMovementTracker
 		if (previous.getPlane() != current.getPlane()
 			|| chebyshev(previous, current) > TELEPORT_DISTANCE_THRESHOLD)
 		{
+			// State-driven loop: a teleport / plane change can move the player out of
+			// (or into) a loop zone — re-resolve the active step from world-state so a
+			// gather-loop source follows them (e.g. teleporting home when out of keys
+			// resolves back to the bank step). No-op for linear sources and when the
+			// resolved step is unchanged; gated on significant movement so it stays off
+			// the per-tick walking hot path.
+			guidanceSequencer.reDeriveState();
 			guidanceCoordinator.refreshHintArrow();
 		}
 	}
