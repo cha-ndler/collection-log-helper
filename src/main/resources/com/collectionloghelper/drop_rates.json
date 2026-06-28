@@ -19519,17 +19519,17 @@
     "travelTip": "Quetzal whistle -> Varlamore -> Hunter Guild",
     "guidanceSteps": [
       {
-        "description": "Travel to the Hunter Guild in Avium Savannah, Varlamore. Use the Quetzal whistle to teleport to Varlamore, then run south-west to the guild. Requires 46 Hunter and completion of Children of the Sun.",
+        "description": "Travel to the Hunter Guild in Avium Savannah, Varlamore. Use the Quetzal whistle to teleport straight to the landing zone in front of the guild (no running needed); the fairy ring is the only run-based route, north-west to the guild. Requires 46 Hunter and completion of Children of the Sun.",
         "worldX": 1579,
         "worldY": 3069,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Quetzal whistle -> Varlamore -> run south-west to Hunter Guild",
+        "travelTip": "Quetzal whistle -> landing zone in front of Hunter Guild",
         "section": "Travel"
       },
       {
-        "description": "Complete Hunter Guild activities in the Avium Savannah. Track and catch creatures in the guild hunting grounds for Hunter Guild points. Spend points at the guild reward shop for guild-exclusive items. Higher Hunter levels unlock additional creature types and greater point rewards.",
+        "description": "Complete Hunters' Rumours from a Guild Hunter in the Avium Savannah. Each rumour tasks you with tracking and catching a specific creature, rewarding Hunter experience and a hunters' loot sack whose quality scales with the rumour tier. Guild-exclusive items (guild hunter outfit, huntsman's kit, quetzal whistles, Quetzin) come from loot sacks and rumour-milestone unlocks. Higher Hunter levels unlock higher rumour tiers (Adept, Expert, Master), which award higher-quality loot sacks.",
         "worldX": 1579,
         "worldY": 3069,
         "worldPlane": 0,
