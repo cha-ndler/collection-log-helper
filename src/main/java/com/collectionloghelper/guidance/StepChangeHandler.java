@@ -117,6 +117,11 @@ public class StepChangeHandler
 					+ "/" + guidanceSequencer.getCumulativeTrackThreshold()
 					+ " actions tracked";
 			}
+			final String infoBoxHint = guidanceSequencer.getActiveStepHint();
+			if (infoBoxHint != null)
+			{
+				tooltip += "\n" + infoBoxHint;
+			}
 			in.activeInfoBox.setTooltipText(tooltip);
 			if (current == total)
 			{
@@ -128,7 +133,9 @@ public class StepChangeHandler
 		{
 			final int current = guidanceSequencer.getCurrentIndex() + 1;
 			final int total = guidanceSequencer.getTotalSteps();
-			final String desc = step.resolveDescription(in.activeTargetItemId);
+			final String stepHint = guidanceSequencer.getActiveStepHint();
+			final String baseDesc = step.resolveDescription(in.activeTargetItemId);
+			final String desc = stepHint != null ? baseDesc + "\n" + stepHint : baseDesc;
 			final boolean isManual = step.getCompletionCondition() == CompletionCondition.MANUAL;
 			final GuidanceStep rawStep = guidanceSequencer.getRawCurrentStep();
 			final CollectionLogSource stepChangeSource = guidanceSequencer.getActiveSource();
