@@ -16154,7 +16154,7 @@
         "section": "Activity"
       },
       {
-        "description": "During the 10-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope. Bailing continuously maximises your loot share. Two or more unrepaired nets will end the trip early",
+        "description": "During the 5-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope. Bailing continuously maximises your loot share. Torn nets simply catch no fish until repaired",
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 1,
@@ -16166,7 +16166,7 @@
         "section": "Activity"
       },
       {
-        "description": "When the trawler returns to Port Khazard, collect your fish haul from Murphy. Each Angler outfit piece has approximately a 1-in-12 chance per completed voyage. Bank and board again for the next run",
+        "description": "When the trawler returns to Port Khazard, search the trawler net to collect your fish haul. Each Angler outfit piece has approximately a 1-in-12 chance per completed voyage. Bank and board again for the next run",
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 0,
