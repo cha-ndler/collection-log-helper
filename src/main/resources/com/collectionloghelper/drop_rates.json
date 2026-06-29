@@ -14485,7 +14485,7 @@
       },
       {
         "section": "Queue",
-        "description": "Board the lander matching your combat level (Novice <100, Intermediate 100-150, Veteran 150+). Wait for the lander to fill and depart to the island.",
+        "description": "Board the lander matching your combat level (Novice 40+, Intermediate 70+, Veteran 100+). Wait for the lander to fill and depart to the island.",
         "worldX": 2659,
         "worldY": 2676,
         "worldPlane": 0,
@@ -14498,7 +14498,7 @@
       },
       {
         "section": "Round",
-        "description": "Destroy all 4 portals while defending the Void Knight. Use Protect from Melee when swarmed by spinners near the Void Knight. Prioritise portals over kills - the game ends instantly if the Void Knight falls.",
+        "description": "Destroy all 4 portals while defending the Void Knight. Kill Spinners at each portal once its immunity drops - they repair the portals; Shifters, Defilers, Ravagers and Torchers are the pests that attack the Void Knight. Prioritise portals over kills - the game ends instantly if the Void Knight falls.",
         "worldX": 2659,
         "worldY": 2676,
         "worldPlane": 0,
