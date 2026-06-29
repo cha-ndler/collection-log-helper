@@ -194,6 +194,24 @@ public class GuidanceSequencerRestockTest
 			"highlight target should remain the recurring key");
 	}
 
+	/**
+	 * #822: the recurring-gather MANUAL step deliberately suppresses auto-advance, which
+	 * reads as "stuck". {@code getActiveStepHint()} must surface a "Keep gathering - press
+	 * Next" hint on that step so the deliberate pause is not mistaken for a hang.
+	 */
+	@Test
+	public void recurringGatherStepSurfacesKeepGatheringHint() throws Exception
+	{
+		AtomicReference<GuidanceStep> lastStep = new AtomicReference<>();
+		sequencer.setPlayerLocation(new WorldPoint(0, 0, 0));
+		sequencer.startSequence(makeSource(gatherLoopSteps()), lastStep::set, () -> { });
+
+		assertEquals(0, sequencer.getCurrentIndex(), "precondition: on the recurring gather step");
+		String hint = sequencer.getActiveStepHint();
+		assertTrue(hint != null && hint.contains("Keep gathering"),
+			"recurring-gather MANUAL step should surface a 'Keep gathering' hint (#822), got: " + hint);
+	}
+
 	// ---- Scenario helpers ----
 
 	private void startAtLoopStep(AtomicReference<GuidanceStep> lastStep)
