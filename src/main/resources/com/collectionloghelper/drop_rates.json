@@ -20824,7 +20824,14 @@
         "worldPlane": 0,
         "objectId": 27785,
         "objectInteractAction": "Investigate",
-        "completionCondition": "PLAYER_ON_PLANE",
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [
+          1620,
+          9990,
+          1690,
+          10100,
+          0
+        ],
         "section": "Travel"
       },
       {
