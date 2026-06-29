@@ -248,6 +248,32 @@ public class GuidanceSequencer
 	}
 
 	/**
+	 * #822: a short user-facing hint for the active step when it is an intentional
+	 * WAIT step — a recurring-gather step (auto-advance deliberately suppressed) or a
+	 * MANUAL loop terminal — so the deliberate pause is not mistaken for a hang.
+	 * Returns {@code null} for a one-off MANUAL step or an event-driven step (those
+	 * advance on their own or on a single Next, so they never read as stuck).
+	 * Keyed off the loop/recurring condition, so every loop source benefits at once.
+	 */
+	public String getActiveStepHint()
+	{
+		GuidanceStep step = getCurrentStep();
+		if (step == null || step.getCompletionCondition() != CompletionCondition.MANUAL)
+		{
+			return null;
+		}
+		if (isRecurringGatherSequence())
+		{
+			return "Keep gathering - press Next when done (the loop re-enters this step).";
+		}
+		if (step.getLoopBackToStep() > 0 && step.getLoopCount() > 0)
+		{
+			return "Repeat until done - press Next to continue, or Stop to finish.";
+		}
+		return null;
+	}
+
+	/**
 	 * Returns the raw current step without bank routing substitution,
 	 * but with conditional alternatives resolved.
 	 */
