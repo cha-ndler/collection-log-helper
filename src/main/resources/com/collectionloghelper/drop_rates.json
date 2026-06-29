@@ -3291,7 +3291,14 @@
         "worldPlane": 0,
         "objectId": 32637,
         "objectInteractAction": "Climb-down",
-        "completionCondition": "PLAYER_ON_PLANE"
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [
+          3770,
+          9690,
+          3850,
+          9810,
+          1
+        ]
       },
       {
         "description": "Run north to The Nightmare's arena in the Sisterhood Sanctuary",
