@@ -457,6 +457,71 @@ public class GuidanceSequencer
 		}
 	}
 
+	/**
+	 * Mid-session state-driven step re-derivation (state-driven loop fix).
+	 *
+	 * <p>For gather-loop sources only — those that declare loop fuel via
+	 * {@code restockIfMissingAllItemIds} ({@link #isRecurringGatherSequence()}) —
+	 * recomputes the active step from current world-state {@code (inventory,
+	 * location, clog-unlock)} whenever that state changes, <em>without</em>
+	 * requiring re-activation. This is what turns the loop from "linear advance on
+	 * per-step completion events" into "the correct step is a pure function of
+	 * world-state at any tick", so every gather-loop source benefits at once.
+	 *
+	 * <p>Reuses the exact activation chain ({@link #skipSatisfiedSteps()} ->
+	 * {@link #advanceToFurthestSatisfiedState()}): re-derive from step 0 over the
+	 * current state and land on the resolved step. Because the re-derivation runs
+	 * from scratch, the depletion/restock park ({@link #checkDepletionAndMaybeReset()})
+	 * is subsumed — a player who has run dry simply re-resolves back to the bank
+	 * step via the skip-chain.
+	 *
+	 * <p>Back-compat: linear (non-gather-loop) sources are a no-op, so today's
+	 * event-driven advance is unchanged. Termination on target clog-unlock is owned
+	 * by {@link #onItemObtained}, so this no-ops once {@link #targetSlotUnlocked}.
+	 * Notifies listeners <em>only when the resolved step index actually changes</em>,
+	 * so it is safe to call on every inventory / location change without step-change
+	 * spam or overlay churn.
+	 */
+	public void reDeriveState()
+	{
+		if (!active || steps == null || targetSlotUnlocked || !isRecurringGatherSequence())
+		{
+			return;
+		}
+
+		int previousIndex = currentIndex;
+
+		// Re-derive from scratch over the current world-state (same chain as
+		// startSequence / syncToCurrentState, minus the destructive always-notify).
+		currentIndex = 0;
+		loopIterationsCompleted = 0;
+		crossedWaypointIndex = 0;
+		awaitingRestock = false;
+		restockStepIndex = 0;
+		resolvedAlternatives.clear();
+		tilePointCache = null;
+		chatPatternCache = null;
+
+		skipSatisfiedSteps();
+		if (!active)
+		{
+			// All steps already satisfied — sequence completed via the skip-chain.
+			return;
+		}
+		advanceToFurthestSatisfiedState();
+
+		if (currentIndex != previousIndex)
+		{
+			GuidanceStep step = getCurrentStep();
+			if (step != null)
+			{
+				log.info("State re-derived to step {}/{} for {}",
+					currentIndex + 1, steps.size(), activeSource != null ? activeSource.getName() : "?");
+				notifyStepChanged(step);
+			}
+		}
+	}
+
 	public int getCumulativeActionCount()
 	{
 		return cumulativeActionCount;
