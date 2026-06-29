@@ -16176,8 +16176,14 @@
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 0,
-        "completionCondition": "PLAYER_ON_PLANE",
-        "targetPlane": 1,
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [
+          2658,
+          3158,
+          2680,
+          3180,
+          1
+        ],
         "section": "Activity"
       },
       {
