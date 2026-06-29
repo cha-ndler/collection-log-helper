@@ -32214,7 +32214,14 @@
           25275
         ],
         "objectInteractAction": "Dive-in",
-        "completionCondition": "PLAYER_ON_PLANE",
+        "completionCondition": "ARRIVE_AT_ZONE",
+        "completionZone": [
+          1720,
+          5325,
+          1800,
+          5375,
+          0
+        ],
         "section": "Travel"
       },
       {
