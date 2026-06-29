@@ -337,3 +337,39 @@ Sol Heredit, Perilous Moons (BOSSES); ~23 OTHER aggregate/point-shop sources;
 
 _REMAINING before DoD closes: item-id leg (#1, blocked on MCP restart);
 TempleOSRS clog-membership leg (#4, pilot launched); operator seam round (#7, P5)._
+
+---
+
+## 2026-06-27 — Guidance-engine loop-class leg (engine, not data)
+
+A live Shades-of-Mort'ton run surfaced a CLASS of guidance-engine defects. Engine map finding:
+the engine already resolves the active step from world-state AT ACTIVATION
+(skipSatisfiedSteps -> advanceToFurthestSatisfiedState -> checkDepletionAndMaybeReset),
+it just never re-ran mid-session. Operator gate chose "wire the existing chain" over
+"build a new resolver DSL".
+
+- **F1 (loop not state-driven mid-session)** -> PR #1018: `GuidanceSequencer.reDeriveState()`
+  re-runs the activation chain on inventory/teleport, opt-in to gather-loop sources
+  (restock-fuel signal, no new schema), notify-only-on-change. 6-case Shades reference
+  matrix. CI build GREEN. Awaiting operator merge (structural -> no automerge).
+- **F3 (stale highlight not cleared)** -> PR #1019: clear tier-driven highlight when a
+  dynamic-tier step no longer matches inventory (used last key). 3 tests. CI pending.
+- **F4 (over-highlight ~72 pyres)** -> operator chose NEAREST-ONLY (single nearest matched
+  instance). CLH PR pending (own opt-in mechanism + tests); queued behind P2.
+- **F5 (clog-unlock termination)** -> already handled: onItemObtained fires
+  fireSequenceComplete on target-slot unlock; live confirm deferred to P4 seam round.
+- **F7 (DiaryTierState perf)** -> minor; refresh already varbit-gated. Deferred.
+- **F2 (phantom "reward pillar" MANUAL step) + F8 wording** -> DATA, loop 03 sweep.
+
+**P2 (static corpus detectors)** -> toolkit PR #94 (operator chose Part C only; Part A/B seam
+deferred to the live-client P4 round). Four detectors folded into `run_corpus_detectors`:
+dead-end-manual-step (WARN), phantom-mechanic-text (WARN), over-highlight-risk (INFO),
+loop-structure (INFO). Loop-marker carve-out enforced (D4Batch inconsistency never flagged).
+Real-corpus sanity over 226 sources: dead-end-manual 12/8 (incl. Shades step[2]), phantom 22/19,
+over-highlight 9/4, loop-structure 0. 385 toolkit tests green, bundle rebuilt. NOT automerge ->
+operator merge + release + `/mcp` reconnect before P3 trusts it ("merged != live").
+
+**P3 (Workflow corpus sweep)** not started — explicitly cross-session; runs after P2 is released
+and reconnected. pipeline(survivors, run-detectors -> skeptic-verify -> fix-straggler).
+
+**F4 nearest-only** CLH highlight PR still queued (operator chose nearest-only single).
