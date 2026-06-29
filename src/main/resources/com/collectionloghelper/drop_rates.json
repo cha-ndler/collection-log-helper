@@ -14634,7 +14634,7 @@
       }
     ],
     "locationDescription": "Mage Training Arena, north-east of Al Kharid",
-    "travelTip": "Ring of dueling -> Emir's Arena, then run north-east",
+    "travelTip": "Ring of dueling -> Emir's Arena, then run north",
     "requirements": {
       "skills": [
         {
@@ -14651,11 +14651,11 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Ring of dueling -> Emir's Arena, run north-east",
+        "travelTip": "Ring of dueling -> Emir's Arena, run north",
         "section": "Travel"
       },
       {
-        "description": "Enter one of the four training rooms. Telekinetic: move statues with Telekinetic Grab. Alchemy: High Alch the correct items. Enchanting: Lvl-1 Enchant jewelry. Graveyard (needs Bones to Peaches unlocked): convert bones. Each room awards its own coloured pizazz points",
+        "description": "Enter one of the four training rooms. Telekinetic: move statues with Telekinetic Grab. Alchemy: High Alch the correct items. Enchanting: Lvl-1 Enchant jewelry. Graveyard: convert bones. Each room awards its own coloured pizazz points",
         "worldX": 3374,
         "worldY": 3316,
         "worldPlane": 0,
@@ -14676,7 +14676,7 @@
         "section": "Activity"
       },
       {
-        "description": "When you have enough pizazz points, visit the reward shop inside the arena to purchase Infinity armour pieces, wands, Mage's book, or Bones to Peaches. The Master wand (17 pizazz of each type) and Mage's book are the primary targets",
+        "description": "When you have enough pizazz points, visit the reward shop inside the arena to purchase Infinity armour pieces, wands, Mage's book, or Bones to Peaches. The Master wand (240 Telekinetic, 240 Alchemist, 2400 Enchantment, 240 Graveyard pizazz with the Teacher wand; about 480/530/4800/480 from scratch) and Mage's book are the primary targets",
         "worldX": 3363,
         "worldY": 3316,
         "worldPlane": 0,
