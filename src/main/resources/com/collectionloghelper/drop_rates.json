@@ -15490,7 +15490,7 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to Amy in Falador east of the Falador shield shop to pick up your starting contract. Higher Construction levels unlock the Carpenter (Adept 20+, Expert 50+, Master 70+) tiers - each pays more points per contract.",
+        "description": "Travel to Amy in Falador east of the Falador shield shop to pick up your starting contract. Higher Construction levels unlock the Carpenter (Novice 20+, Adept 50+, Expert 70+) tiers - each pays more points per contract.",
         "worldX": 2954,
         "worldY": 3369,
         "worldPlane": 0,
@@ -15500,7 +15500,7 @@
         "section": "Travel"
       },
       {
-        "description": "Talk to Amy and accept a contract. She will direct you to Falador, Varrock, Hosidius, or East Ardougne - teleport directly to the contract city. Higher tiers (Adept / Expert / Master) ignore the starter Falador-only contracts.",
+        "description": "Talk to Amy and accept a contract. She will direct you to Falador, Varrock, Hosidius, or East Ardougne - teleport directly to the contract city. Higher tiers (Novice / Adept / Expert) ignore the starter Falador-only contracts.",
         "worldX": 2954,
         "worldY": 3369,
         "worldPlane": 0,
@@ -15509,7 +15509,7 @@
         "section": "Travel"
       },
       {
-        "description": "At the contract house, repair every broken hotspot in the order shown. Right-click each broken object and use the correct plank tier (Master = Mahogany only). Use the Crystal saw boost if your Construction level is borderline. Reporting to the owner finishes the contract and credits the carpenter's points.",
+        "description": "At the contract house, repair every broken hotspot in the order shown. Right-click each broken object and use the correct plank tier (Expert = Mahogany only). Use the Crystal saw boost if your Construction level is borderline. Reporting to the owner finishes the contract and credits the carpenter's points.",
         "worldX": 2954,
         "worldY": 3369,
         "worldPlane": 0,
@@ -15533,7 +15533,7 @@
         "section": "Reward"
       },
       {
-        "description": "Teleport back to a bank to restock planks when your inventory runs low. Falador east bank is closest to Amy; West Ardougne bank is closest to Ardougne contracts.",
+        "description": "Teleport back to a bank to restock planks when your inventory runs low. Falador east bank is closest to Amy; East Ardougne bank is closest to Ardougne contracts.",
         "worldX": 2965,
         "worldY": 3382,
         "worldPlane": 0,
