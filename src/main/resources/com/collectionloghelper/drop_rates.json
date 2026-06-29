@@ -8294,7 +8294,7 @@
     "travelTip": "Barrows teleport (Arceuus 83 Magic), Barrows teleport tablet, or Fairy ring BKR",
     "guidanceSteps": [
       {
-        "description": "Teleport to Barrows with a spade, food, prayer potions, and a weapon for each style (Magic for Ahrim, Ranged for Karil, Melee for the four Melee brothers). Verac ignores Protect prayers - bring high-defence armour for him",
+        "description": "Teleport to Barrows with a spade, food, prayer potions, and a weapon for each style (Magic for the four melee brothers - Dharok, Guthan, Torag, Verac - and for Karil; Ranged or Melee for Ahrim). Verac ignores Protect prayers - bring high-defence armour for him",
         "worldX": 3565,
         "worldY": 3298,
         "worldPlane": 0,
