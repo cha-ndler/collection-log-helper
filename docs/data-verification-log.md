@@ -373,3 +373,39 @@ operator merge + release + `/mcp` reconnect before P3 trusts it ("merged != live
 and reconnected. pipeline(survivors, run-detectors -> skeptic-verify -> fix-straggler).
 
 **F4 nearest-only** CLH highlight PR still queued (operator chose nearest-only single).
+
+---
+
+## 2026-06-28 — Wiki-meta guidance-prose tail sweep (35 sources merged, one PR each)
+
+Drained the open `findings-wiki-meta-2026-06.md` tranche-4 backlog (minigame/activity tail,
+Hallowed Sepulchre → Stronghold of Security) plus 2 straggler tail sources, via a
+re-verify → fix Workflow pipeline. NB: this is the **data/guidance-prose** backlog — distinct
+from the P3 corpus-detector sweep (the dead-end-manual 12 / phantom 22 / over-highlight 9 = 43
+detector survivors above), which remains pending P2 toolkit #94 release + `/mcp` reconnect.
+
+- **Re-verify gate (read-only):** 37 sources re-checked against CURRENT data; each finding
+  re-passed a domain-skeptic RAW-receipt gate (fresh verbatim wiki/MCP quote, cite-or-discard).
+  **95 CONFIRMED, 18 DROPPED** (already-fixed / domain-refuted / absence-only receipt). Gate
+  caught a false straggler: Fishing-Swordfish "boostable from 62" — relies on a non-existent
+  "super fishing potion"; max Fishing boost is +5 (Admiral pie), so the data's "from 63" is
+  CORRECT (do NOT re-flag).
+- **Fixes:** 35 sources, one PR each, **prose/requirement-only** (no itemId / dropRate / coord /
+  `loopBackToStep` / `loopCount` touched), `validate_drop_rates` + `guidance_lint` +
+  `commit_message_lint` per source, CI `build` the authoritative gate, strict-protection
+  serialized auto-merge. **PRs #1021–#1056.**
+- Sample blockers/highs (all skeptic-SURVIVED with raw receipts):
+  - Hallowed Sepulchre floor-5 Agility gate 72 → **92** (not boostable); entrance NE not SE.
+  - Brimhaven Agility Arena reward NPC Cap'n Izzy → **Pirate Jackie the Fruit**; graceful
+    recolour **250 vouchers full-set** (was "250 each / 1500 total" — 6× overstated).
+  - Aerial Fishing fabricated fish names (violet perch → mottled eel, cerulean twitch →
+    greater siren) + inverted Molch-pearl mechanic.
+  - Guardians of the Rift three fabricated Arceuus/Mind-altar travel routes removed; unique
+    points threshold 150 → **300** (Nov-2024 change).
+  - Soul Wars Protect-Melee on Avatar; Ectoplasmator 2500 → **250**; removed phantom Unsired
+    shards reward.
+  - Champion's Challenge removed fabricated `DRAGON_SLAYER_I` quest gate (operator-reviewed, #1055).
+- **5 sources held for review** (4 weak-receipt re-pulled in-PR + the Champion's Challenge
+  structured `requirements` edit); all merged after operator confirmation (#1026/#1029/#1030/
+  #1032/#1055). Hunter Guild #1044 transient BLOCK cleared and merged.
+- Transient server-side rate-limiting during fan-out; re-running the affected sources cleared it.
