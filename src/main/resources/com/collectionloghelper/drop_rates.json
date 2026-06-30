@@ -24228,7 +24228,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Scurrius. Stand under the boss for melee, dodge the falling rocks (red tiles), and kill the Giant rat spawns immediately to disrupt the fight. Scurrius heals from the Food Piles between phases (not from the rats), so push damage through the phase transitions. Use Protect from Missiles to negate his ranged-style auto. Easy first-boss fight that often drops the Scurrius' spine (rune pouch upgrade).",
+        "description": "Kill Scurrius. Stand under the boss for melee, dodge the falling rocks (red tiles), and kill the Giant rat spawns immediately to disrupt the fight. Scurrius heals from the Food Piles between phases (not from the rats), so push damage through the phase transitions. Use Protect from Melee for phases one and two - his Tail Swipe melee is his fastest and most accurate attack (Protect from Missiles only blocks the minor Flying Fur ranged hit). Easy first-boss fight that often drops the Scurrius' spine (rune pouch upgrade).",
         "worldX": 3299,
         "worldY": 9867,
         "worldPlane": 0,
