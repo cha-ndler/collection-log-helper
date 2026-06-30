@@ -27,21 +27,21 @@
 
 | # | Source | Category | Data verified (V1) | In-game (V2) | Open findings |
 |---|--------|----------|--------------------|--------------|---------------|
-| 1 | Abyssal Sire | BOSSES | - | - | - |
-| 2 | Alchemical Hydra | BOSSES | - | - | - |
-| 3 | Amoxliatl | BOSSES | - | - | - |
-| 4 | Araxxor | BOSSES | - | - | - |
-| 5 | Barrows | BOSSES | - | - | - |
-| 6 | Brutus | BOSSES | - | - | - |
-| 7 | Bryophyta | BOSSES | - | - | - |
-| 8 | Callisto | BOSSES | - | - | - |
-| 9 | Cerberus | BOSSES | - | - | - |
-| 10 | Chaos Elemental | BOSSES | - | - | - |
-| 11 | Chaos Fanatic | BOSSES | - | - | - |
-| 12 | Commander Zilyana | BOSSES | - | - | - |
-| 13 | Corporeal Beast | BOSSES | - | - | - |
-| 14 | Corrupted Gauntlet | BOSSES | - | - | - |
-| 15 | Crazy archaeologist | BOSSES | - | - | - |
+| 1 | Abyssal Sire | BOSSES | `2026-06-30` | - | - |
+| 2 | Alchemical Hydra | BOSSES | `2026-06-30` | - | - |
+| 3 | Amoxliatl | BOSSES | `2026-06-30` | - | - |
+| 4 | Araxxor | BOSSES | - | - | 1 (PR #1080) |
+| 5 | Barrows | BOSSES | `2026-06-30` | - | - |
+| 6 | Brutus | BOSSES | `2026-06-30` | - | - |
+| 7 | Bryophyta | BOSSES | - | - | 1 (PR #1081) |
+| 8 | Callisto | BOSSES | - | - | 1 (PR #1082) |
+| 9 | Cerberus | BOSSES | `2026-06-30` | - | - |
+| 10 | Chaos Elemental | BOSSES | `2026-06-30` | - | - |
+| 11 | Chaos Fanatic | BOSSES | `2026-06-30` | - | - |
+| 12 | Commander Zilyana | BOSSES | `2026-06-30` | - | - |
+| 13 | Corporeal Beast | BOSSES | `2026-06-30` | - | - |
+| 14 | Corrupted Gauntlet | BOSSES | `2026-06-30` | - | - |
+| 15 | Crazy archaeologist | BOSSES | `2026-06-30` | - | - |
 | 16 | Dagannoth Prime | BOSSES | - | - | - |
 | 17 | Dagannoth Rex | BOSSES | - | - | - |
 | 18 | Dagannoth Supreme | BOSSES | - | - | - |
@@ -437,3 +437,42 @@ detector survivors above), which remains pending P2 toolkit #94 release + `/mcp`
   CI-green and live-verified (operator-approved merge policy).
 - The 9th divergence (Trouble Brewing) was a transient drive-state artifact off the pre-edit
   client; not reproduced on a clean relaunch — no data change, no spectator fix needed.
+
+## 2026-06-30 — Accuracy-convergence v2, Phase-2 semantic pass: BOSSES batch 1 (15 sources)
+
+Cache `2026-06-25-rev239` (no drift). Ran the three-tier loop:
+
+- **Phase 0 (deterministic) — corpus DRAINED.** `run_corpus_detectors` + `validate_drop_rates(all)`
+  + `guidance_lint` over all 226: 6 detector classes queue-empty (fairy-ring, salve-non-undead,
+  wilderness-level, lodestone, sailors-amulet, loop-structure). Everything else is by-design
+  (multi-source duplicate itemIds; loop markers) or corpus-wide advisory heuristics (#49 npc-id,
+  #50 area-confirmability, over-highlight→tracked engine F4 work, phantom-mechanic on descriptive
+  prose). **No new actionable mechanical defects.** Two cosmetic cache name-nits noted only
+  (Shades "lock"→"locks"; Hard-TT glory "(t)"→"(t4)") — display strings, correct ids.
+- **Phase 1 (mechanical sweep):** last corpus sweep 2026-06-29 = 225 PASS / 0 DIVERGENCE
+  (mechanically green). Operator-gated to re-run; not re-run this batch.
+- **Phase 2 (semantic/meta):** accuracy-verifier Workflow (`pipeline(verify → domain-skeptic gate)`,
+  cite-or-discard, live OSRS wiki) over 15 BOSSES. **12 CLEAN, 3 with skeptic-survived high
+  findings** — all independently re-confirmed by direct WebFetch of the wiki before editing:
+  - **Araxxor — PR #1080 (high):** requirements omitted the 92 Slayer gate AND the on-task lock
+    (spider/araxyte task; Konar may assign). Receipt: "requiring level 92 Slayer and access to
+    Morytania to kill"; "may only be killed while on a spider or araxyte Slayer task". Fix:
+    `skills SLAYER 92` + prep-step prose.
+  - **Bryophyta — PR #1081 (high):** Growthlings can ONLY be killed with a woodcutting axe or
+    magic secateurs (one-shot); gear listed only a whip, so the kill was impossible as written.
+    Receipt: "they must be attacked with a woodcutting axe or magic secateurs, one-shotting the
+    growthlings"; "battleaxes or the zombie axe, cannot be used". Fix: prep + combat prose.
+  - **Callisto — PR #1082 (high):** prayer guidance INVERTED — stood on Protect from Magic and
+    disparaged Protect from Melee, but his AoE melee (~50% reduced by Protect from Melee) is the
+    primary threat; Magic is only for the white-orb knockback. Receipt: "using Protect from Melee
+    reduces the damage by ~50%". Fix: arrival + combat prose.
+
+**Stamps:** V1 = `2026-06-30` for the 12 clean sources (Abyssal Sire, Alchemical Hydra, Amoxliatl,
+Barrows, Brutus, Cerberus, Chaos Elemental, Chaos Fanatic, Commander Zilyana, Corporeal Beast,
+Corrupted Gauntlet, Crazy archaeologist). The 3 fixed sources stay V1 `-` until their PRs merge
++ re-verify. V2 (in-game) stays `-` corpus-wide (operator-gated). All 3 fix PRs are prose/
+requirement-only (no itemId/dropRate/coord/`loopBackToStep`/`loopCount`), one source per PR,
+`automerge skipping` (data PRs are operator-merged), CI `build`+`scripts` the authoritative gate.
+
+**Next batch:** continue Phase 2 over the remaining BOSSES (Dagannoth trio → Zulrah), then SLAYER,
+then RAIDS, per the traffic-priority order.
