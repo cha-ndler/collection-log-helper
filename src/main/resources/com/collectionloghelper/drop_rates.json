@@ -10845,6 +10845,9 @@
           "skill": "SLAYER",
           "level": 48
         }
+      ],
+      "quests": [
+        "PERILOUS_MOONS"
       ]
     },
     "items": [
