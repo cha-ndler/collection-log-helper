@@ -3978,7 +3978,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Varrock west bank. Required: Mossy key (farmed from Moss giants in Varrock Sewers or Brimhaven Dungeon at 1/150, or 1/75 on a moss giant Slayer task). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport",
+        "description": "Bank in Varrock west bank. Required: Mossy key (farmed from Moss giants in Varrock Sewers or Brimhaven Dungeon at 1/150, or 1/75 on a moss giant Slayer task). Bring melee gear, super combat, food, prayer potions, and an Amulet of glory for the return teleport. Also bring a woodcutting axe or magic secateurs to kill the Growthlings (a bronze axe is available from the log pile in the lair if you have neither)",
         "worldX": 3185,
         "worldY": 3439,
         "worldPlane": 0,
@@ -4017,7 +4017,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Bryophyta. Activate Protect from Magic before entering or immediately on entry. All melee styles are equally effective (no elevated stab defence; 50% fire magic weakness). Kill Growthlings the moment they spawn - Bryophyta is immune to all damage (except poison and venom) while any Growthling is alive",
+        "description": "Kill Bryophyta. Activate Protect from Magic before entering or immediately on entry. All melee styles are equally effective (no elevated stab defence; 50% fire magic weakness). Kill the Growthlings the moment they spawn by attacking them with a woodcutting axe or magic secateurs, which one-shot them - normal weapons, battleaxes, and the zombie axe cannot damage them. Bryophyta is immune to all damage (except poison and venom) while any Growthling is alive",
         "worldX": 3174,
         "worldY": 3435,
         "worldPlane": 0,
