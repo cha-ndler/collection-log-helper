@@ -42,11 +42,11 @@
 | 13 | Corporeal Beast | BOSSES | `2026-06-30` | - | - |
 | 14 | Corrupted Gauntlet | BOSSES | `2026-06-30` | - | - |
 | 15 | Crazy archaeologist | BOSSES | `2026-06-30` | - | - |
-| 16 | Dagannoth Prime | BOSSES | - | - | 1 (PR #1084) |
-| 17 | Dagannoth Rex | BOSSES | - | - | 1 (PR #1085) |
+| 16 | Dagannoth Prime | BOSSES | `2026-06-30` | - | - |
+| 17 | Dagannoth Rex | BOSSES | `2026-06-30` | - | - |
 | 18 | Dagannoth Supreme | BOSSES | `2026-06-30` | - | - |
 | 19 | Deranged Archaeologist | BOSSES | `2026-06-30` | - | - |
-| 20 | Doom of Mokhaiotl | BOSSES | - | - | 1 (PR #1086) |
+| 20 | Doom of Mokhaiotl | BOSSES | `2026-06-30` | - | - |
 | 21 | Duke Sucellus | BOSSES | `2026-06-30` | - | - |
 | 22 | Duke Sucellus (Awakened) | BOSSES | `2026-06-30` | - | - |
 | 23 | General Graardor | BOSSES | `2026-06-30` | - | - |
@@ -54,24 +54,24 @@
 | 25 | Grotesque Guardians | BOSSES | `2026-06-30` | - | - |
 | 26 | Hespori | BOSSES | `2026-06-30` | - | - |
 | 27 | K'ril Tsutsaroth | BOSSES | `2026-06-30` | - | - |
-| 28 | Kalphite Queen | BOSSES | - | - | 1 (PR #1087) |
+| 28 | Kalphite Queen | BOSSES | `2026-06-30` | - | - |
 | 29 | King Black Dragon | BOSSES | `2026-06-30` | - | - |
 | 30 | Kraken | BOSSES | `2026-06-30` | - | - |
-| 31 | Kree'arra | BOSSES | - | - | - |
-| 32 | Nex | BOSSES | - | - | - |
-| 33 | Obor | BOSSES | - | - | - |
-| 34 | Perilous Moons | BOSSES | - | - | - |
-| 35 | Phantom Muspah | BOSSES | - | - | - |
-| 36 | Phosani's Nightmare | BOSSES | - | - | - |
-| 37 | Royal Titans | BOSSES | - | - | - |
-| 38 | Sarachnis | BOSSES | - | - | - |
-| 39 | Scorpia | BOSSES | - | - | - |
-| 40 | Scurrius | BOSSES | - | - | - |
-| 41 | Shellbane Gryphon | BOSSES | - | - | - |
-| 42 | Skotizo | BOSSES | - | - | - |
-| 43 | Sol Heredit | BOSSES | - | - | - |
-| 44 | The Fight Caves | BOSSES | - | - | - |
-| 45 | The Gauntlet | BOSSES | - | - | - |
+| 31 | Kree'arra | BOSSES | `2026-06-30` | - | - |
+| 32 | Nex | BOSSES | `2026-06-30` | - | - |
+| 33 | Obor | BOSSES | `2026-06-30` | - | - |
+| 34 | Perilous Moons | BOSSES | `2026-06-30` | - | - |
+| 35 | Phantom Muspah | BOSSES | - | - | 1 (PR #1095) |
+| 36 | Phosani's Nightmare | BOSSES | `2026-06-30` | - | - |
+| 37 | Royal Titans | BOSSES | `2026-06-30` | - | - |
+| 38 | Sarachnis | BOSSES | - | - | 1 (PR #1092) |
+| 39 | Scorpia | BOSSES | - | - | 1 (PR #1093) |
+| 40 | Scurrius | BOSSES | - | - | 1 (PR #1091) |
+| 41 | Shellbane Gryphon | BOSSES | - | - | 1 (PR #1094) |
+| 42 | Skotizo | BOSSES | `2026-06-30` | - | - |
+| 43 | Sol Heredit | BOSSES | `2026-06-30` | - | - |
+| 44 | The Fight Caves | BOSSES | - | - | 1 (PR #1090) |
+| 45 | The Gauntlet | BOSSES | `2026-06-30` | - | - |
 | 46 | The Hueycoatl | BOSSES | - | - | - |
 | 47 | The Inferno | BOSSES | - | - | - |
 | 48 | The Leviathan | BOSSES | - | - | - |
@@ -518,3 +518,50 @@ classifier correctly blocked self-merge of this batch).
 
 **Running total V1-stamped:** 26 / 226 (12 batch-1 clean + 3 batch-1 fixes-merged + 11 batch-2
 clean; batch-2's 4 fixes pending merge).
+
+## 2026-06-30 — Accuracy-convergence v2, Phase-2 semantic pass: BOSSES batch 3 (15 sources)
+
+Cache `2026-06-25-rev239`. Batch: Kree'arra, Nex, Obor, Perilous Moons, Phantom Muspah, Phosani's
+Nightmare, Royal Titans, Sarachnis, Scorpia, Scurrius, Shellbane Gryphon, Skotizo, Sol Heredit,
+The Fight Caves, The Gauntlet. Verifier returned **9 CLEAN, 6 sources with skeptic-survived
+findings** (5 high + 1 low). One verifier "low" was DROPPED on review (Shellbane cave-direction
+already correct). All findings independently re-confirmed by direct WebFetch before editing.
+
+- **The Fight Caves — PR #1090 (high):** wave 1-62 prayers were wrong for 3 of 4 named monsters —
+  Protect from Magic vs Tz-Kih (22) and Yt-MejKot (180) and Protect from Missiles vs Tz-Kek (45),
+  but all three are MELEE; Ket-Zek (the actual magic attacker) was mislabelled a melee minion and
+  omitted from the prayer list. Corrected to attack-style prayers (Melee: Tz-Kih/Tz-Kek/Yt-MejKot/
+  Yt-HurKot; Missiles: Tok-Xil; Magic: Ket-Zek). Receipt: Fight Cave monster table.
+- **Scurrius — PR #1091 (high):** "Protect from Missiles" → **Protect from Melee** (phases 1-2; Tail
+  Swipe melee is fastest/most accurate; Missiles only blocks the minor Flying Fur). Receipt:
+  Scurrius/Strategies.
+- **Sarachnis — PR #1092 (high):** fabricated "Protect from Magic when red / Protect from Ranged
+  when yellow" — she has no magic attack and no colour-glow tells (melee+ranged only). Replaced
+  with distance-based prayers; removed the unverified "magic-using spawn". Receipt: Sarachnis page.
+- **Scorpia — PR #1093 (high):** "run south-west" from the Lava Maze teleport → **north-east**; the
+  Scorpion Pit is NE Wilderness while the teleport lands west/south. Receipt: "Cave in the Scorpion
+  Pit (north-east Wilderness)".
+- **Shellbane Gryphon — PR #1094 (high):** 3 steps recommended a **Quetzal whistle** to reach/return
+  from The Great Conch — impossible (Quetzal is Varlamore-only; the Great Conch is a Sailing island
+  reached by fairy ring CJQ / charter ship / Sailing). Receipt: Great Conch Transportation section.
+  (The companion "low" cave-direction finding was dropped — data already says "north".)
+- **Phantom Muspah — PR #1095 (low):** "Ancient Prison entrance" mislabel — the Muspah lair is a
+  SOUTHERN crevice of Ghorrock Dungeon; the Ghorrock/Ancient Prison (Duke Sucellus) is the distinct
+  NW entrance. "Run south" was already correct; only the landmark name was fixed. Receipt: Ghorrock
+  Dungeon page.
+
+**Process note — verifier blind spot:** as in batch 2 (Dagannoth Rex), the per-source verifier
+returned a source CLEAN that shared a defect with a flagged sibling. None recurred here, but the
+pattern stands: cross-source consistency catches what independent per-source verification misses.
+
+**Stamps:** V1 = `2026-06-30` for the 4 now-merged batch-2 fixes (Dagannoth Prime/Rex, Doom,
+Kalphite Queen) + the 9 batch-3 clean sources. The 6 batch-3 fixes (PRs #1090–#1095) stay V1 `-`
+until merged + re-verified. V2 (in-game) corpus-wide `-` (operator-gated). Fix PRs await operator
+merge (self-merge policy-blocked).
+
+**Repo-hygiene PR #1089 (open):** untracks a 17 MB `backup.bundle` (255 refs) + 10 validation
+screenshots accidentally swept into the tree by a `git add -A`; awaiting operator merge. History
+purge of the bundle blob is flagged as a separate operator decision.
+
+**Running total V1-stamped:** 39 / 226 (26 prior + 4 batch-2 fixes-merged + 9 batch-3 clean;
+batch-3's 6 fixes pending merge → 45 once merged).
