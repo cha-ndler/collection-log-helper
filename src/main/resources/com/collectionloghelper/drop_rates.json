@@ -11402,7 +11402,7 @@
         ]
       },
       {
-        "description": "Kill Cave Horrors in the Mos Le Harmless cave. Without a witchwood icon equipped, the scream special attack always deals 10% of base HP as damage; wearing the icon converts the scream into a regular attack roll (58 Slayer)",
+        "description": "Kill Cave Horrors in the Mos Le Harmless cave (58 Slayer). The scream special always deals 10% of your base Hitpoints level on hit; without a witchwood icon equipped the horror always screams. Wearing the witchwood icon does not stop the scream - it makes the horror alternate randomly between a melee kick (every 4 ticks) and a scream (every 5), so it only partially reduces the special. The special is fully negated only by Protect from Melee",
         "worldX": 3740,
         "worldY": 9373,
         "worldPlane": 0,
