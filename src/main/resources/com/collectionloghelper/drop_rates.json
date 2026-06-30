@@ -5492,7 +5492,7 @@
         "travelTip": "Burning amulet -> Chaos Temple + run north"
       },
       {
-        "description": "Arrive at Callisto's Den and pre-pot Divine ranging potion. Turn on Rigour (or Eagle Eye) and Protect from Magic before engaging; melee combat is not advised as Callisto deals very high melee damage even through Protect from Melee",
+        "description": "Arrive at Callisto's Den and pre-pot Divine ranging potion. Turn on Rigour (or Eagle Eye) and keep Protect from Melee up - it reduces his high-damage AoE melee (his primary threat) by ~50%. Flick Protect from Magic only when he launches the white orb knockback",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
@@ -5500,7 +5500,7 @@
         "completionDistance": 5
       },
       {
-        "description": "Kill Callisto with ranged using Protect from Magic. Callisto uses melee, ranged (if out of reach), and a slow magic attack - Protect from Magic fully negates the magic attack and prevents the knockback/stun. At 66% and 33% HP Callisto deploys bear traps that snare and damage if stepped on. Protect from Melee only reduces his melee damage by ~50% so stay at range",
+        "description": "Kill Callisto with ranged. Keep Protect from Melee up as the standing prayer - his high-damage AoE melee swipe is the main threat and is reduced ~50% by it. He also uses a ranged crescent attack when out of melee reach (Protect from Magic does NOT block this). When he launches the white orb at you, flick Protect from Magic to avoid the knockback and up to 50 damage. At 66% and 33% HP Callisto deploys bear traps that snare and damage if stepped on",
         "worldX": 3291,
         "worldY": 3849,
         "worldPlane": 0,
