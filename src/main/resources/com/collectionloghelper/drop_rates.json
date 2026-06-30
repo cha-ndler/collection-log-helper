@@ -5515,8 +5515,8 @@
   {
     "name": "Demonic gorillas",
     "category": "SLAYER",
-    "worldX": 2405,
-    "worldY": 3419,
+    "worldX": 2112,
+    "worldY": 5651,
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "ironKillTimeSeconds": 72,
@@ -5611,8 +5611,8 @@
       },
       {
         "description": "Kill Demonic gorillas in the Crash Site Cavern. They switch attack style after three missed hits in a row (blocked by prayer counts as missed), so watch for the style change and swap your protection prayer accordingly. Dodge the falling-boulder special (run one tile when the ground turns red) and the magic attack (a green orb, up to 30 damage - blocked by Protect from Magic). Use Emberlight or Arclight for the melee swap as demonic gorillas are demons and take bonus damage from demonbane weapons. Toxic blowpipe or Bow of faerdhinen works well for ranged.",
-        "worldX": 2405,
-        "worldY": 3419,
+        "worldX": 2112,
+        "worldY": 5651,
         "worldPlane": 0,
         "npcId": 7144,
         "interactAction": "Attack",
@@ -5622,7 +5622,7 @@
         "recommendedItemIds": [
           25865,
           12926,
-          22324,
+          29589,
           6685,
           3024,
           2434
@@ -5630,8 +5630,8 @@
       },
       {
         "description": "Loot the ballista parts, Zenyte shards, and Monkey tails. Banking back to Edgeville or Castle Wars is the standard cycle; the spirit tree network gives you a fast return for the next trip.",
-        "worldX": 2405,
-        "worldY": 3419,
+        "worldX": 2112,
+        "worldY": 5651,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
         "section": "Loot"
@@ -22227,7 +22227,7 @@
           "8848": "Kill Cyclopes while holding a Black defender in inventory to receive a Mithril defender.",
           "8849": "Kill Cyclopes while holding a Mithril defender in inventory to receive an Adamant defender.",
           "8850": "Kill Cyclopes while holding an Adamant defender in inventory to receive a Rune defender.",
-          "12954": "Kill Cyclopes while holding a Rune defender in inventory to receive the Dragon defender."
+          "12954": "Only the level 106 Cyclopes in the Warriors' Guild basement drop the Dragon defender (1/100). After obtaining the Rune defender, show it to Lorelai (one-time) to unlock basement access via the ladder west of the guild's back door, then kill the level 106 Cyclopes there."
         },
         "worldX": 2849,
         "worldY": 3543,
