@@ -9121,7 +9121,7 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
         "requiredItemIds": [
-          21167,
+          21166,
           11941,
           1704,
           385,
