@@ -30,11 +30,11 @@
 | 1 | Abyssal Sire | BOSSES | `2026-06-30` | - | - |
 | 2 | Alchemical Hydra | BOSSES | `2026-06-30` | - | - |
 | 3 | Amoxliatl | BOSSES | `2026-06-30` | - | - |
-| 4 | Araxxor | BOSSES | - | - | 1 (PR #1080) |
+| 4 | Araxxor | BOSSES | `2026-06-30` | - | -|
 | 5 | Barrows | BOSSES | `2026-06-30` | - | - |
 | 6 | Brutus | BOSSES | `2026-06-30` | - | - |
-| 7 | Bryophyta | BOSSES | - | - | 1 (PR #1081) |
-| 8 | Callisto | BOSSES | - | - | 1 (PR #1082) |
+| 7 | Bryophyta | BOSSES | `2026-06-30` | - | -|
+| 8 | Callisto | BOSSES | `2026-06-30` | - | -|
 | 9 | Cerberus | BOSSES | `2026-06-30` | - | - |
 | 10 | Chaos Elemental | BOSSES | `2026-06-30` | - | - |
 | 11 | Chaos Fanatic | BOSSES | `2026-06-30` | - | - |
@@ -42,21 +42,21 @@
 | 13 | Corporeal Beast | BOSSES | `2026-06-30` | - | - |
 | 14 | Corrupted Gauntlet | BOSSES | `2026-06-30` | - | - |
 | 15 | Crazy archaeologist | BOSSES | `2026-06-30` | - | - |
-| 16 | Dagannoth Prime | BOSSES | - | - | - |
-| 17 | Dagannoth Rex | BOSSES | - | - | - |
-| 18 | Dagannoth Supreme | BOSSES | - | - | - |
-| 19 | Deranged Archaeologist | BOSSES | - | - | - |
-| 20 | Doom of Mokhaiotl | BOSSES | - | - | - |
-| 21 | Duke Sucellus | BOSSES | - | - | - |
-| 22 | Duke Sucellus (Awakened) | BOSSES | - | - | - |
-| 23 | General Graardor | BOSSES | - | - | - |
-| 24 | Giant Mole | BOSSES | - | - | - |
-| 25 | Grotesque Guardians | BOSSES | - | - | - |
-| 26 | Hespori | BOSSES | - | - | - |
-| 27 | K'ril Tsutsaroth | BOSSES | - | - | - |
-| 28 | Kalphite Queen | BOSSES | - | - | - |
-| 29 | King Black Dragon | BOSSES | - | - | - |
-| 30 | Kraken | BOSSES | - | - | - |
+| 16 | Dagannoth Prime | BOSSES | - | - | 1 (PR #1084) |
+| 17 | Dagannoth Rex | BOSSES | - | - | 1 (PR #1085) |
+| 18 | Dagannoth Supreme | BOSSES | `2026-06-30` | - | - |
+| 19 | Deranged Archaeologist | BOSSES | `2026-06-30` | - | - |
+| 20 | Doom of Mokhaiotl | BOSSES | - | - | 1 (PR #1086) |
+| 21 | Duke Sucellus | BOSSES | `2026-06-30` | - | - |
+| 22 | Duke Sucellus (Awakened) | BOSSES | `2026-06-30` | - | - |
+| 23 | General Graardor | BOSSES | `2026-06-30` | - | - |
+| 24 | Giant Mole | BOSSES | `2026-06-30` | - | - |
+| 25 | Grotesque Guardians | BOSSES | `2026-06-30` | - | - |
+| 26 | Hespori | BOSSES | `2026-06-30` | - | - |
+| 27 | K'ril Tsutsaroth | BOSSES | `2026-06-30` | - | - |
+| 28 | Kalphite Queen | BOSSES | - | - | 1 (PR #1087) |
+| 29 | King Black Dragon | BOSSES | `2026-06-30` | - | - |
+| 30 | Kraken | BOSSES | `2026-06-30` | - | - |
 | 31 | Kree'arra | BOSSES | - | - | - |
 | 32 | Nex | BOSSES | - | - | - |
 | 33 | Obor | BOSSES | - | - | - |
@@ -476,3 +476,45 @@ requirement-only (no itemId/dropRate/coord/`loopBackToStep`/`loopCount`), one so
 
 **Next batch:** continue Phase 2 over the remaining BOSSES (Dagannoth trio → Zulrah), then SLAYER,
 then RAIDS, per the traffic-priority order.
+
+## 2026-06-30 — Accuracy-convergence v2, Phase-2 semantic pass: BOSSES batch 2 (15 sources)
+
+Cache `2026-06-25-rev239`. Batch: Dagannoth Prime/Rex/Supreme, Deranged Archaeologist, Doom of
+Mokhaiotl, Duke Sucellus (+Awakened), General Graardor, Giant Mole, Grotesque Guardians, Hespori,
+K'ril Tsutsaroth, Kalphite Queen, King Black Dragon, Kraken. Verifier returned **12 CLEAN, 3 with
+skeptic-survived findings**; cross-source consistency found a **4th** (Dagannoth Rex) the verifier
+missed. All independently re-confirmed by direct WebFetch before editing.
+
+- **Dagannoth Prime — PR #1084 (high):** `travelTip`/step-1 said "Lunar Isle tele → Rellekka". The
+  Lunar Isle Teleport lands on Lunar Isle, not Rellekka, and is not the Kings' route; the Lunar
+  option is **Waterbirth Teleport → Waterbirth Island** (already correct on Dagannoth Supreme).
+  Receipt: "Teleports you to Waterbirth Island" (Lunar spellbook).
+- **Dagannoth Rex — PR #1085 (high):** identical travel defect, **caught by cross-source consistency**
+  (verifier returned Rex CLEAN). Same fix. Surfaced because Prime/Rex/Supreme share the lair and
+  Supreme already had the correct form — a verifier blind spot worth noting for future batches.
+- **Doom of Mokhaiotl — PR #1086 (high ×2):** (a) gear inverted — entry said melee/"Scythe is BiS";
+  the fight is **ranged-primary** (twisted bow BiS given Magic 275; scorching bow budget), melee
+  only as a punish switch. recItems scythe+soulreaper → twisted-bow(20997)+crystal-halberd(23987),
+  `cache_ids` verified. (b) prayers are **projectile-colour** based (blue=mage, green=ranged,
+  red=melee), not phase-based; old text omitted ranged. Receipts: "twisted bow is the best weapon…
+  given Doom's Magic level of 275"; "a single projectile, with its colour… blue for magic, green
+  for ranged, and red for melee".
+- **Kalphite Queen — PR #1087 (high + low):** phase-2 "stay outside melee range to avoid her stomp"
+  — KQ has **no stomp/AoE** (only stab/range/magic); correct is **walk under her** as phase 2
+  begins. Also dropped the unnecessary forced Missiles→Magic prayer switch (she uses both styles in
+  both forms; either overhead, Magic slightly preferred). Receipts: "Players should walk under her
+  as soon as this phase begins…"; "it generally does not matter whether you pray Protect from Magic
+  or Protect from Missiles".
+
+**Straggler noted (out of batch):** **Basilisk Knight** (SLAYER) carries the same impossible
+"Lunar Isle tele → Rellekka" travelTip, but its correct route differs (Neitiznot / Jormungand's
+Prison, not Waterbirth). Left for the SLAYER batch to verify+fix per-source — not patched blind.
+
+**Stamps:** V1 = `2026-06-30` for the 3 now-merged batch-1 fixes (Araxxor, Bryophyta, Callisto) +
+the 11 batch-2 clean sources (clean list excludes Dagannoth Rex, now a fixed source). The 4 batch-2
+fixes (PRs #1084–#1087) stay V1 `-` until merged + re-verified. V2 (in-game) corpus-wide `-`
+(operator-gated). Fix PRs await operator merge (data PRs are operator-merged; the auto-mode
+classifier correctly blocked self-merge of this batch).
+
+**Running total V1-stamped:** 26 / 226 (12 batch-1 clean + 3 batch-1 fixes-merged + 11 batch-2
+clean; batch-2's 4 fixes pending merge).
