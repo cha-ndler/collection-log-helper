@@ -125,21 +125,21 @@
 | 96 | Smoke Devil | SLAYER | `2026-06-30` | - | - |
 | 97 | Spiritual Mage | SLAYER | `2026-06-30` | - | - |
 | 98 | Spiritual Mage (Zarosian) | SLAYER | `2026-06-30` | - | - |
-| 99 | Sulphur Nagua | SLAYER | - | - | 1 (PR #1124) |
+| 99 | Sulphur Nagua | SLAYER | `2026-06-30` | - | - |
 | 100 | Superior Slayer Monster | SLAYER | `2026-06-30` | - | - |
 | 101 | Terror Dog | SLAYER | `2026-06-30` | - | - |
 | 102 | Tormented Demons | SLAYER | `2026-06-30` | - | - |
 | 103 | Turoth | SLAYER | `2026-06-30` | - | - |
-| 104 | Vyrewatch Sentinel | SLAYER | - | - | 1 (PR #1125) |
-| 105 | Warped Creature | SLAYER | - | - | 1 (PR #1126) |
+| 104 | Vyrewatch Sentinel | SLAYER | `2026-06-30` | - | - |
+| 105 | Warped Creature | SLAYER | `2026-06-30` | - | - |
 | 106 | Wyrm | SLAYER | `2026-06-30` | - | - |
-| 107 | Chambers of Xeric | RAIDS | - | - | - |
-| 108 | Chambers of Xeric (Challenge Mode) | RAIDS | - | - | - |
-| 109 | Theatre of Blood | RAIDS | - | - | - |
-| 110 | Theatre of Blood (Hard Mode) | RAIDS | - | - | - |
-| 111 | Tombs of Amascut | RAIDS | - | - | - |
-| 112 | Tombs of Amascut (300 Invocation) | RAIDS | - | - | - |
-| 113 | Tombs of Amascut (500 Invocation) | RAIDS | - | - | - |
+| 107 | Chambers of Xeric | RAIDS | `2026-06-30` | - | - |
+| 108 | Chambers of Xeric (Challenge Mode) | RAIDS | `2026-06-30` | - | - |
+| 109 | Theatre of Blood | RAIDS | `2026-06-30` | - | - |
+| 110 | Theatre of Blood (Hard Mode) | RAIDS | `2026-06-30` | - | - |
+| 111 | Tombs of Amascut | RAIDS | `2026-06-30` | - | - |
+| 112 | Tombs of Amascut (300 Invocation) | RAIDS | `2026-06-30` | - | - |
+| 113 | Tombs of Amascut (500 Invocation) | RAIDS | - | - | 1 (PR #1128) |
 | 114 | Barbarian Assault | MINIGAMES | - | - | - |
 | 115 | Barracuda Trials | MINIGAMES | - | - | - |
 | 116 | Brimhaven Agility Arena | MINIGAMES | - | - | - |
@@ -743,3 +743,25 @@ Warped partial-quest) + 1 Tier-0 id (Custodian Stalker / Gryphon). Much cleaner 
 
 **Running total V1-stamped:** 103 / 225 (61 BOSSES + 42 SLAYER). Next category: RAIDS (7 sources, CoX →
 ToA), then MINIGAMES.
+
+## 2026-06-30 — Accuracy-convergence v2: RAIDS (7) — RAIDS category COMPLETE
+
+Cache `2026-06-25-rev239`. SLAYER batch-3 fixes all merged → SLAYER complete (45/45). RAIDS verifier
+returned **6 CLEAN, 1 finding** — the raids are very well-maintained (the points/completion/invocation
+reward model is correctly represented; access/travel/mechanics all checked out).
+- **Tombs of Amascut (500 Invocation) — PR #1128 (low):** the Masori crafting kit (27372) and Menaphite
+  ornament kit (27255) were modeled as 1/50 RNG, but they are deterministic CHALLENGE rewards (raid level
+  350+ / 425+, deathless — "Always" rarity). At 500 invocation both thresholds are met, so both are
+  guaranteed on a first deathless clear. Changed to `dropRate 1.0 + milestoneKills 1`, matching the
+  sibling Cursed phalanx / Remnants in the same entry. Scoped to the 500 tier only (300/normal entries,
+  where raid level can be below the thresholds, were not flagged). Receipts: "level 350+ ... 1500 points"
+  / "level 425 (or higher) with zero deaths", both "Always" rarity.
+
+**Stamps:** V1 = `2026-06-30` for the 3 now-merged SLAYER batch-3 fixes (Sulphur Nagua, Vyrewatch
+Sentinel, Warped Creature) + the 6 RAIDS clean sources. ToA-500 stays V1 `-` until #1128 merges.
+
+**RAIDS category status:** all 7 verified. **6/7 V1-stamped**; 7/7 once #1128 merges.
+**BOSSES + SLAYER + RAIDS complete** = 113 of 225 sources (~50%) — the three combat-PvM categories done.
+
+**Running total V1-stamped:** 112 / 225 (61 BOSSES + 45 SLAYER + 6 RAIDS). Next category: MINIGAMES (25
+sources, Barbarian Assault → Wintertodt), then OTHER (58), SKILLING (17), CLUES (12).
