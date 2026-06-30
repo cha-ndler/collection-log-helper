@@ -12888,6 +12888,10 @@
         {
           "skill": "SLAYER",
           "level": 87
+        },
+        {
+          "skill": "MAGIC",
+          "level": 50
         }
       ]
     },
