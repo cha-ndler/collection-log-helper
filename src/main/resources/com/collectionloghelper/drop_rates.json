@@ -24079,7 +24079,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Civitas illa Fortis (Varlamore). Requires an active gryphon Slayer task - the boss cannot be attacked off-task. Required: 51 Slayer and 'Troubled Tortugans' quest complete. Bring strong melee gear, a Tortugan shield (REQUIRED - heavy damage without it), equipped weight >= 40kg to counter the knockback special, prayer potions, food, Slayer helmet (i) on-task, and a Quetzal whistle for the return teleport",
+        "description": "Bank in Civitas illa Fortis (Varlamore). Requires an active gryphon Slayer task - the boss cannot be attacked off-task. Required: 51 Slayer and 'Troubled Tortugans' quest complete. Bring strong melee gear, a Tortugan shield (REQUIRED - heavy damage without it), equipped weight >= 40kg to counter the knockback special, prayer potions, food, Slayer helmet (i) on-task, and a way back to a fairy ring or charter ship for the return trip",
         "worldX": 1626,
         "worldY": 3093,
         "worldPlane": 0,
@@ -24094,7 +24094,7 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to The Great Conch and locate the Shellbane Gryphon Cave entrance in the centre of the island, north of fairy ring CJQ. Take fairy ring CJQ or a Quetzal whistle to The Great Conch, then head north to the cave entrance",
+        "description": "Travel to The Great Conch and locate the Shellbane Gryphon Cave entrance in the centre of the island, north of fairy ring CJQ. Take fairy ring CJQ (or a charter ship, or sail there) to The Great Conch, then head north to the cave entrance",
         "worldX": 3176,
         "worldY": 2477,
         "worldPlane": 0,
@@ -24132,7 +24132,7 @@
         ]
       },
       {
-        "description": "Pick up the Gryphon feathers (7-10 guaranteed per kill) and any rares, then exit the cave and teleport via Quetzal whistle to restock. Belle's folly (tarnished) is the main unique chase at 1/256",
+        "description": "Pick up the Gryphon feathers (7-10 guaranteed per kill) and any rares, then exit the cave and return via fairy ring CJQ or a charter ship to restock. Belle's folly (tarnished) is the main unique chase at 1/256",
         "worldX": 1626,
         "worldY": 3093,
         "worldPlane": 0,
