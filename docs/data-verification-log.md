@@ -67,43 +67,43 @@
 | 38 | Sarachnis | BOSSES | `2026-06-30` | - | - |
 | 39 | Scorpia | BOSSES | `2026-06-30` | - | - |
 | 40 | Scurrius | BOSSES | `2026-06-30` | - | - |
-| 41 | Shellbane Gryphon | BOSSES | - | - | 1 (PR #1097) |
+| 41 | Shellbane Gryphon | BOSSES | `2026-06-30` | - | - |
 | 42 | Skotizo | BOSSES | `2026-06-30` | - | - |
 | 43 | Sol Heredit | BOSSES | `2026-06-30` | - | - |
 | 44 | The Fight Caves | BOSSES | `2026-06-30` | - | - |
 | 45 | The Gauntlet | BOSSES | `2026-06-30` | - | - |
-| 46 | The Hueycoatl | BOSSES | - | - | 1 (PR #1106) |
-| 47 | The Inferno | BOSSES | - | - | 1 (PR #1098) |
+| 46 | The Hueycoatl | BOSSES | `2026-06-30` | - | - |
+| 47 | The Inferno | BOSSES | `2026-06-30` | - | - |
 | 48 | The Leviathan | BOSSES | `2026-06-30` | - | - |
 | 49 | The Leviathan (Awakened) | BOSSES | `2026-06-30` | - | - |
 | 50 | The Nightmare | BOSSES | `2026-06-30` | - | - |
-| 51 | The Whisperer | BOSSES | - | - | 1 (PR #1105) |
-| 52 | The Whisperer (Awakened) | BOSSES | - | - | 1 (PR #1103) |
+| 51 | The Whisperer | BOSSES | `2026-06-30` | - | - |
+| 52 | The Whisperer (Awakened) | BOSSES | `2026-06-30` | - | - |
 | 53 | Thermonuclear smoke devil | BOSSES | `2026-06-30` | - | - |
 | 54 | Vardorvis | BOSSES | `2026-06-30` | - | - |
 | 55 | Vardorvis (Awakened) | BOSSES | `2026-06-30` | - | - |
-| 56 | Venenatis | BOSSES | - | - | 1 (PR #1100) |
-| 57 | Vet'ion | BOSSES | - | - | 1 (PR #1099) |
-| 58 | Vorkath | BOSSES | - | - | 1 (PR #1101) |
-| 59 | Yama | BOSSES | - | - | 1 (PR #1104) |
+| 56 | Venenatis | BOSSES | `2026-06-30` | - | - |
+| 57 | Vet'ion | BOSSES | `2026-06-30` | - | - |
+| 58 | Vorkath | BOSSES | `2026-06-30` | - | - |
+| 59 | Yama | BOSSES | `2026-06-30` | - | - |
 | 60 | Zalcano | BOSSES | `2026-06-30` | - | - |
-| 61 | Zulrah | BOSSES | - | - | 1 (PR #1102) |
-| 62 | Aberrant Spectre | SLAYER | - | - | - |
-| 63 | Abyssal Demon | SLAYER | - | - | - |
-| 64 | Aquanite | SLAYER | - | - | - |
-| 65 | Araxyte | SLAYER | - | - | - |
-| 66 | Basilisk | SLAYER | - | - | - |
-| 67 | Basilisk Knight | SLAYER | - | - | - |
-| 68 | Bloodveld | SLAYER | - | - | - |
-| 69 | Brine Rat | SLAYER | - | - | - |
-| 70 | Cave Crawler | SLAYER | - | - | - |
-| 71 | Cave Horror | SLAYER | - | - | - |
-| 72 | Cave Kraken | SLAYER | - | - | - |
-| 73 | Cockatrice | SLAYER | - | - | - |
-| 74 | Crawling Hand | SLAYER | - | - | - |
-| 75 | Custodian Stalker | SLAYER | - | - | - |
-| 76 | Dark Beast | SLAYER | - | - | - |
-| 77 | Demonic gorillas | SLAYER | - | - | - |
+| 61 | Zulrah | BOSSES | `2026-06-30` | - | - |
+| 62 | Aberrant Spectre | SLAYER | `2026-06-30` | - | - |
+| 63 | Abyssal Demon | SLAYER | `2026-06-30` | - | - |
+| 64 | Aquanite | SLAYER | `2026-06-30` | - | - |
+| 65 | Araxyte | SLAYER | `2026-06-30` | - | - |
+| 66 | Basilisk | SLAYER | `2026-06-30` | - | - |
+| 67 | Basilisk Knight | SLAYER | - | - | 1 (PR #1112) |
+| 68 | Bloodveld | SLAYER | `2026-06-30` | - | - |
+| 69 | Brine Rat | SLAYER | `2026-06-30` | - | - |
+| 70 | Cave Crawler | SLAYER | `2026-06-30` | - | - |
+| 71 | Cave Horror | SLAYER | - | - | 1 (PR #1111) |
+| 72 | Cave Kraken | SLAYER | - | - | 1 (PR #1110) |
+| 73 | Cockatrice | SLAYER | `2026-06-30` | - | - |
+| 74 | Crawling Hand | SLAYER | - | - | 1 (PR #1108) |
+| 75 | Custodian Stalker | SLAYER | - | - | 1 (PR #1109) |
+| 76 | Dark Beast | SLAYER | `2026-06-30` | - | - |
+| 77 | Demonic gorillas | SLAYER | `2026-06-30` | - | - |
 | 78 | Drake | SLAYER | - | - | - |
 | 79 | Dust Devil | SLAYER | - | - | - |
 | 80 | Earthen Nagua | SLAYER | - | - | - |
@@ -618,3 +618,49 @@ Yama), and missing access gates (Araxxor, Venenatis, Vet'ion). Strong evidence t
 is worthwhile.
 
 **Running total V1-stamped:** 51 / 226.
+
+## 2026-06-30 — Accuracy-convergence v2: SLAYER batch 1 (16) + BOSSES category CLOSED + Tier-0 #96 backlog
+
+Cache `2026-06-25-rev239`. BOSSES batch-4 fixes all merged → **BOSSES category COMPLETE: 61/61 V1-stamped.**
+
+**SLAYER batch 1** (Aberrant Spectre → Demonic gorillas): verifier returned **12 CLEAN, 4 sources with
+findings** (5 findings); cross-source consistency added a **5th** (Basilisk Knight). All re-confirmed by
+direct WebFetch.
+- **Crawling Hand — PR #1108 (high):** combat step said "Slayer Tower basement"; Crawling Hands are on
+  the GROUND FLOOR (self-contradicted its own locationDescription). Receipt: "ground floor[UK]".
+- **Custodian Stalker — PR #1109 (high ×2 + Tier-0):** travel "run south" → NORTH-WEST from fairy ring
+  AIS (×3 fields); southern squeeze-through entrance needs 59 Agility (noted + northern BLS alternative);
+  AND the Tier-0 junk gear id 392 (noted Manta ray) → 391. Receipt: "AIS to Auburn Valley, then run
+  north-west"; "Southern entrance requiring 59 Agility".
+- **Cave Kraken — PR #1110 (low):** missing 50 Magic assignment requirement (had SLAYER 87 only).
+  Receipt: "require level 87 Slayer and 50 Magic".
+- **Cave Horror — PR #1111 (low):** witchwood icon does NOT convert the scream to a regular roll - it
+  makes the horror alternate kick/scream (partial); special always 10% base HP, fully negated only by
+  Protect from Melee.
+- **Basilisk Knight — PR #1112 (high, cross-source catch):** "Lunar Isle tele -> Rellekka" impossible
+  (Lunar teleport -> Lunar Isle). Island of Stone is reached by Haskell's boat from Rellekka. Verifier
+  returned it CLEAN — the **third** Lunar-teleport miss (after Dagannoth Rex), confirming the per-source
+  verifier blind spot for this travel class.
+
+**NEW Tier-0 backlog — item-id-plausibility (detector #96, enabled by the 2026-06-30 toolkit update).**
+The updated `run_corpus_detectors` now flags junk NOTED-item ids (cache name "null", `noteTemplate` 799)
+used in required/recommended loadouts that `cache_ids` passes. 10 flagged; **1 fixed** (Custodian Stalker
+392→391 in #1109). **9 remaining**, all on OTHER/already-stamped sources — a distinct deterministic sweep:
+- **Burning amulet** (junk 21167 = noted Burning amulet (5)) → **21166** on 5 Wilderness sources:
+  Chaos Elemental, Scorpia, Chaos Fanatic, Crazy archaeologist, Revenants. CLEAR fix (it's the required
+  wildy travel item the guidance already names). Systematic copy-paste error.
+- **Magic logs** (junk 1514 → 1513) on Revenants recommendedItemIds ×2 — nonsense as gear; wrong id,
+  intended item unknown (likely should be removed or corrected). NEEDS intent.
+- **Runite bar** (junk 2364 → 2363) on Gryphon recommendedItemIds — nonsense as gear; NEEDS intent.
+- **23713** (noted; unnoted 23712 has no RuneLite constant) on Deranged Archaeologist requiredItemIds —
+  NEEDS cache resolution + intent.
+  *Held for operator decision (one-PR-per-source vs bundled; and intent investigation for the 3 unclear).*
+
+**Still deferred:** Yama Oathplate shards drop rate (1/15 vs 1/17.07 unresolved — needs one precise
+source). Repo-hygiene: the 17 MB bundle blob still in history (filter-repo purge is an operator call).
+
+**Stamps:** V1 = `2026-06-30` for the 10 now-merged BOSSES batch-4 fixes + the 11 SLAYER batch-1 clean
+sources. The 5 SLAYER fixes (PRs #1108–#1112) stay V1 `-` until merged + re-verified.
+
+**Running total V1-stamped:** 72 / 226 (61 BOSSES complete + 11 SLAYER clean; SLAYER's 5 fixes pending
+merge → 77). SLAYER progress: 16/106 verified.
