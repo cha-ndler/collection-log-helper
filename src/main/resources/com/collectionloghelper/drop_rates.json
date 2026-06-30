@@ -18517,35 +18517,35 @@
       {
         "itemId": 32087,
         "name": "Barracuda paint",
-        "dropRate": 0.01,
+        "dropRate": 0.004167,
         "isPet": false,
         "wikiPage": "Barracuda_paint"
       },
       {
         "itemId": 32090,
         "name": "Shark paint",
-        "dropRate": 0.1,
+        "dropRate": 0.027778,
         "isPet": false,
         "wikiPage": "Shark_paint"
       },
       {
         "itemId": 32093,
         "name": "Inky paint",
-        "dropRate": 0.01,
+        "dropRate": 0.000667,
         "isPet": false,
         "wikiPage": "Inky_paint"
       },
       {
         "itemId": 32096,
         "name": "Angler's paint",
-        "dropRate": 0.005,
+        "dropRate": 0.0000617,
         "isPet": false,
         "wikiPage": "Angler%27s_paint"
       },
       {
         "itemId": 32099,
         "name": "Salvor's paint",
-        "dropRate": 0.005,
+        "dropRate": 0.0000417,
         "isPet": false,
         "wikiPage": "Salvor%27s_paint"
       },
@@ -18618,7 +18618,7 @@
         "section": "Travel"
       },
       {
-        "description": "Board your boat and earn boat paints through Sailing activities: port tasks (Shark paint, common), Barracuda Trials Marlin rank (Barracuda paint), Martial salvage (Salvor's paint, rare), kraken variant drops (Inky paint, rare). Deity paints require fully charting the corresponding ocean and completing an NPC hand-in. Apply paints at the Shipyard boat schematics board (20 Construction required).",
+        "description": "Board your boat and earn boat paints through Sailing activities: port tasks (Shark paint, 1/36), Barracuda Trials Marlin rank (Barracuda paint, 1/240-1/400), sorting martial salvage (Salvor's paint, 1/24,000), kraken variant drops (Inky paint, 1/1,500-1/3,000), and deep-sea or shoal trawling while fishing (Angler's paint, ~1/16,200). Sandy paint is a guaranteed drop from a hermit crab when you perform the crab dance emote before the killing blow. Deity paints (Armadylean, Zamorakian, Guthixian, Saradominist) come from an NPC hand-in after fully charting the corresponding ocean. Merchant's paint is obtained by giving all 5 tradeable paints to Trader Stan. Apply paints at the Shipyard boat schematics board (20 Construction required).",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
