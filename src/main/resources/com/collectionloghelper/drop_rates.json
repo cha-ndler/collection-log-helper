@@ -23468,7 +23468,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Yama. Bring Saradomin brews, super restores, prayer pots, and ranged-tank gear (Karil's top + Masori, Bowfa or Zaryte crossbow). Yama is melee-and-magic style hybrid; Protect from Magic is the primary prayer. Bring a chasm teleport scroll for repeat trips.",
+        "description": "Bank for Yama. Bring Saradomin brews, super restores, prayer pots, and ranged-tank gear (Karil's top + Masori, Bowfa or Zaryte crossbow). Yama uses all three styles: flick Protect from Missiles and Protect from Magic to match his ranged and magic attacks - his melee pierces prayer (a 3-tile hit), so keep your distance. Bring a chasm teleport scroll for repeat trips.",
         "worldX": 1641,
         "worldY": 3673,
         "worldPlane": 0,
@@ -23501,7 +23501,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Yama. Protect from Magic, dodge the floor-fire patches and the demonic tallow slams, kill the spawned imps fast. On the enrage phase Yama leaps to a new chasm tile - reposition immediately or eat through the unprotected hit. Scythe of Vitur or Soulreaper axe for melee DPS; Bowfa or Tbow for ranged tank role.",
+        "description": "Kill Yama. Flick between Protect from Missiles and Protect from Magic to match his ranged and magic attacks (in phase 3 he alternates them every attack); his melee hits through prayer in a 3-tile radius, so keep your distance. Dodge the floor-fire patches and shadow waves, and destroy the void flares before they fully charge - they damage you and heal Yama if left alive. On the enrage phase Yama leaps to a new chasm tile - reposition immediately or eat through the unprotected hit. Scythe of Vitur or Soulreaper axe for melee DPS; Bowfa or Tbow for ranged tank role.",
         "worldX": 1503,
         "worldY": 10091,
         "worldPlane": 0,
