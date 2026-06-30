@@ -6625,7 +6625,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
+        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P2",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -6640,7 +6640,7 @@
                 22400
               ]
             },
-            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
+            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P2",
             "travelTip": "Drakan's medallion -> Ver Sinhaza"
           }
         ],
@@ -6663,7 +6663,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat Verzik Vitur. P1: pray Protect from Magic and dagger the Athanatos. P2: dodge the purple projectile, switch prayers to match the Nylocas colour. P3: Tbow with dragon arrows, pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
+        "description": "Defeat Verzik Vitur. P1: pray Protect from Magic, shelter behind the pillars and use the Dawnbringer's special attack to damage her. P2: dodge the purple projectile and stop the Nylocas Athanatos it spawns from healing her by hitting it once with a poisoned weapon (dragon dagger), and switch prayers to match the summoned Nylocas colour. P3: Tbow with dragon arrows, pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -16166,7 +16166,7 @@
         "completionDistance": 20,
         "travelTip": "Minigame tele -> Fishing Trawler, or fairy ring DJP -> run south",
         "requiredItemIds": [
-          1925,
+          583,
           954
         ],
         "section": "Travel"
@@ -16193,7 +16193,7 @@
         "worldPlane": 1,
         "completionCondition": "MANUAL",
         "recommendedItemIds": [
-          1925,
+          583,
           954
         ],
         "section": "Activity"
@@ -18509,35 +18509,35 @@
       {
         "itemId": 32087,
         "name": "Barracuda paint",
-        "dropRate": 0.01,
+        "dropRate": 0.004167,
         "isPet": false,
         "wikiPage": "Barracuda_paint"
       },
       {
         "itemId": 32090,
         "name": "Shark paint",
-        "dropRate": 0.1,
+        "dropRate": 0.027778,
         "isPet": false,
         "wikiPage": "Shark_paint"
       },
       {
         "itemId": 32093,
         "name": "Inky paint",
-        "dropRate": 0.01,
+        "dropRate": 0.000667,
         "isPet": false,
         "wikiPage": "Inky_paint"
       },
       {
         "itemId": 32096,
         "name": "Angler's paint",
-        "dropRate": 0.005,
+        "dropRate": 0.0000617,
         "isPet": false,
         "wikiPage": "Angler%27s_paint"
       },
       {
         "itemId": 32099,
         "name": "Salvor's paint",
-        "dropRate": 0.005,
+        "dropRate": 0.0000417,
         "isPet": false,
         "wikiPage": "Salvor%27s_paint"
       },
@@ -18610,7 +18610,7 @@
         "section": "Travel"
       },
       {
-        "description": "Board your boat and earn boat paints through Sailing activities: port tasks (Shark paint, common), Barracuda Trials Marlin rank (Barracuda paint), Martial salvage (Salvor's paint, rare), kraken variant drops (Inky paint, rare). Deity paints require fully charting the corresponding ocean and completing an NPC hand-in. Apply paints at the Shipyard boat schematics board (20 Construction required).",
+        "description": "Board your boat and earn boat paints through Sailing activities: port tasks (Shark paint, 1/36), Barracuda Trials Marlin rank (Barracuda paint, 1/240-1/400), sorting martial salvage (Salvor's paint, 1/24,000), kraken variant drops (Inky paint, 1/1,500-1/3,000), and deep-sea or shoal trawling while fishing (Angler's paint, ~1/16,200). Sandy paint is a guaranteed drop from a hermit crab when you perform the crab dance emote before the killing blow. Deity paints (Armadylean, Zamorakian, Guthixian, Saradominist) come from an NPC hand-in after fully charting the corresponding ocean. Merchant's paint is obtained by giving all 5 tradeable paints to Trader Stan. Apply paints at the Shipyard boat schematics board (20 Construction required).",
         "worldX": 1824,
         "worldY": 3691,
         "worldPlane": 0,
@@ -22219,7 +22219,7 @@
           "8848": "Kill Cyclopes while holding a Black defender in inventory to receive a Mithril defender.",
           "8849": "Kill Cyclopes while holding a Mithril defender in inventory to receive an Adamant defender.",
           "8850": "Kill Cyclopes while holding an Adamant defender in inventory to receive a Rune defender.",
-          "12954": "Kill Cyclopes while holding a Rune defender in inventory to receive the Dragon defender."
+          "12954": "Only the level 106 Cyclopes in the Warriors' Guild basement drop the Dragon defender (1/100). After obtaining the Rune defender, show it to Lorelai (one-time) to unlock basement access via the ladder west of the guild's back door, then kill the level 106 Cyclopes there."
         },
         "worldX": 2849,
         "worldY": 3543,
@@ -23847,12 +23847,12 @@
       }
     ],
     "locationDescription": "Ruins of Tapoyauik, Varlamore",
-    "travelTip": "Quetzal whistle -> Tapoyauik, or Civitas illa Fortis Teleport (standard spell)",
+    "travelTip": "Pendant of ates -> Twilight Temple (then lift down), or Civitas illa Fortis Teleport (standard spell) and run south",
     "npcId": 13685,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Amoxliatl. Bring a quetzal whistle, prayer pots, sharks, and your best melee setup (Scythe of Vitur or Soulreaper axe). Amoxliatl is a Slayer monster (48 Slayer); also stock magic for the secondary kill style and a Pendant of ates for the teleport once you have one.",
+        "description": "Bank for Amoxliatl. Bring a quetzal whistle, prayer pots, sharks, and your best melee setup (Scythe of Vitur or Soulreaper axe). Amoxliatl is a Slayer monster (48 Slayer) killed with melee only - the unstable ice blocks it spawns can only be damaged by melee, so there is no secondary kill style. Bring a Pendant of ates for the teleport once you have one.",
         "worldX": 1593,
         "worldY": 3091,
         "worldPlane": 0,
@@ -23866,17 +23866,17 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Ruins of Tapoyauik, Varlamore. Use a quetzal whistle to fly directly to the ruins, or Civitas illa Fortis Teleport (standard spell) and run south. Pendant of ates teleport (uncharged drops from Amoxliatl) skips the run entirely once charged",
+        "description": "Travel to the Ruins of Tapoyauik, Varlamore. Use a Pendant of ates to teleport to the Twilight Temple next to the lift (once you have one), then take the lift down into the dungeon; otherwise use Civitas illa Fortis Teleport (standard spell) and run south. A quetzal whistle does not fly directly to the ruins. Pendant of ates teleport (uncharged drops from Amoxliatl) skips the run entirely once charged",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Quetzal whistle -> Tapoyauik, or Pendant of ates once charged",
+        "travelTip": "Pendant of ates -> Twilight Temple, then lift down to the dungeon",
         "section": "Travel"
       },
       {
-        "description": "Kill Amoxliatl. Protect from Magic for the freeze-and-bind ice projectile. Stand adjacent for melee uptime; step out of the ice-crystal AoE tiles when they spawn. Frozen tears drop on the floor mid-fight - pick them up before the next attack as they despawn fast. Standard meta: Scythe of Vitur with Slayer helm + Avernic defender + Inquisitor's armour.",
+        "description": "Kill Amoxliatl. Protect from Magic for the freeze-and-bind ice projectile. Stand adjacent for melee uptime. When 'Amoxliatl forms some unstable ice blocks around you' appears, 1-4 unstable ice blocks spawn nearby - destroy them with melee (only melee damages them) within 15 ticks (~9s), or each remaining block shatters into icy pools and heals the boss 16-25. Frozen tears drop on the floor mid-fight - pick them up before the next attack as they despawn fast. Standard meta: Scythe of Vitur with Slayer helm + Avernic defender + Inquisitor's armour.",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
