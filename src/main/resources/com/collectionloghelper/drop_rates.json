@@ -32430,7 +32430,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Darkmeyer via Drakan's medallion (Sins of the Father required). Equip vyre noble clothing (top, legs, shoes) before entering - without it Vyrewatch Sentinels will attack rather than let you pickpocket them.",
+        "description": "Travel to Darkmeyer via Drakan's medallion (Sins of the Father required). Equip the full Vyrewatch outfit (top, legs, shoes - the 'vyre noble' disguise) before entering - without it the Vyres turn hostile instead of letting you pickpocket them.",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
@@ -32438,14 +32438,14 @@
         "completionDistance": 20,
         "travelTip": "Drakan's medallion -> Darkmeyer; or Kharyrll teleport -> Canifis then travel south-east",
         "requiredItemIds": [
-          24774,
-          24775,
-          24776
+          9634,
+          9636,
+          9638
         ],
         "section": "Travel"
       },
       {
-        "description": "Pickpocket Vyrewatch Sentinels (82 Thieving required). Wear vyre noble robes to avoid aggression. Blood shards drop at approximately 1/5000 per pickpocket. Rogue's outfit doubles pickpocket loot. Use Dodgy necklace to avoid stun/damage on failure.",
+        "description": "Pickpocket Vyres in Darkmeyer (82 Thieving required). Wear the full Vyrewatch outfit to blend in. Blood shard drops at approximately 1/5000 per pickpocket. Rogue's outfit doubles pickpocket loot. Use a Dodgy necklace to avoid stun/damage on failure.",
         "worldX": 3631,
         "worldY": 3325,
         "worldPlane": 0,
