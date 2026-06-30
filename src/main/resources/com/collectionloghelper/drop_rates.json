@@ -1506,7 +1506,7 @@
         "completionCondition": "MANUAL"
       },
       {
-        "description": "Kill the Kalphite Queen - Phase 1 (510 HP halved at 255). She rotates Magic and Ranged hits that ALWAYS land but can roll 0 damage; her Ranged attack drains 1 prayer point on a non-zero hit. Use Protect from Missiles (Ranged hits are more frequent and drain prayer) and tank her Magic. Fight her in melee range with crush gear (Bandos godsword spec, abyssal bludgeon, or Osmumten's fang) - standing in melee triggers her to use her melee attack 50% of the time, lowering her DPS. Bring an antidote++ or serpentine helm against the Kalphite Guardian poison on the way in",
+        "description": "Kill the Kalphite Queen - Phase 1 (510 HP halved at 255). She rotates Magic and Ranged hits that ALWAYS land but can roll 0 damage; her Ranged attack drains 1 prayer point on a non-zero hit. Keep one overhead up - it does not matter much whether you pray Protect from Missiles or Protect from Magic since she attacks with both (Protect from Magic is slightly preferred in case another player crashes you). Fight her in melee range with crush gear (Bandos godsword spec, abyssal bludgeon, or Osmumten's fang) - standing in melee triggers her to use her melee attack 50% of the time, lowering her DPS. Bring an antidote++ or serpentine helm against the Kalphite Guardian poison on the way in",
         "worldX": 3471,
         "worldY": 9506,
         "worldPlane": 0,
@@ -1517,7 +1517,7 @@
         "completionNpcId": 965
       },
       {
-        "description": "Phase 2: when KQ flashes/shape-shifts at 50% HP she gains a wing-like form and her attack styles swap priorities - switch to Protect from Magic and use Ranged (twisted bow, blowpipe, or zaryte crossbow with Armadyl/Crystal armour). Stay outside melee range during phase 2 to avoid her stomp. Bring a few extra Saradomin brews if soloing without prayer flicks; the kill is over in 30-60 seconds with t-bow",
+        "description": "Phase 2: when KQ flashes/shape-shifts at 50% HP she gains a wing-like form - keep your overhead up (no forced prayer switch is needed) and continue with Ranged (twisted bow, blowpipe, or zaryte crossbow with Armadyl/Crystal armour). Walk under her (stand adjacent) as soon as phase 2 begins - she has no stomp or AoE attack, and standing away just gives her a free extra attack. Bring a few extra Saradomin brews if soloing without prayer flicks; the kill is over in 30-60 seconds with t-bow",
         "worldX": 3471,
         "worldY": 9506,
         "worldPlane": 0,
