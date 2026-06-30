@@ -23593,7 +23593,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for a Mokhaiotl delve. Bring a Mokhaiotl waystone, full Saradomin brews, super restores, prayer pots, super combat potion, and your best melee setup (Scythe is BiS for the boss but Soulreaper axe works). Bring chinchompas or magic for the early-depth swarm phases.",
+        "description": "Bank for a Mokhaiotl delve. Bring a Mokhaiotl waystone, full Saradomin brews, super restores, prayer pots, and ranging potions. Ranged is the primary style: a twisted bow is BiS given Doom's very high Magic level (275), and the scorching bow is the budget alternative. Bring a crystal halberd (or other melee weapon) only as a switch for the melee-punish mechanic at deeper delves - melee is unfriendly as a main weapon.",
         "worldX": 1593,
         "worldY": 3091,
         "worldPlane": 0,
@@ -23627,7 +23627,7 @@
         "section": "Combat"
       },
       {
-        "description": "Fight through the depth floors. Each depth has a different mechanic rotation (slam, projectile, shadow tiles). Protect from Magic for shadow phases, Protect from Melee when Doom closes the gap. Watch for the shadow-clone phase from depth 5+ and pre-pot before each floor's boss segment. Doom of Mokhaiotl is the depth-end fight - kill it to claim the delve reward.",
+        "description": "Fight through the depth floors. The Doom's standard attack is a single projectile whose colour tells you which prayer to use: blue = Protect from Magic, green = Protect from Missiles, red = Protect from Melee (red only appears from depth 2+). Damage is calculated on impact, so you can flick the correct prayer after the projectile launches. Watch for the shadow-clone phase from depth 5+ and pre-pot before each floor's boss segment. Doom of Mokhaiotl is the depth-end fight - kill it to claim the delve reward.",
         "worldX": 1311,
         "worldY": 9520,
         "worldPlane": 0,
@@ -23637,8 +23637,8 @@
         "completionNpcId": 14707,
         "section": "Combat",
         "recommendedItemIds": [
-          22325,
-          27277,
+          20997,
+          23987,
           6685,
           3024,
           2434
