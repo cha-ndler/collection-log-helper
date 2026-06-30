@@ -24339,7 +24339,7 @@
         "section": "Travel"
       },
       {
-        "description": "Clear waves 1-62. Use Protect from Magic against Tz-Kih (level 22) and Yt-MejKot (180); Protect from Missiles against Tz-Kek (45) and Tok-Xil (90); Protect from Melee against Yt-HurKot (108) when healing Jad. Always pillar manip the larger spawns - stand so the pillar is between you and the new wave to control aggro stacking. Drop melee minions (Yt-MejKot, Ket-Zek) by tanking on the south pillar.",
+        "description": "Clear waves 1-62. Pray by each monster's attack style: Protect from Melee against Tz-Kih (level 22, drains prayer), Tz-Kek (45), Yt-MejKot (180), and the Yt-HurKot (108) healers; Protect from Missiles against Tok-Xil (90); Protect from Magic against Ket-Zek (360). Always pillar manip the larger spawns - stand so the pillar is between you and the new wave to control aggro stacking. Tank the melee minions (Tz-Kih, Yt-MejKot) on the south pillar, and keep Ket-Zek (magic) and Tok-Xil (ranged) at a distance.",
         "worldX": 2401,
         "worldY": 5093,
         "worldPlane": 0,
