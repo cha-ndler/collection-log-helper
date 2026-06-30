@@ -9169,6 +9169,12 @@
     "requirements": {
       "quests": [
         "SINS_OF_THE_FATHER"
+      ],
+      "skills": [
+        {
+          "skill": "SLAYER",
+          "level": 92
+        }
       ]
     },
     "items": [
@@ -9254,7 +9260,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Araxxor. Bring Saradomin brews, super restores, and combat potions. Use melee (scythe, Inquisitor's mace, or Soulreaper axe) or ranged; bring a halberd for mirrorback araxytes. Saradomin brews and super restores for sustain.",
+        "description": "Bank for Araxxor. Requires 92 Slayer, and he can only be killed while on a spider or araxyte Slayer task (Konar can also assign Araxxor). Bring Saradomin brews, super restores, and combat potions. Use melee (scythe, Inquisitor's mace, or Soulreaper axe) or ranged; bring a halberd for mirrorback araxytes. Saradomin brews and super restores for sustain.",
         "worldX": 3087,
         "worldY": 3493,
         "worldPlane": 0,
