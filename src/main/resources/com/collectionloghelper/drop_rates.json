@@ -909,18 +909,18 @@
       }
     ],
     "locationDescription": "Rellekka docks (boat to island)",
-    "travelTip": "Lunar Isle teleport -> Rellekka, or Fremennik sea boots -> Rellekka",
+    "travelTip": "Fremennik sea boots -> Rellekka, or Enchanted lyre / Rellekka house portal",
     "npcId": 8061,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Rellekka docks, sail to Ungael Island via Torfinn. Use lunar isle teleport or Fremennik sea boots",
+        "description": "Travel to Rellekka docks, sail to Ungael Island via Torfinn. Use Fremennik sea boots (or an Enchanted lyre / Rellekka house portal) to reach Rellekka",
         "worldX": 2641,
         "worldY": 3697,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Lunar Isle teleport + talk to banker, Rellekka house portal, or Fremennik sea boots",
+        "travelTip": "Fremennik sea boots, Rellekka house portal, or Enchanted lyre",
         "conditionalAlternatives": [
           {
             "requirements": {
