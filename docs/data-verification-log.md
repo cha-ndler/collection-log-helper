@@ -93,34 +93,34 @@
 | 64 | Aquanite | SLAYER | `2026-06-30` | - | - |
 | 65 | Araxyte | SLAYER | `2026-06-30` | - | - |
 | 66 | Basilisk | SLAYER | `2026-06-30` | - | - |
-| 67 | Basilisk Knight | SLAYER | - | - | 1 (PR #1112) |
+| 67 | Basilisk Knight | SLAYER | `2026-06-30` | - | - |
 | 68 | Bloodveld | SLAYER | `2026-06-30` | - | - |
 | 69 | Brine Rat | SLAYER | `2026-06-30` | - | - |
 | 70 | Cave Crawler | SLAYER | `2026-06-30` | - | - |
-| 71 | Cave Horror | SLAYER | - | - | 1 (PR #1111) |
-| 72 | Cave Kraken | SLAYER | - | - | 1 (PR #1110) |
+| 71 | Cave Horror | SLAYER | `2026-06-30` | - | - |
+| 72 | Cave Kraken | SLAYER | `2026-06-30` | - | - |
 | 73 | Cockatrice | SLAYER | `2026-06-30` | - | - |
-| 74 | Crawling Hand | SLAYER | - | - | 1 (PR #1108) |
-| 75 | Custodian Stalker | SLAYER | - | - | 1 (PR #1109) |
+| 74 | Crawling Hand | SLAYER | `2026-06-30` | - | - |
+| 75 | Custodian Stalker | SLAYER | `2026-06-30` | - | - |
 | 76 | Dark Beast | SLAYER | `2026-06-30` | - | - |
 | 77 | Demonic gorillas | SLAYER | `2026-06-30` | - | - |
-| 78 | Drake | SLAYER | - | - | - |
-| 79 | Dust Devil | SLAYER | - | - | - |
-| 80 | Earthen Nagua | SLAYER | - | - | - |
-| 81 | Fossil Island Wyvern | SLAYER | - | - | - |
-| 82 | Frost Nagua | SLAYER | - | - | - |
-| 83 | Gargoyle | SLAYER | - | - | - |
-| 84 | Gryphon | SLAYER | - | - | - |
-| 85 | Hydra | SLAYER | - | - | - |
-| 86 | Infernal Mage | SLAYER | - | - | - |
-| 87 | Jelly | SLAYER | - | - | - |
-| 88 | Kurask | SLAYER | - | - | - |
+| 78 | Drake | SLAYER | `2026-06-30` | - | - |
+| 79 | Dust Devil | SLAYER | `2026-06-30` | - | - |
+| 80 | Earthen Nagua | SLAYER | - | - | 1 (PR #1114) |
+| 81 | Fossil Island Wyvern | SLAYER | `2026-06-30` | - | - |
+| 82 | Frost Nagua | SLAYER | `2026-06-30` | - | - |
+| 83 | Gargoyle | SLAYER | `2026-06-30` | - | - |
+| 84 | Gryphon | SLAYER | - | - | Tier-0 #96 (junk id 2364) |
+| 85 | Hydra | SLAYER | `2026-06-30` | - | - |
+| 86 | Infernal Mage | SLAYER | `2026-06-30` | - | - |
+| 87 | Jelly | SLAYER | `2026-06-30` | - | - |
+| 88 | Kurask | SLAYER | `2026-06-30` | - | - |
 | 89 | Lava Strykewyrm | SLAYER | - | - | - |
-| 90 | Lizardman shaman | SLAYER | - | - | - |
-| 91 | Mogre | SLAYER | - | - | - |
-| 92 | Nechryael | SLAYER | - | - | - |
-| 93 | Pyrefiend | SLAYER | - | - | - |
-| 94 | Rockslug | SLAYER | - | - | - |
+| 90 | Lizardman shaman | SLAYER | `2026-06-30` | - | - |
+| 91 | Mogre | SLAYER | `2026-06-30` | - | - |
+| 92 | Nechryael | SLAYER | `2026-06-30` | - | - |
+| 93 | Pyrefiend | SLAYER | `2026-06-30` | - | - |
+| 94 | Rockslug | SLAYER | `2026-06-30` | - | - |
 | 95 | Skeletal Wyvern | SLAYER | - | - | - |
 | 96 | Smoke Devil | SLAYER | - | - | - |
 | 97 | Spiritual Mage | SLAYER | - | - | - |
@@ -664,3 +664,28 @@ sources. The 5 SLAYER fixes (PRs #1108–#1112) stay V1 `-` until merged + re-ve
 
 **Running total V1-stamped:** 72 / 226 (61 BOSSES complete + 11 SLAYER clean; SLAYER's 5 fixes pending
 merge → 77). SLAYER progress: 16/106 verified.
+
+## 2026-06-30 — Accuracy-convergence v2: SLAYER batch 2 (Drake → Rockslug, 16)
+
+Cache `2026-06-25-rev239`. SLAYER batch-1 fixes all merged. Batch 2 verifier returned **15 CLEAN, 1
+finding** — the cleanest batch yet (the Slayer mid-tier is well-maintained).
+- **Earthen Nagua — PR #1114 (high):** missing access gate — the Tonali Cavern is only reachable after
+  The Final Dawn quest. Added `requirements.quests THE_FINAL_DAWN` (verified present in the RuneLite
+  `Quest` enum the project builds against) + a travel-step prose note. Receipt: "found in the Tonali
+  Cavern after completion of the The Final Dawn quest".
+
+**Gryphon — semantic CLEAN but held from V1 (open Tier-0 #96):** Gryphon's recommendedItemIds carries
+junk id 2364 (noted Runite bar, null cache name). A source isn't V1-validated until it clears all tiers,
+so Gryphon stays V1 `-` with an open Tier-0 finding until the item-id sweep resolves it (the unnoted
+2363 = Runite bar is nonsense as gear, so it needs intent — likely removal or a corrected food/gear id).
+
+**Stamps:** V1 = `2026-06-30` for the 5 now-merged SLAYER batch-1 fixes + the 14 batch-2 clean sources
+(excludes Gryphon [open Tier-0] and Earthen Nagua [fixed, pending merge]).
+
+**Running total V1-stamped:** 91 / 226 (61 BOSSES + 16 SLAYER b1 + 14 SLAYER b2-clean). SLAYER progress:
+32/106 verified (Earthen Nagua → 92 once #1114 merges; Gryphon pending its Tier-0 id).
+
+**Open Tier-0 #96 backlog (unchanged, awaiting operator):** burning amulet 21167→21166 (×5 Wilderness,
+clear); magic logs 1514→1513 (Revenants ×2), runite bar 2364→2363 (Gryphon), 23713 (Deranged
+Archaeologist) — the latter 3 need intent. Yama Oathplate-shards rate + bundle-blob history purge also
+still pending operator calls.
