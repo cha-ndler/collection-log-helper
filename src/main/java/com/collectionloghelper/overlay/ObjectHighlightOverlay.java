@@ -43,6 +43,7 @@ import net.runelite.client.callback.ClientThread;
 import net.runelite.api.DecorativeObject;
 import net.runelite.api.GameObject;
 import net.runelite.api.GroundObject;
+import net.runelite.api.Player;
 import net.runelite.api.Point;
 import net.runelite.api.Scene;
 import net.runelite.api.Tile;
@@ -301,11 +302,24 @@ public class ObjectHighlightOverlay extends Overlay
 		final List<TileObject> objects = this.matchedObjects;
 		final String action = this.objectInteractAction;
 		final String tipText = this.tooltipText;
+		final List<WorldPoint> exactTiles = this.filterTiles;
+		final int maxDist = this.filterMaxDistance;
 
 		if (objects.isEmpty() || !config.showOverlays())
 		{
 			return null;
 		}
+
+		// Nearest-only highlight: when the step pinned no explicit tiles
+		// (objectFilterTiles) and no distance window (objectMaxDistance), a target
+		// objectId can match every scene instance (e.g. 70+ funeral pyres / braziers
+		// on a gather-loop step). Highlight only the instance nearest the player so
+		// guidance points at the next actionable object rather than cluttering the
+		// scene. Steps that pin tiles or a distance window keep their full set.
+		final boolean nearestOnly = (exactTiles == null || exactTiles.isEmpty())
+			&& maxDist <= 0
+			&& objects.size() > 1;
+		final TileObject nearest = nearestOnly ? nearestObject(objects, playerLocalLocation()) : null;
 
 		Color overlayColor = config.overlayColor();
 		final ObjectHighlightStyle style = config.objectHighlightStyle();
@@ -315,6 +329,10 @@ public class ObjectHighlightOverlay extends Overlay
 
 		for (TileObject obj : objects)
 		{
+			if (nearestOnly && obj != nearest)
+			{
+				continue;
+			}
 			LocalPoint localPoint = obj.getLocalLocation();
 			if (style == ObjectHighlightStyle.OUTLINE_GLOW)
 			{
@@ -338,6 +356,49 @@ public class ObjectHighlightOverlay extends Overlay
 		}
 
 		return null;
+	}
+
+	private LocalPoint playerLocalLocation()
+	{
+		Player local = client.getLocalPlayer();
+		return local != null ? local.getLocalLocation() : null;
+	}
+
+	/**
+	 * Returns the object nearest the player by squared local distance. Allocation-free
+	 * (single pass, no comparator) so it is safe on the render path. Falls back to the
+	 * first object when the player location is unavailable, so an unfiltered single-
+	 * instance highlight still draws.
+	 */
+	static TileObject nearestObject(List<TileObject> objects, LocalPoint player)
+	{
+		if (objects == null || objects.isEmpty())
+		{
+			return null;
+		}
+		if (player == null)
+		{
+			return objects.get(0);
+		}
+		TileObject best = null;
+		long bestDistSq = Long.MAX_VALUE;
+		for (TileObject obj : objects)
+		{
+			LocalPoint lp = obj.getLocalLocation();
+			if (lp == null)
+			{
+				continue;
+			}
+			long dx = (long) lp.getX() - player.getX();
+			long dy = (long) lp.getY() - player.getY();
+			long distSq = dx * dx + dy * dy;
+			if (distSq < bestDistSq)
+			{
+				bestDistSq = distSq;
+				best = obj;
+			}
+		}
+		return best != null ? best : objects.get(0);
 	}
 
 	/**
