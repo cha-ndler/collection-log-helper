@@ -27,3 +27,6 @@ __pycache__/
 # Generated audit reports (written by scripts/audit_drop_rates.py)
 audit-report-*.json
 audit-report-*.md
+
+# drift_check.mjs local state cache
+.drift-cache/
