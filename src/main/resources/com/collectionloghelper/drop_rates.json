@@ -2789,7 +2789,7 @@
         "section": "Combat"
       },
       {
-        "description": "Kill The Whisperer (Awakened). Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys. Use the blackstone fragment to hop into the Shadow Realm and break the four shadow tiles before her shield resets - missing one resets her shield to full and extends the kill 30 seconds. Never let your sanity bar fully deplete; full depletion causes near-instant death within 10 ticks - teleport immediately if this occurs. Awakened-mode: more tentacles (7 in X formation, 6 in + formation vs 4 in base); Soul Siphon has 16 souls (up from 12) with a 21-second timer. Switch prayers a tick early on every volley.",
+        "description": "Kill The Whisperer (Awakened). Switch Protect from Missiles for grey-barb ranged volleys and Protect from Magic for blue-orb magic volleys. When she casts Soul Siphon, use the blackstone fragment to enter the Shadow Realm and kill a full set of souls chanting the same phrase before the chant completes - failing it deals 50 damage to you and heals her for 100. Never let your sanity bar fully deplete; full depletion causes near-instant death within 10 ticks - teleport immediately if this occurs. Awakened-mode: more tentacles (7 in X formation, 6 in + formation vs 4 in base); Soul Siphon has 16 souls (up from 12) with a 21-second timer. Switch prayers a tick early on every volley.",
         "worldX": 3007,
         "worldY": 3477,
         "worldPlane": 0,
