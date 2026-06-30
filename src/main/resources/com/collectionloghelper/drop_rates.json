@@ -5034,7 +5034,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank in Ferox Enclave then travel to the Scorpion Pit in deep Wilderness (level ~53). Bring anti-venom+, a high-tier stab weapon, prayer potions, food, and a Wilderness-cheap kit (Karil's leathertop / Black d'hide) - Scorpia's guardians inflict poison starting at 6 damage and burn through brews quickly. Burning amulet -> Lava Maze then run south-west; or web-walk down via the Chaos Elemental ladder. Scorpia is in multi-combat so a PKer team will land specs together - swap to a one-click logout if you spot dots on the minimap",
+        "description": "Bank in Ferox Enclave then travel to the Scorpion Pit in deep Wilderness (level ~53). Bring anti-venom+, a high-tier stab weapon, prayer potions, food, and a Wilderness-cheap kit (Karil's leathertop / Black d'hide) - Scorpia's guardians inflict poison starting at 6 damage and burn through brews quickly. Burning amulet -> Lava Maze then run north-east to the Scorpion Pit; or web-walk down via the Chaos Elemental ladder. Scorpia is in multi-combat so a PKer team will land specs together - swap to a one-click logout if you spot dots on the minimap",
         "worldX": 3231,
         "worldY": 3936,
         "worldPlane": 0,
