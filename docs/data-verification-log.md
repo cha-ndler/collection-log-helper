@@ -689,3 +689,23 @@ so Gryphon stays V1 `-` with an open Tier-0 finding until the item-id sweep reso
 clear); magic logs 1514→1513 (Revenants ×2), runite bar 2364→2363 (Gryphon), 23713 (Deranged
 Archaeologist) — the latter 3 need intent. Yama Oathplate-shards rate + bundle-blob history purge also
 still pending operator calls.
+
+## 2026-06-30 — Tier-0 item-id-plausibility (#96) sweep — DRAINED (operator-approved)
+
+All 10 junk noted-item ids flagged by detector #96 fixed (7 PRs, one source each). After fixing the
+intended-item ones and removing the unrecoverable ones, the intent split resolved cleanly:
+- **Burning amulet 21167 → 21166** (`BURNING_AMULET_5`), the wilderness travel item the guidance names:
+  **Chaos Elemental #1116, Scorpia #1117, Chaos Fanatic #1118, Crazy archaeologist #1119, Revenants
+  #1120** (a single systematic copy-paste of the NOTED amulet id across the 5 Wilderness sources).
+- **Removed** (junk id, unnoted form equally nonsensical as gear, intent unrecoverable — removed rather
+  than guessed): **Revenants** magic logs 1514 ×2 (in #1120), **Gryphon** runite bar 2364 (#1121),
+  **Deranged Archaeologist** noted id 23713 (#1122; not a hard requirement — Fossil Island is boat-
+  reachable, the Digsite pendant is travel convenience).
+- Earlier in-batch fix: **Custodian Stalker** 392 → 391 (Manta ray), folded into #1109.
+
+Each fix is deterministic (detector #96 + `runelite_id_lookup` for the resolvable ids) and passes
+`validate_drop_rates --check cache_ids`. **Re-run `run_corpus_detectors` after these merge to confirm the
+#96 queue is empty.** Note: the 5 Wilderness sources + Deranged Archaeologist are already V1-stamped
+BOSSES (the Tier-0 fix is a residual id correction, not a re-verification — stamps unchanged). **Gryphon**
+becomes V1-stampable once #1121 merges (this was its sole open finding). **Revenants** stays unstamped —
+it is an OTHER-category source (#184) not yet semantically verified; the Tier-0 fix clears only one tier.
