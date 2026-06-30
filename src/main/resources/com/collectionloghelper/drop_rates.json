@@ -6625,7 +6625,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
+        "description": "Travel to Ver Sinhaza - Kharyrll teleport to Canifis then run south through Mort'ton. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P2",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
@@ -6640,7 +6640,7 @@
                 22400
               ]
             },
-            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P1",
+            "description": "Use Drakan's medallion to teleport directly to Ver Sinhaza. Bring Scythe of vitur (or Soulreaper axe), Tbow + dragon arrows for Verzik P3, full brews/restores, Sanguinesti staff or Trident, and a Dragon dagger(p++) for the Nylocas Athanatos on Verzik P2",
             "travelTip": "Drakan's medallion -> Ver Sinhaza"
           }
         ],
@@ -6663,7 +6663,7 @@
         "section": "Combat"
       },
       {
-        "description": "Defeat Verzik Vitur. P1: pray Protect from Magic and dagger the Athanatos. P2: dodge the purple projectile, switch prayers to match the Nylocas colour. P3: Tbow with dragon arrows, pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
+        "description": "Defeat Verzik Vitur. P1: pray Protect from Magic, shelter behind the pillars and use the Dawnbringer's special attack to damage her. P2: dodge the purple projectile and stop the Nylocas Athanatos it spawns from healing her by hitting it once with a poisoned weapon (dragon dagger), and switch prayers to match the summoned Nylocas colour. P3: Tbow with dragon arrows, pray Protect from Magic, dance the lightning zaps and never stand on a tornado",
         "worldX": 3650,
         "worldY": 3218,
         "worldPlane": 0,
