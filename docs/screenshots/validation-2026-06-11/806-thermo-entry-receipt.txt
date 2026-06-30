@@ -1,0 +1,21 @@
+#806 Thermonuclear smoke devil entrance-step confirm (2026-06-11)
+
+SURFACE (before entry):
+  guidance.activate landed on currentStepIndex=1 ("Enter the smoky cave"),
+  held at index 1 for 6+ seconds while standing a few tiles from the surface
+  entrance; entrance object stayed highlighted (book marker + glow).
+  Evidence: 806-thermo-surface-glow-persists-{full,detail}.png
+  Pre-fix (ARRIVE_AT_TILE r=10) would have completed on this surface proximity.
+
+ON ENTRY (climbed into the cave):
+  2026-06-11 19:11:10 EDT [Client] INFO c.c.guidance.GuidanceSequencer -
+    Step 2 complete (ARRIVE_AT_ZONE: player in zone [2350,9400 - 2432,9472] plane 0)
+  2026-06-11 19:11:10 EDT [Client] INFO c.c.guidance.GuidanceSequencer -
+    Advanced to step 3/6: Navigate north-west through the smoke devil cave...
+
+  Completion fired via ARRIVE_AT_ZONE with the player INSIDE the underground
+  cave zone, NOT on surface proximity -> #806 fix confirmed.
+
+Note: player entered wearing a Slayer helmet and no Gas mask; the step's
+"Gas mask MISSING" requirement display is informational only and did not gate
+completion (filed as issue #818).
