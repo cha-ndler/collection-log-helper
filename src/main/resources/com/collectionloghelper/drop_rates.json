@@ -5311,6 +5311,11 @@
     "worldPlane": 0,
     "killTimeSeconds": 180,
     "ironKillTimeSeconds": 80,
+    "requirements": {
+      "diaries": [
+        "WILDERNESS_MEDIUM"
+      ]
+    },
     "items": [
       {
         "itemId": 27673,
@@ -5376,7 +5381,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Vet'ion's Rest in the Wilderness with a crush weapon (Inquisitor's mace or Soulreaper axe), prayer potions, Saradomin brews, and a Voidwaker / DWH spec. Burning amulet to Chaos Temple, then run east",
+        "description": "Travel to Vet'ion's Rest in the Wilderness with a crush weapon (Inquisitor's mace or Soulreaper axe), prayer potions, Saradomin brews, and a Voidwaker / DWH spec. Entering the lair requires the medium Wilderness Diary, or an active Vet'ion boss Slayer task (a skeleton task does not bypass the diary). Burning amulet to Chaos Temple, then run east",
         "worldX": 3196,
         "worldY": 3776,
         "worldPlane": 0,
@@ -5399,7 +5404,7 @@
         "completionDistance": 5
       },
       {
-        "description": "Kill Vet'ion. Use Protect from Magic throughout - he attacks with magic only. Skeletal Hellhounds spawn at 50% HP in his first form; Greater Skeletal Hellhounds spawn at 50% HP in his enraged second form - kill them immediately as they grant him full damage immunity while alive. Use crush attacks since his stab and slash defence are very high",
+        "description": "Kill Vet'ion. His lightning is a dodgeable 3x3 AoE - move off the glowing tiles to avoid it (no overhead prayer fully blocks it; all his attacks can be dodged by moving). Skeletal Hellhounds spawn at 50% HP in his first form, and Greater Skeletal Hellhounds at 50% HP in his enraged second form - they attack with melee, so use Protect from Melee while they are up, and kill them immediately as they grant him full damage immunity while alive. Use crush attacks since his stab and slash defence are very high",
         "worldX": 3220,
         "worldY": 3783,
         "worldPlane": 0,
