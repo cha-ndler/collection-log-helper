@@ -23855,12 +23855,12 @@
       }
     ],
     "locationDescription": "Ruins of Tapoyauik, Varlamore",
-    "travelTip": "Quetzal whistle -> Tapoyauik, or Civitas illa Fortis Teleport (standard spell)",
+    "travelTip": "Pendant of ates -> Twilight Temple (then lift down), or Civitas illa Fortis Teleport (standard spell) and run south",
     "npcId": 13685,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Bank for Amoxliatl. Bring a quetzal whistle, prayer pots, sharks, and your best melee setup (Scythe of Vitur or Soulreaper axe). Amoxliatl is a Slayer monster (48 Slayer); also stock magic for the secondary kill style and a Pendant of ates for the teleport once you have one.",
+        "description": "Bank for Amoxliatl. Bring a quetzal whistle, prayer pots, sharks, and your best melee setup (Scythe of Vitur or Soulreaper axe). Amoxliatl is a Slayer monster (48 Slayer) killed with melee only - the unstable ice blocks it spawns can only be damaged by melee, so there is no secondary kill style. Bring a Pendant of ates for the teleport once you have one.",
         "worldX": 1593,
         "worldY": 3091,
         "worldPlane": 0,
@@ -23874,17 +23874,17 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Ruins of Tapoyauik, Varlamore. Use a quetzal whistle to fly directly to the ruins, or Civitas illa Fortis Teleport (standard spell) and run south. Pendant of ates teleport (uncharged drops from Amoxliatl) skips the run entirely once charged",
+        "description": "Travel to the Ruins of Tapoyauik, Varlamore. Use a Pendant of ates to teleport to the Twilight Temple next to the lift (once you have one), then take the lift down into the dungeon; otherwise use Civitas illa Fortis Teleport (standard spell) and run south. A quetzal whistle does not fly directly to the ruins. Pendant of ates teleport (uncharged drops from Amoxliatl) skips the run entirely once charged",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Quetzal whistle -> Tapoyauik, or Pendant of ates once charged",
+        "travelTip": "Pendant of ates -> Twilight Temple, then lift down to the dungeon",
         "section": "Travel"
       },
       {
-        "description": "Kill Amoxliatl. Protect from Magic for the freeze-and-bind ice projectile. Stand adjacent for melee uptime; step out of the ice-crystal AoE tiles when they spawn. Frozen tears drop on the floor mid-fight - pick them up before the next attack as they despawn fast. Standard meta: Scythe of Vitur with Slayer helm + Avernic defender + Inquisitor's armour.",
+        "description": "Kill Amoxliatl. Protect from Magic for the freeze-and-bind ice projectile. Stand adjacent for melee uptime. When 'Amoxliatl forms some unstable ice blocks around you' appears, 1-4 unstable ice blocks spawn nearby - destroy them with melee (only melee damages them) within 15 ticks (~9s), or each remaining block shatters into icy pools and heals the boss 16-25. Frozen tears drop on the floor mid-fight - pick them up before the next attack as they despawn fast. Standard meta: Scythe of Vitur with Slayer helm + Avernic defender + Inquisitor's armour.",
         "worldX": 1362,
         "worldY": 4511,
         "worldPlane": 0,
