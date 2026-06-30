@@ -24591,7 +24591,6 @@
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 8,
         "requiredItemIds": [
-          23713,
           12695,
           6685,
           2434,
