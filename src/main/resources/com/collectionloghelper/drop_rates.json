@@ -9983,12 +9983,11 @@
         "completionDistance": 10,
         "requiredItemIds": [
           21816,
-          21167
+          21166
         ],
         "recommendedItemIds": [
           12926,
           21816,
-          1514,
           391,
           2434,
           2444
@@ -10049,7 +10048,6 @@
         "recommendedItemIds": [
           12926,
           21816,
-          1514,
           391,
           2434,
           2444
