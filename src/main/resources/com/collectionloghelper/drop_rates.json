@@ -4205,7 +4205,7 @@
       }
     ],
     "locationDescription": "Waterbirth Island, Rellekka",
-    "travelTip": "Lunar Isle tele -> Rellekka",
+    "travelTip": "Waterbirth Teleport (Lunar spellbook) -> Waterbirth Island",
     "mutuallyExclusiveSources": [
       "Dagannoth Prime",
       "Dagannoth Supreme"
@@ -4214,7 +4214,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Waterbirth Island via Rellekka docks (pay 1,000 gp without The Fremennik Trials, free after) or Lunar Isle teleport",
+        "description": "Travel to Waterbirth Island via Rellekka docks (pay 1,000 gp without The Fremennik Trials, free after) or Waterbirth Teleport (Lunar spellbook)",
         "worldX": 2521,
         "worldY": 3740,
         "worldPlane": 0,
