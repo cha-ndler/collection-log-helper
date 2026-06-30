@@ -1591,7 +1591,7 @@
         "independent": true
       }
     ],
-    "locationDescription": "Ancient Prison entrance, Weiss",
+    "locationDescription": "Phantom Muspah lair (southern crevice of Ghorrock Dungeon), via Weiss",
     "travelTip": "Icy basalt teleport -> Weiss, or Ring of shadows",
     "npcId": 12077,
     "interactAction": "Attack",
@@ -1605,7 +1605,7 @@
         "completionDistance": 20
       },
       {
-        "description": "Run south through Ghorrock Dungeon and step onto the Ancient Prison entrance tile",
+        "description": "Run south through Ghorrock Dungeon to the crevice leading to the Phantom Muspah's lair (the Ghorrock Prison entrance is a separate location in the north-west)",
         "worldX": 3338,
         "worldY": 10303,
         "worldPlane": 0,
