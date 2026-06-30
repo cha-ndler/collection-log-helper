@@ -827,7 +827,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Zulrah. Prayer rotates per form: green (Ranged form) -> Protect from Missiles, blue (Magic form) -> Protect from Magic, red (Melee form) -> Protect from Melee, jad phase -> swap each attack. Bring a blowpipe + magic setup, swap gear on the rotation, and avoid the toxic clouds Zulrah summons",
+        "description": "Kill Zulrah. Prayer matches the form's attack style: green (Ranged form) -> Protect from Missiles, blue (Magic form) -> Protect from Magic. In its red (magma) form Zulrah does NOT use a melee attack - it whips its tail at your current tile for a typeless hit that no prayer reduces, so move two tiles away to dodge it rather than praying Melee. During the jad phase swap your overhead each attack. Bring a blowpipe + magic setup, swap gear on the rotation, and avoid the toxic clouds Zulrah summons",
         "worldX": 2268,
         "worldY": 3069,
         "worldPlane": 0,
