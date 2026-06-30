@@ -10923,6 +10923,9 @@
           "skill": "SLAYER",
           "level": 48
         }
+      ],
+      "quests": [
+        "THE_FINAL_DAWN"
       ]
     },
     "items": [
@@ -10949,7 +10952,7 @@
         "section": "Bank"
       },
       {
-        "description": "Use the quetzal whistle to travel to Kastori in Varlamore, then run west to the Tonali Cavern entrance beneath the Crypt of Tonali",
+        "description": "Use the quetzal whistle to travel to Kastori in Varlamore, then run west to the Tonali Cavern entrance beneath the Crypt of Tonali (accessible only after completing The Final Dawn quest)",
         "worldX": 1309,
         "worldY": 3104,
         "worldPlane": 0,
