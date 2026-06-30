@@ -24100,7 +24100,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Quetzal whistle -> The Great Conch, run east to the cave mouth",
+        "travelTip": "Fairy ring CJQ -> The Great Conch, run north to the cave mouth",
         "section": "Travel"
       },
       {
