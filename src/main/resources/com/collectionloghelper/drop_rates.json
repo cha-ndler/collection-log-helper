@@ -23292,7 +23292,7 @@
       }
     ],
     "locationDescription": "The Darkfrost, Hailstorm Mountains in Varlamore",
-    "travelTip": "Quetzal whistle -> Hueycoatl arena, or Quetzal Transport System -> Quetzacalli Gorge -> run to the Darkfrost",
+    "travelTip": "Pendant of ates -> the Darkfrost (direct), or Quetzal Transport System / quetzal whistle -> Quetzacalli Gorge then run to the Darkfrost",
     "npcId": 14009,
     "interactAction": "Attack",
     "guidanceSteps": [
@@ -23311,13 +23311,13 @@
         "section": "Bank"
       },
       {
-        "description": "Travel to the Hueycoatl arena (the Darkfrost) in the Hailstorm Mountains, Varlamore. Use the quetzal whistle for the fastest route, or take the Quetzal Transport System to Quetzacalli Gorge and run to the Darkfrost (the pendant of ates teleports directly once unlocked)",
+        "description": "Travel to the Hueycoatl arena (the Darkfrost) in the Hailstorm Mountains, Varlamore. The pendant of ates teleports directly to the Darkfrost (once unlocked) for the fastest route; otherwise the quetzal whistle or Quetzal Transport System only lands at Quetzacalli Gorge (the Darkfrost is not a landing site), so run to the Darkfrost from there",
         "worldX": 1509,
         "worldY": 3290,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "travelTip": "Quetzal whistle -> Hueycoatl, or Quetzal Transport System -> Quetzacalli Gorge -> run to the Darkfrost",
+        "travelTip": "Pendant of ates -> the Darkfrost (direct), or Quetzal Transport System / quetzal whistle -> Quetzacalli Gorge then run",
         "section": "Travel"
       },
       {
