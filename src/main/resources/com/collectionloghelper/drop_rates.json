@@ -11516,12 +11516,12 @@
       }
     ],
     "locationDescription": "Jormungand's Prison, Island of Stone",
-    "travelTip": "Lunar Isle tele -> Rellekka",
+    "travelTip": "Fremennik sea boots or Enchanted lyre -> Rellekka, then Haskell's boat to the Island of Stone",
     "npcId": 9293,
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to Jormungand's Prison, Island of Stone.",
+        "description": "Travel to Jormungand's Prison on the Island of Stone: reach Rellekka (Fremennik sea boots or Enchanted lyre), then take Haskell's boat north of Yrsa's Accoutrements to the Island of Stone.",
         "worldX": 2456,
         "worldY": 4240,
         "worldPlane": 0,
