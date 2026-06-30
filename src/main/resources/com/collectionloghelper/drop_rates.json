@@ -16166,7 +16166,7 @@
         "completionDistance": 20,
         "travelTip": "Minigame tele -> Fishing Trawler, or fairy ring DJP -> run south",
         "requiredItemIds": [
-          1925,
+          583,
           954
         ],
         "section": "Travel"
@@ -16193,7 +16193,7 @@
         "worldPlane": 1,
         "completionCondition": "MANUAL",
         "recommendedItemIds": [
-          1925,
+          583,
           954
         ],
         "section": "Activity"
