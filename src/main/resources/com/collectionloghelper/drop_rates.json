@@ -24473,7 +24473,7 @@
         "section": "Travel"
       },
       {
-        "description": "Clear waves 1-66. Stack-up positioning is the entire game: pillar 4 (NW) and pillar 1 (S) are the standard anchors. Pray Magic vs Jal-Zek (mages) and Jal-Xil (rangers), Ranged vs Jal-Imkot (melee meleers) and Jal-AkRek-Mej, and Melee vs Jal-MejRah (bats) when adjacent. Blob (Jal-Xil) shots split into mage+range halves - 1-tick prayer flick to drop both. Healers (Jal-AkRek-Ket) come in twos and stack heals on Zuk - drag them off-screen. Always keep at least 4 brews + 4 restores in the bag entering wave 67.",
+        "description": "Clear waves 1-66. Stack-up positioning is the entire game: pillar 4 (NW) and pillar 1 (S) are the standard anchors. Pray by each monster's attack style: Protect from Magic vs Jal-Zek (mager) and Jal-AkRek-Mej (magic blob); Protect from Missiles vs Jal-Xil (ranger) and Jal-MejRah (bats); Protect from Melee vs Jal-Imkot (meleer) when adjacent. The Jal-Ak blob shots split into mage+range halves - 1-tick prayer flick to drop both. Healers come in twos and stack heals on Zuk - drag them off-screen. Always keep at least 4 brews + 4 restores in the bag entering wave 67.",
         "worldX": 2273,
         "worldY": 5341,
         "worldPlane": 0,
