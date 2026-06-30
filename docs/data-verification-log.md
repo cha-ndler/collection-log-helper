@@ -106,33 +106,33 @@
 | 77 | Demonic gorillas | SLAYER | `2026-06-30` | - | - |
 | 78 | Drake | SLAYER | `2026-06-30` | - | - |
 | 79 | Dust Devil | SLAYER | `2026-06-30` | - | - |
-| 80 | Earthen Nagua | SLAYER | - | - | 1 (PR #1114) |
+| 80 | Earthen Nagua | SLAYER | `2026-06-30` | - | - |
 | 81 | Fossil Island Wyvern | SLAYER | `2026-06-30` | - | - |
 | 82 | Frost Nagua | SLAYER | `2026-06-30` | - | - |
 | 83 | Gargoyle | SLAYER | `2026-06-30` | - | - |
-| 84 | Gryphon | SLAYER | - | - | Tier-0 #96 (junk id 2364) |
+| 84 | Gryphon | SLAYER | `2026-06-30` | - | - |
 | 85 | Hydra | SLAYER | `2026-06-30` | - | - |
 | 86 | Infernal Mage | SLAYER | `2026-06-30` | - | - |
 | 87 | Jelly | SLAYER | `2026-06-30` | - | - |
 | 88 | Kurask | SLAYER | `2026-06-30` | - | - |
-| 89 | Lava Strykewyrm | SLAYER | - | - | - |
+| 89 | Lava Strykewyrm | SLAYER | `2026-06-30` | - | - |
 | 90 | Lizardman shaman | SLAYER | `2026-06-30` | - | - |
 | 91 | Mogre | SLAYER | `2026-06-30` | - | - |
 | 92 | Nechryael | SLAYER | `2026-06-30` | - | - |
 | 93 | Pyrefiend | SLAYER | `2026-06-30` | - | - |
 | 94 | Rockslug | SLAYER | `2026-06-30` | - | - |
-| 95 | Skeletal Wyvern | SLAYER | - | - | - |
-| 96 | Smoke Devil | SLAYER | - | - | - |
-| 97 | Spiritual Mage | SLAYER | - | - | - |
-| 98 | Spiritual Mage (Zarosian) | SLAYER | - | - | - |
-| 99 | Sulphur Nagua | SLAYER | - | - | - |
-| 100 | Superior Slayer Monster | SLAYER | - | - | - |
-| 101 | Terror Dog | SLAYER | - | - | - |
-| 102 | Tormented Demons | SLAYER | - | - | - |
-| 103 | Turoth | SLAYER | - | - | - |
-| 104 | Vyrewatch Sentinel | SLAYER | - | - | - |
-| 105 | Warped Creature | SLAYER | - | - | - |
-| 106 | Wyrm | SLAYER | - | - | - |
+| 95 | Skeletal Wyvern | SLAYER | `2026-06-30` | - | - |
+| 96 | Smoke Devil | SLAYER | `2026-06-30` | - | - |
+| 97 | Spiritual Mage | SLAYER | `2026-06-30` | - | - |
+| 98 | Spiritual Mage (Zarosian) | SLAYER | `2026-06-30` | - | - |
+| 99 | Sulphur Nagua | SLAYER | - | - | 1 (PR #1124) |
+| 100 | Superior Slayer Monster | SLAYER | `2026-06-30` | - | - |
+| 101 | Terror Dog | SLAYER | `2026-06-30` | - | - |
+| 102 | Tormented Demons | SLAYER | `2026-06-30` | - | - |
+| 103 | Turoth | SLAYER | `2026-06-30` | - | - |
+| 104 | Vyrewatch Sentinel | SLAYER | - | - | 1 (PR #1125) |
+| 105 | Warped Creature | SLAYER | - | - | 1 (PR #1126) |
+| 106 | Wyrm | SLAYER | `2026-06-30` | - | - |
 | 107 | Chambers of Xeric | RAIDS | - | - | - |
 | 108 | Chambers of Xeric (Challenge Mode) | RAIDS | - | - | - |
 | 109 | Theatre of Blood | RAIDS | - | - | - |
@@ -709,3 +709,37 @@ Each fix is deterministic (detector #96 + `runelite_id_lookup` for the resolvabl
 BOSSES (the Tier-0 fix is a residual id correction, not a re-verification — stamps unchanged). **Gryphon**
 becomes V1-stampable once #1121 merges (this was its sole open finding). **Revenants** stays unstamped —
 it is an OTHER-category source (#184) not yet semantically verified; the Tier-0 fix clears only one tier.
+
+## 2026-06-30 — Accuracy-convergence v2: SLAYER batch 3 (final 13) — SLAYER category COMPLETE
+
+Cache `2026-06-25-rev239`. Tier-0 #96 sweep merged + confirmed drained (0 findings). Batch 3 (the last 13,
+incl. **Lava Strykewyrm** which had been skipped in the batch-2 range): verifier returned **10 CLEAN, 3
+findings**. All re-confirmed by direct WebFetch.
+- **Sulphur Nagua — PR #1124 (high):** missing access gate — Neypotzli (beneath Cam Torum) needs partial
+  completion of Perilous Moons. Added `requirements.quests PERILOUS_MOONS` (the checker treats an
+  in-progress quest as access, correctly modelling "partial"). Receipt: "Partial completion of Perilous
+  Moons is required for access."
+- **Vyrewatch Sentinel — PR #1125 (high):** loot step said Blood shard "1/5000" — that's the Darkmeyer
+  Vyre PICKPOCKETING rate; the combat drop is 1/1500 (the source's own dropRate field 0.000667 was
+  already correct; only the prose was wrong, overstating the grind ~3.3x). Receipt: "Vyrewatch Sentinel
+  (combat): 1/1,500".
+- **Warped Creature — PR #1126 (low):** "Requires completion of The Path of Glouphrie" → PARTIAL
+  completion (the structured quest requirement was already partial-aware; prose-only). Receipt:
+  "requiring partial completion of The Path of Glouphrie".
+
+**Note on counts:** SLAYER is **45 sources** (rows 62-106), not 106 (106 is the last row number). Earlier
+"X/106" SLAYER-progress notes meant row index, not count.
+
+**Stamps:** V1 = `2026-06-30` for: Earthen Nagua (#1114 merged), Gryphon (#1121 merged, #96 cleared), and
+the 10 batch-3 clean sources. The 3 batch-3 fixes (#1124-#1126) stay V1 `-` until merged.
+
+**SLAYER category status:** all 45 verified. **42/45 V1-stamped**; 45/45 once #1124-#1126 merge.
+**BOSSES + SLAYER both complete** = 106 of 225 sources (≈47%).
+
+**Aggregate across 45 SLAYER sources:** 9 real defects fixed — missing access gates (Cave Kraken 50
+Magic, Earthen Nagua + Sulphur Nagua quest gates), travel (Custodian Stalker direction+agility, Basilisk
+Knight Lunar-teleport), prose/mechanic (Crawling Hand floor, Cave Horror witchwood, Vyrewatch rate-text,
+Warped partial-quest) + 1 Tier-0 id (Custodian Stalker / Gryphon). Much cleaner than BOSSES (≈20% vs 36%).
+
+**Running total V1-stamped:** 103 / 225 (61 BOSSES + 42 SLAYER). Next category: RAIDS (7 sources, CoX →
+ToA), then MINIGAMES.
