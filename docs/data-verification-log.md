@@ -61,33 +61,33 @@
 | 32 | Nex | BOSSES | `2026-06-30` | - | - |
 | 33 | Obor | BOSSES | `2026-06-30` | - | - |
 | 34 | Perilous Moons | BOSSES | `2026-06-30` | - | - |
-| 35 | Phantom Muspah | BOSSES | - | - | 1 (PR #1095) |
+| 35 | Phantom Muspah | BOSSES | `2026-06-30` | - | - |
 | 36 | Phosani's Nightmare | BOSSES | `2026-06-30` | - | - |
 | 37 | Royal Titans | BOSSES | `2026-06-30` | - | - |
-| 38 | Sarachnis | BOSSES | - | - | 1 (PR #1092) |
-| 39 | Scorpia | BOSSES | - | - | 1 (PR #1093) |
-| 40 | Scurrius | BOSSES | - | - | 1 (PR #1091) |
-| 41 | Shellbane Gryphon | BOSSES | - | - | 1 (PR #1094) |
+| 38 | Sarachnis | BOSSES | `2026-06-30` | - | - |
+| 39 | Scorpia | BOSSES | `2026-06-30` | - | - |
+| 40 | Scurrius | BOSSES | `2026-06-30` | - | - |
+| 41 | Shellbane Gryphon | BOSSES | - | - | 1 (PR #1097) |
 | 42 | Skotizo | BOSSES | `2026-06-30` | - | - |
 | 43 | Sol Heredit | BOSSES | `2026-06-30` | - | - |
-| 44 | The Fight Caves | BOSSES | - | - | 1 (PR #1090) |
+| 44 | The Fight Caves | BOSSES | `2026-06-30` | - | - |
 | 45 | The Gauntlet | BOSSES | `2026-06-30` | - | - |
-| 46 | The Hueycoatl | BOSSES | - | - | - |
-| 47 | The Inferno | BOSSES | - | - | - |
-| 48 | The Leviathan | BOSSES | - | - | - |
-| 49 | The Leviathan (Awakened) | BOSSES | - | - | - |
-| 50 | The Nightmare | BOSSES | - | - | - |
-| 51 | The Whisperer | BOSSES | - | - | - |
-| 52 | The Whisperer (Awakened) | BOSSES | - | - | - |
-| 53 | Thermonuclear smoke devil | BOSSES | - | - | - |
-| 54 | Vardorvis | BOSSES | - | - | - |
-| 55 | Vardorvis (Awakened) | BOSSES | - | - | - |
-| 56 | Venenatis | BOSSES | - | - | - |
-| 57 | Vet'ion | BOSSES | - | - | - |
-| 58 | Vorkath | BOSSES | - | - | - |
-| 59 | Yama | BOSSES | - | - | - |
-| 60 | Zalcano | BOSSES | - | - | - |
-| 61 | Zulrah | BOSSES | - | - | - |
+| 46 | The Hueycoatl | BOSSES | - | - | 1 (PR #1106) |
+| 47 | The Inferno | BOSSES | - | - | 1 (PR #1098) |
+| 48 | The Leviathan | BOSSES | `2026-06-30` | - | - |
+| 49 | The Leviathan (Awakened) | BOSSES | `2026-06-30` | - | - |
+| 50 | The Nightmare | BOSSES | `2026-06-30` | - | - |
+| 51 | The Whisperer | BOSSES | - | - | 1 (PR #1105) |
+| 52 | The Whisperer (Awakened) | BOSSES | - | - | 1 (PR #1103) |
+| 53 | Thermonuclear smoke devil | BOSSES | `2026-06-30` | - | - |
+| 54 | Vardorvis | BOSSES | `2026-06-30` | - | - |
+| 55 | Vardorvis (Awakened) | BOSSES | `2026-06-30` | - | - |
+| 56 | Venenatis | BOSSES | - | - | 1 (PR #1100) |
+| 57 | Vet'ion | BOSSES | - | - | 1 (PR #1099) |
+| 58 | Vorkath | BOSSES | - | - | 1 (PR #1101) |
+| 59 | Yama | BOSSES | - | - | 1 (PR #1104) |
+| 60 | Zalcano | BOSSES | `2026-06-30` | - | - |
+| 61 | Zulrah | BOSSES | - | - | 1 (PR #1102) |
 | 62 | Aberrant Spectre | SLAYER | - | - | - |
 | 63 | Abyssal Demon | SLAYER | - | - | - |
 | 64 | Aquanite | SLAYER | - | - | - |
@@ -565,3 +565,56 @@ purge of the bundle blob is flagged as a separate operator decision.
 
 **Running total V1-stamped:** 39 / 226 (26 prior + 4 batch-2 fixes-merged + 9 batch-3 clean;
 batch-3's 6 fixes pending merge → 45 once merged).
+
+## 2026-06-30 — Accuracy-convergence v2, Phase-2 semantic pass: BOSSES batch 4 (16 sources) — BOSSES COMPLETE
+
+Cache `2026-06-25-rev239`. Final BOSSES batch: The Hueycoatl, The Inferno, The Leviathan (+Awakened),
+The Nightmare, The Whisperer (+Awakened), Thermonuclear smoke devil, Vardorvis (+Awakened), Venenatis,
+Vet'ion, Vorkath, Yama, Zalcano, Zulrah. Verifier returned **7 CLEAN, 9 sources with skeptic-survived
+findings** (12 findings: 1 blocker + 1 second blocker + 7 high + 3 low; one flagged drop rate deferred).
+The verifier prompt was hardened this batch to inspect per-step `travelTip` fields (the gap that caused
+the batch-3 Shellbane miss). All findings independently re-confirmed by direct WebFetch before editing.
+
+- **The Inferno — PR #1098 (BLOCKER):** wave 1-66 prayers wrong for 4 of 5 monsters (prayed Magic vs
+  the ranger Jal-Xil, Ranged vs the meleer Jal-Imkot, Ranged vs the mage Jal-AkRek-Mej, Melee vs the
+  ranged bat Jal-MejRah). Corrected to attack-style prayers + fixed the Jal-Xil/blob and healer labels.
+- **Vet'ion — PR #1099 (BLOCKER + high):** no access gate (needs medium Wilderness Diary OR Vet'ion
+  boss task) — added `diaries: WILDERNESS_MEDIUM` + prose; and "Protect from Magic, magic only" was
+  wrong (lightning is a dodgeable AoE; Protect from Melee for the melee hellhounds).
+- **Venenatis — PR #1100 (high):** same missing Silk Chasm access gate; added diary requirement + prose.
+- **Vorkath — PR #1101 (high):** "Lunar Isle teleport -> Rellekka" impossible (Lunar teleport -> Lunar
+  Isle); replaced with Fremennik sea boots / Enchanted lyre / house portal. (Same class as Dagannoth.)
+- **Zulrah — PR #1102 (high):** red/magma form is a typeless tail attack (move 2 tiles), NOT
+  "Protect from Melee" — no prayer reduces it.
+- **The Whisperer (Awakened) — PR #1103 (high):** fabricated "break four shadow tiles before her shield
+  resets / 30s extension" replaced with the real Soul Siphon (kill a same-chant soul set; fail = 50 dmg
+  + heal 100) — which the same step already referenced later.
+- **Yama — PR #1104 (high + low):** "Protect from Magic primary" wrong (melee/ranged/magic, dynamic
+  switch; melee pierces prayer); fabricated "demonic tallow slams / imps" → void flares + shadow waves.
+- **The Whisperer — PR #1105 (low):** ranged barbs are grey, not purple.
+- **The Hueycoatl — PR #1106 (low):** quetzal whistle billed as direct/fastest to the Darkfrost, but
+  the Darkfrost is not a Quetzal landing site (nearest Quetzacalli Gorge); pendant of ates is the direct
+  teleport.
+
+**Deferred (logged, not patched):** **Yama — Oathplate shards drop rate.** Current `0.03333` (1/30) is
+almost certainly too low, but my sources disagree on the correct value (wiki main page "1/15" vs the
+verifier's "1/17.07"). Not guessed — needs a single precise drop-table source before editing. (Tier-2
+rate work, per the loop's "leave rates to a precise source" rule.)
+
+**Stamps:** V1 = `2026-06-30` for the 5 now-merged batch-3 fixes (Fight Caves, Scurrius, Sarachnis,
+Scorpia, Phantom Muspah) + the 7 batch-4 clean sources. Shellbane Gryphon stays V1 `-` pending its
+follow-up **PR #1097** (a per-step `travelTip` the batch-3 fix missed — still had the Quetzal-whistle +
+"east" error). The 9 batch-4 fixes (PRs #1098–#1106) stay V1 `-` until merged + re-verified.
+
+**BOSSES category status:** all 61 BOSSES verified. **51/61 V1-stamped**; the remaining 10 are pending
+fix PRs (#1097 Shellbane + #1098–#1106 batch-4) → **61/61 once merged.** This closes the BOSSES leg of
+the convergence loop; SLAYER is next (note the logged Basilisk Knight Lunar-teleport straggler).
+
+**Aggregate across all 61 BOSSES:** 22 real current-meta defects found and fixed (≈36% of sources
+carried at least one) — 2 blockers (Inferno/Vet'ion prayers+gate), travel impossibilities (Dagannoth
+×2, Vorkath, Shellbane, Hueycoatl), inverted/wrong prayers (Callisto, Scurrius, Fight Caves, Inferno,
+Vet'ion, Zulrah, Yama, Sarachnis), fabricated mechanics (Bryophyta, Sarachnis, Whisperer-Awakened,
+Yama), and missing access gates (Araxxor, Venenatis, Vet'ion). Strong evidence the corpus-wide sweep
+is worthwhile.
+
+**Running total V1-stamped:** 51 / 226.
