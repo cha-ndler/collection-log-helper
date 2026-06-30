@@ -409,3 +409,31 @@ detector survivors above), which remains pending P2 toolkit #94 release + `/mcp`
   structured `requirements` edit); all merged after operator confirmation (#1026/#1029/#1030/
   #1032/#1055). Hunter Guild #1044 transient BLOCK cleared and merged.
 - Transient server-side rate-limiting during fan-out; re-running the affected sources cleared it.
+
+## 2026-06-29 — Guidance mechanical sweep: PLANE-1 dead-step class (8 sources, all merged)
+
+- **Method:** full 226-source guidance mechanical sweep (Spectator `--sweep`, live dev client,
+  harness v0.7) → **216 PASS / 9 DIVERGENCE / 0 ERROR**. Root-caused, fixed, live-verified by
+  relaunch + re-sweep, merged. Final re-sweep: **225 PASS / 0 DIVERGENCE** (the 1 STATE_DRIVEN
+  is Shades of Mort'ton, activation-only by design) — corpus mechanically green.
+- **Defect class PLANE-1:** an "enter dungeon/cavern/sanctuary via stairs/whirlpool/statue/board"
+  step used `PLAYER_ON_PLANE` with `worldPlane` equal to the plane the player **already stands
+  on** at the prior step. `CompletionChecker` evaluates `PLAYER_ON_PLANE` as a pure state check
+  (`playerLocation.getPlane() == step.getWorldPlane()`), so the condition was true the instant
+  the step activated — the engine auto-advanced past it and **the player never saw the
+  instruction in-game**. Confirmed by the live-engine sweep (double-advance) + the engine source.
+- **Fix pattern:** replace `PLAYER_ON_PLANE` with `ARRIVE_AT_ZONE` over the actual destination,
+  each zone anchored to a RAW spawn/in-data receipt; the original highlight (object/tile) is left
+  untouched. The "instanced" trio proved to have **static** destination coords (spawn-data), so no
+  in-game capture was needed.
+  - Mithril Dragon **#1060** (Ancient Cavern upper, p1 · npc 2919) / Waterfiend **#1061**
+    (lower, p0 · npc 2916) — same cavern, different levels.
+  - Catacombs of Kourend **#1062** (underground, p0) / Barrows **#1063** (tunnels, p0,
+    dropped stale `completionPlane`) / Revenants **#1064** (caves, p0 · npc 7881).
+  - The Nightmare **#1065** / Phosani's Nightmare **#1066** (Sisterhood Sanctuary, p1 · npc 9460)
+    / Fishing Trawler **#1067** (trawler deck, p1 · npc 10707; dropped stale `targetPlane`).
+- **Verification:** per source `validate_drop_rates` + `guidance_lint`; CI `build`+`scripts`
+  green; two relaunch + live re-sweep cycles (5/5 then 3/3 PASS); one source per PR; merged once
+  CI-green and live-verified (operator-approved merge policy).
+- The 9th divergence (Trouble Brewing) was a transient drive-state artifact off the pre-edit
+  client; not reproduced on a clean relaunch — no data change, no spectator fix needed.
