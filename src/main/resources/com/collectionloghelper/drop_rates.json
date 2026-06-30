@@ -5515,8 +5515,8 @@
   {
     "name": "Demonic gorillas",
     "category": "SLAYER",
-    "worldX": 2405,
-    "worldY": 3419,
+    "worldX": 2112,
+    "worldY": 5651,
     "worldPlane": 0,
     "killTimeSeconds": 60,
     "ironKillTimeSeconds": 72,
@@ -5611,8 +5611,8 @@
       },
       {
         "description": "Kill Demonic gorillas in the Crash Site Cavern. They switch attack style after three missed hits in a row (blocked by prayer counts as missed), so watch for the style change and swap your protection prayer accordingly. Dodge the falling-boulder special (run one tile when the ground turns red) and the magic attack (a green orb, up to 30 damage - blocked by Protect from Magic). Use Emberlight or Arclight for the melee swap as demonic gorillas are demons and take bonus damage from demonbane weapons. Toxic blowpipe or Bow of faerdhinen works well for ranged.",
-        "worldX": 2405,
-        "worldY": 3419,
+        "worldX": 2112,
+        "worldY": 5651,
         "worldPlane": 0,
         "npcId": 7144,
         "interactAction": "Attack",
@@ -5622,7 +5622,7 @@
         "recommendedItemIds": [
           25865,
           12926,
-          22324,
+          29589,
           6685,
           3024,
           2434
@@ -5630,8 +5630,8 @@
       },
       {
         "description": "Loot the ballista parts, Zenyte shards, and Monkey tails. Banking back to Edgeville or Castle Wars is the standard cycle; the spirit tree network gives you a fast return for the next trip.",
-        "worldX": 2405,
-        "worldY": 3419,
+        "worldX": 2112,
+        "worldY": 5651,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
         "section": "Loot"
