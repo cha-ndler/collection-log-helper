@@ -16327,7 +16327,7 @@
       {
         "itemId": 5554,
         "name": "Rogue mask",
-        "dropRate": 0.625,
+        "dropRate": 0.392,
         "isPet": false,
         "wikiPage": "Rogue_mask",
         "independent": true
@@ -16335,7 +16335,7 @@
       {
         "itemId": 5553,
         "name": "Rogue top",
-        "dropRate": 0.625,
+        "dropRate": 0.392,
         "isPet": false,
         "wikiPage": "Rogue_top",
         "independent": true
@@ -16343,7 +16343,7 @@
       {
         "itemId": 5555,
         "name": "Rogue trousers",
-        "dropRate": 0.625,
+        "dropRate": 0.392,
         "isPet": false,
         "wikiPage": "Rogue_trousers",
         "independent": true
@@ -16351,7 +16351,7 @@
       {
         "itemId": 5556,
         "name": "Rogue gloves",
-        "dropRate": 0.625,
+        "dropRate": 0.392,
         "isPet": false,
         "wikiPage": "Rogue_gloves",
         "independent": true
@@ -16359,7 +16359,7 @@
       {
         "itemId": 5557,
         "name": "Rogue boots",
-        "dropRate": 0.625,
+        "dropRate": 0.392,
         "isPet": false,
         "wikiPage": "Rogue_boots",
         "independent": true
@@ -16402,14 +16402,6 @@
           3060,
           4990,
           1
-        ],
-        "recommendedItemIds": [
-          13237,
-          13238,
-          13239,
-          13240,
-          13241,
-          13242
         ],
         "section": "Activity"
       },
