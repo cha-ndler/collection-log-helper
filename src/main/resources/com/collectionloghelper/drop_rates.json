@@ -5214,6 +5214,11 @@
     "worldPlane": 0,
     "killTimeSeconds": 120,
     "ironKillTimeSeconds": 72,
+    "requirements": {
+      "diaries": [
+        "WILDERNESS_MEDIUM"
+      ]
+    },
     "items": [
       {
         "itemId": 27670,
@@ -5272,7 +5277,7 @@
     "interactAction": "Attack",
     "guidanceSteps": [
       {
-        "description": "Travel to the Silk Chasm cave entrance in the Wilderness with anti-pk gear, a Voidwaker / DWH spec weapon if available, and at least one super combat plus restore. Use Wilderness crabs teleport (fastest) or Waka canoe (57 Woodcutting)",
+        "description": "Travel to the Silk Chasm cave entrance in the Wilderness with anti-pk gear, a Voidwaker / DWH spec weapon if available, and at least one super combat plus restore. Entering the lair requires the medium Wilderness Diary, or an active Venenatis boss Slayer task (a spider task does not bypass the diary). Use Wilderness crabs teleport (fastest) or Waka canoe (57 Woodcutting)",
         "worldX": 3321,
         "worldY": 3794,
         "worldPlane": 0,
