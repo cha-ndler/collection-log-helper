@@ -22243,7 +22243,7 @@
         "section": "Travel"
       },
       {
-        "description": "Kill Cyclopes for defender drops. Warrior guild tokens are spent on entry (10) and another 10 each minute inside the room - bring a large supply. Hold the current tier defender in inventory to unlock the next tier. Protect from Melee recommended.",
+        "description": "Kill Cyclopes for defender drops. Warrior guild tokens are spent on entry (10) and another 10 each minute inside the room - bring a large supply. Tier progression is gated by LEAVING and re-entering: after you get a defender, leave the room (re-showing it to Kamfreena) and re-enter, and the next tier can then drop even if the defender is banked. Holding the current defender only lets you obtain duplicates of the SAME tier. Protect from Melee recommended.",
         "perItemStepDescription": {
           "8844": "Kill Cyclopes (no prerequisite) to receive a Bronze defender and start the chain.",
           "8845": "Kill Cyclopes while holding a Bronze defender in inventory to receive an Iron defender.",
