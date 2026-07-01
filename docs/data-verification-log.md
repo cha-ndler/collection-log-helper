@@ -142,7 +142,7 @@
 | 113 | Tombs of Amascut (500 Invocation) | RAIDS | `2026-06-30` | - | - |
 | 114 | Barbarian Assault | MINIGAMES | `2026-06-30` | - | - |
 | 115 | Barracuda Trials | MINIGAMES | `2026-06-30` | - | - |
-| 116 | Brimhaven Agility Arena | MINIGAMES | - | - | #1142 prose; structural pointCost deferred |
+| 116 | Brimhaven Agility Arena | MINIGAMES | `2026-07-01` | - | #1142 prose; pointCost no-change (per-item, no sum) |
 | 117 | Castle Wars | MINIGAMES | `2026-06-30` | - | - |
 | 118 | Fishing Trawler | MINIGAMES | `2026-06-30` | - | - |
 | 119 | Giants' Foundry | MINIGAMES | `2026-06-30` | - | - |
@@ -152,7 +152,7 @@
 | 123 | Hallowed Sepulchre | MINIGAMES | `2026-06-30` | - | - |
 | 124 | Last Man Standing | MINIGAMES | `2026-06-30` | - | - |
 | 125 | Mage Training Arena | MINIGAMES | `2026-06-30` | - | - |
-| 126 | Mahogany Homes | MINIGAMES | - | - | coord deferred (unverifiable tile) |
+| 126 | Mahogany Homes | MINIGAMES | `2026-07-01` | - | coord fixed #1170 |
 | 127 | Mastering Mixology | MINIGAMES | `2026-06-30` | - | - |
 | 128 | Pest Control | MINIGAMES | `2026-06-30` | - | - |
 | 129 | Rogues' Den | MINIGAMES | `2026-06-30` | - | - |
@@ -218,7 +218,7 @@
 | 189 | Small Salvage | OTHER | `2026-07-01` | - | - |
 | 190 | Stingray (Boat Combat) | OTHER | `2026-07-01` | - | - |
 | 191 | Stronghold of Security | OTHER | `2026-07-01` | - | - |
-| 192 | TzHaar | OTHER | - | - | deferred (aggregate multi-NPC rate model) |
+| 192 | TzHaar | OTHER | `2026-07-01` | - | resolved: aggregate model intentional |
 | 193 | Vampyre Kraken (Boat Combat) | OTHER | `2026-07-01` | - | - |
 | 194 | Waterfiend | OTHER | `2026-07-01` | - | - |
 | 195 | Wilderness God Wars Dungeon | OTHER | `2026-07-01` | - | - |
@@ -238,7 +238,7 @@
 | 209 | Runecrafting (Fire Runes) | SKILLING | `2026-07-01` | - | - |
 | 210 | Shooting Stars | SKILLING | `2026-07-01` | - | - |
 | 211 | Thieving (Seed Stalls) | SKILLING | `2026-07-01` | - | - |
-| 212 | Underwater Crabs | SKILLING | - | - | deferred (Mogre entry route wiki-contradicted; needs sourced coords) |
+| 212 | Underwater Crabs | SKILLING | `2026-07-01` | - | route fixed #1171 |
 | 213 | Woodcutting (Teak Trees) | SKILLING | `2026-07-01` | - | - |
 | 214 | Beginner Treasure Trails | CLUES | `2026-07-01` | - | - |
 | 215 | Easy Treasure Trails | CLUES | `2026-07-01` | - | - |
@@ -247,7 +247,7 @@
 | 218 | Hard Treasure Trail Rewards (Rare) | CLUES | `2026-07-01` | - | - |
 | 219 | Hard Treasure Trails | CLUES | `2026-07-01` | - | - |
 | 220 | Master Treasure Trail Rewards (Rare) | CLUES | `2026-07-01` | - | - |
-| 221 | Master Treasure Trails | CLUES | - | - | 1 (PR #1166) |
+| 221 | Master Treasure Trails | CLUES | `2026-07-01` | - | - |
 | 222 | Medium Treasure Trails | CLUES | `2026-07-01` | - | - |
 | 223 | Scroll Cases | CLUES | `2026-07-01` | - | - |
 | 224 | Shared Treasure Trail Rewards | CLUES | `2026-07-01` | - | - |
@@ -1021,3 +1021,51 @@ Once #1166 merges the V1-stamped total is 219/225, with the remaining 6 being ex
 than un-examined sources. Other standing deferrals (not V1 rows): Brimhaven graceful `pointCost` model,
 Mahogany Homes Amy coord, Yama Oathplate rate, bundle-blob history purge, and the Barracuda Trials Soup
 `isPet`/`wikiPage` cross-source follow-up.
+## 2026-07-01 — Deferral-resolution pass
+
+Worked the deferral queue after the 225-source verification completed. **7 of 9 deferrals resolved**
+(4 via sourced fixes, 2 via investigation/decision, 1 already-merged clue fix); 2 remain, both awaiting
+an operator decision.
+
+**Resolved via sourced fixes (merged):**
+- **Yama Oathplate shards — #1168:** 1/30 -> 1/17.07. The 1/15-vs-1/17.07 conflict was settled by the
+  item's own drop-table page ("Yama 1238 12 1/17.07"). (Yama row was already V1-stamped.)
+- **Barracuda Trials Soup — #1169:** isPet false->true + wikiPage "Soup_(item)"->"Soup", the recorded
+  cross-source follow-up to Port Tasks #1156. (Row already V1-stamped.)
+- **Mahogany Homes — #1170:** Amy coord (2954,3369)->(2990,3365), cache-confirmed via npc_spawns
+  (NPC 10428 at 2990,3365, east Falador). Row now V1-stamped.
+- **Underwater Crabs — #1171:** Mogre Camp entry rerouted from Mudskipper Point to Murphy at Port
+  Khazard (npc_spawns: Murphy 5607 at 2668,3162; wiki "speak to Murphy at Port Khazard to go diving").
+  Underwater fight coord + the D4Batch3 gather-loop marker preserved. Row now V1-stamped.
+
+**Resolved via investigation / decision (no code/data change):**
+- **TzHaar — resolved: aggregate model intentional (operator call).** The 9 per-NPC rate findings
+  compared per-NPC wiki rates against a source that deliberately models the aggregate "kill TzHaar-city"
+  effective rate (npcId 2173 = TzHaar-Ket, but items span Ket/Mej/Xil with a consistent ~4x down-weight).
+  Kept as-is; row V1-stamped.
+- **Brimhaven Agility Arena pointCost — investigated: NO CHANGE.** The deferral assumed 6 pieces x 250 =
+  1500 was summed somewhere. Code inspection shows `pointCost` is used in exactly three places, all
+  strictly PER-ITEM and never summed across a source: `EfficiencyCalculator.scoreIndividualItem`
+  (hoursNeeded = pointCost / pointsPerHour), the calc text dump, and `ItemDetailPanel` (Cost / Est. Time
+  rows). No 1500 overstatement exists. 250-per-piece is the correct per-item representation (each piece
+  requires reaching the 250-voucher threshold; the recolour then unlocks all 6). Changing the data would
+  introduce error: 42-each understates each piece's threshold, and anchor-250/rest-0 drops the 5 zero-cost
+  pieces into the `else` 0.2 fallback (~500 h, i.e. displayed as SLOW). Fixed at the correct layer =
+  no change. Row V1-stamped (prose already fixed in #1142). Wiki (Graceful clothing): the blue Brimhaven
+  scheme is "250 Brimhaven vouchers, and is only available for recolouring the whole graceful outfit."
+- **Master Treasure Trails — #1166 merged:** the tier-scaled clue-upgrade prose fix landed; row V1-stamped.
+
+**Still deferred (2 — need an operator decision, not more sourcing):**
+- **Lost Schematics (OTHER):** Piscarilius (test-guarded by `SailingSourceTriageTest`) vs the verifier's
+  Port-Sarim finding. Resolving toward Port Sarim means editing a regression test — needs a factual call
+  on which port is the canonical anchor.
+- **Sea Treasures (OTHER):** re-model the 8 Medallion fragments as per-island one-time collectibles
+  (test-guarded; ~8 authored steps with coords). Larger authoring + likely in-game capture; do only on
+  request.
+
+Repo-hygiene item outside the V1 rows: the 17 MB bundle blob still in git history (a `git filter-repo`
+purge + force-push is an operator-only decision).
+
+**Running total V1-stamped:** 223 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 25 MINIGAMES + 56 OTHER +
+17 SKILLING + 12 CLUES). Only **Lost Schematics** and **Sea Treasures** remain, both pending an operator
+decision.
