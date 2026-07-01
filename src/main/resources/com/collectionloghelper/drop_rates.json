@@ -30129,7 +30129,7 @@
       }
     ],
     "locationDescription": "Fire Altar, north-east of Al Kharid",
-    "travelTip": "Ring of dueling -> Emir's Arena (Al Kharid) -> run north-east to fire altar ruins; or Abyss (requires Enter the Abyss miniquest, omit glory/prayer for PvP danger)",
+    "travelTip": "Ring of dueling -> Emir's Arena (Al Kharid) -> run north/north-west to fire altar ruins; or Abyss (requires Enter the Abyss miniquest, omit glory/prayer for PvP danger)",
     "requirements": {
       "skills": [
         {
@@ -30146,7 +30146,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Ring of dueling -> Emir's Arena -> run north-east to fire altar ruins",
+        "travelTip": "Ring of dueling -> Emir's Arena -> run north/north-west to fire altar ruins",
         "requiredItemIds": [
           1442
         ],
