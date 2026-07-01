@@ -16183,7 +16183,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Port Khazard. Use the Minigame Grouping teleport (Fishing Trawler) for the fastest route, or fairy ring DJP then run south. Bring bailing buckets and rope for repairs",
+        "description": "Travel to Port Khazard. Use the Minigame Grouping teleport (Fishing Trawler) for the fastest route, or fairy ring DJP then run south. Bring a bailing bucket, swamp paste (to seal leaks), and rope (to repair torn nets)",
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 0,
@@ -16212,7 +16212,7 @@
         "section": "Activity"
       },
       {
-        "description": "During the 5-minute voyage, bail water from flooded sections (use bucket on water) and repair damaged nets with rope. Bailing continuously maximises your loot share. Torn nets simply catch no fish until repaired",
+        "description": "During the 5-minute voyage, keep three tasks up: bail water with the bucket, seal the hull leaks with swamp paste (the leaks are the source of the incoming water), and repair torn nets with rope. Staying on top of leaks and bailing maximises your loot share; torn nets simply catch no fish until repaired",
         "worldX": 2661,
         "worldY": 3164,
         "worldPlane": 1,
