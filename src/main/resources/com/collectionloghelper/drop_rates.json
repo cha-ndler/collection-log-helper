@@ -30334,7 +30334,7 @@
     ],
     "guidanceSteps": [
       {
-        "description": "Travel to the Grand Tree in Tree Gnome Stronghold. Talk to Gianne jnr. on the west end of the ground floor to get a hard delivery order.",
+        "description": "Travel to the Grand Tree in Tree Gnome Stronghold and climb up to the 1st floor [UK] / 2nd floor [US]. Talk to Aluft Gianne jnr. at the west end of that floor (north-west, just west of the cafe) to get a hard delivery order.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
@@ -30357,7 +30357,7 @@
         "section": "Order"
       },
       {
-        "description": "Cook the required gnome dish using the range and ingredients on the Grand Tree ground floor. Use the recipe book in your inventory if unsure of the recipe. Deliver the finished dish to the assigned customer within the 11-minute time limit. Customer locations vary across Gielinor - check the delivery box for the destination.",
+        "description": "Cook the required gnome dish using the range and ingredient shops on the Grand Tree 1st floor [UK] / 2nd floor [US] (same floor as Gianne jnr.). Use the recipe book in your inventory if unsure of the recipe. Deliver the finished dish to the assigned customer within the 11-minute time limit. Customer locations vary across Gielinor - check the delivery box for the destination.",
         "worldX": 2436,
         "worldY": 3500,
         "worldPlane": 0,
