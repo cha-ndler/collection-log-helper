@@ -21971,7 +21971,7 @@
       "skills": [
         {
           "skill": "AGILITY",
-          "level": 10
+          "level": 1
         }
       ]
     },
@@ -21983,7 +21983,7 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 25,
-        "travelTip": "Camelot teleport -> Seers' Village rooftop (60+ Agility); Varrock teleport for Varrock rooftop (10+)",
+        "travelTip": "Camelot teleport -> Seers' Village rooftop (60+ Agility); Varrock teleport for Varrock rooftop (30+)",
         "section": "Travel"
       },
       {
