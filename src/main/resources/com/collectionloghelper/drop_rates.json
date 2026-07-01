@@ -18170,7 +18170,7 @@
         "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Granite_body",
-        "pointCost": 1000
+        "milestoneKills": 1
       },
       {
         "itemId": 12703,
@@ -18240,7 +18240,7 @@
       },
       {
         "section": "Reward",
-        "description": "Spend honour points at Commander Connad's shop: Fighter torso (1500 pts), Penance skirt (1500 pts), role hats (1100 pts each). Buy Gambles (500 pts + 1 Penance Queen kill) for a chance at the Pet penance queen (1/1000 per gamble).",
+        "description": "Spend honour points at Commander Connad's shop: Fighter torso (1500 pts), Penance skirt (1500 pts), role hats (1100 pts each). Buy Gambles (500 pts + 1 Penance Queen kill) for a chance at the Pet penance queen (1/1000 per gamble). The Granite body is the only reward not bought with honour points - it costs 95,000 coins from Commander Connad after your first Penance Queen kill.",
         "worldX": 2519,
         "worldY": 3571,
         "worldPlane": 0,
