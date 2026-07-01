@@ -89,11 +89,11 @@ public class GuidanceSequencerWaypointTest
 
 		Constructor<GuidanceSequencer> ctor = GuidanceSequencer.class.getDeclaredConstructor(
 			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class,
-			com.collectionloghelper.guidance.bosses.BossGuidanceRegistry.class);
+			com.collectionloghelper.guidance.bosses.BossGuidanceRegistry.class, com.collectionloghelper.sailing.SailingDockResolver.class);
 		ctor.setAccessible(true);
 		com.collectionloghelper.guidance.bosses.BossGuidanceRegistry bossRegistry =
 			org.mockito.Mockito.mock(com.collectionloghelper.guidance.bosses.BossGuidanceRegistry.class);
-		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker, bossRegistry);
+		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker, bossRegistry, null);
 	}
 
 	// ── Helpers ───────────────────────────────────────────────────────────────
