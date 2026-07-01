@@ -34,9 +34,11 @@ import com.collectionloghelper.data.StepWaypoint;
 import com.collectionloghelper.data.Zone;
 import com.collectionloghelper.guidance.bosses.BossGuidance;
 import com.collectionloghelper.guidance.bosses.BossGuidanceRegistry;
+import com.collectionloghelper.sailing.SailingDockResolver;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -54,6 +56,7 @@ public class GuidanceSequencer
 	private final PlayerInventoryState inventoryState;
 	private final RequirementsChecker requirementsChecker;
 	private final BossGuidanceRegistry bossRegistry;
+	private final SailingDockResolver sailingDockResolver;
 	private final CompletionChecker completionChecker;
 	private final StepAdvancer stepAdvancer;
 	private final SequencerEventAdapter eventAdapter;
@@ -118,11 +121,13 @@ public class GuidanceSequencer
 
 	@Inject
 	private GuidanceSequencer(PlayerInventoryState inventoryState, PlayerCollectionState collectionState,
-		RequirementsChecker requirementsChecker, BossGuidanceRegistry bossRegistry)
+		RequirementsChecker requirementsChecker, BossGuidanceRegistry bossRegistry,
+		SailingDockResolver sailingDockResolver)
 	{
 		this.inventoryState = inventoryState;
 		this.requirementsChecker = requirementsChecker;
 		this.bossRegistry = bossRegistry;
+		this.sailingDockResolver = sailingDockResolver;
 		this.completionChecker = new CompletionChecker(inventoryState, collectionState);
 		this.stepAdvancer = new StepAdvancer(this.completionChecker);
 		this.eventAdapter = new SequencerEventAdapter(this.completionChecker);
@@ -289,21 +294,47 @@ public class GuidanceSequencer
 	 */
 	private GuidanceStep resolveStep(int index)
 	{
-		GuidanceStep step = steps.get(index);
-		if (step.getConditionalAlternatives() == null || step.getConditionalAlternatives().isEmpty())
+		GuidanceStep cached = resolvedAlternatives.get(index);
+		if (cached != null)
 		{
-			return step;
+			return cached;
 		}
 
-		return resolvedAlternatives.computeIfAbsent(index, i ->
+		GuidanceStep step = steps.get(index);
+		GuidanceStep resolved = step;
+
+		// 1. Conditional alternatives (existing behaviour).
+		if (step.getConditionalAlternatives() != null && !step.getConditionalAlternatives().isEmpty())
 		{
-			GuidanceStep resolved = step.resolveAlternative(requirementsChecker);
+			resolved = step.resolveAlternative(requirementsChecker);
 			if (resolved != step)
 			{
-				log.info("Step {} resolved conditional alternative: {}", i + 1, resolved.getDescription());
+				log.info("Step {} resolved conditional alternative: {}", index + 1, resolved.getDescription());
 			}
-			return resolved;
-		});
+		}
+
+		// 2. Sailing dynamic-dock override for the first step: point port-based
+		//    Sailing sources at the player's best owned boat's dock rather than the
+		//    static Piscarilius anchor. Runtime-only; the static data is unchanged.
+		//    (The resolver is an optional collaborator; guard for tests that omit it.)
+		if (sailingDockResolver != null)
+		{
+			Optional<WorldPoint> dock = sailingDockResolver.resolveFirstStepOverride(resolved, index);
+			if (dock.isPresent())
+			{
+				WorldPoint d = dock.get();
+				resolved = resolved.withWorldX(d.getX()).withWorldY(d.getY()).withWorldPlane(d.getPlane());
+				log.info("Step {} dock override -> best ship dock ({}, {}, {})", index + 1, d.getX(), d.getY(), d.getPlane());
+			}
+		}
+
+		// Cache only when the step was actually modified, preserving the prior
+		// "return the raw step" behaviour for the common no-op case.
+		if (resolved != step)
+		{
+			resolvedAlternatives.put(index, resolved);
+		}
+		return resolved;
 	}
 
 	public int getCurrentIndex()
