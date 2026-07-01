@@ -14384,7 +14384,7 @@
         "section": "Foundry"
       },
       {
-        "description": "Pour metal into the crucible, then move the sword through the trip hammer, grindstone, and polishing wheel in order to shape the blade. Match the target profile shown on the heat gauge each step - the closer you match, the more reputation per sword. The optimal pattern is hammer x2, grindstone x1, polish x1, cycling until the gauge is full.",
+        "description": "Pour metal into the crucible, then shape the blade using the tool that matches the sword's current TEMPERATURE band on the HUD (there is no fixed pattern): use the trip hammer while the sword is Hot, the grindstone at Medium temperature, and the polishing wheel when Cold. Using the right tool for the current temperature raises the sword's quality toward 100%. Keep the sword in the correct heat range and match the target mould to maximise reputation per sword.",
         "worldX": 3365,
         "worldY": 11489,
         "worldPlane": 0,
