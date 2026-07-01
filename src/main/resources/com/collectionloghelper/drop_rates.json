@@ -19599,8 +19599,8 @@
   {
     "name": "Lost Schematics",
     "category": "OTHER",
-    "worldX": 1824,
-    "worldY": 3691,
+    "worldX": 3044,
+    "worldY": 3193,
     "worldPlane": 0,
     "killTimeSeconds": 600,
     "afkLevel": 1,
@@ -19719,8 +19719,8 @@
     "guidanceSteps": [
       {
         "description": "Sail to discoverable islands via Port Sarim docks. Higher Sailing level unlocks more islands and schematic types.",
-        "worldX": 1824,
-        "worldY": 3691,
+        "worldX": 3044,
+        "worldY": 3193,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
@@ -19728,8 +19728,8 @@
       },
       {
         "description": "Find lost schematics while exploring islands during Sailing voyages.",
-        "worldX": 1824,
-        "worldY": 3691,
+        "worldX": 3044,
+        "worldY": 3193,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
         "section": "Find schematics"
