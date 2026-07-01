@@ -32323,8 +32323,8 @@
         "itemId": 31283,
         "name": "Soup",
         "dropRate": 0.000222,
-        "isPet": false,
-        "wikiPage": "Soup_(item)"
+        "isPet": true,
+        "wikiPage": "Soup"
       },
       {
         "itemId": 32090,
