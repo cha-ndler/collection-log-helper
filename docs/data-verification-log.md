@@ -214,32 +214,32 @@
 | 185 | Rune Dragon | OTHER | `2026-07-01` | - | - |
 | 186 | Sailing Misc | OTHER | `2026-07-01` | - | - |
 | 187 | Sea Treasures | OTHER | - | - | deferred (fragment re-model, test-guarded) |
-| 188 | Shayzien Armour | OTHER | - | - | 1 (PR #1158) |
+| 188 | Shayzien Armour | OTHER | `2026-07-01` | - | - |
 | 189 | Small Salvage | OTHER | `2026-07-01` | - | - |
 | 190 | Stingray (Boat Combat) | OTHER | `2026-07-01` | - | - |
 | 191 | Stronghold of Security | OTHER | `2026-07-01` | - | - |
 | 192 | TzHaar | OTHER | - | - | deferred (aggregate multi-NPC rate model) |
-| 193 | Vampyre Kraken (Boat Combat) | OTHER | - | - | 1 (PR #1159) |
+| 193 | Vampyre Kraken (Boat Combat) | OTHER | `2026-07-01` | - | - |
 | 194 | Waterfiend | OTHER | `2026-07-01` | - | - |
 | 195 | Wilderness God Wars Dungeon | OTHER | `2026-07-01` | - | - |
 | 196 | Zombie Pirate Locker | OTHER | `2026-07-01` | - | - |
-| 197 | Aerial Fishing | SKILLING | - | - | - |
-| 198 | Black Chinchompas | SKILLING | - | - | - |
-| 199 | Colossal Wyrm Agility | SKILLING | - | - | - |
-| 200 | Cutting Squid | SKILLING | - | - | - |
-| 201 | Deep Sea Fishing | SKILLING | - | - | - |
-| 202 | Farming (Fruit Trees) | SKILLING | - | - | - |
-| 203 | Fishing (Swordfish) | SKILLING | - | - | - |
-| 204 | Mining (Gemstone Rocks) | SKILLING | - | - | - |
-| 205 | Motherlode Mine | SKILLING | - | - | - |
-| 206 | Pickpocketing Darkmeyer Vyre | SKILLING | - | - | - |
-| 207 | Prifddinas Rabbit | SKILLING | - | - | - |
-| 208 | Rooftop Agility | SKILLING | - | - | - |
-| 209 | Runecrafting (Fire Runes) | SKILLING | - | - | - |
-| 210 | Shooting Stars | SKILLING | - | - | - |
-| 211 | Thieving (Seed Stalls) | SKILLING | - | - | - |
-| 212 | Underwater Crabs | SKILLING | - | - | - |
-| 213 | Woodcutting (Teak Trees) | SKILLING | - | - | - |
+| 197 | Aerial Fishing | SKILLING | `2026-07-01` | - | - |
+| 198 | Black Chinchompas | SKILLING | `2026-07-01` | - | - |
+| 199 | Colossal Wyrm Agility | SKILLING | `2026-07-01` | - | - |
+| 200 | Cutting Squid | SKILLING | `2026-07-01` | - | - |
+| 201 | Deep Sea Fishing | SKILLING | - | - | 1 (PR #1161) |
+| 202 | Farming (Fruit Trees) | SKILLING | - | - | 1 (PR #1164) |
+| 203 | Fishing (Swordfish) | SKILLING | `2026-07-01` | - | - |
+| 204 | Mining (Gemstone Rocks) | SKILLING | `2026-07-01` | - | - |
+| 205 | Motherlode Mine | SKILLING | `2026-07-01` | - | - |
+| 206 | Pickpocketing Darkmeyer Vyre | SKILLING | `2026-07-01` | - | - |
+| 207 | Prifddinas Rabbit | SKILLING | `2026-07-01` | - | - |
+| 208 | Rooftop Agility | SKILLING | - | - | 1 (PR #1162) |
+| 209 | Runecrafting (Fire Runes) | SKILLING | - | - | 1 (PR #1163) |
+| 210 | Shooting Stars | SKILLING | `2026-07-01` | - | - |
+| 211 | Thieving (Seed Stalls) | SKILLING | `2026-07-01` | - | - |
+| 212 | Underwater Crabs | SKILLING | - | - | deferred (Mogre entry route wiki-contradicted; needs sourced coords) |
+| 213 | Woodcutting (Teak Trees) | SKILLING | `2026-07-01` | - | - |
 | 214 | Beginner Treasure Trails | CLUES | - | - | - |
 | 215 | Easy Treasure Trails | CLUES | - | - | - |
 | 216 | Elite Treasure Trail Rewards (Rare) | CLUES | - | - | - |
@@ -947,3 +947,38 @@ carry `deferred` in the fixes column.
 **Running total V1-stamped:** 189 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 53 OTHER).
 **OTHER category COMPLETE: 58/58 verified** (53 clean-stamped, 2 fixes pending merge, 3 deferred: TzHaar,
 Sea Treasures, Lost Schematics). Next category: **SKILLING** (17 sources), then **CLUES** (12).
+
+## 2026-07-01 — Accuracy-convergence v2: SKILLING (17/17 — SKILLING CATEGORY COMPLETE)
+
+Cache `2026-06-25-rev239`. OTHER batch-4 fixes merged (#1158/#1159). Full SKILLING category in one batch:
+**12 CLEAN, 5 with findings; 4 fixed, 1 deferred.** Tier-0 accuracy layer clean (the dead-end-MANUAL /
+phantom-mechanic / over-highlight warnings on Aerial Fishing, Motherlode, Fire Runes, Black Chinchompas
+belong to the separate guidance-engine loop-class workstream, not accuracy — deliberately out of scope).
+- **Deep Sea Fishing — PR #1161 (major):** Sailing requirement `1` → `56`. All clog fish come from deep
+  sea trawling shoals; every shoal needs a trawling net and the lowest (rope net / Giant krill shoal) is
+  69 Fishing / **56 Sailing**. Wiki (Deep sea trawling): "69 Fishing/56 Sailing for Giant krill shoals."
+- **Rooftop Agility — PR #1162 (major+minor):** Agility gate `10` → `1` (Draynor rooftop became level 1
+  when the May-2024 update removed its level-10 req; the generic source should gate at the lowest course).
+  Also fixed a step travelTip labelling Varrock rooftop "(10+)" → "(30+)". Wiki: Draynor "available to
+  players with 1 Agility ... requirement of 10 has been removed"; Varrock "30 or higher."
+- **Runecrafting (Fire Runes) — PR #1163 (minor):** travelTip direction "run north-east" → "north/
+  north-west" (fire altar is NW of Emir's Arena, not NE; the step description already said "west of
+  Emir's Arena"). Wiki (Fire Altar): "north of Al Kharid, west of the Emir's Arena."
+- **Farming (Fruit Trees) — PR #1164 (major):** Tree Gnome Village fairy ring `CLR` → `CIQ` (CLR lands
+  on Ape Atoll; CIQ is the Tree Gnome Village patch code). Wiki (Fairy ring): CLR = Ape Atoll; CIQ =
+  Tree Gnome Village.
+- **Underwater Crabs — DEFERRED.** The verifier upheld (correctly, per wiki) that the Mogre Camp is
+  entered by speaking to **Murphy at Port Khazard** ("speak to Murphy at Port Khazard to go diving"), not
+  by diving at Mudskipper Point as the current 3-step guidance routes. But the correct replacement needs
+  sourced Port-Khazard/Mogre-Camp dive coordinates for the ARRIVE/dive steps, which are not available
+  without in-game capture (the AIQ→Mudskipper Point fairy-ring code itself is valid and was in-game-
+  validated for Skeletal Wyvern, but nothing validates a Mudskipper→Mogre dive). Won't guess coords —
+  deferred for authoring / in-game capture, wiki citation attached. Wiki (Mogre Camp / RFD Pirate Pete):
+  "speak to Murphy at Port Khazard to go diving."
+
+**Stamps:** V1 = `2026-07-01` for the 2 now-merged OTHER batch-4 fixes (#1158/#1159) + the 12 SKILLING
+clean. The 4 SKILLING fixes (#1161-#1164) stamp after merge; Underwater Crabs carries `deferred`.
+
+**Running total V1-stamped:** 203 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 55 OTHER +
+12 SKILLING). **SKILLING category COMPLETE: 17/17 verified** (12 clean-stamped, 4 fixes pending merge, 1
+deferred: Underwater Crabs). Final category remaining: **CLUES** (12 sources).
