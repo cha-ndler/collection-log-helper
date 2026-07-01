@@ -70,6 +70,10 @@ public class SailingDockResolver
 	 * drop_rates.json. A first step landing here is the "travel to your sailing
 	 * port" step and is eligible for the dynamic dock override.
 	 */
+	// NB: this static-data sentinel (1824,3691) is intentionally NOT the same tile
+	// as {@link SailingPort#PORT_PISCARILIUS}'s dock (1845,3687). This is the value
+	// authors placed in drop_rates.json as the "generic sailing port" first-step
+	// target; the enum holds the actual navigation tile. Do not "reconcile" them.
 	private static final int ANCHOR_X = 1824;
 	private static final int ANCHOR_Y = 3691;
 	private static final int ANCHOR_PLANE = 0;
@@ -123,9 +127,8 @@ public class SailingDockResolver
 		if (!port.isPresent())
 		{
 			log.debug("Best Sailing boat is at unknown port index {}", bestPortId);
-			return Optional.empty();
 		}
-		return Optional.of(port.get().getDock());
+		return port.map(SailingPort::getDock);
 	}
 
 	/**

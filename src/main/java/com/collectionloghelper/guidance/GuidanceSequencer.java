@@ -304,7 +304,9 @@ public class GuidanceSequencer
 		GuidanceStep resolved = step;
 
 		// 1. Conditional alternatives (existing behaviour).
-		if (step.getConditionalAlternatives() != null && !step.getConditionalAlternatives().isEmpty())
+		boolean hasAlternatives = step.getConditionalAlternatives() != null
+			&& !step.getConditionalAlternatives().isEmpty();
+		if (hasAlternatives)
 		{
 			resolved = step.resolveAlternative(requirementsChecker);
 			if (resolved != step)
@@ -328,9 +330,11 @@ public class GuidanceSequencer
 			}
 		}
 
-		// Cache only when the step was actually modified, preserving the prior
-		// "return the raw step" behaviour for the common no-op case.
-		if (resolved != step)
+		// Cache the resolved step when it carried conditional alternatives (matching
+		// the prior computeIfAbsent stickiness, even when it resolves to the base
+		// step) or when the dock override modified it. Steps with neither are left
+		// uncached, preserving the prior "return the raw step" behaviour.
+		if (hasAlternatives || resolved != step)
 		{
 			resolvedAlternatives.put(index, resolved);
 		}

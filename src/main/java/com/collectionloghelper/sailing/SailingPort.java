@@ -4,10 +4,13 @@
  *
  * The port index -> dock world-coordinate table below is factual OSRS game data.
  * The index/coordinate values were cross-referenced against the public,
- * BSD-2-Clause-licensed "Where's My Boat" plugin
- * (https://github.com/ArchRBX/wheresmyboat, (c) 2025 nucleon, Cooper Morris,
- * AtchRBX), whose enums/Port.java enumerates each Sailing port with its
- * navigation WorldPoint. Attribution retained per BSD-2-Clause.
+ * BSD-2-Clause-licensed "Where's My Boat" plugin, whose enums/Port.java
+ * enumerates each Sailing port with its navigation WorldPoint.
+ *   Repository: https://github.com/ArchRBX/wheresmyboat
+ *   Upstream copyright (retained per BSD-2-Clause):
+ *     Copyright (c) 2025, nucleon <https://github.com/nucleon>
+ *     Copyright (c) 2025, Cooper Morris <https://github.com/coopermor>
+ *     Copyright (c) 2025, AtchRBX <https://github.com/AtchRBX>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
