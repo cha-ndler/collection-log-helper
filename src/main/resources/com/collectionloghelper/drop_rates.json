@@ -13835,7 +13835,7 @@
         "section": "Sepulchre"
       },
       {
-        "description": "Spend Hallowed marks at the reward shop near the entrance. The Ring of endurance and Strange old lockpick come from the floor-5 grand coffins; everything else is bought with marks (Hallowed grapple/focus/symbol/hammer 100 marks, Hallowed ring 250 marks, Dark dye 300, Dark acorn 3000).",
+        "description": "Spend Hallowed marks at the reward shop near the entrance. The Strange old lockpick drops from regular coffins on every floor (better odds the higher the floor: ~1/200 on floor 1 up to ~1/40 on floor 5); the Ring of endurance is exclusive to the floor-5 Grand Hallowed Coffin. Everything else is bought with marks (Hallowed grapple/focus/symbol/hammer 100 marks, Hallowed ring 250 marks, Dark dye 300, Dark acorn 3000).",
         "worldX": 3654,
         "worldY": 3385,
         "worldPlane": 0,
