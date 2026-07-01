@@ -20908,7 +20908,7 @@
         "section": "Bank"
       },
       {
-        "description": "Kill monsters in the Catacombs for dark totem pieces (base, middle, top - each 1/500 from any monster). Burying bones restores Prayer. Popular Slayer tasks here include abyssal demons, nechryaels, hellhounds, and brutal black dragons. Combine Slayer trips with totem piece hunting for efficient farming.",
+        "description": "Kill monsters in the Catacombs for the dark totem pieces (base, middle, top). The drop is not a flat 1/500 and not from every monster: the rate is HP-dependent, 1/(500 - the monster's Hitpoints), so higher-HP monsters drop pieces more often (e.g. a 205 HP monster is ~1/295). Ghosts never drop them, and Superior Slayer monsters give a guaranteed piece. Burying bones restores Prayer. Popular Slayer tasks here include abyssal demons, nechryaels, hellhounds, and brutal black dragons - combine Slayer trips with totem hunting.",
         "worldX": 1664,
         "worldY": 10050,
         "worldPlane": 0,
