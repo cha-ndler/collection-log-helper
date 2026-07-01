@@ -153,9 +153,9 @@ public class GuidanceSequenceCompleteOrderingTest
 		// which is the heart of the #801 ordering bug.
 		Constructor<GuidanceSequencer> seqCtor = GuidanceSequencer.class.getDeclaredConstructor(
 			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class,
-			com.collectionloghelper.guidance.bosses.BossGuidanceRegistry.class);
+			com.collectionloghelper.guidance.bosses.BossGuidanceRegistry.class, com.collectionloghelper.sailing.SailingDockResolver.class);
 		seqCtor.setAccessible(true);
-		sequencer = seqCtor.newInstance(inventoryState, collectionState, requirementsChecker, null);
+		sequencer = seqCtor.newInstance(inventoryState, collectionState, requirementsChecker, null, null);
 
 		when(inventoryState.hasItem(anyInt())).thenReturn(false);
 		when(inventoryState.hasAllItems(any())).thenReturn(true);

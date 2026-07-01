@@ -88,9 +88,9 @@ public class BossGuidanceDispatchTest
 
 		Constructor<GuidanceSequencer> seqCtor = GuidanceSequencer.class.getDeclaredConstructor(
 			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class,
-			BossGuidanceRegistry.class);
+			BossGuidanceRegistry.class, com.collectionloghelper.sailing.SailingDockResolver.class);
 		seqCtor.setAccessible(true);
-		sequencer = seqCtor.newInstance(inventoryState, collectionState, requirementsChecker, registry);
+		sequencer = seqCtor.newInstance(inventoryState, collectionState, requirementsChecker, registry, null);
 	}
 
 	private static GuidanceStep makeManualStep(String description)

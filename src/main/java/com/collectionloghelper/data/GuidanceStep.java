@@ -34,6 +34,7 @@ import com.collectionloghelper.data.condition.ConditionNodeDeserializer;
 import com.google.gson.annotations.JsonAdapter;
 import javax.annotation.Nullable;
 import lombok.Value;
+import lombok.With;
 
 /**
  * A single step in a multi-step guidance sequence for obtaining collection log items.
@@ -58,9 +59,19 @@ public class GuidanceStep
 	@Nullable
 	Map<Integer, String> perItemStepDescription;
 
-	/** Target world coordinates for this step (0 = no location). */
+	/**
+	 * Target world coordinates for this step (0 = no location).
+	 *
+	 * <p>{@code @With} generates {@code withWorldX/withWorldY/withWorldPlane}
+	 * copy-methods used to produce a coordinate-overridden step at runtime (e.g.
+	 * the Sailing dynamic-dock first-step override) without mutating the
+	 * immutable {@code @Value}.
+	 */
+	@With
 	int worldX;
+	@With
 	int worldY;
+	@With
 	int worldPlane;
 
 	/** NPC to highlight for this step (0 = no NPC). */

@@ -94,9 +94,9 @@ public class GuidanceSequencerRestockTest
 
 		Constructor<GuidanceSequencer> ctor = GuidanceSequencer.class.getDeclaredConstructor(
 			PlayerInventoryState.class, PlayerCollectionState.class, RequirementsChecker.class,
-			com.collectionloghelper.guidance.bosses.BossGuidanceRegistry.class);
+			com.collectionloghelper.guidance.bosses.BossGuidanceRegistry.class, com.collectionloghelper.sailing.SailingDockResolver.class);
 		ctor.setAccessible(true);
-		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker, null);
+		sequencer = ctor.newInstance(inventoryState, collectionState, requirementsChecker, null, null);
 	}
 
 	// ---- Tests ----
