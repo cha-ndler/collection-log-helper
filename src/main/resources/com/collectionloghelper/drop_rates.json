@@ -31973,8 +31973,8 @@
   {
     "name": "Armoured Zombie",
     "category": "OTHER",
-    "worldX": 3566,
-    "worldY": 3390,
+    "worldX": 2780,
+    "worldY": 10277,
     "worldPlane": 0,
     "killTimeSeconds": 7,
     "afkLevel": 2,
@@ -32016,7 +32016,7 @@
       }
     ],
     "locationDescription": "Zemouregal's Fort, in the far north (Troll Country, near Ghorrock)",
-    "travelTip": "Varrock teleport -> north to fort",
+    "travelTip": "No direct teleport - Weiss (icy basalt) or Trollheim teleport, then the tunnel on Trollweiss Mountain peak",
     "npcId": 14113,
     "interactAction": "Attack",
     "requirements": {
@@ -32026,9 +32026,9 @@
     },
     "guidanceSteps": [
       {
-        "description": "Travel to Zemouregal's Fort in the far north of Troll Country (near Ghorrock). Requires The Curse of Arrav quest.",
-        "worldX": 3566,
-        "worldY": 3390,
+        "description": "Travel to Zemouregal's Fort in the far north (Troll Country, between Weiss and the Ice Path, Ghorrock to the east). There is no direct teleport - use Weiss (icy basalt) or a Trollheim teleport and reach the fort via the tunnel on the peak of Trollweiss Mountain. Requires The Curse of Arrav quest.",
+        "worldX": 2780,
+        "worldY": 10277,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
@@ -32036,8 +32036,8 @@
       },
       {
         "description": "Kill Armoured Zombies at Zemouregal's Fort. Use Crumble Undead or melee. Broken zombie axe, Broken zombie helmet, and Champion scroll (zombie) are the rare drops.",
-        "worldX": 3566,
-        "worldY": 3390,
+        "worldX": 2780,
+        "worldY": 10277,
         "worldPlane": 0,
         "npcId": 14113,
         "interactAction": "Attack",
