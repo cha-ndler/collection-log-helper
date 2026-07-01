@@ -227,31 +227,31 @@
 | 198 | Black Chinchompas | SKILLING | `2026-07-01` | - | - |
 | 199 | Colossal Wyrm Agility | SKILLING | `2026-07-01` | - | - |
 | 200 | Cutting Squid | SKILLING | `2026-07-01` | - | - |
-| 201 | Deep Sea Fishing | SKILLING | - | - | 1 (PR #1161) |
-| 202 | Farming (Fruit Trees) | SKILLING | - | - | 1 (PR #1164) |
+| 201 | Deep Sea Fishing | SKILLING | `2026-07-01` | - | - |
+| 202 | Farming (Fruit Trees) | SKILLING | `2026-07-01` | - | - |
 | 203 | Fishing (Swordfish) | SKILLING | `2026-07-01` | - | - |
 | 204 | Mining (Gemstone Rocks) | SKILLING | `2026-07-01` | - | - |
 | 205 | Motherlode Mine | SKILLING | `2026-07-01` | - | - |
 | 206 | Pickpocketing Darkmeyer Vyre | SKILLING | `2026-07-01` | - | - |
 | 207 | Prifddinas Rabbit | SKILLING | `2026-07-01` | - | - |
-| 208 | Rooftop Agility | SKILLING | - | - | 1 (PR #1162) |
-| 209 | Runecrafting (Fire Runes) | SKILLING | - | - | 1 (PR #1163) |
+| 208 | Rooftop Agility | SKILLING | `2026-07-01` | - | - |
+| 209 | Runecrafting (Fire Runes) | SKILLING | `2026-07-01` | - | - |
 | 210 | Shooting Stars | SKILLING | `2026-07-01` | - | - |
 | 211 | Thieving (Seed Stalls) | SKILLING | `2026-07-01` | - | - |
 | 212 | Underwater Crabs | SKILLING | - | - | deferred (Mogre entry route wiki-contradicted; needs sourced coords) |
 | 213 | Woodcutting (Teak Trees) | SKILLING | `2026-07-01` | - | - |
-| 214 | Beginner Treasure Trails | CLUES | - | - | - |
-| 215 | Easy Treasure Trails | CLUES | - | - | - |
-| 216 | Elite Treasure Trail Rewards (Rare) | CLUES | - | - | - |
-| 217 | Elite Treasure Trails | CLUES | - | - | - |
-| 218 | Hard Treasure Trail Rewards (Rare) | CLUES | - | - | - |
-| 219 | Hard Treasure Trails | CLUES | - | - | - |
-| 220 | Master Treasure Trail Rewards (Rare) | CLUES | - | - | - |
-| 221 | Master Treasure Trails | CLUES | - | - | - |
-| 222 | Medium Treasure Trails | CLUES | - | - | - |
-| 223 | Scroll Cases | CLUES | - | - | - |
-| 224 | Shared Treasure Trail Rewards | CLUES | - | - | - |
-| 225 | The Mimic | CLUES | - | - | - |
+| 214 | Beginner Treasure Trails | CLUES | `2026-07-01` | - | - |
+| 215 | Easy Treasure Trails | CLUES | `2026-07-01` | - | - |
+| 216 | Elite Treasure Trail Rewards (Rare) | CLUES | `2026-07-01` | - | - |
+| 217 | Elite Treasure Trails | CLUES | `2026-07-01` | - | - |
+| 218 | Hard Treasure Trail Rewards (Rare) | CLUES | `2026-07-01` | - | - |
+| 219 | Hard Treasure Trails | CLUES | `2026-07-01` | - | - |
+| 220 | Master Treasure Trail Rewards (Rare) | CLUES | `2026-07-01` | - | - |
+| 221 | Master Treasure Trails | CLUES | - | - | 1 (PR #1166) |
+| 222 | Medium Treasure Trails | CLUES | `2026-07-01` | - | - |
+| 223 | Scroll Cases | CLUES | `2026-07-01` | - | - |
+| 224 | Shared Treasure Trail Rewards | CLUES | `2026-07-01` | - | - |
+| 225 | The Mimic | CLUES | `2026-07-01` | - | - |
 
 _Total: 225 sources. Stamp format: `YYYY-MM-DD`. Set *Open findings* to the count
 when a Findings block is added for that source._
@@ -982,3 +982,42 @@ clean. The 4 SKILLING fixes (#1161-#1164) stamp after merge; Underwater Crabs ca
 **Running total V1-stamped:** 203 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 55 OTHER +
 12 SKILLING). **SKILLING category COMPLETE: 17/17 verified** (12 clean-stamped, 4 fixes pending merge, 1
 deferred: Underwater Crabs). Final category remaining: **CLUES** (12 sources).
+
+## 2026-07-01 — Accuracy-convergence v2: CLUES (12/12) — ALL 7 CATEGORIES VERIFIED
+
+Cache `2026-06-25-rev239`. SKILLING fixes merged (#1161-#1164). Final category — the Treasure-Trail
+reward tables (676 items across 12 sources): **11 CLEAN, 1 with a finding; 1 fixed.** Tier-0 accuracy
+layer clean (the dead-end-MANUAL warnings on Hard/Elite/Master Treasure Trails are guidance-engine, out
+of scope). Verifiers were directed to prioritise rare-unique per-casket rates + mechanics over the huge
+common-item tables (which have no clean published per-casket rate — carve-out).
+- **Master Treasure Trails — PR #1166 (major):** the Loot step said a master clue drops "as a 1/100 rare
+  drop from completing any easy/medium/hard/elite casket." The tertiary master-clue upgrade is not flat
+  and never 1/100 — it is tier-scaled: easy `1/50`, medium `1/30`, hard `1/15`, elite `1/5`. Reworded to
+  the per-tier rates (elite is 20x more generous than the old figure). Watson-trade half was already
+  correct. Wiki (Reward casket easy/hard/elite tertiary): "Clue scroll (master) 1/50" / "1/15" / "1/5".
+- The other 11 sources (incl. the big Easy/Medium/Hard tables, the tier-Rare tables, Shared rewards,
+  Scroll Cases, The Mimic) verified CLEAN — rare-unique rates and mechanics matched the wiki.
+
+**Stamps:** V1 = `2026-07-01` for the 4 now-merged SKILLING fixes (#1161-#1164) + the 11 CLUES clean.
+The 1 CLUES fix (#1166 Master Treasure Trails) stamps after merge.
+
+**Running total V1-stamped:** 218 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 55 OTHER +
+16 SKILLING + 11 CLUES). **CLUES category COMPLETE: 12/12 verified.**
+
+### Accuracy-convergence v2 — ALL CATEGORIES VERIFIED (225/225 examined)
+
+Every one of the 7 collection-log categories has now been through the Phase-2 semantic accuracy pass
+(BOSSES, SLAYER, RAIDS, MINIGAMES, OTHER, SKILLING, CLUES). The 7 rows still short of a V1 date are all
+tracked, non-clean states — 1 fix pending merge (Master Treasure Trails #1166) and 6 deferrals awaiting
+an authoring/design decision or in-game capture:
+- **OTHER (3):** Lost Schematics (Piscarilius anchor test-guarded vs Port-Sarim finding); TzHaar
+  (aggregate multi-NPC effective-rate model vs per-NPC wiki rates); Sea Treasures (medallion-fragment
+  re-model, test-guarded).
+- **SKILLING (1):** Underwater Crabs (Mogre Camp entry route wiki-contradicted; needs sourced dive
+  coordinates / in-game capture).
+- **MINIGAMES (2):** pre-existing deferrals from that category's pass (see the MINIGAMES section above).
+
+Once #1166 merges the V1-stamped total is 219/225, with the remaining 6 being explicit deferrals rather
+than un-examined sources. Other standing deferrals (not V1 rows): Brimhaven graceful `pointCost` model,
+Mahogany Homes Amy coord, Yama Oathplate rate, bundle-blob history purge, and the Barracuda Trials Soup
+`isPet`/`wikiPage` cross-source follow-up.
