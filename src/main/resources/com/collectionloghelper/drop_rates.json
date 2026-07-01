@@ -15817,7 +15817,7 @@
       {
         "itemId": 27695,
         "name": "Dragon pickaxe (broken)",
-        "dropRate": 1.0,
+        "dropRate": 0.01,
         "isPet": false,
         "wikiPage": "Dragon_pickaxe_(broken)",
         "pointCost": 4000
@@ -15904,7 +15904,7 @@
         ]
       },
       {
-        "description": "Exit the mine after the round ends to bank your points and ores. Spend points at Petrified Pete's shop for Prospector pieces (boots 21k, legs 34k, jacket 39k, helmet 26k each), Dragon pickaxe broken (4000), Volcanic mine teleport (200), Large water container (10000), or Ash covered tome (40000).",
+        "description": "Exit the mine after the round ends to bank your points and ores. Spend points at Petrified Pete's shop for Prospector pieces (boots 21k, legs 34k, jacket 39k, helmet 26k each), Volcanic mine teleport (200), Large water container (10000), or Ash covered tome (40000). The Dragon pickaxe (broken) is not bought directly - it is a 1/100 roll from Ore packs, which cost 4000 points each (expected ~400k points).",
         "worldX": 3815,
         "worldY": 3807,
         "worldPlane": 0,
