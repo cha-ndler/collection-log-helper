@@ -14445,7 +14445,7 @@
         "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Elite_void_top",
-        "pointCost": 650,
+        "pointCost": 200,
         "independent": true,
         "requiresPrevious": true
       },
@@ -14464,7 +14464,7 @@
         "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Elite_void_robe",
-        "pointCost": 650,
+        "pointCost": 200,
         "independent": true,
         "requiresPrevious": true
       },
