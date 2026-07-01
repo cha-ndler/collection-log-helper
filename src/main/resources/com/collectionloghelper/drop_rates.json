@@ -30193,7 +30193,7 @@
     },
     "guidanceSteps": [
       {
-        "description": "Start a fruit tree run. Plant saplings at all available patches: Gnome Stronghold (spirit tree), Lleyta (gnome glider), Brimhaven (Charter ship or Ardougne cloak 2+), Catherby (Catherby teleport or Camelot teleport), Tree Gnome Village (fairy ring CLR), and Farming Guild (85+ Farming, fairy ring CIR). Pay the nearby gardener to protect each tree from disease.",
+        "description": "Start a fruit tree run. Plant saplings at all available patches: Gnome Stronghold (spirit tree), Lleyta (gnome glider), Brimhaven (Charter ship or Ardougne cloak 2+), Catherby (Catherby teleport or Camelot teleport), Tree Gnome Village (fairy ring CIQ), and Farming Guild (85+ Farming, fairy ring CIR). Pay the nearby gardener to protect each tree from disease.",
         "worldX": 1249,
         "worldY": 3719,
         "worldPlane": 0,
