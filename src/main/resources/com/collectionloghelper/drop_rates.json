@@ -18750,7 +18750,7 @@
         "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Champion%27s_cape",
-        "milestoneKills": 10
+        "milestoneKills": 11
       }
     ],
     "locationDescription": "Champions' Guild south of Varrock",
@@ -18776,7 +18776,7 @@
         "section": "Travel"
       },
       {
-        "description": "Challenge a champion in the arena by handing a champion scroll to Larxia. Each champion uses a specific combat style - use appropriate protection prayer. Defeat all 10 champions to unlock the Champions' cape and the Champion of Champions fight.",
+        "description": "Challenge a champion in the arena by handing a champion scroll to Larxus. Each champion uses a specific combat style - use the appropriate protection prayer. Defeating all 10 race champions unlocks the Champion of Champions fight against Leon d'Cour; the Champion's cape is only awarded after you also defeat Leon d'Cour (all 11 champions).",
         "worldX": 3191,
         "worldY": 3356,
         "worldPlane": 0,
