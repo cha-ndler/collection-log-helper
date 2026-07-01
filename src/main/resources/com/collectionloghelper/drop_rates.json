@@ -18351,8 +18351,8 @@
         "itemId": 31283,
         "name": "Soup",
         "dropRate": 0.000333,
-        "isPet": false,
-        "wikiPage": "Soup_(item)",
+        "isPet": true,
+        "wikiPage": "Soup",
         "independent": true
       }
     ],
