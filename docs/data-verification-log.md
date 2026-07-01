@@ -166,35 +166,35 @@
 | 137 | Volcanic Mine | MINIGAMES | `2026-06-30` | - | - |
 | 138 | Wintertodt | MINIGAMES | `2026-06-30` | - | - |
 | 139 | Adamant Dragon | OTHER | `2026-06-30` | - | - |
-| 140 | Albatross (Boat Combat) | OTHER | - | - | 1 (PR #1145) |
-| 141 | Armoured Zombie | OTHER | - | - | 1 (PR #1144) |
+| 140 | Albatross (Boat Combat) | OTHER | `2026-06-30` | - | - |
+| 141 | Armoured Zombie | OTHER | `2026-06-30` | - | - |
 | 142 | Barracuda Salvage | OTHER | `2026-06-30` | - | - |
 | 143 | Boat Paints | OTHER | `2026-06-30` | - | - |
 | 144 | Brimstone Chest | OTHER | `2026-06-30` | - | - |
 | 145 | Camdozaal | OTHER | `2026-06-30` | - | - |
-| 146 | Catacombs of Kourend | OTHER | - | - | 1 (PR #1148) |
-| 147 | Champion's Challenge | OTHER | - | - | 1 (PR #1146) |
+| 146 | Catacombs of Kourend | OTHER | `2026-06-30` | - | - |
+| 147 | Champion's Challenge | OTHER | `2026-06-30` | - | - |
 | 148 | Chompy Bird Hunting | OTHER | `2026-06-30` | - | - |
 | 149 | Creature Creation (Frogeel) | OTHER | `2026-06-30` | - | - |
 | 150 | Creature Creation (Jubster) | OTHER | `2026-06-30` | - | - |
 | 151 | Creature Creation (Newtroost) | OTHER | `2026-06-30` | - | - |
-| 152 | Creature Creation (Spidine) | OTHER | - | - | 1 (PR #1147) |
+| 152 | Creature Creation (Spidine) | OTHER | `2026-06-30` | - | - |
 | 153 | Creature Creation (Swordchick) | OTHER | `2026-06-30` | - | - |
-| 154 | Creature Creation (Unicow) | OTHER | - | - | - |
-| 155 | Cyclopes | OTHER | - | - | - |
-| 156 | Elder Chaos Druids | OTHER | - | - | - |
-| 157 | Elven Crystal Chest | OTHER | - | - | - |
-| 158 | Fishy Salvage | OTHER | - | - | - |
-| 159 | Forestry | OTHER | - | - | - |
-| 160 | Fossil Island Notes | OTHER | - | - | - |
-| 161 | Fountain of Rune | OTHER | - | - | - |
-| 162 | Fremennik Salvage | OTHER | - | - | - |
-| 163 | Glough's Experiments | OTHER | - | - | - |
-| 164 | Great White Shark (Boat Combat) | OTHER | - | - | - |
-| 165 | Hunter Guild | OTHER | - | - | - |
-| 166 | Large Salvage | OTHER | - | - | - |
-| 167 | Larran's Big Chest | OTHER | - | - | - |
-| 168 | Lost Schematics | OTHER | - | - | - |
+| 154 | Creature Creation (Unicow) | OTHER | `2026-06-30` | - | - |
+| 155 | Cyclopes | OTHER | - | - | 1 (PR #1153) |
+| 156 | Elder Chaos Druids | OTHER | `2026-06-30` | - | - |
+| 157 | Elven Crystal Chest | OTHER | `2026-06-30` | - | - |
+| 158 | Fishy Salvage | OTHER | `2026-06-30` | - | - |
+| 159 | Forestry | OTHER | - | - | 1 (PR #1151) |
+| 160 | Fossil Island Notes | OTHER | `2026-06-30` | - | - |
+| 161 | Fountain of Rune | OTHER | `2026-06-30` | - | - |
+| 162 | Fremennik Salvage | OTHER | `2026-06-30` | - | - |
+| 163 | Glough's Experiments | OTHER | - | - | 1 (PR #1152) |
+| 164 | Great White Shark (Boat Combat) | OTHER | `2026-06-30` | - | - |
+| 165 | Hunter Guild | OTHER | `2026-06-30` | - | - |
+| 166 | Large Salvage | OTHER | `2026-06-30` | - | - |
+| 167 | Larran's Big Chest | OTHER | `2026-06-30` | - | - |
+| 168 | Lost Schematics | OTHER | - | - | deferred (Piscarilius anchor test-guarded) |
 | 169 | Martial Salvage | OTHER | - | - | - |
 | 170 | Miscellaneous | OTHER | - | - | - |
 | 171 | Mithril Dragon | OTHER | - | - | - |
@@ -841,3 +841,34 @@ Mahogany Amy coord still open/deferred).
 
 **Running total V1-stamped:** 146 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 10 OTHER).
 OTHER progress: 15/58. Next: OTHER batch 2 (Creature Creation Unicow → Fremennik Salvage).
+
+## 2026-06-30 — Accuracy-convergence v2: OTHER batch 2 (30/58)
+
+Cache `2026-06-25-rev239`. OTHER batch-1 fixes merged. Batch 2 (Creature Creation Unicow → Lost
+Schematics): **11 CLEAN, 4 with findings; 3 fixed, 1 reverted/deferred**. All re-confirmed by WebFetch /
+coordinate_helper.
+- **Lost Schematics — DEFERRED (reverted PR #1150):** the finding said the coords 1824,3691 (Port
+  Piscarilius, Sailing 15) should move to Port Sarim (3044,3193) to match the entry's "Port Sarim docks"
+  travelTip + Sailing-1 requirement. **CI rejected it:** `SailingSourceTriageTest.
+  lostSchematics_resolvedPortCoords_matchPortPiscarilius` deliberately asserts the Piscarilius anchor
+  ("The ARRIVE_AT_TILE step targeting Port Piscarilius is the correct anchor"), with a sibling assertion
+  for Port Tasks. The coord is an intentional, test-guarded design choice - editing the test to match the
+  data change would be double-fixing to silence CI. Two wiki-cited positions genuinely conflict
+  (verifier: Port-Sarim/Sailing-1; test author: Piscarilius), so this is **deferred for authoring review**
+  - resolve which port is the true anchor, then update coord+test OR travelTip+requirement together.
+  **Lesson: CI is the authoritative gate; local `validate_drop_rates` passed but the intentional
+  regression test caught the mismatch.**
+- **Forestry — PR #1151 (high):** Golden pheasant egg rate 0.003704 (stale 1/270, pre-Feb-2025) → 0.02
+  (~1/50 per event, the wiki's corrected effective rate; not the 1/30 news figure).
+- **Glough's Experiments — PR #1152 (high):** locationDescription "beneath Ape Atoll" → Kandarin (north
+  of Tree Gnome Stronghold). Coords were already Kandarin; only the prose named the wrong continent (the
+  sibling Demonic gorillas entry, same npcId 7144, was already correct).
+- **Cyclopes — PR #1153 (low):** defender tier progression is leave-and-re-enter (re-show to Kamfreena),
+  not "hold the defender in inventory"; holding only yields same-tier duplicates.
+
+**Stamps:** V1 = `2026-06-30` for the 5 now-merged OTHER batch-1 fixes + the 11 OTHER batch-2 clean. The 3
+batch-2 fixes (#1151 Forestry, #1152 Glough's, #1153 Cyclopes) stamp after merge; Lost Schematics deferred
+(reverted #1150) - stays open.
+
+**Running total V1-stamped:** 162 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 26 OTHER).
+OTHER progress: 30/58. Next: OTHER batch 3 (Martial Salvage → Prifddinas Elf).
