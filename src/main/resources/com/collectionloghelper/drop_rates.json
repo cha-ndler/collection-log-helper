@@ -17529,7 +17529,7 @@
         "section": "Activity"
       },
       {
-        "description": "Collect vale offerings from completed totems after ent visits. Exchange offerings at the reward trader for Bow string spool, Fletching knife, Ent branch, or Greenman mask.",
+        "description": "Collect vale offerings from completed totems after ent visits. Vale offerings are an intermediate currency: rummage every 100 offerings for one vale research point (plus a random reward). Spend vale research points at the Vale Research Exchange (run by Ranulph) on the Bow string spool, Fletching knife, Ent branch, or Greenman mask.",
         "worldX": 1452,
         "worldY": 3128,
         "worldPlane": 0,
