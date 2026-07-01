@@ -18260,6 +18260,14 @@
     "worldPlane": 0,
     "killTimeSeconds": 480,
     "afkLevel": 1,
+    "requirements": {
+      "skills": [
+        {
+          "skill": "SAILING",
+          "level": 30
+        }
+      ]
+    },
     "items": [
       {
         "itemId": 31732,
@@ -18342,7 +18350,7 @@
       {
         "itemId": 31283,
         "name": "Soup",
-        "dropRate": 0.000444,
+        "dropRate": 0.000333,
         "isPet": false,
         "wikiPage": "Soup_(item)",
         "independent": true
@@ -18352,7 +18360,7 @@
     "travelTip": "Sailing port -> trial",
     "guidanceSteps": [
       {
-        "description": "Travel to Sailing trial locations across the seas.",
+        "description": "Travel to the Sailing trial locations across the seas. The three trials unlock by Sailing level (not boostable): The Tempor Tantrum at 30, The Jubbly Jive at 55, and The Gwenith Glide at 72; The Gwenith Glide also requires the Regicide quest. Only skiffs may be used.",
         "worldX": 1823,
         "worldY": 3691,
         "worldPlane": 0,
