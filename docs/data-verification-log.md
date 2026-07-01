@@ -194,7 +194,7 @@
 | 165 | Hunter Guild | OTHER | `2026-06-30` | - | - |
 | 166 | Large Salvage | OTHER | `2026-06-30` | - | - |
 | 167 | Larran's Big Chest | OTHER | `2026-06-30` | - | - |
-| 168 | Lost Schematics | OTHER | - | - | 1 (PR #1150) |
+| 168 | Lost Schematics | OTHER | - | - | deferred (Piscarilius anchor test-guarded) |
 | 169 | Martial Salvage | OTHER | - | - | - |
 | 170 | Miscellaneous | OTHER | - | - | - |
 | 171 | Mithril Dragon | OTHER | - | - | - |
@@ -845,11 +845,19 @@ OTHER progress: 15/58. Next: OTHER batch 2 (Creature Creation Unicow → Fremenn
 ## 2026-06-30 — Accuracy-convergence v2: OTHER batch 2 (30/58)
 
 Cache `2026-06-25-rev239`. OTHER batch-1 fixes merged. Batch 2 (Creature Creation Unicow → Lost
-Schematics): **11 CLEAN, 4 with findings**. All re-confirmed by WebFetch / coordinate_helper.
-- **Lost Schematics — PR #1150 (high):** source + both steps used coords 1824,3691 = Port Piscarilius
-  (Kourend, Sailing 15), contradicting the entry's own "Port Sarim docks" travelTip and Sailing-1
-  requirement. Fixed → 3044,3193 (Port Sarim, region 12081). (2nd coord-to-wrong-place blocker-class
-  defect this batch pair, after Armoured Zombie.)
+Schematics): **11 CLEAN, 4 with findings; 3 fixed, 1 reverted/deferred**. All re-confirmed by WebFetch /
+coordinate_helper.
+- **Lost Schematics — DEFERRED (reverted PR #1150):** the finding said the coords 1824,3691 (Port
+  Piscarilius, Sailing 15) should move to Port Sarim (3044,3193) to match the entry's "Port Sarim docks"
+  travelTip + Sailing-1 requirement. **CI rejected it:** `SailingSourceTriageTest.
+  lostSchematics_resolvedPortCoords_matchPortPiscarilius` deliberately asserts the Piscarilius anchor
+  ("The ARRIVE_AT_TILE step targeting Port Piscarilius is the correct anchor"), with a sibling assertion
+  for Port Tasks. The coord is an intentional, test-guarded design choice - editing the test to match the
+  data change would be double-fixing to silence CI. Two wiki-cited positions genuinely conflict
+  (verifier: Port-Sarim/Sailing-1; test author: Piscarilius), so this is **deferred for authoring review**
+  - resolve which port is the true anchor, then update coord+test OR travelTip+requirement together.
+  **Lesson: CI is the authoritative gate; local `validate_drop_rates` passed but the intentional
+  regression test caught the mismatch.**
 - **Forestry — PR #1151 (high):** Golden pheasant egg rate 0.003704 (stale 1/270, pre-Feb-2025) → 0.02
   (~1/50 per event, the wiki's corrected effective rate; not the 1/30 news figure).
 - **Glough's Experiments — PR #1152 (high):** locationDescription "beneath Ape Atoll" → Kandarin (north
@@ -858,8 +866,9 @@ Schematics): **11 CLEAN, 4 with findings**. All re-confirmed by WebFetch / coord
 - **Cyclopes — PR #1153 (low):** defender tier progression is leave-and-re-enter (re-show to Kamfreena),
   not "hold the defender in inventory"; holding only yields same-tier duplicates.
 
-**Stamps:** V1 = `2026-06-30` for the 5 now-merged OTHER batch-1 fixes + the 11 OTHER batch-2 clean. The 4
-batch-2 fixes (#1150-#1153) stamp after merge.
+**Stamps:** V1 = `2026-06-30` for the 5 now-merged OTHER batch-1 fixes + the 11 OTHER batch-2 clean. The 3
+batch-2 fixes (#1151 Forestry, #1152 Glough's, #1153 Cyclopes) stamp after merge; Lost Schematics deferred
+(reverted #1150) - stays open.
 
 **Running total V1-stamped:** 162 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 26 OTHER).
 OTHER progress: 30/58. Next: OTHER batch 3 (Martial Salvage → Prifddinas Elf).
