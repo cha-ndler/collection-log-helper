@@ -7696,10 +7696,11 @@
       {
         "itemId": 27255,
         "name": "Menaphite ornament kit",
-        "dropRate": 0.02,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Menaphite_ornament_kit",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 1
       },
       {
         "itemId": 27248,
@@ -7713,10 +7714,11 @@
       {
         "itemId": 27372,
         "name": "Masori crafting kit",
-        "dropRate": 0.02,
+        "dropRate": 1.0,
         "isPet": false,
         "wikiPage": "Masori_crafting_kit",
-        "independent": true
+        "independent": true,
+        "milestoneKills": 1
       },
       {
         "itemId": 27377,
