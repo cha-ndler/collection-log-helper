@@ -15715,7 +15715,7 @@
         "section": "Travel"
       },
       {
-        "description": "Mix potions at the Mixology station to earn Mox (orange), Aga (green), and Lye (blue) resin. Optimal cycle: grind the herb, add to vial, agitate at the correct station, then deposit the finished potion. Watch the order indicators - over-agitating turns the potion into paste (wasted XP).",
+        "description": "Mix potions at the Mixology station to earn Mox (blue), Aga (green), and Lye (red) resin. Optimal cycle: grind the herb, add to vial, agitate at the correct station, then deposit the finished potion. Watch the order indicators - over-agitating turns the potion into paste (wasted XP).",
         "worldX": 1393,
         "worldY": 2937,
         "worldPlane": 0,
