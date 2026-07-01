@@ -139,32 +139,32 @@
 | 110 | Theatre of Blood (Hard Mode) | RAIDS | `2026-06-30` | - | - |
 | 111 | Tombs of Amascut | RAIDS | `2026-06-30` | - | - |
 | 112 | Tombs of Amascut (300 Invocation) | RAIDS | `2026-06-30` | - | - |
-| 113 | Tombs of Amascut (500 Invocation) | RAIDS | - | - | 1 (PR #1128) |
-| 114 | Barbarian Assault | MINIGAMES | - | - | - |
-| 115 | Barracuda Trials | MINIGAMES | - | - | - |
-| 116 | Brimhaven Agility Arena | MINIGAMES | - | - | - |
-| 117 | Castle Wars | MINIGAMES | - | - | - |
-| 118 | Fishing Trawler | MINIGAMES | - | - | - |
-| 119 | Giants' Foundry | MINIGAMES | - | - | - |
-| 120 | Gnome Restaurant (Scarfs) | MINIGAMES | - | - | - |
-| 121 | Gnome Restaurant (Seed Pods) | MINIGAMES | - | - | - |
-| 122 | Guardians of the Rift | MINIGAMES | - | - | - |
-| 123 | Hallowed Sepulchre | MINIGAMES | - | - | - |
-| 124 | Last Man Standing | MINIGAMES | - | - | - |
-| 125 | Mage Training Arena | MINIGAMES | - | - | - |
-| 126 | Mahogany Homes | MINIGAMES | - | - | - |
-| 127 | Mastering Mixology | MINIGAMES | - | - | - |
-| 128 | Pest Control | MINIGAMES | - | - | - |
-| 129 | Rogues' Den | MINIGAMES | - | - | - |
-| 130 | Shades of Mort'ton | MINIGAMES | - | - | - |
-| 131 | Soul Wars | MINIGAMES | - | - | - |
-| 132 | Temple Trekking | MINIGAMES | - | - | - |
-| 133 | Tempoross | MINIGAMES | - | - | - |
-| 134 | Tithe Farm | MINIGAMES | - | - | - |
-| 135 | Trouble Brewing | MINIGAMES | - | - | - |
-| 136 | Vale Totems | MINIGAMES | - | - | - |
-| 137 | Volcanic Mine | MINIGAMES | - | - | - |
-| 138 | Wintertodt | MINIGAMES | - | - | - |
+| 113 | Tombs of Amascut (500 Invocation) | RAIDS | `2026-06-30` | - | - |
+| 114 | Barbarian Assault | MINIGAMES | - | - | 1 (PR #1134) |
+| 115 | Barracuda Trials | MINIGAMES | - | - | 1 (PR #1141) |
+| 116 | Brimhaven Agility Arena | MINIGAMES | - | - | #1142 prose; structural pointCost deferred |
+| 117 | Castle Wars | MINIGAMES | `2026-06-30` | - | - |
+| 118 | Fishing Trawler | MINIGAMES | - | - | 1 (PR #1138) |
+| 119 | Giants' Foundry | MINIGAMES | - | - | 1 (PR #1135) |
+| 120 | Gnome Restaurant (Scarfs) | MINIGAMES | `2026-06-30` | - | - |
+| 121 | Gnome Restaurant (Seed Pods) | MINIGAMES | - | - | 1 (PR #1137) |
+| 122 | Guardians of the Rift | MINIGAMES | `2026-06-30` | - | - |
+| 123 | Hallowed Sepulchre | MINIGAMES | - | - | 1 (PR #1139) |
+| 124 | Last Man Standing | MINIGAMES | `2026-06-30` | - | - |
+| 125 | Mage Training Arena | MINIGAMES | `2026-06-30` | - | - |
+| 126 | Mahogany Homes | MINIGAMES | - | - | coord deferred (unverifiable tile) |
+| 127 | Mastering Mixology | MINIGAMES | - | - | 1 (PR #1132) |
+| 128 | Pest Control | MINIGAMES | - | - | 1 (PR #1131) |
+| 129 | Rogues' Den | MINIGAMES | `2026-06-30` | - | - |
+| 130 | Shades of Mort'ton | MINIGAMES | `2026-06-30` | - | - |
+| 131 | Soul Wars | MINIGAMES | - | - | 1 (PR #1130) |
+| 132 | Temple Trekking | MINIGAMES | - | - | 1 (PR #1136) |
+| 133 | Tempoross | MINIGAMES | `2026-06-30` | - | - |
+| 134 | Tithe Farm | MINIGAMES | `2026-06-30` | - | - |
+| 135 | Trouble Brewing | MINIGAMES | `2026-06-30` | - | - |
+| 136 | Vale Totems | MINIGAMES | - | - | 1 (PR #1140) |
+| 137 | Volcanic Mine | MINIGAMES | - | - | 1 (PR #1133) |
+| 138 | Wintertodt | MINIGAMES | `2026-06-30` | - | - |
 | 139 | Adamant Dragon | OTHER | - | - | - |
 | 140 | Albatross (Boat Combat) | OTHER | - | - | - |
 | 141 | Armoured Zombie | OTHER | - | - | - |
@@ -765,3 +765,50 @@ Sentinel, Warped Creature) + the 6 RAIDS clean sources. ToA-500 stays V1 `-` unt
 
 **Running total V1-stamped:** 112 / 225 (61 BOSSES + 45 SLAYER + 6 RAIDS). Next category: MINIGAMES (25
 sources, Barbarian Assault → Wintertodt), then OTHER (58), SKILLING (17), CLUES (12).
+
+## 2026-06-30 — Accuracy-convergence v2: MINIGAMES (25) — highest defect rate yet
+
+Cache `2026-06-25-rev239`. RAIDS ToA-500 fix merged. MINIGAMES verifier returned **11 CLEAN, 14 sources
+with findings (17 total)** — by far the highest hit rate (~56% of sources), because the prose-only
+2026-06-28 wiki-meta sweep left many STRUCTURED point-shop / dropRate values wrong. **13 sources fixed
+this turn; 2 deferred.** All findings re-confirmed by direct WebFetch.
+
+**High / blocker fixes:**
+- **Barbarian Assault #1134:** Granite body had fabricated pointCost 1000 — it's a 95,000-coin purchase
+  (Penance Queen kill), the only BA reward not from honour points. Removed pointCost → dropRate 1.0 +
+  milestoneKills 1 + prose.
+- **Pest Control #1131:** Elite void top/robe pointCost 650 → 200 (the upgrade cost; requiresPrevious
+  already gates the regular 250).
+- **Soul Wars #1130:** Ectoplasmator pointCost 2500 → 250 Zeal Tokens.
+- **Volcanic Mine #1133:** Dragon pickaxe (broken) was dropRate 1.0 + pointCost 4000 (guaranteed buy);
+  it's a 1/100 roll from 4000-point ore packs → dropRate 0.01.
+- **Giants' Foundry #1135:** no fixed hammer×2/grind/polish pattern — tool is dictated by the sword's
+  TEMPERATURE band (hot=hammer, medium=grindstone, cold=polish).
+- **Gnome Restaurant (Seed Pods) #1137:** Gianne jnr / range on the Grand Tree 1st floor [UK], not
+  ground floor.
+- **Mastering Mixology #1132:** resin colours — Mox is blue, Lye is red (were orange/blue).
+- **Temple Trekking #1136 (blocker):** Lumberjack outfit is dropped by undead lumberjacks in the
+  bridge-repair event (25% each), NOT bought from a fabricated "token trader"; drop is
+  difficulty-independent.
+
+**Low fixes:** Barracuda Trials #1141 (missing SAILING 30 gate + Soup rate 1/2252→1/3000), Fishing
+Trawler #1138 (swamp-paste leak task), Hallowed Sepulchre #1139 (Strange old lockpick drops on all
+floors, not just floor 5), Vale Totems #1140 (vale research points at the Vale Research Exchange, not
+offerings direct), Brimhaven #1142 (reward currency: tickets→XP, items via vouchers, hook 800 vouchers).
+
+**Deferred (2 — operator/verification needed):**
+- **Brimhaven Agility Arena — graceful pointCost (structural):** 6 pieces × 250 = 1500 vs the real
+  whole-set 250-voucher recolour (6× overstatement). Needs a plugin set-recolour modeling decision (a
+  single purchase unlocks all 6). Prose already correct; #1142 fixed the currency. **Row stays open.**
+- **Mahogany Homes — Amy coord:** the entry's ARRIVE tile (2954,3369) is likely wrong (finding says
+  ~2990,3365, "south of the park"), but the wiki gives no exact tile, so I did not swap in an unverified
+  coord. **Row stays open** — resolve via npc_spawns/coordinate_helper or in-game.
+
+**Stamps:** V1 = `2026-06-30` for ToA-500 (merged) + the 11 MINIGAMES clean. The 12 fixed sources
+(#1130-1141) stamp after merge. Brimhaven + Mahogany Homes stay open (deferred above).
+
+**MINIGAMES status:** 11/25 stamped; 23/25 once the 12 fix PRs merge; Brimhaven + Mahogany the 2
+residual open items.
+
+**Running total V1-stamped:** 124 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 11 MINIGAMES). Categories
+done: BOSSES, SLAYER, RAIDS (3/7). Next: OTHER (58 — the largest), SKILLING (17), CLUES (12).
