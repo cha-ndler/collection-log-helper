@@ -20364,7 +20364,7 @@
         "isPet": false,
         "wikiPage": "Medallion_fragment",
         "independent": true,
-        "milestoneKills": 10
+        "milestoneKills": 1
       },
       {
         "itemId": 32389,
@@ -20373,7 +20373,7 @@
         "isPet": false,
         "wikiPage": "Medallion_fragment",
         "independent": true,
-        "milestoneKills": 20
+        "milestoneKills": 1
       },
       {
         "itemId": 32390,
@@ -20382,7 +20382,7 @@
         "isPet": false,
         "wikiPage": "Medallion_fragment",
         "independent": true,
-        "milestoneKills": 30
+        "milestoneKills": 1
       },
       {
         "itemId": 32391,
@@ -20391,7 +20391,7 @@
         "isPet": false,
         "wikiPage": "Medallion_fragment",
         "independent": true,
-        "milestoneKills": 40
+        "milestoneKills": 1
       },
       {
         "itemId": 32392,
@@ -20400,7 +20400,7 @@
         "isPet": false,
         "wikiPage": "Medallion_fragment",
         "independent": true,
-        "milestoneKills": 60
+        "milestoneKills": 1
       },
       {
         "itemId": 32393,
@@ -20409,7 +20409,7 @@
         "isPet": false,
         "wikiPage": "Medallion_fragment",
         "independent": true,
-        "milestoneKills": 80
+        "milestoneKills": 1
       },
       {
         "itemId": 32394,
@@ -20418,7 +20418,7 @@
         "isPet": false,
         "wikiPage": "Medallion_fragment",
         "independent": true,
-        "milestoneKills": 100
+        "milestoneKills": 1
       },
       {
         "itemId": 32395,
@@ -20427,7 +20427,7 @@
         "isPet": false,
         "wikiPage": "Medallion_fragment",
         "independent": true,
-        "milestoneKills": 120
+        "milestoneKills": 1
       },
       {
         "itemId": 32398,
@@ -20502,17 +20502,97 @@
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 20,
-        "description": "Use Sailors' amulet to teleport to The Pandemonium or your nearest activated port. Accept a sea treasure task from the port notice board.",
-        "travelTip": "Sailors' amulet -> The Pandemonium (default unlock)",
+        "description": "Sail to your best boat's port to begin (the world-map arrow points to it). The eight Medallion fragments are scattered across the Sailing islands, each obtained from a distinct one-time activity hinted at in the waterlogged journal. Collect all eight, then assemble the Medallion of the Deep. The fragments need progressively higher Sailing (40 up to 63).",
+        "travelTip": "Sailors' amulet -> your nearest activated port",
         "section": "Travel"
       },
       {
-        "description": "Board your boat and navigate to the marked sea treasure location. Interact with the treasure spot to collect Medallion fragments (1-8, combine to form Medallion of the Deep) and rare antique junk: Rusty locket, Mouldy block, Dull knife, Broken compass, Rusty coin, Broken sextant, Mouldy doll, Smashed mirror. Higher Sailing levels unlock better treasure voyages.",
-        "worldX": 1824,
-        "worldY": 3691,
+        "worldX": 3061,
+        "worldY": 2639,
+        "worldPlane": 0,
+        "completionCondition": "ITEM_OBTAINED",
+        "completionItemId": 32388,
+        "description": "Loot the rusty chest on Dognose Island (40 Sailing, 33 Thieving) to obtain Medallion fragment 1.",
+        "travelTip": "Sail to Dognose Island",
+        "section": "Fragment 1"
+      },
+      {
+        "worldX": 0,
+        "worldY": 0,
+        "worldPlane": 0,
+        "completionCondition": "ITEM_OBTAINED",
+        "completionItemId": 32389,
+        "description": "Investigate the coral reef at the Coral Nurseries with diving apparatus equipped (45 Sailing, diving apparatus, Troubled Tortugans started) to obtain Medallion fragment 2.",
+        "travelTip": "Sail to the Coral Nurseries",
+        "section": "Fragment 2"
+      },
+      {
+        "worldX": 2997,
+        "worldY": 2288,
+        "worldPlane": 0,
+        "completionCondition": "ITEM_OBTAINED",
+        "completionItemId": 32390,
+        "description": "Kill or pickpocket the pirates on The Onyx Crest (47 Sailing; 60 Thieving to pickpocket) to obtain Medallion fragment 3.",
+        "travelTip": "Sail to The Onyx Crest",
+        "section": "Fragment 3"
+      },
+      {
+        "worldX": 1872,
+        "worldY": 2985,
+        "worldPlane": 0,
+        "completionCondition": "ITEM_OBTAINED",
+        "completionItemId": 32391,
+        "description": "Give fruit to the raccoon on Vatrachos Island (46 Sailing, Children of the Sun) to obtain Medallion fragment 4.",
+        "travelTip": "Sail to Vatrachos Island",
+        "section": "Fragment 4"
+      },
+      {
+        "worldX": 1860,
+        "worldY": 3306,
+        "worldPlane": 0,
+        "completionCondition": "ITEM_OBTAINED",
+        "completionItemId": 32392,
+        "description": "Thieve the silver stall in Port Roberts (50 Sailing, 50 Thieving) to obtain Medallion fragment 5.",
+        "travelTip": "Sail to Port Roberts",
+        "section": "Fragment 5"
+      },
+      {
+        "worldX": 1557,
+        "worldY": 2771,
+        "worldPlane": 0,
+        "completionCondition": "ITEM_OBTAINED",
+        "completionItemId": 32393,
+        "description": "Chop the teak trees on Shimmering Atoll (49 Sailing, 35 Woodcutting) to obtain Medallion fragment 6.",
+        "travelTip": "Sail to Shimmering Atoll",
+        "section": "Fragment 6"
+      },
+      {
+        "worldX": 2532,
+        "worldY": 2531,
+        "worldPlane": 0,
+        "completionCondition": "ITEM_OBTAINED",
+        "completionItemId": 32394,
+        "description": "Investigate the cauldron on the Isle of Bones (56 Sailing) to obtain Medallion fragment 7.",
+        "travelTip": "Sail to Isle of Bones",
+        "section": "Fragment 7"
+      },
+      {
+        "worldX": 2058,
+        "worldY": 2606,
+        "worldPlane": 0,
+        "completionCondition": "ITEM_OBTAINED",
+        "completionItemId": 32395,
+        "description": "Chart the crab monument on Wintumber Island (63 Sailing) to obtain Medallion fragment 8.",
+        "travelTip": "Sail to Wintumber Island",
+        "section": "Fragment 8"
+      },
+      {
+        "worldX": 0,
+        "worldY": 0,
         "worldPlane": 0,
         "completionCondition": "MANUAL",
-        "section": "Activity"
+        "description": "Once you hold all eight fragments, read the waterlogged journal and combine the fragments to assemble the Medallion of the Deep.",
+        "section": "Assemble"
       }
     ],
     "rewardType": "MIXED",
