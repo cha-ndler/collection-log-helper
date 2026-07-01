@@ -181,34 +181,34 @@
 | 152 | Creature Creation (Spidine) | OTHER | `2026-06-30` | - | - |
 | 153 | Creature Creation (Swordchick) | OTHER | `2026-06-30` | - | - |
 | 154 | Creature Creation (Unicow) | OTHER | `2026-06-30` | - | - |
-| 155 | Cyclopes | OTHER | - | - | 1 (PR #1153) |
+| 155 | Cyclopes | OTHER | `2026-06-30` | - | - |
 | 156 | Elder Chaos Druids | OTHER | `2026-06-30` | - | - |
 | 157 | Elven Crystal Chest | OTHER | `2026-06-30` | - | - |
 | 158 | Fishy Salvage | OTHER | `2026-06-30` | - | - |
-| 159 | Forestry | OTHER | - | - | 1 (PR #1151) |
+| 159 | Forestry | OTHER | `2026-06-30` | - | - |
 | 160 | Fossil Island Notes | OTHER | `2026-06-30` | - | - |
 | 161 | Fountain of Rune | OTHER | `2026-06-30` | - | - |
 | 162 | Fremennik Salvage | OTHER | `2026-06-30` | - | - |
-| 163 | Glough's Experiments | OTHER | - | - | 1 (PR #1152) |
+| 163 | Glough's Experiments | OTHER | `2026-06-30` | - | - |
 | 164 | Great White Shark (Boat Combat) | OTHER | `2026-06-30` | - | - |
 | 165 | Hunter Guild | OTHER | `2026-06-30` | - | - |
 | 166 | Large Salvage | OTHER | `2026-06-30` | - | - |
 | 167 | Larran's Big Chest | OTHER | `2026-06-30` | - | - |
 | 168 | Lost Schematics | OTHER | - | - | deferred (Piscarilius anchor test-guarded) |
-| 169 | Martial Salvage | OTHER | - | - | - |
-| 170 | Miscellaneous | OTHER | - | - | - |
-| 171 | Mithril Dragon | OTHER | - | - | - |
-| 172 | Monkey Backpacks | OTHER | - | - | - |
-| 173 | My Notes | OTHER | - | - | - |
-| 174 | Narwhal (Boat Combat) | OTHER | - | - | - |
-| 175 | Ocean Encounters | OTHER | - | - | - |
-| 176 | Ogress Shaman | OTHER | - | - | - |
-| 177 | Opulent Salvage | OTHER | - | - | - |
-| 178 | Orcas (Boat Combat) | OTHER | - | - | - |
-| 179 | Plundered Salvage | OTHER | - | - | - |
-| 180 | Port Tasks | OTHER | - | - | - |
-| 181 | Prifddinas Elf | OTHER | - | - | - |
-| 182 | Pyramid Plunder | OTHER | - | - | - |
+| 169 | Martial Salvage | OTHER | `2026-07-01` | - | - |
+| 170 | Miscellaneous | OTHER | `2026-07-01` | - | - |
+| 171 | Mithril Dragon | OTHER | `2026-07-01` | - | - |
+| 172 | Monkey Backpacks | OTHER | `2026-07-01` | - | - |
+| 173 | My Notes | OTHER | `2026-07-01` | - | - |
+| 174 | Narwhal (Boat Combat) | OTHER | `2026-07-01` | - | - |
+| 175 | Ocean Encounters | OTHER | - | - | 1 (PR #1155) |
+| 176 | Ogress Shaman | OTHER | `2026-07-01` | - | - |
+| 177 | Opulent Salvage | OTHER | `2026-07-01` | - | - |
+| 178 | Orcas (Boat Combat) | OTHER | `2026-07-01` | - | - |
+| 179 | Plundered Salvage | OTHER | `2026-07-01` | - | - |
+| 180 | Port Tasks | OTHER | - | - | 1 (PR #1156) |
+| 181 | Prifddinas Elf | OTHER | `2026-07-01` | - | - |
+| 182 | Pyramid Plunder | OTHER | `2026-07-01` | - | - |
 | 183 | Random Events | OTHER | - | - | - |
 | 184 | Revenants | OTHER | - | - | - |
 | 185 | Rune Dragon | OTHER | - | - | - |
@@ -872,3 +872,39 @@ batch-2 fixes (#1151 Forestry, #1152 Glough's, #1153 Cyclopes) stamp after merge
 
 **Running total V1-stamped:** 162 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 26 OTHER).
 OTHER progress: 30/58. Next: OTHER batch 3 (Martial Salvage → Prifddinas Elf).
+
+## 2026-07-01 — Accuracy-convergence v2: OTHER batch 3 (44/58)
+
+Cache `2026-06-25-rev239`. OTHER batch-2 fixes merged (#1151/#1152/#1153; Lost Schematics stays
+deferred). Batch 3 (Martial Salvage → Pyramid Plunder, 14 sources — heavily Sailing content):
+**12 CLEAN, 2 with findings; 2 fixed.** Tier-0 detectors (npc-id-cache, dead-end, phantom-mechanic,
+over-highlight) had zero hits on any batch-3 source. Semantic pass = 14×verify → domain-skeptic
+refutation; both upheld findings re-confirmed by WebFetch (0 refuted).
+- **Ocean Encounters — PR #1155 (major):** Sailing requirement `28` → `40`. Every clog item is a
+  giant-clam pearl (Tiny 31770 → Radiant 31800); giant clams are the only encounter yielding them and
+  appear from Sailing 40 (below 40 only as a passenger). A solo player at 28 gets nothing, and 28 was
+  not sourced to any wiki threshold. Wiki (Giant clam): "can appear anywhere on the ocean while the
+  boat is moving, starting at level 40 Sailing." `D4Batch11RegressionTest` only asserts a SAILING entry
+  is present (not a level), so the change is test-safe.
+- **Port Tasks — PR #1156 (major+minor):** Soup (31283) is the Sailing **skilling pet** but was
+  `isPet:false` → set `true`; also `wikiPage` `Soup_(item)` (404) → `Soup`. Wiki (Soup): "Soup is a
+  skilling pet that can be obtained while training the Sailing skill." Item-field change only — the
+  test-guarded Piscarilius coord anchor for Port Tasks (`SailingSourceTriageTest`) is untouched.
+- **Manual pre-clears (not defects):** Ogress Shaman step[1] `objectId 31791` = "Hole" at (2523,2861)
+  via `object_lookup` — the correct Corsair Cove Dungeon entrance (item-id collision with Shimmering
+  pearl is a cross-namespace coincidence). Port Tasks / all salvage / boat-combat sources sharing
+  `1824,3691` = the cache-confirmed, test-guarded Port Piscarilius anchor (design intent, not a bug).
+
+**Cross-source follow-up (recorded, not yet fixed):** the same Soup (31283) `isPet:false` /
+`wikiPage:"Soup_(item)"` misclassification also exists in **Barracuda Trials** (a different source /
+batch). Left out of the Port Tasks PR to keep it one-source-scoped; fix when Barracuda Trials is
+verified.
+
+**Stamps:** V1 = `2026-06-30` for the 3 now-merged batch-2 fixes (#1151/#1152/#1153); V1 = `2026-07-01`
+for the 12 batch-3 clean. The 2 batch-3 fixes (#1155 Ocean Encounters, #1156 Port Tasks) stamp after
+merge.
+
+**Running total V1-stamped:** 177 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 41 OTHER).
+OTHER progress: 44/58. Next: OTHER batch 4 (Random Events → Zombie Pirate Locker, incl. remaining
+salvage/boat-combat + Revenants, Rune Dragon, Shayzien Armour, Stronghold of Security, TzHaar,
+Waterfiend, Wilderness GWD).
