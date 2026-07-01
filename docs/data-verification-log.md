@@ -194,7 +194,7 @@
 | 165 | Hunter Guild | OTHER | `2026-06-30` | - | - |
 | 166 | Large Salvage | OTHER | `2026-06-30` | - | - |
 | 167 | Larran's Big Chest | OTHER | `2026-06-30` | - | - |
-| 168 | Lost Schematics | OTHER | - | - | deferred (Piscarilius anchor test-guarded) |
+| 168 | Lost Schematics | OTHER | `2026-07-01` | - | anchor now dynamic (dock resolver #1173) |
 | 169 | Martial Salvage | OTHER | `2026-07-01` | - | - |
 | 170 | Miscellaneous | OTHER | `2026-07-01` | - | - |
 | 171 | Mithril Dragon | OTHER | `2026-07-01` | - | - |
@@ -213,7 +213,7 @@
 | 184 | Revenants | OTHER | `2026-07-01` | - | - |
 | 185 | Rune Dragon | OTHER | `2026-07-01` | - | - |
 | 186 | Sailing Misc | OTHER | `2026-07-01` | - | - |
-| 187 | Sea Treasures | OTHER | - | - | deferred (fragment re-model, test-guarded) |
+| 187 | Sea Treasures | OTHER | - | - | 1 (PR #1174) |
 | 188 | Shayzien Armour | OTHER | `2026-07-01` | - | - |
 | 189 | Small Salvage | OTHER | `2026-07-01` | - | - |
 | 190 | Stingray (Boat Combat) | OTHER | `2026-07-01` | - | - |
@@ -1069,3 +1069,23 @@ purge + force-push is an operator-only decision).
 **Running total V1-stamped:** 223 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 25 MINIGAMES + 56 OTHER +
 17 SKILLING + 12 CLUES). Only **Lost Schematics** and **Sea Treasures** remain, both pending an operator
 decision.
+
+## 2026-07-01 — Final deferrals closed (Lost Schematics + Sea Treasures)
+
+The last two deferrals are resolved via the dynamic Sailing dock work, not a static-anchor guess:
+- **Lost Schematics — resolved by the dock resolver (#1173).** The Piscarilius-vs-Port-Sarim anchor
+  debate is moot: the first step now resolves at runtime to the player's best owned boat's dock
+  (`SailingDockResolver`), falling back to the static Piscarilius anchor. No test change was needed —
+  the static data (and `SailingSourceTriageTest`) are untouched; the override is runtime-only. Row
+  V1-stamped.
+- **Sea Treasures — fragment guidance authored (#1174).** The 8 Medallion fragments were mis-modeled as
+  milestone kills (10/20/.../120) of a fabricated notice-board task. Re-modeled as one-time island
+  collectibles: `milestoneKills` -> 1, and the 2 placeholder steps replaced with 10 (travel + one
+  `ITEM_OBTAINED` step per fragment anchored to its island dock from the `SailingPort` table + terminal
+  MANUAL assemble). Already-obtained fragments auto-skip. Island coords + activities per the wiki
+  (Medallion fragment). Step-0 stays the Piscarilius `ARRIVE_AT_TILE` sentinel, so the dock resolver and
+  `SailingSourceTriageTest` both still apply. Stamps V1 after #1174 merges.
+
+**Running total V1-stamped:** 224 / 225 (Sea Treasures stamps to 225/225 once #1174 merges). The
+deferral queue is now empty. The only outstanding non-V1 item is the repo-hygiene bundle-blob history
+purge (operator-only `git filter-repo` + force-push).
