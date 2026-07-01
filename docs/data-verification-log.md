@@ -140,46 +140,46 @@
 | 111 | Tombs of Amascut | RAIDS | `2026-06-30` | - | - |
 | 112 | Tombs of Amascut (300 Invocation) | RAIDS | `2026-06-30` | - | - |
 | 113 | Tombs of Amascut (500 Invocation) | RAIDS | `2026-06-30` | - | - |
-| 114 | Barbarian Assault | MINIGAMES | - | - | 1 (PR #1134) |
-| 115 | Barracuda Trials | MINIGAMES | - | - | 1 (PR #1141) |
+| 114 | Barbarian Assault | MINIGAMES | `2026-06-30` | - | - |
+| 115 | Barracuda Trials | MINIGAMES | `2026-06-30` | - | - |
 | 116 | Brimhaven Agility Arena | MINIGAMES | - | - | #1142 prose; structural pointCost deferred |
 | 117 | Castle Wars | MINIGAMES | `2026-06-30` | - | - |
-| 118 | Fishing Trawler | MINIGAMES | - | - | 1 (PR #1138) |
-| 119 | Giants' Foundry | MINIGAMES | - | - | 1 (PR #1135) |
+| 118 | Fishing Trawler | MINIGAMES | `2026-06-30` | - | - |
+| 119 | Giants' Foundry | MINIGAMES | `2026-06-30` | - | - |
 | 120 | Gnome Restaurant (Scarfs) | MINIGAMES | `2026-06-30` | - | - |
-| 121 | Gnome Restaurant (Seed Pods) | MINIGAMES | - | - | 1 (PR #1137) |
+| 121 | Gnome Restaurant (Seed Pods) | MINIGAMES | `2026-06-30` | - | - |
 | 122 | Guardians of the Rift | MINIGAMES | `2026-06-30` | - | - |
-| 123 | Hallowed Sepulchre | MINIGAMES | - | - | 1 (PR #1139) |
+| 123 | Hallowed Sepulchre | MINIGAMES | `2026-06-30` | - | - |
 | 124 | Last Man Standing | MINIGAMES | `2026-06-30` | - | - |
 | 125 | Mage Training Arena | MINIGAMES | `2026-06-30` | - | - |
 | 126 | Mahogany Homes | MINIGAMES | - | - | coord deferred (unverifiable tile) |
-| 127 | Mastering Mixology | MINIGAMES | - | - | 1 (PR #1132) |
-| 128 | Pest Control | MINIGAMES | - | - | 1 (PR #1131) |
+| 127 | Mastering Mixology | MINIGAMES | `2026-06-30` | - | - |
+| 128 | Pest Control | MINIGAMES | `2026-06-30` | - | - |
 | 129 | Rogues' Den | MINIGAMES | `2026-06-30` | - | - |
 | 130 | Shades of Mort'ton | MINIGAMES | `2026-06-30` | - | - |
-| 131 | Soul Wars | MINIGAMES | - | - | 1 (PR #1130) |
-| 132 | Temple Trekking | MINIGAMES | - | - | 1 (PR #1136) |
+| 131 | Soul Wars | MINIGAMES | `2026-06-30` | - | - |
+| 132 | Temple Trekking | MINIGAMES | `2026-06-30` | - | - |
 | 133 | Tempoross | MINIGAMES | `2026-06-30` | - | - |
 | 134 | Tithe Farm | MINIGAMES | `2026-06-30` | - | - |
 | 135 | Trouble Brewing | MINIGAMES | `2026-06-30` | - | - |
-| 136 | Vale Totems | MINIGAMES | - | - | 1 (PR #1140) |
-| 137 | Volcanic Mine | MINIGAMES | - | - | 1 (PR #1133) |
+| 136 | Vale Totems | MINIGAMES | `2026-06-30` | - | - |
+| 137 | Volcanic Mine | MINIGAMES | `2026-06-30` | - | - |
 | 138 | Wintertodt | MINIGAMES | `2026-06-30` | - | - |
-| 139 | Adamant Dragon | OTHER | - | - | - |
-| 140 | Albatross (Boat Combat) | OTHER | - | - | - |
-| 141 | Armoured Zombie | OTHER | - | - | - |
-| 142 | Barracuda Salvage | OTHER | - | - | - |
-| 143 | Boat Paints | OTHER | - | - | - |
-| 144 | Brimstone Chest | OTHER | - | - | - |
-| 145 | Camdozaal | OTHER | - | - | - |
-| 146 | Catacombs of Kourend | OTHER | - | - | - |
-| 147 | Champion's Challenge | OTHER | - | - | - |
-| 148 | Chompy Bird Hunting | OTHER | - | - | - |
-| 149 | Creature Creation (Frogeel) | OTHER | - | - | - |
-| 150 | Creature Creation (Jubster) | OTHER | - | - | - |
-| 151 | Creature Creation (Newtroost) | OTHER | - | - | - |
-| 152 | Creature Creation (Spidine) | OTHER | - | - | - |
-| 153 | Creature Creation (Swordchick) | OTHER | - | - | - |
+| 139 | Adamant Dragon | OTHER | `2026-06-30` | - | - |
+| 140 | Albatross (Boat Combat) | OTHER | - | - | 1 (PR #1145) |
+| 141 | Armoured Zombie | OTHER | - | - | 1 (PR #1144) |
+| 142 | Barracuda Salvage | OTHER | `2026-06-30` | - | - |
+| 143 | Boat Paints | OTHER | `2026-06-30` | - | - |
+| 144 | Brimstone Chest | OTHER | `2026-06-30` | - | - |
+| 145 | Camdozaal | OTHER | `2026-06-30` | - | - |
+| 146 | Catacombs of Kourend | OTHER | - | - | 1 (PR #1148) |
+| 147 | Champion's Challenge | OTHER | - | - | 1 (PR #1146) |
+| 148 | Chompy Bird Hunting | OTHER | `2026-06-30` | - | - |
+| 149 | Creature Creation (Frogeel) | OTHER | `2026-06-30` | - | - |
+| 150 | Creature Creation (Jubster) | OTHER | `2026-06-30` | - | - |
+| 151 | Creature Creation (Newtroost) | OTHER | `2026-06-30` | - | - |
+| 152 | Creature Creation (Spidine) | OTHER | - | - | 1 (PR #1147) |
+| 153 | Creature Creation (Swordchick) | OTHER | `2026-06-30` | - | - |
 | 154 | Creature Creation (Unicow) | OTHER | - | - | - |
 | 155 | Cyclopes | OTHER | - | - | - |
 | 156 | Elder Chaos Druids | OTHER | - | - | - |
@@ -812,3 +812,32 @@ residual open items.
 
 **Running total V1-stamped:** 124 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 11 MINIGAMES). Categories
 done: BOSSES, SLAYER, RAIDS (3/7). Next: OTHER (58 — the largest), SKILLING (17), CLUES (12).
+
+## 2026-06-30 — Accuracy-convergence v2: OTHER batch 1 (15/58)
+
+Cache `2026-06-25-rev239`. MINIGAMES fixes merged (Brimhaven + Mahogany still the 2 residual open items).
+OTHER batch 1 (Adamant Dragon → Creature Creation Swordchick): **10 CLEAN, 5 with findings (7 total)**.
+All re-confirmed by direct WebFetch / MCP id lookups.
+- **Armoured Zombie — PR #1144 (BLOCKER + high):** source + both steps used coords 3566,3390 =
+  **Darkmeyer, Morytania** (84 tiles away, coordinate_helper), contradicting the entry's own "far north
+  Troll Country" description; ARRIVE could never resolve. npcId 14113 = Zemouregal's Fort armoured zombie
+  (drop table matches). Fixed coords → 2780,10277 (region 11168, underground fort tunnels) and the travel
+  (no direct teleport; via the Trollweiss Mountain peak tunnel). Note: npc_spawns had no mejrs data for
+  this quest-instanced NPC; coord from the wiki spawn receipt, region-verified.
+- **Albatross (Boat Combat) — PR #1145 (high):** SAILING requirement 55 → 50 (bounty-task Sailing level;
+  matches sibling Narwhal=62 convention).
+- **Champion's Challenge — PR #1146 (high + low):** gatekeeper "Larxia" → **Larxus**; the Champion's cape
+  needs all **11** champions (10 race + Leon d'Cour), not 10 (fixed prose + Champion's cape
+  milestoneKills 10→11).
+- **Creature Creation (Spidine) — PR #1147 (high):** requiredItemIds [223, **331**] → [223, **327**] —
+  331=Raw salmon, 327=Raw sardine (the description already said "raw sardine"). `runelite_id_lookup` +
+  cache_ids verified.
+- **Catacombs of Kourend — PR #1148 (low):** dark totem is not a flat "1/500 from any monster" - it's
+  HP-dependent 1/(500-hitpoints), excludes ghosts, guaranteed from Superior Slayer monsters.
+
+**Stamps:** V1 = `2026-06-30` for the 12 now-merged MINIGAMES fixes + the 10 OTHER batch-1 clean. The 5
+OTHER fixes (#1144-#1148) stamp after merge. MINIGAMES now 23/25 (Brimhaven structural pointCost +
+Mahogany Amy coord still open/deferred).
+
+**Running total V1-stamped:** 146 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 10 OTHER).
+OTHER progress: 15/58. Next: OTHER batch 2 (Creature Creation Unicow → Fremennik Salvage).
