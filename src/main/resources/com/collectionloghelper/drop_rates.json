@@ -28358,7 +28358,7 @@
         "section": "Travel"
       },
       {
-        "description": "Obtain a master clue scroll by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a 1/100 rare drop from completing any easy/medium/hard/elite casket",
+        "description": "Obtain a master clue scroll by trading one clue of each tier (easy, medium, hard, elite) to Watson in Hosidius, or as a tier-scaled drop from opening a lower-tier reward casket (easy 1/50, medium 1/30, hard 1/15, elite 1/5)",
         "worldX": 1646,
         "worldY": 3577,
         "worldPlane": 0,
