@@ -30254,8 +30254,8 @@
         "wikiPage": "Fresh_crab_shell"
       }
     ],
-    "locationDescription": "Mogre Camp, underwater south of Mudskipper Point",
-    "travelTip": "Fairy ring AIQ -> Mudskipper Point; or Amulet of glory -> Draynor + run",
+    "locationDescription": "Mogre Camp, underwater - entered via Murphy at Port Khazard",
+    "travelTip": "Minigame Teleport (Fishing Trawler) -> Port Khazard, then speak to Murphy to dive",
     "guidanceSteps": [
       {
         "description": "Bank for Mogre Camp. Bring a weapon for level 23 underwater crabs, food, fishbowl helmet and diving apparatus to breathe underwater. Recipe for Disaster (Pirate Pete subquest) required to enter the underwater area.",
@@ -30271,17 +30271,17 @@
         "section": "Bank prep"
       },
       {
-        "description": "Travel to Mudskipper Point. Fairy ring AIQ teleports directly to Mudskipper Point. Alternatively amulet of glory to Draynor Village then run south-west along the coast.",
-        "worldX": 2987,
-        "worldY": 3033,
+        "description": "Travel to Port Khazard, where Murphy stands on the pier. The Fishing Trawler Minigame Teleport lands beside him; alternatively take a charter ship to Port Khazard or run south from Yanille.",
+        "worldX": 2668,
+        "worldY": 3162,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
-        "travelTip": "Fairy ring AIQ -> Mudskipper Point (run NW); or Amulet of glory -> Draynor + run SW",
+        "travelTip": "Minigame Teleport -> Fishing Trawler (lands at Port Khazard, beside Murphy)",
         "section": "Travel"
       },
       {
-        "description": "Equip your fishbowl helmet and diving apparatus, then dive into the underwater entrance on the south side of Mudskipper Point to descend to the Mogre Camp underwater area.",
+        "description": "Equip your fishbowl helmet and diving apparatus (or a Medallion of the deep), then speak to Murphy at Port Khazard to dive down to the Mogre Camp underwater area.",
         "worldX": 2978,
         "worldY": 9181,
         "worldPlane": 0,
@@ -30307,9 +30307,9 @@
         "loopCount": 0
       },
       {
-        "description": "Surface via the underwater exit and bank fresh crab claws and shells at Port Sarim or Draynor Village once your inventory is full.",
-        "worldX": 2987,
-        "worldY": 3033,
+        "description": "Surface back to Port Khazard once your inventory is full, then bank your fresh crab claws and shells (teleport to the nearest bank).",
+        "worldX": 2668,
+        "worldY": 3162,
         "worldPlane": 0,
         "completionCondition": "ARRIVE_AT_TILE",
         "completionDistance": 15,
