@@ -16305,7 +16305,7 @@
         "section": "Travel"
       },
       {
-        "description": "Choose the hardest route and weakest (hard-tier) follower (Rolayne Twickit) for the best Lumberjack outfit drop chance. Hard route, hard follower gives the highest token reward multiplier.",
+        "description": "The Lumberjack outfit is not tied to route difficulty or token rewards - each undead lumberjack in the bridge-repair event has a 25% chance to drop a piece (limit one piece per event). Do quick treks and fight the undead lumberjacks whenever the bridge-repair event appears.",
         "worldX": 3479,
         "worldY": 3241,
         "worldPlane": 0,
@@ -16323,7 +16323,7 @@
         "section": "Trek"
       },
       {
-        "description": "Claim your reward token at Paterdomus and exchange it with the token trader for a Lumberjack outfit piece. Hard treks yield more tokens per run.",
+        "description": "Claim your trek reward at Paterdomus. The Lumberjack outfit pieces are NOT bought here - they drop directly from the undead lumberjacks during the bridge-repair event (25% each, one piece per event). Other rewards scale with the trek's difficulty and length.",
         "worldX": 3477,
         "worldY": 3239,
         "worldPlane": 0,
