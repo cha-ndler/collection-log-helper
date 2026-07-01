@@ -201,28 +201,28 @@
 | 172 | Monkey Backpacks | OTHER | `2026-07-01` | - | - |
 | 173 | My Notes | OTHER | `2026-07-01` | - | - |
 | 174 | Narwhal (Boat Combat) | OTHER | `2026-07-01` | - | - |
-| 175 | Ocean Encounters | OTHER | - | - | 1 (PR #1155) |
+| 175 | Ocean Encounters | OTHER | `2026-07-01` | - | - |
 | 176 | Ogress Shaman | OTHER | `2026-07-01` | - | - |
 | 177 | Opulent Salvage | OTHER | `2026-07-01` | - | - |
 | 178 | Orcas (Boat Combat) | OTHER | `2026-07-01` | - | - |
 | 179 | Plundered Salvage | OTHER | `2026-07-01` | - | - |
-| 180 | Port Tasks | OTHER | - | - | 1 (PR #1156) |
+| 180 | Port Tasks | OTHER | `2026-07-01` | - | - |
 | 181 | Prifddinas Elf | OTHER | `2026-07-01` | - | - |
 | 182 | Pyramid Plunder | OTHER | `2026-07-01` | - | - |
-| 183 | Random Events | OTHER | - | - | - |
-| 184 | Revenants | OTHER | - | - | - |
-| 185 | Rune Dragon | OTHER | - | - | - |
-| 186 | Sailing Misc | OTHER | - | - | - |
-| 187 | Sea Treasures | OTHER | - | - | - |
-| 188 | Shayzien Armour | OTHER | - | - | - |
-| 189 | Small Salvage | OTHER | - | - | - |
-| 190 | Stingray (Boat Combat) | OTHER | - | - | - |
-| 191 | Stronghold of Security | OTHER | - | - | - |
-| 192 | TzHaar | OTHER | - | - | - |
-| 193 | Vampyre Kraken (Boat Combat) | OTHER | - | - | - |
-| 194 | Waterfiend | OTHER | - | - | - |
-| 195 | Wilderness God Wars Dungeon | OTHER | - | - | - |
-| 196 | Zombie Pirate Locker | OTHER | - | - | - |
+| 183 | Random Events | OTHER | `2026-07-01` | - | - |
+| 184 | Revenants | OTHER | `2026-07-01` | - | - |
+| 185 | Rune Dragon | OTHER | `2026-07-01` | - | - |
+| 186 | Sailing Misc | OTHER | `2026-07-01` | - | - |
+| 187 | Sea Treasures | OTHER | - | - | deferred (fragment re-model, test-guarded) |
+| 188 | Shayzien Armour | OTHER | - | - | 1 (PR #1158) |
+| 189 | Small Salvage | OTHER | `2026-07-01` | - | - |
+| 190 | Stingray (Boat Combat) | OTHER | `2026-07-01` | - | - |
+| 191 | Stronghold of Security | OTHER | `2026-07-01` | - | - |
+| 192 | TzHaar | OTHER | - | - | deferred (aggregate multi-NPC rate model) |
+| 193 | Vampyre Kraken (Boat Combat) | OTHER | - | - | 1 (PR #1159) |
+| 194 | Waterfiend | OTHER | `2026-07-01` | - | - |
+| 195 | Wilderness God Wars Dungeon | OTHER | `2026-07-01` | - | - |
+| 196 | Zombie Pirate Locker | OTHER | `2026-07-01` | - | - |
 | 197 | Aerial Fishing | SKILLING | - | - | - |
 | 198 | Black Chinchompas | SKILLING | - | - | - |
 | 199 | Colossal Wyrm Agility | SKILLING | - | - | - |
@@ -908,3 +908,42 @@ merge.
 OTHER progress: 44/58. Next: OTHER batch 4 (Random Events → Zombie Pirate Locker, incl. remaining
 salvage/boat-combat + Revenants, Rune Dragon, Shayzien Armour, Stronghold of Security, TzHaar,
 Waterfiend, Wilderness GWD).
+
+## 2026-07-01 — Accuracy-convergence v2: OTHER batch 4 (58/58 — OTHER CATEGORY COMPLETE)
+
+Cache `2026-06-25-rev239`. Batch-3 fixes merged (#1155/#1156). Final OTHER batch (Random Events →
+Zombie Pirate Locker, 14 sources): **10 CLEAN, 4 with findings; 2 fixed, 2 deferred.** Tier-0 detectors
+zero-hit across the batch. Semantic pass = 14×verify → domain-skeptic refutation.
+- **Shayzien Armour — PR #1158 (major+minor):** milestoneKills were `40/80/120/160/200` (8x too high).
+  Each Combat Ring tier drops one piece per defeat with no duplicates until the 5-piece set is complete,
+  so a tier is guaranteed after 5 defeats; with sequential unlock the cumulative guarantee is
+  `5/10/15/20/25`. Fixed all 25 milestoneKills + the matching `perItemStepDescription` "(N kills)" text,
+  and added the missing `Defence 20` requirement (favour removed Jan 2024). Wiki (Combat Ring): "defeat
+  each tier of soldier a total of five times"; "no duplicate pieces until ... the complete set from that
+  tier"; "requires level 20 Defence."
+- **Vampyre Kraken — PR #1159 (minor):** combat-step prose said Bottled storm `1/512`, contradicting the
+  source's own Bottled storm item dropRate (`0.003333` = `1/300`). Aligned prose to the item rate.
+- **TzHaar — DEFERRED (aggregate multi-NPC model).** The verifier upheld 9 per-NPC rate "fixes" (e.g.
+  Obsidian helm 1/8000→1/2000, Toktz-mej-tal 1/16384→1/4096), each ~4x richer than the current values.
+  But source `npcId 2173 = TzHaar-Ket`, while the item set spans TzHaar-**Ket** (obsidian armour),
+  TzHaar-**Mej** (Toktz-mej-tal) AND TzHaar-**Xil** (Toktz-xil-* weapons) — items that don't drop from
+  Ket at all. The near-uniform, consistently ~4x-down-weighted rates are the signature of a **deliberate
+  aggregate "kill TzHaar in the city" effective-rate model** (only a fraction of the mixed population
+  drops each item). The findings compare per-NPC wiki rates to aggregate effective rates — a domain-blind
+  mismatch; mass-applying them would break the efficiency model. Deferred for authoring review (decide
+  per-NPC vs aggregate modeling). [Same class as the "multi-source items are a feature" guardrail.]
+- **Sea Treasures — DEFERRED (fragment re-model, test-guarded).** The verifier upheld that the 8 Medallion
+  fragments are one-time collectibles from 8 distinct island activities (guided by the waterlogged
+  journal), not milestone kills from a repeatable notice-board task. That is a structural source re-model
+  (per-fragment coords/requirements/activities), not a data-value fix, and the source is test-guarded
+  (`SailingSourceTriageTest.seaTreasures_...Piscarilius`). Deferred for authoring capture. Wiki (Medallion
+  of the Deep): "Assembling the medallion requires that the player read the waterlogged journal ... hints
+  on the location of the fragments."
+
+**Stamps:** V1 = `2026-07-01` for the 2 now-merged batch-3 fixes (#1155/#1156) + the 10 batch-4 clean.
+The 2 batch-4 fixes (#1158 Shayzien, #1159 Vampyre Kraken) stamp after merge; TzHaar + Sea Treasures
+carry `deferred` in the fixes column.
+
+**Running total V1-stamped:** 189 / 225 (61 BOSSES + 45 SLAYER + 7 RAIDS + 23 MINIGAMES + 53 OTHER).
+**OTHER category COMPLETE: 58/58 verified** (53 clean-stamped, 2 fixes pending merge, 3 deferred: TzHaar,
+Sea Treasures, Lost Schematics). Next category: **SKILLING** (17 sources), then **CLUES** (12).
